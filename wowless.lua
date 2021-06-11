@@ -1,21 +1,52 @@
+local handler = require('xmlhandler.tree')
+local path = require('path')
+local xml2lua = require('xml2lua')
+
+local function loadFile(filename)
+  local f = assert(io.open(filename:gsub('\\', '/'), 'rb'))
+  local content = f:read('*all')
+  f:close()
+  if content:sub(1, 3) == '\239\187\191' then
+    content = content:sub(4)
+  end
+  return content
+end
+
+local function loadXml(dir, xml)
+  local h = handler:new()
+  xml2lua.parser(h):parse(xml)
+  local script = h.root.Ui.Script
+  local luas = {}
+  for _, s in ipairs(type(script) == 'string' and {script} or script or {}) do
+    if type(s) == 'string' then
+      table.insert(luas, assert(loadstring(s)))
+    else
+      table.insert(luas, assert(loadstring(loadFile(path.join(dir, s._attr.file)))))
+    end
+  end
+  return luas
+end
+
 local function loadToc(toc)
+  local dir = path.dirname(toc)
   local result = {}
   for line in io.lines(toc) do
-    line = line:match('^%s*(.-)%s*$'):gsub('\\', '/')
+    line = line:match('^%s*(.-)%s*$')
     if line ~= '' and line:sub(1, 1) ~= '#' then
-      local f = assert(io.open(line, 'rb'))
-      local content = f:read('*all')
-      f:close()
-      if content:sub(1, 3) == '\239\187\191' then
-        content = content:sub(4)
-      end
+      local filename = path.join(dir, line)
+      local content = loadFile(filename)
       if line:sub(-4) == '.lua' then
         table.insert(result, {
           filename = line,
           lua = assert(loadstring(content)),
         })
       elseif line:sub(-4) == '.xml' then
-        -- TODO support xml
+        for _, lua in ipairs(loadXml(path.dirname(filename), content)) do
+          table.insert(result, {
+            filename = line,
+            lua = lua,
+          })
+        end
       else
         error('unknown file type ' .. line)
       end
@@ -71,6 +102,7 @@ local env = setmetatable({
   table = {
     insert = table.insert,
   },
+  tostring = tostring,
   type = type,
 }, {
   __index = function(t, k)
@@ -82,8 +114,7 @@ local env = setmetatable({
   end
 })
 
-require('lfs').chdir('wowui/classic/FrameXML')
-for _, code in ipairs(loadToc('FrameXML.toc')) do
+for _, code in ipairs(loadToc('wowui/classic/FrameXML/FrameXML.toc')) do
   local success, err = pcall(setfenv(code.lua, env))
   if not success then
     error('failure loading ' .. code.filename .. ': ' .. err)
