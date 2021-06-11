@@ -1,0 +1,4 @@
+[submodule "wowui/classic"]
+	path = wowui/classic
+	url = https://github.com/Gethe/wow-ui-source
+	branch = classic
