@@ -89,6 +89,6 @@ for _, code in ipairs(loadToc('FrameXML.toc')) do
     error('failure loading ' .. code.filename .. ': ' .. err)
   end
 end
-for k in pairs(env) do
-  print(k)
+for k, v in pairs(env) do
+  print(k .. ' = ' .. tostring(v))
 end
