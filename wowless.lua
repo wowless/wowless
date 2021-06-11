@@ -39,9 +39,15 @@ local env = {
   bit = {
     bor = bitlib.bor,
   },
+  C_ScriptedAnimations = {
+    GetAllScriptedAnimationEffects = function()
+      return {}  -- UNIMPLEMENTED
+    end,
+  },
   C_Timer = {
     After = UNIMPLEMENTED,
   },
+  C_VoiceChat = {},
   Enum = setmetatable({}, {
     __index = function(_, k)
       return setmetatable({}, {
@@ -54,6 +60,7 @@ local env = {
   FillLocalizedClassList = UNIMPLEMENTED,
   getfenv = getfenv,
   ipairs = ipairs,
+  IsGMClient = UNIMPLEMENTED,
   LE_EXPANSION_BURNING_CRUSADE = 'UNIMPLEMENTED:LE_EXPANSION_BURNING_CRUSADE',
   LE_EXPANSION_CLASSIC = 'UNIMPLEMENTED:LE_EXPANSION_CLASSIC',
   LE_LFG_CATEGORY_BATTLEFIELD = 'UNIMPLEMENTED:LE_LFG_CATEGORY_BATTLEFIELD',
@@ -86,6 +93,7 @@ local env = {
   },
   type = type,
 }
+env['_G'] = env
 
 require('lfs').chdir('wowui/classic/FrameXML')
 for _, code in ipairs(loadToc('FrameXML.toc')) do
