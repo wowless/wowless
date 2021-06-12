@@ -9,10 +9,10 @@ jobs:
         submodules: true
     - uses: leafo/gh-actions-lua@v8
       with:
-        luaVersion: 5.1
+        luaVersion: '5.1'
     - uses: leafo/gh-actions-luarocks@v4
       with:
-        luarocksVersion: 3.7
+        luarocksVersion: '3.7.0'
     - name: build
       run: luarocks make
     - name: test
