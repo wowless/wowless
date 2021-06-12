@@ -69,6 +69,7 @@ local bitlib = require('bit')
 local UNIMPLEMENTED = function() end
 
 local globalStrings = {
+  -- luacheck: no max line length
   CONFIRM_CONTINUE = 'Do you wish to continue?',
   GUILD_REPUTATION_WARNING_GENERIC = 'You will lose one rank of guild reputation with your previous guild.',
   REMOVE_GUILDMEMBER_LABEL = 'Are you sure you want to remove %s from the guild?',
