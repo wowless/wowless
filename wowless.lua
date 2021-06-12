@@ -1,3 +1,4 @@
+local datafile = require('datafile')
 local handler = require('xmlhandler.dom')
 local path = require('path')
 local xml2lua = require('xml2lua')
@@ -160,7 +161,7 @@ local env = setmetatable({
   end
 })
 
-for _, code in ipairs(loadToc('wowui/classic/FrameXML/FrameXML.toc')) do
+for _, code in ipairs(loadToc(datafile.path('wowui/classic/FrameXML/FrameXML.toc'))) do
   local success, err = pcall(setfenv(code.lua, env))
   if not success then
     error('failure loading ' .. code.filename .. ': ' .. err)
