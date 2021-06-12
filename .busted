@@ -1,0 +1,7 @@
+return {
+  _all = {
+    ROOT = {'.'},
+    lua = 'lua5.1',
+    verbose = true,
+  },
+}
