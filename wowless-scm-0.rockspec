@@ -1,3 +1,4 @@
+rockspec_format = '3.0'
 package = 'wowless'
 version = 'scm-0'
 source = {
