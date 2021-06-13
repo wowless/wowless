@@ -13,6 +13,8 @@ jobs:
     - uses: leafo/gh-actions-luarocks@v4
       with:
         luarocksVersion: '3.7.0'
+    - name: lint
+      run: luarocks install luacheck && luacheck *.lua
     - name: build
       run: luarocks make
     - name: test
