@@ -13,6 +13,9 @@ local function loadFile(filename)
   return content
 end
 
+-- TODO enable xml
+local enableXml = false
+
 local function loadXml(dir, xml)
   local h = handler:new()
   xml2lua.parser(h):parse(xml)
@@ -51,11 +54,15 @@ local function loadToc(toc)
           lua = assert(loadstring(content)),
         })
       elseif line:sub(-4) == '.xml' then
-        for _, lua in ipairs(loadXml(path.dirname(filename), content)) do
-          table.insert(result, {
-            filename = line,
-            lua = lua,
-          })
+        if enableXml then
+          for _, lua in ipairs(loadXml(path.dirname(filename), content)) do
+            table.insert(result, {
+              filename = line,
+              lua = lua,
+            })
+          end
+        else
+          print('skipping ' .. filename)
         end
       else
         error('unknown file type ' .. line)
