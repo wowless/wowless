@@ -17,13 +17,24 @@ end
 local enableXml = false
 
 local function loadXml(filename)
+  print('working on ' .. filename)
   local dir = path.dirname(filename)
   local h = handler:new()
   xml2lua.parser(h):parse(readFile(filename))
   assert(h.root._name == 'Ui')
   local luas = {}
   for _, v in ipairs(h.root._children) do
-    if not enableXml then
+    if v._name == 'Include' then
+      assert(v._attr and v._attr.file and #v._children == 0)
+      -- TODO enable includes of lua
+      if v._attr.file:sub(-4) == '.xml' then
+        for _, lua in ipairs(loadXml(path.join(dir, v._attr.file))) do
+          table.insert(luas, lua)
+        end
+      else
+        print('skipping ' .. filename)
+      end
+    elseif not enableXml then
       print('skipping ' .. filename .. ' ' .. (v._name or v._type))
     elseif v._name == 'Script' then
       if v._attr and v._attr.file then
