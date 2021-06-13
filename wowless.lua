@@ -23,12 +23,16 @@ end
 
 local loadXml
 
+local function loadLuaString(filename, str)
+  return {
+    filename = filename,
+    lua = assert(loadstring(str)),
+  }
+end
+
 local function loadFile(filename)
   if filename:sub(-4) == '.lua' then
-    return {{
-      filename = filename,
-      lua = assert(loadstring(readFile(filename))),
-    }}
+    return {loadLuaString(filename, readFile(filename))}
   elseif filename:sub(-4) == '.xml' then
     return loadXml(filename)
   else
@@ -61,10 +65,7 @@ function loadXml(filename)
       elseif v._children then
         for _, x in ipairs(v._children) do
           if x._type == 'TEXT' then
-            table.insert(result, {
-              filename = filename,
-              lua = assert(loadstring(x._text)),
-            })
+            table.insert(result, loadLuaString(filename, x._text))
           end
         end
       else
