@@ -3,7 +3,7 @@ local handler = require('xmlhandler.dom')
 local path = require('path')
 local xml2lua = require('xml2lua')
 
-local function loadFile(filename)
+local function readFile(filename)
   local f = assert(io.open(filename:gsub('\\', '/'), 'rb'))
   local content = f:read('*all')
   f:close()
@@ -16,16 +16,19 @@ end
 -- TODO enable xml
 local enableXml = false
 
-local function loadXml(dir, xml)
+local function loadXml(filename)
+  local dir = path.dirname(filename)
   local h = handler:new()
-  xml2lua.parser(h):parse(xml)
+  xml2lua.parser(h):parse(readFile(filename))
   assert(h.root._name == 'Ui')
   local luas = {}
   for _, v in ipairs(h.root._children) do
-    if v._name == 'Script' then
+    if not enableXml then
+      print('skipping ' .. filename .. ' ' .. (v._name or v._type))
+    elseif v._name == 'Script' then
       if v._attr and v._attr.file then
         assert(#v._children == 0)
-        table.insert(luas, assert(loadstring(loadFile(path.join(dir, v._attr.file)))))
+        table.insert(luas, assert(loadstring(readFile(path.join(dir, v._attr.file)))))
       elseif v._children then
         for _, x in ipairs(v._children) do
           if x._type == 'TEXT' then
@@ -47,22 +50,17 @@ local function loadToc(toc)
     line = line:match('^%s*(.-)%s*$')
     if line ~= '' and line:sub(1, 1) ~= '#' then
       local filename = path.join(dir, line)
-      local content = loadFile(filename)
       if line:sub(-4) == '.lua' then
         table.insert(result, {
-          filename = line,
-          lua = assert(loadstring(content)),
+          filename = filename,
+          lua = assert(loadstring(readFile(filename))),
         })
       elseif line:sub(-4) == '.xml' then
-        if enableXml then
-          for _, lua in ipairs(loadXml(path.dirname(filename), content)) do
-            table.insert(result, {
-              filename = line,
-              lua = lua,
-            })
-          end
-        else
-          print('skipping ' .. filename)
+        for _, lua in ipairs(loadXml(filename)) do
+          table.insert(result, {
+            filename = filename,
+            lua = lua,
+          })
         end
       else
         error('unknown file type ' .. line)
