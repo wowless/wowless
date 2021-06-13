@@ -1,3 +1,4 @@
+local bitlib = require('bit')
 local datafile = require('datafile')
 local handler = require('xmlhandler.dom')
 local path = require('path')
@@ -13,37 +14,55 @@ local function readFile(filename)
   return content
 end
 
+local function tappend(tbl, arr)
+  for _, e in ipairs(arr) do
+    table.insert(tbl, e)
+  end
+  return tbl
+end
+
+local loadXml
+
+local function loadFile(filename)
+  if filename:sub(-4) == '.lua' then
+    return {
+      filename = filename,
+      lua = assert(loadstring(readFile(filename))),
+    }
+  elseif filename:sub(-4) == '.xml' then
+    return loadXml(filename)
+  else
+    error('unknown file type ' .. filename)
+  end
+end
+
 -- TODO enable xml
 local enableXml = false
 
-local function loadXml(filename)
+function loadXml(filename)
   print('working on ' .. filename)
   local dir = path.dirname(filename)
   local h = handler:new()
   xml2lua.parser(h):parse(readFile(filename))
   assert(h.root._name == 'Ui')
-  local luas = {}
+  local result = {}
   for _, v in ipairs(h.root._children) do
     if v._name == 'Include' then
       assert(v._attr and v._attr.file and #v._children == 0)
-      -- TODO enable includes of lua
-      if v._attr.file:sub(-4) == '.xml' then
-        for _, lua in ipairs(loadXml(path.join(dir, v._attr.file))) do
-          table.insert(luas, lua)
-        end
-      else
-        print('skipping ' .. filename)
-      end
+      tappend(result, loadFile(path.join(dir, v._attr.file)))
     elseif not enableXml then
       print('skipping ' .. filename .. ' ' .. (v._name or v._type))
     elseif v._name == 'Script' then
       if v._attr and v._attr.file then
         assert(#v._children == 0)
-        table.insert(luas, assert(loadstring(readFile(path.join(dir, v._attr.file)))))
+        tappend(result, loadFile(path.join(dir, v._attr.file)))
       elseif v._children then
         for _, x in ipairs(v._children) do
           if x._type == 'TEXT' then
-            table.insert(luas, assert(loadstring(x._text)))
+            table.insert(result, {
+              filename = filename,
+              lua = assert(loadstring(x._text)),
+            })
           end
         end
       else
@@ -51,7 +70,7 @@ local function loadXml(filename)
       end
     end
   end
-  return luas
+  return result
 end
 
 local function loadToc(toc)
@@ -60,28 +79,11 @@ local function loadToc(toc)
   for line in io.lines(toc) do
     line = line:match('^%s*(.-)%s*$')
     if line ~= '' and line:sub(1, 1) ~= '#' then
-      local filename = path.join(dir, line)
-      if line:sub(-4) == '.lua' then
-        table.insert(result, {
-          filename = filename,
-          lua = assert(loadstring(readFile(filename))),
-        })
-      elseif line:sub(-4) == '.xml' then
-        for _, lua in ipairs(loadXml(filename)) do
-          table.insert(result, {
-            filename = filename,
-            lua = lua,
-          })
-        end
-      else
-        error('unknown file type ' .. line)
-      end
+      tappend(result, loadFile(path.join(dir, line)))
     end
   end
   return result
 end
-
-local bitlib = require('bit')
 
 local UNIMPLEMENTED = function() end
 
