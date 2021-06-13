@@ -9,13 +9,18 @@ local globalStrings = {
 local UNIMPLEMENTED = function() end
 
 local globals = {
-  CreateFrame = function()
-    return {
+  CreateFrame = function(_, _, name)
+    local frame = {
       Hide = UNIMPLEMENTED,
       RegisterEvent = UNIMPLEMENTED,
       SetForbidden = UNIMPLEMENTED,
       SetScript = UNIMPLEMENTED,
+      SetSize = UNIMPLEMENTED,
     }
+    if name then
+      _G[name] = frame
+    end
+    return frame
   end,
   C_Club = {},
   C_GamePad = {},

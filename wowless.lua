@@ -41,7 +41,7 @@ local function loadFile(filename)
 end
 
 -- TODO enable xml
-local enableXml = false
+local enableXml = true
 
 function loadXml(filename)
   print('working on ' .. filename)
@@ -56,6 +56,10 @@ function loadXml(filename)
     if v._name == 'Include' then
       assert(v._attr and v._attr.file and #v._children == 0)
       tappend(result, loadFile(path.join(dir, v._attr.file)))
+    elseif v._name == 'Frame' then
+      table.insert(result, loadLuaString(filename, string.format([[
+        CreateFrame('Frame', nil, %s)
+      ]], v._attr.name and ('[[' .. v._attr.name .. ']]') or 'nil')))
     elseif not enableXml then
       print('skipping ' .. filename .. ' ' .. v._name)
     elseif v._name == 'Script' then
