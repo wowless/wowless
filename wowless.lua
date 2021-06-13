@@ -41,7 +41,7 @@ local function loadFile(filename)
 end
 
 -- TODO enable xml
-local enableXml = true
+local enableXml = false
 
 function loadXml(filename)
   print('working on ' .. filename)
