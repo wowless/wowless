@@ -25,10 +25,10 @@ local loadXml
 
 local function loadFile(filename)
   if filename:sub(-4) == '.lua' then
-    return {
+    return {{
       filename = filename,
       lua = assert(loadstring(readFile(filename))),
-    }
+    }}
   elseif filename:sub(-4) == '.xml' then
     return loadXml(filename)
   else
