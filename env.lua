@@ -1,26 +1,32 @@
-local globalStrings = {
-  -- luacheck: no max line length
-  CONFIRM_CONTINUE = 'Do you wish to continue?',
-  GUILD_REPUTATION_WARNING_GENERIC = 'You will lose one rank of guild reputation with your previous guild.',
-  REMOVE_GUILDMEMBER_LABEL = 'Are you sure you want to remove %s from the guild?',
-  VOID_STORAGE_DEPOSIT_CONFIRMATION = 'Depositing this item will remove all modifications and make it non-refundable and non-tradeable.',
-}
-
 local UNIMPLEMENTED = function() end
 
 local frameTypes = {
+  button = true,
+  checkbutton = true,
   frame = true,
 }
 
+local function _IsFrameType(t)
+  return frameTypes[string.lower(t)] ~= nil
+end
+
+local frameTemplates = {}
+
 local function _CreateFrame(t)
-  if t.virtual then
-    assert(t.name, 'cannot create anonymous virtual frame')
-    frameTypes[t.name] = true
-    return nil
-  end
   assert(t.type, 'must specify frame type for frame ' .. tostring(t.name))
   local frameType = frameTypes[string.lower(t.type)]
   assert(frameType, 'unknown frame type ' .. t.type .. ' for frame ' .. tostring(t.name))
+  for template in string.gmatch(t.inherits or '', '[^, ]+') do
+    -- TODO figure out how to deal with unknown templates, maybe just ignore?
+    if not frameTemplates[template] then
+      print('ignoring unknown template ' .. template .. ' for frame ' .. tostring(t.name))
+    end
+  end
+  if t.virtual then
+    assert(t.name, 'cannot create anonymous virtual frame')
+    frameTemplates[t.name] = true
+    return nil
+  end
   local frame = {
     Hide = UNIMPLEMENTED,
     RegisterEvent = UNIMPLEMENTED,
@@ -91,10 +97,20 @@ local globals = {
 for k, v in pairs(globals) do
   _G[k] = v
 end
+
+local globalStrings = {
+  -- luacheck: no max line length
+  CONFIRM_CONTINUE = 'Do you wish to continue?',
+  GUILD_REPUTATION_WARNING_GENERIC = 'You will lose one rank of guild reputation with your previous guild.',
+  REMOVE_GUILDMEMBER_LABEL = 'Are you sure you want to remove %s from the guild?',
+  VOID_STORAGE_DEPOSIT_CONFIRMATION = 'Depositing this item will remove all modifications and make it non-refundable and non-tradeable.',
+}
+
 for k, v in pairs(globalStrings) do
   _G[k] = v
 end
 
 return {
   CreateFrame = _CreateFrame,
+  IsFrameType = _IsFrameType,
 }

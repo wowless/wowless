@@ -18,55 +18,63 @@ local function loader(api, sink)
     sink(filename, assert(loadstring(str)))
   end
 
-  local loadXml
+  local loadFile
 
-  local function loadFile(filename)
+  local function loadXml(filename)
+    local dir = path.dirname(filename)
+
+    -- TODO enable xml
+    local enableXml = arg[1] == 'xml'
+
+    local function loadKids(e)
+      for _, v in ipairs(e._children) do
+        assert(v._type == 'ELEMENT')
+        if v._name == 'Include' then
+          assert(v._attr and v._attr.file and #v._children == 0)
+          loadFile(path.join(dir, v._attr.file))
+        elseif v._name == 'ScopedModifier' then
+          -- TODO support ScopedModifier attributes
+          loadKids(v)
+        elseif api.IsFrameType(v._name) then
+          api.CreateFrame({
+            inherits = v._attr.inherits,
+            name = v._attr.name,
+            type = v._name,
+            virtual = v._attr.virtual,
+          })
+        elseif not enableXml then
+          print('skipping ' .. filename .. ' ' .. v._name)
+        elseif v._name == 'Script' then
+          if v._attr and v._attr.file then
+            assert(#v._children == 0)
+            loadFile(path.join(dir, v._attr.file))
+          elseif v._children then
+            for _, x in ipairs(v._children) do
+              if x._type == 'TEXT' then
+                loadLuaString(filename, x._text)
+              end
+            end
+          else
+            error('invalid script tag')
+          end
+        end
+      end
+    end
+
+    local h = handler:new()
+    h.options.commentNode = false
+    xml2lua.parser(h):parse(readFile(filename))
+    assert(h.root._name == 'Ui')
+    loadKids(h.root)
+  end
+
+  function loadFile(filename)
     if filename:sub(-4) == '.lua' then
       loadLuaString(filename, readFile(filename))
     elseif filename:sub(-4) == '.xml' then
       return loadXml(filename)
     else
       error('unknown file type ' .. filename)
-    end
-  end
-
-  -- TODO enable xml
-  local enableXml = arg[1] == 'xml'
-
-  function loadXml(filename)
-    local dir = path.dirname(filename)
-    local h = handler:new()
-    h.options.commentNode = false
-    xml2lua.parser(h):parse(readFile(filename))
-    assert(h.root._name == 'Ui')
-    for _, v in ipairs(h.root._children) do
-      assert(v._type == 'ELEMENT')
-      if v._name == 'Include' then
-        assert(v._attr and v._attr.file and #v._children == 0)
-        loadFile(path.join(dir, v._attr.file))
-      elseif v._name == 'Frame' then
-        api.CreateFrame({
-          inherits = v._attr.inherits,
-          name = v._attr.name,
-          type = 'Frame',
-          virtual = v._attr.virtual,
-        })
-      elseif not enableXml then
-        print('skipping ' .. filename .. ' ' .. v._name)
-      elseif v._name == 'Script' then
-        if v._attr and v._attr.file then
-          assert(#v._children == 0)
-          loadFile(path.join(dir, v._attr.file))
-        elseif v._children then
-          for _, x in ipairs(v._children) do
-            if x._type == 'TEXT' then
-              loadLuaString(filename, x._text)
-            end
-          end
-        else
-          error('invalid script tag')
-        end
-      end
     end
   end
 
@@ -101,6 +109,7 @@ local env = (function()
     setmetatable = setmetatable,
     string = {
       format = string.format,
+      gmatch = string.gmatch,
       gsub = string.gsub,
       lower = string.lower,
       match = string.match,
