@@ -115,7 +115,7 @@ local function _CreateUIObject(t)
   end
   if virtual then
     assert(t.name, 'cannot create anonymous virtual uiobject')
-    uiobjectTypes[t.name] = {
+    uiobjectTypes[string.lower(t.name)] = {
       inherits = 'parentedobject',  -- set real inherits
       intrinsic = t.intrinsic,
     }
