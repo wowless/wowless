@@ -93,6 +93,9 @@ local env = setmetatable({
   setmetatable = setmetatable,
   string = {
     format = string.format,
+    gsub = string.gsub,
+    match = string.match,
+    sub = string.sub,
     upper = string.upper,
   },
   table = {
