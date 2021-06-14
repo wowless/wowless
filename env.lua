@@ -8,19 +8,25 @@ local globalStrings = {
 
 local UNIMPLEMENTED = function() end
 
+local function _CreateFrame(t)
+  local frame = {
+    Hide = UNIMPLEMENTED,
+    RegisterEvent = UNIMPLEMENTED,
+    SetForbidden = UNIMPLEMENTED,
+    SetScript = UNIMPLEMENTED,
+    SetSize = UNIMPLEMENTED,
+  }
+  if t.name then
+    _G[t.name] = frame
+  end
+  return frame
+end
+
 local globals = {
-  CreateFrame = function(_, _, name)
-    local frame = {
-      Hide = UNIMPLEMENTED,
-      RegisterEvent = UNIMPLEMENTED,
-      SetForbidden = UNIMPLEMENTED,
-      SetScript = UNIMPLEMENTED,
-      SetSize = UNIMPLEMENTED,
-    }
-    if name then
-      _G[name] = frame
-    end
-    return frame
+  CreateFrame = function(_, name)
+    return _CreateFrame({
+      name = name,
+    })
   end,
   C_Club = {},
   C_GamePad = {},
@@ -74,3 +80,7 @@ end
 for k, v in pairs(globalStrings) do
   _G[k] = v
 end
+
+return {
+  CreateFrame = _CreateFrame,
+}
