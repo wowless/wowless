@@ -35,8 +35,8 @@ local function loader(api, sink)
         elseif v._name == 'ScopedModifier' then
           -- TODO support ScopedModifier attributes
           loadKids(v)
-        elseif api.IsFrameType(v._name) then
-          api.CreateFrame({
+        elseif api.IsFrameType(filename, v._name) then
+          api.CreateFrame(filename, {
             inherits = v._attr.inherits,
             name = v._attr.name,
             type = v._name,
@@ -94,16 +94,17 @@ end
 local env = (function()
   local bitlib = require('bit')
   return setmetatable({
-    assert = assert,  -- TODO change, this is only for debugging
+    assert = assert,
     bit = {
       bor = bitlib.bor,
     },
+    error = error,
     getfenv = getfenv,
     getmetatable = getmetatable,
     ipairs = ipairs,
     math = {},
     pairs = pairs,
-    print = print,  -- TODO change, this is only for debugging
+    print = print,
     rawget = rawget,
     select = select,
     setmetatable = setmetatable,
@@ -133,15 +134,26 @@ local env = (function()
 end)()
 
 do
+  local function wrap(filename, fn, ...)
+    local success, arg = pcall(fn, ...)
+    assert(success, 'failure in ' .. filename .. ': ' .. tostring(arg))
+    return arg
+  end
   local api = setfenv(loadfile('env.lua'), env)()
+  local wrappedApi = setmetatable({}, {
+    __index = function(_, k)
+      return setmetatable({}, {
+        __call = function(_, filename, ...)
+          return wrap(filename, api[k], ...)
+        end,
+      })
+    end,
+  })
   local sink = function(filename, lua)
-    local success, err = pcall(setfenv(lua, env))
-    if not success then
-      error('failure loading ' .. filename .. ': ' .. err)
-    end
+    wrap(filename, setfenv(lua, env))
   end
   local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
-  loader(api, sink)(toc)
+  loader(wrappedApi, sink)(toc)
 end
 
 for k, v in pairs(env) do
