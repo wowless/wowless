@@ -9,17 +9,20 @@ local uiobjectTypes = {
   checkbutton = {
     inherits = 'button',
   },
+  editbox = {},
   font = {},
   fontfamily = {},
   fontstring = {},
   frame = {},
   gametooltip = {},
+  messageframe = {},
   modelscene = {},
   playermodel = {},
   scrollframe = {},
   slider = {},
   statusbar = {},
   texture = {},
+  worldframe = {},
 }
 
 local function _InheritsFrom(a, b)
