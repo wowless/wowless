@@ -54,6 +54,12 @@ local function _CreateUIObject(t)
     frameTemplates[t.name] = true
     return nil
   end
+  if t.intrinsic then
+    assert(t.name, 'cannot create anonymous intrinsic frame')
+    assert(not _IsUIObjectType(t.name), 'already a uiobject type named ' .. t.name)
+    uiobjectTypes[string.lower(t.name)] = {}
+    return nil
+  end
   local frame = {
     Hide = UNIMPLEMENTED,
     RegisterEvent = UNIMPLEMENTED,

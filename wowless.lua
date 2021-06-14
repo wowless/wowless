@@ -39,6 +39,7 @@ local function loader(mkapi, sink)
         elseif api.IsUIObjectType(v._name) then
           api.CreateUIObject({
             inherits = v._attr.inherits,
+            intrinsic = v._attr.intrinsic,
             name = v._attr.name,
             type = v._name,
             virtual = v._attr.virtual,
