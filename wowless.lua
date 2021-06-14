@@ -36,7 +36,7 @@ local function loader(mkapi, sink)
         elseif v._name == 'ScopedModifier' then
           -- TODO support ScopedModifier attributes
           loadKids(v)
-        elseif api.IsUIObjectType(v._name) then
+        elseif api.IsIntrinsicType(v._name) then
           api.CreateUIObject({
             inherits = v._attr.inherits,
             intrinsic = v._attr.intrinsic,

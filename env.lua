@@ -1,29 +1,86 @@
 local UNIMPLEMENTED = function() end
 
 local uiobjectTypes = {
-  actor = {},
-  animationgroup = {},
+  actor = {
+    inherits = 'parentedobject',
+  },
+  animationgroup = {
+    inherits = 'parentedobject',
+  },
   button = {
     inherits = 'frame',
   },
   checkbutton = {
     inherits = 'button',
   },
-  editbox = {},
-  font = {},
-  fontfamily = {},
-  fontstring = {},
-  frame = {},
-  gametooltip = {},
-  messageframe = {},
-  modelscene = {},
-  playermodel = {},
-  scrollframe = {},
-  slider = {},
-  statusbar = {},
-  texture = {},
-  worldframe = {},
+  editbox = {
+    inherits = 'frame',
+  },
+  font = {
+    inherits = 'parentedobject',
+  },
+  fontfamily = {
+    inherits = 'parentedobject',
+  },
+  fontstring = {
+    inherits = 'parentedobject',
+  },
+  frame = {
+    inherits = 'parentedobject',
+    mixin = {
+      Hide = UNIMPLEMENTED,
+      RegisterEvent = UNIMPLEMENTED,
+      SetScript = UNIMPLEMENTED,
+      SetSize = UNIMPLEMENTED,
+    },
+  },
+  gametooltip = {
+    inherits = 'frame',
+  },
+  messageframe = {
+    inherits = 'frame',
+  },
+  modelscene = {
+    inherits = 'parentedobject',
+  },
+  parentedobject = {
+    mixin = {
+      SetForbidden = UNIMPLEMENTED,
+    },
+  },
+  playermodel = {
+    inherits = 'parentedobject',
+  },
+  scrollframe = {
+    inherits = 'frame',
+  },
+  slider = {
+    inherits = 'frame',
+  },
+  statusbar = {
+    inherits = 'frame',
+  },
+  texture = {
+    inherits = 'parentedobject',
+  },
+  worldframe = {
+    inherits = 'frame',
+  },
 }
+
+-- The default set of uiobject types are intrinsic.
+for _, v in pairs(uiobjectTypes) do
+  v.intrinsic = true
+end
+
+local function Mixin(t, ...)
+  for _, tt in ipairs({...}) do
+    for k, v in pairs(tt) do
+      t[k] = v
+    end
+  end
+  return t
+end
 
 local function _InheritsFrom(a, b)
   a, b = string.lower(a), string.lower(b)
@@ -33,44 +90,46 @@ local function _InheritsFrom(a, b)
   return a ~= nil
 end
 
+local function _IsIntrinsicType(t)
+  local type = uiobjectTypes[string.lower(t)]
+  return type and type.intrinsic
+end
+
 local function _IsUIObjectType(t)
   return uiobjectTypes[string.lower(t)] ~= nil
 end
-
-local frameTemplates = {}
 
 local function _CreateUIObject(t)
   assert(t.type, 'must specify type for ' .. tostring(t.name))
   local type = uiobjectTypes[string.lower(t.type)]
   assert(type, 'unknown type ' .. t.type .. ' for ' .. tostring(t.name))
-  for template in string.gmatch(t.inherits or '', '[^, ]+') do
-    -- TODO figure out how to deal with unknown templates, maybe just ignore?
-    if not frameTemplates[template] then
-      print('ignoring unknown template ' .. template .. ' for frame ' .. tostring(t.name))
+  for superType in string.gmatch(t.inherits or '', '[^, ]+') do
+    if not uiobjectTypes[string.lower(superType)] then
+      print('ignoring unknown inherited type ' .. superType .. ' for ' .. tostring(t.name))
     end
   end
-  if t.virtual then
-    assert(t.name, 'cannot create anonymous virtual frame')
-    frameTemplates[t.name] = true
-    return nil
-  end
+  local virtual = t.virtual
   if t.intrinsic then
-    assert(t.name, 'cannot create anonymous intrinsic frame')
     assert(not _IsUIObjectType(t.name), 'already a uiobject type named ' .. t.name)
-    uiobjectTypes[string.lower(t.name)] = {}
+    virtual = true
+  end
+  if virtual then
+    assert(t.name, 'cannot create anonymous virtual uiobject')
+    uiobjectTypes[t.name] = {
+      inherits = 'parentedobject',  -- set real inherits
+      intrinsic = t.intrinsic,
+    }
     return nil
   end
-  local frame = {
-    Hide = UNIMPLEMENTED,
-    RegisterEvent = UNIMPLEMENTED,
-    SetForbidden = UNIMPLEMENTED,
-    SetScript = UNIMPLEMENTED,
-    SetSize = UNIMPLEMENTED,
-  }
-  if t.name then
-    _G[t.name] = frame
+  local obj = {}
+  while type do
+    Mixin(obj, type.mixin)
+    type = uiobjectTypes[type.inherits]
   end
-  return frame
+  if t.name then
+    _G[t.name] = obj
+  end
+  return obj
 end
 
 local globals = {
@@ -146,5 +205,6 @@ end
 
 return {
   CreateUIObject = _CreateUIObject,
+  IsIntrinsicType = _IsIntrinsicType,
   IsUIObjectType = _IsUIObjectType,
 }
