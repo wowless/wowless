@@ -1,4 +1,4 @@
-local function loader(api, sink)
+local function loader(mkapi, sink)
 
   local handler = require('xmlhandler.dom')
   local path = require('path')
@@ -21,6 +21,7 @@ local function loader(api, sink)
   local loadFile
 
   local function loadXml(filename)
+    local api = mkapi(filename)
     local dir = path.dirname(filename)
 
     -- TODO enable xml
@@ -35,8 +36,8 @@ local function loader(api, sink)
         elseif v._name == 'ScopedModifier' then
           -- TODO support ScopedModifier attributes
           loadKids(v)
-        elseif api.IsFrameType(filename, v._name) then
-          api.CreateFrame(filename, {
+        elseif api.IsFrameType(v._name) then
+          api.CreateFrame({
             inherits = v._attr.inherits,
             name = v._attr.name,
             type = v._name,
@@ -140,20 +141,22 @@ do
     return arg
   end
   local api = setfenv(loadfile('env.lua'), env)()
-  local wrappedApi = setmetatable({}, {
-    __index = function(_, k)
-      return setmetatable({}, {
-        __call = function(_, filename, ...)
-          return wrap(filename, api[k], ...)
-        end,
-      })
-    end,
-  })
+  local mkapi = function(filename)
+    return setmetatable({}, {
+      __index = function(_, k)
+        return setmetatable({}, {
+          __call = function(_, ...)
+            return wrap(filename, api[k], ...)
+          end,
+        })
+      end,
+    })
+  end
   local sink = function(filename, lua)
     wrap(filename, setfenv(lua, env))
   end
   local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
-  loader(wrappedApi, sink)(toc)
+  loader(mkapi, sink)(toc)
 end
 
 for k, v in pairs(env) do
