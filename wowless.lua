@@ -23,18 +23,15 @@ end
 
 local loadXml
 
-local function loadLuaString(filename, str)
-  return {
-    filename = filename,
-    lua = assert(loadstring(str)),
-  }
+local function loadLuaString(filename, str, sink)
+  sink(filename, assert(loadstring(str)))
 end
 
-local function loadFile(filename)
+local function loadFile(filename, sink)
   if filename:sub(-4) == '.lua' then
-    return {loadLuaString(filename, readFile(filename))}
+    loadLuaString(filename, readFile(filename), sink)
   elseif filename:sub(-4) == '.xml' then
-    return loadXml(filename)
+    return loadXml(filename, sink)
   else
     error('unknown file type ' .. filename)
   end
@@ -43,33 +40,33 @@ end
 -- TODO enable xml
 local enableXml = false
 
-function loadXml(filename)
+function loadXml(filename, sink)
   print('working on ' .. filename)
   local dir = path.dirname(filename)
   local h = handler:new()
   h.options.commentNode = false
   xml2lua.parser(h):parse(readFile(filename))
   assert(h.root._name == 'Ui')
-  local result = {}
   for _, v in ipairs(h.root._children) do
     assert(v._type == 'ELEMENT')
     if v._name == 'Include' then
       assert(v._attr and v._attr.file and #v._children == 0)
-      tappend(result, loadFile(path.join(dir, v._attr.file)))
+      loadFile(path.join(dir, v._attr.file), sink)
     elseif v._name == 'Frame' then
-      table.insert(result, loadLuaString(filename, string.format([[
+      local luastr = string.format([[
         CreateFrame('Frame', nil, %s)
-      ]], v._attr.name and ('[[' .. v._attr.name .. ']]') or 'nil')))
+      ]], v._attr.name and ('[[' .. v._attr.name .. ']]') or 'nil')
+      loadLuaString(filename, luastr, sink)
     elseif not enableXml then
       print('skipping ' .. filename .. ' ' .. v._name)
     elseif v._name == 'Script' then
       if v._attr and v._attr.file then
         assert(#v._children == 0)
-        tappend(result, loadFile(path.join(dir, v._attr.file)))
+        loadFile(path.join(dir, v._attr.file), sink)
       elseif v._children then
         for _, x in ipairs(v._children) do
           if x._type == 'TEXT' then
-            table.insert(result, loadLuaString(filename, x._text))
+            loadLuaString(filename, x._text, sink)
           end
         end
       else
@@ -77,19 +74,16 @@ function loadXml(filename)
       end
     end
   end
-  return result
 end
 
-local function loadToc(toc)
+local function loadToc(toc, sink)
   local dir = path.dirname(toc)
-  local result = {}
   for line in io.lines(toc) do
     line = line:match('^%s*(.-)%s*$')
     if line ~= '' and line:sub(1, 1) ~= '#' then
-      tappend(result, loadFile(path.join(dir, line)))
+      loadFile(path.join(dir, line), sink)
     end
   end
-  return result
 end
 
 local env = setmetatable({
@@ -124,12 +118,12 @@ local env = setmetatable({
 })
 
 setfenv(loadfile('env.lua'), env)()
-for _, code in ipairs(loadToc(datafile.path('wowui/classic/FrameXML/FrameXML.toc'))) do
-  local success, err = pcall(setfenv(code.lua, env))
+loadToc(datafile.path('wowui/classic/FrameXML/FrameXML.toc'), function(filename, lua)
+  local success, err = pcall(setfenv(lua, env))
   if not success then
-    error('failure loading ' .. code.filename .. ': ' .. err)
+    error('failure loading ' .. filename .. ': ' .. err)
   end
-end
+end)
 for k, v in pairs(env) do
   print(k .. ' = ' .. tostring(v))
 end
