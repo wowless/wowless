@@ -27,7 +27,7 @@ local function loader(mkapi, sink)
     -- TODO enable xml
     local enableXml = arg[1] == 'xml'
 
-    local function loadKids(e)
+    local function loadKids(e, parent)
       for _, v in ipairs(e._children) do
         assert(v._type == 'ELEMENT')
         if v._name == 'Include' then
@@ -35,15 +35,21 @@ local function loader(mkapi, sink)
           loadFile(path.join(dir, v._attr.file))
         elseif v._name == 'ScopedModifier' then
           -- TODO support ScopedModifier attributes
-          loadKids(v)
+          loadKids(v, parent)
+        elseif v._name == 'Frames' then
+          -- TODO support ScopedModifier attributes
+          loadKids(v, parent)
         elseif api.IsIntrinsicType(v._name) then
-          api.CreateUIObject({
-            inherits = v._attr.inherits,
-            intrinsic = v._attr.intrinsic,
-            name = v._attr.name,
+          local attr = v._attr or {}
+          local obj = api.CreateUIObject({
+            inherits = attr.inherits,
+            intrinsic = attr.intrinsic,
+            name = attr.name,
+            parent = parent,
             type = v._name,
-            virtual = v._attr.virtual,
+            virtual = attr.virtual,
           })
+          loadKids(v, obj)
         elseif enableXml and v._name == 'Script' then
           if v._attr and v._attr.file then
             assert(#v._children == 0)

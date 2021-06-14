@@ -115,11 +115,13 @@ local function _CreateUIObject(t)
   end
   if virtual then
     assert(t.name, 'cannot create anonymous virtual uiobject')
-    uiobjectTypes[string.lower(t.name)] = {
+    local newtype = {
+      data = {},
       inherits = 'parentedobject',  -- set real inherits
       intrinsic = t.intrinsic,
     }
-    return nil
+    uiobjectTypes[string.lower(t.name)] = newtype
+    return newtype.data
   end
   local obj = {}
   while type do
