@@ -8,7 +8,19 @@ local globalStrings = {
 
 local UNIMPLEMENTED = function() end
 
+local frameTypes = {
+  frame = true,
+}
+
 local function _CreateFrame(t)
+  if t.virtual then
+    assert(t.name, 'cannot create anonymous virtual frame')
+    frameTypes[t.name] = true
+    return nil
+  end
+  assert(t.type, 'must specify frame type for frame ' .. tostring(t.name))
+  local frameType = frameTypes[string.lower(t.type)]
+  assert(frameType, 'unknown frame type ' .. t.type .. ' for frame ' .. tostring(t.name))
   local frame = {
     Hide = UNIMPLEMENTED,
     RegisterEvent = UNIMPLEMENTED,
@@ -23,9 +35,10 @@ local function _CreateFrame(t)
 end
 
 local globals = {
-  CreateFrame = function(_, name)
+  CreateFrame = function(type, name)
     return _CreateFrame({
       name = name,
+      type = type,
     })
   end,
   C_Club = {},
@@ -65,6 +78,7 @@ local globals = {
   end,
   NUM_LE_ITEM_QUALITYS = 10,  -- UNIMPLEMENTED
   RegisterStaticConstants = UNIMPLEMENTED,
+  securecall = UNIMPLEMENTED,
   seterrorhandler = UNIMPLEMENTED,
   UnitRace = function()
     return 'Human', 'Human', 1  -- UNIMPLEMENTED

@@ -46,7 +46,10 @@ local function loader(api, sink)
         loadFile(path.join(dir, v._attr.file))
       elseif v._name == 'Frame' then
         api.CreateFrame({
+          inherits = v._attr.inherits,
           name = v._attr.name,
+          type = 'Frame',
+          virtual = v._attr.virtual,
         })
       elseif not enableXml then
         print('skipping ' .. filename .. ' ' .. v._name)
@@ -83,6 +86,7 @@ end
 local env = (function()
   local bitlib = require('bit')
   return setmetatable({
+    assert = assert,  -- TODO change, this is only for debugging
     bit = {
       bor = bitlib.bor,
     },
@@ -91,12 +95,14 @@ local env = (function()
     ipairs = ipairs,
     math = {},
     pairs = pairs,
+    print = print,  -- TODO change, this is only for debugging
     rawget = rawget,
     select = select,
     setmetatable = setmetatable,
     string = {
       format = string.format,
       gsub = string.gsub,
+      lower = string.lower,
       match = string.match,
       sub = string.sub,
       upper = string.upper,
