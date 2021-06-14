@@ -50,9 +50,8 @@ local function loader(mkapi, sink)
             loadFile(path.join(dir, v._attr.file))
           elseif v._children then
             for _, x in ipairs(v._children) do
-              if x._type == 'TEXT' then
-                loadLuaString(filename, x._text)
-              end
+              assert(x._type == 'TEXT', 'invalid script child')
+              loadLuaString(filename, x._text)
             end
           else
             error('invalid script tag')
