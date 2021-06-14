@@ -159,6 +159,8 @@ do
   loader(mkapi, sink)(toc)
 end
 
-for k, v in pairs(env) do
-  print(k .. ' = ' .. tostring(v))
+local size = 0
+for _ in pairs(env) do
+  size = size + 1
 end
+print('global environment has ' .. size .. ' symbols')
