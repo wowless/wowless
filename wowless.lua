@@ -31,7 +31,7 @@ local function loader(api, sink)
   end
 
   -- TODO enable xml
-  local enableXml = false
+  local enableXml = arg[1] == 'xml'
 
   function loadXml(filename)
     local dir = path.dirname(filename)
