@@ -1,13 +1,25 @@
 local UNIMPLEMENTED = function() end
 
 local uiobjectTypes = {
+  actor = {},
+  animationgroup = {},
   button = {
     inherits = 'frame',
   },
   checkbutton = {
     inherits = 'button',
   },
+  font = {},
+  fontfamily = {},
+  fontstring = {},
   frame = {},
+  gametooltip = {},
+  modelscene = {},
+  playermodel = {},
+  scrollframe = {},
+  slider = {},
+  statusbar = {},
+  texture = {},
 }
 
 local function _InheritsFrom(a, b)
