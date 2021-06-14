@@ -14,13 +14,6 @@ local function readFile(filename)
   return content
 end
 
-local function tappend(tbl, arr)
-  for _, e in ipairs(arr) do
-    table.insert(tbl, e)
-  end
-  return tbl
-end
-
 local loadXml
 
 local function loadLuaString(filename, str, sink)
