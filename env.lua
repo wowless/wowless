@@ -1,21 +1,33 @@
 local UNIMPLEMENTED = function() end
 
-local frameTypes = {
-  button = true,
-  checkbutton = true,
-  frame = true,
+local uiobjectTypes = {
+  button = {
+    inherits = 'frame',
+  },
+  checkbutton = {
+    inherits = 'button',
+  },
+  frame = {},
 }
 
-local function _IsFrameType(t)
-  return frameTypes[string.lower(t)] ~= nil
+local function _InheritsFrom(a, b)
+  a, b = string.lower(a), string.lower(b)
+  while a ~= nil and a ~= b do
+    a = uiobjectTypes[a].inherits
+  end
+  return a ~= nil
+end
+
+local function _IsUIObjectType(t)
+  return uiobjectTypes[string.lower(t)] ~= nil
 end
 
 local frameTemplates = {}
 
-local function _CreateFrame(t)
-  assert(t.type, 'must specify frame type for frame ' .. tostring(t.name))
-  local frameType = frameTypes[string.lower(t.type)]
-  assert(frameType, 'unknown frame type ' .. t.type .. ' for frame ' .. tostring(t.name))
+local function _CreateUIObject(t)
+  assert(t.type, 'must specify type for ' .. tostring(t.name))
+  local type = uiobjectTypes[string.lower(t.type)]
+  assert(type, 'unknown type ' .. t.type .. ' for ' .. tostring(t.name))
   for template in string.gmatch(t.inherits or '', '[^, ]+') do
     -- TODO figure out how to deal with unknown templates, maybe just ignore?
     if not frameTemplates[template] then
@@ -42,7 +54,8 @@ end
 
 local globals = {
   CreateFrame = function(type, name)
-    return _CreateFrame({
+    assert(_InheritsFrom(type, 'frame'), type .. ' does not inherit from frame')
+    return _CreateUIObject({
       name = name,
       type = type,
     })
@@ -111,6 +124,6 @@ for k, v in pairs(globalStrings) do
 end
 
 return {
-  CreateFrame = _CreateFrame,
-  IsFrameType = _IsFrameType,
+  CreateUIObject = _CreateUIObject,
+  IsUIObjectType = _IsUIObjectType,
 }

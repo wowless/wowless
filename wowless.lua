@@ -36,16 +36,14 @@ local function loader(mkapi, sink)
         elseif v._name == 'ScopedModifier' then
           -- TODO support ScopedModifier attributes
           loadKids(v)
-        elseif api.IsFrameType(v._name) then
-          api.CreateFrame({
+        elseif api.IsUIObjectType(v._name) then
+          api.CreateUIObject({
             inherits = v._attr.inherits,
             name = v._attr.name,
             type = v._name,
             virtual = v._attr.virtual,
           })
-        elseif not enableXml then
-          print('skipping ' .. filename .. ' ' .. v._name)
-        elseif v._name == 'Script' then
+        elseif enableXml and v._name == 'Script' then
           if v._attr and v._attr.file then
             assert(#v._children == 0)
             loadFile(path.join(dir, v._attr.file))
@@ -58,6 +56,8 @@ local function loader(mkapi, sink)
           else
             error('invalid script tag')
           end
+        else
+          print('skipping ' .. filename .. ' ' .. v._name)
         end
       end
     end
