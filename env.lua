@@ -134,7 +134,7 @@ local function _CreateUIObject(t)
   return obj
 end
 
-local globals = {
+Mixin(_G, {
   CreateFrame = function(type, name)
     assert(_InheritsFrom(type, 'frame'), type .. ' does not inherit from frame')
     return _CreateUIObject({
@@ -187,23 +187,15 @@ local globals = {
   UnitSex = function()
     return 2  -- UNIMPLEMENTED
   end,
-}
+})
 
-for k, v in pairs(globals) do
-  _G[k] = v
-end
-
-local globalStrings = {
+Mixin(_G, {
   -- luacheck: no max line length
   CONFIRM_CONTINUE = 'Do you wish to continue?',
   GUILD_REPUTATION_WARNING_GENERIC = 'You will lose one rank of guild reputation with your previous guild.',
   REMOVE_GUILDMEMBER_LABEL = 'Are you sure you want to remove %s from the guild?',
   VOID_STORAGE_DEPOSIT_CONFIRMATION = 'Depositing this item will remove all modifications and make it non-refundable and non-tradeable.',
-}
-
-for k, v in pairs(globalStrings) do
-  _G[k] = v
-end
+})
 
 return {
   CreateUIObject = _CreateUIObject,
