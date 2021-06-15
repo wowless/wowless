@@ -101,17 +101,14 @@ end
 local env = (function()
   local bitlib = require('bit')
   return setmetatable({
-    assert = assert,
     bit = {
       bor = bitlib.bor,
     },
-    error = error,
     getfenv = getfenv,
     getmetatable = getmetatable,
     ipairs = ipairs,
     math = {},
     pairs = pairs,
-    print = print,
     rawget = rawget,
     select = select,
     setmetatable = setmetatable,
@@ -146,7 +143,11 @@ do
     assert(success, 'failure in ' .. filename .. ': ' .. tostring(arg))
     return arg
   end
-  local api = setfenv(loadfile('env.lua'), env)()
+  local api = setfenv(loadfile('env.lua'), env)({
+    assert = assert,
+    error = error,
+    print = print,
+  })
   local mkapi = function(filename)
     return setmetatable({}, {
       __index = function(_, k)

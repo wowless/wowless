@@ -1,3 +1,5 @@
+local api = ...
+
 local UNIMPLEMENTED = function() end
 
 local uiobjectTypes = {
@@ -133,21 +135,21 @@ local function _IsUIObjectType(t)
 end
 
 local function _CreateUIObject(t)
-  assert(t.type, 'must specify type for ' .. tostring(t.name))
+  api.assert(t.type, 'must specify type for ' .. tostring(t.name))
   local type = uiobjectTypes[string.lower(t.type)]
-  assert(type, 'unknown type ' .. t.type .. ' for ' .. tostring(t.name))
+  api.assert(type, 'unknown type ' .. t.type .. ' for ' .. tostring(t.name))
   for superType in string.gmatch(t.inherits or '', '[^, ]+') do
     if not uiobjectTypes[string.lower(superType)] then
-      print('ignoring unknown inherited type ' .. superType .. ' for ' .. tostring(t.name))
+      api.print('ignoring unknown inherited type ' .. superType .. ' for ' .. tostring(t.name))
     end
   end
   local virtual = t.virtual
   if t.intrinsic then
-    assert(not _IsUIObjectType(t.name), 'already a uiobject type named ' .. t.name)
+    api.assert(not _IsUIObjectType(t.name), 'already a uiobject type named ' .. t.name)
     virtual = true
   end
   if virtual then
-    assert(t.name, 'cannot create anonymous virtual uiobject')
+    api.assert(t.name, 'cannot create anonymous virtual uiobject')
     local newtype = {
       data = {},
       inherits = 'parentedobject',  -- set real inherits
@@ -169,7 +171,7 @@ end
 
 Mixin(_G, {
   CreateFrame = function(type, name)
-    assert(_InheritsFrom(type, 'frame'), type .. ' does not inherit from frame')
+    api.assert(_InheritsFrom(type, 'frame'), type .. ' does not inherit from frame')
     return _CreateUIObject({
       name = name,
       type = type,
