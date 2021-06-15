@@ -4,47 +4,47 @@ local UNIMPLEMENTED = function() end
 
 local uiobjectTypes = {
   actor = {
-    inherits = 'parentedobject',
+    inherits = {'parentedobject'},
     intrinsic = true,
     name = 'Actor',
   },
   animationgroup = {
-    inherits = 'parentedobject',
+    inherits = {'parentedobject'},
     intrinsic = true,
     name = 'AnimationGroup',
   },
   button = {
-    inherits = 'frame',
+    inherits = {'frame'},
     intrinsic = true,
     name = 'Button',
   },
   checkbutton = {
-    inherits = 'button',
+    inherits = {'button'},
     intrinsic = true,
     name = 'CheckButton',
   },
   editbox = {
-    inherits = 'frame',
+    inherits = {'frame'},
     intrinsic = true,
     name = 'EditBox',
   },
   font = {
-    inherits = 'parentedobject',
+    inherits = {'parentedobject'},
     intrinsic = true,
     name = 'Font',
   },
   fontfamily = {
-    inherits = 'parentedobject',
+    inherits = {'parentedobject'},
     intrinsic = true,
     name = 'FontFamily',
   },
   fontstring = {
-    inherits = 'parentedobject',
+    inherits = {'parentedobject'},
     intrinsic = true,
     name = 'FontString',
   },
   frame = {
-    inherits = 'parentedobject',
+    inherits = {'parentedobject'},
     intrinsic = true,
     mixin = {
       Hide = UNIMPLEMENTED,
@@ -55,21 +55,22 @@ local uiobjectTypes = {
     name = 'Frame',
   },
   gametooltip = {
-    inherits = 'frame',
+    inherits = {'frame'},
     intrinsic = true,
     name = 'GameTooltip',
   },
   messageframe = {
-    inherits = 'frame',
+    inherits = {'frame'},
     intrinsic = true,
     name = 'MessageFrame',
   },
   modelscene = {
-    inherits = 'parentedobject',
+    inherits = {'parentedobject'},
     intrinsic = true,
     name = 'ModelScene',
   },
   parentedobject = {
+    inherits = {},
     intrinsic = true,
     mixin = {
       SetForbidden = UNIMPLEMENTED,
@@ -77,32 +78,32 @@ local uiobjectTypes = {
     name = 'ParentedObject',
   },
   playermodel = {
-    inherits = 'parentedobject',
+    inherits = {'parentedobject'},
     intrinsic = true,
     name = 'PlayerModel',
   },
   scrollframe = {
-    inherits = 'frame',
+    inherits = {'frame'},
     intrinsic = true,
     name = 'ScrollFrame',
   },
   slider = {
-    inherits = 'frame',
+    inherits = {'frame'},
     intrinsic = true,
     name = 'Slider',
   },
   statusbar = {
-    inherits = 'frame',
+    inherits = {'frame'},
     intrinsic = true,
     name = 'StatusBar',
   },
   texture = {
-    inherits = 'parentedobject',
+    inherits = {'parentedobject'},
     intrinsic = true,
     name = 'Texture',
   },
   worldframe = {
-    inherits = 'frame',
+    inherits = {'frame'},
     intrinsic = true,
     name = 'WorldFrame',
   },
@@ -134,6 +135,19 @@ local function _IsUIObjectType(t)
   return uiobjectTypes[string.lower(t)] ~= nil
 end
 
+local function makeObject(type)
+  if #type.inherits == 0 then
+    return Mixin({}, type.mixin)
+  end
+  for _, p in ipairs(type.inherits) do
+    api.assert(uiobjectTypes[p], 'unknown object type ' .. p)
+  end
+  for i = 2, #type.inherits do
+    api.log(0, 'ignoring multiple inheritance type ' .. type.inherits[i] .. ' for ' .. tostring(type.name))
+  end
+  return Mixin(makeObject(uiobjectTypes[type.inherits[1]]), type.mixin)
+end
+
 local function _CreateUIObject(t)
   api.assert(t.type, 'must specify type for ' .. tostring(t.name))
   local type = uiobjectTypes[string.lower(t.type)]
@@ -141,32 +155,27 @@ local function _CreateUIObject(t)
   api.log(3, 'creating %s%s%s',
       type.name, t.name and (' named ' .. t.name) or '',
       t.parent and t.parent.virtual and (' with parent ' .. t.parent.name) or '')
-  for _, superType in ipairs(t.inherits) do
-    if not uiobjectTypes[string.lower(superType)] then
-      api.log(0, 'ignoring unknown inherited type ' .. superType .. ' for ' .. tostring(t.name))
-    end
-  end
   local virtual = t.virtual
   if t.intrinsic then
     api.assert(not _IsUIObjectType(t.name), 'already a uiobject type named ' .. t.name)
     api.assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. t.name)
     virtual = true
   end
+  local inherits = {}
+  for _, inh in ipairs(t.inherits) do
+    table.insert(inherits, string.lower(inh))
+  end
   if virtual then
     api.assert(t.name, 'cannot create anonymous virtual uiobject')
     local newtype = {
-      inherits = t.inherits,
+      inherits = inherits,
       intrinsic = t.intrinsic,
       name = t.name,
     }
     uiobjectTypes[string.lower(t.name)] = newtype
     return newtype
   end
-  local obj = {}
-  while type do
-    Mixin(obj, type.mixin)
-    type = uiobjectTypes[type.inherits]
-  end
+  local obj = makeObject(type)
   if t.name then
     _G[t.name] = obj
   end
