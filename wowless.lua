@@ -26,6 +26,18 @@ local function loader(mkapi, skipscripts, log, sink)
     return result
   end
 
+  local function parseBoolean(str)
+    if str == 'true' then
+      return true
+    elseif str == 'false' then
+      return false
+    elseif str == nil then
+      return nil
+    else
+      error('invalid boolean ' .. str)
+    end
+  end
+
   local loadFile
 
   local function loadXml(filename)
@@ -48,11 +60,11 @@ local function loader(mkapi, skipscripts, log, sink)
           local attr = v._attr or {}
           local obj = api.CreateUIObject({
             inherits = strsplit(attr.inherits),
-            intrinsic = attr.intrinsic == 'true',
+            intrinsic = parseBoolean(attr.intrinsic),
             name = attr.name,
             parent = parent,
             type = v._name,
-            virtual = attr.virtual == 'true',
+            virtual = parseBoolean(attr.virtual),
           })
           loadKids(v, obj)
         elseif not skipscripts and v._name == 'Script' then

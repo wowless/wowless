@@ -149,6 +149,7 @@ local function _CreateUIObject(t)
   local virtual = t.virtual
   if t.intrinsic then
     api.assert(not _IsUIObjectType(t.name), 'already a uiobject type named ' .. t.name)
+    api.assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. t.name)
     virtual = true
   end
   if virtual then
