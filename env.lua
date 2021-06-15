@@ -141,7 +141,7 @@ local function _CreateUIObject(t)
   api.log(3, 'creating %s%s%s',
       type.name, t.name and (' named ' .. t.name) or '',
       t.parent and t.parent.virtual and (' with parent ' .. t.parent.name) or '')
-  for superType in string.gmatch(t.inherits or '', '[^, ]+') do
+  for _, superType in ipairs(t.inherits) do
     if not uiobjectTypes[string.lower(superType)] then
       api.log(0, 'ignoring unknown inherited type ' .. superType .. ' for ' .. tostring(t.name))
     end
@@ -154,7 +154,7 @@ local function _CreateUIObject(t)
   if virtual then
     api.assert(t.name, 'cannot create anonymous virtual uiobject')
     local newtype = {
-      inherits = 'parentedobject',  -- set real inherits
+      inherits = t.inherits,
       intrinsic = t.intrinsic,
       name = t.name,
     }
@@ -176,6 +176,7 @@ Mixin(_G, {
   CreateFrame = function(type, name)
     api.assert(_InheritsFrom(type, 'frame'), type .. ' does not inherit from frame')
     return _CreateUIObject({
+      inherits = {},
       name = name,
       type = type,
     })

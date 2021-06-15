@@ -18,6 +18,14 @@ local function loader(mkapi, skipscripts, log, sink)
     sink(filename, assert(loadstring(str)))
   end
 
+  local function strsplit(str)
+    local result = {}
+    for s in string.gmatch(str or '', '[^, ]+') do
+      table.insert(result, s)
+    end
+    return result
+  end
+
   local loadFile
 
   local function loadXml(filename)
@@ -39,12 +47,12 @@ local function loader(mkapi, skipscripts, log, sink)
         elseif api.IsIntrinsicType(v._name) then
           local attr = v._attr or {}
           local obj = api.CreateUIObject({
-            inherits = attr.inherits,
-            intrinsic = attr.intrinsic == "true",
+            inherits = strsplit(attr.inherits),
+            intrinsic = attr.intrinsic == 'true',
             name = attr.name,
             parent = parent,
             type = v._name,
-            virtual = attr.virtual == "true",
+            virtual = attr.virtual == 'true',
           })
           loadKids(v, obj)
         elseif not skipscripts and v._name == 'Script' then
