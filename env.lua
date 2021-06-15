@@ -3,75 +3,108 @@ local UNIMPLEMENTED = function() end
 local uiobjectTypes = {
   actor = {
     inherits = 'parentedobject',
+    intrinsic = true,
+    name = 'Actor',
   },
   animationgroup = {
     inherits = 'parentedobject',
+    intrinsic = true,
+    name = 'AnimationGroup',
   },
   button = {
     inherits = 'frame',
+    intrinsic = true,
+    name = 'Button',
   },
   checkbutton = {
     inherits = 'button',
+    intrinsic = true,
+    name = 'CheckButton',
   },
   editbox = {
     inherits = 'frame',
+    intrinsic = true,
+    name = 'EditBox',
   },
   font = {
     inherits = 'parentedobject',
+    intrinsic = true,
+    name = 'Font',
   },
   fontfamily = {
     inherits = 'parentedobject',
+    intrinsic = true,
+    name = 'FontFamily',
   },
   fontstring = {
     inherits = 'parentedobject',
+    intrinsic = true,
+    name = 'FontString',
   },
   frame = {
     inherits = 'parentedobject',
+    intrinsic = true,
     mixin = {
       Hide = UNIMPLEMENTED,
       RegisterEvent = UNIMPLEMENTED,
       SetScript = UNIMPLEMENTED,
       SetSize = UNIMPLEMENTED,
     },
+    name = 'Frame',
   },
   gametooltip = {
     inherits = 'frame',
+    intrinsic = true,
+    name = 'GameTooltip',
   },
   messageframe = {
     inherits = 'frame',
+    intrinsic = true,
+    name = 'MessageFrame',
   },
   modelscene = {
     inherits = 'parentedobject',
+    intrinsic = true,
+    name = 'ModelScene',
   },
   parentedobject = {
+    intrinsic = true,
     mixin = {
       SetForbidden = UNIMPLEMENTED,
     },
+    name = 'ParentedObject',
   },
   playermodel = {
     inherits = 'parentedobject',
+    intrinsic = true,
+    name = 'PlayerModel',
   },
   scrollframe = {
     inherits = 'frame',
+    intrinsic = true,
+    name = 'ScrollFrame',
   },
   slider = {
     inherits = 'frame',
+    intrinsic = true,
+    name = 'Slider',
   },
   statusbar = {
     inherits = 'frame',
+    intrinsic = true,
+    name = 'StatusBar',
   },
   texture = {
     inherits = 'parentedobject',
+    intrinsic = true,
+    name = 'Texture',
   },
   worldframe = {
     inherits = 'frame',
+    intrinsic = true,
+    name = 'WorldFrame',
   },
 }
-
--- The default set of uiobject types are intrinsic.
-for _, v in pairs(uiobjectTypes) do
-  v.intrinsic = true
-end
 
 local function Mixin(t, ...)
   for _, tt in ipairs({...}) do
