@@ -138,9 +138,12 @@ local function _CreateUIObject(t)
   api.assert(t.type, 'must specify type for ' .. tostring(t.name))
   local type = uiobjectTypes[string.lower(t.type)]
   api.assert(type, 'unknown type ' .. t.type .. ' for ' .. tostring(t.name))
+  api.log(3, 'creating %s%s%s',
+      type.name, t.name and (' named ' .. t.name) or '',
+      t.parent and t.parent.virtual and (' with parent ' .. t.parent.name) or '')
   for superType in string.gmatch(t.inherits or '', '[^, ]+') do
     if not uiobjectTypes[string.lower(superType)] then
-      api.print('ignoring unknown inherited type ' .. superType .. ' for ' .. tostring(t.name))
+      api.log(0, 'ignoring unknown inherited type ' .. superType .. ' for ' .. tostring(t.name))
     end
   end
   local virtual = t.virtual
@@ -151,12 +154,12 @@ local function _CreateUIObject(t)
   if virtual then
     api.assert(t.name, 'cannot create anonymous virtual uiobject')
     local newtype = {
-      data = {},
       inherits = 'parentedobject',  -- set real inherits
       intrinsic = t.intrinsic,
+      name = t.name,
     }
     uiobjectTypes[string.lower(t.name)] = newtype
-    return newtype.data
+    return newtype
   end
   local obj = {}
   while type do

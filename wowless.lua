@@ -1,4 +1,4 @@
-local function loader(mkapi, sink)
+local function loader(mkapi, skipscripts, log, sink)
 
   local handler = require('xmlhandler.dom')
   local path = require('path')
@@ -24,9 +24,6 @@ local function loader(mkapi, sink)
     local api = mkapi(filename)
     local dir = path.dirname(filename)
 
-    -- TODO enable xml
-    local enableXml = arg[1] == 'xml'
-
     local function loadKids(e, parent)
       for _, v in ipairs(e._children) do
         assert(v._type == 'ELEMENT')
@@ -50,7 +47,7 @@ local function loader(mkapi, sink)
             virtual = attr.virtual,
           })
           loadKids(v, obj)
-        elseif enableXml and v._name == 'Script' then
+        elseif not skipscripts and v._name == 'Script' then
           if v._attr and v._attr.file then
             assert(#v._children == 0)
             loadFile(path.join(dir, v._attr.file))
@@ -63,7 +60,7 @@ local function loader(mkapi, sink)
             error('invalid script tag')
           end
         else
-          print('skipping ' .. filename .. ' ' .. v._name)
+          log(1, 'skipping ' .. filename .. ' ' .. v._name)
         end
       end
     end
@@ -76,6 +73,7 @@ local function loader(mkapi, sink)
   end
 
   function loadFile(filename)
+    log(2, 'loading file %s', filename)
     if filename:sub(-4) == '.lua' then
       loadLuaString(filename, readFile(filename))
     elseif filename:sub(-4) == '.xml' then
@@ -98,7 +96,7 @@ local function loader(mkapi, sink)
   return loadToc
 end
 
-local env = (function()
+local function mkEnv()
   local bitlib = require('bit')
   return setmetatable({
     bit = {
@@ -135,18 +133,24 @@ local env = (function()
       end
     end
   })
-end)()
+end
 
-do
+local function run(tocname, loglevel, skipscripts)
   local function wrap(filename, fn, ...)
     local success, arg = pcall(fn, ...)
     assert(success, 'failure in ' .. filename .. ': ' .. tostring(arg))
     return arg
   end
+  local function log(level, fmt, ...)
+    if level <= loglevel then
+      print(string.format(fmt, ...))
+    end
+  end
+  local env = mkEnv()
   local api = setfenv(loadfile('env.lua'), env)({
     assert = assert,
+    log = log,
     error = error,
-    print = print,
   })
   local mkapi = function(filename)
     return setmetatable({}, {
@@ -162,10 +166,12 @@ do
   local sink = function(filename, lua)
     wrap(filename, setfenv(lua, env))
   end
-  local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
-  loader(mkapi, sink)(toc)
+  loader(mkapi, skipscripts, log, sink)(tocname)
+  return env
 end
 
+local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
+local env = run(toc, arg[1] == 'xml' and 100 or 0, arg[1] ~= 'xml')
 local size = 0
 for _ in pairs(env) do
   size = size + 1
