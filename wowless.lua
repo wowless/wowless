@@ -40,11 +40,11 @@ local function loader(mkapi, skipscripts, log, sink)
           local attr = v._attr or {}
           local obj = api.CreateUIObject({
             inherits = attr.inherits,
-            intrinsic = attr.intrinsic,
+            intrinsic = attr.intrinsic == "true",
             name = attr.name,
             parent = parent,
             type = v._name,
-            virtual = attr.virtual,
+            virtual = attr.virtual == "true",
           })
           loadKids(v, obj)
         elseif not skipscripts and v._name == 'Script' then
