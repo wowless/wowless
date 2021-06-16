@@ -1,4 +1,45 @@
-local lang = {
+local function mixin(t, ...)
+  for _, kv in ipairs({...}) do
+    for k, v in pairs(kv) do
+      t[k] = v
+    end
+  end
+  return t
+end
+
+local function tappend(t, t2)
+  for _, v in ipairs(t2) do
+    table.insert(t, v)
+  end
+  return t
+end
+
+local function preprocess(tree)
+  local newtree = {}
+  for k, v in pairs(tree) do
+    local attrs = mixin({}, v.attributes)
+    local kids = tappend({}, v.children or {})
+    local supertypes = { [k] = true }
+    local text = v.text
+    local t = v
+    while t.extends do
+      supertypes[t.extends] = true
+      t = tree[t.extends]
+      mixin(attrs, t.attributes)
+      tappend(kids, t.children or {})
+      text = text or t.text
+    end
+    newtree[k] = mixin({}, v, {
+      attributes = attrs,
+      children = kids,
+      supertypes = supertypes,
+      text = text,
+    })
+  end
+  return newtree
+end
+
+local lang = preprocess({
   absdimension = {
     attributes = {
       x = {
@@ -1498,66 +1539,37 @@ local lang = {
   worldframe = {
     extends = 'frame',
   },
-}
-
-local function mixin(t, ...)
-  for _, kv in ipairs({...}) do
-    for k, v in pairs(kv) do
-      t[k] = v
-    end
-  end
-  return t
-end
+})
 
 local function validateRoot(root)
   local warnings = {}
   local function run(e, tn, tk)
     assert(e._type == 'ELEMENT', 'invalid xml type ' .. e._type .. ' on child of ' .. tn)
     local tname = string.lower(e._name)
-    assert(lang[tname], tname .. ' is not a type')
-    assert(not lang[tname].virtual, tname .. ' is virtual and cannot be instantiated')
-    local classes = {}
-    do
-      local t = tname
-      while t do
-        classes[t] = true
-        t = lang[t].extends
-      end
-    end
+    local ty = lang[tname]
+    assert(ty, tname .. ' is not a type')
+    assert(not ty.virtual, tname .. ' is virtual and cannot be instantiated')
     local extends = false
     for _, k in ipairs(tk) do
-      extends = extends or classes[k]
+      extends = extends or ty.supertypes[k]
     end
     assert(extends, tname .. ' cannot be a child of ' .. tn)
-    local attrs = {}
-    local kids = {}
-    local text = false
-    for cname in pairs(classes) do
-      local ct = lang[cname]
-      mixin(attrs, ct.attributes)
-      for _, k in ipairs(ct.children or {}) do
-        table.insert(kids, k)
-      end
-      text = text or ct.text
-    end
     for k in pairs(e._attr or {}) do
-      if not attrs[string.lower(k)] then
+      if not ty.attributes[string.lower(k)] then
         table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
       end
     end
-    if text then
+    if ty.text then
       assert(e._children, 'missing text in ' .. tname)
       for _, kid in ipairs(e._children) do
         assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
       end
     else
-      assert(not next(e._children) or kids, tname .. ' has kids but should not')
-      assert(e._children or not next(kids), tname .. ' should have kids but does not')
       for _, kid in ipairs(e._children or {}) do
         if kid._type == 'TEXT' then
           table.insert(warnings, 'ignoring text kid of ' .. tname)
         else
-          run(kid, tname, kids)
+          run(kid, tname, ty.children)
         end
       end
     end
