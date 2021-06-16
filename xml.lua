@@ -1509,56 +1509,61 @@ local function mixin(t, ...)
   return t
 end
 
-local function run(e, tn, tk)
-  assert(e._type == 'ELEMENT', 'invalid xml type ' .. e._type .. ' on child of ' .. tn)
-  local tname = string.lower(e._name)
-  assert(lang[tname], tname .. ' is not a type')
-  assert(not lang[tname].virtual, tname .. ' is virtual and cannot be instantiated')
-  local classes = {}
-  do
-    local t = tname
-    while t do
-      classes[t] = true
-      t = lang[t].extends
+local function validateRoot(root)
+  local warnings = {}
+  local function run(e, tn, tk)
+    assert(e._type == 'ELEMENT', 'invalid xml type ' .. e._type .. ' on child of ' .. tn)
+    local tname = string.lower(e._name)
+    assert(lang[tname], tname .. ' is not a type')
+    assert(not lang[tname].virtual, tname .. ' is virtual and cannot be instantiated')
+    local classes = {}
+    do
+      local t = tname
+      while t do
+        classes[t] = true
+        t = lang[t].extends
+      end
     end
-  end
-  local extends = false
-  for _, k in ipairs(tk) do
-    extends = extends or classes[k]
-  end
-  assert(extends, tname .. ' cannot be a child of ' .. tn)
-  local attrs = {}
-  local kids = {}
-  local text = false
-  for cname in pairs(classes) do
-    local ct = lang[cname]
-    mixin(attrs, ct.attributes)
-    for _, k in ipairs(ct.children or {}) do
-      table.insert(kids, k)
+    local extends = false
+    for _, k in ipairs(tk) do
+      extends = extends or classes[k]
     end
-    text = text or ct.text
-  end
-  for k in pairs(e._attr or {}) do
-    if not attrs[string.lower(k)] then
-      print('attribute ' .. k .. ' is not supported by ' .. tname)
+    assert(extends, tname .. ' cannot be a child of ' .. tn)
+    local attrs = {}
+    local kids = {}
+    local text = false
+    for cname in pairs(classes) do
+      local ct = lang[cname]
+      mixin(attrs, ct.attributes)
+      for _, k in ipairs(ct.children or {}) do
+        table.insert(kids, k)
+      end
+      text = text or ct.text
     end
-  end
-  if text then
-    assert(e._children, 'missing text in ' .. tname)
-    for _, kid in ipairs(e._children) do
-      assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
+    for k in pairs(e._attr or {}) do
+      if not attrs[string.lower(k)] then
+        table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
+      end
     end
-  else
-    assert(not next(e._children) or kids, tname .. ' has kids but should not')
-    assert(e._children or not next(kids), tname .. ' should have kids but does not')
-    for _, kid in ipairs(e._children or {}) do
-      if kid._type == 'TEXT' then
-        print('ignoring text kid of ' .. tname)
-      else
-        run(kid, tname, kids)
+    if text then
+      assert(e._children, 'missing text in ' .. tname)
+      for _, kid in ipairs(e._children) do
+        assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
+      end
+    else
+      assert(not next(e._children) or kids, tname .. ' has kids but should not')
+      assert(e._children or not next(kids), tname .. ' should have kids but does not')
+      for _, kid in ipairs(e._children or {}) do
+        if kid._type == 'TEXT' then
+          table.insert(warnings, 'ignoring text kid of ' .. tname)
+        else
+          run(kid, tname, kids)
+        end
       end
     end
   end
+  run(root, 'toplevel', {'bindings', 'ui'})
+  return warnings
 end
 
 local function validate(filename)
@@ -1568,7 +1573,7 @@ local function validate(filename)
   local data = file:read('*all')
   file:close()
   require('xml2lua').parser(h):parse(data)
-  run(h.root, 'toplevel', {'bindings', 'ui'})
+  return validateRoot(h.root)
 end
 
 return {
