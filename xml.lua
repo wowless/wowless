@@ -1561,10 +1561,16 @@ local function run(e, tn, tk)
   end
 end
 
-local h = require('xmlhandler.dom'):new()
-h.options.commentNode = false
-local file = assert(require('io').open(arg[1], 'r'))
-local data = file:read('*all')
-file:close()
-require('xml2lua').parser(h):parse(data)
-run(h.root, 'toplevel', {'bindings', 'ui'})
+local function validate(filename)
+  local h = require('xmlhandler.dom'):new()
+  h.options.commentNode = false
+  local file = assert(io.open(filename, 'r'))
+  local data = file:read('*all')
+  file:close()
+  require('xml2lua').parser(h):parse(data)
+  run(h.root, 'toplevel', {'bindings', 'ui'})
+end
+
+return {
+  validate = validate,
+}
