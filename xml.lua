@@ -273,7 +273,7 @@ local lang = preprocess({
         type = 'bool',
       },
       registerforclicks = {
-        type = 'bool',
+        type = 'stringlist',
       },
       text = {
         type = 'string',
@@ -659,7 +659,7 @@ local lang = preprocess({
         type = 'string',
       },
       useparentlevel = {
-        type = 'boolean',
+        type = 'bool',
       },
     },
     children = {
@@ -1541,6 +1541,22 @@ local lang = preprocess({
   },
 })
 
+local attributeTypes = {
+  bool = function(s)
+    local x = string.lower(s)
+    return x == 'true' or x == 'false'
+  end,
+  number = function(s)
+    return tonumber(s) ~= nil
+  end,
+  string = function()
+    return true
+  end,
+  stringlist = function()
+    return true
+  end,
+}
+
 local function validateRoot(root)
   local warnings = {}
   local function run(e, tn, tk)
@@ -1554,9 +1570,12 @@ local function validateRoot(root)
       extends = extends or ty.supertypes[k]
     end
     assert(extends, tname .. ' cannot be a child of ' .. tn)
-    for k in pairs(e._attr or {}) do
-      if not ty.attributes[string.lower(k)] then
+    for k, v in pairs(e._attr or {}) do
+      local attr = ty.attributes[string.lower(k)]
+      if not attr then
         table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
+      elseif not attributeTypes[attr.type](v) then
+        table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
       end
     end
     if ty.text then
