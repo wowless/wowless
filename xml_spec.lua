@@ -1,6 +1,6 @@
 describe('xml.lua', function()
   local module = dofile('xml.lua')
-  local handle = io.popen('find wowui/classic/{SharedXML,FrameXML,AddOns} -name "*.xml"')
+  local handle = io.popen([[bash -c 'find wowui/classic/{SharedXML,FrameXML,AddOns} -name "*.xml"']])
   local warnings = {}
   for line in handle:lines() do
     it('handles ' .. line, function()
