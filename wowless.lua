@@ -1,41 +1,11 @@
 local function loader(mkapi, skipscripts, log, sink)
 
-  local handler = require('xmlhandler.dom')
   local path = require('path')
-  local xml2lua = require('xml2lua')
-
-  local function readFile(filename)
-    local f = assert(io.open(filename:gsub('\\', '/'), 'rb'))
-    local content = f:read('*all')
-    f:close()
-    if content:sub(1, 3) == '\239\187\191' then
-      content = content:sub(4)
-    end
-    return content
-  end
+  local xml = require('wowless.xml')
+  local readFile = require('wowless.util').readfile
 
   local function loadLuaString(filename, str)
     sink(filename, assert(loadstring(str)))
-  end
-
-  local function strsplit(str)
-    local result = {}
-    for s in string.gmatch(str or '', '[^, ]+') do
-      table.insert(result, s)
-    end
-    return result
-  end
-
-  local function parseBoolean(str)
-    if str == 'true' then
-      return true
-    elseif str == 'false' then
-      return false
-    elseif str == nil then
-      return nil
-    else
-      error('invalid boolean ' .. str)
-    end
   end
 
   local loadFile
@@ -45,51 +15,43 @@ local function loader(mkapi, skipscripts, log, sink)
     local dir = path.dirname(filename)
 
     local function loadKids(e, parent)
-      for _, v in ipairs(e._children) do
-        assert(v._type == 'ELEMENT')
-        if v._name == 'Include' then
-          assert(v._attr and v._attr.file and #v._children == 0)
-          loadFile(path.join(dir, v._attr.file))
-        elseif v._name == 'ScopedModifier' then
+      for _, v in ipairs(e.kids) do
+        if v.name == 'include' then
+          assert(v.attr.file and #v.kids == 0)
+          loadFile(path.join(dir, v.attr.file))
+        elseif v.name == 'scopedmodifier' then
           -- TODO support ScopedModifier attributes
           loadKids(v, parent)
-        elseif v._name == 'Frames' then
-          -- TODO support ScopedModifier attributes
+        elseif v.name == 'frames' then
           loadKids(v, parent)
-        elseif api.IsIntrinsicType(v._name) then
-          local attr = v._attr or {}
+        elseif api.IsIntrinsicType(v.name) then
           local obj = api.CreateUIObject({
-            inherits = strsplit(attr.inherits),
-            intrinsic = parseBoolean(attr.intrinsic),
-            name = attr.name,
+            inherits = v.attr.inherits or {},
+            intrinsic = v.attr.intrinsic,
+            name = v.attr.name,
             parent = parent,
-            type = v._name,
-            virtual = parseBoolean(attr.virtual),
+            type = v.name,
+            virtual = v.attr.virtual,
           })
           loadKids(v, obj)
-        elseif not skipscripts and v._name == 'Script' then
-          if v._attr and v._attr.file then
-            assert(#v._children == 0)
-            loadFile(path.join(dir, v._attr.file))
-          elseif v._children then
-            for _, x in ipairs(v._children) do
-              assert(x._type == 'TEXT', 'invalid script child')
-              loadLuaString(filename, x._text)
-            end
+        elseif not skipscripts and v.name == 'script' then
+          if v.attr.file then
+            assert(#v.kids == 0)
+            loadFile(path.join(dir, v.attr.file))
           else
-            error('invalid script tag')
+            for _, x in ipairs(v.kids) do
+              loadLuaString(filename, x)
+            end
           end
         else
-          log(1, 'skipping ' .. filename .. ' ' .. v._name)
+          log(1, 'skipping ' .. filename .. ' ' .. v.name)
         end
       end
     end
 
-    local h = handler:new()
-    h.options.commentNode = false
-    xml2lua.parser(h):parse(readFile(filename))
-    assert(h.root._name == 'Ui')
-    loadKids(h.root)
+    local root = xml.validate(filename)
+    assert(root.name == 'ui')
+    loadKids(root)
   end
 
   function loadFile(filename)

@@ -1,7 +1,7 @@
 local util = require('wowless.util')
-local mixin, tappend = util.mixin, util.tappend
 
 local function preprocess(tree)
+  local mixin, tappend = util.mixin, util.tappend
   local newtree = {}
   for k, v in pairs(tree) do
     local attrs = mixin({}, v.attributes)
@@ -497,7 +497,7 @@ local lang = preprocess({
         type = 'number',
       },
       inherits = {
-        type = 'string',
+        type = 'stringlist',
       },
       justifyh = {
         type = 'string',
@@ -1587,6 +1587,7 @@ local function validateRoot(root)
       assert(e._children, 'missing text in ' .. tname)
       for _, kid in ipairs(e._children) do
         assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
+        table.insert(resultKids, e._text)
       end
     else
       for _, kid in ipairs(e._children or {}) do
@@ -1606,10 +1607,7 @@ end
 local function validate(filename)
   local h = require('xmlhandler.dom'):new()
   h.options.commentNode = false
-  local file = assert(io.open(filename, 'r'))
-  local data = file:read('*all')
-  file:close()
-  require('xml2lua').parser(h):parse(data)
+  require('xml2lua').parser(h):parse(util.readfile(filename))
   return validateRoot(h.root)
 end
 
