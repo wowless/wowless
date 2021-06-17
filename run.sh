@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
 eval $(.lua/bin/luarocks path)
-luacheck *.lua
+luacheck .
 luarocks build --no-install
 luarocks test
