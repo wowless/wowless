@@ -1,6 +1,5 @@
 return {
   _all = {
-    ROOT = {'.'},
     verbose = true,
   },
 }
