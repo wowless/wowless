@@ -1544,16 +1544,26 @@ local lang = preprocess({
 local attributeTypes = {
   bool = function(s)
     local x = string.lower(s)
-    return x == 'true' or x == 'false'
+    if x == 'true' then
+      return true
+    elseif x == 'false' then
+      return false
+    else
+      return nil
+    end
   end,
   number = function(s)
-    return tonumber(s) ~= nil
+    return tonumber(s)
   end,
-  string = function()
-    return true
+  string = function(s)
+    return s
   end,
-  stringlist = function()
-    return true
+  stringlist = function(s)
+    local result = {}
+    for part in string.gmatch(s, '[^, ]+') do
+      table.insert(result, part)
+    end
+    return result
   end,
 }
 
@@ -1576,10 +1586,13 @@ local function validateRoot(root)
       local attr = ty.attributes[an]
       if not attr then
         table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
-      elseif not attributeTypes[attr.type](v) then
-        table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
       else
-        resultAttrs[an] = v
+        local vv = attributeTypes[attr.type](v)
+        if vv == nil then
+          table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
+        else
+          resultAttrs[an] = vv
+        end
       end
     end
     local resultKids = {}

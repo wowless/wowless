@@ -9,7 +9,18 @@ describe('xml.lua', function()
     assert.same('table', type(e.kids))
     for a, v in pairs(e.attr) do
       assert.same('string', type(a))
-      assert.is_not.same('table', type(v))
+      local validator = ({
+        boolean = function() end,
+        number = function() end,
+        string = function() end,
+        table = function(t)
+          for _, s in ipairs(t) do
+            assert.same('string', type(s))
+          end
+        end,
+      })[type(v)]
+      assert.is_not.Nil(validator, 'unexpected type ' .. type(v))
+      validator(v)
     end
     for _, k in ipairs(e.kids) do
       check(k)
