@@ -7,15 +7,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: true
-    - uses: leafo/gh-actions-lua@v8
-      with:
-        luaVersion: '5.1'
-    - uses: leafo/gh-actions-luarocks@v4
-      with:
-        luarocksVersion: '3.7.0'
-    - name: lint
-      run: luarocks install luacheck && luacheck *.lua
-    - name: build
-      run: luarocks make
-    - name: test
-      run: luarocks test
+    - name: setup
+      run: ./setup.sh
+    - name: run
+      run: ./run.sh
