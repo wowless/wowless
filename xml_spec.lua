@@ -2,10 +2,24 @@ describe('xml.lua', function()
   local module = dofile('xml.lua')
   local handle = io.popen([[bash -c 'find wowui/classic/{SharedXML,FrameXML,AddOns} -name "*.xml"']])
   local warnings = {}
+  local function check(e)
+    assert.same('table', type(e))
+    assert.same('string', type(e.name))
+    assert.same('table', type(e.attr))
+    assert.same('table', type(e.kids))
+    for a, v in pairs(e.attr) do
+      assert.same('string', type(a))
+      assert.is_not.same('table', type(v))
+    end
+    for _, k in ipairs(e.kids) do
+      check(k)
+    end
+  end
   for line in handle:lines() do
     it('handles ' .. line, function()
-      local w = module.validate(line)
+      local r, w = module.validate(line)
       warnings[line] = next(w) and w or nil
+      check(r)
     end)
   end
   handle:close()

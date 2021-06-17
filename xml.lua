@@ -1570,14 +1570,19 @@ local function validateRoot(root)
       extends = extends or ty.supertypes[k]
     end
     assert(extends, tname .. ' cannot be a child of ' .. tn)
+    local resultAttrs = {}
     for k, v in pairs(e._attr or {}) do
-      local attr = ty.attributes[string.lower(k)]
+      local an = string.lower(k)
+      local attr = ty.attributes[an]
       if not attr then
         table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
       elseif not attributeTypes[attr.type](v) then
         table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
+      else
+        resultAttrs[an] = v
       end
     end
+    local resultKids = {}
     if ty.text then
       assert(e._children, 'missing text in ' .. tname)
       for _, kid in ipairs(e._children) do
@@ -1588,13 +1593,14 @@ local function validateRoot(root)
         if kid._type == 'TEXT' then
           table.insert(warnings, 'ignoring text kid of ' .. tname)
         else
-          run(kid, tname, ty.children)
+          table.insert(resultKids, run(kid, tname, ty.children))
         end
       end
     end
+    return { name = tname, attr = resultAttrs, kids = resultKids }
   end
-  run(root, 'toplevel', {'bindings', 'ui'})
-  return warnings
+  local result = run(root, 'toplevel', {'bindings', 'ui'})
+  return result, warnings
 end
 
 local function validate(filename)
