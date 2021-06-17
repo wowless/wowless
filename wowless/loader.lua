@@ -117,7 +117,7 @@ local function mkEnv()
   })
 end
 
-local function run(tocname, loglevel, skipscripts)
+local function run(loglevel, skipscripts)
   local function wrap(filename, fn, ...)
     local success, arg = pcall(fn, ...)
     assert(success, 'failure in ' .. filename .. ': ' .. tostring(arg))
@@ -148,14 +148,11 @@ local function run(tocname, loglevel, skipscripts)
   local sink = function(filename, lua)
     wrap(filename, setfenv(lua, env))
   end
-  loader(mkapi, skipscripts, log, sink)(tocname)
+  local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
+  loader(mkapi, skipscripts, log, sink)(toc)
   return env
 end
 
-local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
-local env = run(toc, arg[1] == 'xml' and 100 or 0, arg[1] ~= 'xml')
-local size = 0
-for _ in pairs(env) do
-  size = size + 1
-end
-print('global environment has ' .. size .. ' symbols')
+return {
+  run = run,
+}
