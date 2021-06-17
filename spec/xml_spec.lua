@@ -1,5 +1,5 @@
 describe('xml.lua', function()
-  local module = dofile('xml.lua')
+  local module = require('wowless.xml')
   local handle = io.popen([[bash -c 'find wowui/classic/{SharedXML,FrameXML,AddOns} -name "*.xml"']])
   local warnings = {}
   local function check(e)
