@@ -69,7 +69,13 @@ local function loader(api, skipscripts, log, sink)
             name = e.attr.name,
           }
         else
-          loadKids(e, api:CreateUIObject(e.name, e.attr.name))
+          local name = e.attr.name
+          if name and string.match(name, '$parent') then
+            assert(parent, '$parent substitution requires a parent name')
+            name = string.gsub(name, '$parent', parent)
+          end
+          api:CreateUIObject(e.name, name)
+          loadKids(e, name or parent)
         end
       else
         local fn = xmllang[e.name]
