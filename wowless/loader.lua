@@ -13,7 +13,13 @@ local function loader(api, skipscripts, log, sink)
   local function loadXml(filename)
     local dir = path.dirname(filename)
 
-    local loadKids
+    local loadElement
+
+    local function loadKids(e, parent)
+      for _, v in ipairs(e.kids) do
+        loadElement(v, parent)
+      end
+    end
 
     local xmllang = {
       frames = function(e, parent)
@@ -40,27 +46,25 @@ local function loader(api, skipscripts, log, sink)
       end,
     }
 
-    function loadKids(e, parent)
-      for _, v in ipairs(e.kids) do
-        if api.IsIntrinsicType(v.name) then
-          local obj = api:CreateUIObject({
-            inherits = v.attr.inherits or {},
-            intrinsic = v.attr.intrinsic,
-            name = v.attr.name,
-            parent = parent,
-            type = v.name,
-            virtual = v.attr.virtual,
-          })
-          if obj then
-            loadKids(v, obj)
-          end
+    function loadElement(e, parent)
+      if api.IsIntrinsicType(e.name) then
+        local obj = api:CreateUIObject({
+          inherits = e.attr.inherits or {},
+          intrinsic = e.attr.intrinsic,
+          name = e.attr.name,
+          parent = parent,
+          type = e.name,
+          virtual = e.attr.virtual,
+        })
+        if obj then
+          loadKids(e, obj)
+        end
+      else
+        local fn = xmllang[e.name]
+        if fn then
+          fn(e, parent)
         else
-          local fn = xmllang[v.name]
-          if fn then
-            fn(v, parent)
-          else
-            log(1, 'skipping ' .. filename .. ' ' .. v.name)
-          end
+          log(1, 'skipping ' .. filename .. ' ' .. e.name)
         end
       end
     end
