@@ -89,8 +89,10 @@ local function loader(api, skipscripts, log, sink)
                   local fnattr = script.attr['function']
                   local fn = function()
                     if fnattr then
+                      log(3, 'calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
                       api.env[fnattr](obj)
                     else
+                      log(3, 'calling inline script from %s on %s', e.name, tostring(obj:GetName()))
                       local old = api.env.self
                       api.env.self = obj
                       loadLuaKids(script)
@@ -144,7 +146,9 @@ local function loader(api, skipscripts, log, sink)
           mixin(obj, mix)
           constructor(obj)
           if obj.__scripts and obj.__scripts.onload then
+            log(4, 'begin onload for ' .. tostring(obj:GetName()))
             sink(obj.__scripts.onload)
+            log(4, 'end onload for ' .. tostring(obj:GetName()))
           end
         end
       else

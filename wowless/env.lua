@@ -68,10 +68,12 @@ local function mkBaseUIObjectTypes(api)
         CreateTexture = function(self, name)
           return api:CreateUIObject('texture', name, self)
         end,
+        GetFrameLevel = STUB_NUMBER,
         IgnoreDepth = UNIMPLEMENTED,
         IsEventRegistered = UNIMPLEMENTED,
         RegisterEvent = UNIMPLEMENTED,
         SetClampRectInsets = UNIMPLEMENTED,
+        SetFrameLevel = UNIMPLEMENTED,
       },
       name = 'Frame',
     },
