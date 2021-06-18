@@ -15,13 +15,13 @@ build = {
   type = 'none',
   install = {
     lua = {
+      ['wowless.env'] = 'wowless/env.lua',
       ['wowless.loader'] = 'wowless/loader.lua',
       ['wowless.util'] = 'wowless/util.lua',
       ['wowless.xml'] = 'wowless/xml.lua',
     },
   },
   copy_directories = {
-    'client',
     'wowui',
   },
 }
