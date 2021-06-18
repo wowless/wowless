@@ -48,6 +48,10 @@ local function loader(api, skipscripts, log, sink)
 
     function loadElement(e, parent)
       if api:IsIntrinsicType(e.name) then
+        local inherits = {e.name}
+        for _, inh in ipairs(e.attr.inherits or {}) do
+          table.insert(inherits, string.lower(inh))
+        end
         local virtual = e.attr.virtual
         if e.attr.intrinsic then
           assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.name)
@@ -57,13 +61,12 @@ local function loader(api, skipscripts, log, sink)
           assert(e.attr.name, 'cannot create anonymous virtual uiobject')
           local name = string.lower(e.attr.name)
           if api.uiobjectTypes[name] then
-            api.log(0, 'overwriting uiobject type ' .. name)
-          end
-          local inherits = {}
-          for _, inh in ipairs(e.attr.inherits or {}) do
-            table.insert(inherits, string.lower(inh))
+            api.log(0, 'overwriting uiobject type ' .. e.attr.name)
           end
           api.uiobjectTypes[name] = {
+            constructor = function(obj)
+              loadKids(e, obj:GetName())
+            end,
             inherits = inherits,
             intrinsic = e.attr.intrinsic,
             name = e.attr.name,
@@ -71,10 +74,10 @@ local function loader(api, skipscripts, log, sink)
         else
           local name = e.attr.name
           if name and string.match(name, '$parent') then
-            assert(parent, '$parent substitution requires a parent name')
+            assert(parent, '$parent substitution requires a parent name: ' .. name)
             name = string.gsub(name, '$parent', parent)
           end
-          api:CreateUIObject(e.name, name)
+          api:CreateUIObject(inherits[1] or e.name, name)
           loadKids(e, name or parent)
         end
       else

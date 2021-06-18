@@ -70,7 +70,7 @@ local baseUIObjectTypes = {
     name = 'ModelScene',
   },
   parentedobject = {
-    inherits = {},
+    inherits = {'uiobject'},
     intrinsic = true,
     mixin = {
       SetForbidden = UNIMPLEMENTED,
@@ -102,6 +102,16 @@ local baseUIObjectTypes = {
     intrinsic = true,
     name = 'Texture',
   },
+  uiobject = {
+    inherits = {},
+    intrinsic = true,
+    mixin = {
+      GetName = function(self)
+        return self.__name
+      end,
+    },
+    name = 'UIObject',
+  },
   worldframe = {
     inherits = {'frame'},
     intrinsic = true,
@@ -126,9 +136,9 @@ local function _IsUIObjectType(api, t)
   return api.uiobjectTypes[string.lower(t)] ~= nil
 end
 
-local function makeObject(api, type)
+local function makeObject(api, type, name)
   if #type.inherits == 0 then
-    return Mixin({}, type.mixin)
+    return Mixin({ __name = name }, type.mixin)
   end
   for _, p in ipairs(type.inherits) do
     assert(api.uiobjectTypes[p], 'unknown object type ' .. p)
@@ -136,15 +146,19 @@ local function makeObject(api, type)
   for i = 2, #type.inherits do
     api.log(0, 'ignoring multiple inheritance type ' .. type.inherits[i] .. ' for ' .. tostring(type.name))
   end
-  return Mixin(makeObject(api, api.uiobjectTypes[type.inherits[1]]), type.mixin)
+  local obj = Mixin(makeObject(api, api.uiobjectTypes[type.inherits[1]]), type.mixin)
+  if type.constructor then
+    type.constructor(obj)
+  end
+  return obj
 end
 
 local function _CreateUIObject(api, typename, objname)
   assert(typename, 'must specify type for ' .. tostring(objname))
   local type = api.uiobjectTypes[typename]
   assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
-  api.log(3, 'creating %s%s', typename, objname and (' named ' .. objname) or '')
-  local obj = makeObject(api, type)
+  api.log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
+  local obj = makeObject(api, type, objname)
   if objname then
     api.env[objname] = obj
   end
