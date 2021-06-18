@@ -77,7 +77,7 @@ local function loader(api, skipscripts, log, sink)
             assert(parent, '$parent substitution requires a parent name: ' .. name)
             name = string.gsub(name, '$parent', parent)
           end
-          api:CreateUIObject(inherits[1] or e.name, name)
+          api:CreateUIObject(e.name, name)
           loadKids(e, name or parent)
         end
       else
