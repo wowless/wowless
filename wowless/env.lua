@@ -16,6 +16,10 @@ local baseUIObjectTypes = {
   button = {
     inherits = {'frame'},
     intrinsic = true,
+    mixin = {
+      Disable = UNIMPLEMENTED,
+      IsEnabled = UNIMPLEMENTED,
+    },
     name = 'Button',
   },
   checkbutton = {
@@ -44,7 +48,7 @@ local baseUIObjectTypes = {
     name = 'FontString',
   },
   frame = {
-    inherits = {'parentedobject'},
+    inherits = {'parentedobject', 'region'},
     intrinsic = true,
     mixin = {
       Hide = UNIMPLEMENTED,
@@ -84,6 +88,15 @@ local baseUIObjectTypes = {
     inherits = {'parentedobject'},
     intrinsic = true,
     name = 'PlayerModel',
+  },
+  region = {
+    inherits = {},
+    intrinsic = true,
+    mixin = {
+      Hide = UNIMPLEMENTED,
+      Show = UNIMPLEMENTED,
+    },
+    name = 'Region',
   },
   scrollframe = {
     inherits = {'frame'},
