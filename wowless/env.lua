@@ -160,6 +160,9 @@ local function _CreateUIObject(api, typename, objname)
   api.log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
   local obj = makeObject(api, type, objname)
   if objname then
+    if api.env[objname] then
+      api.log(0, 'overwriting global ' .. objname)
+    end
     api.env[objname] = obj
   end
   return obj
