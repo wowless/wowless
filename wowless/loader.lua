@@ -22,6 +22,12 @@ local function loader(api, skipscripts, log, sink)
       end
     end
 
+    local function loadLuaKids(e)
+      for _, s in ipairs(e.kids) do
+        loadLuaString(filename, s)
+      end
+    end
+
     local xmllang = {
       frames = function(e, parent)
         loadKids(e, parent)
@@ -39,9 +45,7 @@ local function loader(api, skipscripts, log, sink)
             assert(#e.kids == 0)
             loadFile(path.join(dir, e.attr.file))
           else
-            for _, s in ipairs(e.kids) do
-              loadLuaString(filename, s)
-            end
+            loadLuaKids(e)
           end
         end
       end,
@@ -62,6 +66,29 @@ local function loader(api, skipscripts, log, sink)
           assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.name)
           virtual = true
         end
+        local function constructor(obj)
+          if e.attr.parentkey then
+            obj:GetParent()[e.attr.parentkey] = obj
+          end
+          loadKids(e, obj)
+          if not skipscripts then
+            for _, kid in ipairs(e.kids) do
+              if kid.name == 'scripts' then
+                for _, script in ipairs(kid.kids) do
+                  if script.name == 'onload' then
+                    local fn = script.attr['function']
+                    if fn then
+                      print('invoking ' .. fn)
+                      sink(filename, function() _G[fn](obj) end)
+                    else
+                      loadLuaKids(script)
+                    end
+                  end
+                end
+              end
+            end
+          end
+        end
         if virtual then
           assert(e.attr.name, 'cannot create anonymous virtual uiobject')
           local name = string.lower(e.attr.name)
@@ -69,9 +96,7 @@ local function loader(api, skipscripts, log, sink)
             api.log(0, 'overwriting uiobject type ' .. e.attr.name)
           end
           api.uiobjectTypes[name] = {
-            constructor = function(obj)
-              loadKids(e, obj)
-            end,
+            constructor = constructor,
             inherits = inherits,
             intrinsic = e.attr.intrinsic,
             mixin = mix,
@@ -89,7 +114,7 @@ local function loader(api, skipscripts, log, sink)
           end
           local obj = api:CreateUIObject(e.name, name, parent, inherits)
           mixin(obj, mix)
-          loadKids(e, obj)
+          constructor(obj)
         end
       else
         local fn = xmllang[e.name]
