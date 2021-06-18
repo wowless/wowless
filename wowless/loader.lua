@@ -48,16 +48,28 @@ local function loader(api, skipscripts, log, sink)
 
     function loadElement(e, parent)
       if api:IsIntrinsicType(e.name) then
-        local obj = api:CreateUIObject({
-          inherits = e.attr.inherits or {},
-          intrinsic = e.attr.intrinsic,
-          name = e.attr.name,
-          parent = parent,
-          type = e.name,
-          virtual = e.attr.virtual,
-        })
-        if obj then
-          loadKids(e, obj)
+        local virtual = e.attr.virtual
+        if e.attr.intrinsic then
+          assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.name)
+          virtual = true
+        end
+        if virtual then
+          assert(e.attr.name, 'cannot create anonymous virtual uiobject')
+          local name = string.lower(e.attr.name)
+          if api.uiobjectTypes[name] then
+            api.log(0, 'overwriting uiobject type ' .. name)
+          end
+          local inherits = {}
+          for _, inh in ipairs(e.attr.inherits or {}) do
+            table.insert(inherits, string.lower(inh))
+          end
+          api.uiobjectTypes[name] = {
+            inherits = inherits,
+            intrinsic = e.attr.intrinsic,
+            name = e.attr.name,
+          }
+        else
+          loadKids(e, api:CreateUIObject(e.name, e.attr.name))
         end
       else
         local fn = xmllang[e.name]

@@ -139,36 +139,14 @@ local function makeObject(api, type)
   return Mixin(makeObject(api, api.uiobjectTypes[type.inherits[1]]), type.mixin)
 end
 
-local function _CreateUIObject(api, t)
-  assert(t.type, 'must specify type for ' .. tostring(t.name))
-  local type = api.uiobjectTypes[string.lower(t.type)]
-  assert(type, 'unknown type ' .. t.type .. ' for ' .. tostring(t.name))
-  api.log(3, 'creating %s%s%s',
-      type.name, t.name and (' named ' .. t.name) or '',
-      t.parent and t.parent.virtual and (' with parent ' .. t.parent.name) or '')
-  local virtual = t.virtual
-  if t.intrinsic then
-    assert(not _IsUIObjectType(api, t.name), 'already a uiobject type named ' .. t.name)
-    assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. t.name)
-    virtual = true
-  end
-  local inherits = {}
-  for _, inh in ipairs(t.inherits) do
-    table.insert(inherits, string.lower(inh))
-  end
-  if virtual then
-    assert(t.name, 'cannot create anonymous virtual uiobject')
-    local newtype = {
-      inherits = inherits,
-      intrinsic = t.intrinsic,
-      name = t.name,
-    }
-    api.uiobjectTypes[string.lower(t.name)] = newtype
-    return nil
-  end
+local function _CreateUIObject(api, typename, objname)
+  assert(typename, 'must specify type for ' .. tostring(objname))
+  local type = api.uiobjectTypes[typename]
+  assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
+  api.log(3, 'creating %s%s', typename, objname and (' named ' .. objname) or '')
   local obj = makeObject(api, type)
-  if t.name then
-    api.env[t.name] = obj
+  if objname then
+    api.env[objname] = obj
   end
   return obj
 end
@@ -216,11 +194,7 @@ local function mkWowEnv(api)
   return {
     CreateFrame = function(type, name)
       assert(_InheritsFrom(api, type, 'frame'), type .. ' does not inherit from frame')
-      return _CreateUIObject(api, {
-        inherits = {},
-        name = name,
-        type = type,
-      })
+      return _CreateUIObject(api, string.lower(type), name)
     end,
     C_Club = {},
     C_GamePad = {},
