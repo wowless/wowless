@@ -6,7 +6,7 @@ local function loader(api, skipscripts, log, sink)
   local readFile, mixin = util.readfile, util.mixin
 
   local function loadLuaString(filename, str)
-    sink(filename, assert(loadstring(str)))
+    sink(filename, assert(loadstring(str, filename)))
   end
 
   local loadFile
@@ -173,9 +173,8 @@ local function run(loglevel, skipscripts)
     end
   end
   local env, api = require('wowless.env').new(log)
-  local sink = function(filename, lua)
-    local success, err = pcall(setfenv(lua, env))
-    assert(success, 'failure in ' .. filename .. ': ' .. tostring(err))
+  local sink = function(_, lua)
+    xpcall(setfenv(lua, env), function() print(debug.traceback()) end)
   end
   local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
   loader(api, skipscripts, log, sink)(toc)
