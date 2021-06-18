@@ -120,11 +120,11 @@ local baseUIObjectTypes = {
 }
 
 local function _InheritsFrom(api, a, b)
-  a, b = string.lower(a), string.lower(b)
-  while a ~= nil and a ~= b do
-    a = api.uiobjectTypes[a].inherits
+  local result = a == b
+  for _, inh in ipairs(api.uiobjectTypes[a].inherits) do
+    result = result or _InheritsFrom(inh, b)
   end
-  return a ~= nil
+  return result
 end
 
 local function _IsIntrinsicType(api, t)
@@ -207,8 +207,9 @@ end
 local function mkWowEnv(api)
   return {
     CreateFrame = function(type, name)
-      assert(_InheritsFrom(api, type, 'frame'), type .. ' does not inherit from frame')
-      return _CreateUIObject(api, string.lower(type), name)
+      local ltype = string.lower(type)
+      assert(_InheritsFrom(api, ltype, 'frame'), type .. ' does not inherit from frame')
+      return _CreateUIObject(api, ltype, name)
     end,
     C_Club = {},
     C_GamePad = {},
