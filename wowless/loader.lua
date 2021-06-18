@@ -118,6 +118,7 @@ local function mkEnv()
 end
 
 local function run(loglevel, skipscripts)
+  local datafile = require('datafile')
   local function wrap(filename, fn, ...)
     local success, arg = pcall(fn, ...)
     assert(success, 'failure in ' .. filename .. ': ' .. tostring(arg))
@@ -129,7 +130,7 @@ local function run(loglevel, skipscripts)
     end
   end
   local env = mkEnv()
-  local api = setfenv(loadfile('env.lua'), env)({
+  local api = setfenv(loadfile(datafile.path('client/env.lua')), env)({
     assert = assert,
     log = log,
     error = error,
@@ -148,7 +149,7 @@ local function run(loglevel, skipscripts)
   local sink = function(filename, lua)
     wrap(filename, setfenv(lua, env))
   end
-  local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
+  local toc = datafile.path('wowui/classic/FrameXML/FrameXML.toc')
   loader(mkapi, skipscripts, log, sink)(toc)
   return env
 end

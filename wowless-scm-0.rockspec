@@ -12,11 +12,16 @@ dependencies = {
   'xml2lua',
 }
 build = {
-  type = 'builtin',
-  modules = {
-    wowless = 'wowless.lua',
+  type = 'none',
+  install = {
+    lua = {
+      ['wowless.loader'] = 'wowless/loader.lua',
+      ['wowless.util'] = 'wowless/util.lua',
+      ['wowless.xml'] = 'wowless/xml.lua',
+    },
   },
   copy_directories = {
+    'client',
     'wowui',
   },
 }
