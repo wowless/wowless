@@ -21,6 +21,7 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         Disable = UNIMPLEMENTED,
         IsEnabled = UNIMPLEMENTED,
+        SetText = UNIMPLEMENTED,
       },
       name = 'Button',
     },
@@ -35,9 +36,17 @@ local function mkBaseUIObjectTypes(api)
       name = 'EditBox',
     },
     font = {
-      inherits = {'parentedobject'},
+      inherits = {'fontinstance', 'parentedobject'},
       intrinsic = true,
       name = 'Font',
+    },
+    fontinstance = {
+      inherits = {'uiobject'},
+      intrinsic = true,
+      mixin = {
+        SetFontObject = UNIMPLEMENTED,
+      },
+      name = 'FontInstance',
     },
     fontfamily = {
       inherits = {'parentedobject'},
@@ -45,22 +54,24 @@ local function mkBaseUIObjectTypes(api)
       name = 'FontFamily',
     },
     fontstring = {
-      inherits = {'parentedobject'},
+      inherits = {'fontinstance', 'layeredregion'},
       intrinsic = true,
+      mixin = {
+        SetText = UNIMPLEMENTED,
+      },
       name = 'FontString',
     },
     frame = {
-      inherits = {'parentedobject', 'region'},
+      inherits = {'parentedobject', 'region', 'scriptobject'},
       intrinsic = true,
       mixin = {
         CreateTexture = function(self, name)
           return api:CreateUIObject('texture', name, self)
         end,
         IgnoreDepth = UNIMPLEMENTED,
+        IsEventRegistered = UNIMPLEMENTED,
         RegisterEvent = UNIMPLEMENTED,
         SetClampRectInsets = UNIMPLEMENTED,
-        SetScript = UNIMPLEMENTED,
-        SetSize = UNIMPLEMENTED,
       },
       name = 'Frame',
     },
@@ -105,7 +116,7 @@ local function mkBaseUIObjectTypes(api)
       name = 'PlayerModel',
     },
     region = {
-      inherits = {},
+      inherits = {'parentedobject'},
       intrinsic = true,
       mixin = {
         ClearAllPoints = UNIMPLEMENTED,
@@ -118,6 +129,15 @@ local function mkBaseUIObjectTypes(api)
         Show = UNIMPLEMENTED,
       },
       name = 'Region',
+    },
+    scriptobject = {
+      inherits = {},
+      intrinsic = true,
+      mixin = {
+        GetScript = UNIMPLEMENTED,
+        SetScript = UNIMPLEMENTED,
+      },
+      name = 'ScriptObject',
     },
     scrollframe = {
       inherits = {'frame'},
@@ -251,6 +271,7 @@ local function mkBaseEnv()
     table = {
       insert = table.insert,
     },
+    tinsert = table.insert,
     tostring = tostring,
     type = type,
   }, {
@@ -294,6 +315,8 @@ local function mkWowEnv(api)
     }),
     FillLocalizedClassList = UNIMPLEMENTED,
     format = string.format,
+    GetCVarSettingValidity = UNIMPLEMENTED,
+    GetDefaultVideoOptions = UNIMPLEMENTED,
     GetInventorySlotInfo = function()
       return 'UNIMPLEMENTED'
     end,
@@ -323,6 +346,7 @@ local globalStrings = {
   -- luacheck: no max line length
   CONFIRM_CONTINUE = 'Do you wish to continue?',
   GUILD_REPUTATION_WARNING_GENERIC = 'You will lose one rank of guild reputation with your previous guild.',
+  PRESS_TAB = "Press Tab",
   REMOVE_GUILDMEMBER_LABEL = 'Are you sure you want to remove %s from the guild?',
   VOID_STORAGE_DEPOSIT_CONFIRMATION = 'Depositing this item will remove all modifications and make it non-refundable and non-tradeable.',
 }
