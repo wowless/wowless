@@ -65,7 +65,7 @@ local lang = preprocess({
   actor = {
     attributes = {
       mixin = {
-        type = 'string',
+        type = 'stringlist',
       },
       name = {
         type = 'string',

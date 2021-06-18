@@ -2,7 +2,8 @@ local function loader(api, skipscripts, log, sink)
 
   local path = require('path')
   local xml = require('wowless.xml')
-  local readFile = require('wowless.util').readfile
+  local util = require('wowless.util')
+  local readFile, mixin = util.readfile, util.mixin
 
   local function loadLuaString(filename, str)
     sink(filename, assert(loadstring(str)))
@@ -52,6 +53,10 @@ local function loader(api, skipscripts, log, sink)
         for _, inh in ipairs(e.attr.inherits or {}) do
           table.insert(inherits, string.lower(inh))
         end
+        local mix = {}
+        for _, m in ipairs(e.attr.mixin or {}) do
+          mixin(mix, api.env[m])
+        end
         local virtual = e.attr.virtual
         if e.attr.intrinsic then
           assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.name)
@@ -69,6 +74,7 @@ local function loader(api, skipscripts, log, sink)
             end,
             inherits = inherits,
             intrinsic = e.attr.intrinsic,
+            mixin = mix,
             name = e.attr.name,
           }
         else
@@ -81,7 +87,9 @@ local function loader(api, skipscripts, log, sink)
             assert(p, '$parent substitution requires a parent name: ' .. name)
             name = string.gsub(name, '$parent', p:GetName())
           end
-          loadKids(e, api:CreateUIObject(e.name, name, parent, inherits))
+          local obj = api:CreateUIObject(e.name, name, parent, inherits)
+          mixin(obj, mix)
+          loadKids(e, obj)
         end
       else
         local fn = xmllang[e.name]
