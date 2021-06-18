@@ -6,6 +6,6 @@ describe('loader', function()
     for _ in pairs(env) do
       count = count + 1
     end
-    assert.same(13251, count)
+    assert.same(13253, count)
   end)
 end)

@@ -193,7 +193,7 @@ end
 local function _InheritsFrom(api, a, b)
   local result = a == b
   for _, inh in ipairs(api.uiobjectTypes[a].inherits) do
-    result = result or _InheritsFrom(inh, b)
+    result = result or _InheritsFrom(api, inh, b)
   end
   return result
 end
@@ -245,6 +245,7 @@ end
 local function mkBaseEnv()
   local bitlib = require('bit')
   return setmetatable({
+    assert = assert,
     bit = {
       bor = bitlib.bor,
     },
@@ -330,6 +331,7 @@ local function mkWowEnv(api)
       return setmetatable({}, {})
     end,
     NUM_LE_ITEM_QUALITYS = 10,  -- UNIMPLEMENTED
+    print = print,
     RegisterStaticConstants = UNIMPLEMENTED,
     securecall = UNIMPLEMENTED,
     seterrorhandler = UNIMPLEMENTED,

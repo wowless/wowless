@@ -86,12 +86,32 @@ local function loader(api, skipscripts, log, sink)
               if kid.name == 'scripts' then
                 obj.__scripts = obj.__scripts or {}
                 for _, script in ipairs(kid.kids) do
-                  local fn = script.attr['function']
-                  if fn then
-                    obj.__scripts[script.name] = function() _G[fn](obj) end
-                  else
-                    obj.__scripts[script.name] = function() loadLuaKids(script) end
+                  local fnattr = script.attr['function']
+                  local fn = function()
+                    if fnattr then
+                      api.env[fnattr](obj)
+                    else
+                      local old = api.env.self
+                      api.env.self = obj
+                      loadLuaKids(script)
+                      api.env.self = old
+                    end
                   end
+                  local inh = script.attr.inherit
+                  local old = obj.__scripts[script.name]
+                  local wfn = fn
+                  if inh == 'prepend' then
+                    if old then
+                      wfn = function() fn() old(obj) end
+                    end
+                  elseif inh == 'append' then
+                    if old then
+                      wfn = function() old(obj) fn() end
+                    end
+                  else
+                    assert(inh == nil, 'invalid inherit tag on script')
+                  end
+                  obj.__scripts[script.name] = wfn
                 end
               end
             end
@@ -174,7 +194,10 @@ local function run(loglevel, skipscripts)
   end
   local env, api = require('wowless.env').new(log)
   local sink = function(lua)
-    xpcall(setfenv(lua, env), function() print(debug.traceback()) end)
+    assert(xpcall(setfenv(lua, env), function(err)
+      print('error: ' .. err)
+      print(debug.traceback())
+    end))
   end
   local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
   loader(api, skipscripts, log, sink)(toc)
