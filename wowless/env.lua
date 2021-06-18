@@ -1,148 +1,174 @@
 local Mixin = require('wowless.util').mixin
 
 local UNIMPLEMENTED = function() end
+local STUB_NUMBER = function() return 1 end
 
-local baseUIObjectTypes = {
-  actor = {
-    inherits = {'parentedobject'},
-    intrinsic = true,
-    name = 'Actor',
-  },
-  animationgroup = {
-    inherits = {'parentedobject'},
-    intrinsic = true,
-    name = 'AnimationGroup',
-  },
-  button = {
-    inherits = {'frame'},
-    intrinsic = true,
-    mixin = {
-      Disable = UNIMPLEMENTED,
-      IsEnabled = UNIMPLEMENTED,
+local function mkBaseUIObjectTypes(api)
+  return {
+    actor = {
+      inherits = {'parentedobject'},
+      intrinsic = true,
+      name = 'Actor',
     },
-    name = 'Button',
-  },
-  checkbutton = {
-    inherits = {'button'},
-    intrinsic = true,
-    name = 'CheckButton',
-  },
-  editbox = {
-    inherits = {'frame'},
-    intrinsic = true,
-    name = 'EditBox',
-  },
-  font = {
-    inherits = {'parentedobject'},
-    intrinsic = true,
-    name = 'Font',
-  },
-  fontfamily = {
-    inherits = {'parentedobject'},
-    intrinsic = true,
-    name = 'FontFamily',
-  },
-  fontstring = {
-    inherits = {'parentedobject'},
-    intrinsic = true,
-    name = 'FontString',
-  },
-  frame = {
-    inherits = {'parentedobject', 'region'},
-    intrinsic = true,
-    mixin = {
-      Hide = UNIMPLEMENTED,
-      RegisterEvent = UNIMPLEMENTED,
-      SetScript = UNIMPLEMENTED,
-      SetSize = UNIMPLEMENTED,
+    animationgroup = {
+      inherits = {'parentedobject'},
+      intrinsic = true,
+      name = 'AnimationGroup',
     },
-    name = 'Frame',
-  },
-  gametooltip = {
-    inherits = {'frame'},
-    intrinsic = true,
-    name = 'GameTooltip',
-  },
-  messageframe = {
-    inherits = {'frame'},
-    intrinsic = true,
-    name = 'MessageFrame',
-  },
-  modelscene = {
-    inherits = {'parentedobject'},
-    intrinsic = true,
-    name = 'ModelScene',
-  },
-  parentedobject = {
-    inherits = {'uiobject'},
-    intrinsic = true,
-    mixin = {
-      GetParent = function(self)
-        return self.__parent
-      end,
-      SetForbidden = UNIMPLEMENTED,
+    button = {
+      inherits = {'frame'},
+      intrinsic = true,
+      mixin = {
+        Disable = UNIMPLEMENTED,
+        IsEnabled = UNIMPLEMENTED,
+      },
+      name = 'Button',
     },
-    name = 'ParentedObject',
-  },
-  playermodel = {
-    inherits = {'parentedobject'},
-    intrinsic = true,
-    name = 'PlayerModel',
-  },
-  region = {
-    inherits = {},
-    intrinsic = true,
-    mixin = {
-      Hide = UNIMPLEMENTED,
-      Show = UNIMPLEMENTED,
+    checkbutton = {
+      inherits = {'button'},
+      intrinsic = true,
+      name = 'CheckButton',
     },
-    name = 'Region',
-  },
-  scrollframe = {
-    inherits = {'frame'},
-    intrinsic = true,
-    name = 'ScrollFrame',
-  },
-  slider = {
-    inherits = {'frame'},
-    intrinsic = true,
-    mixin = {
-      GetMinMaxValues = UNIMPLEMENTED,
-      SetMinMaxValues = UNIMPLEMENTED,
-      SetValue = UNIMPLEMENTED,
+    editbox = {
+      inherits = {'frame'},
+      intrinsic = true,
+      name = 'EditBox',
     },
-    name = 'Slider',
-  },
-  statusbar = {
-    inherits = {'frame'},
-    intrinsic = true,
-    mixin = {
-      GetMinMaxValues = UNIMPLEMENTED,
-      SetMinMaxValues = UNIMPLEMENTED,
+    font = {
+      inherits = {'parentedobject'},
+      intrinsic = true,
+      name = 'Font',
     },
-    name = 'StatusBar',
-  },
-  texture = {
-    inherits = {'parentedobject'},
-    intrinsic = true,
-    name = 'Texture',
-  },
-  uiobject = {
-    inherits = {},
-    intrinsic = true,
-    mixin = {
-      GetName = function(self)
-        return self.__name
-      end,
+    fontfamily = {
+      inherits = {'parentedobject'},
+      intrinsic = true,
+      name = 'FontFamily',
     },
-    name = 'UIObject',
-  },
-  worldframe = {
-    inherits = {'frame'},
-    intrinsic = true,
-    name = 'WorldFrame',
-  },
-}
+    fontstring = {
+      inherits = {'parentedobject'},
+      intrinsic = true,
+      name = 'FontString',
+    },
+    frame = {
+      inherits = {'parentedobject', 'region'},
+      intrinsic = true,
+      mixin = {
+        CreateTexture = function(self, name)
+          return api:CreateUIObject('texture', name, self)
+        end,
+        IgnoreDepth = UNIMPLEMENTED,
+        RegisterEvent = UNIMPLEMENTED,
+        SetClampRectInsets = UNIMPLEMENTED,
+        SetScript = UNIMPLEMENTED,
+        SetSize = UNIMPLEMENTED,
+      },
+      name = 'Frame',
+    },
+    gametooltip = {
+      inherits = {'frame'},
+      intrinsic = true,
+      name = 'GameTooltip',
+    },
+    layeredregion = {
+      inherits = {'region'},
+      intrinsic = true,
+      mixin = {
+        SetDrawLayer = UNIMPLEMENTED,
+        SetVertexColor = UNIMPLEMENTED,
+      },
+      name = 'LayeredRegion',
+    },
+    messageframe = {
+      inherits = {'frame'},
+      intrinsic = true,
+      name = 'MessageFrame',
+    },
+    modelscene = {
+      inherits = {'parentedobject'},
+      intrinsic = true,
+      name = 'ModelScene',
+    },
+    parentedobject = {
+      inherits = {'uiobject'},
+      intrinsic = true,
+      mixin = {
+        GetParent = function(self)
+          return self.__parent
+        end,
+        SetForbidden = UNIMPLEMENTED,
+      },
+      name = 'ParentedObject',
+    },
+    playermodel = {
+      inherits = {'parentedobject'},
+      intrinsic = true,
+      name = 'PlayerModel',
+    },
+    region = {
+      inherits = {},
+      intrinsic = true,
+      mixin = {
+        ClearAllPoints = UNIMPLEMENTED,
+        GetEffectiveScale = STUB_NUMBER,
+        GetHeight = STUB_NUMBER,
+        GetWidth = STUB_NUMBER,
+        Hide = UNIMPLEMENTED,
+        SetPoint = UNIMPLEMENTED,
+        SetSize = UNIMPLEMENTED,
+        Show = UNIMPLEMENTED,
+      },
+      name = 'Region',
+    },
+    scrollframe = {
+      inherits = {'frame'},
+      intrinsic = true,
+      name = 'ScrollFrame',
+    },
+    slider = {
+      inherits = {'frame'},
+      intrinsic = true,
+      mixin = {
+        GetMinMaxValues = UNIMPLEMENTED,
+        SetMinMaxValues = UNIMPLEMENTED,
+        SetValue = UNIMPLEMENTED,
+      },
+      name = 'Slider',
+    },
+    statusbar = {
+      inherits = {'frame'},
+      intrinsic = true,
+      mixin = {
+        GetMinMaxValues = UNIMPLEMENTED,
+        SetMinMaxValues = UNIMPLEMENTED,
+      },
+      name = 'StatusBar',
+    },
+    texture = {
+      inherits = {'layeredregion', 'parentedobject'},
+      intrinsic = true,
+      mixin = {
+        SetTexCoord = UNIMPLEMENTED,
+        SetTexture = UNIMPLEMENTED,
+      },
+      name = 'Texture',
+    },
+    uiobject = {
+      inherits = {},
+      intrinsic = true,
+      mixin = {
+        GetName = function(self)
+          return self.__name
+        end,
+      },
+      name = 'UIObject',
+    },
+    worldframe = {
+      inherits = {'frame'},
+      intrinsic = true,
+      name = 'WorldFrame',
+    },
+  }
+end
 
 local function _InheritsFrom(api, a, b)
   local result = a == b
@@ -205,7 +231,10 @@ local function mkBaseEnv()
     getfenv = getfenv,
     getmetatable = getmetatable,
     ipairs = ipairs,
-    math = {},
+    math = {
+      max = math.max,
+    },
+    max = math.max,
     pairs = pairs,
     rawget = rawget,
     select = select,
@@ -306,8 +335,8 @@ local function new(log)
     IsIntrinsicType = _IsIntrinsicType,
     IsUIObjectType = _IsUIObjectType,
     log = log,
-    uiobjectTypes = Mixin({}, baseUIObjectTypes),
   }
+  api.uiobjectTypes = mkBaseUIObjectTypes(api)
   Mixin(env, mkWowEnv(api), globalStrings)
   return env, api
 end

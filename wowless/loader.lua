@@ -36,6 +36,12 @@ local function loader(api, skipscripts, log, sink)
         assert(e.attr.file and #e.kids == 0)
         loadFile(path.join(dir, e.attr.file))
       end,
+      layer = function(e, parent)
+        loadKids(e, parent)
+      end,
+      layers = function(e, parent)
+        loadKids(e, parent)
+      end,
       scopedmodifier = function(e, parent)
         loadKids(e, parent)
       end,
@@ -48,6 +54,9 @@ local function loader(api, skipscripts, log, sink)
             loadLuaKids(e)
           end
         end
+      end,
+      scripts = function()
+        -- handled by loadElement
       end,
     }
 
