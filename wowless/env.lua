@@ -136,29 +136,29 @@ local function _IsUIObjectType(api, t)
   return api.uiobjectTypes[string.lower(t)] ~= nil
 end
 
-local function makeObject(api, type, name)
-  if #type.inherits == 0 then
-    return Mixin({ __name = name }, type.mixin)
+local function mixinType(api, type, obj)
+  for _, inh in ipairs(type.inherits) do
+    mixinType(api, api.uiobjectTypes[inh], obj)
   end
-  for _, p in ipairs(type.inherits) do
-    assert(api.uiobjectTypes[p], 'unknown object type ' .. p)
-  end
-  for i = 2, #type.inherits do
-    api.log(0, 'ignoring multiple inheritance type ' .. type.inherits[i] .. ' for ' .. tostring(type.name))
-  end
-  local obj = Mixin(makeObject(api, api.uiobjectTypes[type.inherits[1]]), type.mixin)
+  Mixin(obj, type.mixin)
   if type.constructor then
     type.constructor(obj)
   end
   return obj
 end
 
-local function _CreateUIObject(api, typename, objname)
+local function _CreateUIObject(api, typename, objname, inherits)
   assert(typename, 'must specify type for ' .. tostring(objname))
   local type = api.uiobjectTypes[typename]
   assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
   api.log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
-  local obj = makeObject(api, type, objname)
+  local obj = { __name = objname }
+  mixinType(api, type, obj)
+  for _, inh in ipairs(inherits or {}) do
+    local inhtype = api.uiobjectTypes[inh]
+    assert(inhtype, 'unknown inherit type ' .. inh .. ' for ' .. tostring(objname))
+    mixinType(api, inhtype, obj)
+  end
   if objname then
     if api.env[objname] then
       api.log(0, 'overwriting global ' .. objname)
