@@ -13,16 +13,38 @@ local function loader(api, skipscripts, log, sink)
   local function loadXml(filename)
     local dir = path.dirname(filename)
 
-    local function loadKids(e, parent)
+    local loadKids
+
+    local xmllang = {
+      frames = function(e, parent)
+        loadKids(e, parent)
+      end,
+      include = function(e)
+        assert(e.attr.file and #e.kids == 0)
+        loadFile(path.join(dir, e.attr.file))
+      end,
+      scopedmodifier = function(e, parent)
+        loadKids(e, parent)
+      end,
+      script = function(e)
+        if not skipscripts then
+          if e.attr.file then
+            assert(#e.kids == 0)
+            loadFile(path.join(dir, e.attr.file))
+          else
+            for _, s in ipairs(e.kids) do
+              loadLuaString(filename, s)
+            end
+          end
+        end
+      end,
+    }
+
+    function loadKids(e, parent)
       for _, v in ipairs(e.kids) do
-        if v.name == 'include' then
-          assert(v.attr.file and #v.kids == 0)
-          loadFile(path.join(dir, v.attr.file))
-        elseif v.name == 'scopedmodifier' then
-          -- TODO support ScopedModifier attributes
-          loadKids(v, parent)
-        elseif v.name == 'frames' then
-          loadKids(v, parent)
+        local fn = xmllang[v.name]
+        if fn then
+          fn(v, parent)
         elseif api.IsIntrinsicType(v.name) then
           local obj = api:CreateUIObject({
             inherits = v.attr.inherits or {},
@@ -33,15 +55,6 @@ local function loader(api, skipscripts, log, sink)
             virtual = v.attr.virtual,
           })
           loadKids(v, obj)
-        elseif not skipscripts and v.name == 'script' then
-          if v.attr.file then
-            assert(#v.kids == 0)
-            loadFile(path.join(dir, v.attr.file))
-          else
-            for _, x in ipairs(v.kids) do
-              loadLuaString(filename, x)
-            end
-          end
         else
           log(1, 'skipping ' .. filename .. ' ' .. v.name)
         end
