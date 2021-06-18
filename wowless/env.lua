@@ -164,7 +164,7 @@ local function _CreateUIObject(api, t)
       name = t.name,
     }
     uiobjectTypes[string.lower(t.name)] = newtype
-    return newtype
+    return nil
   end
   local obj = makeObject(api, type)
   if t.name then

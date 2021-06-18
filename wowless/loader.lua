@@ -42,10 +42,7 @@ local function loader(api, skipscripts, log, sink)
 
     function loadKids(e, parent)
       for _, v in ipairs(e.kids) do
-        local fn = xmllang[v.name]
-        if fn then
-          fn(v, parent)
-        elseif api.IsIntrinsicType(v.name) then
+        if api.IsIntrinsicType(v.name) then
           local obj = api:CreateUIObject({
             inherits = v.attr.inherits or {},
             intrinsic = v.attr.intrinsic,
@@ -54,9 +51,16 @@ local function loader(api, skipscripts, log, sink)
             type = v.name,
             virtual = v.attr.virtual,
           })
-          loadKids(v, obj)
+          if obj then
+            loadKids(v, obj)
+          end
         else
-          log(1, 'skipping ' .. filename .. ' ' .. v.name)
+          local fn = xmllang[v.name]
+          if fn then
+            fn(v, parent)
+          else
+            log(1, 'skipping ' .. filename .. ' ' .. v.name)
+          end
         end
       end
     end
