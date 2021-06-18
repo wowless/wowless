@@ -93,11 +93,20 @@ local baseUIObjectTypes = {
   slider = {
     inherits = {'frame'},
     intrinsic = true,
+    mixin = {
+      GetMinMaxValues = UNIMPLEMENTED,
+      SetMinMaxValues = UNIMPLEMENTED,
+      SetValue = UNIMPLEMENTED,
+    },
     name = 'Slider',
   },
   statusbar = {
     inherits = {'frame'},
     intrinsic = true,
+    mixin = {
+      GetMinMaxValues = UNIMPLEMENTED,
+      SetMinMaxValues = UNIMPLEMENTED,
+    },
     name = 'StatusBar',
   },
   texture = {

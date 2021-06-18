@@ -68,21 +68,20 @@ local function loader(api, skipscripts, log, sink)
         end
         local function constructor(obj)
           if e.attr.parentkey then
+            log(3, 'attaching ' .. e.attr.parentkey)
             obj:GetParent()[e.attr.parentkey] = obj
           end
           loadKids(e, obj)
           if not skipscripts then
             for _, kid in ipairs(e.kids) do
               if kid.name == 'scripts' then
+                obj.__scripts = obj.__scripts or {}
                 for _, script in ipairs(kid.kids) do
-                  if script.name == 'onload' then
-                    local fn = script.attr['function']
-                    if fn then
-                      print('invoking ' .. fn)
-                      sink(filename, function() _G[fn](obj) end)
-                    else
-                      loadLuaKids(script)
-                    end
+                  local fn = script.attr['function']
+                  if fn then
+                    obj.__scripts[script.name] = function() _G[fn](obj) end
+                  else
+                    obj.__scripts[script.name] = function() loadLuaKids(script) end
                   end
                 end
               end
@@ -115,6 +114,9 @@ local function loader(api, skipscripts, log, sink)
           local obj = api:CreateUIObject(e.name, name, parent, inherits)
           mixin(obj, mix)
           constructor(obj)
+          if obj.__scripts and obj.__scripts.onload then
+            sink(filename, obj.__scripts.onload)
+          end
         end
       else
         local fn = xmllang[e.name]
