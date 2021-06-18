@@ -8,6 +8,6 @@ jobs:
       with:
         submodules: true
     - name: setup
-      run: ./setup.sh
+      run: bin/setup.sh
     - name: run
-      run: ./run.sh
+      run: bin/run.sh

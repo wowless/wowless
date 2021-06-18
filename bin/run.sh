@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
-eval $(.lua/bin/luarocks path)
+DIR=$(dirname $0)/../.lua
+eval $($DIR/bin/luarocks path)
 luacheck .
 luarocks build --no-install
 luarocks test -- "$@"
