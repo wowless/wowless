@@ -73,6 +73,9 @@ local baseUIObjectTypes = {
     inherits = {'uiobject'},
     intrinsic = true,
     mixin = {
+      GetParent = function(self)
+        return self.__parent
+      end,
       SetForbidden = UNIMPLEMENTED,
     },
     name = 'ParentedObject',
@@ -147,12 +150,15 @@ local function mixinType(api, type, obj)
   return obj
 end
 
-local function _CreateUIObject(api, typename, objname, inherits)
+local function _CreateUIObject(api, typename, objname, parent, inherits)
   assert(typename, 'must specify type for ' .. tostring(objname))
   local type = api.uiobjectTypes[typename]
   assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
   api.log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
-  local obj = { __name = objname }
+  local obj = {
+    __name = objname,
+    __parent = parent,
+  }
   mixinType(api, type, obj)
   for _, inh in ipairs(inherits or {}) do
     local inhtype = api.uiobjectTypes[inh]

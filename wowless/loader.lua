@@ -65,7 +65,7 @@ local function loader(api, skipscripts, log, sink)
           end
           api.uiobjectTypes[name] = {
             constructor = function(obj)
-              loadKids(e, obj:GetName())
+              loadKids(e, obj)
             end,
             inherits = inherits,
             intrinsic = e.attr.intrinsic,
@@ -74,11 +74,14 @@ local function loader(api, skipscripts, log, sink)
         else
           local name = e.attr.name
           if name and string.match(name, '$parent') then
-            assert(parent, '$parent substitution requires a parent name: ' .. name)
-            name = string.gsub(name, '$parent', parent)
+            local p = parent
+            while p ~= nil and not p:GetName() do
+              p = p:GetParent()
+            end
+            assert(p, '$parent substitution requires a parent name: ' .. name)
+            name = string.gsub(name, '$parent', p:GetName())
           end
-          api:CreateUIObject(e.name, name)
-          loadKids(e, name or parent)
+          loadKids(e, api:CreateUIObject(e.name, name, parent, inherits))
         end
       else
         local fn = xmllang[e.name]
