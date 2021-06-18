@@ -2,7 +2,7 @@ local Mixin = require('wowless.util').mixin
 
 local UNIMPLEMENTED = function() end
 
-local uiobjectTypes = {
+local baseUIObjectTypes = {
   actor = {
     inherits = {'parentedobject'},
     intrinsic = true,
@@ -109,21 +109,21 @@ local uiobjectTypes = {
   },
 }
 
-local function _InheritsFrom(a, b)
+local function _InheritsFrom(api, a, b)
   a, b = string.lower(a), string.lower(b)
   while a ~= nil and a ~= b do
-    a = uiobjectTypes[a].inherits
+    a = api.uiobjectTypes[a].inherits
   end
   return a ~= nil
 end
 
-local function _IsIntrinsicType(t)
-  local type = uiobjectTypes[string.lower(t)]
+local function _IsIntrinsicType(api, t)
+  local type = api.uiobjectTypes[string.lower(t)]
   return type and type.intrinsic
 end
 
-local function _IsUIObjectType(t)
-  return uiobjectTypes[string.lower(t)] ~= nil
+local function _IsUIObjectType(api, t)
+  return api.uiobjectTypes[string.lower(t)] ~= nil
 end
 
 local function makeObject(api, type)
@@ -131,24 +131,24 @@ local function makeObject(api, type)
     return Mixin({}, type.mixin)
   end
   for _, p in ipairs(type.inherits) do
-    assert(uiobjectTypes[p], 'unknown object type ' .. p)
+    assert(api.uiobjectTypes[p], 'unknown object type ' .. p)
   end
   for i = 2, #type.inherits do
     api.log(0, 'ignoring multiple inheritance type ' .. type.inherits[i] .. ' for ' .. tostring(type.name))
   end
-  return Mixin(makeObject(api, uiobjectTypes[type.inherits[1]]), type.mixin)
+  return Mixin(makeObject(api, api.uiobjectTypes[type.inherits[1]]), type.mixin)
 end
 
 local function _CreateUIObject(api, t)
   assert(t.type, 'must specify type for ' .. tostring(t.name))
-  local type = uiobjectTypes[string.lower(t.type)]
+  local type = api.uiobjectTypes[string.lower(t.type)]
   assert(type, 'unknown type ' .. t.type .. ' for ' .. tostring(t.name))
   api.log(3, 'creating %s%s%s',
       type.name, t.name and (' named ' .. t.name) or '',
       t.parent and t.parent.virtual and (' with parent ' .. t.parent.name) or '')
   local virtual = t.virtual
   if t.intrinsic then
-    assert(not _IsUIObjectType(t.name), 'already a uiobject type named ' .. t.name)
+    assert(not _IsUIObjectType(api, t.name), 'already a uiobject type named ' .. t.name)
     assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. t.name)
     virtual = true
   end
@@ -163,7 +163,7 @@ local function _CreateUIObject(api, t)
       intrinsic = t.intrinsic,
       name = t.name,
     }
-    uiobjectTypes[string.lower(t.name)] = newtype
+    api.uiobjectTypes[string.lower(t.name)] = newtype
     return nil
   end
   local obj = makeObject(api, type)
@@ -215,7 +215,7 @@ end
 local function mkWowEnv(api)
   return {
     CreateFrame = function(type, name)
-      assert(_InheritsFrom(type, 'frame'), type .. ' does not inherit from frame')
+      assert(_InheritsFrom(api, type, 'frame'), type .. ' does not inherit from frame')
       return _CreateUIObject(api, {
         inherits = {},
         name = name,
@@ -286,6 +286,7 @@ local function new(log)
     IsIntrinsicType = _IsIntrinsicType,
     IsUIObjectType = _IsUIObjectType,
     log = log,
+    uiobjectTypes = Mixin({}, baseUIObjectTypes),
   }
   Mixin(env, mkWowEnv(api), globalStrings)
   return env, api

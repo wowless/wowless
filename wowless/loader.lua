@@ -47,7 +47,7 @@ local function loader(api, skipscripts, log, sink)
     }
 
     function loadElement(e, parent)
-      if api.IsIntrinsicType(e.name) then
+      if api:IsIntrinsicType(e.name) then
         local obj = api:CreateUIObject({
           inherits = e.attr.inherits or {},
           intrinsic = e.attr.intrinsic,
