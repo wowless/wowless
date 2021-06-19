@@ -1,4 +1,5 @@
-local Mixin = require('wowless.util').mixin
+local util = require('wowless.util')
+local Mixin = util.mixin
 
 local UNIMPLEMENTED = function() end
 local STUB_NUMBER = function() return 1 end
@@ -64,6 +65,7 @@ local function mkBaseUIObjectTypes(api)
           return api:CreateUIObject('texture', name, self)
         end,
         GetFrameLevel = STUB_NUMBER,
+        GetID = STUB_NUMBER,
         IgnoreDepth = UNIMPLEMENTED,
         IsEventRegistered = UNIMPLEMENTED,
         RegisterEvent = UNIMPLEMENTED,
@@ -269,6 +271,7 @@ local function mkBaseEnv()
     },
     table = {
       insert = table.insert,
+      wipe = util.twipe,
     },
     tinsert = table.insert,
     tostring = tostring,
@@ -314,6 +317,7 @@ local function mkWowEnv(api)
     }),
     FillLocalizedClassList = UNIMPLEMENTED,
     format = string.format,
+    GetChatWindowInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
     GetDefaultVideoOptions = UNIMPLEMENTED,
     GetInventorySlotInfo = function()

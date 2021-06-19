@@ -24,8 +24,16 @@ local function tappend(t, t2)
   return t
 end
 
+local function twipe(t)
+  for k in pairs(t) do
+    t[k] = nil
+  end
+  return t
+end
+
 return {
   mixin = mixin,
   readfile = readfile,
   tappend = tappend,
+  twipe = twipe,
 }

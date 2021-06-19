@@ -215,10 +215,10 @@ local function run(loglevel, skipscripts)
   end
   local env, api = require('wowless.env').new(log)
   local sink = function(lua)
-    assert(xpcall(setfenv(lua, env), function(err)
+    xpcall(setfenv(lua, env), function(err)
       print('error: ' .. err)
       print(debug.traceback())
-    end))
+    end)
   end
   local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
   loader(api, skipscripts, log, sink)(toc)
