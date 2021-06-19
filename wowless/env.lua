@@ -22,6 +22,7 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         Disable = UNIMPLEMENTED,
         IsEnabled = UNIMPLEMENTED,
+        RegisterForClicks = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
       },
       name = 'Button',
@@ -69,6 +70,7 @@ local function mkBaseUIObjectTypes(api)
         IgnoreDepth = UNIMPLEMENTED,
         IsEventRegistered = UNIMPLEMENTED,
         RegisterEvent = UNIMPLEMENTED,
+        RegisterForDrag = UNIMPLEMENTED,
         SetClampRectInsets = UNIMPLEMENTED,
         SetFrameLevel = UNIMPLEMENTED,
       },
