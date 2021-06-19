@@ -65,12 +65,14 @@ local function mkBaseUIObjectTypes(api)
         CreateTexture = function(self, name)
           return api:CreateUIObject('texture', name, self)
         end,
+        GetAttribute = UNIMPLEMENTED,
         GetFrameLevel = STUB_NUMBER,
         GetID = STUB_NUMBER,
         IgnoreDepth = UNIMPLEMENTED,
         IsEventRegistered = UNIMPLEMENTED,
         RegisterEvent = UNIMPLEMENTED,
         RegisterForDrag = UNIMPLEMENTED,
+        SetAttribute = UNIMPLEMENTED,
         SetClampRectInsets = UNIMPLEMENTED,
         SetFrameLevel = UNIMPLEMENTED,
       },
@@ -168,6 +170,7 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'layeredregion', 'parentedobject'},
       intrinsic = true,
       mixin = {
+        SetDesaturated = UNIMPLEMENTED,
         SetTexCoord = UNIMPLEMENTED,
         SetTexture = UNIMPLEMENTED,
       },
@@ -319,6 +322,9 @@ local function mkWowEnv(api)
     }),
     FillLocalizedClassList = UNIMPLEMENTED,
     format = string.format,
+    GetActionBarPage = STUB_NUMBER,
+    GetActionInfo = UNIMPLEMENTED,
+    GetActionTexture = UNIMPLEMENTED,
     GetChatWindowInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
     GetDefaultVideoOptions = UNIMPLEMENTED,
@@ -328,9 +334,13 @@ local function mkWowEnv(api)
     GetItemQualityColor = function()
       return 0, 0, 0  -- UNIMPLEMENTED
     end,
+    HasAction = UNIMPLEMENTED,
+    IsAltKeyDown = UNIMPLEMENTED,
+    IsControlKeyDown = UNIMPLEMENTED,
     IsGMClient = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
     issecure = UNIMPLEMENTED,
+    IsShiftKeyDown = UNIMPLEMENTED,
     newproxy = function()
       return setmetatable({}, {})
     end,
@@ -338,6 +348,7 @@ local function mkWowEnv(api)
     print = print,
     RegisterStaticConstants = UNIMPLEMENTED,
     securecall = UNIMPLEMENTED,
+    SetActionUIButton = UNIMPLEMENTED,
     seterrorhandler = UNIMPLEMENTED,
     UnitRace = function()
       return 'Human', 'Human', 1  -- UNIMPLEMENTED
