@@ -104,16 +104,21 @@ local function loader(api, skipscripts, log, sink)
                 obj.__scripts = obj.__scripts or {}
                 for _, script in ipairs(kid.kids) do
                   local fnattr = script.attr['function']
-                  local fn = function()
-                    if fnattr then
-                      log(3, 'calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
+                  local fn
+                  if fnattr then
+                    fn = function()
+                      log(3, 'begin calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
                       api.env[fnattr](obj)
-                    else
-                      log(3, 'calling inline script from %s on %s', e.name, tostring(obj:GetName()))
-                      local old = api.env.self
-                      api.env.self = obj
-                      loadLuaKids(script)
-                      api.env.self = old
+                      log(3, 'end calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
+                    end
+                  else
+                    local sfn = assert(loadstring(
+                        'return function(self, ...)\n' .. table.concat(script.kids, '\n') .. '\nend',
+                        filename))()
+                    fn = function()
+                      log(3, 'begin calling inline script from %s on %s', e.name, tostring(obj:GetName()))
+                      sfn(obj)
+                      log(3, 'end calling inline script from %s on %s', e.name, tostring(obj:GetName()))
                     end
                   end
                   local inh = script.attr.inherit
