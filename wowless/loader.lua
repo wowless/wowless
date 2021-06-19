@@ -29,6 +29,23 @@ local function loader(api, skipscripts, log, sink)
     end
 
     local xmllang = {
+      fontfamily = function(e)
+        assert(e.attr, 'invalid font family without attributes')
+        local name = e.attr.name
+        assert(name, 'invalid font family without name')
+        assert(e.attr.virtual, 'invalid non-virtual font family')
+        assert(#e.kids > 0, 'invalid font family ' .. name .. ' without members')
+        for _, kid in ipairs(e.kids) do
+          assert(kid.name == 'member', 'invalid font family ' .. name)
+          assert(#kid.kids == 1 and kid.kids[1].name == 'font', 'invalid font family member in ' .. name)
+        end
+        local font = e.kids[1].kids[1]
+        return loadElement({
+          name = font.name,
+          attr = mixin(font.attr, { virtual = true, name = name }),
+          kids = font.kids,
+        })
+      end,
       frames = function(e, parent)
         loadKids(e, parent)
       end,

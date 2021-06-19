@@ -36,7 +36,7 @@ local function mkBaseUIObjectTypes(api)
       name = 'EditBox',
     },
     font = {
-      inherits = {'fontinstance', 'parentedobject'},
+      inherits = {'fontinstance'},
       intrinsic = true,
       name = 'Font',
     },
@@ -47,11 +47,6 @@ local function mkBaseUIObjectTypes(api)
         SetFontObject = UNIMPLEMENTED,
       },
       name = 'FontInstance',
-    },
-    fontfamily = {
-      inherits = {'parentedobject'},
-      intrinsic = true,
-      name = 'FontFamily',
     },
     fontstring = {
       inherits = {'fontinstance', 'layeredregion'},
@@ -211,6 +206,7 @@ end
 
 local function mixinType(api, type, obj)
   for _, inh in ipairs(type.inherits) do
+    assert(api.uiobjectTypes[inh], inh .. ' is not a uiobject type')
     mixinType(api, api.uiobjectTypes[inh], obj)
   end
   Mixin(obj, type.mixin)
