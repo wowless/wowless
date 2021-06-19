@@ -1587,7 +1587,7 @@ local function validateRoot(root)
       assert(e._children, 'missing text in ' .. tname)
       for _, kid in ipairs(e._children) do
         assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
-        table.insert(resultKids, e._text)
+        table.insert(resultKids, kid._text)
       end
     else
       for _, kid in ipairs(e._children or {}) do

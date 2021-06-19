@@ -22,9 +22,15 @@ describe('xml.lua #huge', function()
       assert.is_not.Nil(validator, 'unexpected type ' .. type(v))
       validator(v)
     end
+    local numtext = 0
     for _, k in ipairs(e.kids) do
-      check(k)
+      if type(k) == 'string' then
+        numtext = numtext + 1
+      else
+        check(k)
+      end
     end
+    assert.True(numtext == 0 or numtext == #e.kids)
   end
   for line in handle:lines() do
     it('handles ' .. line, function()
