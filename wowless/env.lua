@@ -30,6 +30,9 @@ local function mkBaseUIObjectTypes(api)
     checkbutton = {
       inherits = {'button'},
       intrinsic = true,
+      mixin = {
+        SetChecked = UNIMPLEMENTED,
+      },
       name = 'CheckButton',
     },
     cooldown = {
@@ -59,6 +62,7 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'fontinstance', 'layeredregion'},
       intrinsic = true,
       mixin = {
+        GetText = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
       },
       name = 'FontString',
@@ -86,6 +90,9 @@ local function mkBaseUIObjectTypes(api)
     gametooltip = {
       inherits = {'frame'},
       intrinsic = true,
+      mixin = {
+        GetOwner = UNIMPLEMENTED,
+      },
       name = 'GameTooltip',
     },
     layeredregion = {
@@ -266,6 +273,7 @@ local function mkBaseEnv()
       max = math.max,
     },
     max = math.max,
+    next = next,
     pairs = pairs,
     rawget = rawget,
     select = select,
@@ -328,8 +336,11 @@ local function mkWowEnv(api)
     FillLocalizedClassList = UNIMPLEMENTED,
     format = string.format,
     GetActionBarPage = STUB_NUMBER,
+    GetActionCount = STUB_NUMBER,
     GetActionInfo = UNIMPLEMENTED,
     GetActionTexture = UNIMPLEMENTED,
+    GetBindingKey = UNIMPLEMENTED,
+    GetBindingText = UNIMPLEMENTED,
     GetChatWindowInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
     GetDefaultVideoOptions = UNIMPLEMENTED,
@@ -341,11 +352,15 @@ local function mkWowEnv(api)
     end,
     HasAction = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
+    IsConsumableAction = UNIMPLEMENTED,
     IsControlKeyDown = UNIMPLEMENTED,
+    IsEquippedAction = UNIMPLEMENTED,
     IsGMClient = UNIMPLEMENTED,
+    IsItemAction = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
     issecure = UNIMPLEMENTED,
     IsShiftKeyDown = UNIMPLEMENTED,
+    IsStackableAction = UNIMPLEMENTED,
     newproxy = function()
       return setmetatable({}, {})
     end,
