@@ -290,6 +290,7 @@ local function mkBaseEnv()
       sub = string.sub,
       upper = string.upper,
     },
+    strlower = string.lower,
     strsub = string.sub,
     table = {
       insert = table.insert,
