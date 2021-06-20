@@ -32,6 +32,11 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       name = 'CheckButton',
     },
+    cooldown = {
+      inherits = {'frame'},
+      intrinsic = true,
+      name = 'Cooldown',
+    },
     editbox = {
       inherits = {'frame'},
       intrinsic = true,
