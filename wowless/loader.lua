@@ -113,7 +113,7 @@ local function loader(api, skipscripts, log, sink)
                     end
                   else
                     local fnstr = 'return function(self, ...)\n' .. table.concat(script.kids, '\n') .. '\nend'
-                    local sfn = setfenv(assert(loadstring(fnstr, filename))(), api.env)
+                    local sfn = setfenv(assert(loadstring(fnstr, path.basename(filename)))(), api.env)
                     fn = function()
                       log(3, 'begin calling inline script from %s on %s', e.name, tostring(obj:GetName()))
                       sfn(obj)
