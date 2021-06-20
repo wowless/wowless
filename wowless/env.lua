@@ -74,6 +74,7 @@ local function mkBaseUIObjectTypes(api)
         CreateTexture = function(self, name)
           return api:CreateUIObject('texture', name, self)
         end,
+        EnableMouse = UNIMPLEMENTED,
         GetAttribute = UNIMPLEMENTED,
         GetFrameLevel = STUB_NUMBER,
         GetID = STUB_NUMBER,
@@ -84,6 +85,7 @@ local function mkBaseUIObjectTypes(api)
         SetAttribute = UNIMPLEMENTED,
         SetClampRectInsets = UNIMPLEMENTED,
         SetFrameLevel = UNIMPLEMENTED,
+        SetID = UNIMPLEMENTED,
       },
       name = 'Frame',
     },
@@ -141,6 +143,7 @@ local function mkBaseUIObjectTypes(api)
         Hide = UNIMPLEMENTED,
         SetPoint = UNIMPLEMENTED,
         SetSize = UNIMPLEMENTED,
+        SetWidth = UNIMPLEMENTED,
         Show = UNIMPLEMENTED,
       },
       name = 'Region',
@@ -287,6 +290,7 @@ local function mkBaseEnv()
       sub = string.sub,
       upper = string.upper,
     },
+    strsub = string.sub,
     table = {
       insert = table.insert,
       wipe = util.twipe,
