@@ -255,7 +255,7 @@ local function _CreateUIObject(api, typename, objname, parent, inherits)
   end
   if objname then
     if api.env[objname] then
-      api.log(0, 'overwriting global ' .. objname)
+      api.log(1, 'overwriting global ' .. objname)
     end
     api.env[objname] = obj
   end

@@ -144,7 +144,7 @@ local function loader(api, skipscripts, log, sink)
           assert(e.attr.name, 'cannot create anonymous virtual uiobject')
           local name = string.lower(e.attr.name)
           if api.uiobjectTypes[name] then
-            api.log(0, 'overwriting uiobject type ' .. e.attr.name)
+            api.log(1, 'overwriting uiobject type ' .. e.attr.name)
           end
           api.uiobjectTypes[name] = {
             constructor = constructor,
