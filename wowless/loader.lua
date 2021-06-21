@@ -16,8 +16,8 @@ local function loader(api, log, sink)
 
     local loadElement
 
-    local function loadKids(e, parent)
-      for _, v in ipairs(e.kids) do
+    local function loadElements(t, parent)
+      for _, v in ipairs(t) do
         loadElement(v, parent)
       end
     end
@@ -32,18 +32,20 @@ local function loader(api, log, sink)
         })
       end,
       frames = function(e, parent)
-        loadKids(e, parent)
+        loadElements(e.kids, parent)
       end,
       include = function(e)
         loadFile(path.join(dir, e.file))
       end,
       layers = function(e, parent)
         for _, layer in ipairs(e.layers) do
-          loadKids(layer, parent)
+          loadElements(layer.fontstrings, parent)
+          loadElements(layer.lines, parent)
+          loadElements(layer.textures, parent)
         end
       end,
       scopedmodifier = function(e, parent)
-        loadKids(e, parent)
+        loadElements(e.kids, parent)
       end,
       script = function(e)
         if e.file then
@@ -79,7 +81,7 @@ local function loader(api, log, sink)
             log(3, 'attaching ' .. e.attr.parentkey)
             obj:GetParent()[e.attr.parentkey] = obj
           end
-          loadKids(e, obj)
+          loadElements(e.kids, obj)
           for _, kid in ipairs(e.kids) do
             if kid.name == 'scripts' then
               obj.__scripts = obj.__scripts or {}
@@ -165,7 +167,7 @@ local function loader(api, log, sink)
 
     local root = xml.validate(filename)
     assert(root.name == 'ui')
-    loadKids(root)
+    loadElements(root.kids)
   end
 
   function loadFile(filename)

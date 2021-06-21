@@ -746,19 +746,30 @@ local lang = preprocess({
     },
   },
   layer = {
-    attributes = {
+    fields = {
+      fontstrings = {
+        child = 'fontstring',
+        repeated = true,
+        source = 'child',
+      },
       level = {
-        required = true,
+        source = 'attribute',
         type = 'string',
       },
+      lines = {
+        child = 'line',
+        repeated = true,
+        source = 'child',
+      },
+      textures = {
+        child = 'texture',
+        repeated = true,
+        source = 'child',
+      },
       texturesublevel = {
+        source = 'attribute',
         type = 'number',
       },
-    },
-    children = {
-      fontstring = true,
-      line = true,
-      texture = true,
     },
   },
   layers = {
