@@ -1583,12 +1583,15 @@ local function validateRoot(root)
       end
     end
     local resultKids = {}
+    local resultText = nil
     if ty.text then
       assert(e._children, 'missing text in ' .. tname)
+      local texts = {}
       for _, kid in ipairs(e._children) do
         assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
-        table.insert(resultKids, kid._text)
+        table.insert(texts, kid._text)
       end
+      resultText = table.concat(texts, '\n')
     else
       for _, kid in ipairs(e._children or {}) do
         if kid._type == 'TEXT' then
@@ -1598,7 +1601,12 @@ local function validateRoot(root)
         end
       end
     end
-    return { name = tname, attr = resultAttrs, kids = resultKids }
+    return {
+      attr = resultAttrs,
+      kids = resultKids,
+      name = tname,
+      text = resultText,
+    }
   end
   local result = run(root, 'toplevel', {'bindings', 'ui'})
   return result, warnings

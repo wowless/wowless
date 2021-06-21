@@ -22,12 +22,6 @@ local function loader(api, log, sink)
       end
     end
 
-    local function loadLuaKids(e)
-      for _, s in ipairs(e.kids) do
-        loadLuaString(filename, s)
-      end
-    end
-
     local xmllang = {
       fontfamily = function(e)
         assert(e.attr, 'invalid font family without attributes')
@@ -67,7 +61,8 @@ local function loader(api, log, sink)
           assert(#e.kids == 0)
           loadFile(path.join(dir, e.attr.file))
         else
-          loadLuaKids(e)
+          assert(e.text)
+          loadLuaString(filename, e.text)
         end
       end,
       scripts = function()
@@ -109,7 +104,8 @@ local function loader(api, log, sink)
                     log(3, 'end calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
                   end
                 else
-                  local fnstr = 'return function(self, ...)\n' .. table.concat(script.kids, '\n') .. '\nend'
+                  assert(script.text, 'script missing text')
+                  local fnstr = 'return function(self, ...)\n' .. script.text .. '\nend'
                   local sfn = setfenv(assert(loadstring(fnstr, path.basename(filename)))(), api.env)
                   fn = function()
                     log(3, 'begin calling inline script from %s on %s', e.name, tostring(obj:GetName()))
