@@ -8,4 +8,7 @@ describe('loader', function()
     end
     assert.same(13859, count)
   end)
+  it('loads errors', function()
+    loader.run(0, false)
+  end)
 end)

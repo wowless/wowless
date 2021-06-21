@@ -282,6 +282,7 @@ local function mkBaseEnv()
     select = select,
     setmetatable = setmetatable,
     string = {
+      find = string.find,
       format = string.format,
       gmatch = string.gmatch,
       gsub = string.gsub,
