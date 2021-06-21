@@ -672,8 +672,12 @@ local lang = preprocess({
     extends = 'layoutframe',
   },
   frames = {
-    children = {
-      frame = true,
+    fields = {
+      frames = {
+        child = 'frame',
+        repeated = true,
+        source = 'child',
+      },
     },
   },
   gametooltip = {
@@ -1608,7 +1612,7 @@ local function validateRoot(root)
           local cname = spec.child or name
           local kids = {}
           for _, kid in ipairs(e._children) do
-            if kid._name and string.lower(kid._name) == cname then
+            if kid._name and lang[string.lower(kid._name)].supertypes[cname] then
               table.insert(kids, run(kid, tname, { [cname] = true }))
             end
           end

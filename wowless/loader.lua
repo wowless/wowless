@@ -32,7 +32,7 @@ local function loader(api, log, sink)
         })
       end,
       frames = function(e, parent)
-        loadElements(e.kids, parent)
+        loadElements(e.frames, parent)
       end,
       include = function(e)
         loadFile(path.join(dir, e.file))
