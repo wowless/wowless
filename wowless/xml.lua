@@ -5,6 +5,7 @@ local function preprocess(tree)
   local newtree = {}
   for k, v in pairs(tree) do
     local attrs = mixin({}, v.attributes)
+    local fields = mixin({}, v.fields)
     local kids = mixin({}, v.children)
     local supertypes = { [k] = true }
     local text = v.text
@@ -13,12 +14,14 @@ local function preprocess(tree)
       supertypes[t.extends] = true
       t = tree[t.extends]
       mixin(attrs, t.attributes)
+      mixin(fields, t.fields)
       mixin(kids, t.children)
       text = text or t.text
     end
     newtree[k] = mixin({}, v, {
       attributes = attrs,
       children = kids,
+      fields = fields,
       supertypes = supertypes,
       text = text,
     })
@@ -527,16 +530,22 @@ local lang = preprocess({
     },
   },
   fontfamily = {
-    attributes = {
+    fields = {
+      members = {
+        child = 'member',
+        repeated = true,
+        required = true,
+        source = 'child',
+      },
       name = {
+        required = true,
+        source = 'attribute',
         type = 'string',
       },
       virtual = {
-        type = 'bool',
-      },
-    },
-    children = {
-      member = true,
+        source = 'attribute',
+        value = 'true',
+      }
     },
   },
   fontheight = {
@@ -870,13 +879,16 @@ local lang = preprocess({
     extends = 'dimension',
   },
   member = {
-    attributes = {
+    fields = {
       alphabet = {
+        required = true,
+        source = 'attribute',
         type = 'string',
       },
-    },
-    children = {
-      font = true,
+      font = {
+        required = true,
+        source = 'child',
+      },
     },
   },
   messageframe = {
@@ -1562,51 +1574,85 @@ local function validateRoot(root)
     local ty = lang[tname]
     assert(ty, tname .. ' is not a type')
     assert(not ty.virtual, tname .. ' is virtual and cannot be instantiated')
-    local extends = false
-    for k in pairs(tk) do
-      extends = extends or ty.supertypes[k]
-    end
-    assert(extends, tname .. ' cannot be a child of ' .. tn)
-    local resultAttrs = {}
-    for k, v in pairs(e._attr or {}) do
-      local an = string.lower(k)
-      local attr = ty.attributes[an]
-      if not attr then
-        table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
-      else
-        local vv = attributeTypes[attr.type](v)
-        if vv == nil then
-          table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
+    if next(ty.fields) then
+      assert(not next(ty.attributes), 'attributes and fields in ' .. tname)
+      assert(not next(ty.children), 'children and fields in ' .. tname)
+      local fields = { _xmlname = tname }
+      for name, spec in pairs(ty.fields) do
+        if spec.source == 'attribute' then
+          local attr = e._attr[name]
+          assert(spec.value == nil or attr == spec.value, 'bad attribute value ' .. tostring(attr) .. ' in ' .. tname)
+          assert(not spec.required or attr ~= nil, 'missing attribute ' .. name .. ' in ' .. tname)
+          if spec.value == nil then
+            assert(spec.type, 'missing type on attribute field ' .. name .. ' of ' .. tname)
+            fields[name] = attributeTypes[spec.type](attr)
+          end
+        elseif spec.source == 'child' then
+          local cname = spec.child or name
+          local kids = {}
+          for _, kid in ipairs(e._children) do
+            if kid._name and string.lower(kid._name) == cname then
+              table.insert(kids, run(kid, tname, { [cname] = true }))
+            end
+          end
+          assert(not spec.required or #kids > 0, 'missing required child ' .. cname .. ' of ' .. tname)
+          assert(spec.repeated or #kids <= 1, 'too many instances of child ' .. cname .. ' of ' .. tname)
+          fields[name] = spec.repeated and kids or #kids and kids[1] or nil
         else
-          resultAttrs[an] = vv
+          error('invalid spec source ' .. spec.source .. ' in ' .. tname)
         end
       end
-    end
-    local resultKids = {}
-    local resultText = nil
-    if ty.text then
-      assert(e._children, 'missing text in ' .. tname)
-      local texts = {}
-      for _, kid in ipairs(e._children) do
-        assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
-        table.insert(texts, kid._text)
-      end
-      resultText = table.concat(texts, '\n')
+      return fields
     else
-      for _, kid in ipairs(e._children or {}) do
-        if kid._type == 'TEXT' then
-          table.insert(warnings, 'ignoring text kid of ' .. tname)
+      local extends = false
+      for k in pairs(tk) do
+        extends = extends or ty.supertypes[k]
+      end
+      assert(extends, tname .. ' cannot be a child of ' .. tn)
+      local resultAttrs = {}
+      for k, v in pairs(e._attr or {}) do
+        local an = string.lower(k)
+        local attr = ty.attributes[an]
+        if not attr then
+          table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
         else
-          table.insert(resultKids, run(kid, tname, ty.children))
+          local vv = attributeTypes[attr.type](v)
+          if vv == nil then
+            table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
+          else
+            resultAttrs[an] = vv
+          end
         end
       end
+      if ty.text then
+        assert(e._children, 'missing text in ' .. tname)
+        local texts = {}
+        for _, kid in ipairs(e._children) do
+          assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
+          table.insert(texts, kid._text)
+        end
+        return {
+          attr = resultAttrs,
+          kids = {},
+          name = tname,
+          text = table.concat(texts, '\n'),
+        }
+      else
+        local resultKids = {}
+        for _, kid in ipairs(e._children or {}) do
+          if kid._type == 'TEXT' then
+            table.insert(warnings, 'ignoring text kid of ' .. tname)
+          else
+            table.insert(resultKids, run(kid, tname, ty.children))
+          end
+        end
+        return {
+          attr = resultAttrs,
+          kids = resultKids,
+          name = tname,
+        }
+      end
     end
-    return {
-      attr = resultAttrs,
-      kids = resultKids,
-      name = tname,
-      text = resultText,
-    }
   end
   local result = run(root, 'toplevel', {
     bindings = true,

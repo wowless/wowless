@@ -4,33 +4,38 @@ describe('xml.lua #huge', function()
   local warnings = {}
   local function check(e)
     assert.same('table', type(e))
-    assert.same('string', type(e.name))
-    assert.same('table', type(e.attr))
-    assert.same('table', type(e.kids))
-    for a, v in pairs(e.attr) do
-      assert.same('string', type(a))
-      local validator = ({
-        boolean = function() end,
-        number = function() end,
-        string = function() end,
-        table = function(t)
-          for _, s in ipairs(t) do
-            assert.same('string', type(s))
-          end
-        end,
-      })[type(v)]
-      assert.is_not.Nil(validator, 'unexpected type ' .. type(v))
-      validator(v)
-    end
-    local numtext = 0
-    for _, k in ipairs(e.kids) do
-      if type(k) == 'string' then
-        numtext = numtext + 1
-      else
-        check(k)
+    if e._xmlname then
+      assert.Nil(e.attr)
+      assert.Nil(e.kids)
+    else
+      assert.same('string', type(e.name))
+      assert.same('table', type(e.attr))
+      assert.same('table', type(e.kids))
+      for a, v in pairs(e.attr) do
+        assert.same('string', type(a))
+        local validator = ({
+          boolean = function() end,
+          number = function() end,
+          string = function() end,
+          table = function(t)
+            for _, s in ipairs(t) do
+              assert.same('string', type(s))
+            end
+          end,
+        })[type(v)]
+        assert.is_not.Nil(validator, 'unexpected type ' .. type(v))
+        validator(v)
       end
+      local numtext = 0
+      for _, k in ipairs(e.kids) do
+        if type(k) == 'string' then
+          numtext = numtext + 1
+        else
+          check(k)
+        end
+      end
+      assert.True(numtext == 0 or numtext == #e.kids)
     end
-    assert.True(numtext == 0 or numtext == #e.kids)
   end
   for line in handle:lines() do
     it('handles ' .. line, function()
