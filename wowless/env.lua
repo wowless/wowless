@@ -317,6 +317,10 @@ local function mkWowEnv(api)
       assert(_InheritsFrom(api, ltype, 'frame'), type .. ' does not inherit from frame')
       return _CreateUIObject(api, ltype, name)
     end,
+    C_CVar = {
+      GetCVar = UNIMPLEMENTED,
+      GetCVarBool = UNIMPLEMENTED,
+    },
     C_Club = {},
     C_GamePad = {},
     C_ScriptedAnimations = {
