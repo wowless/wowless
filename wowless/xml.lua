@@ -1,11 +1,11 @@
 local util = require('wowless.util')
 
 local function preprocess(tree)
-  local mixin, tappend = util.mixin, util.tappend
+  local mixin = util.mixin
   local newtree = {}
   for k, v in pairs(tree) do
     local attrs = mixin({}, v.attributes)
-    local kids = tappend({}, v.children or {})
+    local kids = mixin({}, v.children)
     local supertypes = { [k] = true }
     local text = v.text
     local t = v
@@ -13,7 +13,7 @@ local function preprocess(tree)
       supertypes[t.extends] = true
       t = tree[t.extends]
       mixin(attrs, t.attributes)
-      tappend(kids, t.children or {})
+      mixin(kids, t.children)
       text = text or t.text
     end
     newtree[k] = mixin({}, v, {
@@ -75,7 +75,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'scripts',
+      scripts = true,
     },
   },
   alpha = {
@@ -111,12 +111,12 @@ local lang = preprocess({
       },
     },
     children = {
-      'offset',
+      offset = true,
     },
   },
   anchors = {
     children = {
-      'anchor',
+      anchor = true,
     },
   },
   animationgroup = {
@@ -129,8 +129,8 @@ local lang = preprocess({
       },
     },
     children = {
-      'animation',
-      'scripts',
+      animation = true,
+      scripts = true,
     },
     extends = 'layoutframe',
   },
@@ -162,13 +162,13 @@ local lang = preprocess({
       },
     },
     children = {
-      'keyvalues',
-      'scripts',
+      keyvalues = true,
+      scripts = true,
     },
   },
   animations = {
     children = {
-      'animationgroup',
+      animationgroup = true,
     },
   },
   attribute = {
@@ -186,7 +186,7 @@ local lang = preprocess({
   },
   attributes = {
     children = {
-      'attribute',
+      attribute = true,
     },
   },
   backdrop = {
@@ -199,7 +199,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'edgesize',
+      edgesize = true,
     },
   },
   barcolor = {
@@ -239,8 +239,8 @@ local lang = preprocess({
   },
   bindings = {
     children = {
-      'binding',
-      'modifiedclick',
+      binding = true,
+      modifiedclick = true,
     },
   },
   blingtexture = {
@@ -267,13 +267,13 @@ local lang = preprocess({
       },
     },
     children = {
-      'buttonfont',
-      'buttontext',
-      'disabledtexture',
-      'highlighttexture',
-      'normaltexture',
-      'pushedtextoffset',
-      'pushedtexture',
+      buttonfont = true,
+      buttontext = true,
+      disabledtexture = true,
+      highlighttexture = true,
+      normaltexture = true,
+      pushedtextoffset = true,
+      pushedtexture = true,
     },
     extends = 'frame',
   },
@@ -298,8 +298,8 @@ local lang = preprocess({
       },
     },
     children = {
-      'checkedtexture',
-      'disabledcheckedtexture',
+      checkedtexture = true,
+      disabledcheckedtexture = true,
     },
     extends = 'button',
   },
@@ -338,10 +338,10 @@ local lang = preprocess({
   },
   colorselect = {
     children = {
-      'colorvaluetexture',
-      'colorvaluethumbtexture',
-      'colorwheeltexture',
-      'colorwheelthumbtexture',
+      colorvaluetexture = true,
+      colorvaluethumbtexture = true,
+      colorwheeltexture = true,
+      colorwheelthumbtexture = true,
     },
     extends = 'frame',
   },
@@ -373,7 +373,7 @@ local lang = preprocess({
   },
   controlpoints = {
     children = {
-      'controlpoint',
+      controlpoint = true,
     },
   },
   cooldown = {
@@ -389,15 +389,15 @@ local lang = preprocess({
       },
     },
     children = {
-      'blingtexture',
-      'edgetexture',
-      'swipetexture',
+      blingtexture = true,
+      edgetexture = true,
+      swipetexture = true,
     },
     extends = 'frame',
   },
   dimension = {
     children = {
-      'absdimension',
+      absdimension = true,
     },
     virtual = true,
   },
@@ -462,8 +462,8 @@ local lang = preprocess({
       },
     },
     children = {
-      'fontstring',
-      'highlightcolor',
+      fontstring = true,
+      highlightcolor = true,
     },
     extends = 'frame',
   },
@@ -522,8 +522,8 @@ local lang = preprocess({
       },
     },
     children = {
-      'color',
-      'shadow',
+      color = true,
+      shadow = true,
     },
   },
   fontfamily = {
@@ -536,7 +536,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'member',
+      member = true,
     },
   },
   fontheight = {
@@ -571,9 +571,9 @@ local lang = preprocess({
       },
     },
     children = {
-      'color',
-      'fontheight',
-      'shadow',
+      color = true,
+      fontheight = true,
+      shadow = true,
     },
     extends = 'layoutframe',
   },
@@ -650,21 +650,21 @@ local lang = preprocess({
       },
     },
     children = {
-      'animations',
-      'attributes',
-      'backdrop',
-      'frames',
-      'hitrectinsets',
-      'layers',
-      'resizebounds',
-      'scripts',
-      'titleregion',
+      animations = true,
+      attributes = true,
+      backdrop = true,
+      frames = true,
+      hitrectinsets = true,
+      layers = true,
+      resizebounds = true,
+      scripts = true,
+      titleregion = true,
     },
     extends = 'layoutframe',
   },
   frames = {
     children = {
-      'frame',
+      frame = true,
     },
   },
   gametooltip = {
@@ -677,8 +677,8 @@ local lang = preprocess({
       },
     },
     children = {
-      'maxcolor',
-      'mincolor',
+      maxcolor = true,
+      mincolor = true,
     },
   },
   highlightcolor = {
@@ -706,7 +706,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'absinset',
+      absinset = true,
     },
   },
   include = {
@@ -732,7 +732,7 @@ local lang = preprocess({
   },
   keyvalues = {
     children = {
-      'keyvalue',
+      keyvalue = true,
     },
   },
   layer = {
@@ -746,14 +746,14 @@ local lang = preprocess({
       },
     },
     children = {
-      'fontstring',
-      'line',
-      'texture',
+      fontstring = true,
+      line = true,
+      texture = true,
     },
   },
   layers = {
     children = {
-      'layer',
+      layer = true,
     },
   },
   layoutframe = {
@@ -796,10 +796,10 @@ local lang = preprocess({
       },
     },
     children = {
-      'anchors',
-      'color',
-      'keyvalues',
-      'size',
+      anchors = true,
+      color = true,
+      keyvalues = true,
+      size = true,
     },
     virtual = true,
   },
@@ -833,7 +833,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'origin',
+      origin = true,
     },
     extends = 'animation',
   },
@@ -846,7 +846,7 @@ local lang = preprocess({
   },
   maskedtextures = {
     children = {
-      'maskedtexture',
+      maskedtexture = true,
     },
   },
   masktexture = {
@@ -859,7 +859,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'maskedtextures',
+      maskedtextures = true,
     },
     extends = 'texture',
   },
@@ -876,7 +876,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'font',
+      font = true,
     },
   },
   messageframe = {
@@ -895,7 +895,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'fontstring',
+      fontstring = true,
     },
     extends = 'frame',
   },
@@ -910,7 +910,7 @@ local lang = preprocess({
   },
   modelscene = {
     children = {
-      'viewinsets',
+      viewinsets = true,
     },
     extends = 'frame',
   },
@@ -946,7 +946,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'absdimension',
+      absdimension = true,
     },
   },
   onarrowpressed = {
@@ -1142,7 +1142,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'offset',
+      offset = true,
     },
   },
   path = {
@@ -1152,7 +1152,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'controlpoints',
+      controlpoints = true,
     },
     extends = 'animation',
   },
@@ -1201,8 +1201,8 @@ local lang = preprocess({
   },
   resizebounds = {
     children = {
-      'maxresize',
-      'minresize',
+      maxresize = true,
+      minresize = true,
     },
   },
   rotation = {
@@ -1235,7 +1235,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'origin',
+      origin = true,
     },
     extends = 'animation',
   },
@@ -1255,8 +1255,8 @@ local lang = preprocess({
       },
     },
     children = {
-      'actor',
-      'layoutframe',
+      actor = true,
+      layoutframe = true,
     },
   },
   script = {
@@ -1269,7 +1269,7 @@ local lang = preprocess({
   },
   scripts = {
     children = {
-      'scripttype',
+      scripttype = true,
     },
   },
   scripttype = {
@@ -1295,12 +1295,12 @@ local lang = preprocess({
   },
   scrollchild = {
     children = {
-      'frame',
+      frame = true,
     },
   },
   scrollframe = {
     children = {
-      'scrollchild',
+      scrollchild = true,
     },
     extends = 'frame',
   },
@@ -1318,13 +1318,13 @@ local lang = preprocess({
       },
     },
     children = {
-      'color',
-      'offset',
+      color = true,
+      offset = true,
     },
   },
   simplehtml = {
     children = {
-      'fontstring',
+      fontstring = true,
     },
     extends = 'frame',
   },
@@ -1338,7 +1338,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'absdimension',
+      absdimension = true,
     },
   },
   slider = {
@@ -1366,7 +1366,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'thumbtexture',
+      thumbtexture = true,
     },
     extends = 'frame',
   },
@@ -1389,8 +1389,8 @@ local lang = preprocess({
       },
     },
     children = {
-      'barcolor',
-      'bartexture',
+      barcolor = true,
+      bartexture = true,
     },
     extends = 'frame',
   },
@@ -1416,7 +1416,7 @@ local lang = preprocess({
       },
     },
     children = {
-      'rect',
+      rect = true,
     },
   },
   texture = {
@@ -1453,11 +1453,11 @@ local lang = preprocess({
       },
     },
     children = {
-      'animations',
-      'color',
-      'gradient',
-      'scripts',
-      'texcoords',
+      animations = true,
+      color = true,
+      gradient = true,
+      scripts = true,
+      texcoords = true,
     },
     extends = 'layoutframe',
   },
@@ -1491,12 +1491,12 @@ local lang = preprocess({
       },
     },
     children = {
-      'font',
-      'fontfamily',
-      'include',
-      'layoutframe',
-      'scopedmodifier',
-      'script',
+      font = true,
+      fontfamily = true,
+      include = true,
+      layoutframe = true,
+      scopedmodifier = true,
+      script = true,
     },
   },
   unitpositionframe = {
@@ -1504,7 +1504,7 @@ local lang = preprocess({
   },
   value = {
     children = {
-      'absvalue',
+      absvalue = true,
     },
   },
   viewinsets = {
@@ -1563,7 +1563,7 @@ local function validateRoot(root)
     assert(ty, tname .. ' is not a type')
     assert(not ty.virtual, tname .. ' is virtual and cannot be instantiated')
     local extends = false
-    for _, k in ipairs(tk) do
+    for k in pairs(tk) do
       extends = extends or ty.supertypes[k]
     end
     assert(extends, tname .. ' cannot be a child of ' .. tn)
@@ -1608,7 +1608,10 @@ local function validateRoot(root)
       text = resultText,
     }
   end
-  local result = run(root, 'toplevel', {'bindings', 'ui'})
+  local result = run(root, 'toplevel', {
+    bindings = true,
+    ui = true,
+  })
   return result, warnings
 end
 
