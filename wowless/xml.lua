@@ -1277,8 +1277,9 @@ local lang = preprocess({
     },
   },
   script = {
-    attributes = {
+    fields = {
       file = {
+        source = 'attribute',
         type = 'string',
       },
     },
@@ -1585,7 +1586,7 @@ local function validateRoot(root)
       local fields = { _xmlname = tname }
       for name, spec in pairs(ty.fields) do
         if spec.source == 'attribute' then
-          local attr = e._attr[name]
+          local attr = e._attr and e._attr[name] or nil
           assert(spec.value == nil or attr == spec.value, 'bad attribute value ' .. tostring(attr) .. ' in ' .. tname)
           assert(not spec.required or attr ~= nil, 'missing attribute ' .. name .. ' in ' .. tname)
           if spec.value == nil then
@@ -1606,6 +1607,14 @@ local function validateRoot(root)
         else
           error('invalid spec source ' .. spec.source .. ' in ' .. tname)
         end
+      end
+      if ty.text then
+        local texts = {}
+        for _, kid in ipairs(e._children) do
+          assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
+          table.insert(texts, kid._text)
+        end
+        fields.text = #texts > 0 and table.concat(texts, '\n') or nil
       end
       return fields
     else

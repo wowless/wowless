@@ -46,9 +46,9 @@ local function loader(api, log, sink)
         loadKids(e, parent)
       end,
       script = function(e)
-        if e.attr.file then
-          assert(#e.kids == 0)
-          loadFile(path.join(dir, e.attr.file))
+        if e.file then
+          assert(not e.text)
+          loadFile(path.join(dir, e.file))
         else
           assert(e.text)
           loadLuaString(filename, e.text)
