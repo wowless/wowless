@@ -1,4 +1,4 @@
-local function loader(api, skipscripts, log, sink)
+local function loader(api, log, sink)
 
   local path = require('path')
   local xml = require('wowless.xml')
@@ -63,13 +63,11 @@ local function loader(api, skipscripts, log, sink)
         loadKids(e, parent)
       end,
       script = function(e)
-        if not skipscripts then
-          if e.attr.file then
-            assert(#e.kids == 0)
-            loadFile(path.join(dir, e.attr.file))
-          else
-            loadLuaKids(e)
-          end
+        if e.attr.file then
+          assert(#e.kids == 0)
+          loadFile(path.join(dir, e.attr.file))
+        else
+          loadLuaKids(e)
         end
       end,
       scripts = function()
@@ -98,44 +96,42 @@ local function loader(api, skipscripts, log, sink)
             obj:GetParent()[e.attr.parentkey] = obj
           end
           loadKids(e, obj)
-          if not skipscripts then
-            for _, kid in ipairs(e.kids) do
-              if kid.name == 'scripts' then
-                obj.__scripts = obj.__scripts or {}
-                for _, script in ipairs(kid.kids) do
-                  local fnattr = script.attr['function']
-                  local fn
-                  if fnattr then
-                    fn = function()
-                      log(3, 'begin calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
-                      api.env[fnattr](obj)
-                      log(3, 'end calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
-                    end
-                  else
-                    local fnstr = 'return function(self, ...)\n' .. table.concat(script.kids, '\n') .. '\nend'
-                    local sfn = setfenv(assert(loadstring(fnstr, path.basename(filename)))(), api.env)
-                    fn = function()
-                      log(3, 'begin calling inline script from %s on %s', e.name, tostring(obj:GetName()))
-                      sfn(obj)
-                      log(3, 'end calling inline script from %s on %s', e.name, tostring(obj:GetName()))
-                    end
+          for _, kid in ipairs(e.kids) do
+            if kid.name == 'scripts' then
+              obj.__scripts = obj.__scripts or {}
+              for _, script in ipairs(kid.kids) do
+                local fnattr = script.attr['function']
+                local fn
+                if fnattr then
+                  fn = function()
+                    log(3, 'begin calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
+                    api.env[fnattr](obj)
+                    log(3, 'end calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
                   end
-                  local inh = script.attr.inherit
-                  local old = obj.__scripts[script.name]
-                  local wfn = fn
-                  if inh == 'prepend' then
-                    if old then
-                      wfn = function() fn() old(obj) end
-                    end
-                  elseif inh == 'append' then
-                    if old then
-                      wfn = function() old(obj) fn() end
-                    end
-                  else
-                    assert(inh == nil, 'invalid inherit tag on script')
+                else
+                  local fnstr = 'return function(self, ...)\n' .. table.concat(script.kids, '\n') .. '\nend'
+                  local sfn = setfenv(assert(loadstring(fnstr, path.basename(filename)))(), api.env)
+                  fn = function()
+                    log(3, 'begin calling inline script from %s on %s', e.name, tostring(obj:GetName()))
+                    sfn(obj)
+                    log(3, 'end calling inline script from %s on %s', e.name, tostring(obj:GetName()))
                   end
-                  obj.__scripts[script.name] = wfn
                 end
+                local inh = script.attr.inherit
+                local old = obj.__scripts[script.name]
+                local wfn = fn
+                if inh == 'prepend' then
+                  if old then
+                    wfn = function() fn() old(obj) end
+                  end
+                elseif inh == 'append' then
+                  if old then
+                    wfn = function() old(obj) fn() end
+                  end
+                else
+                  assert(inh == nil, 'invalid inherit tag on script')
+                end
+                obj.__scripts[script.name] = wfn
               end
             end
           end
@@ -211,7 +207,7 @@ local function loader(api, skipscripts, log, sink)
   return loadToc
 end
 
-local function run(loglevel, skipscripts)
+local function run(loglevel)
   local function log(level, fmt, ...)
     if level <= loglevel then
       print(string.format(fmt, ...))
@@ -229,7 +225,7 @@ local function run(loglevel, skipscripts)
     end)
   end
   local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
-  loader(api, skipscripts, log, sink)(toc)
+  loader(api, log, sink)(toc)
   return env, errors
 end
 
