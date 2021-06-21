@@ -719,9 +719,10 @@ local lang = preprocess({
     },
   },
   include = {
-    attributes = {
+    fields = {
       file = {
         required = true,
+        source = 'attribute',
         type = 'string',
       },
     },

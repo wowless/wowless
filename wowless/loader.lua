@@ -35,8 +35,7 @@ local function loader(api, log, sink)
         loadKids(e, parent)
       end,
       include = function(e)
-        assert(e.attr.file and #e.kids == 0)
-        loadFile(path.join(dir, e.attr.file))
+        loadFile(path.join(dir, e.file))
       end,
       layers = function(e, parent)
         for _, layer in ipairs(e.layers) do
