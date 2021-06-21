@@ -761,9 +761,13 @@ local lang = preprocess({
     },
   },
   layers = {
-    children = {
-      layer = true,
-    },
+    fields = {
+      layers = {
+        child = 'layer',
+        repeated = true,
+        source = 'child',
+      },
+    }
   },
   layoutframe = {
     attributes = {

@@ -38,11 +38,10 @@ local function loader(api, log, sink)
         assert(e.attr.file and #e.kids == 0)
         loadFile(path.join(dir, e.attr.file))
       end,
-      layer = function(e, parent)
-        loadKids(e, parent)
-      end,
       layers = function(e, parent)
-        loadKids(e, parent)
+        for _, layer in ipairs(e.layers) do
+          loadKids(layer, parent)
+        end
       end,
       scopedmodifier = function(e, parent)
         loadKids(e, parent)
@@ -62,7 +61,7 @@ local function loader(api, log, sink)
     }
 
     function loadElement(e, parent)
-      if api:IsIntrinsicType(e.name) then
+      if api:IsIntrinsicType(e._xmlname or e.name) then
         local inherits = {e.name}
         for _, inh in ipairs(e.attr.inherits or {}) do
           table.insert(inherits, string.lower(inh))
