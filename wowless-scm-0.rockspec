@@ -19,6 +19,7 @@ build = {
       ['wowless.loader'] = 'wowless/loader.lua',
       ['wowless.util'] = 'wowless/util.lua',
       ['wowless.xml'] = 'wowless/xml.lua',
+      ['wowless.xmllang'] = 'wowless/xmllang.lua',
     },
   },
   copy_directories = {
