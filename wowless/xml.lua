@@ -1604,7 +1604,7 @@ local function validateRoot(root)
     if next(ty.fields) then
       assert(not next(ty.attributes), 'attributes and fields in ' .. tname)
       assert(not next(ty.children), 'children and fields in ' .. tname)
-      local fields = { _xmlname = tname }
+      local fields = { type = tname }
       for name, spec in pairs(ty.fields) do
         if spec.source == 'attribute' then
           local aname = spec.attribute or name
@@ -1670,8 +1670,8 @@ local function validateRoot(root)
         return {
           attr = resultAttrs,
           kids = {},
-          name = tname,
           text = table.concat(texts, '\n'),
+          type = tname,
         }
       else
         local resultKids = {}
@@ -1685,7 +1685,7 @@ local function validateRoot(root)
         return {
           attr = resultAttrs,
           kids = resultKids,
-          name = tname,
+          type = tname,
         }
       end
     end

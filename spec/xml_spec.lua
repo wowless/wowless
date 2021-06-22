@@ -4,11 +4,11 @@ describe('xml.lua #huge', function()
   local warnings = {}
   local function check(e)
     assert.same('table', type(e))
-    if e._xmlname then
+    assert.same('string', type(e.type))
+    if type(e.attr) ~= 'table' then
       assert.Nil(e.attr)
       assert.Nil(e.kids)
     else
-      assert.same('string', type(e.name))
       assert.same('table', type(e.attr))
       assert.same('table', type(e.kids))
       for a, v in pairs(e.attr) do

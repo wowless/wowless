@@ -26,9 +26,9 @@ local function loader(api, log, sink)
       fontfamily = function(e)
         local font = e.members[1].font
         return loadElement({
-          name = font.name,
           attr = mixin(font.attr, { virtual = true, name = e.name }),
           kids = font.kids,
+          type = font.type,
         })
       end,
       frames = function(e, parent)
@@ -62,8 +62,8 @@ local function loader(api, log, sink)
     }
 
     function loadElement(e, parent)
-      if api:IsIntrinsicType(e._xmlname or e.name) then
-        local inherits = {e.name}
+      if api:IsIntrinsicType(e.type) then
+        local inherits = {e.type}
         for _, inh in ipairs(e.attr.inherits or {}) do
           table.insert(inherits, string.lower(inh))
         end
@@ -73,7 +73,7 @@ local function loader(api, log, sink)
         end
         local virtual = e.attr.virtual
         if e.attr.intrinsic then
-          assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.name)
+          assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
           virtual = true
         end
         local function constructor(obj)
@@ -83,36 +83,36 @@ local function loader(api, log, sink)
           end
           loadElements(e.kids, obj)
           for _, kid in ipairs(e.kids) do
-            if kid.name == 'scripts' then
+            if kid.type == 'scripts' then
               obj.__scripts = obj.__scripts or {}
               for _, script in ipairs(kid.kids) do
                 local fn
                 if script.func then
                   local fnattr = script.func
                   fn = function()
-                    log(3, 'begin calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
+                    log(3, 'begin calling script function %s from %s on %s', fnattr, e.type, tostring(obj:GetName()))
                     api.env[fnattr](obj)
-                    log(3, 'end calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
+                    log(3, 'end calling script function %s from %s on %s', fnattr, e.type, tostring(obj:GetName()))
                   end
                 elseif script.method then
                   local mattr = script.method
                   fn = function()
-                    log(3, 'begin calling script method %s from %s on %s', mattr, e.name, tostring(obj:GetName()))
+                    log(3, 'begin calling script method %s from %s on %s', mattr, e.type, tostring(obj:GetName()))
                     obj[mattr](obj)
-                    log(3, 'end calling script method %s from %s on %s', mattr, e.name, tostring(obj:GetName()))
+                    log(3, 'end calling script method %s from %s on %s', mattr, e.type, tostring(obj:GetName()))
                   end
                 elseif script.text then
                   local fnstr = 'return function(self, ...)\n' .. script.text .. '\nend'
                   local sfn = setfenv(assert(loadstring(fnstr, path.basename(filename)))(), api.env)
                   fn = function()
-                    log(3, 'begin calling inline script from %s on %s', e.name, tostring(obj:GetName()))
+                    log(3, 'begin calling inline script from %s on %s', e.type, tostring(obj:GetName()))
                     sfn(obj)
-                    log(3, 'end calling inline script from %s on %s', e.name, tostring(obj:GetName()))
+                    log(3, 'end calling inline script from %s on %s', e.type, tostring(obj:GetName()))
                   end
                 end
                 if fn then
                   local inh = script.inherit
-                  local old = obj.__scripts[script._xmlname]
+                  local old = obj.__scripts[script.type]
                   local wfn = fn
                   if inh == 'prepend' then
                     if old then
@@ -125,7 +125,7 @@ local function loader(api, log, sink)
                   else
                     assert(inh == nil, 'invalid inherit tag on script')
                   end
-                  obj.__scripts[script._xmlname] = wfn
+                  obj.__scripts[script.type] = wfn
                 end
               end
             end
@@ -154,7 +154,7 @@ local function loader(api, log, sink)
             assert(p, '$parent substitution requires a parent name: ' .. name)
             name = string.gsub(name, '$parent', p:GetName())
           end
-          local obj = api:CreateUIObject(e.name, name, parent, inherits)
+          local obj = api:CreateUIObject(e.type, name, parent, inherits)
           mixin(obj, mix)
           constructor(obj)
           if obj.__scripts and obj.__scripts.onload then
@@ -164,17 +164,17 @@ local function loader(api, log, sink)
           end
         end
       else
-        local fn = xmllang[e._xmlname or e.name]
+        local fn = xmllang[e.type]
         if fn then
           fn(e, parent)
         else
-          log(1, 'skipping ' .. filename .. ' ' .. e.name)
+          log(1, 'skipping ' .. filename .. ' ' .. e.type)
         end
       end
     end
 
     local root = xml.validate(filename)
-    assert(root.name == 'ui')
+    assert(root.type == 'ui')
     loadElements(root.kids)
   end
 
