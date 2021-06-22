@@ -288,6 +288,7 @@ local function mkBaseEnv()
       gsub = string.gsub,
       lower = string.lower,
       match = string.match,
+      rep = string.rep,
       sub = string.sub,
       upper = string.upper,
     },

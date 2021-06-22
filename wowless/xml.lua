@@ -1306,20 +1306,26 @@ local lang = preprocess({
     },
   },
   scripttype = {
-    attributes = {
+    fields = {
       autoenableinput = {
+        source = 'attribute',
         type = 'bool',
       },
-      ['function'] = {
+      func = {
+        attribute = 'function',
+        source = 'attribute',
         type = 'string',
       },
       inherit = {
+        source = 'attribute',
         type = 'string',
       },
       intrinsicorder = {
+        source = 'attribute',
         type = 'string',
       },
       method = {
+        source = 'attribute',
         type = 'string',
       },
     },
@@ -1601,10 +1607,11 @@ local function validateRoot(root)
       local fields = { _xmlname = tname }
       for name, spec in pairs(ty.fields) do
         if spec.source == 'attribute' then
-          local attr = e._attr and e._attr[name] or nil
+          local aname = spec.attribute or name
+          local attr = e._attr and e._attr[aname] or nil
           assert(spec.value == nil or attr == spec.value, 'bad attribute value ' .. tostring(attr) .. ' in ' .. tname)
-          assert(not spec.required or attr ~= nil, 'missing attribute ' .. name .. ' in ' .. tname)
-          if spec.value == nil then
+          assert(not spec.required or attr ~= nil, 'missing attribute ' .. aname .. ' in ' .. tname)
+          if attr and spec.value == nil then
             assert(spec.type, 'missing type on attribute field ' .. name .. ' of ' .. tname)
             fields[name] = attributeTypes[spec.type](attr)
           end

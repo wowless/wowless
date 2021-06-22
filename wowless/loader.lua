@@ -86,16 +86,22 @@ local function loader(api, log, sink)
             if kid.name == 'scripts' then
               obj.__scripts = obj.__scripts or {}
               for _, script in ipairs(kid.kids) do
-                local fnattr = script.attr['function']
                 local fn
-                if fnattr then
+                if script.func then
+                  local fnattr = script.func
                   fn = function()
                     log(3, 'begin calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
                     api.env[fnattr](obj)
                     log(3, 'end calling script function %s from %s on %s', fnattr, e.name, tostring(obj:GetName()))
                   end
-                else
-                  assert(script.text, 'script missing text')
+                elseif script.method then
+                  local mattr = script.method
+                  fn = function()
+                    log(3, 'begin calling script method %s from %s on %s', mattr, e.name, tostring(obj:GetName()))
+                    obj[mattr](obj)
+                    log(3, 'end calling script method %s from %s on %s', mattr, e.name, tostring(obj:GetName()))
+                  end
+                elseif script.text then
                   local fnstr = 'return function(self, ...)\n' .. script.text .. '\nend'
                   local sfn = setfenv(assert(loadstring(fnstr, path.basename(filename)))(), api.env)
                   fn = function()
@@ -104,21 +110,23 @@ local function loader(api, log, sink)
                     log(3, 'end calling inline script from %s on %s', e.name, tostring(obj:GetName()))
                   end
                 end
-                local inh = script.attr.inherit
-                local old = obj.__scripts[script.name]
-                local wfn = fn
-                if inh == 'prepend' then
-                  if old then
-                    wfn = function() fn() old(obj) end
+                if fn then
+                  local inh = script.inherit
+                  local old = obj.__scripts[script._xmlname]
+                  local wfn = fn
+                  if inh == 'prepend' then
+                    if old then
+                      wfn = function() fn() old(obj) end
+                    end
+                  elseif inh == 'append' then
+                    if old then
+                      wfn = function() old(obj) fn() end
+                    end
+                  else
+                    assert(inh == nil, 'invalid inherit tag on script')
                   end
-                elseif inh == 'append' then
-                  if old then
-                    wfn = function() old(obj) fn() end
-                  end
-                else
-                  assert(inh == nil, 'invalid inherit tag on script')
+                  obj.__scripts[script._xmlname] = wfn
                 end
-                obj.__scripts[script.name] = wfn
               end
             end
           end
