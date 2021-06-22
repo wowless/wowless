@@ -39,6 +39,9 @@ local function mkBaseUIObjectTypes(api)
     cooldown = {
       inherits = {'frame'},
       intrinsic = true,
+      mixin = {
+        SetSwipeColor = UNIMPLEMENTED,
+      },
       name = 'Cooldown',
     },
     editbox = {
@@ -85,6 +88,7 @@ local function mkBaseUIObjectTypes(api)
         IsEventRegistered = UNIMPLEMENTED,
         RegisterEvent = UNIMPLEMENTED,
         RegisterForDrag = UNIMPLEMENTED,
+        RegisterUnitEvent = UNIMPLEMENTED,
         SetAttribute = UNIMPLEMENTED,
         SetClampRectInsets = UNIMPLEMENTED,
         SetFrameLevel = UNIMPLEMENTED,
@@ -181,7 +185,11 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         GetMinMaxValues = UNIMPLEMENTED,
+        GetStatusBarTexture = UNIMPLEMENTED,
+        GetValue = UNIMPLEMENTED,
         SetMinMaxValues = UNIMPLEMENTED,
+        SetStatusBarColor = UNIMPLEMENTED,
+        SetValue = UNIMPLEMENTED,
       },
       name = 'StatusBar',
     },
@@ -304,6 +312,7 @@ local function mkBaseEnv()
       wipe = util.twipe,
     },
     tinsert = table.insert,
+    tonumber = tonumber,
     tostring = tostring,
     type = type,
   }, {
@@ -386,9 +395,17 @@ local function mkWowEnv(api)
     securecall = UNIMPLEMENTED,
     SetActionUIButton = UNIMPLEMENTED,
     seterrorhandler = UNIMPLEMENTED,
+    SetPortraitTexture = UNIMPLEMENTED,
+    ShouldKnowUnitHealth = UNIMPLEMENTED,
+    UnitHealthMax = STUB_NUMBER,
+    UnitIsConnected = UNIMPLEMENTED,
+    UnitName = function()
+      return 'Unitname'  -- UNIMPLEMENTED
+    end,
     UnitRace = function()
       return 'Human', 'Human', 1  -- UNIMPLEMENTED
     end,
+    UnitRealmRelationship = UNIMPLEMENTED,
     UnitSex = function()
       return 2  -- UNIMPLEMENTED
     end,
