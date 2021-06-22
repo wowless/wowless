@@ -44,6 +44,11 @@ local function mkBaseUIObjectTypes(api)
       },
       name = 'Cooldown',
     },
+    dressupmodel = {
+      inherits = {'playermodel'},
+      intrinsic = true,
+      name = 'DressUpModel',
+    },
     editbox = {
       inherits = {'frame'},
       intrinsic = true,
@@ -118,6 +123,11 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       name = 'MessageFrame',
     },
+    model = {
+      inherits = {'frame'},
+      intrinsic = true,
+      name = 'Model',
+    },
     modelscene = {
       inherits = {'parentedobject'},
       intrinsic = true,
@@ -135,7 +145,7 @@ local function mkBaseUIObjectTypes(api)
       name = 'ParentedObject',
     },
     playermodel = {
-      inherits = {'parentedobject'},
+      inherits = {'model'},
       intrinsic = true,
       name = 'PlayerModel',
     },
@@ -375,6 +385,7 @@ local function mkWowEnv(api)
     GetItemQualityColor = function()
       return 0, 0, 0  -- UNIMPLEMENTED
     end,
+    GetNumAddOns = STUB_NUMBER,
     HasAction = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
     IsConsumableAction = UNIMPLEMENTED,
@@ -386,6 +397,7 @@ local function mkWowEnv(api)
     issecure = UNIMPLEMENTED,
     IsShiftKeyDown = UNIMPLEMENTED,
     IsStackableAction = UNIMPLEMENTED,
+    IsVeteranTrialAccount = UNIMPLEMENTED,
     newproxy = function()
       return setmetatable({}, {})
     end,
