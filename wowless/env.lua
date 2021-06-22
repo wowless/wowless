@@ -31,7 +31,10 @@ local function mkBaseUIObjectTypes(api)
         end,
         GetTextWidth = STUB_NUMBER,
         IsEnabled = UNIMPLEMENTED,
+        LockHighlight = UNIMPLEMENTED,
         RegisterForClicks = UNIMPLEMENTED,
+        SetDisabledFontObject = UNIMPLEMENTED,
+        SetEnabled = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
       },
       name = 'Button',
@@ -173,8 +176,10 @@ local function mkBaseUIObjectTypes(api)
         GetWidth = STUB_NUMBER,
         Hide = UNIMPLEMENTED,
         IsShown = UNIMPLEMENTED,
+        SetAlpha = UNIMPLEMENTED,
         SetHeight = UNIMPLEMENTED,
         SetPoint = UNIMPLEMENTED,
+        SetShown = UNIMPLEMENTED,
         SetSize = UNIMPLEMENTED,
         SetWidth = UNIMPLEMENTED,
         Show = UNIMPLEMENTED,
@@ -362,6 +367,7 @@ local function mkWowEnv(api)
     C_CVar = {
       GetCVar = UNIMPLEMENTED,
       GetCVarBool = UNIMPLEMENTED,
+      GetCVarDefault = UNIMPLEMENTED,
     },
     C_Club = {},
     C_GamePad = {},
@@ -376,7 +382,10 @@ local function mkWowEnv(api)
     C_Timer = {
       After = UNIMPLEMENTED,
     },
-    C_VoiceChat = {},
+    C_VoiceChat = {
+      GetAvailableInputDevices = UNIMPLEMENTED,
+      GetAvailableOutputDevices = UNIMPLEMENTED,
+    },
     C_Widget = {},
     Enum = setmetatable({}, {
       __index = function(_, k)
@@ -393,9 +402,11 @@ local function mkWowEnv(api)
     GetActionCount = STUB_NUMBER,
     GetActionInfo = UNIMPLEMENTED,
     GetActionTexture = UNIMPLEMENTED,
+    GetAvailableLocales = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
     GetBindingText = UNIMPLEMENTED,
     GetChatWindowInfo = UNIMPLEMENTED,
+    GetCVarInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
     GetDefaultVideoOptions = UNIMPLEMENTED,
     GetInventorySlotInfo = function()
@@ -414,6 +425,7 @@ local function mkWowEnv(api)
     IsEquippedAction = UNIMPLEMENTED,
     IsGMClient = UNIMPLEMENTED,
     IsItemAction = UNIMPLEMENTED,
+    IsMacClient = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
     issecure = UNIMPLEMENTED,
     IsShiftKeyDown = UNIMPLEMENTED,
