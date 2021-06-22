@@ -21,6 +21,7 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         Disable = UNIMPLEMENTED,
+        GetFontString = UNIMPLEMENTED,
         IsEnabled = UNIMPLEMENTED,
         RegisterForClicks = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
@@ -55,6 +56,7 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         SetFontObject = UNIMPLEMENTED,
+        SetSpacing = UNIMPLEMENTED,
       },
       name = 'FontInstance',
     },
@@ -141,6 +143,7 @@ local function mkBaseUIObjectTypes(api)
         GetHeight = STUB_NUMBER,
         GetWidth = STUB_NUMBER,
         Hide = UNIMPLEMENTED,
+        SetHeight = UNIMPLEMENTED,
         SetPoint = UNIMPLEMENTED,
         SetSize = UNIMPLEMENTED,
         SetWidth = UNIMPLEMENTED,
@@ -185,6 +188,7 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'layeredregion', 'parentedobject'},
       intrinsic = true,
       mixin = {
+        GetTexCoord = UNIMPLEMENTED,
         SetDesaturated = UNIMPLEMENTED,
         SetTexCoord = UNIMPLEMENTED,
         SetTexture = UNIMPLEMENTED,
