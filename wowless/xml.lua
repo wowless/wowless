@@ -1670,7 +1670,7 @@ local function validateRoot(root)
         return {
           attr = resultAttrs,
           kids = {},
-          text = table.concat(texts, '\n'),
+          text = #texts > 0 and table.concat(texts, '\n') or nil,
           type = tname,
         }
       else
