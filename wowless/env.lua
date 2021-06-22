@@ -18,6 +18,7 @@ local function mkBaseUIObjectTypes(api)
     },
     button = {
       constructor = function(self)
+        self.__fontstring = self:CreateFontString()
         self.icon = self:CreateTexture()
       end,
       inherits = {'frame'},
@@ -25,7 +26,9 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         Disable = UNIMPLEMENTED,
         Enable = UNIMPLEMENTED,
-        GetFontString = UNIMPLEMENTED,
+        GetFontString = function(self)
+          return self.__fontstring
+        end,
         IsEnabled = UNIMPLEMENTED,
         RegisterForClicks = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
@@ -86,6 +89,9 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'parentedobject', 'region', 'scriptobject'},
       intrinsic = true,
       mixin = {
+        CreateFontString = function(self, name)
+          return api:CreateUIObject('fontstring', name, self)
+        end,
         CreateTexture = function(self, name)
           return api:CreateUIObject('texture', name, self)
         end,
