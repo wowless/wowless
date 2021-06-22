@@ -35,6 +35,8 @@ local function mkBaseUIObjectTypes(api)
         RegisterForClicks = UNIMPLEMENTED,
         SetDisabledFontObject = UNIMPLEMENTED,
         SetEnabled = UNIMPLEMENTED,
+        SetHighlightFontObject = UNIMPLEMENTED,
+        SetNormalFontObject = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
         UnlockHighlight = UNIMPLEMENTED,
       },
@@ -91,6 +93,9 @@ local function mkBaseUIObjectTypes(api)
       name = 'FontString',
     },
     frame = {
+      constructor = function(self)
+        self.__attributes = {}
+      end,
       inherits = {'parentedobject', 'region', 'scriptobject'},
       intrinsic = true,
       mixin = {
@@ -101,7 +106,9 @@ local function mkBaseUIObjectTypes(api)
           return api:CreateUIObject('texture', name, self)
         end,
         EnableMouse = UNIMPLEMENTED,
-        GetAttribute = UNIMPLEMENTED,
+        GetAttribute = function(self, name)
+          return self.__attributes[name]
+        end,
         GetFrameLevel = STUB_NUMBER,
         GetID = STUB_NUMBER,
         IgnoreDepth = UNIMPLEMENTED,
@@ -109,7 +116,17 @@ local function mkBaseUIObjectTypes(api)
         RegisterEvent = UNIMPLEMENTED,
         RegisterForDrag = UNIMPLEMENTED,
         RegisterUnitEvent = UNIMPLEMENTED,
-        SetAttribute = UNIMPLEMENTED,
+        SetAttribute = function(self, name, value)
+          local old = self.__attributes[name]
+          if old ~= value then
+            api.log(4, 'setting %s to %s', name, tostring(value))
+            self.__attributes[name] = value
+            local script = self:GetScript('OnAttributeChanged')
+            if script then
+              script(self, name, value)
+            end
+          end
+        end,
         SetClampRectInsets = UNIMPLEMENTED,
         SetFrameLevel = UNIMPLEMENTED,
         SetID = UNIMPLEMENTED,
@@ -395,6 +412,11 @@ local function mkWowEnv(api)
     C_VoiceChat = {
       GetAvailableInputDevices = UNIMPLEMENTED,
       GetAvailableOutputDevices = UNIMPLEMENTED,
+      GetCommunicationMode = UNIMPLEMENTED,
+      GetInputVolume = UNIMPLEMENTED,
+      GetMasterVolumeScale = UNIMPLEMENTED,
+      GetOutputVolume = UNIMPLEMENTED,
+      GetVADSensitivity = UNIMPLEMENTED,
     },
     C_Widget = {},
     Enum = setmetatable({}, {
@@ -449,9 +471,17 @@ local function mkWowEnv(api)
       return setmetatable({}, {})
     end,
     NUM_LE_ITEM_QUALITYS = 10,  -- UNIMPLEMENTED
+    pcall = pcall,
     print = print,
     RegisterStaticConstants = UNIMPLEMENTED,
-    securecall = UNIMPLEMENTED,
+    securecall = function(func, ...)
+      assert(func, 'securecall of nil function')
+      if type(func) == 'string' then
+        assert(api.env[func], 'securecall of unknown function ' .. func)
+        func = api.env[func]
+      end
+      func(...)
+    end,
     SetActionUIButton = UNIMPLEMENTED,
     seterrorhandler = UNIMPLEMENTED,
     SetPortraitTexture = UNIMPLEMENTED,
@@ -479,6 +509,11 @@ local globalStrings = {
   GUILD_REPUTATION_WARNING_GENERIC = 'You will lose one rank of guild reputation with your previous guild.',
   PRESS_TAB = 'Press Tab',
   REMOVE_GUILDMEMBER_LABEL = 'Are you sure you want to remove %s from the guild?',
+  SOUND_CACHE_SIZE_LARGE = 'Large (%dMB)',
+  SOUND_CACHE_SIZE_SMALL = 'Small (%dMB)',
+  SOUND_CHANNELS_HIGH = 'High (%d)',
+  SOUND_CHANNELS_LOW = 'Low (%d)',
+  SOUND_CHANNELS_MEDIUM = 'Medium (%d)',
   VOID_STORAGE_DEPOSIT_CONFIRMATION = 'Depositing this item will remove all modifications and make it non-refundable and non-tradeable.',
 }
 
