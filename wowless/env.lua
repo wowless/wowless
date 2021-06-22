@@ -17,10 +17,14 @@ local function mkBaseUIObjectTypes(api)
       name = 'AnimationGroup',
     },
     button = {
+      constructor = function(self)
+        self.icon = self:CreateTexture()
+      end,
       inherits = {'frame'},
       intrinsic = true,
       mixin = {
         Disable = UNIMPLEMENTED,
+        Enable = UNIMPLEMENTED,
         GetFontString = UNIMPLEMENTED,
         IsEnabled = UNIMPLEMENTED,
         RegisterForClicks = UNIMPLEMENTED,
@@ -126,6 +130,9 @@ local function mkBaseUIObjectTypes(api)
     model = {
       inherits = {'frame'},
       intrinsic = true,
+      mixin = {
+        SetRotation = UNIMPLEMENTED,
+      },
       name = 'Model',
     },
     modelscene = {
@@ -354,6 +361,9 @@ local function mkWowEnv(api)
         return {}  -- UNIMPLEMENTED
       end,
     },
+    C_StorePublic = {
+      IsDisabledByParentalControls = UNIMPLEMENTED,
+    },
     C_Timer = {
       After = UNIMPLEMENTED,
     },
@@ -398,6 +408,9 @@ local function mkWowEnv(api)
     IsShiftKeyDown = UNIMPLEMENTED,
     IsStackableAction = UNIMPLEMENTED,
     IsVeteranTrialAccount = UNIMPLEMENTED,
+    Kiosk = {
+      IsEnabled = UNIMPLEMENTED,
+    },
     newproxy = function()
       return setmetatable({}, {})
     end,
