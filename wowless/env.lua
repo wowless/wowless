@@ -36,6 +36,7 @@ local function mkBaseUIObjectTypes(api)
         SetDisabledFontObject = UNIMPLEMENTED,
         SetEnabled = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
+        UnlockHighlight = UNIMPLEMENTED,
       },
       name = 'Button',
     },
@@ -446,6 +447,8 @@ local function mkWowEnv(api)
     seterrorhandler = UNIMPLEMENTED,
     SetPortraitTexture = UNIMPLEMENTED,
     ShouldKnowUnitHealth = UNIMPLEMENTED,
+    Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
+    Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
     UnitHealthMax = STUB_NUMBER,
     UnitIsConnected = UNIMPLEMENTED,
     UnitName = function()
