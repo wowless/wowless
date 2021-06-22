@@ -55,6 +55,7 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'uiobject'},
       intrinsic = true,
       mixin = {
+        GetFont = UNIMPLEMENTED,
         SetFontObject = UNIMPLEMENTED,
         SetSpacing = UNIMPLEMENTED,
       },

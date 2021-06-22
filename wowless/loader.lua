@@ -23,6 +23,9 @@ local function loader(api, log, sink)
     end
 
     local xmllang = {
+      buttontext = function(e, parent)
+        return loadElement(mixin({}, e, { type = 'fontstring' }), parent)
+      end,
       fontfamily = function(e)
         local font = e.members[1].font
         return loadElement({
