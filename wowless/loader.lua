@@ -90,7 +90,6 @@ local function loader(api, log, sink)
           loadElements(e.kids, obj)
           for _, kid in ipairs(e.kids) do
             if kid.type == 'scripts' then
-              obj.__scripts = obj.__scripts or {}
               for _, script in ipairs(kid.kids) do
                 local fn
                 if script.func then
@@ -118,7 +117,7 @@ local function loader(api, log, sink)
                 end
                 if fn then
                   local inh = script.inherit
-                  local old = obj.__scripts[script.type]
+                  local old = obj:GetScript(script.type)
                   local wfn = fn
                   if inh == 'prepend' then
                     if old then
@@ -131,7 +130,7 @@ local function loader(api, log, sink)
                   else
                     assert(inh == nil, 'invalid inherit tag on script')
                   end
-                  obj.__scripts[script.type] = wfn
+                  obj:SetScript(script.type, wfn)
                 end
               end
             end
@@ -163,9 +162,10 @@ local function loader(api, log, sink)
           local obj = api:CreateUIObject(e.type, name, parent, inherits)
           mixin(obj, mix)
           constructor(obj)
-          if obj.__scripts and obj.__scripts.onload then
+          local onload = obj.GetScript and obj:GetScript('OnLoad')
+          if onload then
             log(4, 'begin onload for ' .. tostring(obj:GetName()))
-            sink(obj.__scripts.onload)
+            sink(function() onload(obj) end)
             log(4, 'end onload for ' .. tostring(obj:GetName()))
           end
         end

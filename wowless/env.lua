@@ -7,7 +7,7 @@ local STUB_NUMBER = function() return 1 end
 local function mkBaseUIObjectTypes(api)
   return {
     actor = {
-      inherits = {'parentedobject'},
+      inherits = {'parentedobject', 'scriptobject'},
       intrinsic = true,
       name = 'Actor',
     },
@@ -147,7 +147,7 @@ local function mkBaseUIObjectTypes(api)
       name = 'Model',
     },
     modelscene = {
-      inherits = {'parentedobject'},
+      inherits = {'frame'},
       intrinsic = true,
       name = 'ModelScene',
     },
@@ -188,11 +188,18 @@ local function mkBaseUIObjectTypes(api)
       name = 'Region',
     },
     scriptobject = {
+      constructor = function(self)
+        self.__scripts = {}
+      end,
       inherits = {},
       intrinsic = true,
       mixin = {
-        GetScript = UNIMPLEMENTED,
-        SetScript = UNIMPLEMENTED,
+        GetScript = function(self, name)
+          return self.__scripts[string.lower(name)]
+        end,
+        SetScript = function(self, name, script)
+          self.__scripts[string.lower(name)] = script
+        end,
       },
       name = 'ScriptObject',
     },
@@ -275,6 +282,7 @@ local function mixinType(api, type, obj)
     assert(api.uiobjectTypes[inh], inh .. ' is not a uiobject type')
     mixinType(api, api.uiobjectTypes[inh], obj)
   end
+  api.log(4, 'mixing in ' .. type.name)
   Mixin(obj, type.mixin)
   if type.constructor then
     type.constructor(obj)
