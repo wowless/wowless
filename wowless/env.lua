@@ -29,6 +29,7 @@ local function mkBaseUIObjectTypes(api)
         GetFontString = function(self)
           return self.__fontstring
         end,
+        GetTextWidth = STUB_NUMBER,
         IsEnabled = UNIMPLEMENTED,
         RegisterForClicks = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
@@ -171,6 +172,7 @@ local function mkBaseUIObjectTypes(api)
         GetHeight = STUB_NUMBER,
         GetWidth = STUB_NUMBER,
         Hide = UNIMPLEMENTED,
+        IsShown = UNIMPLEMENTED,
         SetHeight = UNIMPLEMENTED,
         SetPoint = UNIMPLEMENTED,
         SetSize = UNIMPLEMENTED,
@@ -351,6 +353,7 @@ end
 
 local function mkWowEnv(api)
   return {
+    AntiAliasingSupported = UNIMPLEMENTED,
     CreateFrame = function(type, name)
       local ltype = string.lower(type)
       assert(_InheritsFrom(api, ltype, 'frame'), type .. ' does not inherit from frame')
@@ -401,6 +404,8 @@ local function mkWowEnv(api)
     GetItemQualityColor = function()
       return 0, 0, 0  -- UNIMPLEMENTED
     end,
+    GetMaxRenderScale = UNIMPLEMENTED,
+    GetMinRenderScale = UNIMPLEMENTED,
     GetNumAddOns = STUB_NUMBER,
     HasAction = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
@@ -417,6 +422,7 @@ local function mkWowEnv(api)
     Kiosk = {
       IsEnabled = UNIMPLEMENTED,
     },
+    MultiSampleAntiAliasingSupported = UNIMPLEMENTED,
     newproxy = function()
       return setmetatable({}, {})
     end,

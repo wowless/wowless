@@ -37,6 +37,9 @@ local function loader(api, log, sink)
       frames = function(e, parent)
         loadElements(e.frames, parent)
       end,
+      highlighttexture = function(e, parent)
+        loadElement(mixin({}, e, { type = 'texture' }), parent)
+      end,
       include = function(e)
         loadFile(path.join(dir, e.file))
       end,
