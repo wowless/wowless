@@ -65,6 +65,14 @@ local function validateRoot(root)
     local ty = lang[tname]
     assert(ty, tname .. ' is not a type')
     assert(not ty.virtual, tname .. ' is virtual and cannot be instantiated')
+    local extends = false
+    for k in pairs(tk) do
+      extends = extends or ty.supertypes[k]
+    end
+    if not extends then
+      table.insert(warnings, tname .. ' cannot be a child of ' .. tn)
+      return nil
+    end
     if next(ty.fields) then
       assert(not next(ty.attributes), 'attributes and fields in ' .. tname)
       assert(not next(ty.children), 'children and fields in ' .. tname)
@@ -84,7 +92,10 @@ local function validateRoot(root)
           local kids = {}
           for _, kid in ipairs(e._children) do
             if kid._name and lang[string.lower(kid._name)].supertypes[cname] then
-              table.insert(kids, run(kid, tname, { [cname] = true }))
+              local newkid = run(kid, tname, { [cname] = true })
+              if newkid then
+                table.insert(kids, newkid)
+              end
             end
           end
           assert(not spec.required or #kids > 0, 'missing required child ' .. cname .. ' of ' .. tname)
@@ -104,11 +115,6 @@ local function validateRoot(root)
       end
       return fields
     else
-      local extends = false
-      for k in pairs(tk) do
-        extends = extends or ty.supertypes[k]
-      end
-      assert(extends, tname .. ' cannot be a child of ' .. tn)
       local resultAttrs = {}
       for k, v in pairs(e._attr or {}) do
         local an = string.lower(k)
@@ -143,7 +149,10 @@ local function validateRoot(root)
           if kid._type == 'TEXT' then
             table.insert(warnings, 'ignoring text kid of ' .. tname)
           else
-            table.insert(resultKids, run(kid, tname, ty.children))
+            local newkid = run(kid, tname, ty.children)
+            if newkid then
+              table.insert(resultKids, newkid)
+            end
           end
         end
         return {

@@ -330,6 +330,7 @@ local function mkBaseEnv()
       format = string.format,
       gmatch = string.gmatch,
       gsub = string.gsub,
+      len = string.len,
       lower = string.lower,
       match = string.match,
       rep = string.rep,

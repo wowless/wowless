@@ -66,6 +66,9 @@ describe('xml.lua #huge', function()
       ['wowui/classic/AddOns/Blizzard_SocialUI/Blizzard_SocialUI.xml'] = {
         'ignoring text kid of texture',
       },
+      ['wowui/classic/FrameXML/ContainerFrame.xml'] = {
+        'scripts cannot be a child of texture',
+      },
       ['wowui/classic/FrameXML/FriendsFrame.xml'] = {
         'attribute pointG is not supported by anchor',
       },

@@ -1464,7 +1464,6 @@ return {
       animations = true,
       color = true,
       gradient = true,
-      scripts = true,
       texcoords = true,
     },
     extends = 'layoutframe',
