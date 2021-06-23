@@ -432,6 +432,7 @@ local function mkWowEnv(api)
       GetVADSensitivity = UNIMPLEMENTED,
     },
     C_Widget = {},
+    DropCursorMoney = UNIMPLEMENTED,
     Enum = setmetatable({}, {
       __index = function(_, k)
         return setmetatable({}, {

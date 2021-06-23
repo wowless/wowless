@@ -108,6 +108,7 @@ local function loader(api, log, sink)
                   local fnattr = script.func
                   fn = function()
                     log(3, 'begin calling script function %s from %s on %s', fnattr, e.type, tostring(obj:GetName()))
+                    assert(api.env[fnattr], 'unknown script function ' .. fnattr)
                     api.env[fnattr](obj)
                     log(3, 'end calling script function %s from %s on %s', fnattr, e.type, tostring(obj:GetName()))
                   end
