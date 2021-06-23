@@ -141,6 +141,7 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         GetOwner = UNIMPLEMENTED,
+        IsOwned = UNIMPLEMENTED,
       },
       name = 'GameTooltip',
     },
