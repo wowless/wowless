@@ -163,9 +163,6 @@ local function loader(api, log, sink)
           }
         else
           local name = e.attr.name
-          if virtual and ignoreVirtual then
-            api.log(1, 'ignoring virtual on ' .. tostring(e.attr.name))
-          end
           if name and string.match(name, '$parent') then
             local p = parent
             while p ~= nil and not p:GetName() do
@@ -173,6 +170,9 @@ local function loader(api, log, sink)
             end
             assert(p, '$parent substitution requires a parent name: ' .. name)
             name = string.gsub(name, '$parent', p:GetName())
+          end
+          if virtual and ignoreVirtual then
+            api.log(1, 'ignoring virtual on ' .. tostring(name))
           end
           local obj = api:CreateUIObject(e.type, name, parent, inherits)
           mixin(obj, mix)
