@@ -16,9 +16,9 @@ local function loader(api, log, sink)
 
     local loadElement
 
-    local function loadElements(t, parent)
+    local function loadElements(t, parent, ignoreVirtual)
       for _, v in ipairs(t) do
-        loadElement(v, parent)
+        loadElement(v, parent, ignoreVirtual)
       end
     end
 
@@ -37,8 +37,8 @@ local function loader(api, log, sink)
           type = font.type,
         })
       end,
-      frames = function(e, parent)
-        loadElements(e.frames, parent)
+      frames = function(e, parent, ignoreVirtual)
+        loadElements(e.frames, parent, ignoreVirtual)
       end,
       highlighttexture = function(e, parent)
         loadElement(mixin({}, e, { type = 'texture' }), parent)
@@ -46,11 +46,11 @@ local function loader(api, log, sink)
       include = function(e)
         loadFile(path.join(dir, e.file))
       end,
-      layers = function(e, parent)
+      layers = function(e, parent, ignoreVirtual)
         for _, layer in ipairs(e.layers) do
-          loadElements(layer.fontstrings, parent)
-          loadElements(layer.lines, parent)
-          loadElements(layer.textures, parent)
+          loadElements(layer.fontstrings, parent, ignoreVirtual)
+          loadElements(layer.lines, parent, ignoreVirtual)
+          loadElements(layer.textures, parent, ignoreVirtual)
         end
       end,
       normaltext = function(e, parent)
@@ -79,7 +79,7 @@ local function loader(api, log, sink)
       end,
     }
 
-    function loadElement(e, parent)
+    function loadElement(e, parent, ignoreVirtual)
       if api:IsIntrinsicType(e.type) then
         local inherits = {e.type}
         for _, inh in ipairs(e.attr.inherits or {}) do
@@ -99,7 +99,7 @@ local function loader(api, log, sink)
             log(3, 'attaching ' .. e.attr.parentkey)
             obj:GetParent()[e.attr.parentkey] = obj
           end
-          loadElements(e.kids, obj)
+          loadElements(e.kids, obj, true)
           for _, kid in ipairs(e.kids) do
             if kid.type == 'scripts' then
               for _, script in ipairs(kid.kids) do
@@ -148,7 +148,7 @@ local function loader(api, log, sink)
             end
           end
         end
-        if virtual then
+        if virtual and not ignoreVirtual then
           assert(e.attr.name, 'cannot create anonymous virtual uiobject')
           local name = string.lower(e.attr.name)
           if api.uiobjectTypes[name] then
@@ -163,6 +163,9 @@ local function loader(api, log, sink)
           }
         else
           local name = e.attr.name
+          if virtual and ignoreVirtual then
+            api.log(1, 'ignoring virtual on ' .. tostring(e.attr.name))
+          end
           if name and string.match(name, '$parent') then
             local p = parent
             while p ~= nil and not p:GetName() do
@@ -184,7 +187,7 @@ local function loader(api, log, sink)
       else
         local fn = xmllang[e.type]
         if fn then
-          fn(e, parent)
+          fn(e, parent, ignoreVirtual)
         else
           log(1, 'skipping ' .. filename .. ' ' .. e.type)
         end

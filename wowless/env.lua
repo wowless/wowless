@@ -19,7 +19,6 @@ local function mkBaseUIObjectTypes(api)
     button = {
       constructor = function(self)
         self.__fontstring = self:CreateFontString()
-        self.icon = self:CreateTexture()
       end,
       inherits = {'frame'},
       intrinsic = true,
