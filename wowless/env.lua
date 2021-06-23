@@ -132,6 +132,7 @@ local function mkBaseUIObjectTypes(api)
         end,
         SetClampRectInsets = UNIMPLEMENTED,
         SetFrameLevel = UNIMPLEMENTED,
+        SetMouseClickEnabled = UNIMPLEMENTED,
         SetID = UNIMPLEMENTED,
       },
       name = 'Frame',
