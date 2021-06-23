@@ -26,6 +26,9 @@ local function loader(api, log, sink)
       buttontext = function(e, parent)
         return loadElement(mixin({}, e, { type = 'fontstring' }), parent)
       end,
+      disabledtexture = function(e, parent)
+        loadElement(mixin({}, e, { type = 'texture' }), parent)
+      end,
       fontfamily = function(e)
         local font = e.members[1].font
         return loadElement({
@@ -49,6 +52,15 @@ local function loader(api, log, sink)
           loadElements(layer.lines, parent)
           loadElements(layer.textures, parent)
         end
+      end,
+      normaltext = function(e, parent)
+        loadElement(mixin({}, e, { type = 'fontstring' }), parent)
+      end,
+      normaltexture = function(e, parent)
+        loadElement(mixin({}, e, { type = 'texture' }), parent)
+      end,
+      pushedtexture = function(e, parent)
+        loadElement(mixin({}, e, { type = 'texture' }), parent)
       end,
       scopedmodifier = function(e, parent)
         loadElements(e.kids, parent)
