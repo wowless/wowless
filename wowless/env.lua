@@ -466,6 +466,9 @@ local function mkWowEnv(api)
     GetItemQualityColor = function()
       return 0, 0, 0  -- UNIMPLEMENTED
     end,
+    GetLootMethod = function()
+      return 'freeforall'  -- UNIMPLEMENTED
+    end,
     GetMaxRenderScale = UNIMPLEMENTED,
     GetMinRenderScale = UNIMPLEMENTED,
     GetModifiedClick = UNIMPLEMENTED,
