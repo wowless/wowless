@@ -346,6 +346,8 @@ local function mkBaseEnv()
     max = math.max,
     next = next,
     pairs = pairs,
+    pcall = pcall,
+    print = print,
     rawget = rawget,
     select = select,
     setmetatable = setmetatable,
@@ -470,8 +472,6 @@ local function mkWowEnv(api)
       return setmetatable({}, {})
     end,
     NUM_LE_ITEM_QUALITYS = 10,  -- UNIMPLEMENTED
-    pcall = pcall,
-    print = print,
     RegisterStaticConstants = UNIMPLEMENTED,
     securecall = function(func, ...)
       assert(func, 'securecall of nil function')
