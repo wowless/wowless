@@ -221,16 +221,20 @@ local function mkBaseUIObjectTypes(api)
     },
     scriptobject = {
       constructor = function(self)
-        self.__scripts = {}
+        self.__scripts = {
+          [0] = {},
+          [1] = {},
+          [2] = {},
+        }
       end,
       inherits = {},
       intrinsic = true,
       mixin = {
-        GetScript = function(self, name)
-          return self.__scripts[string.lower(name)]
+        GetScript = function(self, name, bindingType)
+          return self.__scripts[bindingType or 1][string.lower(name)]
         end,
         SetScript = function(self, name, script)
-          self.__scripts[string.lower(name)] = script
+          self.__scripts[1][string.lower(name)] = script
         end,
       },
       name = 'ScriptObject',
