@@ -476,6 +476,7 @@ local function mkWowEnv(api)
     issecure = UNIMPLEMENTED,
     IsShiftKeyDown = UNIMPLEMENTED,
     IsStackableAction = UNIMPLEMENTED,
+    IsTrialAccount = UNIMPLEMENTED,
     IsVeteranTrialAccount = UNIMPLEMENTED,
     Kiosk = {
       IsEnabled = UNIMPLEMENTED,
