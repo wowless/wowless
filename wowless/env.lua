@@ -354,6 +354,7 @@ local function mkBaseEnv()
     },
     getfenv = getfenv,
     getmetatable = getmetatable,
+    getn = table.getn,
     ipairs = ipairs,
     math = {
       max = math.max,
@@ -458,6 +459,7 @@ local function mkWowEnv(api)
     GetCVarInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
     GetDefaultVideoOptions = UNIMPLEMENTED,
+    GetGameTime = UNIMPLEMENTED,
     GetInventorySlotInfo = function()
       return 'UNIMPLEMENTED'
     end,
@@ -466,13 +468,18 @@ local function mkWowEnv(api)
     end,
     GetMaxRenderScale = UNIMPLEMENTED,
     GetMinRenderScale = UNIMPLEMENTED,
+    GetModifiedClick = UNIMPLEMENTED,
     GetNumAddOns = STUB_NUMBER,
+    GetText = UNIMPLEMENTED,
     HasAction = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
     IsConsumableAction = UNIMPLEMENTED,
     IsControlKeyDown = UNIMPLEMENTED,
     IsEquippedAction = UNIMPLEMENTED,
     IsGMClient = UNIMPLEMENTED,
+    IsInGroup = UNIMPLEMENTED,
+    IsInGuild = UNIMPLEMENTED,
+    IsInInstance = UNIMPLEMENTED,
     IsItemAction = UNIMPLEMENTED,
     IsMacClient = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
@@ -481,6 +488,7 @@ local function mkWowEnv(api)
     IsStackableAction = UNIMPLEMENTED,
     IsTrialAccount = UNIMPLEMENTED,
     IsVeteranTrialAccount = UNIMPLEMENTED,
+    IsWindowsClient = UNIMPLEMENTED,
     Kiosk = {
       IsEnabled = UNIMPLEMENTED,
     },
@@ -489,6 +497,7 @@ local function mkWowEnv(api)
       return setmetatable({}, {})
     end,
     NUM_LE_ITEM_QUALITYS = 10,  -- UNIMPLEMENTED
+    PlaySound = UNIMPLEMENTED,
     RegisterStaticConstants = UNIMPLEMENTED,
     securecall = function(func, ...)
       assert(func, 'securecall of nil function')
@@ -502,13 +511,21 @@ local function mkWowEnv(api)
     seterrorhandler = UNIMPLEMENTED,
     SetPortraitTexture = UNIMPLEMENTED,
     ShouldKnowUnitHealth = UNIMPLEMENTED,
+    ShowBossFrameWhenUninteractable = UNIMPLEMENTED,
     Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
+    UnitExists = UNIMPLEMENTED,
     UnitHealthMax = STUB_NUMBER,
     UnitIsConnected = UNIMPLEMENTED,
+    UnitIsDead = UNIMPLEMENTED,
+    UnitIsGhost = UNIMPLEMENTED,
+    UnitIsGroupLeader = UNIMPLEMENTED,
+    UnitIsVisible = UNIMPLEMENTED,
     UnitName = function()
       return 'Unitname'  -- UNIMPLEMENTED
     end,
+    UnitPower = STUB_NUMBER,
+    UnitPowerMax = STUB_NUMBER,
     UnitPowerType = function()
       return 0, 'MANA'  -- UNIMPLEMENTED
     end,
