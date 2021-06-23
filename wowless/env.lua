@@ -246,9 +246,13 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'frame'},
       intrinsic = true,
       mixin = {
-        GetMinMaxValues = UNIMPLEMENTED,
+        GetMinMaxValues = function()
+          return 0, 0  -- UNIMPLEMENTED
+        end,
         GetStatusBarTexture = UNIMPLEMENTED,
-        GetValue = UNIMPLEMENTED,
+        GetValue = function()
+          return 0  -- UNIMPLEMENTED
+        end,
         SetMinMaxValues = UNIMPLEMENTED,
         SetStatusBarColor = UNIMPLEMENTED,
         SetValue = UNIMPLEMENTED,
