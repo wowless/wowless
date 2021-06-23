@@ -182,11 +182,8 @@ local function loader(api, log, sink)
           local obj = api:CreateUIObject(e.type, name, parent, inherits)
           mixin(obj, mix)
           constructor(obj)
-          local onload = obj.GetScript and obj:GetScript('OnLoad')
-          if onload then
-            log(4, 'begin onload for ' .. tostring(obj:GetName()))
-            sink(function() onload(obj) end)
-            log(4, 'end onload for ' .. tostring(obj:GetName()))
+          if obj.__RunScript then
+            sink(function() obj:__RunScript('OnLoad') end)
           end
         end
       else

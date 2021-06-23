@@ -226,6 +226,16 @@ local function mkBaseUIObjectTypes(api)
           [1] = {},
           [2] = {},
         }
+        self.__RunScript = function(_, name, ...)
+          for i = 0, 2 do
+            local script = self:GetScript(name, i)
+            if script then
+              api.log(4, 'begin %s for %s%s', name, self:GetObjectType(), self:GetName() or '')
+              script(self, ...)
+              api.log(4, 'end %s for %s%s', name, self:GetObjectType(), self:GetName() or '')
+            end
+          end
+        end
       end,
       inherits = {},
       intrinsic = true,
@@ -290,6 +300,9 @@ local function mkBaseUIObjectTypes(api)
         GetName = function(self)
           return self.__name
         end,
+        GetObjectType = function(self)
+          return self.__type
+        end,
       },
       name = 'UIObject',
     },
@@ -339,6 +352,7 @@ local function _CreateUIObject(api, typename, objname, parent, inherits)
   local obj = {
     __name = objname,
     __parent = parent,
+    __type = typename,
   }
   mixinType(api, type, obj)
   for _, inh in ipairs(inherits or {}) do
