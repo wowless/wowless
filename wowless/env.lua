@@ -373,6 +373,7 @@ local function mkBaseEnv()
     rawget = rawget,
     select = select,
     setmetatable = setmetatable,
+    sort = table.sort,
     string = {
       find = string.find,
       format = string.format,
@@ -387,6 +388,7 @@ local function mkBaseEnv()
     },
     strlower = string.lower,
     strsub = string.sub,
+    strupper = string.upper,
     table = {
       insert = table.insert,
       wipe = util.twipe,
@@ -465,9 +467,13 @@ local function mkWowEnv(api)
     GetAvailableLocales = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
     GetBindingText = UNIMPLEMENTED,
+    GetChatTypeIndex = STUB_NUMBER,
     GetChatWindowInfo = UNIMPLEMENTED,
     GetCVarInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
+    GetDefaultLanguage = function()
+      return 'Common', 7  -- UNIMPLEMENTED
+    end,
     GetDefaultVideoOptions = UNIMPLEMENTED,
     GetGameTime = UNIMPLEMENTED,
     GetInventorySlotInfo = function()
