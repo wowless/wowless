@@ -358,6 +358,7 @@ local function mkBaseEnv()
     bit = {
       bor = bitlib.bor,
     },
+    ceil = math.ceil,
     getfenv = getfenv,
     getmetatable = getmetatable,
     getn = table.getn,
