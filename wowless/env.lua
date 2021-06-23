@@ -257,6 +257,7 @@ local function mkBaseUIObjectTypes(api)
         end,
         SetMinMaxValues = UNIMPLEMENTED,
         SetStatusBarColor = UNIMPLEMENTED,
+        SetStatusBarTexture = UNIMPLEMENTED,
         SetValue = UNIMPLEMENTED,
       },
       name = 'StatusBar',
@@ -507,6 +508,9 @@ local function mkWowEnv(api)
     UnitIsConnected = UNIMPLEMENTED,
     UnitName = function()
       return 'Unitname'  -- UNIMPLEMENTED
+    end,
+    UnitPowerType = function()
+      return 0, 'MANA'  -- UNIMPLEMENTED
     end,
     UnitRace = function()
       return 'Human', 'Human', 1  -- UNIMPLEMENTED
