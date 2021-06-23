@@ -195,6 +195,9 @@ local function mkBaseUIObjectTypes(api)
         ClearAllPoints = UNIMPLEMENTED,
         GetEffectiveScale = STUB_NUMBER,
         GetHeight = STUB_NUMBER,
+        GetNumPoints = function()
+          return 0  -- UNIMPLEMENTED
+        end,
         GetWidth = STUB_NUMBER,
         Hide = UNIMPLEMENTED,
         IsShown = UNIMPLEMENTED,
