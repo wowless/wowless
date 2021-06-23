@@ -82,6 +82,7 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         GetFont = UNIMPLEMENTED,
         SetFontObject = UNIMPLEMENTED,
+        SetJustifyH = UNIMPLEMENTED,
         SetSpacing = UNIMPLEMENTED,
       },
       name = 'FontInstance',
