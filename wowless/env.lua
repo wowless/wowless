@@ -555,20 +555,6 @@ local function mkWowEnv(api)
   }
 end
 
-local globalStrings = {
-  -- luacheck: no max line length
-  CONFIRM_CONTINUE = 'Do you wish to continue?',
-  GUILD_REPUTATION_WARNING_GENERIC = 'You will lose one rank of guild reputation with your previous guild.',
-  PRESS_TAB = 'Press Tab',
-  REMOVE_GUILDMEMBER_LABEL = 'Are you sure you want to remove %s from the guild?',
-  SOUND_CACHE_SIZE_LARGE = 'Large (%dMB)',
-  SOUND_CACHE_SIZE_SMALL = 'Small (%dMB)',
-  SOUND_CHANNELS_HIGH = 'High (%d)',
-  SOUND_CHANNELS_LOW = 'Low (%d)',
-  SOUND_CHANNELS_MEDIUM = 'Medium (%d)',
-  VOID_STORAGE_DEPOSIT_CONFIRMATION = 'Depositing this item will remove all modifications and make it non-refundable and non-tradeable.',
-}
-
 local function new(log)
   local env = mkBaseEnv()
   local api = {
@@ -579,7 +565,7 @@ local function new(log)
     log = log,
   }
   api.uiobjectTypes = mkBaseUIObjectTypes(api)
-  Mixin(env, mkWowEnv(api), globalStrings)
+  Mixin(env, mkWowEnv(api), require('wowless.globalstrings'))
   return env, api
 end
 

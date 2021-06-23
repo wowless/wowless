@@ -16,6 +16,7 @@ build = {
   install = {
     lua = {
       ['wowless.env'] = 'wowless/env.lua',
+      ['wowless.globalstrings'] = 'wowless/globalstrings.lua',
       ['wowless.loader'] = 'wowless/loader.lua',
       ['wowless.util'] = 'wowless/util.lua',
       ['wowless.xml'] = 'wowless/xml.lua',
