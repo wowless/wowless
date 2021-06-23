@@ -134,6 +134,7 @@ local function mkBaseUIObjectTypes(api)
         end,
         SetClampRectInsets = UNIMPLEMENTED,
         SetFrameLevel = UNIMPLEMENTED,
+        SetFrameStrata = UNIMPLEMENTED,
         SetHitRectInsets = UNIMPLEMENTED,
         SetMouseClickEnabled = UNIMPLEMENTED,
         SetID = UNIMPLEMENTED,
@@ -208,6 +209,7 @@ local function mkBaseUIObjectTypes(api)
         IsShown = UNIMPLEMENTED,
         SetAlpha = UNIMPLEMENTED,
         SetHeight = UNIMPLEMENTED,
+        SetParent = UNIMPLEMENTED,
         SetPoint = UNIMPLEMENTED,
         SetScale = UNIMPLEMENTED,
         SetShown = UNIMPLEMENTED,
@@ -424,6 +426,9 @@ local function mkWowEnv(api)
         return {}  -- UNIMPLEMENTED
       end,
     },
+    C_Social = {
+      TwitterCheckStatus = UNIMPLEMENTED,
+    },
     C_StorePublic = {
       IsDisabledByParentalControls = UNIMPLEMENTED,
     },
@@ -456,6 +461,7 @@ local function mkWowEnv(api)
     GetActionCount = STUB_NUMBER,
     GetActionInfo = UNIMPLEMENTED,
     GetActionTexture = UNIMPLEMENTED,
+    GetAddOnEnableState = UNIMPLEMENTED,
     GetAvailableLocales = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
     GetBindingText = UNIMPLEMENTED,
@@ -476,9 +482,12 @@ local function mkWowEnv(api)
     GetMaxRenderScale = UNIMPLEMENTED,
     GetMinRenderScale = UNIMPLEMENTED,
     GetModifiedClick = UNIMPLEMENTED,
-    GetNumAddOns = STUB_NUMBER,
+    GetNumAddOns = function()
+      return 0  -- UNIMPLEMENTED
+    end,
     GetText = UNIMPLEMENTED,
     HasAction = UNIMPLEMENTED,
+    IsAddonVersionCheckEnabled = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
     IsConsumableAction = UNIMPLEMENTED,
     IsControlKeyDown = UNIMPLEMENTED,
