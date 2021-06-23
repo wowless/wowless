@@ -621,7 +621,7 @@ return {
         type = 'bool',
       },
       securemixin = {
-        type = 'string',
+        type = 'stringlist',
       },
       useparentlevel = {
         type = 'bool',

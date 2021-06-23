@@ -89,6 +89,9 @@ local function loader(api, log, sink)
         for _, m in ipairs(e.attr.mixin or {}) do
           mixin(mix, api.env[m])
         end
+        for _, m in ipairs(e.attr.securemixin or {}) do
+          mixin(mix, api.env[m])
+        end
         local virtual = e.attr.virtual
         if e.attr.intrinsic then
           assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
@@ -116,6 +119,7 @@ local function loader(api, log, sink)
                   local mattr = script.method
                   fn = function()
                     log(3, 'begin calling script method %s from %s on %s', mattr, e.type, tostring(obj:GetName()))
+                    assert(obj[mattr], 'unknown script method ' .. mattr)
                     obj[mattr](obj)
                     log(3, 'end calling script method %s from %s on %s', mattr, e.type, tostring(obj:GetName()))
                   end
