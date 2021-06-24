@@ -442,10 +442,14 @@ local function mkWowEnv(api)
     CreateFont = function(name)
       return _CreateUIObject(api, 'font', name)
     end,
-    CreateFrame = function(type, name)
+    CreateFrame = function(type, name, parent, templates)
       local ltype = string.lower(type)
       assert(_InheritsFrom(api, ltype, 'frame'), type .. ' does not inherit from frame')
-      return _CreateUIObject(api, ltype, name)
+      local inherits = {}
+      for template in string.gmatch(templates or '', '[^, ]+') do
+        table.insert(inherits, template)
+      end
+      return _CreateUIObject(api, ltype, name, parent, inherits)
     end,
     C_CVar = {
       GetCVar = UNIMPLEMENTED,
