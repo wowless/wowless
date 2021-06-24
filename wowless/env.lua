@@ -662,6 +662,7 @@ local function mkWowEnv(api)
     UnitIsGroupLeader = UNIMPLEMENTED,
     UnitIsPossessed = UNIMPLEMENTED,
     UnitIsVisible = UNIMPLEMENTED,
+    UnitLevel = STUB_NUMBER,
     UnitName = function()
       return 'Unitname'  -- UNIMPLEMENTED
     end,
@@ -677,6 +678,8 @@ local function mkWowEnv(api)
     UnitSex = function()
       return 2  -- UNIMPLEMENTED
     end,
+    UnitXP = STUB_NUMBER,
+    UnitXPMax = STUB_NUMBER,
   }
 end
 
