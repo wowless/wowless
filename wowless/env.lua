@@ -211,6 +211,7 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         GetOwner = UNIMPLEMENTED,
         IsOwned = UNIMPLEMENTED,
+        SetPadding = UNIMPLEMENTED,
       },
       name = 'GameTooltip',
     },
@@ -244,6 +245,16 @@ local function mkBaseUIObjectTypes(api)
     modelscene = {
       inherits = {'frame'},
       intrinsic = true,
+      mixin = {
+        GetLightDirection = function()
+          return 1, 1, 1  -- UNIMPLEMENTED
+        end,
+        GetLightPosition = function()
+          return 1, 1, 1  -- UNIMPLEMENTED
+        end,
+        SetLightDirection = UNIMPLEMENTED,
+        SetLightPosition = UNIMPLEMENTED,
+      },
       name = 'ModelScene',
     },
     parentedobject = {
@@ -260,6 +271,9 @@ local function mkBaseUIObjectTypes(api)
     playermodel = {
       inherits = {'model'},
       intrinsic = true,
+      mixin = {
+        SetPortraitZoom = UNIMPLEMENTED,
+      },
       name = 'PlayerModel',
     },
     region = {
@@ -544,6 +558,7 @@ local function mkWowEnv(api)
   return {
     AntiAliasingSupported = UNIMPLEMENTED,
     BNFeaturesEnabled = UNIMPLEMENTED,
+    BNFeaturesEnabledAndConnected = UNIMPLEMENTED,
     CreateFont = function(name)
       return _CreateUIObject(api, 'font', name)
     end,
@@ -558,7 +573,9 @@ local function mkWowEnv(api)
       obj:__RunScript('OnLoad')
       return obj
     end,
-    C_ChatInfo = {},
+    C_ChatInfo = {
+      IsValidChatLine = UNIMPLEMENTED,
+    },
     C_Club = {},
     C_CVar = {
       GetCVar = UNIMPLEMENTED,
