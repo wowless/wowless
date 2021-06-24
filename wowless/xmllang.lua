@@ -706,22 +706,31 @@ return {
     },
   },
   keyvalue = {
-    attributes = {
+    fields = {
       key = {
+        required = true,
+        source = 'attribute',
         type = 'string',
       },
       type = {
+        source = 'attribute',
         type = 'string',
       },
       value = {
+        required = true,
+        source = 'attribute',
         type = 'string',
       },
     },
   },
   keyvalues = {
-    children = {
-      keyvalue = true,
-    },
+    fields = {
+      entries = {
+        child = 'keyvalue',
+        repeated = true,
+        source = 'child',
+      },
+    }
   },
   layer = {
     fields = {

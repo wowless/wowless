@@ -70,6 +70,11 @@ local function loader(api, log, sink)
       include = function(e)
         loadFile(path.join(dir, e.file))
       end,
+      keyvalues = function(e, parent)
+        for _, kv in ipairs(e.entries) do
+          parent[kv.key] = kv.type == 'number' and tonumber(kv.value) or kv.value
+        end
+      end,
       layers = function(e, parent, ignoreVirtual)
         for _, layer in ipairs(e.layers) do
           loadElements(layer.fontstrings, parent, ignoreVirtual)
