@@ -337,6 +337,8 @@ local function mkBaseUIObjectTypes(api)
         SetScrollChild = function(self, scrollChild)
           self.__scrollChild = scrollChild
         end,
+        SetVerticalScroll = UNIMPLEMENTED,
+        UpdateScrollChildRect = UNIMPLEMENTED,
       },
       name = 'ScrollFrame',
     },
@@ -350,10 +352,12 @@ local function mkBaseUIObjectTypes(api)
         end,
         GetValue = STUB_NUMBER,
         SetMinMaxValues = UNIMPLEMENTED,
+        SetStepsPerPage = UNIMPLEMENTED,
         SetThumbTexture = function(self, tex)
           self.__thumbTexture = toTexture(self, tex)
         end,
         SetValue = UNIMPLEMENTED,
+        SetValueStep = UNIMPLEMENTED,
       },
       name = 'Slider',
     },
