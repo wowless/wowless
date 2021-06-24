@@ -139,8 +139,13 @@ return {
     },
   },
   animations = {
-    children = {
-      animationgroup = true,
+    fields = {
+      groups = {
+        child = 'animationgroup',
+        repeated = true,
+        required = true,
+        source = 'child',
+      },
     },
   },
   attribute = {

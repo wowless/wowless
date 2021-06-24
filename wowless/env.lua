@@ -22,7 +22,7 @@ local function mkBaseUIObjectTypes(api)
       name = 'Actor',
     },
     animationgroup = {
-      inherits = {'parentedobject'},
+      inherits = {'parentedobject', 'scriptobject'},
       intrinsic = true,
       name = 'AnimationGroup',
     },

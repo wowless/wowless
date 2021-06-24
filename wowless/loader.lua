@@ -23,6 +23,9 @@ local function loader(api, log, sink)
     end
 
     local xmllang = {
+      animations = function(e, parent)
+        loadElements(e.groups, parent)
+      end,
       bartexture = function(e, parent)
         parent:SetStatusBarTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
       end,
