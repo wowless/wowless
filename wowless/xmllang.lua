@@ -1302,8 +1302,11 @@ return {
     virtual = true,
   },
   scrollchild = {
-    children = {
-      frame = true,
+    fields = {
+      frame = {
+        required = true,
+        source = 'child',
+      },
     },
   },
   scrollframe = {

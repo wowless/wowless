@@ -77,6 +77,9 @@ local function loader(api, log, sink)
       scripts = function()
         -- handled by loadElement
       end,
+      scrollchild = function(e, parent)
+        loadElement(e.frame, parent)
+      end,
     }
 
     function loadElement(e, parent, ignoreVirtual)
