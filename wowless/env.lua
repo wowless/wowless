@@ -50,6 +50,7 @@ local function mkBaseUIObjectTypes(api)
         GetPushedTexture = function(self)
           return self.__pushedTexture
         end,
+        GetText = UNIMPLEMENTED,
         GetTextWidth = STUB_NUMBER,
         IsEnabled = UNIMPLEMENTED,
         LockHighlight = UNIMPLEMENTED,
@@ -124,6 +125,7 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         GetText = UNIMPLEMENTED,
+        IsTruncated = UNIMPLEMENTED,
         SetFormattedText = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
       },
