@@ -677,6 +677,7 @@ local function mkWowEnv(api)
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetNumSkillLines = STUB_NUMBER,
     GetNumSubgroupMembers = STUB_NUMBER,
     GetNumTitles = STUB_NUMBER,
     GetNumTrackingTypes = STUB_NUMBER,
@@ -684,11 +685,16 @@ local function mkWowEnv(api)
     GetPetActionInfo = UNIMPLEMENTED,
     GetScreenHeight = STUB_NUMBER,
     GetScreenWidth = STUB_NUMBER,
+    GetSelectedSkill = STUB_NUMBER,
     GetSendMailPrice = STUB_NUMBER,
+    GetSkillLineInfo = function()
+      return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
+    end,
     GetSubZoneText = UNIMPLEMENTED,
     GetTabardCreationCost = STUB_NUMBER,
     GetText = UNIMPLEMENTED,
     GetTime = UNIMPLEMENTED,
+    GetTotemInfo = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
     GetZonePVPInfo = UNIMPLEMENTED,
     GuildControlGetNumRanks = STUB_NUMBER,
@@ -740,6 +746,7 @@ local function mkWowEnv(api)
     seterrorhandler = UNIMPLEMENTED,
     SetPortraitTexture = UNIMPLEMENTED,
     SetPortraitToTexture = UNIMPLEMENTED,
+    SetSelectedSkill = UNIMPLEMENTED,
     ShouldKnowUnitHealth = UNIMPLEMENTED,
     ShowBossFrameWhenUninteractable = UNIMPLEMENTED,
     Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
