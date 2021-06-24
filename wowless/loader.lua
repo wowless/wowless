@@ -154,6 +154,13 @@ local function loader(api, log, sink)
             log(3, 'attaching ' .. e.attr.parentkey)
             obj:GetParent()[e.attr.parentkey] = obj
           end
+          if e.attr.parentarray then
+            local k = e.attr.parentarray
+            log(3, 'attaching to array ' .. k)
+            local p = obj:GetParent()
+            p[k] = p[k] or {}
+            table.insert(p[k], obj)
+          end
           loadElements(e.kids, obj, true)
           for _, kid in ipairs(e.kids) do
             if kid.type == 'scripts' then
