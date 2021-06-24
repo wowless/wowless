@@ -113,6 +113,7 @@ local function mkBaseUIObjectTypes(api)
         SetEdgeTexture = function(self, tex)
           self.__edgeTexture = toTexture(self, tex)
         end,
+        SetHideCountdownNumbers = UNIMPLEMENTED,
         SetSwipeColor = UNIMPLEMENTED,
         SetSwipeTexture = function(self, tex)
           self.__swipeTexture = toTexture(self, tex)
@@ -272,6 +273,9 @@ local function mkBaseUIObjectTypes(api)
         end,
         GetPoint = UNIMPLEMENTED,
         GetRight = STUB_NUMBER,
+        GetSize = function(self)
+          return self:GetWidth(), self:GetHeight()
+        end,
         GetWidth = STUB_NUMBER,
         Hide = UNIMPLEMENTED,
         IsShown = UNIMPLEMENTED,
@@ -551,7 +555,15 @@ local function mkWowEnv(api)
       GetCVarBool = UNIMPLEMENTED,
       GetCVarDefault = UNIMPLEMENTED,
     },
+    C_FriendList = {
+      SetWhoToUi = UNIMPLEMENTED,
+    },
     C_GamePad = {},
+    C_GuildInfo = {
+      GuildControlGetRankFlags = function()
+        return {}  -- UNIMPLEMENTED
+      end,
+    },
     C_ProductChoice = {},
     C_ScriptedAnimations = {
       GetAllScriptedAnimationEffects = function()
@@ -617,6 +629,7 @@ local function mkWowEnv(api)
     GetGameTime = function()
       return 1, 1  -- UNIMPLEMENTED
     end,
+    GetGuildRosterShowOffline = UNIMPLEMENTED,
     GetInventorySlotInfo = function()
       return 'UNIMPLEMENTED'
     end,
@@ -645,6 +658,8 @@ local function mkWowEnv(api)
     GetTime = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
     GetZonePVPInfo = UNIMPLEMENTED,
+    GuildControlGetNumRanks = STUB_NUMBER,
+    GuildControlGetRankName = UNIMPLEMENTED,
     HasAction = UNIMPLEMENTED,
     HasPetUI = UNIMPLEMENTED,
     IsAddonVersionCheckEnabled = UNIMPLEMENTED,
