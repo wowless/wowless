@@ -82,6 +82,7 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         GetFont = UNIMPLEMENTED,
         SetFontObject = UNIMPLEMENTED,
+        SetIndentedWordWrap = UNIMPLEMENTED,
         SetJustifyH = UNIMPLEMENTED,
         SetSpacing = UNIMPLEMENTED,
         SetTextColor = UNIMPLEMENTED,
@@ -136,8 +137,9 @@ local function mkBaseUIObjectTypes(api)
         SetFrameLevel = UNIMPLEMENTED,
         SetFrameStrata = UNIMPLEMENTED,
         SetHitRectInsets = UNIMPLEMENTED,
-        SetMouseClickEnabled = UNIMPLEMENTED,
         SetID = UNIMPLEMENTED,
+        SetMouseClickEnabled = UNIMPLEMENTED,
+        SetUserPlaced = UNIMPLEMENTED,
       },
       name = 'Frame',
     },
@@ -200,10 +202,12 @@ local function mkBaseUIObjectTypes(api)
         ClearAllPoints = UNIMPLEMENTED,
         GetEffectiveScale = STUB_NUMBER,
         GetHeight = STUB_NUMBER,
+        GetLeft = STUB_NUMBER,
         GetNumPoints = function()
           return 0  -- UNIMPLEMENTED
         end,
         GetPoint = UNIMPLEMENTED,
+        GetRight = STUB_NUMBER,
         GetWidth = STUB_NUMBER,
         Hide = UNIMPLEMENTED,
         IsShown = UNIMPLEMENTED,
@@ -387,6 +391,7 @@ local function mkBaseEnv()
     ipairs = ipairs,
     math = {
       max = math.max,
+      min = math.min,
     },
     max = math.max,
     next = next,
@@ -434,6 +439,9 @@ end
 local function mkWowEnv(api)
   return {
     AntiAliasingSupported = UNIMPLEMENTED,
+    CreateFont = function(name)
+      return _CreateUIObject(api, 'font', name)
+    end,
     CreateFrame = function(type, name)
       local ltype = string.lower(type)
       assert(_InheritsFrom(api, ltype, 'frame'), type .. ' does not inherit from frame')
@@ -487,11 +495,14 @@ local function mkWowEnv(api)
     GetActionInfo = UNIMPLEMENTED,
     GetActionTexture = UNIMPLEMENTED,
     GetAddOnEnableState = UNIMPLEMENTED,
+    GetAlternativeDefaultLanguage = UNIMPLEMENTED,
     GetAvailableLocales = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
     GetBindingText = UNIMPLEMENTED,
     GetChatTypeIndex = STUB_NUMBER,
     GetChatWindowInfo = UNIMPLEMENTED,
+    GetChatWindowSavedDimensions = UNIMPLEMENTED,
+    GetChatWindowSavedPosition = UNIMPLEMENTED,
     GetCVarInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
     GetDefaultLanguage = function()
@@ -514,7 +525,9 @@ local function mkWowEnv(api)
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetScreenWidth = STUB_NUMBER,
     GetText = UNIMPLEMENTED,
+    GetTime = UNIMPLEMENTED,
     HasAction = UNIMPLEMENTED,
     IsAddonVersionCheckEnabled = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
@@ -553,6 +566,7 @@ local function mkWowEnv(api)
       func(...)
     end,
     SetActionUIButton = UNIMPLEMENTED,
+    SetChatWindowName = UNIMPLEMENTED,
     seterrorhandler = UNIMPLEMENTED,
     SetPortraitTexture = UNIMPLEMENTED,
     ShouldKnowUnitHealth = UNIMPLEMENTED,
