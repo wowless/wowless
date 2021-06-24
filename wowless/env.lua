@@ -449,7 +449,9 @@ local function mkWowEnv(api)
       for template in string.gmatch(templates or '', '[^, ]+') do
         table.insert(inherits, template)
       end
-      return _CreateUIObject(api, ltype, name, parent, inherits)
+      local obj = _CreateUIObject(api, ltype, name, parent, inherits)
+      obj:__RunScript('OnLoad')
+      return obj
     end,
     C_CVar = {
       GetCVar = UNIMPLEMENTED,
