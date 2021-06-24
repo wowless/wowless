@@ -319,6 +319,7 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         GetHorizontalScroll = STUB_NUMBER,
+        GetVerticalScrollRange = STUB_NUMBER,
         GetScrollChild = function(self)
           return self.__scrollChild
         end,
@@ -336,6 +337,7 @@ local function mkBaseUIObjectTypes(api)
         GetThumbTexture = function(self)
           return self.__thumbTexture
         end,
+        GetValue = STUB_NUMBER,
         SetMinMaxValues = UNIMPLEMENTED,
         SetThumbTexture = function(self, tex)
           self.__thumbTexture = toTexture(self, tex)
@@ -462,6 +464,7 @@ local function mkBaseEnv()
       bor = bitlib.bor,
     },
     ceil = math.ceil,
+    floor = math.floor,
     getfenv = getfenv,
     getmetatable = getmetatable,
     getn = table.getn,
@@ -471,6 +474,7 @@ local function mkBaseEnv()
       min = math.min,
     },
     max = math.max,
+    min = math.min,
     next = next,
     pairs = pairs,
     pcall = pcall,
