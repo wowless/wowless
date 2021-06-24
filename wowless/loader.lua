@@ -26,11 +26,17 @@ local function loader(api, log, sink)
       bartexture = function(e, parent)
         parent:SetStatusBarTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
       end,
+      blingtexture = function(e, parent)
+        parent:SetBlingTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
+      end,
       buttontext = function(e, parent)
         return loadElement(mixin({}, e, { type = 'fontstring' }), parent)
       end,
       disabledtexture = function(e, parent)
         parent:SetDisabledTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
+      end,
+      edgetexture = function(e, parent)
+        parent:SetEdgeTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
       end,
       fontfamily = function(e)
         local font = e.members[1].font
@@ -82,6 +88,9 @@ local function loader(api, log, sink)
       end,
       scrollchild = function(e, parent)
         parent:SetScrollChild(loadElement(e.frame, parent))
+      end,
+      swipetexture = function(e, parent)
+        parent:SetSwipeTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
       end,
     }
 

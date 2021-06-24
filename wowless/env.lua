@@ -88,7 +88,16 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'frame'},
       intrinsic = true,
       mixin = {
+        SetBlingTexture = function(self, tex)
+          self.__blingTexture = toTexture(self, tex)
+        end,
+        SetEdgeTexture = function(self, tex)
+          self.__edgeTexture = toTexture(self, tex)
+        end,
         SetSwipeColor = UNIMPLEMENTED,
+        SetSwipeTexture = function(self, tex)
+          self.__swipeTexture = toTexture(self, tex)
+        end,
       },
       name = 'Cooldown',
     },
