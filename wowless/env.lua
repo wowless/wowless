@@ -108,6 +108,7 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'frame'},
       intrinsic = true,
       mixin = {
+        Clear = UNIMPLEMENTED,
         SetBlingTexture = function(self, tex)
           self.__blingTexture = toTexture(self, tex)
         end,
@@ -706,6 +707,7 @@ local function mkWowEnv(api)
       return setmetatable({}, {})
     end,
     NUM_LE_ITEM_QUALITYS = 10,  -- UNIMPLEMENTED
+    PetHasActionBar = UNIMPLEMENTED,
     PlaySound = UNIMPLEMENTED,
     RegisterStaticConstants = UNIMPLEMENTED,
     securecall = function(func, ...)
