@@ -80,7 +80,13 @@ local function validateRoot(root)
       for name, spec in pairs(ty.fields) do
         if spec.source == 'attribute' then
           local aname = spec.attribute or name
-          local attr = e._attr and e._attr[aname] or nil
+          local attr = nil
+          for k, v in pairs(e._attr or {}) do
+            if string.lower(k) == aname then
+              assert(attr == nil, 'duplicate attributes for ' .. aname .. ' in ' .. tname)
+              attr = v
+            end
+          end
           assert(spec.value == nil or attr == spec.value, 'bad attribute value ' .. tostring(attr) .. ' in ' .. tname)
           assert(not spec.required or attr ~= nil, 'missing attribute ' .. aname .. ' in ' .. tname)
           if attr and spec.value == nil then

@@ -127,21 +127,26 @@ local function loader(api, log, sink)
                   end
                 end
                 if fn then
-                  local inh = script.inherit
                   local old = obj:GetScript(script.type)
-                  local wfn = fn
-                  if inh == 'prepend' then
-                    if old then
-                      wfn = function() fn() old(obj) end
+                  if old and script.inherit then
+                    local bfn = fn
+                    if script.inherit == 'prepend' then
+                      fn = function() bfn() old(obj) end
+                    elseif script.inherit == 'append' then
+                      fn = function() old(obj) bfn() end
+                    else
+                      error('invalid inherit tag on script')
                     end
-                  elseif inh == 'append' then
-                    if old then
-                      wfn = function() old(obj) fn() end
-                    end
-                  else
-                    assert(inh == nil, 'invalid inherit tag on script')
                   end
-                  obj:SetScript(script.type, wfn)
+                  local bindingType = 1
+                  if script.intrinsicorder == 'precall' then
+                    bindingType = 0
+                  elseif script.intrinsicorder == 'postcall' then
+                    bindingType = 2
+                  else
+                    assert(script.intrinsicorder == nil, 'invalid intrinsicOrder tag on script')
+                  end
+                  obj:__SetScript(script.type, bindingType, fn)
                 end
               end
             end
