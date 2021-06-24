@@ -3,6 +3,7 @@ local Mixin = util.mixin
 
 local UNIMPLEMENTED = function() end
 local STUB_NUMBER = function() return 1 end
+local STUB_TABLE = function() return {} end
 
 local function toTexture(parent, tex)
   if type(tex) == 'string' then
@@ -568,19 +569,17 @@ local function mkWowEnv(api)
     },
     C_GamePad = {},
     C_GuildInfo = {
-      GuildControlGetRankFlags = function()
-        return {}  -- UNIMPLEMENTED
-      end,
+      GuildControlGetRankFlags = STUB_TABLE,
     },
     C_LootHistory = {
       GetItem = UNIMPLEMENTED,
       GetNumItems = STUB_NUMBER,
     },
-    C_ProductChoice = {},
+    C_ProductChoice = {
+      GetChoices = STUB_TABLE,
+    },
     C_ScriptedAnimations = {
-      GetAllScriptedAnimationEffects = function()
-        return {}  -- UNIMPLEMENTED
-      end,
+      GetAllScriptedAnimationEffects = STUB_TABLE,
     },
     C_Social = {
       TwitterCheckStatus = UNIMPLEMENTED,
