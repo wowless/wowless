@@ -110,26 +110,20 @@ local function loader(api, log, sink)
                 if script.func then
                   local fnattr = script.func
                   fn = function()
-                    log(3, 'begin calling script function %s from %s on %s', fnattr, e.type, tostring(obj:GetName()))
                     assert(api.env[fnattr], 'unknown script function ' .. fnattr)
                     api.env[fnattr](obj)
-                    log(3, 'end calling script function %s from %s on %s', fnattr, e.type, tostring(obj:GetName()))
                   end
                 elseif script.method then
                   local mattr = script.method
                   fn = function()
-                    log(3, 'begin calling script method %s from %s on %s', mattr, e.type, tostring(obj:GetName()))
                     assert(obj[mattr], 'unknown script method ' .. mattr)
                     obj[mattr](obj)
-                    log(3, 'end calling script method %s from %s on %s', mattr, e.type, tostring(obj:GetName()))
                   end
                 elseif script.text then
                   local fnstr = 'return function(self, ...)\n' .. script.text .. '\nend'
                   local sfn = setfenv(assert(loadstring(fnstr, path.basename(filename)))(), api.env)
                   fn = function()
-                    log(3, 'begin calling inline script from %s on %s', e.type, tostring(obj:GetName()))
                     sfn(obj)
-                    log(3, 'end calling inline script from %s on %s', e.type, tostring(obj:GetName()))
                   end
                 end
                 if fn then
