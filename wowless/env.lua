@@ -576,7 +576,9 @@ local function mkWowEnv(api)
       return 0  -- UNIMPLEMENTED
     end,
     GetNumTrackingTypes = STUB_NUMBER,
+    GetScreenHeight = STUB_NUMBER,
     GetScreenWidth = STUB_NUMBER,
+    GetSubZoneText = UNIMPLEMENTED,
     GetText = UNIMPLEMENTED,
     GetTime = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
@@ -630,6 +632,7 @@ local function mkWowEnv(api)
     UnitChannelInfo = UNIMPLEMENTED,
     UnitClass = UNIMPLEMENTED,
     UnitExists = UNIMPLEMENTED,
+    UnitHealth = STUB_NUMBER,
     UnitHealthMax = STUB_NUMBER,
     UnitIsConnected = UNIMPLEMENTED,
     UnitIsDead = UNIMPLEMENTED,
