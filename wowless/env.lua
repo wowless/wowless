@@ -481,16 +481,22 @@ local function _CreateUIObject(api, typename, objname, parent, inherits)
   local type = api.uiobjectTypes[typename]
   assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
   api.log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
-  local obj = {
+  local supers = superTypes(api, typename, inherits)
+  local wapi = {}
+  for _, s in ipairs(supers) do
+    Mixin(wapi, api.uiobjectTypes[s].mixin)
+  end
+  local obj = setmetatable({
     __name = objname,
     __parent = parent,
     __type = typename,
-  }
-  for _, t in ipairs(superTypes(api, typename, inherits)) do
+  }, {
+    __index = wapi,
+  })
+  for _, t in ipairs(supers) do
     local ty = api.uiobjectTypes[t]
-    api.log(4, 'mixing in ' .. ty.name)
-    Mixin(obj, ty.mixin)
     if ty.constructor then
+      api.log(4, 'running constructor for ' .. ty.name)
       ty.constructor(obj)
     end
   end
