@@ -236,6 +236,9 @@ local function mkBaseUIObjectTypes(api)
             end
           end
         end
+        self.__SetScript = function(_, name, bindingType, script)
+          self.__scripts[bindingType][string.lower(name)] = script
+        end
       end,
       inherits = {},
       intrinsic = true,
@@ -244,7 +247,7 @@ local function mkBaseUIObjectTypes(api)
           return self.__scripts[bindingType or 1][string.lower(name)]
         end,
         SetScript = function(self, name, script)
-          self.__scripts[1][string.lower(name)] = script
+          self:__SetScript(name, 1, script)
         end,
       },
       name = 'ScriptObject',
