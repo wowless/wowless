@@ -100,7 +100,7 @@ local function mkBaseUIObjectTypes(api)
     },
     frame = {
       constructor = function(self)
-        self.__attributes = {}
+        self.__attributes = self.__attributes or {}
       end,
       inherits = {'parentedobject', 'region', 'scriptobject'},
       intrinsic = true,
@@ -125,7 +125,7 @@ local function mkBaseUIObjectTypes(api)
         SetAttribute = function(self, name, value)
           local old = self.__attributes[name]
           if old ~= value then
-            api.log(4, 'setting %s to %s', name, tostring(value))
+            api.log(4, 'setting attribute %s on %s to %s', name, tostring(self:GetName()), tostring(value))
             self.__attributes[name] = value
             local script = self:GetScript('OnAttributeChanged')
             if script then
@@ -573,6 +573,8 @@ local function mkWowEnv(api)
     ShowBossFrameWhenUninteractable = UNIMPLEMENTED,
     Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
+    UnitCastingInfo = UNIMPLEMENTED,
+    UnitChannelInfo = UNIMPLEMENTED,
     UnitExists = UNIMPLEMENTED,
     UnitHealthMax = STUB_NUMBER,
     UnitIsConnected = UNIMPLEMENTED,
