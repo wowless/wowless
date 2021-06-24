@@ -614,7 +614,9 @@ local function mkWowEnv(api)
       return 'Common', 7  -- UNIMPLEMENTED
     end,
     GetDefaultVideoOptions = UNIMPLEMENTED,
-    GetGameTime = UNIMPLEMENTED,
+    GetGameTime = function()
+      return 1, 1  -- UNIMPLEMENTED
+    end,
     GetInventorySlotInfo = function()
       return 'UNIMPLEMENTED'
     end,
