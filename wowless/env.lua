@@ -447,7 +447,7 @@ local function mkWowEnv(api)
       assert(_InheritsFrom(api, ltype, 'frame'), type .. ' does not inherit from frame')
       local inherits = {}
       for template in string.gmatch(templates or '', '[^, ]+') do
-        table.insert(inherits, template)
+        table.insert(inherits, string.lower(template))
       end
       local obj = _CreateUIObject(api, ltype, name, parent, inherits)
       obj:__RunScript('OnLoad')
