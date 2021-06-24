@@ -393,7 +393,12 @@ local function mkBaseUIObjectTypes(api)
         SetMinMaxValues = UNIMPLEMENTED,
         SetStatusBarColor = UNIMPLEMENTED,
         SetStatusBarTexture = function(self, tex)
-          self.__statusBarTexture = toTexture(self, tex)
+          if type(tex) == 'number' then
+            api.log(1, 'unimplemented call to SetStatusBarTexture')
+            self.__statusBarTexture = self:CreateTexture()
+          else
+            self.__statusBarTexture = toTexture(self, tex)
+          end
         end,
         SetValue = UNIMPLEMENTED,
       },
@@ -407,6 +412,7 @@ local function mkBaseUIObjectTypes(api)
         GetTexture = UNIMPLEMENTED,
         SetAtlas = UNIMPLEMENTED,
         SetDesaturated = UNIMPLEMENTED,
+        SetGradient = UNIMPLEMENTED,
         SetHorizTile = UNIMPLEMENTED,
         SetTexCoord = UNIMPLEMENTED,
         SetTexture = UNIMPLEMENTED,
