@@ -32,6 +32,9 @@ local function loader(api, log, sink)
       buttontext = function(e, parent)
         return loadElement(mixin({}, e, { type = 'fontstring' }), parent)
       end,
+      disabledfont = function(e, parent)
+        parent:SetDisabledFontObject(loadElement(mixin({}, e, { type = 'font' }), parent))
+      end,
       disabledtexture = function(e, parent)
         parent:SetDisabledTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
       end,
@@ -49,6 +52,9 @@ local function loader(api, log, sink)
       frames = function(e, parent, ignoreVirtual)
         loadElements(e.frames, parent, ignoreVirtual)
       end,
+      highlightfont = function(e, parent)
+        parent:SetHighlightFontObject(loadElement(mixin({}, e, { type = 'font' }), parent))
+      end,
       highlighttexture = function(e, parent)
         parent:SetHighlightTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
       end,
@@ -61,6 +67,9 @@ local function loader(api, log, sink)
           loadElements(layer.lines, parent, ignoreVirtual)
           loadElements(layer.textures, parent, ignoreVirtual)
         end
+      end,
+      normalfont = function(e, parent)
+        parent:SetNormalFontObject(loadElement(mixin({}, e, { type = 'font' }), parent))
       end,
       normaltext = function(e, parent)
         loadElement(mixin({}, e, { type = 'fontstring' }), parent)
