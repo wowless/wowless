@@ -19,27 +19,56 @@ local function mkBaseUIObjectTypes(api)
     button = {
       constructor = function(self)
         self.__fontstring = self:CreateFontString()
+        self.__ToTexture = function(tex)
+          if type(tex) == 'string' then
+            local t = self:CreateTexture()
+            t:SetTexture(tex)
+            return
+          else
+            return tex
+          end
+        end
       end,
       inherits = {'frame'},
       intrinsic = true,
       mixin = {
         Disable = UNIMPLEMENTED,
         Enable = UNIMPLEMENTED,
+        GetDisabledTexture = function(self)
+          return self.__disabledTexture
+        end,
         GetFontString = function(self)
           return self.__fontstring
+        end,
+        GetHighlightTexture = function(self)
+          return self.__highlightTexture
+        end,
+        GetNormalTexture = function(self)
+          return self.__normalTexture
+        end,
+        GetPushedTexture = function(self)
+          return self.__pushedTexture
         end,
         GetTextWidth = STUB_NUMBER,
         IsEnabled = UNIMPLEMENTED,
         LockHighlight = UNIMPLEMENTED,
         RegisterForClicks = UNIMPLEMENTED,
         SetDisabledFontObject = UNIMPLEMENTED,
-        SetDisabledTexture = UNIMPLEMENTED,
+        SetDisabledTexture = function(self, tex)
+          self.__disabledTexture = self.__ToTexture(tex)
+        end,
         SetEnabled = UNIMPLEMENTED,
         SetHighlightFontObject = UNIMPLEMENTED,
-        SetHighlightTexture = UNIMPLEMENTED,
+        SetHighlightTexture = function(self, tex)
+          self.__highlightTexture = self.__ToTexture(tex)
+        end,
         SetNormalFontObject = UNIMPLEMENTED,
-        SetNormalTexture = UNIMPLEMENTED,
-        SetPushedTexture = UNIMPLEMENTED,
+        SetNormalTexture = function(self, tex)
+          self.__normalTexture = self.__ToTexture(tex)
+        end,
+        SetPushedTexture = function(self, tex)
+          self.__pushedTexture = self.__ToTexture(tex)
+        end,
         SetText = UNIMPLEMENTED,
         UnlockHighlight = UNIMPLEMENTED,
       },

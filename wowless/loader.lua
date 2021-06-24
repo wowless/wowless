@@ -27,7 +27,7 @@ local function loader(api, log, sink)
         return loadElement(mixin({}, e, { type = 'fontstring' }), parent)
       end,
       disabledtexture = function(e, parent)
-        loadElement(mixin({}, e, { type = 'texture' }), parent)
+        parent:SetDisabledTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
       end,
       fontfamily = function(e)
         local font = e.members[1].font
@@ -41,7 +41,7 @@ local function loader(api, log, sink)
         loadElements(e.frames, parent, ignoreVirtual)
       end,
       highlighttexture = function(e, parent)
-        loadElement(mixin({}, e, { type = 'texture' }), parent)
+        parent:SetHighlightTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
       end,
       include = function(e)
         loadFile(path.join(dir, e.file))
@@ -57,10 +57,10 @@ local function loader(api, log, sink)
         loadElement(mixin({}, e, { type = 'fontstring' }), parent)
       end,
       normaltexture = function(e, parent)
-        loadElement(mixin({}, e, { type = 'texture' }), parent)
+        parent:SetNormalTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
       end,
       pushedtexture = function(e, parent)
-        loadElement(mixin({}, e, { type = 'texture' }), parent)
+        parent:SetPushedTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
       end,
       scopedmodifier = function(e, parent)
         loadElements(e.kids, parent)
@@ -184,6 +184,7 @@ local function loader(api, log, sink)
           if obj.__RunScript then
             sink(function() obj:__RunScript('OnLoad') end)
           end
+          return obj
         end
       else
         local fn = xmllang[e.type]
