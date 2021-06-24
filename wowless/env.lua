@@ -333,7 +333,13 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         GetMinMaxValues = UNIMPLEMENTED,
+        GetThumbTexture = function(self)
+          return self.__thumbTexture
+        end,
         SetMinMaxValues = UNIMPLEMENTED,
+        SetThumbTexture = function(self, tex)
+          self.__thumbTexture = toTexture(self, tex)
+        end,
         SetValue = UNIMPLEMENTED,
       },
       name = 'Slider',

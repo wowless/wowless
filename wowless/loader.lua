@@ -107,6 +107,9 @@ local function loader(api, log, sink)
       swipetexture = function(e, parent)
         parent:SetSwipeTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
       end,
+      thumbtexture = function(e, parent)
+        parent:SetThumbTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
+      end,
     }
 
     function loadElement(e, parent, ignoreVirtual)
