@@ -32,6 +32,12 @@ local function loader(api, log, sink)
       buttontext = function(e, parent)
         return loadElement(mixin({}, e, { type = 'fontstring' }), parent)
       end,
+      checkedtexture = function(e, parent)
+        parent:SetCheckedTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
+      end,
+      disabledcheckedtexture = function(e, parent)
+        parent:SetDisabledCheckedTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
+      end,
       disabledfont = function(e, parent)
         parent:SetDisabledFontObject(loadElement(mixin({}, e, { type = 'font' }), parent))
       end,

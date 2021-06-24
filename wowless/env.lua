@@ -80,7 +80,19 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'button'},
       intrinsic = true,
       mixin = {
+        GetCheckedTexture = function(self)
+          return self.__checkedTexture
+        end,
+        GetDisabledCheckedTexture = function(self)
+          return self.__disabledCheckedTexture
+        end,
         SetChecked = UNIMPLEMENTED,
+        SetCheckedTexture = function(self, tex)
+          self.__checkedTexture = toTexture(self, tex)
+        end,
+        SetDisabledCheckedTexture = function(self, tex)
+          self.__disabledCheckedTexture = toTexture(self, tex)
+        end,
       },
       name = 'CheckButton',
     },
