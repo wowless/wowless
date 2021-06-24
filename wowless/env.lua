@@ -192,6 +192,11 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       name = 'MessageFrame',
     },
+    minimap = {
+      inherits = {'frame'},
+      intrinsic = true,
+      name = 'Minimap',
+    },
     model = {
       inherits = {'frame'},
       intrinsic = true,
@@ -321,6 +326,7 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         GetTexCoord = UNIMPLEMENTED,
+        GetTexture = UNIMPLEMENTED,
         SetDesaturated = UNIMPLEMENTED,
         SetTexCoord = UNIMPLEMENTED,
         SetTexture = UNIMPLEMENTED,
@@ -529,6 +535,7 @@ local function mkWowEnv(api)
     GetAddOnEnableState = UNIMPLEMENTED,
     GetAlternativeDefaultLanguage = UNIMPLEMENTED,
     GetAvailableLocales = UNIMPLEMENTED,
+    GetBattlefieldStatus = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
     GetBindingText = UNIMPLEMENTED,
     GetChatTypeIndex = STUB_NUMBER,
@@ -552,14 +559,18 @@ local function mkWowEnv(api)
       return 'freeforall'  -- UNIMPLEMENTED
     end,
     GetMaxRenderScale = UNIMPLEMENTED,
+    GetMinimapZoneText = UNIMPLEMENTED,
     GetMinRenderScale = UNIMPLEMENTED,
     GetModifiedClick = UNIMPLEMENTED,
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetNumTrackingTypes = STUB_NUMBER,
     GetScreenWidth = STUB_NUMBER,
     GetText = UNIMPLEMENTED,
     GetTime = UNIMPLEMENTED,
+    GetTrackingInfo = UNIMPLEMENTED,
+    GetZonePVPInfo = UNIMPLEMENTED,
     HasAction = UNIMPLEMENTED,
     IsAddonVersionCheckEnabled = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
@@ -607,6 +618,7 @@ local function mkWowEnv(api)
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
     UnitCastingInfo = UNIMPLEMENTED,
     UnitChannelInfo = UNIMPLEMENTED,
+    UnitClass = UNIMPLEMENTED,
     UnitExists = UNIMPLEMENTED,
     UnitHealthMax = STUB_NUMBER,
     UnitIsConnected = UNIMPLEMENTED,
