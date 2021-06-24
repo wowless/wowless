@@ -9,6 +9,7 @@ dependencies = {
   'bitlib',
   'datafile',
   'lua-path',
+  'lua-resty-tsort',
   'xml2lua',
 }
 build = {

@@ -1,3 +1,4 @@
+local tsort = require('resty.tsort')
 local util = require('wowless.util')
 local Mixin = util.mixin
 
@@ -458,17 +459,21 @@ local function _IsUIObjectType(api, t)
   return api.uiobjectTypes[string.lower(t)] ~= nil
 end
 
-local function mixinType(api, type, obj)
-  for _, inh in ipairs(type.inherits) do
-    assert(api.uiobjectTypes[inh], inh .. ' is not a uiobject type')
-    mixinType(api, api.uiobjectTypes[inh], obj)
+local function superTypes(api, type, inherits)
+  local g = tsort.new()
+  local function process(t)
+    local ty = api.uiobjectTypes[t]
+    assert(ty, t .. ' is not a uiobject type')
+    for _, inh in ipairs(ty.inherits or {}) do
+      g:add(inh, t)
+      process(inh)
+    end
   end
-  api.log(4, 'mixing in ' .. type.name)
-  Mixin(obj, type.mixin)
-  if type.constructor then
-    type.constructor(obj)
+  process(type)
+  for _, inh in ipairs(inherits or {}) do
+    process(inh)
   end
-  return obj
+  return g:sort()
 end
 
 local function _CreateUIObject(api, typename, objname, parent, inherits)
@@ -481,11 +486,13 @@ local function _CreateUIObject(api, typename, objname, parent, inherits)
     __parent = parent,
     __type = typename,
   }
-  mixinType(api, type, obj)
-  for _, inh in ipairs(inherits or {}) do
-    local inhtype = api.uiobjectTypes[inh]
-    assert(inhtype, 'unknown inherit type ' .. inh .. ' for ' .. tostring(objname))
-    mixinType(api, inhtype, obj)
+  for _, t in ipairs(superTypes(api, typename, inherits)) do
+    local ty = api.uiobjectTypes[t]
+    api.log(4, 'mixing in ' .. ty.name)
+    Mixin(obj, ty.mixin)
+    if ty.constructor then
+      ty.constructor(obj)
+    end
   end
   if objname then
     if api.env[objname] then
