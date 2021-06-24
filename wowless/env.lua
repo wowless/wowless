@@ -221,7 +221,7 @@ local function mkBaseUIObjectTypes(api)
     },
     scriptobject = {
       constructor = function(self)
-        self.__scripts = {
+        self.__scripts = self.__scripts or {
           [0] = {},
           [1] = {},
           [2] = {},
@@ -230,13 +230,14 @@ local function mkBaseUIObjectTypes(api)
           for i = 0, 2 do
             local script = self:GetScript(name, i)
             if script then
-              api.log(4, 'begin %s for %s%s', name, self:GetObjectType(), self:GetName() or '')
+              api.log(4, 'begin %s[%d] for %s %s', name, i, self:GetObjectType(), tostring(self:GetName()))
               script(self, ...)
-              api.log(4, 'end %s for %s%s', name, self:GetObjectType(), self:GetName() or '')
+              api.log(4, 'end %s[%d] for %s %s', name, i, self:GetObjectType(), tostring(self:GetName()))
             end
           end
         end
         self.__SetScript = function(_, name, bindingType, script)
+          api.log(4, 'setting %s[%d] for %s %s', name, bindingType, self:GetObjectType(), tostring(self:GetName()))
           self.__scripts[bindingType][string.lower(name)] = script
         end
       end,
