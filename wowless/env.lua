@@ -152,6 +152,7 @@ local function mkBaseUIObjectTypes(api)
         GetID = STUB_NUMBER,
         IgnoreDepth = UNIMPLEMENTED,
         IsEventRegistered = UNIMPLEMENTED,
+        IsUserPlaced = UNIMPLEMENTED,
         RegisterEvent = UNIMPLEMENTED,
         RegisterForDrag = UNIMPLEMENTED,
         RegisterUnitEvent = UNIMPLEMENTED,
@@ -502,13 +503,15 @@ local function mkWowEnv(api)
       obj:__RunScript('OnLoad')
       return obj
     end,
+    C_ChatInfo = {},
+    C_Club = {},
     C_CVar = {
       GetCVar = UNIMPLEMENTED,
       GetCVarBool = UNIMPLEMENTED,
       GetCVarDefault = UNIMPLEMENTED,
     },
-    C_Club = {},
     C_GamePad = {},
+    C_ProductChoice = {},
     C_ScriptedAnimations = {
       GetAllScriptedAnimationEffects = function()
         return {}  -- UNIMPLEMENTED
@@ -559,6 +562,7 @@ local function mkWowEnv(api)
     GetChatWindowInfo = UNIMPLEMENTED,
     GetChatWindowSavedDimensions = UNIMPLEMENTED,
     GetChatWindowSavedPosition = UNIMPLEMENTED,
+    GetCurrentTitle = UNIMPLEMENTED,
     GetCVarInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
     GetDefaultLanguage = function()
@@ -575,6 +579,7 @@ local function mkWowEnv(api)
     GetLootMethod = function()
       return 'freeforall'  -- UNIMPLEMENTED
     end,
+    GetMaxPlayerLevel = STUB_NUMBER,
     GetMaxRenderScale = UNIMPLEMENTED,
     GetMinimapZoneText = UNIMPLEMENTED,
     GetMinRenderScale = UNIMPLEMENTED,
@@ -582,7 +587,10 @@ local function mkWowEnv(api)
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetNumSubgroupMembers = STUB_NUMBER,
+    GetNumTitles = STUB_NUMBER,
     GetNumTrackingTypes = STUB_NUMBER,
+    GetPetActionInfo = UNIMPLEMENTED,
     GetScreenHeight = STUB_NUMBER,
     GetScreenWidth = STUB_NUMBER,
     GetSubZoneText = UNIMPLEMENTED,
@@ -591,21 +599,25 @@ local function mkWowEnv(api)
     GetTrackingInfo = UNIMPLEMENTED,
     GetZonePVPInfo = UNIMPLEMENTED,
     HasAction = UNIMPLEMENTED,
+    HasPetUI = UNIMPLEMENTED,
     IsAddonVersionCheckEnabled = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
     IsConsumableAction = UNIMPLEMENTED,
     IsControlKeyDown = UNIMPLEMENTED,
     IsEquippedAction = UNIMPLEMENTED,
+    IsEveryoneAssistant = UNIMPLEMENTED,
     IsGMClient = UNIMPLEMENTED,
     IsInGroup = UNIMPLEMENTED,
     IsInGuild = UNIMPLEMENTED,
     IsInInstance = UNIMPLEMENTED,
+    IsInRaid = UNIMPLEMENTED,
     IsItemAction = UNIMPLEMENTED,
     IsMacClient = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
     issecure = UNIMPLEMENTED,
     IsShiftKeyDown = UNIMPLEMENTED,
     IsStackableAction = UNIMPLEMENTED,
+    IsTitleKnown = UNIMPLEMENTED,
     IsTrialAccount = UNIMPLEMENTED,
     IsVeteranTrialAccount = UNIMPLEMENTED,
     IsWindowsClient = UNIMPLEMENTED,
@@ -631,6 +643,7 @@ local function mkWowEnv(api)
     SetChatWindowName = UNIMPLEMENTED,
     seterrorhandler = UNIMPLEMENTED,
     SetPortraitTexture = UNIMPLEMENTED,
+    SetPortraitToTexture = UNIMPLEMENTED,
     ShouldKnowUnitHealth = UNIMPLEMENTED,
     ShowBossFrameWhenUninteractable = UNIMPLEMENTED,
     Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
@@ -641,10 +654,13 @@ local function mkWowEnv(api)
     UnitExists = UNIMPLEMENTED,
     UnitHealth = STUB_NUMBER,
     UnitHealthMax = STUB_NUMBER,
+    UnitInBattleground = UNIMPLEMENTED,
     UnitIsConnected = UNIMPLEMENTED,
     UnitIsDead = UNIMPLEMENTED,
     UnitIsGhost = UNIMPLEMENTED,
+    UnitIsGroupAssistant = UNIMPLEMENTED,
     UnitIsGroupLeader = UNIMPLEMENTED,
+    UnitIsPossessed = UNIMPLEMENTED,
     UnitIsVisible = UNIMPLEMENTED,
     UnitName = function()
       return 'Unitname'  -- UNIMPLEMENTED
