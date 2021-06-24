@@ -72,7 +72,18 @@ local function loader(api, log, sink)
       end,
       keyvalues = function(e, parent)
         for _, kv in ipairs(e.entries) do
-          parent[kv.key] = kv.type == 'number' and tonumber(kv.value) or kv.value
+          local ty = kv.type
+          local v = kv.value
+          if ty == 'number' then
+            v = tonumber(v)
+          elseif ty == 'global' then
+            v = api.env[v]
+          elseif ty == 'boolean' then
+            v = (v == 'true')
+          elseif ty ~= nil and ty ~= 'string' then
+            error('invalid keyvalue type ' .. ty)
+          end
+          parent[kv.key] = v
         end
       end,
       layers = function(e, parent, ignoreVirtual)
