@@ -571,6 +571,7 @@ local function mkWowEnv(api)
       After = UNIMPLEMENTED,
     },
     C_VoiceChat = {
+      GetActiveChannelID = UNIMPLEMENTED,
       GetAvailableInputDevices = UNIMPLEMENTED,
       GetAvailableOutputDevices = UNIMPLEMENTED,
       GetCommunicationMode = UNIMPLEMENTED,
