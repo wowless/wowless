@@ -24,6 +24,10 @@ local function mkBaseUIObjectTypes(api)
     animationgroup = {
       inherits = {'parentedobject', 'scriptobject'},
       intrinsic = true,
+      mixin = {
+        Play = UNIMPLEMENTED,
+        Stop = UNIMPLEMENTED,
+      },
       name = 'AnimationGroup',
     },
     button = {
