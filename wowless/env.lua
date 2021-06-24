@@ -189,14 +189,9 @@ local function mkBaseUIObjectTypes(api)
         RegisterForDrag = UNIMPLEMENTED,
         RegisterUnitEvent = UNIMPLEMENTED,
         SetAttribute = function(self, name, value)
-          local old = self.__attributes[name]
-          if old ~= value then
-            api.log(4, 'setting attribute %s on %s to %s', name, tostring(self:GetName()), tostring(value))
-            self.__attributes[name] = value
-            if old ~= nil then
-              self:__RunScript('OnAttributeChanged', name, value)
-            end
-          end
+          api.log(4, 'setting attribute %s on %s to %s', name, tostring(self:GetName()), tostring(value))
+          self.__attributes[name] = value
+          self:__RunScript('OnAttributeChanged', name, value)
         end,
         SetClampRectInsets = UNIMPLEMENTED,
         SetFrameLevel = UNIMPLEMENTED,
