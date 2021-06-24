@@ -193,7 +193,9 @@ local function mkBaseUIObjectTypes(api)
           if old ~= value then
             api.log(4, 'setting attribute %s on %s to %s', name, tostring(self:GetName()), tostring(value))
             self.__attributes[name] = value
-            self:__RunScript('OnAttributeChanged', name, value)
+            if old ~= nil then
+              self:__RunScript('OnAttributeChanged', name, value)
+            end
           end
         end,
         SetClampRectInsets = UNIMPLEMENTED,
