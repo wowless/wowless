@@ -64,14 +64,17 @@ local function mkBaseUIObjectTypes(api)
           self.__disabledTexture = toTexture(self, tex)
         end,
         SetEnabled = UNIMPLEMENTED,
+        SetHighlightAtlas = UNIMPLEMENTED,
         SetHighlightFontObject = UNIMPLEMENTED,
         SetHighlightTexture = function(self, tex)
           self.__highlightTexture = toTexture(self, tex)
         end,
+        SetNormalAtlas = UNIMPLEMENTED,
         SetNormalFontObject = UNIMPLEMENTED,
         SetNormalTexture = function(self, tex)
           self.__normalTexture = toTexture(self, tex)
         end,
+        SetPushedAtlas = UNIMPLEMENTED,
         SetPushedTexture = function(self, tex)
           self.__pushedTexture = toTexture(self, tex)
         end,
@@ -378,9 +381,12 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         GetTexCoord = UNIMPLEMENTED,
         GetTexture = UNIMPLEMENTED,
+        SetAtlas = UNIMPLEMENTED,
         SetDesaturated = UNIMPLEMENTED,
+        SetHorizTile = UNIMPLEMENTED,
         SetTexCoord = UNIMPLEMENTED,
         SetTexture = UNIMPLEMENTED,
+        SetVertTile = UNIMPLEMENTED,
       },
       name = 'Texture',
     },
@@ -557,6 +563,9 @@ local function mkWowEnv(api)
     },
     C_StorePublic = {
       IsDisabledByParentalControls = UNIMPLEMENTED,
+    },
+    C_Texture = {
+      GetAtlasInfo = UNIMPLEMENTED,
     },
     C_Timer = {
       After = UNIMPLEMENTED,
