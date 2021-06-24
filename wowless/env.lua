@@ -123,6 +123,7 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         GetText = UNIMPLEMENTED,
+        SetFormattedText = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
       },
       name = 'FontString',
@@ -292,6 +293,7 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'frame'},
       intrinsic = true,
       mixin = {
+        GetHorizontalScroll = STUB_NUMBER,
         GetScrollChild = function(self)
           return self.__scrollChild
         end,
