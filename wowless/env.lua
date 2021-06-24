@@ -4,6 +4,16 @@ local Mixin = util.mixin
 local UNIMPLEMENTED = function() end
 local STUB_NUMBER = function() return 1 end
 
+local function toTexture(parent, tex)
+  if type(tex) == 'string' then
+    local t = parent:CreateTexture()
+    t:SetTexture(tex)
+    return t
+  else
+    return tex
+  end
+end
+
 local function mkBaseUIObjectTypes(api)
   return {
     actor = {
@@ -19,15 +29,6 @@ local function mkBaseUIObjectTypes(api)
     button = {
       constructor = function(self)
         self.__fontstring = self:CreateFontString()
-        self.__ToTexture = function(tex)
-          if type(tex) == 'string' then
-            local t = self:CreateTexture()
-            t:SetTexture(tex)
-            return
-          else
-            return tex
-          end
-        end
       end,
       inherits = {'frame'},
       intrinsic = true,
@@ -55,19 +56,19 @@ local function mkBaseUIObjectTypes(api)
         RegisterForClicks = UNIMPLEMENTED,
         SetDisabledFontObject = UNIMPLEMENTED,
         SetDisabledTexture = function(self, tex)
-          self.__disabledTexture = self.__ToTexture(tex)
+          self.__disabledTexture = toTexture(self, tex)
         end,
         SetEnabled = UNIMPLEMENTED,
         SetHighlightFontObject = UNIMPLEMENTED,
         SetHighlightTexture = function(self, tex)
-          self.__highlightTexture = self.__ToTexture(tex)
+          self.__highlightTexture = toTexture(self, tex)
         end,
         SetNormalFontObject = UNIMPLEMENTED,
         SetNormalTexture = function(self, tex)
-          self.__normalTexture = self.__ToTexture(tex)
+          self.__normalTexture = toTexture(self, tex)
         end,
         SetPushedTexture = function(self, tex)
-          self.__pushedTexture = self.__ToTexture(tex)
+          self.__pushedTexture = toTexture(self, tex)
         end,
         SetText = UNIMPLEMENTED,
         UnlockHighlight = UNIMPLEMENTED,
@@ -320,13 +321,17 @@ local function mkBaseUIObjectTypes(api)
         GetMinMaxValues = function()
           return 0, 0  -- UNIMPLEMENTED
         end,
-        GetStatusBarTexture = UNIMPLEMENTED,
+        GetStatusBarTexture = function(self)
+          return self.__statusBarTexture
+        end,
         GetValue = function()
           return 0  -- UNIMPLEMENTED
         end,
         SetMinMaxValues = UNIMPLEMENTED,
         SetStatusBarColor = UNIMPLEMENTED,
-        SetStatusBarTexture = UNIMPLEMENTED,
+        SetStatusBarTexture = function(self, tex)
+          self.__statusBarTexture = toTexture(self, tex)
+        end,
         SetValue = UNIMPLEMENTED,
       },
       name = 'StatusBar',
