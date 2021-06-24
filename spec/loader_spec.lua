@@ -8,7 +8,7 @@ describe('loader', function()
   end
   local loader = require('wowless.loader')
   it('loads', function()
-    local env, errors = loader.run(0, false)
+    local env, errors = loader.run(0)
     assert.same({38345, 11}, {count(env), #errors})
   end)
 end)
