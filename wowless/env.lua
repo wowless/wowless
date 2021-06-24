@@ -541,6 +541,7 @@ end
 local function mkWowEnv(api)
   return {
     AntiAliasingSupported = UNIMPLEMENTED,
+    BNFeaturesEnabled = UNIMPLEMENTED,
     CreateFont = function(name)
       return _CreateUIObject(api, 'font', name)
     end,
