@@ -566,6 +566,10 @@ local function mkWowEnv(api)
         return {}  -- UNIMPLEMENTED
       end,
     },
+    C_LootHistory = {
+      GetItem = UNIMPLEMENTED,
+      GetNumItems = STUB_NUMBER,
+    },
     C_ProductChoice = {},
     C_ScriptedAnimations = {
       GetAllScriptedAnimationEffects = function()
