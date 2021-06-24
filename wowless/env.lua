@@ -363,6 +363,8 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'frame'},
       intrinsic = true,
       mixin = {
+        Disable = UNIMPLEMENTED,
+        Enable = UNIMPLEMENTED,
         GetMinMaxValues = UNIMPLEMENTED,
         GetThumbTexture = function(self)
           return self.__thumbTexture
