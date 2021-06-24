@@ -484,6 +484,8 @@ local function mkBaseEnv()
     getn = table.getn,
     ipairs = ipairs,
     math = {
+      ceil = math.ceil,
+      floor = math.floor,
       max = math.max,
       min = math.min,
     },
