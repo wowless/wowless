@@ -78,7 +78,7 @@ local function loader(api, log, sink)
         -- handled by loadElement
       end,
       scrollchild = function(e, parent)
-        loadElement(e.frame, parent)
+        parent:SetScrollChild(loadElement(e.frame, parent))
       end,
     }
 

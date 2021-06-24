@@ -291,6 +291,14 @@ local function mkBaseUIObjectTypes(api)
     scrollframe = {
       inherits = {'frame'},
       intrinsic = true,
+      mixin = {
+        GetScrollChild = function(self)
+          return self.__scrollChild
+        end,
+        SetScrollChild = function(self, scrollChild)
+          self.__scrollChild = scrollChild
+        end,
+      },
       name = 'ScrollFrame',
     },
     slider = {
