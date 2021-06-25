@@ -933,12 +933,20 @@ local function mkWowEnv(api)
   }
 end
 
+local function Call(api, fun)
+  return xpcall(fun, function(err)
+    api.errors = api.errors + 1
+    print('error: ' .. err)
+    print(debug.traceback())
+  end)
+end
+
 local function _SendEvent(api, event, ...)
   local args = {...}
   for _, frame in ipairs(api.frames) do
     if frame.__registeredEvents[string.lower(event)] then
-      xpcall(function() frame:__RunScript('OnEvent', event, unpack(args)) end, function(err)
-        print('error: ' .. err)
+      api:Call(function()
+        frame:__RunScript('OnEvent', event, unpack(args))
       end)
     end
   end
@@ -947,8 +955,10 @@ end
 local function new(log)
   local env = mkBaseEnv()
   local api = {
+    Call = Call,
     CreateUIObject = _CreateUIObject,
     env = env,
+    errors = 0,
     frames = {},
     IsIntrinsicType = _IsIntrinsicType,
     IsUIObjectType = _IsUIObjectType,

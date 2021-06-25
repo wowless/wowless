@@ -304,21 +304,12 @@ local function run(loglevel)
     end
   end
   local env, api = require('wowless.env').new(log)
-  local errors = {}
   local sink = function(lua)
-    xpcall(setfenv(lua, env), function(err)
-      table.insert(errors, err)
-      if loglevel > 0 then
-        print('error: ' .. err)
-        print(debug.traceback())
-      end
-    end)
+    api:Call(setfenv(lua, env))
   end
   local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
   loader(api, log, sink)(toc)
-  api:SendEvent('PLAYER_LOGIN')
-  api:SendEvent('PLAYER_ENTERING_WORLD')
-  return env, errors
+  return api
 end
 
 return {
