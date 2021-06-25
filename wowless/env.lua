@@ -301,6 +301,7 @@ local function mkBaseUIObjectTypes(api)
         end,
         GetPoint = UNIMPLEMENTED,
         GetRight = STUB_NUMBER,
+        GetTop = STUB_NUMBER,
         GetSize = function(self)
           return self:GetWidth(), self:GetHeight()
         end,
