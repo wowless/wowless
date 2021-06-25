@@ -596,6 +596,7 @@ local function mkWowEnv(api)
     AntiAliasingSupported = UNIMPLEMENTED,
     BNFeaturesEnabled = UNIMPLEMENTED,
     BNFeaturesEnabledAndConnected = UNIMPLEMENTED,
+    CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
     CreateFont = function(name)
       return _CreateUIObject(api, 'font', name)
     end,
@@ -701,6 +702,7 @@ local function mkWowEnv(api)
       return 1, 1  -- UNIMPLEMENTED
     end,
     GetGuildRosterShowOffline = UNIMPLEMENTED,
+    GetInventoryAlertStatus = UNIMPLEMENTED,
     GetInventorySlotInfo = function()
       return 'UNIMPLEMENTED'
     end,
@@ -719,6 +721,7 @@ local function mkWowEnv(api)
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetNumQuestWatches = STUB_NUMBER,
     GetNumShapeshiftForms = STUB_NUMBER,
     GetNumSkillLines = STUB_NUMBER,
     GetNumSubgroupMembers = STUB_NUMBER,
@@ -726,6 +729,8 @@ local function mkWowEnv(api)
     GetNumTrackingTypes = STUB_NUMBER,
     GetPetActionCooldown = UNIMPLEMENTED,
     GetPetActionInfo = UNIMPLEMENTED,
+    GetPetExperience = STUB_NUMBER,
+    GetPlayerTradeMoney = STUB_NUMBER,
     GetRepairAllCost = STUB_NUMBER,
     GetScreenHeight = STUB_NUMBER,
     GetScreenWidth = STUB_NUMBER,
@@ -749,6 +754,7 @@ local function mkWowEnv(api)
     IsAddOnLoaded = UNIMPLEMENTED,
     IsAddonVersionCheckEnabled = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
+    IsBattlefieldArena = UNIMPLEMENTED,
     IsConsumableAction = UNIMPLEMENTED,
     IsControlKeyDown = UNIMPLEMENTED,
     IsEquippedAction = UNIMPLEMENTED,
