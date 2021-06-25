@@ -61,6 +61,7 @@ local function mkBaseUIObjectTypes(api)
         IsEnabled = UNIMPLEMENTED,
         LockHighlight = UNIMPLEMENTED,
         RegisterForClicks = UNIMPLEMENTED,
+        SetButtonState = UNIMPLEMENTED,
         SetDisabledFontObject = UNIMPLEMENTED,
         SetDisabledTexture = function(self, tex)
           self.__disabledTexture = toTexture(self, tex)
@@ -135,6 +136,7 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         GetNumber = STUB_NUMBER,
         SetNumber = UNIMPLEMENTED,
+        SetSecureText = UNIMPLEMENTED,
       },
       name = 'EditBox',
     },
@@ -163,6 +165,7 @@ local function mkBaseUIObjectTypes(api)
         GetText = UNIMPLEMENTED,
         IsTruncated = UNIMPLEMENTED,
         SetFormattedText = UNIMPLEMENTED,
+        SetMaxLines = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
       },
       name = 'FontString',
@@ -585,6 +588,7 @@ local function mkBaseEnv()
     tinsert = table.insert,
     tonumber = tonumber,
     tostring = tostring,
+    tremove = table.remove,
     type = type,
   }, {
     __index = function(t, k)
@@ -628,10 +632,16 @@ local function mkWowEnv(api)
       IsValidChatLine = UNIMPLEMENTED,
     },
     C_Club = {},
+    C_Commentator = {
+      IsSpectating = UNIMPLEMENTED,
+    },
     C_CVar = {
       GetCVar = UNIMPLEMENTED,
       GetCVarBool = UNIMPLEMENTED,
       GetCVarDefault = UNIMPLEMENTED,
+    },
+    C_DeathInfo = {
+      GetSelfResurrectOptions = UNIMPLEMENTED,
     },
     C_FriendList = {
       SetWhoToUi = UNIMPLEMENTED,
@@ -658,6 +668,11 @@ local function mkWowEnv(api)
     },
     C_StorePublic = {
       IsDisabledByParentalControls = UNIMPLEMENTED,
+    },
+    C_SummonInfo = {
+      GetSummonConfirmTimeLeft = STUB_NUMBER,
+      GetSummonReason = UNIMPLEMENTED,
+      IsSummonSkippingStartExperience = UNIMPLEMENTED,
     },
     C_Texture = {
       GetAtlasInfo = UNIMPLEMENTED,
@@ -692,6 +707,7 @@ local function mkWowEnv(api)
     GetActionCount = STUB_NUMBER,
     GetActionInfo = UNIMPLEMENTED,
     GetActionTexture = UNIMPLEMENTED,
+    GetActiveLootRollIDs = STUB_TABLE,
     GetAddOnEnableState = UNIMPLEMENTED,
     GetAlternativeDefaultLanguage = UNIMPLEMENTED,
     GetAvailableLocales = UNIMPLEMENTED,
@@ -752,6 +768,7 @@ local function mkWowEnv(api)
     GetPetActionInfo = UNIMPLEMENTED,
     GetPetExperience = STUB_NUMBER,
     GetPlayerTradeMoney = STUB_NUMBER,
+    GetReleaseTimeRemaining = STUB_NUMBER,
     GetRepairAllCost = STUB_NUMBER,
     GetRestState = function()
       return 2, 'Normal', 1  -- UNIMPLEMENTED
@@ -763,6 +780,7 @@ local function mkWowEnv(api)
     GetSkillLineInfo = function()
       return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
     end,
+    GetSpellConfirmationPromptsInfo = STUB_TABLE,
     GetSubZoneText = UNIMPLEMENTED,
     GetTabardCreationCost = STUB_NUMBER,
     GetText = UNIMPLEMENTED,
@@ -777,6 +795,7 @@ local function mkWowEnv(api)
     HasAction = UNIMPLEMENTED,
     HasKey = UNIMPLEMENTED,
     HasPetUI = UNIMPLEMENTED,
+    InCinematic = UNIMPLEMENTED,
     InCombatLockdown = UNIMPLEMENTED,
     IsAddOnLoaded = UNIMPLEMENTED,
     IsAddonVersionCheckEnabled = UNIMPLEMENTED,
@@ -818,6 +837,7 @@ local function mkWowEnv(api)
     PetHasActionBar = UNIMPLEMENTED,
     PlaySound = UNIMPLEMENTED,
     RegisterStaticConstants = UNIMPLEMENTED,
+    ResurrectGetOfferer = UNIMPLEMENTED,
     securecall = function(func, ...)
       assert(func, 'securecall of nil function')
       if type(func) == 'string' then
@@ -840,11 +860,13 @@ local function mkWowEnv(api)
     UnitChannelInfo = UNIMPLEMENTED,
     UnitClass = UNIMPLEMENTED,
     UnitExists = UNIMPLEMENTED,
+    UnitFactionGroup = UNIMPLEMENTED,
     UnitHealth = STUB_NUMBER,
     UnitHealthMax = STUB_NUMBER,
     UnitInBattleground = UNIMPLEMENTED,
     UnitIsConnected = UNIMPLEMENTED,
     UnitIsDead = UNIMPLEMENTED,
+    UnitIsDeadOrGhost = UNIMPLEMENTED,
     UnitIsGhost = UNIMPLEMENTED,
     UnitIsGroupAssistant = UNIMPLEMENTED,
     UnitIsGroupLeader = UNIMPLEMENTED,
