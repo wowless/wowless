@@ -303,6 +303,7 @@ local function run(loglevel)
   end
   local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
   loader(api, log, sink)(toc)
+  api:SendEvent('PLAYER_LOGIN')
   return env, errors
 end
 

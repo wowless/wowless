@@ -165,6 +165,7 @@ local function mkBaseUIObjectTypes(api)
     },
     frame = {
       constructor = function(self, xmlattr)
+        table.insert(api.frames, self)
         self.__attributes = self.__attributes or {}
         if xmlattr.id then
           self:SetID(xmlattr.id)
@@ -818,14 +819,25 @@ local function mkWowEnv(api)
   }
 end
 
+local function _SendEvent(api, event, ...)
+  local args = {...}
+  for _, frame in ipairs(api.frames) do
+    xpcall(function() frame:__RunScript('OnEvent', event, unpack(args)) end, function(err)
+      print('error: ' .. err)
+    end)
+  end
+end
+
 local function new(log)
   local env = mkBaseEnv()
   local api = {
     CreateUIObject = _CreateUIObject,
     env = env,
+    frames = {},
     IsIntrinsicType = _IsIntrinsicType,
     IsUIObjectType = _IsUIObjectType,
     log = log,
+    SendEvent = _SendEvent,
   }
   api.uiobjectTypes = mkBaseUIObjectTypes(api)
   Mixin(env, mkWowEnv(api), require('wowless.globalstrings'))
