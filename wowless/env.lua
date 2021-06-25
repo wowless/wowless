@@ -615,6 +615,9 @@ local function mkWowEnv(api)
     BNFeaturesEnabled = UNIMPLEMENTED,
     BNFeaturesEnabledAndConnected = UNIMPLEMENTED,
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
+    Constants = {
+      CurrencyConsts = {},
+    },
     CreateFont = function(name)
       return _CreateUIObject(api, 'font', name)
     end,
@@ -635,6 +638,9 @@ local function mkWowEnv(api)
     C_Club = {},
     C_Commentator = {
       IsSpectating = UNIMPLEMENTED,
+    },
+    C_CurrencyInfo = {
+      GetCurrencyInfo = STUB_TABLE,
     },
     C_CVar = {
       GetCVar = function(var)
@@ -722,6 +728,7 @@ local function mkWowEnv(api)
     GetActiveLootRollIDs = STUB_TABLE,
     GetAddOnEnableState = UNIMPLEMENTED,
     GetAlternativeDefaultLanguage = UNIMPLEMENTED,
+    GetArenaTeam = UNIMPLEMENTED,
     GetAvailableLocales = UNIMPLEMENTED,
     GetBattlefieldStatus = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
@@ -780,6 +787,9 @@ local function mkWowEnv(api)
     GetPetActionInfo = UNIMPLEMENTED,
     GetPetExperience = STUB_NUMBER,
     GetPlayerTradeMoney = STUB_NUMBER,
+    GetPVPLifetimeStats = UNIMPLEMENTED,
+    GetPVPSessionStats = UNIMPLEMENTED,
+    GetPVPYesterdayStats = UNIMPLEMENTED,
     GetReleaseTimeRemaining = STUB_NUMBER,
     GetRepairAllCost = STUB_NUMBER,
     GetRestState = function()
