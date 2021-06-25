@@ -168,9 +168,9 @@ local function loader(api, log, sink)
                 local fn
                 if script.func then
                   local fnattr = script.func
-                  fn = function(x, ...)
+                  fn = function(...)
                     assert(api.env[fnattr], 'unknown script function ' .. fnattr)
-                    api.env[fnattr](x, ...)
+                    api.env[fnattr](...)
                   end
                 elseif script.method then
                   local mattr = script.method
@@ -191,9 +191,9 @@ local function loader(api, log, sink)
                   if old and script.inherit then
                     local bfn = fn
                     if script.inherit == 'prepend' then
-                      fn = function(x, ...) bfn(x, ...) old(x, ...) end
+                      fn = function(...) bfn(...) old(...) end
                     elseif script.inherit == 'append' then
-                      fn = function(x, ...) old(x, ...) bfn(x, ...) end
+                      fn = function(...) old(...) bfn(...) end
                     else
                       error('invalid inherit tag on script')
                     end
