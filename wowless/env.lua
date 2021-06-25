@@ -814,6 +814,7 @@ local function mkWowEnv(api)
     GetTime = UNIMPLEMENTED,
     GetTotemInfo = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
+    GetQuestTimers = UNIMPLEMENTED,
     GetXPExhaustion = UNIMPLEMENTED,
     GetZonePVPInfo = UNIMPLEMENTED,
     GetZoneText = UNIMPLEMENTED,
@@ -842,6 +843,7 @@ local function mkWowEnv(api)
     IsItemAction = UNIMPLEMENTED,
     IsMacClient = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
+    IsResting = UNIMPLEMENTED,
     IsRestrictedAccount = UNIMPLEMENTED,
     issecure = UNIMPLEMENTED,
     IsShiftKeyDown = UNIMPLEMENTED,
@@ -866,6 +868,7 @@ local function mkWowEnv(api)
     PetHasActionBar = UNIMPLEMENTED,
     PlaySound = UNIMPLEMENTED,
     RegisterStaticConstants = UNIMPLEMENTED,
+    RequestRaidInfo = UNIMPLEMENTED,
     ResurrectGetOfferer = UNIMPLEMENTED,
     securecall = function(func, ...)
       assert(func, 'securecall of nil function')
@@ -887,6 +890,7 @@ local function mkWowEnv(api)
     Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
     TriggerTutorial = UNIMPLEMENTED,
+    UnitAura = UNIMPLEMENTED,
     UnitCastingInfo = UNIMPLEMENTED,
     UnitChannelInfo = UNIMPLEMENTED,
     UnitClass = UNIMPLEMENTED,
