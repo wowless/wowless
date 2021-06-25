@@ -17,6 +17,9 @@ local function toTexture(parent, tex)
 end
 
 local function mkBaseUIObjectTypes(api)
+  local function u(x)
+    return api.userdata[x]
+  end
   return {
     actor = {
       inherits = {'parentedobject', 'scriptobject'},
@@ -35,7 +38,7 @@ local function mkBaseUIObjectTypes(api)
     },
     button = {
       constructor = function(self)
-        self.__fontstring = self:CreateFontString()
+        u(self).fontstring = self:CreateFontString()
       end,
       inherits = {'frame'},
       intrinsic = true,
@@ -43,19 +46,19 @@ local function mkBaseUIObjectTypes(api)
         Disable = UNIMPLEMENTED,
         Enable = UNIMPLEMENTED,
         GetDisabledTexture = function(self)
-          return self.__disabledTexture
+          return u(self).disabledTexture
         end,
         GetFontString = function(self)
-          return self.__fontstring
+          return u(self).fontstring
         end,
         GetHighlightTexture = function(self)
-          return self.__highlightTexture
+          return u(self).highlightTexture
         end,
         GetNormalTexture = function(self)
-          return self.__normalTexture
+          return u(self).normalTexture
         end,
         GetPushedTexture = function(self)
-          return self.__pushedTexture
+          return u(self).pushedTexture
         end,
         GetText = UNIMPLEMENTED,
         GetTextWidth = STUB_NUMBER,
@@ -65,22 +68,22 @@ local function mkBaseUIObjectTypes(api)
         SetButtonState = UNIMPLEMENTED,
         SetDisabledFontObject = UNIMPLEMENTED,
         SetDisabledTexture = function(self, tex)
-          self.__disabledTexture = toTexture(self, tex)
+          u(self).disabledTexture = toTexture(self, tex)
         end,
         SetEnabled = UNIMPLEMENTED,
         SetHighlightAtlas = UNIMPLEMENTED,
         SetHighlightFontObject = UNIMPLEMENTED,
         SetHighlightTexture = function(self, tex)
-          self.__highlightTexture = toTexture(self, tex)
+          u(self).highlightTexture = toTexture(self, tex)
         end,
         SetNormalAtlas = UNIMPLEMENTED,
         SetNormalFontObject = UNIMPLEMENTED,
         SetNormalTexture = function(self, tex)
-          self.__normalTexture = toTexture(self, tex)
+          u(self).normalTexture = toTexture(self, tex)
         end,
         SetPushedAtlas = UNIMPLEMENTED,
         SetPushedTexture = function(self, tex)
-          self.__pushedTexture = toTexture(self, tex)
+          u(self).pushedTexture = toTexture(self, tex)
         end,
         SetText = UNIMPLEMENTED,
         UnlockHighlight = UNIMPLEMENTED,
@@ -92,17 +95,17 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         GetCheckedTexture = function(self)
-          return self.__checkedTexture
+          return u(self).checkedTexture
         end,
         GetDisabledCheckedTexture = function(self)
-          return self.__disabledCheckedTexture
+          return u(self).disabledCheckedTexture
         end,
         SetChecked = UNIMPLEMENTED,
         SetCheckedTexture = function(self, tex)
-          self.__checkedTexture = toTexture(self, tex)
+          u(self).checkedTexture = toTexture(self, tex)
         end,
         SetDisabledCheckedTexture = function(self, tex)
-          self.__disabledCheckedTexture = toTexture(self, tex)
+          u(self).disabledCheckedTexture = toTexture(self, tex)
         end,
       },
       name = 'CheckButton',
@@ -113,15 +116,15 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         Clear = UNIMPLEMENTED,
         SetBlingTexture = function(self, tex)
-          self.__blingTexture = toTexture(self, tex)
+          u(self).blingTexture = toTexture(self, tex)
         end,
         SetEdgeTexture = function(self, tex)
-          self.__edgeTexture = toTexture(self, tex)
+          u(self).edgeTexture = toTexture(self, tex)
         end,
         SetHideCountdownNumbers = UNIMPLEMENTED,
         SetSwipeColor = UNIMPLEMENTED,
         SetSwipeTexture = function(self, tex)
-          self.__swipeTexture = toTexture(self, tex)
+          u(self).swipeTexture = toTexture(self, tex)
         end,
       },
       name = 'Cooldown',
@@ -174,8 +177,8 @@ local function mkBaseUIObjectTypes(api)
     frame = {
       constructor = function(self, xmlattr)
         table.insert(api.frames, self)
-        self.__attributes = self.__attributes or {}
-        self.__registeredEvents = {}
+        u(self).attributes = {}
+        u(self).registeredEvents = {}
         if xmlattr.id then
           self:SetID(xmlattr.id)
         end
@@ -191,37 +194,37 @@ local function mkBaseUIObjectTypes(api)
         end,
         EnableMouse = UNIMPLEMENTED,
         GetAttribute = function(self, name)
-          return self.__attributes[name]
+          return u(self).attributes[name]
         end,
         GetFrameLevel = STUB_NUMBER,
         GetID = function(self)
-          return self.__id or 0
+          return u(self).id or 0
         end,
         IgnoreDepth = UNIMPLEMENTED,
         IsEventRegistered = UNIMPLEMENTED,
         IsUserPlaced = UNIMPLEMENTED,
         Raise = UNIMPLEMENTED,
         RegisterEvent = function(self, event)
-          self.__registeredEvents[string.lower(event)] = true
+          u(self).registeredEvents[string.lower(event)] = true
         end,
         RegisterForDrag = UNIMPLEMENTED,
         RegisterUnitEvent = UNIMPLEMENTED,
         SetAttribute = function(self, name, value)
           api.log(4, 'setting attribute %s on %s to %s', name, tostring(self:GetName()), tostring(value))
-          self.__attributes[name] = value
-          self:__RunScript('OnAttributeChanged', name, value)
+          u(self).attributes[name] = value
+          u(self).RunScript(self, 'OnAttributeChanged', name, value)
         end,
         SetClampRectInsets = UNIMPLEMENTED,
         SetFrameLevel = UNIMPLEMENTED,
         SetFrameStrata = UNIMPLEMENTED,
         SetHitRectInsets = UNIMPLEMENTED,
         SetID = function(self, id)
-          self.__id = id
+          u(self).id = id
         end,
         SetMouseClickEnabled = UNIMPLEMENTED,
         SetUserPlaced = UNIMPLEMENTED,
         UnregisterEvent = function(self, event)
-          self.__registeredEvents[string.lower(event)] = nil
+          u(self).registeredEvents[string.lower(event)] = nil
         end,
       },
       name = 'Frame',
@@ -283,7 +286,7 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         GetParent = function(self)
-          return self.__parent
+          return u(self).parent
         end,
         SetForbidden = UNIMPLEMENTED,
       },
@@ -324,7 +327,7 @@ local function mkBaseUIObjectTypes(api)
         SetAlpha = UNIMPLEMENTED,
         SetHeight = UNIMPLEMENTED,
         SetParent = function(self, parent)
-          self.__parent = parent
+          u(self).parent = parent
         end,
         SetPoint = UNIMPLEMENTED,
         SetScale = UNIMPLEMENTED,
@@ -337,12 +340,12 @@ local function mkBaseUIObjectTypes(api)
     },
     scriptobject = {
       constructor = function(self)
-        self.__scripts = self.__scripts or {
+        u(self).scripts = {
           [0] = {},
           [1] = {},
           [2] = {},
         }
-        self.__RunScript = function(_, name, ...)
+        u(self).RunScript = function(_, name, ...)
           for i = 0, 2 do
             local script = self:GetScript(name, i)
             if script then
@@ -352,19 +355,19 @@ local function mkBaseUIObjectTypes(api)
             end
           end
         end
-        self.__SetScript = function(_, name, bindingType, script)
+        u(self).SetScript = function(_, name, bindingType, script)
           api.log(4, 'setting %s[%d] for %s %s', name, bindingType, self:GetObjectType(), tostring(self:GetName()))
-          self.__scripts[bindingType][string.lower(name)] = script
+          u(self).scripts[bindingType][string.lower(name)] = script
         end
       end,
       inherits = {},
       intrinsic = true,
       mixin = {
         GetScript = function(self, name, bindingType)
-          return self.__scripts[bindingType or 1][string.lower(name)]
+          return u(self).scripts[bindingType or 1][string.lower(name)]
         end,
         SetScript = function(self, name, script)
-          self:__SetScript(name, 1, script)
+          u(self).SetScript(self, name, 1, script)
         end,
       },
       name = 'ScriptObject',
@@ -376,10 +379,10 @@ local function mkBaseUIObjectTypes(api)
         GetHorizontalScroll = STUB_NUMBER,
         GetVerticalScrollRange = STUB_NUMBER,
         GetScrollChild = function(self)
-          return self.__scrollChild
+          return u(self).scrollChild
         end,
         SetScrollChild = function(self, scrollChild)
-          self.__scrollChild = scrollChild
+          u(self).scrollChild = scrollChild
         end,
         SetVerticalScroll = UNIMPLEMENTED,
         UpdateScrollChildRect = UNIMPLEMENTED,
@@ -394,13 +397,13 @@ local function mkBaseUIObjectTypes(api)
         Enable = UNIMPLEMENTED,
         GetMinMaxValues = UNIMPLEMENTED,
         GetThumbTexture = function(self)
-          return self.__thumbTexture
+          return u(self).thumbTexture
         end,
         GetValue = STUB_NUMBER,
         SetMinMaxValues = UNIMPLEMENTED,
         SetStepsPerPage = UNIMPLEMENTED,
         SetThumbTexture = function(self, tex)
-          self.__thumbTexture = toTexture(self, tex)
+          u(self).thumbTexture = toTexture(self, tex)
         end,
         SetValue = UNIMPLEMENTED,
         SetValueStep = UNIMPLEMENTED,
@@ -415,7 +418,7 @@ local function mkBaseUIObjectTypes(api)
           return 0, 0  -- UNIMPLEMENTED
         end,
         GetStatusBarTexture = function(self)
-          return self.__statusBarTexture
+          return u(self).statusBarTexture
         end,
         GetValue = function()
           return 0  -- UNIMPLEMENTED
@@ -425,9 +428,9 @@ local function mkBaseUIObjectTypes(api)
         SetStatusBarTexture = function(self, tex)
           if type(tex) == 'number' then
             api.log(1, 'unimplemented call to SetStatusBarTexture')
-            self.__statusBarTexture = self:CreateTexture()
+            u(self).statusBarTexture = self:CreateTexture()
           else
-            self.__statusBarTexture = toTexture(self, tex)
+            u(self).statusBarTexture = toTexture(self, tex)
           end
         end,
         SetValue = UNIMPLEMENTED,
@@ -455,10 +458,10 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         GetName = function(self)
-          return self.__name
+          return u(self).name
         end,
         GetObjectType = function(self)
-          return self.__type
+          return u(self).type
         end,
         IsObjectType = UNIMPLEMENTED,
       },
@@ -516,13 +519,12 @@ local function _CreateUIObject(api, typename, objname, parent, inherits, xmlattr
   for _, s in ipairs(supers) do
     Mixin(wapi, api.uiobjectTypes[s].mixin)
   end
-  local obj = setmetatable({
-    __name = objname,
-    __parent = parent,
-    __type = typename,
-  }, {
-    __index = wapi,
-  })
+  local obj = setmetatable({}, {__index = wapi})
+  api.userdata[obj] = {
+    name = objname,
+    parent = parent,
+    type = typename,
+  }
   for _, t in ipairs(supers) do
     local ty = api.uiobjectTypes[t]
     if ty.constructor then
@@ -633,7 +635,7 @@ local function mkWowEnv(api)
         table.insert(inherits, string.lower(template))
       end
       local obj = _CreateUIObject(api, ltype, name, parent, inherits)
-      obj:__RunScript('OnLoad')
+      api.userdata[obj].RunScript(obj, 'OnLoad')
       return obj
     end,
     C_ChatInfo = {
@@ -944,9 +946,9 @@ end
 local function _SendEvent(api, event, ...)
   local args = {...}
   for _, frame in ipairs(api.frames) do
-    if frame.__registeredEvents[string.lower(event)] then
+    if api.userdata[frame].registeredEvents[string.lower(event)] then
       api:CallSafely(function()
-        frame:__RunScript('OnEvent', event, unpack(args))
+        api.userdata[frame].RunScript(frame, 'OnEvent', event, unpack(args))
       end)
     end
   end
@@ -964,6 +966,7 @@ local function new(log)
     IsUIObjectType = _IsUIObjectType,
     log = log,
     SendEvent = _SendEvent,
+    userdata = {},
   }
   api.uiobjectTypes = mkBaseUIObjectTypes(api)
   Mixin(env, mkWowEnv(api), require('wowless.globalstrings'))
