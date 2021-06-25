@@ -933,7 +933,7 @@ local function mkWowEnv(api)
   }
 end
 
-local function Call(api, fun)
+local function CallSafely(api, fun)
   return xpcall(fun, function(err)
     api.errors = api.errors + 1
     print('error: ' .. err)
@@ -945,7 +945,7 @@ local function _SendEvent(api, event, ...)
   local args = {...}
   for _, frame in ipairs(api.frames) do
     if frame.__registeredEvents[string.lower(event)] then
-      api:Call(function()
+      api:CallSafely(function()
         frame:__RunScript('OnEvent', event, unpack(args))
       end)
     end
@@ -955,7 +955,7 @@ end
 local function new(log)
   local env = mkBaseEnv()
   local api = {
-    Call = Call,
+    CallSafely = CallSafely,
     CreateUIObject = _CreateUIObject,
     env = env,
     errors = 0,

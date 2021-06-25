@@ -20,7 +20,7 @@ local function loader(api, log)
   end
 
   local function loadLuaString(filename, str)
-    api:Call(setfenv(assert(loadstring(str, path.basename(filename))), api.env))
+    api:CallSafely(setfenv(assert(loadstring(str, path.basename(filename))), api.env))
   end
 
   local loadFile
@@ -254,7 +254,7 @@ local function loader(api, log)
           mixin(obj, mix)
           constructor(obj)
           if obj.__RunScript then
-            api:Call(function() obj:__RunScript('OnLoad') end)
+            api:CallSafely(function() obj:__RunScript('OnLoad') end)
           end
           return obj
         end
