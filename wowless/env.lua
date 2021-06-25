@@ -643,7 +643,9 @@ local function mkWowEnv(api)
       GetCVarBool = UNIMPLEMENTED,
       GetCVarDefault = function(var)  -- UNIMPLEMENTED
         local defaults = {
-          nameplateMotion = 0
+          cameraSmoothStyle = '0',
+          cameraSmoothTrackingStyle = '0',
+          nameplateMotion = '0',
         }
         return defaults[var]
       end,
@@ -661,6 +663,9 @@ local function mkWowEnv(api)
     C_LootHistory = {
       GetItem = UNIMPLEMENTED,
       GetNumItems = STUB_NUMBER,
+    },
+    C_NamePlate = {
+      GetNumNamePlateMotionTypes = STUB_NUMBER,
     },
     C_PaperDollInfo = {
       OffhandHasWeapon = UNIMPLEMENTED,
