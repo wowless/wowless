@@ -27,6 +27,7 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'parentedobject', 'scriptobject'},
       intrinsic = true,
       mixin = {
+        IsPlaying = UNIMPLEMENTED,
         Play = UNIMPLEMENTED,
         Stop = UNIMPLEMENTED,
       },
@@ -799,6 +800,8 @@ local function mkWowEnv(api)
     GetScreenWidth = STUB_NUMBER,
     GetSelectedSkill = STUB_NUMBER,
     GetSendMailPrice = STUB_NUMBER,
+    GetShapeshiftFormCooldown = UNIMPLEMENTED,
+    GetShapeshiftFormInfo = UNIMPLEMENTED,
     GetSkillLineInfo = function()
       return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
     end,
@@ -815,8 +818,10 @@ local function mkWowEnv(api)
     GuildControlGetNumRanks = STUB_NUMBER,
     GuildControlGetRankName = UNIMPLEMENTED,
     HasAction = UNIMPLEMENTED,
+    HasBonusActionBar = UNIMPLEMENTED,
     HasKey = UNIMPLEMENTED,
     HasPetUI = UNIMPLEMENTED,
+    HasTempShapeshiftActionBar = UNIMPLEMENTED,
     InCinematic = UNIMPLEMENTED,
     InCombatLockdown = UNIMPLEMENTED,
     IsAddOnLoaded = UNIMPLEMENTED,
