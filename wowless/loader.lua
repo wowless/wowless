@@ -1,4 +1,4 @@
-local function loader(api, log, sink)
+local function loader(api, log)
 
   local path = require('path')
   local xml = require('wowless.xml')
@@ -20,7 +20,7 @@ local function loader(api, log, sink)
   end
 
   local function loadLuaString(filename, str)
-    sink(assert(loadstring(str, path.basename(filename))))
+    api:Call(setfenv(assert(loadstring(str, path.basename(filename))), api.env))
   end
 
   local loadFile
@@ -254,7 +254,7 @@ local function loader(api, log, sink)
           mixin(obj, mix)
           constructor(obj)
           if obj.__RunScript then
-            sink(function() obj:__RunScript('OnLoad') end)
+            api:Call(function() obj:__RunScript('OnLoad') end)
           end
           return obj
         end
@@ -303,12 +303,9 @@ local function run(loglevel)
       print(string.format(fmt, ...))
     end
   end
-  local env, api = require('wowless.env').new(log)
-  local sink = function(lua)
-    api:Call(setfenv(lua, env))
-  end
+  local api = require('wowless.env').new(log)
   local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
-  loader(api, log, sink)(toc)
+  loader(api, log)(toc)
   return api
 end
 

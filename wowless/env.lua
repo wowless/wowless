@@ -967,7 +967,7 @@ local function new(log)
   }
   api.uiobjectTypes = mkBaseUIObjectTypes(api)
   Mixin(env, mkWowEnv(api), require('wowless.globalstrings'))
-  return env, api
+  return api
 end
 
 return {
