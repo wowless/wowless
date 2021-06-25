@@ -164,8 +164,11 @@ local function mkBaseUIObjectTypes(api)
       name = 'FontString',
     },
     frame = {
-      constructor = function(self)
+      constructor = function(self, xmlattr)
         self.__attributes = self.__attributes or {}
+        if xmlattr.id then
+          self:SetID(xmlattr.id)
+        end
       end,
       inherits = {'parentedobject', 'region', 'scriptobject'},
       intrinsic = true,
@@ -479,7 +482,7 @@ local function superTypes(api, type, inherits)
   return g:sort()
 end
 
-local function _CreateUIObject(api, typename, objname, parent, inherits)
+local function _CreateUIObject(api, typename, objname, parent, inherits, xmlattr)
   assert(typename, 'must specify type for ' .. tostring(objname))
   local type = api.uiobjectTypes[typename]
   assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
@@ -500,7 +503,7 @@ local function _CreateUIObject(api, typename, objname, parent, inherits)
     local ty = api.uiobjectTypes[t]
     if ty.constructor then
       api.log(4, 'running constructor for ' .. ty.name)
-      ty.constructor(obj)
+      ty.constructor(obj, xmlattr or {})
     end
   end
   if objname then

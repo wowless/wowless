@@ -237,12 +237,9 @@ local function loader(api, log, sink)
           if virtual and ignoreVirtual then
             api.log(1, 'ignoring virtual on ' .. tostring(name))
           end
-          local obj = api:CreateUIObject(e.type, name, parent, inherits)
+          local obj = api:CreateUIObject(e.type, name, parent, inherits, e.attr)
           mixin(obj, mix)
           constructor(obj)
-          if e.attr.id then
-            obj:SetID(e.attr.id)
-          end
           if obj.__RunScript then
             sink(function() obj:__RunScript('OnLoad') end)
           end
