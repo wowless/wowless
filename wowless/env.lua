@@ -279,6 +279,7 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         RefreshCamera = UNIMPLEMENTED,
+        RefreshUnit = UNIMPLEMENTED,
         SetPortraitZoom = UNIMPLEMENTED,
       },
       name = 'PlayerModel',
@@ -684,6 +685,7 @@ local function mkWowEnv(api)
     GetChatWindowInfo = UNIMPLEMENTED,
     GetChatWindowSavedDimensions = UNIMPLEMENTED,
     GetChatWindowSavedPosition = UNIMPLEMENTED,
+    GetClassicExpansionLevel = STUB_NUMBER,
     GetComboPoints = STUB_NUMBER,
     GetCurrentScaledResolution = function()
       return 1024, 768  -- UNIMPLEMENTED
@@ -713,6 +715,7 @@ local function mkWowEnv(api)
     GetMinimapZoneText = UNIMPLEMENTED,
     GetMinRenderScale = UNIMPLEMENTED,
     GetModifiedClick = UNIMPLEMENTED,
+    GetMouseFocus = UNIMPLEMENTED,
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -723,6 +726,7 @@ local function mkWowEnv(api)
     GetNumTrackingTypes = STUB_NUMBER,
     GetPetActionCooldown = UNIMPLEMENTED,
     GetPetActionInfo = UNIMPLEMENTED,
+    GetRepairAllCost = STUB_NUMBER,
     GetScreenHeight = STUB_NUMBER,
     GetScreenWidth = STUB_NUMBER,
     GetSelectedSkill = STUB_NUMBER,
@@ -765,6 +769,11 @@ local function mkWowEnv(api)
     IsTrialAccount = UNIMPLEMENTED,
     IsVeteranTrialAccount = UNIMPLEMENTED,
     IsWindowsClient = UNIMPLEMENTED,
+    LE_EXPANSION_BURNING_CRUSADE = 2,  -- UNIMPLEMENTED
+    LoadAddOn = function(name)
+      api.log(1, 'failing to load addon ' .. name)
+      return false, 'LOAD_FAILED'  -- UNIMPLEMENTED
+    end,
     Kiosk = {
       IsEnabled = UNIMPLEMENTED,
     },
