@@ -216,6 +216,9 @@ local function mkBaseUIObjectTypes(api)
         end,
         SetMouseClickEnabled = UNIMPLEMENTED,
         SetUserPlaced = UNIMPLEMENTED,
+        UnregisterEvent = function(self, event)
+          self.__registeredEvents[string.lower(event)] = nil
+        end,
       },
       name = 'Frame',
     },
