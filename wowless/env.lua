@@ -323,7 +323,9 @@ local function mkBaseUIObjectTypes(api)
         IsVisible = UNIMPLEMENTED,
         SetAlpha = UNIMPLEMENTED,
         SetHeight = UNIMPLEMENTED,
-        SetParent = UNIMPLEMENTED,
+        SetParent = function(self, parent)
+          self.__parent = parent
+        end,
         SetPoint = UNIMPLEMENTED,
         SetScale = UNIMPLEMENTED,
         SetShown = UNIMPLEMENTED,

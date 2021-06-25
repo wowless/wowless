@@ -158,6 +158,10 @@ local function loader(api, log, sink)
           virtual = true
         end
         local function constructor(obj)
+          if e.attr.parent then
+            log(3, 'setting parent to ' .. e.attr.parent)
+            obj:SetParent(api.env[e.attr.parent])
+          end
           if e.attr.parentkey then
             log(3, 'attaching ' .. e.attr.parentkey)
             obj:GetParent()[e.attr.parentkey] = obj
