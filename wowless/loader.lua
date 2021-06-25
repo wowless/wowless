@@ -168,31 +168,32 @@ local function loader(api, log, sink)
                 local fn
                 if script.func then
                   local fnattr = script.func
-                  fn = function()
+                  fn = function(x, ...)
                     assert(api.env[fnattr], 'unknown script function ' .. fnattr)
-                    api.env[fnattr](obj)
+                    api.env[fnattr](x, ...)
                   end
                 elseif script.method then
                   local mattr = script.method
-                  fn = function()
-                    assert(obj[mattr], 'unknown script method ' .. mattr)
-                    obj[mattr](obj)
+                  fn = function(x, ...)
+                    assert(x[mattr], 'unknown script method ' .. mattr)
+                    x[mattr](x, ...)
                   end
                 elseif script.text then
-                  local fnstr = 'return function(self, ...)\n' .. script.text .. '\nend'
-                  local sfn = setfenv(assert(loadstring(fnstr, path.basename(filename)))(), api.env)
-                  fn = function()
-                    sfn(obj)
-                  end
+                  local argTable = {
+                    onevent = 'self, event, ...'
+                  }
+                  local args = argTable[string.lower(script.type)] or 'self, ...'
+                  local fnstr = 'return function(' .. args .. ')\n' .. script.text .. '\nend'
+                  fn = setfenv(assert(loadstring(fnstr, path.basename(filename)))(), api.env)
                 end
                 if fn then
                   local old = obj:GetScript(script.type)
                   if old and script.inherit then
                     local bfn = fn
                     if script.inherit == 'prepend' then
-                      fn = function() bfn() old(obj) end
+                      fn = function(x, ...) bfn(x, ...) old(x, ...) end
                     elseif script.inherit == 'append' then
-                      fn = function() old(obj) bfn() end
+                      fn = function(x, ...) old(x, ...) bfn(x, ...) end
                     else
                       error('invalid inherit tag on script')
                     end
