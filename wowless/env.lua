@@ -571,6 +571,7 @@ local function mkBaseEnv()
     setmetatable = setmetatable,
     sort = table.sort,
     string = {
+      byte = string.byte,
       find = string.find,
       format = string.format,
       gmatch = string.gmatch,
