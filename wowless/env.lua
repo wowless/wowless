@@ -292,6 +292,7 @@ local function mkBaseUIObjectTypes(api)
         RefreshCamera = UNIMPLEMENTED,
         RefreshUnit = UNIMPLEMENTED,
         SetPortraitZoom = UNIMPLEMENTED,
+        SetUnit = UNIMPLEMENTED,
       },
       name = 'PlayerModel',
     },
@@ -731,6 +732,9 @@ local function mkWowEnv(api)
     GetMaxRenderScale = UNIMPLEMENTED,
     GetMinimapZoneText = UNIMPLEMENTED,
     GetMinRenderScale = UNIMPLEMENTED,
+    GetMirrorTimerInfo = function()
+      return 'UNKNOWN'  -- UNIMPLEMENTED
+    end,
     GetModifiedClick = UNIMPLEMENTED,
     GetMouseFocus = UNIMPLEMENTED,
     GetNumAddOns = function()
@@ -749,6 +753,9 @@ local function mkWowEnv(api)
     GetPetExperience = STUB_NUMBER,
     GetPlayerTradeMoney = STUB_NUMBER,
     GetRepairAllCost = STUB_NUMBER,
+    GetRestState = function()
+      return 2, 'Normal', 1  -- UNIMPLEMENTED
+    end,
     GetScreenHeight = STUB_NUMBER,
     GetScreenWidth = STUB_NUMBER,
     GetSelectedSkill = STUB_NUMBER,
@@ -762,11 +769,13 @@ local function mkWowEnv(api)
     GetTime = UNIMPLEMENTED,
     GetTotemInfo = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
+    GetXPExhaustion = UNIMPLEMENTED,
     GetZonePVPInfo = UNIMPLEMENTED,
     GetZoneText = UNIMPLEMENTED,
     GuildControlGetNumRanks = STUB_NUMBER,
     GuildControlGetRankName = UNIMPLEMENTED,
     HasAction = UNIMPLEMENTED,
+    HasKey = UNIMPLEMENTED,
     HasPetUI = UNIMPLEMENTED,
     InCombatLockdown = UNIMPLEMENTED,
     IsAddOnLoaded = UNIMPLEMENTED,
