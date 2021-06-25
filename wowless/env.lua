@@ -764,6 +764,7 @@ local function mkWowEnv(api)
     GetItemQualityColor = function()
       return 0, 0, 0  -- UNIMPLEMENTED
     end,
+    GetLanguageByIndex = UNIMPLEMENTED,
     GetLootMethod = function()
       return 'freeforall'  -- UNIMPLEMENTED
     end,
