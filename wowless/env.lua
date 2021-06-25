@@ -181,7 +181,9 @@ local function mkBaseUIObjectTypes(api)
           return self.__attributes[name]
         end,
         GetFrameLevel = STUB_NUMBER,
-        GetID = STUB_NUMBER,
+        GetID = function(self)
+          return self.__id or 0
+        end,
         IgnoreDepth = UNIMPLEMENTED,
         IsEventRegistered = UNIMPLEMENTED,
         IsUserPlaced = UNIMPLEMENTED,
@@ -197,7 +199,9 @@ local function mkBaseUIObjectTypes(api)
         SetFrameLevel = UNIMPLEMENTED,
         SetFrameStrata = UNIMPLEMENTED,
         SetHitRectInsets = UNIMPLEMENTED,
-        SetID = UNIMPLEMENTED,
+        SetID = function(self, id)
+          self.__id = id
+        end,
         SetMouseClickEnabled = UNIMPLEMENTED,
         SetUserPlaced = UNIMPLEMENTED,
       },
