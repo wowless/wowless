@@ -278,6 +278,7 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'model'},
       intrinsic = true,
       mixin = {
+        RefreshCamera = UNIMPLEMENTED,
         SetPortraitZoom = UNIMPLEMENTED,
       },
       name = 'PlayerModel',
@@ -301,6 +302,7 @@ local function mkBaseUIObjectTypes(api)
         GetWidth = STUB_NUMBER,
         Hide = UNIMPLEMENTED,
         IsShown = UNIMPLEMENTED,
+        IsVisible = UNIMPLEMENTED,
         SetAlpha = UNIMPLEMENTED,
         SetHeight = UNIMPLEMENTED,
         SetParent = UNIMPLEMENTED,
@@ -438,6 +440,7 @@ local function mkBaseUIObjectTypes(api)
         GetObjectType = function(self)
           return self.__type
         end,
+        IsObjectType = UNIMPLEMENTED,
       },
       name = 'UIObject',
     },
@@ -682,6 +685,9 @@ local function mkWowEnv(api)
     GetChatWindowSavedDimensions = UNIMPLEMENTED,
     GetChatWindowSavedPosition = UNIMPLEMENTED,
     GetComboPoints = STUB_NUMBER,
+    GetCurrentScaledResolution = function()
+      return 1024, 768  -- UNIMPLEMENTED
+    end,
     GetCurrentTitle = UNIMPLEMENTED,
     GetCVarInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
@@ -710,6 +716,7 @@ local function mkWowEnv(api)
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetNumShapeshiftForms = STUB_NUMBER,
     GetNumSkillLines = STUB_NUMBER,
     GetNumSubgroupMembers = STUB_NUMBER,
     GetNumTitles = STUB_NUMBER,
@@ -730,10 +737,12 @@ local function mkWowEnv(api)
     GetTotemInfo = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
     GetZonePVPInfo = UNIMPLEMENTED,
+    GetZoneText = UNIMPLEMENTED,
     GuildControlGetNumRanks = STUB_NUMBER,
     GuildControlGetRankName = UNIMPLEMENTED,
     HasAction = UNIMPLEMENTED,
     HasPetUI = UNIMPLEMENTED,
+    IsAddOnLoaded = UNIMPLEMENTED,
     IsAddonVersionCheckEnabled = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
     IsConsumableAction = UNIMPLEMENTED,
@@ -748,6 +757,7 @@ local function mkWowEnv(api)
     IsItemAction = UNIMPLEMENTED,
     IsMacClient = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
+    IsRestrictedAccount = UNIMPLEMENTED,
     issecure = UNIMPLEMENTED,
     IsShiftKeyDown = UNIMPLEMENTED,
     IsStackableAction = UNIMPLEMENTED,
@@ -802,6 +812,7 @@ local function mkWowEnv(api)
     UnitName = function()
       return 'Unitname'  -- UNIMPLEMENTED
     end,
+    UnitOnTaxi = UNIMPLEMENTED,
     UnitPower = STUB_NUMBER,
     UnitPowerMax = STUB_NUMBER,
     UnitPowerType = function()
