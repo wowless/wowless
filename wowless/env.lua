@@ -740,6 +740,7 @@ local function mkWowEnv(api)
     GetChatWindowSavedPosition = UNIMPLEMENTED,
     GetClassicExpansionLevel = STUB_NUMBER,
     GetComboPoints = STUB_NUMBER,
+    GetContainerNumFreeSlots = STUB_NUMBER,
     GetCurrentScaledResolution = function()
       return 1024, 768  -- UNIMPLEMENTED
     end,
@@ -776,6 +777,7 @@ local function mkWowEnv(api)
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetNumLanguages = STUB_NUMBER,
     GetNumQuestWatches = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -884,6 +886,7 @@ local function mkWowEnv(api)
     ShowBossFrameWhenUninteractable = UNIMPLEMENTED,
     Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
+    TriggerTutorial = UNIMPLEMENTED,
     UnitCastingInfo = UNIMPLEMENTED,
     UnitChannelInfo = UNIMPLEMENTED,
     UnitClass = UNIMPLEMENTED,
