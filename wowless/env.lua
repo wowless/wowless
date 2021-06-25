@@ -171,6 +171,7 @@ local function mkBaseUIObjectTypes(api)
       constructor = function(self, xmlattr)
         table.insert(api.frames, self)
         self.__attributes = self.__attributes or {}
+        self.__registeredEvents = {}
         if xmlattr.id then
           self:SetID(xmlattr.id)
         end
@@ -196,7 +197,9 @@ local function mkBaseUIObjectTypes(api)
         IsEventRegistered = UNIMPLEMENTED,
         IsUserPlaced = UNIMPLEMENTED,
         Raise = UNIMPLEMENTED,
-        RegisterEvent = UNIMPLEMENTED,
+        RegisterEvent = function(self, event)
+          self.__registeredEvents[string.lower(event)] = true
+        end,
         RegisterForDrag = UNIMPLEMENTED,
         RegisterUnitEvent = UNIMPLEMENTED,
         SetAttribute = function(self, name, value)
@@ -860,9 +863,11 @@ end
 local function _SendEvent(api, event, ...)
   local args = {...}
   for _, frame in ipairs(api.frames) do
-    xpcall(function() frame:__RunScript('OnEvent', event, unpack(args)) end, function(err)
-      print('error: ' .. err)
-    end)
+    if frame.__registeredEvents[string.lower(event)] then
+      xpcall(function() frame:__RunScript('OnEvent', event, unpack(args)) end, function(err)
+        print('error: ' .. err)
+      end)
+    end
   end
 end
 
