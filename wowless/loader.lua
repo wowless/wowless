@@ -240,6 +240,9 @@ local function loader(api, log, sink)
           local obj = api:CreateUIObject(e.type, name, parent, inherits)
           mixin(obj, mix)
           constructor(obj)
+          if e.attr.id then
+            obj:SetID(e.attr.id)
+          end
           if obj.__RunScript then
             sink(function() obj:__RunScript('OnLoad') end)
           end
