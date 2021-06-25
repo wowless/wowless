@@ -5,6 +5,20 @@ local function loader(api, log, sink)
   local util = require('wowless.util')
   local readFile, mixin = util.readfile, util.mixin
 
+  local function parseTypedValue(type, value)
+    if type == 'number' then
+      return tonumber(value)
+    elseif type == 'global' then
+      return api.env[value]
+    elseif type == 'boolean' then
+      return (value == 'true')
+    elseif type == 'string' or type == nil then
+      return value
+    else
+      error('invalid keyvalue/attribute type ' .. type)
+    end
+  end
+
   local function loadLuaString(filename, str)
     sink(assert(loadstring(str, path.basename(filename))))
   end
@@ -25,6 +39,11 @@ local function loader(api, log, sink)
     local xmllang = {
       animations = function(e, parent)
         loadElements(e.groups, parent)
+      end,
+      attributes = function(e, parent)
+        for _, attr in ipairs(e.entries) do
+          parent:SetAttribute(attr.name, parseTypedValue(attr.type, attr.value))
+        end
       end,
       bartexture = function(e, parent)
         parent:SetStatusBarTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
@@ -72,18 +91,7 @@ local function loader(api, log, sink)
       end,
       keyvalues = function(e, parent)
         for _, kv in ipairs(e.entries) do
-          local ty = kv.type
-          local v = kv.value
-          if ty == 'number' then
-            v = tonumber(v)
-          elseif ty == 'global' then
-            v = api.env[v]
-          elseif ty == 'boolean' then
-            v = (v == 'true')
-          elseif ty ~= nil and ty ~= 'string' then
-            error('invalid keyvalue type ' .. ty)
-          end
-          parent[kv.key] = v
+          parent[kv.key] = parseTypedValue(kv.type, kv.value)
         end
       end,
       layers = function(e, parent, ignoreVirtual)

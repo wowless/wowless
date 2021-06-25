@@ -760,6 +760,7 @@ local function mkWowEnv(api)
     GuildControlGetRankName = UNIMPLEMENTED,
     HasAction = UNIMPLEMENTED,
     HasPetUI = UNIMPLEMENTED,
+    InCombatLockdown = UNIMPLEMENTED,
     IsAddOnLoaded = UNIMPLEMENTED,
     IsAddonVersionCheckEnabled = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,

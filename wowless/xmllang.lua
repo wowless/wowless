@@ -149,21 +149,28 @@ return {
     },
   },
   attribute = {
-    attributes = {
+    fields = {
       name = {
+        source = 'attribute',
         type = 'string',
       },
       type = {
+        source = 'attribute',
         type = 'string',
       },
       value = {
+        source = 'attribute',
         type = 'string',
       },
     },
   },
   attributes = {
-    children = {
-      attribute = true,
+    fields = {
+      entries = {
+        child = 'attribute',
+        repeated = true,
+        source = 'child',
+      },
     },
   },
   backdrop = {
