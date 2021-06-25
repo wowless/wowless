@@ -132,6 +132,10 @@ local function mkBaseUIObjectTypes(api)
     editbox = {
       inherits = {'frame'},
       intrinsic = true,
+      mixin = {
+        GetNumber = STUB_NUMBER,
+        SetNumber = UNIMPLEMENTED,
+      },
       name = 'EditBox',
     },
     font = {
@@ -631,6 +635,9 @@ local function mkWowEnv(api)
       GetItem = UNIMPLEMENTED,
       GetNumItems = STUB_NUMBER,
     },
+    C_PaperDollInfo = {
+      OffhandHasWeapon = UNIMPLEMENTED,
+    },
     C_ProductChoice = {
       GetChoices = STUB_TABLE,
     },
@@ -721,7 +728,9 @@ local function mkWowEnv(api)
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
-    GetNumQuestWatches = STUB_NUMBER,
+    GetNumQuestWatches = function()
+      return 0  -- UNIMPLEMENTED
+    end,
     GetNumShapeshiftForms = STUB_NUMBER,
     GetNumSkillLines = STUB_NUMBER,
     GetNumSubgroupMembers = STUB_NUMBER,
