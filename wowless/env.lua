@@ -195,6 +195,7 @@ local function mkBaseUIObjectTypes(api)
         IgnoreDepth = UNIMPLEMENTED,
         IsEventRegistered = UNIMPLEMENTED,
         IsUserPlaced = UNIMPLEMENTED,
+        Raise = UNIMPLEMENTED,
         RegisterEvent = UNIMPLEMENTED,
         RegisterForDrag = UNIMPLEMENTED,
         RegisterUnitEvent = UNIMPLEMENTED,
@@ -301,10 +302,10 @@ local function mkBaseUIObjectTypes(api)
         end,
         GetPoint = UNIMPLEMENTED,
         GetRight = STUB_NUMBER,
-        GetTop = STUB_NUMBER,
         GetSize = function(self)
           return self:GetWidth(), self:GetHeight()
         end,
+        GetTop = STUB_NUMBER,
         GetWidth = STUB_NUMBER,
         Hide = UNIMPLEMENTED,
         IsShown = UNIMPLEMENTED,
