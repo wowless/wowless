@@ -637,9 +637,16 @@ local function mkWowEnv(api)
       IsSpectating = UNIMPLEMENTED,
     },
     C_CVar = {
-      GetCVar = UNIMPLEMENTED,
+      GetCVar = function(var)
+        return api.env.C_CVar.GetCVarDefault(var)  -- UNIMPLEMENTED
+      end,
       GetCVarBool = UNIMPLEMENTED,
-      GetCVarDefault = UNIMPLEMENTED,
+      GetCVarDefault = function(var)  -- UNIMPLEMENTED
+        local defaults = {
+          nameplateMotion = 0
+        }
+        return defaults[var]
+      end,
     },
     C_DeathInfo = {
       GetSelfResurrectOptions = UNIMPLEMENTED,
@@ -846,6 +853,7 @@ local function mkWowEnv(api)
       end
       func(...)
     end,
+    SetActionBarToggles = UNIMPLEMENTED,
     SetActionUIButton = UNIMPLEMENTED,
     SetChatWindowName = UNIMPLEMENTED,
     seterrorhandler = UNIMPLEMENTED,
