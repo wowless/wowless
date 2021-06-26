@@ -20,7 +20,7 @@ local function loader(api)
   end
 
   local function loadLuaString(filename, str)
-    api:CallSafely(setfenv(assert(loadstring(str, path.basename(filename))), api.env))
+    api.CallSafely(setfenv(assert(loadstring(str, path.basename(filename))), api.env))
   end
 
   local loadFile
@@ -140,7 +140,7 @@ local function loader(api)
     }
 
     function loadElement(e, parent, ignoreVirtual)
-      if api:IsIntrinsicType(e.type) then
+      if api.IsIntrinsicType(e.type) then
         local inherits = {e.type}
         for _, inh in ipairs(e.attr.inherits or {}) do
           table.insert(inherits, string.lower(inh))
@@ -218,7 +218,7 @@ local function loader(api)
                   else
                     assert(script.intrinsicorder == nil, 'invalid intrinsicOrder tag on script')
                   end
-                  api:SetScript(obj, script.type, bindingType, fn)
+                  api.SetScript(obj, script.type, bindingType, fn)
                 end
               end
             end
@@ -250,11 +250,11 @@ local function loader(api)
           if virtual and ignoreVirtual then
             api.log(1, 'ignoring virtual on ' .. tostring(name))
           end
-          local obj = api:CreateUIObject(e.type, name, parent, inherits, e.attr)
+          local obj = api.CreateUIObject(e.type, name, parent, inherits, e.attr)
           mixin(obj, mix)
           constructor(obj)
           if obj.SetScript then
-            api:CallSafely(function() api:RunScript(obj, 'OnLoad') end)
+            api.CallSafely(function() api.RunScript(obj, 'OnLoad') end)
           end
           return obj
         end

@@ -187,10 +187,10 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         CreateFontString = function(self, name)
-          return api:CreateUIObject('fontstring', name, self)
+          return api.CreateUIObject('fontstring', name, self)
         end,
         CreateTexture = function(self, name)
-          return api:CreateUIObject('texture', name, self)
+          return api.CreateUIObject('texture', name, self)
         end,
         EnableMouse = UNIMPLEMENTED,
         GetAttribute = function(self, name)
@@ -212,7 +212,7 @@ local function mkBaseUIObjectTypes(api)
         SetAttribute = function(self, name, value)
           api.log(4, 'setting attribute %s on %s to %s', name, tostring(self:GetName()), tostring(value))
           u(self).attributes[name] = value
-          api:RunScript(self, 'OnAttributeChanged', name, value)
+          api.RunScript(self, 'OnAttributeChanged', name, value)
         end,
         SetClampRectInsets = UNIMPLEMENTED,
         SetFrameLevel = UNIMPLEMENTED,
@@ -353,7 +353,7 @@ local function mkBaseUIObjectTypes(api)
           return u(self).scripts[bindingType or 1][string.lower(name)]
         end,
         SetScript = function(self, name, script)
-          api:SetScript(self, name, 1, script)
+          api.SetScript(self, name, 1, script)
         end,
       },
       name = 'ScriptObject',
@@ -544,17 +544,17 @@ local function mkWowEnv(api)
       CurrencyConsts = {},
     },
     CreateFont = function(name)
-      return api:CreateUIObject('font', name)
+      return api.CreateUIObject('font', name)
     end,
     CreateFrame = function(type, name, parent, templates)
       local ltype = string.lower(type)
-      assert(api:InheritsFrom(ltype, 'frame'), type .. ' does not inherit from frame')
+      assert(api.InheritsFrom(ltype, 'frame'), type .. ' does not inherit from frame')
       local inherits = {}
       for template in string.gmatch(templates or '', '[^, ]+') do
         table.insert(inherits, string.lower(template))
       end
-      local obj = api:CreateUIObject(ltype, name, parent, inherits)
-      api:RunScript(obj, 'OnLoad')
+      local obj = api.CreateUIObject(ltype, name, parent, inherits)
+      api.RunScript(obj, 'OnLoad')
       return obj
     end,
     C_ChatInfo = {
