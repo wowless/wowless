@@ -17,6 +17,7 @@ build = {
   type = 'none',
   install = {
     lua = {
+      ['wowless.api'] = 'wowless/api.lua',
       ['wowless.env'] = 'wowless/env.lua',
       ['wowless.globalstrings'] = 'wowless/globalstrings.lua',
       ['wowless.loader'] = 'wowless/loader.lua',

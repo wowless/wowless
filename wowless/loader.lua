@@ -303,7 +303,8 @@ local function run(loglevel)
       print(string.format(fmt, ...))
     end
   end
-  local api = require('wowless.env').new(log)
+  local api = require('wowless.api').new(log)
+  require('wowless.env').init(api)
   local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
   loader(api)(toc)
   return api
