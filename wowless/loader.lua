@@ -1,4 +1,4 @@
-local function loader(api, log)
+local function loader(api)
 
   local path = require('path')
   local xml = require('wowless.xml')
@@ -159,16 +159,16 @@ local function loader(api, log)
         end
         local function constructor(obj)
           if e.attr.parent then
-            log(3, 'setting parent to ' .. e.attr.parent)
+            api.log(3, 'setting parent to ' .. e.attr.parent)
             obj:SetParent(api.env[e.attr.parent])
           end
           if e.attr.parentkey then
-            log(3, 'attaching ' .. e.attr.parentkey)
+            api.log(3, 'attaching ' .. e.attr.parentkey)
             obj:GetParent()[e.attr.parentkey] = obj
           end
           if e.attr.parentarray then
             local k = e.attr.parentarray
-            log(3, 'attaching to array ' .. k)
+            api.log(3, 'attaching to array ' .. k)
             local p = obj:GetParent()
             p[k] = p[k] or {}
             table.insert(p[k], obj)
@@ -263,7 +263,7 @@ local function loader(api, log)
         if fn then
           fn(e, parent, ignoreVirtual)
         else
-          log(1, 'skipping ' .. filename .. ' ' .. e.type)
+          api.log(1, 'skipping ' .. filename .. ' ' .. e.type)
         end
       end
     end
@@ -274,7 +274,7 @@ local function loader(api, log)
   end
 
   function loadFile(filename)
-    log(2, 'loading file %s', filename)
+    api.log(2, 'loading file %s', filename)
     if filename:sub(-4) == '.lua' then
       loadLuaString(filename, readFile(filename))
     elseif filename:sub(-4) == '.xml' then
@@ -305,7 +305,7 @@ local function run(loglevel)
   end
   local api = require('wowless.env').new(log)
   local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
-  loader(api, log)(toc)
+  loader(api)(toc)
   return api
 end
 
