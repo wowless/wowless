@@ -218,7 +218,7 @@ local function loader(api, log)
                   else
                     assert(script.intrinsicorder == nil, 'invalid intrinsicOrder tag on script')
                   end
-                  api.userdata[obj]:SetScript(script.type, bindingType, fn)
+                  api:SetScript(obj, script.type, bindingType, fn)
                 end
               end
             end
@@ -253,8 +253,8 @@ local function loader(api, log)
           local obj = api:CreateUIObject(e.type, name, parent, inherits, e.attr)
           mixin(obj, mix)
           constructor(obj)
-          if api.userdata[obj].RunScript then
-            api:CallSafely(function() api.userdata[obj].RunScript(obj, 'OnLoad') end)
+          if obj.SetScript then
+            api:CallSafely(function() api:RunScript(obj, 'OnLoad') end)
           end
           return obj
         end

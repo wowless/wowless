@@ -212,7 +212,7 @@ local function mkBaseUIObjectTypes(api)
         SetAttribute = function(self, name, value)
           api.log(4, 'setting attribute %s on %s to %s', name, tostring(self:GetName()), tostring(value))
           u(self).attributes[name] = value
-          u(self).RunScript(self, 'OnAttributeChanged', name, value)
+          api:RunScript(self, 'OnAttributeChanged', name, value)
         end,
         SetClampRectInsets = UNIMPLEMENTED,
         SetFrameLevel = UNIMPLEMENTED,
@@ -345,20 +345,6 @@ local function mkBaseUIObjectTypes(api)
           [1] = {},
           [2] = {},
         }
-        u(self).RunScript = function(_, name, ...)
-          for i = 0, 2 do
-            local script = self:GetScript(name, i)
-            if script then
-              api.log(4, 'begin %s[%d] for %s %s', name, i, self:GetObjectType(), tostring(self:GetName()))
-              script(self, ...)
-              api.log(4, 'end %s[%d] for %s %s', name, i, self:GetObjectType(), tostring(self:GetName()))
-            end
-          end
-        end
-        u(self).SetScript = function(_, name, bindingType, script)
-          api.log(4, 'setting %s[%d] for %s %s', name, bindingType, self:GetObjectType(), tostring(self:GetName()))
-          u(self).scripts[bindingType][string.lower(name)] = script
-        end
       end,
       inherits = {},
       intrinsic = true,
@@ -367,7 +353,7 @@ local function mkBaseUIObjectTypes(api)
           return u(self).scripts[bindingType or 1][string.lower(name)]
         end,
         SetScript = function(self, name, script)
-          u(self).SetScript(self, name, 1, script)
+          api:SetScript(self, name, 1, script)
         end,
       },
       name = 'ScriptObject',
@@ -635,7 +621,7 @@ local function mkWowEnv(api)
         table.insert(inherits, string.lower(template))
       end
       local obj = _CreateUIObject(api, ltype, name, parent, inherits)
-      api.userdata[obj].RunScript(obj, 'OnLoad')
+      api:RunScript(obj, 'OnLoad')
       return obj
     end,
     C_ChatInfo = {
@@ -943,12 +929,28 @@ local function CallSafely(api, fun)
   end)
 end
 
+local function RunScript(api, obj, name, ...)
+  for i = 0, 2 do
+    local script = obj:GetScript(name, i)
+    if script then
+      api.log(4, 'begin %s[%d] for %s %s', name, i, obj:GetObjectType(), tostring(obj:GetName()))
+      script(obj, ...)
+      api.log(4, 'end %s[%d] for %s %s', name, i, obj:GetObjectType(), tostring(obj:GetName()))
+    end
+  end
+end
+
+local function SetScript(api, obj, name, bindingType, script)
+  api.log(4, 'setting %s[%d] for %s %s', name, bindingType, obj:GetObjectType(), tostring(obj:GetName()))
+  api.userdata[obj].scripts[bindingType][string.lower(name)] = script
+end
+
 local function _SendEvent(api, event, ...)
   local args = {...}
   for _, frame in ipairs(api.frames) do
     if api.userdata[frame].registeredEvents[string.lower(event)] then
       api:CallSafely(function()
-        api.userdata[frame].RunScript(frame, 'OnEvent', event, unpack(args))
+        api:RunScript(frame, 'OnEvent', event, unpack(args))
       end)
     end
   end
@@ -965,7 +967,9 @@ local function new(log)
     IsIntrinsicType = _IsIntrinsicType,
     IsUIObjectType = _IsUIObjectType,
     log = log,
+    RunScript = RunScript,
     SendEvent = _SendEvent,
+    SetScript = SetScript,
     userdata = {},
   }
   api.uiobjectTypes = mkBaseUIObjectTypes(api)
