@@ -114,6 +114,10 @@ local function new(log)
     return errors
   end
 
+  local function UserData(obj)
+    return userdata[obj]
+  end
+
   return {
     CallSafely = CallSafely,
     CreateUIObject = CreateUIObject,
@@ -128,7 +132,7 @@ local function new(log)
     SendEvent = SendEvent,
     SetScript = SetScript,
     uiobjectTypes = uiobjectTypes,
-    userdata = userdata,
+    UserData = UserData,
   }
 end
 

@@ -18,7 +18,7 @@ end
 
 local function mkBaseUIObjectTypes(api)
   local function u(x)
-    return api.userdata[x]
+    return api.UserData(x)
   end
   return {
     actor = {
