@@ -77,9 +77,11 @@ local function validateRoot(root)
       assert(not next(ty.attributes), 'attributes and fields in ' .. tname)
       assert(not next(ty.children), 'children and fields in ' .. tname)
       local fields = { type = tname }
+      local fieldAttrs = {}
       for name, spec in pairs(ty.fields) do
         if spec.source == 'attribute' then
           local aname = spec.attribute or name
+          fieldAttrs[aname] = true
           local attr = nil
           for k, v in pairs(e._attr or {}) do
             if string.lower(k) == aname then
@@ -118,6 +120,11 @@ local function validateRoot(root)
           table.insert(texts, kid._text)
         end
         fields.text = #texts > 0 and table.concat(texts, '\n') or nil
+      end
+      for k in pairs(e._attr or {}) do
+        if not fieldAttrs[string.lower(k)] then
+          table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
+        end
       end
       return fields
     else

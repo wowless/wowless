@@ -62,33 +62,42 @@ return {
     extends = 'animation',
   },
   anchor = {
-    attributes = {
+    fields = {
+      offset = {
+        source = 'child',
+      },
       point = {
+        source = 'attribute',
         type = 'string',
       },
       relativekey = {
+        source = 'attribute',
         type = 'string',
       },
       relativepoint = {
+        source = 'attribute',
         type = 'string',
       },
       relativeto = {
+        source = 'attribute',
         type = 'string',
       },
       x = {
+        source = 'attribute',
         type = 'number',
       },
       y = {
+        source = 'attribute',
         type = 'number',
       },
     },
-    children = {
-      offset = true,
-    },
   },
   anchors = {
-    children = {
-      anchor = true,
+    fields = {
+      anchor = {
+        repeated = true,
+        source = 'child',
+      },
     },
   },
   animationgroup = {
@@ -959,16 +968,19 @@ return {
     extends = 'frame',
   },
   offset = {
-    attributes = {
+    fields = {
+      dim = {
+        child = 'absdimension',
+        source = 'child',
+      },
       x = {
+        source = 'attribute',
         type = 'number',
       },
       y = {
+        source = 'attribute',
         type = 'number',
       },
-    },
-    children = {
-      absdimension = true,
     },
   },
   onarrowpressed = {
