@@ -23,7 +23,9 @@ local function UpdateVisible(api, obj)
   if ud.visible ~= nv then
     ud.visible = nv
     api.RunScript(obj, nv and 'OnShow' or 'OnHide')
-  -- TODO run this recursively
+    for k in pairs(ud.children or {}) do
+      UpdateVisible(api, k)
+    end
   end
 end
 
