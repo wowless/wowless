@@ -199,6 +199,15 @@ local function mkBaseUIObjectTypes(api)
         GetAttribute = function(self, name)
           return u(self).attributes[name]
         end,
+        GetChildren = function(self)
+          local ret = {}
+          for kid in pairs(u(self).children) do
+            if api.InheritsFrom(u(kid).type, 'frame') then
+              table.insert(ret, kid)
+            end
+          end
+          return unpack(ret)
+        end,
         GetFrameLevel = STUB_NUMBER,
         GetID = function(self)
           return u(self).id or 0
