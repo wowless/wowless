@@ -349,7 +349,7 @@ local function mkBaseUIObjectTypes(api)
           u(self).shown = shown
           local newVisible = self:IsVisible()
           if oldVisible ~= newVisible then
-            local handler = newVisible and 'onshow' or 'onhide'
+            local handler = newVisible and 'OnShow' or 'OnHide'
             api.RunScript(self, handler)
             -- TODO run this recursively
           end
