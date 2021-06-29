@@ -330,7 +330,10 @@ local function mkBaseUIObjectTypes(api)
         IsShown = function(self)
           return u(self).shown
         end,
-        IsVisible = UNIMPLEMENTED,
+        IsVisible = function(self)
+          local parent = self:GetParent()
+          return self:IsShown() and (not parent or parent:IsVisible())
+        end,
         SetAlpha = UNIMPLEMENTED,
         SetHeight = UNIMPLEMENTED,
         SetParent = function(self, parent)
