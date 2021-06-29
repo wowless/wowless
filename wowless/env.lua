@@ -304,6 +304,9 @@ local function mkBaseUIObjectTypes(api)
       name = 'PlayerModel',
     },
     region = {
+      constructor = function(self)
+        u(self).shown = true
+      end,
       inherits = {'parentedobject'},
       intrinsic = true,
       mixin = {
@@ -321,8 +324,12 @@ local function mkBaseUIObjectTypes(api)
         end,
         GetTop = STUB_NUMBER,
         GetWidth = STUB_NUMBER,
-        Hide = UNIMPLEMENTED,
-        IsShown = UNIMPLEMENTED,
+        Hide = function(self)
+          u(self).shown = false
+        end,
+        IsShown = function(self)
+          return u(self).shown
+        end,
         IsVisible = UNIMPLEMENTED,
         SetAlpha = UNIMPLEMENTED,
         SetHeight = UNIMPLEMENTED,
@@ -331,10 +338,18 @@ local function mkBaseUIObjectTypes(api)
         end,
         SetPoint = UNIMPLEMENTED,
         SetScale = UNIMPLEMENTED,
-        SetShown = UNIMPLEMENTED,
+        SetShown = function(self, shown)
+          if shown and not self:IsShown() then
+            self:Show()
+          elseif not shown and self:IsShown() then
+            self:Hide()
+          end
+        end,
         SetSize = UNIMPLEMENTED,
         SetWidth = UNIMPLEMENTED,
-        Show = UNIMPLEMENTED,
+        Show = function(self)
+          u(self).shown = true
+        end,
       },
       name = 'Region',
     },
@@ -614,6 +629,7 @@ local function mkWowEnv(api)
       IsDisabledByParentalControls = UNIMPLEMENTED,
     },
     C_SummonInfo = {
+      CancelSummon = UNIMPLEMENTED,
       GetSummonConfirmTimeLeft = STUB_NUMBER,
       GetSummonReason = UNIMPLEMENTED,
       IsSummonSkippingStartExperience = UNIMPLEMENTED,
@@ -718,7 +734,9 @@ local function mkWowEnv(api)
     GetPVPLifetimeStats = UNIMPLEMENTED,
     GetPVPSessionStats = UNIMPLEMENTED,
     GetPVPYesterdayStats = UNIMPLEMENTED,
-    GetReleaseTimeRemaining = STUB_NUMBER,
+    GetReleaseTimeRemaining = function()
+      return 0  -- UNIMPLEMENTED
+    end,
     GetRepairAllCost = STUB_NUMBER,
     GetRestState = function()
       return 2, 'Normal', 1  -- UNIMPLEMENTED
