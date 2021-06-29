@@ -131,6 +131,16 @@ local function loader(api)
       scrollchild = function(e, parent)
         parent:SetScrollChild(loadElement(e.frame, parent))
       end,
+      size = function(e, parent)
+        local x = e.x or (e.dim and e.dim.x) or nil
+        local y = e.y or (e.dim and e.dim.y) or nil
+        if x then
+          parent:SetWidth(x)
+        end
+        if y then
+          parent:SetHeight(y)
+        end
+      end,
       swipetexture = function(e, parent)
         parent:SetSwipeTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
       end,

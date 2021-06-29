@@ -334,15 +334,19 @@ local function mkBaseUIObjectTypes(api)
     region = {
       constructor = function(self, xmlattr)
         local ud = u(self)
+        ud.height = 0
         ud.shown = not xmlattr.hidden
         ud.visible = ud.shown and (not ud.parent or u(ud.parent).visible)
+        ud.width = 0
       end,
       inherits = {'parentedobject'},
       intrinsic = true,
       mixin = {
         ClearAllPoints = UNIMPLEMENTED,
         GetEffectiveScale = STUB_NUMBER,
-        GetHeight = STUB_NUMBER,
+        GetHeight = function(self)
+          return u(self).height
+        end,
         GetLeft = STUB_NUMBER,
         GetNumPoints = function()
           return 0  -- UNIMPLEMENTED
@@ -353,7 +357,9 @@ local function mkBaseUIObjectTypes(api)
           return self:GetWidth(), self:GetHeight()
         end,
         GetTop = STUB_NUMBER,
-        GetWidth = STUB_NUMBER,
+        GetWidth = function(self)
+          return u(self).width
+        end,
         Hide = function(self)
           self:SetShown(false)
         end,
@@ -364,7 +370,9 @@ local function mkBaseUIObjectTypes(api)
           return u(self).visible
         end,
         SetAlpha = UNIMPLEMENTED,
-        SetHeight = UNIMPLEMENTED,
+        SetHeight = function(self, height)
+          u(self).height = height
+        end,
         SetParent = function(self, parent)
           api.SetParent(self, parent)
         end,
@@ -375,7 +383,9 @@ local function mkBaseUIObjectTypes(api)
           UpdateVisible(api, self)
         end,
         SetSize = UNIMPLEMENTED,
-        SetWidth = UNIMPLEMENTED,
+        SetWidth = function(self, width)
+          u(self).width = width
+        end,
         Show = function(self)
           self:SetShown(true)
         end,

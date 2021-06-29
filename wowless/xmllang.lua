@@ -1,12 +1,12 @@
 return {
   absdimension = {
-    attributes = {
+    fields = {
       x = {
-        required = true,
+        source = 'attribute',
         type = 'number',
       },
       y = {
-        required = true,
+        source = 'attribute',
         type = 'number',
       },
     },
@@ -1361,16 +1361,19 @@ return {
     extends = 'frame',
   },
   size = {
-    attributes = {
+    fields = {
+      dim = {
+        child = 'absdimension',
+        source = 'child',
+      },
       x = {
+        source = 'attribute',
         type = 'number',
       },
       y = {
+        source = 'attribute',
         type = 'number',
       },
-    },
-    children = {
-      absdimension = true,
     },
   },
   slider = {
