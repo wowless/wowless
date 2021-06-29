@@ -138,9 +138,12 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'frame'},
       intrinsic = true,
       mixin = {
+        ClearFocus = UNIMPLEMENTED,
         GetNumber = STUB_NUMBER,
         SetNumber = UNIMPLEMENTED,
         SetSecureText = UNIMPLEMENTED,
+        SetText = UNIMPLEMENTED,
+        SetTextInsets = UNIMPLEMENTED,
       },
       name = 'EditBox',
     },
@@ -304,8 +307,8 @@ local function mkBaseUIObjectTypes(api)
       name = 'PlayerModel',
     },
     region = {
-      constructor = function(self)
-        u(self).shown = true
+      constructor = function(self, xmlattr)
+        u(self).shown = not xmlattr.hidden
       end,
       inherits = {'parentedobject'},
       intrinsic = true,
@@ -325,7 +328,7 @@ local function mkBaseUIObjectTypes(api)
         GetTop = STUB_NUMBER,
         GetWidth = STUB_NUMBER,
         Hide = function(self)
-          u(self).shown = false
+          self:SetShown(false)
         end,
         IsShown = function(self)
           return u(self).shown
@@ -342,16 +345,19 @@ local function mkBaseUIObjectTypes(api)
         SetPoint = UNIMPLEMENTED,
         SetScale = UNIMPLEMENTED,
         SetShown = function(self, shown)
-          if shown and not self:IsShown() then
-            self:Show()
-          elseif not shown and self:IsShown() then
-            self:Hide()
+          local oldVisible = self:IsVisible()
+          u(self).shown = shown
+          local newVisible = self:IsVisible()
+          if oldVisible ~= newVisible and self.GetScript then
+            local handler = newVisible and 'onshow' or 'onhide'
+            api.RunScript(self, handler)
+            -- TODO run this recursively
           end
         end,
         SetSize = UNIMPLEMENTED,
         SetWidth = UNIMPLEMENTED,
         Show = function(self)
-          u(self).shown = true
+          self:SetShown(true)
         end,
       },
       name = 'Region',
@@ -557,6 +563,7 @@ local function mkWowEnv(api)
     AntiAliasingSupported = UNIMPLEMENTED,
     BNFeaturesEnabled = UNIMPLEMENTED,
     BNFeaturesEnabledAndConnected = UNIMPLEMENTED,
+    BNGetInfo = UNIMPLEMENTED,
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
     Constants = {
       CurrencyConsts = {},
@@ -827,6 +834,7 @@ local function mkWowEnv(api)
     SetActionBarToggles = UNIMPLEMENTED,
     SetActionUIButton = UNIMPLEMENTED,
     SetChatWindowName = UNIMPLEMENTED,
+    SetChatWindowShown = UNIMPLEMENTED,
     seterrorhandler = UNIMPLEMENTED,
     SetPortraitTexture = UNIMPLEMENTED,
     SetPortraitToTexture = UNIMPLEMENTED,
