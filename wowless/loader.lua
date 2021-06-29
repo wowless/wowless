@@ -253,9 +253,7 @@ local function loader(api)
           local obj = api.CreateUIObject(e.type, name, parent, inherits, e.attr)
           mixin(obj, mix)
           constructor(obj)
-          if obj.SetScript then
-            api.CallSafely(function() api.RunScript(obj, 'OnLoad') end)
-          end
+          api.RunScript(obj, 'OnLoad')
           return obj
         end
       else

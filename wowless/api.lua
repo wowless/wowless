@@ -84,12 +84,15 @@ local function new(log)
   end
 
   local function RunScript(obj, name, ...)
-    for i = 0, 2 do
-      local script = obj:GetScript(name, i)
-      if script then
-        log(4, 'begin %s[%d] for %s %s', name, i, obj:GetObjectType(), tostring(obj:GetName()))
-        script(obj, ...)
-        log(4, 'end %s[%d] for %s %s', name, i, obj:GetObjectType(), tostring(obj:GetName()))
+    if obj.GetScript then
+      local args = {...}
+      for i = 0, 2 do
+        local script = obj:GetScript(name, i)
+        if script then
+          log(4, 'begin %s[%d] for %s %s', name, i, obj:GetObjectType(), tostring(obj:GetName()))
+          CallSafely(function() script(obj, unpack(args)) end)
+          log(4, 'end %s[%d] for %s %s', name, i, obj:GetObjectType(), tostring(obj:GetName()))
+        end
       end
     end
   end
@@ -100,12 +103,9 @@ local function new(log)
   end
 
   local function SendEvent(event, ...)
-    local args = {...}
     for _, frame in ipairs(frames) do
       if userdata[frame].registeredEvents[string.lower(event)] then
-        CallSafely(function()
-          RunScript(frame, 'OnEvent', event, unpack(args))
-        end)
+        RunScript(frame, 'OnEvent', event, ...)
       end
     end
   end
