@@ -43,6 +43,16 @@ local function new(log)
     return g:sort()
   end
 
+  local function SetParent(obj, parent)
+    if userdata[obj].parent then
+      userdata[userdata[obj].parent].children[obj] = nil
+    end
+    userdata[obj].parent = parent
+    if parent then
+      userdata[parent].children[obj] = true
+    end
+  end
+
   local function CreateUIObject(typename, objname, parent, inherits, xmlattr)
     assert(typename, 'must specify type for ' .. tostring(objname))
     local type = uiobjectTypes[typename]
@@ -56,9 +66,9 @@ local function new(log)
     local obj = setmetatable({}, {__index = wapi})
     userdata[obj] = {
       name = objname,
-      parent = parent,
       type = typename,
     }
+    SetParent(obj, parent)
     for _, t in ipairs(supers) do
       local ty = uiobjectTypes[t]
       if ty.constructor then
@@ -130,6 +140,7 @@ local function new(log)
     log = log,
     RunScript = RunScript,
     SendEvent = SendEvent,
+    SetParent = SetParent,
     SetScript = SetScript,
     uiobjectTypes = uiobjectTypes,
     UserData = UserData,

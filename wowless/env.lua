@@ -285,6 +285,9 @@ local function mkBaseUIObjectTypes(api)
       name = 'ModelScene',
     },
     parentedobject = {
+      constructor = function(self)
+        u(self).children = {}
+      end,
       inherits = {'uiobject'},
       intrinsic = true,
       mixin = {
@@ -340,7 +343,7 @@ local function mkBaseUIObjectTypes(api)
         SetAlpha = UNIMPLEMENTED,
         SetHeight = UNIMPLEMENTED,
         SetParent = function(self, parent)
-          u(self).parent = parent
+          api.SetParent(self, parent)
         end,
         SetPoint = UNIMPLEMENTED,
         SetScale = UNIMPLEMENTED,
