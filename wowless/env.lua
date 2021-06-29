@@ -16,6 +16,17 @@ local function toTexture(parent, tex)
   end
 end
 
+local function UpdateVisible(api, obj)
+  local ud = api.UserData(obj)
+  local pv = not ud.parent or api.UserData(ud.parent).visible
+  local nv = pv and ud.shown
+  if ud.visible ~= nv then
+    ud.visible = nv
+    api.RunScript(obj, nv and 'OnShow' or 'OnHide')
+  -- TODO run this recursively
+  end
+end
+
 local function mkBaseUIObjectTypes(api)
   local function u(x)
     return api.UserData(x)
@@ -320,7 +331,9 @@ local function mkBaseUIObjectTypes(api)
     },
     region = {
       constructor = function(self, xmlattr)
-        u(self).shown = not xmlattr.hidden
+        local ud = u(self)
+        ud.shown = not xmlattr.hidden
+        ud.visible = ud.shown and (not ud.parent or u(ud.parent).visible)
       end,
       inherits = {'parentedobject'},
       intrinsic = true,
@@ -346,8 +359,7 @@ local function mkBaseUIObjectTypes(api)
           return u(self).shown
         end,
         IsVisible = function(self)
-          local parent = self:GetParent()
-          return self:IsShown() and (not parent or parent:IsVisible())
+          return u(self).visible
         end,
         SetAlpha = UNIMPLEMENTED,
         SetHeight = UNIMPLEMENTED,
@@ -357,14 +369,8 @@ local function mkBaseUIObjectTypes(api)
         SetPoint = UNIMPLEMENTED,
         SetScale = UNIMPLEMENTED,
         SetShown = function(self, shown)
-          local oldVisible = self:IsVisible()
           u(self).shown = shown
-          local newVisible = self:IsVisible()
-          if oldVisible ~= newVisible then
-            local handler = newVisible and 'OnShow' or 'OnHide'
-            api.RunScript(self, handler)
-            -- TODO run this recursively
-          end
+          UpdateVisible(api, self)
         end,
         SetSize = UNIMPLEMENTED,
         SetWidth = UNIMPLEMENTED,
