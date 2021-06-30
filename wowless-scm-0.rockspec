@@ -10,7 +10,7 @@ dependencies = {
   'datafile',
   'lua-path',
   'lua-resty-tsort',
-  'penlight',
+  'serpent',
   'xml2lua',
 }
 build = {
