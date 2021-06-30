@@ -617,13 +617,10 @@ local function mkMetaEnv(api)
     end
   end)()
   return {
-    __index = function(t, k)
-      if k == '_G' then
-        return t
-      elseif k == '__dump' then
-        return __dump
-      end
-    end
+    __index = {
+      _G = api.env,
+      __dump = __dump,
+    },
   }
 end
 
