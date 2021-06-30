@@ -598,30 +598,30 @@ local baseEnv = {
   type = type,
 }
 
-local dump = (function()
-  local block = require('serpent').block
-  local config = { nocode = true }
-  return function(x)
-    print(block(x, config))
-  end
-end)()
-
 local function mkMetaEnv(api)
+  local __dump = (function()
+    local block = require('serpent').block
+    local config = { nocode = true }
+    local function dump(x)
+      print(block(x, config))
+    end
+    return function(...)
+      for _, x in ipairs({...}) do
+        dump(x)
+        if api.UserData(x) then
+          print('===[begin userdata]===')
+          dump(api.UserData(x))
+          print('===[ end userdata ]===')
+        end
+      end
+    end
+  end)()
   return {
     __index = function(t, k)
       if k == '_G' then
         return t
       elseif k == '__dump' then
-        return function(...)
-          for _, x in ipairs({...}) do
-            dump(x)
-            if api.UserData(x) then
-              print('===[begin userdata]===')
-              dump(api.UserData(x))
-              print('===[ end userdata ]===')
-            end
-          end
-        end
+        return __dump
       end
     end
   }
