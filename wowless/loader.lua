@@ -53,7 +53,7 @@ local function loader(api)
       anchors = function(e, parent)
         for _, anchor in ipairs(e.anchor) do
           local point = anchor.point
-          local relativeTo = parentSub(anchor.relativeto, parent)
+          local relativeTo = parentSub(anchor.relativeto, parent:GetParent())
           local relativePoint = anchor.relativepoint
           local x = anchor.x or (anchor.offset and anchor.offset.x) or nil
           local y = anchor.y or (anchor.offset and anchor.offset.y) or nil

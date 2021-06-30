@@ -335,6 +335,7 @@ local function mkBaseUIObjectTypes(api)
       constructor = function(self, xmlattr)
         local ud = u(self)
         ud.height = 0
+        ud.points = {}
         ud.shown = not xmlattr.hidden
         ud.visible = ud.shown and (not ud.parent or u(ud.parent).visible)
         ud.width = 0
@@ -342,16 +343,32 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'parentedobject'},
       intrinsic = true,
       mixin = {
-        ClearAllPoints = UNIMPLEMENTED,
+        ClearAllPoints = function(self)
+          util.twipe(u(self).points)
+        end,
         GetEffectiveScale = STUB_NUMBER,
         GetHeight = function(self)
           return u(self).height
         end,
         GetLeft = STUB_NUMBER,
-        GetNumPoints = function()
-          return 0  -- UNIMPLEMENTED
+        GetNumPoints = function(self)
+          return #u(self).points
         end,
-        GetPoint = UNIMPLEMENTED,
+        GetPoint = function(self, index)
+          local idx
+          if type(index) == 'string' then
+            local i = 1
+            while not idx and i <= #u(self).points do
+              if u(self).points[i][1] == index then
+                idx = i
+              end
+              i = i + 1
+            end
+          else
+            idx = index or 1
+          end
+          return unpack(u(self).points[idx])
+        end,
         GetRight = STUB_NUMBER,
         GetSize = function(self)
           return self:GetWidth(), self:GetHeight()
@@ -376,7 +393,16 @@ local function mkBaseUIObjectTypes(api)
         SetParent = function(self, parent)
           api.SetParent(self, parent)
         end,
-        SetPoint = UNIMPLEMENTED,
+        SetPoint = function(self, point, arg1, arg2, arg3, arg4)
+          -- TODO handle resetting points
+          local p
+          if type(arg2) == 'string' then
+            p = { point, type(arg1) == 'string' and api.env[arg1] or arg1, arg2, arg3, arg4 }
+          else
+            p = { point, u(self).parent, point, arg1, arg2 }
+          end
+          table.insert(u(self).points, p)
+        end,
         SetScale = UNIMPLEMENTED,
         SetShown = function(self, shown)
           u(self).shown = shown
