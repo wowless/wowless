@@ -19,6 +19,19 @@ local function loader(api)
     end
   end
 
+  local function parentSub(name, parent)
+    if name and string.match(name, '$parent') then
+      local p = parent
+      while p ~= nil and not p:GetName() do
+        p = p:GetParent()
+      end
+      assert(p, '$parent substitution requires a parent name: ' .. name)
+      return string.gsub(name, '$parent', p:GetName())
+    else
+      return name
+    end
+  end
+
   local function loadLuaString(filename, str)
     api.CallSafely(setfenv(assert(loadstring(str, path.basename(filename))), api.env))
   end
@@ -37,6 +50,20 @@ local function loader(api)
     end
 
     local xmllang = {
+      anchors = function(e, parent)
+        for _, anchor in ipairs(e.anchor) do
+          local point = anchor.point
+          local relativeTo = parentSub(anchor.relativeto, parent)
+          local relativePoint = anchor.relativepoint
+          local x = anchor.x or (anchor.offset and anchor.offset.x) or nil
+          local y = anchor.y or (anchor.offset and anchor.offset.y) or nil
+          if not relativeTo and not relativePoint then
+            parent:SetPoint(point, x, y)
+          else
+            parent:SetPoint(point, relativeTo, relativePoint, x, y)
+          end
+        end
+      end,
       animations = function(e, parent)
         loadElements(e.groups, parent)
       end,
@@ -248,15 +275,7 @@ local function loader(api)
             name = e.attr.name,
           }
         else
-          local name = e.attr.name
-          if name and string.match(name, '$parent') then
-            local p = parent
-            while p ~= nil and not p:GetName() do
-              p = p:GetParent()
-            end
-            assert(p, '$parent substitution requires a parent name: ' .. name)
-            name = string.gsub(name, '$parent', p:GetName())
-          end
+          local name = parentSub(e.attr.name, parent)
           if virtual and ignoreVirtual then
             api.log(1, 'ignoring virtual on ' .. tostring(name))
           end
