@@ -88,8 +88,7 @@ local function new(log)
   local function CallSafely(fun)
     return xpcall(fun, function(err)
       errors = errors + 1
-      print('error: ' .. err)
-      print(debug.traceback())
+      log(0, 'error: ' .. err .. '\n' .. debug.traceback())
     end)
   end
 
