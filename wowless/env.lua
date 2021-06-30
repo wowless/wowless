@@ -552,6 +552,7 @@ local baseEnv = {
   getfenv = getfenv,
   getmetatable = getmetatable,
   getn = table.getn,
+  gsub = string.gsub,
   ipairs = ipairs,
   math = {
     ceil = math.ceil,
@@ -743,6 +744,7 @@ local function mkWowEnv(api)
     }),
     FillLocalizedClassList = UNIMPLEMENTED,
     GetActionBarPage = STUB_NUMBER,
+    GetActionBarToggles = UNIMPLEMENTED,
     GetActionCount = STUB_NUMBER,
     GetActionInfo = UNIMPLEMENTED,
     GetActionTexture = UNIMPLEMENTED,
@@ -899,7 +901,7 @@ local function mkWowEnv(api)
         assert(api.env[func], 'securecall of unknown function ' .. func)
         func = api.env[func]
       end
-      func(...)
+      return func(...)
     end,
     SetActionBarToggles = UNIMPLEMENTED,
     SetActionUIButton = UNIMPLEMENTED,
