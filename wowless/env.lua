@@ -16,23 +16,24 @@ local function toTexture(parent, tex)
   end
 end
 
-local function UpdateVisible(api, obj)
-  local ud = api.UserData(obj)
-  local pv = not ud.parent or api.UserData(ud.parent).visible
-  local nv = pv and ud.shown
-  if ud.visible ~= nv then
-    ud.visible = nv
-    api.RunScript(obj, nv and 'OnShow' or 'OnHide')
-    for k in pairs(ud.children or {}) do
-      UpdateVisible(api, k)
-    end
-  end
-end
-
 local function mkBaseUIObjectTypes(api)
   local function u(x)
     return api.UserData(x)
   end
+
+  local function UpdateVisible(obj)
+    local ud = u(obj)
+    local pv = not ud.parent or u(ud.parent).visible
+    local nv = pv and ud.shown
+    if ud.visible ~= nv then
+      ud.visible = nv
+      api.RunScript(obj, nv and 'OnShow' or 'OnHide')
+      for k in pairs(ud.children or {}) do
+        UpdateVisible(k)
+      end
+    end
+  end
+
   return {
     actor = {
       inherits = {'parentedobject', 'scriptobject'},
@@ -406,7 +407,7 @@ local function mkBaseUIObjectTypes(api)
         SetScale = UNIMPLEMENTED,
         SetShown = function(self, shown)
           u(self).shown = shown
-          UpdateVisible(api, self)
+          UpdateVisible(self)
         end,
         SetSize = UNIMPLEMENTED,
         SetWidth = function(self, width)
