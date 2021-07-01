@@ -131,7 +131,7 @@ local function mkBaseUIObjectTypes(api)
     },
     checkbutton = {
       constructor = function(self, xmlattr)
-        u(self).checked = not not xmlattr.checked
+        m(self, 'SetChecked', xmlattr.checked)
       end,
       inherits = {'button'},
       intrinsic = true,
