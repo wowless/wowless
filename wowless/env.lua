@@ -61,6 +61,12 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'frame'},
       intrinsic = true,
       mixin = {
+        Click = function(self, button, down)
+          local b = button or 'LeftButton'
+          api.RunScript(self, 'PreClick', b, down)
+          api.RunScript(self, 'OnClick', b, down)
+          api.RunScript(self, 'PostClick', b, down)
+        end,
         Disable = UNIMPLEMENTED,
         Enable = UNIMPLEMENTED,
         GetDisabledTexture = function(self)
