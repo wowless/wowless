@@ -21,6 +21,10 @@ local function mkBaseUIObjectTypes(api)
     return api.UserData(x)
   end
 
+  local function m(obj, f, ...)
+    return getmetatable(obj).__index[f](obj, ...)
+  end
+
   local function UpdateVisible(obj)
     local ud = u(obj)
     local pv = not ud.parent or u(ud.parent).visible
@@ -52,7 +56,7 @@ local function mkBaseUIObjectTypes(api)
     },
     button = {
       constructor = function(self)
-        u(self).fontstring = self:CreateFontString()
+        u(self).fontstring = m(self, 'CreateFontString')
       end,
       inherits = {'frame'},
       intrinsic = true,
@@ -197,7 +201,7 @@ local function mkBaseUIObjectTypes(api)
         u(self).attributes = {}
         u(self).registeredEvents = {}
         if xmlattr.id then
-          self:SetID(xmlattr.id)
+          m(self, 'SetID', xmlattr.id)
         end
       end,
       inherits = {'parentedobject', 'region', 'scriptobject'},
@@ -372,14 +376,14 @@ local function mkBaseUIObjectTypes(api)
         end,
         GetRight = STUB_NUMBER,
         GetSize = function(self)
-          return self:GetWidth(), self:GetHeight()
+          return m(self, 'GetWidth'), m(self, 'GetHeight')
         end,
         GetTop = STUB_NUMBER,
         GetWidth = function(self)
           return u(self).width
         end,
         Hide = function(self)
-          self:SetShown(false)
+          m(self, 'SetShown', false)
         end,
         IsShown = function(self)
           return u(self).shown
@@ -414,7 +418,7 @@ local function mkBaseUIObjectTypes(api)
           u(self).width = width
         end,
         Show = function(self)
-          self:SetShown(true)
+          m(self, 'SetShown', true)
         end,
       },
       name = 'Region',
@@ -495,7 +499,7 @@ local function mkBaseUIObjectTypes(api)
         SetStatusBarTexture = function(self, tex)
           if type(tex) == 'number' then
             api.log(1, 'unimplemented call to SetStatusBarTexture')
-            u(self).statusBarTexture = self:CreateTexture()
+            u(self).statusBarTexture = m(self, 'CreateTexture')
           else
             u(self).statusBarTexture = toTexture(self, tex)
           end
