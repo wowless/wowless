@@ -12,6 +12,6 @@ describe('loader', function()
         frame:Click()
       end
     end
-    assert.same(122, api.GetErrorCount())
+    assert.same(120, api.GetErrorCount())
   end)
 end)

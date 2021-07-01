@@ -57,23 +57,29 @@ local function mkBaseUIObjectTypes(api)
     button = {
       constructor = function(self)
         u(self).beingClicked = false
+        u(self).enabled = true
         u(self).fontstring = m(self, 'CreateFontString')
       end,
       inherits = {'frame'},
       intrinsic = true,
       mixin = {
         Click = function(self, button, down)
-          if not u(self).beingClicked then
-            u(self).beingClicked = true
+          local ud = u(self)
+          if ud.enabled and not ud.beingClicked then
+            ud.beingClicked = true
             local b = button or 'LeftButton'
             api.RunScript(self, 'PreClick', b, down)
             api.RunScript(self, 'OnClick', b, down)
             api.RunScript(self, 'PostClick', b, down)
-            u(self).beingClicked = false
+            ud.beingClicked = false
           end
         end,
-        Disable = UNIMPLEMENTED,
-        Enable = UNIMPLEMENTED,
+        Disable = function(self)
+          u(self).enabled = false
+        end,
+        Enable = function(self)
+          u(self).enabled = true
+        end,
         GetDisabledTexture = function(self)
           return u(self).disabledTexture
         end,
@@ -91,7 +97,9 @@ local function mkBaseUIObjectTypes(api)
         end,
         GetText = UNIMPLEMENTED,
         GetTextWidth = STUB_NUMBER,
-        IsEnabled = UNIMPLEMENTED,
+        IsEnabled = function(self)
+          return u(self).enabled
+        end,
         LockHighlight = UNIMPLEMENTED,
         RegisterForClicks = UNIMPLEMENTED,
         SetButtonState = UNIMPLEMENTED,
@@ -99,7 +107,9 @@ local function mkBaseUIObjectTypes(api)
         SetDisabledTexture = function(self, tex)
           u(self).disabledTexture = toTexture(self, tex)
         end,
-        SetEnabled = UNIMPLEMENTED,
+        SetEnabled = function(self, value)
+          u(self).enabled = (value == true)
+        end,
         SetHighlightAtlas = UNIMPLEMENTED,
         SetHighlightFontObject = UNIMPLEMENTED,
         SetHighlightTexture = function(self, tex)
