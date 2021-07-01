@@ -177,6 +177,9 @@ local function loader(api)
     }
 
     local xmlattrlang = {
+      checked = function(obj, value)
+        obj:SetChecked(value)
+      end,
       hidden = function(obj, value)
         obj:SetShown(not value)
       end,
