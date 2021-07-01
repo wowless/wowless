@@ -56,16 +56,21 @@ local function mkBaseUIObjectTypes(api)
     },
     button = {
       constructor = function(self)
+        u(self).beingClicked = false
         u(self).fontstring = m(self, 'CreateFontString')
       end,
       inherits = {'frame'},
       intrinsic = true,
       mixin = {
         Click = function(self, button, down)
-          local b = button or 'LeftButton'
-          api.RunScript(self, 'PreClick', b, down)
-          api.RunScript(self, 'OnClick', b, down)
-          api.RunScript(self, 'PostClick', b, down)
+          if not u(self).beingClicked then
+            u(self).beingClicked = true
+            local b = button or 'LeftButton'
+            api.RunScript(self, 'PreClick', b, down)
+            api.RunScript(self, 'OnClick', b, down)
+            api.RunScript(self, 'PostClick', b, down)
+            u(self).beingClicked = false
+          end
         end,
         Disable = UNIMPLEMENTED,
         Enable = UNIMPLEMENTED,
