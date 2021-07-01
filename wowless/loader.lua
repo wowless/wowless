@@ -229,7 +229,11 @@ local function loader(api)
                   end
                 elseif script.text then
                   local argTable = {
-                    onevent = 'self, event, ...'
+                    onattributechanged = 'self, name, value',
+                    onclick = 'self, button, down',
+                    onevent = 'self, event, ...',
+                    postclick = 'self, button, down',
+                    preclick = 'self, button, down',
                   }
                   local args = argTable[string.lower(script.type)] or 'self, ...'
                   local fnstr = 'return function(' .. args .. ')\n' .. script.text .. '\nend'
