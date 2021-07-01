@@ -108,7 +108,7 @@ local function mkBaseUIObjectTypes(api)
           u(self).disabledTexture = toTexture(self, tex)
         end,
         SetEnabled = function(self, value)
-          u(self).enabled = (value == true)
+          u(self).enabled = not not value
         end,
         SetHighlightAtlas = UNIMPLEMENTED,
         SetHighlightFontObject = UNIMPLEMENTED,
