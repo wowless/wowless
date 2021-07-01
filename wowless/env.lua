@@ -639,6 +639,7 @@ local baseEnv = {
   tostring = tostring,
   tremove = table.remove,
   type = type,
+  unpack = unpack,
 }
 
 local function mkMetaEnv(api)
@@ -915,6 +916,7 @@ local function mkWowEnv(api)
     IsInRaid = UNIMPLEMENTED,
     IsItemAction = UNIMPLEMENTED,
     IsMacClient = UNIMPLEMENTED,
+    IsModifiedClick = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
     IsResting = UNIMPLEMENTED,
     IsRestrictedAccount = UNIMPLEMENTED,
@@ -943,6 +945,7 @@ local function mkWowEnv(api)
     RegisterStaticConstants = UNIMPLEMENTED,
     RequestRaidInfo = UNIMPLEMENTED,
     ResurrectGetOfferer = UNIMPLEMENTED,
+    RollOnLoot = UNIMPLEMENTED,
     securecall = function(func, ...)
       assert(func, 'securecall of nil function')
       if type(func) == 'string' then
@@ -1000,6 +1003,7 @@ local function mkWowEnv(api)
     end,
     UnitXP = STUB_NUMBER,
     UnitXPMax = STUB_NUMBER,
+    UseInventoryItem = UNIMPLEMENTED,
   }
 end
 
