@@ -850,6 +850,16 @@ local function mkWowEnv(api)
     HasKey = UNIMPLEMENTED,
     HasPetUI = UNIMPLEMENTED,
     HasTempShapeshiftActionBar = UNIMPLEMENTED,
+    hooksecurefunc = function(arg1, arg2, arg3)
+      local tbl, name, fn
+      if arg3 ~= nil then
+        tbl, name, fn = arg1, arg2, arg3
+      else
+        tbl, name, fn = api.env, arg1, arg2
+      end
+      local oldfn = tbl[name]
+      tbl[name] = function(...) oldfn(...) fn(...) end
+    end,
     InCinematic = UNIMPLEMENTED,
     InCombatLockdown = UNIMPLEMENTED,
     IsAddOnLoaded = UNIMPLEMENTED,
