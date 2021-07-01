@@ -527,7 +527,7 @@ local function mkBaseUIObjectTypes(api)
           return u(self).name
         end,
         GetObjectType = function(self)
-          return u(self).type
+          return api.uiobjectTypes[u(self).type].name
         end,
         IsObjectType = UNIMPLEMENTED,
       },

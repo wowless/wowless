@@ -9,6 +9,7 @@ describe('frame #small', function()
       numPoints = 0,
       shown = true,
       size = {0, 0},
+      type = 'Frame',
       visible = true,
       width = 0,
     }
@@ -19,6 +20,7 @@ describe('frame #small', function()
       parent = f:GetParent(),
       shown = f:IsShown(),
       size = {f:GetSize()},
+      type = f:GetObjectType(),
       visible = f:IsVisible(),
       width = f:GetWidth(),
     }
