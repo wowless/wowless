@@ -7,6 +7,7 @@ describe('frame #small', function()
     local expected = {
       height = 0,
       numPoints = 0,
+      object = {},
       shown = true,
       size = {0, 0},
       type = 'Frame',
@@ -17,6 +18,7 @@ describe('frame #small', function()
       height = f:GetHeight(),
       name = f:GetName(),
       numPoints = f:GetNumPoints(),
+      object = f,
       parent = f:GetParent(),
       shown = f:IsShown(),
       size = {f:GetSize()},
