@@ -57,6 +57,7 @@ local function new(log)
     assert(typename, 'must specify type for ' .. tostring(objname))
     local type = uiobjectTypes[typename]
     assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
+    assert(type.intrinsic, 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
     log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
     local supers = superTypes(typename, inherits)
     local wapi = {}
