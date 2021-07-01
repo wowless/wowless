@@ -176,6 +176,23 @@ local function loader(api)
       end,
     }
 
+    local xmlattrlang = {
+      parent = function(obj, value)
+        api.log(3, 'setting parent to ' .. value)
+        obj:SetParent(api.env[value])
+      end,
+      parentarray = function(obj, value)
+        api.log(3, 'attaching to array ' .. value)
+        local p = obj:GetParent()
+        p[value] = p[value] or {}
+        table.insert(p[value], obj)
+      end,
+      parentkey = function(obj, value)
+        api.log(3, 'attaching ' .. value)
+        obj:GetParent()[value] = obj
+      end,
+    }
+
     function loadElement(e, parent, ignoreVirtual)
       if api.IsIntrinsicType(e.type) then
         local inherits = {e.type}
@@ -195,20 +212,10 @@ local function loader(api)
           virtual = true
         end
         local function constructor(obj)
-          if e.attr.parent then
-            api.log(3, 'setting parent to ' .. e.attr.parent)
-            obj:SetParent(api.env[e.attr.parent])
-          end
-          if e.attr.parentkey then
-            api.log(3, 'attaching ' .. e.attr.parentkey)
-            obj:GetParent()[e.attr.parentkey] = obj
-          end
-          if e.attr.parentarray then
-            local k = e.attr.parentarray
-            api.log(3, 'attaching to array ' .. k)
-            local p = obj:GetParent()
-            p[k] = p[k] or {}
-            table.insert(p[k], obj)
+          for k, v in pairs(e.attr) do
+            if xmlattrlang[k] then
+              xmlattrlang[k](obj, v)
+            end
           end
           loadElements(e.kids, obj, true)
           for _, kid in ipairs(e.kids) do
