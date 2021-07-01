@@ -366,12 +366,12 @@ local function mkBaseUIObjectTypes(api)
       name = 'PlayerModel',
     },
     region = {
-      constructor = function(self, xmlattr)
+      constructor = function(self)
         local ud = u(self)
         ud.height = 0
         ud.points = {}
-        ud.shown = not xmlattr.hidden
-        ud.visible = ud.shown and (not ud.parent or u(ud.parent).visible)
+        ud.shown = true
+        ud.visible = not ud.parent or u(ud.parent).visible
         ud.width = 0
       end,
       inherits = {'parentedobject'},

@@ -177,6 +177,9 @@ local function loader(api)
     }
 
     local xmlattrlang = {
+      hidden = function(obj, value)
+        obj:SetShown(not value)
+      end,
       parent = function(obj, value)
         api.log(3, 'setting parent to ' .. value)
         obj:SetParent(api.env[value])
