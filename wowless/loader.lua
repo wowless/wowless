@@ -334,6 +334,13 @@ local function run(loglevel)
   require('wowless.env').init(api)
   local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
   loader(api)(toc)
+  api.SendEvent('PLAYER_LOGIN')
+  api.SendEvent('PLAYER_ENTERING_WORLD')
+  for _, frame in ipairs(api.frames) do
+    if frame.Click and frame:IsVisible() then
+      frame:Click()
+    end
+  end
   return api
 end
 
