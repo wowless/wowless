@@ -202,6 +202,9 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         ClearFocus = UNIMPLEMENTED,
+        GetInputLanguage = function()
+          return 'ROMAN'  -- UNIMPLEMENTED
+        end,
         GetNumber = STUB_NUMBER,
         SetFocus = UNIMPLEMENTED,
         SetNumber = UNIMPLEMENTED,
@@ -403,6 +406,10 @@ local function mkBaseUIObjectTypes(api)
         end,
         GetAlpha = function(self)
           return u(self).alpha
+        end,
+        GetBottom = STUB_NUMBER,
+        GetCenter = function()
+          return 1, 1  -- UNIMPLEMENTED
         end,
         GetEffectiveAlpha = function(self)
           local ud = u(self)
