@@ -120,6 +120,14 @@ local function new(log)
     end
   end
 
+  local function NextFrame()
+    for _, frame in ipairs(frames) do
+      if userdata[frame].visible then
+        RunScript(frame, 'OnUpdate', 1)
+      end
+    end
+  end
+
   local function GetErrorCount()
     return errors
   end
@@ -138,6 +146,7 @@ local function new(log)
     IsIntrinsicType = IsIntrinsicType,
     IsUIObjectType = IsUIObjectType,
     log = log,
+    NextFrame = NextFrame,
     RunScript = RunScript,
     SendEvent = SendEvent,
     SetParent = SetParent,

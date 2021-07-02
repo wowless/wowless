@@ -245,6 +245,7 @@ local function loader(api)
                     onattributechanged = 'self, name, value',
                     onclick = 'self, button, down',
                     onevent = 'self, event, ...',
+                    onupdate = 'self, elapsed',
                     postclick = 'self, button, down',
                     preclick = 'self, button, down',
                   }
@@ -358,6 +359,7 @@ local function run(loglevel)
       frame:Click()
     end
   end
+  api.NextFrame()
   return api
 end
 
