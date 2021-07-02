@@ -54,6 +54,14 @@ local function mkBaseUIObjectTypes(api)
       },
       name = 'AnimationGroup',
     },
+    browser = {
+      inherits = {'frame'},
+      intrinsic = true,
+      mixin = {
+        NavigateHome = UNIMPLEMENTED,
+      },
+      name = 'Browser',
+    },
     button = {
       constructor = function(self)
         u(self).beingClicked = false
@@ -786,6 +794,7 @@ local function mkWowEnv(api)
       GetAllScriptedAnimationEffects = STUB_TABLE,
     },
     C_Social = {
+      RegisterSocialBrowser = UNIMPLEMENTED,
       TwitterCheckStatus = UNIMPLEMENTED,
     },
     C_StorePublic = {
@@ -907,6 +916,7 @@ local function mkWowEnv(api)
     GetPVPSessionStats = UNIMPLEMENTED,
     GetPVPYesterdayStats = UNIMPLEMENTED,
     GetQuestLogSelection = UNIMPLEMENTED,
+    GetQuestTimers = UNIMPLEMENTED,
     GetReleaseTimeRemaining = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -931,7 +941,7 @@ local function mkWowEnv(api)
     GetTime = UNIMPLEMENTED,
     GetTotemInfo = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
-    GetQuestTimers = UNIMPLEMENTED,
+    GetWebTicket = UNIMPLEMENTED,
     GetXPExhaustion = UNIMPLEMENTED,
     GetZonePVPInfo = UNIMPLEMENTED,
     GetZoneText = UNIMPLEMENTED,
