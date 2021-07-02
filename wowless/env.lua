@@ -126,6 +126,7 @@ local function mkBaseUIObjectTypes(api)
         SetEnabled = function(self, value)
           u(self).enabled = not not value
         end,
+        SetFormattedText = UNIMPLEMENTED,
         SetHighlightAtlas = UNIMPLEMENTED,
         SetHighlightFontObject = UNIMPLEMENTED,
         SetHighlightTexture = function(self, tex)
@@ -236,6 +237,7 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'fontinstance', 'layeredregion'},
       intrinsic = true,
       mixin = {
+        GetStringWidth = STUB_NUMBER,
         GetText = UNIMPLEMENTED,
         IsTruncated = UNIMPLEMENTED,
         SetFormattedText = UNIMPLEMENTED,
@@ -475,6 +477,7 @@ local function mkBaseUIObjectTypes(api)
         IsVisible = function(self)
           return u(self).visible
         end,
+        SetAllPoints = UNIMPLEMENTED,
         SetAlpha = function(self, alpha)
           u(self).alpha = alpha < 0 and 0 or alpha > 1 and 1 or alpha
         end,
@@ -625,6 +628,7 @@ local function mkBaseUIObjectTypes(api)
         GetTexCoord = UNIMPLEMENTED,
         GetTexture = UNIMPLEMENTED,
         SetAtlas = UNIMPLEMENTED,
+        SetColorTexture = UNIMPLEMENTED,
         SetDesaturated = UNIMPLEMENTED,
         SetGradient = UNIMPLEMENTED,
         SetHorizTile = UNIMPLEMENTED,
@@ -746,7 +750,12 @@ local function mkWowEnv(api)
     BNFeaturesEnabled = UNIMPLEMENTED,
     BNFeaturesEnabledAndConnected = UNIMPLEMENTED,
     BNGetInfo = UNIMPLEMENTED,
-    BNGetNumFriends = STUB_NUMBER,
+    BNGetNumFriendInvites = function()
+      return 0  -- UNIMPLEMENTED
+    end,
+    BNGetNumFriends = function()
+      return 0, 0  -- UNIMPLEMENTED
+    end,
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
     CastShapeshiftForm = UNIMPLEMENTED,
     ChangeActionBarPage = UNIMPLEMENTED,
@@ -797,11 +806,17 @@ local function mkWowEnv(api)
       GetSelfResurrectOptions = UNIMPLEMENTED,
     },
     C_FriendList = {
+      GetFriendInfoByIndex = STUB_TABLE,
+      GetNumFriends = STUB_NUMBER,
+      GetNumOnlineFriends = STUB_NUMBER,
+      SetSelectedFriend = UNIMPLEMENTED,
       SetWhoToUi = UNIMPLEMENTED,
+      ShowFriends = UNIMPLEMENTED,
     },
     C_GamePad = {},
     C_GuildInfo = {
       GuildControlGetRankFlags = STUB_TABLE,
+      GuildRoster = UNIMPLEMENTED,
     },
     C_LootHistory = {
       GetItem = UNIMPLEMENTED,
@@ -962,6 +977,9 @@ local function mkWowEnv(api)
     GetSpellConfirmationPromptsInfo = STUB_TABLE,
     GetSpellTabInfo = UNIMPLEMENTED,
     GetSubZoneText = UNIMPLEMENTED,
+    GetSummonFriendCooldown = function()
+      return 0, 0  -- UNIMPLEMENTED
+    end,
     GetTabardCreationCost = STUB_NUMBER,
     GetText = UNIMPLEMENTED,
     GetTime = UNIMPLEMENTED,
