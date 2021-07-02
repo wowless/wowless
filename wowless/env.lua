@@ -911,6 +911,7 @@ local function mkWowEnv(api)
     GetCursorMoney = UNIMPLEMENTED,
     GetCVarInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
+    GetDailyQuestsCompleted = STUB_NUMBER,
     GetDefaultLanguage = function()
       return 'Common', 7  -- UNIMPLEMENTED
     end,
@@ -932,6 +933,7 @@ local function mkWowEnv(api)
     GetLootMethod = function()
       return 'freeforall'  -- UNIMPLEMENTED
     end,
+    GetMaxDailyQuests = STUB_NUMBER,
     GetMaxPlayerLevel = STUB_NUMBER,
     GetMaxRenderScale = UNIMPLEMENTED,
     GetMinimapZoneText = UNIMPLEMENTED,
@@ -950,7 +952,9 @@ local function mkWowEnv(api)
       return 0  -- UNIMPLEMENTED
     end,
     GetNumQuestLogChoices = STUB_NUMBER,
-    GetNumQuestLogEntries = STUB_NUMBER,
+    GetNumQuestLogEntries = function()
+      return 1, 1  -- UNIMPLEMENTED
+    end,
     GetNumQuestLogRewards = STUB_NUMBER,
     GetNumQuestLogRewardSpells = STUB_NUMBER,
     GetNumQuestWatches = function()
@@ -969,15 +973,25 @@ local function mkWowEnv(api)
     GetPVPSessionStats = UNIMPLEMENTED,
     GetPVPYesterdayStats = UNIMPLEMENTED,
     GetQuestBackgroundMaterial = UNIMPLEMENTED,
+    GetQuestLogChoiceInfo = function()
+      return 'moo', 1, 1, 1, false  -- UNIMPLEMENTED
+    end,
     GetQuestLogGroupNum = STUB_NUMBER,
+    GetQuestLogPushable = UNIMPLEMENTED,
     GetQuestLogQuestText = UNIMPLEMENTED,
     GetQuestLogRequiredMoney = STUB_NUMBER,
     GetQuestLogRewardHonor = STUB_NUMBER,
+    GetQuestLogRewardInfo = function()
+      return 'moo', 1, 1, 1, false, 1, 1  -- UNIMPLEMENTED
+    end,
     GetQuestLogRewardMoney = STUB_NUMBER,
+    GetQuestLogRewardSpell = UNIMPLEMENTED,
     GetQuestLogRewardTitle = UNIMPLEMENTED,
     GetQuestLogSelection = STUB_NUMBER,
     GetQuestLogTimeLeft = STUB_NUMBER,
-    GetQuestLogTitle = UNIMPLEMENTED,
+    GetQuestLogTitle = function()
+      return 'moo', 1  -- UNIMPLEMENTED
+    end,
     GetQuestTimers = UNIMPLEMENTED,
     GetReleaseTimeRemaining = function()
       return 0  -- UNIMPLEMENTED
@@ -1049,6 +1063,7 @@ local function mkWowEnv(api)
     IsMacClient = UNIMPLEMENTED,
     IsModifiedClick = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
+    IsQuestWatched = UNIMPLEMENTED,
     IsResting = UNIMPLEMENTED,
     IsRestrictedAccount = UNIMPLEMENTED,
     issecure = UNIMPLEMENTED,
@@ -1056,6 +1071,7 @@ local function mkWowEnv(api)
     IsStackableAction = UNIMPLEMENTED,
     IsTitleKnown = UNIMPLEMENTED,
     IsTrialAccount = UNIMPLEMENTED,
+    IsUnitOnQuest = UNIMPLEMENTED,
     IsVeteranTrialAccount = UNIMPLEMENTED,
     IsWindowsClient = UNIMPLEMENTED,
     LE_EXPANSION_BURNING_CRUSADE = 2,  -- UNIMPLEMENTED
@@ -1075,6 +1091,7 @@ local function mkWowEnv(api)
     PickupInventoryItem = UNIMPLEMENTED,
     PlaySound = UNIMPLEMENTED,
     PutItemInBackpack = UNIMPLEMENTED,
+    QuestHonorFrame_Update = UNIMPLEMENTED,
     RegisterStaticConstants = UNIMPLEMENTED,
     RequestRaidInfo = UNIMPLEMENTED,
     ResurrectGetOfferer = UNIMPLEMENTED,
