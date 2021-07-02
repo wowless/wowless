@@ -962,6 +962,9 @@ local function mkWowEnv(api)
     GetModifiedClick = UNIMPLEMENTED,
     GetMoney = STUB_NUMBER,
     GetMouseFocus = UNIMPLEMENTED,
+    GetNetStats = function()
+      return 1, 1, 1, 1  -- UNIMPLEMENTED
+    end,
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -1041,6 +1044,7 @@ local function mkWowEnv(api)
     GetTime = UNIMPLEMENTED,
     GetTotemInfo = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
+    GetWeaponEnchantInfo = UNIMPLEMENTED,
     GetWebTicket = UNIMPLEMENTED,
     GetXPExhaustion = UNIMPLEMENTED,
     GetZonePVPInfo = UNIMPLEMENTED,
