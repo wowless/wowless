@@ -182,11 +182,12 @@ local function mkBaseUIObjectTypes(api)
       name = 'DressUpModel',
     },
     editbox = {
-      inherits = {'frame'},
+      inherits = {'fontinstance', 'frame'},
       intrinsic = true,
       mixin = {
         ClearFocus = UNIMPLEMENTED,
         GetNumber = STUB_NUMBER,
+        SetFocus = UNIMPLEMENTED,
         SetNumber = UNIMPLEMENTED,
         SetSecureText = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
