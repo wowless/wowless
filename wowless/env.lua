@@ -57,6 +57,8 @@ local function mkBaseUIObjectTypes(api)
     button = {
       constructor = function(self)
         u(self).beingClicked = false
+        u(self).buttonLocked = false
+        u(self).buttonState = 'NORMAL'
         u(self).enabled = true
         u(self).fontstring = m(self, 'CreateFontString')
       end,
@@ -80,6 +82,9 @@ local function mkBaseUIObjectTypes(api)
         Enable = function(self)
           u(self).enabled = true
         end,
+        GetButtonState = function(self)
+          return u(self).buttonState
+        end,
         GetDisabledTexture = function(self)
           return u(self).disabledTexture
         end,
@@ -102,7 +107,10 @@ local function mkBaseUIObjectTypes(api)
         end,
         LockHighlight = UNIMPLEMENTED,
         RegisterForClicks = UNIMPLEMENTED,
-        SetButtonState = UNIMPLEMENTED,
+        SetButtonState = function(self, state, locked)
+          u(self).buttonLocked = not not locked
+          u(self).buttonState = state
+        end,
         SetDisabledFontObject = UNIMPLEMENTED,
         SetDisabledTexture = function(self, tex)
           u(self).disabledTexture = toTexture(self, tex)
