@@ -369,7 +369,9 @@ local function mkBaseUIObjectTypes(api)
     region = {
       constructor = function(self)
         local ud = u(self)
+        ud.alpha = 1
         ud.height = 0
+        ud.isIgnoringParentAlpha = false
         ud.points = {}
         ud.shown = true
         ud.visible = not ud.parent or u(ud.parent).visible
@@ -380,6 +382,17 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         ClearAllPoints = function(self)
           util.twipe(u(self).points)
+        end,
+        GetAlpha = function(self)
+          return u(self).alpha
+        end,
+        GetEffectiveAlpha = function(self)
+          local ud = u(self)
+          if not ud.parent or ud.isIgnoringParentAlpha then
+            return ud.alpha
+          else
+            return m(ud.parent, 'GetEffectiveAlpha') * ud.alpha
+          end
         end,
         GetEffectiveScale = STUB_NUMBER,
         GetHeight = function(self)
@@ -415,15 +428,23 @@ local function mkBaseUIObjectTypes(api)
         Hide = function(self)
           m(self, 'SetShown', false)
         end,
+        IsIgnoringParentAlpha = function(self)
+          return u(self).isIgnoringParentAlpha
+        end,
         IsShown = function(self)
           return u(self).shown
         end,
         IsVisible = function(self)
           return u(self).visible
         end,
-        SetAlpha = UNIMPLEMENTED,
+        SetAlpha = function(self, alpha)
+          u(self).alpha = alpha < 0 and 0 or alpha > 1 and 1 or alpha
+        end,
         SetHeight = function(self, height)
           u(self).height = height
+        end,
+        SetIgnoreParentAlpha = function(self, ignore)
+          u(self).isIgnoringParentAlpha = not not ignore
         end,
         SetParent = function(self, parent)
           api.SetParent(self, parent)
