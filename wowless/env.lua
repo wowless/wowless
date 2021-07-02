@@ -834,6 +834,7 @@ local function mkWowEnv(api)
     GetClassicExpansionLevel = STUB_NUMBER,
     GetComboPoints = STUB_NUMBER,
     GetContainerNumFreeSlots = STUB_NUMBER,
+    GetContainerNumSlots = STUB_NUMBER,
     GetCurrentScaledResolution = function()
       return 1024, 768  -- UNIMPLEMENTED
     end,
@@ -848,6 +849,7 @@ local function mkWowEnv(api)
     GetGameTime = function()
       return 1, 1  -- UNIMPLEMENTED
     end,
+    GetGMStatus = UNIMPLEMENTED,
     GetGuildRosterShowOffline = UNIMPLEMENTED,
     GetInventoryAlertStatus = UNIMPLEMENTED,
     GetInventorySlotInfo = function()
