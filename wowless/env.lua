@@ -199,6 +199,9 @@ local function mkBaseUIObjectTypes(api)
       name = 'DressUpModel',
     },
     editbox = {
+      constructor = function(self)
+        u(self).editboxText = ''
+      end,
       inherits = {'fontinstance', 'frame'},
       intrinsic = true,
       mixin = {
@@ -207,10 +210,17 @@ local function mkBaseUIObjectTypes(api)
           return 'ROMAN'  -- UNIMPLEMENTED
         end,
         GetNumber = STUB_NUMBER,
+        GetText = function(self)
+          return u(self).editboxText
+        end,
         SetFocus = UNIMPLEMENTED,
         SetNumber = UNIMPLEMENTED,
-        SetSecureText = UNIMPLEMENTED,
-        SetText = UNIMPLEMENTED,
+        SetSecureText = function(self, text)
+          u(self).editboxText = text
+        end,
+        SetText = function(self, text)
+          u(self).editboxText = text
+        end,
         SetTextInsets = UNIMPLEMENTED,
       },
       name = 'EditBox',
@@ -226,6 +236,10 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         GetFont = UNIMPLEMENTED,
         GetShadowOffset = STUB_NUMBER,
+        GetSpacing = STUB_NUMBER,
+        GetTextColor = function()
+          return 1, 1, 1  -- UNIMPLEMENTED
+        end,
         SetFontObject = UNIMPLEMENTED,
         SetIndentedWordWrap = UNIMPLEMENTED,
         SetJustifyH = UNIMPLEMENTED,
@@ -238,6 +252,7 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'fontinstance', 'layeredregion'},
       intrinsic = true,
       mixin = {
+        GetLineHeight = STUB_NUMBER,
         GetStringWidth = STUB_NUMBER,
         GetText = UNIMPLEMENTED,
         IsTruncated = UNIMPLEMENTED,
@@ -566,6 +581,7 @@ local function mkBaseUIObjectTypes(api)
         GetScrollChild = function(self)
           return u(self).scrollChild
         end,
+        SetHorizontalScroll = UNIMPLEMENTED,
         SetScrollChild = function(self, scrollChild)
           u(self).scrollChild = scrollChild
         end,
@@ -662,6 +678,7 @@ local function mkBaseUIObjectTypes(api)
 end
 
 local baseEnv = {
+  abs = math.abs,
   assert = assert,
   bit = {
     bor = bitlib.bor,
