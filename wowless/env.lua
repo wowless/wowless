@@ -682,6 +682,7 @@ local function mkWowEnv(api)
     BNFeaturesEnabled = UNIMPLEMENTED,
     BNFeaturesEnabledAndConnected = UNIMPLEMENTED,
     BNGetInfo = UNIMPLEMENTED,
+    BNGetNumFriends = STUB_NUMBER,
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
     Constants = {
       CurrencyConsts = {},
@@ -700,6 +701,7 @@ local function mkWowEnv(api)
       api.RunScript(obj, 'OnLoad')
       return obj
     end,
+    CursorHasItem = UNIMPLEMENTED,
     C_ChatInfo = {
       IsValidChatLine = UNIMPLEMENTED,
     },
@@ -814,6 +816,7 @@ local function mkWowEnv(api)
       return 1024, 768  -- UNIMPLEMENTED
     end,
     GetCurrentTitle = UNIMPLEMENTED,
+    GetCursorInfo = UNIMPLEMENTED,
     GetCVarInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
     GetDefaultLanguage = function()
@@ -949,7 +952,9 @@ local function mkWowEnv(api)
     end,
     NUM_LE_ITEM_QUALITYS = 10,  -- UNIMPLEMENTED
     PetHasActionBar = UNIMPLEMENTED,
+    PickupInventoryItem = UNIMPLEMENTED,
     PlaySound = UNIMPLEMENTED,
+    PutItemInBackpack = UNIMPLEMENTED,
     RegisterStaticConstants = UNIMPLEMENTED,
     RequestRaidInfo = UNIMPLEMENTED,
     ResurrectGetOfferer = UNIMPLEMENTED,
@@ -974,6 +979,8 @@ local function mkWowEnv(api)
     ShowBossFrameWhenUninteractable = UNIMPLEMENTED,
     Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
+    SpellCanTargetItem = UNIMPLEMENTED,
+    ToggleWorldMap = UNIMPLEMENTED,
     TriggerTutorial = UNIMPLEMENTED,
     UnitAura = UNIMPLEMENTED,
     UnitCastingInfo = UNIMPLEMENTED,
