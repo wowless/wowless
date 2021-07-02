@@ -706,9 +706,12 @@ local function mkWowEnv(api)
     BNGetInfo = UNIMPLEMENTED,
     BNGetNumFriends = STUB_NUMBER,
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
+    CastShapeshiftForm = UNIMPLEMENTED,
+    ChangeActionBarPage = UNIMPLEMENTED,
     Constants = {
       CurrencyConsts = {},
     },
+    ContainerIDToInventoryID = UNIMPLEMENTED,
     CreateFont = function(name)
       return api.CreateUIObject('font', name)
     end,
@@ -782,6 +785,7 @@ local function mkWowEnv(api)
     },
     C_SummonInfo = {
       CancelSummon = UNIMPLEMENTED,
+      ConfirmSummon = UNIMPLEMENTED,
       GetSummonConfirmTimeLeft = STUB_NUMBER,
       GetSummonReason = UNIMPLEMENTED,
       IsSummonSkippingStartExperience = UNIMPLEMENTED,
@@ -833,6 +837,7 @@ local function mkWowEnv(api)
     GetChatWindowSavedPosition = UNIMPLEMENTED,
     GetClassicExpansionLevel = STUB_NUMBER,
     GetComboPoints = STUB_NUMBER,
+    GetContainerItemInfo = UNIMPLEMENTED,
     GetContainerNumFreeSlots = STUB_NUMBER,
     GetContainerNumSlots = STUB_NUMBER,
     GetCurrentScaledResolution = function()
@@ -840,6 +845,7 @@ local function mkWowEnv(api)
     end,
     GetCurrentTitle = UNIMPLEMENTED,
     GetCursorInfo = UNIMPLEMENTED,
+    GetCursorMoney = UNIMPLEMENTED,
     GetCVarInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
     GetDefaultLanguage = function()
@@ -852,6 +858,7 @@ local function mkWowEnv(api)
     GetGMStatus = UNIMPLEMENTED,
     GetGuildRosterShowOffline = UNIMPLEMENTED,
     GetInventoryAlertStatus = UNIMPLEMENTED,
+    GetInventoryItemID = UNIMPLEMENTED,
     GetInventorySlotInfo = function()
       return 'UNIMPLEMENTED'
     end,
@@ -870,6 +877,7 @@ local function mkWowEnv(api)
       return 'UNKNOWN'  -- UNIMPLEMENTED
     end,
     GetModifiedClick = UNIMPLEMENTED,
+    GetMoney = STUB_NUMBER,
     GetMouseFocus = UNIMPLEMENTED,
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
@@ -890,6 +898,7 @@ local function mkWowEnv(api)
     GetPVPLifetimeStats = UNIMPLEMENTED,
     GetPVPSessionStats = UNIMPLEMENTED,
     GetPVPYesterdayStats = UNIMPLEMENTED,
+    GetQuestLogSelection = UNIMPLEMENTED,
     GetReleaseTimeRemaining = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -907,6 +916,7 @@ local function mkWowEnv(api)
       return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
     end,
     GetSpellConfirmationPromptsInfo = STUB_TABLE,
+    GetSpellTabInfo = UNIMPLEMENTED,
     GetSubZoneText = UNIMPLEMENTED,
     GetTabardCreationCost = STUB_NUMBER,
     GetText = UNIMPLEMENTED,
@@ -922,6 +932,7 @@ local function mkWowEnv(api)
     HasAction = UNIMPLEMENTED,
     HasBonusActionBar = UNIMPLEMENTED,
     HasKey = UNIMPLEMENTED,
+    HasPetSpells = UNIMPLEMENTED,
     HasPetUI = UNIMPLEMENTED,
     HasTempShapeshiftActionBar = UNIMPLEMENTED,
     hooksecurefunc = function(arg1, arg2, arg3)
@@ -936,6 +947,7 @@ local function mkWowEnv(api)
     end,
     InCinematic = UNIMPLEMENTED,
     InCombatLockdown = UNIMPLEMENTED,
+    IsAccountSecured = UNIMPLEMENTED,
     IsAddOnLoaded = UNIMPLEMENTED,
     IsAddonVersionCheckEnabled = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
@@ -993,6 +1005,7 @@ local function mkWowEnv(api)
     end,
     SetActionBarToggles = UNIMPLEMENTED,
     SetActionUIButton = UNIMPLEMENTED,
+    SetBagPortraitTexture = UNIMPLEMENTED,
     SetChatWindowName = UNIMPLEMENTED,
     SetChatWindowShown = UNIMPLEMENTED,
     seterrorhandler = UNIMPLEMENTED,
@@ -1004,6 +1017,7 @@ local function mkWowEnv(api)
     Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
     SpellCanTargetItem = UNIMPLEMENTED,
+    SpellCanTargetItemID = UNIMPLEMENTED,
     ToggleWorldMap = UNIMPLEMENTED,
     TriggerTutorial = UNIMPLEMENTED,
     UnitAura = UNIMPLEMENTED,
