@@ -946,6 +946,13 @@ local function mkWowEnv(api)
       return 0  -- UNIMPLEMENTED
     end,
     GetNumLanguages = STUB_NUMBER,
+    GetNumQuestLeaderBoards = function()
+      return 0  -- UNIMPLEMENTED
+    end,
+    GetNumQuestLogChoices = STUB_NUMBER,
+    GetNumQuestLogEntries = STUB_NUMBER,
+    GetNumQuestLogRewards = STUB_NUMBER,
+    GetNumQuestLogRewardSpells = STUB_NUMBER,
     GetNumQuestWatches = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -961,7 +968,16 @@ local function mkWowEnv(api)
     GetPVPLifetimeStats = UNIMPLEMENTED,
     GetPVPSessionStats = UNIMPLEMENTED,
     GetPVPYesterdayStats = UNIMPLEMENTED,
-    GetQuestLogSelection = UNIMPLEMENTED,
+    GetQuestBackgroundMaterial = UNIMPLEMENTED,
+    GetQuestLogGroupNum = STUB_NUMBER,
+    GetQuestLogQuestText = UNIMPLEMENTED,
+    GetQuestLogRequiredMoney = STUB_NUMBER,
+    GetQuestLogRewardHonor = STUB_NUMBER,
+    GetQuestLogRewardMoney = STUB_NUMBER,
+    GetQuestLogRewardTitle = UNIMPLEMENTED,
+    GetQuestLogSelection = STUB_NUMBER,
+    GetQuestLogTimeLeft = STUB_NUMBER,
+    GetQuestLogTitle = UNIMPLEMENTED,
     GetQuestTimers = UNIMPLEMENTED,
     GetReleaseTimeRemaining = function()
       return 0  -- UNIMPLEMENTED
@@ -1021,6 +1037,7 @@ local function mkWowEnv(api)
     IsBattlefieldArena = UNIMPLEMENTED,
     IsConsumableAction = UNIMPLEMENTED,
     IsControlKeyDown = UNIMPLEMENTED,
+    IsCurrentQuestFailed = UNIMPLEMENTED,
     IsEquippedAction = UNIMPLEMENTED,
     IsEveryoneAssistant = UNIMPLEMENTED,
     IsGMClient = UNIMPLEMENTED,
@@ -1070,6 +1087,7 @@ local function mkWowEnv(api)
       end
       return func(...)
     end,
+    SelectQuestLogEntry = UNIMPLEMENTED,
     SetActionBarToggles = UNIMPLEMENTED,
     SetActionUIButton = UNIMPLEMENTED,
     SetBagPortraitTexture = UNIMPLEMENTED,
