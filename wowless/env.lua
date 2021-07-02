@@ -487,6 +487,7 @@ local function mkBaseUIObjectTypes(api)
         IsIgnoringParentScale = function(self)
           return u(self).isIgnoringParentScale
         end,
+        IsMouseOver = UNIMPLEMENTED,
         IsShown = function(self)
           return u(self).shown
         end,
@@ -927,6 +928,9 @@ local function mkWowEnv(api)
     GetCurrentTitle = UNIMPLEMENTED,
     GetCursorInfo = UNIMPLEMENTED,
     GetCursorMoney = UNIMPLEMENTED,
+    GetCursorPosition = function()
+      return 0, 0  -- UNIMPLEMENTED
+    end,
     GetCVarInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
     GetDailyQuestsCompleted = STUB_NUMBER,
@@ -934,6 +938,7 @@ local function mkWowEnv(api)
       return 'Common', 7  -- UNIMPLEMENTED
     end,
     GetDefaultVideoOptions = UNIMPLEMENTED,
+    GetFileStreamingStatus = UNIMPLEMENTED,
     GetGameTime = function()
       return 1, 1  -- UNIMPLEMENTED
     end,
@@ -1096,6 +1101,7 @@ local function mkWowEnv(api)
     IsStackableAction = UNIMPLEMENTED,
     IsTitleKnown = UNIMPLEMENTED,
     IsTrialAccount = UNIMPLEMENTED,
+    IsTutorialFlagged = UNIMPLEMENTED,
     IsUnitOnQuest = UNIMPLEMENTED,
     IsVeteranTrialAccount = UNIMPLEMENTED,
     IsWindowsClient = UNIMPLEMENTED,
