@@ -388,7 +388,9 @@ local function mkBaseUIObjectTypes(api)
         ud.alpha = 1
         ud.height = 0
         ud.isIgnoringParentAlpha = false
+        ud.isIgnoringParentScale = false
         ud.points = {}
+        ud.scale = 1
         ud.shown = true
         ud.visible = not ud.parent or u(ud.parent).visible
         ud.width = 0
@@ -410,7 +412,14 @@ local function mkBaseUIObjectTypes(api)
             return m(ud.parent, 'GetEffectiveAlpha') * ud.alpha
           end
         end,
-        GetEffectiveScale = STUB_NUMBER,
+        GetEffectiveScale = function(self)
+          local ud = u(self)
+          if not ud.parent or ud.isIgnoringParentScale then
+            return ud.scale
+          else
+            return m(ud.parent, 'GetEffectiveScale') * ud.scale
+          end
+        end,
         GetHeight = function(self)
           return u(self).height
         end,
@@ -434,6 +443,9 @@ local function mkBaseUIObjectTypes(api)
           return unpack(u(self).points[idx])
         end,
         GetRight = STUB_NUMBER,
+        GetScale = function(self)
+          return u(self).scale
+        end,
         GetSize = function(self)
           return m(self, 'GetWidth'), m(self, 'GetHeight')
         end,
@@ -446,6 +458,9 @@ local function mkBaseUIObjectTypes(api)
         end,
         IsIgnoringParentAlpha = function(self)
           return u(self).isIgnoringParentAlpha
+        end,
+        IsIgnoringParentScale = function(self)
+          return u(self).isIgnoringParentScale
         end,
         IsShown = function(self)
           return u(self).shown
@@ -475,7 +490,11 @@ local function mkBaseUIObjectTypes(api)
           end
           table.insert(u(self).points, p)
         end,
-        SetScale = UNIMPLEMENTED,
+        SetScale = function(self, scale)
+          if scale > 0 then
+            u(self).scale = scale
+          end
+        end,
         SetShown = function(self, shown)
           u(self).shown = shown
           UpdateVisible(self)
