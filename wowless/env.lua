@@ -225,6 +225,7 @@ local function mkBaseUIObjectTypes(api)
       intrinsic = true,
       mixin = {
         GetFont = UNIMPLEMENTED,
+        GetShadowOffset = STUB_NUMBER,
         SetFontObject = UNIMPLEMENTED,
         SetIndentedWordWrap = UNIMPLEMENTED,
         SetJustifyH = UNIMPLEMENTED,
@@ -962,6 +963,7 @@ local function mkWowEnv(api)
     end,
     GetNumShapeshiftForms = STUB_NUMBER,
     GetNumSkillLines = STUB_NUMBER,
+    GetNumSpellTabs = STUB_NUMBER,
     GetNumSubgroupMembers = STUB_NUMBER,
     GetNumTitles = STUB_NUMBER,
     GetNumTrackingTypes = STUB_NUMBER,
@@ -1010,7 +1012,9 @@ local function mkWowEnv(api)
       return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
     end,
     GetSpellConfirmationPromptsInfo = STUB_TABLE,
-    GetSpellTabInfo = UNIMPLEMENTED,
+    GetSpellTabInfo = function()
+      return 'moo', 0, 0, 0  -- UNIMPLEMENTED
+    end,
     GetSubZoneText = UNIMPLEMENTED,
     GetSummonFriendCooldown = function()
       return 0, 0  -- UNIMPLEMENTED
