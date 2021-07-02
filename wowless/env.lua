@@ -757,6 +757,7 @@ local function mkWowEnv(api)
       return 0, 0  -- UNIMPLEMENTED
     end,
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
+    CanReplaceGuildMaster = UNIMPLEMENTED,
     CastShapeshiftForm = UNIMPLEMENTED,
     ChangeActionBarPage = UNIMPLEMENTED,
     Constants = {
@@ -781,7 +782,11 @@ local function mkWowEnv(api)
     C_ChatInfo = {
       IsValidChatLine = UNIMPLEMENTED,
     },
-    C_Club = {},
+    C_Club = {
+      GetInvitationsForSelf = STUB_TABLE,
+      GetSubscribedClubs = STUB_TABLE,
+      IsEnabled = UNIMPLEMENTED,
+    },
     C_Commentator = {
       IsSpectating = UNIMPLEMENTED,
     },
