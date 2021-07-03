@@ -19,6 +19,7 @@ do
   end
   local names = {
     'OnAttributeChanged',
+    'OnHide',
     'OnLoad',
     'OnShow',
   }

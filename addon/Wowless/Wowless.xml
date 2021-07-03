@@ -1,15 +1,19 @@
 <Ui>
   <Script file='Wowless.lua' />
-  <Frame name='WowlessSimpleFrame' />
-  <Frame name='WowlessAttributeFrame'>
+  <Frame name='WowlessLogger' virtual='true'>
+    <Scripts>
+      <OnAttributeChanged function='Wowless_OnAttributeChanged' />
+      <OnHide function='Wowless_OnHide' />
+      <OnLoad function='Wowless_OnLoad' />
+      <OnShow function='Wowless_OnShow' />
+    </Scripts>
+  </Frame>
+  <Frame name='WowlessSimpleFrame' inherits='WowlessLogger' />
+  <Frame name='WowlessAttributeFrame' inherits='WowlessLogger'>
     <Attributes>
       <Attribute name='attr1' value='attrvalue1' />
       <Attribute name='attr2' value='attrvalue2' />
     </Attributes>
-    <Scripts>
-      <OnLoad function='Wowless_OnLoad' />
-      <OnShow function='Wowless_OnShow' />
-      <OnAttributeChanged function='Wowless_OnAttributeChanged' />
-    </Scripts>
   </Frame>
+  <Frame name='WowlessHiddenFrame' inherits='WowlessLogger' hidden='true' />
 </Ui>
