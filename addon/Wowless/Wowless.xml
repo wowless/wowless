@@ -7,8 +7,9 @@
       <Attribute name='attr2' value='attrvalue2' />
     </Attributes>
     <Scripts>
-      <OnLoad function='WowlessAttributeFrame_OnLoad' />
-      <OnAttributeChanged function='WowlessAttributeFrame_OnAttributeChanged' />
+      <OnLoad function='Wowless_OnLoad' />
+      <OnShow function='Wowless_OnShow' />
+      <OnAttributeChanged function='Wowless_OnAttributeChanged' />
     </Scripts>
   </Frame>
 </Ui>

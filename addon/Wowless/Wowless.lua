@@ -12,15 +12,19 @@ local log = (function()
   end
 end)()
 
-local function WowlessAttributeFrame_OnLoad()
-  log('OnLoad')
+do
+  local function scriptHandler(name, self, ...)
+    local rest = table.concat({...}, ',')
+    log('%s(%s%s)', name, self:GetName(), rest ~= '' and (',' .. rest) or '')
+  end
+  local names = {
+    'OnAttributeChanged',
+    'OnLoad',
+    'OnShow',
+  }
+  for _, name in ipairs(names) do
+    _G['Wowless_' .. name] = function(...)
+      scriptHandler(name, ...)
+    end
+  end
 end
-
-local function WowlessAttributeFrame_OnAttributeChanged(_, name, value)
-  log('OnAttributeChanged(%s,%s)', name, value)
-end
-
-_G.Mixin(_G, {
-  WowlessAttributeFrame_OnLoad = WowlessAttributeFrame_OnLoad,
-  WowlessAttributeFrame_OnAttributeChanged = WowlessAttributeFrame_OnAttributeChanged,
-})
