@@ -16,4 +16,11 @@
     </Attributes>
   </Frame>
   <Frame name='WowlessHiddenFrame' inherits='WowlessLogger' hidden='true' />
+  <Frame name='WowlessParentTemplate' inherits='WowlessLogger' virtual='true'>
+    <Frames>
+      <Frame name='$parentKid2' inherits='WowlessLogger' />
+      <Frame name='$parentKid1' inherits='WowlessLogger' />
+    </Frames>
+  </Frame>
+  <Frame name='WowlessParent' inherits='WowlessParentTemplate' />
 </Ui>
