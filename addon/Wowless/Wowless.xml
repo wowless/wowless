@@ -1,3 +1,14 @@
 <Ui>
-  <Frame name='rofl' />
+  <Script file='Wowless.lua' />
+  <Frame name='WowlessSimpleFrame' />
+  <Frame name='WowlessAttributeFrame'>
+    <Attributes>
+      <Attribute name='attr1' value='attrvalue1' />
+      <Attribute name='attr2' value='attrvalue2' />
+    </Attributes>
+    <Scripts>
+      <OnLoad function='WowlessAttributeFrame_OnLoad' />
+      <OnAttributeChanged function='WowlessAttributeFrame_OnAttributeChanged' />
+    </Scripts>
+  </Frame>
 </Ui>

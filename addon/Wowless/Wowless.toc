@@ -1,1 +1,2 @@
+## SavedVariables: WowlessLog
 Wowless.xml
