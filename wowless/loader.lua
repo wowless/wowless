@@ -183,7 +183,7 @@ local function loader(api)
       hidden = function(obj, value)
         local ud = api.UserData(obj)
         ud.shown = not value
-        ud.visible = not value
+        ud.visible = ud.shown and (not ud.parent or api.UserData(ud.parent).visible)
       end,
       parent = function(obj, value)
         api.log(3, 'setting parent to ' .. value)
