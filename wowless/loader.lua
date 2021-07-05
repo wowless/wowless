@@ -181,7 +181,9 @@ local function loader(api)
         obj:SetChecked(value)
       end,
       hidden = function(obj, value)
-        obj:SetShown(not value)
+        local ud = api.UserData(obj)
+        ud.shown = not value
+        ud.visible = not value
       end,
       parent = function(obj, value)
         api.log(3, 'setting parent to ' .. value)

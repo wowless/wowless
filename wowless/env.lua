@@ -825,6 +825,7 @@ local function mkWowEnv(api)
         }
         return defaults[var]
       end,
+      SetCVar = UNIMPLEMENTED,
     },
     C_DeathInfo = {
       GetSelfResurrectOptions = UNIMPLEMENTED,
@@ -879,6 +880,7 @@ local function mkWowEnv(api)
       After = UNIMPLEMENTED,
     },
     C_VoiceChat = {
+      CanPlayerUseVoiceChat = UNIMPLEMENTED,
       GetActiveChannelID = UNIMPLEMENTED,
       GetAvailableInputDevices = UNIMPLEMENTED,
       GetAvailableOutputDevices = UNIMPLEMENTED,
@@ -956,6 +958,7 @@ local function mkWowEnv(api)
     GetLootMethod = function()
       return 'freeforall'  -- UNIMPLEMENTED
     end,
+    GetLootThreshold = STUB_NUMBER,
     GetMaxDailyQuests = STUB_NUMBER,
     GetMaxPlayerLevel = STUB_NUMBER,
     GetMaxRenderScale = UNIMPLEMENTED,
@@ -992,6 +995,7 @@ local function mkWowEnv(api)
     GetNumSubgroupMembers = STUB_NUMBER,
     GetNumTitles = STUB_NUMBER,
     GetNumTrackingTypes = STUB_NUMBER,
+    GetOptOutOfLoot = UNIMPLEMENTED,
     GetPetActionCooldown = UNIMPLEMENTED,
     GetPetActionInfo = UNIMPLEMENTED,
     GetPetExperience = STUB_NUMBER,
@@ -1125,6 +1129,7 @@ local function mkWowEnv(api)
     end,
     NUM_LE_ITEM_QUALITYS = 10,  -- UNIMPLEMENTED
     PetHasActionBar = UNIMPLEMENTED,
+    PickupContainerItem = UNIMPLEMENTED,
     PickupInventoryItem = UNIMPLEMENTED,
     PlaySound = UNIMPLEMENTED,
     PutItemInBackpack = UNIMPLEMENTED,
@@ -1160,11 +1165,13 @@ local function mkWowEnv(api)
     ToggleWorldMap = UNIMPLEMENTED,
     TriggerTutorial = UNIMPLEMENTED,
     UnitAura = UNIMPLEMENTED,
+    UnitCanCooperate = UNIMPLEMENTED,
     UnitCastingInfo = UNIMPLEMENTED,
     UnitChannelInfo = UNIMPLEMENTED,
     UnitClass = UNIMPLEMENTED,
     UnitExists = UNIMPLEMENTED,
     UnitFactionGroup = UNIMPLEMENTED,
+    UnitGUID = UNIMPLEMENTED,
     UnitHealth = STUB_NUMBER,
     UnitHealthMax = STUB_NUMBER,
     UnitInBattleground = UNIMPLEMENTED,
@@ -1174,7 +1181,10 @@ local function mkWowEnv(api)
     UnitIsGhost = UNIMPLEMENTED,
     UnitIsGroupAssistant = UNIMPLEMENTED,
     UnitIsGroupLeader = UNIMPLEMENTED,
+    UnitIsOtherPlayersPet = UNIMPLEMENTED,
+    UnitIsPlayer = UNIMPLEMENTED,
     UnitIsPossessed = UNIMPLEMENTED,
+    UnitIsUnit = UNIMPLEMENTED,
     UnitIsVisible = UNIMPLEMENTED,
     UnitLevel = STUB_NUMBER,
     UnitName = function()
