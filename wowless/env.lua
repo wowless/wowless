@@ -766,6 +766,7 @@ end
 local function mkWowEnv(api)
   return {
     AntiAliasingSupported = UNIMPLEMENTED,
+    BankButtonIDToInvSlotID = STUB_NUMBER,
     BNFeaturesEnabled = UNIMPLEMENTED,
     BNFeaturesEnabledAndConnected = UNIMPLEMENTED,
     BNGetInfo = UNIMPLEMENTED,
@@ -779,6 +780,7 @@ local function mkWowEnv(api)
     CanReplaceGuildMaster = UNIMPLEMENTED,
     CastShapeshiftForm = UNIMPLEMENTED,
     ChangeActionBarPage = UNIMPLEMENTED,
+    CollapseSkillHeader = UNIMPLEMENTED,
     Constants = {
       CurrencyConsts = {},
     },
@@ -912,6 +914,7 @@ local function mkWowEnv(api)
     GetAlternativeDefaultLanguage = UNIMPLEMENTED,
     GetArenaTeam = UNIMPLEMENTED,
     GetAvailableLocales = UNIMPLEMENTED,
+    GetBankBagSlotFlag = UNIMPLEMENTED,
     GetBattlefieldStatus = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
     GetBindingText = UNIMPLEMENTED,
@@ -1099,6 +1102,7 @@ local function mkWowEnv(api)
     IsInGuild = UNIMPLEMENTED,
     IsInInstance = UNIMPLEMENTED,
     IsInRaid = UNIMPLEMENTED,
+    IsInventoryItemProfessionBag = UNIMPLEMENTED,
     IsItemAction = UNIMPLEMENTED,
     IsMacClient = UNIMPLEMENTED,
     IsModifiedClick = UNIMPLEMENTED,
@@ -1115,6 +1119,7 @@ local function mkWowEnv(api)
     IsUnitOnQuest = UNIMPLEMENTED,
     IsVeteranTrialAccount = UNIMPLEMENTED,
     IsWindowsClient = UNIMPLEMENTED,
+    LE_BAG_FILTER_FLAG_EQUIPMENT = 2,
     LE_EXPANSION_BURNING_CRUSADE = 2,  -- UNIMPLEMENTED
     LoadAddOn = function(name)
       api.log(1, 'failing to load addon ' .. name)
@@ -1127,12 +1132,14 @@ local function mkWowEnv(api)
     newproxy = function()
       return setmetatable({}, {})
     end,
+    NUM_LE_BAG_FILTER_FLAGS = 5,
     NUM_LE_ITEM_QUALITYS = 10,  -- UNIMPLEMENTED
     PetHasActionBar = UNIMPLEMENTED,
     PickupContainerItem = UNIMPLEMENTED,
     PickupInventoryItem = UNIMPLEMENTED,
     PlaySound = UNIMPLEMENTED,
     PutItemInBackpack = UNIMPLEMENTED,
+    PutItemInBag = UNIMPLEMENTED,
     QuestHonorFrame_Update = UNIMPLEMENTED,
     RegisterStaticConstants = UNIMPLEMENTED,
     RequestRaidInfo = UNIMPLEMENTED,
@@ -1146,6 +1153,7 @@ local function mkWowEnv(api)
       end
       return func(...)
     end,
+    SelectGossipOption = UNIMPLEMENTED,
     SelectQuestLogEntry = UNIMPLEMENTED,
     SetActionBarToggles = UNIMPLEMENTED,
     SetActionUIButton = UNIMPLEMENTED,
