@@ -848,6 +848,9 @@ local function mkWowEnv(api)
     C_LootHistory = {
       GetItem = UNIMPLEMENTED,
       GetNumItems = STUB_NUMBER,
+      GetPlayerInfo = function()
+        return 'moo', 'WARRIOR'  -- UNIMPLEMENTED
+      end,
     },
     C_NamePlate = {
       GetNumNamePlateMotionTypes = STUB_NUMBER,
