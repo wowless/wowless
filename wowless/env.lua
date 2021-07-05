@@ -952,6 +952,7 @@ local function mkWowEnv(api)
     end,
     GetGMStatus = UNIMPLEMENTED,
     GetGuildRosterShowOffline = UNIMPLEMENTED,
+    GetInstanceInfo = UNIMPLEMENTED,
     GetInventoryAlertStatus = UNIMPLEMENTED,
     GetInventoryItemID = UNIMPLEMENTED,
     GetInventorySlotInfo = function()
@@ -1062,7 +1063,7 @@ local function mkWowEnv(api)
     end,
     GetTabardCreationCost = STUB_NUMBER,
     GetText = UNIMPLEMENTED,
-    GetTime = UNIMPLEMENTED,
+    GetTime = STUB_NUMBER,
     GetTotemInfo = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
     GetWeaponEnchantInfo = UNIMPLEMENTED,
