@@ -927,7 +927,7 @@ local function mkWowEnv(api)
     end,
     GetCurrentTitle = UNIMPLEMENTED,
     GetCursorInfo = UNIMPLEMENTED,
-    GetCursorMoney = UNIMPLEMENTED,
+    GetCursorMoney = STUB_NUMBER,
     GetCursorPosition = function()
       return 0, 0  -- UNIMPLEMENTED
     end,
@@ -1024,6 +1024,12 @@ local function mkWowEnv(api)
       return 0  -- UNIMPLEMENTED
     end,
     GetRepairAllCost = STUB_NUMBER,
+    GetRestrictedAccountData = function()
+      local rLevel = 20
+      local rMoney = 10000000
+      local profCap = 0
+      return rLevel, rMoney, profCap
+    end,
     GetRestState = function()
       return 2, 'Normal', 1  -- UNIMPLEMENTED
     end,
