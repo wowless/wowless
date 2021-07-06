@@ -115,10 +115,32 @@ describe('loader #small', function()
         </Frame>
       </Ui>
     ]])
+    assert.same(0, api.GetErrorCount())
     assert.equals(keyKid, api.env.Frame1.KeyKid)
     assert.equals(arrayKid, api.env.Frame1.ArrayKid)
     assert.equals(keyKid, api.env.Frame2)
     assert.same(1, #arrayKid)
     assert.equals(arrayKid[1], api.env.Frame3)
+  end)
+
+  pending('runs OnShow on new non-hidden frames', function()
+    local log = {}
+    api.env.Frame1_OnLoad = function()
+      table.insert(log, 'OnLoad')
+    end
+    api.env.Frame1_OnShow = function()
+      table.insert(log, 'OnShow')
+    end
+    loadXml([[
+      <Ui>
+        <Frame name='Frame1'>
+          <Scripts>
+            <OnLoad function='Frame1_OnLoad' />
+            <OnShow function='Frame1_OnShow' />
+          </Scripts>
+        </Frame>
+      </Ui>
+    ]])
+    assert.same({'OnLoad', 'OnShow'}, log)
   end)
 end)
