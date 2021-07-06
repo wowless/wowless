@@ -12,7 +12,7 @@ describe('loader #small', function()
   end
 
   it('loads empty xml', function()
-    loadXml('<Ui/>')
+    loadXml('<Ui />')
     assert.same(0, api.GetErrorCount())
   end)
 
@@ -44,7 +44,7 @@ describe('loader #small', function()
       <Ui>
         <Frame name='MyFrame'>
           <Scripts>
-            <OnLoad function='MyOnLoad'/>
+            <OnLoad function='MyOnLoad' />
           </Scripts>
         </Frame>
       </Ui>
@@ -67,5 +67,32 @@ describe('loader #small', function()
     ]])
     assert.same(0, api.GetErrorCount())
     assert.same({ moo = 'cow' }, api.env.MyFrame)
+  end)
+
+  it('calls OnLoad of kids before parents', function()
+    local log = {}
+    api.env.Logger_OnLoad = function(self)
+      table.insert(log, self:GetName())
+    end
+    loadXml([[
+      <Ui>
+        <Frame name='Logger' virtual='true'>
+          <Scripts>
+            <OnLoad function='Logger_OnLoad' />
+          </Scripts>
+        </Frame>
+        <Frame name='Frame1' inherits='Logger'>
+          <Frames>
+            <Frame name='Frame2' inherits='Logger'>
+              <Frames>
+                <Frame name='Frame3' inherits='Logger' />
+              </Frames>
+            </Frame>
+          </Frames>
+        </Frame>
+      </Ui>
+    ]])
+    assert.same(0, api.GetErrorCount())
+    assert.same({'Frame3', 'Frame2', 'Frame1'}, log)
   end)
 end)
