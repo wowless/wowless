@@ -95,4 +95,30 @@ describe('loader #small', function()
     assert.same(0, api.GetErrorCount())
     assert.same({'Frame3', 'Frame2', 'Frame1'}, log)
   end)
+
+  it('runs parentKey and parentArray before parent OnLoad', function()
+    local keyKid, arrayKid
+    api.env.Frame1_OnLoad = function(self)
+      keyKid = self.KeyKid
+      arrayKid = self.ArrayKid
+    end
+    loadXml([[
+      <Ui>
+        <Frame name='Frame1'>
+          <Scripts>
+            <OnLoad function='Frame1_OnLoad' />
+          </Scripts>
+          <Frames>
+            <Frame name='Frame2' parentKey='KeyKid' />
+            <Frame name='Frame3' parentArray='ArrayKid' />
+          </Frames>
+        </Frame>
+      </Ui>
+    ]])
+    assert.equals(keyKid, api.env.Frame1.KeyKid)
+    assert.equals(arrayKid, api.env.Frame1.ArrayKid)
+    assert.equals(keyKid, api.env.Frame2)
+    assert.same(1, #arrayKid)
+    assert.equals(arrayKid[1], api.env.Frame3)
+  end)
 end)
