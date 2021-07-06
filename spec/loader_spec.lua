@@ -123,7 +123,7 @@ describe('loader #small', function()
     assert.equals(arrayKid[1], api.env.Frame3)
   end)
 
-  pending('runs OnShow on new non-hidden frames', function()
+  it('runs OnShow on new non-hidden frames', function()
     local log = {}
     for _, h in ipairs({'OnLoad', 'OnShow', 'OnHide'}) do
       api.env['Logger_' .. h] = function(self)

@@ -303,6 +303,9 @@ local function loader(api)
           mixin(obj, mix)
           constructor(obj)
           api.RunScript(obj, 'OnLoad')
+          if obj.IsVisible and obj:IsVisible() then
+            api.RunScript(obj, 'OnShow')
+          end
           return obj
         end
       else
