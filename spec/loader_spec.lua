@@ -125,22 +125,32 @@ describe('loader #small', function()
 
   pending('runs OnShow on new non-hidden frames', function()
     local log = {}
-    api.env.Frame1_OnLoad = function()
-      table.insert(log, 'OnLoad')
-    end
-    api.env.Frame1_OnShow = function()
-      table.insert(log, 'OnShow')
+    for _, h in ipairs({'OnLoad', 'OnShow', 'OnHide'}) do
+      api.env['Logger_' .. h] = function(self)
+        table.insert(log, h .. ' ' .. self:GetName())
+      end
     end
     loadXml([[
       <Ui>
-        <Frame name='Frame1'>
+        <Frame name='Logger' virtual='true'>
           <Scripts>
-            <OnLoad function='Frame1_OnLoad' />
-            <OnShow function='Frame1_OnShow' />
+            <OnLoad function='Logger_OnLoad' />
+            <OnShow function='Logger_OnShow' />
+            <OnHide function='Logger_OnHide' />
           </Scripts>
         </Frame>
+        <Frame name='Frame1' inherits='Logger' />
+        <Frame name='Frame2' inherits='Logger' hidden='true' />
+        <Frame name='Frame3' inherits='Logger' hidden='false' />
       </Ui>
     ]])
-    assert.same({'OnLoad', 'OnShow'}, log)
+    local expected = {
+      'OnLoad Frame1',
+      'OnShow Frame1',
+      'OnLoad Frame2',
+      'OnLoad Frame3',
+      'OnShow Frame3',
+    }
+    assert.same(expected, log)
   end)
 end)
