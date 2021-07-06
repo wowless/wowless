@@ -11,3 +11,5 @@ jobs:
       run: bin/setup.sh
     - name: run
       run: bin/run.sh
+    - name: upload rockspec
+      run: bin/upload.sh ${{ secrets.LUAROCKS_API_KEY }}
