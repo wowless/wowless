@@ -341,30 +341,11 @@ local function loader(api)
     end
   end
 
-  return loadToc
-end
-
-local function run(loglevel)
-  local function log(level, fmt, ...)
-    if level <= loglevel then
-      print(string.format(fmt, ...))
-    end
-  end
-  local api = require('wowless.api').new(log)
-  require('wowless.env').init(api)
-  local toc = require('datafile').path('wowui/classic/FrameXML/FrameXML.toc')
-  loader(api)(toc)
-  api.SendEvent('PLAYER_LOGIN')
-  api.SendEvent('PLAYER_ENTERING_WORLD')
-  for _, frame in ipairs(api.frames) do
-    if frame.Click and frame:IsVisible() then
-      frame:Click()
-    end
-  end
-  api.NextFrame()
-  return api
+  return {
+    loadToc = loadToc,
+  }
 end
 
 return {
-  run = run,
+  loader = loader,
 }
