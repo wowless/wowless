@@ -178,4 +178,16 @@ describe('loader #small', function()
     assert.Not.Nil(api.env.Frame1)
     assert.Nil(api.env.Frame2)
   end)
+
+  it('does not permit virtuals as tags', function()
+    loadXml([[
+      <Ui>
+        <Frame name='Frame1' virtual='true' />
+        <Frame1 name='Frame2' />
+      </Ui>
+    ]])
+    assert.same(1, api.GetErrorCount())
+    assert.Nil(api.env.Frame1)
+    assert.Nil(api.env.Frame2)
+  end)
 end)
