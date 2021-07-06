@@ -190,4 +190,29 @@ describe('loader #small', function()
     assert.Nil(api.env.Frame1)
     assert.Nil(api.env.Frame2)
   end)
+
+  pending('should completely construct a parent before kid OnLoad', function()
+    local parentShown
+    api.env.Kid_OnLoad = function(self)
+      parentShown = self:GetParent():IsShown()
+    end
+    loadXml([[
+      <Ui>
+        <Frame name='Template' virtual='true'>
+          <Frames>
+            <Frame name='$parentKid'>
+              <Scripts>
+                <OnLoad function='Kid_OnLoad' />
+              </Scripts>
+            </Frame>
+          </Frames>
+        </Frame>
+        <Frame name='Parent' inherits='Template' hidden='true' />
+      </Ui>
+    ]])
+    assert.False(parentShown)
+    assert.False(api.env.Parent:IsShown())
+    assert.True(api.env.ParentKid:IsShown())
+    assert.False(api.env.ParentKid:IsVisible())
+  end)
 end)
