@@ -191,7 +191,7 @@ describe('loader #small', function()
     assert.Nil(api.env.Frame2)
   end)
 
-  pending('should completely construct a parent before kid OnLoad', function()
+  pending('completely constructs a parent before kid OnLoad', function()
     local parentShown
     api.env.Kid_OnLoad = function(self)
       parentShown = self:GetParent():IsShown()
@@ -214,5 +214,19 @@ describe('loader #small', function()
     assert.False(api.env.Parent:IsShown())
     assert.True(api.env.ParentKid:IsShown())
     assert.False(api.env.ParentKid:IsVisible())
+  end)
+
+  it('ignores nested virtuals', function()
+    loadXml([[
+      <Ui>
+        <Frame name='OuterTemplate' virtual='true'>
+          <Frames>
+            <Frame name='InnerTemplate' virtual='true' />
+          </Frames>
+        </Frame>
+        <Frame name='TheFrame' inherits='OuterTemplate' />
+      </Ui>
+    ]])
+    assert.equals(api.env.TheFrame, api.env.InnerTemplate:GetParent())
   end)
 end)
