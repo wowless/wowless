@@ -151,6 +151,31 @@ describe('loader #small', function()
       'OnLoad Frame3',
       'OnShow Frame3',
     }
+    assert.same(0, api.GetErrorCount())
     assert.same(expected, log)
+  end)
+
+  it('does not instantiate virtuals', function()
+    loadXml([[
+      <Ui>
+        <Frame name='Frame1' virtual='true' />
+        <Frame name='Frame2' inherits='Frame1' />
+      </Ui>
+    ]])
+    assert.same(0, api.GetErrorCount())
+    assert.Nil(api.env.Frame1)
+    assert.Not.Nil(api.env.Frame2)
+  end)
+
+  it('does not permit inheriting non-virtuals', function()
+    loadXml([[
+      <Ui>
+        <Frame name='Frame1' />
+        <Frame name='Frame2' inherits='Frame1' />
+      </Ui>
+    ]])
+    assert.same(1, api.GetErrorCount())
+    assert.Not.Nil(api.env.Frame1)
+    assert.Nil(api.env.Frame2)
   end)
 end)
