@@ -1,7 +1,11 @@
 describe('loader #small', function()
-  local api = require('wowless.api').new(function() end)
-  require('wowless.env').init(api)
-  local loader = require('wowless.loader').loader(api)
+
+  local api, loader
+  before_each(function()
+    api = require('wowless.api').new(function() end)
+    require('wowless.env').init(api)
+    loader = require('wowless.loader').loader(api)
+  end)
 
   local function loadXml(str)
     loader.loadXml('test.xml', str)
@@ -10,6 +14,11 @@ describe('loader #small', function()
   it('loads empty xml', function()
     loadXml('<Ui/>')
     assert.same(0, api.GetErrorCount())
+  end)
+
+  it('treats bad xml as an error', function()
+    loadXml('<Ui>')
+    assert.same(1, api.GetErrorCount())
   end)
 
   it('creates simple frames', function()

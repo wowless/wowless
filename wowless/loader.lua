@@ -315,9 +315,11 @@ local function loader(api)
       end
     end
 
-    local root = xml.validate(xmlstr)
-    assert(root.type == 'ui')
-    loadElements(root.kids)
+    return api.CallSafely(function()
+      local root = xml.validate(xmlstr)
+      assert(root.type == 'ui')
+      loadElements(root.kids)
+    end)
   end
 
   function loadFile(filename)
