@@ -37,9 +37,10 @@ describe('xml.lua #huge', function()
       assert.True(numtext == 0 or numtext == #e.kids)
     end
   end
+  local readFile = require('wowless.util').readfile
   for line in handle:lines() do
     it('handles ' .. line, function()
-      local r, w = module.validate(line)
+      local r, w = module.validate(readFile(line))
       warnings[line] = next(w) and w or nil
       check(r)
     end)

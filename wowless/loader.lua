@@ -38,7 +38,7 @@ local function loader(api)
 
   local loadFile
 
-  local function loadXml(filename)
+  local function loadXml(filename, xmlstr)
     local dir = path.dirname(filename)
 
     local loadElement
@@ -315,7 +315,7 @@ local function loader(api)
       end
     end
 
-    local root = xml.validate(filename)
+    local root = xml.validate(xmlstr)
     assert(root.type == 'ui')
     loadElements(root.kids)
   end
@@ -325,7 +325,7 @@ local function loader(api)
     if filename:sub(-4) == '.lua' then
       loadLuaString(filename, readFile(filename))
     elseif filename:sub(-4) == '.xml' then
-      return loadXml(filename)
+      return loadXml(filename, readFile(filename))
     else
       error('unknown file type ' .. filename)
     end
@@ -343,6 +343,7 @@ local function loader(api)
 
   return {
     loadToc = loadToc,
+    loadXml = loadXml,
   }
 end
 

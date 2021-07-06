@@ -1,7 +1,6 @@
-local util = require('wowless.util')
+local mixin = require('wowless.util').mixin
 
 local function preprocess(tree)
-  local mixin = util.mixin
   local newtree = {}
   for k, v in pairs(tree) do
     local attrs = mixin({}, v.attributes)
@@ -183,10 +182,10 @@ local function validateRoot(root)
   return result, warnings
 end
 
-local function validate(filename)
+local function validate(xmlstr)
   local h = require('xmlhandler.dom'):new()
   h.options.commentNode = false
-  require('xml2lua').parser(h):parse(util.readfile(filename))
+  require('xml2lua').parser(h):parse(xmlstr)
   return validateRoot(h.root)
 end
 
