@@ -36,7 +36,7 @@ describe('loader #small', function()
     assert.Not.equal(frame1, frame2)
   end)
 
-  it('calls OnLoad handler', function()
+  it('calls OnLoad script function', function()
     api.env.MyOnLoad = function(self)
       self.moo = 'cow'
     end
@@ -45,6 +45,22 @@ describe('loader #small', function()
         <Frame name='MyFrame'>
           <Scripts>
             <OnLoad function='MyOnLoad'/>
+          </Scripts>
+        </Frame>
+      </Ui>
+    ]])
+    assert.same(0, api.GetErrorCount())
+    assert.same({ moo = 'cow' }, api.env.MyFrame)
+  end)
+
+  it('calls OnLoad script inline', function()
+    loadXml([[
+      <Ui>
+        <Frame name='MyFrame'>
+          <Scripts>
+            <OnLoad>
+              self.moo = 'cow'
+            </OnLoad>
           </Scripts>
         </Frame>
       </Ui>
