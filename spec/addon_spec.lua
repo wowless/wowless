@@ -1,6 +1,9 @@
 describe('addon #small', function()
   pending('writes a log on PLAYER_LOGOUT', function()
-    local api = require('wowless.api').new(function() end)
+    local log = function(_, ...)
+      print(string.format(...))
+    end
+    local api = require('wowless.api').new(log)
     require('wowless.env').init(api)
     local loader = require('wowless.loader').loader(api)
     loader.loadToc('addon/Wowless/Wowless.toc')
