@@ -68,8 +68,10 @@ local function loader(api)
         loadElements(e.groups, parent)
       end,
       attributes = function(e, parent)
+        -- TODO share code with SetAttribute somehow
+        local attrs = api.UserData(parent).attributes
         for _, attr in ipairs(e.entries) do
-          parent:SetAttribute(attr.name, parseTypedValue(attr.luatype, attr.value))
+          attrs[attr.name] = parseTypedValue(attr.luatype, attr.value)
         end
       end,
       bartexture = function(e, parent)
