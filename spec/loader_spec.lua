@@ -244,4 +244,21 @@ describe('loader #small', function()
     assert.equals(api.env.Kid1, api.env.Parent.Moo)
     assert.equals(api.env.Kid2, api.env.Parent.Cow)
   end)
+
+  it('is completely crazy, TODO verify with client', function()
+    loadXml([[
+      <Ui>
+        <Button name='Template' virtual='true'>
+          <NormalTexture name='$parentNormalTexture' />
+          <PushedTexture name='$parentPushedTexture' />
+        </Button>
+        <Frame name='Instantiation' inherits='Template' />
+      </Ui>
+    ]])
+    assert.same(0, api.GetErrorCount())
+    assert.same('Frame', api.env.Instantiation:GetObjectType())
+    assert.Not.Nil(api.env.Instantiation.SetNormalTexture)
+    assert.Not.Nil(api.env.InstantiationNormalTexture)
+    assert.Not.Nil(api.env.InstantiationPushedTexture)
+  end)
 end)
