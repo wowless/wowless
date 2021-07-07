@@ -210,6 +210,7 @@ describe('loader #small', function()
         <Frame name='Parent' inherits='Template' hidden='true' />
       </Ui>
     ]])
+    assert.same(0, api.GetErrorCount())
     assert.False(parentShown)
     assert.False(api.env.Parent:IsShown())
     assert.True(api.env.ParentKid:IsShown())
@@ -227,6 +228,20 @@ describe('loader #small', function()
         <Frame name='TheFrame' inherits='OuterTemplate' />
       </Ui>
     ]])
+    assert.same(0, api.GetErrorCount())
     assert.equals(api.env.TheFrame, api.env.InnerTemplate:GetParent())
+  end)
+
+  it('evaluates parent= before parentKey=', function()
+    loadXml([[
+      <Ui>
+        <Frame name='Parent' />
+        <Frame name='Kid1' parent='Parent' parentkey='Moo' />
+        <Frame name='Kid2' parentkey='Cow' parent='Parent' />
+      </Ui>
+    ]])
+    assert.same(0, api.GetErrorCount())
+    assert.equals(api.env.Kid1, api.env.Parent.Moo)
+    assert.equals(api.env.Kid2, api.env.Parent.Cow)
   end)
 end)
