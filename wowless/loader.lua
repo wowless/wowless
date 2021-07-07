@@ -141,8 +141,58 @@ local function loader(api)
           loadLuaString(filename, e.text)
         end
       end,
-      scripts = function()
-        -- handled by loadElement
+      scripts = function(e, parent)
+        local obj = parent
+        for _, script in ipairs(e.kids) do
+          local fn
+          if script.func then
+            local fnattr = script.func
+            fn = function(...)
+              assert(api.env[fnattr], 'unknown script function ' .. fnattr)
+              api.env[fnattr](...)
+            end
+          elseif script.method then
+            local mattr = script.method
+            fn = function(x, ...)
+              assert(x[mattr], 'unknown script method ' .. mattr)
+              x[mattr](x, ...)
+            end
+          elseif script.text then
+            local argTable = {
+              onattributechanged = 'self, name, value',
+              onclick = 'self, button, down',
+              onevent = 'self, event, ...',
+              onupdate = 'self, elapsed',
+              postclick = 'self, button, down',
+              preclick = 'self, button, down',
+            }
+            local args = argTable[string.lower(script.type)] or 'self, ...'
+            local fnstr = 'return function(' .. args .. ')\n' .. script.text .. '\nend'
+            fn = setfenv(assert(loadstring(fnstr, path.basename(filename)))(), api.env)
+          end
+          if fn then
+            local old = obj:GetScript(script.type)
+            if old and script.inherit then
+              local bfn = fn
+              if script.inherit == 'prepend' then
+                fn = function(...) bfn(...) old(...) end
+              elseif script.inherit == 'append' then
+                fn = function(...) old(...) bfn(...) end
+              else
+                error('invalid inherit tag on script')
+              end
+            end
+            local bindingType = 1
+            if script.intrinsicorder == 'precall' then
+              bindingType = 0
+            elseif script.intrinsicorder == 'postcall' then
+              bindingType = 2
+            else
+              assert(script.intrinsicorder == nil, 'invalid intrinsicOrder tag on script')
+            end
+            api.SetScript(obj, script.type, bindingType, fn)
+          end
+        end
       end,
       scrollchild = function(e, parent)
         parent:SetScrollChild(loadElement(e.frame, parent))
@@ -215,60 +265,6 @@ local function loader(api)
             end
           end
           loadElements(e.kids, obj, true)
-          for _, kid in ipairs(e.kids) do
-            if kid.type == 'scripts' then
-              for _, script in ipairs(kid.kids) do
-                local fn
-                if script.func then
-                  local fnattr = script.func
-                  fn = function(...)
-                    assert(api.env[fnattr], 'unknown script function ' .. fnattr)
-                    api.env[fnattr](...)
-                  end
-                elseif script.method then
-                  local mattr = script.method
-                  fn = function(x, ...)
-                    assert(x[mattr], 'unknown script method ' .. mattr)
-                    x[mattr](x, ...)
-                  end
-                elseif script.text then
-                  local argTable = {
-                    onattributechanged = 'self, name, value',
-                    onclick = 'self, button, down',
-                    onevent = 'self, event, ...',
-                    onupdate = 'self, elapsed',
-                    postclick = 'self, button, down',
-                    preclick = 'self, button, down',
-                  }
-                  local args = argTable[string.lower(script.type)] or 'self, ...'
-                  local fnstr = 'return function(' .. args .. ')\n' .. script.text .. '\nend'
-                  fn = setfenv(assert(loadstring(fnstr, path.basename(filename)))(), api.env)
-                end
-                if fn then
-                  local old = obj:GetScript(script.type)
-                  if old and script.inherit then
-                    local bfn = fn
-                    if script.inherit == 'prepend' then
-                      fn = function(...) bfn(...) old(...) end
-                    elseif script.inherit == 'append' then
-                      fn = function(...) old(...) bfn(...) end
-                    else
-                      error('invalid inherit tag on script')
-                    end
-                  end
-                  local bindingType = 1
-                  if script.intrinsicorder == 'precall' then
-                    bindingType = 0
-                  elseif script.intrinsicorder == 'postcall' then
-                    bindingType = 2
-                  else
-                    assert(script.intrinsicorder == nil, 'invalid intrinsicOrder tag on script')
-                  end
-                  api.SetScript(obj, script.type, bindingType, fn)
-                end
-              end
-            end
-          end
         end
         if virtual and not ignoreVirtual then
           assert(e.attr.name, 'cannot create anonymous virtual uiobject')
