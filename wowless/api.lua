@@ -53,6 +53,18 @@ local function new(log)
     end
   end
 
+  local function ParentSub(name, parent)
+    if name and string.match(name, '$parent') then
+      local p = parent
+      while p ~= nil and not p:GetName() do
+        p = p:GetParent()
+      end
+      return string.gsub(name, '$parent', p and p:GetName() or 'Top')
+    else
+      return name
+    end
+  end
+
   local function CreateUIObject(typename, objname, parent, inherits, xmlattr)
     assert(typename, 'must specify type for ' .. tostring(objname))
     local type = uiobjectTypes[typename]
@@ -66,7 +78,7 @@ local function new(log)
     end
     local obj = setmetatable({}, {__index = wapi})
     userdata[obj] = {
-      name = objname,
+      name = ParentSub(objname, parent),
       type = typename,
     }
     SetParent(obj, parent)
@@ -147,6 +159,7 @@ local function new(log)
     IsUIObjectType = IsUIObjectType,
     log = log,
     NextFrame = NextFrame,
+    ParentSub = ParentSub,
     RunScript = RunScript,
     SendEvent = SendEvent,
     SetParent = SetParent,

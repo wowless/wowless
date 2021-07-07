@@ -125,7 +125,7 @@ describe('frame #small', function()
     assert.same('rofl moo copter', f:rofl('copter'))
   end)
 
-  pending('support $parent in frame names', function()
+  it('support $parent in frame names', function()
     api.env.CreateFrame('frame', 'Moo')
     assert.same('MooCow', api.env.CreateFrame('frame', '$parentCow', api.env.Moo):GetName())
     assert.same('TopCow', api.env.CreateFrame('frame', '$parentCow'):GetName())
