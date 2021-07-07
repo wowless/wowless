@@ -23,4 +23,7 @@
     </Frames>
   </Frame>
   <Frame name='WowlessParent' inherits='WowlessParentTemplate' />
+  <Frame name='WowlessKeyParent' inherits='WowlessLogger' />
+  <Frame name='$parentKid1' inherits='WowlessLogger' parent='WowlessKeyParent' parentkey='Moo' />
+  <Frame name='$parentKid2' inherits='WowlessLogger' parentkey='Cow' parent='WowlessKeyParent' />
 </Ui>

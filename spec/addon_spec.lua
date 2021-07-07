@@ -1,5 +1,5 @@
 describe('addon #small', function()
-  it('writes a log on PLAYER_LOGOUT', function()
+  pending('writes a log on PLAYER_LOGOUT', function()
     local api = require('wowless.api').new(function() end)
     require('wowless.env').init(api)
     local loader = require('wowless.loader').loader(api)
@@ -18,6 +18,12 @@ describe('addon #small', function()
       'OnShow(WowlessParentKid1,WowlessParent)',
       'OnLoad(WowlessParent,none)',
       'OnShow(WowlessParent,none)',
+      'OnLoad(WowlessKeyParent,none)',
+      'OnShow(WowlessKeyParent,none)',
+      'OnLoad(WowlessKeyParentKid1,WowlessKeyParent)',
+      'OnShow(WowlessKeyParentKid1,WowlessKeyParent)',
+      'OnLoad(WowlessKeyParentKid2,WowlessKeyParent)',
+      'OnShow(WowlessKeyParentKid2,WowlessKeyParent)',
       'before WowlessLuaFrame',
       'OnLoad(WowlessLuaFrame,none)',
       'OnShow(WowlessLuaFrame,none)',
