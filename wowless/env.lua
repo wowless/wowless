@@ -798,6 +798,9 @@ local function mkWowEnv(api)
       end
       local obj = api.CreateUIObject(ltype, name, parent, inherits)
       api.RunScript(obj, 'OnLoad')
+      if obj:IsVisible() then
+        api.RunScript(obj, 'OnShow')
+      end
       return obj
     end,
     CursorHasItem = UNIMPLEMENTED,

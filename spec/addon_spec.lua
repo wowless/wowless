@@ -1,5 +1,5 @@
 describe('addon #small', function()
-  pending('writes a log on PLAYER_LOGOUT', function()
+  it('writes a log on PLAYER_LOGOUT', function()
     local api = require('wowless.api').new(function() end)
     require('wowless.env').init(api)
     local loader = require('wowless.loader').loader(api)
