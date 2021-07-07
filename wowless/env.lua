@@ -726,6 +726,7 @@ local baseEnv = {
   strsub = string.sub,
   strupper = string.upper,
   table = {
+    concat = table.concat,
     insert = table.insert,
     wipe = util.twipe,
   },
