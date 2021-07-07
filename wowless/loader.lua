@@ -284,7 +284,7 @@ local function loader(api)
             name = e.attr.name,
           }
         else
-          local name = api.ParentSub(e.attr.name, parent)
+          local name = e.attr.name
           if virtual and ignoreVirtual then
             api.log(1, 'ignoring virtual on ' .. tostring(name))
           end

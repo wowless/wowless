@@ -65,7 +65,8 @@ local function new(log)
     end
   end
 
-  local function CreateUIObject(typename, objname, parent, inherits, xmlattr)
+  local function CreateUIObject(typename, objnamearg, parent, inherits, xmlattr)
+    local objname = ParentSub(objnamearg, parent)
     assert(typename, 'must specify type for ' .. tostring(objname))
     local type = uiobjectTypes[typename]
     assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
@@ -78,7 +79,7 @@ local function new(log)
     end
     local obj = setmetatable({}, {__index = wapi})
     userdata[obj] = {
-      name = ParentSub(objname, parent),
+      name = objname,
       type = typename,
     }
     SetParent(obj, parent)
