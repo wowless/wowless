@@ -959,6 +959,7 @@ local function mkWowEnv(api)
     GetInstanceInfo = UNIMPLEMENTED,
     GetInventoryAlertStatus = UNIMPLEMENTED,
     GetInventoryItemID = UNIMPLEMENTED,
+    GetInventoryItemTexture = UNIMPLEMENTED,
     GetInventorySlotInfo = function()
       return 'UNIMPLEMENTED'
     end,
@@ -1110,6 +1111,7 @@ local function mkWowEnv(api)
     IsInGuild = UNIMPLEMENTED,
     IsInInstance = UNIMPLEMENTED,
     IsInRaid = UNIMPLEMENTED,
+    IsInventoryItemLocked = UNIMPLEMENTED,
     IsInventoryItemProfessionBag = UNIMPLEMENTED,
     IsItemAction = UNIMPLEMENTED,
     IsMacClient = UNIMPLEMENTED,
