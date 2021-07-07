@@ -124,4 +124,10 @@ describe('frame #small', function()
     v.rofl = function(self, arg) return 'rofl ' .. self:GetName() .. ' ' .. arg end
     assert.same('rofl moo copter', f:rofl('copter'))
   end)
+
+  pending('support $parent in frame names', function()
+    api.env.CreateFrame('frame', 'Moo')
+    assert.same('MooCow', api.env.CreateFrame('frame', '$parentCow', api.env.Moo):GetName())
+    assert.same('TopCow', api.env.CreateFrame('frame', '$parentCow'):GetName())
+  end)
 end)
