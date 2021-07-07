@@ -69,7 +69,7 @@ local function loader(api)
       end,
       attributes = function(e, parent)
         for _, attr in ipairs(e.entries) do
-          parent:SetAttribute(attr.name, parseTypedValue(attr.type, attr.value))
+          parent:SetAttribute(attr.name, parseTypedValue(attr.luatype, attr.value))
         end
       end,
       bartexture = function(e, parent)
@@ -118,7 +118,7 @@ local function loader(api)
       end,
       keyvalues = function(e, parent)
         for _, kv in ipairs(e.entries) do
-          parent[kv.key] = parseTypedValue(kv.type, kv.value)
+          parent[kv.key] = parseTypedValue(kv.luatype, kv.value)
         end
       end,
       layers = function(e, parent, ignoreVirtual)

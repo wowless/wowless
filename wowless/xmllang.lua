@@ -159,11 +159,12 @@ return {
   },
   attribute = {
     fields = {
-      name = {
+      luatype = {
+        attribute = 'type',
         source = 'attribute',
         type = 'string',
       },
-      type = {
+      name = {
         source = 'attribute',
         type = 'string',
       },
@@ -723,12 +724,13 @@ return {
   },
   keyvalue = {
     fields = {
-      key = {
-        required = true,
+      luatype = {
+        attribute = 'type',
         source = 'attribute',
         type = 'string',
       },
-      type = {
+      key = {
+        required = true,
         source = 'attribute',
         type = 'string',
       },
