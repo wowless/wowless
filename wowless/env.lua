@@ -336,7 +336,9 @@ local function mkBaseUIObjectTypes(api)
           return u(self).id
         end,
         IgnoreDepth = UNIMPLEMENTED,
-        IsEventRegistered = UNIMPLEMENTED,
+        IsEventRegistered = function(self, event)
+          return not not u(self).registeredEvents[string.lower(event)]
+        end,
         IsMouseClickEnabled = function(self)
           return u(self).mouseClickEnabled
         end,
