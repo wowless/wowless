@@ -97,6 +97,7 @@ local function mkBaseUIObjectTypes(api)
         u(self).buttonState = 'NORMAL'
         u(self).enabled = true
         u(self).fontstring = m(self, 'CreateFontString')
+        u(self).registeredClicks = { LeftButtonUp = true }
       end,
       inherits = {'frame'},
       mixin = {
@@ -142,7 +143,13 @@ local function mkBaseUIObjectTypes(api)
           return u(self).enabled
         end,
         LockHighlight = UNIMPLEMENTED,
-        RegisterForClicks = UNIMPLEMENTED,
+        RegisterForClicks = function(self, ...)
+          local ud = u(self)
+          util.twipe(ud.registeredClicks)
+          for _, type in ipairs({...}) do
+            ud.registeredClicks[type] = true
+          end
+        end,
         SetButtonState = function(self, state, locked)
           u(self).buttonLocked = not not locked
           u(self).buttonState = state
