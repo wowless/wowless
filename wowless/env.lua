@@ -136,6 +136,7 @@ local function mkBaseUIObjectTypes(api)
           return u(self).pushedTexture
         end,
         GetText = UNIMPLEMENTED,
+        GetTextHeight = STUB_NUMBER,
         GetTextWidth = STUB_NUMBER,
         IsEnabled = function(self)
           return u(self).enabled
@@ -261,6 +262,7 @@ local function mkBaseUIObjectTypes(api)
         GetTextColor = function()
           return 1, 1, 1  -- UNIMPLEMENTED
         end,
+        SetFont = UNIMPLEMENTED,
         SetFontObject = UNIMPLEMENTED,
         SetIndentedWordWrap = UNIMPLEMENTED,
         SetJustifyH = UNIMPLEMENTED,
@@ -286,8 +288,11 @@ local function mkBaseUIObjectTypes(api)
       constructor = function(self)
         table.insert(api.frames, self)
         u(self).attributes = {}
+        u(self).hyperlinksEnabled = false
         u(self).id = 0
+        u(self).movable = false
         u(self).registeredEvents = {}
+        u(self).resizable = false
       end,
       inherits = {'parentedobject', 'region', 'scriptobject'},
       mixin = {
@@ -311,11 +316,20 @@ local function mkBaseUIObjectTypes(api)
           return unpack(ret)
         end,
         GetFrameLevel = STUB_NUMBER,
+        GetHyperlinksEnabled = function(self)
+          return u(self).hyperlinksEnabled
+        end,
         GetID = function(self)
           return u(self).id
         end,
         IgnoreDepth = UNIMPLEMENTED,
         IsEventRegistered = UNIMPLEMENTED,
+        IsMovable = function(self)
+          return u(self).movable
+        end,
+        IsResizable = function(self)
+          return u(self).resizable
+        end,
         IsUserPlaced = UNIMPLEMENTED,
         Raise = UNIMPLEMENTED,
         RegisterEvent = function(self, event)
@@ -332,11 +346,20 @@ local function mkBaseUIObjectTypes(api)
         SetFrameLevel = UNIMPLEMENTED,
         SetFrameStrata = UNIMPLEMENTED,
         SetHitRectInsets = UNIMPLEMENTED,
+        SetHyperlinksEnabled = function(self, value)
+          u(self).hyperlinksEnabled = not not value
+        end,
         SetID = function(self, id)
           assert(type(id) == 'number', 'invalid ID ' .. tostring(id))
           u(self).id = id
         end,
         SetMouseClickEnabled = UNIMPLEMENTED,
+        SetMovable = function(self, value)
+          u(self).movable = not not value
+        end,
+        SetResizable = function(self, value)
+          u(self).resizable = not not value
+        end,
         SetUserPlaced = UNIMPLEMENTED,
         UnregisterEvent = function(self, event)
           u(self).registeredEvents[string.lower(event)] = nil
@@ -731,6 +754,7 @@ local baseEnv = {
   table = {
     concat = table.concat,
     insert = table.insert,
+    sort = table.sort,
     wipe = util.twipe,
   },
   tinsert = table.insert,
@@ -927,7 +951,11 @@ local function mkWowEnv(api)
     GetBindingKey = UNIMPLEMENTED,
     GetBindingText = UNIMPLEMENTED,
     GetChatTypeIndex = STUB_NUMBER,
-    GetChatWindowInfo = UNIMPLEMENTED,
+    GetChatWindowChannels = UNIMPLEMENTED,
+    GetChatWindowInfo = function(idx)
+      return '', 10, 1, 1, 1, 1, 1, 1, idx  -- UNIMPLEMENTED
+    end,
+    GetChatWindowMessages = UNIMPLEMENTED,
     GetChatWindowSavedDimensions = UNIMPLEMENTED,
     GetChatWindowSavedPosition = UNIMPLEMENTED,
     GetClassicExpansionLevel = STUB_NUMBER,
@@ -1199,8 +1227,11 @@ local function mkWowEnv(api)
     SetActionBarToggles = UNIMPLEMENTED,
     SetActionUIButton = UNIMPLEMENTED,
     SetBagPortraitTexture = UNIMPLEMENTED,
+    SetChatWindowDocked = UNIMPLEMENTED,
+    SetChatWindowLocked = UNIMPLEMENTED,
     SetChatWindowName = UNIMPLEMENTED,
     SetChatWindowShown = UNIMPLEMENTED,
+    SetChatWindowUninteractable = UNIMPLEMENTED,
     seterrorhandler = UNIMPLEMENTED,
     SetPortraitTexture = UNIMPLEMENTED,
     SetPortraitToTexture = UNIMPLEMENTED,
