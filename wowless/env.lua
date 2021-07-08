@@ -38,15 +38,44 @@ local function mkBaseUIObjectTypes(api)
     end
   end
 
-  return {
+  local function flatten(types)
+    local result = {}
+    local function flattenOne(k)
+      if not result[k] then
+        local ty = types[k]
+        local metaindex = Mixin({}, ty.mixin)
+        for _, inh in ipairs(ty.inherits) do
+          flattenOne(inh)
+          Mixin(metaindex, result[inh].metatable.__index)
+        end
+        result[k] = {
+          constructor = function(self, xmlattr)
+            for _, inh in ipairs(ty.inherits) do
+              result[inh].constructor(self, xmlattr)
+            end
+            if ty.constructor then
+              ty.constructor(self, xmlattr)
+            end
+          end,
+          inherits = ty.inherits,
+          metatable = { __index = metaindex },
+          name = ty.name,
+        }
+      end
+    end
+    for k in pairs(types) do
+      flattenOne(k)
+    end
+    return result
+  end
+
+  return flatten({
     actor = {
       inherits = {'parentedobject', 'scriptobject'},
-      intrinsic = true,
       name = 'Actor',
     },
     animationgroup = {
       inherits = {'parentedobject', 'scriptobject'},
-      intrinsic = true,
       mixin = {
         IsPlaying = UNIMPLEMENTED,
         Play = UNIMPLEMENTED,
@@ -56,7 +85,6 @@ local function mkBaseUIObjectTypes(api)
     },
     browser = {
       inherits = {'frame'},
-      intrinsic = true,
       mixin = {
         NavigateHome = UNIMPLEMENTED,
       },
@@ -71,7 +99,6 @@ local function mkBaseUIObjectTypes(api)
         u(self).fontstring = m(self, 'CreateFontString')
       end,
       inherits = {'frame'},
-      intrinsic = true,
       mixin = {
         Click = function(self, button, down)
           local ud = u(self)
@@ -151,7 +178,6 @@ local function mkBaseUIObjectTypes(api)
         u(self).checked = false
       end,
       inherits = {'button'},
-      intrinsic = true,
       mixin = {
         GetChecked = function(self)
           return u(self).checked
@@ -176,7 +202,6 @@ local function mkBaseUIObjectTypes(api)
     },
     cooldown = {
       inherits = {'frame'},
-      intrinsic = true,
       mixin = {
         Clear = UNIMPLEMENTED,
         SetBlingTexture = function(self, tex)
@@ -195,7 +220,6 @@ local function mkBaseUIObjectTypes(api)
     },
     dressupmodel = {
       inherits = {'playermodel'},
-      intrinsic = true,
       name = 'DressUpModel',
     },
     editbox = {
@@ -203,7 +227,6 @@ local function mkBaseUIObjectTypes(api)
         u(self).editboxText = ''
       end,
       inherits = {'fontinstance', 'frame'},
-      intrinsic = true,
       mixin = {
         ClearFocus = UNIMPLEMENTED,
         GetInputLanguage = function()
@@ -227,12 +250,10 @@ local function mkBaseUIObjectTypes(api)
     },
     font = {
       inherits = {'fontinstance'},
-      intrinsic = true,
       name = 'Font',
     },
     fontinstance = {
       inherits = {'uiobject'},
-      intrinsic = true,
       mixin = {
         GetFont = UNIMPLEMENTED,
         GetShadowOffset = STUB_NUMBER,
@@ -250,7 +271,6 @@ local function mkBaseUIObjectTypes(api)
     },
     fontstring = {
       inherits = {'fontinstance', 'layeredregion'},
-      intrinsic = true,
       mixin = {
         GetLineHeight = STUB_NUMBER,
         GetStringWidth = STUB_NUMBER,
@@ -272,7 +292,6 @@ local function mkBaseUIObjectTypes(api)
         end
       end,
       inherits = {'parentedobject', 'region', 'scriptobject'},
-      intrinsic = true,
       mixin = {
         CreateFontString = function(self, name)
           return api.CreateUIObject('fontstring', name, self)
@@ -328,7 +347,6 @@ local function mkBaseUIObjectTypes(api)
     },
     gametooltip = {
       inherits = {'frame'},
-      intrinsic = true,
       mixin = {
         GetOwner = UNIMPLEMENTED,
         IsOwned = UNIMPLEMENTED,
@@ -338,7 +356,6 @@ local function mkBaseUIObjectTypes(api)
     },
     layeredregion = {
       inherits = {'region'},
-      intrinsic = true,
       mixin = {
         SetDrawLayer = UNIMPLEMENTED,
         SetVertexColor = UNIMPLEMENTED,
@@ -347,17 +364,14 @@ local function mkBaseUIObjectTypes(api)
     },
     messageframe = {
       inherits = {'frame'},
-      intrinsic = true,
       name = 'MessageFrame',
     },
     minimap = {
       inherits = {'frame'},
-      intrinsic = true,
       name = 'Minimap',
     },
     model = {
       inherits = {'frame'},
-      intrinsic = true,
       mixin = {
         SetRotation = UNIMPLEMENTED,
       },
@@ -365,7 +379,6 @@ local function mkBaseUIObjectTypes(api)
     },
     modelscene = {
       inherits = {'frame'},
-      intrinsic = true,
       mixin = {
         GetLightDirection = function()
           return 1, 1, 1  -- UNIMPLEMENTED
@@ -383,7 +396,6 @@ local function mkBaseUIObjectTypes(api)
         u(self).children = {}
       end,
       inherits = {'uiobject'},
-      intrinsic = true,
       mixin = {
         GetParent = function(self)
           return u(self).parent
@@ -394,7 +406,6 @@ local function mkBaseUIObjectTypes(api)
     },
     playermodel = {
       inherits = {'model'},
-      intrinsic = true,
       mixin = {
         RefreshCamera = UNIMPLEMENTED,
         RefreshUnit = UNIMPLEMENTED,
@@ -417,7 +428,6 @@ local function mkBaseUIObjectTypes(api)
         ud.width = 0
       end,
       inherits = {'parentedobject'},
-      intrinsic = true,
       mixin = {
         ClearAllPoints = function(self)
           util.twipe(u(self).points)
@@ -545,7 +555,6 @@ local function mkBaseUIObjectTypes(api)
         }
       end,
       inherits = {},
-      intrinsic = true,
       mixin = {
         GetScript = function(self, name, bindingType)
           return u(self).scripts[bindingType or 1][string.lower(name)]
@@ -575,7 +584,6 @@ local function mkBaseUIObjectTypes(api)
     },
     scrollframe = {
       inherits = {'frame'},
-      intrinsic = true,
       mixin = {
         GetHorizontalScroll = STUB_NUMBER,
         GetVerticalScrollRange = STUB_NUMBER,
@@ -593,7 +601,6 @@ local function mkBaseUIObjectTypes(api)
     },
     slider = {
       inherits = {'frame'},
-      intrinsic = true,
       mixin = {
         Disable = UNIMPLEMENTED,
         Enable = UNIMPLEMENTED,
@@ -614,7 +621,6 @@ local function mkBaseUIObjectTypes(api)
     },
     statusbar = {
       inherits = {'frame'},
-      intrinsic = true,
       mixin = {
         GetMinMaxValues = function()
           return 0, 0  -- UNIMPLEMENTED
@@ -641,7 +647,6 @@ local function mkBaseUIObjectTypes(api)
     },
     texture = {
       inherits = {'layeredregion', 'parentedobject'},
-      intrinsic = true,
       mixin = {
         GetTexCoord = UNIMPLEMENTED,
         GetTexture = UNIMPLEMENTED,
@@ -658,7 +663,6 @@ local function mkBaseUIObjectTypes(api)
     },
     uiobject = {
       inherits = {},
-      intrinsic = true,
       mixin = {
         GetName = function(self)
           return u(self).name
@@ -672,10 +676,9 @@ local function mkBaseUIObjectTypes(api)
     },
     worldframe = {
       inherits = {'frame'},
-      intrinsic = true,
       name = 'WorldFrame',
     },
-  }
+  })
 end
 
 local baseEnv = {

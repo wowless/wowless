@@ -240,43 +240,60 @@ local function loader(api)
       end,
     }
 
-    function loadElement(e, parent, ignoreVirtual)
-      if api.IsIntrinsicType(e.type) then
-        local inherits = {e.type}
+    local function mkConstructor(e)
+      return function(obj)
         for _, inh in ipairs(e.attr.inherits or {}) do
-          table.insert(inherits, string.lower(inh))
+          api.templates[string.lower(inh)].constructor(obj)
         end
-        local mix = {}
         for _, m in ipairs(e.attr.mixin or {}) do
-          mixin(mix, api.env[m])
+          mixin(obj, api.env[m])
         end
         for _, m in ipairs(e.attr.securemixin or {}) do
-          mixin(mix, api.env[m])
+          mixin(obj, api.env[m])
         end
+        for k, v in pairs(e.attr) do
+          if xmlattrlang[k] then
+            xmlattrlang[k](obj, v)
+          end
+        end
+        loadElements(e.kids, obj, true)
+      end
+    end
+
+    function loadElement(e, parent, ignoreVirtual)
+      if api.IsIntrinsicType(e.type) then
+        -- TODO see if this is actually necessary
+        for _, inh in ipairs(e.attr.inherits or {}) do
+          assert(api.templates[string.lower(inh)], 'template ' .. inh .. ' .. does not exist')
+        end
+        local constructor = mkConstructor(e)
         local virtual = e.attr.virtual
         if e.attr.intrinsic then
           assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
-          virtual = true
-        end
-        local function constructor(obj)
-          for k, v in pairs(e.attr) do
-            if xmlattrlang[k] then
-              xmlattrlang[k](obj, v)
-            end
-          end
-          loadElements(e.kids, obj, true)
-        end
-        if virtual and not ignoreVirtual then
-          assert(e.attr.name, 'cannot create anonymous virtual uiobject')
+          assert(e.attr.name, 'cannot create anonymous intrinsic')
           local name = string.lower(e.attr.name)
           if api.uiobjectTypes[name] then
-            api.log(1, 'overwriting uiobject type ' .. e.attr.name)
+            api.log(1, 'overwriting intrinsic ' .. e.attr.name)
           end
+          local basetype = string.lower(e.type)
+          local base = api.uiobjectTypes[basetype]
           api.uiobjectTypes[name] = {
+            constructor = function(self, xmlattr)
+              base.constructor(self, xmlattr)
+              constructor(self)
+            end,
+            inherits = { basetype },
+            metatable = { __index = base.metatable.__index },
+            name = e.attr.name,
+          }
+        elseif virtual and not ignoreVirtual then
+          assert(e.attr.name, 'cannot create anonymous template')
+          local name = string.lower(e.attr.name)
+          if api.templates[name] then
+            api.log(1, 'overwriting template ' .. e.attr.name)
+          end
+          api.templates[name] = {
             constructor = constructor,
-            inherits = inherits,
-            intrinsic = e.attr.intrinsic,
-            mixin = mix,
             name = e.attr.name,
           }
         else
@@ -284,8 +301,7 @@ local function loader(api)
           if virtual and ignoreVirtual then
             api.log(1, 'ignoring virtual on ' .. tostring(name))
           end
-          local obj = api.CreateUIObject(e.type, name, parent, inherits, e.attr)
-          mixin(obj, mix)
+          local obj = api.CreateUIObject(e.type, name, parent, nil, e.attr)
           constructor(obj)
           api.RunScript(obj, 'OnLoad')
           if obj.IsVisible and obj:IsVisible() then

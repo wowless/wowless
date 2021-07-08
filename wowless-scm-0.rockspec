@@ -9,7 +9,6 @@ dependencies = {
   'bitlib',
   'datafile',
   'lua-path',
-  'lua-resty-tsort',
   'serpent',
   'xml2lua',
 }
