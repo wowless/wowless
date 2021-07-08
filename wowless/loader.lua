@@ -377,19 +377,25 @@ local function loader(api)
   end
 
   local function parseToc(toc)
+    local attrs = {}
     local files = {}
     local dir = path.dirname(toc)
     for line in io.lines(toc) do
       line = line:match('^%s*(.-)%s*$')
-      if line ~= '' and line:sub(1, 1) ~= '#' then
+      if line:sub(1, 3) == '## ' then
+        local key, value = line:match('(%w+): (%w+)', 4)
+        if key then
+          attrs[key] = value
+        end
+      elseif line ~= '' and line:sub(1, 1) ~= '#' then
         table.insert(files, path.join(dir, line))
       end
     end
-    return files
+    return { attrs = attrs, files = files }
   end
 
   local function loadToc(toc)
-    for _, file in ipairs(parseToc(toc)) do
+    for _, file in ipairs(parseToc(toc).files) do
       loadFile(file)
     end
   end
