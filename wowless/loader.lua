@@ -402,7 +402,7 @@ local function loader(api)
   end
 
   local function loadToc(toc, name, env)
-    api.log(1, 'loading toc %s', toc.name)
+    api.log(1, 'loading toc %s', toc)
     for _, file in ipairs(parseToc(toc).files) do
       loadFile(file, name, env)
     end
