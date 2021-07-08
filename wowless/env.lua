@@ -515,6 +515,7 @@ local function mkBaseUIObjectTypes(api)
         end,
         SetParent = function(self, parent)
           api.SetParent(self, parent)
+          UpdateVisible(self)
         end,
         SetPoint = function(self, point, arg1, arg2, arg3, arg4)
           -- TODO handle resetting points
