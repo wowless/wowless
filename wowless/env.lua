@@ -391,6 +391,9 @@ local function mkBaseUIObjectTypes(api)
           u(self).resizable = not not value
         end,
         SetUserPlaced = UNIMPLEMENTED,
+        UnregisterAllEvents = function(self)
+          util.twipe(u(self).registeredEvents)
+        end,
         UnregisterEvent = function(self, event)
           u(self).registeredEvents[string.lower(event)] = nil
         end,
