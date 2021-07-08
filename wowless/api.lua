@@ -81,15 +81,19 @@ local function new(log)
     }
     SetParent(obj, parent)
     type.constructor(obj)
+    for _, template in ipairs({...}) do
+      log(4, 'initializing attributes for ' .. tostring(template.name))
+      template.initAttrs(obj)
+    end
     if objname then
+      if obj.GetParent then
+        objname = ParentSub(objnamearg, obj:GetParent())
+        userdata[obj].name = objname
+      end
       if env[objname] then
         log(1, 'overwriting global ' .. objname)
       end
       env[objname] = obj
-    end
-    for _, template in ipairs({...}) do
-      log(4, 'initializing attributes for ' .. tostring(template.name))
-      template.initAttrs(obj)
     end
     for _, template in ipairs({...}) do
       log(4, 'initializing children for ' .. tostring(template.name))
