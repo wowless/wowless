@@ -19,8 +19,10 @@ local function loader(api)
     end
   end
 
-  local function loadLuaString(filename, str)
-    api.CallSafely(setfenv(assert(loadstring(str, path.basename(filename))), api.env))
+  local function loadLuaString(filename, str, ...)
+    local args = {...}
+    local fn = setfenv(assert(loadstring(str, path.basename(filename))), api.env)
+    api.CallSafely(function() fn(unpack(args)) end)
   end
 
   local loadFile
@@ -365,10 +367,10 @@ local function loader(api)
     end)
   end
 
-  function loadFile(filename)
+  function loadFile(filename, ...)
     api.log(2, 'loading file %s', filename)
     if filename:sub(-4) == '.lua' then
-      loadLuaString(filename, readFile(filename))
+      loadLuaString(filename, readFile(filename), ...)
     elseif filename:sub(-4) == '.xml' then
       return loadXml(filename, readFile(filename))
     else
@@ -376,11 +378,11 @@ local function loader(api)
     end
   end
 
-  local function parseToc(toc)
+  local function parseToc(tocFile)
     local attrs = {}
     local files = {}
-    local dir = path.dirname(toc)
-    for line in io.lines(toc) do
+    local dir = path.dirname(tocFile)
+    for line in io.lines(tocFile) do
       line = line:match('^%s*(.-)%s*$')
       if line:sub(1, 3) == '## ' then
         local key, value = line:match('(%w+): (%w+)', 4)
@@ -391,17 +393,35 @@ local function loader(api)
         table.insert(files, path.join(dir, line))
       end
     end
-    return { attrs = attrs, files = files }
+    return {
+      attrs = attrs,
+      env = {},
+      files = files,
+      name = path.basename(tocFile),
+    }
   end
 
-  local function loadToc(toc)
+  local function loadToc(toc, name, env)
+    api.log(1, 'loading toc %s', toc.name)
     for _, file in ipairs(parseToc(toc).files) do
-      loadFile(file)
+      loadFile(file, name, env)
     end
   end
 
   local function loadFrameXml()
     loadToc(require('datafile').path('wowui/classic/FrameXML/FrameXML.toc'))
+    local tocFiles = {}
+    local handle = io.popen([[bash -c 'find wowui/classic/AddOns -name "*.toc"']])
+    for line in handle:lines() do
+      table.insert(tocFiles, line)
+    end
+    handle:close()
+    for _, tocFile in ipairs(tocFiles) do
+      local toc = parseToc(tocFile)
+      if not toc.attrs.LoadOnDemand then
+        loadToc(tocFile, toc.name, toc.env)
+      end
+    end
   end
 
   return {
