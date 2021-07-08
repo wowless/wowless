@@ -364,7 +364,10 @@ local function mkBaseUIObjectTypes(api)
           u(self).registeredEvents[string.lower(event)] = true
         end,
         RegisterForDrag = UNIMPLEMENTED,
-        RegisterUnitEvent = UNIMPLEMENTED,
+        RegisterUnitEvent = function(self, event)  -- unit1, unit2
+          -- TODO actually do unit filtering
+          u(self).registeredEvents[string.lower(event)] = true
+        end,
         SetAttribute = function(self, name, value)
           api.log(4, 'setting attribute %s on %s to %s', name, tostring(self:GetName()), tostring(value))
           u(self).attributes[name] = value
