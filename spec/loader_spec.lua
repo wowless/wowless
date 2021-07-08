@@ -191,7 +191,7 @@ describe('loader #small', function()
     assert.Nil(api.env.Frame2)
   end)
 
-  pending('completely constructs a parent before kid OnLoad', function()
+  it('completely constructs a parent before kid OnLoad', function()
     local parentShown
     api.env.Kid_OnLoad = function(self)
       parentShown = self:GetParent():IsShown()

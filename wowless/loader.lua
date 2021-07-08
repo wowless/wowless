@@ -243,10 +243,10 @@ local function loader(api)
       end,
     }
 
-    local function mkConstructor(e)
+    local function mkInitAttrs(e)
       return function(obj)
         for _, inh in ipairs(e.attr.inherits or {}) do
-          api.templates[string.lower(inh)].constructor(obj)
+          api.templates[string.lower(inh)].initAttrs(obj)
         end
         for _, m in ipairs(e.attr.mixin or {}) do
           mixin(obj, api.env[m])
@@ -259,13 +259,22 @@ local function loader(api)
             xmlattrlang[k](obj, v)
           end
         end
+      end
+    end
+
+    local function mkInitKids(e)
+      return function(obj)
+        for _, inh in ipairs(e.attr.inherits or {}) do
+          api.templates[string.lower(inh)].initKids(obj)
+        end
         loadElements(e.kids, obj, true)
       end
     end
 
     function loadElement(e, parent, ignoreVirtual)
       if api.IsIntrinsicType(e.type) then
-        local constructor = mkConstructor(e)
+        local initAttrs = mkInitAttrs(e)
+        local initKids = mkInitKids(e)
         local virtual = e.attr.virtual
         if e.attr.intrinsic then
           assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
@@ -280,7 +289,8 @@ local function loader(api)
           api.uiobjectTypes[name] = {
             constructor = function(self, xmlattr)
               base.constructor(self, xmlattr)
-              constructor(self)
+              initAttrs(self)
+              initKids(self)
             end,
             inherits = { basetype },
             metatable = { __index = base.metatable.__index },
@@ -294,7 +304,8 @@ local function loader(api)
           end
           api.log(3, 'creating template ' .. e.attr.name)
           api.templates[name] = {
-            constructor = constructor,
+            initAttrs = initAttrs,
+            initKids = initKids,
             name = e.attr.name,
           }
         else
@@ -306,7 +317,8 @@ local function loader(api)
             assert(api.templates[string.lower(inh)], 'unknown template ' .. inh)
           end
           local obj = api.CreateUIObject(e.type, name, parent, nil, e.attr)
-          constructor(obj)
+          initAttrs(obj)
+          initKids(obj)
           api.RunScript(obj, 'OnLoad')
           if obj.IsVisible and obj:IsVisible() then
             api.RunScript(obj, 'OnShow')

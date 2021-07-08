@@ -66,7 +66,8 @@ local function new(log)
     for _, inh in ipairs(inherits or {}) do
       local template = templates[inh]
       log(4, 'running constructor for ' .. template.name)
-      template.constructor(obj)
+      template.initAttrs(obj)
+      template.initKids(obj)
     end
     if objname then
       if env[objname] then
