@@ -320,13 +320,31 @@ local function loader(api)
           if virtual and ignoreVirtual then
             api.log(1, 'ignoring virtual on ' .. tostring(name))
           end
+          local templates = {}
           for _, inh in ipairs(e.attr.inherits or {}) do
-            assert(api.templates[string.lower(inh)], 'unknown template ' .. inh)
+            local template = api.templates[string.lower(inh)]
+            assert(template, 'unknown template ' .. inh)
+            table.insert(templates, template)
           end
-          return api.CreateUIObject(e.type, name, parent, {
-            initAttrs = initAttrs,
-            initKids = initKids,
+          table.insert(templates, {
+            initAttrs = function(obj)
+              for _, m in ipairs(e.attr.mixin or {}) do
+                mixin(obj, api.env[m])
+              end
+              for _, m in ipairs(e.attr.securemixin or {}) do
+                mixin(obj, api.env[m])
+              end
+              for k, v in pairs(e.attr) do
+                if xmlattrlang[k] then
+                  xmlattrlang[k](obj, v)
+                end
+              end
+            end,
+            initKids = function(obj)
+              loadElements(e.kids, obj, true)
+            end,
           })
+          return api.CreateUIObject(e.type, name, parent, unpack(templates))
         end
       else
         local fn = xmllang[e.type]

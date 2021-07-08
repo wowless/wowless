@@ -88,8 +88,11 @@ local function new(log)
       env[objname] = obj
     end
     for _, template in ipairs({...}) do
-      log(4, 'running constructor for ' .. tostring(template.name))
+      log(4, 'initializing attributes for ' .. tostring(template.name))
       template.initAttrs(obj)
+    end
+    for _, template in ipairs({...}) do
+      log(4, 'initializing children for ' .. tostring(template.name))
       template.initKids(obj)
     end
     RunScript(obj, 'OnLoad')
