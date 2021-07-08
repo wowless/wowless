@@ -956,6 +956,7 @@ local function mkWowEnv(api)
       end,
     }),
     FillLocalizedClassList = UNIMPLEMENTED,
+    FlashClientIcon = UNIMPLEMENTED,
     GetActionBarPage = STUB_NUMBER,
     GetActionBarToggles = UNIMPLEMENTED,
     GetActionCount = STUB_NUMBER,

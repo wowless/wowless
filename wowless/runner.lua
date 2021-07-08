@@ -17,6 +17,10 @@ local function run(loglevel)
     end
   end
   api.NextFrame()
+  api.SendEvent('PLAYER_REGEN_DISABLED')
+  api.NextFrame()
+  api.SendEvent('PLAYER_REGEN_ENABLED')
+  api.NextFrame()
   return api
 end
 
