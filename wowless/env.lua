@@ -286,6 +286,7 @@ local function mkBaseUIObjectTypes(api)
       constructor = function(self)
         table.insert(api.frames, self)
         u(self).attributes = {}
+        u(self).id = 0
         u(self).registeredEvents = {}
       end,
       inherits = {'parentedobject', 'region', 'scriptobject'},
@@ -311,7 +312,7 @@ local function mkBaseUIObjectTypes(api)
         end,
         GetFrameLevel = STUB_NUMBER,
         GetID = function(self)
-          return u(self).id or 0
+          return u(self).id
         end,
         IgnoreDepth = UNIMPLEMENTED,
         IsEventRegistered = UNIMPLEMENTED,
@@ -332,6 +333,7 @@ local function mkBaseUIObjectTypes(api)
         SetFrameStrata = UNIMPLEMENTED,
         SetHitRectInsets = UNIMPLEMENTED,
         SetID = function(self, id)
+          assert(type(id) == 'number', 'invalid ID ' .. tostring(id))
           u(self).id = id
         end,
         SetMouseClickEnabled = UNIMPLEMENTED,
@@ -957,9 +959,37 @@ local function mkWowEnv(api)
     GetInventoryAlertStatus = UNIMPLEMENTED,
     GetInventoryItemID = UNIMPLEMENTED,
     GetInventoryItemTexture = UNIMPLEMENTED,
-    GetInventorySlotInfo = function()
-      return 'UNIMPLEMENTED'
-    end,
+    GetInventorySlotInfo = (function()
+      local t = {
+        ammoslot = 0,
+        headslot = 1,
+        neckslot = 2,
+        shoulderslot = 3,
+        shirtslot = 4,
+        chestslot = 5,
+        waistslot = 6,
+        legsslot = 7,
+        feetslot = 8,
+        wristslot = 9,
+        handsslot = 10,
+        finger0slot = 11,
+        finger1slot = 12,
+        trinket0slot = 13,
+        trinket1slot = 14,
+        backslot = 15,
+        mainhandslot = 16,
+        secondaryhandslot = 17,
+        rangedslot = 18,
+        tabardslot = 19,
+        bag0slot = 20,
+        bag1slot = 21,
+        bag2slot = 22,
+        bag3slot = 23,
+      }
+      return function(slotName)
+        return assert(t[string.lower(slotName)], 'unknown slot name ' .. slotName)
+      end
+    end)(),
     GetItemQualityColor = function()
       return 0, 0, 0  -- UNIMPLEMENTED
     end,
