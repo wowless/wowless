@@ -297,6 +297,7 @@ local function mkBaseUIObjectTypes(api)
         u(self).attributes = {}
         u(self).hyperlinksEnabled = false
         u(self).id = 0
+        u(self).isUserPlaced = false
         u(self).mouseClickEnabled = true
         u(self).mouseMotionEnabled = true
         u(self).movable = false
@@ -355,7 +356,9 @@ local function mkBaseUIObjectTypes(api)
         IsResizable = function(self)
           return u(self).resizable
         end,
-        IsUserPlaced = UNIMPLEMENTED,
+        IsUserPlaced = function(self)
+          return u(self).isUserPlaced
+        end,
         Raise = UNIMPLEMENTED,
         RegisterEvent = function(self, event)
           u(self).registeredEvents[string.lower(event)] = true
@@ -390,7 +393,9 @@ local function mkBaseUIObjectTypes(api)
         SetResizable = function(self, value)
           u(self).resizable = not not value
         end,
-        SetUserPlaced = UNIMPLEMENTED,
+        SetUserPlaced = function(self, value)
+          u(self).isUserPlaced = not not value
+        end,
         UnregisterAllEvents = function(self)
           util.twipe(u(self).registeredEvents)
         end,
