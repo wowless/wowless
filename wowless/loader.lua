@@ -376,13 +376,21 @@ local function loader(api)
     end
   end
 
-  local function loadToc(toc)
+  local function parseToc(toc)
+    local files = {}
     local dir = path.dirname(toc)
     for line in io.lines(toc) do
       line = line:match('^%s*(.-)%s*$')
       if line ~= '' and line:sub(1, 1) ~= '#' then
-        loadFile(path.join(dir, line))
+        table.insert(files, path.join(dir, line))
       end
+    end
+    return files
+  end
+
+  local function loadToc(toc)
+    for _, file in ipairs(parseToc(toc)) do
+      loadFile(file)
     end
   end
 
