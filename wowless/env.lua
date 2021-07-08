@@ -290,6 +290,8 @@ local function mkBaseUIObjectTypes(api)
         u(self).attributes = {}
         u(self).hyperlinksEnabled = false
         u(self).id = 0
+        u(self).mouseClickEnabled = true
+        u(self).mouseMotionEnabled = true
         u(self).movable = false
         u(self).registeredEvents = {}
         u(self).resizable = false
@@ -302,7 +304,11 @@ local function mkBaseUIObjectTypes(api)
         CreateTexture = function(self, name)
           return api.CreateUIObject('texture', name, self)
         end,
-        EnableMouse = UNIMPLEMENTED,
+        EnableMouse = function(self, value)
+          local ud = u(self)
+          ud.mouseClickEnabled = not not value
+          ud.mouseMotionEnabled = not not value
+        end,
         GetAttribute = function(self, name)
           return u(self).attributes[name]
         end,
@@ -324,6 +330,16 @@ local function mkBaseUIObjectTypes(api)
         end,
         IgnoreDepth = UNIMPLEMENTED,
         IsEventRegistered = UNIMPLEMENTED,
+        IsMouseClickEnabled = function(self)
+          return u(self).mouseClickEnabled
+        end,
+        IsMouseEnabled = function(self)
+          local ud = u(self)
+          return ud.mouseClickEnabled and ud.mouseMotionEnabled
+        end,
+        IsMouseMotionEnabled = function(self)
+          return u(self).mouseMotionEnabled
+        end,
         IsMovable = function(self)
           return u(self).movable
         end,
@@ -353,7 +369,12 @@ local function mkBaseUIObjectTypes(api)
           assert(type(id) == 'number', 'invalid ID ' .. tostring(id))
           u(self).id = id
         end,
-        SetMouseClickEnabled = UNIMPLEMENTED,
+        SetMouseClickEnabled = function(self, value)
+          u(self).mouseClickEnabled = not not value
+        end,
+        SetMouseMotionEnabled = function(self, value)
+          u(self).mouseMotionEnabled = not not value
+        end,
         SetMovable = function(self, value)
           u(self).movable = not not value
         end,
