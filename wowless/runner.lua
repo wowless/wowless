@@ -21,6 +21,7 @@ local function run(loglevel)
   api.NextFrame()
   api.SendEvent('PLAYER_REGEN_ENABLED')
   api.NextFrame()
+  api.SendEvent('PLAYER_LOGOUT')
   return api
 end
 
