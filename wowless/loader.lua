@@ -362,7 +362,7 @@ local function loader(api)
 
     return api.CallSafely(function()
       local root = xml.validate(xmlstr)
-      assert(root.type == 'ui')
+      assert(root.type == 'ui' or root.type == 'bindings')
       loadElements(root.kids)
     end)
   end
