@@ -789,19 +789,16 @@ local function mkWowEnv(api)
     CreateFont = function(name)
       return api.CreateUIObject('font', name)
     end,
-    CreateFrame = function(type, name, parent, templates)
+    CreateFrame = function(type, name, parent, templateNames)
       local ltype = string.lower(type)
       assert(api.InheritsFrom(ltype, 'frame'), type .. ' does not inherit from frame')
-      local inherits = {}
-      for template in string.gmatch(templates or '', '[^, ]+') do
-        table.insert(inherits, string.lower(template))
+      local templates = {}
+      for templateName in string.gmatch(templateNames or '', '[^, ]+') do
+        local template = api.templates[string.lower(templateName)]
+        assert(template, 'unknown template ' .. templateName)
+        table.insert(templates, template)
       end
-      local obj = api.CreateUIObject(ltype, name, parent, inherits)
-      api.RunScript(obj, 'OnLoad')
-      if obj:IsVisible() then
-        api.RunScript(obj, 'OnShow')
-      end
-      return obj
+      return api.CreateUIObject(ltype, name, parent, unpack(templates))
     end,
     CursorHasItem = UNIMPLEMENTED,
     C_ChatInfo = {

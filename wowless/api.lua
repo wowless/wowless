@@ -46,38 +46,6 @@ local function new(log)
     end
   end
 
-  local function CreateUIObject(typename, objnamearg, parent, inherits)
-    local objname = ParentSub(objnamearg, parent)
-    assert(typename, 'must specify type for ' .. tostring(objname))
-    local type = uiobjectTypes[typename]
-    assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
-    assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
-    for _, inh in ipairs(inherits or {}) do
-      assert(templates[inh], 'unknown template ' .. inh)
-    end
-    log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
-    local obj = setmetatable({}, type.metatable)
-    userdata[obj] = {
-      name = objname,
-      type = typename,
-    }
-    SetParent(obj, parent)
-    type.constructor(obj)
-    for _, inh in ipairs(inherits or {}) do
-      local template = templates[inh]
-      log(4, 'running constructor for ' .. template.name)
-      template.initAttrs(obj)
-      template.initKids(obj)
-    end
-    if objname then
-      if env[objname] then
-        log(1, 'overwriting global ' .. objname)
-      end
-      env[objname] = obj
-    end
-    return obj
-  end
-
   local function CallSafely(fun)
     return xpcall(fun, function(err)
       errors = errors + 1
@@ -97,6 +65,38 @@ local function new(log)
         end
       end
     end
+  end
+
+  local function CreateUIObject(typename, objnamearg, parent, ...)
+    local objname = ParentSub(objnamearg, parent)
+    assert(typename, 'must specify type for ' .. tostring(objname))
+    local type = uiobjectTypes[typename]
+    assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
+    assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
+    log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
+    local obj = setmetatable({}, type.metatable)
+    userdata[obj] = {
+      name = objname,
+      type = typename,
+    }
+    SetParent(obj, parent)
+    type.constructor(obj)
+    for _, template in ipairs({...}) do
+      log(4, 'running constructor for ' .. tostring(template.name))
+      template.initAttrs(obj)
+      template.initKids(obj)
+    end
+    if objname then
+      if env[objname] then
+        log(1, 'overwriting global ' .. objname)
+      end
+      env[objname] = obj
+    end
+    RunScript(obj, 'OnLoad')
+    if obj.IsVisible and obj:IsVisible() then
+      RunScript(obj, 'OnShow')
+    end
+    return obj
   end
 
   local function SetScript(obj, name, bindingType, script)

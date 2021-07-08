@@ -127,10 +127,14 @@ local function loader(api)
         loadElement(mixin({}, e, { type = 'fontstring' }), parent)
       end,
       normaltexture = function(e, parent)
-        parent:SetNormalTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
+        if parent.SetNormalTexture then
+          parent:SetNormalTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
+        end
       end,
       pushedtexture = function(e, parent)
-        parent:SetPushedTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
+        if parent.SetPushedTexture then
+          parent:SetPushedTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
+        end
       end,
       scopedmodifier = function(e, parent)
         loadElements(e.kids, parent)
@@ -319,14 +323,10 @@ local function loader(api)
           for _, inh in ipairs(e.attr.inherits or {}) do
             assert(api.templates[string.lower(inh)], 'unknown template ' .. inh)
           end
-          local obj = api.CreateUIObject(e.type, name, parent)
-          initAttrs(obj)
-          initKids(obj)
-          api.RunScript(obj, 'OnLoad')
-          if obj.IsVisible and obj:IsVisible() then
-            api.RunScript(obj, 'OnShow')
-          end
-          return obj
+          return api.CreateUIObject(e.type, name, parent, {
+            initAttrs = initAttrs,
+            initKids = initKids,
+          })
         end
       else
         local fn = xmllang[e.type]
