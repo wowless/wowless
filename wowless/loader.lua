@@ -71,7 +71,10 @@ local function loader(api)
         return loadElement(mixin({}, e, { type = 'fontstring' }), parent)
       end,
       checkedtexture = function(e, parent)
-        parent:SetCheckedTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
+        -- TODO generalize to all of these
+        if parent.SetCheckedTexture then
+          parent:SetCheckedTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
+        end
       end,
       disabledcheckedtexture = function(e, parent)
         parent:SetDisabledCheckedTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
