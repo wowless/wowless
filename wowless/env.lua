@@ -411,9 +411,23 @@ local function mkBaseUIObjectTypes(api)
     gametooltip = {
       inherits = {'frame'},
       mixin = {
-        GetOwner = UNIMPLEMENTED,
-        IsOwned = UNIMPLEMENTED,
+        AddLine = UNIMPLEMENTED,
+        FadeOut = UNIMPLEMENTED,
+        GetOwner = function(self)
+          return u(self).tooltipOwner
+        end,
+        IsOwned = function(self)
+          return u(self).tooltipOwner ~= nil
+        end,
+        SetBagItem = UNIMPLEMENTED,
+        SetInventoryItem = UNIMPLEMENTED,
+        SetOwner = function(self, owner)
+          u(self).tooltipOwner = owner
+        end,
         SetPadding = UNIMPLEMENTED,
+        SetShapeshift = UNIMPLEMENTED,
+        SetText = UNIMPLEMENTED,
+        SetUnit = UNIMPLEMENTED,
       },
       name = 'GameTooltip',
     },
@@ -924,6 +938,9 @@ local function mkWowEnv(api)
     C_NamePlate = {
       GetNumNamePlateMotionTypes = STUB_NUMBER,
     },
+    C_NewItems = {
+      RemoveNewItem = UNIMPLEMENTED,
+    },
     C_PaperDollInfo = {
       OffhandHasWeapon = UNIMPLEMENTED,
     },
@@ -1219,6 +1236,7 @@ local function mkWowEnv(api)
     IsModifiedClick = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
     IsQuestWatched = UNIMPLEMENTED,
+    InRepairMode = UNIMPLEMENTED,
     IsResting = UNIMPLEMENTED,
     IsRestrictedAccount = UNIMPLEMENTED,
     issecure = UNIMPLEMENTED,
@@ -1254,6 +1272,7 @@ local function mkWowEnv(api)
     QuestHonorFrame_Update = UNIMPLEMENTED,
     RegisterStaticConstants = UNIMPLEMENTED,
     RequestRaidInfo = UNIMPLEMENTED,
+    ResetCursor = UNIMPLEMENTED,
     ResurrectGetOfferer = UNIMPLEMENTED,
     RollOnLoot = UNIMPLEMENTED,
     securecall = function(func, ...)
@@ -1316,6 +1335,7 @@ local function mkWowEnv(api)
       return 'Unitname'  -- UNIMPLEMENTED
     end,
     UnitOnTaxi = UNIMPLEMENTED,
+    UnitPlayerControlled = UNIMPLEMENTED,
     UnitPower = STUB_NUMBER,
     UnitPowerMax = STUB_NUMBER,
     UnitPowerType = function()
@@ -1324,6 +1344,7 @@ local function mkWowEnv(api)
     UnitRace = function()
       return 'Human', 'Human', 1  -- UNIMPLEMENTED
     end,
+    UnitReaction = UNIMPLEMENTED,
     UnitRealmRelationship = UNIMPLEMENTED,
     UnitResistance = function()
       return 0, 0, 0, 0

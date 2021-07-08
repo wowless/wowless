@@ -21,6 +21,12 @@ local function run(loglevel)
   api.NextFrame()
   api.SendEvent('PLAYER_REGEN_ENABLED')
   api.NextFrame()
+  for _, frame in ipairs(api.frames) do
+    if frame:IsVisible() then
+      api.RunScript(frame, 'OnEnter', true)
+      api.RunScript(frame, 'OnLeave', true)
+    end
+  end
   api.SendEvent('PLAYER_LOGOUT')
   return api
 end

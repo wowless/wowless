@@ -168,7 +168,9 @@ local function loader(api)
             local argTable = {
               onattributechanged = 'self, name, value',
               onclick = 'self, button, down',
+              onenter = 'self, motion',
               onevent = 'self, event, ...',
+              onleave = 'self, motion',
               onupdate = 'self, elapsed',
               postclick = 'self, button, down',
               preclick = 'self, button, down',
