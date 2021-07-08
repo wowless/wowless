@@ -262,10 +262,6 @@ local function loader(api)
 
     function loadElement(e, parent, ignoreVirtual)
       if api.IsIntrinsicType(e.type) then
-        -- TODO see if this is actually necessary
-        for _, inh in ipairs(e.attr.inherits or {}) do
-          assert(api.templates[string.lower(inh)], 'template ' .. inh .. ' .. does not exist')
-        end
         local constructor = mkConstructor(e)
         local virtual = e.attr.virtual
         if e.attr.intrinsic then
@@ -275,6 +271,7 @@ local function loader(api)
           if api.uiobjectTypes[name] then
             api.log(1, 'overwriting intrinsic ' .. e.attr.name)
           end
+          api.log(3, 'creating intrinsic ' .. e.attr.name)
           local basetype = string.lower(e.type)
           local base = api.uiobjectTypes[basetype]
           api.uiobjectTypes[name] = {
@@ -292,6 +289,7 @@ local function loader(api)
           if api.templates[name] then
             api.log(1, 'overwriting template ' .. e.attr.name)
           end
+          api.log(3, 'creating template ' .. e.attr.name)
           api.templates[name] = {
             constructor = constructor,
             name = e.attr.name,
@@ -300,6 +298,9 @@ local function loader(api)
           local name = e.attr.name
           if virtual and ignoreVirtual then
             api.log(1, 'ignoring virtual on ' .. tostring(name))
+          end
+          for _, inh in ipairs(e.attr.inherits or {}) do
+            assert(api.templates[string.lower(inh)], 'unknown template ' .. inh)
           end
           local obj = api.CreateUIObject(e.type, name, parent, nil, e.attr)
           constructor(obj)

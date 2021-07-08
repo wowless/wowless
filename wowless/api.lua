@@ -52,6 +52,9 @@ local function new(log)
     local type = uiobjectTypes[typename]
     assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
     assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
+    for _, inh in ipairs(inherits or {}) do
+      assert(templates[inh], 'unknown template ' .. inh)
+    end
     log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
     local obj = setmetatable({}, type.metatable)
     userdata[obj] = {
@@ -62,7 +65,6 @@ local function new(log)
     type.constructor(obj, xmlattr or {})
     for _, inh in ipairs(inherits or {}) do
       local template = templates[inh]
-      assert(template, 'unknown template ' .. inh)
       log(4, 'running constructor for ' .. template.name)
       template.constructor(obj)
     end
