@@ -1001,6 +1001,7 @@ local function mkWowEnv(api)
     GetNumQuestWatches = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetNumSavedInstances = STUB_NUMBER,
     GetNumShapeshiftForms = STUB_NUMBER,
     GetNumSkillLines = STUB_NUMBER,
     GetNumSpellTabs = STUB_NUMBER,
@@ -1069,6 +1070,7 @@ local function mkWowEnv(api)
     GetTabardCreationCost = STUB_NUMBER,
     GetText = UNIMPLEMENTED,
     GetTime = STUB_NUMBER,
+    GetTitleName = UNIMPLEMENTED,
     GetTotemInfo = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
     GetWeaponEnchantInfo = UNIMPLEMENTED,
@@ -1186,10 +1188,13 @@ local function mkWowEnv(api)
     UnitCanCooperate = UNIMPLEMENTED,
     UnitCastingInfo = UNIMPLEMENTED,
     UnitChannelInfo = UNIMPLEMENTED,
-    UnitClass = UNIMPLEMENTED,
+    UnitClass = function()
+      return 'Warrior', 'WARRIOR', 1
+    end,
     UnitExists = UNIMPLEMENTED,
     UnitFactionGroup = UNIMPLEMENTED,
     UnitGUID = UNIMPLEMENTED,
+    UnitHasRelicSlot = UNIMPLEMENTED,
     UnitHealth = STUB_NUMBER,
     UnitHealthMax = STUB_NUMBER,
     UnitInBattleground = UNIMPLEMENTED,
@@ -1218,6 +1223,9 @@ local function mkWowEnv(api)
       return 'Human', 'Human', 1  -- UNIMPLEMENTED
     end,
     UnitRealmRelationship = UNIMPLEMENTED,
+    UnitResistance = function()
+      return 0, 0, 0, 0
+    end,
     UnitSex = function()
       return 2  -- UNIMPLEMENTED
     end,
