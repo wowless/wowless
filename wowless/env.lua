@@ -920,6 +920,7 @@ local function mkWowEnv(api)
     GetAlternativeDefaultLanguage = UNIMPLEMENTED,
     GetArenaTeam = UNIMPLEMENTED,
     GetAvailableLocales = UNIMPLEMENTED,
+    GetBagSlotFlag = UNIMPLEMENTED,
     GetBankBagSlotFlag = UNIMPLEMENTED,
     GetBattlefieldStatus = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
