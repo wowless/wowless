@@ -386,7 +386,12 @@ local function loader(api)
     end
   end
 
+  local function loadFrameXml()
+    loadToc(require('datafile').path('wowui/classic/FrameXML/FrameXML.toc'))
+  end
+
   return {
+    loadFrameXml = loadFrameXml,
     loadToc = loadToc,
     loadXml = loadXml,
   }
