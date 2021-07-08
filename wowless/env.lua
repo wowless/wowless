@@ -49,12 +49,12 @@ local function mkBaseUIObjectTypes(api)
           Mixin(metaindex, result[inh].metatable.__index)
         end
         result[k] = {
-          constructor = function(self, xmlattr)
+          constructor = function(self)
             for _, inh in ipairs(ty.inherits) do
-              result[inh].constructor(self, xmlattr)
+              result[inh].constructor(self)
             end
             if ty.constructor then
-              ty.constructor(self, xmlattr)
+              ty.constructor(self)
             end
           end,
           inherits = ty.inherits,
@@ -283,13 +283,10 @@ local function mkBaseUIObjectTypes(api)
       name = 'FontString',
     },
     frame = {
-      constructor = function(self, xmlattr)
+      constructor = function(self)
         table.insert(api.frames, self)
         u(self).attributes = {}
         u(self).registeredEvents = {}
-        if xmlattr.id then
-          m(self, 'SetID', xmlattr.id)
-        end
       end,
       inherits = {'parentedobject', 'region', 'scriptobject'},
       mixin = {

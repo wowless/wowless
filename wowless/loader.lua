@@ -227,6 +227,9 @@ local function loader(api)
         ud.shown = not value
         ud.visible = ud.shown and (not ud.parent or api.UserData(ud.parent).visible)
       end,
+      id = function(obj, value)
+        obj:SetID(value)
+      end,
       parent = function(obj, value)
         api.log(3, 'setting parent to ' .. value)
         obj:SetParent(api.env[value])
@@ -316,7 +319,7 @@ local function loader(api)
           for _, inh in ipairs(e.attr.inherits or {}) do
             assert(api.templates[string.lower(inh)], 'unknown template ' .. inh)
           end
-          local obj = api.CreateUIObject(e.type, name, parent, nil, e.attr)
+          local obj = api.CreateUIObject(e.type, name, parent)
           initAttrs(obj)
           initKids(obj)
           api.RunScript(obj, 'OnLoad')

@@ -46,7 +46,7 @@ local function new(log)
     end
   end
 
-  local function CreateUIObject(typename, objnamearg, parent, inherits, xmlattr)
+  local function CreateUIObject(typename, objnamearg, parent, inherits)
     local objname = ParentSub(objnamearg, parent)
     assert(typename, 'must specify type for ' .. tostring(objname))
     local type = uiobjectTypes[typename]
@@ -62,7 +62,7 @@ local function new(log)
       type = typename,
     }
     SetParent(obj, parent)
-    type.constructor(obj, xmlattr or {})
+    type.constructor(obj)
     for _, inh in ipairs(inherits or {}) do
       local template = templates[inh]
       log(4, 'running constructor for ' .. template.name)
