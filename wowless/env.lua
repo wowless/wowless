@@ -973,7 +973,9 @@ local function mkWowEnv(api)
         local defaults = {
           cameraSmoothStyle = '0',
           cameraSmoothTrackingStyle = '0',
+          NamePlateHorizontalScale = '1',
           nameplateMotion = '0',
+          NamePlateVerticalScale = '1',
         }
         return defaults[var]
       end,
@@ -1006,7 +1008,11 @@ local function mkWowEnv(api)
       GetBestMapForUnit = UNIMPLEMENTED,
     },
     C_NamePlate = {
+      GetNamePlates = STUB_TABLE,
       GetNumNamePlateMotionTypes = STUB_NUMBER,
+      SetNamePlateEnemySize = UNIMPLEMENTED,
+      SetNamePlateFriendlySize = UNIMPLEMENTED,
+      SetNamePlateSelfSize = UNIMPLEMENTED,
     },
     C_NewItems = {
       RemoveNewItem = UNIMPLEMENTED,
@@ -1274,6 +1280,9 @@ local function mkWowEnv(api)
     GetPetActionCooldown = UNIMPLEMENTED,
     GetPetActionInfo = UNIMPLEMENTED,
     GetPetExperience = STUB_NUMBER,
+    GetPhysicalScreenSize = function()
+      return 1024, 768
+    end,
     GetPlayerTradeMoney = STUB_NUMBER,
     GetPVPLifetimeStats = UNIMPLEMENTED,
     GetPVPSessionStats = UNIMPLEMENTED,
