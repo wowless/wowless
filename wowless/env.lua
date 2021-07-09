@@ -985,15 +985,21 @@ local function mkWowEnv(api)
         nameplateMotion = '0',
         NamePlateVerticalScale = '1',
       }
+      local cvars = {}
+      local function GetCVar(var)
+        return cvars[var] or cvarDefaults[var]
+      end
       return {
-        GetCVar = function(var)
-          return cvarDefaults[var]  -- UNIMPLEMENTED
+        GetCVar = GetCVar,
+        GetCVarBool = function(var)
+          return GetCVar(var) == "1"
         end,
-        GetCVarBool = UNIMPLEMENTED,
         GetCVarDefault = function(var)
           return cvarDefaults[var]
         end,
-        SetCVar = UNIMPLEMENTED,
+        SetCVar = function(var, value)
+          cvars[var] = value
+        end,
       }
     end)(),
     C_DeathInfo = {
