@@ -31,7 +31,7 @@ local function loader(api)
     local function loadXml(filename, xmlstr)
       local dir = path.dirname(filename)
 
-      local function withContext(ignoreVirtual)
+      local function withContext(ignoreVirtual, scriptsUseGivenEnv)
 
         local loadElement
 
@@ -142,7 +142,7 @@ local function loader(api)
             end
           end,
           scopedmodifier = function(e, parent)
-            loadElements(e.kids, parent)
+            withContext(ignoreVirtual, e.attr.scriptsusegivenenv).loadElements(e.kids, parent)
           end,
           script = function(e)
             if e.file then
@@ -159,9 +159,10 @@ local function loader(api)
               local fn
               if script.func then
                 local fnattr = script.func
+                local env = scriptsUseGivenEnv and addonEnv or api.env
                 fn = function(...)
-                  assert(api.env[fnattr], 'unknown script function ' .. fnattr)
-                  api.env[fnattr](...)
+                  assert(env[fnattr], 'unknown script function ' .. fnattr)
+                  env[fnattr](...)
                 end
               elseif script.method then
                 local mattr = script.method
@@ -281,7 +282,7 @@ local function loader(api)
             for _, inh in ipairs(e.attr.inherits or {}) do
               api.templates[string.lower(inh)].initKids(obj)
             end
-            withContext(true).loadElements(e.kids, obj)
+            withContext(true, scriptsUseGivenEnv).loadElements(e.kids, obj)
           end
         end
 
@@ -348,7 +349,7 @@ local function loader(api)
                   end
                 end,
                 initKids = function(obj)
-                  withContext(true).loadElements(e.kids, obj)
+                  withContext(true, scriptsUseGivenEnv).loadElements(e.kids, obj)
                 end,
               })
               return api.CreateUIObject(e.type, name, parent, unpack(templates))
@@ -369,7 +370,7 @@ local function loader(api)
       return api.CallSafely(function()
         local root = xml.validate(xmlstr)
         assert(root.type == 'ui' or root.type == 'bindings')
-        withContext(false).loadElements(root.kids)
+        withContext(false, false).loadElements(root.kids)
       end)
     end
 
