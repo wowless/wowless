@@ -311,6 +311,7 @@ local function mkBaseUIObjectTypes(api)
         SetFormattedText = UNIMPLEMENTED,
         SetMaxLines = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
+        SetTextHeight = UNIMPLEMENTED,
       },
       name = 'FontString',
     },
@@ -1009,6 +1010,7 @@ local function mkWowEnv(api)
     C_Map = {
       GetBestMapForUnit = UNIMPLEMENTED,
     },
+    C_ModelInfo = {},
     C_NamePlate = {
       GetNamePlates = STUB_TABLE,
       GetNumNamePlateMotionTypes = STUB_NUMBER,
@@ -1025,6 +1027,7 @@ local function mkWowEnv(api)
     C_ProductChoice = {
       GetChoices = STUB_TABLE,
     },
+    C_PvP = {},
     C_ScriptedAnimations = {
       GetAllScriptedAnimationEffects = STUB_TABLE,
     },
@@ -1418,6 +1421,8 @@ local function mkWowEnv(api)
     Kiosk = {
       IsEnabled = UNIMPLEMENTED,
     },
+    MoveBackwardStop = UNIMPLEMENTED,
+    MoveForwardStop = UNIMPLEMENTED,
     MultiSampleAntiAliasingSupported = UNIMPLEMENTED,
     newproxy = function()
       return setmetatable({}, {})
@@ -1460,14 +1465,19 @@ local function mkWowEnv(api)
     SetPortraitTexture = UNIMPLEMENTED,
     SetPortraitToTexture = UNIMPLEMENTED,
     SetSelectedSkill = UNIMPLEMENTED,
+    SetUIVisibility = UNIMPLEMENTED,
     ShouldKnowUnitHealth = UNIMPLEMENTED,
     ShowBossFrameWhenUninteractable = UNIMPLEMENTED,
     Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
     SpellCanTargetItem = UNIMPLEMENTED,
     SpellCanTargetItemID = UNIMPLEMENTED,
+    StrafeLeftStop = UNIMPLEMENTED,
+    StrafeRightStop = UNIMPLEMENTED,
     ToggleWorldMap = UNIMPLEMENTED,
     TriggerTutorial = UNIMPLEMENTED,
+    TurnLeftStop = UNIMPLEMENTED,
+    TurnRightStop = UNIMPLEMENTED,
     UnitAffectingCombat = UNIMPLEMENTED,
     UnitAura = UNIMPLEMENTED,
     UnitCanCooperate = UNIMPLEMENTED,
