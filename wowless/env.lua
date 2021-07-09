@@ -1103,8 +1103,13 @@ local function mkWowEnv(api)
       After = UNIMPLEMENTED,
     },
     C_UIWidgetManager = {
-      GetBelowMinimapWidgetSetID = UNIMPLEMENTED,
-      GetTopCenterWidgetSetID = UNIMPLEMENTED,
+      GetAllWidgetsBySetID = STUB_TABLE,
+      GetBelowMinimapWidgetSetID = function()
+        return 2
+      end,
+      GetTopCenterWidgetSetID = function()
+        return 1
+      end,
     },
     C_VoiceChat = {
       CanPlayerUseVoiceChat = UNIMPLEMENTED,
@@ -1508,6 +1513,8 @@ local function mkWowEnv(api)
     LE_ITEM_WEAPON_THROWN = 15,
     LE_ITEM_WEAPON_UNARMED = 16,
     LE_ITEM_WEAPON_WAND = 17,
+    LE_PARTY_CATEGORY_HOME = 1,
+    LE_PARTY_CATEGORY_INSTANCE = 2,
     LoadAddOn = function(name)
       api.log(1, 'failing to load addon ' .. name)
       return false, 'LOAD_FAILED'  -- UNIMPLEMENTED
