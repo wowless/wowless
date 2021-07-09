@@ -829,6 +829,7 @@ local baseEnv = {
   print = print,
   rawget = rawget,
   select = select,
+  setfenv = setfenv,
   setmetatable = setmetatable,
   sort = table.sort,
   string = {
