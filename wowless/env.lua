@@ -295,6 +295,7 @@ local function mkBaseUIObjectTypes(api)
         SetIndentedWordWrap = UNIMPLEMENTED,
         SetJustifyH = UNIMPLEMENTED,
         SetJustifyV = UNIMPLEMENTED,
+        SetShadowColor = UNIMPLEMENTED,
         SetSpacing = UNIMPLEMENTED,
         SetTextColor = UNIMPLEMENTED,
       },
@@ -718,6 +719,11 @@ local function mkBaseUIObjectTypes(api)
       },
       name = 'ScrollFrame',
     },
+    simplehtml = {
+      inherits = {'fontinstance', 'frame'},
+      mixin = {},
+      name = 'SimpleHTML',
+    },
     slider = {
       inherits = {'frame'},
       mixin = {
@@ -998,6 +1004,10 @@ local function mkWowEnv(api)
     },
     C_StorePublic = {
       IsDisabledByParentalControls = UNIMPLEMENTED,
+    },
+    C_StoreSecure = {
+      GetCurrencyID = UNIMPLEMENTED,
+      GetPurchaseList = UNIMPLEMENTED,
     },
     C_SummonInfo = {
       CancelSummon = UNIMPLEMENTED,
