@@ -327,6 +327,7 @@ local function mkBaseUIObjectTypes(api)
         u(self).isUserPlaced = false
         u(self).mouseClickEnabled = true
         u(self).mouseMotionEnabled = true
+        u(self).mouseWheelEnabled = false
         u(self).movable = false
         u(self).registeredEvents = {}
         u(self).resizable = false
@@ -343,6 +344,9 @@ local function mkBaseUIObjectTypes(api)
           local ud = u(self)
           ud.mouseClickEnabled = not not value
           ud.mouseMotionEnabled = not not value
+        end,
+        EnableMouseWheel = function(self, value)
+          u(self).mouseWheelEnabled = not not value
         end,
         GetAttribute = function(self, name)
           return u(self).attributes[name]
@@ -391,6 +395,9 @@ local function mkBaseUIObjectTypes(api)
         IsMouseMotionEnabled = function(self)
           return u(self).mouseMotionEnabled
         end,
+        IsMouseWheelEnabled = function(self)
+          return u(self).mouseWheelEnabled
+        end,
         IsMovable = function(self)
           return u(self).movable
         end,
@@ -405,6 +412,7 @@ local function mkBaseUIObjectTypes(api)
           u(self).registeredEvents[string.lower(event)] = true
         end,
         RegisterForDrag = UNIMPLEMENTED,
+        RegisterForMouse = UNIMPLEMENTED,
         RegisterUnitEvent = function(self, event)  -- unit1, unit2
           -- TODO actually do unit filtering
           u(self).registeredEvents[string.lower(event)] = true
@@ -963,6 +971,8 @@ local function mkWowEnv(api)
     },
     C_Commentator = {
       IsSpectating = UNIMPLEMENTED,
+      SetFollowCameraSpeeds = UNIMPLEMENTED,
+      SetMouseDisabled = UNIMPLEMENTED,
     },
     C_CurrencyInfo = {
       GetCurrencyInfo = STUB_TABLE,
@@ -1027,7 +1037,10 @@ local function mkWowEnv(api)
     C_ProductChoice = {
       GetChoices = STUB_TABLE,
     },
-    C_PvP = {},
+    C_PvP = {
+      GetArenaCrowdControlInfo = UNIMPLEMENTED,
+      IsInBrawl = UNIMPLEMENTED,
+    },
     C_ScriptedAnimations = {
       GetAllScriptedAnimationEffects = STUB_TABLE,
     },
