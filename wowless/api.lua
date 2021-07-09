@@ -81,10 +81,8 @@ local function new(log)
       template.initAttrs(obj)
     end
     if objname then
-      if obj.GetParent then
-        objname = ParentSub(objnamearg, obj:GetParent())
-        userdata[obj].name = objname
-      end
+      objname = ParentSub(objnamearg, userdata[obj].parent)
+      userdata[obj].name = objname
       if env[objname] then
         log(1, 'overwriting global ' .. objname)
       end
