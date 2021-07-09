@@ -1027,6 +1027,32 @@ local function mkWowEnv(api)
     },
     C_Map = {
       GetBestMapForUnit = UNIMPLEMENTED,
+      GetFallbackWorldMapID = STUB_NUMBER,
+      GetMapArtBackgroundAtlas = UNIMPLEMENTED,
+      GetMapArtID = STUB_NUMBER,
+      GetMapArtLayers = function()
+        local layer = {
+          additionalZoomSteps = 0,
+          layerHeight = 1,
+          layerWidth = 1,
+          maxScale = 1,
+          minScale = 1,
+          tileHeight = 1,
+          tileWidth = 1,
+        }
+        return { layer }
+      end,
+      GetMapArtLayerTextures = STUB_TABLE,
+      GetMapChildrenInfo = STUB_TABLE,
+      GetMapInfo = function(uiMapID)
+        return {
+          flags = 0,
+          mapID = uiMapID,
+          mapType = api.env.Enum.UIMapType.Cosmic,
+          name = 'TheMap',
+          parentMapID = 0,
+        }
+      end,
     },
     C_ModelInfo = {},
     C_NamePlate = {
