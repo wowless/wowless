@@ -1,0 +1,8 @@
+{
+    "Lua.diagnostics.globals": [
+        "describe",
+        "it",
+        "pending",
+        "before_each"
+    ]
+}
