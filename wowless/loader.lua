@@ -407,7 +407,7 @@ local function loader(api)
     for line in io.lines(tocFile) do
       line = line:match('^%s*(.-)%s*$')
       if line:sub(1, 3) == '## ' then
-        local key, value = line:match('(%w_+): (%w_+)', 4)
+        local key, value = line:match('([%w_]+): ([%w_]+)', 4)
         if key then
           attrs[key] = value
         end
@@ -443,7 +443,7 @@ local function loader(api)
     end
     for _, tocFile in ipairs(tocFiles) do
       local toc = parseToc(tocFile)
-      if toc.attrs.LoadOnDemand ~= "1" then
+      if toc.attrs.LoadOnDemand ~= '1' then
         for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
           doLoad(string.format('wowui/classic/AddOns/%s/%s.toc', dep, dep))
         end
