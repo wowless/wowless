@@ -367,6 +367,12 @@ local function mkBaseUIObjectTypes(api)
         GetID = function(self)
           return u(self).id
         end,
+        GetMaxResize = function(self)
+          return u(self).maxResizeWidth, u(self).maxResizeHeight
+        end,
+        GetMinResize = function(self)
+          return u(self).minResizeWidth, u(self).minResizeHeight
+        end,
         IgnoreDepth = UNIMPLEMENTED,
         IsClampedToScreen = function(self)
           return u(self).isClampedToScreen
@@ -424,6 +430,14 @@ local function mkBaseUIObjectTypes(api)
         SetID = function(self, id)
           assert(type(id) == 'number', 'invalid ID ' .. tostring(id))
           u(self).id = id
+        end,
+        SetMaxResize = function(self, maxWidth, maxHeight)
+          u(self).maxResizeWidth = maxWidth
+          u(self).maxResizeHeight = maxHeight
+        end,
+        SetMinResize = function(self, minWidth, minHeight)
+          u(self).minResizeWidth = minWidth
+          u(self).minResizeHeight = minHeight
         end,
         SetMouseClickEnabled = function(self, value)
           u(self).mouseClickEnabled = not not value
@@ -908,6 +922,7 @@ local function mkWowEnv(api)
       return 0, 0  -- UNIMPLEMENTED
     end,
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
+    CanBeRaidTarget = UNIMPLEMENTED,
     CanReplaceGuildMaster = UNIMPLEMENTED,
     CastShapeshiftForm = UNIMPLEMENTED,
     ChangeActionBarPage = UNIMPLEMENTED,
@@ -931,10 +946,12 @@ local function mkWowEnv(api)
       return api.CreateUIObject(ltype, name, parent, unpack(templates))
     end,
     CursorHasItem = UNIMPLEMENTED,
+    C_AuthChallenge = {},
     C_ChatInfo = {
       IsValidChatLine = UNIMPLEMENTED,
     },
     C_Club = {
+      ClearClubPresenceSubscription = UNIMPLEMENTED,
       GetInvitationsForSelf = STUB_TABLE,
       GetSubscribedClubs = STUB_TABLE,
       IsEnabled = UNIMPLEMENTED,
@@ -983,6 +1000,9 @@ local function mkWowEnv(api)
         return 'moo', 'WARRIOR'  -- UNIMPLEMENTED
       end,
     },
+    C_Map = {
+      GetBestMapForUnit = UNIMPLEMENTED,
+    },
     C_NamePlate = {
       GetNumNamePlateMotionTypes = STUB_NUMBER,
     },
@@ -1022,6 +1042,10 @@ local function mkWowEnv(api)
     C_Timer = {
       After = UNIMPLEMENTED,
     },
+    C_UIWidgetManager = {
+      GetBelowMinimapWidgetSetID = UNIMPLEMENTED,
+      GetTopCenterWidgetSetID = UNIMPLEMENTED,
+    },
     C_VoiceChat = {
       CanPlayerUseVoiceChat = UNIMPLEMENTED,
       GetActiveChannelID = UNIMPLEMENTED,
@@ -1034,6 +1058,12 @@ local function mkWowEnv(api)
       GetVADSensitivity = UNIMPLEMENTED,
     },
     C_Widget = {},
+    C_WowTokenPublic = {
+      GetCommerceSystemStatus = UNIMPLEMENTED,
+    },
+    C_WowTokenSecure = {
+      CancelRedeem = UNIMPLEMENTED,
+    },
     DropCursorMoney = UNIMPLEMENTED,
     Enum = setmetatable({
       StoreError = {
@@ -1267,6 +1297,7 @@ local function mkWowEnv(api)
       return 'moo', 1  -- UNIMPLEMENTED
     end,
     GetQuestTimers = UNIMPLEMENTED,
+    GetRaidTargetIndex = UNIMPLEMENTED,
     GetReleaseTimeRemaining = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -1349,6 +1380,7 @@ local function mkWowEnv(api)
     IsMacClient = UNIMPLEMENTED,
     IsModifiedClick = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
+    IsPublicBuild = UNIMPLEMENTED,
     IsQuestWatched = UNIMPLEMENTED,
     InRepairMode = UNIMPLEMENTED,
     IsResting = UNIMPLEMENTED,
