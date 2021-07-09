@@ -377,12 +377,19 @@ local function loader(api)
     function loadFile(filename)
       api.CallSafely(function()
         api.log(2, 'loading file %s', filename)
+        local loadFn
         if filename:sub(-4) == '.lua' then
-          loadLuaString(filename, readFile(filename))
+          loadFn = loadLuaString
         elseif filename:sub(-4) == '.xml' then
-          return loadXml(filename, readFile(filename))
+          loadFn = loadXml
         else
           error('unknown file type ' .. filename)
+        end
+        local success, content = pcall(function() return readFile(filename) end)
+        if success then
+          loadFn(filename, content)
+        else
+          api.log(1, 'skipping missing file %s', filename)
         end
       end)
     end
