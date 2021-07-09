@@ -16,11 +16,6 @@ local function new(log)
   end
 
   local function IsIntrinsicType(t)
-    local type = uiobjectTypes[string.lower(t)]
-    return type and type.metatable
-  end
-
-  local function IsUIObjectType(t)
     return uiobjectTypes[string.lower(t)] ~= nil
   end
 
@@ -143,7 +138,6 @@ local function new(log)
     GetErrorCount = GetErrorCount,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
-    IsUIObjectType = IsUIObjectType,
     log = log,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
