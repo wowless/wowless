@@ -822,6 +822,21 @@ local function mkBaseUIObjectTypes(api)
       },
       name = 'UIObject',
     },
+    unitpositionframe = {
+      inherits = {'frame'},
+      mixin = {
+        AddUnit = UNIMPLEMENTED,
+        ClearUnits = UNIMPLEMENTED,
+        FinalizeUnits = UNIMPLEMENTED,
+        GetMouseOverUnits = UNIMPLEMENTED,
+        SetPlayerPingScale = UNIMPLEMENTED,
+        SetPlayerPingTexture = UNIMPLEMENTED,
+        SetUiMapID = UNIMPLEMENTED,
+        StartPlayerPing = UNIMPLEMENTED,
+        StopPlayerPing = UNIMPLEMENTED,
+      },
+      name = 'UnitPositionFrame',
+    },
     worldframe = {
       inherits = {'frame'},
       name = 'WorldFrame',
@@ -947,6 +962,7 @@ local function mkWowEnv(api)
     end,
     CreateFrame = function(type, name, parent, templateNames)
       local ltype = string.lower(type)
+      assert(api.IsIntrinsicType(ltype), type .. ' is not intrinsic')
       assert(api.InheritsFrom(ltype, 'frame'), type .. ' does not inherit from frame')
       local templates = {}
       for templateName in string.gmatch(templateNames or '', '[^, ]+') do
@@ -957,6 +973,9 @@ local function mkWowEnv(api)
       return api.CreateUIObject(ltype, name, parent, unpack(templates))
     end,
     CursorHasItem = UNIMPLEMENTED,
+    C_AreaPoiInfo = {
+      GetAreaPOIForMap = STUB_TABLE,
+    },
     C_AuthChallenge = {
       SetFrame = UNIMPLEMENTED,
     },
@@ -1003,6 +1022,7 @@ local function mkWowEnv(api)
       }
     end)(),
     C_DeathInfo = {
+      GetCorpseMapPosition = UNIMPLEMENTED,
       GetSelfResurrectOptions = UNIMPLEMENTED,
     },
     C_FriendList = {
@@ -1014,6 +1034,9 @@ local function mkWowEnv(api)
       ShowFriends = UNIMPLEMENTED,
     },
     C_GamePad = {},
+    C_GossipInfo = {
+      GetPoiForUiMapID = UNIMPLEMENTED,
+    },
     C_GuildInfo = {
       GuildControlGetRankFlags = STUB_TABLE,
       GuildRoster = UNIMPLEMENTED,
@@ -1027,7 +1050,9 @@ local function mkWowEnv(api)
     },
     C_Map = {
       GetBestMapForUnit = UNIMPLEMENTED,
-      GetFallbackWorldMapID = STUB_NUMBER,
+      GetFallbackWorldMapID = function()
+        return 0
+      end,
       GetMapArtBackgroundAtlas = UNIMPLEMENTED,
       GetMapArtID = STUB_NUMBER,
       GetMapArtLayers = function()
@@ -1044,6 +1069,8 @@ local function mkWowEnv(api)
       end,
       GetMapArtLayerTextures = STUB_TABLE,
       GetMapChildrenInfo = STUB_TABLE,
+      GetMapDisplayInfo = UNIMPLEMENTED,
+      GetMapHighlightInfoAtPosition = UNIMPLEMENTED,
       GetMapInfo = function(uiMapID)
         return {
           flags = 0,
@@ -1053,6 +1080,9 @@ local function mkWowEnv(api)
           parentMapID = 0,
         }
       end,
+    },
+    C_MapExplorationInfo = {
+      GetExploredMapTextures = STUB_TABLE,
     },
     C_ModelInfo = {},
     C_NamePlate = {
@@ -1074,6 +1104,9 @@ local function mkWowEnv(api)
     C_PvP = {
       GetArenaCrowdControlInfo = UNIMPLEMENTED,
       IsInBrawl = UNIMPLEMENTED,
+    },
+    C_QuestLog = {
+      GetMaxNumQuests = STUB_NUMBER,
     },
     C_ScriptedAnimations = {
       GetAllScriptedAnimationEffects = STUB_TABLE,
@@ -1214,6 +1247,7 @@ local function mkWowEnv(api)
     GetAvailableLocales = UNIMPLEMENTED,
     GetBagSlotFlag = UNIMPLEMENTED,
     GetBankBagSlotFlag = UNIMPLEMENTED,
+    GetBattlefieldFlagPosition = UNIMPLEMENTED,
     GetBattlefieldStatus = UNIMPLEMENTED,
     GetBidderAuctionItems = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
@@ -1322,6 +1356,7 @@ local function mkWowEnv(api)
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetNumBattlefieldFlagPositions = STUB_NUMBER,
     GetNumBindings = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -1438,6 +1473,7 @@ local function mkWowEnv(api)
       local oldfn = tbl[name]
       tbl[name] = function(...) oldfn(...) fn(...) end
     end,
+    InActiveBattlefield = UNIMPLEMENTED,
     InCinematic = UNIMPLEMENTED,
     InCombatLockdown = UNIMPLEMENTED,
     IsAccountSecured = UNIMPLEMENTED,
