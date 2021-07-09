@@ -32,10 +32,10 @@ local function new(log)
   local function ParentSub(name, parent)
     if name and string.match(name, '$parent') then
       local p = parent
-      while p ~= nil and not p:GetName() do
-        p = p:GetParent()
+      while p ~= nil and not userdata[p].name do
+        p = userdata[p].parent
       end
-      return string.gsub(name, '$parent', p and p:GetName() or 'Top')
+      return string.gsub(name, '$parent', p and userdata[p].name or 'Top')
     else
       return name
     end
