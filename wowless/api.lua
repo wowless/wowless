@@ -95,7 +95,7 @@ local function new(log)
       template.initKids(obj)
     end
     RunScript(obj, 'OnLoad')
-    if obj.IsVisible and obj:IsVisible() then
+    if userdata[obj].visible then
       RunScript(obj, 'OnShow')
     end
     return obj
