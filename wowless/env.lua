@@ -977,23 +977,25 @@ local function mkWowEnv(api)
     C_CurrencyInfo = {
       GetCurrencyInfo = STUB_TABLE,
     },
-    C_CVar = {
-      GetCVar = function(var)
-        return api.env.C_CVar.GetCVarDefault(var)  -- UNIMPLEMENTED
-      end,
-      GetCVarBool = UNIMPLEMENTED,
-      GetCVarDefault = function(var)  -- UNIMPLEMENTED
-        local defaults = {
-          cameraSmoothStyle = '0',
-          cameraSmoothTrackingStyle = '0',
-          NamePlateHorizontalScale = '1',
-          nameplateMotion = '0',
-          NamePlateVerticalScale = '1',
-        }
-        return defaults[var]
-      end,
-      SetCVar = UNIMPLEMENTED,
-    },
+    C_CVar = (function()
+      local cvarDefaults = {
+        cameraSmoothStyle = '0',
+        cameraSmoothTrackingStyle = '0',
+        NamePlateHorizontalScale = '1',
+        nameplateMotion = '0',
+        NamePlateVerticalScale = '1',
+      }
+      return {
+        GetCVar = function(var)
+          return cvarDefaults[var]  -- UNIMPLEMENTED
+        end,
+        GetCVarBool = UNIMPLEMENTED,
+        GetCVarDefault = function(var)
+          return cvarDefaults[var]
+        end,
+        SetCVar = UNIMPLEMENTED,
+      }
+    end)(),
     C_DeathInfo = {
       GetSelfResurrectOptions = UNIMPLEMENTED,
     },
