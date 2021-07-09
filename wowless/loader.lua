@@ -429,7 +429,7 @@ local function loader(api)
   local function loadFrameXml()
     loadToc(require('datafile').path('wowui/classic/FrameXML/FrameXML.toc'))
     local tocFiles = {}
-    local handle = io.popen([[bash -c 'find wowui/classic/AddOns -name "*.toc"']])
+    local handle = io.popen([[bash -c 'find wowui/classic/AddOns -name "*.toc" | sort']])
     for line in handle:lines() do
       table.insert(tocFiles, line)
     end
