@@ -946,7 +946,9 @@ local function mkWowEnv(api)
       return api.CreateUIObject(ltype, name, parent, unpack(templates))
     end,
     CursorHasItem = UNIMPLEMENTED,
-    C_AuthChallenge = {},
+    C_AuthChallenge = {
+      SetFrame = UNIMPLEMENTED,
+    },
     C_ChatInfo = {
       IsValidChatLine = UNIMPLEMENTED,
     },
