@@ -1284,7 +1284,9 @@ local function mkWowEnv(api)
     InRepairMode = UNIMPLEMENTED,
     IsResting = UNIMPLEMENTED,
     IsRestrictedAccount = UNIMPLEMENTED,
-    issecure = UNIMPLEMENTED,
+    issecure = function()
+      return true  -- UNIMPLEMENTED
+    end,
     IsShiftKeyDown = UNIMPLEMENTED,
     IsStackableAction = UNIMPLEMENTED,
     IsTitleKnown = UNIMPLEMENTED,
