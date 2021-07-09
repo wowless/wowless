@@ -427,7 +427,7 @@ local function loader(api)
     handle:close()
     for _, tocFile in ipairs(tocFiles) do
       local toc = parseToc(tocFile)
-      if not toc.attrs.LoadOnDemand then
+      if toc.attrs.LoadOnDemand ~= "1" then
         loadToc(tocFile)
       end
     end
