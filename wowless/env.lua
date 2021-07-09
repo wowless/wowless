@@ -233,6 +233,9 @@ local function mkBaseUIObjectTypes(api)
     editbox = {
       constructor = function(self)
         u(self).editboxText = ''
+        u(self).isAutoFocus = true
+        u(self).isMultiLine = false
+        u(self).maxLetters = 64  -- TODO validate this default
       end,
       inherits = {'fontinstance', 'frame'},
       mixin = {
@@ -240,11 +243,29 @@ local function mkBaseUIObjectTypes(api)
         GetInputLanguage = function()
           return 'ROMAN'  -- UNIMPLEMENTED
         end,
+        GetMaxLetters = function(self)
+          return u(self).maxLetters
+        end,
         GetNumber = STUB_NUMBER,
         GetText = function(self)
           return u(self).editboxText
         end,
+        IsAutoFocus = function(self)
+          return u(self).isAutoFocus
+        end,
+        IsMultiLine = function(self)
+          return u(self).isMultiLine
+        end,
+        SetAutoFocus = function(self, value)
+          u(self).isAutoFocus = not not value
+        end,
         SetFocus = UNIMPLEMENTED,
+        SetMaxLetters = function(self, value)
+          u(self).maxLetters = value
+        end,
+        SetMultiLine = function(self, value)
+          u(self).isMultiLine = not not value
+        end,
         SetNumber = UNIMPLEMENTED,
         SetSecureText = function(self, text)
           u(self).editboxText = text
@@ -273,6 +294,7 @@ local function mkBaseUIObjectTypes(api)
         SetFontObject = UNIMPLEMENTED,
         SetIndentedWordWrap = UNIMPLEMENTED,
         SetJustifyH = UNIMPLEMENTED,
+        SetJustifyV = UNIMPLEMENTED,
         SetSpacing = UNIMPLEMENTED,
         SetTextColor = UNIMPLEMENTED,
       },
@@ -295,8 +317,11 @@ local function mkBaseUIObjectTypes(api)
       constructor = function(self)
         table.insert(api.frames, self)
         u(self).attributes = {}
+        u(self).frameLevel = 1
+        u(self).frameStrata = 'MEDIUM'
         u(self).hyperlinksEnabled = false
         u(self).id = 0
+        u(self).isClampedToScreen = false
         u(self).isUserPlaced = false
         u(self).mouseClickEnabled = true
         u(self).mouseMotionEnabled = true
@@ -329,7 +354,12 @@ local function mkBaseUIObjectTypes(api)
           end
           return unpack(ret)
         end,
-        GetFrameLevel = STUB_NUMBER,
+        GetFrameLevel = function(self)
+          return u(self).frameLevel
+        end,
+        GetFrameStrata = function(self)
+          return u(self).frameStrata
+        end,
         GetHyperlinksEnabled = function(self)
           return u(self).hyperlinksEnabled
         end,
@@ -337,6 +367,9 @@ local function mkBaseUIObjectTypes(api)
           return u(self).id
         end,
         IgnoreDepth = UNIMPLEMENTED,
+        IsClampedToScreen = function(self)
+          return u(self).isClampedToScreen
+        end,
         IsEventRegistered = function(self, event)
           return not not u(self).registeredEvents[string.lower(event)]
         end,
@@ -373,9 +406,16 @@ local function mkBaseUIObjectTypes(api)
           u(self).attributes[name] = value
           api.RunScript(self, 'OnAttributeChanged', name, value)
         end,
+        SetClampedToScreen = function(self, value)
+          u(self).isClampedToScreen = not not value
+        end,
         SetClampRectInsets = UNIMPLEMENTED,
-        SetFrameLevel = UNIMPLEMENTED,
-        SetFrameStrata = UNIMPLEMENTED,
+        SetFrameLevel = function(self, frameLevel)
+          u(self).frameLevel = frameLevel
+        end,
+        SetFrameStrata = function(self, frameStrata)
+          u(self).frameStrata = frameStrata
+        end,
         SetHitRectInsets = UNIMPLEMENTED,
         SetHyperlinksEnabled = function(self, value)
           u(self).hyperlinksEnabled = not not value
@@ -421,6 +461,7 @@ local function mkBaseUIObjectTypes(api)
         end,
         SetBagItem = UNIMPLEMENTED,
         SetInventoryItem = UNIMPLEMENTED,
+        SetMinimumWidth = UNIMPLEMENTED,
         SetOwner = function(self, owner)
           u(self).tooltipOwner = owner
         end,
@@ -1104,6 +1145,9 @@ local function mkWowEnv(api)
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetNumBindings = function()
+      return 0  -- UNIMPLEMENTED
+    end,
     GetNumLanguages = STUB_NUMBER,
     GetNumQuestLeaderBoards = function()
       return 0  -- UNIMPLEMENTED
@@ -1288,11 +1332,13 @@ local function mkWowEnv(api)
     SetActionBarToggles = UNIMPLEMENTED,
     SetActionUIButton = UNIMPLEMENTED,
     SetBagPortraitTexture = UNIMPLEMENTED,
+    SetBinding = UNIMPLEMENTED,
     SetChatWindowDocked = UNIMPLEMENTED,
     SetChatWindowLocked = UNIMPLEMENTED,
     SetChatWindowName = UNIMPLEMENTED,
     SetChatWindowShown = UNIMPLEMENTED,
     SetChatWindowUninteractable = UNIMPLEMENTED,
+    SetCursor = UNIMPLEMENTED,
     seterrorhandler = UNIMPLEMENTED,
     SetPortraitTexture = UNIMPLEMENTED,
     SetPortraitToTexture = UNIMPLEMENTED,
@@ -1305,6 +1351,7 @@ local function mkWowEnv(api)
     SpellCanTargetItemID = UNIMPLEMENTED,
     ToggleWorldMap = UNIMPLEMENTED,
     TriggerTutorial = UNIMPLEMENTED,
+    UnitAffectingCombat = UNIMPLEMENTED,
     UnitAura = UNIMPLEMENTED,
     UnitCanCooperate = UNIMPLEMENTED,
     UnitCastingInfo = UNIMPLEMENTED,
@@ -1313,7 +1360,9 @@ local function mkWowEnv(api)
       return 'Warrior', 'WARRIOR', 1
     end,
     UnitExists = UNIMPLEMENTED,
-    UnitFactionGroup = UNIMPLEMENTED,
+    UnitFactionGroup = function()
+      return 'Horde', 'Horde'
+    end,
     UnitGUID = UNIMPLEMENTED,
     UnitHasRelicSlot = UNIMPLEMENTED,
     UnitHealth = STUB_NUMBER,
@@ -1336,6 +1385,7 @@ local function mkWowEnv(api)
     end,
     UnitOnTaxi = UNIMPLEMENTED,
     UnitPlayerControlled = UNIMPLEMENTED,
+    UnitPosition = UNIMPLEMENTED,
     UnitPower = STUB_NUMBER,
     UnitPowerMax = STUB_NUMBER,
     UnitPowerType = function()
