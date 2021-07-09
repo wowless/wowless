@@ -375,14 +375,16 @@ local function loader(api)
     end
 
     function loadFile(filename)
-      api.log(2, 'loading file %s', filename)
-      if filename:sub(-4) == '.lua' then
-        loadLuaString(filename, readFile(filename))
-      elseif filename:sub(-4) == '.xml' then
-        return loadXml(filename, readFile(filename))
-      else
-        error('unknown file type ' .. filename)
-      end
+      api.CallSafely(function()
+        api.log(2, 'loading file %s', filename)
+        if filename:sub(-4) == '.lua' then
+          loadLuaString(filename, readFile(filename))
+        elseif filename:sub(-4) == '.xml' then
+          return loadXml(filename, readFile(filename))
+        else
+          error('unknown file type ' .. filename)
+        end
+      end)
     end
 
     return {
@@ -398,7 +400,7 @@ local function loader(api)
     for line in io.lines(tocFile) do
       line = line:match('^%s*(.-)%s*$')
       if line:sub(1, 3) == '## ' then
-        local key, value = line:match('(%w+): (%w+)', 4)
+        local key, value = line:match('(%w_+): (%w_+)', 4)
         if key then
           attrs[key] = value
         end
@@ -425,10 +427,20 @@ local function loader(api)
       table.insert(tocFiles, line)
     end
     handle:close()
+    local loaded = {}
+    local function doLoad(tocFile)
+      if not loaded[tocFile] then
+        loadToc(tocFile)
+        loaded[tocFile] = true
+      end
+    end
     for _, tocFile in ipairs(tocFiles) do
       local toc = parseToc(tocFile)
       if toc.attrs.LoadOnDemand ~= "1" then
-        loadToc(tocFile)
+        for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
+          doLoad(string.format('wowui/classic/AddOns/%s/%s.toc', dep, dep))
+        end
+        doLoad(tocFile)
       end
     end
   end
