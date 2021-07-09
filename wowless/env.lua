@@ -1178,10 +1178,13 @@ local function mkWowEnv(api)
     GetAddOnEnableState = UNIMPLEMENTED,
     GetAlternativeDefaultLanguage = UNIMPLEMENTED,
     GetArenaTeam = UNIMPLEMENTED,
+    GetAuctionDeposit = STUB_NUMBER,
+    GetAuctionItemSubClasses = UNIMPLEMENTED,
     GetAvailableLocales = UNIMPLEMENTED,
     GetBagSlotFlag = UNIMPLEMENTED,
     GetBankBagSlotFlag = UNIMPLEMENTED,
     GetBattlefieldStatus = UNIMPLEMENTED,
+    GetBidderAuctionItems = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
     GetBindingText = UNIMPLEMENTED,
     GetChatTypeIndex = STUB_NUMBER,
@@ -1254,8 +1257,17 @@ local function mkWowEnv(api)
         return assert(t[string.lower(slotName)], 'unknown slot name ' .. slotName)
       end
     end)(),
+    GetItemClassInfo = function(classID)
+      return string.format('ItemClass%d', classID)
+    end,
+    GetItemInventorySlotInfo = function(inventorySlot)
+      return string.format('ItemInventorySlot%d', inventorySlot)
+    end,
     GetItemQualityColor = function()
       return 0, 0, 0  -- UNIMPLEMENTED
+    end,
+    GetItemSubClassInfo = function(classID, subClassID)
+      return string.format('ItemClass%dSubClass%d', classID, subClassID)
     end,
     GetLanguageByIndex = UNIMPLEMENTED,
     GetLootMethod = function()
@@ -1303,6 +1315,7 @@ local function mkWowEnv(api)
     GetNumTitles = STUB_NUMBER,
     GetNumTrackingTypes = STUB_NUMBER,
     GetOptOutOfLoot = UNIMPLEMENTED,
+    GetOwnerAuctionItems = UNIMPLEMENTED,
     GetPetActionCooldown = UNIMPLEMENTED,
     GetPetActionInfo = UNIMPLEMENTED,
     GetPetExperience = STUB_NUMBER,
@@ -1435,6 +1448,40 @@ local function mkWowEnv(api)
     IsWindowsClient = UNIMPLEMENTED,
     LE_BAG_FILTER_FLAG_EQUIPMENT = 2,
     LE_EXPANSION_BURNING_CRUSADE = 2,  -- UNIMPLEMENTED
+    LE_INVENTORY_TYPE_BODY_TYPE = 1,
+    LE_INVENTORY_TYPE_CHEST_TYPE = 2,
+    LE_INVENTORY_TYPE_CLOAK_TYPE = 3,
+    LE_INVENTORY_TYPE_FEET_TYPE = 4,
+    LE_INVENTORY_TYPE_FINGER_TYPE = 5,
+    LE_INVENTORY_TYPE_HAND_TYPE = 6,
+    LE_INVENTORY_TYPE_HEAD_TYPE = 7,
+    LE_INVENTORY_TYPE_HOLDABLE_TYPE = 8,
+    LE_INVENTORY_TYPE_LEGS_TYPE = 9,
+    LE_INVENTORY_TYPE_NECK_TYPE = 10,
+    LE_INVENTORY_TYPE_ROBE_TYPE = 11,
+    LE_INVENTORY_TYPE_SHOULDER_TYPE = 12,
+    LE_INVENTORY_TYPE_TRINKET_TYPE = 13,
+    LE_INVENTORY_TYPE_WAIST_TYPE = 14,
+    LE_INVENTORY_TYPE_WRIST_TYPE = 15,
+    LE_ITEM_CLASS_WEAPON = 1,
+    LE_ITEM_CLASS_ARMOR = 2,
+    LE_ITEM_WEAPON_AXE1H = 1,
+    LE_ITEM_WEAPON_AXE2H = 2,
+    LE_ITEM_WEAPON_BOWS = 3,
+    LE_ITEM_WEAPON_CROSSBOW = 4,
+    LE_ITEM_WEAPON_DAGGER = 5,
+    LE_ITEM_WEAPON_FISHINGPOLE = 6,
+    LE_ITEM_WEAPON_GENERIC = 7,
+    LE_ITEM_WEAPON_GUNS = 8,
+    LE_ITEM_WEAPON_MACE1H = 9,
+    LE_ITEM_WEAPON_MACE2H = 10,
+    LE_ITEM_WEAPON_POLEARM = 11,
+    LE_ITEM_WEAPON_STAFF = 12,
+    LE_ITEM_WEAPON_SWORD1H = 13,
+    LE_ITEM_WEAPON_SWORD2H = 14,
+    LE_ITEM_WEAPON_THROWN = 15,
+    LE_ITEM_WEAPON_UNARMED = 16,
+    LE_ITEM_WEAPON_WAND = 17,
     LoadAddOn = function(name)
       api.log(1, 'failing to load addon ' .. name)
       return false, 'LOAD_FAILED'  -- UNIMPLEMENTED
@@ -1489,6 +1536,8 @@ local function mkWowEnv(api)
     SetUIVisibility = UNIMPLEMENTED,
     ShouldKnowUnitHealth = UNIMPLEMENTED,
     ShowBossFrameWhenUninteractable = UNIMPLEMENTED,
+    SortAuctionClearSort = UNIMPLEMENTED,
+    SortAuctionSetSort = UNIMPLEMENTED,
     Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
     SpellCanTargetItem = UNIMPLEMENTED,
