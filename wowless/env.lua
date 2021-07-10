@@ -865,7 +865,6 @@ local baseEnv = {
   ceil = math.ceil,
   floor = math.floor,
   format = string.format,
-  getfenv = getfenv,
   getmetatable = getmetatable,
   getn = table.getn,
   gsub = string.gsub,
@@ -1301,6 +1300,13 @@ local function mkWowEnv(api)
       return 'Common', 7  -- UNIMPLEMENTED
     end,
     GetDefaultVideoOptions = UNIMPLEMENTED,
+    getfenv = function(arg)
+      if arg == 0 then
+        return api.env
+      else
+        return getfenv(arg)
+      end
+    end,
     GetFileStreamingStatus = UNIMPLEMENTED,
     GetGameTime = function()
       return 1, 1  -- UNIMPLEMENTED
