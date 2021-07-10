@@ -1122,7 +1122,10 @@ local function mkWowEnv(api)
     },
     C_StoreSecure = {
       GetCurrencyID = UNIMPLEMENTED,
+      GetFailureInfo = UNIMPLEMENTED,
       GetPurchaseList = UNIMPLEMENTED,
+      HasPurchaseInProgress = UNIMPLEMENTED,
+      IsAvailable = UNIMPLEMENTED,
     },
     C_SummonInfo = {
       CancelSummon = UNIMPLEMENTED,
