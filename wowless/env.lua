@@ -1481,6 +1481,7 @@ local function mkWowEnv(api)
     GetTradeSkillInvSlots = UNIMPLEMENTED,
     GetTradeSkillSubClasses = UNIMPLEMENTED,
     GetTradeSkillSubClassFilter = UNIMPLEMENTED,
+    GetTrainerServiceTypeFilter = UNIMPLEMENTED,
     GetWeaponEnchantInfo = UNIMPLEMENTED,
     GetWebTicket = UNIMPLEMENTED,
     GetXPExhaustion = UNIMPLEMENTED,
