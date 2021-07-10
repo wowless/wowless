@@ -450,6 +450,14 @@ local function loader(api)
         doLoad(tocFile)
       end
     end
+    -- TODO don't force load the rest of the tocs
+    for _, tocFile in ipairs(tocFiles) do
+      local toc = parseToc(tocFile)
+      for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
+        doLoad(string.format('wowui/classic/AddOns/%s/%s.toc', dep, dep))
+      end
+      doLoad(tocFile)
+    end
   end
 
   return {
