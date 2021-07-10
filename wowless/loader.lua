@@ -437,6 +437,10 @@ local function loader(api)
     local loaded = {}
     local function doLoad(tocFile)
       if not loaded[tocFile] then
+        local toc = parseToc(tocFile)
+        for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
+          doLoad(string.format('wowui/classic/AddOns/%s/%s.toc', dep, dep))
+        end
         loadToc(tocFile)
         loaded[tocFile] = true
       end
@@ -444,18 +448,11 @@ local function loader(api)
     for _, tocFile in ipairs(tocFiles) do
       local toc = parseToc(tocFile)
       if toc.attrs.LoadOnDemand ~= '1' then
-        for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
-          doLoad(string.format('wowui/classic/AddOns/%s/%s.toc', dep, dep))
-        end
         doLoad(tocFile)
       end
     end
     -- TODO don't force load the rest of the tocs
     for _, tocFile in ipairs(tocFiles) do
-      local toc = parseToc(tocFile)
-      for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
-        doLoad(string.format('wowui/classic/AddOns/%s/%s.toc', dep, dep))
-      end
       doLoad(tocFile)
     end
   end
