@@ -617,7 +617,12 @@ local function mkBaseUIObjectTypes(api)
           else
             idx = index or 1
           end
-          return unpack(u(self).points[idx])
+          if u(self).points[idx] then
+            return unpack(u(self).points[idx])
+          else
+            api.log(1, 'returning fake point')
+            return 'CENTER', api.env.UIParent, 'CENTER', 0, 0
+          end
         end,
         GetRight = STUB_NUMBER,
         GetScale = function(self)
