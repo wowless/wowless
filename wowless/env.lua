@@ -863,6 +863,7 @@ local baseEnv = {
   abs = math.abs,
   assert = assert,
   bit = {
+    band = bitlib.band,
     bor = bitlib.bor,
   },
   ceil = math.ceil,
@@ -973,6 +974,7 @@ local function mkWowEnv(api)
     BNGetNumFriends = function()
       return 0, 0  -- UNIMPLEMENTED
     end,
+    BreakUpLargeNumbers = tostring,  -- UNIMPLEMENTED,
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
     CanBeRaidTarget = UNIMPLEMENTED,
     CanReplaceGuildMaster = UNIMPLEMENTED,
@@ -984,6 +986,7 @@ local function mkWowEnv(api)
     CombatLogGetNumEntries = STUB_NUMBER,
     CombatLogResetFilter = UNIMPLEMENTED,
     CombatLogSetCurrentEntry = UNIMPLEMENTED,
+    CombatLog_Object_IsA = UNIMPLEMENTED,
     CombatTextSetActiveUnit = UNIMPLEMENTED,
     Constants = {
       CurrencyConsts = {},
