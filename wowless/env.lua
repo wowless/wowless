@@ -669,6 +669,9 @@ local function mkBaseUIObjectTypes(api)
           u(self).isIgnoringParentAlpha = not not ignore
         end,
         SetParent = function(self, parent)
+          if type(parent) == 'string' then
+            parent = api.env[parent]
+          end
           api.SetParent(self, parent)
           UpdateVisible(self)
         end,
@@ -976,6 +979,11 @@ local function mkWowEnv(api)
     CastShapeshiftForm = UNIMPLEMENTED,
     ChangeActionBarPage = UNIMPLEMENTED,
     CollapseSkillHeader = UNIMPLEMENTED,
+    CombatLogAddFilter = UNIMPLEMENTED,
+    CombatLogGetCurrentEntry = UNIMPLEMENTED,
+    CombatLogGetNumEntries = STUB_NUMBER,
+    CombatLogResetFilter = UNIMPLEMENTED,
+    CombatLogSetCurrentEntry = UNIMPLEMENTED,
     CombatTextSetActiveUnit = UNIMPLEMENTED,
     Constants = {
       CurrencyConsts = {},
@@ -1006,6 +1014,9 @@ local function mkWowEnv(api)
       IsSpectating = UNIMPLEMENTED,
       SetFollowCameraSpeeds = UNIMPLEMENTED,
       SetMouseDisabled = UNIMPLEMENTED,
+    },
+    C_Console = {
+      SetFontHeight = UNIMPLEMENTED,
     },
     C_CurrencyInfo = {
       GetCurrencyInfo = STUB_TABLE,
