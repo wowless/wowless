@@ -420,9 +420,14 @@ local function loader(api)
 
   local function loadToc(tocFile)
     api.log(1, 'loading toc %s', tocFile)
-    local addon = tocFile:find('/AddOns/') and forAddon(path.basename(tocFile), {}) or forAddon()
+    local isAddon = tocFile:find('/AddOns/')
+    local tocBase = path.basename(tocFile):sub(1, -5)
+    local addon = isAddon and forAddon(tocBase, {}) or forAddon()
     for _, file in ipairs(parseToc(tocFile).files) do
       addon.loadFile(file)
+    end
+    if isAddon then
+      api.SendEvent('ADDON_LOADED', tocBase)
     end
   end
 
