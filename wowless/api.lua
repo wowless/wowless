@@ -62,7 +62,7 @@ local function new(log)
     end
   end
 
-  local function CreateUIObject(typename, objnamearg, parent, ...)
+  local function CreateUIObject(typename, objnamearg, parent, addonEnv, ...)
     local objname = ParentSub(objnamearg, parent)
     assert(typename, 'must specify type for ' .. tostring(objname))
     local type = uiobjectTypes[typename]
@@ -87,6 +87,9 @@ local function new(log)
         log(1, 'overwriting global ' .. objname)
       end
       env[objname] = obj
+      if addonEnv then
+        addonEnv[objname] = obj
+      end
     end
     for _, template in ipairs({...}) do
       log(4, 'initializing children for ' .. tostring(template.name))

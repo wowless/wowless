@@ -945,7 +945,7 @@ local function mkWowEnv(api)
       assert(template, 'unknown template ' .. templateName)
       table.insert(templates, template)
     end
-    return api.CreateUIObject(ltype, name, parent, unpack(templates))
+    return api.CreateUIObject(ltype, name, parent, nil, unpack(templates))
   end
   return {
     AntiAliasingSupported = UNIMPLEMENTED,

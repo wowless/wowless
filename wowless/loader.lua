@@ -352,11 +352,7 @@ local function loader(api)
                   withContext(true, scriptsUseGivenEnv).loadElements(e.kids, obj)
                 end,
               })
-              local obj = api.CreateUIObject(e.type, name, parent, unpack(templates))
-              if scriptsUseGivenEnv and name then
-                addonEnv[name] = obj
-              end
-              return obj
+              return api.CreateUIObject(e.type, name, parent, scriptsUseGivenEnv and addonEnv or nil, unpack(templates))
             end
           else
             local fn = xmllang[e.type]
