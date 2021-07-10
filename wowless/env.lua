@@ -935,6 +935,18 @@ local function mkMetaEnv(api)
 end
 
 local function mkWowEnv(api)
+  local function CreateFrame(type, name, parent, templateNames)
+    local ltype = string.lower(type)
+    assert(api.IsIntrinsicType(ltype), type .. ' is not intrinsic')
+    assert(api.InheritsFrom(ltype, 'frame'), type .. ' does not inherit from frame')
+    local templates = {}
+    for templateName in string.gmatch(templateNames or '', '[^, ]+') do
+      local template = api.templates[string.lower(templateName)]
+      assert(template, 'unknown template ' .. templateName)
+      table.insert(templates, template)
+    end
+    return api.CreateUIObject(ltype, name, parent, unpack(templates))
+  end
   return {
     AntiAliasingSupported = UNIMPLEMENTED,
     BankButtonIDToInvSlotID = STUB_NUMBER,
@@ -960,18 +972,8 @@ local function mkWowEnv(api)
     CreateFont = function(name)
       return api.CreateUIObject('font', name)
     end,
-    CreateFrame = function(type, name, parent, templateNames)
-      local ltype = string.lower(type)
-      assert(api.IsIntrinsicType(ltype), type .. ' is not intrinsic')
-      assert(api.InheritsFrom(ltype, 'frame'), type .. ' does not inherit from frame')
-      local templates = {}
-      for templateName in string.gmatch(templateNames or '', '[^, ]+') do
-        local template = api.templates[string.lower(templateName)]
-        assert(template, 'unknown template ' .. templateName)
-        table.insert(templates, template)
-      end
-      return api.CreateUIObject(ltype, name, parent, unpack(templates))
-    end,
+    CreateForbiddenFrame = CreateFrame,
+    CreateFrame = CreateFrame,
     CursorHasItem = UNIMPLEMENTED,
     C_AreaPoiInfo = {
       GetAreaPOIForMap = STUB_TABLE,
