@@ -234,6 +234,7 @@ local function mkBaseUIObjectTypes(api)
       constructor = function(self)
         u(self).editboxText = ''
         u(self).isAutoFocus = true
+        u(self).isCountInvisibleLetters = false
         u(self).isMultiLine = false
         u(self).maxLetters = 64  -- TODO validate this default
       end,
@@ -253,11 +254,17 @@ local function mkBaseUIObjectTypes(api)
         IsAutoFocus = function(self)
           return u(self).isAutoFocus
         end,
+        IsCountInvisibleLetters = function(self)
+          return u(self).isCountInvisibleLetters
+        end,
         IsMultiLine = function(self)
           return u(self).isMultiLine
         end,
         SetAutoFocus = function(self, value)
           u(self).isAutoFocus = not not value
+        end,
+        SetCountInvisibleLetters = function(self, value)
+          u(self).isCountInvisibleLetters = not not value
         end,
         SetFocus = UNIMPLEMENTED,
         SetMaxLetters = function(self, value)
@@ -970,6 +977,7 @@ local function mkWowEnv(api)
     CastShapeshiftForm = UNIMPLEMENTED,
     ChangeActionBarPage = UNIMPLEMENTED,
     CollapseSkillHeader = UNIMPLEMENTED,
+    CombatTextSetActiveUnit = UNIMPLEMENTED,
     Constants = {
       CurrencyConsts = {},
     },
@@ -1091,7 +1099,9 @@ local function mkWowEnv(api)
     C_MapExplorationInfo = {
       GetExploredMapTextures = STUB_TABLE,
     },
-    C_ModelInfo = {},
+    C_ModelInfo = {
+      GetModelSceneInfoByID = UNIMPLEMENTED,
+    },
     C_NamePlate = {
       GetNamePlates = STUB_TABLE,
       GetNumNamePlateMotionTypes = STUB_NUMBER,
@@ -1371,6 +1381,7 @@ local function mkWowEnv(api)
       return 0  -- UNIMPLEMENTED
     end,
     GetNumLanguages = STUB_NUMBER,
+    GetNumMacros = STUB_NUMBER,
     GetNumQuestLeaderBoards = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -1460,6 +1471,10 @@ local function mkWowEnv(api)
     GetTitleName = UNIMPLEMENTED,
     GetTotemInfo = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
+    GetTradeSkillInvSlotFilter = UNIMPLEMENTED,
+    GetTradeSkillInvSlots = UNIMPLEMENTED,
+    GetTradeSkillSubClasses = UNIMPLEMENTED,
+    GetTradeSkillSubClassFilter = UNIMPLEMENTED,
     GetWeaponEnchantInfo = UNIMPLEMENTED,
     GetWebTicket = UNIMPLEMENTED,
     GetXPExhaustion = UNIMPLEMENTED,
