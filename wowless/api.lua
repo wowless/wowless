@@ -49,14 +49,15 @@ local function new(log)
   end
 
   local function RunScript(obj, name, ...)
-    if obj.GetScript then
+    local ud = userdata[obj]
+    if ud.scripts then
       local args = {...}
       for i = 0, 2 do
-        local script = obj:GetScript(name, i)
+        local script = ud.scripts[i][string.lower(name)]
         if script then
-          log(4, 'begin %s[%d] for %s %s', name, i, obj:GetObjectType(), tostring(obj:GetName()))
+          log(4, 'begin %s[%d] for %s %s', name, i, ud.type, tostring(ud.name))
           CallSafely(function() script(obj, unpack(args)) end)
-          log(4, 'end %s[%d] for %s %s', name, i, obj:GetObjectType(), tostring(obj:GetName()))
+          log(4, 'end %s[%d] for %s %s', name, i, ud.type, tostring(ud.name))
         end
       end
     end
@@ -103,8 +104,9 @@ local function new(log)
   end
 
   local function SetScript(obj, name, bindingType, script)
-    log(4, 'setting %s[%d] for %s %s', name, bindingType, obj:GetObjectType(), tostring(obj:GetName()))
-    userdata[obj].scripts[bindingType][string.lower(name)] = script
+    local ud = userdata[obj]
+    log(4, 'setting %s[%d] for %s %s', name, bindingType, ud.type, tostring(ud.name))
+    ud.scripts[bindingType][string.lower(name)] = script
   end
 
   local function SendEvent(event, ...)
