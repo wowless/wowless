@@ -201,13 +201,16 @@ local function loader(api)
                     error('invalid inherit tag on script')
                   end
                 end
+                assert(not script.intrinsicorder or parent.__intrinsicHack, 'intrinsicOrder on non-intrinsic')
                 local bindingType = 1
                 if script.intrinsicorder == 'precall' then
                   bindingType = 0
                 elseif script.intrinsicorder == 'postcall' then
                   bindingType = 2
-                else
-                  assert(script.intrinsicorder == nil, 'invalid intrinsicOrder tag on script')
+                elseif script.intrinsicorder then
+                  error('invalid intrinsicOrder tag on script')
+                elseif parent.__intrinsicHack then
+                  bindingType = 0
                 end
                 api.SetScript(obj, script.type, bindingType, fn)
               end
@@ -309,7 +312,9 @@ local function loader(api)
                 constructor = function(self, xmlattr)
                   base.constructor(self, xmlattr)
                   initAttrs(self)
+                  self.__intrinsicHack = true
                   initKids(self)
+                  self.__intrinsicHack = nil
                 end,
                 inherits = { basetype },
                 metatable = { __index = base.metatable.__index },
