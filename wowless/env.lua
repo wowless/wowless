@@ -859,6 +859,14 @@ local function mkBaseUIObjectTypes(api)
   })
 end
 
+local function stringFormat(fmt, ...)
+  local args = {...}
+  for i, arg in ipairs(args) do
+    fmt = fmt:gsub('%%' .. i .. '%$', arg)
+  end
+  return string.format(fmt, ...)
+end
+
 local baseEnv = {
   abs = math.abs,
   assert = assert,
@@ -868,7 +876,7 @@ local baseEnv = {
   },
   ceil = math.ceil,
   floor = math.floor,
-  format = string.format,
+  format = stringFormat,
   getmetatable = getmetatable,
   getn = table.getn,
   gsub = string.gsub,
@@ -896,7 +904,7 @@ local baseEnv = {
   string = {
     byte = string.byte,
     find = string.find,
-    format = string.format,
+    format = stringFormat,
     gmatch = string.gmatch,
     gsub = string.gsub,
     len = string.len,
