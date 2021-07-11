@@ -336,6 +336,7 @@ local function mkBaseUIObjectTypes(api)
         u(self).mouseMotionEnabled = true
         u(self).mouseWheelEnabled = false
         u(self).movable = false
+        u(self).registeredAllEvents = false
         u(self).registeredEvents = {}
         u(self).resizable = false
       end,
@@ -415,6 +416,9 @@ local function mkBaseUIObjectTypes(api)
           return u(self).isUserPlaced
         end,
         Raise = UNIMPLEMENTED,
+        RegisterAllEvents = function(self)
+          u(self).registeredAllEvents = true
+        end,
         RegisterEvent = function(self, event)
           u(self).registeredEvents[string.lower(event)] = true
         end,
@@ -471,6 +475,7 @@ local function mkBaseUIObjectTypes(api)
           u(self).isUserPlaced = not not value
         end,
         UnregisterAllEvents = function(self)
+          u(self).registeredAllEvents = false
           util.twipe(u(self).registeredEvents)
         end,
         UnregisterEvent = function(self, event)

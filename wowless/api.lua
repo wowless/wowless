@@ -108,8 +108,10 @@ local function new(log)
   end
 
   local function SendEvent(event, ...)
+    local ev = string.lower(event)
     for _, frame in ipairs(frames) do
-      if userdata[frame].registeredEvents[string.lower(event)] then
+      local ud = userdata[frame]
+      if ud.registeredEvents[ev] or ud.registeredAllEvents then
         RunScript(frame, 'OnEvent', event, ...)
       end
     end
