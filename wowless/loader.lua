@@ -31,7 +31,11 @@ local function loader(api)
     local function loadXml(filename, xmlstr)
       local dir = path.dirname(filename)
 
-      local function withContext(ignoreVirtual, scriptsUseGivenEnv)
+      local function usingContext(ctx)
+
+        local function withContext(update)
+          return usingContext(mixin({}, ctx, update))
+        end
 
         local loadElement
 
@@ -142,7 +146,7 @@ local function loader(api)
             end
           end,
           scopedmodifier = function(e, parent)
-            withContext(ignoreVirtual, e.attr.scriptsusegivenenv).loadElements(e.kids, parent)
+            withContext({ useAddonEnv = e.attr.scriptsusegivenenv }).loadElements(e.kids, parent)
           end,
           script = function(e)
             if e.file then
@@ -159,7 +163,7 @@ local function loader(api)
               local fn
               if script.func then
                 local fnattr = script.func
-                local env = scriptsUseGivenEnv and addonEnv or api.env
+                local env = ctx.useAddonEnv and addonEnv or api.env
                 fn = function(...)
                   assert(env[fnattr], 'unknown script function ' .. fnattr)
                   env[fnattr](...)
@@ -282,7 +286,7 @@ local function loader(api)
             for _, inh in ipairs(e.attr.inherits or {}) do
               api.templates[string.lower(inh)].initKids(obj)
             end
-            withContext(true, scriptsUseGivenEnv).loadElements(e.kids, obj)
+            withContext({ ignoreVirtual = true }).loadElements(e.kids, obj)
           end
         end
 
@@ -311,7 +315,7 @@ local function loader(api)
                 metatable = { __index = base.metatable.__index },
                 name = e.attr.name,
               }
-            elseif virtual and not ignoreVirtual then
+            elseif virtual and not ctx.ignoreVirtual then
               assert(e.attr.name, 'cannot create anonymous template')
               local name = string.lower(e.attr.name)
               if api.templates[name] then
@@ -325,7 +329,7 @@ local function loader(api)
               }
             else
               local name = e.attr.name
-              if virtual and ignoreVirtual then
+              if virtual and ctx.ignoreVirtual then
                 api.log(1, 'ignoring virtual on ' .. tostring(name))
               end
               local templates = {}
@@ -349,10 +353,10 @@ local function loader(api)
                   end
                 end,
                 initKids = function(obj)
-                  withContext(true, scriptsUseGivenEnv).loadElements(e.kids, obj)
+                  withContext({ ignoreVirtual = true }).loadElements(e.kids, obj)
                 end,
               })
-              return api.CreateUIObject(e.type, name, parent, scriptsUseGivenEnv and addonEnv or nil, unpack(templates))
+              return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, unpack(templates))
             end
           else
             local fn = xmllang[e.type]
@@ -370,7 +374,11 @@ local function loader(api)
       return api.CallSafely(function()
         local root = xml.validate(xmlstr)
         assert(root.type == 'ui' or root.type == 'bindings')
-        withContext(false, false).loadElements(root.kids)
+        local ctx = {
+          ignoreVirtual = false,
+          useAddonEnv = false,
+        }
+        usingContext(ctx).loadElements(root.kids)
       end)
     end
 
