@@ -3,3 +3,7 @@ exclude_files = {
   'tainted-lua/',
   'wowui/',
 }
+read_globals = {
+  'issecure',
+  'securecall',
+}
