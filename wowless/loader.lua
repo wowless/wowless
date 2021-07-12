@@ -431,16 +431,22 @@ local function loader(api)
     return { attrs = attrs, files = files }
   end
 
+  local badAddons = {
+    Blizzard_FlightMap = true,
+  }
+
   local function loadToc(tocFile)
     api.log(1, 'loading toc %s', tocFile)
     local isAddon = tocFile:find('/AddOns/')
     local tocBase = path.basename(tocFile):sub(1, -5)
-    local addon = isAddon and forAddon(tocBase, {}) or forAddon()
-    for _, file in ipairs(parseToc(tocFile).files) do
-      addon.loadFile(file)
-    end
-    if isAddon then
-      api.SendEvent('ADDON_LOADED', tocBase)
+    if not badAddons[tocBase] then
+      local addon = isAddon and forAddon(tocBase, {}) or forAddon()
+      for _, file in ipairs(parseToc(tocFile).files) do
+        addon.loadFile(file)
+      end
+      if isAddon then
+        api.SendEvent('ADDON_LOADED', tocBase)
+      end
     end
   end
 
