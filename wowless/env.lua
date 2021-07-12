@@ -1044,6 +1044,7 @@ local function mkWowEnv(api)
         NamePlateHorizontalScale = '1',
         nameplateMotion = '0',
         NamePlateVerticalScale = '1',
+        timeMgrAlarmTime = '0',
       }
       local cvars = {}
       local function GetCVar(var)
