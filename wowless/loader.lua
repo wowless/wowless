@@ -431,23 +431,16 @@ local function loader(api)
     return { attrs = attrs, files = files }
   end
 
-  local badAddons = {
-    Blizzard_FlightMap = true,
-    Blizzard_SocialUI = true,
-  }
-
   local function loadToc(tocFile)
     api.log(1, 'loading toc %s', tocFile)
     local isAddon = tocFile:find('/AddOns/')
     local tocBase = path.basename(tocFile):sub(1, -5)
-    if not badAddons[tocBase] then
-      local addon = isAddon and forAddon(tocBase, {}) or forAddon()
-      for _, file in ipairs(parseToc(tocFile).files) do
-        addon.loadFile(file)
-      end
-      if isAddon then
-        api.SendEvent('ADDON_LOADED', tocBase)
-      end
+    local addon = isAddon and forAddon(tocBase, {}) or forAddon()
+    for _, file in ipairs(parseToc(tocFile).files) do
+      addon.loadFile(file)
+    end
+    if isAddon then
+      api.SendEvent('ADDON_LOADED', tocBase)
     end
   end
 
@@ -477,8 +470,14 @@ local function loader(api)
       end
     end
     -- TODO don't force load the rest of the tocs
+    local badAddons = {
+      Blizzard_FlightMap = true,
+      Blizzard_SocialUI = true,
+    }
     for _, tocFile in ipairs(tocFiles) do
-      doLoad(tocFile)
+      if not badAddons[path.basename(tocFile):sub(1, -5)] then
+        doLoad(tocFile)
+      end
     end
   end
 
