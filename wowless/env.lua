@@ -41,25 +41,28 @@ local function mkBaseUIObjectTypes(api)
   local function flatten(types)
     local result = {}
     local function flattenOne(k)
-      if not result[k] then
+      local lk = string.lower(k)
+      if not result[lk] then
         local ty = types[k]
+        local inherits = {}
         local metaindex = Mixin({}, ty.mixin)
         for _, inh in ipairs(ty.inherits) do
           flattenOne(inh)
-          Mixin(metaindex, result[inh].metatable.__index)
+          table.insert(inherits, string.lower(inh))
+          Mixin(metaindex, result[string.lower(inh)].metatable.__index)
         end
-        result[k] = {
+        result[lk] = {
           constructor = function(self)
-            for _, inh in ipairs(ty.inherits) do
+            for _, inh in ipairs(inherits) do
               result[inh].constructor(self)
             end
             if ty.constructor then
               ty.constructor(self)
             end
           end,
-          inherits = ty.inherits,
+          inherits = inherits,
           metatable = { __index = metaindex },
-          name = ty.name,
+          name = k,
         }
       end
     end
@@ -70,27 +73,24 @@ local function mkBaseUIObjectTypes(api)
   end
 
   return flatten({
-    actor = {
-      inherits = {'parentedobject', 'scriptobject'},
-      name = 'Actor',
+    Actor = {
+      inherits = {'ParentedObject', 'ScriptObject'},
     },
-    animationgroup = {
-      inherits = {'parentedobject', 'scriptobject'},
+    AnimationGroup = {
+      inherits = {'ParentedObject', 'ScriptObject'},
       mixin = {
         IsPlaying = UNIMPLEMENTED,
         Play = UNIMPLEMENTED,
         Stop = UNIMPLEMENTED,
       },
-      name = 'AnimationGroup',
     },
-    browser = {
-      inherits = {'frame'},
+    Browser = {
+      inherits = {'Frame'},
       mixin = {
         NavigateHome = UNIMPLEMENTED,
       },
-      name = 'Browser',
     },
-    button = {
+    Button = {
       constructor = function(self)
         u(self).beingClicked = false
         u(self).buttonLocked = false
@@ -99,7 +99,7 @@ local function mkBaseUIObjectTypes(api)
         u(self).fontstring = m(self, 'CreateFontString')
         u(self).registeredClicks = { LeftButtonUp = true }
       end,
-      inherits = {'frame'},
+      inherits = {'Frame'},
       mixin = {
         Click = function(self, button, down)
           local ud = u(self)
@@ -179,13 +179,12 @@ local function mkBaseUIObjectTypes(api)
         SetText = UNIMPLEMENTED,
         UnlockHighlight = UNIMPLEMENTED,
       },
-      name = 'Button',
     },
-    checkbutton = {
+    CheckButton = {
       constructor = function(self)
         u(self).checked = false
       end,
-      inherits = {'button'},
+      inherits = {'Button'},
       mixin = {
         GetChecked = function(self)
           return u(self).checked
@@ -206,10 +205,9 @@ local function mkBaseUIObjectTypes(api)
           u(self).disabledCheckedTexture = toTexture(self, tex)
         end,
       },
-      name = 'CheckButton',
     },
-    cooldown = {
-      inherits = {'frame'},
+    Cooldown = {
+      inherits = {'Frame'},
       mixin = {
         Clear = UNIMPLEMENTED,
         SetBlingTexture = function(self, tex)
@@ -224,13 +222,11 @@ local function mkBaseUIObjectTypes(api)
           u(self).swipeTexture = toTexture(self, tex)
         end,
       },
-      name = 'Cooldown',
     },
-    dressupmodel = {
-      inherits = {'playermodel'},
-      name = 'DressUpModel',
+    DressUpModel = {
+      inherits = {'PlayerModel'},
     },
-    editbox = {
+    EditBox = {
       constructor = function(self)
         u(self).editboxText = ''
         u(self).isAutoFocus = true
@@ -238,7 +234,7 @@ local function mkBaseUIObjectTypes(api)
         u(self).isMultiLine = false
         u(self).maxLetters = 64  -- TODO validate this default
       end,
-      inherits = {'fontinstance', 'frame'},
+      inherits = {'FontInstance', 'Frame'},
       mixin = {
         ClearFocus = UNIMPLEMENTED,
         GetInputLanguage = function()
@@ -282,14 +278,12 @@ local function mkBaseUIObjectTypes(api)
         end,
         SetTextInsets = UNIMPLEMENTED,
       },
-      name = 'EditBox',
     },
-    font = {
-      inherits = {'fontinstance'},
-      name = 'Font',
+    Font = {
+      inherits = {'FontInstance'},
     },
-    fontinstance = {
-      inherits = {'uiobject'},
+    FontInstance = {
+      inherits = {'UIObject'},
       mixin = {
         GetFont = UNIMPLEMENTED,
         GetShadowOffset = STUB_NUMBER,
@@ -306,10 +300,9 @@ local function mkBaseUIObjectTypes(api)
         SetSpacing = UNIMPLEMENTED,
         SetTextColor = UNIMPLEMENTED,
       },
-      name = 'FontInstance',
     },
-    fontstring = {
-      inherits = {'fontinstance', 'layeredregion'},
+    FontString = {
+      inherits = {'FontInstance', 'LayeredRegion'},
       mixin = {
         GetLineHeight = STUB_NUMBER,
         GetStringWidth = STUB_NUMBER,
@@ -320,9 +313,8 @@ local function mkBaseUIObjectTypes(api)
         SetText = UNIMPLEMENTED,
         SetTextHeight = UNIMPLEMENTED,
       },
-      name = 'FontString',
     },
-    frame = {
+    Frame = {
       constructor = function(self)
         table.insert(api.frames, self)
         u(self).attributes = {}
@@ -340,7 +332,7 @@ local function mkBaseUIObjectTypes(api)
         u(self).registeredEvents = {}
         u(self).resizable = false
       end,
-      inherits = {'parentedobject', 'region', 'scriptobject'},
+      inherits = {'ParentedObject', 'Region', 'ScriptObject'},
       mixin = {
         CreateFontString = function(self, name)
           return api.CreateUIObject('fontstring', name, self)
@@ -482,10 +474,9 @@ local function mkBaseUIObjectTypes(api)
           u(self).registeredEvents[string.lower(event)] = nil
         end,
       },
-      name = 'Frame',
     },
-    gametooltip = {
-      inherits = {'frame'},
+    GameTooltip = {
+      inherits = {'Frame'},
       mixin = {
         AddLine = UNIMPLEMENTED,
         FadeOut = UNIMPLEMENTED,
@@ -506,33 +497,28 @@ local function mkBaseUIObjectTypes(api)
         SetText = UNIMPLEMENTED,
         SetUnit = UNIMPLEMENTED,
       },
-      name = 'GameTooltip',
     },
-    layeredregion = {
-      inherits = {'region'},
+    LayeredRegion = {
+      inherits = {'Region'},
       mixin = {
         SetDrawLayer = UNIMPLEMENTED,
         SetVertexColor = UNIMPLEMENTED,
       },
-      name = 'LayeredRegion',
     },
-    messageframe = {
-      inherits = {'frame'},
-      name = 'MessageFrame',
+    MessageFrame = {
+      inherits = {'Frame'},
     },
-    minimap = {
-      inherits = {'frame'},
-      name = 'Minimap',
+    Minimap = {
+      inherits = {'Frame'},
     },
-    model = {
-      inherits = {'frame'},
+    Model = {
+      inherits = {'Frame'},
       mixin = {
         SetRotation = UNIMPLEMENTED,
       },
-      name = 'Model',
     },
-    modelscene = {
-      inherits = {'frame'},
+    ModelScene = {
+      inherits = {'Frame'},
       mixin = {
         GetLightDirection = function()
           return 1, 1, 1  -- UNIMPLEMENTED
@@ -543,36 +529,32 @@ local function mkBaseUIObjectTypes(api)
         SetLightDirection = UNIMPLEMENTED,
         SetLightPosition = UNIMPLEMENTED,
       },
-      name = 'ModelScene',
     },
-    offscreenframe = {
-      inherits = {'frame'},
-      name = 'OffScreenFrame',
+    OffScreenFrame = {
+      inherits = {'Frame'},
     },
-    parentedobject = {
+    ParentedObject = {
       constructor = function(self)
         u(self).children = {}
       end,
-      inherits = {'uiobject'},
+      inherits = {'UIObject'},
       mixin = {
         GetParent = function(self)
           return u(self).parent
         end,
         SetForbidden = UNIMPLEMENTED,
       },
-      name = 'ParentedObject',
     },
-    playermodel = {
-      inherits = {'model'},
+    PlayerModel = {
+      inherits = {'Model'},
       mixin = {
         RefreshCamera = UNIMPLEMENTED,
         RefreshUnit = UNIMPLEMENTED,
         SetPortraitZoom = UNIMPLEMENTED,
         SetUnit = UNIMPLEMENTED,
       },
-      name = 'PlayerModel',
     },
-    region = {
+    Region = {
       constructor = function(self)
         local ud = u(self)
         ud.alpha = 1
@@ -585,7 +567,7 @@ local function mkBaseUIObjectTypes(api)
         ud.visible = not ud.parent or u(ud.parent).visible
         ud.width = 0
       end,
-      inherits = {'parentedobject'},
+      inherits = {'ParentedObject'},
       mixin = {
         ClearAllPoints = function(self)
           util.twipe(u(self).points)
@@ -711,9 +693,8 @@ local function mkBaseUIObjectTypes(api)
           m(self, 'SetShown', true)
         end,
       },
-      name = 'Region',
     },
-    scriptobject = {
+    ScriptObject = {
       constructor = function(self)
         u(self).scripts = {
           [0] = {},
@@ -747,10 +728,9 @@ local function mkBaseUIObjectTypes(api)
           api.SetScript(self, name, 1, script)
         end,
       },
-      name = 'ScriptObject',
     },
-    scrollframe = {
-      inherits = {'frame'},
+    ScrollFrame = {
+      inherits = {'Frame'},
       mixin = {
         GetHorizontalScroll = STUB_NUMBER,
         GetVerticalScrollRange = STUB_NUMBER,
@@ -764,15 +744,13 @@ local function mkBaseUIObjectTypes(api)
         SetVerticalScroll = UNIMPLEMENTED,
         UpdateScrollChildRect = UNIMPLEMENTED,
       },
-      name = 'ScrollFrame',
     },
-    simplehtml = {
-      inherits = {'fontinstance', 'frame'},
+    SimpleHTML = {
+      inherits = {'FontInstance', 'Frame'},
       mixin = {},
-      name = 'SimpleHTML',
     },
-    slider = {
-      inherits = {'frame'},
+    Slider = {
+      inherits = {'Frame'},
       mixin = {
         Disable = UNIMPLEMENTED,
         Enable = UNIMPLEMENTED,
@@ -789,10 +767,9 @@ local function mkBaseUIObjectTypes(api)
         SetValue = UNIMPLEMENTED,
         SetValueStep = UNIMPLEMENTED,
       },
-      name = 'Slider',
     },
-    statusbar = {
-      inherits = {'frame'},
+    StatusBar = {
+      inherits = {'Frame'},
       mixin = {
         GetMinMaxValues = function()
           return 0, 0  -- UNIMPLEMENTED
@@ -815,10 +792,9 @@ local function mkBaseUIObjectTypes(api)
         end,
         SetValue = UNIMPLEMENTED,
       },
-      name = 'StatusBar',
     },
-    texture = {
-      inherits = {'layeredregion', 'parentedobject'},
+    Texture = {
+      inherits = {'LayeredRegion', 'ParentedObject'},
       mixin = {
         GetTexCoord = UNIMPLEMENTED,
         GetTexture = UNIMPLEMENTED,
@@ -831,9 +807,8 @@ local function mkBaseUIObjectTypes(api)
         SetTexture = UNIMPLEMENTED,
         SetVertTile = UNIMPLEMENTED,
       },
-      name = 'Texture',
     },
-    uiobject = {
+    UIObject = {
       inherits = {},
       mixin = {
         GetName = function(self)
@@ -844,10 +819,9 @@ local function mkBaseUIObjectTypes(api)
         end,
         IsObjectType = UNIMPLEMENTED,
       },
-      name = 'UIObject',
     },
-    unitpositionframe = {
-      inherits = {'frame'},
+    UnitPositionFrame = {
+      inherits = {'Frame'},
       mixin = {
         AddUnit = UNIMPLEMENTED,
         ClearUnits = UNIMPLEMENTED,
@@ -859,11 +833,9 @@ local function mkBaseUIObjectTypes(api)
         StartPlayerPing = UNIMPLEMENTED,
         StopPlayerPing = UNIMPLEMENTED,
       },
-      name = 'UnitPositionFrame',
     },
-    worldframe = {
-      inherits = {'frame'},
-      name = 'WorldFrame',
+    WorldFrame = {
+      inherits = {'Frame'},
     },
   })
 end
