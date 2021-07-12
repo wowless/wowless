@@ -545,6 +545,10 @@ local function mkBaseUIObjectTypes(api)
       },
       name = 'ModelScene',
     },
+    offscreenframe = {
+      inherits = {'frame'},
+      name = 'OffScreenFrame',
+    },
     parentedobject = {
       constructor = function(self)
         u(self).children = {}

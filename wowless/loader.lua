@@ -433,6 +433,7 @@ local function loader(api)
 
   local badAddons = {
     Blizzard_FlightMap = true,
+    Blizzard_SocialUI = true,
   }
 
   local function loadToc(tocFile)
