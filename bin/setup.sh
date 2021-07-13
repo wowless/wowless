@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
+python3 -m pip install -t .lua hererocks
+PYTHONPATH=.lua .lua/bin/hererocks -l 5.1 -r 3.5.0 .lua
 DIR="$PWD/.lua"
-python3 -m pip install -t "$DIR" hererocks
-PYTHONPATH="$DIR" "$DIR"/bin/hererocks -l 5.1 -r 3.5.0 "$DIR"
 (cd tainted-lua && make linux && make install INSTALL_TOP="$DIR" && make clean)
-eval $("$DIR"/bin/luarocks path)
-luarocks install luacheck
+eval $(.lua/bin/luarocks path)
+.lua/bin/luarocks install luacheck

@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
-DIR=$(dirname $0)/../.lua
-eval $($DIR/bin/luarocks path)
-luacheck .
-luarocks build --no-install
-luarocks test -- "$@"
+eval $(.lua/bin/luarocks path)
+.lua/bin/luacheck .
+.lua/bin/luarocks build --no-install
+.lua/bin/luarocks test -- "$@"
