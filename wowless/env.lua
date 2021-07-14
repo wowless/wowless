@@ -870,69 +870,71 @@ local function stringFormat(fmt, ...)
   return string.format(fmt, ...)
 end
 
-local baseEnv = {
-  abs = math.abs,
-  assert = assert,
-  bit = {
-    band = bitlib.band,
-    bor = bitlib.bor,
-  },
-  ceil = math.ceil,
-  floor = math.floor,
-  format = stringFormat,
-  getmetatable = getmetatable,
-  getn = table.getn,
-  gsub = string.gsub,
-  ipairs = ipairs,
-  math = {
+local function mkBaseEnv()
+  return {
     abs = math.abs,
+    assert = assert,
+    bit = {
+      band = bitlib.band,
+      bor = bitlib.bor,
+    },
     ceil = math.ceil,
     floor = math.floor,
+    format = stringFormat,
+    getmetatable = getmetatable,
+    getn = table.getn,
+    gsub = string.gsub,
+    ipairs = ipairs,
+    math = {
+      abs = math.abs,
+      ceil = math.ceil,
+      floor = math.floor,
+      max = math.max,
+      min = math.min,
+    },
     max = math.max,
     min = math.min,
-  },
-  max = math.max,
-  min = math.min,
-  mod = math.fmod,
-  next = next,
-  pairs = pairs,
-  pcall = pcall,
-  print = print,
-  rawget = rawget,
-  rawset = rawset,
-  select = select,
-  setfenv = setfenv,
-  setmetatable = setmetatable,
-  sort = table.sort,
-  string = {
-    byte = string.byte,
-    find = string.find,
-    format = stringFormat,
-    gmatch = string.gmatch,
-    gsub = string.gsub,
-    len = string.len,
-    lower = string.lower,
-    match = string.match,
-    rep = string.rep,
-    sub = string.sub,
-    upper = string.upper,
-  },
-  strlower = string.lower,
-  strsub = string.sub,
-  strupper = string.upper,
-  table = {
-    concat = table.concat,
-    insert = table.insert,
+    mod = math.fmod,
+    next = next,
+    pairs = pairs,
+    pcall = pcall,
+    print = print,
+    rawget = rawget,
+    rawset = rawset,
+    select = select,
+    setfenv = setfenv,
+    setmetatable = setmetatable,
     sort = table.sort,
-    wipe = util.twipe,
-  },
-  tinsert = table.insert,
-  tonumber = tonumber,
-  tostring = tostring,
-  tremove = table.remove,
-  type = type,
-  unpack = unpack,
-}
+    string = {
+      byte = string.byte,
+      find = string.find,
+      format = stringFormat,
+      gmatch = string.gmatch,
+      gsub = string.gsub,
+      len = string.len,
+      lower = string.lower,
+      match = string.match,
+      rep = string.rep,
+      sub = string.sub,
+      upper = string.upper,
+    },
+    strlower = string.lower,
+    strsub = string.sub,
+    strupper = string.upper,
+    table = {
+      concat = table.concat,
+      insert = table.insert,
+      sort = table.sort,
+      wipe = util.twipe,
+    },
+    tinsert = table.insert,
+    tonumber = tonumber,
+    tostring = tostring,
+    tremove = table.remove,
+    type = type,
+    unpack = unpack,
+  }
+end
 
 local function mkMetaEnv(api)
   local __dump = (function()
@@ -1866,7 +1868,7 @@ end)()
 
 local function init(api)
   setmetatable(api.env, mkMetaEnv(api))
-  Mixin(api.env, baseEnv, fakeConstants, mkWowEnv(api), require('wowless.globalstrings'))
+  Mixin(api.env, mkBaseEnv(), fakeConstants, mkWowEnv(api), require('wowless.globalstrings'))
   Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api))
 end
 
