@@ -548,8 +548,12 @@ local function mkBaseUIObjectTypes(api)
         GetLightPosition = function()
           return 1, 1, 1  -- UNIMPLEMENTED
         end,
+        GetViewInsets = function()
+          return 1, 1, 1, 1  -- UNIMPLEMENTED
+        end,
         SetLightDirection = UNIMPLEMENTED,
         SetLightPosition = UNIMPLEMENTED,
+        SetViewInsets = UNIMPLEMENTED,
       },
     },
     OffScreenFrame = {
@@ -580,9 +584,11 @@ local function mkBaseUIObjectTypes(api)
       constructor = function(self)
         local ud = u(self)
         ud.alpha = 1
+        ud.bottom = 0
         ud.height = 0
         ud.isIgnoringParentAlpha = false
         ud.isIgnoringParentScale = false
+        ud.left = 0
         ud.points = {}
         ud.scale = 1
         ud.shown = true
@@ -597,7 +603,9 @@ local function mkBaseUIObjectTypes(api)
         GetAlpha = function(self)
           return u(self).alpha
         end,
-        GetBottom = STUB_NUMBER,
+        GetBottom = function(self)
+          return u(self).bottom
+        end,
         GetCenter = function()
           return 1, 1  -- UNIMPLEMENTED
         end,
@@ -620,7 +628,9 @@ local function mkBaseUIObjectTypes(api)
         GetHeight = function(self)
           return u(self).height
         end,
-        GetLeft = STUB_NUMBER,
+        GetLeft = function(self)
+          return u(self).left
+        end,
         GetNumPoints = function(self)
           return #u(self).points
         end,
@@ -644,14 +654,22 @@ local function mkBaseUIObjectTypes(api)
             return 'CENTER', api.env.UIParent, 'CENTER', 0, 0
           end
         end,
-        GetRight = STUB_NUMBER,
+        GetRect = function(self)
+          local ud = u(self)
+          return ud.bottom, ud.left, ud.width, ud.height
+        end,
+        GetRight = function(self)
+          return u(self).left + u(self).width
+        end,
         GetScale = function(self)
           return u(self).scale
         end,
         GetSize = function(self)
           return m(self, 'GetWidth'), m(self, 'GetHeight')
         end,
-        GetTop = STUB_NUMBER,
+        GetTop = function(self)
+          return u(self).bottom + u(self).height
+        end,
         GetWidth = function(self)
           return u(self).width
         end,
@@ -891,6 +909,7 @@ local function mkBaseEnv()
       floor = math.floor,
       max = math.max,
       min = math.min,
+      sqrt = math.sqrt,
     },
     max = math.max,
     min = math.min,
@@ -1224,6 +1243,7 @@ local function mkWowEnv(api)
       GetMasterVolumeScale = UNIMPLEMENTED,
       GetOutputVolume = UNIMPLEMENTED,
       GetVADSensitivity = UNIMPLEMENTED,
+      IsTranscriptionAllowed = UNIMPLEMENTED,
     },
     C_Widget = {},
     C_WowTokenPublic = {
@@ -1753,6 +1773,7 @@ local function mkWowEnv(api)
     SpellCanTargetItemID = UNIMPLEMENTED,
     StrafeLeftStop = UNIMPLEMENTED,
     StrafeRightStop = UNIMPLEMENTED,
+    SupportsClipCursor = UNIMPLEMENTED,
     ToggleWorldMap = UNIMPLEMENTED,
     TriggerTutorial = UNIMPLEMENTED,
     TurnLeftStop = UNIMPLEMENTED,

@@ -98,10 +98,14 @@ local function validateRoot(root)
           local cname = spec.child or name
           local kids = {}
           for _, kid in ipairs(e._children) do
-            if kid._name and lang[string.lower(kid._name)].supertypes[cname] then
-              local newkid = run(kid, tname, { [cname] = true })
-              if newkid then
-                table.insert(kids, newkid)
+            if kid._name then
+              local kty = lang[string.lower(kid._name)]
+              assert(kty, 'unknown tag ' .. kid._name)
+              if kty.supertypes[cname] then
+                local newkid = run(kid, tname, { [cname] = true })
+                if newkid then
+                  table.insert(kids, newkid)
+                end
               end
             end
           end

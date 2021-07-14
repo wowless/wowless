@@ -200,9 +200,7 @@ return {
     },
   },
   backgroundinsets = {
-    children = {
-      absinset = true,
-    },
+    extends = 'insets',
   },
   barcolor = {
     extends = 'color',
@@ -469,6 +467,7 @@ return {
     children = {
       fontstring = true,
       highlightcolor = true,
+      textinsets = true,
     },
     extends = 'frame',
   },
@@ -706,6 +705,18 @@ return {
     extends = 'texture',
   },
   hitrectinsets = {
+    extends = 'insets',
+  },
+  include = {
+    fields = {
+      file = {
+        required = true,
+        source = 'attribute',
+        type = 'string',
+      },
+    },
+  },
+  insets = {
     attributes = {
       bottom = {
         type = 'number',
@@ -723,15 +734,11 @@ return {
     children = {
       absinset = true,
     },
+    virtual = true,
   },
-  include = {
-    fields = {
-      file = {
-        required = true,
-        source = 'attribute',
-        type = 'string',
-      },
-    },
+  itembutton = {
+    -- TODO intrinsic
+    extends = 'button',
   },
   keyvalue = {
     fields = {
@@ -1481,6 +1488,9 @@ return {
     children = {
       rect = true,
     },
+  },
+  textinsets = {
+    extends = 'insets',
   },
   texture = {
     attributes = {
