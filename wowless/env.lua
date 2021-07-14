@@ -1605,6 +1605,7 @@ local function mkWowEnv(api)
     end,
     IsShiftKeyDown = UNIMPLEMENTED,
     IsStackableAction = UNIMPLEMENTED,
+    IsTestBuild = UNIMPLEMENTED,
     IsTitleKnown = UNIMPLEMENTED,
     IsTrialAccount = UNIMPLEMENTED,
     IsTutorialFlagged = UNIMPLEMENTED,
