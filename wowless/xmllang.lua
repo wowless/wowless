@@ -1523,6 +1523,9 @@ return {
     },
     extends = 'layoutframe',
   },
+  texturecoordtranslation = {
+    extends = 'animation',
+  },
   thumbtexture = {
     extends = 'texture',
   },
