@@ -979,8 +979,11 @@ local function mkWowEnv(api)
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
     CanBeRaidTarget = UNIMPLEMENTED,
     CanReplaceGuildMaster = UNIMPLEMENTED,
+    CanSendSoRByText = UNIMPLEMENTED,
+    CastingInfo = UNIMPLEMENTED,  -- TODO classic era only
     CastShapeshiftForm = UNIMPLEMENTED,
     ChangeActionBarPage = UNIMPLEMENTED,
+    ChannelInfo = UNIMPLEMENTED,  -- TODO classic era only
     CollapseSkillHeader = UNIMPLEMENTED,
     CombatLogAddFilter = UNIMPLEMENTED,
     CombatLogGetCurrentEntry = UNIMPLEMENTED,
@@ -1132,6 +1135,7 @@ local function mkWowEnv(api)
     },
     C_ProductChoice = {
       GetChoices = STUB_TABLE,
+      GetNumSuppressed = STUB_NUMBER,
     },
     C_PvP = {
       GetArenaCrowdControlInfo = UNIMPLEMENTED,
@@ -1139,6 +1143,9 @@ local function mkWowEnv(api)
     },
     C_QuestLog = {
       GetMaxNumQuests = STUB_NUMBER,
+    },
+    C_RecruitAFriend = {
+      IsSendingEnabled = UNIMPLEMENTED,
     },
     C_ScriptedAnimations = {
       GetAllScriptedAnimationEffects = STUB_TABLE,
@@ -1325,6 +1332,7 @@ local function mkWowEnv(api)
       return 'Common', 7  -- UNIMPLEMENTED
     end,
     GetDefaultVideoOptions = UNIMPLEMENTED,
+    GetExpansionLevel = UNIMPLEMENTED,
     getfenv = function(arg)
       if arg == 0 then
         return api.env
@@ -1520,6 +1528,7 @@ local function mkWowEnv(api)
     HasPetSpells = UNIMPLEMENTED,
     HasPetUI = UNIMPLEMENTED,
     HasTempShapeshiftActionBar = UNIMPLEMENTED,
+    HonorSystemEnabled = UNIMPLEMENTED,
     hooksecurefunc = function(arg1, arg2, arg3)
       local tbl, name, fn
       if arg3 ~= nil then
