@@ -10,6 +10,7 @@ dependencies = {
   'datafile',
   'lua-path',
   'serpent',
+  'wowcig',
   'xml2lua',
 }
 build = {

@@ -1,7 +1,3 @@
-[submodule "wowui/classic"]
-	path = wowui/classic
-	url = https://github.com/Gethe/wow-ui-source
-	branch = classic
 [submodule "tainted-lua"]
 	path = tainted-lua
 	url = https://github.com/Meorawr/tainted-lua
