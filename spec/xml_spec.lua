@@ -1,6 +1,6 @@
 describe('xml.lua #huge', function()
   local module = require('wowless.xml')
-  local rootDir = require('wowless.loader').frameXmlRootDir
+  local rootDir = require('wowless.loader').wowClassicRootDir
   local handle = io.popen(([[bash -c 'find %s/{SharedXML,FrameXML,AddOns} -name "*.xml"']]):format(rootDir))
   local warnings = {}
   local function check(e)

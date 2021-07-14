@@ -1,4 +1,4 @@
-local function run(loglevel)
+local function run(loglevel, version)
   local function log(level, fmt, ...)
     if level <= loglevel then
       print(string.format(fmt, ...))
@@ -6,7 +6,13 @@ local function run(loglevel)
   end
   local api = require('wowless.api').new(log)
   require('wowless.env').init(api)
-  require('wowless.loader').loader(api).loadFrameXml()
+  local loader = require('wowless.loader')
+  local rootDirs = {
+    wow = loader.wowRetailRootDir,
+    wow_classic = loader.wowClassicRootDir,
+    wow_classic_era = loader.wowClassicEraRootDir,
+  }
+  loader.loader(api).loadFrameXml(assert(rootDirs[version]))
   api.SendEvent('PLAYER_LOGIN')
   api.SendEvent('UPDATE_CHAT_WINDOWS')
   api.SendEvent('PLAYER_ENTERING_WORLD')

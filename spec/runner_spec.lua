@@ -1,7 +1,7 @@
 describe('runner', function()
   local runner = require('wowless.runner')
   it('loads', function()
-    local api = runner.run(0)
+    local api = runner.run(0, 'wow_classic')
     assert.same(2, api.GetErrorCount())
   end)
 end)

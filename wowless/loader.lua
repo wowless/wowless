@@ -1,4 +1,6 @@
-local frameXmlRootDir = 'extracts/2.5.1.39170/Interface'
+local wowClassicEraRootDir = 'extracts/1.13.7.38704/Interface'
+local wowClassicRootDir = 'extracts/2.5.1.39170/Interface'
+local wowRetailRootDir = 'extracts/9.1.0.39335/Interface'
 
 local function loader(api)
 
@@ -446,10 +448,10 @@ local function loader(api)
     end
   end
 
-  local function loadFrameXml()
-    loadToc(path.join(frameXmlRootDir, 'FrameXML/FrameXML.toc'))
+  local function loadFrameXml(rootDir)
+    loadToc(path.join(rootDir, 'FrameXML/FrameXML.toc'))
     local tocFiles = {}
-    local addonDir = path.join(frameXmlRootDir, 'AddOns')
+    local addonDir = path.join(rootDir, 'AddOns')
     local handle = io.popen(([[bash -c 'find %s -name "*.toc" | sort']]):format(addonDir))
     for line in handle:lines() do
       table.insert(tocFiles, line)
@@ -492,6 +494,8 @@ local function loader(api)
 end
 
 return {
-  frameXmlRootDir = frameXmlRootDir,
   loader = loader,
+  wowClassicEraRootDir = wowClassicEraRootDir,
+  wowClassicRootDir = wowClassicRootDir,
+  wowRetailRootDir = wowRetailRootDir,
 }
