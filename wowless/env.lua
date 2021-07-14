@@ -1028,6 +1028,8 @@ local function mkWowEnv(api)
       IsEnabled = UNIMPLEMENTED,
     },
     C_Commentator = {
+      GetMaxNumPlayersPerTeam = STUB_NUMBER,
+      GetMaxNumTeams = STUB_NUMBER,
       IsSpectating = UNIMPLEMENTED,
       SetFollowCameraSpeeds = UNIMPLEMENTED,
       SetMouseDisabled = UNIMPLEMENTED,
@@ -1078,6 +1080,7 @@ local function mkWowEnv(api)
     },
     C_GamePad = {},
     C_GossipInfo = {
+      GetGossipPoiForUiMapID = UNIMPLEMENTED,
       GetPoiForUiMapID = UNIMPLEMENTED,
     },
     C_GuildInfo = {
@@ -1262,6 +1265,7 @@ local function mkWowEnv(api)
         NoMixedAlliance = 29,
         PendingItemAudit = 30,
         PvEToPvPTransferNotAllowed = 31,
+        PveToPvpTransferNotAllowed = 31,  -- case insensitive?
         RaceClassComboIneligible = 32,
         RealmNotEligible = 33,
         TooMuchMoneyForLevel = 34,
@@ -1515,7 +1519,9 @@ local function mkWowEnv(api)
       return 0, 0  -- UNIMPLEMENTED
     end,
     GetTabardCreationCost = STUB_NUMBER,
-    GetText = UNIMPLEMENTED,
+    GetText = function(token)
+      return 'GetText(' .. token .. ')'  -- UNIMPLEMENTED
+    end,
     GetTime = STUB_NUMBER,
     GetTitleName = UNIMPLEMENTED,
     GetTotemInfo = UNIMPLEMENTED,

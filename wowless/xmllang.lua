@@ -948,6 +948,9 @@ return {
   minresize = {
     extends = 'dimension',
   },
+  model = {
+    extends = 'frame',
+  },
   modelscene = {
     children = {
       viewinsets = true,
