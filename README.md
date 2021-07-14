@@ -17,3 +17,5 @@ The above will:
   * mess around with the frames created: click around, mouse over things, etc.
 
 The loading and testing work for Classic and Classic Era, but do not yet work for Retail. To see the litany of errors caused by Retail, run `bin/try.sh 0 wow`, and then help fix the resulting issues!
+
+[wowcig]: https://github.com/ferronn-dev/wowcig
