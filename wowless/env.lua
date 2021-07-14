@@ -1353,6 +1353,7 @@ local function mkWowEnv(api)
     GetBattlefieldFlagPosition = UNIMPLEMENTED,
     GetBattlefieldStatus = UNIMPLEMENTED,
     GetBidderAuctionItems = UNIMPLEMENTED,
+    GetBinding = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
     GetBindingText = UNIMPLEMENTED,
     GetChatTypeIndex = STUB_NUMBER,
@@ -1478,9 +1479,7 @@ local function mkWowEnv(api)
       return 0  -- UNIMPLEMENTED
     end,
     GetNumBattlefieldFlagPositions = STUB_NUMBER,
-    GetNumBindings = function()
-      return 0  -- UNIMPLEMENTED
-    end,
+    GetNumBindings = STUB_NUMBER,
     GetNumLanguages = STUB_NUMBER,
     GetNumMacros = STUB_NUMBER,
     GetNumQuestLeaderBoards = function()
@@ -1861,6 +1860,7 @@ end
 
 local fakeConstants = (function()
   local names = {
+    'BINDING_HEADER_MOVEMENT',
     'LE_ACTIONBAR_STATE_MAIN',
     'LE_AUTOCOMPLETE_PRIORITY_ACCOUNT_CHARACTER',
     'LE_AUTOCOMPLETE_PRIORITY_ACCOUNT_CHARACTER_SAME_REALM',
