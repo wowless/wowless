@@ -1538,7 +1538,10 @@ local function mkWowEnv(api)
     InRepairMode = UNIMPLEMENTED,
     IsResting = UNIMPLEMENTED,
     IsRestrictedAccount = UNIMPLEMENTED,
-    issecure = issecure,  -- tainted-lua
+    issecure = function()
+      -- use tainted-lua if available
+      return issecure and issecure() or true
+    end,
     IsShiftKeyDown = UNIMPLEMENTED,
     IsStackableAction = UNIMPLEMENTED,
     IsTitleKnown = UNIMPLEMENTED,
@@ -1618,7 +1621,12 @@ local function mkWowEnv(api)
         assert(api.env[func], 'securecall of unknown function ' .. func)
         func = api.env[func]
       end
-      return securecall(func, ...)  -- tainted-lua
+      -- use tainted-lua if available
+      if securecall then
+        return securecall(func, ...)
+      else
+        return func(...)
+      end
     end,
     SelectGossipOption = UNIMPLEMENTED,
     SelectQuestLogEntry = UNIMPLEMENTED,
