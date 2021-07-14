@@ -1121,7 +1121,7 @@ local function mkWowEnv(api)
         return {
           flags = 0,
           mapID = uiMapID,
-          mapType = api.env.Enum.UIMapType.Cosmic,
+          mapType = api.env.Enum.UIMapType.World,
           name = 'TheMap',
           parentMapID = 0,
         }
@@ -1232,6 +1232,11 @@ local function mkWowEnv(api)
         ConsumableTokenOwned = 10,
         TooManyTokens = 11,
         ItemUnavailable = 12,
+      },
+      UIMapType = {
+        Continent = 0,
+        Cosmic = 0,
+        World = 0,
       },
       VasError = {
         AllianceNotEligible = 1,
