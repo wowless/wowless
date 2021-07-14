@@ -1,3 +1,5 @@
+local frameXmlRootDir = 'extracts/2.5.1.39170/Interface'
+
 local function loader(api)
 
   local path = require('path')
@@ -445,9 +447,10 @@ local function loader(api)
   end
 
   local function loadFrameXml()
-    loadToc(require('datafile').path('wowui/classic/FrameXML/FrameXML.toc'))
+    loadToc(path.join(frameXmlRootDir, 'FrameXML/FrameXML.toc'))
     local tocFiles = {}
-    local handle = io.popen([[bash -c 'find wowui/classic/AddOns -name "*.toc" | sort']])
+    local addonDir = path.join(frameXmlRootDir, 'AddOns')
+    local handle = io.popen(([[bash -c 'find %s -name "*.toc" | sort']]):format(addonDir))
     for line in handle:lines() do
       table.insert(tocFiles, line)
     end
@@ -457,7 +460,7 @@ local function loader(api)
       if not loaded[tocFile] then
         local toc = parseToc(tocFile)
         for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
-          doLoad(string.format('wowui/classic/AddOns/%s/%s.toc', dep, dep))
+          doLoad(string.format('%s/%s/%s.toc', addonDir, dep, dep))
         end
         loadToc(tocFile)
         loaded[tocFile] = true
@@ -489,5 +492,6 @@ local function loader(api)
 end
 
 return {
+  frameXmlRootDir = frameXmlRootDir,
   loader = loader,
 }

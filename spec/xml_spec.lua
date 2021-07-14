@@ -1,6 +1,7 @@
 describe('xml.lua #huge', function()
   local module = require('wowless.xml')
-  local handle = io.popen([[bash -c 'find wowui/classic/{SharedXML,FrameXML,AddOns} -name "*.xml"']])
+  local rootDir = require('wowless.loader').frameXmlRootDir
+  local handle = io.popen(([[bash -c 'find %s/{SharedXML,FrameXML,AddOns} -name "*.xml"']]):format(rootDir))
   local warnings = {}
   local function check(e)
     assert.same('table', type(e))
@@ -41,45 +42,45 @@ describe('xml.lua #huge', function()
   for line in handle:lines() do
     it('handles ' .. line, function()
       local r, w = module.validate(readFile(line))
-      warnings[line] = next(w) and w or nil
+      warnings[line:sub(#rootDir + 2)] = next(w) and w or nil
       check(r)
     end)
   end
   handle:close()
   it('has known warnings', function()
     local known = {
-      ['wowui/classic/AddOns/Blizzard_Commentator/Bindings.xml'] = {
+      ['AddOns/Blizzard_Commentator/Bindings.xml'] = {
         'ignoring text kid of bindings',
       },
-      ['wowui/classic/AddOns/Blizzard_Commentator/Blizzard_CommentatorScoreboard.xml'] = {
+      ['AddOns/Blizzard_Commentator/Blizzard_CommentatorScoreboard.xml'] = {
         'attribute setToFinalAlpha is not supported by alpha',
         'attribute setToFinalAlpha is not supported by alpha',
       },
-      ['wowui/classic/AddOns/Blizzard_Communities/CommunitiesInvitationFrame.xml'] = {
+      ['AddOns/Blizzard_Communities/CommunitiesInvitationFrame.xml'] = {
         'attribute relaitvePoint is not supported by anchor',
       },
-      ['wowui/classic/AddOns/Blizzard_ItemSocketingUI/Blizzard_ItemSocketingUI.xml'] = {
+      ['AddOns/Blizzard_ItemSocketingUI/Blizzard_ItemSocketingUI.xml'] = {
         'ignoring text kid of frame',
       },
-      ['wowui/classic/AddOns/Blizzard_SharedMapDataProviders/WorldQuestDataProvider.xml'] = {
+      ['AddOns/Blizzard_SharedMapDataProviders/WorldQuestDataProvider.xml'] = {
         'attribute textureSubLevel is not supported by texture',
       },
-      ['wowui/classic/AddOns/Blizzard_SocialUI/Blizzard_SocialUI.xml'] = {
+      ['AddOns/Blizzard_SocialUI/Blizzard_SocialUI.xml'] = {
         'ignoring text kid of texture',
       },
-      ['wowui/classic/FrameXML/ContainerFrame.xml'] = {
+      ['FrameXML/ContainerFrame.xml'] = {
         'scripts cannot be a child of texture',
       },
-      ['wowui/classic/FrameXML/FriendsFrame.xml'] = {
+      ['FrameXML/FriendsFrame.xml'] = {
         'attribute pointG is not supported by anchor',
       },
-      ['wowui/classic/FrameXML/PetPaperDollFrame.xml'] = {
+      ['FrameXML/PetPaperDollFrame.xml'] = {
         'ignoring text kid of scripts',
         'ignoring text kid of scripts',
         'ignoring text kid of scripts',
         'ignoring text kid of scripts',
       },
-      ['wowui/classic/FrameXML/WorldStateFrame.xml'] = {
+      ['FrameXML/WorldStateFrame.xml'] = {
         'ignoring text kid of scripts',
       },
     }

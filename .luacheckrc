@@ -3,7 +3,6 @@ exclude_files = {
   'cache/',
   'extracts/',
   'tainted-lua/',
-  'wowui/',
 }
 read_globals = {
   'issecure',

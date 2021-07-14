@@ -7,7 +7,6 @@ source = {
 dependencies = {
   'lua = 5.1',
   'bitlib',
-  'datafile',
   'lua-path',
   'serpent',
   'wowcig',
@@ -26,8 +25,5 @@ build = {
       ['wowless.xml'] = 'wowless/xml.lua',
       ['wowless.xmllang'] = 'wowless/xmllang.lua',
     },
-  },
-  copy_directories = {
-    'wowui',
   },
 }
