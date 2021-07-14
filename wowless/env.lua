@@ -159,6 +159,7 @@ local function mkBaseUIObjectTypes(api)
           u(self).buttonLocked = not not locked
           u(self).buttonState = state
         end,
+        SetDisabledAtlas = UNIMPLEMENTED,
         SetDisabledFontObject = UNIMPLEMENTED,
         SetDisabledTexture = function(self, tex)
           u(self).disabledTexture = toTexture(self, tex)
@@ -1660,6 +1661,28 @@ local function mkWowEnv(api)
     IsVeteranTrialAccount = UNIMPLEMENTED,
     IsWindowsClient = UNIMPLEMENTED,
     LE_BAG_FILTER_FLAG_EQUIPMENT = 2,
+    LE_GAME_ERR_ABILITY_COOLDOWN = 1,
+    LE_GAME_ERR_OUT_OF_ARCANE_CHARGES = 5,
+    LE_GAME_ERR_OUT_OF_CHI = 6,
+    LE_GAME_ERR_OUT_OF_COMBO_POINTS = 7,
+    LE_GAME_ERR_OUT_OF_ENERGY = 8,
+    LE_GAME_ERR_OUT_OF_FOCUS = 9,
+    LE_GAME_ERR_OUT_OF_FURY = 10,
+    LE_GAME_ERR_OUT_OF_HEALTH = 11,
+    LE_GAME_ERR_OUT_OF_HOLY_POWER = 12,
+    LE_GAME_ERR_OUT_OF_INSANITY = 13,
+    LE_GAME_ERR_OUT_OF_LUNAR_POWER = 14,
+    LE_GAME_ERR_OUT_OF_MAELSTROM = 15,
+    LE_GAME_ERR_OUT_OF_MANA = 16,
+    LE_GAME_ERR_OUT_OF_PAIN = 17,
+    LE_GAME_ERR_OUT_OF_POWER_DISPLAY = 18,
+    LE_GAME_ERR_OUT_OF_RAGE = 19,
+    LE_GAME_ERR_OUT_OF_RANGE = 20,
+    LE_GAME_ERR_OUT_OF_RUNES = 21,
+    LE_GAME_ERR_OUT_OF_RUNIC_POWER = 22,
+    LE_GAME_ERR_OUT_OF_SOUL_SHARDS = 23,
+    LE_GAME_ERR_SPELL_COOLDOWN = 24,
+    LE_GAME_ERR_SPELL_FAILED_ANOTHER_IN_PROGRESS = 25,
     LE_EXPANSION_BURNING_CRUSADE = 2,  -- UNIMPLEMENTED
     LE_INVENTORY_TYPE_BODY_TYPE = 1,
     LE_INVENTORY_TYPE_CHEST_TYPE = 2,
