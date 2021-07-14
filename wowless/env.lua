@@ -238,6 +238,7 @@ local function mkBaseUIObjectTypes(api)
     EditBox = {
       constructor = function(self)
         u(self).editboxText = ''
+        u(self).enabled = true
         u(self).isAutoFocus = true
         u(self).isCountInvisibleLetters = false
         u(self).isMultiLine = false
@@ -246,6 +247,12 @@ local function mkBaseUIObjectTypes(api)
       inherits = {'FontInstance', 'Frame'},
       mixin = {
         ClearFocus = UNIMPLEMENTED,
+        Disable = function(self)
+          u(self).enabled = false
+        end,
+        Enable = function(self)
+          u(self).enabled = true
+        end,
         GetInputLanguage = function()
           return 'ROMAN'  -- UNIMPLEMENTED
         end,
@@ -261,6 +268,9 @@ local function mkBaseUIObjectTypes(api)
         end,
         IsCountInvisibleLetters = function(self)
           return u(self).isCountInvisibleLetters
+        end,
+        IsEnabled = function(self)
+          return u(self).enabled
         end,
         IsMultiLine = function(self)
           return u(self).isMultiLine
