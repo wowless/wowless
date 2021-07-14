@@ -1599,6 +1599,7 @@ local function mkWowEnv(api)
     IsMacClient = UNIMPLEMENTED,
     IsModifiedClick = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
+    IsPlayerInWorld = UNIMPLEMENTED,
     IsPublicBuild = UNIMPLEMENTED,
     IsQuestWatched = UNIMPLEMENTED,
     InRepairMode = UNIMPLEMENTED,
