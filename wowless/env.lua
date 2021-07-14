@@ -434,6 +434,9 @@ local function mkBaseUIObjectTypes(api)
           u(self).attributes[name] = value
           api.RunScript(self, 'OnAttributeChanged', name, value)
         end,
+        SetBackdrop = UNIMPLEMENTED,  -- TODO classic era only
+        SetBackdropBorderColor = UNIMPLEMENTED,  -- TODO classic era only
+        SetBackdropColor = UNIMPLEMENTED,  -- TODO classic era only
         SetClampedToScreen = function(self, value)
           u(self).isClampedToScreen = not not value
         end,
@@ -1306,6 +1309,15 @@ local function mkWowEnv(api)
     GetCursorPosition = function()
       return 0, 0  -- UNIMPLEMENTED
     end,
+    GetCVar = function(name)
+      return api.env.C_CVar.GetCVar(name)
+    end,
+    GetCVarBool = function(name)
+      return api.env.C_CVar.GetCVarBool(name)
+    end,
+    GetCVarDefault = function(name)
+      return api.env.C_CVar.GetCVarDefault(name)
+    end,
     GetCVarInfo = UNIMPLEMENTED,
     GetCVarSettingValidity = UNIMPLEMENTED,
     GetDailyQuestsCompleted = STUB_NUMBER,
@@ -1605,6 +1617,7 @@ local function mkWowEnv(api)
     LE_ITEM_WEAPON_WAND = 17,
     LE_PARTY_CATEGORY_HOME = 1,
     LE_PARTY_CATEGORY_INSTANCE = 2,
+    LE_TRANSMOG_COLLECTION_TYPE_FEET = 1,  -- UNIMPLEMENTED
     LoadAddOn = function(name)
       api.log(1, 'failing to load addon ' .. name)
       return false, 'LOAD_FAILED'  -- UNIMPLEMENTED
@@ -1620,6 +1633,7 @@ local function mkWowEnv(api)
     end,
     NUM_LE_BAG_FILTER_FLAGS = 5,
     NUM_LE_ITEM_QUALITYS = 10,  -- UNIMPLEMENTED
+    NUM_LE_TRANSMOG_COLLECTION_TYPES = 0,  -- UNIMPLEMENTED
     PetHasActionBar = UNIMPLEMENTED,
     PickupContainerItem = UNIMPLEMENTED,
     PickupInventoryItem = UNIMPLEMENTED,

@@ -193,7 +193,14 @@ return {
       },
     },
     children = {
+      backgroundinsets = true,
       edgesize = true,
+      tilesize = true,
+    },
+  },
+  backgroundinsets = {
+    children = {
+      absinset = true,
     },
   },
   barcolor = {
@@ -1511,6 +1518,9 @@ return {
   },
   thumbtexture = {
     extends = 'texture',
+  },
+  tilesize = {
+    extends = 'value',
   },
   titleregion = {
     extends = 'layoutframe',
