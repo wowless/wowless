@@ -97,6 +97,8 @@ local function mkBaseUIObjectTypes(api)
         u(self).buttonState = 'NORMAL'
         u(self).enabled = true
         u(self).fontstring = m(self, 'CreateFontString')
+        u(self).pushedTextOffsetX = 0
+        u(self).pushedTextOffsetY = 0
         u(self).registeredClicks = { LeftButtonUp = true }
       end,
       inherits = {'Frame'},
@@ -132,6 +134,9 @@ local function mkBaseUIObjectTypes(api)
         end,
         GetNormalTexture = function(self)
           return u(self).normalTexture
+        end,
+        GetPushedTextOffset = function(self)
+          return u(self).pushedTextOffsetX, u(self).pushedTextOffsetY
         end,
         GetPushedTexture = function(self)
           return u(self).pushedTexture
@@ -173,6 +178,10 @@ local function mkBaseUIObjectTypes(api)
           u(self).normalTexture = toTexture(self, tex)
         end,
         SetPushedAtlas = UNIMPLEMENTED,
+        SetPushedTextOffset = function(self, x, y)
+          u(self).pushedTextOffsetX = x
+          u(self).pushedTextOffsetY = y
+        end,
         SetPushedTexture = function(self, tex)
           u(self).pushedTexture = toTexture(self, tex)
         end,
@@ -1513,6 +1522,7 @@ local function mkWowEnv(api)
     InCinematic = UNIMPLEMENTED,
     InCombatLockdown = UNIMPLEMENTED,
     IsAccountSecured = UNIMPLEMENTED,
+    IsActiveBattlefieldArena = UNIMPLEMENTED,
     IsAddOnLoaded = UNIMPLEMENTED,
     IsAddonVersionCheckEnabled = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
@@ -1567,8 +1577,15 @@ local function mkWowEnv(api)
     LE_INVENTORY_TYPE_TRINKET_TYPE = 13,
     LE_INVENTORY_TYPE_WAIST_TYPE = 14,
     LE_INVENTORY_TYPE_WRIST_TYPE = 15,
-    LE_ITEM_CLASS_WEAPON = 1,
     LE_ITEM_CLASS_ARMOR = 2,
+    LE_ITEM_CLASS_MISCELLANEOUS = 3,
+    LE_ITEM_CLASS_WEAPON = 1,
+    LE_ITEM_MISCELLANEOUS_COMPANION_PET = 1,
+    LE_ITEM_MISCELLANEOUS_HOLIDAY = 2,
+    LE_ITEM_MISCELLANEOUS_JUNK = 3,
+    LE_ITEM_MISCELLANEOUS_MOUNT = 4,
+    LE_ITEM_MISCELLANEOUS_OTHER = 5,
+    LE_ITEM_MISCELLANEOUS_REAGENT = 6,
     LE_ITEM_WEAPON_AXE1H = 1,
     LE_ITEM_WEAPON_AXE2H = 2,
     LE_ITEM_WEAPON_BOWS = 3,
