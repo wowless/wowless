@@ -1359,6 +1359,7 @@ local function mkWowEnv(api)
       return 1, 1  -- UNIMPLEMENTED
     end,
     GetGMStatus = UNIMPLEMENTED,
+    GetGMTicket = UNIMPLEMENTED,
     GetGuildRosterShowOffline = UNIMPLEMENTED,
     GetInstanceInfo = UNIMPLEMENTED,
     GetInventoryAlertStatus = UNIMPLEMENTED,
@@ -1463,7 +1464,13 @@ local function mkWowEnv(api)
       return 1024, 768
     end,
     GetPlayerTradeMoney = STUB_NUMBER,
+    GetPVPLastWeekStats = UNIMPLEMENTED,
     GetPVPLifetimeStats = UNIMPLEMENTED,
+    GetPVPRankInfo = function()
+      return 'Pariah', 0  -- UNIMPLEMENTED
+    end,
+    GetPVPRankProgress = UNIMPLEMENTED,
+    GetPVPThisWeekStats = UNIMPLEMENTED,
     GetPVPSessionStats = UNIMPLEMENTED,
     GetPVPYesterdayStats = UNIMPLEMENTED,
     GetQuestBackgroundMaterial = UNIMPLEMENTED,
@@ -1542,6 +1549,9 @@ local function mkWowEnv(api)
     GMEuropaTicketsEnabled = UNIMPLEMENTED,
     GuildControlGetNumRanks = STUB_NUMBER,
     GuildControlGetRankName = UNIMPLEMENTED,
+    GuildRoster = function()
+      return api.env.C_GuildInfo.GuildRoster()
+    end,
     HasAction = UNIMPLEMENTED,
     HasBonusActionBar = UNIMPLEMENTED,
     HasKey = UNIMPLEMENTED,
@@ -1759,6 +1769,7 @@ local function mkWowEnv(api)
     UnitPowerType = function()
       return 0, 'MANA'  -- UNIMPLEMENTED
     end,
+    UnitPVPRank = STUB_NUMBER,
     UnitRace = function()
       return 'Human', 'Human', 1  -- UNIMPLEMENTED
     end,

@@ -194,6 +194,7 @@ return {
     },
     children = {
       backgroundinsets = true,
+      bordercolor = true,
       edgesize = true,
       tilesize = true,
     },
@@ -246,6 +247,9 @@ return {
   },
   blingtexture = {
     extends = 'texture',
+  },
+  bordercolor = {
+    extends = 'color',
   },
   browser = {
     attributes = {
