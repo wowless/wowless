@@ -1233,6 +1233,7 @@ local function mkWowEnv(api)
       GetModelSceneInfoByID = UNIMPLEMENTED,
     },
     C_NamePlate = {
+      GetNamePlateForUnit = UNIMPLEMENTED,
       GetNamePlates = STUB_TABLE,
       GetNumNamePlateMotionTypes = STUB_NUMBER,
       SetNamePlateEnemySize = UNIMPLEMENTED,
@@ -1399,6 +1400,7 @@ local function mkWowEnv(api)
         ConsumableTokenOwned = 10,
         TooManyTokens = 11,
         ItemUnavailable = 12,
+        ClientRestricted = 13,
       },
       TransmogCollectionTypeMeta = {
         NumValues = 1,
@@ -1445,6 +1447,17 @@ local function mkWowEnv(api)
         RealmNotEligible = 33,
         TooMuchMoneyForLevel = 34,
         UnderMinLevelReq = 35,
+        CharacterHasVasPending = 36,
+        OperationAlreadyInProgress = 37,
+        LockedForVas = 38,
+        MoveInProgress = 39,
+        AlreadyRenameFlagged = 40,
+        GuildRankInsufficient = 41,
+        CharacterWithoutGuild = 42,
+        GmSeniorityInsufficient = 43,
+        AuthenticatorInsufficient = 44,
+        NewLeaderInvalid = 45,
+        NeedsLevelSquish = 46,
       },
       VasServiceType = {
         FactionChange = 1,
@@ -1452,6 +1465,8 @@ local function mkWowEnv(api)
         AppearanceChange = 3,
         NameChange = 4,
         CharacterTransfer = 5,
+        GuildNameChange = 6,
+        GuildFactionChange = 7,
       },
     }, {
       __index = function(_, k)
