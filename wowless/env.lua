@@ -900,6 +900,7 @@ local function mkBaseEnv()
       bor = bitlib.bor,
     },
     ceil = math.ceil,
+    error = error,
     floor = math.floor,
     format = stringFormat,
     getmetatable = getmetatable,
@@ -920,6 +921,7 @@ local function mkBaseEnv()
     next = next,
     pairs = pairs,
     pcall = pcall,
+    PI = math.pi,
     print = print,
     rawget = rawget,
     rawset = rawset,
@@ -1102,6 +1104,18 @@ local function mkWowEnv(api)
         end,
       }
     end)(),
+    C_DateAndTime = {
+      GetCurrentCalendarTime = function()
+        return {
+          hour = 3,
+          minute = 26,
+          month = 7,
+          monthDay = 15,
+          weekday = 5,
+          year = 2021,
+        }
+      end,
+    },
     C_DeathInfo = {
       GetCorpseMapPosition = UNIMPLEMENTED,
       GetSelfResurrectOptions = UNIMPLEMENTED,
@@ -1184,6 +1198,7 @@ local function mkWowEnv(api)
       OffhandHasWeapon = UNIMPLEMENTED,
     },
     C_PetBattles = {},
+    C_PlayerMentorship = {},
     C_ProductChoice = {
       GetChoices = STUB_TABLE,
       GetNumSuppressed = STUB_NUMBER,
@@ -1205,6 +1220,7 @@ local function mkWowEnv(api)
       RegisterSocialBrowser = UNIMPLEMENTED,
       TwitterCheckStatus = UNIMPLEMENTED,
     },
+    C_SocialQueue = {},
     C_SpecializationInfo = {
       CanPlayerUseTalentSpecUI = UNIMPLEMENTED,
     },
@@ -1253,6 +1269,7 @@ local function mkWowEnv(api)
       GetOutputVolume = UNIMPLEMENTED,
       GetVADSensitivity = UNIMPLEMENTED,
       IsLoggedIn = UNIMPLEMENTED,
+      IsMuted = UNIMPLEMENTED,
       IsSpeakForMeActive = UNIMPLEMENTED,
       IsTranscriptionAllowed = UNIMPLEMENTED,
     },
@@ -1424,6 +1441,7 @@ local function mkWowEnv(api)
     GetInstanceInfo = UNIMPLEMENTED,
     GetInventoryAlertStatus = UNIMPLEMENTED,
     GetInventoryItemID = UNIMPLEMENTED,
+    GetInventoryItemLink = UNIMPLEMENTED,
     GetInventoryItemTexture = UNIMPLEMENTED,
     GetInventorySlotInfo = (function()
       local t = {
@@ -1459,6 +1477,7 @@ local function mkWowEnv(api)
     GetItemClassInfo = function(classID)
       return string.format('ItemClass%d', classID)
     end,
+    GetItemInfo = UNIMPLEMENTED,
     GetItemInventorySlotInfo = function(inventorySlot)
       return string.format('ItemInventorySlot%d', inventorySlot)
     end,
@@ -1477,6 +1496,7 @@ local function mkWowEnv(api)
     GetMaxLevelForPlayerExpansion = STUB_NUMBER,
     GetMaxPlayerLevel = STUB_NUMBER,
     GetMaxRenderScale = UNIMPLEMENTED,
+    GetMerchantFilter = UNIMPLEMENTED,
     GetMinimapZoneText = UNIMPLEMENTED,
     GetMinRenderScale = UNIMPLEMENTED,
     GetMirrorTimerInfo = function()
@@ -1485,12 +1505,14 @@ local function mkWowEnv(api)
     GetModifiedClick = UNIMPLEMENTED,
     GetMoney = STUB_NUMBER,
     GetMouseFocus = UNIMPLEMENTED,
+    GetMultiCastBarIndex = STUB_NUMBER,
     GetNetStats = function()
       return 1, 1, 1, 1  -- UNIMPLEMENTED
     end,
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetNumArenaOpponents = STUB_NUMBER,
     GetNumBattlefieldFlagPositions = STUB_NUMBER,
     GetNumBindings = STUB_NUMBER,
     GetNumLanguages = STUB_NUMBER,
@@ -1510,6 +1532,7 @@ local function mkWowEnv(api)
     GetNumSavedInstances = STUB_NUMBER,
     GetNumShapeshiftForms = STUB_NUMBER,
     GetNumSkillLines = STUB_NUMBER,
+    GetNumSpecializations = STUB_NUMBER,
     GetNumSpellTabs = STUB_NUMBER,
     GetNumSubgroupMembers = STUB_NUMBER,
     GetNumTitles = STUB_NUMBER,
@@ -1576,10 +1599,12 @@ local function mkWowEnv(api)
     GetSkillLineInfo = function()
       return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
     end,
+    GetSpecializationInfo = UNIMPLEMENTED,
     GetSpellConfirmationPromptsInfo = STUB_TABLE,
     GetSpellTabInfo = function()
       return 'moo', 0, 0, 0  -- UNIMPLEMENTED
     end,
+    GetSpellTexture = UNIMPLEMENTED,
     GetSubZoneText = UNIMPLEMENTED,
     GetSummonFriendCooldown = function()
       return 0, 0  -- UNIMPLEMENTED
@@ -1591,12 +1616,14 @@ local function mkWowEnv(api)
     GetTime = STUB_NUMBER,
     GetTitleName = UNIMPLEMENTED,
     GetTotemInfo = UNIMPLEMENTED,
+    GetTrackedAchievements = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
     GetTradeSkillInvSlotFilter = UNIMPLEMENTED,
     GetTradeSkillInvSlots = UNIMPLEMENTED,
     GetTradeSkillSubClasses = UNIMPLEMENTED,
     GetTradeSkillSubClassFilter = UNIMPLEMENTED,
     GetTrainerServiceTypeFilter = UNIMPLEMENTED,
+    GetUnitPowerBarInfo = UNIMPLEMENTED,
     GetWeaponEnchantInfo = UNIMPLEMENTED,
     GetWebTicket = UNIMPLEMENTED,
     GetXPExhaustion = UNIMPLEMENTED,
@@ -1666,6 +1693,7 @@ local function mkWowEnv(api)
     IsShiftKeyDown = UNIMPLEMENTED,
     IsStackableAction = UNIMPLEMENTED,
     IsTestBuild = UNIMPLEMENTED,
+    IsThreatWarningEnabled = UNIMPLEMENTED,
     IsTitleKnown = UNIMPLEMENTED,
     IsTrialAccount = UNIMPLEMENTED,
     IsTutorialFlagged = UNIMPLEMENTED,
@@ -1809,6 +1837,7 @@ local function mkWowEnv(api)
     StrafeLeftStop = UNIMPLEMENTED,
     StrafeRightStop = UNIMPLEMENTED,
     SupportsClipCursor = UNIMPLEMENTED,
+    TargetSpellReplacesBonusTree = UNIMPLEMENTED,
     ToggleWorldMap = UNIMPLEMENTED,
     TriggerTutorial = UNIMPLEMENTED,
     TurnLeftStop = UNIMPLEMENTED,
@@ -1827,6 +1856,7 @@ local function mkWowEnv(api)
     end,
     UnitGUID = UNIMPLEMENTED,
     UnitHasRelicSlot = UNIMPLEMENTED,
+    UnitHasVehicleUI = UNIMPLEMENTED,
     UnitHealth = STUB_NUMBER,
     UnitHealthMax = STUB_NUMBER,
     UnitInBattleground = UNIMPLEMENTED,
@@ -1845,6 +1875,7 @@ local function mkWowEnv(api)
     UnitName = function()
       return 'Unitname'  -- UNIMPLEMENTED
     end,
+    UnitNameUnmodified = UNIMPLEMENTED,
     UnitOnTaxi = UNIMPLEMENTED,
     UnitPlayerControlled = UNIMPLEMENTED,
     UnitPosition = UNIMPLEMENTED,
