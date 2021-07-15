@@ -2020,7 +2020,7 @@ end)()
 
 local function init(api)
   setmetatable(api.env, mkMetaEnv(api))
-  Mixin(api.env, mkBaseEnv(), fakeConstants, mkWowEnv(api), require('wowless.globalstrings'))
+  Mixin(api.env, mkBaseEnv(), fakeConstants, mkWowEnv(api))
   Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api))
 end
 

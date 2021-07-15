@@ -449,6 +449,7 @@ local function loader(api)
   end
 
   local function loadFrameXml(rootDir)
+    forAddon().loadFile(path.join(rootDir, 'FrameXML/GlobalStrings.lua'))
     loadToc(path.join(rootDir, 'FrameXML/FrameXML.toc'))
     local tocFiles = {}
     local addonDir = path.join(rootDir, 'AddOns')
