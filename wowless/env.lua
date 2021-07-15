@@ -325,6 +325,7 @@ local function mkBaseUIObjectTypes(api)
         SetJustifyH = UNIMPLEMENTED,
         SetJustifyV = UNIMPLEMENTED,
         SetShadowColor = UNIMPLEMENTED,
+        SetShadowOffset = UNIMPLEMENTED,
         SetSpacing = UNIMPLEMENTED,
         SetTextColor = UNIMPLEMENTED,
       },
@@ -1246,6 +1247,7 @@ local function mkWowEnv(api)
     },
     C_SocialQueue = {
       GetAllGroups = STUB_TABLE,
+      GetConfig = UNIMPLEMENTED,
     },
     C_SpecializationInfo = {
       CanPlayerUseTalentSpecUI = UNIMPLEMENTED,
