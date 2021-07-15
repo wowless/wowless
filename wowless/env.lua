@@ -330,6 +330,7 @@ local function mkBaseUIObjectTypes(api)
         IsTruncated = UNIMPLEMENTED,
         SetFormattedText = UNIMPLEMENTED,
         SetMaxLines = UNIMPLEMENTED,
+        SetNonSpaceWrap = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
         SetTextHeight = UNIMPLEMENTED,
       },
@@ -840,6 +841,7 @@ local function mkBaseUIObjectTypes(api)
         GetTexCoord = UNIMPLEMENTED,
         GetTexture = UNIMPLEMENTED,
         SetAtlas = UNIMPLEMENTED,
+        SetBlendMode = UNIMPLEMENTED,
         SetColorTexture = UNIMPLEMENTED,
         SetDesaturated = UNIMPLEMENTED,
         SetGradient = UNIMPLEMENTED,
@@ -1047,6 +1049,7 @@ local function mkWowEnv(api)
       SetFrame = UNIMPLEMENTED,
     },
     C_ChatInfo = {
+      GetNumReservedChatWindows = STUB_NUMBER,
       IsValidChatLine = UNIMPLEMENTED,
     },
     C_ClassColor = {
@@ -1180,6 +1183,7 @@ local function mkWowEnv(api)
     C_PaperDollInfo = {
       OffhandHasWeapon = UNIMPLEMENTED,
     },
+    C_PetBattles = {},
     C_ProductChoice = {
       GetChoices = STUB_TABLE,
       GetNumSuppressed = STUB_NUMBER,
@@ -1200,6 +1204,9 @@ local function mkWowEnv(api)
     C_Social = {
       RegisterSocialBrowser = UNIMPLEMENTED,
       TwitterCheckStatus = UNIMPLEMENTED,
+    },
+    C_SpecializationInfo = {
+      CanPlayerUseTalentSpecUI = UNIMPLEMENTED,
     },
     C_Spell = {},
     C_StorePublic = {
@@ -1237,6 +1244,7 @@ local function mkWowEnv(api)
     C_VoiceChat = {
       CanPlayerUseVoiceChat = UNIMPLEMENTED,
       GetActiveChannelID = UNIMPLEMENTED,
+      GetActiveChannelType = UNIMPLEMENTED,
       GetAvailableInputDevices = UNIMPLEMENTED,
       GetAvailableOutputDevices = UNIMPLEMENTED,
       GetCommunicationMode = UNIMPLEMENTED,
@@ -1244,6 +1252,8 @@ local function mkWowEnv(api)
       GetMasterVolumeScale = UNIMPLEMENTED,
       GetOutputVolume = UNIMPLEMENTED,
       GetVADSensitivity = UNIMPLEMENTED,
+      IsLoggedIn = UNIMPLEMENTED,
+      IsSpeakForMeActive = UNIMPLEMENTED,
       IsTranscriptionAllowed = UNIMPLEMENTED,
     },
     C_Widget = {},
@@ -1395,6 +1405,7 @@ local function mkWowEnv(api)
     end,
     GetDefaultVideoOptions = UNIMPLEMENTED,
     GetExpansionLevel = UNIMPLEMENTED,
+    GetExtraBarIndex = STUB_NUMBER,
     getfenv = function(arg)
       if arg == 0 then
         return api.env
@@ -1408,6 +1419,7 @@ local function mkWowEnv(api)
     end,
     GetGMStatus = UNIMPLEMENTED,
     GetGMTicket = UNIMPLEMENTED,
+    GetGuildLogoInfo = UNIMPLEMENTED,
     GetGuildRosterShowOffline = UNIMPLEMENTED,
     GetInstanceInfo = UNIMPLEMENTED,
     GetInventoryAlertStatus = UNIMPLEMENTED,
@@ -1462,6 +1474,7 @@ local function mkWowEnv(api)
     end,
     GetLootThreshold = STUB_NUMBER,
     GetMaxDailyQuests = STUB_NUMBER,
+    GetMaxLevelForPlayerExpansion = STUB_NUMBER,
     GetMaxPlayerLevel = STUB_NUMBER,
     GetMaxRenderScale = UNIMPLEMENTED,
     GetMinimapZoneText = UNIMPLEMENTED,
@@ -1852,6 +1865,7 @@ local function mkWowEnv(api)
     UnitSex = function()
       return 2  -- UNIMPLEMENTED
     end,
+    UnitThreatSituation = UNIMPLEMENTED,
     UnitXP = STUB_NUMBER,
     UnitXPMax = STUB_NUMBER,
     UseInventoryItem = UNIMPLEMENTED,
