@@ -159,7 +159,9 @@ local function mkBaseUIObjectTypes(api)
           u(self).buttonLocked = not not locked
           u(self).buttonState = state
         end,
-        SetDisabledAtlas = UNIMPLEMENTED,
+        SetDisabledAtlas = function(self, atlas)
+          u(self).disabledTexture = toTexture(self, atlas)
+        end,
         SetDisabledFontObject = UNIMPLEMENTED,
         SetDisabledTexture = function(self, tex)
           u(self).disabledTexture = toTexture(self, tex)
@@ -168,17 +170,23 @@ local function mkBaseUIObjectTypes(api)
           u(self).enabled = not not value
         end,
         SetFormattedText = UNIMPLEMENTED,
-        SetHighlightAtlas = UNIMPLEMENTED,
+        SetHighlightAtlas = function(self, atlas)
+          u(self).highlightTexture = toTexture(self, atlas)
+        end,
         SetHighlightFontObject = UNIMPLEMENTED,
         SetHighlightTexture = function(self, tex)
           u(self).highlightTexture = toTexture(self, tex)
         end,
-        SetNormalAtlas = UNIMPLEMENTED,
+        SetNormalAtlas = function(self, atlas)
+          u(self).normalTexture = toTexture(self, atlas)
+        end,
         SetNormalFontObject = UNIMPLEMENTED,
         SetNormalTexture = function(self, tex)
           u(self).normalTexture = toTexture(self, tex)
         end,
-        SetPushedAtlas = UNIMPLEMENTED,
+        SetPushedAtlas = function(self, atlas)
+          u(self).pushedTexture = toTexture(self, atlas)
+        end,
         SetPushedTextOffset = function(self, x, y)
           u(self).pushedTextOffsetX = x
           u(self).pushedTextOffsetY = y
