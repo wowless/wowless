@@ -1257,6 +1257,7 @@ local function mkWowEnv(api)
     },
     C_RecruitAFriend = {
       IsEnabled = UNIMPLEMENTED,
+      IsRecruitingEnabled = UNIMPLEMENTED,
       IsSendingEnabled = UNIMPLEMENTED,
     },
     C_ScriptedAnimations = {
