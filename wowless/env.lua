@@ -1115,6 +1115,9 @@ local function mkWowEnv(api)
         GetCVarDefault = function(var)
           return cvarDefaults[var]
         end,
+        RegisterCVar = function(var, value)
+          cvars[var] = value
+        end,
         SetCVar = function(var, value)
           cvars[var] = value
         end,
@@ -1233,7 +1236,10 @@ local function mkWowEnv(api)
     C_PartyInfo = {
       AllowedToDoPartyConversion = UNIMPLEMENTED,
     },
-    C_PetBattles = {},
+    C_PetBattles = {
+      GetAllEffectNames = UNIMPLEMENTED,
+      GetAllStates = UNIMPLEMENTED,
+    },
     C_PlayerMentorship = {},
     C_ProductChoice = {
       GetChoices = STUB_TABLE,
@@ -1245,6 +1251,9 @@ local function mkWowEnv(api)
     },
     C_QuestLog = {
       GetMaxNumQuests = STUB_NUMBER,
+    },
+    C_QuestSession = {
+      GetSessionBeginDetails = UNIMPLEMENTED,
     },
     C_RecruitAFriend = {
       IsEnabled = UNIMPLEMENTED,
@@ -1324,6 +1333,9 @@ local function mkWowEnv(api)
     },
     C_WowTokenSecure = {
       CancelRedeem = UNIMPLEMENTED,
+    },
+    C_ZoneAbility = {
+      GetActiveAbilities = STUB_TABLE,
     },
     DropCursorMoney = UNIMPLEMENTED,
     Enum = setmetatable({
@@ -1468,6 +1480,7 @@ local function mkWowEnv(api)
     GetDefaultLanguage = function()
       return 'Common', 7  -- UNIMPLEMENTED
     end,
+    GetDefaultScale = STUB_NUMBER,
     GetDefaultVideoOptions = UNIMPLEMENTED,
     GetExpansionLevel = UNIMPLEMENTED,
     GetExtraBarIndex = STUB_NUMBER,
