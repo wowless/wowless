@@ -590,7 +590,10 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         RefreshCamera = UNIMPLEMENTED,
         RefreshUnit = UNIMPLEMENTED,
+        SetAnimation = UNIMPLEMENTED,
         SetCamDistanceScale = UNIMPLEMENTED,
+        SetDisplayInfo = UNIMPLEMENTED,
+        SetDoBlend = UNIMPLEMENTED,
         SetPortraitZoom = UNIMPLEMENTED,
         SetUnit = UNIMPLEMENTED,
       },
@@ -802,7 +805,9 @@ local function mkBaseUIObjectTypes(api)
     },
     SimpleHTML = {
       inherits = {'FontInstance', 'Frame'},
-      mixin = {},
+      mixin = {
+        SetText = UNIMPLEMENTED,
+      },
     },
     Slider = {
       inherits = {'Frame'},
@@ -926,6 +931,7 @@ local function mkBaseEnv()
       floor = math.floor,
       max = math.max,
       min = math.min,
+      pi = math.pi,
       sqrt = math.sqrt,
     },
     max = math.max,
@@ -1027,6 +1033,7 @@ local function mkWowEnv(api)
     BreakUpLargeNumbers = tostring,  -- UNIMPLEMENTED,
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
     CanBeRaidTarget = UNIMPLEMENTED,
+    CanHearthAndResurrectFromArea = UNIMPLEMENTED,
     CanReplaceGuildMaster = UNIMPLEMENTED,
     CanSendSoRByText = UNIMPLEMENTED,
     CastingInfo = UNIMPLEMENTED,  -- TODO classic era only
@@ -1164,6 +1171,7 @@ local function mkWowEnv(api)
       CanPlayerUsePremadeGroup = UNIMPLEMENTED,
     },
     C_LFGList = {
+      GetApplications = STUB_TABLE,
       GetAvailableCategories = STUB_TABLE,
       GetAvailableLanguageSearchFilter = STUB_TABLE,
       GetAvailableRoles = UNIMPLEMENTED,
@@ -1225,7 +1233,9 @@ local function mkWowEnv(api)
       GetNumNamePlateMotionTypes = STUB_NUMBER,
       SetNamePlateEnemySize = UNIMPLEMENTED,
       SetNamePlateFriendlySize = UNIMPLEMENTED,
+      SetNamePlateSelfClickThrough = UNIMPLEMENTED,
       SetNamePlateSelfSize = UNIMPLEMENTED,
+      SetTargetClampingInsets = UNIMPLEMENTED,
     },
     C_NewItems = {
       RemoveNewItem = UNIMPLEMENTED,
@@ -1237,8 +1247,24 @@ local function mkWowEnv(api)
       AllowedToDoPartyConversion = UNIMPLEMENTED,
     },
     C_PetBattles = {
+      CanPetSwapIn = UNIMPLEMENTED,
       GetAllEffectNames = UNIMPLEMENTED,
       GetAllStates = UNIMPLEMENTED,
+      GetBattleState = UNIMPLEMENTED,
+      GetDisplayID = STUB_NUMBER,
+      GetHealth = STUB_NUMBER,
+      GetIcon = STUB_NUMBER,
+      GetLevel = STUB_NUMBER,
+      GetMaxHealth = STUB_NUMBER,
+      GetName = function()
+        return 'PetName'
+      end,
+      GetNumPets = STUB_NUMBER,
+      GetPVPMatchmakingInfo = UNIMPLEMENTED,
+      GetSelectedAction = UNIMPLEMENTED,
+      IsSkipAvailable = UNIMPLEMENTED,
+      IsTrapAvailable = UNIMPLEMENTED,
+      ShouldShowPetSelect = UNIMPLEMENTED,
     },
     C_PlayerMentorship = {},
     C_ProductChoice = {
@@ -1256,9 +1282,14 @@ local function mkWowEnv(api)
       GetSessionBeginDetails = UNIMPLEMENTED,
     },
     C_RecruitAFriend = {
+      GetRAFInfo = UNIMPLEMENTED,
+      GetRAFSystemInfo = UNIMPLEMENTED,
       IsEnabled = UNIMPLEMENTED,
       IsRecruitingEnabled = UNIMPLEMENTED,
       IsSendingEnabled = UNIMPLEMENTED,
+    },
+    C_Scenario = {
+      ShouldShowCriteria = UNIMPLEMENTED,
     },
     C_ScriptedAnimations = {
       GetAllScriptedAnimationEffects = STUB_TABLE,
@@ -1655,6 +1686,9 @@ local function mkWowEnv(api)
     GetRealmName = function()
       return 'Realm'  -- UNIMPLEMENTED
     end,
+    GetRealZoneText = function()
+      return 'RealZoneText'  -- UNIMPLEMENTED
+    end,
     GetReleaseTimeRemaining = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -1705,6 +1739,7 @@ local function mkWowEnv(api)
     GetUnitPowerBarInfo = UNIMPLEMENTED,
     GetWeaponEnchantInfo = UNIMPLEMENTED,
     GetWebTicket = UNIMPLEMENTED,
+    GetWorldPVPQueueStatus = UNIMPLEMENTED,
     GetXPExhaustion = UNIMPLEMENTED,
     GetZonePVPInfo = UNIMPLEMENTED,
     GetZoneText = UNIMPLEMENTED,
@@ -1753,6 +1788,7 @@ local function mkWowEnv(api)
     IsInGroup = UNIMPLEMENTED,
     IsInGuild = UNIMPLEMENTED,
     IsInInstance = UNIMPLEMENTED,
+    IsInJailersTower = UNIMPLEMENTED,
     IsInRaid = UNIMPLEMENTED,
     IsInventoryItemLocked = UNIMPLEMENTED,
     IsInventoryItemProfessionBag = UNIMPLEMENTED,
@@ -1763,6 +1799,7 @@ local function mkWowEnv(api)
     IsPlayerInWorld = UNIMPLEMENTED,
     IsPublicBuild = UNIMPLEMENTED,
     IsQuestWatched = UNIMPLEMENTED,
+    IsRaidMarkerActive = UNIMPLEMENTED,
     InRepairMode = UNIMPLEMENTED,
     IsResting = UNIMPLEMENTED,
     IsRestrictedAccount = UNIMPLEMENTED,
