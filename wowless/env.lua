@@ -1052,6 +1052,9 @@ local function mkWowEnv(api)
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
     CursorHasItem = UNIMPLEMENTED,
+    C_AdventureJournal = {
+      CanBeShown = UNIMPLEMENTED,
+    },
     C_AreaPoiInfo = {
       GetAreaPOIForMap = STUB_TABLE,
     },
@@ -1146,6 +1149,10 @@ local function mkWowEnv(api)
       GuildRoster = UNIMPLEMENTED,
     },
     C_Item = {},
+    C_LFGInfo = {
+      CanPlayerUseGroupFinder = UNIMPLEMENTED,
+    },
+    C_LFGList = {},
     C_LootHistory = {
       GetItem = UNIMPLEMENTED,
       GetNumItems = STUB_NUMBER,
@@ -1228,13 +1235,16 @@ local function mkWowEnv(api)
       RegisterSocialBrowser = UNIMPLEMENTED,
       TwitterCheckStatus = UNIMPLEMENTED,
     },
-    C_SocialQueue = {},
+    C_SocialQueue = {
+      GetAllGroups = STUB_TABLE,
+    },
     C_SpecializationInfo = {
       CanPlayerUseTalentSpecUI = UNIMPLEMENTED,
     },
     C_Spell = {},
     C_StorePublic = {
       IsDisabledByParentalControls = UNIMPLEMENTED,
+      IsEnabled = UNIMPLEMENTED,
     },
     C_StoreSecure = {
       GetCurrencyID = UNIMPLEMENTED,
@@ -1404,6 +1414,9 @@ local function mkWowEnv(api)
     GetContainerItemInfo = UNIMPLEMENTED,
     GetContainerNumFreeSlots = STUB_NUMBER,
     GetContainerNumSlots = STUB_NUMBER,
+    GetCurrentRegionName = function()
+      return 'RegionName'  -- UNIMPLEMENTED
+    end,
     GetCurrentScaledResolution = function()
       return 1024, 768  -- UNIMPLEMENTED
     end,
@@ -1585,6 +1598,10 @@ local function mkWowEnv(api)
     end,
     GetQuestTimers = UNIMPLEMENTED,
     GetRaidTargetIndex = UNIMPLEMENTED,
+    GetRealmID = STUB_NUMBER,
+    GetRealmName = function()
+      return 'Realm'  -- UNIMPLEMENTED
+    end,
     GetReleaseTimeRemaining = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -1648,6 +1665,7 @@ local function mkWowEnv(api)
     end,
     HasAction = UNIMPLEMENTED,
     HasBonusActionBar = UNIMPLEMENTED,
+    HasCompletedAnyAchievement = UNIMPLEMENTED,
     HasKey = UNIMPLEMENTED,
     HasPetSpells = UNIMPLEMENTED,
     HasPetUI = UNIMPLEMENTED,
@@ -1773,6 +1791,7 @@ local function mkWowEnv(api)
     LE_ITEM_WEAPON_THROWN = 15,
     LE_ITEM_WEAPON_UNARMED = 16,
     LE_ITEM_WEAPON_WAND = 17,
+    LE_LOOT_FILTER_SPEC1 = 0,
     LE_PARTY_CATEGORY_HOME = 1,
     LE_PARTY_CATEGORY_INSTANCE = 2,
     LE_TRANSMOG_COLLECTION_TYPE_FEET = 1,  -- UNIMPLEMENTED
