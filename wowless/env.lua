@@ -310,6 +310,9 @@ local function mkBaseUIObjectTypes(api)
         SetTextInsets = UNIMPLEMENTED,
       },
     },
+    FogOfWarFrame = {
+      inherits = {'Frame'},
+    },
     Font = {
       inherits = {'FontInstance'},
     },
@@ -598,6 +601,12 @@ local function mkBaseUIObjectTypes(api)
         SetPortraitZoom = UNIMPLEMENTED,
         SetUnit = UNIMPLEMENTED,
       },
+    },
+    POIFrame = {
+      inherits = {'Frame'},
+    },
+    QuestPOIFrame = {
+      inherits = {'Frame'},
     },
     Region = {
       constructor = function(self)
@@ -1068,6 +1077,7 @@ local function mkWowEnv(api)
     C_AdventureJournal = {
       CanBeShown = UNIMPLEMENTED,
     },
+    C_AdventureMap = {},
     C_AreaPoiInfo = {
       GetAreaPOIForMap = STUB_TABLE,
     },
@@ -1159,6 +1169,9 @@ local function mkWowEnv(api)
       ShowFriends = UNIMPLEMENTED,
     },
     C_GamePad = {},
+    C_Garrison = {
+      GetAllEncounterThreats = UNIMPLEMENTED,
+    },
     C_GossipInfo = {
       GetGossipPoiForUiMapID = UNIMPLEMENTED,
       GetPoiForUiMapID = UNIMPLEMENTED,
@@ -1492,6 +1505,8 @@ local function mkWowEnv(api)
     GetActiveLootRollIDs = STUB_TABLE,
     GetAddOnEnableState = UNIMPLEMENTED,
     GetAlternativeDefaultLanguage = UNIMPLEMENTED,
+    GetArchaeologyInfo = UNIMPLEMENTED,
+    GetArenaOpponentSpec = UNIMPLEMENTED,
     GetArenaTeam = UNIMPLEMENTED,
     GetAuctionDeposit = STUB_NUMBER,
     GetAuctionItemSubClasses = UNIMPLEMENTED,
@@ -1649,7 +1664,10 @@ local function mkWowEnv(api)
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetNumArchaeologyRaces = STUB_NUMBER,
     GetNumArenaOpponents = STUB_NUMBER,
+    GetNumArenaOpponentSpecs = STUB_NUMBER,
+    GetNumArtifactsByRace = STUB_NUMBER,
     GetNumBattlefieldFlagPositions = STUB_NUMBER,
     GetNumBindings = STUB_NUMBER,
     GetNumLanguages = STUB_NUMBER,

@@ -1231,6 +1231,10 @@ return {
   playermodel = {
     extends = 'frame',
   },
+  poiframe = {
+    extends = 'frame',
+    virtual = true,
+  },
   postclick = {
     extends = 'scripttype',
   },
@@ -1242,6 +1246,9 @@ return {
   },
   pushedtexture = {
     extends = 'texture',
+  },
+  questpoiframe = {
+    extends = 'poiframe',
   },
   rect = {
     attributes = {
@@ -1312,7 +1319,7 @@ return {
     extends = 'animation',
   },
   scenariopoiframe = {
-    extends = 'frame',
+    extends = 'poiframe',
   },
   scopedmodifier = {
     attributes = {
