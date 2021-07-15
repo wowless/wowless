@@ -298,9 +298,12 @@ local function mkBaseUIObjectTypes(api)
           u(self).isMultiLine = not not value
         end,
         SetNumber = UNIMPLEMENTED,
+        SetNumeric = UNIMPLEMENTED,
         SetSecureText = function(self, text)
           u(self).editboxText = text
         end,
+        SetSecurityDisablePaste = UNIMPLEMENTED,
+        SetSecurityDisableSetText = UNIMPLEMENTED,
         SetText = function(self, text)
           u(self).editboxText = text
         end,
@@ -1158,7 +1161,15 @@ local function mkWowEnv(api)
       CanPlayerUsePremadeGroup = UNIMPLEMENTED,
     },
     C_LFGList = {
+      GetAvailableCategories = STUB_TABLE,
+      GetAvailableLanguageSearchFilter = STUB_TABLE,
       GetAvailableRoles = UNIMPLEMENTED,
+      GetDefaultLanguageSearchFilter = STUB_NUMBER,
+      GetLanguageSearchFilter = STUB_NUMBER,
+      GetNumApplications = function()
+        return 0, 0  -- UNIMPLEMENTED
+      end,
+      HasActiveEntryInfo = UNIMPLEMENTED,
     },
     C_LootHistory = {
       GetItem = UNIMPLEMENTED,
@@ -1236,6 +1247,7 @@ local function mkWowEnv(api)
       GetMaxNumQuests = STUB_NUMBER,
     },
     C_RecruitAFriend = {
+      IsEnabled = UNIMPLEMENTED,
       IsSendingEnabled = UNIMPLEMENTED,
     },
     C_ScriptedAnimations = {
@@ -1248,6 +1260,10 @@ local function mkWowEnv(api)
     C_SocialQueue = {
       GetAllGroups = STUB_TABLE,
       GetConfig = UNIMPLEMENTED,
+    },
+    C_SocialRestrictions = {
+      IsSilenced = UNIMPLEMENTED,
+      IsSquelched = UNIMPLEMENTED,
     },
     C_SpecializationInfo = {
       CanPlayerUseTalentSpecUI = UNIMPLEMENTED,
@@ -1468,7 +1484,14 @@ local function mkWowEnv(api)
     end,
     GetGMStatus = UNIMPLEMENTED,
     GetGMTicket = UNIMPLEMENTED,
-    GetGroupMemberCounts = UNIMPLEMENTED,
+    GetGroupMemberCounts = function()
+      return {
+        DAMAGER = 3,
+        HEALER = 1,
+        NOROLE = 0,
+        TANK = 1,
+      }
+    end,
     GetGuildLogoInfo = UNIMPLEMENTED,
     GetGuildRosterShowOffline = UNIMPLEMENTED,
     GetInstanceInfo = UNIMPLEMENTED,
@@ -1522,10 +1545,13 @@ local function mkWowEnv(api)
       return string.format('ItemClass%dSubClass%d', classID, subClassID)
     end,
     GetLanguageByIndex = UNIMPLEMENTED,
+    GetLFGDeserterExpiration = STUB_NUMBER,
+    GetLFGRoleUpdate = UNIMPLEMENTED,
     GetLootMethod = function()
       return 'freeforall'  -- UNIMPLEMENTED
     end,
     GetLootThreshold = STUB_NUMBER,
+    GetMaxBattlefieldID = STUB_NUMBER,
     GetMaxDailyQuests = STUB_NUMBER,
     GetMaxLevelForPlayerExpansion = STUB_NUMBER,
     GetMaxPlayerLevel = STUB_NUMBER,
@@ -1637,6 +1663,7 @@ local function mkWowEnv(api)
     GetSkillLineInfo = function()
       return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
     end,
+    GetSpecialization = STUB_NUMBER,
     GetSpecializationInfo = UNIMPLEMENTED,
     GetSpellConfirmationPromptsInfo = STUB_TABLE,
     GetSpellTabInfo = function()
@@ -1827,6 +1854,7 @@ local function mkWowEnv(api)
     end,
     NUM_LE_BAG_FILTER_FLAGS = 5,
     NUM_LE_ITEM_QUALITYS = 10,  -- UNIMPLEMENTED
+    NUM_LE_LFG_CATEGORYS = 0,  -- UNIMPLEMENTED
     NUM_LE_TRANSMOG_COLLECTION_TYPES = 0,  -- UNIMPLEMENTED
     PetHasActionBar = UNIMPLEMENTED,
     PickupContainerItem = UNIMPLEMENTED,
@@ -1878,6 +1906,7 @@ local function mkWowEnv(api)
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
     SpellCanTargetItem = UNIMPLEMENTED,
     SpellCanTargetItemID = UNIMPLEMENTED,
+    StoreSecureReference = UNIMPLEMENTED,
     StrafeLeftStop = UNIMPLEMENTED,
     StrafeRightStop = UNIMPLEMENTED,
     SupportsClipCursor = UNIMPLEMENTED,
@@ -1898,7 +1927,9 @@ local function mkWowEnv(api)
     UnitFactionGroup = function()
       return 'Horde', 'Horde'
     end,
+    UnitGetAvailableRoles = UNIMPLEMENTED,
     UnitGUID = UNIMPLEMENTED,
+    UnitHasLFGDeserter = UNIMPLEMENTED,
     UnitHasRelicSlot = UNIMPLEMENTED,
     UnitHasVehicleUI = UNIMPLEMENTED,
     UnitHealth = STUB_NUMBER,
