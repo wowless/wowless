@@ -224,6 +224,9 @@ local function mkBaseUIObjectTypes(api)
         end,
       },
     },
+    CinematicModel = {
+      inherits = {'PlayerModel'},
+    },
     Cooldown = {
       inherits = {'Frame'},
       mixin = {
@@ -604,9 +607,16 @@ local function mkBaseUIObjectTypes(api)
     },
     POIFrame = {
       inherits = {'Frame'},
+      mixin = {
+        SetBorderAlpha = UNIMPLEMENTED,
+        SetBorderScalar = UNIMPLEMENTED,
+        SetBorderTexture = UNIMPLEMENTED,
+        SetFillAlpha = UNIMPLEMENTED,
+        SetFillTexture = UNIMPLEMENTED,
+      },
     },
     QuestPOIFrame = {
-      inherits = {'Frame'},
+      inherits = {'POIFrame'},
     },
     Region = {
       constructor = function(self)
@@ -796,6 +806,9 @@ local function mkBaseUIObjectTypes(api)
           api.SetScript(self, name, 1, script)
         end,
       },
+    },
+    ScenarioPOIFrame = {
+      inherits = {'POIFrame'},
     },
     ScrollFrame = {
       inherits = {'Frame'},
@@ -1081,6 +1094,7 @@ local function mkWowEnv(api)
     C_AreaPoiInfo = {
       GetAreaPOIForMap = STUB_TABLE,
     },
+    C_ArtifactUI = {},
     C_AuthChallenge = {
       SetFrame = UNIMPLEMENTED,
     },
@@ -1171,6 +1185,7 @@ local function mkWowEnv(api)
     C_GamePad = {},
     C_Garrison = {
       GetAllEncounterThreats = UNIMPLEMENTED,
+      IsUsingPartyGarrison = UNIMPLEMENTED,
     },
     C_GossipInfo = {
       GetGossipPoiForUiMapID = UNIMPLEMENTED,
@@ -1283,6 +1298,9 @@ local function mkWowEnv(api)
       IsSkipAvailable = UNIMPLEMENTED,
       IsTrapAvailable = UNIMPLEMENTED,
       ShouldShowPetSelect = UNIMPLEMENTED,
+    },
+    C_PlayerInfo = {
+      UnitIsSameServer = UNIMPLEMENTED,
     },
     C_PlayerMentorship = {},
     C_ProductChoice = {
@@ -1506,6 +1524,7 @@ local function mkWowEnv(api)
     GetAddOnEnableState = UNIMPLEMENTED,
     GetAlternativeDefaultLanguage = UNIMPLEMENTED,
     GetArchaeologyInfo = UNIMPLEMENTED,
+    GetArchaeologyRaceInfo = UNIMPLEMENTED,
     GetArenaOpponentSpec = UNIMPLEMENTED,
     GetArenaTeam = UNIMPLEMENTED,
     GetAuctionDeposit = STUB_NUMBER,
@@ -1637,6 +1656,7 @@ local function mkWowEnv(api)
       return string.format('ItemClass%dSubClass%d', classID, subClassID)
     end,
     GetLanguageByIndex = UNIMPLEMENTED,
+    GetLFGCategoryForID = UNIMPLEMENTED,
     GetLFGDeserterExpiration = STUB_NUMBER,
     GetLFGRoleUpdate = UNIMPLEMENTED,
     GetLootMethod = function()
@@ -1694,6 +1714,7 @@ local function mkWowEnv(api)
     GetNumTrackingTypes = STUB_NUMBER,
     GetOptOutOfLoot = UNIMPLEMENTED,
     GetOwnerAuctionItems = UNIMPLEMENTED,
+    GetPartyLFGID = STUB_NUMBER,
     GetPetActionCooldown = UNIMPLEMENTED,
     GetPetActionInfo = UNIMPLEMENTED,
     GetPetExperience = STUB_NUMBER,
