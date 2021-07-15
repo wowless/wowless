@@ -4,5 +4,6 @@
         "it",
         "pending",
         "before_each"
-    ]
+    ],
+    "search.useIgnoreFiles": false
 }
