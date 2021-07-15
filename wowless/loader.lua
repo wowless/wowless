@@ -277,11 +277,8 @@ local function loader(api)
           end,
         }
 
-        local function mkInitAttrs(e)
+        local function mkInitAttrsNotRecursive(e)
           return function(obj)
-            for _, inh in ipairs(e.attr.inherits or {}) do
-              api.templates[string.lower(inh)].initAttrs(obj)
-            end
             for _, m in ipairs(e.attr.mixin or {}) do
               mixin(obj, api.env[m])
             end
@@ -293,6 +290,16 @@ local function loader(api)
                 xmlattrlang[k](obj, v)
               end
             end
+          end
+        end
+
+        local function mkInitAttrs(e)
+          local notRecursive = mkInitAttrsNotRecursive(e)
+          return function(obj)
+            for _, inh in ipairs(e.attr.inherits or {}) do
+              api.templates[string.lower(inh)].initAttrs(obj)
+            end
+            notRecursive(obj)
           end
         end
 
@@ -356,19 +363,7 @@ local function loader(api)
                 table.insert(templates, template)
               end
               table.insert(templates, {
-                initAttrs = function(obj)
-                  for _, m in ipairs(e.attr.mixin or {}) do
-                    mixin(obj, api.env[m])
-                  end
-                  for _, m in ipairs(e.attr.securemixin or {}) do
-                    mixin(obj, api.env[m])
-                  end
-                  for k, v in pairs(e.attr) do
-                    if xmlattrlang[k] then
-                      xmlattrlang[k](obj, v)
-                    end
-                  end
-                end,
+                initAttrs = mkInitAttrsNotRecursive(e),
                 initKids = function(obj)
                   withContext({ ignoreVirtual = true }).loadElements(e.kids, obj)
                 end,
