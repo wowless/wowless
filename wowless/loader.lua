@@ -270,7 +270,10 @@ local function loader(api)
           end,
           parentkey = function(obj, value)
             api.log(3, 'attaching ' .. value)
-            obj:GetParent()[value] = obj
+            local parent = obj:GetParent()
+            if parent then
+              parent[value] = obj
+            end
           end,
         }
 
