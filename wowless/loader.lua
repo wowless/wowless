@@ -462,11 +462,13 @@ local function loader(api)
     local function doLoad(tocFile)
       if not loaded[tocFile] then
         local toc = parseToc(tocFile)
-        for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
-          doLoad(string.format('%s/%s/%s.toc', addonDir, dep, dep))
+        if toc.attrs.AllowLoad ~= 'Glue' then
+          for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
+            doLoad(string.format('%s/%s/%s.toc', addonDir, dep, dep))
+          end
+          loadToc(tocFile)
+          loaded[tocFile] = true
         end
-        loadToc(tocFile)
-        loaded[tocFile] = true
       end
     end
     for _, tocFile in ipairs(tocFiles) do
