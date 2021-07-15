@@ -279,11 +279,12 @@ local function loader(api)
 
         local function mkInitAttrsNotRecursive(e)
           return function(obj)
+            local env = ctx.useAddonEnv and addonEnv or api.env
             for _, m in ipairs(e.attr.mixin or {}) do
-              mixin(obj, api.env[m])
+              mixin(obj, env[m])
             end
             for _, m in ipairs(e.attr.securemixin or {}) do
-              mixin(obj, api.env[m])
+              mixin(obj, env[m])
             end
             for k, v in pairs(e.attr) do
               if xmlattrlang[k] then
