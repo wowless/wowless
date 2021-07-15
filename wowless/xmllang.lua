@@ -1006,6 +1006,12 @@ return {
       },
     },
   },
+  onanimfinished = {
+    extends = 'scripttype',
+  },
+  onanimstarted = {
+    extends = 'scripttype',
+  },
   onarrowpressed = {
     extends = 'scripttype',
   },
@@ -1022,6 +1028,9 @@ return {
     extends = 'scripttype',
   },
   oncolorselect = {
+    extends = 'scripttype',
+  },
+  oncooldowndone = {
     extends = 'scripttype',
   },
   oncursorchanged = {
@@ -1103,6 +1112,9 @@ return {
     extends = 'scripttype',
   },
   onload = {
+    extends = 'scripttype',
+  },
+  onloop = {
     extends = 'scripttype',
   },
   onmodelcleared = {
