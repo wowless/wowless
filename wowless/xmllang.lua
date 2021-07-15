@@ -1183,6 +1183,9 @@ return {
   ontooltipsetunit = {
     extends = 'scripttype',
   },
+  onuimapchanged = {
+    extends = 'scripttype',
+  },
   onupdate = {
     extends = 'scripttype',
   },

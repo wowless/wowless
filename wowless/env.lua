@@ -586,6 +586,7 @@ local function mkBaseUIObjectTypes(api)
       mixin = {
         RefreshCamera = UNIMPLEMENTED,
         RefreshUnit = UNIMPLEMENTED,
+        SetCamDistanceScale = UNIMPLEMENTED,
         SetPortraitZoom = UNIMPLEMENTED,
         SetUnit = UNIMPLEMENTED,
       },
@@ -1151,8 +1152,13 @@ local function mkWowEnv(api)
     C_Item = {},
     C_LFGInfo = {
       CanPlayerUseGroupFinder = UNIMPLEMENTED,
+      CanPlayerUseLFD = UNIMPLEMENTED,
+      CanPlayerUseLFR = UNIMPLEMENTED,
+      CanPlayerUsePremadeGroup = UNIMPLEMENTED,
     },
-    C_LFGList = {},
+    C_LFGList = {
+      GetAvailableRoles = UNIMPLEMENTED,
+    },
     C_LootHistory = {
       GetItem = UNIMPLEMENTED,
       GetNumItems = STUB_NUMBER,
@@ -1211,6 +1217,9 @@ local function mkWowEnv(api)
     },
     C_PaperDollInfo = {
       OffhandHasWeapon = UNIMPLEMENTED,
+    },
+    C_PartyInfo = {
+      AllowedToDoPartyConversion = UNIMPLEMENTED,
     },
     C_PetBattles = {},
     C_PlayerMentorship = {},
@@ -1457,12 +1466,14 @@ local function mkWowEnv(api)
     end,
     GetGMStatus = UNIMPLEMENTED,
     GetGMTicket = UNIMPLEMENTED,
+    GetGroupMemberCounts = UNIMPLEMENTED,
     GetGuildLogoInfo = UNIMPLEMENTED,
     GetGuildRosterShowOffline = UNIMPLEMENTED,
     GetInstanceInfo = UNIMPLEMENTED,
     GetInventoryAlertStatus = UNIMPLEMENTED,
     GetInventoryItemID = UNIMPLEMENTED,
     GetInventoryItemLink = UNIMPLEMENTED,
+    GetInventoryItemQuality = UNIMPLEMENTED,
     GetInventoryItemTexture = UNIMPLEMENTED,
     GetInventorySlotInfo = (function()
       local t = {
@@ -1726,7 +1737,11 @@ local function mkWowEnv(api)
     IsUnitOnQuest = UNIMPLEMENTED,
     IsVeteranTrialAccount = UNIMPLEMENTED,
     IsWindowsClient = UNIMPLEMENTED,
+    LE_BAG_FILTER_FLAG_CONSUMABLES = 1,
     LE_BAG_FILTER_FLAG_EQUIPMENT = 2,
+    LE_BAG_FILTER_FLAG_IGNORE_CLEANUP = 3,
+    LE_BAG_FILTER_FLAG_JUNK = 4,
+    LE_BAG_FILTER_FLAG_TRADE_GOODS = 5,
     LE_GAME_ERR_ABILITY_COOLDOWN = 1,
     LE_GAME_ERR_OUT_OF_ARCANE_CHARGES = 5,
     LE_GAME_ERR_OUT_OF_CHI = 6,
