@@ -13,7 +13,11 @@ local function loader(api)
     if type == 'number' then
       return tonumber(value)
     elseif type == 'global' then
-      return api.env[value]
+      local t = api.env
+      for part in value:gmatch('[^.]+') do
+        t = t[part]
+      end
+      return t
     elseif type == 'boolean' then
       return (value == 'true')
     elseif type == 'string' or type == nil then
