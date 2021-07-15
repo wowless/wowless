@@ -18,10 +18,11 @@ local function loader(api)
         t = t[part]
       end
       return t
-    elseif type == 'boolean' then
+    elseif type == 'boolean' or type == 'bool' then
       return (value == 'true')
     elseif type == 'string' or type == nil then
-      return value
+      local n = tonumber(value)
+      return n ~= nil and n or value
     else
       error('invalid keyvalue/attribute type ' .. type)
     end

@@ -411,6 +411,7 @@ local function mkBaseUIObjectTypes(api)
         GetMinResize = function(self)
           return u(self).minResizeWidth, u(self).minResizeHeight
         end,
+        GetRegions = UNIMPLEMENTED,
         IgnoreDepth = UNIMPLEMENTED,
         IsClampedToScreen = function(self)
           return u(self).isClampedToScreen
@@ -1146,6 +1147,9 @@ local function mkWowEnv(api)
       GetCorpseMapPosition = UNIMPLEMENTED,
       GetSelfResurrectOptions = UNIMPLEMENTED,
     },
+    C_FrameManager = {
+      GetFrameVisibilityState = UNIMPLEMENTED,
+    },
     C_FriendList = {
       GetFriendInfoByIndex = STUB_TABLE,
       GetNumFriends = STUB_NUMBER,
@@ -1339,8 +1343,16 @@ local function mkWowEnv(api)
       GetBelowMinimapWidgetSetID = function()
         return 2
       end,
+      GetObjectiveTrackerWidgetSetID = STUB_NUMBER,
+      GetPowerBarWidgetSetID = STUB_NUMBER,
       GetTopCenterWidgetSetID = function()
         return 1
+      end,
+      GetWidgetSetInfo = function()
+        return {
+          layoutDirection = 0,
+          verticalPadding = 0,
+        }
       end,
     },
     C_VoiceChat = {
