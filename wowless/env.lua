@@ -1542,6 +1542,7 @@ local function mkWowEnv(api)
     GetBinding = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
     GetBindingText = UNIMPLEMENTED,
+    GetCategoryList = STUB_TABLE,
     GetChatTypeIndex = STUB_NUMBER,
     GetChatWindowChannels = UNIMPLEMENTED,
     GetChatWindowInfo = function(idx)
@@ -1694,6 +1695,9 @@ local function mkWowEnv(api)
     GetNumArtifactsByRace = STUB_NUMBER,
     GetNumBattlefieldFlagPositions = STUB_NUMBER,
     GetNumBindings = STUB_NUMBER,
+    GetNumCompletedAchievements = function()
+      return 1, 1  -- UNIMPLEMENTED
+    end,
     GetNumLanguages = STUB_NUMBER,
     GetNumMacros = STUB_NUMBER,
     GetNumQuestLeaderBoards = function()
