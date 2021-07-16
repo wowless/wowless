@@ -835,37 +835,70 @@ local function mkBaseUIObjectTypes(api)
       },
     },
     Slider = {
+      constructor = function(self)
+        local ud = u(self)
+        ud.enabled = true
+        ud.max = 0
+        ud.min = 0
+        ud.value = 0
+      end,
       inherits = {'Frame'},
       mixin = {
-        Disable = UNIMPLEMENTED,
-        Enable = UNIMPLEMENTED,
-        GetMinMaxValues = UNIMPLEMENTED,
+        Disable = function(self)
+          u(self).enabled = false
+        end,
+        Enable = function(self)
+          u(self).enabled = true
+        end,
+        GetMinMaxValues = function(self)
+          local ud = u(self)
+          return ud.min, ud.max
+        end,
         GetThumbTexture = function(self)
           return u(self).thumbTexture
         end,
-        GetValue = STUB_NUMBER,
-        SetMinMaxValues = UNIMPLEMENTED,
+        GetValue = function(self)
+          return u(self).value
+        end,
+        SetMinMaxValues = function(self, min, max)
+          local ud = u(self)
+          ud.min = min
+          ud.max = max
+        end,
         SetStepsPerPage = UNIMPLEMENTED,
         SetThumbTexture = function(self, tex)
           u(self).thumbTexture = toTexture(self, tex)
         end,
-        SetValue = UNIMPLEMENTED,
+        SetValue = function(self, value)
+          u(self).value = value
+        end,
         SetValueStep = UNIMPLEMENTED,
       },
     },
     StatusBar = {
+      constructor = function(self)
+        local ud = u(self)
+        ud.max = 0
+        ud.min = 0
+        ud.value = 0
+      end,
       inherits = {'Frame'},
       mixin = {
-        GetMinMaxValues = function()
-          return 0, 0  -- UNIMPLEMENTED
+        GetMinMaxValues = function(self)
+          local ud = u(self)
+          return ud.min, ud.max
         end,
         GetStatusBarTexture = function(self)
           return u(self).statusBarTexture
         end,
-        GetValue = function()
-          return 0  -- UNIMPLEMENTED
+        GetValue = function(self)
+          return u(self).value
         end,
-        SetMinMaxValues = UNIMPLEMENTED,
+        SetMinMaxValues = function(self, min, max)
+          local ud = u(self)
+          ud.min = min
+          ud.max = max
+        end,
         SetStatusBarColor = UNIMPLEMENTED,
         SetStatusBarTexture = function(self, tex)
           if type(tex) == 'number' then
@@ -875,7 +908,9 @@ local function mkBaseUIObjectTypes(api)
             u(self).statusBarTexture = toTexture(self, tex)
           end
         end,
-        SetValue = UNIMPLEMENTED,
+        SetValue = function(self, value)
+          u(self).value = value
+        end,
       },
     },
     Texture = {
