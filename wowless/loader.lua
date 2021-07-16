@@ -260,7 +260,9 @@ local function loader(api)
           end,
           parent = function(obj, value)
             api.log(3, 'setting parent to ' .. value)
-            obj:SetParent(api.env[value])
+            api.SetParent(obj, api.env[value])
+            local ud = api.UserData(obj)
+            ud.visible = ud.shown and (not ud.parent or api.UserData(ud.parent).visible)
           end,
           parentarray = function(obj, value)
             api.log(3, 'attaching to array ' .. value)
