@@ -322,7 +322,9 @@ local function mkBaseUIObjectTypes(api)
     FontInstance = {
       inherits = {'UIObject'},
       mixin = {
-        GetFont = UNIMPLEMENTED,
+        GetFont = function()
+          return nil, 12  -- UNIMPLEMENTED
+        end,
         GetShadowOffset = STUB_NUMBER,
         GetSpacing = STUB_NUMBER,
         GetTextColor = function()
