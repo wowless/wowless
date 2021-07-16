@@ -277,6 +277,15 @@ local function loader(api)
           end,
         }
 
+        local function initKidsMaybeFrames(e, obj, framesFlag)
+          local newctx = withContext({ ignoreVirtual = true })
+          for _, kid in ipairs(e.kids) do
+            if (string.lower(kid.type) == 'frames') == framesFlag then
+              newctx.loadElement(kid, obj)
+            end
+          end
+      end
+
         local function mkInitAttrsNotRecursive(e)
           return function(obj)
             local env = ctx.useAddonEnv and addonEnv or api.env
@@ -291,6 +300,7 @@ local function loader(api)
                 xmlattrlang[k](obj, v)
               end
             end
+            initKidsMaybeFrames(e, obj, false)
           end
         end
 
@@ -304,12 +314,19 @@ local function loader(api)
           end
         end
 
+        local function mkInitKidsNotRecursive(e)
+          return function(obj)
+            initKidsMaybeFrames(e, obj, true)
+          end
+        end
+
         local function mkInitKids(e)
+          local notRecursive = mkInitKidsNotRecursive(e)
           return function(obj)
             for _, inh in ipairs(e.attr.inherits or {}) do
               api.templates[string.lower(inh)].initKids(obj)
             end
-            withContext({ ignoreVirtual = true }).loadElements(e.kids, obj)
+            notRecursive(obj)
           end
         end
 
@@ -331,8 +348,8 @@ local function loader(api)
               api.uiobjectTypes[name] = {
                 constructor = function(self, xmlattr)
                   base.constructor(self, xmlattr)
-                  initAttrs(self)
                   self.__intrinsicHack = true
+                  initAttrs(self)
                   initKids(self)
                   self.__intrinsicHack = nil
                 end,
@@ -365,9 +382,7 @@ local function loader(api)
               end
               table.insert(templates, {
                 initAttrs = mkInitAttrsNotRecursive(e),
-                initKids = function(obj)
-                  withContext({ ignoreVirtual = true }).loadElements(e.kids, obj)
-                end,
+                initKids = mkInitKidsNotRecursive(e),
               })
               return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, unpack(templates))
             end
@@ -381,7 +396,10 @@ local function loader(api)
           end
         end
 
-        return { loadElements = loadElements }
+        return {
+          loadElement = loadElement,
+          loadElements = loadElements,
+        }
       end
 
       return api.CallSafely(function()
