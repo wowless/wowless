@@ -1223,7 +1223,7 @@ local function mkWowEnv(api)
     },
     C_GamePad = {},
     C_Garrison = {
-      GetAllEncounterThreats = UNIMPLEMENTED,
+      GetAllEncounterThreats = STUB_TABLE,
       IsUsingPartyGarrison = UNIMPLEMENTED,
     },
     C_GossipInfo = {
@@ -1563,8 +1563,12 @@ local function mkWowEnv(api)
     GetAddOnEnableState = UNIMPLEMENTED,
     GetAlternativeDefaultLanguage = UNIMPLEMENTED,
     GetArchaeologyInfo = UNIMPLEMENTED,
-    GetArchaeologyRaceInfo = UNIMPLEMENTED,
-    GetArenaOpponentSpec = UNIMPLEMENTED,
+    GetArchaeologyRaceInfo = function()
+      return 'Name', nil, nil, 0, 0  -- UNIMPLEMENTED
+    end,
+    GetArenaOpponentSpec = function()
+      return 0, 0  -- UNIMPLEMENTED
+    end,
     GetArenaTeam = UNIMPLEMENTED,
     GetAuctionDeposit = STUB_NUMBER,
     GetAuctionItemSubClasses = UNIMPLEMENTED,
