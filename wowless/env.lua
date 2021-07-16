@@ -2093,6 +2093,9 @@ local function mkWowEnv(api)
       return 'Horde', 'Horde'
     end,
     UnitGetAvailableRoles = UNIMPLEMENTED,
+    UnitGetIncomingHeals = UNIMPLEMENTED,
+    UnitGetTotalAbsorbs = UNIMPLEMENTED,
+    UnitGetTotalHealAbsorbs = UNIMPLEMENTED,
     UnitGUID = UNIMPLEMENTED,
     UnitHasLFGDeserter = UNIMPLEMENTED,
     UnitHasRelicSlot = UNIMPLEMENTED,
