@@ -17,7 +17,7 @@ jobs:
         restore-keys: cache-
     - name: setup
       run: bin/setup.sh
-    - name: run
-      run: bin/run.sh
+    - name: test
+      run: bin/test.sh
     - name: upload rockspec
       run: bin/upload.sh ${{ secrets.LUAROCKS_API_KEY }}

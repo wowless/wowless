@@ -1,6 +1,5 @@
 #!/bin/bash
-set -e
+loglevel=${1-100}
+version=${2-wow_classic}
 eval $(.lua/bin/luarocks path)
-.lua/bin/luacheck .
-.lua/bin/luarocks build --no-install
-.lua/bin/luarocks test -- "$@"
+.lua/bin/lua -e "require('wowless.runner').run($loglevel, '$version')"
