@@ -1,6 +1,6 @@
 local wowClassicEraRootDir = 'extracts/1.13.7.38704/Interface'
 local wowClassicRootDir = 'extracts/2.5.1.39170/Interface'
-local wowRetailRootDir = 'extracts/9.1.0.39335/Interface'
+local wowRetailRootDir = 'extracts/9.1.0.39427/Interface'
 
 local function loader(api)
 
