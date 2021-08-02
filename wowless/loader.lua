@@ -1,6 +1,6 @@
-local wowClassicEraRootDir = 'extracts/1.13.7.38704/Interface'
+local wowClassicEraRootDir = 'extracts/1.13.7.39605/Interface'
 local wowClassicPtrRootDir = 'extracts/2.5.2.39618/Interface'
-local wowClassicRootDir = 'extracts/2.5.1.39170/Interface'
+local wowClassicRootDir = 'extracts/2.5.1.39603/Interface'
 local wowRetailPtrRootDir = 'extracts/9.1.0.39617/Interface'
 local wowRetailRootDir = 'extracts/9.1.0.39427/Interface'
 
