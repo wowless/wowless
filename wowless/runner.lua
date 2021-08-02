@@ -9,8 +9,10 @@ local function run(loglevel, version)
   local loader = require('wowless.loader')
   local rootDirs = {
     wow = loader.wowRetailRootDir,
+    wowt = loader.wowRetailPtrRootDir,
     wow_classic = loader.wowClassicRootDir,
     wow_classic_era = loader.wowClassicEraRootDir,
+    wow_classic_ptr = loader.wowClassicPtrRootDir,
   }
   loader.loader(api).loadFrameXml(assert(rootDirs[version]))
   api.SendEvent('PLAYER_LOGIN')
