@@ -999,6 +999,7 @@ local function mkBaseEnv()
     max = math.max,
     min = math.min,
     mod = math.fmod,
+    newproxy = newproxy,
     next = next,
     pairs = pairs,
     pcall = pcall,
@@ -2018,9 +2019,6 @@ local function mkWowEnv(api)
     MoveBackwardStop = UNIMPLEMENTED,
     MoveForwardStop = UNIMPLEMENTED,
     MultiSampleAntiAliasingSupported = UNIMPLEMENTED,
-    newproxy = function()
-      return setmetatable({}, {})
-    end,
     NUM_LE_BAG_FILTER_FLAGS = 5,
     NUM_LE_ITEM_QUALITYS = 10,  -- UNIMPLEMENTED
     NUM_LE_LFG_CATEGORYS = 0,  -- UNIMPLEMENTED
