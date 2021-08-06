@@ -9,7 +9,7 @@ dependencies = {
   'bitlib',
   'lua-path',
   'serpent',
-  'wowcig >= 0.3',
+  'wowcig >= 0.4',
   'xml2lua',
 }
 build = {
