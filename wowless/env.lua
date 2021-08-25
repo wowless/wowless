@@ -1041,6 +1041,7 @@ local function mkBaseEnv()
     tremove = table.remove,
     type = type,
     unpack = unpack,
+    wipe = util.twipe,
   }
 end
 
@@ -1140,6 +1141,12 @@ local function mkWowEnv(api, loader)
     C_AuthChallenge = {
       SetFrame = UNIMPLEMENTED,
     },
+    C_ChallengeMode = {
+      GetMapTable = STUB_TABLE,
+    },
+    C_CharacterServicesPublic = {
+      ShouldSeeControlPopup = UNIMPLEMENTED,
+    },
     C_ChatInfo = {
       GetNumReservedChatWindows = STUB_NUMBER,
       IsValidChatLine = UNIMPLEMENTED,
@@ -1155,6 +1162,7 @@ local function mkWowEnv(api, loader)
       GetSubscribedClubs = STUB_TABLE,
       IsEnabled = UNIMPLEMENTED,
     },
+    C_ClubFinder = {},
     C_Commentator = {
       GetMaxNumPlayersPerTeam = STUB_NUMBER,
       GetMaxNumTeams = STUB_NUMBER,
@@ -1234,10 +1242,12 @@ local function mkWowEnv(api, loader)
       GetPoiForUiMapID = UNIMPLEMENTED,
     },
     C_GuildInfo = {
+      GetGuildTabardInfo = UNIMPLEMENTED,
       GuildControlGetRankFlags = STUB_TABLE,
       GuildRoster = UNIMPLEMENTED,
     },
     C_Item = {},
+    C_LegendaryCrafting = {},
     C_LFGInfo = {
       CanPlayerUseGroupFinder = UNIMPLEMENTED,
       CanPlayerUseLFD = UNIMPLEMENTED,
@@ -1599,6 +1609,7 @@ local function mkWowEnv(api, loader)
     GetChatWindowSavedDimensions = UNIMPLEMENTED,
     GetChatWindowSavedPosition = UNIMPLEMENTED,
     GetClassicExpansionLevel = STUB_NUMBER,
+    GetClassInfo = UNIMPLEMENTED,
     GetComboPoints = STUB_NUMBER,
     GetContainerItemInfo = UNIMPLEMENTED,
     GetContainerNumFreeSlots = STUB_NUMBER,
@@ -1750,6 +1761,7 @@ local function mkWowEnv(api, loader)
     GetNumArtifactsByRace = STUB_NUMBER,
     GetNumBattlefieldFlagPositions = STUB_NUMBER,
     GetNumBindings = STUB_NUMBER,
+    GetNumClasses = STUB_NUMBER,
     GetNumCompletedAchievements = function()
       return 1, 1  -- UNIMPLEMENTED
     end,
@@ -1884,6 +1896,7 @@ local function mkWowEnv(api, loader)
     GMEuropaTicketsEnabled = UNIMPLEMENTED,
     GuildControlGetNumRanks = STUB_NUMBER,
     GuildControlGetRankName = UNIMPLEMENTED,
+    GuildControlSetRank = UNIMPLEMENTED,
     GuildRoster = function()
       return api.env.C_GuildInfo.GuildRoster()
     end,
@@ -2049,6 +2062,7 @@ local function mkWowEnv(api, loader)
     PutItemInBag = UNIMPLEMENTED,
     QuestHonorFrame_Update = UNIMPLEMENTED,
     RegisterStaticConstants = UNIMPLEMENTED,
+    RequestGuildRecruitmentSettings = UNIMPLEMENTED,
     RequestRaidInfo = UNIMPLEMENTED,
     ResetCursor = UNIMPLEMENTED,
     ResurrectGetOfferer = UNIMPLEMENTED,
@@ -2230,6 +2244,7 @@ local fakeConstants = (function()
     'LE_WORLD_QUEST_QUALITY_COMMON',
     'LE_WORLD_QUEST_QUALITY_EPIC',
     'LE_WORLD_QUEST_QUALITY_RARE',
+    'UK_AADC_POPUP_TEXT',
   }
   local t = {}
   for _, n in ipairs(names) do
