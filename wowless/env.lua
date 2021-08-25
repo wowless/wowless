@@ -2029,7 +2029,6 @@ local function mkWowEnv(api, loader)
     LoadAddOn = function(name)
       assert(name)
       loader.loadAddon(name)
-      api.env.BattlefieldMapOptions = {}  -- TODO remove
       return true
     end,
     Kiosk = {
