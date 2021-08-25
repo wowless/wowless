@@ -1244,11 +1244,16 @@ local function mkWowEnv(api)
       CanPlayerUsePremadeGroup = UNIMPLEMENTED,
     },
     C_LFGList = {
+      ClearCreationTextFields = UNIMPLEMENTED,
+      GetActiveEntryInfo = UNIMPLEMENTED,
       GetApplications = STUB_TABLE,
       GetAvailableCategories = STUB_TABLE,
       GetAvailableLanguageSearchFilter = STUB_TABLE,
       GetAvailableRoles = UNIMPLEMENTED,
       GetDefaultLanguageSearchFilter = STUB_NUMBER,
+      GetFilteredSearchResults = function()
+        return 0  -- UNIMPLEMENTED
+      end,
       GetLanguageSearchFilter = STUB_NUMBER,
       GetNumApplications = function()
         return 0, 0  -- UNIMPLEMENTED
@@ -1597,6 +1602,9 @@ local function mkWowEnv(api)
     GetContainerItemInfo = UNIMPLEMENTED,
     GetContainerNumFreeSlots = STUB_NUMBER,
     GetContainerNumSlots = STUB_NUMBER,
+    GetCraftFilter = UNIMPLEMENTED,
+    GetCraftSlots = UNIMPLEMENTED,
+    GetCurrentGuildBankTab = STUB_NUMBER,
     GetCurrentRegionName = function()
       return 'RegionName'  -- UNIMPLEMENTED
     end,
@@ -1649,8 +1657,13 @@ local function mkWowEnv(api)
         TANK = 1,
       }
     end,
+    GetGuildBankTabInfo = UNIMPLEMENTED,
     GetGuildLogoInfo = UNIMPLEMENTED,
+    GetGuildRosterMOTD = function()
+      return ''  -- UNIMPLEMENTED
+    end,
     GetGuildRosterShowOffline = UNIMPLEMENTED,
+    GetGuildTabardFiles = UNIMPLEMENTED,
     GetInstanceInfo = UNIMPLEMENTED,
     GetInventoryAlertStatus = UNIMPLEMENTED,
     GetInventoryItemID = UNIMPLEMENTED,
@@ -1739,6 +1752,7 @@ local function mkWowEnv(api)
     GetNumCompletedAchievements = function()
       return 1, 1  -- UNIMPLEMENTED
     end,
+    GetNumGuildBankTabs = STUB_NUMBER,
     GetNumLanguages = STUB_NUMBER,
     GetNumMacros = STUB_NUMBER,
     GetNumQuestLeaderBoards = function()
@@ -1905,6 +1919,7 @@ local function mkWowEnv(api)
     IsEquippedAction = UNIMPLEMENTED,
     IsEveryoneAssistant = UNIMPLEMENTED,
     IsGMClient = UNIMPLEMENTED,
+    IsGuildLeader = UNIMPLEMENTED,
     IsInGroup = UNIMPLEMENTED,
     IsInGuild = UNIMPLEMENTED,
     IsInInstance = UNIMPLEMENTED,
@@ -2062,6 +2077,7 @@ local function mkWowEnv(api)
     SetChatWindowUninteractable = UNIMPLEMENTED,
     SetCursor = UNIMPLEMENTED,
     seterrorhandler = UNIMPLEMENTED,
+    SetGuildRosterSelection = UNIMPLEMENTED,
     SetPortraitTexture = UNIMPLEMENTED,
     SetPortraitToTexture = UNIMPLEMENTED,
     SetSelectedSkill = UNIMPLEMENTED,
