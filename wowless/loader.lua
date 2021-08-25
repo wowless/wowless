@@ -473,11 +473,9 @@ local function loader(api)
     loadToc(path.join(rootDir, 'FrameXML/FrameXML.toc'))
     local tocFiles = {}
     local addonDir = path.join(rootDir, 'AddOns')
-    local handle = io.popen(([[bash -c 'find %s -name "*.toc" | sort']]):format(addonDir))
-    for line in handle:lines() do
-      table.insert(tocFiles, line)
+    for dir in path.each(addonDir .. '/*', 'n', { skipfiles = true }) do
+      table.insert(tocFiles, path.join(addonDir, dir, dir .. '.toc'))
     end
-    handle:close()
     local loaded = {}
     local function doLoad(tocFile)
       if not loaded[tocFile] then
