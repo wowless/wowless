@@ -512,6 +512,7 @@ local function mkBaseUIObjectTypes(api)
         SetUserPlaced = function(self, value)
           u(self).isUserPlaced = not not value
         end,
+        StartMoving = UNIMPLEMENTED,
         UnregisterAllEvents = function(self)
           u(self).registeredAllEvents = false
           util.twipe(u(self).registeredEvents)
@@ -2027,6 +2028,7 @@ local function mkWowEnv(api)
     LE_TRANSMOG_COLLECTION_TYPE_FEET = 1,  -- UNIMPLEMENTED
     LoadAddOn = function(name)
       api.log(1, 'failing to load addon ' .. name)
+      api.env.BattlefieldMapOptions = {}
       return false, 'LOAD_FAILED'  -- UNIMPLEMENTED
     end,
     Kiosk = {
