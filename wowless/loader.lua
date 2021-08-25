@@ -389,7 +389,7 @@ local function loader(api)
             if fn then
               fn(e, parent)
             else
-              api.log(1, 'skipping ' .. filename .. ' ' .. e.type)
+              api.log(2, 'skipping ' .. filename .. ' ' .. e.type)
             end
           end
         end
@@ -437,6 +437,26 @@ local function loader(api)
     }
   end
 
+  local function resolveToc(tocFile, version)
+    api.log(1, 'resolving %s', tocFile)
+    local tocVersion = tocFile:match('_(%a+).toc')
+    if tocVersion == version then
+      api.log(1, '%s already has a version', tocFile)
+      return tocFile
+    end
+    local versionSpecific = tocFile:sub(1, -5) .. '_' .. version .. '.toc'
+    if path.isfile(versionSpecific) then
+      api.log(1, 'using version specific %s', versionSpecific)
+      return versionSpecific
+    end
+    if path.isfile(tocFile) then
+      api.log(1, 'falling back to %s', tocFile)
+      return tocFile
+    end
+    api.log(1, 'no valid toc for %s', tocFile)
+    return nil
+  end
+
   local function parseToc(tocFile)
     local attrs = {}
     local files = {}
@@ -468,13 +488,21 @@ local function loader(api)
     end
   end
 
-  local function loadFrameXml(rootDir)
+  local function loadFrameXml(rootDir, version)
     forAddon().loadFile(path.join(rootDir, 'FrameXML/GlobalStrings.lua'))
-    loadToc(path.join(rootDir, 'FrameXML/FrameXML.toc'))
+    loadToc(resolveToc(path.join(rootDir, 'FrameXML/FrameXML.toc'), version))
     local tocFiles = {}
     local addonDir = path.join(rootDir, 'AddOns')
+    -- TODO don't force load the rest of the tocs
+    local badAddons = {
+      Blizzard_FlightMap = true,
+      Blizzard_SocialUI = true,
+    }
     for dir in path.each(addonDir .. '/*', 'n', { skipfiles = true }) do
-      table.insert(tocFiles, path.join(addonDir, dir, dir .. '.toc'))
+      local toc = resolveToc(path.join(addonDir, dir, dir .. '.toc'), version)
+      if toc and not badAddons[dir] then
+        table.insert(tocFiles, toc)
+      end
     end
     local loaded = {}
     local function doLoad(tocFile)
@@ -482,7 +510,7 @@ local function loader(api)
         local toc = parseToc(tocFile)
         if toc.attrs.AllowLoad ~= 'Glue' then
           for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
-            doLoad(string.format('%s/%s/%s.toc', addonDir, dep, dep))
+            doLoad(resolveToc(string.format('%s/%s/%s.toc', addonDir, dep, dep), version))
           end
           loadToc(tocFile)
           loaded[tocFile] = true
@@ -495,15 +523,8 @@ local function loader(api)
         doLoad(tocFile)
       end
     end
-    -- TODO don't force load the rest of the tocs
-    local badAddons = {
-      Blizzard_FlightMap = true,
-      Blizzard_SocialUI = true,
-    }
     for _, tocFile in ipairs(tocFiles) do
-      if not badAddons[path.basename(tocFile):sub(1, -5)] then
-        doLoad(tocFile)
-      end
+      doLoad(tocFile)
     end
   end
 
