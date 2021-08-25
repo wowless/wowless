@@ -1,8 +1,8 @@
-local wowClassicEraRootDir = 'extracts/1.13.7.39692/Interface'
-local wowClassicPtrRootDir = 'extracts/2.5.2.39832/Interface'
-local wowClassicRootDir = 'extracts/2.5.1.39640/Interface'
-local wowRetailPtrRootDir = 'extracts/9.1.0.39804/Interface'
-local wowRetailRootDir = 'extracts/9.1.0.39804/Interface'
+local wowClassicEraRootDir = 'extracts/wow_classic_era/Interface'
+local wowClassicPtrRootDir = 'extracts/wow_classic_ptr/Interface'
+local wowClassicRootDir = 'extracts/wow_classic/Interface'
+local wowRetailPtrRootDir = 'extracts/wowt/Interface'
+local wowRetailRootDir = 'extracts/wow/Interface'
 
 local function loader(api)
 
