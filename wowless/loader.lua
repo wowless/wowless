@@ -538,6 +538,7 @@ local function loader(api, rootDir, version)
     loadFrameXml = loadFrameXml,
     loadToc = loadToc,
     loadXml = forAddon().loadXml,
+    version = version,
   }
 end
 

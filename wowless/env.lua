@@ -16,7 +16,7 @@ local function toTexture(parent, tex)
   end
 end
 
-local function mkBaseUIObjectTypes(api)
+local function mkBaseUIObjectTypes(api, loader)
   local function u(x)
     return api.UserData(x)
   end
@@ -468,9 +468,9 @@ local function mkBaseUIObjectTypes(api)
           u(self).attributes[name] = value
           api.RunScript(self, 'OnAttributeChanged', name, value)
         end,
-        SetBackdrop = UNIMPLEMENTED,  -- TODO classic era only
-        SetBackdropBorderColor = UNIMPLEMENTED,  -- TODO classic era only
-        SetBackdropColor = UNIMPLEMENTED,  -- TODO classic era only
+        SetBackdrop = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
+        SetBackdropBorderColor = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
+        SetBackdropColor = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
         SetClampedToScreen = function(self, value)
           u(self).isClampedToScreen = not not value
         end,
@@ -1101,10 +1101,10 @@ local function mkWowEnv(api, loader)
     CanHearthAndResurrectFromArea = UNIMPLEMENTED,
     CanReplaceGuildMaster = UNIMPLEMENTED,
     CanSendSoRByText = UNIMPLEMENTED,
-    CastingInfo = UNIMPLEMENTED,  -- TODO classic era only
+    CastingInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     CastShapeshiftForm = UNIMPLEMENTED,
     ChangeActionBarPage = UNIMPLEMENTED,
-    ChannelInfo = UNIMPLEMENTED,  -- TODO classic era only
+    ChannelInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     CollapseSkillHeader = UNIMPLEMENTED,
     CombatLogAddFilter = UNIMPLEMENTED,
     CombatLogGetCurrentEntry = UNIMPLEMENTED,
@@ -2241,7 +2241,7 @@ end)()
 local function init(api, loader)
   setmetatable(api.env, mkMetaEnv(api))
   Mixin(api.env, mkBaseEnv(), fakeConstants, mkWowEnv(api, loader))
-  Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api))
+  Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api, loader))
 end
 
 return {

@@ -1,5 +1,6 @@
 local api = require('wowless.api').new(function() end)
-require('wowless.env').init(api)
+local loader = require('wowless.loader').loader(api)
+require('wowless.env').init(api, loader)
 
 describe('frame #small', function()
   it('has expected defaults', function()

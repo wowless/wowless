@@ -3,8 +3,8 @@ describe('loader #small', function()
   local api, loader
   before_each(function()
     api = require('wowless.api').new(function() end)
-    require('wowless.env').init(api)
     loader = require('wowless.loader').loader(api)
+    require('wowless.env').init(api, loader)
   end)
 
   local function loadXml(str)
