@@ -1,4 +1,4 @@
-local function loader(api)
+local function loader(api, rootDir, version)
 
   local path = require('path')
   local xml = require('wowless.xml')
@@ -437,7 +437,7 @@ local function loader(api)
     }
   end
 
-  local function resolveToc(tocFile, version)
+  local function resolveToc(tocFile)
     api.log(1, 'resolving %s', tocFile)
     local tocVersion = tocFile:match('_(%a+).toc')
     if tocVersion == version then
@@ -488,9 +488,23 @@ local function loader(api)
     end
   end
 
-  local function loadFrameXml(rootDir, version)
+  local loaded = {}
+  local function doLoad(tocFile)
+    if not loaded[tocFile] then
+      local toc = parseToc(tocFile)
+      if toc.attrs.AllowLoad ~= 'Glue' then
+        for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
+          doLoad(resolveToc(string.format('%s/AddOns/%s/%s.toc', rootDir, dep, dep)))
+        end
+        loadToc(tocFile)
+        loaded[tocFile] = true
+      end
+    end
+  end
+
+  local function loadFrameXml()
     forAddon().loadFile(path.join(rootDir, 'FrameXML/GlobalStrings.lua'))
-    loadToc(resolveToc(path.join(rootDir, 'FrameXML/FrameXML.toc'), version))
+    loadToc(resolveToc(path.join(rootDir, 'FrameXML/FrameXML.toc')))
     local tocFiles = {}
     local addonDir = path.join(rootDir, 'AddOns')
     -- TODO don't force load the rest of the tocs
@@ -499,22 +513,9 @@ local function loader(api)
       Blizzard_SocialUI = true,
     }
     for dir in path.each(addonDir .. '/*', 'n', { skipfiles = true }) do
-      local toc = resolveToc(path.join(addonDir, dir, dir .. '.toc'), version)
+      local toc = resolveToc(path.join(addonDir, dir, dir .. '.toc'))
       if toc and not badAddons[dir] then
         table.insert(tocFiles, toc)
-      end
-    end
-    local loaded = {}
-    local function doLoad(tocFile)
-      if not loaded[tocFile] then
-        local toc = parseToc(tocFile)
-        if toc.attrs.AllowLoad ~= 'Glue' then
-          for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
-            doLoad(resolveToc(string.format('%s/%s/%s.toc', addonDir, dep, dep), version))
-          end
-          loadToc(tocFile)
-          loaded[tocFile] = true
-        end
       end
     end
     for _, tocFile in ipairs(tocFiles) do
@@ -528,7 +529,12 @@ local function loader(api)
     end
   end
 
+  local function loadAddon(addonName)
+    doLoad(resolveToc(path.join(rootDir, 'AddOns', addonName, addonName .. '.toc')))
+  end
+
   return {
+    loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
     loadToc = loadToc,
     loadXml = forAddon().loadXml,

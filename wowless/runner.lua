@@ -5,9 +5,9 @@ local function run(loglevel, dir, version)
     end
   end
   local api = require('wowless.api').new(log)
-  require('wowless.env').init(api)
-  local loader = require('wowless.loader')
-  loader.loader(api).loadFrameXml(dir, version)
+  local loader = require('wowless.loader').loader(api, dir, version)
+  require('wowless.env').init(api, loader)
+  loader.loadFrameXml()
   api.SendEvent('PLAYER_LOGIN')
   api.SendEvent('UPDATE_CHAT_WINDOWS')
   api.SendEvent('PLAYER_ENTERING_WORLD')

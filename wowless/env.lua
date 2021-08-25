@@ -1070,7 +1070,7 @@ local function mkMetaEnv(api)
   }
 end
 
-local function mkWowEnv(api)
+local function mkWowEnv(api, loader)
   local function CreateFrame(type, name, parent, templateNames)
     local ltype = string.lower(type)
     assert(api.IsIntrinsicType(ltype), type .. ' is not intrinsic')
@@ -2027,9 +2027,10 @@ local function mkWowEnv(api)
     LE_PARTY_CATEGORY_INSTANCE = 2,
     LE_TRANSMOG_COLLECTION_TYPE_FEET = 1,  -- UNIMPLEMENTED
     LoadAddOn = function(name)
-      api.log(1, 'failing to load addon ' .. name)
-      api.env.BattlefieldMapOptions = {}
-      return false, 'LOAD_FAILED'  -- UNIMPLEMENTED
+      assert(name)
+      loader.loadAddon(name)
+      api.env.BattlefieldMapOptions = {}  -- TODO remove
+      return true
     end,
     Kiosk = {
       IsEnabled = UNIMPLEMENTED,
@@ -2238,9 +2239,9 @@ local fakeConstants = (function()
   return t
 end)()
 
-local function init(api)
+local function init(api, loader)
   setmetatable(api.env, mkMetaEnv(api))
-  Mixin(api.env, mkBaseEnv(), fakeConstants, mkWowEnv(api))
+  Mixin(api.env, mkBaseEnv(), fakeConstants, mkWowEnv(api, loader))
   Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api))
 end
 
