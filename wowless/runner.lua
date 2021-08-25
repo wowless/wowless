@@ -7,14 +7,7 @@ local function run(loglevel, version)
   local api = require('wowless.api').new(log)
   require('wowless.env').init(api)
   local loader = require('wowless.loader')
-  local rootDirs = {
-    wow = loader.wowRetailRootDir,
-    wowt = loader.wowRetailPtrRootDir,
-    wow_classic = loader.wowClassicRootDir,
-    wow_classic_era = loader.wowClassicEraRootDir,
-    wow_classic_ptr = loader.wowClassicPtrRootDir,
-  }
-  loader.loader(api).loadFrameXml(assert(rootDirs[version]))
+  loader.loader(api).loadFrameXml('extracts/' .. version .. '/Interface')
   api.SendEvent('PLAYER_LOGIN')
   api.SendEvent('UPDATE_CHAT_WINDOWS')
   api.SendEvent('PLAYER_ENTERING_WORLD')

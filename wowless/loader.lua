@@ -1,9 +1,3 @@
-local wowClassicEraRootDir = 'extracts/wow_classic_era/Interface'
-local wowClassicPtrRootDir = 'extracts/wow_classic_ptr/Interface'
-local wowClassicRootDir = 'extracts/wow_classic/Interface'
-local wowRetailPtrRootDir = 'extracts/wowt/Interface'
-local wowRetailRootDir = 'extracts/wow/Interface'
-
 local function loader(api)
 
   local path = require('path')
@@ -524,9 +518,4 @@ end
 
 return {
   loader = loader,
-  wowClassicEraRootDir = wowClassicEraRootDir,
-  wowClassicPtrRootDir = wowClassicPtrRootDir,
-  wowClassicRootDir = wowClassicRootDir,
-  wowRetailPtrRootDir = wowRetailPtrRootDir,
-  wowRetailRootDir = wowRetailRootDir,
 }
