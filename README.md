@@ -16,6 +16,6 @@ The above will:
   * load the code, just like a WoW client would
   * mess around with the frames created: click around, mouse over things, etc.
 
-The loading and testing work for Classic and Classic Era, but do not yet work for Retail. To see the litany of errors caused by Retail, run `bin/run.sh 0 wow`, and then help fix the resulting issues!
+The loading and testing work for Classic and Classic Era, but do not yet work for Retail. To see the litany of errors caused by Retail, run `bin/run.sh 0 wow Mainline`, and then help fix the resulting issues!
 
 [wowcig]: https://github.com/ferronn-dev/wowcig
