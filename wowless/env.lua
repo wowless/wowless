@@ -425,7 +425,8 @@ local function mkBaseUIObjectTypes(api)
           return u(self).isClampedToScreen
         end,
         IsEventRegistered = function(self, event)
-          return not not u(self).registeredEvents[string.lower(event)]
+          local ud = u(self)
+          return ud.registeredAllEvents or not not ud.registeredEvents[string.lower(event)]
         end,
         IsMouseClickEnabled = function(self)
           return u(self).mouseClickEnabled
