@@ -518,6 +518,7 @@ local function loader(api, rootDir, version)
         table.insert(tocFiles, toc)
       end
     end
+    table.sort(tocFiles)
     for _, tocFile in ipairs(tocFiles) do
       local toc = parseToc(tocFile)
       if toc.attrs.LoadOnDemand ~= '1' then
