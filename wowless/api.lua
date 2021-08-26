@@ -7,6 +7,10 @@ local function new(log)
   local uiobjectTypes = {}
   local userdata = {}
 
+  local function u(obj)
+    return userdata[obj[0]]
+  end
+
   local function InheritsFrom(a, b)
     local result = a == b
     for _, inh in ipairs(uiobjectTypes[a].inherits) do
@@ -20,22 +24,22 @@ local function new(log)
   end
 
   local function SetParent(obj, parent)
-    if userdata[obj].parent then
-      userdata[userdata[obj].parent].children[obj] = nil
+    if u(obj).parent then
+      u(u(obj).parent).children[obj] = nil
     end
-    userdata[obj].parent = parent
+    u(obj).parent = parent
     if parent then
-      userdata[parent].children[obj] = true
+      u(parent).children[obj] = true
     end
   end
 
   local function ParentSub(name, parent)
     if name and string.match(name, '$parent') then
       local p = parent
-      while p ~= nil and not userdata[p].name do
-        p = userdata[p].parent
+      while p ~= nil and not u(p).name do
+        p = u(p).parent
       end
-      return string.gsub(name, '$parent', p and userdata[p].name or 'Top')
+      return string.gsub(name, '$parent', p and u(p).name or 'Top')
     else
       return name
     end
@@ -49,7 +53,7 @@ local function new(log)
   end
 
   local function RunScript(obj, name, ...)
-    local ud = userdata[obj]
+    local ud = u(obj)
     if ud.scripts then
       local args = {...}
       for i = 0, 2 do
@@ -71,7 +75,8 @@ local function new(log)
     assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
     log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
     local obj = setmetatable({}, type.metatable)
-    userdata[obj] = {
+    obj[0] = newproxy()
+    userdata[obj[0]] = {
       name = objname,
       type = typename,
     }
@@ -82,8 +87,8 @@ local function new(log)
       template.initAttrs(obj)
     end
     if objname then
-      objname = ParentSub(objnamearg, userdata[obj].parent)
-      userdata[obj].name = objname
+      objname = ParentSub(objnamearg, u(obj).parent)
+      u(obj).name = objname
       if env[objname] then
         log(1, 'overwriting global ' .. objname)
       end
@@ -97,14 +102,14 @@ local function new(log)
       template.initKids(obj)
     end
     RunScript(obj, 'OnLoad')
-    if userdata[obj].visible then
+    if u(obj).visible then
       RunScript(obj, 'OnShow')
     end
     return obj
   end
 
   local function SetScript(obj, name, bindingType, script)
-    local ud = userdata[obj]
+    local ud = u(obj)
     log(4, 'setting %s[%d] for %s %s', name, bindingType, ud.type, tostring(ud.name))
     ud.scripts[bindingType][string.lower(name)] = script
   end
@@ -112,7 +117,7 @@ local function new(log)
   local function SendEvent(event, ...)
     local ev = string.lower(event)
     for _, frame in ipairs(frames) do
-      local ud = userdata[frame]
+      local ud = u(frame)
       if ud.registeredEvents[ev] or ud.registeredAllEvents then
         RunScript(frame, 'OnEvent', event, ...)
       end
@@ -121,7 +126,7 @@ local function new(log)
 
   local function NextFrame()
     for _, frame in ipairs(frames) do
-      if userdata[frame].visible then
+      if u(frame).visible then
         RunScript(frame, 'OnUpdate', 1)
       end
     end
@@ -129,10 +134,6 @@ local function new(log)
 
   local function GetErrorCount()
     return errors
-  end
-
-  local function UserData(obj)
-    return userdata[obj]
   end
 
   return {
@@ -152,7 +153,7 @@ local function new(log)
     SetScript = SetScript,
     templates = templates,
     uiobjectTypes = uiobjectTypes,
-    UserData = UserData,
+    UserData = u,
   }
 end
 

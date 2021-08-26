@@ -8,7 +8,7 @@ describe('frame #small', function()
     local expected = {
       height = 0,
       numPoints = 0,
-      object = {},
+      object = { [0] = f[0] },
       shown = true,
       size = {0, 0},
       type = 'Frame',

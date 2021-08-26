@@ -50,7 +50,11 @@ describe('loader #small', function()
       </Ui>
     ]])
     assert.same(0, api.GetErrorCount())
-    assert.same({ moo = 'cow' }, api.env.MyFrame)
+    local expected = {
+      [0] = api.env.MyFrame[0],
+      moo = 'cow',
+    }
+    assert.same(expected, api.env.MyFrame)
   end)
 
   it('calls OnLoad script inline', function()
@@ -66,7 +70,11 @@ describe('loader #small', function()
       </Ui>
     ]])
     assert.same(0, api.GetErrorCount())
-    assert.same({ moo = 'cow' }, api.env.MyFrame)
+    local expected = {
+      [0] = api.env.MyFrame[0],
+      moo = 'cow',
+    }
+    assert.same(expected, api.env.MyFrame)
   end)
 
   it('calls OnLoad of kids before parents', function()
