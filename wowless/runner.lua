@@ -1,4 +1,7 @@
-local function run(loglevel, dir, version)
+local function run(cfg)
+  local dir = cfg.dir
+  local version = cfg.version
+  local loglevel = cfg.loglevel or 0
   local function log(level, fmt, ...)
     if level <= loglevel then
       print(string.format(fmt, ...))
