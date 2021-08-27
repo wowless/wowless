@@ -1612,6 +1612,7 @@ local function mkWowEnv(api, loader)
     FillLocalizedClassList = UNIMPLEMENTED,
     FlashClientIcon = UNIMPLEMENTED,
     FollowUnit = UNIMPLEMENTED,
+    forceinsecure = UNIMPLEMENTED,
     GetActionBarPage = STUB_NUMBER,
     GetActionBarToggles = UNIMPLEMENTED,
     GetActionCount = STUB_NUMBER,
@@ -1689,6 +1690,9 @@ local function mkWowEnv(api, loader)
     end,
     GetDefaultScale = STUB_NUMBER,
     GetDefaultVideoOptions = UNIMPLEMENTED,
+    geterrorhandler = function()
+      return api.ErrorHandler  -- UNIMPLEMENTED
+    end,
     GetExpansionLevel = UNIMPLEMENTED,
     GetExtraBarIndex = STUB_NUMBER,
     getfenv = function(arg)
@@ -1969,6 +1973,7 @@ local function mkWowEnv(api, loader)
     InCinematic = UNIMPLEMENTED,
     InCombatLockdown = UNIMPLEMENTED,
     IsAccountSecured = UNIMPLEMENTED,
+    IsActionInRange = UNIMPLEMENTED,
     IsActiveBattlefieldArena = UNIMPLEMENTED,
     IsAddOnLoaded = UNIMPLEMENTED,
     IsAddonVersionCheckEnabled = UNIMPLEMENTED,
@@ -1989,6 +1994,7 @@ local function mkWowEnv(api, loader)
     IsInventoryItemLocked = UNIMPLEMENTED,
     IsInventoryItemProfessionBag = UNIMPLEMENTED,
     IsItemAction = UNIMPLEMENTED,
+    IsItemInRange = UNIMPLEMENTED,
     IsLoggedIn = UNIMPLEMENTED,
     IsMacClient = UNIMPLEMENTED,
     IsModifiedClick = UNIMPLEMENTED,
@@ -2005,6 +2011,7 @@ local function mkWowEnv(api, loader)
       return issecure and issecure() or true
     end,
     IsShiftKeyDown = UNIMPLEMENTED,
+    IsSpellInRange = UNIMPLEMENTED,
     IsSpellKnown = UNIMPLEMENTED,
     IsStackableAction = UNIMPLEMENTED,
     IsTestBuild = UNIMPLEMENTED,
@@ -2013,6 +2020,9 @@ local function mkWowEnv(api, loader)
     IsTrialAccount = UNIMPLEMENTED,
     IsTutorialFlagged = UNIMPLEMENTED,
     IsUnitOnQuest = UNIMPLEMENTED,
+    IsUsableAction = UNIMPLEMENTED,
+    IsUsableItem = UNIMPLEMENTED,
+    IsUsableSpell = UNIMPLEMENTED,
     IsVeteranTrialAccount = UNIMPLEMENTED,
     IsWindowsClient = UNIMPLEMENTED,
     LE_BAG_FILTER_FLAG_CONSUMABLES = 1,

@@ -136,10 +136,16 @@ local function new(log)
     return errors
   end
 
+  local function ErrorHandler(str)
+    errors = errors + 1
+    log(0, 'error: ' .. str)
+  end
+
   return {
     CallSafely = CallSafely,
     CreateUIObject = CreateUIObject,
     env = env,
+    ErrorHandler = ErrorHandler,
     frames = frames,
     GetErrorCount = GetErrorCount,
     InheritsFrom = InheritsFrom,
