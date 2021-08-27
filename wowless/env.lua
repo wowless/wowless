@@ -605,13 +605,19 @@ local function mkBaseUIObjectTypes(api, loader)
     ParentedObject = {
       constructor = function(self)
         u(self).children = {}
+        u(self).forbidden = false
       end,
       inherits = {'UIObject'},
       mixin = {
         GetParent = function(self)
           return u(self).parent
         end,
-        SetForbidden = UNIMPLEMENTED,
+        IsForbidden = function(self)
+          return u(self).forbidden
+        end,
+        SetForbidden = function(self)
+          u(self).forbidden = true
+        end,
       },
     },
     PlayerModel = {
@@ -645,11 +651,13 @@ local function mkBaseUIObjectTypes(api, loader)
         local ud = u(self)
         ud.alpha = 1
         ud.bottom = 0
+        ud.explicitlyProtected = false
         ud.height = 0
         ud.isIgnoringParentAlpha = false
         ud.isIgnoringParentScale = false
         ud.left = 0
         ud.points = {}
+        ud.protected = false
         ud.scale = 1
         ud.shown = true
         ud.visible = not ud.parent or u(ud.parent).visible
@@ -743,6 +751,9 @@ local function mkBaseUIObjectTypes(api, loader)
           return u(self).isIgnoringParentScale
         end,
         IsMouseOver = UNIMPLEMENTED,
+        IsProtected = function(self)
+          return u(self).protected, u(self).explicitlyProtected
+        end,
         IsShown = function(self)
           return u(self).shown
         end,
@@ -806,6 +817,9 @@ local function mkBaseUIObjectTypes(api, loader)
       mixin = {
         GetScript = function(self, name, bindingType)
           return u(self).scripts[bindingType or 1][string.lower(name)]
+        end,
+        HasScript = function(self, name)
+          return m(self, 'GetScript', name) ~= nil
         end,
         HookScript = function(self, name, script, bindingType)
           local btype = bindingType or 1
@@ -1481,7 +1495,9 @@ local function mkWowEnv(api, loader)
       IsTranscriptionAllowed = UNIMPLEMENTED,
     },
     C_Widget = {
-      IsFrameWidget = UNIMPLEMENTED,
+      IsFrameWidget = function()
+        return true  -- UNIMPLEMENTED
+      end,
     },
     C_WowTokenPublic = {
       GetCommerceSystemStatus = UNIMPLEMENTED,
@@ -1594,10 +1610,12 @@ local function mkWowEnv(api, loader)
     }),
     FillLocalizedClassList = UNIMPLEMENTED,
     FlashClientIcon = UNIMPLEMENTED,
+    FollowUnit = UNIMPLEMENTED,
     GetActionBarPage = STUB_NUMBER,
     GetActionBarToggles = UNIMPLEMENTED,
     GetActionCount = STUB_NUMBER,
     GetActionInfo = UNIMPLEMENTED,
+    GetActionText = UNIMPLEMENTED,
     GetActionTexture = UNIMPLEMENTED,
     GetActiveLootRollIDs = STUB_TABLE,
     GetAddOnEnableState = UNIMPLEMENTED,
@@ -1702,6 +1720,7 @@ local function mkWowEnv(api, loader)
     GetGuildTabardFiles = UNIMPLEMENTED,
     GetInstanceInfo = UNIMPLEMENTED,
     GetInventoryAlertStatus = UNIMPLEMENTED,
+    GetInventoryItemDurability = UNIMPLEMENTED,
     GetInventoryItemID = UNIMPLEMENTED,
     GetInventoryItemLink = UNIMPLEMENTED,
     GetInventoryItemQuality = UNIMPLEMENTED,
@@ -1790,6 +1809,7 @@ local function mkWowEnv(api, loader)
     GetNumCompletedAchievements = function()
       return 1, 1  -- UNIMPLEMENTED
     end,
+    GetNumGroupMembers = STUB_NUMBER,
     GetNumGuildBankTabs = STUB_NUMBER,
     GetNumLanguages = STUB_NUMBER,
     GetNumMacros = STUB_NUMBER,
@@ -1886,6 +1906,7 @@ local function mkWowEnv(api, loader)
     GetSpecialization = STUB_NUMBER,
     GetSpecializationInfo = UNIMPLEMENTED,
     GetSpellConfirmationPromptsInfo = STUB_TABLE,
+    GetSpellInfo = UNIMPLEMENTED,
     GetSpellTabInfo = function()
       return 'moo', 0, 0, 0  -- UNIMPLEMENTED
     end,
@@ -1983,6 +2004,7 @@ local function mkWowEnv(api, loader)
       return issecure and issecure() or true
     end,
     IsShiftKeyDown = UNIMPLEMENTED,
+    IsSpellKnown = UNIMPLEMENTED,
     IsStackableAction = UNIMPLEMENTED,
     IsTestBuild = UNIMPLEMENTED,
     IsThreatWarningEnabled = UNIMPLEMENTED,
@@ -2070,6 +2092,9 @@ local function mkWowEnv(api, loader)
       loader.loadAddon(name)
       return true
     end,
+    loadstring_untainted = function(s)
+      return loader.loadLuaString('<loadstring_untainted>', s)
+    end,
     Kiosk = {
       IsEnabled = UNIMPLEMENTED,
     },
@@ -2106,6 +2131,7 @@ local function mkWowEnv(api, loader)
         return func(...)
       end
     end,
+    SecureCmdOptionParse = UNIMPLEMENTED,
     SelectGossipOption = UNIMPLEMENTED,
     SelectQuestLogEntry = UNIMPLEMENTED,
     SetActionBarToggles = UNIMPLEMENTED,
@@ -2149,6 +2175,9 @@ local function mkWowEnv(api, loader)
     UnitChannelInfo = UNIMPLEMENTED,
     UnitClass = function()
       return 'Warrior', 'WARRIOR', 1
+    end,
+    UnitClassBase = function()
+      return 'WARRIOR', 1
     end,
     UnitExists = UNIMPLEMENTED,
     UnitFactionGroup = function()
