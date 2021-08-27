@@ -45,11 +45,13 @@ local function new(log)
     end
   end
 
+  local function ErrorHandler(str)
+    errors = errors + 1
+    log(0, 'error: ' .. str .. '\n' .. debug.traceback())
+  end
+
   local function CallSafely(fun)
-    return xpcall(fun, function(err)
-      errors = errors + 1
-      log(0, '%s', 'error: ' .. err .. '\n' .. debug.traceback())
-    end)
+    return xpcall(fun, ErrorHandler)
   end
 
   local function RunScript(obj, name, ...)
@@ -115,6 +117,7 @@ local function new(log)
   end
 
   local function SendEvent(event, ...)
+    log(1, 'sending event %s', event)
     local ev = string.lower(event)
     for _, frame in ipairs(frames) do
       local ud = u(frame)
@@ -136,11 +139,6 @@ local function new(log)
     return errors
   end
 
-  local function ErrorHandler(str)
-    errors = errors + 1
-    log(0, 'error: ' .. str)
-  end
-
   return {
     CallSafely = CallSafely,
     CreateUIObject = CreateUIObject,
@@ -150,6 +148,7 @@ local function new(log)
     GetErrorCount = GetErrorCount,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
+    isLoggedIn = false,
     log = log,
     NextFrame = NextFrame,
     ParentSub = ParentSub,

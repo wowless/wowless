@@ -7,7 +7,7 @@ local STUB_NUMBER = function() return 1 end
 local STUB_TABLE = function() return {} end
 
 local function toTexture(parent, tex)
-  if type(tex) == 'string' then
+  if type(tex) == 'string' or type(tex) == 'number' then
     local t = parent:CreateTexture()
     t:SetTexture(tex)
     return t
@@ -486,6 +486,8 @@ local function mkBaseUIObjectTypes(api, loader)
           u(self).isClampedToScreen = not not value
         end,
         SetClampRectInsets = UNIMPLEMENTED,
+        SetFixedFrameLevel = loader.version ~= 'Vanilla' and UNIMPLEMENTED or nil,
+        SetFixedFrameStrata = loader.version ~= 'Vanilla' and UNIMPLEMENTED or nil,
         SetFrameLevel = function(self, frameLevel)
           u(self).frameLevel = frameLevel
         end,
@@ -1068,6 +1070,7 @@ local function mkBaseEnv()
     table = {
       concat = table.concat,
       insert = table.insert,
+      remove = table.remove,
       sort = table.sort,
       wipe = util.twipe,
     },
@@ -1078,6 +1081,7 @@ local function mkBaseEnv()
     type = type,
     unpack = unpack,
     wipe = util.twipe,
+    xpcall = xpcall,
   }
 end
 
@@ -1663,6 +1667,9 @@ local function mkWowEnv(api, loader)
     GetCraftFilter = UNIMPLEMENTED,
     GetCraftSlots = UNIMPLEMENTED,
     GetCurrentGuildBankTab = STUB_NUMBER,
+    GetCurrentRegion = function()
+      return 1  -- UNIMPLEMENTED
+    end,
     GetCurrentRegionName = function()
       return 'RegionName'  -- UNIMPLEMENTED
     end,
@@ -1780,7 +1787,9 @@ local function mkWowEnv(api, loader)
     GetLFGCategoryForID = UNIMPLEMENTED,
     GetLFGDeserterExpiration = STUB_NUMBER,
     GetLFGRoleUpdate = UNIMPLEMENTED,
-    GetLocale = UNIMPLEMENTED,
+    GetLocale = function()
+      return 'enUS'  -- UNIMPLEMENTED
+    end,
     GetLootMethod = function()
       return 'freeforall'  -- UNIMPLEMENTED
     end,
@@ -2003,7 +2012,9 @@ local function mkWowEnv(api, loader)
     IsInventoryItemProfessionBag = UNIMPLEMENTED,
     IsItemAction = UNIMPLEMENTED,
     IsItemInRange = UNIMPLEMENTED,
-    IsLoggedIn = UNIMPLEMENTED,
+    IsLoggedIn = function()
+      return api.isLoggedIn
+    end,
     IsMacClient = UNIMPLEMENTED,
     IsModifiedClick = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
