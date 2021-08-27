@@ -1021,6 +1021,7 @@ local function mkBaseEnv()
     getn = table.getn,
     gsub = string.gsub,
     ipairs = ipairs,
+    loadstring_untainted = loadstring,
     math = {
       abs = math.abs,
       ceil = math.ceil,
@@ -2092,9 +2093,6 @@ local function mkWowEnv(api, loader)
       loader.loadAddon(name)
       return true
     end,
-    loadstring_untainted = function(s)
-      return loader.loadLuaString('<loadstring_untainted>', s)
-    end,
     Kiosk = {
       IsEnabled = UNIMPLEMENTED,
     },
@@ -2118,6 +2116,9 @@ local function mkWowEnv(api, loader)
     ResetCursor = UNIMPLEMENTED,
     ResurrectGetOfferer = UNIMPLEMENTED,
     RollOnLoot = UNIMPLEMENTED,
+    scrub = function(...)
+      return ...  -- UNIMPLEMENTED
+    end,
     securecall = function(func, ...)
       assert(func, 'securecall of nil function')
       if type(func) == 'string' then

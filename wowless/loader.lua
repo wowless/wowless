@@ -441,7 +441,6 @@ local function loader(api, cfg)
 
     return {
       loadFile = loadFile,
-      loadLuaString = loadLuaString,
       loadXml = loadXml,
     }
   end
@@ -552,7 +551,6 @@ local function loader(api, cfg)
   return {
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
-    loadLuaString = forAddon().loadLuaString,
     loadToc = loadToc,
     loadXml = forAddon().loadXml,
     version = version,
