@@ -1,4 +1,7 @@
-local function loader(api, rootDir, version)
+local function loader(api, cfg)
+  local rootDir = cfg and cfg.rootDir
+  local version = cfg and cfg.version
+  local otherAddonDirs = cfg and cfg.otherAddonDirs or {}
 
   local path = require('path')
   local xml = require('wowless.xml')
@@ -530,8 +533,14 @@ local function loader(api, rootDir, version)
     end
   end
 
+  local otherAddons = {}
+  for _, d in ipairs(otherAddonDirs) do
+    otherAddons[path.basename(d)] = d
+  end
+
   local function loadAddon(addonName)
-    doLoad(resolveToc(path.join(rootDir, 'AddOns', addonName, addonName .. '.toc')))
+    local dir = otherAddons[addonName] or path.join(rootDir, 'AddOns', addonName)
+    doLoad(resolveToc(path.join(dir, addonName .. '.toc')))
   end
 
   return {

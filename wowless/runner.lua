@@ -1,6 +1,4 @@
 local function run(cfg)
-  local dir = cfg.dir
-  local version = cfg.version
   local loglevel = cfg.loglevel or 0
   local function log(level, fmt, ...)
     if level <= loglevel then
@@ -8,9 +6,16 @@ local function run(cfg)
     end
   end
   local api = require('wowless.api').new(log)
-  local loader = require('wowless.loader').loader(api, dir, version)
+  local loader = require('wowless.loader').loader(api, {
+    otherAddonDirs = cfg.otherAddonDirs,
+    rootDir = cfg.dir,
+    version = cfg.version,
+  })
   require('wowless.env').init(api, loader)
   loader.loadFrameXml()
+  for _, d in ipairs(cfg.otherAddonDirs or {}) do
+    loader.loadAddon(require('path').basename(d))
+  end
   api.SendEvent('PLAYER_LOGIN')
   api.SendEvent('UPDATE_CHAT_WINDOWS')
   api.SendEvent('PLAYER_ENTERING_WORLD')
