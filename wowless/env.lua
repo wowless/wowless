@@ -1021,6 +1021,7 @@ local function mkBaseEnv()
     getn = table.getn,
     gsub = string.gsub,
     ipairs = ipairs,
+    loadstring = loadstring,
     loadstring_untainted = loadstring,
     math = {
       abs = math.abs,
@@ -1048,6 +1049,7 @@ local function mkBaseEnv()
     sort = table.sort,
     string = {
       byte = string.byte,
+      char = string.char,
       find = string.find,
       format = stringFormat,
       gmatch = string.gmatch,
@@ -1836,6 +1838,8 @@ local function mkWowEnv(api, loader)
     GetNumSpecializations = STUB_NUMBER,
     GetNumSpellTabs = STUB_NUMBER,
     GetNumSubgroupMembers = STUB_NUMBER,
+    GetNumTalents = STUB_NUMBER,
+    GetNumTalentTabs = STUB_NUMBER,
     GetNumTitles = STUB_NUMBER,
     GetNumTrackingTypes = STUB_NUMBER,
     GetOptOutOfLoot = UNIMPLEMENTED,
@@ -1921,6 +1925,9 @@ local function mkWowEnv(api, loader)
       return 0, 0  -- UNIMPLEMENTED
     end,
     GetTabardCreationCost = STUB_NUMBER,
+    GetTalentInfo = function()
+      return nil, nil, nil, nil, 0  -- UNIMPLEMENTED
+    end,
     GetText = function(token)
       return 'GetText(' .. token .. ')'  -- UNIMPLEMENTED
     end,
@@ -1929,6 +1936,7 @@ local function mkWowEnv(api, loader)
     GetTotemInfo = UNIMPLEMENTED,
     GetTrackedAchievements = UNIMPLEMENTED,
     GetTrackingInfo = UNIMPLEMENTED,
+    GetTrackingTexture = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     GetTradeSkillInvSlotFilter = UNIMPLEMENTED,
     GetTradeSkillInvSlots = UNIMPLEMENTED,
     GetTradeSkillSubClasses = UNIMPLEMENTED,
