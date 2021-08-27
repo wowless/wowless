@@ -97,6 +97,7 @@ local function mkBaseUIObjectTypes(api, loader)
         u(self).buttonState = 'NORMAL'
         u(self).enabled = true
         u(self).fontstring = m(self, 'CreateFontString')
+        u(self).motionScriptsWhileDisabled = false
         u(self).pushedTextOffsetX = 0
         u(self).pushedTextOffsetY = 0
         u(self).registeredClicks = { LeftButtonUp = true }
@@ -131,6 +132,9 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         GetHighlightTexture = function(self)
           return u(self).highlightTexture
+        end,
+        GetMotionScriptsWhileDisabled = function(self)
+          return u(self).motionScriptsWhileDisabled
         end,
         GetNormalTexture = function(self)
           return u(self).normalTexture
@@ -176,6 +180,9 @@ local function mkBaseUIObjectTypes(api, loader)
         SetHighlightFontObject = UNIMPLEMENTED,
         SetHighlightTexture = function(self, tex)
           u(self).highlightTexture = toTexture(self, tex)
+        end,
+        SetMotionScriptsWhileDisabled = function(self, value)
+          u(self).motionScriptsWhileDisabled = not not value
         end,
         SetNormalAtlas = function(self, atlas)
           u(self).normalTexture = toTexture(self, atlas)
@@ -372,6 +379,7 @@ local function mkBaseUIObjectTypes(api, loader)
         u(self).registeredAllEvents = false
         u(self).registeredEvents = {}
         u(self).resizable = false
+        u(self).toplevel = false
       end,
       inherits = {'ParentedObject', 'Region', 'ScriptObject'},
       mixin = {
@@ -447,6 +455,9 @@ local function mkBaseUIObjectTypes(api, loader)
         IsResizable = function(self)
           return u(self).resizable
         end,
+        IsToplevel = function(self)
+          return u(self).toplevel
+        end,
         IsUserPlaced = function(self)
           return u(self).isUserPlaced
         end,
@@ -509,6 +520,9 @@ local function mkBaseUIObjectTypes(api, loader)
         SetResizable = function(self, value)
           u(self).resizable = not not value
         end,
+        SetToplevel = function(self, value)
+          u(self).toplevel = not not value
+        end,
         SetUserPlaced = function(self, value)
           u(self).isUserPlaced = not not value
         end,
@@ -557,6 +571,10 @@ local function mkBaseUIObjectTypes(api, loader)
     },
     Minimap = {
       inherits = {'Frame'},
+      mixin = {
+        SetMaskTexture = UNIMPLEMENTED,
+        SetZoom = UNIMPLEMENTED,
+      },
     },
     Model = {
       inherits = {'Frame'},
@@ -1027,6 +1045,7 @@ local function mkBaseEnv()
       upper = string.upper,
     },
     strlower = string.lower,
+    strmatch = string.match,
     strsub = string.sub,
     strupper = string.upper,
     table = {
@@ -1150,6 +1169,7 @@ local function mkWowEnv(api, loader)
     C_ChatInfo = {
       GetNumReservedChatWindows = STUB_NUMBER,
       IsValidChatLine = UNIMPLEMENTED,
+      RegisterAddonMessagePrefix = UNIMPLEMENTED,
     },
     C_ClassColor = {
       GetClassColor = function()  -- UNIMPLEMENTED
@@ -1460,7 +1480,9 @@ local function mkWowEnv(api, loader)
       IsSpeakForMeActive = UNIMPLEMENTED,
       IsTranscriptionAllowed = UNIMPLEMENTED,
     },
-    C_Widget = {},
+    C_Widget = {
+      IsFrameWidget = UNIMPLEMENTED,
+    },
     C_WowTokenPublic = {
       GetCommerceSystemStatus = UNIMPLEMENTED,
     },
@@ -1598,7 +1620,9 @@ local function mkWowEnv(api, loader)
     GetBidderAuctionItems = UNIMPLEMENTED,
     GetBinding = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
-    GetBindingText = UNIMPLEMENTED,
+    GetBindingText = function()
+      return ''  -- UNIMPLEMENTED
+    end,
     GetCategoryList = STUB_TABLE,
     GetChatTypeIndex = STUB_NUMBER,
     GetChatWindowChannels = UNIMPLEMENTED,
@@ -1730,6 +1754,7 @@ local function mkWowEnv(api, loader)
     GetLFGCategoryForID = UNIMPLEMENTED,
     GetLFGDeserterExpiration = STUB_NUMBER,
     GetLFGRoleUpdate = UNIMPLEMENTED,
+    GetLocale = UNIMPLEMENTED,
     GetLootMethod = function()
       return 'freeforall'  -- UNIMPLEMENTED
     end,
@@ -1942,6 +1967,7 @@ local function mkWowEnv(api, loader)
     IsInventoryItemLocked = UNIMPLEMENTED,
     IsInventoryItemProfessionBag = UNIMPLEMENTED,
     IsItemAction = UNIMPLEMENTED,
+    IsLoggedIn = UNIMPLEMENTED,
     IsMacClient = UNIMPLEMENTED,
     IsModifiedClick = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
@@ -2086,6 +2112,7 @@ local function mkWowEnv(api, loader)
     SetActionUIButton = UNIMPLEMENTED,
     SetBagPortraitTexture = UNIMPLEMENTED,
     SetBinding = UNIMPLEMENTED,
+    SetBindingClick = UNIMPLEMENTED,
     SetChatWindowDocked = UNIMPLEMENTED,
     SetChatWindowLocked = UNIMPLEMENTED,
     SetChatWindowName = UNIMPLEMENTED,
