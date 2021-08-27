@@ -478,10 +478,10 @@ local function loader(api, cfg)
     return { attrs = attrs, files = files }
   end
 
-  local function loadToc(tocFile)
+  local function loadToc(tocFile, addonName)
     api.log(1, 'loading toc %s', tocFile)
-    local isAddon = tocFile:find('/AddOns/')
-    local tocBase = tocFile:match('/AddOns/([^/]+)/')
+    local isAddon = addonName and true or tocFile:find('/AddOns/')
+    local tocBase = addonName or tocFile:match('/AddOns/([^/]+)/')
     local addon = isAddon and forAddon(tocBase, {}) or forAddon()
     for _, file in ipairs(parseToc(tocFile).files) do
       addon.loadFile(file)
@@ -492,14 +492,14 @@ local function loader(api, cfg)
   end
 
   local loaded = {}
-  local function doLoad(tocFile)
+  local function doLoad(tocFile, addonName)
     if not loaded[tocFile] then
       local toc = parseToc(tocFile)
       if toc.attrs.AllowLoad ~= 'Glue' then
         for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
           doLoad(resolveToc(string.format('%s/AddOns/%s/%s.toc', rootDir, dep, dep)))
         end
-        loadToc(tocFile)
+        loadToc(tocFile, addonName)
         loaded[tocFile] = true
       end
     end
@@ -540,7 +540,7 @@ local function loader(api, cfg)
 
   local function loadAddon(addonName)
     local dir = otherAddons[addonName] or path.join(rootDir, 'AddOns', addonName)
-    doLoad(resolveToc(path.join(dir, addonName .. '.toc')))
+    doLoad(resolveToc(path.join(dir, addonName .. '.toc')), addonName)
   end
 
   return {
