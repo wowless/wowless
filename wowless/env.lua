@@ -78,9 +78,18 @@ local function mkBaseUIObjectTypes(api, loader)
     },
     Alpha = {
       inherits = {'Animation'},
+      mixin = {
+        SetFromAlpha = UNIMPLEMENTED,
+        SetToAlpha = UNIMPLEMENTED,
+      },
     },
     Animation = {
       inherits = {'ParentedObject', 'ScriptObject'},
+      mixin = {
+        SetDuration = UNIMPLEMENTED,
+        SetOrder = UNIMPLEMENTED,
+        SetStartDelay = UNIMPLEMENTED,
+      },
     },
     AnimationGroup = {
       constructor = function(self)
@@ -89,8 +98,9 @@ local function mkBaseUIObjectTypes(api, loader)
       inherits = {'ParentedObject', 'ScriptObject'},
       mixin = {
         CreateAnimation = function(self, type)
-          assert(api.InheritsFrom(type, 'animation'))
-          local anim = api.CreateUIObject(type)
+          local ltype = type:lower()
+          assert(api.InheritsFrom(ltype, 'animation'))
+          local anim = api.CreateUIObject(ltype)
           table.insert(u(self).animations, anim)
           return anim
         end,
@@ -99,6 +109,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         IsPlaying = UNIMPLEMENTED,
         Play = UNIMPLEMENTED,
+        SetToFinalAlpha = UNIMPLEMENTED,
         Stop = UNIMPLEMENTED,
       },
     },
@@ -990,6 +1001,7 @@ local function mkBaseUIObjectTypes(api, loader)
       mixin = {
         GetTexCoord = UNIMPLEMENTED,
         GetTexture = UNIMPLEMENTED,
+        GetVertexColor = UNIMPLEMENTED,
         SetAtlas = UNIMPLEMENTED,
         SetBlendMode = UNIMPLEMENTED,
         SetColorTexture = UNIMPLEMENTED,
