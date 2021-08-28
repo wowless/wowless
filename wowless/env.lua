@@ -867,8 +867,8 @@ local function mkBaseUIObjectTypes(api, loader)
         GetScript = function(self, name, bindingType)
           return u(self).scripts[bindingType or 1][string.lower(name)]
         end,
-        HasScript = function(self, name)
-          return m(self, 'GetScript', name) ~= nil
+        HasScript = function()
+          return true  -- UNIMPLEMENTED
         end,
         HookScript = function(self, name, script, bindingType)
           local btype = bindingType or 1
