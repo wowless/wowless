@@ -1717,6 +1717,14 @@ local function mkWowEnv(api, loader)
     GetBindingText = function()
       return ''  -- UNIMPLEMENTED
     end,
+    GetBuildInfo = function()
+      local versions = {
+        Mainline = { "9.0.2", "36665", "Nov 17 2020", 90002 },
+        TBC = { "2.5.1", "36665", "Nov 17 2020", 20501 },
+        Vanilla = { "1.13.6", "36665", "Nov 17 2020", 11306 },
+      }
+      return unpack(versions[loader.version])
+    end,
     GetCategoryList = STUB_TABLE,
     GetChatTypeIndex = STUB_NUMBER,
     GetChatWindowChannels = UNIMPLEMENTED,
