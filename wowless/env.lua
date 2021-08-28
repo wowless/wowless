@@ -571,6 +571,7 @@ local function mkBaseUIObjectTypes(api, loader)
     GameTooltip = {
       inherits = {'Frame'},
       mixin = {
+        AddFontStrings = UNIMPLEMENTED,
         AddLine = UNIMPLEMENTED,
         FadeOut = UNIMPLEMENTED,
         GetOwner = function(self)
@@ -1475,6 +1476,8 @@ local function mkWowEnv(api, loader)
     },
     C_QuestLog = {
       GetMaxNumQuests = STUB_NUMBER,
+      IsOnQuest = UNIMPLEMENTED,
+      IsQuestFlaggedCompleted = UNIMPLEMENTED,
     },
     C_QuestSession = {
       GetSessionBeginDetails = UNIMPLEMENTED,
@@ -1783,6 +1786,9 @@ local function mkWowEnv(api, loader)
     end,
     GetExpansionLevel = UNIMPLEMENTED,
     GetExtraBarIndex = STUB_NUMBER,
+    GetFactionInfoByID = function(id)
+      return 'faction' .. id, nil, nil, nil, nil, 0  -- UNIMPLEMENTED
+    end,
     getfenv = function(arg)
       if arg == 0 then
         return api.env
@@ -1805,6 +1811,7 @@ local function mkWowEnv(api, loader)
       }
     end,
     GetGuildBankTabInfo = UNIMPLEMENTED,
+    GetGuildInfo = UNIMPLEMENTED,
     GetGuildLogoInfo = UNIMPLEMENTED,
     GetGuildRosterMOTD = function()
       return ''  -- UNIMPLEMENTED
@@ -1852,6 +1859,7 @@ local function mkWowEnv(api, loader)
     GetItemClassInfo = function(classID)
       return string.format('ItemClass%d', classID)
     end,
+    GetItemCount = STUB_NUMBER,
     GetItemInfo = UNIMPLEMENTED,
     GetItemInventorySlotInfo = function(inventorySlot)
       return string.format('ItemInventorySlot%d', inventorySlot)
