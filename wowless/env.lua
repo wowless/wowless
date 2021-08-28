@@ -1695,6 +1695,9 @@ local function mkWowEnv(api, loader)
     GetActionTexture = UNIMPLEMENTED,
     GetActiveLootRollIDs = STUB_TABLE,
     GetAddOnEnableState = UNIMPLEMENTED,
+    GetAddOnMetadata = function(addon, field)
+      return ('addonmetadata:%s:%s'):format(addon, field)  -- UNIMPLEMENTED
+    end,
     GetAlternativeDefaultLanguage = UNIMPLEMENTED,
     GetArchaeologyInfo = UNIMPLEMENTED,
     GetArchaeologyRaceInfo = function()
