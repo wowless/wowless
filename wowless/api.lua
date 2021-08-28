@@ -12,6 +12,7 @@ local function new(log)
   end
 
   local function InheritsFrom(a, b)
+    assert(uiobjectTypes[a], 'unknown type ' .. a)
     local result = a == b
     for _, inh in ipairs(uiobjectTypes[a].inherits) do
       result = result or InheritsFrom(inh, b)

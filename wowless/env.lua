@@ -76,9 +76,27 @@ local function mkBaseUIObjectTypes(api, loader)
     Actor = {
       inherits = {'ParentedObject', 'ScriptObject'},
     },
+    Alpha = {
+      inherits = {'Animation'},
+    },
+    Animation = {
+      inherits = {'ParentedObject', 'ScriptObject'},
+    },
     AnimationGroup = {
+      constructor = function(self)
+        u(self).animations = {}
+      end,
       inherits = {'ParentedObject', 'ScriptObject'},
       mixin = {
+        CreateAnimation = function(self, type)
+          assert(api.InheritsFrom(type, 'animation'))
+          local anim = api.CreateUIObject(type)
+          table.insert(u(self).animations, anim)
+          return anim
+        end,
+        GetAnimations = function(self)
+          return unpack(u(self).animations)
+        end,
         IsPlaying = UNIMPLEMENTED,
         Play = UNIMPLEMENTED,
         Stop = UNIMPLEMENTED,
@@ -622,6 +640,9 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
       },
     },
+    Path = {
+      inherits = {'Animation'},
+    },
     PlayerModel = {
       inherits = {'Model'},
       mixin = {
@@ -652,6 +673,7 @@ local function mkBaseUIObjectTypes(api, loader)
       constructor = function(self)
         local ud = u(self)
         ud.alpha = 1
+        ud.animationGroups = {}
         ud.bottom = 0
         ud.explicitlyProtected = false
         ud.height = 0
@@ -670,8 +692,16 @@ local function mkBaseUIObjectTypes(api, loader)
         ClearAllPoints = function(self)
           util.twipe(u(self).points)
         end,
+        CreateAnimationGroup = function(self)
+          local group = api.CreateUIObject('animationgroup')
+          table.insert(u(self).animationGroups, group)
+          return group
+        end,
         GetAlpha = function(self)
           return u(self).alpha
+        end,
+        GetAnimationGroups = function(self)
+          return unpack(u(self).animationGroups)
         end,
         GetBottom = function(self)
           return u(self).bottom
@@ -806,6 +836,12 @@ local function mkBaseUIObjectTypes(api, loader)
           m(self, 'SetShown', true)
         end,
       },
+    },
+    Rotation = {
+      inherits = {'Animation'},
+    },
+    Scale = {
+      inherits = {'Animation'},
     },
     ScriptObject = {
       constructor = function(self)
@@ -965,6 +1001,12 @@ local function mkBaseUIObjectTypes(api, loader)
         SetTexelSnappingBias = UNIMPLEMENTED,
         SetTexture = UNIMPLEMENTED,
         SetVertTile = UNIMPLEMENTED,
+      },
+    },
+    Translation = {
+      inherits = {'Animation'},
+      mixin = {
+        SetOffset = UNIMPLEMENTED,
       },
     },
     UIObject = {
@@ -1146,9 +1188,11 @@ local function mkWowEnv(api, loader)
     CanReplaceGuildMaster = UNIMPLEMENTED,
     CanSendSoRByText = UNIMPLEMENTED,
     CastingInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
+    CastPetAction = UNIMPLEMENTED,
     CastShapeshiftForm = UNIMPLEMENTED,
     ChangeActionBarPage = UNIMPLEMENTED,
     ChannelInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
+    ClearOverrideBindings = UNIMPLEMENTED,
     CollapseSkillHeader = UNIMPLEMENTED,
     CombatLogAddFilter = UNIMPLEMENTED,
     CombatLogGetCurrentEntry = UNIMPLEMENTED,
@@ -1926,6 +1970,7 @@ local function mkWowEnv(api, loader)
     end,
     GetSpecialization = STUB_NUMBER,
     GetSpecializationInfo = UNIMPLEMENTED,
+    GetSpellBookItemInfo = UNIMPLEMENTED,
     GetSpellConfirmationPromptsInfo = STUB_TABLE,
     GetSpellInfo = UNIMPLEMENTED,
     GetSpellTabInfo = function()
@@ -2032,6 +2077,7 @@ local function mkWowEnv(api, loader)
       -- use tainted-lua if available
       return issecure and issecure() or true
     end,
+    issecurevariable = UNIMPLEMENTED,
     IsShiftKeyDown = UNIMPLEMENTED,
     IsSpellInRange = UNIMPLEMENTED,
     IsSpellKnown = UNIMPLEMENTED,

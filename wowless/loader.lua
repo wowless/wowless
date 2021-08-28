@@ -69,7 +69,31 @@ local function loader(api, cfg)
             end
           end,
           animations = function(e, parent)
-            loadElements(e.groups, parent)
+            local groups = api.UserData(parent).animationGroups
+            for _, g in ipairs(e.groups) do
+              -- Put all the actual animations in a separate element.
+              -- This way we can attach them to the group later.
+              local animset = {
+                anims = {},
+                type = 'animset',
+              }
+              local newkids = { animset }
+              for _, k in ipairs(g.kids) do
+                table.insert(k.type == 'scripts' and newkids or animset.anims, k)
+              end
+              local gg = {
+                attr = g.attr,
+                kids = newkids,
+                type = 'animationgroup',
+              }
+              table.insert(groups, loadElement(gg, parent))
+            end
+          end,
+          animset = function(e, parent)
+            local anims = api.UserData(parent).animations
+            for _, anim in ipairs(e.anims) do
+              table.insert(anims, loadElement(anim, parent))
+            end
           end,
           attributes = function(e, parent)
             -- TODO share code with SetAttribute somehow
