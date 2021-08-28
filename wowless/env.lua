@@ -270,6 +270,7 @@ local function mkBaseUIObjectTypes(api, loader)
         SetBlingTexture = function(self, tex)
           u(self).blingTexture = toTexture(self, tex)
         end,
+        SetDrawBling = UNIMPLEMENTED,
         SetEdgeTexture = function(self, tex)
           u(self).edgeTexture = toTexture(self, tex)
         end,
@@ -578,6 +579,7 @@ local function mkBaseUIObjectTypes(api, loader)
         IsOwned = function(self)
           return u(self).tooltipOwner ~= nil
         end,
+        SetAction = UNIMPLEMENTED,
         SetBagItem = UNIMPLEMENTED,
         SetInventoryItem = UNIMPLEMENTED,
         SetMinimumWidth = UNIMPLEMENTED,
@@ -1082,10 +1084,13 @@ local function mkBaseEnv()
     math = {
       abs = math.abs,
       ceil = math.ceil,
+      cos = math.cos,
       floor = math.floor,
       max = math.max,
       min = math.min,
       pi = math.pi,
+      rad = math.rad,
+      sin = math.sin,
       sqrt = math.sqrt,
     },
     max = math.max,
@@ -1680,6 +1685,10 @@ local function mkWowEnv(api, loader)
     forceinsecure = UNIMPLEMENTED,
     GetActionBarPage = STUB_NUMBER,
     GetActionBarToggles = UNIMPLEMENTED,
+    GetActionCharges = UNIMPLEMENTED,
+    GetActionCooldown = function()
+      return 0, 0, 0  -- UNIMPLEMENTED
+    end,
     GetActionCount = STUB_NUMBER,
     GetActionInfo = UNIMPLEMENTED,
     GetActionText = UNIMPLEMENTED,
@@ -2055,9 +2064,11 @@ local function mkWowEnv(api, loader)
     IsAddOnLoaded = UNIMPLEMENTED,
     IsAddonVersionCheckEnabled = UNIMPLEMENTED,
     IsAltKeyDown = UNIMPLEMENTED,
+    IsAutoRepeatAction = UNIMPLEMENTED,
     IsBattlefieldArena = UNIMPLEMENTED,
     IsConsumableAction = UNIMPLEMENTED,
     IsControlKeyDown = UNIMPLEMENTED,
+    IsCurrentAction = UNIMPLEMENTED,
     IsCurrentQuestFailed = UNIMPLEMENTED,
     IsEquippedAction = UNIMPLEMENTED,
     IsEveryoneAssistant = UNIMPLEMENTED,
@@ -2105,6 +2116,7 @@ local function mkWowEnv(api, loader)
     IsUsableSpell = UNIMPLEMENTED,
     IsVeteranTrialAccount = UNIMPLEMENTED,
     IsWindowsClient = UNIMPLEMENTED,
+    KeyRingButtonIDToInvSlotID = UNIMPLEMENTED,
     LE_BAG_FILTER_FLAG_CONSUMABLES = 1,
     LE_BAG_FILTER_FLAG_EQUIPMENT = 2,
     LE_BAG_FILTER_FLAG_IGNORE_CLEANUP = 3,
