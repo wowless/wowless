@@ -330,6 +330,9 @@ local function mkBaseUIObjectTypes(api, loader)
         SetCountInvisibleLetters = function(self, value)
           u(self).isCountInvisibleLetters = not not value
         end,
+        SetEnabled = function(self, value)
+          u(self).enabled = not not value
+        end,
         SetFocus = UNIMPLEMENTED,
         SetMaxLetters = function(self, value)
           u(self).maxLetters = value
@@ -853,6 +856,9 @@ local function mkBaseUIObjectTypes(api, loader)
     },
     Rotation = {
       inherits = {'Animation'},
+      mixin = {
+        SetDegrees = UNIMPLEMENTED,
+      },
     },
     Scale = {
       inherits = {'Animation'},
@@ -1237,12 +1243,18 @@ local function mkWowEnv(api, loader)
       GetAreaPOIForMap = STUB_TABLE,
     },
     C_ArtifactUI = {},
-    C_AuctionHouse = {},
+    C_AuctionHouse = {
+      GetAuctionItemSubClasses = UNIMPLEMENTED,
+      HasFavorites = UNIMPLEMENTED,
+      QueryBids = UNIMPLEMENTED,
+    },
     C_AuthChallenge = {
       SetFrame = UNIMPLEMENTED,
     },
     C_AzeriteEmpoweredItem = {},
-    C_AzeriteEssence = {},
+    C_AzeriteEssence = {
+      GetMilestones = UNIMPLEMENTED,
+    },
     C_BarberShop = {},
     C_Calendar = {},
     C_ChallengeMode = {
