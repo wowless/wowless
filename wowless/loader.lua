@@ -535,6 +535,12 @@ local function loader(api, cfg)
   end
 
   local function loadFrameXml()
+    forAddon().loadFile(path.join(rootDir, 'GlobalEnvironment.lua'))
+    -- Special hack to avoid loops in map resolution code.
+    api.env.Enum.UIMapType.Continent = 0
+    api.env.Enum.UIMapType.Cosmic = 0
+    api.env.Enum.UIMapType.World = 0
+    -- End special hack.
     forAddon().loadFile(path.join(rootDir, 'FrameXML/GlobalStrings.lua'))
     loadToc(resolveToc(path.join(rootDir, 'FrameXML/FrameXML.toc')))
     local tocFiles = {}
