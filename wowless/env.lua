@@ -1237,12 +1237,18 @@ local function mkWowEnv(api, loader)
       GetAreaPOIForMap = STUB_TABLE,
     },
     C_ArtifactUI = {},
+    C_AuctionHouse = {},
     C_AuthChallenge = {
       SetFrame = UNIMPLEMENTED,
     },
+    C_AzeriteEmpoweredItem = {},
+    C_AzeriteEssence = {},
+    C_BarberShop = {},
+    C_Calendar = {},
     C_ChallengeMode = {
       GetMapTable = STUB_TABLE,
     },
+    C_CharacterServices = {},
     C_CharacterServicesPublic = {
       ShouldSeeControlPopup = UNIMPLEMENTED,
     },
@@ -1256,6 +1262,7 @@ local function mkWowEnv(api, loader)
         return Mixin({r=0, g=0, b=0}, api.env.ColorMixin)
       end,
     },
+    C_ClassTrial = {},
     C_Club = {
       ClearClubPresenceSubscription = UNIMPLEMENTED,
       GetInvitationsForSelf = STUB_TABLE,
@@ -1273,6 +1280,9 @@ local function mkWowEnv(api, loader)
     C_Console = {
       SetFontHeight = UNIMPLEMENTED,
     },
+    C_ContributionCollector = {},
+    C_Covenants = {},
+    C_CovenantSanctumUI = {},
     C_CurrencyInfo = {
       GetCurrencyInfo = STUB_TABLE,
     },
@@ -1347,6 +1357,7 @@ local function mkWowEnv(api, loader)
       GuildRoster = UNIMPLEMENTED,
     },
     C_Item = {},
+    C_ItemInteraction = {},
     C_LegendaryCrafting = {},
     C_LFGInfo = {
       CanPlayerUseGroupFinder = UNIMPLEMENTED,
@@ -1414,9 +1425,11 @@ local function mkWowEnv(api, loader)
     C_MapExplorationInfo = {
       GetExploredMapTextures = STUB_TABLE,
     },
+    C_Minimap = {},
     C_ModelInfo = {
       GetModelSceneInfoByID = UNIMPLEMENTED,
     },
+    C_MountJournal = {},
     C_NamePlate = {
       GetNamePlateForUnit = UNIMPLEMENTED,
       GetNamePlates = STUB_TABLE,
@@ -1427,6 +1440,7 @@ local function mkWowEnv(api, loader)
       SetNamePlateSelfSize = UNIMPLEMENTED,
       SetTargetClampingInsets = UNIMPLEMENTED,
     },
+    C_Navigation = {},
     C_NewItems = {
       RemoveNewItem = UNIMPLEMENTED,
     },
@@ -1456,6 +1470,8 @@ local function mkWowEnv(api, loader)
       IsTrapAvailable = UNIMPLEMENTED,
       ShouldShowPetSelect = UNIMPLEMENTED,
     },
+    C_PetJournal = {},
+    C_PlayerChoice = {},
     C_PlayerInfo = {
       UnitIsSameServer = UNIMPLEMENTED,
     },
@@ -1486,6 +1502,7 @@ local function mkWowEnv(api, loader)
     C_Scenario = {
       ShouldShowCriteria = UNIMPLEMENTED,
     },
+    C_ScrappingMachineUI = {},
     C_ScriptedAnimations = {
       GetAllScriptedAnimationEffects = STUB_TABLE,
     },
@@ -1501,6 +1518,7 @@ local function mkWowEnv(api, loader)
       IsSilenced = UNIMPLEMENTED,
       IsSquelched = UNIMPLEMENTED,
     },
+    C_Soulbinds = {},
     C_SpecializationInfo = {
       CanPlayerUseTalentSpecUI = UNIMPLEMENTED,
     },
@@ -1516,6 +1534,7 @@ local function mkWowEnv(api, loader)
       HasPurchaseInProgress = UNIMPLEMENTED,
       IsAvailable = UNIMPLEMENTED,
     },
+    C_SuperTrack = {},
     C_SummonInfo = {
       CancelSummon = UNIMPLEMENTED,
       ConfirmSummon = UNIMPLEMENTED,
@@ -1529,6 +1548,8 @@ local function mkWowEnv(api, loader)
     C_Timer = {
       After = UNIMPLEMENTED,
     },
+    C_ToyBox = {},
+    C_TradeSkillUI = {},
     C_UIWidgetManager = {
       GetAllWidgetsBySetID = STUB_TABLE,
       GetBelowMinimapWidgetSetID = function()
@@ -1759,9 +1780,27 @@ local function mkWowEnv(api, loader)
     GetItemInventorySlotInfo = function(inventorySlot)
       return string.format('ItemInventorySlot%d', inventorySlot)
     end,
-    GetItemQualityColor = function()
-      return 0, 0, 0  -- UNIMPLEMENTED
-    end,
+    GetItemQualityColor = (function()
+      local data = {
+        [0] = { 0x9d, 0x9d, 0x9d },  -- Poor
+        [1] = { 0xff, 0xff, 0xff },  -- Common
+        [2] = { 0x1e, 0xff, 0x00 },  -- Uncommon
+        [3] = { 0x00, 0x70, 0xdd },  -- Rare
+        [4] = { 0xa3, 0x35, 0xee },  -- Epic
+        [5] = { 0xff, 0x80, 0x00 },  -- Legendary
+        [6] = { 0xe6, 0xcc, 0x80 },  -- Artifact
+        [7] = { 0x00, 0xcc, 0xff },  -- Heirloom
+        [8] = { 0x00, 0xcc, 0xff },  -- WoW Token
+      }
+      local returns = {}
+      for k, v in pairs(data) do
+        local r, g, b = unpack(v)
+        returns[k] = { r / 255, g / 255, b / 255, string.format('%2x%2x%2x', r, g, b) }
+      end
+      return function(i)
+        return unpack(returns[i])
+      end
+    end)(),
     GetItemSubClassInfo = function(classID, subClassID)
       return string.format('ItemClass%dSubClass%d', classID, subClassID)
     end,
