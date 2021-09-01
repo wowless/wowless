@@ -1244,7 +1244,7 @@ local function mkWowEnv(api, loader)
     },
     C_ArtifactUI = {},
     C_AuctionHouse = {
-      GetAuctionItemSubClasses = UNIMPLEMENTED,
+      GetAuctionItemSubClasses = STUB_TABLE,
       HasFavorites = UNIMPLEMENTED,
       QueryBids = UNIMPLEMENTED,
     },
@@ -1253,7 +1253,10 @@ local function mkWowEnv(api, loader)
     },
     C_AzeriteEmpoweredItem = {},
     C_AzeriteEssence = {
-      GetMilestones = UNIMPLEMENTED,
+      GetMilestones = STUB_TABLE,
+    },
+    C_AzeriteItem = {
+      FindActiveAzeriteItem = UNIMPLEMENTED,
     },
     C_BarberShop = {},
     C_Calendar = {},
