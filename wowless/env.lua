@@ -1777,6 +1777,8 @@ local function mkWowEnv(api, loader)
     GetLanguageByIndex = UNIMPLEMENTED,
     GetLFGCategoryForID = UNIMPLEMENTED,
     GetLFGDeserterExpiration = STUB_NUMBER,
+    GetLFGInfoServer = UNIMPLEMENTED,
+    GetLFGProposal = UNIMPLEMENTED,
     GetLFGRoleUpdate = UNIMPLEMENTED,
     GetLocale = function()
       return 'enUS'  -- UNIMPLEMENTED
@@ -2012,6 +2014,7 @@ local function mkWowEnv(api, loader)
     IsMacClient = UNIMPLEMENTED,
     IsModifiedClick = UNIMPLEMENTED,
     IsOnGlueScreen = UNIMPLEMENTED,
+    IsPartyLFG = UNIMPLEMENTED,
     IsPlayerInWorld = UNIMPLEMENTED,
     IsPublicBuild = UNIMPLEMENTED,
     IsQuestWatched = UNIMPLEMENTED,
