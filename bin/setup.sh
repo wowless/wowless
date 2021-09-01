@@ -11,10 +11,16 @@ rm -f extracts/wow*
 .lua/bin/wowcig -p wow_classic
 .lua/bin/wowcig -p wow_classic_era
 .lua/bin/wowcig -p wow_classic_ptr
-# TODO generalize
-for v in 1.13.7.39692 2.5.2.39926 2.5.2.40011 9.1.0.39804
+for d in extracts/*
 do
-  curl -s http://storage.googleapis.com/wow.ferronn.dev/gscrapes/$v.lua | \
-  .lua/bin/lua gextract.lua /dev/stdin > \
-  extracts/$v/Interface/GlobalEnvironment.lua
+  if [ ! -h $d ]
+  then
+    v=$(basename $d)
+    if ! bash -c "curl -s http://storage.googleapis.com/wow.ferronn.dev/gscrapes/$v.lua | \
+         .lua/bin/lua gextract.lua /dev/stdin 2>/dev/null > \
+         extracts/$v/Interface/GlobalEnvironment.lua"
+    then
+      echo "failed to extract globals for $v"
+    fi
+  fi
 done
