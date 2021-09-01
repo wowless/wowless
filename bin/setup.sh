@@ -5,12 +5,15 @@ PYTHONPATH=.lua .lua/bin/hererocks -l 5.1 -r 3.5.0 .lua
 eval $(.lua/bin/luarocks path)
 .lua/bin/luarocks install luacheck
 .lua/bin/luarocks build --only-deps
-rm -f extracts/wow*
-.lua/bin/wowcig -p wow
-.lua/bin/wowcig -p wowt
-.lua/bin/wowcig -p wow_classic
-.lua/bin/wowcig -p wow_classic_era
-.lua/bin/wowcig -p wow_classic_ptr
+if [ "$1" != "skipcig" ]
+then
+  rm -f extracts/wow*
+  .lua/bin/wowcig -p wow
+  .lua/bin/wowcig -p wowt
+  .lua/bin/wowcig -p wow_classic
+  .lua/bin/wowcig -p wow_classic_era
+  .lua/bin/wowcig -p wow_classic_ptr
+fi
 for d in extracts/*
 do
   if [ ! -h $d ]

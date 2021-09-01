@@ -86,6 +86,28 @@ local function luaEnums(data, r)
   return result
 end
 
+local function otherConstants(data)
+  local keys = {
+    'BINDING_HEADER_MOVEMENT',
+    'ITEM_QUALITY0_DESC',
+    'ITEM_QUALITY1_DESC',
+    'ITEM_QUALITY2_DESC',
+    'ITEM_QUALITY3_DESC',
+    'ITEM_QUALITY4_DESC',
+    'ITEM_QUALITY5_DESC',
+    'ITEM_QUALITY6_DESC',
+    'ITEM_QUALITY7_DESC',
+    'ITEM_QUALITY8_DESC',
+    'ITEM_QUALITY9_DESC',
+    'UK_AADC_POPUP_TEXT',
+  }
+  local result = {}
+  for _, k in ipairs(keys) do
+    result[k] = resolve(data, global(data, 's' .. k))
+  end
+  return result
+end
+
 do
   local data = loadData(arg[1])
   local result = {}
@@ -95,6 +117,7 @@ do
   recursiveMixin(result, { Enum = resolve(data, capsule(data, 'sEnum')) })
   recursiveMixin(result, luaEnums(data, global(data)))
   recursiveMixin(result, luaEnums(data, capsule(data)))
+  recursiveMixin(result, otherConstants(data))
 
   local keys = {}
   for k in pairs(result) do
