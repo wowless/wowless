@@ -23,6 +23,9 @@ local function tpairs(data, x)
 end
 
 local function resolve(data, top)
+  if top == nil then
+    return nil
+  end
   local refs = {}
   local function fun(x)
     assert(type(x) == 'string', tostring(x) .. ' is not a string')
@@ -86,6 +89,8 @@ end
 do
   local data = loadData(arg[1])
   local result = {}
+  recursiveMixin(result, { Constants = resolve(data, global(data, 'sConstants')) })
+  recursiveMixin(result, { Constants = resolve(data, capsule(data, 'sConstants')) })
   recursiveMixin(result, { Enum = resolve(data, global(data, 'sEnum')) })
   recursiveMixin(result, { Enum = resolve(data, capsule(data, 'sEnum')) })
   recursiveMixin(result, luaEnums(data, global(data)))
