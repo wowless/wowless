@@ -1190,6 +1190,7 @@ local function mkWowEnv(api, loader)
     return api.CreateUIObject(ltype, name, parent, nil, unpack(templates))
   end
   return {
+    AcceptBattlefieldPort = UNIMPLEMENTED,
     AntiAliasingSupported = UNIMPLEMENTED,
     BankButtonIDToInvSlotID = STUB_NUMBER,
     BNFeaturesEnabled = UNIMPLEMENTED,
