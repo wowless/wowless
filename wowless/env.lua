@@ -1119,6 +1119,7 @@ local function mkBaseEnv()
     pcall = pcall,
     PI = math.pi,
     print = print,
+    random = math.random,
     rawget = rawget,
     rawset = rawset,
     select = select,
@@ -1271,8 +1272,9 @@ local function mkWowEnv(api, loader)
       ClearPreviewChoices = UNIMPLEMENTED,
     },
     C_Calendar = {
-      EventGetTypesDisplayOrdered = UNIMPLEMENTED,
-      GetDefaultGuildFilter = UNIMPLEMENTED,
+      EventGetClubId = UNIMPLEMENTED,
+      EventGetTypesDisplayOrdered = STUB_TABLE,
+      GetDefaultGuildFilter = STUB_TABLE,
     },
     C_ChallengeMode = {
       GetMapTable = STUB_TABLE,
