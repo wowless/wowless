@@ -1280,7 +1280,11 @@ local function mkWowEnv(api, loader)
       GetMapTable = STUB_TABLE,
     },
     C_CharacterServices = {
-      GetCharacterServiceDisplayData = UNIMPLEMENTED,
+      GetCharacterServiceDisplayData = function()  -- UNIMPLEMENTED
+        return {
+          popupInfo = {},
+        }
+      end,
       HasRequiredBoostForClassTrial = UNIMPLEMENTED,
     },
     C_CharacterServicesPublic = {
@@ -1297,7 +1301,7 @@ local function mkWowEnv(api, loader)
       end,
     },
     C_ClassTrial = {
-      GetClassTrialLogoutTimeSeconds = UNIMPLEMENTED,
+      GetClassTrialLogoutTimeSeconds = STUB_NUMBER,
     },
     C_Club = {
       ClearClubPresenceSubscription = UNIMPLEMENTED,
@@ -1321,7 +1325,9 @@ local function mkWowEnv(api, loader)
     },
     C_ContributionCollector = {},
     C_Covenants = {},
-    C_CovenantSanctumUI = {},
+    C_CovenantSanctumUI = {
+      GetSoulCurrencies = UNIMPLEMENTED,
+    },
     C_CurrencyInfo = {
       GetCurrencyInfo = STUB_TABLE,
     },
@@ -1370,6 +1376,10 @@ local function mkWowEnv(api, loader)
       GetCorpseMapPosition = UNIMPLEMENTED,
       GetSelfResurrectOptions = UNIMPLEMENTED,
     },
+    C_EncounterJournal = {
+      GetSlotFilter = UNIMPLEMENTED,
+      ResetSlotFilter = UNIMPLEMENTED,
+    },
     C_FrameManager = {
       GetFrameVisibilityState = UNIMPLEMENTED,
     },
@@ -1384,6 +1394,7 @@ local function mkWowEnv(api, loader)
     C_GamePad = {},
     C_Garrison = {
       GetAllEncounterThreats = STUB_TABLE,
+      GetBuildingSizes = UNIMPLEMENTED,
       IsUsingPartyGarrison = UNIMPLEMENTED,
     },
     C_GossipInfo = {
@@ -1397,7 +1408,9 @@ local function mkWowEnv(api, loader)
     },
     C_Item = {},
     C_ItemInteraction = {},
-    C_LegendaryCrafting = {},
+    C_LegendaryCrafting = {
+      GetRuneforgePowersByClassSpecAndCovenant = UNIMPLEMENTED,
+    },
     C_LFGInfo = {
       CanPlayerUseGroupFinder = UNIMPLEMENTED,
       CanPlayerUseLFD = UNIMPLEMENTED,
@@ -1658,10 +1671,16 @@ local function mkWowEnv(api, loader)
       GetActiveAbilities = STUB_TABLE,
     },
     DropCursorMoney = UNIMPLEMENTED,
+    EJ_GetDifficulty = UNIMPLEMENTED,
+    EJ_GetInstanceInfo = UNIMPLEMENTED,
+    EJ_GetLootFilter = UNIMPLEMENTED,
+    EJ_GetNumLoot = STUB_NUMBER,
+    EJ_IsValidInstanceDifficulty = UNIMPLEMENTED,
     FillLocalizedClassList = UNIMPLEMENTED,
     FlashClientIcon = UNIMPLEMENTED,
     FollowUnit = UNIMPLEMENTED,
     forceinsecure = UNIMPLEMENTED,
+    GetAccountExpansionLevel = STUB_NUMBER,
     GetActionBarPage = STUB_NUMBER,
     GetActionBarToggles = UNIMPLEMENTED,
     GetActionCharges = UNIMPLEMENTED,
@@ -1718,6 +1737,7 @@ local function mkWowEnv(api, loader)
     GetChatWindowSavedPosition = UNIMPLEMENTED,
     GetClassicExpansionLevel = STUB_NUMBER,
     GetClassInfo = UNIMPLEMENTED,
+    GetClientDisplayExpansionLevel = STUB_NUMBER,
     GetComboPoints = STUB_NUMBER,
     GetContainerItemInfo = UNIMPLEMENTED,
     GetContainerNumFreeSlots = STUB_NUMBER,
@@ -1760,6 +1780,7 @@ local function mkWowEnv(api, loader)
     geterrorhandler = function()
       return api.ErrorHandler  -- UNIMPLEMENTED
     end,
+    GetExpansionDisplayInfo = UNIMPLEMENTED,
     GetExpansionLevel = UNIMPLEMENTED,
     GetExtraBarIndex = STUB_NUMBER,
     GetFactionInfoByID = function(id)
@@ -2008,6 +2029,7 @@ local function mkWowEnv(api, loader)
     GetSpecialization = STUB_NUMBER,
     GetSpecializationInfo = UNIMPLEMENTED,
     GetSpecializationInfoForClassID = UNIMPLEMENTED,
+    GetSpecializationNameForSpecID = UNIMPLEMENTED,
     GetSpellBookItemInfo = UNIMPLEMENTED,
     GetSpellConfirmationPromptsInfo = STUB_TABLE,
     GetSpellInfo = UNIMPLEMENTED,
