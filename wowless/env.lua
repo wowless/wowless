@@ -283,6 +283,9 @@ local function mkBaseUIObjectTypes(api, loader)
     },
     DressUpModel = {
       inherits = {'PlayerModel'},
+      mixin = {
+        SetAutoDress = UNIMPLEMENTED,
+      },
     },
     EditBox = {
       constructor = function(self)
@@ -1258,12 +1261,20 @@ local function mkWowEnv(api, loader)
     C_AzeriteItem = {
       FindActiveAzeriteItem = UNIMPLEMENTED,
     },
-    C_BarberShop = {},
-    C_Calendar = {},
+    C_BarberShop = {
+      ClearPreviewChoices = UNIMPLEMENTED,
+    },
+    C_Calendar = {
+      EventGetTypesDisplayOrdered = UNIMPLEMENTED,
+      GetDefaultGuildFilter = UNIMPLEMENTED,
+    },
     C_ChallengeMode = {
       GetMapTable = STUB_TABLE,
     },
-    C_CharacterServices = {},
+    C_CharacterServices = {
+      GetCharacterServiceDisplayData = UNIMPLEMENTED,
+      HasRequiredBoostForClassTrial = UNIMPLEMENTED,
+    },
     C_CharacterServicesPublic = {
       ShouldSeeControlPopup = UNIMPLEMENTED,
     },
@@ -1277,7 +1288,9 @@ local function mkWowEnv(api, loader)
         return Mixin({r=0, g=0, b=0}, api.env.ColorMixin)
       end,
     },
-    C_ClassTrial = {},
+    C_ClassTrial = {
+      GetClassTrialLogoutTimeSeconds = UNIMPLEMENTED,
+    },
     C_Club = {
       ClearClubPresenceSubscription = UNIMPLEMENTED,
       GetInvitationsForSelf = STUB_TABLE,
@@ -1444,7 +1457,11 @@ local function mkWowEnv(api, loader)
     C_ModelInfo = {
       GetModelSceneInfoByID = UNIMPLEMENTED,
     },
-    C_MountJournal = {},
+    C_MountJournal = {
+      GetAppliedMountEquipmentID = UNIMPLEMENTED,
+      GetMountEquipmentUnlockLevel = STUB_NUMBER,
+      IsValidSourceFilter = UNIMPLEMENTED,
+    },
     C_NamePlate = {
       GetNamePlateForUnit = UNIMPLEMENTED,
       GetNamePlates = STUB_TABLE,
@@ -1485,9 +1502,15 @@ local function mkWowEnv(api, loader)
       IsTrapAvailable = UNIMPLEMENTED,
       ShouldShowPetSelect = UNIMPLEMENTED,
     },
-    C_PetJournal = {},
+    C_PetJournal = {
+      GetNumPetSources = STUB_NUMBER,
+      GetPetInfoByIndex = UNIMPLEMENTED,
+      GetSummonRandomFavoritePetGUID = UNIMPLEMENTED,
+      IsJournalUnlocked = UNIMPLEMENTED,
+    },
     C_PlayerChoice = {},
     C_PlayerInfo = {
+      CanPlayerUseMountEquipment = UNIMPLEMENTED,
       UnitIsSameServer = UNIMPLEMENTED,
     },
     C_PlayerMentorship = {},
@@ -1563,7 +1586,9 @@ local function mkWowEnv(api, loader)
     C_Timer = {
       After = UNIMPLEMENTED,
     },
-    C_ToyBox = {},
+    C_ToyBox = {
+      GetNumFilteredToys = STUB_NUMBER,
+    },
     C_TradeSkillUI = {},
     C_UIWidgetManager = {
       GetAllWidgetsBySetID = STUB_TABLE,
