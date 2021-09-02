@@ -2027,7 +2027,9 @@ local function mkWowEnv(api, loader)
       return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
     end,
     GetSpecialization = STUB_NUMBER,
-    GetSpecializationInfo = UNIMPLEMENTED,
+    GetSpecializationInfo = function()  -- UNIMPLEMENTED
+      return 1, 'SpecName'
+    end,
     GetSpecializationInfoForClassID = UNIMPLEMENTED,
     GetSpecializationNameForSpecID = UNIMPLEMENTED,
     GetSpellBookItemInfo = UNIMPLEMENTED,
