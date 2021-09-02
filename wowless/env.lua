@@ -425,6 +425,7 @@ local function mkBaseUIObjectTypes(api, loader)
         CreateTexture = function(self, name)
           return api.CreateUIObject('texture', name, self)
         end,
+        DesaturateHierarchy = UNIMPLEMENTED,
         EnableMouse = function(self, value)
           local ud = u(self)
           ud.mouseClickEnabled = not not value
@@ -619,7 +620,10 @@ local function mkBaseUIObjectTypes(api, loader)
     Model = {
       inherits = {'Frame'},
       mixin = {
+        SetLight = UNIMPLEMENTED,
+        SetPosition = UNIMPLEMENTED,
         SetRotation = UNIMPLEMENTED,
+        TransformCameraSpaceToModelSpace = UNIMPLEMENTED,
       },
     },
     ModelScene = {
@@ -666,12 +670,14 @@ local function mkBaseUIObjectTypes(api, loader)
     PlayerModel = {
       inherits = {'Model'},
       mixin = {
+        FreezeAnimation = UNIMPLEMENTED,
         RefreshCamera = UNIMPLEMENTED,
         RefreshUnit = UNIMPLEMENTED,
         SetAnimation = UNIMPLEMENTED,
         SetCamDistanceScale = UNIMPLEMENTED,
         SetDisplayInfo = UNIMPLEMENTED,
         SetDoBlend = UNIMPLEMENTED,
+        SetKeepModelOnHide = UNIMPLEMENTED,
         SetPortraitZoom = UNIMPLEMENTED,
         SetUnit = UNIMPLEMENTED,
       },
@@ -1297,7 +1303,10 @@ local function mkWowEnv(api, loader)
       GetSubscribedClubs = STUB_TABLE,
       IsEnabled = UNIMPLEMENTED,
     },
-    C_ClubFinder = {},
+    C_ClubFinder = {
+      GetClubRecruitmentSettings = UNIMPLEMENTED,
+      PlayerRequestPendingClubsList = UNIMPLEMENTED,
+    },
     C_Commentator = {
       GetMaxNumPlayersPerTeam = STUB_NUMBER,
       GetMaxNumTeams = STUB_NUMBER,
@@ -1458,6 +1467,7 @@ local function mkWowEnv(api, loader)
       GetModelSceneInfoByID = UNIMPLEMENTED,
     },
     C_MountJournal = {
+      AreMountEquipmentEffectsSuppressed = UNIMPLEMENTED,
       GetAppliedMountEquipmentID = UNIMPLEMENTED,
       GetMountEquipmentUnlockLevel = STUB_NUMBER,
       IsValidSourceFilter = UNIMPLEMENTED,
@@ -1503,14 +1513,17 @@ local function mkWowEnv(api, loader)
       ShouldShowPetSelect = UNIMPLEMENTED,
     },
     C_PetJournal = {
+      GetNumPets = STUB_NUMBER,
       GetNumPetSources = STUB_NUMBER,
       GetPetInfoByIndex = UNIMPLEMENTED,
+      GetSummonedPetGUID = UNIMPLEMENTED,
       GetSummonRandomFavoritePetGUID = UNIMPLEMENTED,
       IsJournalUnlocked = UNIMPLEMENTED,
     },
     C_PlayerChoice = {},
     C_PlayerInfo = {
       CanPlayerUseMountEquipment = UNIMPLEMENTED,
+      GetAlternateFormInfo = UNIMPLEMENTED,
       UnitIsSameServer = UNIMPLEMENTED,
     },
     C_PlayerMentorship = {},
@@ -1588,8 +1601,13 @@ local function mkWowEnv(api, loader)
     },
     C_ToyBox = {
       GetNumFilteredToys = STUB_NUMBER,
+      GetNumLearnedDisplayedToys = STUB_NUMBER,
+      GetNumTotalDisplayedToys = STUB_NUMBER,
     },
     C_TradeSkillUI = {},
+    C_TransmogCollection = {
+      GetLatestAppearance = UNIMPLEMENTED,
+    },
     C_UIWidgetManager = {
       GetAllWidgetsBySetID = STUB_TABLE,
       GetBelowMinimapWidgetSetID = function()
@@ -1908,6 +1926,7 @@ local function mkWowEnv(api, loader)
     GetNumShapeshiftForms = STUB_NUMBER,
     GetNumSkillLines = STUB_NUMBER,
     GetNumSpecializations = STUB_NUMBER,
+    GetNumSpecializationsForClassID = STUB_NUMBER,
     GetNumSpellTabs = STUB_NUMBER,
     GetNumSubgroupMembers = STUB_NUMBER,
     GetNumTalents = STUB_NUMBER,
@@ -1986,6 +2005,7 @@ local function mkWowEnv(api, loader)
     end,
     GetSpecialization = STUB_NUMBER,
     GetSpecializationInfo = UNIMPLEMENTED,
+    GetSpecializationInfoForClassID = UNIMPLEMENTED,
     GetSpellBookItemInfo = UNIMPLEMENTED,
     GetSpellConfirmationPromptsInfo = STUB_TABLE,
     GetSpellInfo = UNIMPLEMENTED,
