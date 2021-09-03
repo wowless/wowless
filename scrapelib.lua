@@ -12,7 +12,8 @@ end
 
 local function tpairs(data, x)
   assert(type(x) == 'string')
-  assert(sub(x, 1, 1) == 't')
+  local tx = sub(x, 1, 1)
+  assert(tx == 't' or tx == 'f' or tx == 'u')
   return pairs(data[tonumber(sub(x, 2))])
 end
 
@@ -50,6 +51,42 @@ local function resolve(data, top)
   return fun(top)
 end
 
+local function names(data, rend)
+  local result = {}
+  local refs = {}
+  local stack = { { '_G', rend } }
+  while #stack > 0 do
+    local str, r = unpack(table.remove(stack))
+    refs[r] = true
+    for k, v in data:tpairs(r) do
+      local tk = sub(k, 1, 1)
+      local s = str
+      if tk == 'm' then
+        s = 'getmetatable(' .. s .. ')'
+      elseif tk == 'e' then
+        s = 'getfenv(' .. s .. ')'
+      elseif tk == 'n' or tk == 'b' then
+        s = s .. '[' .. sub(k, 2) .. ']'
+      elseif tk == 's' then
+        s = s .. '.' .. sub(k, 2)
+      elseif tk == 't' or tk == 'f' or tk == 'u' then
+        print('ignoring table key ' .. k)
+      else
+        error('invalid key ' .. k)
+      end
+      if v == rend then
+        table.insert(result, s)
+      elseif not refs[v] then
+        local tv = sub(v, 1, 1)
+        if tv == 't' or tv == 'u' or tv =='f' then
+          table.insert(stack, { s, v })
+        end
+      end
+    end
+  end
+  return result
+end
+
 local function global(data, ...)
   return ref(data, 't1', ...)
 end
@@ -62,6 +99,7 @@ local dataMT = {
   __index = {
     capsule = capsule,
     global = global,
+    names = names,
     ref = ref,
     resolve = resolve,
     tpairs = tpairs,
