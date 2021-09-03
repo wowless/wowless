@@ -12,6 +12,7 @@ then
   .lua/bin/wowcig -p wowt
   .lua/bin/wowcig -p wow_classic
   .lua/bin/wowcig -p wow_classic_era
+  .lua/bin/wowcig -p wow_classic_era_ptr
   .lua/bin/wowcig -p wow_classic_ptr
 fi
 for d in extracts/*

@@ -10,7 +10,7 @@ dependencies = {
   'lua-path',
   'penlight',
   'serpent',
-  'wowcig >= 0.5',
+  'wowcig >= 0.6',
   'xml2lua',
 }
 build = {
