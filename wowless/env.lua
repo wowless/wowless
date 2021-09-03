@@ -580,6 +580,7 @@ local function mkBaseUIObjectTypes(api, loader)
       mixin = {
         AddFontStrings = UNIMPLEMENTED,
         AddLine = UNIMPLEMENTED,
+        ClearLines = UNIMPLEMENTED,
         FadeOut = UNIMPLEMENTED,
         GetOwner = function(self)
           return u(self).tooltipOwner
@@ -588,6 +589,7 @@ local function mkBaseUIObjectTypes(api, loader)
           return u(self).tooltipOwner ~= nil
         end,
         SetAction = UNIMPLEMENTED,
+        SetAnchorType = UNIMPLEMENTED,
         SetBagItem = UNIMPLEMENTED,
         SetInventoryItem = UNIMPLEMENTED,
         SetMinimumWidth = UNIMPLEMENTED,
@@ -1351,6 +1353,7 @@ local function mkWowEnv(api, loader)
       end
       return {
         GetCVar = GetCVar,
+        GetCVarBitfield = UNIMPLEMENTED,
         GetCVarBool = function(var)
           return GetCVar(var) == "1"
         end,
@@ -1546,7 +1549,9 @@ local function mkWowEnv(api, loader)
       GetAlternateFormInfo = UNIMPLEMENTED,
       UnitIsSameServer = UNIMPLEMENTED,
     },
-    C_PlayerMentorship = {},
+    C_PlayerMentorship = {
+      GetMentorshipStatus = UNIMPLEMENTED,
+    },
     C_ProductChoice = {
       GetChoices = STUB_TABLE,
       GetNumSuppressed = STUB_NUMBER,
@@ -2232,6 +2237,7 @@ local function mkWowEnv(api, loader)
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
     SpellCanTargetItem = UNIMPLEMENTED,
     SpellCanTargetItemID = UNIMPLEMENTED,
+    SpellIsTargeting = UNIMPLEMENTED,
     StoreSecureReference = UNIMPLEMENTED,
     StrafeLeftStop = UNIMPLEMENTED,
     StrafeRightStop = UNIMPLEMENTED,
