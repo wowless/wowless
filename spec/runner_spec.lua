@@ -14,7 +14,7 @@ describe('runner', function()
     })
     assert.same(0, api.GetErrorCount())
   end)
-  pending('loads wow classic era ptr', function()
+  it('loads wow classic era ptr', function()
     local api = runner.run({
       dir = 'extracts/wow_classic_era_ptr/Interface',
       version = 'Vanilla',

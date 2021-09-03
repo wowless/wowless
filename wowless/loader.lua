@@ -548,6 +548,7 @@ local function loader(api, cfg)
     -- TODO don't force load the rest of the tocs
     local badAddons = {
       Blizzard_FlightMap = true,
+      Blizzard_GMChatUI = true,
       Blizzard_SocialUI = true,
     }
     for dir in path.each(addonDir .. '/*', 'n', { skipfiles = true }) do

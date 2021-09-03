@@ -22,7 +22,7 @@ local function run(cfg)
   api.SendEvent('PLAYER_ENTERING_WORLD')
   for _, frame in ipairs(api.frames) do
     if frame.Click and frame:IsVisible() then
-      api.log(2, 'cicking %s', frame:GetName())
+      api.log(2, 'cicking %s', tostring(frame:GetName()))
       frame:Click()
     end
   end
@@ -33,7 +33,7 @@ local function run(cfg)
   api.NextFrame()
   for _, frame in ipairs(api.frames) do
     if frame:IsVisible() then
-      api.log(2, 'enter/leave %s', frame:GetName())
+      api.log(2, 'enter/leave %s', tostring(frame:GetName()))
       api.RunScript(frame, 'OnEnter', true)
       api.RunScript(frame, 'OnLeave', true)
     end
