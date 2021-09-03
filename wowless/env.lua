@@ -262,6 +262,10 @@ local function mkBaseUIObjectTypes(api, loader)
     },
     CinematicModel = {
       inherits = {'PlayerModel'},
+      mixin = {
+        SetHeightFactor = UNIMPLEMENTED,
+        SetTargetDistance = UNIMPLEMENTED,
+      },
     },
     Cooldown = {
       inherits = {'Frame'},
@@ -968,6 +972,7 @@ local function mkBaseUIObjectTypes(api, loader)
         GetValue = function(self)
           return u(self).value
         end,
+        IsDraggingThumb = UNIMPLEMENTED,
         SetMinMaxValues = function(self, min, max)
           local ud = u(self)
           ud.min = min
@@ -1147,6 +1152,7 @@ local function mkBaseEnv()
       sub = string.sub,
       upper = string.upper,
     },
+    strlen = string.len,
     strlower = string.lower,
     strmatch = string.match,
     strrep = string.rep,
@@ -1414,7 +1420,9 @@ local function mkWowEnv(api, loader)
       GuildControlGetRankFlags = STUB_TABLE,
       GuildRoster = UNIMPLEMENTED,
     },
-    C_Item = {},
+    C_Item = {
+      DoesItemExist = UNIMPLEMENTED,
+    },
     C_ItemInteraction = {},
     C_LegendaryCrafting = {
       GetRuneforgePowersByClassSpecAndCovenant = UNIMPLEMENTED,
@@ -1507,6 +1515,7 @@ local function mkWowEnv(api, loader)
     },
     C_Navigation = {},
     C_NewItems = {
+      IsNewItem = UNIMPLEMENTED,
       RemoveNewItem = UNIMPLEMENTED,
     },
     C_PaperDollInfo = {
@@ -1618,6 +1627,7 @@ local function mkWowEnv(api, loader)
       GetSummonReason = UNIMPLEMENTED,
       IsSummonSkippingStartExperience = UNIMPLEMENTED,
     },
+    C_TaskQuest = {},
     C_Texture = {
       GetAtlasInfo = UNIMPLEMENTED,
     },
@@ -1750,6 +1760,7 @@ local function mkWowEnv(api, loader)
     GetClientDisplayExpansionLevel = STUB_NUMBER,
     GetComboPoints = STUB_NUMBER,
     GetContainerItemInfo = UNIMPLEMENTED,
+    GetContainerItemQuestInfo = UNIMPLEMENTED,
     GetContainerNumFreeSlots = STUB_NUMBER,
     GetContainerNumSlots = STUB_NUMBER,
     GetCraftFilter = UNIMPLEMENTED,
