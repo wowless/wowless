@@ -790,6 +790,11 @@ local function mkBaseUIObjectTypes(api, loader)
         GetScale = function(self)
           return u(self).scale
         end,
+        GetScaledRect = function(self)
+          local s = m(self, 'GetEffectiveScale')
+          local b, l, w, h = m(self, 'GetRect')
+          return b * s, l * s, w * s, h * s
+        end,
         GetSize = function(self)
           return m(self, 'GetWidth'), m(self, 'GetHeight')
         end,
