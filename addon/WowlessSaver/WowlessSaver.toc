@@ -1,3 +1,0 @@
-## Interface: 10000
-## SavedVariables: WowlessSaverBuildInfo, WowlessSaverData
-WowlessSaver.lua
