@@ -1287,7 +1287,12 @@ local function mkWowEnv(api, loader)
     },
     C_AzeriteEmpoweredItem = {},
     C_AzeriteEssence = {
-      GetMilestones = STUB_TABLE,
+      GetMilestones = function()  -- UNIMPLEMENTED
+        -- Need to include at least one "slot" milestone to prevent UI errors.
+        return {
+          { slot = 1 },
+        }
+      end,
     },
     C_AzeriteItem = {
       FindActiveAzeriteItem = UNIMPLEMENTED,
