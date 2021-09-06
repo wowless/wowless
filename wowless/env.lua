@@ -365,6 +365,9 @@ local function mkBaseUIObjectTypes(api, loader)
     },
     Font = {
       inherits = {'FontInstance'},
+      mixin = {
+        CopyFontObject = UNIMPLEMENTED,
+      },
     },
     FontInstance = {
       inherits = {'UIObject'},

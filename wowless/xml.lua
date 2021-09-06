@@ -146,10 +146,6 @@ local function validateRoot(root)
           end
         end
       end
-      -- Hack for fonts: they are always virtual.
-      if tname == 'font' then
-        resultAttrs.virtual = true
-      end
       if ty.text then
         assert(e._children, 'missing text in ' .. tname)
         local texts = {}

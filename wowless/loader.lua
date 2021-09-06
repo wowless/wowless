@@ -387,34 +387,38 @@ local function loader(api, cfg)
                 metatable = { __index = base.metatable.__index },
                 name = e.attr.name,
               }
-            elseif virtual and not ctx.ignoreVirtual then
-              assert(e.attr.name, 'cannot create anonymous template')
-              local name = string.lower(e.attr.name)
-              if api.templates[name] then
-                api.log(1, 'overwriting template ' .. e.attr.name)
-              end
-              api.log(3, 'creating template ' .. e.attr.name)
-              api.templates[name] = {
-                initAttrs = initAttrs,
-                initKids = initKids,
-                name = e.attr.name,
-              }
             else
-              local name = e.attr.name
-              if virtual and ctx.ignoreVirtual then
-                api.log(1, 'ignoring virtual on ' .. tostring(name))
+              local ltype = string.lower(e.type)
+              if (ltype == 'font' and e.attr.name) or (virtual and not ctx.ignoreVirtual) then
+                assert(e.attr.name, 'cannot create anonymous template')
+                local name = string.lower(e.attr.name)
+                if api.templates[name] then
+                  api.log(1, 'overwriting template ' .. e.attr.name)
+                end
+                api.log(3, 'creating template ' .. e.attr.name)
+                api.templates[name] = {
+                  initAttrs = initAttrs,
+                  initKids = initKids,
+                  name = e.attr.name,
+                }
               end
-              local templates = {}
-              for _, inh in ipairs(e.attr.inherits or {}) do
-                local template = api.templates[string.lower(inh)]
-                assert(template, 'unknown template ' .. inh)
-                table.insert(templates, template)
+              if ltype == 'font' or (not virtual or ctx.ignoreVirtual) then
+                local name = e.attr.name
+                if virtual and ctx.ignoreVirtual then
+                  api.log(1, 'ignoring virtual on ' .. tostring(name))
+                end
+                local templates = {}
+                for _, inh in ipairs(e.attr.inherits or {}) do
+                  local template = api.templates[string.lower(inh)]
+                  assert(template, 'unknown template ' .. inh)
+                  table.insert(templates, template)
+                end
+                table.insert(templates, {
+                  initAttrs = mkInitAttrsNotRecursive(e),
+                  initKids = mkInitKidsNotRecursive(e),
+                })
+                return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, unpack(templates))
               end
-              table.insert(templates, {
-                initAttrs = mkInitAttrsNotRecursive(e),
-                initKids = mkInitKidsNotRecursive(e),
-              })
-              return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, unpack(templates))
             end
           else
             local fn = xmllang[e.type]
