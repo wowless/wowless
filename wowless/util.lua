@@ -22,7 +22,8 @@ local function strjoin(sep, ...)
 end
 
 local function strtrim(s)
-  return s:gsub('^%s*', ''):gsub('%s*$', '')
+  local ret = s:gsub('^%s*', ''):gsub('%s*$', '')
+  return ret
 end
 
 local function tappend(t, t2)
