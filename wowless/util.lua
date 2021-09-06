@@ -17,6 +17,14 @@ local function readfile(filename)
   return content
 end
 
+local function strjoin(sep, ...)
+  return table.concat({...}, sep)
+end
+
+local function strtrim(s)
+  return s:gsub('^%s*', ''):gsub('%s*$', '')
+end
+
 local function tappend(t, t2)
   for _, v in ipairs(t2) do
     table.insert(t, v)
@@ -34,6 +42,8 @@ end
 return {
   mixin = mixin,
   readfile = readfile,
+  strjoin = strjoin,
+  strtrim = strtrim,
   tappend = tappend,
   twipe = twipe,
 }

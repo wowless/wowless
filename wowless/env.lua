@@ -1145,6 +1145,7 @@ local function mkBaseEnv()
       format = stringFormat,
       gmatch = string.gmatch,
       gsub = string.gsub,
+      join = util.strjoin,
       len = string.len,
       lower = string.lower,
       match = string.match,
@@ -1157,6 +1158,7 @@ local function mkBaseEnv()
     strmatch = string.match,
     strrep = string.rep,
     strsub = string.sub,
+    strtrim = util.strtrim,
     strupper = string.upper,
     table = {
       concat = table.concat,
