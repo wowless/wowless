@@ -375,6 +375,9 @@ local function mkBaseUIObjectTypes(api, loader)
         GetFont = function()
           return nil, 12  -- UNIMPLEMENTED
         end,
+        GetShadowColor = function()
+          return 1, 1, 1  -- UNIMPLEMENTED
+        end,
         GetShadowOffset = STUB_NUMBER,
         GetSpacing = STUB_NUMBER,
         GetTextColor = function()
