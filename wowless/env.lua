@@ -1243,6 +1243,7 @@ local function mkWowEnv(api, loader)
     CastingInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     CastPetAction = UNIMPLEMENTED,
     CastShapeshiftForm = UNIMPLEMENTED,
+    CanEditOfficerNote = UNIMPLEMENTED,
     ChangeActionBarPage = UNIMPLEMENTED,
     ChannelInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     ClearOverrideBindings = UNIMPLEMENTED,
