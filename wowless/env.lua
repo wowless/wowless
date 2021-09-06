@@ -1153,6 +1153,7 @@ local function mkBaseEnv()
       sub = string.sub,
       upper = string.upper,
     },
+    strjoin = util.strjoin,
     strlen = string.len,
     strlower = string.lower,
     strmatch = string.match,
