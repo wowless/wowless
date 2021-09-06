@@ -38,6 +38,9 @@ local function run(cfg)
       api.RunScript(frame, 'OnLeave', true)
     end
   end
+  api.SendEvent('LOOT_READY', false)
+  api.SendEvent('LOOT_OPENED', false, false)
+  api.SendEvent('LOOT_CLOSED')
   api.SendEvent('PLAYER_LOGOUT')
   return api
 end

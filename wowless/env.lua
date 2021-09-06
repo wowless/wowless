@@ -1253,6 +1253,7 @@ local function mkWowEnv(api, loader)
     ChangeActionBarPage = UNIMPLEMENTED,
     ChannelInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     ClearOverrideBindings = UNIMPLEMENTED,
+    CloseLoot = UNIMPLEMENTED,
     CollapseSkillHeader = UNIMPLEMENTED,
     CombatLogAddFilter = UNIMPLEMENTED,
     CombatLogGetCurrentEntry = UNIMPLEMENTED,
@@ -1963,6 +1964,7 @@ local function mkWowEnv(api, loader)
     GetNumGroupMembers = STUB_NUMBER,
     GetNumGuildBankTabs = STUB_NUMBER,
     GetNumLanguages = STUB_NUMBER,
+    GetNumLootItems = STUB_NUMBER,
     GetNumMacros = STUB_NUMBER,
     GetNumQuestLeaderBoards = function()
       return 0  -- UNIMPLEMENTED
@@ -2144,6 +2146,7 @@ local function mkWowEnv(api, loader)
     IsCurrentQuestFailed = UNIMPLEMENTED,
     IsEquippedAction = UNIMPLEMENTED,
     IsEveryoneAssistant = UNIMPLEMENTED,
+    IsFishingLoot = UNIMPLEMENTED,
     IsGMClient = UNIMPLEMENTED,
     IsGuildLeader = UNIMPLEMENTED,
     IsInGroup = UNIMPLEMENTED,
@@ -2195,6 +2198,7 @@ local function mkWowEnv(api, loader)
       loader.loadAddon(name)
       return true
     end,
+    LootSlotHasItem = UNIMPLEMENTED,
     Kiosk = {
       IsEnabled = UNIMPLEMENTED,
     },
