@@ -621,6 +621,9 @@ local function mkBaseUIObjectTypes(api, loader)
         SetVertexColor = UNIMPLEMENTED,
       },
     },
+    MaskTexture = {
+      inherits = {'Texture'},
+    },
     MessageFrame = {
       inherits = {'Frame'},
     },
