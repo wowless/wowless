@@ -1254,6 +1254,8 @@ local function mkWowEnv(api, loader)
     BreakUpLargeNumbers = tostring,  -- UNIMPLEMENTED,
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
     CanBeRaidTarget = UNIMPLEMENTED,
+    CanGuildDemote = UNIMPLEMENTED,
+    CanGuildPromote = UNIMPLEMENTED,
     CanHearthAndResurrectFromArea = UNIMPLEMENTED,
     CanReplaceGuildMaster = UNIMPLEMENTED,
     CanSendSoRByText = UNIMPLEMENTED,
@@ -1886,11 +1888,15 @@ local function mkWowEnv(api, loader)
     GetGuildFactionInfo = function()
       return 'Guild', 'Description', 0, 0, 0, 0
     end,
-    GetGuildInfo = UNIMPLEMENTED,
+    GetGuildInfo = function()
+      return 'GuildName', 'Member', 1  -- UNIMPLEMENTED
+    end,
     GetGuildLogoInfo = UNIMPLEMENTED,
     GetGuildMembershipRequestInfo = UNIMPLEMENTED,
     GetGuildRenameRequired = UNIMPLEMENTED,
-    GetGuildRosterInfo = UNIMPLEMENTED,
+    GetGuildRosterInfo = function()
+      return 'Moo-Realm', 'Member', 1  -- UNIMPLEMENTED
+    end,
     GetGuildRosterMOTD = function()
       return ''  -- UNIMPLEMENTED
     end,
@@ -2015,7 +2021,9 @@ local function mkWowEnv(api, loader)
     end,
     GetNumGroupMembers = STUB_NUMBER,
     GetNumGuildBankTabs = STUB_NUMBER,
-    GetNumGuildMembers = STUB_NUMBER,
+    GetNumGuildMembers = function()
+      return 0, 0, 0  -- UNIMPLEMENTED
+    end,
     GetNumGuildMembershipRequests = STUB_NUMBER,
     GetNumLanguages = STUB_NUMBER,
     GetNumLootItems = STUB_NUMBER,
