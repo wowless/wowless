@@ -331,6 +331,7 @@ local function loader(api, cfg)
 
         local function initKidsMaybeFrames(e, obj, framesFlag)
           local frameykids = {
+            -- TODO this list is incomplete
             frames = true,
             highlighttexture = true,
             layers = true,
