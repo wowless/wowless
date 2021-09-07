@@ -1342,7 +1342,7 @@ local function mkWowEnv(api, loader)
       IsEnabled = UNIMPLEMENTED,
     },
     C_ClubFinder = {
-      GetClubRecruitmentSettings = UNIMPLEMENTED,
+      GetClubRecruitmentSettings = STUB_TABLE,
       PlayerRequestPendingClubsList = UNIMPLEMENTED,
     },
     C_Commentator = {
@@ -1746,6 +1746,7 @@ local function mkWowEnv(api, loader)
     GetArenaTeam = UNIMPLEMENTED,
     GetAuctionDeposit = STUB_NUMBER,
     GetAuctionItemSubClasses = UNIMPLEMENTED,
+    GetAvailableLocaleInfo = STUB_TABLE,
     GetAvailableLocales = UNIMPLEMENTED,
     GetBagSlotFlag = UNIMPLEMENTED,
     GetBankBagSlotFlag = UNIMPLEMENTED,
