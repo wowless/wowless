@@ -272,6 +272,7 @@ local function mkBaseUIObjectTypes(api, loader)
       inherits = {'Frame'},
       mixin = {
         Clear = UNIMPLEMENTED,
+        Pause = UNIMPLEMENTED,
         SetBlingTexture = function(self, tex)
           u(self).blingTexture = toTexture(self, tex)
         end,
@@ -1314,6 +1315,7 @@ local function mkWowEnv(api, loader)
       EventGetClubId = UNIMPLEMENTED,
       EventGetTypesDisplayOrdered = STUB_TABLE,
       GetDefaultGuildFilter = STUB_TABLE,
+      OpenCalendar = UNIMPLEMENTED,
     },
     C_ChallengeMode = {
       GetMapTable = STUB_TABLE,
@@ -1428,6 +1430,7 @@ local function mkWowEnv(api, loader)
       GetFrameVisibilityState = UNIMPLEMENTED,
     },
     C_FriendList = {
+      GetFriendInfo = UNIMPLEMENTED,
       GetFriendInfoByIndex = STUB_TABLE,
       GetNumFriends = STUB_NUMBER,
       GetNumOnlineFriends = STUB_NUMBER,
@@ -1608,10 +1611,13 @@ local function mkWowEnv(api, loader)
     },
     C_PvP = {
       GetArenaCrowdControlInfo = UNIMPLEMENTED,
+      GetRandomBGInfo = UNIMPLEMENTED,
       IsInBrawl = UNIMPLEMENTED,
     },
     C_QuestLog = {
       GetMaxNumQuests = STUB_NUMBER,
+      GetNumQuestLogEntries = STUB_NUMBER,
+      GetTitleForQuestID = UNIMPLEMENTED,
       IsOnQuest = UNIMPLEMENTED,
       IsQuestFlaggedCompleted = UNIMPLEMENTED,
     },
@@ -1877,9 +1883,14 @@ local function mkWowEnv(api, loader)
     GetGuildApplicantInfo = UNIMPLEMENTED,
     GetGuildBankTabInfo = UNIMPLEMENTED,
     GetGuildFactionGroup = UNIMPLEMENTED,
+    GetGuildFactionInfo = function()
+      return 'Guild', 'Description', 0, 0, 0, 0
+    end,
     GetGuildInfo = UNIMPLEMENTED,
     GetGuildLogoInfo = UNIMPLEMENTED,
+    GetGuildMembershipRequestInfo = UNIMPLEMENTED,
     GetGuildRenameRequired = UNIMPLEMENTED,
+    GetGuildRosterInfo = UNIMPLEMENTED,
     GetGuildRosterMOTD = function()
       return ''  -- UNIMPLEMENTED
     end,
@@ -1965,6 +1976,8 @@ local function mkWowEnv(api, loader)
     GetLocale = function()
       return 'enUS'  -- UNIMPLEMENTED
     end,
+    GetLookingForGuildComment = UNIMPLEMENTED,
+    GetLookingForGuildSettings = UNIMPLEMENTED,
     GetLootMethod = function()
       return 'freeforall'  -- UNIMPLEMENTED
     end,
@@ -2002,6 +2015,8 @@ local function mkWowEnv(api, loader)
     end,
     GetNumGroupMembers = STUB_NUMBER,
     GetNumGuildBankTabs = STUB_NUMBER,
+    GetNumGuildMembers = STUB_NUMBER,
+    GetNumGuildMembershipRequests = STUB_NUMBER,
     GetNumLanguages = STUB_NUMBER,
     GetNumLootItems = STUB_NUMBER,
     GetNumMacros = STUB_NUMBER,
@@ -2017,6 +2032,7 @@ local function mkWowEnv(api, loader)
     GetNumQuestWatches = function()
       return 0  -- UNIMPLEMENTED
     end,
+    GetNumRecruitingGuilds = STUB_NUMBER,
     GetNumSavedInstances = STUB_NUMBER,
     GetNumShapeshiftForms = STUB_NUMBER,
     GetNumSkillLines = STUB_NUMBER,
@@ -2076,6 +2092,8 @@ local function mkWowEnv(api, loader)
     GetRealZoneText = function()
       return 'RealZoneText'  -- UNIMPLEMENTED
     end,
+    GetRecruitingGuildInfo = UNIMPLEMENTED,
+    GetRecruitingGuildSelection = UNIMPLEMENTED,
     GetReleaseTimeRemaining = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -2255,7 +2273,9 @@ local function mkWowEnv(api, loader)
     RegisterStaticConstants = UNIMPLEMENTED,
     RequestGuildChallengeInfo = UNIMPLEMENTED,
     RequestGuildRecruitmentSettings = UNIMPLEMENTED,
+    RequestGuildRewards = UNIMPLEMENTED,
     RequestRaidInfo = UNIMPLEMENTED,
+    RequestRatedInfo = UNIMPLEMENTED,
     ResetCursor = UNIMPLEMENTED,
     ResurrectGetOfferer = UNIMPLEMENTED,
     RollOnLoot = UNIMPLEMENTED,
