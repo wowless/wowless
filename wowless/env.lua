@@ -263,6 +263,7 @@ local function mkBaseUIObjectTypes(api, loader)
     CinematicModel = {
       inherits = {'PlayerModel'},
       mixin = {
+        SetFacingLeft = UNIMPLEMENTED,
         SetHeightFactor = UNIMPLEMENTED,
         SetTargetDistance = UNIMPLEMENTED,
       },
@@ -632,6 +633,8 @@ local function mkBaseUIObjectTypes(api, loader)
     Model = {
       inherits = {'Frame'},
       mixin = {
+        InitializeCamera = UNIMPLEMENTED,
+        SetFacing = UNIMPLEMENTED,
         SetLight = UNIMPLEMENTED,
         SetPosition = UNIMPLEMENTED,
         SetRotation = UNIMPLEMENTED,
@@ -727,6 +730,7 @@ local function mkBaseUIObjectTypes(api, loader)
       end,
       inherits = {'ParentedObject'},
       mixin = {
+        AdjustPointsOffset = UNIMPLEMENTED,
         ClearAllPoints = function(self)
           util.twipe(u(self).points)
         end,
