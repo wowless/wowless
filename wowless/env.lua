@@ -1066,7 +1066,9 @@ local function mkBaseUIObjectTypes(api, loader)
         GetObjectType = function(self)
           return api.uiobjectTypes[u(self).type].name
         end,
-        IsObjectType = UNIMPLEMENTED,
+        IsObjectType = function(self, ty)
+          return api.InheritsFrom(u(self).type, string.lower(ty))
+        end,
       },
     },
     UnitPositionFrame = {
