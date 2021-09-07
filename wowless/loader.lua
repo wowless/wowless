@@ -156,9 +156,7 @@ local function loader(api, cfg)
           end,
           layers = function(e, parent)
             for _, layer in ipairs(e.layers) do
-              loadElements(layer.fontstrings, parent)
-              loadElements(layer.lines, parent)
-              loadElements(layer.textures, parent)
+              loadElements(layer.kids, parent)
             end
           end,
           normalfont = function(e, parent)
