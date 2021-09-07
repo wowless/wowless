@@ -1,31 +1,18 @@
 describe('runner', function()
+  local versions = {
+    wow_classic = 'TBC',
+    wow_classic_era = 'Vanilla',
+    wow_classic_era_ptr = 'Vanilla',
+    wow_classic_ptr = 'TBC',
+  }
   local runner = require('wowless.runner')
-  it('loads wow classic', function()
-    local api = runner.run({
-      dir = 'extracts/wow_classic/Interface',
-      version = 'TBC',
-    })
-    assert.same(0, api.GetErrorCount())
-  end)
-  it('loads wow classic era', function()
-    local api = runner.run({
-      dir = 'extracts/wow_classic_era/Interface',
-      version = 'Vanilla',
-    })
-    assert.same(0, api.GetErrorCount())
-  end)
-  it('loads wow classic era ptr', function()
-    local api = runner.run({
-      dir = 'extracts/wow_classic_era_ptr/Interface',
-      version = 'Vanilla',
-    })
-    assert.same(0, api.GetErrorCount())
-  end)
-  it('loads wow classic ptr', function()
-    local api = runner.run({
-      dir = 'extracts/wow_classic_ptr/Interface',
-      version = 'TBC',
-    })
-    assert.same(0, api.GetErrorCount())
-  end)
+  for k, v in pairs(versions) do
+    it('loads ' .. k, function()
+      local api = runner.run({
+        dir = 'extracts/' .. k .. '/Interface',
+        version = v
+      })
+      assert.same(0, api.GetErrorCount())
+    end)
+  end
 end)
