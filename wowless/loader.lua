@@ -332,7 +332,8 @@ local function loader(api, cfg)
         local function initKidsMaybeFrames(e, obj, framesFlag)
           local newctx = withContext({ ignoreVirtual = true })
           for _, kid in ipairs(e.kids) do
-            if (string.lower(kid.type) == 'frames') == framesFlag then
+            local kty = string.lower(kid.type)
+            if (kty == 'frames' or kty == 'layers') == framesFlag then
               newctx.loadElement(kid, obj)
             end
           end
