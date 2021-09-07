@@ -1343,6 +1343,7 @@ local function mkWowEnv(api, loader)
     },
     C_ClubFinder = {
       GetClubRecruitmentSettings = STUB_TABLE,
+      IsEnabled = UNIMPLEMENTED,
       PlayerRequestPendingClubsList = UNIMPLEMENTED,
     },
     C_Commentator = {
@@ -1849,6 +1850,7 @@ local function mkWowEnv(api, loader)
       }
     end,
     GetGuildBankTabInfo = UNIMPLEMENTED,
+    GetGuildFactionGroup = UNIMPLEMENTED,
     GetGuildInfo = UNIMPLEMENTED,
     GetGuildLogoInfo = UNIMPLEMENTED,
     GetGuildRosterMOTD = function()
@@ -2220,8 +2222,10 @@ local function mkWowEnv(api, loader)
     PlaySound = UNIMPLEMENTED,
     PutItemInBackpack = UNIMPLEMENTED,
     PutItemInBag = UNIMPLEMENTED,
+    QueryGuildNews = UNIMPLEMENTED,
     QuestHonorFrame_Update = UNIMPLEMENTED,
     RegisterStaticConstants = UNIMPLEMENTED,
+    RequestGuildChallengeInfo = UNIMPLEMENTED,
     RequestGuildRecruitmentSettings = UNIMPLEMENTED,
     RequestRaidInfo = UNIMPLEMENTED,
     ResetCursor = UNIMPLEMENTED,
