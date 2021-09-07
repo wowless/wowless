@@ -330,10 +330,14 @@ local function loader(api, cfg)
         }
 
         local function initKidsMaybeFrames(e, obj, framesFlag)
+          local frameykids = {
+            frames = true,
+            highlighttexture = true,
+            layers = true,
+          }
           local newctx = withContext({ ignoreVirtual = true })
           for _, kid in ipairs(e.kids) do
-            local kty = string.lower(kid.type)
-            if (kty == 'frames' or kty == 'layers') == framesFlag then
+            if not not frameykids[string.lower(kid.type)] == framesFlag then
               newctx.loadElement(kid, obj)
             end
           end
