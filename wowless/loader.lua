@@ -9,6 +9,7 @@ local function loader(api, cfg)
   local readFile, mixin = util.readfile, util.mixin
 
   local function parseTypedValue(type, value)
+    type = type and string.lower(type) or nil
     if type == 'number' then
       return tonumber(value)
     elseif type == 'global' then
