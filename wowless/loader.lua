@@ -337,7 +337,7 @@ local function loader(api, cfg)
               newctx.loadElement(kid, obj)
             end
           end
-      end
+        end
 
         local function mkInitAttrsNotRecursive(e)
           return function(obj)
