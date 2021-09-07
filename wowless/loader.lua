@@ -57,7 +57,31 @@ local function loader(api, cfg)
           anchors = function(e, parent)
             for _, anchor in ipairs(e.anchor) do
               local point = anchor.point
-              local relativeTo = api.ParentSub(anchor.relativeto, parent:GetParent())
+              local relativeTo
+              if anchor.relativeto then
+                relativeTo = api.ParentSub(anchor.relativeto, parent:GetParent())
+              elseif anchor.relativekey then
+                local parts = {util.strsplit('.', anchor.relativekey)}
+                if #parts == 1 then
+                  relativeTo = api.ParentSub(anchor.relativekey, parent:GetParent())
+                else
+                  local obj = parent
+                  for i = 1, #parts do
+                    local p = parts[i]
+                    if p == '$parent' then
+                      obj = obj:GetParent()
+                    else
+                      if not obj[p] then
+                        api.log(1, 'invalid relativeKey %q', anchor.relativekey)
+                        obj = nil
+                        break
+                      end
+                      obj = obj[p]
+                    end
+                  end
+                  relativeTo = obj
+                end
+              end
               local relativePoint = anchor.relativepoint
               local x = anchor.x or (anchor.offset and anchor.offset.x) or nil
               local y = anchor.y or (anchor.offset and anchor.offset.y) or nil
