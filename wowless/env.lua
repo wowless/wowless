@@ -1164,6 +1164,7 @@ local function mkBaseEnv()
     strlower = string.lower,
     strmatch = string.match,
     strrep = string.rep,
+    strsplit = util.strsplit,
     strsub = string.sub,
     strtrim = util.strtrim,
     strupper = string.upper,

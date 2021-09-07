@@ -21,6 +21,21 @@ local function strjoin(sep, ...)
   return table.concat({...}, sep)
 end
 
+local function strsplit(sep, s, n)
+  assert(string.len(sep) == 1)
+  assert(n == nil)
+  local result = {}
+  while true do
+    local pos = string.find(s, '%' .. sep)
+    if not pos then
+      table.insert(result, s)
+      return unpack(result)
+    end
+    table.insert(result, s:sub(0, pos - 1))
+    s = s:sub(pos + 1)
+  end
+end
+
 local function strtrim(s)
   local ret = s:gsub('^%s*', ''):gsub('%s*$', '')
   return ret
@@ -44,6 +59,7 @@ return {
   mixin = mixin,
   readfile = readfile,
   strjoin = strjoin,
+  strsplit = strsplit,
   strtrim = strtrim,
   tappend = tappend,
   twipe = twipe,
