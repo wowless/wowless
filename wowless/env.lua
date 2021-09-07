@@ -1035,7 +1035,9 @@ local function mkBaseUIObjectTypes(api, loader)
     Texture = {
       inherits = {'LayeredRegion', 'ParentedObject'},
       mixin = {
-        GetTexCoord = UNIMPLEMENTED,
+        GetTexCoord = function()
+          return 0, 0, 0, 0, 0, 0, 0, 0  -- UNIMPLEMENTED
+        end,
         GetTexture = UNIMPLEMENTED,
         GetVertexColor = UNIMPLEMENTED,
         SetAtlas = UNIMPLEMENTED,
@@ -1359,7 +1361,8 @@ local function mkWowEnv(api, loader)
     C_ContributionCollector = {},
     C_Covenants = {},
     C_CovenantSanctumUI = {
-      GetSoulCurrencies = UNIMPLEMENTED,
+      GetAnimaInfo = UNIMPLEMENTED,
+      GetSoulCurrencies = STUB_TABLE,
     },
     C_CurrencyInfo = {
       GetCurrencyInfo = STUB_TABLE,
@@ -1411,8 +1414,10 @@ local function mkWowEnv(api, loader)
       GetSelfResurrectOptions = UNIMPLEMENTED,
     },
     C_EncounterJournal = {
+      GetLootInfoByIndex = UNIMPLEMENTED,
       GetSlotFilter = UNIMPLEMENTED,
       ResetSlotFilter = UNIMPLEMENTED,
+      SetSlotFilter = UNIMPLEMENTED,
     },
     C_FrameManager = {
       GetFrameVisibilityState = UNIMPLEMENTED,
@@ -1711,10 +1716,13 @@ local function mkWowEnv(api, loader)
       GetActiveAbilities = STUB_TABLE,
     },
     DropCursorMoney = UNIMPLEMENTED,
+    EJ_GetCurrentTier = UNIMPLEMENTED,
     EJ_GetDifficulty = UNIMPLEMENTED,
+    EJ_GetInstanceByIndex = UNIMPLEMENTED,
     EJ_GetInstanceInfo = UNIMPLEMENTED,
     EJ_GetLootFilter = UNIMPLEMENTED,
     EJ_GetNumLoot = STUB_NUMBER,
+    EJ_GetTierInfo = UNIMPLEMENTED,
     EJ_IsValidInstanceDifficulty = UNIMPLEMENTED,
     FillLocalizedClassList = UNIMPLEMENTED,
     FlashClientIcon = UNIMPLEMENTED,
@@ -1823,6 +1831,7 @@ local function mkWowEnv(api, loader)
       return api.ErrorHandler  -- UNIMPLEMENTED
     end,
     GetExpansionDisplayInfo = UNIMPLEMENTED,
+    GetExpansionForLevel = UNIMPLEMENTED,
     GetExpansionLevel = UNIMPLEMENTED,
     GetExtraBarIndex = STUB_NUMBER,
     GetFactionInfoByID = function(id)
