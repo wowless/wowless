@@ -400,6 +400,7 @@ local function mkBaseUIObjectTypes(api, loader)
       inherits = {'FontInstance', 'LayeredRegion'},
       mixin = {
         GetLineHeight = STUB_NUMBER,
+        GetStringHeight = STUB_NUMBER,
         GetStringWidth = STUB_NUMBER,
         GetText = UNIMPLEMENTED,
         IsTruncated = UNIMPLEMENTED,
@@ -1257,6 +1258,8 @@ local function mkWowEnv(api, loader)
     BreakUpLargeNumbers = tostring,  -- UNIMPLEMENTED,
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
     CanBeRaidTarget = UNIMPLEMENTED,
+    CanEditOfficerNote = UNIMPLEMENTED,
+    CanExitVehicle = UNIMPLEMENTED,
     CanGuildDemote = UNIMPLEMENTED,
     CanGuildPromote = UNIMPLEMENTED,
     CanHearthAndResurrectFromArea = UNIMPLEMENTED,
@@ -1265,7 +1268,6 @@ local function mkWowEnv(api, loader)
     CastingInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     CastPetAction = UNIMPLEMENTED,
     CastShapeshiftForm = UNIMPLEMENTED,
-    CanEditOfficerNote = UNIMPLEMENTED,
     ChangeActionBarPage = UNIMPLEMENTED,
     ChannelInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     ClearOverrideBindings = UNIMPLEMENTED,
@@ -1476,6 +1478,9 @@ local function mkWowEnv(api, loader)
     C_LegendaryCrafting = {
       GetRuneforgePowersByClassSpecAndCovenant = UNIMPLEMENTED,
     },
+    C_LFGuildInfo = {
+      GetRecruitingGuildTabardInfo = UNIMPLEMENTED,
+    },
     C_LFGInfo = {
       CanPlayerUseGroupFinder = UNIMPLEMENTED,
       CanPlayerUseLFD = UNIMPLEMENTED,
@@ -1550,6 +1555,7 @@ local function mkWowEnv(api, loader)
       AreMountEquipmentEffectsSuppressed = UNIMPLEMENTED,
       GetAppliedMountEquipmentID = UNIMPLEMENTED,
       GetMountEquipmentUnlockLevel = STUB_NUMBER,
+      GetNumMountsNeedingFanfare = STUB_NUMBER,
       IsValidSourceFilter = UNIMPLEMENTED,
     },
     C_NamePlate = {
@@ -1601,10 +1607,13 @@ local function mkWowEnv(api, loader)
       GetSummonRandomFavoritePetGUID = UNIMPLEMENTED,
       IsJournalUnlocked = UNIMPLEMENTED,
     },
-    C_PlayerChoice = {},
+    C_PlayerChoice = {
+      IsWaitingForPlayerChoiceResponse = UNIMPLEMENTED,
+    },
     C_PlayerInfo = {
       CanPlayerUseMountEquipment = UNIMPLEMENTED,
       GetAlternateFormInfo = UNIMPLEMENTED,
+      IsPlayerEligibleForNPEv2 = UNIMPLEMENTED,
       UnitIsSameServer = UNIMPLEMENTED,
     },
     C_PlayerMentorship = {
@@ -1615,9 +1624,13 @@ local function mkWowEnv(api, loader)
       GetNumSuppressed = STUB_NUMBER,
     },
     C_PvP = {
+      CanPlayerUseRatedPVPUI = UNIMPLEMENTED,
       GetArenaCrowdControlInfo = UNIMPLEMENTED,
-      GetRandomBGInfo = UNIMPLEMENTED,
+      GetRandomBGInfo = function()
+        return { minLevel = 0 }  -- UNIMPLEMENTED
+      end,
       IsInBrawl = UNIMPLEMENTED,
+      IsWarModeDesired = UNIMPLEMENTED,
     },
     C_QuestLog = {
       GetMaxNumQuests = STUB_NUMBER,
@@ -1655,9 +1668,13 @@ local function mkWowEnv(api, loader)
       IsSilenced = UNIMPLEMENTED,
       IsSquelched = UNIMPLEMENTED,
     },
-    C_Soulbinds = {},
+    C_Soulbinds = {
+      GetConduitChargesCapacity = UNIMPLEMENTED,
+    },
     C_SpecializationInfo = {
       CanPlayerUseTalentSpecUI = UNIMPLEMENTED,
+      CanPlayerUseTalentUI = UNIMPLEMENTED,
+      GetPvpTalentSlotInfo = UNIMPLEMENTED,
     },
     C_Spell = {},
     C_StorePublic = {
@@ -1691,7 +1708,10 @@ local function mkWowEnv(api, loader)
       GetNumLearnedDisplayedToys = STUB_NUMBER,
       GetNumTotalDisplayedToys = STUB_NUMBER,
     },
-    C_TradeSkillUI = {},
+    C_TradeSkillUI = {
+      SetOnlyShowLearnedRecipes = UNIMPLEMENTED,
+      SetOnlyShowUnlearnedRecipes = UNIMPLEMENTED,
+    },
     C_TransmogCollection = {
       GetLatestAppearance = UNIMPLEMENTED,
     },
@@ -1756,6 +1776,7 @@ local function mkWowEnv(api, loader)
     FollowUnit = UNIMPLEMENTED,
     forceinsecure = UNIMPLEMENTED,
     GetAccountExpansionLevel = STUB_NUMBER,
+    GetAchievementInfo = UNIMPLEMENTED,
     GetActionBarPage = STUB_NUMBER,
     GetActionBarToggles = UNIMPLEMENTED,
     GetActionCharges = UNIMPLEMENTED,
@@ -1767,6 +1788,7 @@ local function mkWowEnv(api, loader)
     GetActionText = UNIMPLEMENTED,
     GetActionTexture = UNIMPLEMENTED,
     GetActiveLootRollIDs = STUB_TABLE,
+    GetActiveSpecGroup = UNIMPLEMENTED,
     GetAddOnEnableState = UNIMPLEMENTED,
     GetAddOnMetadata = function(addon, field)
       return ('addonmetadata:%s:%s'):format(addon, field)  -- UNIMPLEMENTED
@@ -1803,6 +1825,7 @@ local function mkWowEnv(api, loader)
       return unpack(versions[loader.version])
     end,
     GetCategoryList = STUB_TABLE,
+    GetChannelList = UNIMPLEMENTED,
     GetChatTypeIndex = STUB_NUMBER,
     GetChatWindowChannels = UNIMPLEMENTED,
     GetChatWindowInfo = function(idx)
@@ -1821,6 +1844,7 @@ local function mkWowEnv(api, loader)
     GetContainerNumSlots = STUB_NUMBER,
     GetCraftFilter = UNIMPLEMENTED,
     GetCraftSlots = UNIMPLEMENTED,
+    GetCurrentArenaSeason = UNIMPLEMENTED,
     GetCurrentGuildBankTab = STUB_NUMBER,
     GetCurrentRegion = function()
       return 1  -- UNIMPLEMENTED
@@ -1895,7 +1919,9 @@ local function mkWowEnv(api, loader)
       return 'GuildName', 'Member', 1  -- UNIMPLEMENTED
     end,
     GetGuildLogoInfo = UNIMPLEMENTED,
-    GetGuildMembershipRequestInfo = UNIMPLEMENTED,
+    GetGuildMembershipRequestInfo = function()
+      return 'Name', 0, 0  -- UNIMPLEMENTED
+    end,
     GetGuildRenameRequired = UNIMPLEMENTED,
     GetGuildRosterInfo = function()
       return 'Moo-Realm', 'Member', 1  -- UNIMPLEMENTED
@@ -1990,6 +2016,7 @@ local function mkWowEnv(api, loader)
     GetLootMethod = function()
       return 'freeforall'  -- UNIMPLEMENTED
     end,
+    GetLootSpecialization = UNIMPLEMENTED,
     GetLootThreshold = STUB_NUMBER,
     GetMaxBattlefieldID = STUB_NUMBER,
     GetMaxDailyQuests = STUB_NUMBER,
@@ -2047,6 +2074,7 @@ local function mkWowEnv(api, loader)
     GetNumSavedInstances = STUB_NUMBER,
     GetNumShapeshiftForms = STUB_NUMBER,
     GetNumSkillLines = STUB_NUMBER,
+    GetNumSpecGroups = STUB_NUMBER,
     GetNumSpecializations = STUB_NUMBER,
     GetNumSpecializationsForClassID = STUB_NUMBER,
     GetNumSpellTabs = STUB_NUMBER,
@@ -2133,6 +2161,7 @@ local function mkWowEnv(api, loader)
     end,
     GetSpecializationInfoForClassID = UNIMPLEMENTED,
     GetSpecializationNameForSpecID = UNIMPLEMENTED,
+    GetSpecializationRole = UNIMPLEMENTED,
     GetSpellBookItemInfo = UNIMPLEMENTED,
     GetSpellConfirmationPromptsInfo = STUB_TABLE,
     GetSpellInfo = UNIMPLEMENTED,
@@ -2285,7 +2314,10 @@ local function mkWowEnv(api, loader)
     RequestGuildChallengeInfo = UNIMPLEMENTED,
     RequestGuildRecruitmentSettings = UNIMPLEMENTED,
     RequestGuildRewards = UNIMPLEMENTED,
+    RequestPVPOptionsEnabled = UNIMPLEMENTED,
+    RequestPVPRewards = UNIMPLEMENTED,
     RequestRaidInfo = UNIMPLEMENTED,
+    RequestRandomBattlegroundInstanceInfo = UNIMPLEMENTED,
     RequestRatedInfo = UNIMPLEMENTED,
     ResetCursor = UNIMPLEMENTED,
     ResurrectGetOfferer = UNIMPLEMENTED,
