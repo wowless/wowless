@@ -402,6 +402,7 @@ local function mkBaseUIObjectTypes(api, loader)
         GetLineHeight = STUB_NUMBER,
         GetStringHeight = STUB_NUMBER,
         GetStringWidth = STUB_NUMBER,
+        GetUnboundedStringWidth = STUB_NUMBER,
         GetText = UNIMPLEMENTED,
         IsTruncated = UNIMPLEMENTED,
         SetFormattedText = UNIMPLEMENTED,
@@ -1322,6 +1323,7 @@ local function mkWowEnv(api, loader)
       EventGetClubId = UNIMPLEMENTED,
       EventGetTypesDisplayOrdered = STUB_TABLE,
       GetDefaultGuildFilter = STUB_TABLE,
+      GetNumPendingInvites = STUB_NUMBER,
       OpenCalendar = UNIMPLEMENTED,
     },
     C_ChallengeMode = {
@@ -1350,6 +1352,7 @@ local function mkWowEnv(api, loader)
     },
     C_ClassTrial = {
       GetClassTrialLogoutTimeSeconds = STUB_NUMBER,
+      IsClassTrialCharacter = UNIMPLEMENTED,
     },
     C_Club = {
       ClearClubPresenceSubscription = UNIMPLEMENTED,
@@ -1460,6 +1463,7 @@ local function mkWowEnv(api, loader)
       GetInProgressMissions = STUB_NUMBER,
       GetNumFollowers = STUB_NUMBER,
       GetRecruiterAbilityCategories = STUB_TABLE,
+      IsPlayerInGarrison = UNIMPLEMENTED,
       IsUsingPartyGarrison = UNIMPLEMENTED,
     },
     C_GossipInfo = {
@@ -1547,7 +1551,9 @@ local function mkWowEnv(api, loader)
     C_MapExplorationInfo = {
       GetExploredMapTextures = STUB_TABLE,
     },
-    C_Minimap = {},
+    C_Minimap = {
+      ShouldUseHybridMinimap = UNIMPLEMENTED,
+    },
     C_ModelInfo = {
       GetModelSceneInfoByID = UNIMPLEMENTED,
     },
@@ -1595,12 +1601,14 @@ local function mkWowEnv(api, loader)
       GetNumPets = STUB_NUMBER,
       GetPVPMatchmakingInfo = UNIMPLEMENTED,
       GetSelectedAction = UNIMPLEMENTED,
+      IsInBattle = UNIMPLEMENTED,
       IsSkipAvailable = UNIMPLEMENTED,
       IsTrapAvailable = UNIMPLEMENTED,
       ShouldShowPetSelect = UNIMPLEMENTED,
     },
     C_PetJournal = {
       GetNumPets = STUB_NUMBER,
+      GetNumPetsNeedingFanfare = STUB_NUMBER,
       GetNumPetSources = STUB_NUMBER,
       GetPetInfoByIndex = UNIMPLEMENTED,
       GetSummonedPetGUID = UNIMPLEMENTED,
@@ -1650,6 +1658,7 @@ local function mkWowEnv(api, loader)
       IsSendingEnabled = UNIMPLEMENTED,
     },
     C_Scenario = {
+      GetInfo = UNIMPLEMENTED,
       ShouldShowCriteria = UNIMPLEMENTED,
     },
     C_ScrappingMachineUI = {},
@@ -1669,7 +1678,7 @@ local function mkWowEnv(api, loader)
       IsSquelched = UNIMPLEMENTED,
     },
     C_Soulbinds = {
-      GetConduitChargesCapacity = UNIMPLEMENTED,
+      GetConduitChargesCapacity = STUB_NUMBER,
     },
     C_SpecializationInfo = {
       CanPlayerUseTalentSpecUI = UNIMPLEMENTED,
@@ -1842,6 +1851,7 @@ local function mkWowEnv(api, loader)
     GetContainerItemQuestInfo = UNIMPLEMENTED,
     GetContainerNumFreeSlots = STUB_NUMBER,
     GetContainerNumSlots = STUB_NUMBER,
+    GetCorruption = STUB_NUMBER,
     GetCraftFilter = UNIMPLEMENTED,
     GetCraftSlots = UNIMPLEMENTED,
     GetCurrentArenaSeason = UNIMPLEMENTED,
@@ -2007,6 +2017,9 @@ local function mkWowEnv(api, loader)
     GetLFGDeserterExpiration = STUB_NUMBER,
     GetLFGInfoServer = UNIMPLEMENTED,
     GetLFGProposal = UNIMPLEMENTED,
+    GetLFGQueuedList = UNIMPLEMENTED,
+    GetLFGReadyCheckUpdate = UNIMPLEMENTED,
+    GetLFGRoles = UNIMPLEMENTED,
     GetLFGRoleUpdate = UNIMPLEMENTED,
     GetLocale = function()
       return 'enUS'  -- UNIMPLEMENTED
@@ -2033,6 +2046,7 @@ local function mkWowEnv(api, loader)
     GetMoney = STUB_NUMBER,
     GetMouseFocus = UNIMPLEMENTED,
     GetMultiCastBarIndex = STUB_NUMBER,
+    GetNegativeCorruptionEffectInfo = UNIMPLEMENTED,
     GetNetStats = function()
       return 1, 1, 1, 1  -- UNIMPLEMENTED
     end,
@@ -2212,9 +2226,11 @@ local function mkWowEnv(api, loader)
     HasBonusActionBar = UNIMPLEMENTED,
     HasCompletedAnyAchievement = UNIMPLEMENTED,
     HasKey = UNIMPLEMENTED,
+    HasOverrideActionBar = UNIMPLEMENTED,
     HasPetSpells = UNIMPLEMENTED,
     HasPetUI = UNIMPLEMENTED,
     HasTempShapeshiftActionBar = UNIMPLEMENTED,
+    HasVehicleActionBar = UNIMPLEMENTED,
     HonorSystemEnabled = UNIMPLEMENTED,
     hooksecurefunc = function(arg1, arg2, arg3)
       local tbl, name, fn
@@ -2263,6 +2279,7 @@ local function mkWowEnv(api, loader)
     IsOnGlueScreen = UNIMPLEMENTED,
     IsPartyLFG = UNIMPLEMENTED,
     IsPlayerInWorld = UNIMPLEMENTED,
+    IsPossessBarVisible = UNIMPLEMENTED,
     IsPublicBuild = UNIMPLEMENTED,
     IsQuestWatched = UNIMPLEMENTED,
     IsRaidMarkerActive = UNIMPLEMENTED,
@@ -2362,6 +2379,8 @@ local function mkWowEnv(api, loader)
     ShowBossFrameWhenUninteractable = UNIMPLEMENTED,
     SortAuctionClearSort = UNIMPLEMENTED,
     SortAuctionSetSort = UNIMPLEMENTED,
+    SortQuests = UNIMPLEMENTED,
+    SortQuestSortTypes = UNIMPLEMENTED,
     Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
     SpellCanTargetItem = UNIMPLEMENTED,
@@ -2378,6 +2397,7 @@ local function mkWowEnv(api, loader)
     TurnRightStop = UNIMPLEMENTED,
     UnitAffectingCombat = UNIMPLEMENTED,
     UnitAura = UNIMPLEMENTED,
+    UnitAuraSlots = UNIMPLEMENTED,
     UnitCanCooperate = UNIMPLEMENTED,
     UnitCastingInfo = UNIMPLEMENTED,
     UnitChannelInfo = UNIMPLEMENTED,
@@ -2398,10 +2418,12 @@ local function mkWowEnv(api, loader)
     UnitGUID = UNIMPLEMENTED,
     UnitHasLFGDeserter = UNIMPLEMENTED,
     UnitHasRelicSlot = UNIMPLEMENTED,
+    UnitHasVehiclePlayerFrameUI = UNIMPLEMENTED,
     UnitHasVehicleUI = UNIMPLEMENTED,
     UnitHealth = STUB_NUMBER,
     UnitHealthMax = STUB_NUMBER,
     UnitInBattleground = UNIMPLEMENTED,
+    UnitInVehicle = UNIMPLEMENTED,
     UnitIsConnected = UNIMPLEMENTED,
     UnitIsDead = UNIMPLEMENTED,
     UnitIsDeadOrGhost = UNIMPLEMENTED,
@@ -2422,6 +2444,7 @@ local function mkWowEnv(api, loader)
     UnitPlayerControlled = UNIMPLEMENTED,
     UnitPosition = UNIMPLEMENTED,
     UnitPower = STUB_NUMBER,
+    UnitPowerBarTimerInfo = UNIMPLEMENTED,
     UnitPowerMax = STUB_NUMBER,
     UnitPowerType = function()
       return 0, 'MANA'  -- UNIMPLEMENTED
