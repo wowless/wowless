@@ -1118,6 +1118,7 @@ local function mkBaseEnv()
     assert = assert,
     bit = {
       band = bitlib.band,
+      bnot = bitlib.bnot,
       bor = bitlib.bor,
     },
     ceil = math.ceil,
@@ -1264,6 +1265,7 @@ local function mkWowEnv(api, loader)
     CanGuildDemote = UNIMPLEMENTED,
     CanGuildPromote = UNIMPLEMENTED,
     CanHearthAndResurrectFromArea = UNIMPLEMENTED,
+    CanPartyLFGBackfill = UNIMPLEMENTED,
     CanReplaceGuildMaster = UNIMPLEMENTED,
     CanSendSoRByText = UNIMPLEMENTED,
     CastingInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
@@ -1295,7 +1297,9 @@ local function mkWowEnv(api, loader)
     C_AreaPoiInfo = {
       GetAreaPOIForMap = STUB_TABLE,
     },
-    C_ArtifactUI = {},
+    C_ArtifactUI = {
+      GetEquippedArtifactInfo = UNIMPLEMENTED,
+    },
     C_AuctionHouse = {
       GetAuctionItemSubClasses = STUB_TABLE,
       HasFavorites = UNIMPLEMENTED,
@@ -1622,6 +1626,7 @@ local function mkWowEnv(api, loader)
       CanPlayerUseMountEquipment = UNIMPLEMENTED,
       GetAlternateFormInfo = UNIMPLEMENTED,
       IsPlayerEligibleForNPEv2 = UNIMPLEMENTED,
+      IsPlayerNPERestricted = UNIMPLEMENTED,
       UnitIsSameServer = UNIMPLEMENTED,
     },
     C_PlayerMentorship = {
@@ -1633,22 +1638,27 @@ local function mkWowEnv(api, loader)
     },
     C_PvP = {
       CanPlayerUseRatedPVPUI = UNIMPLEMENTED,
+      GetActiveMatchState = UNIMPLEMENTED,
       GetArenaCrowdControlInfo = UNIMPLEMENTED,
       GetRandomBGInfo = function()
         return { minLevel = 0 }  -- UNIMPLEMENTED
       end,
+      IsBattlegroundEnlistmentBonusActive = UNIMPLEMENTED,
       IsInBrawl = UNIMPLEMENTED,
       IsWarModeDesired = UNIMPLEMENTED,
     },
     C_QuestLog = {
+      GetInfo = UNIMPLEMENTED,
       GetMaxNumQuests = STUB_NUMBER,
       GetNumQuestLogEntries = STUB_NUMBER,
       GetTitleForQuestID = UNIMPLEMENTED,
+      HasActiveThreats = UNIMPLEMENTED,
       IsOnQuest = UNIMPLEMENTED,
       IsQuestFlaggedCompleted = UNIMPLEMENTED,
     },
     C_QuestSession = {
       GetSessionBeginDetails = UNIMPLEMENTED,
+      HasJoined = UNIMPLEMENTED,
     },
     C_RecruitAFriend = {
       GetRAFInfo = UNIMPLEMENTED,
@@ -1659,6 +1669,7 @@ local function mkWowEnv(api, loader)
     },
     C_Scenario = {
       GetInfo = UNIMPLEMENTED,
+      IsInScenario = UNIMPLEMENTED,
       ShouldShowCriteria = UNIMPLEMENTED,
     },
     C_ScrappingMachineUI = {},
@@ -1697,7 +1708,9 @@ local function mkWowEnv(api, loader)
       HasPurchaseInProgress = UNIMPLEMENTED,
       IsAvailable = UNIMPLEMENTED,
     },
-    C_SuperTrack = {},
+    C_SuperTrack = {
+      GetSuperTrackedQuestID = UNIMPLEMENTED,
+    },
     C_SummonInfo = {
       CancelSummon = UNIMPLEMENTED,
       ConfirmSummon = UNIMPLEMENTED,
@@ -1706,6 +1719,7 @@ local function mkWowEnv(api, loader)
       IsSummonSkippingStartExperience = UNIMPLEMENTED,
     },
     C_TaskQuest = {},
+    C_TaxiMap = {},
     C_Texture = {
       GetAtlasInfo = UNIMPLEMENTED,
     },
@@ -1741,6 +1755,7 @@ local function mkWowEnv(api, loader)
         }
       end,
     },
+    C_VignetteInfo = {},
     C_VoiceChat = {
       CanPlayerUseVoiceChat = UNIMPLEMENTED,
       GetActiveChannelID = UNIMPLEMENTED,
@@ -1819,6 +1834,7 @@ local function mkWowEnv(api, loader)
     GetBankBagSlotFlag = UNIMPLEMENTED,
     GetBattlefieldFlagPosition = UNIMPLEMENTED,
     GetBattlefieldStatus = UNIMPLEMENTED,
+    GetBattlegroundInfo = UNIMPLEMENTED,
     GetBidderAuctionItems = UNIMPLEMENTED,
     GetBinding = UNIMPLEMENTED,
     GetBindingKey = UNIMPLEMENTED,
@@ -2058,6 +2074,7 @@ local function mkWowEnv(api, loader)
     GetNumArenaOpponentSpecs = STUB_NUMBER,
     GetNumArtifactsByRace = STUB_NUMBER,
     GetNumBattlefieldFlagPositions = STUB_NUMBER,
+    GetNumBattlegroundTypes = STUB_NUMBER,
     GetNumBindings = STUB_NUMBER,
     GetNumClasses = STUB_NUMBER,
     GetNumCompletedAchievements = function()
@@ -2208,6 +2225,7 @@ local function mkWowEnv(api, loader)
     GetUnitPowerBarInfo = UNIMPLEMENTED,
     GetWeaponEnchantInfo = UNIMPLEMENTED,
     GetWebTicket = UNIMPLEMENTED,
+    GetWorldElapsedTimers = UNIMPLEMENTED,
     GetWorldPVPQueueStatus = UNIMPLEMENTED,
     GetXPExhaustion = UNIMPLEMENTED,
     GetZonePVPInfo = UNIMPLEMENTED,
@@ -2226,6 +2244,7 @@ local function mkWowEnv(api, loader)
     HasBonusActionBar = UNIMPLEMENTED,
     HasCompletedAnyAchievement = UNIMPLEMENTED,
     HasKey = UNIMPLEMENTED,
+    HasLFGRestrictions = UNIMPLEMENTED,
     HasOverrideActionBar = UNIMPLEMENTED,
     HasPetSpells = UNIMPLEMENTED,
     HasPetUI = UNIMPLEMENTED,
@@ -2253,6 +2272,7 @@ local function mkWowEnv(api, loader)
     IsAltKeyDown = UNIMPLEMENTED,
     IsAutoRepeatAction = UNIMPLEMENTED,
     IsBattlefieldArena = UNIMPLEMENTED,
+    IsCharacterNewlyBoosted = UNIMPLEMENTED,
     IsConsumableAction = UNIMPLEMENTED,
     IsControlKeyDown = UNIMPLEMENTED,
     IsCurrentAction = UNIMPLEMENTED,
@@ -2281,6 +2301,7 @@ local function mkWowEnv(api, loader)
     IsPlayerInWorld = UNIMPLEMENTED,
     IsPossessBarVisible = UNIMPLEMENTED,
     IsPublicBuild = UNIMPLEMENTED,
+    IsPVPTimerRunning = UNIMPLEMENTED,
     IsQuestWatched = UNIMPLEMENTED,
     IsRaidMarkerActive = UNIMPLEMENTED,
     InRepairMode = UNIMPLEMENTED,
@@ -2327,6 +2348,7 @@ local function mkWowEnv(api, loader)
     PutItemInBag = UNIMPLEMENTED,
     QueryGuildNews = UNIMPLEMENTED,
     QuestHonorFrame_Update = UNIMPLEMENTED,
+    QuestMapUpdateAllQuests = UNIMPLEMENTED,
     RegisterStaticConstants = UNIMPLEMENTED,
     RequestGuildChallengeInfo = UNIMPLEMENTED,
     RequestGuildRecruitmentSettings = UNIMPLEMENTED,
@@ -2415,6 +2437,7 @@ local function mkWowEnv(api, loader)
     UnitGetIncomingHeals = UNIMPLEMENTED,
     UnitGetTotalAbsorbs = UNIMPLEMENTED,
     UnitGetTotalHealAbsorbs = UNIMPLEMENTED,
+    UnitGroupRolesAssigned = UNIMPLEMENTED,
     UnitGUID = UNIMPLEMENTED,
     UnitHasLFGDeserter = UNIMPLEMENTED,
     UnitHasRelicSlot = UNIMPLEMENTED,
