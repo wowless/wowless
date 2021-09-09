@@ -1436,6 +1436,7 @@ local function mkWowEnv(api, loader)
     },
     C_DeathInfo = {
       GetCorpseMapPosition = UNIMPLEMENTED,
+      GetGraveyardsForMap = STUB_TABLE,
       GetSelfResurrectOptions = UNIMPLEMENTED,
     },
     C_EncounterJournal = {
@@ -1675,6 +1676,7 @@ local function mkWowEnv(api, loader)
       GetMaxNumQuests = STUB_NUMBER,
       GetNumQuestLogEntries = STUB_NUMBER,
       GetQuestAdditionalHighlights = UNIMPLEMENTED,
+      GetQuestsOnMap = UNIMPLEMENTED,
       GetTitleForQuestID = UNIMPLEMENTED,
       HasActiveThreats = UNIMPLEMENTED,
       IsOnQuest = UNIMPLEMENTED,
