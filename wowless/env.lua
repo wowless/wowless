@@ -711,6 +711,7 @@ local function mkBaseUIObjectTypes(api, loader)
         SetBorderTexture = UNIMPLEMENTED,
         SetFillAlpha = UNIMPLEMENTED,
         SetFillTexture = UNIMPLEMENTED,
+        SetMapID = UNIMPLEMENTED,
       },
     },
     QuestPOIFrame = {
@@ -1137,6 +1138,7 @@ local function mkBaseEnv()
       ceil = math.ceil,
       cos = math.cos,
       floor = math.floor,
+      huge = math.huge,
       max = math.max,
       min = math.min,
       pi = math.pi,
@@ -1657,6 +1659,7 @@ local function mkWowEnv(api, loader)
       HasActiveThreats = UNIMPLEMENTED,
       IsOnQuest = UNIMPLEMENTED,
       IsQuestFlaggedCompleted = UNIMPLEMENTED,
+      ReadyForTurnIn = UNIMPLEMENTED,
     },
     C_QuestSession = {
       GetSessionBeginDetails = UNIMPLEMENTED,
