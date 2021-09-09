@@ -365,6 +365,7 @@ local function mkBaseUIObjectTypes(api, loader)
     FogOfWarFrame = {
       inherits = {'Frame'},
       mixin = {
+        GetUiMapID = UNIMPLEMENTED,
         SetUiMapID = UNIMPLEMENTED,
       },
     },
@@ -1266,6 +1267,7 @@ local function mkWowEnv(api, loader)
     BreakUpLargeNumbers = tostring,  -- UNIMPLEMENTED,
     CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
     CanBeRaidTarget = UNIMPLEMENTED,
+    CancelEmote = UNIMPLEMENTED,
     CanEditOfficerNote = UNIMPLEMENTED,
     CanExitVehicle = UNIMPLEMENTED,
     CanGuildDemote = UNIMPLEMENTED,
@@ -1427,6 +1429,7 @@ local function mkWowEnv(api, loader)
         SetCVar = function(var, value)
           cvars[var] = value
         end,
+        SetCVarBitfield = UNIMPLEMENTED,
       }
     end)(),
     C_DateAndTime = {
@@ -1537,6 +1540,7 @@ local function mkWowEnv(api, loader)
     },
     C_Map = {
       CanSetUserWaypointOnMap = UNIMPLEMENTED,
+      CloseWorldMapInteraction = UNIMPLEMENTED,
       GetBestMapForUnit = UNIMPLEMENTED,
       GetFallbackWorldMapID = function()
         return 0
@@ -1694,13 +1698,18 @@ local function mkWowEnv(api, loader)
       GetQuestAdditionalHighlights = UNIMPLEMENTED,
       GetQuestsOnMap = UNIMPLEMENTED,
       GetTitleForQuestID = UNIMPLEMENTED,
+      GetZoneStoryInfo = UNIMPLEMENTED,
       HasActiveThreats = UNIMPLEMENTED,
       IsOnQuest = UNIMPLEMENTED,
       IsQuestFlaggedCompleted = UNIMPLEMENTED,
       ReadyForTurnIn = UNIMPLEMENTED,
+      SetMapForQuestPOIs = UNIMPLEMENTED,
     },
     C_QuestSession = {
+      CanStart = UNIMPLEMENTED,
       GetSessionBeginDetails = UNIMPLEMENTED,
+      Exists = UNIMPLEMENTED,
+      GetPendingCommand = UNIMPLEMENTED,
       HasJoined = UNIMPLEMENTED,
     },
     C_RecruitAFriend = {
@@ -1835,6 +1844,7 @@ local function mkWowEnv(api, loader)
     C_ZoneAbility = {
       GetActiveAbilities = STUB_TABLE,
     },
+    DoEmote = UNIMPLEMENTED,
     DropCursorMoney = UNIMPLEMENTED,
     EJ_GetCurrentTier = UNIMPLEMENTED,
     EJ_GetDifficulty = UNIMPLEMENTED,
@@ -2399,7 +2409,8 @@ local function mkWowEnv(api, loader)
     PutItemInBag = UNIMPLEMENTED,
     QueryGuildNews = UNIMPLEMENTED,
     QuestHonorFrame_Update = UNIMPLEMENTED,
-    QuestMapUpdateAllQuests = UNIMPLEMENTED,
+    QuestMapUpdateAllQuests = STUB_NUMBER,
+    QuestPOIUpdateIcons = UNIMPLEMENTED,
     RegisterStaticConstants = UNIMPLEMENTED,
     RequestGuildChallengeInfo = UNIMPLEMENTED,
     RequestGuildRecruitmentSettings = UNIMPLEMENTED,
