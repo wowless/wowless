@@ -1368,15 +1368,22 @@ local function mkWowEnv(api, loader)
       IsClassTrialCharacter = UNIMPLEMENTED,
     },
     C_Club = {
+      ClearAutoAdvanceStreamViewMarker = UNIMPLEMENTED,
       ClearClubPresenceSubscription = UNIMPLEMENTED,
+      Flush = UNIMPLEMENTED,
       GetInvitationsForSelf = STUB_TABLE,
       GetSubscribedClubs = STUB_TABLE,
       IsEnabled = UNIMPLEMENTED,
+      ShouldAllowClubType = UNIMPLEMENTED,
     },
     C_ClubFinder = {
       GetClubRecruitmentSettings = STUB_TABLE,
+      GetPlayerApplicantLocaleFlags = UNIMPLEMENTED,
+      GetPlayerApplicantSettings = STUB_TABLE,
+      GetPlayerSettingsFocusFlagsSelectedCount = STUB_NUMBER,
       IsEnabled = UNIMPLEMENTED,
       PlayerRequestPendingClubsList = UNIMPLEMENTED,
+      SetPlayerApplicantLocaleFlags = UNIMPLEMENTED,
     },
     C_Commentator = {
       GetMaxNumPlayersPerTeam = STUB_NUMBER,
@@ -1589,9 +1596,14 @@ local function mkWowEnv(api, loader)
     C_MountJournal = {
       AreMountEquipmentEffectsSuppressed = UNIMPLEMENTED,
       GetAppliedMountEquipmentID = UNIMPLEMENTED,
+      GetDisplayedMountInfo = UNIMPLEMENTED,
       GetMountEquipmentUnlockLevel = STUB_NUMBER,
+      GetMountIDs = STUB_TABLE,
+      GetNumDisplayedMounts = STUB_NUMBER,
+      GetNumMounts = STUB_NUMBER,
       GetNumMountsNeedingFanfare = STUB_NUMBER,
       IsValidSourceFilter = UNIMPLEMENTED,
+      NeedsFanfare = UNIMPLEMENTED,
     },
     C_NamePlate = {
       GetNamePlateForUnit = UNIMPLEMENTED,
