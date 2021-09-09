@@ -1073,6 +1073,9 @@ local function mkBaseUIObjectTypes(api, loader)
         SetVertTile = UNIMPLEMENTED,
       },
     },
+    TextureCoordTranslation = {
+      inherits = {'Animation'},
+    },
     Translation = {
       inherits = {'Animation'},
       mixin = {
@@ -1334,6 +1337,7 @@ local function mkWowEnv(api, loader)
     },
     C_BarberShop = {
       ClearPreviewChoices = UNIMPLEMENTED,
+      SaveSeenChoices = UNIMPLEMENTED,
     },
     C_Calendar = {
       EventGetClubId = UNIMPLEMENTED,
@@ -1518,6 +1522,7 @@ local function mkWowEnv(api, loader)
       DoesItemExist = UNIMPLEMENTED,
     },
     C_ItemInteraction = {},
+    C_ItemUpgrade = {},
     C_LegendaryCrafting = {
       GetRuneforgePowersByClassSpecAndCovenant = UNIMPLEMENTED,
     },
