@@ -31,6 +31,10 @@ local function run(cfg)
   api.NextFrame()
   api.SendEvent('PLAYER_REGEN_ENABLED')
   api.NextFrame()
+  -- TODO remove hack hiding CovenantFollowerPlacer
+  if api.env.CovenantFollowerPlacer then
+    api.env.CovenantFollowerPlacer:Hide()
+  end
   for _, frame in ipairs(api.frames) do
     if frame:IsVisible() then
       api.log(2, 'enter/leave %s', tostring(frame:GetName()))

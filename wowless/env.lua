@@ -1625,7 +1625,9 @@ local function mkWowEnv(api, loader)
       SetNamePlateSelfSize = UNIMPLEMENTED,
       SetTargetClampingInsets = UNIMPLEMENTED,
     },
-    C_Navigation = {},
+    C_Navigation = {
+      GetFrame = UNIMPLEMENTED,
+    },
     C_NewItems = {
       IsNewItem = UNIMPLEMENTED,
       RemoveNewItem = UNIMPLEMENTED,
@@ -2392,6 +2394,7 @@ local function mkWowEnv(api, loader)
     IsOnGlueScreen = UNIMPLEMENTED,
     IsPartyLFG = UNIMPLEMENTED,
     IsPlayerInWorld = UNIMPLEMENTED,
+    IsPlayerMoving = UNIMPLEMENTED,
     IsPossessBarVisible = UNIMPLEMENTED,
     IsPublicBuild = UNIMPLEMENTED,
     IsPVPTimerRunning = UNIMPLEMENTED,
