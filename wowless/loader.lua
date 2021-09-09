@@ -82,6 +82,8 @@ local function loader(api, cfg)
                   end
                   relativeTo = obj
                 end
+              else
+                relativeTo = api.UserData(parent).parent
               end
               local relativePoint = anchor.relativepoint
               local x = anchor.x or (anchor.offset and anchor.offset.x) or nil
