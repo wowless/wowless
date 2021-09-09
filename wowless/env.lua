@@ -404,6 +404,7 @@ local function mkBaseUIObjectTypes(api, loader)
       inherits = {'FontInstance', 'LayeredRegion'},
       mixin = {
         GetLineHeight = STUB_NUMBER,
+        GetNumLines = STUB_NUMBER,
         GetStringHeight = STUB_NUMBER,
         GetStringWidth = STUB_NUMBER,
         GetUnboundedStringWidth = STUB_NUMBER,
@@ -636,6 +637,8 @@ local function mkBaseUIObjectTypes(api, loader)
     Minimap = {
       inherits = {'Frame'},
       mixin = {
+        GetZoom = STUB_NUMBER,
+        GetZoomLevels = STUB_NUMBER,
         SetMaskTexture = UNIMPLEMENTED,
         SetZoom = UNIMPLEMENTED,
       },
@@ -1404,6 +1407,7 @@ local function mkWowEnv(api, loader)
       GetSoulCurrencies = STUB_TABLE,
     },
     C_CurrencyInfo = {
+      GetBackpackCurrencyInfo = UNIMPLEMENTED,
       GetCurrencyInfo = STUB_TABLE,
     },
     C_CVar = (function()
@@ -1502,6 +1506,9 @@ local function mkWowEnv(api, loader)
       GuildControlGetRankFlags = STUB_TABLE,
       GuildRoster = UNIMPLEMENTED,
     },
+    C_Heirloom = {
+      ShouldShowHeirloomHelp = UNIMPLEMENTED,
+    },
     C_InvasionInfo = {
       GetInvasionForUiMapID = UNIMPLEMENTED,
     },
@@ -1595,6 +1602,7 @@ local function mkWowEnv(api, loader)
     },
     C_MountJournal = {
       AreMountEquipmentEffectsSuppressed = UNIMPLEMENTED,
+      ClearRecentFanfares = UNIMPLEMENTED,
       GetAppliedMountEquipmentID = UNIMPLEMENTED,
       GetDisplayedMountInfo = UNIMPLEMENTED,
       GetMountEquipmentUnlockLevel = STUB_NUMBER,
@@ -1901,6 +1909,9 @@ local function mkWowEnv(api, loader)
     GetAuctionItemSubClasses = UNIMPLEMENTED,
     GetAvailableLocaleInfo = STUB_TABLE,
     GetAvailableLocales = UNIMPLEMENTED,
+    GetBagName = function()
+      return 'BagName'  -- UNIMPLEMENTED
+    end,
     GetBagSlotFlag = UNIMPLEMENTED,
     GetBankBagSlotFlag = UNIMPLEMENTED,
     GetBattlefieldFlagPosition = UNIMPLEMENTED,
@@ -2345,8 +2356,10 @@ local function mkWowEnv(api, loader)
     IsAltKeyDown = UNIMPLEMENTED,
     IsAutoRepeatAction = UNIMPLEMENTED,
     IsBattlefieldArena = UNIMPLEMENTED,
+    IsBattlePayItem = UNIMPLEMENTED,
     IsCharacterNewlyBoosted = UNIMPLEMENTED,
     IsConsumableAction = UNIMPLEMENTED,
+    IsContainerItemAnUpgrade = UNIMPLEMENTED,
     IsControlKeyDown = UNIMPLEMENTED,
     IsCurrentAction = UNIMPLEMENTED,
     IsCurrentQuestFailed = UNIMPLEMENTED,
