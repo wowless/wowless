@@ -1820,6 +1820,10 @@ local function mkWowEnv(api, loader)
     C_TransmogCollection = {
       GetLatestAppearance = UNIMPLEMENTED,
     },
+    C_TTSSettings = {
+      GetSpeechRate = STUB_NUMBER,
+      GetSpeechVolume = STUB_NUMBER,
+    },
     C_UIWidgetManager = {
       GetAllWidgetsBySetID = STUB_TABLE,
       GetBelowMinimapWidgetSetID = function()
