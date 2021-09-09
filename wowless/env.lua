@@ -2192,7 +2192,9 @@ local function mkWowEnv(api, loader)
     end,
     GetSpecializationInfoForClassID = UNIMPLEMENTED,
     GetSpecializationNameForSpecID = UNIMPLEMENTED,
-    GetSpecializationRole = UNIMPLEMENTED,
+    GetSpecializationRole = function()
+      return 'DAMAGER'  -- UNIMPLEMENTED
+    end,
     GetSpellBookItemInfo = UNIMPLEMENTED,
     GetSpellConfirmationPromptsInfo = STUB_TABLE,
     GetSpellInfo = UNIMPLEMENTED,
