@@ -1401,7 +1401,9 @@ local function mkWowEnv(api, loader)
     C_ContributionCollector = {
       GetContributionCollectorsForMap = STUB_TABLE,
     },
-    C_Covenants = {},
+    C_Covenants = {
+      GetActiveCovenantID = STUB_NUMBER,
+    },
     C_CovenantSanctumUI = {
       GetAnimaInfo = UNIMPLEMENTED,
       GetSoulCurrencies = STUB_TABLE,
@@ -1761,7 +1763,9 @@ local function mkWowEnv(api, loader)
       IsSquelched = UNIMPLEMENTED,
     },
     C_Soulbinds = {
+      GetActiveSoulbindID = STUB_NUMBER,
       GetConduitChargesCapacity = STUB_NUMBER,
+      GetSoulbindData = UNIMPLEMENTED,
     },
     C_SpecializationInfo = {
       CanPlayerUseTalentSpecUI = UNIMPLEMENTED,
@@ -1909,6 +1913,9 @@ local function mkWowEnv(api, loader)
     GetAuctionItemSubClasses = UNIMPLEMENTED,
     GetAvailableLocaleInfo = STUB_TABLE,
     GetAvailableLocales = UNIMPLEMENTED,
+    GetAverageItemLevel = function()
+      return 1, 1, 1  -- UNIMPLEMENTED
+    end,
     GetBagName = function()
       return 'BagName'  -- UNIMPLEMENTED
     end,
@@ -2517,6 +2524,7 @@ local function mkWowEnv(api, loader)
     UnitClassBase = function()
       return 'WARRIOR', 1
     end,
+    UnitEffectiveLevel = STUB_NUMBER,
     UnitExists = UNIMPLEMENTED,
     UnitFactionGroup = function()
       return 'Horde', 'Horde'
