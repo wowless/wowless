@@ -1651,6 +1651,7 @@ local function mkWowEnv(api, loader)
       GetArenaSkirmishRewards = function()
         return 0, 0  -- UNIMPLEMENTED
       end,
+      GetAvailableBrawlInfo = UNIMPLEMENTED,
       GetRandomBGInfo = function()
         return { minLevel = 0 }  -- UNIMPLEMENTED
       end,
@@ -1658,6 +1659,11 @@ local function mkWowEnv(api, loader)
         return 0, 0  -- UNIMPLEMENTED
       end,
       GetRandomEpicBGInfo = STUB_TABLE,
+      GetRandomEpicBGRewards = function()
+        return 0, 0  -- UNIMPLEMENTED
+      end,
+      GetSpecialEventDetails = UNIMPLEMENTED,
+      GetSpecialEventInfo = UNIMPLEMENTED,
       IsBattlegroundEnlistmentBonusActive = UNIMPLEMENTED,
       IsInBrawl = UNIMPLEMENTED,
       IsWarModeDesired = UNIMPLEMENTED,
