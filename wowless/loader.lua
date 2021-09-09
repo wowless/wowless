@@ -585,6 +585,7 @@ local function loader(api, cfg)
       Blizzard_FlightMap = true,
       Blizzard_GMChatUI = true,
       Blizzard_SocialUI = true,
+      Blizzard_Tutorial = true,  -- conflicts with NewPlayerExperience
     }
     for dir in path.each(addonDir .. '/*', 'n', { skipfiles = true }) do
       local toc = resolveToc(path.join(addonDir, dir, dir .. '.toc'))
