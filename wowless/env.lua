@@ -364,6 +364,9 @@ local function mkBaseUIObjectTypes(api, loader)
     },
     FogOfWarFrame = {
       inherits = {'Frame'},
+      mixin = {
+        SetUiMapID = UNIMPLEMENTED,
+      },
     },
     Font = {
       inherits = {'FontInstance'},
@@ -706,6 +709,7 @@ local function mkBaseUIObjectTypes(api, loader)
     POIFrame = {
       inherits = {'Frame'},
       mixin = {
+        DrawNone = UNIMPLEMENTED,
         SetBorderAlpha = UNIMPLEMENTED,
         SetBorderScalar = UNIMPLEMENTED,
         SetBorderTexture = UNIMPLEMENTED,
@@ -1270,6 +1274,7 @@ local function mkWowEnv(api, loader)
     CanPartyLFGBackfill = UNIMPLEMENTED,
     CanReplaceGuildMaster = UNIMPLEMENTED,
     CanSendSoRByText = UNIMPLEMENTED,
+    CanTrackBattlePets = UNIMPLEMENTED,
     CastingInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     CastPetAction = UNIMPLEMENTED,
     CastShapeshiftForm = UNIMPLEMENTED,
@@ -1381,7 +1386,9 @@ local function mkWowEnv(api, loader)
     C_Console = {
       SetFontHeight = UNIMPLEMENTED,
     },
-    C_ContributionCollector = {},
+    C_ContributionCollector = {
+      GetContributionCollectorsForMap = STUB_TABLE,
+    },
     C_Covenants = {},
     C_CovenantSanctumUI = {
       GetAnimaInfo = UNIMPLEMENTED,
@@ -1469,6 +1476,7 @@ local function mkWowEnv(api, loader)
       GetFollowers = STUB_TABLE,
       GetFollowerSoftCap = STUB_NUMBER,
       GetFollowerXPTable = STUB_TABLE,
+      GetGarrisonPlotsInstancesForMap = STUB_TABLE,
       GetInProgressMissions = STUB_NUMBER,
       GetNumFollowers = STUB_NUMBER,
       GetRecruiterAbilityCategories = STUB_TABLE,
@@ -1528,6 +1536,7 @@ local function mkWowEnv(api, loader)
       end,
     },
     C_Map = {
+      CanSetUserWaypointOnMap = UNIMPLEMENTED,
       GetBestMapForUnit = UNIMPLEMENTED,
       GetFallbackWorldMapID = function()
         return 0
@@ -1550,6 +1559,7 @@ local function mkWowEnv(api, loader)
       GetMapBannersForMap = STUB_TABLE,
       GetMapChildrenInfo = STUB_TABLE,
       GetMapDisplayInfo = UNIMPLEMENTED,
+      GetMapGroupID = UNIMPLEMENTED,
       GetMapHighlightInfoAtPosition = UNIMPLEMENTED,
       GetMapInfo = function(uiMapID)
         return {
@@ -1560,6 +1570,8 @@ local function mkWowEnv(api, loader)
           parentMapID = 0,
         }
       end,
+      GetMapLinksForMap = STUB_TABLE,
+      GetUserWaypointPositionForMap = UNIMPLEMENTED,
     },
     C_MapExplorationInfo = {
       GetExploredMapTextures = STUB_TABLE,
@@ -1665,12 +1677,16 @@ local function mkWowEnv(api, loader)
       end,
       GetSpecialEventDetails = UNIMPLEMENTED,
       GetSpecialEventInfo = UNIMPLEMENTED,
+      IsActiveBattlefield = UNIMPLEMENTED,
       IsBattlegroundEnlistmentBonusActive = UNIMPLEMENTED,
       IsInBrawl = UNIMPLEMENTED,
       IsWarModeDesired = UNIMPLEMENTED,
     },
     C_QuestLog = {
-      GetBountySetInfoForMapID = UNIMPLEMENTED,
+      GetBountiesForMapID = UNIMPLEMENTED,
+      GetBountySetInfoForMapID = function()
+        return 0, 0, 0  -- UNIMPLEMENTED
+      end,
       GetInfo = UNIMPLEMENTED,
       GetLogIndexForQuestID = STUB_NUMBER,
       GetMaxNumQuests = STUB_NUMBER,
@@ -1748,7 +1764,9 @@ local function mkWowEnv(api, loader)
     C_TaskQuest = {
       GetQuestsForPlayerByMapID = UNIMPLEMENTED,
     },
-    C_TaxiMap = {},
+    C_TaxiMap = {
+      ShouldMapShowTaxiNodes = UNIMPLEMENTED,
+    },
     C_Texture = {
       GetAtlasInfo = UNIMPLEMENTED,
     },
@@ -1784,7 +1802,9 @@ local function mkWowEnv(api, loader)
         }
       end,
     },
-    C_VignetteInfo = {},
+    C_VignetteInfo = {
+      GetVignettes = STUB_TABLE,
+    },
     C_VoiceChat = {
       CanPlayerUseVoiceChat = UNIMPLEMENTED,
       GetActiveChannelID = UNIMPLEMENTED,
@@ -2438,6 +2458,7 @@ local function mkWowEnv(api, loader)
     Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
     SpellCanTargetItem = UNIMPLEMENTED,
     SpellCanTargetItemID = UNIMPLEMENTED,
+    SpellCanTargetQuest = UNIMPLEMENTED,
     SpellIsTargeting = UNIMPLEMENTED,
     StoreSecureReference = UNIMPLEMENTED,
     StrafeLeftStop = UNIMPLEMENTED,
