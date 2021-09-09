@@ -1392,9 +1392,11 @@ local function mkWowEnv(api, loader)
       local cvarDefaults = {
         cameraSmoothStyle = '0',
         cameraSmoothTrackingStyle = '0',
+        NamePlateClassificationScale = '1',
         NamePlateHorizontalScale = '1',
         nameplateMotion = '0',
         NamePlateVerticalScale = '1',
+        remoteTextToSpeechVoice = '1',
         timeMgrAlarmTime = '0',
       }
       local cvars = {}
@@ -1709,7 +1711,7 @@ local function mkWowEnv(api, loader)
       IsAvailable = UNIMPLEMENTED,
     },
     C_SuperTrack = {
-      GetSuperTrackedQuestID = UNIMPLEMENTED,
+      GetSuperTrackedQuestID = STUB_NUMBER,
     },
     C_SummonInfo = {
       CancelSummon = UNIMPLEMENTED,
@@ -2439,7 +2441,9 @@ local function mkWowEnv(api, loader)
     UnitGetIncomingHeals = UNIMPLEMENTED,
     UnitGetTotalAbsorbs = UNIMPLEMENTED,
     UnitGetTotalHealAbsorbs = UNIMPLEMENTED,
-    UnitGroupRolesAssigned = UNIMPLEMENTED,
+    UnitGroupRolesAssigned = function()
+      return 'DAMAGER'  -- UNIMPLEMENTED
+    end,
     UnitGUID = UNIMPLEMENTED,
     UnitHasLFGDeserter = UNIMPLEMENTED,
     UnitHasRelicSlot = UNIMPLEMENTED,
