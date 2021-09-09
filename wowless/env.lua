@@ -1483,6 +1483,9 @@ local function mkWowEnv(api, loader)
       GuildControlGetRankFlags = STUB_TABLE,
       GuildRoster = UNIMPLEMENTED,
     },
+    C_InvasionInfo = {
+      GetInvasionForUiMapID = UNIMPLEMENTED,
+    },
     C_Item = {
       DoesItemExist = UNIMPLEMENTED,
     },
@@ -1543,6 +1546,7 @@ local function mkWowEnv(api, loader)
         return { layer }
       end,
       GetMapArtLayerTextures = STUB_TABLE,
+      GetMapBannersForMap = STUB_TABLE,
       GetMapChildrenInfo = STUB_TABLE,
       GetMapDisplayInfo = UNIMPLEMENTED,
       GetMapHighlightInfoAtPosition = UNIMPLEMENTED,
@@ -1644,17 +1648,27 @@ local function mkWowEnv(api, loader)
       CanPlayerUseRatedPVPUI = UNIMPLEMENTED,
       GetActiveMatchState = UNIMPLEMENTED,
       GetArenaCrowdControlInfo = UNIMPLEMENTED,
+      GetArenaSkirmishRewards = function()
+        return 0, 0  -- UNIMPLEMENTED
+      end,
       GetRandomBGInfo = function()
         return { minLevel = 0 }  -- UNIMPLEMENTED
       end,
+      GetRandomBGRewards = function()
+        return 0, 0  -- UNIMPLEMENTED
+      end,
+      GetRandomEpicBGInfo = STUB_TABLE,
       IsBattlegroundEnlistmentBonusActive = UNIMPLEMENTED,
       IsInBrawl = UNIMPLEMENTED,
       IsWarModeDesired = UNIMPLEMENTED,
     },
     C_QuestLog = {
+      GetBountySetInfoForMapID = UNIMPLEMENTED,
       GetInfo = UNIMPLEMENTED,
+      GetLogIndexForQuestID = STUB_NUMBER,
       GetMaxNumQuests = STUB_NUMBER,
       GetNumQuestLogEntries = STUB_NUMBER,
+      GetQuestAdditionalHighlights = UNIMPLEMENTED,
       GetTitleForQuestID = UNIMPLEMENTED,
       HasActiveThreats = UNIMPLEMENTED,
       IsOnQuest = UNIMPLEMENTED,
@@ -1723,7 +1737,9 @@ local function mkWowEnv(api, loader)
       GetSummonReason = UNIMPLEMENTED,
       IsSummonSkippingStartExperience = UNIMPLEMENTED,
     },
-    C_TaskQuest = {},
+    C_TaskQuest = {
+      GetQuestsForPlayerByMapID = UNIMPLEMENTED,
+    },
     C_TaxiMap = {},
     C_Texture = {
       GetAtlasInfo = UNIMPLEMENTED,
