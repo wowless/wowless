@@ -7,18 +7,19 @@ describe('runner', function()
       wow_classic_era_ptr = 'Vanilla',
       wow_classic_ptr = 'TBC',
     }
-    local cmds = {'set -e ;'}
+    local handles = {}
     for k, v in pairs(versions) do
-      table.insert(cmds, string.format('bin/run.sh 0 %s %s &', k, v))
+      handles[k] = io.popen(string.format('bin/run.sh 0 %s %s 2>&1', k, v))
     end
-    for _ = 2, #cmds do
-      table.insert(cmds, 'wait -n ;')
+    local results = {}
+    for k, h in pairs(handles) do
+      results[k] = h:read('*all')
+      h:close()
     end
-    local inner = string.format('bash -c "%s"', table.concat(cmds, ''))
-    local outer = string.format('bash -c \'%s\' >/dev/null; echo $?', inner)
-    local handle = io.popen(outer)
-    local content = handle:read('*all')
-    handle:close()
-    assert.same('0\n', content)
+    local expected = {}
+    for k in pairs(versions) do
+      expected[k] = ''
+    end
+    assert.same(expected, results)
   end)
 end)
