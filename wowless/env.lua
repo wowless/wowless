@@ -1322,7 +1322,6 @@ local function mkWowEnv(api, loader)
     },
     C_Calendar = {
       EventGetClubId = UNIMPLEMENTED,
-      GetNumPendingInvites = STUB_NUMBER,
       OpenCalendar = UNIMPLEMENTED,
     },
     C_CharacterServices = {
@@ -1337,7 +1336,6 @@ local function mkWowEnv(api, loader)
       ShouldSeeControlPopup = UNIMPLEMENTED,
     },
     C_ChatInfo = {
-      GetNumReservedChatWindows = STUB_NUMBER,
       IsValidChatLine = UNIMPLEMENTED,
       RegisterAddonMessagePrefix = UNIMPLEMENTED,
     },
@@ -1347,7 +1345,6 @@ local function mkWowEnv(api, loader)
       end,
     },
     C_ClassTrial = {
-      GetClassTrialLogoutTimeSeconds = STUB_NUMBER,
       IsClassTrialCharacter = UNIMPLEMENTED,
     },
     C_Club = {
@@ -1359,23 +1356,17 @@ local function mkWowEnv(api, loader)
     },
     C_ClubFinder = {
       GetPlayerApplicantLocaleFlags = UNIMPLEMENTED,
-      GetPlayerSettingsFocusFlagsSelectedCount = STUB_NUMBER,
       IsEnabled = UNIMPLEMENTED,
       PlayerRequestPendingClubsList = UNIMPLEMENTED,
       SetPlayerApplicantLocaleFlags = UNIMPLEMENTED,
     },
     C_Commentator = {
-      GetMaxNumPlayersPerTeam = STUB_NUMBER,
-      GetMaxNumTeams = STUB_NUMBER,
       IsSpectating = UNIMPLEMENTED,
       SetFollowCameraSpeeds = UNIMPLEMENTED,
       SetMouseDisabled = UNIMPLEMENTED,
     },
     C_Console = {
       SetFontHeight = UNIMPLEMENTED,
-    },
-    C_Covenants = {
-      GetActiveCovenantID = STUB_NUMBER,
     },
     C_CovenantSanctumUI = {
       GetAnimaInfo = UNIMPLEMENTED,
@@ -1443,8 +1434,6 @@ local function mkWowEnv(api, loader)
     },
     C_FriendList = {
       GetFriendInfo = UNIMPLEMENTED,
-      GetNumFriends = STUB_NUMBER,
-      GetNumOnlineFriends = STUB_NUMBER,
       SetSelectedFriend = UNIMPLEMENTED,
       SetWhoToUi = UNIMPLEMENTED,
       ShowFriends = UNIMPLEMENTED,
@@ -1454,9 +1443,6 @@ local function mkWowEnv(api, loader)
       GetAvailableMissions = UNIMPLEMENTED,
       GetCombatAllyMission = UNIMPLEMENTED,
       GetCurrencyTypes = UNIMPLEMENTED,
-      GetFollowerSoftCap = STUB_NUMBER,
-      GetInProgressMissions = STUB_NUMBER,
-      GetNumFollowers = STUB_NUMBER,
       IsPlayerInGarrison = UNIMPLEMENTED,
       IsUsingPartyGarrison = UNIMPLEMENTED,
     },
@@ -1495,11 +1481,9 @@ local function mkWowEnv(api, loader)
       ClearCreationTextFields = UNIMPLEMENTED,
       GetActiveEntryInfo = UNIMPLEMENTED,
       GetAvailableRoles = UNIMPLEMENTED,
-      GetDefaultLanguageSearchFilter = STUB_NUMBER,
       GetFilteredSearchResults = function()
         return 0  -- UNIMPLEMENTED
       end,
-      GetLanguageSearchFilter = STUB_NUMBER,
       GetNumApplications = function()
         return 0, 0  -- UNIMPLEMENTED
       end,
@@ -1507,7 +1491,6 @@ local function mkWowEnv(api, loader)
     },
     C_LootHistory = {
       GetItem = UNIMPLEMENTED,
-      GetNumItems = STUB_NUMBER,
       GetPlayerInfo = function()
         return 'moo', 'WARRIOR'  -- UNIMPLEMENTED
       end,
@@ -1520,7 +1503,6 @@ local function mkWowEnv(api, loader)
         return 0
       end,
       GetMapArtBackgroundAtlas = UNIMPLEMENTED,
-      GetMapArtID = STUB_NUMBER,
       GetMapArtLayers = function()
         local layer = {
           additionalZoomSteps = 0,
@@ -1558,16 +1540,11 @@ local function mkWowEnv(api, loader)
       ClearRecentFanfares = UNIMPLEMENTED,
       GetAppliedMountEquipmentID = UNIMPLEMENTED,
       GetDisplayedMountInfo = UNIMPLEMENTED,
-      GetMountEquipmentUnlockLevel = STUB_NUMBER,
-      GetNumDisplayedMounts = STUB_NUMBER,
-      GetNumMounts = STUB_NUMBER,
-      GetNumMountsNeedingFanfare = STUB_NUMBER,
       IsValidSourceFilter = UNIMPLEMENTED,
       NeedsFanfare = UNIMPLEMENTED,
     },
     C_NamePlate = {
       GetNamePlateForUnit = UNIMPLEMENTED,
-      GetNumNamePlateMotionTypes = STUB_NUMBER,
       SetNamePlateEnemySize = UNIMPLEMENTED,
       SetNamePlateFriendlySize = UNIMPLEMENTED,
       SetNamePlateSelfClickThrough = UNIMPLEMENTED,
@@ -1592,15 +1569,9 @@ local function mkWowEnv(api, loader)
       GetAllEffectNames = UNIMPLEMENTED,
       GetAllStates = UNIMPLEMENTED,
       GetBattleState = UNIMPLEMENTED,
-      GetDisplayID = STUB_NUMBER,
-      GetHealth = STUB_NUMBER,
-      GetIcon = STUB_NUMBER,
-      GetLevel = STUB_NUMBER,
-      GetMaxHealth = STUB_NUMBER,
       GetName = function()
         return 'PetName'
       end,
-      GetNumPets = STUB_NUMBER,
       GetPVPMatchmakingInfo = UNIMPLEMENTED,
       GetSelectedAction = UNIMPLEMENTED,
       IsInBattle = UNIMPLEMENTED,
@@ -1609,9 +1580,6 @@ local function mkWowEnv(api, loader)
       ShouldShowPetSelect = UNIMPLEMENTED,
     },
     C_PetJournal = {
-      GetNumPets = STUB_NUMBER,
-      GetNumPetsNeedingFanfare = STUB_NUMBER,
-      GetNumPetSources = STUB_NUMBER,
       GetPetInfoByIndex = UNIMPLEMENTED,
       GetSummonedPetGUID = UNIMPLEMENTED,
       GetSummonRandomFavoritePetGUID = UNIMPLEMENTED,
@@ -1629,9 +1597,6 @@ local function mkWowEnv(api, loader)
     },
     C_PlayerMentorship = {
       GetMentorshipStatus = UNIMPLEMENTED,
-    },
-    C_ProductChoice = {
-      GetNumSuppressed = STUB_NUMBER,
     },
     C_PvP = {
       CanPlayerUseRatedPVPUI = UNIMPLEMENTED,
@@ -1663,9 +1628,6 @@ local function mkWowEnv(api, loader)
         return 0, 0, 0  -- UNIMPLEMENTED
       end,
       GetInfo = UNIMPLEMENTED,
-      GetLogIndexForQuestID = STUB_NUMBER,
-      GetMaxNumQuests = STUB_NUMBER,
-      GetNumQuestLogEntries = STUB_NUMBER,
       GetQuestAdditionalHighlights = UNIMPLEMENTED,
       GetQuestsOnMap = UNIMPLEMENTED,
       GetTitleForQuestID = UNIMPLEMENTED,
@@ -1708,8 +1670,6 @@ local function mkWowEnv(api, loader)
       IsSquelched = UNIMPLEMENTED,
     },
     C_Soulbinds = {
-      GetActiveSoulbindID = STUB_NUMBER,
-      GetConduitChargesCapacity = STUB_NUMBER,
       GetSoulbindData = UNIMPLEMENTED,
     },
     C_SpecializationInfo = {
@@ -1729,13 +1689,9 @@ local function mkWowEnv(api, loader)
       HasPurchaseInProgress = UNIMPLEMENTED,
       IsAvailable = UNIMPLEMENTED,
     },
-    C_SuperTrack = {
-      GetSuperTrackedQuestID = STUB_NUMBER,
-    },
     C_SummonInfo = {
       CancelSummon = UNIMPLEMENTED,
       ConfirmSummon = UNIMPLEMENTED,
-      GetSummonConfirmTimeLeft = STUB_NUMBER,
       GetSummonReason = UNIMPLEMENTED,
       IsSummonSkippingStartExperience = UNIMPLEMENTED,
     },
@@ -1751,11 +1707,6 @@ local function mkWowEnv(api, loader)
     C_Timer = {
       After = UNIMPLEMENTED,
     },
-    C_ToyBox = {
-      GetNumFilteredToys = STUB_NUMBER,
-      GetNumLearnedDisplayedToys = STUB_NUMBER,
-      GetNumTotalDisplayedToys = STUB_NUMBER,
-    },
     C_TradeSkillUI = {
       SetOnlyShowLearnedRecipes = UNIMPLEMENTED,
       SetOnlyShowUnlearnedRecipes = UNIMPLEMENTED,
@@ -1763,16 +1714,10 @@ local function mkWowEnv(api, loader)
     C_TransmogCollection = {
       GetLatestAppearance = UNIMPLEMENTED,
     },
-    C_TTSSettings = {
-      GetSpeechRate = STUB_NUMBER,
-      GetSpeechVolume = STUB_NUMBER,
-    },
     C_UIWidgetManager = {
       GetBelowMinimapWidgetSetID = function()
         return 2
       end,
-      GetObjectiveTrackerWidgetSetID = STUB_NUMBER,
-      GetPowerBarWidgetSetID = STUB_NUMBER,
       GetTopCenterWidgetSetID = function()
         return 1
       end,
