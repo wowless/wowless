@@ -2507,9 +2507,7 @@ local function mkWowEnv(api, loader)
         return func(...)
       end
     end,
-    SecureCmdOptionParse = function()
-      return ''  -- UNIMPLEMENTED
-    end,
+    SecureCmdOptionParse = dofile('wowapi/SecureCmdOptionParse.lua').impl,
     SelectGossipOption = UNIMPLEMENTED,
     SelectQuestLogEntry = UNIMPLEMENTED,
     SetActionBarToggles = UNIMPLEMENTED,
