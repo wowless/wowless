@@ -4,7 +4,6 @@ local Mixin = util.mixin
 
 local UNIMPLEMENTED = function() end
 local STUB_NUMBER = function() return 1 end
-local STUB_TABLE = function() return {} end
 
 local function toTexture(parent, tex)
   if type(tex) == 'string' or type(tex) == 'number' then
@@ -1295,14 +1294,10 @@ local function mkWowEnv(api, loader)
       CanBeShown = UNIMPLEMENTED,
     },
     C_AdventureMap = {},
-    C_AreaPoiInfo = {
-      GetAreaPOIForMap = STUB_TABLE,
-    },
     C_ArtifactUI = {
       GetEquippedArtifactInfo = UNIMPLEMENTED,
     },
     C_AuctionHouse = {
-      GetAuctionItemSubClasses = STUB_TABLE,
       HasFavorites = UNIMPLEMENTED,
       QueryBids = UNIMPLEMENTED,
     },
@@ -1327,13 +1322,8 @@ local function mkWowEnv(api, loader)
     },
     C_Calendar = {
       EventGetClubId = UNIMPLEMENTED,
-      EventGetTypesDisplayOrdered = STUB_TABLE,
-      GetDefaultGuildFilter = STUB_TABLE,
       GetNumPendingInvites = STUB_NUMBER,
       OpenCalendar = UNIMPLEMENTED,
-    },
-    C_ChallengeMode = {
-      GetMapTable = STUB_TABLE,
     },
     C_CharacterServices = {
       GetCharacterServiceDisplayData = function()  -- UNIMPLEMENTED
@@ -1364,15 +1354,11 @@ local function mkWowEnv(api, loader)
       ClearAutoAdvanceStreamViewMarker = UNIMPLEMENTED,
       ClearClubPresenceSubscription = UNIMPLEMENTED,
       Flush = UNIMPLEMENTED,
-      GetInvitationsForSelf = STUB_TABLE,
-      GetSubscribedClubs = STUB_TABLE,
       IsEnabled = UNIMPLEMENTED,
       ShouldAllowClubType = UNIMPLEMENTED,
     },
     C_ClubFinder = {
-      GetClubRecruitmentSettings = STUB_TABLE,
       GetPlayerApplicantLocaleFlags = UNIMPLEMENTED,
-      GetPlayerApplicantSettings = STUB_TABLE,
       GetPlayerSettingsFocusFlagsSelectedCount = STUB_NUMBER,
       IsEnabled = UNIMPLEMENTED,
       PlayerRequestPendingClubsList = UNIMPLEMENTED,
@@ -1388,19 +1374,14 @@ local function mkWowEnv(api, loader)
     C_Console = {
       SetFontHeight = UNIMPLEMENTED,
     },
-    C_ContributionCollector = {
-      GetContributionCollectorsForMap = STUB_TABLE,
-    },
     C_Covenants = {
       GetActiveCovenantID = STUB_NUMBER,
     },
     C_CovenantSanctumUI = {
       GetAnimaInfo = UNIMPLEMENTED,
-      GetSoulCurrencies = STUB_TABLE,
     },
     C_CurrencyInfo = {
       GetBackpackCurrencyInfo = UNIMPLEMENTED,
-      GetCurrencyInfo = STUB_TABLE,
     },
     C_CVar = (function()
       local cvarDefaults = {
@@ -1449,7 +1430,6 @@ local function mkWowEnv(api, loader)
     },
     C_DeathInfo = {
       GetCorpseMapPosition = UNIMPLEMENTED,
-      GetGraveyardsForMap = STUB_TABLE,
       GetSelfResurrectOptions = UNIMPLEMENTED,
     },
     C_EncounterJournal = {
@@ -1463,7 +1443,6 @@ local function mkWowEnv(api, loader)
     },
     C_FriendList = {
       GetFriendInfo = UNIMPLEMENTED,
-      GetFriendInfoByIndex = STUB_TABLE,
       GetNumFriends = STUB_NUMBER,
       GetNumOnlineFriends = STUB_NUMBER,
       SetSelectedFriend = UNIMPLEMENTED,
@@ -1472,20 +1451,12 @@ local function mkWowEnv(api, loader)
     },
     C_GamePad = {},
     C_Garrison = {
-      GetAllEncounterThreats = STUB_TABLE,
-      GetAutoCombatDamageClassValues = STUB_TABLE,
-      GetAutoTroops = STUB_TABLE,
       GetAvailableMissions = UNIMPLEMENTED,
-      GetBuildingSizes = STUB_TABLE,
       GetCombatAllyMission = UNIMPLEMENTED,
       GetCurrencyTypes = UNIMPLEMENTED,
-      GetFollowers = STUB_TABLE,
       GetFollowerSoftCap = STUB_NUMBER,
-      GetFollowerXPTable = STUB_TABLE,
-      GetGarrisonPlotsInstancesForMap = STUB_TABLE,
       GetInProgressMissions = STUB_NUMBER,
       GetNumFollowers = STUB_NUMBER,
-      GetRecruiterAbilityCategories = STUB_TABLE,
       IsPlayerInGarrison = UNIMPLEMENTED,
       IsUsingPartyGarrison = UNIMPLEMENTED,
     },
@@ -1495,7 +1466,6 @@ local function mkWowEnv(api, loader)
     },
     C_GuildInfo = {
       GetGuildTabardInfo = UNIMPLEMENTED,
-      GuildControlGetRankFlags = STUB_TABLE,
       GuildRoster = UNIMPLEMENTED,
     },
     C_Heirloom = {
@@ -1524,9 +1494,6 @@ local function mkWowEnv(api, loader)
     C_LFGList = {
       ClearCreationTextFields = UNIMPLEMENTED,
       GetActiveEntryInfo = UNIMPLEMENTED,
-      GetApplications = STUB_TABLE,
-      GetAvailableCategories = STUB_TABLE,
-      GetAvailableLanguageSearchFilter = STUB_TABLE,
       GetAvailableRoles = UNIMPLEMENTED,
       GetDefaultLanguageSearchFilter = STUB_NUMBER,
       GetFilteredSearchResults = function()
@@ -1566,9 +1533,6 @@ local function mkWowEnv(api, loader)
         }
         return { layer }
       end,
-      GetMapArtLayerTextures = STUB_TABLE,
-      GetMapBannersForMap = STUB_TABLE,
-      GetMapChildrenInfo = STUB_TABLE,
       GetMapDisplayInfo = UNIMPLEMENTED,
       GetMapGroupID = UNIMPLEMENTED,
       GetMapHighlightInfoAtPosition = UNIMPLEMENTED,
@@ -1581,11 +1545,7 @@ local function mkWowEnv(api, loader)
           parentMapID = 0,
         }
       end,
-      GetMapLinksForMap = STUB_TABLE,
       GetUserWaypointPositionForMap = UNIMPLEMENTED,
-    },
-    C_MapExplorationInfo = {
-      GetExploredMapTextures = STUB_TABLE,
     },
     C_Minimap = {
       ShouldUseHybridMinimap = UNIMPLEMENTED,
@@ -1599,7 +1559,6 @@ local function mkWowEnv(api, loader)
       GetAppliedMountEquipmentID = UNIMPLEMENTED,
       GetDisplayedMountInfo = UNIMPLEMENTED,
       GetMountEquipmentUnlockLevel = STUB_NUMBER,
-      GetMountIDs = STUB_TABLE,
       GetNumDisplayedMounts = STUB_NUMBER,
       GetNumMounts = STUB_NUMBER,
       GetNumMountsNeedingFanfare = STUB_NUMBER,
@@ -1608,7 +1567,6 @@ local function mkWowEnv(api, loader)
     },
     C_NamePlate = {
       GetNamePlateForUnit = UNIMPLEMENTED,
-      GetNamePlates = STUB_TABLE,
       GetNumNamePlateMotionTypes = STUB_NUMBER,
       SetNamePlateEnemySize = UNIMPLEMENTED,
       SetNamePlateFriendlySize = UNIMPLEMENTED,
@@ -1673,7 +1631,6 @@ local function mkWowEnv(api, loader)
       GetMentorshipStatus = UNIMPLEMENTED,
     },
     C_ProductChoice = {
-      GetChoices = STUB_TABLE,
       GetNumSuppressed = STUB_NUMBER,
     },
     C_PvP = {
@@ -1690,7 +1647,6 @@ local function mkWowEnv(api, loader)
       GetRandomBGRewards = function()
         return 0, 0  -- UNIMPLEMENTED
       end,
-      GetRandomEpicBGInfo = STUB_TABLE,
       GetRandomEpicBGRewards = function()
         return 0, 0  -- UNIMPLEMENTED
       end,
@@ -1740,15 +1696,11 @@ local function mkWowEnv(api, loader)
       ShouldShowCriteria = UNIMPLEMENTED,
     },
     C_ScrappingMachineUI = {},
-    C_ScriptedAnimations = {
-      GetAllScriptedAnimationEffects = STUB_TABLE,
-    },
     C_Social = {
       RegisterSocialBrowser = UNIMPLEMENTED,
       TwitterCheckStatus = UNIMPLEMENTED,
     },
     C_SocialQueue = {
-      GetAllGroups = STUB_TABLE,
       GetConfig = UNIMPLEMENTED,
     },
     C_SocialRestrictions = {
@@ -1816,7 +1768,6 @@ local function mkWowEnv(api, loader)
       GetSpeechVolume = STUB_NUMBER,
     },
     C_UIWidgetManager = {
-      GetAllWidgetsBySetID = STUB_TABLE,
       GetBelowMinimapWidgetSetID = function()
         return 2
       end,
@@ -1831,9 +1782,6 @@ local function mkWowEnv(api, loader)
           verticalPadding = 0,
         }
       end,
-    },
-    C_VignetteInfo = {
-      GetVignettes = STUB_TABLE,
     },
     C_VoiceChat = {
       CanPlayerUseVoiceChat = UNIMPLEMENTED,
@@ -1861,9 +1809,6 @@ local function mkWowEnv(api, loader)
     },
     C_WowTokenSecure = {
       CancelRedeem = UNIMPLEMENTED,
-    },
-    C_ZoneAbility = {
-      GetActiveAbilities = STUB_TABLE,
     },
     GetActionCooldown = function()
       return 0, 0, 0  -- UNIMPLEMENTED
@@ -2187,7 +2132,8 @@ end
 
 local function init(api, loader)
   setmetatable(api.env, mkMetaEnv(api))
-  Mixin(api.env, mkBaseEnv(), mkWowEnv(api, loader), require('wowless.wowapi'))
+  Mixin(api.env, mkBaseEnv(), mkWowEnv(api, loader))
+  util.recursiveMixin(api.env, require('wowless.wowapi'))
   Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api, loader))
 end
 

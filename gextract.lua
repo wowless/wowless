@@ -1,16 +1,5 @@
+local recursiveMixin = require('wowless.util').recursiveMixin
 local sub = string.sub
-
-local function recursiveMixin(t, u)
-  for k, v in pairs(u) do
-    local tv = t[k]
-    if tv == nil or type(tv) ~= 'table' or type(v) ~= 'table' then
-      t[k] = v
-    else
-      recursiveMixin(tv, v)
-    end
-  end
-  return t
-end
 
 local function luaEnums(data, r)
   local result = {}

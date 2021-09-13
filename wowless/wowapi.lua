@@ -18,7 +18,14 @@ for f in require('lfs').dir('wowapi') do
     local fn = f:sub(1, -5)
     local t = dofile('wowapi/' .. f)
     assert(fn == t.name, ('invalid name %q in %q'):format(t.name, f))
-    fns[fn] = getFn(t)
+    local dot = fn:find('%.')
+    if dot then
+      local p = fn:sub(1, dot-1)
+      fns[p] = fns[p] or {}
+      fns[p][fn:sub(dot+1)] = getFn(t)
+    else
+      fns[fn] = getFn(t)
+    end
   end
 end
 return fns

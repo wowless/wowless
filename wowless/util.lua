@@ -7,6 +7,18 @@ local function mixin(t, ...)
   return t
 end
 
+local function recursiveMixin(t, u)
+  for k, v in pairs(u) do
+    local tv = t[k]
+    if tv == nil or type(tv) ~= 'table' or type(v) ~= 'table' then
+      t[k] = v
+    else
+      recursiveMixin(tv, v)
+    end
+  end
+  return t
+end
+
 local function readfile(filename)
   local f = assert(io.open(filename:gsub('\\', '/'), 'rb'))
   local content = f:read('*all')
@@ -58,6 +70,7 @@ end
 return {
   mixin = mixin,
   readfile = readfile,
+  recursiveMixin = recursiveMixin,
   strjoin = strjoin,
   strsplit = strsplit,
   strtrim = strtrim,
