@@ -1277,7 +1277,6 @@ local function mkWowEnv(api, loader)
     return api.CreateUIObject(ltype, name, parent, nil, unpack(templates))
   end
   return {
-    BankButtonIDToInvSlotID = STUB_NUMBER,
     BNGetNumFriendInvites = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -1287,7 +1286,6 @@ local function mkWowEnv(api, loader)
     BreakUpLargeNumbers = tostring,  -- UNIMPLEMENTED,
     CastingInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     ChannelInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
-    CombatLogGetNumEntries = STUB_NUMBER,
     CreateFont = function(name)
       return api.CreateUIObject('font', name)
     end,
@@ -1867,13 +1865,9 @@ local function mkWowEnv(api, loader)
     C_ZoneAbility = {
       GetActiveAbilities = STUB_TABLE,
     },
-    EJ_GetNumLoot = STUB_NUMBER,
-    GetAccountExpansionLevel = STUB_NUMBER,
-    GetActionBarPage = STUB_NUMBER,
     GetActionCooldown = function()
       return 0, 0, 0  -- UNIMPLEMENTED
     end,
-    GetActionCount = STUB_NUMBER,
     GetActiveLootRollIDs = STUB_TABLE,
     GetAddOnMetadata = function(addon, field)
       return ('addonmetadata:%s:%s'):format(addon, field)  -- UNIMPLEMENTED
@@ -1884,7 +1878,6 @@ local function mkWowEnv(api, loader)
     GetArenaOpponentSpec = function()
       return 0, 0  -- UNIMPLEMENTED
     end,
-    GetAuctionDeposit = STUB_NUMBER,
     GetAvailableLocaleInfo = STUB_TABLE,
     GetAverageItemLevel = function()
       return 1, 1, 1  -- UNIMPLEMENTED
@@ -1904,17 +1897,9 @@ local function mkWowEnv(api, loader)
       return unpack(versions[loader.version])
     end,
     GetCategoryList = STUB_TABLE,
-    GetChatTypeIndex = STUB_NUMBER,
     GetChatWindowInfo = function(idx)
       return '', 10, 1, 1, 1, 1, 1, 1, idx  -- UNIMPLEMENTED
     end,
-    GetClassicExpansionLevel = STUB_NUMBER,
-    GetClientDisplayExpansionLevel = STUB_NUMBER,
-    GetComboPoints = STUB_NUMBER,
-    GetContainerNumFreeSlots = STUB_NUMBER,
-    GetContainerNumSlots = STUB_NUMBER,
-    GetCorruption = STUB_NUMBER,
-    GetCurrentGuildBankTab = STUB_NUMBER,
     GetCurrentRegion = function()
       return 1  -- UNIMPLEMENTED
     end,
@@ -1924,7 +1909,6 @@ local function mkWowEnv(api, loader)
     GetCurrentScaledResolution = function()
       return 1024, 768  -- UNIMPLEMENTED
     end,
-    GetCursorMoney = STUB_NUMBER,
     GetCursorPosition = function()
       return 0, 0  -- UNIMPLEMENTED
     end,
@@ -1937,15 +1921,12 @@ local function mkWowEnv(api, loader)
     GetCVarDefault = function(name)
       return api.env.C_CVar.GetCVarDefault(name)
     end,
-    GetDailyQuestsCompleted = STUB_NUMBER,
     GetDefaultLanguage = function()
       return 'Common', 7  -- UNIMPLEMENTED
     end,
-    GetDefaultScale = STUB_NUMBER,
     geterrorhandler = function()
       return api.ErrorHandler  -- UNIMPLEMENTED
     end,
-    GetExtraBarIndex = STUB_NUMBER,
     GetFactionInfoByID = function(id)
       return 'faction' .. id, nil, nil, nil, nil, 0  -- UNIMPLEMENTED
     end,
@@ -2016,7 +1997,6 @@ local function mkWowEnv(api, loader)
     GetItemClassInfo = function(classID)
       return string.format('ItemClass%d', classID)
     end,
-    GetItemCount = STUB_NUMBER,
     GetItemInventorySlotInfo = function(inventorySlot)
       return string.format('ItemInventorySlot%d', inventorySlot)
     end,
@@ -2044,99 +2024,51 @@ local function mkWowEnv(api, loader)
     GetItemSubClassInfo = function(classID, subClassID)
       return string.format('ItemClass%dSubClass%d', classID, subClassID)
     end,
-    GetLFGDeserterExpiration = STUB_NUMBER,
     GetLocale = function()
       return 'enUS'  -- UNIMPLEMENTED
     end,
     GetLootMethod = function()
       return 'freeforall'  -- UNIMPLEMENTED
     end,
-    GetLootThreshold = STUB_NUMBER,
-    GetMaxBattlefieldID = STUB_NUMBER,
-    GetMaxDailyQuests = STUB_NUMBER,
-    GetMaxLevelForPlayerExpansion = STUB_NUMBER,
-    GetMaxPlayerLevel = STUB_NUMBER,
     GetMirrorTimerInfo = function()
       return 'UNKNOWN'  -- UNIMPLEMENTED
     end,
-    GetMoney = STUB_NUMBER,
-    GetMultiCastBarIndex = STUB_NUMBER,
     GetNetStats = function()
       return 1, 1, 1, 1  -- UNIMPLEMENTED
     end,
     GetNumAddOns = function()
       return 0  -- UNIMPLEMENTED
     end,
-    GetNumArchaeologyRaces = STUB_NUMBER,
-    GetNumArenaOpponents = STUB_NUMBER,
-    GetNumArenaOpponentSpecs = STUB_NUMBER,
-    GetNumArtifactsByRace = STUB_NUMBER,
-    GetNumBattlefieldFlagPositions = STUB_NUMBER,
-    GetNumBattlegroundTypes = STUB_NUMBER,
-    GetNumBindings = STUB_NUMBER,
-    GetNumClasses = STUB_NUMBER,
     GetNumCompletedAchievements = function()
       return 1, 1  -- UNIMPLEMENTED
     end,
-    GetNumGroupMembers = STUB_NUMBER,
-    GetNumGuildBankTabs = STUB_NUMBER,
     GetNumGuildMembers = function()
       return 0, 0, 0  -- UNIMPLEMENTED
     end,
-    GetNumGuildMembershipRequests = STUB_NUMBER,
-    GetNumLanguages = STUB_NUMBER,
-    GetNumLootItems = STUB_NUMBER,
-    GetNumMacros = STUB_NUMBER,
     GetNumQuestLeaderBoards = function()
       return 0  -- UNIMPLEMENTED
     end,
-    GetNumQuestLogChoices = STUB_NUMBER,
     GetNumQuestLogEntries = function()
       return 1, 1  -- UNIMPLEMENTED
     end,
-    GetNumQuestLogRewards = STUB_NUMBER,
-    GetNumQuestLogRewardSpells = STUB_NUMBER,
     GetNumQuestWatches = function()
       return 0  -- UNIMPLEMENTED
     end,
-    GetNumRecruitingGuilds = STUB_NUMBER,
-    GetNumSavedInstances = STUB_NUMBER,
-    GetNumShapeshiftForms = STUB_NUMBER,
-    GetNumSkillLines = STUB_NUMBER,
-    GetNumSpecGroups = STUB_NUMBER,
-    GetNumSpecializations = STUB_NUMBER,
-    GetNumSpecializationsForClassID = STUB_NUMBER,
-    GetNumSpellTabs = STUB_NUMBER,
-    GetNumSubgroupMembers = STUB_NUMBER,
-    GetNumTalents = STUB_NUMBER,
-    GetNumTalentTabs = STUB_NUMBER,
-    GetNumTitles = STUB_NUMBER,
-    GetNumTrackingTypes = STUB_NUMBER,
-    GetPartyLFGID = STUB_NUMBER,
-    GetPetExperience = STUB_NUMBER,
     GetPhysicalScreenSize = function()
       return 1024, 768
     end,
-    GetPlayerTradeMoney = STUB_NUMBER,
     GetPVPRankInfo = function()
       return 'Pariah', 0  -- UNIMPLEMENTED
     end,
     GetQuestLogChoiceInfo = function()
       return 'moo', 1, 1, 1, false  -- UNIMPLEMENTED
     end,
-    GetQuestLogGroupNum = STUB_NUMBER,
-    GetQuestLogRequiredMoney = STUB_NUMBER,
-    GetQuestLogRewardHonor = STUB_NUMBER,
     GetQuestLogRewardInfo = function()
       return 'moo', 1, 1, 1, false, 1, 1  -- UNIMPLEMENTED
     end,
-    GetQuestLogRewardMoney = STUB_NUMBER,
-    GetQuestLogSelection = STUB_NUMBER,
-    GetQuestLogTimeLeft = STUB_NUMBER,
     GetQuestLogTitle = function()
       return 'moo', 1  -- UNIMPLEMENTED
     end,
-    GetRealmID = STUB_NUMBER,
     GetRealmName = function()
       return 'Realm'  -- UNIMPLEMENTED
     end,
@@ -2146,7 +2078,6 @@ local function mkWowEnv(api, loader)
     GetReleaseTimeRemaining = function()
       return 0  -- UNIMPLEMENTED
     end,
-    GetRepairAllCost = STUB_NUMBER,
     GetRestrictedAccountData = function()
       local rLevel = 20
       local rMoney = 10000000
@@ -2156,14 +2087,9 @@ local function mkWowEnv(api, loader)
     GetRestState = function()
       return 2, 'Normal', 1  -- UNIMPLEMENTED
     end,
-    GetScreenHeight = STUB_NUMBER,
-    GetScreenWidth = STUB_NUMBER,
-    GetSelectedSkill = STUB_NUMBER,
-    GetSendMailPrice = STUB_NUMBER,
     GetSkillLineInfo = function()
       return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
     end,
-    GetSpecialization = STUB_NUMBER,
     GetSpecializationInfo = function()  -- UNIMPLEMENTED
       return 1, 'SpecName'
     end,
@@ -2177,16 +2103,13 @@ local function mkWowEnv(api, loader)
     GetSummonFriendCooldown = function()
       return 0, 0  -- UNIMPLEMENTED
     end,
-    GetTabardCreationCost = STUB_NUMBER,
     GetTalentInfo = function()
       return nil, nil, nil, nil, 0  -- UNIMPLEMENTED
     end,
     GetText = function(token)
       return 'GetText(' .. token .. ')'  -- UNIMPLEMENTED
     end,
-    GetTime = STUB_NUMBER,
     GetTrackingTexture = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
-    GuildControlGetNumRanks = STUB_NUMBER,
     GuildRoster = function()
       return api.env.C_GuildInfo.GuildRoster()
     end,
@@ -2215,7 +2138,6 @@ local function mkWowEnv(api, loader)
     Kiosk = {
       IsEnabled = UNIMPLEMENTED,
     },
-    QuestMapUpdateAllQuests = STUB_NUMBER,
     RunMacroText = function(s)
       for _, line in ipairs({util.strsplit('\n', s)}) do
         api.SendEvent('EXECUTE_CHAT_LINE', line)
@@ -2237,32 +2159,24 @@ local function mkWowEnv(api, loader)
         return func(...)
       end
     end,
-    Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
     UnitClass = function()
       return 'Warrior', 'WARRIOR', 1
     end,
     UnitClassBase = function()
       return 'WARRIOR', 1
     end,
-    UnitEffectiveLevel = STUB_NUMBER,
     UnitFactionGroup = function()
       return 'Horde', 'Horde'
     end,
     UnitGroupRolesAssigned = function()
       return 'DAMAGER'  -- UNIMPLEMENTED
     end,
-    UnitHealth = STUB_NUMBER,
-    UnitHealthMax = STUB_NUMBER,
-    UnitLevel = STUB_NUMBER,
     UnitName = function()
       return 'Unitname'  -- UNIMPLEMENTED
     end,
-    UnitPower = STUB_NUMBER,
-    UnitPowerMax = STUB_NUMBER,
     UnitPowerType = function()
       return 0, 'MANA'  -- UNIMPLEMENTED
     end,
-    UnitPVPRank = STUB_NUMBER,
     UnitRace = function()
       return 'Human', 'Human', 1  -- UNIMPLEMENTED
     end,
@@ -2272,8 +2186,6 @@ local function mkWowEnv(api, loader)
     UnitSex = function()
       return 2  -- UNIMPLEMENTED
     end,
-    UnitXP = STUB_NUMBER,
-    UnitXPMax = STUB_NUMBER,
   }
 end
 
