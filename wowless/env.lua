@@ -304,6 +304,7 @@ local function mkBaseUIObjectTypes(api, loader)
       end,
       inherits = {'FontInstance', 'Frame'},
       mixin = {
+        AddHistoryLine = UNIMPLEMENTED,
         ClearFocus = UNIMPLEMENTED,
         Disable = function(self)
           u(self).enabled = false
@@ -1190,6 +1191,7 @@ local function mkBaseEnv()
     setfenv = setfenv,
     setmetatable = setmetatable,
     sort = table.sort,
+    strfind = string.find,
     string = {
       byte = string.byte,
       char = string.char,
@@ -2484,6 +2486,11 @@ local function mkWowEnv(api, loader)
     ResetCursor = UNIMPLEMENTED,
     ResurrectGetOfferer = UNIMPLEMENTED,
     RollOnLoot = UNIMPLEMENTED,
+    RunMacroText = function(s)
+      for _, line in ipairs({util.strsplit('\n', s)}) do
+        api.SendEvent('EXECUTE_CHAT_LINE', line)
+      end
+    end,
     scrub = function(...)
       return ...  -- UNIMPLEMENTED
     end,
@@ -2500,7 +2507,9 @@ local function mkWowEnv(api, loader)
         return func(...)
       end
     end,
-    SecureCmdOptionParse = UNIMPLEMENTED,
+    SecureCmdOptionParse = function()
+      return ''  -- UNIMPLEMENTED
+    end,
     SelectGossipOption = UNIMPLEMENTED,
     SelectQuestLogEntry = UNIMPLEMENTED,
     SetActionBarToggles = UNIMPLEMENTED,
@@ -2532,6 +2541,8 @@ local function mkWowEnv(api, loader)
     SpellCanTargetItemID = UNIMPLEMENTED,
     SpellCanTargetQuest = UNIMPLEMENTED,
     SpellIsTargeting = UNIMPLEMENTED,
+    StartAttack = UNIMPLEMENTED,
+    StopAttack = UNIMPLEMENTED,
     StoreSecureReference = UNIMPLEMENTED,
     StrafeLeftStop = UNIMPLEMENTED,
     StrafeRightStop = UNIMPLEMENTED,

@@ -45,6 +45,14 @@ local function run(cfg)
   api.SendEvent('LOOT_READY', false)
   api.SendEvent('LOOT_OPENED', false, false)
   api.SendEvent('LOOT_CLOSED')
+  do
+    local b = api.env.ActionButton1
+    b:SetAttribute('type', 'macro')
+    b:SetAttribute('macrotext', '/startattack')
+    b:Click()
+    b:SetAttribute('macrotext', '/stopattack')
+    b:Click()
+  end
   api.SendEvent('PLAYER_LOGOUT')
   return api
 end
