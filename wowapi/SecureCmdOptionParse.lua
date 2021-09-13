@@ -5,9 +5,7 @@ return {
   outputs = 's?s?',
   status = 'stub',
   impl = function(s)
-    for _, part in ipairs({util.strsplit(';', s)}) do
-      return util.strtrim(part)
-    end
+    return util.strtrim((util.strsplit(';', s)))
   end,
   tests = {
     {
