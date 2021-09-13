@@ -1868,7 +1868,6 @@ local function mkWowEnv(api, loader)
     GetActionCooldown = function()
       return 0, 0, 0  -- UNIMPLEMENTED
     end,
-    GetActiveLootRollIDs = STUB_TABLE,
     GetAddOnMetadata = function(addon, field)
       return ('addonmetadata:%s:%s'):format(addon, field)  -- UNIMPLEMENTED
     end,
@@ -1878,7 +1877,6 @@ local function mkWowEnv(api, loader)
     GetArenaOpponentSpec = function()
       return 0, 0  -- UNIMPLEMENTED
     end,
-    GetAvailableLocaleInfo = STUB_TABLE,
     GetAverageItemLevel = function()
       return 1, 1, 1  -- UNIMPLEMENTED
     end,
@@ -1896,7 +1894,6 @@ local function mkWowEnv(api, loader)
       }
       return unpack(versions[loader.version])
     end,
-    GetCategoryList = STUB_TABLE,
     GetChatWindowInfo = function(idx)
       return '', 10, 1, 1, 1, 1, 1, 1, idx  -- UNIMPLEMENTED
     end,
@@ -2096,7 +2093,6 @@ local function mkWowEnv(api, loader)
     GetSpecializationRole = function()
       return 'DAMAGER'  -- UNIMPLEMENTED
     end,
-    GetSpellConfirmationPromptsInfo = STUB_TABLE,
     GetSpellTabInfo = function()
       return 'moo', 0, 0, 0  -- UNIMPLEMENTED
     end,

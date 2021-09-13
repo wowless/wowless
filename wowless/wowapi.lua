@@ -1,10 +1,13 @@
 local UNIMPLEMENTED = function() end
 local STUB_NUMBER = function() return 1 end
+local STUB_TABLE = function() return {} end
 local function getFn(t)
   if t.status == 'unimplemented' then
     return UNIMPLEMENTED
   elseif t.status == 'stubnumber' then
     return STUB_NUMBER
+  elseif t.status == 'stubtable' then
+    return STUB_TABLE
   else
     return assert(t.impl)
   end
