@@ -2507,7 +2507,6 @@ local function mkWowEnv(api, loader)
         return func(...)
       end
     end,
-    SecureCmdOptionParse = dofile('wowapi/SecureCmdOptionParse.lua').impl,
     SelectGossipOption = UNIMPLEMENTED,
     SelectQuestLogEntry = UNIMPLEMENTED,
     SetActionBarToggles = UNIMPLEMENTED,
@@ -2631,7 +2630,7 @@ end
 
 local function init(api, loader)
   setmetatable(api.env, mkMetaEnv(api))
-  Mixin(api.env, mkBaseEnv(), mkWowEnv(api, loader))
+  Mixin(api.env, mkBaseEnv(), mkWowEnv(api, loader), require('wowless.wowapi'))
   Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api, loader))
 end
 
