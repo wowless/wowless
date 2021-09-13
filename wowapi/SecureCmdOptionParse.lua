@@ -2,26 +2,25 @@ return {
   name = 'SecureCmdOptionParse',
   inputs = 's',
   outputs = 's?s?',
-  impl = function()
-    return ''  -- UNIMPLEMENTED
+  status = 'stub',
+  impl = function(s)
+    return s
   end,
   tests = {
     {
       name = 'empty string',
       inputs = {''},
-      outputs = {},
-      pending = true,
+      outputs = {''},
     },
     {
       name = 'command with no action',
       inputs = {'/hello'},
-      outputs = {},
-      pending = true,
+      outputs = {'/hello'},
     },
     {
       name = 'command with target and no action',
       inputs = {'/hello [@Alice]'},
-      outputs = {},
+      outputs = {'', 'Alice'},
       pending = true,
     },
   },
