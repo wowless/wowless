@@ -1277,12 +1277,7 @@ local function mkWowEnv(api, loader)
     return api.CreateUIObject(ltype, name, parent, nil, unpack(templates))
   end
   return {
-    AcceptBattlefieldPort = UNIMPLEMENTED,
-    AntiAliasingSupported = UNIMPLEMENTED,
     BankButtonIDToInvSlotID = STUB_NUMBER,
-    BNFeaturesEnabled = UNIMPLEMENTED,
-    BNFeaturesEnabledAndConnected = UNIMPLEMENTED,
-    BNGetInfo = UNIMPLEMENTED,
     BNGetNumFriendInvites = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -1290,40 +1285,14 @@ local function mkWowEnv(api, loader)
       return 0, 0  -- UNIMPLEMENTED
     end,
     BreakUpLargeNumbers = tostring,  -- UNIMPLEMENTED,
-    CanAutoSetGamePadCursorControl = UNIMPLEMENTED,
-    CanBeRaidTarget = UNIMPLEMENTED,
-    CancelEmote = UNIMPLEMENTED,
-    CanEditOfficerNote = UNIMPLEMENTED,
-    CanExitVehicle = UNIMPLEMENTED,
-    CanGuildDemote = UNIMPLEMENTED,
-    CanGuildPromote = UNIMPLEMENTED,
-    CanHearthAndResurrectFromArea = UNIMPLEMENTED,
-    CanPartyLFGBackfill = UNIMPLEMENTED,
-    CanReplaceGuildMaster = UNIMPLEMENTED,
-    CanSendSoRByText = UNIMPLEMENTED,
-    CanTrackBattlePets = UNIMPLEMENTED,
     CastingInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
-    CastPetAction = UNIMPLEMENTED,
-    CastShapeshiftForm = UNIMPLEMENTED,
-    ChangeActionBarPage = UNIMPLEMENTED,
     ChannelInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
-    ClearOverrideBindings = UNIMPLEMENTED,
-    CloseLoot = UNIMPLEMENTED,
-    CollapseSkillHeader = UNIMPLEMENTED,
-    CombatLogAddFilter = UNIMPLEMENTED,
-    CombatLogGetCurrentEntry = UNIMPLEMENTED,
     CombatLogGetNumEntries = STUB_NUMBER,
-    CombatLogResetFilter = UNIMPLEMENTED,
-    CombatLogSetCurrentEntry = UNIMPLEMENTED,
-    CombatLog_Object_IsA = UNIMPLEMENTED,
-    CombatTextSetActiveUnit = UNIMPLEMENTED,
-    ContainerIDToInventoryID = UNIMPLEMENTED,
     CreateFont = function(name)
       return api.CreateUIObject('font', name)
     end,
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
-    CursorHasItem = UNIMPLEMENTED,
     C_AdventureJournal = {
       CanBeShown = UNIMPLEMENTED,
     },
@@ -1898,65 +1867,31 @@ local function mkWowEnv(api, loader)
     C_ZoneAbility = {
       GetActiveAbilities = STUB_TABLE,
     },
-    DoEmote = UNIMPLEMENTED,
-    DropCursorMoney = UNIMPLEMENTED,
-    EJ_GetCurrentTier = UNIMPLEMENTED,
-    EJ_GetDifficulty = UNIMPLEMENTED,
-    EJ_GetInstanceByIndex = UNIMPLEMENTED,
-    EJ_GetInstanceInfo = UNIMPLEMENTED,
-    EJ_GetLootFilter = UNIMPLEMENTED,
     EJ_GetNumLoot = STUB_NUMBER,
-    EJ_GetTierInfo = UNIMPLEMENTED,
-    EJ_IsValidInstanceDifficulty = UNIMPLEMENTED,
-    FillLocalizedClassList = UNIMPLEMENTED,
-    FlashClientIcon = UNIMPLEMENTED,
-    FollowUnit = UNIMPLEMENTED,
-    forceinsecure = UNIMPLEMENTED,
     GetAccountExpansionLevel = STUB_NUMBER,
-    GetAchievementInfo = UNIMPLEMENTED,
     GetActionBarPage = STUB_NUMBER,
-    GetActionBarToggles = UNIMPLEMENTED,
-    GetActionCharges = UNIMPLEMENTED,
     GetActionCooldown = function()
       return 0, 0, 0  -- UNIMPLEMENTED
     end,
     GetActionCount = STUB_NUMBER,
-    GetActionInfo = UNIMPLEMENTED,
-    GetActionText = UNIMPLEMENTED,
-    GetActionTexture = UNIMPLEMENTED,
     GetActiveLootRollIDs = STUB_TABLE,
-    GetActiveSpecGroup = UNIMPLEMENTED,
-    GetAddOnEnableState = UNIMPLEMENTED,
     GetAddOnMetadata = function(addon, field)
       return ('addonmetadata:%s:%s'):format(addon, field)  -- UNIMPLEMENTED
     end,
-    GetAlternativeDefaultLanguage = UNIMPLEMENTED,
-    GetArchaeologyInfo = UNIMPLEMENTED,
     GetArchaeologyRaceInfo = function()
       return 'Name', nil, nil, 0, 0  -- UNIMPLEMENTED
     end,
     GetArenaOpponentSpec = function()
       return 0, 0  -- UNIMPLEMENTED
     end,
-    GetArenaTeam = UNIMPLEMENTED,
     GetAuctionDeposit = STUB_NUMBER,
-    GetAuctionItemSubClasses = UNIMPLEMENTED,
     GetAvailableLocaleInfo = STUB_TABLE,
-    GetAvailableLocales = UNIMPLEMENTED,
     GetAverageItemLevel = function()
       return 1, 1, 1  -- UNIMPLEMENTED
     end,
     GetBagName = function()
       return 'BagName'  -- UNIMPLEMENTED
     end,
-    GetBagSlotFlag = UNIMPLEMENTED,
-    GetBankBagSlotFlag = UNIMPLEMENTED,
-    GetBattlefieldFlagPosition = UNIMPLEMENTED,
-    GetBattlefieldStatus = UNIMPLEMENTED,
-    GetBattlegroundInfo = UNIMPLEMENTED,
-    GetBidderAuctionItems = UNIMPLEMENTED,
-    GetBinding = UNIMPLEMENTED,
-    GetBindingKey = UNIMPLEMENTED,
     GetBindingText = function()
       return ''  -- UNIMPLEMENTED
     end,
@@ -1969,27 +1904,16 @@ local function mkWowEnv(api, loader)
       return unpack(versions[loader.version])
     end,
     GetCategoryList = STUB_TABLE,
-    GetChannelList = UNIMPLEMENTED,
     GetChatTypeIndex = STUB_NUMBER,
-    GetChatWindowChannels = UNIMPLEMENTED,
     GetChatWindowInfo = function(idx)
       return '', 10, 1, 1, 1, 1, 1, 1, idx  -- UNIMPLEMENTED
     end,
-    GetChatWindowMessages = UNIMPLEMENTED,
-    GetChatWindowSavedDimensions = UNIMPLEMENTED,
-    GetChatWindowSavedPosition = UNIMPLEMENTED,
     GetClassicExpansionLevel = STUB_NUMBER,
-    GetClassInfo = UNIMPLEMENTED,
     GetClientDisplayExpansionLevel = STUB_NUMBER,
     GetComboPoints = STUB_NUMBER,
-    GetContainerItemInfo = UNIMPLEMENTED,
-    GetContainerItemQuestInfo = UNIMPLEMENTED,
     GetContainerNumFreeSlots = STUB_NUMBER,
     GetContainerNumSlots = STUB_NUMBER,
     GetCorruption = STUB_NUMBER,
-    GetCraftFilter = UNIMPLEMENTED,
-    GetCraftSlots = UNIMPLEMENTED,
-    GetCurrentArenaSeason = UNIMPLEMENTED,
     GetCurrentGuildBankTab = STUB_NUMBER,
     GetCurrentRegion = function()
       return 1  -- UNIMPLEMENTED
@@ -2000,8 +1924,6 @@ local function mkWowEnv(api, loader)
     GetCurrentScaledResolution = function()
       return 1024, 768  -- UNIMPLEMENTED
     end,
-    GetCurrentTitle = UNIMPLEMENTED,
-    GetCursorInfo = UNIMPLEMENTED,
     GetCursorMoney = STUB_NUMBER,
     GetCursorPosition = function()
       return 0, 0  -- UNIMPLEMENTED
@@ -2015,20 +1937,14 @@ local function mkWowEnv(api, loader)
     GetCVarDefault = function(name)
       return api.env.C_CVar.GetCVarDefault(name)
     end,
-    GetCVarInfo = UNIMPLEMENTED,
-    GetCVarSettingValidity = UNIMPLEMENTED,
     GetDailyQuestsCompleted = STUB_NUMBER,
     GetDefaultLanguage = function()
       return 'Common', 7  -- UNIMPLEMENTED
     end,
     GetDefaultScale = STUB_NUMBER,
-    GetDefaultVideoOptions = UNIMPLEMENTED,
     geterrorhandler = function()
       return api.ErrorHandler  -- UNIMPLEMENTED
     end,
-    GetExpansionDisplayInfo = UNIMPLEMENTED,
-    GetExpansionForLevel = UNIMPLEMENTED,
-    GetExpansionLevel = UNIMPLEMENTED,
     GetExtraBarIndex = STUB_NUMBER,
     GetFactionInfoByID = function(id)
       return 'faction' .. id, nil, nil, nil, nil, 0  -- UNIMPLEMENTED
@@ -2040,12 +1956,9 @@ local function mkWowEnv(api, loader)
         return getfenv(arg)
       end
     end,
-    GetFileStreamingStatus = UNIMPLEMENTED,
     GetGameTime = function()
       return 1, 1  -- UNIMPLEMENTED
     end,
-    GetGMStatus = UNIMPLEMENTED,
-    GetGMTicket = UNIMPLEMENTED,
     GetGroupMemberCounts = function()
       return {
         DAMAGER = 3,
@@ -2054,36 +1967,21 @@ local function mkWowEnv(api, loader)
         TANK = 1,
       }
     end,
-    GetGuildApplicantInfo = UNIMPLEMENTED,
-    GetGuildBankTabInfo = UNIMPLEMENTED,
-    GetGuildFactionGroup = UNIMPLEMENTED,
     GetGuildFactionInfo = function()
       return 'Guild', 'Description', 0, 0, 0, 0
     end,
     GetGuildInfo = function()
       return 'GuildName', 'Member', 1  -- UNIMPLEMENTED
     end,
-    GetGuildLogoInfo = UNIMPLEMENTED,
     GetGuildMembershipRequestInfo = function()
       return 'Name', 0, 0  -- UNIMPLEMENTED
     end,
-    GetGuildRenameRequired = UNIMPLEMENTED,
     GetGuildRosterInfo = function()
       return 'Moo-Realm', 'Member', 1  -- UNIMPLEMENTED
     end,
     GetGuildRosterMOTD = function()
       return ''  -- UNIMPLEMENTED
     end,
-    GetGuildRosterSelection = UNIMPLEMENTED,
-    GetGuildRosterShowOffline = UNIMPLEMENTED,
-    GetGuildTabardFiles = UNIMPLEMENTED,
-    GetInstanceInfo = UNIMPLEMENTED,
-    GetInventoryAlertStatus = UNIMPLEMENTED,
-    GetInventoryItemDurability = UNIMPLEMENTED,
-    GetInventoryItemID = UNIMPLEMENTED,
-    GetInventoryItemLink = UNIMPLEMENTED,
-    GetInventoryItemQuality = UNIMPLEMENTED,
-    GetInventoryItemTexture = UNIMPLEMENTED,
     GetInventorySlotInfo = (function()
       local t = {
         ammoslot = 0,
@@ -2119,7 +2017,6 @@ local function mkWowEnv(api, loader)
       return string.format('ItemClass%d', classID)
     end,
     GetItemCount = STUB_NUMBER,
-    GetItemInfo = UNIMPLEMENTED,
     GetItemInventorySlotInfo = function(inventorySlot)
       return string.format('ItemInventorySlot%d', inventorySlot)
     end,
@@ -2147,41 +2044,23 @@ local function mkWowEnv(api, loader)
     GetItemSubClassInfo = function(classID, subClassID)
       return string.format('ItemClass%dSubClass%d', classID, subClassID)
     end,
-    GetLanguageByIndex = UNIMPLEMENTED,
-    GetLFGCategoryForID = UNIMPLEMENTED,
     GetLFGDeserterExpiration = STUB_NUMBER,
-    GetLFGInfoServer = UNIMPLEMENTED,
-    GetLFGProposal = UNIMPLEMENTED,
-    GetLFGQueuedList = UNIMPLEMENTED,
-    GetLFGReadyCheckUpdate = UNIMPLEMENTED,
-    GetLFGRoles = UNIMPLEMENTED,
-    GetLFGRoleUpdate = UNIMPLEMENTED,
     GetLocale = function()
       return 'enUS'  -- UNIMPLEMENTED
     end,
-    GetLookingForGuildComment = UNIMPLEMENTED,
-    GetLookingForGuildSettings = UNIMPLEMENTED,
     GetLootMethod = function()
       return 'freeforall'  -- UNIMPLEMENTED
     end,
-    GetLootSpecialization = UNIMPLEMENTED,
     GetLootThreshold = STUB_NUMBER,
     GetMaxBattlefieldID = STUB_NUMBER,
     GetMaxDailyQuests = STUB_NUMBER,
     GetMaxLevelForPlayerExpansion = STUB_NUMBER,
     GetMaxPlayerLevel = STUB_NUMBER,
-    GetMaxRenderScale = UNIMPLEMENTED,
-    GetMerchantFilter = UNIMPLEMENTED,
-    GetMinimapZoneText = UNIMPLEMENTED,
-    GetMinRenderScale = UNIMPLEMENTED,
     GetMirrorTimerInfo = function()
       return 'UNKNOWN'  -- UNIMPLEMENTED
     end,
-    GetModifiedClick = UNIMPLEMENTED,
     GetMoney = STUB_NUMBER,
-    GetMouseFocus = UNIMPLEMENTED,
     GetMultiCastBarIndex = STUB_NUMBER,
-    GetNegativeCorruptionEffectInfo = UNIMPLEMENTED,
     GetNetStats = function()
       return 1, 1, 1, 1  -- UNIMPLEMENTED
     end,
@@ -2233,47 +2112,30 @@ local function mkWowEnv(api, loader)
     GetNumTalentTabs = STUB_NUMBER,
     GetNumTitles = STUB_NUMBER,
     GetNumTrackingTypes = STUB_NUMBER,
-    GetOptOutOfLoot = UNIMPLEMENTED,
-    GetOwnerAuctionItems = UNIMPLEMENTED,
     GetPartyLFGID = STUB_NUMBER,
-    GetPetActionCooldown = UNIMPLEMENTED,
-    GetPetActionInfo = UNIMPLEMENTED,
     GetPetExperience = STUB_NUMBER,
     GetPhysicalScreenSize = function()
       return 1024, 768
     end,
     GetPlayerTradeMoney = STUB_NUMBER,
-    GetPVPLastWeekStats = UNIMPLEMENTED,
-    GetPVPLifetimeStats = UNIMPLEMENTED,
     GetPVPRankInfo = function()
       return 'Pariah', 0  -- UNIMPLEMENTED
     end,
-    GetPVPRankProgress = UNIMPLEMENTED,
-    GetPVPThisWeekStats = UNIMPLEMENTED,
-    GetPVPSessionStats = UNIMPLEMENTED,
-    GetPVPYesterdayStats = UNIMPLEMENTED,
-    GetQuestBackgroundMaterial = UNIMPLEMENTED,
     GetQuestLogChoiceInfo = function()
       return 'moo', 1, 1, 1, false  -- UNIMPLEMENTED
     end,
     GetQuestLogGroupNum = STUB_NUMBER,
-    GetQuestLogPushable = UNIMPLEMENTED,
-    GetQuestLogQuestText = UNIMPLEMENTED,
     GetQuestLogRequiredMoney = STUB_NUMBER,
     GetQuestLogRewardHonor = STUB_NUMBER,
     GetQuestLogRewardInfo = function()
       return 'moo', 1, 1, 1, false, 1, 1  -- UNIMPLEMENTED
     end,
     GetQuestLogRewardMoney = STUB_NUMBER,
-    GetQuestLogRewardSpell = UNIMPLEMENTED,
-    GetQuestLogRewardTitle = UNIMPLEMENTED,
     GetQuestLogSelection = STUB_NUMBER,
     GetQuestLogTimeLeft = STUB_NUMBER,
     GetQuestLogTitle = function()
       return 'moo', 1  -- UNIMPLEMENTED
     end,
-    GetQuestTimers = UNIMPLEMENTED,
-    GetRaidTargetIndex = UNIMPLEMENTED,
     GetRealmID = STUB_NUMBER,
     GetRealmName = function()
       return 'Realm'  -- UNIMPLEMENTED
@@ -2281,8 +2143,6 @@ local function mkWowEnv(api, loader)
     GetRealZoneText = function()
       return 'RealZoneText'  -- UNIMPLEMENTED
     end,
-    GetRecruitingGuildInfo = UNIMPLEMENTED,
-    GetRecruitingGuildSelection = UNIMPLEMENTED,
     GetReleaseTimeRemaining = function()
       return 0  -- UNIMPLEMENTED
     end,
@@ -2300,8 +2160,6 @@ local function mkWowEnv(api, loader)
     GetScreenWidth = STUB_NUMBER,
     GetSelectedSkill = STUB_NUMBER,
     GetSendMailPrice = STUB_NUMBER,
-    GetShapeshiftFormCooldown = UNIMPLEMENTED,
-    GetShapeshiftFormInfo = UNIMPLEMENTED,
     GetSkillLineInfo = function()
       return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
     end,
@@ -2309,19 +2167,13 @@ local function mkWowEnv(api, loader)
     GetSpecializationInfo = function()  -- UNIMPLEMENTED
       return 1, 'SpecName'
     end,
-    GetSpecializationInfoForClassID = UNIMPLEMENTED,
-    GetSpecializationNameForSpecID = UNIMPLEMENTED,
     GetSpecializationRole = function()
       return 'DAMAGER'  -- UNIMPLEMENTED
     end,
-    GetSpellBookItemInfo = UNIMPLEMENTED,
     GetSpellConfirmationPromptsInfo = STUB_TABLE,
-    GetSpellInfo = UNIMPLEMENTED,
     GetSpellTabInfo = function()
       return 'moo', 0, 0, 0  -- UNIMPLEMENTED
     end,
-    GetSpellTexture = UNIMPLEMENTED,
-    GetSubZoneText = UNIMPLEMENTED,
     GetSummonFriendCooldown = function()
       return 0, 0  -- UNIMPLEMENTED
     end,
@@ -2333,45 +2185,11 @@ local function mkWowEnv(api, loader)
       return 'GetText(' .. token .. ')'  -- UNIMPLEMENTED
     end,
     GetTime = STUB_NUMBER,
-    GetTitleName = UNIMPLEMENTED,
-    GetTotemInfo = UNIMPLEMENTED,
-    GetTrackedAchievements = UNIMPLEMENTED,
-    GetTrackingInfo = UNIMPLEMENTED,
     GetTrackingTexture = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
-    GetTradeSkillInvSlotFilter = UNIMPLEMENTED,
-    GetTradeSkillInvSlots = UNIMPLEMENTED,
-    GetTradeSkillSubClasses = UNIMPLEMENTED,
-    GetTradeSkillSubClassFilter = UNIMPLEMENTED,
-    GetTrainerServiceTypeFilter = UNIMPLEMENTED,
-    GetUnitPowerBarInfo = UNIMPLEMENTED,
-    GetWeaponEnchantInfo = UNIMPLEMENTED,
-    GetWebTicket = UNIMPLEMENTED,
-    GetWorldElapsedTimers = UNIMPLEMENTED,
-    GetWorldPVPQueueStatus = UNIMPLEMENTED,
-    GetXPExhaustion = UNIMPLEMENTED,
-    GetZonePVPInfo = UNIMPLEMENTED,
-    GetZoneText = UNIMPLEMENTED,
-    GMEuropaBugsEnabled = UNIMPLEMENTED,
-    GMEuropaComplaintsEnabled = UNIMPLEMENTED,
-    GMEuropaSuggestionsEnabled = UNIMPLEMENTED,
-    GMEuropaTicketsEnabled = UNIMPLEMENTED,
     GuildControlGetNumRanks = STUB_NUMBER,
-    GuildControlGetRankName = UNIMPLEMENTED,
-    GuildControlSetRank = UNIMPLEMENTED,
     GuildRoster = function()
       return api.env.C_GuildInfo.GuildRoster()
     end,
-    HasAction = UNIMPLEMENTED,
-    HasBonusActionBar = UNIMPLEMENTED,
-    HasCompletedAnyAchievement = UNIMPLEMENTED,
-    HasKey = UNIMPLEMENTED,
-    HasLFGRestrictions = UNIMPLEMENTED,
-    HasOverrideActionBar = UNIMPLEMENTED,
-    HasPetSpells = UNIMPLEMENTED,
-    HasPetUI = UNIMPLEMENTED,
-    HasTempShapeshiftActionBar = UNIMPLEMENTED,
-    HasVehicleActionBar = UNIMPLEMENTED,
-    HonorSystemEnabled = UNIMPLEMENTED,
     hooksecurefunc = function(arg1, arg2, arg3)
       local tbl, name, fn
       if arg3 ~= nil then
@@ -2382,110 +2200,22 @@ local function mkWowEnv(api, loader)
       local oldfn = tbl[name]
       tbl[name] = function(...) oldfn(...) fn(...) end
     end,
-    InActiveBattlefield = UNIMPLEMENTED,
-    InCinematic = UNIMPLEMENTED,
-    InCombatLockdown = UNIMPLEMENTED,
-    IsAccountSecured = UNIMPLEMENTED,
-    IsActionInRange = UNIMPLEMENTED,
-    IsActiveBattlefieldArena = UNIMPLEMENTED,
-    IsAddOnLoaded = UNIMPLEMENTED,
-    IsAddonVersionCheckEnabled = UNIMPLEMENTED,
-    IsAltKeyDown = UNIMPLEMENTED,
-    IsAutoRepeatAction = UNIMPLEMENTED,
-    IsBattlefieldArena = UNIMPLEMENTED,
-    IsBattlePayItem = UNIMPLEMENTED,
-    IsCharacterNewlyBoosted = UNIMPLEMENTED,
-    IsConsumableAction = UNIMPLEMENTED,
-    IsContainerItemAnUpgrade = UNIMPLEMENTED,
-    IsControlKeyDown = UNIMPLEMENTED,
-    IsCurrentAction = UNIMPLEMENTED,
-    IsCurrentQuestFailed = UNIMPLEMENTED,
-    IsEquippedAction = UNIMPLEMENTED,
-    IsEveryoneAssistant = UNIMPLEMENTED,
-    IsFishingLoot = UNIMPLEMENTED,
-    IsGMClient = UNIMPLEMENTED,
-    IsGuildLeader = UNIMPLEMENTED,
-    IsInGroup = UNIMPLEMENTED,
-    IsInGuild = UNIMPLEMENTED,
-    IsInInstance = UNIMPLEMENTED,
-    IsInJailersTower = UNIMPLEMENTED,
-    IsInRaid = UNIMPLEMENTED,
-    IsInventoryItemLocked = UNIMPLEMENTED,
-    IsInventoryItemProfessionBag = UNIMPLEMENTED,
-    IsItemAction = UNIMPLEMENTED,
-    IsItemInRange = UNIMPLEMENTED,
     IsLoggedIn = function()
       return api.isLoggedIn
     end,
-    IsMacClient = UNIMPLEMENTED,
-    IsModifiedClick = UNIMPLEMENTED,
-    IsOnGlueScreen = UNIMPLEMENTED,
-    IsPartyLFG = UNIMPLEMENTED,
-    IsPlayerInWorld = UNIMPLEMENTED,
-    IsPlayerMoving = UNIMPLEMENTED,
-    IsPossessBarVisible = UNIMPLEMENTED,
-    IsPublicBuild = UNIMPLEMENTED,
-    IsPVPTimerRunning = UNIMPLEMENTED,
-    IsQuestWatched = UNIMPLEMENTED,
-    IsRaidMarkerActive = UNIMPLEMENTED,
-    InRepairMode = UNIMPLEMENTED,
-    IsResting = UNIMPLEMENTED,
-    IsRestrictedAccount = UNIMPLEMENTED,
     issecure = function()
       -- use tainted-lua if available
       return issecure and issecure() or true
     end,
-    issecurevariable = UNIMPLEMENTED,
-    IsShiftKeyDown = UNIMPLEMENTED,
-    IsSpellInRange = UNIMPLEMENTED,
-    IsSpellKnown = UNIMPLEMENTED,
-    IsStackableAction = UNIMPLEMENTED,
-    IsTestBuild = UNIMPLEMENTED,
-    IsThreatWarningEnabled = UNIMPLEMENTED,
-    IsTitleKnown = UNIMPLEMENTED,
-    IsTrialAccount = UNIMPLEMENTED,
-    IsTutorialFlagged = UNIMPLEMENTED,
-    IsUnitOnQuest = UNIMPLEMENTED,
-    IsUsableAction = UNIMPLEMENTED,
-    IsUsableItem = UNIMPLEMENTED,
-    IsUsableSpell = UNIMPLEMENTED,
-    IsVeteranTrialAccount = UNIMPLEMENTED,
-    IsWindowsClient = UNIMPLEMENTED,
-    KeyRingButtonIDToInvSlotID = UNIMPLEMENTED,
     LoadAddOn = function(name)
       assert(name)
       loader.loadAddon(name)
       return true
     end,
-    LootSlotHasItem = UNIMPLEMENTED,
     Kiosk = {
       IsEnabled = UNIMPLEMENTED,
     },
-    MoveBackwardStop = UNIMPLEMENTED,
-    MoveForwardStop = UNIMPLEMENTED,
-    MultiSampleAntiAliasingSupported = UNIMPLEMENTED,
-    PetHasActionBar = UNIMPLEMENTED,
-    PickupContainerItem = UNIMPLEMENTED,
-    PickupInventoryItem = UNIMPLEMENTED,
-    PlaySound = UNIMPLEMENTED,
-    PutItemInBackpack = UNIMPLEMENTED,
-    PutItemInBag = UNIMPLEMENTED,
-    QueryGuildNews = UNIMPLEMENTED,
-    QuestHonorFrame_Update = UNIMPLEMENTED,
     QuestMapUpdateAllQuests = STUB_NUMBER,
-    QuestPOIUpdateIcons = UNIMPLEMENTED,
-    RegisterStaticConstants = UNIMPLEMENTED,
-    RequestGuildChallengeInfo = UNIMPLEMENTED,
-    RequestGuildRecruitmentSettings = UNIMPLEMENTED,
-    RequestGuildRewards = UNIMPLEMENTED,
-    RequestPVPOptionsEnabled = UNIMPLEMENTED,
-    RequestPVPRewards = UNIMPLEMENTED,
-    RequestRaidInfo = UNIMPLEMENTED,
-    RequestRandomBattlegroundInstanceInfo = UNIMPLEMENTED,
-    RequestRatedInfo = UNIMPLEMENTED,
-    ResetCursor = UNIMPLEMENTED,
-    ResurrectGetOfferer = UNIMPLEMENTED,
-    RollOnLoot = UNIMPLEMENTED,
     RunMacroText = function(s)
       for _, line in ipairs({util.strsplit('\n', s)}) do
         api.SendEvent('EXECUTE_CHAT_LINE', line)
@@ -2507,56 +2237,7 @@ local function mkWowEnv(api, loader)
         return func(...)
       end
     end,
-    SelectGossipOption = UNIMPLEMENTED,
-    SelectQuestLogEntry = UNIMPLEMENTED,
-    SetActionBarToggles = UNIMPLEMENTED,
-    SetActionUIButton = UNIMPLEMENTED,
-    SetBagPortraitTexture = UNIMPLEMENTED,
-    SetBinding = UNIMPLEMENTED,
-    SetBindingClick = UNIMPLEMENTED,
-    SetChatWindowDocked = UNIMPLEMENTED,
-    SetChatWindowLocked = UNIMPLEMENTED,
-    SetChatWindowName = UNIMPLEMENTED,
-    SetChatWindowShown = UNIMPLEMENTED,
-    SetChatWindowUninteractable = UNIMPLEMENTED,
-    SetCursor = UNIMPLEMENTED,
-    seterrorhandler = UNIMPLEMENTED,
-    SetGuildRosterSelection = UNIMPLEMENTED,
-    SetPortraitTexture = UNIMPLEMENTED,
-    SetPortraitToTexture = UNIMPLEMENTED,
-    SetSelectedSkill = UNIMPLEMENTED,
-    SetUIVisibility = UNIMPLEMENTED,
-    ShouldKnowUnitHealth = UNIMPLEMENTED,
-    ShowBossFrameWhenUninteractable = UNIMPLEMENTED,
-    SortAuctionClearSort = UNIMPLEMENTED,
-    SortAuctionSetSort = UNIMPLEMENTED,
-    SortQuests = UNIMPLEMENTED,
-    SortQuestSortTypes = UNIMPLEMENTED,
     Sound_GameSystem_GetNumOutputDrivers = STUB_NUMBER,
-    Sound_GameSystem_GetOutputDriverNameByIndex = UNIMPLEMENTED,
-    SpellCanTargetItem = UNIMPLEMENTED,
-    SpellCanTargetItemID = UNIMPLEMENTED,
-    SpellCanTargetQuest = UNIMPLEMENTED,
-    SpellIsTargeting = UNIMPLEMENTED,
-    StartAttack = UNIMPLEMENTED,
-    StopAttack = UNIMPLEMENTED,
-    StoreSecureReference = UNIMPLEMENTED,
-    StrafeLeftStop = UNIMPLEMENTED,
-    StrafeRightStop = UNIMPLEMENTED,
-    SupportsClipCursor = UNIMPLEMENTED,
-    TargetSpellReplacesBonusTree = UNIMPLEMENTED,
-    ToggleWorldMap = UNIMPLEMENTED,
-    TriggerTutorial = UNIMPLEMENTED,
-    TurnLeftStop = UNIMPLEMENTED,
-    TurnRightStop = UNIMPLEMENTED,
-    UnitAffectingCombat = UNIMPLEMENTED,
-    UnitAura = UNIMPLEMENTED,
-    UnitAuraSlots = UNIMPLEMENTED,
-    UnitCanAssist = UNIMPLEMENTED,
-    UnitCanAttack = UNIMPLEMENTED,
-    UnitCanCooperate = UNIMPLEMENTED,
-    UnitCastingInfo = UNIMPLEMENTED,
-    UnitChannelInfo = UNIMPLEMENTED,
     UnitClass = function()
       return 'Warrior', 'WARRIOR', 1
     end,
@@ -2564,47 +2245,19 @@ local function mkWowEnv(api, loader)
       return 'WARRIOR', 1
     end,
     UnitEffectiveLevel = STUB_NUMBER,
-    UnitExists = UNIMPLEMENTED,
     UnitFactionGroup = function()
       return 'Horde', 'Horde'
     end,
-    UnitGetAvailableRoles = UNIMPLEMENTED,
-    UnitGetIncomingHeals = UNIMPLEMENTED,
-    UnitGetTotalAbsorbs = UNIMPLEMENTED,
-    UnitGetTotalHealAbsorbs = UNIMPLEMENTED,
     UnitGroupRolesAssigned = function()
       return 'DAMAGER'  -- UNIMPLEMENTED
     end,
-    UnitGUID = UNIMPLEMENTED,
-    UnitHasLFGDeserter = UNIMPLEMENTED,
-    UnitHasRelicSlot = UNIMPLEMENTED,
-    UnitHasVehiclePlayerFrameUI = UNIMPLEMENTED,
-    UnitHasVehicleUI = UNIMPLEMENTED,
     UnitHealth = STUB_NUMBER,
     UnitHealthMax = STUB_NUMBER,
-    UnitInBattleground = UNIMPLEMENTED,
-    UnitInVehicle = UNIMPLEMENTED,
-    UnitIsConnected = UNIMPLEMENTED,
-    UnitIsDead = UNIMPLEMENTED,
-    UnitIsDeadOrGhost = UNIMPLEMENTED,
-    UnitIsGhost = UNIMPLEMENTED,
-    UnitIsGroupAssistant = UNIMPLEMENTED,
-    UnitIsGroupLeader = UNIMPLEMENTED,
-    UnitIsOtherPlayersPet = UNIMPLEMENTED,
-    UnitIsPlayer = UNIMPLEMENTED,
-    UnitIsPossessed = UNIMPLEMENTED,
-    UnitIsUnit = UNIMPLEMENTED,
-    UnitIsVisible = UNIMPLEMENTED,
     UnitLevel = STUB_NUMBER,
     UnitName = function()
       return 'Unitname'  -- UNIMPLEMENTED
     end,
-    UnitNameUnmodified = UNIMPLEMENTED,
-    UnitOnTaxi = UNIMPLEMENTED,
-    UnitPlayerControlled = UNIMPLEMENTED,
-    UnitPosition = UNIMPLEMENTED,
     UnitPower = STUB_NUMBER,
-    UnitPowerBarTimerInfo = UNIMPLEMENTED,
     UnitPowerMax = STUB_NUMBER,
     UnitPowerType = function()
       return 0, 'MANA'  -- UNIMPLEMENTED
@@ -2613,18 +2266,14 @@ local function mkWowEnv(api, loader)
     UnitRace = function()
       return 'Human', 'Human', 1  -- UNIMPLEMENTED
     end,
-    UnitReaction = UNIMPLEMENTED,
-    UnitRealmRelationship = UNIMPLEMENTED,
     UnitResistance = function()
       return 0, 0, 0, 0
     end,
     UnitSex = function()
       return 2  -- UNIMPLEMENTED
     end,
-    UnitThreatSituation = UNIMPLEMENTED,
     UnitXP = STUB_NUMBER,
     UnitXPMax = STUB_NUMBER,
-    UseInventoryItem = UNIMPLEMENTED,
   }
 end
 
