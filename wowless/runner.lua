@@ -52,6 +52,8 @@ local function run(cfg)
     b:Click()
     b:SetAttribute('macrotext', '/stopattack')
     b:Click()
+    b:SetAttribute('macrotext', '/startattack\n/stopattack')
+    b:Click()
   end
   api.SendEvent('PLAYER_LOGOUT')
   return api
