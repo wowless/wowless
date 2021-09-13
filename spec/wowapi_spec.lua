@@ -10,7 +10,7 @@ describe('wowapi #small', function()
         local impl = t.impl
         for _, test in ipairs(t.tests) do
           (test.pending and pending or it)(test.name, function()
-            assert.same(test.outputs, impl(test.inputs))
+            assert.same(test.outputs, {impl(unpack(test.inputs))})
           end)
         end
       end)
