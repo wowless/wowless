@@ -1290,20 +1290,7 @@ local function mkWowEnv(api, loader)
     end,
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
-    C_AdventureJournal = {
-      CanBeShown = UNIMPLEMENTED,
-    },
     C_AdventureMap = {},
-    C_ArtifactUI = {
-      GetEquippedArtifactInfo = UNIMPLEMENTED,
-    },
-    C_AuctionHouse = {
-      HasFavorites = UNIMPLEMENTED,
-      QueryBids = UNIMPLEMENTED,
-    },
-    C_AuthChallenge = {
-      SetFrame = UNIMPLEMENTED,
-    },
     C_AzeriteEmpoweredItem = {},
     C_AzeriteEssence = {
       GetMilestones = function()  -- UNIMPLEMENTED
@@ -1313,66 +1300,17 @@ local function mkWowEnv(api, loader)
         }
       end,
     },
-    C_AzeriteItem = {
-      FindActiveAzeriteItem = UNIMPLEMENTED,
-    },
-    C_BarberShop = {
-      ClearPreviewChoices = UNIMPLEMENTED,
-      SaveSeenChoices = UNIMPLEMENTED,
-    },
-    C_Calendar = {
-      EventGetClubId = UNIMPLEMENTED,
-      OpenCalendar = UNIMPLEMENTED,
-    },
     C_CharacterServices = {
       GetCharacterServiceDisplayData = function()  -- UNIMPLEMENTED
         return {
           popupInfo = {},
         }
       end,
-      HasRequiredBoostForClassTrial = UNIMPLEMENTED,
-    },
-    C_CharacterServicesPublic = {
-      ShouldSeeControlPopup = UNIMPLEMENTED,
-    },
-    C_ChatInfo = {
-      IsValidChatLine = UNIMPLEMENTED,
-      RegisterAddonMessagePrefix = UNIMPLEMENTED,
     },
     C_ClassColor = {
       GetClassColor = function()  -- UNIMPLEMENTED
         return Mixin({r=0, g=0, b=0}, api.env.ColorMixin)
       end,
-    },
-    C_ClassTrial = {
-      IsClassTrialCharacter = UNIMPLEMENTED,
-    },
-    C_Club = {
-      ClearAutoAdvanceStreamViewMarker = UNIMPLEMENTED,
-      ClearClubPresenceSubscription = UNIMPLEMENTED,
-      Flush = UNIMPLEMENTED,
-      IsEnabled = UNIMPLEMENTED,
-      ShouldAllowClubType = UNIMPLEMENTED,
-    },
-    C_ClubFinder = {
-      GetPlayerApplicantLocaleFlags = UNIMPLEMENTED,
-      IsEnabled = UNIMPLEMENTED,
-      PlayerRequestPendingClubsList = UNIMPLEMENTED,
-      SetPlayerApplicantLocaleFlags = UNIMPLEMENTED,
-    },
-    C_Commentator = {
-      IsSpectating = UNIMPLEMENTED,
-      SetFollowCameraSpeeds = UNIMPLEMENTED,
-      SetMouseDisabled = UNIMPLEMENTED,
-    },
-    C_Console = {
-      SetFontHeight = UNIMPLEMENTED,
-    },
-    C_CovenantSanctumUI = {
-      GetAnimaInfo = UNIMPLEMENTED,
-    },
-    C_CurrencyInfo = {
-      GetBackpackCurrencyInfo = UNIMPLEMENTED,
     },
     C_CVar = (function()
       local cvarDefaults = {
@@ -1419,90 +1357,26 @@ local function mkWowEnv(api, loader)
         }
       end,
     },
-    C_DeathInfo = {
-      GetCorpseMapPosition = UNIMPLEMENTED,
-      GetSelfResurrectOptions = UNIMPLEMENTED,
-    },
-    C_EncounterJournal = {
-      GetLootInfoByIndex = UNIMPLEMENTED,
-      GetSlotFilter = UNIMPLEMENTED,
-      ResetSlotFilter = UNIMPLEMENTED,
-      SetSlotFilter = UNIMPLEMENTED,
-    },
-    C_FrameManager = {
-      GetFrameVisibilityState = UNIMPLEMENTED,
-    },
-    C_FriendList = {
-      GetFriendInfo = UNIMPLEMENTED,
-      SetSelectedFriend = UNIMPLEMENTED,
-      SetWhoToUi = UNIMPLEMENTED,
-      ShowFriends = UNIMPLEMENTED,
-    },
     C_GamePad = {},
-    C_Garrison = {
-      GetAvailableMissions = UNIMPLEMENTED,
-      GetCombatAllyMission = UNIMPLEMENTED,
-      GetCurrencyTypes = UNIMPLEMENTED,
-      IsPlayerInGarrison = UNIMPLEMENTED,
-      IsUsingPartyGarrison = UNIMPLEMENTED,
-    },
-    C_GossipInfo = {
-      GetGossipPoiForUiMapID = UNIMPLEMENTED,
-      GetPoiForUiMapID = UNIMPLEMENTED,
-    },
-    C_GuildInfo = {
-      GetGuildTabardInfo = UNIMPLEMENTED,
-      GuildRoster = UNIMPLEMENTED,
-    },
-    C_Heirloom = {
-      ShouldShowHeirloomHelp = UNIMPLEMENTED,
-    },
-    C_InvasionInfo = {
-      GetInvasionForUiMapID = UNIMPLEMENTED,
-    },
-    C_Item = {
-      DoesItemExist = UNIMPLEMENTED,
-    },
     C_ItemInteraction = {},
     C_ItemUpgrade = {},
-    C_LegendaryCrafting = {
-      GetRuneforgePowersByClassSpecAndCovenant = UNIMPLEMENTED,
-    },
-    C_LFGuildInfo = {
-      GetRecruitingGuildTabardInfo = UNIMPLEMENTED,
-    },
-    C_LFGInfo = {
-      CanPlayerUseGroupFinder = UNIMPLEMENTED,
-      CanPlayerUseLFD = UNIMPLEMENTED,
-      CanPlayerUseLFR = UNIMPLEMENTED,
-      CanPlayerUsePremadeGroup = UNIMPLEMENTED,
-    },
     C_LFGList = {
-      ClearCreationTextFields = UNIMPLEMENTED,
-      GetActiveEntryInfo = UNIMPLEMENTED,
-      GetAvailableRoles = UNIMPLEMENTED,
       GetFilteredSearchResults = function()
         return 0  -- UNIMPLEMENTED
       end,
       GetNumApplications = function()
         return 0, 0  -- UNIMPLEMENTED
       end,
-      HasActiveEntryInfo = UNIMPLEMENTED,
     },
     C_LootHistory = {
-      GetItem = UNIMPLEMENTED,
       GetPlayerInfo = function()
         return 'moo', 'WARRIOR'  -- UNIMPLEMENTED
       end,
     },
     C_Map = {
-      CanSetUserWaypointOnMap = UNIMPLEMENTED,
-      CloseWorldMapInteraction = UNIMPLEMENTED,
-      GetBestMapForUnit = UNIMPLEMENTED,
       GetFallbackWorldMapID = function()
         return 0
       end,
-      GetMapArtBackgroundAtlas = UNIMPLEMENTED,
       GetMapArtLayers = function()
         local layer = {
           additionalZoomSteps = 0,
@@ -1515,9 +1389,6 @@ local function mkWowEnv(api, loader)
         }
         return { layer }
       end,
-      GetMapDisplayInfo = UNIMPLEMENTED,
-      GetMapGroupID = UNIMPLEMENTED,
-      GetMapHighlightInfoAtPosition = UNIMPLEMENTED,
       GetMapInfo = function(uiMapID)
         return {
           flags = 0,
@@ -1527,85 +1398,16 @@ local function mkWowEnv(api, loader)
           parentMapID = 0,
         }
       end,
-      GetUserWaypointPositionForMap = UNIMPLEMENTED,
-    },
-    C_Minimap = {
-      ShouldUseHybridMinimap = UNIMPLEMENTED,
-    },
-    C_ModelInfo = {
-      GetModelSceneInfoByID = UNIMPLEMENTED,
-    },
-    C_MountJournal = {
-      AreMountEquipmentEffectsSuppressed = UNIMPLEMENTED,
-      ClearRecentFanfares = UNIMPLEMENTED,
-      GetAppliedMountEquipmentID = UNIMPLEMENTED,
-      GetDisplayedMountInfo = UNIMPLEMENTED,
-      IsValidSourceFilter = UNIMPLEMENTED,
-      NeedsFanfare = UNIMPLEMENTED,
-    },
-    C_NamePlate = {
-      GetNamePlateForUnit = UNIMPLEMENTED,
-      SetNamePlateEnemySize = UNIMPLEMENTED,
-      SetNamePlateFriendlySize = UNIMPLEMENTED,
-      SetNamePlateSelfClickThrough = UNIMPLEMENTED,
-      SetNamePlateSelfSize = UNIMPLEMENTED,
-      SetTargetClampingInsets = UNIMPLEMENTED,
-    },
-    C_Navigation = {
-      GetFrame = UNIMPLEMENTED,
-    },
-    C_NewItems = {
-      IsNewItem = UNIMPLEMENTED,
-      RemoveNewItem = UNIMPLEMENTED,
-    },
-    C_PaperDollInfo = {
-      OffhandHasWeapon = UNIMPLEMENTED,
-    },
-    C_PartyInfo = {
-      AllowedToDoPartyConversion = UNIMPLEMENTED,
     },
     C_PetBattles = {
-      CanPetSwapIn = UNIMPLEMENTED,
-      GetAllEffectNames = UNIMPLEMENTED,
-      GetAllStates = UNIMPLEMENTED,
-      GetBattleState = UNIMPLEMENTED,
       GetName = function()
         return 'PetName'
       end,
-      GetPVPMatchmakingInfo = UNIMPLEMENTED,
-      GetSelectedAction = UNIMPLEMENTED,
-      IsInBattle = UNIMPLEMENTED,
-      IsSkipAvailable = UNIMPLEMENTED,
-      IsTrapAvailable = UNIMPLEMENTED,
-      ShouldShowPetSelect = UNIMPLEMENTED,
-    },
-    C_PetJournal = {
-      GetPetInfoByIndex = UNIMPLEMENTED,
-      GetSummonedPetGUID = UNIMPLEMENTED,
-      GetSummonRandomFavoritePetGUID = UNIMPLEMENTED,
-      IsJournalUnlocked = UNIMPLEMENTED,
-    },
-    C_PlayerChoice = {
-      IsWaitingForPlayerChoiceResponse = UNIMPLEMENTED,
-    },
-    C_PlayerInfo = {
-      CanPlayerUseMountEquipment = UNIMPLEMENTED,
-      GetAlternateFormInfo = UNIMPLEMENTED,
-      IsPlayerEligibleForNPEv2 = UNIMPLEMENTED,
-      IsPlayerNPERestricted = UNIMPLEMENTED,
-      UnitIsSameServer = UNIMPLEMENTED,
-    },
-    C_PlayerMentorship = {
-      GetMentorshipStatus = UNIMPLEMENTED,
     },
     C_PvP = {
-      CanPlayerUseRatedPVPUI = UNIMPLEMENTED,
-      GetActiveMatchState = UNIMPLEMENTED,
-      GetArenaCrowdControlInfo = UNIMPLEMENTED,
       GetArenaSkirmishRewards = function()
         return 0, 0  -- UNIMPLEMENTED
       end,
-      GetAvailableBrawlInfo = UNIMPLEMENTED,
       GetRandomBGInfo = function()
         return { minLevel = 0 }  -- UNIMPLEMENTED
       end,
@@ -1615,105 +1417,14 @@ local function mkWowEnv(api, loader)
       GetRandomEpicBGRewards = function()
         return 0, 0  -- UNIMPLEMENTED
       end,
-      GetSpecialEventDetails = UNIMPLEMENTED,
-      GetSpecialEventInfo = UNIMPLEMENTED,
-      IsActiveBattlefield = UNIMPLEMENTED,
-      IsBattlegroundEnlistmentBonusActive = UNIMPLEMENTED,
-      IsInBrawl = UNIMPLEMENTED,
-      IsWarModeDesired = UNIMPLEMENTED,
     },
     C_QuestLog = {
-      GetBountiesForMapID = UNIMPLEMENTED,
       GetBountySetInfoForMapID = function()
         return 0, 0, 0  -- UNIMPLEMENTED
       end,
-      GetInfo = UNIMPLEMENTED,
-      GetQuestAdditionalHighlights = UNIMPLEMENTED,
-      GetQuestsOnMap = UNIMPLEMENTED,
-      GetTitleForQuestID = UNIMPLEMENTED,
-      GetZoneStoryInfo = UNIMPLEMENTED,
-      HasActiveThreats = UNIMPLEMENTED,
-      IsOnQuest = UNIMPLEMENTED,
-      IsQuestFlaggedCompleted = UNIMPLEMENTED,
-      ReadyForTurnIn = UNIMPLEMENTED,
-      SetMapForQuestPOIs = UNIMPLEMENTED,
-    },
-    C_QuestSession = {
-      CanStart = UNIMPLEMENTED,
-      GetSessionBeginDetails = UNIMPLEMENTED,
-      Exists = UNIMPLEMENTED,
-      GetPendingCommand = UNIMPLEMENTED,
-      HasJoined = UNIMPLEMENTED,
-    },
-    C_RecruitAFriend = {
-      GetRAFInfo = UNIMPLEMENTED,
-      GetRAFSystemInfo = UNIMPLEMENTED,
-      IsEnabled = UNIMPLEMENTED,
-      IsRecruitingEnabled = UNIMPLEMENTED,
-      IsSendingEnabled = UNIMPLEMENTED,
-    },
-    C_Scenario = {
-      GetInfo = UNIMPLEMENTED,
-      IsInScenario = UNIMPLEMENTED,
-      ShouldShowCriteria = UNIMPLEMENTED,
     },
     C_ScrappingMachineUI = {},
-    C_Social = {
-      RegisterSocialBrowser = UNIMPLEMENTED,
-      TwitterCheckStatus = UNIMPLEMENTED,
-    },
-    C_SocialQueue = {
-      GetConfig = UNIMPLEMENTED,
-    },
-    C_SocialRestrictions = {
-      IsSilenced = UNIMPLEMENTED,
-      IsSquelched = UNIMPLEMENTED,
-    },
-    C_Soulbinds = {
-      GetSoulbindData = UNIMPLEMENTED,
-    },
-    C_SpecializationInfo = {
-      CanPlayerUseTalentSpecUI = UNIMPLEMENTED,
-      CanPlayerUseTalentUI = UNIMPLEMENTED,
-      GetPvpTalentSlotInfo = UNIMPLEMENTED,
-    },
     C_Spell = {},
-    C_StorePublic = {
-      IsDisabledByParentalControls = UNIMPLEMENTED,
-      IsEnabled = UNIMPLEMENTED,
-    },
-    C_StoreSecure = {
-      GetCurrencyID = UNIMPLEMENTED,
-      GetFailureInfo = UNIMPLEMENTED,
-      GetPurchaseList = UNIMPLEMENTED,
-      HasPurchaseInProgress = UNIMPLEMENTED,
-      IsAvailable = UNIMPLEMENTED,
-    },
-    C_SummonInfo = {
-      CancelSummon = UNIMPLEMENTED,
-      ConfirmSummon = UNIMPLEMENTED,
-      GetSummonReason = UNIMPLEMENTED,
-      IsSummonSkippingStartExperience = UNIMPLEMENTED,
-    },
-    C_TaskQuest = {
-      GetQuestsForPlayerByMapID = UNIMPLEMENTED,
-    },
-    C_TaxiMap = {
-      ShouldMapShowTaxiNodes = UNIMPLEMENTED,
-    },
-    C_Texture = {
-      GetAtlasInfo = UNIMPLEMENTED,
-    },
-    C_Timer = {
-      After = UNIMPLEMENTED,
-    },
-    C_TradeSkillUI = {
-      SetOnlyShowLearnedRecipes = UNIMPLEMENTED,
-      SetOnlyShowUnlearnedRecipes = UNIMPLEMENTED,
-    },
-    C_TransmogCollection = {
-      GetLatestAppearance = UNIMPLEMENTED,
-    },
     C_UIWidgetManager = {
       GetBelowMinimapWidgetSetID = function()
         return 2
@@ -1728,32 +1439,10 @@ local function mkWowEnv(api, loader)
         }
       end,
     },
-    C_VoiceChat = {
-      CanPlayerUseVoiceChat = UNIMPLEMENTED,
-      GetActiveChannelID = UNIMPLEMENTED,
-      GetActiveChannelType = UNIMPLEMENTED,
-      GetAvailableInputDevices = UNIMPLEMENTED,
-      GetAvailableOutputDevices = UNIMPLEMENTED,
-      GetCommunicationMode = UNIMPLEMENTED,
-      GetInputVolume = UNIMPLEMENTED,
-      GetMasterVolumeScale = UNIMPLEMENTED,
-      GetOutputVolume = UNIMPLEMENTED,
-      GetVADSensitivity = UNIMPLEMENTED,
-      IsLoggedIn = UNIMPLEMENTED,
-      IsMuted = UNIMPLEMENTED,
-      IsSpeakForMeActive = UNIMPLEMENTED,
-      IsTranscriptionAllowed = UNIMPLEMENTED,
-    },
     C_Widget = {
       IsFrameWidget = function()
         return true  -- UNIMPLEMENTED
       end,
-    },
-    C_WowTokenPublic = {
-      GetCommerceSystemStatus = UNIMPLEMENTED,
-    },
-    C_WowTokenSecure = {
-      CancelRedeem = UNIMPLEMENTED,
     },
     GetActionCooldown = function()
       return 0, 0, 0  -- UNIMPLEMENTED
