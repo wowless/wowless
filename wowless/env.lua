@@ -453,8 +453,25 @@ local function mkBaseUIObjectTypes(api, loader)
         EnableMouseWheel = function(self, value)
           u(self).mouseWheelEnabled = not not value
         end,
-        GetAttribute = function(self, name)
-          return u(self).attributes[name]
+        GetAttribute = function(self, arg1, arg2, arg3)
+          local attrs = u(self).attributes
+          if arg3 then
+            local keys = {
+              arg1 .. arg2 .. arg3,
+              '*' .. arg2 .. arg3,
+              arg1 .. arg2 .. '*',
+              '*' .. arg2 .. '*',
+              arg2,
+            }
+            for _, k in ipairs(keys) do
+              if attrs[k] then
+                return attrs[k]
+              end
+            end
+            return nil
+          else
+            return attrs[arg1]
+          end
         end,
         GetChildren = function(self)
           local ret = {}
@@ -2527,6 +2544,8 @@ local function mkWowEnv(api, loader)
     UnitAffectingCombat = UNIMPLEMENTED,
     UnitAura = UNIMPLEMENTED,
     UnitAuraSlots = UNIMPLEMENTED,
+    UnitCanAssist = UNIMPLEMENTED,
+    UnitCanAttack = UNIMPLEMENTED,
     UnitCanCooperate = UNIMPLEMENTED,
     UnitCastingInfo = UNIMPLEMENTED,
     UnitChannelInfo = UNIMPLEMENTED,
