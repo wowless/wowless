@@ -20,8 +20,11 @@ local function run(cfg)
   api.SendEvent('PLAYER_LOGIN')
   api.SendEvent('UPDATE_CHAT_WINDOWS')
   api.SendEvent('PLAYER_ENTERING_WORLD')
+  local clickBlacklist = {
+    PVPReadyDialogEnterBattleButton = true,
+  }
   for _, frame in ipairs(api.frames) do
-    if frame.Click and frame:IsVisible() then
+    if frame.Click and frame:IsVisible() and not clickBlacklist[frame:GetName() or ''] then
       api.log(2, 'cicking %s', tostring(frame:GetName()))
       frame:Click()
     end
