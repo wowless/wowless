@@ -3,13 +3,18 @@ local STUB_NUMBER = function() return 1 end
 local STUB_TABLE = function() return {} end
 local function getFn(t)
   if t.status == 'unimplemented' then
+    assert(t.impl == nil)
     return UNIMPLEMENTED
   elseif t.status == 'stubnumber' then
+    assert(t.impl == nil)
     return STUB_NUMBER
   elseif t.status == 'stubtable' then
+    assert(t.impl == nil)
     return STUB_TABLE
-  else
+  elseif t.status == 'stub' then
     return assert(t.impl)
+  else
+    error(('invalid status %q on %q'):format(t.status, t.name))
   end
 end
 local fns = {}
