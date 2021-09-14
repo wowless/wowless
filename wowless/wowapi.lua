@@ -18,10 +18,10 @@ local function getFn(t)
   end
 end
 local fns = {}
-for f in require('lfs').dir('wowapi') do
+for f in require('lfs').dir('wowapi/api') do
   if f:sub(-4) == '.lua' then
     local fn = f:sub(1, -5)
-    local t = dofile('wowapi/' .. f)
+    local t = dofile('wowapi/api/' .. f)
     assert(fn == t.name, ('invalid name %q in %q'):format(t.name, f))
     local bfn = getFn(t)
     local impl = not t.inputs and bfn or function(...)

@@ -1,9 +1,9 @@
 describe('wowapi #small', function()
-  for f in require('lfs').dir('wowapi') do
+  for f in require('lfs').dir('wowapi/api') do
     if f:sub(-4) == '.lua' then
       local fn = f:sub(1, -5)
       describe(fn, function()
-        local t = dofile('wowapi/' .. f)
+        local t = dofile('wowapi/api/' .. f)
         it('has the right name', function()
           assert.same(fn, t.name)
         end)
