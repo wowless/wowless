@@ -1767,7 +1767,7 @@ end
 local function init(api, loader)
   setmetatable(api.env, mkMetaEnv(api))
   Mixin(api.env, mkBaseEnv(), mkWowEnv(api, loader))
-  util.recursiveMixin(api.env, require('wowless.wowapi'))
+  util.recursiveMixin(api.env, dofile('wowapi/wowapi/init.lua'))
   Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api, loader))
 end
 
