@@ -275,6 +275,7 @@ local function mkBaseUIObjectTypes(api, loader)
         SetBlingTexture = function(self, tex)
           u(self).blingTexture = toTexture(self, tex)
         end,
+        SetCooldown = UNIMPLEMENTED,
         SetDrawBling = UNIMPLEMENTED,
         SetEdgeTexture = function(self, tex)
           u(self).edgeTexture = toTexture(self, tex)
@@ -1767,7 +1768,7 @@ end
 local function init(api, loader)
   setmetatable(api.env, mkMetaEnv(api))
   Mixin(api.env, mkBaseEnv())
-  util.recursiveMixin(api.env, dofile('wowapi/wowapi/init.lua')('wowapi/api'))
+  util.recursiveMixin(api.env, dofile('wowapi/wowapi/init.lua').loadFunctions('wowapi/api'))
   util.recursiveMixin(api.env, mkWowEnv(api, loader))
   Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api, loader))
 end
