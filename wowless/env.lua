@@ -1766,8 +1766,9 @@ end
 
 local function init(api, loader)
   setmetatable(api.env, mkMetaEnv(api))
-  Mixin(api.env, mkBaseEnv(), mkWowEnv(api, loader))
+  Mixin(api.env, mkBaseEnv())
   util.recursiveMixin(api.env, dofile('wowapi/wowapi/init.lua')('wowapi/api'))
+  util.recursiveMixin(api.env, mkWowEnv(api, loader))
   Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api, loader))
 end
 
