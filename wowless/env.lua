@@ -1697,7 +1697,7 @@ local function mkWowEnv(api, loader)
         tbl, name, fn = api.env, arg1, arg2
       end
       local oldfn = tbl[name]
-      tbl[name] = function(...) oldfn(...) fn(...) end
+      tbl[name] = function(...) oldfn(...) return fn(...) end
     end,
     IsLoggedIn = function()
       return api.isLoggedIn
