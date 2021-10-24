@@ -620,7 +620,6 @@ local function mkBaseUIObjectTypes(api, loader)
         AddLine = UNIMPLEMENTED,
         ClearLines = UNIMPLEMENTED,
         FadeOut = UNIMPLEMENTED,
-        SetBackpackToken = UNIMPLEMENTED,
         GetOwner = function(self)
           return u(self).tooltipOwner
         end,
@@ -629,6 +628,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         SetAction = UNIMPLEMENTED,
         SetAnchorType = UNIMPLEMENTED,
+        SetBackpackToken = UNIMPLEMENTED,
         SetBagItem = UNIMPLEMENTED,
         SetInventoryItem = UNIMPLEMENTED,
         SetMinimumWidth = UNIMPLEMENTED,
@@ -1162,7 +1162,6 @@ local function mkBaseEnv()
     getmetatable = getmetatable,
     getn = table.getn,
     gsub = string.gsub,
-    strlenutf8 = string.len, -- NEEDS ACTUAL FUNCTION
     ipairs = ipairs,
     loadstring = loadstring,
     loadstring_untainted = loadstring,
@@ -1213,6 +1212,7 @@ local function mkBaseEnv()
     },
     strjoin = util.strjoin,
     strlen = string.len,
+    strlenutf8 = string.len, -- NEEDS ACTUAL FUNCTION
     strlower = string.lower,
     strmatch = string.match,
     strrep = string.rep,
@@ -1739,9 +1739,6 @@ local function mkWowEnv(api, loader)
         return func(...)
       end
     end,
-    UnitPowerBarID = function(n)
-      return n
-    end,
     UnitClass = function()
       return 'Warrior', 'WARRIOR', 1
     end,
@@ -1757,11 +1754,14 @@ local function mkWowEnv(api, loader)
     UnitName = function()
       return 'Unitname'  -- UNIMPLEMENTED
     end,
+    UnitPowerBarID = function(n)
+      return n
+    end,
     UnitPowerType = function()
-      return 0, 'RAGE'  -- UNIMPLEMENTED
+      return 0, 'MANA'  -- UNIMPLEMENTED
     end,
     UnitRace = function()
-      return 'Orc', 'Orc', 2  -- UNIMPLEMENTED
+      return 'Human', 'Human', 1  -- UNIMPLEMENTED
     end,
     UnitResistance = function()
       return 0, 0, 0, 0

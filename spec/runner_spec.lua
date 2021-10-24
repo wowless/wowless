@@ -1,7 +1,7 @@
 describe('runner', function()
   it('loads required versions', function()
     local versions = {
-      wow = 'Mainline', --pending fixes with wowapi
+      wow = 'Mainline',
       wow_classic = 'TBC',
       wow_classic_era = 'Vanilla',
       wow_classic_era_ptr = 'Vanilla',
