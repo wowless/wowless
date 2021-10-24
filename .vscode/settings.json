@@ -1,3 +1,9 @@
 {
-    "search.useIgnoreFiles": false
+    "search.useIgnoreFiles": false,
+    "Lua.diagnostics.workspaceDelay": -1,
+    "Lua.diagnostics.disable": [
+        ".luacheckrc",
+        "extracts",
+        113
+    ]
 }

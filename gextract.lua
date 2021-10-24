@@ -34,6 +34,7 @@ local function otherConstants(data)
 end
 
 do
+  print(arg[1])
   local data = require('scrapelib')(arg[1])
   local result = {}
   recursiveMixin(result, { Constants = data:resolve(data:global('sConstants')) })

@@ -1,3 +1,5 @@
 .lua/
 cache
 extracts
+.gscrapes
+log.txt

@@ -570,6 +570,7 @@ local function loader(api, cfg)
   end
 
   local function loadFrameXml()
+    print(rootDir)
     forAddon().loadFile(path.join(rootDir, 'GlobalEnvironment.lua'))
     -- Special hack to avoid loops in map resolution code.
     api.env.Enum.UIMapType.Continent = 0

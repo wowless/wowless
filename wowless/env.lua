@@ -410,6 +410,7 @@ local function mkBaseUIObjectTypes(api, loader)
         GetStringWidth = STUB_NUMBER,
         GetUnboundedStringWidth = STUB_NUMBER,
         GetText = UNIMPLEMENTED,
+        GetWrappedWidth = STUB_NUMBER,
         IsTruncated = UNIMPLEMENTED,
         SetFormattedText = UNIMPLEMENTED,
         SetMaxLines = UNIMPLEMENTED,
@@ -619,6 +620,7 @@ local function mkBaseUIObjectTypes(api, loader)
         AddLine = UNIMPLEMENTED,
         ClearLines = UNIMPLEMENTED,
         FadeOut = UNIMPLEMENTED,
+        SetBackpackToken = UNIMPLEMENTED,
         GetOwner = function(self)
           return u(self).tooltipOwner
         end,
@@ -684,6 +686,7 @@ local function mkBaseUIObjectTypes(api, loader)
         GetViewInsets = function()
           return 1, 1, 1, 1  -- UNIMPLEMENTED
         end,
+        SetLightAmbientColor = UNIMPLEMENTED,
         SetLightDirection = UNIMPLEMENTED,
         SetLightPosition = UNIMPLEMENTED,
         SetViewInsets = UNIMPLEMENTED,
@@ -1159,6 +1162,7 @@ local function mkBaseEnv()
     getmetatable = getmetatable,
     getn = table.getn,
     gsub = string.gsub,
+    strlenutf8 = string.len, -- NEEDS ACTUAL FUNCTION
     ipairs = ipairs,
     loadstring = loadstring,
     loadstring_untainted = loadstring,
@@ -1734,6 +1738,9 @@ local function mkWowEnv(api, loader)
       else
         return func(...)
       end
+    end,
+    UnitPowerBarID = function(n)
+      return n
     end,
     UnitClass = function()
       return 'Warrior', 'WARRIOR', 1
