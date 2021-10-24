@@ -1758,10 +1758,10 @@ local function mkWowEnv(api, loader)
       return 'Unitname'  -- UNIMPLEMENTED
     end,
     UnitPowerType = function()
-      return 0, 'MANA'  -- UNIMPLEMENTED
+      return 0, 'RAGE'  -- UNIMPLEMENTED
     end,
     UnitRace = function()
-      return 'Human', 'Human', 1  -- UNIMPLEMENTED
+      return 'Orc', 'Orc', 2  -- UNIMPLEMENTED
     end,
     UnitResistance = function()
       return 0, 0, 0, 0
