@@ -410,6 +410,7 @@ local function mkBaseUIObjectTypes(api, loader)
         GetStringWidth = STUB_NUMBER,
         GetUnboundedStringWidth = STUB_NUMBER,
         GetText = UNIMPLEMENTED,
+        GetWrappedWidth = STUB_NUMBER,
         IsTruncated = UNIMPLEMENTED,
         SetFormattedText = UNIMPLEMENTED,
         SetMaxLines = UNIMPLEMENTED,
@@ -627,6 +628,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         SetAction = UNIMPLEMENTED,
         SetAnchorType = UNIMPLEMENTED,
+        SetBackpackToken = UNIMPLEMENTED,
         SetBagItem = UNIMPLEMENTED,
         SetInventoryItem = UNIMPLEMENTED,
         SetMinimumWidth = UNIMPLEMENTED,
@@ -684,6 +686,7 @@ local function mkBaseUIObjectTypes(api, loader)
         GetViewInsets = function()
           return 1, 1, 1, 1  -- UNIMPLEMENTED
         end,
+        SetLightAmbientColor = UNIMPLEMENTED,
         SetLightDirection = UNIMPLEMENTED,
         SetLightPosition = UNIMPLEMENTED,
         SetViewInsets = UNIMPLEMENTED,
@@ -1209,6 +1212,7 @@ local function mkBaseEnv()
     },
     strjoin = util.strjoin,
     strlen = string.len,
+    strlenutf8 = string.len, -- NEEDS ACTUAL FUNCTION
     strlower = string.lower,
     strmatch = string.match,
     strrep = string.rep,
@@ -1749,6 +1753,9 @@ local function mkWowEnv(api, loader)
     end,
     UnitName = function()
       return 'Unitname'  -- UNIMPLEMENTED
+    end,
+    UnitPowerBarID = function(n)
+      return n
     end,
     UnitPowerType = function()
       return 0, 'MANA'  -- UNIMPLEMENTED
