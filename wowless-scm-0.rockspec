@@ -7,6 +7,7 @@ source = {
 dependencies = {
   'lua = 5.1',
   'bitlib',
+  'libdeflate',
   'lua-path',
   'penlight',
   'serpent',
