@@ -97,7 +97,7 @@ local function mkBaseUIObjectTypes(api, loader)
       inherits = {'ParentedObject', 'ScriptObject'},
       mixin = {
         CreateAnimation = function(self, type)
-          local ltype = type:lower()
+          local ltype = (type or 'animation'):lower()
           assert(api.InheritsFrom(ltype, 'animation'))
           local anim = api.CreateUIObject(ltype)
           table.insert(u(self).animations, anim)
@@ -1174,6 +1174,7 @@ local function mkBaseEnv()
       max = math.max,
       min = math.min,
       pi = math.pi,
+      pow = math.pow,
       rad = math.rad,
       sin = math.sin,
       sqrt = math.sqrt,
@@ -1481,6 +1482,9 @@ local function mkWowEnv(api, loader)
     GetChatWindowInfo = function(idx)
       return '', 10, 1, 1, 1, 1, 1, 1, idx  -- UNIMPLEMENTED
     end,
+    GetContainerItemCooldown = function()
+      return 0, 0, 0  -- UNIMPLEMENTED
+    end,
     GetCurrentRegion = function()
       return 1  -- UNIMPLEMENTED
     end,
@@ -1543,6 +1547,9 @@ local function mkWowEnv(api, loader)
     end,
     GetGuildRosterMOTD = function()
       return ''  -- UNIMPLEMENTED
+    end,
+    GetInventoryItemCooldown = function()
+      return 0, 0, 0  -- UNIMPLEMENTED
     end,
     GetInventorySlotInfo = (function()
       local t = {
