@@ -2,6 +2,7 @@ describe('runner', function()
   it('loads required versions', function()
     local versions = {
       wow = 'Mainline',
+      wowt = 'Mainline',
       wow_classic = 'TBC',
       wow_classic_era = 'Vanilla',
       wow_classic_era_ptr = 'Vanilla',
