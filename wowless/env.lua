@@ -1482,9 +1482,6 @@ local function mkWowEnv(api, loader)
     GetCurrentRegion = function()
       return 1  -- UNIMPLEMENTED
     end,
-    GetCurrentRegionName = function()
-      return 'RegionName'  -- UNIMPLEMENTED
-    end,
     GetCurrentScaledResolution = function()
       return 1024, 768  -- UNIMPLEMENTED
     end,
@@ -1740,12 +1737,6 @@ local function mkWowEnv(api, loader)
         return func(...)
       end
     end,
-    UnitClass = function()
-      return 'Warrior', 'WARRIOR', 1
-    end,
-    UnitClassBase = function()
-      return 'WARRIOR', 1
-    end,
     UnitFactionGroup = function()
       return 'Horde', 'Horde'
     end,
@@ -1754,9 +1745,6 @@ local function mkWowEnv(api, loader)
     end,
     UnitName = function()
       return 'Unitname'  -- UNIMPLEMENTED
-    end,
-    UnitPowerBarID = function(n)
-      return n
     end,
     UnitPowerType = function()
       return 0, 'MANA'  -- UNIMPLEMENTED
@@ -1767,17 +1755,14 @@ local function mkWowEnv(api, loader)
     UnitResistance = function()
       return 0, 0, 0, 0
     end,
-    UnitSex = function()
-      return 2  -- UNIMPLEMENTED
-    end,
   }
 end
 
 local function init(api, loader)
   setmetatable(api.env, mkMetaEnv(api))
   Mixin(api.env, mkBaseEnv())
-  util.recursiveMixin(api.env, dofile('wowapi/wowapi/init.lua').loadFunctions('wowapi/api'))
-  util.recursiveMixin(api.env, mkWowEnv(api, loader))
+  util.recursiveMixin(api.env, dofile('wowapi/wowapi/init.lua').loadFunctions('wowapi/api'), true)
+  util.recursiveMixin(api.env, mkWowEnv(api, loader), true)
   Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api, loader))
 end
 
