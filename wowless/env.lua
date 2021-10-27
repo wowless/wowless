@@ -1297,7 +1297,6 @@ local function mkWowEnv(api, loader)
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
     C_AdventureMap = {},
-    C_AzeriteEmpoweredItem = {},
     C_AzeriteEssence = {
       GetMilestones = function()  -- UNIMPLEMENTED
         -- Need to include at least one "slot" milestone to prevent UI errors.
@@ -1363,9 +1362,6 @@ local function mkWowEnv(api, loader)
         }
       end,
     },
-    C_GamePad = {},
-    C_ItemInteraction = {},
-    C_ItemUpgrade = {},
     C_LFGList = {
       GetFilteredSearchResults = function()
         return 0  -- UNIMPLEMENTED
@@ -1429,8 +1425,6 @@ local function mkWowEnv(api, loader)
         return 0, 0, 0  -- UNIMPLEMENTED
       end,
     },
-    C_ScrappingMachineUI = {},
-    C_Spell = {},
     C_UIWidgetManager = {
       GetBelowMinimapWidgetSetID = function()
         return 2
