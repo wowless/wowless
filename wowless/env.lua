@@ -1304,23 +1304,6 @@ local function mkWowEnv(api, loader)
         }
       end,
     },
-    C_ClassColor = {
-      GetClassColor = function()  -- UNIMPLEMENTED
-        return Mixin({r=0, g=0, b=0}, api.env.ColorMixin)
-      end,
-    },
-    C_DateAndTime = {
-      GetCurrentCalendarTime = function()
-        return {
-          hour = 3,
-          minute = 26,
-          month = 7,
-          monthDay = 15,
-          weekday = 5,
-          year = 2021,
-        }
-      end,
-    },
     C_LFGList = {
       GetFilteredSearchResults = function()
         return 0  -- UNIMPLEMENTED
@@ -1358,30 +1341,6 @@ local function mkWowEnv(api, loader)
           name = 'TheMap',
           parentMapID = 0,
         }
-      end,
-    },
-    C_PetBattles = {
-      GetName = function()
-        return 'PetName'
-      end,
-    },
-    C_PvP = {
-      GetArenaSkirmishRewards = function()
-        return 0, 0  -- UNIMPLEMENTED
-      end,
-      GetRandomBGInfo = function()
-        return { minLevel = 0 }  -- UNIMPLEMENTED
-      end,
-      GetRandomBGRewards = function()
-        return 0, 0  -- UNIMPLEMENTED
-      end,
-      GetRandomEpicBGRewards = function()
-        return 0, 0  -- UNIMPLEMENTED
-      end,
-    },
-    C_QuestLog = {
-      GetBountySetInfoForMapID = function()
-        return 0, 0, 0  -- UNIMPLEMENTED
       end,
     },
     C_Widget = {
