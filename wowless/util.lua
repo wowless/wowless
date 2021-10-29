@@ -14,7 +14,7 @@ local function recursiveMixin(t, u, failOnOverwrite)
       assert(tv == nil or not failOnOverwrite, ("overwriting %q"):format(k))
       t[k] = v
     else
-      recursiveMixin(tv, v)
+      recursiveMixin(tv, v, failOnOverwrite)
     end
   end
   return t

@@ -1305,9 +1305,6 @@ local function mkWowEnv(api, loader)
       end,
     },
     C_LFGList = {
-      GetFilteredSearchResults = function()
-        return 0  -- UNIMPLEMENTED
-      end,
       GetNumApplications = function()
         return 0, 0  -- UNIMPLEMENTED
       end,
@@ -1315,17 +1312,6 @@ local function mkWowEnv(api, loader)
     C_LootHistory = {
       GetPlayerInfo = function()
         return 'moo', 'WARRIOR'  -- UNIMPLEMENTED
-      end,
-    },
-    C_Map = {
-      GetMapInfo = function(uiMapID)
-        return {
-          flags = 0,
-          mapID = uiMapID,
-          mapType = api.env.Enum.UIMapType.World,
-          name = 'TheMap',
-          parentMapID = 0,
-        }
       end,
     },
     C_Widget = {
