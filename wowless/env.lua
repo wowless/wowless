@@ -1388,35 +1388,6 @@ local function mkWowEnv(api, loader)
         return getfenv(arg)
       end
     end,
-    GetGameTime = function()
-      return 1, 1  -- UNIMPLEMENTED
-    end,
-    GetGroupMemberCounts = function()
-      return {
-        DAMAGER = 3,
-        HEALER = 1,
-        NOROLE = 0,
-        TANK = 1,
-      }
-    end,
-    GetGuildFactionInfo = function()
-      return 'Guild', 'Description', 0, 0, 0, 0
-    end,
-    GetGuildInfo = function()
-      return 'GuildName', 'Member', 1  -- UNIMPLEMENTED
-    end,
-    GetGuildMembershipRequestInfo = function()
-      return 'Name', 0, 0  -- UNIMPLEMENTED
-    end,
-    GetGuildRosterInfo = function()
-      return 'Moo-Realm', 'Member', 1  -- UNIMPLEMENTED
-    end,
-    GetGuildRosterMOTD = function()
-      return ''  -- UNIMPLEMENTED
-    end,
-    GetInventoryItemCooldown = function()
-      return 0, 0, 0  -- UNIMPLEMENTED
-    end,
     GetInventorySlotInfo = (function()
       local t = {
         ammoslot = 0,
@@ -1481,18 +1452,6 @@ local function mkWowEnv(api, loader)
     GetSkillLineInfo = function()
       return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
     end,
-    GetSpecializationInfo = function()  -- UNIMPLEMENTED
-      return 1, 'SpecName'
-    end,
-    GetSpecializationRole = function()
-      return 'DAMAGER'  -- UNIMPLEMENTED
-    end,
-    GetSpellTabInfo = function()
-      return 'moo', 0, 0, 0  -- UNIMPLEMENTED
-    end,
-    GetSummonFriendCooldown = function()
-      return 0, 0  -- UNIMPLEMENTED
-    end,
     GetTalentInfo = function()
       return nil, nil, nil, nil, 0  -- UNIMPLEMENTED
     end,
@@ -1525,9 +1484,6 @@ local function mkWowEnv(api, loader)
       loader.loadAddon(name)
       return true
     end,
-    Kiosk = {
-      IsEnabled = UNIMPLEMENTED,
-    },
     RunMacroText = function(s)
       for _, line in ipairs({util.strsplit('\n', s)}) do
         api.SendEvent('EXECUTE_CHAT_LINE', line)
@@ -1548,24 +1504,6 @@ local function mkWowEnv(api, loader)
       else
         return func(...)
       end
-    end,
-    UnitFactionGroup = function()
-      return 'Horde', 'Horde'
-    end,
-    UnitGroupRolesAssigned = function()
-      return 'DAMAGER'  -- UNIMPLEMENTED
-    end,
-    UnitName = function()
-      return 'Unitname'  -- UNIMPLEMENTED
-    end,
-    UnitPowerType = function()
-      return 0, 'MANA'  -- UNIMPLEMENTED
-    end,
-    UnitRace = function()
-      return 'Human', 'Human', 1  -- UNIMPLEMENTED
-    end,
-    UnitResistance = function()
-      return 0, 0, 0, 0
     end,
   }
 end
