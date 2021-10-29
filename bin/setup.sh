@@ -4,6 +4,7 @@ python3 -m pip install -t .lua hererocks
 PYTHONPATH=.lua .lua/bin/hererocks -l 5.1 -r 3.5.0 .lua
 eval $(.lua/bin/luarocks path)
 .lua/bin/luarocks install luacheck
+.lua/bin/luarocks install wowapi/wowapi-scm-0.rockspec
 .lua/bin/luarocks build --only-deps
 for p in wow wowt wow_classic wow_classic_era wow_classic_era_ptr wow_classic_ptr; do
   d="extracts/$p"
