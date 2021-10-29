@@ -1603,69 +1603,6 @@ local function mkWowEnv(api, loader)
     GetItemSubClassInfo = function(classID, subClassID)
       return string.format('ItemClass%dSubClass%d', classID, subClassID)
     end,
-    GetLocale = function()
-      return 'enUS'  -- UNIMPLEMENTED
-    end,
-    GetLootMethod = function()
-      return 'freeforall'  -- UNIMPLEMENTED
-    end,
-    GetMirrorTimerInfo = function()
-      return 'UNKNOWN'  -- UNIMPLEMENTED
-    end,
-    GetNetStats = function()
-      return 1, 1, 1, 1  -- UNIMPLEMENTED
-    end,
-    GetNumAddOns = function()
-      return 0  -- UNIMPLEMENTED
-    end,
-    GetNumCompletedAchievements = function()
-      return 1, 1  -- UNIMPLEMENTED
-    end,
-    GetNumGuildMembers = function()
-      return 0, 0, 0  -- UNIMPLEMENTED
-    end,
-    GetNumQuestLeaderBoards = function()
-      return 0  -- UNIMPLEMENTED
-    end,
-    GetNumQuestLogEntries = function()
-      return 1, 1  -- UNIMPLEMENTED
-    end,
-    GetNumQuestWatches = function()
-      return 0  -- UNIMPLEMENTED
-    end,
-    GetPhysicalScreenSize = function()
-      return 1024, 768
-    end,
-    GetPVPRankInfo = function()
-      return 'Pariah', 0  -- UNIMPLEMENTED
-    end,
-    GetQuestLogChoiceInfo = function()
-      return 'moo', 1, 1, 1, false  -- UNIMPLEMENTED
-    end,
-    GetQuestLogRewardInfo = function()
-      return 'moo', 1, 1, 1, false, 1, 1  -- UNIMPLEMENTED
-    end,
-    GetQuestLogTitle = function()
-      return 'moo', 1  -- UNIMPLEMENTED
-    end,
-    GetRealmName = function()
-      return 'Realm'  -- UNIMPLEMENTED
-    end,
-    GetRealZoneText = function()
-      return 'RealZoneText'  -- UNIMPLEMENTED
-    end,
-    GetReleaseTimeRemaining = function()
-      return 0  -- UNIMPLEMENTED
-    end,
-    GetRestrictedAccountData = function()
-      local rLevel = 20
-      local rMoney = 10000000
-      local profCap = 0
-      return rLevel, rMoney, profCap
-    end,
-    GetRestState = function()
-      return 2, 'Normal', 1  -- UNIMPLEMENTED
-    end,
     GetSkillLineInfo = function()
       return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
     end,
@@ -1761,7 +1698,7 @@ end
 local function init(api, loader)
   setmetatable(api.env, mkMetaEnv(api))
   Mixin(api.env, mkBaseEnv())
-  util.recursiveMixin(api.env, require('wowapi').loadFunctions('wowapi/api'), true)
+  util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions('wowapi/api'), true)
   util.recursiveMixin(api.env, mkWowEnv(api, loader), true)
   Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api, loader))
 end
