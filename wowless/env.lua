@@ -1363,15 +1363,6 @@ local function mkWowEnv(api, loader)
     GetCursorPosition = function()
       return 0, 0  -- UNIMPLEMENTED
     end,
-    GetCVar = loader.version == 'Vanilla' and function(name)
-      return api.env.C_CVar.GetCVar(name)
-    end or nil,
-    GetCVarBool = loader.version == 'Vanilla' and function(name)
-      return api.env.C_CVar.GetCVarBool(name)
-    end or nil,
-    GetCVarDefault = loader.version == 'Vanilla' and function(name)
-      return api.env.C_CVar.GetCVarDefault(name)
-    end or nil,
     GetDefaultLanguage = function()
       return 'Common', 7  -- UNIMPLEMENTED
     end,
