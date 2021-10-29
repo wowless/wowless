@@ -1282,12 +1282,6 @@ local function mkWowEnv(api, loader)
     return api.CreateUIObject(ltype, name, parent, nil, unpack(templates))
   end
   return {
-    BNGetNumFriendInvites = function()
-      return 0  -- UNIMPLEMENTED
-    end,
-    BNGetNumFriends = function()
-      return 0, 0  -- UNIMPLEMENTED
-    end,
     BreakUpLargeNumbers = tostring,  -- UNIMPLEMENTED,
     CastingInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     ChannelInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
@@ -1297,26 +1291,11 @@ local function mkWowEnv(api, loader)
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
     C_AdventureMap = {},
-    GetActionCooldown = function()
-      return 0, 0, 0  -- UNIMPLEMENTED
-    end,
     GetAddOnMetadata = function(addon, field)
       return ('addonmetadata:%s:%s'):format(addon, field)  -- UNIMPLEMENTED
     end,
     GetArchaeologyRaceInfo = function()
       return 'Name', nil, nil, 0, 0  -- UNIMPLEMENTED
-    end,
-    GetArenaOpponentSpec = function()
-      return 0, 0  -- UNIMPLEMENTED
-    end,
-    GetAverageItemLevel = function()
-      return 1, 1, 1  -- UNIMPLEMENTED
-    end,
-    GetBagName = function()
-      return 'BagName'  -- UNIMPLEMENTED
-    end,
-    GetBindingText = function()
-      return ''  -- UNIMPLEMENTED
     end,
     GetBuildInfo = function()
       local versions = {
@@ -1328,21 +1307,6 @@ local function mkWowEnv(api, loader)
     end,
     GetChatWindowInfo = function(idx)
       return '', 10, 1, 1, 1, 1, 1, 1, idx  -- UNIMPLEMENTED
-    end,
-    GetContainerItemCooldown = function()
-      return 0, 0, 0  -- UNIMPLEMENTED
-    end,
-    GetCurrentRegion = function()
-      return 1  -- UNIMPLEMENTED
-    end,
-    GetCurrentScaledResolution = function()
-      return 1024, 768  -- UNIMPLEMENTED
-    end,
-    GetCursorPosition = function()
-      return 0, 0  -- UNIMPLEMENTED
-    end,
-    GetDefaultLanguage = function()
-      return 'Common', 7  -- UNIMPLEMENTED
     end,
     geterrorhandler = function()
       return api.ErrorHandler  -- UNIMPLEMENTED
