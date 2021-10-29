@@ -1389,9 +1389,6 @@ local function mkWowEnv(api, loader)
     GetText = function(token)
       return 'GetText(' .. token .. ')'  -- UNIMPLEMENTED
     end,
-    GuildRoster = function()
-      return api.env.C_GuildInfo.GuildRoster()
-    end,
     hooksecurefunc = function(arg1, arg2, arg3)
       local tbl, name, fn
       if arg3 ~= nil then
