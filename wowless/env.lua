@@ -1297,14 +1297,6 @@ local function mkWowEnv(api, loader)
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
     C_AdventureMap = {},
-    C_AzeriteEssence = {
-      GetMilestones = function()  -- UNIMPLEMENTED
-        -- Need to include at least one "slot" milestone to prevent UI errors.
-        return {
-          { slot = 1 },
-        }
-      end,
-    },
     C_CharacterServices = {
       GetCharacterServiceDisplayData = function()  -- UNIMPLEMENTED
         return {
@@ -1423,20 +1415,6 @@ local function mkWowEnv(api, loader)
     C_QuestLog = {
       GetBountySetInfoForMapID = function()
         return 0, 0, 0  -- UNIMPLEMENTED
-      end,
-    },
-    C_UIWidgetManager = {
-      GetBelowMinimapWidgetSetID = function()
-        return 2
-      end,
-      GetTopCenterWidgetSetID = function()
-        return 1
-      end,
-      GetWidgetSetInfo = function()
-        return {
-          layoutDirection = 0,
-          verticalPadding = 0,
-        }
       end,
     },
     C_Widget = {
