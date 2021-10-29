@@ -1297,28 +1297,6 @@ local function mkWowEnv(api, loader)
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
     C_AdventureMap = {},
-    C_CharacterServices = {
-      GetCharacterServiceDisplayData = function()  -- UNIMPLEMENTED
-        return {
-          popupInfo = {},
-        }
-      end,
-    },
-    C_LFGList = {
-      GetNumApplications = function()
-        return 0, 0  -- UNIMPLEMENTED
-      end,
-    },
-    C_LootHistory = {
-      GetPlayerInfo = function()
-        return 'moo', 'WARRIOR'  -- UNIMPLEMENTED
-      end,
-    },
-    C_Widget = {
-      IsFrameWidget = function()
-        return true  -- UNIMPLEMENTED
-      end,
-    },
     GetActionCooldown = function()
       return 0, 0, 0  -- UNIMPLEMENTED
     end,
