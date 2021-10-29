@@ -1283,8 +1283,6 @@ local function mkWowEnv(api, loader)
   end
   return {
     BreakUpLargeNumbers = tostring,  -- UNIMPLEMENTED,
-    CastingInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
-    ChannelInfo = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     CreateFont = function(name)
       return api.CreateUIObject('font', name)
     end,
@@ -1391,7 +1389,6 @@ local function mkWowEnv(api, loader)
     GetText = function(token)
       return 'GetText(' .. token .. ')'  -- UNIMPLEMENTED
     end,
-    GetTrackingTexture = loader.version == 'Vanilla' and UNIMPLEMENTED or nil,
     GuildRoster = function()
       return api.env.C_GuildInfo.GuildRoster()
     end,
@@ -1444,7 +1441,7 @@ end
 local function init(api, loader)
   setmetatable(api.env, mkMetaEnv(api))
   Mixin(api.env, mkBaseEnv())
-  util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions('wowapi/api'), true)
+  util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions('wowapi/api', loader.version), true)
   util.recursiveMixin(api.env, mkWowEnv(api, loader), true)
   Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api, loader))
 end
