@@ -1289,9 +1289,6 @@ local function mkWowEnv(api, loader)
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
     C_AdventureMap = {},
-    GetAddOnMetadata = function(addon, field)
-      return ('addonmetadata:%s:%s'):format(addon, field)  -- UNIMPLEMENTED
-    end,
     GetArchaeologyRaceInfo = function()
       return 'Name', nil, nil, 0, 0  -- UNIMPLEMENTED
     end,
