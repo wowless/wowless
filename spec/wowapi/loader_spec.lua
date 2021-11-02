@@ -1,8 +1,8 @@
-describe('init', function()
-  local wowapi = require('wowapi.loader')
+describe('loader', function()
+  local loader = require('wowapi.loader')
 
   it('loads', function()
-    assert.same('table', type(wowapi.loadFunctions('data/api')))
+    assert.same('table', type(loader.loadFunctions('data/api')))
   end)
 
   describe('argSig', function()
@@ -13,7 +13,24 @@ describe('init', function()
       local s = 'foo'
       local t = {}
       local u = newproxy()
-      assert.same('xbfnstu', wowapi.argSig('name', nil, b, f, n, s, t, u, nil))
+      assert.same('xbfnstu', loader.argSig('name', nil, b, f, n, s, t, u, nil))
+    end)
+  end)
+
+  describe('getFn', function()
+    it('works with null stub results', function()
+      local api = require('wowapi.yaml').parse([[
+---
+name: Foo
+status: stub
+returns:
+  - null
+  - 42
+  - null
+]])
+      local modules = {}
+      local fn = loader.getFn(api, modules)
+      assert.same({nil, 42, nil}, {fn()})
     end)
   end)
 end)

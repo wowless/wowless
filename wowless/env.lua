@@ -1289,9 +1289,6 @@ local function mkWowEnv(api, loader)
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
     C_AdventureMap = {},
-    GetArchaeologyRaceInfo = function()
-      return 'Name', nil, nil, 0, 0  -- UNIMPLEMENTED
-    end,
     GetBuildInfo = function()
       local versions = {
         Mainline = { "9.0.2", "36665", "Nov 17 2020", 90002 },
@@ -1369,12 +1366,6 @@ local function mkWowEnv(api, loader)
     end)(),
     GetItemSubClassInfo = function(classID, subClassID)
       return string.format('ItemClass%dSubClass%d', classID, subClassID)
-    end,
-    GetSkillLineInfo = function()
-      return nil, nil, nil, 0, 0, 0, 1  -- UNIMPLEMENTED
-    end,
-    GetTalentInfo = function()
-      return nil, nil, nil, nil, 0  -- UNIMPLEMENTED
     end,
     GetText = function(token)
       return 'GetText(' .. token .. ')'  -- UNIMPLEMENTED

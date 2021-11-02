@@ -1,0 +1,9 @@
+---
+name: GetTalentInfo
+status: stub
+returns:
+  - null
+  - null
+  - null
+  - null
+  - 0
