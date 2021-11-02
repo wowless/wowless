@@ -1,0 +1,5 @@
+---
+name: getfenv
+status: implemented
+module: core
+api: getfenv

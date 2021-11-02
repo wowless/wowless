@@ -1309,13 +1309,6 @@ local function mkWowEnv(api, loader)
     GetFactionInfoByID = function(id)
       return 'faction' .. id, nil, nil, nil, nil, 0  -- UNIMPLEMENTED
     end,
-    getfenv = function(arg)
-      if arg == 0 then
-        return api.env
-      else
-        return getfenv(arg)
-      end
-    end,
     GetInventorySlotInfo = (function()
       local t = {
         ammoslot = 0,

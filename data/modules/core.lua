@@ -2,6 +2,13 @@ local env = ...
 
 return {
   api = {
+    getfenv = function(arg)
+      if arg == 0 then
+        return env
+      else
+        return getfenv(arg)
+      end
+    end,
     hooksecurefunc = function(arg1, arg2, arg3)
       local tbl, name, fn
       if arg3 ~= nil then
