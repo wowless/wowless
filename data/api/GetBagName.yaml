@@ -1,0 +1,5 @@
+---
+name: GetBagName
+status: stub
+returns:
+  - BagName

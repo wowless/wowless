@@ -1,0 +1,7 @@
+---
+name: GetAchievementNumCriteria
+status: unimplemented
+inputs:
+  - s
+  - n
+outputs: n

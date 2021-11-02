@@ -1,0 +1,23 @@
+---
+name: GetAchievementCriteriaInfo
+status: stub
+inputs:
+  - ss
+  - nn
+  - ns
+  - sn
+outputs: snbnnsnnsnbnn
+returns:
+  - '0'
+  - 0
+  - false
+  - 4
+  - 5
+  - Test
+  - 0
+  - 0
+  - '5'
+  - 109
+  - true
+  - 30
+  - 5

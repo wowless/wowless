@@ -1,0 +1,7 @@
+---
+name: C_Map.GetUserWaypointPositionForMap
+status: implemented
+inputs: n
+outputs: t
+module: map
+api: GetUserWaypointPositionForMap

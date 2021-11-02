@@ -1,0 +1,10 @@
+---
+name: secureexecuterange
+status: unimplemented
+inputs:
+  - tf
+  - tfnnn
+  - tfb
+  - tft
+  - tfs
+outputs: n

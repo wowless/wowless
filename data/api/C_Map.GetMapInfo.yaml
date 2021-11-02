@@ -1,0 +1,7 @@
+---
+name: C_Map.GetMapInfo
+status: implemented
+inputs: n
+outputs: t
+module: map
+api: GetMapInfo

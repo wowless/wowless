@@ -1,0 +1,6 @@
+---
+name: GetDefaultLanguage
+status: stub
+returns:
+  - Common
+  - 7

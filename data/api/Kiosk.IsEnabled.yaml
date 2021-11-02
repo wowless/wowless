@@ -1,0 +1,5 @@
+---
+name: Kiosk.IsEnabled
+status: unimplemented
+inputs: ''
+outputs: b

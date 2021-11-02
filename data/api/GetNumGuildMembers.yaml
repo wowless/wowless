@@ -1,0 +1,7 @@
+---
+name: GetNumGuildMembers
+status: stub
+returns:
+  - 0
+  - 0
+  - 0

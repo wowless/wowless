@@ -1,0 +1,9 @@
+---
+name: C_CVar.RegisterCVar
+status: implemented
+inputs:
+  - s
+  - ss
+outputs: ''
+module: cvar
+api: RegisterCVar

@@ -1,0 +1,5 @@
+---
+name: BNGetNumFriendInvites
+status: stub
+returns:
+  - 0

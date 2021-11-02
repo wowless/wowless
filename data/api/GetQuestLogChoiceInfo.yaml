@@ -1,0 +1,9 @@
+---
+name: GetQuestLogChoiceInfo
+status: stub
+returns:
+  - moo
+  - 1
+  - 1
+  - 1
+  - false

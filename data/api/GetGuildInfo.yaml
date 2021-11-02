@@ -1,0 +1,7 @@
+---
+name: GetGuildInfo
+status: stub
+returns:
+  - GuildName
+  - Member
+  - 1

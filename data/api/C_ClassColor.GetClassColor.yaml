@@ -1,0 +1,9 @@
+---
+name: C_ClassColor.GetClassColor
+status: stub
+inputs: s
+outputs: t
+returns:
+  b: 0
+  g: 0
+  r: 0

@@ -1,0 +1,7 @@
+---
+name: C_LFGList.GetFilteredSearchResults
+status: stub
+inputs: ''
+outputs: nt
+returns:
+  - 0

@@ -1,5 +1,6 @@
 return {
   _all = {
+    ['defer-print'] = true,
     verbose = true,
   },
 }

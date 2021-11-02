@@ -1,0 +1,6 @@
+---
+name: GetCurrentScaledResolution
+status: stub
+returns:
+  - 1024
+  - 768

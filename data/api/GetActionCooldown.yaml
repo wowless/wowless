@@ -1,0 +1,7 @@
+---
+name: GetActionCooldown
+status: stub
+returns:
+  - 0
+  - 0
+  - 0

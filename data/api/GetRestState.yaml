@@ -1,0 +1,7 @@
+---
+name: GetRestState
+status: stub
+returns:
+  - 2
+  - Normal
+  - 1

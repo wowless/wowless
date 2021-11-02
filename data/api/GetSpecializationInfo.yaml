@@ -1,0 +1,6 @@
+---
+name: GetSpecializationInfo
+status: stub
+returns:
+  - 1
+  - SpecName

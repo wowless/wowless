@@ -1,0 +1,9 @@
+---
+name: C_AzeriteEssence.GetMilestones
+status: stub
+inputs: ''
+outputs: t
+returns:
+  -
+    -
+      slot: 1

@@ -1,0 +1,6 @@
+---
+name: GetQuestLogTitle
+status: stub
+returns:
+  - moo
+  - 1

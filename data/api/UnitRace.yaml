@@ -1,0 +1,7 @@
+---
+name: UnitRace
+status: stub
+returns:
+  - Human
+  - Human
+  - 1

@@ -1,0 +1,5 @@
+---
+name: GetNumAddOns
+status: stub
+returns:
+  - 0

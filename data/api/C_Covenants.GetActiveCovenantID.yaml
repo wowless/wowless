@@ -1,0 +1,8 @@
+---
+name: C_Covenants.GetActiveCovenantID
+status: unimplemented
+inputs:
+  - ''
+  - t
+  - s
+outputs: n

@@ -1,0 +1,8 @@
+---
+name: UnitClassBase
+status: stub
+inputs: s
+outputs: sn
+returns:
+  - WARRIOR
+  - 1

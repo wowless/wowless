@@ -1,0 +1,5 @@
+---
+name: GetSpecializationRole
+status: stub
+returns:
+  - DAMAGER

@@ -9,6 +9,7 @@ dependencies = {
   'bitlib',
   'libdeflate',
   'lua-path',
+  'lyaml',
   'penlight',
   'serpent',
   'wowcig >= 0.9',

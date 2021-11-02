@@ -18,6 +18,8 @@ jobs:
         path: cache
         key: cache-${{ env.WOWLESS_CACHEKEY_SUFFIX }}
         restore-keys: cache-
+    - name: install deps
+      run: sudo apt-get install -y libyaml-dev
     - name: setup
       run: bin/setup.sh
     - name: test

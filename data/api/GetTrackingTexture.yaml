@@ -1,0 +1,7 @@
+---
+name: GetTrackingTexture
+status: unimplemented
+versions:
+  - Vanilla
+inputs: ''
+outputs: x

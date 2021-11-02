@@ -1,0 +1,6 @@
+---
+name: GetNumQuestLogEntries
+status: stub
+returns:
+  - 1
+  - 1

@@ -1,0 +1,5 @@
+---
+name: GetRealZoneText
+status: stub
+returns:
+  - RealZoneText

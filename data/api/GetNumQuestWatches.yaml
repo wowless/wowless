@@ -1,0 +1,5 @@
+---
+name: GetNumQuestWatches
+status: stub
+returns:
+  - 0

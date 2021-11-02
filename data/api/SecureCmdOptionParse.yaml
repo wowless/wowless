@@ -1,0 +1,5 @@
+---
+name: SecureCmdOptionParse
+status: stub
+inputs: s
+outputs: 's?s?'

@@ -1,0 +1,9 @@
+---
+name: UnitClass
+status: stub
+inputs: s
+outputs: ssn
+returns:
+  - Warrior
+  - WARRIOR
+  - 1

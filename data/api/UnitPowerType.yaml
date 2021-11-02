@@ -1,0 +1,6 @@
+---
+name: UnitPowerType
+status: stub
+returns:
+  - 0
+  - MANA

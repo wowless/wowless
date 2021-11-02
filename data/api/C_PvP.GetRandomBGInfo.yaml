@@ -1,0 +1,8 @@
+---
+name: C_PvP.GetRandomBGInfo
+status: stub
+inputs: ''
+outputs: t
+returns:
+  -
+    minLevel: 0

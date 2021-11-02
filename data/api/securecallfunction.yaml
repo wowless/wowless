@@ -1,0 +1,10 @@
+---
+name: securecallfunction
+status: unimplemented
+inputs:
+  - ft
+  - tf
+  - tfnnn
+  - tfb
+  - tft
+outputs: '?'

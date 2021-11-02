@@ -1,0 +1,13 @@
+---
+name: C_DateAndTime.GetCurrentCalendarTime
+status: stub
+inputs: ''
+outputs: '?'
+returns:
+  -
+    hour: 3
+    minute: 26
+    month: 7
+    monthDay: 15
+    weekday: 5
+    year: 2021

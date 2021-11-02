@@ -1,0 +1,8 @@
+---
+name: C_Soulbinds.GetActiveSoulbindID
+status: unimplemented
+inputs:
+  - ''
+  - t
+  - s
+outputs: n

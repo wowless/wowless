@@ -1,0 +1,7 @@
+---
+name: GetUnitPowerBarInfoByID
+status: stub
+inputs:
+  - n
+  - s
+outputs: t

@@ -1,0 +1,5 @@
+---
+name: GetReleaseTimeRemaining
+status: stub
+returns:
+  - 0

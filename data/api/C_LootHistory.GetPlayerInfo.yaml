@@ -1,0 +1,6 @@
+---
+name: C_LootHistory.GetPlayerInfo
+status: stub
+returns:
+  - moo
+  - WARRIOR

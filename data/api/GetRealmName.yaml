@@ -1,0 +1,5 @@
+---
+name: GetRealmName
+status: stub
+returns:
+  - Realm

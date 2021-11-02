@@ -1,0 +1,7 @@
+---
+name: C_CVar.GetCVarDefault
+status: implemented
+inputs: s
+outputs: x
+module: cvar
+api: GetCVarDefault

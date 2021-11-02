@@ -1,0 +1,6 @@
+---
+name: GetPVPRankInfo
+status: stub
+returns:
+  - Pariah
+  - 0

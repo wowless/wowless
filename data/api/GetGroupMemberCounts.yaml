@@ -1,0 +1,9 @@
+---
+name: GetGroupMemberCounts
+status: stub
+returns:
+  -
+    DAMAGER: 3
+    HEALER: 1
+    NOROLE: 0
+    TANK: 1

@@ -1,3 +1,0 @@
-[submodule "wowapi"]
-	path = wowapi
-	url = https://github.com/lua-wow-tools/wowapi
