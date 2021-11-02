@@ -1,9 +1,7 @@
 ---
 name: C_ClassColor.GetClassColor
-status: stub
+status: implemented
 inputs: s
 outputs: t
-returns:
-  b: 0
-  g: 0
-  r: 0
+module: classcolor
+api: GetClassColor

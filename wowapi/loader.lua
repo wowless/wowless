@@ -132,11 +132,11 @@ local function getFn(api, modules)
   end
 end
 
-local function loadFunctions(dir, version)
+local function loadFunctions(dir, version, env)
   local mods = {}
   for filename in require('lfs').dir(dir .. '/../modules') do
     if filename:sub(-4) == '.lua' then
-      mods[filename:sub(1, -5)] = dofile(dir .. '/../modules/' .. filename)
+      mods[filename:sub(1, -5)] = loadfile(dir .. '/../modules/' .. filename)(env)
     end
   end
   local fns = {}
