@@ -504,6 +504,12 @@ local function loader(api, cfg)
     }
   end
 
+  local alternateVersionNames = {
+    Vanilla = 'Classic',
+    TBC = 'BCC',
+    Mainline = 'Mainline',
+  }
+
   local function resolveToc(tocFile)
     api.log(1, 'resolving %s', tocFile)
     local tocVersion = tocFile:match('_(%a+).toc')
@@ -511,10 +517,18 @@ local function loader(api, cfg)
       api.log(1, '%s already has a version', tocFile)
       return tocFile
     end
-    local versionSpecific = tocFile:sub(1, -5) .. '_' .. version .. '.toc'
-    if path.isfile(versionSpecific) then
-      api.log(1, 'using version specific %s', versionSpecific)
-      return versionSpecific
+    local toTry = {
+      '_' .. version,
+      '-' .. version,
+      '_' .. alternateVersionNames[version],
+      '-' .. alternateVersionNames[version],
+    }
+    for _, try in ipairs(toTry) do
+      local versionSpecific = tocFile:sub(1, -5) .. try .. '.toc'
+      if path.isfile(versionSpecific) then
+        api.log(1, 'using version specific %s', versionSpecific)
+        return versionSpecific
+      end
     end
     if path.isfile(tocFile) then
       api.log(1, 'falling back to %s', tocFile)
