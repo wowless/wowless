@@ -268,6 +268,13 @@ local function mkBaseUIObjectTypes(api, loader)
         SetTargetDistance = UNIMPLEMENTED,
       },
     },
+    ColorSelect = {
+      inherits = {'Frame'},
+      mixin = {
+        GetColorRGB = UNIMPLEMENTED,
+        SetColorRGB = UNIMPLEMENTED,
+      },
+    },
     Cooldown = {
       inherits = {'Frame'},
       mixin = {
