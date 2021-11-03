@@ -447,6 +447,9 @@ local function mkBaseUIObjectTypes(api, loader)
         CreateFontString = function(self, name)
           return api.CreateUIObject('fontstring', name, self)
         end,
+        CreateMaskTexture = function(self)
+          return api.CreateUIObject('masktexture', nil, self)
+        end,
         CreateTexture = function(self, name)
           return api.CreateUIObject('texture', name, self)
         end,
@@ -1195,6 +1198,7 @@ local function mkBaseEnv()
     pcall = pcall,
     PI = math.pi,
     print = print,
+    rad = math.rad,
     random = math.random,
     rawget = rawget,
     rawset = rawset,
@@ -1218,6 +1222,7 @@ local function mkBaseEnv()
       sub = string.sub,
       upper = string.upper,
     },
+    strbyte = string.byte,
     strjoin = util.strjoin,
     strlen = string.len,
     strlenutf8 = string.len, -- NEEDS ACTUAL FUNCTION
