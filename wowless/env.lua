@@ -201,6 +201,7 @@ local function mkBaseUIObjectTypes(api, loader)
         SetEnabled = function(self, value)
           u(self).enabled = not not value
         end,
+        SetFontString = UNIMPLEMENTED,
         SetFormattedText = UNIMPLEMENTED,
         SetHighlightAtlas = function(self, atlas)
           u(self).highlightTexture = toTexture(self, atlas)
