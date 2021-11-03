@@ -1,3 +1,9 @@
 ---
 name: issecurevariable
-status: unimplemented
+status: stub
+inputs:
+  - s
+  - ts
+outputs: b
+returns:
+  - true
