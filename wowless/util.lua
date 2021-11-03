@@ -20,15 +20,33 @@ local function recursiveMixin(t, u, failOnOverwrite)
   return t
 end
 
-local function readfile(filename)
-  local f = assert(io.open(filename:gsub('\\', '/'), 'rb'))
-  local content = f:read('*all')
-  f:close()
-  if content:sub(1, 3) == '\239\187\191' then
-    content = content:sub(4)
+-- Case insensitive in terms of file basenames, not directory names.
+local readfile = (function()
+  local lfs = require('lfs')
+  local path = require('path')
+  local dircache = {}
+  return function(filename)
+    local dirname = path.dirname(path.normalize(filename))
+    local dircontents = dircache[dirname]
+    if not dircontents then
+      dircontents = {}
+      for f in lfs.dir(dirname) do
+        if path.isfile(path.join(dirname, f)) then
+          dircontents[f:lower()] = f
+        end
+      end
+      dircache[dirname] = dircontents
+    end
+    local fn = path.join(dirname, dircontents[path.basename(filename):lower()])
+    local f = assert(io.open(fn:gsub('\\', '/'), 'rb'))
+    local content = f:read('*all')
+    f:close()
+    if content:sub(1, 3) == '\239\187\191' then
+      content = content:sub(4)
+    end
+    return content
   end
-  return content
-end
+end)()
 
 local function strjoin(sep, ...)
   return table.concat({...}, sep)
