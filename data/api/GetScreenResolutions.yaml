@@ -1,0 +1,7 @@
+---
+name: GetScreenResolutions
+status: stub
+inputs: ''
+outputs: t
+returns:
+  - '1024x768'
