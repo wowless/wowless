@@ -1,0 +1,8 @@
+---
+name: CastSpellByName
+status: unimplemented
+inputs:
+  - s
+  - ss
+outputs: ''
+protection: secure

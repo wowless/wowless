@@ -1,0 +1,5 @@
+---
+name: GetInventoryItemCount
+status: unimplemented
+inputs: sn
+outputs: n

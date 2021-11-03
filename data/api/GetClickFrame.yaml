@@ -1,0 +1,5 @@
+---
+name: GetClickFrame
+status: unimplemented
+inputs: s
+outputs: x

@@ -277,6 +277,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         SetCooldown = UNIMPLEMENTED,
         SetDrawBling = UNIMPLEMENTED,
+        SetDrawEdge = UNIMPLEMENTED,
         SetEdgeTexture = function(self, tex)
           u(self).edgeTexture = toTexture(self, tex)
         end,
@@ -630,6 +631,7 @@ local function mkBaseUIObjectTypes(api, loader)
         SetAnchorType = UNIMPLEMENTED,
         SetBackpackToken = UNIMPLEMENTED,
         SetBagItem = UNIMPLEMENTED,
+        SetHyperlink = UNIMPLEMENTED,
         SetInventoryItem = UNIMPLEMENTED,
         SetMinimumWidth = UNIMPLEMENTED,
         SetOwner = function(self, owner)

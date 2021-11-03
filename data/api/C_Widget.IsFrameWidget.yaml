@@ -1,4 +1,6 @@
 ---
 name: C_Widget.IsFrameWidget
-status: unimplemented
+status: stub
 outputs: b
+returns:
+  - true

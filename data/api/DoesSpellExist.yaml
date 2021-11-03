@@ -1,5 +1,5 @@
 ---
-name: UnitIsUnit
+name: DoesSpellExist
 status: unimplemented
-inputs: ss
+inputs: s
 outputs: b

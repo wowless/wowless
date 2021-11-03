@@ -95,7 +95,11 @@ describe('api', function()
             end
           end)
           it('has a valid protection', function()
-            assert.True(t.protection == nil or t.protection == 'hardware')
+            local valid = {
+              hardware = true,
+              secure = true,
+            }
+            assert.True(t.protection == nil or valid[t.protection])
           end)
           it('has valid inputs', function()
             local ty = type(t.inputs)
