@@ -1,5 +1,3 @@
-local env = ...
-
 return {
   api = {
     GetMapInfo = function(uiMapID)
@@ -10,9 +8,6 @@ return {
         name = 'TheMap',
         parentMapID = 0,
       }
-    end,
-    GetUserWaypointPositionForMap = function()
-      return env.Mixin({x=1, y=1}, env.Vector2DMixin)
     end,
   },
 }

@@ -119,6 +119,7 @@ describe('api', function()
             local fields = {
               api = true,
               inputs = true,
+              mixin = true,
               module = true,
               name = true,
               outputs = true,

@@ -1,7 +1,6 @@
 ---
 name: C_ClassColor.GetClassColor
-status: implemented
+status: unimplemented
 inputs: s
 outputs: t
-module: classcolor
-api: GetClassColor
+mixin: ColorMixin

@@ -1,8 +1,8 @@
 local function yamlquote(s)
-  if type(s) == 'string' and (s == '' or s:match('[^a-zA-Z_.-]')) then
-    return '\'' .. s .. '\''
-  else
+  if type(s) ~= 'string' or s:match('^[a-zA-Z][a-zA-Z0-9_.-]*$') then
     return tostring(s)
+  else
+    return '\'' .. s .. '\''
   end
 end
 
@@ -12,6 +12,7 @@ local fieldOrder = {
   'versions',
   'inputs',
   'outputs',
+  'mixin',
   'protected',
   'returns',
   'module',

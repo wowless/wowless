@@ -1,7 +1,6 @@
 ---
 name: C_Map.GetUserWaypointPositionForMap
-status: implemented
+status: unimplemented
 inputs: n
 outputs: t
-module: map
-api: GetUserWaypointPositionForMap
+mixin: Vector2DMixin
