@@ -1,4 +1,5 @@
 ---
-name: GetSpellInfo
+name: GetAddOnMetadata
 status: unimplemented
+inputs: ss
 outputs: s

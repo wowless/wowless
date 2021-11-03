@@ -1,5 +1,5 @@
 ---
-name: UnitGUID
+name: UnitInRaid
 status: unimplemented
 inputs: s
-outputs: s
+outputs: b

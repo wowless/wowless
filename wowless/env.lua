@@ -279,10 +279,12 @@ local function mkBaseUIObjectTypes(api, loader)
         SetCooldown = UNIMPLEMENTED,
         SetDrawBling = UNIMPLEMENTED,
         SetDrawEdge = UNIMPLEMENTED,
+        SetDrawSwipe = UNIMPLEMENTED,
         SetEdgeTexture = function(self, tex)
           u(self).edgeTexture = toTexture(self, tex)
         end,
         SetHideCountdownNumbers = UNIMPLEMENTED,
+        SetReverse = UNIMPLEMENTED,
         SetSwipeColor = UNIMPLEMENTED,
         SetSwipeTexture = function(self, tex)
           u(self).swipeTexture = toTexture(self, tex)
@@ -1061,6 +1063,8 @@ local function mkBaseUIObjectTypes(api, loader)
           ud.min = min
           ud.max = max
         end,
+        SetOrientation = UNIMPLEMENTED,
+        SetReverseFill = UNIMPLEMENTED,
         SetStatusBarColor = UNIMPLEMENTED,
         SetStatusBarTexture = function(self, tex)
           if type(tex) == 'number' then
