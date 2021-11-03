@@ -113,5 +113,5 @@ local dataMT = {
 return function(filename)
   local env = {}
   setfenv(loadfile(filename), env)()
-  return setmetatable(env.TheFlatDumperData or env.WowlessSaverData, dataMT)
+  return setmetatable(env.TheFlatDumperData or env.WowlessSaverData, dataMT), env.TheFlatDumperBuildInfo
 end

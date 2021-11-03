@@ -1289,14 +1289,6 @@ local function mkWowEnv(api, loader)
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
     C_AdventureMap = {},
-    GetBuildInfo = function()
-      local versions = {
-        Mainline = { "9.0.2", "36665", "Nov 17 2020", 90002 },
-        TBC = { "2.5.1", "36665", "Nov 17 2020", 20501 },
-        Vanilla = { "1.13.6", "36665", "Nov 17 2020", 11306 },
-      }
-      return unpack(versions[loader.version])
-    end,
     GetChatWindowInfo = function(idx)
       return '', 10, 1, 1, 1, 1, 1, 1, idx  -- UNIMPLEMENTED
     end,
