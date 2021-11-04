@@ -669,6 +669,9 @@ local function mkBaseUIObjectTypes(api, loader)
         SetShapeshift = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
         SetUnit = UNIMPLEMENTED,
+        SetUnitAura = UNIMPLEMENTED,
+        SetUnitBuff = UNIMPLEMENTED,
+        SetUnitDebuff = UNIMPLEMENTED,
       },
     },
     LayeredRegion = {
@@ -962,6 +965,9 @@ local function mkBaseUIObjectTypes(api, loader)
     },
     Scale = {
       inherits = {'Animation'},
+      mixin = {
+        SetScale = UNIMPLEMENTED,
+      },
     },
     ScriptObject = {
       constructor = function(self)
@@ -1120,6 +1126,7 @@ local function mkBaseUIObjectTypes(api, loader)
       inherits = {'LayeredRegion', 'ParentedObject'},
       mixin = {
         AddMaskTexture = UNIMPLEMENTED,
+        GetAtlas = UNIMPLEMENTED,
         GetTexCoord = function()
           return 0, 0, 0, 0, 0, 0, 0, 0  -- UNIMPLEMENTED
         end,
