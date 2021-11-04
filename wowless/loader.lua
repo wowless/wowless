@@ -85,14 +85,10 @@ local function loader(api, cfg)
               else
                 relativeTo = api.UserData(parent).parent
               end
-              local relativePoint = anchor.relativepoint
+              local relativePoint = anchor.relativepoint or 'CENTER'
               local x = anchor.x or (anchor.offset and anchor.offset.x) or nil
               local y = anchor.y or (anchor.offset and anchor.offset.y) or nil
-              if not relativeTo and not relativePoint then
-                parent:SetPoint(point, x, y)
-              else
-                parent:SetPoint(point, relativeTo, relativePoint, x, y)
-              end
+              parent:SetPoint(point, relativeTo, relativePoint, x, y)
             end
           end,
           animations = function(e, parent)
