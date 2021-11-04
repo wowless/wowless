@@ -326,6 +326,9 @@ local function loader(api, cfg)
             ud.explicitlyProtected = value
             ud.protected = value
           end,
+          text = function(obj, value)
+            getmetatable(obj).__index.SetText(obj, value)
+          end,
         }
 
         local function initKidsMaybeFrames(e, obj, framesFlag)
