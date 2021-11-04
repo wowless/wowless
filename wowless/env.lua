@@ -517,6 +517,9 @@ local function mkBaseUIObjectTypes(api, loader)
         GetMinResize = function(self)
           return u(self).minResizeWidth, u(self).minResizeHeight
         end,
+        GetNumChildren = function(self)
+          return select('#', m(self, 'GetChildren'))
+        end,
         GetRegions = UNIMPLEMENTED,
         IgnoreDepth = UNIMPLEMENTED,
         IsClampedToScreen = function(self)
@@ -576,6 +579,7 @@ local function mkBaseUIObjectTypes(api, loader)
           u(self).isClampedToScreen = not not value
         end,
         SetClampRectInsets = UNIMPLEMENTED,
+        SetClipsChildren = UNIMPLEMENTED,
         SetDontSavePosition = UNIMPLEMENTED,
         SetFixedFrameLevel = loader.version ~= 'Vanilla' and UNIMPLEMENTED or nil,
         SetFixedFrameStrata = loader.version ~= 'Vanilla' and UNIMPLEMENTED or nil,
@@ -719,6 +723,7 @@ local function mkBaseUIObjectTypes(api, loader)
       end,
       inherits = {'UIObject'},
       mixin = {
+        GetDebugName = UNIMPLEMENTED,
         GetParent = function(self)
           return u(self).parent
         end,
@@ -1029,6 +1034,7 @@ local function mkBaseUIObjectTypes(api, loader)
           local ud = u(self)
           return ud.min, ud.max
         end,
+        GetOrientation = UNIMPLEMENTED,
         GetThumbTexture = function(self)
           return u(self).thumbTexture
         end,
@@ -1106,6 +1112,7 @@ local function mkBaseUIObjectTypes(api, loader)
         SetDesaturation = UNIMPLEMENTED,
         SetGradient = UNIMPLEMENTED,
         SetHorizTile = UNIMPLEMENTED,
+        SetRotation = UNIMPLEMENTED,
         SetSnapToPixelGrid = UNIMPLEMENTED,
         SetTexCoord = UNIMPLEMENTED,
         SetTexelSnappingBias = UNIMPLEMENTED,
@@ -1230,6 +1237,7 @@ local function mkBaseEnv()
       match = string.match,
       rep = string.rep,
       sub = string.sub,
+      trim = util.strtrim,
       upper = string.upper,
     },
     strbyte = string.byte,
