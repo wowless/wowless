@@ -434,6 +434,7 @@ local function mkBaseUIObjectTypes(api, loader)
       constructor = function(self)
         table.insert(api.frames, self)
         u(self).attributes = {}
+        u(self).frameIndex = #api.frames
         u(self).frameLevel = 1
         u(self).frameStrata = 'MEDIUM'
         u(self).hyperlinksEnabled = false
@@ -1310,6 +1311,14 @@ local function mkWowEnv(api, loader)
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
     C_AdventureMap = {},
+    EnumerateFrames = function(frame)
+      if frame == nil then
+        return api.frames[1]
+      else
+        local idx = api.UserData(frame).frameIndex
+        return idx ~= #api.frames and api.frames[idx+1] or nil
+      end
+    end,
     GetChatWindowInfo = function(idx)
       return '', 10, 1, 1, 1, 1, 1, 1, idx  -- UNIMPLEMENTED
     end,

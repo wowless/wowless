@@ -1,7 +1,0 @@
----
-name: EnumerateFrames
-status: unimplemented
-inputs:
-  - ''
-  - t
-outputs: x
