@@ -643,6 +643,7 @@ local function mkBaseUIObjectTypes(api, loader)
     GameTooltip = {
       inherits = {'Frame'},
       mixin = {
+        AddDoubleLine = UNIMPLEMENTED,
         AddFontStrings = UNIMPLEMENTED,
         AddLine = UNIMPLEMENTED,
         ClearLines = UNIMPLEMENTED,
@@ -1244,6 +1245,7 @@ local function mkBaseEnv()
     format = stringFormat,
     getmetatable = getmetatable,
     getn = table.getn,
+    gmatch = string.gmatch,
     gsub = string.gsub,
     ipairs = ipairs,
     loadstring = loadstring,
