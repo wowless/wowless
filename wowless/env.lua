@@ -523,7 +523,7 @@ local function mkBaseUIObjectTypes(api, loader)
         GetNumChildren = function(self)
           return select('#', m(self, 'GetChildren'))
         end,
-        GetNumRegions = function(self)
+        GetNumRegions = function()
           return 0  -- UNIMPLEMENTED
         end,
         GetRegions = UNIMPLEMENTED,
