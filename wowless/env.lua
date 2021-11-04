@@ -575,6 +575,7 @@ local function mkBaseUIObjectTypes(api, loader)
           u(self).isClampedToScreen = not not value
         end,
         SetClampRectInsets = UNIMPLEMENTED,
+        SetDontSavePosition = UNIMPLEMENTED,
         SetFixedFrameLevel = loader.version ~= 'Vanilla' and UNIMPLEMENTED or nil,
         SetFixedFrameStrata = loader.version ~= 'Vanilla' and UNIMPLEMENTED or nil,
         SetFrameLevel = function(self, frameLevel)
@@ -1172,6 +1173,7 @@ local function mkBaseEnv()
       bor = bitlib.bor,
     },
     ceil = math.ceil,
+    date = os.date,
     debugstack = debug.traceback,
     error = error,
     floor = math.floor,
