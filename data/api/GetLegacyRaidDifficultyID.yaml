@@ -1,0 +1,7 @@
+---
+name: GetLegacyRaidDifficultyID
+status: unimplemented
+versions:
+  - Mainline
+inputs: ''
+outputs: n

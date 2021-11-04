@@ -1,0 +1,7 @@
+---
+name: GetDungeonDifficultyID
+status: unimplemented
+versions:
+  - Mainline
+inputs: ''
+outputs: n

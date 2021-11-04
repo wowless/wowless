@@ -1,0 +1,7 @@
+---
+name: GetVehicleBarIndex
+status: unimplemented
+versions:
+  - Mainline
+inputs: ''
+outputs: n

@@ -1,0 +1,7 @@
+---
+name: GetDifficultyInfo
+status: unimplemented
+versions:
+  - Mainline
+inputs: n
+outputs: ssbbbbn
