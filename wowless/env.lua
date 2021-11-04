@@ -1176,6 +1176,9 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
       },
     },
+    TabardModel = {
+      inherits = {'PlayerModel'},
+    },
     Texture = {
       inherits = {'LayeredRegion', 'ParentedObject'},
       mixin = {
