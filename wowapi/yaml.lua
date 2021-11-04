@@ -9,6 +9,7 @@ end
 local fieldOrder = {
   'name',
   'status',
+  'comment',
   'versions',
   'inputs',
   'outputs',

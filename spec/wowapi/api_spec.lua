@@ -118,6 +118,7 @@ describe('api', function()
           it('has no extraneous fields', function()
             local fields = {
               api = true,
+              comment = true,
               inputs = true,
               mixin = true,
               module = true,
