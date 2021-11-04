@@ -54,11 +54,11 @@ end
 
 local function strsplit(sep, s, n)
   assert(string.len(sep) == 1)
-  assert(n == nil)
+  n = n or math.huge
   local result = {}
   while true do
     local pos = string.find(s, '%' .. sep)
-    if not pos then
+    if not pos or #result == n-1 then
       table.insert(result, s)
       return unpack(result)
     end
