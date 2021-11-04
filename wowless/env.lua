@@ -88,6 +88,7 @@ local function mkBaseUIObjectTypes(api, loader)
         SetDuration = UNIMPLEMENTED,
         SetOrder = UNIMPLEMENTED,
         SetStartDelay = UNIMPLEMENTED,
+        SetTarget = UNIMPLEMENTED,
       },
     },
     AnimationGroup = {
@@ -646,6 +647,7 @@ local function mkBaseUIObjectTypes(api, loader)
         AddLine = UNIMPLEMENTED,
         ClearLines = UNIMPLEMENTED,
         FadeOut = UNIMPLEMENTED,
+        GetMinimumWidth = STUB_NUMBER,
         GetOwner = function(self)
           return u(self).tooltipOwner
         end,
@@ -719,6 +721,9 @@ local function mkBaseUIObjectTypes(api, loader)
         SetLightPosition = UNIMPLEMENTED,
         SetViewInsets = UNIMPLEMENTED,
       },
+    },
+    MovieFrame = {
+      inherits = {'Frame'},
     },
     OffScreenFrame = {
       inherits = {'Frame'},
@@ -1079,6 +1084,10 @@ local function mkBaseUIObjectTypes(api, loader)
           local ud = u(self)
           return ud.min, ud.max
         end,
+        GetOrientation = UNIMPLEMENTED,
+        GetReverseFill = UNIMPLEMENTED,
+        GetRotatesTexture = UNIMPLEMENTED,
+        GetStatusBarAtlas = UNIMPLEMENTED,
         GetStatusBarTexture = function(self)
           return u(self).statusBarTexture
         end,
@@ -1110,6 +1119,7 @@ local function mkBaseUIObjectTypes(api, loader)
     Texture = {
       inherits = {'LayeredRegion', 'ParentedObject'},
       mixin = {
+        AddMaskTexture = UNIMPLEMENTED,
         GetTexCoord = function()
           return 0, 0, 0, 0, 0, 0, 0, 0  -- UNIMPLEMENTED
         end,
@@ -1211,6 +1221,7 @@ local function mkBaseEnv()
       huge = math.huge,
       max = math.max,
       min = math.min,
+      modf = math.modf,
       pi = math.pi,
       pow = math.pow,
       rad = math.rad,

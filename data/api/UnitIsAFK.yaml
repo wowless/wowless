@@ -1,0 +1,5 @@
+---
+name: UnitIsAFK
+status: unimplemented
+inputs: s
+outputs: z
