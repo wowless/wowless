@@ -524,10 +524,18 @@ local function mkBaseUIObjectTypes(api, loader)
         GetNumChildren = function(self)
           return select('#', m(self, 'GetChildren'))
         end,
-        GetNumRegions = function()
-          return 0  -- UNIMPLEMENTED
+        GetNumRegions = function(self)
+          return select('#', m(self, 'GetRegions'))
         end,
-        GetRegions = UNIMPLEMENTED,
+        GetRegions = function(self)
+          local ret = {}
+          for kid in pairs(u(self).children) do
+            if api.InheritsFrom(u(kid).type, 'layeredregion') then
+              table.insert(ret, kid)
+            end
+          end
+          return unpack(ret)
+        end,
         IgnoreDepth = UNIMPLEMENTED,
         IsClampedToScreen = function(self)
           return u(self).isClampedToScreen
