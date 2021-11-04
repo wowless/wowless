@@ -345,6 +345,7 @@ local function mkBaseUIObjectTypes(api, loader)
         IsMultiLine = function(self)
           return u(self).isMultiLine
         end,
+        SetAltArrowKeyMode = UNIMPLEMENTED,
         SetAutoFocus = function(self, value)
           u(self).isAutoFocus = not not value
         end,
@@ -428,6 +429,7 @@ local function mkBaseUIObjectTypes(api, loader)
         SetNonSpaceWrap = UNIMPLEMENTED,
         SetText = UNIMPLEMENTED,
         SetTextHeight = UNIMPLEMENTED,
+        SetWordWrap = UNIMPLEMENTED,
       },
     },
     Frame = {
@@ -462,6 +464,7 @@ local function mkBaseUIObjectTypes(api, loader)
           return api.CreateUIObject('texture', name, self)
         end,
         DesaturateHierarchy = UNIMPLEMENTED,
+        EnableKeyboard = UNIMPLEMENTED,
         EnableMouse = function(self, value)
           local ud = u(self)
           ud.mouseClickEnabled = not not value
@@ -519,6 +522,9 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         GetNumChildren = function(self)
           return select('#', m(self, 'GetChildren'))
+        end,
+        GetNumRegions = function(self)
+          return 0  -- UNIMPLEMENTED
         end,
         GetRegions = UNIMPLEMENTED,
         IgnoreDepth = UNIMPLEMENTED,
@@ -646,6 +652,7 @@ local function mkBaseUIObjectTypes(api, loader)
         IsOwned = function(self)
           return u(self).tooltipOwner ~= nil
         end,
+        NumLines = STUB_NUMBER,
         SetAction = UNIMPLEMENTED,
         SetAnchorType = UNIMPLEMENTED,
         SetBackpackToken = UNIMPLEMENTED,
@@ -1042,11 +1049,13 @@ local function mkBaseUIObjectTypes(api, loader)
           return u(self).value
         end,
         IsDraggingThumb = UNIMPLEMENTED,
+        IsEnabled = UNIMPLEMENTED,
         SetMinMaxValues = function(self, min, max)
           local ud = u(self)
           ud.min = min
           ud.max = max
         end,
+        SetOrientation = UNIMPLEMENTED,
         SetStepsPerPage = UNIMPLEMENTED,
         SetThumbTexture = function(self, tex)
           u(self).thumbTexture = toTexture(self, tex)
@@ -1083,6 +1092,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         SetOrientation = UNIMPLEMENTED,
         SetReverseFill = UNIMPLEMENTED,
+        SetRotatesTexture = UNIMPLEMENTED,
         SetStatusBarColor = UNIMPLEMENTED,
         SetStatusBarTexture = function(self, tex)
           if type(tex) == 'number' then
@@ -1111,6 +1121,7 @@ local function mkBaseUIObjectTypes(api, loader)
         SetDesaturated = UNIMPLEMENTED,
         SetDesaturation = UNIMPLEMENTED,
         SetGradient = UNIMPLEMENTED,
+        SetGradientAlpha = UNIMPLEMENTED,
         SetHorizTile = UNIMPLEMENTED,
         SetRotation = UNIMPLEMENTED,
         SetSnapToPixelGrid = UNIMPLEMENTED,
