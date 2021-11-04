@@ -1,3 +1,5 @@
 ---
 name: GetMinimapZoneText
 status: unimplemented
+inputs: ''
+outputs: s

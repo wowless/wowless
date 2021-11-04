@@ -1,4 +1,5 @@
 ---
 name: GetActionBarPage
 status: unimplemented
+inputs: ''
 outputs: n

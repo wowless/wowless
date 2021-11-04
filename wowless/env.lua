@@ -174,7 +174,9 @@ local function mkBaseUIObjectTypes(api, loader)
         GetPushedTexture = function(self)
           return u(self).pushedTexture
         end,
-        GetText = UNIMPLEMENTED,
+        GetText = function(self)
+          return m(u(self).fontstring, 'GetText')
+        end,
         GetTextHeight = STUB_NUMBER,
         GetTextWidth = STUB_NUMBER,
         IsEnabled = function(self)
@@ -231,7 +233,9 @@ local function mkBaseUIObjectTypes(api, loader)
         SetPushedTexture = function(self, tex)
           u(self).pushedTexture = toTexture(self, tex)
         end,
-        SetText = UNIMPLEMENTED,
+        SetText = function(self, text)
+          m(u(self).fontstring, 'SetText', text)
+        end,
         UnlockHighlight = UNIMPLEMENTED,
       },
     },
@@ -422,13 +426,25 @@ local function mkBaseUIObjectTypes(api, loader)
         GetStringHeight = STUB_NUMBER,
         GetStringWidth = STUB_NUMBER,
         GetUnboundedStringWidth = STUB_NUMBER,
-        GetText = UNIMPLEMENTED,
+        GetText = function(self)
+          return u(self).text
+        end,
         GetWrappedWidth = STUB_NUMBER,
         IsTruncated = UNIMPLEMENTED,
         SetFormattedText = UNIMPLEMENTED,
         SetMaxLines = UNIMPLEMENTED,
         SetNonSpaceWrap = UNIMPLEMENTED,
-        SetText = UNIMPLEMENTED,
+        SetText = function(self, text)
+          if type(text) == 'function' then
+            -- TODO fix issues for ChatConfigFrame then change to func()
+            text = ''
+          end
+          if text == nil then
+            text = ''
+          end
+          assert(type(text) == 'string' or type(text) == 'number')
+          u(self).text = tostring(text)
+        end,
         SetTextHeight = UNIMPLEMENTED,
         SetWordWrap = UNIMPLEMENTED,
       },
@@ -465,6 +481,7 @@ local function mkBaseUIObjectTypes(api, loader)
           return api.CreateUIObject('texture', name, self)
         end,
         DesaturateHierarchy = UNIMPLEMENTED,
+        DisableDrawLayer = UNIMPLEMENTED,
         EnableKeyboard = UNIMPLEMENTED,
         EnableMouse = function(self, value)
           local ud = u(self)
