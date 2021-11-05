@@ -1,0 +1,5 @@
+---
+name: GetNumDisplayChannels
+status: unimplemented
+inputs: ''
+outputs: n

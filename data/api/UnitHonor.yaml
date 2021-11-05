@@ -1,0 +1,7 @@
+---
+name: UnitHonor
+status: unimplemented
+versions:
+  - Mainline
+inputs: s
+outputs: n

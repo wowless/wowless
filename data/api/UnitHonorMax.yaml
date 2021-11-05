@@ -1,0 +1,7 @@
+---
+name: UnitHonorMax
+status: unimplemented
+versions:
+  - Mainline
+inputs: s
+outputs: n
