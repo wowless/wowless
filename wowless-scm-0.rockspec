@@ -16,18 +16,19 @@ dependencies = {
   'xml2lua',
 }
 build = {
-  type = 'none',
+  type = 'builtin',
   install = {
     bin = { wowless = 'wowless.lua' },
-    lua = {
-      ['wowless.api'] = 'wowless/api.lua',
-      ['wowless.env'] = 'wowless/env.lua',
-      ['wowless.loader'] = 'wowless/loader.lua',
-      ['wowless.runner'] = 'wowless/runner.lua',
-      ['wowless.util'] = 'wowless/util.lua',
-      ['wowless.wowapi'] = 'wowless/wowapi.lua',
-      ['wowless.xml'] = 'wowless/xml.lua',
-      ['wowless.xmllang'] = 'wowless/xmllang.lua',
-    },
+  },
+  modules = {
+    ['wowapi.loader'] = 'wowapi/loader.lua',
+    ['wowapi.yaml'] = 'wowapi/yaml.lua',
+    ['wowless.api'] = 'wowless/api.lua',
+    ['wowless.env'] = 'wowless/env.lua',
+    ['wowless.loader'] = 'wowless/loader.lua',
+    ['wowless.runner'] = 'wowless/runner.lua',
+    ['wowless.util'] = 'wowless/util.lua',
+    ['wowless.xml'] = 'wowless/xml.lua',
+    ['wowless.xmllang'] = 'wowless/xmllang.lua',
   },
 }
