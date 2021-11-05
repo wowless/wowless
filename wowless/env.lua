@@ -1411,6 +1411,9 @@ local function mkWowEnv(api, loader)
         return idx ~= #api.frames and api.frames[idx+1] or nil
       end
     end,
+    GetAddOnMetadata = function(addon, key)
+      return loader.getAddOnMetadata(addon, key)
+    end,
     GetChatWindowInfo = function(idx)
       return '', 10, 1, 1, 1, 1, 1, 1, idx  -- UNIMPLEMENTED
     end,

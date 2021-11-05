@@ -569,6 +569,7 @@ local function loader(api, cfg)
   end
 
   local loaded = {}
+  local addonToToc = {}
   local function doLoad(tocFile, addonName)
     if not loaded[tocFile] then
       local toc = parseToc(tocFile)
@@ -576,10 +577,18 @@ local function loader(api, cfg)
         for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
           doLoad(resolveToc(string.format('%s/AddOns/%s/%s.toc', rootDir, dep, dep)))
         end
+        if addonName then
+          addonToToc[addonName] = toc
+        end
         loadToc(tocFile, addonName)
         loaded[tocFile] = true
       end
     end
+  end
+
+  local function getAddOnMetadata(addon, key)
+    local toc = addonToToc[addon]
+    return toc and toc.attrs[key] or nil
   end
 
   local function loadFrameXml()
@@ -629,6 +638,7 @@ local function loader(api, cfg)
   end
 
   return {
+    getAddOnMetadata = getAddOnMetadata,
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
     loadToc = loadToc,
