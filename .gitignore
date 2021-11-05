@@ -2,3 +2,5 @@
 cache
 extracts
 .vscode
+wowless/*.o
+wowless/*.so

@@ -1,4 +1,5 @@
 local bitlib = require('bit')
+local extformat = require('wowless.ext').format
 local util = require('wowless.util')
 local Mixin = util.mixin
 
@@ -1249,7 +1250,7 @@ local function stringFormat(fmt, ...)
   for i, arg in ipairs(args) do
     fmt = fmt:gsub('%%' .. i .. '%$', arg)
   end
-  return string.format(fmt, ...)
+  return extformat(fmt, ...)
 end
 
 local function mkBaseEnv()

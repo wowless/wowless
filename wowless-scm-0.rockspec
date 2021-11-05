@@ -25,6 +25,7 @@ build = {
     ['wowapi.yaml'] = 'wowapi/yaml.lua',
     ['wowless.api'] = 'wowless/api.lua',
     ['wowless.env'] = 'wowless/env.lua',
+    ['wowless.ext'] = 'wowless/ext.c',
     ['wowless.loader'] = 'wowless/loader.lua',
     ['wowless.runner'] = 'wowless/runner.lua',
     ['wowless.util'] = 'wowless/util.lua',
