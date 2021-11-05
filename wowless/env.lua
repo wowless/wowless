@@ -1278,8 +1278,6 @@ local function mkBaseEnv()
     gmatch = string.gmatch,
     gsub = string.gsub,
     ipairs = ipairs,
-    loadstring = loadstring,
-    loadstring_untainted = loadstring,
     math = {
       abs = math.abs,
       ceil = math.ceil,
@@ -1503,6 +1501,12 @@ local function mkWowEnv(api, loader)
       assert(name)
       loader.loadAddon(name)
       return true
+    end,
+    loadstring = function(str, name)
+      return setfenv(loadstring(str, name), api.env)
+    end,
+    loadstring_untainted = function(...)
+      return api.env.loadstring(...)
     end,
     RunMacroText = function(s)
       for _, line in ipairs({util.strsplit('\n', s)}) do
