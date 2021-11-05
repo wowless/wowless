@@ -435,15 +435,10 @@ local function mkBaseUIObjectTypes(api, loader)
         SetMaxLines = UNIMPLEMENTED,
         SetNonSpaceWrap = UNIMPLEMENTED,
         SetText = function(self, text)
-          if type(text) == 'function' then
-            -- TODO fix issues for ChatConfigFrame then change to func()
-            text = ''
+          if type(text) == 'number' then
+            text = tostring(text)
           end
-          if text == nil then
-            text = ''
-          end
-          assert(type(text) == 'string' or type(text) == 'number')
-          u(self).text = tostring(text)
+          u(self).text = type(text) == 'string' and text or nil
         end,
         SetTextHeight = UNIMPLEMENTED,
         SetWordWrap = UNIMPLEMENTED,

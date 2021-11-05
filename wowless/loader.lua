@@ -327,7 +327,7 @@ local function loader(api, cfg)
             ud.protected = value
           end,
           text = function(obj, value)
-            getmetatable(obj).__index.SetText(obj, api.env[value])
+            getmetatable(obj).__index.SetText(obj, api.env[value] or value)
           end,
         }
 
