@@ -11,17 +11,17 @@
 /* macro to `unsign' a character */
 #define uchar(c)        ((unsigned char)(c))
 
-#define L_ESC		'%'
+#define L_ESC  '%'
 
 /* maximum size of each formatted item (> len(format('%99.99f', -1e308))) */
-#define MAX_ITEM	512
+#define MAX_ITEM 512
 /* valid flags in a format specification */
-#define FLAGS	"-+ #0"
+#define FLAGS "-+ #0"
 /*
 ** maximum size of each format specification (such as '%-099.99d')
 ** (+10 accounts for %99.99x plus margin of error)
 */
-#define MAX_FORMAT	(sizeof(FLAGS) + sizeof(LUA_INTFRMLEN) + 10)
+#define MAX_FORMAT (sizeof(FLAGS) + sizeof(LUA_INTFRMLEN) + 10)
 
 static void addquoted(lua_State *L, luaL_Buffer *b, int arg) {
   size_t l;
@@ -118,7 +118,7 @@ static int wowless_ext_format(lua_State *L) {
           break;
         }
         case 'e':  case 'E': case 'f':
-		case 'F':  /* wowless */
+        case 'F':  /* wowless */
         case 'g': case 'G': {
           sprintf(buff, form, (double)luaL_checknumber(L, arg));
           break;
