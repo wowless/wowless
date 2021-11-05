@@ -1,5 +1,7 @@
 ---
 name: UnitGUID
-status: unimplemented
+status: stub
 inputs: s
 outputs: s
+returns:
+  - Player-1096-06DF65C1

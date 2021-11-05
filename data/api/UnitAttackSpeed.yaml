@@ -1,0 +1,5 @@
+---
+name: UnitAttackSpeed
+status: unimplemented
+inputs: s
+outputs: nn

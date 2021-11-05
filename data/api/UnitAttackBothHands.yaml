@@ -1,0 +1,8 @@
+---
+name: UnitAttackBothHands
+status: unimplemented
+versions:
+  - TBC
+  - Vanilla
+inputs: s
+outputs: nnnn

@@ -668,6 +668,7 @@ local function mkBaseUIObjectTypes(api, loader)
         AddLine = UNIMPLEMENTED,
         ClearLines = UNIMPLEMENTED,
         FadeOut = UNIMPLEMENTED,
+        GetAnchorType = UNIMPLEMENTED,
         GetMinimumWidth = STUB_NUMBER,
         GetOwner = function(self)
           return u(self).tooltipOwner

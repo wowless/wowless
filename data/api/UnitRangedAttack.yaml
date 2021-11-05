@@ -1,0 +1,5 @@
+---
+name: UnitRangedAttack
+status: unimplemented
+inputs: s
+outputs: nn
