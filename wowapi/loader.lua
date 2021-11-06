@@ -99,15 +99,6 @@ local argSig = (function()
   end
 end)()
 
-local function checkSig(fn, apisigs, fsig)
-  for _, x in ipairs(apisigs) do
-    if fsig == x then
-      return
-    end
-  end
-  error(('invalid arguments to %q, expected one of {%s}, got %q'):format(fn, table.concat(apisigs, ', '), fsig))
-end
-
 local function unpackReturns(r)
   local ret = {}
   for i, v in ipairs(r) do
@@ -148,16 +139,21 @@ local function loadFunctions(dir, version, env)
       if api.inputs == nil then
         return bfn
       end
-      local inputs = api.inputs
-      if type(inputs) == 'string' then
-        inputs = {inputs}
+      local apisigs = api.inputs
+      if type(apisigs) == 'string' then
+        apisigs = {apisigs}
       end
-      if type(inputs) ~= 'table' then
+      if type(apisigs) ~= 'table' then
         error(('invalid inputs type on %q'):format(fn))
       end
       return function(...)
-        checkSig(fn, inputs, argSig(fn, ...))
-        return bfn(...)
+        local fsig = argSig(fn, ...)
+        for _, x in ipairs(apisigs) do
+          if fsig == x then
+            return bfn(...)
+          end
+        end
+        error(('invalid arguments to %q, expected one of {%s}, got %q'):format(fn, table.concat(apisigs, ', '), fsig))
       end
     end)()
     local dot = fn:find('%.')
