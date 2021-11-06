@@ -99,18 +99,13 @@ local argSig = (function()
   end
 end)()
 
-local function checkSig(fn, apisig, fsig)
-  if type(apisig) == 'string' then
-    assert(fsig == apisig, ('invalid arguments to %q, expected %q, got %q'):format(fn, apisig, fsig))
-  elseif type(apisig) == 'table' then
-    local ok = false
-    for _, x in ipairs(apisig) do
-      ok = ok or fsig == x
+local function checkSig(fn, apisigs, fsig)
+  for _, x in ipairs(apisigs) do
+    if fsig == x then
+      return
     end
-    assert(ok, ('invalid arguments to %q, expected one of {%s}, got %q'):format(fn, table.concat(apisig, ', '), fsig))
-  else
-    error(('invalid inputs type on %q'):format(fn))
   end
+  error(('invalid arguments to %q, expected one of {%s}, got %q'):format(fn, table.concat(apisigs, ', '), fsig))
 end
 
 local function unpackReturns(r)
@@ -149,10 +144,22 @@ local function loadFunctions(dir, version, env)
   local fns = {}
   for fn, api in pairs(loadApis(dir, version)) do
     local bfn = getFn(api, mods, env)
-    local impl = not api.inputs and bfn or function(...)
-      checkSig(fn, api.inputs, argSig(fn, ...))
-      return bfn(...)
-    end
+    local impl = (function()
+      if api.inputs == nil then
+        return bfn
+      end
+      local inputs = api.inputs
+      if type(inputs) == 'string' then
+        inputs = {inputs}
+      end
+      if type(inputs) ~= 'table' then
+        error(('invalid inputs type on %q'):format(fn))
+      end
+      return function(...)
+        checkSig(fn, inputs, argSig(fn, ...))
+        return bfn(...)
+      end
+    end)()
     local dot = fn:find('%.')
     if dot then
       local p = fn:sub(1, dot-1)
