@@ -1,0 +1,11 @@
+---
+name: EnableAddOn
+status: unimplemented
+inputs:
+  - n
+  - ns
+  - nb
+  - s
+  - ss
+  - sb
+outputs: ''
