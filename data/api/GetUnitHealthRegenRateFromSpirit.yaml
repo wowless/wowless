@@ -1,0 +1,5 @@
+---
+name: GetUnitHealthRegenRateFromSpirit
+status: unimplemented
+inputs: s
+outputs: n

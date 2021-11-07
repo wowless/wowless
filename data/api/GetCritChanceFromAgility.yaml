@@ -1,0 +1,5 @@
+---
+name: GetCritChanceFromAgility
+status: unimplemented
+inputs: s
+outputs: n

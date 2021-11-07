@@ -1,0 +1,5 @@
+---
+name: GetUnitManaRegenRateFromSpirit
+status: unimplemented
+inputs: s
+outputs: n

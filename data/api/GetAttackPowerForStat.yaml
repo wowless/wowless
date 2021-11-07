@@ -1,0 +1,5 @@
+---
+name: GetAttackPowerForStat
+status: unimplemented
+inputs: nn
+outputs: n

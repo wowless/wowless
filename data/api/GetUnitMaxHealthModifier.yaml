@@ -1,0 +1,5 @@
+---
+name: GetUnitMaxHealthModifier
+status: unimplemented
+inputs: s
+outputs: n

@@ -1,12 +1,16 @@
 local cvarDefaults = {
   cameraSmoothStyle = '0',
   cameraSmoothTrackingStyle = '0',
+  chatStyle = 'classic',
+  lastTalkedToGM = '',
   NamePlateClassificationScale = '1',
   NamePlateHorizontalScale = '1',
   nameplateMotion = '0',
   NamePlateVerticalScale = '1',
+  partyBackgroundOpacity = '1',
   remoteTextToSpeechVoice = '1',
   timeMgrAlarmTime = '0',
+  whisperMode = 'inline',
 }
 
 local cvars = {}
