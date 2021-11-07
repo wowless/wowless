@@ -1,3 +1,7 @@
 ---
 name: GetAchievementInfo
 status: unimplemented
+inputs:
+  - n
+  - nn
+outputs: nsnbnnnsnnsbbsb

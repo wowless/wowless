@@ -1,5 +1,5 @@
 ---
-name: GetClassInfo
+name: GetCategoryInfo
 status: unimplemented
 inputs: n
-outputs: ssn
+outputs: snn

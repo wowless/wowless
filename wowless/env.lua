@@ -277,7 +277,13 @@ local function mkBaseUIObjectTypes(api, loader)
     ColorSelect = {
       inherits = {'Frame'},
       mixin = {
-        GetColorRGB = UNIMPLEMENTED,
+        GetColorHSV = function()
+          return 0, 0, 0
+        end,
+        GetColorRGB = function()
+          return 0, 0, 0
+        end,
+        SetColorHSV = UNIMPLEMENTED,
         SetColorRGB = UNIMPLEMENTED,
       },
     },
@@ -608,6 +614,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         SetClampRectInsets = UNIMPLEMENTED,
         SetClipsChildren = UNIMPLEMENTED,
+        SetDepth = UNIMPLEMENTED,
         SetDontSavePosition = UNIMPLEMENTED,
         SetFixedFrameLevel = loader.version ~= 'Vanilla' and UNIMPLEMENTED or nil,
         SetFixedFrameStrata = loader.version ~= 'Vanilla' and UNIMPLEMENTED or nil,
@@ -652,6 +659,7 @@ local function mkBaseUIObjectTypes(api, loader)
           u(self).isUserPlaced = not not value
         end,
         StartMoving = UNIMPLEMENTED,
+        StopMovingOrSizing = UNIMPLEMENTED,
         UnregisterAllEvents = function(self)
           u(self).registeredAllEvents = false
           util.twipe(u(self).registeredEvents)
@@ -1124,6 +1132,7 @@ local function mkBaseUIObjectTypes(api, loader)
           ud.min = min
           ud.max = max
         end,
+        SetObeyStepOnDrag = UNIMPLEMENTED,
         SetOrientation = UNIMPLEMENTED,
         SetStepsPerPage = UNIMPLEMENTED,
         SetThumbTexture = function(self, tex)
