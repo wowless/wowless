@@ -1,0 +1,7 @@
+---
+name: GetTutorialsEnabled
+status: unimplemented
+versions:
+  - Mainline
+inputs: ''
+outputs: b

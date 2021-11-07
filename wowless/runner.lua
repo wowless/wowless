@@ -19,8 +19,7 @@ local function run(cfg)
   api.isLoggedIn = true
   api.SendEvent('PLAYER_LOGIN')
   api.SendEvent('UPDATE_CHAT_WINDOWS')
-  -- TODO enable the next line
-  -- api.SendEvent('VARIABLES_LOADED')
+  api.SendEvent('VARIABLES_LOADED')
   api.SendEvent('PLAYER_ENTERING_WORLD')
   local clickBlacklist = {
     PVPReadyDialogEnterBattleButton = true,

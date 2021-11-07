@@ -1,0 +1,7 @@
+---
+name: GetPVPRoles
+status: unimplemented
+versions:
+  - Mainline
+inputs: ''
+outputs: bbb

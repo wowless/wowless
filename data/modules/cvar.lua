@@ -8,6 +8,7 @@ local cvarDefaults = {
   nameplateMotion = '0',
   NamePlateVerticalScale = '1',
   partyBackgroundOpacity = '1',
+  spellActivationOverlayOpacity = '1',
   remoteTextToSpeechVoice = '1',
   timeMgrAlarmTime = '0',
   whisperMode = 'inline',
