@@ -1,3 +1,5 @@
 ---
 name: GetAddOnEnableState
 status: unimplemented
+inputs: ss
+outputs: n

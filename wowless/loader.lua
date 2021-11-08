@@ -563,12 +563,19 @@ local function loader(api, cfg)
 
   local loaded = {}
   local addonToToc = {}
+  local loadAddon
   local function doLoad(tocFile, addonName)
     if not loaded[tocFile] then
       local toc = parseToc(tocFile)
       if toc.attrs.AllowLoad ~= 'Glue' then
         for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
-          doLoad(resolveTocDir(string.format('%s/AddOns/%s', rootDir, dep)))
+          loadAddon(dep)
+        end
+        for dep in string.gmatch(toc.attrs.RequiredDeps or '', '[^, ]+') do
+          loadAddon(dep)
+        end
+        for dep in string.gmatch(toc.attrs.Dependencies or '', '[^, ]+') do
+          loadAddon(dep)
         end
         if addonName then
           addonToToc[addonName] = toc
@@ -625,9 +632,21 @@ local function loader(api, cfg)
     otherAddons[path.basename(d)] = d
   end
 
-  local function loadAddon(addonName)
-    local dir = otherAddons[addonName] or path.join(rootDir, 'AddOns', addonName)
-    doLoad(resolveTocDir(dir), addonName)
+  function loadAddon(addonName)
+    local dirs = {
+      path.join('extracts/addons', version, addonName),
+      path.join(rootDir, 'AddOns', addonName),
+    }
+    if otherAddons[addonName] then
+      table.insert(dirs, 1, otherAddons[addonName])
+    end
+    for _, dir in ipairs(dirs) do
+      local tocFile = resolveTocDir(dir)
+      if tocFile then
+        return doLoad(tocFile, addonName)
+      end
+    end
+    error('unable to load ' .. addonName)
   end
 
   return {

@@ -1,8 +1,8 @@
 #!/bin/bash
 eval $(.lua/bin/luarocks path)
 rm -rf extracts/addons
-for id in 13501 267285 334372; do
-  echo Retrieving $id
+for id in 3358 13501 267285 334372 457175; do
+  echo Retrieving curseforge $id
   .lua/bin/lua tools/curseforge.lua $id
 done
 function dotest() {

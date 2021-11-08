@@ -110,6 +110,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         IsPlaying = UNIMPLEMENTED,
         Play = UNIMPLEMENTED,
+        SetLooping = UNIMPLEMENTED,
         SetToFinalAlpha = UNIMPLEMENTED,
         Stop = UNIMPLEMENTED,
       },

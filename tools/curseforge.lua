@@ -12,11 +12,18 @@ local function main(cfid)
   local headers, stream = assert(http_request(url):go())
   assert(headers:get(":status") == "200")
   local cfg = json:decode(assert(stream:get_body_as_string()))
-  table.sort(cfg.latestFiles, function(a, b) return a.id > b.id end)
+  table.sort(cfg.latestFiles, function(a, b)
+    if a.releaseType < b.releaseType then
+      return true
+    elseif a.releaseType > b.releaseType then
+      return false
+    else
+      return a.id > b.id
+    end
+  end)
   for cfFlavor, wowFlavor in pairs(flavors) do
     for _, file in ipairs(cfg.latestFiles) do
       if file.gameVersionFlavor == cfFlavor and
-          file.releaseType == 1 and
           not file.displayName:match('-nolib') and
           not file.isAlternate then
         os.execute(([[
