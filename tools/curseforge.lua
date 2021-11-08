@@ -19,7 +19,12 @@ local function main(cfid)
           file.releaseType == 1 and
           not file.displayName:match('-nolib') and
           not file.isAlternate then
-        print(wowFlavor, file.downloadUrl)
+        os.execute(([[
+          mkdir -p extracts/addons/%s &&
+          cd extracts/addons/%s &&
+          wget "%s" &&
+          unzip -q *.zip
+        ]]):format(wowFlavor, wowFlavor, file.downloadUrl))
         break
       end
     end
