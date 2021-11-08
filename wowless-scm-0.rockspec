@@ -7,6 +7,8 @@ source = {
 dependencies = {
   'lua = 5.1',
   'bitlib',
+  'http',
+  'json-lua',
   'libdeflate',
   'lua-path',
   'lyaml',
