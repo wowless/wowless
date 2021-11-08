@@ -509,31 +509,24 @@ local function loader(api, cfg)
     Mainline = 'Mainline',
   }
 
-  local function resolveToc(tocFile)
-    api.log(1, 'resolving %s', tocFile)
-    local tocVersion = tocFile:match('_(%a+).toc')
-    if tocVersion == version then
-      api.log(1, '%s already has a version', tocFile)
-      return tocFile
-    end
+  local function resolveTocDir(tocDir)
+    api.log(1, 'resolving %s', tocDir)
+    local base = path.basename(tocDir)
     local toTry = {
       '_' .. version,
       '-' .. version,
       '_' .. alternateVersionNames[version],
       '-' .. alternateVersionNames[version],
+      '',
     }
     for _, try in ipairs(toTry) do
-      local versionSpecific = tocFile:sub(1, -5) .. try .. '.toc'
-      if path.isfile(versionSpecific) then
-        api.log(1, 'using version specific %s', versionSpecific)
-        return versionSpecific
+      local tocFile = path.join(tocDir, base .. try .. '.toc')
+      if path.isfile(tocFile) then
+        api.log(1, 'using toc %s', tocFile)
+        return tocFile
       end
     end
-    if path.isfile(tocFile) then
-      api.log(1, 'falling back to %s', tocFile)
-      return tocFile
-    end
-    api.log(1, 'no valid toc for %s', tocFile)
+    api.log(1, 'no valid toc for %s', tocDir)
     return nil
   end
 
@@ -575,7 +568,7 @@ local function loader(api, cfg)
       local toc = parseToc(tocFile)
       if toc.attrs.AllowLoad ~= 'Glue' then
         for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
-          doLoad(resolveToc(string.format('%s/AddOns/%s/%s.toc', rootDir, dep, dep)))
+          doLoad(resolveTocDir(string.format('%s/AddOns/%s', rootDir, dep)))
         end
         if addonName then
           addonToToc[addonName] = toc
@@ -599,7 +592,7 @@ local function loader(api, cfg)
     api.env.Enum.UIMapType.World = 0
     -- End special hack.
     forAddon().loadFile(path.join(rootDir, 'FrameXML/GlobalStrings.lua'))
-    loadToc(resolveToc(path.join(rootDir, 'FrameXML/FrameXML.toc')))
+    loadToc(resolveTocDir(path.join(rootDir, 'FrameXML')))
     local tocFiles = {}
     local addonDir = path.join(rootDir, 'AddOns')
     -- TODO don't force load the rest of the tocs
@@ -610,7 +603,7 @@ local function loader(api, cfg)
       Blizzard_Tutorial = true,  -- conflicts with NewPlayerExperience
     }
     for dir in path.each(addonDir .. '/*', 'n', { skipfiles = true }) do
-      local toc = resolveToc(path.join(addonDir, dir, dir .. '.toc'))
+      local toc = resolveTocDir(path.join(addonDir, dir))
       if toc and not badAddons[dir] then
         table.insert(tocFiles, toc)
       end
@@ -634,7 +627,7 @@ local function loader(api, cfg)
 
   local function loadAddon(addonName)
     local dir = otherAddons[addonName] or path.join(rootDir, 'AddOns', addonName)
-    doLoad(resolveToc(path.join(dir, addonName .. '.toc')), addonName)
+    doLoad(resolveTocDir(dir), addonName)
   end
 
   return {
