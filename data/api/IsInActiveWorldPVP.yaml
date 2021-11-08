@@ -1,0 +1,7 @@
+---
+name: IsInActiveWorldPVP
+status: unimplemented
+inputs:
+  - ''
+  - s
+outputs: z

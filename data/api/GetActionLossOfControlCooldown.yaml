@@ -1,0 +1,5 @@
+---
+name: GetActionLossOfControlCooldown
+status: unimplemented
+inputs: n
+outputs: nn

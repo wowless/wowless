@@ -1,0 +1,7 @@
+---
+name: GetFriendshipReputation
+status: unimplemented
+versions:
+  - Mainline
+inputs: n
+outputs: nnnssnsnn

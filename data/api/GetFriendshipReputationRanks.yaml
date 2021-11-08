@@ -1,0 +1,5 @@
+---
+name: GetFriendshipReputationRanks
+status: unimplemented
+inputs: n
+outputs: nn
