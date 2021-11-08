@@ -1,6 +1,11 @@
 ---
 name: C_ClassColor.GetClassColor
-status: unimplemented
+status: stub
 inputs: s
 outputs: t
 mixin: ColorMixin
+returns:
+  -
+    b: 0
+    g: 0
+    r: 0
