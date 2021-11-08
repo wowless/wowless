@@ -22,8 +22,9 @@ local function main(cfid)
         os.execute(([[
           mkdir -p extracts/addons/%s &&
           cd extracts/addons/%s &&
-          wget "%s" &&
-          unzip -q *.zip
+          wget -q "%s" &&
+          unzip -q *.zip &&
+          rm *.zip
         ]]):format(wowFlavor, wowFlavor, file.downloadUrl))
         break
       end
