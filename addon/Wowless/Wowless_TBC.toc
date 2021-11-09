@@ -1,0 +1,3 @@
+## Interface: 20502
+## SavedVariables: WowlessLog
+Wowless.xml
