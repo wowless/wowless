@@ -1,6 +1,10 @@
 describe('addon #small', function()
   it('writes a log on PLAYER_LOGOUT', function()
-    local api = require('wowless.api').new(function() end)
+    local api = require('wowless.api').new(function(level, ...)
+      if level == 0 then
+        print(string.format(...))
+      end
+    end)
     local loader = require('wowless.loader').loader(api)
     require('wowless.env').init(api, loader)
     loader.loadToc('addon/Wowless/Wowless.toc')
@@ -29,6 +33,7 @@ describe('addon #small', function()
       'OnShow(WowlessLuaFrame,none)',
       'after WowlessLuaFrame',
     }
+    assert.same(0, api.GetErrorCount())
     assert.same(expected, api.env.WowlessLog)
   end)
 end)

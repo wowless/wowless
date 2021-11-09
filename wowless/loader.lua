@@ -132,7 +132,7 @@ local function loader(api, cfg)
             parent:SetBlingTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
           end,
           buttontext = function(e, parent)
-            return loadElement(mixin({}, e, { type = 'fontstring' }), parent)
+            parent:SetFontString(loadElement(mixin({}, e, { type = 'fontstring' }), parent))
           end,
           checkedtexture = function(e, parent)
             -- TODO generalize to all of these

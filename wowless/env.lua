@@ -127,7 +127,6 @@ local function mkBaseUIObjectTypes(api, loader)
         u(self).buttonLocked = false
         u(self).buttonState = 'NORMAL'
         u(self).enabled = true
-        u(self).fontstring = m(self, 'CreateFontString')
         u(self).motionScriptsWhileDisabled = false
         u(self).pushedTextOffsetX = 0
         u(self).pushedTextOffsetY = 0
@@ -159,7 +158,8 @@ local function mkBaseUIObjectTypes(api, loader)
           return u(self).disabledTexture
         end,
         GetFontString = function(self)
-          return u(self).fontstring
+          local fs = u(self).fontstring
+          return fs and u(fs).parent == self and fs or nil
         end,
         GetHighlightTexture = function(self)
           return u(self).highlightTexture
@@ -177,7 +177,8 @@ local function mkBaseUIObjectTypes(api, loader)
           return u(self).pushedTexture
         end,
         GetText = function(self)
-          return m(u(self).fontstring, 'GetText')
+          local fs = u(self).fontstring
+          return fs and u(fs).parent == self and m(fs, 'GetText') or nil
         end,
         GetTextHeight = STUB_NUMBER,
         GetTextWidth = STUB_NUMBER,
@@ -206,7 +207,11 @@ local function mkBaseUIObjectTypes(api, loader)
         SetEnabled = function(self, value)
           u(self).enabled = not not value
         end,
-        SetFontString = UNIMPLEMENTED,
+        SetFontString = function(self, value)
+          u(u(value).parent).fontstring = nil
+          api.SetParent(value, self)
+          u(self).fontstring = value
+        end,
         SetFormattedText = UNIMPLEMENTED,
         SetHighlightAtlas = function(self, atlas)
           u(self).highlightTexture = toTexture(self, atlas)
@@ -236,6 +241,7 @@ local function mkBaseUIObjectTypes(api, loader)
           u(self).pushedTexture = toTexture(self, tex)
         end,
         SetText = function(self, text)
+          u(self).fontstring = u(self).fontstring or m(self, 'CreateFontString')
           m(u(self).fontstring, 'SetText', text)
         end,
         UnlockHighlight = UNIMPLEMENTED,
