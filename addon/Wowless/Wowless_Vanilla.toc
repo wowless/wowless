@@ -1,3 +1,2 @@
 ## Interface: 11401
-## SavedVariables: WowlessLog
 Wowless.xml

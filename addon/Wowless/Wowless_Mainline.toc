@@ -1,3 +1,2 @@
 ## Interface: 90105
-## SavedVariables: WowlessLog
 Wowless.xml
