@@ -286,6 +286,8 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         SetColorHSV = UNIMPLEMENTED,
         SetColorRGB = UNIMPLEMENTED,
+        SetColorWheelTexture = UNIMPLEMENTED,
+        SetColorWheelThumbTexture = UNIMPLEMENTED,
       },
     },
     Cooldown = {
@@ -1096,6 +1098,7 @@ local function mkBaseUIObjectTypes(api, loader)
     SimpleHTML = {
       inherits = {'FontInstance', 'Frame'},
       mixin = {
+        GetContentHeight = STUB_NUMBER,
         SetText = UNIMPLEMENTED,
       },
     },
@@ -1162,6 +1165,7 @@ local function mkBaseUIObjectTypes(api, loader)
         GetReverseFill = UNIMPLEMENTED,
         GetRotatesTexture = UNIMPLEMENTED,
         GetStatusBarAtlas = UNIMPLEMENTED,
+        GetStatusBarColor = UNIMPLEMENTED,
         GetStatusBarTexture = function(self)
           return u(self).statusBarTexture
         end,
