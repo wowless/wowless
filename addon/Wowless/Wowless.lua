@@ -77,3 +77,26 @@ do
   assert(g:GetText() == nil)
   assert(g:GetFontString() == nil)
 end
+
+-- TODO uncomment when this is working
+--[[
+do
+  local f = CreateFrame('Frame')
+  local g = CreateFrame('Frame', nil, f)
+  local h = CreateFrame('Frame', nil, f)
+  local i = CreateFrame('Frame', nil, f)
+  assert(f:GetNumChildren() == 3)
+  assert(select(1, f:GetChildren()) == g)
+  assert(select(2, f:GetChildren()) == h)
+  assert(select(3, f:GetChildren()) == i)
+  h:SetParent(_G.UIParent)
+  assert(f:GetNumChildren() == 2)
+  assert(select(1, f:GetChildren()) == g)
+  assert(select(2, f:GetChildren()) == i)
+  h:SetParent(f)
+  assert(f:GetNumChildren() == 3)
+  assert(select(1, f:GetChildren()) == g)
+  assert(select(2, f:GetChildren()) == i)
+  assert(select(3, f:GetChildren()) == h)
+end
+]]--
