@@ -25,22 +25,28 @@ local function mkBaseUIObjectTypes(api, loader)
     return getmetatable(obj).__index[f](obj, ...)
   end
 
-  local function nextkid(obj, idx)
-    idx = idx + 1
+  local function nextkid(obj, kid)
     local ud = u(obj)
-    local list = ud.childrenList
     local set = ud.childrenSet
-    while list and idx <= #list do
-      local kid = list[idx]
-      if set[kid] == idx then
-        return idx, kid
+    if set then
+      local list = assert(ud.childrenList)
+      local idx = 0
+      if kid then
+        idx = assert(set[kid])
+        assert(list[idx] == kid)
       end
-      idx = idx + 1
+      while idx < #list do
+        idx = idx + 1
+        kid = list[idx]
+        if set[kid] == idx then
+          return kid
+        end
+      end
     end
   end
 
   local function kids(obj)
-    return nextkid, obj, 0
+    return nextkid, obj, nil
   end
 
   local function UpdateVisible(obj)
@@ -50,7 +56,7 @@ local function mkBaseUIObjectTypes(api, loader)
     if ud.visible ~= nv then
       ud.visible = nv
       api.RunScript(obj, nv and 'OnShow' or 'OnHide')
-      for _, kid in kids(obj) do
+      for kid in kids(obj) do
         UpdateVisible(kid)
       end
     end
@@ -542,7 +548,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         GetChildren = function(self)
           local ret = {}
-          for _, kid in kids(self) do
+          for kid in kids(self) do
             if api.InheritsFrom(u(kid).type, 'frame') then
               table.insert(ret, kid)
             end
@@ -575,7 +581,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         GetRegions = function(self)
           local ret = {}
-          for _, kid in kids(self) do
+          for kid in kids(self) do
             if api.InheritsFrom(u(kid).type, 'layeredregion') then
               table.insert(ret, kid)
             end
