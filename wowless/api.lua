@@ -25,12 +25,16 @@ local function new(log)
   end
 
   local function SetParent(obj, parent)
+    if u(obj).parent == parent then
+      return
+    end
     if u(obj).parent then
-      u(u(obj).parent).children[obj] = nil
+      u(u(obj).parent).childrenSet[obj] = nil
     end
     u(obj).parent = parent
     if parent then
-      u(parent).children[obj] = true
+      table.insert(u(parent).childrenList, obj)
+      u(parent).childrenSet[obj] = #u(parent).childrenList
     end
   end
 

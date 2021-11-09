@@ -78,8 +78,20 @@ do
   assert(g:GetFontString() == nil)
 end
 
--- TODO uncomment when this is working
---[[
+do
+  local f = CreateFrame('Frame')
+  local g = CreateFrame('Frame')
+  local h = CreateFrame('Frame')
+  g:SetParent(f)
+  h:SetParent(f)
+  assert(f:GetNumChildren() == 2)
+  assert(select(1, f:GetChildren()) == g)
+  assert(select(2, f:GetChildren()) == h)
+  g:SetParent(f)
+  assert(select(1, f:GetChildren()) == g)
+  assert(select(2, f:GetChildren()) == h)
+end
+
 do
   local f = CreateFrame('Frame')
   local g = CreateFrame('Frame', nil, f)
@@ -89,7 +101,7 @@ do
   assert(select(1, f:GetChildren()) == g)
   assert(select(2, f:GetChildren()) == h)
   assert(select(3, f:GetChildren()) == i)
-  h:SetParent(_G.UIParent)
+  h:SetParent(nil)
   assert(f:GetNumChildren() == 2)
   assert(select(1, f:GetChildren()) == g)
   assert(select(2, f:GetChildren()) == i)
@@ -99,4 +111,3 @@ do
   assert(select(2, f:GetChildren()) == i)
   assert(select(3, f:GetChildren()) == h)
 end
-]]--

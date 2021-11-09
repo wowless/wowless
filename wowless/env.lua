@@ -25,6 +25,24 @@ local function mkBaseUIObjectTypes(api, loader)
     return getmetatable(obj).__index[f](obj, ...)
   end
 
+  local function nextkid(obj, idx)
+    idx = idx + 1
+    local ud = u(obj)
+    local list = ud.childrenList
+    local set = ud.childrenSet
+    while list and idx <= #list do
+      local kid = list[idx]
+      if set[kid] == idx then
+        return idx, kid
+      end
+      idx = idx + 1
+    end
+  end
+
+  local function kids(obj)
+    return nextkid, obj, 0
+  end
+
   local function UpdateVisible(obj)
     local ud = u(obj)
     local pv = not ud.parent or u(ud.parent).visible
@@ -32,8 +50,8 @@ local function mkBaseUIObjectTypes(api, loader)
     if ud.visible ~= nv then
       ud.visible = nv
       api.RunScript(obj, nv and 'OnShow' or 'OnHide')
-      for k in pairs(ud.children or {}) do
-        UpdateVisible(k)
+      for _, kid in kids(obj) do
+        UpdateVisible(kid)
       end
     end
   end
@@ -524,7 +542,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         GetChildren = function(self)
           local ret = {}
-          for kid in pairs(u(self).children) do
+          for _, kid in kids(self) do
             if api.InheritsFrom(u(kid).type, 'frame') then
               table.insert(ret, kid)
             end
@@ -557,7 +575,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end,
         GetRegions = function(self)
           local ret = {}
-          for kid in pairs(u(self).children) do
+          for _, kid in kids(self) do
             if api.InheritsFrom(u(kid).type, 'layeredregion') then
               table.insert(ret, kid)
             end
@@ -780,7 +798,8 @@ local function mkBaseUIObjectTypes(api, loader)
     },
     ParentedObject = {
       constructor = function(self)
-        u(self).children = {}
+        u(self).childrenList = {}
+        u(self).childrenSet = {}
         u(self).forbidden = false
       end,
       inherits = {'UIObject'},
