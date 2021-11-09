@@ -1,4 +1,3 @@
-local http_request = require('http.request').new_from_uri
 local json = require('JSON')
 
 local flavors = {
@@ -8,10 +7,9 @@ local flavors = {
 }
 
 local function main(cfid)
-  local url = 'https://addons-ecs.forgesvc.net/api/v2/addon/' .. cfid
-  local headers, stream = assert(http_request(url):go())
-  assert(headers:get(":status") == "200")
-  local cfg = json:decode(assert(stream:get_body_as_string()))
+  local pipe = io.popen('wget -qO- https://addons-ecs.forgesvc.net/api/v2/addon/' .. cfid)
+  local cfg = json:decode(pipe:read('*all'))
+  pipe:close()
   table.sort(cfg.latestFiles, function(a, b)
     if a.releaseType < b.releaseType then
       return true
