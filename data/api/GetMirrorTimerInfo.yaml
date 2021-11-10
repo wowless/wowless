@@ -2,4 +2,4 @@
 name: GetMirrorTimerInfo
 status: stub
 returns:
-  - UNKNOWN
+- UNKNOWN

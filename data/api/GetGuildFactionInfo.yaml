@@ -2,9 +2,9 @@
 name: GetGuildFactionInfo
 status: stub
 returns:
-  - Guild
-  - Description
-  - 0
-  - 0
-  - 0
-  - 0
+- Guild
+- Description
+- 0
+- 0
+- 0
+- 0

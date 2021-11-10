@@ -2,9 +2,9 @@
 name: C_LegendaryCrafting.GetRuneforgePowersByClassSpecAndCovenant
 status: unimplemented
 inputs:
-  - ''
-  - n
-  - nn
-  - nnn
-  - nnxn
+- ''
+- n
+- nn
+- nnn
+- nnxn
 outputs: t

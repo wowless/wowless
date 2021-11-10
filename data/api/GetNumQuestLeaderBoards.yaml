@@ -2,4 +2,4 @@
 name: GetNumQuestLeaderBoards
 status: stub
 returns:
-  - 0
+- 0

@@ -2,7 +2,7 @@
 name: C_Soulbinds.GetActiveSoulbindID
 status: unimplemented
 inputs:
-  - ''
-  - t
-  - s
+- ''
+- t
+- s
 outputs: n

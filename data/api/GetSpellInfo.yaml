@@ -2,6 +2,6 @@
 name: GetSpellInfo
 status: unimplemented
 inputs:
-  - n
-  - s
+- n
+- s
 outputs: snnnnnn

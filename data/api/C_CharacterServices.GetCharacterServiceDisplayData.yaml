@@ -2,5 +2,4 @@
 name: C_CharacterServices.GetCharacterServiceDisplayData
 status: stub
 returns:
-  -
-    popupInfo: {}
+- popupInfo: {}

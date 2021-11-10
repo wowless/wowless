@@ -4,5 +4,5 @@ status: stub
 inputs: s
 outputs: sn
 returns:
-  - WARRIOR
-  - 1
+- WARRIOR
+- 1

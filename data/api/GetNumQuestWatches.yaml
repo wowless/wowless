@@ -2,4 +2,4 @@
 name: GetNumQuestWatches
 status: stub
 returns:
-  - 0
+- 0

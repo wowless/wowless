@@ -2,6 +2,6 @@
 name: GetTutorialsEnabled
 status: unimplemented
 versions:
-  - Mainline
+- Mainline
 inputs: ''
 outputs: b

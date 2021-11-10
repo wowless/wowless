@@ -2,9 +2,9 @@
 name: GetTalentTabInfo
 status: unimplemented
 versions:
-  - TBC
-  - Vanilla
+- TBC
+- Vanilla
 inputs:
-  - n
-  - nb
+- n
+- nb
 outputs: ssns

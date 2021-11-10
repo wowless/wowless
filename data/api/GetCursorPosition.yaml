@@ -2,5 +2,5 @@
 name: GetCursorPosition
 status: stub
 returns:
-  - 0
-  - 0
+- 0
+- 0

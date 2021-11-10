@@ -2,7 +2,7 @@
 name: GetNetStats
 status: stub
 returns:
-  - 1
-  - 1
-  - 1
-  - 1
+- 1
+- 1
+- 1
+- 1

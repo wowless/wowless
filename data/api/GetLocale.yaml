@@ -2,4 +2,4 @@
 name: GetLocale
 status: stub
 returns:
-  - enUS
+- enUS

@@ -2,6 +2,6 @@
 name: UnitHonor
 status: unimplemented
 versions:
-  - Mainline
+- Mainline
 inputs: s
 outputs: n

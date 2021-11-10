@@ -2,6 +2,6 @@
 name: BankButtonIDToInvSlotID
 status: unimplemented
 inputs:
-  - n
-  - nn
+- n
+- nn
 outputs: n

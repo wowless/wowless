@@ -2,10 +2,10 @@
 name: GetSkillLineInfo
 status: stub
 returns:
-  - ''
-  - null
-  - null
-  - 0
-  - 0
-  - 0
-  - 1
+- ''
+- null
+- null
+- 0
+- 0
+- 0
+- 1

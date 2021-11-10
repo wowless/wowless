@@ -2,5 +2,5 @@
 name: GetNumCompletedAchievements
 status: stub
 returns:
-  - 1
-  - 1
+- 1
+- 1

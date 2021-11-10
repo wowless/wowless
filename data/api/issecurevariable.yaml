@@ -2,8 +2,8 @@
 name: issecurevariable
 status: stub
 inputs:
-  - s
-  - ts
+- s
+- ts
 outputs: b
 returns:
-  - true
+- true

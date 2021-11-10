@@ -2,5 +2,5 @@
 name: UnitFactionGroup
 status: stub
 returns:
-  - Horde
-  - Horde
+- Horde
+- Horde

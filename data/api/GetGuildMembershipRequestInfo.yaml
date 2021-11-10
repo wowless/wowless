@@ -2,6 +2,6 @@
 name: GetGuildMembershipRequestInfo
 status: stub
 returns:
-  - Name
-  - 0
-  - 0
+- Name
+- 0
+- 0

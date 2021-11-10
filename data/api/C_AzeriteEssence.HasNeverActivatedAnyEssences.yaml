@@ -1,8 +1,8 @@
 ---
 name: C_AzeriteEssence.HasNeverActivatedAnyEssences
 status: unimplemented
-comment: 'TODO autogenerate once extra ignored args are supported'
+comment: TODO autogenerate once extra ignored args are supported
 inputs:
-  - ''
-  - t
+- ''
+- t
 outputs: b

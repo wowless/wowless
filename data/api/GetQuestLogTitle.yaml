@@ -2,5 +2,5 @@
 name: GetQuestLogTitle
 status: stub
 returns:
-  - moo
-  - 1
+- moo
+- 1

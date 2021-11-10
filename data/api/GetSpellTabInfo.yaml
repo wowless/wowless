@@ -2,7 +2,7 @@
 name: GetSpellTabInfo
 status: stub
 returns:
-  - moo
-  - 0
-  - 0
-  - 0
+- moo
+- 0
+- 0
+- 0

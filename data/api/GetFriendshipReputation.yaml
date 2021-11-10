@@ -2,6 +2,6 @@
 name: GetFriendshipReputation
 status: unimplemented
 versions:
-  - Mainline
+- Mainline
 inputs: n
 outputs: nnnssnsnn

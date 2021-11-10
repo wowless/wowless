@@ -2,5 +2,5 @@
 name: GetSummonFriendCooldown
 status: stub
 returns:
-  - 0
-  - 0
+- 0
+- 0

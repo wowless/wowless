@@ -4,6 +4,4 @@ status: stub
 inputs: ''
 outputs: t
 returns:
-  -
-    -
-      slot: 1
+- - slot: 1

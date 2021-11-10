@@ -4,4 +4,4 @@ status: stub
 inputs: ''
 outputs: t
 returns:
-  - '1024x768'
+- 1024x768

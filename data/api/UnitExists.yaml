@@ -2,6 +2,6 @@
 name: UnitExists
 status: unimplemented
 inputs:
-  - ''
-  - s
+- ''
+- s
 outputs: b

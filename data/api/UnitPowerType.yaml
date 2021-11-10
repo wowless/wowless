@@ -2,5 +2,5 @@
 name: UnitPowerType
 status: stub
 returns:
-  - 0
-  - MANA
+- 0
+- MANA

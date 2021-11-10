@@ -2,8 +2,8 @@
 name: GetQuestLogChoiceInfo
 status: stub
 returns:
-  - moo
-  - 1
-  - 1
-  - 1
-  - false
+- moo
+- 1
+- 1
+- 1
+- false

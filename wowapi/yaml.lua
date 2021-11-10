@@ -1,10 +1,5 @@
-local function yamlquote(s)
-  if type(s) ~= 'string' or s:match('^[a-zA-Z][a-zA-Z0-9_.-]*$') then
-    return tostring(s)
-  else
-    return '\'' .. s .. '\''
-  end
-end
+local emitter = require('yaml').emitter
+local parse = require('lyaml').load
 
 local fieldOrder = {
   'name',
@@ -31,55 +26,61 @@ local function isarray(t)
   return true
 end
 
-local function table2yaml(t, indent)
-  local strs = {}
-  local prefix = string.rep(' ', indent)
-  if not next(t) then
-    table.insert(strs, ' {}\n')
-  elseif isarray(t) then
-    table.insert(strs, '\n')
-    for _, value in ipairs(t) do
-      if value == require('lyaml').null then
-        table.insert(strs, ('%s- null\n'):format(prefix))
-      elseif type(value) == 'table' then
-        table.insert(strs, ('%s-'):format(prefix))
-        table.insert(strs, table2yaml(value, indent+2))
-      else
-        table.insert(strs, ('%s- %s\n'):format(prefix, yamlquote(value)))
-      end
-    end
-  else
-    table.insert(strs, '\n')
-    local sortedKeys = {}
-    for name in pairs(t) do
-      table.insert(sortedKeys, name)
-    end
-    table.sort(sortedKeys)
-    local names = {}
-    for _, name in ipairs(indent == 0 and fieldOrder or {}) do
-      table.insert(names, name)
-    end
-    for _, name in ipairs(sortedKeys) do
-      table.insert(names, name)
-    end
-    local handled = {}
-    for _, name in ipairs(names) do
-      local value = t[name]
-      if value and not handled[name] then
-        handled[name] = true
-        if type(value) == 'table' then
-          table.insert(strs, ('%s%s:'):format(prefix, name))
-          table.insert(strs, table2yaml(value, indent+2))
-        else
-          table.insert(strs, ('%s%s: %s\n'):format(prefix, name, yamlquote(value)))
+local function api2yaml(api)
+  local emit = emitter().emit
+  assert(emit({type = 'STREAM_START'}))
+  assert(emit({type = 'DOCUMENT_START'}))
+  local function run(v)
+    local ty = type(v)
+    if v == require('lyaml').null then
+      assert(emit({type = 'SCALAR', value = 'null'}))
+    elseif ty == 'number' or ty == 'boolean' then
+      assert(emit({type = 'SCALAR', value = tostring(v)}))
+    elseif ty == 'string' then
+      assert(emit({type = 'SCALAR', value = v, style = v == '' and 'SINGLE_QUOTED' or nil}))
+    elseif ty == 'table' then
+      if not next(v) then
+        assert(emit({type = 'MAPPING_START'}))
+        assert(emit({type = 'MAPPING_END'}))
+      elseif isarray(v) then
+        assert(emit({type = 'SEQUENCE_START'}))
+        for _, value in ipairs(v) do
+          run(value)
         end
+        assert(emit({type = 'SEQUENCE_END'}))
+      else
+        assert(emit({type = 'MAPPING_START'}))
+        local sortedKeys = {}
+        for name in pairs(v) do
+          table.insert(sortedKeys, name)
+        end
+        table.sort(sortedKeys)
+        local names = {}
+        for _, name in ipairs(v == api and fieldOrder or {}) do
+          table.insert(names, name)
+        end
+        for _, name in ipairs(sortedKeys) do
+          table.insert(names, name)
+        end
+        local handled = {}
+        for _, name in ipairs(names) do
+          local value = v[name]
+          if value and not handled[name] then
+            handled[name] = true
+            run(name)
+            run(value)
+          end
+        end
+        assert(emit({type = 'MAPPING_END'}))
       end
+    else
+      error('invalid type ' .. ty)
     end
   end
-  return table.concat(strs, '')
+  run(api)
+  assert(emit({type = 'DOCUMENT_END', implicit = true}))
+  return select(2, assert(emit({type = 'STREAM_END'})))
 end
-
-local parse = require('lyaml').load
 
 return {
   parse = parse,
@@ -89,7 +90,5 @@ return {
     file:close()
     return parse(str)
   end,
-  pprint = function(t)
-    return '---' .. table2yaml(t, 0)
-  end,
+  pprint = api2yaml,
 }

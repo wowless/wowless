@@ -2,6 +2,6 @@
 name: GetTrackingTexture
 status: unimplemented
 versions:
-  - Vanilla
+- Vanilla
 inputs: ''
 outputs: x

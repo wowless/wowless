@@ -3,9 +3,8 @@ name: C_CurrencyInfo.GetBasicCurrencyInfo
 status: stub
 comment: 'TODO autogenerate structure, issue #57'
 inputs:
-  - n
-  - nn
+- n
+- nn
 outputs: t
 returns:
-  -
-    name: ''
+- name: ''

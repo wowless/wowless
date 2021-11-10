@@ -2,7 +2,7 @@
 name: GetSpellSubtext
 status: unimplemented
 versions:
-  - TBC
-  - Vanilla
+- TBC
+- Vanilla
 inputs: n
 outputs: x

@@ -2,10 +2,10 @@
 name: GetQuestLogRewardInfo
 status: stub
 returns:
-  - moo
-  - 1
-  - 1
-  - 1
-  - false
-  - 1
-  - 1
+- moo
+- 1
+- 1
+- 1
+- false
+- 1
+- 1

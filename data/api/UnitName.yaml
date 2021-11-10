@@ -2,4 +2,4 @@
 name: UnitName
 status: stub
 returns:
-  - Unitname
+- Unitname

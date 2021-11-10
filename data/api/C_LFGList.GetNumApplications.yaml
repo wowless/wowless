@@ -2,5 +2,5 @@
 name: C_LFGList.GetNumApplications
 status: stub
 returns:
-  - 0
-  - 0
+- 0
+- 0

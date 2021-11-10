@@ -2,9 +2,9 @@
 name: C_CVar.SetCVar
 status: implemented
 inputs:
-  - s
-  - ss
-  - sss
+- s
+- ss
+- sss
 outputs: b
 module: cvar
 api: SetCVar

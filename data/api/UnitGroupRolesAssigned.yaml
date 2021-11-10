@@ -2,4 +2,4 @@
 name: UnitGroupRolesAssigned
 status: stub
 returns:
-  - DAMAGER
+- DAMAGER

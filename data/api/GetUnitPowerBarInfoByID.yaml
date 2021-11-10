@@ -2,6 +2,6 @@
 name: GetUnitPowerBarInfoByID
 status: stub
 inputs:
-  - n
-  - s
+- n
+- s
 outputs: t

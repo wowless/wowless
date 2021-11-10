@@ -2,6 +2,6 @@
 name: GetRestrictedAccountData
 status: stub
 returns:
-  - 20
-  - 10000000
-  - 0
+- 20
+- 10000000
+- 0

@@ -2,6 +2,6 @@
 name: UnitGetIncomingHeals
 status: unimplemented
 inputs:
-  - s
-  - ss
+- s
+- ss
 outputs: n

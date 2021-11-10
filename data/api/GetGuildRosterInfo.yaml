@@ -2,6 +2,6 @@
 name: GetGuildRosterInfo
 status: stub
 returns:
-  - Moo-Realm
-  - Member
-  - 1
+- Moo-Realm
+- Member
+- 1

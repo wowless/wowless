@@ -2,7 +2,7 @@
 name: CastSpellByName
 status: unimplemented
 inputs:
-  - s
-  - ss
+- s
+- ss
 outputs: ''
 protection: secure

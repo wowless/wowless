@@ -2,6 +2,6 @@
 name: GetAchievementNumCriteria
 status: unimplemented
 inputs:
-  - s
-  - n
+- s
+- n
 outputs: n

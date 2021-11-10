@@ -4,6 +4,5 @@ status: stub
 inputs: n
 outputs: t
 returns:
-  -
-    layoutDirection: 0
-    verticalPadding: 0
+- layoutDirection: 0
+  verticalPadding: 0

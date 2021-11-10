@@ -2,6 +2,6 @@
 name: GetVehicleBarIndex
 status: unimplemented
 versions:
-  - Mainline
+- Mainline
 inputs: ''
 outputs: n

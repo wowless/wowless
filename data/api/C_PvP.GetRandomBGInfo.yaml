@@ -4,5 +4,4 @@ status: stub
 inputs: ''
 outputs: t
 returns:
-  -
-    minLevel: 0
+- minLevel: 0

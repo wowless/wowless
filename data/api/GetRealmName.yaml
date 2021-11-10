@@ -2,4 +2,4 @@
 name: GetRealmName
 status: stub
 returns:
-  - Realm
+- Realm

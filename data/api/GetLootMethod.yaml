@@ -2,4 +2,4 @@
 name: GetLootMethod
 status: stub
 returns:
-  - freeforall
+- freeforall

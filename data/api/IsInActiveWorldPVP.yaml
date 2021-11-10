@@ -2,6 +2,6 @@
 name: IsInActiveWorldPVP
 status: unimplemented
 inputs:
-  - ''
-  - s
+- ''
+- s
 outputs: z

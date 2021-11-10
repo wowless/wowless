@@ -2,6 +2,6 @@
 name: GetGuildInfo
 status: stub
 returns:
-  - GuildName
-  - Member
-  - 1
+- GuildName
+- Member
+- 1

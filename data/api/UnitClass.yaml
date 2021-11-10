@@ -4,6 +4,6 @@ status: stub
 inputs: s
 outputs: ssn
 returns:
-  - Warrior
-  - WARRIOR
-  - 1
+- Warrior
+- WARRIOR
+- 1

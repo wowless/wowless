@@ -2,5 +2,5 @@
 name: GetPVPRankInfo
 status: stub
 returns:
-  - Pariah
-  - 0
+- Pariah
+- 0

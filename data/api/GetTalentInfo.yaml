@@ -2,8 +2,8 @@
 name: GetTalentInfo
 status: stub
 returns:
-  - null
-  - null
-  - null
-  - null
-  - 0
+- null
+- null
+- null
+- null
+- 0

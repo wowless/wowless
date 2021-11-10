@@ -2,5 +2,5 @@
 name: GetDefaultLanguage
 status: stub
 returns:
-  - Common
-  - 7
+- Common
+- 7

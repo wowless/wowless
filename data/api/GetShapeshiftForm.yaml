@@ -2,6 +2,6 @@
 name: GetShapeshiftForm
 status: unimplemented
 inputs:
-  - ''
-  - b
+- ''
+- b
 outputs: n

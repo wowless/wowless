@@ -2,6 +2,6 @@
 name: GetAchievementInfo
 status: unimplemented
 inputs:
-  - n
-  - nn
+- n
+- nn
 outputs: nsnbnnnsnnsbbsb

@@ -4,4 +4,4 @@ status: stub
 inputs: s
 outputs: x
 returns:
-  - 2
+- 2

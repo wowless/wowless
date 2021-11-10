@@ -2,5 +2,5 @@
 name: GetCurrentScaledResolution
 status: stub
 returns:
-  - 1024
-  - 768
+- 1024
+- 768

@@ -2,7 +2,7 @@
 name: C_SocialQueue.GetAllGroups
 status: unimplemented
 inputs:
-  - ''
-  - b
-  - bb
+- ''
+- b
+- bb
 outputs: t

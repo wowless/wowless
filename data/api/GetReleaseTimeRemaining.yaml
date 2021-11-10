@@ -2,4 +2,4 @@
 name: GetReleaseTimeRemaining
 status: stub
 returns:
-  - 0
+- 0
