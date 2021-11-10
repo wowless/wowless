@@ -6,4 +6,5 @@ inputs:
 - ntn
 outputs:
 - type: n
-- type: t
+- mixin: Vector2DMixin
+  type: t

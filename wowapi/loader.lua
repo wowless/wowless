@@ -126,7 +126,10 @@ local function getFn(api, modules, env)
     return (function(...)
       for idx, out in ipairs(api.outputs) do
         if out.mixin then
-          env.Mixin(select(idx, ...), env[out.mixin])
+          local t = select(idx, ...)
+          if t then
+            env.Mixin(t, env[out.mixin])
+          end
         end
       end
       return ...
