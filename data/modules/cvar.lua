@@ -3,6 +3,7 @@ local cvarDefaults = {
   cameraSmoothTrackingStyle = '0',
   chatStyle = 'classic',
   lastTalkedToGM = '',
+  minimapZoom = '1',
   NamePlateClassificationScale = '1',
   NamePlateHorizontalScale = '1',
   nameplateMotion = '0',
