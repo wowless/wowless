@@ -3,5 +3,5 @@ name: C_Map.GetUserWaypointPositionForMap
 status: unimplemented
 inputs: n
 outputs:
-- type: t
-mixin: Vector2DMixin
+- mixin: Vector2DMixin
+  type: t

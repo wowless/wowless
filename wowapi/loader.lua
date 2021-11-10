@@ -122,11 +122,15 @@ end
 
 local function getFn(api, modules, env)
   local stub = doGetFn(api, modules)
-  if api.mixin then
-    assert(#api.outputs == 1 and api.outputs[1].type == 't', 'mixin only works with outputs=t')
-    return function(...) return env.Mixin(stub(...), env[api.mixin]) end
-  else
-    return stub
+  return api.outputs == nil and stub or function(...)
+    return (function(...)
+      for idx, out in ipairs(api.outputs) do
+        if out.mixin then
+          env.Mixin(select(idx, ...), env[out.mixin])
+        end
+      end
+      return ...
+    end)(stub(...))
   end
 end
 

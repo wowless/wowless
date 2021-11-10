@@ -113,6 +113,7 @@ describe('api', function()
           end)
           it('has valid outputs', function()
             local fields = {
+              mixin = true,
               type = true,
             }
             local ty = type(t.outputs)
@@ -125,6 +126,7 @@ describe('api', function()
                 local ot = assert(v.type)
                 assert.True(type(ot) == 'string')
                 assert.True(string.len(ot) == 1)
+                assert.True(v.mixin == nil or type(v.mixin) == 'string')
               end
             else
               assert.True(ty == 'nil')
@@ -135,7 +137,6 @@ describe('api', function()
               api = true,
               comment = true,
               inputs = true,
-              mixin = true,
               module = true,
               name = true,
               outputs = true,
