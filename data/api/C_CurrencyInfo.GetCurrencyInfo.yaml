@@ -4,7 +4,8 @@ status: stub
 inputs:
 - ''
 - n
-outputs: t
+outputs:
+- type: t
 returns:
 - canEarnPerWeek: true
   discovered: true

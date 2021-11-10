@@ -2,4 +2,5 @@
 name: GetCurrentBindingSet
 status: unimplemented
 inputs: ''
-outputs: n
+outputs:
+- type: n

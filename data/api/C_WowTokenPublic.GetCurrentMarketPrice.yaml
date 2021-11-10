@@ -2,4 +2,5 @@
 name: C_WowTokenPublic.GetCurrentMarketPrice
 status: unimplemented
 inputs: ''
-outputs: n
+outputs:
+- type: n

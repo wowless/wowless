@@ -2,4 +2,7 @@
 name: GetItemCooldown
 status: unimplemented
 inputs: n
-outputs: nnn
+outputs:
+- type: n
+- type: n
+- type: n

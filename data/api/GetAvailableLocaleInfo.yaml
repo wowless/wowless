@@ -1,4 +1,5 @@
 ---
 name: GetAvailableLocaleInfo
 status: unimplemented
-outputs: t
+outputs:
+- type: t

@@ -2,7 +2,8 @@
 name: GetUnitPowerBarInfo
 status: stub
 inputs: s
-outputs: t
+outputs:
+- type: t
 returns:
 - anchorTop: true
   animateNumbers: true

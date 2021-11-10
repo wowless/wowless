@@ -2,4 +2,5 @@
 name: GetCurrentResolution
 status: unimplemented
 inputs: ''
-outputs: n
+outputs:
+- type: n

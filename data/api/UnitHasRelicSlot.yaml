@@ -2,4 +2,5 @@
 name: UnitHasRelicSlot
 status: unimplemented
 inputs: s
-outputs: b
+outputs:
+- type: b

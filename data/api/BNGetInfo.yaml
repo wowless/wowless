@@ -2,4 +2,11 @@
 name: BNGetInfo
 status: unimplemented
 inputs: ''
-outputs: xsnsbbb
+outputs:
+- type: x
+- type: s
+- type: n
+- type: s
+- type: b
+- type: b
+- type: b

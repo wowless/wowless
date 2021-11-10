@@ -1,4 +1,5 @@
 ---
 name: GetItemCount
 status: unimplemented
-outputs: n
+outputs:
+- type: n

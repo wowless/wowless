@@ -4,4 +4,5 @@ status: unimplemented
 inputs:
 - ''
 - s
-outputs: z
+outputs:
+- type: z

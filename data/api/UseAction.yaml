@@ -2,5 +2,5 @@
 name: UseAction
 status: unimplemented
 inputs: nxs
-outputs: ''
+outputs: {}
 protection: secure

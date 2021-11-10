@@ -1,4 +1,5 @@
 ---
 name: GetQuestLogRewardHonor
 status: unimplemented
-outputs: n
+outputs:
+- type: n

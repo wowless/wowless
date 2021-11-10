@@ -5,4 +5,5 @@ inputs:
 - n
 - nn
 - nnb
-outputs: s
+outputs:
+- type: s

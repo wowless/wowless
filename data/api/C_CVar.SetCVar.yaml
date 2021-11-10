@@ -5,6 +5,7 @@ inputs:
 - s
 - ss
 - sss
-outputs: b
+outputs:
+- type: b
 module: cvar
 api: SetCVar

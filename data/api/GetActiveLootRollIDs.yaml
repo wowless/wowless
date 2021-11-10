@@ -1,4 +1,5 @@
 ---
 name: GetActiveLootRollIDs
 status: unimplemented
-outputs: t
+outputs:
+- type: t

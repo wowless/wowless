@@ -1,4 +1,5 @@
 ---
 name: C_ToyBox.GetNumLearnedDisplayedToys
 status: unimplemented
-outputs: n
+outputs:
+- type: n

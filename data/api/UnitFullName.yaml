@@ -2,4 +2,6 @@
 name: UnitFullName
 status: unimplemented
 inputs: s
-outputs: ss
+outputs:
+- type: s
+- type: s

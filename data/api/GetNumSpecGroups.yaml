@@ -1,4 +1,5 @@
 ---
 name: GetNumSpecGroups
 status: unimplemented
-outputs: n
+outputs:
+- type: n

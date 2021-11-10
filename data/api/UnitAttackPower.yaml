@@ -2,4 +2,7 @@
 name: UnitAttackPower
 status: unimplemented
 inputs: s
-outputs: nnn
+outputs:
+- type: n
+- type: n
+- type: n

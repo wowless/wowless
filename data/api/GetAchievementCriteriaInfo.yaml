@@ -6,7 +6,20 @@ inputs:
 - nn
 - ns
 - sn
-outputs: snbnnsnnsnbnn
+outputs:
+- type: s
+- type: n
+- type: b
+- type: n
+- type: n
+- type: s
+- type: n
+- type: n
+- type: s
+- type: n
+- type: b
+- type: n
+- type: n
 returns:
 - 0
 - 0

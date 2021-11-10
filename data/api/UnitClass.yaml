@@ -2,7 +2,10 @@
 name: UnitClass
 status: stub
 inputs: s
-outputs: ssn
+outputs:
+- type: s
+- type: s
+- type: n
 returns:
 - Warrior
 - WARRIOR

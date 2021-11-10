@@ -7,4 +7,5 @@ inputs:
 - nn
 - nnn
 - nnxn
-outputs: t
+outputs:
+- type: t

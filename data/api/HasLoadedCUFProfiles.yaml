@@ -2,4 +2,5 @@
 name: HasLoadedCUFProfiles
 status: unimplemented
 inputs: ''
-outputs: b
+outputs:
+- type: b

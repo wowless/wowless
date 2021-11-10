@@ -4,5 +4,5 @@ status: unimplemented
 inputs:
 - s
 - ss
-outputs: ''
+outputs: {}
 protection: secure

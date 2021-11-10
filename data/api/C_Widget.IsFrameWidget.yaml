@@ -1,6 +1,7 @@
 ---
 name: C_Widget.IsFrameWidget
 status: stub
-outputs: b
+outputs:
+- type: b
 returns:
 - true

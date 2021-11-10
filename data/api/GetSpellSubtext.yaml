@@ -5,4 +5,5 @@ versions:
 - TBC
 - Vanilla
 inputs: n
-outputs: x
+outputs:
+- type: x

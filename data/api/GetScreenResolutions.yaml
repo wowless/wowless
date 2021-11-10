@@ -2,6 +2,7 @@
 name: GetScreenResolutions
 status: stub
 inputs: ''
-outputs: t
+outputs:
+- type: t
 returns:
 - 1024x768

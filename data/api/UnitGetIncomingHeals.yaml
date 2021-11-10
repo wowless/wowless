@@ -4,4 +4,5 @@ status: unimplemented
 inputs:
 - s
 - ss
-outputs: n
+outputs:
+- type: n

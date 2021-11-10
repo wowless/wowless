@@ -2,4 +2,9 @@
 name: UnitArmor
 status: unimplemented
 inputs: s
-outputs: nnnnn
+outputs:
+- type: n
+- type: n
+- type: n
+- type: n
+- type: n

@@ -5,4 +5,5 @@ comment: TODO autogenerate once extra ignored args are supported
 inputs:
 - ''
 - t
-outputs: b
+outputs:
+- type: b

@@ -1,4 +1,5 @@
 ---
 name: GetQuestLogGroupNum
 status: unimplemented
-outputs: n
+outputs:
+- type: n

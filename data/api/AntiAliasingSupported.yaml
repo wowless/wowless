@@ -2,4 +2,5 @@
 name: AntiAliasingSupported
 status: unimplemented
 inputs: ''
-outputs: b
+outputs:
+- type: b

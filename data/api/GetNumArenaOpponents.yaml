@@ -1,4 +1,5 @@
 ---
 name: GetNumArenaOpponents
 status: unimplemented
-outputs: n
+outputs:
+- type: n

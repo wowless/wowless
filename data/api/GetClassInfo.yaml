@@ -2,4 +2,7 @@
 name: GetClassInfo
 status: unimplemented
 inputs: n
-outputs: ssn
+outputs:
+- type: s
+- type: s
+- type: n

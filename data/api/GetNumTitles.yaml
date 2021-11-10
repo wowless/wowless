@@ -1,4 +1,5 @@
 ---
 name: GetNumTitles
 status: unimplemented
-outputs: n
+outputs:
+- type: n

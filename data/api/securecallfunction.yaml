@@ -7,4 +7,5 @@ inputs:
 - tfnnn
 - tfb
 - tft
-outputs: '?'
+outputs:
+- type: '?'

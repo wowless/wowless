@@ -1,4 +1,5 @@
 ---
 name: GetGuildRosterMOTD
 status: unimplemented
-outputs: s
+outputs:
+- type: s

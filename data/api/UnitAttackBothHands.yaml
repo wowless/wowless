@@ -5,4 +5,8 @@ versions:
 - TBC
 - Vanilla
 inputs: s
-outputs: nnnn
+outputs:
+- type: n
+- type: n
+- type: n
+- type: n

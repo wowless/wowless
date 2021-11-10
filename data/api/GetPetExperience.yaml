@@ -1,4 +1,5 @@
 ---
 name: GetPetExperience
 status: unimplemented
-outputs: n
+outputs:
+- type: n

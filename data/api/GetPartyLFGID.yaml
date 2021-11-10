@@ -1,4 +1,5 @@
 ---
 name: GetPartyLFGID
 status: unimplemented
-outputs: n
+outputs:
+- type: n

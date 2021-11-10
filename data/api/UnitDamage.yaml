@@ -2,4 +2,11 @@
 name: UnitDamage
 status: unimplemented
 inputs: s
-outputs: nnnnnnn
+outputs:
+- type: n
+- type: n
+- type: n
+- type: n
+- type: n
+- type: n
+- type: n

@@ -1,4 +1,5 @@
 ---
 name: GetActionCount
 status: unimplemented
-outputs: n
+outputs:
+- type: n

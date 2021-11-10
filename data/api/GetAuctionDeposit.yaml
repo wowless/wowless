@@ -1,4 +1,5 @@
 ---
 name: GetAuctionDeposit
 status: unimplemented
-outputs: n
+outputs:
+- type: n

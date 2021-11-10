@@ -2,4 +2,7 @@
 name: GetCategoryInfo
 status: unimplemented
 inputs: n
-outputs: snn
+outputs:
+- type: s
+- type: n
+- type: n

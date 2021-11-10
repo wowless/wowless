@@ -4,6 +4,6 @@ status: implemented
 inputs:
 - s
 - ss
-outputs: ''
+outputs: {}
 module: cvar
 api: RegisterCVar

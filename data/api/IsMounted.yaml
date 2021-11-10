@@ -1,4 +1,5 @@
 ---
 name: IsMounted
 status: unimplemented
-outputs: b
+outputs:
+- type: b

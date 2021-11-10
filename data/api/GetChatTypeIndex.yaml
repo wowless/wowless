@@ -1,4 +1,5 @@
 ---
 name: GetChatTypeIndex
 status: unimplemented
-outputs: n
+outputs:
+- type: n

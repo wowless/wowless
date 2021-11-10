@@ -1,4 +1,5 @@
 ---
 name: C_LFGList.GetLanguageSearchFilter
 status: unimplemented
-outputs: n
+outputs:
+- type: n

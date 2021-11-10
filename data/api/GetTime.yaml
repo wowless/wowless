@@ -1,4 +1,5 @@
 ---
 name: GetTime
 status: unimplemented
-outputs: n
+outputs:
+- type: n

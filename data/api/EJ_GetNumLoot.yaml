@@ -1,4 +1,5 @@
 ---
 name: EJ_GetNumLoot
 status: unimplemented
-outputs: n
+outputs:
+- type: n

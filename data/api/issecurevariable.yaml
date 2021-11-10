@@ -4,6 +4,7 @@ status: stub
 inputs:
 - s
 - ts
-outputs: b
+outputs:
+- type: b
 returns:
 - true

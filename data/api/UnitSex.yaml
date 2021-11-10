@@ -2,6 +2,7 @@
 name: UnitSex
 status: stub
 inputs: s
-outputs: x
+outputs:
+- type: x
 returns:
 - 2

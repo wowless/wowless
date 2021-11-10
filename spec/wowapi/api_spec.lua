@@ -112,8 +112,23 @@ describe('api', function()
             end
           end)
           it('has valid outputs', function()
+            local fields = {
+              type = true,
+            }
             local ty = type(t.outputs)
-            assert.True(ty == 'string' or ty == 'nil')
+            if (ty == 'table') then
+              for _, v in ipairs(t.outputs) do
+                assert.True(type(v) == 'table')
+                for k in pairs(v) do
+                  assert.True(fields[k])
+                end
+                local ot = assert(v.type)
+                assert.True(type(ot) == 'string')
+                assert.True(string.len(ot) == 1)
+              end
+            else
+              assert.True(ty == 'nil')
+            end
           end)
           it('has no extraneous fields', function()
             local fields = {

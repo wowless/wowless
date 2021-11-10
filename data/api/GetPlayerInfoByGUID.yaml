@@ -2,4 +2,11 @@
 name: GetPlayerInfoByGUID
 status: unimplemented
 inputs: s
-outputs: ssssnss
+outputs:
+- type: s
+- type: s
+- type: s
+- type: s
+- type: n
+- type: s
+- type: s

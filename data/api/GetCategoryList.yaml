@@ -1,4 +1,5 @@
 ---
 name: GetCategoryList
 status: unimplemented
-outputs: t
+outputs:
+- type: t

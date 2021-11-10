@@ -2,4 +2,4 @@
 name: SetRaidTarget
 status: unimplemented
 inputs: sn
-outputs: ''
+outputs: {}

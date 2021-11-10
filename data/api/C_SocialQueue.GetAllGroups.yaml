@@ -5,4 +5,5 @@ inputs:
 - ''
 - b
 - bb
-outputs: t
+outputs:
+- type: t

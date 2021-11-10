@@ -5,4 +5,5 @@ inputs:
 - ss
 - sst
 - sstn
-outputs: b
+outputs:
+- type: b

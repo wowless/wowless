@@ -1,4 +1,5 @@
 ---
 name: C_LFGList.GetAvailableCategories
 status: unimplemented
-outputs: t
+outputs:
+- type: t

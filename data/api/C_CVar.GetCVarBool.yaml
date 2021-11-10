@@ -2,6 +2,7 @@
 name: C_CVar.GetCVarBool
 status: implemented
 inputs: s
-outputs: x
+outputs:
+- type: x
 module: cvar
 api: GetCVarBool

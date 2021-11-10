@@ -1,4 +1,5 @@
 ---
 name: GetDailyQuestsCompleted
 status: unimplemented
-outputs: n
+outputs:
+- type: n

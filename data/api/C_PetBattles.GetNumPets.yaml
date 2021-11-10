@@ -1,4 +1,5 @@
 ---
 name: C_PetBattles.GetNumPets
 status: unimplemented
-outputs: n
+outputs:
+- type: n

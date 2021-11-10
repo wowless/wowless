@@ -8,4 +8,5 @@ inputs:
 - snn
 - snnb
 - snnbs
-outputs: t
+outputs:
+- type: t

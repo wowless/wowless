@@ -2,4 +2,5 @@
 name: GetSubZoneText
 status: unimplemented
 inputs: ''
-outputs: s
+outputs:
+- type: s

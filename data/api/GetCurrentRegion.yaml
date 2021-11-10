@@ -1,4 +1,5 @@
 ---
 name: GetCurrentRegion
 status: unimplemented
-outputs: n
+outputs:
+- type: n

@@ -1,4 +1,5 @@
 ---
 name: GetNumSkillLines
 status: unimplemented
-outputs: n
+outputs:
+- type: n

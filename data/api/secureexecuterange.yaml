@@ -7,4 +7,5 @@ inputs:
 - tfb
 - tft
 - tfs
-outputs: n
+outputs:
+- type: n

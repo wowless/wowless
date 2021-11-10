@@ -1,4 +1,5 @@
 ---
 name: GetNumQuestLogRewardSpells
 status: unimplemented
-outputs: n
+outputs:
+- type: n

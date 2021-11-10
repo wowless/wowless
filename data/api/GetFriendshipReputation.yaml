@@ -4,4 +4,13 @@ status: unimplemented
 versions:
 - Mainline
 inputs: n
-outputs: nnnssnsnn
+outputs:
+- type: n
+- type: n
+- type: n
+- type: s
+- type: s
+- type: n
+- type: s
+- type: n
+- type: n

@@ -1,4 +1,5 @@
 ---
 name: GetMoney
 status: unimplemented
-outputs: n
+outputs:
+- type: n

@@ -2,6 +2,7 @@
 name: C_AzeriteEssence.GetMilestones
 status: stub
 inputs: ''
-outputs: t
+outputs:
+- type: t
 returns:
 - - slot: 1

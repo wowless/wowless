@@ -2,4 +2,5 @@
 name: GetAvailableBandwidth
 status: unimplemented
 inputs: ''
-outputs: n
+outputs:
+- type: n

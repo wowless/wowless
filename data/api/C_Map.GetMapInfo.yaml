@@ -2,6 +2,7 @@
 name: C_Map.GetMapInfo
 status: implemented
 inputs: n
-outputs: t
+outputs:
+- type: t
 module: map
 api: GetMapInfo

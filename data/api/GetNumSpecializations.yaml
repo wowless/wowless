@@ -1,4 +1,5 @@
 ---
 name: GetNumSpecializations
 status: unimplemented
-outputs: n
+outputs:
+- type: n

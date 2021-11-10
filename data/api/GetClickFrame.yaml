@@ -2,4 +2,5 @@
 name: GetClickFrame
 status: unimplemented
 inputs: s
-outputs: x
+outputs:
+- type: x

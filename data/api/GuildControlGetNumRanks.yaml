@@ -1,4 +1,5 @@
 ---
 name: GuildControlGetNumRanks
 status: unimplemented
-outputs: n
+outputs:
+- type: n

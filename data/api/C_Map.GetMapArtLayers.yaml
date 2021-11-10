@@ -2,7 +2,8 @@
 name: C_Map.GetMapArtLayers
 status: stub
 inputs: n
-outputs: t
+outputs:
+- type: t
 returns:
 - - additionalZoomSteps: 0
     layerHeight: 1

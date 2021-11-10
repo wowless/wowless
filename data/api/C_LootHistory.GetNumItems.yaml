@@ -1,4 +1,5 @@
 ---
 name: C_LootHistory.GetNumItems
 status: unimplemented
-outputs: n
+outputs:
+- type: n

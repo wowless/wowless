@@ -2,7 +2,8 @@
 name: C_ClassColor.GetClassColor
 status: stub
 inputs: s
-outputs: t
+outputs:
+- type: t
 mixin: ColorMixin
 returns:
 - b: 0

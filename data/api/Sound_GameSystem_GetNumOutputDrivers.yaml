@@ -1,4 +1,5 @@
 ---
 name: Sound_GameSystem_GetNumOutputDrivers
 status: unimplemented
-outputs: n
+outputs:
+- type: n

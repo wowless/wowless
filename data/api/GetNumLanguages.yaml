@@ -1,4 +1,5 @@
 ---
 name: GetNumLanguages
 status: unimplemented
-outputs: n
+outputs:
+- type: n

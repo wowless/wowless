@@ -4,4 +4,7 @@ status: unimplemented
 versions:
 - Mainline
 inputs: ''
-outputs: bbb
+outputs:
+- type: b
+- type: b
+- type: b

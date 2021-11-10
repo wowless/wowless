@@ -2,4 +2,5 @@
 name: GetSpellCritChanceFromIntellect
 status: unimplemented
 inputs: s
-outputs: n
+outputs:
+- type: n

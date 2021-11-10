@@ -5,6 +5,7 @@ comment: 'TODO autogenerate structure, issue #57'
 inputs:
 - n
 - nn
-outputs: t
+outputs:
+- type: t
 returns:
 - name: ''

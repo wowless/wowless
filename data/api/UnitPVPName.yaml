@@ -2,4 +2,5 @@
 name: UnitPVPName
 status: unimplemented
 inputs: s
-outputs: s
+outputs:
+- type: s

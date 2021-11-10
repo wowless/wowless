@@ -1,4 +1,5 @@
 ---
 name: GetNumGroupMembers
 status: unimplemented
-outputs: n
+outputs:
+- type: n

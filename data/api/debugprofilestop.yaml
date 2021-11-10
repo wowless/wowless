@@ -2,4 +2,5 @@
 name: debugprofilestop
 status: unimplemented
 inputs: ''
-outputs: n
+outputs:
+- type: n

@@ -2,4 +2,5 @@
 name: HasArtifactEquipped
 status: unimplemented
 inputs: ''
-outputs: z
+outputs:
+- type: z

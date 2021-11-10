@@ -6,4 +6,6 @@ inputs:
 - tn
 - tnn
 - tnnt
-outputs: ss
+outputs:
+- type: s
+- type: s
