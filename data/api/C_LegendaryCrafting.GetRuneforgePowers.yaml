@@ -6,5 +6,5 @@ inputs:
 - t
 - tn
 outputs:
-- type: t
-- type: t
+- type: table
+- type: table

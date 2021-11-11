@@ -3,4 +3,4 @@ name: GetFramerate
 status: unimplemented
 inputs: ''
 outputs:
-- type: n
+- type: number

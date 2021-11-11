@@ -3,6 +3,6 @@ name: UnitSex
 status: stub
 inputs: s
 outputs:
-- type: x
+- type: nil
 returns:
 - 2

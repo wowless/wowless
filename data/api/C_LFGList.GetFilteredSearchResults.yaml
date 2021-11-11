@@ -3,7 +3,7 @@ name: C_LFGList.GetFilteredSearchResults
 status: stub
 inputs: ''
 outputs:
-- type: n
-- type: t
+- type: number
+- type: table
 returns:
 - 0

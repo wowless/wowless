@@ -3,9 +3,9 @@ name: C_Map.GetWorldPosFromMapPos
 status: stub
 inputs: nt
 outputs:
-- type: n
+- type: number
 - mixin: Vector2DMixin
-  type: t
+  type: table
 returns:
 - 0
 - x: 0

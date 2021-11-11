@@ -6,4 +6,4 @@ inputs:
 - sst
 - sstn
 outputs:
-- type: b
+- type: bool

@@ -2,4 +2,4 @@
 name: GetNumBindings
 status: unimplemented
 outputs:
-- type: n
+- type: number

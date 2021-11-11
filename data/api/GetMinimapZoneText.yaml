@@ -3,4 +3,4 @@ name: GetMinimapZoneText
 status: unimplemented
 inputs: ''
 outputs:
-- type: s
+- type: string

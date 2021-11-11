@@ -3,4 +3,4 @@ name: BNFeaturesEnabled
 status: unimplemented
 inputs: ''
 outputs:
-- type: b
+- type: bool

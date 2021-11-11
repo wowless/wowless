@@ -6,4 +6,4 @@ inputs:
 - sn
 - snb
 outputs:
-- type: n
+- type: number

@@ -5,5 +5,5 @@ inputs:
 - n
 - nn
 outputs:
-- type: s
-- type: s
+- type: string
+- type: string

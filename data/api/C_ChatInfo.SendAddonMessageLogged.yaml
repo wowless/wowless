@@ -6,4 +6,4 @@ inputs:
 - sss
 - ssss
 outputs:
-- type: b
+- type: bool

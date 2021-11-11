@@ -2,4 +2,4 @@
 name: GetNumShapeshiftForms
 status: unimplemented
 outputs:
-- type: n
+- type: number

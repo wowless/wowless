@@ -2,4 +2,4 @@
 name: GetLFGDeserterExpiration
 status: unimplemented
 outputs:
-- type: n
+- type: number

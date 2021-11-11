@@ -3,12 +3,12 @@ name: GetLootSlotInfo
 status: unimplemented
 inputs: n
 outputs:
-- type: s
-- type: s
-- type: n
-- type: n
-- type: n
-- type: b
-- type: b
-- type: n
-- type: b
+- type: string
+- type: string
+- type: number
+- type: number
+- type: number
+- type: bool
+- type: bool
+- type: number
+- type: bool

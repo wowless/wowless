@@ -116,6 +116,15 @@ describe('api', function()
               mixin = true,
               type = true,
             }
+            local types = {
+              bool = true,
+              ['nil'] = true,
+              number = true,
+              oneornil = true,
+              string = true,
+              table = true,
+              unknown = true,
+            }
             local ty = type(t.outputs)
             if (ty == 'table') then
               for _, v in ipairs(t.outputs) do
@@ -125,7 +134,7 @@ describe('api', function()
                 end
                 local ot = assert(v.type)
                 assert.True(type(ot) == 'string')
-                assert.True(string.len(ot) == 1)
+                assert.True(types[ot])
                 assert.True(v.mixin == nil or type(v.mixin) == 'string')
               end
             else

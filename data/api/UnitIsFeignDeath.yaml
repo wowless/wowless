@@ -3,4 +3,4 @@ name: UnitIsFeignDeath
 status: unimplemented
 inputs: s
 outputs:
-- type: z
+- type: oneornil

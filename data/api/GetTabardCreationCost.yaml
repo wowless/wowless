@@ -2,4 +2,4 @@
 name: GetTabardCreationCost
 status: unimplemented
 outputs:
-- type: n
+- type: number

@@ -6,4 +6,4 @@ inputs:
 - nn
 - nnb
 outputs:
-- type: t
+- type: table

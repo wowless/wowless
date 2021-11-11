@@ -6,6 +6,6 @@ inputs:
 - n
 - nn
 outputs:
-- type: t
+- type: table
 returns:
 - name: ''

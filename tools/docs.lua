@@ -79,13 +79,19 @@ local function insig(fn)
   table.insert(t, inputs)
   return t
 end
+local omap = {
+  b = 'bool',
+  n = 'number',
+  s = 'string',
+  t = 'table',
+}
 local function outsig(fn)
   local outputs = {}
   for _, r in ipairs(fn.Returns or {}) do
-    local c = (r.Nilable and 'x') or types[r.Type] or tys[r.Type] or (enum[r.Type] and 'n')
+    local c = (r.Nilable and 'nil') or omap[types[r.Type] or tys[r.Type] or (enum[r.Type] and 'n')]
     if not c then
       print('unknown type ' .. r.Type)
-      c = '?'
+      c = 'unknown'
     end
     table.insert(outputs, {type = c, mixin = r.Mixin})
   end

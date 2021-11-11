@@ -3,4 +3,4 @@ name: GetClickFrame
 status: unimplemented
 inputs: s
 outputs:
-- type: x
+- type: nil

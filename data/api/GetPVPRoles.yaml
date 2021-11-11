@@ -5,6 +5,6 @@ versions:
 - Mainline
 inputs: ''
 outputs:
-- type: b
-- type: b
-- type: b
+- type: bool
+- type: bool
+- type: bool

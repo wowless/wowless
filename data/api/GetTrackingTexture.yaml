@@ -5,4 +5,4 @@ versions:
 - Vanilla
 inputs: ''
 outputs:
-- type: x
+- type: nil

@@ -3,4 +3,4 @@ name: GetDownloadedPercentage
 status: unimplemented
 inputs: ''
 outputs:
-- type: n
+- type: number

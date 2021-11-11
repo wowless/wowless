@@ -3,4 +3,4 @@ name: GetSchoolString
 status: unimplemented
 inputs: n
 outputs:
-- type: s
+- type: string

@@ -2,4 +2,4 @@
 name: GetNumRecruitingGuilds
 status: unimplemented
 outputs:
-- type: n
+- type: number

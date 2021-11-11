@@ -6,4 +6,4 @@ versions:
 - Vanilla
 inputs: n
 outputs:
-- type: x
+- type: nil

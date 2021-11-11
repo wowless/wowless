@@ -3,4 +3,4 @@ name: GetAttackPowerForStat
 status: unimplemented
 inputs: nn
 outputs:
-- type: n
+- type: number

@@ -3,4 +3,4 @@ name: HasArtifactEquipped
 status: unimplemented
 inputs: ''
 outputs:
-- type: z
+- type: oneornil

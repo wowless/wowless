@@ -3,15 +3,15 @@ name: C_PetJournal.GetPetInfoBySpeciesID
 status: unimplemented
 inputs: n
 outputs:
-- type: s
-- type: s
-- type: n
-- type: n
-- type: s
-- type: s
-- type: b
-- type: b
-- type: b
-- type: b
-- type: b
-- type: n
+- type: string
+- type: string
+- type: number
+- type: number
+- type: string
+- type: string
+- type: bool
+- type: bool
+- type: bool
+- type: bool
+- type: bool
+- type: number

@@ -2,4 +2,4 @@
 name: GetSpecialization
 status: unimplemented
 outputs:
-- type: n
+- type: number

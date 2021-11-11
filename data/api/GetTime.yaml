@@ -2,4 +2,4 @@
 name: GetTime
 status: unimplemented
 outputs:
-- type: n
+- type: number

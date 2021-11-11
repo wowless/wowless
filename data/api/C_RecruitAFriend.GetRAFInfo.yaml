@@ -3,4 +3,4 @@ name: C_RecruitAFriend.GetRAFInfo
 status: unimplemented
 inputs: ''
 outputs:
-- type: x
+- type: nil

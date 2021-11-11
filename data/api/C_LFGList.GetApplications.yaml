@@ -2,4 +2,4 @@
 name: C_LFGList.GetApplications
 status: unimplemented
 outputs:
-- type: t
+- type: table

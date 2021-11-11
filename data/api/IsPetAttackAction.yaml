@@ -3,4 +3,4 @@ name: IsPetAttackAction
 status: unimplemented
 inputs: n
 outputs:
-- type: b
+- type: bool

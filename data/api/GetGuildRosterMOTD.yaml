@@ -2,4 +2,4 @@
 name: GetGuildRosterMOTD
 status: unimplemented
 outputs:
-- type: s
+- type: string

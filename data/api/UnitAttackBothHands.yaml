@@ -6,7 +6,7 @@ versions:
 - Vanilla
 inputs: s
 outputs:
-- type: n
-- type: n
-- type: n
-- type: n
+- type: number
+- type: number
+- type: number
+- type: number

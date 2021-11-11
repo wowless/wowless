@@ -3,6 +3,6 @@ name: GetCategoryInfo
 status: unimplemented
 inputs: n
 outputs:
-- type: s
-- type: n
-- type: n
+- type: string
+- type: number
+- type: number

@@ -2,4 +2,4 @@
 name: GetCategoryList
 status: unimplemented
 outputs:
-- type: t
+- type: table

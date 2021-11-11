@@ -7,5 +7,5 @@ inputs:
 - tnn
 - tnnt
 outputs:
-- type: s
-- type: s
+- type: string
+- type: string

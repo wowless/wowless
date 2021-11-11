@@ -3,5 +3,5 @@ name: GetExpertisePercent
 status: unimplemented
 inputs: ''
 outputs:
-- type: n
-- type: n
+- type: number
+- type: number

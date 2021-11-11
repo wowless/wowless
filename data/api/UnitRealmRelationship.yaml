@@ -3,4 +3,4 @@ name: UnitRealmRelationship
 status: unimplemented
 inputs: s
 outputs:
-- type: n
+- type: number

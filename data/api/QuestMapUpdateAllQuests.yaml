@@ -2,4 +2,4 @@
 name: QuestMapUpdateAllQuests
 status: unimplemented
 outputs:
-- type: n
+- type: number

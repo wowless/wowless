@@ -6,4 +6,4 @@ inputs:
 - ns
 - nss
 outputs:
-- type: b
+- type: bool

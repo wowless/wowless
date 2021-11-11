@@ -5,8 +5,8 @@ inputs:
 - ''
 - n
 outputs:
-- type: n
-- type: s
-- type: s
-- type: n
-- type: x
+- type: number
+- type: string
+- type: string
+- type: number
+- type: nil

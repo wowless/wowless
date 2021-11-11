@@ -2,4 +2,4 @@
 name: GetNumSavedInstances
 status: unimplemented
 outputs:
-- type: n
+- type: number

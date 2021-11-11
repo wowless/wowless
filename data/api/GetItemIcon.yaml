@@ -3,4 +3,4 @@ name: GetItemIcon
 status: unimplemented
 inputs: n
 outputs:
-- type: n
+- type: number

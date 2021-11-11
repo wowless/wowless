@@ -3,7 +3,7 @@ name: C_DateAndTime.GetCurrentCalendarTime
 status: stub
 inputs: ''
 outputs:
-- type: '?'
+- type: unknown
 returns:
 - hour: 3
   minute: 26

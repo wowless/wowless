@@ -3,4 +3,4 @@ name: UnitReaction
 status: unimplemented
 inputs: ss
 outputs:
-- type: n
+- type: number

@@ -2,4 +2,4 @@
 name: GetMaxBattlefieldID
 status: unimplemented
 outputs:
-- type: n
+- type: number

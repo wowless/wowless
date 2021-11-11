@@ -9,4 +9,4 @@ inputs:
 - snnb
 - snnbs
 outputs:
-- type: t
+- type: table

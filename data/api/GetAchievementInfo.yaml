@@ -5,18 +5,18 @@ inputs:
 - n
 - nn
 outputs:
-- type: n
-- type: s
-- type: n
-- type: b
-- type: n
-- type: n
-- type: n
-- type: s
-- type: n
-- type: n
-- type: s
-- type: b
-- type: b
-- type: s
-- type: b
+- type: number
+- type: string
+- type: number
+- type: bool
+- type: number
+- type: number
+- type: number
+- type: string
+- type: number
+- type: number
+- type: string
+- type: bool
+- type: bool
+- type: string
+- type: bool

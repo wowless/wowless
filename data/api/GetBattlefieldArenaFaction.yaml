@@ -3,4 +3,4 @@ name: GetBattlefieldArenaFaction
 status: unimplemented
 inputs: ''
 outputs:
-- type: n
+- type: number

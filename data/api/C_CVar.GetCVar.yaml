@@ -3,6 +3,6 @@ name: C_CVar.GetCVar
 status: implemented
 inputs: s
 outputs:
-- type: x
+- type: nil
 module: cvar
 api: GetCVar

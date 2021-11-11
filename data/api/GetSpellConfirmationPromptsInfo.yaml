@@ -2,4 +2,4 @@
 name: GetSpellConfirmationPromptsInfo
 status: unimplemented
 outputs:
-- type: t
+- type: table

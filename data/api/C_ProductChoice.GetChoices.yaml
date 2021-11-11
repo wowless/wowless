@@ -2,4 +2,4 @@
 name: C_ProductChoice.GetChoices
 status: unimplemented
 outputs:
-- type: t
+- type: table

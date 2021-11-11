@@ -5,6 +5,6 @@ inputs:
 - s
 - ts
 outputs:
-- type: b
+- type: bool
 returns:
 - true

@@ -3,10 +3,10 @@ name: BNGetInfo
 status: unimplemented
 inputs: ''
 outputs:
-- type: x
-- type: s
-- type: n
-- type: s
-- type: b
-- type: b
-- type: b
+- type: nil
+- type: string
+- type: number
+- type: string
+- type: bool
+- type: bool
+- type: bool

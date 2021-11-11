@@ -5,4 +5,4 @@ inputs:
 - s
 - sn
 outputs:
-- type: b
+- type: bool

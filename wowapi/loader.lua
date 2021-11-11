@@ -68,13 +68,13 @@ end)()
 
 local getStub = (function()
   local defaultOutputs = {
-    b = 'false',
-    n = '1',
-    s = '\'\'',
-    t = '{}',
-    x = 'nil',
-    z = 'nil',
-    ['?'] = 'nil',
+    bool = 'false',
+    ['nil'] = 'nil',
+    number = '1',
+    oneornil = 'nil',
+    string = '\'\'',
+    table = '{}',
+    unknown = 'nil',
   }
   local function mkStub(sig)
     local rets = {}

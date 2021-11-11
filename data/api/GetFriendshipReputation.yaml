@@ -5,12 +5,12 @@ versions:
 - Mainline
 inputs: n
 outputs:
-- type: n
-- type: n
-- type: n
-- type: s
-- type: s
-- type: n
-- type: s
-- type: n
-- type: n
+- type: number
+- type: number
+- type: number
+- type: string
+- type: string
+- type: number
+- type: string
+- type: number
+- type: number

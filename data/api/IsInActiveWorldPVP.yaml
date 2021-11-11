@@ -5,4 +5,4 @@ inputs:
 - ''
 - s
 outputs:
-- type: z
+- type: oneornil

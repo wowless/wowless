@@ -3,6 +3,6 @@ name: GetClassInfo
 status: unimplemented
 inputs: n
 outputs:
-- type: s
-- type: s
-- type: n
+- type: string
+- type: string
+- type: number

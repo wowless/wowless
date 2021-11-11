@@ -2,4 +2,4 @@
 name: GetNumQuestLogChoices
 status: unimplemented
 outputs:
-- type: n
+- type: number

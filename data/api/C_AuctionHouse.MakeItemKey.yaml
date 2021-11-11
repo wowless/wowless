@@ -7,4 +7,4 @@ inputs:
 - nnn
 - nnnn
 outputs:
-- type: t
+- type: table

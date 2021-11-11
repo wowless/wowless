@@ -2,4 +2,4 @@
 name: GetBindingText
 status: unimplemented
 outputs:
-- type: s
+- type: string

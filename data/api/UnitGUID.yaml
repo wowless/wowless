@@ -3,6 +3,6 @@ name: UnitGUID
 status: stub
 inputs: s
 outputs:
-- type: s
+- type: string
 returns:
 - Player-1096-06DF65C1

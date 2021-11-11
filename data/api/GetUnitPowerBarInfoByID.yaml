@@ -5,4 +5,4 @@ inputs:
 - n
 - s
 outputs:
-- type: t
+- type: table

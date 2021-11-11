@@ -5,4 +5,4 @@ inputs:
 - ''
 - s
 outputs:
-- type: x
+- type: nil

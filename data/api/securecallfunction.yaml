@@ -8,4 +8,4 @@ inputs:
 - tfb
 - tft
 outputs:
-- type: '?'
+- type: unknown

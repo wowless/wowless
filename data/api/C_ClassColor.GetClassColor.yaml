@@ -4,7 +4,7 @@ status: stub
 inputs: s
 outputs:
 - mixin: ColorMixin
-  type: t
+  type: table
 returns:
 - b: 0
   g: 0

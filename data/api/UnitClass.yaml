@@ -3,9 +3,9 @@ name: UnitClass
 status: stub
 inputs: s
 outputs:
-- type: s
-- type: s
-- type: n
+- type: string
+- type: string
+- type: number
 returns:
 - Warrior
 - WARRIOR

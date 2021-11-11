@@ -3,7 +3,7 @@ name: SecureCmdOptionParse
 status: stub
 inputs: s
 outputs:
-- type: s
-- type: '?'
-- type: s
-- type: '?'
+- type: string
+- type: unknown
+- type: string
+- type: unknown

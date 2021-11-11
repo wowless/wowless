@@ -3,4 +3,4 @@ name: GetInventoryItemCount
 status: unimplemented
 inputs: sn
 outputs:
-- type: n
+- type: number

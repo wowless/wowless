@@ -5,7 +5,7 @@ inputs:
 - ''
 - n
 outputs:
-- type: t
+- type: table
 returns:
 - canEarnPerWeek: true
   discovered: true

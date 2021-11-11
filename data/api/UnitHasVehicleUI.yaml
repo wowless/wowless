@@ -3,4 +3,4 @@ name: UnitHasVehicleUI
 status: unimplemented
 inputs: s
 outputs:
-- type: z
+- type: oneornil

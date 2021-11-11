@@ -6,4 +6,4 @@ inputs:
 - tn
 - tnt
 outputs:
-- type: x
+- type: nil

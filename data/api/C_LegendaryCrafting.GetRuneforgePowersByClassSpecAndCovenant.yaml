@@ -8,4 +8,4 @@ inputs:
 - nnn
 - nnxn
 outputs:
-- type: t
+- type: table

@@ -6,4 +6,4 @@ inputs:
 - sn
 - snn
 outputs:
-- type: x
+- type: nil

@@ -3,4 +3,4 @@ name: HasExtraActionBar
 status: unimplemented
 inputs: ''
 outputs:
-- type: z
+- type: oneornil

@@ -3,8 +3,8 @@ name: UnitClassBase
 status: stub
 inputs: s
 outputs:
-- type: s
-- type: n
+- type: string
+- type: number
 returns:
 - WARRIOR
 - 1

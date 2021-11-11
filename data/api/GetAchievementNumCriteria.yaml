@@ -5,4 +5,4 @@ inputs:
 - s
 - n
 outputs:
-- type: n
+- type: number

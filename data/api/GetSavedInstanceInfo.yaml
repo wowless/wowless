@@ -3,16 +3,16 @@ name: GetSavedInstanceInfo
 status: unimplemented
 inputs: n
 outputs:
-- type: s
-- type: n
-- type: n
-- type: n
-- type: b
-- type: b
-- type: n
-- type: b
-- type: n
-- type: s
-- type: n
-- type: n
-- type: b
+- type: string
+- type: number
+- type: number
+- type: number
+- type: bool
+- type: bool
+- type: number
+- type: bool
+- type: number
+- type: string
+- type: number
+- type: number
+- type: bool

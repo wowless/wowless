@@ -6,6 +6,6 @@ inputs:
 - ss
 - sss
 outputs:
-- type: b
+- type: bool
 module: cvar
 api: SetCVar

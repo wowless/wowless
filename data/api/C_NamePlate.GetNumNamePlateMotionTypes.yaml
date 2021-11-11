@@ -2,4 +2,4 @@
 name: C_NamePlate.GetNumNamePlateMotionTypes
 status: unimplemented
 outputs:
-- type: n
+- type: number

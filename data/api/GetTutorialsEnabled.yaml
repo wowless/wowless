@@ -5,4 +5,4 @@ versions:
 - Mainline
 inputs: ''
 outputs:
-- type: b
+- type: bool

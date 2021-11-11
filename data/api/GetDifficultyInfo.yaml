@@ -5,10 +5,10 @@ versions:
 - Mainline
 inputs: n
 outputs:
-- type: s
-- type: s
-- type: b
-- type: b
-- type: b
-- type: b
-- type: n
+- type: string
+- type: string
+- type: bool
+- type: bool
+- type: bool
+- type: bool
+- type: number

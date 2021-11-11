@@ -3,4 +3,4 @@ name: UnitHasRelicSlot
 status: unimplemented
 inputs: s
 outputs:
-- type: b
+- type: bool

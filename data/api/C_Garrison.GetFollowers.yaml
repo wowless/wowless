@@ -2,4 +2,4 @@
 name: C_Garrison.GetFollowers
 status: unimplemented
 outputs:
-- type: t
+- type: table

@@ -2,4 +2,4 @@
 name: GetQuestLogRequiredMoney
 status: unimplemented
 outputs:
-- type: n
+- type: number

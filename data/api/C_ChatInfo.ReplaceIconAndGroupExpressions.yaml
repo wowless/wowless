@@ -6,4 +6,4 @@ inputs:
 - sb
 - sbb
 outputs:
-- type: s
+- type: string

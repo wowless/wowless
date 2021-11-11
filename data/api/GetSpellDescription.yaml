@@ -3,4 +3,4 @@ name: GetSpellDescription
 status: unimplemented
 inputs: n
 outputs:
-- type: s
+- type: string

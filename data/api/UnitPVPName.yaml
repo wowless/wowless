@@ -3,4 +3,4 @@ name: UnitPVPName
 status: unimplemented
 inputs: s
 outputs:
-- type: s
+- type: string

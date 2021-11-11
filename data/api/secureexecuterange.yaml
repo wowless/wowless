@@ -8,4 +8,4 @@ inputs:
 - tft
 - tfs
 outputs:
-- type: n
+- type: number

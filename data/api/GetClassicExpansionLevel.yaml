@@ -2,4 +2,4 @@
 name: GetClassicExpansionLevel
 status: unimplemented
 outputs:
-- type: n
+- type: number

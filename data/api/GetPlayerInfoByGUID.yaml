@@ -3,10 +3,10 @@ name: GetPlayerInfoByGUID
 status: unimplemented
 inputs: s
 outputs:
-- type: s
-- type: s
-- type: s
-- type: s
-- type: n
-- type: s
-- type: s
+- type: string
+- type: string
+- type: string
+- type: string
+- type: number
+- type: string
+- type: string

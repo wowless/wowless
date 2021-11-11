@@ -3,5 +3,5 @@ name: AcceptBattlefieldPort
 status: unimplemented
 inputs: nb
 outputs:
-- type: b
+- type: bool
 protection: hardware

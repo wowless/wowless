@@ -3,9 +3,9 @@ name: GetWatchedFactionInfo
 status: unimplemented
 inputs: ''
 outputs:
-- type: s
-- type: n
-- type: n
-- type: n
-- type: n
-- type: n
+- type: string
+- type: number
+- type: number
+- type: number
+- type: number
+- type: number

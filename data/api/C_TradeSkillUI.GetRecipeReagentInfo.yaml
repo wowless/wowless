@@ -5,7 +5,7 @@ inputs:
 - nn
 - nnn
 outputs:
-- type: x
-- type: x
-- type: n
-- type: n
+- type: nil
+- type: nil
+- type: number
+- type: number

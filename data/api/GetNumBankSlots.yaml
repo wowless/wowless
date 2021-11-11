@@ -3,5 +3,5 @@ name: GetNumBankSlots
 status: unimplemented
 inputs: ''
 outputs:
-- type: n
-- type: z
+- type: number
+- type: oneornil
