@@ -17,6 +17,6 @@ fields:
   type: number
 - mixin: Vector2DMixin
   name: normalizedPosition
-  type: table
+  type: Vector2D
 - name: state
   type: AnimaDiversionNodeState

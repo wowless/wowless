@@ -13,8 +13,8 @@ fields:
 - mixin: ColorMixin
   name: swatchColor1
   nilable: true
-  type: table
+  type: Color
 - mixin: ColorMixin
   name: swatchColor2
   nilable: true
-  type: table
+  type: Color

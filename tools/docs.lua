@@ -212,10 +212,14 @@ for f, envt in pairs(docs) do
               for k in pairs(field) do
                 assert(expectedStructureFieldKeys[k], ('unexpected field key %q in %q'):format(k, f))
               end
+              local ty = field.Type
+              if ty == 'table' and field.Mixin then
+                ty = knownMixinStructs[field.Mixin] or ty
+              end
               table.insert(ret, {
                 name = field.Name,
                 nilable = field.Nilable,
-                type = field.Type,
+                type = ty,
                 innerType = field.InnerType,
                 mixin = field.Mixin,
                 default = field.Default,

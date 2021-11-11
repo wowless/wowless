@@ -25,4 +25,4 @@ fields:
   type: string
 - mixin: ColorMixin
   name: bannerColor
-  type: table
+  type: Color

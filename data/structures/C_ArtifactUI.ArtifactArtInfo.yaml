@@ -8,13 +8,13 @@ fields:
   type: string
 - mixin: ColorMixin
   name: titleColor
-  type: table
+  type: Color
 - mixin: ColorMixin
   name: barConnectedColor
-  type: table
+  type: Color
 - mixin: ColorMixin
   name: barDisconnectedColor
-  type: table
+  type: Color
 - name: uiModelSceneID
   type: number
 - name: spellVisualKitID

@@ -64,4 +64,4 @@ fields:
 - mixin: ColorMixin
   name: colorTint
   nilable: true
-  type: table
+  type: Color

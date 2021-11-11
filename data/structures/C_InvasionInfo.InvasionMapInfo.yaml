@@ -8,7 +8,7 @@ fields:
   type: string
 - mixin: Vector2DMixin
   name: position
-  type: table
+  type: Vector2D
 - name: atlasName
   type: string
 - name: rewardQuestID

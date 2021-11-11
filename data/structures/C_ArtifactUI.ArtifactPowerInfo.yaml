@@ -26,11 +26,11 @@ fields:
   type: number
 - mixin: Vector2DMixin
   name: position
-  type: table
+  type: Vector2D
 - mixin: Vector2DMixin
   name: offset
   nilable: true
-  type: table
+  type: Vector2D
 - name: linearIndex
   nilable: true
   type: number
