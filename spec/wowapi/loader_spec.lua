@@ -2,7 +2,7 @@ describe('loader', function()
   local loader = require('wowapi.loader')
 
   it('loads', function()
-    assert.same('table', type(loader.loadFunctions('data/api')))
+    assert.same('table', type(loader.loadFunctions()))
   end)
 
   describe('argSig', function()

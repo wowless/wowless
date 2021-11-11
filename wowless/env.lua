@@ -1590,7 +1590,7 @@ end
 local function init(api, loader)
   setmetatable(api.env, mkMetaEnv(api))
   Mixin(api.env, mkBaseEnv())
-  util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions('data/api', loader.version, api.env), true)
+  util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(loader.version, api.env), true)
   util.recursiveMixin(api.env, mkWowEnv(api, loader), true)
   Mixin(api.uiobjectTypes, mkBaseUIObjectTypes(api, loader))
 end

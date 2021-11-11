@@ -1,5 +1,34 @@
-local yaml = require('wowapi.yaml')
+local lfsdir = require('lfs').dir
 local yamlnull = require('lyaml').null
+local yamlparse = require('wowapi.yaml').parseFile
+
+local apiYamls, apiLuas = (function()
+  local yamls, luas = {}, {}
+  for f in lfsdir('data/api') do
+    local filename = 'data/api/' .. f
+    if f:sub(-4) == '.lua' then
+      local fn = f:sub(1, -5)
+      local lua = loadfile(filename)
+      luas[fn] = lua
+    elseif f:sub(-5) == '.yaml' then
+      local fn = f:sub(1, -6)
+      local api = yamlparse(filename)
+      yamls[fn] = api
+    end
+  end
+  return yamls, luas
+end)()
+
+local apiModules = (function()
+  local modules = {}
+  for f in lfsdir('data/modules') do
+    if f:sub(-4) == '.lua' then
+      local fn = f:sub(1, -5)
+      modules[fn] = loadfile('data/modules/' .. f)
+    end
+  end
+  return modules
+end)()
 
 local function mixin(b, t)
   b = b or {}
@@ -13,27 +42,24 @@ local loadApis = (function()
   local env = {
     require = require,
   }
-  return function(dir, version)
+  return function(version)
     local apis = {}
-    for f in require('lfs').dir(dir) do
-      if f:sub(-4) == '.lua' then
-        local fn = f:sub(1, -5)
-        local api = setfenv(loadfile(dir .. '/' .. f), env)()
-        apis[fn] = mixin(apis[fn], api)
-      elseif f:sub(-5) == '.yaml' then
-        local fn = f:sub(1, -6)
-        local api = yaml.parseFile(dir .. '/' .. f)
-        local match = not api.versions
-        if api.versions then
-          for _, v in ipairs(api.versions) do
-            if version == v then
-              match = true
-            end
+    for fn, yaml in pairs(apiYamls) do
+      local match = not yaml.versions
+      if yaml.versions then
+        for _, v in ipairs(yaml.versions) do
+          if version == v then
+            match = true
           end
         end
-        if match then
-          apis[fn] = mixin(apis[fn], api)
-        end
+      end
+      if match then
+        apis[fn] = yaml
+      end
+    end
+    for fn, lua in pairs(apiLuas) do
+      if apis[fn] then
+        mixin(apis[fn], setfenv(lua, env)())
       end
     end
     return apis
@@ -137,15 +163,13 @@ local function getFn(api, modules, env)
   end
 end
 
-local function loadFunctions(dir, version, env)
+local function loadFunctions(version, env)
   local mods = {}
-  for filename in require('lfs').dir(dir .. '/../modules') do
-    if filename:sub(-4) == '.lua' then
-      mods[filename:sub(1, -5)] = loadfile(dir .. '/../modules/' .. filename)(env)
-    end
+  for k, v in pairs(apiModules) do
+    mods[k] = v(env)
   end
   local fns = {}
-  for fn, api in pairs(loadApis(dir, version)) do
+  for fn, api in pairs(loadApis(version)) do
     local bfn = getFn(api, mods, env)
     local impl = (function()
       if api.inputs == nil then
