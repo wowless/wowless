@@ -19,9 +19,9 @@ fields:
   nilable: true
   type: number
 - name: time
-  type: unknown
+  type: CalendarTime
 - name: lockoutTime
-  type: unknown
+  type: CalendarTime
 - name: isLocked
   type: bool
 - name: isAutoApprove

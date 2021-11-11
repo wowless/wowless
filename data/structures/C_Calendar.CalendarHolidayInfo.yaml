@@ -10,7 +10,7 @@ fields:
   type: number
 - name: startTime
   nilable: true
-  type: unknown
+  type: CalendarTime
 - name: endTime
   nilable: true
-  type: unknown
+  type: CalendarTime

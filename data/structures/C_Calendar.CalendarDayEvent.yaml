@@ -9,9 +9,9 @@ fields:
 - name: isCustomTitle
   type: bool
 - name: startTime
-  type: unknown
+  type: CalendarTime
 - name: endTime
-  type: unknown
+  type: CalendarTime
 - name: calendarType
   type: string
 - name: sequenceType

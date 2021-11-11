@@ -1,0 +1,16 @@
+---
+name: CalendarTime
+status: implemented
+fields:
+- name: hour
+  type: number
+- name: minute
+  type: number
+- name: month
+  type: number
+- name: monthDay
+  type: number
+- name: weekday
+  type: number
+- name: year
+  type: number

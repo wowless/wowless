@@ -59,6 +59,11 @@ for _, envt in pairs(docs) do
     end
   end
 end
+for k, v in pairs(require('wowapi.data').structures) do
+  if v.status == 'implemented' then
+    tys[k] = 't'
+  end
+end
 local function insig(fn, ns)
   local inputs = ''
   local firstDefault = nil
