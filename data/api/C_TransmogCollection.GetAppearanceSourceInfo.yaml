@@ -19,6 +19,6 @@ outputs:
   type: string
 - name: sourceType
   nilable: true
-  type: nil
+  type: number
 - name: itemSubClass
   type: number

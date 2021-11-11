@@ -20,10 +20,10 @@ fields:
 - name: conduitRank
   type: number
 - name: state
-  type: SoulbindNodeState
+  type: number
 - name: conduitType
   nilable: true
-  type: SoulbindConduitType
+  type: number
 - innerType: number
   name: parentNodeIDs
   type: table

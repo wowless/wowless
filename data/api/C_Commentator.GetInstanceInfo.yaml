@@ -7,7 +7,7 @@ outputs:
   type: number
 - name: mapName
   nilable: true
-  type: nil
+  type: string
 - name: status
   type: number
 - name: instanceIDLow

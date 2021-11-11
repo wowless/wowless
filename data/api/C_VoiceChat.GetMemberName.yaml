@@ -5,4 +5,4 @@ inputs: nn
 outputs:
 - name: memberName
   nilable: true
-  type: nil
+  type: string

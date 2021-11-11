@@ -5,7 +5,7 @@ fields:
 - name: id
   type: number
 - name: ability
-  type: GarrisonFollowerAbilityInfo
+  type: table
 - name: name
   type: string
 - name: icon
@@ -35,7 +35,7 @@ fields:
   name: researchCurrencyCosts
   type: table
 - name: talentAvailability
-  type: GarrisonTalentAvailability
+  type: number
 - name: talentRank
   type: number
 - name: talentMaxRank
@@ -53,4 +53,4 @@ fields:
   nilable: true
   type: string
 - name: socketInfo
-  type: GarrisonTalentSocketInfo
+  type: table

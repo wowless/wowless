@@ -5,4 +5,4 @@ inputs: ''
 outputs:
 - name: memberInfo
   nilable: true
-  type: nil
+  type: table

@@ -22,7 +22,7 @@ fields:
   type: table
 - name: autoCombatAutoAttack
   nilable: true
-  type: AutoCombatSpellInfo
+  type: table
 - name: role
   type: number
 - name: health

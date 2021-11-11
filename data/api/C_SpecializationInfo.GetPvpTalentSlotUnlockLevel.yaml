@@ -5,4 +5,4 @@ inputs: n
 outputs:
 - name: requiredLevel
   nilable: true
-  type: nil
+  type: number

@@ -9,15 +9,15 @@ fields:
 - name: isCustomTitle
   type: bool
 - name: startTime
-  type: CalendarTime
+  type: unknown
 - name: endTime
-  type: CalendarTime
+  type: unknown
 - name: calendarType
   type: string
 - name: sequenceType
   type: string
 - name: eventType
-  type: CalendarEventType
+  type: number
 - name: iconTexture
   nilable: true
   type: number

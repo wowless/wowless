@@ -17,9 +17,9 @@ fields:
 - name: cvarIndex
   type: number
 - name: tree
-  type: SoulbindTree
+  type: table
 - name: modelSceneData
-  type: SoulbindModelSceneData
+  type: table
 - name: activationSoundKitID
   type: number
 - name: playerConditionReason

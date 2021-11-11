@@ -5,4 +5,4 @@ inputs: ''
 outputs:
 - name: brawlInfo
   nilable: true
-  type: nil
+  type: table

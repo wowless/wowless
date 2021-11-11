@@ -5,4 +5,4 @@ inputs: s
 outputs:
 - name: itemName
   nilable: true
-  type: nil
+  type: string

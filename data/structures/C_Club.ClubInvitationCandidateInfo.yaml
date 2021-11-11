@@ -9,4 +9,4 @@ fields:
 - name: priority
   type: number
 - name: status
-  type: ClubInvitationCandidateStatus
+  type: number

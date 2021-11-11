@@ -15,4 +15,4 @@ outputs:
   type: number
 - name: portraitGiverModelSceneID
   nilable: true
-  type: nil
+  type: number

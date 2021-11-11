@@ -7,6 +7,6 @@ fields:
 - name: name
   type: string
 - name: mapType
-  type: UIMapType
+  type: number
 - name: parentMapID
   type: number

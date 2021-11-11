@@ -6,4 +6,4 @@ outputs:
 - innerType: VoiceAudioDevice
   name: outputDevices
   nilable: true
-  type: nil
+  type: table

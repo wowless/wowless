@@ -11,7 +11,7 @@ fields:
   type: number
 - name: quality
   nilable: true
-  type: WorldQuestQuality
+  type: number
 - name: tradeskillLineID
   nilable: true
   type: number

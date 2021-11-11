@@ -5,4 +5,4 @@ inputs: sn
 outputs:
 - name: value
   nilable: true
-  type: nil
+  type: bool

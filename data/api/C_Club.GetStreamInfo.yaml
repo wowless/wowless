@@ -5,4 +5,4 @@ inputs: ss
 outputs:
 - name: streamInfo
   nilable: true
-  type: nil
+  type: table

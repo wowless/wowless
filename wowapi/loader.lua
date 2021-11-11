@@ -52,7 +52,7 @@ local getStub = (function()
     structureDefaults[name] = (function()
       local t = {}
       for _, field in ipairs(st.fields) do
-        local v = tostring(defaultOutputs[field.type])
+        local v = tostring(defaultOutputs[field.nilable and 'nil' or field.type])
         table.insert(t, ('[%q]=%s'):format(field.name, v))
       end
       return '{' .. table.concat(t, ',') .. '}'
@@ -61,7 +61,7 @@ local getStub = (function()
   return function(sig)
     local rets = {}
     for _, out in ipairs(sig) do
-      local v = defaultOutputs[out.type] or structureDefaults[out.type]
+      local v = defaultOutputs[out.nilable and 'nil' or out.type] or structureDefaults[out.type]
       assert(v, ('invalid output type %q'):format(out.type))
       table.insert(rets, v)
     end

@@ -5,4 +5,4 @@ inputs: ''
 outputs:
 - name: guildClubId
   nilable: true
-  type: nil
+  type: string

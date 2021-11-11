@@ -10,7 +10,7 @@ fields:
   name: rewards
   type: table
 - name: status
-  type: GossipOptionStatus
+  type: number
 - name: spellID
   nilable: true
   type: number

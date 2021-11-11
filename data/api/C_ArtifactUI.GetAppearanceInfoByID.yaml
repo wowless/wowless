@@ -15,12 +15,12 @@ outputs:
   type: bool
 - name: failureDescription
   nilable: true
-  type: nil
+  type: string
 - name: uiCameraID
   type: number
 - name: altHandCameraID
   nilable: true
-  type: nil
+  type: number
 - name: swatchColorR
   type: number
 - name: swatchColorG

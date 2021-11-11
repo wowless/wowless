@@ -10,6 +10,6 @@ outputs:
   type: number
 - name: timeOfNextStateChange
   nilable: true
-  type: nil
+  type: number
 - name: startTime
   type: number

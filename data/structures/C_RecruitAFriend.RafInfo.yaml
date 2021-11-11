@@ -15,10 +15,10 @@ fields:
   type: table
 - name: nextReward
   nilable: true
-  type: RafReward
+  type: table
 - name: recruitmentInfo
   nilable: true
-  type: RafRecruitmentinfo
+  type: table
 - innerType: RafRecruit
   name: recruits
   type: table

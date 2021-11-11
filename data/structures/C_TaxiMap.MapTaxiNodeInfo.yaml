@@ -12,7 +12,7 @@ fields:
 - name: atlasName
   type: string
 - name: faction
-  type: FlightPathFaction
+  type: number
 - name: textureKitPrefix
   nilable: true
   type: string

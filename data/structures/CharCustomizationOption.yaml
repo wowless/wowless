@@ -9,7 +9,7 @@ fields:
 - name: orderIndex
   type: number
 - name: optionType
-  type: ChrCustomizationOptionType
+  type: number
 - innerType: CharCustomizationChoice
   name: choices
   type: table

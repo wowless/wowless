@@ -7,4 +7,4 @@ inputs:
 outputs:
 - name: isConnected
   nilable: true
-  type: nil
+  type: bool

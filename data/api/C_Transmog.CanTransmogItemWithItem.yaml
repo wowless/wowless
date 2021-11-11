@@ -7,4 +7,4 @@ outputs:
   type: bool
 - name: failureReason
   nilable: true
-  type: nil
+  type: string

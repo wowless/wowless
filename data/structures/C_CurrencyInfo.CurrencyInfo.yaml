@@ -27,7 +27,7 @@ fields:
 - name: isTradeable
   type: bool
 - name: quality
-  type: ItemQuality
+  type: number
 - name: maxWeeklyQuantity
   type: number
 - name: totalEarned

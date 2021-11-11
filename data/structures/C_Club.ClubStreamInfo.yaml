@@ -11,6 +11,6 @@ fields:
 - name: leadersAndModeratorsOnly
   type: bool
 - name: streamType
-  type: ClubStreamType
+  type: number
 - name: creationTime
   type: number

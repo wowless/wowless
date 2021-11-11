@@ -5,4 +5,4 @@ inputs: s
 outputs:
 - name: invitation
   nilable: true
-  type: nil
+  type: table

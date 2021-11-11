@@ -5,4 +5,4 @@ inputs: tn
 outputs:
 - name: result
   nilable: true
-  type: nil
+  type: table

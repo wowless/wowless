@@ -5,4 +5,4 @@ inputs: t
 outputs:
 - name: config
   nilable: true
-  type: nil
+  type: table

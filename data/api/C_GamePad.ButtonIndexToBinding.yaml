@@ -5,4 +5,4 @@ inputs: n
 outputs:
 - name: bindingName
   nilable: true
-  type: nil
+  type: string

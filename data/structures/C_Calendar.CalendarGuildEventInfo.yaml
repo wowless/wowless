@@ -17,7 +17,7 @@ fields:
 - name: minute
   type: number
 - name: eventType
-  type: CalendarEventType
+  type: number
 - name: title
   type: string
 - name: calendarType

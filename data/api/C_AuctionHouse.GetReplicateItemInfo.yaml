@@ -5,22 +5,22 @@ inputs: n
 outputs:
 - name: name
   nilable: true
-  type: nil
+  type: string
 - name: texture
   nilable: true
-  type: nil
+  type: number
 - name: count
   type: number
 - name: qualityID
   type: number
 - name: usable
   nilable: true
-  type: nil
+  type: bool
 - name: level
   type: number
 - name: levelType
   nilable: true
-  type: nil
+  type: string
 - name: minBid
   type: number
 - name: minIncrement
@@ -31,20 +31,20 @@ outputs:
   type: number
 - name: highBidder
   nilable: true
-  type: nil
+  type: string
 - name: bidderFullName
   nilable: true
-  type: nil
+  type: string
 - name: owner
   nilable: true
-  type: nil
+  type: string
 - name: ownerFullName
   nilable: true
-  type: nil
+  type: string
 - name: saleStatus
   type: number
 - name: itemID
   type: number
 - name: hasAllInfo
   nilable: true
-  type: nil
+  type: bool

@@ -10,10 +10,10 @@ outputs:
 - innerType: BattlefieldItemReward
   name: itemRewards
   nilable: true
-  type: nil
+  type: table
 - innerType: BattlefieldCurrencyReward
   name: currencyRewards
   nilable: true
-  type: nil
+  type: table
 - name: hasWon
   type: bool

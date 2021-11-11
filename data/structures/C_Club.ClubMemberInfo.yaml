@@ -11,12 +11,12 @@ fields:
   type: string
 - name: role
   nilable: true
-  type: ClubRoleIdentifier
+  type: number
 - name: presence
-  type: ClubMemberPresence
+  type: number
 - name: clubType
   nilable: true
-  type: ClubType
+  type: number
 - name: guid
   nilable: true
   type: string

@@ -5,4 +5,4 @@ inputs: nn
 outputs:
 - name: mutedForAll
   nilable: true
-  type: nil
+  type: bool

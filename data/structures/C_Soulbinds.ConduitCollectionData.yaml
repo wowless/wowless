@@ -9,7 +9,7 @@ fields:
 - name: conduitItemLevel
   type: number
 - name: conduitType
-  type: SoulbindConduitType
+  type: number
 - name: conduitSpecSetID
   type: number
 - innerType: number

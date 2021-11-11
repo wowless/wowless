@@ -5,12 +5,12 @@ fields:
 - name: auctionID
   type: number
 - name: itemKey
-  type: ItemKey
+  type: table
 - name: itemLink
   nilable: true
   type: string
 - name: timeLeft
-  type: AuctionHouseTimeLeftBand
+  type: number
 - name: minBid
   nilable: true
   type: number

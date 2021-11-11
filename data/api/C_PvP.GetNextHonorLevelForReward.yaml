@@ -5,4 +5,4 @@ inputs: n
 outputs:
 - name: nextHonorLevelWithReward
   nilable: true
-  type: nil
+  type: number

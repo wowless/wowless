@@ -5,7 +5,7 @@ inputs: ''
 outputs:
 - name: detailsCameraID
   nilable: true
-  type: nil
+  type: number
 - name: vendorCameraID
   nilable: true
-  type: nil
+  type: number

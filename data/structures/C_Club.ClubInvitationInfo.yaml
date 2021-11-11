@@ -7,4 +7,4 @@ fields:
 - name: isMyInvitation
   type: bool
 - name: invitee
-  type: ClubMemberInfo
+  type: table

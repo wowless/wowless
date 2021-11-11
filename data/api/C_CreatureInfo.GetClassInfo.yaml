@@ -5,4 +5,4 @@ inputs: n
 outputs:
 - name: classInfo
   nilable: true
-  type: nil
+  type: table

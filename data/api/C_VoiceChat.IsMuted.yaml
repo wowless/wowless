@@ -5,4 +5,4 @@ inputs: ''
 outputs:
 - name: isMuted
   nilable: true
-  type: nil
+  type: bool

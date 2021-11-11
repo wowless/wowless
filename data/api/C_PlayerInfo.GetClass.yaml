@@ -5,10 +5,10 @@ inputs: t
 outputs:
 - name: className
   nilable: true
-  type: nil
+  type: string
 - name: classFilename
   nilable: true
-  type: nil
+  type: string
 - name: classID
   nilable: true
-  type: nil
+  type: number

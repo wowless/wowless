@@ -22,7 +22,7 @@ fields:
   name: specIds
   type: table
 - name: requestStatus
-  type: PlayerClubRequestStatus
+  type: number
 - name: lookupSuccess
   type: bool
 - name: lastUpdatedTime

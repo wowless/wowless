@@ -7,7 +7,7 @@ fields:
 - name: maxProgress
   type: number
 - name: displayType
-  type: ConquestProgressBarDisplayType
+  type: number
 - name: unlocksCompleted
   type: number
 - name: maxUnlocks

@@ -11,8 +11,8 @@ fields:
 - name: stackDisplay
   type: number
 - name: iconSizeType
-  type: SpellDisplayIconSizeType
+  type: number
 - name: iconDisplayType
-  type: SpellDisplayIconDisplayType
+  type: number
 - name: textShownState
-  type: SpellDisplayTextShownStateType
+  type: number

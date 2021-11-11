@@ -5,7 +5,7 @@ fields:
 - name: name
   type: string
 - name: optionType
-  type: SelfResurrectOptionType
+  type: number
 - name: id
   type: number
 - name: canUse

@@ -5,4 +5,4 @@ inputs: nn
 outputs:
 - name: silenced
   nilable: true
-  type: nil
+  type: bool

@@ -5,4 +5,4 @@ inputs: nn
 outputs:
 - name: appearance
   nilable: true
-  type: nil
+  type: table

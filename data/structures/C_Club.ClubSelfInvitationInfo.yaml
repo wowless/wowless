@@ -5,9 +5,9 @@ fields:
 - name: invitationId
   type: string
 - name: club
-  type: ClubInfo
+  type: table
 - name: inviter
-  type: ClubMemberInfo
+  type: table
 - innerType: ClubMemberInfo
   name: leaders
   type: table

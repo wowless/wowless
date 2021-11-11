@@ -5,7 +5,7 @@ inputs: n
 outputs:
 - name: petID
   nilable: true
-  type: nil
+  type: string
 - name: ability1ID
   type: number
 - name: ability2ID

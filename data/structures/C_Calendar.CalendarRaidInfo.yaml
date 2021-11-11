@@ -9,7 +9,7 @@ fields:
 - name: raidID
   type: number
 - name: time
-  type: CalendarTime
+  type: unknown
 - name: difficulty
   type: number
 - name: difficultyName

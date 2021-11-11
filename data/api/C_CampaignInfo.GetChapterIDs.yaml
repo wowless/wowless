@@ -6,4 +6,4 @@ outputs:
 - innerType: number
   name: chapterIDs
   nilable: true
-  type: nil
+  type: table

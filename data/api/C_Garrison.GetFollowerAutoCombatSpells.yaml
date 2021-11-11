@@ -8,4 +8,4 @@ outputs:
   type: table
 - name: autoCombatAutoAttack
   nilable: true
-  type: nil
+  type: table

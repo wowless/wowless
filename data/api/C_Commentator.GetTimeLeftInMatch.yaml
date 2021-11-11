@@ -5,4 +5,4 @@ inputs: ''
 outputs:
 - name: timeLeft
   nilable: true
-  type: nil
+  type: number

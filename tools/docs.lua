@@ -92,9 +92,7 @@ local knownMixinStructs = {
 }
 local function ret2ty(r, ns)
   local t = r.Type
-  if r.Nilable then
-    return 'nil'
-  elseif enum[t] then
+  if enum[t] then
     return 'number'
   end
   local oty = omap[types[t] or (ns and tys[ns .. '.' .. t]) or tys[t]]
@@ -212,14 +210,10 @@ for f, envt in pairs(docs) do
               for k in pairs(field) do
                 assert(expectedStructureFieldKeys[k], ('unexpected field key %q in %q'):format(k, f))
               end
-              local ty = field.Type
-              if ty == 'table' and field.Mixin then
-                ty = knownMixinStructs[field.Mixin] or ty
-              end
               table.insert(ret, {
                 name = field.Name,
                 nilable = field.Nilable,
-                type = ty,
+                type = ret2ty(field, t.Namespace),
                 innerType = field.InnerType,
                 mixin = field.Mixin,
                 default = field.Default,

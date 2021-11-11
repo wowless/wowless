@@ -10,7 +10,7 @@ fields:
 - name: name
   type: string
 - name: state
-  type: FlightPathState
+  type: number
 - name: slotIndex
   type: number
 - name: textureKitPrefix

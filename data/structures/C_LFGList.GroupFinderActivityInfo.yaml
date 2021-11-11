@@ -19,7 +19,7 @@ fields:
 - name: maxNumPlayers
   type: number
 - name: displayType
-  type: LfgListDisplayType
+  type: number
 - name: orderIndex
   type: number
 - name: useHonorLevel

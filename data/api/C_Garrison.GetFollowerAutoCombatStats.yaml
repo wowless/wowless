@@ -5,4 +5,4 @@ inputs: s
 outputs:
 - name: autoCombatInfo
   nilable: true
-  type: nil
+  type: table

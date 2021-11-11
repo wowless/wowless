@@ -8,4 +8,4 @@ inputs:
 outputs:
 - name: eventIndexInfo
   nilable: true
-  type: nil
+  type: table

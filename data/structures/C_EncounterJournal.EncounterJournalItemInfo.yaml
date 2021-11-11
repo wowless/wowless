@@ -15,7 +15,7 @@ fields:
   type: string
 - name: filterType
   nilable: true
-  type: ItemSlotFilterType
+  type: number
 - name: icon
   nilable: true
   type: number

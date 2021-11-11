@@ -11,7 +11,7 @@ fields:
 - name: duration
   type: number
 - name: trajectory
-  type: ScriptedAnimationTrajectory
+  type: number
 - name: yawRadians
   type: number
 - name: pitchRadians
@@ -34,7 +34,7 @@ fields:
   type: bool
 - name: startBehavior
   nilable: true
-  type: ScriptedAnimationBehavior
+  type: number
 - name: startSoundKitID
   nilable: true
   type: number
@@ -43,7 +43,7 @@ fields:
   type: number
 - name: finishBehavior
   nilable: true
-  type: ScriptedAnimationBehavior
+  type: number
 - name: finishSoundKitID
   nilable: true
   type: number

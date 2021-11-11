@@ -13,4 +13,4 @@ outputs:
   type: number
 - name: parentSkillLineID
   nilable: true
-  type: nil
+  type: number

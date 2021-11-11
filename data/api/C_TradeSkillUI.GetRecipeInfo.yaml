@@ -7,4 +7,4 @@ inputs:
 outputs:
 - name: recipeInfo
   nilable: true
-  type: nil
+  type: unknown

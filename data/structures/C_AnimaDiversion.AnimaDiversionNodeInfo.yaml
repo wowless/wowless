@@ -19,4 +19,4 @@ fields:
   name: normalizedPosition
   type: Vector2D
 - name: state
-  type: AnimaDiversionNodeState
+  type: number

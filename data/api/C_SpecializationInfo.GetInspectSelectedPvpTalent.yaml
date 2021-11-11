@@ -5,4 +5,4 @@ inputs: sn
 outputs:
 - name: selectedTalentID
   nilable: true
-  type: nil
+  type: number

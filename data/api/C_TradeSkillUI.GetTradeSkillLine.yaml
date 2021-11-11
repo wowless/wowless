@@ -15,7 +15,7 @@ outputs:
   type: number
 - name: parentSkillLineID
   nilable: true
-  type: nil
+  type: number
 - name: parentSkillLineDisplayName
   nilable: true
-  type: nil
+  type: string

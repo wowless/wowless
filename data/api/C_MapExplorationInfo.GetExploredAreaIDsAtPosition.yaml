@@ -6,4 +6,4 @@ outputs:
 - innerType: number
   name: areaID
   nilable: true
-  type: nil
+  type: table

@@ -7,4 +7,4 @@ outputs:
   type: bool
 - name: expansionTrialRemainingSeconds
   nilable: true
-  type: nil
+  type: number

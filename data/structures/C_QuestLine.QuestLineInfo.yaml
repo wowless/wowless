@@ -23,4 +23,4 @@ fields:
 - name: isCampaign
   type: bool
 - name: floorLocation
-  type: QuestLineFloorLocation
+  type: number

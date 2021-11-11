@@ -10,7 +10,7 @@ fields:
   nilable: true
   type: string
 - name: eventType
-  type: CalendarEventType
+  type: number
 - name: repeatOption
   type: number
 - name: maxSize
@@ -19,9 +19,9 @@ fields:
   nilable: true
   type: number
 - name: time
-  type: CalendarTime
+  type: unknown
 - name: lockoutTime
-  type: CalendarTime
+  type: unknown
 - name: isLocked
   type: bool
 - name: isAutoApprove

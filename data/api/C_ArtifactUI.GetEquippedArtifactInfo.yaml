@@ -7,7 +7,7 @@ outputs:
   type: number
 - name: altItemID
   nilable: true
-  type: nil
+  type: number
 - name: name
   type: string
 - name: icon
@@ -24,10 +24,10 @@ outputs:
   type: number
 - name: itemAppearanceID
   nilable: true
-  type: nil
+  type: number
 - name: altItemAppearanceID
   nilable: true
-  type: nil
+  type: number
 - name: altOnTop
   type: bool
 - name: tier

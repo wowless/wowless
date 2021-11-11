@@ -7,25 +7,25 @@ fields:
 - name: itemID
   type: number
 - name: rewardType
-  type: RafRewardType
+  type: number
 - name: petInfo
   nilable: true
-  type: RafPetInfo
+  type: table
 - name: mountInfo
   nilable: true
-  type: RafMountInfo
+  type: table
 - name: appearanceInfo
   nilable: true
-  type: RafAppearanceInfo
+  type: table
 - name: titleInfo
   nilable: true
-  type: RafTitleInfo
+  type: table
 - name: appearanceSetInfo
   nilable: true
-  type: RafAppearanceSetInfo
+  type: table
 - name: illusionInfo
   nilable: true
-  type: RafIllusionInfo
+  type: table
 - name: canClaim
   type: bool
 - name: claimed

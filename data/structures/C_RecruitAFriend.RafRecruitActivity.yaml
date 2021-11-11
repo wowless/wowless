@@ -7,4 +7,4 @@ fields:
 - name: rewardQuestID
   type: number
 - name: state
-  type: RafRecruitActivityState
+  type: number

@@ -7,10 +7,10 @@ outputs:
   type: string
 - name: factionID
   nilable: true
-  type: nil
+  type: number
 - name: capped
   nilable: true
-  type: nil
+  type: bool
 - name: displayAsObjective
   nilable: true
-  type: nil
+  type: bool

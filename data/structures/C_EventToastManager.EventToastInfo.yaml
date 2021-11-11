@@ -24,9 +24,9 @@ fields:
   nilable: true
   type: number
 - name: eventType
-  type: EventToastEventType
+  type: number
 - name: displayType
-  type: EventToastDisplayType
+  type: number
 - name: uiTextureKit
   type: string
 - name: sortOrder

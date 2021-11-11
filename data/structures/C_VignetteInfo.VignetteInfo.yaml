@@ -27,7 +27,7 @@ fields:
 - name: vignetteID
   type: number
 - name: type
-  type: VignetteType
+  type: number
 - name: rewardQuestID
   type: number
 - name: widgetSetID

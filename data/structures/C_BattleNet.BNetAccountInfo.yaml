@@ -29,6 +29,6 @@ fields:
 - name: note
   type: string
 - name: rafLinkType
-  type: RafLinkType
+  type: number
 - name: gameAccountInfo
-  type: BNetGameAccountInfo
+  type: table

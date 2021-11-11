@@ -5,4 +5,4 @@ inputs: sn
 outputs:
 - name: info
   nilable: true
-  type: nil
+  type: table

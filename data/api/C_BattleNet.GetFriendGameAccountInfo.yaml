@@ -5,4 +5,4 @@ inputs: nn
 outputs:
 - name: gameAccountInfo
   nilable: true
-  type: nil
+  type: table

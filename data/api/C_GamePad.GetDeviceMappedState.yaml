@@ -7,4 +7,4 @@ inputs:
 outputs:
 - name: state
   nilable: true
-  type: nil
+  type: table

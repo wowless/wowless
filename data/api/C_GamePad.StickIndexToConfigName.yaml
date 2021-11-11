@@ -5,4 +5,4 @@ inputs: n
 outputs:
 - name: configName
   nilable: true
-  type: nil
+  type: string

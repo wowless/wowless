@@ -21,7 +21,7 @@ outputs:
   type: bool
 - name: faction
   nilable: true
-  type: nil
+  type: number
 - name: shouldHideOnChar
   type: bool
 - name: isCollected

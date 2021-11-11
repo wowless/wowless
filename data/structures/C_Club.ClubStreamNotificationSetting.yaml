@@ -5,4 +5,4 @@ fields:
 - name: streamId
   type: string
 - name: filter
-  type: ClubStreamNotificationFilter
+  type: number

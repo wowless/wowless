@@ -5,4 +5,4 @@ inputs: ''
 outputs:
 - name: currentGarrTalentTreeFriendshipFactionID
   nilable: true
-  type: nil
+  type: number

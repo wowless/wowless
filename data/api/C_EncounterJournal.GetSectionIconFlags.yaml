@@ -6,4 +6,4 @@ outputs:
 - innerType: number
   name: iconFlags
   nilable: true
-  type: nil
+  type: table

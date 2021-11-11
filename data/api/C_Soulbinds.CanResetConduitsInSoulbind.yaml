@@ -7,4 +7,4 @@ outputs:
   type: bool
 - name: errorDescription
   nilable: true
-  type: nil
+  type: string

@@ -6,4 +6,4 @@ outputs:
 - mixin: Vector2DMixin
   name: normalizedPosition
   nilable: true
-  type: nil
+  type: Vector2D

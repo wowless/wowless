@@ -14,7 +14,7 @@ fields:
 - name: broadcast
   type: string
 - name: clubType
-  type: ClubType
+  type: number
 - name: avatarId
   type: number
 - name: memberCount

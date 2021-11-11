@@ -6,4 +6,4 @@ outputs:
 - innerType: BountyInfo
   name: bounties
   nilable: true
-  type: nil
+  type: table

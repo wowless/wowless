@@ -15,4 +15,4 @@ fields:
   type: number
 - name: slot
   nilable: true
-  type: AzeriteEssenceSlot
+  type: number

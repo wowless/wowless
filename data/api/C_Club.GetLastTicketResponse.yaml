@@ -7,6 +7,6 @@ outputs:
   type: number
 - name: info
   nilable: true
-  type: nil
+  type: table
 - name: showError
   type: bool

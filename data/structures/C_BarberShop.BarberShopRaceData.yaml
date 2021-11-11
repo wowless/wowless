@@ -8,4 +8,4 @@ fields:
   type: string
 - name: alternateFormRaceData
   nilable: true
-  type: CharacterAlternateFormData
+  type: unknown

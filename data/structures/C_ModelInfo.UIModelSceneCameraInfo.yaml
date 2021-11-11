@@ -33,4 +33,4 @@ fields:
 - name: zoomedRollOffset
   type: number
 - name: flags
-  type: ModelSceneSetting
+  type: number

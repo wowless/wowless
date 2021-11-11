@@ -5,7 +5,7 @@ inputs: n
 outputs:
 - name: warModeApplies
   nilable: true
-  type: nil
+  type: bool
 - name: limitOncePerTooltip
   nilable: true
-  type: nil
+  type: bool

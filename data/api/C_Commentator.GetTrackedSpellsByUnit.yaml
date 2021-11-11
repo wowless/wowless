@@ -6,4 +6,4 @@ outputs:
 - innerType: number
   name: spells
   nilable: true
-  type: nil
+  type: table

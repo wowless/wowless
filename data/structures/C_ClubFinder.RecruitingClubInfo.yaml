@@ -18,7 +18,7 @@ fields:
   type: number
 - name: tabardInfo
   nilable: true
-  type: GuildTabardInfo
+  type: unknown
 - innerType: number
   name: recruitingSpecIds
   type: table

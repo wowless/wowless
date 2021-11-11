@@ -11,7 +11,7 @@ fields:
 - name: monthsRemaining
   type: number
 - name: subStatus
-  type: RafRecruitSubStatus
+  type: number
 - name: acceptanceID
   type: string
 - innerType: RafRecruitActivity

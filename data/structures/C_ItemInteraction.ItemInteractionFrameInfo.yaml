@@ -15,7 +15,7 @@ fields:
 - name: buttonText
   type: string
 - name: interactionType
-  type: UIItemInteractionType
+  type: number
 - name: flags
   type: number
 - name: description

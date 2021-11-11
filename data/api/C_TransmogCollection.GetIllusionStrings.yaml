@@ -9,4 +9,4 @@ outputs:
   type: string
 - name: sourceText
   nilable: true
-  type: nil
+  type: string

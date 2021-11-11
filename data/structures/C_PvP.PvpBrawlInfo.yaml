@@ -13,7 +13,7 @@ fields:
 - name: timeLeftUntilNextChange
   type: number
 - name: brawlType
-  type: BrawlType
+  type: number
 - innerType: string
   name: mapNames
   type: table

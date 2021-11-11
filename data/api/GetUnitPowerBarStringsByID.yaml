@@ -5,10 +5,10 @@ inputs: n
 outputs:
 - name: name
   nilable: true
-  type: nil
+  type: string
 - name: tooltip
   nilable: true
-  type: nil
+  type: string
 - name: cost
   nilable: true
-  type: nil
+  type: string

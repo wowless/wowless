@@ -19,4 +19,4 @@ outputs:
   type: bool
 - name: texture
   nilable: true
-  type: nil
+  type: number

@@ -5,4 +5,4 @@ inputs: s
 outputs:
 - name: info
   nilable: true
-  type: nil
+  type: unknown

@@ -5,4 +5,4 @@ inputs: s
 outputs:
 - name: errorReason
   nilable: true
-  type: nil
+  type: number

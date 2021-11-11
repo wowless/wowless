@@ -5,4 +5,4 @@ inputs: nnn
 outputs:
 - name: depositCost
   nilable: true
-  type: nil
+  type: number

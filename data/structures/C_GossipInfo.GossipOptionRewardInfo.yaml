@@ -7,4 +7,4 @@ fields:
 - name: quantity
   type: number
 - name: rewardType
-  type: GossipOptionRewardType
+  type: number

@@ -5,4 +5,4 @@ inputs: s
 outputs:
 - name: clubInfo
   nilable: true
-  type: nil
+  type: table

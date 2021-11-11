@@ -7,7 +7,7 @@ fields:
 - name: channelID
   type: number
 - name: channelType
-  type: ChatChannelType
+  type: number
 - name: clubId
   type: string
 - name: streamId

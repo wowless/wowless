@@ -7,7 +7,7 @@ fields:
 - name: level
   type: number
 - name: completionDate
-  type: MythicPlusDate
+  type: table
 - innerType: number
   name: affixIDs
   type: table

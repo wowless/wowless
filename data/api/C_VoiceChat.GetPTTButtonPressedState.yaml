@@ -5,4 +5,4 @@ inputs: ''
 outputs:
 - name: isPressed
   nilable: true
-  type: nil
+  type: bool

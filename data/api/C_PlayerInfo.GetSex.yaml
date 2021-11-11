@@ -5,4 +5,4 @@ inputs: t
 outputs:
 - name: sex
   nilable: true
-  type: nil
+  type: number

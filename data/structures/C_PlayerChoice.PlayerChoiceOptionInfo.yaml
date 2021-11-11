@@ -17,9 +17,9 @@ fields:
 - name: hasRewards
   type: bool
 - name: rewardInfo
-  type: PlayerChoiceOptionRewardInfo
+  type: table
 - name: rarity
-  type: PlayerChoiceRarity
+  type: number
 - name: uiTextureKit
   type: string
 - name: maxStacks

@@ -5,4 +5,4 @@ inputs: s
 outputs:
 - name: icon
   nilable: true
-  type: nil
+  type: number

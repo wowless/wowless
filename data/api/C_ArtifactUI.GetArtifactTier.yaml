@@ -5,4 +5,4 @@ inputs: ''
 outputs:
 - name: tier
   nilable: true
-  type: nil
+  type: number

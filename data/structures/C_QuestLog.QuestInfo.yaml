@@ -19,7 +19,7 @@ fields:
   type: number
 - name: frequency
   nilable: true
-  type: QuestFrequency
+  type: number
 - name: isHeader
   type: bool
 - name: isCollapsed

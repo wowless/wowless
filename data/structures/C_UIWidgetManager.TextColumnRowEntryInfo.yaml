@@ -5,8 +5,8 @@ fields:
 - name: text
   type: string
 - name: enabledState
-  type: WidgetEnabledState
+  type: number
 - name: hAlign
-  type: WidgetTextHorizontalAlignmentType
+  type: number
 - name: columnWidth
   type: number

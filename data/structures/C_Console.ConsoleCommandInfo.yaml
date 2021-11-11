@@ -7,9 +7,9 @@ fields:
 - name: help
   type: string
 - name: category
-  type: ConsoleCategory
+  type: number
 - name: commandType
-  type: ConsoleCommandType
+  type: number
 - name: scriptContents
   type: string
 - name: scriptParameters

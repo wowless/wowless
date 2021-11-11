@@ -33,4 +33,4 @@ fields:
 - name: shouldShowQuest
   type: bool
 - name: screenType
-  type: SplashScreenType
+  type: number

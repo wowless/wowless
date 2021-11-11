@@ -5,4 +5,4 @@ inputs: ''
 outputs:
 - name: collectionData
   nilable: true
-  type: nil
+  type: table

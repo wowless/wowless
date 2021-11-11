@@ -6,4 +6,4 @@ outputs:
 - innerType: string
   name: keys
   nilable: true
-  type: nil
+  type: table

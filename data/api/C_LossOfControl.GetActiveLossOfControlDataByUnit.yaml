@@ -5,4 +5,4 @@ inputs: sn
 outputs:
 - name: event
   nilable: true
-  type: nil
+  type: table
