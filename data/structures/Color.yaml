@@ -1,0 +1,10 @@
+---
+name: Color
+status: implemented
+fields:
+- name: r
+  type: number
+- name: g
+  type: number
+- name: b
+  type: number

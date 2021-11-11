@@ -56,6 +56,7 @@ describe('api', function()
   end)
   describe('file', function()
     local yaml = require('wowapi.yaml')
+    local structures = require('wowapi.data').structures
     for filename in require('lfs').dir('data/api') do
       describe(filename, function()
         local str do
@@ -134,7 +135,7 @@ describe('api', function()
                 end
                 local ot = assert(v.type)
                 assert.True(type(ot) == 'string')
-                assert.True(types[ot])
+                assert.truthy(types[ot] or structures[ot], ('invalid type %q'):format(ot))
                 assert.True(v.mixin == nil or type(v.mixin) == 'string')
               end
             else

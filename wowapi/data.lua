@@ -29,8 +29,20 @@ local apiModules = (function()
   return modules
 end)()
 
+local apiStructures = (function()
+  local structures = {}
+  for f in lfsdir('data/structures') do
+    if f:sub(-5) == '.yaml' then
+      local fn = f:sub(1, -6)
+      structures[fn] = yamlparse('data/structures/' .. f)
+    end
+  end
+  return structures
+end)()
+
 return {
   luas = apiLuas,
   modules = apiModules,
+  structures = apiStructures,
   yamls = apiYamls,
 }

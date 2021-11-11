@@ -85,15 +85,22 @@ local omap = {
   s = 'string',
   t = 'table',
 }
+local knownMixinStructs = {
+  ColorMixin = 'Color',
+  Vector2DMixin = 'Vector2D',
+}
 local function outsig(fn)
   local outputs = {}
   for _, r in ipairs(fn.Returns or {}) do
-    local c = (r.Nilable and 'nil') or omap[types[r.Type] or tys[r.Type] or (enum[r.Type] and 'n')]
-    if not c then
+    local ty = (r.Nilable and 'nil') or omap[types[r.Type] or tys[r.Type] or (enum[r.Type] and 'n')]
+    if not ty then
       print('unknown type ' .. r.Type)
-      c = 'unknown'
+      ty = 'unknown'
     end
-    table.insert(outputs, {type = c, mixin = r.Mixin})
+    if ty == 'table' and r.Mixin then
+      ty = knownMixinStructs[r.Mixin] or ty
+    end
+    table.insert(outputs, {type = ty, mixin = r.Mixin})
   end
   return outputs
 end
