@@ -48,21 +48,22 @@ local tys = {}
 for _, envt in pairs(docs) do
   for _, t in pairs(envt) do
     for _, ty in ipairs(t.Tables or {}) do
+      local name = (t.Namespace and (t.Namespace .. '.') or '') .. ty.Name
       local c = assert(tables[ty.Type])
-      local old = tys[ty.Name]
+      local old = tys[name]
       if old then
         assert(old == c)
       else
-        tys[ty.Name] = c
+        tys[name] = c
       end
     end
   end
 end
-local function insig(fn)
+local function insig(fn, ns)
   local inputs = ''
   local firstDefault = nil
   for i, a in ipairs(fn.Arguments or {}) do
-    local c = types[a.Type] or tys[a.Type] or (enum[a.Type] and 'n')
+    local c = types[a.Type] or (ns and tys[ns .. '.' .. a.Type]) or tys[a.Type] or (enum[a.Type] and 'n')
     if not c then
       print('unknown type ' .. a.Type)
       c = '?'
@@ -89,18 +90,27 @@ local knownMixinStructs = {
   ColorMixin = 'Color',
   Vector2DMixin = 'Vector2D',
 }
-local function outsig(fn)
+local function ret2ty(r, ns)
+  local t = r.Type
+  if r.Nilable then
+    return 'nil'
+  elseif enum[t] then
+    return 'number'
+  end
+  local oty = omap[types[t] or (ns and tys[ns .. '.' .. t]) or tys[t]]
+  if not oty then
+    print('unknown type ' .. r.Type)
+    return 'unknown'
+  elseif oty == 'table' and r.Mixin then
+    return knownMixinStructs[r.Mixin] or oty
+  else
+    return oty
+  end
+end
+local function outsig(fn, ns)
   local outputs = {}
   for _, r in ipairs(fn.Returns or {}) do
-    local ty = (r.Nilable and 'nil') or omap[types[r.Type] or tys[r.Type] or (enum[r.Type] and 'n')]
-    if not ty then
-      print('unknown type ' .. r.Type)
-      ty = 'unknown'
-    end
-    if ty == 'table' and r.Mixin then
-      ty = knownMixinStructs[r.Mixin] or ty
-    end
-    table.insert(outputs, {type = ty, mixin = r.Mixin})
+    table.insert(outputs, {type = ret2ty(r, ns), mixin = r.Mixin})
   end
   return outputs
 end
@@ -123,6 +133,8 @@ require('tools.rewrite').yaml(function(api)
     return
   end
   local name = api.name
+  local dotpos = name:find('%.')
+  local ns = dotpos and name:sub(1, dotpos-1)
   local envfn = functions[name]
   if not envfn then
     return
@@ -130,10 +142,10 @@ require('tools.rewrite').yaml(function(api)
   local inputs = {}
   local outputs = nil
   for _, fn in pairs(envfn) do
-    for _, input in ipairs(insig(fn)) do
+    for _, input in ipairs(insig(fn, ns)) do
       inputs[input] = true
     end
-    outputs = outputs or outsig(fn)
+    outputs = outputs or outsig(fn, ns)
   end
   local inlist = {}
   for input in pairs(inputs) do
