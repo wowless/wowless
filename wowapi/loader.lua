@@ -47,13 +47,17 @@ local getStub = (function()
     table = '{}',
     unknown = 'nil',
   }
-  local structureDefaults = (function()
-    -- TODO generalize this
-    return {
-      Color = '{ r = 1, g = 1, b = 1 }',
-      Vector2D = '{ x = 1, y = 1 }',
-    }
-  end)()
+  local structureDefaults = {}
+  for name, st in pairs(data.structures) do
+    structureDefaults[name] = (function()
+      local t = {}
+      for _, field in ipairs(st.fields) do
+        local v = tostring(defaultOutputs[field.type])
+        table.insert(t, ('[%q]=%s'):format(field.name, v))
+      end
+      return '{' .. table.concat(t, ',') .. '}'
+    end)()
+  end
   return function(sig)
     local rets = {}
     for _, out in ipairs(sig) do
