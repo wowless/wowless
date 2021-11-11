@@ -6,4 +6,5 @@ inputs:
 - ns
 - nss
 outputs:
-- type: bool
+- name: isPending
+  type: bool

@@ -6,4 +6,6 @@ inputs:
 - nn
 - nnb
 outputs:
-- type: table
+- innerType: UiMapDetails
+  name: info
+  type: table

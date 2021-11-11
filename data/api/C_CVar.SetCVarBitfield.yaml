@@ -5,4 +5,5 @@ inputs:
 - snb
 - snbs
 outputs:
-- type: bool
+- name: success
+  type: bool

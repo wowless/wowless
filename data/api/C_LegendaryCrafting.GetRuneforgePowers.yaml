@@ -6,5 +6,9 @@ inputs:
 - t
 - tn
 outputs:
-- type: table
-- type: table
+- innerType: number
+  name: primaryRuneforgePowerIDs
+  type: table
+- innerType: number
+  name: otherRuneforgePowerIDs
+  type: table

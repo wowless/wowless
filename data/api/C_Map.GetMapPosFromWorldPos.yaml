@@ -5,6 +5,8 @@ inputs:
 - nt
 - ntn
 outputs:
-- type: number
+- name: uiMapID
+  type: number
 - mixin: Vector2DMixin
+  name: mapPosition
   type: Vector2D

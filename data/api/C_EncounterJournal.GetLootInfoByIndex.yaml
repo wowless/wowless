@@ -5,4 +5,5 @@ inputs:
 - n
 - nn
 outputs:
-- type: table
+- name: itemInfo
+  type: table

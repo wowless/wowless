@@ -7,4 +7,5 @@ inputs:
 - nnn
 - nnnn
 outputs:
-- type: table
+- name: itemKey
+  type: table

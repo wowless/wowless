@@ -5,4 +5,5 @@ inputs:
 - ''
 - n
 outputs:
-- type: table
+- name: monthInfo
+  type: table

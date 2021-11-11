@@ -6,4 +6,6 @@ inputs:
 - tn
 - tnt
 outputs:
-- type: nil
+- name: info
+  nilable: true
+  type: nil

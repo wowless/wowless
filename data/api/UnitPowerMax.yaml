@@ -6,4 +6,5 @@ inputs:
 - sn
 - snb
 outputs:
-- type: number
+- name: maxPower
+  type: number

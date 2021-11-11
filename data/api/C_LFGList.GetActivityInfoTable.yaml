@@ -6,4 +6,5 @@ inputs:
 - nn
 - nnb
 outputs:
-- type: table
+- name: activityInfo
+  type: table

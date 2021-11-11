@@ -114,7 +114,11 @@ describe('api', function()
           end)
           it('has valid outputs', function()
             local fields = {
+              default = true,
+              innerType = true,
               mixin = true,
+              name = true,
+              nilable = true,
               type = true,
             }
             local types = {
@@ -127,7 +131,8 @@ describe('api', function()
               unknown = true,
             }
             local ty = type(t.outputs)
-            if (ty == 'table') then
+            if ty ~= 'nil' then
+              assert.True(ty == 'table')
               for _, v in ipairs(t.outputs) do
                 assert.True(type(v) == 'table')
                 for k in pairs(v) do
@@ -138,8 +143,6 @@ describe('api', function()
                 assert.truthy(types[ot] or structures[ot], ('invalid type %q'):format(ot))
                 assert.True(v.mixin == nil or type(v.mixin) == 'string')
               end
-            else
-              assert.True(ty == 'nil')
             end
           end)
           it('has no extraneous fields', function()

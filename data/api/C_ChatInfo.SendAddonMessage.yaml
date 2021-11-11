@@ -6,4 +6,5 @@ inputs:
 - sss
 - ssss
 outputs:
-- type: bool
+- name: success
+  type: bool

@@ -9,4 +9,6 @@ inputs:
 - snnb
 - snnbs
 outputs:
-- type: table
+- innerType: ClubInvitationCandidateInfo
+  name: candidates
+  type: table

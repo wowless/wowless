@@ -5,4 +5,5 @@ inputs:
 - t
 - tb
 outputs:
-- type: bool
+- name: valid
+  type: bool

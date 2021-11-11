@@ -5,4 +5,5 @@ inputs:
 - ''
 - s
 outputs:
-- type: bool
+- name: set
+  type: bool

@@ -6,4 +6,6 @@ inputs:
 - sn
 - snn
 outputs:
-- type: nil
+- name: eventIndexInfo
+  nilable: true
+  type: nil

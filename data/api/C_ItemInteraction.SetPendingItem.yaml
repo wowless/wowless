@@ -5,4 +5,5 @@ inputs:
 - ''
 - t
 outputs:
-- type: bool
+- name: success
+  type: bool

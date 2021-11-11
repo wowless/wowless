@@ -6,4 +6,5 @@ inputs:
 - sb
 - sbb
 outputs:
-- type: string
+- name: output
+  type: string

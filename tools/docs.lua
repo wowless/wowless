@@ -107,10 +107,30 @@ local function ret2ty(r, ns)
     return oty
   end
 end
+local expectedReturnKeys = {
+  Default = true,
+  Documentation = true,
+  InnerType = true,
+  Mixin = true,
+  Name = true,
+  Nilable = true,
+  StrideIndex = true,
+  Type = true,
+}
 local function outsig(fn, ns)
   local outputs = {}
   for _, r in ipairs(fn.Returns or {}) do
-    table.insert(outputs, {type = ret2ty(r, ns), mixin = r.Mixin})
+    for k in pairs(r) do
+      assert(expectedReturnKeys[k], ('unexpected key %q'):format(k))
+    end
+    table.insert(outputs, {
+      default = r.Default,
+      innerType = r.InnerType,
+      mixin = r.Mixin,
+      name = r.Name,
+      nilable = r.Nilable,
+      type = ret2ty(r, ns),
+    })
   end
   return outputs
 end

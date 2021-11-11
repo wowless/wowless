@@ -5,4 +5,6 @@ inputs:
 - ''
 - t
 outputs:
-- type: nil
+- name: isConnected
+  nilable: true
+  type: nil

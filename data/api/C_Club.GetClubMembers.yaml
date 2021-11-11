@@ -5,4 +5,6 @@ inputs:
 - s
 - ss
 outputs:
-- type: table
+- innerType: number
+  name: members
+  type: table

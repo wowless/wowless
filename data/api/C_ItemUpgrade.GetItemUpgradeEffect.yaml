@@ -5,5 +5,7 @@ inputs:
 - n
 - nn
 outputs:
-- type: string
-- type: string
+- name: outBaseEffect
+  type: string
+- name: outUpgradedEffect
+  type: string

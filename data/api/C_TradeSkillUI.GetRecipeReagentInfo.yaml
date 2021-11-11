@@ -5,7 +5,13 @@ inputs:
 - nn
 - nnn
 outputs:
-- type: nil
-- type: nil
-- type: number
-- type: number
+- name: reagentName
+  nilable: true
+  type: nil
+- name: reagentFileID
+  nilable: true
+  type: nil
+- name: reagentCount
+  type: number
+- name: playerReagentCount
+  type: number

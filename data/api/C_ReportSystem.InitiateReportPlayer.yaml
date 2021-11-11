@@ -5,4 +5,5 @@ inputs:
 - s
 - st
 outputs:
-- type: number
+- name: token
+  type: number

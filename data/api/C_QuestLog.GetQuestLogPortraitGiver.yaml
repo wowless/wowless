@@ -5,8 +5,14 @@ inputs:
 - ''
 - n
 outputs:
-- type: number
-- type: string
-- type: string
-- type: number
-- type: nil
+- name: portraitGiver
+  type: number
+- name: portraitGiverText
+  type: string
+- name: portraitGiverName
+  type: string
+- name: portraitGiverMount
+  type: number
+- name: portraitGiverModelSceneID
+  nilable: true
+  type: nil

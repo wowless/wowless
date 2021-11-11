@@ -5,4 +5,5 @@ inputs:
 - ''
 - n
 outputs:
-- type: number
+- name: minLevel
+  type: number

@@ -5,8 +5,13 @@ inputs:
 - sn
 - snn
 outputs:
-- type: number
-- type: number
-- type: number
-- type: number
-- type: number
+- name: texture
+  type: number
+- name: colorR
+  type: number
+- name: colorG
+  type: number
+- name: colorB
+  type: number
+- name: colorA
+  type: number

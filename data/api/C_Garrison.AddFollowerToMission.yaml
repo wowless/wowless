@@ -5,4 +5,5 @@ inputs:
 - ns
 - nsn
 outputs:
-- type: bool
+- name: followerAdded
+  type: bool

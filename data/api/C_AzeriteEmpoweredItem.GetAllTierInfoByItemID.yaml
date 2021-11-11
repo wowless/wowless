@@ -5,4 +5,6 @@ inputs:
 - s
 - sn
 outputs:
-- type: table
+- innerType: AzeriteEmpoweredItemTierInfo
+  name: tierInfo
+  type: table

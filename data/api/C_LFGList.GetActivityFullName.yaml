@@ -6,4 +6,5 @@ inputs:
 - nn
 - nnb
 outputs:
-- type: string
+- name: fullName
+  type: string

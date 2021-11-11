@@ -6,4 +6,5 @@ inputs:
 - sst
 - sstn
 outputs:
-- type: bool
+- name: alreadyHasMessages
+  type: bool
