@@ -63,4 +63,4 @@ fields:
 - name: isCollected
   type: bool
 - name: autoCombatStats
-  type: table
+  type: C_Garrison.FollowerAutoCombatStatsInfo

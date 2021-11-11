@@ -5,4 +5,4 @@ inputs: nn
 outputs:
 - name: appearance
   nilable: true
-  type: table
+  type: C_ContributionCollector.ContributionAppearance

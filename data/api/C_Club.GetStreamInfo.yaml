@@ -5,4 +5,4 @@ inputs: ss
 outputs:
 - name: streamInfo
   nilable: true
-  type: table
+  type: C_Club.ClubStreamInfo

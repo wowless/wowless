@@ -5,4 +5,4 @@ inputs: s
 outputs:
 - name: autoCombatInfo
   nilable: true
-  type: table
+  type: C_Garrison.FollowerAutoCombatStatsInfo

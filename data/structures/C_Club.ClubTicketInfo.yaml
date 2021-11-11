@@ -16,4 +16,4 @@ fields:
   nilable: true
   type: string
 - name: creator
-  type: table
+  type: C_Club.ClubMemberInfo

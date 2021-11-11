@@ -7,6 +7,6 @@ outputs:
   type: number
 - name: info
   nilable: true
-  type: table
+  type: C_Club.ClubInfo
 - name: showError
   type: bool

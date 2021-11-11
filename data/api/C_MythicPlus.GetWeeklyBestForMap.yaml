@@ -8,7 +8,7 @@ outputs:
 - name: level
   type: number
 - name: completionDate
-  type: table
+  type: C_MythicPlus.MythicPlusDate
 - innerType: number
   name: affixIDs
   type: table

@@ -5,4 +5,4 @@ inputs: n
 outputs:
 - name: campaignChapterInfo
   nilable: true
-  type: table
+  type: C_CampaignInfo.CampaignChapterInfo

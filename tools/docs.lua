@@ -80,12 +80,6 @@ local function insig(fn, ns)
   table.insert(t, inputs)
   return t
 end
-local omap = {
-  b = 'bool',
-  n = 'number',
-  s = 'string',
-  t = 'table',
-}
 local knownMixinStructs = {
   ColorMixin = 'Color',
   Vector2DMixin = 'Vector2D',
@@ -94,15 +88,17 @@ local function ret2ty(r, ns)
   local t = r.Type
   if enum[t] then
     return 'number'
-  end
-  local oty = omap[types[t] or (ns and tys[ns .. '.' .. t]) or tys[t]]
-  if not oty then
+  elseif t == 'table' then
+    return r.Mixin and knownMixinStructs[r.Mixin] or t
+  elseif types[t] then
+    return t
+  elseif ns and tys[ns .. '.' .. t] then
+    return ns .. '.' .. t
+  elseif tys[t] then
+    return t
+  else
     print('unknown type ' .. r.Type)
     return 'unknown'
-  elseif oty == 'table' and r.Mixin then
-    return knownMixinStructs[r.Mixin] or oty
-  else
-    return oty
   end
 end
 local expectedReturnKeys = {

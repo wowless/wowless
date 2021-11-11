@@ -22,7 +22,7 @@ fields:
   type: table
 - name: autoCombatAutoAttack
   nilable: true
-  type: table
+  type: C_Garrison.AutoCombatSpellInfo
 - name: role
   type: number
 - name: health

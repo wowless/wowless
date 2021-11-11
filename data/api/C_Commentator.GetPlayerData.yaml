@@ -5,4 +5,4 @@ inputs: nn
 outputs:
 - name: info
   nilable: true
-  type: table
+  type: C_Commentator.CommentatorPlayerData

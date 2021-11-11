@@ -5,7 +5,7 @@ fields:
 - name: auctionID
   type: number
 - name: itemKey
-  type: table
+  type: C_AuctionHouse.ItemKey
 - name: itemLink
   nilable: true
   type: string

@@ -5,4 +5,4 @@ inputs: n
 outputs:
 - name: ownedAuction
   nilable: true
-  type: table
+  type: C_AuctionHouse.OwnedAuctionInfo

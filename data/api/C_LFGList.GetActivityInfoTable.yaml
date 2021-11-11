@@ -7,4 +7,4 @@ inputs:
 - nnb
 outputs:
 - name: activityInfo
-  type: table
+  type: C_LFGList.GroupFinderActivityInfo

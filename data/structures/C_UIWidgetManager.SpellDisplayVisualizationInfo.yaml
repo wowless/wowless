@@ -7,7 +7,7 @@ fields:
 - name: enabledState
   type: number
 - name: spellInfo
-  type: table
+  type: C_UIWidgetManager.UIWidgetSpellInfo
 - name: tooltipLoc
   type: number
 - name: widgetSizeSetting

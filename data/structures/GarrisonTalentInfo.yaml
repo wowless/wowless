@@ -5,7 +5,7 @@ fields:
 - name: id
   type: number
 - name: ability
-  type: table
+  type: GarrisonFollowerAbilityInfo
 - name: name
   type: string
 - name: icon
@@ -53,4 +53,4 @@ fields:
   nilable: true
   type: string
 - name: socketInfo
-  type: table
+  type: GarrisonTalentSocketInfo

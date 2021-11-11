@@ -5,4 +5,4 @@ fields:
 - name: name
   type: string
 - name: autoCombatSpellInfo
-  type: table
+  type: C_Garrison.AutoCombatSpellInfo

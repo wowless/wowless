@@ -5,4 +5,4 @@ inputs: ss
 outputs:
 - name: channel
   nilable: true
-  type: table
+  type: C_VoiceChat.VoiceChatChannel

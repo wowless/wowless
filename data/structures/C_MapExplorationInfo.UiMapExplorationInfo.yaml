@@ -16,4 +16,4 @@ fields:
   name: fileDataIDs
   type: table
 - name: hitRect
-  type: table
+  type: C_MapExplorationInfo.UiMapExplorationHitRect

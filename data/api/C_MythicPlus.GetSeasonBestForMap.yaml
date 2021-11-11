@@ -5,7 +5,7 @@ inputs: n
 outputs:
 - name: intimeInfo
   nilable: true
-  type: table
+  type: C_MythicPlus.MapSeasonBestInfo
 - name: overtimeInfo
   nilable: true
-  type: table
+  type: C_MythicPlus.MapSeasonBestInfo

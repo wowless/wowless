@@ -14,4 +14,4 @@ fields:
   type: string
 - name: ability
   nilable: true
-  type: table
+  type: C_Garrison.GarrisonAbilityInfo

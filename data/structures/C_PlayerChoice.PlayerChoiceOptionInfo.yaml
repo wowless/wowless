@@ -17,7 +17,7 @@ fields:
 - name: hasRewards
   type: bool
 - name: rewardInfo
-  type: table
+  type: C_PlayerChoice.PlayerChoiceOptionRewardInfo
 - name: rarity
   type: number
 - name: uiTextureKit

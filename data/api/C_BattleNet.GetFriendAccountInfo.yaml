@@ -7,4 +7,4 @@ inputs:
 outputs:
 - name: accountInfo
   nilable: true
-  type: table
+  type: C_BattleNet.BNetAccountInfo

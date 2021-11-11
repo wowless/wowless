@@ -9,7 +9,7 @@ fields:
   nilable: true
   type: string
 - name: configID
-  type: table
+  type: C_GamePad.GamePadConfigID
 - name: labelStyle
   nilable: true
   type: string

@@ -5,4 +5,4 @@ inputs: ''
 outputs:
 - name: memberInfo
   nilable: true
-  type: table
+  type: C_VoiceChat.VoiceChatMember

@@ -10,22 +10,22 @@ fields:
   type: number
 - name: petInfo
   nilable: true
-  type: table
+  type: C_RecruitAFriend.RafPetInfo
 - name: mountInfo
   nilable: true
-  type: table
+  type: C_RecruitAFriend.RafMountInfo
 - name: appearanceInfo
   nilable: true
-  type: table
+  type: C_RecruitAFriend.RafAppearanceInfo
 - name: titleInfo
   nilable: true
-  type: table
+  type: C_RecruitAFriend.RafTitleInfo
 - name: appearanceSetInfo
   nilable: true
-  type: table
+  type: C_RecruitAFriend.RafAppearanceSetInfo
 - name: illusionInfo
   nilable: true
-  type: table
+  type: C_RecruitAFriend.RafIllusionInfo
 - name: canClaim
   type: bool
 - name: claimed

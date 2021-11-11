@@ -5,4 +5,4 @@ inputs: n
 outputs:
 - name: spellInfo
   nilable: true
-  type: table
+  type: C_Garrison.AutoCombatSpellInfo

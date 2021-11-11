@@ -5,4 +5,4 @@ inputs: nn
 outputs:
 - name: questLineInfo
   nilable: true
-  type: table
+  type: C_QuestLine.QuestLineInfo

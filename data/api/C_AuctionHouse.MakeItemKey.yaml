@@ -8,4 +8,4 @@ inputs:
 - nnnn
 outputs:
 - name: itemKey
-  type: table
+  type: C_AuctionHouse.ItemKey

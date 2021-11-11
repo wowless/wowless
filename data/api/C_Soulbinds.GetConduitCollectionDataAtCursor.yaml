@@ -5,4 +5,4 @@ inputs: ''
 outputs:
 - name: collectionData
   nilable: true
-  type: table
+  type: C_Soulbinds.ConduitCollectionData

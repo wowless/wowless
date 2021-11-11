@@ -5,4 +5,4 @@ inputs: nn
 outputs:
 - name: gossipPoiInfo
   nilable: true
-  type: table
+  type: C_GossipInfo.GossipPoiInfo

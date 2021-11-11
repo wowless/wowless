@@ -31,4 +31,4 @@ fields:
 - name: rafLinkType
   type: number
 - name: gameAccountInfo
-  type: table
+  type: C_BattleNet.BNetGameAccountInfo

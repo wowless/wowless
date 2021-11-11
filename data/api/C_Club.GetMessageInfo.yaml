@@ -5,4 +5,4 @@ inputs: sst
 outputs:
 - name: message
   nilable: true
-  type: table
+  type: C_Club.ClubMessageInfo

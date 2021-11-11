@@ -5,4 +5,4 @@ inputs: n
 outputs:
 - name: info
   nilable: true
-  type: table
+  type: C_PvP.HonorRewardInfo

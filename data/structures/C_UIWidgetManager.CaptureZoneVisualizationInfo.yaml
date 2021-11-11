@@ -11,7 +11,7 @@ fields:
 - name: dangerFlashType
   type: number
 - name: zoneInfo
-  type: table
+  type: C_UIWidgetManager.ZoneEntry
 - name: tooltipLoc
   type: number
 - name: widgetSizeSetting

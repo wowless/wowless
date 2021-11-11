@@ -5,4 +5,4 @@ inputs: n
 outputs:
 - name: campaignInfo
   nilable: true
-  type: table
+  type: C_CampaignInfo.CampaignInfo

@@ -6,4 +6,4 @@ inputs:
 - nn
 outputs:
 - name: itemInfo
-  type: table
+  type: C_EncounterJournal.EncounterJournalItemInfo

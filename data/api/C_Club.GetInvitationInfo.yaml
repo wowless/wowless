@@ -5,4 +5,4 @@ inputs: s
 outputs:
 - name: invitation
   nilable: true
-  type: table
+  type: C_Club.ClubSelfInvitationInfo

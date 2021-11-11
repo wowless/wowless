@@ -5,4 +5,4 @@ inputs: tn
 outputs:
 - name: result
   nilable: true
-  type: table
+  type: C_AuctionHouse.ItemSearchResultInfo

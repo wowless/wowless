@@ -25,4 +25,4 @@ fields:
   name: covenantSoulbinds
   type: table
 - name: featureInfo
-  type: table
+  type: C_CovenantPreview.CovenantFeatureInfo

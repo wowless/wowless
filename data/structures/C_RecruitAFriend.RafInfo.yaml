@@ -15,10 +15,10 @@ fields:
   type: table
 - name: nextReward
   nilable: true
-  type: table
+  type: C_RecruitAFriend.RafReward
 - name: recruitmentInfo
   nilable: true
-  type: table
+  type: C_RecruitAFriend.RafRecruitmentinfo
 - innerType: RafRecruit
   name: recruits
   type: table
