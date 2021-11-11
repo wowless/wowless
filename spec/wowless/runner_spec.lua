@@ -1,4 +1,4 @@
-describe('runner', function()
+describe('runner #huge', function()
   it('loads required versions', function()
     local versions = {
       wow = 'Mainline',

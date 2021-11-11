@@ -2,7 +2,7 @@ local api = require('wowless.api').new(function() end)
 local loader = require('wowless.loader').loader(api)
 require('wowless.env').init(api, loader)
 
-describe('frame #small', function()
+describe('frame', function()
   it('has expected defaults', function()
     local f = api.env.CreateFrame('frame')
     local expected = {

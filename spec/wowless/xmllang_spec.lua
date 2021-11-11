@@ -1,4 +1,4 @@
-describe('xmllang #small', function()
+describe('xmllang', function()
   local lang = require('wowless.xmllang')
   it('has no entries with a field named "type"', function()
     for k, v in pairs(lang) do

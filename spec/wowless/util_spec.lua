@@ -1,4 +1,4 @@
-describe('util #small', function()
+describe('util', function()
   local util = require('wowless.util')
   describe('strjoin', function()
     it('returns empty with no elements', function()
