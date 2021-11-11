@@ -1,14 +1,6 @@
 local data = require('wowapi.data')
 local yamlnull = require('lyaml').null
 
-local structureDefaults = (function()
-  -- TODO generalize this
-  return {
-    Color = '{ r = 1, g = 1, b = 1 }',
-    Vector2D = '{ x = 1, y = 1 }',
-  }
-end)()
-
 local function mixin(b, t)
   b = b or {}
   for k, v in pairs(t) do
@@ -55,7 +47,14 @@ local getStub = (function()
     table = '{}',
     unknown = 'nil',
   }
-  local function mkStub(sig)
+  local structureDefaults = (function()
+    -- TODO generalize this
+    return {
+      Color = '{ r = 1, g = 1, b = 1 }',
+      Vector2D = '{ x = 1, y = 1 }',
+    }
+  end)()
+  return function(sig)
     local rets = {}
     for _, out in ipairs(sig) do
       local v = defaultOutputs[out.type] or structureDefaults[out.type]
@@ -63,15 +62,6 @@ local getStub = (function()
       table.insert(rets, v)
     end
     return loadstring('return ' .. table.concat(rets, ', '))
-  end
-  local stubs = {}
-  return function(sig)
-    local stub = stubs[sig]
-    if not stub then
-      stub = mkStub(sig)
-      stubs[sig] = stub
-    end
-    return stub
   end
 end)()
 
