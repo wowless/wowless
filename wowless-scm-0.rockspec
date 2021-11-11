@@ -22,6 +22,7 @@ build = {
     bin = { wowless = 'wowless.lua' },
   },
   modules = {
+    ['wowapi.data'] = 'wowapi/data.lua',
     ['wowapi.loader'] = 'wowapi/loader.lua',
     ['wowapi.yaml'] = 'wowapi/yaml.lua',
     ['wowless.api'] = 'wowless/api.lua',
