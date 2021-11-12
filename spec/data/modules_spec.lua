@@ -17,13 +17,19 @@ describe('modules', function()
           assert.Not.Nil(module.api)
           assert.same('table', type(module.api))
           assert.Nil(getmetatable(module.api))
-          for k, v in pairs(module.api) do
-            assert.same('string', type(k))
-            assert.Not.same('', k)
-            assert.same('function', type(v))
-          end
           assert.True(module.state == nil or type(module.state) == 'table')
         end)
+        for fname, fn in pairs(module.api) do
+          describe(fname, function()
+            it('has a valid name', function()
+              assert.same('string', type(fname))
+              assert.Not.same('', fname)
+            end)
+            it('has a valid function', function()
+              assert.same('function', type(fn))
+            end)
+          end)
+        end
       end)
     end
   end
