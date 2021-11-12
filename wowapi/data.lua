@@ -1,21 +1,15 @@
 local lfsdir = require('lfs').dir
 local yamlparse = require('wowapi.yaml').parseFile
 
-local apiYamls, apiLuas = (function()
-  local yamls, luas = {}, {}
+local apiYamls = (function()
+  local yamls = {}
   for f in lfsdir('data/api') do
-    local filename = 'data/api/' .. f
-    if f:sub(-4) == '.lua' then
-      local fn = f:sub(1, -5)
-      local lua = loadfile(filename)
-      luas[fn] = lua
-    elseif f:sub(-5) == '.yaml' then
+    if f:sub(-5) == '.yaml' then
       local fn = f:sub(1, -6)
-      local api = yamlparse(filename)
-      yamls[fn] = api
+      yamls[fn] = yamlparse('data/api/' .. f)
     end
   end
-  return yamls, luas
+  return yamls
 end)()
 
 local apiModules = (function()
@@ -41,7 +35,6 @@ local apiStructures = (function()
 end)()
 
 return {
-  luas = apiLuas,
   modules = apiModules,
   structures = apiStructures,
   yamls = apiYamls,

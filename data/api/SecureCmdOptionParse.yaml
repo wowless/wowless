@@ -1,9 +1,13 @@
 ---
 name: SecureCmdOptionParse
-status: stub
+status: implemented
 inputs: s
 outputs:
-- type: string
-- type: unknown
-- type: string
-- type: unknown
+- name: result
+  nilable: true
+  type: string
+- name: target
+  nilable: true
+  type: string
+module: secure
+api: SecureCmdOptionParse
