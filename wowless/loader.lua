@@ -326,14 +326,12 @@ local function loader(api, cfg)
             ud.explicitlyProtected = value
             ud.protected = value
           end,
-          text = function(obj, value)
-            getmetatable(obj).__index.SetText(obj, api.env[value] or value)
-          end,
         }
 
         local function initKidsMaybeFrames(e, obj, framesFlag)
           local frameykids = {
             -- TODO this list is incomplete
+            buttontext = true,
             frames = true,
             highlighttexture = true,
             layers = true,
@@ -343,6 +341,10 @@ local function loader(api, cfg)
             if not not frameykids[string.lower(kid.type)] == framesFlag then
               newctx.loadElement(kid, obj)
             end
+          end
+          local text = e.attr.text
+          if text and framesFlag then
+            getmetatable(obj).__index.SetText(obj, api.env[text] or text)
           end
         end
 

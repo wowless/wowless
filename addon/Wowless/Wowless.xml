@@ -26,4 +26,17 @@
   <Frame name='WowlessKeyParent' inherits='WowlessLogger' />
   <Frame name='$parentKid1' inherits='WowlessLogger' parent='WowlessKeyParent' parentkey='Moo' />
   <Frame name='$parentKid2' inherits='WowlessLogger' parentkey='Cow' parent='WowlessKeyParent' />
+
+  <Button name='WowlessAttrOrder' text='moocow'>
+    <Scripts>
+      <OnLoad>assert(self:GetText() == 'moocow', 'outer load')</OnLoad>
+    </Scripts>
+    <Frames>
+      <Frame name='$parentKid1'>
+        <Scripts>
+          <OnLoad>assert(self:GetParent():GetText() == nil, 'inner load')</OnLoad>
+        </Scripts>
+      </Frame>
+    </Frames>
+  </Button>
 </Ui>
