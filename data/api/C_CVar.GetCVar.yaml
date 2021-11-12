@@ -3,6 +3,9 @@ name: C_CVar.GetCVar
 status: implemented
 inputs: s
 outputs:
-- type: nil
-module: cvar
-api: GetCVar
+- name: value
+  nilable: true
+  type: string
+states:
+- CVarDefaults
+- CVars

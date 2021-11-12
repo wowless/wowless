@@ -1,5 +1,6 @@
 ---
 name: hooksecurefunc
 status: implemented
-module: core
-api: hooksecurefunc
+outputs: {}
+states:
+- env

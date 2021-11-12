@@ -9,5 +9,3 @@ outputs:
 - name: target
   nilable: true
   type: string
-module: secure
-api: SecureCmdOptionParse

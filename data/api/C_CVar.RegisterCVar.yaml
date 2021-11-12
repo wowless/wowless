@@ -5,5 +5,5 @@ inputs:
 - s
 - ss
 outputs: {}
-module: cvar
-api: RegisterCVar
+states:
+- CVars

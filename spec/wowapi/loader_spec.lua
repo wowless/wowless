@@ -1,9 +1,11 @@
 describe('loader', function()
   local loader = require('wowapi.loader')
 
-  it('loads', function()
-    assert.same('table', type(loader.loadFunctions()))
-  end)
+  for _, v in ipairs({'Vanilla', 'TBC', 'Mainline'}) do
+    it('loads ' .. v, function()
+      assert.same('table', type(loader.loadFunctions(v, {})))
+    end)
+  end
 
   describe('argSig', function()
     it('handles all types', function()

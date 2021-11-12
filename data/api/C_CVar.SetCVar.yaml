@@ -6,6 +6,7 @@ inputs:
 - ss
 - sss
 outputs:
-- type: bool
-module: cvar
-api: SetCVar
+- name: success
+  type: bool
+states:
+- CVars

@@ -18,7 +18,7 @@ end
 
 return {
   apis = loaddir('api', 'yaml'),
-  modules = loaddir('modules', 'lua'),
+  impl = loaddir('impl', 'lua'),
   state = loaddir('state', 'yaml'),
   structures = loaddir('structures', 'yaml'),
 }
