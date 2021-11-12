@@ -1527,9 +1527,6 @@ local function mkWowEnv(api, loader)
         return unpack(returns[i])
       end
     end)(),
-    GetText = function(token)
-      return 'GetText(' .. token .. ')'  -- UNIMPLEMENTED
-    end,
     IsLoggedIn = function()
       return api.isLoggedIn
     end,

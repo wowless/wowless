@@ -1,0 +1,10 @@
+---
+name: GetText
+status: unimplemented
+inputs:
+- s
+- sn
+- sxn
+outputs:
+- name: text
+  type: string
