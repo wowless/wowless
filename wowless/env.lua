@@ -1540,9 +1540,6 @@ local function mkWowEnv(api, loader)
         api.SendEvent('EXECUTE_CHAT_LINE', line)
       end
     end,
-    scrub = function(...)
-      return ...  -- UNIMPLEMENTED
-    end,
   }
 end
 
