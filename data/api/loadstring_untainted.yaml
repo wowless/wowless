@@ -1,0 +1,5 @@
+---
+name: loadstring_untainted
+status: implemented
+states:
+- env

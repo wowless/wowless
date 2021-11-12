@@ -1,0 +1,5 @@
+---
+name: loadstring
+status: implemented
+states:
+- env
