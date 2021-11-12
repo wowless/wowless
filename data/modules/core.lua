@@ -1,9 +1,7 @@
 local env = ...
 
 local function returner(...)
-  local t = {...}
-  local n = select('#', ...)
-  return function() return unpack(t, 1, n) end
+  return {...}, select('#', ...)
 end
 
 return {
@@ -24,9 +22,9 @@ return {
       end
       local oldfn = tbl[name]
       tbl[name] = function(...)
-        local retfn = returner(oldfn(...))
+        local t, n = returner(oldfn(...))
         fn(...)
-        return retfn()
+        return unpack(t, 1, n)
       end
     end,
   },
