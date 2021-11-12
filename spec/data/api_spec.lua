@@ -115,14 +115,14 @@ describe('api', function()
           elseif t.status == 'stub' then
             assert.Nil(t.module, 'stub apis cannot specify a module')
             assert.Nil(t.api, 'stub apis cannot specify an api')
-            assert.Not.Nil(t.returns, 'stub apis must specify return values')
+            assert.same('table', type(t.returns), 'stub apis must specify return value table')
           elseif t.status == 'implemented' then
-            assert.Not.Nil(t.module, 'implemented apis must specify a module')
-            assert.Not.Nil(t.api, 'implemented apis must specify an api')
+            assert.same('string', type(t.module), 'implemented apis must specify a module')
+            assert.same('string', type(t.api), 'implemented apis must specify an api')
             assert.Nil(t.returns, 'implemented apis cannot specify return values')
-            local mod = data.modules[t.module]()
-            assert.Not.Nil(mod, 'unknown module ' .. t.module)
-            assert.Not.Nil(mod.api[t.api], 'unknown api ' .. t.api)
+            local modfn = data.modules[t.module]
+            assert.Not.Nil(modfn, 'unknown module ' .. t.module)
+            assert.Not.Nil(modfn().api()[t.api], 'unknown api ' .. t.api)
           else
             error('unsupported status')
           end

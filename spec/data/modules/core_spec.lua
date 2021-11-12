@@ -12,7 +12,7 @@ describe('core', function()
         return a-1, b-1, c-1
       end
       local t = { func = func }
-      assert.same({}, {modulefn().api.hooksecurefunc(t, 'func', hook)})
+      assert.same({}, {modulefn().api().hooksecurefunc(t, 'func', hook)})
       assert.Not.equals(func, t.func)
       assert.Not.equals(func, t.hook)
       assert.same({13, 35, 57}, {t.func(12, 34, 56)})
@@ -30,7 +30,7 @@ describe('core', function()
       local hookWasCalled = false
       local hook = function() hookWasCalled = true end
       local env = { moocow = func }
-      modulefn(env).api.hooksecurefunc('moocow', hook)
+      modulefn(env).api().hooksecurefunc('moocow', hook)
       assert.Not.equals(func, env.moocow)
       assert.Not.equals(hook, env.moocow)
       check(env.moocow())

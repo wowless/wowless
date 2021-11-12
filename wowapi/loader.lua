@@ -3,7 +3,7 @@ local yamlnull = require('lyaml').null
 
 local function loadApis(version)
   local apis = {}
-  for fn, yaml in pairs(data.yamls) do
+  for fn, yaml in pairs(data.apis) do
     local match = not yaml.versions
     if yaml.versions then
       for _, v in ipairs(yaml.versions) do
@@ -94,7 +94,12 @@ local function doGetFn(api, modules)
   elseif api.status == 'stub' then
     return function() return unpackReturns(api.returns) end
   elseif api.status == 'implemented' then
-    return assert(modules[api.module].api[api.api])
+    local module = assert(modules[api.module])
+    local args = {}
+    for _, state in ipairs(module.state or {}) do
+      table.insert(args, data.state[state].value)
+    end
+    return assert(module.api(unpack(args))[api.api])
   else
     error(('invalid status %q on %q'):format(api.status, api.name))
   end

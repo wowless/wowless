@@ -26,6 +26,10 @@ local function isarray(t)
   return true
 end
 
+local function keycomp(a, b)
+  return a:lower() < b:lower()
+end
+
 local function api2yaml(api)
   local emit = emitter().emit
   assert(emit({type = 'STREAM_START'}))
@@ -54,7 +58,7 @@ local function api2yaml(api)
         for name in pairs(v) do
           table.insert(sortedKeys, name)
         end
-        table.sort(sortedKeys)
+        table.sort(sortedKeys, keycomp)
         local names = {}
         for _, name in ipairs(v == api and fieldOrder or {}) do
           table.insert(names, name)

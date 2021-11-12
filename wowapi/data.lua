@@ -1,41 +1,24 @@
-local lfsdir = require('lfs').dir
-local yamlparse = require('wowapi.yaml').parseFile
+local extLoaders = {
+  lua = loadfile,
+  yaml = require('wowapi.yaml').parseFile,
+}
 
-local apiYamls = (function()
-  local yamls = {}
-  for f in lfsdir('data/api') do
-    if f:sub(-5) == '.yaml' then
-      local fn = f:sub(1, -6)
-      yamls[fn] = yamlparse('data/api/' .. f)
+local function loaddir(dir, ext)
+  local len = ext:len()
+  local loader = extLoaders[ext]
+  local t = {}
+  for f in require('lfs').dir('data/' .. dir) do
+    if f:sub(-1 - len) == '.' .. ext then
+      local fn = f:sub(1, -2 - len)
+      t[fn] = loader('data/' .. dir .. '/' .. f)
     end
   end
-  return yamls
-end)()
-
-local apiModules = (function()
-  local modules = {}
-  for f in lfsdir('data/modules') do
-    if f:sub(-4) == '.lua' then
-      local fn = f:sub(1, -5)
-      modules[fn] = loadfile('data/modules/' .. f)
-    end
-  end
-  return modules
-end)()
-
-local apiStructures = (function()
-  local structures = {}
-  for f in lfsdir('data/structures') do
-    if f:sub(-5) == '.yaml' then
-      local fn = f:sub(1, -6)
-      structures[fn] = yamlparse('data/structures/' .. f)
-    end
-  end
-  return structures
-end)()
+  return t
+end
 
 return {
-  modules = apiModules,
-  structures = apiStructures,
-  yamls = apiYamls,
+  apis = loaddir('api', 'yaml'),
+  modules = loaddir('modules', 'lua'),
+  state = loaddir('state', 'yaml'),
+  structures = loaddir('structures', 'yaml'),
 }

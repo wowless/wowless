@@ -1,4 +1,5 @@
 describe('modules', function()
+  local state = require('wowapi.data').state
   for filename in require('lfs').dir('data/modules') do
     if filename ~= '.' and filename ~= '..' then
       describe(filename, function()
@@ -15,11 +16,20 @@ describe('modules', function()
             assert.True(fields[k], ('unexpected field %q'):format(k))
           end
           assert.Not.Nil(module.api)
-          assert.same('table', type(module.api))
-          assert.Nil(getmetatable(module.api))
-          assert.True(module.state == nil or type(module.state) == 'table')
+          assert.same('function', type(module.api))
+          if module.state ~= nil then
+            assert.same('table', type(module.state))
+            for _, v in ipairs(module.state) do
+              assert.same('string', type(v))
+              assert.Not.Nil(state[v])
+            end
+          end
         end)
-        for fname, fn in pairs(module.api) do
+        local args = {}
+        for _, v in ipairs(module.state or {}) do
+          table.insert(args, state[v].value)
+        end
+        for fname, fn in pairs(module.api(unpack(args))) do
           describe(fname, function()
             it('has a valid name', function()
               assert.same('string', type(fname))
