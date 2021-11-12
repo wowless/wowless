@@ -1,0 +1,21 @@
+---
+name: GetAddOnInfo
+status: unimplemented
+inputs:
+- n
+- s
+outputs:
+- name: name
+  type: string
+- name: title
+  type: string
+- name: notes
+  type: string
+- name: loadable
+  type: bool
+- name: reason
+  type: string
+- name: security
+  type: string
+- name: newVersion
+  type: bool
