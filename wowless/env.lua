@@ -1533,9 +1533,6 @@ local function mkWowEnv(api, loader)
         return unpack(returns[i])
       end
     end)(),
-    GetItemSubClassInfo = function(classID, subClassID)
-      return string.format('ItemClass%dSubClass%d', classID, subClassID)
-    end,
     GetText = function(token)
       return 'GetText(' .. token .. ')'  -- UNIMPLEMENTED
     end,

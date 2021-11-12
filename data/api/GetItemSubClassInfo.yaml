@@ -1,0 +1,12 @@
+---
+name: GetItemSubClassInfo
+status: stub
+inputs: nn
+outputs:
+- name: name
+  type: string
+- name: isArmorType
+  type: bool
+returns:
+- nonempty
+- false
