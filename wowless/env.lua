@@ -1475,9 +1475,6 @@ local function mkWowEnv(api, loader)
     geterrorhandler = function()
       return api.ErrorHandler  -- UNIMPLEMENTED
     end,
-    GetFactionInfoByID = function(id)
-      return 'faction' .. id, nil, nil, nil, nil, 0  -- UNIMPLEMENTED
-    end,
     GetInventorySlotInfo = (function()
       local t = {
         ammoslot = 0,
