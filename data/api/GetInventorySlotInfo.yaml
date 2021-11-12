@@ -1,0 +1,9 @@
+---
+name: GetInventorySlotInfo
+status: implemented
+inputs: s
+outputs:
+- name: slotId
+  type: number
+- name: textureName
+  type: string

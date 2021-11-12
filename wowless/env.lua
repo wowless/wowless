@@ -1475,37 +1475,6 @@ local function mkWowEnv(api, loader)
     geterrorhandler = function()
       return api.ErrorHandler  -- UNIMPLEMENTED
     end,
-    GetInventorySlotInfo = (function()
-      local t = {
-        ammoslot = 0,
-        headslot = 1,
-        neckslot = 2,
-        shoulderslot = 3,
-        shirtslot = 4,
-        chestslot = 5,
-        waistslot = 6,
-        legsslot = 7,
-        feetslot = 8,
-        wristslot = 9,
-        handsslot = 10,
-        finger0slot = 11,
-        finger1slot = 12,
-        trinket0slot = 13,
-        trinket1slot = 14,
-        backslot = 15,
-        mainhandslot = 16,
-        secondaryhandslot = 17,
-        rangedslot = 18,
-        tabardslot = 19,
-        bag0slot = 20,
-        bag1slot = 21,
-        bag2slot = 22,
-        bag3slot = 23,
-      }
-      return function(slotName)
-        return assert(t[string.lower(slotName)], 'unknown slot name ' .. slotName)
-      end
-    end)(),
     GetItemQualityColor = (function()
       local data = {
         [0] = { 0x9d, 0x9d, 0x9d },  -- Poor
