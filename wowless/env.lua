@@ -1454,7 +1454,6 @@ local function mkWowEnv(api, loader)
     return api.CreateUIObject(ltype, name, parent, nil, unpack(templates))
   end
   return {
-    BreakUpLargeNumbers = tostring,  -- UNIMPLEMENTED,
     CreateFont = function(name)
       return api.CreateUIObject('font', name)
     end,
