@@ -1,5 +1,11 @@
 local env = ...
 
+local function returner(...)
+  local t = {...}
+  local n = select('#', ...)
+  return function() return unpack(t, 1, n) end
+end
+
 return {
   api = {
     getfenv = function(arg)
@@ -18,9 +24,9 @@ return {
       end
       local oldfn = tbl[name]
       tbl[name] = function(...)
-        local returns = {oldfn(...)}
+        local retfn = returner(oldfn(...))
         fn(...)
-        return unpack(returns)
+        return retfn()
       end
     end,
   },
