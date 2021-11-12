@@ -1530,10 +1530,6 @@ local function mkWowEnv(api, loader)
     IsLoggedIn = function()
       return api.isLoggedIn
     end,
-    issecure = function()
-      -- use tainted-lua if available
-      return issecure and issecure() or true
-    end,
     LoadAddOn = function(name)
       assert(name)
       loader.loadAddon(name)
