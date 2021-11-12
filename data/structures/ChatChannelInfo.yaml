@@ -1,0 +1,16 @@
+---
+name: ChatChannelInfo
+status: implemented
+fields:
+- name: name
+  type: string
+- name: shortcut
+  type: string
+- name: localID
+  type: number
+- name: instanceID
+  type: number
+- name: zoneChannelID
+  type: number
+- name: channelType
+  type: number
