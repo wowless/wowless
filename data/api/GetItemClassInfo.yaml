@@ -1,0 +1,7 @@
+---
+name: GetItemClassInfo
+status: unimplemented
+inputs: n
+outputs:
+- name: name
+  type: string

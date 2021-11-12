@@ -1512,9 +1512,6 @@ local function mkWowEnv(api, loader)
         return assert(t[string.lower(slotName)], 'unknown slot name ' .. slotName)
       end
     end)(),
-    GetItemClassInfo = function(classID)
-      return string.format('ItemClass%d', classID)
-    end,
     GetItemInventorySlotInfo = function(inventorySlot)
       return string.format('ItemInventorySlot%d', inventorySlot)
     end,
