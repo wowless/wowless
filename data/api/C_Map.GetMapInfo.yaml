@@ -1,8 +1,13 @@
 ---
 name: C_Map.GetMapInfo
-status: implemented
+status: stub
 inputs: n
 outputs:
-- type: table
-module: map
-api: GetMapInfo
+- name: info
+  type: C_Map.UiMapDetails
+returns:
+- flags: 0
+  mapID: 0
+  mapType: 0
+  name: TheMap
+  parentMapID: 0
