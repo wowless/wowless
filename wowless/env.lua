@@ -1475,27 +1475,6 @@ local function mkWowEnv(api, loader)
     geterrorhandler = function()
       return api.ErrorHandler  -- UNIMPLEMENTED
     end,
-    GetItemQualityColor = (function()
-      local data = {
-        [0] = { 0x9d, 0x9d, 0x9d },  -- Poor
-        [1] = { 0xff, 0xff, 0xff },  -- Common
-        [2] = { 0x1e, 0xff, 0x00 },  -- Uncommon
-        [3] = { 0x00, 0x70, 0xdd },  -- Rare
-        [4] = { 0xa3, 0x35, 0xee },  -- Epic
-        [5] = { 0xff, 0x80, 0x00 },  -- Legendary
-        [6] = { 0xe6, 0xcc, 0x80 },  -- Artifact
-        [7] = { 0x00, 0xcc, 0xff },  -- Heirloom
-        [8] = { 0x00, 0xcc, 0xff },  -- WoW Token
-      }
-      local returns = {}
-      for k, v in pairs(data) do
-        local r, g, b = unpack(v)
-        returns[k] = { r / 255, g / 255, b / 255, string.format('%2x%2x%2x', r, g, b) }
-      end
-      return function(i)
-        return unpack(returns[i])
-      end
-    end)(),
     IsLoggedIn = function()
       return api.isLoggedIn
     end,

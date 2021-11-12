@@ -1,0 +1,13 @@
+---
+name: GetItemQualityColor
+status: implemented
+inputs: n
+outputs:
+- name: r
+  type: number
+- name: g
+  type: number
+- name: b
+  type: number
+- name: hex
+  type: string
