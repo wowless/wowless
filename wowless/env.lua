@@ -1460,7 +1460,6 @@ local function mkWowEnv(api, loader)
     end,
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
-    C_AdventureMap = {},
     EnumerateFrames = function(frame)
       if frame == nil then
         return api.frames[1]
