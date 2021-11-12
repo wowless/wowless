@@ -1543,19 +1543,6 @@ local function mkWowEnv(api, loader)
     scrub = function(...)
       return ...  -- UNIMPLEMENTED
     end,
-    securecall = function(func, ...)
-      assert(func, 'securecall of nil function')
-      if type(func) == 'string' then
-        assert(api.env[func], 'securecall of unknown function ' .. func)
-        func = api.env[func]
-      end
-      -- use tainted-lua if available
-      if securecall then
-        return securecall(func, ...)
-      else
-        return func(...)
-      end
-    end,
   }
 end
 
