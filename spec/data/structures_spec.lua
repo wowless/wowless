@@ -1,7 +1,8 @@
 describe('structures', function()
   local yaml = require('wowapi.yaml')
   for filename in require('lfs').dir('data/structures') do
-    if filename:sub(-5) == '.yaml' then
+    if filename ~= '.' and filename ~= '..' then
+      assert(filename:sub(-5) == '.yaml', 'invalid file ' .. filename)
       describe(filename, function()
         local str = (function()
           local file = io.open('data/structures/' .. filename, 'r')
