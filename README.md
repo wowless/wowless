@@ -2,7 +2,7 @@
 A headless WoW client Lua and FrameXML interpreter. Intended for addon testing.
 
 ```sh
-$ git clone --recurse-submodules https://github.com/ferronn-dev/wowless
+$ git clone https://github.com/lua-wow-tools/wowless
 $ cd wowless
 $ bin/setup.sh
 $ bin/test.sh
@@ -16,6 +16,4 @@ The above will:
   * load the code, just like a WoW client would
   * mess around with the frames created: click around, mouse over things, etc.
 
-The loading and testing work for Classic and Classic Era, but do not yet work for Retail. To see the litany of errors caused by Retail, run `bin/run.sh 0 wow Mainline`, and then help fix the resulting issues!
-
-[wowcig]: https://github.com/ferronn-dev/wowcig
+[wowcig]: https://github.com/lua-wow-tools/wowcig
