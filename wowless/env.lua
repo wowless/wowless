@@ -1512,9 +1512,6 @@ local function mkWowEnv(api, loader)
         return assert(t[string.lower(slotName)], 'unknown slot name ' .. slotName)
       end
     end)(),
-    GetItemInventorySlotInfo = function(inventorySlot)
-      return string.format('ItemInventorySlot%d', inventorySlot)
-    end,
     GetItemQualityColor = (function()
       local data = {
         [0] = { 0x9d, 0x9d, 0x9d },  -- Poor
