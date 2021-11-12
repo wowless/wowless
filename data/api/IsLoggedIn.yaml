@@ -1,0 +1,7 @@
+---
+name: IsLoggedIn
+status: unimplemented
+inputs: ''
+outputs:
+- name: isLoggedIn
+  type: bool

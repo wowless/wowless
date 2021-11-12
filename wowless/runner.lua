@@ -16,7 +16,6 @@ local function run(cfg)
   for _, d in ipairs(cfg.otherAddonDirs or {}) do
     loader.loadAddon(require('path').basename(d))
   end
-  api.isLoggedIn = true
   api.SendEvent('PLAYER_LOGIN')
   api.SendEvent('UPDATE_CHAT_WINDOWS')
   api.SendEvent('VARIABLES_LOADED')

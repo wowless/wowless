@@ -1461,9 +1461,6 @@ local function mkWowEnv(api, loader)
     geterrorhandler = function()
       return api.ErrorHandler  -- UNIMPLEMENTED
     end,
-    IsLoggedIn = function()
-      return api.isLoggedIn
-    end,
     LoadAddOn = function(name)
       assert(name)
       loader.loadAddon(name)

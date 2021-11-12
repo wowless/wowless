@@ -153,7 +153,6 @@ local function new(log)
     GetErrorCount = GetErrorCount,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
-    isLoggedIn = false,
     log = log,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
