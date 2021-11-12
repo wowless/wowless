@@ -1407,10 +1407,6 @@ local function mkBaseEnv()
     type = type,
     unpack = unpack,
     wipe = util.twipe,
-    xpcall = function(f, e, ...)
-      local args = {...}
-      return xpcall(function() f(unpack(args)) end, e)
-    end,
   }
 end
 
