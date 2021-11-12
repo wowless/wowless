@@ -1472,9 +1472,6 @@ local function mkWowEnv(api, loader)
     GetAddOnMetadata = function(addon, key)
       return loader.getAddOnMetadata(addon, key)
     end,
-    GetChatWindowInfo = function(idx)
-      return '', 10, 1, 1, 1, 1, 1, 1, idx  -- UNIMPLEMENTED
-    end,
     geterrorhandler = function()
       return api.ErrorHandler  -- UNIMPLEMENTED
     end,
