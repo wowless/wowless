@@ -1414,30 +1414,22 @@ local function mkBaseEnv()
   }
 end
 
-local function mkMetaEnv(api)
-  local __dump = (function()
-    local block = require('serpent').block
-    local config = { nocode = true }
-    local function dump(x)
-      print(block(x, config))
-    end
-    return function(...)
-      for _, x in ipairs({...}) do
-        dump(x)
-        if api.UserData(x) then
-          print('===[begin userdata]===')
-          dump(api.UserData(x))
-          print('===[ end userdata ]===')
-        end
+local function dump(api)
+  local block = require('serpent').block
+  local config = { nocode = true }
+  local function d(x)
+    print(block(x, config))
+  end
+  return function(...)
+    for _, x in ipairs({...}) do
+      d(x)
+      if api.UserData(x) then
+        print('===[begin userdata]===')
+        d(api.UserData(x))
+        print('===[ end userdata ]===')
       end
     end
-  end)()
-  return {
-    __index = {
-      _G = api.env,
-      __dump = __dump,
-    },
-  }
+  end
 end
 
 local function mkWowEnv(api, loader)
@@ -1490,7 +1482,8 @@ local function mkWowEnv(api, loader)
 end
 
 local function init(api, loader)
-  setmetatable(api.env, mkMetaEnv(api))
+  api.env._G = api.env
+  api.env.__dump = dump(api)
   Mixin(api.env, mkBaseEnv())
   util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(loader.version, api.env), true)
   util.recursiveMixin(api.env, mkWowEnv(api, loader), true)
