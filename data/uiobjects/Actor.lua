@@ -1,0 +1,3 @@
+return {
+  inherits = {'ParentedObject', 'ScriptObject'},
+}

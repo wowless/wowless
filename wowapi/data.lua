@@ -21,4 +21,5 @@ return {
   impl = loaddir('impl', 'lua'),
   state = loaddir('state', 'yaml'),
   structures = loaddir('structures', 'yaml'),
+  uiobjects = loaddir('uiobjects', 'lua'),
 }
