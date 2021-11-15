@@ -4,11 +4,24 @@ inherits:
 - Frame
 methods:
   GetLightDirection:
-    status: implemented
+    status: unimplemented
+    outputs:
+    - type: number
+    - type: number
+    - type: number
   GetLightPosition:
-    status: implemented
+    status: unimplemented
+    outputs:
+    - type: number
+    - type: number
+    - type: number
   GetViewInsets:
-    status: implemented
+    status: unimplemented
+    outputs:
+    - type: number
+    - type: number
+    - type: number
+    - type: number
   SetLightAmbientColor:
     status: unimplemented
   SetLightDirection:

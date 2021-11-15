@@ -9,7 +9,16 @@ methods:
   GetAtlas:
     status: unimplemented
   GetTexCoord:
-    status: implemented
+    outputs:
+    - type: number
+    - type: number
+    - type: number
+    - type: number
+    - type: number
+    - type: number
+    - type: number
+    - type: number
+    status: unimplemented
   GetTexture:
     status: unimplemented
   GetVertexColor:
