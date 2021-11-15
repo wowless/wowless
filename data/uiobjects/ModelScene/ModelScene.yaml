@@ -1,0 +1,19 @@
+---
+name: ModelScene
+inherits:
+- Frame
+methods:
+  GetLightDirection:
+    status: implemented
+  GetLightPosition:
+    status: implemented
+  GetViewInsets:
+    status: implemented
+  SetLightAmbientColor:
+    status: unimplemented
+  SetLightDirection:
+    status: unimplemented
+  SetLightPosition:
+    status: unimplemented
+  SetViewInsets:
+    status: unimplemented

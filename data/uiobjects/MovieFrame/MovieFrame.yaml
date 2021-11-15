@@ -1,0 +1,5 @@
+---
+name: MovieFrame
+inherits:
+- Frame
+methods: {}

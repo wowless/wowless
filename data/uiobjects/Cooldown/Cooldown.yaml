@@ -1,0 +1,29 @@
+---
+name: Cooldown
+inherits:
+- Frame
+methods:
+  Clear:
+    status: unimplemented
+  Pause:
+    status: unimplemented
+  SetBlingTexture:
+    status: implemented
+  SetCooldown:
+    status: unimplemented
+  SetDrawBling:
+    status: unimplemented
+  SetDrawEdge:
+    status: unimplemented
+  SetDrawSwipe:
+    status: unimplemented
+  SetEdgeTexture:
+    status: implemented
+  SetHideCountdownNumbers:
+    status: unimplemented
+  SetReverse:
+    status: unimplemented
+  SetSwipeColor:
+    status: unimplemented
+  SetSwipeTexture:
+    status: implemented

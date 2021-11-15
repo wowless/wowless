@@ -1,0 +1,13 @@
+---
+name: ParentedObject
+inherits:
+- UIObject
+methods:
+  GetDebugName:
+    status: unimplemented
+  GetParent:
+    status: implemented
+  IsForbidden:
+    status: implemented
+  SetForbidden:
+    status: implemented

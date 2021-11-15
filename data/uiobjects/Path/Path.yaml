@@ -1,0 +1,5 @@
+---
+name: Path
+inherits:
+- Animation
+methods: {}

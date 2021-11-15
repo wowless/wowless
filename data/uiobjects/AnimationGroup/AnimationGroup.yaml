@@ -1,0 +1,20 @@
+---
+name: AnimationGroup
+inherits:
+- ParentedObject
+- ScriptObject
+methods:
+  CreateAnimation:
+    status: implemented
+  GetAnimations:
+    status: implemented
+  IsPlaying:
+    status: unimplemented
+  Play:
+    status: unimplemented
+  SetLooping:
+    status: unimplemented
+  SetToFinalAlpha:
+    status: unimplemented
+  Stop:
+    status: unimplemented

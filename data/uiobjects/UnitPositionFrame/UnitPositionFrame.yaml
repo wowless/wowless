@@ -1,0 +1,23 @@
+---
+name: UnitPositionFrame
+inherits:
+- Frame
+methods:
+  AddUnit:
+    status: unimplemented
+  ClearUnits:
+    status: unimplemented
+  FinalizeUnits:
+    status: unimplemented
+  GetMouseOverUnits:
+    status: unimplemented
+  SetPlayerPingScale:
+    status: unimplemented
+  SetPlayerPingTexture:
+    status: unimplemented
+  SetUiMapID:
+    status: unimplemented
+  StartPlayerPing:
+    status: unimplemented
+  StopPlayerPing:
+    status: unimplemented

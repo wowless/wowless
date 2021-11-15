@@ -1,0 +1,7 @@
+---
+name: DressUpModel
+inherits:
+- PlayerModel
+methods:
+  SetAutoDress:
+    status: unimplemented

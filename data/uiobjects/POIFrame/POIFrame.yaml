@@ -1,0 +1,19 @@
+---
+name: POIFrame
+inherits:
+- Frame
+methods:
+  DrawNone:
+    status: unimplemented
+  SetBorderAlpha:
+    status: unimplemented
+  SetBorderScalar:
+    status: unimplemented
+  SetBorderTexture:
+    status: unimplemented
+  SetFillAlpha:
+    status: unimplemented
+  SetFillTexture:
+    status: unimplemented
+  SetMapID:
+    status: unimplemented

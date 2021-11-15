@@ -1,0 +1,10 @@
+---
+name: UIObject
+inherits: {}
+methods:
+  GetName:
+    status: implemented
+  GetObjectType:
+    status: implemented
+  IsObjectType:
+    status: implemented

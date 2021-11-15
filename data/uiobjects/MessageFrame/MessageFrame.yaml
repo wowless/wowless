@@ -1,0 +1,5 @@
+---
+name: MessageFrame
+inherits:
+- Frame
+methods: {}

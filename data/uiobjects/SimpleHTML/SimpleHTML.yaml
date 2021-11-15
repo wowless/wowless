@@ -1,0 +1,12 @@
+---
+name: SimpleHTML
+inherits:
+- FontInstance
+- Frame
+methods:
+  GetContentHeight:
+    outputs:
+    - type: number
+    status: unimplemented
+  SetText:
+    status: unimplemented

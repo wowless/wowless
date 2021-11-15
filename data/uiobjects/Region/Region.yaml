@@ -1,0 +1,81 @@
+---
+name: Region
+inherits:
+- ParentedObject
+methods:
+  AdjustPointsOffset:
+    status: unimplemented
+  ClearAllPoints:
+    status: implemented
+  CreateAnimationGroup:
+    status: implemented
+  GetAlpha:
+    status: implemented
+  GetAnimationGroups:
+    status: implemented
+  GetBottom:
+    status: implemented
+  GetCenter:
+    status: implemented
+  GetEffectiveAlpha:
+    status: implemented
+  GetEffectiveScale:
+    status: implemented
+  GetHeight:
+    status: implemented
+  GetLeft:
+    status: implemented
+  GetNumPoints:
+    status: implemented
+  GetPoint:
+    status: implemented
+  GetRect:
+    status: implemented
+  GetRight:
+    status: implemented
+  GetScale:
+    status: implemented
+  GetScaledRect:
+    status: implemented
+  GetSize:
+    status: implemented
+  GetTop:
+    status: implemented
+  GetWidth:
+    status: implemented
+  Hide:
+    status: implemented
+  IsIgnoringParentAlpha:
+    status: implemented
+  IsIgnoringParentScale:
+    status: implemented
+  IsMouseOver:
+    status: unimplemented
+  IsProtected:
+    status: implemented
+  IsShown:
+    status: implemented
+  IsVisible:
+    status: implemented
+  SetAllPoints:
+    status: unimplemented
+  SetAlpha:
+    status: implemented
+  SetHeight:
+    status: implemented
+  SetIgnoreParentAlpha:
+    status: implemented
+  SetParent:
+    status: implemented
+  SetPoint:
+    status: implemented
+  SetScale:
+    status: implemented
+  SetShown:
+    status: implemented
+  SetSize:
+    status: unimplemented
+  SetWidth:
+    status: implemented
+  Show:
+    status: implemented

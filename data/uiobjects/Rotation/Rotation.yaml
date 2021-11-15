@@ -1,0 +1,7 @@
+---
+name: Rotation
+inherits:
+- Animation
+methods:
+  SetDegrees:
+    status: unimplemented

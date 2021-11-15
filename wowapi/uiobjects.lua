@@ -96,10 +96,8 @@ local function mkBaseUIObjectTypes(api, loader)
     kids = kids,
     loader = loader,
     m = m,
-    STUB_NUMBER = function() return 1 end,
     toTexture = toTexture,
     u = u,
-    UNIMPLEMENTED = function() end,
     UpdateVisible = UpdateVisible,
     util = require('wowless.util'),
   }
@@ -107,11 +105,16 @@ local function mkBaseUIObjectTypes(api, loader)
     env[k] = v
   end
 
-  local t = {}
-  for k, v in pairs(require('wowapi.data').uiobjects) do
-    t[k] = setfenv(v, env)()
+  local uiobjects = require('wowapi.data').uiobjects
+  for _, v in pairs(uiobjects) do
+    if v.constructor then
+      setfenv(v.constructor, env)
+    end
+    for _, method in pairs(v.mixin) do
+      setfenv(method, env)
+    end
   end
-  return flatten(t)
+  return flatten(uiobjects)
 end
 
 return mkBaseUIObjectTypes

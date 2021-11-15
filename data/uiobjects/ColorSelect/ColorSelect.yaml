@@ -1,0 +1,17 @@
+---
+name: ColorSelect
+inherits:
+- Frame
+methods:
+  GetColorHSV:
+    status: implemented
+  GetColorRGB:
+    status: implemented
+  SetColorHSV:
+    status: unimplemented
+  SetColorRGB:
+    status: unimplemented
+  SetColorWheelTexture:
+    status: unimplemented
+  SetColorWheelThumbTexture:
+    status: unimplemented

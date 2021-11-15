@@ -1,0 +1,37 @@
+---
+name: FontInstance
+inherits:
+- UIObject
+methods:
+  GetFont:
+    status: implemented
+  GetShadowColor:
+    status: implemented
+  GetShadowOffset:
+    outputs:
+    - type: number
+    status: unimplemented
+  GetSpacing:
+    outputs:
+    - type: number
+    status: unimplemented
+  GetTextColor:
+    status: implemented
+  SetFont:
+    status: unimplemented
+  SetFontObject:
+    status: unimplemented
+  SetIndentedWordWrap:
+    status: unimplemented
+  SetJustifyH:
+    status: unimplemented
+  SetJustifyV:
+    status: unimplemented
+  SetShadowColor:
+    status: unimplemented
+  SetShadowOffset:
+    status: unimplemented
+  SetSpacing:
+    status: unimplemented
+  SetTextColor:
+    status: unimplemented

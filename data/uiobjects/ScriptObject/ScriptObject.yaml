@@ -1,0 +1,12 @@
+---
+name: ScriptObject
+inherits: {}
+methods:
+  GetScript:
+    status: implemented
+  HasScript:
+    status: implemented
+  HookScript:
+    status: implemented
+  SetScript:
+    status: implemented

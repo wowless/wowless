@@ -1,0 +1,9 @@
+---
+name: LayeredRegion
+inherits:
+- Region
+methods:
+  SetDrawLayer:
+    status: unimplemented
+  SetVertexColor:
+    status: unimplemented

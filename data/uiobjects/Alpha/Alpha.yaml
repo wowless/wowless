@@ -1,0 +1,9 @@
+---
+name: Alpha
+inherits:
+- Animation
+methods:
+  SetFromAlpha:
+    status: unimplemented
+  SetToAlpha:
+    status: unimplemented

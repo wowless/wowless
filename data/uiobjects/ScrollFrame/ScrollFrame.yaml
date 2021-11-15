@@ -1,0 +1,23 @@
+---
+name: ScrollFrame
+inherits:
+- Frame
+methods:
+  GetHorizontalScroll:
+    outputs:
+    - type: number
+    status: unimplemented
+  GetScrollChild:
+    status: implemented
+  GetVerticalScrollRange:
+    outputs:
+    - type: number
+    status: unimplemented
+  SetHorizontalScroll:
+    status: unimplemented
+  SetScrollChild:
+    status: implemented
+  SetVerticalScroll:
+    status: unimplemented
+  UpdateScrollChildRect:
+    status: unimplemented

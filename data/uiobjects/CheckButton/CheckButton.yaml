@@ -1,0 +1,17 @@
+---
+name: CheckButton
+inherits:
+- Button
+methods:
+  GetChecked:
+    status: implemented
+  GetCheckedTexture:
+    status: implemented
+  GetDisabledCheckedTexture:
+    status: implemented
+  SetChecked:
+    status: implemented
+  SetCheckedTexture:
+    status: implemented
+  SetDisabledCheckedTexture:
+    status: implemented

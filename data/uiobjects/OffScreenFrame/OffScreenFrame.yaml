@@ -1,0 +1,5 @@
+---
+name: OffScreenFrame
+inherits:
+- Frame
+methods: {}

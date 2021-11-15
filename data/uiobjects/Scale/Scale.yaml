@@ -1,0 +1,7 @@
+---
+name: Scale
+inherits:
+- Animation
+methods:
+  SetScale:
+    status: unimplemented

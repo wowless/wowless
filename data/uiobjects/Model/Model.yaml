@@ -1,0 +1,17 @@
+---
+name: Model
+inherits:
+- Frame
+methods:
+  InitializeCamera:
+    status: unimplemented
+  SetFacing:
+    status: unimplemented
+  SetLight:
+    status: unimplemented
+  SetPosition:
+    status: unimplemented
+  SetRotation:
+    status: unimplemented
+  TransformCameraSpaceToModelSpace:
+    status: unimplemented

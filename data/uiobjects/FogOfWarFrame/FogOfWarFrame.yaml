@@ -1,0 +1,9 @@
+---
+name: FogOfWarFrame
+inherits:
+- Frame
+methods:
+  GetUiMapID:
+    status: unimplemented
+  SetUiMapID:
+    status: unimplemented

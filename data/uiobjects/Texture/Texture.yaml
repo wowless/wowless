@@ -1,0 +1,46 @@
+---
+name: Texture
+inherits:
+- LayeredRegion
+- ParentedObject
+methods:
+  AddMaskTexture:
+    status: unimplemented
+  GetAtlas:
+    status: unimplemented
+  GetTexCoord:
+    status: implemented
+  GetTexture:
+    status: unimplemented
+  GetVertexColor:
+    status: unimplemented
+  IsDesaturated:
+    status: unimplemented
+  SetAtlas:
+    status: unimplemented
+  SetBlendMode:
+    status: unimplemented
+  SetColorTexture:
+    status: unimplemented
+  SetDesaturated:
+    status: unimplemented
+  SetDesaturation:
+    status: unimplemented
+  SetGradient:
+    status: unimplemented
+  SetGradientAlpha:
+    status: unimplemented
+  SetHorizTile:
+    status: unimplemented
+  SetRotation:
+    status: unimplemented
+  SetSnapToPixelGrid:
+    status: unimplemented
+  SetTexCoord:
+    status: unimplemented
+  SetTexelSnappingBias:
+    status: unimplemented
+  SetTexture:
+    status: unimplemented
+  SetVertTile:
+    status: unimplemented

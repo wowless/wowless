@@ -1,0 +1,60 @@
+---
+name: EditBox
+inherits:
+- FontInstance
+- Frame
+methods:
+  AddHistoryLine:
+    status: unimplemented
+  ClearFocus:
+    status: unimplemented
+  Disable:
+    status: implemented
+  Enable:
+    status: implemented
+  GetInputLanguage:
+    status: implemented
+  GetMaxLetters:
+    status: implemented
+  GetNumber:
+    outputs:
+    - type: number
+    status: unimplemented
+  GetText:
+    status: implemented
+  IsAutoFocus:
+    status: implemented
+  IsCountInvisibleLetters:
+    status: implemented
+  IsEnabled:
+    status: implemented
+  IsMultiLine:
+    status: implemented
+  SetAltArrowKeyMode:
+    status: unimplemented
+  SetAutoFocus:
+    status: implemented
+  SetCountInvisibleLetters:
+    status: implemented
+  SetEnabled:
+    status: implemented
+  SetFocus:
+    status: unimplemented
+  SetMaxLetters:
+    status: implemented
+  SetMultiLine:
+    status: implemented
+  SetNumber:
+    status: unimplemented
+  SetNumeric:
+    status: unimplemented
+  SetSecureText:
+    status: implemented
+  SetSecurityDisablePaste:
+    status: unimplemented
+  SetSecurityDisableSetText:
+    status: unimplemented
+  SetText:
+    status: implemented
+  SetTextInsets:
+    status: unimplemented

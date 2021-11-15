@@ -1,0 +1,11 @@
+---
+name: CinematicModel
+inherits:
+- PlayerModel
+methods:
+  SetFacingLeft:
+    status: unimplemented
+  SetHeightFactor:
+    status: unimplemented
+  SetTargetDistance:
+    status: unimplemented

@@ -1,0 +1,35 @@
+---
+name: Slider
+inherits:
+- Frame
+methods:
+  Disable:
+    status: implemented
+  Enable:
+    status: implemented
+  GetMinMaxValues:
+    status: implemented
+  GetOrientation:
+    status: unimplemented
+  GetThumbTexture:
+    status: implemented
+  GetValue:
+    status: implemented
+  IsDraggingThumb:
+    status: unimplemented
+  IsEnabled:
+    status: unimplemented
+  SetMinMaxValues:
+    status: implemented
+  SetObeyStepOnDrag:
+    status: unimplemented
+  SetOrientation:
+    status: unimplemented
+  SetStepsPerPage:
+    status: unimplemented
+  SetThumbTexture:
+    status: implemented
+  SetValue:
+    status: implemented
+  SetValueStep:
+    status: unimplemented

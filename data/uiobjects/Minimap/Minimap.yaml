@@ -1,0 +1,25 @@
+---
+name: Minimap
+inherits:
+- Frame
+methods:
+  GetZoom:
+    outputs:
+    - type: number
+    status: unimplemented
+  GetZoomLevels:
+    outputs:
+    - type: number
+    status: unimplemented
+  SetArchBlobRingAlpha:
+    status: unimplemented
+  SetArchBlobRingScalar:
+    status: unimplemented
+  SetMaskTexture:
+    status: unimplemented
+  SetQuestBlobRingAlpha:
+    status: unimplemented
+  SetQuestBlobRingScalar:
+    status: unimplemented
+  SetZoom:
+    status: unimplemented

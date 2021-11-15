@@ -1,0 +1,25 @@
+---
+name: PlayerModel
+inherits:
+- Model
+methods:
+  FreezeAnimation:
+    status: unimplemented
+  RefreshCamera:
+    status: unimplemented
+  RefreshUnit:
+    status: unimplemented
+  SetAnimation:
+    status: unimplemented
+  SetCamDistanceScale:
+    status: unimplemented
+  SetDisplayInfo:
+    status: unimplemented
+  SetDoBlend:
+    status: unimplemented
+  SetKeepModelOnHide:
+    status: unimplemented
+  SetPortraitZoom:
+    status: unimplemented
+  SetUnit:
+    status: unimplemented

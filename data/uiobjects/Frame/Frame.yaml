@@ -1,0 +1,135 @@
+---
+name: Frame
+inherits:
+- ParentedObject
+- Region
+- ScriptObject
+methods:
+  CreateFontString:
+    status: implemented
+  CreateMaskTexture:
+    status: implemented
+  CreateTexture:
+    status: implemented
+  DesaturateHierarchy:
+    status: unimplemented
+  DisableDrawLayer:
+    status: unimplemented
+  EnableKeyboard:
+    status: unimplemented
+  EnableMouse:
+    status: implemented
+  EnableMouseWheel:
+    status: implemented
+  GetAttribute:
+    status: implemented
+  GetChildren:
+    status: implemented
+  GetFrameLevel:
+    status: implemented
+  GetFrameStrata:
+    status: implemented
+  GetHyperlinksEnabled:
+    status: implemented
+  GetID:
+    status: implemented
+  GetMaxResize:
+    status: implemented
+  GetMinResize:
+    status: implemented
+  GetNumChildren:
+    status: implemented
+  GetNumRegions:
+    status: implemented
+  GetRegions:
+    status: implemented
+  IgnoreDepth:
+    status: unimplemented
+  IsClampedToScreen:
+    status: implemented
+  IsEventRegistered:
+    status: implemented
+  IsMouseClickEnabled:
+    status: implemented
+  IsMouseEnabled:
+    status: implemented
+  IsMouseMotionEnabled:
+    status: implemented
+  IsMouseWheelEnabled:
+    status: implemented
+  IsMovable:
+    status: implemented
+  IsResizable:
+    status: implemented
+  IsToplevel:
+    status: implemented
+  IsUserPlaced:
+    status: implemented
+  Raise:
+    status: unimplemented
+  RegisterAllEvents:
+    status: implemented
+  RegisterEvent:
+    status: implemented
+  RegisterForDrag:
+    status: unimplemented
+  RegisterForMouse:
+    status: unimplemented
+  RegisterUnitEvent:
+    status: implemented
+  SetAttribute:
+    status: implemented
+  SetBackdrop:
+    status: unimplemented
+  SetBackdropBorderColor:
+    status: unimplemented
+  SetBackdropColor:
+    status: unimplemented
+  SetClampedToScreen:
+    status: implemented
+  SetClampRectInsets:
+    status: unimplemented
+  SetClipsChildren:
+    status: unimplemented
+  SetDepth:
+    status: unimplemented
+  SetDontSavePosition:
+    status: unimplemented
+  SetFixedFrameLevel:
+    status: unimplemented
+  SetFixedFrameStrata:
+    status: unimplemented
+  SetFrameLevel:
+    status: implemented
+  SetFrameStrata:
+    status: implemented
+  SetHitRectInsets:
+    status: unimplemented
+  SetHyperlinksEnabled:
+    status: implemented
+  SetID:
+    status: implemented
+  SetMaxResize:
+    status: implemented
+  SetMinResize:
+    status: implemented
+  SetMouseClickEnabled:
+    status: implemented
+  SetMouseMotionEnabled:
+    status: implemented
+  SetMovable:
+    status: implemented
+  SetResizable:
+    status: implemented
+  SetToplevel:
+    status: implemented
+  SetUserPlaced:
+    status: implemented
+  StartMoving:
+    status: unimplemented
+  StopMovingOrSizing:
+    status: unimplemented
+  UnregisterAllEvents:
+    status: implemented
+  UnregisterEvent:
+    status: implemented

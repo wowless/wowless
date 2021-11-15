@@ -1,0 +1,65 @@
+---
+name: GameTooltip
+inherits:
+- Frame
+methods:
+  AddDoubleLine:
+    status: unimplemented
+  AddFontStrings:
+    status: unimplemented
+  AddLine:
+    status: unimplemented
+  ClearLines:
+    status: unimplemented
+  FadeOut:
+    status: unimplemented
+  GetAnchorType:
+    status: unimplemented
+  GetMinimumWidth:
+    outputs:
+    - type: number
+    status: unimplemented
+  GetOwner:
+    status: implemented
+  IsOwned:
+    status: implemented
+  NumLines:
+    outputs:
+    - type: number
+    status: unimplemented
+  SetAction:
+    status: unimplemented
+  SetAnchorType:
+    status: unimplemented
+  SetBackpackToken:
+    status: unimplemented
+  SetBagItem:
+    status: unimplemented
+  SetCurrencyToken:
+    status: unimplemented
+  SetCurrencyTokenByID:
+    status: unimplemented
+  SetHyperlink:
+    status: unimplemented
+  SetInventoryItem:
+    status: unimplemented
+  SetMinimumWidth:
+    status: unimplemented
+  SetOwner:
+    status: implemented
+  SetPadding:
+    status: unimplemented
+  SetShapeshift:
+    status: unimplemented
+  SetText:
+    status: unimplemented
+  SetToyByItemID:
+    status: unimplemented
+  SetUnit:
+    status: unimplemented
+  SetUnitAura:
+    status: unimplemented
+  SetUnitBuff:
+    status: unimplemented
+  SetUnitDebuff:
+    status: unimplemented

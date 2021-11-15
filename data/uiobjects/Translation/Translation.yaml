@@ -1,0 +1,7 @@
+---
+name: Translation
+inherits:
+- Animation
+methods:
+  SetOffset:
+    status: unimplemented

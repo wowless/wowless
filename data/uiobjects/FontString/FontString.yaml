@@ -1,0 +1,46 @@
+---
+name: FontString
+inherits:
+- FontInstance
+- LayeredRegion
+methods:
+  GetLineHeight:
+    outputs:
+    - type: number
+    status: unimplemented
+  GetNumLines:
+    outputs:
+    - type: number
+    status: unimplemented
+  GetStringHeight:
+    outputs:
+    - type: number
+    status: unimplemented
+  GetStringWidth:
+    outputs:
+    - type: number
+    status: unimplemented
+  GetText:
+    status: implemented
+  GetUnboundedStringWidth:
+    outputs:
+    - type: number
+    status: unimplemented
+  GetWrappedWidth:
+    outputs:
+    - type: number
+    status: unimplemented
+  IsTruncated:
+    status: unimplemented
+  SetFormattedText:
+    status: unimplemented
+  SetMaxLines:
+    status: unimplemented
+  SetNonSpaceWrap:
+    status: unimplemented
+  SetText:
+    status: implemented
+  SetTextHeight:
+    status: unimplemented
+  SetWordWrap:
+    status: unimplemented

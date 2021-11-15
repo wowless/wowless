@@ -1,0 +1,7 @@
+---
+name: Browser
+inherits:
+- Frame
+methods:
+  NavigateHome:
+    status: unimplemented

@@ -1,0 +1,14 @@
+---
+name: Animation
+inherits:
+- ParentedObject
+- ScriptObject
+methods:
+  SetDuration:
+    status: unimplemented
+  SetOrder:
+    status: unimplemented
+  SetStartDelay:
+    status: unimplemented
+  SetTarget:
+    status: unimplemented

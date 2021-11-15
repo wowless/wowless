@@ -1,0 +1,81 @@
+---
+name: Button
+inherits:
+- Frame
+methods:
+  Click:
+    status: implemented
+  Disable:
+    status: implemented
+  Enable:
+    status: implemented
+  GetButtonState:
+    status: implemented
+  GetDisabledTexture:
+    status: implemented
+  GetFontString:
+    status: implemented
+  GetHighlightTexture:
+    status: implemented
+  GetMotionScriptsWhileDisabled:
+    status: implemented
+  GetNormalTexture:
+    status: implemented
+  GetPushedTextOffset:
+    status: implemented
+  GetPushedTexture:
+    status: implemented
+  GetText:
+    status: implemented
+  GetTextHeight:
+    outputs:
+    - type: number
+    status: unimplemented
+  GetTextWidth:
+    outputs:
+    - type: number
+    status: unimplemented
+  IsEnabled:
+    status: implemented
+  LockHighlight:
+    status: unimplemented
+  RegisterForClicks:
+    status: implemented
+  SetButtonState:
+    status: implemented
+  SetDisabledAtlas:
+    status: implemented
+  SetDisabledFontObject:
+    status: unimplemented
+  SetDisabledTexture:
+    status: implemented
+  SetEnabled:
+    status: implemented
+  SetFontString:
+    status: implemented
+  SetFormattedText:
+    status: unimplemented
+  SetHighlightAtlas:
+    status: implemented
+  SetHighlightFontObject:
+    status: unimplemented
+  SetHighlightTexture:
+    status: implemented
+  SetMotionScriptsWhileDisabled:
+    status: implemented
+  SetNormalAtlas:
+    status: implemented
+  SetNormalFontObject:
+    status: unimplemented
+  SetNormalTexture:
+    status: implemented
+  SetPushedAtlas:
+    status: implemented
+  SetPushedTextOffset:
+    status: implemented
+  SetPushedTexture:
+    status: implemented
+  SetText:
+    status: implemented
+  UnlockHighlight:
+    status: unimplemented

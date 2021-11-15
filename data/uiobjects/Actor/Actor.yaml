@@ -1,0 +1,6 @@
+---
+name: Actor
+inherits:
+- ParentedObject
+- ScriptObject
+methods: {}
