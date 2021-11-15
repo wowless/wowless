@@ -25,6 +25,15 @@ for ty, g in pairs(globals) do
   methodsets[ty] = set
 end
 
+local function subset(set1, set2)
+  for k in pairs(set1) do
+    if not set2[k] then
+      return false
+    end
+  end
+  return true
+end
+
 local function difference(set1, set2)
   local t = {}
   for k in pairs(set1) do
@@ -39,6 +48,7 @@ local out = {}
 for ty, set in pairs(methodsets) do
   if ty ~= 'Frame' then
     local t = {}
+    assert(subset(methodsets.Frame, set))
     for k in pairs(difference(set, methodsets.Frame)) do
       table.insert(t, k)
     end
