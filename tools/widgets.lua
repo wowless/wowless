@@ -1,5 +1,9 @@
 local data = require('tools.scrapelib')(arg[1])
 local globals = {
+  Button = { 'SpellBookNextPageButton' },
+  Checkout = { 'SimpleCheckout' },
+  ColorSelect = { 'ColorPickerFrame' },
+  Cooldown = { 'ContainerFrame1Item1Cooldown' },
   Frame = { 'ActionStatus' },
   GameTooltip = { 'GameTooltip' },
   Minimap = { 'Minimap' },
