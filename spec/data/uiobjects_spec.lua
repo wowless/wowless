@@ -62,6 +62,19 @@ describe('uiobjects', function()
                 }
                 assert.True(valid[method.status], ('invalid status %q'):format(method.status))
               end)
+              it('has valid outputs', function()
+                local valid = {
+                  name = true,
+                  type = true,
+                }
+                for _, m in ipairs(method.outputs or {}) do
+                  for k in pairs(m) do
+                    assert.True(valid[k])
+                  end
+                  assert.same('string', type(m.type))
+                  assert.same('number', m.type)
+                end
+              end)
             end)
           end
         end)

@@ -26,13 +26,14 @@ local function loadUIObject(name)
     if method.status == 'implemented' then
       mixin[mname] = assert(lua(mname))
     elseif method.status == 'unimplemented' then
-      if method.outputs and #method.outputs == 1 and method.outputs[1].type == 'number' then
-        mixin[mname] = function() return 1 end
-      elseif not method.outputs then
-        mixin[mname] = function() end
-      else
-        error(('unsupported unimplemented method %s.%s'):format(name, mname))
+      -- TODO unify this with loader.lua
+      local t = {}
+      local n = method.outputs and #method.outputs or 0
+      for _, output in ipairs(method.outputs or {}) do
+        assert(output.type == 'number', ('unsupported type in %s.%s'):format(name, mname))
+        table.insert(t, 1)
       end
+      mixin[mname] = function() return unpack(t, 1, n) end
     else
       error(('unsupported method status %q on %s.%s'):format(method.status, name, mname))
     end

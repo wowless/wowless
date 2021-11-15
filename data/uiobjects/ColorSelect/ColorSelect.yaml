@@ -4,9 +4,23 @@ inherits:
 - Frame
 methods:
   GetColorHSV:
-    status: implemented
+    outputs:
+    - name: h
+      type: number
+    - name: s
+      type: number
+    - name: v
+      type: number
+    status: unimplemented
   GetColorRGB:
-    status: implemented
+    outputs:
+    - name: r
+      type: number
+    - name: g
+      type: number
+    - name: b
+      type: number
+    status: unimplemented
   SetColorHSV:
     status: unimplemented
   SetColorRGB:
