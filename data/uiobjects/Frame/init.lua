@@ -1,4 +1,4 @@
-(function(self)
+return (function(self)
   table.insert(api.frames, self)
   u(self).attributes = {}
   u(self).frameIndex = #api.frames

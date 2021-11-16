@@ -1,4 +1,4 @@
-(function(self)
+return (function(self)
   local ud = u(self)
   ud.alpha = 1
   ud.animationGroups = {}

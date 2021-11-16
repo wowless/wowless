@@ -1,4 +1,4 @@
-(function(self)
+return (function(self)
   local ud = u(self)
   ud.enabled = true
   ud.max = 0

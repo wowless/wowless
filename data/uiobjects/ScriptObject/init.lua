@@ -1,4 +1,4 @@
-(function(self)
+return (function(self)
   u(self).scripts = {
     [0] = {},
     [1] = {},

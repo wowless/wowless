@@ -1,4 +1,4 @@
-(function(self)
+return (function(self)
   u(self).beingClicked = false
   u(self).buttonLocked = false
   u(self).buttonState = 'NORMAL'

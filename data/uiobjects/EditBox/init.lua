@@ -1,4 +1,4 @@
-(function(self)
+return (function(self)
   u(self).editboxText = ''
   u(self).enabled = true
   u(self).isAutoFocus = true
