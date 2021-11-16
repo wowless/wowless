@@ -9,6 +9,10 @@ fields:
   motionScriptsWhileDisabled:
     type: bool
   normalTexture: {}
+  pushedTextOffsetX:
+    type: number
+  pushedTextOffsetY:
+    type: number
   pushedTexture: {}
 inherits:
 - Frame
@@ -48,7 +52,10 @@ methods:
     - normalTexture
     status: getter
   GetPushedTextOffset:
-    status: implemented
+    fields:
+    - pushedTextOffsetX
+    - pushedTextOffsetY
+    status: getter
   GetPushedTexture:
     fields:
     - pushedTexture
@@ -108,7 +115,10 @@ methods:
   SetPushedAtlas:
     status: implemented
   SetPushedTextOffset:
-    status: implemented
+    fields:
+    - pushedTextOffsetX
+    - pushedTextOffsetY
+    status: setter
   SetPushedTexture:
     status: implemented
   SetText:

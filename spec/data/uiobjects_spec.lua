@@ -55,7 +55,11 @@ describe('uiobjects', function()
                 for k2 in pairs(v) do
                   assert(fields[k2])
                 end
-                assert.True(v.type == nil or v.type == 'bool')
+                local types = {
+                  bool = true,
+                  number = true,
+                }
+                assert.True(v.type == nil or types[v.type])
               end
             end
           end)
