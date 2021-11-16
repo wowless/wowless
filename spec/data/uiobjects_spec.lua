@@ -43,6 +43,22 @@ describe('uiobjects', function()
               assert.Truthy(k == 'init' or cfg.methods[k], ('method %q not in yaml'):format(k))
             end
           end)
+          it('has valid fields', function()
+            if cfg.fields ~= nil then
+              assert.same('table', type(cfg.fields))
+              for k, v in pairs(cfg.fields) do
+                assert.same('string', type(k))
+                assert.same('table', type(v))
+                local fields = {
+                  type = true
+                }
+                for k2 in pairs(v) do
+                  assert(fields[k2])
+                end
+                assert.True(v.type == nil or v.type == 'bool')
+              end
+            end
+          end)
         end)
         describe('methods', function()
           for methodname, method in pairs(cfg.methods) do
