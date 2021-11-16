@@ -26,59 +26,72 @@ methods:
   GetInputLanguage:
     status: implemented
   GetMaxLetters:
-    field: maxLetters
+    fields:
+    - maxLetters
     status: getter
   GetNumber:
     outputs:
     - type: number
     status: unimplemented
   GetText:
-    field: editboxText
+    fields:
+    - editboxText
     status: getter
   IsAutoFocus:
-    field: isAutoFocus
+    fields:
+    - isAutoFocus
     status: getter
   IsCountInvisibleLetters:
-    field: isCountInvisibleLetters
+    fields:
+    - isCountInvisibleLetters
     status: getter
   IsEnabled:
-    field: enabled
+    fields:
+    - enabled
     status: getter
   IsMultiLine:
-    field: isMultiLine
+    fields:
+    - isMultiLine
     status: getter
   SetAltArrowKeyMode:
     status: unimplemented
   SetAutoFocus:
-    field: isAutoFocus
+    fields:
+    - isAutoFocus
     status: setter
   SetCountInvisibleLetters:
-    field: isCountInvisibleLetters
+    fields:
+    - isCountInvisibleLetters
     status: setter
   SetEnabled:
-    field: enabled
+    fields:
+    - enabled
     status: setter
   SetFocus:
     status: unimplemented
   SetMaxLetters:
-    field: maxLetters
+    fields:
+    - maxLetters
     status: setter
   SetMultiLine:
-    field: isMultiLine
+    fields:
+    - isMultiLine
     status: setter
   SetNumber:
     status: unimplemented
   SetNumeric:
     status: unimplemented
   SetSecureText:
-    field: editboxText
+    fields:
+    - editboxText
     status: setter
   SetSecurityDisablePaste:
     status: unimplemented
   SetSecurityDisableSetText:
     status: unimplemented
   SetText:
-    field: editboxText
+    fields:
+    - editboxText
     status: setter
   SetTextInsets:
     status: unimplemented

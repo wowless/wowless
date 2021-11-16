@@ -20,32 +20,38 @@ methods:
   Enable:
     status: implemented
   GetButtonState:
-    field: buttonState
+    fields:
+    - buttonState
     status: getter
   GetDisabledFontObject:
     status: unimplemented
   GetDisabledTexture:
-    field: disabledTexture
+    fields:
+    - disabledTexture
     status: getter
   GetFontString:
     status: implemented
   GetHighlightFontObject:
     status: unimplemented
   GetHighlightTexture:
-    field: highlightTexture
+    fields:
+    - highlightTexture
     status: getter
   GetMotionScriptsWhileDisabled:
-    field: motionScriptsWhileDisabled
+    fields:
+    - motionScriptsWhileDisabled
     status: getter
   GetNormalFontObject:
     status: unimplemented
   GetNormalTexture:
-    field: normalTexture
+    fields:
+    - normalTexture
     status: getter
   GetPushedTextOffset:
     status: implemented
   GetPushedTexture:
-    field: pushedTexture
+    fields:
+    - pushedTexture
     status: getter
   GetText:
     status: implemented
@@ -58,7 +64,8 @@ methods:
     - type: number
     status: unimplemented
   IsEnabled:
-    field: enabled
+    fields:
+    - enabled
     status: getter
   LockHighlight:
     status: unimplemented
@@ -75,7 +82,8 @@ methods:
   SetDisabledTexture:
     status: implemented
   SetEnabled:
-    field: enabled
+    fields:
+    - enabled
     status: setter
   SetFontString:
     status: implemented
@@ -88,7 +96,8 @@ methods:
   SetHighlightTexture:
     status: implemented
   SetMotionScriptsWhileDisabled:
-    field: motionScriptsWhileDisabled
+    fields:
+    - motionScriptsWhileDisabled
     status: setter
   SetNormalAtlas:
     status: implemented

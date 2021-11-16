@@ -19,10 +19,12 @@ methods:
   GetStepsPerPage:
     status: unimplemented
   GetThumbTexture:
-    field: thumbTexture
+    fields:
+    - thumbTexture
     status: getter
   GetValue:
-    field: value
+    fields:
+    - value
     status: getter
   GetValueStep:
     status: unimplemented
@@ -43,7 +45,8 @@ methods:
   SetThumbTexture:
     status: implemented
   SetValue:
-    field: value
+    fields:
+    - value
     status: setter
   SetValueStep:
     status: unimplemented

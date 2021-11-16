@@ -22,12 +22,14 @@ methods:
   CreateAnimationGroup:
     status: implemented
   GetAlpha:
-    field: alpha
+    fields:
+    - alpha
     status: getter
   GetAnimationGroups:
     status: implemented
   GetBottom:
-    field: bottom
+    fields:
+    - bottom
     status: getter
   GetCenter:
     status: implemented
@@ -36,10 +38,12 @@ methods:
   GetEffectiveScale:
     status: implemented
   GetHeight:
-    field: height
+    fields:
+    - height
     status: getter
   GetLeft:
-    field: left
+    fields:
+    - left
     status: getter
   GetNumPoints:
     status: implemented
@@ -50,7 +54,8 @@ methods:
   GetRight:
     status: implemented
   GetScale:
-    field: scale
+    fields:
+    - scale
     status: getter
   GetScaledRect:
     status: implemented
@@ -59,35 +64,42 @@ methods:
   GetTop:
     status: implemented
   GetWidth:
-    field: width
+    fields:
+    - width
     status: getter
   Hide:
     status: implemented
   IsIgnoringParentAlpha:
-    field: isIgnoringParentAlpha
+    fields:
+    - isIgnoringParentAlpha
     status: getter
   IsIgnoringParentScale:
-    field: isIgnoringParentScale
+    fields:
+    - isIgnoringParentScale
     status: getter
   IsMouseOver:
     status: unimplemented
   IsProtected:
     status: implemented
   IsShown:
-    field: shown
+    fields:
+    - shown
     status: getter
   IsVisible:
-    field: visible
+    fields:
+    - visible
     status: getter
   SetAllPoints:
     status: unimplemented
   SetAlpha:
     status: implemented
   SetHeight:
-    field: height
+    fields:
+    - height
     status: setter
   SetIgnoreParentAlpha:
-    field: isIgnoringParentAlpha
+    fields:
+    - isIgnoringParentAlpha
     status: setter
   SetParent:
     status: implemented
@@ -100,7 +112,8 @@ methods:
   SetSize:
     status: unimplemented
   SetWidth:
-    field: width
+    fields:
+    - width
     status: setter
   Show:
     status: implemented

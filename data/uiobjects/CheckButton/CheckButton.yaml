@@ -9,16 +9,20 @@ inherits:
 - Button
 methods:
   GetChecked:
-    field: checked
+    fields:
+    - checked
     status: getter
   GetCheckedTexture:
-    field: checkedTexture
+    fields:
+    - checkedTexture
     status: getter
   GetDisabledCheckedTexture:
-    field: disabledCheckedTexture
+    fields:
+    - disabledCheckedTexture
     status: getter
   SetChecked:
-    field: checked
+    fields:
+    - checked
     status: setter
   SetCheckedTexture:
     status: implemented

@@ -23,7 +23,8 @@ methods:
     - type: number
     status: unimplemented
   GetText:
-    field: text
+    fields:
+    - text
     status: getter
   GetUnboundedStringWidth:
     outputs:

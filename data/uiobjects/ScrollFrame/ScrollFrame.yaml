@@ -10,7 +10,8 @@ methods:
     - type: number
     status: unimplemented
   GetScrollChild:
-    field: scrollChild
+    fields:
+    - scrollChild
     status: getter
   GetVerticalScrollRange:
     outputs:
@@ -19,7 +20,8 @@ methods:
   SetHorizontalScroll:
     status: unimplemented
   SetScrollChild:
-    field: scrollChild
+    fields:
+    - scrollChild
     status: setter
   SetVerticalScroll:
     status: unimplemented

@@ -6,11 +6,11 @@ methods:
   GetFont:
     status: implemented
   GetShadowColor:
-    status: unimplemented
     outputs:
     - type: number
     - type: number
     - type: number
+    status: unimplemented
   GetShadowOffset:
     outputs:
     - type: number
@@ -20,11 +20,11 @@ methods:
     - type: number
     status: unimplemented
   GetTextColor:
-    status: unimplemented
     outputs:
     - type: number
     - type: number
     - type: number
+    status: unimplemented
   SetFont:
     status: unimplemented
   SetFontObject:

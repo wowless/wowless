@@ -9,10 +9,12 @@ methods:
   GetDebugName:
     status: unimplemented
   GetParent:
-    field: parent
+    fields:
+    - parent
     status: getter
   IsForbidden:
-    field: forbidden
+    fields:
+    - forbidden
     status: getter
   SetForbidden:
     status: implemented

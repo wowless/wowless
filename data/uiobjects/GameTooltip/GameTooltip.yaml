@@ -46,7 +46,8 @@ methods:
     - type: number
     status: unimplemented
   GetOwner:
-    field: tooltipOwner
+    fields:
+    - tooltipOwner
     status: getter
   GetPadding:
     status: unimplemented
@@ -223,7 +224,8 @@ methods:
     versions:
     - Mainline
   SetOwner:
-    field: tooltipOwner
+    fields:
+    - tooltipOwner
     status: setter
   SetPadding:
     status: unimplemented

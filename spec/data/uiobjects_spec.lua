@@ -65,7 +65,7 @@ describe('uiobjects', function()
             describe(methodname, function()
               it('has only valid fields', function()
                 local fields = {
-                  field = true,
+                  fields = true,
                   outputs = true,
                   status = true,
                   versions = true,

@@ -42,23 +42,28 @@ methods:
   EnableMouse:
     status: implemented
   EnableMouseWheel:
-    field: mouseWheelEnabled
+    fields:
+    - mouseWheelEnabled
     status: setter
   GetAttribute:
     status: implemented
   GetChildren:
     status: implemented
   GetFrameLevel:
-    field: frameLevel
+    fields:
+    - frameLevel
     status: getter
   GetFrameStrata:
-    field: frameStrata
+    fields:
+    - frameStrata
     status: getter
   GetHyperlinksEnabled:
-    field: hyperlinksEnabled
+    fields:
+    - hyperlinksEnabled
     status: getter
   GetID:
-    field: id
+    fields:
+    - id
     status: getter
   GetMaxResize:
     status: implemented
@@ -73,32 +78,40 @@ methods:
   IgnoreDepth:
     status: unimplemented
   IsClampedToScreen:
-    field: isClampedToScreen
+    fields:
+    - isClampedToScreen
     status: getter
   IsEventRegistered:
     status: implemented
   IsMouseClickEnabled:
-    field: mouseClickEnabled
+    fields:
+    - mouseClickEnabled
     status: getter
   IsMouseEnabled:
     status: implemented
   IsMouseMotionEnabled:
-    field: mouseMotionEnabled
+    fields:
+    - mouseMotionEnabled
     status: getter
   IsMouseWheelEnabled:
-    field: mouseWheelEnabled
+    fields:
+    - mouseWheelEnabled
     status: getter
   IsMovable:
-    field: movable
+    fields:
+    - movable
     status: getter
   IsResizable:
-    field: resizable
+    fields:
+    - resizable
     status: getter
   IsToplevel:
-    field: toplevel
+    fields:
+    - toplevel
     status: getter
   IsUserPlaced:
-    field: isUserPlaced
+    fields:
+    - isUserPlaced
     status: getter
   Raise:
     status: unimplemented
@@ -115,7 +128,8 @@ methods:
   SetAttribute:
     status: implemented
   SetClampedToScreen:
-    field: isClampedToScreen
+    fields:
+    - isClampedToScreen
     status: setter
   SetClampRectInsets:
     status: unimplemented
@@ -130,15 +144,18 @@ methods:
   SetFixedFrameStrata:
     status: unimplemented
   SetFrameLevel:
-    field: frameLevel
+    fields:
+    - frameLevel
     status: setter
   SetFrameStrata:
-    field: frameStrata
+    fields:
+    - frameStrata
     status: setter
   SetHitRectInsets:
     status: unimplemented
   SetHyperlinksEnabled:
-    field: hyperlinksEnabled
+    fields:
+    - hyperlinksEnabled
     status: setter
   SetID:
     status: implemented
@@ -147,22 +164,28 @@ methods:
   SetMinResize:
     status: implemented
   SetMouseClickEnabled:
-    field: mouseClickEnabled
+    fields:
+    - mouseClickEnabled
     status: setter
   SetMouseMotionEnabled:
-    field: mouseMotionEnabled
+    fields:
+    - mouseMotionEnabled
     status: setter
   SetMovable:
-    field: movable
+    fields:
+    - movable
     status: setter
   SetResizable:
-    field: resizable
+    fields:
+    - resizable
     status: setter
   SetToplevel:
-    field: toplevel
+    fields:
+    - toplevel
     status: setter
   SetUserPlaced:
-    field: isUserPlaced
+    fields:
+    - isUserPlaced
     status: setter
   StartMoving:
     status: unimplemented

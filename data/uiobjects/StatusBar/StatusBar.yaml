@@ -21,10 +21,12 @@ methods:
   GetStatusBarColor:
     status: unimplemented
   GetStatusBarTexture:
-    field: statusBarTexture
+    fields:
+    - statusBarTexture
     status: getter
   GetValue:
-    field: value
+    fields:
+    - value
     status: getter
   SetFillStyle:
     status: unimplemented
@@ -43,5 +45,6 @@ methods:
   SetStatusBarTexture:
     status: implemented
   SetValue:
-    field: value
+    fields:
+    - value
     status: setter
