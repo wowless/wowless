@@ -9,15 +9,23 @@ methods:
     status: implemented
   GetMinMaxValues:
     status: implemented
+  GetObeyStepOnDrag:
+    status: unimplemented
   GetOrientation:
+    status: unimplemented
+  GetStepsPerPage:
     status: unimplemented
   GetThumbTexture:
     status: implemented
   GetValue:
     status: implemented
+  GetValueStep:
+    status: unimplemented
   IsDraggingThumb:
     status: unimplemented
   IsEnabled:
+    status: unimplemented
+  SetEnabled:
     status: unimplemented
   SetMinMaxValues:
     status: implemented

@@ -21,9 +21,21 @@ methods:
     - name: b
       type: number
     status: unimplemented
+  GetColorValueTexture:
+    status: unimplemented
+  GetColorValueThumbTexture:
+    status: unimplemented
+  GetColorWheelTexture:
+    status: unimplemented
+  GetColorWheelThumbTexture:
+    status: unimplemented
   SetColorHSV:
     status: unimplemented
   SetColorRGB:
+    status: unimplemented
+  SetColorValueTexture:
+    status: unimplemented
+  SetColorValueThumbTexture:
     status: unimplemented
   SetColorWheelTexture:
     status: unimplemented

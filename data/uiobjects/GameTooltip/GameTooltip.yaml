@@ -9,11 +9,23 @@ methods:
     status: unimplemented
   AddLine:
     status: unimplemented
+  AddSpellByID:
+    status: unimplemented
+  AddTexture:
+    status: unimplemented
+  AdvanceSecondaryCompareItem:
+    status: unimplemented
+  AppendText:
+    status: unimplemented
   ClearLines:
+    status: unimplemented
+  CopyTooltip:
     status: unimplemented
   FadeOut:
     status: unimplemented
   GetAnchorType:
+    status: unimplemented
+  GetItem:
     status: unimplemented
   GetMinimumWidth:
     outputs:
@@ -21,27 +33,75 @@ methods:
     status: unimplemented
   GetOwner:
     status: implemented
+  GetPadding:
+    status: unimplemented
+  GetSpell:
+    status: unimplemented
+  GetUnit:
+    status: unimplemented
+  IsEquippedItem:
+    status: unimplemented
   IsOwned:
     status: implemented
+  IsUnit:
+    status: unimplemented
   NumLines:
     outputs:
     - type: number
+    status: unimplemented
+  ResetSecondaryCompareItem:
     status: unimplemented
   SetAction:
     status: unimplemented
   SetAnchorType:
     status: unimplemented
+  SetAuctionItem:
+    status: unimplemented
+  SetAuctionSellItem:
+    status: unimplemented
   SetBackpackToken:
     status: unimplemented
   SetBagItem:
+    status: unimplemented
+  SetBagItemChild:
+    status: unimplemented
+  SetBuybackItem:
+    status: unimplemented
+  SetCompareItem:
+    status: unimplemented
+  SetCraftItem:
+    status: unimplemented
+  SetCraftSpell:
     status: unimplemented
   SetCurrencyToken:
     status: unimplemented
   SetCurrencyTokenByID:
     status: unimplemented
+  SetExistingSocketGem:
+    status: unimplemented
+  SetFrameStack:
+    status: unimplemented
+  SetGuildBankItem:
+    status: unimplemented
   SetHyperlink:
     status: unimplemented
+  SetInboxItem:
+    status: unimplemented
+  SetInstanceLockEncountersComplete:
+    status: unimplemented
   SetInventoryItem:
+    status: unimplemented
+  SetInventoryItemByID:
+    status: unimplemented
+  SetItemByID:
+    status: unimplemented
+  SetLootItem:
+    status: unimplemented
+  SetLootRollItem:
+    status: unimplemented
+  SetMerchantCostItem:
+    status: unimplemented
+  SetMerchantItem:
     status: unimplemented
   SetMinimumWidth:
     status: unimplemented
@@ -49,11 +109,47 @@ methods:
     status: implemented
   SetPadding:
     status: unimplemented
+  SetPetAction:
+    status: unimplemented
+  SetPossession:
+    status: unimplemented
+  SetQuestItem:
+    status: unimplemented
+  SetQuestLogItem:
+    status: unimplemented
+  SetQuestLogRewardSpell:
+    status: unimplemented
+  SetQuestRewardSpell:
+    status: unimplemented
+  SetSendMailItem:
+    status: unimplemented
   SetShapeshift:
+    status: unimplemented
+  SetSocketedItem:
+    status: unimplemented
+  SetSocketGem:
+    status: unimplemented
+  SetSpellBookItem:
+    status: unimplemented
+  SetSpellByID:
+    status: unimplemented
+  SetTalent:
     status: unimplemented
   SetText:
     status: unimplemented
+  SetTotem:
+    status: unimplemented
   SetToyByItemID:
+    status: unimplemented
+  SetTrackingSpell:
+    status: unimplemented
+  SetTradePlayerItem:
+    status: unimplemented
+  SetTradeSkillItem:
+    status: unimplemented
+  SetTradeTargetItem:
+    status: unimplemented
+  SetTrainerService:
     status: unimplemented
   SetUnit:
     status: unimplemented

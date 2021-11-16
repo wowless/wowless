@@ -11,14 +11,20 @@ methods:
     status: implemented
   GetButtonState:
     status: implemented
+  GetDisabledFontObject:
+    status: unimplemented
   GetDisabledTexture:
     status: implemented
   GetFontString:
     status: implemented
+  GetHighlightFontObject:
+    status: unimplemented
   GetHighlightTexture:
     status: implemented
   GetMotionScriptsWhileDisabled:
     status: implemented
+  GetNormalFontObject:
+    status: unimplemented
   GetNormalTexture:
     status: implemented
   GetPushedTextOffset:
@@ -41,6 +47,8 @@ methods:
     status: unimplemented
   RegisterForClicks:
     status: implemented
+  RegisterForMouse:
+    status: unimplemented
   SetButtonState:
     status: implemented
   SetDisabledAtlas:

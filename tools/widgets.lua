@@ -61,4 +61,14 @@ for ty, set in pairs(methodsets) do
   end
 end
 
-io.write(require('wowapi.yaml').pprint(out))
+local existing = require('wowapi.data').uiobjects
+for name, obj in pairs(existing) do
+  if out[name] then
+    for _, m in ipairs(out[name]) do
+      obj.cfg.methods[m] = obj.cfg.methods[m] or { status = 'unimplemented' }
+    end
+    local fn = ('data/uiobjects/%s/%s.yaml'):format(name, name)
+    local yaml = require('wowapi.yaml').pprint(obj.cfg)
+    require('pl.file').write(fn, yaml)
+  end
+end

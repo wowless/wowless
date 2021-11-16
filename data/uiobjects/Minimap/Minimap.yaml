@@ -3,6 +3,8 @@ name: Minimap
 inherits:
 - Frame
 methods:
+  GetPingPosition:
+    status: unimplemented
   GetZoom:
     outputs:
     - type: number
@@ -11,15 +13,31 @@ methods:
     outputs:
     - type: number
     status: unimplemented
+  PingLocation:
+    status: unimplemented
   SetArchBlobRingAlpha:
     status: unimplemented
   SetArchBlobRingScalar:
     status: unimplemented
+  SetBlipTexture:
+    status: unimplemented
+  SetCorpsePOIArrowTexture:
+    status: unimplemented
+  SetIconTexture:
+    status: unimplemented
   SetMaskTexture:
+    status: unimplemented
+  SetPlayerTexture:
+    status: unimplemented
+  SetPOIArrowTexture:
     status: unimplemented
   SetQuestBlobRingAlpha:
     status: unimplemented
   SetQuestBlobRingScalar:
     status: unimplemented
+  SetStaticPOIArrowTexture:
+    status: unimplemented
   SetZoom:
+    status: unimplemented
+  UpdateBlips:
     status: unimplemented

@@ -3,30 +3,102 @@ name: ModelScene
 inherits:
 - Frame
 methods:
+  ClearFog:
+    status: unimplemented
+  CreateActor:
+    status: unimplemented
+  GetActorAtIndex:
+    status: unimplemented
+  GetCameraFarClip:
+    status: unimplemented
+  GetCameraFieldOfView:
+    status: unimplemented
+  GetCameraForward:
+    status: unimplemented
+  GetCameraNearClip:
+    status: unimplemented
+  GetCameraPosition:
+    status: unimplemented
+  GetCameraRight:
+    status: unimplemented
+  GetCameraUp:
+    status: unimplemented
+  GetDrawLayer:
+    status: unimplemented
+  GetFogColor:
+    status: unimplemented
+  GetFogFar:
+    status: unimplemented
+  GetFogNear:
+    status: unimplemented
+  GetLightAmbientColor:
+    status: unimplemented
+  GetLightDiffuseColor:
+    status: unimplemented
   GetLightDirection:
-    status: unimplemented
     outputs:
     - type: number
     - type: number
     - type: number
+    status: unimplemented
   GetLightPosition:
-    status: unimplemented
     outputs:
     - type: number
     - type: number
     - type: number
+    status: unimplemented
+  GetLightType:
+    status: unimplemented
+  GetNumActors:
+    status: unimplemented
   GetViewInsets:
-    status: unimplemented
     outputs:
     - type: number
     - type: number
     - type: number
     - type: number
+    status: unimplemented
+  GetViewTranslation:
+    status: unimplemented
+  IsLightVisible:
+    status: unimplemented
+  Project3DPointTo2D:
+    status: unimplemented
+  SetCameraFarClip:
+    status: unimplemented
+  SetCameraFieldOfView:
+    status: unimplemented
+  SetCameraNearClip:
+    status: unimplemented
+  SetCameraOrientationByAxisVectors:
+    status: unimplemented
+  SetCameraOrientationByYawPitchRoll:
+    status: unimplemented
+  SetCameraPosition:
+    status: unimplemented
+  SetDrawLayer:
+    status: unimplemented
+  SetFogColor:
+    status: unimplemented
+  SetFogFar:
+    status: unimplemented
+  SetFogNear:
+    status: unimplemented
   SetLightAmbientColor:
+    status: unimplemented
+  SetLightDiffuseColor:
     status: unimplemented
   SetLightDirection:
     status: unimplemented
   SetLightPosition:
     status: unimplemented
+  SetLightType:
+    status: unimplemented
+  SetLightVisible:
+    status: unimplemented
   SetViewInsets:
+    status: unimplemented
+  SetViewTranslation:
+    status: unimplemented
+  TakeActor:
     status: unimplemented

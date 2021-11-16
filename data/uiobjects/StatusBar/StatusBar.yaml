@@ -3,6 +3,8 @@ name: StatusBar
 inherits:
 - Frame
 methods:
+  GetFillStyle:
+    status: unimplemented
   GetMinMaxValues:
     status: implemented
   GetOrientation:
@@ -19,6 +21,8 @@ methods:
     status: implemented
   GetValue:
     status: implemented
+  SetFillStyle:
+    status: unimplemented
   SetMinMaxValues:
     status: implemented
   SetOrientation:
@@ -26,6 +30,8 @@ methods:
   SetReverseFill:
     status: unimplemented
   SetRotatesTexture:
+    status: unimplemented
+  SetStatusBarAtlas:
     status: unimplemented
   SetStatusBarColor:
     status: unimplemented

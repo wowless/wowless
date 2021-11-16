@@ -39,6 +39,7 @@ local function loadUIObject(name)
     end
   end
   return {
+    cfg = cfg,
     constructor = lua('init'),
     inherits = cfg.inherits,
     mixin = mixin,
