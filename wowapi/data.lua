@@ -27,14 +27,24 @@ local function loadUIObject(name)
       mixin[mname] = assert(lua(mname))
     elseif method.status == 'getter' then
       -- luacheck: globals u
-      mixin[mname] = function(self) return u(self)[method.fields[1]] end
+      mixin[mname] = function(self)
+        local ud = u(self)
+        local t = {}
+        for i, f in ipairs(method.fields) do
+          t[i] = ud[f]
+        end
+        return unpack(t, 1, #method.fields)
+      end
     elseif method.status == 'setter' then
-      if cfg.fields[method.fields[1]].type == 'bool' then
-        -- luacheck: globals u
-        mixin[mname] = function(self, arg) u(self)[method.fields[1]] = not not arg end
-      else
-        -- luacheck: globals u
-        mixin[mname] = function(self, arg) u(self)[method.fields[1]] = arg end
+      mixin[mname] = function(self, ...)
+        local ud = u(self)
+        for i, f in ipairs(method.fields) do
+          local v = select(i, ...)
+          if cfg.fields[f].type == 'bool' then
+            v = not not v
+          end
+          ud[f] = v
+        end
       end
     elseif method.status == 'unimplemented' then
       -- TODO unify this with loader.lua
