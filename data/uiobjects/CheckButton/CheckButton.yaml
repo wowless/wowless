@@ -1,9 +1,9 @@
 ---
 name: CheckButton
 fields:
-- checked
-- checkedTexture
-- disabledCheckedTexture
+  checked: {}
+  checkedTexture: {}
+  disabledCheckedTexture: {}
 inherits:
 - Button
 methods:

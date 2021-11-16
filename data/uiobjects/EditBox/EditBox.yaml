@@ -1,12 +1,12 @@
 ---
 name: EditBox
 fields:
-- editboxText
-- enabled
-- isAutoFocus
-- isCountInvisibleLetters
-- isMultiLine
-- maxLetters
+  editboxText: {}
+  enabled: {}
+  isAutoFocus: {}
+  isCountInvisibleLetters: {}
+  isMultiLine: {}
+  maxLetters: {}
 inherits:
 - FontInstance
 - Frame

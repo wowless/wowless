@@ -1,7 +1,7 @@
 ---
 name: ScrollFrame
 fields:
-- scrollChild
+  scrollChild: {}
 inherits:
 - Frame
 methods:

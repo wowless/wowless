@@ -1,7 +1,7 @@
 ---
 name: UIObject
 fields:
-- name
+  name: {}
 inherits: {}
 methods:
   GetName:

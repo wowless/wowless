@@ -1,8 +1,8 @@
 ---
 name: StatusBar
 fields:
-- statusBarTexture
-- value
+  statusBarTexture: {}
+  value: {}
 inherits:
 - Frame
 methods:

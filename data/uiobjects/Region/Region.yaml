@@ -1,16 +1,16 @@
 ---
 name: Region
 fields:
-- alpha
-- bottom
-- height
-- isIgnoringParentAlpha
-- isIgnoringParentScale
-- left
-- scale
-- shown
-- visible
-- width
+  alpha: {}
+  bottom: {}
+  height: {}
+  isIgnoringParentAlpha: {}
+  isIgnoringParentScale: {}
+  left: {}
+  scale: {}
+  shown: {}
+  visible: {}
+  width: {}
 inherits:
 - ParentedObject
 methods:

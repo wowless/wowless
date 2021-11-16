@@ -1,8 +1,8 @@
 ---
 name: Slider
 fields:
-- thumbTexture
-- value
+  thumbTexture: {}
+  value: {}
 inherits:
 - Frame
 methods:

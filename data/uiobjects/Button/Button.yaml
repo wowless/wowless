@@ -1,13 +1,13 @@
 ---
 name: Button
 fields:
-- buttonState
-- disabledTexture
-- enabled
-- highlightTexture
-- motionScriptsWhileDisabled
-- normalTexture
-- pushedTexture
+  buttonState: {}
+  disabledTexture: {}
+  enabled: {}
+  highlightTexture: {}
+  motionScriptsWhileDisabled: {}
+  normalTexture: {}
+  pushedTexture: {}
 inherits:
 - Frame
 methods:

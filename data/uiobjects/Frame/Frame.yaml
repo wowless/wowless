@@ -1,18 +1,18 @@
 ---
 name: Frame
 fields:
-- frameLevel
-- frameStrata
-- hyperlinksEnabled
-- id
-- isClampedToScreen
-- isUserPlaced
-- mouseClickEnabled
-- mouseMotionEnabled
-- mouseWheelEnabled
-- movable
-- resizable
-- toplevel
+  frameLevel: {}
+  frameStrata: {}
+  hyperlinksEnabled: {}
+  id: {}
+  isClampedToScreen: {}
+  isUserPlaced: {}
+  mouseClickEnabled: {}
+  mouseMotionEnabled: {}
+  mouseWheelEnabled: {}
+  movable: {}
+  resizable: {}
+  toplevel: {}
 inherits:
 - ParentedObject
 - Region

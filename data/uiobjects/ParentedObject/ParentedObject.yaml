@@ -1,8 +1,8 @@
 ---
 name: ParentedObject
 fields:
-- forbidden
-- parent
+  forbidden: {}
+  parent: {}
 inherits:
 - UIObject
 methods:

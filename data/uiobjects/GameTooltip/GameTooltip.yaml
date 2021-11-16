@@ -1,7 +1,7 @@
 ---
 name: GameTooltip
 fields:
-- tooltipOwner
+  tooltipOwner: {}
 inherits:
 - Frame
 methods:
