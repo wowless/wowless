@@ -18,6 +18,7 @@ local function tpairs(data, x)
 end
 
 local function resolve(data, top, depth)
+  depth = depth or math.huge
   if top == nil then
     return nil
   end
