@@ -5,11 +5,20 @@ fields:
   frameStrata: {}
   hyperlinksEnabled:
     type: bool
-  id: {}
+  id:
+    type: number
   isClampedToScreen:
     type: bool
   isUserPlaced:
     type: bool
+  maxResizeHeight:
+    type: number
+  maxResizeWidth:
+    type: number
+  minResizeHeight:
+    type: number
+  minResizeWidth:
+    type: number
   mouseClickEnabled:
     type: bool
   mouseMotionEnabled:
@@ -66,9 +75,15 @@ methods:
     - id
     status: getter
   GetMaxResize:
-    status: implemented
+    fields:
+    - maxResizeWidth
+    - maxResizeHeight
+    status: getter
   GetMinResize:
-    status: implemented
+    fields:
+    - minResizeWidth
+    - minResizeHeight
+    status: getter
   GetNumChildren:
     status: implemented
   GetNumRegions:
@@ -158,11 +173,19 @@ methods:
     - hyperlinksEnabled
     status: setter
   SetID:
-    status: implemented
+    fields:
+    - id
+    status: setter
   SetMaxResize:
-    status: implemented
+    fields:
+    - maxResizeWidth
+    - maxResizeHeight
+    status: setter
   SetMinResize:
-    status: implemented
+    fields:
+    - minResizeWidth
+    - minResizeHeight
+    status: setter
   SetMouseClickEnabled:
     fields:
     - mouseClickEnabled

@@ -1,6 +1,8 @@
 ---
 name: Button
 fields:
+  buttonLocked:
+    type: bool
   buttonState: {}
   disabledTexture: {}
   enabled:
@@ -81,7 +83,10 @@ methods:
   RegisterForMouse:
     status: unimplemented
   SetButtonState:
-    status: implemented
+    fields:
+    - buttonState
+    - buttonLocked
+    status: setter
   SetDisabledAtlas:
     status: implemented
   SetDisabledFontObject:

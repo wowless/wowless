@@ -1,6 +1,10 @@
 ---
 name: StatusBar
 fields:
+  max:
+    type: number
+  min:
+    type: number
   statusBarTexture: {}
   value: {}
 inherits:
@@ -9,7 +13,10 @@ methods:
   GetFillStyle:
     status: unimplemented
   GetMinMaxValues:
-    status: implemented
+    fields:
+    - min
+    - max
+    status: getter
   GetOrientation:
     status: unimplemented
   GetReverseFill:
@@ -31,7 +38,10 @@ methods:
   SetFillStyle:
     status: unimplemented
   SetMinMaxValues:
-    status: implemented
+    fields:
+    - min
+    - max
+    status: setter
   SetOrientation:
     status: unimplemented
   SetReverseFill:

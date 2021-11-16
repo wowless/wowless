@@ -1,6 +1,10 @@
 ---
 name: Slider
 fields:
+  max:
+    type: number
+  min:
+    type: number
   thumbTexture: {}
   value: {}
 inherits:
@@ -11,7 +15,10 @@ methods:
   Enable:
     status: implemented
   GetMinMaxValues:
-    status: implemented
+    fields:
+    - min
+    - max
+    status: getter
   GetObeyStepOnDrag:
     status: unimplemented
   GetOrientation:
@@ -35,7 +42,10 @@ methods:
   SetEnabled:
     status: unimplemented
   SetMinMaxValues:
-    status: implemented
+    fields:
+    - min
+    - max
+    status: setter
   SetObeyStepOnDrag:
     status: unimplemented
   SetOrientation:

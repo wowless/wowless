@@ -2,16 +2,20 @@
 name: Region
 fields:
   alpha: {}
-  bottom: {}
-  height: {}
+  bottom:
+    type: number
+  height:
+    type: number
   isIgnoringParentAlpha:
     type: bool
   isIgnoringParentScale: {}
-  left: {}
+  left:
+    type: number
   scale: {}
   shown: {}
   visible: {}
-  width: {}
+  width:
+    type: number
 inherits:
 - ParentedObject
 methods:
@@ -50,7 +54,12 @@ methods:
   GetPoint:
     status: implemented
   GetRect:
-    status: implemented
+    fields:
+    - bottom
+    - left
+    - width
+    - height
+    status: getter
   GetRight:
     status: implemented
   GetScale:
@@ -60,7 +69,10 @@ methods:
   GetScaledRect:
     status: implemented
   GetSize:
-    status: implemented
+    fields:
+    - width
+    - height
+    status: getter
   GetTop:
     status: implemented
   GetWidth:
