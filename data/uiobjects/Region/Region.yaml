@@ -83,7 +83,8 @@ methods:
   SetAlpha:
     status: implemented
   SetHeight:
-    status: implemented
+    field: height
+    status: setter
   SetIgnoreParentAlpha:
     status: implemented
   SetParent:
@@ -97,6 +98,7 @@ methods:
   SetSize:
     status: unimplemented
   SetWidth:
-    status: implemented
+    field: width
+    status: setter
   Show:
     status: implemented

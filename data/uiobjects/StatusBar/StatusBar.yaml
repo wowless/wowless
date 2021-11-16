@@ -43,4 +43,5 @@ methods:
   SetStatusBarTexture:
     status: implemented
   SetValue:
-    status: implemented
+    field: value
+    status: setter

@@ -62,6 +62,7 @@ describe('uiobjects', function()
                 local valid = {
                   getter = true,
                   implemented = true,
+                  setter = true,
                   unimplemented = true,
                 }
                 assert.True(valid[method.status], ('invalid status %q'):format(method.status))

@@ -54,7 +54,8 @@ methods:
   SetFocus:
     status: unimplemented
   SetMaxLetters:
-    status: implemented
+    field: maxLetters
+    status: setter
   SetMultiLine:
     status: implemented
   SetNumber:
@@ -62,12 +63,14 @@ methods:
   SetNumeric:
     status: unimplemented
   SetSecureText:
-    status: implemented
+    field: editboxText
+    status: setter
   SetSecurityDisablePaste:
     status: unimplemented
   SetSecurityDisableSetText:
     status: unimplemented
   SetText:
-    status: implemented
+    field: editboxText
+    status: setter
   SetTextInsets:
     status: unimplemented

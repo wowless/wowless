@@ -223,7 +223,8 @@ methods:
     versions:
     - Mainline
   SetOwner:
-    status: implemented
+    field: tooltipOwner
+    status: setter
   SetPadding:
     status: unimplemented
   SetPetAction:

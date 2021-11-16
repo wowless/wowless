@@ -119,9 +119,11 @@ methods:
   SetFixedFrameStrata:
     status: unimplemented
   SetFrameLevel:
-    status: implemented
+    field: frameLevel
+    status: setter
   SetFrameStrata:
-    status: implemented
+    field: frameStrata
+    status: setter
   SetHitRectInsets:
     status: unimplemented
   SetHyperlinksEnabled:

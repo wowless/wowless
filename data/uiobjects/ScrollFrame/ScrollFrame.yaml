@@ -19,7 +19,8 @@ methods:
   SetHorizontalScroll:
     status: unimplemented
   SetScrollChild:
-    status: implemented
+    field: scrollChild
+    status: setter
   SetVerticalScroll:
     status: unimplemented
   UpdateScrollChildRect:

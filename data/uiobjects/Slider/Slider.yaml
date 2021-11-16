@@ -43,6 +43,7 @@ methods:
   SetThumbTexture:
     status: implemented
   SetValue:
-    status: implemented
+    field: value
+    status: setter
   SetValueStep:
     status: unimplemented
