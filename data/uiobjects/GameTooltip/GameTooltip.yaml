@@ -1,5 +1,7 @@
 ---
 name: GameTooltip
+fields:
+- tooltipOwner
 inherits:
 - Frame
 methods:
@@ -44,7 +46,8 @@ methods:
     - type: number
     status: unimplemented
   GetOwner:
-    status: implemented
+    field: tooltipOwner
+    status: getter
   GetPadding:
     status: unimplemented
   GetSpell:

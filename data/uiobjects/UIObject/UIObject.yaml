@@ -1,9 +1,12 @@
 ---
 name: UIObject
+fields:
+- name
 inherits: {}
 methods:
   GetName:
-    status: implemented
+    field: name
+    status: getter
   GetObjectType:
     status: implemented
   IsObjectType:

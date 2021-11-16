@@ -1,5 +1,8 @@
 ---
 name: Slider
+fields:
+- thumbTexture
+- value
 inherits:
 - Frame
 methods:
@@ -16,9 +19,11 @@ methods:
   GetStepsPerPage:
     status: unimplemented
   GetThumbTexture:
-    status: implemented
+    field: thumbTexture
+    status: getter
   GetValue:
-    status: implemented
+    field: value
+    status: getter
   GetValueStep:
     status: unimplemented
   IsDraggingThumb:

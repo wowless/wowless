@@ -1,5 +1,13 @@
 ---
 name: Button
+fields:
+- buttonState
+- disabledTexture
+- enabled
+- highlightTexture
+- motionScriptsWhileDisabled
+- normalTexture
+- pushedTexture
 inherits:
 - Frame
 methods:
@@ -10,27 +18,33 @@ methods:
   Enable:
     status: implemented
   GetButtonState:
-    status: implemented
+    field: buttonState
+    status: getter
   GetDisabledFontObject:
     status: unimplemented
   GetDisabledTexture:
-    status: implemented
+    field: disabledTexture
+    status: getter
   GetFontString:
     status: implemented
   GetHighlightFontObject:
     status: unimplemented
   GetHighlightTexture:
-    status: implemented
+    field: highlightTexture
+    status: getter
   GetMotionScriptsWhileDisabled:
-    status: implemented
+    field: motionScriptsWhileDisabled
+    status: getter
   GetNormalFontObject:
     status: unimplemented
   GetNormalTexture:
-    status: implemented
+    field: normalTexture
+    status: getter
   GetPushedTextOffset:
     status: implemented
   GetPushedTexture:
-    status: implemented
+    field: pushedTexture
+    status: getter
   GetText:
     status: implemented
   GetTextHeight:
@@ -42,7 +56,8 @@ methods:
     - type: number
     status: unimplemented
   IsEnabled:
-    status: implemented
+    field: enabled
+    status: getter
   LockHighlight:
     status: unimplemented
   RegisterForClicks:

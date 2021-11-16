@@ -1,5 +1,18 @@
 ---
 name: Frame
+fields:
+- frameLevel
+- frameStrata
+- hyperlinksEnabled
+- id
+- isClampedToScreen
+- isUserPlaced
+- mouseClickEnabled
+- mouseMotionEnabled
+- mouseWheelEnabled
+- movable
+- resizable
+- toplevel
 inherits:
 - ParentedObject
 - Region
@@ -26,13 +39,17 @@ methods:
   GetChildren:
     status: implemented
   GetFrameLevel:
-    status: implemented
+    field: frameLevel
+    status: getter
   GetFrameStrata:
-    status: implemented
+    field: frameStrata
+    status: getter
   GetHyperlinksEnabled:
-    status: implemented
+    field: hyperlinksEnabled
+    status: getter
   GetID:
-    status: implemented
+    field: id
+    status: getter
   GetMaxResize:
     status: implemented
   GetMinResize:
@@ -46,25 +63,33 @@ methods:
   IgnoreDepth:
     status: unimplemented
   IsClampedToScreen:
-    status: implemented
+    field: isClampedToScreen
+    status: getter
   IsEventRegistered:
     status: implemented
   IsMouseClickEnabled:
-    status: implemented
+    field: mouseClickEnabled
+    status: getter
   IsMouseEnabled:
     status: implemented
   IsMouseMotionEnabled:
-    status: implemented
+    field: mouseMotionEnabled
+    status: getter
   IsMouseWheelEnabled:
-    status: implemented
+    field: mouseWheelEnabled
+    status: getter
   IsMovable:
-    status: implemented
+    field: movable
+    status: getter
   IsResizable:
-    status: implemented
+    field: resizable
+    status: getter
   IsToplevel:
-    status: implemented
+    field: toplevel
+    status: getter
   IsUserPlaced:
-    status: implemented
+    field: isUserPlaced
+    status: getter
   Raise:
     status: unimplemented
   RegisterAllEvents:

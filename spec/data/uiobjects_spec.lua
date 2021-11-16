@@ -25,6 +25,7 @@ describe('uiobjects', function()
           end)
           it('has only valid fields', function()
             local fields = {
+              fields = true,
               inherits = true,
               methods = true,
               name = true,
@@ -48,6 +49,7 @@ describe('uiobjects', function()
             describe(methodname, function()
               it('has only valid fields', function()
                 local fields = {
+                  field = true,
                   outputs = true,
                   status = true,
                   versions = true,
@@ -58,6 +60,7 @@ describe('uiobjects', function()
               end)
               it('has valid status', function()
                 local valid = {
+                  getter = true,
                   implemented = true,
                   unimplemented = true,
                 }

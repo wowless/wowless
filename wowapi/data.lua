@@ -25,6 +25,9 @@ local function loadUIObject(name)
   for mname, method in pairs(cfg.methods) do
     if method.status == 'implemented' then
       mixin[mname] = assert(lua(mname))
+    elseif method.status == 'getter' then
+      -- luacheck: globals u
+      mixin[mname] = function(self) return u(self)[method.field] end
     elseif method.status == 'unimplemented' then
       -- TODO unify this with loader.lua
       local t = {}

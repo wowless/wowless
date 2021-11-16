@@ -1,5 +1,12 @@
 ---
 name: EditBox
+fields:
+- editboxText
+- enabled
+- isAutoFocus
+- isCountInvisibleLetters
+- isMultiLine
+- maxLetters
 inherits:
 - FontInstance
 - Frame
@@ -15,21 +22,27 @@ methods:
   GetInputLanguage:
     status: implemented
   GetMaxLetters:
-    status: implemented
+    field: maxLetters
+    status: getter
   GetNumber:
     outputs:
     - type: number
     status: unimplemented
   GetText:
-    status: implemented
+    field: editboxText
+    status: getter
   IsAutoFocus:
-    status: implemented
+    field: isAutoFocus
+    status: getter
   IsCountInvisibleLetters:
-    status: implemented
+    field: isCountInvisibleLetters
+    status: getter
   IsEnabled:
-    status: implemented
+    field: enabled
+    status: getter
   IsMultiLine:
-    status: implemented
+    field: isMultiLine
+    status: getter
   SetAltArrowKeyMode:
     status: unimplemented
   SetAutoFocus:

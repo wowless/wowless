@@ -1,5 +1,7 @@
 ---
 name: ScrollFrame
+fields:
+- scrollChild
 inherits:
 - Frame
 methods:
@@ -8,7 +10,8 @@ methods:
     - type: number
     status: unimplemented
   GetScrollChild:
-    status: implemented
+    field: scrollChild
+    status: getter
   GetVerticalScrollRange:
     outputs:
     - type: number

@@ -1,13 +1,18 @@
 ---
 name: ParentedObject
+fields:
+- forbidden
+- parent
 inherits:
 - UIObject
 methods:
   GetDebugName:
     status: unimplemented
   GetParent:
-    status: implemented
+    field: parent
+    status: getter
   IsForbidden:
-    status: implemented
+    field: forbidden
+    status: getter
   SetForbidden:
     status: implemented

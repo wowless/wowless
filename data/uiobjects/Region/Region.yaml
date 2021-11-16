@@ -1,5 +1,16 @@
 ---
 name: Region
+fields:
+- alpha
+- bottom
+- height
+- isIgnoringParentAlpha
+- isIgnoringParentScale
+- left
+- scale
+- shown
+- visible
+- width
 inherits:
 - ParentedObject
 methods:
@@ -10,11 +21,13 @@ methods:
   CreateAnimationGroup:
     status: implemented
   GetAlpha:
-    status: implemented
+    field: alpha
+    status: getter
   GetAnimationGroups:
     status: implemented
   GetBottom:
-    status: implemented
+    field: bottom
+    status: getter
   GetCenter:
     status: implemented
   GetEffectiveAlpha:
@@ -22,9 +35,11 @@ methods:
   GetEffectiveScale:
     status: implemented
   GetHeight:
-    status: implemented
+    field: height
+    status: getter
   GetLeft:
-    status: implemented
+    field: left
+    status: getter
   GetNumPoints:
     status: implemented
   GetPoint:
@@ -34,7 +49,8 @@ methods:
   GetRight:
     status: implemented
   GetScale:
-    status: implemented
+    field: scale
+    status: getter
   GetScaledRect:
     status: implemented
   GetSize:
@@ -42,21 +58,26 @@ methods:
   GetTop:
     status: implemented
   GetWidth:
-    status: implemented
+    field: width
+    status: getter
   Hide:
     status: implemented
   IsIgnoringParentAlpha:
-    status: implemented
+    field: isIgnoringParentAlpha
+    status: getter
   IsIgnoringParentScale:
-    status: implemented
+    field: isIgnoringParentScale
+    status: getter
   IsMouseOver:
     status: unimplemented
   IsProtected:
     status: implemented
   IsShown:
-    status: implemented
+    field: shown
+    status: getter
   IsVisible:
-    status: implemented
+    field: visible
+    status: getter
   SetAllPoints:
     status: unimplemented
   SetAlpha:

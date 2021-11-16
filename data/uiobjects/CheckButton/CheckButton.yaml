@@ -1,14 +1,21 @@
 ---
 name: CheckButton
+fields:
+- checked
+- checkedTexture
+- disabledCheckedTexture
 inherits:
 - Button
 methods:
   GetChecked:
-    status: implemented
+    field: checked
+    status: getter
   GetCheckedTexture:
-    status: implemented
+    field: checkedTexture
+    status: getter
   GetDisabledCheckedTexture:
-    status: implemented
+    field: disabledCheckedTexture
+    status: getter
   SetChecked:
     status: implemented
   SetCheckedTexture:
