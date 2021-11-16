@@ -2,10 +2,14 @@
 name: EditBox
 fields:
   editboxText: {}
-  enabled: {}
-  isAutoFocus: {}
-  isCountInvisibleLetters: {}
-  isMultiLine: {}
+  enabled:
+    type: bool
+  isAutoFocus:
+    type: bool
+  isCountInvisibleLetters:
+    type: bool
+  isMultiLine:
+    type: bool
   maxLetters: {}
 inherits:
 - FontInstance
@@ -46,18 +50,22 @@ methods:
   SetAltArrowKeyMode:
     status: unimplemented
   SetAutoFocus:
-    status: implemented
+    field: isAutoFocus
+    status: setter
   SetCountInvisibleLetters:
-    status: implemented
+    field: isCountInvisibleLetters
+    status: setter
   SetEnabled:
-    status: implemented
+    field: enabled
+    status: setter
   SetFocus:
     status: unimplemented
   SetMaxLetters:
     field: maxLetters
     status: setter
   SetMultiLine:
-    status: implemented
+    field: isMultiLine
+    status: setter
   SetNumber:
     status: unimplemented
   SetNumeric:

@@ -3,16 +3,25 @@ name: Frame
 fields:
   frameLevel: {}
   frameStrata: {}
-  hyperlinksEnabled: {}
+  hyperlinksEnabled:
+    type: bool
   id: {}
-  isClampedToScreen: {}
-  isUserPlaced: {}
-  mouseClickEnabled: {}
-  mouseMotionEnabled: {}
-  mouseWheelEnabled: {}
-  movable: {}
-  resizable: {}
-  toplevel: {}
+  isClampedToScreen:
+    type: bool
+  isUserPlaced:
+    type: bool
+  mouseClickEnabled:
+    type: bool
+  mouseMotionEnabled:
+    type: bool
+  mouseWheelEnabled:
+    type: bool
+  movable:
+    type: bool
+  resizable:
+    type: bool
+  toplevel:
+    type: bool
 inherits:
 - ParentedObject
 - Region
@@ -33,7 +42,8 @@ methods:
   EnableMouse:
     status: implemented
   EnableMouseWheel:
-    status: implemented
+    field: mouseWheelEnabled
+    status: setter
   GetAttribute:
     status: implemented
   GetChildren:
@@ -105,7 +115,8 @@ methods:
   SetAttribute:
     status: implemented
   SetClampedToScreen:
-    status: implemented
+    field: isClampedToScreen
+    status: setter
   SetClampRectInsets:
     status: unimplemented
   SetClipsChildren:
@@ -127,7 +138,8 @@ methods:
   SetHitRectInsets:
     status: unimplemented
   SetHyperlinksEnabled:
-    status: implemented
+    field: hyperlinksEnabled
+    status: setter
   SetID:
     status: implemented
   SetMaxResize:
@@ -135,17 +147,23 @@ methods:
   SetMinResize:
     status: implemented
   SetMouseClickEnabled:
-    status: implemented
+    field: mouseClickEnabled
+    status: setter
   SetMouseMotionEnabled:
-    status: implemented
+    field: mouseMotionEnabled
+    status: setter
   SetMovable:
-    status: implemented
+    field: movable
+    status: setter
   SetResizable:
-    status: implemented
+    field: resizable
+    status: setter
   SetToplevel:
-    status: implemented
+    field: toplevel
+    status: setter
   SetUserPlaced:
-    status: implemented
+    field: isUserPlaced
+    status: setter
   StartMoving:
     status: unimplemented
   StopMovingOrSizing:

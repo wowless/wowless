@@ -29,8 +29,13 @@ local function loadUIObject(name)
       -- luacheck: globals u
       mixin[mname] = function(self) return u(self)[method.field] end
     elseif method.status == 'setter' then
-      -- luacheck: globals u
-      mixin[mname] = function(self, arg) u(self)[method.field] = arg end
+      if cfg.fields[method.field].type == 'bool' then
+        -- luacheck: globals u
+        mixin[mname] = function(self, arg) u(self)[method.field] = not not arg end
+      else
+        -- luacheck: globals u
+        mixin[mname] = function(self, arg) u(self)[method.field] = arg end
+      end
     elseif method.status == 'unimplemented' then
       -- TODO unify this with loader.lua
       local t = {}

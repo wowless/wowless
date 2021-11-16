@@ -1,7 +1,8 @@
 ---
 name: CheckButton
 fields:
-  checked: {}
+  checked:
+    type: bool
   checkedTexture: {}
   disabledCheckedTexture: {}
 inherits:
@@ -17,7 +18,8 @@ methods:
     field: disabledCheckedTexture
     status: getter
   SetChecked:
-    status: implemented
+    field: checked
+    status: setter
   SetCheckedTexture:
     status: implemented
   SetDisabledCheckedTexture:

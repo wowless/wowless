@@ -3,9 +3,11 @@ name: Button
 fields:
   buttonState: {}
   disabledTexture: {}
-  enabled: {}
+  enabled:
+    type: bool
   highlightTexture: {}
-  motionScriptsWhileDisabled: {}
+  motionScriptsWhileDisabled:
+    type: bool
   normalTexture: {}
   pushedTexture: {}
 inherits:
@@ -73,7 +75,8 @@ methods:
   SetDisabledTexture:
     status: implemented
   SetEnabled:
-    status: implemented
+    field: enabled
+    status: setter
   SetFontString:
     status: implemented
   SetFormattedText:
@@ -85,7 +88,8 @@ methods:
   SetHighlightTexture:
     status: implemented
   SetMotionScriptsWhileDisabled:
-    status: implemented
+    field: motionScriptsWhileDisabled
+    status: setter
   SetNormalAtlas:
     status: implemented
   SetNormalFontObject:

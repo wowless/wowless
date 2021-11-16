@@ -4,7 +4,8 @@ fields:
   alpha: {}
   bottom: {}
   height: {}
-  isIgnoringParentAlpha: {}
+  isIgnoringParentAlpha:
+    type: bool
   isIgnoringParentScale: {}
   left: {}
   scale: {}
@@ -86,7 +87,8 @@ methods:
     field: height
     status: setter
   SetIgnoreParentAlpha:
-    status: implemented
+    field: isIgnoringParentAlpha
+    status: setter
   SetParent:
     status: implemented
   SetPoint:
