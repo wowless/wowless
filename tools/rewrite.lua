@@ -2,7 +2,7 @@ local lfs = require('lfs')
 local pf = require('pl.file')
 local yaml = require('wowapi.yaml')
 
-local function yamlRewriter(fn)
+local function apiRewriter(fn)
   for filename in lfs.dir('data/api') do
     if filename:sub(-5) == '.yaml' then
       local api = yaml.parseFile('data/api/' .. filename)
@@ -14,6 +14,20 @@ local function yamlRewriter(fn)
   end
 end
 
+local function uiobjectRewriter(fn)
+  for d in lfs.dir('data/uiobjects') do
+    if d ~= '.' and d ~= '..' then
+      local filename = ('data/uiobjects/%s/%s.yaml'):format(d, d)
+      local cfg = yaml.parseFile(filename)
+      local newcfg = fn(cfg)
+      if newcfg then
+        pf.write(filename, yaml.pprint(newcfg))
+      end
+    end
+  end
+end
+
 return {
-  yaml = yamlRewriter,
+  api = apiRewriter,
+  uiobject = uiobjectRewriter,
 }
