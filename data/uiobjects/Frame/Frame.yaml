@@ -79,12 +79,6 @@ methods:
     status: implemented
   SetAttribute:
     status: implemented
-  SetBackdrop:
-    status: unimplemented
-  SetBackdropBorderColor:
-    status: unimplemented
-  SetBackdropColor:
-    status: unimplemented
   SetClampedToScreen:
     status: implemented
   SetClampRectInsets:
