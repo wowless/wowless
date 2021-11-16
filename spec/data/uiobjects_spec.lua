@@ -50,6 +50,7 @@ describe('uiobjects', function()
                 local fields = {
                   outputs = true,
                   status = true,
+                  versions = true,
                 }
                 for k in pairs(method) do
                   assert.True(fields[k], ('invalid field %q'):format(k))
@@ -73,6 +74,22 @@ describe('uiobjects', function()
                   end
                   assert.same('string', type(m.type))
                   assert.same('number', m.type)
+                end
+              end)
+              it('has valid versions', function()
+                if method.versions ~= nil then
+                  assert.same('table', type(method.versions))
+                  local valid = {
+                    Vanilla = true,
+                    TBC = true,
+                    Mainline = true,
+                  }
+                  local seen = {}
+                  for _, v in ipairs(method.versions) do
+                    assert.True(valid[v])
+                    assert.Nil(seen[v])
+                    seen[v] = true
+                  end
                 end
               end)
             end)

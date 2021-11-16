@@ -15,10 +15,34 @@ methods:
     status: unimplemented
   PingLocation:
     status: unimplemented
+  SetArchBlobInsideAlpha:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetArchBlobInsideTexture:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetArchBlobOutsideAlpha:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetArchBlobOutsideTexture:
+    status: unimplemented
+    versions:
+    - Mainline
   SetArchBlobRingAlpha:
     status: unimplemented
+    versions:
+    - Mainline
   SetArchBlobRingScalar:
     status: unimplemented
+    versions:
+    - Mainline
+  SetArchBlobRingTexture:
+    status: unimplemented
+    versions:
+    - Mainline
   SetBlipTexture:
     status: unimplemented
   SetCorpsePOIArrowTexture:
@@ -31,12 +55,72 @@ methods:
     status: unimplemented
   SetPOIArrowTexture:
     status: unimplemented
+  SetQuestBlobInsideAlpha:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetQuestBlobInsideTexture:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetQuestBlobOutsideAlpha:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetQuestBlobOutsideSelectedTexture:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetQuestBlobOutsideTexture:
+    status: unimplemented
+    versions:
+    - Mainline
   SetQuestBlobRingAlpha:
     status: unimplemented
+    versions:
+    - Mainline
   SetQuestBlobRingScalar:
     status: unimplemented
+    versions:
+    - Mainline
+  SetQuestBlobRingTexture:
+    status: unimplemented
+    versions:
+    - Mainline
   SetStaticPOIArrowTexture:
     status: unimplemented
+  SetTaskBlobInsideAlpha:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetTaskBlobInsideTexture:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetTaskBlobOutsideAlpha:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetTaskBlobOutsideSelectedTexture:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetTaskBlobOutsideTexture:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetTaskBlobRingAlpha:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetTaskBlobRingScalar:
+    status: unimplemented
+    versions:
+    - Mainline
+  SetTaskBlobRingTexture:
+    status: unimplemented
+    versions:
+    - Mainline
   SetZoom:
     status: unimplemented
   UpdateBlips:
