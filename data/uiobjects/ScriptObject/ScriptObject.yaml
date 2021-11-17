@@ -1,5 +1,11 @@
 ---
 name: ScriptObject
+fields:
+  scripts:
+    init:
+      0: {}
+      1: {}
+      2: {}
 inherits: {}
 methods:
   GetScript:

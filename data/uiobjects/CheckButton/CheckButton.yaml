@@ -2,6 +2,7 @@
 name: CheckButton
 fields:
   checked:
+    init: false
     type: bool
   checkedTexture: {}
   disabledCheckedTexture: {}

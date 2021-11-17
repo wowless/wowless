@@ -1,15 +1,25 @@
 ---
 name: Frame
 fields:
-  frameLevel: {}
-  frameStrata: {}
+  attributes:
+    init: {}
+  frameLevel:
+    init: 1
+    type: number
+  frameStrata:
+    init: MEDIUM
+    type: string
   hyperlinksEnabled:
+    init: false
     type: bool
   id:
+    init: 0
     type: number
   isClampedToScreen:
+    init: false
     type: bool
   isUserPlaced:
+    init: false
     type: bool
   maxResizeHeight:
     type: number
@@ -20,16 +30,27 @@ fields:
   minResizeWidth:
     type: number
   mouseClickEnabled:
+    init: true
     type: bool
   mouseMotionEnabled:
+    init: true
     type: bool
   mouseWheelEnabled:
+    init: false
     type: bool
   movable:
+    init: false
     type: bool
+  registeredAllEvents:
+    init: false
+    type: bool
+  registeredEvents:
+    init: {}
   resizable:
+    init: false
     type: bool
   toplevel:
+    init: false
     type: bool
 inherits:
 - ParentedObject

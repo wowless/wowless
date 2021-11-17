@@ -1,16 +1,24 @@
 ---
 name: EditBox
 fields:
-  editboxText: {}
+  editboxText:
+    init: ''
+    type: string
   enabled:
+    init: true
     type: bool
   isAutoFocus:
+    init: true
     type: bool
   isCountInvisibleLetters:
+    init: false
     type: bool
   isMultiLine:
+    init: false
     type: bool
-  maxLetters: {}
+  maxLetters:
+    init: 64
+    type: number
 inherits:
 - FontInstance
 - Frame
