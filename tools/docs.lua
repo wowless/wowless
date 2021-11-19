@@ -34,6 +34,31 @@ for _, tag in ipairs(tags) do
   end
 end
 lfs.mkdir(outdir)
+local expectedTopLevelFields = {
+  Events = true,
+  Functions = true,
+  Name = true,
+  Namespace = true,
+  Tables = true,
+  Type = true,
+}
+local tabs, funcs = {}, {}
+for f, envt in pairs(docs) do
+  for _, t in pairs(envt) do
+    for k in pairs(t) do
+      assert(expectedTopLevelFields[k], ('unexpected field %q in %q'):format(k, f))
+    end
+    assert(not t.Type or t.Type == 'System', f)
+    for _, tab in ipairs(t.Tables or {}) do
+      local name = (t.Namespace and (t.Namespace .. '.') or '') .. tab.Name
+      tabs[name] = tabs[name] or tab
+    end
+    for _, func in ipairs(t.Functions or {}) do
+      local name = (t.Namespace and (t.Namespace .. '.') or '') .. func.Name
+      funcs[name] = funcs[name] or func
+    end
+  end
+end
 local types = {
   bool = 'b',
   number = 'n',
@@ -46,20 +71,8 @@ local tables = {
   Structure = 't',
 }
 local tys = {}
--- First pass for types.
-for _, envt in pairs(docs) do
-  for _, t in pairs(envt) do
-    for _, ty in ipairs(t.Tables or {}) do
-      local name = (t.Namespace and (t.Namespace .. '.') or '') .. ty.Name
-      local c = assert(tables[ty.Type])
-      local old = tys[name]
-      if old then
-        assert(old == c)
-      else
-        tys[name] = c
-      end
-    end
-  end
+for name, tab in pairs(tabs) do
+  tys[name] = assert(tables[tab.Type])
 end
 for k, v in pairs(require('wowapi.data').structures) do
   if v.status == 'implemented' then
