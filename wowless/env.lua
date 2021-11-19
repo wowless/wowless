@@ -27,6 +27,7 @@ local function mkBaseEnv()
       status = coroutine.status,
       yield = coroutine.yield,
     },
+    cos = math.cos,
     date = os.date,
     debugstack = debug.traceback,
     error = error,
@@ -68,6 +69,7 @@ local function mkBaseEnv()
     select = select,
     setfenv = setfenv,
     setmetatable = setmetatable,
+    sin = math.sin,
     sort = table.sort,
     strfind = string.find,
     string = {

@@ -1,0 +1,7 @@
+---
+name: SetConsoleKey
+status: unimplemented
+inputs:
+- s
+- x
+outputs: {}
