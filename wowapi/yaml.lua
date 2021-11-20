@@ -70,7 +70,7 @@ local function api2yaml(api)
         local handled = {}
         for _, name in ipairs(names) do
           local value = v[name]
-          if value and not handled[name] then
+          if value ~= nil and not handled[name] then
             handled[name] = true
             run(name)
             run(value)

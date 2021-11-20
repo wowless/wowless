@@ -5,6 +5,7 @@ inputs: nb
 newinputs:
 - name: setting
   type: number
-- name: newVal
+- default: false
+  name: newVal
   type: bool
 outputs: {}

@@ -8,11 +8,15 @@ newinputs:
 outputs:
 - name: name
   type: string
-- name: isWeapon
+- default: false
+  name: isWeapon
   type: bool
-- name: canHaveIllusions
+- default: false
+  name: canHaveIllusions
   type: bool
-- name: canMainHand
+- default: false
+  name: canMainHand
   type: bool
-- name: canOffHand
+- default: false
+  name: canOffHand
   type: bool

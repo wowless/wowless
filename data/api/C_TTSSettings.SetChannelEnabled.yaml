@@ -5,6 +5,7 @@ inputs: tb
 newinputs:
 - name: channelInfo
   type: ChatChannelInfo
-- name: newVal
+- default: false
+  name: newVal
   type: bool
 outputs: {}

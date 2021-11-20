@@ -146,7 +146,7 @@ local function newinsig(fn, ns)
       innerType = a.InnerType,
       mixin = a.Mixin,
       name = a.Name,
-      nilable = a.Nilable,
+      nilable = a.Nilable or nil,
       type = t2ty(a.Type, ns, a.Mixin),
     })
   end
@@ -173,7 +173,7 @@ local function outsig(fn, ns)
       innerType = r.InnerType,
       mixin = r.Mixin,
       name = r.Name,
-      nilable = r.Nilable,
+      nilable = r.Nilable or nil,
       type = t2ty(r.Type, ns, r.Mixin),
     })
   end
@@ -228,7 +228,7 @@ for name, tab in pairs(tabs) do
           end
           table.insert(ret, {
             name = field.Name,
-            nilable = field.Nilable,
+            nilable = field.Nilable or nil,
             type = t2ty(field.Type, ns, field.Mixin),
             innerType = field.InnerType,
             mixin = field.Mixin,

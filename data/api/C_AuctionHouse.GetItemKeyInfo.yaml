@@ -5,7 +5,8 @@ inputs: tb
 newinputs:
 - name: itemKey
   type: C_AuctionHouse.ItemKey
-- name: restrictQualityToFilter
+- default: false
+  name: restrictQualityToFilter
   type: bool
 outputs:
 - name: itemKeyInfo

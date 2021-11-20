@@ -5,7 +5,8 @@ inputs: sb
 newinputs:
 - name: bugInfo
   type: string
-- name: suppressNotification
+- default: false
+  name: suppressNotification
   type: bool
 outputs:
 - name: success

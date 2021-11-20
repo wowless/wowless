@@ -5,11 +5,14 @@ inputs: sbbb
 newinputs:
 - name: groupGUID
   type: string
-- name: applyAsTank
+- default: false
+  name: applyAsTank
   type: bool
-- name: applyAsHealer
+- default: false
+  name: applyAsHealer
   type: bool
-- name: applyAsDamage
+- default: false
+  name: applyAsDamage
   type: bool
 outputs:
 - name: requestSuccessful

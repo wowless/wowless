@@ -5,6 +5,7 @@ inputs: sb
 newinputs:
 - name: channelKey
   type: string
-- name: newVal
+- default: false
+  name: newVal
   type: bool
 outputs: {}

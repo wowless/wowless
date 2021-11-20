@@ -5,6 +5,7 @@ inputs: sb
 newinputs:
 - name: unitToken
   type: string
-- name: isGuid
+- default: false
+  name: isGuid
   type: bool
 outputs: {}

@@ -11,7 +11,8 @@ newinputs:
 - default: NumPowerTypes
   name: powerType
   type: number
-- name: unmodified
+- default: false
+  name: unmodified
   type: bool
 outputs:
 - name: power
