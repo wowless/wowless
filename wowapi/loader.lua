@@ -140,6 +140,18 @@ local function loadFunctions(version, env)
   for fn, api in pairs(loadApis(version)) do
     local bfn = getFn(api, env)
     local impl = (function()
+      if api.newinputs then
+        local sig = api.newinputs
+        return function(...)
+          for i, param in ipairs(sig) do
+            local arg = select(i, ...)
+            if arg == nil then
+              assert(param.nilable, ('arg %d (%q) of %q is not nilable, but nil was passed'):format(i, param.name, fn))
+            end
+          end
+          return bfn(...)
+        end
+      end
       if api.inputs == nil then
         return bfn
       end
