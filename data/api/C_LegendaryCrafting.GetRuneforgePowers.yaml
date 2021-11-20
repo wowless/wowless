@@ -5,6 +5,14 @@ inputs:
 - ''
 - t
 - tn
+newinputs:
+- mixin: ItemLocationMixin
+  name: baseItem
+  nilable: true
+  type: table
+- name: filter
+  nilable: true
+  type: number
 outputs:
 - innerType: number
   name: primaryRuneforgePowerIDs

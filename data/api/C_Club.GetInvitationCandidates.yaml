@@ -8,6 +8,21 @@ inputs:
 - snn
 - snnb
 - snnbs
+newinputs:
+- name: filter
+  nilable: true
+  type: string
+- name: maxResults
+  nilable: true
+  type: number
+- name: cursorPosition
+  nilable: true
+  type: number
+- name: allowFullMatch
+  nilable: true
+  type: bool
+- name: clubId
+  type: string
 outputs:
 - innerType: ClubInvitationCandidateInfo
   name: candidates

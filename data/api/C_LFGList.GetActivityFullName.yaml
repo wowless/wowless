@@ -5,6 +5,15 @@ inputs:
 - n
 - nn
 - nnb
+newinputs:
+- name: activityID
+  type: number
+- name: questID
+  nilable: true
+  type: number
+- name: showWarmode
+  nilable: true
+  type: bool
 outputs:
 - name: fullName
   type: string

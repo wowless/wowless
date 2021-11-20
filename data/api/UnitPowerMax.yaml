@@ -5,6 +5,14 @@ inputs:
 - s
 - sn
 - snb
+newinputs:
+- name: unitToken
+  type: string
+- default: NumPowerTypes
+  name: powerType
+  type: number
+- name: unmodified
+  type: bool
 outputs:
 - name: maxPower
   type: number

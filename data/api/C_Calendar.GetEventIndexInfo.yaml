@@ -5,6 +5,15 @@ inputs:
 - s
 - sn
 - snn
+newinputs:
+- name: eventID
+  type: string
+- name: monthOffset
+  nilable: true
+  type: number
+- name: monthDay
+  nilable: true
+  type: number
 outputs:
 - name: eventIndexInfo
   nilable: true

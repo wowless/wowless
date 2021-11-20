@@ -95,6 +95,7 @@ describe('api', function()
             comment = true,
             inputs = true,
             name = true,
+            newinputs = true,
             outputs = true,
             protection = true,
             returns = true,

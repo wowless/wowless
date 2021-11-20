@@ -5,4 +5,15 @@ inputs:
 - nn
 - nnn
 - nnnn
+newinputs:
+- name: categoryID
+  type: number
+- name: activityID
+  type: number
+- default: 0
+  name: filter
+  type: number
+- default: 0
+  name: preferredFilters
+  type: number
 outputs: {}

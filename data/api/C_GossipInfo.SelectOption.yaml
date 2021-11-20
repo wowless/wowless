@@ -5,4 +5,13 @@ inputs:
 - n
 - ns
 - nsb
+newinputs:
+- name: index
+  type: number
+- name: text
+  nilable: true
+  type: string
+- name: confirmed
+  nilable: true
+  type: bool
 outputs: {}

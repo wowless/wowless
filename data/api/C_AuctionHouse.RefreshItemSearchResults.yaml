@@ -5,4 +5,13 @@ inputs:
 - t
 - tn
 - tnn
+newinputs:
+- name: itemKey
+  type: C_AuctionHouse.ItemKey
+- name: minLevelFilter
+  nilable: true
+  type: number
+- name: maxLevelFilter
+  nilable: true
+  type: number
 outputs: {}

@@ -5,4 +5,14 @@ inputs:
 - n
 - nn
 - nnt
+newinputs:
+- name: recipeSpellID
+  type: number
+- default: 1
+  name: numCasts
+  type: number
+- innerType: OptionalReagentInfo
+  name: optionalReagents
+  nilable: true
+  type: table
 outputs: {}

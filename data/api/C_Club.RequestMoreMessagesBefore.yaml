@@ -5,6 +5,17 @@ inputs:
 - ss
 - sst
 - sstn
+newinputs:
+- name: clubId
+  type: string
+- name: streamId
+  type: string
+- name: messageId
+  nilable: true
+  type: C_Club.ClubMessageIdentifier
+- name: count
+  nilable: true
+  type: number
 outputs:
 - name: alreadyHasMessages
   type: bool

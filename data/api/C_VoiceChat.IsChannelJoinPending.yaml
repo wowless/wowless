@@ -5,6 +5,15 @@ inputs:
 - n
 - ns
 - nss
+newinputs:
+- name: channelType
+  type: number
+- name: clubId
+  nilable: true
+  type: string
+- name: streamId
+  nilable: true
+  type: string
 outputs:
 - name: isPending
   type: bool

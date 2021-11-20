@@ -7,4 +7,16 @@ inputs:
 - sss
 - sssn
 - sssnn
+newinputs:
+- name: name
+  type: string
+- name: shortName
+  nilable: true
+  type: string
+- name: description
+  type: string
+- name: clubType
+  type: number
+- name: avatarId
+  type: number
 outputs: {}

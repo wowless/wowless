@@ -6,4 +6,16 @@ inputs:
 - sb
 - sbb
 - sbbb
+newinputs:
+- name: targetName
+  type: string
+- name: tank
+  nilable: true
+  type: bool
+- name: healer
+  nilable: true
+  type: bool
+- name: dps
+  nilable: true
+  type: bool
 outputs: {}

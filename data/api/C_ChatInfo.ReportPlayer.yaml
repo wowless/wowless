@@ -5,4 +5,14 @@ inputs:
 - s
 - st
 - sts
+newinputs:
+- name: complaintType
+  type: string
+- mixin: PlayerLocationMixin
+  name: playerLocation
+  nilable: true
+  type: table
+- name: comment
+  nilable: true
+  type: string
 outputs: {}

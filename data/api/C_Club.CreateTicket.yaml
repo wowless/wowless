@@ -6,4 +6,16 @@ inputs:
 - sn
 - snn
 - snns
+newinputs:
+- name: clubId
+  type: string
+- name: allowedRedeemCount
+  nilable: true
+  type: number
+- name: duration
+  nilable: true
+  type: number
+- name: defaultStreamId
+  nilable: true
+  type: string
 outputs: {}

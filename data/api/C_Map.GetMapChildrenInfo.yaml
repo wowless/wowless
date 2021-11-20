@@ -5,6 +5,15 @@ inputs:
 - n
 - nn
 - nnb
+newinputs:
+- name: uiMapID
+  type: number
+- name: mapType
+  nilable: true
+  type: number
+- name: allDescendants
+  nilable: true
+  type: bool
 outputs:
 - innerType: UiMapDetails
   name: info

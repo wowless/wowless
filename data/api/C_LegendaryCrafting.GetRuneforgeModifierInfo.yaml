@@ -6,6 +6,18 @@ inputs:
 - tn
 - tnn
 - tnnt
+newinputs:
+- mixin: ItemLocationMixin
+  name: baseItem
+  type: table
+- name: powerID
+  nilable: true
+  type: number
+- name: addedModifierIndex
+  type: number
+- innerType: number
+  name: modifiers
+  type: table
 outputs:
 - name: name
   type: string

@@ -7,6 +7,7 @@ local fieldOrder = {
   'comment',
   'versions',
   'inputs',
+  'newinputs',
   'outputs',
   'mixin',
   'protected',

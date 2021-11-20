@@ -5,4 +5,18 @@ inputs:
 - tnn
 - tnnn
 - tnnnn
+newinputs:
+- mixin: ItemLocationMixin
+  name: item
+  type: table
+- name: duration
+  type: number
+- name: quantity
+  type: number
+- name: bid
+  nilable: true
+  type: number
+- name: buyout
+  nilable: true
+  type: number
 outputs: {}

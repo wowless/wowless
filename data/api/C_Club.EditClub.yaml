@@ -8,4 +8,22 @@ inputs:
 - ssss
 - ssssn
 - ssssns
+newinputs:
+- name: clubId
+  type: string
+- name: name
+  nilable: true
+  type: string
+- name: shortName
+  nilable: true
+  type: string
+- name: description
+  nilable: true
+  type: string
+- name: avatarId
+  nilable: true
+  type: number
+- name: broadcast
+  nilable: true
+  type: string
 outputs: {}

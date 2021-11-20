@@ -6,4 +6,18 @@ inputs:
 - sss
 - ssss
 - ssssb
+newinputs:
+- name: clubId
+  type: string
+- name: streamId
+  type: string
+- name: name
+  nilable: true
+  type: string
+- name: subject
+  nilable: true
+  type: string
+- name: leadersAndModeratorsOnly
+  nilable: true
+  type: bool
 outputs: {}

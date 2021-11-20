@@ -5,4 +5,18 @@ inputs:
 - ttb
 - ttbn
 - ttbnn
+newinputs:
+- name: itemKey
+  type: C_AuctionHouse.ItemKey
+- innerType: AuctionHouseSortType
+  name: sorts
+  type: table
+- name: separateOwnerItems
+  type: bool
+- default: 0
+  name: minLevelFilter
+  type: number
+- default: 0
+  name: maxLevelFilter
+  type: number
 outputs: {}
