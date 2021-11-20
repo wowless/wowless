@@ -72,7 +72,6 @@ describe('api', function()
             string = true,
             table = true,
             unknown = true,
-            ['C_ConfigurationWarnings.ConfigurationWarning'] = true,  -- TODO remove this
           }
           if t.newinputs then
             assert.same('table', type(t.newinputs))

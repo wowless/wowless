@@ -125,7 +125,9 @@ local function t2ty(t, ns, mixin)
   elseif types[t] then
     return t
   elseif ns and tys[ns .. '.' .. t] then
-    return ns .. '.' .. t
+    local n = ns .. '.' .. t
+    local b = tabs[n]
+    return b and b.Type == 'Structure' and n or 'number'
   elseif tys[t] then
     return t
   else
