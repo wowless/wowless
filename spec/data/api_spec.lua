@@ -57,6 +57,37 @@ describe('api', function()
             assert.True(ty == 'string' or ty == 'nil')
           end
         end)
+        it('has valid newinputs', function()
+          local fields = {
+            default = true,
+            innerType = true,
+            mixin = true,
+            name = true,
+            nilable = true,
+            type = true,
+          }
+          local types = {
+            bool = true,
+            number = true,
+            string = true,
+            table = true,
+            unknown = true,
+            ['C_ConfigurationWarnings.ConfigurationWarning'] = true,  -- TODO remove this
+          }
+          if t.newinputs then
+            assert.same('table', type(t.newinputs))
+            for _, v in ipairs(t.newinputs) do
+              assert.same('table', type(v))
+              for k in pairs(v) do
+                assert.True(fields[k])
+              end
+              local ty = assert(v.type)
+              assert.same('string', type(ty))
+              assert.truthy(types[ty] or data.structures[ty], ('invalid type %q'):format(ty))
+              assert.True(v.mixin == nil or type(v.mixin) == 'string')
+            end
+          end
+        end)
         it('has valid outputs', function()
           local fields = {
             default = true,
