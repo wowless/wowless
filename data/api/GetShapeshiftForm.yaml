@@ -1,8 +1,8 @@
 ---
 name: GetShapeshiftForm
 status: unimplemented
-inputs:
-- ''
-- b
+newinputs:
+- nilable: true
+  type: bool
 outputs:
 - type: number

@@ -4,9 +4,10 @@ status: unimplemented
 versions:
 - TBC
 - Vanilla
-inputs:
-- n
-- nb
+newinputs:
+- type: number
+- nilable: true
+  type: bool
 outputs:
 - type: string
 - type: string

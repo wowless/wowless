@@ -1,9 +1,9 @@
 ---
 name: C_CurrencyInfo.GetCurrencyInfo
 status: stub
-inputs:
-- ''
-- n
+newinputs:
+- nilable: true
+  type: number
 outputs:
 - type: table
 returns:

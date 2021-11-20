@@ -1,8 +1,9 @@
 ---
 name: BankButtonIDToInvSlotID
 status: unimplemented
-inputs:
-- n
-- nn
+newinputs:
+- type: number
+- nilable: true
+  type: number
 outputs:
 - type: number
