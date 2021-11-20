@@ -1,11 +1,11 @@
 ---
 name: GetAchievementCriteriaInfo
-status: stub
-inputs:
-- ss
-- nn
-- ns
-- sn
+status: unimplemented
+newinputs:
+- name: achievementID
+  type: number
+- name: criteriaIndex
+  type: number
 outputs:
 - type: string
 - type: number
@@ -20,17 +20,3 @@ outputs:
 - type: bool
 - type: number
 - type: number
-returns:
-- 0
-- 0
-- false
-- 4
-- 5
-- Test
-- 0
-- 0
-- 5
-- 109
-- true
-- 30
-- 5
