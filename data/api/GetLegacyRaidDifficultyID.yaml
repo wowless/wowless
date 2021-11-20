@@ -3,6 +3,6 @@ name: GetLegacyRaidDifficultyID
 status: unimplemented
 versions:
 - Mainline
-inputs: ''
+newinputs: {}
 outputs:
 - type: number

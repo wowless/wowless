@@ -1,7 +1,8 @@
 ---
 name: GetItemQualityColor
 status: implemented
-inputs: n
+newinputs:
+- type: number
 outputs:
 - name: r
   type: number

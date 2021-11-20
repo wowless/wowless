@@ -3,6 +3,6 @@ name: GetRaidDifficultyID
 status: unimplemented
 versions:
 - Mainline
-inputs: ''
+newinputs: {}
 outputs:
 - type: number

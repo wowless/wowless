@@ -1,7 +1,8 @@
 ---
 name: GetActionLossOfControlCooldown
 status: unimplemented
-inputs: n
+newinputs:
+- type: number
 outputs:
 - type: number
 - type: number

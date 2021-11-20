@@ -1,5 +1,6 @@
 ---
 name: SaveBindings
 status: unimplemented
-inputs: n
+newinputs:
+- type: number
 outputs: {}

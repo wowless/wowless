@@ -1,6 +1,6 @@
 ---
 name: Kiosk.IsEnabled
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: bool

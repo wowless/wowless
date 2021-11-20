@@ -1,7 +1,7 @@
 ---
 name: BNGetInfo
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: nil
 - type: string

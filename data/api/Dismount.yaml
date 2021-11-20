@@ -1,5 +1,5 @@
 ---
 name: Dismount
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs: {}

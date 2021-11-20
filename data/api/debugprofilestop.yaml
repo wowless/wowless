@@ -1,6 +1,6 @@
 ---
 name: debugprofilestop
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: number

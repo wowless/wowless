@@ -4,7 +4,8 @@ status: unimplemented
 versions:
 - TBC
 - Vanilla
-inputs: s
+newinputs:
+- type: string
 outputs:
 - type: number
 - type: number

@@ -1,6 +1,6 @@
 ---
 name: HasExtraActionBar
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: oneornil

@@ -1,7 +1,8 @@
 ---
 name: C_Map.GetMapInfo
 status: stub
-inputs: n
+newinputs:
+- type: number
 outputs:
 - name: info
   type: C_Map.UiMapDetails

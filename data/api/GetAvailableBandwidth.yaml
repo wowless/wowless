@@ -1,6 +1,6 @@
 ---
 name: GetAvailableBandwidth
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: number

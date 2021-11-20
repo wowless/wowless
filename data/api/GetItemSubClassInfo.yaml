@@ -1,7 +1,9 @@
 ---
 name: GetItemSubClassInfo
 status: stub
-inputs: nn
+newinputs:
+- type: number
+- type: number
 outputs:
 - name: name
   type: string

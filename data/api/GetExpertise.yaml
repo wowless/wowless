@@ -1,7 +1,7 @@
 ---
 name: GetExpertise
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: number
 - type: number

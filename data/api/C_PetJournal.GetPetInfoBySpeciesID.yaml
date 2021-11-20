@@ -1,7 +1,8 @@
 ---
 name: C_PetJournal.GetPetInfoBySpeciesID
 status: unimplemented
-inputs: n
+newinputs:
+- type: number
 outputs:
 - type: string
 - type: string

@@ -1,7 +1,7 @@
 ---
 name: C_LFGList.GetFilteredSearchResults
 status: stub
-inputs: ''
+newinputs: {}
 outputs:
 - type: number
 - type: table

@@ -1,7 +1,8 @@
 ---
 name: UnitClassBase
 status: stub
-inputs: s
+newinputs:
+- type: string
 outputs:
 - type: string
 - type: number

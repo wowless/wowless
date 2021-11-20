@@ -1,6 +1,7 @@
 ---
 name: GetSchoolString
 status: unimplemented
-inputs: n
+newinputs:
+- type: number
 outputs:
 - type: string

@@ -1,6 +1,7 @@
 ---
 name: GetCombatRating
 status: unimplemented
-inputs: n
+newinputs:
+- type: number
 outputs:
 - type: number

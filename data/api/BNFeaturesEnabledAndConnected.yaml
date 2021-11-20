@@ -1,6 +1,6 @@
 ---
 name: BNFeaturesEnabledAndConnected
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: bool

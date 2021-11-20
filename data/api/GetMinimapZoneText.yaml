@@ -1,6 +1,6 @@
 ---
 name: GetMinimapZoneText
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: string

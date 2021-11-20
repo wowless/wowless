@@ -1,4 +1,5 @@
 ---
 name: UnitCastingInfo
 status: unimplemented
-inputs: s
+newinputs:
+- type: string

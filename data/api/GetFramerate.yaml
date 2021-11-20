@@ -1,6 +1,6 @@
 ---
 name: GetFramerate
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: number

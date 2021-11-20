@@ -1,7 +1,7 @@
 ---
 name: C_Map.GetFallbackWorldMapID
 status: stub
-inputs: ''
+newinputs: {}
 outputs:
 - type: number
 returns:

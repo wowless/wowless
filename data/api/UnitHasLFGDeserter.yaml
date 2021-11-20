@@ -1,6 +1,7 @@
 ---
 name: UnitHasLFGDeserter
 status: unimplemented
-inputs: s
+newinputs:
+- type: string
 outputs:
 - type: bool

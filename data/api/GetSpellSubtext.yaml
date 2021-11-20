@@ -4,6 +4,7 @@ status: unimplemented
 versions:
 - TBC
 - Vanilla
-inputs: n
+newinputs:
+- type: number
 outputs:
 - type: nil

@@ -1,6 +1,6 @@
 ---
 name: GetArmorPenetration
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: number

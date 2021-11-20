@@ -1,7 +1,7 @@
 ---
 name: GetScreenResolutions
 status: stub
-inputs: ''
+newinputs: {}
 outputs:
 - type: table
 returns:

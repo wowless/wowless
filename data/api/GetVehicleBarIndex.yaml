@@ -3,6 +3,6 @@ name: GetVehicleBarIndex
 status: unimplemented
 versions:
 - Mainline
-inputs: ''
+newinputs: {}
 outputs:
 - type: number

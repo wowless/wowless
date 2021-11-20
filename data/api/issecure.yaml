@@ -1,7 +1,7 @@
 ---
 name: issecure
 status: implemented
-inputs: ''
+newinputs: {}
 outputs:
 - name: isSecure
   type: bool

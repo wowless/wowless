@@ -1,7 +1,8 @@
 ---
 name: C_Map.GetMapArtLayers
 status: stub
-inputs: n
+newinputs:
+- type: number
 outputs:
 - type: table
 returns:

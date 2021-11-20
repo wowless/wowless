@@ -1,6 +1,6 @@
 ---
 name: HasArtifactEquipped
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: oneornil

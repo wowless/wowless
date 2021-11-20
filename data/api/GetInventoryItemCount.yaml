@@ -1,6 +1,8 @@
 ---
 name: GetInventoryItemCount
 status: unimplemented
-inputs: sn
+newinputs:
+- type: string
+- type: number
 outputs:
 - type: number

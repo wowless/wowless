@@ -1,6 +1,10 @@
 ---
 name: UseAction
 status: unimplemented
-inputs: nxs
+newinputs:
+- type: number
+- nilable: true
+  type: unknown
+- type: string
 outputs: {}
 protection: secure

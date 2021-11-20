@@ -1,7 +1,7 @@
 ---
 name: C_PvP.GetRandomBGInfo
 status: stub
-inputs: ''
+newinputs: {}
 outputs:
 - type: table
 returns:

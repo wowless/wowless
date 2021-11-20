@@ -3,7 +3,8 @@ name: GetDifficultyInfo
 status: unimplemented
 versions:
 - Mainline
-inputs: n
+newinputs:
+- type: number
 outputs:
 - type: string
 - type: string

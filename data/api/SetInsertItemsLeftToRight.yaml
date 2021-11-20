@@ -1,5 +1,6 @@
 ---
 name: SetInsertItemsLeftToRight
 status: unimplemented
-inputs: b
+newinputs:
+- type: bool
 outputs: {}

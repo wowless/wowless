@@ -1,7 +1,7 @@
 ---
 name: GetNumBankSlots
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: number
 - type: oneornil

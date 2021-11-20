@@ -1,6 +1,6 @@
 ---
 name: GetCurrentResolution
 status: unimplemented
-inputs: ''
+newinputs: {}
 outputs:
 - type: number

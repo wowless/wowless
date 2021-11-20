@@ -3,6 +3,7 @@ name: UnitHonorMax
 status: unimplemented
 versions:
 - Mainline
-inputs: s
+newinputs:
+- type: string
 outputs:
 - type: number

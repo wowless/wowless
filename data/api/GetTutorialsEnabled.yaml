@@ -3,6 +3,6 @@ name: GetTutorialsEnabled
 status: unimplemented
 versions:
 - Mainline
-inputs: ''
+newinputs: {}
 outputs:
 - type: bool

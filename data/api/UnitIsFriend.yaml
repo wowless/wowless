@@ -1,6 +1,8 @@
 ---
 name: UnitIsFriend
 status: unimplemented
-inputs: ss
+newinputs:
+- type: string
+- type: string
 outputs:
 - type: oneornil

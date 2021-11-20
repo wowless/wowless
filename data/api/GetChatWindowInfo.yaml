@@ -1,7 +1,8 @@
 ---
 name: GetChatWindowInfo
 status: unimplemented
-inputs: n
+newinputs:
+- type: number
 outputs:
 - name: name
   type: string
