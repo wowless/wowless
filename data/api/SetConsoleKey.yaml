@@ -1,7 +1,8 @@
 ---
 name: SetConsoleKey
 status: unimplemented
-inputs:
-- s
-- x
+newinputs:
+- name: key
+  nilable: true
+  type: string
 outputs: {}
