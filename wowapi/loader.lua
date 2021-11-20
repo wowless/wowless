@@ -149,6 +149,12 @@ local function loadFunctions(version, env)
               assert(
                 param.nilable or param.default ~= nil,
                 ('arg %d (%q) of %q is not nilable, but nil was passed'):format(i, param.name, fn))
+            else
+              local ty = type(arg)
+              local nty = ty == 'boolean' and 'bool' or ty
+              assert(
+                nty == param.type,
+                ('arg %d (%q) of %q is of type %q, but %q was passed'):format(i, param.name, fn, param.type, nty))
             end
           end
           return bfn(...)
