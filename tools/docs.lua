@@ -79,10 +79,22 @@ for k, v in pairs(require('wowapi.data').structures) do
     tys[k] = 't'
   end
 end
+local expectedArgumentKeys = {
+  Default = true,
+  Documentation = true,
+  InnerType = true,
+  Mixin = true,
+  Name = true,
+  Nilable = true,
+  Type = true,
+}
 local function insig(fn, ns)
   local inputs = ''
   local firstDefault = nil
   for i, a in ipairs(fn.Arguments or {}) do
+    for k in pairs(a) do
+      assert(expectedArgumentKeys[k], ('invalid argument key %q in %q'):format(k, fn.Name))
+    end
     local c = types[a.Type] or (ns and tys[ns .. '.' .. a.Type]) or tys[a.Type] or (enum[a.Type] and 'n')
     if not c then
       print('unknown type ' .. a.Type)
