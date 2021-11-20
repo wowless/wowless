@@ -146,7 +146,9 @@ local function loadFunctions(version, env)
           for i, param in ipairs(sig) do
             local arg = select(i, ...)
             if arg == nil then
-              assert(param.nilable, ('arg %d (%q) of %q is not nilable, but nil was passed'):format(i, param.name, fn))
+              assert(
+                param.nilable or param.default ~= nil,
+                ('arg %d (%q) of %q is not nilable, but nil was passed'):format(i, param.name, fn))
             end
           end
           return bfn(...)
