@@ -135,7 +135,7 @@ local function getFn(api, env)
   end
 end
 
-local function loadFunctions(version, env)
+local function loadFunctions(version, env, log)
   local fns = {}
   for fn, api in pairs(loadApis(version)) do
     local bfn = getFn(api, env)
@@ -182,13 +182,23 @@ local function loadFunctions(version, env)
         error(('invalid arguments to %q, expected one of {%s}, got %q'):format(fn, table.concat(apisigs, ', '), fsig))
       end
     end)()
+    local function wrapimpl(...)
+      log(4, 'entering %s', api.name)
+      local t = {...}
+      local n = select('#', ...)
+      return (function(success, ...)
+        log(4, 'leaving %s (%s)', api.name, success and 'success' or 'failure')
+        assert(success, ...)
+        return ...
+      end)(pcall(function() return impl(unpack(t, 1, n)) end))
+    end
     local dot = fn:find('%.')
     if dot then
       local p = fn:sub(1, dot-1)
       fns[p] = fns[p] or {}
-      fns[p][fn:sub(dot+1)] = impl
+      fns[p][fn:sub(dot+1)] = wrapimpl
     else
-      fns[fn] = impl
+      fns[fn] = wrapimpl
     end
   end
   return fns
