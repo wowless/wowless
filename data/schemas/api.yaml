@@ -1,0 +1,16 @@
+---
+name: api
+type:
+  record:
+    name: string
+    status: string
+    newinputs:
+      sequenceof:
+        record:
+          name: string
+          type: string
+    outputs:
+      sequenceof:
+        record:
+          name: string
+          type: string
