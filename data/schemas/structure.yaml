@@ -2,10 +2,10 @@
 name: structure
 type:
   record:
-    name: string
-    status: string
     fields:
       sequenceof:
         record:
           name: string
           type: string
+    name: string
+    status: string

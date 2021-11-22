@@ -3,7 +3,6 @@ name: api
 type:
   record:
     name: string
-    status: string
     newinputs:
       sequenceof:
         record:
@@ -14,3 +13,4 @@ type:
         record:
           name: string
           type: string
+    status: string
