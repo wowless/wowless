@@ -1,0 +1,23 @@
+---
+name: uiobject
+type: record
+fields:
+  fields:
+    type: map
+    valuetype:
+      type: record
+      fields:
+        type: string
+  inherits:
+    type: sequence
+    seqtype: string
+  methods:
+    type: map
+    valuetype:
+      type: record
+      fields:
+        fields:
+          type: sequence
+          seqtype: string
+        status:
+          type: string
