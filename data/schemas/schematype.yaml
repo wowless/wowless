@@ -1,0 +1,12 @@
+---
+name: schematype
+type:
+  oneof:
+  - string
+  - record:
+      record:
+        mapof: schematype
+  - record:
+      mapof: schematype
+  - record:
+      sequenceof: schematype
