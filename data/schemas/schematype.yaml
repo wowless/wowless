@@ -10,4 +10,7 @@ type:
   - record:
       mapof: schematype
   - record:
+      oneof:
+        sequenceof: schematype
+  - record:
       sequenceof: schematype
