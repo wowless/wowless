@@ -1,0 +1,7 @@
+---
+name: state
+type:
+  record:
+    name: string
+    value:
+      mapof: any

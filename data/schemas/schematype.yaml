@@ -2,6 +2,7 @@
 name: schematype
 type:
   oneof:
+  - any
   - string
   - record:
       record:
