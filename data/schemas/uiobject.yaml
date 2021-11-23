@@ -6,7 +6,11 @@ type:
       type:
         mapof:
           record:
-            type: string
+            type:
+              type:
+                enum:
+                - bool
+                - number
     inherits:
       type:
         sequenceof: string
@@ -17,6 +21,30 @@ type:
             fields:
               type:
                 sequenceof: string
+            outputs:
+              type:
+                sequenceof:
+                  record:
+                    name:
+                      type: string
+                    type:
+                      required: true
+                      type: string
             status:
               required: true
-              type: string
+              type:
+                enum:
+                - getter
+                - implemented
+                - setter
+                - unimplemented
+            versions:
+              type:
+                sequenceof:
+                  enum:
+                  - Mainline
+                  - TBC
+                  - Vanilla
+    name:
+      required: true
+      type: string

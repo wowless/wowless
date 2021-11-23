@@ -10,7 +10,7 @@ local function validate(schematype, v)
   elseif schematype == 'schematype' then
     validate(magicSchemaType, v)
   elseif type(schematype) ~= 'table' then
-    error('unexpected schema type ' .. schematype)
+    error('unexpected schema type ' .. tostring(schematype))
   elseif schematype.record then
     assert(type(v) == 'table', 'expected table')
     for k2, v2 in pairs(v) do
