@@ -11,7 +11,7 @@ local function validate(schematype, v)
     assert(type(v) == 'table', 'expected table')
     -- TODO required/optional fields
     for k2, v2 in pairs(v) do
-      local k2ty = schematype.record[k2]
+      local k2ty = schematype.record[k2].type
       assert(k2ty, 'unknown field ' .. k2)
       validate(k2ty, v2)
     end

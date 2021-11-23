@@ -7,14 +7,24 @@ type:
   - string
   - record:
       record:
-        mapof: schematype
+        required: true
+        type:
+          mapof: schematype
   - record:
       enum:
-        sequenceof: string
+        required: true
+        type:
+          sequenceof: string
   - record:
-      mapof: schematype
+      mapof:
+        required: true
+        type: schematype
   - record:
       oneof:
-        sequenceof: schematype
+        required: true
+        type:
+          sequenceof: schematype
   - record:
-      sequenceof: schematype
+      sequenceof:
+        required: true
+        type: schematype
