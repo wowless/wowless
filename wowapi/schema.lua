@@ -3,6 +3,8 @@ local function validate(schematype, v)
     return
   elseif schematype == 'string' then
     assert(type(v) == 'string', 'expected string')
+  elseif schematype == 'boolean' then
+    assert(type(v) == 'boolean', 'expected boolean')
   elseif type(schematype) ~= 'table' then
     error('expected type table')
   elseif schematype.record then

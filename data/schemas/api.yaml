@@ -2,15 +2,32 @@
 name: api
 type:
   record:
+    inputs:
+      sequenceof: string
     name: string
     newinputs:
       sequenceof:
         record:
+          default: any
+          innerType: string
+          mixin: string
           name: string
+          nilable: boolean
           type: string
     outputs:
       sequenceof:
         record:
+          default: any
+          innerType: string
+          mixin: string
           name: string
+          nilable: boolean
           type: string
+    protection: string
+    returns:
+      sequenceof: any
+    states:
+      sequenceof: string
     status: string
+    versions:
+      sequenceof: string
