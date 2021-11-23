@@ -152,20 +152,53 @@ describe('schema', function()
       end)
     end)
     describe('oneof', function()
-      local ty = {
-        oneof = {},
-      }
-      it('rejects nil', function()
-        reject(ty, nil)
+      it('rejects nil unless any is allowed', function()
+        reject({ oneof = {} }, nil)
+        reject({ oneof = { 'string' } }, nil)
+        accept({ oneof = { 'any' } }, nil)
       end)
-      it('rejects numbers', function()
-        reject(ty, 42)
+      it('rejects numbers unless any is allowed', function()
+        reject({ oneof = {} }, 42)
+        reject({ oneof = { 'string' } }, 42)
+        accept({ oneof = { 'any' } }, 42)
       end)
-      it('rejects strings', function()
-        reject(ty, 'foo')
+      it('accepts strings when specified', function()
+        reject({ oneof = {} }, 'foo')
+        accept({ oneof = { 'string' } }, 'foo')
+        accept({ oneof = { 'any' } }, 'foo')
       end)
-      it('rejects empty tables', function()
-        reject(ty, {})
+      it('rejects empty tables unless any is allowed', function()
+        reject({ oneof = {} }, {})
+        reject({ oneof = { 'string' } }, {})
+        accept({ oneof = { 'any' } }, {})
+      end)
+      it('accepts oneof each', function()
+        local ty = {
+          oneof = {
+            'string',
+            { mapof = 'string' },
+            { sequenceof = 'string' },
+          },
+        }
+        accept(ty, 'foo')
+        accept(ty, { foo = 'bar' })
+        accept(ty, { 'foo', 'bar' })
+      end)
+      it('nests', function()
+        local ty = {
+          oneof = {
+            'string',
+            {
+              oneof = {
+                { mapof = 'string' },
+                { sequenceof = 'string' },
+              },
+            },
+          },
+        }
+        accept(ty, 'foo')
+        accept(ty, { foo = 'bar' })
+        accept(ty, { 'foo', 'bar' })
       end)
     end)
   end)
