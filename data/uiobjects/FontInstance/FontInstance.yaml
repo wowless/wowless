@@ -5,6 +5,8 @@ inherits:
 methods:
   GetFont:
     status: implemented
+  GetFontObject:
+    status: unimplemented
   GetShadowColor:
     outputs:
     - type: number
