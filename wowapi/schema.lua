@@ -1,5 +1,9 @@
 local magicSchemaType = require('wowapi.yaml').parseFile('data/schemas/schematype.yaml').type
 
+local domains = {
+  structure = require('wowapi.data').structures,
+}
+
 local function validate(schematype, v)
   if schematype == 'any' then
     return
@@ -65,6 +69,10 @@ local function validate(schematype, v)
       seen[vv] = true
     end
     assert(not schematype.enumset.nonempty or next(seen), 'missing value in enumset')
+  elseif schematype.ref then
+    assert(type(v) == 'string', 'expected string in ref')
+    local domain = assert(domains[schematype.ref], 'bad schema: invalid domain')
+    assert(domain[v], 'unknown domain value ' .. v)
   else
     error('expected record/mapof/sequenceof/oneof')
   end

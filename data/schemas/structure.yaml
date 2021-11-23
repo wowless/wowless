@@ -20,7 +20,15 @@ type:
               type: boolean
             type:
               required: true
-              type: string
+              type:
+                oneof:
+                - enum:
+                  - bool
+                  - number
+                  - string
+                  - table
+                  - unknown
+                - ref: structure
     name:
       required: true
       type: string

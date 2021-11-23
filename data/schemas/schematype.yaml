@@ -44,6 +44,12 @@ type:
         type:
           sequenceof: schematype
   - record:
+      ref:
+        required: true
+        type:
+          enum:
+          - structure
+  - record:
       sequenceof:
         required: true
         type: schematype
