@@ -15,7 +15,8 @@ local function validate(schematype, v)
     end
   elseif schematype.mapof then
     assert(type(v) == 'table', 'expected table')
-    for _, v2 in pairs(v) do
+    for k2, v2 in pairs(v) do
+      assert(type(k2) == 'string', 'expected string key')
       validate(schematype.mapof, v2)
     end
   elseif schematype.sequenceof then
