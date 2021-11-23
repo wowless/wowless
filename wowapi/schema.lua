@@ -29,7 +29,12 @@ local function validate(schematype, v)
     end
     assert(max == #v, 'expected array')
   elseif schematype.oneof then
-    error('unsupported')
+    for _, ty in ipairs(schematype.oneof) do
+      if pcall(function() validate(ty, v) end) then
+        return
+      end
+    end
+    error('did not validate against any element of oneof')
   else
     error('expected record/mapof/sequenceof/oneof')
   end
