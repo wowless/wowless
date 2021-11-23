@@ -16,6 +16,17 @@ type:
         type:
           sequenceof: string
   - record:
+      enumset:
+        required: true
+        type:
+          record:
+            nonempty:
+              type: boolean
+            values:
+              required: true
+              type:
+                sequenceof: string
+  - record:
       mapof:
         required: true
         type: schematype

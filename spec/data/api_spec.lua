@@ -6,19 +6,6 @@ describe('api', function()
       assert(filename:sub(-5) == '.yaml', 'invalid file ' .. filename)
       describe(filename, function()
         local t = yaml.parseFile('data/api/' .. filename)
-        it('has a valid version list', function()
-          local valid = {
-            Vanilla = true,
-            TBC = true,
-            Mainline = true,
-          }
-          if t.versions then
-            assert.True(#t.versions > 0, 'empty version list')
-            for _, v in ipairs(t.versions) do
-              assert.True(valid[v], ('invalid version %q'):format(v))
-            end
-          end
-        end)
         it('has valid newinputs', function()
           local types = {
             bool = true,

@@ -40,28 +40,6 @@ describe('uiobjects', function()
             end
           end)
         end)
-        describe('methods', function()
-          for methodname, method in pairs(cfg.methods) do
-            describe(methodname, function()
-              it('has valid versions', function()
-                if method.versions ~= nil then
-                  assert.same('table', type(method.versions))
-                  local valid = {
-                    Vanilla = true,
-                    TBC = true,
-                    Mainline = true,
-                  }
-                  local seen = {}
-                  for _, v in ipairs(method.versions) do
-                    assert.True(valid[v])
-                    assert.Nil(seen[v])
-                    seen[v] = true
-                  end
-                end
-              end)
-            end)
-          end
-        end)
       end)
     end
   end

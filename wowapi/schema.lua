@@ -51,6 +51,20 @@ local function validate(schematype, v)
       end
     end
     error('did not match against any element of enum')
+  elseif schematype.enumset then
+    assert(type(v) == 'table', 'expected table for enumset')
+    local values = {}
+    for _, vv in ipairs(schematype.enumset.values) do
+      values[vv] = true
+    end
+    local seen = {}
+    for _, vv in ipairs(v) do
+      assert(type(vv) == 'string', 'expected string value in enumset')
+      assert(values[vv], 'unknown value ' .. vv)
+      assert(not seen[vv], 'duplicate value ' .. vv)
+      seen[vv] = true
+    end
+    assert(not schematype.enumset.nonempty or next(seen), 'missing value in enumset')
   else
     error('expected record/mapof/sequenceof/oneof')
   end
