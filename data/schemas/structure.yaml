@@ -3,9 +3,15 @@ name: structure
 type:
   record:
     fields:
-      sequenceof:
-        record:
-          name: string
-          type: string
-    name: string
-    status: string
+      required: true
+      type:
+        sequenceof:
+          record:
+            name: string
+            type: string
+    name:
+      required: true
+      type: string
+    status:
+      required: true
+      type: string

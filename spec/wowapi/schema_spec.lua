@@ -61,11 +61,13 @@ describe('schema', function()
     describe('record', function()
       local ty = {
         record = {
-          foo = 'string',
-          bar = 'string',
+          foo = { type = 'string' },
+          bar = { type = 'string' },
           baz = {
-            record = {
-              quux = 'string',
+            type = {
+              record = {
+                quux = { type = 'string' },
+              },
             },
           },
         },

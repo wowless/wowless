@@ -2,6 +2,10 @@
 name: state
 type:
   record:
-    name: string
+    name:
+      required: true
+      type: string
     value:
-      mapof: any
+      required: true
+      type:
+        mapof: any

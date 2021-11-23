@@ -3,14 +3,20 @@ name: uiobject
 type:
   record:
     fields:
-      mapof:
-        record:
-          type: string
+      type:
+        mapof:
+          record:
+            type: string
     inherits:
-      sequenceof: string
+      type:
+        sequenceof: string
     methods:
-      mapof:
-        record:
-          fields:
-            sequenceof: string
-          status: string
+      type:
+        mapof:
+          record:
+            fields:
+              type:
+                sequenceof: string
+            status:
+              required: true
+              type: string

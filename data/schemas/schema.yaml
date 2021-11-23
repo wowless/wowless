@@ -2,5 +2,9 @@
 name: schema
 type:
   record:
-    name: string
-    type: schematype
+    name:
+      required: true
+      type: string
+    type:
+      required: true
+      type: schematype
