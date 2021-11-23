@@ -109,6 +109,18 @@ describe('schema', function()
           baz = { quux = 'baz.quux', extra = 'bad' },
         })
       end)
+      it('handles required fields', function()
+        local rty = {
+          record = {
+            foo = { type = 'string' },
+            bar = { required = true, type = 'string' },
+          }
+        }
+        reject(rty, {})
+        reject(rty, { foo = 'foo' })
+        accept(rty, { bar = 'bar' })
+        accept(rty, { foo = 'foo', bar = 'bar' })
+      end)
     end)
     describe('mapof', function()
       local mstr = { mapof = 'string' }
