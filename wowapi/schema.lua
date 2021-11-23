@@ -1,3 +1,5 @@
+local magicSchemaType = require('wowapi.yaml').parseFile('data/schemas/schematype.yaml').type
+
 local function validate(schematype, v)
   if schematype == 'any' then
     return
@@ -5,8 +7,10 @@ local function validate(schematype, v)
     assert(type(v) == 'string', 'expected string')
   elseif schematype == 'boolean' then
     assert(type(v) == 'boolean', 'expected boolean')
+  elseif schematype == 'schematype' then
+    validate(magicSchemaType, v)
   elseif type(schematype) ~= 'table' then
-    error('expected type table')
+    error('unexpected schema type ' .. schematype)
   elseif schematype.record then
     assert(type(v) == 'table', 'expected table')
     for k2, v2 in pairs(v) do
