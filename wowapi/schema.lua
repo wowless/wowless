@@ -50,7 +50,7 @@ local function validate(schematype, v)
         return
       end
     end
-    error('did not match against any element of enum')
+    error(v .. ' did not match against any element of enum')
   elseif schematype.enumset then
     assert(type(v) == 'table', 'expected table for enumset')
     local values = {}

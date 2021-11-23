@@ -2,14 +2,22 @@
 name: schematype
 type:
   oneof:
-  - any
-  - boolean
-  - string
+  - enum:
+    - any
+    - boolean
+    - schematype
+    - string
   - record:
       record:
         required: true
         type:
-          mapof: schematype
+          mapof:
+            record:
+              required:
+                type: boolean
+              type:
+                required: true
+                type: schematype
   - record:
       enum:
         required: true
