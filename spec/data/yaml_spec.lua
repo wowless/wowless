@@ -5,6 +5,7 @@ local validate = require('wowapi.schema').validate
 local dirschemas = {
   api = 'api',
   state = 'state',
+  structures = 'structure',
 }
 
 describe('yaml', function()

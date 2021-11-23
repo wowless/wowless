@@ -10,9 +10,9 @@ local function validate(schematype, v)
   elseif schematype.record then
     assert(type(v) == 'table', 'expected table')
     for k2, v2 in pairs(v) do
-      local k2ty = schematype.record[k2].type
-      assert(k2ty, 'unknown field ' .. k2)
-      validate(k2ty, v2)
+      local info = schematype.record[k2]
+      assert(info, 'unknown field ' .. k2)
+      validate(info.type, v2)
     end
     for field, info in pairs(schematype.record) do
       assert(not info.required or v[field], 'missing required field ' .. field)
