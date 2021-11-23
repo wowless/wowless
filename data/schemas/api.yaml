@@ -24,7 +24,15 @@ type:
               type: boolean
             type:
               required: true
-              type: string
+              type:
+                oneof:
+                - enum:
+                  - bool
+                  - number
+                  - string
+                  - table
+                  - unknown
+                - ref: structure
     outputs:
       type:
         sequenceof:
@@ -41,7 +49,17 @@ type:
               type: boolean
             type:
               required: true
-              type: string
+              type:
+                oneof:
+                - enum:
+                  - bool
+                  - nil
+                  - number
+                  - oneornil
+                  - string
+                  - table
+                  - unknown
+                - ref: structure
     protection:
       type:
         enum:
