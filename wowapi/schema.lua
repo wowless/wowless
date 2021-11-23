@@ -37,6 +37,14 @@ local function validate(schematype, v)
       end
     end
     error('did not validate against any element of oneof')
+  elseif schematype.enum then
+    assert(type(v) == 'string', 'expected string')
+    for _, ev in ipairs(schematype.enum) do
+      if ev == v then
+        return
+      end
+    end
+    error('did not match against any element of enum')
   else
     error('expected record/mapof/sequenceof/oneof')
   end

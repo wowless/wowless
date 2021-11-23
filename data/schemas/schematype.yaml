@@ -3,10 +3,14 @@ name: schematype
 type:
   oneof:
   - any
+  - boolean
   - string
   - record:
       record:
         mapof: schematype
+  - record:
+      enum:
+        sequenceof: string
   - record:
       mapof: schematype
   - record:
