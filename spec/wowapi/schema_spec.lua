@@ -66,6 +66,42 @@ describe('schema', function()
           baz = { quux = 'baz.quux' },
         })
       end)
+      it('rejects extra fields', function()
+        reject(ty, {
+          foo = 'foo',
+          bar = 'bar',
+          baz = { quux = 'baz.quux' },
+          extra = 'bad',
+        })
+      end)
+      it('rejects extra nested fields', function()
+        reject(ty, {
+          foo = 'foo',
+          bar = 'bar',
+          baz = { quux = 'baz.quux', extra = 'bad' },
+        })
+      end)
+    end)
+    describe('mapof', function()
+    end)
+    describe('sequenceof', function()
+    end)
+    describe('oneof', function()
+      local ty = {
+        oneof = {},
+      }
+      it('rejects nil', function()
+        reject(ty, nil)
+      end)
+      it('rejects numbers', function()
+        reject(ty, 42)
+      end)
+      it('rejects strings', function()
+        reject(ty, 'foo')
+      end)
+      it('rejects empty tables', function()
+        reject(ty, {})
+      end)
     end)
   end)
 end)
