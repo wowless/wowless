@@ -45,7 +45,9 @@ type:
       ref:
         required: true
         type:
-          literal: structure
+          oneof:
+          - literal: state
+          - literal: structure
   - record:
       sequenceof:
         required: true

@@ -68,7 +68,10 @@ type:
         sequenceof: any
     states:
       type:
-        sequenceof: string
+        sequenceof:
+          oneof:
+          - literal: env
+          - ref: state
     status:
       required: true
       type:

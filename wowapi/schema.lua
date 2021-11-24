@@ -1,7 +1,9 @@
 local magicSchemaType = require('wowapi.yaml').parseFile('data/schemas/schematype.yaml').type
 
+local wdata = require('wowapi.data')
 local domains = {
-  structure = require('wowapi.data').structures,
+  state = wdata.state,
+  structure = wdata.structures,
 }
 
 local function validate(schematype, v)

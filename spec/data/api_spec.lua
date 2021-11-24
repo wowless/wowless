@@ -18,9 +18,6 @@ describe('api', function()
           elseif t.status == 'implemented' then
             assert.Nil(t.returns, 'implemented apis cannot specify return values')
             assert.Not.Nil(data.impl[t.name], 'implemented apis must have an implementation')
-            for _, st in ipairs(t.states or {}) do
-              assert.truthy(data.state[st] or st == 'env', 'states must be valid')
-            end
           else
             error('unsupported status')
           end
