@@ -13,7 +13,8 @@ type:
                 - literal: number
     inherits:
       type:
-        sequenceof: string
+        sequenceof:
+          ref: uiobject
     methods:
       type:
         mapof:
@@ -29,7 +30,9 @@ type:
                       type: string
                     type:
                       required: true
-                      type: string
+                      type:
+                        oneof:
+                        - literal: number
             status:
               required: true
               type:

@@ -4,6 +4,7 @@ local wdata = require('wowapi.data')
 local domains = {
   state = wdata.state,
   structure = wdata.structures,
+  uiobject = wdata.uiobjects,
 }
 
 local function validate(schematype, v)

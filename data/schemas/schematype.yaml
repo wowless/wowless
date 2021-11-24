@@ -48,6 +48,7 @@ type:
           oneof:
           - literal: state
           - literal: structure
+          - literal: uiobject
   - record:
       sequenceof:
         required: true
