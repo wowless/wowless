@@ -47,14 +47,9 @@ local function validate(schematype, v)
       end
     end
     error('did not validate against any element of oneof')
-  elseif schematype.enum then
+  elseif schematype.literal then
     assert(type(v) == 'string', 'expected string')
-    for _, ev in ipairs(schematype.enum) do
-      if ev == v then
-        return
-      end
-    end
-    error(v .. ' did not match against any element of enum')
+    assert(v == schematype.literal, 'string literal mismatch')
   elseif schematype.enumset then
     assert(type(v) == 'table', 'expected table for enumset')
     local values = {}

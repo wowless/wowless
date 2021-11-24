@@ -2,27 +2,10 @@
 name: schematype
 type:
   oneof:
-  - enum:
-    - any
-    - boolean
-    - schematype
-    - string
-  - record:
-      record:
-        required: true
-        type:
-          mapof:
-            record:
-              required:
-                type: boolean
-              type:
-                required: true
-                type: schematype
-  - record:
-      enum:
-        required: true
-        type:
-          sequenceof: string
+  - literal: any
+  - literal: boolean
+  - literal: schematype
+  - literal: string
   - record:
       enumset:
         required: true
@@ -35,6 +18,10 @@ type:
               type:
                 sequenceof: string
   - record:
+      literal:
+        required: true
+        type: string
+  - record:
       mapof:
         required: true
         type: schematype
@@ -44,11 +31,21 @@ type:
         type:
           sequenceof: schematype
   - record:
+      record:
+        required: true
+        type:
+          mapof:
+            record:
+              required:
+                type: boolean
+              type:
+                required: true
+                type: schematype
+  - record:
       ref:
         required: true
         type:
-          enum:
-          - structure
+          literal: structure
   - record:
       sequenceof:
         required: true

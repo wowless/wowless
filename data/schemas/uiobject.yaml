@@ -8,9 +8,9 @@ type:
           record:
             type:
               type:
-                enum:
-                - bool
-                - number
+                oneof:
+                - literal: bool
+                - literal: number
     inherits:
       type:
         sequenceof: string
@@ -33,11 +33,11 @@ type:
             status:
               required: true
               type:
-                enum:
-                - getter
-                - implemented
-                - setter
-                - unimplemented
+                oneof:
+                - literal: getter
+                - literal: implemented
+                - literal: setter
+                - literal: unimplemented
             versions:
               type:
                 enumset:
