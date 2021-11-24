@@ -7,4 +7,5 @@ type:
       type: string
     type:
       required: true
-      type: schematype
+      type:
+        schema: schematype

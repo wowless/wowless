@@ -4,7 +4,6 @@ type:
   oneof:
   - literal: any
   - literal: boolean
-  - literal: schematype
   - literal: string
   - record:
       enumset:
@@ -24,12 +23,14 @@ type:
   - record:
       mapof:
         required: true
-        type: schematype
+        type:
+          schema: schematype
   - record:
       oneof:
         required: true
         type:
-          sequenceof: schematype
+          sequenceof:
+            schema: schematype
   - record:
       record:
         required: true
@@ -40,16 +41,24 @@ type:
                 type: boolean
               type:
                 required: true
-                type: schematype
+                type:
+                  schema: schematype
   - record:
       ref:
         required: true
         type:
           oneof:
+          - literal: schema
           - literal: state
           - literal: structure
           - literal: uiobject
   - record:
+      schema:
+        required: true
+        type:
+          ref: schema
+  - record:
       sequenceof:
         required: true
-        type: schematype
+        type:
+          schema: schematype

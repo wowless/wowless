@@ -80,6 +80,7 @@ end
 return {
   apis = loaddir('api', 'yaml'),
   impl = loaddir('impl', 'lua'),
+  schemas = loaddir('schemas', 'yaml'),
   state = loaddir('state', 'yaml'),
   structures = loaddir('structures', 'yaml'),
   uiobjects = loadUIObjects(),
