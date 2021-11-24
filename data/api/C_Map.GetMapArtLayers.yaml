@@ -1,10 +1,6 @@
 ---
 name: C_Map.GetMapArtLayers
 status: stub
-newinputs:
-- type: number
-outputs:
-- type: table
 returns:
 - - additionalZoomSteps: 0
     layerHeight: 1
@@ -13,3 +9,8 @@ returns:
     minScale: 1
     tileHeight: 1
     tileWidth: 1
+signatures:
+- inputs:
+  - type: number
+  outputs:
+  - type: table

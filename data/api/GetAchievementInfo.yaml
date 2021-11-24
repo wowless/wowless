@@ -1,23 +1,24 @@
 ---
 name: GetAchievementInfo
 status: unimplemented
-newinputs:
-- type: number
-- nilable: true
-  type: number
-outputs:
-- type: number
-- type: string
-- type: number
-- type: bool
-- type: number
-- type: number
-- type: number
-- type: string
-- type: number
-- type: number
-- type: string
-- type: bool
-- type: bool
-- type: string
-- type: bool
+signatures:
+- inputs:
+  - type: number
+  - nilable: true
+    type: number
+  outputs:
+  - type: number
+  - type: string
+  - type: number
+  - type: bool
+  - type: number
+  - type: number
+  - type: number
+  - type: string
+  - type: number
+  - type: number
+  - type: string
+  - type: bool
+  - type: bool
+  - type: string
+  - type: bool

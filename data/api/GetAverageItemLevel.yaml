@@ -1,7 +1,8 @@
 ---
 name: GetAverageItemLevel
 status: unimplemented
-outputs:
-- type: number
-- type: number
-- type: number
+signatures:
+- outputs:
+  - type: number
+  - type: number
+  - type: number

@@ -1,9 +1,10 @@
 ---
 name: CastSpellByName
 status: unimplemented
-newinputs:
-- type: string
-- nilable: true
-  type: string
-outputs: {}
 protection: secure
+signatures:
+- inputs:
+  - type: string
+  - nilable: true
+    type: string
+  outputs: {}

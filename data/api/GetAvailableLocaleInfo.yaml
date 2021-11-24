@@ -1,5 +1,6 @@
 ---
 name: GetAvailableLocaleInfo
 status: unimplemented
-outputs:
-- type: table
+signatures:
+- outputs:
+  - type: table

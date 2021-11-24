@@ -1,9 +1,10 @@
 ---
 name: C_LFGList.GetFilteredSearchResults
 status: stub
-newinputs: {}
-outputs:
-- type: number
-- type: table
 returns:
 - 0
+signatures:
+- inputs: {}
+  outputs:
+  - type: number
+  - type: table

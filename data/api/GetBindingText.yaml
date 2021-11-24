@@ -1,5 +1,6 @@
 ---
 name: GetBindingText
 status: unimplemented
-outputs:
-- type: string
+signatures:
+- outputs:
+  - type: string

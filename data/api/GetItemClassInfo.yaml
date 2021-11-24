@@ -1,8 +1,9 @@
 ---
 name: GetItemClassInfo
 status: unimplemented
-newinputs:
-- type: number
-outputs:
-- name: name
-  type: string
+signatures:
+- inputs:
+  - type: number
+  outputs:
+  - name: name
+    type: string

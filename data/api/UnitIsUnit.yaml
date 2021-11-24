@@ -1,8 +1,9 @@
 ---
 name: UnitIsUnit
 status: unimplemented
-newinputs:
-- type: string
-- type: string
-outputs:
-- type: bool
+signatures:
+- inputs:
+  - type: string
+  - type: string
+  outputs:
+  - type: bool

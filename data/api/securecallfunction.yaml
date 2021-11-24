@@ -1,11 +1,12 @@
 ---
 name: securecallfunction
 status: unimplemented
-inputs:
-- ft
-- tf
-- tfnnn
-- tfb
-- tft
-outputs:
-- type: unknown
+signatures:
+- oldinputs:
+  - ft
+  - tf
+  - tfnnn
+  - tfb
+  - tft
+  outputs:
+  - type: unknown

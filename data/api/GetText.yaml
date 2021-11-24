@@ -1,15 +1,16 @@
 ---
 name: GetText
 status: unimplemented
-newinputs:
-- name: token
-  type: string
-- name: gender
-  nilable: true
-  type: number
-- name: ordinal
-  nilable: true
-  type: number
-outputs:
-- name: text
-  type: string
+signatures:
+- inputs:
+  - name: token
+    type: string
+  - name: gender
+    nilable: true
+    type: number
+  - name: ordinal
+    nilable: true
+    type: number
+  outputs:
+  - name: text
+    type: string

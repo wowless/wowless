@@ -1,25 +1,26 @@
 ---
 name: GetChatWindowInfo
 status: unimplemented
-newinputs:
-- type: number
-outputs:
-- name: name
-  type: string
-- name: fontSize
-  type: number
-- name: r
-  type: number
-- name: g
-  type: number
-- name: b
-  type: number
-- name: alpha
-  type: number
-- name: shown
-  type: number
-- name: locked
-  type: number
-- name: docked
-  nilable: true
-  type: number
+signatures:
+- inputs:
+  - type: number
+  outputs:
+  - name: name
+    type: string
+  - name: fontSize
+    type: number
+  - name: r
+    type: number
+  - name: g
+    type: number
+  - name: b
+    type: number
+  - name: alpha
+    type: number
+  - name: shown
+    type: number
+  - name: locked
+    type: number
+  - name: docked
+    nilable: true
+    type: number

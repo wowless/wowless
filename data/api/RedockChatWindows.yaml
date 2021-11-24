@@ -1,5 +1,6 @@
 ---
 name: RedockChatWindows
 status: unimplemented
-newinputs: {}
-outputs: {}
+signatures:
+- inputs: {}
+  outputs: {}

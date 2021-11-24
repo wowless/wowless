@@ -1,14 +1,15 @@
 ---
 name: C_Map.GetMapInfo
 status: stub
-newinputs:
-- type: number
-outputs:
-- name: info
-  type: C_Map.UiMapDetails
 returns:
 - flags: 0
   mapID: 0
   mapType: 0
   name: TheMap
   parentMapID: 0
+signatures:
+- inputs:
+  - type: number
+  outputs:
+  - name: info
+    type: C_Map.UiMapDetails

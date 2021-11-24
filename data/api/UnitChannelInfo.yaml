@@ -1,5 +1,6 @@
 ---
 name: UnitChannelInfo
 status: unimplemented
-newinputs:
-- type: string
+signatures:
+- inputs:
+  - type: string

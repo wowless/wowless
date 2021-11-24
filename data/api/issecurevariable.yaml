@@ -1,10 +1,11 @@
 ---
 name: issecurevariable
 status: stub
-inputs:
-- s
-- ts
-outputs:
-- type: bool
 returns:
 - true
+signatures:
+- oldinputs:
+  - s
+  - ts
+  outputs:
+  - type: bool

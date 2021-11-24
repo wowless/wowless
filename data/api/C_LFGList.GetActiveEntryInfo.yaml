@@ -1,6 +1,7 @@
 ---
 name: C_LFGList.GetActiveEntryInfo
 status: unimplemented
-newinputs: {}
-outputs:
-- type: nil
+signatures:
+- inputs: {}
+  outputs:
+  - type: nil

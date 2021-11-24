@@ -1,14 +1,15 @@
 ---
 name: C_CVar.SetCVar
 status: implemented
-newinputs:
-- type: string
-- nilable: true
-  type: string
-- nilable: true
-  type: string
-outputs:
-- name: success
-  type: bool
+signatures:
+- inputs:
+  - type: string
+  - nilable: true
+    type: string
+  - nilable: true
+    type: string
+  outputs:
+  - name: success
+    type: bool
 states:
 - CVars

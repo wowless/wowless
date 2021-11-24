@@ -3,7 +3,8 @@ name: UnitHonor
 status: unimplemented
 versions:
 - Mainline
-newinputs:
-- type: string
-outputs:
-- type: number
+signatures:
+- inputs:
+  - type: string
+  outputs:
+  - type: number

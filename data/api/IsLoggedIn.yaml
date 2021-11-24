@@ -1,7 +1,8 @@
 ---
 name: IsLoggedIn
 status: unimplemented
-newinputs: {}
-outputs:
-- name: isLoggedIn
-  type: bool
+signatures:
+- inputs: {}
+  outputs:
+  - name: isLoggedIn
+    type: bool

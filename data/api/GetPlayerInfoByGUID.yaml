@@ -1,13 +1,14 @@
 ---
 name: GetPlayerInfoByGUID
 status: unimplemented
-newinputs:
-- type: string
-outputs:
-- type: string
-- type: string
-- type: string
-- type: string
-- type: number
-- type: string
-- type: string
+signatures:
+- inputs:
+  - type: string
+  outputs:
+  - type: string
+  - type: string
+  - type: string
+  - type: string
+  - type: number
+  - type: string
+  - type: string

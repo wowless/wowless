@@ -1,10 +1,11 @@
 ---
 name: UseAction
 status: unimplemented
-newinputs:
-- type: number
-- nilable: true
-  type: unknown
-- type: string
-outputs: {}
 protection: secure
+signatures:
+- inputs:
+  - type: number
+  - nilable: true
+    type: unknown
+  - type: string
+  outputs: {}

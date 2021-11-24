@@ -1,7 +1,8 @@
 ---
 name: SetRaidTarget
 status: unimplemented
-newinputs:
-- type: string
-- type: number
-outputs: {}
+signatures:
+- inputs:
+  - type: string
+  - type: number
+  outputs: {}

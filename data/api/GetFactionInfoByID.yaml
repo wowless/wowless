@@ -1,38 +1,39 @@
 ---
 name: GetFactionInfoByID
 status: unimplemented
-newinputs:
-- type: number
-outputs:
-- name: name
-  type: string
-- name: description
-  type: string
-- name: standingID
-  type: number
-- name: barMin
-  type: number
-- name: barMax
-  type: number
-- name: barValue
-  type: number
-- name: atWarWith
-  type: bool
-- name: canToggleAtWar
-  type: bool
-- name: isHeader
-  type: bool
-- name: isCollapsed
-  type: bool
-- name: hasRep
-  type: bool
-- name: isWatched
-  type: bool
-- name: isChild
-  type: bool
-- name: factionID
-  type: number
-- name: hasBonusRepGain
-  type: bool
-- name: canSetInteractive
-  type: bool
+signatures:
+- inputs:
+  - type: number
+  outputs:
+  - name: name
+    type: string
+  - name: description
+    type: string
+  - name: standingID
+    type: number
+  - name: barMin
+    type: number
+  - name: barMax
+    type: number
+  - name: barValue
+    type: number
+  - name: atWarWith
+    type: bool
+  - name: canToggleAtWar
+    type: bool
+  - name: isHeader
+    type: bool
+  - name: isCollapsed
+    type: bool
+  - name: hasRep
+    type: bool
+  - name: isWatched
+    type: bool
+  - name: isChild
+    type: bool
+  - name: factionID
+    type: number
+  - name: hasBonusRepGain
+    type: bool
+  - name: canSetInteractive
+    type: bool

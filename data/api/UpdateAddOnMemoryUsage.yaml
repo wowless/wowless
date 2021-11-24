@@ -1,5 +1,6 @@
 ---
 name: UpdateAddOnMemoryUsage
 status: unimplemented
-newinputs: {}
-outputs: {}
+signatures:
+- inputs: {}
+  outputs: {}

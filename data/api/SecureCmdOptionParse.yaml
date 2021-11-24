@@ -1,12 +1,13 @@
 ---
 name: SecureCmdOptionParse
 status: implemented
-newinputs:
-- type: string
-outputs:
-- name: result
-  nilable: true
-  type: string
-- name: target
-  nilable: true
-  type: string
+signatures:
+- inputs:
+  - type: string
+  outputs:
+  - name: result
+    nilable: true
+    type: string
+  - name: target
+    nilable: true
+    type: string

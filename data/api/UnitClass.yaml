@@ -1,13 +1,14 @@
 ---
 name: UnitClass
 status: stub
-newinputs:
-- type: string
-outputs:
-- type: string
-- type: string
-- type: number
 returns:
 - Warrior
 - WARRIOR
 - 1
+signatures:
+- inputs:
+  - type: string
+  outputs:
+  - type: string
+  - type: string
+  - type: number

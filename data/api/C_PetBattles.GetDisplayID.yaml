@@ -1,5 +1,6 @@
 ---
 name: C_PetBattles.GetDisplayID
 status: unimplemented
-outputs:
-- type: number
+signatures:
+- outputs:
+  - type: number

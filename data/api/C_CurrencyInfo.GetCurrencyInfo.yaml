@@ -1,11 +1,6 @@
 ---
 name: C_CurrencyInfo.GetCurrencyInfo
 status: stub
-newinputs:
-- nilable: true
-  type: number
-outputs:
-- type: table
 returns:
 - canEarnPerWeek: true
   discovered: true
@@ -21,3 +16,9 @@ returns:
   quantity: 9999
   quantityEarnedThisWeek: 1
   totalEarned: 99999
+signatures:
+- inputs:
+  - nilable: true
+    type: number
+  outputs:
+  - type: table

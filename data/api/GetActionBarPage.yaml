@@ -1,6 +1,7 @@
 ---
 name: GetActionBarPage
 status: unimplemented
-newinputs: {}
-outputs:
-- type: number
+signatures:
+- inputs: {}
+  outputs:
+  - type: number

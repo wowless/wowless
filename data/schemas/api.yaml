@@ -2,62 +2,9 @@
 name: api
 type:
   record:
-    inputs:
-      type:
-        sequenceof: string
     name:
       required: true
       type: string
-    newinputs:
-      type:
-        sequenceof:
-          record:
-            default:
-              type: any
-            innerType:
-              type: string
-            mixin:
-              type: string
-            name:
-              type: string
-            nilable:
-              type: boolean
-            type:
-              required: true
-              type:
-                oneof:
-                - literal: bool
-                - literal: number
-                - literal: string
-                - literal: table
-                - literal: unknown
-                - ref: structure
-    outputs:
-      type:
-        sequenceof:
-          record:
-            default:
-              type: any
-            innerType:
-              type: string
-            mixin:
-              type: string
-            name:
-              type: string
-            nilable:
-              type: boolean
-            type:
-              required: true
-              type:
-                oneof:
-                - literal: bool
-                - literal: nil
-                - literal: number
-                - literal: oneornil
-                - literal: string
-                - literal: table
-                - literal: unknown
-                - ref: structure
     protection:
       type:
         oneof:
@@ -66,6 +13,63 @@ type:
     returns:
       type:
         sequenceof: any
+    signatures:
+      type:
+        sequenceof:
+          record:
+            inputs:
+              type:
+                sequenceof:
+                  record:
+                    default:
+                      type: any
+                    innerType:
+                      type: string
+                    mixin:
+                      type: string
+                    name:
+                      type: string
+                    nilable:
+                      type: boolean
+                    type:
+                      required: true
+                      type:
+                        oneof:
+                        - literal: bool
+                        - literal: number
+                        - literal: string
+                        - literal: table
+                        - literal: unknown
+                        - ref: structure
+            oldinputs:
+              type:
+                sequenceof: string
+            outputs:
+              type:
+                sequenceof:
+                  record:
+                    default:
+                      type: any
+                    innerType:
+                      type: string
+                    mixin:
+                      type: string
+                    name:
+                      type: string
+                    nilable:
+                      type: boolean
+                    type:
+                      required: true
+                      type:
+                        oneof:
+                        - literal: bool
+                        - literal: nil
+                        - literal: number
+                        - literal: oneornil
+                        - literal: string
+                        - literal: table
+                        - literal: unknown
+                        - ref: structure
     states:
       type:
         sequenceof:

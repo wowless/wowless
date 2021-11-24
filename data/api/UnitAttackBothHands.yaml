@@ -4,10 +4,11 @@ status: unimplemented
 versions:
 - TBC
 - Vanilla
-newinputs:
-- type: string
-outputs:
-- type: number
-- type: number
-- type: number
-- type: number
+signatures:
+- inputs:
+  - type: string
+  outputs:
+  - type: number
+  - type: number
+  - type: number
+  - type: number

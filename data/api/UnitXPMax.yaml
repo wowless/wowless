@@ -1,7 +1,8 @@
 ---
 name: UnitXPMax
 status: unimplemented
-newinputs:
-- type: string
-outputs:
-- type: number
+signatures:
+- inputs:
+  - type: string
+  outputs:
+  - type: number

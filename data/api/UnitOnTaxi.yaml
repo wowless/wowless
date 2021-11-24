@@ -1,7 +1,8 @@
 ---
 name: UnitOnTaxi
 status: unimplemented
-newinputs:
-- type: string
-outputs:
-- type: oneornil
+signatures:
+- inputs:
+  - type: string
+  outputs:
+  - type: oneornil

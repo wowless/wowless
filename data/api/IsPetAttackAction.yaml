@@ -1,7 +1,8 @@
 ---
 name: IsPetAttackAction
 status: unimplemented
-newinputs:
-- type: number
-outputs:
-- type: bool
+signatures:
+- inputs:
+  - type: number
+  outputs:
+  - type: bool

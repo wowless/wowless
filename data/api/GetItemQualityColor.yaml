@@ -1,14 +1,15 @@
 ---
 name: GetItemQualityColor
 status: implemented
-newinputs:
-- type: number
-outputs:
-- name: r
-  type: number
-- name: g
-  type: number
-- name: b
-  type: number
-- name: hex
-  type: string
+signatures:
+- inputs:
+  - type: number
+  outputs:
+  - name: r
+    type: number
+  - name: g
+    type: number
+  - name: b
+    type: number
+  - name: hex
+    type: string

@@ -1,9 +1,10 @@
 ---
 name: GetCategoryInfo
 status: unimplemented
-newinputs:
-- type: number
-outputs:
-- type: string
-- type: number
-- type: number
+signatures:
+- inputs:
+  - type: number
+  outputs:
+  - type: string
+  - type: number
+  - type: number

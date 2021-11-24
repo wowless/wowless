@@ -1,8 +1,9 @@
 ---
 name: SetConsoleKey
 status: unimplemented
-newinputs:
-- name: key
-  nilable: true
-  type: string
-outputs: {}
+signatures:
+- inputs:
+  - name: key
+    nilable: true
+    type: string
+  outputs: {}

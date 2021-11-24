@@ -1,11 +1,12 @@
 ---
 name: UnitClassBase
 status: stub
-newinputs:
-- type: string
-outputs:
-- type: string
-- type: number
 returns:
 - WARRIOR
 - 1
+signatures:
+- inputs:
+  - type: string
+  outputs:
+  - type: string
+  - type: number

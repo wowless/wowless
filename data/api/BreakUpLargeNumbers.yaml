@@ -1,8 +1,9 @@
 ---
 name: BreakUpLargeNumbers
 status: unimplemented
-newinputs:
-- type: number
-outputs:
-- name: valueString
-  type: string
+signatures:
+- inputs:
+  - type: number
+  outputs:
+  - name: valueString
+    type: string

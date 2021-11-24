@@ -1,10 +1,11 @@
 ---
 name: C_CVar.RegisterCVar
 status: implemented
-newinputs:
-- type: string
-- nilable: true
-  type: string
-outputs: {}
+signatures:
+- inputs:
+  - type: string
+  - nilable: true
+    type: string
+  outputs: {}
 states:
 - CVars

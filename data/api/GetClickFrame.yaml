@@ -1,7 +1,8 @@
 ---
 name: GetClickFrame
 status: unimplemented
-newinputs:
-- type: string
-outputs:
-- type: nil
+signatures:
+- inputs:
+  - type: string
+  outputs:
+  - type: nil

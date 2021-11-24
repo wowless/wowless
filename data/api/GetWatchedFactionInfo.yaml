@@ -1,11 +1,12 @@
 ---
 name: GetWatchedFactionInfo
 status: unimplemented
-newinputs: {}
-outputs:
-- type: string
-- type: number
-- type: number
-- type: number
-- type: number
-- type: number
+signatures:
+- inputs: {}
+  outputs:
+  - type: string
+  - type: number
+  - type: number
+  - type: number
+  - type: number
+  - type: number

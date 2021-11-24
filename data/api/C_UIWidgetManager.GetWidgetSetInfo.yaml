@@ -1,10 +1,11 @@
 ---
 name: C_UIWidgetManager.GetWidgetSetInfo
 status: stub
-newinputs:
-- type: number
-outputs:
-- type: table
 returns:
 - layoutDirection: 0
   verticalPadding: 0
+signatures:
+- inputs:
+  - type: number
+  outputs:
+  - type: table

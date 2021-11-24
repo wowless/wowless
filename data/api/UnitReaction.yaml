@@ -1,8 +1,9 @@
 ---
 name: UnitReaction
 status: unimplemented
-newinputs:
-- type: string
-- type: string
-outputs:
-- type: number
+signatures:
+- inputs:
+  - type: string
+  - type: string
+  outputs:
+  - type: number

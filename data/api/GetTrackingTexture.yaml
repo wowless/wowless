@@ -3,6 +3,7 @@ name: GetTrackingTexture
 status: unimplemented
 versions:
 - Vanilla
-newinputs: {}
-outputs:
-- type: nil
+signatures:
+- inputs: {}
+  outputs:
+  - type: nil

@@ -1,9 +1,10 @@
 ---
 name: UnitSex
 status: stub
-newinputs:
-- type: string
-outputs:
-- type: nil
 returns:
 - 2
+signatures:
+- inputs:
+  - type: string
+  outputs:
+  - type: nil

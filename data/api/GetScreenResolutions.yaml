@@ -1,8 +1,9 @@
 ---
 name: GetScreenResolutions
 status: stub
-newinputs: {}
-outputs:
-- type: table
 returns:
 - 1024x768
+signatures:
+- inputs: {}
+  outputs:
+  - type: table

@@ -1,6 +1,7 @@
 ---
 name: C_RecruitAFriend.GetRAFInfo
 status: unimplemented
-newinputs: {}
-outputs:
-- type: nil
+signatures:
+- inputs: {}
+  outputs:
+  - type: nil

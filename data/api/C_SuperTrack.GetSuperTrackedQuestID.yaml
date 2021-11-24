@@ -1,7 +1,8 @@
 ---
 name: C_SuperTrack.GetSuperTrackedQuestID
 status: stub
-newinputs: {}
-outputs: {}
 returns:
 - 22
+signatures:
+- inputs: {}
+  outputs: {}

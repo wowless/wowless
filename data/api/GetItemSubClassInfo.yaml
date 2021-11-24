@@ -1,14 +1,15 @@
 ---
 name: GetItemSubClassInfo
 status: stub
-newinputs:
-- type: number
-- type: number
-outputs:
-- name: name
-  type: string
-- name: isArmorType
-  type: bool
 returns:
 - nonempty
 - false
+signatures:
+- inputs:
+  - type: number
+  - type: number
+  outputs:
+  - name: name
+    type: string
+  - name: isArmorType
+    type: bool

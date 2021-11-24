@@ -1,12 +1,13 @@
 ---
 name: C_CVar.GetCVarBool
 status: implemented
-newinputs:
-- type: string
-outputs:
-- name: value
-  nilable: true
-  type: bool
+signatures:
+- inputs:
+  - type: string
+  outputs:
+  - name: value
+    nilable: true
+    type: bool
 states:
 - CVarDefaults
 - CVars

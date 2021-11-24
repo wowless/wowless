@@ -1,7 +1,8 @@
 ---
 name: SetModifiedClick
 status: unimplemented
-newinputs:
-- type: string
-- type: string
-outputs: {}
+signatures:
+- inputs:
+  - type: string
+  - type: string
+  outputs: {}

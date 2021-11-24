@@ -1,5 +1,6 @@
 ---
 name: GetCurrentRegion
 status: unimplemented
-outputs:
-- type: number
+signatures:
+- outputs:
+  - type: number

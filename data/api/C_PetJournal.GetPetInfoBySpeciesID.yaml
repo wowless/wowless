@@ -1,18 +1,19 @@
 ---
 name: C_PetJournal.GetPetInfoBySpeciesID
 status: unimplemented
-newinputs:
-- type: number
-outputs:
-- type: string
-- type: string
-- type: number
-- type: number
-- type: string
-- type: string
-- type: bool
-- type: bool
-- type: bool
-- type: bool
-- type: bool
-- type: number
+signatures:
+- inputs:
+  - type: number
+  outputs:
+  - type: string
+  - type: string
+  - type: number
+  - type: number
+  - type: string
+  - type: string
+  - type: bool
+  - type: bool
+  - type: bool
+  - type: bool
+  - type: bool
+  - type: number

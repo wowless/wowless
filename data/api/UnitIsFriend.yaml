@@ -1,8 +1,9 @@
 ---
 name: UnitIsFriend
 status: unimplemented
-newinputs:
-- type: string
-- type: string
-outputs:
-- type: oneornil
+signatures:
+- inputs:
+  - type: string
+  - type: string
+  outputs:
+  - type: oneornil

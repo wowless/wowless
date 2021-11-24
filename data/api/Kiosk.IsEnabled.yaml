@@ -1,6 +1,7 @@
 ---
 name: Kiosk.IsEnabled
 status: unimplemented
-newinputs: {}
-outputs:
-- type: bool
+signatures:
+- inputs: {}
+  outputs:
+  - type: bool

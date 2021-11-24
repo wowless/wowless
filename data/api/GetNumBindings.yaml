@@ -1,5 +1,6 @@
 ---
 name: GetNumBindings
 status: unimplemented
-outputs:
-- type: number
+signatures:
+- outputs:
+  - type: number

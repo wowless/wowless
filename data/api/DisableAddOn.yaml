@@ -1,9 +1,10 @@
 ---
 name: DisableAddOn
 status: unimplemented
-inputs:
-- n
-- s
-- sb
-- ss
-outputs: {}
+signatures:
+- oldinputs:
+  - n
+  - s
+  - sb
+  - ss
+  outputs: {}
