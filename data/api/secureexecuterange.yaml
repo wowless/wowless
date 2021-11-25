@@ -3,9 +3,3 @@ name: secureexecuterange
 status: unimplemented
 outputs:
 - type: number
-oldinputs:
-- tf
-- tfnnn
-- tfb
-- tft
-- tfs

@@ -5,6 +5,3 @@ outputs:
 - type: bool
 returns:
 - true
-oldinputs:
-- s
-- ts

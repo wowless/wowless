@@ -3,9 +3,3 @@ name: securecallfunction
 status: unimplemented
 outputs:
 - type: unknown
-oldinputs:
-- ft
-- tf
-- tfnnn
-- tfb
-- tft
