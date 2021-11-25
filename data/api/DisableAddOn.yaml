@@ -1,9 +1,12 @@
 ---
 name: DisableAddOn
 status: unimplemented
+inputs:
+- - name: index
+    type: number
+- - name: name
+    type: string
+  - name: character
+    nilable: true
+    type: string
 outputs: {}
-oldinputs:
-- n
-- s
-- sb
-- ss

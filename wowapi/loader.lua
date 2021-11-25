@@ -141,9 +141,7 @@ local function loadFunctions(version, env, log)
     local bfn = getFn(api, env)
     local impl = (function()
       if api.inputs then
-        assert(#api.inputs == 1, api.name)
-        local sig = api.inputs[1]
-        return function(...)
+        local function check(sig, ...)
           for i, param in ipairs(sig) do
             local arg = select(i, ...)
             if arg == nil then
@@ -160,7 +158,21 @@ local function loadFunctions(version, env, log)
                   i, tostring(param.name), fn, param.type, nty))
             end
           end
-          return bfn(...)
+        end
+        return function(...)
+          if #api.inputs == 1 then
+            check(api.inputs[1], ...)
+            return bfn(...)
+          else
+            local t = {...}
+            local n = select('#', ...)
+            for _, sig in ipairs(api.inputs) do
+              if pcall(function() check(sig, unpack(t, 1, n)) end) then
+                return bfn(...)
+              end
+            end
+            error('args matched no input signature of ' .. fn)
+          end
         end
       end
       if api.oldinputs == nil then
