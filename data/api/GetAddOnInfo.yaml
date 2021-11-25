@@ -1,6 +1,11 @@
 ---
 name: GetAddOnInfo
 status: unimplemented
+inputs:
+- - name: index
+    type: number
+- - name: name
+    type: string
 outputs:
 - name: name
   type: string
@@ -16,6 +21,3 @@ outputs:
   type: string
 - name: newVersion
   type: bool
-oldinputs:
-- n
-- s
