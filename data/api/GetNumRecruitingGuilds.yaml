@@ -1,6 +1,5 @@
 ---
 name: GetNumRecruitingGuilds
 status: unimplemented
-signatures:
-- outputs:
-  - type: number
+outputs:
+- type: number

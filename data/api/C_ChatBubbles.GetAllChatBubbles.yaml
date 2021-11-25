@@ -1,9 +1,8 @@
 ---
 name: C_ChatBubbles.GetAllChatBubbles
 status: unimplemented
-signatures:
-- inputs:
-  - nilable: true
+inputs:
+- - nilable: true
     type: bool
-  outputs:
-  - type: table
+outputs:
+- type: table

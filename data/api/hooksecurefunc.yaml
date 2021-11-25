@@ -1,7 +1,6 @@
 ---
 name: hooksecurefunc
 status: implemented
-signatures:
-- outputs: {}
+outputs: {}
 states:
 - env

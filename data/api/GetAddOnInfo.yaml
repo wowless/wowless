@@ -1,22 +1,21 @@
 ---
 name: GetAddOnInfo
 status: unimplemented
-signatures:
-- oldinputs:
-  - n
-  - s
-  outputs:
-  - name: name
-    type: string
-  - name: title
-    type: string
-  - name: notes
-    type: string
-  - name: loadable
-    type: bool
-  - name: reason
-    type: string
-  - name: security
-    type: string
-  - name: newVersion
-    type: bool
+outputs:
+- name: name
+  type: string
+- name: title
+  type: string
+- name: notes
+  type: string
+- name: loadable
+  type: bool
+- name: reason
+  type: string
+- name: security
+  type: string
+- name: newVersion
+  type: bool
+oldinputs:
+- n
+- s

@@ -1,11 +1,10 @@
 ---
 name: GetItemInventorySlotInfo
 status: stub
+inputs:
+- - type: number
+outputs:
+- name: name
+  type: string
 returns:
 - nonempty
-signatures:
-- inputs:
-  - type: number
-  outputs:
-  - name: name
-    type: string

@@ -1,10 +1,9 @@
 ---
 name: GetClassInfo
 status: unimplemented
-signatures:
-- inputs:
-  - type: number
-  outputs:
-  - type: string
-  - type: string
-  - type: number
+inputs:
+- - type: number
+outputs:
+- type: string
+- type: string
+- type: number

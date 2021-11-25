@@ -1,9 +1,8 @@
 ---
 name: UnitExists
 status: unimplemented
-signatures:
-- inputs:
-  - nilable: true
+inputs:
+- - nilable: true
     type: string
-  outputs:
-  - type: bool
+outputs:
+- type: bool

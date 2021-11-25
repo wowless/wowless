@@ -1,6 +1,5 @@
 ---
 name: C_PetJournal.GetNumPetsNeedingFanfare
 status: unimplemented
-signatures:
-- outputs:
-  - type: number
+outputs:
+- type: number

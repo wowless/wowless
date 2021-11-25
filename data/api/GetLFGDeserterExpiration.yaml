@@ -1,6 +1,5 @@
 ---
 name: GetLFGDeserterExpiration
 status: unimplemented
-signatures:
-- outputs:
-  - type: number
+outputs:
+- type: number

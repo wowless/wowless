@@ -1,6 +1,5 @@
 ---
 name: GetActiveLootRollIDs
 status: unimplemented
-signatures:
-- outputs:
-  - type: table
+outputs:
+- type: table

@@ -1,6 +1,5 @@
 ---
 name: GetSelectedSkill
 status: unimplemented
-signatures:
-- outputs:
-  - type: number
+outputs:
+- type: number

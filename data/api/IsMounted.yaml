@@ -1,6 +1,5 @@
 ---
 name: IsMounted
 status: unimplemented
-signatures:
-- outputs:
-  - type: bool
+outputs:
+- type: bool

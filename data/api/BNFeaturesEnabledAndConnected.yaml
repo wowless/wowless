@@ -1,7 +1,7 @@
 ---
 name: BNFeaturesEnabledAndConnected
 status: unimplemented
-signatures:
-- inputs: {}
-  outputs:
-  - type: bool
+inputs:
+- {}
+outputs:
+- type: bool

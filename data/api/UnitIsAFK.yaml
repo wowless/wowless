@@ -1,8 +1,7 @@
 ---
 name: UnitIsAFK
 status: unimplemented
-signatures:
-- inputs:
-  - type: string
-  outputs:
-  - type: oneornil
+inputs:
+- - type: string
+outputs:
+- type: oneornil

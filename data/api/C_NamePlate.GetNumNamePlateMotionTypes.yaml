@@ -1,6 +1,5 @@
 ---
 name: C_NamePlate.GetNumNamePlateMotionTypes
 status: unimplemented
-signatures:
-- outputs:
-  - type: number
+outputs:
+- type: number

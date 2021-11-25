@@ -1,7 +1,6 @@
 ---
 name: SaveBindings
 status: unimplemented
-signatures:
-- inputs:
-  - type: number
-  outputs: {}
+inputs:
+- - type: number
+outputs: {}

@@ -1,8 +1,7 @@
 ---
 name: UnitPVPName
 status: unimplemented
-signatures:
-- inputs:
-  - type: string
-  outputs:
-  - type: string
+inputs:
+- - type: string
+outputs:
+- type: string

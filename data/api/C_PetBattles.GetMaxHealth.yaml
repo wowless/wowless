@@ -1,6 +1,5 @@
 ---
 name: C_PetBattles.GetMaxHealth
 status: unimplemented
-signatures:
-- outputs:
-  - type: number
+outputs:
+- type: number

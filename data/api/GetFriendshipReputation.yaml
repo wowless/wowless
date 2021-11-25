@@ -3,16 +3,15 @@ name: GetFriendshipReputation
 status: unimplemented
 versions:
 - Mainline
-signatures:
-- inputs:
-  - type: number
-  outputs:
-  - type: number
-  - type: number
-  - type: number
-  - type: string
-  - type: string
-  - type: number
-  - type: string
-  - type: number
-  - type: number
+inputs:
+- - type: number
+outputs:
+- type: number
+- type: number
+- type: number
+- type: string
+- type: string
+- type: number
+- type: string
+- type: number
+- type: number

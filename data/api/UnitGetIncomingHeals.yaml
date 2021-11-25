@@ -1,10 +1,9 @@
 ---
 name: UnitGetIncomingHeals
 status: unimplemented
-signatures:
-- inputs:
-  - type: string
+inputs:
+- - type: string
   - nilable: true
     type: string
-  outputs:
-  - type: number
+outputs:
+- type: number

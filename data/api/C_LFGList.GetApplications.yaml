@@ -1,6 +1,5 @@
 ---
 name: C_LFGList.GetApplications
 status: unimplemented
-signatures:
-- outputs:
-  - type: table
+outputs:
+- type: table

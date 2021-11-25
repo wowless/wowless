@@ -3,7 +3,7 @@ name: GetRaidDifficultyID
 status: unimplemented
 versions:
 - Mainline
-signatures:
-- inputs: {}
-  outputs:
-  - type: number
+inputs:
+- {}
+outputs:
+- type: number

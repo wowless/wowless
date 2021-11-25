@@ -3,9 +3,9 @@ name: GetPVPRoles
 status: unimplemented
 versions:
 - Mainline
-signatures:
-- inputs: {}
-  outputs:
-  - type: bool
-  - type: bool
-  - type: bool
+inputs:
+- {}
+outputs:
+- type: bool
+- type: bool
+- type: bool

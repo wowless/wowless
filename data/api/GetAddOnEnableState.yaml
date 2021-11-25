@@ -1,9 +1,8 @@
 ---
 name: GetAddOnEnableState
 status: unimplemented
-signatures:
-- inputs:
+inputs:
+- - type: string
   - type: string
-  - type: string
-  outputs:
-  - type: number
+outputs:
+- type: number

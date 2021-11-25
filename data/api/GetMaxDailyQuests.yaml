@@ -1,6 +1,5 @@
 ---
 name: GetMaxDailyQuests
 status: unimplemented
-signatures:
-- outputs:
-  - type: number
+outputs:
+- type: number

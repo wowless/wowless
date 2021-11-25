@@ -1,7 +1,7 @@
 ---
 name: GetDownloadedPercentage
 status: unimplemented
-signatures:
-- inputs: {}
-  outputs:
-  - type: number
+inputs:
+- {}
+outputs:
+- type: number

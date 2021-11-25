@@ -1,16 +1,15 @@
 ---
 name: GetLootSlotInfo
 status: unimplemented
-signatures:
-- inputs:
-  - type: number
-  outputs:
-  - type: string
-  - type: string
-  - type: number
-  - type: number
-  - type: number
-  - type: bool
-  - type: bool
-  - type: number
-  - type: bool
+inputs:
+- - type: number
+outputs:
+- type: string
+- type: string
+- type: number
+- type: number
+- type: number
+- type: bool
+- type: bool
+- type: number
+- type: bool

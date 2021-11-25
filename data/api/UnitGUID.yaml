@@ -1,10 +1,9 @@
 ---
 name: UnitGUID
 status: stub
+inputs:
+- - type: string
+outputs:
+- type: string
 returns:
 - Player-1096-06DF65C1
-signatures:
-- inputs:
-  - type: string
-  outputs:
-  - type: string

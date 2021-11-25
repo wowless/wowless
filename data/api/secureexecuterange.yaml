@@ -1,12 +1,11 @@
 ---
 name: secureexecuterange
 status: unimplemented
-signatures:
-- oldinputs:
-  - tf
-  - tfnnn
-  - tfb
-  - tft
-  - tfs
-  outputs:
-  - type: number
+outputs:
+- type: number
+oldinputs:
+- tf
+- tfnnn
+- tfb
+- tft
+- tfs

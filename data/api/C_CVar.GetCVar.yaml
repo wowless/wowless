@@ -1,13 +1,12 @@
 ---
 name: C_CVar.GetCVar
 status: implemented
-signatures:
-- inputs:
-  - type: string
-  outputs:
-  - name: value
-    nilable: true
-    type: string
+inputs:
+- - type: string
+outputs:
+- name: value
+  nilable: true
+  type: string
 states:
 - CVarDefaults
 - CVars

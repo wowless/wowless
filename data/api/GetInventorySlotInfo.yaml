@@ -1,11 +1,10 @@
 ---
 name: GetInventorySlotInfo
 status: implemented
-signatures:
-- inputs:
-  - type: string
-  outputs:
-  - name: slotId
-    type: number
-  - name: textureName
-    type: string
+inputs:
+- - type: string
+outputs:
+- name: slotId
+  type: number
+- name: textureName
+  type: string

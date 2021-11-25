@@ -1,10 +1,9 @@
 ---
 name: AcceptBattlefieldPort
 status: unimplemented
+inputs:
+- - type: number
+  - type: bool
+outputs:
+- type: bool
 protection: hardware
-signatures:
-- inputs:
-  - type: number
-  - type: bool
-  outputs:
-  - type: bool

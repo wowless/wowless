@@ -3,14 +3,13 @@ name: GetDifficultyInfo
 status: unimplemented
 versions:
 - Mainline
-signatures:
-- inputs:
-  - type: number
-  outputs:
-  - type: string
-  - type: string
-  - type: bool
-  - type: bool
-  - type: bool
-  - type: bool
-  - type: number
+inputs:
+- - type: number
+outputs:
+- type: string
+- type: string
+- type: bool
+- type: bool
+- type: bool
+- type: bool
+- type: number

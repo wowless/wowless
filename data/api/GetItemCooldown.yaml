@@ -1,10 +1,9 @@
 ---
 name: GetItemCooldown
 status: unimplemented
-signatures:
-- inputs:
-  - type: number
-  outputs:
-  - type: number
-  - type: number
-  - type: number
+inputs:
+- - type: number
+outputs:
+- type: number
+- type: number
+- type: number

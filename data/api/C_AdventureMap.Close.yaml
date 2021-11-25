@@ -1,6 +1,6 @@
 ---
 name: C_AdventureMap.Close
 status: unimplemented
-signatures:
-- inputs: {}
-  outputs: {}
+inputs:
+- {}
+outputs: {}

@@ -1,7 +1,7 @@
 ---
 name: HasLoadedCUFProfiles
 status: unimplemented
-signatures:
-- inputs: {}
-  outputs:
-  - type: bool
+inputs:
+- {}
+outputs:
+- type: bool

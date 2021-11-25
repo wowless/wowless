@@ -1,6 +1,5 @@
 ---
 name: Sound_GameSystem_GetNumOutputDrivers
 status: unimplemented
-signatures:
-- outputs:
-  - type: number
+outputs:
+- type: number

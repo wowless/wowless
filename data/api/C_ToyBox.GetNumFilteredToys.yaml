@@ -1,6 +1,5 @@
 ---
 name: C_ToyBox.GetNumFilteredToys
 status: unimplemented
-signatures:
-- outputs:
-  - type: number
+outputs:
+- type: number

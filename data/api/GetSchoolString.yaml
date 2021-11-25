@@ -1,8 +1,7 @@
 ---
 name: GetSchoolString
 status: unimplemented
-signatures:
-- inputs:
-  - type: number
-  outputs:
-  - type: string
+inputs:
+- - type: number
+outputs:
+- type: string

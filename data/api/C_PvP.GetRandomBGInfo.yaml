@@ -1,9 +1,9 @@
 ---
 name: C_PvP.GetRandomBGInfo
 status: stub
+inputs:
+- {}
+outputs:
+- type: table
 returns:
 - minLevel: 0
-signatures:
-- inputs: {}
-  outputs:
-  - type: table

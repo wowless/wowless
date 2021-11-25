@@ -1,6 +1,5 @@
 ---
 name: GetQuestLogRewardMoney
 status: unimplemented
-signatures:
-- outputs:
-  - type: number
+outputs:
+- type: number

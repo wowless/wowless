@@ -1,9 +1,8 @@
 ---
 name: IsInActiveWorldPVP
 status: unimplemented
-signatures:
-- inputs:
-  - nilable: true
+inputs:
+- - nilable: true
     type: string
-  outputs:
-  - type: oneornil
+outputs:
+- type: oneornil

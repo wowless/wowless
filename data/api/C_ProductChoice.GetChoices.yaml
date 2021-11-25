@@ -1,6 +1,5 @@
 ---
 name: C_ProductChoice.GetChoices
 status: unimplemented
-signatures:
-- outputs:
-  - type: table
+outputs:
+- type: table

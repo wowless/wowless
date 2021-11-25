@@ -1,7 +1,7 @@
 ---
 name: GetSubZoneText
 status: unimplemented
-signatures:
-- inputs: {}
-  outputs:
-  - type: string
+inputs:
+- {}
+outputs:
+- type: string

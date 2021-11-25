@@ -1,8 +1,7 @@
 ---
 name: GetItemIcon
 status: unimplemented
-signatures:
-- inputs:
-  - type: number
-  outputs:
-  - type: number
+inputs:
+- - type: number
+outputs:
+- type: number

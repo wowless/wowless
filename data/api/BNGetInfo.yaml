@@ -1,13 +1,13 @@
 ---
 name: BNGetInfo
 status: unimplemented
-signatures:
-- inputs: {}
-  outputs:
-  - type: nil
-  - type: string
-  - type: number
-  - type: string
-  - type: bool
-  - type: bool
-  - type: bool
+inputs:
+- {}
+outputs:
+- type: nil
+- type: string
+- type: number
+- type: string
+- type: bool
+- type: bool
+- type: bool

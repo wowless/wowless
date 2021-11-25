@@ -4,13 +4,12 @@ status: unimplemented
 versions:
 - TBC
 - Vanilla
-signatures:
-- inputs:
-  - type: number
+inputs:
+- - type: number
   - nilable: true
     type: bool
-  outputs:
-  - type: string
-  - type: string
-  - type: number
-  - type: string
+outputs:
+- type: string
+- type: string
+- type: number
+- type: string

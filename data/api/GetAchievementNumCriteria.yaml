@@ -1,9 +1,8 @@
 ---
 name: GetAchievementNumCriteria
 status: unimplemented
-signatures:
-- inputs:
-  - name: achievementID
+inputs:
+- - name: achievementID
     type: number
-  outputs:
-  - type: number
+outputs:
+- type: number

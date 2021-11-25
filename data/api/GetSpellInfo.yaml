@@ -1,15 +1,14 @@
 ---
 name: GetSpellInfo
 status: unimplemented
-signatures:
-- oldinputs:
-  - n
-  - s
-  outputs:
-  - type: string
-  - type: number
-  - type: number
-  - type: number
-  - type: number
-  - type: number
-  - type: number
+outputs:
+- type: string
+- type: number
+- type: number
+- type: number
+- type: number
+- type: number
+- type: number
+oldinputs:
+- n
+- s

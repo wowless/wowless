@@ -1,9 +1,8 @@
 ---
 name: UnitFullName
 status: unimplemented
-signatures:
-- inputs:
-  - type: string
-  outputs:
-  - type: string
-  - type: string
+inputs:
+- - type: string
+outputs:
+- type: string
+- type: string

@@ -1,11 +1,10 @@
 ---
 name: C_SocialQueue.GetAllGroups
 status: unimplemented
-signatures:
-- inputs:
-  - nilable: true
+inputs:
+- - nilable: true
     type: bool
   - nilable: true
     type: bool
-  outputs:
-  - type: table
+outputs:
+- type: table

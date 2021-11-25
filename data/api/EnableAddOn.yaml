@@ -1,12 +1,11 @@
 ---
 name: EnableAddOn
 status: unimplemented
-signatures:
-- oldinputs:
-  - n
-  - ns
-  - nb
-  - s
-  - ss
-  - sb
-  outputs: {}
+outputs: {}
+oldinputs:
+- n
+- ns
+- nb
+- s
+- ss
+- sb

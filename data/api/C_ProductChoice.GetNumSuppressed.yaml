@@ -1,6 +1,5 @@
 ---
 name: C_ProductChoice.GetNumSuppressed
 status: unimplemented
-signatures:
-- outputs:
-  - type: number
+outputs:
+- type: number

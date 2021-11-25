@@ -1,9 +1,8 @@
 ---
 name: GetText
 status: unimplemented
-signatures:
-- inputs:
-  - name: token
+inputs:
+- - name: token
     type: string
   - name: gender
     nilable: true
@@ -11,6 +10,6 @@ signatures:
   - name: ordinal
     nilable: true
     type: number
-  outputs:
-  - name: text
-    type: string
+outputs:
+- name: text
+  type: string

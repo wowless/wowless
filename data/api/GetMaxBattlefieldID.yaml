@@ -1,6 +1,5 @@
 ---
 name: GetMaxBattlefieldID
 status: unimplemented
-signatures:
-- outputs:
-  - type: number
+outputs:
+- type: number

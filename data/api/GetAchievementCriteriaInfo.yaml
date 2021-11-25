@@ -1,23 +1,22 @@
 ---
 name: GetAchievementCriteriaInfo
 status: unimplemented
-signatures:
-- inputs:
-  - name: achievementID
+inputs:
+- - name: achievementID
     type: number
   - name: criteriaIndex
     type: number
-  outputs:
-  - type: string
-  - type: number
-  - type: bool
-  - type: number
-  - type: number
-  - type: string
-  - type: number
-  - type: number
-  - type: string
-  - type: number
-  - type: bool
-  - type: number
-  - type: number
+outputs:
+- type: string
+- type: number
+- type: bool
+- type: number
+- type: number
+- type: string
+- type: number
+- type: number
+- type: string
+- type: number
+- type: bool
+- type: number
+- type: number
