@@ -51,35 +51,6 @@ local getStub = (function()
   end
 end)()
 
-local argSig = (function()
-  local typeSigs = {
-    boolean = 'b',
-    ['function'] = 'f',
-    ['nil'] = 'x',
-    number = 'n',
-    string = 's',
-    table = 't',
-    userdata = 'u',
-  }
-  return function(fn, ...)
-    -- Ignore trailing nils for our purposes.
-    local last = select('#', ...)
-    while last > 0 and (select(last, ...)) == nil do
-      last = last - 1
-    end
-    local sig = ''
-    for i = 1, last do
-      local ty = type((select(i, ...)))
-      local c = typeSigs[ty]
-      if not c then
-        error(('invalid argument %d of type %q to %q'):format(i, ty, fn))
-      end
-      sig = sig .. c
-    end
-    return sig
-  end
-end)()
-
 local function unpackReturns(r)
   local ret = {}
   for i, v in ipairs(r) do
@@ -175,25 +146,7 @@ local function loadFunctions(version, env, log)
           end
         end
       end
-      if api.oldinputs == nil then
-        return bfn
-      end
-      local apisigs = api.oldinputs
-      if type(apisigs) == 'string' then
-        apisigs = {apisigs}
-      end
-      if type(apisigs) ~= 'table' then
-        error(('invalid inputs type on %q'):format(fn))
-      end
-      return function(...)
-        local fsig = argSig(fn, ...)
-        for _, x in ipairs(apisigs) do
-          if fsig == x then
-            return bfn(...)
-          end
-        end
-        error(('invalid arguments to %q, expected one of {%s}, got %q'):format(fn, table.concat(apisigs, ', '), fsig))
-      end
+      return bfn
     end)()
     local function wrapimpl(...)
       log(4, 'entering %s', api.name)
@@ -218,7 +171,6 @@ local function loadFunctions(version, env, log)
 end
 
 return {
-  argSig = argSig,
   getFn = getFn,
   loadApis = loadApis,
   loadFunctions = loadFunctions,

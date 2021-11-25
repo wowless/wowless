@@ -30,9 +30,6 @@ type:
     name:
       required: true
       type: string
-    oldinputs:
-      type:
-        sequenceof: string
     outputs:
       type:
         sequenceof:
