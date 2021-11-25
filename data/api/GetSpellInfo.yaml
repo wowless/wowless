@@ -1,14 +1,23 @@
 ---
 name: GetSpellInfo
 status: unimplemented
+inputs:
+- - name: spellID
+    type: number
+- - name: name
+    type: string
 outputs:
-- type: string
-- type: number
-- type: number
-- type: number
-- type: number
-- type: number
-- type: number
-oldinputs:
-- n
-- s
+- name: name
+  type: string
+- name: rank
+  type: nil
+- name: icon
+  type: number
+- name: castTime
+  type: number
+- name: minRange
+  type: number
+- name: maxRange
+  type: number
+- name: spellID
+  type: number
