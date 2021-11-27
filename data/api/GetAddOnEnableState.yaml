@@ -2,7 +2,16 @@
 name: GetAddOnEnableState
 status: unimplemented
 inputs:
-- - type: string
-  - type: string
+- - name: character
+    nilable: true
+    type: string
+  - name: addonIndex
+    type: number
+- - name: character
+    nilable: true
+    type: string
+  - name: addonName
+    type: string
 outputs:
-- type: number
+- name: enabledState
+  type: number
