@@ -15,6 +15,7 @@ type:
                 - literal: bool
                 - literal: number
                 - literal: string
+                - literal: texture
     inherits:
       type:
         sequenceof:

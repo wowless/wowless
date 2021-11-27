@@ -4,8 +4,10 @@ fields:
   checked:
     init: false
     type: bool
-  checkedTexture: {}
-  disabledCheckedTexture: {}
+  checkedTexture:
+    type: texture
+  disabledCheckedTexture:
+    type: texture
 inherits:
 - Button
 methods:
@@ -26,6 +28,10 @@ methods:
     - checked
     status: setter
   SetCheckedTexture:
-    status: implemented
+    fields:
+    - checkedTexture
+    status: setter
   SetDisabledCheckedTexture:
-    status: implemented
+    fields:
+    - disabledCheckedTexture
+    status: setter

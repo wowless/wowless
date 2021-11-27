@@ -10,22 +10,26 @@ fields:
   buttonState:
     init: NORMAL
     type: string
-  disabledTexture: {}
+  disabledTexture:
+    type: texture
   enabled:
     init: true
     type: bool
-  highlightTexture: {}
+  highlightTexture:
+    type: texture
   motionScriptsWhileDisabled:
     init: false
     type: bool
-  normalTexture: {}
+  normalTexture:
+    type: texture
   pushedTextOffsetX:
     init: 0
     type: number
   pushedTextOffsetY:
     init: 0
     type: number
-  pushedTexture: {}
+  pushedTexture:
+    type: texture
   registeredClicks:
     init:
       LeftButtonUp: true
@@ -101,11 +105,15 @@ methods:
     - buttonLocked
     status: setter
   SetDisabledAtlas:
-    status: implemented
+    fields:
+    - disabledTexture
+    status: setter
   SetDisabledFontObject:
     status: unimplemented
   SetDisabledTexture:
-    status: implemented
+    fields:
+    - disabledTexture
+    status: setter
   SetEnabled:
     fields:
     - enabled
@@ -115,30 +123,42 @@ methods:
   SetFormattedText:
     status: unimplemented
   SetHighlightAtlas:
-    status: implemented
+    fields:
+    - highlightTexture
+    status: setter
   SetHighlightFontObject:
     status: unimplemented
   SetHighlightTexture:
-    status: implemented
+    fields:
+    - highlightTexture
+    status: setter
   SetMotionScriptsWhileDisabled:
     fields:
     - motionScriptsWhileDisabled
     status: setter
   SetNormalAtlas:
-    status: implemented
+    fields:
+    - normalTexture
+    status: setter
   SetNormalFontObject:
     status: unimplemented
   SetNormalTexture:
-    status: implemented
+    fields:
+    - normalTexture
+    status: setter
   SetPushedAtlas:
-    status: implemented
+    fields:
+    - pushedTexture
+    status: setter
   SetPushedTextOffset:
     fields:
     - pushedTextOffsetX
     - pushedTextOffsetY
     status: setter
   SetPushedTexture:
-    status: implemented
+    fields:
+    - pushedTexture
+    status: setter
   SetText:
     status: implemented
   UnlockHighlight:

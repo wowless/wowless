@@ -7,7 +7,8 @@ fields:
   min:
     init: 0
     type: number
-  statusBarTexture: {}
+  statusBarTexture:
+    type: texture
   value:
     init: 0
     type: number
@@ -57,7 +58,9 @@ methods:
   SetStatusBarColor:
     status: unimplemented
   SetStatusBarTexture:
-    status: implemented
+    fields:
+    - statusBarTexture
+    status: setter
   SetValue:
     fields:
     - value

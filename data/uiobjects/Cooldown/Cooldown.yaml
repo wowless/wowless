@@ -1,5 +1,12 @@
 ---
 name: Cooldown
+fields:
+  blingTexture:
+    type: texture
+  edgeTexture:
+    type: texture
+  swipeTexture:
+    type: texture
 inherits:
 - Frame
 methods:
@@ -30,7 +37,9 @@ methods:
   Resume:
     status: unimplemented
   SetBlingTexture:
-    status: implemented
+    fields:
+    - blingTexture
+    status: setter
   SetCooldown:
     status: unimplemented
   SetCooldownDuration:
@@ -50,7 +59,9 @@ methods:
   SetEdgeScale:
     status: unimplemented
   SetEdgeTexture:
-    status: implemented
+    fields:
+    - edgeTexture
+    status: setter
   SetHideCountdownNumbers:
     status: unimplemented
   SetReverse:
@@ -60,6 +71,8 @@ methods:
   SetSwipeColor:
     status: unimplemented
   SetSwipeTexture:
-    status: implemented
+    fields:
+    - swipeTexture
+    status: setter
   SetUseCircularEdge:
     status: unimplemented

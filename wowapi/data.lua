@@ -16,6 +16,16 @@ local function loaddir(dir, ext)
   return t
 end
 
+local function toTexture(parent, tex)
+  if type(tex) == 'string' or type(tex) == 'number' then
+    local t = parent:CreateTexture()
+    t:SetTexture(tex)
+    return t
+  else
+    return tex
+  end
+end
+
 local function loadUIObject(name)
   local function lua(f)
     return extLoaders.lua(('data/uiobjects/%s/%s.lua'):format(name, f))
@@ -56,10 +66,14 @@ local function loadUIObject(name)
         local ud = u(self)
         for i, f in ipairs(method.fields) do
           local v = select(i, ...)
-          if cfg.fields[f].type == 'bool' then
-            v = not not v
+          local ty = cfg.fields[f].type
+          if ty == 'bool' then
+            ud[f] = not not v
+          elseif ty == 'texture' then
+            ud[f] = toTexture(self, v)
+          else
+            ud[f] = v
           end
-          ud[f] = v
         end
       end
     elseif method.status == 'unimplemented' then

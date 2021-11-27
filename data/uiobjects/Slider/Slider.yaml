@@ -10,7 +10,8 @@ fields:
   min:
     init: 0
     type: number
-  thumbTexture: {}
+  thumbTexture:
+    type: texture
   value:
     init: 0
     type: number
@@ -60,7 +61,9 @@ methods:
   SetStepsPerPage:
     status: unimplemented
   SetThumbTexture:
-    status: implemented
+    fields:
+    - thumbTexture
+    status: setter
   SetValue:
     fields:
     - value

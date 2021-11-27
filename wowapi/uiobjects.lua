@@ -1,16 +1,6 @@
 local util = require('wowless.util')
 local Mixin = util.mixin
 
-local function toTexture(parent, tex)
-  if type(tex) == 'string' or type(tex) == 'number' then
-    local t = parent:CreateTexture()
-    t:SetTexture(tex)
-    return t
-  else
-    return tex
-  end
-end
-
 local function mkBaseUIObjectTypes(api, loader)
   local function u(x)
     return api.UserData(x)
@@ -96,7 +86,6 @@ local function mkBaseUIObjectTypes(api, loader)
     kids = kids,
     loader = loader,
     m = m,
-    toTexture = toTexture,
     u = u,
     UpdateVisible = UpdateVisible,
     util = require('wowless.util'),
