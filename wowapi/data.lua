@@ -22,17 +22,15 @@ local function loadUIObject(name)
   end
   local cfg = extLoaders.yaml(('data/uiobjects/%s/%s.yaml'):format(name, name))
   local constructor = (function()
-    if name == 'UIObject' then
-      -- Otherwise we'll overwrite name and type, with hilarious consequences.
-      return
-    end
     local luainit = lua('init')
     local deepcopy = require('pl.tablex').deepcopy
     return function(self)
       -- luacheck: globals u
       local ud = u(self)
       for fname, field in pairs(cfg.fields or {}) do
-        ud[fname] = type(field.init) == 'table' and deepcopy(field.init) or field.init
+        if field.init then
+          ud[fname] = type(field.init) == 'table' and deepcopy(field.init) or field.init
+        end
       end
       if luainit then
         setfenv(luainit, getfenv(1))(self)
