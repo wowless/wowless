@@ -1,7 +1,7 @@
 local util = require('wowless.util')
 local Mixin = util.mixin
 
-local function mkBaseUIObjectTypes(api, loader)
+local function mkBaseUIObjectTypes(api)
   local function u(x)
     return api.UserData(x)
   end
@@ -84,7 +84,6 @@ local function mkBaseUIObjectTypes(api, loader)
   local env = {
     api = api,
     kids = kids,
-    loader = loader,
     m = m,
     u = u,
     UpdateVisible = UpdateVisible,

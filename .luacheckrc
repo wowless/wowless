@@ -7,7 +7,6 @@ files['data/uiobjects'] = {
   read_globals = {
     'api',
     'kids',
-    'loader',
     'm',
     'u',
     'UpdateVisible',

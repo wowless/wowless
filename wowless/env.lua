@@ -187,7 +187,7 @@ local function init(api, loader)
   Mixin(api.env, mkBaseEnv())
   util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(loader.version, api.env, api.log), true)
   util.recursiveMixin(api.env, mkWowEnv(api, loader), true)
-  Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api, loader))
+  Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api))
 end
 
 return {
