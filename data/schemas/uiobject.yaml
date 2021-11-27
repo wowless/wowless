@@ -6,11 +6,14 @@ type:
       type:
         mapof:
           record:
+            init:
+              type: any
             type:
               type:
                 oneof:
                 - literal: bool
                 - literal: number
+                - literal: string
     inherits:
       type:
         sequenceof:

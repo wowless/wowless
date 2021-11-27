@@ -28,7 +28,17 @@ local function isarray(t)
 end
 
 local function keycomp(a, b)
-  return a:lower() < b:lower()
+  local ta, tb = type(a), type(b)
+  if ta ~= tb then
+    return ta < tb
+  end
+  if ta == 'number' then
+    return a < b
+  elseif ta == 'string' then
+    return a:lower() < b:lower()
+  else
+    error('invalid table key type ' .. ta)
+  end
 end
 
 local function api2yaml(api)

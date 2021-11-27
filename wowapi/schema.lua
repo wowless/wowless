@@ -29,7 +29,7 @@ local function validate(schematype, v)
       validate(info.type, v2)
     end
     for field, info in pairs(schematype.record) do
-      assert(not info.required or v[field], 'missing required field ' .. field)
+      assert(not info.required or v[field] ~= nil, 'missing required field ' .. field)
     end
   elseif schematype.mapof then
     assert(type(v) == 'table', 'expected table')
