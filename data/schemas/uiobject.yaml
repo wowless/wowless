@@ -7,7 +7,8 @@ type:
         mapof:
           record:
             init:
-              type: any
+              type:
+                schema: any
             type:
               type:
                 oneof:
