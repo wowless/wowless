@@ -38,7 +38,7 @@ local function loadUIObject(name)
         setfenv(luainit, getfenv(1))(self)
       end
     end
-  end)
+  end)()
   local mixin = {}
   for mname, method in pairs(cfg.methods) do
     if method.status == 'implemented' then
