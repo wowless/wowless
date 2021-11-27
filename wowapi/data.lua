@@ -21,6 +21,22 @@ local function loadUIObject(name)
     return extLoaders.lua(('data/uiobjects/%s/%s.lua'):format(name, f))
   end
   local cfg = extLoaders.yaml(('data/uiobjects/%s/%s.yaml'):format(name, name))
+  local constructor = (function()
+    local luainit = lua('init')
+    local deepcopy = require('pl.tablex').deepcopy
+    return function(self)
+      -- luacheck: globals u
+      local ud = u(self)
+      for fname, field in pairs(cfg.fields or {}) do
+        if field.init then
+          ud[fname] = type(field.init) == 'table' and deepcopy(field.init) or field.init
+        end
+      end
+      if luainit then
+        setfenv(luainit, getfenv(1))(self)
+      end
+    end
+  end)()
   local mixin = {}
   for mname, method in pairs(cfg.methods) do
     if method.status == 'implemented' then
@@ -61,7 +77,7 @@ local function loadUIObject(name)
   end
   return {
     cfg = cfg,
-    constructor = lua('init'),
+    constructor = constructor,
     inherits = cfg.inherits,
     mixin = mixin,
   }

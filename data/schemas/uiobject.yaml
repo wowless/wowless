@@ -6,11 +6,15 @@ type:
       type:
         mapof:
           record:
+            init:
+              type:
+                schema: any
             type:
               type:
                 oneof:
                 - literal: bool
                 - literal: number
+                - literal: string
     inherits:
       type:
         sequenceof:

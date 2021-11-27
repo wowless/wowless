@@ -1,5 +1,8 @@
 ---
 name: AnimationGroup
+fields:
+  animations:
+    init: {}
 inherits:
 - ParentedObject
 - ScriptObject

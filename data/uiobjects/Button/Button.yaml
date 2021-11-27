@@ -1,21 +1,34 @@
 ---
 name: Button
 fields:
-  buttonLocked:
+  beingClicked:
+    init: false
     type: bool
-  buttonState: {}
+  buttonLocked:
+    init: false
+    type: bool
+  buttonState:
+    init: NORMAL
+    type: string
   disabledTexture: {}
   enabled:
+    init: true
     type: bool
   highlightTexture: {}
   motionScriptsWhileDisabled:
+    init: false
     type: bool
   normalTexture: {}
   pushedTextOffsetX:
+    init: 0
     type: number
   pushedTextOffsetY:
+    init: 0
     type: number
   pushedTexture: {}
+  registeredClicks:
+    init:
+      LeftButtonUp: true
 inherits:
 - Frame
 methods:

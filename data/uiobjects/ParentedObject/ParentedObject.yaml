@@ -1,7 +1,13 @@
 ---
 name: ParentedObject
 fields:
-  forbidden: {}
+  childrenList:
+    init: {}
+  childrenSet:
+    init: {}
+  forbidden:
+    init: false
+    type: bool
   parent: {}
 inherits:
 - UIObject

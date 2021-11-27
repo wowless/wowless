@@ -1,20 +1,43 @@
 ---
 name: Region
 fields:
-  alpha: {}
-  bottom:
+  alpha:
+    init: 1
     type: number
+  animationGroups:
+    init: {}
+  bottom:
+    init: 0
+    type: number
+  explicitlyProtected:
+    init: false
+    type: bool
   height:
+    init: 0
     type: number
   isIgnoringParentAlpha:
+    init: false
     type: bool
-  isIgnoringParentScale: {}
+  isIgnoringParentScale:
+    init: false
+    type: bool
   left:
+    init: 0
     type: number
-  scale: {}
-  shown: {}
+  points:
+    init: {}
+  protected:
+    init: false
+    type: bool
+  scale:
+    init: 1
+    type: number
+  shown:
+    init: true
+    type: bool
   visible: {}
   width:
+    init: 0
     type: number
 inherits:
 - ParentedObject

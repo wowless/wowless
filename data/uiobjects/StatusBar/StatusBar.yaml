@@ -2,11 +2,15 @@
 name: StatusBar
 fields:
   max:
+    init: 0
     type: number
   min:
+    init: 0
     type: number
   statusBarTexture: {}
-  value: {}
+  value:
+    init: 0
+    type: number
 inherits:
 - Frame
 methods:

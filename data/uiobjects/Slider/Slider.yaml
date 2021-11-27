@@ -1,12 +1,19 @@
 ---
 name: Slider
 fields:
+  enabled:
+    init: true
+    type: bool
   max:
+    init: 0
     type: number
   min:
+    init: 0
     type: number
   thumbTexture: {}
-  value: {}
+  value:
+    init: 0
+    type: number
 inherits:
 - Frame
 methods:
