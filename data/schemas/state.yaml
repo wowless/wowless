@@ -8,4 +8,5 @@ type:
     value:
       required: true
       type:
-        mapof: any
+        mapof:
+          schema: any

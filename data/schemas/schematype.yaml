@@ -2,9 +2,10 @@
 name: schematype
 type:
   oneof:
-  - literal: any
   - literal: boolean
+  - literal: number
   - literal: string
+  - literal: table
   - record:
       enumset:
         required: true

@@ -7,12 +7,14 @@ local domains = {
 }
 
 local function validate(schematype, v)
-  if schematype == 'any' then
-    return
+  if schematype == 'number' then
+    assert(type(v) == 'number', 'expected number')
   elseif schematype == 'string' then
     assert(type(v) == 'string', 'expected string')
   elseif schematype == 'boolean' then
     assert(type(v) == 'boolean', 'expected boolean')
+  elseif schematype == 'table' then
+    assert(type(v) == 'table', 'expected table')
   elseif type(schematype) ~= 'table' then
     error('unexpected schema type ' .. tostring(schematype))
   elseif schematype.schema then

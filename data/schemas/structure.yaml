@@ -8,7 +8,8 @@ type:
         sequenceof:
           record:
             default:
-              type: any
+              type:
+                schema: any
             innerType:
               type: string
             mixin:
