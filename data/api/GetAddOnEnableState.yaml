@@ -1,6 +1,6 @@
 ---
 name: GetAddOnEnableState
-status: unimplemented
+status: implemented
 inputs:
 - - name: character
     nilable: true
@@ -15,3 +15,5 @@ inputs:
 outputs:
 - name: enabledState
   type: number
+states:
+- Addons
