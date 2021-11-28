@@ -13,10 +13,11 @@ describe('addon', function()
           end
         end)
         local loader = require('wowless.loader').loader(api, {
+          otherAddonDirs = { 'addon/Wowless' },
           version = version,
         })
         require('wowless.env').init(api, loader)
-        loader.loadToc(('addon/Wowless/Wowless_%s.toc'):format(version), 'Wowless')
+        loader.loadAddon('Wowless')
         assert.same(0, api.GetErrorCount())
       end)
     end)

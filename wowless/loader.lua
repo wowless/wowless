@@ -3,6 +3,7 @@ local function loader(api, cfg)
   local version = cfg and cfg.version
   local otherAddonDirs = cfg and cfg.otherAddonDirs or {}
 
+  local lfs = require('lfs')
   local path = require('path')
   local xml = require('wowless.xml')
   local util = require('wowless.util')
@@ -514,7 +515,7 @@ local function loader(api, cfg)
   local function resolveTocDir(tocDir)
     api.log(1, 'resolving %s', tocDir)
     local base = path.basename(tocDir)
-    local toTry = {
+    local toTry = not version and {''} or {
       '_' .. version,
       '-' .. version,
       '_' .. alternateVersionNames[version],
@@ -550,60 +551,82 @@ local function loader(api, cfg)
     return { attrs = attrs, files = files }
   end
 
-  local function loadToc(tocFile, addonName)
-    api.log(1, 'loading toc %s', tocFile)
-    local isAddon = addonName and true or tocFile:find('/AddOns/')
-    local tocBase = addonName or tocFile:match('/AddOns/([^/]+)/')
-    local addon = isAddon and forAddon(tocBase, {}) or forAddon()
-    for _, file in ipairs(parseToc(tocFile).files) do
-      addon.loadFile(file)
-    end
-    if isAddon then
-      api.SendEvent('ADDON_LOADED', tocBase)
-    end
-  end
-
-  local loaded = {}
-  local addonToToc = {}
-  local loadAddon
-  local function doLoad(tocFile, addonName)
-    if not loaded[tocFile] then
-      local toc = parseToc(tocFile)
-      if toc.attrs.AllowLoad ~= 'Glue' then
-        for dep in string.gmatch(toc.attrs.RequiredDep or '', '[^, ]+') do
-          loadAddon(dep)
+  local addonData = {}
+  do
+    local function maybeAdd(dir)
+      local name = path.basename(dir)
+      if not addonData[name] then
+        local tocFile = resolveTocDir(dir)
+        if tocFile then
+          addonData[name] = parseToc(tocFile)
         end
-        for dep in string.gmatch(toc.attrs.RequiredDeps or '', '[^, ]+') do
-          loadAddon(dep)
-        end
-        for dep in string.gmatch(toc.attrs.Dependencies or '', '[^, ]+') do
-          loadAddon(dep)
-        end
-        if addonName then
-          addonToToc[addonName] = toc
-        end
-        loadToc(tocFile, addonName)
-        loaded[tocFile] = true
       end
+    end
+    local function maybeAddAll(dir)
+      for d in lfs.dir(dir) do
+        if d ~= '.' and d ~= '..' then
+          maybeAdd(path.join(dir, d))
+        end
+      end
+    end
+    for _, d in ipairs(otherAddonDirs) do
+      maybeAdd(d)
+    end
+    if version then
+      maybeAddAll(path.join('extracts', 'addons', version))
+    end
+    if rootDir then
+      maybeAddAll(path.join(rootDir, 'AddOns'))
     end
   end
 
   local function getAddOnMetadata(addon, key)
-    local toc = addonToToc[addon]
+    local toc = addonData[addon]
     return toc and toc.attrs[key] or nil
   end
 
+  local depAttrs = {
+    'RequiredDep',
+    'RequiredDeps',
+    'Dependencies',
+  }
+
+  local loaded = {}
+  local function loadAddon(addonName)
+    local toc = addonData[addonName]
+    if not toc then
+      error('unknown addon ' .. addonName)
+    end
+    if not loaded[addonName] and toc.attrs.AllowLoad ~= 'Glue' then
+      api.log(1, 'loading addon dependencies for %s', addonName)
+      for _, attr in ipairs(depAttrs) do
+        for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
+          loadAddon(dep)
+        end
+      end
+      api.log(1, 'loading addon files for %s', addonName)
+      local context = forAddon(addonName, {})
+      for _, file in ipairs(toc.files) do
+        context.loadFile(file)
+      end
+      api.log(1, 'done loading %s', addonName)
+      api.SendEvent('ADDON_LOADED', addonName)
+      loaded[addonName] = true
+    end
+  end
+
   local function loadFrameXml()
-    forAddon().loadFile(path.join(rootDir, 'GlobalEnvironment.lua'))
+    local context = forAddon()
+    context.loadFile(path.join(rootDir, 'GlobalEnvironment.lua'))
     -- Special hack to avoid loops in map resolution code.
     api.env.Enum.UIMapType.Continent = 0
     api.env.Enum.UIMapType.Cosmic = 0
     api.env.Enum.UIMapType.World = 0
     -- End special hack.
-    forAddon().loadFile(path.join(rootDir, 'FrameXML/GlobalStrings.lua'))
-    loadToc(resolveTocDir(path.join(rootDir, 'FrameXML')))
-    local tocFiles = {}
-    local addonDir = path.join(rootDir, 'AddOns')
+    context.loadFile(path.join(rootDir, 'FrameXML/GlobalStrings.lua'))
+    for _, file in ipairs(parseToc(resolveTocDir(path.join(rootDir, 'FrameXML'))).files) do
+      context.loadFile(file)
+    end
     -- TODO don't force load the rest of the tocs
     local badAddons = {
       Blizzard_FlightMap = true,
@@ -611,51 +634,27 @@ local function loader(api, cfg)
       Blizzard_SocialUI = true,
       Blizzard_Tutorial = true,  -- conflicts with NewPlayerExperience
     }
-    for dir in path.each(addonDir .. '/*', 'n', { skipfiles = true }) do
-      local toc = resolveTocDir(path.join(addonDir, dir))
-      if toc and not badAddons[dir] then
-        table.insert(tocFiles, toc)
+    local blizzardAddons = {}
+    for name in pairs(addonData) do
+      if name:sub(1, 9) == 'Blizzard_' and not badAddons[name] then
+        table.insert(blizzardAddons, name)
       end
     end
-    table.sort(tocFiles)
-    for _, tocFile in ipairs(tocFiles) do
-      local toc = parseToc(tocFile)
-      if toc.attrs.LoadOnDemand ~= '1' then
-        doLoad(tocFile)
+    table.sort(blizzardAddons)
+    for _, name in ipairs(blizzardAddons) do
+      if addonData[name].attrs.LoadOnDemand ~= '1' then
+        loadAddon(name)
       end
     end
-    for _, tocFile in ipairs(tocFiles) do
-      doLoad(tocFile)
+    for _, name in ipairs(blizzardAddons) do
+      loadAddon(name)
     end
-  end
-
-  local otherAddons = {}
-  for _, d in ipairs(otherAddonDirs) do
-    otherAddons[path.basename(d)] = d
-  end
-
-  function loadAddon(addonName)
-    local dirs = {
-      path.join('extracts/addons', version, addonName),
-      path.join(rootDir, 'AddOns', addonName),
-    }
-    if otherAddons[addonName] then
-      table.insert(dirs, 1, otherAddons[addonName])
-    end
-    for _, dir in ipairs(dirs) do
-      local tocFile = resolveTocDir(dir)
-      if tocFile then
-        return doLoad(tocFile, addonName)
-      end
-    end
-    error('unable to load ' .. addonName)
   end
 
   return {
     getAddOnMetadata = getAddOnMetadata,
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
-    loadToc = loadToc,
     loadXml = forAddon().loadXml,
     version = version,
   }
