@@ -3,6 +3,7 @@ local function new(log)
   local env = {}
   local errors = 0
   local frames = {}
+  local states = {}
   local templates = {}
   local uiobjectTypes = {}
   local userdata = {}
@@ -160,6 +161,7 @@ local function new(log)
     SendEvent = SendEvent,
     SetParent = SetParent,
     SetScript = SetScript,
+    states = states,
     templates = templates,
     uiobjectTypes = uiobjectTypes,
     UserData = u,

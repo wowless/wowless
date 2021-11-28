@@ -185,7 +185,11 @@ local function init(api, loader)
   api.env._G = api.env
   api.env.__dump = dump(api)
   Mixin(api.env, mkBaseEnv())
-  util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(loader.version, api.env, api.log), true)
+  for _, data in pairs(require('wowapi.data').state) do
+    api.states[data.name] = require('pl.tablex').deepcopy(data.value)
+  end
+  util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(
+    loader.version, api.env, api.log, api.states), true)
   util.recursiveMixin(api.env, mkWowEnv(api, loader), true)
   Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api))
 end

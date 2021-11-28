@@ -3,7 +3,7 @@ describe('loader', function()
 
   for _, v in ipairs({'Vanilla', 'TBC', 'Mainline'}) do
     it('loads ' .. v, function()
-      assert.same('table', type(loader.loadFunctions(v, {})))
+      assert.same('table', type(loader.loadFunctions(v, {}, nil, {})))
     end)
   end
 
