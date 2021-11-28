@@ -551,7 +551,7 @@ local function loader(api, cfg)
     return { attrs = attrs, files = files }
   end
 
-  local addonData = {}
+  local addonData = assert(api.states.Addons)
   do
     local function maybeAdd(dir)
       local name = path.basename(dir)
@@ -581,11 +581,6 @@ local function loader(api, cfg)
     if rootDir then
       maybeAddAll(path.join(rootDir, 'AddOns'))
     end
-  end
-
-  local function getAddOnMetadata(addon, key)
-    local toc = addonData[addon]
-    return toc and toc.attrs[key] or nil
   end
 
   local depAttrs = {
@@ -655,7 +650,6 @@ local function loader(api, cfg)
   end
 
   return {
-    getAddOnMetadata = getAddOnMetadata,
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
     loadXml = forAddon().loadXml,

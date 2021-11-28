@@ -1,0 +1,14 @@
+---
+name: GetAddOnMetadata
+status: implemented
+inputs:
+- - name: addon
+    type: string
+  - name: field
+    type: string
+outputs:
+- name: value
+  nilable: true
+  type: string
+states:
+- Addons

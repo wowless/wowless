@@ -162,9 +162,6 @@ local function mkWowEnv(api, loader)
         return idx ~= #api.frames and api.frames[idx+1] or nil
       end
     end,
-    GetAddOnMetadata = function(addon, key)
-      return loader.getAddOnMetadata(addon, key)
-    end,
     geterrorhandler = function()
       return api.ErrorHandler  -- UNIMPLEMENTED
     end,
