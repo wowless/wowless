@@ -21,6 +21,7 @@ local function mkBaseEnv()
       bor = bitlib.bor,
     },
     ceil = math.ceil,
+    collectgarbage = collectgarbage,
     coroutine = {
       create = coroutine.create,
       resume = coroutine.resume,

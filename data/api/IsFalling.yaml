@@ -1,0 +1,8 @@
+---
+name: IsFalling
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: falling
+  type: bool
