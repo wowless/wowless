@@ -563,9 +563,12 @@ local function loader(api, cfg)
       end
     end
     local function maybeAddAll(dir)
-      for d in lfs.dir(dir) do
-        if d ~= '.' and d ~= '..' then
-          maybeAdd(path.join(dir, d))
+      local attrs = lfs.attributes(dir)
+      if attrs and attrs.mode == 'directory' then
+        for d in lfs.dir(dir) do
+          if d ~= '.' and d ~= '..' then
+            maybeAdd(path.join(dir, d))
+          end
         end
       end
     end
