@@ -145,6 +145,10 @@ local function new(log)
     return errors
   end
 
+  for _, data in pairs(require('wowapi.data').state) do
+    states[data.name] = require('pl.tablex').deepcopy(data.value)
+  end
+
   return {
     CallSafely = CallSafely,
     CreateUIObject = CreateUIObject,
