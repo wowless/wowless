@@ -1,3 +1,7 @@
 ---
 name: IsAddonVersionCheckEnabled
 status: unimplemented
+inputs:
+- {}
+outputs:
+- type: bool
