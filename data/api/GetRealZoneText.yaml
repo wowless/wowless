@@ -1,5 +1,11 @@
 ---
 name: GetRealZoneText
-status: stub
-returns:
-- RealZoneText
+status: unimplemented
+inputs:
+- - name: instanceID
+    nilable: true
+    type: number
+outputs:
+- name: zone
+  stub: RealZoneText
+  type: string

@@ -1,5 +1,9 @@
 ---
 name: GetRealmName
-status: stub
-returns:
-- Realm
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: realmName
+  stub: Realm
+  type: string

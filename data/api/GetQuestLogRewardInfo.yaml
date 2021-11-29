@@ -1,11 +1,22 @@
 ---
 name: GetQuestLogRewardInfo
-status: stub
-returns:
-- moo
-- 1
-- 1
-- 1
-- false
-- 1
-- 1
+status: unimplemented
+inputs:
+- - name: itemIndex
+    type: number
+  - name: questID
+    nilable: true
+    type: number
+outputs:
+- name: name
+  type: string
+- name: texture
+  type: number
+- name: quantity
+  type: number
+- name: quality
+  type: number
+- name: isUsable
+  type: bool
+- name: itemID
+  type: number
