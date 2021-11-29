@@ -1,8 +1,10 @@
 ---
 name: C_SuperTrack.GetSuperTrackedQuestID
-status: stub
+status: unimplemented
 inputs:
 - {}
-outputs: {}
-returns:
-- 22
+outputs:
+- name: questID
+  nilable: true
+  stub: 22
+  type: number

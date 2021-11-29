@@ -44,12 +44,13 @@ local getStub = (function()
     local rets = {}
     for _, out in ipairs(sig) do
       local v
-      if out.stub then
-        local ty = type(out.stub)
+      if out.stub or out.default then
+        local value = out.stub or out.default
+        local ty = type(value)
         if ty == 'number' or ty == 'boolean' then
-          v = tostring(out.stub)
+          v = tostring(value)
         elseif ty == 'string' then
-          v = string.format('%q', out.stub)
+          v = string.format('%q', value)
         else
           error('unsupported stub value type ' .. ty)
         end
