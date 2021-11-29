@@ -1,3 +1,10 @@
 ---
 name: IsAddOnLoaded
 status: unimplemented
+inputs:
+- - name: index
+    type: number
+- - name: name
+    type: string
+outputs:
+- type: bool
