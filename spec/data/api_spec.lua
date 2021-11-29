@@ -18,6 +18,9 @@ describe('api', function()
           elseif t.status == 'implemented' then
             assert.Nil(t.returns, 'implemented apis cannot specify return values')
             assert.Not.Nil(data.impl[t.name], 'implemented apis must have an implementation')
+            for _, output in ipairs(t.outputs or {}) do
+              assert.Nil(output.stub, 'implemented apis cannot specify return values')
+            end
           else
             error('unsupported status')
           end

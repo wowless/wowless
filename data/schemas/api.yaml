@@ -48,6 +48,9 @@ type:
               type: string
             nilable:
               type: boolean
+            stub:
+              type:
+                schema: any
             type:
               required: true
               type:

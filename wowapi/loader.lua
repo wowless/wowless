@@ -43,7 +43,14 @@ local getStub = (function()
   return function(sig)
     local rets = {}
     for _, out in ipairs(sig) do
-      local v = defaultOutputs[out.nilable and 'nil' or out.type] or structureDefaults[out.type]
+      local v
+      if out.nilable then
+        v = 'nil'
+      elseif out.stub then
+        v = string.format('%q', tostring(out.stub))
+      else
+        v = defaultOutputs[out.type] or structureDefaults[out.type]
+      end
       assert(v, ('invalid output type %q'):format(out.type))
       table.insert(rets, v)
     end

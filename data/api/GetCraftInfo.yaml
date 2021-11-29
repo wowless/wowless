@@ -1,7 +1,6 @@
 ---
 name: GetCraftInfo
-status: stub
-comment: stubbed for craftType=optimal to handle CraftTypeColor
+status: unimplemented
 versions:
 - TBC
 - Vanilla
@@ -14,6 +13,7 @@ outputs:
 - name: craftSubSpellName
   type: string
 - name: craftType
+  stub: optimal
   type: string
 - name: numAvailable
   type: number
@@ -23,11 +23,3 @@ outputs:
   type: number
 - name: requiredLevel
   type: number
-returns:
-- foo
-- subfoo
-- optimal
-- 1
-- false
-- 0
-- 0
