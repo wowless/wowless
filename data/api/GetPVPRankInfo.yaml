@@ -1,6 +1,19 @@
 ---
 name: GetPVPRankInfo
-status: stub
-returns:
-- Pariah
-- 0
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: rank
+    type: number
+  - name: faction
+    nilable: true
+    type: string
+outputs:
+- name: rankName
+  stub: Pariah
+  type: string
+- name: rankNumber
+  stub: 0
+  type: number

@@ -1,5 +1,10 @@
 ---
 name: GetNumQuestWatches
-status: stub
-returns:
-- 0
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- type: number

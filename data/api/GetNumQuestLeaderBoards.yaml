@@ -1,5 +1,10 @@
 ---
 name: GetNumQuestLeaderBoards
-status: stub
-returns:
-- 0
+status: unimplemented
+inputs:
+- - name: questLogIndex
+    nilable: true
+    type: number
+outputs:
+- name: numObjectives
+  type: number

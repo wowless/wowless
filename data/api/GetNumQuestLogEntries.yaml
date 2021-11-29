@@ -1,6 +1,10 @@
 ---
 name: GetNumQuestLogEntries
-status: stub
-returns:
-- 1
-- 1
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: numEntries
+  type: number
+- name: numQuests
+  type: number

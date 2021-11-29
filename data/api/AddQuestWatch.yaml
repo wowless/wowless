@@ -1,0 +1,7 @@
+---
+name: AddQuestWatch
+status: unimplemented
+inputs:
+- - name: questIndex
+    type: number
+outputs: {}
