@@ -1,0 +1,12 @@
+---
+name: GetCraftNumReagents
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: id
+    type: number
+outputs:
+- name: numReagents
+  type: number

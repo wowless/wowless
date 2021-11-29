@@ -1,0 +1,13 @@
+---
+name: GetCraftCooldown
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: id
+    type: number
+outputs:
+- name: craftCooldownTime
+  nilable: true
+  type: number

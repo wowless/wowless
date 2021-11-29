@@ -1,0 +1,13 @@
+---
+name: GetPetTrainingPoints
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- name: totalPoints
+  type: number
+- name: spent
+  type: number

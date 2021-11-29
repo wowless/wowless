@@ -1,0 +1,10 @@
+---
+name: GetCraftSelectionIndex
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- type: number

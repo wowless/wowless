@@ -1,0 +1,10 @@
+---
+name: GetCraftButtonToken
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- type: string

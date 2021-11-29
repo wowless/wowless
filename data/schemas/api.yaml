@@ -2,6 +2,8 @@
 name: api
 type:
   record:
+    comment:
+      type: string
     inputs:
       type:
         sequenceof:

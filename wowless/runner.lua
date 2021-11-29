@@ -58,6 +58,9 @@ local function run(cfg)
     b:SetAttribute('macrotext', '/startattack\n/stopattack')
     b:Click()
   end
+  api.SendEvent('CRAFT_SHOW')
+  api.SendEvent('CRAFT_UPDATE')
+  api.SendEvent('CRAFT_CLOSE')
   api.SendEvent('PLAYER_LOGOUT')
   return api
 end

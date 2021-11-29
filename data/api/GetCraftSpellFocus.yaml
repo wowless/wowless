@@ -1,0 +1,9 @@
+---
+name: GetCraftSpellFocus
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: id
+    type: number

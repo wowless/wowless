@@ -1,0 +1,10 @@
+---
+name: CraftIsEnchanting
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- type: bool

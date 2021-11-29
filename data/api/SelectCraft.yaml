@@ -1,0 +1,10 @@
+---
+name: SelectCraft
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: id
+    type: number
+outputs: {}

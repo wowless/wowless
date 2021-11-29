@@ -1,0 +1,11 @@
+---
+name: GetCraftDescription
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: id
+    type: number
+outputs:
+- type: string

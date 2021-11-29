@@ -1,0 +1,20 @@
+---
+name: GetCraftReagentInfo
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: id
+    type: number
+  - name: reagentIndex
+    type: number
+outputs:
+- name: reagentName
+  type: string
+- name: reagentTexture
+  type: number
+- name: reagentCount
+  type: number
+- name: playerReagentCount
+  type: number
