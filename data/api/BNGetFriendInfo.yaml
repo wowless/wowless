@@ -1,0 +1,43 @@
+---
+name: BNGetFriendInfo
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: bnetIDAccount
+  type: string
+- name: accountName
+  type: string
+- name: battleTag
+  type: string
+- name: isBattleTag
+  type: bool
+- name: characterName
+  type: string
+- name: bnetIDGameAccount
+  type: string
+- name: client
+  type: string
+- name: isOnline
+  type: bool
+- name: lastOnline
+  type: number
+- name: isAFK
+  type: bool
+- name: isDND
+  type: bool
+- name: broadcastText
+  type: string
+- name: noteText
+  type: string
+- name: isRealIDFriend
+  type: bool
+- name: broadcastTime
+  type: number
+- name: canSoR
+  type: bool
+- name: isReferAFriend
+  type: bool
+- name: canSummonFriend
+  type: bool

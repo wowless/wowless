@@ -1,0 +1,13 @@
+---
+name: BNGetFriendInviteInfo
+status: unimplemented
+inputs:
+- - name: inviteIndex
+    type: number
+outputs:
+- name: inviteID
+  type: number
+- name: accountName
+  type: string
+- name: isBattleTag
+  type: bool

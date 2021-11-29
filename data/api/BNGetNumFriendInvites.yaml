@@ -1,5 +1,8 @@
 ---
 name: BNGetNumFriendInvites
-status: stub
-returns:
-- 0
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: numInvites
+  type: number
