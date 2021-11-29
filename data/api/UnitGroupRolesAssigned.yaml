@@ -1,5 +1,12 @@
 ---
 name: UnitGroupRolesAssigned
-status: stub
-returns:
-- DAMAGER
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- - name: unit
+    type: string
+outputs:
+- name: role
+  stub: DAMAGER
+  type: string

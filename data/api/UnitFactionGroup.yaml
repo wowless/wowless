@@ -1,6 +1,13 @@
 ---
 name: UnitFactionGroup
-status: stub
-returns:
-- Horde
-- Horde
+status: unimplemented
+inputs:
+- - name: unit
+    type: string
+outputs:
+- name: factionTag
+  stub: Horde
+  type: string
+- name: localizedFactionName
+  stub: Horde
+  type: string
