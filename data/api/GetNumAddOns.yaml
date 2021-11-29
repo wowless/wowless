@@ -1,5 +1,9 @@
 ---
 name: GetNumAddOns
-status: stub
-returns:
-- 0
+status: implemented
+inputs:
+- {}
+outputs:
+- type: number
+states:
+- Addons

@@ -558,7 +558,9 @@ local function loader(api, cfg)
       if not addonData[name] then
         local tocFile = resolveTocDir(dir)
         if tocFile then
-          addonData[name] = parseToc(tocFile)
+          local addon = parseToc(tocFile)
+          addonData[name] = addon
+          table.insert(addonData, addon)
         end
       end
     end
@@ -633,7 +635,7 @@ local function loader(api, cfg)
     }
     local blizzardAddons = {}
     for name in pairs(addonData) do
-      if name:sub(1, 9) == 'Blizzard_' and not badAddons[name] then
+      if type(name) == 'string' and name:sub(1, 9) == 'Blizzard_' and not badAddons[name] then
         table.insert(blizzardAddons, name)
       end
     end
