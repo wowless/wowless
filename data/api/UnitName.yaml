@@ -1,5 +1,13 @@
 ---
 name: UnitName
-status: stub
-returns:
-- Unitname
+status: unimplemented
+inputs:
+- - name: unit
+    type: string
+outputs:
+- name: name
+  stub: Unitname
+  type: string
+- name: realm
+  nilable: true
+  type: string

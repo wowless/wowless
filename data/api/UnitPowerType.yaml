@@ -1,6 +1,22 @@
 ---
 name: UnitPowerType
-status: stub
-returns:
-- 0
-- MANA
+status: unimplemented
+inputs:
+- - name: unit
+    type: string
+outputs:
+- name: powerType
+  stub: 0
+  type: number
+- name: powerToken
+  stub: MANA
+  type: string
+- name: altR
+  nilable: true
+  type: number
+- name: altG
+  nilable: true
+  type: number
+- name: altB
+  nilable: true
+  type: number

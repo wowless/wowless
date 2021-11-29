@@ -1,8 +1,20 @@
 ---
 name: UnitResistance
-status: stub
-returns:
-- 0
-- 0
-- 0
-- 0
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: unit
+    type: string
+  - name: id
+    type: number
+outputs:
+- name: base
+  type: number
+- name: resistance
+  type: number
+- name: positive
+  type: number
+- name: negative
+  type: number

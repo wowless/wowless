@@ -44,10 +44,17 @@ local getStub = (function()
     local rets = {}
     for _, out in ipairs(sig) do
       local v
-      if out.nilable then
+      if out.stub then
+        local ty = type(out.stub)
+        if ty == 'number' or ty == 'boolean' then
+          v = tostring(out.stub)
+        elseif ty == 'string' then
+          v = string.format('%q', out.stub)
+        else
+          error('unsupported stub value type ' .. ty)
+        end
+      elseif out.nilable then
         v = 'nil'
-      elseif out.stub then
-        v = string.format('%q', tostring(out.stub))
       else
         v = defaultOutputs[out.type] or structureDefaults[out.type]
       end

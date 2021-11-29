@@ -1,9 +1,9 @@
 ---
 name: UnitSex
-status: stub
+status: unimplemented
 inputs:
 - - type: string
 outputs:
-- type: nil
-returns:
-- 2
+- nilable: true
+  stub: 2
+  type: number

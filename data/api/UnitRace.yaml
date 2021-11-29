@@ -1,7 +1,15 @@
 ---
 name: UnitRace
-status: stub
-returns:
-- Human
-- Human
-- 1
+status: unimplemented
+inputs:
+- - name: unit
+    type: string
+outputs:
+- name: race
+  stub: Human
+  type: string
+- name: fileName
+  stub: Human
+  type: string
+- name: id
+  type: number
