@@ -1,7 +1,13 @@
 ---
 name: GetGuildInfo
-status: stub
-returns:
-- GuildName
-- Member
-- 1
+status: unimplemented
+inputs:
+- - name: unit
+    type: string
+outputs:
+- name: guildName
+  type: string
+- name: guildRankName
+  type: string
+- name: guildRankIndex
+  type: number

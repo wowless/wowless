@@ -1,10 +1,20 @@
 ---
 name: GetGuildFactionInfo
-status: stub
-returns:
-- Guild
-- Description
-- 0
-- 0
-- 0
-- 0
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs:
+- name: name
+  type: string
+- name: description
+  type: string
+- name: standingID
+  type: number
+- name: barMin
+  type: number
+- name: barMax
+  type: number
+- name: barValue
+  type: number

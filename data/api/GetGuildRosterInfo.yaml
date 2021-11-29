@@ -1,7 +1,23 @@
 ---
 name: GetGuildRosterInfo
-status: stub
-returns:
-- Moo-Realm
-- Member
-- 1
+status: unimplemented
+inputs:
+- - name: guildIndex
+    type: number
+outputs:
+- name: name
+  type: string
+- name: rank
+  type: string
+- name: rankIndex
+  type: number
+- name: class
+  type: string
+- name: zone
+  type: string
+- name: officerNote
+  type: string
+- name: isOnline
+  type: bool
+- name: isAway
+  type: bool
