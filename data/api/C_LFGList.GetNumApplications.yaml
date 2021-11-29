@@ -1,6 +1,12 @@
 ---
 name: C_LFGList.GetNumApplications
-status: stub
-returns:
-- 0
-- 0
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs:
+- name: numApplications
+  type: number
+- name: numActiveApplications
+  type: number

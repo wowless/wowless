@@ -1,6 +1,19 @@
 ---
 name: C_LootHistory.GetPlayerInfo
-status: stub
-returns:
-- moo
-- WARRIOR
+status: unimplemented
+inputs:
+- - name: itemIndex
+    type: number
+  - name: playerIndex
+    type: number
+outputs:
+- name: name
+  type: string
+- name: class
+  type: string
+- name: rollType
+  type: string
+- name: roll
+  type: number
+- name: isWinner
+  type: bool
