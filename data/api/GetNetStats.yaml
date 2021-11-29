@@ -1,8 +1,14 @@
 ---
 name: GetNetStats
-status: stub
-returns:
-- 1
-- 1
-- 1
-- 1
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: bandwidthIn
+  type: number
+- name: bandwidthOut
+  type: number
+- name: latencyHome
+  type: number
+- name: latencyWorld
+  type: number

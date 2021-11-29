@@ -1,6 +1,12 @@
 ---
 name: GetNumCompletedAchievements
-status: stub
-returns:
-- 1
-- 1
+status: unimplemented
+inputs:
+- - name: forGuild
+    nilable: true
+    type: bool
+outputs:
+- name: numAchievements
+  type: number
+- name: numCompleted
+  type: number

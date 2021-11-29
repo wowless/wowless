@@ -1,5 +1,20 @@
 ---
 name: GetMirrorTimerInfo
-status: stub
-returns:
-- UNKNOWN
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: timer
+  stub: EXHAUSTION
+  type: string
+- name: value
+  type: number
+- name: maxValue
+  type: number
+- name: scale
+  type: number
+- name: paused
+  type: number
+- name: label
+  type: string

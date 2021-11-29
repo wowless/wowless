@@ -1,7 +1,12 @@
 ---
 name: GetNumGuildMembers
-status: stub
-returns:
-- 0
-- 0
-- 0
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: totalMembers
+  type: number
+- name: onlineMembers
+  type: number
+- name: onlineAndMobileMembers
+  type: number

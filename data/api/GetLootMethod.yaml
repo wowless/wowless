@@ -1,5 +1,16 @@
 ---
 name: GetLootMethod
-status: stub
-returns:
-- freeforall
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- name: lootMethod
+  stub: freeforall
+  type: string
+- name: partyMaster
+  type: number
+- name: raidMaster
+  type: number

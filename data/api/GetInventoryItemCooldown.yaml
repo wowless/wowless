@@ -1,7 +1,13 @@
 ---
 name: GetInventoryItemCooldown
-status: stub
-returns:
-- 0
-- 0
-- 0
+status: unimplemented
+inputs:
+- - name: unit
+    type: string
+outputs:
+- name: start
+  type: number
+- name: duration
+  type: number
+- name: enable
+  type: number

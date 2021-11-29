@@ -1,14 +1,14 @@
 ---
 name: GetItemSubClassInfo
-status: stub
+status: unimplemented
 inputs:
-- - type: number
-  - type: number
+- - name: classID
+    type: number
+  - name: subClassID
+    type: number
 outputs:
 - name: name
+  stub: someNonEmptyString
   type: string
 - name: isArmorType
   type: bool
-returns:
-- nonempty
-- false

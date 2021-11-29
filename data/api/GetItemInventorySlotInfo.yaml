@@ -1,10 +1,10 @@
 ---
 name: GetItemInventorySlotInfo
-status: stub
+status: unimplemented
 inputs:
-- - type: number
+- - name: inventoryType
+    type: number
 outputs:
 - name: name
+  stub: someNonEmptyString
   type: string
-returns:
-- nonempty

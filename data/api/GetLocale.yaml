@@ -1,5 +1,9 @@
 ---
 name: GetLocale
-status: stub
-returns:
-- enUS
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: locale
+  stub: enUS
+  type: string
