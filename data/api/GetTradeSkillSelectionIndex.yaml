@@ -1,0 +1,8 @@
+---
+name: GetTradeSkillSelectionIndex
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: skillIndex
+  type: number

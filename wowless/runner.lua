@@ -61,6 +61,9 @@ local function run(cfg)
   api.SendEvent('CRAFT_SHOW')
   api.SendEvent('CRAFT_UPDATE')
   api.SendEvent('CRAFT_CLOSE')
+  api.SendEvent('TRADE_SKILL_SHOW')
+  api.SendEvent('TRADE_SKILL_UPDATE')
+  api.SendEvent('TRADE_SKILL_CLOSE')
   api.SendEvent('PLAYER_LOGOUT')
   return api
 end
