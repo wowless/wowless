@@ -1,13 +1,15 @@
 ---
 name: UnitClass
-status: stub
+status: unimplemented
 inputs:
-- - type: string
+- - name: unit
+    type: string
 outputs:
-- type: string
-- type: string
-- type: number
-returns:
-- Warrior
-- WARRIOR
-- 1
+- name: className
+  stub: Warrior
+  type: string
+- name: classFilename
+  stub: WARRIOR
+  type: string
+- name: classID
+  type: number
