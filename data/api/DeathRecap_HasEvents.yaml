@@ -1,0 +1,9 @@
+---
+name: DeathRecap_HasEvents
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs:
+- type: bool
