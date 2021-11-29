@@ -1,0 +1,23 @@
+---
+name: GetSpecializationInfoByID
+status: unimplemented
+inputs:
+- - name: specID
+    type: number
+  - name: gender
+    nilable: true
+    type: number
+outputs:
+- name: id
+  type: number
+- name: name
+  type: string
+- name: description
+  type: string
+- name: texture
+  type: number
+- name: role
+  type: string
+- name: class
+  stub: WARRIOR
+  type: string

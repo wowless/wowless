@@ -1,5 +1,9 @@
 ---
 name: GetBagName
-status: stub
-returns:
-- BagName
+status: unimplemented
+inputs:
+- - name: bagID
+    type: number
+outputs:
+- name: bagName
+  type: string

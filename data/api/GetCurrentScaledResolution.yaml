@@ -1,6 +1,12 @@
 ---
 name: GetCurrentScaledResolution
-status: stub
-returns:
-- 1024
-- 768
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: width
+  stub: 1024
+  type: number
+- name: height
+  stub: 768
+  type: number

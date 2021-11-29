@@ -1,6 +1,11 @@
 ---
 name: GetArenaOpponentSpec
-status: stub
-returns:
-- 0
-- 0
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: specID
+  type: number
+- name: gender
+  type: number

@@ -1,7 +1,15 @@
 ---
 name: GetActionCooldown
-status: stub
-returns:
-- 0
-- 0
-- 0
+status: unimplemented
+inputs:
+- - name: action
+    type: number
+outputs:
+- name: start
+  type: number
+- name: duration
+  type: number
+- name: enable
+  type: number
+- name: modRate
+  type: number

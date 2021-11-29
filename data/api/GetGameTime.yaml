@@ -1,6 +1,10 @@
 ---
 name: GetGameTime
-status: stub
-returns:
-- 1
-- 1
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: hour
+  type: number
+- name: minute
+  type: number

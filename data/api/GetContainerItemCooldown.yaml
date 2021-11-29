@@ -1,7 +1,15 @@
 ---
 name: GetContainerItemCooldown
-status: stub
-returns:
-- 0
-- 0
-- 0
+status: unimplemented
+inputs:
+- - name: bagID
+    type: number
+  - name: slot
+    type: number
+outputs:
+- name: start
+  type: number
+- name: duration
+  type: number
+- name: enable
+  type: number

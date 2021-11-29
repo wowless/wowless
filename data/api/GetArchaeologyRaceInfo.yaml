@@ -1,9 +1,19 @@
 ---
 name: GetArchaeologyRaceInfo
-status: stub
-returns:
-- Name
-- null
-- null
-- 0
-- 0
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- - name: raceIndex
+    type: number
+outputs:
+- name: name
+  type: string
+- name: texture
+  type: number
+- name: itemID
+  type: number
+- name: currencyAmount
+  type: number
+- name: projectAmount
+  type: number

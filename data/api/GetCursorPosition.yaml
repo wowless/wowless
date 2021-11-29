@@ -1,6 +1,10 @@
 ---
 name: GetCursorPosition
-status: stub
-returns:
-- 0
-- 0
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: x
+  type: number
+- name: y
+  type: number

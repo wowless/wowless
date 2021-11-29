@@ -1,6 +1,12 @@
 ---
 name: GetDefaultLanguage
-status: stub
-returns:
-- Common
-- 7
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: language
+  stub: Common
+  type: string
+- name: languageID
+  stub: 7
+  type: number
