@@ -1,6 +1,10 @@
 ---
 name: GetSummonFriendCooldown
-status: stub
-returns:
-- 0
-- 0
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: start
+  type: number
+- name: duration
+  type: number

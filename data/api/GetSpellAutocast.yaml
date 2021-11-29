@@ -1,0 +1,13 @@
+---
+name: GetSpellAutocast
+status: unimplemented
+inputs:
+- - name: slot
+    type: number
+  - name: bookType
+    type: string
+outputs:
+- name: autoCastAllowed
+  type: bool
+- name: autoCastEnabled
+  type: bool

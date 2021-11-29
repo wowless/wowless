@@ -1,7 +1,12 @@
 ---
 name: GetRestState
-status: stub
-returns:
-- 2
-- Normal
-- 1
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: exhaustionStateID
+  type: number
+- name: exhaustionStateName
+  type: string
+- name: exhaustionStateMultiplier
+  type: number

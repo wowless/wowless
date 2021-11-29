@@ -1,8 +1,23 @@
 ---
 name: GetSpellTabInfo
-status: stub
-returns:
-- moo
-- 0
-- 0
-- 0
+status: unimplemented
+inputs:
+- - name: tabIndex
+    type: number
+outputs:
+- name: name
+  type: string
+- name: texture
+  type: number
+- name: offset
+  type: number
+- name: numSlots
+  type: number
+- name: isGuild
+  type: bool
+- name: offSpecID
+  type: string
+- name: shouldHide
+  type: bool
+- name: specID
+  type: number

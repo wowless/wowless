@@ -1,0 +1,13 @@
+---
+name: IsPassiveSpell
+status: unimplemented
+inputs:
+- - name: slot
+    type: number
+  - name: bookType
+    type: string
+- - name: spellName
+    type: string
+outputs:
+- name: isPassive
+  type: bool

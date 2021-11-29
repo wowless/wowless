@@ -1,7 +1,12 @@
 ---
 name: GetRestrictedAccountData
-status: stub
-returns:
-- 20
-- 10000000
-- 0
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: rLevel
+  type: number
+- name: rMoney
+  type: number
+- name: profCap
+  type: number

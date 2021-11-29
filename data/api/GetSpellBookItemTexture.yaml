@@ -1,0 +1,11 @@
+---
+name: GetSpellBookItemTexture
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+  - name: bookType
+    type: string
+outputs:
+- name: fileID
+  type: number

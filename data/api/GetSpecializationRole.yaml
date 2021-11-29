@@ -1,5 +1,10 @@
 ---
 name: GetSpecializationRole
-status: stub
-returns:
-- DAMAGER
+status: unimplemented
+inputs:
+- - name: spec
+    type: number
+outputs:
+- name: role
+  stub: DAMAGER
+  type: string
