@@ -589,13 +589,12 @@ local function loader(api, cfg)
     'Dependencies',
   }
 
-  local loaded = {}
   local function loadAddon(addonName)
     local toc = addonData[addonName]
     if not toc then
       error('unknown addon ' .. addonName)
     end
-    if not loaded[addonName] and toc.attrs.AllowLoad ~= 'Glue' then
+    if not toc.loaded and toc.attrs.AllowLoad ~= 'Glue' then
       api.log(1, 'loading addon dependencies for %s', addonName)
       for _, attr in ipairs(depAttrs) do
         for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
@@ -609,7 +608,7 @@ local function loader(api, cfg)
       end
       api.log(1, 'done loading %s', addonName)
       api.SendEvent('ADDON_LOADED', addonName)
-      loaded[addonName] = true
+      toc.loaded = true
     end
   end
 
