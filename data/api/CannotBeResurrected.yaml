@@ -1,0 +1,7 @@
+---
+name: CannotBeResurrected
+status: unimplemented
+inputs:
+- {}
+outputs:
+- type: bool
