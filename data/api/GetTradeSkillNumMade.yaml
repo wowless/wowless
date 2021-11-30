@@ -1,0 +1,14 @@
+---
+name: GetTradeSkillNumMade
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: skillIndex
+    type: number
+outputs:
+- name: minMade
+  type: number
+- name: maxMade
+  type: number

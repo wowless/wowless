@@ -1,0 +1,15 @@
+---
+name: GetTradeSkillLine
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- name: skillLineName
+  type: string
+- name: skillLineRank
+  type: number
+- name: skillLineMaxRank
+  type: number

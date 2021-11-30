@@ -1,0 +1,9 @@
+---
+name: C_TradeSkillUI.IsTradeSkillReady
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs:
+- type: bool
