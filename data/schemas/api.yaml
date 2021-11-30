@@ -41,7 +41,14 @@ type:
               type:
                 schema: any
             innerType:
-              type: string
+              type:
+                oneof:
+                - literal: bool
+                - literal: number
+                - literal: string
+                - literal: table
+                - literal: unknown
+                - ref: structure
             mixin:
               type: string
             name:
