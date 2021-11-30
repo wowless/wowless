@@ -16,92 +16,14 @@ local function loaddir(dir, ext)
   return t
 end
 
-local function toTexture(parent, tex)
-  if type(tex) == 'string' or type(tex) == 'number' then
-    local t = parent:CreateTexture()
-    t:SetTexture(tex)
-    return t
-  else
-    return tex
-  end
-end
-
-local function loadUIObject(name)
-  local function lua(f)
-    return extLoaders.lua(('data/uiobjects/%s/%s.lua'):format(name, f))
-  end
-  local cfg = extLoaders.yaml(('data/uiobjects/%s/%s.yaml'):format(name, name))
-  local constructor = (function()
-    local luainit = lua('init')
-    local deepcopy = require('pl.tablex').deepcopy
-    return function(self)
-      -- luacheck: globals u
-      local ud = u(self)
-      for fname, field in pairs(cfg.fields or {}) do
-        if field.init then
-          ud[fname] = type(field.init) == 'table' and deepcopy(field.init) or field.init
-        end
-      end
-      if luainit then
-        setfenv(luainit, getfenv(1))(self)
-      end
-    end
-  end)()
-  local mixin = {}
-  for mname, method in pairs(cfg.methods) do
-    if method.status == 'implemented' then
-      mixin[mname] = assert(lua(mname))
-    elseif method.status == 'getter' then
-      -- luacheck: globals u
-      mixin[mname] = function(self)
-        local ud = u(self)
-        local t = {}
-        for i, f in ipairs(method.fields) do
-          t[i] = ud[f]
-        end
-        return unpack(t, 1, #method.fields)
-      end
-    elseif method.status == 'setter' then
-      mixin[mname] = function(self, ...)
-        local ud = u(self)
-        for i, f in ipairs(method.fields) do
-          local v = select(i, ...)
-          local ty = cfg.fields[f].type
-          if ty == 'bool' then
-            ud[f] = not not v
-          elseif ty == 'texture' then
-            ud[f] = toTexture(self, v)
-          else
-            ud[f] = v
-          end
-        end
-      end
-    elseif method.status == 'unimplemented' then
-      -- TODO unify this with loader.lua
-      local t = {}
-      local n = method.outputs and #method.outputs or 0
-      for _, output in ipairs(method.outputs or {}) do
-        assert(output.type == 'number', ('unsupported type in %s.%s'):format(name, mname))
-        table.insert(t, 1)
-      end
-      mixin[mname] = function() return unpack(t, 1, n) end
-    else
-      error(('unsupported method status %q on %s.%s'):format(method.status, name, mname))
-    end
-  end
-  return {
-    cfg = cfg,
-    constructor = constructor,
-    inherits = cfg.inherits,
-    mixin = mixin,
-  }
-end
-
 local function loadUIObjects()
   local uiobjects = {}
-  for dir in require('lfs').dir('data/uiobjects') do
-    if dir ~= '.' and dir ~= '..' then
-      uiobjects[dir] = loadUIObject(dir)
+  for d in require('lfs').dir('data/uiobjects') do
+    if d ~= '.' and d ~= '..' then
+      uiobjects[d] = {
+        cfg = extLoaders.yaml(('data/uiobjects/%s/%s.yaml'):format(d, d)),
+        methods = loaddir('uiobjects/' .. d, 'lua'),
+      }
     end
   end
   return uiobjects

@@ -1,6 +1,16 @@
 local util = require('wowless.util')
 local Mixin = util.mixin
 
+local function toTexture(parent, tex)
+  if type(tex) == 'string' or type(tex) == 'number' then
+    local t = parent:CreateTexture()
+    t:SetTexture(tex)
+    return t
+  else
+    return tex
+  end
+end
+
 local function mkBaseUIObjectTypes(api)
   local function u(x)
     return api.UserData(x)
@@ -93,7 +103,72 @@ local function mkBaseUIObjectTypes(api)
     env[k] = v
   end
 
-  local uiobjects = require('wowapi.data').uiobjects
+  local uiobjects = {}
+  for name, data in pairs(require('wowapi.data').uiobjects) do
+    local cfg = data.cfg
+    local lua = data.methods
+    local constructor = (function()
+      local deepcopy = require('pl.tablex').deepcopy
+      return function(self)
+        local ud = u(self)
+        for fname, field in pairs(cfg.fields or {}) do
+          if field.init then
+            ud[fname] = type(field.init) == 'table' and deepcopy(field.init) or field.init
+          end
+        end
+        if lua.init then
+          setfenv(lua.init, getfenv(1))(self)
+        end
+      end
+    end)()
+    local mixin = {}
+    for mname, method in pairs(cfg.methods) do
+      if method.status == 'implemented' then
+        mixin[mname] = assert(lua[mname])
+      elseif method.status == 'getter' then
+        mixin[mname] = function(self)
+          local ud = u(self)
+          local t = {}
+          for i, f in ipairs(method.fields) do
+            t[i] = ud[f]
+          end
+          return unpack(t, 1, #method.fields)
+        end
+      elseif method.status == 'setter' then
+        mixin[mname] = function(self, ...)
+          local ud = u(self)
+          for i, f in ipairs(method.fields) do
+            local v = select(i, ...)
+            local ty = cfg.fields[f].type
+            if ty == 'bool' then
+              ud[f] = not not v
+            elseif ty == 'texture' then
+              ud[f] = toTexture(self, v)
+            else
+              ud[f] = v
+            end
+          end
+        end
+      elseif method.status == 'unimplemented' then
+        -- TODO unify this with loader.lua
+        local t = {}
+        local n = method.outputs and #method.outputs or 0
+        for _, output in ipairs(method.outputs or {}) do
+          assert(output.type == 'number', ('unsupported type in %s.%s'):format(name, mname))
+          table.insert(t, 1)
+        end
+        mixin[mname] = function() return unpack(t, 1, n) end
+      else
+        error(('unsupported method status %q on %s.%s'):format(method.status, name, mname))
+      end
+    end
+    uiobjects[name] = {
+      cfg = cfg,
+      constructor = constructor,
+      inherits = cfg.inherits,
+      mixin = mixin,
+    }
+  end
   for _, v in pairs(uiobjects) do
     if v.constructor then
       setfenv(v.constructor, env)
