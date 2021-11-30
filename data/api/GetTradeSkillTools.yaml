@@ -1,0 +1,9 @@
+---
+name: GetTradeSkillTools
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: skillIndex
+    type: number

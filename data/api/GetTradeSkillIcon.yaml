@@ -1,0 +1,12 @@
+---
+name: GetTradeSkillIcon
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: skillIndex
+    type: number
+outputs:
+- name: texture
+  type: number

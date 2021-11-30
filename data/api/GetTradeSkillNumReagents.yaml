@@ -1,0 +1,11 @@
+---
+name: GetTradeSkillNumReagents
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: skillIndex
+    type: number
+outputs:
+- type: number
