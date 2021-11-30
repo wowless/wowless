@@ -6,7 +6,7 @@ inputs:
     type: number
   - name: optionalReagentIndex
     type: number
-  - innerType: OptionalReagentInfo
+  - innerType: unknown
     name: optionalReagents
     type: table
 outputs:

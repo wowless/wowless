@@ -7,7 +7,7 @@ inputs:
   - default: 1
     name: numCasts
     type: number
-  - innerType: OptionalReagentInfo
+  - innerType: unknown
     name: optionalReagents
     nilable: true
     type: table

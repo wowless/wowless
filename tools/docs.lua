@@ -118,7 +118,7 @@ local function insig(fn, ns)
     end
     table.insert(t, {
       default = a.Default,
-      innerType = a.InnerType,
+      innerType = a.InnerType and t2ty(a.InnerType, ns),
       mixin = a.Mixin,
       name = a.Name,
       nilable = a.Nilable or nil,
