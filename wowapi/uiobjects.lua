@@ -12,6 +12,8 @@ local function toTexture(parent, tex)
 end
 
 local function mkBaseUIObjectTypes(api)
+  local log = api.log or function() end
+
   local function u(x)
     return api.UserData(x)
   end
@@ -105,6 +107,26 @@ local function mkBaseUIObjectTypes(api)
 
   local uiobjects = {}
   for name, data in pairs(require('wowapi.data').uiobjects) do
+    local function wrap(fname, fn)
+      setfenv(fn, env)
+      return function(...)
+        log(4, 'entering %s:%s', name, fname)
+        local t = {...}
+        local n = select('#', ...)
+        return (function(success, ...)
+          log(4, 'leaving %s:%s (%s)', name, fname, success and 'success' or 'failure')
+          assert(success, ...)
+          return ...
+        end)(pcall(function() return fn(unpack(t, 1, n)) end))
+      end
+    end
+    local function wrapAll(map)
+      local mm = {}
+      for k, v in pairs(map) do
+        mm[k] = wrap(k, v)
+      end
+      return mm
+    end
     local cfg = data.cfg
     local lua = data.methods
     local constructor = (function()
@@ -164,18 +186,10 @@ local function mkBaseUIObjectTypes(api)
     end
     uiobjects[name] = {
       cfg = cfg,
-      constructor = constructor,
+      constructor = wrap('<init>', constructor),
       inherits = cfg.inherits,
-      mixin = mixin,
+      mixin = wrapAll(mixin),
     }
-  end
-  for _, v in pairs(uiobjects) do
-    if v.constructor then
-      setfenv(v.constructor, env)
-    end
-    for _, method in pairs(v.mixin) do
-      setfenv(method, env)
-    end
   end
   return flatten(uiobjects)
 end
