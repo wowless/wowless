@@ -11,6 +11,6 @@ inputs:
   - name: count
     type: number
 outputs:
-- innerType: ClubMessageInfo
+- innerType: C_Club.ClubMessageInfo
   name: messages
   type: table

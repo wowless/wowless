@@ -13,15 +13,15 @@ fields:
 - name: labelStyle
   nilable: true
   type: string
-- innerType: GamePadRawButtonMapping
+- innerType: C_GamePad.GamePadRawButtonMapping
   name: rawButtonMappings
   type: table
-- innerType: GamePadRawAxisMapping
+- innerType: C_GamePad.GamePadRawAxisMapping
   name: rawAxisMappings
   type: table
-- innerType: GamePadAxisConfig
+- innerType: C_GamePad.GamePadAxisConfig
   name: axisConfigs
   type: table
-- innerType: GamePadStickConfig
+- innerType: C_GamePad.GamePadStickConfig
   name: stickConfigs
   type: table

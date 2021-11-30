@@ -7,6 +7,6 @@ inputs:
   - name: memberId
     type: number
 outputs:
-- innerType: ClubRoleIdentifier
+- innerType: number
   name: assignableRoles
   type: table

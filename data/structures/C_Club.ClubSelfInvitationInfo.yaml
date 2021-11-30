@@ -8,6 +8,6 @@ fields:
   type: C_Club.ClubInfo
 - name: inviter
   type: C_Club.ClubMemberInfo
-- innerType: ClubMemberInfo
+- innerType: C_Club.ClubMemberInfo
   name: leaders
   type: table

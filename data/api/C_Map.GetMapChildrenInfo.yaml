@@ -11,6 +11,6 @@ inputs:
     nilable: true
     type: bool
 outputs:
-- innerType: UiMapDetails
+- innerType: C_Map.UiMapDetails
   name: info
   type: table

@@ -11,6 +11,6 @@ inputs:
   - name: newest
     type: C_Club.ClubMessageIdentifier
 outputs:
-- innerType: ClubMessageInfo
+- innerType: C_Club.ClubMessageInfo
   name: messages
   type: table

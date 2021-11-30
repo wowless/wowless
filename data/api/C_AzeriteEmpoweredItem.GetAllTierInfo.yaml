@@ -6,6 +6,6 @@ inputs:
     name: azeriteEmpoweredItemLocation
     type: table
 outputs:
-- innerType: AzeriteEmpoweredItemTierInfo
+- innerType: C_AzeriteEmpoweredItem.AzeriteEmpoweredItemTierInfo
   name: tierInfo
   type: table

@@ -8,11 +8,11 @@ outputs:
   type: number
 - name: experience
   type: number
-- innerType: BattlefieldItemReward
+- innerType: C_PvP.BattlefieldItemReward
   name: itemRewards
   nilable: true
   type: table
-- innerType: BattlefieldCurrencyReward
+- innerType: C_PvP.BattlefieldCurrencyReward
   name: currencyRewards
   nilable: true
   type: table

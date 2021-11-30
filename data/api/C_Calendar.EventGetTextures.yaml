@@ -5,6 +5,6 @@ inputs:
 - - name: eventType
     type: number
 outputs:
-- innerType: CalendarEventTextureInfo
+- innerType: C_Calendar.CalendarEventTextureInfo
   name: textures
   type: table

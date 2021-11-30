@@ -8,6 +8,6 @@ inputs:
     nilable: true
     type: number
 outputs:
-- innerType: AppearanceSourceInfo
+- innerType: unknown
   name: sources
   type: table

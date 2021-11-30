@@ -16,12 +16,12 @@ fields:
   type: string
 - name: covenantCrest
   type: string
-- innerType: CovenantAbilityInfo
+- innerType: C_CovenantPreview.CovenantAbilityInfo
   name: covenantAbilities
   type: table
 - name: fromPlayerChoice
   type: bool
-- innerType: CovenantSoulbindInfo
+- innerType: C_CovenantPreview.CovenantSoulbindInfo
   name: covenantSoulbinds
   type: table
 - name: featureInfo

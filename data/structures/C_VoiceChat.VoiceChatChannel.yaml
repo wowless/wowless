@@ -22,6 +22,6 @@ fields:
   type: bool
 - name: isTranscribing
   type: bool
-- innerType: VoiceChatMember
+- innerType: C_VoiceChat.VoiceChatMember
   name: members
   type: table

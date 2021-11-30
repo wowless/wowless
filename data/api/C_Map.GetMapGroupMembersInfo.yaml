@@ -5,6 +5,6 @@ inputs:
 - - name: uiMapGroupID
     type: number
 outputs:
-- innerType: UiMapGroupMemberInfo
+- innerType: C_Map.UiMapGroupMemberInfo
   name: info
   type: table

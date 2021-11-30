@@ -19,7 +19,7 @@ fields:
 - name: category
   nilable: true
   type: string
-- innerType: GarrisonAbilityCounterInfo
+- innerType: C_Garrison.GarrisonAbilityCounterInfo
   name: counters
   type: table
 - name: isEmptySlot

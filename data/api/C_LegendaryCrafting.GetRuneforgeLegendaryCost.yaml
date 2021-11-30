@@ -6,6 +6,6 @@ inputs:
     name: baseItem
     type: table
 outputs:
-- innerType: CurrencyCost
+- innerType: unknown
   name: cost
   type: table

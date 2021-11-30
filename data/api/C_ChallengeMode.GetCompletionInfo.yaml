@@ -28,6 +28,6 @@ outputs:
   type: number
 - name: isEligibleForScore
   type: bool
-- innerType: ChallengeModeCompletionMemberInfo
+- innerType: C_ChallengeMode.ChallengeModeCompletionMemberInfo
   name: members
   type: table

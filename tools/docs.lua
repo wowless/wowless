@@ -145,7 +145,7 @@ local function outsig(fn, ns)
     end
     table.insert(outputs, {
       default = r.Default,
-      innerType = r.InnerType,
+      innerType = r.InnerType and t2ty(r.InnerType, ns),
       mixin = r.Mixin,
       name = r.Name,
       nilable = r.Nilable or nil,
@@ -203,7 +203,7 @@ for name, tab in pairs(tabs) do
             name = field.Name,
             nilable = field.Nilable or nil,
             type = t2ty(field.Type, ns, field.Mixin),
-            innerType = field.InnerType,
+            innerType = field.InnerType and t2ty(field.InnerType, ns),
             mixin = field.Mixin,
             default = field.Default,
           })

@@ -17,6 +17,6 @@ fields:
 - name: claimID
   nilable: true
   type: number
-- innerType: WeeklyRewardActivityRewardInfo
+- innerType: C_WeeklyRewards.WeeklyRewardActivityRewardInfo
   name: rewards
   type: table

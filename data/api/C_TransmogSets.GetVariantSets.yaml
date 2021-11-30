@@ -5,6 +5,6 @@ inputs:
 - - name: transmogSetID
     type: number
 outputs:
-- innerType: TransmogSetInfo
+- innerType: C_TransmogSets.TransmogSetInfo
   name: sets
   type: table

@@ -9,6 +9,6 @@ inputs:
   - name: casterBoardIndex
     type: number
 outputs:
-- innerType: AutoMissionTargetingInfo
+- innerType: C_Garrison.AutoMissionTargetingInfo
   name: targetInfo
   type: table

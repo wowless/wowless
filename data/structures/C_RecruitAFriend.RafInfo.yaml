@@ -10,7 +10,7 @@ fields:
   type: number
 - name: claimInProgress
   type: bool
-- innerType: RafReward
+- innerType: C_RecruitAFriend.RafReward
   name: rewards
   type: table
 - name: nextReward
@@ -19,6 +19,6 @@ fields:
 - name: recruitmentInfo
   nilable: true
   type: C_RecruitAFriend.RafRecruitmentinfo
-- innerType: RafRecruit
+- innerType: C_RecruitAFriend.RafRecruit
   name: recruits
   type: table

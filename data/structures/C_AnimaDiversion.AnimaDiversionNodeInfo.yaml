@@ -8,7 +8,7 @@ fields:
   type: string
 - name: description
   type: string
-- innerType: AnimaDiversionCostInfo
+- innerType: C_AnimaDiversion.AnimaDiversionCostInfo
   name: costs
   type: table
 - name: currencyID

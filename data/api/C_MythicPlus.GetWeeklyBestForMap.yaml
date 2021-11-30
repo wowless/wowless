@@ -14,7 +14,7 @@ outputs:
 - innerType: number
   name: affixIDs
   type: table
-- innerType: MythicPlusMember
+- innerType: C_MythicPlus.MythicPlusMember
   name: members
   type: table
 - name: dungeonScore

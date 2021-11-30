@@ -6,7 +6,7 @@ fields:
   type: string
 - name: type
   type: string
-- innerType: GossipOptionRewardInfo
+- innerType: C_GossipInfo.GossipOptionRewardInfo
   name: rewards
   type: table
 - name: status

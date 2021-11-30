@@ -7,6 +7,6 @@ inputs:
   - name: renownLevel
     type: number
 outputs:
-- innerType: CovenantSanctumRenownRewardInfo
+- innerType: C_CovenantSanctumUI.CovenantSanctumRenownRewardInfo
   name: rewards
   type: table

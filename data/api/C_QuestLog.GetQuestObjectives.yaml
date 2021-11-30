@@ -5,6 +5,6 @@ inputs:
 - - name: questID
     type: number
 outputs:
-- innerType: QuestObjectiveInfo
+- innerType: C_QuestLog.QuestObjectiveInfo
   name: objectives
   type: table

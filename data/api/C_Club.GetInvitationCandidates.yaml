@@ -17,6 +17,6 @@ inputs:
   - name: clubId
     type: string
 outputs:
-- innerType: ClubInvitationCandidateInfo
+- innerType: C_Club.ClubInvitationCandidateInfo
   name: candidates
   type: table

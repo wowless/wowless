@@ -18,6 +18,6 @@ fields:
 - innerType: number
   name: axes
   type: table
-- innerType: GamePadStick
+- innerType: C_GamePad.GamePadStick
   name: sticks
   type: table

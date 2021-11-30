@@ -8,10 +8,10 @@ fields:
   type: number
 - name: itemLevelIncrement
   type: number
-- innerType: ItemUpgradeStat
+- innerType: C_ItemUpgrade.ItemUpgradeStat
   name: levelStats
   type: table
-- innerType: ItemUpgradeCurrencyCost
+- innerType: C_ItemUpgrade.ItemUpgradeCurrencyCost
   name: costsToUpgrade
   type: table
 - name: failureMessage

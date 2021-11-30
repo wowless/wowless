@@ -5,6 +5,6 @@ inputs:
 - - name: covenantID
     type: number
 outputs:
-- innerType: CovenantSanctumRenownLevelInfo
+- innerType: C_CovenantSanctumUI.CovenantSanctumRenownLevelInfo
   name: levels
   type: table

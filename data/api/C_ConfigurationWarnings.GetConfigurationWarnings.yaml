@@ -6,6 +6,6 @@ inputs:
     name: includeSeenWarnings
     type: bool
 outputs:
-- innerType: ConfigurationWarning
+- innerType: number
   name: configurationWarnings
   type: table

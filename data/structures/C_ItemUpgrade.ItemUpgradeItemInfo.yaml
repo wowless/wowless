@@ -14,6 +14,6 @@ fields:
   type: number
 - name: maxUpgrade
   type: number
-- innerType: ItemUpgradeLevelInfo
+- innerType: C_ItemUpgrade.ItemUpgradeLevelInfo
   name: upgradeLevelInfos
   type: table

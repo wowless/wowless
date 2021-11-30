@@ -12,6 +12,6 @@ fields:
   type: number
 - name: isYou
   type: bool
-- innerType: ChallengeModeGuildAttemptMember
+- innerType: C_ChallengeMode.ChallengeModeGuildAttemptMember
   name: members
   type: table

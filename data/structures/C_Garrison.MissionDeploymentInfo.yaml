@@ -18,6 +18,6 @@ fields:
   type: string
 - name: isExhausting
   type: bool
-- innerType: GarrisonEnemyEncounterInfo
+- innerType: C_Garrison.GarrisonEnemyEncounterInfo
   name: enemies
   type: table

@@ -5,7 +5,7 @@ inputs:
 - - name: uiMapID
     type: number
 outputs:
-- innerType: BountyInfo
+- innerType: unknown
   name: bounties
   nilable: true
   type: table

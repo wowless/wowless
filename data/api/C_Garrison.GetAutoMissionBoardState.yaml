@@ -5,6 +5,6 @@ inputs:
 - - name: missionID
     type: number
 outputs:
-- innerType: AutoMissionTargetingInfo
+- innerType: C_Garrison.AutoMissionTargetingInfo
   name: targetInfo
   type: table

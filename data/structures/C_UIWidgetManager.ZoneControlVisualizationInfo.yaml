@@ -10,7 +10,7 @@ fields:
   type: number
 - name: dangerFlashType
   type: number
-- innerType: ZoneEntry
+- innerType: C_UIWidgetManager.ZoneEntry
   name: zoneEntries
   type: table
 - name: tooltipLoc

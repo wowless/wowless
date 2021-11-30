@@ -24,7 +24,7 @@ fields:
   type: string
 - name: maxStacks
   type: number
-- innerType: PlayerChoiceOptionButtonInfo
+- innerType: C_PlayerChoice.PlayerChoiceOptionButtonInfo
   name: buttons
   type: table
 - name: widgetSetID

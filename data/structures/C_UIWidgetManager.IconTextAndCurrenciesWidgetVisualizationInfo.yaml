@@ -14,7 +14,7 @@ fields:
   type: string
 - name: description
   type: string
-- innerType: UIWidgetCurrencyInfo
+- innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
   name: currencies
   type: table
 - name: textureKitID

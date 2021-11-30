@@ -14,10 +14,10 @@ fields:
   type: number
 - name: height
   type: number
-- innerType: GarrisonMechanicInfo
+- innerType: C_Garrison.GarrisonMechanicInfo
   name: mechanics
   type: table
-- innerType: AutoCombatSpellInfo
+- innerType: C_Garrison.AutoCombatSpellInfo
   name: autoCombatSpells
   type: table
 - name: autoCombatAutoAttack

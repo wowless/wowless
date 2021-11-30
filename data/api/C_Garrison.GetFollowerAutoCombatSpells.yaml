@@ -7,7 +7,7 @@ inputs:
   - name: followerLevel
     type: number
 outputs:
-- innerType: AutoCombatSpellInfo
+- innerType: C_Garrison.AutoCombatSpellInfo
   name: autoCombatSpells
   type: table
 - name: autoCombatAutoAttack

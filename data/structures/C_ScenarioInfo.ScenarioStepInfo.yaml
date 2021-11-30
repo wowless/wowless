@@ -16,7 +16,7 @@ fields:
   type: bool
 - name: shouldShowBonusObjective
   type: bool
-- innerType: ScenarioStepSpellInfo
+- innerType: C_ScenarioInfo.ScenarioStepSpellInfo
   name: spells
   type: table
 - name: weightedProgress

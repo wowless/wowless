@@ -9,6 +9,6 @@ inputs:
   - name: endTime
     type: CalendarTime
 outputs:
-- innerType: CalendarDayEvent
+- innerType: C_Calendar.CalendarDayEvent
   name: events
   type: table

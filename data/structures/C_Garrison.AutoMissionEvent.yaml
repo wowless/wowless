@@ -14,6 +14,6 @@ fields:
   type: number
 - name: auraType
   type: number
-- innerType: AutoMissionCombatEventInfo
+- innerType: C_Garrison.AutoMissionCombatEventInfo
   name: targetInfo
   type: table

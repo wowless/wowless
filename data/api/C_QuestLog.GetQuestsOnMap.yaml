@@ -5,6 +5,6 @@ inputs:
 - - name: uiMapID
     type: number
 outputs:
-- innerType: QuestOnMapInfo
+- innerType: C_QuestLog.QuestOnMapInfo
   name: quests
   type: table

@@ -9,6 +9,6 @@ inputs:
     name: includeIncompleteRuns
     type: bool
 outputs:
-- innerType: MythicPlusRunInfo
+- innerType: C_MythicPlus.MythicPlusRunInfo
   name: runs
   type: table

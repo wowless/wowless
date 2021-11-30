@@ -14,7 +14,7 @@ fields:
   type: bool
 - name: keepOpenAfterChoice
   type: bool
-- innerType: PlayerChoiceOptionInfo
+- innerType: C_PlayerChoice.PlayerChoiceOptionInfo
   name: options
   type: table
 - name: soundKitID

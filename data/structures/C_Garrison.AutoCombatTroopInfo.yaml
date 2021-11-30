@@ -10,7 +10,7 @@ fields:
   type: string
 - name: followerTypeID
   type: number
-- innerType: FollowerDisplayID
+- innerType: C_Garrison.FollowerDisplayID
   name: displayIDs
   type: table
 - name: level
