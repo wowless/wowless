@@ -9,11 +9,12 @@ dependencies = {
   'bitlib',
   'json-lua',
   'libdeflate',
+  'luadbd',
   'lua-path',
   'lyaml',
   'penlight',
   'serpent',
-  'wowcig >= 0.9',
+  'wowcig >= 0.10',
   'xml2lua',
 }
 build = {

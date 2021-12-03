@@ -1,7 +1,7 @@
 local tag = arg[2] or 'wow_classic'
 local api = require('wowless.runner').run({
   loglevel = arg[1] and tonumber(arg[1]) or 0,
-  dir = 'extracts/' .. tag .. '/Interface',
+  dir = 'extracts/' .. tag,
   version = arg[3] or 'TBC',
   otherAddonDirs = { arg[4] },
 })

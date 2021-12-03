@@ -581,7 +581,7 @@ local function loader(api, cfg)
       maybeAddAll(path.join('extracts', 'addons', version))
     end
     if rootDir then
-      maybeAddAll(path.join(rootDir, 'AddOns'))
+      maybeAddAll(path.join(rootDir, 'Interface', 'AddOns'))
     end
   end
 
@@ -614,16 +614,25 @@ local function loader(api, cfg)
     end
   end
 
+  local function db2rows(name)
+    local dbd = require('luadbd').dbds[name]
+    local db2 = path.join(rootDir, 'db2', name .. '.db2')
+    local v, b = api.env.GetBuildInfo()
+    return dbd:rows(v .. '.' .. b, require('pl.file').read(db2))
+  end
+
   local function loadFrameXml()
     local context = forAddon()
-    context.loadFile(path.join(rootDir, 'GlobalEnvironment.lua'))
+    context.loadFile(path.join(rootDir, 'Interface', 'GlobalEnvironment.lua'))
     -- Special hack to avoid loops in map resolution code.
     api.env.Enum.UIMapType.Continent = 0
     api.env.Enum.UIMapType.Cosmic = 0
     api.env.Enum.UIMapType.World = 0
     -- End special hack.
-    context.loadFile(path.join(rootDir, 'FrameXML/GlobalStrings.lua'))
-    for _, file in ipairs(parseToc(resolveTocDir(path.join(rootDir, 'FrameXML'))).files) do
+    for row in db2rows('globalstrings') do
+      api.env[row.BaseTag] = row.TagText_lang
+    end
+    for _, file in ipairs(parseToc(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML'))).files) do
       context.loadFile(file)
     end
     -- TODO don't force load the rest of the tocs
