@@ -1,7 +1,13 @@
 ---
 name: FontString
 fields:
+  maxLines:
+    init: 0
+    type: number
   text: {}
+  textScale:
+    init: 1
+    type: number
 inherits:
 - FontInstance
 - LayeredRegion
@@ -10,6 +16,10 @@ methods:
     outputs:
     - type: number
     status: unimplemented
+  GetMaxLines:
+    fields:
+    - maxLines
+    status: getter
   GetNumLines:
     outputs:
     - type: number
@@ -26,6 +36,10 @@ methods:
     fields:
     - text
     status: getter
+  GetTextScale:
+    fields:
+    - textScale
+    status: getter
   GetUnboundedStringWidth:
     outputs:
     - type: number
@@ -39,12 +53,18 @@ methods:
   SetFormattedText:
     status: unimplemented
   SetMaxLines:
-    status: unimplemented
+    fields:
+    - maxLines
+    status: setter
   SetNonSpaceWrap:
     status: unimplemented
   SetText:
     status: implemented
   SetTextHeight:
     status: unimplemented
+  SetTextScale:
+    fields:
+    - textScale
+    status: setter
   SetWordWrap:
     status: unimplemented
