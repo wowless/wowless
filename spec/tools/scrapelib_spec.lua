@@ -28,4 +28,16 @@ describe('tools.scrapelib', function()
     assert.same(42, data:resolve(data:global('sFoo', 'sQuux')))
     assert.same({}, data:resolve(data:global('sBar')))
   end)
+  it('fails to resolve a dag', function()
+    local data = scrape({
+      [1] = {
+        sFoo = 't2',
+        sBar = 't2',
+      },
+      [2] = {
+        sBaz = 'n42',
+      },
+    })
+    assert.False(pcall(function() data:resolve(data:global()) end))
+  end)
 end)
