@@ -28,7 +28,7 @@ local function resolve(data, top, depth)
       return x
     end
     assert(type(x) == 'string', tostring(x) .. ' is not a string')
-    assert(not refs[x], 'unsupported loop in structure')
+    assert(not refs[x], 'unsupported loop in structure: ' .. x)
     local tx = sub(x, 1, 1)
     if tx == 'n' then
       return tonumber(sub(x, 2))
