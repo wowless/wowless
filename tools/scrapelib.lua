@@ -28,7 +28,11 @@ local function resolve(data, top, depth)
       return x
     end
     assert(type(x) == 'string', tostring(x) .. ' is not a string')
-    assert(not refs[x], 'unsupported loop in structure: ' .. x)
+    local rx = refs[x]
+    if rx then
+      assert(type(rx) == 'table', 'unsupported loop in structure: ' .. x)
+      return rx
+    end
     local tx = sub(x, 1, 1)
     if tx == 'n' then
       return tonumber(sub(x, 2))
@@ -42,13 +46,16 @@ local function resolve(data, top, depth)
       return '<metatable>'
     elseif tx == 'f' or tx == 'u' then
       refs[x] = true
-      return fun('t' .. sub(x, 2), lvl + 1)
+      local ret = fun('t' .. sub(x, 2), lvl + 1)
+      refs[x] = ret
+      return ret
     elseif tx == 't' then
       refs[x] = true
       local t = {}
       for k, v in tpairs(data, x) do
         t[fun(k, lvl + 1)] = fun(v, lvl + 1)
       end
+      refs[x] = t
       return t
     else
       error('invalid type on ' .. x)
