@@ -23,6 +23,8 @@ fields:
   type: bool
 - name: researched
   type: bool
+- name: ignoreTalent
+  type: bool
 - name: researchDuration
   type: number
 - name: startTime
@@ -54,3 +56,5 @@ fields:
   type: string
 - name: socketInfo
   type: GarrisonTalentSocketInfo
+- name: treeID
+  type: number

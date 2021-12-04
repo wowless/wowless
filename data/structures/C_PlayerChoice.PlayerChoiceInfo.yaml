@@ -8,6 +8,8 @@ fields:
   type: number
 - name: questionText
   type: string
+- name: pendingChoiceText
+  type: string
 - name: uiTextureKit
   type: string
 - name: hideWarboardHeader

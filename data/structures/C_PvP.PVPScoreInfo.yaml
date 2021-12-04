@@ -38,6 +38,8 @@ fields:
   type: string
 - name: honorLevel
   type: number
+- name: roleAssigned
+  type: number
 - innerType: C_PvP.PVPStatInfo
   name: stats
   type: table
