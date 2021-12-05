@@ -1,0 +1,23 @@
+---
+name: GetProfessions
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs:
+- name: prof1
+  nilable: true
+  type: number
+- name: prof2
+  nilable: true
+  type: number
+- name: archaeology
+  nilable: true
+  type: number
+- name: fishing
+  nilable: true
+  type: number
+- name: cooking
+  nilable: true
+  type: number

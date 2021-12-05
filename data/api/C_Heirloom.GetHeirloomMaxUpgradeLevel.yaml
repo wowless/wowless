@@ -1,0 +1,11 @@
+---
+name: C_Heirloom.GetHeirloomMaxUpgradeLevel
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- - name: itemID
+    type: number
+outputs:
+- name: upgradeLevel
+  type: number
