@@ -4,6 +4,9 @@ type:
   record:
     comment:
       type: string
+    dbs:
+      type:
+        sequenceof: string
     inputs:
       type:
         sequenceof:
