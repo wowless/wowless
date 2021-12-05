@@ -1,0 +1,10 @@
+---
+name: GetQuestsCompleted
+status: unimplemented
+inputs:
+- - name: table
+    nilable: true
+    type: table
+outputs:
+- name: questsCompleted
+  type: table
