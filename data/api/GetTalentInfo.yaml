@@ -1,9 +1,14 @@
 ---
 name: GetTalentInfo
-status: stub
-returns:
-- null
-- null
-- null
-- null
-- 0
+status: unimplemented
+outputs:
+- nilable: true
+  type: unknown
+- nilable: true
+  type: unknown
+- nilable: true
+  type: unknown
+- nilable: true
+  type: unknown
+- stub: 0
+  type: unknown
