@@ -82,8 +82,14 @@ local function doGetFn(api, env, states)
     return getStub(api.outputs or {})
   elseif api.status == 'implemented' then
     local args = {}
+    local frameworks = {
+      env = env,
+    }
+    for _, fw in ipairs(api.frameworks or {}) do
+      table.insert(args, assert(frameworks[fw]))
+    end
     for _, st in ipairs(api.states or {}) do
-      table.insert(args, st == 'env' and env or states[st])
+      table.insert(args, states[st])
     end
     for _, db in ipairs(api.dbs or {}) do
       table.insert(args, function() return db2rows(env, db) end)

@@ -2,5 +2,5 @@
 name: hooksecurefunc
 status: implemented
 outputs: {}
-states:
+frameworks:
 - env

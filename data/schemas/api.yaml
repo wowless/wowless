@@ -7,6 +7,11 @@ type:
     dbs:
       type:
         sequenceof: string
+    frameworks:
+      type:
+        sequenceof:
+          oneof:
+          - literal: env
     inputs:
       type:
         sequenceof:
@@ -81,9 +86,7 @@ type:
     states:
       type:
         sequenceof:
-          oneof:
-          - literal: env
-          - ref: state
+          ref: state
     status:
       required: true
       type:

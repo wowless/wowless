@@ -1,5 +1,5 @@
 ---
 name: getfenv
 status: implemented
-states:
+frameworks:
 - env
