@@ -1,5 +1,11 @@
 ---
 name: C_CharacterServices.GetCharacterServiceDisplayData
-status: stub
-returns:
-- popupInfo: {}
+status: unimplemented
+inputs:
+- - name: boostType
+    type: number
+outputs:
+- name: upgradeDisplayData
+  stub:
+    popupInfo: {}
+  type: table

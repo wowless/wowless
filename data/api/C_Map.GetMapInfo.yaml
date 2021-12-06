@@ -1,14 +1,14 @@
 ---
 name: C_Map.GetMapInfo
-status: stub
+status: unimplemented
 inputs:
 - - type: number
 outputs:
 - name: info
+  stub:
+    flags: 0
+    mapID: 0
+    mapType: 0
+    name: TheMap
+    parentMapID: 0
   type: C_Map.UiMapDetails
-returns:
-- flags: 0
-  mapID: 0
-  mapType: 0
-  name: TheMap
-  parentMapID: 0

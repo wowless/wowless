@@ -1,15 +1,15 @@
 ---
 name: C_Map.GetMapArtLayers
-status: stub
+status: unimplemented
 inputs:
 - - type: number
 outputs:
-- type: table
-returns:
-- - additionalZoomSteps: 0
+- stub:
+  - additionalZoomSteps: 0
     layerHeight: 1
     layerWidth: 1
     maxScale: 1
     minScale: 1
     tileHeight: 1
     tileWidth: 1
+  type: table
