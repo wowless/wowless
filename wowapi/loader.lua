@@ -141,6 +141,13 @@ local function loadFunctions(version, env, log, states)
                   i, tostring(param.name), fn))
             else
               local ty = type(arg)
+              -- Simulate C lua_isnumber and lua_isstring.
+              -- TODO further simulate lua_tonumber and lua_tostring by changing the passed arg.
+              if param.type == 'number' and ty == 'string' then
+                ty = tonumber(arg) and 'number' or ty
+              elseif param.type == 'string' and ty == 'number' then
+                ty = tostring(arg) and 'string' or ty
+              end
               local nty = ty == 'boolean' and 'bool' or ty
               assert(
                 nty == param.type,
