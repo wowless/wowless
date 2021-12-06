@@ -136,31 +136,11 @@ local function dump(api)
   end
 end
 
-local function mkWowEnv(api)
-  local function CreateFrame(type, name, parent, templateNames)
-    local ltype = string.lower(type)
-    assert(api.IsIntrinsicType(ltype), type .. ' is not intrinsic')
-    assert(api.InheritsFrom(ltype, 'frame'), type .. ' does not inherit from frame')
-    local templates = {}
-    for templateName in string.gmatch(templateNames or '', '[^, ]+') do
-      local template = api.templates[string.lower(templateName)]
-      assert(template, 'unknown template ' .. templateName)
-      table.insert(templates, template)
-    end
-    return api.CreateUIObject(ltype, name, parent, nil, unpack(templates))
-  end
-  return {
-    CreateForbiddenFrame = CreateFrame,
-    CreateFrame = CreateFrame,
-  }
-end
-
 local function init(api, loader)
   api.env._G = api.env
   api.env.__dump = dump(api)
   Mixin(api.env, mkBaseEnv())
   util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
-  util.recursiveMixin(api.env, mkWowEnv(api), true)
   Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api))
 end
 

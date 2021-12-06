@@ -116,6 +116,19 @@ local function new(log)
     return obj
   end
 
+  local function CreateFrame(type, name, parent, templateNames)
+    local ltype = string.lower(type)
+    assert(IsIntrinsicType(ltype), type .. ' is not intrinsic')
+    assert(InheritsFrom(ltype, 'frame'), type .. ' does not inherit from frame')
+    local tmpls = {}
+    for templateName in string.gmatch(templateNames or '', '[^, ]+') do
+      local template = templates[string.lower(templateName)]
+      assert(template, 'unknown template ' .. templateName)
+      table.insert(tmpls, template)
+    end
+    return CreateUIObject(ltype, name, parent, nil, unpack(tmpls))
+  end
+
   local function SetScript(obj, name, bindingType, script)
     local ud = u(obj)
     log(4, 'setting %s[%d] for %s %s', name, bindingType, ud.type, tostring(ud.name))
@@ -151,6 +164,7 @@ local function new(log)
 
   return {
     CallSafely = CallSafely,
+    CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,
     env = env,
     ErrorHandler = ErrorHandler,
