@@ -3,7 +3,9 @@ describe('loader', function()
 
   for _, v in ipairs({'Vanilla', 'TBC', 'Mainline'}) do
     it('loads ' .. v, function()
-      assert.same('table', type(loader.loadFunctions(v, {}, nil, {})))
+      local api = { env = {}, states = {} }
+      local wowlessLoader = { version = v }
+      assert.same('table', type(loader.loadFunctions(api, wowlessLoader)))
     end)
   end
 end)

@@ -136,7 +136,7 @@ local function dump(api)
   end
 end
 
-local function mkWowEnv(api, loader)
+local function mkWowEnv(api)
   local function CreateFrame(type, name, parent, templateNames)
     local ltype = string.lower(type)
     assert(api.IsIntrinsicType(ltype), type .. ' is not intrinsic')
@@ -150,32 +150,8 @@ local function mkWowEnv(api, loader)
     return api.CreateUIObject(ltype, name, parent, nil, unpack(templates))
   end
   return {
-    CreateFont = function(name)
-      return api.CreateUIObject('font', name)
-    end,
     CreateForbiddenFrame = CreateFrame,
     CreateFrame = CreateFrame,
-    EnumerateFrames = function(frame)
-      if frame == nil then
-        return api.frames[1]
-      else
-        local idx = api.UserData(frame).frameIndex
-        return idx ~= #api.frames and api.frames[idx+1] or nil
-      end
-    end,
-    geterrorhandler = function()
-      return api.ErrorHandler  -- UNIMPLEMENTED
-    end,
-    LoadAddOn = function(name)
-      assert(name)
-      loader.loadAddon(name)
-      return true
-    end,
-    RunMacroText = function(s)
-      for _, line in ipairs({util.strsplit('\n', s)}) do
-        api.SendEvent('EXECUTE_CHAT_LINE', line)
-      end
-    end,
   }
 end
 
@@ -183,9 +159,8 @@ local function init(api, loader)
   api.env._G = api.env
   api.env.__dump = dump(api)
   Mixin(api.env, mkBaseEnv())
-  util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(
-    loader.version, api.env, api.log, api.states), true)
-  util.recursiveMixin(api.env, mkWowEnv(api, loader), true)
+  util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
+  util.recursiveMixin(api.env, mkWowEnv(api), true)
   Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api))
 end
 

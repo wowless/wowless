@@ -1,0 +1,16 @@
+---
+name: LoadAddOn
+status: implemented
+inputs:
+- - name: addonIndex
+    type: number
+- - name: addonName
+    type: string
+outputs:
+- name: loaded
+  type: bool
+- name: reason
+  nilable: true
+  type: string
+frameworks:
+- loader

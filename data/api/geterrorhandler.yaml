@@ -1,0 +1,9 @@
+---
+name: geterrorhandler
+status: implemented
+inputs:
+- {}
+outputs:
+- type: unknown
+frameworks:
+- api

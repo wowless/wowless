@@ -11,7 +11,9 @@ type:
       type:
         sequenceof:
           oneof:
+          - literal: api
           - literal: env
+          - literal: loader
     inputs:
       type:
         sequenceof:

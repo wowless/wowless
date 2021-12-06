@@ -1,0 +1,9 @@
+---
+name: RunMacroText
+status: implemented
+inputs:
+- - name: macroText
+    type: string
+outputs: {}
+frameworks:
+- api
