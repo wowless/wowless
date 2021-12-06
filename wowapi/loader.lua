@@ -1,4 +1,5 @@
 local data = require('wowapi.data')
+local plprettywrite = require('pl.pretty').write
 local yamlnull = require('lyaml').null
 
 local function loadApis(version)
@@ -51,6 +52,8 @@ local getStub = (function()
           v = tostring(value)
         elseif ty == 'string' then
           v = string.format('%q', value)
+        elseif ty == 'table' then
+          v = plprettywrite(value)
         else
           error('unsupported stub value type ' .. ty)
         end

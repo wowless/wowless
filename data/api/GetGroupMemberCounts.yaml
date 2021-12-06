@@ -1,8 +1,15 @@
 ---
 name: GetGroupMemberCounts
-status: stub
-returns:
-- DAMAGER: 3
-  HEALER: 1
-  NOROLE: 0
-  TANK: 1
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs:
+- name: data
+  stub:
+    DAMAGER: 3
+    HEALER: 1
+    NOROLE: 0
+    TANK: 1
+  type: table
