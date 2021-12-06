@@ -1,6 +1,31 @@
 ---
 name: GetSpecializationInfo
-status: stub
-returns:
-- 1
-- SpecName
+status: unimplemented
+inputs:
+- - name: specIndex
+    type: number
+  - name: isInspect
+    nilable: true
+    type: bool
+  - name: isPet
+    nilable: true
+    type: bool
+  - name: inspectTarget
+    nilable: true
+    type: unknown
+  - name: sex
+    nilable: true
+    type: number
+outputs:
+- name: id
+  type: number
+- name: name
+  type: string
+- name: description
+  type: string
+- name: icon
+  type: number
+- name: role
+  type: string
+- name: primaryStat
+  type: number
