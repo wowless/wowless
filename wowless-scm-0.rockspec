@@ -7,6 +7,7 @@ source = {
 dependencies = {
   'lua = 5.1',
   'bitlib',
+  'cluacov',
   'json-lua',
   'libdeflate',
   'luadbd',
