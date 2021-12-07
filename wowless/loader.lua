@@ -31,8 +31,12 @@ local function loader(api, cfg)
 
   local function forAddon(addonName, addonEnv)
 
+    local function loadstr(str, filename)
+      return assert(loadstring(str, '@' .. path.normalize(filename):gsub('/', '\\')))
+    end
+
     local function loadLuaString(filename, str)
-      local fn = setfenv(assert(loadstring(str, '@' .. path.normalize(filename))), api.env)
+      local fn = setfenv(loadstr(str, filename), api.env)
       api.CallSafely(function() fn(addonName, addonEnv) end)
     end
 
@@ -241,7 +245,7 @@ local function loader(api, cfg)
                 }
                 local args = argTable[string.lower(script.type)] or 'self, ...'
                 local fnstr = 'return function(' .. args .. ')\n' .. script.text .. '\nend'
-                fn = setfenv(assert(loadstring(fnstr, '@' .. path.normalize(filename)))(), api.env)
+                fn = setfenv(loadstr(fnstr, filename)(), api.env)
               end
               if fn then
                 local old = obj:GetScript(script.type)
