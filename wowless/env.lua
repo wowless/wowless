@@ -51,6 +51,7 @@ local function mkBaseEnv()
       pi = math.pi,
       pow = math.pow,
       rad = math.rad,
+      random = math.random,
       sin = math.sin,
       sqrt = math.sqrt,
     },

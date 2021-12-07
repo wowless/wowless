@@ -16,6 +16,9 @@ fields:
   isMultiLine:
     init: false
     type: bool
+  maxBytes:
+    init: 200
+    type: number
   maxLetters:
     init: 64
     type: number
@@ -33,6 +36,10 @@ methods:
     status: implemented
   GetInputLanguage:
     status: implemented
+  GetMaxBytes:
+    fields:
+    - maxBytes
+    status: getter
   GetMaxLetters:
     fields:
     - maxLetters
@@ -45,6 +52,10 @@ methods:
     fields:
     - editboxText
     status: getter
+  HighlightText:
+    status: unimplemented
+  Insert:
+    status: unimplemented
   IsAutoFocus:
     fields:
     - isAutoFocus
@@ -71,12 +82,18 @@ methods:
     fields:
     - isCountInvisibleLetters
     status: setter
+  SetCursorPosition:
+    status: unimplemented
   SetEnabled:
     fields:
     - enabled
     status: setter
   SetFocus:
     status: unimplemented
+  SetMaxBytes:
+    fields:
+    - maxBytes
+    status: setter
   SetMaxLetters:
     fields:
     - maxLetters

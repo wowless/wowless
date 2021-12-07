@@ -3,5 +3,11 @@ name: Scale
 inherits:
 - Animation
 methods:
+  SetFromScale:
+    status: unimplemented
+  SetOrigin:
+    status: unimplemented
   SetScale:
+    status: unimplemented
+  SetToScale:
     status: unimplemented
