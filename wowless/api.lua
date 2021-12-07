@@ -39,13 +39,15 @@ local function new(log)
     end
   end
 
+  local parentMatch = '$[pP][aA][rR][eE][nN][tT]'
+
   local function ParentSub(name, parent)
-    if name and string.match(name, '$parent') then
+    if name and string.match(name, parentMatch) then
       local p = parent
       while p ~= nil and not u(p).name do
         p = u(p).parent
       end
-      return string.gsub(name, '$parent', p and u(p).name or 'Top')
+      return string.gsub(name, parentMatch, p and u(p).name or 'Top')
     else
       return name
     end
