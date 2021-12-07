@@ -1,4 +1,4 @@
-describe('loader', function()
+expose('loader', function()
 
   local api, loader
   before_each(function()

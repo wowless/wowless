@@ -1,4 +1,4 @@
-describe('addon', function()
+expose('addon', function()
   local versions = {
     'Vanilla',
     'TBC',

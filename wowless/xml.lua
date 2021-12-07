@@ -186,11 +186,37 @@ local function validateRoot(root)
   return result, warnings
 end
 
+-- Simulates xml2lua dom output via luaexpat.
+local function xml2dom(xmlstr)
+  local stack = { { _children = {} } }
+  local parser = require('lxp').new({
+    CharacterData = function(_, text)
+      table.insert(stack[#stack]._children, {
+        _text = text,
+        _type = 'TEXT',
+      })
+    end,
+    EndElement = function()
+      table.remove(stack)
+    end,
+    StartElement = function(_, name, attrs)
+      local t = {
+        _attr = attrs,
+        _children = {},
+        _name = name,
+        _type = 'ELEMENT',
+      }
+      table.insert(stack[#stack]._children, t)
+      table.insert(stack, t)
+    end,
+  })
+  parser:parse(xmlstr)
+  parser:close()
+  return stack[1]._children[1]
+end
+
 local function validate(xmlstr)
-  local h = require('xmlhandler.dom'):new()
-  h.options.commentNode = false
-  require('xml2lua').parser(h):parse(xmlstr)
-  return validateRoot(h.root)
+  return validateRoot(xml2dom(xmlstr))
 end
 
 return {

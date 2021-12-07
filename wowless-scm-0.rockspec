@@ -10,12 +10,12 @@ dependencies = {
   'json-lua',
   'libdeflate',
   'luadbd',
+  'luaexpat',
   'lua-path',
   'lyaml',
   'penlight',
   'serpent',
   'wowcig >= 0.10',
-  'xml2lua',
 }
 build = {
   type = 'builtin',
