@@ -85,6 +85,7 @@ local function mkBaseEnv()
       lower = string.lower,
       match = string.match,
       rep = string.rep,
+      split = util.strsplit,
       sub = string.sub,
       trim = util.strtrim,
       upper = string.upper,
