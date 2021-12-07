@@ -30,15 +30,28 @@ local getStub = (function()
     unknown = 'nil',
   }
   local structureDefaults = {}
-  for name, st in pairs(data.structures) do
-    structureDefaults[name] = (function()
+  local function ensureStructureDefault(name)
+    if structureDefaults[name] == nil then
+      structureDefaults[name] = true
+      local st = data.structures[name]
       local t = {}
       for _, field in ipairs(st.fields) do
-        local v = tostring(defaultOutputs[field.nilable and 'nil' or field.type])
+        local v
+        if data.structures[field.type] then
+          ensureStructureDefault(field.type)
+          v = structureDefaults[field.type]
+        else
+          v = tostring(defaultOutputs[field.nilable and 'nil' or field.type])
+        end
         table.insert(t, ('[%q]=%s'):format(field.name, v))
       end
-      return '{' .. table.concat(t, ',') .. '}'
-    end)()
+      structureDefaults[name] = '{' .. table.concat(t, ',') .. '}'
+    else
+      assert(structureDefaults[name] ~= true, 'loop in structure definitions')
+    end
+  end
+  for name in pairs(data.structures) do
+    ensureStructureDefault(name)
   end
   return function(sig)
     local rets = {}
