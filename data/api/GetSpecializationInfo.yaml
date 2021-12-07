@@ -18,6 +18,7 @@ inputs:
     type: number
 outputs:
 - name: id
+  stub: 73
   type: number
 - name: name
   type: string
