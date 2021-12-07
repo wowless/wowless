@@ -155,7 +155,7 @@ local function loadFunctions(api, loader)
                 ty = tonumber(arg) and 'number' or ty
               elseif param.type == 'string' and ty == 'number' then
                 ty = tostring(arg) and 'string' or ty
-              elseif data.structures[param.type] ~= nil then
+              elseif param.type == 'unknown' or data.structures[param.type] ~= nil then
                 ty = param.type
               elseif ty == 'boolean' then
                 ty = 'bool'

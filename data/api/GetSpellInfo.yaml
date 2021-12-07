@@ -3,6 +3,7 @@ name: GetSpellInfo
 status: unimplemented
 inputs:
 - - name: spellID
+    nilable: true
     type: number
 - - name: name
     type: string
