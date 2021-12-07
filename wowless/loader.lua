@@ -559,6 +559,7 @@ local function loader(api, cfg)
         local tocFile = resolveTocDir(dir)
         if tocFile then
           local addon = parseToc(tocFile)
+          addon.name = name
           addonData[name] = addon
           table.insert(addonData, addon)
         end

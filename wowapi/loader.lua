@@ -155,12 +155,15 @@ local function loadFunctions(api, loader)
                 ty = tonumber(arg) and 'number' or ty
               elseif param.type == 'string' and ty == 'number' then
                 ty = tostring(arg) and 'string' or ty
+              elseif data.structures[param.type] ~= nil then
+                ty = param.type
+              elseif ty == 'boolean' then
+                ty = 'bool'
               end
-              local nty = ty == 'boolean' and 'bool' or ty
               assert(
-                nty == param.type,
+                ty == param.type,
                 ('arg %d (%q) of %q is of type %q, but %q was passed'):format(
-                  i, tostring(param.name), fn, param.type, nty))
+                  i, tostring(param.name), fn, param.type, ty))
             end
           end
         end
