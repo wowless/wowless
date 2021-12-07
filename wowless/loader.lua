@@ -245,7 +245,7 @@ local function loader(api, cfg)
                 }
                 local args = argTable[string.lower(script.type)] or 'self, ...'
                 local fnstr = 'return function(' .. args .. ')\n' .. script.text .. '\nend'
-                fn = setfenv(loadstr(fnstr, filename)(), api.env)
+                fn = setfenv(loadstr(string.rep('\n', script.line - 2) .. fnstr, filename)(), api.env)
               end
               if fn then
                 local old = obj:GetScript(script.type)

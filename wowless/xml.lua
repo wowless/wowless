@@ -118,10 +118,13 @@ local function validateRoot(root)
       end
       if ty.text then
         local texts = {}
+        local line
         for _, kid in ipairs(e._children) do
           assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
           table.insert(texts, kid._text)
+          line = line or kid._line
         end
+        fields.line = line
         fields.text = #texts > 0 and table.concat(texts, '\n') or nil
       end
       for k in pairs(e._attr or {}) do
@@ -149,13 +152,16 @@ local function validateRoot(root)
       if ty.text then
         assert(e._children, 'missing text in ' .. tname)
         local texts = {}
+        local line
         for _, kid in ipairs(e._children) do
           assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
           table.insert(texts, kid._text)
+          line = line or kid._line
         end
         return {
           attr = resultAttrs,
           kids = {},
+          line = line,
           text = #texts > 0 and table.concat(texts, '\n') or nil,
           type = tname,
         }
@@ -190,8 +196,9 @@ end
 local function xml2dom(xmlstr)
   local stack = { { _children = {} } }
   local parser = require('lxp').new({
-    CharacterData = function(_, text)
+    CharacterData = function(p, text)
       table.insert(stack[#stack]._children, {
+        _line = p:pos() - select(2, text:gsub('\n', '')),
         _text = text,
         _type = 'TEXT',
       })
