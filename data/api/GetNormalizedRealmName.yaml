@@ -1,0 +1,8 @@
+---
+name: GetNormalizedRealmName
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: normalizedRealmName
+  type: string

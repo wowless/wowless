@@ -19,6 +19,7 @@ local function mkBaseEnv()
       band = bitlib.band,
       bnot = bitlib.bnot,
       bor = bitlib.bor,
+      bxor = bitlib.bxor,
     },
     ceil = math.ceil,
     collectgarbage = collectgarbage,

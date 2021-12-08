@@ -6,7 +6,7 @@ methods:
   GetFont:
     status: implemented
   GetFontObject:
-    status: unimplemented
+    status: implemented
   GetShadowColor:
     outputs:
     - type: number

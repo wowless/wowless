@@ -41,6 +41,8 @@ methods:
     status: unimplemented
   SetHorizTile:
     status: unimplemented
+  SetMask:
+    status: unimplemented
   SetRotation:
     status: unimplemented
   SetSnapToPixelGrid:
