@@ -1,0 +1,7 @@
+---
+name: PartialPlayTime
+status: unimplemented
+inputs:
+- {}
+outputs:
+- type: bool

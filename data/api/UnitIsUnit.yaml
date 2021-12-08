@@ -1,8 +1,8 @@
 ---
 name: UnitIsUnit
-status: unimplemented
+status: implemented
 inputs:
-- - type: string
-  - type: string
+- - type: unit
+  - type: unit
 outputs:
 - type: bool

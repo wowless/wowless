@@ -1,7 +1,9 @@
 ---
 name: UnitIsPlayer
-status: unimplemented
+status: implemented
 inputs:
-- - type: string
+- - type: unit
 outputs:
 - type: bool
+states:
+- Units

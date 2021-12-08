@@ -1,8 +1,8 @@
 ---
 name: UnitExists
-status: unimplemented
+status: implemented
 inputs:
 - - nilable: true
-    type: string
+    type: unit
 outputs:
 - type: bool
