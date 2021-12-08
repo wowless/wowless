@@ -5,5 +5,3 @@ inputs:
 - - type: unit
 outputs:
 - type: bool
-states:
-- Units
