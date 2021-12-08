@@ -153,6 +153,7 @@ local function loadFunctions(api, loader)
     local impl = (function()
       if apicfg.inputs then
         local function check(sig, ...)
+          local args = {}
           for i, param in ipairs(sig) do
             local arg = select(i, ...)
             if arg == nil then
@@ -162,12 +163,13 @@ local function loadFunctions(api, loader)
                   i, tostring(param.name), fn))
             else
               local ty = type(arg)
-              -- Simulate C lua_isnumber and lua_isstring.
-              -- TODO further simulate lua_tonumber and lua_tostring by changing the passed arg.
+              -- Simulate C lua_tonumber and lua_tostring.
               if param.type == 'number' and ty == 'string' then
-                ty = tonumber(arg) and 'number' or ty
+                arg = tonumber(arg) or arg
+                ty = type(arg)
               elseif param.type == 'string' and ty == 'number' then
-                ty = tostring(arg) and 'string' or ty
+                arg = tostring(arg) or arg
+                ty = type(arg)
               elseif param.type == 'unknown' or data.structures[param.type] ~= nil then
                 ty = param.type
               elseif ty == 'boolean' then
@@ -177,19 +179,21 @@ local function loadFunctions(api, loader)
                 ty == param.type,
                 ('arg %d (%q) of %q is of type %q, but %q was passed'):format(
                   i, tostring(param.name), fn, param.type, ty))
+              args[i] = arg
             end
           end
+          return unpack(args, 1, select('#', ...))
         end
         return function(...)
           if #apicfg.inputs == 1 then
-            check(apicfg.inputs[1], ...)
-            return bfn(...)
+            return bfn(check(apicfg.inputs[1], ...))
           else
             local t = {...}
             local n = select('#', ...)
             for _, sig in ipairs(apicfg.inputs) do
-              if pcall(function() check(sig, unpack(t, 1, n)) end) then
-                return bfn(...)
+              local result = {pcall(function() return check(sig, unpack(t, 1, n)) end)}
+              if result[1] then
+                return bfn(unpack(result, 2))
               end
             end
             error('args matched no input signature of ' .. fn)
