@@ -640,25 +640,13 @@ local function loader(api, cfg)
     for _, file in ipairs(parseToc(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML'))).files) do
       context.loadFile(file)
     end
-    -- TODO don't force load the rest of the tocs
-    local badAddons = {
-      Blizzard_FlightMap = true,
-      Blizzard_GMChatUI = true,
-      Blizzard_SocialUI = true,
-      Blizzard_Tutorial = true,  -- conflicts with NewPlayerExperience
-    }
     local blizzardAddons = {}
-    for name in pairs(addonData) do
-      if type(name) == 'string' and name:sub(1, 9) == 'Blizzard_' and not badAddons[name] then
+    for name, toc in pairs(addonData) do
+      if type(name) == 'string' and name:sub(1, 9) == 'Blizzard_' and toc.attrs.LoadOnDemand ~= '1' then
         table.insert(blizzardAddons, name)
       end
     end
     table.sort(blizzardAddons)
-    for _, name in ipairs(blizzardAddons) do
-      if addonData[name].attrs.LoadOnDemand ~= '1' then
-        loadAddon(name)
-      end
-    end
     for _, name in ipairs(blizzardAddons) do
       loadAddon(name)
     end
