@@ -4,5 +4,6 @@ status: unimplemented
 inputs:
 - {}
 outputs:
-- stub: 0
+- name: uiMapID
+  stub: 947
   type: number

@@ -629,11 +629,6 @@ local function loader(api, cfg)
   local function loadFrameXml()
     local context = forAddon()
     context.loadFile(path.join(rootDir, 'Interface', 'GlobalEnvironment.lua'))
-    -- Special hack to avoid loops in map resolution code.
-    api.env.Enum.UIMapType.Continent = 0
-    api.env.Enum.UIMapType.Cosmic = 0
-    api.env.Enum.UIMapType.World = 0
-    -- End special hack.
     for row in db2rows('globalstrings') do
       api.env[row.BaseTag] = row.TagText_lang
     end
