@@ -12,6 +12,7 @@ dependencies = {
   'libdeflate',
   'luadbd',
   'luaexpat',
+  'luautf8',
   'lua-path',
   'lyaml',
   'penlight',

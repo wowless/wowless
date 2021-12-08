@@ -1,5 +1,6 @@
 local bitlib = require('bit')
 local extformat = require('wowless.ext').format
+local utf8 = require('lua-utf8')
 local util = require('wowless.util')
 local Mixin = util.mixin
 
@@ -94,9 +95,10 @@ local function mkBaseEnv()
       upper = string.upper,
     },
     strbyte = string.byte,
+    strcmputf8i = utf8.ncasecmp,
     strjoin = util.strjoin,
     strlen = string.len,
-    strlenutf8 = string.len, -- NEEDS ACTUAL FUNCTION
+    strlenutf8 = utf8.len,
     strlower = string.lower,
     strmatch = string.match,
     strrep = string.rep,
