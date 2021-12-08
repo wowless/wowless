@@ -49,6 +49,7 @@ type:
         required: true
         type:
           oneof:
+          - literal: db
           - literal: schema
           - literal: state
           - literal: structure

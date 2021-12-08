@@ -6,7 +6,8 @@ type:
       type: string
     dbs:
       type:
-        sequenceof: string
+        sequenceof:
+          ref: db
     frameworks:
       type:
         sequenceof:
