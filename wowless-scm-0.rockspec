@@ -16,7 +16,7 @@ dependencies = {
   'lyaml',
   'penlight',
   'serpent',
-  'wowcig >= 0.10',
+  'wowcig >= 0.11',
 }
 build = {
   type = 'builtin',
