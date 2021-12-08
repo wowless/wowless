@@ -146,6 +146,12 @@ local function getFn(api, loader, apicfg)
   end
 end
 
+local function resolveUnit(units, unit)
+  -- TODO complete unit resolution
+  local guid = units.aliases[unit:lower()]
+  return guid and units.guids[guid] or nil
+end
+
 local function loadFunctions(api, loader)
   local fns = {}
   for fn, apicfg in pairs(loadApis(loader.version)) do
@@ -174,6 +180,9 @@ local function loadFunctions(api, loader)
                 ty = param.type
               elseif ty == 'boolean' then
                 ty = 'bool'
+              elseif param.type == 'unit' and ty == 'string' then
+                arg = resolveUnit(api.states.Units, arg)
+                ty = 'unit'
               end
               assert(
                 ty == param.type,

@@ -1,8 +1,10 @@
 ---
 name: UnitGUID
-status: unimplemented
+status: implemented
 inputs:
-- - type: string
+- - name: unit
+    type: unit
 outputs:
-- stub: Player-1096-06DF65C1
+- name: guid
+  nilable: true
   type: string

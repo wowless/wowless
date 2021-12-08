@@ -39,6 +39,7 @@ type:
                   - literal: number
                   - literal: string
                   - literal: table
+                  - literal: unit
                   - literal: unknown
                   - ref: structure
     name:

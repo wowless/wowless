@@ -1,0 +1,11 @@
+---
+name: Units
+value:
+  aliases:
+    player: Player-1096-06DF65C1
+  guids:
+    Player-1096-06DF65C1:
+      class: 1
+      guid: Player-1096-06DF65C1
+      name: Unitname
+      sex: 2

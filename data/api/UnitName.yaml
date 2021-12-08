@@ -1,12 +1,12 @@
 ---
 name: UnitName
-status: unimplemented
+status: implemented
 inputs:
 - - name: unit
-    type: string
+    type: unit
 outputs:
 - name: name
-  stub: Unitname
+  nilable: true
   type: string
 - name: realm
   nilable: true

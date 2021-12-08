@@ -1,11 +1,10 @@
 ---
 name: UnitSex
-status: unimplemented
+status: implemented
 inputs:
 - - name: unit
-    type: string
+    type: unit
 outputs:
 - name: sex
   nilable: true
-  stub: 2
   type: number

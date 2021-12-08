@@ -1,12 +1,13 @@
 ---
 name: UnitClassBase
-status: unimplemented
+status: implemented
 inputs:
 - - name: unit
-    type: string
+    type: unit
 outputs:
 - name: classFilename
-  stub: WARRIOR
   type: string
 - name: classID
   type: number
+dbs:
+- chrclasses
