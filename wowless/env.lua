@@ -32,6 +32,7 @@ local function mkBaseEnv()
     cos = math.cos,
     date = os.date,
     debugstack = debug.traceback,
+    difftime = os.difftime,
     error = error,
     floor = math.floor,
     format = stringFormat,

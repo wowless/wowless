@@ -7,6 +7,9 @@ fields:
   enabled:
     init: true
     type: bool
+  historyLines:
+    init: 10
+    type: number
   isAutoFocus:
     init: true
     type: bool
@@ -34,6 +37,10 @@ methods:
     status: implemented
   Enable:
     status: implemented
+  GetHistoryLines:
+    fields:
+    - historyLines
+    status: getter
   GetInputLanguage:
     status: implemented
   GetMaxBytes:
@@ -90,6 +97,10 @@ methods:
     status: setter
   SetFocus:
     status: unimplemented
+  SetHistoryLines:
+    fields:
+    - historyLines
+    status: setter
   SetMaxBytes:
     fields:
     - maxBytes
