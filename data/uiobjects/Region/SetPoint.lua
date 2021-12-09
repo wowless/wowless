@@ -5,25 +5,27 @@ return (function(self, point, ...)
   local relativePoint = 'CENTER'
   local x, y = 0, 0
   local idx = 1
-  if type(select(idx, ...) or nil) == 'string' then
-    local name = api.ParentSub(select(idx, ...), relativeTo)
+  local maybeRelativeTo = select(idx, ...)
+  if type(maybeRelativeTo) == 'string' then
+    local name = api.ParentSub(maybeRelativeTo, relativeTo)
     local frame = api.env[name]
     if not frame then
       api.log(1, 'SetPoint to unknown frame %q', name)
     end
     relativeTo = frame
     idx = idx + 1
-  elseif type(select(idx, ...) or nil) == 'table' then
-    relativeTo = select(idx, ...)
+  elseif type(maybeRelativeTo) == 'table' then
+    relativeTo = maybeRelativeTo
     idx = idx + 1
   end
-  if type(select(idx, ...) or nil) == 'string' then
-    relativePoint = select(idx, ...)
+  local maybeRelativePoint = select(idx, ...)
+  if type(maybeRelativePoint) == 'string' then
+    relativePoint = maybeRelativePoint
     idx = idx + 1
   end
-  local xx, yy = select(idx, ...)
-  if type(xx) == 'number' and type(yy) == 'number' then
-    x, y = xx, yy
+  local maybeX, maybeY = select(idx, ...)
+  if type(maybeX) == 'number' and type(maybeY) == 'number' then
+    x, y = maybeX, maybeY
   end
   table.insert(u(self).points, { point, relativeTo, relativePoint, x, y })
 end)(...)
