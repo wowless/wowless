@@ -1,37 +1,29 @@
-return (function(self, arg1, arg2, arg3, arg4, arg5)
+return (function(self, point, ...)
   -- TODO handle resetting points
-  local point = arg1 or 'CENTER'
+  point = point or 'CENTER'
   local relativeTo = u(self).parent
   local relativePoint = 'CENTER'
-  local x = 0
-  local y = 0
-  if type(arg2) == 'number' and type(arg3) == 'number' then
-    x = arg2
-    y = arg3
-  else
-    if type(arg2) == 'string' then
-      local name = api.ParentSub(arg2, relativeTo)
-      local frame = api.env[name]
-      if not frame then
-        api.log(1, 'SetPoint to unknown frame %q', name)
-      end
-      relativeTo = frame
-    elseif type(arg2) == 'table' then
-      relativeTo = arg2
-    else
-      assert(arg2 == nil)
+  local x, y = 0, 0
+  local idx = 1
+  if type(select(idx, ...) or nil) == 'string' then
+    local name = api.ParentSub(select(idx, ...), relativeTo)
+    local frame = api.env[name]
+    if not frame then
+      api.log(1, 'SetPoint to unknown frame %q', name)
     end
-    if type(arg3) == 'number' and type(arg4) == 'number' then
-      -- This is speculative based on usage in FrameXML.
-      x = arg3
-      y = arg4
-    elseif type(arg3) == 'string' then
-      relativePoint = arg3
-      if type(arg4) == 'number' and type(arg5) == 'number' then
-        x = arg4
-        y = arg5
-      end
-    end
+    relativeTo = frame
+    idx = idx + 1
+  elseif type(select(idx, ...) or nil) == 'table' then
+    relativeTo = select(idx, ...)
+    idx = idx + 1
+  end
+  if type(select(idx, ...) or nil) == 'string' then
+    relativePoint = select(idx, ...)
+    idx = idx + 1
+  end
+  local xx, yy = select(idx, ...)
+  if type(xx) == 'number' and type(yy) == 'number' then
+    x, y = xx, yy
   end
   table.insert(u(self).points, { point, relativeTo, relativePoint, x, y })
 end)(...)
