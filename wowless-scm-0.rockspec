@@ -10,14 +10,14 @@ dependencies = {
   'cluacov',
   'json-lua',
   'libdeflate',
-  'luadbd',
+  'luadbd = 0.3',
   'luaexpat',
   'luautf8',
   'lua-path',
   'lyaml',
   'penlight',
   'serpent',
-  'wowcig >= 0.11',
+  'wowcig = 0.11',
 }
 build = {
   type = 'builtin',
