@@ -1,15 +1,15 @@
 ---
 name: UnitRace
-status: unimplemented
+status: implemented
 inputs:
 - - name: unit
-    type: string
+    type: unit
 outputs:
 - name: race
-  stub: Human
   type: string
 - name: fileName
-  stub: Human
   type: string
 - name: id
   type: number
+dbs:
+- chrraces

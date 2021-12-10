@@ -10,4 +10,5 @@ value:
       guid: Player-1096-06DF65C1
       isplayer: true
       name: Unitname
+      race: 2
       sex: 2
