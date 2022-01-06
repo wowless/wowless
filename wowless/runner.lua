@@ -12,7 +12,7 @@ local function run(cfg)
     version = cfg.version,
   })
   require('wowless.env').init(api, loader)
-  if cfg.rootDir then
+  if cfg.dir then
     loader.loadFrameXml()
   end
   for _, d in ipairs(cfg.otherAddonDirs or {}) do
