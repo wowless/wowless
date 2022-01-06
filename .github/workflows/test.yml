@@ -6,16 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - name: compute cache key suffix
-      run: echo WOWLESS_CACHEKEY_SUFFIX=$(date -u +%Y%m%d%H) >> $GITHUB_ENV
-    - name: cache
-      uses: actions/cache@v2
-      with:
-        path: cache
-        key: cache-${{ env.WOWLESS_CACHEKEY_SUFFIX }}
-        restore-keys: cache-
     - name: install deps
       run: sudo apt-get install -y libyaml-dev libzip-dev
     - name: setup
