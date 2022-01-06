@@ -1,0 +1,21 @@
+repos:
+- repo: https://github.com/Calinou/pre-commit-luacheck
+  rev: v1.0.0
+  hooks:
+  - id: luacheck
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.0.1
+  hooks:
+  - id: check-yaml
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+- repo: https://github.com/shellcheck-py/shellcheck-py
+  rev: v0.8.0.1
+  hooks:
+  - id: shellcheck
+    args:
+    - --shell=bash
+- repo: meta
+  hooks:
+  - id: check-hooks-apply
+  - id: check-useless-excludes
