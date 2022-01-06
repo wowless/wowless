@@ -12,7 +12,9 @@ local function run(cfg)
     version = cfg.version,
   })
   require('wowless.env').init(api, loader)
-  loader.loadFrameXml()
+  if cfg.rootDir then
+    loader.loadFrameXml()
+  end
   for _, d in ipairs(cfg.otherAddonDirs or {}) do
     loader.loadAddon(require('path').basename(d))
   end
@@ -46,13 +48,15 @@ local function run(cfg)
   api.SendEvent('LOOT_CLOSED')
   do
     local b = api.env.ActionButton1
-    b:SetAttribute('type', 'macro')
-    b:SetAttribute('macrotext', '/startattack')
-    b:Click()
-    b:SetAttribute('macrotext', '/stopattack')
-    b:Click()
-    b:SetAttribute('macrotext', '/startattack\n/stopattack')
-    b:Click()
+    if b then
+      b:SetAttribute('type', 'macro')
+      b:SetAttribute('macrotext', '/startattack')
+      b:Click()
+      b:SetAttribute('macrotext', '/stopattack')
+      b:Click()
+      b:SetAttribute('macrotext', '/startattack\n/stopattack')
+      b:Click()
+    end
   end
   api.SendEvent('CRAFT_SHOW')
   api.SendEvent('CRAFT_UPDATE')

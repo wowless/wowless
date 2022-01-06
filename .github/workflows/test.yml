@@ -11,4 +11,4 @@ jobs:
     - name: setup
       run: bin/setup.sh
     - name: test
-      run: bin/test.sh --exclude-tags=huge
+      run: bin/test.sh
