@@ -29,13 +29,14 @@ local function main(cfid)
       if gvFile.gameVersionTypeId == cfFlavor and
           not file.displayName:match('-nolib') and
           not file.isAlternate then
-        os.execute(([[
-          mkdir -p extracts/addons/%s &&
-          cd extracts/addons/%s &&
-          wget -q "%s" &&
-          unzip -q *.zip &&
-          rm *.zip
-        ]]):format(wowFlavor, wowFlavor, file.downloadUrl))
+        local dir = ('extracts/addons/%d-%s/Interface/AddOns'):format(cfid, wowFlavor)
+        os.execute(table.concat({
+          ('mkdir -p "%s"'):format(dir),
+          ('cd "%s"'):format(dir),
+          ('wget -q "%s"'):format(file.downloadUrl),
+          'unzip -q *.zip',
+          'rm *.zip',
+        }, '&&'))
         break
       end
     end

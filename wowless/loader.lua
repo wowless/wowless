@@ -580,10 +580,7 @@ local function loader(api, cfg)
       end
     end
     for _, d in ipairs(otherAddonDirs) do
-      maybeAdd(d)
-    end
-    if version then
-      maybeAddAll(path.join('extracts', 'addons', version))
+      maybeAddAll(path.dirname(d))
     end
     if rootDir then
       maybeAddAll(path.join(rootDir, 'Interface', 'AddOns'))
