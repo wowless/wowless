@@ -541,7 +541,7 @@ local function loader(api, cfg)
     local attrs = {}
     local files = {}
     local dir = path.dirname(tocFile)
-    for line in io.lines(tocFile) do
+    for line in util.readfile(tocFile):gmatch('[^\r\n]+') do
       line = line:match('^%s*(.-)%s*$')
       if line:sub(1, 3) == '## ' then
         local key, value = line:match('([^:]+): (.*)', 4)
