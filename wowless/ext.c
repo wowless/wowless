@@ -97,16 +97,19 @@ static int wowless_ext_format(lua_State *L) {
     else { /* format item */
       char form[MAX_FORMAT];  /* to store the format (`%...') */
       char buff[MAX_ITEM];  /* to store the formatted item */
-      if (++arg > top)
-        luaL_argerror(L, arg, "no value");
       strfrmt = scanformat(L, strfrmt, form);
+      if (++arg > top) {
+        if (*strfrmt != 'd' && *strfrmt != 'i') {  /* wowless */
+          luaL_argerror(L, arg, "no value");
+        }
+      }
       switch (*strfrmt++) {
         case 'c': {
           sprintf(buff, form, (int)luaL_checknumber(L, arg));
           break;
         }
         case 'd':  case 'i': {
-          const lua_Number num = luaL_checknumber(L, arg);
+          const lua_Number num = arg > top ? 0 : luaL_checknumber(L, arg);  /* wowless */
           addintlen(form);
           sprintf(buff, form, (LUA_INTFRM_T)num);
           break;

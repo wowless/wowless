@@ -132,6 +132,18 @@ local tests = {
       assert(select(3, f:GetChildren()) == h)
     end,
   },
+  {
+    name = 'format nil numbers',
+    fn = function()
+      assert(_G.format('%d') == '0')
+    end,
+  },
+  {
+    name = 'format nil strings',
+    fn = function()
+      assert(not pcall(function() _G.format('%s') end))
+    end,
+  },
 }
 
 for _, test in ipairs(tests) do
