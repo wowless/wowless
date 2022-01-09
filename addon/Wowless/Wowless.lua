@@ -133,15 +133,29 @@ local tests = {
     end,
   },
   {
-    name = 'format nil numbers',
+    name = 'format missing numbers',
     fn = function()
       assert(_G.format('%d') == '0')
     end,
   },
+--[[ TODO reenable
   {
-    name = 'format nil strings',
+    name = 'format nil numbers',
+    fn = function()
+      assert(_G.format('%d', nil) == '0')
+    end,
+  },
+]]--
+  {
+    name = 'does not format missing strings',
     fn = function()
       assert(not pcall(function() _G.format('%s') end))
+    end,
+  },
+  {
+    name = 'does not format nil strings',
+    fn = function()
+      assert(not pcall(function() _G.format('%s', nil) end))
     end,
   },
 }
