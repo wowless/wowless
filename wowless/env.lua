@@ -4,14 +4,6 @@ local utf8 = require('lua-utf8')
 local util = require('wowless.util')
 local Mixin = util.mixin
 
-local function stringFormat(fmt, ...)
-  local args = {...}
-  for i, arg in ipairs(args) do
-    fmt = fmt:gsub('%%' .. i .. '%$', arg)
-  end
-  return extformat(fmt, ...)
-end
-
 local function mkBaseEnv()
   return {
     abs = math.abs,
@@ -36,7 +28,7 @@ local function mkBaseEnv()
     difftime = os.difftime,
     error = error,
     floor = math.floor,
-    format = stringFormat,
+    format = extformat,
     getmetatable = getmetatable,
     getn = table.getn,
     gmatch = string.gmatch,
@@ -81,7 +73,7 @@ local function mkBaseEnv()
       byte = string.byte,
       char = string.char,
       find = string.find,
-      format = stringFormat,
+      format = extformat,
       gmatch = string.gmatch,
       gsub = string.gsub,
       join = util.strjoin,

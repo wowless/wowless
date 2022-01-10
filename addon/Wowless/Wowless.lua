@@ -168,7 +168,19 @@ local tests = {
     fn = function()
       assertEquals(' 7   moo', _G.format('%2$2d %1$5s', 'moo', 7))
     end,
-    pending = true,  -- TODO remove
+  },
+  {
+    name = 'format handles up to index 99 substitution',
+    fn = function()
+      local t = {}
+      for i = 1, 100 do
+        t[i] = i
+      end
+      for i = 1, 99 do
+        assertEquals(tostring(i), _G.format('%' .. i .. '$d', unpack(t)))
+      end
+      assert(not pcall(function() _G.format('%100$d', unpack(t)) end))
+    end,
   },
 }
 

@@ -52,8 +52,27 @@ static void addquoted(lua_State *L, luaL_Buffer *b, int arg) {
   luaL_addchar(b, '"');
 }
 
-static const char *scanformat(lua_State *L, const char *strfrmt, char *form) {
+/*
+ * wowless: support lua 4.0 style positional arguments.
+ * One difference from lua 4.0: wow supports 2-digit positions.
+ */
+static const char *scanargnum(lua_State *L, const char *strfrmt, int *argnum) {
   const char *p = strfrmt;
+  while (*p != '\0' && isdigit(*p)) p++;
+  if (*p != '$')
+    return strfrmt;
+  if (p == strfrmt || (size_t)(p - strfrmt) > 2)
+    luaL_error(L, "invalid format (bad positional specifier)");
+  *argnum = *strfrmt++ - '0';
+  if (*strfrmt != '$')
+    *argnum = *argnum * 10 + *strfrmt++ - '0';
+  (*argnum)++;  /* +1 to skip format string */
+  return ++strfrmt;
+}
+
+static const char *scanformat(lua_State *L, const char *strfrmt, char *form, int *argnum) {
+  const char *p = scanargnum(L, strfrmt, argnum);
+  strfrmt = p;
   while (*p != '\0' && strchr(FLAGS, *p) != NULL) p++;  /* skip flags */
   if ((size_t)(p - strfrmt) >= sizeof(FLAGS))
     luaL_error(L, "invalid format (repeated flags)");
@@ -83,9 +102,9 @@ static void addintlen(char *form) {
 
 static int wowless_ext_format(lua_State *L) {
   int top = lua_gettop(L);
-  int arg = 1;
+  int argidx = 1;
   size_t sfl;
-  const char *strfrmt = luaL_checklstring(L, arg, &sfl);
+  const char *strfrmt = luaL_checklstring(L, 1, &sfl);
   const char *strfrmt_end = strfrmt+sfl;
   luaL_Buffer b;
   luaL_buffinit(L, &b);
@@ -97,8 +116,9 @@ static int wowless_ext_format(lua_State *L) {
     else { /* format item */
       char form[MAX_FORMAT];  /* to store the format (`%...') */
       char buff[MAX_ITEM];  /* to store the formatted item */
-      strfrmt = scanformat(L, strfrmt, form);
-      if (++arg > top) {
+      int arg = ++argidx;
+      strfrmt = scanformat(L, strfrmt, form, &arg);
+      if (arg > top) {
         if (*strfrmt != 'd' && *strfrmt != 'i') {  /* wowless */
           luaL_argerror(L, arg, "no value");
         }
