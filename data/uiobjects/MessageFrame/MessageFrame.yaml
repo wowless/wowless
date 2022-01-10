@@ -2,4 +2,6 @@
 name: MessageFrame
 inherits:
 - Frame
-methods: {}
+methods:
+  AddMessage:
+    status: unimplemented
