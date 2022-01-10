@@ -1,3 +1,14 @@
 ---
 name: FillLocalizedClassList
-status: unimplemented
+status: implemented
+inputs:
+- - name: classTable
+    type: table
+  - name: isFemale
+    nilable: true
+    type: bool
+outputs:
+- name: classTable
+  type: table
+dbs:
+- chrclasses
