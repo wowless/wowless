@@ -1,9 +1,24 @@
 ---
 name: LayeredRegion
+fields:
+  layer:
+    init: ARTWORK
+    type: string
+  sublevel:
+    init: 0
+    type: number
 inherits:
 - Region
 methods:
+  GetDrawLayer:
+    fields:
+    - layer
+    - sublevel
+    status: getter
   SetDrawLayer:
-    status: unimplemented
+    fields:
+    - layer
+    - sublevel
+    status: setter
   SetVertexColor:
     status: unimplemented

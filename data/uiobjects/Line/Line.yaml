@@ -1,0 +1,21 @@
+---
+name: Line
+fields:
+  thickness:
+    init: 1
+    type: number
+inherits:
+- Texture
+methods:
+  GetThickness:
+    fields:
+    - thickness
+    status: getter
+  SetEndPoint:
+    status: unimplemented
+  SetStartPoint:
+    status: unimplemented
+  SetThickness:
+    fields:
+    - thickness
+    status: setter

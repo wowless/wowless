@@ -59,6 +59,8 @@ inherits:
 methods:
   CreateFontString:
     status: implemented
+  CreateLine:
+    status: implemented
   CreateMaskTexture:
     status: implemented
   CreateTexture:
