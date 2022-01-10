@@ -610,9 +610,9 @@ local function loader(api, cfg)
       for _, file in ipairs(toc.files) do
         context.loadFile(file)
       end
+      toc.loaded = true
       api.log(1, 'done loading %s', addonName)
       api.SendEvent('ADDON_LOADED', addonName)
-      toc.loaded = true
     end
   end
 
