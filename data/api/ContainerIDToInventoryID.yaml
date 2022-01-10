@@ -1,3 +1,9 @@
 ---
 name: ContainerIDToInventoryID
 status: unimplemented
+inputs:
+- - name: bagID
+    type: number
+outputs:
+- name: inventoryID
+  type: number

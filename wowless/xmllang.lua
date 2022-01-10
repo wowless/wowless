@@ -1070,6 +1070,9 @@ return {
   onfinished = {
     extends = 'scripttype',
   },
+  onfocusgained = {
+    extends = 'scripttype',
+  },
   ongamepadbuttondown = {
     extends = 'scripttype',
   },

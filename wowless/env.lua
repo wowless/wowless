@@ -39,6 +39,7 @@ local function mkBaseEnv()
       ceil = math.ceil,
       cos = math.cos,
       floor = math.floor,
+      fmod = math.fmod,
       huge = math.huge,
       max = math.max,
       min = math.min,

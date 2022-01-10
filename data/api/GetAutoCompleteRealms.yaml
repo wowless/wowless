@@ -1,0 +1,10 @@
+---
+name: GetAutoCompleteRealms
+status: unimplemented
+inputs:
+- - name: tableNames
+    nilable: true
+    type: table
+outputs:
+- name: tableNames
+  type: table
