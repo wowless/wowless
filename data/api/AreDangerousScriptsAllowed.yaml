@@ -1,0 +1,9 @@
+---
+name: AreDangerousScriptsAllowed
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: value
+  stub: true
+  type: bool

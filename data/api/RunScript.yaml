@@ -1,0 +1,7 @@
+---
+name: RunScript
+status: implemented
+inputs:
+- - name: script
+    type: string
+outputs: {}

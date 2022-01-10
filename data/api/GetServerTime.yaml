@@ -1,0 +1,8 @@
+---
+name: GetServerTime
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: timestamp
+  type: number

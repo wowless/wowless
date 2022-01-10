@@ -41,6 +41,9 @@ fields:
   movable:
     init: false
     type: bool
+  propagateKeyboardInput:
+    init: false
+    type: bool
   registeredAllEvents:
     init: false
     type: bool
@@ -111,6 +114,10 @@ methods:
     status: implemented
   GetNumRegions:
     status: implemented
+  GetPropagateKeyboardInput:
+    fields:
+    - propagateKeyboardInput
+    status: getter
   GetRegions:
     status: implemented
   IgnoreDepth:
@@ -220,6 +227,10 @@ methods:
   SetMovable:
     fields:
     - movable
+    status: setter
+  SetPropagateKeyboardInput:
+    fields:
+    - propagateKeyboardInput
     status: setter
   SetResizable:
     fields:

@@ -1,0 +1,8 @@
+---
+name: ScriptsDisallowedForBeta
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: value
+  type: bool
