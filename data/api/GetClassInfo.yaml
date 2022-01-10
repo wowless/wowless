@@ -1,9 +1,15 @@
 ---
 name: GetClassInfo
-status: unimplemented
+status: implemented
 inputs:
-- - type: number
+- - name: classIndex
+    type: number
 outputs:
-- type: string
-- type: string
-- type: number
+- name: className
+  type: string
+- name: classFile
+  type: string
+- name: classID
+  type: number
+dbs:
+- chrclasses
