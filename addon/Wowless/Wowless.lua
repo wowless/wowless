@@ -1,6 +1,12 @@
 local addonName = ...
 local CreateFrame = _G.CreateFrame
 
+local function assertEquals(expected, actual)
+  if expected ~= actual then
+    error(string.format('want %s, got %s', tostring(expected), tostring(actual)), 2)
+  end
+end
+
 local tests = {
   {
     name = 'xml evaluation order',
@@ -135,17 +141,16 @@ local tests = {
   {
     name = 'format missing numbers',
     fn = function()
-      assert(_G.format('%d') == '0')
+      assertEquals('0', _G.format('%d'))
     end,
   },
---[[ TODO reenable
   {
     name = 'format nil numbers',
     fn = function()
-      assert(_G.format('%d', nil) == '0')
+      assertEquals('0', _G.format('%d', nil))
     end,
+    pending = true,  -- TODO remove
   },
-]]--
   {
     name = 'does not format missing strings',
     fn = function()
@@ -157,6 +162,13 @@ local tests = {
     fn = function()
       assert(not pcall(function() _G.format('%s', nil) end))
     end,
+  },
+  {
+    name = 'format handles indexed substitution',
+    fn = function()
+      assertEquals(' 7   moo', _G.format('%2$2d %1$5s', 'moo', 7))
+    end,
+    pending = true,  -- TODO remove
   },
 }
 
@@ -172,7 +184,9 @@ do
   frame:SetScript('OnEvent', function(_, _, name)
     if name == addonName then
       for _, test in ipairs(tests) do
-        test.fn(test.env)
+        if not test.pending then
+          test.fn(test.env)
+        end
       end
     end
   end)
