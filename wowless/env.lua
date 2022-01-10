@@ -41,6 +41,7 @@ local function mkBaseEnv()
       floor = math.floor,
       fmod = math.fmod,
       huge = math.huge,
+      log = math.log,
       max = math.max,
       min = math.min,
       modf = math.modf,
@@ -106,6 +107,7 @@ local function mkBaseEnv()
           fn(i, v)
         end
       end,
+      getn = table.getn,
       insert = table.insert,
       remove = table.remove,
       sort = table.sort,
