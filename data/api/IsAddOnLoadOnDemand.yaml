@@ -1,0 +1,12 @@
+---
+name: IsAddOnLoadOnDemand
+status: implemented
+inputs:
+- - name: index
+    type: number
+- - name: name
+    type: string
+outputs:
+- type: oneornil
+states:
+- Addons

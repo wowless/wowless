@@ -13,6 +13,7 @@ local function mkBaseEnv()
       bnot = bitlib.bnot,
       bor = bitlib.bor,
       bxor = bitlib.bxor,
+      lshift = bitlib.lshift,
     },
     ceil = math.ceil,
     collectgarbage = collectgarbage,

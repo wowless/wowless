@@ -1,14 +1,33 @@
 ---
 name: Animation
+fields:
+  endDelay:
+    type: number
+  startDelay:
+    type: number
 inherits:
 - ParentedObject
 - ScriptObject
 methods:
+  GetEndDelay:
+    fields:
+    - endDelay
+    status: getter
+  GetStartDelay:
+    fields:
+    - startDelay
+    status: getter
   SetDuration:
     status: unimplemented
+  SetEndDelay:
+    fields:
+    - endDelay
+    status: setter
   SetOrder:
     status: unimplemented
   SetStartDelay:
-    status: unimplemented
+    fields:
+    - startDelay
+    status: setter
   SetTarget:
     status: unimplemented
