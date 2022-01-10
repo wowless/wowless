@@ -1,5 +1,5 @@
 local env, arg = ...
-if arg == 0 then
+if arg == nil or arg == 0 then
   return env
 else
   return getfenv(arg)

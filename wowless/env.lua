@@ -14,6 +14,7 @@ local function mkBaseEnv()
       bor = bitlib.bor,
       bxor = bitlib.bxor,
       lshift = bitlib.lshift,
+      rshift = bitlib.rshift,
     },
     ceil = math.ceil,
     collectgarbage = collectgarbage,
