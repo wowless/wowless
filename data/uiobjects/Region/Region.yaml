@@ -136,6 +136,10 @@ methods:
     fields:
     - isIgnoringParentAlpha
     status: setter
+  SetIgnoreParentScale:
+    fields:
+    - isIgnoringParentScale
+    status: setter
   SetParent:
     status: implemented
   SetPoint:

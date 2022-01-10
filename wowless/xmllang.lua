@@ -1118,6 +1118,12 @@ return {
   onmousedown = {
     extends = 'scripttype',
   },
+  onmouseenter = {
+    extends = 'scripttype',
+  },
+  onmouseleave = {
+    extends = 'scripttype',
+  },
   onmoviefinished = {
     extends = 'scripttype',
   },

@@ -101,6 +101,11 @@ local function mkBaseEnv()
     strupper = string.upper,
     table = {
       concat = table.concat,
+      foreach = function(t, fn)
+        for i, v in ipairs(t) do
+          fn(i, v)
+        end
+      end,
       insert = table.insert,
       remove = table.remove,
       sort = table.sort,
