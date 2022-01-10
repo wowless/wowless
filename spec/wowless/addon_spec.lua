@@ -17,7 +17,7 @@ expose('addon', function()
           version = version,
         })
         require('wowless.env').init(api, loader)
-        loader.loadAddon('Wowless')
+        assert(loader.loadAddon('Wowless'))
         assert.same(0, api.GetErrorCount())
       end)
     end)

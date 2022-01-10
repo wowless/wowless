@@ -16,7 +16,7 @@ local function run(cfg)
     loader.loadFrameXml()
   end
   for _, d in ipairs(cfg.otherAddonDirs or {}) do
-    loader.loadAddon(require('path').basename(d))
+    assert(loader.loadAddon(require('path').basename(d)))
   end
   api.SendEvent('PLAYER_LOGIN')
   api.SendEvent('UPDATE_CHAT_WINDOWS')

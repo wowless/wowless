@@ -1,3 +1,2 @@
 local loader, addonIndexOrName = ...
-loader.loadAddon(addonIndexOrName)
-return true
+return loader.loadAddon(addonIndexOrName)

@@ -593,7 +593,7 @@ local function loader(api, cfg)
     'Dependencies',
   }
 
-  local function loadAddon(addonName)
+  local function doLoadAddon(addonName)
     local toc = addonData[addonName]
     if not toc then
       error('unknown addon ' .. addonName)
@@ -602,7 +602,7 @@ local function loader(api, cfg)
       api.log(1, 'loading addon dependencies for %s', addonName)
       for _, attr in ipairs(depAttrs) do
         for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
-          loadAddon(dep)
+          doLoadAddon(dep)
         end
       end
       api.log(1, 'loading addon files for %s', addonName)
@@ -614,6 +614,10 @@ local function loader(api, cfg)
       api.log(1, 'done loading %s', addonName)
       api.SendEvent('ADDON_LOADED', addonName)
     end
+  end
+
+  local function loadAddon(addonName)
+    return pcall(function() doLoadAddon(addonName) end)
   end
 
   local function db2rows(name)
