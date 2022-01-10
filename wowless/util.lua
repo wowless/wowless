@@ -20,24 +20,35 @@ local function recursiveMixin(t, u, failOnOverwrite)
   return t
 end
 
--- Case insensitive in terms of file basenames, not directory names.
 local readfile = (function()
   local lfs = require('lfs')
   local path = require('path')
-  local dircache = {}
-  return function(filename)
-    local dirname = path.dirname(path.normalize(filename))
-    local dircontents = dircache[dirname]
-    if not dircontents then
-      dircontents = {}
-      for f in lfs.dir(dirname) do
-        if path.isfile(path.join(dirname, f)) then
-          dircontents[f:lower()] = f
+  local cachedDirs = {}
+  local nameCache = {}
+  local function cacheDir(dir)
+    if not cachedDirs[dir] then
+      cachedDirs[dir] = true
+      cacheDir(path.dirname(dir))
+      if dir == '' then
+        for f in lfs.dir('.') do
+          nameCache[f:lower()] = f
+        end
+      else
+        local rdir = assert(nameCache[dir], 'unknown directory ' .. dir)
+        for f in lfs.dir(rdir) do
+          local fn = path.join(rdir, f)
+          nameCache[fn:lower()] = fn
         end
       end
-      dircache[dirname] = dircontents
     end
-    local fn = path.join(dirname, dircontents[path.basename(filename):lower()])
+  end
+  local function resolveCase(name)
+    local lname = name:lower()
+    cacheDir(path.dirname(lname))
+    return assert(nameCache[lname], 'unknown file ' .. name)
+  end
+  return function(filename)
+    local fn = resolveCase(path.normalize(filename))
     local f = assert(io.open(fn:gsub('\\', '/'), 'rb'))
     local content = f:read('*all')
     f:close()
