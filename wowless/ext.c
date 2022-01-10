@@ -129,7 +129,7 @@ static int wowless_ext_format(lua_State *L) {
           break;
         }
         case 'd':  case 'i': {
-          const lua_Number num = arg > top ? 0 : luaL_checknumber(L, arg);  /* wowless */
+          const lua_Number num = arg > top ? 0 : luaL_optnumber(L, arg, 0);  /* wowless */
           addintlen(form);
           sprintf(buff, form, (LUA_INTFRM_T)num);
           break;

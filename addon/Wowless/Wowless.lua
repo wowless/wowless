@@ -149,7 +149,6 @@ local tests = {
     fn = function()
       assertEquals('0', _G.format('%d', nil))
     end,
-    pending = true,  -- TODO remove
   },
   {
     name = 'does not format missing strings',
