@@ -285,7 +285,7 @@ local function loader(api, cfg)
             end
           end,
           scrollchild = function(e, parent)
-            parent:SetScrollChild(loadElement(e.frame, parent))
+            parent:SetScrollChild(loadElement(e.kids[#e.kids], parent))
           end,
           size = function(e, parent)
             local x, y = getXY(e)
