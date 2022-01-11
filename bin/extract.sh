@@ -9,5 +9,5 @@ gsutil -q cp gs://wowless.dev/extracts/"$v".zip extracts/
 unzip -d extracts -q -u extracts/"$v".zip
 gsutil -q cp gs://wowless.dev/gscrapes/"$v".lua extracts/
 .lua/bin/lua tools/gextract.lua extracts/"$v".lua > extracts/"$v"/Interface/GlobalEnvironment.lua
-ln -sf "$v" extracts/"$p"
+ln -hsf "$v" extracts/"$p"
 echo " done."
