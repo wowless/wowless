@@ -52,7 +52,8 @@ local function api2yaml(api)
     elseif ty == 'number' or ty == 'boolean' then
       assert(emit({type = 'SCALAR', value = tostring(v)}))
     elseif ty == 'string' then
-      assert(emit({type = 'SCALAR', value = v, style = v == '' and 'SINGLE_QUOTED' or nil}))
+      local sq = v == '' or v == 'true' or v == 'false'
+      assert(emit({type = 'SCALAR', value = v, style = sq and 'SINGLE_QUOTED' or nil}))
     elseif ty == 'table' then
       if not next(v) then
         assert(emit({type = 'MAPPING_START'}))

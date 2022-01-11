@@ -48,7 +48,7 @@ type:
                 - literal: number
                 - literal: string
             value:
-              type: boolean
+              type: string
     name:
       required: true
       type: string
