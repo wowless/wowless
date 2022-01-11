@@ -36,6 +36,5 @@ build = {
     ['wowless.runner'] = 'wowless/runner.lua',
     ['wowless.util'] = 'wowless/util.lua',
     ['wowless.xml'] = 'wowless/xml.lua',
-    ['wowless.xmllang'] = 'wowless/xmllang.lua',
   },
 }

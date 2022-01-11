@@ -28,7 +28,7 @@ local function preprocess(tree)
   return newtree
 end
 
-local lang = preprocess(require('wowless.xmllang'))
+local lang = preprocess(require('wowapi.data').xml)
 
 local attributeTypes = {
   bool = function(s)
