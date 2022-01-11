@@ -1,0 +1,10 @@
+---
+name: GetMacroIcons
+status: unimplemented
+inputs:
+- - name: iconTable
+    nilable: true
+    type: table
+outputs:
+- name: iconTable
+  type: table

@@ -1251,6 +1251,9 @@ return {
   preclick = {
     extends = 'scripttype',
   },
+  pushedfont = {
+    extends = 'buttonfont',
+  },
   pushedtextoffset = {
     extends = 'dimension',
   },

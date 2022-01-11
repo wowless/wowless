@@ -1,0 +1,7 @@
+---
+name: GetLooseMacroIcons
+status: unimplemented
+inputs:
+- - name: iconTable
+    type: table
+outputs: {}
