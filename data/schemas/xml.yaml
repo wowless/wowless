@@ -22,33 +22,6 @@ type:
     extends:
       type:
         ref: xml
-    fields:
-      type:
-        mapof:
-          record:
-            attribute:
-              type: string
-            child:
-              type:
-                ref: xml
-            repeated:
-              type: boolean
-            required:
-              type: boolean
-            source:
-              required: true
-              type:
-                oneof:
-                - literal: attribute
-                - literal: child
-            type:
-              type:
-                oneof:
-                - literal: bool
-                - literal: number
-                - literal: string
-            value:
-              type: string
     name:
       required: true
       type: string
