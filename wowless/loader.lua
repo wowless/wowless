@@ -176,7 +176,7 @@ local function loader(api, cfg)
             })
           end,
           frames = function(e, parent)
-            loadElements(e.frames, parent)
+            loadElements(e.kids, parent)
           end,
           highlightfont = function(e, parent)
             parent:SetHighlightFontObject(loadElement(mixin({}, e, { type = 'font' }), parent))

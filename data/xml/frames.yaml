@@ -1,7 +1,4 @@
 ---
 name: frames
-fields:
-  frames:
-    child: frame
-    repeated: true
-    source: child
+children:
+  frame: true
