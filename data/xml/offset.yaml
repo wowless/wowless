@@ -1,12 +1,9 @@
 ---
 name: offset
-fields:
-  dim:
-    child: absdimension
-    source: child
+attributes:
   x:
-    source: attribute
     type: number
   y:
-    source: attribute
     type: number
+children:
+  absdimension: true

@@ -29,6 +29,15 @@ local function loader(api, cfg)
     end
   end
 
+  local function getXY(e)
+    if e then
+      local dim = e.kids[#e.kids]
+      local x = e.attr.x or (dim and dim.x) or nil
+      local y = e.attr.y or (dim and dim.y) or nil
+      return x, y
+    end
+  end
+
   local function forAddon(addonName, addonEnv)
 
     local function loadstr(str, filename)
@@ -91,8 +100,9 @@ local function loader(api, cfg)
                 relativeTo = api.UserData(parent).parent
               end
               local relativePoint = anchor.relativepoint or 'CENTER'
-              local x = anchor.x or (anchor.offset and anchor.offset.x) or nil
-              local y = anchor.y or (anchor.offset and anchor.offset.y) or nil
+              local offsetX, offsetY = getXY(anchor.offset)
+              local x = anchor.x or offsetX
+              local y = anchor.y or offsetY
               parent:SetPoint(point, relativeTo, relativePoint, x, y)
             end
           end,
@@ -278,9 +288,7 @@ local function loader(api, cfg)
             parent:SetScrollChild(loadElement(e.frame, parent))
           end,
           size = function(e, parent)
-            local dim = e.kids[#e.kids]
-            local x = e.attr.x or (dim and dim.x) or nil
-            local y = e.attr.y or (dim and dim.y) or nil
+            local x, y = getXY(e)
             if x then
               parent:SetWidth(x)
             end
