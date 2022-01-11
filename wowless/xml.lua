@@ -30,6 +30,25 @@ end
 
 local lang = preprocess(require('wowapi.data').xml)
 
+local attrBasedElementMT = {
+  __index = (function()
+    local fields = {
+      attr = true,
+      kids = true,
+      line = true,
+      text = true,
+      type = true,
+    }
+    return function(_, k)
+      assert(fields[k], 'invalid table key ' .. k)
+    end
+  end)(),
+  __metatable = 'attrBasedElementMT',
+  __newindex = function()
+    error('cannot add fields')
+  end,
+}
+
 local attributeTypes = {
   bool = function(s)
     local x = string.lower(s)
@@ -158,13 +177,13 @@ local function validateRoot(root)
           table.insert(texts, kid._text)
           line = line or kid._line
         end
-        return {
+        return setmetatable({
           attr = resultAttrs,
           kids = {},
           line = line,
           text = #texts > 0 and table.concat(texts, '\n') or nil,
           type = tname,
-        }
+        }, attrBasedElementMT)
       else
         local resultKids = {}
         for _, kid in ipairs(e._children or {}) do
@@ -177,11 +196,11 @@ local function validateRoot(root)
             end
           end
         end
-        return {
+        return setmetatable({
           attr = resultAttrs,
           kids = resultKids,
           type = tname,
-        }
+        }, attrBasedElementMT)
       end
     end
   end
