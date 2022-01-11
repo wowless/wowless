@@ -136,8 +136,8 @@ local function loader(api, cfg)
           attributes = function(e, parent)
             -- TODO share code with SetAttribute somehow
             local attrs = api.UserData(parent).attributes
-            for _, attr in ipairs(e.entries) do
-              attrs[attr.name] = parseTypedValue(attr.luatype, attr.value)
+            for _, a in ipairs(e.kids) do
+              attrs[a.attr.name] = parseTypedValue(a.attr.type, a.attr.value)
             end
           end,
           bartexture = function(e, parent)

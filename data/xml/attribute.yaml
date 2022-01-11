@@ -1,13 +1,9 @@
 ---
 name: attribute
-fields:
-  luatype:
-    attribute: type
-    source: attribute
-    type: string
+attributes:
   name:
-    source: attribute
+    type: string
+  type:
     type: string
   value:
-    source: attribute
     type: string

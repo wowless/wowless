@@ -1,7 +1,4 @@
 ---
 name: attributes
-fields:
-  entries:
-    child: attribute
-    repeated: true
-    source: child
+children:
+  attribute: true
