@@ -49,16 +49,44 @@ local attrBasedElementMT = {
   end,
 }
 
+local attrMTs = (function()
+  local result = {}
+  for name, spec in pairs(lang) do
+    if not next(spec.fields) then
+      -- TODO be more defensive in loader.lua and remove these
+      local attrs = {
+        inherits = true,
+        intrinsic = true,
+        mixin = true,
+        name = true,
+        securemixin = true,
+        text = true,
+        virtual = true,
+      }
+      for attr in pairs(spec.attributes) do
+        attrs[attr] = true
+      end
+      result[name] = {
+        __index = function(_, k)
+          assert(attrs[k], 'invalid table key ' .. k)
+        end,
+        __metatable = 'attrMT:' .. name,
+        __newindex = function()
+          error('cannot add fields')
+        end,
+      }
+    end
+  end
+  return result
+end)()
+
 local fieldBasedElementMTs = (function()
   local result = {}
   for name, spec in pairs(lang) do
     if next(spec.fields) then
-      local fields = {}
+      local fields = { text = spec.text }
       for field in pairs(spec.fields) do
         fields[field] = true
-      end
-      if spec.text then
-        fields.text = true
       end
       result[name] = {
         __index = function(_, k)
@@ -203,7 +231,7 @@ local function validateRoot(root)
           line = line or kid._line
         end
         return setmetatable({
-          attr = resultAttrs,
+          attr = setmetatable(resultAttrs, attrMTs[tname]),
           kids = {},
           line = line,
           text = #texts > 0 and table.concat(texts, '\n') or nil,
@@ -222,7 +250,7 @@ local function validateRoot(root)
           end
         end
         return setmetatable({
-          attr = resultAttrs,
+          attr = setmetatable(resultAttrs, attrMTs[tname]),
           kids = resultKids,
           type = tname,
         }, attrBasedElementMT)

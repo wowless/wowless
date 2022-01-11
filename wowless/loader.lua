@@ -160,7 +160,7 @@ local function loader(api, cfg)
           fontfamily = function(e)
             local font = e.members[1].font
             return loadElement({
-              attr = mixin(font.attr, { virtual = true, name = e.name }),
+              attr = mixin({}, font.attr, { virtual = true, name = e.name }),
               kids = font.kids,
               type = font.type,
             })
