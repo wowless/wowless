@@ -587,6 +587,15 @@ return {
     },
     extends = 'layoutframe',
   },
+  fontstringheader1 = {
+    extends = 'fontstring',
+  },
+  fontstringheader2 = {
+    extends = 'fontstring',
+  },
+  fontstringheader3 = {
+    extends = 'fontstring',
+  },
   frame = {
     attributes = {
       clampedtoscreen = {
@@ -1013,6 +1022,9 @@ return {
   onchar = {
     extends = 'scripttype',
   },
+  oncharcomposition = {
+    extends = 'scripttype',
+  },
   onclick = {
     extends = 'scripttype',
   },
@@ -1412,6 +1424,9 @@ return {
   simplehtml = {
     children = {
       fontstring = true,
+      fontstringheader1 = true,
+      fontstringheader2 = true,
+      fontstringheader3 = true,
     },
     extends = 'frame',
   },
