@@ -278,8 +278,9 @@ local function loader(api, cfg)
             parent:SetScrollChild(loadElement(e.frame, parent))
           end,
           size = function(e, parent)
-            local x = e.x or (e.dim and e.dim.x) or nil
-            local y = e.y or (e.dim and e.dim.y) or nil
+            local dim = e.kids[#e.kids]
+            local x = e.attr.x or (dim and dim.x) or nil
+            local y = e.attr.y or (dim and dim.y) or nil
             if x then
               parent:SetWidth(x)
             end
