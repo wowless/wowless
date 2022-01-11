@@ -1,7 +1,6 @@
 ---
 name: include
-fields:
+attributes:
   file:
     required: true
-    source: attribute
     type: string

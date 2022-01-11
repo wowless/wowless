@@ -185,7 +185,7 @@ local function loader(api, cfg)
             parent:SetHighlightTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
           end,
           include = function(e)
-            loadFile(path.join(dir, e.file))
+            loadFile(path.join(dir, e.attr.file))
           end,
           keyvalues = function(e, parent)
             for _, kv in ipairs(e.entries) do
