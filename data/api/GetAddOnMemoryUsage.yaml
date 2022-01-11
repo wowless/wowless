@@ -1,0 +1,11 @@
+---
+name: GetAddOnMemoryUsage
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+- - name: name
+    type: string
+outputs:
+- name: memoryKb
+  type: number

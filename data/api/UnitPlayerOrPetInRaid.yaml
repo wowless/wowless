@@ -1,0 +1,9 @@
+---
+name: UnitPlayerOrPetInRaid
+status: unimplemented
+inputs:
+- - name: unit
+    type: unit
+outputs:
+- name: value
+  type: bool
