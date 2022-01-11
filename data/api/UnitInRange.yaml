@@ -1,0 +1,13 @@
+---
+name: UnitInRange
+status: unimplemented
+inputs:
+- - name: unit
+    type: unit
+outputs:
+- name: inRange
+  stub: true
+  type: bool
+- name: checkedRange
+  stub: true
+  type: bool

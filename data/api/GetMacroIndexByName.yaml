@@ -1,0 +1,9 @@
+---
+name: GetMacroIndexByName
+status: unimplemented
+inputs:
+- - name: name
+    type: string
+outputs:
+- name: macroSlot
+  type: number

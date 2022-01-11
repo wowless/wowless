@@ -1,0 +1,15 @@
+---
+name: GetMacroInfo
+status: unimplemented
+inputs:
+- - name: macroSlot
+    type: number
+- - name: name
+    type: string
+outputs:
+- name: name
+  type: string
+- name: icon
+  type: number
+- name: body
+  type: string

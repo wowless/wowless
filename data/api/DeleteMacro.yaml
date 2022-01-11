@@ -1,0 +1,9 @@
+---
+name: DeleteMacro
+status: unimplemented
+inputs:
+- - name: macroSlot
+    type: number
+- - name: name
+    type: string
+outputs: {}

@@ -1,0 +1,8 @@
+---
+name: GetSpellBonusHealing
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: bonusHealing
+  type: number
