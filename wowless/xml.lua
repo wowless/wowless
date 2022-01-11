@@ -4,7 +4,6 @@ local function preprocess(tree)
   local newtree = {}
   for k, v in pairs(tree) do
     local attrs = mixin({}, v.attributes)
-    local fields = mixin({}, v.fields)
     local kids = mixin({}, v.children)
     local supertypes = { [k] = true }
     local text = v.text
@@ -13,14 +12,12 @@ local function preprocess(tree)
       supertypes[t.extends] = true
       t = tree[t.extends]
       mixin(attrs, t.attributes)
-      mixin(fields, t.fields)
       mixin(kids, t.children)
       text = text or t.text
     end
     newtree[k] = mixin({}, v, {
       attributes = attrs,
       children = kids,
-      fields = fields,
       supertypes = supertypes,
       text = text,
     })
@@ -52,52 +49,28 @@ local attrBasedElementMT = {
 local attrMTs = (function()
   local result = {}
   for name, spec in pairs(lang) do
-    if not next(spec.fields) then
-      -- TODO be more defensive in loader.lua and remove these
-      local attrs = {
-        inherits = true,
-        intrinsic = true,
-        mixin = true,
-        name = true,
-        securemixin = true,
-        text = true,
-        virtual = true,
-      }
-      for attr in pairs(spec.attributes) do
-        attrs[attr] = true
-      end
-      result[name] = {
-        __index = function(_, k)
-          assert(attrs[k], 'invalid table key ' .. k)
-        end,
-        __metatable = 'attrMT:' .. name,
-        __newindex = function()
-          error('cannot add fields')
-        end,
-      }
+    -- TODO be more defensive in loader.lua and remove these
+    local attrs = {
+      inherits = true,
+      intrinsic = true,
+      mixin = true,
+      name = true,
+      securemixin = true,
+      text = true,
+      virtual = true,
+    }
+    for attr in pairs(spec.attributes) do
+      attrs[attr] = true
     end
-  end
-  return result
-end)()
-
-local fieldBasedElementMTs = (function()
-  local result = {}
-  for name, spec in pairs(lang) do
-    if next(spec.fields) then
-      local fields = { text = spec.text }
-      for field in pairs(spec.fields) do
-        fields[field] = true
-      end
-      result[name] = {
-        __index = function(_, k)
-          assert(fields[k], 'invalid table key ' .. k)
-        end,
-        __metatable = 'fieldBasedElementMT:' .. name,
-        __newindex = function()
-          error('cannot add fields')
-        end,
-      }
-    end
+    result[name] = {
+      __index = function(_, k)
+        assert(attrs[k], 'invalid table key ' .. k)
+      end,
+      __metatable = 'attrMT:' .. name,
+      __newindex = function()
+        error('cannot add fields')
+      end,
+    }
   end
   return result
 end)()
@@ -144,117 +117,54 @@ local function validateRoot(root)
       table.insert(warnings, tname .. ' cannot be a child of ' .. tn)
       return nil
     end
-    if next(ty.fields) then
-      assert(not next(ty.attributes), 'attributes and fields in ' .. tname)
-      assert(not next(ty.children), 'children and fields in ' .. tname)
-      local fields = { type = tname }
-      local fieldAttrs = {}
-      for name, spec in pairs(ty.fields) do
-        if spec.source == 'attribute' then
-          local aname = spec.attribute or name
-          fieldAttrs[aname] = true
-          local attr = nil
-          for k, v in pairs(e._attr or {}) do
-            if string.lower(k) == aname then
-              assert(attr == nil, 'duplicate attributes for ' .. aname .. ' in ' .. tname)
-              attr = v
-            end
-          end
-          assert(spec.value == nil or attr == spec.value, 'bad attribute value ' .. tostring(attr) .. ' in ' .. tname)
-          assert(not spec.required or attr ~= nil, 'missing attribute ' .. aname .. ' in ' .. tname)
-          if attr and spec.value == nil then
-            assert(spec.type, 'missing type on attribute field ' .. name .. ' of ' .. tname)
-            fields[name] = attributeTypes[spec.type](attr)
-          end
-        elseif spec.source == 'child' then
-          local cname = spec.child or name
-          local kids = {}
-          for _, kid in ipairs(e._children) do
-            if kid._name then
-              local kty = lang[string.lower(kid._name)]
-              assert(kty, 'unknown tag ' .. kid._name)
-              if kty.supertypes[cname] then
-                local newkid = run(kid, tname, { [cname] = true })
-                if newkid then
-                  table.insert(kids, newkid)
-                end
-              end
-            end
-          end
-          assert(not spec.required or #kids > 0, 'missing required child ' .. cname .. ' of ' .. tname)
-          assert(spec.repeated or #kids <= 1, 'too many instances of child ' .. cname .. ' of ' .. tname)
-          fields[name] = spec.repeated and kids or #kids and kids[1] or nil
-        else
-          error('invalid spec source ' .. spec.source .. ' in ' .. tname)
-        end
-      end
-      if ty.text then
-        local texts = {}
-        local line
-        for _, kid in ipairs(e._children) do
-          assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
-          table.insert(texts, kid._text)
-          line = line or kid._line
-        end
-        fields.line = line
-        fields.text = #texts > 0 and table.concat(texts, '\n') or nil
-      end
-      for k in pairs(e._attr or {}) do
-        if not fieldAttrs[string.lower(k)] then
-          table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
-        end
-      end
-      return setmetatable(fields, fieldBasedElementMTs[tname])
-    else
-      local resultAttrs = {}
-      for k, v in pairs(e._attr or {}) do
-        local an = string.lower(k)
-        local attr = ty.attributes[an]
-        if not attr then
-          table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
-        else
-          local vv = attributeTypes[attr.type](v)
-          if vv == nil then
-            table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
-          else
-            resultAttrs[an] = vv
-          end
-        end
-      end
-      if ty.text then
-        assert(e._children, 'missing text in ' .. tname)
-        local texts = {}
-        local line
-        for _, kid in ipairs(e._children) do
-          assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
-          table.insert(texts, kid._text)
-          line = line or kid._line
-        end
-        return setmetatable({
-          attr = setmetatable(resultAttrs, attrMTs[tname]),
-          kids = {},
-          line = line,
-          text = #texts > 0 and table.concat(texts, '\n') or nil,
-          type = tname,
-        }, attrBasedElementMT)
+    local resultAttrs = {}
+    for k, v in pairs(e._attr or {}) do
+      local an = string.lower(k)
+      local attr = ty.attributes[an]
+      if not attr then
+        table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
       else
-        local resultKids = {}
-        for _, kid in ipairs(e._children or {}) do
-          if kid._type == 'TEXT' then
-            table.insert(warnings, 'ignoring text kid of ' .. tname)
-          else
-            local newkid = run(kid, tname, ty.children)
-            if newkid then
-              table.insert(resultKids, newkid)
-            end
+        local vv = attributeTypes[attr.type](v)
+        if vv == nil then
+          table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
+        else
+          resultAttrs[an] = vv
+        end
+      end
+    end
+    if ty.text then
+      assert(e._children, 'missing text in ' .. tname)
+      local texts = {}
+      local line
+      for _, kid in ipairs(e._children) do
+        assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
+        table.insert(texts, kid._text)
+        line = line or kid._line
+      end
+      return setmetatable({
+        attr = setmetatable(resultAttrs, attrMTs[tname]),
+        kids = {},
+        line = line,
+        text = #texts > 0 and table.concat(texts, '\n') or nil,
+        type = tname,
+      }, attrBasedElementMT)
+    else
+      local resultKids = {}
+      for _, kid in ipairs(e._children or {}) do
+        if kid._type == 'TEXT' then
+          table.insert(warnings, 'ignoring text kid of ' .. tname)
+        else
+          local newkid = run(kid, tname, ty.children)
+          if newkid then
+            table.insert(resultKids, newkid)
           end
         end
-        return setmetatable({
-          attr = setmetatable(resultAttrs, attrMTs[tname]),
-          kids = resultKids,
-          type = tname,
-        }, attrBasedElementMT)
       end
+      return setmetatable({
+        attr = setmetatable(resultAttrs, attrMTs[tname]),
+        kids = resultKids,
+        type = tname,
+      }, attrBasedElementMT)
     end
   end
   local result = run(root, 'toplevel', {
