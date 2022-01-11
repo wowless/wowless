@@ -193,7 +193,7 @@ local function loader(api, cfg)
             end
           end,
           layers = function(e, parent)
-            for _, layer in ipairs(e.layers) do
+            for _, layer in ipairs(e.kids) do
               loadElements(layer.kids, parent)
             end
           end,
