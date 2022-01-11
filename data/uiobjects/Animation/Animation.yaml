@@ -3,6 +3,9 @@ name: Animation
 fields:
   endDelay:
     type: number
+  smoothing:
+    init: OUT
+    type: string
   startDelay:
     type: number
 inherits:
@@ -12,6 +15,10 @@ methods:
   GetEndDelay:
     fields:
     - endDelay
+    status: getter
+  GetSmoothing:
+    fields:
+    - smoothing
     status: getter
   GetStartDelay:
     fields:
@@ -25,6 +32,10 @@ methods:
     status: setter
   SetOrder:
     status: unimplemented
+  SetSmoothing:
+    fields:
+    - smoothing
+    status: setter
   SetStartDelay:
     fields:
     - startDelay

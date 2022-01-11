@@ -15,6 +15,7 @@ type:
                 - literal: bool
                 - literal: number
                 - literal: string
+                - literal: table
                 - literal: texture
     inherits:
       type:
