@@ -1,23 +1,17 @@
 ---
 name: anchor
-fields:
-  offset:
-    source: child
+attributes:
   point:
-    source: attribute
     type: string
   relativekey:
-    source: attribute
     type: string
   relativepoint:
-    source: attribute
     type: string
   relativeto:
-    source: attribute
     type: string
   x:
-    source: attribute
     type: number
   y:
-    source: attribute
     type: number
+children:
+  offset: true

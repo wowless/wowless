@@ -70,15 +70,15 @@ local function loader(api, cfg)
 
         local xmllang = {
           anchors = function(e, parent)
-            for _, anchor in ipairs(e.anchor) do
-              local point = anchor.point
+            for _, anchor in ipairs(e.kids) do
+              local point = anchor.attr.point
               local relativeTo
-              if anchor.relativeto then
-                relativeTo = api.ParentSub(anchor.relativeto, parent:GetParent())
-              elseif anchor.relativekey then
-                local parts = {util.strsplit('.', anchor.relativekey)}
+              if anchor.attr.relativeto then
+                relativeTo = api.ParentSub(anchor.attr.relativeto, parent:GetParent())
+              elseif anchor.attr.relativekey then
+                local parts = {util.strsplit('.', anchor.attr.relativekey)}
                 if #parts == 1 then
-                  relativeTo = api.ParentSub(anchor.relativekey, parent:GetParent())
+                  relativeTo = api.ParentSub(anchor.attr.relativekey, parent:GetParent())
                 else
                   local obj = parent
                   for i = 1, #parts do
@@ -87,7 +87,7 @@ local function loader(api, cfg)
                       obj = obj:GetParent()
                     else
                       if not obj[p] then
-                        api.log(1, 'invalid relativeKey %q', anchor.relativekey)
+                        api.log(1, 'invalid relativeKey %q', anchor.attr.relativekey)
                         obj = nil
                         break
                       end
@@ -99,10 +99,10 @@ local function loader(api, cfg)
               else
                 relativeTo = api.UserData(parent).parent
               end
-              local relativePoint = anchor.relativepoint or 'CENTER'
-              local offsetX, offsetY = getXY(anchor.offset)
-              local x = anchor.x or offsetX
-              local y = anchor.y or offsetY
+              local relativePoint = anchor.attr.relativepoint or 'CENTER'
+              local offsetX, offsetY = getXY(anchor.kids[#anchor.kids])
+              local x = anchor.attr.x or offsetX
+              local y = anchor.attr.y or offsetY
               parent:SetPoint(point, relativeTo, relativePoint, x, y)
             end
           end,
