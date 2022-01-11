@@ -188,8 +188,8 @@ local function loader(api, cfg)
             loadFile(path.join(dir, e.attr.file))
           end,
           keyvalues = function(e, parent)
-            for _, kv in ipairs(e.entries) do
-              parent[kv.key] = parseTypedValue(kv.luatype, kv.value)
+            for _, kv in ipairs(e.kids) do
+              parent[kv.attr.key] = parseTypedValue(kv.attr.type, kv.attr.value)
             end
           end,
           layers = function(e, parent)

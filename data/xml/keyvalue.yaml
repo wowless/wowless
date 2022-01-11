@@ -1,15 +1,11 @@
 ---
 name: keyvalue
-fields:
+attributes:
   key:
     required: true
-    source: attribute
     type: string
-  luatype:
-    attribute: type
-    source: attribute
+  type:
     type: string
   value:
     required: true
-    source: attribute
     type: string

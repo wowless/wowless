@@ -1,7 +1,4 @@
 ---
 name: keyvalues
-fields:
-  entries:
-    child: keyvalue
-    repeated: true
-    source: child
+children:
+  keyvalue: true
