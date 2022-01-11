@@ -108,7 +108,7 @@ local function loader(api, cfg)
           end,
           animations = function(e, parent)
             local groups = api.UserData(parent).animationGroups
-            for _, g in ipairs(e.groups) do
+            for _, g in ipairs(e.kids) do
               -- Put all the actual animations in a separate element.
               -- This way we can attach them to the group later.
               local animset = {

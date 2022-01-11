@@ -1,8 +1,4 @@
 ---
 name: animations
-fields:
-  groups:
-    child: animationgroup
-    repeated: true
-    required: true
-    source: child
+children:
+  animationgroup: true
