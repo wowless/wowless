@@ -6,7 +6,7 @@ fields:
   type: number
 - name: name
   type: string
-- name: texture
-  type: number
 - name: quantity
+  type: number
+- name: texture
   type: number

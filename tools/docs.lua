@@ -208,6 +208,7 @@ for name, tab in pairs(tabs) do
             default = field.Default,
           })
         end
+        table.sort(ret, function(a, b) return a.name < b.name end)
         return ret
       end)(),
     }

@@ -8,7 +8,7 @@ fields:
   type: string
 - name: isActive
   type: bool
-- name: isSystemDefault
-  type: bool
 - name: isCommsDefault
+  type: bool
+- name: isSystemDefault
   type: bool

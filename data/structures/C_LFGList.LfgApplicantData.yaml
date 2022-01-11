@@ -6,14 +6,14 @@ fields:
   type: number
 - name: applicationStatus
   type: string
-- name: pendingApplicationStatus
-  nilable: true
-  type: string
-- name: numMembers
-  type: number
-- name: isNew
-  type: bool
 - name: comment
   type: string
 - name: displayOrderID
   type: number
+- name: isNew
+  type: bool
+- name: numMembers
+  type: number
+- name: pendingApplicationStatus
+  nilable: true
+  type: string

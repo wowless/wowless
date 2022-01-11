@@ -6,13 +6,13 @@ fields:
   type: number
 - name: eligible
   type: bool
-- name: needTank
-  type: bool
-- name: needHealer
+- name: isAutoAccept
   type: bool
 - name: needDamage
   type: bool
-- name: isAutoAccept
+- name: needHealer
+  type: bool
+- name: needTank
   type: bool
 - name: queueData
   type: unknown
