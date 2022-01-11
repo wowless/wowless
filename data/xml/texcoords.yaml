@@ -10,4 +10,4 @@ attributes:
   top:
     type: number
 children:
-  rect: true
+- rect

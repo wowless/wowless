@@ -1,4 +1,4 @@
 ---
 name: maskedtextures
 children:
-  maskedtexture: true
+- maskedtexture

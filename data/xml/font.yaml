@@ -26,5 +26,5 @@ attributes:
   virtual:
     type: bool
 children:
-  color: true
-  shadow: true
+- color
+- shadow

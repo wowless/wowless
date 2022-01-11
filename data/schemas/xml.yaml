@@ -18,7 +18,8 @@ type:
                 - literal: stringlist
     children:
       type:
-        mapof: boolean
+        sequenceof:
+          ref: xml
     extends:
       type:
         ref: xml

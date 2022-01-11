@@ -6,7 +6,7 @@ attributes:
   tile:
     type: bool
 children:
-  backgroundinsets: true
-  bordercolor: true
-  edgesize: true
-  tilesize: true
+- backgroundinsets
+- bordercolor
+- edgesize
+- tilesize

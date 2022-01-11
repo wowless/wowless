@@ -1,5 +1,5 @@
 ---
 name: modelscene
 children:
-  viewinsets: true
+- viewinsets
 extends: frame

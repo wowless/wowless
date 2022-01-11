@@ -16,5 +16,5 @@ attributes:
   valuestep:
     type: number
 children:
-  thumbtexture: true
+- thumbtexture
 extends: frame

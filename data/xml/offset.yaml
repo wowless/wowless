@@ -6,4 +6,4 @@ attributes:
   y:
     type: number
 children:
-  absdimension: true
+- absdimension

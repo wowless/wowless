@@ -10,5 +10,5 @@ attributes:
   top:
     type: number
 children:
-  absinset: true
+- absinset
 virtual: true

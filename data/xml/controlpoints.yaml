@@ -1,4 +1,4 @@
 ---
 name: controlpoints
 children:
-  controlpoint: true
+- controlpoint

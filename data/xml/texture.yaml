@@ -22,8 +22,8 @@ attributes:
   verttile:
     type: bool
 children:
-  animations: true
-  color: true
-  gradient: true
-  texcoords: true
+- animations
+- color
+- gradient
+- texcoords
 extends: layoutframe

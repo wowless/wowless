@@ -12,6 +12,6 @@ attributes:
   reversefill:
     type: bool
 children:
-  barcolor: true
-  bartexture: true
+- barcolor
+- bartexture
 extends: frame

@@ -48,13 +48,13 @@ attributes:
   useparentlevel:
     type: bool
 children:
-  animations: true
-  attributes: true
-  backdrop: true
-  frames: true
-  hitrectinsets: true
-  layers: true
-  resizebounds: true
-  scripts: true
-  titleregion: true
+- animations
+- attributes
+- backdrop
+- frames
+- hitrectinsets
+- layers
+- resizebounds
+- scripts
+- titleregion
 extends: layoutframe

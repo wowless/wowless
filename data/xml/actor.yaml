@@ -8,4 +8,4 @@ attributes:
   virtual:
     type: bool
 children:
-  scripts: true
+- scripts

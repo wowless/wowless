@@ -6,6 +6,6 @@ attributes:
   settofinalalpha:
     type: bool
 children:
-  animation: true
-  scripts: true
+- animation
+- scripts
 extends: layoutframe

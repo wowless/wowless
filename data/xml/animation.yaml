@@ -18,5 +18,5 @@ attributes:
   target:
     type: string
 children:
-  keyvalues: true
-  scripts: true
+- keyvalues
+- scripts

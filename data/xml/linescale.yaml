@@ -10,5 +10,5 @@ attributes:
   toscaley:
     type: number
 children:
-  origin: true
+- origin
 extends: animation

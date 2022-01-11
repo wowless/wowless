@@ -22,7 +22,7 @@ attributes:
   visiblebytes:
     type: number
 children:
-  fontstring: true
-  highlightcolor: true
-  textinsets: true
+- fontstring
+- highlightcolor
+- textinsets
 extends: frame

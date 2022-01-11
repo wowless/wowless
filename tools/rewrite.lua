@@ -27,7 +27,20 @@ local function uiobjectRewriter(fn)
   end
 end
 
+local function xmlRewriter(fn)
+  for filename in lfs.dir('data/xml') do
+    if filename:sub(-5) == '.yaml' then
+      local xml = yaml.parseFile('data/xml/' .. filename)
+      local newxml = fn(xml)
+      if newxml then
+        pf.write('data/xml/' .. filename, yaml.pprint(newxml))
+      end
+    end
+  end
+end
+
 return {
   api = apiRewriter,
   uiobject = uiobjectRewriter,
+  xml = xmlRewriter,
 }

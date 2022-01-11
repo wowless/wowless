@@ -14,4 +14,4 @@ attributes:
   y:
     type: number
 children:
-  offset: true
+- offset

@@ -1,4 +1,4 @@
 ---
 name: value
 children:
-  absvalue: true
+- absvalue

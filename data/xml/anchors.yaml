@@ -1,4 +1,4 @@
 ---
 name: anchors
 children:
-  anchor: true
+- anchor

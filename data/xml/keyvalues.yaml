@@ -1,4 +1,4 @@
 ---
 name: keyvalues
 children:
-  keyvalue: true
+- keyvalue

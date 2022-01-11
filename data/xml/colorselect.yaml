@@ -1,8 +1,8 @@
 ---
 name: colorselect
 children:
-  colorvaluetexture: true
-  colorvaluethumbtexture: true
-  colorwheeltexture: true
-  colorwheelthumbtexture: true
+- colorvaluetexture
+- colorvaluethumbtexture
+- colorwheeltexture
+- colorwheelthumbtexture
 extends: frame

@@ -1,4 +1,4 @@
 ---
 name: scripts
 children:
-  scripttype: true
+- scripttype

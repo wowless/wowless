@@ -26,8 +26,8 @@ attributes:
   virtual:
     type: bool
 children:
-  anchors: true
-  color: true
-  keyvalues: true
-  size: true
+- anchors
+- color
+- keyvalues
+- size
 virtual: true

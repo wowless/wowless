@@ -4,5 +4,5 @@ attributes:
   orientation:
     type: string
 children:
-  maxcolor: true
-  mincolor: true
+- maxcolor
+- mincolor

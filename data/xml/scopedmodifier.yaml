@@ -8,5 +8,5 @@ attributes:
   scriptsusegivenenv:
     type: bool
 children:
-  actor: true
-  layoutframe: true
+- actor
+- layoutframe

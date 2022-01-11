@@ -1,5 +1,5 @@
 ---
 name: bindings
 children:
-  binding: true
-  modifiedclick: true
+- binding
+- modifiedclick

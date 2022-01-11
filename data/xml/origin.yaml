@@ -4,4 +4,4 @@ attributes:
   point:
     type: string
 children:
-  offset: true
+- offset

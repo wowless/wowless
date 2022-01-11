@@ -8,9 +8,9 @@ attributes:
   xsi:schemalocation:
     type: string
 children:
-  font: true
-  fontfamily: true
-  include: true
-  layoutframe: true
-  scopedmodifier: true
-  script: true
+- font
+- fontfamily
+- include
+- layoutframe
+- scopedmodifier
+- script

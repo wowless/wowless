@@ -1,4 +1,4 @@
 ---
 name: attributes
 children:
-  attribute: true
+- attribute

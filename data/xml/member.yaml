@@ -5,4 +5,4 @@ attributes:
     required: true
     type: string
 children:
-  font: true
+- font

@@ -8,7 +8,7 @@ attributes:
   reverse:
     type: bool
 children:
-  blingtexture: true
-  edgetexture: true
-  swipetexture: true
+- blingtexture
+- edgetexture
+- swipetexture
 extends: frame

@@ -1,4 +1,4 @@
 ---
 name: layers
 children:
-  layer: true
+- layer

@@ -7,6 +7,6 @@ attributes:
   texturesublevel:
     type: number
 children:
-  fontstring: true
-  line: true
-  texture: true
+- fontstring
+- line
+- texture

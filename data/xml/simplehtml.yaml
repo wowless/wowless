@@ -1,8 +1,8 @@
 ---
 name: simplehtml
 children:
-  fontstring: true
-  fontstringheader1: true
-  fontstringheader2: true
-  fontstringheader3: true
+- fontstring
+- fontstringheader1
+- fontstringheader2
+- fontstringheader3
 extends: frame

@@ -1,4 +1,4 @@
 ---
 name: frames
 children:
-  frame: true
+- frame

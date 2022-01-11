@@ -4,5 +4,5 @@ attributes:
   curve:
     type: string
 children:
-  controlpoints: true
+- controlpoints
 extends: animation

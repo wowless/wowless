@@ -4,6 +4,6 @@ attributes:
   checked:
     type: bool
 children:
-  checkedtexture: true
-  disabledcheckedtexture: true
+- checkedtexture
+- disabledcheckedtexture
 extends: button

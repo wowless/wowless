@@ -8,11 +8,11 @@ attributes:
   text:
     type: string
 children:
-  buttonfont: true
-  buttontext: true
-  disabledtexture: true
-  highlighttexture: true
-  normaltexture: true
-  pushedtextoffset: true
-  pushedtexture: true
+- buttonfont
+- buttontext
+- disabledtexture
+- highlighttexture
+- normaltexture
+- pushedtextoffset
+- pushedtexture
 extends: frame

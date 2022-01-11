@@ -1,5 +1,5 @@
 ---
 name: resizebounds
 children:
-  maxresize: true
-  minresize: true
+- maxresize
+- minresize

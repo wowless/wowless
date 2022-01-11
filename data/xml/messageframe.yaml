@@ -10,5 +10,5 @@ attributes:
   insertmode:
     type: string
 children:
-  fontstring: true
+- fontstring
 extends: frame

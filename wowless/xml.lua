@@ -4,7 +4,10 @@ local function preprocess(tree)
   local newtree = {}
   for k, v in pairs(tree) do
     local attrs = mixin({}, v.attributes)
-    local kids = mixin({}, v.children)
+    local kids = {}
+    for _, kid in ipairs(v.children or {}) do
+      kids[kid] = true
+    end
     local supertypes = { [k] = true }
     local text = v.text
     local t = v
@@ -12,7 +15,9 @@ local function preprocess(tree)
       supertypes[t.extends] = true
       t = tree[t.extends]
       mixin(attrs, t.attributes)
-      mixin(kids, t.children)
+      for _, kid in ipairs(t.children or {}) do
+        kids[kid] = true
+      end
       text = text or t.text
     end
     newtree[k] = mixin({}, v, {

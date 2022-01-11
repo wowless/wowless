@@ -1,5 +1,5 @@
 ---
 name: dimension
 children:
-  absdimension: true
+- absdimension
 virtual: true

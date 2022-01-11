@@ -6,5 +6,5 @@ attributes:
   y:
     type: number
 children:
-  color: true
-  offset: true
+- color
+- offset

@@ -6,5 +6,5 @@ attributes:
   vwrapmode:
     type: string
 children:
-  maskedtextures: true
+- maskedtextures
 extends: texture
