@@ -1,10 +1,8 @@
 ---
 name: member
-fields:
+attributes:
   alphabet:
     required: true
-    source: attribute
     type: string
-  font:
-    required: true
-    source: child
+children:
+  font: true

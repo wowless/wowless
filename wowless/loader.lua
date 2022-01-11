@@ -168,7 +168,7 @@ local function loader(api, cfg)
             parent:SetEdgeTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
           end,
           fontfamily = function(e)
-            local font = e.kids[1].font
+            local font = e.kids[1].kids[1]
             return loadElement({
               attr = mixin({}, font.attr, { virtual = true, name = e.attr.name }),
               kids = font.kids,
