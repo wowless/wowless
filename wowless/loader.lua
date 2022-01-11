@@ -217,9 +217,9 @@ local function loader(api, cfg)
             withContext({ useAddonEnv = e.attr.scriptsusegivenenv }).loadElements(e.kids, parent)
           end,
           script = function(e)
-            if e.file then
+            if e.attr.file then
               assert(not e.text)
-              loadFile(path.join(dir, e.file))
+              loadFile(path.join(dir, e.attr.file))
             else
               assert(e.text)
               loadLuaString(filename, e.text)

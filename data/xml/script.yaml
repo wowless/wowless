@@ -1,7 +1,6 @@
 ---
 name: script
-fields:
+attributes:
   file:
-    source: attribute
     type: string
 text: true
