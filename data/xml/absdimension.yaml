@@ -1,9 +1,7 @@
 ---
 name: absdimension
-fields:
+attributes:
   x:
-    source: attribute
     type: number
   y:
-    source: attribute
     type: number

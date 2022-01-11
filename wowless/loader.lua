@@ -32,8 +32,8 @@ local function loader(api, cfg)
   local function getXY(e)
     if e then
       local dim = e.kids[#e.kids]
-      local x = e.attr.x or (dim and dim.x) or nil
-      local y = e.attr.y or (dim and dim.y) or nil
+      local x = e.attr.x or (dim and dim.attr.x) or nil
+      local y = e.attr.y or (dim and dim.attr.y) or nil
       return x, y
     end
   end
