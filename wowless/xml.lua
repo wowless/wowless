@@ -49,6 +49,31 @@ local attrBasedElementMT = {
   end,
 }
 
+local fieldBasedElementMTs = (function()
+  local result = {}
+  for name, spec in pairs(lang) do
+    if next(spec.fields) then
+      local fields = {}
+      for field in pairs(spec.fields) do
+        fields[field] = true
+      end
+      if spec.text then
+        fields.text = true
+      end
+      result[name] = {
+        __index = function(_, k)
+          assert(fields[k], 'invalid table key ' .. k)
+        end,
+        __metatable = 'fieldBasedElementMT:' .. name,
+        __newindex = function()
+          error('cannot add fields')
+        end,
+      }
+    end
+  end
+  return result
+end)()
+
 local attributeTypes = {
   bool = function(s)
     local x = string.lower(s)
@@ -151,7 +176,7 @@ local function validateRoot(root)
           table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
         end
       end
-      return fields
+      return setmetatable(fields, fieldBasedElementMTs[tname])
     else
       local resultAttrs = {}
       for k, v in pairs(e._attr or {}) do
