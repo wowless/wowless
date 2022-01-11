@@ -1,0 +1,31 @@
+---
+name: GetRaidRosterInfo
+status: unimplemented
+inputs:
+- - name: raidIndex
+    type: number
+outputs:
+- name: name
+  type: string
+- name: rank
+  type: number
+- name: subgroup
+  type: number
+- name: level
+  type: number
+- name: class
+  type: string
+- name: fileName
+  type: string
+- name: zone
+  type: string
+- name: online
+  type: oneornil
+- name: isDead
+  type: oneornil
+- name: role
+  type: string
+- name: isML
+  type: oneornil
+- name: combatRole
+  type: string

@@ -1,0 +1,15 @@
+---
+name: GetPetHappiness
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- name: happiness
+  type: number
+- name: damagePercentage
+  type: number
+- name: loyaltyRate
+  type: number

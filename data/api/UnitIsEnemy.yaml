@@ -1,0 +1,11 @@
+---
+name: UnitIsEnemy
+status: unimplemented
+inputs:
+- - name: unit
+    type: unit
+  - name: otherUnit
+    type: unit
+outputs:
+- name: isEnemy
+  type: oneornil

@@ -1,14 +1,29 @@
 ---
 name: Model
+fields:
+  modelScale:
+    type: number
 inherits:
 - Frame
 methods:
+  ClearModel:
+    status: unimplemented
+  GetModelScale:
+    fields:
+    - modelScale
+    status: getter
   InitializeCamera:
     status: unimplemented
   SetFacing:
     status: unimplemented
   SetLight:
     status: unimplemented
+  SetModel:
+    status: unimplemented
+  SetModelScale:
+    fields:
+    - modelScale
+    status: setter
   SetPosition:
     status: unimplemented
   SetRotation:

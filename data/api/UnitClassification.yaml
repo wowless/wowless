@@ -1,0 +1,10 @@
+---
+name: UnitClassification
+status: unimplemented
+inputs:
+- - name: unit
+    type: unit
+outputs:
+- name: classification
+  stub: normal
+  type: string

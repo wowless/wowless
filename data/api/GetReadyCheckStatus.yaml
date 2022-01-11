@@ -1,0 +1,10 @@
+---
+name: GetReadyCheckStatus
+status: unimplemented
+inputs:
+- - name: unit
+    type: unit
+outputs:
+- name: readyCheckStatus
+  nilable: true
+  type: string
