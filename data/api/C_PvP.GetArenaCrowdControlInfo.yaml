@@ -7,8 +7,6 @@ inputs:
 outputs:
 - name: spellID
   type: number
-- name: itemID
-  type: number
 - name: startTime
   type: number
 - name: duration
