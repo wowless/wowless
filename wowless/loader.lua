@@ -68,6 +68,84 @@ local function loader(api, cfg)
           end
         end
 
+        local xmltab = {
+          bartexture = {
+            objecttype = 'texture',
+            parentmethod = 'SetStatusBarTexture',
+            parenttype = 'StatusBar',
+          },
+          blingtexture = {
+            objecttype = 'texture',
+            parentmethod = 'SetBlingTexture',
+            parenttype = 'Cooldown',
+          },
+          buttontext = {
+            objecttype = 'fontstring',
+            parentmethod = 'SetFontString',
+            parenttype = 'Button',
+          },
+          checkedtexture = {
+            objecttype = 'texture',
+            parentmethod = 'SetCheckedTexture',
+            parenttype = 'CheckButton',
+          },
+          disabledcheckedtexture = {
+            objecttype = 'texture',
+            parentmethod = 'SetDisabledCheckedTexture',
+            parenttype = 'CheckButton',
+          },
+          disabledfont = {
+            objecttype = 'font',
+            parentmethod = 'SetDisabledFontObject',
+            parenttype = 'Button',
+          },
+          disabledtexture = {
+            objecttype = 'texture',
+            parentmethod = 'SetDisabledTexture',
+            parenttype = 'Button',
+          },
+          edgetexture = {
+            objecttype = 'texture',
+            parentmethod = 'SetEdgeTexture',
+            parenttype = 'Cooldown',
+          },
+          highlightfont = {
+            objecttype = 'font',
+            parentmethod = 'SetHighlightFontObject',
+            parenttype = 'Button',
+          },
+          highlighttexture = {
+            objecttype = 'texture',
+            parentmethod = 'SetHighlightTexture',
+            parenttype = 'Button',
+          },
+          normalfont = {
+            objecttype = 'font',
+            parentmethod = 'SetNormalFontObject',
+            parenttype = 'Button',
+          },
+          normaltexture = {
+            objecttype = 'texture',
+            parentmethod = 'SetNormalTexture',
+            parenttype = 'Button',
+          },
+          pushedtexture = {
+            objecttype = 'texture',
+            parentmethod = 'SetPushedTexture',
+            parenttype = 'Button',
+          },
+          swipetexture = {
+            objecttype = 'texture',
+            parentmethod = 'SetSwipeTexture',
+            parenttype = 'Cooldown',
+          },
+          thumbtexture = {
+            objecttype = 'texture',
+            parentmethod = 'SetThumbTexture',
+            parenttype = 'Slider',
+          },
+        }
+
         local xmllang = {
           anchors = function(e, parent)
             for _, anchor in ipairs(e.kids) do
@@ -140,33 +218,6 @@ local function loader(api, cfg)
               attrs[a.attr.name] = parseTypedValue(a.attr.type, a.attr.value)
             end
           end,
-          bartexture = function(e, parent)
-            parent:SetStatusBarTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
-          end,
-          blingtexture = function(e, parent)
-            parent:SetBlingTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
-          end,
-          buttontext = function(e, parent)
-            parent:SetFontString(loadElement(mixin({}, e, { type = 'fontstring' }), parent))
-          end,
-          checkedtexture = function(e, parent)
-            -- TODO generalize to all of these
-            if parent.SetCheckedTexture then
-              parent:SetCheckedTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
-            end
-          end,
-          disabledcheckedtexture = function(e, parent)
-            parent:SetDisabledCheckedTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
-          end,
-          disabledfont = function(e, parent)
-            parent:SetDisabledFontObject(loadElement(mixin({}, e, { type = 'font' }), parent))
-          end,
-          disabledtexture = function(e, parent)
-            parent:SetDisabledTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
-          end,
-          edgetexture = function(e, parent)
-            parent:SetEdgeTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
-          end,
           fontfamily = function(e)
             local font = e.kids[1].kids[1]
             return loadElement({
@@ -177,12 +228,6 @@ local function loader(api, cfg)
           end,
           frames = function(e, parent)
             loadElements(e.kids, parent)
-          end,
-          highlightfont = function(e, parent)
-            parent:SetHighlightFontObject(loadElement(mixin({}, e, { type = 'font' }), parent))
-          end,
-          highlighttexture = function(e, parent)
-            parent:SetHighlightTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
           end,
           include = function(e)
             loadFile(path.join(dir, e.attr.file))
@@ -195,22 +240,6 @@ local function loader(api, cfg)
           layers = function(e, parent)
             for _, layer in ipairs(e.kids) do
               loadElements(layer.kids, parent)
-            end
-          end,
-          normalfont = function(e, parent)
-            parent:SetNormalFontObject(loadElement(mixin({}, e, { type = 'font' }), parent))
-          end,
-          normaltext = function(e, parent)
-            loadElement(mixin({}, e, { type = 'fontstring' }), parent)
-          end,
-          normaltexture = function(e, parent)
-            if parent.SetNormalTexture then
-              parent:SetNormalTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
-            end
-          end,
-          pushedtexture = function(e, parent)
-            if parent.SetPushedTexture then
-              parent:SetPushedTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
             end
           end,
           scopedmodifier = function(e, parent)
@@ -295,12 +324,6 @@ local function loader(api, cfg)
             if y then
               parent:SetHeight(y)
             end
-          end,
-          swipetexture = function(e, parent)
-            parent:SetSwipeTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
-          end,
-          thumbtexture = function(e, parent)
-            parent:SetThumbTexture(loadElement(mixin({}, e, { type = 'texture' }), parent))
           end,
         }
 
@@ -467,8 +490,12 @@ local function loader(api, cfg)
               end
             end
           else
+            local tab = xmltab[e.type]
             local fn = xmllang[e.type]
-            if fn then
+            if tab then
+              local obj = loadElement(mixin({}, e, { type = tab.objecttype }), parent)
+              api.uiobjectTypes[tab.parenttype:lower()].metatable.__index[tab.parentmethod](parent, obj)
+            elseif fn then
               fn(e, parent)
             else
               api.log(2, 'skipping ' .. filename .. ' ' .. e.type)
