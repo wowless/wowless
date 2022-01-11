@@ -229,15 +229,15 @@ local function loader(api, cfg)
             local obj = parent
             for _, script in ipairs(e.kids) do
               local fn
-              if script.func then
-                local fnattr = script.func
+              if script.attr['function'] then
+                local fnattr = script.attr['function']
                 local env = ctx.useAddonEnv and addonEnv or api.env
                 fn = function(...)
                   assert(env[fnattr], 'unknown script function ' .. fnattr)
                   env[fnattr](...)
                 end
-              elseif script.method then
-                local mattr = script.method
+              elseif script.attr.method then
+                local mattr = script.attr.method
                 fn = function(x, ...)
                   assert(x[mattr], 'unknown script method ' .. mattr)
                   x[mattr](x, ...)
@@ -259,23 +259,23 @@ local function loader(api, cfg)
               end
               if fn then
                 local old = obj:GetScript(script.type)
-                if old and script.inherit then
+                if old and script.attr.inherit then
                   local bfn = fn
-                  if script.inherit == 'prepend' then
+                  if script.attr.inherit == 'prepend' then
                     fn = function(...) bfn(...) old(...) end
-                  elseif script.inherit == 'append' then
+                  elseif script.attr.inherit == 'append' then
                     fn = function(...) old(...) bfn(...) end
                   else
                     error('invalid inherit tag on script')
                   end
                 end
-                assert(not script.intrinsicorder or parent.__intrinsicHack, 'intrinsicOrder on non-intrinsic')
+                assert(not script.attr.intrinsicorder or parent.__intrinsicHack, 'intrinsicOrder on non-intrinsic')
                 local bindingType = 1
-                if script.intrinsicorder == 'precall' then
+                if script.attr.intrinsicorder == 'precall' then
                   bindingType = 0
-                elseif script.intrinsicorder == 'postcall' then
+                elseif script.attr.intrinsicorder == 'postcall' then
                   bindingType = 2
-                elseif script.intrinsicorder then
+                elseif script.attr.intrinsicorder then
                   error('invalid intrinsicOrder tag on script')
                 elseif parent.__intrinsicHack then
                   bindingType = 0
