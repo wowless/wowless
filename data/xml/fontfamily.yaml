@@ -1,15 +1,10 @@
 ---
 name: fontfamily
-fields:
-  members:
-    child: member
-    repeated: true
-    required: true
-    source: child
+attributes:
   name:
     required: true
-    source: attribute
     type: string
   virtual:
-    source: attribute
-    value: 'true'
+    type: bool
+children:
+  member: true
