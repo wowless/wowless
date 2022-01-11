@@ -1,0 +1,13 @@
+---
+name: attribute
+fields:
+  luatype:
+    attribute: type
+    source: attribute
+    type: string
+  name:
+    source: attribute
+    type: string
+  value:
+    source: attribute
+    type: string

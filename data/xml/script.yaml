@@ -1,0 +1,7 @@
+---
+name: script
+fields:
+  file:
+    source: attribute
+    type: string
+text: true

@@ -1,0 +1,60 @@
+---
+name: frame
+attributes:
+  clampedtoscreen:
+    type: bool
+  clipchildren:
+    type: bool
+  debugid:
+    type: number
+  dontsaveposition:
+    type: bool
+  enablekeyboard:
+    type: bool
+  enablemouse:
+    type: bool
+  enablemouseclicks:
+    type: bool
+  enablemousemotion:
+    type: bool
+  enablemousewheel:
+    type: bool
+  flattenrenderlayers:
+    type: bool
+  framelevel:
+    type: number
+  framestrata:
+    type: string
+  hyperlinksenabled:
+    type: bool
+  id:
+    type: number
+  intrinsic:
+    type: bool
+  movable:
+    type: bool
+  parent:
+    type: string
+  propagatehyperlinkstoparent:
+    type: bool
+  protected:
+    type: bool
+  resizable:
+    type: bool
+  securemixin:
+    type: stringlist
+  toplevel:
+    type: bool
+  useparentlevel:
+    type: bool
+children:
+  animations: true
+  attributes: true
+  backdrop: true
+  frames: true
+  hitrectinsets: true
+  layers: true
+  resizebounds: true
+  scripts: true
+  titleregion: true
+extends: layoutframe

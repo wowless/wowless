@@ -1,0 +1,9 @@
+---
+name: checkbutton
+attributes:
+  checked:
+    type: bool
+children:
+  checkedtexture: true
+  disabledcheckedtexture: true
+extends: button

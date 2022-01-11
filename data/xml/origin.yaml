@@ -1,0 +1,7 @@
+---
+name: origin
+attributes:
+  point:
+    type: string
+children:
+  offset: true

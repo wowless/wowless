@@ -1,0 +1,6 @@
+---
+name: scrollchild
+fields:
+  frame:
+    required: true
+    source: child

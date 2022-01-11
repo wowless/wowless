@@ -1,0 +1,14 @@
+---
+name: messageframe
+attributes:
+  displayduration:
+    type: number
+  fadeduration:
+    type: number
+  fadepower:
+    type: number
+  insertmode:
+    type: string
+children:
+  fontstring: true
+extends: frame

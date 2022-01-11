@@ -1,0 +1,11 @@
+---
+name: actor
+attributes:
+  mixin:
+    type: stringlist
+  name:
+    type: string
+  virtual:
+    type: bool
+children:
+  scripts: true

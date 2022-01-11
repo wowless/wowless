@@ -36,4 +36,5 @@ return {
   state = loaddir('state', 'yaml'),
   structures = loaddir('structures', 'yaml'),
   uiobjects = loadUIObjects(),
+  xml = loaddir('xml', 'yaml'),
 }

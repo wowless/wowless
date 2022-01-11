@@ -1,0 +1,8 @@
+---
+name: colorselect
+children:
+  colorvaluetexture: true
+  colorvaluethumbtexture: true
+  colorwheeltexture: true
+  colorwheelthumbtexture: true
+extends: frame

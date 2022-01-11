@@ -1,0 +1,6 @@
+---
+name: anchors
+fields:
+  anchor:
+    repeated: true
+    source: child

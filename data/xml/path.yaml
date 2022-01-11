@@ -1,0 +1,8 @@
+---
+name: path
+attributes:
+  curve:
+    type: string
+children:
+  controlpoints: true
+extends: animation

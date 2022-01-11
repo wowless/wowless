@@ -1,0 +1,12 @@
+---
+name: size
+fields:
+  dim:
+    child: absdimension
+    source: child
+  x:
+    source: attribute
+    type: number
+  y:
+    source: attribute
+    type: number

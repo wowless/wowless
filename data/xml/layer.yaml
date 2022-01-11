@@ -1,0 +1,12 @@
+---
+name: layer
+attributes:
+  level:
+    required: true
+    type: string
+  texturesublevel:
+    type: number
+children:
+  fontstring: true
+  line: true
+  texture: true

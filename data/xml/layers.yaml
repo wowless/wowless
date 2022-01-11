@@ -1,0 +1,7 @@
+---
+name: layers
+fields:
+  layers:
+    child: layer
+    repeated: true
+    source: child

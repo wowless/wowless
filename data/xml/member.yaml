@@ -1,0 +1,10 @@
+---
+name: member
+fields:
+  alphabet:
+    required: true
+    source: attribute
+    type: string
+  font:
+    required: true
+    source: child

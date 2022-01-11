@@ -1,0 +1,21 @@
+---
+name: scripttype
+fields:
+  autoenableinput:
+    source: attribute
+    type: bool
+  func:
+    attribute: function
+    source: attribute
+    type: string
+  inherit:
+    source: attribute
+    type: string
+  intrinsicorder:
+    source: attribute
+    type: string
+  method:
+    source: attribute
+    type: string
+text: true
+virtual: true

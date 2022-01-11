@@ -1,0 +1,10 @@
+---
+name: masktexture
+attributes:
+  hwrapmode:
+    type: string
+  vwrapmode:
+    type: string
+children:
+  maskedtextures: true
+extends: texture

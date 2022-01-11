@@ -7,6 +7,7 @@ local dirschemas = {
   schemas = 'schema',
   state = 'state',
   structures = 'structure',
+  xml = 'xml',
 }
 
 describe('yaml', function()

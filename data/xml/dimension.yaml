@@ -1,0 +1,5 @@
+---
+name: dimension
+children:
+  absdimension: true
+virtual: true

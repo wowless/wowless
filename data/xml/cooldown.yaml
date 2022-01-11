@@ -1,0 +1,14 @@
+---
+name: cooldown
+attributes:
+  drawedge:
+    type: bool
+  hidecountdownnumbers:
+    type: bool
+  reverse:
+    type: bool
+children:
+  blingtexture: true
+  edgetexture: true
+  swipetexture: true
+extends: frame

@@ -1,0 +1,4 @@
+---
+name: poiframe
+extends: frame
+virtual: true

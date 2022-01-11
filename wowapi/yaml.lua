@@ -100,10 +100,10 @@ end
 return {
   parse = parse,
   parseFile = function(f)
-    local file = io.open(f, 'r')
+    local file = assert(io.open(f, 'r'), 'failed to open ' .. tostring(f))
     local str = file:read('*all')
     file:close()
-    return parse(str)
+    return assert(parse(str), 'could not parse ' .. tostring(f) .. ' as yaml')
   end,
   pprint = api2yaml,
 }

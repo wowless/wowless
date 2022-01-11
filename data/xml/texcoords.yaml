@@ -1,0 +1,13 @@
+---
+name: texcoords
+attributes:
+  bottom:
+    type: number
+  left:
+    type: number
+  right:
+    type: number
+  top:
+    type: number
+children:
+  rect: true

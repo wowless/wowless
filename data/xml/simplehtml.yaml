@@ -1,0 +1,8 @@
+---
+name: simplehtml
+children:
+  fontstring: true
+  fontstringheader1: true
+  fontstringheader2: true
+  fontstringheader3: true
+extends: frame

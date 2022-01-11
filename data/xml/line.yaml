@@ -1,0 +1,10 @@
+---
+name: line
+attributes:
+  alphamode:
+    type: string
+  atlas:
+    type: string
+  thickness:
+    type: number
+extends: layoutframe

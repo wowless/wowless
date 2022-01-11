@@ -1,0 +1,10 @@
+---
+name: shadow
+attributes:
+  x:
+    type: number
+  y:
+    type: number
+children:
+  color: true
+  offset: true

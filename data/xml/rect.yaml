@@ -1,0 +1,19 @@
+---
+name: rect
+attributes:
+  llx:
+    type: number
+  lly:
+    type: number
+  lrx:
+    type: number
+  lry:
+    type: number
+  ulx:
+    type: number
+  uly:
+    type: number
+  urx:
+    type: number
+  ury:
+    type: number

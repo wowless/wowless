@@ -5,6 +5,7 @@ local domains = {
   state = wdata.state,
   structure = wdata.structures,
   uiobject = wdata.uiobjects,
+  xml = wdata.xml,
 }
 
 local function validate(schematype, v)

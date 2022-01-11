@@ -1,0 +1,29 @@
+---
+name: texture
+attributes:
+  alphamode:
+    type: string
+  atlas:
+    type: string
+  desaturated:
+    type: bool
+  file:
+    type: string
+  horiztile:
+    type: bool
+  nonblocking:
+    type: bool
+  snaptopixelgrid:
+    type: bool
+  texelsnappingbias:
+    type: number
+  useatlassize:
+    type: bool
+  verttile:
+    type: bool
+children:
+  animations: true
+  color: true
+  gradient: true
+  texcoords: true
+extends: layoutframe

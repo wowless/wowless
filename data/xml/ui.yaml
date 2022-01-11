@@ -1,0 +1,16 @@
+---
+name: ui
+attributes:
+  xmlns:
+    type: string
+  xmlns:xsi:
+    type: string
+  xsi:schemalocation:
+    type: string
+children:
+  font: true
+  fontfamily: true
+  include: true
+  layoutframe: true
+  scopedmodifier: true
+  script: true

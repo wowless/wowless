@@ -1,0 +1,12 @@
+---
+name: backdrop
+attributes:
+  edgefile:
+    type: string
+  tile:
+    type: bool
+children:
+  backgroundinsets: true
+  bordercolor: true
+  edgesize: true
+  tilesize: true

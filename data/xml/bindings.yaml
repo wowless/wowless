@@ -1,0 +1,5 @@
+---
+name: bindings
+children:
+  binding: true
+  modifiedclick: true

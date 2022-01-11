@@ -1,0 +1,8 @@
+---
+name: alpha
+attributes:
+  fromalpha:
+    type: number
+  toalpha:
+    type: number
+extends: animation

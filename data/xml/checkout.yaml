@@ -1,0 +1,6 @@
+---
+name: checkout
+attributes:
+  imefont:
+    type: string
+extends: frame

@@ -1,0 +1,58 @@
+---
+name: xml
+type:
+  record:
+    attributes:
+      type:
+        mapof:
+          record:
+            required:
+              type: boolean
+            type:
+              required: true
+              type:
+                oneof:
+                - literal: bool
+                - literal: number
+                - literal: string
+                - literal: stringlist
+    children:
+      type:
+        mapof: boolean
+    extends:
+      type:
+        ref: xml
+    fields:
+      type:
+        mapof:
+          record:
+            attribute:
+              type: string
+            child:
+              type:
+                ref: xml
+            repeated:
+              type: boolean
+            required:
+              type: boolean
+            source:
+              required: true
+              type:
+                oneof:
+                - literal: attribute
+                - literal: child
+            type:
+              type:
+                oneof:
+                - literal: bool
+                - literal: number
+                - literal: string
+            value:
+              type: boolean
+    name:
+      required: true
+      type: string
+    text:
+      type: boolean
+    virtual:
+      type: boolean

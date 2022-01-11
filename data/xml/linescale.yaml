@@ -1,0 +1,14 @@
+---
+name: linescale
+attributes:
+  fromscalex:
+    type: number
+  fromscaley:
+    type: number
+  toscalex:
+    type: number
+  toscaley:
+    type: number
+children:
+  origin: true
+extends: animation

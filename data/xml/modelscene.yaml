@@ -1,0 +1,5 @@
+---
+name: modelscene
+children:
+  viewinsets: true
+extends: frame
