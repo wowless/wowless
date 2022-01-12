@@ -1,3 +1,11 @@
+local xmltab = (function()
+  local t = {}
+  for k, v in pairs(require('wowapi.data').xml) do
+    t[k] = v.impl
+  end
+  return t
+end)()
+
 local function loader(api, cfg)
   local rootDir = cfg and cfg.rootDir
   local version = cfg and cfg.version
@@ -67,84 +75,6 @@ local function loader(api, cfg)
             loadElement(v, parent)
           end
         end
-
-        local xmltab = {
-          bartexture = {
-            objecttype = 'texture',
-            parentmethod = 'SetStatusBarTexture',
-            parenttype = 'StatusBar',
-          },
-          blingtexture = {
-            objecttype = 'texture',
-            parentmethod = 'SetBlingTexture',
-            parenttype = 'Cooldown',
-          },
-          buttontext = {
-            objecttype = 'fontstring',
-            parentmethod = 'SetFontString',
-            parenttype = 'Button',
-          },
-          checkedtexture = {
-            objecttype = 'texture',
-            parentmethod = 'SetCheckedTexture',
-            parenttype = 'CheckButton',
-          },
-          disabledcheckedtexture = {
-            objecttype = 'texture',
-            parentmethod = 'SetDisabledCheckedTexture',
-            parenttype = 'CheckButton',
-          },
-          disabledfont = {
-            objecttype = 'font',
-            parentmethod = 'SetDisabledFontObject',
-            parenttype = 'Button',
-          },
-          disabledtexture = {
-            objecttype = 'texture',
-            parentmethod = 'SetDisabledTexture',
-            parenttype = 'Button',
-          },
-          edgetexture = {
-            objecttype = 'texture',
-            parentmethod = 'SetEdgeTexture',
-            parenttype = 'Cooldown',
-          },
-          highlightfont = {
-            objecttype = 'font',
-            parentmethod = 'SetHighlightFontObject',
-            parenttype = 'Button',
-          },
-          highlighttexture = {
-            objecttype = 'texture',
-            parentmethod = 'SetHighlightTexture',
-            parenttype = 'Button',
-          },
-          normalfont = {
-            objecttype = 'font',
-            parentmethod = 'SetNormalFontObject',
-            parenttype = 'Button',
-          },
-          normaltexture = {
-            objecttype = 'texture',
-            parentmethod = 'SetNormalTexture',
-            parenttype = 'Button',
-          },
-          pushedtexture = {
-            objecttype = 'texture',
-            parentmethod = 'SetPushedTexture',
-            parenttype = 'Button',
-          },
-          swipetexture = {
-            objecttype = 'texture',
-            parentmethod = 'SetSwipeTexture',
-            parenttype = 'Cooldown',
-          },
-          thumbtexture = {
-            objecttype = 'texture',
-            parentmethod = 'SetThumbTexture',
-            parenttype = 'Slider',
-          },
-        }
 
         local xmllang = {
           anchors = function(e, parent)

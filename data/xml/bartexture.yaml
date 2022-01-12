@@ -1,3 +1,7 @@
 ---
 name: bartexture
 extends: texture
+impl:
+  objecttype: texture
+  parentmethod: SetStatusBarTexture
+  parenttype: StatusBar

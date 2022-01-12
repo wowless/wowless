@@ -1,3 +1,7 @@
 ---
 name: disabledtexture
 extends: texture
+impl:
+  objecttype: texture
+  parentmethod: SetDisabledTexture
+  parenttype: Button

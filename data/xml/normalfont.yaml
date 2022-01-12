@@ -1,3 +1,7 @@
 ---
 name: normalfont
 extends: buttonfont
+impl:
+  objecttype: font
+  parentmethod: SetNormalFontObject
+  parenttype: Button

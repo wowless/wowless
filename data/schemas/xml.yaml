@@ -23,6 +23,19 @@ type:
     extends:
       type:
         ref: xml
+    impl:
+      type:
+        record:
+          objecttype:
+            required: true
+            type: string
+          parentmethod:
+            required: true
+            type: string
+          parenttype:
+            required: true
+            type:
+              ref: uiobject
     name:
       required: true
       type: string

@@ -1,3 +1,7 @@
 ---
 name: buttontext
 extends: fontstring
+impl:
+  objecttype: fontstring
+  parentmethod: SetFontString
+  parenttype: Button

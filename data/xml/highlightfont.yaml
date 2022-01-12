@@ -1,3 +1,7 @@
 ---
 name: highlightfont
 extends: buttonfont
+impl:
+  objecttype: font
+  parentmethod: SetHighlightFontObject
+  parenttype: Button
