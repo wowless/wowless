@@ -435,12 +435,11 @@ local function loader(api, cfg)
 
       return api.CallSafely(function()
         local root = xml.validate(xmlstr)
-        assert(root.type == 'ui' or root.type == 'bindings')
         local ctx = {
           ignoreVirtual = false,
           useAddonEnv = false,
         }
-        usingContext(ctx).loadElements(root.kids)
+        usingContext(ctx).loadElement(root)
       end)
     end
 

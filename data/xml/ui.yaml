@@ -14,3 +14,4 @@ children:
 - layoutframe
 - scopedmodifier
 - script
+impl: transparent
