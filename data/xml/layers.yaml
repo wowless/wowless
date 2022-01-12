@@ -2,3 +2,4 @@
 name: layers
 children:
 - layer
+impl: transparent

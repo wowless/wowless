@@ -10,3 +10,4 @@ children:
 - fontstring
 - line
 - texture
+impl: transparent

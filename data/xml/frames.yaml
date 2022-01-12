@@ -2,3 +2,4 @@
 name: frames
 children:
 - frame
+impl: transparent

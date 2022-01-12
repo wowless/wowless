@@ -156,20 +156,12 @@ local function loader(api, cfg)
               type = font.type,
             })
           end,
-          frames = function(e, parent)
-            loadElements(e.kids, parent)
-          end,
           include = function(e)
             loadFile(path.join(dir, e.attr.file))
           end,
           keyvalues = function(e, parent)
             for _, kv in ipairs(e.kids) do
               parent[kv.attr.key] = parseTypedValue(kv.attr.type, kv.attr.value)
-            end
-          end,
-          layers = function(e, parent)
-            for _, layer in ipairs(e.kids) do
-              loadElements(layer.kids, parent)
             end
           end,
           scopedmodifier = function(e, parent)
@@ -422,9 +414,11 @@ local function loader(api, cfg)
           else
             local tab = xmltab[e.type]
             local fn = xmllang[e.type]
-            if tab then
+            if type(tab) == 'table' then
               local obj = loadElement(mixin({}, e, { type = tab.objecttype }), parent)
               api.uiobjectTypes[tab.parenttype:lower()].metatable.__index[tab.parentmethod](parent, obj)
+            elseif tab == 'transparent' then
+              loadElements(e.kids, parent)
             elseif fn then
               fn(e, parent)
             else

@@ -25,17 +25,19 @@ type:
         ref: xml
     impl:
       type:
-        record:
-          objecttype:
-            required: true
-            type: string
-          parentmethod:
-            required: true
-            type: string
-          parenttype:
-            required: true
-            type:
-              ref: uiobject
+        oneof:
+        - record:
+            objecttype:
+              required: true
+              type: string
+            parentmethod:
+              required: true
+              type: string
+            parenttype:
+              required: true
+              type:
+                ref: uiobject
+        - literal: transparent
     name:
       required: true
       type: string
