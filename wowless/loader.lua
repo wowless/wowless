@@ -318,8 +318,14 @@ local function loader(api, cfg)
             for _, m in ipairs(e.attr.securemixin or {}) do
               mixin(obj, env[m])
             end
+            -- Evaluate parent= before others.
             for k, v in pairs(e.attr) do
-              if xmlattrlang[k] then
+              if k == 'parent' then
+                xmlattrlang.parent(obj, v)
+              end
+            end
+            for k, v in pairs(e.attr) do
+              if xmlattrlang[k] and k ~= 'parent' then
                 xmlattrlang[k](obj, v)
               end
             end
