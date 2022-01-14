@@ -270,8 +270,10 @@ local function loader(api, cfg)
           parentarray = function(obj, value)
             api.log(3, 'attaching to array ' .. value)
             local p = obj:GetParent()
-            p[value] = p[value] or {}
-            table.insert(p[value], obj)
+            if p then
+              p[value] = p[value] or {}
+              table.insert(p[value], obj)
+            end
           end,
           parentkey = function(obj, value)
             api.log(3, 'attaching ' .. value)
