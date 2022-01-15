@@ -9,6 +9,8 @@ inherits:
 methods:
   CreateAnimation:
     status: implemented
+  Finish:
+    status: unimplemented
   GetAnimations:
     status: implemented
   IsPlaying:
