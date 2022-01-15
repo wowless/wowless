@@ -27,7 +27,7 @@ local function run(cfg)
   }
   for _, frame in ipairs(api.frames) do
     if frame.Click and frame:IsVisible() and not clickBlacklist[frame:GetName() or ''] then
-      api.log(2, 'cicking %s', tostring(frame:GetName()))
+      api.log(2, 'clicking %s', tostring(frame:GetName()))
       frame:Click()
     end
   end
