@@ -1,0 +1,16 @@
+---
+name: C_LFGList.GetAvailableActivities
+status: unimplemented
+inputs:
+- - name: categoryID
+    nilable: true
+    type: number
+  - name: groupID
+    nilable: true
+    type: number
+  - name: filter
+    nilable: true
+    type: number
+outputs:
+- name: activities
+  type: table

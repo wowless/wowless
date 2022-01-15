@@ -1,0 +1,12 @@
+---
+name: CanInspect
+status: unimplemented
+inputs:
+- - name: unit
+    type: unit
+  - name: showError
+    nilable: true
+    type: bool
+outputs:
+- name: canInspect
+  type: oneornil
