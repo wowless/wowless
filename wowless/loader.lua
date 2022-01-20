@@ -140,6 +140,22 @@ local function loader(api, cfg)
             local a = e.attr
             api.UserData(parent).attributes[a.name] = parseTypedValue(a.type, a.value)
           end,
+          color = function(e, parent)
+            local r, g, b, a
+            if e.attr.name then
+              r, g, b, a = _G[e.attr.name]:GetRGBA()
+            else
+              r, g, b, a = e.attr.r, e.attr.g, e.attr.b, e.attr.a
+            end
+            local p = api.UserData(parent)
+            if api.InheritsFrom(p.type, 'texture') then
+              parent:SetColorTexture(r, g, b, a)
+            elseif api.InheritsFrom(p.type, 'fontinstance') then
+              parent:SetTextColor(r, g, b, a)
+            else
+              error('cannot apply color to ' .. p.type)
+            end
+          end,
           fontfamily = function(e)
             local font = e.kids[1].kids[1]
             return loadElement({
