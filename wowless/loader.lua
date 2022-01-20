@@ -242,6 +242,16 @@ local function loader(api, cfg)
               parent:SetHeight(y)
             end
           end,
+          texcoords = function(e, parent)
+            local rect = e.kids[#e.kids]
+            if rect then
+              local x = rect.attr
+              parent:SetTexCoord(x.ulx, x.uly, x.llx, x.lly, x.urx, x.ury, x.lrx, x.lry)
+            else
+              local x = e.attr
+              parent:SetTexCoord(x.left, x.right, x.top, x.bottom)
+            end
+          end,
         }
 
         local xmlattrlang = {
