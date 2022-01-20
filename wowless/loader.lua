@@ -100,42 +100,40 @@ local function loader(api, cfg)
         end
 
         local xmllang = {
-          anchors = function(e, parent)
-            for _, anchor in ipairs(e.kids) do
-              local point = anchor.attr.point
-              local relativeTo
-              if anchor.attr.relativeto then
-                relativeTo = api.ParentSub(anchor.attr.relativeto, parent:GetParent())
-              elseif anchor.attr.relativekey then
-                local parts = {util.strsplit('.', anchor.attr.relativekey)}
-                if #parts == 1 then
-                  relativeTo = api.ParentSub(anchor.attr.relativekey, parent:GetParent())
-                else
-                  local obj = parent
-                  for i = 1, #parts do
-                    local p = parts[i]
-                    if p == '$parent' then
-                      obj = obj:GetParent()
-                    else
-                      if not obj[p] then
-                        api.log(1, 'invalid relativeKey %q', anchor.attr.relativekey)
-                        obj = nil
-                        break
-                      end
-                      obj = obj[p]
-                    end
-                  end
-                  relativeTo = obj
-                end
+          anchor = function(anchor, parent)
+            local point = anchor.attr.point
+            local relativeTo
+            if anchor.attr.relativeto then
+              relativeTo = api.ParentSub(anchor.attr.relativeto, parent:GetParent())
+            elseif anchor.attr.relativekey then
+              local parts = {util.strsplit('.', anchor.attr.relativekey)}
+              if #parts == 1 then
+                relativeTo = api.ParentSub(anchor.attr.relativekey, parent:GetParent())
               else
-                relativeTo = api.UserData(parent).parent
+                local obj = parent
+                for i = 1, #parts do
+                  local p = parts[i]
+                  if p == '$parent' then
+                    obj = obj:GetParent()
+                  else
+                    if not obj[p] then
+                      api.log(1, 'invalid relativeKey %q', anchor.attr.relativekey)
+                      obj = nil
+                      break
+                    end
+                    obj = obj[p]
+                  end
+                end
+                relativeTo = obj
               end
-              local relativePoint = anchor.attr.relativepoint or 'CENTER'
-              local offsetX, offsetY = getXY(anchor.kids[#anchor.kids])
-              local x = anchor.attr.x or offsetX
-              local y = anchor.attr.y or offsetY
-              parent:SetPoint(point, relativeTo, relativePoint, x, y)
+            else
+              relativeTo = api.UserData(parent).parent
             end
+            local relativePoint = anchor.attr.relativepoint or 'CENTER'
+            local offsetX, offsetY = getXY(anchor.kids[#anchor.kids])
+            local x = anchor.attr.x or offsetX
+            local y = anchor.attr.y or offsetY
+            parent:SetPoint(point, relativeTo, relativePoint, x, y)
           end,
           animations = function(e, parent)
             local groups = api.UserData(parent).animationGroups
