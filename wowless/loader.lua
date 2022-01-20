@@ -172,10 +172,9 @@ local function loader(api, cfg)
           include = function(e)
             loadFile(path.join(dir, e.attr.file))
           end,
-          keyvalues = function(e, parent)
-            for _, kv in ipairs(e.kids) do
-              parent[kv.attr.key] = parseTypedValue(kv.attr.type, kv.attr.value)
-            end
+          keyvalue = function(e, parent)
+            local a = e.attr
+            parent[a.key] = parseTypedValue(a.type, a.value)
           end,
           scopedmodifier = function(e, parent)
             withContext({ useAddonEnv = e.attr.scriptsusegivenenv }).loadElements(e.kids, parent)
