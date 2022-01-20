@@ -1,3 +1,5 @@
 ---
 name: onclick
 extends: scripttype
+impl:
+  args: self, button, down

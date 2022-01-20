@@ -1,3 +1,5 @@
 ---
 name: preclick
 extends: scripttype
+impl:
+  args: self, button, down

@@ -212,17 +212,8 @@ local function loader(api, cfg)
                   x[mattr](x, ...)
                 end
               elseif script.text then
-                local argTable = {
-                  onattributechanged = 'self, name, value',
-                  onclick = 'self, button, down',
-                  onenter = 'self, motion',
-                  onevent = 'self, event, ...',
-                  onleave = 'self, motion',
-                  onupdate = 'self, elapsed',
-                  postclick = 'self, button, down',
-                  preclick = 'self, button, down',
-                }
-                local args = argTable[string.lower(script.type)] or 'self, ...'
+                local impl = xmlimpls[string.lower(script.type)].tag
+                local args = impl and impl.args or 'self, ...'
                 local fnstr = 'return function(' .. args .. ')\n' .. script.text .. '\nend'
                 fn = setfenv(loadstr(string.rep('\n', script.line - 2) .. fnstr, filename)(), api.env)
               end

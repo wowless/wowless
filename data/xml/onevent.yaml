@@ -1,3 +1,5 @@
 ---
 name: onevent
 extends: scripttype
+impl:
+  args: self, event, ...

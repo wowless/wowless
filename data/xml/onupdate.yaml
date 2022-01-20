@@ -1,3 +1,5 @@
 ---
 name: onupdate
 extends: scripttype
+impl:
+  args: self, elapsed
