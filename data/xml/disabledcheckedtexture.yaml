@@ -2,6 +2,6 @@
 name: disabledcheckedtexture
 extends: texture
 impl:
-  argument: texture
+  argument: self
   parentmethod: SetDisabledCheckedTexture
   parenttype: CheckButton

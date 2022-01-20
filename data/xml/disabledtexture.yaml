@@ -2,6 +2,6 @@
 name: disabledtexture
 extends: texture
 impl:
-  argument: texture
+  argument: self
   parentmethod: SetDisabledTexture
   parenttype: Button

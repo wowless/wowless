@@ -2,6 +2,6 @@
 name: disabledfont
 extends: buttonfont
 impl:
-  argument: font
+  argument: self
   parentmethod: SetDisabledFontObject
   parenttype: Button

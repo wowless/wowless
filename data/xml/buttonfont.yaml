@@ -5,4 +5,5 @@ attributes:
     type: string
   style:
     type: string
+extends: font
 virtual: true

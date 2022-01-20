@@ -13,9 +13,17 @@ local xmlimpls = (function()
     for n, a in pairs(attrs) do
       aimpls[n] = a.impl
     end
+    local tag = v.impl
+    if type(tag) == 'table' and tag.argument == 'self' then
+      local arg = v.extends
+      while tree[arg].virtual do
+        arg = tree[arg].extends
+      end
+      tag.argument = arg
+    end
     newtree[k] = {
       attrs = aimpls,
-      tag = v.impl,
+      tag = tag,
     }
   end
   return newtree
@@ -433,7 +441,7 @@ local function loader(api, cfg)
             local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
             local fn = xmllang[e.type]
             if type(impl) == 'table' then
-              local elt = impl.argument == 'kids' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
+              local elt = impl.argument == 'lastkid' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
               local obj = loadElement(elt, parent)
               api.uiobjectTypes[impl.parenttype:lower()].metatable.__index[impl.parentmethod](parent, obj)
             elseif impl == 'transparent' then

@@ -3,6 +3,6 @@ name: scrollchild
 children:
 - frame
 impl:
-  argument: kids
+  argument: lastkid
   parentmethod: SetScrollChild
   parenttype: ScrollFrame

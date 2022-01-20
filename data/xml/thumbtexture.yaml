@@ -2,6 +2,6 @@
 name: thumbtexture
 extends: texture
 impl:
-  argument: texture
+  argument: self
   parentmethod: SetThumbTexture
   parenttype: Slider
