@@ -1,5 +1,14 @@
 ---
 name: ColorSelect
+fields:
+  colorValueTexture:
+    type: texture
+  colorValueThumbTexture:
+    type: texture
+  colorWheelTexture:
+    type: texture
+  colorWheelThumbTexture:
+    type: texture
 inherits:
 - Frame
 methods:
@@ -22,22 +31,38 @@ methods:
       type: number
     status: unimplemented
   GetColorValueTexture:
-    status: unimplemented
+    fields:
+    - colorValueTexture
+    status: getter
   GetColorValueThumbTexture:
-    status: unimplemented
+    fields:
+    - colorValueThumbTexture
+    status: getter
   GetColorWheelTexture:
-    status: unimplemented
+    fields:
+    - colorWheelTexture
+    status: getter
   GetColorWheelThumbTexture:
-    status: unimplemented
+    fields:
+    - colorWheelThumbTexture
+    status: getter
   SetColorHSV:
     status: unimplemented
   SetColorRGB:
     status: unimplemented
   SetColorValueTexture:
-    status: unimplemented
+    fields:
+    - colorValueTexture
+    status: setter
   SetColorValueThumbTexture:
-    status: unimplemented
+    fields:
+    - colorValueThumbTexture
+    status: setter
   SetColorWheelTexture:
-    status: unimplemented
+    fields:
+    - colorWheelTexture
+    status: setter
   SetColorWheelThumbTexture:
-    status: unimplemented
+    fields:
+    - colorWheelThumbTexture
+    status: setter
