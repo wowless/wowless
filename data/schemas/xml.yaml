@@ -6,6 +6,8 @@ type:
       type:
         mapof:
           record:
+            impl:
+              type: string
             required:
               type: boolean
             type:

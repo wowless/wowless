@@ -1,9 +1,24 @@
-local xmltab = (function()
-  local t = {}
-  for k, v in pairs(require('wowapi.data').xml) do
-    t[k] = v.impl
+local xmlimpls = (function()
+  local mixin = require('wowless.util').mixin
+  local tree = require('wowapi.data').xml
+  local newtree = {}
+  for k, v in pairs(tree) do
+    local attrs = mixin({}, v.attributes)
+    local t = v
+    while t.extends do
+      t = tree[t.extends]
+      mixin(attrs, t.attributes)
+    end
+    local aimpls = {}
+    for n, a in pairs(attrs) do
+      aimpls[n] = a.impl
+    end
+    newtree[k] = {
+      attrs = aimpls,
+      tag = v.impl,
+    }
   end
-  return t
+  return newtree
 end)()
 
 local function loader(api, cfg)
@@ -250,16 +265,10 @@ local function loader(api, cfg)
         }
 
         local xmlattrlang = {
-          checked = function(obj, value)
-            obj:SetChecked(value)
-          end,
           hidden = function(obj, value)
             local ud = api.UserData(obj)
             ud.shown = not value
             ud.visible = ud.shown and (not ud.parent or api.UserData(ud.parent).visible)
-          end,
-          id = function(obj, value)
-            obj:SetID(value)
           end,
           parent = function(obj, value)
             api.log(3, 'setting parent to ' .. value)
@@ -324,9 +333,16 @@ local function loader(api, cfg)
                 xmlattrlang.parent(obj, v)
               end
             end
+            local attrimpls = xmlimpls[e.type].attrs
             for k, v in pairs(e.attr) do
-              if xmlattrlang[k] and k ~= 'parent' then
-                xmlattrlang[k](obj, v)
+              if k ~= 'parent' then
+                local methodName = attrimpls[k]
+                local fn = xmlattrlang[k]
+                if methodName then
+                  api.uiobjectTypes[e.type].metatable.__index[methodName](obj, v)
+                elseif fn then
+                  xmlattrlang[k](obj, v)
+                end
               end
             end
             initKidsMaybeFrames(e, obj, false)
@@ -420,12 +436,12 @@ local function loader(api, cfg)
               end
             end
           else
-            local tab = xmltab[e.type]
+            local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
             local fn = xmllang[e.type]
-            if type(tab) == 'table' then
-              local obj = loadElement(mixin({}, e, { type = tab.objecttype }), parent)
-              api.uiobjectTypes[tab.parenttype:lower()].metatable.__index[tab.parentmethod](parent, obj)
-            elseif tab == 'transparent' then
+            if type(impl) == 'table' then
+              local obj = loadElement(mixin({}, e, { type = impl.objecttype }), parent)
+              api.uiobjectTypes[impl.parenttype:lower()].metatable.__index[impl.parentmethod](parent, obj)
+            elseif impl == 'transparent' then
               loadElements(e.kids, parent)
             elseif fn then
               fn(e, parent)

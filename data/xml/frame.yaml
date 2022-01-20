@@ -28,6 +28,7 @@ attributes:
   hyperlinksenabled:
     type: bool
   id:
+    impl: SetID
     type: number
   intrinsic:
     type: bool
