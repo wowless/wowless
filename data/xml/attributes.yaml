@@ -2,3 +2,4 @@
 name: attributes
 children:
 - attribute
+impl: transparent

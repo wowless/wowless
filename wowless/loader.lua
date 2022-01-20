@@ -156,12 +156,10 @@ local function loader(api, cfg)
               table.insert(anims, loadElement(anim, parent))
             end
           end,
-          attributes = function(e, parent)
+          attribute = function(e, parent)
             -- TODO share code with SetAttribute somehow
-            local attrs = api.UserData(parent).attributes
-            for _, a in ipairs(e.kids) do
-              attrs[a.attr.name] = parseTypedValue(a.attr.type, a.attr.value)
-            end
+            local a = e.attr
+            api.UserData(parent).attributes[a.name] = parseTypedValue(a.type, a.value)
           end,
           fontfamily = function(e)
             local font = e.kids[1].kids[1]
