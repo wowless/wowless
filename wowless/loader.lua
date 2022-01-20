@@ -247,9 +247,6 @@ local function loader(api, cfg)
               end
             end
           end,
-          scrollchild = function(e, parent)
-            parent:SetScrollChild(loadElement(e.kids[#e.kids], parent))
-          end,
           size = function(e, parent)
             local x, y = getXY(e)
             if x then
@@ -436,7 +433,8 @@ local function loader(api, cfg)
             local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
             local fn = xmllang[e.type]
             if type(impl) == 'table' then
-              local obj = loadElement(mixin({}, e, { type = impl.objecttype }), parent)
+              local elt = impl.argument == 'kids' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
+              local obj = loadElement(elt, parent)
               api.uiobjectTypes[impl.parenttype:lower()].metatable.__index[impl.parentmethod](parent, obj)
             elseif impl == 'transparent' then
               loadElements(e.kids, parent)

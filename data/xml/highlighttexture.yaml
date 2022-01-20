@@ -2,6 +2,6 @@
 name: highlighttexture
 extends: texture
 impl:
-  objecttype: texture
+  argument: texture
   parentmethod: SetHighlightTexture
   parenttype: Button

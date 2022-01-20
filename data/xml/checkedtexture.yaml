@@ -2,6 +2,6 @@
 name: checkedtexture
 extends: texture
 impl:
-  objecttype: texture
+  argument: texture
   parentmethod: SetCheckedTexture
   parenttype: CheckButton

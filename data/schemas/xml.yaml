@@ -29,9 +29,12 @@ type:
       type:
         oneof:
         - record:
-            objecttype:
+            argument:
               required: true
-              type: string
+              type:
+                oneof:
+                - literal: kids
+                - ref: xml
             parentmethod:
               required: true
               type: string

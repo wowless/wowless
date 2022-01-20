@@ -2,6 +2,6 @@
 name: pushedtexture
 extends: texture
 impl:
-  objecttype: texture
+  argument: texture
   parentmethod: SetPushedTexture
   parenttype: Button

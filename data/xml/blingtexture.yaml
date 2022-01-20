@@ -2,6 +2,6 @@
 name: blingtexture
 extends: texture
 impl:
-  objecttype: texture
+  argument: texture
   parentmethod: SetBlingTexture
   parenttype: Cooldown

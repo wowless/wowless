@@ -2,6 +2,6 @@
 name: edgetexture
 extends: texture
 impl:
-  objecttype: texture
+  argument: texture
   parentmethod: SetEdgeTexture
   parenttype: Cooldown

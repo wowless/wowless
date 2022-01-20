@@ -2,6 +2,6 @@
 name: swipetexture
 extends: texture
 impl:
-  objecttype: texture
+  argument: texture
   parentmethod: SetSwipeTexture
   parenttype: Cooldown

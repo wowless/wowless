@@ -2,3 +2,7 @@
 name: scrollchild
 children:
 - frame
+impl:
+  argument: kids
+  parentmethod: SetScrollChild
+  parenttype: ScrollFrame
