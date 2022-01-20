@@ -5,7 +5,7 @@ return (function(self)
   if name ~= nil then
     return name
   end
-  local name = ""
+  name = ""
   local parent = ud.parent
   local pud
   while parent do
