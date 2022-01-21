@@ -1,6 +1,8 @@
 ---
 name: GetSpecializationInfoByID
 status: unimplemented
+versions:
+- Mainline
 inputs:
 - - name: specID
     type: number
@@ -17,7 +19,11 @@ outputs:
 - name: texture
   type: number
 - name: role
+  stub: DAMAGER
   type: string
-- name: class
+- name: classFile
   stub: WARRIOR
+  type: string
+- name: className
+  stub: Warrior
   type: string
