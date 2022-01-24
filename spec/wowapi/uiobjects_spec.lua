@@ -3,6 +3,7 @@ describe('uiobjects', function()
   it('runs', function()
     local api = {
       frames = {},
+      GetDebugName = function() return "" end,
       UserData = function() return {} end,
     }
     local loader = {}

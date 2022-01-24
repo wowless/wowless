@@ -109,15 +109,17 @@ local function mkBaseUIObjectTypes(api)
   for name, data in pairs(require('wowapi.data').uiobjects) do
     local function wrap(fname, fn)
       setfenv(fn, env)
-      return function(...)
-        log(4, 'entering %s:%s', name, fname)
+      return function(self, ...)
+        local dname = api.GetDebugName(self)
+        dname = dname == "" and ("<" .. name .. ">") or dname
+        log(4, 'entering %s:%s', dname, fname)
         local t = {...}
         local n = select('#', ...)
         return (function(success, ...)
-          log(4, 'leaving %s:%s (%s)', name, fname, success and 'success' or 'failure')
+          log(4, 'leaving %s:%s (%s)', dname, fname, success and 'success' or 'failure')
           assert(success, ...)
           return ...
-        end)(pcall(function() return fn(unpack(t, 1, n)) end))
+        end)(pcall(function() return fn(self, unpack(t, 1, n)) end))
       end
     end
     local function wrapAll(map)
