@@ -1,0 +1,12 @@
+---
+name: EJ_GetEncounterByIndex
+status: unimplemented
+outputs:
+- type: string
+- type: string
+- type: number
+- type: number
+- type: string
+- type: number
+- type: number
+- type: number

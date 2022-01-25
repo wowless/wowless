@@ -9,10 +9,18 @@ methods:
     outputs:
     - type: number
     status: unimplemented
+  GetHorizontalScrollRange:
+    outputs:
+    - type: number
+    status: unimplemented
   GetScrollChild:
     fields:
     - scrollChild
     status: getter
+  GetVerticalScroll:
+    outputs:
+    - type: number
+    status: unimplemented
   GetVerticalScrollRange:
     outputs:
     - type: number
