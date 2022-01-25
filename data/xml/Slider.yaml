@@ -1,0 +1,20 @@
+---
+name: Slider
+attributes:
+  defaultvalue:
+    type: number
+  maxvalue:
+    type: number
+  minvalue:
+    type: number
+  obeystepondrag:
+    type: bool
+  orientation:
+    type: string
+  stepsperpage:
+    type: number
+  valuestep:
+    type: number
+children:
+- ThumbTexture
+extends: Frame

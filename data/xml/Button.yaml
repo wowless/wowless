@@ -1,0 +1,18 @@
+---
+name: Button
+attributes:
+  motionscriptswhiledisabled:
+    type: bool
+  registerforclicks:
+    type: stringlist
+  text:
+    type: string
+children:
+- ButtonFont
+- ButtonText
+- DisabledTexture
+- HighlightTexture
+- NormalTexture
+- PushedTextOffset
+- PushedTexture
+extends: Frame

@@ -1,0 +1,3 @@
+---
+name: OnHyperlinkEnter
+extends: ScriptType

@@ -1,5 +1,0 @@
----
-name: resizebounds
-children:
-- maxresize
-- minresize

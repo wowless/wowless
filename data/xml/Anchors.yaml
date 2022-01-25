@@ -1,0 +1,5 @@
+---
+name: Anchors
+children:
+- Anchor
+impl: transparent

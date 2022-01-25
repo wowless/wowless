@@ -1,0 +1,17 @@
+---
+name: Ui
+attributes:
+  xmlns:
+    type: string
+  xmlns:xsi:
+    type: string
+  xsi:schemalocation:
+    type: string
+children:
+- Font
+- FontFamily
+- Include
+- LayoutFrame
+- ScopedModifier
+- Script
+impl: transparent

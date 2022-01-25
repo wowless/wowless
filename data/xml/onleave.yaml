@@ -1,5 +1,0 @@
----
-name: onleave
-extends: scripttype
-impl:
-  args: self, motion

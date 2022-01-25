@@ -1,0 +1,8 @@
+---
+name: Member
+attributes:
+  alphabet:
+    required: true
+    type: string
+children:
+- Font

@@ -1,0 +1,22 @@
+---
+name: Animation
+attributes:
+  childkey:
+    type: string
+  duration:
+    type: number
+  enddelay:
+    type: number
+  order:
+    type: number
+  parentkey:
+    type: string
+  smoothing:
+    type: string
+  startdelay:
+    type: number
+  target:
+    type: string
+children:
+- KeyValues
+- Scripts

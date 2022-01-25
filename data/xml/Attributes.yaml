@@ -1,0 +1,5 @@
+---
+name: Attributes
+children:
+- Attribute
+impl: transparent

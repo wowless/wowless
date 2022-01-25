@@ -1,0 +1,7 @@
+---
+name: AbsDimension
+attributes:
+  x:
+    type: number
+  y:
+    type: number

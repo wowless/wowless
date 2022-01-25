@@ -1,7 +1,0 @@
----
-name: highlightfont
-extends: buttonfont
-impl:
-  argument: self
-  parentmethod: SetHighlightFontObject
-  parenttype: Button

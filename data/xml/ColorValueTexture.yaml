@@ -1,0 +1,7 @@
+---
+name: ColorValueTexture
+extends: Texture
+impl:
+  argument: self
+  parentmethod: SetColorValueTexture
+  parenttype: ColorSelect

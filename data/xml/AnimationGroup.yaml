@@ -1,0 +1,11 @@
+---
+name: AnimationGroup
+attributes:
+  looping:
+    type: string
+  settofinalalpha:
+    type: bool
+children:
+- Animation
+- Scripts
+extends: LayoutFrame

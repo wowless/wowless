@@ -33,7 +33,8 @@ local function xmlRewriter(fn)
       local xml = yaml.parseFile('data/xml/' .. filename)
       local newxml = fn(xml)
       if newxml then
-        pf.write('data/xml/' .. filename, yaml.pprint(newxml))
+        pf.delete('data/xml/' .. filename)
+        pf.write('data/xml/' .. newxml.name .. '.yaml', yaml.pprint(newxml))
       end
     end
   end

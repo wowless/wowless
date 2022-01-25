@@ -1,0 +1,8 @@
+---
+name: ColorSelect
+children:
+- ColorValueTexture
+- ColorValueThumbTexture
+- ColorWheelTexture
+- ColorWheelThumbTexture
+extends: Frame

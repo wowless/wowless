@@ -1,0 +1,5 @@
+---
+name: MaskedTexture
+attributes:
+  childkey:
+    type: string

@@ -1,0 +1,5 @@
+---
+name: OnAttributeChanged
+extends: ScriptType
+impl:
+  args: self, name, value

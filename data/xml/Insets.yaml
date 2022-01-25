@@ -1,0 +1,14 @@
+---
+name: Insets
+attributes:
+  bottom:
+    type: number
+  left:
+    type: number
+  right:
+    type: number
+  top:
+    type: number
+children:
+- AbsInset
+virtual: true

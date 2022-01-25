@@ -1,0 +1,11 @@
+---
+name: ViewInsets
+attributes:
+  bottom:
+    type: number
+  left:
+    type: number
+  right:
+    type: number
+  top:
+    type: number

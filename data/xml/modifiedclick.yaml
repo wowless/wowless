@@ -1,7 +1,0 @@
----
-name: modifiedclick
-attributes:
-  action:
-    type: string
-  default:
-    type: string

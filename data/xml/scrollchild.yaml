@@ -1,8 +1,0 @@
----
-name: scrollchild
-children:
-- frame
-impl:
-  argument: lastkid
-  parentmethod: SetScrollChild
-  parenttype: ScrollFrame

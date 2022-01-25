@@ -1,0 +1,5 @@
+---
+name: AbsValue
+attributes:
+  val:
+    type: number

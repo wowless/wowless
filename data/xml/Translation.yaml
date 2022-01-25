@@ -1,0 +1,8 @@
+---
+name: Translation
+attributes:
+  offsetx:
+    type: number
+  offsety:
+    type: number
+extends: Animation

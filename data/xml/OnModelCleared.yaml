@@ -1,0 +1,3 @@
+---
+name: OnModelCleared
+extends: ScriptType

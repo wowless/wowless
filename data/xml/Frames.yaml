@@ -1,0 +1,5 @@
+---
+name: Frames
+children:
+- Frame
+impl: transparent

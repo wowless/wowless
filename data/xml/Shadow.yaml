@@ -1,0 +1,10 @@
+---
+name: Shadow
+attributes:
+  x:
+    type: number
+  y:
+    type: number
+children:
+- Color
+- Offset

@@ -1,0 +1,5 @@
+---
+name: ModelScene
+children:
+- ViewInsets
+extends: Frame

@@ -1,7 +1,0 @@
----
-name: highlighttexture
-extends: texture
-impl:
-  argument: self
-  parentmethod: SetHighlightTexture
-  parenttype: Button

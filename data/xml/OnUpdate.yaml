@@ -1,0 +1,5 @@
+---
+name: OnUpdate
+extends: ScriptType
+impl:
+  args: self, elapsed

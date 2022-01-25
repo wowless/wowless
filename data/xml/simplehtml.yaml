@@ -1,8 +1,0 @@
----
-name: simplehtml
-children:
-- fontstring
-- fontstringheader1
-- fontstringheader2
-- fontstringheader3
-extends: frame

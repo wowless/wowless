@@ -1,0 +1,24 @@
+---
+name: FontString
+attributes:
+  font:
+    type: string
+  justifyh:
+    type: string
+  justifyv:
+    type: string
+  maxlines:
+    type: number
+  nonspacewrap:
+    type: bool
+  spacing:
+    type: number
+  text:
+    type: string
+  wordwrap:
+    type: bool
+children:
+- Color
+- FontHeight
+- Shadow
+extends: LayoutFrame

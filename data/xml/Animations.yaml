@@ -1,0 +1,5 @@
+---
+name: Animations
+children:
+- AnimationGroup
+impl: transparent

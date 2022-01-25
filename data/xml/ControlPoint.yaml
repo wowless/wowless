@@ -1,0 +1,7 @@
+---
+name: ControlPoint
+attributes:
+  offsetx:
+    type: number
+  offsety:
+    type: number

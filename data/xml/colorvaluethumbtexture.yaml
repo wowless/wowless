@@ -1,7 +1,0 @@
----
-name: colorvaluethumbtexture
-extends: texture
-impl:
-  argument: self
-  parentmethod: SetColorValueThumbTexture
-  parenttype: ColorSelect

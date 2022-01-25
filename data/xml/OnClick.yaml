@@ -1,0 +1,5 @@
+---
+name: OnClick
+extends: ScriptType
+impl:
+  args: self, button, down

@@ -1,5 +1,0 @@
----
-name: modelscene
-children:
-- viewinsets
-extends: frame

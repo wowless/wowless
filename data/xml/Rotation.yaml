@@ -1,0 +1,6 @@
+---
+name: Rotation
+attributes:
+  degrees:
+    type: number
+extends: Animation

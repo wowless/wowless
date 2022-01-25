@@ -1,7 +1,0 @@
----
-name: checkedtexture
-extends: texture
-impl:
-  argument: self
-  parentmethod: SetCheckedTexture
-  parenttype: CheckButton

@@ -1,7 +1,0 @@
----
-name: normalfont
-extends: buttonfont
-impl:
-  argument: self
-  parentmethod: SetNormalFontObject
-  parenttype: Button

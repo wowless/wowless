@@ -1,0 +1,28 @@
+---
+name: EditBox
+attributes:
+  autofocus:
+    type: bool
+  bytes:
+    type: number
+  countinvisibleletters:
+    type: bool
+  historylines:
+    type: number
+  ignorearrows:
+    type: bool
+  invisiblebytes:
+    type: number
+  letters:
+    type: number
+  multiline:
+    type: bool
+  numeric:
+    type: bool
+  visiblebytes:
+    type: number
+children:
+- FontString
+- HighlightColor
+- TextInsets
+extends: Frame

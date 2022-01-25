@@ -1,7 +1,0 @@
----
-name: absdimension
-attributes:
-  x:
-    type: number
-  y:
-    type: number

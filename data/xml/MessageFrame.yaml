@@ -1,0 +1,14 @@
+---
+name: MessageFrame
+attributes:
+  displayduration:
+    type: number
+  fadeduration:
+    type: number
+  fadepower:
+    type: number
+  insertmode:
+    type: string
+children:
+- FontString
+extends: Frame

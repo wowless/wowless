@@ -1,0 +1,7 @@
+---
+name: ButtonText
+extends: FontString
+impl:
+  argument: self
+  parentmethod: SetFontString
+  parenttype: Button

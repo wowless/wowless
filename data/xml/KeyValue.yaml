@@ -1,0 +1,11 @@
+---
+name: KeyValue
+attributes:
+  key:
+    required: true
+    type: string
+  type:
+    type: string
+  value:
+    required: true
+    type: string

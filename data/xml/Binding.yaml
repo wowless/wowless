@@ -1,0 +1,20 @@
+---
+name: Binding
+attributes:
+  category:
+    type: string
+  custombindingid:
+    type: string
+  debug:
+    type: bool
+  default:
+    type: string
+  header:
+    type: string
+  hidden:
+    type: bool
+  name:
+    type: string
+  runonup:
+    type: bool
+text: true

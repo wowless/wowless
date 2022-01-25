@@ -1,0 +1,12 @@
+---
+name: ScopedModifier
+attributes:
+  forbidden:
+    type: bool
+  fulllockdown:
+    type: bool
+  scriptsusegivenenv:
+    type: bool
+children:
+- Actor
+- LayoutFrame

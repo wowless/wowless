@@ -1,0 +1,7 @@
+---
+name: NormalTexture
+extends: Texture
+impl:
+  argument: self
+  parentmethod: SetNormalTexture
+  parenttype: Button

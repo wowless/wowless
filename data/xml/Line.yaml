@@ -1,0 +1,10 @@
+---
+name: Line
+attributes:
+  alphamode:
+    type: string
+  atlas:
+    type: string
+  thickness:
+    type: number
+extends: LayoutFrame

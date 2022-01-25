@@ -1,6 +1,0 @@
----
-name: bindings
-children:
-- binding
-- modifiedclick
-impl: transparent

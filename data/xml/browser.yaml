@@ -1,6 +1,0 @@
----
-name: browser
-attributes:
-  imefont:
-    type: string
-extends: frame

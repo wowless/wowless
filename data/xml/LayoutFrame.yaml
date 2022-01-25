@@ -1,0 +1,33 @@
+---
+name: LayoutFrame
+attributes:
+  alpha:
+    type: number
+  hidden:
+    type: bool
+  ignoreparentalpha:
+    type: bool
+  ignoreparentscale:
+    type: bool
+  inherits:
+    type: stringlist
+  mixin:
+    type: stringlist
+  name:
+    type: string
+  parentarray:
+    type: string
+  parentkey:
+    type: string
+  scale:
+    type: number
+  setallpoints:
+    type: bool
+  virtual:
+    type: bool
+children:
+- Anchors
+- Color
+- KeyValues
+- Size
+virtual: true

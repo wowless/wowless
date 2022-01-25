@@ -1,8 +1,0 @@
----
-name: path
-attributes:
-  curve:
-    type: string
-children:
-- controlpoints
-extends: animation

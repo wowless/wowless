@@ -1,0 +1,3 @@
+---
+name: ContainedAlertFrame
+extends: Button

@@ -1,0 +1,7 @@
+---
+name: BlingTexture
+extends: Texture
+impl:
+  argument: self
+  parentmethod: SetBlingTexture
+  parenttype: Cooldown

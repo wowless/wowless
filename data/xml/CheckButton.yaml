@@ -1,0 +1,10 @@
+---
+name: CheckButton
+attributes:
+  checked:
+    impl: SetChecked
+    type: bool
+children:
+- CheckedTexture
+- DisabledCheckedTexture
+extends: Button

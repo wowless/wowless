@@ -1,0 +1,30 @@
+---
+name: Font
+attributes:
+  filter:
+    type: bool
+  fixedsize:
+    type: bool
+  font:
+    type: string
+  height:
+    type: number
+  inherits:
+    type: stringlist
+  justifyh:
+    type: string
+  justifyv:
+    type: string
+  monochrome:
+    type: bool
+  name:
+    type: string
+  outline:
+    type: string
+  spacing:
+    type: number
+  virtual:
+    type: bool
+children:
+- Color
+- Shadow

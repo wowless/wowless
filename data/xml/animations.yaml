@@ -1,5 +1,0 @@
----
-name: animations
-children:
-- animationgroup
-impl: transparent

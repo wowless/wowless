@@ -1,9 +1,0 @@
----
-name: buttonfont
-attributes:
-  justifyh:
-    type: string
-  style:
-    type: string
-extends: font
-virtual: true

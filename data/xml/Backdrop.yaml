@@ -1,0 +1,12 @@
+---
+name: Backdrop
+attributes:
+  edgefile:
+    type: string
+  tile:
+    type: bool
+children:
+- BackgroundInsets
+- BorderColor
+- EdgeSize
+- TileSize

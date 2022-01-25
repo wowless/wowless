@@ -1,0 +1,17 @@
+---
+name: StatusBar
+attributes:
+  defaultvalue:
+    type: number
+  drawlayer:
+    type: string
+  maxvalue:
+    type: number
+  minvalue:
+    type: number
+  reversefill:
+    type: bool
+children:
+- BarColor
+- BarTexture
+extends: Frame

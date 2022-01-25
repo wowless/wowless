@@ -1,0 +1,15 @@
+---
+name: ScriptType
+attributes:
+  autoenableinput:
+    type: bool
+  function:
+    type: string
+  inherit:
+    type: string
+  intrinsicorder:
+    type: string
+  method:
+    type: string
+text: true
+virtual: true

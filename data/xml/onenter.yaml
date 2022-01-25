@@ -1,5 +1,0 @@
----
-name: onenter
-extends: scripttype
-impl:
-  args: self, motion

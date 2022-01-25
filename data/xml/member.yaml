@@ -1,8 +1,0 @@
----
-name: member
-attributes:
-  alphabet:
-    required: true
-    type: string
-children:
-- font

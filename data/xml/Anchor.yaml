@@ -1,0 +1,17 @@
+---
+name: Anchor
+attributes:
+  point:
+    type: string
+  relativekey:
+    type: string
+  relativepoint:
+    type: string
+  relativeto:
+    type: string
+  x:
+    type: number
+  y:
+    type: number
+children:
+- Offset

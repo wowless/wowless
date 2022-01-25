@@ -1,0 +1,10 @@
+---
+name: FontFamily
+attributes:
+  name:
+    required: true
+    type: string
+  virtual:
+    type: bool
+children:
+- Member

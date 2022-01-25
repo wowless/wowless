@@ -1,5 +1,0 @@
----
-name: dimension
-children:
-- absdimension
-virtual: true

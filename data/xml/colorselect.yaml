@@ -1,8 +1,0 @@
----
-name: colorselect
-children:
-- colorvaluetexture
-- colorvaluethumbtexture
-- colorwheeltexture
-- colorwheelthumbtexture
-extends: frame

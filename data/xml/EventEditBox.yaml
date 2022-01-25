@@ -1,0 +1,3 @@
+---
+name: EventEditBox
+extends: EditBox

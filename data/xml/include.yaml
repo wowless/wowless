@@ -1,6 +1,0 @@
----
-name: include
-attributes:
-  file:
-    required: true
-    type: string

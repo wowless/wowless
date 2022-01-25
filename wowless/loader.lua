@@ -19,9 +19,9 @@ local xmlimpls = (function()
       while tree[arg].virtual do
         arg = tree[arg].extends
       end
-      tag.argument = arg
+      tag.argument = arg:lower()
     end
-    newtree[k] = {
+    newtree[k:lower()] = {
       attrs = aimpls,
       tag = tag,
     }

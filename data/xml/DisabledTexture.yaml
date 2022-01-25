@@ -1,0 +1,7 @@
+---
+name: DisabledTexture
+extends: Texture
+impl:
+  argument: self
+  parentmethod: SetDisabledTexture
+  parenttype: Button

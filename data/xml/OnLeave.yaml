@@ -1,0 +1,5 @@
+---
+name: OnLeave
+extends: ScriptType
+impl:
+  args: self, motion

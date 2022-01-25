@@ -1,7 +1,0 @@
----
-name: disabledfont
-extends: buttonfont
-impl:
-  argument: self
-  parentmethod: SetDisabledFontObject
-  parenttype: Button

@@ -1,0 +1,5 @@
+---
+name: KeyValues
+children:
+- KeyValue
+impl: transparent

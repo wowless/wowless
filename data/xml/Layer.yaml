@@ -1,0 +1,13 @@
+---
+name: Layer
+attributes:
+  level:
+    required: true
+    type: string
+  texturesublevel:
+    type: number
+children:
+- FontString
+- Line
+- Texture
+impl: transparent

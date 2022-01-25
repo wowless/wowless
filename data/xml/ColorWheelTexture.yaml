@@ -1,0 +1,7 @@
+---
+name: ColorWheelTexture
+extends: Texture
+impl:
+  argument: self
+  parentmethod: SetColorWheelTexture
+  parenttype: ColorSelect

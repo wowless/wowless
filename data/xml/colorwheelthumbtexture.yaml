@@ -1,7 +1,0 @@
----
-name: colorwheelthumbtexture
-extends: texture
-impl:
-  argument: self
-  parentmethod: SetColorWheelThumbTexture
-  parenttype: ColorSelect

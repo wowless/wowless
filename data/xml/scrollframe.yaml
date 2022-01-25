@@ -1,5 +1,0 @@
----
-name: scrollframe
-children:
-- scrollchild
-extends: frame

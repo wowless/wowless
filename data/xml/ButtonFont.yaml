@@ -1,0 +1,9 @@
+---
+name: ButtonFont
+attributes:
+  justifyh:
+    type: string
+  style:
+    type: string
+extends: Font
+virtual: true

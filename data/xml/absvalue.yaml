@@ -1,5 +1,0 @@
----
-name: absvalue
-attributes:
-  val:
-    type: number
