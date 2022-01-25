@@ -10,7 +10,7 @@ dependencies = {
   'cluacov',
   'json-lua',
   'libdeflate',
-  'luadbd = 0.3.1',
+  'luadbd = 0.3.2',
   'luaexpat',
   'luautf8',
   'lua-path',

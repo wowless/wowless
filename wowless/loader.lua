@@ -598,7 +598,9 @@ local function loader(api, cfg)
     local dbd = require('luadbd').dbds[name]
     local db2 = path.join(rootDir, 'db2', name .. '.db2')
     local v, b = api.env.GetBuildInfo()
-    return dbd:rows(v .. '.' .. b, require('pl.file').read(db2))
+    local bversion = v .. '.' .. b
+    local build = assert(dbd:build(bversion), ('cannot load %s in %s'):format(name, bversion))
+    return build:rows(require('pl.file').read(db2))
   end
 
   local function loadFrameXml()

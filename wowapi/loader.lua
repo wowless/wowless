@@ -86,8 +86,9 @@ local function db2rows(env, name)
   local dbd = require('luadbd').dbds[name]
   local v, b = env.GetBuildInfo()
   local version = v .. '.' .. b
+  local build = assert(dbd:build(version), ('cannot load %s in %s'):format(name, version))
   local db2 = require('path').join('extracts', version, 'db2', name .. '.db2')
-  return dbd:rows(version, require('pl.file').read(db2))
+  return build:rows(require('pl.file').read(db2))
 end
 
 local function doGetFn(api, loader, apicfg)
