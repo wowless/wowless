@@ -2,7 +2,11 @@
 name: GetAddOnMetadata
 status: implemented
 inputs:
-- - name: addon
+- - name: addonIndex
+    type: number
+  - name: field
+    type: string
+- - name: addonName
     type: string
   - name: field
     type: string
