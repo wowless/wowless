@@ -1,6 +1,8 @@
 ---
 name: EJ_GetEncounterByIndex
 status: unimplemented
+versions:
+- Mainline
 outputs:
 - type: string
 - type: string

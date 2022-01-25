@@ -1,6 +1,8 @@
 ---
 name: GetAchievementCriteriaInfoByID
 status: unimplemented
+versions:
+- Mainline
 inputs:
 - - name: achievementID
     type: number
