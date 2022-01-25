@@ -1,0 +1,10 @@
+---
+name: GetNumGuildPerks
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs:
+- name: numGuildPerks
+  type: number

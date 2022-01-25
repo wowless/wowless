@@ -1,0 +1,10 @@
+---
+name: GetTotalAchievementPoints
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs:
+- name: points
+  type: number

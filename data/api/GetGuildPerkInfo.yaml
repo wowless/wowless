@@ -1,0 +1,15 @@
+---
+name: GetGuildPerkInfo
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: name
+  type: string
+- name: spellID
+  type: number
+- name: iconTexture
+  type: number

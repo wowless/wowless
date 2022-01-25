@@ -1,0 +1,8 @@
+---
+name: CanGuildInvite
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: canInvite
+  type: bool

@@ -1,0 +1,8 @@
+---
+name: CanEditMOTD
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: canEdit
+  type: bool
