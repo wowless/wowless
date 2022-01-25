@@ -52,10 +52,10 @@ local function mkBaseUIObjectTypes(api)
     local nv = pv and ud.shown
     if ud.visible ~= nv then
       ud.visible = nv
-      api.RunScript(obj, nv and 'OnShow' or 'OnHide')
       for kid in kids(obj) do
         UpdateVisible(kid)
       end
+      api.RunScript(obj, nv and 'OnShow' or 'OnHide')
     end
   end
 
