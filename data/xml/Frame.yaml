@@ -51,7 +51,6 @@ attributes:
 children:
 - Animations
 - Attributes
-- Backdrop
 - Frames
 - HitRectInsets
 - Layers
