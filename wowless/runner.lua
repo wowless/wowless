@@ -27,7 +27,7 @@ local function run(cfg)
   }
   for _, frame in ipairs(api.frames) do
     if frame.Click and frame:IsVisible() and not clickBlacklist[frame:GetName() or ''] then
-      api.log(2, 'clicking %s', tostring(frame:GetName()))
+      api.log(2, 'clicking %s', api.GetDebugName(frame))
       frame:Click()
     end
   end
@@ -38,7 +38,7 @@ local function run(cfg)
   api.NextFrame()
   for _, frame in ipairs(api.frames) do
     if frame:IsVisible() then
-      api.log(2, 'enter/leave %s', tostring(frame:GetName()))
+      api.log(2, 'enter/leave %s', api.GetDebugName(frame))
       api.RunScript(frame, 'OnEnter', true)
       api.RunScript(frame, 'OnLeave', true)
     end
