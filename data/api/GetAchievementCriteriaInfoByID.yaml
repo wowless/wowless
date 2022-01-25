@@ -1,0 +1,24 @@
+---
+name: GetAchievementCriteriaInfoByID
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- - name: achievementID
+    type: number
+  - name: criteriaID
+    type: number
+outputs:
+- type: string
+- type: number
+- type: bool
+- type: number
+- type: number
+- type: string
+- type: number
+- type: number
+- type: string
+- type: number
+- type: bool
+- type: number
+- type: number

@@ -1,0 +1,6 @@
+---
+name: GetSavedInstanceChatLink
+status: unimplemented
+outputs:
+- name: link
+  type: string
