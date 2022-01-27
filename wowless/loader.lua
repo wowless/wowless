@@ -203,8 +203,8 @@ local function loader(api, cfg)
               elseif script.text then
                 local impl = xmlimpls[string.lower(script.type)].tag
                 local args = impl and impl.args or 'self, ...'
-                local fnstr = 'return function(' .. args .. ')\n' .. script.text .. '\nend'
-                fn = setfenv(loadstr(string.rep('\n', script.line - 2) .. fnstr, filename)(), api.env)
+                local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
+                fn = setfenv(loadstr(string.rep('\n', script.line - 1) .. fnstr, filename), api.env)()
               end
               if fn then
                 local old = obj:GetScript(script.type)
