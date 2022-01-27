@@ -1,0 +1,8 @@
+---
+name: C_PetJournal.ClearRecentFanfares
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs: {}
