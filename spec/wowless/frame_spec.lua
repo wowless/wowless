@@ -110,8 +110,6 @@ describe('frame', function()
     assert.same(0, api.GetErrorCount())
   end)
 
---[[
-  -- TODO evaluate whether this test is valid or not
   it('overflows the stack when OnShow/OnHide call each other', function()
     local f = api.env.CreateFrame('frame')
     f:SetScript('OnShow', function(self) self:Hide() end)
@@ -119,7 +117,6 @@ describe('frame', function()
     f:Hide()
     assert.Not.same(0, api.GetErrorCount())
   end)
-]]--
 
   it('shares metatables across instances', function()
     local f = api.env.CreateFrame('frame')
