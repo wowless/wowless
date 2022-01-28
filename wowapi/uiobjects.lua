@@ -47,16 +47,15 @@ local function mkBaseUIObjectTypes(api)
   end
 
   local function UpdateVisible(obj)
-    local ud = u(obj)
-    local pv = not ud.parent or u(ud.parent).visible
-    local nv = pv and ud.shown
-    if ud.visible ~= nv then
-      ud.visible = nv
-      for kid in kids(obj) do
+    local shown = u(obj).shown
+    log(4, 'enter UpdateVisible(%s) %s', api.GetDebugName(obj), tostring(shown))
+    for kid in kids(obj) do
+      if shown == u(kid).shown then
         UpdateVisible(kid)
       end
-      api.RunScript(obj, nv and 'OnShow' or 'OnHide')
     end
+    api.RunScript(obj, shown and 'OnShow' or 'OnHide')
+    log(4, 'leave UpdateVisible(%s) %s', api.GetDebugName(obj), tostring(shown))
   end
 
   local function flatten(types)

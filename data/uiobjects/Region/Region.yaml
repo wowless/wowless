@@ -35,7 +35,6 @@ fields:
   shown:
     init: true
     type: bool
-  visible: {}
   width:
     init: 0
     type: number
@@ -121,9 +120,7 @@ methods:
     - shown
     status: getter
   IsVisible:
-    fields:
-    - visible
-    status: getter
+    status: implemented
   SetAllPoints:
     status: unimplemented
   SetAlpha:

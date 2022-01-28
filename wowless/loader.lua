@@ -260,13 +260,10 @@ local function loader(api, cfg)
             api.log(3, 'setting hidden=%s on %s', tostring(value), api.GetDebugName(obj))
             local ud = api.UserData(obj)
             ud.shown = not value
-            ud.visible = ud.shown and (not ud.parent or api.UserData(ud.parent).visible)
           end,
           parent = function(obj, value)
             api.log(3, 'setting parent to ' .. value)
             api.SetParent(obj, api.env[value])
-            local ud = api.UserData(obj)
-            ud.visible = ud.shown and (not ud.parent or api.UserData(ud.parent).visible)
           end,
           parentarray = function(obj, value)
             api.log(3, 'attaching to array ' .. value)
