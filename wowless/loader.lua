@@ -319,15 +319,23 @@ local function loader(api, cfg)
             for _, m in ipairs(e.attr.securemixin or {}) do
               mixin(obj, env[m])
             end
-            -- Evaluate parent= before others.
-            for k, v in pairs(e.attr) do
-              if k == 'parent' then
-                xmlattrlang.parent(obj, v)
+            local early = {
+              'parent',
+              'parentkey',
+              'parentarray',
+            }
+            local earlymap = {}
+            for _, ek in ipairs(early) do
+              earlymap[ek] = true
+              for k, v in pairs(e.attr) do
+                if k == ek then
+                  xmlattrlang[k](obj, v)
+                end
               end
             end
             local attrimpls = xmlimpls[e.type].attrs
             for k, v in pairs(e.attr) do
-              if k ~= 'parent' then
+              if not earlymap[k] then
                 local methodName = attrimpls[k]
                 local fn = xmlattrlang[k]
                 if methodName then
