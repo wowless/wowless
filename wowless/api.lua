@@ -146,7 +146,7 @@ local function new(log)
       template.initKids(obj)
     end
     RunScript(obj, 'OnLoad')
-    if u(obj).visible then
+    if InheritsFrom(typename, 'region') and obj:IsVisible() then
       RunScript(obj, 'OnShow')
     end
     return obj
@@ -184,7 +184,7 @@ local function new(log)
 
   local function NextFrame()
     for _, frame in ipairs(frames) do
-      if u(frame).visible then
+      if frame:IsVisible() then
         RunScript(frame, 'OnUpdate', 1)
       end
     end

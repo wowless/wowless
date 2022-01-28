@@ -1,4 +1,5 @@
 return (function(self, shown)
-  u(self).shown = shown
-  UpdateVisible(self)
+  UpdateVisible(self, function()
+    u(self).shown = not not shown
+  end)
 end)(...)
