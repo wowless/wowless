@@ -257,6 +257,7 @@ local function loader(api, cfg)
 
         local xmlattrlang = {
           hidden = function(obj, value)
+            api.log(3, 'setting hidden=%s on %s', tostring(value), api.GetDebugName(obj))
             local ud = api.UserData(obj)
             ud.shown = not value
             ud.visible = ud.shown and (not ud.parent or api.UserData(ud.parent).visible)
