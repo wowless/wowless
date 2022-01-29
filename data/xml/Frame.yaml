@@ -24,6 +24,7 @@ attributes:
   framelevel:
     type: number
   framestrata:
+    impl: SetFrameStrata
     type: string
   hyperlinksenabled:
     type: bool
