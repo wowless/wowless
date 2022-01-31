@@ -403,6 +403,7 @@ local function loader(api, cfg)
               assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
               assert(e.attr.name, 'cannot create anonymous intrinsic')
               local name = string.lower(e.attr.name)
+              assert(xmlimpls[name].tag == 'intrinsic', name .. ' needs to be marked intrinsic in spec')
               if api.uiobjectTypes[name] then
                 api.log(1, 'overwriting intrinsic ' .. e.attr.name)
               end

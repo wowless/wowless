@@ -1,3 +1,4 @@
 ---
 name: ScrollingMessageFrame
 extends: Frame
+impl: intrinsic

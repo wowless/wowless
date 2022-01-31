@@ -1,3 +1,4 @@
 ---
 name: EventEditBox
 extends: EditBox
+impl: intrinsic

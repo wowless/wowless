@@ -1,3 +1,4 @@
 ---
 name: ContainedAlertFrame
 extends: Button
+impl: intrinsic
