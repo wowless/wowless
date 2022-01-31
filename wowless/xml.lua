@@ -106,7 +106,7 @@ local attributeTypes = {
   end,
 }
 
-local function parseRoot(_, root)
+local function parseRoot(root)
   local warnings = {}
   local function run(e, tn, tk)
     assert(e._type == 'ELEMENT', 'invalid xml type ' .. e._type .. ' on child of ' .. tn)
@@ -211,10 +211,8 @@ end
 
 return {
   newParser = function()
-    return {
-      parse = function(self, xmlstr)
-        return parseRoot(self, xml2dom(xmlstr))
-      end,
-    }
+    return function(xmlstr)
+      return parseRoot(xml2dom(xmlstr))
+    end
   end,
 }
