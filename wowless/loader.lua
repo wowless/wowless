@@ -307,6 +307,41 @@ local function loader(api, cfg)
           end
         end
 
+        local earlyAttrs = {
+          'parent',
+          'parentkey',
+          'parentarray'
+        }
+        local earlyAttrMap = (function()
+          local m = {}
+          for _, k in ipairs(earlyAttrs) do
+            m[k] = true
+          end
+          return m
+        end)()
+
+        local function mkInitEarlyAttrsNotRecursive(e)
+          return function(obj)
+            for _, ek in ipairs(earlyAttrs) do
+              for k, v in pairs(e.attr) do
+                if k == ek then
+                  xmlattrlang[k](obj, v)
+                end
+              end
+            end
+          end
+        end
+
+        local function mkInitEarlyAttrs(e)
+          local notRecursive = mkInitEarlyAttrsNotRecursive(e)
+          return function(obj)
+            for _, inh in ipairs(e.attr.inherits or {}) do
+              api.templates[string.lower(inh)].initEarlyAttrs(obj)
+            end
+            notRecursive(obj)
+          end
+        end
+
         local function mkInitAttrsNotRecursive(e)
           return function(obj)
             local env = ctx.useAddonEnv and addonEnv or api.env
@@ -316,23 +351,9 @@ local function loader(api, cfg)
             for _, m in ipairs(e.attr.securemixin or {}) do
               mixin(obj, env[m])
             end
-            local early = {
-              'parent',
-              'parentkey',
-              'parentarray',
-            }
-            local earlymap = {}
-            for _, ek in ipairs(early) do
-              earlymap[ek] = true
-              for k, v in pairs(e.attr) do
-                if k == ek then
-                  xmlattrlang[k](obj, v)
-                end
-              end
-            end
             local attrimpls = xmlimpls[e.type].attrs
             for k, v in pairs(e.attr) do
-              if not earlymap[k] then
+              if not earlyAttrMap[k] then
                 local methodName = attrimpls[k]
                 local fn = xmlattrlang[k]
                 if methodName then
@@ -374,6 +395,7 @@ local function loader(api, cfg)
 
         function loadElement(e, parent)
           if api.IsIntrinsicType(e.type) then
+            local initEarlyAttrs = mkInitEarlyAttrs(e)
             local initAttrs = mkInitAttrs(e)
             local initKids = mkInitKids(e)
             local virtual = e.attr.virtual
@@ -391,6 +413,7 @@ local function loader(api, cfg)
                 constructor = function(self, xmlattr)
                   base.constructor(self, xmlattr)
                   self.__intrinsicHack = true
+                  initEarlyAttrs(self)
                   initAttrs(self)
                   initKids(self)
                   self.__intrinsicHack = nil
@@ -409,6 +432,7 @@ local function loader(api, cfg)
                 end
                 api.log(3, 'creating template ' .. e.attr.name)
                 api.templates[name] = {
+                  initEarlyAttrs = initEarlyAttrs,
                   initAttrs = initAttrs,
                   initKids = initKids,
                   name = e.attr.name,
@@ -426,6 +450,7 @@ local function loader(api, cfg)
                   table.insert(templates, template)
                 end
                 table.insert(templates, {
+                  initEarlyAttrs = mkInitEarlyAttrsNotRecursive(e),
                   initAttrs = mkInitAttrsNotRecursive(e),
                   initKids = mkInitKidsNotRecursive(e),
                 })
