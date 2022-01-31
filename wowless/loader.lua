@@ -36,7 +36,7 @@ local function loader(api, cfg)
 
   local lfs = require('lfs')
   local path = require('path')
-  local xml = require('wowless.xml')
+  local xml = require('wowless.xml').newParser()
   local util = require('wowless.util')
   local readFile, mixin = util.readfile, util.mixin
 
@@ -482,7 +482,7 @@ local function loader(api, cfg)
       end
 
       return api.CallSafely(function()
-        local root = xml.parse(xmlstr)
+        local root = xml:parse(xmlstr)
         local ctx = {
           ignoreVirtual = false,
           useAddonEnv = false,
