@@ -127,8 +127,8 @@ local function new(log)
     SetParent(obj, parent)
     type.constructor(obj)
     for _, template in ipairs({...}) do
-      log(4, 'initializing attributes for ' .. tostring(template.name))
-      template.initAttrs(obj)
+      log(4, 'initializing early attributes for ' .. tostring(template.name))
+      template.initEarlyAttrs(obj)
     end
     if objname then
       objname = ParentSub(objnamearg, u(obj).parent)
@@ -140,6 +140,10 @@ local function new(log)
       if addonEnv then
         addonEnv[objname] = obj
       end
+    end
+    for _, template in ipairs({...}) do
+      log(4, 'initializing attributes for ' .. tostring(template.name))
+      template.initAttrs(obj)
     end
     for _, template in ipairs({...}) do
       log(4, 'initializing children for ' .. tostring(template.name))
