@@ -106,7 +106,7 @@ local attributeTypes = {
   end,
 }
 
-local function validateRoot(root)
+local function parseRoot(root)
   local warnings = {}
   local function run(e, tn, tk)
     assert(e._type == 'ELEMENT', 'invalid xml type ' .. e._type .. ' on child of ' .. tn)
@@ -209,10 +209,10 @@ local function xml2dom(xmlstr)
   return stack[1]._children[1]
 end
 
-local function validate(xmlstr)
-  return validateRoot(xml2dom(xmlstr))
+local function parse(xmlstr)
+  return parseRoot(xml2dom(xmlstr))
 end
 
 return {
-  validate = validate,
+  parse = parse,
 }

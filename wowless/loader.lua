@@ -482,7 +482,7 @@ local function loader(api, cfg)
       end
 
       return api.CallSafely(function()
-        local root = xml.validate(xmlstr)
+        local root = xml.parse(xmlstr)
         local ctx = {
           ignoreVirtual = false,
           useAddonEnv = false,
