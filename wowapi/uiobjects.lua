@@ -77,7 +77,10 @@ local function mkBaseUIObjectTypes(api)
         for _, inh in ipairs(ty.inherits) do
           flattenOne(inh)
           table.insert(inherits, string.lower(inh))
-          Mixin(metaindex, result[string.lower(inh)].metatable.__index)
+          for mk, mv in pairs(result[string.lower(inh)].metatable.__index) do
+            assert(not metaindex[mk] or metaindex[mk] == mv, 'multiple implementations of ' .. mk)
+            metaindex[mk] = mv
+          end
         end
         result[lk] = {
           constructor = function(self)

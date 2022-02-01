@@ -166,8 +166,6 @@ methods:
     status: implemented
   RegisterForDrag:
     status: unimplemented
-  RegisterForMouse:
-    status: unimplemented
   RegisterUnitEvent:
     status: implemented
   SetAttribute:
