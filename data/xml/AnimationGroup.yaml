@@ -5,7 +5,7 @@ attributes:
     type: string
   settofinalalpha:
     type: bool
-children:
+contents:
 - Animation
 - Scripts
 extends: LayoutFrame

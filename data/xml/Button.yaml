@@ -7,7 +7,7 @@ attributes:
     type: stringlist
   text:
     type: string
-children:
+contents:
 - ButtonFont
 - ButtonText
 - DisabledTexture

@@ -1,6 +1,6 @@
 ---
 name: ColorSelect
-children:
+contents:
 - ColorValueTexture
 - ColorValueThumbTexture
 - ColorWheelTexture

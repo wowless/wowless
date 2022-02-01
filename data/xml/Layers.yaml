@@ -1,5 +1,5 @@
 ---
 name: Layers
-children:
+contents:
 - Layer
 impl: transparent

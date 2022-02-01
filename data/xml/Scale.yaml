@@ -13,6 +13,6 @@ attributes:
     type: number
   toscaley:
     type: number
-children:
+contents:
 - Origin
 extends: Animation

@@ -17,4 +17,4 @@ attributes:
     type: string
   runonup:
     type: bool
-text: true
+contents: text

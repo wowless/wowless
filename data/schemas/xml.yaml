@@ -18,10 +18,12 @@ type:
                 - literal: number
                 - literal: string
                 - literal: stringlist
-    children:
+    contents:
       type:
-        sequenceof:
-          ref: xml
+        oneof:
+        - literal: text
+        - sequenceof:
+            ref: xml
     extends:
       type:
         ref: xml
@@ -50,7 +52,5 @@ type:
     name:
       required: true
       type: string
-    text:
-      type: boolean
     virtual:
       type: boolean

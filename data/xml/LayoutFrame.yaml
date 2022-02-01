@@ -25,7 +25,7 @@ attributes:
     type: bool
   virtual:
     type: bool
-children:
+contents:
 - Anchors
 - Color
 - KeyValues

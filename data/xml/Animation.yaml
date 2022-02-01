@@ -17,6 +17,6 @@ attributes:
     type: number
   target:
     type: string
-children:
+contents:
 - KeyValues
 - Scripts

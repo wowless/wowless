@@ -9,5 +9,5 @@ attributes:
     type: number
   top:
     type: number
-children:
+contents:
 - Rect

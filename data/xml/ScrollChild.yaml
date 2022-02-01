@@ -1,6 +1,6 @@
 ---
 name: ScrollChild
-children:
+contents:
 - Frame
 impl:
   argument: lastkid

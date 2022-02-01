@@ -5,7 +5,7 @@ attributes:
     type: string
   tile:
     type: bool
-children:
+contents:
 - BackgroundInsets
 - BorderColor
 - EdgeSize

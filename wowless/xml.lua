@@ -5,21 +5,33 @@ local function preprocess(tree)
   for k, v in pairs(tree) do
     local attrs = mixin({}, v.attributes)
     local kids = {}
-    for _, kid in ipairs(v.children or {}) do
-      kids[kid:lower()] = true
+    local text = false
+    if type(v.contents) == 'table' then
+      for _, kid in ipairs(v.contents or {}) do
+        kids[kid:lower()] = true
+      end
+    elseif v.contents == 'text' then
+      text = true
+    elseif v.contents ~= nil then
+      error('invalid contents on ' .. k)
     end
     local supertypes = { [k:lower()] = true }
-    local text = v.text
     local t = v
     while t.extends do
       supertypes[t.extends:lower()] = true
       t = tree[t.extends]
       mixin(attrs, t.attributes)
-      for _, kid in ipairs(t.children or {}) do
-        kids[kid:lower()] = true
+      if type(t.contents) == 'table' then
+        for _, kid in ipairs(t.contents or {}) do
+          kids[kid:lower()] = true
+        end
+      elseif t.contents == 'text' then
+        text = true
+      elseif t.contents ~= nil then
+        error('invalid contents on ' .. k)
       end
-      text = text or t.text
     end
+    assert(not text or #kids == 0, 'both text and kids on ' .. k)
     newtree[k:lower()] = mixin({}, v, {
       attributes = attrs,
       children = kids,

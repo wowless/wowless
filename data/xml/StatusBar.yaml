@@ -11,7 +11,7 @@ attributes:
     type: number
   reversefill:
     type: bool
-children:
+contents:
 - BarColor
 - BarTexture
 extends: Frame

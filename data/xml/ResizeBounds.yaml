@@ -1,5 +1,5 @@
 ---
 name: ResizeBounds
-children:
+contents:
 - MaxResize
 - MinResize

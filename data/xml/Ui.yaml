@@ -7,7 +7,7 @@ attributes:
     type: string
   xsi:schemalocation:
     type: string
-children:
+contents:
 - Font
 - FontFamily
 - Include

@@ -5,6 +5,6 @@ attributes:
     type: string
   vwrapmode:
     type: string
-children:
+contents:
 - MaskedTextures
 extends: Texture

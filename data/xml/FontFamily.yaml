@@ -6,5 +6,5 @@ attributes:
     type: string
   virtual:
     type: bool
-children:
+contents:
 - Member

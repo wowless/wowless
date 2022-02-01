@@ -1,5 +1,5 @@
 ---
 name: ModelScene
-children:
+contents:
 - ViewInsets
 extends: Frame

@@ -21,7 +21,7 @@ attributes:
     type: bool
   verttile:
     type: bool
-children:
+contents:
 - Animations
 - Color
 - Gradient

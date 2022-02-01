@@ -49,7 +49,7 @@ attributes:
     type: bool
   useparentlevel:
     type: bool
-children:
+contents:
 - Animations
 - Attributes
 - Backdrop
