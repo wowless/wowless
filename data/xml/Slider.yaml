@@ -2,18 +2,28 @@
 name: Slider
 attributes:
   defaultvalue:
+    impl:
+      method: SetValue
     type: number
   maxvalue:
     type: number
   minvalue:
     type: number
   obeystepondrag:
+    impl:
+      method: SetObeyStepOnDrag
     type: bool
   orientation:
+    impl:
+      method: SetOrientation
     type: string
   stepsperpage:
+    impl:
+      method: SetStepsPerPage
     type: number
   valuestep:
+    impl:
+      method: SetValueStep
     type: number
 contents:
 - ThumbTexture

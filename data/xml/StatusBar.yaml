@@ -2,6 +2,8 @@
 name: StatusBar
 attributes:
   defaultvalue:
+    impl:
+      method: SetValue
     type: number
   drawlayer:
     type: string
@@ -10,6 +12,8 @@ attributes:
   minvalue:
     type: number
   reversefill:
+    impl:
+      method: SetReverseFill
     type: bool
 contents:
 - BarColor
