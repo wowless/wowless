@@ -26,9 +26,6 @@ fields:
     type: number
   points:
     init: {}
-  protected:
-    init: false
-    type: bool
   scale:
     init: 1
     type: number

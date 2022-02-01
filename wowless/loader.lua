@@ -284,7 +284,6 @@ local function loader(api, cfg)
           protected = function(obj, value)
             local ud = api.UserData(obj)
             ud.explicitlyProtected = value
-            ud.protected = value
           end,
         }
 
