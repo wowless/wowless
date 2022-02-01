@@ -7,7 +7,16 @@ type:
         mapof:
           record:
             impl:
-              type: string
+              type:
+                oneof:
+                - record:
+                    field:
+                      required: true
+                      type: string
+                - record:
+                    method:
+                      required: true
+                      type: string
             required:
               type: boolean
             type:

@@ -2,7 +2,8 @@
 name: CheckButton
 attributes:
   checked:
-    impl: SetChecked
+    impl:
+      method: SetChecked
     type: bool
 contents:
 - CheckedTexture

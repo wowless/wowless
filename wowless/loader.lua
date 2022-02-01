@@ -281,10 +281,6 @@ local function loader(api, cfg)
               parent[value] = obj
             end
           end,
-          protected = function(obj, value)
-            local ud = api.UserData(obj)
-            ud.explicitlyProtected = value
-          end,
         }
 
         local function initKidsMaybeFrames(e, obj, framesFlag)
@@ -354,12 +350,20 @@ local function loader(api, cfg)
             local attrimpls = (xmlimpls[e.type] or intrinsics[e.type]).attrs
             for k, v in pairs(e.attr) do
               if not earlyAttrMap[k] then
-                local methodName = attrimpls[k]
-                local fn = xmlattrlang[k]
-                if methodName then
-                  api.uiobjectTypes[e.type].metatable.__index[methodName](obj, v)
-                elseif fn then
-                  xmlattrlang[k](obj, v)
+                local attrimpl = attrimpls[k]
+                if attrimpl then
+                  if attrimpl.method then
+                    api.uiobjectTypes[e.type].metatable.__index[attrimpl.method](obj, v)
+                  elseif attrimpl.field then
+                    api.UserData(obj)[attrimpl.field] = v
+                  else
+                    error('invalid attribute impl for ' .. k)
+                  end
+                else
+                  local fn = xmlattrlang[k]
+                  if fn then
+                    fn(obj, v)
+                  end
                 end
               end
             end
