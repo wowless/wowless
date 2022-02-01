@@ -1,4 +1,0 @@
----
-name: ItemButton
-extends: Button
-impl: intrinsic

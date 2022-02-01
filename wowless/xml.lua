@@ -106,12 +106,12 @@ local attributeTypes = {
   end,
 }
 
-local function parseRoot(root)
+local function parseRoot(root, intrinsics)
   local warnings = {}
   local function run(e, tn, tk)
     assert(e._type == 'ELEMENT', 'invalid xml type ' .. e._type .. ' on child of ' .. tn)
     local tname = string.lower(e._name)
-    local ty = lang[tname]
+    local ty = lang[tname] or intrinsics[tname]
     assert(ty, tname .. ' is not a type')
     assert(not ty.virtual, tname .. ' is virtual and cannot be instantiated')
     local extends = false
@@ -165,6 +165,14 @@ local function parseRoot(root)
           end
         end
       end
+      if resultAttrs.intrinsic and resultAttrs.name then
+        intrinsics[resultAttrs.name:lower()] = {
+          attributes = ty.attributes,
+          children = ty.children,
+          supertypes = mixin({}, ty.supertypes, { tname = true }),
+          text = ty.text,
+        }
+      end
       return setmetatable({
         attr = setmetatable(resultAttrs, attrMTs[tname]),
         kids = resultKids,
@@ -211,8 +219,9 @@ end
 
 return {
   newParser = function()
+    local intrinsics = {}
     return function(xmlstr)
-      return parseRoot(xml2dom(xmlstr))
+      return parseRoot(xml2dom(xmlstr), intrinsics)
     end
   end,
 }

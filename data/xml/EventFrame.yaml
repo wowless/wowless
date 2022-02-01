@@ -1,4 +1,0 @@
----
-name: EventFrame
-extends: Frame
-impl: intrinsic

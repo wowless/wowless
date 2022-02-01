@@ -39,6 +39,7 @@ local function loader(api, cfg)
   local parseXml = require('wowless.xml').newParser()
   local util = require('wowless.util')
   local readFile, mixin = util.readfile, util.mixin
+  local intrinsics = {}
 
   local function parseTypedValue(type, value)
     type = type and string.lower(type) or nil
@@ -351,7 +352,7 @@ local function loader(api, cfg)
             for _, m in ipairs(e.attr.securemixin or {}) do
               mixin(obj, env[m])
             end
-            local attrimpls = xmlimpls[e.type].attrs
+            local attrimpls = (xmlimpls[e.type] or intrinsics[e.type]).attrs
             for k, v in pairs(e.attr) do
               if not earlyAttrMap[k] then
                 local methodName = attrimpls[k]
@@ -403,7 +404,6 @@ local function loader(api, cfg)
               assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
               assert(e.attr.name, 'cannot create anonymous intrinsic')
               local name = string.lower(e.attr.name)
-              assert(xmlimpls[name].tag == 'intrinsic', name .. ' needs to be marked intrinsic in spec')
               if api.uiobjectTypes[name] then
                 api.log(1, 'overwriting intrinsic ' .. e.attr.name)
               end
@@ -423,6 +423,7 @@ local function loader(api, cfg)
                 metatable = { __index = base.metatable.__index },
                 name = e.attr.name,
               }
+              intrinsics[name] = xmlimpls[basetype]
             else
               local ltype = string.lower(e.type)
               if (ltype == 'font' and e.attr.name) or (virtual and not ctx.ignoreVirtual) then
