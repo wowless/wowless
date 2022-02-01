@@ -4,18 +4,30 @@ attributes:
   childkey:
     type: string
   duration:
+    impl:
+      method: SetDuration
     type: number
   enddelay:
+    impl:
+      method: SetEndDelay
     type: number
   order:
+    impl:
+      method: SetOrder
     type: number
   parentkey:
     type: string
   smoothing:
+    impl:
+      method: SetSmoothing
     type: string
   startdelay:
+    impl:
+      method: SetStartDelay
     type: number
   target:
+    impl:
+      method: SetTarget
     type: string
 contents:
 - KeyValues

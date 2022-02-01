@@ -2,8 +2,12 @@
 name: AnimationGroup
 attributes:
   looping:
+    impl:
+      method: SetLooping
     type: string
   settofinalalpha:
+    impl:
+      method: SetToFinalAlpha
     type: bool
 contents:
 - Animation
