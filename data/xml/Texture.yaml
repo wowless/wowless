@@ -23,7 +23,6 @@ attributes:
     type: bool
 contents:
 - Animations
-- Color
 - Gradient
 - TexCoords
 extends: LayoutFrame

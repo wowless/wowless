@@ -8,7 +8,9 @@ local function preprocess(tree)
     local text = false
     if type(v.contents) == 'table' then
       for _, kid in ipairs(v.contents or {}) do
-        kids[kid:lower()] = true
+        local key = kid:lower()
+        assert(not kids[key], kid .. ' is already a child of ' .. k)
+        kids[key] = true
       end
     elseif v.contents == 'text' then
       text = true
@@ -20,10 +22,15 @@ local function preprocess(tree)
     while t.extends do
       supertypes[t.extends:lower()] = true
       t = tree[t.extends]
-      mixin(attrs, t.attributes)
+      for ak, av in pairs(t.attributes or {}) do
+        assert(not attrs[ak], ak .. ' is already an attribute of ' .. k)
+        attrs[ak] = av
+      end
       if type(t.contents) == 'table' then
         for _, kid in ipairs(t.contents or {}) do
-          kids[kid:lower()] = true
+          local key = kid:lower()
+          assert(not kids[key], kid .. ' is already a child of ' .. k)
+          kids[key] = true
         end
       elseif t.contents == 'text' then
         text = true
