@@ -46,7 +46,6 @@ type:
             args:
               required: true
               type: string
-        - literal: intrinsic
         - literal: transparent
     name:
       required: true
