@@ -124,7 +124,10 @@ local function parseRoot(root, intrinsics)
     assert(e._type == 'ELEMENT', 'invalid xml type ' .. e._type .. ' on child of ' .. tn)
     local tname = string.lower(e._name)
     local ty = lang[tname] or intrinsics[tname]
-    assert(ty, tname .. ' is not a type')
+    if not ty then
+      table.insert(warnings, 'unknown type ' .. tname)
+      return nil
+    end
     assert(not ty.virtual, tname .. ' is virtual and cannot be instantiated')
     local extends = false
     for k in pairs(tk) do

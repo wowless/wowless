@@ -194,7 +194,7 @@ expose('loader', function()
         <Frame1 name='Frame2' />
       </Ui>
     ]])
-    assert.same(1, api.GetErrorCount())
+    assert.same(0, api.GetErrorCount())
     assert.Nil(api.env.Frame1)
     assert.Nil(api.env.Frame2)
   end)
