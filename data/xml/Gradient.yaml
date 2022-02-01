@@ -3,6 +3,6 @@ name: Gradient
 attributes:
   orientation:
     type: string
-children:
+contents:
 - MaxColor
 - MinColor

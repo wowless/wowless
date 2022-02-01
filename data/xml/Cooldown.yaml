@@ -7,7 +7,7 @@ attributes:
     type: bool
   reverse:
     type: bool
-children:
+contents:
 - BlingTexture
 - EdgeTexture
 - SwipeTexture

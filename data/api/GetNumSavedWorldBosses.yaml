@@ -1,0 +1,10 @@
+---
+name: GetNumSavedWorldBosses
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs:
+- name: numSavedWorldBosses
+  type: number

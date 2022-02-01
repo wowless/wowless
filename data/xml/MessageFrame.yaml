@@ -9,6 +9,6 @@ attributes:
     type: number
   insertmode:
     type: string
-children:
+contents:
 - FontString
 extends: Frame

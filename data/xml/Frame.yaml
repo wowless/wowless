@@ -2,53 +2,78 @@
 name: Frame
 attributes:
   clampedtoscreen:
+    impl:
+      method: SetClampedToScreen
     type: bool
   clipchildren:
+    impl:
+      method: SetClipsChildren
     type: bool
   debugid:
     type: number
   dontsaveposition:
     type: bool
   enablekeyboard:
+    impl:
+      method: EnableKeyboard
     type: bool
   enablemouse:
+    impl:
+      method: EnableMouse
     type: bool
   enablemouseclicks:
     type: bool
   enablemousemotion:
     type: bool
   enablemousewheel:
+    impl:
+      method: EnableMouseWheel
     type: bool
   flattenrenderlayers:
     type: bool
   framelevel:
+    impl:
+      method: SetFrameLevel
     type: number
   framestrata:
+    impl:
+      method: SetFrameStrata
     type: string
   hyperlinksenabled:
+    impl:
+      method: SetHyperlinksEnabled
     type: bool
   id:
-    impl: SetID
+    impl:
+      method: SetID
     type: number
   intrinsic:
     type: bool
   movable:
+    impl:
+      method: SetMovable
     type: bool
   parent:
     type: string
   propagatehyperlinkstoparent:
     type: bool
   protected:
+    impl:
+      field: explicitlyProtected
     type: bool
   resizable:
+    impl:
+      method: SetResizable
     type: bool
   securemixin:
     type: stringlist
   toplevel:
+    impl:
+      method: SetToplevel
     type: bool
   useparentlevel:
     type: bool
-children:
+contents:
 - Animations
 - Attributes
 - Frames

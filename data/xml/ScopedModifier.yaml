@@ -7,6 +7,6 @@ attributes:
     type: bool
   scriptsusegivenenv:
     type: bool
-children:
+contents:
 - Actor
 - LayoutFrame

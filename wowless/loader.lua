@@ -36,9 +36,10 @@ local function loader(api, cfg)
 
   local lfs = require('lfs')
   local path = require('path')
-  local xml = require('wowless.xml')
+  local parseXml = require('wowless.xml').newParser()
   local util = require('wowless.util')
   local readFile, mixin = util.readfile, util.mixin
+  local intrinsics = {}
 
   local function parseTypedValue(type, value)
     type = type and string.lower(type) or nil
@@ -203,8 +204,9 @@ local function loader(api, cfg)
               elseif script.text then
                 local impl = xmlimpls[string.lower(script.type)].tag
                 local args = impl and impl.args or 'self, ...'
-                local fnstr = 'return function(' .. args .. ')\n' .. script.text .. '\nend'
-                fn = setfenv(loadstr(string.rep('\n', script.line - 2) .. fnstr, filename)(), api.env)
+                local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
+                local env = ctx.useAddonEnv and addonEnv or api.env
+                fn = setfenv(loadstr(string.rep('\n', script.line - 1) .. fnstr, filename), env)()
               end
               if fn then
                 local old = obj:GetScript(script.type)
@@ -256,15 +258,13 @@ local function loader(api, cfg)
 
         local xmlattrlang = {
           hidden = function(obj, value)
+            api.log(3, 'setting hidden=%s on %s', tostring(value), api.GetDebugName(obj))
             local ud = api.UserData(obj)
             ud.shown = not value
-            ud.visible = ud.shown and (not ud.parent or api.UserData(ud.parent).visible)
           end,
           parent = function(obj, value)
             api.log(3, 'setting parent to ' .. value)
             api.SetParent(obj, api.env[value])
-            local ud = api.UserData(obj)
-            ud.visible = ud.shown and (not ud.parent or api.UserData(ud.parent).visible)
           end,
           parentarray = function(obj, value)
             api.log(3, 'attaching to array ' .. value)
@@ -280,11 +280,6 @@ local function loader(api, cfg)
             if parent then
               parent[value] = obj
             end
-          end,
-          protected = function(obj, value)
-            local ud = api.UserData(obj)
-            ud.explicitlyProtected = value
-            ud.protected = value
           end,
         }
 
@@ -308,6 +303,41 @@ local function loader(api, cfg)
           end
         end
 
+        local earlyAttrs = {
+          'parent',
+          'parentkey',
+          'parentarray'
+        }
+        local earlyAttrMap = (function()
+          local m = {}
+          for _, k in ipairs(earlyAttrs) do
+            m[k] = true
+          end
+          return m
+        end)()
+
+        local function mkInitEarlyAttrsNotRecursive(e)
+          return function(obj)
+            for _, ek in ipairs(earlyAttrs) do
+              for k, v in pairs(e.attr) do
+                if k == ek then
+                  xmlattrlang[k](obj, v)
+                end
+              end
+            end
+          end
+        end
+
+        local function mkInitEarlyAttrs(e)
+          local notRecursive = mkInitEarlyAttrsNotRecursive(e)
+          return function(obj)
+            for _, inh in ipairs(e.attr.inherits or {}) do
+              api.templates[string.lower(inh)].initEarlyAttrs(obj)
+            end
+            notRecursive(obj)
+          end
+        end
+
         local function mkInitAttrsNotRecursive(e)
           return function(obj)
             local env = ctx.useAddonEnv and addonEnv or api.env
@@ -317,21 +347,23 @@ local function loader(api, cfg)
             for _, m in ipairs(e.attr.securemixin or {}) do
               mixin(obj, env[m])
             end
-            -- Evaluate parent= before others.
+            local attrimpls = (xmlimpls[e.type] or intrinsics[e.type]).attrs
             for k, v in pairs(e.attr) do
-              if k == 'parent' then
-                xmlattrlang.parent(obj, v)
-              end
-            end
-            local attrimpls = xmlimpls[e.type].attrs
-            for k, v in pairs(e.attr) do
-              if k ~= 'parent' then
-                local methodName = attrimpls[k]
-                local fn = xmlattrlang[k]
-                if methodName then
-                  api.uiobjectTypes[e.type].metatable.__index[methodName](obj, v)
-                elseif fn then
-                  xmlattrlang[k](obj, v)
+              if not earlyAttrMap[k] then
+                local attrimpl = attrimpls[k]
+                if attrimpl then
+                  if attrimpl.method then
+                    api.uiobjectTypes[e.type].metatable.__index[attrimpl.method](obj, v)
+                  elseif attrimpl.field then
+                    api.UserData(obj)[attrimpl.field] = v
+                  else
+                    error('invalid attribute impl for ' .. k)
+                  end
+                else
+                  local fn = xmlattrlang[k]
+                  if fn then
+                    fn(obj, v)
+                  end
                 end
               end
             end
@@ -367,6 +399,7 @@ local function loader(api, cfg)
 
         function loadElement(e, parent)
           if api.IsIntrinsicType(e.type) then
+            local initEarlyAttrs = mkInitEarlyAttrs(e)
             local initAttrs = mkInitAttrs(e)
             local initKids = mkInitKids(e)
             local virtual = e.attr.virtual
@@ -384,6 +417,7 @@ local function loader(api, cfg)
                 constructor = function(self, xmlattr)
                   base.constructor(self, xmlattr)
                   self.__intrinsicHack = true
+                  initEarlyAttrs(self)
                   initAttrs(self)
                   initKids(self)
                   self.__intrinsicHack = nil
@@ -392,6 +426,7 @@ local function loader(api, cfg)
                 metatable = { __index = base.metatable.__index },
                 name = e.attr.name,
               }
+              intrinsics[name] = xmlimpls[basetype]
             else
               local ltype = string.lower(e.type)
               if (ltype == 'font' and e.attr.name) or (virtual and not ctx.ignoreVirtual) then
@@ -402,6 +437,7 @@ local function loader(api, cfg)
                 end
                 api.log(3, 'creating template ' .. e.attr.name)
                 api.templates[name] = {
+                  initEarlyAttrs = initEarlyAttrs,
                   initAttrs = initAttrs,
                   initKids = initKids,
                   name = e.attr.name,
@@ -419,6 +455,7 @@ local function loader(api, cfg)
                   table.insert(templates, template)
                 end
                 table.insert(templates, {
+                  initEarlyAttrs = mkInitEarlyAttrsNotRecursive(e),
                   initAttrs = mkInitAttrsNotRecursive(e),
                   initKids = mkInitKidsNotRecursive(e),
                 })
@@ -449,7 +486,7 @@ local function loader(api, cfg)
       end
 
       return api.CallSafely(function()
-        local root = xml.validate(xmlstr)
+        local root = parseXml(xmlstr)
         local ctx = {
           ignoreVirtual = false,
           useAddonEnv = false,

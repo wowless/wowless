@@ -1,3 +1,4 @@
 return (function(self)
-  return u(self).protected, u(self).explicitlyProtected
+  -- TODO walk anchor hierarchy
+  return u(self).explicitlyProtected, u(self).explicitlyProtected
 end)(...)

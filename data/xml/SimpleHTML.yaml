@@ -1,6 +1,6 @@
 ---
 name: SimpleHTML
-children:
+contents:
 - FontString
 - FontStringHeader1
 - FontStringHeader2

@@ -2,9 +2,10 @@
 name: CheckButton
 attributes:
   checked:
-    impl: SetChecked
+    impl:
+      method: SetChecked
     type: bool
-children:
+contents:
 - CheckedTexture
 - DisabledCheckedTexture
 extends: Button

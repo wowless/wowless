@@ -5,21 +5,33 @@ local function preprocess(tree)
   for k, v in pairs(tree) do
     local attrs = mixin({}, v.attributes)
     local kids = {}
-    for _, kid in ipairs(v.children or {}) do
-      kids[kid:lower()] = true
+    local text = false
+    if type(v.contents) == 'table' then
+      for _, kid in ipairs(v.contents or {}) do
+        kids[kid:lower()] = true
+      end
+    elseif v.contents == 'text' then
+      text = true
+    elseif v.contents ~= nil then
+      error('invalid contents on ' .. k)
     end
     local supertypes = { [k:lower()] = true }
-    local text = v.text
     local t = v
     while t.extends do
       supertypes[t.extends:lower()] = true
       t = tree[t.extends]
       mixin(attrs, t.attributes)
-      for _, kid in ipairs(t.children or {}) do
-        kids[kid:lower()] = true
+      if type(t.contents) == 'table' then
+        for _, kid in ipairs(t.contents or {}) do
+          kids[kid:lower()] = true
+        end
+      elseif t.contents == 'text' then
+        text = true
+      elseif t.contents ~= nil then
+        error('invalid contents on ' .. k)
       end
-      text = text or t.text
     end
+    assert(not text or #kids == 0, 'both text and kids on ' .. k)
     newtree[k:lower()] = mixin({}, v, {
       attributes = attrs,
       children = kids,
@@ -106,12 +118,12 @@ local attributeTypes = {
   end,
 }
 
-local function validateRoot(root)
+local function parseRoot(root, intrinsics)
   local warnings = {}
   local function run(e, tn, tk)
     assert(e._type == 'ELEMENT', 'invalid xml type ' .. e._type .. ' on child of ' .. tn)
     local tname = string.lower(e._name)
-    local ty = lang[tname]
+    local ty = lang[tname] or intrinsics[tname]
     assert(ty, tname .. ' is not a type')
     assert(not ty.virtual, tname .. ' is virtual and cannot be instantiated')
     local extends = false
@@ -165,6 +177,14 @@ local function validateRoot(root)
           end
         end
       end
+      if resultAttrs.intrinsic and resultAttrs.name then
+        intrinsics[resultAttrs.name:lower()] = {
+          attributes = ty.attributes,
+          children = ty.children,
+          supertypes = mixin({}, ty.supertypes, { tname = true }),
+          text = ty.text,
+        }
+      end
       return setmetatable({
         attr = setmetatable(resultAttrs, attrMTs[tname]),
         kids = resultKids,
@@ -209,10 +229,11 @@ local function xml2dom(xmlstr)
   return stack[1]._children[1]
 end
 
-local function validate(xmlstr)
-  return validateRoot(xml2dom(xmlstr))
-end
-
 return {
-  validate = validate,
+  newParser = function()
+    local intrinsics = {}
+    return function(xmlstr)
+      return parseRoot(xml2dom(xmlstr), intrinsics)
+    end
+  end,
 }

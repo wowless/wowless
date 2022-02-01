@@ -5,6 +5,6 @@ attributes:
     type: number
   y:
     type: number
-children:
+contents:
 - Color
 - Offset

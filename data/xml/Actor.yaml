@@ -7,5 +7,5 @@ attributes:
     type: string
   virtual:
     type: bool
-children:
+contents:
 - Scripts

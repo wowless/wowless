@@ -21,7 +21,7 @@ attributes:
     type: bool
   visiblebytes:
     type: number
-children:
+contents:
 - FontString
 - HighlightColor
 - TextInsets

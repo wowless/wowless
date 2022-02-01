@@ -3,5 +3,5 @@ name: Origin
 attributes:
   point:
     type: string
-children:
+contents:
 - Offset

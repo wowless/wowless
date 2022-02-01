@@ -62,104 +62,6 @@ local function new(log)
     return xpcall(fun, ErrorHandler)
   end
 
-  local function RunScript(obj, name, ...)
-    local ud = u(obj)
-    if ud.scripts then
-      local args = {...}
-      for i = 0, 2 do
-        local script = ud.scripts[i][string.lower(name)]
-        if script then
-          log(4, 'begin %s[%d] for %s %s', name, i, ud.type, tostring(ud.name))
-          CallSafely(function() script(obj, unpack(args)) end)
-          log(4, 'end %s[%d] for %s %s', name, i, ud.type, tostring(ud.name))
-        end
-      end
-    end
-  end
-
-  local function CreateUIObject(typename, objnamearg, parent, addonEnv, ...)
-    local objname = ParentSub(objnamearg, parent)
-    assert(typename, 'must specify type for ' .. tostring(objname))
-    local type = uiobjectTypes[typename]
-    assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
-    assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
-    log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
-    local obj = setmetatable({}, type.metatable)
-    obj[0] = newproxy()
-    userdata[obj[0]] = {
-      name = objname,
-      type = typename,
-    }
-    SetParent(obj, parent)
-    type.constructor(obj)
-    for _, template in ipairs({...}) do
-      log(4, 'initializing attributes for ' .. tostring(template.name))
-      template.initAttrs(obj)
-    end
-    if objname then
-      objname = ParentSub(objnamearg, u(obj).parent)
-      u(obj).name = objname
-      if env[objname] then
-        log(1, 'overwriting global ' .. objname)
-      end
-      env[objname] = obj
-      if addonEnv then
-        addonEnv[objname] = obj
-      end
-    end
-    for _, template in ipairs({...}) do
-      log(4, 'initializing children for ' .. tostring(template.name))
-      template.initKids(obj)
-    end
-    RunScript(obj, 'OnLoad')
-    if u(obj).visible then
-      RunScript(obj, 'OnShow')
-    end
-    return obj
-  end
-
-  local function CreateFrame(type, name, parent, templateNames)
-    local ltype = string.lower(type)
-    assert(IsIntrinsicType(ltype), type .. ' is not intrinsic')
-    assert(InheritsFrom(ltype, 'frame'), type .. ' does not inherit from frame')
-    local tmpls = {}
-    for templateName in string.gmatch(templateNames or '', '[^, ]+') do
-      local template = templates[string.lower(templateName)]
-      assert(template, 'unknown template ' .. templateName)
-      table.insert(tmpls, template)
-    end
-    return CreateUIObject(ltype, name, parent, nil, unpack(tmpls))
-  end
-
-  local function SetScript(obj, name, bindingType, script)
-    local ud = u(obj)
-    log(4, 'setting %s[%d] for %s %s', name, bindingType, ud.type, tostring(ud.name))
-    ud.scripts[bindingType][string.lower(name)] = script
-  end
-
-  local function SendEvent(event, ...)
-    log(1, 'sending event %s', event)
-    local ev = string.lower(event)
-    for _, frame in ipairs(frames) do
-      local ud = u(frame)
-      if ud.registeredEvents[ev] or ud.registeredAllEvents then
-        RunScript(frame, 'OnEvent', event, ...)
-      end
-    end
-  end
-
-  local function NextFrame()
-    for _, frame in ipairs(frames) do
-      if u(frame).visible then
-        RunScript(frame, 'OnUpdate', 1)
-      end
-    end
-  end
-
-  local function GetErrorCount()
-    return errors
-  end
-
   local function GetDebugName(frame)
     local ud = u(frame)
     local name = ud.name
@@ -192,6 +94,108 @@ local function new(log)
       parent = pud.parent
     end
     return name
+  end
+
+  local function RunScript(obj, name, ...)
+    local ud = u(obj)
+    if ud.scripts then
+      local args = {...}
+      for i = 0, 2 do
+        local script = ud.scripts[i][string.lower(name)]
+        if script then
+          log(4, 'begin %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
+          CallSafely(function() script(obj, unpack(args)) end)
+          log(4, 'end %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
+        end
+      end
+    end
+  end
+
+  local function CreateUIObject(typename, objnamearg, parent, addonEnv, ...)
+    local objname = ParentSub(objnamearg, parent)
+    assert(typename, 'must specify type for ' .. tostring(objname))
+    local type = uiobjectTypes[typename]
+    assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
+    assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
+    log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
+    local obj = setmetatable({}, type.metatable)
+    obj[0] = newproxy()
+    userdata[obj[0]] = {
+      name = objname,
+      type = typename,
+    }
+    SetParent(obj, parent)
+    type.constructor(obj)
+    for _, template in ipairs({...}) do
+      log(4, 'initializing early attributes for ' .. tostring(template.name))
+      template.initEarlyAttrs(obj)
+    end
+    if objname then
+      objname = ParentSub(objnamearg, u(obj).parent)
+      u(obj).name = objname
+      if env[objname] then
+        log(1, 'overwriting global ' .. objname)
+      end
+      env[objname] = obj
+      if addonEnv then
+        addonEnv[objname] = obj
+      end
+    end
+    for _, template in ipairs({...}) do
+      log(4, 'initializing attributes for ' .. tostring(template.name))
+      template.initAttrs(obj)
+    end
+    for _, template in ipairs({...}) do
+      log(4, 'initializing children for ' .. tostring(template.name))
+      template.initKids(obj)
+    end
+    RunScript(obj, 'OnLoad')
+    if InheritsFrom(typename, 'region') and obj:IsVisible() then
+      RunScript(obj, 'OnShow')
+    end
+    return obj
+  end
+
+  local function CreateFrame(type, name, parent, templateNames)
+    local ltype = string.lower(type)
+    assert(IsIntrinsicType(ltype), type .. ' is not intrinsic')
+    assert(InheritsFrom(ltype, 'frame'), type .. ' does not inherit from frame')
+    local tmpls = {}
+    for templateName in string.gmatch(templateNames or '', '[^, ]+') do
+      local template = templates[string.lower(templateName)]
+      assert(template, 'unknown template ' .. templateName)
+      table.insert(tmpls, template)
+    end
+    return CreateUIObject(ltype, name, parent, nil, unpack(tmpls))
+  end
+
+  local function SetScript(obj, name, bindingType, script)
+    local ud = u(obj)
+    log(4, 'setting %s[%d] for %s %s', name, bindingType, ud.type, GetDebugName(obj))
+    ud.scripts[bindingType][string.lower(name)] = script
+  end
+
+  local function SendEvent(event, ...)
+    log(1, 'sending event %s', event)
+    local ev = string.lower(event)
+    for _, frame in ipairs(frames) do
+      local ud = u(frame)
+      if ud.registeredEvents[ev] or ud.registeredAllEvents then
+        RunScript(frame, 'OnEvent', event, ...)
+      end
+    end
+  end
+
+  local function NextFrame()
+    for _, frame in ipairs(frames) do
+      if frame:IsVisible() then
+        RunScript(frame, 'OnUpdate', 1)
+      end
+    end
+  end
+
+  local function GetErrorCount()
+    return errors
   end
 
   for _, data in pairs(require('wowapi.data').state) do

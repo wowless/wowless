@@ -17,7 +17,7 @@ attributes:
     type: string
   wordwrap:
     type: bool
-children:
+contents:
 - Color
 - FontHeight
 - Shadow

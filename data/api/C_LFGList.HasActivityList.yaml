@@ -1,0 +1,9 @@
+---
+name: C_LFGList.HasActivityList
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs:
+- type: bool

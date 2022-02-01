@@ -11,5 +11,5 @@ attributes:
     type: string
   method:
     type: string
-text: true
+contents: text
 virtual: true

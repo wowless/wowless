@@ -4,5 +4,5 @@ attributes:
   alphabet:
     required: true
     type: string
-children:
+contents:
 - Font

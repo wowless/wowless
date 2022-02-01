@@ -3,6 +3,6 @@ name: Path
 attributes:
   curve:
     type: string
-children:
+contents:
 - ControlPoints
 extends: Animation

@@ -2,12 +2,18 @@
 name: LayoutFrame
 attributes:
   alpha:
+    impl:
+      method: SetAlpha
     type: number
   hidden:
     type: bool
   ignoreparentalpha:
+    impl:
+      method: SetIgnoreParentAlpha
     type: bool
   ignoreparentscale:
+    impl:
+      method: SetIgnoreParentScale
     type: bool
   inherits:
     type: stringlist
@@ -20,12 +26,16 @@ attributes:
   parentkey:
     type: string
   scale:
+    impl:
+      method: SetScale
     type: number
   setallpoints:
+    impl:
+      method: SetAllPoints
     type: bool
   virtual:
     type: bool
-children:
+contents:
 - Anchors
 - Color
 - KeyValues

@@ -7,7 +7,16 @@ type:
         mapof:
           record:
             impl:
-              type: string
+              type:
+                oneof:
+                - record:
+                    field:
+                      required: true
+                      type: string
+                - record:
+                    method:
+                      required: true
+                      type: string
             required:
               type: boolean
             type:
@@ -18,10 +27,12 @@ type:
                 - literal: number
                 - literal: string
                 - literal: stringlist
-    children:
+    contents:
       type:
-        sequenceof:
-          ref: xml
+        oneof:
+        - literal: text
+        - sequenceof:
+            ref: xml
     extends:
       type:
         ref: xml
@@ -50,7 +61,5 @@ type:
     name:
       required: true
       type: string
-    text:
-      type: boolean
     virtual:
       type: boolean

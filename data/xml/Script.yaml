@@ -3,4 +3,4 @@ name: Script
 attributes:
   file:
     type: string
-text: true
+contents: text

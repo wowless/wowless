@@ -1,6 +1,6 @@
 ---
 name: Bindings
-children:
+contents:
 - Binding
 - ModifiedClick
 impl: transparent

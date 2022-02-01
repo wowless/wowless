@@ -1,5 +1,5 @@
 ---
 name: Dimension
-children:
+contents:
 - AbsDimension
 virtual: true
