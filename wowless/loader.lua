@@ -353,13 +353,15 @@ local function loader(api, cfg)
             for _, m in ipairs(e.attr.securemixin or {}) do
               mixin(obj, env[m])
             end
-            local attrimpls = (xmlimpls[e.type] or intrinsics[e.type]).attrs
+            local objty = api.UserData(obj).type
+            -- This assumes that uiobject types and xml types are the same "space" of strings.
+            local attrimpls = (xmlimpls[objty] or intrinsics[objty]).attrs
             for k, v in pairs(e.attr) do
               if not earlyAttrMap[k] then
                 local attrimpl = attrimpls[k]
                 if attrimpl then
                   if attrimpl.method then
-                    local fn = api.uiobjectTypes[e.type].metatable.__index[attrimpl.method]
+                    local fn = api.uiobjectTypes[objty].metatable.__index[attrimpl.method]
                     if type(v) == 'table' then -- stringlist
                       fn(obj, unpack(v))
                     else
