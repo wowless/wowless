@@ -97,7 +97,7 @@ local function doGetFn(api, loader, apicfg)
   elseif apicfg.status == 'implemented' then
     local args = {}
     local frameworks = {
-      api = api,  -- TODO replace api framework with something finer grained
+      api = api, -- TODO replace api framework with something finer grained
       env = api.env,
       loader = loader,
     }
@@ -108,7 +108,9 @@ local function doGetFn(api, loader, apicfg)
       table.insert(args, api.states[st])
     end
     for _, db in ipairs(apicfg.dbs or {}) do
-      table.insert(args, function() return db2rows(api.env, db) end)
+      table.insert(args, function()
+        return db2rows(api.env, db)
+      end)
     end
     local impl = data.impl[apicfg.name]
     return function(...)
@@ -132,19 +134,20 @@ end
 
 local function getFn(api, loader, apicfg)
   local stub = doGetFn(api, loader, apicfg)
-  return apicfg.outputs == nil and stub or function(...)
-    return (function(...)
-      for idx, out in ipairs(apicfg.outputs) do
-        if out.mixin then
-          local t = select(idx, ...)
-          if t then
-            api.env.Mixin(t, api.env[out.mixin])
+  return apicfg.outputs == nil and stub
+    or function(...)
+      return (function(...)
+        for idx, out in ipairs(apicfg.outputs) do
+          if out.mixin then
+            local t = select(idx, ...)
+            if t then
+              api.env.Mixin(t, api.env[out.mixin])
+            end
           end
         end
-      end
-      return ...
-    end)(stub(...))
-  end
+        return ...
+      end)(stub(...))
+    end
 end
 
 local function resolveUnit(units, unit)
@@ -166,8 +169,8 @@ local function loadFunctions(api, loader)
             if arg == nil then
               assert(
                 param.nilable or param.default ~= nil,
-                ('arg %d (%q) of %q is not nilable, but nil was passed'):format(
-                  i, tostring(param.name), fn))
+                ('arg %d (%q) of %q is not nilable, but nil was passed'):format(i, tostring(param.name), fn)
+              )
             else
               local ty = type(arg)
               -- Simulate C lua_tonumber and lua_tostring.
@@ -188,7 +191,13 @@ local function loadFunctions(api, loader)
               assert(
                 ty == param.type,
                 ('arg %d (%q) of %q is of type %q, but %q was passed'):format(
-                  i, tostring(param.name), fn, param.type, ty))
+                  i,
+                  tostring(param.name),
+                  fn,
+                  param.type,
+                  ty
+                )
+              )
               args[i] = arg
             end
           end
@@ -198,10 +207,12 @@ local function loadFunctions(api, loader)
           if #apicfg.inputs == 1 then
             return bfn(check(apicfg.inputs[1], ...))
           else
-            local t = {...}
+            local t = { ... }
             local n = select('#', ...)
             for _, sig in ipairs(apicfg.inputs) do
-              local result = {pcall(function() return check(sig, unpack(t, 1, n)) end)}
+              local result = { pcall(function()
+                return check(sig, unpack(t, 1, n))
+              end) }
               if result[1] then
                 return bfn(unpack(result, 2))
               end
@@ -214,19 +225,21 @@ local function loadFunctions(api, loader)
     end)()
     local function wrapimpl(...)
       api.log(4, 'entering %s', apicfg.name)
-      local t = {...}
+      local t = { ... }
       local n = select('#', ...)
       return (function(success, ...)
         api.log(4, 'leaving %s (%s)', apicfg.name, success and 'success' or 'failure')
         assert(success, ...)
         return ...
-      end)(pcall(function() return impl(unpack(t, 1, n)) end))
+      end)(pcall(function()
+        return impl(unpack(t, 1, n))
+      end))
     end
     local dot = fn:find('%.')
     if dot then
-      local p = fn:sub(1, dot-1)
+      local p = fn:sub(1, dot - 1)
       fns[p] = fns[p] or {}
-      fns[p][fn:sub(dot+1)] = wrapimpl
+      fns[p][fn:sub(dot + 1)] = wrapimpl
     else
       fns[fn] = wrapimpl
     end

@@ -91,7 +91,7 @@ local function names(data, rend)
         table.insert(result, s)
       elseif not refs[v] then
         local tv = sub(v, 1, 1)
-        if tv == 't' or tv == 'u' or tv =='f' then
+        if tv == 't' or tv == 'u' or tv == 'f' then
           table.insert(stack, { s, v })
         end
       end

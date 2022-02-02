@@ -2,10 +2,13 @@ describe('schema', function()
   describe('validate', function()
     local accept, reject = (function()
       local validate = require('wowapi.schema').validate
-      return validate, function(schema, value)
-        local success, msg = pcall(function() validate(schema, value) end)
-        assert.False(success, msg)
-      end
+      return validate,
+        function(schema, value)
+          local success, msg = pcall(function()
+            validate(schema, value)
+          end)
+          assert.False(success, msg)
+        end
     end)()
     describe('boolean', function()
       it('rejects nil', function()
@@ -131,7 +134,7 @@ describe('schema', function()
           record = {
             foo = { type = 'string' },
             bar = { required = true, type = 'string' },
-          }
+          },
         }
         reject(rty, {})
         reject(rty, { foo = 'foo' })

@@ -1,5 +1,5 @@
 local function mixin(t, ...)
-  for _, kv in ipairs({...}) do
+  for _, kv in ipairs({ ... }) do
     for k, v in pairs(kv) do
       t[k] = v
     end
@@ -11,7 +11,7 @@ local function recursiveMixin(t, u, failOnOverwrite)
   for k, v in pairs(u) do
     local tv = t[k]
     if tv == nil or type(tv) ~= 'table' or type(v) ~= 'table' then
-      assert(tv == nil or not failOnOverwrite, ("overwriting %q"):format(k))
+      assert(tv == nil or not failOnOverwrite, ('overwriting %q'):format(k))
       t[k] = v
     else
       recursiveMixin(tv, v, failOnOverwrite)
@@ -60,7 +60,7 @@ local readfile = (function()
 end)()
 
 local function strjoin(sep, ...)
-  return table.concat({...}, sep)
+  return table.concat({ ... }, sep)
 end
 
 local function strsplit(sep, s, n)
@@ -69,7 +69,7 @@ local function strsplit(sep, s, n)
   local result = {}
   while true do
     local pos = string.find(s, '%' .. sep)
-    if not pos or #result == n-1 then
+    if not pos or #result == n - 1 then
       table.insert(result, s)
       return unpack(result)
     end

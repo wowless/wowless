@@ -5,6 +5,10 @@ repos:
   - id: check-yaml
   - id: end-of-file-fixer
   - id: trailing-whitespace
+- repo: https://github.com/JohnnyMorganz/StyLua
+  rev: v0.12.1
+  hooks:
+  - id: stylua
 - repo: https://github.com/shellcheck-py/shellcheck-py
   rev: v0.8.0.1
   hooks:

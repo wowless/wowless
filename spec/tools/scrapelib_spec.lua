@@ -21,7 +21,7 @@ describe('tools.scrapelib', function()
       },
       [3] = {},
       [4] = {
-        sFrob = 'sMoo'
+        sFrob = 'sMoo',
       },
     })
     assert.same('Moo', data:resolve(data:global('sFoo', 'sBaz', 'sFrob')))
@@ -45,6 +45,8 @@ describe('tools.scrapelib', function()
   end)
   it('fails to resolve loops', function()
     local data = scrape({ { sFoo = 't1' } })
-    assert.False(pcall(function() data:resolve(data:global()) end))
+    assert.False(pcall(function()
+      data:resolve(data:global())
+    end))
   end)
 end)

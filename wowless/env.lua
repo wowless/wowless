@@ -133,7 +133,7 @@ local function dump(api)
     print(block(x, config))
   end
   return function(...)
-    for _, x in ipairs({...}) do
+    for _, x in ipairs({ ... }) do
       d(x)
       if api.UserData(x) then
         print('===[begin userdata]===')

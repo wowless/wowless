@@ -1,5 +1,4 @@
 expose('loader', function()
-
   local api, loader
   before_each(function()
     api = require('wowless.api').new(function() end)
@@ -101,7 +100,7 @@ expose('loader', function()
       </Ui>
     ]])
     assert.same(0, api.GetErrorCount())
-    assert.same({'Frame3', 'Frame2', 'Frame1'}, log)
+    assert.same({ 'Frame3', 'Frame2', 'Frame1' }, log)
   end)
 
   it('runs parentKey and parentArray before parent OnLoad', function()
@@ -133,7 +132,7 @@ expose('loader', function()
 
   it('runs OnShow on new non-hidden frames', function()
     local log = {}
-    for _, h in ipairs({'OnLoad', 'OnShow', 'OnHide'}) do
+    for _, h in ipairs({ 'OnLoad', 'OnShow', 'OnHide' }) do
       api.env['Logger_' .. h] = function(self)
         table.insert(log, h .. ' ' .. self:GetName())
       end

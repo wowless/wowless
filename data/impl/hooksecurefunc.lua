@@ -1,7 +1,7 @@
 local env, arg1, arg2, arg3 = ...
 
 local function returner(...)
-  return {...}, select('#', ...)
+  return { ... }, select('#', ...)
 end
 
 local tbl, name, fn
