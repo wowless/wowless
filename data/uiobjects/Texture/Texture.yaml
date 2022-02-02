@@ -43,6 +43,8 @@ methods:
     status: unimplemented
   SetMask:
     status: unimplemented
+  SetNonBlocking:
+    status: unimplemented
   SetRotation:
     status: unimplemented
   SetSnapToPixelGrid:

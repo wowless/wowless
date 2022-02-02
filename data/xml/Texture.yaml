@@ -2,24 +2,42 @@
 name: Texture
 attributes:
   alphamode:
+    impl:
+      method: SetBlendMode
     type: string
   atlas:
+    impl:
+      method: SetAtlas
     type: string
   desaturated:
+    impl:
+      method: SetDesaturated
     type: bool
   file:
+    impl:
+      method: SetTexture
     type: string
   horiztile:
+    impl:
+      method: SetHorizTile
     type: bool
   nonblocking:
+    impl:
+      method: SetNonBlocking
     type: bool
   snaptopixelgrid:
+    impl:
+      method: SetSnapToPixelGrid
     type: bool
   texelsnappingbias:
+    impl:
+      method: SetTexelSnappingBias
     type: number
   useatlassize:
     type: bool
   verttile:
+    impl:
+      method: SetVertTile
     type: bool
 contents:
 - Animations
