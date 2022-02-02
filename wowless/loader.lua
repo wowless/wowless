@@ -360,7 +360,7 @@ local function loader(api, cfg)
                 if attrimpl then
                   if attrimpl.method then
                     local fn = api.uiobjectTypes[e.type].metatable.__index[attrimpl.method]
-                    if type(v) == 'table' then  -- stringlist
+                    if type(v) == 'table' then -- stringlist
                       fn(obj, unpack(v))
                     else
                       fn(obj, v)
