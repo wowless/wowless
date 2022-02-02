@@ -2,7 +2,11 @@
 name: Alpha
 attributes:
   fromalpha:
+    impl:
+      method: SetFromAlpha
     type: number
   toalpha:
+    impl:
+      method: SetToAlpha
     type: number
 extends: Animation

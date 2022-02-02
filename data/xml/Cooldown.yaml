@@ -2,10 +2,16 @@
 name: Cooldown
 attributes:
   drawedge:
+    impl:
+      method: SetDrawEdge
     type: bool
   hidecountdownnumbers:
+    impl:
+      method: SetHideCountdownNumbers
     type: bool
   reverse:
+    impl:
+      method: SetReverse
     type: bool
 contents:
 - BlingTexture
