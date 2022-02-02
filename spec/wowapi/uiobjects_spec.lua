@@ -6,6 +6,9 @@ describe('uiobjects', function()
       GetDebugName = function()
         return ''
       end,
+      InheritsFrom = function()
+        return true
+      end,
       UserData = function()
         return {}
       end,

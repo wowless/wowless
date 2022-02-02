@@ -120,6 +120,10 @@ local function mkBaseUIObjectTypes(api)
     local function wrap(fname, fn)
       setfenv(fn, env)
       return function(self, ...)
+        assert(
+          api.InheritsFrom(u(self).type, name:lower()),
+          ('invalid self to %s.%s, got %s'):format(name, fname, tostring(u(self).type))
+        )
         local dname = api.GetDebugName(self)
         dname = dname == '' and ('<' .. name .. '>') or dname
         log(4, 'entering %s:%s', dname, fname)

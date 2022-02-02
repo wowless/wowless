@@ -474,7 +474,10 @@ local function loader(api, cfg)
             if type(impl) == 'table' then
               local elt = impl.argument == 'lastkid' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
               local obj = loadElement(elt, parent)
-              api.uiobjectTypes[impl.parenttype:lower()].metatable.__index[impl.parentmethod](parent, obj)
+              -- TODO find if this if needs to be broader to everything here including kids
+              if api.InheritsFrom(api.UserData(parent).type, impl.parenttype:lower()) then
+                api.uiobjectTypes[impl.parenttype:lower()].metatable.__index[impl.parentmethod](parent, obj)
+              end
             elseif impl == 'transparent' then
               loadElements(e.kids, parent)
             elseif fn then
