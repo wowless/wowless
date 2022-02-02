@@ -353,7 +353,12 @@ local function loader(api, cfg)
                 local attrimpl = attrimpls[k]
                 if attrimpl then
                   if attrimpl.method then
-                    api.uiobjectTypes[e.type].metatable.__index[attrimpl.method](obj, v)
+                    local fn = api.uiobjectTypes[e.type].metatable.__index[attrimpl.method]
+                    if type(v) == 'table' then  -- stringlist
+                      fn(obj, unpack(v))
+                    else
+                      fn(obj, v)
+                    end
                   elseif attrimpl.field then
                     api.UserData(obj)[attrimpl.field] = v
                   else

@@ -2,8 +2,12 @@
 name: Button
 attributes:
   motionscriptswhiledisabled:
+    impl:
+      method: SetMotionScriptsWhileDisabled
     type: bool
   registerforclicks:
+    impl:
+      method: RegisterForClicks
     type: stringlist
   text:
     type: string
