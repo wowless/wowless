@@ -15,10 +15,10 @@ local globals = {
   Minimap = { 'Minimap' },
   ModelScene = { 'ModelPreviewFrame', 'Display', 'ModelScene' },
   MovieFrame = { 'MovieFrame' },
---  OffScreenFrame = { 'OffScreenFrame' },
+  --  OffScreenFrame = { 'OffScreenFrame' },
   Slider = { 'OpacitySliderFrame' },
   StatusBar = { 'PlayerFrameHealthBar' },
---  SimpleHTML = 'ItemTextPageText',
+  --  SimpleHTML = 'ItemTextPageText',
   WorldFrame = { 'WorldFrame' },
 }
 

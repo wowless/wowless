@@ -1,2 +1,2 @@
 local cvarDefaults, cvars, var = ...
-return tostring(cvars[var] or cvarDefaults[var]) == "1"
+return tostring(cvars[var] or cvarDefaults[var]) == '1'

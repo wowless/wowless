@@ -43,29 +43,29 @@ end
 
 local function api2yaml(api)
   local emit = emitter().emit
-  assert(emit({type = 'STREAM_START'}))
-  assert(emit({type = 'DOCUMENT_START'}))
+  assert(emit({ type = 'STREAM_START' }))
+  assert(emit({ type = 'DOCUMENT_START' }))
   local function run(v)
     local ty = type(v)
     if v == require('lyaml').null then
-      assert(emit({type = 'SCALAR', value = 'null'}))
+      assert(emit({ type = 'SCALAR', value = 'null' }))
     elseif ty == 'number' or ty == 'boolean' then
-      assert(emit({type = 'SCALAR', value = tostring(v)}))
+      assert(emit({ type = 'SCALAR', value = tostring(v) }))
     elseif ty == 'string' then
       local sq = v == '' or v == 'true' or v == 'false'
-      assert(emit({type = 'SCALAR', value = v, style = sq and 'SINGLE_QUOTED' or nil}))
+      assert(emit({ type = 'SCALAR', value = v, style = sq and 'SINGLE_QUOTED' or nil }))
     elseif ty == 'table' then
       if not next(v) then
-        assert(emit({type = 'MAPPING_START'}))
-        assert(emit({type = 'MAPPING_END'}))
+        assert(emit({ type = 'MAPPING_START' }))
+        assert(emit({ type = 'MAPPING_END' }))
       elseif isarray(v) then
-        assert(emit({type = 'SEQUENCE_START'}))
+        assert(emit({ type = 'SEQUENCE_START' }))
         for _, value in ipairs(v) do
           run(value)
         end
-        assert(emit({type = 'SEQUENCE_END'}))
+        assert(emit({ type = 'SEQUENCE_END' }))
       else
-        assert(emit({type = 'MAPPING_START'}))
+        assert(emit({ type = 'MAPPING_START' }))
         local sortedKeys = {}
         for name in pairs(v) do
           table.insert(sortedKeys, name)
@@ -87,15 +87,15 @@ local function api2yaml(api)
             run(value)
           end
         end
-        assert(emit({type = 'MAPPING_END'}))
+        assert(emit({ type = 'MAPPING_END' }))
       end
     else
       error('invalid type ' .. ty)
     end
   end
   run(api)
-  assert(emit({type = 'DOCUMENT_END', implicit = true}))
-  return select(2, assert(emit({type = 'STREAM_END'})))
+  assert(emit({ type = 'DOCUMENT_END', implicit = true }))
+  return select(2, assert(emit({ type = 'STREAM_END' })))
 end
 
 return {

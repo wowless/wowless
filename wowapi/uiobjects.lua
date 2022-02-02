@@ -121,15 +121,17 @@ local function mkBaseUIObjectTypes(api)
       setfenv(fn, env)
       return function(self, ...)
         local dname = api.GetDebugName(self)
-        dname = dname == "" and ("<" .. name .. ">") or dname
+        dname = dname == '' and ('<' .. name .. '>') or dname
         log(4, 'entering %s:%s', dname, fname)
-        local t = {...}
+        local t = { ... }
         local n = select('#', ...)
         return (function(success, ...)
           log(4, 'leaving %s:%s (%s)', dname, fname, success and 'success' or 'failure')
           assert(success, ...)
           return ...
-        end)(pcall(function() return fn(self, unpack(t, 1, n)) end))
+        end)(pcall(function()
+          return fn(self, unpack(t, 1, n))
+        end))
       end
     end
     local function wrapAll(map)
@@ -191,7 +193,9 @@ local function mkBaseUIObjectTypes(api)
           assert(output.type == 'number', ('unsupported type in %s.%s'):format(name, mname))
           table.insert(t, 1)
         end
-        mixin[mname] = function() return unpack(t, 1, n) end
+        mixin[mname] = function()
+          return unpack(t, 1, n)
+        end
       else
         error(('unsupported method status %q on %s.%s'):format(method.status, name, mname))
       end

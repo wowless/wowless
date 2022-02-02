@@ -71,14 +71,15 @@ local function loader(api, cfg)
   end
 
   local function forAddon(addonName, addonEnv)
-
     local function loadstr(str, filename)
       return assert(loadstring(str, '@' .. path.normalize(filename):gsub('/', '\\')))
     end
 
     local function loadLuaString(filename, str)
       local fn = setfenv(loadstr(str, filename), api.env)
-      api.CallSafely(function() fn(addonName, addonEnv) end)
+      api.CallSafely(function()
+        fn(addonName, addonEnv)
+      end)
     end
 
     local loadFile
@@ -87,7 +88,6 @@ local function loader(api, cfg)
       local dir = path.dirname(filename)
 
       local function usingContext(ctx)
-
         local function withContext(update)
           return usingContext(mixin({}, ctx, update))
         end
@@ -107,7 +107,7 @@ local function loader(api, cfg)
             if anchor.attr.relativeto then
               relativeTo = api.ParentSub(anchor.attr.relativeto, parent:GetParent())
             elseif anchor.attr.relativekey then
-              local parts = {util.strsplit('.', anchor.attr.relativekey)}
+              local parts = { util.strsplit('.', anchor.attr.relativekey) }
               if #parts == 1 then
                 relativeTo = api.ParentSub(anchor.attr.relativekey, parent:GetParent())
               else
@@ -213,9 +213,15 @@ local function loader(api, cfg)
                 if old and script.attr.inherit then
                   local bfn = fn
                   if script.attr.inherit == 'prepend' then
-                    fn = function(...) bfn(...) old(...) end
+                    fn = function(...)
+                      bfn(...)
+                      old(...)
+                    end
                   elseif script.attr.inherit == 'append' then
-                    fn = function(...) old(...) bfn(...) end
+                    fn = function(...)
+                      old(...)
+                      bfn(...)
+                    end
                   else
                     error('invalid inherit tag on script')
                   end
@@ -306,7 +312,7 @@ local function loader(api, cfg)
         local earlyAttrs = {
           'parent',
           'parentkey',
-          'parentarray'
+          'parentarray',
         }
         local earlyAttrMap = (function()
           local m = {}
@@ -506,7 +512,9 @@ local function loader(api, cfg)
         else
           error('unknown file type ' .. filename)
         end
-        local success, content = pcall(function() return readFile(filename) end)
+        local success, content = pcall(function()
+          return readFile(filename)
+        end)
         if success then
           loadFn(filename, content)
         else
@@ -530,13 +538,14 @@ local function loader(api, cfg)
   local function resolveTocDir(tocDir)
     api.log(1, 'resolving %s', tocDir)
     local base = path.basename(tocDir)
-    local toTry = not version and {''} or {
-      '_' .. version,
-      '-' .. version,
-      '_' .. alternateVersionNames[version],
-      '-' .. alternateVersionNames[version],
-      '',
-    }
+    local toTry = not version and { '' }
+      or {
+        '_' .. version,
+        '-' .. version,
+        '_' .. alternateVersionNames[version],
+        '-' .. alternateVersionNames[version],
+        '',
+      }
     for _, try in ipairs(toTry) do
       local tocFile = path.join(tocDir, base .. try .. '.toc')
       if path.isfile(tocFile) then
@@ -628,7 +637,9 @@ local function loader(api, cfg)
   end
 
   local function loadAddon(addonName)
-    return pcall(function() doLoadAddon(addonName) end)
+    return pcall(function()
+      doLoadAddon(addonName)
+    end)
   end
 
   local function db2rows(name)

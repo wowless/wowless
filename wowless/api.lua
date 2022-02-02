@@ -1,5 +1,4 @@
 local function new(log)
-
   local env = {}
   local errors = 0
   local frames = {}
@@ -68,26 +67,26 @@ local function new(log)
     if name ~= nil then
       return name
     end
-    name = ""
+    name = ''
     local parent = ud.parent
     local pud
     while parent do
       pud = u(parent)
       local found = false
-      for k,v in pairs(parent) do
+      for k, v in pairs(parent) do
         if v == frame then
-          name = k .. (name == "" and "" or ("." .. name))
+          name = k .. (name == '' and '' or ('.' .. name))
           found = true
         end
       end
       if not found then
-        name = string.match(tostring(frame), "^table: 0x0*(.*)$"):lower() .. (name == "" and "" or ("." .. name))
+        name = string.match(tostring(frame), '^table: 0x0*(.*)$'):lower() .. (name == '' and '' or ('.' .. name))
       end
       local parentName = pud.name
-      if parentName == "UIParent" then
+      if parentName == 'UIParent' then
         break
-      elseif parentName and parentName ~= "" then
-        name = parentName .. "." .. name
+      elseif parentName and parentName ~= '' then
+        name = parentName .. '.' .. name
         break
       end
       frame = parent
@@ -99,12 +98,14 @@ local function new(log)
   local function RunScript(obj, name, ...)
     local ud = u(obj)
     if ud.scripts then
-      local args = {...}
+      local args = { ... }
       for i = 0, 2 do
         local script = ud.scripts[i][string.lower(name)]
         if script then
           log(4, 'begin %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
-          CallSafely(function() script(obj, unpack(args)) end)
+          CallSafely(function()
+            script(obj, unpack(args))
+          end)
           log(4, 'end %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
         end
       end
@@ -126,7 +127,7 @@ local function new(log)
     }
     SetParent(obj, parent)
     type.constructor(obj)
-    for _, template in ipairs({...}) do
+    for _, template in ipairs({ ... }) do
       log(4, 'initializing early attributes for ' .. tostring(template.name))
       template.initEarlyAttrs(obj)
     end
@@ -141,11 +142,11 @@ local function new(log)
         addonEnv[objname] = obj
       end
     end
-    for _, template in ipairs({...}) do
+    for _, template in ipairs({ ... }) do
       log(4, 'initializing attributes for ' .. tostring(template.name))
       template.initAttrs(obj)
     end
-    for _, template in ipairs({...}) do
+    for _, template in ipairs({ ... }) do
       log(4, 'initializing children for ' .. tostring(template.name))
       template.initKids(obj)
     end

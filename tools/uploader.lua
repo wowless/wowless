@@ -8,7 +8,7 @@ end)()
 local pprint = require('pl.pretty').write
 local tmpfile = (function()
   local name = os.tmpname()
-  local f = io.open(name, "w")
+  local f = io.open(name, 'w')
   f:write(table.concat({
     'TheFlatDumperBuildInfo = ',
     pprint(data.BuildInfo),
@@ -21,7 +21,7 @@ local tmpfile = (function()
   return name
 end)()
 local outfile = string.format('%s.%s.lua', data.BuildInfo[1], data.BuildInfo[2])
-print("uploading " .. outfile)
+print('uploading ' .. outfile)
 local outurl = 'gs://wow.ferronn.dev/gscrapes/' .. outfile
 assert(os.execute(string.format('gsutil cp %q %s', tmpfile, outurl)))
 os.remove(tmpfile)

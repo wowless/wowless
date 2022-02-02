@@ -50,7 +50,9 @@ local function validate(schematype, v)
     assert(max == #v, 'expected array')
   elseif schematype.oneof then
     for _, ty in ipairs(schematype.oneof) do
-      if pcall(function() validate(ty, v) end) then
+      if pcall(function()
+        validate(ty, v)
+      end) then
         return
       end
     end
