@@ -261,7 +261,6 @@ local function loader(api, cfg)
 
         local xmlattrlang = {
           hidden = function(obj, value)
-            api.log(3, 'setting hidden=%s on %s', tostring(value), api.GetDebugName(obj))
             local ud = api.UserData(obj)
             ud.shown = not value
           end,
@@ -321,8 +320,6 @@ local function loader(api, cfg)
 
         local earlyAttrs = {
           'parent',
-          'parentkey',
-          'parentarray',
         }
         local earlyAttrMap = (function()
           local m = {}
