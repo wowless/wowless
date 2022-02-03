@@ -266,26 +266,22 @@ local function loader(api, cfg)
 
         local xmlattrlang = {
           hidden = function(obj, value)
-            local ud = api.UserData(obj)
-            ud.shown = not value
+            api.UserData(obj).shown = not value
           end,
           parent = function(obj, value)
-            api.log(3, 'setting parent to ' .. value)
             api.SetParent(obj, api.env[value])
           end,
           parentarray = function(obj, value)
-            api.log(3, 'attaching to array ' .. value)
-            local p = obj:GetParent()
+            local p = api.UserData(obj).parent
             if p then
               p[value] = p[value] or {}
               table.insert(p[value], obj)
             end
           end,
           parentkey = function(obj, value)
-            api.log(3, 'attaching ' .. value)
-            local parent = obj:GetParent()
-            if parent then
-              parent[value] = obj
+            local p = api.UserData(obj).parent
+            if p then
+              p[value] = obj
             end
           end,
         }
