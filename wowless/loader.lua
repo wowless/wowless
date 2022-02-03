@@ -300,9 +300,22 @@ local function loader(api, cfg)
               newctx.loadElement(kid, obj)
             end
           end
-          local text = e.attr.text
-          if text and framesFlag then
-            getmetatable(obj).__index.SetText(obj, api.env[text] or text)
+          if framesFlag then
+            -- TODO unify this with processing in middle phase
+            local objty = api.UserData(obj).type
+            -- This assumes that uiobject types and xml types are the same "space" of strings.
+            local attrimpls = (xmlimpls[objty] or intrinsics[objty]).attrs
+            for k, v in pairs(e.attr) do
+              local attrimpl = attrimpls[k]
+              if attrimpl and attrimpl.method and attrimpl.phase == 'late' then
+                local fn = api.uiobjectTypes[objty].metatable.__index[attrimpl.method]
+                if type(v) == 'table' then -- stringlist
+                  fn(obj, unpack(v))
+                else
+                  fn(obj, v)
+                end
+              end
+            end
           end
         end
 
@@ -358,11 +371,13 @@ local function loader(api, cfg)
                 local attrimpl = attrimpls[k]
                 if attrimpl then
                   if attrimpl.method then
-                    local fn = api.uiobjectTypes[objty].metatable.__index[attrimpl.method]
-                    if type(v) == 'table' then -- stringlist
-                      fn(obj, unpack(v))
-                    else
-                      fn(obj, v)
+                    if attrimpl.phase ~= 'late' then
+                      local fn = api.uiobjectTypes[objty].metatable.__index[attrimpl.method]
+                      if type(v) == 'table' then -- stringlist
+                        fn(obj, unpack(v))
+                      else
+                        fn(obj, v)
+                      end
                     end
                   elseif attrimpl.field then
                     api.UserData(obj)[attrimpl.field] = v

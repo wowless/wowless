@@ -17,6 +17,10 @@ type:
                     method:
                       required: true
                       type: string
+                    phase:
+                      type:
+                        oneof:
+                        - literal: late
             required:
               type: boolean
             type:
