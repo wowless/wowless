@@ -22,6 +22,7 @@ type:
               type:
                 oneof:
                 - literal: early
+                - literal: middle
                 - literal: late
             required:
               type: boolean
@@ -70,5 +71,10 @@ type:
     name:
       required: true
       type: string
+    phase:
+      type:
+        oneof:
+        - literal: middle
+        - literal: late
     virtual:
       type: boolean

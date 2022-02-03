@@ -28,6 +28,7 @@ local xmlimpls = (function()
     end
     newtree[k:lower()] = {
       attrs = aimpls,
+      phase = v.phase or 'middle',
       tag = tag,
     }
   end
@@ -323,17 +324,10 @@ local function loader(api, cfg)
           end
         end
 
-        local function initKidsMaybeFrames(e, obj, framesFlag)
-          local frameykids = {
-            -- TODO this list is incomplete
-            buttontext = true,
-            frames = true,
-            highlighttexture = true,
-            layers = true,
-          }
+        local function processKids(e, obj, phase)
           local newctx = withContext({ ignoreVirtual = true })
           for _, kid in ipairs(e.kids) do
-            if not not frameykids[string.lower(kid.type)] == framesFlag then
+            if xmlimpls[string.lower(kid.type)].phase == phase then
               newctx.loadElement(kid, obj)
             end
           end
@@ -345,10 +339,10 @@ local function loader(api, cfg)
           end,
           Attrs = function(e, obj)
             processAttrs(e, obj, 'middle')
-            initKidsMaybeFrames(e, obj, false)
+            processKids(e, obj, 'middle')
           end,
           Kids = function(e, obj)
-            initKidsMaybeFrames(e, obj, true)
+            processKids(e, obj, 'late')
             processAttrs(e, obj, 'late')
           end,
         }

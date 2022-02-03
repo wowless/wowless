@@ -5,3 +5,4 @@ impl:
   argument: self
   parentmethod: SetFontString
   parenttype: Button
+phase: late
