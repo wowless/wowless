@@ -100,6 +100,60 @@ local function loader(api, cfg)
           end
         end
 
+        local function loadScript(script, obj)
+          local fn
+          if script.attr['function'] then
+            local fnattr = script.attr['function']
+            local env = ctx.useAddonEnv and addonEnv or api.env
+            fn = function(...)
+              assert(env[fnattr], 'unknown script function ' .. fnattr)
+              env[fnattr](...)
+            end
+          elseif script.attr.method then
+            local mattr = script.attr.method
+            fn = function(x, ...)
+              assert(x[mattr], 'unknown script method ' .. mattr)
+              x[mattr](x, ...)
+            end
+          elseif script.text then
+            local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
+            local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
+            local env = ctx.useAddonEnv and addonEnv or api.env
+            fn = setfenv(loadstr(string.rep('\n', script.line - 1) .. fnstr, filename), env)()
+          end
+          if fn then
+            local old = obj:GetScript(script.type)
+            if old and script.attr.inherit then
+              local bfn = fn
+              if script.attr.inherit == 'prepend' then
+                fn = function(...)
+                  bfn(...)
+                  old(...)
+                end
+              elseif script.attr.inherit == 'append' then
+                fn = function(...)
+                  old(...)
+                  bfn(...)
+                end
+              else
+                error('invalid inherit tag on script')
+              end
+            end
+            assert(not script.attr.intrinsicorder or obj.__intrinsicHack, 'intrinsicOrder on non-intrinsic')
+            local bindingType = 1
+            if script.attr.intrinsicorder == 'precall' then
+              bindingType = 0
+            elseif script.attr.intrinsicorder == 'postcall' then
+              bindingType = 2
+            elseif script.attr.intrinsicorder then
+              error('invalid intrinsicOrder tag on script')
+            elseif obj.__intrinsicHack then
+              bindingType = 0
+            end
+            api.SetScript(obj, script.type, bindingType, fn)
+          end
+        end
+
         local xmllang = {
           anchor = function(anchor, parent)
             local point = anchor.attr.point
@@ -182,63 +236,6 @@ local function loader(api, cfg)
             else
               assert(e.text)
               loadLuaString(filename, e.text)
-            end
-          end,
-          scripts = function(e, parent)
-            local obj = parent
-            for _, script in ipairs(e.kids) do
-              local fn
-              if script.attr['function'] then
-                local fnattr = script.attr['function']
-                local env = ctx.useAddonEnv and addonEnv or api.env
-                fn = function(...)
-                  assert(env[fnattr], 'unknown script function ' .. fnattr)
-                  env[fnattr](...)
-                end
-              elseif script.attr.method then
-                local mattr = script.attr.method
-                fn = function(x, ...)
-                  assert(x[mattr], 'unknown script method ' .. mattr)
-                  x[mattr](x, ...)
-                end
-              elseif script.text then
-                local impl = xmlimpls[string.lower(script.type)].tag
-                local args = impl and impl.args or 'self, ...'
-                local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-                local env = ctx.useAddonEnv and addonEnv or api.env
-                fn = setfenv(loadstr(string.rep('\n', script.line - 1) .. fnstr, filename), env)()
-              end
-              if fn then
-                local old = obj:GetScript(script.type)
-                if old and script.attr.inherit then
-                  local bfn = fn
-                  if script.attr.inherit == 'prepend' then
-                    fn = function(...)
-                      bfn(...)
-                      old(...)
-                    end
-                  elseif script.attr.inherit == 'append' then
-                    fn = function(...)
-                      old(...)
-                      bfn(...)
-                    end
-                  else
-                    error('invalid inherit tag on script')
-                  end
-                end
-                assert(not script.attr.intrinsicorder or parent.__intrinsicHack, 'intrinsicOrder on non-intrinsic')
-                local bindingType = 1
-                if script.attr.intrinsicorder == 'precall' then
-                  bindingType = 0
-                elseif script.attr.intrinsicorder == 'postcall' then
-                  bindingType = 2
-                elseif script.attr.intrinsicorder then
-                  error('invalid intrinsicOrder tag on script')
-                elseif parent.__intrinsicHack then
-                  bindingType = 0
-                end
-                api.SetScript(obj, script.type, bindingType, fn)
-              end
             end
           end,
           size = function(e, parent)
@@ -478,7 +475,9 @@ local function loader(api, cfg)
           else
             local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
             local fn = xmllang[e.type]
-            if type(impl) == 'table' then
+            if type(impl) == 'table' and impl.script then
+              loadScript(e, parent)
+            elseif type(impl) == 'table' then
               local elt = impl.argument == 'lastkid' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
               local obj = loadElement(elt, parent)
               -- TODO find if this if needs to be broader to everything here including kids

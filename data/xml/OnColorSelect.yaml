@@ -1,3 +1,5 @@
 ---
 name: OnColorSelect
 extends: ScriptType
+impl:
+  script: {}

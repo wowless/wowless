@@ -1,3 +1,5 @@
 ---
 name: OnArrowPressed
 extends: ScriptType
+impl:
+  script: {}

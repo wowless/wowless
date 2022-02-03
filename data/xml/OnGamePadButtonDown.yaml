@@ -1,3 +1,5 @@
 ---
 name: OnGamePadButtonDown
 extends: ScriptType
+impl:
+  script: {}

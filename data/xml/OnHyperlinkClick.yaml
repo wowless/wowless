@@ -1,3 +1,5 @@
 ---
 name: OnHyperlinkClick
 extends: ScriptType
+impl:
+  script: {}

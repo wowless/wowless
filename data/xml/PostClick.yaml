@@ -2,4 +2,5 @@
 name: PostClick
 extends: ScriptType
 impl:
-  args: self, button, down
+  script:
+    args: self, button, down

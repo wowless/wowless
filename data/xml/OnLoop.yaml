@@ -1,3 +1,5 @@
 ---
 name: OnLoop
 extends: ScriptType
+impl:
+  script: {}

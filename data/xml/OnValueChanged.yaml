@@ -1,3 +1,5 @@
 ---
 name: OnValueChanged
 extends: ScriptType
+impl:
+  script: {}

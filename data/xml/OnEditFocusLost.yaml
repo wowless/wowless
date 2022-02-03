@@ -1,3 +1,5 @@
 ---
 name: OnEditFocusLost
 extends: ScriptType
+impl:
+  script: {}

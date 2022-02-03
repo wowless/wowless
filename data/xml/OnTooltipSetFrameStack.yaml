@@ -1,3 +1,5 @@
 ---
 name: OnTooltipSetFrameStack
 extends: ScriptType
+impl:
+  script: {}

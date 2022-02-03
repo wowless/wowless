@@ -1,3 +1,5 @@
 ---
 name: OnInputLanguageChanged
 extends: ScriptType
+impl:
+  script: {}

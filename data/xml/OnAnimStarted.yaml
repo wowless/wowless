@@ -1,3 +1,5 @@
 ---
 name: OnAnimStarted
 extends: ScriptType
+impl:
+  script: {}

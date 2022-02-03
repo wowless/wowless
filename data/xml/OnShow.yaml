@@ -1,3 +1,5 @@
 ---
 name: OnShow
 extends: ScriptType
+impl:
+  script: {}

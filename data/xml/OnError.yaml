@@ -1,3 +1,5 @@
 ---
 name: OnError
 extends: ScriptType
+impl:
+  script: {}

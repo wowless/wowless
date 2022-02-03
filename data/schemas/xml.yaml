@@ -54,9 +54,12 @@ type:
               type:
                 ref: uiobject
         - record:
-            args:
+            script:
               required: true
-              type: string
+              type:
+                record:
+                  args:
+                    type: string
         - literal: transparent
     name:
       required: true

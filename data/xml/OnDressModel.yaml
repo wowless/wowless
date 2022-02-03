@@ -1,3 +1,5 @@
 ---
 name: OnDressModel
 extends: ScriptType
+impl:
+  script: {}
