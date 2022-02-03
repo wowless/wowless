@@ -318,41 +318,15 @@ local function loader(api, cfg)
           end
         end
 
-        local earlyAttrs = {
-          'parent',
-        }
-        local earlyAttrMap = (function()
-          local m = {}
-          for _, k in ipairs(earlyAttrs) do
-            m[k] = true
-          end
-          return m
-        end)()
-
-        local function mkInitEarlyAttrsNotRecursive(e)
-          return function(obj)
-            for _, ek in ipairs(earlyAttrs) do
-              for k, v in pairs(e.attr) do
-                if k == ek then
-                  xmlattrlang[k](obj, v)
-                end
+        local phases = {
+          EarlyAttrs = function(e, obj)
+            for k, v in pairs(e.attr) do
+              if k == 'parent' then
+                xmlattrlang[k](obj, v)
               end
             end
-          end
-        end
-
-        local function mkInitEarlyAttrs(e)
-          local notRecursive = mkInitEarlyAttrsNotRecursive(e)
-          return function(obj)
-            for _, inh in ipairs(e.attr.inherits or {}) do
-              api.templates[string.lower(inh)].initEarlyAttrs(obj)
-            end
-            notRecursive(obj)
-          end
-        end
-
-        local function mkInitAttrsNotRecursive(e)
-          return function(obj)
+          end,
+          Attrs = function(e, obj)
             local env = ctx.useAddonEnv and addonEnv or api.env
             for _, m in ipairs(e.attr.mixin or {}) do
               mixin(obj, env[m])
@@ -364,7 +338,7 @@ local function loader(api, cfg)
             -- This assumes that uiobject types and xml types are the same "space" of strings.
             local attrimpls = (xmlimpls[objty] or intrinsics[objty]).attrs
             for k, v in pairs(e.attr) do
-              if not earlyAttrMap[k] then
+              if k ~= 'parent' then
                 local attrimpl = attrimpls[k]
                 if attrimpl then
                   if attrimpl.method then
@@ -390,34 +364,40 @@ local function loader(api, cfg)
               end
             end
             initKidsMaybeFrames(e, obj, false)
-          end
-        end
-
-        local function mkInitAttrs(e)
-          local notRecursive = mkInitAttrsNotRecursive(e)
-          return function(obj)
-            for _, inh in ipairs(e.attr.inherits or {}) do
-              api.templates[string.lower(inh)].initAttrs(obj)
-            end
-            notRecursive(obj)
-          end
-        end
-
-        local function mkInitKidsNotRecursive(e)
-          return function(obj)
+          end,
+          Kids = function(e, obj)
             initKidsMaybeFrames(e, obj, true)
+          end,
+        }
+
+        local function mkInitPhaseNotRecursive(phaseName)
+          local phase = phases[phaseName]
+          return function(e)
+            return function(obj)
+              return phase(e, obj)
+            end
           end
         end
 
-        local function mkInitKids(e)
-          local notRecursive = mkInitKidsNotRecursive(e)
-          return function(obj)
-            for _, inh in ipairs(e.attr.inherits or {}) do
-              api.templates[string.lower(inh)].initKids(obj)
+        local function mkInitPhase(phaseName)
+          local mkNotRecursive = mkInitPhaseNotRecursive(phaseName)
+          return function(e)
+            local notRecursive = mkNotRecursive(e)
+            return function(obj)
+              for _, inh in ipairs(e.attr.inherits or {}) do
+                api.templates[string.lower(inh)]['init' .. phaseName](obj)
+              end
+              notRecursive(obj)
             end
-            notRecursive(obj)
           end
         end
+
+        local mkInitEarlyAttrsNotRecursive = mkInitPhaseNotRecursive('EarlyAttrs')
+        local mkInitAttrsNotRecursive = mkInitPhaseNotRecursive('Attrs')
+        local mkInitKidsNotRecursive = mkInitPhaseNotRecursive('Kids')
+        local mkInitEarlyAttrs = mkInitPhase('EarlyAttrs')
+        local mkInitAttrs = mkInitPhase('Attrs')
+        local mkInitKids = mkInitPhase('Kids')
 
         function loadElement(e, parent)
           if api.IsIntrinsicType(e.type) then
