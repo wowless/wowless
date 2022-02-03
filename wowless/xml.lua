@@ -77,10 +77,7 @@ local attrMTs = (function()
     local attrs = {
       inherits = true,
       intrinsic = true,
-      mixin = true,
       name = true,
-      securemixin = true,
-      text = true,
       virtual = true,
     }
     for attr in pairs(spec.attributes) do
