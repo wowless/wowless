@@ -1,3 +1,5 @@
 ---
 name: OnFinished
 extends: ScriptType
+impl:
+  script: {}

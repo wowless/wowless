@@ -1,3 +1,5 @@
 ---
 name: OnSpacePressed
 extends: ScriptType
+impl:
+  script: {}

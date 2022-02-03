@@ -11,7 +11,12 @@ local xmlimpls = (function()
     end
     local aimpls = {}
     for n, a in pairs(attrs) do
-      aimpls[n] = a.impl
+      if a.impl then
+        aimpls[n] = {
+          impl = a.impl,
+          phase = a.phase or 'middle',
+        }
+      end
     end
     local tag = v.impl
     if type(tag) == 'table' and tag.argument == 'self' then
@@ -23,6 +28,7 @@ local xmlimpls = (function()
     end
     newtree[k:lower()] = {
       attrs = aimpls,
+      phase = v.phase or 'middle',
       tag = tag,
     }
   end
@@ -97,6 +103,60 @@ local function loader(api, cfg)
         local function loadElements(t, parent)
           for _, v in ipairs(t) do
             loadElement(v, parent)
+          end
+        end
+
+        local function loadScript(script, obj)
+          local fn
+          if script.attr['function'] then
+            local fnattr = script.attr['function']
+            local env = ctx.useAddonEnv and addonEnv or api.env
+            fn = function(...)
+              assert(env[fnattr], 'unknown script function ' .. fnattr)
+              env[fnattr](...)
+            end
+          elseif script.attr.method then
+            local mattr = script.attr.method
+            fn = function(x, ...)
+              assert(x[mattr], 'unknown script method ' .. mattr)
+              x[mattr](x, ...)
+            end
+          elseif script.text then
+            local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
+            local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
+            local env = ctx.useAddonEnv and addonEnv or api.env
+            fn = setfenv(loadstr(string.rep('\n', script.line - 1) .. fnstr, filename), env)()
+          end
+          if fn then
+            local old = obj:GetScript(script.type)
+            if old and script.attr.inherit then
+              local bfn = fn
+              if script.attr.inherit == 'prepend' then
+                fn = function(...)
+                  bfn(...)
+                  old(...)
+                end
+              elseif script.attr.inherit == 'append' then
+                fn = function(...)
+                  old(...)
+                  bfn(...)
+                end
+              else
+                error('invalid inherit tag on script')
+              end
+            end
+            assert(not script.attr.intrinsicorder or obj.__intrinsicHack, 'intrinsicOrder on non-intrinsic')
+            local bindingType = 1
+            if script.attr.intrinsicorder == 'precall' then
+              bindingType = 0
+            elseif script.attr.intrinsicorder == 'postcall' then
+              bindingType = 2
+            elseif script.attr.intrinsicorder then
+              error('invalid intrinsicOrder tag on script')
+            elseif obj.__intrinsicHack then
+              bindingType = 0
+            end
+            api.SetScript(obj, script.type, bindingType, fn)
           end
         end
 
@@ -184,63 +244,6 @@ local function loader(api, cfg)
               loadLuaString(filename, e.text)
             end
           end,
-          scripts = function(e, parent)
-            local obj = parent
-            for _, script in ipairs(e.kids) do
-              local fn
-              if script.attr['function'] then
-                local fnattr = script.attr['function']
-                local env = ctx.useAddonEnv and addonEnv or api.env
-                fn = function(...)
-                  assert(env[fnattr], 'unknown script function ' .. fnattr)
-                  env[fnattr](...)
-                end
-              elseif script.attr.method then
-                local mattr = script.attr.method
-                fn = function(x, ...)
-                  assert(x[mattr], 'unknown script method ' .. mattr)
-                  x[mattr](x, ...)
-                end
-              elseif script.text then
-                local impl = xmlimpls[string.lower(script.type)].tag
-                local args = impl and impl.args or 'self, ...'
-                local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-                local env = ctx.useAddonEnv and addonEnv or api.env
-                fn = setfenv(loadstr(string.rep('\n', script.line - 1) .. fnstr, filename), env)()
-              end
-              if fn then
-                local old = obj:GetScript(script.type)
-                if old and script.attr.inherit then
-                  local bfn = fn
-                  if script.attr.inherit == 'prepend' then
-                    fn = function(...)
-                      bfn(...)
-                      old(...)
-                    end
-                  elseif script.attr.inherit == 'append' then
-                    fn = function(...)
-                      old(...)
-                      bfn(...)
-                    end
-                  else
-                    error('invalid inherit tag on script')
-                  end
-                end
-                assert(not script.attr.intrinsicorder or parent.__intrinsicHack, 'intrinsicOrder on non-intrinsic')
-                local bindingType = 1
-                if script.attr.intrinsicorder == 'precall' then
-                  bindingType = 0
-                elseif script.attr.intrinsicorder == 'postcall' then
-                  bindingType = 2
-                elseif script.attr.intrinsicorder then
-                  error('invalid intrinsicOrder tag on script')
-                elseif parent.__intrinsicHack then
-                  bindingType = 0
-                end
-                api.SetScript(obj, script.type, bindingType, fn)
-              end
-            end
-          end,
           size = function(e, parent)
             local x, y = getXY(e)
             if x then
@@ -264,151 +267,114 @@ local function loader(api, cfg)
 
         local xmlattrlang = {
           hidden = function(obj, value)
-            api.log(3, 'setting hidden=%s on %s', tostring(value), api.GetDebugName(obj))
-            local ud = api.UserData(obj)
-            ud.shown = not value
+            api.UserData(obj).shown = not value
+          end,
+          mixin = function(obj, value)
+            local env = ctx.useAddonEnv and addonEnv or api.env
+            for _, m in ipairs(value) do
+              mixin(obj, env[m])
+            end
           end,
           parent = function(obj, value)
-            api.log(3, 'setting parent to ' .. value)
             api.SetParent(obj, api.env[value])
           end,
           parentarray = function(obj, value)
-            api.log(3, 'attaching to array ' .. value)
-            local p = obj:GetParent()
+            local p = api.UserData(obj).parent
             if p then
               p[value] = p[value] or {}
               table.insert(p[value], obj)
             end
           end,
           parentkey = function(obj, value)
-            api.log(3, 'attaching ' .. value)
-            local parent = obj:GetParent()
-            if parent then
-              parent[value] = obj
+            local p = api.UserData(obj).parent
+            if p then
+              p[value] = obj
+            end
+          end,
+          securemixin = function(obj, value)
+            local env = ctx.useAddonEnv and addonEnv or api.env
+            for _, m in ipairs(value) do
+              mixin(obj, env[m])
             end
           end,
         }
 
-        local function initKidsMaybeFrames(e, obj, framesFlag)
-          local frameykids = {
-            -- TODO this list is incomplete
-            buttontext = true,
-            frames = true,
-            highlighttexture = true,
-            layers = true,
-          }
+        local function processAttrs(e, obj, phase)
+          local objty = api.UserData(obj).type
+          local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
+          for k, v in pairs(e.attr) do
+            -- This assumes that uiobject types and xml types are the same "space" of strings.
+            local attr = attrs[k]
+            if attr and phase == attr.phase then
+              if attr.impl == 'internal' then
+                xmlattrlang[k](obj, v)
+              elseif attr.impl.method then
+                local fn = api.uiobjectTypes[objty].metatable.__index[attr.impl.method]
+                if type(v) == 'table' then -- stringlist
+                  fn(obj, unpack(v))
+                else
+                  fn(obj, v)
+                end
+              elseif attr.impl.field then
+                api.UserData(obj)[attr.impl.field] = v
+              else
+                error('invalid attribute impl for ' .. k)
+              end
+            end
+          end
+        end
+
+        local function processKids(e, obj, phase)
           local newctx = withContext({ ignoreVirtual = true })
           for _, kid in ipairs(e.kids) do
-            if not not frameykids[string.lower(kid.type)] == framesFlag then
+            if xmlimpls[string.lower(kid.type)].phase == phase then
               newctx.loadElement(kid, obj)
             end
           end
-          local text = e.attr.text
-          if text and framesFlag then
-            getmetatable(obj).__index.SetText(obj, api.env[text] or text)
-          end
         end
 
-        local earlyAttrs = {
-          'parent',
-          'parentkey',
-          'parentarray',
+        local phases = {
+          EarlyAttrs = function(e, obj)
+            processAttrs(e, obj, 'early')
+          end,
+          Attrs = function(e, obj)
+            processAttrs(e, obj, 'middle')
+            processKids(e, obj, 'middle')
+          end,
+          Kids = function(e, obj)
+            processKids(e, obj, 'late')
+            processAttrs(e, obj, 'late')
+          end,
         }
-        local earlyAttrMap = (function()
-          local m = {}
-          for _, k in ipairs(earlyAttrs) do
-            m[k] = true
-          end
-          return m
-        end)()
 
-        local function mkInitEarlyAttrsNotRecursive(e)
-          return function(obj)
-            for _, ek in ipairs(earlyAttrs) do
-              for k, v in pairs(e.attr) do
-                if k == ek then
-                  xmlattrlang[k](obj, v)
-                end
+        local function mkInitPhaseNotRecursive(phaseName)
+          local phase = phases[phaseName]
+          return function(e)
+            return function(obj)
+              return phase(e, obj)
+            end
+          end
+        end
+
+        local function mkInitPhase(phaseName)
+          local mkNotRecursive = mkInitPhaseNotRecursive(phaseName)
+          return function(e)
+            local notRecursive = mkNotRecursive(e)
+            return function(obj)
+              for _, inh in ipairs(e.attr.inherits or {}) do
+                api.templates[string.lower(inh)]['init' .. phaseName](obj)
               end
+              notRecursive(obj)
             end
           end
         end
 
-        local function mkInitEarlyAttrs(e)
-          local notRecursive = mkInitEarlyAttrsNotRecursive(e)
-          return function(obj)
-            for _, inh in ipairs(e.attr.inherits or {}) do
-              api.templates[string.lower(inh)].initEarlyAttrs(obj)
-            end
-            notRecursive(obj)
-          end
-        end
-
-        local function mkInitAttrsNotRecursive(e)
-          return function(obj)
-            local env = ctx.useAddonEnv and addonEnv or api.env
-            for _, m in ipairs(e.attr.mixin or {}) do
-              mixin(obj, env[m])
-            end
-            for _, m in ipairs(e.attr.securemixin or {}) do
-              mixin(obj, env[m])
-            end
-            local objty = api.UserData(obj).type
-            -- This assumes that uiobject types and xml types are the same "space" of strings.
-            local attrimpls = (xmlimpls[objty] or intrinsics[objty]).attrs
-            for k, v in pairs(e.attr) do
-              if not earlyAttrMap[k] then
-                local attrimpl = attrimpls[k]
-                if attrimpl then
-                  if attrimpl.method then
-                    local fn = api.uiobjectTypes[objty].metatable.__index[attrimpl.method]
-                    if type(v) == 'table' then -- stringlist
-                      fn(obj, unpack(v))
-                    else
-                      fn(obj, v)
-                    end
-                  elseif attrimpl.field then
-                    api.UserData(obj)[attrimpl.field] = v
-                  else
-                    error('invalid attribute impl for ' .. k)
-                  end
-                else
-                  local fn = xmlattrlang[k]
-                  if fn then
-                    fn(obj, v)
-                  end
-                end
-              end
-            end
-            initKidsMaybeFrames(e, obj, false)
-          end
-        end
-
-        local function mkInitAttrs(e)
-          local notRecursive = mkInitAttrsNotRecursive(e)
-          return function(obj)
-            for _, inh in ipairs(e.attr.inherits or {}) do
-              api.templates[string.lower(inh)].initAttrs(obj)
-            end
-            notRecursive(obj)
-          end
-        end
-
-        local function mkInitKidsNotRecursive(e)
-          return function(obj)
-            initKidsMaybeFrames(e, obj, true)
-          end
-        end
-
-        local function mkInitKids(e)
-          local notRecursive = mkInitKidsNotRecursive(e)
-          return function(obj)
-            for _, inh in ipairs(e.attr.inherits or {}) do
-              api.templates[string.lower(inh)].initKids(obj)
-            end
-            notRecursive(obj)
-          end
-        end
+        local mkInitEarlyAttrsNotRecursive = mkInitPhaseNotRecursive('EarlyAttrs')
+        local mkInitAttrsNotRecursive = mkInitPhaseNotRecursive('Attrs')
+        local mkInitKidsNotRecursive = mkInitPhaseNotRecursive('Kids')
+        local mkInitEarlyAttrs = mkInitPhase('EarlyAttrs')
+        local mkInitAttrs = mkInitPhase('Attrs')
+        local mkInitKids = mkInitPhase('Kids')
 
         function loadElement(e, parent)
           if api.IsIntrinsicType(e.type) then
@@ -478,7 +444,9 @@ local function loader(api, cfg)
           else
             local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
             local fn = xmllang[e.type]
-            if type(impl) == 'table' then
+            if type(impl) == 'table' and impl.script then
+              loadScript(e, parent)
+            elseif type(impl) == 'table' then
               local elt = impl.argument == 'lastkid' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
               local obj = loadElement(elt, parent)
               -- TODO find if this if needs to be broader to everything here including kids

@@ -1,3 +1,5 @@
 ---
 name: OnAnimFinished
 extends: ScriptType
+impl:
+  script: {}

@@ -1,3 +1,5 @@
 ---
 name: OnTooltipSetUnit
 extends: ScriptType
+impl:
+  script: {}

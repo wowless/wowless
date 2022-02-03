@@ -1,3 +1,5 @@
 ---
 name: OnEscapePressed
 extends: ScriptType
+impl:
+  script: {}

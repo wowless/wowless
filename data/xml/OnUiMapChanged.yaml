@@ -1,3 +1,5 @@
 ---
 name: OnUiMapChanged
 extends: ScriptType
+impl:
+  script: {}

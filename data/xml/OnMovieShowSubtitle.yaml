@@ -1,3 +1,5 @@
 ---
 name: OnMovieShowSubtitle
 extends: ScriptType
+impl:
+  script: {}

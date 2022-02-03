@@ -9,6 +9,7 @@ type:
             impl:
               type:
                 oneof:
+                - literal: internal
                 - record:
                     field:
                       required: true
@@ -19,6 +20,12 @@ type:
                       type: string
                     position:
                       type: number
+            phase:
+              type:
+                oneof:
+                - literal: early
+                - literal: middle
+                - literal: late
             required:
               type: boolean
             type:
@@ -56,12 +63,20 @@ type:
               type:
                 ref: uiobject
         - record:
-            args:
+            script:
               required: true
-              type: string
+              type:
+                record:
+                  args:
+                    type: string
         - literal: transparent
     name:
       required: true
       type: string
+    phase:
+      type:
+        oneof:
+        - literal: middle
+        - literal: late
     virtual:
       type: boolean

@@ -5,3 +5,4 @@ impl:
   argument: self
   parentmethod: SetHighlightTexture
   parenttype: Button
+phase: late

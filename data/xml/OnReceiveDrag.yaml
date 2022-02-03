@@ -1,3 +1,5 @@
 ---
 name: OnReceiveDrag
 extends: ScriptType
+impl:
+  script: {}

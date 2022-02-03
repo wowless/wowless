@@ -1,3 +1,5 @@
 ---
 name: OnRequestNewSize
 extends: ScriptType
+impl:
+  script: {}

@@ -10,6 +10,9 @@ attributes:
       method: RegisterForClicks
     type: stringlist
   text:
+    impl:
+      method: SetText
+    phase: late
     type: string
 contents:
 - ButtonFont

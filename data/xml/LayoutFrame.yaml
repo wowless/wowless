@@ -6,6 +6,7 @@ attributes:
       method: SetAlpha
     type: number
   hidden:
+    impl: internal
     type: bool
   ignoreparentalpha:
     impl:
@@ -18,12 +19,16 @@ attributes:
   inherits:
     type: stringlist
   mixin:
+    impl: internal
+    phase: early
     type: stringlist
   name:
     type: string
   parentarray:
+    impl: internal
     type: string
   parentkey:
+    impl: internal
     type: string
   scale:
     impl:

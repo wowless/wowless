@@ -1,3 +1,5 @@
 ---
 name: OnStop
 extends: ScriptType
+impl:
+  script: {}

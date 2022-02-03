@@ -2,3 +2,4 @@
 name: Scripts
 contents:
 - ScriptType
+impl: transparent

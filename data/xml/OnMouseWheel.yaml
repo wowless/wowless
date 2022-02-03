@@ -1,3 +1,5 @@
 ---
 name: OnMouseWheel
 extends: ScriptType
+impl:
+  script: {}

@@ -1,3 +1,5 @@
 ---
 name: OnMouseEnter
 extends: ScriptType
+impl:
+  script: {}
