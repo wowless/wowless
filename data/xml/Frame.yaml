@@ -68,6 +68,7 @@ attributes:
       method: SetResizable
     type: bool
   securemixin:
+    impl: internal
     type: stringlist
   toplevel:
     impl:

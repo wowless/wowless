@@ -19,6 +19,8 @@ attributes:
   inherits:
     type: stringlist
   mixin:
+    impl: internal
+    phase: early
     type: stringlist
   name:
     type: string

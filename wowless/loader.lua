@@ -268,6 +268,12 @@ local function loader(api, cfg)
           hidden = function(obj, value)
             api.UserData(obj).shown = not value
           end,
+          mixin = function(obj, value)
+            local env = ctx.useAddonEnv and addonEnv or api.env
+            for _, m in ipairs(value) do
+              mixin(obj, env[m])
+            end
+          end,
           parent = function(obj, value)
             api.SetParent(obj, api.env[value])
           end,
@@ -282,6 +288,12 @@ local function loader(api, cfg)
             local p = api.UserData(obj).parent
             if p then
               p[value] = obj
+            end
+          end,
+          securemixin = function(obj, value)
+            local env = ctx.useAddonEnv and addonEnv or api.env
+            for _, m in ipairs(value) do
+              mixin(obj, env[m])
             end
           end,
         }
@@ -332,13 +344,6 @@ local function loader(api, cfg)
             processAttrs(e, obj, 'early')
           end,
           Attrs = function(e, obj)
-            local env = ctx.useAddonEnv and addonEnv or api.env
-            for _, m in ipairs(e.attr.mixin or {}) do
-              mixin(obj, env[m])
-            end
-            for _, m in ipairs(e.attr.securemixin or {}) do
-              mixin(obj, env[m])
-            end
             processAttrs(e, obj, 'middle')
             initKidsMaybeFrames(e, obj, false)
           end,
