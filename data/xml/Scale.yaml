@@ -2,16 +2,34 @@
 name: Scale
 attributes:
   fromscalex:
+    impl:
+      method: SetFromScale
+      position: 1
     type: number
   fromscaley:
+    impl:
+      method: SetFromScale
+      position: 2
     type: number
   scalex:
+    impl:
+      method: SetScale
+      position: 1
     type: number
   scaley:
+    impl:
+      method: SetScale
+      position: 2
     type: number
   toscalex:
+    impl:
+      method: SetToScale
+      position: 1
     type: number
   toscaley:
+    impl:
+      method: SetToScale
+      position: 2
     type: number
 contents:
 - Origin

@@ -17,6 +17,8 @@ type:
                     method:
                       required: true
                       type: string
+                    position:
+                      type: number
             required:
               type: boolean
             type:
