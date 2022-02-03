@@ -1,0 +1,10 @@
+---
+name: EJ_GetNumTiers
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs:
+- name: numTiers
+  type: number
