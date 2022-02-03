@@ -11,7 +11,12 @@ local xmlimpls = (function()
     end
     local aimpls = {}
     for n, a in pairs(attrs) do
-      aimpls[n] = a.impl
+      if a.impl then
+        aimpls[n] = {
+          impl = a.impl,
+          phase = a.phase or 'middle',
+        }
+      end
     end
     local tag = v.impl
     if type(tag) == 'table' and tag.argument == 'self' then
@@ -287,25 +292,22 @@ local function loader(api, cfg)
 
         local function processAttrs(e, obj, phase)
           local objty = api.UserData(obj).type
+          local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
           for k, v in pairs(e.attr) do
             -- This assumes that uiobject types and xml types are the same "space" of strings.
-            local attrimpl = (xmlimpls[objty] or intrinsics[objty]).attrs[k]
-            local kphase = (attrimpl and attrimpl.phase) or (k == 'parent' and 'early') or 'middle'
-            if kphase == phase then
-              if not attrimpl then
-                local fn = xmlattrlang[k]
-                if fn then
-                  fn(obj, v)
-                end
-              elseif attrimpl.method then
-                local fn = api.uiobjectTypes[objty].metatable.__index[attrimpl.method]
+            local attr = attrs[k]
+            if attr and phase == attr.phase then
+              if attr.impl == 'internal' then
+                xmlattrlang[k](obj, v)
+              elseif attr.impl.method then
+                local fn = api.uiobjectTypes[objty].metatable.__index[attr.impl.method]
                 if type(v) == 'table' then -- stringlist
                   fn(obj, unpack(v))
                 else
                   fn(obj, v)
                 end
-              elseif attrimpl.field then
-                api.UserData(obj)[attrimpl.field] = v
+              elseif attr.impl.field then
+                api.UserData(obj)[attr.impl.field] = v
               else
                 error('invalid attribute impl for ' .. k)
               end

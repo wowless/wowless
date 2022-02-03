@@ -9,6 +9,7 @@ type:
             impl:
               type:
                 oneof:
+                - literal: internal
                 - record:
                     field:
                       required: true
@@ -17,10 +18,11 @@ type:
                     method:
                       required: true
                       type: string
-                    phase:
-                      type:
-                        oneof:
-                        - literal: late
+            phase:
+              type:
+                oneof:
+                - literal: early
+                - literal: late
             required:
               type: boolean
             type:

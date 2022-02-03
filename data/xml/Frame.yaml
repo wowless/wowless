@@ -54,6 +54,8 @@ attributes:
       method: SetMovable
     type: bool
   parent:
+    impl: internal
+    phase: early
     type: string
   propagatehyperlinkstoparent:
     type: bool

@@ -6,6 +6,7 @@ attributes:
       method: SetAlpha
     type: number
   hidden:
+    impl: internal
     type: bool
   ignoreparentalpha:
     impl:
@@ -22,8 +23,10 @@ attributes:
   name:
     type: string
   parentarray:
+    impl: internal
     type: string
   parentkey:
+    impl: internal
     type: string
   scale:
     impl:
