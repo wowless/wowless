@@ -285,6 +285,34 @@ local function loader(api, cfg)
           end,
         }
 
+        local function processAttrs(e, obj, phase)
+          local objty = api.UserData(obj).type
+          for k, v in pairs(e.attr) do
+            -- This assumes that uiobject types and xml types are the same "space" of strings.
+            local attrimpl = (xmlimpls[objty] or intrinsics[objty]).attrs[k]
+            local kphase = (attrimpl and attrimpl.phase) or (k == 'parent' and 'early') or 'middle'
+            if kphase == phase then
+              if not attrimpl then
+                local fn = xmlattrlang[k]
+                if fn then
+                  fn(obj, v)
+                end
+              elseif attrimpl.method then
+                local fn = api.uiobjectTypes[objty].metatable.__index[attrimpl.method]
+                if type(v) == 'table' then -- stringlist
+                  fn(obj, unpack(v))
+                else
+                  fn(obj, v)
+                end
+              elseif attrimpl.field then
+                api.UserData(obj)[attrimpl.field] = v
+              else
+                error('invalid attribute impl for ' .. k)
+              end
+            end
+          end
+        end
+
         local function initKidsMaybeFrames(e, obj, framesFlag)
           local frameykids = {
             -- TODO this list is incomplete
@@ -299,32 +327,11 @@ local function loader(api, cfg)
               newctx.loadElement(kid, obj)
             end
           end
-          if framesFlag then
-            -- TODO unify this with processing in middle phase
-            local objty = api.UserData(obj).type
-            -- This assumes that uiobject types and xml types are the same "space" of strings.
-            local attrimpls = (xmlimpls[objty] or intrinsics[objty]).attrs
-            for k, v in pairs(e.attr) do
-              local attrimpl = attrimpls[k]
-              if attrimpl and attrimpl.method and attrimpl.phase == 'late' then
-                local fn = api.uiobjectTypes[objty].metatable.__index[attrimpl.method]
-                if type(v) == 'table' then -- stringlist
-                  fn(obj, unpack(v))
-                else
-                  fn(obj, v)
-                end
-              end
-            end
-          end
         end
 
         local phases = {
           EarlyAttrs = function(e, obj)
-            for k, v in pairs(e.attr) do
-              if k == 'parent' then
-                xmlattrlang[k](obj, v)
-              end
-            end
+            processAttrs(e, obj, 'early')
           end,
           Attrs = function(e, obj)
             local env = ctx.useAddonEnv and addonEnv or api.env
@@ -334,39 +341,12 @@ local function loader(api, cfg)
             for _, m in ipairs(e.attr.securemixin or {}) do
               mixin(obj, env[m])
             end
-            local objty = api.UserData(obj).type
-            -- This assumes that uiobject types and xml types are the same "space" of strings.
-            local attrimpls = (xmlimpls[objty] or intrinsics[objty]).attrs
-            for k, v in pairs(e.attr) do
-              if k ~= 'parent' then
-                local attrimpl = attrimpls[k]
-                if attrimpl then
-                  if attrimpl.method then
-                    if attrimpl.phase ~= 'late' then
-                      local fn = api.uiobjectTypes[objty].metatable.__index[attrimpl.method]
-                      if type(v) == 'table' then -- stringlist
-                        fn(obj, unpack(v))
-                      else
-                        fn(obj, v)
-                      end
-                    end
-                  elseif attrimpl.field then
-                    api.UserData(obj)[attrimpl.field] = v
-                  else
-                    error('invalid attribute impl for ' .. k)
-                  end
-                else
-                  local fn = xmlattrlang[k]
-                  if fn then
-                    fn(obj, v)
-                  end
-                end
-              end
-            end
+            processAttrs(e, obj, 'middle')
             initKidsMaybeFrames(e, obj, false)
           end,
           Kids = function(e, obj)
             initKidsMaybeFrames(e, obj, true)
+            processAttrs(e, obj, 'late')
           end,
         }
 
