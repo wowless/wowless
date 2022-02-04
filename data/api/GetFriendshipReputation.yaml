@@ -4,14 +4,24 @@ status: unimplemented
 versions:
 - Mainline
 inputs:
-- - type: number
+- - name: factionID
+    type: number
 outputs:
-- type: number
-- type: number
-- type: number
-- type: string
-- type: string
-- type: number
-- type: string
-- type: number
-- type: number
+- name: friendID
+  type: number
+- name: friendRep
+  type: number
+- name: friendMaxRep
+  type: number
+- name: friendName
+  type: string
+- name: friendText
+  type: string
+- name: friendTexture
+  type: number
+- name: friendTextLevel
+  type: string
+- name: friendThreshold
+  type: number
+- name: nextFriendThreshold
+  type: number

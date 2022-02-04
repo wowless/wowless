@@ -1,0 +1,8 @@
+---
+name: GetGossipOptions
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}

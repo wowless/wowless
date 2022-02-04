@@ -1,0 +1,8 @@
+---
+name: GetGossipText
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: text
+  type: string

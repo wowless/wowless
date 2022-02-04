@@ -1,0 +1,11 @@
+---
+name: GetNumGossipAvailableQuests
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- name: numNewQuests
+  type: number
