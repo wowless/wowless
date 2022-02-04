@@ -5,4 +5,5 @@ inputs:
 - {}
 outputs:
 - name: isLoggedIn
+  stub: true
   type: bool
