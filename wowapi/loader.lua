@@ -89,28 +89,19 @@ local function mkdb2s(env)
   local read = require('pl.file').read
   return setmetatable({}, {
     __index = function(dbs, db)
-      return function()
-        if rawget(dbs, db) then
-          return dbs[db]()
-        end
-        local v, b = env.GetBuildInfo()
-        local version = v .. '.' .. b
-        local dbd = dbds[db]
-        local build = assert(dbd:build(version), ('cannot load %s in %s'):format(db, version))
-        local t = {}
-        for row in build:rows(read(join('extracts', version, 'db2', db .. '.db2'))) do
-          table.insert(t, row)
-        end
-        local function fn()
-          local idx = 0
-          return function()
-            idx = idx + 1
-            return t[idx]
-          end
-        end
-        dbs[db] = fn
-        return fn()
+      local v, b = env.GetBuildInfo()
+      local version = v .. '.' .. b
+      local dbd = dbds[db]
+      local build = assert(dbd:build(version), ('cannot load %s in %s'):format(db, version))
+      local t = {}
+      for row in build:rows(read(join('extracts', version, 'db2', db .. '.db2'))) do
+        table.insert(t, row)
       end
+      dbs[db] = {
+        data = t,
+        indices = {},
+      }
+      return dbs[db]
     end,
   })
 end
@@ -135,20 +126,30 @@ local function doGetFn(api, loader, apicfg, db2s)
       table.insert(
         args,
         (function()
-          local db2 = db2s[db.name]
           if not db.index then
-            return db2
-          else
-            -- TODO cache indices
-            return function(k)
-              k = type(k) == 'string' and k:lower() or k
-              for row in db2() do
-                local field = row[db.index]
-                field = type(field) == 'string' and field:lower() or field
-                if field == k then
-                  return row
-                end
+            return function()
+              local t = db2s[db.name].data
+              local idx = 0
+              return function()
+                idx = idx + 1
+                return t[idx]
               end
+            end
+          else
+            local function keyify(x)
+              return type(x) == 'string' and x:lower() or x
+            end
+            return function(k)
+              local db2 = db2s[db.name]
+              local index = db2.indices[db.index]
+              if not index then
+                index = {}
+                for _, row in ipairs(db2.data) do
+                  index[keyify(row[db.index])] = row
+                end
+                db2.indices[db.index] = index
+              end
+              return index[keyify(k)]
             end
           end
         end)()
