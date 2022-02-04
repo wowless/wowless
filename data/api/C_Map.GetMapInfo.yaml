@@ -8,4 +8,5 @@ outputs:
 - name: info
   type: C_Map.UiMapDetails
 dbs:
-- name: uimap
+- index: ID
+  name: uimap

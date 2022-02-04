@@ -1,8 +1,5 @@
 local chrclasses, unit = ...
-if unit then
-  for row in chrclasses() do
-    if row.ID == unit.class then
-      return row.Name_lang, row.Filename, row.ID
-    end
-  end
+local row = unit and chrclasses(unit.class)
+if row then
+  return row.Name_lang, row.Filename, row.ID
 end

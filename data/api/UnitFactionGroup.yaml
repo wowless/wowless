@@ -10,4 +10,5 @@ outputs:
 - name: localizedFactionName
   type: string
 dbs:
-- name: factiongroup
+- index: InternalName
+  name: factiongroup

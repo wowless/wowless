@@ -9,4 +9,5 @@ outputs:
   nilable: true
   type: C_CreatureInfo.ClassInfo
 dbs:
-- name: chrclasses
+- index: ID
+  name: chrclasses

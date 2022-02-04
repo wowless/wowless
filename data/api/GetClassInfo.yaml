@@ -12,4 +12,5 @@ outputs:
 - name: classID
   type: number
 dbs:
-- name: chrclasses
+- index: ID
+  name: chrclasses
