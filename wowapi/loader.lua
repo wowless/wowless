@@ -83,7 +83,7 @@ end)()
 
 -- TODO rationalize this with wowless loader
 local function mkdb2s(env)
-  -- Do this lazily because of insane loading order :(
+  -- Do this lazily because env.GetBuildInfo() isn't available till very late.
   local dbds = require('luadbd').dbds
   local join = require('path').join
   local read = require('pl.file').read
@@ -97,10 +97,16 @@ local function mkdb2s(env)
         local version = v .. '.' .. b
         local dbd = dbds[db]
         local build = assert(dbd:build(version), ('cannot load %s in %s'):format(db, version))
-        local db2file = join('extracts', version, 'db2', db .. '.db2')
-        local db2data = read(db2file)
-        local fn = function()
-          return build:rows(db2data)
+        local t = {}
+        for row in build:rows(read(join('extracts', version, 'db2', db .. '.db2'))) do
+          table.insert(t, row)
+        end
+        local function fn()
+          local idx = 0
+          return function()
+            idx = idx + 1
+            return t[idx]
+          end
         end
         dbs[db] = fn
         return fn()
