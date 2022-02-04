@@ -132,7 +132,27 @@ local function doGetFn(api, loader, apicfg, db2s)
       table.insert(args, api.states[st])
     end
     for _, db in ipairs(apicfg.dbs or {}) do
-      table.insert(args, db2s[db.name])
+      table.insert(
+        args,
+        (function()
+          local db2 = db2s[db.name]
+          if not db.index then
+            return db2
+          else
+            -- TODO cache indices
+            return function(k)
+              k = type(k) == 'string' and k:lower() or k
+              for row in db2() do
+                local field = row[db.index]
+                field = type(field) == 'string' and field:lower() or field
+                if field == k then
+                  return row
+                end
+              end
+            end
+          end
+        end)()
+      )
     end
     local impl = data.impl[apicfg.name]
     return function(...)
