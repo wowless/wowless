@@ -11,7 +11,7 @@ local validValues = (function()
   local v = {}
   for _, b in ipairs(buttons) do
     for _, d in ipairs(directions) do
-      v[b .. d] = true
+      v[(b .. d):lower()] = true
     end
   end
   return v
@@ -20,8 +20,10 @@ return (function(self, ...)
   local ud = u(self)
   util.twipe(ud.registeredClicks)
   for i = 1, select('#', ...) do
-    local type = select(i, ...)
-    assert(validValues[type], 'invalid click registration type')
-    ud.registeredClicks[type] = true
+    local clickType = select(i, ...)
+    assert(type(clickType) == 'string', 'expected string, got ' .. type(clickType))
+    local ltype = clickType:lower()
+    assert(validValues[ltype], 'invalid click registration type ' .. clickType)
+    ud.registeredClicks[ltype] = true
   end
 end)(...)

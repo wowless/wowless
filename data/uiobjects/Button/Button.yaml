@@ -34,7 +34,7 @@ fields:
     type: texture
   registeredClicks:
     init:
-      LeftButtonUp: true
+      leftbuttonup: true
 inherits:
 - Frame
 methods:
