@@ -5,9 +5,11 @@ versions:
 - Mainline
 inputs:
 - - name: factionID
+    nilable: true
     type: number
 outputs:
 - name: friendID
+  nilable: true
   type: number
 - name: friendRep
   type: number
