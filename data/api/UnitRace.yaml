@@ -12,4 +12,4 @@ outputs:
 - name: id
   type: number
 dbs:
-- chrraces
+- name: chrraces

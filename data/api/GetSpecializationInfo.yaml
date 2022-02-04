@@ -30,6 +30,6 @@ outputs:
 - name: primaryStat
   type: number
 dbs:
-- chrspecialization
+- name: chrspecialization
 states:
 - Units

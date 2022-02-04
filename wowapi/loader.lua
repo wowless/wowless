@@ -126,7 +126,7 @@ local function doGetFn(api, loader, apicfg, db2s)
       table.insert(args, api.states[st])
     end
     for _, db in ipairs(apicfg.dbs or {}) do
-      table.insert(args, db2s[db])
+      table.insert(args, db2s[db.name])
     end
     local impl = data.impl[apicfg.name]
     return function(...)

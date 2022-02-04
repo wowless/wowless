@@ -19,5 +19,5 @@ outputs:
   nilable: true
   type: number
 dbs:
-- chrclassesxpowertypes
-- powertype
+- name: chrclassesxpowertypes
+- name: powertype

@@ -8,5 +8,5 @@ outputs:
 - name: info
   type: C_Texture.AtlasInfo
 dbs:
-- uitextureatlas
-- uitextureatlasmember
+- name: uitextureatlas
+- name: uitextureatlasmember
