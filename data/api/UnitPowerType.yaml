@@ -19,5 +19,7 @@ outputs:
   nilable: true
   type: number
 dbs:
-- name: chrclassesxpowertypes
-- name: powertype
+- index: ClassID
+  name: chrclassesxpowertypes
+- index: PowerTypeEnum
+  name: powertype

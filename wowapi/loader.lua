@@ -145,7 +145,8 @@ local function doGetFn(api, loader, apicfg, db2s)
               if not index then
                 index = {}
                 for _, row in ipairs(db2.data) do
-                  index[keyify(row[db.index])] = row
+                  local rowkey = keyify(row[db.index])
+                  index[rowkey] = index[rowkey] or row
                 end
                 db2.indices[db.index] = index
               end
