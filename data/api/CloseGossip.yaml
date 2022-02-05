@@ -1,0 +1,9 @@
+---
+name: CloseGossip
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs: {}

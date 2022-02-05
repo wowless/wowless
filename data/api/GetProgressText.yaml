@@ -1,0 +1,11 @@
+---
+name: GetProgressText
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- name: progressText
+  type: string

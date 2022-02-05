@@ -1,0 +1,9 @@
+---
+name: GetActiveTitle
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: title
+  type: string

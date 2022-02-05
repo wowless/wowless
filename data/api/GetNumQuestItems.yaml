@@ -1,0 +1,11 @@
+---
+name: GetNumQuestItems
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- name: numRequiredItems
+  type: number

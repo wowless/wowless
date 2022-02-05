@@ -1,0 +1,11 @@
+---
+name: GetActiveQuestID
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: activeQuestID
+  type: number

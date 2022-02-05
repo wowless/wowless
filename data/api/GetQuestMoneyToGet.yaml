@@ -1,0 +1,11 @@
+---
+name: GetQuestMoneyToGet
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- name: money
+  type: number

@@ -1,0 +1,13 @@
+---
+name: IsQuestItemHidden
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: hidden
+  stub: 0
+  type: number

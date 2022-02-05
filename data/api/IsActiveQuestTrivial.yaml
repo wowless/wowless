@@ -1,0 +1,11 @@
+---
+name: IsActiveQuestTrivial
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: isActiveQuestTrivial
+  type: bool

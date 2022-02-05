@@ -1,0 +1,12 @@
+---
+name: GetAvailableTitle
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: title
+  type: string

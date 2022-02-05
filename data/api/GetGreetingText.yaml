@@ -1,0 +1,8 @@
+---
+name: GetGreetingText
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: greetingText
+  type: string
