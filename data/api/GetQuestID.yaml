@@ -1,8 +1,8 @@
 ---
-name: GetNumQuestItems
+name: GetQuestID
 status: unimplemented
 inputs:
 - {}
 outputs:
-- name: numRequiredItems
+- name: questID
   type: number

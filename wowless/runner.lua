@@ -66,6 +66,9 @@ local function run(cfg)
   api.SendEvent('TRADE_SKILL_CLOSE')
   api.SendEvent('GOSSIP_SHOW')
   api.SendEvent('GOSSIP_CLOSE')
+  api.SendEvent('QUEST_GREETING')
+  api.SendEvent('QUEST_PROGRESS')
+  api.SendEvent('QUEST_FINISHED')
   api.SendEvent('PLAYER_LOGOUT')
   return api
 end

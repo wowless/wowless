@@ -1,0 +1,19 @@
+---
+name: GetAvailableQuestInfo
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: isTrivial
+  type: bool
+- name: frequency
+  type: number
+- name: isRepeatable
+  type: bool
+- name: isLegendary
+  type: bool
+- name: questID
+  type: number

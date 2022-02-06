@@ -1,9 +1,6 @@
 ---
 name: GetAvailableTitle
 status: unimplemented
-versions:
-- TBC
-- Vanilla
 inputs:
 - - name: index
     type: number

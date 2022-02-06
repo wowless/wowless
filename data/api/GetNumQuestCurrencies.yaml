@@ -1,0 +1,10 @@
+---
+name: GetNumQuestCurrencies
+status: unimplemented
+versions:
+- Mainline
+inputs:
+- {}
+outputs:
+- name: numQuestCurrencies
+  type: number

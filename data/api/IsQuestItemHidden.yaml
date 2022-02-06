@@ -1,9 +1,6 @@
 ---
 name: IsQuestItemHidden
 status: unimplemented
-versions:
-- TBC
-- Vanilla
 inputs:
 - - name: index
     type: number
