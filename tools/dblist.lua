@@ -3,7 +3,7 @@ local dbset = {
 }
 for _, v in pairs(require('wowapi.data').apis) do
   for _, db in ipairs(v.dbs or {}) do
-    dbset[db] = true
+    dbset[db.name] = true
   end
 end
 local dblist = {}
