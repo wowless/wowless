@@ -22,6 +22,7 @@ local function run(cfg)
   api.SendEvent('UPDATE_CHAT_WINDOWS')
   api.SendEvent('VARIABLES_LOADED')
   api.SendEvent('PLAYER_ENTERING_WORLD')
+  api.SendEvent('TRIAL_STATUS_UPDATE')
   local clickBlacklist = {
     PVPReadyDialogEnterBattleButton = true,
   }
