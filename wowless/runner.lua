@@ -24,6 +24,7 @@ local function run(cfg)
   api.SendEvent('PLAYER_ENTERING_WORLD')
   api.SendEvent('TRIAL_STATUS_UPDATE')
   api.SendEvent('DISPLAY_SIZE_CHANGED')
+  api.SendEvent('SPELLS_CHANGED')
   local clickBlacklist = {
     PVPReadyDialogEnterBattleButton = true,
   }
