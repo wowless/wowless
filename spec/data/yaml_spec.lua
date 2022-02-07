@@ -4,6 +4,7 @@ local validate = require('wowapi.schema').validate
 
 local dirschemas = {
   api = 'api',
+  events = 'event',
   schemas = 'schema',
   state = 'state',
   structures = 'structure',
