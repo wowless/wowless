@@ -2,7 +2,7 @@ describe('tools.scrapelib', function()
   local function scrape(data)
     local tmp = os.tmpname()
     require('pl.file').write(tmp, 'TheFlatDumperData = ' .. require('pl.pretty').write(data))
-    local ret = require('tools.scrapelib')(tmp)
+    local ret = require('tools.scrapelib')(tmp).Data
     os.remove(tmp)
     return ret
   end

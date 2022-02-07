@@ -126,5 +126,12 @@ local dataMT = {
 return function(filename)
   local env = {}
   setfenv(loadfile(filename), env)()
-  return setmetatable(env.TheFlatDumperData or env.WowlessSaverData, dataMT), env.TheFlatDumperBuildInfo
+  local ret = {}
+  for k, v in pairs(env) do
+    if k:sub(1, 13) == 'TheFlatDumper' then
+      local kk = k:sub(14)
+      ret[kk] = kk == 'Data' and setmetatable(v, dataMT) or v
+    end
+  end
+  return ret
 end

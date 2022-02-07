@@ -34,8 +34,9 @@ local function otherConstants(data)
 end
 
 do
-  local data, buildinfo = require('tools.scrapelib')(arg[1])
-  print(string.format('function GetBuildInfo()\n  return %q, %q, %q, %d\nend', unpack(buildinfo)))
+  local scrape = require('tools.scrapelib')(arg[1])
+  print(string.format('function GetBuildInfo()\n  return %q, %q, %q, %d\nend', unpack(scrape.BuildInfo)))
+  local data = scrape.Data
 
   local result = {}
   recursiveMixin(result, { Constants = data:resolve(data:global('sConstants')) })
