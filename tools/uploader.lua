@@ -5,18 +5,24 @@ local data = (function()
   local dump = require('libdeflate'):DecompressDeflate(env.TheFlatDumper)
   return setfenv(loadstring('return ' .. dump), env)()
 end)()
+local keys = {}
+for k in pairs(data) do
+  table.insert(keys, k)
+end
+table.sort(keys)
 local pprint = require('pl.pretty').write
 local tmpfile = (function()
   local name = os.tmpname()
   local f = io.open(name, 'w')
-  f:write(table.concat({
-    'TheFlatDumperBuildInfo = ',
-    pprint(data.BuildInfo),
-    '\n',
-    'TheFlatDumperData = ',
-    pprint(data.Data),
-    '\n',
-  }, ''))
+  for _, k in ipairs(keys) do
+    f:write(table.concat({
+      'TheFlatDumper',
+      k,
+      ' = ',
+      pprint(data[k]),
+      '\n',
+    }, ''))
+  end
   f:close()
   return name
 end)()
