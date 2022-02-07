@@ -13,6 +13,9 @@ fields:
   type: number
 - name: progress
   type: number
+- name: raidString
+  nilable: true
+  type: string
 - innerType: C_WeeklyRewards.WeeklyRewardActivityRewardInfo
   name: rewards
   type: table
