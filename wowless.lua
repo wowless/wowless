@@ -1,11 +1,18 @@
-local tag = arg[2] or 'wow_classic'
+local args = (function()
+  local parser = require('argparse')()
+  parser:argument('loglevel', 'log level'):default('0')
+  parser:argument('product', 'product tag'):default('wow_classic')
+  parser:argument('flavor', 'product flavor'):default('TBC')
+  parser:argument('addon', 'addon directory to test'):args('?')
+  return parser:parse()
+end)()
 local api = require('wowless.runner').run({
-  loglevel = arg[1] and tonumber(arg[1]) or 0,
-  dir = 'extracts/' .. tag,
-  version = arg[3] or 'TBC',
-  otherAddonDirs = { arg[4] },
+  loglevel = assert(tonumber(args.loglevel)),
+  dir = 'extracts/' .. args.product,
+  version = args.flavor,
+  otherAddonDirs = { args.addon },
 })
 if api.GetErrorCount() ~= 0 then
-  io.stderr:write('failure on ' .. tag .. '\n')
+  io.stderr:write('failure on ' .. args.tag .. '\n')
   os.exit(1)
 end

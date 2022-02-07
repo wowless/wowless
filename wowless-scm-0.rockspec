@@ -6,6 +6,7 @@ source = {
 }
 dependencies = {
   'lua = 5.1',
+  'argparse',
   'bitlib',
   'cluacov',
   'json-lua',
