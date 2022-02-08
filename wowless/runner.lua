@@ -73,8 +73,13 @@ local function run(cfg)
   api.SendEvent('QUEST_PROGRESS')
   api.SendEvent('QUEST_FINISHED')
   if cfg.allevents then
+    local eventBlacklist = {
+      PLAYER_LOGIN = true,
+      PLAYER_LOGOUT = true,
+      UPDATE_MASTER_LOOT_LIST = true,
+    }
     for k, v in pairs(require('wowapi.data').events) do
-      if k ~= 'PLAYER_LOGIN' and k ~= 'PLAYER_LOGOUT' and not next(v.payload) then
+      if not eventBlacklist[k] and not next(v.payload) then
         api.SendEvent(k)
       end
     end
