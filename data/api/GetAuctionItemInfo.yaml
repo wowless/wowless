@@ -1,0 +1,51 @@
+---
+name: GetAuctionItemInfo
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: type
+    type: string
+  - name: index
+    type: number
+outputs:
+- name: name
+  type: string
+- name: texture
+  type: number
+- name: count
+  type: number
+- name: quality
+  type: number
+- name: canUse
+  type: number
+- name: level
+  type: number
+- name: levelColHeader
+  type: string
+- name: minBid
+  type: number
+- name: minIncrement
+  type: number
+- name: buyoutPrice
+  type: number
+- name: bidAmount
+  type: number
+- name: highBidder
+  nilable: true
+  type: string
+- name: bidderFullName
+  nilable: true
+  type: string
+- name: owner
+  type: string
+- name: ownerFullName
+  nilable: true
+  type: string
+- name: saleStatus
+  type: number
+- name: itemId
+  type: number
+- name: hasAllInfo
+  type: bool

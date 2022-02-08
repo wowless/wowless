@@ -1,0 +1,14 @@
+---
+name: GetAuctionSort
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: type
+    type: string
+outputs:
+- name: column
+  type: string
+- name: reversed
+  type: bool

@@ -1,0 +1,14 @@
+---
+name: GetNumAuctionItems
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: list
+    type: string
+outputs:
+- name: batch
+  type: number
+- name: count
+  type: number

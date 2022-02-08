@@ -1,0 +1,14 @@
+---
+name: GetInstanceLockTimeRemaining
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: lockTimeLeft
+  type: number
+- name: isPreviousInstance
+  type: bool
+- name: encountersTotal
+  type: number
+- name: encountersComplete
+  type: number
