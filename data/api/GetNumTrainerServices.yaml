@@ -1,0 +1,8 @@
+---
+name: GetNumTrainerServices
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: numServices
+  type: number

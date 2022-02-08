@@ -1,0 +1,15 @@
+---
+name: GetTrainerServiceInfo
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: name
+  type: string
+- name: rank
+  type: string
+- name: category
+  type: string
+- name: expanded
+  type: oneornil

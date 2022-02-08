@@ -1,0 +1,7 @@
+---
+name: ExpandTrainerSkillLine
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs: {}

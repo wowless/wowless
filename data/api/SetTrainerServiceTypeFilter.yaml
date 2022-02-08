@@ -1,0 +1,9 @@
+---
+name: SetTrainerServiceTypeFilter
+status: unimplemented
+inputs:
+- - name: type
+    type: string
+  - name: status
+    type: number
+outputs: {}

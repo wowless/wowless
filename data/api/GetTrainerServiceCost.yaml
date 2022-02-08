@@ -1,0 +1,11 @@
+---
+name: GetTrainerServiceCost
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: money
+  type: number
+- name: isProfession
+  type: bool

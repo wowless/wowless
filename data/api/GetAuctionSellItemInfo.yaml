@@ -1,0 +1,29 @@
+---
+name: GetAuctionSellItemInfo
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- {}
+outputs:
+- name: name
+  type: string
+- name: texture
+  type: number
+- name: count
+  type: number
+- name: quality
+  type: number
+- name: canUse
+  type: bool
+- name: price
+  type: number
+- name: pricePerUnit
+  type: number
+- name: stackCount
+  type: number
+- name: totalCount
+  type: number
+- name: itemID
+  type: number

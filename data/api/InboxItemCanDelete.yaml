@@ -1,0 +1,9 @@
+---
+name: InboxItemCanDelete
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: value
+  type: bool
