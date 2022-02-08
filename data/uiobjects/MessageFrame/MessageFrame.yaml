@@ -5,3 +5,5 @@ inherits:
 methods:
   AddMessage:
     status: unimplemented
+  Clear:
+    status: unimplemented
