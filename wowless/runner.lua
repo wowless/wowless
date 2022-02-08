@@ -72,6 +72,13 @@ local function run(cfg)
   api.SendEvent('QUEST_GREETING')
   api.SendEvent('QUEST_PROGRESS')
   api.SendEvent('QUEST_FINISHED')
+  if cfg.allevents then
+    for k, v in pairs(require('wowapi.data').events) do
+      if k ~= 'PLAYER_LOGIN' and k ~= 'PLAYER_LOGOUT' and not next(v.payload) then
+        api.SendEvent(k)
+      end
+    end
+  end
   api.SendEvent('PLAYER_LOGOUT')
   return api
 end

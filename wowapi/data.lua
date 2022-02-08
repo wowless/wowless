@@ -31,6 +31,7 @@ end
 
 return {
   apis = loaddir('api', 'yaml'),
+  events = loaddir('events', 'yaml'),
   impl = loaddir('impl', 'lua'),
   schemas = loaddir('schemas', 'yaml'),
   state = loaddir('state', 'yaml'),
