@@ -1,0 +1,7 @@
+---
+name: C_WowTokenSecure.ConfirmSellToken
+status: unimplemented
+inputs:
+- - name: sell
+    type: bool
+outputs: {}

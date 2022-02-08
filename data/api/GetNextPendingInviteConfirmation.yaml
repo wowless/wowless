@@ -1,0 +1,9 @@
+---
+name: GetNextPendingInviteConfirmation
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: firstInvite
+  nilable: true
+  type: number

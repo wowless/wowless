@@ -1,3 +1,13 @@
 ---
 name: GetBattlefieldStatus
 status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: queueStatus
+  type: string
+- name: queueMapName
+  type: string
+- name: queueInstanceID
+  type: number

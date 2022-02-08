@@ -1,3 +1,30 @@
 ---
 name: GetBattlegroundInfo
 status: unimplemented
+inputs:
+- {}
+outputs:
+- name: localizedName
+  type: string
+- name: canEnter
+  type: bool
+- name: isHoliday
+  type: bool
+- name: isRandom
+  type: bool
+- name: battleGroundID
+  type: number
+- name: mapDescription
+  type: string
+- name: bgMapID
+  type: number
+- name: maxPlayers
+  type: number
+- name: gameType
+  type: number
+- name: iconTexture
+  type: number
+- name: shortDescription
+  type: string
+- name: longDescription
+  type: string
