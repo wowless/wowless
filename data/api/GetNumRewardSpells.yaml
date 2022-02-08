@@ -1,0 +1,8 @@
+---
+name: GetNumRewardSpells
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: numRewardSpells
+  type: number

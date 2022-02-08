@@ -1,0 +1,8 @@
+---
+name: GetRewardMoney
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: money
+  type: number

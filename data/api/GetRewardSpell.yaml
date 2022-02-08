@@ -1,0 +1,25 @@
+---
+name: GetRewardSpell
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: texture
+  type: number
+- name: spellName
+  type: string
+- name: isTradeskillSpell
+  type: bool
+- name: isSpellLearned
+  type: bool
+- name: hideSpellLearnText
+  type: bool
+- name: isBoostSpell
+  type: bool
+- name: garrFollowerID
+  nilable: true
+  type: number
+- name: genericUnlock
+  type: bool
+- name: spellID
+  type: number

@@ -1,0 +1,8 @@
+---
+name: GetNumQuestRewards
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: numRewards
+  type: number

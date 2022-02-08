@@ -1,0 +1,8 @@
+---
+name: GetNumQuestChoices
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: numChoices
+  type: number

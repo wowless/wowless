@@ -1,0 +1,12 @@
+---
+name: GetQuestPortraitTurnIn
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: questPortrait
+  type: number
+- name: questPortraitText
+  type: string
+- name: questPortraitName
+  type: string
