@@ -1,0 +1,18 @@
+---
+name: UnitSelectionColor
+status: unimplemented
+inputs:
+- - name: unit
+    type: unit
+  - name: useExtendedColors
+    nilable: true
+    type: bool
+outputs:
+- name: red
+  type: number
+- name: green
+  type: number
+- name: blue
+  type: number
+- name: alpha
+  type: number
