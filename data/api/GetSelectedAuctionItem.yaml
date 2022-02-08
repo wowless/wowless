@@ -1,0 +1,12 @@
+---
+name: GetSelectedAuctionItem
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: type
+    type: string
+outputs:
+- name: index
+  type: number

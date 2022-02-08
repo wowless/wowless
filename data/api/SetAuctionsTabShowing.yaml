@@ -1,0 +1,10 @@
+---
+name: SetAuctionsTabShowing
+status: unimplemented
+versions:
+- TBC
+- Vanilla
+inputs:
+- - name: value
+    type: bool
+outputs: {}
