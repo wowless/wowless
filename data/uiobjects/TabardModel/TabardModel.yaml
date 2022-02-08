@@ -2,4 +2,10 @@
 name: TabardModel
 inherits:
 - PlayerModel
-methods: {}
+methods:
+  GetLowerEmblemTexture:
+    status: unimplemented
+  GetUpperEmblemTexture:
+    status: unimplemented
+  InitializeTabardColors:
+    status: unimplemented
