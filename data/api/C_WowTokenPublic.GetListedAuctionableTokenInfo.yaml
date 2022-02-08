@@ -1,0 +1,13 @@
+---
+name: C_WowTokenPublic.GetListedAuctionableTokenInfo
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: itemID
+  type: number
+- name: buyoutPrice
+  type: number
+- name: duration
+  type: number

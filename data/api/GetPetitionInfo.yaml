@@ -1,0 +1,20 @@
+---
+name: GetPetitionInfo
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: petitionType
+  type: string
+- name: title
+  type: string
+- name: bodyText
+  type: string
+- name: maxSignatures
+  type: number
+- name: originatorName
+  type: string
+- name: isOriginator
+  type: bool
+- name: minSignatures
+  type: number

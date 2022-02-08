@@ -1,0 +1,9 @@
+---
+name: GetPetitionNameInfo
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: name
+  type: string
