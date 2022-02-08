@@ -80,10 +80,15 @@ local function run(cfg)
       PLAYER_LOGOUT = true,
       UPDATE_MASTER_LOOT_LIST = true,
     }
+    local keys = {}
     for k, v in pairs(require('wowapi.data').events) do
       if not eventBlacklist[k] and not next(v.payload) then
-        api.SendEvent(k)
+        table.insert(keys, k)
       end
+    end
+    table.sort(keys)
+    for _, k in ipairs(keys) do
+      api.SendEvent(k)
     end
   end
   api.SendEvent('PLAYER_LOGOUT')
