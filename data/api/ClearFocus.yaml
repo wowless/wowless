@@ -1,0 +1,9 @@
+---
+name: ClearFocus
+status: unimplemented
+versions:
+- Mainline
+- TBC
+inputs:
+- {}
+outputs: {}

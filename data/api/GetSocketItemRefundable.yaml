@@ -1,0 +1,11 @@
+---
+name: GetSocketItemRefundable
+status: unimplemented
+versions:
+- Mainline
+- TBC
+inputs:
+- {}
+outputs:
+- name: value
+  type: bool
