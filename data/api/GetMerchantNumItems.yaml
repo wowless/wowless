@@ -1,0 +1,8 @@
+---
+name: GetMerchantNumItems
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: numMerchantItems
+  type: number

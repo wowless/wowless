@@ -1,0 +1,8 @@
+---
+name: GetNumBuybackItems
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: numBuybackItems
+  type: number

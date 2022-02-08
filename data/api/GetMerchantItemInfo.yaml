@@ -1,0 +1,26 @@
+---
+name: GetMerchantItemInfo
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: name
+  type: number
+- name: texture
+  type: string
+- name: price
+  type: number
+- name: quantity
+  type: number
+- name: numAvailable
+  type: number
+- name: isPurchasable
+  type: oneornil
+- name: isUsable
+  type: oneornil
+- name: extendedCost
+  type: oneornil
+- name: currencyID
+  nilable: true
+  type: number

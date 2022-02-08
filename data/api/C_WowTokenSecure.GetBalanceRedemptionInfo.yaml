@@ -1,0 +1,14 @@
+---
+name: C_WowTokenSecure.GetBalanceRedemptionInfo
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: currentBalance
+  type: number
+- name: addedBalance
+  type: number
+- name: canRedeem
+  type: bool
+- name: cannotRedeemReason
+  type: string

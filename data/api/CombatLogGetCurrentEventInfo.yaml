@@ -1,0 +1,20 @@
+---
+name: CombatLogGetCurrentEventInfo
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: timestamp
+  type: number
+- name: subevent
+  type: string
+- name: hideCaster
+  type: bool
+- name: guid
+  type: string
+- name: name
+  type: string
+- name: flags
+  type: number
+- name: raidFlags
+  type: number
