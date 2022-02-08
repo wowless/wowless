@@ -1,0 +1,8 @@
+---
+name: ItemTextGetPage
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: pageNum
+  type: number

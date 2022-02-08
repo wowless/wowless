@@ -1,3 +1,27 @@
 ---
 name: GetInstanceInfo
 status: unimplemented
+inputs:
+- {}
+outputs:
+- name: name
+  type: string
+- name: instanceType
+  type: string
+- name: difficultyID
+  type: number
+- name: difficultyName
+  type: string
+- name: maxPlayers
+  type: number
+- name: dynamicDifficulty
+  type: number
+- name: isDynamic
+  type: bool
+- name: instanceID
+  type: number
+- name: instanceGroupSize
+  type: number
+- name: lfgDungeonID
+  nilable: true
+  type: number

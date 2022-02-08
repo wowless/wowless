@@ -1,0 +1,8 @@
+---
+name: ItemTextHasNextPage
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: value
+  type: oneornil

@@ -1,0 +1,8 @@
+---
+name: ItemTextGetText
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: pageBody
+  type: string

@@ -1,0 +1,7 @@
+---
+name: SetTradeMoney
+status: unimplemented
+inputs:
+- - name: money
+    type: number
+outputs: {}
