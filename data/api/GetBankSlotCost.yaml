@@ -1,0 +1,9 @@
+---
+name: GetBankSlotCost
+status: unimplemented
+inputs:
+- - name: numSlots
+    type: number
+outputs:
+- name: cost
+  type: number

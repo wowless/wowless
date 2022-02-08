@@ -24,5 +24,17 @@ local t = {
   bag1slot = 21,
   bag2slot = 22,
   bag3slot = 23,
+  bag1 = 64,
+  bag2 = 65,
+  bag3 = 66,
+  bag4 = 67,
+  bag5 = 68,
+  bag6 = 69,
+  bag7 = 70,
+  bag8 = 71,
+  bag9 = 72,
+  bag10 = 73,
+  bag11 = 74,
+  bag12 = 75,
 }
 return assert(t[string.lower(slotName)], 'unknown slot name ' .. slotName)
