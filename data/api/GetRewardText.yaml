@@ -1,0 +1,8 @@
+---
+name: GetRewardText
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: rewardText
+  type: string

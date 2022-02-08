@@ -15,6 +15,6 @@ local api = require('wowless.runner').run({
   allevents = args.allevents,
 })
 if api.GetErrorCount() ~= 0 then
-  io.stderr:write('failure on ' .. args.tag .. '\n')
+  io.stderr:write('failure on ' .. args.product .. '\n')
   os.exit(1)
 end
