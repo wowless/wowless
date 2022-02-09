@@ -77,7 +77,6 @@ local function run(cfg)
       INSTANCE_LOCK_START = true,
       INSTANCE_LOCK_WARNING = true,
       OPEN_MASTER_LOOT_LIST = true,
-      PARTY_INVITE_CANCEL = true, -- does not fire in vanilla
       PLAYER_LOGIN = true,
       PLAYER_LOGOUT = true,
       UPDATE_MASTER_LOOT_LIST = true,
