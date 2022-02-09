@@ -1,0 +1,8 @@
+---
+name: C_Trophy.MonumentLoadList
+status: unimplemented
+flavors:
+- Mainline
+inputs:
+- {}
+outputs: {}

@@ -1,0 +1,8 @@
+---
+name: C_BlackMarket.Close
+status: unimplemented
+flavors:
+- Mainline
+inputs:
+- {}
+outputs: {}
