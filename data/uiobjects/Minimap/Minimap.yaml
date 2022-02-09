@@ -16,33 +16,33 @@ methods:
   PingLocation:
     status: unimplemented
   SetArchBlobInsideAlpha:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetArchBlobInsideTexture:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetArchBlobOutsideAlpha:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetArchBlobOutsideTexture:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetArchBlobRingAlpha:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetArchBlobRingScalar:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetArchBlobRingTexture:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetBlipTexture:
     status: unimplemented
   SetCorpsePOIArrowTexture:
@@ -56,71 +56,71 @@ methods:
   SetPOIArrowTexture:
     status: unimplemented
   SetQuestBlobInsideAlpha:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetQuestBlobInsideTexture:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetQuestBlobOutsideAlpha:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetQuestBlobOutsideSelectedTexture:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetQuestBlobOutsideTexture:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetQuestBlobRingAlpha:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetQuestBlobRingScalar:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetQuestBlobRingTexture:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetStaticPOIArrowTexture:
     status: unimplemented
   SetTaskBlobInsideAlpha:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetTaskBlobInsideTexture:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetTaskBlobOutsideAlpha:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetTaskBlobOutsideSelectedTexture:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetTaskBlobOutsideTexture:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetTaskBlobRingAlpha:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetTaskBlobRingScalar:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetTaskBlobRingTexture:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetZoom:
     status: unimplemented
   UpdateBlips:

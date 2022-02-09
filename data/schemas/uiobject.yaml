@@ -28,6 +28,9 @@ type:
             fields:
               type:
                 sequenceof: string
+            flavors:
+              type:
+                schema: flavors
             outputs:
               type:
                 sequenceof:
@@ -47,9 +50,6 @@ type:
                 - literal: implemented
                 - literal: setter
                 - literal: unimplemented
-            versions:
-              type:
-                schema: flavors
     name:
       required: true
       type: string

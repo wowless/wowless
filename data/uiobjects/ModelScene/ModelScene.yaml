@@ -77,9 +77,9 @@ methods:
   SetCameraPosition:
     status: unimplemented
   SetDesaturation:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetDrawLayer:
     status: unimplemented
   SetFogColor:
@@ -101,9 +101,9 @@ methods:
   SetLightVisible:
     status: unimplemented
   SetPaused:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetViewInsets:
     status: unimplemented
   SetViewTranslation:

@@ -104,7 +104,7 @@ for name, obj in pairs(existing) do
         for v in pairs(vers) do
           table.insert(vs, v)
         end
-        obj.cfg.methods[m].versions = vs
+        obj.cfg.methods[m].flavors = vs
       end
     end
     local fn = ('data/uiobjects/%s/%s.yaml'):format(name, name)

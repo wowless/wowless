@@ -6,9 +6,9 @@ inherits:
 - Frame
 methods:
   AddAtlas:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   AddDoubleLine:
     status: unimplemented
   AddFontStrings:
@@ -32,13 +32,13 @@ methods:
   GetAnchorType:
     status: unimplemented
   GetAzeritePowerID:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   GetCustomLineSpacing:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   GetItem:
     status: unimplemented
   GetMinimumWidth:
@@ -68,51 +68,51 @@ methods:
   ResetSecondaryCompareItem:
     status: unimplemented
   SetAchievementByID:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetAction:
     status: unimplemented
   SetAllowShowWithNoLines:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetAnchorType:
     status: unimplemented
   SetArtifactItem:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetArtifactPowerByID:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetAuctionItem:
-    status: unimplemented
-    versions:
+    flavors:
     - TBC
     - Vanilla
+    status: unimplemented
   SetAuctionSellItem:
-    status: unimplemented
-    versions:
+    flavors:
     - TBC
     - Vanilla
+    status: unimplemented
   SetAzeriteEssence:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetAzeriteEssenceSlot:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetAzeritePower:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetBackpackToken:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetBagItem:
     status: unimplemented
   SetBagItemChild:
@@ -120,53 +120,53 @@ methods:
   SetBuybackItem:
     status: unimplemented
   SetCompanionPet:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetCompareAzeritePower:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetCompareItem:
     status: unimplemented
   SetConduit:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetCraftItem:
-    status: unimplemented
-    versions:
+    flavors:
     - TBC
     - Vanilla
+    status: unimplemented
   SetCraftSpell:
-    status: unimplemented
-    versions:
+    flavors:
     - TBC
     - Vanilla
+    status: unimplemented
   SetCurrencyByID:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetCurrencyToken:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetCurrencyTokenByID:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetCustomLineSpacing:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetEnhancedConduit:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetEquipmentSet:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetExistingSocketGem:
     status: unimplemented
   SetFrameStack:
@@ -174,9 +174,9 @@ methods:
   SetGuildBankItem:
     status: unimplemented
   SetHeirloomByItemID:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetHyperlink:
     status: unimplemented
   SetInboxItem:
@@ -190,21 +190,21 @@ methods:
   SetItemByID:
     status: unimplemented
   SetItemKey:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetLFGDungeonReward:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetLFGDungeonShortageReward:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetLootCurrency:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetLootItem:
     status: unimplemented
   SetLootRollItem:
@@ -216,13 +216,13 @@ methods:
   SetMinimumWidth:
     status: unimplemented
   SetMountBySpellID:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetOwnedItemByID:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetOwner:
     fields:
     - tooltipOwner
@@ -234,67 +234,67 @@ methods:
   SetPossession:
     status: unimplemented
   SetPvpBrawl:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetPvpTalent:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetQuestCurrency:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetQuestItem:
     status: unimplemented
   SetQuestLogCurrency:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetQuestLogItem:
     status: unimplemented
   SetQuestLogRewardSpell:
     status: unimplemented
   SetQuestLogSpecialItem:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetQuestPartyProgress:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetQuestRewardSpell:
     status: unimplemented
   SetRecipeRankInfo:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetRecipeReagentItem:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetRecipeResultItem:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetRuneforgeResultItem:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetSendMailItem:
     status: unimplemented
   SetShapeshift:
     status: unimplemented
   SetShrinkToFitWrapped:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetSocketedItem:
     status: unimplemented
   SetSocketedRelic:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetSocketGem:
     status: unimplemented
   SetSpellBookItem:
@@ -308,29 +308,29 @@ methods:
   SetTotem:
     status: unimplemented
   SetToyByItemID:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
-  SetTrackingSpell:
     status: unimplemented
-    versions:
+  SetTrackingSpell:
+    flavors:
     - TBC
     - Vanilla
+    status: unimplemented
   SetTradePlayerItem:
     status: unimplemented
   SetTradeSkillItem:
-    status: unimplemented
-    versions:
+    flavors:
     - TBC
     - Vanilla
+    status: unimplemented
   SetTradeTargetItem:
     status: unimplemented
   SetTrainerService:
     status: unimplemented
   SetTransmogrifyItem:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetUnit:
     status: unimplemented
   SetUnitAura:
@@ -340,22 +340,22 @@ methods:
   SetUnitDebuff:
     status: unimplemented
   SetUpgradeItem:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetVoidDepositItem:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetVoidItem:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetVoidWithdrawalItem:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
   SetWeeklyReward:
-    status: unimplemented
-    versions:
+    flavors:
     - Mainline
+    status: unimplemented
