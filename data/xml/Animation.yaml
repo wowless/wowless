@@ -16,6 +16,7 @@ attributes:
       method: SetOrder
     type: number
   parentkey:
+    impl: internal
     type: string
   smoothing:
     impl:
