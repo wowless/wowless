@@ -8,3 +8,7 @@ outputs:
   type: number
 - name: numBNetOnline
   type: number
+- name: numBNetFavorite
+  type: number
+- name: numBNetFavoriteOnline
+  type: number
