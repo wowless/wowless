@@ -1,7 +1,7 @@
 ---
 name: CraftIsEnchanting
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

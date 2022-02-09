@@ -1,6 +1,6 @@
 ---
 name: ChannelInfo
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla

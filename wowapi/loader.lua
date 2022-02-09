@@ -1,13 +1,13 @@
 local data = require('wowapi.data')
 local plprettywrite = require('pl.pretty').write
 
-local function loadApis(version)
+local function loadApis(flavor)
   local apis = {}
   for fn, yaml in pairs(data.apis) do
-    local match = not yaml.versions
-    if yaml.versions then
-      for _, v in ipairs(yaml.versions) do
-        if version == v then
+    local match = not yaml.flavors
+    if yaml.flavors then
+      for _, f in ipairs(yaml.flavors) do
+        if flavor == f then
           match = true
         end
       end

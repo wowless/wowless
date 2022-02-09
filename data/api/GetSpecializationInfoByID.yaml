@@ -1,7 +1,7 @@
 ---
 name: GetSpecializationInfoByID
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - - name: specID

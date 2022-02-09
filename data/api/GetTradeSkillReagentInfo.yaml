@@ -1,7 +1,7 @@
 ---
 name: GetTradeSkillReagentInfo
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

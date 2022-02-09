@@ -1,7 +1,7 @@
 ---
 name: GetTrackingTexture
 status: unimplemented
-versions:
+flavors:
 - Vanilla
 inputs:
 - {}

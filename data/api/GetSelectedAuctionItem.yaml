@@ -1,7 +1,7 @@
 ---
 name: GetSelectedAuctionItem
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

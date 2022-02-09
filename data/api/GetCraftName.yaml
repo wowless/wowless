@@ -1,7 +1,7 @@
 ---
 name: GetCraftName
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

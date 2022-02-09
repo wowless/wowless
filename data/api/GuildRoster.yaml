@@ -1,7 +1,7 @@
 ---
 name: GuildRoster
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

@@ -1,7 +1,7 @@
 ---
 name: EJ_GetNumTiers
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - {}

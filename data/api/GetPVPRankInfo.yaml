@@ -1,7 +1,7 @@
 ---
 name: GetPVPRankInfo
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

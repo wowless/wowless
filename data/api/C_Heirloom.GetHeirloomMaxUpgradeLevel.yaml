@@ -1,7 +1,7 @@
 ---
 name: C_Heirloom.GetHeirloomMaxUpgradeLevel
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - - name: itemID

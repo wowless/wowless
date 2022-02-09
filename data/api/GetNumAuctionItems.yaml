@@ -1,7 +1,7 @@
 ---
 name: GetNumAuctionItems
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

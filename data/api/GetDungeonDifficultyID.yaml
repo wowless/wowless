@@ -1,7 +1,7 @@
 ---
 name: GetDungeonDifficultyID
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - {}

@@ -1,7 +1,7 @@
 ---
 name: GetGuildBankMoney
 status: unimplemented
-versions:
+flavors:
 - Mainline
 - TBC
 inputs:

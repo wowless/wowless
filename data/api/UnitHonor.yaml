@@ -1,7 +1,7 @@
 ---
 name: UnitHonor
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - - type: string

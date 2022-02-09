@@ -1,7 +1,7 @@
 ---
 name: GetTradeSkillIcon
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

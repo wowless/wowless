@@ -1,7 +1,7 @@
 ---
 name: GetAchievementCriteriaInfoByID
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - - name: achievementID

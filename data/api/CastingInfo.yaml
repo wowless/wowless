@@ -1,6 +1,6 @@
 ---
 name: CastingInfo
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla

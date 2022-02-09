@@ -5,6 +5,7 @@ local fieldOrder = {
   'name',
   'status',
   'comment',
+  'flavors',
   'versions',
   'inputs',
   'newinputs',

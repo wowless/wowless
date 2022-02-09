@@ -1,7 +1,7 @@
 ---
 name: GetTradeSkillCooldown
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

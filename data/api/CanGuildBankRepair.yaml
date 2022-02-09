@@ -1,7 +1,7 @@
 ---
 name: CanGuildBankRepair
 status: unimplemented
-versions:
+flavors:
 - Mainline
 - TBC
 inputs:

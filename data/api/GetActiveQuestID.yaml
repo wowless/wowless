@@ -1,7 +1,7 @@
 ---
 name: GetActiveQuestID
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - - name: index

@@ -1,7 +1,7 @@
 ---
 name: GetDifficultyInfo
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - - type: number

@@ -1,7 +1,7 @@
 ---
 name: UnitHonorMax
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - - type: string

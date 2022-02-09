@@ -1,7 +1,7 @@
 ---
 name: C_TradeSkillUI.CloseTradeSkill
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - {}

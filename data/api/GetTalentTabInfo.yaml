@@ -1,7 +1,7 @@
 ---
 name: GetTalentTabInfo
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

@@ -1,7 +1,7 @@
 ---
 name: GetQuestLogTitle
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

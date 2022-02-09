@@ -1,7 +1,7 @@
 ---
 name: GetNumGuildPerks
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - {}

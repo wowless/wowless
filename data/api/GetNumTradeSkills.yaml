@@ -1,7 +1,7 @@
 ---
 name: GetNumTradeSkills
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

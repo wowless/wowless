@@ -1,7 +1,7 @@
 ---
 name: UnitResistance
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

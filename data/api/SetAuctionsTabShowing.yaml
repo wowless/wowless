@@ -1,7 +1,7 @@
 ---
 name: SetAuctionsTabShowing
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

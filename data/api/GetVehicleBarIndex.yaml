@@ -1,7 +1,7 @@
 ---
 name: GetVehicleBarIndex
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - {}

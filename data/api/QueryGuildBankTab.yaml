@@ -1,7 +1,7 @@
 ---
 name: QueryGuildBankTab
 status: unimplemented
-versions:
+flavors:
 - Mainline
 - TBC
 inputs:

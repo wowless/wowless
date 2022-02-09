@@ -1,7 +1,7 @@
 ---
 name: GetQuestIndexForWatch
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

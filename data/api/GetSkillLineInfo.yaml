@@ -1,7 +1,7 @@
 ---
 name: GetSkillLineInfo
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

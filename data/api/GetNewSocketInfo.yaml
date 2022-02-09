@@ -1,7 +1,7 @@
 ---
 name: GetNewSocketInfo
 status: unimplemented
-versions:
+flavors:
 - Mainline
 - TBC
 inputs:

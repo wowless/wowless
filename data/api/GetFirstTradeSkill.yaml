@@ -1,7 +1,7 @@
 ---
 name: GetFirstTradeSkill
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

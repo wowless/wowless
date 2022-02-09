@@ -1,7 +1,7 @@
 ---
 name: GetCraftSpellFocus
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

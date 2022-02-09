@@ -1,7 +1,7 @@
 ---
 name: EJ_SelectTier
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - - name: tier

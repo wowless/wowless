@@ -1,7 +1,7 @@
 ---
 name: GetSpellSubtext
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

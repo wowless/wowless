@@ -1,7 +1,7 @@
 ---
 name: HasBoundGemProposed
 status: unimplemented
-versions:
+flavors:
 - Mainline
 - TBC
 inputs:

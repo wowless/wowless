@@ -1,7 +1,7 @@
 ---
 name: GetCraftReagentInfo
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:

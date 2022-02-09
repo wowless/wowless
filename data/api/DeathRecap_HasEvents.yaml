@@ -1,7 +1,7 @@
 ---
 name: DeathRecap_HasEvents
 status: unimplemented
-versions:
+flavors:
 - Mainline
 inputs:
 - {}

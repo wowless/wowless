@@ -1,7 +1,7 @@
 ---
 name: GetGossipActiveQuests
 status: unimplemented
-versions:
+flavors:
 - TBC
 - Vanilla
 inputs:
