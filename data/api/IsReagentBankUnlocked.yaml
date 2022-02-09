@@ -1,11 +1,10 @@
 ---
-name: GetCurrentArenaSeason
+name: IsReagentBankUnlocked
 status: unimplemented
 flavors:
 - Mainline
-- TBC
 inputs:
 - {}
 outputs:
 - name: value
-  type: number
+  type: bool

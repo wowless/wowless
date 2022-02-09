@@ -1,0 +1,8 @@
+---
+name: RequestLFDPartyLockInfo
+status: unimplemented
+flavors:
+- Mainline
+inputs:
+- {}
+outputs: {}
