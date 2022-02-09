@@ -1,0 +1,11 @@
+---
+name: HaveQuestRewardData
+status: unimplemented
+flavors:
+- Mainline
+inputs:
+- - name: questID
+    type: number
+outputs:
+- name: value
+  type: bool

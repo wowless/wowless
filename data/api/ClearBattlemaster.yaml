@@ -1,0 +1,8 @@
+---
+name: ClearBattlemaster
+status: unimplemented
+flavors:
+- Mainline
+inputs:
+- {}
+outputs: {}
