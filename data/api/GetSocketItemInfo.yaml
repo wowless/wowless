@@ -1,0 +1,15 @@
+---
+name: GetSocketItemInfo
+status: unimplemented
+versions:
+- Mainline
+- TBC
+inputs:
+- {}
+outputs:
+- name: name
+  type: string
+- name: icon
+  type: number
+- name: quality
+  type: number

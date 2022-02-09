@@ -1,0 +1,9 @@
+---
+name: CloseSocketInfo
+status: unimplemented
+versions:
+- Mainline
+- TBC
+inputs:
+- {}
+outputs: {}
