@@ -1,0 +1,16 @@
+---
+name: GetNewSocketInfo
+status: unimplemented
+versions:
+- Mainline
+- TBC
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: name
+  type: string
+- name: icon
+  type: number
+- name: gemMatchesSocket
+  type: bool

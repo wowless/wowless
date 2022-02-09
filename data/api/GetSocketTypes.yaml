@@ -1,0 +1,13 @@
+---
+name: GetSocketTypes
+status: unimplemented
+versions:
+- Mainline
+- TBC
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: gemColor
+  stub: Blue
+  type: string
