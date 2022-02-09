@@ -9,6 +9,10 @@ repos:
   rev: v0.12.1
   hooks:
   - id: stylua
+- repo: https://github.com/markdownlint/markdownlint
+  rev: v0.11.0
+  hooks:
+  - id: markdownlint
 - repo: https://github.com/shellcheck-py/shellcheck-py
   rev: v0.8.0.1
   hooks:

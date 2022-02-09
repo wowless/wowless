@@ -1,4 +1,5 @@
 # wowless
+
 A headless WoW client Lua and FrameXML interpreter. Intended for addon testing.
 
 To get started:
@@ -13,6 +14,7 @@ bin/run.sh --product wow
 ```
 
 The above will:
+
 * set up a local Lua environment
 * install wowless dependencies in that environment
 * verify that you have a working setup
