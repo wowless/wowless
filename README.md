@@ -9,7 +9,7 @@ cd wowless
 bin/setup.sh
 bin/test.sh
 bin/wowcig.sh
-bin/run.sh 0 wow Mainline
+bin/run.sh --product wow
 ```
 
 The above will:
