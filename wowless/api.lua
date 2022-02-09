@@ -135,7 +135,7 @@ local function new(log)
       objname = ParentSub(objnamearg, u(obj).parent)
       u(obj).name = objname
       if env[objname] then
-        log(1, 'overwriting global ' .. objname)
+        log(3, 'overwriting global ' .. objname)
       end
       env[objname] = obj
       if addonEnv then
