@@ -1,0 +1,12 @@
+---
+name: GetCoinText
+status: unimplemented
+inputs:
+- - name: money
+    type: number
+  - name: separator
+    nilable: true
+    type: string
+outputs:
+- name: formattedAmount
+  type: string

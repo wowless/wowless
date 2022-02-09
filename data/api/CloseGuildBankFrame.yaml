@@ -1,0 +1,9 @@
+---
+name: CloseGuildBankFrame
+status: unimplemented
+versions:
+- Mainline
+- TBC
+inputs:
+- {}
+outputs: {}
