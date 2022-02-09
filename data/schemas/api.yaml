@@ -106,9 +106,4 @@ type:
         - literal: unimplemented
     versions:
       type:
-        enumset:
-          nonempty: true
-          values:
-          - Mainline
-          - TBC
-          - Vanilla
+        schema: flavors

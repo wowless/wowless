@@ -49,12 +49,7 @@ type:
                 - literal: unimplemented
             versions:
               type:
-                enumset:
-                  nonempty: true
-                  values:
-                  - Mainline
-                  - TBC
-                  - Vanilla
+                schema: flavors
     name:
       required: true
       type: string
