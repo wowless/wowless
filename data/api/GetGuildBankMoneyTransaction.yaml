@@ -1,0 +1,24 @@
+---
+name: GetGuildBankMoneyTransaction
+status: unimplemented
+versions:
+- Mainline
+- TBC
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: type
+  type: string
+- name: user
+  type: string
+- name: amount
+  type: number
+- name: years
+  type: number
+- name: months
+  type: number
+- name: days
+  type: number
+- name: hours
+  type: number

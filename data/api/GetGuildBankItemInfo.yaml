@@ -1,0 +1,22 @@
+---
+name: GetGuildBankItemInfo
+status: unimplemented
+versions:
+- Mainline
+- TBC
+inputs:
+- - name: tab
+    type: number
+  - name: index
+    type: number
+outputs:
+- name: texture
+  type: number
+- name: itemCount
+  type: number
+- name: locked
+  type: bool
+- name: isFiltered
+  type: bool
+- name: quality
+  type: number

@@ -1,0 +1,11 @@
+---
+name: GetGuildBankWithdrawMoney
+status: unimplemented
+versions:
+- Mainline
+- TBC
+inputs:
+- {}
+outputs:
+- name: value
+  type: number

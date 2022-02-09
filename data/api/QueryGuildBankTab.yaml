@@ -1,0 +1,10 @@
+---
+name: QueryGuildBankTab
+status: unimplemented
+versions:
+- Mainline
+- TBC
+inputs:
+- - name: index
+    type: number
+outputs: {}
