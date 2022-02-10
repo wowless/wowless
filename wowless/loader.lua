@@ -145,7 +145,7 @@ local function loader(api, cfg)
                 error('invalid inherit tag on script')
               end
             end
-            assert(not script.attr.intrinsicorder or obj.__intrinsicHack, 'intrinsicOrder on non-intrinsic')
+            assert(not script.attr.intrinsicorder or ctx.intrinsic, 'intrinsicOrder on non-intrinsic')
             local bindingType = 1
             if script.attr.intrinsicorder == 'precall' then
               bindingType = 0
@@ -153,7 +153,7 @@ local function loader(api, cfg)
               bindingType = 2
             elseif script.attr.intrinsicorder then
               error('invalid intrinsicOrder tag on script')
-            elseif obj.__intrinsicHack then
+            elseif ctx.intrinsic then
               bindingType = 0
             end
             api.SetScript(obj, script.type, bindingType, fn)
@@ -378,9 +378,6 @@ local function loader(api, cfg)
 
         function loadElement(e, parent)
           if api.IsIntrinsicType(e.type) then
-            local initEarlyAttrs = mkInitEarlyAttrs(e)
-            local initAttrs = mkInitAttrs(e)
-            local initKids = mkInitKids(e)
             local virtual = e.attr.virtual
             if e.attr.intrinsic then
               assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
@@ -395,11 +392,10 @@ local function loader(api, cfg)
               api.uiobjectTypes[name] = {
                 constructor = function(self, xmlattr)
                   base.constructor(self, xmlattr)
-                  self.__intrinsicHack = true
-                  initEarlyAttrs(self)
-                  initAttrs(self)
-                  initKids(self)
-                  self.__intrinsicHack = nil
+                  local newctx = withContext({ intrinsic = true })
+                  newctx.mkInitEarlyAttrs(e)(self)
+                  newctx.mkInitAttrs(e)(self)
+                  newctx.mkInitKids(e)(self)
                 end,
                 inherits = { basetype },
                 metatable = { __index = base.metatable.__index },
@@ -416,9 +412,9 @@ local function loader(api, cfg)
                 end
                 api.log(3, 'creating template ' .. e.attr.name)
                 api.templates[name] = {
-                  initEarlyAttrs = initEarlyAttrs,
-                  initAttrs = initAttrs,
-                  initKids = initKids,
+                  initEarlyAttrs = mkInitEarlyAttrs(e),
+                  initAttrs = mkInitAttrs(e),
+                  initKids = mkInitKids(e),
                   name = e.attr.name,
                 }
               end
@@ -466,6 +462,9 @@ local function loader(api, cfg)
         return {
           loadElement = loadElement,
           loadElements = loadElements,
+          mkInitEarlyAttrs = mkInitEarlyAttrs,
+          mkInitAttrs = mkInitAttrs,
+          mkInitKids = mkInitKids,
         }
       end
 
@@ -473,6 +472,7 @@ local function loader(api, cfg)
         local root = parseXml(xmlstr)
         local ctx = {
           ignoreVirtual = false,
+          intrinsic = false,
           useAddonEnv = false,
         }
         usingContext(ctx).loadElement(root)
