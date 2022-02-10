@@ -68,6 +68,7 @@ type:
                 record:
                   args:
                     type: string
+        - literal: loadstring
         - literal: transparent
     name:
       required: true

@@ -2,5 +2,7 @@
 name: Script
 attributes:
   file:
+    impl: loadfile
     type: string
 contents: text
+impl: loadstring

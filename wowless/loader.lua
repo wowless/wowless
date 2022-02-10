@@ -233,15 +233,6 @@ local function loader(api, cfg)
           scopedmodifier = function(e, parent)
             withContext({ useAddonEnv = e.attr.scriptsusegivenenv }).loadElements(e.kids, parent)
           end,
-          script = function(e)
-            if e.attr.file then
-              assert(not e.text)
-              loadFile(path.join(dir, e.attr.file))
-            else
-              assert(e.text)
-              loadLuaString(filename, e.text)
-            end
-          end,
           size = function(e, parent)
             local x, y = getXY(e)
             if x then
@@ -420,7 +411,7 @@ local function loader(api, cfg)
               if api.InheritsFrom(api.UserData(parent).type, impl.parenttype:lower()) then
                 api.uiobjectTypes[impl.parenttype:lower()].metatable.__index[impl.parentmethod](parent, obj)
               end
-            elseif impl == 'transparent' then
+            elseif impl == 'transparent' or impl == 'loadstring' then
               for k, v in pairs(e.attr) do
                 local attr = xmlimpls[e.type].attrs[k]
                 if attr then
@@ -428,6 +419,9 @@ local function loader(api, cfg)
                 end
               end
               loadElements(e.kids, parent)
+              if impl == 'loadstring' and e.text then
+                loadLuaString(filename, e.text)
+              end
             elseif fn then
               fn(e, parent)
             else
