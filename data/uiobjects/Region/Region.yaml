@@ -145,7 +145,10 @@ methods:
   SetShown:
     status: implemented
   SetSize:
-    status: unimplemented
+    fields:
+    - width
+    - height
+    status: setter
   SetWidth:
     fields:
     - width
