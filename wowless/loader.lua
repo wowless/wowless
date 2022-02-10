@@ -14,6 +14,7 @@ local xmlimpls = (function()
       if a.impl then
         aimpls[n] = {
           impl = a.impl,
+          name = n,
           phase = a.phase or 'middle',
         }
       end
@@ -296,9 +297,9 @@ local function loader(api, cfg)
           end,
         }
 
-        local function processAttr(attr, obj, k, v)
+        local function processAttr(attr, obj, v)
           if attr.impl == 'internal' then
-            xmlattrlang[k](obj, v)
+            xmlattrlang[attr.name](obj, v)
           elseif attr.impl == 'loadfile' then
             loadFile(path.join(dir, v))
           elseif attr.impl.method then
@@ -311,7 +312,7 @@ local function loader(api, cfg)
           elseif attr.impl.field then
             api.UserData(obj)[attr.impl.field] = v
           else
-            error('invalid attribute impl for ' .. k)
+            error('invalid attribute impl for ' .. attr.name)
           end
         end
 
@@ -322,7 +323,7 @@ local function loader(api, cfg)
             -- This assumes that uiobject types and xml types are the same "space" of strings.
             local attr = attrs[k]
             if attr and phase == attr.phase then
-              processAttr(attr, obj, k, v)
+              processAttr(attr, obj, v)
             end
           end
         end
@@ -423,7 +424,7 @@ local function loader(api, cfg)
               for k, v in pairs(e.attr) do
                 local attr = xmlimpls[e.type].attrs[k]
                 if attr then
-                  processAttr(attr, nil, k, v)
+                  processAttr(attr, nil, v)
                 end
               end
               loadElements(e.kids, parent)
