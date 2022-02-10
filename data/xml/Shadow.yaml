@@ -8,3 +8,5 @@ attributes:
 contents:
 - Color
 - Offset
+impl:
+  scope: shadow

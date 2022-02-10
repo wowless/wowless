@@ -66,6 +66,10 @@ type:
               type:
                 ref: uiobject
         - record:
+            scope:
+              required: true
+              type: string
+        - record:
             script:
               required: true
               type:

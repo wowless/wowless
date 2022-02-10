@@ -213,7 +213,11 @@ local function loader(api, cfg)
             if api.InheritsFrom(p.type, 'texture') then
               parent:SetColorTexture(r, g, b, a)
             elseif api.InheritsFrom(p.type, 'fontinstance') then
-              parent:SetTextColor(r, g, b, a)
+              if ctx.shadow then
+                parent:SetShadowColor(r, g, b, a)
+              else
+                parent:SetTextColor(r, g, b, a)
+              end
             else
               error('cannot apply color to ' .. p.type)
             end
@@ -403,6 +407,8 @@ local function loader(api, cfg)
             local fn = xmllang[e.type]
             if type(impl) == 'table' and impl.script then
               loadScript(e, parent)
+            elseif type(impl) == 'table' and impl.scope then
+              withContext({ [impl.scope] = true }).loadElements(e.kids, parent)
             elseif type(impl) == 'table' then
               local elt = impl.argument == 'lastkid' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
               local obj = loadElement(elt, parent)
