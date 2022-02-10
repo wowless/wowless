@@ -78,7 +78,7 @@ methods:
     status: implemented
   EnableMouseWheel:
     fields:
-    - mouseWheelEnabled
+    - name: mouseWheelEnabled
     status: setter
   GetAttribute:
     status: implemented
@@ -86,29 +86,29 @@ methods:
     status: implemented
   GetFrameLevel:
     fields:
-    - frameLevel
+    - name: frameLevel
     status: getter
   GetFrameStrata:
     fields:
-    - frameStrata
+    - name: frameStrata
     status: getter
   GetHyperlinksEnabled:
     fields:
-    - hyperlinksEnabled
+    - name: hyperlinksEnabled
     status: getter
   GetID:
     fields:
-    - id
+    - name: id
     status: getter
   GetMaxResize:
     fields:
-    - maxResizeWidth
-    - maxResizeHeight
+    - name: maxResizeWidth
+    - name: maxResizeHeight
     status: getter
   GetMinResize:
     fields:
-    - minResizeWidth
-    - minResizeHeight
+    - name: minResizeWidth
+    - name: minResizeHeight
     status: getter
   GetNumChildren:
     status: implemented
@@ -116,7 +116,7 @@ methods:
     status: implemented
   GetPropagateKeyboardInput:
     fields:
-    - propagateKeyboardInput
+    - name: propagateKeyboardInput
     status: getter
   GetRegions:
     status: implemented
@@ -124,39 +124,39 @@ methods:
     status: unimplemented
   IsClampedToScreen:
     fields:
-    - isClampedToScreen
+    - name: isClampedToScreen
     status: getter
   IsEventRegistered:
     status: implemented
   IsMouseClickEnabled:
     fields:
-    - mouseClickEnabled
+    - name: mouseClickEnabled
     status: getter
   IsMouseEnabled:
     status: implemented
   IsMouseMotionEnabled:
     fields:
-    - mouseMotionEnabled
+    - name: mouseMotionEnabled
     status: getter
   IsMouseWheelEnabled:
     fields:
-    - mouseWheelEnabled
+    - name: mouseWheelEnabled
     status: getter
   IsMovable:
     fields:
-    - movable
+    - name: movable
     status: getter
   IsResizable:
     fields:
-    - resizable
+    - name: resizable
     status: getter
   IsToplevel:
     fields:
-    - toplevel
+    - name: toplevel
     status: getter
   IsUserPlaced:
     fields:
-    - isUserPlaced
+    - name: isUserPlaced
     status: getter
   Raise:
     status: unimplemented
@@ -172,7 +172,7 @@ methods:
     status: implemented
   SetClampedToScreen:
     fields:
-    - isClampedToScreen
+    - name: isClampedToScreen
     status: setter
   SetClampRectInsets:
     status: unimplemented
@@ -188,59 +188,59 @@ methods:
     status: unimplemented
   SetFrameLevel:
     fields:
-    - frameLevel
+    - name: frameLevel
     status: setter
   SetFrameStrata:
     fields:
-    - frameStrata
+    - name: frameStrata
     status: setter
   SetHitRectInsets:
     status: unimplemented
   SetHyperlinksEnabled:
     fields:
-    - hyperlinksEnabled
+    - name: hyperlinksEnabled
     status: setter
   SetID:
     fields:
-    - id
+    - name: id
     status: setter
   SetMaxResize:
     fields:
-    - maxResizeWidth
-    - maxResizeHeight
+    - name: maxResizeWidth
+    - name: maxResizeHeight
     status: setter
   SetMinResize:
     fields:
-    - minResizeWidth
-    - minResizeHeight
+    - name: minResizeWidth
+    - name: minResizeHeight
     status: setter
   SetMouseClickEnabled:
     fields:
-    - mouseClickEnabled
+    - name: mouseClickEnabled
     status: setter
   SetMouseMotionEnabled:
     fields:
-    - mouseMotionEnabled
+    - name: mouseMotionEnabled
     status: setter
   SetMovable:
     fields:
-    - movable
+    - name: movable
     status: setter
   SetPropagateKeyboardInput:
     fields:
-    - propagateKeyboardInput
+    - name: propagateKeyboardInput
     status: setter
   SetResizable:
     fields:
-    - resizable
+    - name: resizable
     status: setter
   SetToplevel:
     fields:
-    - toplevel
+    - name: toplevel
     status: setter
   SetUserPlaced:
     fields:
-    - isUserPlaced
+    - name: isUserPlaced
     status: setter
   StartMoving:
     status: unimplemented

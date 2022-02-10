@@ -16,11 +16,11 @@ methods:
     status: implemented
   GetParent:
     fields:
-    - parent
+    - name: parent
     status: getter
   IsForbidden:
     fields:
-    - forbidden
+    - name: forbidden
     status: getter
   SetForbidden:
     status: implemented

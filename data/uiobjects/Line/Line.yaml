@@ -9,7 +9,7 @@ inherits:
 methods:
   GetThickness:
     fields:
-    - thickness
+    - name: thickness
     status: getter
   SetEndPoint:
     status: unimplemented
@@ -17,5 +17,5 @@ methods:
     status: unimplemented
   SetThickness:
     fields:
-    - thickness
+    - name: thickness
     status: setter

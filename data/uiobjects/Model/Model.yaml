@@ -10,7 +10,7 @@ methods:
     status: unimplemented
   GetModelScale:
     fields:
-    - modelScale
+    - name: modelScale
     status: getter
   InitializeCamera:
     status: unimplemented
@@ -22,7 +22,7 @@ methods:
     status: unimplemented
   SetModelScale:
     fields:
-    - modelScale
+    - name: modelScale
     status: setter
   SetPosition:
     status: unimplemented

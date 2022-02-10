@@ -18,7 +18,7 @@ methods:
     status: unimplemented
   GetMaxLines:
     fields:
-    - maxLines
+    - name: maxLines
     status: getter
   GetNumLines:
     outputs:
@@ -34,11 +34,11 @@ methods:
     status: unimplemented
   GetText:
     fields:
-    - text
+    - name: text
     status: getter
   GetTextScale:
     fields:
-    - textScale
+    - name: textScale
     status: getter
   GetUnboundedStringWidth:
     outputs:
@@ -54,7 +54,7 @@ methods:
     status: unimplemented
   SetMaxLines:
     fields:
-    - maxLines
+    - name: maxLines
     status: setter
   SetNonSpaceWrap:
     status: unimplemented
@@ -64,7 +64,7 @@ methods:
     status: unimplemented
   SetTextScale:
     fields:
-    - textScale
+    - name: textScale
     status: setter
   SetWordWrap:
     status: unimplemented

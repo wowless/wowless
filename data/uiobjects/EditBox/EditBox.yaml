@@ -39,17 +39,17 @@ methods:
     status: implemented
   GetHistoryLines:
     fields:
-    - historyLines
+    - name: historyLines
     status: getter
   GetInputLanguage:
     status: implemented
   GetMaxBytes:
     fields:
-    - maxBytes
+    - name: maxBytes
     status: getter
   GetMaxLetters:
     fields:
-    - maxLetters
+    - name: maxLetters
     status: getter
   GetNumber:
     outputs:
@@ -57,7 +57,7 @@ methods:
     status: unimplemented
   GetText:
     fields:
-    - editboxText
+    - name: editboxText
     status: getter
   HighlightText:
     status: unimplemented
@@ -65,53 +65,53 @@ methods:
     status: unimplemented
   IsAutoFocus:
     fields:
-    - isAutoFocus
+    - name: isAutoFocus
     status: getter
   IsCountInvisibleLetters:
     fields:
-    - isCountInvisibleLetters
+    - name: isCountInvisibleLetters
     status: getter
   IsEnabled:
     fields:
-    - enabled
+    - name: enabled
     status: getter
   IsMultiLine:
     fields:
-    - isMultiLine
+    - name: isMultiLine
     status: getter
   SetAltArrowKeyMode:
     status: unimplemented
   SetAutoFocus:
     fields:
-    - isAutoFocus
+    - name: isAutoFocus
     status: setter
   SetCountInvisibleLetters:
     fields:
-    - isCountInvisibleLetters
+    - name: isCountInvisibleLetters
     status: setter
   SetCursorPosition:
     status: unimplemented
   SetEnabled:
     fields:
-    - enabled
+    - name: enabled
     status: setter
   SetFocus:
     status: unimplemented
   SetHistoryLines:
     fields:
-    - historyLines
+    - name: historyLines
     status: setter
   SetMaxBytes:
     fields:
-    - maxBytes
+    - name: maxBytes
     status: setter
   SetMaxLetters:
     fields:
-    - maxLetters
+    - name: maxLetters
     status: setter
   SetMultiLine:
     fields:
-    - isMultiLine
+    - name: isMultiLine
     status: setter
   SetNumber:
     status: unimplemented
@@ -119,7 +119,7 @@ methods:
     status: unimplemented
   SetSecureText:
     fields:
-    - editboxText
+    - name: editboxText
     status: setter
   SetSecurityDisablePaste:
     status: unimplemented
@@ -127,7 +127,7 @@ methods:
     status: unimplemented
   SetText:
     fields:
-    - editboxText
+    - name: editboxText
     status: setter
   SetTextInsets:
     status: unimplemented

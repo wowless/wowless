@@ -15,7 +15,7 @@ methods:
     status: unimplemented
   GetScrollChild:
     fields:
-    - scrollChild
+    - name: scrollChild
     status: getter
   GetVerticalScroll:
     outputs:
@@ -29,7 +29,7 @@ methods:
     status: unimplemented
   SetScrollChild:
     fields:
-    - scrollChild
+    - name: scrollChild
     status: setter
   SetVerticalScroll:
     status: unimplemented

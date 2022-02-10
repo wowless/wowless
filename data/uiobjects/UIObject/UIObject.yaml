@@ -6,7 +6,7 @@ inherits: {}
 methods:
   GetName:
     fields:
-    - name
+    - name: name
     status: getter
   GetObjectType:
     status: implemented

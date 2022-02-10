@@ -46,13 +46,13 @@ methods:
     status: implemented
   GetAlpha:
     fields:
-    - alpha
+    - name: alpha
     status: getter
   GetAnimationGroups:
     status: implemented
   GetBottom:
     fields:
-    - bottom
+    - name: bottom
     status: getter
   GetCenter:
     status: implemented
@@ -62,11 +62,11 @@ methods:
     status: implemented
   GetHeight:
     fields:
-    - height
+    - name: height
     status: getter
   GetLeft:
     fields:
-    - left
+    - name: left
     status: getter
   GetNumPoints:
     status: implemented
@@ -74,29 +74,29 @@ methods:
     status: implemented
   GetRect:
     fields:
-    - bottom
-    - left
-    - width
-    - height
+    - name: bottom
+    - name: left
+    - name: width
+    - name: height
     status: getter
   GetRight:
     status: implemented
   GetScale:
     fields:
-    - scale
+    - name: scale
     status: getter
   GetScaledRect:
     status: implemented
   GetSize:
     fields:
-    - width
-    - height
+    - name: width
+    - name: height
     status: getter
   GetTop:
     status: implemented
   GetWidth:
     fields:
-    - width
+    - name: width
     status: getter
   Hide:
     status: implemented
@@ -104,11 +104,11 @@ methods:
     status: unimplemented
   IsIgnoringParentAlpha:
     fields:
-    - isIgnoringParentAlpha
+    - name: isIgnoringParentAlpha
     status: getter
   IsIgnoringParentScale:
     fields:
-    - isIgnoringParentScale
+    - name: isIgnoringParentScale
     status: getter
   IsMouseOver:
     status: unimplemented
@@ -116,7 +116,7 @@ methods:
     status: implemented
   IsShown:
     fields:
-    - shown
+    - name: shown
     status: getter
   IsVisible:
     status: implemented
@@ -126,15 +126,15 @@ methods:
     status: implemented
   SetHeight:
     fields:
-    - height
+    - name: height
     status: setter
   SetIgnoreParentAlpha:
     fields:
-    - isIgnoringParentAlpha
+    - name: isIgnoringParentAlpha
     status: setter
   SetIgnoreParentScale:
     fields:
-    - isIgnoringParentScale
+    - name: isIgnoringParentScale
     status: setter
   SetParent:
     status: implemented
@@ -146,12 +146,12 @@ methods:
     status: implemented
   SetSize:
     fields:
-    - width
-    - height
+    - name: width
+    - name: height
     status: setter
   SetWidth:
     fields:
-    - width
+    - name: width
     status: setter
   Show:
     status: implemented

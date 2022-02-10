@@ -19,8 +19,8 @@ methods:
     status: unimplemented
   GetMinMaxValues:
     fields:
-    - min
-    - max
+    - name: min
+    - name: max
     status: getter
   GetOrientation:
     status: unimplemented
@@ -34,18 +34,18 @@ methods:
     status: unimplemented
   GetStatusBarTexture:
     fields:
-    - statusBarTexture
+    - name: statusBarTexture
     status: getter
   GetValue:
     fields:
-    - value
+    - name: value
     status: getter
   SetFillStyle:
     status: unimplemented
   SetMinMaxValues:
     fields:
-    - min
-    - max
+    - name: min
+    - name: max
     status: setter
   SetOrientation:
     status: unimplemented
@@ -59,9 +59,9 @@ methods:
     status: unimplemented
   SetStatusBarTexture:
     fields:
-    - statusBarTexture
+    - name: statusBarTexture
     status: setter
   SetValue:
     fields:
-    - value
+    - name: value
     status: setter

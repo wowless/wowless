@@ -27,7 +27,11 @@ type:
           record:
             fields:
               type:
-                sequenceof: string
+                sequenceof:
+                  record:
+                    name:
+                      required: true
+                      type: string
             flavors:
               type:
                 schema: flavors

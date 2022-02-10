@@ -14,31 +14,31 @@ inherits:
 methods:
   GetEndDelay:
     fields:
-    - endDelay
+    - name: endDelay
     status: getter
   GetSmoothing:
     fields:
-    - smoothing
+    - name: smoothing
     status: getter
   GetStartDelay:
     fields:
-    - startDelay
+    - name: startDelay
     status: getter
   SetDuration:
     status: unimplemented
   SetEndDelay:
     fields:
-    - endDelay
+    - name: endDelay
     status: setter
   SetOrder:
     status: unimplemented
   SetSmoothing:
     fields:
-    - smoothing
+    - name: smoothing
     status: setter
   SetStartDelay:
     fields:
-    - startDelay
+    - name: startDelay
     status: setter
   SetTarget:
     status: unimplemented

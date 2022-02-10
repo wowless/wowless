@@ -167,7 +167,7 @@ local function mkBaseUIObjectTypes(api)
           local ud = u(self)
           local t = {}
           for i, f in ipairs(method.fields) do
-            t[i] = ud[f]
+            t[i] = ud[f.name]
           end
           return unpack(t, 1, #method.fields)
         end
@@ -176,13 +176,13 @@ local function mkBaseUIObjectTypes(api)
           local ud = u(self)
           for i, f in ipairs(method.fields) do
             local v = select(i, ...)
-            local ty = cfg.fields[f].type
+            local ty = cfg.fields[f.name].type
             if ty == 'bool' then
-              ud[f] = not not v
+              ud[f.name] = not not v
             elseif ty == 'texture' then
-              ud[f] = toTexture(self, v)
+              ud[f.name] = toTexture(self, v)
             else
-              ud[f] = v
+              ud[f.name] = v
             end
           end
         end

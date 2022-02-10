@@ -46,13 +46,13 @@ methods:
     status: implemented
   GetButtonState:
     fields:
-    - buttonState
+    - name: buttonState
     status: getter
   GetDisabledFontObject:
     status: unimplemented
   GetDisabledTexture:
     fields:
-    - disabledTexture
+    - name: disabledTexture
     status: getter
   GetFontString:
     status: implemented
@@ -60,28 +60,28 @@ methods:
     status: unimplemented
   GetHighlightTexture:
     fields:
-    - highlightTexture
+    - name: highlightTexture
     status: getter
   GetMotionScriptsWhileDisabled:
     fields:
-    - motionScriptsWhileDisabled
+    - name: motionScriptsWhileDisabled
     status: getter
   GetNormalFontObject:
     fields:
-    - normalFontObject
+    - name: normalFontObject
     status: getter
   GetNormalTexture:
     fields:
-    - normalTexture
+    - name: normalTexture
     status: getter
   GetPushedTextOffset:
     fields:
-    - pushedTextOffsetX
-    - pushedTextOffsetY
+    - name: pushedTextOffsetX
+    - name: pushedTextOffsetY
     status: getter
   GetPushedTexture:
     fields:
-    - pushedTexture
+    - name: pushedTexture
     status: getter
   GetText:
     status: implemented
@@ -95,7 +95,7 @@ methods:
     status: unimplemented
   IsEnabled:
     fields:
-    - enabled
+    - name: enabled
     status: getter
   LockHighlight:
     status: unimplemented
@@ -105,22 +105,22 @@ methods:
     status: unimplemented
   SetButtonState:
     fields:
-    - buttonState
-    - buttonLocked
+    - name: buttonState
+    - name: buttonLocked
     status: setter
   SetDisabledAtlas:
     fields:
-    - disabledTexture
+    - name: disabledTexture
     status: setter
   SetDisabledFontObject:
     status: unimplemented
   SetDisabledTexture:
     fields:
-    - disabledTexture
+    - name: disabledTexture
     status: setter
   SetEnabled:
     fields:
-    - enabled
+    - name: enabled
     status: setter
   SetFontString:
     status: implemented
@@ -128,42 +128,42 @@ methods:
     status: unimplemented
   SetHighlightAtlas:
     fields:
-    - highlightTexture
+    - name: highlightTexture
     status: setter
   SetHighlightFontObject:
     status: unimplemented
   SetHighlightTexture:
     fields:
-    - highlightTexture
+    - name: highlightTexture
     status: setter
   SetMotionScriptsWhileDisabled:
     fields:
-    - motionScriptsWhileDisabled
+    - name: motionScriptsWhileDisabled
     status: setter
   SetNormalAtlas:
     fields:
-    - normalTexture
+    - name: normalTexture
     status: setter
   SetNormalFontObject:
     fields:
-    - normalFontObject
+    - name: normalFontObject
     status: setter
   SetNormalTexture:
     fields:
-    - normalTexture
+    - name: normalTexture
     status: setter
   SetPushedAtlas:
     fields:
-    - pushedTexture
+    - name: pushedTexture
     status: setter
   SetPushedTextOffset:
     fields:
-    - pushedTextOffsetX
-    - pushedTextOffsetY
+    - name: pushedTextOffsetX
+    - name: pushedTextOffsetY
     status: setter
   SetPushedTexture:
     fields:
-    - pushedTexture
+    - name: pushedTexture
     status: setter
   SetText:
     status: implemented

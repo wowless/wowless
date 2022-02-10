@@ -47,7 +47,7 @@ methods:
     status: unimplemented
   GetOwner:
     fields:
-    - tooltipOwner
+    - name: tooltipOwner
     status: getter
   GetPadding:
     status: unimplemented
@@ -225,7 +225,7 @@ methods:
     status: unimplemented
   SetOwner:
     fields:
-    - tooltipOwner
+    - name: tooltipOwner
     status: setter
   SetPadding:
     status: unimplemented

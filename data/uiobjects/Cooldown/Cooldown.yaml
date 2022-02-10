@@ -38,7 +38,7 @@ methods:
     status: unimplemented
   SetBlingTexture:
     fields:
-    - blingTexture
+    - name: blingTexture
     status: setter
   SetCooldown:
     status: unimplemented
@@ -60,7 +60,7 @@ methods:
     status: unimplemented
   SetEdgeTexture:
     fields:
-    - edgeTexture
+    - name: edgeTexture
     status: setter
   SetHideCountdownNumbers:
     status: unimplemented
@@ -72,7 +72,7 @@ methods:
     status: unimplemented
   SetSwipeTexture:
     fields:
-    - swipeTexture
+    - name: swipeTexture
     status: setter
   SetUseCircularEdge:
     status: unimplemented

@@ -12,13 +12,13 @@ inherits:
 methods:
   GetDrawLayer:
     fields:
-    - layer
-    - sublevel
+    - name: layer
+    - name: sublevel
     status: getter
   SetDrawLayer:
     fields:
-    - layer
-    - sublevel
+    - name: layer
+    - name: sublevel
     status: setter
   SetVertexColor:
     status: unimplemented

@@ -32,19 +32,19 @@ methods:
     status: unimplemented
   GetColorValueTexture:
     fields:
-    - colorValueTexture
+    - name: colorValueTexture
     status: getter
   GetColorValueThumbTexture:
     fields:
-    - colorValueThumbTexture
+    - name: colorValueThumbTexture
     status: getter
   GetColorWheelTexture:
     fields:
-    - colorWheelTexture
+    - name: colorWheelTexture
     status: getter
   GetColorWheelThumbTexture:
     fields:
-    - colorWheelThumbTexture
+    - name: colorWheelThumbTexture
     status: getter
   SetColorHSV:
     status: unimplemented
@@ -52,17 +52,17 @@ methods:
     status: unimplemented
   SetColorValueTexture:
     fields:
-    - colorValueTexture
+    - name: colorValueTexture
     status: setter
   SetColorValueThumbTexture:
     fields:
-    - colorValueThumbTexture
+    - name: colorValueThumbTexture
     status: setter
   SetColorWheelTexture:
     fields:
-    - colorWheelTexture
+    - name: colorWheelTexture
     status: setter
   SetColorWheelThumbTexture:
     fields:
-    - colorWheelThumbTexture
+    - name: colorWheelThumbTexture
     status: setter

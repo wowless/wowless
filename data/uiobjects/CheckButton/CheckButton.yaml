@@ -13,25 +13,25 @@ inherits:
 methods:
   GetChecked:
     fields:
-    - checked
+    - name: checked
     status: getter
   GetCheckedTexture:
     fields:
-    - checkedTexture
+    - name: checkedTexture
     status: getter
   GetDisabledCheckedTexture:
     fields:
-    - disabledCheckedTexture
+    - name: disabledCheckedTexture
     status: getter
   SetChecked:
     fields:
-    - checked
+    - name: checked
     status: setter
   SetCheckedTexture:
     fields:
-    - checkedTexture
+    - name: checkedTexture
     status: setter
   SetDisabledCheckedTexture:
     fields:
-    - disabledCheckedTexture
+    - name: disabledCheckedTexture
     status: setter

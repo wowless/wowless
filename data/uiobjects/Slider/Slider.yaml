@@ -24,8 +24,8 @@ methods:
     status: implemented
   GetMinMaxValues:
     fields:
-    - min
-    - max
+    - name: min
+    - name: max
     status: getter
   GetObeyStepOnDrag:
     status: unimplemented
@@ -35,11 +35,11 @@ methods:
     status: unimplemented
   GetThumbTexture:
     fields:
-    - thumbTexture
+    - name: thumbTexture
     status: getter
   GetValue:
     fields:
-    - value
+    - name: value
     status: getter
   GetValueStep:
     status: unimplemented
@@ -51,8 +51,8 @@ methods:
     status: unimplemented
   SetMinMaxValues:
     fields:
-    - min
-    - max
+    - name: min
+    - name: max
     status: setter
   SetObeyStepOnDrag:
     status: unimplemented
@@ -62,11 +62,11 @@ methods:
     status: unimplemented
   SetThumbTexture:
     fields:
-    - thumbTexture
+    - name: thumbTexture
     status: setter
   SetValue:
     fields:
-    - value
+    - name: value
     status: setter
   SetValueStep:
     status: unimplemented
