@@ -347,24 +347,14 @@ local function loader(api, cfg)
           end,
         }
 
-        local function mkInitPhaseNotRecursive(phaseName)
+        local function mkInitPhase(phaseName)
           local phase = phases[phaseName]
           return function(e)
-            return function(obj)
-              return phase(e, obj)
-            end
-          end
-        end
-
-        local function mkInitPhase(phaseName)
-          local mkNotRecursive = mkInitPhaseNotRecursive(phaseName)
-          return function(e)
-            local notRecursive = mkNotRecursive(e)
             return function(obj)
               for _, inh in ipairs(e.attr.inherits or {}) do
                 api.templates[string.lower(inh)]['init' .. phaseName](obj)
               end
-              notRecursive(obj)
+              phase(e, obj)
             end
           end
         end
