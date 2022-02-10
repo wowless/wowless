@@ -18,14 +18,15 @@ local args = (function()
   parser:argument('deprecated_addon', 'addon directory to test'):args('?')
   return parser:parse()
 end)()
+local product = args.product or args.deprecated_product
 local api = require('wowless.runner').run({
   loglevel = assert(tonumber(args.loglevel or args.deprecated_loglevel)),
-  dir = 'extracts/' .. (args.product or args.deprecated_product),
+  dir = 'extracts/' .. product,
   version = (args.product and productToFlavor[args.product] or args.deprecated_flavor),
   otherAddonDirs = { args.addondir or args.deprecated_addon },
   allevents = args.allevents,
 })
 if api.GetErrorCount() ~= 0 then
-  io.stderr:write('failure on ' .. args.product .. '\n')
+  io.stderr:write('failure on ' .. product .. '\n')
   os.exit(1)
 end
