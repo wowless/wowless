@@ -127,6 +127,10 @@ local function new(log)
     }
     SetParent(obj, parent)
     type.constructor(obj)
+    if InheritsFrom(typename, 'frame') then
+      table.insert(frames, obj)
+      u(obj).frameIndex = #frames
+    end
     if tmpls then
       for _, template in ipairs(tmpls) do
         log(4, 'initializing early attributes for ' .. tostring(template.name))
@@ -171,10 +175,7 @@ local function new(log)
       assert(template, 'unknown template ' .. templateName)
       table.insert(tmpls, template)
     end
-    local frame = CreateUIObject(ltype, name, parent, nil, tmpls)
-    table.insert(frames, frame)
-    u(frame).frameIndex = #frames
-    return frame
+    return CreateUIObject(ltype, name, parent, nil, tmpls)
   end
 
   local function SetScript(obj, name, bindingType, script)
