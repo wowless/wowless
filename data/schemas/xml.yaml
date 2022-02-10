@@ -19,6 +19,10 @@ type:
                     method:
                       required: true
                       type: string
+                - record:
+                    scope:
+                      required: true
+                      type: string
             phase:
               type:
                 oneof:

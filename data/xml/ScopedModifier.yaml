@@ -6,7 +6,10 @@ attributes:
   fulllockdown:
     type: bool
   scriptsusegivenenv:
+    impl:
+      scope: useAddonEnv
     type: bool
 contents:
 - Actor
 - LayoutFrame
+impl: transparent

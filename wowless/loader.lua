@@ -230,9 +230,6 @@ local function loader(api, cfg)
             local a = e.attr
             parent[a.key] = parseTypedValue(a.type, a.value)
           end,
-          scopedmodifier = function(e, parent)
-            withContext({ useAddonEnv = e.attr.scriptsusegivenenv }).loadElements(e.kids, parent)
-          end,
           size = function(e, parent)
             local x, y = getXY(e)
             if x then
@@ -293,6 +290,8 @@ local function loader(api, cfg)
             xmlattrlang[attr.name](obj, v)
           elseif attr.impl == 'loadfile' then
             loadFile(path.join(dir, v))
+          elseif attr.impl.scope then
+            return { [attr.impl.scope] = v }
           elseif attr.impl.method then
             local fn = api.uiobjectTypes[api.UserData(obj).type].metatable.__index[attr.impl.method]
             if type(v) == 'table' then -- stringlist
@@ -412,13 +411,14 @@ local function loader(api, cfg)
                 api.uiobjectTypes[impl.parenttype:lower()].metatable.__index[impl.parentmethod](parent, obj)
               end
             elseif impl == 'transparent' or impl == 'loadstring' then
+              local ctxmix = {}
               for k, v in pairs(e.attr) do
                 local attr = xmlimpls[e.type].attrs[k]
                 if attr then
-                  processAttr(attr, nil, v)
+                  mixin(ctxmix, processAttr(attr, nil, v))
                 end
               end
-              loadElements(e.kids, parent)
+              withContext(ctxmix).loadElements(e.kids, parent)
               if impl == 'loadstring' and e.text then
                 loadLuaString(filename, e.text)
               end
