@@ -245,6 +245,9 @@ local function loader(api, cfg)
             assert(ctx.shadow, 'this should only run on shadow for now')
             parent:SetShadowOffset(getXY(e))
           end,
+          pushedtextoffset = function(e, parent)
+            parent:SetPushedTextOffset(getXY(e.kids[#e.kids]))
+          end,
           size = function(e, parent)
             local x, y = getXY(e)
             if x then
