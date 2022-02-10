@@ -434,7 +434,7 @@ local function loader(api, cfg)
                   initAttrs = mkInitAttrsNotRecursive(e),
                   initKids = mkInitKidsNotRecursive(e),
                 })
-                return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, unpack(templates))
+                return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, templates)
               end
             end
           else

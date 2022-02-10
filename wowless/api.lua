@@ -112,7 +112,7 @@ local function new(log)
     end
   end
 
-  local function CreateUIObject(typename, objnamearg, parent, addonEnv, ...)
+  local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmpls)
     local objname = ParentSub(objnamearg, parent)
     assert(typename, 'must specify type for ' .. tostring(objname))
     local type = uiobjectTypes[typename]
@@ -127,9 +127,11 @@ local function new(log)
     }
     SetParent(obj, parent)
     type.constructor(obj)
-    for _, template in ipairs({ ... }) do
-      log(4, 'initializing early attributes for ' .. tostring(template.name))
-      template.initEarlyAttrs(obj)
+    if tmpls then
+      for _, template in ipairs(tmpls) do
+        log(4, 'initializing early attributes for ' .. tostring(template.name))
+        template.initEarlyAttrs(obj)
+      end
     end
     if objname then
       objname = ParentSub(objnamearg, u(obj).parent)
@@ -142,13 +144,15 @@ local function new(log)
         addonEnv[objname] = obj
       end
     end
-    for _, template in ipairs({ ... }) do
-      log(4, 'initializing attributes for ' .. tostring(template.name))
-      template.initAttrs(obj)
-    end
-    for _, template in ipairs({ ... }) do
-      log(4, 'initializing children for ' .. tostring(template.name))
-      template.initKids(obj)
+    if tmpls then
+      for _, template in ipairs(tmpls) do
+        log(4, 'initializing attributes for ' .. tostring(template.name))
+        template.initAttrs(obj)
+      end
+      for _, template in ipairs(tmpls) do
+        log(4, 'initializing children for ' .. tostring(template.name))
+        template.initKids(obj)
+      end
     end
     RunScript(obj, 'OnLoad')
     if InheritsFrom(typename, 'region') and obj:IsVisible() then
@@ -167,7 +171,7 @@ local function new(log)
       assert(template, 'unknown template ' .. templateName)
       table.insert(tmpls, template)
     end
-    local frame = CreateUIObject(ltype, name, parent, nil, unpack(tmpls))
+    local frame = CreateUIObject(ltype, name, parent, nil, tmpls)
     table.insert(frames, frame)
     u(frame).frameIndex = #frames
     return frame
