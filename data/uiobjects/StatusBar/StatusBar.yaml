@@ -7,6 +7,18 @@ fields:
   min:
     init: 0
     type: number
+  statusBarColorAlpha:
+    init: 0
+    type: number
+  statusBarColorBlue:
+    init: 0
+    type: number
+  statusBarColorGreen:
+    init: 0
+    type: number
+  statusBarColorRed:
+    init: 0
+    type: number
   statusBarTexture:
     type: texture
   value:
@@ -31,7 +43,12 @@ methods:
   GetStatusBarAtlas:
     status: unimplemented
   GetStatusBarColor:
-    status: unimplemented
+    fields:
+    - name: statusBarColorRed
+    - name: statusBarColorGreen
+    - name: statusBarColorBlue
+    - name: statusBarColorAlpha
+    status: getter
   GetStatusBarTexture:
     fields:
     - name: statusBarTexture
@@ -56,7 +73,13 @@ methods:
   SetStatusBarAtlas:
     status: unimplemented
   SetStatusBarColor:
-    status: unimplemented
+    fields:
+    - name: statusBarColorRed
+    - name: statusBarColorGreen
+    - name: statusBarColorBlue
+    - name: statusBarColorAlpha
+      nilable: true
+    status: setter
   SetStatusBarTexture:
     fields:
     - name: statusBarTexture
