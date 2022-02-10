@@ -234,6 +234,10 @@ local function loader(api, cfg)
             local a = e.attr
             parent[a.key] = parseTypedValue(a.type, a.value)
           end,
+          offset = function(e, parent)
+            assert(ctx.shadow, 'this should only run on shadow for now')
+            parent:SetShadowOffset(getXY(e))
+          end,
           size = function(e, parent)
             local x, y = getXY(e)
             if x then
