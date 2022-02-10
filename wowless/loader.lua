@@ -225,9 +225,6 @@ local function loader(api, cfg)
               type = font.type,
             })
           end,
-          include = function(e)
-            loadFile(path.join(dir, e.attr.file))
-          end,
           keyvalue = function(e, parent)
             local a = e.attr
             parent[a.key] = parseTypedValue(a.type, a.value)
@@ -266,6 +263,9 @@ local function loader(api, cfg)
         }
 
         local xmlattrlang = {
+          file = function(_, value)
+            loadFile(path.join(dir, value))
+          end,
           hidden = function(obj, value)
             api.UserData(obj).shown = not value
           end,
@@ -299,6 +299,23 @@ local function loader(api, cfg)
           end,
         }
 
+        local function processAttr(attr, obj, k, v)
+          if attr.impl == 'internal' then
+            xmlattrlang[k](obj, v)
+          elseif attr.impl.method then
+            local fn = api.uiobjectTypes[api.UserData(obj).type].metatable.__index[attr.impl.method]
+            if type(v) == 'table' then -- stringlist
+              fn(obj, unpack(v))
+            else
+              fn(obj, v)
+            end
+          elseif attr.impl.field then
+            api.UserData(obj)[attr.impl.field] = v
+          else
+            error('invalid attribute impl for ' .. k)
+          end
+        end
+
         local function processAttrs(e, obj, phase)
           local objty = api.UserData(obj).type
           local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
@@ -306,20 +323,7 @@ local function loader(api, cfg)
             -- This assumes that uiobject types and xml types are the same "space" of strings.
             local attr = attrs[k]
             if attr and phase == attr.phase then
-              if attr.impl == 'internal' then
-                xmlattrlang[k](obj, v)
-              elseif attr.impl.method then
-                local fn = api.uiobjectTypes[objty].metatable.__index[attr.impl.method]
-                if type(v) == 'table' then -- stringlist
-                  fn(obj, unpack(v))
-                else
-                  fn(obj, v)
-                end
-              elseif attr.impl.field then
-                api.UserData(obj)[attr.impl.field] = v
-              else
-                error('invalid attribute impl for ' .. k)
-              end
+              processAttr(attr, obj, k, v)
             end
           end
         end
@@ -417,6 +421,12 @@ local function loader(api, cfg)
                 api.uiobjectTypes[impl.parenttype:lower()].metatable.__index[impl.parentmethod](parent, obj)
               end
             elseif impl == 'transparent' then
+              for k, v in pairs(e.attr) do
+                local attr = xmlimpls[e.type].attrs[k]
+                if attr then
+                  processAttr(attr, nil, k, v)
+                end
+              end
               loadElements(e.kids, parent)
             elseif fn then
               fn(e, parent)

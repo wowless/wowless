@@ -2,5 +2,7 @@
 name: Include
 attributes:
   file:
+    impl: internal
     required: true
     type: string
+impl: transparent
