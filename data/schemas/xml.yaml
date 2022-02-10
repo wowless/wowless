@@ -10,6 +10,7 @@ type:
               type:
                 oneof:
                 - literal: internal
+                - literal: loadfile
                 - record:
                     field:
                       required: true

@@ -2,7 +2,7 @@
 name: Include
 attributes:
   file:
-    impl: internal
+    impl: loadfile
     required: true
     type: string
 impl: transparent

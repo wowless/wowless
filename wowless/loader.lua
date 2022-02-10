@@ -263,9 +263,6 @@ local function loader(api, cfg)
         }
 
         local xmlattrlang = {
-          file = function(_, value)
-            loadFile(path.join(dir, value))
-          end,
           hidden = function(obj, value)
             api.UserData(obj).shown = not value
           end,
@@ -302,6 +299,8 @@ local function loader(api, cfg)
         local function processAttr(attr, obj, k, v)
           if attr.impl == 'internal' then
             xmlattrlang[k](obj, v)
+          elseif attr.impl == 'loadfile' then
+            loadFile(path.join(dir, v))
           elseif attr.impl.method then
             local fn = api.uiobjectTypes[api.UserData(obj).type].metatable.__index[attr.impl.method]
             if type(v) == 'table' then -- stringlist
