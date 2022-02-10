@@ -230,6 +230,13 @@ local function loader(api, cfg)
               type = font.type,
             })
           end,
+          hitrectinsets = function(e, parent)
+            local kid = e.kids[#e.kids]
+            local function v(k)
+              return e.attr[k] or (kid and kid.attr[k])
+            end
+            parent:SetHitRectInsets(v('left'), v('right'), v('top'), v('bottom'))
+          end,
           keyvalue = function(e, parent)
             local a = e.attr
             parent[a.key] = parseTypedValue(a.type, a.value)
