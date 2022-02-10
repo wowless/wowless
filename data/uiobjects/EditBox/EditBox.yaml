@@ -19,6 +19,9 @@ fields:
   isMultiLine:
     init: false
     type: bool
+  isSecureText:
+    init: false
+    type: bool
   maxBytes:
     init: 200
     type: number
@@ -79,6 +82,10 @@ methods:
     fields:
     - name: isMultiLine
     status: getter
+  IsSecureText:
+    fields:
+    - name: isSecureText
+    status: getter
   SetAltArrowKeyMode:
     status: unimplemented
   SetAutoFocus:
@@ -119,7 +126,7 @@ methods:
     status: unimplemented
   SetSecureText:
     fields:
-    - name: editboxText
+    - name: isSecureText
     status: setter
   SetSecurityDisablePaste:
     status: unimplemented

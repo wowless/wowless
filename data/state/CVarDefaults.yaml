@@ -4,6 +4,7 @@ value:
   cameraSmoothStyle: 0
   cameraSmoothTrackingStyle: 0
   chatStyle: classic
+  graphicsQuality: 1
   lastTalkedToGM: ''
   minimapZoom: 1
   NamePlateClassificationScale: 1
@@ -11,8 +12,10 @@ value:
   nameplateMotion: 0
   NamePlateVerticalScale: 1
   partyBackgroundOpacity: 1
+  RAIDgraphicsQuality: 1
   remoteTextToSpeechVoice: 1
   RenderScale: 1
   spellActivationOverlayOpacity: 1
+  timeMgrAlarmMessage: ''
   timeMgrAlarmTime: 0
   whisperMode: inline

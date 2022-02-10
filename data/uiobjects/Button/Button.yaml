@@ -107,6 +107,7 @@ methods:
     fields:
     - name: buttonState
     - name: buttonLocked
+      nilable: true
     status: setter
   SetDisabledAtlas:
     fields:

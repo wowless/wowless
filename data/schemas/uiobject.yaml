@@ -32,6 +32,8 @@ type:
                     name:
                       required: true
                       type: string
+                    nilable:
+                      type: boolean
             flavors:
               type:
                 schema: flavors

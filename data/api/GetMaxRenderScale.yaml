@@ -1,3 +1,8 @@
 ---
 name: GetMaxRenderScale
 status: unimplemented
+inputs:
+- {}
+outputs:
+- name: value
+  type: number

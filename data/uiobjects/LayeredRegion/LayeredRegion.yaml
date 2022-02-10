@@ -19,6 +19,7 @@ methods:
     fields:
     - name: layer
     - name: sublevel
+      nilable: true
     status: setter
   SetVertexColor:
     status: unimplemented
