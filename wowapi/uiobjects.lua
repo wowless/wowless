@@ -156,9 +156,6 @@ local function mkBaseUIObjectTypes(api)
             ud[fname] = type(field.init) == 'table' and deepcopy(field.init) or field.init
           end
         end
-        if lua.init then
-          setfenv(lua.init, getfenv(1))(self)
-        end
       end
     end)()
     local mixin = {}

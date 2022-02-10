@@ -36,7 +36,7 @@ describe('uiobjects', function()
           it('has valid methods', function()
             assert.same('table', type(cfg.methods))
             for k in pairs(luas) do
-              assert.Truthy(k == 'init' or cfg.methods[k], ('method %q not in yaml'):format(k))
+              assert.Truthy(cfg.methods[k], ('method %q not in yaml'):format(k))
             end
           end)
         end)
