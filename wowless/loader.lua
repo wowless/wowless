@@ -347,24 +347,25 @@ local function loader(api, cfg)
           end,
         }
 
-        local function mkInitPhase(phaseName)
+        local function mkInitPhase(phaseName, e)
           local phase = phases[phaseName]
-          return function(e)
-            return function(obj)
-              for _, inh in ipairs(e.attr.inherits or {}) do
-                api.templates[string.lower(inh)]['init' .. phaseName](obj)
-              end
-              phase(e, obj)
+          return function(obj)
+            for _, inh in ipairs(e.attr.inherits or {}) do
+              api.templates[string.lower(inh)]['init' .. phaseName](obj)
             end
+            phase(e, obj)
           end
         end
 
-        local mkInitEarlyAttrs = mkInitPhase('EarlyAttrs')
-        local mkInitAttrs = mkInitPhase('Attrs')
-        local mkInitKids = mkInitPhase('Kids')
-
         function loadElement(e, parent)
           if api.IsIntrinsicType(e.type) then
+            local newctx = withContext({ intrinsic = not not e.attr.intrinsic })
+            local template = {
+              initEarlyAttrs = newctx.mkInitPhase('EarlyAttrs', e),
+              initAttrs = newctx.mkInitPhase('Attrs', e),
+              initKids = newctx.mkInitPhase('Kids', e),
+              name = e.attr.name,
+            }
             local virtual = e.attr.virtual
             if e.attr.intrinsic then
               assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
@@ -379,10 +380,9 @@ local function loader(api, cfg)
               api.uiobjectTypes[name] = {
                 constructor = function(self, xmlattr)
                   base.constructor(self, xmlattr)
-                  local newctx = withContext({ intrinsic = true })
-                  newctx.mkInitEarlyAttrs(e)(self)
-                  newctx.mkInitAttrs(e)(self)
-                  newctx.mkInitKids(e)(self)
+                  template.initEarlyAttrs(self)
+                  template.initAttrs(self)
+                  template.initKids(self)
                 end,
                 inherits = { basetype },
                 metatable = { __index = base.metatable.__index },
@@ -398,23 +398,13 @@ local function loader(api, cfg)
                   api.log(1, 'overwriting template ' .. e.attr.name)
                 end
                 api.log(3, 'creating template ' .. e.attr.name)
-                api.templates[name] = {
-                  initEarlyAttrs = mkInitEarlyAttrs(e),
-                  initAttrs = mkInitAttrs(e),
-                  initKids = mkInitKids(e),
-                  name = e.attr.name,
-                }
+                api.templates[name] = template
               end
               if ltype == 'font' or (not virtual or ctx.ignoreVirtual) then
                 local name = e.attr.name
                 if virtual and ctx.ignoreVirtual then
                   api.log(1, 'ignoring virtual on ' .. tostring(name))
                 end
-                local template = {
-                  initEarlyAttrs = mkInitEarlyAttrs(e),
-                  initAttrs = mkInitAttrs(e),
-                  initKids = mkInitKids(e),
-                }
                 return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
               end
             end
@@ -443,9 +433,7 @@ local function loader(api, cfg)
         return {
           loadElement = loadElement,
           loadElements = loadElements,
-          mkInitEarlyAttrs = mkInitEarlyAttrs,
-          mkInitAttrs = mkInitAttrs,
-          mkInitKids = mkInitKids,
+          mkInitPhase = mkInitPhase,
         }
       end
 
