@@ -167,7 +167,10 @@ local function new(log)
       assert(template, 'unknown template ' .. templateName)
       table.insert(tmpls, template)
     end
-    return CreateUIObject(ltype, name, parent, nil, unpack(tmpls))
+    local frame = CreateUIObject(ltype, name, parent, nil, unpack(tmpls))
+    table.insert(frames, frame)
+    u(frame).frameIndex = #frames
+    return frame
   end
 
   local function SetScript(obj, name, bindingType, script)
