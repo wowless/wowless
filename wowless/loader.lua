@@ -455,6 +455,7 @@ local function loader(api, cfg)
     end
 
     function loadFile(filename)
+      filename = path.normalize(filename)
       api.CallSafely(function()
         api.log(2, 'loading file %s', filename)
         local loadFn
