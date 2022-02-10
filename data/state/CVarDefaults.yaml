@@ -1,20 +1,31 @@
 ---
 name: CVarDefaults
 value:
+  cameraDistanceMaxZoomFactor: 1
   cameraSmoothStyle: 0
   cameraSmoothTrackingStyle: 0
+  cameraYawMoveSpeed: 1
+  cameraYawSmoothSpeed: 1
   chatStyle: classic
+  colorblindWeaknessFactor: 1
   graphicsQuality: 1
   lastTalkedToGM: ''
   minimapZoom: 1
+  mouseSpeed: 1
   NamePlateClassificationScale: 1
   NamePlateHorizontalScale: 1
+  nameplateMaxDistance: 20
   nameplateMotion: 0
   NamePlateVerticalScale: 1
   partyBackgroundOpacity: 1
   RAIDgraphicsQuality: 1
   remoteTextToSpeechVoice: 1
   RenderScale: 1
+  Sound_AmbienceVolume: 1
+  Sound_DialogVolume: 1
+  Sound_MasterVolume: 1
+  Sound_MusicVolume: 1
+  Sound_SFXVolume: 1
   spellActivationOverlayOpacity: 1
   timeMgrAlarmMessage: ''
   timeMgrAlarmTime: 0

@@ -181,10 +181,10 @@ local function mkBaseUIObjectTypes(api)
               ud[f.name] = not not v
             elseif ty == 'texture' then
               ud[f.name] = toTexture(self, v)
-            else
-              -- TODO enable the following check
-              --assert(v ~= nil or f.nilable, ('cannot set nil on %s.%s.%s'):format(name, mname, f.name))
+            elseif v ~= nil then
               ud[f.name] = v
+            else
+              assert(f.nilable, ('cannot set nil on %s.%s.%s'):format(name, mname, f.name))
             end
           end
         end
