@@ -369,9 +369,6 @@ local function loader(api, cfg)
           end
         end
 
-        local mkInitEarlyAttrsNotRecursive = mkInitPhaseNotRecursive('EarlyAttrs')
-        local mkInitAttrsNotRecursive = mkInitPhaseNotRecursive('Attrs')
-        local mkInitKidsNotRecursive = mkInitPhaseNotRecursive('Kids')
         local mkInitEarlyAttrs = mkInitPhase('EarlyAttrs')
         local mkInitAttrs = mkInitPhase('Attrs')
         local mkInitKids = mkInitPhase('Kids')
@@ -423,18 +420,12 @@ local function loader(api, cfg)
                 if virtual and ctx.ignoreVirtual then
                   api.log(1, 'ignoring virtual on ' .. tostring(name))
                 end
-                local templates = {}
-                for _, inh in ipairs(e.attr.inherits or {}) do
-                  local template = api.templates[string.lower(inh)]
-                  assert(template, 'unknown template ' .. inh)
-                  table.insert(templates, template)
-                end
-                table.insert(templates, {
-                  initEarlyAttrs = mkInitEarlyAttrsNotRecursive(e),
-                  initAttrs = mkInitAttrsNotRecursive(e),
-                  initKids = mkInitKidsNotRecursive(e),
-                })
-                return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, templates)
+                local template = {
+                  initEarlyAttrs = mkInitEarlyAttrs(e),
+                  initAttrs = mkInitAttrs(e),
+                  initKids = mkInitKids(e),
+                }
+                return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
               end
             end
           else
