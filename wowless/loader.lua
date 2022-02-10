@@ -249,6 +249,12 @@ local function loader(api, cfg)
             local a = e.attr
             parent[a.key] = parseTypedValue(a.type, a.value)
           end,
+          maxresize = function(e, parent)
+            parent:SetMaxResize(getXY(e.kids[#e.kids]))
+          end,
+          minresize = function(e, parent)
+            parent:SetMinResize(getXY(e.kids[#e.kids]))
+          end,
           offset = function(e, parent)
             assert(ctx.shadow, 'this should only run on shadow for now')
             parent:SetShadowOffset(getXY(e))

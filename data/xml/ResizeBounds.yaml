@@ -3,3 +3,4 @@ name: ResizeBounds
 contents:
 - MaxResize
 - MinResize
+impl: transparent
