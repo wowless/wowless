@@ -275,6 +275,9 @@ local function loader(api, cfg)
               parent:SetTexCoord(x.left, x.right, x.top, x.bottom)
             end
           end,
+          viewinsets = function(e, parent)
+            parent:SetViewInsets(e.attr.left, e.attr.right, e.attr.top, e.attr.bottom)
+          end,
         }
 
         local xmlattrlang = {
