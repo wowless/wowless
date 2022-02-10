@@ -263,7 +263,7 @@ local function loader(api, cfg)
             parent:SetOrigin(e.attr.point, getXY(e.kids[#e.kids]))
           end,
           pushedtextoffset = function(e, parent)
-            parent:SetPushedTextOffset(getXY(e.kids[#e.kids]))
+            parent:SetPushedTextOffset(getXY(e))
           end,
           size = function(e, parent)
             local x, y = getXY(e)
