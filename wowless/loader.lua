@@ -202,6 +202,14 @@ local function loader(api, cfg)
             local a = e.attr
             api.UserData(parent).attributes[a.name] = parseTypedValue(a.type, a.value)
           end,
+          barcolor = function(e, parent)
+            -- TODO deduplicate with color
+            if e.attr.name then
+              parent:SetStatusBarColor(_G[e.attr.name]:GetRGBA())
+            else
+              parent:SetStatusBarColor(e.attr.r, e.attr.g, e.attr.b, e.attr.a)
+            end
+          end,
           color = function(e, parent)
             local r, g, b, a
             if e.attr.name then
