@@ -378,15 +378,11 @@ local function loader(api, cfg)
               local basetype = string.lower(e.type)
               local base = api.uiobjectTypes[basetype]
               api.uiobjectTypes[name] = {
-                constructor = function(self, xmlattr)
-                  base.constructor(self, xmlattr)
-                  template.initEarlyAttrs(self)
-                  template.initAttrs(self)
-                  template.initKids(self)
-                end,
+                constructor = base.constructor,
                 inherits = { basetype },
                 metatable = { __index = base.metatable.__index },
                 name = e.attr.name,
+                template = template,
               }
               intrinsics[name] = xmlimpls[basetype]
             else

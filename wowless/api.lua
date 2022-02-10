@@ -112,7 +112,7 @@ local function new(log)
     end
   end
 
-  local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmpls)
+  local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg)
     local objname = ParentSub(objnamearg, parent)
     assert(typename, 'must specify type for ' .. tostring(objname))
     local type = uiobjectTypes[typename]
@@ -131,11 +131,18 @@ local function new(log)
       table.insert(frames, obj)
       u(obj).frameIndex = #frames
     end
-    if tmpls then
-      for _, template in ipairs(tmpls) do
-        log(4, 'initializing early attributes for ' .. tostring(template.name))
-        template.initEarlyAttrs(obj)
+    local tmpls = {}
+    if tmplsarg then
+      for _, tmpl in ipairs(tmplsarg) do
+        table.insert(tmpls, tmpl)
       end
+    end
+    if type.template then
+      table.insert(tmpls, type.template)
+    end
+    for _, template in ipairs(tmpls) do
+      log(4, 'initializing early attributes for ' .. tostring(template.name))
+      template.initEarlyAttrs(obj)
     end
     if objname then
       objname = ParentSub(objnamearg, u(obj).parent)
@@ -148,15 +155,13 @@ local function new(log)
         addonEnv[objname] = obj
       end
     end
-    if tmpls then
-      for _, template in ipairs(tmpls) do
-        log(4, 'initializing attributes for ' .. tostring(template.name))
-        template.initAttrs(obj)
-      end
-      for _, template in ipairs(tmpls) do
-        log(4, 'initializing children for ' .. tostring(template.name))
-        template.initKids(obj)
-      end
+    for _, template in ipairs(tmpls) do
+      log(4, 'initializing attributes for ' .. tostring(template.name))
+      template.initAttrs(obj)
+    end
+    for _, template in ipairs(tmpls) do
+      log(4, 'initializing children for ' .. tostring(template.name))
+      template.initKids(obj)
     end
     RunScript(obj, 'OnLoad')
     if InheritsFrom(typename, 'region') and obj:IsVisible() then
