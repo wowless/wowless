@@ -19,6 +19,8 @@ type:
               type: string
             nilable:
               type: boolean
+            stub:
+              type: string
             type:
               required: true
               type:

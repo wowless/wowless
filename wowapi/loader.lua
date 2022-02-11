@@ -40,6 +40,9 @@ local getStub = (function()
         if data.structures[field.type] then
           ensureStructureDefault(field.type)
           v = structureDefaults[field.type]
+        elseif field.stub then
+          assert(type(field.stub) == 'string', 'only string stubs supported in structures')
+          v = string.format('%q', field.stub)
         else
           v = tostring(defaultOutputs[field.nilable and 'nil' or field.type])
         end
