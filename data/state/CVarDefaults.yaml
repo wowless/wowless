@@ -17,6 +17,7 @@ value:
   nameplateMaxDistance: 20
   nameplateMotion: 0
   NamePlateVerticalScale: 1
+  newMythicPlusSeason: 1
   partyBackgroundOpacity: 1
   RAIDgraphicsQuality: 1
   remoteTextToSpeechVoice: 1
