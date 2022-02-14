@@ -122,12 +122,12 @@ local attributeTypes = {
   end,
 }
 
-local function parseRoot(root, intrinsics)
+local function parseRoot(root, intrinsics, snapshot)
   local warnings = {}
   local function run(e, tn, tk)
     assert(e._type == 'ELEMENT', 'invalid xml type ' .. e._type .. ' on child of ' .. tn)
     local tname = string.lower(e._name)
-    local ty = lang[tname] or intrinsics[tname]
+    local ty = lang[tname] or snapshot[tname]
     if not ty then
       table.insert(warnings, 'unknown type ' .. tname)
       return nil
@@ -240,7 +240,11 @@ return {
   newParser = function()
     local intrinsics = {}
     return function(xmlstr)
-      return parseRoot(xml2dom(xmlstr), intrinsics)
+      local snapshot = {}
+      for k, v in pairs(intrinsics) do
+        snapshot[k] = v
+      end
+      return parseRoot(xml2dom(xmlstr), intrinsics, snapshot)
     end
   end,
 }
