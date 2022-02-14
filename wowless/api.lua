@@ -200,7 +200,14 @@ local function new(log)
     end
   end
 
-  local function NextFrame()
+  local function NextFrame(elapsed)
+    local time = states.Time
+    time.stamp = time.stamp + (elapsed or 1)
+    while time.timers:peek().pri < time.stamp do
+      local timer = time.timers:pop()
+      log(2, 'running timer %.2f %s', timer.pri, tostring(timer.val))
+      timer.val()
+    end
     for _, frame in ipairs(frames) do
       if frame:IsVisible() then
         RunScript(frame, 'OnUpdate', 1)

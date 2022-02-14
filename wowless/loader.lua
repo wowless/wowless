@@ -564,6 +564,14 @@ local function loader(api, cfg)
     return { attrs = attrs, files = files }
   end
 
+  do
+    local time = assert(api.states.Time)
+    time.timers = require('minheap'):new()
+    time.timers:push(math.huge, function()
+      error('fell off the end of time')
+    end)
+  end
+
   local addonData = assert(api.states.Addons)
   do
     local function maybeAdd(dir)

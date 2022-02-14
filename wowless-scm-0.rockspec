@@ -16,6 +16,7 @@ dependencies = {
   'luautf8',
   'lua-path',
   'lyaml',
+  'minheap',
   'penlight',
   'serpent',
 }

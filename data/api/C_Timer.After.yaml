@@ -1,3 +1,7 @@
 ---
 name: C_Timer.After
-status: unimplemented
+status: implemented
+frameworks:
+- api
+states:
+- Time

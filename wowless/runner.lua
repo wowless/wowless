@@ -38,7 +38,9 @@ local function run(cfg)
   api.SendEvent('PLAYER_REGEN_DISABLED')
   api.NextFrame()
   api.SendEvent('PLAYER_REGEN_ENABLED')
-  api.NextFrame()
+  for _ = 1, 200 do
+    api.NextFrame(5)
+  end
   for _, frame in ipairs(api.frames) do
     if frame:IsVisible() then
       api.log(2, 'enter/leave %s', api.GetDebugName(frame))
