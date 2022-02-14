@@ -78,12 +78,13 @@ local function loader(api, cfg)
   end
 
   local function forAddon(addonName, addonEnv)
-    local function loadstr(str, filename)
-      return assert(loadstring(str, '@' .. path.normalize(filename):gsub('/', '\\')))
+    local function loadstr(str, filename, line)
+      local pre = line and string.rep('\n', line - 1) or ''
+      return assert(loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\')))
     end
 
-    local function loadLuaString(filename, str)
-      local fn = setfenv(loadstr(str, filename), api.env)
+    local function loadLuaString(filename, str, line)
+      local fn = setfenv(loadstr(str, filename, line), api.env)
       api.CallSafely(function()
         fn(addonName, addonEnv)
       end)
@@ -126,7 +127,7 @@ local function loader(api, cfg)
             local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
             local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
             local env = ctx.useAddonEnv and addonEnv or api.env
-            fn = setfenv(loadstr(string.rep('\n', script.line - 1) .. fnstr, filename), env)()
+            fn = setfenv(loadstr(fnstr, filename, script.line), env)()
           end
           if fn then
             local old = obj:GetScript(script.type)
@@ -460,7 +461,7 @@ local function loader(api, cfg)
               end
               withContext(ctxmix).loadElements(e.kids, parent)
               if impl == 'loadstring' and e.text then
-                loadLuaString(filename, e.text)
+                loadLuaString(filename, e.text, e.line)
               end
             elseif fn then
               fn(e, parent)
