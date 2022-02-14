@@ -413,7 +413,7 @@ local function loader(api, cfg)
                 constructor = base.constructor,
                 inherits = { basetype },
                 metatable = { __index = base.metatable.__index },
-                name = e.attr.name,
+                name = base.name,
                 template = template,
               }
               intrinsics[name] = xmlimpls[basetype]
