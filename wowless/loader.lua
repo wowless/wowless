@@ -77,6 +77,14 @@ local function loader(api, cfg)
     end
   end
 
+  local function getColor(e)
+    if e.attr.name then
+      return _G[e.attr.name]:GetRGBA()
+    else
+      return e.attr.r, e.attr.g, e.attr.b, e.attr.a
+    end
+  end
+
   local function forAddon(addonName, addonEnv)
     local function loadstr(str, filename, line)
       local pre = line and string.rep('\n', line - 1) or ''
@@ -204,20 +212,10 @@ local function loader(api, cfg)
             api.UserData(parent).attributes[a.name] = parseTypedValue(a.type, a.value)
           end,
           barcolor = function(e, parent)
-            -- TODO deduplicate with color
-            if e.attr.name then
-              parent:SetStatusBarColor(_G[e.attr.name]:GetRGBA())
-            else
-              parent:SetStatusBarColor(e.attr.r, e.attr.g, e.attr.b, e.attr.a)
-            end
+            parent:SetStatusBarColor(getColor(e))
           end,
           color = function(e, parent)
-            local r, g, b, a
-            if e.attr.name then
-              r, g, b, a = _G[e.attr.name]:GetRGBA()
-            else
-              r, g, b, a = e.attr.r, e.attr.g, e.attr.b, e.attr.a
-            end
+            local r, g, b, a = getColor(e)
             local p = api.UserData(parent)
             if api.InheritsFrom(p.type, 'texture') then
               parent:SetColorTexture(r, g, b, a)
@@ -238,6 +236,21 @@ local function loader(api, cfg)
               kids = font.kids,
               type = font.type,
             })
+          end,
+          gradient = function(e, parent)
+            local minColor, maxColor
+            for _, kid in ipairs(e.kids) do
+              if kid.type == 'mincolor' then
+                minColor = kid
+              elseif kid.type == 'maxcolor' then
+                maxColor = kid
+              end
+            end
+            if minColor and maxColor then
+              local minR, minG, minB, minA = getColor(minColor)
+              local maxR, maxG, maxB, maxA = getColor(maxColor)
+              parent:SetGradientAlpha(e.attr.orientation, minR, minG, minB, minA, maxR, maxG, maxB, maxA)
+            end
           end,
           hitrectinsets = function(e, parent)
             local kid = e.kids[#e.kids]
