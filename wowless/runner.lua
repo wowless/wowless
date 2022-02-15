@@ -74,6 +74,23 @@ local function run(cfg)
   api.SendEvent('QUEST_GREETING')
   api.SendEvent('QUEST_PROGRESS')
   api.SendEvent('QUEST_FINISHED')
+  if cfg.allbindings then
+    local names = {}
+    for name in pairs(api.states.Bindings) do
+      table.insert(names, name)
+    end
+    table.sort(names)
+    for _, name in ipairs(names) do
+      local fn = api.states.Bindings[name]
+      api.log(2, 'firing binding ' .. name)
+      api.CallSafely(function()
+        fn('down')
+      end)
+      api.CallSafely(function()
+        fn('up')
+      end)
+    end
+  end
   if cfg.allevents then
     local eventBlacklist = {
       BARBER_SHOP_OPEN = true, -- issue #111
