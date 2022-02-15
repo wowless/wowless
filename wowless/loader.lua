@@ -237,6 +237,10 @@ local function loader(api, cfg)
               type = font.type,
             })
           end,
+          fontheight = function(e, parent)
+            local name, _, flags = parent:GetFont()
+            parent:SetFont(name, e.kids[#e.kids].attr.val, flags)
+          end,
           gradient = function(e, parent)
             local minColor, maxColor
             for _, kid in ipairs(e.kids) do
