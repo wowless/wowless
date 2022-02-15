@@ -1,0 +1,5 @@
+---
+name: ControlPoint
+inherits:
+- ParentedObject
+methods: {}
