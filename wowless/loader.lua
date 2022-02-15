@@ -284,6 +284,9 @@ local function loader(api, cfg)
           minresize = function(e, parent)
             parent:SetMinResize(getXY(e.kids[#e.kids]))
           end,
+          modifiedclick = function(e)
+            api.states.ModifiedClicks[e.attr.action] = e.attr.default
+          end,
           offset = function(e, parent)
             assert(ctx.shadow, 'this should only run on shadow for now')
             parent:SetShadowOffset(getXY(e))
@@ -494,7 +497,7 @@ local function loader(api, cfg)
             elseif fn then
               fn(e, parent)
             else
-              api.log(2, 'skipping ' .. filename .. ' ' .. e.type)
+              error('unimplemented xml tag ' .. e.type)
             end
           end
         end
