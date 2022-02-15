@@ -62,6 +62,8 @@ methods:
     fields:
     - name: editboxText
     status: getter
+  HasFocus:
+    status: unimplemented
   HighlightText:
     status: unimplemented
   Insert:

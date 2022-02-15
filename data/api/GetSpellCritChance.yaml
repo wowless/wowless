@@ -1,0 +1,9 @@
+---
+name: GetSpellCritChance
+status: unimplemented
+inputs:
+- - name: school
+    type: number
+outputs:
+- name: value
+  type: number

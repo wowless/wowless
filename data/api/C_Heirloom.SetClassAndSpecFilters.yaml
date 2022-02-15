@@ -1,0 +1,9 @@
+---
+name: C_Heirloom.SetClassAndSpecFilters
+status: unimplemented
+inputs:
+- - name: classID
+    type: number
+  - name: specID
+    type: number
+outputs: {}

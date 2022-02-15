@@ -1,0 +1,8 @@
+---
+name: C_PetJournal.IsFindBattleEnabled
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: value
+  type: bool

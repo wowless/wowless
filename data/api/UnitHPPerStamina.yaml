@@ -1,0 +1,9 @@
+---
+name: UnitHPPerStamina
+status: unimplemented
+inputs:
+- - name: unit
+    type: unit
+outputs:
+- name: value
+  type: number
