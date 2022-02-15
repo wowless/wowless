@@ -680,6 +680,14 @@ local function loader(api, cfg)
     for _, file in ipairs(parseToc(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML'))).files) do
       context.loadFile(file)
     end
+    if version then
+      local frameXmlBindingsDirMap = {
+        Mainline = 'Interface',
+        TBC = 'Interface_TBC',
+        Vanilla = 'Interface_Vanilla',
+      }
+      context.loadFile(path.join(rootDir, frameXmlBindingsDirMap[version], 'FrameXML', 'Bindings.xml'))
+    end
     local blizzardAddons = {}
     for name, toc in pairs(addonData) do
       if type(name) == 'string' and name:sub(1, 9) == 'Blizzard_' and toc.attrs.LoadOnDemand ~= '1' then
