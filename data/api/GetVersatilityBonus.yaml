@@ -1,0 +1,7 @@
+---
+name: GetVersatilityBonus
+status: unimplemented
+inputs:
+- - type: number
+outputs:
+- type: number
