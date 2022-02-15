@@ -1,0 +1,7 @@
+---
+name: SpellStopTargeting
+status: unimplemented
+inputs:
+- {}
+outputs:
+- type: bool

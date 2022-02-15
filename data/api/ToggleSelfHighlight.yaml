@@ -1,0 +1,7 @@
+---
+name: ToggleSelfHighlight
+status: unimplemented
+inputs:
+- {}
+outputs:
+- type: bool

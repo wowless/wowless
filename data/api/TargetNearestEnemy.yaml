@@ -1,0 +1,8 @@
+---
+name: TargetNearestEnemy
+status: unimplemented
+inputs:
+- - name: reverse
+    nilable: true
+    type: bool
+outputs: {}

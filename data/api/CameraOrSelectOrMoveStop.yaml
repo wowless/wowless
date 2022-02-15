@@ -1,0 +1,7 @@
+---
+name: CameraOrSelectOrMoveStop
+status: unimplemented
+inputs:
+- - name: stickyFlag
+    type: bool
+outputs: {}

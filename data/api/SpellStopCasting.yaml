@@ -1,0 +1,8 @@
+---
+name: SpellStopCasting
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: value
+  type: bool

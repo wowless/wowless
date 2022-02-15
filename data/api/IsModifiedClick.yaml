@@ -1,3 +1,10 @@
 ---
 name: IsModifiedClick
 status: unimplemented
+inputs:
+- - name: action
+    nilable: true
+    type: string
+outputs:
+- name: value
+  type: bool

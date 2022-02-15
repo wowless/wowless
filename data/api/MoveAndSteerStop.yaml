@@ -1,0 +1,6 @@
+---
+name: MoveAndSteerStop
+status: unimplemented
+inputs:
+- {}
+outputs: {}

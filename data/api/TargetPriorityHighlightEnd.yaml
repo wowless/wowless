@@ -1,0 +1,6 @@
+---
+name: TargetPriorityHighlightEnd
+status: unimplemented
+inputs:
+- - type: bool
+outputs: {}

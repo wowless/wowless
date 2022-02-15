@@ -1,0 +1,7 @@
+---
+name: SetView
+status: unimplemented
+inputs:
+- - name: view
+    type: number
+outputs: {}

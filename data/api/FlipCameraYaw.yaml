@@ -1,0 +1,7 @@
+---
+name: FlipCameraYaw
+status: unimplemented
+inputs:
+- - name: angle
+    type: number
+outputs: {}

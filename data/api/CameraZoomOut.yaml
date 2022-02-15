@@ -1,0 +1,7 @@
+---
+name: CameraZoomOut
+status: unimplemented
+inputs:
+- - name: increment
+    type: number
+outputs: {}
