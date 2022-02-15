@@ -270,6 +270,9 @@ local function loader(api, cfg)
             local a = e.attr
             parent[a.key] = parseTypedValue(a.type, a.value)
           end,
+          maskedtexture = function(e, parent)
+            parent:GetParent()[e.attr.childkey]:AddMaskTexture(parent)
+          end,
           maxresize = function(e, parent)
             parent:SetMaxResize(getXY(e.kids[#e.kids]))
           end,
