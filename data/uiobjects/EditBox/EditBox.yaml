@@ -104,6 +104,8 @@ methods:
     status: setter
   SetFocus:
     status: unimplemented
+  SetHighlightColor:
+    status: unimplemented
   SetHistoryLines:
     fields:
     - name: historyLines

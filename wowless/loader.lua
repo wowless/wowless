@@ -252,6 +252,9 @@ local function loader(api, cfg)
               parent:SetGradientAlpha(e.attr.orientation, minR, minG, minB, minA, maxR, maxG, maxB, maxA)
             end
           end,
+          highlightcolor = function(e, parent)
+            parent:SetHighlightColor(getColor(e))
+          end,
           hitrectinsets = function(e, parent)
             local kid = e.kids[#e.kids]
             local function v(k)
