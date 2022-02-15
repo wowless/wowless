@@ -1,0 +1,9 @@
+---
+name: C_ToyBox.GetIsFavorite
+status: unimplemented
+inputs:
+- - name: itemID
+    type: number
+outputs:
+- name: isFavorite
+  type: bool

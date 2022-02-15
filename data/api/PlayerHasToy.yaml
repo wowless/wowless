@@ -1,9 +1,9 @@
 ---
-name: GetSpecializationNameForSpecID
+name: PlayerHasToy
 status: unimplemented
 inputs:
-- - name: specID
+- - name: itemID
     type: number
 outputs:
 - name: value
-  type: string
+  type: bool

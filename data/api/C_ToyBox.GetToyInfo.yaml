@@ -1,0 +1,19 @@
+---
+name: C_ToyBox.GetToyInfo
+status: unimplemented
+inputs:
+- - name: itemID
+    type: number
+outputs:
+- name: itemID
+  type: number
+- name: toyName
+  type: string
+- name: icon
+  type: number
+- name: isFavorite
+  type: bool
+- name: hasFanfare
+  type: bool
+- name: itemQuality
+  type: number

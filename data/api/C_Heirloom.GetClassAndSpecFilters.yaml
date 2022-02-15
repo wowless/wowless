@@ -3,4 +3,8 @@ name: C_Heirloom.GetClassAndSpecFilters
 status: unimplemented
 inputs:
 - {}
-outputs: {}
+outputs:
+- name: classFilter
+  type: number
+- name: specFilter
+  type: number

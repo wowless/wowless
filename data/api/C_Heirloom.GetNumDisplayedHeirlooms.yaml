@@ -1,0 +1,8 @@
+---
+name: C_Heirloom.GetNumDisplayedHeirlooms
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: value
+  type: number

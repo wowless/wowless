@@ -1,0 +1,11 @@
+---
+name: GetCategoryAchievementPoints
+status: unimplemented
+inputs:
+- - name: categoryID
+    type: number
+  - name: includeSubCategories
+    type: bool
+outputs:
+- name: value
+  type: number

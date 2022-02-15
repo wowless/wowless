@@ -1,5 +1,10 @@
 ---
 name: C_PetJournal.GetNumPets
 status: unimplemented
+inputs:
+- {}
 outputs:
-- type: number
+- name: numPets
+  type: number
+- name: numOwned
+  type: number
