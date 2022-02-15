@@ -1,0 +1,8 @@
+---
+name: C_ToyBox.HasFavorites
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: value
+  type: bool

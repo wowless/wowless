@@ -1,0 +1,10 @@
+---
+name: GetMasteryEffect
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: mastery
+  type: number
+- name: bonusCoefficient
+  type: number

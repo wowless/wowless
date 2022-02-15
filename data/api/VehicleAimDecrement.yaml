@@ -1,0 +1,7 @@
+---
+name: VehicleAimDecrement
+status: unimplemented
+inputs:
+- - name: amount
+    type: number
+outputs: {}

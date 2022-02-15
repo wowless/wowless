@@ -1,0 +1,27 @@
+---
+name: C_Heirloom.GetHeirloomInfo
+status: unimplemented
+inputs:
+- - name: itemID
+    type: number
+outputs:
+- name: name
+  type: string
+- name: itemEquipLoc
+  type: number
+- name: isPvP
+  type: bool
+- name: itemTexture
+  type: number
+- name: upgradeLevel
+  type: number
+- name: source
+  type: string
+- name: searchFiltered
+  type: bool
+- name: effectiveLevel
+  type: number
+- name: minLevel
+  type: number
+- name: maxLevel
+  type: number
