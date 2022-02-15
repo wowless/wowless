@@ -12,7 +12,6 @@ local args = (function()
   parser:option('--product', 'product tag')
   parser:option('--addondir', 'addon directory to test')
   parser:flag('--allevents', 'send all nullary events')
-  parser:flag('--allbindings', 'send all binding events')
   parser:argument('deprecated_loglevel', 'log level'):default('0')
   parser:argument('deprecated_product', 'product tag'):default('wow_classic')
   parser:argument('deprecated_flavor', 'product flavor'):default('TBC')
@@ -26,7 +25,6 @@ local api = require('wowless.runner').run({
   version = (args.product and productToFlavor[args.product] or args.deprecated_flavor),
   otherAddonDirs = { args.addondir or args.deprecated_addon },
   allevents = args.allevents,
-  allbindings = args.allbindings,
 })
 if api.GetErrorCount() ~= 0 then
   io.stderr:write('failure on ' .. product .. '\n')

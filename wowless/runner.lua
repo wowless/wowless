@@ -74,7 +74,7 @@ local function run(cfg)
   api.SendEvent('QUEST_GREETING')
   api.SendEvent('QUEST_PROGRESS')
   api.SendEvent('QUEST_FINISHED')
-  if cfg.allbindings then
+  do
     local names = {}
     for name in pairs(api.states.Bindings) do
       table.insert(names, name)
