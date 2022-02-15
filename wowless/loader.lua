@@ -85,6 +85,14 @@ local function loader(api, cfg)
     end
   end
 
+  local function getInsets(e)
+    local kid = e.kids[#e.kids]
+    local function v(k)
+      return e.attr[k] or (kid and kid.attr[k])
+    end
+    return v('left'), v('right'), v('top'), v('bottom')
+  end
+
   local function forAddon(addonName, addonEnv)
     local function loadstr(str, filename, line)
       local pre = line and string.rep('\n', line - 1) or ''
@@ -265,11 +273,7 @@ local function loader(api, cfg)
             parent:SetHighlightColor(getColor(e))
           end,
           hitrectinsets = function(e, parent)
-            local kid = e.kids[#e.kids]
-            local function v(k)
-              return e.attr[k] or (kid and kid.attr[k])
-            end
-            parent:SetHitRectInsets(v('left'), v('right'), v('top'), v('bottom'))
+            parent:SetHitRectInsets(getInsets(e))
           end,
           keyvalue = function(e, parent)
             local a = e.attr
@@ -316,8 +320,11 @@ local function loader(api, cfg)
               parent:SetTexCoord(x.left, x.right, x.top, x.bottom)
             end
           end,
+          textinsets = function(e, parent)
+            parent:SetTextInsets(getInsets(e))
+          end,
           viewinsets = function(e, parent)
-            parent:SetViewInsets(e.attr.left, e.attr.right, e.attr.top, e.attr.bottom)
+            parent:SetViewInsets(getInsets(e))
           end,
         }
 
