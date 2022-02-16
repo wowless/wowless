@@ -273,6 +273,38 @@ local function loadFunctions(api, loader)
         end
       end
     end)()
+    local checkOutputs = (function()
+      if not apicfg.outputs then
+        return function(...)
+          return ...
+        end
+      else
+        local supportedTypes = {
+          bool = true,
+          number = true,
+          string = true,
+        }
+        return function(...)
+          for i, out in ipairs(apicfg.outputs) do
+            local arg = select(i, ...)
+            local ty = type(arg)
+            if supportedTypes[ty] and supportedTypes[out.type] then
+              assert(
+                ty == out.type,
+                ('output %d (%q) of %q is of type %q, but %q was returned'):format(
+                  i,
+                  tostring(out.name),
+                  fn,
+                  out.type,
+                  ty
+                )
+              )
+            end
+          end
+          return ...
+        end
+      end
+    end)()
     local function wrapimpl(...)
       api.log(4, 'entering %s', apicfg.name)
       local t = { ... }
@@ -282,7 +314,7 @@ local function loadFunctions(api, loader)
         assert(success, ...)
         return ...
       end)(pcall(function()
-        return bfn(checkInputs(unpack(t, 1, n)))
+        return checkOutputs(bfn(checkInputs(unpack(t, 1, n))))
       end))
     end
     local dot = fn:find('%.')
