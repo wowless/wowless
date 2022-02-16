@@ -19,6 +19,8 @@ methods:
     status: unimplemented
   SetLooping:
     status: unimplemented
+  SetPlaying:
+    status: unimplemented
   SetToFinalAlpha:
     status: unimplemented
   Stop:

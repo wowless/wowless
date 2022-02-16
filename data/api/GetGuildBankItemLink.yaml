@@ -1,0 +1,11 @@
+---
+name: GetGuildBankItemLink
+status: unimplemented
+inputs:
+- - name: tab
+    type: number
+  - name: index
+    type: number
+outputs:
+- name: itemLink
+  type: string
