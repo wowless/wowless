@@ -64,23 +64,18 @@ for f, envt in pairs(docs) do
   end
 end
 local types = {
-  bool = 'b',
-  number = 'n',
-  string = 's',
-  table = 't',
-}
-local tables = {
-  Constants = 'n',
-  Enumeration = 'n',
-  Structure = 't',
+  bool = true,
+  number = true,
+  string = true,
+  table = true,
 }
 local tys = {}
-for name, tab in pairs(tabs) do
-  tys[name] = assert(tables[tab.Type])
+for name in pairs(tabs) do
+  tys[name] = true
 end
 for k, v in pairs(require('wowapi.data').structures) do
   if v.status == 'implemented' then
-    tys[k] = 't'
+    tys[k] = true
   end
 end
 local expectedArgumentKeys = {
