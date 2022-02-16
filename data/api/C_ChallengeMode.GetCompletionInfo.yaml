@@ -17,8 +17,10 @@ outputs:
 - name: practiceRun
   type: bool
 - name: oldOverallDungeonScore
+  nilable: true
   type: number
 - name: newOverallDungeonScore
+  nilable: true
   type: number
 - name: IsMapRecord
   type: bool
