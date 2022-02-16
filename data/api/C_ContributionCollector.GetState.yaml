@@ -5,7 +5,7 @@ inputs:
 - - name: contributionID
     type: number
 outputs:
-- default: None
+- default: 0
   name: contributionState
   type: number
 - name: contributionPercentageComplete

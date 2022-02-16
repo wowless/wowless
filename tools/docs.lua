@@ -27,8 +27,8 @@ for _, product in ipairs(products) do
     end
     local env = {}
     setfenv(loadfile(tagdir .. '/Interface/GlobalEnvironment.lua'), env)()
-    for en in pairs(env.Enum) do
-      enum[en] = true
+    for en, em in pairs(env.Enum) do
+      enum[en] = em
     end
   end
 end
@@ -143,7 +143,7 @@ local function outsig(fn, ns)
       assert(expectedReturnKeys[k], ('unexpected key %q'):format(k))
     end
     table.insert(outputs, {
-      default = r.Default,
+      default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
       innerType = r.InnerType and t2ty(r.InnerType, ns),
       mixin = r.Mixin,
       name = r.Name,
