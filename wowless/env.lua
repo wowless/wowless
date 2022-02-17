@@ -30,6 +30,7 @@ local function mkBaseEnv()
     difftime = os.difftime,
     error = error,
     floor = math.floor,
+    forceinsecure = forceinsecure,
     format = extformat,
     getmetatable = getmetatable,
     getn = table.getn,

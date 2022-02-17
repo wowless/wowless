@@ -1,4 +1,5 @@
 read_globals = {
+  'forceinsecure',
   'issecure',
   'issecurevariable',
   'securecall',
