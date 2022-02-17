@@ -36,6 +36,7 @@ local function mkBaseEnv()
     gmatch = string.gmatch,
     gsub = string.gsub,
     ipairs = ipairs,
+    issecure = issecure,
     math = {
       abs = math.abs,
       ceil = math.ceil,

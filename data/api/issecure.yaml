@@ -1,8 +1,0 @@
----
-name: issecure
-status: implemented
-inputs:
-- {}
-outputs:
-- name: isSecure
-  type: bool
