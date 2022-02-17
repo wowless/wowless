@@ -70,6 +70,7 @@ local function mkBaseEnv()
     random = math.random,
     rawget = rawget,
     rawset = rawset,
+    scrub = scrub,
     select = select,
     setfenv = setfenv,
     setmetatable = setmetatable,
