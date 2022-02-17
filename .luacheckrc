@@ -1,5 +1,6 @@
 read_globals = {
   'issecure',
+  'issecurevariable',
   'securecall',
 }
 -- TODO remove this when it is no longer necessary

@@ -1,6 +1,0 @@
----
-name: issecurevariable
-status: unimplemented
-outputs:
-- stub: true
-  type: bool
