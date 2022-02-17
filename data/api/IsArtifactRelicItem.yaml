@@ -1,9 +1,9 @@
 ---
-name: GuildControlGetRankName
+name: IsArtifactRelicItem
 status: unimplemented
 inputs:
-- - name: rank
+- - name: itemID
     type: number
 outputs:
 - name: value
-  type: string
+  type: bool
