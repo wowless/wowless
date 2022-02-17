@@ -36,6 +36,7 @@ local function mkBaseEnv()
     getn = table.getn,
     gmatch = string.gmatch,
     gsub = string.gsub,
+    hooksecurefunc = hooksecurefunc,
     ipairs = ipairs,
     issecure = issecure,
     issecurevariable = issecurevariable,

@@ -1,5 +1,6 @@
 read_globals = {
   'forceinsecure',
+  'hooksecurefunc',
   'issecure',
   'issecurevariable',
   'scrub',
