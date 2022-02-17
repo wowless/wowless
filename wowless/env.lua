@@ -21,6 +21,7 @@ local function mkBaseEnv()
     coroutine = {
       create = coroutine.create,
       resume = coroutine.resume,
+      running = coroutine.running,
       status = coroutine.status,
       yield = coroutine.yield,
     },
