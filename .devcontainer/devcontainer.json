@@ -1,0 +1,7 @@
+{
+	"name": "Wowless",
+	"build": {
+		"dockerfile": "Dockerfile",
+	},
+	"postCreateCommand": "bin/setup.sh && bin/test.sh",
+}
