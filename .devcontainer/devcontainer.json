@@ -3,5 +3,5 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 	},
-	"postCreateCommand": "git submodule update --recursive --init && bin/test.sh",
+	"postCreateCommand": "git submodule update --recursive --init && pre-commit install && pre-commit run -a",
 }

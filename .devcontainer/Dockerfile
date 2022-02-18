@@ -38,3 +38,4 @@ RUN echo \
     serpent \
     wowcig \
     | xargs -n1 luarocks install
+RUN cargo install --root=/usr/local stylua
