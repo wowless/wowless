@@ -15,5 +15,6 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
         context: .devcontainer
+        load: true
         tags: moo
     - run: docker run -t moo -v $PWD:/moo bash -c "cd moo && pre-commit run -a"
