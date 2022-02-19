@@ -17,4 +17,4 @@ jobs:
         context: .devcontainer
         load: true
         tags: moo
-    - run: docker run -t moo -v $PWD:/moo bash -c "cd moo && pre-commit run -a"
+    - run: docker run -t -v $PWD:/moo moo bash -c "cd moo && pre-commit run -a"
