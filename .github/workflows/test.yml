@@ -16,4 +16,4 @@ jobs:
         load: true
         tags: moo
     - run: docker run -t -v $PWD:/moo moo bash -c \
-           "cd moo && $(jq .postCreateCommand .devcontainer/devcontainer.json)"
+           "cd moo && bash -c $(jq .postCreateCommand .devcontainer/devcontainer.json)"
