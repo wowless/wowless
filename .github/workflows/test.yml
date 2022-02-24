@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: bash -c "$(jq .initializeCommand .devcontainer/devcontainer.json)"
+    - run: bash -c "$(jq -r .initializeCommand .devcontainer/devcontainer.json)"
     - uses: satackey/action-docker-layer-caching@v0.0.11
     - run: cd .devcontainer && docker-compose build
     - run: docker run -t -v $PWD:/moo lua-wow-tools/wowless:dev bash -c \
