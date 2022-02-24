@@ -1,4 +1,5 @@
 read_globals = {
+  'debug.forcesecure',
   'forceinsecure',
   'issecure',
   'issecurevariable',

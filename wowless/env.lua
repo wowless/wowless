@@ -1,5 +1,5 @@
 local bitlib = require('bit')
-local extformat = require('wowless.ext').format
+local ext = require('wowless.ext')
 local utf8 = require('lua-utf8')
 local util = require('wowless.util')
 local Mixin = util.mixin
@@ -32,7 +32,7 @@ local function mkBaseEnv()
     error = error,
     floor = math.floor,
     forceinsecure = forceinsecure,
-    format = extformat,
+    format = ext.format,
     getmetatable = getmetatable,
     getn = table.getn,
     gmatch = string.gmatch,
@@ -82,7 +82,7 @@ local function mkBaseEnv()
       byte = string.byte,
       char = string.char,
       find = string.find,
-      format = extformat,
+      format = ext.format,
       gmatch = string.gmatch,
       gsub = string.gsub,
       join = util.strjoin,
@@ -149,12 +149,33 @@ local function dump(api)
   end
 end
 
+local invoke = require('wowless.api').invokeFramework
+
+local function wrapAll(t)
+  for k, v in pairs(t) do
+    local ty = type(v)
+    if v == setfenv then
+      local gtype = type
+      t[k] = function(arg, ...)
+        return invoke(v, gtype(arg) == 'number' and arg + 5 or arg, ...)
+      end
+    elseif ty == 'function' then
+      t[k] = function(...)
+        return invoke(v, ...)
+      end
+    elseif ty == 'table' then
+      wrapAll(v)
+    end
+  end
+end
+
 local function init(api, loader)
-  api.env._G = api.env
   api.env.__dump = dump(api)
   Mixin(api.env, mkBaseEnv())
   util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
   Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api))
+  wrapAll(api.env)
+  api.env._G = api.env
 end
 
 return {

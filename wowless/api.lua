@@ -1,5 +1,61 @@
 local traceback = require('wowless.ext').traceback
 
+-- Protect against setfenv bugs in the client.
+local debug = debug
+local error = error
+local issecure = issecure
+local pcall = pcall
+local print = print
+local select = select
+local unpack = unpack
+
+local function invoke(post, fn, ...)
+  local args = { ... }
+  local n = select('#', ...)
+  return (function(success, arg, ...)
+    post()
+    if success then
+      return arg, ...
+    else
+      error(arg)
+    end
+  end)(pcall(function()
+    return fn(unpack(args, 1, n))
+  end))
+end
+
+local function checkSecure()
+  if not issecure() then
+    print('internal taint violation: ' .. traceback())
+  end
+end
+
+local function postFrameworkSecure()
+  checkSecure()
+  debug.forcesecure()
+end
+
+local function postFrameworkInsecure()
+  checkSecure()
+  forceinsecure()
+end
+
+local function postClient()
+  debug.forcesecure()
+end
+
+local function invokeFramework(fn, ...)
+  local secure = issecure()
+  debug.forcesecure()
+  return invoke(secure and postFrameworkSecure or postFrameworkInsecure, fn, ...)
+end
+
+local function invokeClient(fn, ...)
+  checkSecure()
+  debug.forcesecure()
+  return invoke(postClient, fn, ...)
+end
+
 local function new(log)
   local env = {}
   local errors = 0
@@ -251,5 +307,7 @@ local function new(log)
 end
 
 return {
+  invokeClient = invokeClient,
+  invokeFramework = invokeFramework,
   new = new,
 }
