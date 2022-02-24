@@ -10,6 +10,11 @@ repos:
   rev: v0.12.1
   hooks:
   - id: stylua-system
+- repo: https://github.com/Lucas-C/pre-commit-hooks
+  rev: v1.1.13
+  hooks:
+  - id: remove-crlf
+  - id: forbid-tabs
 - repo: https://github.com/markdownlint/markdownlint
   rev: v0.11.0
   hooks:
