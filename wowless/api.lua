@@ -1,3 +1,5 @@
+local traceback = require('wowless.ext').traceback
+
 local function new(log)
   local env = {}
   local errors = 0
@@ -54,7 +56,7 @@ local function new(log)
 
   local function ErrorHandler(str)
     errors = errors + 1
-    log(0, 'error: ' .. str .. '\n' .. debug.traceback())
+    log(0, 'error: ' .. str .. '\n' .. traceback())
   end
 
   local function CallSafely(fun)
