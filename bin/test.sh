@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-eval "$(.lua/bin/luarocks path)"
-.lua/bin/luacheck -q data spec tools wowapi wowless ./*.lua
-.lua/bin/luarocks build --no-install
-.lua/bin/luarocks test -- "$@"
+luacheck -q data spec tools wowapi wowless ./*.lua
+(cd tainted-lua && cmake --preset linux && cmake --build --preset linux)
+luarocks build --no-install
+luarocks test -- "$@"

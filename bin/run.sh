@@ -1,3 +1,2 @@
 #!/bin/bash
-eval "$(.lua/bin/luarocks path)"
-.lua/bin/lua wowless.lua "$@"
+tainted-lua/build/linux/bin/Release/lua5.1 wowless.lua "$@"

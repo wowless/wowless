@@ -2,13 +2,14 @@ repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.0.1
   hooks:
+  - id: check-json
   - id: check-yaml
   - id: end-of-file-fixer
   - id: trailing-whitespace
 - repo: https://github.com/JohnnyMorganz/StyLua
   rev: v0.12.1
   hooks:
-  - id: stylua
+  - id: stylua-system
 - repo: https://github.com/markdownlint/markdownlint
   rev: v0.11.0
   hooks:

@@ -1,8 +1,6 @@
-.lua/
 cache
 extracts
 luacov.*
 out/
-.vscode
 wowless/*.o
 wowless/*.so

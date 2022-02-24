@@ -1,0 +1,6 @@
+{
+    "dockerComposeFile": "docker-compose.yml",
+    "initializeCommand": "git submodule update --init --recursive",
+    "postCreateCommand": "pre-commit install && pre-commit run -a",
+    "service": "dev"
+}
