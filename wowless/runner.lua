@@ -108,7 +108,7 @@ local function run(cfg)
       for _, flavor in ipairs(v.flavors or {}) do
         flavors[flavor] = true
       end
-      if not eventBlacklist[k] and not next(v.payload) and not v.flavors or flavors[cfg.version] then
+      if not eventBlacklist[k] and not next(v.payload) and (not v.flavors or flavors[cfg.version]) then
         table.insert(keys, k)
       end
     end
