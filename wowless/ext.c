@@ -225,7 +225,7 @@ static int wowless_ext_traceback (lua_State *L) {
     }
     lua_pushliteral(L, "\n\t");
     lua_getinfo(L1, "Snl", &ar);
-    lua_pushfstring(L, "%s:", ar.short_src);
+    lua_pushfstring(L, "%s:", ar.source + 1);
     if (ar.currentline > 0)
       lua_pushfstring(L, "%d:", ar.currentline);
     if (*ar.namewhat != '\0')  /* is there a name? */
@@ -237,7 +237,7 @@ static int wowless_ext_traceback (lua_State *L) {
         lua_pushliteral(L, " ?");  /* C function or tail call */
       else
         lua_pushfstring(L, " in function <%s:%d>",
-                           ar.short_src, ar.linedefined);
+                           ar.source + 1, ar.linedefined);
     }
     lua_concat(L, lua_gettop(L) - arg);
   }
