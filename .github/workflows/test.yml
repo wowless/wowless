@@ -7,13 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: docker/setup-buildx-action@v1
-    - uses: docker/build-push-action@v2
-      with:
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-        context: .devcontainer
-        load: true
-        tags: moo
-    - run: docker run -t -v $PWD:/moo moo bash -c \
+    - run: bash -c "$(jq -r .initializeCommand .devcontainer/devcontainer.json)"
+    - uses: satackey/action-docker-layer-caching@v0.0.11
+    - run: cd .devcontainer && docker-compose build
+    - run: docker run -t -v $PWD:/moo lua-wow-tools/wowless:dev bash -c \
            "cd moo && bash -c $(jq .postCreateCommand .devcontainer/devcontainer.json)"
