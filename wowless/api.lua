@@ -162,7 +162,7 @@ local function new(log)
         if script then
           log(4, 'begin %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
           CallSafely(function()
-            script(obj, unpack(args))
+            invokeClient(script, obj, unpack(args))
           end)
           log(4, 'end %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
         end
