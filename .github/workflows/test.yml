@@ -10,5 +10,5 @@ jobs:
     - run: bash -c "$(jq -r .initializeCommand .devcontainer/devcontainer.json)"
     - uses: satackey/action-docker-layer-caching@v0.0.11
     - run: cd .devcontainer && docker-compose build
-    - run: docker run -t lua-wow-tools/wowless:dev \
-           bash -c "$(jq .postCreateCommand .devcontainer/devcontainer.json)"
+    - run: docker run -t -v $PWD:/moo lua-wow-tools/wowless:dev bash -c \
+           "cd /moo && bash -c $(jq .postCreateCommand .devcontainer/devcontainer.json)"
