@@ -8,6 +8,7 @@ dependencies = {
   'lua = 5.1',
   'argparse',
   'bitlib',
+  'busted',
   'cluacov',
   'json-lua',
   'libdeflate',
@@ -19,6 +20,7 @@ dependencies = {
   'minheap',
   'penlight',
   'serpent',
+  'wowcig',
 }
 build = {
   type = 'builtin',

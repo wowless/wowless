@@ -1,0 +1,16 @@
+build-essential
+ca-certificates
+cmake
+curl
+git
+libexpat-dev
+libreadline-dev
+libssl-dev
+libyaml-dev
+libzip-dev
+lua5.1
+luarocks
+ninja-build
+tar
+unzip
+zip

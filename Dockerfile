@@ -1,37 +1,11 @@
 FROM debian:testing
-RUN apt update && \
-    apt -y install \
-    build-essential \
-    cmake \
-    curl \
-    git \
-    libexpat-dev \
-    libreadline-dev \
-    libssl-dev \
-    libyaml-dev \
-    libzip-dev \
-    lua5.1 \
-    luarocks \
-    ninja-build \
-    tar \
-    unzip \
-    zip && \
-    apt clean
-RUN echo \
-    argparse \
-    bitlib \
-    busted \
-    cluacov \
-    json-lua \
-    libdeflate \
-    luacheck \
-    luadbd \
-    luaexpat \
-    luautf8 \
-    lua-path \
-    lyaml \
-    minheap \
-    penlight \
-    serpent \
-    wowcig \
-    | xargs -n1 luarocks install
+WORKDIR /wowless
+COPY packages.txt .
+RUN apt-get update && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    cat packages.txt | xargs apt-get -y install --no-install-recommends && \
+    apt-get clean
+COPY wowless-scm-0.rockspec .
+RUN luarocks build --deps-only
+COPY . .
+RUN bin/build.sh
