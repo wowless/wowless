@@ -12,12 +12,12 @@ local unpack = unpack
 local function invoke(post, fn, ...)
   local args = { ... }
   local n = select('#', ...)
-  return (function(success, arg, ...)
+  return (function(success, ...)
     post()
     if success then
-      return arg, ...
+      return ...
     else
-      error(arg)
+      error(...)
     end
   end)(pcall(function()
     return fn(unpack(args, 1, n))
