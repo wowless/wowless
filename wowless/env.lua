@@ -1,5 +1,5 @@
 local bitlib = require('bit')
-local ext = require('wowless.ext')
+local extformat = require('wowless.ext').format
 local utf8 = require('lua-utf8')
 local util = require('wowless.util')
 local Mixin = util.mixin
@@ -32,7 +32,7 @@ local function mkBaseEnv()
     error = error,
     floor = math.floor,
     forceinsecure = forceinsecure,
-    format = ext.format,
+    format = extformat,
     getmetatable = getmetatable,
     getn = table.getn,
     gmatch = string.gmatch,
@@ -82,7 +82,7 @@ local function mkBaseEnv()
       byte = string.byte,
       char = string.char,
       find = string.find,
-      format = ext.format,
+      format = extformat,
       gmatch = string.gmatch,
       gsub = string.gsub,
       join = util.strjoin,
@@ -149,19 +149,19 @@ local function dump(api)
   end
 end
 
-local invoke = require('wowless.api').invokeFramework
+local securecall = securecall
+local type = type
 
 local function wrapAll(t)
   for k, v in pairs(t) do
     local ty = type(v)
     if v == setfenv then
-      local gtype = type
       t[k] = function(arg, ...)
-        return invoke(v, gtype(arg) == 'number' and arg + 5 or arg, ...)
+        return securecall(v, type(arg) == 'number' and arg + 2 or arg, ...)
       end
-    elseif ty == 'function' then
+    elseif ty == 'function' and v ~= securecall then
       t[k] = function(...)
-        return invoke(v, ...)
+        return securecall(v, ...)
       end
     elseif ty == 'table' then
       wrapAll(v)

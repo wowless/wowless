@@ -1,61 +1,5 @@
 local traceback = require('wowless.ext').traceback
 
--- Protect against setfenv bugs in the client.
-local debug = debug
-local error = error
-local issecure = issecure
-local pcall = pcall
-local print = print
-local select = select
-local unpack = unpack
-
-local function invoke(post, fn, ...)
-  local args = { ... }
-  local n = select('#', ...)
-  return (function(success, ...)
-    post()
-    if success then
-      return ...
-    else
-      error(...)
-    end
-  end)(pcall(function()
-    return fn(unpack(args, 1, n))
-  end))
-end
-
-local function checkSecure()
-  if not issecure() then
-    print('internal taint violation: ' .. traceback())
-  end
-end
-
-local function postFrameworkSecure()
-  checkSecure()
-  debug.forcesecure()
-end
-
-local function postFrameworkInsecure()
-  checkSecure()
-  forceinsecure()
-end
-
-local function postClient()
-  debug.forcesecure()
-end
-
-local function invokeFramework(fn, ...)
-  local secure = issecure()
-  debug.forcesecure()
-  return invoke(secure and postFrameworkSecure or postFrameworkInsecure, fn, ...)
-end
-
-local function invokeClient(fn, ...)
-  checkSecure()
-  debug.forcesecure()
-  return invoke(postClient, fn, ...)
-end
-
 local function new(log)
   local env = {}
   local errors = 0
@@ -162,7 +106,7 @@ local function new(log)
         if script then
           log(4, 'begin %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
           CallSafely(function()
-            invokeClient(script, obj, unpack(args))
+            script(obj, unpack(args))
           end)
           log(4, 'end %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
         end
@@ -307,7 +251,5 @@ local function new(log)
 end
 
 return {
-  invokeClient = invokeClient,
-  invokeFramework = invokeFramework,
   new = new,
 }
