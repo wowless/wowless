@@ -1,9 +1,0 @@
-version: '3.9'
-services:
-  base:
-    build: ..
-    image: lua-wow-tools/wowless:base
-  dev:
-    build: .
-    command: sleep infinity
-    image: lua-wow-tools/wowless:dev
