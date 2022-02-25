@@ -149,12 +149,33 @@ local function dump(api)
   end
 end
 
+local securecall = securecall
+local type = type
+
+local function wrapAll(t)
+  for k, v in pairs(t) do
+    local ty = type(v)
+    if v == setfenv then
+      t[k] = function(arg, ...)
+        return securecall(v, type(arg) == 'number' and arg + 2 or arg, ...)
+      end
+    elseif ty == 'function' and v ~= securecall then
+      t[k] = function(...)
+        return securecall(v, ...)
+      end
+    elseif ty == 'table' then
+      wrapAll(v)
+    end
+  end
+end
+
 local function init(api, loader)
-  api.env._G = api.env
   api.env.__dump = dump(api)
   Mixin(api.env, mkBaseEnv())
   util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
   Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api))
+  wrapAll(api.env)
+  api.env._G = api.env
 end
 
 return {
