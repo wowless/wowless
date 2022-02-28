@@ -170,6 +170,8 @@ methods:
     status: implemented
   SetAttribute:
     status: implemented
+  SetAttributeNoHandler:
+    status: implemented
   SetClampedToScreen:
     fields:
     - name: isClampedToScreen
