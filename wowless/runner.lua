@@ -91,11 +91,16 @@ local function run(cfg)
       end)
     end
   end
-  if cfg.slashcmds then
+  if cfg.slashcmds or cfg.version == 'Vanilla' then
+    local cmdBlacklist = { -- TODO remove this; these require a better SecureCmdOptionParse
+      BENCHMARK = true,
+      CASTRANDOM = true,
+      USERANDOM = true,
+    }
     local cmds = {}
     for k, v in pairs(api.env) do
       local cmd = k:match('^SLASH_(%a+)1$')
-      if cmd then
+      if cmd and not cmdBlacklist[cmd] then
         cmds[cmd] = v
       end
     end
