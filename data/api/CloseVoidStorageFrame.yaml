@@ -1,0 +1,8 @@
+---
+name: CloseVoidStorageFrame
+status: unimplemented
+flavors:
+- Mainline
+inputs:
+- {}
+outputs: {}

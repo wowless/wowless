@@ -1,0 +1,10 @@
+---
+name: GetNumBattlefieldScores
+status: unimplemented
+flavors:
+- Mainline
+inputs:
+- {}
+outputs:
+- name: value
+  type: number

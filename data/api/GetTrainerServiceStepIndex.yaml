@@ -1,0 +1,11 @@
+---
+name: GetTrainerServiceStepIndex
+status: unimplemented
+flavors:
+- Mainline
+inputs:
+- {}
+outputs:
+- name: value
+  nilable: true
+  type: number
