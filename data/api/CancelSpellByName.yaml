@@ -1,0 +1,7 @@
+---
+name: CancelSpellByName
+status: unimplemented
+inputs:
+- - name: spell
+    type: string
+outputs: {}

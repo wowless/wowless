@@ -1,0 +1,7 @@
+---
+name: ConsoleExec
+status: unimplemented
+inputs:
+- - name: command
+    type: string
+outputs: {}

@@ -1,0 +1,7 @@
+---
+name: SetTaxiBenchmarkMode
+status: unimplemented
+inputs:
+- - name: value
+    type: bool
+outputs: {}

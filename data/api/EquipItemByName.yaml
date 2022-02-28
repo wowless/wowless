@@ -1,0 +1,7 @@
+---
+name: EquipItemByName
+status: unimplemented
+inputs:
+- - name: item
+    type: string
+outputs: {}
