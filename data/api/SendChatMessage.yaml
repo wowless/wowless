@@ -1,0 +1,15 @@
+---
+name: SendChatMessage
+status: unimplemented
+inputs:
+- - name: message
+    type: string
+  - name: type
+    type: string
+  - name: languageID
+    nilable: true
+    type: number
+  - name: target
+    nilable: true
+    type: string
+outputs: {}

@@ -1,0 +1,7 @@
+---
+name: StartWarGameByName
+status: unimplemented
+inputs:
+- - name: args
+    type: string
+outputs: {}
