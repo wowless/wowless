@@ -91,7 +91,7 @@ local function run(cfg)
       end)
     end
   end
-  if cfg.slashcmds or cfg.version == 'Vanilla' then
+  if cfg.slashcmds or cfg.version ~= 'Mainline' then
     local cmdBlacklist = { -- TODO remove this; these require a better SecureCmdOptionParse
       BENCHMARK = true,
       CASTRANDOM = true,
