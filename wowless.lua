@@ -19,6 +19,7 @@ local args = (function()
   parser:option('-l --loglevel', 'log level', 0):convert(tonumber)
   parser:option('-a --addondir', 'addon directory to test'):count('*')
   parser:flag('--allevents', 'send all nullary events')
+  parser:flag('--slashcmds', 'send all slash commands with empty args')
   return parser:parse()
 end)()
 local api = require('wowless.runner').run({
@@ -26,6 +27,7 @@ local api = require('wowless.runner').run({
   dir = 'extracts/' .. args.product,
   loglevel = args.loglevel,
   otherAddonDirs = args.addondir,
+  slashcmds = args.slashcmds,
   version = productToFlavor[args.product],
 })
 if api.GetErrorCount() ~= 0 then

@@ -91,6 +91,19 @@ local function run(cfg)
       end)
     end
   end
+  if cfg.slashcmds then
+    local cmds = {}
+    for k, v in pairs(api.env) do
+      local cmd = k:match('^SLASH_(%a+)1$')
+      if cmd then
+        cmds[cmd] = v
+      end
+    end
+    for k, v in require('pl.tablex').sort(cmds) do
+      api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
+      api.SendEvent('EXECUTE_CHAT_LINE', v)
+    end
+  end
   if cfg.allevents then
     local eventBlacklist = {
       BARBER_SHOP_OPEN = true, -- issue #111
