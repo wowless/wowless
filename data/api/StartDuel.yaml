@@ -1,6 +1,7 @@
 ---
-name: ClearFocus
+name: StartDuel
 status: unimplemented
 inputs:
-- {}
+- - name: unit
+    type: unit
 outputs: {}

@@ -1,0 +1,10 @@
+---
+name: LoggingChat
+status: unimplemented
+inputs:
+- - name: value
+    nilable: true
+    type: bool
+outputs:
+- name: value
+  type: bool

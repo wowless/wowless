@@ -1,0 +1,9 @@
+---
+name: RandomRoll
+status: unimplemented
+inputs:
+- - name: low
+    type: number
+  - name: high
+    type: number
+outputs: {}
