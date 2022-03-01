@@ -31,7 +31,9 @@ local function run(cfg)
   for _, frame in ipairs(api.frames) do
     if frame.Click and frame:IsVisible() and not clickBlacklist[frame:GetName() or ''] then
       api.log(2, 'clicking %s', api.GetDebugName(frame))
-      frame:Click()
+      api.CallSafely(function()
+        frame:Click()
+      end)
     end
   end
   api.NextFrame()
