@@ -31,7 +31,7 @@ local function mkBaseEnv()
     difftime = os.difftime,
     error = error,
     floor = math.floor,
-    forceinsecure = forceinsecure,
+    forceinsecure = function() end, -- TODO use real forceinsecure
     format = ext.format,
     getmetatable = getmetatable,
     getn = table.getn,

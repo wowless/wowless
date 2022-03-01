@@ -1,0 +1,11 @@
+---
+name: IsAutoRepeatSpell
+status: unimplemented
+inputs:
+- - name: spellID
+    type: number
+- - name: spellName
+    type: string
+outputs:
+- name: value
+  type: bool
