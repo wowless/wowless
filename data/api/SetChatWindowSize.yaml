@@ -1,0 +1,9 @@
+---
+name: SetChatWindowSize
+status: unimplemented
+inputs:
+- - name: chatFrameID
+    type: number
+  - name: fontSize
+    type: number
+outputs: {}

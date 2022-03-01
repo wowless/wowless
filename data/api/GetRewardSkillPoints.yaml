@@ -1,0 +1,12 @@
+---
+name: GetRewardSkillPoints
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: skillName
+  type: string
+- name: skillIcon
+  type: number
+- name: skillPoints
+  type: number

@@ -1,0 +1,7 @@
+---
+name: IsCorruptedItem
+status: unimplemented
+inputs:
+- - name: itemLink
+    type: string
+outputs: {}
