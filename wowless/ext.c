@@ -190,6 +190,14 @@ static lua_State *getthread (lua_State *L, int *arg) {
   }
 }
 
+static const char *get_source (const lua_Debug *ar) {
+  if (ar->source[0] == '@') {
+    return ar->source + 1;
+  } else {
+    return ar->short_src;
+  }
+}
+
 #define LEVELS1 120  /* size of the first part of the stack */
 #define LEVELS2 10   /* size of the second part of the stack */
 
@@ -225,7 +233,7 @@ static int wowless_ext_traceback (lua_State *L) {
     }
     lua_pushliteral(L, "\n\t");
     lua_getinfo(L1, "Snl", &ar);
-    lua_pushfstring(L, "%s:", ar.source + 1);
+    lua_pushfstring(L, "%s:", get_source(&ar));
     if (ar.currentline > 0)
       lua_pushfstring(L, "%d:", ar.currentline);
     if (*ar.namewhat != '\0')  /* is there a name? */
@@ -237,7 +245,7 @@ static int wowless_ext_traceback (lua_State *L) {
         lua_pushliteral(L, " ?");  /* C function or tail call */
       else
         lua_pushfstring(L, " in function <%s:%d>",
-                           ar.source + 1, ar.linedefined);
+                           get_source(&ar), ar.linedefined);
     }
     lua_concat(L, lua_gettop(L) - arg);
   }

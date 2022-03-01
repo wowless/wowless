@@ -1,5 +1,5 @@
 local bitlib = require('bit')
-local extformat = require('wowless.ext').format
+local ext = require('wowless.ext')
 local utf8 = require('lua-utf8')
 local util = require('wowless.util')
 local Mixin = util.mixin
@@ -27,12 +27,12 @@ local function mkBaseEnv()
     },
     cos = math.cos,
     date = os.date,
-    debugstack = debug.traceback,
+    debugstack = ext.traceback,
     difftime = os.difftime,
     error = error,
     floor = math.floor,
     forceinsecure = forceinsecure,
-    format = extformat,
+    format = ext.format,
     getmetatable = getmetatable,
     getn = table.getn,
     gmatch = string.gmatch,
@@ -82,7 +82,7 @@ local function mkBaseEnv()
       byte = string.byte,
       char = string.char,
       find = string.find,
-      format = extformat,
+      format = ext.format,
       gmatch = string.gmatch,
       gsub = string.gsub,
       join = util.strjoin,
