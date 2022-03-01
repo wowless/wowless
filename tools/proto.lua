@@ -1,9 +1,6 @@
 local assert = require('luassert')
 
-local function call2name(n)
-  assert.same('Call', n.tag)
-  assert.same(1, #n)
-  n = n[1]
+local function ident(n)
   if n.tag == 'Id' then
     return n[1]
   elseif n.tag == 'Index' then
@@ -16,6 +13,12 @@ local function call2name(n)
   end
 end
 
+local function call2name(n)
+  assert.same('Call', n.tag)
+  assert.same(1, #n)
+  return ident(n[1])
+end
+
 local function proto2api(s)
   local ast = require('metalua.compiler').new():src_to_ast(s)
   assert.same(1, #ast)
@@ -24,12 +27,11 @@ local function proto2api(s)
   local name
   if n.tag == 'Call' then
     name = call2name(n)
-  elseif n.tag == 'Local' then
+  elseif n.tag == 'Local' or n.tag == 'Set' then
     assert.same(2, #n)
     for _, id in ipairs(n[1]) do
-      assert.same('Id', id.tag)
       table.insert(outputs, {
-        name = id[1],
+        name = ident(id),
         type = 'number',
       })
     end
