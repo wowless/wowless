@@ -24,6 +24,8 @@ methods:
     fields:
     - name: startDelay
     status: getter
+  Restart:
+    status: unimplemented
   SetDuration:
     status: unimplemented
   SetEndDelay:

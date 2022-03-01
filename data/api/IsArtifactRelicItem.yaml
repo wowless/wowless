@@ -2,8 +2,8 @@
 name: IsArtifactRelicItem
 status: unimplemented
 inputs:
-- - name: itemID
-    type: number
+- - name: itemIDOrLink
+    type: string
 outputs:
 - name: value
   type: bool
