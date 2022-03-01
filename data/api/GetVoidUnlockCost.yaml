@@ -1,0 +1,8 @@
+---
+name: GetVoidUnlockCost
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: voidStorageUnlockCost
+  type: number

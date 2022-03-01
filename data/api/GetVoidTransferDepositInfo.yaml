@@ -1,0 +1,13 @@
+---
+name: GetVoidTransferDepositInfo
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: itemID
+  type: number
+- name: textureName
+  type: number
+- name: quality
+  type: number
