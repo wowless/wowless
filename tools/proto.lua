@@ -1,23 +1,24 @@
 local assert = require('luassert')
+
+local function apiName(n)
+  if n.tag == 'Id' then
+    return n[1]
+  elseif n.tag == 'Index' then
+    assert.same(2, #n)
+    assert.same('Id', n[1].tag)
+    assert.same('String', n[2].tag)
+    return n[1][1] .. '.' .. n[2][1]
+  else
+    error('unexpected tag ' .. n.tag)
+  end
+end
+
 local function proto2api(s)
   local ast = require('metalua.compiler').new():src_to_ast(s)
   assert.same(1, #ast)
   assert.same('Call', ast[1].tag)
   assert.same(1, #ast[1])
-  local name
-  if ast[1][1].tag == 'Id' then
-    assert.same(1, #ast[1][1])
-    name = ast[1][1][1]
-  elseif ast[1][1].tag == 'Index' then
-    assert.same(2, #ast[1][1])
-    assert.same('Id', ast[1][1][1].tag)
-    assert.same(1, #ast[1][1][1])
-    assert.same('String', ast[1][1][2].tag)
-    assert.same(1, #ast[1][1][2])
-    name = ast[1][1][1][1] .. '.' .. ast[1][1][2][1]
-  else
-    error('unexpected tag ' .. ast[1][1].tag)
-  end
+  local name = apiName(ast[1][1])
   return {
     name = name,
     status = 'unimplemented',
