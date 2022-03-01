@@ -311,8 +311,11 @@ local function loadFunctions(api, loader)
       local n = select('#', ...)
       return (function(success, ...)
         api.log(4, 'leaving %s (%s)', apicfg.name, success and 'success' or 'failure')
-        assert(success, ...)
-        return ...
+        if success then
+          return ...
+        else
+          error((...), 3)
+        end
       end)(pcall(function()
         return checkOutputs(bfn(checkInputs(unpack(t, 1, n))))
       end))
