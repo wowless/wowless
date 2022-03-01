@@ -13,20 +13,26 @@ local function ident(n)
   end
 end
 
-local function call2name(n)
+local function call(n)
   assert.same('Call', n.tag)
-  assert.same(1, #n)
-  return ident(n[1])
+  local inputs = {}
+  for i = 2, #n do
+    table.insert(inputs, {
+      name = ident(n[i]),
+      type = 'number',
+    })
+  end
+  return ident(n[1]), inputs
 end
 
 local function proto2api(s)
   local ast = require('metalua.compiler').new():src_to_ast(s)
   assert.same(1, #ast)
   local n = ast[1]
+  local inputs, name
   local outputs = {}
-  local name
   if n.tag == 'Call' then
-    name = call2name(n)
+    name, inputs = call(n)
   elseif n.tag == 'Local' or n.tag == 'Set' then
     assert.same(2, #n)
     for _, id in ipairs(n[1]) do
@@ -36,14 +42,14 @@ local function proto2api(s)
       })
     end
     assert.same(1, #n[2])
-    name = call2name(n[2][1])
+    name, inputs = call(n[2][1])
   else
     error('unexpected tag ' .. n.tag)
   end
   return {
     name = name,
     status = 'unimplemented',
-    inputs = { {} },
+    inputs = { inputs },
     outputs = outputs,
   }
 end
