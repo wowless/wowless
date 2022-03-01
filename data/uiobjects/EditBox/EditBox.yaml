@@ -36,6 +36,8 @@ methods:
     status: unimplemented
   ClearFocus:
     status: unimplemented
+  ClearHistory:
+    status: unimplemented
   Disable:
     status: implemented
   Enable:

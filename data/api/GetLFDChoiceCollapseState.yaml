@@ -3,8 +3,8 @@ name: GetLFDChoiceCollapseState
 status: unimplemented
 inputs:
 - - name: LFGCollapseList
+    nilable: true
     type: table
 outputs:
 - name: LFGCollapseList
-  nilable: true
   type: table

@@ -5,6 +5,8 @@ inherits:
 methods:
   FreezeAnimation:
     status: unimplemented
+  GetDisplayInfo:
+    status: unimplemented
   RefreshCamera:
     status: unimplemented
   RefreshUnit:

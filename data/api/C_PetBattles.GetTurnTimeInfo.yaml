@@ -1,0 +1,10 @@
+---
+name: C_PetBattles.GetTurnTimeInfo
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: timeRemaining
+  type: number
+- name: turnTime
+  type: number
