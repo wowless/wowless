@@ -1,0 +1,8 @@
+---
+name: GetNumRandomDungeons
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: value
+  type: number

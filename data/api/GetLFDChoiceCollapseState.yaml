@@ -6,4 +6,5 @@ inputs:
     type: table
 outputs:
 - name: LFGCollapseList
+  nilable: true
   type: table

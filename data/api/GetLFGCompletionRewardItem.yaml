@@ -1,0 +1,23 @@
+---
+name: GetLFGCompletionRewardItem
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: texture
+  type: number
+- name: quantity
+  type: number
+- name: isBonus
+  type: bool
+- name: bonusQuantity
+  type: number
+- name: name
+  type: string
+- name: quality
+  type: number
+- name: id
+  type: number
+- name: objectType
+  type: number
