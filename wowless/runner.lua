@@ -117,7 +117,7 @@ local function run(cfg)
       api.SendEvent('EXECUTE_CHAT_LINE', v)
     end
   end
-  if cfg.allevents then
+  if cfg.allevents or cfg.version ~= 'Mainline' then
     local eventBlacklist = {
       BARBER_SHOP_OPEN = true, -- issue #111
       CALENDAR_UPDATE_EVENT_LIST = true, -- calendar math requires better stubs

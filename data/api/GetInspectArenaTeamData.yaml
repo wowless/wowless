@@ -1,0 +1,43 @@
+---
+name: GetInspectArenaTeamData
+status: unimplemented
+inputs:
+- - name: value.index
+    type: number
+outputs:
+- name: teamName
+  type: number
+- name: teamSize
+  type: number
+- name: teamRating
+  type: number
+- name: teamPlayed
+  type: number
+- name: teamWins
+  type: number
+- name: playerPlayed
+  type: number
+- name: playerRating
+  type: number
+- name: background.r
+  type: number
+- name: background.g
+  type: number
+- name: background.b
+  type: number
+- name: emblem
+  type: number
+- name: emblemColor.r
+  type: number
+- name: emblemColor.g
+  type: number
+- name: emblemColor.b
+  type: number
+- name: border
+  type: number
+- name: borderColor.r
+  type: number
+- name: borderColor.g
+  type: number
+- name: borderColor.b
+  type: number

@@ -1,0 +1,30 @@
+---
+name: GetInspectHonorData
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: sessionHK
+  type: number
+- name: sessionDK
+  type: number
+- name: yesterdayHK
+  type: number
+- name: yesterdayHonor
+  type: number
+- name: thisweekHK
+  type: number
+- name: thisweekHonor
+  type: number
+- name: lastweekHK
+  type: number
+- name: lastweekHonor
+  type: number
+- name: lastweekStanding
+  type: number
+- name: lifetimeHK
+  type: number
+- name: lifetimeDK
+  type: number
+- name: lifetimeRank
+  type: number
