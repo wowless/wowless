@@ -1,0 +1,8 @@
+---
+name: GetNumGuildChallenges
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: numChallenges
+  type: number

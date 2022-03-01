@@ -1,0 +1,8 @@
+---
+name: GetVoidTransferCost
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: cost
+  type: number

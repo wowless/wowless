@@ -1,0 +1,8 @@
+---
+name: GetNumGuildEvents
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: numEvents
+  type: number

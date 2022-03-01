@@ -1,0 +1,8 @@
+---
+name: GetNumGuildNews
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: numNews
+  type: number
