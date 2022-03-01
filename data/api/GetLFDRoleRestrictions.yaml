@@ -1,0 +1,13 @@
+---
+name: GetLFDRoleRestrictions
+status: unimplemented
+inputs:
+- - name: dungeonID
+    type: number
+outputs:
+- name: tankLocked
+  type: bool
+- name: healerLocked
+  type: bool
+- name: dpsLocked
+  type: bool

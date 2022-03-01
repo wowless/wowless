@@ -1,0 +1,8 @@
+---
+name: GetNumVoidTransferWithdrawal
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: numWithdrawals
+  type: number

@@ -1,0 +1,23 @@
+---
+name: GetLFGDungeonRewardInfo
+status: unimplemented
+inputs:
+- - name: dungeonID
+    type: number
+  - name: index
+    type: number
+outputs:
+- name: name
+  type: string
+- name: texture
+  type: number
+- name: numItems
+  type: number
+- name: isBonusReward
+  type: bool
+- name: rewardType
+  type: number
+- name: rewardID
+  type: number
+- name: quality
+  type: number

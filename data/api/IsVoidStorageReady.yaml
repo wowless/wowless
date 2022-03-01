@@ -1,0 +1,8 @@
+---
+name: IsVoidStorageReady
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: ready
+  type: bool

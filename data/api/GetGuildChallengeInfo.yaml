@@ -1,0 +1,13 @@
+---
+name: GetGuildChallengeInfo
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: index
+  type: number
+- name: current
+  type: number
+- name: max
+  type: number

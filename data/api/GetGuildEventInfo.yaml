@@ -1,0 +1,23 @@
+---
+name: GetGuildEventInfo
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: type
+  type: number
+- name: player1
+  type: string
+- name: player2
+  type: string
+- name: rank
+  type: number
+- name: year
+  type: number
+- name: month
+  type: number
+- name: day
+  type: number
+- name: hour
+  type: number

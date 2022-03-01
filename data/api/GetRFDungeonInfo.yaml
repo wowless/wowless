@@ -1,0 +1,19 @@
+---
+name: GetRFDungeonInfo
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: id
+  type: number
+- name: name
+  type: string
+- name: typeID
+  type: number
+- name: subtype
+  type: number
+- name: minLevel
+  type: number
+- name: maxLevel
+  type: number

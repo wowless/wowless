@@ -1,0 +1,15 @@
+---
+name: IsLFGDungeonJoinable
+status: unimplemented
+inputs:
+- - name: id
+    type: number
+outputs:
+- name: isAvailable
+  type: bool
+- name: isAvailableToPlayer
+  type: bool
+- name: hideIfNotJoinable
+  type: bool
+- name: totalGroupSizeRequired
+  type: number

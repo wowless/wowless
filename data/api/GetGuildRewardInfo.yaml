@@ -1,0 +1,19 @@
+---
+name: GetGuildRewardInfo
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: achievementID
+  type: number
+- name: itemID
+  type: number
+- name: itemName
+  type: string
+- name: iconTexture
+  type: number
+- name: repLevel
+  type: number
+- name: moneyCost
+  type: number

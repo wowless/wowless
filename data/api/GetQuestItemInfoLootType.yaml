@@ -1,0 +1,11 @@
+---
+name: GetQuestItemInfoLootType
+status: unimplemented
+inputs:
+- - name: questItemType
+    type: number
+  - name: index
+    type: number
+outputs:
+- name: lootType
+  type: number

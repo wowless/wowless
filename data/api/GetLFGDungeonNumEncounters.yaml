@@ -1,0 +1,11 @@
+---
+name: GetLFGDungeonNumEncounters
+status: unimplemented
+inputs:
+- - name: dungeonID
+    type: number
+outputs:
+- name: numEncounters
+  type: number
+- name: numCompleted
+  type: number
