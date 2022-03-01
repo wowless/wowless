@@ -1,0 +1,8 @@
+---
+name: GetBestRFChoice
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: raid
+  type: number

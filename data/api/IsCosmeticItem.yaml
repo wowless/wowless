@@ -1,0 +1,7 @@
+---
+name: IsCosmeticItem
+status: unimplemented
+inputs:
+- - name: itemIDOrLink
+    type: string
+outputs: {}

@@ -1,0 +1,8 @@
+---
+name: GetRewardXP
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: xp
+  type: number

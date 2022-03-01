@@ -1,0 +1,9 @@
+---
+name: GetLFDChoiceCollapseState
+status: unimplemented
+inputs:
+- - name: LFGCollapseList
+    type: table
+outputs:
+- name: LFGCollapseList
+  type: table

@@ -1,0 +1,8 @@
+---
+name: GetRandomDungeonBestChoice
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: bestChoice
+  type: number

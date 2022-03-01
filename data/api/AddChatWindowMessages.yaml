@@ -1,0 +1,9 @@
+---
+name: AddChatWindowMessages
+status: unimplemented
+inputs:
+- - name: chatFrameID
+    type: number
+  - name: group
+    type: string
+outputs: {}
