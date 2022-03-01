@@ -29,7 +29,11 @@ local function run(cfg)
     PVPReadyDialogEnterBattleButton = true,
   }
   for _, frame in ipairs(api.frames) do
-    if frame.Click and frame:IsVisible() and not clickBlacklist[frame:GetName() or ''] then
+    if
+      api.InheritsFrom(api.UserData(frame).type, 'button')
+      and frame:IsVisible()
+      and not clickBlacklist[frame:GetName() or '']
+    then
       api.log(2, 'clicking %s', api.GetDebugName(frame))
       api.CallSafely(function()
         frame:Click()
