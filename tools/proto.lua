@@ -1,3 +1,9 @@
+local args = (function()
+  local parser = require('argparse')()
+  parser:option('-t --type', 'default type', 'string')
+  return parser:parse()
+end)()
+
 local assert = require('luassert')
 
 local function ident(n)
@@ -19,7 +25,7 @@ local function call(n)
   for i = 2, #n do
     table.insert(inputs, {
       name = ident(n[i]),
-      type = 'number',
+      type = args.type,
     })
   end
   return ident(n[1]), inputs
@@ -38,7 +44,7 @@ local function proto2api(s)
     for _, id in ipairs(n[1]) do
       table.insert(outputs, {
         name = ident(id),
-        type = 'number',
+        type = args.type,
       })
     end
     assert.same(1, #n[2])
