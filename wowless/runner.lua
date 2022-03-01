@@ -38,8 +38,8 @@ local function run(cfg)
   api.SendEvent('PLAYER_REGEN_DISABLED')
   api.NextFrame()
   api.SendEvent('PLAYER_REGEN_ENABLED')
-  for _ = 1, 200 do
-    api.NextFrame(5)
+  for i = 1, 12 do
+    api.NextFrame(math.pow(2, i))
   end
   for _, frame in ipairs(api.frames) do
     if frame:IsVisible() then
