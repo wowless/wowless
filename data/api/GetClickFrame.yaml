@@ -1,7 +1,11 @@
 ---
 name: GetClickFrame
-status: unimplemented
+status: implemented
 inputs:
 - - type: string
 outputs:
-- type: nil
+- name: frame
+  nilable: true
+  type: table
+frameworks:
+- env

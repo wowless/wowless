@@ -1,0 +1,3 @@
+local env, name = ...
+-- TODO a real implementation of GetClickFrame
+return env[name]
