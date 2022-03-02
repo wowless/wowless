@@ -126,7 +126,7 @@ methods:
   SetFontString:
     status: implemented
   SetFormattedText:
-    status: unimplemented
+    status: implemented
   SetHighlightAtlas:
     fields:
     - name: highlightTexture
