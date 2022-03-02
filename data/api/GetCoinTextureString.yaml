@@ -1,0 +1,12 @@
+---
+name: GetCoinTextureString
+status: unimplemented
+inputs:
+- - name: amount
+    type: number
+  - name: fontHeight
+    nilable: true
+    type: number
+outputs:
+- name: formattedAmount
+  type: string

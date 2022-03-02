@@ -1,0 +1,11 @@
+---
+name: GetInboxItemLink
+status: unimplemented
+inputs:
+- - name: index
+    type: number
+  - name: attachmentIndex
+    type: number
+outputs:
+- name: itemLink
+  type: string
