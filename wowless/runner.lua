@@ -124,6 +124,7 @@ local function run(cfg)
       CALENDAR_UPDATE_EVENT_LIST = true, -- calendar math requires better stubs
       INSTANCE_LOCK_START = true,
       INSTANCE_LOCK_WARNING = true,
+      MAIL_INBOX_UPDATE = true, -- InboxFrame.openMailID not set when it should be
       OPEN_MASTER_LOOT_LIST = true,
       PLAYER_LOGIN = true,
       PLAYER_LOGOUT = true,
