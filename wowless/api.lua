@@ -192,7 +192,12 @@ local function new(log)
   end
 
   local function SendEvent(event, ...)
-    log(1, 'sending event %s', event)
+    local largs = {}
+    for i = 1, select('#', ...) do
+      local arg = select(i, ...)
+      table.insert(largs, type(arg) == 'string' and ('%q'):format(arg) or tostring(arg))
+    end
+    log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
     local ev = string.lower(event)
     for _, frame in ipairs(frames) do
       local ud = u(frame)
