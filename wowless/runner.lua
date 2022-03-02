@@ -18,6 +18,7 @@ local function run(cfg)
   for _, d in ipairs(cfg.otherAddonDirs or {}) do
     assert(loader.loadAddon(require('path').basename(d)))
   end
+  api.states.System.isLoggedIn = true
   api.SendEvent('PLAYER_LOGIN')
   api.SendEvent('UPDATE_CHAT_WINDOWS')
   api.SendEvent('VARIABLES_LOADED')

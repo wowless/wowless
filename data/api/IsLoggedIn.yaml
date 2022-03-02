@@ -1,9 +1,10 @@
 ---
 name: IsLoggedIn
-status: unimplemented
+status: implemented
 inputs:
 - {}
 outputs:
 - name: isLoggedIn
-  stub: true
   type: bool
+states:
+- System
