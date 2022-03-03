@@ -1,3 +1,3 @@
 return (function(self)
-  u(self).registeredAllEvents = true
+  return api.RegisterAllEvents(self)
 end)(...)

@@ -3,6 +3,7 @@ local traceback = require('wowless.ext').traceback
 local function new(log)
   local env = {}
   local errors = 0
+  local eventRegistrations = {}
   local frames = {}
   local states = {}
   local templates = {}
@@ -199,9 +200,13 @@ local function new(log)
     end
     log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
     local ev = string.lower(event)
+    for i, frame in ipairs(eventRegistrations[ev] or {}) do
+      assert(u(frame).registeredEvents[ev] == i, 'event registration invariant violated')
+      RunScript(frame, 'OnEvent', event, ...)
+    end
+    -- TODO handle RegisterAllEvents similarly
     for _, frame in ipairs(frames) do
-      local ud = u(frame)
-      if ud.registeredEvents[ev] or ud.registeredAllEvents then
+      if u(frame).registeredAllEvents then
         RunScript(frame, 'OnEvent', event, ...)
       end
     end
@@ -226,6 +231,49 @@ local function new(log)
     return errors
   end
 
+  local function RegisterEvent(frame, event)
+    event = event:lower()
+    local ud = u(frame)
+    if not ud.registeredEvents[event] and not ud.registeredAllEvents then
+      local reg = eventRegistrations[event]
+      if not reg then
+        reg = {}
+        eventRegistrations[event] = reg
+      end
+      table.insert(reg, frame)
+      ud.registeredEvents[event] = #reg
+    end
+  end
+
+  local function UnregisterEvent(frame, event)
+    event = event:lower()
+    local ud = u(frame)
+    local idx = ud.registeredEvents[event]
+    if idx then
+      local reg = eventRegistrations[event]
+      assert(reg and reg[idx] == frame, 'event registration invariant violated')
+      if idx ~= #reg then
+        reg[idx] = reg[#reg]
+        u(reg[idx]).registeredEvents[event] = idx
+      end
+      reg[#reg] = nil
+      ud.registeredEvents[event] = nil
+    end
+  end
+
+  local function UnregisterAllEvents(frame)
+    local ud = u(frame)
+    for k in pairs(ud.registeredEvents) do
+      UnregisterEvent(frame, k)
+    end
+    ud.registeredAllEvents = false
+  end
+
+  local function RegisterAllEvents(frame)
+    UnregisterAllEvents(frame)
+    u(frame).registeredAllEvents = true
+  end
+
   for _, data in pairs(require('wowapi.data').state) do
     states[data.name] = require('pl.tablex').deepcopy(data.value)
   end
@@ -244,6 +292,8 @@ local function new(log)
     log = log,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
+    RegisterAllEvents = RegisterAllEvents,
+    RegisterEvent = RegisterEvent,
     RunScript = RunScript,
     SendEvent = SendEvent,
     SetParent = SetParent,
@@ -251,6 +301,8 @@ local function new(log)
     states = states,
     templates = templates,
     uiobjectTypes = uiobjectTypes,
+    UnregisterAllEvents = UnregisterAllEvents,
+    UnregisterEvent = UnregisterEvent,
     UserData = u,
   }
 end
