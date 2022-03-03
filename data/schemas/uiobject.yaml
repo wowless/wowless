@@ -16,6 +16,7 @@ type:
               type:
                 oneof:
                 - literal: bool
+                - literal: font
                 - literal: number
                 - literal: string
                 - literal: table

@@ -131,8 +131,11 @@ local function mkBaseUIObjectTypes(api)
         local n = select('#', ...)
         return (function(success, ...)
           log(4, 'leaving %s:%s (%s)', dname, fname, success and 'success' or 'failure')
-          assert(success, ...)
-          return ...
+          if success then
+            return ...
+          else
+            error((...), 3)
+          end
         end)(pcall(function()
           return fn(self, unpack(t, 1, n))
         end))
@@ -176,15 +179,30 @@ local function mkBaseUIObjectTypes(api)
           local ud = u(self)
           for i, f in ipairs(method.fields) do
             local v = select(i, ...)
-            local ty = cfg.fields[f.name].type
+            local cf = cfg.fields[f.name]
+            local ty = cf.type
             if ty == 'bool' then
               ud[f.name] = not not v
+            elseif v == nil then
+              assert(f.nilable or cf.nilable, ('cannot set nil on %s.%s.%s'):format(name, mname, f.name))
+              ud[f.name] = nil
             elseif ty == 'texture' then
               ud[f.name] = toTexture(self, v)
-            elseif v ~= nil then
+            elseif ty == 'number' then
+              ud[f.name] = assert(tonumber(v))
+            elseif ty == 'string' then
+              ud[f.name] = tostring(v)
+            elseif ty == 'font' then
+              if type(v) == 'string' then
+                v = api.env[v]
+              end
+              assert(type(v) == 'table', 'expected font')
+              ud[f.name] = v
+            elseif ty == 'table' then
+              assert(type(v) == 'table', 'expected table, got ' .. type(v))
               ud[f.name] = v
             else
-              assert(f.nilable, ('cannot set nil on %s.%s.%s'):format(name, mname, f.name))
+              error('unexpected type ' .. ty)
             end
           end
         end

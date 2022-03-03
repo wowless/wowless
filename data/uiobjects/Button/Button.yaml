@@ -24,7 +24,7 @@ fields:
     type: bool
   normalFontObject:
     nilable: true
-    type: table
+    type: font
   normalTexture:
     nilable: true
     type: texture
