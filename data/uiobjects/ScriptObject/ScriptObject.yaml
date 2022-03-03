@@ -6,6 +6,7 @@ fields:
       0: {}
       1: {}
       2: {}
+    type: table
 inherits: {}
 methods:
   GetScript:

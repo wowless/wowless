@@ -11,18 +11,22 @@ fields:
     init: NORMAL
     type: string
   disabledTexture:
+    nilable: true
     type: texture
   enabled:
     init: true
     type: bool
   highlightTexture:
+    nilable: true
     type: texture
   motionScriptsWhileDisabled:
     init: false
     type: bool
   normalFontObject:
+    nilable: true
     type: table
   normalTexture:
+    nilable: true
     type: texture
   pushedTextOffsetX:
     init: 0
@@ -35,6 +39,7 @@ fields:
   registeredClicks:
     init:
       leftbuttonup: true
+    type: table
 inherits:
 - Frame
 methods:

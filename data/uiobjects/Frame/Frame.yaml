@@ -3,6 +3,7 @@ name: Frame
 fields:
   attributes:
     init: {}
+    type: table
   frameLevel:
     init: 1
     type: number
@@ -44,9 +45,12 @@ fields:
   propagateKeyboardInput:
     init: false
     type: bool
-  registeredAllEvents: {}
+  registeredAllEvents:
+    nilable: true
+    type: number
   registeredEvents:
     init: {}
+    type: table
   resizable:
     init: false
     type: bool

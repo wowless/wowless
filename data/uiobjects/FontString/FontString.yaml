@@ -4,7 +4,9 @@ fields:
   maxLines:
     init: 0
     type: number
-  text: {}
+  text:
+    nilable: true
+    type: string
   textScale:
     init: 1
     type: number

@@ -11,6 +11,7 @@ fields:
     init: 0
     type: number
   thumbTexture:
+    nilable: true
     type: texture
   value:
     init: 0

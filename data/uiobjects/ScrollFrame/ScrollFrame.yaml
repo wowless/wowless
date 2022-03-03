@@ -1,7 +1,9 @@
 ---
 name: ScrollFrame
 fields:
-  scrollChild: {}
+  scrollChild:
+    nilable: true
+    type: table
 inherits:
 - Frame
 methods:

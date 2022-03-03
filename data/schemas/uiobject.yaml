@@ -9,7 +9,10 @@ type:
             init:
               type:
                 schema: any
+            nilable:
+              type: boolean
             type:
+              required: true
               type:
                 oneof:
                 - literal: bool

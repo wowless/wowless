@@ -1,7 +1,9 @@
 ---
 name: GameTooltip
 fields:
-  tooltipOwner: {}
+  tooltipOwner:
+    nilable: true
+    type: table
 inherits:
 - Frame
 methods:
