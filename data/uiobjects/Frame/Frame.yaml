@@ -44,9 +44,7 @@ fields:
   propagateKeyboardInput:
     init: false
     type: bool
-  registeredAllEvents:
-    init: false
-    type: bool
+  registeredAllEvents: {}
   registeredEvents:
     init: {}
   resizable:

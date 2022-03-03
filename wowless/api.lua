@@ -1,6 +1,7 @@
 local traceback = require('wowless.ext').traceback
 
 local function new(log)
+  local allEventRegistrations = {}
   local env = {}
   local errors = 0
   local eventRegistrations = {}
@@ -204,11 +205,9 @@ local function new(log)
       assert(u(frame).registeredEvents[ev] == i, 'event registration invariant violated')
       RunScript(frame, 'OnEvent', event, ...)
     end
-    -- TODO handle RegisterAllEvents similarly
-    for _, frame in ipairs(frames) do
-      if u(frame).registeredAllEvents then
-        RunScript(frame, 'OnEvent', event, ...)
-      end
+    for i, frame in ipairs(allEventRegistrations) do
+      assert(u(frame).registeredAllEvents == i, 'event registration invariant violated')
+      RunScript(frame, 'OnEvent', event, ...)
     end
   end
 
@@ -266,12 +265,28 @@ local function new(log)
     for k in pairs(ud.registeredEvents) do
       UnregisterEvent(frame, k)
     end
-    ud.registeredAllEvents = false
+    local idx = ud.registeredAllEvents
+    if idx then
+      assert(allEventRegistrations[idx] == frame, 'event registration invariant violated')
+      if idx ~= #allEventRegistrations then
+        allEventRegistrations[idx] = allEventRegistrations[#allEventRegistrations]
+        u(allEventRegistrations[idx]).registeredAllEvents = idx
+      end
+      allEventRegistrations[#allEventRegistrations] = nil
+      ud.registeredAllEvents = nil
+    end
   end
 
   local function RegisterAllEvents(frame)
     UnregisterAllEvents(frame)
-    u(frame).registeredAllEvents = true
+    table.insert(allEventRegistrations, frame)
+    u(frame).registeredAllEvents = #allEventRegistrations
+  end
+
+  local function IsEventRegistered(frame, event)
+    event = event:lower()
+    local ud = u(frame)
+    return ud.registeredAllEvents or ud.registeredEvents[event]
   end
 
   for _, data in pairs(require('wowapi.data').state) do
@@ -288,6 +303,7 @@ local function new(log)
     GetDebugName = GetDebugName,
     GetErrorCount = GetErrorCount,
     InheritsFrom = InheritsFrom,
+    IsEventRegistered = IsEventRegistered,
     IsIntrinsicType = IsIntrinsicType,
     log = log,
     NextFrame = NextFrame,
