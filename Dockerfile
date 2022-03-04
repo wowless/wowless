@@ -45,6 +45,7 @@ COPY --from=wowless-builder /usr/local/lib/lua /usr/local/lib/lua
 COPY --from=wowless-builder /usr/local/share/lua /usr/local/share/lua
 COPY --from=wowless-builder /wowless/wowless wowless
 COPY data data
+COPY tools tools
 COPY wowapi wowapi
 COPY wowless.lua .
 ENTRYPOINT ["/opt/tainted-lua/bin/lua5.1", "wowless.lua"]
