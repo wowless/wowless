@@ -6,18 +6,11 @@ expose('addon', function()
   }
   for _, version in ipairs(versions) do
     describe(version, function()
-      it('loads successfully', function()
-        local api = require('wowless.api').new(function(level, ...)
-          if level == 0 then
-            print(string.format(...))
-          end
-        end)
-        local loader = require('wowless.loader').loader(api, {
+      it('runs', function()
+        local api = require('wowless.runner').run({
           otherAddonDirs = { 'addon/Wowless' },
           version = version,
         })
-        require('wowless.env').init(api, loader)
-        assert(loader.loadAddon('Wowless'))
         assert.same(0, api.GetErrorCount())
       end)
     end)

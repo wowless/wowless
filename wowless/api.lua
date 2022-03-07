@@ -201,12 +201,12 @@ local function new(log)
     end
     log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
     local ev = string.lower(event)
-    for i, frame in ipairs(eventRegistrations[ev] or {}) do
-      assert(u(frame).registeredEvents[ev] == i, 'event registration invariant violated')
-      RunScript(frame, 'OnEvent', event, ...)
-    end
     for i, frame in ipairs(allEventRegistrations) do
       assert(u(frame).registeredAllEvents == i, 'event registration invariant violated')
+      RunScript(frame, 'OnEvent', event, ...)
+    end
+    for i, frame in ipairs(eventRegistrations[ev] or {}) do
+      assert(u(frame).registeredEvents[ev] == i, 'event registration invariant violated')
       RunScript(frame, 'OnEvent', event, ...)
     end
   end
@@ -217,7 +217,7 @@ local function new(log)
     while time.timers:peek().pri < time.stamp do
       local timer = time.timers:pop()
       log(2, 'running timer %.2f %s', timer.pri, tostring(timer.val))
-      timer.val()
+      CallSafely(timer.val)
     end
     for _, frame in ipairs(frames) do
       if frame:IsVisible() then
