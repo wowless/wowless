@@ -11,6 +11,8 @@ expose('addon', function()
           otherAddonDirs = { 'addon/Wowless' },
           version = version,
         })
+        assert.True(api.env.WowlessTestsDone)
+        assert.same({}, api.env.WowlessTestFailures)
         assert.same(0, api.GetErrorCount())
       end)
     end)
