@@ -8,6 +8,8 @@ inputs:
     type: number
   - name: bookType
     type: string
+- - name: spellName
+    type: string
 outputs:
 - name: start
   type: number

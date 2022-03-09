@@ -1,0 +1,9 @@
+---
+name: IsConsumableSpell
+status: unimplemented
+inputs:
+- - name: spellName
+    type: string
+outputs:
+- name: value
+  type: bool
