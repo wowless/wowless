@@ -12,6 +12,6 @@ RUN apt-get update && \
     ruby \
     zip && \
     apt-get clean
-RUN cargo install --root=/usr/local stylua
+RUN cargo install --root=/usr/local --version=0.12.4 stylua
 COPY wowless-scm-0.rockspec .
 RUN luarocks build --deps-only
