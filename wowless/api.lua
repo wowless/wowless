@@ -201,13 +201,18 @@ local function new(log)
     end
     log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
     local ev = string.lower(event)
+    -- Snapshot current registrations since handlers can mutate them.
+    local regs = {}
     for i, frame in ipairs(allEventRegistrations) do
       assert(u(frame).registeredAllEvents == i, 'event registration invariant violated')
-      RunScript(frame, 'OnEvent', event, ...)
+      table.insert(regs, frame)
     end
     for i, frame in ipairs(eventRegistrations[ev] or {}) do
       assert(u(frame).registeredEvents[ev] == i, 'event registration invariant violated')
-      RunScript(frame, 'OnEvent', event, ...)
+      table.insert(regs, frame)
+    end
+    for _, reg in ipairs(regs) do
+      RunScript(reg, 'OnEvent', event, ...)
     end
   end
 
