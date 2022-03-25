@@ -13,4 +13,8 @@ inputs:
   - name: languageFilter
     nilable: true
     type: C_LFGList.WowLocale
+  - default: false
+    name: searchCrossFactionListings
+    nilable: true
+    type: bool
 outputs: {}

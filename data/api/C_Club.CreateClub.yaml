@@ -13,4 +13,7 @@ inputs:
     type: number
   - name: avatarId
     type: number
+  - name: isCrossFaction
+    nilable: true
+    type: bool
 outputs: {}

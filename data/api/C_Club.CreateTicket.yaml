@@ -13,4 +13,7 @@ inputs:
   - name: defaultStreamId
     nilable: true
     type: string
+  - name: isCrossFaction
+    nilable: true
+    type: bool
 outputs: {}

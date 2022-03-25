@@ -17,6 +17,9 @@ inputs:
     type: table
   - name: type
     type: number
+  - default: false
+    name: crossFaction
+    type: bool
 outputs:
 - name: succesful
   type: bool

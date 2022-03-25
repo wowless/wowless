@@ -16,6 +16,8 @@ fields:
   type: number
 - name: guildLeader
   type: string
+- name: isCrossFaction
+  type: bool
 - name: isGuild
   type: bool
 - name: lastPosterGUID
