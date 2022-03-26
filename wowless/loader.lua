@@ -192,7 +192,7 @@ local function loader(api, cfg)
                 local obj = parent
                 for i = 1, #parts do
                   local p = parts[i]
-                  if p == '$parent' then
+                  if p == '$parent' or p == '$parentKey' then
                     obj = obj:GetParent()
                   else
                     if not obj[p] then
