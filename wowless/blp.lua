@@ -24,7 +24,7 @@ local dxt5 = vstruct.compile([[
 ]])
 
 local function parseBLP(filename)
-  local f = io.open(filename)
+  local f = assert(io.open(filename))
   local header = blpHeader:read(f)
   assert(header.magic == 'BLP2')
   assert(header.version == 1)
