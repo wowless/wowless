@@ -1,5 +1,7 @@
 describe('blp', function()
   it('reads', function()
-    require('wowless.blp').read('spec/wowless/temp.blp')
+    local w, h = require('wowless.blp').read('spec/wowless/temp.blp')
+    assert.same(w, 64)
+    assert.same(h, 64)
   end)
 end)

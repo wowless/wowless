@@ -47,6 +47,7 @@ local function read(filename)
     end
   end
   assert(f:close())
+  return header.width, header.height
 end
 
 return {
