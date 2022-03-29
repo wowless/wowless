@@ -51,4 +51,15 @@ local function writePNG(filename, width, height, data)
   assert(f:close())
 end
 
-writePNG('temp.png', 100, 100, ('\0\255\0'):rep(10000))
+writePNG(
+  'temp.png',
+  256,
+  256,
+  (function()
+    local t = {}
+    for i = 0, 255 do
+      table.insert(t, string.char(0, i, 0):rep(256))
+    end
+    return table.concat(t, '')
+  end)()
+)
