@@ -26,10 +26,10 @@ local dxt5 = vstruct.compile([[
 local function dxt1color(c0, c1)
   local c2, c3
   if c0 > c1 then
-    c2 = c0 * 2 / 3 + c1 / 3
-    c3 = c0 / 3 + c1 * 2 / 3
+    c2 = (c0 * 2 + c1) / 3
+    c3 = (c0 + c1 * 2) / 3
   else
-    c2 = c0 / 2 + c1 / 2
+    c2 = (c0 + c1) / 2
     c3 = 0
   end
   return c2, c3
@@ -52,7 +52,7 @@ local function read(filename)
   assert(header.colorEncoding == 2) -- DXT
   assert(header.alphaSize == 8)
   assert(header.pixelFormat == 7) -- DXT5
-  assert(header.hasMips == 17)
+  assert(header.hasMips == 1 or header.hasMips == 17)
   assert(header.width % 4 == 0)
   assert(header.height % 4 == 0)
   assert(header.mipOffsets[1] == 20 + 64 + 64 + 1024) -- header size
@@ -66,7 +66,7 @@ local function read(filename)
       local c2, c3 = dxt1rgb(t.c0, t.c1)
       for row = 1, 4 do
         for col = 1, 4 do
-          local cx = t.colorTable[(row - 1) * 4 + col]
+          local cx = t.colorTable[17 - ((row - 1) * 4 + col)]
           local rgb = cx == 0 and t.c0 or cx == 1 and t.c1 or cx == 2 and c2 or c3
           table.insert(lines[row], string.char(rgb.r * 256 / 32, rgb.g * 256 / 64, rgb.b * 256 / 32))
         end
