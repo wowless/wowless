@@ -32,19 +32,10 @@ local function read(filename)
   assert(header.alphaSize == 8)
   assert(header.pixelFormat == 7) -- DXT5
   assert(header.hasMips == 17)
-  assert(header.width == header.height)
-  do
-    local cur = 20 + 64 + 64 + 1024 -- header size
-    local dim = header.width
-    for i = 1, math.log(dim) do
-      assert(header.mipOffsets[i] == cur)
-      assert(header.mipSizes[i] == dim * dim)
-      for _ = 1, dim * dim / 16 do
-        dxt5:read(f)
-      end
-      cur = cur + dim * dim
-      dim = dim / 2
-    end
+  assert(header.mipOffsets[1] == 20 + 64 + 64 + 1024) -- header size
+  assert(header.mipSizes[1] == header.width * header.height)
+  for _ = 1, header.width * header.height / 16 do
+    dxt5:read(f)
   end
   assert(f:close())
   return header.width, header.height
