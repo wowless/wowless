@@ -1,0 +1,5 @@
+describe('blp', function()
+  it('reads', function()
+    require('wowless.blp').read('spec/wowless/temp.blp')
+  end)
+end)

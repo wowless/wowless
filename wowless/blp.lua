@@ -23,7 +23,7 @@ local dxt5 = vstruct.compile([[
   colorTable: { [ 4 | 16*u2 ] }
 ]])
 
-local function parseBLP(filename)
+local function read(filename)
   local f = assert(io.open(filename))
   local header = blpHeader:read(f)
   assert(header.magic == 'BLP2')
@@ -40,7 +40,7 @@ local function parseBLP(filename)
       assert(header.mipOffsets[i] == cur)
       assert(header.mipSizes[i] == dim * dim)
       for _ = 1, dim * dim / 16 do
-        require('pl.pretty').dump(dxt5:read(f))
+        dxt5:read(f)
       end
       cur = cur + dim * dim
       dim = dim / 2
@@ -49,4 +49,6 @@ local function parseBLP(filename)
   assert(f:close())
 end
 
-parseBLP('temp.blp')
+return {
+  read = read,
+}
