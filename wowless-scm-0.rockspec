@@ -20,7 +20,6 @@ dependencies = {
   'lyaml',
   'minheap',
   'penlight',
-  'serpent',
   'wowcig',
 }
 build = {

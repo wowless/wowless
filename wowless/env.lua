@@ -132,11 +132,7 @@ local function mkBaseEnv()
 end
 
 local function dump(api)
-  local block = require('serpent').block
-  local config = { nocode = true }
-  local function d(x)
-    print(block(x, config))
-  end
+  local d = require('pl.pretty').dump
   return function(...)
     for _, x in ipairs({ ... }) do
       d(x)
