@@ -1,5 +1,6 @@
 local crc32lib = require('crc32')
 local vstruct = require('vstruct')
+local zlib = require('zlib')
 
 local blpHeader = vstruct.compile([[
   magic: s4  -- BLP2
@@ -50,21 +51,6 @@ local function parseBLP(filename)
   assert(f:close())
 end
 
---[[
-local function adler32(...)
-  local a, b = 1, 0
-  for i = 1, select('#', ...) do
-    local s = select(i, ...)
-    for j = 1, #s do
-      local c = s:sub(j, j):byte()
-      a = (a + c) % 65521
-      b = (b + a) % 65521
-    end
-  end
-  return bit.bor(bit.lshift(b, 16), a)
-end
-]]
-
 local function crc32(...)
   local c = crc32lib.newcrc32()
   for i = 1, select('#', ...) do
@@ -74,6 +60,8 @@ local function crc32(...)
 end
 
 local pngChunks = {
+  IDAT = vstruct.compile('s'),
+  IEND = vstruct.compile(''),
   IHDR = vstruct.compile([[>
     width: u4
     height: u4
@@ -103,6 +91,10 @@ local function writePNG(filename)
     filterMethod = 0,
     interlaceMethod = 0,
   })
+  writePNGChunk(f, 'IDAT', {
+    zlib.compress('\0\255\0\0', 9, 8, 8, 8, 2),
+  })
+  writePNGChunk(f, 'IEND', {})
   assert(f:close())
 end
 
