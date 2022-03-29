@@ -9,7 +9,7 @@ local function crc32(...)
   return c
 end
 
-local pngChunks = {
+local chunks = {
   IDAT = vstruct.compile('s'),
   IEND = vstruct.compile(''),
   IHDR = vstruct.compile([[>
@@ -23,16 +23,16 @@ local pngChunks = {
   ]]),
 }
 
-local function writePNGChunk(f, type, data)
-  local str = pngChunks[type]:write('', data)
+local function writeChunk(f, type, data)
+  local str = chunks[type]:write('', data)
   local fmt = ('> u4 s4 s%d u4'):format(#str)
   vstruct.write(fmt, f, { #str, type, str, crc32(type, str) })
 end
 
-local function writePNG(filename, width, height, data)
+local function write(filename, width, height, data)
   local f = assert(io.open(filename, 'wb'))
   assert(f:write('\137PNG\r\n\26\n'))
-  writePNGChunk(f, 'IHDR', {
+  writeChunk(f, 'IHDR', {
     width = width,
     height = height,
     bitDepth = 8,
@@ -46,20 +46,11 @@ local function writePNG(filename, width, height, data)
     table.insert(lines, '\0')
     table.insert(lines, data:sub((i - 1) * width * 3 + 1, i * width * 3))
   end
-  writePNGChunk(f, 'IDAT', { zlib.compress(table.concat(lines, '')) })
-  writePNGChunk(f, 'IEND', {})
+  writeChunk(f, 'IDAT', { zlib.compress(table.concat(lines, '')) })
+  writeChunk(f, 'IEND', {})
   assert(f:close())
 end
 
-writePNG(
-  'temp.png',
-  256,
-  256,
-  (function()
-    local t = {}
-    for i = 0, 255 do
-      table.insert(t, string.char(0, i, 0):rep(256))
-    end
-    return table.concat(t, '')
-  end)()
-)
+return {
+  write = write,
+}
