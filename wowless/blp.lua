@@ -44,6 +44,32 @@ local function dxt1rgb(c0, c1)
   return c2, c3
 end
 
+local function dxt1alpha(a0, a1)
+  if a0 > a1 then
+    return {
+      [0] = a0,
+      [1] = a1,
+      [2] = (6 * a0 + 1 * a1) / 7,
+      [3] = (5 * a0 + 2 * a1) / 7,
+      [4] = (4 * a0 + 3 * a1) / 7,
+      [5] = (3 * a0 + 4 * a1) / 7,
+      [6] = (2 * a0 + 5 * a1) / 7,
+      [7] = (1 * a0 + 6 * a1) / 7,
+    }
+  else
+    return {
+      [0] = a0,
+      [1] = a1,
+      [2] = (4 * a0 + 1 * a1) / 7,
+      [3] = (3 * a0 + 2 * a1) / 7,
+      [4] = (2 * a0 + 3 * a1) / 7,
+      [5] = (1 * a0 + 4 * a1) / 7,
+      [6] = 0,
+      [7] = 255,
+    }
+  end
+end
+
 local function read(filename)
   local f = assert(io.open(filename))
   local header = blpHeader:read(f)
@@ -62,13 +88,15 @@ local function read(filename)
     local lines = { {}, {}, {}, {} }
     for _ = 1, header.width / 4 do
       local t = dxt5:read(f)
-      -- Ignore alpha for now, just produce rgb.
       local c2, c3 = dxt1rgb(t.c0, t.c1)
+      local aa = dxt1alpha(t.a0, t.a1)
       for row = 1, 4 do
         for col = 1, 4 do
-          local cx = t.colorTable[17 - ((row - 1) * 4 + col)]
+          local idx = 17 - ((row - 1) * 4 + col)
+          local a = aa[t.alphaTable[idx]]
+          local cx = t.colorTable[idx]
           local rgb = cx == 0 and t.c0 or cx == 1 and t.c1 or cx == 2 and c2 or c3
-          table.insert(lines[row], string.char(rgb.r * 256 / 32, rgb.g * 256 / 64, rgb.b * 256 / 32))
+          table.insert(lines[row], string.char(rgb.r * 256 / 32, rgb.g * 256 / 64, rgb.b * 256 / 32, a))
         end
       end
     end

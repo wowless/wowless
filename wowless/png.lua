@@ -29,14 +29,14 @@ local function writeChunk(f, type, data)
   vstruct.write(fmt, f, { #str, type, str, crc32(type, str) })
 end
 
-local function write(filename, width, height, data)
+local function write(filename, width, height, rgba)
   local f = assert(io.open(filename, 'wb'))
   assert(f:write('\137PNG\r\n\26\n'))
   writeChunk(f, 'IHDR', {
     width = width,
     height = height,
     bitDepth = 8,
-    colorType = 2,
+    colorType = 6,
     compressionMethod = 0,
     filterMethod = 0,
     interlaceMethod = 0,
@@ -44,7 +44,7 @@ local function write(filename, width, height, data)
   local lines = {}
   for i = 1, height do
     table.insert(lines, '\0')
-    table.insert(lines, data:sub((i - 1) * width * 3 + 1, i * width * 3))
+    table.insert(lines, rgba:sub((i - 1) * width * 4 + 1, i * width * 4))
   end
   writeChunk(f, 'IDAT', { zlib.compress(table.concat(lines, '')) })
   writeChunk(f, 'IEND', {})
