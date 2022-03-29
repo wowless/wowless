@@ -1,4 +1,4 @@
-local bit = require('bit')
+local crc32lib = require('crc32')
 local vstruct = require('vstruct')
 
 local blpHeader = vstruct.compile([[
@@ -65,37 +65,13 @@ local function adler32(...)
 end
 ]]
 
-local crc32 = (function()
-  local crctab = {}
-  for i = 0, 255 do
-    local c = i
-    for _ = 1, 8 do
-      if bit.band(c, 1) then
-        print(string.format('before %08x', c))
-        c = bit.bxor(0xedb88320, bit.rshift(c, 1))
-        print(string.format('after %08x', c))
-      else
-        print(string.format('before %08x', c))
-        c = bit.rshift(c, 1)
-        print(string.format('after %08x', c))
-      end
-    end
-    crctab[i] = c
-    print(string.format('%08x', c))
+local function crc32(...)
+  local c = crc32lib.newcrc32()
+  for i = 1, select('#', ...) do
+    c:update(select(i, ...))
   end
-  os.exit(0)
-  return function(...)
-    local crc = 0xffffffff
-    for i = 1, select('#', ...) do
-      local s = select(i, ...)
-      for j = 1, #s do
-        local c = s:sub(j, j):byte()
-        crc = bit.bxor(crctab[bit.band(bit.bxor(crc, c), 0xff)], bit.rshift(crc, 8))
-      end
-    end
-    return bit.bxor(crc, 0xffffffff)
-  end
-end)()
+  return c:tonumber()
+end
 
 local pngChunks = {
   IHDR = vstruct.compile([[>
