@@ -1,4 +1,3 @@
-local crc32lib = require('crc32')
 local vstruct = require('vstruct')
 local zlib = require('zlib')
 
@@ -52,11 +51,11 @@ local function parseBLP(filename)
 end
 
 local function crc32(...)
-  local c = crc32lib.newcrc32()
+  local c = zlib.crc32()
   for i = 1, select('#', ...) do
-    c:update(select(i, ...))
+    c = zlib.crc32(c, select(i, ...))
   end
-  return c:tonumber()
+  return c
 end
 
 local pngChunks = {
