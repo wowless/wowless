@@ -1,3 +1,4 @@
+local bit = require('bit')
 local vstruct = require('vstruct')
 
 local blpHeader = vstruct.compile([[
@@ -46,7 +47,88 @@ local function parseBLP(filename)
       dim = dim / 2
     end
   end
-  f:close()
+  assert(f:close())
+end
+
+--[[
+local function adler32(...)
+  local a, b = 1, 0
+  for i = 1, select('#', ...) do
+    local s = select(i, ...)
+    for j = 1, #s do
+      local c = s:sub(j, j):byte()
+      a = (a + c) % 65521
+      b = (b + a) % 65521
+    end
+  end
+  return bit.bor(bit.lshift(b, 16), a)
+end
+]]
+
+local crc32 = (function()
+  local crctab = {}
+  for i = 0, 255 do
+    local c = i
+    for _ = 1, 8 do
+      if bit.band(c, 1) then
+        print(string.format('before %08x', c))
+        c = bit.bxor(0xedb88320, bit.rshift(c, 1))
+        print(string.format('after %08x', c))
+      else
+        print(string.format('before %08x', c))
+        c = bit.rshift(c, 1)
+        print(string.format('after %08x', c))
+      end
+    end
+    crctab[i] = c
+    print(string.format('%08x', c))
+  end
+  os.exit(0)
+  return function(...)
+    local crc = 0xffffffff
+    for i = 1, select('#', ...) do
+      local s = select(i, ...)
+      for j = 1, #s do
+        local c = s:sub(j, j):byte()
+        crc = bit.bxor(crctab[bit.band(bit.bxor(crc, c), 0xff)], bit.rshift(crc, 8))
+      end
+    end
+    return bit.bxor(crc, 0xffffffff)
+  end
+end)()
+
+local pngChunks = {
+  IHDR = vstruct.compile([[>
+    width: u4
+    height: u4
+    bitDepth: u1
+    colorType: u1
+    compressionMethod: u1
+    filterMethod: u1
+    interlaceMethod: u1
+  ]]),
+}
+
+local function writePNGChunk(f, type, data)
+  local str = pngChunks[type]:write('', data)
+  local fmt = ('> u4 s4 s%d u4'):format(#str)
+  vstruct.write(fmt, f, { #str, type, str, crc32(type, str) })
+end
+
+local function writePNG(filename)
+  local f = assert(io.open(filename, 'wb'))
+  assert(f:write('\137PNG\r\n\26\n'))
+  writePNGChunk(f, 'IHDR', {
+    width = 1,
+    height = 1,
+    bitDepth = 8,
+    colorType = 2,
+    compressionMethod = 0,
+    filterMethod = 0,
+    interlaceMethod = 0,
+  })
+  assert(f:close())
 end
 
 parseBLP('temp.blp')
+writePNG('temp.png')
