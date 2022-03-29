@@ -78,24 +78,27 @@ local function writePNGChunk(f, type, data)
   vstruct.write(fmt, f, { #str, type, str, crc32(type, str) })
 end
 
-local function writePNG(filename)
+local function writePNG(filename, width, height, data)
   local f = assert(io.open(filename, 'wb'))
   assert(f:write('\137PNG\r\n\26\n'))
   writePNGChunk(f, 'IHDR', {
-    width = 100,
-    height = 100,
+    width = width,
+    height = height,
     bitDepth = 8,
     colorType = 2,
     compressionMethod = 0,
     filterMethod = 0,
     interlaceMethod = 0,
   })
-  writePNGChunk(f, 'IDAT', {
-    zlib.compress(('\0' .. ('\0\255\0'):rep(100)):rep(100)),
-  })
+  local lines = {}
+  for i = 1, height do
+    table.insert(lines, '\0')
+    table.insert(lines, data:sub((i - 1) * width * 3 + 1, i * width * 3))
+  end
+  writePNGChunk(f, 'IDAT', { zlib.compress(table.concat(lines, '')) })
   writePNGChunk(f, 'IEND', {})
   assert(f:close())
 end
 
 parseBLP('temp.blp')
-writePNG('temp.png')
+writePNG('temp.png', 100, 100, ('\0\255\0'):rep(10000))
