@@ -18,14 +18,31 @@ local dxt5 = vstruct.compile([[
   a0: u1
   a1: u1
   alphaTable: { [ 6 | 16*u3 ] }
-  c0: u2
-  c1: u2
+  c0: { [ 2 | r: u5 g: u6 b: u5 ] }
+  c1: { [ 2 | r: u5 g: u6 b: u5 ] }
   colorTable: { [ 4 | 16*u2 ] }
 ]])
 
-local rgb565 = vstruct.compile([[
-  [ 2 | r: u5 g: u6 b: u5 ]
-]])
+local function dxt1color(c0, c1)
+  local c2, c3
+  if c0 > c1 then
+    c2 = c0 * 2 / 3 + c1 / 3
+    c3 = c0 / 3 + c1 * 2 / 3
+  else
+    c2 = c0 / 2 + c1 / 2
+    c3 = 0
+  end
+  return c2, c3
+end
+
+local function dxt1rgb(c0, c1)
+  local r2, r3 = dxt1color(c0.r, c1.r)
+  local g2, g3 = dxt1color(c0.g, c1.g)
+  local b2, b3 = dxt1color(c0.b, c1.b)
+  local c2 = { r = r2, g = g2, b = b2 }
+  local c3 = { r = r3, g = g3, b = b3 }
+  return c2, c3
+end
 
 local function read(filename)
   local f = assert(io.open(filename))
@@ -46,19 +63,11 @@ local function read(filename)
     for _ = 1, header.width / 4 do
       local t = dxt5:read(f)
       -- Ignore alpha for now, just produce rgb.
-      local c2, c3
-      if t.c0 > t.c1 then
-        c2 = t.c0 * 2 / 3 + t.c1 / 3
-        c3 = t.c0 / 3 + t.c1 * 2 / 3
-      else
-        c2 = t.c0 / 2 + t.c1 / 2
-        c3 = 0
-      end
+      local c2, c3 = dxt1rgb(t.c0, t.c1)
       for row = 1, 4 do
         for col = 1, 4 do
           local cx = t.colorTable[(row - 1) * 4 + col]
-          local c = cx == 0 and t.c0 or cx == 1 and t.c1 or cx == 2 and c2 or c3
-          local rgb = rgb565:read(vstruct.write('u2', '', { c }))
+          local rgb = cx == 0 and t.c0 or cx == 1 and t.c1 or cx == 2 and c2 or c3
           table.insert(lines[row], string.char(rgb.r * 256 / 32, rgb.g * 256 / 64, rgb.b * 256 / 32))
         end
       end
