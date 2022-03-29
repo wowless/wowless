@@ -1,0 +1,11 @@
+describe('blp', function()
+  it('reads', function()
+    local w, h, rgba = require('wowless.blp').read('spec/wowless/temp.blp')
+    assert.same(w, 64)
+    assert.same(h, 64)
+    local tmp = os.tmpname()
+    require('wowless.png').write(tmp, w, h, rgba)
+    local readfile = require('pl.file').read
+    assert.same(readfile('spec/wowless/temp.png'), readfile(tmp))
+  end)
+end)
