@@ -82,8 +82,8 @@ local function writePNG(filename)
   local f = assert(io.open(filename, 'wb'))
   assert(f:write('\137PNG\r\n\26\n'))
   writePNGChunk(f, 'IHDR', {
-    width = 1,
-    height = 1,
+    width = 100,
+    height = 100,
     bitDepth = 8,
     colorType = 2,
     compressionMethod = 0,
@@ -91,7 +91,7 @@ local function writePNG(filename)
     interlaceMethod = 0,
   })
   writePNGChunk(f, 'IDAT', {
-    zlib.compress('\0\255\0\0', 9, 8, 8, 8, 2),
+    zlib.compress(('\0' .. ('\0\255\0'):rep(100)):rep(100)),
   })
   writePNGChunk(f, 'IEND', {})
   assert(f:close())
