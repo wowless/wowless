@@ -20,6 +20,7 @@ dependencies = {
   'lyaml',
   'minheap',
   'penlight',
+  'vstruct',
   'wowcig',
 }
 build = {
