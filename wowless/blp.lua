@@ -37,14 +37,8 @@ local dxt5 = vstruct.compile([[
 ]])
 
 local function dxt1color(c0, c1)
-  local c2, c3
-  if c0 > c1 then
-    c2 = (c0 * 2 + c1) / 3
-    c3 = (c0 + c1 * 2) / 3
-  else
-    c2 = (c0 + c1) / 2
-    c3 = 0
-  end
+  local c2 = (c0 * 2 + c1) / 3
+  local c3 = (c0 + c1 * 2) / 3
   return c2, c3
 end
 
