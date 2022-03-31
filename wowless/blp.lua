@@ -14,6 +14,12 @@ local blpHeader = vstruct.compile([[
   palette: { 256*u4 }
 ]])
 
+local dxt1 = vstruct.compile([[
+  c0: { [ 2 | r: u5 g: u6 b: u5 ] }
+  c1: { [ 2 | r: u5 g: u6 b: u5 ] }
+  colorTable: { [ 4 | 16*u2 ] }
+]])
+
 local dxt3 = vstruct.compile([[
   alphaTable: { [ 8 | 16*u4 ] }
   c0: { [ 2 | r: u5 g: u6 b: u5 ] }
@@ -88,24 +94,37 @@ local function dxt5alpha(a0, a1)
   end
 end
 
-local function read(filename)
-  local f = assert(io.open(filename))
-  local header = blpHeader:read(f)
-  assert(header.magic == 'BLP2')
-  assert(header.version == 1)
-  assert(header.colorEncoding == 2) -- DXT
-  assert(header.alphaSize == 8)
-  assert(header.pixelFormat == 1 or header.pixelFormat == 7) -- DXT5
-  assert(header.hasMips == 1 or header.hasMips == 17)
-  assert(header.width % 4 == 0)
-  assert(header.height % 4 == 0)
-  assert(header.mipOffsets[1] == 20 + 64 + 64 + 1024) -- header size
-  assert(header.mipSizes[1] == header.width * header.height)
-  local rgblines = {}
-  for _ = 1, header.height / 4 do
-    local lines = { {}, {}, {}, {} }
-    for _ = 1, header.width / 4 do
-      if header.pixelFormat == 1 then
+local pixelFormats = {
+  [0] = function(f, header) -- DXT1
+    assert(header.alphaSize == 0)
+    assert(header.mipSizes[1] == header.width * header.height / 2)
+    local rgbalines = {}
+    for _ = 1, header.height / 4 do
+      local lines = { {}, {}, {}, {} }
+      for _ = 1, header.width / 4 do
+        local t = dxt1:read(f)
+        local cc = dxt1rgb(t.c0, t.c1)
+        for row = 1, 4 do
+          for col = 1, 4 do
+            local idx = 17 - ((row - 1) * 4 + col)
+            local rgb = cc[t.colorTable[idx]]
+            table.insert(lines[row], string.char(rgb.r, rgb.g, rgb.b, 255))
+          end
+        end
+      end
+      for _, line in ipairs(lines) do
+        table.insert(rgbalines, table.concat(line, ''))
+      end
+    end
+    return table.concat(rgbalines, '')
+  end,
+  [1] = function(f, header) -- DXT3
+    assert(header.alphaSize == 8)
+    assert(header.mipSizes[1] == header.width * header.height)
+    local rgbalines = {}
+    for _ = 1, header.height / 4 do
+      local lines = { {}, {}, {}, {} }
+      for _ = 1, header.width / 4 do
         local t = dxt3:read(f)
         local cc = dxt1rgb(t.c0, t.c1)
         for row = 1, 4 do
@@ -116,7 +135,20 @@ local function read(filename)
             table.insert(lines[row], string.char(rgb.r, rgb.g, rgb.b, a))
           end
         end
-      elseif header.pixelFormat == 7 then
+      end
+      for _, line in ipairs(lines) do
+        table.insert(rgbalines, table.concat(line, ''))
+      end
+    end
+    return table.concat(rgbalines, '')
+  end,
+  [7] = function(f, header) -- DXT5
+    assert(header.alphaSize == 8)
+    assert(header.mipSizes[1] == header.width * header.height)
+    local rgbalines = {}
+    for _ = 1, header.height / 4 do
+      local lines = { {}, {}, {}, {} }
+      for _ = 1, header.width / 4 do
         local t = dxt5:read(f)
         local aa = dxt5alpha(t.a0, t.a1)
         local cc = dxt1rgb(t.c0, t.c1)
@@ -129,13 +161,27 @@ local function read(filename)
           end
         end
       end
+      for _, line in ipairs(lines) do
+        table.insert(rgbalines, table.concat(line, ''))
+      end
     end
-    for _, line in ipairs(lines) do
-      table.insert(rgblines, table.concat(line, ''))
-    end
-  end
+    return table.concat(rgbalines, '')
+  end,
+}
+
+local function read(filename)
+  local f = assert(io.open(filename))
+  local header = blpHeader:read(f)
+  assert(header.magic == 'BLP2')
+  assert(header.version == 1)
+  assert(header.colorEncoding == 2) -- DXT
+  assert(header.hasMips == 1 or header.hasMips == 17)
+  assert(header.width % 4 == 0)
+  assert(header.height % 4 == 0)
+  assert(header.mipOffsets[1] == 20 + 64 + 64 + 1024) -- header size
+  local rgba = assert(pixelFormats[header.pixelFormat])(f, header)
   assert(f:close())
-  return header.width, header.height, table.concat(rgblines, '')
+  return header.width, header.height, rgba
 end
 
 return {
