@@ -94,78 +94,61 @@ local function dxt5alpha(a0, a1)
   end
 end
 
+local function rundxt(header, fn)
+  local rgbalines = {}
+  for _ = 1, header.height / 4 do
+    local lines = { {}, {}, {}, {} }
+    for _ = 1, header.width / 4 do
+      local perPixel = fn()
+      for row = 1, 4 do
+        for col = 1, 4 do
+          local idx = 17 - ((row - 1) * 4 + col)
+          local rgb, a = perPixel(idx)
+          table.insert(lines[row], string.char(rgb.r, rgb.g, rgb.b, a))
+        end
+      end
+    end
+    for _, line in ipairs(lines) do
+      table.insert(rgbalines, table.concat(line, ''))
+    end
+  end
+  return table.concat(rgbalines, '')
+end
+
 local pixelFormats = {
   [0] = function(f, header) -- DXT1
     assert(header.alphaSize == 0)
     assert(header.mipSizes[1] == header.width * header.height / 2)
-    local rgbalines = {}
-    for _ = 1, header.height / 4 do
-      local lines = { {}, {}, {}, {} }
-      for _ = 1, header.width / 4 do
-        local t = dxt1:read(f)
-        local cc = dxt1rgb(t.c0, t.c1)
-        for row = 1, 4 do
-          for col = 1, 4 do
-            local idx = 17 - ((row - 1) * 4 + col)
-            local rgb = cc[t.colorTable[idx]]
-            table.insert(lines[row], string.char(rgb.r, rgb.g, rgb.b, 255))
-          end
-        end
+    return rundxt(header, function()
+      local t = dxt1:read(f)
+      local cc = dxt1rgb(t.c0, t.c1)
+      return function(idx)
+        return cc[t.colorTable[idx]], 255
       end
-      for _, line in ipairs(lines) do
-        table.insert(rgbalines, table.concat(line, ''))
-      end
-    end
-    return table.concat(rgbalines, '')
+    end)
   end,
   [1] = function(f, header) -- DXT3
     assert(header.alphaSize == 8)
     assert(header.mipSizes[1] == header.width * header.height)
-    local rgbalines = {}
-    for _ = 1, header.height / 4 do
-      local lines = { {}, {}, {}, {} }
-      for _ = 1, header.width / 4 do
-        local t = dxt3:read(f)
-        local cc = dxt1rgb(t.c0, t.c1)
-        for row = 1, 4 do
-          for col = 1, 4 do
-            local idx = 17 - ((row - 1) * 4 + col)
-            local a = t.alphaTable[idx] * 16
-            local rgb = cc[t.colorTable[idx]]
-            table.insert(lines[row], string.char(rgb.r, rgb.g, rgb.b, a))
-          end
-        end
+    return rundxt(header, function()
+      local t = dxt3:read(f)
+      local cc = dxt1rgb(t.c0, t.c1)
+      return function(idx)
+        return cc[t.colorTable[idx]], t.alphaTable[idx] * 16
       end
-      for _, line in ipairs(lines) do
-        table.insert(rgbalines, table.concat(line, ''))
-      end
-    end
-    return table.concat(rgbalines, '')
+    end)
   end,
   [7] = function(f, header) -- DXT5
     assert(header.alphaSize == 8)
     assert(header.mipSizes[1] == header.width * header.height)
-    local rgbalines = {}
-    for _ = 1, header.height / 4 do
-      local lines = { {}, {}, {}, {} }
-      for _ = 1, header.width / 4 do
-        local t = dxt5:read(f)
-        local aa = dxt5alpha(t.a0, t.a1)
-        local cc = dxt1rgb(t.c0, t.c1)
-        for row = 1, 4 do
-          for col = 1, 4 do
-            local idx = 17 - ((row - 1) * 4 + col)
-            local a = aa[t.alphaTable[idx]]
-            local rgb = cc[t.colorTable[idx]]
-            table.insert(lines[row], string.char(rgb.r, rgb.g, rgb.b, a))
-          end
-        end
+    return rundxt(header, function()
+      local t = dxt5:read(f)
+      local aa = dxt5alpha(t.a0, t.a1)
+      local cc = dxt1rgb(t.c0, t.c1)
+      return function(idx)
+        return cc[t.colorTable[idx]], aa[t.alphaTable[idx]]
       end
-      for _, line in ipairs(lines) do
-        table.insert(rgbalines, table.concat(line, ''))
-      end
-    end
-    return table.concat(rgbalines, '')
+    end)
   end,
 }
 
