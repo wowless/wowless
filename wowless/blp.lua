@@ -35,13 +35,24 @@ local function dxt1color(c0, c1)
   return c2, c3
 end
 
+local function dxt1scale(c)
+  return {
+    r = c.r * 256 / 32,
+    g = c.g * 256 / 64,
+    b = c.b * 256 / 32,
+  }
+end
+
 local function dxt1rgb(c0, c1)
   local r2, r3 = dxt1color(c0.r, c1.r)
   local g2, g3 = dxt1color(c0.g, c1.g)
   local b2, b3 = dxt1color(c0.b, c1.b)
-  local c2 = { r = r2, g = g2, b = b2 }
-  local c3 = { r = r3, g = g3, b = b3 }
-  return c2, c3
+  return {
+    [0] = dxt1scale(c0),
+    [1] = dxt1scale(c1),
+    [2] = dxt1scale({ r = r2, g = g2, b = b2 }),
+    [3] = dxt1scale({ r = r3, g = g3, b = b3 }),
+  }
 end
 
 local function dxt5alpha(a0, a1)
@@ -88,15 +99,14 @@ local function read(filename)
     local lines = { {}, {}, {}, {} }
     for _ = 1, header.width / 4 do
       local t = dxt5:read(f)
-      local c2, c3 = dxt1rgb(t.c0, t.c1)
+      local cc = dxt1rgb(t.c0, t.c1)
       local aa = dxt5alpha(t.a0, t.a1)
       for row = 1, 4 do
         for col = 1, 4 do
           local idx = 17 - ((row - 1) * 4 + col)
           local a = aa[t.alphaTable[idx]]
-          local cx = t.colorTable[idx]
-          local rgb = cx == 0 and t.c0 or cx == 1 and t.c1 or cx == 2 and c2 or c3
-          table.insert(lines[row], string.char(rgb.r * 256 / 32, rgb.g * 256 / 64, rgb.b * 256 / 32, a))
+          local rgb = cc[t.colorTable[idx]]
+          table.insert(lines[row], string.char(rgb.r, rgb.g, rgb.b, a))
         end
       end
     end
