@@ -44,7 +44,7 @@ local function dxt1rgb(c0, c1)
   return c2, c3
 end
 
-local function dxt1alpha(a0, a1)
+local function dxt5alpha(a0, a1)
   if a0 > a1 then
     return {
       [0] = a0,
@@ -89,7 +89,7 @@ local function read(filename)
     for _ = 1, header.width / 4 do
       local t = dxt5:read(f)
       local c2, c3 = dxt1rgb(t.c0, t.c1)
-      local aa = dxt1alpha(t.a0, t.a1)
+      local aa = dxt5alpha(t.a0, t.a1)
       for row = 1, 4 do
         for col = 1, 4 do
           local idx = 17 - ((row - 1) * 4 + col)
