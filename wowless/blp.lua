@@ -62,6 +62,17 @@ local function dxt1rgb(c0, c1)
   }
 end
 
+local function dxt1rgba(c0, c1)
+  local r2 = (c0.r + c1.r) / 2
+  local g2 = (c0.g + c1.g) / 2
+  local b2 = (c0.b + c1.b) / 2
+  return {
+    [0] = dxt1scale(c0),
+    [1] = dxt1scale(c1),
+    [2] = dxt1scale({ r = r2, g = g2, b = b2 }),
+  }
+end
+
 local function dxt5alpha(a0, a1)
   if a0 > a1 then
     return {
@@ -111,15 +122,32 @@ end
 
 local pixelFormats = {
   [0] = function(f, header) -- DXT1
-    assert(header.alphaSize == 0)
     assert(header.mipSizes[1] == header.width * header.height / 2)
-    return rundxt(header, function()
-      local t = dxt1:read(f)
-      local cc = dxt1rgb(t.c0, t.c1)
-      return function(idx)
-        return cc[t.colorTable[idx]], 255
-      end
-    end)
+    if header.alphaSize == 0 then
+      return rundxt(header, function()
+        local t = dxt1:read(f)
+        local cc = dxt1rgb(t.c0, t.c1)
+        return function(idx)
+          return cc[t.colorTable[idx]], 255
+        end
+      end)
+    elseif header.alphaSize == 1 then
+      local black = { r = 0, g = 0, b = 0 }
+      return rundxt(header, function()
+        local t = dxt1:read(f)
+        local cc = dxt1rgba(t.c0, t.c1)
+        return function(idx)
+          local cx = t.colorTable[idx]
+          if cx == 3 then
+            return black, 0
+          else
+            return cc[cx], 255
+          end
+        end
+      end)
+    else
+      error('invalid alpha size ' .. header.alphaSize)
+    end
   end,
   [1] = function(f, header) -- DXT3
     assert(header.alphaSize == 8)
