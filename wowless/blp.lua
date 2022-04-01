@@ -150,7 +150,7 @@ local pixelFormats = {
     end
   end,
   [1] = function(f, header) -- DXT3
-    assert(header.alphaSize == 8)
+    assert(header.alphaSize == 4 or header.alphaSize == 8)
     assert(header.mipSizes[1] == header.width * header.height)
     return rundxt(header, function()
       local t = dxt3:read(f)
@@ -180,7 +180,7 @@ local function read(filename)
   assert(header.magic == 'BLP2')
   assert(header.version == 1)
   assert(header.colorEncoding == 2) -- DXT
-  assert(header.hasMips == 1 or header.hasMips == 17)
+  assert(header.hasMips == 0 or header.hasMips == 1 or header.hasMips == 17)
   assert(header.width % 4 == 0)
   assert(header.height % 4 == 0)
   assert(header.mipOffsets[1] == 20 + 64 + 64 + 1024) -- header size
