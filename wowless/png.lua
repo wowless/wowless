@@ -23,32 +23,35 @@ local chunks = {
   ]]),
 }
 
-local function writeChunk(f, type, data)
+local function toChunk(type, data)
   local str = chunks[type]:write('', data)
   local fmt = ('> u4 s4 s%d u4'):format(#str)
-  vstruct.write(fmt, f, { #str, type, str, crc32(type, str) })
+  return vstruct.write(fmt, '', { #str, type, str, crc32(type, str) })
 end
 
-local function write(filename, width, height, rgba)
-  local f = assert(io.open(filename, 'wb'))
-  assert(f:write('\137PNG\r\n\26\n'))
-  writeChunk(f, 'IHDR', {
-    width = width,
-    height = height,
-    bitDepth = 8,
-    colorType = 6,
-    compressionMethod = 0,
-    filterMethod = 0,
-    interlaceMethod = 0,
-  })
+local function write(width, height, rgba)
+  local t = {}
+  table.insert(t, '\137PNG\r\n\26\n')
+  table.insert(
+    t,
+    toChunk('IHDR', {
+      width = width,
+      height = height,
+      bitDepth = 8,
+      colorType = 6,
+      compressionMethod = 0,
+      filterMethod = 0,
+      interlaceMethod = 0,
+    })
+  )
   local lines = {}
   for i = 1, height do
     table.insert(lines, '\0')
     table.insert(lines, rgba:sub((i - 1) * width * 4 + 1, i * width * 4))
   end
-  writeChunk(f, 'IDAT', { zlib.compress(table.concat(lines, '')) })
-  writeChunk(f, 'IEND', {})
-  assert(f:close())
+  table.insert(t, toChunk('IDAT', { zlib.compress(table.concat(lines, '')) }))
+  table.insert(t, toChunk('IEND', {}))
+  return table.concat(t, '')
 end
 
 return {

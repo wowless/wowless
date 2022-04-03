@@ -6,9 +6,9 @@ describe('png', function()
         table.insert(t, string.char(0, i, 0, j))
       end
     end
-    local tmp = os.tmpname()
-    require('wowless.png').write(tmp, 256, 256, table.concat(t, ''))
-    local readfile = require('pl.file').read
-    assert.same(readfile('spec/wowless/green.png'), readfile(tmp))
+    assert.same(
+      require('pl.file').read('spec/wowless/green.png'),
+      require('wowless.png').write(256, 256, table.concat(t, ''))
+    )
   end)
 end)
