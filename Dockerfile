@@ -19,6 +19,7 @@ RUN apt-get update && \
         ca-certificates \
         git \
         libexpat-dev \
+        libmagickwand-dev \
         libssl-dev \
         libyaml-dev \
         libzip-dev \
@@ -35,6 +36,7 @@ FROM debian:testing-slim AS runtime
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
         libexpat1 \
+        libmagickwand-6.q16-6 \
         libreadline8 \
         libyaml-0-2 \
         libzip4 && \

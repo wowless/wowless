@@ -10,6 +10,7 @@ RUN apt-get update \
         curl \
         git \
         libexpat-dev \
+        libmagickwand-dev \
         libreadline-dev \
         libssl-dev \
         libyaml-dev \

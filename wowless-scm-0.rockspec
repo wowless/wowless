@@ -15,6 +15,7 @@ dependencies = {
   'luacheck',
   'luadbd',
   'luaexpat',
+  'luamagick',
   'luautf8',
   'lua-path',
   'lyaml',
