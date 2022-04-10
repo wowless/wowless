@@ -32,6 +32,11 @@ repos:
     entry: bin/test.sh
     language: system
     pass_filenames: false
+  - id: docker-build-and-run
+    name: docker build and run
+    entry: sh -c "if which docker; then docker run $(docker build -q .) -h; fi"
+    language: system
+    pass_filenames: false
 - repo: meta
   hooks:
   - id: check-hooks-apply
