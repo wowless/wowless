@@ -19,11 +19,13 @@ local args = (function()
   parser:option('-l --loglevel', 'log level', 0):convert(tonumber)
   parser:option('-a --addondir', 'addon directory to test'):count('*')
   parser:flag('--allevents', 'send all nullary events')
+  parser:flag('--frame0', 'write frame0 debug')
   return parser:parse()
 end)()
 local api = require('wowless.runner').run({
   allevents = args.allevents,
   dir = 'extracts/' .. args.product,
+  frame0 = args.frame0,
   loglevel = args.loglevel,
   otherAddonDirs = args.addondir,
   version = productToFlavor[args.product],

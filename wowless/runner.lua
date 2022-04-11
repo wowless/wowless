@@ -27,6 +27,46 @@ local function run(cfg)
   api.SendEvent('TRIAL_STATUS_UPDATE')
   api.SendEvent('DISPLAY_SIZE_CHANGED')
   api.SendEvent('SPELLS_CHANGED')
+  if cfg.frame0 then
+    local function points(r)
+      local ps = {}
+      for i = 1, r:GetNumPoints() do
+        local point, relativeTo, relativePoint, x, y = r:GetPoint(i)
+        table.insert(ps, {
+          point = point,
+          relativeTo = relativeTo and relativeTo:GetDebugName() or '<screen>',
+          relativePoint = relativePoint,
+          x = x,
+          y = y,
+        })
+      end
+      return ps
+    end
+    local x = {}
+    for _, frame in ipairs(api.frames) do
+      if frame:IsVisible() and frame:GetNumPoints() > 0 then
+        assert(x[frame:GetDebugName()] == nil)
+        x[frame:GetDebugName()] = {
+          points = points(frame),
+          regions = (function()
+            local rs = {}
+            for i = 1, frame:GetNumRegions() do
+              local region = select(i, frame:GetRegions())
+              if region:IsVisible() and region:GetNumPoints() > 0 then
+                table.insert(rs, {
+                  name = region:GetDebugName(),
+                  points = points(region),
+                })
+              end
+            end
+            return rs
+          end)(),
+        }
+      end
+    end
+    print(require('wowapi.yaml').pprint(x))
+    os.exit(0)
+  end
   local clickBlacklist = {
     PVPReadyDialogEnterBattleButton = true,
   }
