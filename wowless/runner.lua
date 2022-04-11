@@ -1,8 +1,9 @@
 local function run(cfg)
   local loglevel = cfg.loglevel or 0
+  local t = os.clock()
   local function log(level, fmt, ...)
     if level <= loglevel then
-      print(string.format(fmt, ...))
+      print(string.format('[%.3f] ' .. fmt, os.clock() - t, ...))
     end
   end
   local api = require('wowless.api').new(log)
