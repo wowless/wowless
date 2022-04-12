@@ -123,7 +123,7 @@ methods:
   IsVisible:
     status: implemented
   SetAllPoints:
-    status: unimplemented
+    status: implemented
   SetAlpha:
     status: implemented
   SetHeight:
