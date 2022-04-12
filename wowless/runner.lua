@@ -47,31 +47,31 @@ local function run(cfg)
     end
     local x = {}
     for _, frame in ipairs(api.frames) do
-      if frame:IsVisible() and frame:GetNumPoints() > 0 and frame:GetNumRegions() > 0 then
-        assert(x[frame:GetDebugName()] == nil)
-        x[frame:GetDebugName()] = {
-          points = points(frame),
-          regions = (function()
-            local rs = {}
-            for i = 1, frame:GetNumRegions() do
-              local region = select(i, frame:GetRegions())
-              local ty = region:GetObjectType()
-              if region:IsVisible() and region:GetNumPoints() > 0 then
-                table.insert(rs, {
-                  fontstring = ty == 'FontString' and {
-                    string = region:GetText(),
-                  } or nil,
-                  name = region:GetDebugName(),
-                  points = points(region),
-                  texture = ty == 'Texture' and {
-                    texture = region:GetTexture(),
-                  } or nil,
-                })
-              end
-            end
-            return rs
-          end)(),
-        }
+      if frame:IsVisible() and frame:GetNumPoints() > 0 then
+        local regions = {}
+        for i = 1, frame:GetNumRegions() do
+          local region = select(i, frame:GetRegions())
+          local ty = region:GetObjectType()
+          if region:IsVisible() and region:GetNumPoints() > 0 then
+            table.insert(regions, {
+              fontstring = ty == 'FontString' and {
+                string = region:GetText(),
+              } or nil,
+              name = region:GetDebugName(),
+              points = points(region),
+              texture = ty == 'Texture' and {
+                texture = region:GetTexture(),
+              } or nil,
+            })
+          end
+        end
+        if #regions > 0 then
+          table.insert(x, {
+            name = frame:GetDebugName(),
+            points = points(frame),
+            regions = regions,
+          })
+        end
       end
     end
     print(require('wowapi.yaml').pprint(x))
