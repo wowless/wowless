@@ -27,5 +27,12 @@ return (function(self, point, ...)
   if type(maybeX) == 'number' and type(maybeY) == 'number' then
     x, y = maybeX, maybeY
   end
-  table.insert(u(self).points, { point, relativeTo, relativePoint, x, y })
+  local newPoint = { point, relativeTo, relativePoint, x, y }
+  for i, p in ipairs(u(self).points) do
+    if p[1] == point then
+      u(self).points[i] = newPoint
+      return
+    end
+  end
+  table.insert(u(self).points, newPoint)
 end)(...)
