@@ -1,5 +1,9 @@
 ---
 name: Texture
+fields:
+  texture:
+    nilable: true
+    type: string
 inherits:
 - LayeredRegion
 - ParentedObject
@@ -20,7 +24,9 @@ methods:
     - type: number
     status: unimplemented
   GetTexture:
-    status: unimplemented
+    fields:
+    - name: texture
+    status: getter
   GetVertexColor:
     status: unimplemented
   IsDesaturated:
@@ -54,6 +60,8 @@ methods:
   SetTexelSnappingBias:
     status: unimplemented
   SetTexture:
-    status: unimplemented
+    fields:
+    - name: texture
+    status: setter
   SetVertTile:
     status: unimplemented

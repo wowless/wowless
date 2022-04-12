@@ -32,10 +32,13 @@ local function run(cfg)
       local ps = {}
       for i = 1, r:GetNumPoints() do
         local point, relativeTo, relativePoint, x, y = r:GetPoint(i)
+        local width, height = r:GetSize()
         table.insert(ps, {
+          height = height,
           point = point,
-          relativeTo = relativeTo and relativeTo:GetDebugName() or '<screen>',
           relativePoint = relativePoint,
+          relativeTo = relativeTo and relativeTo:GetDebugName() or '<screen>',
+          width = width,
           x = x,
           y = y,
         })
@@ -52,10 +55,17 @@ local function run(cfg)
             local rs = {}
             for i = 1, frame:GetNumRegions() do
               local region = select(i, frame:GetRegions())
+              local ty = region:GetObjectType()
               if region:IsVisible() and region:GetNumPoints() > 0 then
                 table.insert(rs, {
+                  fontstring = ty == 'FontString' and {
+                    string = region:GetText(),
+                  } or nil,
                   name = region:GetDebugName(),
                   points = points(region),
+                  texture = ty == 'Texture' and {
+                    texture = region:GetTexture(),
+                  } or nil,
                 })
               end
             end
