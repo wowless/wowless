@@ -44,7 +44,7 @@ local function run(cfg)
     end
     local x = {}
     for _, frame in ipairs(api.frames) do
-      if frame:IsVisible() and frame:GetNumPoints() > 0 then
+      if frame:IsVisible() and frame:GetNumPoints() > 0 and frame:GetNumRegions() > 0 then
         assert(x[frame:GetDebugName()] == nil)
         x[frame:GetDebugName()] = {
           points = points(frame),
