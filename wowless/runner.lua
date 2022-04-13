@@ -28,56 +28,87 @@ local function run(cfg)
   api.SendEvent('DISPLAY_SIZE_CHANGED')
   api.SendEvent('SPELLS_CHANGED')
   if cfg.frame0 then
-    local function points(r)
-      local ps = {}
-      for i = 1, r:GetNumPoints() do
-        local point, relativeTo, relativePoint, x, y = r:GetPoint(i)
-        table.insert(ps, {
-          point = point,
-          relativePoint = relativePoint,
-          relativeTo = relativeTo and relativeTo:GetDebugName() or '<screen>',
-          x = x,
-          y = y,
-        })
-      end
-      return ps
-    end
-    local x = {}
-    for _, frame in ipairs(api.frames) do
-      if frame:IsVisible() and frame:GetNumPoints() > 0 then
-        local regions = {}
-        for i = 1, frame:GetNumRegions() do
-          local region = select(i, frame:GetRegions())
-          local ty = region:GetObjectType()
-          if region:IsVisible() and region:GetNumPoints() > 0 then
-            local width, height = region:GetSize()
-            table.insert(regions, {
-              fontstring = ty == 'FontString' and {
-                string = region:GetText(),
-              } or nil,
-              height = height,
-              name = region:GetDebugName(),
-              points = points(region),
-              texture = ty == 'Texture' and {
-                texture = region:GetTexture(),
-              } or nil,
-              width = width,
+    print(require('wowapi.yaml').pprint({
+      frames = (function()
+        local function points(r)
+          local ps = {}
+          for i = 1, r:GetNumPoints() do
+            local point, relativeTo, relativePoint, x, y = r:GetPoint(i)
+            table.insert(ps, {
+              point = point,
+              relativePoint = relativePoint,
+              relativeTo = relativeTo and relativeTo:GetDebugName() or '<screen>',
+              x = x,
+              y = y,
             })
           end
+          return ps
         end
-        local width, height = frame:GetSize()
-        if #regions > 0 then
-          table.insert(x, {
-            height = height,
-            name = frame:GetDebugName(),
-            points = points(frame),
-            regions = regions,
-            width = width,
-          })
+        local frames = {}
+        for _, frame in ipairs(api.frames) do
+          if frame:IsVisible() and frame:GetNumPoints() > 0 then
+            local regions = {}
+            for i = 1, frame:GetNumRegions() do
+              local region = select(i, frame:GetRegions())
+              local ty = region:GetObjectType()
+              if region:IsVisible() and region:GetNumPoints() > 0 then
+                local width, height = region:GetSize()
+                table.insert(regions, {
+                  fontstring = ty == 'FontString' and {
+                    string = region:GetText(),
+                  } or nil,
+                  height = height,
+                  name = region:GetDebugName(),
+                  points = points(region),
+                  texture = ty == 'Texture' and {
+                    texture = region:GetTexture(),
+                  } or nil,
+                  width = width,
+                })
+              end
+            end
+            local width, height = frame:GetSize()
+            if #regions > 0 then
+              table.insert(frames, {
+                height = height,
+                name = frame:GetDebugName(),
+                points = points(frame),
+                regions = regions,
+                width = width,
+              })
+            end
+          end
         end
-      end
-    end
-    print(require('wowapi.yaml').pprint(x))
+        return frames
+      end)(),
+      tsort = (function()
+        local screen = {
+          GetDebugName = function()
+            return '<screen>'
+          end,
+        }
+        local tt = require('resty.tsort').new()
+        local function addPoints(r)
+          for i = 1, r:GetNumPoints() do
+            local relativeTo = select(2, r:GetPoint(i)) or screen
+            if relativeTo ~= r then
+              tt:add(relativeTo, r)
+            end
+          end
+        end
+        for _, frame in ipairs(api.frames) do
+          addPoints(frame)
+          for _, r in ipairs({ frame:GetRegions() }) do
+            addPoints(r)
+          end
+        end
+        local ret = {}
+        for _, r in ipairs(assert(tt:sort())) do
+          table.insert(ret, r:GetDebugName())
+        end
+        return ret
+      end)(),
+    }))
     os.exit(0)
   end
   local clickBlacklist = {
