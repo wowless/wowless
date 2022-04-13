@@ -18,6 +18,7 @@ dependencies = {
   'luamagick',
   'luautf8',
   'lua-path',
+  'lua-resty-tsort',
   'lyaml',
   'minheap',
   'penlight',
