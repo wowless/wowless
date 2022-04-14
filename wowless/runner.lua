@@ -28,87 +28,86 @@ local function run(cfg)
   api.SendEvent('DISPLAY_SIZE_CHANGED')
   api.SendEvent('SPELLS_CHANGED')
   if cfg.frame0 then
-    print(require('wowapi.yaml').pprint({
-      frames = (function()
-        local function points(r)
-          local ps = {}
-          for i = 1, r:GetNumPoints() do
-            local point, relativeTo, relativePoint, x, y = r:GetPoint(i)
-            table.insert(ps, {
-              point = point,
-              relativePoint = relativePoint,
-              relativeTo = relativeTo and relativeTo:GetDebugName() or '<screen>',
-              x = x,
-              y = y,
-            })
+    print(require('wowapi.yaml').pprint((function()
+      local tt = require('resty.tsort').new()
+      local function addPoints(r)
+        for i = 1, r:GetNumPoints() do
+          local relativeTo = select(2, r:GetPoint(i))
+          if relativeTo ~= nil and relativeTo ~= r then
+            tt:add(relativeTo, r)
           end
-          return ps
         end
-        local frames = {}
-        for _, frame in ipairs(api.frames) do
-          if frame:IsVisible() and frame:GetNumPoints() > 0 then
-            local regions = {}
-            for i = 1, frame:GetNumRegions() do
-              local region = select(i, frame:GetRegions())
-              local ty = region:GetObjectType()
-              if region:IsVisible() and region:GetNumPoints() > 0 then
-                local width, height = region:GetSize()
-                table.insert(regions, {
-                  fontstring = ty == 'FontString' and {
-                    string = region:GetText(),
-                  } or nil,
-                  height = height,
-                  name = region:GetDebugName(),
-                  points = points(region),
-                  texture = ty == 'Texture' and {
-                    texture = region:GetTexture(),
-                  } or nil,
-                  width = width,
-                })
+      end
+      for _, frame in ipairs(api.frames) do
+        addPoints(frame)
+        for _, r in ipairs({ frame:GetRegions() }) do
+          addPoints(r)
+        end
+      end
+      local rects = {
+        ['<screen>'] = {
+          bottom = 0,
+          left = 0,
+          right = 1024,
+          top = 768,
+        },
+      }
+      for _, r in ipairs(assert(tt:sort())) do
+        local points = {}
+        for i = 1, r:GetNumPoints() do
+          local p, rt, rp, px, py = r:GetPoint(i)
+          if rt ~= r then
+            local pr = assert(rects[rt == nil and '<screen>' or rt], 'moo ' .. r:GetDebugName()) -- relies on tsort
+            local x = (function()
+              if rp == 'TOPLEFT' or rp == 'LEFT' or rp == 'BOTTOMLEFT' then
+                return pr.left
+              elseif rp == 'TOPRIGHT' or rp == 'RIGHT' or rp == 'BOTTOMRIGHT' then
+                return pr.right
+              else
+                return pr.left and pr.right and (pr.left + pr.right) / 2 or nil
               end
-            end
-            local width, height = frame:GetSize()
-            if #regions > 0 then
-              table.insert(frames, {
-                height = height,
-                name = frame:GetDebugName(),
-                points = points(frame),
-                regions = regions,
-                width = width,
-              })
-            end
+            end)()
+            local y = (function()
+              if rp == 'TOPLEFT' or rp == 'TOP' or rp == 'TOPRIGHT' then
+                return pr.top
+              elseif rp == 'BOTTOMLEFT' or rp == 'BOTTOM' or rp == 'BOTTOMRIGHT' then
+                return pr.bottom
+              else
+                return pr.top and pr.bottom and (pr.top + pr.bottom) / 2 or nil
+              end
+            end)()
+            points[p] = {
+              x = x and x + px,
+              y = y and y + py,
+            }
           end
         end
-        return frames
-      end)(),
-      tsort = (function()
-        local screen = {
-          GetDebugName = function()
-            return '<screen>'
-          end,
+        rects[r] = {
+          bottom = (function()
+            local pt = points.BOTTOMLEFT or points.BOTTOM or points.BOTTOMRIGHT
+            return pt and pt.y
+          end)(),
+          left = (function()
+            local pt = points.TOPLEFT or points.LEFT or points.BOTTOMLEFT
+            return pt and pt.x
+          end)(),
+          right = (function()
+            local pt = points.TOPRIGHT or points.RIGHT or points.BOTTOMRIGHT
+            return pt and pt.x
+          end)(),
+          top = (function()
+            local pt = points.TOPLEFT or points.TOP or points.TOPRIGHT
+            return pt and pt.y
+          end)(),
         }
-        local tt = require('resty.tsort').new()
-        local function addPoints(r)
-          for i = 1, r:GetNumPoints() do
-            local relativeTo = select(2, r:GetPoint(i)) or screen
-            if relativeTo ~= r then
-              tt:add(relativeTo, r)
-            end
-          end
-        end
-        for _, frame in ipairs(api.frames) do
-          addPoints(frame)
-          for _, r in ipairs({ frame:GetRegions() }) do
-            addPoints(r)
-          end
-        end
-        local ret = {}
-        for _, r in ipairs(assert(tt:sort())) do
-          table.insert(ret, r:GetDebugName())
-        end
-        return ret
-      end)(),
-    }))
+      end
+      rects['<screen>'] = nil
+      local ret = {}
+      for k, v in pairs(rects) do
+        ret[k:GetDebugName()] = v
+      end
+      return ret
+    end)()))
     os.exit(0)
   end
   local clickBlacklist = {
