@@ -94,22 +94,32 @@ local function run(cfg)
           local pts = {
             bottom = points.BOTTOMLEFT or points.BOTTOM or points.BOTTOMRIGHT,
             left = points.TOPLEFT or points.LEFT or points.BOTTOMLEFT,
+            midx = points.TOP or points.BOTTOM,
+            midy = points.LEFT or points.RIGHT,
             right = points.TOPRIGHT or points.RIGHT or points.BOTTOMRIGHT,
             top = points.TOPLEFT or points.TOP or points.TOPRIGHT,
           }
           local w, h = r:GetSize()
           rects[r] = {
-            bottom = pts.bottom and pts.bottom.y or pts.top and pts.top.y and pts.top.y - h,
-            left = pts.left and pts.left.x or pts.right and pts.right.x and pts.right.x - w,
-            right = pts.right and pts.right.x or pts.left and pts.left.x and pts.left.x + w,
-            top = pts.top and pts.top.y or pts.bottom and pts.bottom.y and pts.bottom.y + h,
+            bottom = pts.bottom and pts.bottom.y
+              or pts.top and pts.top.y and pts.top.y - h
+              or pts.midy and pts.midy.y and pts.midy.y - h / 2,
+            left = pts.left and pts.left.x
+              or pts.right and pts.right.x and pts.right.x - w
+              or pts.midx and pts.midx.x and pts.midx.x - w / 2,
+            right = pts.right and pts.right.x
+              or pts.left and pts.left.x and pts.left.x + w
+              or pts.midx and pts.midx.x and pts.midx.x + w / 2,
+            top = pts.top and pts.top.y
+              or pts.bottom and pts.bottom.y and pts.bottom.y + h
+              or pts.midy and pts.midy.y and pts.midy.y + h / 2,
           }
         end
       end
       rects['<screen>'] = nil
       local ret = {}
       for k, v in pairs(rects) do
-        if next(v) then
+        if next(v) and k:IsVisible() then
           ret[k:GetDebugName()] = v
         end
       end
