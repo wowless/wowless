@@ -52,54 +52,64 @@ local function run(cfg)
           top = 768,
         },
       }
+      local function p2c(r, i)
+        local p, rt, rp, px, py = r:GetPoint(i)
+        local pr = assert(rects[rt == nil and '<screen>' or rt], 'moo ' .. r:GetDebugName()) -- relies on tsort
+        local x = (function()
+          if rp == 'TOPLEFT' or rp == 'LEFT' or rp == 'BOTTOMLEFT' then
+            return pr.left
+          elseif rp == 'TOPRIGHT' or rp == 'RIGHT' or rp == 'BOTTOMRIGHT' then
+            return pr.right
+          else
+            return pr.left and pr.right and (pr.left + pr.right) / 2 or nil
+          end
+        end)()
+        local y = (function()
+          if rp == 'TOPLEFT' or rp == 'TOP' or rp == 'TOPRIGHT' then
+            return pr.top
+          elseif rp == 'BOTTOMLEFT' or rp == 'BOTTOM' or rp == 'BOTTOMRIGHT' then
+            return pr.bottom
+          else
+            return pr.top and pr.bottom and (pr.top + pr.bottom) / 2 or nil
+          end
+        end)()
+        return p, x and x + px, y and y + py
+      end
       for _, r in ipairs(assert(tt:sort())) do
         local points = {}
-        for i = 1, r:GetNumPoints() do
-          local p, rt, rp, px, py = r:GetPoint(i)
-          if rt ~= r then
-            local pr = assert(rects[rt == nil and '<screen>' or rt], 'moo ' .. r:GetDebugName()) -- relies on tsort
-            local x = (function()
-              if rp == 'TOPLEFT' or rp == 'LEFT' or rp == 'BOTTOMLEFT' then
-                return pr.left
-              elseif rp == 'TOPRIGHT' or rp == 'RIGHT' or rp == 'BOTTOMRIGHT' then
-                return pr.right
-              else
-                return pr.left and pr.right and (pr.left + pr.right) / 2 or nil
-              end
-            end)()
-            local y = (function()
-              if rp == 'TOPLEFT' or rp == 'TOP' or rp == 'TOPRIGHT' then
-                return pr.top
-              elseif rp == 'BOTTOMLEFT' or rp == 'BOTTOM' or rp == 'BOTTOMRIGHT' then
-                return pr.bottom
-              else
-                return pr.top and pr.bottom and (pr.top + pr.bottom) / 2 or nil
-              end
-            end)()
-            points[p] = {
-              x = x and x + px,
-              y = y and y + py,
-            }
+        if r:GetNumPoints() == 1 and r:GetPoint(1) == 'CENTER' then
+          local _, x, y = p2c(r, 1)
+          local w, h = r:GetSize()
+          rects[r] = {
+            bottom = y and y - (h / 2),
+            left = x and x - (w / 2),
+            right = x and x + (w / 2),
+            top = y and y + (h / 2),
+          }
+        else
+          for i = 1, r:GetNumPoints() do
+            local p, x, y = p2c(r, i)
+            points[p] = { x = x, y = y }
           end
+          rects[r] = {
+            bottom = (function()
+              local pt = points.BOTTOMLEFT or points.BOTTOM or points.BOTTOMRIGHT
+              return pt and pt.y
+            end)(),
+            left = (function()
+              local pt = points.TOPLEFT or points.LEFT or points.BOTTOMLEFT
+              return pt and pt.x
+            end)(),
+            right = (function()
+              local pt = points.TOPRIGHT or points.RIGHT or points.BOTTOMRIGHT
+              return pt and pt.x
+            end)(),
+            top = (function()
+              local pt = points.TOPLEFT or points.TOP or points.TOPRIGHT
+              return pt and pt.y
+            end)(),
+          }
         end
-        rects[r] = {
-          bottom = (function()
-            local pt = points.BOTTOMLEFT or points.BOTTOM or points.BOTTOMRIGHT
-            return pt and pt.y
-          end)(),
-          left = (function()
-            local pt = points.TOPLEFT or points.LEFT or points.BOTTOMLEFT
-            return pt and pt.x
-          end)(),
-          right = (function()
-            local pt = points.TOPRIGHT or points.RIGHT or points.BOTTOMRIGHT
-            return pt and pt.x
-          end)(),
-          top = (function()
-            local pt = points.TOPLEFT or points.TOP or points.TOPRIGHT
-            return pt and pt.y
-          end)(),
-        }
       end
       rects['<screen>'] = nil
       local ret = {}
