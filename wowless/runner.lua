@@ -91,30 +91,27 @@ local function run(cfg)
             local p, x, y = p2c(r, i)
             points[p] = { x = x, y = y }
           end
+          local pts = {
+            bottom = points.BOTTOMLEFT or points.BOTTOM or points.BOTTOMRIGHT,
+            left = points.TOPLEFT or points.LEFT or points.BOTTOMLEFT,
+            right = points.TOPRIGHT or points.RIGHT or points.BOTTOMRIGHT,
+            top = points.TOPLEFT or points.TOP or points.TOPRIGHT,
+          }
+          local w, h = r:GetSize()
           rects[r] = {
-            bottom = (function()
-              local pt = points.BOTTOMLEFT or points.BOTTOM or points.BOTTOMRIGHT
-              return pt and pt.y
-            end)(),
-            left = (function()
-              local pt = points.TOPLEFT or points.LEFT or points.BOTTOMLEFT
-              return pt and pt.x
-            end)(),
-            right = (function()
-              local pt = points.TOPRIGHT or points.RIGHT or points.BOTTOMRIGHT
-              return pt and pt.x
-            end)(),
-            top = (function()
-              local pt = points.TOPLEFT or points.TOP or points.TOPRIGHT
-              return pt and pt.y
-            end)(),
+            bottom = pts.bottom and pts.bottom.y or pts.top and pts.top.y and pts.top.y - h,
+            left = pts.left and pts.left.x or pts.right and pts.right.x and pts.right.x - w,
+            right = pts.right and pts.right.x or pts.left and pts.left.x and pts.left.x + w,
+            top = pts.top and pts.top.y or pts.bottom and pts.bottom.y and pts.bottom.y + h,
           }
         end
       end
       rects['<screen>'] = nil
       local ret = {}
       for k, v in pairs(rects) do
-        ret[k:GetDebugName()] = v
+        if next(v) then
+          ret[k:GetDebugName()] = v
+        end
       end
       return ret
     end)()))
