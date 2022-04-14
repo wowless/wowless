@@ -118,9 +118,13 @@ local function run(cfg)
       end
       rects['<screen>'] = nil
       local ret = {}
-      for k, v in pairs(rects) do
-        if next(v) and k:IsVisible() then
-          ret[k:GetDebugName()] = v
+      for r, rect in pairs(rects) do
+        if next(rect) and r:IsVisible() then
+          ret[r:GetDebugName()] = {
+            rect = rect,
+            string = r:IsObjectType('FontString') and r:GetText() or nil,
+            texture = r:IsObjectType('Texture') and r:GetTexture() or nil,
+          }
         end
       end
       return ret
