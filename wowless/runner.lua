@@ -123,7 +123,9 @@ local function run(cfg)
           ret[r:GetDebugName()] = {
             rect = rect,
             string = r:IsObjectType('FontString') and r:GetText() or nil,
-            texture = r:IsObjectType('Texture') and r:GetTexture() or nil,
+            texture = r:IsObjectType('Texture') and r:GetTexture()
+              or r:IsObjectType('Button') and r:GetNormalTexture() and r:GetNormalTexture():GetTexture()
+              or nil,
           }
         end
       end
