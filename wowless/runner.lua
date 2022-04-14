@@ -120,13 +120,18 @@ local function run(cfg)
       local ret = {}
       for r, rect in pairs(rects) do
         if next(rect) and r:IsVisible() then
-          ret[r:GetDebugName()] = {
-            rect = rect,
+          local content = {
             string = r:IsObjectType('FontString') and r:GetText() or nil,
             texture = r:IsObjectType('Texture') and r:GetTexture()
               or r:IsObjectType('Button') and r:GetNormalTexture() and r:GetNormalTexture():GetTexture()
               or nil,
           }
+          if next(content) then
+            ret[r:GetDebugName()] = {
+              content = content,
+              rect = rect,
+            }
+          end
         end
       end
       return ret
