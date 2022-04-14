@@ -208,7 +208,7 @@ local function loader(api, cfg)
             else
               relativeTo = api.UserData(parent).parent
             end
-            local relativePoint = anchor.attr.relativepoint or 'CENTER'
+            local relativePoint = anchor.attr.relativepoint or point
             local offsetX, offsetY = getXY(anchor.kids[#anchor.kids])
             local x = anchor.attr.x or offsetX
             local y = anchor.attr.y or offsetY
