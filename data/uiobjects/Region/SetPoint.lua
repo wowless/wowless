@@ -2,7 +2,7 @@ return (function(self, point, ...)
   -- TODO handle resetting points
   point = point or 'CENTER'
   local relativeTo = u(self).parent
-  local relativePoint = 'CENTER'
+  local relativePoint = point
   local x, y = 0, 0
   local idx = 1
   local maybeRelativeTo = select(idx, ...)
@@ -16,6 +16,8 @@ return (function(self, point, ...)
     idx = idx + 1
   elseif type(maybeRelativeTo) == 'table' then
     relativeTo = maybeRelativeTo
+    idx = idx + 1
+  elseif type(maybeRelativeTo) == 'nil' then
     idx = idx + 1
   end
   local maybeRelativePoint = select(idx, ...)
