@@ -143,7 +143,7 @@ local function run(cfg)
                   path = t:GetTexture(),
                   vertTile = t:GetVertTile(),
                 }
-            end)(),
+            end)() or nil,
           }
           if next(content) then
             ret[r:GetDebugName()] = {
