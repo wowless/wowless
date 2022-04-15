@@ -1,9 +1,9 @@
 local function run(cfg)
   local loglevel = cfg.loglevel or 0
-  local t = os.clock()
+  local time0 = os.clock()
   local function log(level, fmt, ...)
     if level <= loglevel then
-      print(string.format('[%.3f] ' .. fmt, os.clock() - t, ...))
+      print(string.format('[%.3f] ' .. fmt, os.clock() - time0, ...))
     end
   end
   local api = require('wowless.api').new(log)
@@ -122,9 +122,26 @@ local function run(cfg)
         if next(rect) and r:IsVisible() then
           local content = {
             string = r:IsObjectType('FontString') and r:GetText() or nil,
-            texture = r:IsObjectType('Texture') and r:GetTexture()
-              or r:IsObjectType('Button') and r:GetNormalTexture() and r:GetNormalTexture():GetTexture()
-              or nil,
+            texture = (function()
+              local t = r:IsObjectType('Texture') and r or r:IsObjectType('Button') and r:GetNormalTexture()
+              return t
+                and {
+                  coords = (function()
+                    local tlx, tly, blx, bly, trx, try, brx, bry = t:GetTexCoord()
+                    return {
+                      blx = blx,
+                      bly = bly,
+                      brx = brx,
+                      bry = bry,
+                      tlx = tlx,
+                      tly = tly,
+                      trx = trx,
+                      try = try,
+                    }
+                  end)(),
+                  path = t:GetTexture(),
+                }
+            end)(),
           }
           if next(content) then
             ret[r:GetDebugName()] = {
