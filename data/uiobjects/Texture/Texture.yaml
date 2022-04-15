@@ -80,7 +80,7 @@ methods:
   SetSnapToPixelGrid:
     status: unimplemented
   SetTexCoord:
-    status: unimplemented
+    status: implemented
   SetTexelSnappingBias:
     status: unimplemented
   SetTexture:
