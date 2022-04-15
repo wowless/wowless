@@ -153,6 +153,25 @@ local function run(cfg)
       end
     end
     require('pl.file').write('frame0.yaml', require('wowapi.yaml').pprint(ret))
+    local magick = require('luamagick')
+    local function color(c)
+      local pwand = magick.new_pixel_wand()
+      pwand:set_color(c)
+      return pwand
+    end
+    local dwand = magick.new_drawing_wand()
+    dwand:set_fill_opacity(0)
+    dwand:set_stroke_color(color('blue'))
+    for _, v in pairs(ret) do
+      if v.content.texture then
+        local r = v.rect
+        dwand:rectangle(r.left, 768 - r.top, r.right, 768 - r.bottom)
+      end
+    end
+    local mwand = magick.new_magick_wand()
+    assert(mwand:new_image(1024, 768, color('none')))
+    mwand:draw_image(dwand)
+    assert(mwand:write_image('frame0.png'))
     os.exit(0)
   end
   local clickBlacklist = {
