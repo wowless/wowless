@@ -43,12 +43,14 @@ local function run(cfg)
         addPoints(r)
       end
     end
+    local screenWidth = 1024
+    local screenHeight = 768
     local rects = {
       ['<screen>'] = {
         bottom = 0,
         left = 0,
-        right = 1024,
-        top = 768,
+        right = screenWidth,
+        top = screenHeight,
       },
     }
     local function p2c(r, i)
@@ -165,11 +167,11 @@ local function run(cfg)
     for _, v in pairs(ret) do
       if v.content.texture then
         local r = v.rect
-        dwand:rectangle(r.left, 768 - r.top, r.right, 768 - r.bottom)
+        dwand:rectangle(r.left, screenHeight - r.top, r.right, screenHeight - r.bottom)
       end
     end
     local mwand = magick.new_magick_wand()
-    assert(mwand:new_image(1024, 768, color('none')))
+    assert(mwand:new_image(screenWidth, screenHeight, color('none')))
     mwand:draw_image(dwand)
     assert(mwand:write_image('frame0.png'))
     os.exit(0)
