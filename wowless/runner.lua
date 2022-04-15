@@ -139,7 +139,9 @@ local function run(cfg)
                       try = try,
                     }
                   end)(),
+                  horizTile = t:GetHorizTile(),
                   path = t:GetTexture(),
+                  vertTile = t:GetVertTile(),
                 }
             end)(),
           }

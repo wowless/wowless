@@ -13,6 +13,9 @@ fields:
   bry:
     init: 1
     type: number
+  horizTile:
+    init: false
+    type: bool
   texture:
     nilable: true
     type: string
@@ -28,6 +31,9 @@ fields:
   try:
     init: 0
     type: number
+  vertTile:
+    init: false
+    type: bool
 inherits:
 - LayeredRegion
 - ParentedObject
@@ -36,6 +42,10 @@ methods:
     status: unimplemented
   GetAtlas:
     status: unimplemented
+  GetHorizTile:
+    fields:
+    - name: horizTile
+    status: getter
   GetTexCoord:
     fields:
     - name: tlx
@@ -53,6 +63,10 @@ methods:
     status: getter
   GetVertexColor:
     status: unimplemented
+  GetVertTile:
+    fields:
+    - name: vertTile
+    status: getter
   IsDesaturated:
     status: unimplemented
   SetAtlas:
@@ -70,7 +84,9 @@ methods:
   SetGradientAlpha:
     status: unimplemented
   SetHorizTile:
-    status: unimplemented
+    fields:
+    - name: horizTile
+    status: setter
   SetMask:
     status: unimplemented
   SetNonBlocking:
@@ -88,4 +104,6 @@ methods:
     - name: texture
     status: setter
   SetVertTile:
-    status: unimplemented
+    fields:
+    - name: vertTile
+    status: setter
