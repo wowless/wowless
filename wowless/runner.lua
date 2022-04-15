@@ -28,136 +28,131 @@ local function run(cfg)
   api.SendEvent('DISPLAY_SIZE_CHANGED')
   api.SendEvent('SPELLS_CHANGED')
   if cfg.frame0 then
-    require('pl.file').write(
-      'frame0.yaml',
-      require('wowapi.yaml').pprint((function()
-        local tt = require('resty.tsort').new()
-        local function addPoints(r)
-          for i = 1, r:GetNumPoints() do
-            local relativeTo = select(2, r:GetPoint(i))
-            if relativeTo ~= nil and relativeTo ~= r then
-              tt:add(relativeTo, r)
-            end
-          end
+    local tt = require('resty.tsort').new()
+    local function addPoints(r)
+      for i = 1, r:GetNumPoints() do
+        local relativeTo = select(2, r:GetPoint(i))
+        if relativeTo ~= nil and relativeTo ~= r then
+          tt:add(relativeTo, r)
         end
-        for _, frame in ipairs(api.frames) do
-          addPoints(frame)
-          for _, r in ipairs({ frame:GetRegions() }) do
-            addPoints(r)
-          end
+      end
+    end
+    for _, frame in ipairs(api.frames) do
+      addPoints(frame)
+      for _, r in ipairs({ frame:GetRegions() }) do
+        addPoints(r)
+      end
+    end
+    local rects = {
+      ['<screen>'] = {
+        bottom = 0,
+        left = 0,
+        right = 1024,
+        top = 768,
+      },
+    }
+    local function p2c(r, i)
+      local p, rt, rp, px, py = r:GetPoint(i)
+      local pr = assert(rects[rt == nil and '<screen>' or rt], 'moo ' .. r:GetDebugName()) -- relies on tsort
+      local x = (function()
+        if rp == 'TOPLEFT' or rp == 'LEFT' or rp == 'BOTTOMLEFT' then
+          return pr.left
+        elseif rp == 'TOPRIGHT' or rp == 'RIGHT' or rp == 'BOTTOMRIGHT' then
+          return pr.right
+        else
+          return pr.left and pr.right and (pr.left + pr.right) / 2 or nil
         end
-        local rects = {
-          ['<screen>'] = {
-            bottom = 0,
-            left = 0,
-            right = 1024,
-            top = 768,
-          },
+      end)()
+      local y = (function()
+        if rp == 'TOPLEFT' or rp == 'TOP' or rp == 'TOPRIGHT' then
+          return pr.top
+        elseif rp == 'BOTTOMLEFT' or rp == 'BOTTOM' or rp == 'BOTTOMRIGHT' then
+          return pr.bottom
+        else
+          return pr.top and pr.bottom and (pr.top + pr.bottom) / 2 or nil
+        end
+      end)()
+      return p, x and x + px, y and y + py
+    end
+    for _, r in ipairs(assert(tt:sort())) do
+      local points = {}
+      if r:GetNumPoints() == 1 and r:GetPoint(1) == 'CENTER' then
+        local _, x, y = p2c(r, 1)
+        local w, h = r:GetSize()
+        rects[r] = {
+          bottom = y and y - (h / 2),
+          left = x and x - (w / 2),
+          right = x and x + (w / 2),
+          top = y and y + (h / 2),
         }
-        local function p2c(r, i)
-          local p, rt, rp, px, py = r:GetPoint(i)
-          local pr = assert(rects[rt == nil and '<screen>' or rt], 'moo ' .. r:GetDebugName()) -- relies on tsort
-          local x = (function()
-            if rp == 'TOPLEFT' or rp == 'LEFT' or rp == 'BOTTOMLEFT' then
-              return pr.left
-            elseif rp == 'TOPRIGHT' or rp == 'RIGHT' or rp == 'BOTTOMRIGHT' then
-              return pr.right
-            else
-              return pr.left and pr.right and (pr.left + pr.right) / 2 or nil
-            end
-          end)()
-          local y = (function()
-            if rp == 'TOPLEFT' or rp == 'TOP' or rp == 'TOPRIGHT' then
-              return pr.top
-            elseif rp == 'BOTTOMLEFT' or rp == 'BOTTOM' or rp == 'BOTTOMRIGHT' then
-              return pr.bottom
-            else
-              return pr.top and pr.bottom and (pr.top + pr.bottom) / 2 or nil
-            end
-          end)()
-          return p, x and x + px, y and y + py
+      else
+        for i = 1, r:GetNumPoints() do
+          local p, x, y = p2c(r, i)
+          points[p] = { x = x, y = y }
         end
-        for _, r in ipairs(assert(tt:sort())) do
-          local points = {}
-          if r:GetNumPoints() == 1 and r:GetPoint(1) == 'CENTER' then
-            local _, x, y = p2c(r, 1)
-            local w, h = r:GetSize()
-            rects[r] = {
-              bottom = y and y - (h / 2),
-              left = x and x - (w / 2),
-              right = x and x + (w / 2),
-              top = y and y + (h / 2),
-            }
-          else
-            for i = 1, r:GetNumPoints() do
-              local p, x, y = p2c(r, i)
-              points[p] = { x = x, y = y }
-            end
-            local pts = {
-              bottom = points.BOTTOMLEFT or points.BOTTOM or points.BOTTOMRIGHT,
-              left = points.TOPLEFT or points.LEFT or points.BOTTOMLEFT,
-              midx = points.TOP or points.BOTTOM,
-              midy = points.LEFT or points.RIGHT,
-              right = points.TOPRIGHT or points.RIGHT or points.BOTTOMRIGHT,
-              top = points.TOPLEFT or points.TOP or points.TOPRIGHT,
-            }
-            local w, h = r:GetSize()
-            rects[r] = {
-              bottom = pts.bottom and pts.bottom.y
-                or pts.top and pts.top.y and pts.top.y - h
-                or pts.midy and pts.midy.y and pts.midy.y - h / 2,
-              left = pts.left and pts.left.x
-                or pts.right and pts.right.x and pts.right.x - w
-                or pts.midx and pts.midx.x and pts.midx.x - w / 2,
-              right = pts.right and pts.right.x
-                or pts.left and pts.left.x and pts.left.x + w
-                or pts.midx and pts.midx.x and pts.midx.x + w / 2,
-              top = pts.top and pts.top.y
-                or pts.bottom and pts.bottom.y and pts.bottom.y + h
-                or pts.midy and pts.midy.y and pts.midy.y + h / 2,
-            }
-          end
-        end
-        rects['<screen>'] = nil
-        local ret = {}
-        for r, rect in pairs(rects) do
-          if next(rect) and r:IsVisible() then
-            local content = {
-              string = r:IsObjectType('FontString') and r:GetText() or nil,
-              texture = (function()
-                local t = r:IsObjectType('Texture') and r or r:IsObjectType('Button') and r:GetNormalTexture()
-                return t
-                  and {
-                    coords = (function()
-                      local tlx, tly, blx, bly, trx, try, brx, bry = t:GetTexCoord()
-                      return {
-                        blx = blx,
-                        bly = bly,
-                        brx = brx,
-                        bry = bry,
-                        tlx = tlx,
-                        tly = tly,
-                        trx = trx,
-                        try = try,
-                      }
-                    end)(),
-                    horizTile = t:GetHorizTile(),
-                    path = t:GetTexture(),
-                    vertTile = t:GetVertTile(),
+        local pts = {
+          bottom = points.BOTTOMLEFT or points.BOTTOM or points.BOTTOMRIGHT,
+          left = points.TOPLEFT or points.LEFT or points.BOTTOMLEFT,
+          midx = points.TOP or points.BOTTOM,
+          midy = points.LEFT or points.RIGHT,
+          right = points.TOPRIGHT or points.RIGHT or points.BOTTOMRIGHT,
+          top = points.TOPLEFT or points.TOP or points.TOPRIGHT,
+        }
+        local w, h = r:GetSize()
+        rects[r] = {
+          bottom = pts.bottom and pts.bottom.y
+            or pts.top and pts.top.y and pts.top.y - h
+            or pts.midy and pts.midy.y and pts.midy.y - h / 2,
+          left = pts.left and pts.left.x
+            or pts.right and pts.right.x and pts.right.x - w
+            or pts.midx and pts.midx.x and pts.midx.x - w / 2,
+          right = pts.right and pts.right.x
+            or pts.left and pts.left.x and pts.left.x + w
+            or pts.midx and pts.midx.x and pts.midx.x + w / 2,
+          top = pts.top and pts.top.y
+            or pts.bottom and pts.bottom.y and pts.bottom.y + h
+            or pts.midy and pts.midy.y and pts.midy.y + h / 2,
+        }
+      end
+    end
+    rects['<screen>'] = nil
+    local ret = {}
+    for r, rect in pairs(rects) do
+      if next(rect) and r:IsVisible() then
+        local content = {
+          string = r:IsObjectType('FontString') and r:GetText() or nil,
+          texture = (function()
+            local t = r:IsObjectType('Texture') and r or r:IsObjectType('Button') and r:GetNormalTexture()
+            return t
+              and {
+                coords = (function()
+                  local tlx, tly, blx, bly, trx, try, brx, bry = t:GetTexCoord()
+                  return {
+                    blx = blx,
+                    bly = bly,
+                    brx = brx,
+                    bry = bry,
+                    tlx = tlx,
+                    tly = tly,
+                    trx = trx,
+                    try = try,
                   }
-              end)() or nil,
-            }
-            if next(content) then
-              ret[r:GetDebugName()] = {
-                content = content,
-                rect = rect,
+                end)(),
+                horizTile = t:GetHorizTile(),
+                path = t:GetTexture(),
+                vertTile = t:GetVertTile(),
               }
-            end
-          end
+          end)() or nil,
+        }
+        if next(content) then
+          ret[r:GetDebugName()] = {
+            content = content,
+            rect = rect,
+          }
         end
-        return ret
-      end)())
-    )
+      end
+    end
+    require('pl.file').write('frame0.yaml', require('wowapi.yaml').pprint(ret))
     os.exit(0)
   end
   local clickBlacklist = {
