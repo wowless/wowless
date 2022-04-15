@@ -70,7 +70,7 @@ methods:
   IsDesaturated:
     status: unimplemented
   SetAtlas:
-    status: unimplemented
+    status: implemented
   SetBlendMode:
     status: unimplemented
   SetColorTexture:
