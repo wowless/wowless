@@ -1,9 +1,33 @@
 ---
 name: Texture
 fields:
+  blx:
+    init: 0
+    type: number
+  bly:
+    init: 1
+    type: number
+  brx:
+    init: 1
+    type: number
+  bry:
+    init: 1
+    type: number
   texture:
     nilable: true
     type: string
+  tlx:
+    init: 0
+    type: number
+  tly:
+    init: 0
+    type: number
+  trx:
+    init: 1
+    type: number
+  try:
+    init: 0
+    type: number
 inherits:
 - LayeredRegion
 - ParentedObject
@@ -13,16 +37,16 @@ methods:
   GetAtlas:
     status: unimplemented
   GetTexCoord:
-    outputs:
-    - type: number
-    - type: number
-    - type: number
-    - type: number
-    - type: number
-    - type: number
-    - type: number
-    - type: number
-    status: unimplemented
+    fields:
+    - name: tlx
+    - name: tly
+    - name: blx
+    - name: bly
+    - name: trx
+    - name: try
+    - name: brx
+    - name: bry
+    status: getter
   GetTexture:
     fields:
     - name: texture
