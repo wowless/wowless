@@ -1,5 +1,6 @@
 cache
 extracts
+frame0.yaml
 luacov.*
 out/
 wowless/*.o
