@@ -124,7 +124,10 @@ local function run(cfg)
         local content = {
           string = r:IsObjectType('FontString') and r:GetText() or nil,
           texture = (function()
-            local t = r:IsObjectType('Texture') and r or r:IsObjectType('Button') and r:GetNormalTexture()
+            local t = r:IsObjectType('Texture') and r
+              or r:IsObjectType('Button') and r:GetNormalTexture()
+              or r:IsObjectType('StatusBar') and r:GetStatusBarTexture()
+              or nil
             return t
               and {
                 coords = (function()
@@ -144,7 +147,7 @@ local function run(cfg)
                 path = t:GetTexture(),
                 vertTile = t:GetVertTile(),
               }
-          end)() or nil,
+          end)(),
         }
         if next(content) then
           ret[r:GetDebugName()] = {
