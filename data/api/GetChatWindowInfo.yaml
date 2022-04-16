@@ -1,8 +1,9 @@
 ---
 name: GetChatWindowInfo
-status: unimplemented
+status: implemented
 inputs:
-- - type: number
+- - name: id
+    type: number
 outputs:
 - name: name
   type: string
@@ -17,9 +18,8 @@ outputs:
 - name: alpha
   type: number
 - name: shown
-  type: number
+  type: oneornil
 - name: locked
-  type: number
+  type: oneornil
 - name: docked
-  nilable: true
-  type: number
+  type: oneornil
