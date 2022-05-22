@@ -1,0 +1,12 @@
+---
+name: GetQuestLogIndexByID
+status: unimplemented
+flavors:
+- TBC
+- Vanilla
+inputs:
+- - name: questID
+    type: number
+outputs:
+- name: questLogIndex
+  type: number
