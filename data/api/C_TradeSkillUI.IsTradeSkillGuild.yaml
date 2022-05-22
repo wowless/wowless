@@ -1,0 +1,8 @@
+---
+name: C_TradeSkillUI.IsTradeSkillGuild
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: value
+  type: bool

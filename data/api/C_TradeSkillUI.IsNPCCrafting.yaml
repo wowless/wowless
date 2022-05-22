@@ -1,0 +1,8 @@
+---
+name: C_TradeSkillUI.IsNPCCrafting
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: isNPCCrafting
+  type: bool
