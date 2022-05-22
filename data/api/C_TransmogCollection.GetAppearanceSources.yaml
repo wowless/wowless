@@ -5,8 +5,10 @@ inputs:
 - - name: appearanceID
     type: number
   - name: categoryType
-    nilable: true
     type: number
+  - mixin: TransmogLocationMixin
+    name: transmogLocation
+    type: table
 outputs:
 - innerType: unknown
   name: sources
