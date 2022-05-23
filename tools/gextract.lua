@@ -35,7 +35,21 @@ end
 
 do
   local scrape = require('tools.scrapelib')(arg[1])
+
   print(string.format('function GetBuildInfo()\n  return %q, %q, %q, %d\nend', unpack(scrape.BuildInfo)))
+
+  print('C_CVar = C_CVar or {}')
+  print('C_CVar.GetCVarDefault = (function()')
+  print('  local t = {')
+  for k, v in require('pl.tablex').sort(scrape.CVarDefaults) do
+    print(string.format('    %s = %q,', k, v))
+  end
+  print('  }')
+  print('  return function(k)')
+  print('    return t[k]')
+  print('  end')
+  print('end)()')
+
   local data = scrape.Data
 
   local result = {}
