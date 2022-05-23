@@ -280,6 +280,7 @@ local function run(cfg)
       PLAYER_LOGIN = true,
       PLAYER_LOGOUT = true,
       UPDATE_MASTER_LOOT_LIST = true,
+      VARIABLES_LOADED = true,
     }
     local keys = {}
     for k, v in pairs(require('wowapi.data').events) do
