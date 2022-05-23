@@ -254,7 +254,6 @@ local function run(cfg)
   do
     local cmdBlacklist = { -- TODO remove this; these require a better SecureCmdOptionParse
       BENCHMARK = true,
-      CALENDAR = true, -- calendar math requires better stubs
       CASTRANDOM = true,
       PTRFEEDBACK = true, -- this just seems broken with an empty string
       USERANDOM = true,
