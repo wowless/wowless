@@ -1,0 +1,7 @@
+---
+name: GetQuestPOIs
+status: unimplemented
+inputs:
+- - name: poiTable
+    type: table
+outputs: {}

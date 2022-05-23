@@ -1,0 +1,23 @@
+---
+name: GetChannelDisplayInfo
+status: unimplemented
+inputs:
+- - name: id
+    type: string
+outputs:
+- name: name
+  type: string
+- name: header
+  type: bool
+- name: collapsed
+  type: bool
+- name: channelNumber
+  type: number
+- name: count
+  type: number
+- name: active
+  type: bool
+- name: category
+  type: string
+- name: channelType
+  type: string
