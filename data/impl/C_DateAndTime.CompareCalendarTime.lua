@@ -1,7 +1,5 @@
-local function toDate(k)
-  return require('date')(k.year, k.month, k.monthDay, k.hour, k.minute)
-end
 local a, b = ...
+local toDate = require('wowless.util').calendarTimeToDate
 local da, db = toDate(a), toDate(b)
 if da < db then
   return -1

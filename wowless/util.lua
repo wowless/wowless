@@ -97,7 +97,26 @@ local function twipe(t)
   return t
 end
 
+local date = require('date')
+
+local function calendarTimeToDate(ct)
+  return date(ct.year, ct.month, ct.monthDay, ct.hour, ct.minute)
+end
+
+local function dateToCalendarTime(d)
+  return {
+    hour = d:gethours(),
+    minute = d:getminutes(),
+    month = d:getmonth(),
+    monthDay = d:getday(),
+    weekday = d:getweekday(),
+    year = d:getyear(),
+  }
+end
+
 return {
+  calendarTimeToDate = calendarTimeToDate,
+  dateToCalendarTime = dateToCalendarTime,
   mixin = mixin,
   readfile = readfile,
   recursiveMixin = recursiveMixin,
