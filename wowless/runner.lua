@@ -273,7 +273,6 @@ local function run(cfg)
   if cfg.allevents or cfg.version ~= 'Mainline' then
     local eventBlacklist = {
       BARBER_SHOP_OPEN = true, -- issue #111
-      CALENDAR_UPDATE_EVENT_LIST = true, -- calendar math requires better stubs
       INSTANCE_LOCK_START = true,
       INSTANCE_LOCK_WARNING = true,
       MAIL_INBOX_UPDATE = true, -- InboxFrame.openMailID not set when it should be
