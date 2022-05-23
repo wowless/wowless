@@ -10,6 +10,7 @@ dependencies = {
   'bitlib',
   'busted',
   'cluacov',
+  'date',
   'json-lua',
   'libdeflate',
   'luacheck',
