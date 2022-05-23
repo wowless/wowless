@@ -1,0 +1,3 @@
+local calendar, month, year = ...
+calendar.currentMonth = month
+calendar.currentYear = year
