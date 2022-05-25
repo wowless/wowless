@@ -57,9 +57,9 @@ local function loader(api, cfg)
       })
       local mkreq = require('http.headers').new
       local skip = cfg.rootDir:len() + 2
-      local prefix = '/product/' .. cfg.rootDir:sub(10) .. '/name/'
+      local prefix = '/product/' .. cfg.rootDir:sub(10)
       local function fetch(stream, f)
-        local fpath = prefix .. f:sub(skip)
+        local fpath = prefix .. (type(f) == 'number' and '/fdid/' .. f or '/name/' .. f:sub(skip))
         api.log(2, 'fetching cascproxy %s', fpath)
         local req = mkreq()
         req:append(':authority', cfg.cascproxy)
@@ -723,11 +723,10 @@ local function loader(api, cfg)
 
   local function db2rows(name)
     local dbd = require('luadbd').dbds[name]
-    local db2 = path.join(rootDir, 'db2', name .. '.db2')
     local v, b = api.env.GetBuildInfo()
     local bversion = v .. '.' .. b
     local build = assert(dbd:build(bversion), ('cannot load %s in %s'):format(name, bversion))
-    return build:rows(require('pl.file').read(db2))
+    return build:rows(readFile(cfg.cascproxy and dbd.fdid or path.join(rootDir, 'db2', name .. '.db2')))
   end
 
   local function loadFrameXml()
