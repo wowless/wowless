@@ -11,6 +11,7 @@ dependencies = {
   'busted',
   'cluacov',
   'date',
+  'http',
   'json-lua',
   'libdeflate',
   'luacheck',

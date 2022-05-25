@@ -49,21 +49,43 @@ local function loader(api, cfg)
   local intrinsics = {}
   local readFile = (function()
     if cfg and cfg.cascproxy and cfg.rootDir then
-      local fetch = require('ssl.https').request
+      local host, port = require('http.util').split_authority(cfg.cascproxy)
+      local conn = require('http.client').connect({
+        host = host,
+        port = port,
+        tls = false,
+      })
+      local mkreq = require('http.headers').new
       local skip = cfg.rootDir:len() + 2
-      local prefix = cfg.cascproxy .. '/product/' .. cfg.rootDir:sub(10) .. '/name/'
-      return function(f)
-        local url = prefix .. f:sub(skip)
-        api.log(2, 'fetching cascproxy %s', url)
-        local data = fetch(url)
-        if data == '' then
-          -- Fall back to local filesystem.
-          return util.readfile(f)
+      local prefix = '/product/' .. cfg.rootDir:sub(10) .. '/name/'
+      local function fetch(stream, f)
+        local fpath = prefix .. f:sub(skip)
+        api.log(2, 'fetching cascproxy %s', fpath)
+        local req = mkreq()
+        req:append(':authority', cfg.cascproxy)
+        req:append(':method', 'GET')
+        req:append(':path', fpath)
+        assert(stream:write_headers(req, true))
+        local res = assert(stream:get_headers())
+        if res:get(':status') == '200' then
+          local data = stream:get_body_as_string()
+          if data and data:sub(1, 3) == '\239\187\191' then
+            data = data:sub(4)
+          end
+          return data
         end
-        if data:sub(1, 3) == '\239\187\191' then
-          data = data:sub(4)
-        end
+      end
+      local function stream(f)
+        local s = assert(conn:new_stream())
+        local data = fetch(s, f)
+        s:shutdown()
         return data
+      end
+      return function(f)
+        local success, data = pcall(function()
+          return stream(f)
+        end)
+        return success and data or util.readfile(f)
       end
     else
       return util.readfile
