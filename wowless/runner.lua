@@ -8,6 +8,7 @@ local function run(cfg)
   end
   local api = require('wowless.api').new(log)
   local loader = require('wowless.loader').loader(api, {
+    cascproxy = cfg.cascproxy,
     otherAddonDirs = cfg.otherAddonDirs,
     rootDir = cfg.dir,
     version = cfg.version,

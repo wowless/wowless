@@ -45,8 +45,30 @@ local function loader(api, cfg)
   local path = require('path')
   local parseXml = require('wowless.xml').newParser()
   local util = require('wowless.util')
-  local readFile, mixin = util.readfile, util.mixin
+  local mixin = util.mixin
   local intrinsics = {}
+  local readFile = (function()
+    if cfg and cfg.cascproxy and cfg.rootDir then
+      local fetch = require('ssl.https').request
+      local skip = cfg.rootDir:len() + 2
+      local prefix = cfg.cascproxy .. '/product/' .. cfg.rootDir:sub(10) .. '/name/'
+      return function(f)
+        local url = prefix .. f:sub(skip)
+        api.log(2, 'fetching cascproxy %s', url)
+        local data = fetch(url)
+        if data == '' then
+          -- Fall back to local filesystem.
+          return util.readfile(f)
+        end
+        if data:sub(1, 3) == '\239\187\191' then
+          data = data:sub(4)
+        end
+        return data
+      end
+    else
+      return util.readfile
+    end
+  end)()
 
   local function parseTypedValue(type, value)
     type = type and string.lower(type) or nil

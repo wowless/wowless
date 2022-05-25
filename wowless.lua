@@ -18,12 +18,14 @@ local args = (function()
   parser:option('-p --product', 'product tag'):count(1):choices(products)
   parser:option('-l --loglevel', 'log level', '0'):convert(tonumber)
   parser:option('-a --addondir', 'addon directory to test'):count('*')
+  parser:option('-c --cascproxy', 'url prefix to cascproxy')
   parser:flag('--allevents', 'send all nullary events')
   parser:flag('--frame0', 'write frame0 debug')
   return parser:parse()
 end)()
 local api = require('wowless.runner').run({
   allevents = args.allevents,
+  cascproxy = args.cascproxy,
   dir = 'extracts/' .. args.product,
   frame0 = args.frame0,
   loglevel = args.loglevel,
