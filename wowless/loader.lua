@@ -358,10 +358,19 @@ local function loader(api, cfg)
             local rect = e.kids[#e.kids]
             if rect then
               local x = rect.attr
-              parent:SetTexCoord(x.ulx, x.uly, x.llx, x.lly, x.urx, x.ury, x.lrx, x.lry)
+              parent:SetTexCoord(
+                x.ulx or 0,
+                x.uly or 0,
+                x.llx or 0,
+                x.lly or 1,
+                x.urx or 1,
+                x.ury or 0,
+                x.lrx or 1,
+                x.lry or 1
+              )
             else
               local x = e.attr
-              parent:SetTexCoord(x.left, x.right, x.top, x.bottom)
+              parent:SetTexCoord(x.left or 0, x.right or 1, x.top or 0, x.bottom or 1)
             end
           end,
           textinsets = function(e, parent)
