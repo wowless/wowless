@@ -3,6 +3,9 @@
         "context": "..",
         "dockerfile": "Dockerfile"
     },
+    "extensions": [
+        "sumneko.lua"
+    ],
     "features": {
         "docker-from-docker": {}
     },

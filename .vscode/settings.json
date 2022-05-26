@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "${workspaceFolder}/tainted-lua"
+    "cmake.sourceDirectory": "${workspaceFolder}/tainted-lua",
+    "Lua.diagnostics.enable": true,
+    "Lua.runtime.version": "Lua 5.1",
+    "Lua.workspace.ignoreDir": [ "data", "spec" ]
 }

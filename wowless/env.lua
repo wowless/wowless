@@ -4,6 +4,12 @@ local utf8 = require('lua-utf8')
 local util = require('wowless.util')
 local Mixin = util.mixin
 
+local taintedlua = {
+  issecure = issecure, ---@diagnostic disable-line: undefined-global
+  issecurevariable = issecurevariable, ---@diagnostic disable-line: undefined-global
+  scrub = scrub, ---@diagnostic disable-line: undefined-global
+}
+
 local function mkBaseEnv()
   return {
     abs = math.abs,
@@ -34,12 +40,12 @@ local function mkBaseEnv()
     forceinsecure = function() end, -- TODO use real forceinsecure
     format = ext.format,
     getmetatable = getmetatable,
-    getn = table.getn,
+    getn = table.getn, ---@diagnostic disable-line: deprecated
     gmatch = string.gmatch,
     gsub = string.gsub,
     ipairs = ipairs,
-    issecure = issecure,
-    issecurevariable = issecurevariable,
+    issecure = taintedlua.issecure,
+    issecurevariable = taintedlua.issecurevariable,
     math = {
       abs = math.abs,
       ceil = math.ceil,
@@ -71,7 +77,7 @@ local function mkBaseEnv()
     random = math.random,
     rawget = rawget,
     rawset = rawset,
-    scrub = scrub,
+    scrub = taintedlua.scrub,
     select = select,
     setfenv = setfenv,
     setmetatable = setmetatable,
@@ -114,7 +120,7 @@ local function mkBaseEnv()
           fn(i, v)
         end
       end,
-      getn = table.getn,
+      getn = table.getn, ---@diagnostic disable-line: deprecated
       insert = table.insert,
       remove = table.remove,
       sort = table.sort,
