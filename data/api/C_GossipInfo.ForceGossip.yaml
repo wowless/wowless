@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: forceGossip
-  type: bool
+  type: boolean

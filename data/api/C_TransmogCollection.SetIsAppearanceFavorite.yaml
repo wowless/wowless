@@ -5,5 +5,5 @@ inputs:
 - - name: itemAppearanceID
     type: number
   - name: isFavorite
-    type: bool
+    type: boolean
 outputs: {}

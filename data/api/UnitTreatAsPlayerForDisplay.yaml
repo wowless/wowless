@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: treatAsPlayer
-  type: bool
+  type: boolean

@@ -44,7 +44,7 @@ type:
                 required: true
                 type:
                   oneof:
-                  - literal: bool
+                  - literal: boolean
                   - literal: number
                   - literal: string
                   - literal: table
@@ -64,7 +64,7 @@ type:
             innerType:
               type:
                 oneof:
-                - literal: bool
+                - literal: boolean
                 - literal: number
                 - literal: string
                 - literal: table
@@ -83,7 +83,7 @@ type:
               required: true
               type:
                 oneof:
-                - literal: bool
+                - literal: boolean
                 - literal: nil
                 - literal: number
                 - literal: oneornil

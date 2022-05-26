@@ -17,7 +17,7 @@ fields:
   type: number
 - name: hideDefaultAtlas
   nilable: true
-  type: bool
+  type: boolean
 - name: hideSoundKitID
   nilable: true
   type: number

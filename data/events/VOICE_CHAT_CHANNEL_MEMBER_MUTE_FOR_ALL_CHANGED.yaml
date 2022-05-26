@@ -7,4 +7,4 @@ payload:
 - name: channelID
   type: number
 - name: isMutedForAll
-  type: bool
+  type: boolean

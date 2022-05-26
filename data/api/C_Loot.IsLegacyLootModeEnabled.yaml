@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isLegacyLootModeEnabled
-  type: bool
+  type: boolean

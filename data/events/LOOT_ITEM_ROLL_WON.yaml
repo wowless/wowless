@@ -11,4 +11,4 @@ payload:
 - name: roll
   type: number
 - name: upgraded
-  type: bool
+  type: boolean

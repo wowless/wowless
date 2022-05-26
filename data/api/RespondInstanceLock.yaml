@@ -3,5 +3,5 @@ name: RespondInstanceLock
 status: unimplemented
 inputs:
 - - name: response
-    type: bool
+    type: boolean
 outputs: {}

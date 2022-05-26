@@ -10,4 +10,4 @@ outputs:
 - name: teamIndex
   type: number
 - name: isPet
-  type: bool
+  type: boolean

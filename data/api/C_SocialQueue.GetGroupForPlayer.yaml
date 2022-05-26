@@ -8,4 +8,4 @@ outputs:
 - name: groupGUID
   type: string
 - name: isSoloQueueParty
-  type: bool
+  type: boolean

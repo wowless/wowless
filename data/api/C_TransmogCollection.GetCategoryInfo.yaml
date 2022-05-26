@@ -9,13 +9,13 @@ outputs:
   type: string
 - default: false
   name: isWeapon
-  type: bool
+  type: boolean
 - default: false
   name: canHaveIllusions
-  type: bool
+  type: boolean
 - default: false
   name: canMainHand
-  type: bool
+  type: boolean
 - default: false
   name: canOffHand
-  type: bool
+  type: boolean

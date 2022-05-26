@@ -5,4 +5,4 @@ payload:
 - name: equipmentSlot
   type: number
 - name: hasCurrent
-  type: bool
+  type: boolean

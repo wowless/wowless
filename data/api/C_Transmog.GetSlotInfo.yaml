@@ -7,19 +7,19 @@ inputs:
     type: table
 outputs:
 - name: isTransmogrified
-  type: bool
+  type: boolean
 - name: hasPending
-  type: bool
+  type: boolean
 - name: isPendingCollected
-  type: bool
+  type: boolean
 - name: canTransmogrify
-  type: bool
+  type: boolean
 - name: cannotTransmogrifyReason
   type: number
 - name: hasUndo
-  type: bool
+  type: boolean
 - name: isHideVisual
-  type: bool
+  type: boolean
 - name: texture
   nilable: true
   type: number

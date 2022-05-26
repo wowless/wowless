@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: canUseAutoAccept
-  type: bool
+  type: boolean

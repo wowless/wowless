@@ -5,21 +5,21 @@ fields:
 - name: atlasName
   type: string
 - name: hasTooltip
-  type: bool
+  type: boolean
 - name: inFogOfWar
-  type: bool
+  type: boolean
 - name: isDead
-  type: bool
+  type: boolean
 - name: isUnique
-  type: bool
+  type: boolean
 - name: name
   type: string
 - name: objectGUID
   type: string
 - name: onMinimap
-  type: bool
+  type: boolean
 - name: onWorldMap
-  type: bool
+  type: boolean
 - name: rewardQuestID
   type: number
 - name: type
@@ -32,4 +32,4 @@ fields:
   nilable: true
   type: number
 - name: zoneInfiniteAOI
-  type: bool
+  type: boolean

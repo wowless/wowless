@@ -11,7 +11,7 @@ fields:
 - name: displayOrderID
   type: number
 - name: isNew
-  type: bool
+  type: boolean
 - name: numMembers
   type: number
 - name: pendingApplicationStatus

@@ -26,7 +26,7 @@ type:
               required: true
               type:
                 oneof:
-                - literal: bool
+                - literal: boolean
                 - literal: number
                 - literal: string
                 - literal: table

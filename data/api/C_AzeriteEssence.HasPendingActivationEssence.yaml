@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: hasEssence
-  type: bool
+  type: boolean

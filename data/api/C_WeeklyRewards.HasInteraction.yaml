@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isInteracting
-  type: bool
+  type: boolean

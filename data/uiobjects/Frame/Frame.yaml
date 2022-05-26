@@ -12,16 +12,16 @@ fields:
     type: string
   hyperlinksEnabled:
     init: false
-    type: bool
+    type: boolean
   id:
     init: 0
     type: number
   isClampedToScreen:
     init: false
-    type: bool
+    type: boolean
   isUserPlaced:
     init: false
-    type: bool
+    type: boolean
   maxResizeHeight:
     type: number
   maxResizeWidth:
@@ -32,19 +32,19 @@ fields:
     type: number
   mouseClickEnabled:
     init: true
-    type: bool
+    type: boolean
   mouseMotionEnabled:
     init: true
-    type: bool
+    type: boolean
   mouseWheelEnabled:
     init: false
-    type: bool
+    type: boolean
   movable:
     init: false
-    type: bool
+    type: boolean
   propagateKeyboardInput:
     init: false
-    type: bool
+    type: boolean
   registeredAllEvents:
     nilable: true
     type: number
@@ -53,10 +53,10 @@ fields:
     type: table
   resizable:
     init: false
-    type: bool
+    type: boolean
   toplevel:
     init: false
-    type: bool
+    type: boolean
 inherits:
 - ParentedObject
 - Region

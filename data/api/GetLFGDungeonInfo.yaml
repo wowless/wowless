@@ -34,16 +34,16 @@ outputs:
 - name: description
   type: string
 - name: isHoliday
-  type: bool
+  type: boolean
 - name: bonusRepAmount
   type: number
 - name: minPlayers
   type: number
 - name: isRandomTimewalker
-  type: bool
+  type: boolean
 - name: mapName
   type: string
 - name: minGear
   type: number
 - name: isScalingDungeon
-  type: bool
+  type: boolean

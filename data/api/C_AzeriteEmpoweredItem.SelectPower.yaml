@@ -9,4 +9,4 @@ inputs:
     type: number
 outputs:
 - name: success
-  type: bool
+  type: boolean

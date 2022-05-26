@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isPVPMap
-  type: bool
+  type: boolean

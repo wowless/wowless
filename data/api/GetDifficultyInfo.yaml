@@ -8,8 +8,8 @@ inputs:
 outputs:
 - type: string
 - type: string
-- type: bool
-- type: bool
-- type: bool
-- type: bool
+- type: boolean
+- type: boolean
+- type: boolean
+- type: boolean
 - type: number

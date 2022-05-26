@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: canUseEquipmentSets
-  type: bool
+  type: boolean

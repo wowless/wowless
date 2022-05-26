@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: displayTimeRemaining
-  type: bool
+  type: boolean

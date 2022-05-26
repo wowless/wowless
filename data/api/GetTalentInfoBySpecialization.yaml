@@ -18,9 +18,9 @@ outputs:
 - name: texture
   type: number
 - name: selected
-  type: bool
+  type: boolean
 - name: available
-  type: bool
+  type: boolean
 - name: spellID
   type: number
 - nilable: true
@@ -30,6 +30,6 @@ outputs:
 - name: column
   type: number
 - name: known
-  type: bool
+  type: boolean
 - name: grantedByAura
-  type: bool
+  type: boolean

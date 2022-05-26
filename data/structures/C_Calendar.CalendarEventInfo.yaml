@@ -15,7 +15,7 @@ fields:
 - name: eventType
   type: number
 - name: hasPendingInvite
-  type: bool
+  type: boolean
 - name: inviteStatus
   nilable: true
   type: number
@@ -23,9 +23,9 @@ fields:
   nilable: true
   type: number
 - name: isAutoApprove
-  type: bool
+  type: boolean
 - name: isLocked
-  type: bool
+  type: boolean
 - name: lockoutTime
   type: CalendarTime
 - name: maxSize

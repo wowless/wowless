@@ -5,4 +5,4 @@ inputs:
 - - type: unit
   - type: unit
 outputs:
-- type: bool
+- type: boolean

@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: challengeModeActive
-  type: bool
+  type: boolean

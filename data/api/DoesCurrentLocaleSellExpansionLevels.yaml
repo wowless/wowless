@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: regionSellsExpansions
-  type: bool
+  type: boolean

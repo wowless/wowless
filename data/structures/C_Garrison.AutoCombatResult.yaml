@@ -6,4 +6,4 @@ fields:
   name: combatLog
   type: table
 - name: winner
-  type: bool
+  type: boolean

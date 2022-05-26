@@ -9,7 +9,7 @@ fields:
     type: table
   forbidden:
     init: false
-    type: bool
+    type: boolean
   parent:
     nilable: true
     type: table

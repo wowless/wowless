@@ -8,4 +8,4 @@ inputs:
     type: string
 outputs:
 - name: isValid
-  type: bool
+  type: boolean

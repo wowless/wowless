@@ -6,6 +6,6 @@ flavors:
 inputs:
 - {}
 outputs:
-- type: bool
-- type: bool
-- type: bool
+- type: boolean
+- type: boolean
+- type: boolean

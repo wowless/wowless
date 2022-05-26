@@ -5,7 +5,7 @@ fields:
 - name: creationTime
   type: number
 - name: leadersAndModeratorsOnly
-  type: bool
+  type: boolean
 - name: name
   type: string
 - name: streamId

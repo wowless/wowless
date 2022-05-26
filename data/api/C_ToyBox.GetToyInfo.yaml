@@ -12,8 +12,8 @@ outputs:
 - name: icon
   type: number
 - name: isFavorite
-  type: bool
+  type: boolean
 - name: hasFanfare
-  type: bool
+  type: boolean
 - name: itemQuality
   type: number

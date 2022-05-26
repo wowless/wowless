@@ -20,10 +20,10 @@ fields:
 - name: scriptTag
   type: string
 - name: useCenterForOriginX
-  type: bool
+  type: boolean
 - name: useCenterForOriginY
-  type: bool
+  type: boolean
 - name: useCenterForOriginZ
-  type: bool
+  type: boolean
 - name: yaw
   type: number

@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isAllowed
-  type: bool
+  type: boolean

@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: allowedToInvite
-  type: bool
+  type: boolean

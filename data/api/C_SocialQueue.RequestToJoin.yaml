@@ -6,13 +6,13 @@ inputs:
     type: string
   - default: false
     name: applyAsTank
-    type: bool
+    type: boolean
   - default: false
     name: applyAsHealer
-    type: bool
+    type: boolean
   - default: false
     name: applyAsDamage
-    type: bool
+    type: boolean
 outputs:
 - name: requestSuccessful
-  type: bool
+  type: boolean

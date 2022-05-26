@@ -5,7 +5,7 @@ fields:
 - name: bestRunLevel
   type: number
 - name: finishedSuccess
-  type: bool
+  type: boolean
 - name: mapName
   type: string
 - name: mapScore

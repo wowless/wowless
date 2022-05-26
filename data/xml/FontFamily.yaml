@@ -5,6 +5,6 @@ attributes:
     required: true
     type: string
   virtual:
-    type: bool
+    type: boolean
 contents:
 - Member

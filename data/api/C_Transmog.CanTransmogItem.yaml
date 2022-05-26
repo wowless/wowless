@@ -6,12 +6,12 @@ inputs:
     type: string
 outputs:
 - name: canBeTransmogged
-  type: bool
+  type: boolean
 - name: selfFailureReason
   nilable: true
   type: string
 - name: canTransmogOthers
-  type: bool
+  type: boolean
 - name: othersFailureReason
   nilable: true
   type: string

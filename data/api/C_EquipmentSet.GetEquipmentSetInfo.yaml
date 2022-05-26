@@ -12,7 +12,7 @@ outputs:
 - name: setID
   type: number
 - name: isEquipped
-  type: bool
+  type: boolean
 - name: numItems
   type: number
 - name: numEquipped

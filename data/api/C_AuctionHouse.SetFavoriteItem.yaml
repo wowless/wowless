@@ -5,5 +5,5 @@ inputs:
 - - name: itemKey
     type: C_AuctionHouse.ItemKey
   - name: setFavorite
-    type: bool
+    type: boolean
 outputs: {}

@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isIgnored
-  type: bool
+  type: boolean

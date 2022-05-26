@@ -8,4 +8,4 @@ inputs:
     type: string
 outputs:
 - name: unitIsOwnerOrControllerOfUnit
-  type: bool
+  type: boolean

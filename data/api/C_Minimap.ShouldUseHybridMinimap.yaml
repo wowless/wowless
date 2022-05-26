@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: shouldUse
-  type: bool
+  type: boolean

@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: canSet
-  type: bool
+  type: boolean

@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: canCreate
-  type: bool
+  type: boolean

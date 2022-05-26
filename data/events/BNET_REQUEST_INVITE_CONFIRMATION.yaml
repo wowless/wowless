@@ -5,10 +5,10 @@ payload:
 - name: gameAccountID
   type: number
 - name: questSessionActive
-  type: bool
+  type: boolean
 - name: tank
-  type: bool
+  type: boolean
 - name: healer
-  type: bool
+  type: boolean
 - name: dps
-  type: bool
+  type: boolean

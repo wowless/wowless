@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: hasFullResults
-  type: bool
+  type: boolean

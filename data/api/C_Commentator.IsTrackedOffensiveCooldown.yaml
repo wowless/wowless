@@ -6,4 +6,4 @@ inputs:
   - type: number
   - type: number
 outputs:
-- type: bool
+- type: boolean

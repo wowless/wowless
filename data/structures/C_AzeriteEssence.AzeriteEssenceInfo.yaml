@@ -11,6 +11,6 @@ fields:
 - name: rank
   type: number
 - name: unlocked
-  type: bool
+  type: boolean
 - name: valid
-  type: bool
+  type: boolean

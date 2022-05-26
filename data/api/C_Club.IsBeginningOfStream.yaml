@@ -10,4 +10,4 @@ inputs:
     type: C_Club.ClubMessageIdentifier
 outputs:
 - name: isBeginningOfStream
-  type: bool
+  type: boolean

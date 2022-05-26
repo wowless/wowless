@@ -4,15 +4,15 @@ attributes:
   drawedge:
     impl:
       method: SetDrawEdge
-    type: bool
+    type: boolean
   hidecountdownnumbers:
     impl:
       method: SetHideCountdownNumbers
-    type: bool
+    type: boolean
   reverse:
     impl:
       method: SetReverse
-    type: bool
+    type: boolean
 contents:
 - BlingTexture
 - EdgeTexture

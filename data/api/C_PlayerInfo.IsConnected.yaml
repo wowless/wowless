@@ -9,4 +9,4 @@ inputs:
 outputs:
 - name: isConnected
   nilable: true
-  type: bool
+  type: boolean

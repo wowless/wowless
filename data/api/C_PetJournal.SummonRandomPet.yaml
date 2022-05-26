@@ -5,5 +5,5 @@ flavors:
 - Mainline
 inputs:
 - - name: onlyFavorites
-    type: bool
+    type: boolean
 outputs: {}

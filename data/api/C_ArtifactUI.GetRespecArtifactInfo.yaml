@@ -30,6 +30,6 @@ outputs:
   nilable: true
   type: number
 - name: altOnTop
-  type: bool
+  type: boolean
 - name: tier
   type: number

@@ -5,5 +5,5 @@ inputs:
 - - name: talentID
     type: number
   - name: temporary
-    type: bool
+    type: boolean
 outputs: {}

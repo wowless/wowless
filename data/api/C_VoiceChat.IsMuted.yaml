@@ -6,4 +6,4 @@ inputs:
 outputs:
 - name: isMuted
   nilable: true
-  type: bool
+  type: boolean

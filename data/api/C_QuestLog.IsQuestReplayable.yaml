@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: isReplayable
-  type: bool
+  type: boolean

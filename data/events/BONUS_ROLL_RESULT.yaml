@@ -13,11 +13,11 @@ payload:
 - name: sex
   type: number
 - name: personalLootToast
-  type: bool
+  type: boolean
 - name: currencyID
   nilable: true
   type: number
 - name: isSecondaryResult
-  type: bool
+  type: boolean
 - name: corrupted
-  type: bool
+  type: boolean

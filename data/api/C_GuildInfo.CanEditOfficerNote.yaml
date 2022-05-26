@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: canEditOfficerNote
-  type: bool
+  type: boolean

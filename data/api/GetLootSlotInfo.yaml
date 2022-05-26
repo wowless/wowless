@@ -9,7 +9,7 @@ outputs:
 - type: number
 - type: number
 - type: number
-- type: bool
-- type: bool
+- type: boolean
+- type: boolean
 - type: number
-- type: bool
+- type: boolean

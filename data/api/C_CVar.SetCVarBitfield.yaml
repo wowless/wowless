@@ -7,10 +7,10 @@ inputs:
   - name: index
     type: number
   - name: value
-    type: bool
+    type: boolean
   - name: scriptCVar
     nilable: true
     type: string
 outputs:
 - name: success
-  type: bool
+  type: boolean

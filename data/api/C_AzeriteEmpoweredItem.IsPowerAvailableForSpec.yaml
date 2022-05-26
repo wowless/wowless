@@ -8,4 +8,4 @@ inputs:
     type: number
 outputs:
 - name: isPowerAvailableForSpec
-  type: bool
+  type: boolean

@@ -4,7 +4,7 @@ attributes:
   checked:
     impl:
       method: SetChecked
-    type: bool
+    type: boolean
 contents:
 - CheckedTexture
 - DisabledCheckedTexture

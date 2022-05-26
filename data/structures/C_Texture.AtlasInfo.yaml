@@ -17,9 +17,9 @@ fields:
 - name: rightTexCoord
   type: number
 - name: tilesHorizontally
-  type: bool
+  type: boolean
 - name: tilesVertically
-  type: bool
+  type: boolean
 - name: topTexCoord
   type: number
 - name: width

@@ -2,23 +2,23 @@
 name: EditBox
 attributes:
   autofocus:
-    type: bool
+    type: boolean
   bytes:
     type: number
   countinvisibleletters:
-    type: bool
+    type: boolean
   historylines:
     type: number
   ignorearrows:
-    type: bool
+    type: boolean
   invisiblebytes:
     type: number
   letters:
     type: number
   multiline:
-    type: bool
+    type: boolean
   numeric:
-    type: bool
+    type: boolean
   visiblebytes:
     type: number
 contents:

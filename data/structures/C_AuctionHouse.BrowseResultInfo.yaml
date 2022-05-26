@@ -6,7 +6,7 @@ fields:
   nilable: true
   type: string
 - name: containsOwnerItem
-  type: bool
+  type: boolean
 - name: itemKey
   type: C_AuctionHouse.ItemKey
 - name: minPrice

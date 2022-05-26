@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isCompletable
-  type: bool
+  type: boolean

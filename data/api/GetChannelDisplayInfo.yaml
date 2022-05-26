@@ -8,15 +8,15 @@ outputs:
 - name: name
   type: string
 - name: header
-  type: bool
+  type: boolean
 - name: collapsed
-  type: bool
+  type: boolean
 - name: channelNumber
   type: number
 - name: count
   type: number
 - name: active
-  type: bool
+  type: boolean
 - name: category
   type: string
 - name: channelType

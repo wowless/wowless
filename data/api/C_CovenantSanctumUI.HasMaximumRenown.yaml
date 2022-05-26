@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: hasMaxRenown
-  type: bool
+  type: boolean

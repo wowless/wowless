@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: canSpeakInGuildChat
-  type: bool
+  type: boolean

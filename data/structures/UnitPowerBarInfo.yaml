@@ -5,32 +5,32 @@ fields:
 - name: ID
   type: number
 - name: anchorTop
-  type: bool
+  type: boolean
 - name: animateNumbers
-  type: bool
+  type: boolean
 - name: barType
   type: number
 - name: endInset
   type: number
 - name: flashAtMinPower
-  type: bool
+  type: boolean
 - name: forcePercentage
-  type: bool
+  type: boolean
 - name: fractionalCounter
-  type: bool
+  type: boolean
 - name: hideFromOthers
-  type: bool
+  type: boolean
 - name: minPower
   type: number
 - name: opaqueFlash
-  type: bool
+  type: boolean
 - name: opaqueSpark
-  type: bool
+  type: boolean
 - name: showOnRaid
-  type: bool
+  type: boolean
 - name: smooth
-  type: bool
+  type: boolean
 - name: sparkUnderFrame
-  type: bool
+  type: boolean
 - name: startInset
   type: number

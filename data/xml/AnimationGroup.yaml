@@ -8,7 +8,7 @@ attributes:
   settofinalalpha:
     impl:
       method: SetToFinalAlpha
-    type: bool
+    type: boolean
 contents:
 - Animation
 - Scripts

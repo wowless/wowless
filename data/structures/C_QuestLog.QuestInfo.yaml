@@ -11,38 +11,38 @@ fields:
   nilable: true
   type: number
 - name: hasLocalPOI
-  type: bool
+  type: boolean
 - name: isAutoComplete
-  type: bool
+  type: boolean
 - name: isBounty
-  type: bool
+  type: boolean
 - name: isCollapsed
-  type: bool
+  type: boolean
 - name: isHeader
-  type: bool
+  type: boolean
 - name: isHidden
-  type: bool
+  type: boolean
 - name: isOnMap
-  type: bool
+  type: boolean
 - name: isScaling
-  type: bool
+  type: boolean
 - name: isStory
-  type: bool
+  type: boolean
 - name: isTask
-  type: bool
+  type: boolean
 - name: level
   type: number
 - name: overridesSortOrder
-  type: bool
+  type: boolean
 - name: questID
   type: number
 - name: questLogIndex
   type: number
 - default: true
   name: readyForTranslation
-  type: bool
+  type: boolean
 - name: startEvent
-  type: bool
+  type: boolean
 - name: suggestedGroup
   type: number
 - name: title

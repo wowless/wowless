@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isWaitingForResponse
-  type: bool
+  type: boolean

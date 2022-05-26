@@ -14,10 +14,10 @@ outputs:
 - name: textureName
   type: number
 - name: locked
-  type: bool
+  type: boolean
 - name: recentDeposit
-  type: bool
+  type: boolean
 - name: isFiltered
-  type: bool
+  type: boolean
 - name: quality
   type: number

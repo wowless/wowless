@@ -5,7 +5,7 @@ inputs:
 - {}
 outputs:
 - name: isExpansionTrialAccount
-  type: bool
+  type: boolean
 - name: expansionTrialRemainingSeconds
   nilable: true
   type: number

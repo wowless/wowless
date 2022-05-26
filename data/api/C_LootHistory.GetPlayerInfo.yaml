@@ -16,4 +16,4 @@ outputs:
 - name: roll
   type: number
 - name: isWinner
-  type: bool
+  type: boolean

@@ -4,33 +4,33 @@ attributes:
   clampedtoscreen:
     impl:
       method: SetClampedToScreen
-    type: bool
+    type: boolean
   clipchildren:
     impl:
       method: SetClipsChildren
-    type: bool
+    type: boolean
   debugid:
     type: number
   dontsaveposition:
-    type: bool
+    type: boolean
   enablekeyboard:
     impl:
       method: EnableKeyboard
-    type: bool
+    type: boolean
   enablemouse:
     impl:
       method: EnableMouse
-    type: bool
+    type: boolean
   enablemouseclicks:
-    type: bool
+    type: boolean
   enablemousemotion:
-    type: bool
+    type: boolean
   enablemousewheel:
     impl:
       method: EnableMouseWheel
-    type: bool
+    type: boolean
   flattenrenderlayers:
-    type: bool
+    type: boolean
   framelevel:
     impl:
       method: SetFrameLevel
@@ -42,40 +42,40 @@ attributes:
   hyperlinksenabled:
     impl:
       method: SetHyperlinksEnabled
-    type: bool
+    type: boolean
   id:
     impl:
       method: SetID
     type: number
   intrinsic:
-    type: bool
+    type: boolean
   movable:
     impl:
       method: SetMovable
-    type: bool
+    type: boolean
   parent:
     impl: internal
     phase: early
     type: string
   propagatehyperlinkstoparent:
-    type: bool
+    type: boolean
   protected:
     impl:
       field: explicitlyProtected
-    type: bool
+    type: boolean
   resizable:
     impl:
       method: SetResizable
-    type: bool
+    type: boolean
   securemixin:
     impl: internal
     type: stringlist
   toplevel:
     impl:
       method: SetToplevel
-    type: bool
+    type: boolean
   useparentlevel:
-    type: bool
+    type: boolean
 contents:
 - Animations
 - Attributes

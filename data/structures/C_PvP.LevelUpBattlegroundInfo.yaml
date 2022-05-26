@@ -7,6 +7,6 @@ fields:
 - name: id
   type: number
 - name: isEpic
-  type: bool
+  type: boolean
 - name: name
   type: string

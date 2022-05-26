@@ -2,7 +2,7 @@
 name: ScriptType
 attributes:
   autoenableinput:
-    type: bool
+    type: boolean
   function:
     type: string
   inherit:

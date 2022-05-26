@@ -17,7 +17,7 @@ fields:
 - name: level
   type: number
 - name: lookupSuccess
-  type: bool
+  type: boolean
 - name: message
   type: string
 - name: name

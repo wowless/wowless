@@ -97,7 +97,7 @@ local attrMTs = (function()
 end)()
 
 local attributeTypes = {
-  bool = function(s)
+  boolean = function(s)
     local x = string.lower(s)
     if x == 'true' then
       return true

@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isRatedMap
-  type: bool
+  type: boolean

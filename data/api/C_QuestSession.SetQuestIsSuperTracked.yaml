@@ -5,5 +5,5 @@ inputs:
 - - name: questID
     type: number
   - name: superTrack
-    type: bool
+    type: boolean
 outputs: {}

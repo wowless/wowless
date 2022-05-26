@@ -10,4 +10,4 @@ inputs:
     type: number
 outputs:
 - name: canRemove
-  type: bool
+  type: boolean

@@ -15,5 +15,5 @@ inputs:
     type: number
   - name: isCrossFaction
     nilable: true
-    type: bool
+    type: boolean
 outputs: {}

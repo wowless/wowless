@@ -6,6 +6,6 @@ inputs:
     type: number
 outputs:
 - name: hasItemData
-  type: bool
+  type: boolean
 - name: canCollect
-  type: bool
+  type: boolean

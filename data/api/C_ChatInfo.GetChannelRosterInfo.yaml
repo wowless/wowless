@@ -10,8 +10,8 @@ outputs:
 - name: name
   type: string
 - name: owner
-  type: bool
+  type: boolean
 - name: moderator
-  type: bool
+  type: boolean
 - name: guid
   type: string

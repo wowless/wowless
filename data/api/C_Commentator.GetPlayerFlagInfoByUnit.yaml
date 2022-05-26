@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: hasFlag
-  type: bool
+  type: boolean

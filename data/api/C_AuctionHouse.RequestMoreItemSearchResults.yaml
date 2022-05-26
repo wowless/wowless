@@ -6,4 +6,4 @@ inputs:
     type: C_AuctionHouse.ItemKey
 outputs:
 - name: hasFullResults
-  type: bool
+  type: boolean

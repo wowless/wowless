@@ -8,9 +8,9 @@ fields:
   nilable: true
   type: number
 - name: hideWarboardHeader
-  type: bool
+  type: boolean
 - name: keepOpenAfterChoice
-  type: bool
+  type: boolean
 - name: objectGUID
   type: string
 - innerType: C_PlayerChoice.PlayerChoiceOptionInfo

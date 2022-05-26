@@ -7,15 +7,15 @@ fields:
 - name: facing
   type: number
 - name: isAlive
-  type: bool
+  type: boolean
 - name: isOccupied
-  type: bool
+  type: boolean
 - name: isPlayer
-  type: bool
+  type: boolean
 - name: name
   type: string
 - name: shouldDrawBelowPlayerBlips
-  type: bool
+  type: boolean
 - name: textureHeight
   type: number
 - name: textureWidth

@@ -7,4 +7,4 @@ inputs:
     type: number
 outputs:
 - name: isValid
-  type: bool
+  type: boolean

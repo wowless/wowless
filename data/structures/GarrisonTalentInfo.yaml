@@ -11,9 +11,9 @@ fields:
 - name: id
   type: number
 - name: ignoreTalent
-  type: bool
+  type: boolean
 - name: isBeingResearched
-  type: bool
+  type: boolean
 - name: name
   type: string
 - name: perkSpellID
@@ -35,9 +35,9 @@ fields:
 - name: researchGoldCost
   type: number
 - name: researched
-  type: bool
+  type: boolean
 - name: selected
-  type: bool
+  type: boolean
 - name: socketInfo
   type: GarrisonTalentSocketInfo
 - name: startTime

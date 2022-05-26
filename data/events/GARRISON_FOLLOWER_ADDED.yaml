@@ -13,7 +13,7 @@ payload:
 - name: followerQuality
   type: number
 - name: isUpgraded
-  type: bool
+  type: boolean
 - name: textureKit
   type: string
 - name: followerTypeID

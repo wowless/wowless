@@ -6,4 +6,4 @@ inputs:
     type: unit
 outputs:
 - name: inParty
-  type: bool
+  type: boolean

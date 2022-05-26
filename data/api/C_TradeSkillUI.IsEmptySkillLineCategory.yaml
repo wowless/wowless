@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: effectivelyKnown
-  type: bool
+  type: boolean

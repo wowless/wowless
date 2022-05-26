@@ -5,9 +5,9 @@ fields:
 - name: bgID
   type: number
 - name: canQueue
-  type: bool
+  type: boolean
 - name: hasRandomWinToday
-  type: bool
+  type: boolean
 - name: maxLevel
   type: number
 - name: minLevel

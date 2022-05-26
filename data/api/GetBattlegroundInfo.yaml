@@ -7,11 +7,11 @@ outputs:
 - name: localizedName
   type: string
 - name: canEnter
-  type: bool
+  type: boolean
 - name: isHoliday
-  type: bool
+  type: boolean
 - name: isRandom
-  type: bool
+  type: boolean
 - name: battleGroundID
   type: number
 - name: mapDescription

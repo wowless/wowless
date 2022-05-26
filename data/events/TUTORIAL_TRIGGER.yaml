@@ -5,4 +5,4 @@ payload:
 - name: tutorialIndex
   type: number
 - name: forceShow
-  type: bool
+  type: boolean

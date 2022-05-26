@@ -12,6 +12,6 @@ outputs:
 - name: outRelationType
   type: number
 - name: outIsQuickJoin
-  type: bool
+  type: boolean
 - name: outClubId
   type: string

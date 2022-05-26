@@ -6,10 +6,10 @@ inputs:
     type: number
 outputs:
 - name: isAvailable
-  type: bool
+  type: boolean
 - name: isAvailableToPlayer
-  type: bool
+  type: boolean
 - name: hideIfNotJoinable
-  type: bool
+  type: boolean
 - name: totalGroupSizeRequired
   type: number

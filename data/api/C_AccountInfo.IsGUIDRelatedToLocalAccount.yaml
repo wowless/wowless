@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: isLocalUser
-  type: bool
+  type: boolean

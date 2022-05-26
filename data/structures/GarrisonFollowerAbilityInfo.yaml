@@ -15,12 +15,12 @@ fields:
 - name: id
   type: number
 - name: isEmptySlot
-  type: bool
+  type: boolean
 - name: isSpecialization
-  type: bool
+  type: boolean
 - name: isTrait
-  type: bool
+  type: boolean
 - name: name
   type: string
 - name: temporary
-  type: bool
+  type: boolean

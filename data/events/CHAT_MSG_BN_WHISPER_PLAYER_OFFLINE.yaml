@@ -29,10 +29,10 @@ payload:
 - name: bnSenderID
   type: number
 - name: isMobile
-  type: bool
+  type: boolean
 - name: isSubtitle
-  type: bool
+  type: boolean
 - name: hideSenderInLetterbox
-  type: bool
+  type: boolean
 - name: supressRaidIcons
-  type: bool
+  type: boolean

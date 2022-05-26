@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: isNew
-  type: bool
+  type: boolean

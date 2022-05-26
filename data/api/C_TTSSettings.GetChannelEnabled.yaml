@@ -6,4 +6,4 @@ inputs:
     type: ChatChannelInfo
 outputs:
 - name: enabled
-  type: bool
+  type: boolean

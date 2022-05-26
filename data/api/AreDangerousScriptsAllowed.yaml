@@ -6,4 +6,4 @@ inputs:
 outputs:
 - name: value
   stub: true
-  type: bool
+  type: boolean

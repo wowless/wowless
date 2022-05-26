@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: hasJoined
-  type: bool
+  type: boolean

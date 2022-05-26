@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: hasActiveEntryInfo
-  type: bool
+  type: boolean

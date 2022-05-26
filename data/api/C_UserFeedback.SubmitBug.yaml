@@ -6,7 +6,7 @@ inputs:
     type: string
   - default: false
     name: suppressNotification
-    type: bool
+    type: boolean
 outputs:
 - name: success
-  type: bool
+  type: boolean

@@ -6,13 +6,13 @@ fields:
   nilable: true
   type: number
 - name: inProgress
-  type: bool
+  type: boolean
 - name: isCombatAllyQuest
-  type: bool
+  type: boolean
 - name: isDaily
-  type: bool
+  type: boolean
 - name: isQuestStart
-  type: bool
+  type: boolean
 - name: mapID
   type: number
 - name: numObjectives

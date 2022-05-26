@@ -5,7 +5,7 @@ inputs:
 - - name: actionID
     type: number
   - name: useNeutral
-    type: bool
+    type: boolean
 outputs:
 - name: isHelpful
-  type: bool
+  type: boolean

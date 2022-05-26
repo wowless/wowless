@@ -5,7 +5,7 @@ fields:
 - name: description
   type: string
 - name: isWarCampaign
-  type: bool
+  type: boolean
 - name: name
   type: string
 - name: uiTextureKit

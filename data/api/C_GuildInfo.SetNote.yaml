@@ -7,5 +7,5 @@ inputs:
   - name: note
     type: string
   - name: isPublic
-    type: bool
+    type: boolean
 outputs: {}

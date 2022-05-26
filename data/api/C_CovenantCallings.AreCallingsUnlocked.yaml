@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: unlocked
-  type: bool
+  type: boolean

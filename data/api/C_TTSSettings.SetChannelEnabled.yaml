@@ -6,5 +6,5 @@ inputs:
     type: ChatChannelInfo
   - default: false
     name: newVal
-    type: bool
+    type: boolean
 outputs: {}

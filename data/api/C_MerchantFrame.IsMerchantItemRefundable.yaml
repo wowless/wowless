@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: refundable
-  type: bool
+  type: boolean

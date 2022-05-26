@@ -16,6 +16,6 @@ outputs:
 - name: duration
   type: number
 - name: enable
-  type: bool
+  type: boolean
 - name: modRate
   type: number

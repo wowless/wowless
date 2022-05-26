@@ -11,4 +11,4 @@ payload:
   nilable: true
   type: string
 - name: pendingJoin
-  type: bool
+  type: boolean

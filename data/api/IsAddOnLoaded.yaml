@@ -7,6 +7,6 @@ inputs:
 - - name: name
     type: string
 outputs:
-- type: bool
+- type: boolean
 states:
 - Addons

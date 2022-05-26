@@ -4,4 +4,4 @@ status: implemented
 inputs:
 - - type: unit
 outputs:
-- type: bool
+- type: boolean

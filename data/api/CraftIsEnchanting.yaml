@@ -7,4 +7,4 @@ flavors:
 inputs:
 - {}
 outputs:
-- type: bool
+- type: boolean

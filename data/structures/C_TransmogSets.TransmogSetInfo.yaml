@@ -8,21 +8,21 @@ fields:
 - name: classMask
   type: number
 - name: collected
-  type: bool
+  type: boolean
 - name: description
   nilable: true
   type: string
 - name: expansionID
   type: number
 - name: favorite
-  type: bool
+  type: boolean
 - name: hiddenUntilCollected
-  type: bool
+  type: boolean
 - name: label
   nilable: true
   type: string
 - name: limitedTimeSet
-  type: bool
+  type: boolean
 - name: name
   type: string
 - name: patchID

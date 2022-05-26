@@ -5,14 +5,14 @@ payload:
 - name: name
   type: string
 - name: isTank
-  type: bool
+  type: boolean
 - name: isHealer
-  type: bool
+  type: boolean
 - name: isDamage
-  type: bool
+  type: boolean
 - name: isNativeRealm
-  type: bool
+  type: boolean
 - name: allowMultipleRoles
-  type: bool
+  type: boolean
 - name: inviterGUID
   type: string

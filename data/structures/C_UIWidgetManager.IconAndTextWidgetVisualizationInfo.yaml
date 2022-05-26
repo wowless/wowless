@@ -5,7 +5,7 @@ fields:
 - name: dynamicTooltip
   type: string
 - name: hasTimer
-  type: bool
+  type: boolean
 - name: orderIndex
   type: number
 - name: state

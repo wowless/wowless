@@ -7,7 +7,7 @@ fields:
 - name: currencyTexture
   type: number
 - name: isCurrencyContainer
-  type: bool
+  type: boolean
 - name: name
   type: string
 - name: quantity

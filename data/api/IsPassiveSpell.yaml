@@ -10,4 +10,4 @@ inputs:
     type: string
 outputs:
 - name: isPassive
-  type: bool
+  type: boolean

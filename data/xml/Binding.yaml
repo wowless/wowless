@@ -6,15 +6,15 @@ attributes:
   custombindingid:
     type: string
   debug:
-    type: bool
+    type: boolean
   default:
     type: string
   header:
     type: string
   hidden:
-    type: bool
+    type: boolean
   name:
     type: string
   runonup:
-    type: bool
+    type: boolean
 contents: text

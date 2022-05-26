@@ -16,4 +16,4 @@ fields:
 - name: tooltipLine
   type: string
 - name: tooltipUseTimeRemaining
-  type: bool
+  type: boolean

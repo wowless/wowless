@@ -6,7 +6,7 @@ inputs:
 outputs:
 - name: value
   nilable: true
-  type: bool
+  type: boolean
 frameworks:
 - env
 states:

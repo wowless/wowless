@@ -5,7 +5,7 @@ inputs:
 - - name: level
     type: number
   - name: isRaid
-    type: bool
+    type: boolean
 outputs:
 - innerType: number
   name: dungeonID

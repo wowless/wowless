@@ -10,4 +10,4 @@ payload:
   type: string
 - name: hideUntilLearned
   nilable: true
-  type: bool
+  type: boolean

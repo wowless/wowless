@@ -2,4 +2,4 @@
 name: IsMounted
 status: unimplemented
 outputs:
-- type: bool
+- type: boolean

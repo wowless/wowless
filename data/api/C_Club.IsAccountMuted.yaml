@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: accountMuted
-  type: bool
+  type: boolean

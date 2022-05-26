@@ -5,9 +5,9 @@ fields:
 - name: auctionID
   type: number
 - name: containsAccountItem
-  type: bool
+  type: boolean
 - name: containsOwnerItem
-  type: bool
+  type: boolean
 - name: itemID
   type: number
 - name: numOwnerItems

@@ -7,4 +7,4 @@ inputs:
     type: table
 outputs:
 - name: isBound
-  type: bool
+  type: boolean

@@ -8,4 +8,4 @@ outputs:
 - name: money
   type: number
 - name: isProfession
-  type: bool
+  type: boolean

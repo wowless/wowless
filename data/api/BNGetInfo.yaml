@@ -8,6 +8,6 @@ outputs:
 - type: string
 - type: number
 - type: string
-- type: bool
-- type: bool
-- type: bool
+- type: boolean
+- type: boolean
+- type: boolean

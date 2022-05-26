@@ -7,15 +7,15 @@ attributes:
     type: number
   hidden:
     impl: internal
-    type: bool
+    type: boolean
   ignoreparentalpha:
     impl:
       method: SetIgnoreParentAlpha
-    type: bool
+    type: boolean
   ignoreparentscale:
     impl:
       method: SetIgnoreParentScale
-    type: bool
+    type: boolean
   inherits:
     type: stringlist
   mixin:
@@ -37,9 +37,9 @@ attributes:
   setallpoints:
     impl:
       method: SetAllPoints
-    type: bool
+    type: boolean
   virtual:
-    type: bool
+    type: boolean
 contents:
 - Anchors
 - Color

@@ -12,7 +12,7 @@ attributes:
   desaturated:
     impl:
       method: SetDesaturated
-    type: bool
+    type: boolean
   file:
     impl:
       method: SetTexture
@@ -20,25 +20,25 @@ attributes:
   horiztile:
     impl:
       method: SetHorizTile
-    type: bool
+    type: boolean
   nonblocking:
     impl:
       method: SetNonBlocking
-    type: bool
+    type: boolean
   snaptopixelgrid:
     impl:
       method: SetSnapToPixelGrid
-    type: bool
+    type: boolean
   texelsnappingbias:
     impl:
       method: SetTexelSnappingBias
     type: number
   useatlassize:
-    type: bool
+    type: boolean
   verttile:
     impl:
       method: SetVertTile
-    type: bool
+    type: boolean
 contents:
 - Animations
 - Gradient

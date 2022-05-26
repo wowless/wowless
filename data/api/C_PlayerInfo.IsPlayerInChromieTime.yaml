@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: inChromieTime
-  type: bool
+  type: boolean

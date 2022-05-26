@@ -5,13 +5,13 @@ fields:
 - name: floorLocation
   type: number
 - name: isCampaign
-  type: bool
+  type: boolean
 - name: isDaily
-  type: bool
+  type: boolean
 - name: isHidden
-  type: bool
+  type: boolean
 - name: isLegendary
-  type: bool
+  type: boolean
 - name: questID
   type: number
 - name: questLineID

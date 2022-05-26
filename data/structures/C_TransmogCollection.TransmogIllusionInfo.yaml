@@ -5,11 +5,11 @@ fields:
 - name: icon
   type: number
 - name: isCollected
-  type: bool
+  type: boolean
 - name: isHideVisual
-  type: bool
+  type: boolean
 - name: isUsable
-  type: bool
+  type: boolean
 - name: sourceID
   type: number
 - name: visualID

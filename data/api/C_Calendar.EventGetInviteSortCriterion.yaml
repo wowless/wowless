@@ -7,4 +7,4 @@ outputs:
 - name: criterion
   type: string
 - name: reverse
-  type: bool
+  type: boolean

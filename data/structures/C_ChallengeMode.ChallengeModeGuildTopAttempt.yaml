@@ -5,7 +5,7 @@ fields:
 - name: classFileName
   type: string
 - name: isYou
-  type: bool
+  type: boolean
 - name: keystoneLevel
   type: number
 - name: mapChallengeModeID

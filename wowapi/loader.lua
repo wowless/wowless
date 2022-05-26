@@ -21,7 +21,7 @@ end
 
 local getStub = (function()
   local defaultOutputs = {
-    bool = 'false',
+    boolean = 'false',
     ['nil'] = 'nil',
     number = '1',
     oneornil = 'nil',
@@ -231,8 +231,6 @@ local function loadFunctions(api, loader)
             ty = type(arg)
           elseif param.type == 'unknown' or data.structures[param.type] ~= nil then
             ty = param.type
-          elseif ty == 'boolean' then
-            ty = 'bool'
           elseif param.type == 'unit' and ty == 'string' then
             arg = resolveUnit(api.states.Units, arg)
             ty = 'unit'
@@ -280,7 +278,7 @@ local function loadFunctions(api, loader)
         end
       else
         local supportedTypes = {
-          bool = true,
+          boolean = true,
           number = true,
           string = true,
         }

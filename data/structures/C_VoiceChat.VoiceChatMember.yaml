@@ -5,12 +5,12 @@ fields:
 - name: energy
   type: number
 - name: isActive
-  type: bool
+  type: boolean
 - name: isMutedForAll
-  type: bool
+  type: boolean
 - name: isSilenced
-  type: bool
+  type: boolean
 - name: isSpeaking
-  type: bool
+  type: boolean
 - name: memberID
   type: number

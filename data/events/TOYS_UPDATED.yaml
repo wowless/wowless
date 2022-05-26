@@ -7,7 +7,7 @@ payload:
   type: number
 - name: isNew
   nilable: true
-  type: bool
+  type: boolean
 - name: hasFanfare
   nilable: true
-  type: bool
+  type: boolean

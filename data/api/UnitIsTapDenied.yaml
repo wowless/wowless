@@ -6,4 +6,4 @@ inputs:
     type: unit
 outputs:
 - name: unitIsTapDenied
-  type: bool
+  type: boolean

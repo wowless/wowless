@@ -17,22 +17,22 @@ outputs:
 - name: barValue
   type: number
 - name: atWarWith
-  type: bool
+  type: boolean
 - name: canToggleAtWar
-  type: bool
+  type: boolean
 - name: isHeader
-  type: bool
+  type: boolean
 - name: isCollapsed
-  type: bool
+  type: boolean
 - name: hasRep
-  type: bool
+  type: boolean
 - name: isWatched
-  type: bool
+  type: boolean
 - name: isChild
-  type: bool
+  type: boolean
 - name: factionID
   type: number
 - name: hasBonusRepGain
-  type: bool
+  type: boolean
 - name: canSetInteractive
-  type: bool
+  type: boolean

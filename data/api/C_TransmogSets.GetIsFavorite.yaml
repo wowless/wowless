@@ -6,6 +6,6 @@ inputs:
     type: number
 outputs:
 - name: isFavorite
-  type: bool
+  type: boolean
 - name: isGroupFavorite
-  type: bool
+  type: boolean

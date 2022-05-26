@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: weeklyRewardAvailable
-  type: bool
+  type: boolean

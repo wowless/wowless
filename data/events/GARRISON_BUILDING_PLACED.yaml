@@ -5,4 +5,4 @@ payload:
 - name: garrisonPlotInstanceID
   type: number
 - name: newPlacement
-  type: bool
+  type: boolean

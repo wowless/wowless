@@ -5,4 +5,4 @@ payload:
 - name: unitTarget
   type: string
 - name: isConnected
-  type: bool
+  type: boolean

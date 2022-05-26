@@ -10,7 +10,7 @@ outputs:
 - name: quantity
   type: number
 - name: isBonus
-  type: bool
+  type: boolean
 - name: bonusQuantity
   type: number
 - name: name

@@ -19,7 +19,7 @@ fields:
 - name: height
   type: number
 - name: isElite
-  type: bool
+  type: boolean
 - name: maxHealth
   type: number
 - innerType: C_Garrison.GarrisonMechanicInfo

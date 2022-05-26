@@ -11,7 +11,7 @@ fields:
 - name: duration
   type: number
 - name: hasThornsEffect
-  type: bool
+  type: boolean
 - name: icon
   type: number
 - name: name

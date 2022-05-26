@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: isEncounterComplete
-  type: bool
+  type: boolean

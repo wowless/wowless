@@ -6,22 +6,22 @@ fields:
     type: string
   enabled:
     init: true
-    type: bool
+    type: boolean
   historyLines:
     init: 10
     type: number
   isAutoFocus:
     init: true
-    type: bool
+    type: boolean
   isCountInvisibleLetters:
     init: false
-    type: bool
+    type: boolean
   isMultiLine:
     init: false
-    type: bool
+    type: boolean
   isSecureText:
     init: false
-    type: bool
+    type: boolean
   maxBytes:
     init: 200
     type: number

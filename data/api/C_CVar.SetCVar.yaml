@@ -9,6 +9,6 @@ inputs:
     type: string
 outputs:
 - name: success
-  type: bool
+  type: boolean
 states:
 - CVars

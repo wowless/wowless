@@ -5,5 +5,5 @@ inputs:
 - - name: clubId
     type: string
   - name: isFavorite
-    type: bool
+    type: boolean
 outputs: {}

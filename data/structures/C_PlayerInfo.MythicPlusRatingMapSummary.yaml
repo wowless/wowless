@@ -9,6 +9,6 @@ fields:
 - name: challengeModeID
   type: number
 - name: finishedSuccess
-  type: bool
+  type: boolean
 - name: mapScore
   type: number

@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: haveSettingsChanged
-  type: bool
+  type: boolean

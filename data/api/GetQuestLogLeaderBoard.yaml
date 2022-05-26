@@ -13,4 +13,4 @@ outputs:
 - name: type
   type: string
 - name: finished
-  type: bool
+  type: boolean

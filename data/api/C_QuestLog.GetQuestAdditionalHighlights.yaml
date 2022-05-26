@@ -8,10 +8,10 @@ outputs:
 - name: uiMapID
   type: number
 - name: worldQuests
-  type: bool
+  type: boolean
 - name: worldQuestsElite
-  type: bool
+  type: boolean
 - name: dungeons
-  type: bool
+  type: boolean
 - name: treasures
-  type: bool
+  type: boolean

@@ -7,4 +7,4 @@ fields:
 - name: id
   type: number
 - name: showWeapon
-  type: bool
+  type: boolean

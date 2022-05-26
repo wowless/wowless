@@ -34,7 +34,7 @@ fields:
   nilable: true
   type: number
 - name: isTroop
-  type: bool
+  type: boolean
 - name: level
   type: number
 - name: maxHealth

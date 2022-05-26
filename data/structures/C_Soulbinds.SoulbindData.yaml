@@ -24,4 +24,4 @@ fields:
 - name: tree
   type: C_Soulbinds.SoulbindTree
 - name: unlocked
-  type: bool
+  type: boolean

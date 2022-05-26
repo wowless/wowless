@@ -5,11 +5,11 @@ payload:
 - name: missionID
   type: number
 - name: canComplete
-  type: bool
+  type: boolean
 - name: success
-  type: bool
+  type: boolean
 - name: bonusRollSuccess
-  type: bool
+  type: boolean
 - innerType: C_Garrison.GarrisonFollowerDeathInfo
   name: followerDeaths
   type: table

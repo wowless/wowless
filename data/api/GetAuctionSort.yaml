@@ -11,4 +11,4 @@ outputs:
 - name: column
   type: string
 - name: reversed
-  type: bool
+  type: boolean

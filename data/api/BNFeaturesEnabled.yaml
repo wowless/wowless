@@ -4,4 +4,4 @@ status: unimplemented
 inputs:
 - {}
 outputs:
-- type: bool
+- type: boolean

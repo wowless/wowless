@@ -26,4 +26,4 @@ outputs:
 - name: purseLimit
   type: number
 - name: isWeekly
-  type: bool
+  type: boolean

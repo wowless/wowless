@@ -5,5 +5,5 @@ inputs:
 - - name: index
     type: number
   - name: checked
-    type: bool
+    type: boolean
 outputs: {}

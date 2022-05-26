@@ -5,6 +5,6 @@ inputs:
 - {}
 outputs:
 - name: isEligible
-  type: bool
+  type: boolean
 - name: failureReason
   type: string

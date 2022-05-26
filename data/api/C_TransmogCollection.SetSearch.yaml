@@ -8,4 +8,4 @@ inputs:
     type: string
 outputs:
 - name: completed
-  type: bool
+  type: boolean

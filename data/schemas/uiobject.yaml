@@ -15,7 +15,7 @@ type:
               required: true
               type:
                 oneof:
-                - literal: bool
+                - literal: boolean
                 - literal: font
                 - literal: number
                 - literal: string

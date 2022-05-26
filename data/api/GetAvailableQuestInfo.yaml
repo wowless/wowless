@@ -8,12 +8,12 @@ inputs:
     type: number
 outputs:
 - name: isTrivial
-  type: bool
+  type: boolean
 - name: frequency
   type: number
 - name: isRepeatable
-  type: bool
+  type: boolean
 - name: isLegendary
-  type: bool
+  type: boolean
 - name: questID
   type: number

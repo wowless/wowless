@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: areAllSourceFiltersChecked
-  type: bool
+  type: boolean

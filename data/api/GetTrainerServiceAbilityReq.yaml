@@ -10,4 +10,4 @@ outputs:
 - name: ability
   type: number
 - name: hasReq
-  type: bool
+  type: boolean

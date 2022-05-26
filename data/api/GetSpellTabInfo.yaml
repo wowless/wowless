@@ -14,10 +14,10 @@ outputs:
 - name: numSlots
   type: number
 - name: isGuild
-  type: bool
+  type: boolean
 - name: offSpecID
   type: string
 - name: shouldHide
-  type: bool
+  type: boolean
 - name: specID
   type: number

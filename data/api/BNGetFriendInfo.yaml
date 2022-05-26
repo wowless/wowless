@@ -12,7 +12,7 @@ outputs:
 - name: battleTag
   type: string
 - name: isBattleTag
-  type: bool
+  type: boolean
 - name: characterName
   type: string
 - name: bnetIDGameAccount
@@ -20,24 +20,24 @@ outputs:
 - name: client
   type: string
 - name: isOnline
-  type: bool
+  type: boolean
 - name: lastOnline
   type: number
 - name: isAFK
-  type: bool
+  type: boolean
 - name: isDND
-  type: bool
+  type: boolean
 - name: broadcastText
   type: string
 - name: noteText
   type: string
 - name: isRealIDFriend
-  type: bool
+  type: boolean
 - name: broadcastTime
   type: number
 - name: canSoR
-  type: bool
+  type: boolean
 - name: isReferAFriend
-  type: bool
+  type: boolean
 - name: canSummonFriend
-  type: bool
+  type: boolean

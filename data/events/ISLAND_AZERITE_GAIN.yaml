@@ -5,7 +5,7 @@ payload:
 - name: amount
   type: number
 - name: gainedByPlayer
-  type: bool
+  type: boolean
 - name: factionIndex
   type: number
 - name: gainedBy

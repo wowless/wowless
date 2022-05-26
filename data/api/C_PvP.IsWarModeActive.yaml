@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: warModeActive
-  type: bool
+  type: boolean

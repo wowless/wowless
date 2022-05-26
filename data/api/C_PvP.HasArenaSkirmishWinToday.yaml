@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: hasArenaSkirmishWinToday
-  type: bool
+  type: boolean

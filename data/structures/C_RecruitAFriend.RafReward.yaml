@@ -11,9 +11,9 @@ fields:
 - name: availableInMonths
   type: number
 - name: canClaim
-  type: bool
+  type: boolean
 - name: claimed
-  type: bool
+  type: boolean
 - name: iconID
   type: number
 - name: illusionInfo
@@ -32,7 +32,7 @@ fields:
   nilable: true
   type: C_RecruitAFriend.RafPetInfo
 - name: repeatable
-  type: bool
+  type: boolean
 - name: repeatableClaimCount
   type: number
 - name: rewardID

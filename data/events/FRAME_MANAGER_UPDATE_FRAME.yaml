@@ -5,4 +5,4 @@ payload:
 - name: type
   type: number
 - name: show
-  type: bool
+  type: boolean

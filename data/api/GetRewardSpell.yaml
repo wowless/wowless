@@ -9,17 +9,17 @@ outputs:
 - name: spellName
   type: string
 - name: isTradeskillSpell
-  type: bool
+  type: boolean
 - name: isSpellLearned
-  type: bool
+  type: boolean
 - name: hideSpellLearnText
-  type: bool
+  type: boolean
 - name: isBoostSpell
-  type: bool
+  type: boolean
 - name: garrFollowerID
   nilable: true
   type: number
 - name: genericUnlock
-  type: bool
+  type: boolean
 - name: spellID
   type: number

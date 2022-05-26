@@ -4,5 +4,5 @@ status: unimplemented
 inputs:
 - - name: reverse
     nilable: true
-    type: bool
+    type: boolean
 outputs: {}

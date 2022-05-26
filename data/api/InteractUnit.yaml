@@ -6,4 +6,4 @@ inputs:
     type: unit
 outputs:
 - name: value
-  type: bool
+  type: boolean

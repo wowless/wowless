@@ -3,6 +3,6 @@ name: GetShapeshiftForm
 status: unimplemented
 inputs:
 - - nilable: true
-    type: bool
+    type: boolean
 outputs:
 - type: number

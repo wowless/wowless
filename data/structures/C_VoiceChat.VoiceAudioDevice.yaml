@@ -7,8 +7,8 @@ fields:
 - name: displayName
   type: string
 - name: isActive
-  type: bool
+  type: boolean
 - name: isCommsDefault
-  type: bool
+  type: boolean
 - name: isSystemDefault
-  type: bool
+  type: boolean

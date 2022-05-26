@@ -14,7 +14,7 @@ fields:
 - name: guid
   type: string
 - name: inviteIsMine
-  type: bool
+  type: boolean
 - name: inviteStatus
   nilable: true
   type: number

@@ -16,7 +16,7 @@ outputs:
 - name: quality
   type: number
 - name: canUse
-  type: bool
+  type: boolean
 - name: price
   type: number
 - name: pricePerUnit

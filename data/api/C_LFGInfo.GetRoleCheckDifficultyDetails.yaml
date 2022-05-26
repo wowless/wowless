@@ -8,4 +8,4 @@ outputs:
   nilable: true
   type: number
 - name: isLevelReduced
-  type: bool
+  type: boolean

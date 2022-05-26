@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: areEffectsSuppressed
-  type: bool
+  type: boolean

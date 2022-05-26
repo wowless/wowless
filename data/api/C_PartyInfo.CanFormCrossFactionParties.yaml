@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: canFormCrossFactionParties
-  type: bool
+  type: boolean

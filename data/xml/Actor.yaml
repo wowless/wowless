@@ -6,6 +6,6 @@ attributes:
   name:
     type: string
   virtual:
-    type: bool
+    type: boolean
 contents:
 - Scripts

@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: actionPending
-  type: bool
+  type: boolean

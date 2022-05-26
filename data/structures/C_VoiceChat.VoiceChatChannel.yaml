@@ -9,13 +9,13 @@ fields:
 - name: clubId
   type: string
 - name: isActive
-  type: bool
+  type: boolean
 - name: isMuted
-  type: bool
+  type: boolean
 - name: isTranscribing
-  type: bool
+  type: boolean
 - name: isTransmitting
-  type: bool
+  type: boolean
 - innerType: C_VoiceChat.VoiceChatMember
   name: members
   type: table

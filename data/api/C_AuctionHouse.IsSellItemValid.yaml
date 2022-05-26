@@ -7,7 +7,7 @@ inputs:
     type: table
   - default: true
     name: displayError
-    type: bool
+    type: boolean
 outputs:
 - name: valid
-  type: bool
+  type: boolean

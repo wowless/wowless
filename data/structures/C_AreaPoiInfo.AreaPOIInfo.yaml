@@ -16,7 +16,7 @@ fields:
   name: position
   type: Vector2D
 - name: shouldGlow
-  type: bool
+  type: boolean
 - name: textureIndex
   nilable: true
   type: number

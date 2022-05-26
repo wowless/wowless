@@ -5,7 +5,7 @@ inputs:
 - - name: actionID
     type: number
   - name: useNeutral
-    type: bool
+    type: boolean
 outputs:
 - name: isHarmful
-  type: bool
+  type: boolean

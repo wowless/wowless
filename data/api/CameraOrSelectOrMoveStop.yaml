@@ -3,5 +3,5 @@ name: CameraOrSelectOrMoveStop
 status: unimplemented
 inputs:
 - - name: stickyFlag
-    type: bool
+    type: boolean
 outputs: {}

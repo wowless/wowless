@@ -7,4 +7,4 @@ outputs:
 - name: itemLevel
   type: number
 - name: isPvpItemLevel
-  type: bool
+  type: boolean

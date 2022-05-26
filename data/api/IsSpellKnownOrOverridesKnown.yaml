@@ -6,7 +6,7 @@ inputs:
     type: number
   - name: isPet
     nilable: true
-    type: bool
+    type: boolean
 outputs:
 - name: value
-  type: bool
+  type: boolean

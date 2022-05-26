@@ -5,14 +5,14 @@ fields:
 - name: clientID
   type: number
 - name: eligible
-  type: bool
+  type: boolean
 - name: isAutoAccept
-  type: bool
+  type: boolean
 - name: needDamage
-  type: bool
+  type: boolean
 - name: needHealer
-  type: bool
+  type: boolean
 - name: needTank
-  type: bool
+  type: boolean
 - name: queueData
   type: unknown

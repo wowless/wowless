@@ -8,5 +8,5 @@ inputs:
     name: sorts
     type: table
   - name: separateOwnerItems
-    type: bool
+    type: boolean
 outputs: {}

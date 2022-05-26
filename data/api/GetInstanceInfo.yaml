@@ -17,7 +17,7 @@ outputs:
 - name: dynamicDifficulty
   type: number
 - name: isDynamic
-  type: bool
+  type: boolean
 - name: instanceID
   type: number
 - name: instanceGroupSize

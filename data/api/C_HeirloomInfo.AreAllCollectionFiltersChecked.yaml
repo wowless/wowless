@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: areAllCollectionFiltersChecked
-  type: bool
+  type: boolean

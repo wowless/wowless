@@ -6,10 +6,10 @@ inputs:
     type: number
   - name: isInspect
     nilable: true
-    type: bool
+    type: boolean
   - name: isPet
     nilable: true
-    type: bool
+    type: boolean
   - name: inspectTarget
     nilable: true
     type: unknown

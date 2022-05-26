@@ -17,4 +17,4 @@ outputs:
   nilable: true
   type: string
 - name: canLoseTransmog
-  type: bool
+  type: boolean

@@ -6,5 +6,5 @@ inputs:
     type: number
   - name: keepCustomZoom
     nilable: true
-    type: bool
+    type: boolean
 outputs: {}

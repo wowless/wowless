@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: canView
-  type: bool
+  type: boolean

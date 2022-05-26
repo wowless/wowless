@@ -5,7 +5,7 @@ fields:
 - name: iconFileID
   type: number
 - name: isCurrencyMaxed
-  type: bool
+  type: boolean
 - name: leadingText
   type: string
 - name: text

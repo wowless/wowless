@@ -5,5 +5,5 @@ inputs:
 - - name: talentID
     type: number
   - name: locked
-    type: bool
+    type: boolean
 outputs: {}

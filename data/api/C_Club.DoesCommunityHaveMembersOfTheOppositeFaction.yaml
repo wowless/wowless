@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: hasMembersOfOppositeFaction
-  type: bool
+  type: boolean

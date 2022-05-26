@@ -9,4 +9,4 @@ payload:
 - name: timeoutSeconds
   type: number
 - name: tournamentRules
-  type: bool
+  type: boolean

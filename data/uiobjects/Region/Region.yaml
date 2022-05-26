@@ -12,16 +12,16 @@ fields:
     type: number
   explicitlyProtected:
     init: false
-    type: bool
+    type: boolean
   height:
     init: 0
     type: number
   isIgnoringParentAlpha:
     init: false
-    type: bool
+    type: boolean
   isIgnoringParentScale:
     init: false
-    type: bool
+    type: boolean
   left:
     init: 0
     type: number
@@ -33,7 +33,7 @@ fields:
     type: number
   shown:
     init: true
-    type: bool
+    type: boolean
   width:
     init: 0
     type: number

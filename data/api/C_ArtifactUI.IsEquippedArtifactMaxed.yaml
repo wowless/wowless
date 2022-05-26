@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: artifactMaxed
-  type: bool
+  type: boolean

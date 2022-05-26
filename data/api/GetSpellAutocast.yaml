@@ -8,6 +8,6 @@ inputs:
     type: string
 outputs:
 - name: autoCastAllowed
-  type: bool
+  type: boolean
 - name: autoCastEnabled
-  type: bool
+  type: boolean

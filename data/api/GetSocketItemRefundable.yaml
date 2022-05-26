@@ -8,4 +8,4 @@ inputs:
 - {}
 outputs:
 - name: value
-  type: bool
+  type: boolean

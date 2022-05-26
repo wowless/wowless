@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: favoritesAreAvailable
-  type: bool
+  type: boolean

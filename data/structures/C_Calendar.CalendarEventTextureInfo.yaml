@@ -11,7 +11,7 @@ fields:
   type: number
 - name: isLfr
   nilable: true
-  type: bool
+  type: boolean
 - name: mapId
   nilable: true
   type: number

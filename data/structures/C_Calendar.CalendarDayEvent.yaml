@@ -12,9 +12,9 @@ fields:
 - name: difficultyName
   type: string
 - name: dontDisplayBanner
-  type: bool
+  type: boolean
 - name: dontDisplayEnd
-  type: bool
+  type: boolean
 - name: endTime
   type: CalendarTime
 - name: eventID
@@ -31,9 +31,9 @@ fields:
 - name: invitedBy
   type: string
 - name: isCustomTitle
-  type: bool
+  type: boolean
 - name: isLocked
-  type: bool
+  type: boolean
 - name: modStatus
   type: string
 - name: numSequenceDays

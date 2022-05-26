@@ -10,13 +10,13 @@ attributes:
   maxlines:
     type: number
   nonspacewrap:
-    type: bool
+    type: boolean
   spacing:
     type: number
   text:
     type: string
   wordwrap:
-    type: bool
+    type: boolean
 contents:
 - FontHeight
 - Shadow

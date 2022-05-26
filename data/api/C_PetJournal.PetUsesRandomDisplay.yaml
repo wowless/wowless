@@ -7,4 +7,4 @@ inputs:
 outputs:
 - name: usesRandomDisplay
   nilable: true
-  type: bool
+  type: boolean

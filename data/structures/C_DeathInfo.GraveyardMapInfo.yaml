@@ -7,7 +7,7 @@ fields:
 - name: graveyardID
   type: number
 - name: isGraveyardSelectable
-  type: bool
+  type: boolean
 - name: name
   type: string
 - mixin: Vector2DMixin

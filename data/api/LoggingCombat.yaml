@@ -4,7 +4,7 @@ status: unimplemented
 inputs:
 - - name: value
     nilable: true
-    type: bool
+    type: boolean
 outputs:
 - name: value
-  type: bool
+  type: boolean

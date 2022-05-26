@@ -13,7 +13,7 @@ fields:
   type: number
 - name: rawButtonCount
   type: number
-- innerType: bool
+- innerType: boolean
   name: rawButtons
   type: table
 - name: vendorID

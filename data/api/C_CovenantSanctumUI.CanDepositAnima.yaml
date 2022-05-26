@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: canDeposit
-  type: bool
+  type: boolean

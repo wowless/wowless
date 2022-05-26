@@ -5,4 +5,4 @@ payload:
 - name: guid
   type: string
 - name: response
-  type: bool
+  type: boolean

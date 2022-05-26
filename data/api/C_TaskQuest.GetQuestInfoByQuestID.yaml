@@ -12,7 +12,7 @@ outputs:
   type: number
 - name: capped
   nilable: true
-  type: bool
+  type: boolean
 - name: displayAsObjective
   nilable: true
-  type: bool
+  type: boolean

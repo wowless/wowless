@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: hasFavorites
-  type: bool
+  type: boolean

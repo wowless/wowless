@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: postingBanned
-  type: bool
+  type: boolean

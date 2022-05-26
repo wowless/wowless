@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: isIgnored
-  type: bool
+  type: boolean

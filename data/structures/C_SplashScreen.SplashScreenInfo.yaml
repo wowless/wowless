@@ -25,7 +25,7 @@ fields:
 - name: screenType
   type: number
 - name: shouldShowQuest
-  type: bool
+  type: boolean
 - name: soundKitID
   type: number
 - name: textureKit

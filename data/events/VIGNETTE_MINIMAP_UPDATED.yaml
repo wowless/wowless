@@ -5,4 +5,4 @@ payload:
 - name: vignetteGUID
   type: string
 - name: onMinimap
-  type: bool
+  type: boolean

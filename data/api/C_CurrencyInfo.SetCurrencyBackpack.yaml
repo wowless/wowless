@@ -5,5 +5,5 @@ inputs:
 - - name: index
     type: number
   - name: backpack
-    type: bool
+    type: boolean
 outputs: {}

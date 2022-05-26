@@ -6,7 +6,7 @@ inputs:
     type: C_AuctionHouse.ItemKey
   - default: false
     name: restrictQualityToFilter
-    type: bool
+    type: boolean
 outputs:
 - name: itemKeyInfo
   nilable: true

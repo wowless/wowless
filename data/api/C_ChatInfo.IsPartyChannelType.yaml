@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: isPartyChannelType
-  type: bool
+  type: boolean

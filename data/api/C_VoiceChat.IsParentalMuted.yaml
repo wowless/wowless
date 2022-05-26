@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isParentalMuted
-  type: bool
+  type: boolean

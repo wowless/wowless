@@ -5,6 +5,6 @@ payload:
 - name: contributionID
   type: number
 - name: isPending
-  type: bool
+  type: boolean
 - name: result
   type: number

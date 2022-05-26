@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: hasSearchResultInfo
-  type: bool
+  type: boolean

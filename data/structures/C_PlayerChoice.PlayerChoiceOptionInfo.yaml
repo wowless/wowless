@@ -8,13 +8,13 @@ fields:
 - name: choiceArtID
   type: number
 - name: desaturatedArt
-  type: bool
+  type: boolean
 - name: description
   type: string
 - name: disabledOption
-  type: bool
+  type: boolean
 - name: hasRewards
-  type: bool
+  type: boolean
 - name: header
   type: string
 - name: headerIconAtlasElement

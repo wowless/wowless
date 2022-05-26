@@ -5,10 +5,10 @@ inputs:
 - - name: mountID
     type: number
   - name: checkIndoors
-    type: bool
+    type: boolean
 outputs:
 - name: isUsable
-  type: bool
+  type: boolean
 - name: useError
   nilable: true
   type: string

@@ -8,13 +8,13 @@ fields:
 - name: age
   type: number
 - name: autoAccept
-  type: bool
+  type: boolean
 - name: comment
   type: string
 - name: isDelisted
-  type: bool
+  type: boolean
 - name: isWarMode
-  type: bool
+  type: boolean
 - name: leaderName
   nilable: true
   type: string

@@ -3,5 +3,5 @@ name: SetSendMailShowing
 status: unimplemented
 inputs:
 - - name: sendMailShowing
-    type: bool
+    type: boolean
 outputs: {}

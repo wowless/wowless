@@ -5,7 +5,7 @@ fields:
 - name: availableMonths
   type: number
 - name: claimInProgress
-  type: bool
+  type: boolean
 - name: lifetimeMonths
   type: number
 - name: nextReward

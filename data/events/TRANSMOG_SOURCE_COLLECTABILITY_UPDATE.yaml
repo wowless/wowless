@@ -5,4 +5,4 @@ payload:
 - name: itemModifiedAppearanceID
   type: number
 - name: collectable
-  type: bool
+  type: boolean

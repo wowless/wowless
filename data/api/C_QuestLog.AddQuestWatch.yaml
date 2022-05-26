@@ -9,4 +9,4 @@ inputs:
     type: number
 outputs:
 - name: wasWatched
-  type: bool
+  type: boolean

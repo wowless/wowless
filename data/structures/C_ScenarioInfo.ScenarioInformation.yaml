@@ -9,7 +9,7 @@ fields:
 - name: flags
   type: number
 - name: isComplete
-  type: bool
+  type: boolean
 - name: money
   type: number
 - name: name

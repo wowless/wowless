@@ -35,13 +35,13 @@ fields:
 - name: height
   type: number
 - name: isAutoTroop
-  type: bool
+  type: boolean
 - name: isCollected
-  type: bool
+  type: boolean
 - name: isSoulbind
-  type: bool
+  type: boolean
 - name: isTroop
-  type: bool
+  type: boolean
 - name: level
   type: number
 - name: levelXP

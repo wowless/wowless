@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: removalSuccessful
-  type: bool
+  type: boolean

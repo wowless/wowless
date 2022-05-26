@@ -12,6 +12,6 @@ outputs:
 - name: rewardQuestID
   type: number
 - name: hasRewardPending
-  type: bool
+  type: boolean
 - name: tooLowLevelForParagon
-  type: bool
+  type: boolean

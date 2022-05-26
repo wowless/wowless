@@ -5,14 +5,14 @@ payload:
 - name: unitTarget
   type: string
 - name: showVehicleFrame
-  type: bool
+  type: boolean
 - name: isControlSeat
-  type: bool
+  type: boolean
 - name: vehicleUIIndicatorID
   type: number
 - name: vehicleGUID
   type: string
 - name: mayChooseExit
-  type: bool
+  type: boolean
 - name: hasPitch
-  type: bool
+  type: boolean

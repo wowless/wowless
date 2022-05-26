@@ -9,5 +9,5 @@ inputs:
   - name: zPos
     type: number
   - name: snapToLocation
-    type: bool
+    type: boolean
 outputs: {}

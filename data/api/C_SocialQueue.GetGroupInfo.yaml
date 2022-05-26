@@ -6,18 +6,18 @@ inputs:
     type: string
 outputs:
 - name: canJoin
-  type: bool
+  type: boolean
 - name: numQueues
   type: number
 - name: needTank
-  type: bool
+  type: boolean
 - name: needHealer
-  type: bool
+  type: boolean
 - name: needDamage
-  type: bool
+  type: boolean
 - name: isSoloQueueParty
-  type: bool
+  type: boolean
 - name: questSessionActive
-  type: bool
+  type: boolean
 - name: leaderGUID
   type: string

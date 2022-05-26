@@ -14,7 +14,7 @@ outputs:
 - name: quality
   type: number
 - name: isUsable
-  type: bool
+  type: boolean
 - name: enchantment
   nilable: true
   type: string

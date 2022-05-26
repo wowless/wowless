@@ -11,11 +11,11 @@ fields:
 - name: iconFileID
   type: number
 - name: isCommodity
-  type: bool
+  type: boolean
 - name: isEquipment
-  type: bool
+  type: boolean
 - name: isPet
-  type: bool
+  type: boolean
 - name: itemName
   type: string
 - name: quality

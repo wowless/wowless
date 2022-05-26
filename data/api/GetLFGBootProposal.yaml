@@ -5,9 +5,9 @@ inputs:
 - {}
 outputs:
 - name: voteInProgress
-  type: bool
+  type: boolean
 - name: didVote
-  type: bool
+  type: boolean
 - name: myVote
   type: number
 - name: targetName

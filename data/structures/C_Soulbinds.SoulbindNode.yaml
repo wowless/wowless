@@ -28,7 +28,7 @@ fields:
   type: number
 - name: socketEnhanced
   nilable: true
-  type: bool
+  type: boolean
 - name: spellID
   type: number
 - name: state

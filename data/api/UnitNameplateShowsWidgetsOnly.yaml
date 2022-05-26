@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: nameplateShowsWidgetsOnly
-  type: bool
+  type: boolean

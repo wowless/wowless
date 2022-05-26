@@ -11,4 +11,4 @@ inputs:
     type: number
 outputs:
 - name: matches
-  type: bool
+  type: boolean

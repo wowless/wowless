@@ -4,7 +4,7 @@ attributes:
   motionscriptswhiledisabled:
     impl:
       method: SetMotionScriptsWhileDisabled
-    type: bool
+    type: boolean
   registerforclicks:
     impl:
       method: RegisterForClicks

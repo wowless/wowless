@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: isAnimaItem
-  type: bool
+  type: boolean

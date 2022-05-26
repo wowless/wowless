@@ -25,9 +25,9 @@ fields:
   type: number
 - name: isRemoteChat
   nilable: true
-  type: bool
+  type: boolean
 - name: isSelf
-  type: bool
+  type: boolean
 - name: lastOnlineDay
   nilable: true
   type: number

@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: canDisplay
-  type: bool
+  type: boolean

@@ -11,4 +11,4 @@ outputs:
   stub: someNonEmptyString
   type: string
 - name: isArmorType
-  type: bool
+  type: boolean

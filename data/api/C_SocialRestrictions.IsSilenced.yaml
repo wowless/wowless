@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isSilenced
-  type: bool
+  type: boolean

@@ -181,7 +181,7 @@ local function mkBaseUIObjectTypes(api)
             local v = select(i, ...)
             local cf = cfg.fields[f.name]
             local ty = cf.type
-            if ty == 'bool' then
+            if ty == 'boolean' then
               ud[f.name] = not not v
             elseif v == nil then
               assert(f.nilable or cf.nilable, ('cannot set nil on %s.%s.%s'):format(name, mname, f.name))

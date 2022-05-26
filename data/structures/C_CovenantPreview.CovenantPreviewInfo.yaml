@@ -19,7 +19,7 @@ fields:
 - name: featureInfo
   type: C_CovenantPreview.CovenantFeatureInfo
 - name: fromPlayerChoice
-  type: bool
+  type: boolean
 - name: mountID
   type: number
 - name: textureKit

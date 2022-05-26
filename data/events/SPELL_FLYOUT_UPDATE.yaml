@@ -10,4 +10,4 @@ payload:
   type: number
 - name: isLearned
   nilable: true
-  type: bool
+  type: boolean

@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: shouldShowNodes
-  type: bool
+  type: boolean

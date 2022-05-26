@@ -5,20 +5,20 @@ fields:
 - name: description
   type: string
 - name: isBonusStep
-  type: bool
+  type: boolean
 - name: isForCurrentStepOnly
-  type: bool
+  type: boolean
 - name: numCriteria
   type: number
 - name: rewardQuestID
   type: number
 - name: shouldShowBonusObjective
-  type: bool
+  type: boolean
 - innerType: C_ScenarioInfo.ScenarioStepSpellInfo
   name: spells
   type: table
 - name: stepFailed
-  type: bool
+  type: boolean
 - name: title
   type: string
 - name: weightedProgress

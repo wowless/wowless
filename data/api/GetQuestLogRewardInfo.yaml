@@ -17,6 +17,6 @@ outputs:
 - name: quality
   type: number
 - name: isUsable
-  type: bool
+  type: boolean
 - name: itemID
   type: number

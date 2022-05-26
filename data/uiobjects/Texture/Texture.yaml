@@ -15,7 +15,7 @@ fields:
     type: number
   horizTile:
     init: false
-    type: bool
+    type: boolean
   texture:
     nilable: true
     type: string
@@ -33,7 +33,7 @@ fields:
     type: number
   vertTile:
     init: false
-    type: bool
+    type: boolean
 inherits:
 - LayeredRegion
 - ParentedObject

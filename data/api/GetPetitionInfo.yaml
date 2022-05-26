@@ -15,6 +15,6 @@ outputs:
 - name: originatorName
   type: string
 - name: isOriginator
-  type: bool
+  type: boolean
 - name: minSignatures
   type: number

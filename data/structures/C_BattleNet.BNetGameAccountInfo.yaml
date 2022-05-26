@@ -6,7 +6,7 @@ fields:
   nilable: true
   type: string
 - name: canSummon
-  type: bool
+  type: boolean
 - name: characterLevel
   nilable: true
   type: number
@@ -25,17 +25,17 @@ fields:
   nilable: true
   type: number
 - name: hasFocus
-  type: bool
+  type: boolean
 - name: isGameAFK
-  type: bool
+  type: boolean
 - name: isGameBusy
-  type: bool
+  type: boolean
 - name: isInCurrentRegion
-  type: bool
+  type: boolean
 - name: isOnline
-  type: bool
+  type: boolean
 - name: isWowMobile
-  type: bool
+  type: boolean
 - name: playerGuid
   nilable: true
   type: string

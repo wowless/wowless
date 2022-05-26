@@ -6,8 +6,8 @@ inputs:
     type: number
 outputs:
 - name: tankLocked
-  type: bool
+  type: boolean
 - name: healerLocked
-  type: bool
+  type: boolean
 - name: dpsLocked
-  type: bool
+  type: boolean

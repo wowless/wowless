@@ -15,11 +15,11 @@ outputs:
 - name: questTag
   type: string
 - name: isHeader
-  type: bool
+  type: boolean
 - name: isCollapsed
-  type: bool
+  type: boolean
 - name: isComplete
-  type: bool
+  type: boolean
 - name: frequency
   type: string
 - name: questID
@@ -29,16 +29,16 @@ outputs:
 - name: displayQuestID
   type: number
 - name: isOnMap
-  type: bool
+  type: boolean
 - name: hasLocalPOI
-  type: bool
+  type: boolean
 - name: isTask
-  type: bool
+  type: boolean
 - name: isBounty
-  type: bool
+  type: boolean
 - name: isStory
-  type: bool
+  type: boolean
 - name: isHidden
-  type: bool
+  type: boolean
 - name: isScaling
-  type: bool
+  type: boolean

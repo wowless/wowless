@@ -8,4 +8,4 @@ inputs:
 outputs:
 - name: mutedForMe
   nilable: true
-  type: bool
+  type: boolean

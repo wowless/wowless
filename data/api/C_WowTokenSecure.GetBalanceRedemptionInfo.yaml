@@ -9,6 +9,6 @@ outputs:
 - name: addedBalance
   type: number
 - name: canRedeem
-  type: bool
+  type: boolean
 - name: cannotRedeemReason
   type: string

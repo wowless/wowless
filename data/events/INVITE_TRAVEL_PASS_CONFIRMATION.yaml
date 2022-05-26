@@ -7,6 +7,6 @@ payload:
 - name: targetGUID
   type: string
 - name: willConvertToRaid
-  type: bool
+  type: boolean
 - name: questSessionActive
-  type: bool
+  type: boolean

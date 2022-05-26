@@ -3,5 +3,5 @@ name: C_WowTokenSecure.ConfirmSellToken
 status: unimplemented
 inputs:
 - - name: sell
-    type: bool
+    type: boolean
 outputs: {}

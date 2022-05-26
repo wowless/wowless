@@ -5,4 +5,4 @@ payload:
 - name: channelID
   type: number
 - name: isTranscribing
-  type: bool
+  type: boolean

@@ -13,4 +13,4 @@ outputs:
 - name: icon
   type: number
 - name: gemMatchesSocket
-  type: bool
+  type: boolean

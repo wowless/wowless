@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isLoading
-  type: bool
+  type: boolean

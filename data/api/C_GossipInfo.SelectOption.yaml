@@ -9,5 +9,5 @@ inputs:
     type: string
   - name: confirmed
     nilable: true
-    type: bool
+    type: boolean
 outputs: {}

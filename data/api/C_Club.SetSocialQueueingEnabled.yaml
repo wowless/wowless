@@ -5,5 +5,5 @@ inputs:
 - - name: clubId
     type: string
   - name: enabled
-    type: bool
+    type: boolean
 outputs: {}

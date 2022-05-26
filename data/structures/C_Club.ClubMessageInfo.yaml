@@ -7,11 +7,11 @@ fields:
 - name: content
   type: string
 - name: destroyed
-  type: bool
+  type: boolean
 - name: destroyer
   nilable: true
   type: C_Club.ClubMemberInfo
 - name: edited
-  type: bool
+  type: boolean
 - name: messageId
   type: C_Club.ClubMessageIdentifier

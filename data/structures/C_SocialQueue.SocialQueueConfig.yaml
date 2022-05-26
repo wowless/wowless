@@ -45,6 +45,6 @@ fields:
 - name: THROTTLE_RF_PRIORITY_ABOVE
   type: number
 - name: TOASTS_DISABLED
-  type: bool
+  type: boolean
 - name: TOAST_DURATION
   type: number

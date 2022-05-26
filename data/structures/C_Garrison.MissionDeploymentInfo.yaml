@@ -14,7 +14,7 @@ fields:
 - name: environmentTexture
   type: number
 - name: isExhausting
-  type: bool
+  type: boolean
 - name: locTextureKit
   type: string
 - name: location

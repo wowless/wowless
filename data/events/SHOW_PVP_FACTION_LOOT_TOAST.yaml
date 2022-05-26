@@ -13,6 +13,6 @@ payload:
 - name: sex
   type: number
 - name: personalLootToast
-  type: bool
+  type: boolean
 - name: lessAwesome
-  type: bool
+  type: boolean

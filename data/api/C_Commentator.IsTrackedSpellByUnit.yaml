@@ -10,4 +10,4 @@ inputs:
     type: number
 outputs:
 - name: isTracked
-  type: bool
+  type: boolean

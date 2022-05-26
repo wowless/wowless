@@ -14,4 +14,4 @@ inputs:
     type: number
 outputs:
 - name: alreadyHasMessages
-  type: bool
+  type: boolean

@@ -5,4 +5,4 @@ payload:
 - name: summonReason
   type: number
 - name: skippingStartExperience
-  type: bool
+  type: boolean

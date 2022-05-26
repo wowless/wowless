@@ -15,4 +15,4 @@ outputs:
 - name: ability3ID
   type: number
 - name: locked
-  type: bool
+  type: boolean

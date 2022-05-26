@@ -19,6 +19,6 @@ outputs:
 - name: role
   type: string
 - name: isRecommended
-  type: bool
+  type: boolean
 - name: isAllowed
-  type: bool
+  type: boolean

@@ -7,6 +7,6 @@ inputs:
     type: table
 outputs:
 - name: canTransmog
-  type: bool
+  type: boolean
 - name: errorCode
   type: number

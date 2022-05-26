@@ -6,7 +6,7 @@ inputs:
     type: table
   - name: isFemale
     nilable: true
-    type: bool
+    type: boolean
 outputs:
 - name: classTable
   type: table

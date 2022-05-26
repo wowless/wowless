@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isSpectating
-  type: bool
+  type: boolean

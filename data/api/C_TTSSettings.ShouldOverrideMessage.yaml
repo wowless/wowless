@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: overrideMessage
-  type: bool
+  type: boolean

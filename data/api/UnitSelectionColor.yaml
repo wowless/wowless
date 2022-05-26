@@ -6,7 +6,7 @@ inputs:
     type: unit
   - name: useExtendedColors
     nilable: true
-    type: bool
+    type: boolean
 outputs:
 - name: red
   type: number

@@ -7,10 +7,10 @@ fields:
 - name: brawlType
   type: number
 - name: canQueue
-  type: bool
+  type: boolean
 - default: false
   name: includesAllArenas
-  type: bool
+  type: boolean
 - name: longDescription
   type: string
 - innerType: string

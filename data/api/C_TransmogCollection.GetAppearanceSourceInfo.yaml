@@ -10,11 +10,11 @@ outputs:
 - name: itemAppearanceID
   type: number
 - name: canHaveIllusion
-  type: bool
+  type: boolean
 - name: icon
   type: number
 - name: isCollected
-  type: bool
+  type: boolean
 - name: itemLink
   type: string
 - name: transmoglink

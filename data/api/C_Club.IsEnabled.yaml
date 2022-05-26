@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: clubsEnabled
-  type: bool
+  type: boolean

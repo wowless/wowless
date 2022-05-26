@@ -12,7 +12,7 @@ attributes:
   obeystepondrag:
     impl:
       method: SetObeyStepOnDrag
-    type: bool
+    type: boolean
   orientation:
     impl:
       method: SetOrientation

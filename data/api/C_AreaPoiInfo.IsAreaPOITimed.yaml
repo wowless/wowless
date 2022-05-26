@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: isTimed
-  type: bool
+  type: boolean

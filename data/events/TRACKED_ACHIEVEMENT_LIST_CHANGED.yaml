@@ -7,4 +7,4 @@ payload:
   type: number
 - name: added
   nilable: true
-  type: bool
+  type: boolean

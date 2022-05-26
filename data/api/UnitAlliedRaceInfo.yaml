@@ -6,6 +6,6 @@ inputs:
     type: string
 outputs:
 - name: isAlliedRace
-  type: bool
+  type: boolean
 - name: hasHeritageArmorUnlocked
-  type: bool
+  type: boolean

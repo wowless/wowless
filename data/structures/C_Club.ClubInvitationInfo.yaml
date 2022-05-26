@@ -7,4 +7,4 @@ fields:
 - name: invitee
   type: C_Club.ClubMemberInfo
 - name: isMyInvitation
-  type: bool
+  type: boolean

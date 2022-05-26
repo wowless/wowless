@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: shouldDiscoverChannels
-  type: bool
+  type: boolean

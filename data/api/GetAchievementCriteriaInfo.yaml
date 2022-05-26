@@ -9,7 +9,7 @@ inputs:
 outputs:
 - type: string
 - type: number
-- type: bool
+- type: boolean
 - type: number
 - type: number
 - type: string
@@ -17,6 +17,6 @@ outputs:
 - type: number
 - type: string
 - type: number
-- type: bool
+- type: boolean
 - type: number
 - type: number

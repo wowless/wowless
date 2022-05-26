@@ -12,4 +12,4 @@ outputs:
 - name: maxPlayers
   type: number
 - name: isArena
-  type: bool
+  type: boolean

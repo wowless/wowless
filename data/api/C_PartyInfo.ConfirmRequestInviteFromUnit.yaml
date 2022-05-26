@@ -6,11 +6,11 @@ inputs:
     type: string
   - name: tank
     nilable: true
-    type: bool
+    type: boolean
   - name: healer
     nilable: true
-    type: bool
+    type: boolean
   - name: dps
     nilable: true
-    type: bool
+    type: boolean
 outputs: {}

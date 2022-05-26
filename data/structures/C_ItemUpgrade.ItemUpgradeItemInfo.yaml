@@ -9,7 +9,7 @@ fields:
 - name: iconID
   type: number
 - name: itemUpgradeable
-  type: bool
+  type: boolean
 - name: maxUpgrade
   type: number
 - name: name

@@ -5,4 +5,4 @@ payload:
 - name: itemID
   type: number
 - name: success
-  type: bool
+  type: boolean

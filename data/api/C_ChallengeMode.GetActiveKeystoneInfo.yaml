@@ -10,4 +10,4 @@ outputs:
   name: activeAffixIDs
   type: table
 - name: wasActiveKeystoneCharged
-  type: bool
+  type: boolean

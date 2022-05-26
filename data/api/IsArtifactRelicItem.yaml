@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: value
-  type: bool
+  type: boolean

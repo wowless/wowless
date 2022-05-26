@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: hasPending
-  type: bool
+  type: boolean

@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: notchPresent
-  type: bool
+  type: boolean

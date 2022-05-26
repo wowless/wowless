@@ -10,7 +10,7 @@ fields:
   nilable: true
   type: string
 - name: filteredByDifficulty
-  type: bool
+  type: boolean
 - name: firstChildSectionID
   nilable: true
   type: number
@@ -24,7 +24,7 @@ fields:
 - name: spellID
   type: number
 - name: startsOpen
-  type: bool
+  type: boolean
 - name: title
   type: string
 - name: uiModelSceneID

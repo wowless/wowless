@@ -17,7 +17,7 @@ outputs:
   type: number
 - name: usable
   nilable: true
-  type: bool
+  type: boolean
 - name: level
   type: number
 - name: levelType
@@ -49,4 +49,4 @@ outputs:
   type: number
 - name: hasAllInfo
   nilable: true
-  type: bool
+  type: boolean

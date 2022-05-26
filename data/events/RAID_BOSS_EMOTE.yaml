@@ -9,4 +9,4 @@ payload:
 - name: displayTime
   type: number
 - name: enableBossEmoteWarningSound
-  type: bool
+  type: boolean

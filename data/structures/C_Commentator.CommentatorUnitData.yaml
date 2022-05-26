@@ -9,9 +9,9 @@ fields:
 - name: healthMax
   type: number
 - name: isDeadOrGhost
-  type: bool
+  type: boolean
 - name: isFeignDeath
-  type: bool
+  type: boolean
 - name: power
   type: number
 - name: powerMax

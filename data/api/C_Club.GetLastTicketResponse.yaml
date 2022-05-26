@@ -11,4 +11,4 @@ outputs:
   nilable: true
   type: C_Club.ClubInfo
 - name: showError
-  type: bool
+  type: boolean

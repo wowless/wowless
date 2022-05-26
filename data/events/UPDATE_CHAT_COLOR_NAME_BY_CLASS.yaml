@@ -5,4 +5,4 @@ payload:
 - name: name
   type: string
 - name: colorNameByClass
-  type: bool
+  type: boolean

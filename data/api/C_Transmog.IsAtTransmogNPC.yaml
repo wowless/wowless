@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isAtNPC
-  type: bool
+  type: boolean

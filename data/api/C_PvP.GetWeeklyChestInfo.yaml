@@ -5,10 +5,10 @@ inputs:
 - {}
 outputs:
 - name: rewardAchieved
-  type: bool
+  type: boolean
 - name: lastWeekRewardAchieved
-  type: bool
+  type: boolean
 - name: lastWeekRewardClaimed
-  type: bool
+  type: boolean
 - name: pvpTierMaxFromWins
   type: number

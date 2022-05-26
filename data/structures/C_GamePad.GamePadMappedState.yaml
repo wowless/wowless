@@ -9,7 +9,7 @@ fields:
   type: number
 - name: buttonCount
   type: number
-- innerType: bool
+- innerType: boolean
   name: buttons
   type: table
 - name: labelStyle

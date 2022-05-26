@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isRatedBattleground
-  type: bool
+  type: boolean

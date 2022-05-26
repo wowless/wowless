@@ -6,10 +6,10 @@ inputs:
     type: string
   - name: noIconReplacement
     nilable: true
-    type: bool
+    type: boolean
   - name: noGroupReplacement
     nilable: true
-    type: bool
+    type: boolean
 outputs:
 - name: output
   type: string

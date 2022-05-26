@@ -5,4 +5,4 @@ fields:
 - name: creatureDisplayID
   type: number
 - name: isVisible
-  type: bool
+  type: boolean

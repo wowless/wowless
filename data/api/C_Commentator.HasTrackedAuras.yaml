@@ -6,6 +6,6 @@ inputs:
     type: string
 outputs:
 - name: hasOffensiveAura
-  type: bool
+  type: boolean
 - name: hasDefensiveAura
-  type: bool
+  type: boolean

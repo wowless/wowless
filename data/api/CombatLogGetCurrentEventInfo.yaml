@@ -9,7 +9,7 @@ outputs:
 - name: subevent
   type: string
 - name: hideCaster
-  type: bool
+  type: boolean
 - name: guid
   type: string
 - name: name

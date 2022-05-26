@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isUsingSmartCamera
-  type: bool
+  type: boolean

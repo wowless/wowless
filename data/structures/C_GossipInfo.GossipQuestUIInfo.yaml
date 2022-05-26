@@ -7,19 +7,19 @@ fields:
   type: number
 - name: isComplete
   nilable: true
-  type: bool
+  type: boolean
 - name: isIgnored
-  type: bool
+  type: boolean
 - name: isLegendary
-  type: bool
+  type: boolean
 - name: isTrivial
-  type: bool
+  type: boolean
 - name: questID
   type: number
 - name: questLevel
   type: number
 - name: repeatable
   nilable: true
-  type: bool
+  type: boolean
 - name: title
   type: string

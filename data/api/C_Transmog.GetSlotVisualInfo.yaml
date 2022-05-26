@@ -19,8 +19,8 @@ outputs:
 - name: pendingVisualID
   type: number
 - name: hasUndo
-  type: bool
+  type: boolean
 - name: isHideVisual
-  type: bool
+  type: boolean
 - name: itemSubclass
   type: number

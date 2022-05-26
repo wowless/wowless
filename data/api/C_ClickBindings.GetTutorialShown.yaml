@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: tutorialShown
-  type: bool
+  type: boolean

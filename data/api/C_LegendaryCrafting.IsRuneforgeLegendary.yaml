@@ -7,4 +7,4 @@ inputs:
     type: table
 outputs:
 - name: isRuneforgeLegendary
-  type: bool
+  type: boolean

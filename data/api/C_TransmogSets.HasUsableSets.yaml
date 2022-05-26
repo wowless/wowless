@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: hasUsableSets
-  type: bool
+  type: boolean

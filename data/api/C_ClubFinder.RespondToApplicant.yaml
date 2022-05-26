@@ -7,14 +7,14 @@ inputs:
   - name: playerGUID
     type: string
   - name: shouldAccept
-    type: bool
+    type: boolean
   - name: requestType
     type: number
   - name: playerName
     type: string
   - name: forceAccept
-    type: bool
+    type: boolean
   - name: reported
     nilable: true
-    type: bool
+    type: boolean
 outputs: {}

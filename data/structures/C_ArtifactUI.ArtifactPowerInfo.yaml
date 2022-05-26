@@ -9,11 +9,11 @@ fields:
 - name: currentRank
   type: number
 - name: isFinal
-  type: bool
+  type: boolean
 - name: isGoldMedal
-  type: bool
+  type: boolean
 - name: isStart
-  type: bool
+  type: boolean
 - name: linearIndex
   nilable: true
   type: number
@@ -29,7 +29,7 @@ fields:
   name: position
   type: Vector2D
 - name: prereqsMet
-  type: bool
+  type: boolean
 - name: spellID
   type: number
 - name: tier

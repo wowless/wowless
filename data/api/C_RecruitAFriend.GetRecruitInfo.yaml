@@ -5,6 +5,6 @@ inputs:
 - {}
 outputs:
 - name: active
-  type: bool
+  type: boolean
 - name: faction
   type: number

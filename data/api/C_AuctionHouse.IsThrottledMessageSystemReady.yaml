@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: canSendThrottledMessage
-  type: bool
+  type: boolean

@@ -28,4 +28,4 @@ fields:
   type: string
 - name: socialQueueingEnabled
   nilable: true
-  type: bool
+  type: boolean

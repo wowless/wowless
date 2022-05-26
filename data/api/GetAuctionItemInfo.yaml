@@ -48,4 +48,4 @@ outputs:
 - name: itemId
   type: number
 - name: hasAllInfo
-  type: bool
+  type: boolean

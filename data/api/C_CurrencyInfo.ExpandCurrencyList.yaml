@@ -5,5 +5,5 @@ inputs:
 - - name: index
     type: number
   - name: expand
-    type: bool
+    type: boolean
 outputs: {}

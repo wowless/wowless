@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: isWildBattle
-  type: bool
+  type: boolean

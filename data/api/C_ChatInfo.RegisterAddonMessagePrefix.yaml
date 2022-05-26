@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: successfulRequest
-  type: bool
+  type: boolean

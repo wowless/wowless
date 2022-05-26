@@ -3,7 +3,7 @@ name: AcceptBattlefieldPort
 status: unimplemented
 inputs:
 - - type: number
-  - type: bool
+  - type: boolean
 outputs:
-- type: bool
+- type: boolean
 protection: hardware

@@ -12,7 +12,7 @@ payload:
   type: string
 - name: isNewGuild
   nilable: true
-  type: bool
+  type: boolean
 - name: bkgColorR
   nilable: true
   type: number

@@ -12,21 +12,21 @@ outputs:
 - name: icon
   type: number
 - name: isActive
-  type: bool
+  type: boolean
 - name: isUsable
-  type: bool
+  type: boolean
 - name: sourceType
   type: number
 - name: isFavorite
-  type: bool
+  type: boolean
 - name: isFactionSpecific
-  type: bool
+  type: boolean
 - name: faction
   nilable: true
   type: number
 - name: shouldHideOnChar
-  type: bool
+  type: boolean
 - name: isCollected
-  type: bool
+  type: boolean
 - name: mountID
   type: number

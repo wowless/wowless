@@ -5,5 +5,5 @@ inputs:
 - - name: transmogSetID
     type: number
   - name: isFavorite
-    type: bool
+    type: boolean
 outputs: {}

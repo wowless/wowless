@@ -8,4 +8,4 @@ outputs:
 - name: distanceSq
   type: number
 - name: onContinent
-  type: bool
+  type: boolean

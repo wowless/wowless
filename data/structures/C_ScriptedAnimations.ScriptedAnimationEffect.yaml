@@ -61,7 +61,7 @@ fields:
 - name: trajectory
   type: number
 - name: useTargetAsSource
-  type: bool
+  type: boolean
 - name: visual
   type: number
 - name: visualScale

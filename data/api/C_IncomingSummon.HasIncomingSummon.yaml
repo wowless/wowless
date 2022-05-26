@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: summon
-  type: bool
+  type: boolean

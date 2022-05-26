@@ -14,11 +14,11 @@ fields:
   nilable: true
   type: number
 - name: containsAccountItem
-  type: bool
+  type: boolean
 - name: containsOwnerItem
-  type: bool
+  type: boolean
 - name: containsSocketedItem
-  type: bool
+  type: boolean
 - name: itemKey
   type: C_AuctionHouse.ItemKey
 - name: itemLink

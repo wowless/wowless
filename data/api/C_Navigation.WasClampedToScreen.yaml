@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: wasClamped
-  type: bool
+  type: boolean

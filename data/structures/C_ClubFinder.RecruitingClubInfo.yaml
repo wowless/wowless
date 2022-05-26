@@ -17,15 +17,15 @@ fields:
 - name: guildLeader
   type: string
 - name: isCrossFaction
-  type: bool
+  type: boolean
 - name: isGuild
-  type: bool
+  type: boolean
 - name: lastPosterGUID
   type: string
 - name: lastUpdatedTime
   type: number
 - name: localeSet
-  type: bool
+  type: boolean
 - name: minILvl
   type: number
 - name: name

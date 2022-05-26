@@ -7,4 +7,4 @@ payload:
 - name: channelID
   type: number
 - name: isSpeaking
-  type: bool
+  type: boolean

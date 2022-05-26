@@ -5,7 +5,7 @@ inputs:
 - - name: rankOrder
     type: number
 outputs:
-- innerType: bool
+- innerType: boolean
   name: permissions
   stub:
   - false

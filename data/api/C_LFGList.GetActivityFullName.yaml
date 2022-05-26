@@ -9,7 +9,7 @@ inputs:
     type: number
   - name: showWarmode
     nilable: true
-    type: bool
+    type: boolean
 outputs:
 - name: fullName
   type: string

@@ -11,11 +11,11 @@ outputs:
 - name: time
   type: number
 - name: onTime
-  type: bool
+  type: boolean
 - name: keystoneUpgradeLevels
   type: number
 - name: practiceRun
-  type: bool
+  type: boolean
 - name: oldOverallDungeonScore
   nilable: true
   type: number
@@ -23,13 +23,13 @@ outputs:
   nilable: true
   type: number
 - name: IsMapRecord
-  type: bool
+  type: boolean
 - name: IsAffixRecord
-  type: bool
+  type: boolean
 - name: PrimaryAffix
   type: number
 - name: isEligibleForScore
-  type: bool
+  type: boolean
 - innerType: C_ChallengeMode.ChallengeModeCompletionMemberInfo
   name: members
   type: table

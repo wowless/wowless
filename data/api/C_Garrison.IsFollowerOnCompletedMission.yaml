@@ -6,4 +6,4 @@ inputs:
     type: string
 outputs:
 - name: followerOnCompletedMission
-  type: bool
+  type: boolean

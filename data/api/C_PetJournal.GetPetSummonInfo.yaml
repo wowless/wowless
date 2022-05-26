@@ -6,7 +6,7 @@ inputs:
     type: string
 outputs:
 - name: isSummonable
-  type: bool
+  type: boolean
 - name: error
   type: number
 - name: errorText

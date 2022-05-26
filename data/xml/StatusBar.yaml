@@ -14,7 +14,7 @@ attributes:
   reversefill:
     impl:
       method: SetReverseFill
-    type: bool
+    type: boolean
 contents:
 - BarColor
 - BarTexture

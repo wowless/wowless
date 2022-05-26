@@ -7,7 +7,7 @@ fields:
 - name: bestWeeklyRating
   type: number
 - name: hasWonBracketToday
-  type: bool
+  type: boolean
 - name: lastWeeksBestRating
   type: number
 - name: personalRating

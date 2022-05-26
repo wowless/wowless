@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: ready
-  type: bool
+  type: boolean

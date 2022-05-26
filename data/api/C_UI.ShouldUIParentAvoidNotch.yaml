@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: willAvoidNotch
-  type: bool
+  type: boolean

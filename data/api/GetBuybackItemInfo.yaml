@@ -16,4 +16,4 @@ outputs:
 - name: numAvailable
   type: number
 - name: isUsable
-  type: bool
+  type: boolean

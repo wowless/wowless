@@ -14,12 +14,12 @@ outputs:
 - name: notes
   type: string
 - name: loadable
-  type: bool
+  type: boolean
 - name: reason
   type: string
 - name: security
   type: string
 - name: newVersion
-  type: bool
+  type: boolean
 states:
 - Addons

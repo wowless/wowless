@@ -9,4 +9,4 @@ inputs:
 outputs:
 - name: mutedForAll
   nilable: true
-  type: bool
+  type: boolean

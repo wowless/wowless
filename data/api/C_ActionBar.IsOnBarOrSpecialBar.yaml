@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: isOnBarOrSpecialBar
-  type: bool
+  type: boolean

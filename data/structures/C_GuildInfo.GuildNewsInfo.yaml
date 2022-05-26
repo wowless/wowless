@@ -10,9 +10,9 @@ fields:
 - name: guildMembersPresent
   type: number
 - name: isHeader
-  type: bool
+  type: boolean
 - name: isSticky
-  type: bool
+  type: boolean
 - name: month
   type: number
 - name: newsDataID

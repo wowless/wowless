@@ -2,13 +2,13 @@
 name: ScopedModifier
 attributes:
   forbidden:
-    type: bool
+    type: boolean
   fulllockdown:
-    type: bool
+    type: boolean
   scriptsusegivenenv:
     impl:
       scope: useAddonEnv
-    type: bool
+    type: boolean
 contents:
 - Actor
 - LayoutFrame

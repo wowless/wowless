@@ -5,8 +5,8 @@ payload:
 - name: name
   type: string
 - name: isTank
-  type: bool
+  type: boolean
 - name: isHealer
-  type: bool
+  type: boolean
 - name: isDamage
-  type: bool
+  type: boolean

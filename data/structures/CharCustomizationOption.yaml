@@ -8,7 +8,7 @@ fields:
 - name: currentChoiceIndex
   type: number
 - name: hasNewChoices
-  type: bool
+  type: boolean
 - name: id
   type: number
 - name: name

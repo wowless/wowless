@@ -8,4 +8,4 @@ inputs:
     type: string
 outputs:
 - name: subscribed
-  type: bool
+  type: boolean

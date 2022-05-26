@@ -6,5 +6,5 @@ flavors:
 - Vanilla
 inputs:
 - - name: value
-    type: bool
+    type: boolean
 outputs: {}

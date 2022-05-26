@@ -5,7 +5,7 @@ fields:
 - name: frameTextureKit
   type: string
 - name: hasTimer
-  type: bool
+  type: boolean
 - name: inAnimType
   type: number
 - name: layoutDirection

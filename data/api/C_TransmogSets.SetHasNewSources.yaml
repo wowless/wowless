@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: hasNewSources
-  type: bool
+  type: boolean

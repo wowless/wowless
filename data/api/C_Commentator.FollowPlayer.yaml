@@ -8,5 +8,5 @@ inputs:
     type: number
   - name: forceInstantTransition
     nilable: true
-    type: bool
+    type: boolean
 outputs: {}

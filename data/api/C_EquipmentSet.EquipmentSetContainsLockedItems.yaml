@@ -6,4 +6,4 @@ inputs:
     type: number
 outputs:
 - name: hasLockedItems
-  type: bool
+  type: boolean

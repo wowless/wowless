@@ -9,4 +9,4 @@ inputs:
     type: number
 outputs:
 - name: canSelect
-  type: bool
+  type: boolean

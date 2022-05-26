@@ -7,7 +7,7 @@ outputs:
 - name: lockTimeLeft
   type: number
 - name: isPreviousInstance
-  type: bool
+  type: boolean
 - name: encountersTotal
   type: number
 - name: encountersComplete

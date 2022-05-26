@@ -5,9 +5,9 @@ fields:
 - name: id
   type: number
 - name: ineligibleChoice
-  type: bool
+  type: boolean
 - name: isNew
-  type: bool
+  type: boolean
 - name: name
   type: string
 - mixin: ColorMixin

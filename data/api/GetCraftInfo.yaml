@@ -18,7 +18,7 @@ outputs:
 - name: numAvailable
   type: number
 - name: isExpanded
-  type: bool
+  type: boolean
 - name: trainingPointCost
   type: number
 - name: requiredLevel

@@ -6,4 +6,4 @@ inputs:
 outputs:
 - name: isPressed
   nilable: true
-  type: bool
+  type: boolean

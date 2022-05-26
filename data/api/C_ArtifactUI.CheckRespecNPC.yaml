@@ -5,4 +5,4 @@ inputs:
 - {}
 outputs:
 - name: canRespec
-  type: bool
+  type: boolean

@@ -7,13 +7,13 @@ payload:
 - name: partyLevelLink
   type: number
 - name: questSessionActive
-  type: bool
+  type: boolean
 - name: tank
   nilable: true
-  type: bool
+  type: boolean
 - name: healer
   nilable: true
-  type: bool
+  type: boolean
 - name: dps
   nilable: true
-  type: bool
+  type: boolean

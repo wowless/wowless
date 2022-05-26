@@ -6,7 +6,7 @@ inputs:
     type: string
 outputs:
 - name: isUnique
-  type: bool
+  type: boolean
 - name: limitCategoryName
   nilable: true
   type: string

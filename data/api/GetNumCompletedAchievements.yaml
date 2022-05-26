@@ -4,7 +4,7 @@ status: unimplemented
 inputs:
 - - name: forGuild
     nilable: true
-    type: bool
+    type: boolean
 outputs:
 - name: numAchievements
   type: number

@@ -14,7 +14,7 @@ outputs:
 - name: displayIndex
   type: number
 - name: unlocked
-  type: bool
+  type: boolean
 - name: failureDescription
   nilable: true
   type: string
@@ -34,4 +34,4 @@ outputs:
 - name: modelSaturation
   type: number
 - name: obtainable
-  type: bool
+  type: boolean

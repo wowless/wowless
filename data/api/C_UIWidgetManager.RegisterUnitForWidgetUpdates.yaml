@@ -6,5 +6,5 @@ inputs:
     type: string
   - default: false
     name: isGuid
-    type: bool
+    type: boolean
 outputs: {}

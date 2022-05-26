@@ -10,7 +10,7 @@ outputs:
 - name: itemEquipLoc
   type: number
 - name: isPvP
-  type: bool
+  type: boolean
 - name: itemTexture
   type: number
 - name: upgradeLevel
@@ -18,7 +18,7 @@ outputs:
 - name: source
   type: string
 - name: searchFiltered
-  type: bool
+  type: boolean
 - name: effectiveLevel
   type: number
 - name: minLevel

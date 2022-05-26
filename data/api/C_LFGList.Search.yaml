@@ -16,5 +16,5 @@ inputs:
   - default: false
     name: searchCrossFactionListings
     nilable: true
-    type: bool
+    type: boolean
 outputs: {}

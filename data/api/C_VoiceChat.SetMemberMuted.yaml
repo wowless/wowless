@@ -6,5 +6,5 @@ inputs:
     name: playerLocation
     type: table
   - name: muted
-    type: bool
+    type: boolean
 outputs: {}
