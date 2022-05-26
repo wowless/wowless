@@ -12,10 +12,12 @@ outputs:
 - name: title
   type: string
 - name: notes
+  nilable: true
   type: string
 - name: loadable
   type: boolean
 - name: reason
+  nilable: true
   type: string
 - name: security
   type: string

@@ -6,8 +6,10 @@ inputs:
     type: unit
 outputs:
 - name: factionTag
+  nilable: true
   type: string
 - name: localizedFactionName
+  nilable: true
   type: string
 dbs:
 - index: InternalName

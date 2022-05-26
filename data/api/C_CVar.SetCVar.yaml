@@ -9,6 +9,7 @@ inputs:
     type: string
 outputs:
 - name: success
+  nilable: true
   type: boolean
 states:
 - CVars

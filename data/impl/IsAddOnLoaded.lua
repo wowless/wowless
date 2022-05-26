@@ -1,4 +1,10 @@
 return (function(addons, addonIndexOrName)
   local addon = addons[addonIndexOrName]
-  return addon and addon.loaded or nil
+  if tonumber(addonIndexOrName) and not addon then
+    error('AddOn index must be in the range of 1 to ' .. #addons)
+  else
+    local value = addon and addon.loaded or false
+    -- TODO separate values for loaded and finished
+    return value, value
+  end
 end)(...)

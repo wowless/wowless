@@ -8,6 +8,7 @@ outputs:
 - name: powerType
   type: number
 - name: powerToken
+  nilable: true
   type: string
 - name: altR
   nilable: true

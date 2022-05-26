@@ -277,6 +277,11 @@ local function loadFunctions(api, loader)
           return ...
         end
       else
+        local nilableTypes = {
+          ['nil'] = true,
+          oneornil = true,
+          unknown = true,
+        }
         local supportedTypes = {
           boolean = true,
           number = true,
@@ -285,8 +290,13 @@ local function loadFunctions(api, loader)
         return function(...)
           for i, out in ipairs(apicfg.outputs) do
             local arg = select(i, ...)
-            local ty = type(arg)
-            if supportedTypes[ty] and supportedTypes[out.type] then
+            if arg == nil then
+              assert(
+                out.nilable or nilableTypes[out.type],
+                ('output %d (%q) of %q is not nilable, but nil was returned'):format(i, tostring(out.name), fn)
+              )
+            elseif supportedTypes[out.type] then
+              local ty = type(arg)
               assert(
                 ty == out.type,
                 ('output %d (%q) of %q is of type %q, but %q was returned'):format(

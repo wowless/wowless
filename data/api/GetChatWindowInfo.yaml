@@ -18,8 +18,11 @@ outputs:
 - name: alpha
   type: number
 - name: shown
-  type: oneornil
+  type: boolean
 - name: locked
-  type: oneornil
+  type: boolean
 - name: docked
-  type: oneornil
+  nilable: true
+  type: number
+- name: uninteractable
+  type: boolean

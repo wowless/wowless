@@ -6,6 +6,7 @@ inputs:
     type: string
 outputs:
 - name: info
+  nilable: true
   type: C_Texture.AtlasInfo
 dbs:
 - index: ID
