@@ -3,7 +3,7 @@ name: ScrollFrame
 fields:
   scrollChild:
     nilable: true
-    type: table
+    type: frame
 inherits:
 - Frame
 methods:
@@ -32,6 +32,7 @@ methods:
   SetScrollChild:
     fields:
     - name: scrollChild
+      required: true
     status: setter
   SetVerticalScroll:
     status: unimplemented

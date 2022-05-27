@@ -176,6 +176,7 @@ local function mkBaseUIObjectTypes(api)
         end
       elseif method.status == 'setter' then
         mixin[mname] = function(self, ...)
+          local n = select('#', ...)
           local ud = u(self)
           for i, f in ipairs(method.fields) do
             local v = select(i, ...)
@@ -183,6 +184,8 @@ local function mkBaseUIObjectTypes(api)
             local ty = cf.type
             if ty == 'boolean' then
               ud[f.name] = not not v
+            elseif i > n then
+              assert(not f.required, ('value required on %s.%s.%s'):format(name, mname, f.name))
             elseif v == nil then
               assert(f.nilable or cf.nilable, ('cannot set nil on %s.%s.%s'):format(name, mname, f.name))
               ud[f.name] = nil
@@ -197,6 +200,12 @@ local function mkBaseUIObjectTypes(api)
                 v = api.env[v]
               end
               assert(type(v) == 'table', 'expected font')
+              ud[f.name] = v
+            elseif ty == 'frame' then
+              if type(v) == 'string' then
+                v = api.env[v]
+              end
+              assert(api.InheritsFrom(v:GetObjectType():lower(), 'frame'))
               ud[f.name] = v
             elseif ty == 'table' then
               assert(type(v) == 'table', 'expected table, got ' .. type(v))

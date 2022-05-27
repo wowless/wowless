@@ -17,6 +17,7 @@ type:
                 oneof:
                 - literal: boolean
                 - literal: font
+                - literal: frame
                 - literal: number
                 - literal: string
                 - literal: table
@@ -37,6 +38,8 @@ type:
                       required: true
                       type: string
                     nilable:
+                      type: boolean
+                    required:
                       type: boolean
             flavors:
               type:
