@@ -2,6 +2,7 @@ local lfs = require('lfs')
 local yaml = require('wowapi.yaml')
 local plsub = require('pl.template').substitute
 
+local objTypes = {}
 local inhrev = {}
 for d in lfs.dir('data/uiobjects') do
   if d ~= '.' and d ~= '..' then
@@ -11,6 +12,7 @@ for d in lfs.dir('data/uiobjects') do
       inhrev[inh] = inhrev[inh] or {}
       table.insert(inhrev[inh], cfg.name)
     end
+    objTypes[cfg.name] = cfg.objectType or cfg.name
   end
 end
 
@@ -47,8 +49,8 @@ G.WowlessGeneratedTests = {
 > if k == 'EditBox' then
       frame:Hide()
 > end
-> if k ~= 'Checkout' and k ~= 'FogOfWarFrame' then
-      assertEquals('$(k)', frame:GetObjectType())
+> if k ~= 'FogOfWarFrame' then
+      assertEquals('$(objTypes[k])', frame:GetObjectType())
 > end
     end,
   },
@@ -57,6 +59,7 @@ G.WowlessGeneratedTests = {
   {
     _escape = '>',
     frametypes = frametypes,
+    objTypes = objTypes,
     sorted = require('pl.tablex').sort,
   }
 ))))

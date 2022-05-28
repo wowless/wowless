@@ -93,7 +93,7 @@ local function mkBaseUIObjectTypes(api)
           end,
           inherits = inherits,
           metatable = { __index = metaindex },
-          name = k,
+          name = ty.cfg.objectType or k,
         }
       end
     end

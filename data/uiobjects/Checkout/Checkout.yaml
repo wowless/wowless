@@ -3,3 +3,4 @@ name: Checkout
 inherits:
 - Frame
 methods: {}
+objectType: BlizzardCheckout
