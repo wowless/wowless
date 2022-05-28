@@ -1,7 +1,6 @@
 ---
 name: POIFrame
-inherits:
-- Frame
+inherits: {}
 methods:
   DrawNone:
     status: unimplemented

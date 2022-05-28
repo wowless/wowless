@@ -1,5 +1,6 @@
 ---
 name: ScenarioPOIFrame
 inherits:
+- Frame
 - POIFrame
 methods: {}

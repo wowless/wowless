@@ -30,13 +30,13 @@ frametypes.Minimap = nil
 frametypes.WorldFrame = nil
 
 -- TODO teach wowless that POIFrame is virtual and retail-only
-frametypes.POIFrame = nil
 frametypes.QuestPOIFrame = nil
 frametypes.ScenarioPOIFrame = nil
 
 print((assert(plsub(
   [[
 local _, G = ...
+local assertEquals = _G.assertEquals
 G.WowlessGeneratedTests = {
 > for k, v in sorted(frametypes) do
   {
