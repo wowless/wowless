@@ -68,7 +68,7 @@ G.WowlessGeneratedTests = {
       local frame = CreateFrame('$(k)')
       assert(frame)
 > if k == 'EditBox' then
-      frame:Hide()
+      frame:Hide() -- captures input focus otherwise
 > end
       assertEquals('$(objTypes[k])', GetObjectType(frame))
     end,
