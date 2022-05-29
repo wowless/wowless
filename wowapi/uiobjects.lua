@@ -11,7 +11,7 @@ local function toTexture(parent, tex)
   end
 end
 
-local function mkBaseUIObjectTypes(api)
+local function mkBaseUIObjectTypes(api, loader)
   local log = api.log or function() end
 
   local function u(x)
@@ -230,12 +230,22 @@ local function mkBaseUIObjectTypes(api)
         error(('unsupported method status %q on %s.%s'):format(method.status, name, mname))
       end
     end
-    uiobjects[name] = {
-      cfg = cfg,
-      constructor = wrap('<init>', constructor),
-      inherits = cfg.inherits,
-      mixin = wrapAll(mixin),
-    }
+    local supported = false
+    if not cfg.flavors then
+      supported = true
+    else
+      for _, flavor in ipairs(cfg.flavors) do
+        supported = supported or flavor == loader.version
+      end
+    end
+    if supported then
+      uiobjects[name] = {
+        cfg = cfg,
+        constructor = wrap('<init>', constructor),
+        inherits = cfg.inherits,
+        mixin = wrapAll(mixin),
+      }
+    end
   end
   return flatten(uiobjects)
 end

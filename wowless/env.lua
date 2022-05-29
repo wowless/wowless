@@ -150,7 +150,7 @@ local function init(api, loader)
   api.env.__dump = dump(api)
   Mixin(api.env, mkBaseEnv())
   util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
-  Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api))
+  Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api, loader))
   if loader.version == 'Mainline' then
     api.env.WOW_PROJECT_ID = 1
     api.env.WOW_PROJECT_MAINLINE = 1

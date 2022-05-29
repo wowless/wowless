@@ -43,10 +43,6 @@ end
 frametypes.Minimap = nil
 frametypes.WorldFrame = nil
 
--- TODO teach wowless that POIFrame is virtual and retail-only
-frametypes.QuestPOIFrame = nil
-frametypes.ScenarioPOIFrame = nil
-
 require('pl.file').write(
   'addon/Wowless/generated.lua',
   assert(plsub(
@@ -58,6 +54,16 @@ G.WowlessGeneratedTests = {
   {
     name = 'can CreateFrame $(k)',
     fn = function()
+> if cfgs[k].flavors then
+      if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE then
+        return assertEquals(
+          false,
+          pcall(function()
+            CreateFrame('$(k)')
+          end)
+        )
+      end
+> end
       local frame = CreateFrame('$(k)')
       assert(frame)
 > if k == 'EditBox' then
@@ -73,6 +79,7 @@ G.WowlessGeneratedTests = {
 ]],
     {
       _escape = '>',
+      cfgs = cfgs,
       frametypes = frametypes,
       objTypes = objTypes,
       sorted = require('pl.tablex').sort,

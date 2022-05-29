@@ -22,6 +22,9 @@ type:
                 - literal: string
                 - literal: table
                 - literal: texture
+    flavors:
+      type:
+        schema: flavors
     inherits:
       type:
         sequenceof:

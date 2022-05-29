@@ -1,5 +1,7 @@
 ---
 name: ScenarioPOIFrame
+flavors:
+- Mainline
 inherits:
 - Frame
 - POIFrame
