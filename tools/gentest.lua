@@ -49,6 +49,7 @@ require('pl.file').write(
     [[
 local _, G = ...
 local assertEquals = _G.assertEquals
+local GetObjectType = CreateFrame('Frame').GetObjectType
 G.WowlessGeneratedTests = {
 > for k, v in sorted(frametypes) do
   {
@@ -69,9 +70,7 @@ G.WowlessGeneratedTests = {
 > if k == 'EditBox' then
       frame:Hide()
 > end
-> if k ~= 'FogOfWarFrame' then
-      assertEquals('$(objTypes[k])', frame:GetObjectType())
-> end
+      assertEquals('$(objTypes[k])', GetObjectType(frame))
     end,
   },
 > end
