@@ -741,6 +741,7 @@ local function loader(api, cfg)
   local function loadFrameXml()
     local context = forAddon()
     context.loadFile(path.join(rootDir, 'Interface', 'GlobalEnvironment.lua'))
+    assert(api.env.GetBuildInfo, 'missing client extract, cannot proceed')
     for row in db2rows('globalstrings') do
       api.env[row.BaseTag] = row.TagText_lang
     end
