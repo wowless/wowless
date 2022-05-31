@@ -42,7 +42,7 @@ do
   print('C_CVar.GetCVarDefault = (function()')
   print('  local t = {')
   for k, v in require('pl.tablex').sort(scrape.CVarDefaults) do
-    print(string.format('    %s = %q,', k, v))
+    print(string.format('    [%q] = %q,', k, v))
   end
   print('  }')
   print('  return function(k)')
