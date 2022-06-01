@@ -50,19 +50,19 @@ require('pl.file').write(
 local _, G = ...
 local assertEquals = _G.assertEquals
 local GetObjectType = CreateFrame('Frame').GetObjectType
-G.WowlessGeneratedTests = {
+G.GeneratedTestFailures = G.test(function(t)
+  t.scope('frametype', function()
 > for k, v in sorted(frametypes) do
-  {
-    name = 'can CreateFrame $(k)',
-    fn = function()
+    t.scope('$(k)', function()
 > if cfgs[k].flavors then
       if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE then
-        return assertEquals(
+        assertEquals(
           false,
           pcall(function()
             CreateFrame('$(k)')
           end)
         )
+        return
       end
 > end
       local frame = CreateFrame('$(k)')
@@ -71,10 +71,10 @@ G.WowlessGeneratedTests = {
       frame:Hide() -- captures input focus otherwise
 > end
       assertEquals('$(objTypes[k])', GetObjectType(frame))
-    end,
-  },
+    end)
 > end
-}
+  end)
+end)
 ]],
     {
       _escape = '>',
