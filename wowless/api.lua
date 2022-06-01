@@ -176,8 +176,10 @@ local function new(log)
 
   local function CreateFrame(type, name, parent, templateNames)
     local ltype = string.lower(type)
-    assert(IsIntrinsicType(ltype), type .. ' is not intrinsic')
-    assert(InheritsFrom(ltype, 'frame'), type .. ' does not inherit from frame')
+    assert(
+      IsIntrinsicType(ltype) and InheritsFrom(ltype, 'frame'),
+      'CreateFrame: Unknown frame type \'' .. type .. '\''
+    )
     local tmpls = {}
     for templateName in string.gmatch(templateNames or '', '[^, ]+') do
       local template = templates[string.lower(templateName)]

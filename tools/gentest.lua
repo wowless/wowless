@@ -40,8 +40,8 @@ do
 end
 
 -- TODO figure out the right approach for these
-frametypes.Minimap = nil
-frametypes.WorldFrame = nil
+cfgs.Minimap = nil
+cfgs.WorldFrame = nil
 
 require('pl.file').write(
   'addon/Wowless/generated.lua',
@@ -52,27 +52,42 @@ local assertEquals = _G.assertEquals
 local GetObjectType = CreateFrame('Frame').GetObjectType
 G.GeneratedTestFailures = G.test(function()
   return {
-    frametype = function()
+    uiobjects = function()
+      local function assertCreateFrame(ty)
+        local function process(...)
+          assertEquals(1, select('#', ...))
+          local frame = ...
+          assert(type(frame) == 'table')
+          return frame
+        end
+        return process(CreateFrame(ty))
+      end
+      local function assertCreateFrameFails(ty)
+        local success, err = pcall(function()
+          CreateFrame(ty)
+        end)
+        assert(not success)
+        local expectedErr = 'CreateFrame: Unknown frame type \'' .. ty .. '\''
+        assertEquals(expectedErr, err:sub(err:len() - expectedErr:len() + 1))
+      end
       return {
-> for k, v in sorted(frametypes) do
+> for k, v in sorted(cfgs) do
         $(k) = function()
-> if cfgs[k].flavors then
+> if frametypes[k] and v.flavors then
           if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE then
-            assertEquals(
-              false,
-              pcall(function()
-                CreateFrame('$(k)')
-              end)
-            )
+            assertCreateFrameFails('$(k)')
             return
           end
 > end
-          local frame = CreateFrame('$(k)')
-          assert(frame)
+> if frametypes[k] then
+          local frame = assertCreateFrame('$(k)')
 > if k == 'EditBox' then
           frame:Hide() -- captures input focus otherwise
 > end
           assertEquals('$(objTypes[k])', GetObjectType(frame))
+> else
+          assertCreateFrameFails('$(k)')
+> end
         end,
 > end
       }
