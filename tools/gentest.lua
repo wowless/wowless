@@ -81,10 +81,17 @@ G.GeneratedTestFailures = G.test(function()
 > end
 > if frametypes[k] then
           local frame = assertCreateFrame('$(k)')
+          local frame2 = assertCreateFrame('$(k)')
 > if k == 'EditBox' then
           frame:Hide() -- captures input focus otherwise
+          frame2:Hide() -- captures input focus otherwise
 > end
           assertEquals('$(objTypes[k])', GetObjectType(frame))
+          local mt = getmetatable(frame)
+          assert(mt == getmetatable(frame2))
+> if k ~= 'FogOfWarFrame' then
+          assert(mt ~= nil)
+> end
 > else
           assertCreateFrameFails('$(k)')
 > end
