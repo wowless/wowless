@@ -93,6 +93,13 @@ G.GeneratedTestFailures = G.test(function()
           assert(mt ~= nil)
 > if next(v.methods) then
           return {
+            contents = function()
+              local udk, udv = next(frame)
+              assertEquals(udk, 0)
+              assertEquals('userdata', type(udv))
+              assert(getmetatable(udv) == nil)
+              assert(next(frame, udk) == nil)
+            end,
             methods = function()
               return {
 > for mname, method in sorted(v.methods) do
