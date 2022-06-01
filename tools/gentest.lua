@@ -91,6 +91,21 @@ G.GeneratedTestFailures = G.test(function()
           assert(mt == getmetatable(frame2))
 > if k ~= 'FogOfWarFrame' then
           assert(mt ~= nil)
+> if next(v.methods) then
+          return {
+            methods = function()
+              return {
+> for mname, method in sorted(v.methods) do
+> if not method.flavors then
+                $(mname) = function()
+                  assertEquals('function', type(mt.__index.$(mname)))
+                end,
+> end
+> end
+              }
+            end,
+          }
+> end
 > end
 > else
           assertCreateFrameFails('$(k)')
@@ -106,6 +121,7 @@ end)
       _escape = '>',
       cfgs = cfgs,
       frametypes = frametypes,
+      next = next,
       objTypes = objTypes,
       sorted = require('pl.tablex').sort,
     }

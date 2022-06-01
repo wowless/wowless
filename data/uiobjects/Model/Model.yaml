@@ -12,8 +12,6 @@ methods:
     fields:
     - name: modelScale
     status: getter
-  InitializeCamera:
-    status: unimplemented
   SetFacing:
     status: unimplemented
   SetLight:
@@ -25,8 +23,6 @@ methods:
     - name: modelScale
     status: setter
   SetPosition:
-    status: unimplemented
-  SetRotation:
     status: unimplemented
   TransformCameraSpaceToModelSpace:
     status: unimplemented

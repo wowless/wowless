@@ -23,5 +23,7 @@ methods:
     status: unimplemented
   SetPortraitZoom:
     status: unimplemented
+  SetRotation:
+    status: unimplemented
   SetUnit:
     status: unimplemented
