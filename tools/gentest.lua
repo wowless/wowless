@@ -50,30 +50,34 @@ require('pl.file').write(
 local _, G = ...
 local assertEquals = _G.assertEquals
 local GetObjectType = CreateFrame('Frame').GetObjectType
-G.GeneratedTestFailures = G.test(function(t)
-  t.scope('frametype', function()
+G.GeneratedTestFailures = G.test(function()
+  return {
+    frametype = function()
+      return {
 > for k, v in sorted(frametypes) do
-    t.scope('$(k)', function()
+        $(k) = function()
 > if cfgs[k].flavors then
-      if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE then
-        assertEquals(
-          false,
-          pcall(function()
-            CreateFrame('$(k)')
-          end)
-        )
-        return
-      end
+          if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE then
+            assertEquals(
+              false,
+              pcall(function()
+                CreateFrame('$(k)')
+              end)
+            )
+            return
+          end
 > end
-      local frame = CreateFrame('$(k)')
-      assert(frame)
+          local frame = CreateFrame('$(k)')
+          assert(frame)
 > if k == 'EditBox' then
-      frame:Hide() -- captures input focus otherwise
+          frame:Hide() -- captures input focus otherwise
 > end
-      assertEquals('$(objTypes[k])', GetObjectType(frame))
-    end)
+          assertEquals('$(objTypes[k])', GetObjectType(frame))
+        end,
 > end
-  end)
+      }
+    end,
+  }
 end)
 ]],
     {
