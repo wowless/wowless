@@ -1,8 +1,6 @@
 ---
 name: C_SecureTransfer.GetMailInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:

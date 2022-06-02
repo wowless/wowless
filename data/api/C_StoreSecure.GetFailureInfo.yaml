@@ -1,5 +1,3 @@
 ---
 name: C_StoreSecure.GetFailureInfo
 status: unimplemented
-flavors:
-- Mainline
