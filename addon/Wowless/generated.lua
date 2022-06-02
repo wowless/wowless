@@ -3,6 +3,480 @@ local assertEquals = _G.assertEquals
 local GetObjectType = CreateFrame('Frame').GetObjectType
 G.GeneratedTestFailures = G.test(function()
   return {
+    apiNamespaces = function()
+      return {
+        C_AccountInfo = function()
+          assertEquals('table', type(_G.C_AccountInfo))
+        end,
+        C_AchievementInfo = function()
+          assertEquals('table', type(_G.C_AchievementInfo))
+        end,
+        C_ActionBar = function()
+          assertEquals('table', type(_G.C_ActionBar))
+        end,
+        C_AdventureJournal = function()
+          assertEquals('table', type(_G.C_AdventureJournal))
+        end,
+        C_AdventureMap = function()
+          assertEquals('table', type(_G.C_AdventureMap))
+        end,
+        C_AlliedRaces = function()
+          assertEquals('table', type(_G.C_AlliedRaces))
+        end,
+        C_AnimaDiversion = function()
+          assertEquals('table', type(_G.C_AnimaDiversion))
+        end,
+        C_ArdenwealdGardening = function()
+          assertEquals('table', type(_G.C_ArdenwealdGardening))
+        end,
+        C_AreaPoiInfo = function()
+          assertEquals('table', type(_G.C_AreaPoiInfo))
+        end,
+        C_ArtifactUI = function()
+          assertEquals('table', type(_G.C_ArtifactUI))
+        end,
+        C_AuctionHouse = function()
+          assertEquals('table', type(_G.C_AuctionHouse))
+        end,
+        C_AuthChallenge = function()
+          assertEquals('table', type(_G.C_AuthChallenge))
+        end,
+        C_AzeriteEmpoweredItem = function()
+          assertEquals('table', type(_G.C_AzeriteEmpoweredItem))
+        end,
+        C_AzeriteEssence = function()
+          assertEquals('table', type(_G.C_AzeriteEssence))
+        end,
+        C_AzeriteItem = function()
+          assertEquals('table', type(_G.C_AzeriteItem))
+        end,
+        C_BarberShop = function()
+          assertEquals('table', type(_G.C_BarberShop))
+        end,
+        C_BattleNet = function()
+          assertEquals('table', type(_G.C_BattleNet))
+        end,
+        C_BehavioralMessaging = function()
+          assertEquals('table', type(_G.C_BehavioralMessaging))
+        end,
+        C_BlackMarket = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(_G.C_BlackMarket))
+            return
+          end
+          assertEquals('table', type(_G.C_BlackMarket))
+        end,
+        C_CVar = function()
+          assertEquals('table', type(_G.C_CVar))
+        end,
+        C_Calendar = function()
+          assertEquals('table', type(_G.C_Calendar))
+        end,
+        C_CampaignInfo = function()
+          assertEquals('table', type(_G.C_CampaignInfo))
+        end,
+        C_ChallengeMode = function()
+          assertEquals('table', type(_G.C_ChallengeMode))
+        end,
+        C_CharacterServices = function()
+          assertEquals('table', type(_G.C_CharacterServices))
+        end,
+        C_CharacterServicesPublic = function()
+          assertEquals('table', type(_G.C_CharacterServicesPublic))
+        end,
+        C_ChatBubbles = function()
+          assertEquals('table', type(_G.C_ChatBubbles))
+        end,
+        C_ChatInfo = function()
+          assertEquals('table', type(_G.C_ChatInfo))
+        end,
+        C_ChromieTime = function()
+          assertEquals('table', type(_G.C_ChromieTime))
+        end,
+        C_ClassColor = function()
+          assertEquals('table', type(_G.C_ClassColor))
+        end,
+        C_ClassTrial = function()
+          assertEquals('table', type(_G.C_ClassTrial))
+        end,
+        C_ClickBindings = function()
+          assertEquals('table', type(_G.C_ClickBindings))
+        end,
+        C_Club = function()
+          assertEquals('table', type(_G.C_Club))
+        end,
+        C_ClubFinder = function()
+          assertEquals('table', type(_G.C_ClubFinder))
+        end,
+        C_Commentator = function()
+          assertEquals('table', type(_G.C_Commentator))
+        end,
+        C_ConfigurationWarnings = function()
+          assertEquals('table', type(_G.C_ConfigurationWarnings))
+        end,
+        C_Console = function()
+          assertEquals('table', type(_G.C_Console))
+        end,
+        C_ContributionCollector = function()
+          assertEquals('table', type(_G.C_ContributionCollector))
+        end,
+        C_CovenantCallings = function()
+          assertEquals('table', type(_G.C_CovenantCallings))
+        end,
+        C_CovenantPreview = function()
+          assertEquals('table', type(_G.C_CovenantPreview))
+        end,
+        C_CovenantSanctumUI = function()
+          assertEquals('table', type(_G.C_CovenantSanctumUI))
+        end,
+        C_Covenants = function()
+          assertEquals('table', type(_G.C_Covenants))
+        end,
+        C_CreatureInfo = function()
+          assertEquals('table', type(_G.C_CreatureInfo))
+        end,
+        C_CurrencyInfo = function()
+          assertEquals('table', type(_G.C_CurrencyInfo))
+        end,
+        C_Cursor = function()
+          assertEquals('table', type(_G.C_Cursor))
+        end,
+        C_DateAndTime = function()
+          assertEquals('table', type(_G.C_DateAndTime))
+        end,
+        C_DeathInfo = function()
+          assertEquals('table', type(_G.C_DeathInfo))
+        end,
+        C_EncounterJournal = function()
+          assertEquals('table', type(_G.C_EncounterJournal))
+        end,
+        C_EquipmentSet = function()
+          assertEquals('table', type(_G.C_EquipmentSet))
+        end,
+        C_EventToastManager = function()
+          assertEquals('table', type(_G.C_EventToastManager))
+        end,
+        C_FogOfWar = function()
+          assertEquals('table', type(_G.C_FogOfWar))
+        end,
+        C_FrameManager = function()
+          assertEquals('table', type(_G.C_FrameManager))
+        end,
+        C_FriendList = function()
+          assertEquals('table', type(_G.C_FriendList))
+        end,
+        C_GamePad = function()
+          assertEquals('table', type(_G.C_GamePad))
+        end,
+        C_Garrison = function()
+          assertEquals('table', type(_G.C_Garrison))
+        end,
+        C_GossipInfo = function()
+          assertEquals('table', type(_G.C_GossipInfo))
+        end,
+        C_GuildInfo = function()
+          assertEquals('table', type(_G.C_GuildInfo))
+        end,
+        C_Heirloom = function()
+          assertEquals('table', type(_G.C_Heirloom))
+        end,
+        C_HeirloomInfo = function()
+          assertEquals('table', type(_G.C_HeirloomInfo))
+        end,
+        C_IncomingSummon = function()
+          assertEquals('table', type(_G.C_IncomingSummon))
+        end,
+        C_InvasionInfo = function()
+          assertEquals('table', type(_G.C_InvasionInfo))
+        end,
+        C_IslandsQueue = function()
+          assertEquals('table', type(_G.C_IslandsQueue))
+        end,
+        C_Item = function()
+          assertEquals('table', type(_G.C_Item))
+        end,
+        C_ItemInteraction = function()
+          assertEquals('table', type(_G.C_ItemInteraction))
+        end,
+        C_ItemSocketInfo = function()
+          assertEquals('table', type(_G.C_ItemSocketInfo))
+        end,
+        C_ItemUpgrade = function()
+          assertEquals('table', type(_G.C_ItemUpgrade))
+        end,
+        C_KeyBindings = function()
+          assertEquals('table', type(_G.C_KeyBindings))
+        end,
+        C_LFGInfo = function()
+          assertEquals('table', type(_G.C_LFGInfo))
+        end,
+        C_LFGList = function()
+          assertEquals('table', type(_G.C_LFGList))
+        end,
+        C_LFGuildInfo = function()
+          assertEquals('table', type(_G.C_LFGuildInfo))
+        end,
+        C_LegendaryCrafting = function()
+          assertEquals('table', type(_G.C_LegendaryCrafting))
+        end,
+        C_LevelLink = function()
+          assertEquals('table', type(_G.C_LevelLink))
+        end,
+        C_LevelSquish = function()
+          assertEquals('table', type(_G.C_LevelSquish))
+        end,
+        C_Loot = function()
+          assertEquals('table', type(_G.C_Loot))
+        end,
+        C_LootHistory = function()
+          assertEquals('table', type(_G.C_LootHistory))
+        end,
+        C_LootJournal = function()
+          assertEquals('table', type(_G.C_LootJournal))
+        end,
+        C_LoreText = function()
+          assertEquals('table', type(_G.C_LoreText))
+        end,
+        C_LossOfControl = function()
+          assertEquals('table', type(_G.C_LossOfControl))
+        end,
+        C_Mail = function()
+          assertEquals('table', type(_G.C_Mail))
+        end,
+        C_Map = function()
+          assertEquals('table', type(_G.C_Map))
+        end,
+        C_MapExplorationInfo = function()
+          assertEquals('table', type(_G.C_MapExplorationInfo))
+        end,
+        C_MerchantFrame = function()
+          assertEquals('table', type(_G.C_MerchantFrame))
+        end,
+        C_Minimap = function()
+          assertEquals('table', type(_G.C_Minimap))
+        end,
+        C_ModelInfo = function()
+          assertEquals('table', type(_G.C_ModelInfo))
+        end,
+        C_ModifiedInstance = function()
+          assertEquals('table', type(_G.C_ModifiedInstance))
+        end,
+        C_MountJournal = function()
+          assertEquals('table', type(_G.C_MountJournal))
+        end,
+        C_MythicPlus = function()
+          assertEquals('table', type(_G.C_MythicPlus))
+        end,
+        C_NamePlate = function()
+          assertEquals('table', type(_G.C_NamePlate))
+        end,
+        C_Navigation = function()
+          assertEquals('table', type(_G.C_Navigation))
+        end,
+        C_NewItems = function()
+          assertEquals('table', type(_G.C_NewItems))
+        end,
+        C_PaperDollInfo = function()
+          assertEquals('table', type(_G.C_PaperDollInfo))
+        end,
+        C_PartyInfo = function()
+          assertEquals('table', type(_G.C_PartyInfo))
+        end,
+        C_PartyPose = function()
+          assertEquals('table', type(_G.C_PartyPose))
+        end,
+        C_PetBattles = function()
+          assertEquals('table', type(_G.C_PetBattles))
+        end,
+        C_PetInfo = function()
+          assertEquals('table', type(_G.C_PetInfo))
+        end,
+        C_PetJournal = function()
+          assertEquals('table', type(_G.C_PetJournal))
+        end,
+        C_PlayerChoice = function()
+          assertEquals('table', type(_G.C_PlayerChoice))
+        end,
+        C_PlayerInfo = function()
+          assertEquals('table', type(_G.C_PlayerInfo))
+        end,
+        C_PlayerMentorship = function()
+          assertEquals('table', type(_G.C_PlayerMentorship))
+        end,
+        C_ProductChoice = function()
+          assertEquals('table', type(_G.C_ProductChoice))
+        end,
+        C_PvP = function()
+          assertEquals('table', type(_G.C_PvP))
+        end,
+        C_QuestLine = function()
+          assertEquals('table', type(_G.C_QuestLine))
+        end,
+        C_QuestLog = function()
+          assertEquals('table', type(_G.C_QuestLog))
+        end,
+        C_QuestSession = function()
+          assertEquals('table', type(_G.C_QuestSession))
+        end,
+        C_RaidLocks = function()
+          assertEquals('table', type(_G.C_RaidLocks))
+        end,
+        C_RecruitAFriend = function()
+          assertEquals('table', type(_G.C_RecruitAFriend))
+        end,
+        C_ReportSystem = function()
+          assertEquals('table', type(_G.C_ReportSystem))
+        end,
+        C_Reputation = function()
+          assertEquals('table', type(_G.C_Reputation))
+        end,
+        C_ResearchInfo = function()
+          assertEquals('table', type(_G.C_ResearchInfo))
+        end,
+        C_Scenario = function()
+          assertEquals('table', type(_G.C_Scenario))
+        end,
+        C_ScenarioInfo = function()
+          assertEquals('table', type(_G.C_ScenarioInfo))
+        end,
+        C_ScrappingMachineUI = function()
+          assertEquals('table', type(_G.C_ScrappingMachineUI))
+        end,
+        C_ScriptedAnimations = function()
+          assertEquals('table', type(_G.C_ScriptedAnimations))
+        end,
+        C_Seasons = function()
+          assertEquals('table', type(_G.C_Seasons))
+        end,
+        C_SecureTransfer = function()
+          assertEquals('table', type(_G.C_SecureTransfer))
+        end,
+        C_Social = function()
+          assertEquals('table', type(_G.C_Social))
+        end,
+        C_SocialQueue = function()
+          assertEquals('table', type(_G.C_SocialQueue))
+        end,
+        C_SocialRestrictions = function()
+          assertEquals('table', type(_G.C_SocialRestrictions))
+        end,
+        C_Soulbinds = function()
+          assertEquals('table', type(_G.C_Soulbinds))
+        end,
+        C_SpecializationInfo = function()
+          assertEquals('table', type(_G.C_SpecializationInfo))
+        end,
+        C_Spell = function()
+          assertEquals('table', type(_G.C_Spell))
+        end,
+        C_SpellBook = function()
+          assertEquals('table', type(_G.C_SpellBook))
+        end,
+        C_SplashScreen = function()
+          assertEquals('table', type(_G.C_SplashScreen))
+        end,
+        C_StableInfo = function()
+          assertEquals('table', type(_G.C_StableInfo))
+        end,
+        C_StorePublic = function()
+          assertEquals('table', type(_G.C_StorePublic))
+        end,
+        C_StoreSecure = function()
+          assertEquals('table', type(_G.C_StoreSecure))
+        end,
+        C_SummonInfo = function()
+          assertEquals('table', type(_G.C_SummonInfo))
+        end,
+        C_SuperTrack = function()
+          assertEquals('table', type(_G.C_SuperTrack))
+        end,
+        C_System = function()
+          assertEquals('table', type(_G.C_System))
+        end,
+        C_TTSSettings = function()
+          assertEquals('table', type(_G.C_TTSSettings))
+        end,
+        C_TaskQuest = function()
+          assertEquals('table', type(_G.C_TaskQuest))
+        end,
+        C_TaxiMap = function()
+          assertEquals('table', type(_G.C_TaxiMap))
+        end,
+        C_Texture = function()
+          assertEquals('table', type(_G.C_Texture))
+        end,
+        C_Timer = function()
+          assertEquals('table', type(_G.C_Timer))
+        end,
+        C_ToyBox = function()
+          assertEquals('table', type(_G.C_ToyBox))
+        end,
+        C_ToyBoxInfo = function()
+          assertEquals('table', type(_G.C_ToyBoxInfo))
+        end,
+        C_TradeSkillUI = function()
+          assertEquals('table', type(_G.C_TradeSkillUI))
+        end,
+        C_Transmog = function()
+          assertEquals('table', type(_G.C_Transmog))
+        end,
+        C_TransmogCollection = function()
+          assertEquals('table', type(_G.C_TransmogCollection))
+        end,
+        C_TransmogSets = function()
+          assertEquals('table', type(_G.C_TransmogSets))
+        end,
+        C_Trophy = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(_G.C_Trophy))
+            return
+          end
+          assertEquals('table', type(_G.C_Trophy))
+        end,
+        C_Tutorial = function()
+          assertEquals('table', type(_G.C_Tutorial))
+        end,
+        C_UI = function()
+          assertEquals('table', type(_G.C_UI))
+        end,
+        C_UIWidgetManager = function()
+          assertEquals('table', type(_G.C_UIWidgetManager))
+        end,
+        C_UserFeedback = function()
+          assertEquals('table', type(_G.C_UserFeedback))
+        end,
+        C_VideoOptions = function()
+          assertEquals('table', type(_G.C_VideoOptions))
+        end,
+        C_VignetteInfo = function()
+          assertEquals('table', type(_G.C_VignetteInfo))
+        end,
+        C_VoiceChat = function()
+          assertEquals('table', type(_G.C_VoiceChat))
+        end,
+        C_WeeklyRewards = function()
+          assertEquals('table', type(_G.C_WeeklyRewards))
+        end,
+        C_Widget = function()
+          assertEquals('table', type(_G.C_Widget))
+        end,
+        C_WowTokenPublic = function()
+          assertEquals('table', type(_G.C_WowTokenPublic))
+        end,
+        C_WowTokenSecure = function()
+          assertEquals('table', type(_G.C_WowTokenSecure))
+        end,
+        C_WowTokenUI = function()
+          assertEquals('table', type(_G.C_WowTokenUI))
+        end,
+        C_ZoneAbility = function()
+          assertEquals('table', type(_G.C_ZoneAbility))
+        end,
+        Kiosk = function()
+          assertEquals('table', type(_G.Kiosk))
+        end,
+      }
+    end,
     uiobjects = function()
       local function assertCreateFrame(ty)
         local function process(...)

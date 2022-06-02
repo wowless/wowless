@@ -1,9 +1,17 @@
 local plsub = require('pl.template').substitute
 
+local apis = {}
 local uiobjects = {}
 do
   local lfs = require('lfs')
   local yaml = require('wowapi.yaml')
+  for d in lfs.dir('data/api') do
+    if d ~= '.' and d ~= '..' then
+      local filename = ('data/api/%s'):format(d)
+      local cfg = yaml.parseFile(filename)
+      apis[cfg.name] = cfg
+    end
+  end
   for d in lfs.dir('data/uiobjects') do
     if d ~= '.' and d ~= '..' then
       local filename = ('data/uiobjects/%s/%s.yaml'):format(d, d)
@@ -39,6 +47,27 @@ do
   addtype('Frame')
 end
 
+local apiNamespaceFlavors = {}
+for k, v in pairs(apis) do
+  local p = k:find('%.')
+  if p then
+    local name = k:sub(1, p - 1)
+    apiNamespaceFlavors[name] = apiNamespaceFlavors[name] or {}
+    for _, flavor in ipairs(v.flavors or { 'Vanilla', 'TBC', 'Mainline' }) do
+      apiNamespaceFlavors[name][flavor] = true
+    end
+  end
+end
+local apiNamespaces = {}
+for k, v in pairs(apiNamespaceFlavors) do
+  local list = {}
+  for f in pairs(v) do
+    table.insert(list, f)
+  end
+  assert(next(list))
+  apiNamespaces[k] = { flavors = #list ~= 3 and list or nil }
+end
+
 local function badflavor(flavors)
   local ids = {
     Mainline = 'WOW_PROJECT_MAINLINE',
@@ -70,6 +99,21 @@ local assertEquals = _G.assertEquals
 local GetObjectType = CreateFrame('Frame').GetObjectType
 G.GeneratedTestFailures = G.test(function()
   return {
+    apiNamespaces = function()
+      return {
+> for k, v in sorted(apiNamespaces) do
+        $(k) = function()
+> if v.flavors then
+          if $(badflavor(v.flavors)) then
+            assertEquals('nil', type(_G.$(k)))
+            return
+          end
+> end
+          assertEquals('table', type(_G.$(k)))
+        end,
+> end
+      }
+    end,
     uiobjects = function()
       local function assertCreateFrame(ty)
         local function process(...)
@@ -148,6 +192,7 @@ end)
 ]],
   {
     _escape = '>',
+    apiNamespaces = apiNamespaces,
     badflavor = badflavor,
     frametypes = frametypes,
     next = next,
