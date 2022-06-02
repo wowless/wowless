@@ -27,6 +27,11 @@ repos:
     - --shell=bash
 - repo: local
   hooks:
+  - id: luacheck
+    name: luacheck
+    entry: luacheck
+    language: system
+    types: [lua]
   - id: local-test
     name: bin/test.sh
     entry: bin/test.sh
