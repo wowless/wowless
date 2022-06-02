@@ -91,7 +91,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(mt == getmetatable(frame2))
 > if k ~= 'FogOfWarFrame' then
           assert(mt ~= nil)
-> if next(v.methods) then
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -100,6 +99,7 @@ G.GeneratedTestFailures = G.test(function()
               assert(getmetatable(udv) == nil)
               assert(next(frame, udk) == nil)
             end,
+> if next(v.methods) then
             methods = function()
               return {
 > for mname, method in sorted(v.methods) do
@@ -111,8 +111,8 @@ G.GeneratedTestFailures = G.test(function()
 > end
               }
             end,
-          }
 > end
+          }
 > end
 > else
           assertCreateFrameFails('$(k)')
