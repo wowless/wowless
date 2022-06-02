@@ -94,7 +94,7 @@ G.GeneratedTestFailures = G.test(function()
 > for k, v in sorted(cfgs) do
         $(k) = function()
 > if frametypes[k] and v.flavors then
-          if _G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE then
+          if $(badflavor(v.flavors)) then
             assertCreateFrameFails('$(k)')
             return
           end
