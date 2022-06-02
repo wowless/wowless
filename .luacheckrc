@@ -5,6 +5,17 @@ read_globals = {
   'scrub',
   'securecall',
 }
+files['addon/Wowless'] = {
+  read_globals = {
+    'CreateFrame',
+    'debugprofilestop',
+    'DevTools_Dump',
+    'format',
+    'SendSystemMessage',
+    'WOW_PROJECT_ID',
+    'WOW_PROJECT_MAINLINE',
+  },
+}
 -- TODO remove this when it is no longer necessary
 files['data/uiobjects'] = {
   read_globals = {

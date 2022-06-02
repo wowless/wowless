@@ -1,6 +1,3 @@
-[submodule "addon/Wowless"]
-	path = addon/Wowless
-	url = https://github.com/lua-wow-tools/wowless-addon
 [submodule "tainted-lua"]
 	path = tainted-lua
 	url = https://github.com/Meorawr/tainted-lua

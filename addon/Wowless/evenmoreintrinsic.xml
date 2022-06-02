@@ -1,0 +1,7 @@
+<Ui>
+  <WowlessIntrinsicType name='WowlessEvenMoreIntrinsicType' intrinsic='true'>
+    <Scripts>
+      <OnLoad>end, error('this should not be executed')--</OnLoad>
+    </Scripts>
+  </WowlessIntrinsicType>
+</Ui>

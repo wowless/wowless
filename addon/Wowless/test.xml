@@ -1,0 +1,220 @@
+<Ui>
+  <Script>
+    _G.WowlessLog = {}
+    local function log(fmt, ...)
+      table.insert(_G.WowlessLog, string.format(fmt, ...))
+    end
+    local function scriptHandler(name, self, ...)
+      local rest = table.concat({...}, ',')
+      local argstr = table.concat({
+        self:GetName(),
+        self:GetParent() and tostring(self:GetParent():GetName()) or 'none',
+        rest ~= '' and rest or nil,
+      }, ',')
+      log('%s(%s)', name, argstr)
+    end
+    local names = {
+      'OnAttributeChanged',
+      'OnHide',
+      'OnLoad',
+      'OnShow',
+    }
+    for _, name in ipairs(names) do
+      _G['Wowless_' .. name] = function(...)
+        scriptHandler(name, ...)
+      end
+    end
+  </Script>
+  <Frame name='WowlessLogger' virtual='true'>
+    <Scripts>
+      <OnAttributeChanged function='Wowless_OnAttributeChanged' />
+      <OnHide function='Wowless_OnHide' />
+      <OnLoad function='Wowless_OnLoad' />
+      <OnShow function='Wowless_OnShow' />
+    </Scripts>
+  </Frame>
+  <Frame name='WowlessSimpleFrame' inherits='WowlessLogger' />
+  <Frame name='WowlessAttributeFrame' inherits='WowlessLogger'>
+    <Attributes>
+      <Attribute name='attr1' value='attrvalue1' />
+      <Attribute name='attr2' value='attrvalue2' />
+    </Attributes>
+  </Frame>
+  <Frame name='WowlessHiddenFrame' inherits='WowlessLogger' hidden='true' />
+  <Frame name='WowlessParentTemplate' inherits='WowlessLogger' virtual='true'>
+    <Frames>
+      <Frame name='$parentKid2' inherits='WowlessLogger' />
+      <Frame name='$parentKid1' inherits='WowlessLogger' />
+    </Frames>
+  </Frame>
+  <Frame name='WowlessParent' inherits='WowlessParentTemplate' />
+  <Frame name='WowlessKeyParent' inherits='WowlessLogger' />
+  <Frame name='$parentKid1' inherits='WowlessLogger' parent='WowlessKeyParent' parentkey='Moo' />
+  <Frame name='$parentKid2' inherits='WowlessLogger' parentkey='Cow' parent='WowlessKeyParent' />
+  <Script>
+    local expected = {
+      'OnLoad(WowlessSimpleFrame,none)',
+      'OnShow(WowlessSimpleFrame,none)',
+      'OnLoad(WowlessAttributeFrame,none)',
+      'OnShow(WowlessAttributeFrame,none)',
+      'OnLoad(WowlessHiddenFrame,none)',
+      'OnLoad(WowlessParentKid2,WowlessParent)',
+      'OnShow(WowlessParentKid2,WowlessParent)',
+      'OnLoad(WowlessParentKid1,WowlessParent)',
+      'OnShow(WowlessParentKid1,WowlessParent)',
+      'OnLoad(WowlessParent,none)',
+      'OnShow(WowlessParent,none)',
+      'OnLoad(WowlessKeyParent,none)',
+      'OnShow(WowlessKeyParent,none)',
+      'OnLoad(WowlessKeyParentKid1,WowlessKeyParent)',
+      'OnShow(WowlessKeyParentKid1,WowlessKeyParent)',
+      'OnLoad(WowlessKeyParentKid2,WowlessKeyParent)',
+      'OnShow(WowlessKeyParentKid2,WowlessKeyParent)',
+      'before WowlessLuaFrame',
+      'OnLoad(WowlessLuaFrame,none)',
+      'OnShow(WowlessLuaFrame,none)',
+      'after WowlessLuaFrame',
+    }
+    table.insert(_G.WowlessLog, 'before WowlessLuaFrame')
+    CreateFrame('Frame', 'WowlessLuaFrame', nil, 'WowlessLogger')
+    table.insert(_G.WowlessLog, 'after WowlessLuaFrame')
+    assertEquals(table.concat(expected, '\n'), table.concat(_G.WowlessLog, '\n'))
+  </Script>
+
+  <Button name='WowlessAttrOrder' text='moocow'>
+    <Scripts>
+      <OnLoad>assert(self:GetText() == 'moocow', 'outer load')</OnLoad>
+    </Scripts>
+    <Frames>
+      <Frame name='$parentKid1'>
+        <Scripts>
+          <OnLoad>assert(self:GetParent():GetText() == nil, 'inner load')</OnLoad>
+        </Scripts>
+      </Frame>
+    </Frames>
+  </Button>
+
+  <Script>
+    WowlessLog = {}
+  </Script>
+  <Frame>
+    <Scripts>
+      <OnLoad>
+        tinsert(WowlessLog, 'during')
+        end, (function()
+          tinsert(WowlessLog, 'before')
+        end)()
+      --</OnLoad>
+    </Scripts>
+  </Frame>
+  <Script>
+    assert(table.concat(WowlessLog, ',') == 'before,during')
+  </Script>
+
+  <Frame>
+    <Frames>
+      <Frame hidden='true'>
+        <Scripts>
+          <OnHide>error('should not be called')</OnHide>
+        </Scripts>
+      </Frame>
+    </Frames>
+    <Scripts>
+      <OnLoad>self:Hide()</OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame name='WowlessTemplate1' frameStrata='LOW' virtual='true'>
+    <Scripts>
+      <OnLoad>end, assertEquals('LOW', WowlessFrame:GetFrameStrata())--</OnLoad>
+    </Scripts>
+  </Frame>
+  <Frame name='WowlessTemplate2' frameStrata='MEDIUM' virtual='true'>
+    <Scripts>
+      <OnLoad>end, assertEquals('MEDIUM', WowlessFrame:GetFrameStrata())--</OnLoad>
+    </Scripts>
+  </Frame>
+  <Frame name='WowlessTemplate3' frameStrata='HIGH' virtual='true' inherits='WowlessTemplate2'>
+    <Scripts>
+      <OnLoad>end, assertEquals('HIGH', WowlessFrame:GetFrameStrata())--</OnLoad>
+    </Scripts>
+  </Frame>
+  <Frame name='WowlessFrame' frameStrata='DIALOG' inherits='WowlessTemplate1,WowlessTemplate3'>
+    <Scripts>
+      <OnLoad>end, assertEquals('DIALOG', WowlessFrame:GetFrameStrata())--</OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Button name='WowlessTemplate' registerForClicks='AnyUp,AnyDown' virtual='true'>
+    <Scripts>
+      <OnLoad>end, assertEquals('Frame', WowlessFrame:GetObjectType())--</OnLoad>
+    </Scripts>
+  </Button>
+  <Frame name='WowlessFrame' inherits='WowlessTemplate' />
+
+  <Frame name='WowlessIntrinsicType' intrinsic='true' />
+  <Script>
+    local obj = CreateFrame('WowlessIntrinsicType')
+    assertEquals(true, obj ~= nil)
+    assertEquals('Frame', obj:GetObjectType())
+    assertEquals(true, obj:IsObjectType('Frame'))
+    -- TODO test intrinsic IsObjectType in the client
+    -- assertEquals(false, obj:IsObjectType('WowlessIntrinsicType'))
+  </Script>
+  <WowlessIntrinsicType>
+    <Scripts>
+      <OnLoad>end, error('this should not be executed')--</OnLoad>
+    </Scripts>
+  </WowlessIntrinsicType>
+  <WowlessIntrinsicType name='WowlessEvenMoreIntrinsicType' intrinsic='true'>
+    <Scripts>
+      <OnLoad>end, error('this should not be executed')--</OnLoad>
+    </Scripts>
+  </WowlessIntrinsicType>
+  <Include file='evenmoreintrinsic.xml' />
+  <Script>
+    -- TODO disabled until wowless supports LUA_WARNING
+    -- assertEquals(false, pcall(function() CreateFrame('WowlessEvenMoreIntrinsicType') end))
+  </Script>
+
+  <Script>
+    assertEquals(nil, coroutine.running())
+  </Script>
+
+  <Frame>
+    <Layers>
+      <Layer>
+        <Texture parentKey='Default' />
+        <Texture parentKey='Override'>
+          <TexCoords top='1' bottom='0' left='1' right='0' />
+        </Texture>
+        <Texture parentKey='PartialOverride'>
+          <TexCoords left='1' right='0' />  <!-- top=0 bottom=1 defaults -->
+        </Texture>
+        <Texture parentKey='MultipleOverride'>
+          <TexCoords top='1' bottom='0' />  <!-- this is ignored/overridden -->
+          <TexCoords left='1' right='0' />
+        </Texture>
+      </Layer>
+    </Layers>
+    <Scripts>
+      <OnLoad>
+        local function check(ulx, uly, llx, lly, urx, ury, lrx, lry, ...)
+          assertEquals(8, select('#', ...))
+          assertEquals(ulx, select(1, ...))
+          assertEquals(uly, select(2, ...))
+          assertEquals(llx, select(3, ...))
+          assertEquals(lly, select(4, ...))
+          assertEquals(urx, select(5, ...))
+          assertEquals(ury, select(6, ...))
+          assertEquals(lrx, select(7, ...))
+          assertEquals(lry, select(8, ...))
+        end
+        check(0, 0, 0, 1, 1, 0, 1, 1, self.Default:GetTexCoord())
+        check(1, 1, 1, 0, 0, 1, 0, 0, self.Override:GetTexCoord())
+        check(1, 0, 1, 1, 0, 0, 0, 1, self.PartialOverride:GetTexCoord())
+        check(1, 0, 1, 1, 0, 0, 0, 1, self.MultipleOverride:GetTexCoord())
+      </OnLoad>
+    </Scripts>
+  </Frame>
+</Ui>
