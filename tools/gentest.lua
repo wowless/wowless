@@ -47,27 +47,30 @@ do
   addtype('Frame')
 end
 
-local apiNamespaceFlavors = {}
-for k, v in pairs(apis) do
-  local p = k:find('%.')
-  if p then
-    local name = k:sub(1, p - 1)
-    apiNamespaceFlavors[name] = apiNamespaceFlavors[name] or {}
-    for _, flavor in ipairs(v.flavors or { 'Vanilla', 'TBC', 'Mainline' }) do
-      apiNamespaceFlavors[name][flavor] = true
+local apiNamespaces = {}
+do
+  for k, v in pairs(apis) do
+    local p = k:find('%.')
+    if p then
+      local name = k:sub(1, p - 1)
+      apiNamespaces[name] = apiNamespaces[name] or { methods = {} }
+      apiNamespaces[name].methods[k:sub(p + 1)] = v
     end
   end
-end
-local apiNamespaces = {}
-for k, v in pairs(apiNamespaceFlavors) do
-  local list = {}
-  for f in pairs(v) do
-    table.insert(list, f)
+  for _, v in pairs(apiNamespaces) do
+    local flavors = {}
+    for _, m in pairs(v.methods) do
+      for _, flavor in ipairs(m.flavors or { 'Vanilla', 'TBC', 'Mainline' }) do
+        flavors[flavor] = true
+      end
+    end
+    local flist = {}
+    for f in pairs(flavors) do
+      table.insert(flist, f)
+    end
+    assert(next(flist))
+    v.flavors = #flist ~= 3 and flist or nil
   end
-  assert(next(list))
-  apiNamespaces[k] = { flavors = #list ~= 3 and list or nil }
-end
-do
   local unavailable = {
     -- These are grabbed by FrameXML and are unavailable by the time addons run.
     'C_AuthChallenge',
