@@ -1,6 +1,8 @@
 ---
 name: C_PetJournal.GetSummonBattlePetCooldown
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

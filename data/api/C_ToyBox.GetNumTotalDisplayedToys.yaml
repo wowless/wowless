@@ -1,5 +1,7 @@
 ---
 name: C_ToyBox.GetNumTotalDisplayedToys
 status: unimplemented
+flavors:
+- Mainline
 outputs:
 - type: number

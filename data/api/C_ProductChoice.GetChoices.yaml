@@ -1,5 +1,8 @@
 ---
 name: C_ProductChoice.GetChoices
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 outputs:
 - type: table

@@ -1,3 +1,5 @@
 ---
 name: C_PetBattles.ShouldShowPetSelect
 status: unimplemented
+flavors:
+- Mainline

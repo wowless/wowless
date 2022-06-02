@@ -1,4 +1,4 @@
-local _, G = ...
+local addonName, G = ...
 local assertEquals = _G.assertEquals
 
 local syncTests = {
@@ -372,6 +372,16 @@ do
           checkSafely(test.name, check)
         end)
       end
+    end
+  end)
+end
+
+do
+  local saver = CreateFrame('Frame')
+  saver:RegisterEvent('ADDON_LOADED')
+  saver:SetScript('OnEvent', function(_, _, name)
+    if name == addonName then
+      _G.WowlessLastTestFailures = _G.WowlessTestFailures
     end
   end)
 end

@@ -1,5 +1,7 @@
 ---
 name: C_Garrison.GetFollowers
 status: unimplemented
+flavors:
+- Mainline
 outputs:
 - type: table

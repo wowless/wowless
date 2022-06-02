@@ -1,6 +1,8 @@
 ---
 name: C_WowTokenSecure.GetGameTimeRedemptionInfo
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

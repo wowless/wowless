@@ -1,3 +1,5 @@
 ---
 name: C_Heirloom.ShouldShowHeirloomHelp
 status: unimplemented
+flavors:
+- Mainline

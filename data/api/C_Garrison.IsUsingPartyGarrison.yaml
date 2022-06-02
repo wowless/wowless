@@ -1,3 +1,5 @@
 ---
 name: C_Garrison.IsUsingPartyGarrison
 status: unimplemented
+flavors:
+- Mainline

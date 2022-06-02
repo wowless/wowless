@@ -1,6 +1,8 @@
 ---
 name: C_TradeSkillUI.CloseObliterumForge
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs: {}

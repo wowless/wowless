@@ -1,6 +1,8 @@
 ---
 name: C_TradeSkillUI.IsNPCCrafting
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

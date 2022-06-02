@@ -1,6 +1,8 @@
 ---
 name: C_PetBattles.GetPetSpeciesID
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: petOwner
     type: number

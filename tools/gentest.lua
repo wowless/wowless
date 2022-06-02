@@ -67,6 +67,21 @@ for k, v in pairs(apiNamespaceFlavors) do
   assert(next(list))
   apiNamespaces[k] = { flavors = #list ~= 3 and list or nil }
 end
+do
+  local unavailable = {
+    -- These are grabbed by FrameXML and are unavailable by the time addons run.
+    'C_AuthChallenge',
+    'C_SecureTransfer',
+    'C_StoreSecure',
+    'C_WowTokenSecure',
+    -- This is documented but does not actually seem to exist.
+    'C_ConfigurationWarnings',
+  }
+  for _, k in ipairs(unavailable) do
+    assert(apiNamespaces[k])
+    apiNamespaces[k] = nil
+  end
+end
 
 local function badflavor(flavors)
   local ids = {

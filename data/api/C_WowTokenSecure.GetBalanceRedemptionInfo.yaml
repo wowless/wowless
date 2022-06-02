@@ -1,6 +1,8 @@
 ---
 name: C_WowTokenSecure.GetBalanceRedemptionInfo
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

@@ -1,6 +1,8 @@
 ---
 name: C_Covenants.GetCovenantData
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: covenantID
     type: number

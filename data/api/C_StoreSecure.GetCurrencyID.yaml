@@ -1,3 +1,5 @@
 ---
 name: C_StoreSecure.GetCurrencyID
 status: unimplemented
+flavors:
+- Mainline

@@ -1,6 +1,8 @@
 ---
 name: C_Heirloom.SetClassAndSpecFilters
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: classID
     type: number

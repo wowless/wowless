@@ -1,6 +1,8 @@
 ---
 name: C_Garrison.GetCurrencyTypes
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: garrisonType
     type: number

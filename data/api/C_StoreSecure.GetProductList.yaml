@@ -1,6 +1,8 @@
 ---
 name: C_StoreSecure.GetProductList
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs: {}

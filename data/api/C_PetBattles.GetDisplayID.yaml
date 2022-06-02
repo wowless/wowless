@@ -1,5 +1,7 @@
 ---
 name: C_PetBattles.GetDisplayID
 status: unimplemented
+flavors:
+- Mainline
 outputs:
 - type: number

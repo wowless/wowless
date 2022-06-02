@@ -1,6 +1,8 @@
 ---
 name: C_PetJournal.GetNumPets
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

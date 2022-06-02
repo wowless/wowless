@@ -1,6 +1,9 @@
 ---
 name: C_Seasons.HasActiveSeason
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 inputs:
 - {}
 outputs:

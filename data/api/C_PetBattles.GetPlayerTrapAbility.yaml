@@ -1,6 +1,8 @@
 ---
 name: C_PetBattles.GetPlayerTrapAbility
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

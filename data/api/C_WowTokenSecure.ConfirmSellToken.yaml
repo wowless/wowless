@@ -1,6 +1,8 @@
 ---
 name: C_WowTokenSecure.ConfirmSellToken
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: sell
     type: boolean

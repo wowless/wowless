@@ -1,6 +1,8 @@
 ---
 name: C_PetBattles.GetTurnTimeInfo
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

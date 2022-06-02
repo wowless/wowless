@@ -1,6 +1,8 @@
 ---
 name: C_AdventureMap.Close
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs: {}

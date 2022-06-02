@@ -1,5 +1,7 @@
 ---
 name: C_PetBattles.GetNumPets
 status: unimplemented
+flavors:
+- Mainline
 outputs:
 - type: number

@@ -1,7 +1,7 @@
 ## Interface-Retail: 90105
 ## Interface-Classic: 11401
 ## Interface-BCC: 20503
-## X-WoWI-ID: 26172
+## SavedVariables: WowlessLastTestFailures
 init.lua
 framework.lua
 test.xml

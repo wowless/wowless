@@ -1,6 +1,8 @@
 ---
 name: C_TradeSkillUI.GetPendingObliterateItemID
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

@@ -1,6 +1,8 @@
 ---
 name: C_ContributionCollector.GetContributionAppearance
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: contributionID
     type: number
