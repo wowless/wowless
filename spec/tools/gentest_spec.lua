@@ -1,0 +1,7 @@
+describe('gentest', function()
+  it('is consistent with addon', function()
+    local addon = require('pl.file').read('addon/Wowless/generated.lua')
+    local gentest = loadfile('tools/gentest.lua')(nil)
+    assert(gentest == addon)
+  end)
+end)

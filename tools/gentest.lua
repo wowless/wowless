@@ -63,10 +63,8 @@ end
 uiobjects.Minimap = nil
 uiobjects.WorldFrame = nil
 
-require('pl.file').write(
-  'addon/Wowless/generated.lua',
-  assert(plsub(
-    [[
+local text = assert(plsub(
+  [[
 local _, G = ...
 local assertEquals = _G.assertEquals
 local GetObjectType = CreateFrame('Frame').GetObjectType
@@ -148,14 +146,19 @@ G.GeneratedTestFailures = G.test(function()
   }
 end)
 ]],
-    {
-      _escape = '>',
-      badflavor = badflavor,
-      frametypes = frametypes,
-      next = next,
-      objTypes = objTypes,
-      sorted = require('pl.tablex').sort,
-      uiobjects = uiobjects,
-    }
-  ))
-)
+  {
+    _escape = '>',
+    badflavor = badflavor,
+    frametypes = frametypes,
+    next = next,
+    objTypes = objTypes,
+    sorted = require('pl.tablex').sort,
+    uiobjects = uiobjects,
+  }
+))
+
+-- Hack so test doesn't have side effects.
+if select('#', ...) == 0 then
+  require('pl.file').write('addon/Wowless/generated.lua', text)
+end
+return text
