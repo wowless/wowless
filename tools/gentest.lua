@@ -1,6 +1,6 @@
 local plsub = require('pl.template').substitute
 
-local cfgs = {}
+local uiobjects = {}
 do
   local lfs = require('lfs')
   local yaml = require('wowapi.yaml')
@@ -8,13 +8,13 @@ do
     if d ~= '.' and d ~= '..' then
       local filename = ('data/uiobjects/%s/%s.yaml'):format(d, d)
       local cfg = yaml.parseFile(filename)
-      cfgs[cfg.name] = cfg
+      uiobjects[cfg.name] = cfg
     end
   end
 end
 
 local inhrev = {}
-for _, cfg in pairs(cfgs) do
+for _, cfg in pairs(uiobjects) do
   for _, inh in ipairs(cfg.inherits) do
     inhrev[inh] = inhrev[inh] or {}
     table.insert(inhrev[inh], cfg.name)
@@ -22,7 +22,7 @@ for _, cfg in pairs(cfgs) do
 end
 
 local objTypes = {}
-for _, cfg in pairs(cfgs) do
+for _, cfg in pairs(uiobjects) do
   objTypes[cfg.name] = cfg.objectType or cfg.name
 end
 
@@ -60,8 +60,8 @@ local function badflavor(flavors)
 end
 
 -- TODO figure out the right approach for these
-cfgs.Minimap = nil
-cfgs.WorldFrame = nil
+uiobjects.Minimap = nil
+uiobjects.WorldFrame = nil
 
 require('pl.file').write(
   'addon/Wowless/generated.lua',
@@ -91,7 +91,7 @@ G.GeneratedTestFailures = G.test(function()
         assertEquals(expectedErr, err:sub(err:len() - expectedErr:len() + 1))
       end
       return {
-> for k, v in sorted(cfgs) do
+> for k, v in sorted(uiobjects) do
         $(k) = function()
 > if frametypes[k] and v.flavors then
           if $(badflavor(v.flavors)) then
@@ -151,11 +151,11 @@ end)
     {
       _escape = '>',
       badflavor = badflavor,
-      cfgs = cfgs,
       frametypes = frametypes,
       next = next,
       objTypes = objTypes,
       sorted = require('pl.tablex').sort,
+      uiobjects = uiobjects,
     }
   ))
 )
