@@ -39,6 +39,26 @@ do
   addtype('Frame')
 end
 
+local function badflavor(flavors)
+  local ids = {
+    Mainline = 'WOW_PROJECT_MAINLINE',
+    TBC = 'WOW_PROJECT_BURNING_CRUSADE_CLASSIC',
+    Vanilla = 'WOW_PROJECT_CLASSIC',
+  }
+  if #flavors == 1 then
+    return 'WOW_PROJECT_ID ~= ' .. assert(ids[flavors[1]])
+  elseif #flavors == 2 then
+    assert(ids[flavors[1]])
+    ids[flavors[1]] = nil
+    assert(ids[flavors[2]])
+    ids[flavors[2]] = nil
+    local _, v = next(ids)
+    return 'WOW_PROJECT_ID == ' .. v
+  else
+    error('invalid flavor setting')
+  end
+end
+
 -- TODO figure out the right approach for these
 cfgs.Minimap = nil
 cfgs.WorldFrame = nil
@@ -103,11 +123,15 @@ G.GeneratedTestFailures = G.test(function()
             methods = function()
               return {
 > for mname, method in sorted(v.methods) do
-> if not method.flavors then
                 $(mname) = function()
+> if method.flavors then
+                  if $(badflavor(method.flavors)) then
+                    assertEquals('nil', type(mt.__index.$(mname)))
+                    return
+                  end
+> end
                   assertEquals('function', type(mt.__index.$(mname)))
                 end,
-> end
 > end
               }
             end,
@@ -126,6 +150,7 @@ end)
 ]],
     {
       _escape = '>',
+      badflavor = badflavor,
       cfgs = cfgs,
       frametypes = frametypes,
       next = next,

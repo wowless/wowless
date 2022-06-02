@@ -229,6 +229,15 @@ local function mkBaseUIObjectTypes(api, loader)
       else
         error(('unsupported method status %q on %s.%s'):format(method.status, name, mname))
       end
+      if method.flavors then
+        local supported = false
+        for _, flavor in ipairs(method.flavors) do
+          supported = supported or flavor == loader.version
+        end
+        if not supported then
+          mixin[mname] = nil
+        end
+      end
     end
     local supported = false
     if not cfg.flavors then
