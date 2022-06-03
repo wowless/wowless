@@ -1,0 +1,5 @@
+---
+name: C_Garrison.GetFollowerActivationCost
+status: unimplemented
+flavors:
+- Mainline

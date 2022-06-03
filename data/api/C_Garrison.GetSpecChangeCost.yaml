@@ -1,0 +1,5 @@
+---
+name: C_Garrison.GetSpecChangeCost
+status: unimplemented
+flavors:
+- Mainline

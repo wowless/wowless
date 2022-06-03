@@ -1,0 +1,5 @@
+---
+name: C_Garrison.GetFollowerInfoForBuilding
+status: unimplemented
+flavors:
+- Mainline

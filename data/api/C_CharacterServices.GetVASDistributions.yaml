@@ -1,0 +1,5 @@
+---
+name: C_CharacterServices.GetVASDistributions
+status: unimplemented
+flavors:
+- Mainline

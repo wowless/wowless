@@ -1,0 +1,5 @@
+---
+name: C_PetBattles.SetPendingReportTargetFromUnit
+status: unimplemented
+flavors:
+- Mainline

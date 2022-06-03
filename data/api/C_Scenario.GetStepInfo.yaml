@@ -1,0 +1,5 @@
+---
+name: C_Scenario.GetStepInfo
+status: unimplemented
+flavors:
+- Mainline

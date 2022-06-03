@@ -9,7 +9,7 @@ function G.GeneratedTests()
           local ns = _G.C_AccountInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetIDFromBattleNetAccountGUID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetIDFromBattleNetAccountGUID))
@@ -24,12 +24,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsGUIDRelatedToLocalAccount))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_AchievementInfo = function()
           local ns = _G.C_AchievementInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetRewardItemID = function()
               assertEquals('function', type(ns.GetRewardItemID))
             end,
@@ -43,12 +49,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetPortraitTexture))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ActionBar = function()
           local ns = _G.C_ActionBar
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             FindFlyoutActionButtons = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.FindFlyoutActionButtons))
@@ -128,6 +140,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ToggleAutoCastPetAction))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_AdventureJournal = function()
           local ns = _G.C_AdventureJournal
@@ -137,11 +155,38 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            ActivateEntry = function()
+              assertEquals('function', type(ns.ActivateEntry))
+            end,
             CanBeShown = function()
               assertEquals('function', type(ns.CanBeShown))
             end,
+            GetNumAvailableSuggestions = function()
+              assertEquals('function', type(ns.GetNumAvailableSuggestions))
+            end,
+            GetPrimaryOffset = function()
+              assertEquals('function', type(ns.GetPrimaryOffset))
+            end,
+            GetReward = function()
+              assertEquals('function', type(ns.GetReward))
+            end,
+            GetSuggestions = function()
+              assertEquals('function', type(ns.GetSuggestions))
+            end,
+            SetPrimaryOffset = function()
+              assertEquals('function', type(ns.SetPrimaryOffset))
+            end,
+            UpdateSuggestions = function()
+              assertEquals('function', type(ns.UpdateSuggestions))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_AdventureMap = function()
           local ns = _G.C_AdventureMap
@@ -151,11 +196,47 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             Close = function()
               assertEquals('function', type(ns.Close))
             end,
+            GetMapID = function()
+              assertEquals('function', type(ns.GetMapID))
+            end,
+            GetMapInsetDetailTileInfo = function()
+              assertEquals('function', type(ns.GetMapInsetDetailTileInfo))
+            end,
+            GetMapInsetInfo = function()
+              assertEquals('function', type(ns.GetMapInsetInfo))
+            end,
+            GetNumMapInsets = function()
+              assertEquals('function', type(ns.GetNumMapInsets))
+            end,
+            GetNumQuestOffers = function()
+              assertEquals('function', type(ns.GetNumQuestOffers))
+            end,
+            GetNumZoneChoices = function()
+              assertEquals('function', type(ns.GetNumZoneChoices))
+            end,
+            GetQuestInfo = function()
+              assertEquals('function', type(ns.GetQuestInfo))
+            end,
+            GetQuestOfferInfo = function()
+              assertEquals('function', type(ns.GetQuestOfferInfo))
+            end,
+            GetZoneChoiceInfo = function()
+              assertEquals('function', type(ns.GetZoneChoiceInfo))
+            end,
+            StartQuest = function()
+              assertEquals('function', type(ns.StartQuest))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_AlliedRaces = function()
           local ns = _G.C_AlliedRaces
@@ -165,7 +246,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ClearAlliedRaceDetailsGiver = function()
               assertEquals('function', type(ns.ClearAlliedRaceDetailsGiver))
             end,
@@ -176,6 +257,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetRaceInfoByID))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_AnimaDiversion = function()
           local ns = _G.C_AnimaDiversion
@@ -185,7 +272,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CloseUI = function()
               assertEquals('function', type(ns.CloseUI))
             end,
@@ -208,6 +295,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SelectAnimaNode))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ArdenwealdGardening = function()
           local ns = _G.C_ArdenwealdGardening
@@ -217,7 +310,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetGardenData = function()
               assertEquals('function', type(ns.GetGardenData))
             end,
@@ -225,12 +318,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsGardenAccessible))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_AreaPoiInfo = function()
           local ns = _G.C_AreaPoiInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetAreaPOIForMap = function()
               assertEquals('function', type(ns.GetAreaPOIForMap))
             end,
@@ -255,6 +354,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsAreaPOITimed))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ArtifactUI = function()
           local ns = _G.C_ArtifactUI
@@ -264,7 +369,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AddPower = function()
               assertEquals('function', type(ns.AddPower))
             end,
@@ -449,6 +554,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ShouldSuppressForgeRotation))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_AuctionHouse = function()
           local ns = _G.C_AuctionHouse
@@ -458,7 +569,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CalculateCommodityDeposit = function()
               assertEquals('function', type(ns.CalculateCommodityDeposit))
             end,
@@ -706,12 +817,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.StartCommoditiesPurchase))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_AzeriteEmpoweredItem = function()
           local ns = _G.C_AzeriteEmpoweredItem
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanSelectPower = function()
               assertEquals('function', type(ns.CanSelectPower))
             end,
@@ -770,12 +887,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetHasBeenViewed))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_AzeriteEssence = function()
           local ns = _G.C_AzeriteEssence
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ActivateEssence = function()
               assertEquals('function', type(ns.ActivateEssence))
             end,
@@ -840,12 +963,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.UnlockMilestone))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_AzeriteItem = function()
           local ns = _G.C_AzeriteItem
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             FindActiveAzeriteItem = function()
               assertEquals('function', type(ns.FindActiveAzeriteItem))
             end,
@@ -874,6 +1003,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsAzeriteItemEnabled))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_BarberShop = function()
           local ns = _G.C_BarberShop
@@ -883,7 +1018,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ApplyCustomizationChoices = function()
               assertEquals('function', type(ns.ApplyCustomizationChoices))
             end,
@@ -960,6 +1095,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ZoomCamera))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_BattleNet = function()
           local ns = _G.C_BattleNet
@@ -969,7 +1110,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetAccountInfoByGUID = function()
               assertEquals('function', type(ns.GetAccountInfoByGUID))
             end,
@@ -992,16 +1133,28 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetGameAccountInfoByID))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_BehavioralMessaging = function()
           local ns = _G.C_BehavioralMessaging
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             SendNotificationReceipt = function()
               assertEquals('function', type(ns.SendNotificationReceipt))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_BlackMarket = function()
           local ns = _G.C_BlackMarket
@@ -1011,23 +1164,44 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             Close = function()
               assertEquals('function', type(ns.Close))
             end,
+            GetHotItem = function()
+              assertEquals('function', type(ns.GetHotItem))
+            end,
+            GetItemInfoByID = function()
+              assertEquals('function', type(ns.GetItemInfoByID))
+            end,
+            GetItemInfoByIndex = function()
+              assertEquals('function', type(ns.GetItemInfoByIndex))
+            end,
+            GetNumItems = function()
+              assertEquals('function', type(ns.GetNumItems))
+            end,
             IsViewOnly = function()
               assertEquals('function', type(ns.IsViewOnly))
+            end,
+            ItemPlaceBid = function()
+              assertEquals('function', type(ns.ItemPlaceBid))
             end,
             RequestItems = function()
               assertEquals('function', type(ns.RequestItems))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_CVar = function()
           local ns = _G.C_CVar
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetCVar = function()
               assertEquals('function', type(ns.GetCVar))
             end,
@@ -1036,6 +1210,9 @@ function G.GeneratedTests()
             end,
             GetCVarBool = function()
               assertEquals('function', type(ns.GetCVarBool))
+            end,
+            GetCVarDefault = function()
+              assertEquals('function', type(ns.GetCVarDefault))
             end,
             RegisterCVar = function()
               assertEquals('function', type(ns.RegisterCVar))
@@ -1050,12 +1227,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetCVarBitfield))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Calendar = function()
           local ns = _G.C_Calendar
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AddEvent = function()
               assertEquals('function', type(ns.AddEvent))
             end,
@@ -1334,6 +1517,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.UpdateEvent))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_CampaignInfo = function()
           local ns = _G.C_CampaignInfo
@@ -1343,7 +1532,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetAvailableCampaigns = function()
               assertEquals('function', type(ns.GetAvailableCampaigns))
             end,
@@ -1375,6 +1564,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.UsesNormalQuestIcons))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ChallengeMode = function()
           local ns = _G.C_ChallengeMode
@@ -1384,7 +1579,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanUseKeystoneInCurrentMap = function()
               assertEquals('function', type(ns.CanUseKeystoneInCurrentMap))
             end,
@@ -1467,45 +1662,135 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.StartChallengeMode))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_CharacterServices = function()
           local ns = _G.C_CharacterServices
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            AssignPCTDistribution = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.AssignPCTDistribution))
+                return
+              end
+              assertEquals('function', type(ns.AssignPCTDistribution))
+            end,
+            AssignPFCDistribution = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.AssignPFCDistribution))
+                return
+              end
+              assertEquals('function', type(ns.AssignPFCDistribution))
+            end,
+            AssignUpgradeDistribution = function()
+              assertEquals('function', type(ns.AssignUpgradeDistribution))
+            end,
+            GetActiveCharacterUpgradeBoostType = function()
+              assertEquals('function', type(ns.GetActiveCharacterUpgradeBoostType))
+            end,
+            GetActiveClassTrialBoostType = function()
+              assertEquals('function', type(ns.GetActiveClassTrialBoostType))
+            end,
+            GetAutomaticBoost = function()
+              assertEquals('function', type(ns.GetAutomaticBoost))
+            end,
+            GetAutomaticBoostCharacter = function()
+              assertEquals('function', type(ns.GetAutomaticBoostCharacter))
+            end,
             GetCharacterServiceDisplayData = function()
               assertEquals('function', type(ns.GetCharacterServiceDisplayData))
+            end,
+            GetCharacterServiceDisplayDataByVASType = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetCharacterServiceDisplayDataByVASType))
+                return
+              end
+              assertEquals('function', type(ns.GetCharacterServiceDisplayDataByVASType))
+            end,
+            GetCharacterServiceDisplayInfo = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetCharacterServiceDisplayInfo))
+                return
+              end
+              assertEquals('function', type(ns.GetCharacterServiceDisplayInfo))
+            end,
+            GetCharacterServiceDisplayOrder = function()
+              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetCharacterServiceDisplayOrder))
+                return
+              end
+              assertEquals('function', type(ns.GetCharacterServiceDisplayOrder))
+            end,
+            GetVASDistributions = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetVASDistributions))
+                return
+              end
+              assertEquals('function', type(ns.GetVASDistributions))
             end,
             HasRequiredBoostForClassTrial = function()
               assertEquals('function', type(ns.HasRequiredBoostForClassTrial))
             end,
+            HasRequiredBoostForUnrevoke = function()
+              assertEquals('function', type(ns.HasRequiredBoostForUnrevoke))
+            end,
+            SetAutomaticBoost = function()
+              assertEquals('function', type(ns.SetAutomaticBoost))
+            end,
+            SetAutomaticBoostCharacter = function()
+              assertEquals('function', type(ns.SetAutomaticBoostCharacter))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_CharacterServicesPublic = function()
           local ns = _G.C_CharacterServicesPublic
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ShouldSeeControlPopup = function()
               assertEquals('function', type(ns.ShouldSeeControlPopup))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ChatBubbles = function()
           local ns = _G.C_ChatBubbles
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetAllChatBubbles = function()
               assertEquals('function', type(ns.GetAllChatBubbles))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ChatInfo = function()
           local ns = _G.C_ChatInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanReportPlayer = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanReportPlayer))
@@ -1654,6 +1939,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SwapChatChannelsByChannelIndex))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ChromieTime = function()
           local ns = _G.C_ChromieTime
@@ -1663,7 +1954,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CloseUI = function()
               assertEquals('function', type(ns.CloseUI))
             end,
@@ -1677,6 +1968,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SelectChromieTimeOption))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ClassColor = function()
           local ns = _G.C_ClassColor
@@ -1686,11 +1983,17 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetClassColor = function()
               assertEquals('function', type(ns.GetClassColor))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ClassTrial = function()
           local ns = _G.C_ClassTrial
@@ -1700,7 +2003,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetClassTrialLogoutTimeSeconds = function()
               assertEquals('function', type(ns.GetClassTrialLogoutTimeSeconds))
             end,
@@ -1708,6 +2011,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsClassTrialCharacter))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ClickBindings = function()
           local ns = _G.C_ClickBindings
@@ -1717,7 +2026,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanSpellBeClickBound = function()
               assertEquals('function', type(ns.CanSpellBeClickBound))
             end,
@@ -1752,12 +2061,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetTutorialShown))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Club = function()
           local ns = _G.C_Club
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AcceptInvitation = function()
               assertEquals('function', type(ns.AcceptInvitation))
             end,
@@ -2024,6 +2339,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ValidateText))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ClubFinder = function()
           local ns = _G.C_ClubFinder
@@ -2033,7 +2354,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ApplicantAcceptClubInvite = function()
               assertEquals('function', type(ns.ApplicantAcceptClubInvite))
             end,
@@ -2194,12 +2515,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ShouldShowClubFinder))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Commentator = function()
           local ns = _G.C_Commentator
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AddPlayerOverrideName = function()
               assertEquals('function', type(ns.AddPlayerOverrideName))
             end,
@@ -2600,12 +2927,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ZoomOut))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Console = function()
           local ns = _G.C_Console
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetAllCommands = function()
               assertEquals('function', type(ns.GetAllCommands))
             end,
@@ -2622,6 +2955,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetFontHeight))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ContributionCollector = function()
           local ns = _G.C_ContributionCollector
@@ -2631,7 +2970,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             Close = function()
               assertEquals('function', type(ns.Close))
             end,
@@ -2687,6 +3026,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsAwaitingRewardQuestData))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_CovenantCallings = function()
           local ns = _G.C_CovenantCallings
@@ -2696,7 +3041,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AreCallingsUnlocked = function()
               assertEquals('function', type(ns.AreCallingsUnlocked))
             end,
@@ -2704,6 +3049,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RequestCallings))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_CovenantPreview = function()
           local ns = _G.C_CovenantPreview
@@ -2713,7 +3064,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CloseFromUI = function()
               assertEquals('function', type(ns.CloseFromUI))
             end,
@@ -2721,6 +3072,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetCovenantInfoForPlayerChoiceResponseID))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_CovenantSanctumUI = function()
           local ns = _G.C_CovenantSanctumUI
@@ -2730,7 +3087,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanAccessReservoir = function()
               assertEquals('function', type(ns.CanAccessReservoir))
             end,
@@ -2780,6 +3137,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RequestCatchUpState))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Covenants = function()
           local ns = _G.C_Covenants
@@ -2789,7 +3152,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetActiveCovenantID = function()
               assertEquals('function', type(ns.GetActiveCovenantID))
             end,
@@ -2800,12 +3163,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetCovenantIDs))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_CreatureInfo = function()
           local ns = _G.C_CreatureInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetClassInfo = function()
               assertEquals('function', type(ns.GetClassInfo))
             end,
@@ -2816,12 +3185,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetRaceInfo))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_CurrencyInfo = function()
           local ns = _G.C_CurrencyInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             DoesWarModeBonusApply = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.DoesWarModeBonusApply))
@@ -2948,12 +3323,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetCurrencyUnused))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Cursor = function()
           local ns = _G.C_Cursor
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             DropCursorCommunitiesStream = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.DropCursorCommunitiesStream))
@@ -2979,12 +3360,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetCursorCommunitiesStream))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_DateAndTime = function()
           local ns = _G.C_DateAndTime
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AdjustTimeByDays = function()
               assertEquals('function', type(ns.AdjustTimeByDays))
             end,
@@ -3000,6 +3387,13 @@ function G.GeneratedTests()
             GetCurrentCalendarTime = function()
               assertEquals('function', type(ns.GetCurrentCalendarTime))
             end,
+            GetDateFromEpoch = function()
+              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetDateFromEpoch))
+                return
+              end
+              assertEquals('function', type(ns.GetDateFromEpoch))
+            end,
             GetSecondsUntilDailyReset = function()
               assertEquals('function', type(ns.GetSecondsUntilDailyReset))
             end,
@@ -3009,13 +3403,33 @@ function G.GeneratedTests()
             GetServerTimeLocal = function()
               assertEquals('function', type(ns.GetServerTimeLocal))
             end,
+            GetTodaysDate = function()
+              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetTodaysDate))
+                return
+              end
+              assertEquals('function', type(ns.GetTodaysDate))
+            end,
+            GetYesterdaysDate = function()
+              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetYesterdaysDate))
+                return
+              end
+              assertEquals('function', type(ns.GetYesterdaysDate))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_DeathInfo = function()
           local ns = _G.C_DeathInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetCorpseMapPosition = function()
               assertEquals('function', type(ns.GetCorpseMapPosition))
             end,
@@ -3032,6 +3446,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.UseSelfResurrectOption))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_EncounterJournal = function()
           local ns = _G.C_EncounterJournal
@@ -3041,7 +3461,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetDungeonEntrancesForMap = function()
               assertEquals('function', type(ns.GetDungeonEntrancesForMap))
             end,
@@ -3082,12 +3502,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetSlotFilter))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_EquipmentSet = function()
           local ns = _G.C_EquipmentSet
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AssignSpecToEquipmentSet = function()
               assertEquals('function', type(ns.AssignSpecToEquipmentSet))
             end,
@@ -3158,6 +3584,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.UseEquipmentSet))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_EventToastManager = function()
           local ns = _G.C_EventToastManager
@@ -3167,7 +3599,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetLevelUpDisplayToastsFromLevel = function()
               assertEquals('function', type(ns.GetLevelUpDisplayToastsFromLevel))
             end,
@@ -3178,6 +3610,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RemoveCurrentToast))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_FogOfWar = function()
           local ns = _G.C_FogOfWar
@@ -3187,7 +3625,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetFogOfWarForMap = function()
               assertEquals('function', type(ns.GetFogOfWarForMap))
             end,
@@ -3195,6 +3633,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetFogOfWarInfo))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_FrameManager = function()
           local ns = _G.C_FrameManager
@@ -3204,17 +3648,23 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetFrameVisibilityState = function()
               assertEquals('function', type(ns.GetFrameVisibilityState))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_FriendList = function()
           local ns = _G.C_FriendList
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AddFriend = function()
               assertEquals('function', type(ns.AddFriend))
             end,
@@ -3310,12 +3760,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SortWho))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_GamePad = function()
           local ns = _G.C_GamePad
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AddSDLMapping = function()
               assertEquals('function', type(ns.AddSDLMapping))
             end,
@@ -3390,6 +3846,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.StopVibration))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Garrison = function()
           local ns = _G.C_Garrison
@@ -3399,12 +3861,75 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AddFollowerToMission = function()
               assertEquals('function', type(ns.AddFollowerToMission))
             end,
+            AllowMissionStartAboveSoftCap = function()
+              assertEquals('function', type(ns.AllowMissionStartAboveSoftCap))
+            end,
+            AreMissionFollowerRequirementsMet = function()
+              assertEquals('function', type(ns.AreMissionFollowerRequirementsMet))
+            end,
+            AssignFollowerToBuilding = function()
+              assertEquals('function', type(ns.AssignFollowerToBuilding))
+            end,
+            CanGenerateRecruits = function()
+              assertEquals('function', type(ns.CanGenerateRecruits))
+            end,
+            CanOpenMissionChest = function()
+              assertEquals('function', type(ns.CanOpenMissionChest))
+            end,
+            CanSetRecruitmentPreference = function()
+              assertEquals('function', type(ns.CanSetRecruitmentPreference))
+            end,
+            CanSpellTargetFollowerIDWithAddAbility = function()
+              assertEquals('function', type(ns.CanSpellTargetFollowerIDWithAddAbility))
+            end,
+            CanUpgradeGarrison = function()
+              assertEquals('function', type(ns.CanUpgradeGarrison))
+            end,
+            CancelConstruction = function()
+              assertEquals('function', type(ns.CancelConstruction))
+            end,
+            CastItemSpellOnFollowerAbility = function()
+              assertEquals('function', type(ns.CastItemSpellOnFollowerAbility))
+            end,
+            CastSpellOnFollower = function()
+              assertEquals('function', type(ns.CastSpellOnFollower))
+            end,
+            CastSpellOnFollowerAbility = function()
+              assertEquals('function', type(ns.CastSpellOnFollowerAbility))
+            end,
+            CastSpellOnMission = function()
+              assertEquals('function', type(ns.CastSpellOnMission))
+            end,
+            ClearCompleteTalent = function()
+              assertEquals('function', type(ns.ClearCompleteTalent))
+            end,
+            CloseArchitect = function()
+              assertEquals('function', type(ns.CloseArchitect))
+            end,
             CloseGarrisonTradeskillNPC = function()
               assertEquals('function', type(ns.CloseGarrisonTradeskillNPC))
+            end,
+            CloseMissionNPC = function()
+              assertEquals('function', type(ns.CloseMissionNPC))
+            end,
+            CloseRecruitmentNPC = function()
+              assertEquals('function', type(ns.CloseRecruitmentNPC))
+            end,
+            CloseTalentNPC = function()
+              assertEquals('function', type(ns.CloseTalentNPC))
+            end,
+            CloseTradeskillCrafter = function()
+              assertEquals('function', type(ns.CloseTradeskillCrafter))
+            end,
+            GenerateRecruits = function()
+              assertEquals('function', type(ns.GenerateRecruits))
+            end,
+            GetAllBonusAbilityEffects = function()
+              assertEquals('function', type(ns.GetAllBonusAbilityEffects))
             end,
             GetAllEncounterThreats = function()
               assertEquals('function', type(ns.GetAllEncounterThreats))
@@ -3433,14 +3958,56 @@ function G.GeneratedTests()
             GetAvailableRecruits = function()
               assertEquals('function', type(ns.GetAvailableRecruits))
             end,
+            GetBasicMissionInfo = function()
+              assertEquals('function', type(ns.GetBasicMissionInfo))
+            end,
+            GetBuffedFollowersForMission = function()
+              assertEquals('function', type(ns.GetBuffedFollowersForMission))
+            end,
+            GetBuildingInfo = function()
+              assertEquals('function', type(ns.GetBuildingInfo))
+            end,
+            GetBuildingLockInfo = function()
+              assertEquals('function', type(ns.GetBuildingLockInfo))
+            end,
             GetBuildingSizes = function()
               assertEquals('function', type(ns.GetBuildingSizes))
+            end,
+            GetBuildingSpecInfo = function()
+              assertEquals('function', type(ns.GetBuildingSpecInfo))
+            end,
+            GetBuildingTimeRemaining = function()
+              assertEquals('function', type(ns.GetBuildingTimeRemaining))
+            end,
+            GetBuildingTooltip = function()
+              assertEquals('function', type(ns.GetBuildingTooltip))
+            end,
+            GetBuildingUpgradeInfo = function()
+              assertEquals('function', type(ns.GetBuildingUpgradeInfo))
+            end,
+            GetBuildings = function()
+              assertEquals('function', type(ns.GetBuildings))
+            end,
+            GetBuildingsForPlot = function()
+              assertEquals('function', type(ns.GetBuildingsForPlot))
+            end,
+            GetBuildingsForSize = function()
+              assertEquals('function', type(ns.GetBuildingsForSize))
+            end,
+            GetClassSpecCategoryInfo = function()
+              assertEquals('function', type(ns.GetClassSpecCategoryInfo))
             end,
             GetCombatAllyMission = function()
               assertEquals('function', type(ns.GetCombatAllyMission))
             end,
             GetCombatLogSpellInfo = function()
               assertEquals('function', type(ns.GetCombatLogSpellInfo))
+            end,
+            GetCompleteMissions = function()
+              assertEquals('function', type(ns.GetCompleteMissions))
+            end,
+            GetCompleteTalent = function()
+              assertEquals('function', type(ns.GetCompleteTalent))
             end,
             GetCurrencyTypes = function()
               assertEquals('function', type(ns.GetCurrencyTypes))
@@ -3457,23 +4024,179 @@ function G.GeneratedTests()
             GetCyphersToNextEquipmentLevel = function()
               assertEquals('function', type(ns.GetCyphersToNextEquipmentLevel))
             end,
+            GetFollowerAbilities = function()
+              assertEquals('function', type(ns.GetFollowerAbilities))
+            end,
+            GetFollowerAbilityAtIndex = function()
+              assertEquals('function', type(ns.GetFollowerAbilityAtIndex))
+            end,
+            GetFollowerAbilityAtIndexByID = function()
+              assertEquals('function', type(ns.GetFollowerAbilityAtIndexByID))
+            end,
+            GetFollowerAbilityCounterMechanicInfo = function()
+              assertEquals('function', type(ns.GetFollowerAbilityCounterMechanicInfo))
+            end,
+            GetFollowerAbilityCountersForMechanicTypes = function()
+              assertEquals('function', type(ns.GetFollowerAbilityCountersForMechanicTypes))
+            end,
+            GetFollowerAbilityDescription = function()
+              assertEquals('function', type(ns.GetFollowerAbilityDescription))
+            end,
+            GetFollowerAbilityIcon = function()
+              assertEquals('function', type(ns.GetFollowerAbilityIcon))
+            end,
+            GetFollowerAbilityInfo = function()
+              assertEquals('function', type(ns.GetFollowerAbilityInfo))
+            end,
+            GetFollowerAbilityIsTrait = function()
+              assertEquals('function', type(ns.GetFollowerAbilityIsTrait))
+            end,
+            GetFollowerAbilityLink = function()
+              assertEquals('function', type(ns.GetFollowerAbilityLink))
+            end,
+            GetFollowerAbilityName = function()
+              assertEquals('function', type(ns.GetFollowerAbilityName))
+            end,
+            GetFollowerActivationCost = function()
+              assertEquals('function', type(ns.GetFollowerActivationCost))
+            end,
             GetFollowerAutoCombatSpells = function()
               assertEquals('function', type(ns.GetFollowerAutoCombatSpells))
             end,
             GetFollowerAutoCombatStats = function()
               assertEquals('function', type(ns.GetFollowerAutoCombatStats))
             end,
+            GetFollowerBiasForMission = function()
+              assertEquals('function', type(ns.GetFollowerBiasForMission))
+            end,
+            GetFollowerClassSpec = function()
+              assertEquals('function', type(ns.GetFollowerClassSpec))
+            end,
+            GetFollowerClassSpecAtlas = function()
+              assertEquals('function', type(ns.GetFollowerClassSpecAtlas))
+            end,
+            GetFollowerClassSpecByID = function()
+              assertEquals('function', type(ns.GetFollowerClassSpecByID))
+            end,
+            GetFollowerClassSpecName = function()
+              assertEquals('function', type(ns.GetFollowerClassSpecName))
+            end,
+            GetFollowerDisplayID = function()
+              assertEquals('function', type(ns.GetFollowerDisplayID))
+            end,
+            GetFollowerInfo = function()
+              assertEquals('function', type(ns.GetFollowerInfo))
+            end,
+            GetFollowerInfoForBuilding = function()
+              assertEquals('function', type(ns.GetFollowerInfoForBuilding))
+            end,
+            GetFollowerIsTroop = function()
+              assertEquals('function', type(ns.GetFollowerIsTroop))
+            end,
+            GetFollowerItemLevelAverage = function()
+              assertEquals('function', type(ns.GetFollowerItemLevelAverage))
+            end,
+            GetFollowerItems = function()
+              assertEquals('function', type(ns.GetFollowerItems))
+            end,
+            GetFollowerLevel = function()
+              assertEquals('function', type(ns.GetFollowerLevel))
+            end,
+            GetFollowerLevelXP = function()
+              assertEquals('function', type(ns.GetFollowerLevelXP))
+            end,
+            GetFollowerLink = function()
+              assertEquals('function', type(ns.GetFollowerLink))
+            end,
+            GetFollowerLinkByID = function()
+              assertEquals('function', type(ns.GetFollowerLinkByID))
+            end,
             GetFollowerMissionCompleteInfo = function()
               assertEquals('function', type(ns.GetFollowerMissionCompleteInfo))
+            end,
+            GetFollowerMissionTimeLeft = function()
+              assertEquals('function', type(ns.GetFollowerMissionTimeLeft))
+            end,
+            GetFollowerMissionTimeLeftSeconds = function()
+              assertEquals('function', type(ns.GetFollowerMissionTimeLeftSeconds))
+            end,
+            GetFollowerModelItems = function()
+              assertEquals('function', type(ns.GetFollowerModelItems))
+            end,
+            GetFollowerName = function()
+              assertEquals('function', type(ns.GetFollowerName))
+            end,
+            GetFollowerNameByID = function()
+              assertEquals('function', type(ns.GetFollowerNameByID))
+            end,
+            GetFollowerPortraitIconID = function()
+              assertEquals('function', type(ns.GetFollowerPortraitIconID))
+            end,
+            GetFollowerPortraitIconIDByID = function()
+              assertEquals('function', type(ns.GetFollowerPortraitIconIDByID))
+            end,
+            GetFollowerQuality = function()
+              assertEquals('function', type(ns.GetFollowerQuality))
+            end,
+            GetFollowerQualityTable = function()
+              assertEquals('function', type(ns.GetFollowerQualityTable))
+            end,
+            GetFollowerRecentlyGainedAbilityIDs = function()
+              assertEquals('function', type(ns.GetFollowerRecentlyGainedAbilityIDs))
+            end,
+            GetFollowerRecentlyGainedTraitIDs = function()
+              assertEquals('function', type(ns.GetFollowerRecentlyGainedTraitIDs))
+            end,
+            GetFollowerShipments = function()
+              assertEquals('function', type(ns.GetFollowerShipments))
             end,
             GetFollowerSoftCap = function()
               assertEquals('function', type(ns.GetFollowerSoftCap))
             end,
+            GetFollowerSourceTextByID = function()
+              assertEquals('function', type(ns.GetFollowerSourceTextByID))
+            end,
+            GetFollowerSpecializationAtIndex = function()
+              assertEquals('function', type(ns.GetFollowerSpecializationAtIndex))
+            end,
+            GetFollowerStatus = function()
+              assertEquals('function', type(ns.GetFollowerStatus))
+            end,
+            GetFollowerTraitAtIndex = function()
+              assertEquals('function', type(ns.GetFollowerTraitAtIndex))
+            end,
+            GetFollowerTraitAtIndexByID = function()
+              assertEquals('function', type(ns.GetFollowerTraitAtIndexByID))
+            end,
+            GetFollowerTypeByID = function()
+              assertEquals('function', type(ns.GetFollowerTypeByID))
+            end,
+            GetFollowerTypeByMissionID = function()
+              assertEquals('function', type(ns.GetFollowerTypeByMissionID))
+            end,
+            GetFollowerUnderBiasReason = function()
+              assertEquals('function', type(ns.GetFollowerUnderBiasReason))
+            end,
+            GetFollowerXP = function()
+              assertEquals('function', type(ns.GetFollowerXP))
+            end,
             GetFollowerXPTable = function()
               assertEquals('function', type(ns.GetFollowerXPTable))
             end,
+            GetFollowerZoneSupportAbilities = function()
+              assertEquals('function', type(ns.GetFollowerZoneSupportAbilities))
+            end,
             GetFollowers = function()
               assertEquals('function', type(ns.GetFollowers))
+            end,
+            GetFollowersSpellsForMission = function()
+              assertEquals('function', type(ns.GetFollowersSpellsForMission))
+            end,
+            GetFollowersTraitsForMission = function()
+              assertEquals('function', type(ns.GetFollowersTraitsForMission))
+            end,
+            GetGarrisonInfo = function()
+              assertEquals('function', type(ns.GetGarrisonInfo))
             end,
             GetGarrisonPlotsInstancesForMap = function()
               assertEquals('function', type(ns.GetGarrisonPlotsInstancesForMap))
@@ -3484,32 +4207,164 @@ function G.GeneratedTests()
             GetGarrisonTalentTreeType = function()
               assertEquals('function', type(ns.GetGarrisonTalentTreeType))
             end,
+            GetGarrisonUpgradeCost = function()
+              assertEquals('function', type(ns.GetGarrisonUpgradeCost))
+            end,
             GetInProgressMissions = function()
               assertEquals('function', type(ns.GetInProgressMissions))
             end,
             GetLandingPageGarrisonType = function()
               assertEquals('function', type(ns.GetLandingPageGarrisonType))
             end,
+            GetLandingPageItems = function()
+              assertEquals('function', type(ns.GetLandingPageItems))
+            end,
+            GetLandingPageShipmentCount = function()
+              assertEquals('function', type(ns.GetLandingPageShipmentCount))
+            end,
+            GetLandingPageShipmentInfo = function()
+              assertEquals('function', type(ns.GetLandingPageShipmentInfo))
+            end,
+            GetLandingPageShipmentInfoByContainerID = function()
+              assertEquals('function', type(ns.GetLandingPageShipmentInfoByContainerID))
+            end,
+            GetLooseShipments = function()
+              assertEquals('function', type(ns.GetLooseShipments))
+            end,
             GetMaxCypherEquipmentLevel = function()
               assertEquals('function', type(ns.GetMaxCypherEquipmentLevel))
+            end,
+            GetMissionBonusAbilityEffects = function()
+              assertEquals('function', type(ns.GetMissionBonusAbilityEffects))
             end,
             GetMissionCompleteEncounters = function()
               assertEquals('function', type(ns.GetMissionCompleteEncounters))
             end,
+            GetMissionCost = function()
+              assertEquals('function', type(ns.GetMissionCost))
+            end,
             GetMissionDeploymentInfo = function()
               assertEquals('function', type(ns.GetMissionDeploymentInfo))
+            end,
+            GetMissionDisplayIDs = function()
+              assertEquals('function', type(ns.GetMissionDisplayIDs))
             end,
             GetMissionEncounterIconInfo = function()
               assertEquals('function', type(ns.GetMissionEncounterIconInfo))
             end,
+            GetMissionLink = function()
+              assertEquals('function', type(ns.GetMissionLink))
+            end,
+            GetMissionMaxFollowers = function()
+              assertEquals('function', type(ns.GetMissionMaxFollowers))
+            end,
+            GetMissionName = function()
+              assertEquals('function', type(ns.GetMissionName))
+            end,
+            GetMissionRewardInfo = function()
+              assertEquals('function', type(ns.GetMissionRewardInfo))
+            end,
+            GetMissionSuccessChance = function()
+              assertEquals('function', type(ns.GetMissionSuccessChance))
+            end,
+            GetMissionTexture = function()
+              assertEquals('function', type(ns.GetMissionTexture))
+            end,
+            GetMissionTimes = function()
+              assertEquals('function', type(ns.GetMissionTimes))
+            end,
+            GetMissionUncounteredMechanics = function()
+              assertEquals('function', type(ns.GetMissionUncounteredMechanics))
+            end,
+            GetNumActiveFollowers = function()
+              assertEquals('function', type(ns.GetNumActiveFollowers))
+            end,
+            GetNumFollowerActivationsRemaining = function()
+              assertEquals('function', type(ns.GetNumFollowerActivationsRemaining))
+            end,
+            GetNumFollowerDailyActivations = function()
+              assertEquals('function', type(ns.GetNumFollowerDailyActivations))
+            end,
             GetNumFollowers = function()
               assertEquals('function', type(ns.GetNumFollowers))
+            end,
+            GetNumFollowersForMechanic = function()
+              assertEquals('function', type(ns.GetNumFollowersForMechanic))
+            end,
+            GetNumFollowersOnMission = function()
+              assertEquals('function', type(ns.GetNumFollowersOnMission))
+            end,
+            GetNumPendingShipments = function()
+              assertEquals('function', type(ns.GetNumPendingShipments))
+            end,
+            GetNumShipmentCurrencies = function()
+              assertEquals('function', type(ns.GetNumShipmentCurrencies))
+            end,
+            GetNumShipmentReagents = function()
+              assertEquals('function', type(ns.GetNumShipmentReagents))
+            end,
+            GetOwnedBuildingInfo = function()
+              assertEquals('function', type(ns.GetOwnedBuildingInfo))
+            end,
+            GetOwnedBuildingInfoAbbrev = function()
+              assertEquals('function', type(ns.GetOwnedBuildingInfoAbbrev))
+            end,
+            GetPartyBuffs = function()
+              assertEquals('function', type(ns.GetPartyBuffs))
+            end,
+            GetPartyMentorLevels = function()
+              assertEquals('function', type(ns.GetPartyMentorLevels))
+            end,
+            GetPartyMissionInfo = function()
+              assertEquals('function', type(ns.GetPartyMissionInfo))
+            end,
+            GetPendingShipmentInfo = function()
+              assertEquals('function', type(ns.GetPendingShipmentInfo))
+            end,
+            GetPlots = function()
+              assertEquals('function', type(ns.GetPlots))
+            end,
+            GetPlotsForBuilding = function()
+              assertEquals('function', type(ns.GetPlotsForBuilding))
+            end,
+            GetPossibleFollowersForBuilding = function()
+              assertEquals('function', type(ns.GetPossibleFollowersForBuilding))
+            end,
+            GetRecruitAbilities = function()
+              assertEquals('function', type(ns.GetRecruitAbilities))
             end,
             GetRecruiterAbilityCategories = function()
               assertEquals('function', type(ns.GetRecruiterAbilityCategories))
             end,
+            GetRecruiterAbilityList = function()
+              assertEquals('function', type(ns.GetRecruiterAbilityList))
+            end,
             GetRecruitmentPreferences = function()
               assertEquals('function', type(ns.GetRecruitmentPreferences))
+            end,
+            GetShipDeathAnimInfo = function()
+              assertEquals('function', type(ns.GetShipDeathAnimInfo))
+            end,
+            GetShipmentContainerInfo = function()
+              assertEquals('function', type(ns.GetShipmentContainerInfo))
+            end,
+            GetShipmentItemInfo = function()
+              assertEquals('function', type(ns.GetShipmentItemInfo))
+            end,
+            GetShipmentReagentCurrencyInfo = function()
+              assertEquals('function', type(ns.GetShipmentReagentCurrencyInfo))
+            end,
+            GetShipmentReagentInfo = function()
+              assertEquals('function', type(ns.GetShipmentReagentInfo))
+            end,
+            GetShipmentReagentItemLink = function()
+              assertEquals('function', type(ns.GetShipmentReagentItemLink))
+            end,
+            GetSpecChangeCost = function()
+              assertEquals('function', type(ns.GetSpecChangeCost))
+            end,
+            GetTabForPlot = function()
+              assertEquals('function', type(ns.GetTabForPlot))
             end,
             GetTalentInfo = function()
               assertEquals('function', type(ns.GetTalentInfo))
@@ -3535,14 +4390,41 @@ function G.GeneratedTests()
             HasAdventures = function()
               assertEquals('function', type(ns.HasAdventures))
             end,
+            HasGarrison = function()
+              assertEquals('function', type(ns.HasGarrison))
+            end,
+            HasShipyard = function()
+              assertEquals('function', type(ns.HasShipyard))
+            end,
+            IsAboveFollowerSoftCap = function()
+              assertEquals('function', type(ns.IsAboveFollowerSoftCap))
+            end,
             IsAtGarrisonMissionNPC = function()
               assertEquals('function', type(ns.IsAtGarrisonMissionNPC))
             end,
             IsEnvironmentCountered = function()
               assertEquals('function', type(ns.IsEnvironmentCountered))
             end,
+            IsFollowerCollected = function()
+              assertEquals('function', type(ns.IsFollowerCollected))
+            end,
             IsFollowerOnCompletedMission = function()
               assertEquals('function', type(ns.IsFollowerOnCompletedMission))
+            end,
+            IsInvasionAvailable = function()
+              assertEquals('function', type(ns.IsInvasionAvailable))
+            end,
+            IsMechanicFullyCountered = function()
+              assertEquals('function', type(ns.IsMechanicFullyCountered))
+            end,
+            IsOnGarrisonMap = function()
+              assertEquals('function', type(ns.IsOnGarrisonMap))
+            end,
+            IsOnShipmentQuestForNPC = function()
+              assertEquals('function', type(ns.IsOnShipmentQuestForNPC))
+            end,
+            IsOnShipyardMap = function()
+              assertEquals('function', type(ns.IsOnShipyardMap))
             end,
             IsPlayerInGarrison = function()
               assertEquals('function', type(ns.IsPlayerInGarrison))
@@ -3553,11 +4435,53 @@ function G.GeneratedTests()
             IsUsingPartyGarrison = function()
               assertEquals('function', type(ns.IsUsingPartyGarrison))
             end,
+            IsVisitGarrisonAvailable = function()
+              assertEquals('function', type(ns.IsVisitGarrisonAvailable))
+            end,
+            MarkMissionComplete = function()
+              assertEquals('function', type(ns.MarkMissionComplete))
+            end,
+            MissionBonusRoll = function()
+              assertEquals('function', type(ns.MissionBonusRoll))
+            end,
+            PlaceBuilding = function()
+              assertEquals('function', type(ns.PlaceBuilding))
+            end,
+            RecruitFollower = function()
+              assertEquals('function', type(ns.RecruitFollower))
+            end,
             RegenerateCombatLog = function()
               assertEquals('function', type(ns.RegenerateCombatLog))
             end,
+            RemoveFollower = function()
+              assertEquals('function', type(ns.RemoveFollower))
+            end,
+            RemoveFollowerFromBuilding = function()
+              assertEquals('function', type(ns.RemoveFollowerFromBuilding))
+            end,
             RemoveFollowerFromMission = function()
               assertEquals('function', type(ns.RemoveFollowerFromMission))
+            end,
+            RenameFollower = function()
+              assertEquals('function', type(ns.RenameFollower))
+            end,
+            RequestClassSpecCategoryInfo = function()
+              assertEquals('function', type(ns.RequestClassSpecCategoryInfo))
+            end,
+            RequestGarrisonUpgradeable = function()
+              assertEquals('function', type(ns.RequestGarrisonUpgradeable))
+            end,
+            RequestLandingPageShipmentInfo = function()
+              assertEquals('function', type(ns.RequestLandingPageShipmentInfo))
+            end,
+            RequestShipmentCreation = function()
+              assertEquals('function', type(ns.RequestShipmentCreation))
+            end,
+            RequestShipmentInfo = function()
+              assertEquals('function', type(ns.RequestShipmentInfo))
+            end,
+            ResearchTalent = function()
+              assertEquals('function', type(ns.ResearchTalent))
             end,
             RushHealAllFollowers = function()
               assertEquals('function', type(ns.RushHealAllFollowers))
@@ -3565,16 +4489,70 @@ function G.GeneratedTests()
             RushHealFollower = function()
               assertEquals('function', type(ns.RushHealFollower))
             end,
+            SearchForFollower = function()
+              assertEquals('function', type(ns.SearchForFollower))
+            end,
             SetAutoCombatSpellFastForward = function()
               assertEquals('function', type(ns.SetAutoCombatSpellFastForward))
             end,
+            SetBuildingActive = function()
+              assertEquals('function', type(ns.SetBuildingActive))
+            end,
+            SetBuildingSpecialization = function()
+              assertEquals('function', type(ns.SetBuildingSpecialization))
+            end,
+            SetFollowerFavorite = function()
+              assertEquals('function', type(ns.SetFollowerFavorite))
+            end,
+            SetFollowerInactive = function()
+              assertEquals('function', type(ns.SetFollowerInactive))
+            end,
+            SetRecruitmentPreferences = function()
+              assertEquals('function', type(ns.SetRecruitmentPreferences))
+            end,
+            SetUsingPartyGarrison = function()
+              assertEquals('function', type(ns.SetUsingPartyGarrison))
+            end,
+            ShouldShowMapTab = function()
+              assertEquals('function', type(ns.ShouldShowMapTab))
+            end,
+            ShowFollowerNameInErrorMessage = function()
+              assertEquals('function', type(ns.ShowFollowerNameInErrorMessage))
+            end,
+            StartMission = function()
+              assertEquals('function', type(ns.StartMission))
+            end,
+            SwapBuildings = function()
+              assertEquals('function', type(ns.SwapBuildings))
+            end,
+            TargetSpellHasFollowerItemLevelUpgrade = function()
+              assertEquals('function', type(ns.TargetSpellHasFollowerItemLevelUpgrade))
+            end,
+            TargetSpellHasFollowerReroll = function()
+              assertEquals('function', type(ns.TargetSpellHasFollowerReroll))
+            end,
+            TargetSpellHasFollowerTemporaryAbility = function()
+              assertEquals('function', type(ns.TargetSpellHasFollowerTemporaryAbility))
+            end,
+            UpgradeBuilding = function()
+              assertEquals('function', type(ns.UpgradeBuilding))
+            end,
+            UpgradeGarrison = function()
+              assertEquals('function', type(ns.UpgradeGarrison))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_GossipInfo = function()
           local ns = _G.C_GossipInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CloseGossip = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CloseGossip))
@@ -3683,12 +4661,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SelectOption))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_GuildInfo = function()
           local ns = _G.C_GuildInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanEditOfficerNote = function()
               assertEquals('function', type(ns.CanEditOfficerNote))
             end,
@@ -3743,6 +4727,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetNote))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Heirloom = function()
           local ns = _G.C_Heirloom
@@ -3752,9 +4742,18 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            CanHeirloomUpgradeFromPending = function()
+              assertEquals('function', type(ns.CanHeirloomUpgradeFromPending))
+            end,
+            CreateHeirloom = function()
+              assertEquals('function', type(ns.CreateHeirloom))
+            end,
             GetClassAndSpecFilters = function()
               assertEquals('function', type(ns.GetClassAndSpecFilters))
+            end,
+            GetCollectedHeirloomFilter = function()
+              assertEquals('function', type(ns.GetCollectedHeirloomFilter))
             end,
             GetHeirloomInfo = function()
               assertEquals('function', type(ns.GetHeirloomInfo))
@@ -3762,19 +4761,67 @@ function G.GeneratedTests()
             GetHeirloomItemIDFromDisplayedIndex = function()
               assertEquals('function', type(ns.GetHeirloomItemIDFromDisplayedIndex))
             end,
+            GetHeirloomItemIDs = function()
+              assertEquals('function', type(ns.GetHeirloomItemIDs))
+            end,
+            GetHeirloomLink = function()
+              assertEquals('function', type(ns.GetHeirloomLink))
+            end,
             GetHeirloomMaxUpgradeLevel = function()
               assertEquals('function', type(ns.GetHeirloomMaxUpgradeLevel))
+            end,
+            GetHeirloomSourceFilter = function()
+              assertEquals('function', type(ns.GetHeirloomSourceFilter))
             end,
             GetNumDisplayedHeirlooms = function()
               assertEquals('function', type(ns.GetNumDisplayedHeirlooms))
             end,
+            GetNumHeirlooms = function()
+              assertEquals('function', type(ns.GetNumHeirlooms))
+            end,
+            GetNumKnownHeirlooms = function()
+              assertEquals('function', type(ns.GetNumKnownHeirlooms))
+            end,
+            GetUncollectedHeirloomFilter = function()
+              assertEquals('function', type(ns.GetUncollectedHeirloomFilter))
+            end,
+            IsItemHeirloom = function()
+              assertEquals('function', type(ns.IsItemHeirloom))
+            end,
+            IsPendingHeirloomUpgrade = function()
+              assertEquals('function', type(ns.IsPendingHeirloomUpgrade))
+            end,
+            PlayerHasHeirloom = function()
+              assertEquals('function', type(ns.PlayerHasHeirloom))
+            end,
             SetClassAndSpecFilters = function()
               assertEquals('function', type(ns.SetClassAndSpecFilters))
+            end,
+            SetCollectedHeirloomFilter = function()
+              assertEquals('function', type(ns.SetCollectedHeirloomFilter))
+            end,
+            SetHeirloomSourceFilter = function()
+              assertEquals('function', type(ns.SetHeirloomSourceFilter))
+            end,
+            SetSearch = function()
+              assertEquals('function', type(ns.SetSearch))
+            end,
+            SetUncollectedHeirloomFilter = function()
+              assertEquals('function', type(ns.SetUncollectedHeirloomFilter))
             end,
             ShouldShowHeirloomHelp = function()
               assertEquals('function', type(ns.ShouldShowHeirloomHelp))
             end,
+            UpgradeHeirloom = function()
+              assertEquals('function', type(ns.UpgradeHeirloom))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_HeirloomInfo = function()
           local ns = _G.C_HeirloomInfo
@@ -3784,7 +4831,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AreAllCollectionFiltersChecked = function()
               assertEquals('function', type(ns.AreAllCollectionFiltersChecked))
             end,
@@ -3807,6 +4854,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetDefaultFilters))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_IncomingSummon = function()
           local ns = _G.C_IncomingSummon
@@ -3816,7 +4869,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             HasIncomingSummon = function()
               assertEquals('function', type(ns.HasIncomingSummon))
             end,
@@ -3824,6 +4877,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IncomingSummonStatus))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_InvasionInfo = function()
           local ns = _G.C_InvasionInfo
@@ -3833,7 +4892,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AreInvasionsAvailable = function()
               assertEquals('function', type(ns.AreInvasionsAvailable))
             end,
@@ -3847,6 +4906,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetInvasionTimeLeft))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_IslandsQueue = function()
           local ns = _G.C_IslandsQueue
@@ -3856,7 +4921,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CloseIslandsQueueScreen = function()
               assertEquals('function', type(ns.CloseIslandsQueueScreen))
             end,
@@ -3876,12 +4941,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RequestPreloadRewardData))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Item = function()
           local ns = _G.C_Item
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanItemTransmogAppearance = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanItemTransmogAppearance))
@@ -4091,6 +5162,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.UnlockItemByGUID))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ItemInteraction = function()
           local ns = _G.C_ItemInteraction
@@ -4100,7 +5177,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ClearPendingItem = function()
               assertEquals('function', type(ns.ClearPendingItem))
             end,
@@ -4138,22 +5215,34 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetPendingItem))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ItemSocketInfo = function()
           local ns = _G.C_ItemSocketInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CompleteSocketing = function()
               assertEquals('function', type(ns.CompleteSocketing))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ItemUpgrade = function()
           local ns = _G.C_ItemUpgrade
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanUpgradeItem = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanUpgradeItem))
@@ -4242,22 +5331,34 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.UpgradeItem))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_KeyBindings = function()
           local ns = _G.C_KeyBindings
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetCustomBindingType = function()
               assertEquals('function', type(ns.GetCustomBindingType))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_LFGInfo = function()
           local ns = _G.C_LFGInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanPlayerUseGroupFinder = function()
               assertEquals('function', type(ns.CanPlayerUseGroupFinder))
             end,
@@ -4296,12 +5397,32 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.HideNameFromUI))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_LFGList = function()
           local ns = _G.C_LFGList
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            AcceptInvite = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.AcceptInvite))
+                return
+              end
+              assertEquals('function', type(ns.AcceptInvite))
+            end,
+            ApplyToGroup = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.ApplyToGroup))
+                return
+              end
+              assertEquals('function', type(ns.ApplyToGroup))
+            end,
             CanActiveEntryUseAutoAccept = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanActiveEntryUseAutoAccept))
@@ -4316,6 +5437,13 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.CanCreateQuestGroup))
             end,
+            CancelApplication = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.CancelApplication))
+                return
+              end
+              assertEquals('function', type(ns.CancelApplication))
+            end,
             ClearApplicationTextFields = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ClearApplicationTextFields))
@@ -4325,6 +5453,9 @@ function G.GeneratedTests()
             end,
             ClearCreationTextFields = function()
               assertEquals('function', type(ns.ClearCreationTextFields))
+            end,
+            ClearSearchResults = function()
+              assertEquals('function', type(ns.ClearSearchResults))
             end,
             ClearSearchTextFields = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -4338,6 +5469,20 @@ function G.GeneratedTests()
             end,
             CreateListing = function()
               assertEquals('function', type(ns.CreateListing))
+            end,
+            DeclineApplicant = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.DeclineApplicant))
+                return
+              end
+              assertEquals('function', type(ns.DeclineApplicant))
+            end,
+            DeclineInvite = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.DeclineInvite))
+                return
+              end
+              assertEquals('function', type(ns.DeclineInvite))
             end,
             DoesEntryTitleMatchPrebuiltTitle = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -4358,6 +5503,19 @@ function G.GeneratedTests()
             end,
             GetActivityGroupInfo = function()
               assertEquals('function', type(ns.GetActivityGroupInfo))
+            end,
+            GetActivityIDForQuestID = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetActivityIDForQuestID))
+                return
+              end
+              assertEquals('function', type(ns.GetActivityIDForQuestID))
+            end,
+            GetActivityInfo = function()
+              assertEquals('function', type(ns.GetActivityInfo))
+            end,
+            GetActivityInfoExpensive = function()
+              assertEquals('function', type(ns.GetActivityInfoExpensive))
             end,
             GetActivityInfoTable = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -4380,12 +5538,40 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.GetApplicantInfo))
             end,
+            GetApplicantMemberInfo = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetApplicantMemberInfo))
+                return
+              end
+              assertEquals('function', type(ns.GetApplicantMemberInfo))
+            end,
+            GetApplicantMemberStats = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetApplicantMemberStats))
+                return
+              end
+              assertEquals('function', type(ns.GetApplicantMemberStats))
+            end,
             GetApplicantPvpRatingInfoForListing = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetApplicantPvpRatingInfoForListing))
                 return
               end
               assertEquals('function', type(ns.GetApplicantPvpRatingInfoForListing))
+            end,
+            GetApplicants = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetApplicants))
+                return
+              end
+              assertEquals('function', type(ns.GetApplicants))
+            end,
+            GetApplicationInfo = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetApplicationInfo))
+                return
+              end
+              assertEquals('function', type(ns.GetApplicationInfo))
             end,
             GetApplications = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -4396,6 +5582,9 @@ function G.GeneratedTests()
             end,
             GetAvailableActivities = function()
               assertEquals('function', type(ns.GetAvailableActivities))
+            end,
+            GetAvailableActivityGroups = function()
+              assertEquals('function', type(ns.GetAvailableActivityGroups))
             end,
             GetAvailableCategories = function()
               assertEquals('function', type(ns.GetAvailableCategories))
@@ -4413,6 +5602,9 @@ function G.GeneratedTests()
                 return
               end
               assertEquals('function', type(ns.GetAvailableRoles))
+            end,
+            GetCategoryInfo = function()
+              assertEquals('function', type(ns.GetCategoryInfo))
             end,
             GetDefaultLanguageSearchFilter = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -4445,12 +5637,33 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.GetLfgCategoryInfo))
             end,
+            GetNumApplicants = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetNumApplicants))
+                return
+              end
+              assertEquals('function', type(ns.GetNumApplicants))
+            end,
             GetNumApplications = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumApplications))
                 return
               end
               assertEquals('function', type(ns.GetNumApplications))
+            end,
+            GetNumInvitedApplicantMembers = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetNumInvitedApplicantMembers))
+                return
+              end
+              assertEquals('function', type(ns.GetNumInvitedApplicantMembers))
+            end,
+            GetNumPendingApplicantMembers = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetNumPendingApplicantMembers))
+                return
+              end
+              assertEquals('function', type(ns.GetNumPendingApplicantMembers))
             end,
             GetOwnedKeystoneActivityAndGroupAndLevel = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -4466,8 +5679,38 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.GetPlaystyleString))
             end,
+            GetRoleCheckInfo = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetRoleCheckInfo))
+                return
+              end
+              assertEquals('function', type(ns.GetRoleCheckInfo))
+            end,
+            GetSearchResultEncounterInfo = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetSearchResultEncounterInfo))
+                return
+              end
+              assertEquals('function', type(ns.GetSearchResultEncounterInfo))
+            end,
+            GetSearchResultFriends = function()
+              assertEquals('function', type(ns.GetSearchResultFriends))
+            end,
             GetSearchResultInfo = function()
               assertEquals('function', type(ns.GetSearchResultInfo))
+            end,
+            GetSearchResultLeaderInfo = function()
+              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetSearchResultLeaderInfo))
+                return
+              end
+              assertEquals('function', type(ns.GetSearchResultLeaderInfo))
+            end,
+            GetSearchResultMemberCounts = function()
+              assertEquals('function', type(ns.GetSearchResultMemberCounts))
+            end,
+            GetSearchResultMemberInfo = function()
+              assertEquals('function', type(ns.GetSearchResultMemberInfo))
             end,
             GetSearchResults = function()
               assertEquals('function', type(ns.GetSearchResults))
@@ -4480,6 +5723,20 @@ function G.GeneratedTests()
             end,
             HasSearchResultInfo = function()
               assertEquals('function', type(ns.HasSearchResultInfo))
+            end,
+            InviteApplicant = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.InviteApplicant))
+                return
+              end
+              assertEquals('function', type(ns.InviteApplicant))
+            end,
+            IsCurrentlyApplying = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.IsCurrentlyApplying))
+                return
+              end
+              assertEquals('function', type(ns.IsCurrentlyApplying))
             end,
             IsLookingForGroupEnabled = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -4495,11 +5752,49 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.IsPlayerAuthenticatedForLFG))
             end,
+            RefreshApplicants = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.RefreshApplicants))
+                return
+              end
+              assertEquals('function', type(ns.RefreshApplicants))
+            end,
+            RemoveApplicant = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.RemoveApplicant))
+                return
+              end
+              assertEquals('function', type(ns.RemoveApplicant))
+            end,
+            RemoveListing = function()
+              assertEquals('function', type(ns.RemoveListing))
+            end,
+            ReportSearchResult = function()
+              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.ReportSearchResult))
+                return
+              end
+              assertEquals('function', type(ns.ReportSearchResult))
+            end,
             RequestAvailableActivities = function()
               assertEquals('function', type(ns.RequestAvailableActivities))
             end,
+            SaveLanguageSearchFilter = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.SaveLanguageSearchFilter))
+                return
+              end
+              assertEquals('function', type(ns.SaveLanguageSearchFilter))
+            end,
             Search = function()
               assertEquals('function', type(ns.Search))
+            end,
+            SetApplicantMemberRole = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.SetApplicantMemberRole))
+                return
+              end
+              assertEquals('function', type(ns.SetApplicantMemberRole))
             end,
             SetEntryTitle = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -4540,6 +5835,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ValidateRequiredPvpRatingForActivity))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_LegendaryCrafting = function()
           local ns = _G.C_LegendaryCrafting
@@ -4549,7 +5850,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CloseRuneforgeInteraction = function()
               assertEquals('function', type(ns.CloseRuneforgeInteraction))
             end,
@@ -4589,6 +5890,9 @@ function G.GeneratedTests()
             GetRuneforgePowers = function()
               assertEquals('function', type(ns.GetRuneforgePowers))
             end,
+            GetRuneforgePowersByClassAndSpec = function()
+              assertEquals('function', type(ns.GetRuneforgePowersByClassAndSpec))
+            end,
             GetRuneforgePowersByClassSpecAndCovenant = function()
               assertEquals('function', type(ns.GetRuneforgePowersByClassSpecAndCovenant))
             end,
@@ -4611,6 +5915,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.UpgradeRuneforgeLegendary))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_LevelLink = function()
           local ns = _G.C_LevelLink
@@ -4620,7 +5930,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             IsActionLocked = function()
               assertEquals('function', type(ns.IsActionLocked))
             end,
@@ -4628,6 +5938,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsSpellLocked))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_LevelSquish = function()
           local ns = _G.C_LevelSquish
@@ -4637,7 +5953,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ConvertFollowerLevel = function()
               assertEquals('function', type(ns.ConvertFollowerLevel))
             end,
@@ -4645,22 +5961,40 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ConvertPlayerLevel))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Loot = function()
           local ns = _G.C_Loot
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             IsLegacyLootModeEnabled = function()
               assertEquals('function', type(ns.IsLegacyLootModeEnabled))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_LootHistory = function()
           local ns = _G.C_LootHistory
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            CanMasterLoot = function()
+              assertEquals('function', type(ns.CanMasterLoot))
+            end,
+            GetExpiration = function()
+              assertEquals('function', type(ns.GetExpiration))
+            end,
             GetItem = function()
               assertEquals('function', type(ns.GetItem))
             end,
@@ -4670,7 +6004,19 @@ function G.GeneratedTests()
             GetPlayerInfo = function()
               assertEquals('function', type(ns.GetPlayerInfo))
             end,
+            GiveMasterLoot = function()
+              assertEquals('function', type(ns.GiveMasterLoot))
+            end,
+            SetExpiration = function()
+              assertEquals('function', type(ns.SetExpiration))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_LootJournal = function()
           local ns = _G.C_LootJournal
@@ -4680,7 +6026,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetItemSetItems = function()
               assertEquals('function', type(ns.GetItemSetItems))
             end,
@@ -4688,6 +6034,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetItemSets))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_LoreText = function()
           local ns = _G.C_LoreText
@@ -4697,17 +6049,23 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             RequestLoreTextForCampaignID = function()
               assertEquals('function', type(ns.RequestLoreTextForCampaignID))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_LossOfControl = function()
           local ns = _G.C_LossOfControl
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetActiveLossOfControlData = function()
               assertEquals('function', type(ns.GetActiveLossOfControlData))
             end,
@@ -4721,12 +6079,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetActiveLossOfControlDataCountByUnit))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Mail = function()
           local ns = _G.C_Mail
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanCheckInbox = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanCheckInbox))
@@ -4741,12 +6105,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsCommandPending))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Map = function()
           local ns = _G.C_Map
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanSetUserWaypointOnMap = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanSetUserWaypointOnMap))
@@ -4911,12 +6281,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetUserWaypoint))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_MapExplorationInfo = function()
           local ns = _G.C_MapExplorationInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetExploredAreaIDsAtPosition = function()
               assertEquals('function', type(ns.GetExploredAreaIDsAtPosition))
             end,
@@ -4924,12 +6300,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetExploredMapTextures))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_MerchantFrame = function()
           local ns = _G.C_MerchantFrame
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetBuybackItemID = function()
               assertEquals('function', type(ns.GetBuybackItemID))
             end,
@@ -4941,6 +6323,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsMerchantItemRefundable))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Minimap = function()
           local ns = _G.C_Minimap
@@ -4950,7 +6338,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetDrawGroundTextures = function()
               assertEquals('function', type(ns.GetDrawGroundTextures))
             end,
@@ -4973,12 +6361,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ShouldUseHybridMinimap))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ModelInfo = function()
           local ns = _G.C_ModelInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AddActiveModelScene = function()
               assertEquals('function', type(ns.AddActiveModelScene))
             end,
@@ -5004,6 +6398,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetModelSceneInfoByID))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ModifiedInstance = function()
           local ns = _G.C_ModifiedInstance
@@ -5013,11 +6413,17 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetModifiedInstanceInfoFromMapID = function()
               assertEquals('function', type(ns.GetModifiedInstanceInfoFromMapID))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_MountJournal = function()
           local ns = _G.C_MountJournal
@@ -5027,7 +6433,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ApplyMountEquipment = function()
               assertEquals('function', type(ns.ApplyMountEquipment))
             end,
@@ -5149,6 +6555,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SummonByID))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_MythicPlus = function()
           local ns = _G.C_MythicPlus
@@ -5158,7 +6570,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetCurrentAffixes = function()
               assertEquals('function', type(ns.GetCurrentAffixes))
             end,
@@ -5220,14 +6632,47 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RequestRewards))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_NamePlate = function()
           local ns = _G.C_NamePlate
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            GetNamePlateEnemyClickThrough = function()
+              assertEquals('function', type(ns.GetNamePlateEnemyClickThrough))
+            end,
+            GetNamePlateEnemyPreferredClickInsets = function()
+              assertEquals('function', type(ns.GetNamePlateEnemyPreferredClickInsets))
+            end,
+            GetNamePlateEnemySize = function()
+              assertEquals('function', type(ns.GetNamePlateEnemySize))
+            end,
             GetNamePlateForUnit = function()
               assertEquals('function', type(ns.GetNamePlateForUnit))
+            end,
+            GetNamePlateFriendlyClickThrough = function()
+              assertEquals('function', type(ns.GetNamePlateFriendlyClickThrough))
+            end,
+            GetNamePlateFriendlyPreferredClickInsets = function()
+              assertEquals('function', type(ns.GetNamePlateFriendlyPreferredClickInsets))
+            end,
+            GetNamePlateFriendlySize = function()
+              assertEquals('function', type(ns.GetNamePlateFriendlySize))
+            end,
+            GetNamePlateSelfClickThrough = function()
+              assertEquals('function', type(ns.GetNamePlateSelfClickThrough))
+            end,
+            GetNamePlateSelfPreferredClickInsets = function()
+              assertEquals('function', type(ns.GetNamePlateSelfPreferredClickInsets))
+            end,
+            GetNamePlateSelfSize = function()
+              assertEquals('function', type(ns.GetNamePlateSelfSize))
             end,
             GetNamePlates = function()
               assertEquals('function', type(ns.GetNamePlates))
@@ -5235,14 +6680,32 @@ function G.GeneratedTests()
             GetNumNamePlateMotionTypes = function()
               assertEquals('function', type(ns.GetNumNamePlateMotionTypes))
             end,
+            GetTargetClampingInsets = function()
+              assertEquals('function', type(ns.GetTargetClampingInsets))
+            end,
+            SetNamePlateEnemyClickThrough = function()
+              assertEquals('function', type(ns.SetNamePlateEnemyClickThrough))
+            end,
+            SetNamePlateEnemyPreferredClickInsets = function()
+              assertEquals('function', type(ns.SetNamePlateEnemyPreferredClickInsets))
+            end,
             SetNamePlateEnemySize = function()
               assertEquals('function', type(ns.SetNamePlateEnemySize))
+            end,
+            SetNamePlateFriendlyClickThrough = function()
+              assertEquals('function', type(ns.SetNamePlateFriendlyClickThrough))
+            end,
+            SetNamePlateFriendlyPreferredClickInsets = function()
+              assertEquals('function', type(ns.SetNamePlateFriendlyPreferredClickInsets))
             end,
             SetNamePlateFriendlySize = function()
               assertEquals('function', type(ns.SetNamePlateFriendlySize))
             end,
             SetNamePlateSelfClickThrough = function()
               assertEquals('function', type(ns.SetNamePlateSelfClickThrough))
+            end,
+            SetNamePlateSelfPreferredClickInsets = function()
+              assertEquals('function', type(ns.SetNamePlateSelfPreferredClickInsets))
             end,
             SetNamePlateSelfSize = function()
               assertEquals('function', type(ns.SetNamePlateSelfSize))
@@ -5251,6 +6714,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetTargetClampingInsets))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Navigation = function()
           local ns = _G.C_Navigation
@@ -5260,7 +6729,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetDistance = function()
               assertEquals('function', type(ns.GetDistance))
             end,
@@ -5277,12 +6746,21 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.WasClampedToScreen))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_NewItems = function()
           local ns = _G.C_NewItems
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            ClearAll = function()
+              assertEquals('function', type(ns.ClearAll))
+            end,
             IsNewItem = function()
               assertEquals('function', type(ns.IsNewItem))
             end,
@@ -5290,12 +6768,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RemoveNewItem))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_PaperDollInfo = function()
           local ns = _G.C_PaperDollInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetArmorEffectiveness = function()
               assertEquals('function', type(ns.GetArmorEffectiveness))
             end,
@@ -5333,12 +6817,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.OffhandHasWeapon))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_PartyInfo = function()
           local ns = _G.C_PartyInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AllowedToDoPartyConversion = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.AllowedToDoPartyConversion))
@@ -5475,6 +6965,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RequestInviteFromUnit))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_PartyPose = function()
           local ns = _G.C_PartyPose
@@ -5484,11 +6980,17 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetPartyPoseInfoByMapID = function()
               assertEquals('function', type(ns.GetPartyPoseInfoByMapID))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_PetBattles = function()
           local ns = _G.C_PetBattles
@@ -5498,15 +7000,66 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            AcceptPVPDuel = function()
+              assertEquals('function', type(ns.AcceptPVPDuel))
+            end,
+            AcceptQueuedPVPMatch = function()
+              assertEquals('function', type(ns.AcceptQueuedPVPMatch))
+            end,
+            CanAcceptQueuedPVPMatch = function()
+              assertEquals('function', type(ns.CanAcceptQueuedPVPMatch))
+            end,
+            CanActivePetSwapOut = function()
+              assertEquals('function', type(ns.CanActivePetSwapOut))
+            end,
             CanPetSwapIn = function()
               assertEquals('function', type(ns.CanPetSwapIn))
+            end,
+            CancelPVPDuel = function()
+              assertEquals('function', type(ns.CancelPVPDuel))
+            end,
+            ChangePet = function()
+              assertEquals('function', type(ns.ChangePet))
+            end,
+            DeclineQueuedPVPMatch = function()
+              assertEquals('function', type(ns.DeclineQueuedPVPMatch))
+            end,
+            ForfeitGame = function()
+              assertEquals('function', type(ns.ForfeitGame))
+            end,
+            GetAbilityEffectInfo = function()
+              assertEquals('function', type(ns.GetAbilityEffectInfo))
+            end,
+            GetAbilityInfo = function()
+              assertEquals('function', type(ns.GetAbilityInfo))
+            end,
+            GetAbilityInfoByID = function()
+              assertEquals('function', type(ns.GetAbilityInfoByID))
+            end,
+            GetAbilityProcTurnIndex = function()
+              assertEquals('function', type(ns.GetAbilityProcTurnIndex))
+            end,
+            GetAbilityState = function()
+              assertEquals('function', type(ns.GetAbilityState))
+            end,
+            GetAbilityStateModification = function()
+              assertEquals('function', type(ns.GetAbilityStateModification))
+            end,
+            GetActivePet = function()
+              assertEquals('function', type(ns.GetActivePet))
             end,
             GetAllEffectNames = function()
               assertEquals('function', type(ns.GetAllEffectNames))
             end,
             GetAllStates = function()
               assertEquals('function', type(ns.GetAllStates))
+            end,
+            GetAttackModifier = function()
+              assertEquals('function', type(ns.GetAttackModifier))
+            end,
+            GetAuraInfo = function()
+              assertEquals('function', type(ns.GetAuraInfo))
             end,
             GetBattleState = function()
               assertEquals('function', type(ns.GetBattleState))
@@ -5516,6 +7069,9 @@ function G.GeneratedTests()
             end,
             GetDisplayID = function()
               assertEquals('function', type(ns.GetDisplayID))
+            end,
+            GetForfeitPenalty = function()
+              assertEquals('function', type(ns.GetForfeitPenalty))
             end,
             GetHealth = function()
               assertEquals('function', type(ns.GetHealth))
@@ -5532,6 +7088,9 @@ function G.GeneratedTests()
             GetName = function()
               assertEquals('function', type(ns.GetName))
             end,
+            GetNumAuras = function()
+              assertEquals('function', type(ns.GetNumAuras))
+            end,
             GetNumPets = function()
               assertEquals('function', type(ns.GetNumPets))
             end,
@@ -5541,14 +7100,29 @@ function G.GeneratedTests()
             GetPetSpeciesID = function()
               assertEquals('function', type(ns.GetPetSpeciesID))
             end,
+            GetPetType = function()
+              assertEquals('function', type(ns.GetPetType))
+            end,
             GetPlayerTrapAbility = function()
               assertEquals('function', type(ns.GetPlayerTrapAbility))
+            end,
+            GetPower = function()
+              assertEquals('function', type(ns.GetPower))
             end,
             GetSelectedAction = function()
               assertEquals('function', type(ns.GetSelectedAction))
             end,
+            GetSpeed = function()
+              assertEquals('function', type(ns.GetSpeed))
+            end,
+            GetStateValue = function()
+              assertEquals('function', type(ns.GetStateValue))
+            end,
             GetTurnTimeInfo = function()
               assertEquals('function', type(ns.GetTurnTimeInfo))
+            end,
+            GetXP = function()
+              assertEquals('function', type(ns.GetXP))
             end,
             IsInBattle = function()
               assertEquals('function', type(ns.IsInBattle))
@@ -5562,13 +7136,46 @@ function G.GeneratedTests()
             IsTrapAvailable = function()
               assertEquals('function', type(ns.IsTrapAvailable))
             end,
+            IsWaitingOnOpponent = function()
+              assertEquals('function', type(ns.IsWaitingOnOpponent))
+            end,
             IsWildBattle = function()
               assertEquals('function', type(ns.IsWildBattle))
+            end,
+            SetPendingReportBattlePetTarget = function()
+              assertEquals('function', type(ns.SetPendingReportBattlePetTarget))
+            end,
+            SetPendingReportTargetFromUnit = function()
+              assertEquals('function', type(ns.SetPendingReportTargetFromUnit))
             end,
             ShouldShowPetSelect = function()
               assertEquals('function', type(ns.ShouldShowPetSelect))
             end,
+            SkipTurn = function()
+              assertEquals('function', type(ns.SkipTurn))
+            end,
+            StartPVPDuel = function()
+              assertEquals('function', type(ns.StartPVPDuel))
+            end,
+            StartPVPMatchmaking = function()
+              assertEquals('function', type(ns.StartPVPMatchmaking))
+            end,
+            StopPVPMatchmaking = function()
+              assertEquals('function', type(ns.StopPVPMatchmaking))
+            end,
+            UseAbility = function()
+              assertEquals('function', type(ns.UseAbility))
+            end,
+            UseTrap = function()
+              assertEquals('function', type(ns.UseTrap))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_PetInfo = function()
           local ns = _G.C_PetInfo
@@ -5578,11 +7185,17 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetPetTamersForMap = function()
               assertEquals('function', type(ns.GetPetTamersForMap))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_PetJournal = function()
           local ns = _G.C_PetJournal
@@ -5592,9 +7205,24 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            CagePetByID = function()
+              assertEquals('function', type(ns.CagePetByID))
+            end,
+            ClearFanfare = function()
+              assertEquals('function', type(ns.ClearFanfare))
+            end,
             ClearRecentFanfares = function()
               assertEquals('function', type(ns.ClearRecentFanfares))
+            end,
+            ClearSearchFilter = function()
+              assertEquals('function', type(ns.ClearSearchFilter))
+            end,
+            FindPetIDByName = function()
+              assertEquals('function', type(ns.FindPetIDByName))
+            end,
+            GetBattlePetLink = function()
+              assertEquals('function', type(ns.GetBattlePetLink))
             end,
             GetDisplayIDByIndex = function()
               assertEquals('function', type(ns.GetDisplayIDByIndex))
@@ -5602,11 +7230,17 @@ function G.GeneratedTests()
             GetDisplayProbabilityByIndex = function()
               assertEquals('function', type(ns.GetDisplayProbabilityByIndex))
             end,
+            GetNumCollectedInfo = function()
+              assertEquals('function', type(ns.GetNumCollectedInfo))
+            end,
             GetNumDisplays = function()
               assertEquals('function', type(ns.GetNumDisplays))
             end,
             GetNumPetSources = function()
               assertEquals('function', type(ns.GetNumPetSources))
+            end,
+            GetNumPetTypes = function()
+              assertEquals('function', type(ns.GetNumPetTypes))
             end,
             GetNumPets = function()
               assertEquals('function', type(ns.GetNumPets))
@@ -5614,14 +7248,29 @@ function G.GeneratedTests()
             GetNumPetsNeedingFanfare = function()
               assertEquals('function', type(ns.GetNumPetsNeedingFanfare))
             end,
+            GetOwnedBattlePetString = function()
+              assertEquals('function', type(ns.GetOwnedBattlePetString))
+            end,
             GetPetAbilityInfo = function()
               assertEquals('function', type(ns.GetPetAbilityInfo))
+            end,
+            GetPetAbilityList = function()
+              assertEquals('function', type(ns.GetPetAbilityList))
             end,
             GetPetAbilityListTable = function()
               assertEquals('function', type(ns.GetPetAbilityListTable))
             end,
+            GetPetCooldownByGUID = function()
+              assertEquals('function', type(ns.GetPetCooldownByGUID))
+            end,
             GetPetInfoByIndex = function()
               assertEquals('function', type(ns.GetPetInfoByIndex))
+            end,
+            GetPetInfoByItemID = function()
+              assertEquals('function', type(ns.GetPetInfoByItemID))
+            end,
+            GetPetInfoByPetID = function()
+              assertEquals('function', type(ns.GetPetInfoByPetID))
             end,
             GetPetInfoBySpeciesID = function()
               assertEquals('function', type(ns.GetPetInfoBySpeciesID))
@@ -5632,8 +7281,20 @@ function G.GeneratedTests()
             GetPetLoadOutInfo = function()
               assertEquals('function', type(ns.GetPetLoadOutInfo))
             end,
+            GetPetModelSceneInfoBySpeciesID = function()
+              assertEquals('function', type(ns.GetPetModelSceneInfoBySpeciesID))
+            end,
+            GetPetSortParameter = function()
+              assertEquals('function', type(ns.GetPetSortParameter))
+            end,
+            GetPetStats = function()
+              assertEquals('function', type(ns.GetPetStats))
+            end,
             GetPetSummonInfo = function()
               assertEquals('function', type(ns.GetPetSummonInfo))
+            end,
+            GetPetTeamAverageLevel = function()
+              assertEquals('function', type(ns.GetPetTeamAverageLevel))
             end,
             GetSummonBattlePetCooldown = function()
               assertEquals('function', type(ns.GetSummonBattlePetCooldown))
@@ -5644,28 +7305,121 @@ function G.GeneratedTests()
             GetSummonedPetGUID = function()
               assertEquals('function', type(ns.GetSummonedPetGUID))
             end,
+            IsFilterChecked = function()
+              assertEquals('function', type(ns.IsFilterChecked))
+            end,
             IsFindBattleEnabled = function()
               assertEquals('function', type(ns.IsFindBattleEnabled))
+            end,
+            IsJournalReadOnly = function()
+              assertEquals('function', type(ns.IsJournalReadOnly))
             end,
             IsJournalUnlocked = function()
               assertEquals('function', type(ns.IsJournalUnlocked))
             end,
+            IsPetSourceChecked = function()
+              assertEquals('function', type(ns.IsPetSourceChecked))
+            end,
+            IsPetTypeChecked = function()
+              assertEquals('function', type(ns.IsPetTypeChecked))
+            end,
             IsUsingDefaultFilters = function()
               assertEquals('function', type(ns.IsUsingDefaultFilters))
+            end,
+            PetCanBeReleased = function()
+              assertEquals('function', type(ns.PetCanBeReleased))
+            end,
+            PetIsCapturable = function()
+              assertEquals('function', type(ns.PetIsCapturable))
+            end,
+            PetIsFavorite = function()
+              assertEquals('function', type(ns.PetIsFavorite))
+            end,
+            PetIsHurt = function()
+              assertEquals('function', type(ns.PetIsHurt))
+            end,
+            PetIsLockedForConvert = function()
+              assertEquals('function', type(ns.PetIsLockedForConvert))
+            end,
+            PetIsRevoked = function()
+              assertEquals('function', type(ns.PetIsRevoked))
+            end,
+            PetIsSlotted = function()
+              assertEquals('function', type(ns.PetIsSlotted))
             end,
             PetIsSummonable = function()
               assertEquals('function', type(ns.PetIsSummonable))
             end,
+            PetIsTradable = function()
+              assertEquals('function', type(ns.PetIsTradable))
+            end,
+            PetIsUsable = function()
+              assertEquals('function', type(ns.PetIsUsable))
+            end,
+            PetNeedsFanfare = function()
+              assertEquals('function', type(ns.PetNeedsFanfare))
+            end,
             PetUsesRandomDisplay = function()
               assertEquals('function', type(ns.PetUsesRandomDisplay))
             end,
+            PickupPet = function()
+              assertEquals('function', type(ns.PickupPet))
+            end,
+            PickupSummonRandomPet = function()
+              assertEquals('function', type(ns.PickupSummonRandomPet))
+            end,
+            ReleasePetByID = function()
+              assertEquals('function', type(ns.ReleasePetByID))
+            end,
+            SetAbility = function()
+              assertEquals('function', type(ns.SetAbility))
+            end,
+            SetAllPetSourcesChecked = function()
+              assertEquals('function', type(ns.SetAllPetSourcesChecked))
+            end,
+            SetAllPetTypesChecked = function()
+              assertEquals('function', type(ns.SetAllPetTypesChecked))
+            end,
+            SetCustomName = function()
+              assertEquals('function', type(ns.SetCustomName))
+            end,
             SetDefaultFilters = function()
               assertEquals('function', type(ns.SetDefaultFilters))
+            end,
+            SetFavorite = function()
+              assertEquals('function', type(ns.SetFavorite))
+            end,
+            SetFilterChecked = function()
+              assertEquals('function', type(ns.SetFilterChecked))
+            end,
+            SetPetLoadOutInfo = function()
+              assertEquals('function', type(ns.SetPetLoadOutInfo))
+            end,
+            SetPetSortParameter = function()
+              assertEquals('function', type(ns.SetPetSortParameter))
+            end,
+            SetPetSourceChecked = function()
+              assertEquals('function', type(ns.SetPetSourceChecked))
+            end,
+            SetPetTypeFilter = function()
+              assertEquals('function', type(ns.SetPetTypeFilter))
+            end,
+            SetSearchFilter = function()
+              assertEquals('function', type(ns.SetSearchFilter))
+            end,
+            SummonPetByGUID = function()
+              assertEquals('function', type(ns.SummonPetByGUID))
             end,
             SummonRandomPet = function()
               assertEquals('function', type(ns.SummonRandomPet))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_PlayerChoice = function()
           local ns = _G.C_PlayerChoice
@@ -5675,12 +7429,21 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetCurrentPlayerChoiceInfo = function()
               assertEquals('function', type(ns.GetCurrentPlayerChoiceInfo))
             end,
             GetNumRerolls = function()
               assertEquals('function', type(ns.GetNumRerolls))
+            end,
+            GetPlayerChoiceInfo = function()
+              assertEquals('function', type(ns.GetPlayerChoiceInfo))
+            end,
+            GetPlayerChoiceOptionInfo = function()
+              assertEquals('function', type(ns.GetPlayerChoiceOptionInfo))
+            end,
+            GetPlayerChoiceRewardInfo = function()
+              assertEquals('function', type(ns.GetPlayerChoiceRewardInfo))
             end,
             GetRemainingTime = function()
               assertEquals('function', type(ns.GetRemainingTime))
@@ -5698,12 +7461,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SendPlayerChoiceResponse))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_PlayerInfo = function()
           local ns = _G.C_PlayerInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanPlayerEnterChromieTime = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanPlayerEnterChromieTime))
@@ -5817,6 +7586,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.UnitIsSameServer))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_PlayerMentorship = function()
           local ns = _G.C_PlayerMentorship
@@ -5826,7 +7601,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetMentorLevelRequirement = function()
               assertEquals('function', type(ns.GetMentorLevelRequirement))
             end,
@@ -5843,6 +7618,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsMentorRestricted))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ProductChoice = function()
           local ns = _G.C_ProductChoice
@@ -5852,20 +7633,32 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetChoices = function()
               assertEquals('function', type(ns.GetChoices))
             end,
             GetNumSuppressed = function()
               assertEquals('function', type(ns.GetNumSuppressed))
             end,
+            GetProducts = function()
+              assertEquals('function', type(ns.GetProducts))
+            end,
+            MakeSelection = function()
+              assertEquals('function', type(ns.MakeSelection))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_PvP = function()
           local ns = _G.C_PvP
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanDisplayDamage = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanDisplayDamage))
@@ -6355,6 +8148,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ToggleWarMode))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_QuestLine = function()
           local ns = _G.C_QuestLine
@@ -6364,7 +8163,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetAvailableQuestLines = function()
               assertEquals('function', type(ns.GetAvailableQuestLines))
             end,
@@ -6381,12 +8180,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RequestQuestLinesForMap))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_QuestLog = function()
           local ns = _G.C_QuestLog
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AbandonQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.AbandonQuest))
@@ -6910,12 +8715,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SortQuestWatches))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_QuestSession = function()
           local ns = _G.C_QuestSession
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanStart = function()
               assertEquals('function', type(ns.CanStart))
             end,
@@ -6959,16 +8770,28 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetQuestIsSuperTracked))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_RaidLocks = function()
           local ns = _G.C_RaidLocks
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             IsEncounterComplete = function()
               assertEquals('function', type(ns.IsEncounterComplete))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_RecruitAFriend = function()
           local ns = _G.C_RecruitAFriend
@@ -6978,7 +8801,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ClaimActivityReward = function()
               assertEquals('function', type(ns.ClaimActivityReward))
             end,
@@ -7013,12 +8836,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RequestUpdatedRecruitmentInfo))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ReportSystem = function()
           local ns = _G.C_ReportSystem
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanReportPlayer = function()
               assertEquals('function', type(ns.CanReportPlayer))
             end,
@@ -7109,12 +8938,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetPendingReportTargetByGuid))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Reputation = function()
           local ns = _G.C_Reputation
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetFactionParagonInfo = function()
               assertEquals('function', type(ns.GetFactionParagonInfo))
             end,
@@ -7125,6 +8960,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RequestFactionParagonPreloadRewardData))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ResearchInfo = function()
           local ns = _G.C_ResearchInfo
@@ -7134,11 +8975,17 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetDigSitesForMap = function()
               assertEquals('function', type(ns.GetDigSitesForMap))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Scenario = function()
           local ns = _G.C_Scenario
@@ -7148,9 +8995,33 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            GetBonusStepRewardQuestID = function()
+              assertEquals('function', type(ns.GetBonusStepRewardQuestID))
+            end,
+            GetBonusSteps = function()
+              assertEquals('function', type(ns.GetBonusSteps))
+            end,
+            GetCriteriaInfo = function()
+              assertEquals('function', type(ns.GetCriteriaInfo))
+            end,
+            GetCriteriaInfoByStep = function()
+              assertEquals('function', type(ns.GetCriteriaInfoByStep))
+            end,
             GetInfo = function()
               assertEquals('function', type(ns.GetInfo))
+            end,
+            GetProvingGroundsInfo = function()
+              assertEquals('function', type(ns.GetProvingGroundsInfo))
+            end,
+            GetScenarioIconInfo = function()
+              assertEquals('function', type(ns.GetScenarioIconInfo))
+            end,
+            GetStepInfo = function()
+              assertEquals('function', type(ns.GetStepInfo))
+            end,
+            GetSupersededObjectives = function()
+              assertEquals('function', type(ns.GetSupersededObjectives))
             end,
             IsInScenario = function()
               assertEquals('function', type(ns.IsInScenario))
@@ -7158,7 +9029,16 @@ function G.GeneratedTests()
             ShouldShowCriteria = function()
               assertEquals('function', type(ns.ShouldShowCriteria))
             end,
+            TreatScenarioAsDungeon = function()
+              assertEquals('function', type(ns.TreatScenarioAsDungeon))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ScenarioInfo = function()
           local ns = _G.C_ScenarioInfo
@@ -7168,7 +9048,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetJailersTowerTypeString = function()
               assertEquals('function', type(ns.GetJailersTowerTypeString))
             end,
@@ -7179,6 +9059,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetScenarioStepInfo))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ScrappingMachineUI = function()
           local ns = _G.C_ScrappingMachineUI
@@ -7188,7 +9074,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CloseScrappingMachine = function()
               assertEquals('function', type(ns.CloseScrappingMachine))
             end,
@@ -7226,16 +9112,28 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ValidateScrappingList))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ScriptedAnimations = function()
           local ns = _G.C_ScriptedAnimations
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetAllScriptedAnimationEffects = function()
               assertEquals('function', type(ns.GetAllScriptedAnimationEffects))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Seasons = function()
           local ns = _G.C_Seasons
@@ -7245,7 +9143,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetActiveSeason = function()
               assertEquals('function', type(ns.GetActiveSeason))
             end,
@@ -7253,12 +9151,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.HasActiveSeason))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Social = function()
           local ns = _G.C_Social
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetLastAchievement = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetLastAchievement))
@@ -7268,6 +9172,13 @@ function G.GeneratedTests()
             end,
             GetLastItem = function()
               assertEquals('function', type(ns.GetLastItem))
+            end,
+            GetLastScreenshot = function()
+              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetLastScreenshot))
+                return
+              end
+              assertEquals('function', type(ns.GetLastScreenshot))
             end,
             GetLastScreenshotIndex = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -7282,6 +9193,20 @@ function G.GeneratedTests()
                 return
               end
               assertEquals('function', type(ns.GetMaxTweetLength))
+            end,
+            GetNumCharactersPerMedia = function()
+              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetNumCharactersPerMedia))
+                return
+              end
+              assertEquals('function', type(ns.GetNumCharactersPerMedia))
+            end,
+            GetScreenshotByIndex = function()
+              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.GetScreenshotByIndex))
+                return
+              end
+              assertEquals('function', type(ns.GetScreenshotByIndex))
             end,
             GetScreenshotInfoByIndex = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -7299,6 +9224,9 @@ function G.GeneratedTests()
             RegisterSocialBrowser = function()
               assertEquals('function', type(ns.RegisterSocialBrowser))
             end,
+            SetTextureToScreenshot = function()
+              assertEquals('function', type(ns.SetTextureToScreenshot))
+            end,
             TwitterCheckStatus = function()
               assertEquals('function', type(ns.TwitterCheckStatus))
             end,
@@ -7311,10 +9239,29 @@ function G.GeneratedTests()
             TwitterGetMSTillCanPost = function()
               assertEquals('function', type(ns.TwitterGetMSTillCanPost))
             end,
+            TwitterPostAchievement = function()
+              assertEquals('function', type(ns.TwitterPostAchievement))
+            end,
+            TwitterPostItem = function()
+              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.TwitterPostItem))
+                return
+              end
+              assertEquals('function', type(ns.TwitterPostItem))
+            end,
             TwitterPostMessage = function()
               assertEquals('function', type(ns.TwitterPostMessage))
             end,
+            TwitterPostScreenshot = function()
+              assertEquals('function', type(ns.TwitterPostScreenshot))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_SocialQueue = function()
           local ns = _G.C_SocialQueue
@@ -7324,7 +9271,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetAllGroups = function()
               assertEquals('function', type(ns.GetAllGroups))
             end,
@@ -7350,12 +9297,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SignalToastDisplayed))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_SocialRestrictions = function()
           local ns = _G.C_SocialRestrictions
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AcknowledgeRegionalChatDisabled = function()
               assertEquals('function', type(ns.AcknowledgeRegionalChatDisabled))
             end,
@@ -7375,6 +9328,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetChatDisabled))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Soulbinds = function()
           local ns = _G.C_Soulbinds
@@ -7384,7 +9343,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ActivateSoulbind = function()
               assertEquals('function', type(ns.ActivateSoulbind))
             end,
@@ -7445,6 +9404,9 @@ function G.GeneratedTests()
             GetConduitIDPendingInstall = function()
               assertEquals('function', type(ns.GetConduitIDPendingInstall))
             end,
+            GetConduitItemLevel = function()
+              assertEquals('function', type(ns.GetConduitItemLevel))
+            end,
             GetConduitQuality = function()
               assertEquals('function', type(ns.GetConduitQuality))
             end,
@@ -7503,6 +9465,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.UnmodifyNode))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_SpecializationInfo = function()
           local ns = _G.C_SpecializationInfo
@@ -7512,7 +9480,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CanPlayerUsePVPTalentUI = function()
               assertEquals('function', type(ns.CanPlayerUsePVPTalentUI))
             end,
@@ -7559,12 +9527,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetPvpTalentLocked))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Spell = function()
           local ns = _G.C_Spell
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             DoesSpellExist = function()
               assertEquals('function', type(ns.DoesSpellExist))
             end,
@@ -7582,6 +9556,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RequestLoadSpellData))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_SpellBook = function()
           local ns = _G.C_SpellBook
@@ -7591,7 +9571,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ContainsAnyDisenchantSpell = function()
               assertEquals('function', type(ns.ContainsAnyDisenchantSpell))
             end,
@@ -7611,6 +9591,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsSpellDisabled))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_SplashScreen = function()
           local ns = _G.C_SplashScreen
@@ -7620,7 +9606,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AcknowledgeSplash = function()
               assertEquals('function', type(ns.AcknowledgeSplash))
             end,
@@ -7631,12 +9617,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RequestLatestSplashScreen))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_StableInfo = function()
           local ns = _G.C_StableInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetNumActivePets = function()
               assertEquals('function', type(ns.GetNumActivePets))
             end,
@@ -7644,12 +9636,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetNumStablePets))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_StorePublic = function()
           local ns = _G.C_StorePublic
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             DoesGroupHavePurchaseableProducts = function()
               assertEquals('function', type(ns.DoesGroupHavePurchaseableProducts))
             end,
@@ -7667,12 +9665,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsEnabled))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_SummonInfo = function()
           local ns = _G.C_SummonInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             CancelSummon = function()
               assertEquals('function', type(ns.CancelSummon))
             end,
@@ -7695,6 +9699,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsSummonSkippingStartExperience))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_SuperTrack = function()
           local ns = _G.C_SuperTrack
@@ -7704,7 +9714,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetHighestPrioritySuperTrackingType = function()
               assertEquals('function', type(ns.GetHighestPrioritySuperTrackingType))
             end,
@@ -7730,22 +9740,34 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetSuperTrackedUserWaypoint))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_System = function()
           local ns = _G.C_System
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetFrameStack = function()
               assertEquals('function', type(ns.GetFrameStack))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_TTSSettings = function()
           local ns = _G.C_TTSSettings
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetChannelEnabled = function()
               assertEquals('function', type(ns.GetChannelEnabled))
             end,
@@ -7804,12 +9826,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ShouldOverrideMessage))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_TaskQuest = function()
           local ns = _G.C_TaskQuest
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             DoesMapShowTaskQuestObjectives = function()
               assertEquals('function', type(ns.DoesMapShowTaskQuestObjectives))
             end,
@@ -7847,12 +9875,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.RequestPreloadRewardData))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_TaxiMap = function()
           local ns = _G.C_TaxiMap
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetAllTaxiNodes = function()
               assertEquals('function', type(ns.GetAllTaxiNodes))
             end,
@@ -7867,26 +9901,50 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ShouldMapShowTaxiNodes))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Texture = function()
           local ns = _G.C_Texture
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetAtlasInfo = function()
               assertEquals('function', type(ns.GetAtlasInfo))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Timer = function()
           local ns = _G.C_Timer
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             After = function()
               assertEquals('function', type(ns.After))
             end,
+            NewTicker = function()
+              assertEquals('function', type(ns.NewTicker))
+            end,
+            NewTimer = function()
+              assertEquals('function', type(ns.NewTimer))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ToyBox = function()
           local ns = _G.C_ToyBox
@@ -7896,9 +9954,12 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ForceToyRefilter = function()
               assertEquals('function', type(ns.ForceToyRefilter))
+            end,
+            GetCollectedShown = function()
+              assertEquals('function', type(ns.GetCollectedShown))
             end,
             GetIsFavorite = function()
               assertEquals('function', type(ns.GetIsFavorite))
@@ -7912,22 +9973,79 @@ function G.GeneratedTests()
             GetNumTotalDisplayedToys = function()
               assertEquals('function', type(ns.GetNumTotalDisplayedToys))
             end,
+            GetNumToys = function()
+              assertEquals('function', type(ns.GetNumToys))
+            end,
             GetToyFromIndex = function()
               assertEquals('function', type(ns.GetToyFromIndex))
             end,
             GetToyInfo = function()
               assertEquals('function', type(ns.GetToyInfo))
             end,
+            GetToyLink = function()
+              assertEquals('function', type(ns.GetToyLink))
+            end,
+            GetUncollectedShown = function()
+              assertEquals('function', type(ns.GetUncollectedShown))
+            end,
+            GetUnusableShown = function()
+              assertEquals('function', type(ns.GetUnusableShown))
+            end,
             HasFavorites = function()
               assertEquals('function', type(ns.HasFavorites))
             end,
+            IsExpansionTypeFilterChecked = function()
+              assertEquals('function', type(ns.IsExpansionTypeFilterChecked))
+            end,
+            IsSourceTypeFilterChecked = function()
+              assertEquals('function', type(ns.IsSourceTypeFilterChecked))
+            end,
+            IsToyUsable = function()
+              assertEquals('function', type(ns.IsToyUsable))
+            end,
+            PickupToyBoxItem = function()
+              assertEquals('function', type(ns.PickupToyBoxItem))
+            end,
+            SetAllExpansionTypeFilters = function()
+              assertEquals('function', type(ns.SetAllExpansionTypeFilters))
+            end,
+            SetAllSourceTypeFilters = function()
+              assertEquals('function', type(ns.SetAllSourceTypeFilters))
+            end,
+            SetCollectedShown = function()
+              assertEquals('function', type(ns.SetCollectedShown))
+            end,
+            SetExpansionTypeFilter = function()
+              assertEquals('function', type(ns.SetExpansionTypeFilter))
+            end,
+            SetFilterString = function()
+              assertEquals('function', type(ns.SetFilterString))
+            end,
+            SetIsFavorite = function()
+              assertEquals('function', type(ns.SetIsFavorite))
+            end,
+            SetSourceTypeFilter = function()
+              assertEquals('function', type(ns.SetSourceTypeFilter))
+            end,
+            SetUncollectedShown = function()
+              assertEquals('function', type(ns.SetUncollectedShown))
+            end,
+            SetUnusableShown = function()
+              assertEquals('function', type(ns.SetUnusableShown))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ToyBoxInfo = function()
           local ns = _G.C_ToyBoxInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ClearFanfare = function()
               assertEquals('function', type(ns.ClearFanfare))
             end,
@@ -7956,6 +10074,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetDefaultFilters))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_TradeSkillUI = function()
           local ns = _G.C_TradeSkillUI
@@ -7965,7 +10089,31 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            AnyRecipeCategoriesFiltered = function()
+              assertEquals('function', type(ns.AnyRecipeCategoriesFiltered))
+            end,
+            AreAnyInventorySlotsFiltered = function()
+              assertEquals('function', type(ns.AreAnyInventorySlotsFiltered))
+            end,
+            CanObliterateCursorItem = function()
+              assertEquals('function', type(ns.CanObliterateCursorItem))
+            end,
+            CanTradeSkillListLink = function()
+              assertEquals('function', type(ns.CanTradeSkillListLink))
+            end,
+            ClearInventorySlotFilter = function()
+              assertEquals('function', type(ns.ClearInventorySlotFilter))
+            end,
+            ClearPendingObliterateItem = function()
+              assertEquals('function', type(ns.ClearPendingObliterateItem))
+            end,
+            ClearRecipeCategoryFilter = function()
+              assertEquals('function', type(ns.ClearRecipeCategoryFilter))
+            end,
+            ClearRecipeSourceTypeFilter = function()
+              assertEquals('function', type(ns.ClearRecipeSourceTypeFilter))
+            end,
             CloseObliterumForge = function()
               assertEquals('function', type(ns.CloseObliterumForge))
             end,
@@ -7975,11 +10123,44 @@ function G.GeneratedTests()
             CraftRecipe = function()
               assertEquals('function', type(ns.CraftRecipe))
             end,
+            DropPendingObliterateItemFromCursor = function()
+              assertEquals('function', type(ns.DropPendingObliterateItemFromCursor))
+            end,
+            GetAllFilterableInventorySlots = function()
+              assertEquals('function', type(ns.GetAllFilterableInventorySlots))
+            end,
             GetAllProfessionTradeSkillLines = function()
               assertEquals('function', type(ns.GetAllProfessionTradeSkillLines))
             end,
+            GetAllRecipeIDs = function()
+              assertEquals('function', type(ns.GetAllRecipeIDs))
+            end,
             GetCategories = function()
               assertEquals('function', type(ns.GetCategories))
+            end,
+            GetCategoryInfo = function()
+              assertEquals('function', type(ns.GetCategoryInfo))
+            end,
+            GetFilterableInventorySlots = function()
+              assertEquals('function', type(ns.GetFilterableInventorySlots))
+            end,
+            GetFilteredRecipeIDs = function()
+              assertEquals('function', type(ns.GetFilteredRecipeIDs))
+            end,
+            GetObliterateSpellID = function()
+              assertEquals('function', type(ns.GetObliterateSpellID))
+            end,
+            GetOnlyShowLearnedRecipes = function()
+              assertEquals('function', type(ns.GetOnlyShowLearnedRecipes))
+            end,
+            GetOnlyShowMakeableRecipes = function()
+              assertEquals('function', type(ns.GetOnlyShowMakeableRecipes))
+            end,
+            GetOnlyShowSkillUpRecipes = function()
+              assertEquals('function', type(ns.GetOnlyShowSkillUpRecipes))
+            end,
+            GetOnlyShowUnlearnedRecipes = function()
+              assertEquals('function', type(ns.GetOnlyShowUnlearnedRecipes))
             end,
             GetOptionalReagentBonusText = function()
               assertEquals('function', type(ns.GetOptionalReagentBonusText))
@@ -7990,8 +10171,32 @@ function G.GeneratedTests()
             GetPendingObliterateItemID = function()
               assertEquals('function', type(ns.GetPendingObliterateItemID))
             end,
+            GetPendingObliterateItemLink = function()
+              assertEquals('function', type(ns.GetPendingObliterateItemLink))
+            end,
+            GetRecipeCooldown = function()
+              assertEquals('function', type(ns.GetRecipeCooldown))
+            end,
+            GetRecipeDescription = function()
+              assertEquals('function', type(ns.GetRecipeDescription))
+            end,
             GetRecipeInfo = function()
               assertEquals('function', type(ns.GetRecipeInfo))
+            end,
+            GetRecipeItemLevelFilter = function()
+              assertEquals('function', type(ns.GetRecipeItemLevelFilter))
+            end,
+            GetRecipeItemLink = function()
+              assertEquals('function', type(ns.GetRecipeItemLink))
+            end,
+            GetRecipeItemNameFilter = function()
+              assertEquals('function', type(ns.GetRecipeItemNameFilter))
+            end,
+            GetRecipeLink = function()
+              assertEquals('function', type(ns.GetRecipeLink))
+            end,
+            GetRecipeNumItemsProduced = function()
+              assertEquals('function', type(ns.GetRecipeNumItemsProduced))
             end,
             GetRecipeNumReagents = function()
               assertEquals('function', type(ns.GetRecipeNumReagents))
@@ -7999,8 +10204,20 @@ function G.GeneratedTests()
             GetRecipeReagentInfo = function()
               assertEquals('function', type(ns.GetRecipeReagentInfo))
             end,
+            GetRecipeReagentItemLink = function()
+              assertEquals('function', type(ns.GetRecipeReagentItemLink))
+            end,
             GetRecipeRepeatCount = function()
               assertEquals('function', type(ns.GetRecipeRepeatCount))
+            end,
+            GetRecipeSourceText = function()
+              assertEquals('function', type(ns.GetRecipeSourceText))
+            end,
+            GetRecipeTools = function()
+              assertEquals('function', type(ns.GetRecipeTools))
+            end,
+            GetSubCategories = function()
+              assertEquals('function', type(ns.GetSubCategories))
             end,
             GetTradeSkillDisplayName = function()
               assertEquals('function', type(ns.GetTradeSkillDisplayName))
@@ -8008,31 +10225,109 @@ function G.GeneratedTests()
             GetTradeSkillLine = function()
               assertEquals('function', type(ns.GetTradeSkillLine))
             end,
+            GetTradeSkillLineForRecipe = function()
+              assertEquals('function', type(ns.GetTradeSkillLineForRecipe))
+            end,
             GetTradeSkillLineInfoByID = function()
               assertEquals('function', type(ns.GetTradeSkillLineInfoByID))
+            end,
+            GetTradeSkillListLink = function()
+              assertEquals('function', type(ns.GetTradeSkillListLink))
+            end,
+            GetTradeSkillTexture = function()
+              assertEquals('function', type(ns.GetTradeSkillTexture))
+            end,
+            IsAnyRecipeFromSource = function()
+              assertEquals('function', type(ns.IsAnyRecipeFromSource))
+            end,
+            IsDataSourceChanging = function()
+              assertEquals('function', type(ns.IsDataSourceChanging))
             end,
             IsEmptySkillLineCategory = function()
               assertEquals('function', type(ns.IsEmptySkillLineCategory))
             end,
+            IsInventorySlotFiltered = function()
+              assertEquals('function', type(ns.IsInventorySlotFiltered))
+            end,
             IsNPCCrafting = function()
               assertEquals('function', type(ns.IsNPCCrafting))
+            end,
+            IsRecipeCategoryFiltered = function()
+              assertEquals('function', type(ns.IsRecipeCategoryFiltered))
+            end,
+            IsRecipeFavorite = function()
+              assertEquals('function', type(ns.IsRecipeFavorite))
+            end,
+            IsRecipeRepeating = function()
+              assertEquals('function', type(ns.IsRecipeRepeating))
+            end,
+            IsRecipeSearchInProgress = function()
+              assertEquals('function', type(ns.IsRecipeSearchInProgress))
+            end,
+            IsRecipeSourceTypeFiltered = function()
+              assertEquals('function', type(ns.IsRecipeSourceTypeFiltered))
             end,
             IsTradeSkillGuild = function()
               assertEquals('function', type(ns.IsTradeSkillGuild))
             end,
+            IsTradeSkillGuildMember = function()
+              assertEquals('function', type(ns.IsTradeSkillGuildMember))
+            end,
+            IsTradeSkillLinked = function()
+              assertEquals('function', type(ns.IsTradeSkillLinked))
+            end,
             IsTradeSkillReady = function()
               assertEquals('function', type(ns.IsTradeSkillReady))
+            end,
+            ObliterateItem = function()
+              assertEquals('function', type(ns.ObliterateItem))
+            end,
+            OpenTradeSkill = function()
+              assertEquals('function', type(ns.OpenTradeSkill))
+            end,
+            SetInventorySlotFilter = function()
+              assertEquals('function', type(ns.SetInventorySlotFilter))
             end,
             SetOnlyShowLearnedRecipes = function()
               assertEquals('function', type(ns.SetOnlyShowLearnedRecipes))
             end,
+            SetOnlyShowMakeableRecipes = function()
+              assertEquals('function', type(ns.SetOnlyShowMakeableRecipes))
+            end,
+            SetOnlyShowSkillUpRecipes = function()
+              assertEquals('function', type(ns.SetOnlyShowSkillUpRecipes))
+            end,
             SetOnlyShowUnlearnedRecipes = function()
               assertEquals('function', type(ns.SetOnlyShowUnlearnedRecipes))
+            end,
+            SetRecipeCategoryFilter = function()
+              assertEquals('function', type(ns.SetRecipeCategoryFilter))
+            end,
+            SetRecipeFavorite = function()
+              assertEquals('function', type(ns.SetRecipeFavorite))
+            end,
+            SetRecipeItemLevelFilter = function()
+              assertEquals('function', type(ns.SetRecipeItemLevelFilter))
+            end,
+            SetRecipeItemNameFilter = function()
+              assertEquals('function', type(ns.SetRecipeItemNameFilter))
             end,
             SetRecipeRepeatCount = function()
               assertEquals('function', type(ns.SetRecipeRepeatCount))
             end,
+            SetRecipeSourceTypeFilter = function()
+              assertEquals('function', type(ns.SetRecipeSourceTypeFilter))
+            end,
+            StopRecipeRepeat = function()
+              assertEquals('function', type(ns.StopRecipeRepeat))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Transmog = function()
           local ns = _G.C_Transmog
@@ -8042,7 +10337,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ApplyAllPending = function()
               assertEquals('function', type(ns.ApplyAllPending))
             end,
@@ -8075,6 +10370,9 @@ function G.GeneratedTests()
             end,
             GetBaseCategory = function()
               assertEquals('function', type(ns.GetBaseCategory))
+            end,
+            GetCost = function()
+              assertEquals('function', type(ns.GetCost))
             end,
             GetCreatureDisplayIDForSource = function()
               assertEquals('function', type(ns.GetCreatureDisplayIDForSource))
@@ -8113,6 +10411,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetPending))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_TransmogCollection = function()
           local ns = _G.C_TransmogCollection
@@ -8122,7 +10426,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AccountCanCollectSource = function()
               assertEquals('function', type(ns.AccountCanCollectSource))
             end,
@@ -8134,6 +10438,9 @@ function G.GeneratedTests()
             end,
             CanAppearanceHaveIllusion = function()
               assertEquals('function', type(ns.CanAppearanceHaveIllusion))
+            end,
+            CanSetFavoriteInCategory = function()
+              assertEquals('function', type(ns.CanSetFavoriteInCategory))
             end,
             ClearNewAppearance = function()
               assertEquals('function', type(ns.ClearNewAppearance))
@@ -8192,8 +10499,14 @@ function G.GeneratedTests()
             GetFallbackWeaponAppearance = function()
               assertEquals('function', type(ns.GetFallbackWeaponAppearance))
             end,
+            GetIllusionFallbackWeaponSource = function()
+              assertEquals('function', type(ns.GetIllusionFallbackWeaponSource))
+            end,
             GetIllusionInfo = function()
               assertEquals('function', type(ns.GetIllusionInfo))
+            end,
+            GetIllusionSourceInfo = function()
+              assertEquals('function', type(ns.GetIllusionSourceInfo))
             end,
             GetIllusionStrings = function()
               assertEquals('function', type(ns.GetIllusionStrings))
@@ -8236,6 +10549,9 @@ function G.GeneratedTests()
             end,
             GetPairedArtifactAppearance = function()
               assertEquals('function', type(ns.GetPairedArtifactAppearance))
+            end,
+            GetShowMissingSourceInItemTooltips = function()
+              assertEquals('function', type(ns.GetShowMissingSourceInItemTooltips))
             end,
             GetSourceIcon = function()
               assertEquals('function', type(ns.GetSourceIcon))
@@ -8327,6 +10643,9 @@ function G.GeneratedTests()
             SetSearchAndFilterCategory = function()
               assertEquals('function', type(ns.SetSearchAndFilterCategory))
             end,
+            SetShowMissingSourceInItemTooltips = function()
+              assertEquals('function', type(ns.SetShowMissingSourceInItemTooltips))
+            end,
             SetSourceTypeFilter = function()
               assertEquals('function', type(ns.SetSourceTypeFilter))
             end,
@@ -8337,6 +10656,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.UpdateUsableAppearances))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_TransmogSets = function()
           local ns = _G.C_TransmogSets
@@ -8346,7 +10671,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ClearLatestSource = function()
               assertEquals('function', type(ns.ClearLatestSource))
             end,
@@ -8391,6 +10716,9 @@ function G.GeneratedTests()
             end,
             GetSetPrimaryAppearances = function()
               assertEquals('function', type(ns.GetSetPrimaryAppearances))
+            end,
+            GetSetSources = function()
+              assertEquals('function', type(ns.GetSetSources))
             end,
             GetSetsContainingSourceID = function()
               assertEquals('function', type(ns.GetSetsContainingSourceID))
@@ -8438,6 +10766,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SetIsFavorite))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Trophy = function()
           local ns = _G.C_Trophy
@@ -8447,11 +10781,41 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            MonumentChangeAppearanceToTrophyID = function()
+              assertEquals('function', type(ns.MonumentChangeAppearanceToTrophyID))
+            end,
+            MonumentCloseMonumentUI = function()
+              assertEquals('function', type(ns.MonumentCloseMonumentUI))
+            end,
+            MonumentGetCount = function()
+              assertEquals('function', type(ns.MonumentGetCount))
+            end,
+            MonumentGetSelectedTrophyID = function()
+              assertEquals('function', type(ns.MonumentGetSelectedTrophyID))
+            end,
+            MonumentGetTrophyInfoByIndex = function()
+              assertEquals('function', type(ns.MonumentGetTrophyInfoByIndex))
+            end,
             MonumentLoadList = function()
               assertEquals('function', type(ns.MonumentLoadList))
             end,
+            MonumentLoadSelectedTrophyID = function()
+              assertEquals('function', type(ns.MonumentLoadSelectedTrophyID))
+            end,
+            MonumentRevertAppearanceToSaved = function()
+              assertEquals('function', type(ns.MonumentRevertAppearanceToSaved))
+            end,
+            MonumentSaveSelection = function()
+              assertEquals('function', type(ns.MonumentSaveSelection))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Tutorial = function()
           local ns = _G.C_Tutorial
@@ -8461,7 +10825,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AbandonTutorialArea = function()
               assertEquals('function', type(ns.AbandonTutorialArea))
             end,
@@ -8469,12 +10833,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ReturnToTutorialArea))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_UI = function()
           local ns = _G.C_UI
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             DoesAnyDisplayHaveNotch = function()
               assertEquals('function', type(ns.DoesAnyDisplayHaveNotch))
             end,
@@ -8491,12 +10861,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ShouldUIParentAvoidNotch))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_UIWidgetManager = function()
           local ns = _G.C_UIWidgetManager
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetAllWidgetsBySetID = function()
               assertEquals('function', type(ns.GetAllWidgetsBySetID))
             end,
@@ -8683,12 +11059,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.UnregisterUnitForWidgetUpdates))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_UserFeedback = function()
           local ns = _G.C_UserFeedback
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             SubmitBug = function()
               assertEquals('function', type(ns.SubmitBug))
             end,
@@ -8696,16 +11078,28 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.SubmitSuggestion))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_VideoOptions = function()
           local ns = _G.C_VideoOptions
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetGxAdapterInfo = function()
               assertEquals('function', type(ns.GetGxAdapterInfo))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_VignetteInfo = function()
           local ns = _G.C_VignetteInfo
@@ -8715,7 +11109,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             FindBestUniqueVignette = function()
               assertEquals('function', type(ns.FindBestUniqueVignette))
             end,
@@ -8729,12 +11123,18 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.GetVignettes))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_VoiceChat = function()
           local ns = _G.C_VoiceChat
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             ActivateChannel = function()
               assertEquals('function', type(ns.ActivateChannel))
             end,
@@ -8968,6 +11368,12 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.ToggleMuted))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_WeeklyRewards = function()
           local ns = _G.C_WeeklyRewards
@@ -8977,7 +11383,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             AreRewardsForCurrentRewardPeriod = function()
               assertEquals('function', type(ns.AreRewardsForCurrentRewardPeriod))
             end,
@@ -9021,25 +11427,43 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.OnUIInteract))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_Widget = function()
           local ns = _G.C_Widget
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             IsFrameWidget = function()
               assertEquals('function', type(ns.IsFrameWidget))
+            end,
+            IsRenderableWidget = function()
+              assertEquals('function', type(ns.IsRenderableWidget))
             end,
             IsWidget = function()
               assertEquals('function', type(ns.IsWidget))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_WowTokenPublic = function()
           local ns = _G.C_WowTokenPublic
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            BuyToken = function()
+              assertEquals('function', type(ns.BuyToken))
+            end,
             GetCommerceSystemStatus = function()
               assertEquals('function', type(ns.GetCommerceSystemStatus))
             end,
@@ -9058,13 +11482,32 @@ function G.GeneratedTests()
             IsAuctionableWowToken = function()
               assertEquals('function', type(ns.IsAuctionableWowToken))
             end,
+            IsConsumableWowToken = function()
+              assertEquals('function', type(ns.IsConsumableWowToken))
+            end,
+            SellToken = function()
+              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                assertEquals('nil', type(ns.SellToken))
+                return
+              end
+              assertEquals('function', type(ns.SellToken))
+            end,
             UpdateListedAuctionableTokens = function()
               assertEquals('function', type(ns.UpdateListedAuctionableTokens))
             end,
             UpdateMarketPrice = function()
               assertEquals('function', type(ns.UpdateMarketPrice))
             end,
+            UpdateTokenCount = function()
+              assertEquals('function', type(ns.UpdateTokenCount))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_WowTokenUI = function()
           local ns = _G.C_WowTokenUI
@@ -9074,11 +11517,17 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             StartTokenSell = function()
               assertEquals('function', type(ns.StartTokenSell))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         C_ZoneAbility = function()
           local ns = _G.C_ZoneAbility
@@ -9088,21 +11537,42 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
             GetActiveAbilities = function()
               assertEquals('function', type(ns.GetActiveAbilities))
             end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
         Kiosk = function()
           local ns = _G.Kiosk
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
+            GetCharacterTemplateSetIndex = function()
+              assertEquals('function', type(ns.GetCharacterTemplateSetIndex))
+            end,
             IsEnabled = function()
               assertEquals('function', type(ns.IsEnabled))
             end,
+            ShutdownSession = function()
+              assertEquals('function', type(ns.ShutdownSession))
+            end,
+            StartSession = function()
+              assertEquals('function', type(ns.StartSession))
+            end,
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
       }
     end,

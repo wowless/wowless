@@ -1,0 +1,5 @@
+---
+name: C_LFGList.IsCurrentlyApplying
+status: unimplemented
+flavors:
+- Mainline

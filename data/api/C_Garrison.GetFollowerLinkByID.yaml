@@ -1,0 +1,5 @@
+---
+name: C_Garrison.GetFollowerLinkByID
+status: unimplemented
+flavors:
+- Mainline

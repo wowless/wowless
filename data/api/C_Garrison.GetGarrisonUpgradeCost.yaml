@@ -1,0 +1,5 @@
+---
+name: C_Garrison.GetGarrisonUpgradeCost
+status: unimplemented
+flavors:
+- Mainline

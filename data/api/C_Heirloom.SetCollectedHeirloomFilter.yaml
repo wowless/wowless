@@ -1,0 +1,5 @@
+---
+name: C_Heirloom.SetCollectedHeirloomFilter
+status: unimplemented
+flavors:
+- Mainline

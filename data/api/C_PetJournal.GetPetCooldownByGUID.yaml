@@ -1,0 +1,5 @@
+---
+name: C_PetJournal.GetPetCooldownByGUID
+status: unimplemented
+flavors:
+- Mainline

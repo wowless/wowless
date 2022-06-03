@@ -1,0 +1,5 @@
+---
+name: C_PetJournal.GetPetModelSceneInfoBySpeciesID
+status: unimplemented
+flavors:
+- Mainline

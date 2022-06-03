@@ -1,0 +1,5 @@
+---
+name: C_CharacterServices.GetCharacterServiceDisplayDataByVASType
+status: unimplemented
+flavors:
+- Mainline

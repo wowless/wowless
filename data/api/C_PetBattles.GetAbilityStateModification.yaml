@@ -1,0 +1,5 @@
+---
+name: C_PetBattles.GetAbilityStateModification
+status: unimplemented
+flavors:
+- Mainline

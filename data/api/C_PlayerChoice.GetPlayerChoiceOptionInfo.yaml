@@ -1,0 +1,5 @@
+---
+name: C_PlayerChoice.GetPlayerChoiceOptionInfo
+status: unimplemented
+flavors:
+- Mainline

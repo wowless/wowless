@@ -1,0 +1,5 @@
+---
+name: C_Garrison.GetFollowerUnderBiasReason
+status: unimplemented
+flavors:
+- Mainline

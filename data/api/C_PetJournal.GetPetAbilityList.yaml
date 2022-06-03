@@ -1,0 +1,5 @@
+---
+name: C_PetJournal.GetPetAbilityList
+status: unimplemented
+flavors:
+- Mainline

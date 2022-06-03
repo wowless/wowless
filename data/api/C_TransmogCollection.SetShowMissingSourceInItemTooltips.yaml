@@ -1,0 +1,5 @@
+---
+name: C_TransmogCollection.SetShowMissingSourceInItemTooltips
+status: unimplemented
+flavors:
+- Mainline

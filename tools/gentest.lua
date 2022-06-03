@@ -130,7 +130,7 @@ function G.GeneratedTests()
 > end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return {
+          local tests = {
 > for mname, method in sorted(v.methods) do
             $(mname) = function()
 > if method.flavors and (not v.flavors or #method.flavors < #v.flavors) then
@@ -143,6 +143,12 @@ function G.GeneratedTests()
             end,
 > end
           }
+          for k in pairs(ns) do
+            tests[k] = tests[k] or function()
+              error('missing')
+            end
+          end
+          return tests
         end,
 > end
       }

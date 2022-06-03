@@ -1,0 +1,5 @@
+---
+name: C_Heirloom.GetNumKnownHeirlooms
+status: unimplemented
+flavors:
+- Mainline

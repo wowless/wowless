@@ -1,0 +1,5 @@
+---
+name: C_Heirloom.IsPendingHeirloomUpgrade
+status: unimplemented
+flavors:
+- Mainline

@@ -1,0 +1,5 @@
+---
+name: C_Garrison.ShowFollowerNameInErrorMessage
+status: unimplemented
+flavors:
+- Mainline

@@ -1,0 +1,5 @@
+---
+name: C_Garrison.GetBuildingUpgradeInfo
+status: unimplemented
+flavors:
+- Mainline

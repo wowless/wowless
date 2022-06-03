@@ -1,0 +1,5 @@
+---
+name: C_LFGList.GetNumPendingApplicantMembers
+status: unimplemented
+flavors:
+- Mainline

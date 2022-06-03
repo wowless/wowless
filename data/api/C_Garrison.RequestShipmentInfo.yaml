@@ -1,0 +1,5 @@
+---
+name: C_Garrison.RequestShipmentInfo
+status: unimplemented
+flavors:
+- Mainline

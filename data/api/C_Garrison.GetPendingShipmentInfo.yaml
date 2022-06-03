@@ -1,0 +1,5 @@
+---
+name: C_Garrison.GetPendingShipmentInfo
+status: unimplemented
+flavors:
+- Mainline

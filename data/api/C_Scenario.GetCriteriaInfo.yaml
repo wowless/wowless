@@ -1,0 +1,5 @@
+---
+name: C_Scenario.GetCriteriaInfo
+status: unimplemented
+flavors:
+- Mainline

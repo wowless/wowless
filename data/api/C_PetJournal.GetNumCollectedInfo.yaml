@@ -1,0 +1,5 @@
+---
+name: C_PetJournal.GetNumCollectedInfo
+status: unimplemented
+flavors:
+- Mainline

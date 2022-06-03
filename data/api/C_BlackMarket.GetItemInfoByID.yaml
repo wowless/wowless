@@ -1,0 +1,5 @@
+---
+name: C_BlackMarket.GetItemInfoByID
+status: unimplemented
+flavors:
+- Mainline

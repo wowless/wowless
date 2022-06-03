@@ -1,0 +1,5 @@
+---
+name: C_PetJournal.SetPetTypeFilter
+status: unimplemented
+flavors:
+- Mainline

@@ -1,0 +1,5 @@
+---
+name: C_Garrison.AllowMissionStartAboveSoftCap
+status: unimplemented
+flavors:
+- Mainline

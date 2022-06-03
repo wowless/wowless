@@ -1,0 +1,5 @@
+---
+name: C_PetBattles.GetForfeitPenalty
+status: unimplemented
+flavors:
+- Mainline

@@ -1,0 +1,5 @@
+---
+name: C_Garrison.GetBuildingTimeRemaining
+status: unimplemented
+flavors:
+- Mainline

@@ -1,0 +1,5 @@
+---
+name: C_Garrison.GetShipmentContainerInfo
+status: unimplemented
+flavors:
+- Mainline

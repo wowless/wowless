@@ -1,0 +1,5 @@
+---
+name: C_PetJournal.IsJournalReadOnly
+status: unimplemented
+flavors:
+- Mainline

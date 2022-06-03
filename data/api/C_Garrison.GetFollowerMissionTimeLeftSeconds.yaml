@@ -1,0 +1,5 @@
+---
+name: C_Garrison.GetFollowerMissionTimeLeftSeconds
+status: unimplemented
+flavors:
+- Mainline

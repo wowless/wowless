@@ -1,0 +1,5 @@
+---
+name: C_PetJournal.GetNumPetTypes
+status: unimplemented
+flavors:
+- Mainline

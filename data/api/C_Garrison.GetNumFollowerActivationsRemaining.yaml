@@ -1,0 +1,5 @@
+---
+name: C_Garrison.GetNumFollowerActivationsRemaining
+status: unimplemented
+flavors:
+- Mainline
