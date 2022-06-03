@@ -2,4 +2,5 @@
 name: GetQuestLogRewardHonor
 status: unimplemented
 outputs:
-- type: number
+- stub: 0
+  type: number
