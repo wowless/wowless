@@ -115,7 +115,7 @@ local text = assert(plsub(
 local _, G = ...
 local assertEquals = _G.assertEquals
 local GetObjectType = CreateFrame('Frame').GetObjectType
-G.GeneratedTestFailures = G.test(function()
+function G.GeneratedTests()
   return {
     apiNamespaces = function()
       return {
@@ -221,7 +221,7 @@ G.GeneratedTestFailures = G.test(function()
       }
     end,
   }
-end)
+end
 ]],
   {
     _escape = '>',

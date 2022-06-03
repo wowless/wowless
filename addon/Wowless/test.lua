@@ -1,10 +1,9 @@
 local addonName, G = ...
 local assertEquals = _G.assertEquals
 
-local syncTests = {
-  {
-    name = 'button text',
-    fn = function()
+local syncTests = function()
+  return {
+    ['button text'] = function()
       local f = CreateFrame('Button')
       assert(f:GetNumRegions() == 0)
       assert(f:GetFontString() == nil)
@@ -33,10 +32,7 @@ local syncTests = {
       assert(g:GetText() == nil)
       assert(g:GetFontString() == nil)
     end,
-  },
-  {
-    name = 'frame kid order',
-    fn = function()
+    ['frame kid order'] = function()
       local f = CreateFrame('Frame')
       local g = CreateFrame('Frame')
       local h = CreateFrame('Frame')
@@ -49,10 +45,7 @@ local syncTests = {
       assert(select(1, f:GetChildren()) == g)
       assert(select(2, f:GetChildren()) == h)
     end,
-  },
-  {
-    name = 'frame three kids order',
-    fn = function()
+    ['frame three kids order'] = function()
       local f = CreateFrame('Frame')
       local g = CreateFrame('Frame', nil, f)
       local h = CreateFrame('Frame', nil, f)
@@ -71,44 +64,26 @@ local syncTests = {
       assert(select(2, f:GetChildren()) == i)
       assert(select(3, f:GetChildren()) == h)
     end,
-  },
-  {
-    name = 'format missing numbers',
-    fn = function()
+    ['format missing numbers'] = function()
       assertEquals('0', format('%d'))
     end,
-  },
-  {
-    name = 'format nil numbers',
-    fn = function()
+    ['format nil numbers'] = function()
       assertEquals('0', format('%d', nil))
     end,
-  },
-  {
-    name = 'does not format missing strings',
-    fn = function()
+    ['does not format missing strings'] = function()
       assert(not pcall(function()
         format('%s')
       end))
     end,
-  },
-  {
-    name = 'does not format nil strings',
-    fn = function()
+    ['does not format nil strings'] = function()
       assert(not pcall(function()
         format('%s', nil)
       end))
     end,
-  },
-  {
-    name = 'format handles indexed substitution',
-    fn = function()
+    ['format handles indexed substitution'] = function()
       assertEquals(' 7   moo', format('%2$2d %1$5s', 'moo', 7))
     end,
-  },
-  {
-    name = 'format handles up to index 99 substitution',
-    fn = function()
+    ['format handles up to index 99 substitution'] = function()
       local t = {}
       for i = 1, 100 do
         t[i] = i
@@ -120,10 +95,7 @@ local syncTests = {
         format('%100$d', unpack(t))
       end))
     end,
-  },
-  {
-    name = 'visible updated on kids before calling any OnShow',
-    fn = function()
+    ['visible updated on kids before calling any OnShow'] = function()
       local p = CreateFrame('Frame')
       local k1 = CreateFrame('Frame', nil, p)
       local k2 = CreateFrame('Frame', nil, p)
@@ -156,10 +128,7 @@ local syncTests = {
       }, '\n')
       assertEquals(expected, table.concat(log, '\n'))
     end,
-  },
-  {
-    name = 'visible updated on kids before OnShow across three parent-kids',
-    fn = function()
+    ['visible updated on kids before OnShow across three parent-kids'] = function()
       local p = CreateFrame('Frame')
       local m = CreateFrame('Frame', nil, p)
       local k = CreateFrame('Frame', nil, m)
@@ -192,10 +161,7 @@ local syncTests = {
       }, '\n')
       assertEquals(expected, table.concat(log, '\n'))
     end,
-  },
-  {
-    name = 'ScrollFrame:SetScrollChild',
-    fn = function()
+    ['ScrollFrame:SetScrollChild'] = function()
       local f = CreateFrame('ScrollFrame')
       assertEquals(nil, f:GetScrollChild())
       local g = CreateFrame('Frame', 'WowlessScrollFrameChild')
@@ -212,10 +178,7 @@ local syncTests = {
         end)
       )
     end,
-  },
-  {
-    name = 'version',
-    fn = function()
+    ['version'] = function()
       local id = _G.WOW_PROJECT_ID
       if id == 1 then
         assertEquals(id, _G.WOW_PROJECT_MAINLINE)
@@ -227,8 +190,8 @@ local syncTests = {
         error('invalid WOW_PROJECT_ID')
       end
     end,
-  },
-}
+  }
+end
 
 local asyncTests = {
   {
@@ -323,38 +286,34 @@ local asyncTests = {
   },
 }
 
-_G.WowlessTestFailures = {}
+_G.WowlessTestFailures = G.test(function()
+  return {
+    generated = G.GeneratedTests,
+    sync = syncTests,
+  }
+end) or {}
 _G.WowlessTestsDone = false
 
 do
   local function checkSafely(name, fn)
     local success, msg = pcall(fn)
     if not success then
-      _G.WowlessTestFailures[name] = msg
+      _G.WowlessTestFailures.async = _G.WowlessTestFailures.async or {}
+      _G.WowlessTestFailures.async[name] = msg
     end
   end
-  local syncIndex, numSyncTests = 0, #syncTests
   local asyncIndex, numAsyncTests, asyncPending = 0, #asyncTests, false
   local totalTime, numFrames = 0, 0
   CreateFrame('Frame'):SetScript('OnUpdate', function(frame, elapsed)
-    local t = debugprofilestop()
     totalTime = totalTime + elapsed
     numFrames = numFrames + 1
-    while debugprofilestop() - t < elapsed / 2 and syncIndex < numSyncTests do
-      syncIndex = syncIndex + 1
-      local test = syncTests[syncIndex]
-      checkSafely(test.name, test.fn)
-    end
-    if syncIndex == numSyncTests and not asyncPending then
+    if not asyncPending then
       if asyncIndex == numAsyncTests then
         frame:SetScript('OnUpdate', nil)
         _G.WowlessTestsDone = true
         local print = DevTools_Dump and print or function() end
         print(('Wowless testing completed in %.1fs (%d frames).'):format(totalTime, numFrames))
-        print(('Ran %d sync and %d async tests.'):format(numSyncTests, numAsyncTests))
-        if G.GeneratedTestFailures then
-          _G.WowlessTestFailures.generated = G.GeneratedTestFailures
-        end
+        print(('Ran %d async tests.'):format(numAsyncTests))
         if not next(_G.WowlessTestFailures) then
           print('No errors.')
         else
