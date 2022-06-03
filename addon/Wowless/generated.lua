@@ -139,10 +139,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CanBeShown = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanBeShown))
-                return
-              end
               assertEquals('function', type(ns.CanBeShown))
             end,
           }
@@ -157,10 +153,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             Close = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.Close))
-                return
-              end
               assertEquals('function', type(ns.Close))
             end,
           }
@@ -175,24 +167,12 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ClearAlliedRaceDetailsGiver = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearAlliedRaceDetailsGiver))
-                return
-              end
               assertEquals('function', type(ns.ClearAlliedRaceDetailsGiver))
             end,
             GetAllRacialAbilitiesFromID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAllRacialAbilitiesFromID))
-                return
-              end
               assertEquals('function', type(ns.GetAllRacialAbilitiesFromID))
             end,
             GetRaceInfoByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRaceInfoByID))
-                return
-              end
               assertEquals('function', type(ns.GetRaceInfoByID))
             end,
           }
@@ -207,52 +187,24 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CloseUI = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseUI))
-                return
-              end
               assertEquals('function', type(ns.CloseUI))
             end,
             GetAnimaDiversionNodes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAnimaDiversionNodes))
-                return
-              end
               assertEquals('function', type(ns.GetAnimaDiversionNodes))
             end,
             GetOriginPosition = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOriginPosition))
-                return
-              end
               assertEquals('function', type(ns.GetOriginPosition))
             end,
             GetReinforceProgress = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetReinforceProgress))
-                return
-              end
               assertEquals('function', type(ns.GetReinforceProgress))
             end,
             GetTextureKit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTextureKit))
-                return
-              end
               assertEquals('function', type(ns.GetTextureKit))
             end,
             OpenAnimaDiversionUI = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.OpenAnimaDiversionUI))
-                return
-              end
               assertEquals('function', type(ns.OpenAnimaDiversionUI))
             end,
             SelectAnimaNode = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SelectAnimaNode))
-                return
-              end
               assertEquals('function', type(ns.SelectAnimaNode))
             end,
           }
@@ -267,17 +219,9 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetGardenData = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetGardenData))
-                return
-              end
               assertEquals('function', type(ns.GetGardenData))
             end,
             IsGardenAccessible = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsGardenAccessible))
-                return
-              end
               assertEquals('function', type(ns.IsGardenAccessible))
             end,
           }
@@ -322,430 +266,186 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             AddPower = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AddPower))
-                return
-              end
               assertEquals('function', type(ns.AddPower))
             end,
             ApplyCursorRelicToSlot = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ApplyCursorRelicToSlot))
-                return
-              end
               assertEquals('function', type(ns.ApplyCursorRelicToSlot))
             end,
             CanApplyArtifactRelic = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanApplyArtifactRelic))
-                return
-              end
               assertEquals('function', type(ns.CanApplyArtifactRelic))
             end,
             CanApplyCursorRelicToSlot = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanApplyCursorRelicToSlot))
-                return
-              end
               assertEquals('function', type(ns.CanApplyCursorRelicToSlot))
             end,
             CanApplyRelicItemIDToEquippedArtifactSlot = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanApplyRelicItemIDToEquippedArtifactSlot))
-                return
-              end
               assertEquals('function', type(ns.CanApplyRelicItemIDToEquippedArtifactSlot))
             end,
             CanApplyRelicItemIDToSlot = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanApplyRelicItemIDToSlot))
-                return
-              end
               assertEquals('function', type(ns.CanApplyRelicItemIDToSlot))
             end,
             CheckRespecNPC = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CheckRespecNPC))
-                return
-              end
               assertEquals('function', type(ns.CheckRespecNPC))
             end,
             Clear = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.Clear))
-                return
-              end
               assertEquals('function', type(ns.Clear))
             end,
             ClearForgeCamera = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearForgeCamera))
-                return
-              end
               assertEquals('function', type(ns.ClearForgeCamera))
             end,
             ConfirmRespec = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ConfirmRespec))
-                return
-              end
               assertEquals('function', type(ns.ConfirmRespec))
             end,
             DoesEquippedArtifactHaveAnyRelicsSlotted = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.DoesEquippedArtifactHaveAnyRelicsSlotted))
-                return
-              end
               assertEquals('function', type(ns.DoesEquippedArtifactHaveAnyRelicsSlotted))
             end,
             GetAppearanceInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAppearanceInfo))
-                return
-              end
               assertEquals('function', type(ns.GetAppearanceInfo))
             end,
             GetAppearanceInfoByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAppearanceInfoByID))
-                return
-              end
               assertEquals('function', type(ns.GetAppearanceInfoByID))
             end,
             GetAppearanceSetInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAppearanceSetInfo))
-                return
-              end
               assertEquals('function', type(ns.GetAppearanceSetInfo))
             end,
             GetArtifactArtInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetArtifactArtInfo))
-                return
-              end
               assertEquals('function', type(ns.GetArtifactArtInfo))
             end,
             GetArtifactInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetArtifactInfo))
-                return
-              end
               assertEquals('function', type(ns.GetArtifactInfo))
             end,
             GetArtifactItemID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetArtifactItemID))
-                return
-              end
               assertEquals('function', type(ns.GetArtifactItemID))
             end,
             GetArtifactTier = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetArtifactTier))
-                return
-              end
               assertEquals('function', type(ns.GetArtifactTier))
             end,
             GetArtifactXPRewardTargetInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetArtifactXPRewardTargetInfo))
-                return
-              end
               assertEquals('function', type(ns.GetArtifactXPRewardTargetInfo))
             end,
             GetCostForPointAtRank = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCostForPointAtRank))
-                return
-              end
               assertEquals('function', type(ns.GetCostForPointAtRank))
             end,
             GetEquippedArtifactArtInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetEquippedArtifactArtInfo))
-                return
-              end
               assertEquals('function', type(ns.GetEquippedArtifactArtInfo))
             end,
             GetEquippedArtifactInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetEquippedArtifactInfo))
-                return
-              end
               assertEquals('function', type(ns.GetEquippedArtifactInfo))
             end,
             GetEquippedArtifactItemID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetEquippedArtifactItemID))
-                return
-              end
               assertEquals('function', type(ns.GetEquippedArtifactItemID))
             end,
             GetEquippedArtifactNumRelicSlots = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetEquippedArtifactNumRelicSlots))
-                return
-              end
               assertEquals('function', type(ns.GetEquippedArtifactNumRelicSlots))
             end,
             GetEquippedArtifactRelicInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetEquippedArtifactRelicInfo))
-                return
-              end
               assertEquals('function', type(ns.GetEquippedArtifactRelicInfo))
             end,
             GetEquippedRelicLockedReason = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetEquippedRelicLockedReason))
-                return
-              end
               assertEquals('function', type(ns.GetEquippedRelicLockedReason))
             end,
             GetForgeRotation = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetForgeRotation))
-                return
-              end
               assertEquals('function', type(ns.GetForgeRotation))
             end,
             GetItemLevelIncreaseProvidedByRelic = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemLevelIncreaseProvidedByRelic))
-                return
-              end
               assertEquals('function', type(ns.GetItemLevelIncreaseProvidedByRelic))
             end,
             GetMetaPowerInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMetaPowerInfo))
-                return
-              end
               assertEquals('function', type(ns.GetMetaPowerInfo))
             end,
             GetNumAppearanceSets = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumAppearanceSets))
-                return
-              end
               assertEquals('function', type(ns.GetNumAppearanceSets))
             end,
             GetNumObtainedArtifacts = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumObtainedArtifacts))
-                return
-              end
               assertEquals('function', type(ns.GetNumObtainedArtifacts))
             end,
             GetNumRelicSlots = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumRelicSlots))
-                return
-              end
               assertEquals('function', type(ns.GetNumRelicSlots))
             end,
             GetPointsRemaining = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPointsRemaining))
-                return
-              end
               assertEquals('function', type(ns.GetPointsRemaining))
             end,
             GetPowerHyperlink = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPowerHyperlink))
-                return
-              end
               assertEquals('function', type(ns.GetPowerHyperlink))
             end,
             GetPowerInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPowerInfo))
-                return
-              end
               assertEquals('function', type(ns.GetPowerInfo))
             end,
             GetPowerLinks = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPowerLinks))
-                return
-              end
               assertEquals('function', type(ns.GetPowerLinks))
             end,
             GetPowers = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPowers))
-                return
-              end
               assertEquals('function', type(ns.GetPowers))
             end,
             GetPowersAffectedByRelic = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPowersAffectedByRelic))
-                return
-              end
               assertEquals('function', type(ns.GetPowersAffectedByRelic))
             end,
             GetPowersAffectedByRelicItemLink = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPowersAffectedByRelicItemLink))
-                return
-              end
               assertEquals('function', type(ns.GetPowersAffectedByRelicItemLink))
             end,
             GetPreviewAppearance = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPreviewAppearance))
-                return
-              end
               assertEquals('function', type(ns.GetPreviewAppearance))
             end,
             GetRelicInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRelicInfo))
-                return
-              end
               assertEquals('function', type(ns.GetRelicInfo))
             end,
             GetRelicInfoByItemID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRelicInfoByItemID))
-                return
-              end
               assertEquals('function', type(ns.GetRelicInfoByItemID))
             end,
             GetRelicLockedReason = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRelicLockedReason))
-                return
-              end
               assertEquals('function', type(ns.GetRelicLockedReason))
             end,
             GetRelicSlotType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRelicSlotType))
-                return
-              end
               assertEquals('function', type(ns.GetRelicSlotType))
             end,
             GetRespecArtifactArtInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRespecArtifactArtInfo))
-                return
-              end
               assertEquals('function', type(ns.GetRespecArtifactArtInfo))
             end,
             GetRespecArtifactInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRespecArtifactInfo))
-                return
-              end
               assertEquals('function', type(ns.GetRespecArtifactInfo))
             end,
             GetRespecCost = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRespecCost))
-                return
-              end
               assertEquals('function', type(ns.GetRespecCost))
             end,
             GetTotalPowerCost = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTotalPowerCost))
-                return
-              end
               assertEquals('function', type(ns.GetTotalPowerCost))
             end,
             GetTotalPurchasedRanks = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTotalPurchasedRanks))
-                return
-              end
               assertEquals('function', type(ns.GetTotalPurchasedRanks))
             end,
             IsArtifactDisabled = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsArtifactDisabled))
-                return
-              end
               assertEquals('function', type(ns.IsArtifactDisabled))
             end,
             IsAtForge = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsAtForge))
-                return
-              end
               assertEquals('function', type(ns.IsAtForge))
             end,
             IsEquippedArtifactDisabled = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsEquippedArtifactDisabled))
-                return
-              end
               assertEquals('function', type(ns.IsEquippedArtifactDisabled))
             end,
             IsEquippedArtifactMaxed = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsEquippedArtifactMaxed))
-                return
-              end
               assertEquals('function', type(ns.IsEquippedArtifactMaxed))
             end,
             IsMaxedByRulesOrEffect = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsMaxedByRulesOrEffect))
-                return
-              end
               assertEquals('function', type(ns.IsMaxedByRulesOrEffect))
             end,
             IsPowerKnown = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsPowerKnown))
-                return
-              end
               assertEquals('function', type(ns.IsPowerKnown))
             end,
             IsViewedArtifactEquipped = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsViewedArtifactEquipped))
-                return
-              end
               assertEquals('function', type(ns.IsViewedArtifactEquipped))
             end,
             SetAppearance = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetAppearance))
-                return
-              end
               assertEquals('function', type(ns.SetAppearance))
             end,
             SetForgeCamera = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetForgeCamera))
-                return
-              end
               assertEquals('function', type(ns.SetForgeCamera))
             end,
             SetForgeRotation = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetForgeRotation))
-                return
-              end
               assertEquals('function', type(ns.SetForgeRotation))
             end,
             SetPreviewAppearance = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetPreviewAppearance))
-                return
-              end
               assertEquals('function', type(ns.SetPreviewAppearance))
             end,
             ShouldSuppressForgeRotation = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ShouldSuppressForgeRotation))
-                return
-              end
               assertEquals('function', type(ns.ShouldSuppressForgeRotation))
             end,
           }
@@ -760,577 +460,249 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CalculateCommodityDeposit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CalculateCommodityDeposit))
-                return
-              end
               assertEquals('function', type(ns.CalculateCommodityDeposit))
             end,
             CalculateItemDeposit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CalculateItemDeposit))
-                return
-              end
               assertEquals('function', type(ns.CalculateItemDeposit))
             end,
             CanCancelAuction = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanCancelAuction))
-                return
-              end
               assertEquals('function', type(ns.CanCancelAuction))
             end,
             CancelAuction = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CancelAuction))
-                return
-              end
               assertEquals('function', type(ns.CancelAuction))
             end,
             CancelCommoditiesPurchase = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CancelCommoditiesPurchase))
-                return
-              end
               assertEquals('function', type(ns.CancelCommoditiesPurchase))
             end,
             CancelSell = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CancelSell))
-                return
-              end
               assertEquals('function', type(ns.CancelSell))
             end,
             CloseAuctionHouse = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseAuctionHouse))
-                return
-              end
               assertEquals('function', type(ns.CloseAuctionHouse))
             end,
             ConfirmCommoditiesPurchase = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ConfirmCommoditiesPurchase))
-                return
-              end
               assertEquals('function', type(ns.ConfirmCommoditiesPurchase))
             end,
             FavoritesAreAvailable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.FavoritesAreAvailable))
-                return
-              end
               assertEquals('function', type(ns.FavoritesAreAvailable))
             end,
             GetAuctionInfoByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAuctionInfoByID))
-                return
-              end
               assertEquals('function', type(ns.GetAuctionInfoByID))
             end,
             GetAuctionItemSubClasses = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAuctionItemSubClasses))
-                return
-              end
               assertEquals('function', type(ns.GetAuctionItemSubClasses))
             end,
             GetAvailablePostCount = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAvailablePostCount))
-                return
-              end
               assertEquals('function', type(ns.GetAvailablePostCount))
             end,
             GetBidInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBidInfo))
-                return
-              end
               assertEquals('function', type(ns.GetBidInfo))
             end,
             GetBidType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBidType))
-                return
-              end
               assertEquals('function', type(ns.GetBidType))
             end,
             GetBids = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBids))
-                return
-              end
               assertEquals('function', type(ns.GetBids))
             end,
             GetBrowseResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBrowseResults))
-                return
-              end
               assertEquals('function', type(ns.GetBrowseResults))
             end,
             GetCancelCost = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCancelCost))
-                return
-              end
               assertEquals('function', type(ns.GetCancelCost))
             end,
             GetCommoditySearchResultInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCommoditySearchResultInfo))
-                return
-              end
               assertEquals('function', type(ns.GetCommoditySearchResultInfo))
             end,
             GetCommoditySearchResultsQuantity = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCommoditySearchResultsQuantity))
-                return
-              end
               assertEquals('function', type(ns.GetCommoditySearchResultsQuantity))
             end,
             GetExtraBrowseInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetExtraBrowseInfo))
-                return
-              end
               assertEquals('function', type(ns.GetExtraBrowseInfo))
             end,
             GetFilterGroups = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFilterGroups))
-                return
-              end
               assertEquals('function', type(ns.GetFilterGroups))
             end,
             GetItemCommodityStatus = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemCommodityStatus))
-                return
-              end
               assertEquals('function', type(ns.GetItemCommodityStatus))
             end,
             GetItemKeyFromItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemKeyFromItem))
-                return
-              end
               assertEquals('function', type(ns.GetItemKeyFromItem))
             end,
             GetItemKeyInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemKeyInfo))
-                return
-              end
               assertEquals('function', type(ns.GetItemKeyInfo))
             end,
             GetItemKeyRequiredLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemKeyRequiredLevel))
-                return
-              end
               assertEquals('function', type(ns.GetItemKeyRequiredLevel))
             end,
             GetItemSearchResultInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemSearchResultInfo))
-                return
-              end
               assertEquals('function', type(ns.GetItemSearchResultInfo))
             end,
             GetItemSearchResultsQuantity = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemSearchResultsQuantity))
-                return
-              end
               assertEquals('function', type(ns.GetItemSearchResultsQuantity))
             end,
             GetMaxBidItemBid = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMaxBidItemBid))
-                return
-              end
               assertEquals('function', type(ns.GetMaxBidItemBid))
             end,
             GetMaxBidItemBuyout = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMaxBidItemBuyout))
-                return
-              end
               assertEquals('function', type(ns.GetMaxBidItemBuyout))
             end,
             GetMaxCommoditySearchResultPrice = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMaxCommoditySearchResultPrice))
-                return
-              end
               assertEquals('function', type(ns.GetMaxCommoditySearchResultPrice))
             end,
             GetMaxItemSearchResultBid = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMaxItemSearchResultBid))
-                return
-              end
               assertEquals('function', type(ns.GetMaxItemSearchResultBid))
             end,
             GetMaxItemSearchResultBuyout = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMaxItemSearchResultBuyout))
-                return
-              end
               assertEquals('function', type(ns.GetMaxItemSearchResultBuyout))
             end,
             GetMaxOwnedAuctionBid = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMaxOwnedAuctionBid))
-                return
-              end
               assertEquals('function', type(ns.GetMaxOwnedAuctionBid))
             end,
             GetMaxOwnedAuctionBuyout = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMaxOwnedAuctionBuyout))
-                return
-              end
               assertEquals('function', type(ns.GetMaxOwnedAuctionBuyout))
             end,
             GetNumBidTypes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumBidTypes))
-                return
-              end
               assertEquals('function', type(ns.GetNumBidTypes))
             end,
             GetNumBids = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumBids))
-                return
-              end
               assertEquals('function', type(ns.GetNumBids))
             end,
             GetNumCommoditySearchResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumCommoditySearchResults))
-                return
-              end
               assertEquals('function', type(ns.GetNumCommoditySearchResults))
             end,
             GetNumItemSearchResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumItemSearchResults))
-                return
-              end
               assertEquals('function', type(ns.GetNumItemSearchResults))
             end,
             GetNumOwnedAuctionTypes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumOwnedAuctionTypes))
-                return
-              end
               assertEquals('function', type(ns.GetNumOwnedAuctionTypes))
             end,
             GetNumOwnedAuctions = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumOwnedAuctions))
-                return
-              end
               assertEquals('function', type(ns.GetNumOwnedAuctions))
             end,
             GetNumReplicateItems = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumReplicateItems))
-                return
-              end
               assertEquals('function', type(ns.GetNumReplicateItems))
             end,
             GetOwnedAuctionInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOwnedAuctionInfo))
-                return
-              end
               assertEquals('function', type(ns.GetOwnedAuctionInfo))
             end,
             GetOwnedAuctionType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOwnedAuctionType))
-                return
-              end
               assertEquals('function', type(ns.GetOwnedAuctionType))
             end,
             GetOwnedAuctions = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOwnedAuctions))
-                return
-              end
               assertEquals('function', type(ns.GetOwnedAuctions))
             end,
             GetQuoteDurationRemaining = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetQuoteDurationRemaining))
-                return
-              end
               assertEquals('function', type(ns.GetQuoteDurationRemaining))
             end,
             GetReplicateItemBattlePetInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetReplicateItemBattlePetInfo))
-                return
-              end
               assertEquals('function', type(ns.GetReplicateItemBattlePetInfo))
             end,
             GetReplicateItemInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetReplicateItemInfo))
-                return
-              end
               assertEquals('function', type(ns.GetReplicateItemInfo))
             end,
             GetReplicateItemLink = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetReplicateItemLink))
-                return
-              end
               assertEquals('function', type(ns.GetReplicateItemLink))
             end,
             GetReplicateItemTimeLeft = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetReplicateItemTimeLeft))
-                return
-              end
               assertEquals('function', type(ns.GetReplicateItemTimeLeft))
             end,
             GetTimeLeftBandInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTimeLeftBandInfo))
-                return
-              end
               assertEquals('function', type(ns.GetTimeLeftBandInfo))
             end,
             HasFavorites = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasFavorites))
-                return
-              end
               assertEquals('function', type(ns.HasFavorites))
             end,
             HasFullBidResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasFullBidResults))
-                return
-              end
               assertEquals('function', type(ns.HasFullBidResults))
             end,
             HasFullBrowseResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasFullBrowseResults))
-                return
-              end
               assertEquals('function', type(ns.HasFullBrowseResults))
             end,
             HasFullCommoditySearchResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasFullCommoditySearchResults))
-                return
-              end
               assertEquals('function', type(ns.HasFullCommoditySearchResults))
             end,
             HasFullItemSearchResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasFullItemSearchResults))
-                return
-              end
               assertEquals('function', type(ns.HasFullItemSearchResults))
             end,
             HasFullOwnedAuctionResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasFullOwnedAuctionResults))
-                return
-              end
               assertEquals('function', type(ns.HasFullOwnedAuctionResults))
             end,
             HasMaxFavorites = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasMaxFavorites))
-                return
-              end
               assertEquals('function', type(ns.HasMaxFavorites))
             end,
             HasSearchResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasSearchResults))
-                return
-              end
               assertEquals('function', type(ns.HasSearchResults))
             end,
             IsFavoriteItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsFavoriteItem))
-                return
-              end
               assertEquals('function', type(ns.IsFavoriteItem))
             end,
             IsSellItemValid = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSellItemValid))
-                return
-              end
               assertEquals('function', type(ns.IsSellItemValid))
             end,
             IsThrottledMessageSystemReady = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsThrottledMessageSystemReady))
-                return
-              end
               assertEquals('function', type(ns.IsThrottledMessageSystemReady))
             end,
             MakeItemKey = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.MakeItemKey))
-                return
-              end
               assertEquals('function', type(ns.MakeItemKey))
             end,
             PlaceBid = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PlaceBid))
-                return
-              end
               assertEquals('function', type(ns.PlaceBid))
             end,
             PostCommodity = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PostCommodity))
-                return
-              end
               assertEquals('function', type(ns.PostCommodity))
             end,
             PostItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PostItem))
-                return
-              end
               assertEquals('function', type(ns.PostItem))
             end,
             QueryBids = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.QueryBids))
-                return
-              end
               assertEquals('function', type(ns.QueryBids))
             end,
             QueryOwnedAuctions = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.QueryOwnedAuctions))
-                return
-              end
               assertEquals('function', type(ns.QueryOwnedAuctions))
             end,
             RefreshCommoditySearchResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RefreshCommoditySearchResults))
-                return
-              end
               assertEquals('function', type(ns.RefreshCommoditySearchResults))
             end,
             RefreshItemSearchResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RefreshItemSearchResults))
-                return
-              end
               assertEquals('function', type(ns.RefreshItemSearchResults))
             end,
             ReplicateItems = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ReplicateItems))
-                return
-              end
               assertEquals('function', type(ns.ReplicateItems))
             end,
             RequestFavorites = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestFavorites))
-                return
-              end
               assertEquals('function', type(ns.RequestFavorites))
             end,
             RequestMoreBrowseResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestMoreBrowseResults))
-                return
-              end
               assertEquals('function', type(ns.RequestMoreBrowseResults))
             end,
             RequestMoreCommoditySearchResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestMoreCommoditySearchResults))
-                return
-              end
               assertEquals('function', type(ns.RequestMoreCommoditySearchResults))
             end,
             RequestMoreItemSearchResults = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestMoreItemSearchResults))
-                return
-              end
               assertEquals('function', type(ns.RequestMoreItemSearchResults))
             end,
             RequestOwnedAuctionBidderInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestOwnedAuctionBidderInfo))
-                return
-              end
               assertEquals('function', type(ns.RequestOwnedAuctionBidderInfo))
             end,
             SearchForFavorites = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SearchForFavorites))
-                return
-              end
               assertEquals('function', type(ns.SearchForFavorites))
             end,
             SearchForItemKeys = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SearchForItemKeys))
-                return
-              end
               assertEquals('function', type(ns.SearchForItemKeys))
             end,
             SendBrowseQuery = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SendBrowseQuery))
-                return
-              end
               assertEquals('function', type(ns.SendBrowseQuery))
             end,
             SendSearchQuery = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SendSearchQuery))
-                return
-              end
               assertEquals('function', type(ns.SendSearchQuery))
             end,
             SendSellSearchQuery = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SendSellSearchQuery))
-                return
-              end
               assertEquals('function', type(ns.SendSellSearchQuery))
             end,
             SetFavoriteItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetFavoriteItem))
-                return
-              end
               assertEquals('function', type(ns.SetFavoriteItem))
             end,
             StartCommoditiesPurchase = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.StartCommoditiesPurchase))
-                return
-              end
               assertEquals('function', type(ns.StartCommoditiesPurchase))
             end,
           }
@@ -1513,178 +885,78 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ApplyCustomizationChoices = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ApplyCustomizationChoices))
-                return
-              end
               assertEquals('function', type(ns.ApplyCustomizationChoices))
             end,
             Cancel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.Cancel))
-                return
-              end
               assertEquals('function', type(ns.Cancel))
             end,
             ClearPreviewChoices = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearPreviewChoices))
-                return
-              end
               assertEquals('function', type(ns.ClearPreviewChoices))
             end,
             GetAvailableCustomizations = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAvailableCustomizations))
-                return
-              end
               assertEquals('function', type(ns.GetAvailableCustomizations))
             end,
             GetCurrentCameraZoom = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentCameraZoom))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentCameraZoom))
             end,
             GetCurrentCharacterData = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentCharacterData))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentCharacterData))
             end,
             GetCurrentCost = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentCost))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentCost))
             end,
             HasAnyChanges = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasAnyChanges))
-                return
-              end
               assertEquals('function', type(ns.HasAnyChanges))
             end,
             IsViewingAlteredForm = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsViewingAlteredForm))
-                return
-              end
               assertEquals('function', type(ns.IsViewingAlteredForm))
             end,
             MarkCustomizationChoiceAsSeen = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.MarkCustomizationChoiceAsSeen))
-                return
-              end
               assertEquals('function', type(ns.MarkCustomizationChoiceAsSeen))
             end,
             MarkCustomizationOptionAsSeen = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.MarkCustomizationOptionAsSeen))
-                return
-              end
               assertEquals('function', type(ns.MarkCustomizationOptionAsSeen))
             end,
             PreviewCustomizationChoice = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PreviewCustomizationChoice))
-                return
-              end
               assertEquals('function', type(ns.PreviewCustomizationChoice))
             end,
             RandomizeCustomizationChoices = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RandomizeCustomizationChoices))
-                return
-              end
               assertEquals('function', type(ns.RandomizeCustomizationChoices))
             end,
             ResetCameraRotation = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ResetCameraRotation))
-                return
-              end
               assertEquals('function', type(ns.ResetCameraRotation))
             end,
             ResetCustomizationChoices = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ResetCustomizationChoices))
-                return
-              end
               assertEquals('function', type(ns.ResetCustomizationChoices))
             end,
             RotateCamera = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RotateCamera))
-                return
-              end
               assertEquals('function', type(ns.RotateCamera))
             end,
             SaveSeenChoices = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SaveSeenChoices))
-                return
-              end
               assertEquals('function', type(ns.SaveSeenChoices))
             end,
             SetCameraDistanceOffset = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetCameraDistanceOffset))
-                return
-              end
               assertEquals('function', type(ns.SetCameraDistanceOffset))
             end,
             SetCameraZoomLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetCameraZoomLevel))
-                return
-              end
               assertEquals('function', type(ns.SetCameraZoomLevel))
             end,
             SetCustomizationChoice = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetCustomizationChoice))
-                return
-              end
               assertEquals('function', type(ns.SetCustomizationChoice))
             end,
             SetModelDressState = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetModelDressState))
-                return
-              end
               assertEquals('function', type(ns.SetModelDressState))
             end,
             SetSelectedSex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetSelectedSex))
-                return
-              end
               assertEquals('function', type(ns.SetSelectedSex))
             end,
             SetViewingAlteredForm = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetViewingAlteredForm))
-                return
-              end
               assertEquals('function', type(ns.SetViewingAlteredForm))
             end,
             SetViewingShapeshiftForm = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetViewingShapeshiftForm))
-                return
-              end
               assertEquals('function', type(ns.SetViewingShapeshiftForm))
             end,
             ZoomCamera = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ZoomCamera))
-                return
-              end
               assertEquals('function', type(ns.ZoomCamera))
             end,
           }
@@ -1699,52 +971,24 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetAccountInfoByGUID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAccountInfoByGUID))
-                return
-              end
               assertEquals('function', type(ns.GetAccountInfoByGUID))
             end,
             GetAccountInfoByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAccountInfoByID))
-                return
-              end
               assertEquals('function', type(ns.GetAccountInfoByID))
             end,
             GetFriendAccountInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFriendAccountInfo))
-                return
-              end
               assertEquals('function', type(ns.GetFriendAccountInfo))
             end,
             GetFriendGameAccountInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFriendGameAccountInfo))
-                return
-              end
               assertEquals('function', type(ns.GetFriendGameAccountInfo))
             end,
             GetFriendNumGameAccounts = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFriendNumGameAccounts))
-                return
-              end
               assertEquals('function', type(ns.GetFriendNumGameAccounts))
             end,
             GetGameAccountInfoByGUID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetGameAccountInfoByGUID))
-                return
-              end
               assertEquals('function', type(ns.GetGameAccountInfoByGUID))
             end,
             GetGameAccountInfoByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetGameAccountInfoByID))
-                return
-              end
               assertEquals('function', type(ns.GetGameAccountInfoByID))
             end,
           }
@@ -1769,24 +1013,12 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             Close = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.Close))
-                return
-              end
               assertEquals('function', type(ns.Close))
             end,
             IsViewOnly = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsViewOnly))
-                return
-              end
               assertEquals('function', type(ns.IsViewOnly))
             end,
             RequestItems = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestItems))
-                return
-              end
               assertEquals('function', type(ns.RequestItems))
             end,
           }
@@ -2113,73 +1345,33 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetAvailableCampaigns = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAvailableCampaigns))
-                return
-              end
               assertEquals('function', type(ns.GetAvailableCampaigns))
             end,
             GetCampaignChapterInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCampaignChapterInfo))
-                return
-              end
               assertEquals('function', type(ns.GetCampaignChapterInfo))
             end,
             GetCampaignID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCampaignID))
-                return
-              end
               assertEquals('function', type(ns.GetCampaignID))
             end,
             GetCampaignInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCampaignInfo))
-                return
-              end
               assertEquals('function', type(ns.GetCampaignInfo))
             end,
             GetChapterIDs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetChapterIDs))
-                return
-              end
               assertEquals('function', type(ns.GetChapterIDs))
             end,
             GetCurrentChapterID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentChapterID))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentChapterID))
             end,
             GetFailureReason = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFailureReason))
-                return
-              end
               assertEquals('function', type(ns.GetFailureReason))
             end,
             GetState = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetState))
-                return
-              end
               assertEquals('function', type(ns.GetState))
             end,
             IsCampaignQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsCampaignQuest))
-                return
-              end
               assertEquals('function', type(ns.IsCampaignQuest))
             end,
             UsesNormalQuestIcons = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.UsesNormalQuestIcons))
-                return
-              end
               assertEquals('function', type(ns.UsesNormalQuestIcons))
             end,
           }
@@ -2194,192 +1386,84 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CanUseKeystoneInCurrentMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanUseKeystoneInCurrentMap))
-                return
-              end
               assertEquals('function', type(ns.CanUseKeystoneInCurrentMap))
             end,
             ClearKeystone = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearKeystone))
-                return
-              end
               assertEquals('function', type(ns.ClearKeystone))
             end,
             CloseKeystoneFrame = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseKeystoneFrame))
-                return
-              end
               assertEquals('function', type(ns.CloseKeystoneFrame))
             end,
             GetActiveChallengeMapID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetActiveChallengeMapID))
-                return
-              end
               assertEquals('function', type(ns.GetActiveChallengeMapID))
             end,
             GetActiveKeystoneInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetActiveKeystoneInfo))
-                return
-              end
               assertEquals('function', type(ns.GetActiveKeystoneInfo))
             end,
             GetAffixInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAffixInfo))
-                return
-              end
               assertEquals('function', type(ns.GetAffixInfo))
             end,
             GetCompletionInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCompletionInfo))
-                return
-              end
               assertEquals('function', type(ns.GetCompletionInfo))
             end,
             GetDeathCount = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDeathCount))
-                return
-              end
               assertEquals('function', type(ns.GetDeathCount))
             end,
             GetDungeonScoreRarityColor = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDungeonScoreRarityColor))
-                return
-              end
               assertEquals('function', type(ns.GetDungeonScoreRarityColor))
             end,
             GetGuildLeaders = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetGuildLeaders))
-                return
-              end
               assertEquals('function', type(ns.GetGuildLeaders))
             end,
             GetKeystoneLevelRarityColor = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetKeystoneLevelRarityColor))
-                return
-              end
               assertEquals('function', type(ns.GetKeystoneLevelRarityColor))
             end,
             GetMapScoreInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMapScoreInfo))
-                return
-              end
               assertEquals('function', type(ns.GetMapScoreInfo))
             end,
             GetMapTable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMapTable))
-                return
-              end
               assertEquals('function', type(ns.GetMapTable))
             end,
             GetMapUIInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMapUIInfo))
-                return
-              end
               assertEquals('function', type(ns.GetMapUIInfo))
             end,
             GetOverallDungeonScore = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOverallDungeonScore))
-                return
-              end
               assertEquals('function', type(ns.GetOverallDungeonScore))
             end,
             GetPowerLevelDamageHealthMod = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPowerLevelDamageHealthMod))
-                return
-              end
               assertEquals('function', type(ns.GetPowerLevelDamageHealthMod))
             end,
             GetSlottedKeystoneInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSlottedKeystoneInfo))
-                return
-              end
               assertEquals('function', type(ns.GetSlottedKeystoneInfo))
             end,
             GetSpecificDungeonOverallScoreRarityColor = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSpecificDungeonOverallScoreRarityColor))
-                return
-              end
               assertEquals('function', type(ns.GetSpecificDungeonOverallScoreRarityColor))
             end,
             GetSpecificDungeonScoreRarityColor = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSpecificDungeonScoreRarityColor))
-                return
-              end
               assertEquals('function', type(ns.GetSpecificDungeonScoreRarityColor))
             end,
             HasSlottedKeystone = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasSlottedKeystone))
-                return
-              end
               assertEquals('function', type(ns.HasSlottedKeystone))
             end,
             IsChallengeModeActive = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsChallengeModeActive))
-                return
-              end
               assertEquals('function', type(ns.IsChallengeModeActive))
             end,
             RemoveKeystone = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RemoveKeystone))
-                return
-              end
               assertEquals('function', type(ns.RemoveKeystone))
             end,
             RequestLeaders = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestLeaders))
-                return
-              end
               assertEquals('function', type(ns.RequestLeaders))
             end,
             Reset = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.Reset))
-                return
-              end
               assertEquals('function', type(ns.Reset))
             end,
             SetKeystoneTooltip = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetKeystoneTooltip))
-                return
-              end
               assertEquals('function', type(ns.SetKeystoneTooltip))
             end,
             SlotKeystone = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SlotKeystone))
-                return
-              end
               assertEquals('function', type(ns.SlotKeystone))
             end,
             StartChallengeMode = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.StartChallengeMode))
-                return
-              end
               assertEquals('function', type(ns.StartChallengeMode))
             end,
           }
@@ -2581,31 +1665,15 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CloseUI = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseUI))
-                return
-              end
               assertEquals('function', type(ns.CloseUI))
             end,
             GetChromieTimeExpansionOption = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetChromieTimeExpansionOption))
-                return
-              end
               assertEquals('function', type(ns.GetChromieTimeExpansionOption))
             end,
             GetChromieTimeExpansionOptions = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetChromieTimeExpansionOptions))
-                return
-              end
               assertEquals('function', type(ns.GetChromieTimeExpansionOptions))
             end,
             SelectChromieTimeOption = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SelectChromieTimeOption))
-                return
-              end
               assertEquals('function', type(ns.SelectChromieTimeOption))
             end,
           }
@@ -2620,10 +1688,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetClassColor = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetClassColor))
-                return
-              end
               assertEquals('function', type(ns.GetClassColor))
             end,
           }
@@ -2638,17 +1702,9 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetClassTrialLogoutTimeSeconds = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetClassTrialLogoutTimeSeconds))
-                return
-              end
               assertEquals('function', type(ns.GetClassTrialLogoutTimeSeconds))
             end,
             IsClassTrialCharacter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsClassTrialCharacter))
-                return
-              end
               assertEquals('function', type(ns.IsClassTrialCharacter))
             end,
           }
@@ -2663,80 +1719,36 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CanSpellBeClickBound = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanSpellBeClickBound))
-                return
-              end
               assertEquals('function', type(ns.CanSpellBeClickBound))
             end,
             ExecuteBinding = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ExecuteBinding))
-                return
-              end
               assertEquals('function', type(ns.ExecuteBinding))
             end,
             GetBindingType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBindingType))
-                return
-              end
               assertEquals('function', type(ns.GetBindingType))
             end,
             GetEffectiveInteractionButton = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetEffectiveInteractionButton))
-                return
-              end
               assertEquals('function', type(ns.GetEffectiveInteractionButton))
             end,
             GetProfileInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetProfileInfo))
-                return
-              end
               assertEquals('function', type(ns.GetProfileInfo))
             end,
             GetStringFromModifiers = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetStringFromModifiers))
-                return
-              end
               assertEquals('function', type(ns.GetStringFromModifiers))
             end,
             GetTutorialShown = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTutorialShown))
-                return
-              end
               assertEquals('function', type(ns.GetTutorialShown))
             end,
             MakeModifiers = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.MakeModifiers))
-                return
-              end
               assertEquals('function', type(ns.MakeModifiers))
             end,
             ResetCurrentProfile = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ResetCurrentProfile))
-                return
-              end
               assertEquals('function', type(ns.ResetCurrentProfile))
             end,
             SetProfileByInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetProfileByInfo))
-                return
-              end
               assertEquals('function', type(ns.SetProfileByInfo))
             end,
             SetTutorialShown = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetTutorialShown))
-                return
-              end
               assertEquals('function', type(ns.SetTutorialShown))
             end,
           }
@@ -3023,381 +2035,165 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ApplicantAcceptClubInvite = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ApplicantAcceptClubInvite))
-                return
-              end
               assertEquals('function', type(ns.ApplicantAcceptClubInvite))
             end,
             ApplicantDeclineClubInvite = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ApplicantDeclineClubInvite))
-                return
-              end
               assertEquals('function', type(ns.ApplicantDeclineClubInvite))
             end,
             CancelMembershipRequest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CancelMembershipRequest))
-                return
-              end
               assertEquals('function', type(ns.CancelMembershipRequest))
             end,
             CheckAllPlayerApplicantSettings = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CheckAllPlayerApplicantSettings))
-                return
-              end
               assertEquals('function', type(ns.CheckAllPlayerApplicantSettings))
             end,
             ClearAllFinderCache = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearAllFinderCache))
-                return
-              end
               assertEquals('function', type(ns.ClearAllFinderCache))
             end,
             ClearClubApplicantsCache = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearClubApplicantsCache))
-                return
-              end
               assertEquals('function', type(ns.ClearClubApplicantsCache))
             end,
             ClearClubFinderPostingsCache = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearClubFinderPostingsCache))
-                return
-              end
               assertEquals('function', type(ns.ClearClubFinderPostingsCache))
             end,
             DoesPlayerBelongToClubFromClubGUID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.DoesPlayerBelongToClubFromClubGUID))
-                return
-              end
               assertEquals('function', type(ns.DoesPlayerBelongToClubFromClubGUID))
             end,
             GetClubFinderDisableReason = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetClubFinderDisableReason))
-                return
-              end
               assertEquals('function', type(ns.GetClubFinderDisableReason))
             end,
             GetClubRecruitmentSettings = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetClubRecruitmentSettings))
-                return
-              end
               assertEquals('function', type(ns.GetClubRecruitmentSettings))
             end,
             GetClubTypeFromFinderGUID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetClubTypeFromFinderGUID))
-                return
-              end
               assertEquals('function', type(ns.GetClubTypeFromFinderGUID))
             end,
             GetFocusIndexFromFlag = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFocusIndexFromFlag))
-                return
-              end
               assertEquals('function', type(ns.GetFocusIndexFromFlag))
             end,
             GetPlayerApplicantLocaleFlags = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPlayerApplicantLocaleFlags))
-                return
-              end
               assertEquals('function', type(ns.GetPlayerApplicantLocaleFlags))
             end,
             GetPlayerApplicantSettings = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPlayerApplicantSettings))
-                return
-              end
               assertEquals('function', type(ns.GetPlayerApplicantSettings))
             end,
             GetPlayerClubApplicationStatus = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPlayerClubApplicationStatus))
-                return
-              end
               assertEquals('function', type(ns.GetPlayerClubApplicationStatus))
             end,
             GetPlayerSettingsFocusFlagsSelectedCount = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPlayerSettingsFocusFlagsSelectedCount))
-                return
-              end
               assertEquals('function', type(ns.GetPlayerSettingsFocusFlagsSelectedCount))
             end,
             GetPostingIDFromClubFinderGUID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPostingIDFromClubFinderGUID))
-                return
-              end
               assertEquals('function', type(ns.GetPostingIDFromClubFinderGUID))
             end,
             GetRecruitingClubInfoFromClubID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRecruitingClubInfoFromClubID))
-                return
-              end
               assertEquals('function', type(ns.GetRecruitingClubInfoFromClubID))
             end,
             GetRecruitingClubInfoFromFinderGUID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRecruitingClubInfoFromFinderGUID))
-                return
-              end
               assertEquals('function', type(ns.GetRecruitingClubInfoFromFinderGUID))
             end,
             GetStatusOfPostingFromClubId = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetStatusOfPostingFromClubId))
-                return
-              end
               assertEquals('function', type(ns.GetStatusOfPostingFromClubId))
             end,
             GetTotalMatchingCommunityListSize = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTotalMatchingCommunityListSize))
-                return
-              end
               assertEquals('function', type(ns.GetTotalMatchingCommunityListSize))
             end,
             GetTotalMatchingGuildListSize = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTotalMatchingGuildListSize))
-                return
-              end
               assertEquals('function', type(ns.GetTotalMatchingGuildListSize))
             end,
             HasAlreadyAppliedToLinkedPosting = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasAlreadyAppliedToLinkedPosting))
-                return
-              end
               assertEquals('function', type(ns.HasAlreadyAppliedToLinkedPosting))
             end,
             HasPostingBeenDelisted = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasPostingBeenDelisted))
-                return
-              end
               assertEquals('function', type(ns.HasPostingBeenDelisted))
             end,
             IsEnabled = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsEnabled))
-                return
-              end
               assertEquals('function', type(ns.IsEnabled))
             end,
             IsListingEnabledFromFlags = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsListingEnabledFromFlags))
-                return
-              end
               assertEquals('function', type(ns.IsListingEnabledFromFlags))
             end,
             IsPostingBanned = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsPostingBanned))
-                return
-              end
               assertEquals('function', type(ns.IsPostingBanned))
             end,
             LookupClubPostingFromClubFinderGUID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.LookupClubPostingFromClubFinderGUID))
-                return
-              end
               assertEquals('function', type(ns.LookupClubPostingFromClubFinderGUID))
             end,
             PlayerGetClubInvitationList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PlayerGetClubInvitationList))
-                return
-              end
               assertEquals('function', type(ns.PlayerGetClubInvitationList))
             end,
             PlayerRequestPendingClubsList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PlayerRequestPendingClubsList))
-                return
-              end
               assertEquals('function', type(ns.PlayerRequestPendingClubsList))
             end,
             PlayerReturnPendingCommunitiesList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PlayerReturnPendingCommunitiesList))
-                return
-              end
               assertEquals('function', type(ns.PlayerReturnPendingCommunitiesList))
             end,
             PlayerReturnPendingGuildsList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PlayerReturnPendingGuildsList))
-                return
-              end
               assertEquals('function', type(ns.PlayerReturnPendingGuildsList))
             end,
             PostClub = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PostClub))
-                return
-              end
               assertEquals('function', type(ns.PostClub))
             end,
             ReportPosting = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ReportPosting))
-                return
-              end
               assertEquals('function', type(ns.ReportPosting))
             end,
             RequestApplicantList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestApplicantList))
-                return
-              end
               assertEquals('function', type(ns.RequestApplicantList))
             end,
             RequestClubsList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestClubsList))
-                return
-              end
               assertEquals('function', type(ns.RequestClubsList))
             end,
             RequestMembershipToClub = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestMembershipToClub))
-                return
-              end
               assertEquals('function', type(ns.RequestMembershipToClub))
             end,
             RequestNextCommunityPage = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestNextCommunityPage))
-                return
-              end
               assertEquals('function', type(ns.RequestNextCommunityPage))
             end,
             RequestNextGuildPage = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestNextGuildPage))
-                return
-              end
               assertEquals('function', type(ns.RequestNextGuildPage))
             end,
             RequestPostingInformationFromClubId = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestPostingInformationFromClubId))
-                return
-              end
               assertEquals('function', type(ns.RequestPostingInformationFromClubId))
             end,
             RequestSubscribedClubPostingIDs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestSubscribedClubPostingIDs))
-                return
-              end
               assertEquals('function', type(ns.RequestSubscribedClubPostingIDs))
             end,
             ResetClubPostingMapCache = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ResetClubPostingMapCache))
-                return
-              end
               assertEquals('function', type(ns.ResetClubPostingMapCache))
             end,
             RespondToApplicant = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RespondToApplicant))
-                return
-              end
               assertEquals('function', type(ns.RespondToApplicant))
             end,
             ReturnClubApplicantList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ReturnClubApplicantList))
-                return
-              end
               assertEquals('function', type(ns.ReturnClubApplicantList))
             end,
             ReturnMatchingCommunityList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ReturnMatchingCommunityList))
-                return
-              end
               assertEquals('function', type(ns.ReturnMatchingCommunityList))
             end,
             ReturnMatchingGuildList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ReturnMatchingGuildList))
-                return
-              end
               assertEquals('function', type(ns.ReturnMatchingGuildList))
             end,
             ReturnPendingClubApplicantList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ReturnPendingClubApplicantList))
-                return
-              end
               assertEquals('function', type(ns.ReturnPendingClubApplicantList))
             end,
             SendChatWhisper = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SendChatWhisper))
-                return
-              end
               assertEquals('function', type(ns.SendChatWhisper))
             end,
             SetAllRecruitmentSettings = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetAllRecruitmentSettings))
-                return
-              end
               assertEquals('function', type(ns.SetAllRecruitmentSettings))
             end,
             SetPlayerApplicantLocaleFlags = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetPlayerApplicantLocaleFlags))
-                return
-              end
               assertEquals('function', type(ns.SetPlayerApplicantLocaleFlags))
             end,
             SetPlayerApplicantSettings = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetPlayerApplicantSettings))
-                return
-              end
               assertEquals('function', type(ns.SetPlayerApplicantSettings))
             end,
             SetRecruitmentLocale = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetRecruitmentLocale))
-                return
-              end
               assertEquals('function', type(ns.SetRecruitmentLocale))
             end,
             SetRecruitmentSettings = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetRecruitmentSettings))
-                return
-              end
               assertEquals('function', type(ns.SetRecruitmentSettings))
             end,
             ShouldShowClubFinder = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ShouldShowClubFinder))
-                return
-              end
               assertEquals('function', type(ns.ShouldShowClubFinder))
             end,
           }
@@ -3840,129 +2636,57 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             Close = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.Close))
-                return
-              end
               assertEquals('function', type(ns.Close))
             end,
             Contribute = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.Contribute))
-                return
-              end
               assertEquals('function', type(ns.Contribute))
             end,
             GetActive = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetActive))
-                return
-              end
               assertEquals('function', type(ns.GetActive))
             end,
             GetAtlases = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAtlases))
-                return
-              end
               assertEquals('function', type(ns.GetAtlases))
             end,
             GetBuffs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBuffs))
-                return
-              end
               assertEquals('function', type(ns.GetBuffs))
             end,
             GetContributionAppearance = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetContributionAppearance))
-                return
-              end
               assertEquals('function', type(ns.GetContributionAppearance))
             end,
             GetContributionCollectorsForMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetContributionCollectorsForMap))
-                return
-              end
               assertEquals('function', type(ns.GetContributionCollectorsForMap))
             end,
             GetContributionResult = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetContributionResult))
-                return
-              end
               assertEquals('function', type(ns.GetContributionResult))
             end,
             GetDescription = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDescription))
-                return
-              end
               assertEquals('function', type(ns.GetDescription))
             end,
             GetManagedContributionsForCreatureID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetManagedContributionsForCreatureID))
-                return
-              end
               assertEquals('function', type(ns.GetManagedContributionsForCreatureID))
             end,
             GetName = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetName))
-                return
-              end
               assertEquals('function', type(ns.GetName))
             end,
             GetOrderIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOrderIndex))
-                return
-              end
               assertEquals('function', type(ns.GetOrderIndex))
             end,
             GetRequiredContributionCurrency = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRequiredContributionCurrency))
-                return
-              end
               assertEquals('function', type(ns.GetRequiredContributionCurrency))
             end,
             GetRequiredContributionItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRequiredContributionItem))
-                return
-              end
               assertEquals('function', type(ns.GetRequiredContributionItem))
             end,
             GetRewardQuestID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRewardQuestID))
-                return
-              end
               assertEquals('function', type(ns.GetRewardQuestID))
             end,
             GetState = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetState))
-                return
-              end
               assertEquals('function', type(ns.GetState))
             end,
             HasPendingContribution = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasPendingContribution))
-                return
-              end
               assertEquals('function', type(ns.HasPendingContribution))
             end,
             IsAwaitingRewardQuestData = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsAwaitingRewardQuestData))
-                return
-              end
               assertEquals('function', type(ns.IsAwaitingRewardQuestData))
             end,
           }
@@ -3977,17 +2701,9 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             AreCallingsUnlocked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AreCallingsUnlocked))
-                return
-              end
               assertEquals('function', type(ns.AreCallingsUnlocked))
             end,
             RequestCallings = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestCallings))
-                return
-              end
               assertEquals('function', type(ns.RequestCallings))
             end,
           }
@@ -4002,17 +2718,9 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CloseFromUI = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseFromUI))
-                return
-              end
               assertEquals('function', type(ns.CloseFromUI))
             end,
             GetCovenantInfoForPlayerChoiceResponseID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCovenantInfoForPlayerChoiceResponseID))
-                return
-              end
               assertEquals('function', type(ns.GetCovenantInfoForPlayerChoiceResponseID))
             end,
           }
@@ -4027,115 +2735,51 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CanAccessReservoir = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanAccessReservoir))
-                return
-              end
               assertEquals('function', type(ns.CanAccessReservoir))
             end,
             CanDepositAnima = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanDepositAnima))
-                return
-              end
               assertEquals('function', type(ns.CanDepositAnima))
             end,
             DepositAnima = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.DepositAnima))
-                return
-              end
               assertEquals('function', type(ns.DepositAnima))
             end,
             EndInteraction = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.EndInteraction))
-                return
-              end
               assertEquals('function', type(ns.EndInteraction))
             end,
             GetAnimaInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAnimaInfo))
-                return
-              end
               assertEquals('function', type(ns.GetAnimaInfo))
             end,
             GetCurrentTalentTreeID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentTalentTreeID))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentTalentTreeID))
             end,
             GetFeatures = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFeatures))
-                return
-              end
               assertEquals('function', type(ns.GetFeatures))
             end,
             GetRenownLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRenownLevel))
-                return
-              end
               assertEquals('function', type(ns.GetRenownLevel))
             end,
             GetRenownLevels = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRenownLevels))
-                return
-              end
               assertEquals('function', type(ns.GetRenownLevels))
             end,
             GetRenownRewardsForLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRenownRewardsForLevel))
-                return
-              end
               assertEquals('function', type(ns.GetRenownRewardsForLevel))
             end,
             GetSanctumType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSanctumType))
-                return
-              end
               assertEquals('function', type(ns.GetSanctumType))
             end,
             GetSoulCurrencies = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSoulCurrencies))
-                return
-              end
               assertEquals('function', type(ns.GetSoulCurrencies))
             end,
             HasMaximumRenown = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasMaximumRenown))
-                return
-              end
               assertEquals('function', type(ns.HasMaximumRenown))
             end,
             IsPlayerInRenownCatchUpMode = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsPlayerInRenownCatchUpMode))
-                return
-              end
               assertEquals('function', type(ns.IsPlayerInRenownCatchUpMode))
             end,
             IsWeeklyRenownCapped = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsWeeklyRenownCapped))
-                return
-              end
               assertEquals('function', type(ns.IsWeeklyRenownCapped))
             end,
             RequestCatchUpState = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestCatchUpState))
-                return
-              end
               assertEquals('function', type(ns.RequestCatchUpState))
             end,
           }
@@ -4150,24 +2794,12 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetActiveCovenantID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetActiveCovenantID))
-                return
-              end
               assertEquals('function', type(ns.GetActiveCovenantID))
             end,
             GetCovenantData = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCovenantData))
-                return
-              end
               assertEquals('function', type(ns.GetCovenantData))
             end,
             GetCovenantIDs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCovenantIDs))
-                return
-              end
               assertEquals('function', type(ns.GetCovenantIDs))
             end,
           }
@@ -4414,94 +3046,42 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetDungeonEntrancesForMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDungeonEntrancesForMap))
-                return
-              end
               assertEquals('function', type(ns.GetDungeonEntrancesForMap))
             end,
             GetEncountersOnMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetEncountersOnMap))
-                return
-              end
               assertEquals('function', type(ns.GetEncountersOnMap))
             end,
             GetLootInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetLootInfo))
-                return
-              end
               assertEquals('function', type(ns.GetLootInfo))
             end,
             GetLootInfoByIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetLootInfoByIndex))
-                return
-              end
               assertEquals('function', type(ns.GetLootInfoByIndex))
             end,
             GetSectionIconFlags = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSectionIconFlags))
-                return
-              end
               assertEquals('function', type(ns.GetSectionIconFlags))
             end,
             GetSectionInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSectionInfo))
-                return
-              end
               assertEquals('function', type(ns.GetSectionInfo))
             end,
             GetSlotFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSlotFilter))
-                return
-              end
               assertEquals('function', type(ns.GetSlotFilter))
             end,
             InstanceHasLoot = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.InstanceHasLoot))
-                return
-              end
               assertEquals('function', type(ns.InstanceHasLoot))
             end,
             IsEncounterComplete = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsEncounterComplete))
-                return
-              end
               assertEquals('function', type(ns.IsEncounterComplete))
             end,
             ResetSlotFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ResetSlotFilter))
-                return
-              end
               assertEquals('function', type(ns.ResetSlotFilter))
             end,
             SetPreviewMythicPlusLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetPreviewMythicPlusLevel))
-                return
-              end
               assertEquals('function', type(ns.SetPreviewMythicPlusLevel))
             end,
             SetPreviewPvpTier = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetPreviewPvpTier))
-                return
-              end
               assertEquals('function', type(ns.SetPreviewPvpTier))
             end,
             SetSlotFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetSlotFilter))
-                return
-              end
               assertEquals('function', type(ns.SetSlotFilter))
             end,
           }
@@ -4592,24 +3172,12 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetLevelUpDisplayToastsFromLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetLevelUpDisplayToastsFromLevel))
-                return
-              end
               assertEquals('function', type(ns.GetLevelUpDisplayToastsFromLevel))
             end,
             GetNextToastToDisplay = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNextToastToDisplay))
-                return
-              end
               assertEquals('function', type(ns.GetNextToastToDisplay))
             end,
             RemoveCurrentToast = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RemoveCurrentToast))
-                return
-              end
               assertEquals('function', type(ns.RemoveCurrentToast))
             end,
           }
@@ -4624,17 +3192,9 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetFogOfWarForMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFogOfWarForMap))
-                return
-              end
               assertEquals('function', type(ns.GetFogOfWarForMap))
             end,
             GetFogOfWarInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFogOfWarInfo))
-                return
-              end
               assertEquals('function', type(ns.GetFogOfWarInfo))
             end,
           }
@@ -4649,10 +3209,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetFrameVisibilityState = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFrameVisibilityState))
-                return
-              end
               assertEquals('function', type(ns.GetFrameVisibilityState))
             end,
           }
@@ -4848,395 +3404,171 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             AddFollowerToMission = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AddFollowerToMission))
-                return
-              end
               assertEquals('function', type(ns.AddFollowerToMission))
             end,
             CloseGarrisonTradeskillNPC = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseGarrisonTradeskillNPC))
-                return
-              end
               assertEquals('function', type(ns.CloseGarrisonTradeskillNPC))
             end,
             GetAllEncounterThreats = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAllEncounterThreats))
-                return
-              end
               assertEquals('function', type(ns.GetAllEncounterThreats))
             end,
             GetAutoCombatDamageClassValues = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAutoCombatDamageClassValues))
-                return
-              end
               assertEquals('function', type(ns.GetAutoCombatDamageClassValues))
             end,
             GetAutoMissionBoardState = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAutoMissionBoardState))
-                return
-              end
               assertEquals('function', type(ns.GetAutoMissionBoardState))
             end,
             GetAutoMissionEnvironmentEffect = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAutoMissionEnvironmentEffect))
-                return
-              end
               assertEquals('function', type(ns.GetAutoMissionEnvironmentEffect))
             end,
             GetAutoMissionTargetingInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAutoMissionTargetingInfo))
-                return
-              end
               assertEquals('function', type(ns.GetAutoMissionTargetingInfo))
             end,
             GetAutoMissionTargetingInfoForSpell = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAutoMissionTargetingInfoForSpell))
-                return
-              end
               assertEquals('function', type(ns.GetAutoMissionTargetingInfoForSpell))
             end,
             GetAutoTroops = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAutoTroops))
-                return
-              end
               assertEquals('function', type(ns.GetAutoTroops))
             end,
             GetAvailableMissions = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAvailableMissions))
-                return
-              end
               assertEquals('function', type(ns.GetAvailableMissions))
             end,
             GetAvailableRecruits = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAvailableRecruits))
-                return
-              end
               assertEquals('function', type(ns.GetAvailableRecruits))
             end,
             GetBuildingSizes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBuildingSizes))
-                return
-              end
               assertEquals('function', type(ns.GetBuildingSizes))
             end,
             GetCombatAllyMission = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCombatAllyMission))
-                return
-              end
               assertEquals('function', type(ns.GetCombatAllyMission))
             end,
             GetCombatLogSpellInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCombatLogSpellInfo))
-                return
-              end
               assertEquals('function', type(ns.GetCombatLogSpellInfo))
             end,
             GetCurrencyTypes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrencyTypes))
-                return
-              end
               assertEquals('function', type(ns.GetCurrencyTypes))
             end,
             GetCurrentCypherEquipmentLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentCypherEquipmentLevel))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentCypherEquipmentLevel))
             end,
             GetCurrentGarrTalentTreeFriendshipFactionID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentGarrTalentTreeFriendshipFactionID))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentGarrTalentTreeFriendshipFactionID))
             end,
             GetCurrentGarrTalentTreeID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentGarrTalentTreeID))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentGarrTalentTreeID))
             end,
             GetCyphersToNextEquipmentLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCyphersToNextEquipmentLevel))
-                return
-              end
               assertEquals('function', type(ns.GetCyphersToNextEquipmentLevel))
             end,
             GetFollowerAutoCombatSpells = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFollowerAutoCombatSpells))
-                return
-              end
               assertEquals('function', type(ns.GetFollowerAutoCombatSpells))
             end,
             GetFollowerAutoCombatStats = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFollowerAutoCombatStats))
-                return
-              end
               assertEquals('function', type(ns.GetFollowerAutoCombatStats))
             end,
             GetFollowerMissionCompleteInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFollowerMissionCompleteInfo))
-                return
-              end
               assertEquals('function', type(ns.GetFollowerMissionCompleteInfo))
             end,
             GetFollowerSoftCap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFollowerSoftCap))
-                return
-              end
               assertEquals('function', type(ns.GetFollowerSoftCap))
             end,
             GetFollowerXPTable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFollowerXPTable))
-                return
-              end
               assertEquals('function', type(ns.GetFollowerXPTable))
             end,
             GetFollowers = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFollowers))
-                return
-              end
               assertEquals('function', type(ns.GetFollowers))
             end,
             GetGarrisonPlotsInstancesForMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetGarrisonPlotsInstancesForMap))
-                return
-              end
               assertEquals('function', type(ns.GetGarrisonPlotsInstancesForMap))
             end,
             GetGarrisonTalentTreeCurrencyTypes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetGarrisonTalentTreeCurrencyTypes))
-                return
-              end
               assertEquals('function', type(ns.GetGarrisonTalentTreeCurrencyTypes))
             end,
             GetGarrisonTalentTreeType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetGarrisonTalentTreeType))
-                return
-              end
               assertEquals('function', type(ns.GetGarrisonTalentTreeType))
             end,
             GetInProgressMissions = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetInProgressMissions))
-                return
-              end
               assertEquals('function', type(ns.GetInProgressMissions))
             end,
             GetLandingPageGarrisonType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetLandingPageGarrisonType))
-                return
-              end
               assertEquals('function', type(ns.GetLandingPageGarrisonType))
             end,
             GetMaxCypherEquipmentLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMaxCypherEquipmentLevel))
-                return
-              end
               assertEquals('function', type(ns.GetMaxCypherEquipmentLevel))
             end,
             GetMissionCompleteEncounters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMissionCompleteEncounters))
-                return
-              end
               assertEquals('function', type(ns.GetMissionCompleteEncounters))
             end,
             GetMissionDeploymentInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMissionDeploymentInfo))
-                return
-              end
               assertEquals('function', type(ns.GetMissionDeploymentInfo))
             end,
             GetMissionEncounterIconInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMissionEncounterIconInfo))
-                return
-              end
               assertEquals('function', type(ns.GetMissionEncounterIconInfo))
             end,
             GetNumFollowers = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumFollowers))
-                return
-              end
               assertEquals('function', type(ns.GetNumFollowers))
             end,
             GetRecruiterAbilityCategories = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRecruiterAbilityCategories))
-                return
-              end
               assertEquals('function', type(ns.GetRecruiterAbilityCategories))
             end,
             GetRecruitmentPreferences = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRecruitmentPreferences))
-                return
-              end
               assertEquals('function', type(ns.GetRecruitmentPreferences))
             end,
             GetTalentInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTalentInfo))
-                return
-              end
               assertEquals('function', type(ns.GetTalentInfo))
             end,
             GetTalentPointsSpentInTalentTree = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTalentPointsSpentInTalentTree))
-                return
-              end
               assertEquals('function', type(ns.GetTalentPointsSpentInTalentTree))
             end,
             GetTalentTreeIDsByClassID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTalentTreeIDsByClassID))
-                return
-              end
               assertEquals('function', type(ns.GetTalentTreeIDsByClassID))
             end,
             GetTalentTreeInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTalentTreeInfo))
-                return
-              end
               assertEquals('function', type(ns.GetTalentTreeInfo))
             end,
             GetTalentTreeResetInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTalentTreeResetInfo))
-                return
-              end
               assertEquals('function', type(ns.GetTalentTreeResetInfo))
             end,
             GetTalentTreeTalentPointResearchInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTalentTreeTalentPointResearchInfo))
-                return
-              end
               assertEquals('function', type(ns.GetTalentTreeTalentPointResearchInfo))
             end,
             GetTalentUnlockWorldQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTalentUnlockWorldQuest))
-                return
-              end
               assertEquals('function', type(ns.GetTalentUnlockWorldQuest))
             end,
             HasAdventures = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasAdventures))
-                return
-              end
               assertEquals('function', type(ns.HasAdventures))
             end,
             IsAtGarrisonMissionNPC = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsAtGarrisonMissionNPC))
-                return
-              end
               assertEquals('function', type(ns.IsAtGarrisonMissionNPC))
             end,
             IsEnvironmentCountered = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsEnvironmentCountered))
-                return
-              end
               assertEquals('function', type(ns.IsEnvironmentCountered))
             end,
             IsFollowerOnCompletedMission = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsFollowerOnCompletedMission))
-                return
-              end
               assertEquals('function', type(ns.IsFollowerOnCompletedMission))
             end,
             IsPlayerInGarrison = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsPlayerInGarrison))
-                return
-              end
               assertEquals('function', type(ns.IsPlayerInGarrison))
             end,
             IsTalentConditionMet = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsTalentConditionMet))
-                return
-              end
               assertEquals('function', type(ns.IsTalentConditionMet))
             end,
             IsUsingPartyGarrison = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsUsingPartyGarrison))
-                return
-              end
               assertEquals('function', type(ns.IsUsingPartyGarrison))
             end,
             RegenerateCombatLog = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RegenerateCombatLog))
-                return
-              end
               assertEquals('function', type(ns.RegenerateCombatLog))
             end,
             RemoveFollowerFromMission = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RemoveFollowerFromMission))
-                return
-              end
               assertEquals('function', type(ns.RemoveFollowerFromMission))
             end,
             RushHealAllFollowers = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RushHealAllFollowers))
-                return
-              end
               assertEquals('function', type(ns.RushHealAllFollowers))
             end,
             RushHealFollower = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RushHealFollower))
-                return
-              end
               assertEquals('function', type(ns.RushHealFollower))
             end,
             SetAutoCombatSpellFastForward = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetAutoCombatSpellFastForward))
-                return
-              end
               assertEquals('function', type(ns.SetAutoCombatSpellFastForward))
             end,
           }
@@ -5425,52 +3757,24 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetClassAndSpecFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetClassAndSpecFilters))
-                return
-              end
               assertEquals('function', type(ns.GetClassAndSpecFilters))
             end,
             GetHeirloomInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetHeirloomInfo))
-                return
-              end
               assertEquals('function', type(ns.GetHeirloomInfo))
             end,
             GetHeirloomItemIDFromDisplayedIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetHeirloomItemIDFromDisplayedIndex))
-                return
-              end
               assertEquals('function', type(ns.GetHeirloomItemIDFromDisplayedIndex))
             end,
             GetHeirloomMaxUpgradeLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetHeirloomMaxUpgradeLevel))
-                return
-              end
               assertEquals('function', type(ns.GetHeirloomMaxUpgradeLevel))
             end,
             GetNumDisplayedHeirlooms = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumDisplayedHeirlooms))
-                return
-              end
               assertEquals('function', type(ns.GetNumDisplayedHeirlooms))
             end,
             SetClassAndSpecFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetClassAndSpecFilters))
-                return
-              end
               assertEquals('function', type(ns.SetClassAndSpecFilters))
             end,
             ShouldShowHeirloomHelp = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ShouldShowHeirloomHelp))
-                return
-              end
               assertEquals('function', type(ns.ShouldShowHeirloomHelp))
             end,
           }
@@ -5485,52 +3789,24 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             AreAllCollectionFiltersChecked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AreAllCollectionFiltersChecked))
-                return
-              end
               assertEquals('function', type(ns.AreAllCollectionFiltersChecked))
             end,
             AreAllSourceFiltersChecked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AreAllSourceFiltersChecked))
-                return
-              end
               assertEquals('function', type(ns.AreAllSourceFiltersChecked))
             end,
             IsHeirloomSourceValid = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsHeirloomSourceValid))
-                return
-              end
               assertEquals('function', type(ns.IsHeirloomSourceValid))
             end,
             IsUsingDefaultFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsUsingDefaultFilters))
-                return
-              end
               assertEquals('function', type(ns.IsUsingDefaultFilters))
             end,
             SetAllCollectionFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetAllCollectionFilters))
-                return
-              end
               assertEquals('function', type(ns.SetAllCollectionFilters))
             end,
             SetAllSourceFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetAllSourceFilters))
-                return
-              end
               assertEquals('function', type(ns.SetAllSourceFilters))
             end,
             SetDefaultFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetDefaultFilters))
-                return
-              end
               assertEquals('function', type(ns.SetDefaultFilters))
             end,
           }
@@ -5545,17 +3821,9 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             HasIncomingSummon = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasIncomingSummon))
-                return
-              end
               assertEquals('function', type(ns.HasIncomingSummon))
             end,
             IncomingSummonStatus = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IncomingSummonStatus))
-                return
-              end
               assertEquals('function', type(ns.IncomingSummonStatus))
             end,
           }
@@ -5570,31 +3838,15 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             AreInvasionsAvailable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AreInvasionsAvailable))
-                return
-              end
               assertEquals('function', type(ns.AreInvasionsAvailable))
             end,
             GetInvasionForUiMapID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetInvasionForUiMapID))
-                return
-              end
               assertEquals('function', type(ns.GetInvasionForUiMapID))
             end,
             GetInvasionInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetInvasionInfo))
-                return
-              end
               assertEquals('function', type(ns.GetInvasionInfo))
             end,
             GetInvasionTimeLeft = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetInvasionTimeLeft))
-                return
-              end
               assertEquals('function', type(ns.GetInvasionTimeLeft))
             end,
           }
@@ -5609,45 +3861,21 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CloseIslandsQueueScreen = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseIslandsQueueScreen))
-                return
-              end
               assertEquals('function', type(ns.CloseIslandsQueueScreen))
             end,
             GetIslandDifficultyInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetIslandDifficultyInfo))
-                return
-              end
               assertEquals('function', type(ns.GetIslandDifficultyInfo))
             end,
             GetIslandsMaxGroupSize = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetIslandsMaxGroupSize))
-                return
-              end
               assertEquals('function', type(ns.GetIslandsMaxGroupSize))
             end,
             GetIslandsWeeklyQuestID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetIslandsWeeklyQuestID))
-                return
-              end
               assertEquals('function', type(ns.GetIslandsWeeklyQuestID))
             end,
             QueueForIsland = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.QueueForIsland))
-                return
-              end
               assertEquals('function', type(ns.QueueForIsland))
             end,
             RequestPreloadRewardData = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestPreloadRewardData))
-                return
-              end
               assertEquals('function', type(ns.RequestPreloadRewardData))
             end,
           }
@@ -5877,87 +4105,39 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ClearPendingItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearPendingItem))
-                return
-              end
               assertEquals('function', type(ns.ClearPendingItem))
             end,
             CloseUI = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseUI))
-                return
-              end
               assertEquals('function', type(ns.CloseUI))
             end,
             GetChargeInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetChargeInfo))
-                return
-              end
               assertEquals('function', type(ns.GetChargeInfo))
             end,
             GetItemConversionCurrencyCost = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemConversionCurrencyCost))
-                return
-              end
               assertEquals('function', type(ns.GetItemConversionCurrencyCost))
             end,
             GetItemInteractionInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemInteractionInfo))
-                return
-              end
               assertEquals('function', type(ns.GetItemInteractionInfo))
             end,
             GetItemInteractionSpellId = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemInteractionSpellId))
-                return
-              end
               assertEquals('function', type(ns.GetItemInteractionSpellId))
             end,
             InitializeFrame = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.InitializeFrame))
-                return
-              end
               assertEquals('function', type(ns.InitializeFrame))
             end,
             PerformItemInteraction = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PerformItemInteraction))
-                return
-              end
               assertEquals('function', type(ns.PerformItemInteraction))
             end,
             Reset = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.Reset))
-                return
-              end
               assertEquals('function', type(ns.Reset))
             end,
             SetCorruptionReforgerItemTooltip = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetCorruptionReforgerItemTooltip))
-                return
-              end
               assertEquals('function', type(ns.SetCorruptionReforgerItemTooltip))
             end,
             SetItemConversionOutputTooltip = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetItemConversionOutputTooltip))
-                return
-              end
               assertEquals('function', type(ns.SetItemConversionOutputTooltip))
             end,
             SetPendingItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetPendingItem))
-                return
-              end
               assertEquals('function', type(ns.SetPendingItem))
             end,
           }
@@ -6382,143 +4562,63 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CloseRuneforgeInteraction = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseRuneforgeInteraction))
-                return
-              end
               assertEquals('function', type(ns.CloseRuneforgeInteraction))
             end,
             CraftRuneforgeLegendary = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CraftRuneforgeLegendary))
-                return
-              end
               assertEquals('function', type(ns.CraftRuneforgeLegendary))
             end,
             GetRuneforgeItemPreviewInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRuneforgeItemPreviewInfo))
-                return
-              end
               assertEquals('function', type(ns.GetRuneforgeItemPreviewInfo))
             end,
             GetRuneforgeLegendaryComponentInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRuneforgeLegendaryComponentInfo))
-                return
-              end
               assertEquals('function', type(ns.GetRuneforgeLegendaryComponentInfo))
             end,
             GetRuneforgeLegendaryCost = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRuneforgeLegendaryCost))
-                return
-              end
               assertEquals('function', type(ns.GetRuneforgeLegendaryCost))
             end,
             GetRuneforgeLegendaryCraftSpellID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRuneforgeLegendaryCraftSpellID))
-                return
-              end
               assertEquals('function', type(ns.GetRuneforgeLegendaryCraftSpellID))
             end,
             GetRuneforgeLegendaryCurrencies = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRuneforgeLegendaryCurrencies))
-                return
-              end
               assertEquals('function', type(ns.GetRuneforgeLegendaryCurrencies))
             end,
             GetRuneforgeLegendaryUpgradeCost = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRuneforgeLegendaryUpgradeCost))
-                return
-              end
               assertEquals('function', type(ns.GetRuneforgeLegendaryUpgradeCost))
             end,
             GetRuneforgeModifierInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRuneforgeModifierInfo))
-                return
-              end
               assertEquals('function', type(ns.GetRuneforgeModifierInfo))
             end,
             GetRuneforgeModifiers = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRuneforgeModifiers))
-                return
-              end
               assertEquals('function', type(ns.GetRuneforgeModifiers))
             end,
             GetRuneforgePowerInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRuneforgePowerInfo))
-                return
-              end
               assertEquals('function', type(ns.GetRuneforgePowerInfo))
             end,
             GetRuneforgePowerSlots = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRuneforgePowerSlots))
-                return
-              end
               assertEquals('function', type(ns.GetRuneforgePowerSlots))
             end,
             GetRuneforgePowers = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRuneforgePowers))
-                return
-              end
               assertEquals('function', type(ns.GetRuneforgePowers))
             end,
             GetRuneforgePowersByClassSpecAndCovenant = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRuneforgePowersByClassSpecAndCovenant))
-                return
-              end
               assertEquals('function', type(ns.GetRuneforgePowersByClassSpecAndCovenant))
             end,
             IsRuneforgeLegendary = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsRuneforgeLegendary))
-                return
-              end
               assertEquals('function', type(ns.IsRuneforgeLegendary))
             end,
             IsRuneforgeLegendaryMaxLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsRuneforgeLegendaryMaxLevel))
-                return
-              end
               assertEquals('function', type(ns.IsRuneforgeLegendaryMaxLevel))
             end,
             IsUpgradeItemValidForRuneforgeLegendary = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsUpgradeItemValidForRuneforgeLegendary))
-                return
-              end
               assertEquals('function', type(ns.IsUpgradeItemValidForRuneforgeLegendary))
             end,
             IsValidRuneforgeBaseItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsValidRuneforgeBaseItem))
-                return
-              end
               assertEquals('function', type(ns.IsValidRuneforgeBaseItem))
             end,
             MakeRuneforgeCraftDescription = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.MakeRuneforgeCraftDescription))
-                return
-              end
               assertEquals('function', type(ns.MakeRuneforgeCraftDescription))
             end,
             UpgradeRuneforgeLegendary = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.UpgradeRuneforgeLegendary))
-                return
-              end
               assertEquals('function', type(ns.UpgradeRuneforgeLegendary))
             end,
           }
@@ -6533,17 +4633,9 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             IsActionLocked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsActionLocked))
-                return
-              end
               assertEquals('function', type(ns.IsActionLocked))
             end,
             IsSpellLocked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSpellLocked))
-                return
-              end
               assertEquals('function', type(ns.IsSpellLocked))
             end,
           }
@@ -6558,17 +4650,9 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ConvertFollowerLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ConvertFollowerLevel))
-                return
-              end
               assertEquals('function', type(ns.ConvertFollowerLevel))
             end,
             ConvertPlayerLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ConvertPlayerLevel))
-                return
-              end
               assertEquals('function', type(ns.ConvertPlayerLevel))
             end,
           }
@@ -6609,17 +4693,9 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetItemSetItems = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemSetItems))
-                return
-              end
               assertEquals('function', type(ns.GetItemSetItems))
             end,
             GetItemSets = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemSets))
-                return
-              end
               assertEquals('function', type(ns.GetItemSets))
             end,
           }
@@ -6634,10 +4710,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             RequestLoreTextForCampaignID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestLoreTextForCampaignID))
-                return
-              end
               assertEquals('function', type(ns.RequestLoreTextForCampaignID))
             end,
           }
@@ -6891,52 +4963,24 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetDrawGroundTextures = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDrawGroundTextures))
-                return
-              end
               assertEquals('function', type(ns.GetDrawGroundTextures))
             end,
             GetUiMapID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetUiMapID))
-                return
-              end
               assertEquals('function', type(ns.GetUiMapID))
             end,
             GetViewRadius = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetViewRadius))
-                return
-              end
               assertEquals('function', type(ns.GetViewRadius))
             end,
             IsRotateMinimapIgnored = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsRotateMinimapIgnored))
-                return
-              end
               assertEquals('function', type(ns.IsRotateMinimapIgnored))
             end,
             SetDrawGroundTextures = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetDrawGroundTextures))
-                return
-              end
               assertEquals('function', type(ns.SetDrawGroundTextures))
             end,
             SetIgnoreRotateMinimap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetIgnoreRotateMinimap))
-                return
-              end
               assertEquals('function', type(ns.SetIgnoreRotateMinimap))
             end,
             ShouldUseHybridMinimap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ShouldUseHybridMinimap))
-                return
-              end
               assertEquals('function', type(ns.ShouldUseHybridMinimap))
             end,
           }
@@ -6982,10 +5026,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetModifiedInstanceInfoFromMapID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetModifiedInstanceInfoFromMapID))
-                return
-              end
               assertEquals('function', type(ns.GetModifiedInstanceInfoFromMapID))
             end,
           }
@@ -7000,283 +5040,123 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ApplyMountEquipment = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ApplyMountEquipment))
-                return
-              end
               assertEquals('function', type(ns.ApplyMountEquipment))
             end,
             AreMountEquipmentEffectsSuppressed = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AreMountEquipmentEffectsSuppressed))
-                return
-              end
               assertEquals('function', type(ns.AreMountEquipmentEffectsSuppressed))
             end,
             ClearFanfare = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearFanfare))
-                return
-              end
               assertEquals('function', type(ns.ClearFanfare))
             end,
             ClearRecentFanfares = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearRecentFanfares))
-                return
-              end
               assertEquals('function', type(ns.ClearRecentFanfares))
             end,
             Dismiss = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.Dismiss))
-                return
-              end
               assertEquals('function', type(ns.Dismiss))
             end,
             GetAppliedMountEquipmentID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAppliedMountEquipmentID))
-                return
-              end
               assertEquals('function', type(ns.GetAppliedMountEquipmentID))
             end,
             GetCollectedFilterSetting = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCollectedFilterSetting))
-                return
-              end
               assertEquals('function', type(ns.GetCollectedFilterSetting))
             end,
             GetDisplayedMountAllCreatureDisplayInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDisplayedMountAllCreatureDisplayInfo))
-                return
-              end
               assertEquals('function', type(ns.GetDisplayedMountAllCreatureDisplayInfo))
             end,
             GetDisplayedMountInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDisplayedMountInfo))
-                return
-              end
               assertEquals('function', type(ns.GetDisplayedMountInfo))
             end,
             GetDisplayedMountInfoExtra = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDisplayedMountInfoExtra))
-                return
-              end
               assertEquals('function', type(ns.GetDisplayedMountInfoExtra))
             end,
             GetIsFavorite = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetIsFavorite))
-                return
-              end
               assertEquals('function', type(ns.GetIsFavorite))
             end,
             GetMountAllCreatureDisplayInfoByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMountAllCreatureDisplayInfoByID))
-                return
-              end
               assertEquals('function', type(ns.GetMountAllCreatureDisplayInfoByID))
             end,
             GetMountEquipmentUnlockLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMountEquipmentUnlockLevel))
-                return
-              end
               assertEquals('function', type(ns.GetMountEquipmentUnlockLevel))
             end,
             GetMountFromItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMountFromItem))
-                return
-              end
               assertEquals('function', type(ns.GetMountFromItem))
             end,
             GetMountFromSpell = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMountFromSpell))
-                return
-              end
               assertEquals('function', type(ns.GetMountFromSpell))
             end,
             GetMountIDs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMountIDs))
-                return
-              end
               assertEquals('function', type(ns.GetMountIDs))
             end,
             GetMountInfoByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMountInfoByID))
-                return
-              end
               assertEquals('function', type(ns.GetMountInfoByID))
             end,
             GetMountInfoExtraByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMountInfoExtraByID))
-                return
-              end
               assertEquals('function', type(ns.GetMountInfoExtraByID))
             end,
             GetMountUsabilityByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMountUsabilityByID))
-                return
-              end
               assertEquals('function', type(ns.GetMountUsabilityByID))
             end,
             GetNumDisplayedMounts = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumDisplayedMounts))
-                return
-              end
               assertEquals('function', type(ns.GetNumDisplayedMounts))
             end,
             GetNumMounts = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumMounts))
-                return
-              end
               assertEquals('function', type(ns.GetNumMounts))
             end,
             GetNumMountsNeedingFanfare = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumMountsNeedingFanfare))
-                return
-              end
               assertEquals('function', type(ns.GetNumMountsNeedingFanfare))
             end,
             IsItemMountEquipment = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsItemMountEquipment))
-                return
-              end
               assertEquals('function', type(ns.IsItemMountEquipment))
             end,
             IsMountEquipmentApplied = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsMountEquipmentApplied))
-                return
-              end
               assertEquals('function', type(ns.IsMountEquipmentApplied))
             end,
             IsSourceChecked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSourceChecked))
-                return
-              end
               assertEquals('function', type(ns.IsSourceChecked))
             end,
             IsTypeChecked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsTypeChecked))
-                return
-              end
               assertEquals('function', type(ns.IsTypeChecked))
             end,
             IsUsingDefaultFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsUsingDefaultFilters))
-                return
-              end
               assertEquals('function', type(ns.IsUsingDefaultFilters))
             end,
             IsValidSourceFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsValidSourceFilter))
-                return
-              end
               assertEquals('function', type(ns.IsValidSourceFilter))
             end,
             IsValidTypeFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsValidTypeFilter))
-                return
-              end
               assertEquals('function', type(ns.IsValidTypeFilter))
             end,
             NeedsFanfare = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.NeedsFanfare))
-                return
-              end
               assertEquals('function', type(ns.NeedsFanfare))
             end,
             Pickup = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.Pickup))
-                return
-              end
               assertEquals('function', type(ns.Pickup))
             end,
             SetAllSourceFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetAllSourceFilters))
-                return
-              end
               assertEquals('function', type(ns.SetAllSourceFilters))
             end,
             SetAllTypeFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetAllTypeFilters))
-                return
-              end
               assertEquals('function', type(ns.SetAllTypeFilters))
             end,
             SetCollectedFilterSetting = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetCollectedFilterSetting))
-                return
-              end
               assertEquals('function', type(ns.SetCollectedFilterSetting))
             end,
             SetDefaultFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetDefaultFilters))
-                return
-              end
               assertEquals('function', type(ns.SetDefaultFilters))
             end,
             SetIsFavorite = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetIsFavorite))
-                return
-              end
               assertEquals('function', type(ns.SetIsFavorite))
             end,
             SetSearch = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetSearch))
-                return
-              end
               assertEquals('function', type(ns.SetSearch))
             end,
             SetSourceFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetSourceFilter))
-                return
-              end
               assertEquals('function', type(ns.SetSourceFilter))
             end,
             SetTypeFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetTypeFilter))
-                return
-              end
               assertEquals('function', type(ns.SetTypeFilter))
             end,
             SummonByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SummonByID))
-                return
-              end
               assertEquals('function', type(ns.SummonByID))
             end,
           }
@@ -7291,143 +5171,63 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetCurrentAffixes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentAffixes))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentAffixes))
             end,
             GetCurrentSeason = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentSeason))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentSeason))
             end,
             GetCurrentSeasonValues = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentSeasonValues))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentSeasonValues))
             end,
             GetLastWeeklyBestInformation = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetLastWeeklyBestInformation))
-                return
-              end
               assertEquals('function', type(ns.GetLastWeeklyBestInformation))
             end,
             GetOwnedKeystoneChallengeMapID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOwnedKeystoneChallengeMapID))
-                return
-              end
               assertEquals('function', type(ns.GetOwnedKeystoneChallengeMapID))
             end,
             GetOwnedKeystoneLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOwnedKeystoneLevel))
-                return
-              end
               assertEquals('function', type(ns.GetOwnedKeystoneLevel))
             end,
             GetOwnedKeystoneMapID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOwnedKeystoneMapID))
-                return
-              end
               assertEquals('function', type(ns.GetOwnedKeystoneMapID))
             end,
             GetRewardLevelForDifficultyLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRewardLevelForDifficultyLevel))
-                return
-              end
               assertEquals('function', type(ns.GetRewardLevelForDifficultyLevel))
             end,
             GetRewardLevelFromKeystoneLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRewardLevelFromKeystoneLevel))
-                return
-              end
               assertEquals('function', type(ns.GetRewardLevelFromKeystoneLevel))
             end,
             GetRunHistory = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRunHistory))
-                return
-              end
               assertEquals('function', type(ns.GetRunHistory))
             end,
             GetSeasonBestAffixScoreInfoForMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSeasonBestAffixScoreInfoForMap))
-                return
-              end
               assertEquals('function', type(ns.GetSeasonBestAffixScoreInfoForMap))
             end,
             GetSeasonBestForMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSeasonBestForMap))
-                return
-              end
               assertEquals('function', type(ns.GetSeasonBestForMap))
             end,
             GetSeasonBestMythicRatingFromThisExpansion = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSeasonBestMythicRatingFromThisExpansion))
-                return
-              end
               assertEquals('function', type(ns.GetSeasonBestMythicRatingFromThisExpansion))
             end,
             GetWeeklyBestForMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetWeeklyBestForMap))
-                return
-              end
               assertEquals('function', type(ns.GetWeeklyBestForMap))
             end,
             GetWeeklyChestRewardLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetWeeklyChestRewardLevel))
-                return
-              end
               assertEquals('function', type(ns.GetWeeklyChestRewardLevel))
             end,
             IsMythicPlusActive = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsMythicPlusActive))
-                return
-              end
               assertEquals('function', type(ns.IsMythicPlusActive))
             end,
             IsWeeklyRewardAvailable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsWeeklyRewardAvailable))
-                return
-              end
               assertEquals('function', type(ns.IsWeeklyRewardAvailable))
             end,
             RequestCurrentAffixes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestCurrentAffixes))
-                return
-              end
               assertEquals('function', type(ns.RequestCurrentAffixes))
             end,
             RequestMapInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestMapInfo))
-                return
-              end
               assertEquals('function', type(ns.RequestMapInfo))
             end,
             RequestRewards = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestRewards))
-                return
-              end
               assertEquals('function', type(ns.RequestRewards))
             end,
           }
@@ -7473,38 +5273,18 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetDistance = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDistance))
-                return
-              end
               assertEquals('function', type(ns.GetDistance))
             end,
             GetFrame = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFrame))
-                return
-              end
               assertEquals('function', type(ns.GetFrame))
             end,
             GetTargetState = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTargetState))
-                return
-              end
               assertEquals('function', type(ns.GetTargetState))
             end,
             HasValidScreenPosition = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasValidScreenPosition))
-                return
-              end
               assertEquals('function', type(ns.HasValidScreenPosition))
             end,
             WasClampedToScreen = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.WasClampedToScreen))
-                return
-              end
               assertEquals('function', type(ns.WasClampedToScreen))
             end,
           }
@@ -7717,10 +5497,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetPartyPoseInfoByMapID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPartyPoseInfoByMapID))
-                return
-              end
               assertEquals('function', type(ns.GetPartyPoseInfoByMapID))
             end,
           }
@@ -7735,164 +5511,72 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CanPetSwapIn = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanPetSwapIn))
-                return
-              end
               assertEquals('function', type(ns.CanPetSwapIn))
             end,
             GetAllEffectNames = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAllEffectNames))
-                return
-              end
               assertEquals('function', type(ns.GetAllEffectNames))
             end,
             GetAllStates = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAllStates))
-                return
-              end
               assertEquals('function', type(ns.GetAllStates))
             end,
             GetBattleState = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBattleState))
-                return
-              end
               assertEquals('function', type(ns.GetBattleState))
             end,
             GetBreedQuality = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBreedQuality))
-                return
-              end
               assertEquals('function', type(ns.GetBreedQuality))
             end,
             GetDisplayID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDisplayID))
-                return
-              end
               assertEquals('function', type(ns.GetDisplayID))
             end,
             GetHealth = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetHealth))
-                return
-              end
               assertEquals('function', type(ns.GetHealth))
             end,
             GetIcon = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetIcon))
-                return
-              end
               assertEquals('function', type(ns.GetIcon))
             end,
             GetLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetLevel))
-                return
-              end
               assertEquals('function', type(ns.GetLevel))
             end,
             GetMaxHealth = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMaxHealth))
-                return
-              end
               assertEquals('function', type(ns.GetMaxHealth))
             end,
             GetName = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetName))
-                return
-              end
               assertEquals('function', type(ns.GetName))
             end,
             GetNumPets = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumPets))
-                return
-              end
               assertEquals('function', type(ns.GetNumPets))
             end,
             GetPVPMatchmakingInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPVPMatchmakingInfo))
-                return
-              end
               assertEquals('function', type(ns.GetPVPMatchmakingInfo))
             end,
             GetPetSpeciesID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPetSpeciesID))
-                return
-              end
               assertEquals('function', type(ns.GetPetSpeciesID))
             end,
             GetPlayerTrapAbility = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPlayerTrapAbility))
-                return
-              end
               assertEquals('function', type(ns.GetPlayerTrapAbility))
             end,
             GetSelectedAction = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSelectedAction))
-                return
-              end
               assertEquals('function', type(ns.GetSelectedAction))
             end,
             GetTurnTimeInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTurnTimeInfo))
-                return
-              end
               assertEquals('function', type(ns.GetTurnTimeInfo))
             end,
             IsInBattle = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsInBattle))
-                return
-              end
               assertEquals('function', type(ns.IsInBattle))
             end,
             IsPlayerNPC = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsPlayerNPC))
-                return
-              end
               assertEquals('function', type(ns.IsPlayerNPC))
             end,
             IsSkipAvailable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSkipAvailable))
-                return
-              end
               assertEquals('function', type(ns.IsSkipAvailable))
             end,
             IsTrapAvailable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsTrapAvailable))
-                return
-              end
               assertEquals('function', type(ns.IsTrapAvailable))
             end,
             IsWildBattle = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsWildBattle))
-                return
-              end
               assertEquals('function', type(ns.IsWildBattle))
             end,
             ShouldShowPetSelect = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ShouldShowPetSelect))
-                return
-              end
               assertEquals('function', type(ns.ShouldShowPetSelect))
             end,
           }
@@ -7907,10 +5591,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetPetTamersForMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPetTamersForMap))
-                return
-              end
               assertEquals('function', type(ns.GetPetTamersForMap))
             end,
           }
@@ -7925,171 +5605,75 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ClearRecentFanfares = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearRecentFanfares))
-                return
-              end
               assertEquals('function', type(ns.ClearRecentFanfares))
             end,
             GetDisplayIDByIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDisplayIDByIndex))
-                return
-              end
               assertEquals('function', type(ns.GetDisplayIDByIndex))
             end,
             GetDisplayProbabilityByIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDisplayProbabilityByIndex))
-                return
-              end
               assertEquals('function', type(ns.GetDisplayProbabilityByIndex))
             end,
             GetNumDisplays = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumDisplays))
-                return
-              end
               assertEquals('function', type(ns.GetNumDisplays))
             end,
             GetNumPetSources = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumPetSources))
-                return
-              end
               assertEquals('function', type(ns.GetNumPetSources))
             end,
             GetNumPets = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumPets))
-                return
-              end
               assertEquals('function', type(ns.GetNumPets))
             end,
             GetNumPetsNeedingFanfare = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumPetsNeedingFanfare))
-                return
-              end
               assertEquals('function', type(ns.GetNumPetsNeedingFanfare))
             end,
             GetPetAbilityInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPetAbilityInfo))
-                return
-              end
               assertEquals('function', type(ns.GetPetAbilityInfo))
             end,
             GetPetAbilityListTable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPetAbilityListTable))
-                return
-              end
               assertEquals('function', type(ns.GetPetAbilityListTable))
             end,
             GetPetInfoByIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPetInfoByIndex))
-                return
-              end
               assertEquals('function', type(ns.GetPetInfoByIndex))
             end,
             GetPetInfoBySpeciesID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPetInfoBySpeciesID))
-                return
-              end
               assertEquals('function', type(ns.GetPetInfoBySpeciesID))
             end,
             GetPetInfoTableByPetID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPetInfoTableByPetID))
-                return
-              end
               assertEquals('function', type(ns.GetPetInfoTableByPetID))
             end,
             GetPetLoadOutInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPetLoadOutInfo))
-                return
-              end
               assertEquals('function', type(ns.GetPetLoadOutInfo))
             end,
             GetPetSummonInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPetSummonInfo))
-                return
-              end
               assertEquals('function', type(ns.GetPetSummonInfo))
             end,
             GetSummonBattlePetCooldown = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSummonBattlePetCooldown))
-                return
-              end
               assertEquals('function', type(ns.GetSummonBattlePetCooldown))
             end,
             GetSummonRandomFavoritePetGUID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSummonRandomFavoritePetGUID))
-                return
-              end
               assertEquals('function', type(ns.GetSummonRandomFavoritePetGUID))
             end,
             GetSummonedPetGUID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSummonedPetGUID))
-                return
-              end
               assertEquals('function', type(ns.GetSummonedPetGUID))
             end,
             IsFindBattleEnabled = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsFindBattleEnabled))
-                return
-              end
               assertEquals('function', type(ns.IsFindBattleEnabled))
             end,
             IsJournalUnlocked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsJournalUnlocked))
-                return
-              end
               assertEquals('function', type(ns.IsJournalUnlocked))
             end,
             IsUsingDefaultFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsUsingDefaultFilters))
-                return
-              end
               assertEquals('function', type(ns.IsUsingDefaultFilters))
             end,
             PetIsSummonable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PetIsSummonable))
-                return
-              end
               assertEquals('function', type(ns.PetIsSummonable))
             end,
             PetUsesRandomDisplay = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PetUsesRandomDisplay))
-                return
-              end
               assertEquals('function', type(ns.PetUsesRandomDisplay))
             end,
             SetDefaultFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetDefaultFilters))
-                return
-              end
               assertEquals('function', type(ns.SetDefaultFilters))
             end,
             SummonRandomPet = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SummonRandomPet))
-                return
-              end
               assertEquals('function', type(ns.SummonRandomPet))
             end,
           }
@@ -8104,52 +5688,24 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetCurrentPlayerChoiceInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentPlayerChoiceInfo))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentPlayerChoiceInfo))
             end,
             GetNumRerolls = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumRerolls))
-                return
-              end
               assertEquals('function', type(ns.GetNumRerolls))
             end,
             GetRemainingTime = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRemainingTime))
-                return
-              end
               assertEquals('function', type(ns.GetRemainingTime))
             end,
             IsWaitingForPlayerChoiceResponse = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsWaitingForPlayerChoiceResponse))
-                return
-              end
               assertEquals('function', type(ns.IsWaitingForPlayerChoiceResponse))
             end,
             OnUIClosed = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.OnUIClosed))
-                return
-              end
               assertEquals('function', type(ns.OnUIClosed))
             end,
             RequestRerollPlayerChoice = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestRerollPlayerChoice))
-                return
-              end
               assertEquals('function', type(ns.RequestRerollPlayerChoice))
             end,
             SendPlayerChoiceResponse = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SendPlayerChoiceResponse))
-                return
-              end
               assertEquals('function', type(ns.SendPlayerChoiceResponse))
             end,
           }
@@ -8283,45 +5839,21 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetMentorLevelRequirement = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMentorLevelRequirement))
-                return
-              end
               assertEquals('function', type(ns.GetMentorLevelRequirement))
             end,
             GetMentorOptionalAchievementIDs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMentorOptionalAchievementIDs))
-                return
-              end
               assertEquals('function', type(ns.GetMentorOptionalAchievementIDs))
             end,
             GetMentorRequirements = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMentorRequirements))
-                return
-              end
               assertEquals('function', type(ns.GetMentorRequirements))
             end,
             GetMentorshipStatus = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetMentorshipStatus))
-                return
-              end
               assertEquals('function', type(ns.GetMentorshipStatus))
             end,
             IsActivePlayerConsideredNewcomer = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsActivePlayerConsideredNewcomer))
-                return
-              end
               assertEquals('function', type(ns.IsActivePlayerConsideredNewcomer))
             end,
             IsMentorRestricted = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsMentorRestricted))
-                return
-              end
               assertEquals('function', type(ns.IsMentorRestricted))
             end,
           }
@@ -8336,17 +5868,9 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetChoices = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetChoices))
-                return
-              end
               assertEquals('function', type(ns.GetChoices))
             end,
             GetNumSuppressed = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumSuppressed))
-                return
-              end
               assertEquals('function', type(ns.GetNumSuppressed))
             end,
           }
@@ -8856,38 +6380,18 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetAvailableQuestLines = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAvailableQuestLines))
-                return
-              end
               assertEquals('function', type(ns.GetAvailableQuestLines))
             end,
             GetQuestLineInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetQuestLineInfo))
-                return
-              end
               assertEquals('function', type(ns.GetQuestLineInfo))
             end,
             GetQuestLineQuests = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetQuestLineQuests))
-                return
-              end
               assertEquals('function', type(ns.GetQuestLineQuests))
             end,
             IsComplete = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsComplete))
-                return
-              end
               assertEquals('function', type(ns.IsComplete))
             end,
             RequestQuestLinesForMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestQuestLinesForMap))
-                return
-              end
               assertEquals('function', type(ns.RequestQuestLinesForMap))
             end,
           }
@@ -9490,87 +6994,39 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ClaimActivityReward = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClaimActivityReward))
-                return
-              end
               assertEquals('function', type(ns.ClaimActivityReward))
             end,
             ClaimNextReward = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClaimNextReward))
-                return
-              end
               assertEquals('function', type(ns.ClaimNextReward))
             end,
             GenerateRecruitmentLink = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GenerateRecruitmentLink))
-                return
-              end
               assertEquals('function', type(ns.GenerateRecruitmentLink))
             end,
             GetRAFInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRAFInfo))
-                return
-              end
               assertEquals('function', type(ns.GetRAFInfo))
             end,
             GetRAFSystemInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRAFSystemInfo))
-                return
-              end
               assertEquals('function', type(ns.GetRAFSystemInfo))
             end,
             GetRecruitActivityRequirementsText = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRecruitActivityRequirementsText))
-                return
-              end
               assertEquals('function', type(ns.GetRecruitActivityRequirementsText))
             end,
             GetRecruitInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRecruitInfo))
-                return
-              end
               assertEquals('function', type(ns.GetRecruitInfo))
             end,
             IsEnabled = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsEnabled))
-                return
-              end
               assertEquals('function', type(ns.IsEnabled))
             end,
             IsRecruitingEnabled = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsRecruitingEnabled))
-                return
-              end
               assertEquals('function', type(ns.IsRecruitingEnabled))
             end,
             IsSendingEnabled = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSendingEnabled))
-                return
-              end
               assertEquals('function', type(ns.IsSendingEnabled))
             end,
             RemoveRAFRecruit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RemoveRAFRecruit))
-                return
-              end
               assertEquals('function', type(ns.RemoveRAFRecruit))
             end,
             RequestUpdatedRecruitmentInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestUpdatedRecruitmentInfo))
-                return
-              end
               assertEquals('function', type(ns.RequestUpdatedRecruitmentInfo))
             end,
           }
@@ -9697,10 +7153,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetDigSitesForMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDigSitesForMap))
-                return
-              end
               assertEquals('function', type(ns.GetDigSitesForMap))
             end,
           }
@@ -9715,24 +7167,12 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetInfo))
-                return
-              end
               assertEquals('function', type(ns.GetInfo))
             end,
             IsInScenario = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsInScenario))
-                return
-              end
               assertEquals('function', type(ns.IsInScenario))
             end,
             ShouldShowCriteria = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ShouldShowCriteria))
-                return
-              end
               assertEquals('function', type(ns.ShouldShowCriteria))
             end,
           }
@@ -9747,24 +7187,12 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetJailersTowerTypeString = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetJailersTowerTypeString))
-                return
-              end
               assertEquals('function', type(ns.GetJailersTowerTypeString))
             end,
             GetScenarioInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetScenarioInfo))
-                return
-              end
               assertEquals('function', type(ns.GetScenarioInfo))
             end,
             GetScenarioStepInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetScenarioStepInfo))
-                return
-              end
               assertEquals('function', type(ns.GetScenarioStepInfo))
             end,
           }
@@ -9779,87 +7207,39 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CloseScrappingMachine = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseScrappingMachine))
-                return
-              end
               assertEquals('function', type(ns.CloseScrappingMachine))
             end,
             DropPendingScrapItemFromCursor = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.DropPendingScrapItemFromCursor))
-                return
-              end
               assertEquals('function', type(ns.DropPendingScrapItemFromCursor))
             end,
             GetCurrentPendingScrapItemLocationByIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentPendingScrapItemLocationByIndex))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentPendingScrapItemLocationByIndex))
             end,
             GetScrapSpellID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetScrapSpellID))
-                return
-              end
               assertEquals('function', type(ns.GetScrapSpellID))
             end,
             GetScrappingMachineName = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetScrappingMachineName))
-                return
-              end
               assertEquals('function', type(ns.GetScrappingMachineName))
             end,
             HasScrappableItems = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasScrappableItems))
-                return
-              end
               assertEquals('function', type(ns.HasScrappableItems))
             end,
             RemoveAllScrapItems = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RemoveAllScrapItems))
-                return
-              end
               assertEquals('function', type(ns.RemoveAllScrapItems))
             end,
             RemoveCurrentScrappingItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RemoveCurrentScrappingItem))
-                return
-              end
               assertEquals('function', type(ns.RemoveCurrentScrappingItem))
             end,
             RemoveItemToScrap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RemoveItemToScrap))
-                return
-              end
               assertEquals('function', type(ns.RemoveItemToScrap))
             end,
             ScrapItems = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ScrapItems))
-                return
-              end
               assertEquals('function', type(ns.ScrapItems))
             end,
             SetScrappingMachine = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetScrappingMachine))
-                return
-              end
               assertEquals('function', type(ns.SetScrappingMachine))
             end,
             ValidateScrappingList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ValidateScrappingList))
-                return
-              end
               assertEquals('function', type(ns.ValidateScrappingList))
             end,
           }
@@ -9884,17 +7264,9 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetActiveSeason = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetActiveSeason))
-                return
-              end
               assertEquals('function', type(ns.GetActiveSeason))
             end,
             HasActiveSeason = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasActiveSeason))
-                return
-              end
               assertEquals('function', type(ns.HasActiveSeason))
             end,
           }
@@ -9971,59 +7343,27 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetAllGroups = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAllGroups))
-                return
-              end
               assertEquals('function', type(ns.GetAllGroups))
             end,
             GetConfig = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConfig))
-                return
-              end
               assertEquals('function', type(ns.GetConfig))
             end,
             GetGroupForPlayer = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetGroupForPlayer))
-                return
-              end
               assertEquals('function', type(ns.GetGroupForPlayer))
             end,
             GetGroupInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetGroupInfo))
-                return
-              end
               assertEquals('function', type(ns.GetGroupInfo))
             end,
             GetGroupMembers = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetGroupMembers))
-                return
-              end
               assertEquals('function', type(ns.GetGroupMembers))
             end,
             GetGroupQueues = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetGroupQueues))
-                return
-              end
               assertEquals('function', type(ns.GetGroupQueues))
             end,
             RequestToJoin = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestToJoin))
-                return
-              end
               assertEquals('function', type(ns.RequestToJoin))
             end,
             SignalToastDisplayed = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SignalToastDisplayed))
-                return
-              end
               assertEquals('function', type(ns.SignalToastDisplayed))
             end,
           }
@@ -10063,304 +7403,132 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ActivateSoulbind = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ActivateSoulbind))
-                return
-              end
               assertEquals('function', type(ns.ActivateSoulbind))
             end,
             CanActivateSoulbind = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanActivateSoulbind))
-                return
-              end
               assertEquals('function', type(ns.CanActivateSoulbind))
             end,
             CanModifySoulbind = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanModifySoulbind))
-                return
-              end
               assertEquals('function', type(ns.CanModifySoulbind))
             end,
             CanResetConduitsInSoulbind = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanResetConduitsInSoulbind))
-                return
-              end
               assertEquals('function', type(ns.CanResetConduitsInSoulbind))
             end,
             CanSwitchActiveSoulbindTreeBranch = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanSwitchActiveSoulbindTreeBranch))
-                return
-              end
               assertEquals('function', type(ns.CanSwitchActiveSoulbindTreeBranch))
             end,
             CloseUI = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseUI))
-                return
-              end
               assertEquals('function', type(ns.CloseUI))
             end,
             CommitPendingConduitsInSoulbind = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CommitPendingConduitsInSoulbind))
-                return
-              end
               assertEquals('function', type(ns.CommitPendingConduitsInSoulbind))
             end,
             FindNodeIDActuallyInstalled = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.FindNodeIDActuallyInstalled))
-                return
-              end
               assertEquals('function', type(ns.FindNodeIDActuallyInstalled))
             end,
             FindNodeIDAppearingInstalled = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.FindNodeIDAppearingInstalled))
-                return
-              end
               assertEquals('function', type(ns.FindNodeIDAppearingInstalled))
             end,
             FindNodeIDPendingInstall = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.FindNodeIDPendingInstall))
-                return
-              end
               assertEquals('function', type(ns.FindNodeIDPendingInstall))
             end,
             FindNodeIDPendingUninstall = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.FindNodeIDPendingUninstall))
-                return
-              end
               assertEquals('function', type(ns.FindNodeIDPendingUninstall))
             end,
             GetActiveSoulbindID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetActiveSoulbindID))
-                return
-              end
               assertEquals('function', type(ns.GetActiveSoulbindID))
             end,
             GetConduitCharges = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitCharges))
-                return
-              end
               assertEquals('function', type(ns.GetConduitCharges))
             end,
             GetConduitChargesCapacity = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitChargesCapacity))
-                return
-              end
               assertEquals('function', type(ns.GetConduitChargesCapacity))
             end,
             GetConduitCollection = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitCollection))
-                return
-              end
               assertEquals('function', type(ns.GetConduitCollection))
             end,
             GetConduitCollectionCount = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitCollectionCount))
-                return
-              end
               assertEquals('function', type(ns.GetConduitCollectionCount))
             end,
             GetConduitCollectionData = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitCollectionData))
-                return
-              end
               assertEquals('function', type(ns.GetConduitCollectionData))
             end,
             GetConduitCollectionDataAtCursor = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitCollectionDataAtCursor))
-                return
-              end
               assertEquals('function', type(ns.GetConduitCollectionDataAtCursor))
             end,
             GetConduitCollectionDataByVirtualID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitCollectionDataByVirtualID))
-                return
-              end
               assertEquals('function', type(ns.GetConduitCollectionDataByVirtualID))
             end,
             GetConduitDisplayed = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitDisplayed))
-                return
-              end
               assertEquals('function', type(ns.GetConduitDisplayed))
             end,
             GetConduitHyperlink = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitHyperlink))
-                return
-              end
               assertEquals('function', type(ns.GetConduitHyperlink))
             end,
             GetConduitIDPendingInstall = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitIDPendingInstall))
-                return
-              end
               assertEquals('function', type(ns.GetConduitIDPendingInstall))
             end,
             GetConduitQuality = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitQuality))
-                return
-              end
               assertEquals('function', type(ns.GetConduitQuality))
             end,
             GetConduitRank = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitRank))
-                return
-              end
               assertEquals('function', type(ns.GetConduitRank))
             end,
             GetConduitSpellID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConduitSpellID))
-                return
-              end
               assertEquals('function', type(ns.GetConduitSpellID))
             end,
             GetInstalledConduitID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetInstalledConduitID))
-                return
-              end
               assertEquals('function', type(ns.GetInstalledConduitID))
             end,
             GetNode = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNode))
-                return
-              end
               assertEquals('function', type(ns.GetNode))
             end,
             GetSoulbindData = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSoulbindData))
-                return
-              end
               assertEquals('function', type(ns.GetSoulbindData))
             end,
             GetSpecsAssignedToSoulbind = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSpecsAssignedToSoulbind))
-                return
-              end
               assertEquals('function', type(ns.GetSpecsAssignedToSoulbind))
             end,
             GetTotalConduitChargesPending = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTotalConduitChargesPending))
-                return
-              end
               assertEquals('function', type(ns.GetTotalConduitChargesPending))
             end,
             GetTotalConduitChargesPendingInSoulbind = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTotalConduitChargesPendingInSoulbind))
-                return
-              end
               assertEquals('function', type(ns.GetTotalConduitChargesPendingInSoulbind))
             end,
             GetTree = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTree))
-                return
-              end
               assertEquals('function', type(ns.GetTree))
             end,
             HasAnyInstalledConduitInSoulbind = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasAnyInstalledConduitInSoulbind))
-                return
-              end
               assertEquals('function', type(ns.HasAnyInstalledConduitInSoulbind))
             end,
             HasAnyPendingConduits = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasAnyPendingConduits))
-                return
-              end
               assertEquals('function', type(ns.HasAnyPendingConduits))
             end,
             HasPendingConduitsInSoulbind = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasPendingConduitsInSoulbind))
-                return
-              end
               assertEquals('function', type(ns.HasPendingConduitsInSoulbind))
             end,
             IsConduitInstalled = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsConduitInstalled))
-                return
-              end
               assertEquals('function', type(ns.IsConduitInstalled))
             end,
             IsConduitInstalledInSoulbind = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsConduitInstalledInSoulbind))
-                return
-              end
               assertEquals('function', type(ns.IsConduitInstalledInSoulbind))
             end,
             IsItemConduitByItemInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsItemConduitByItemInfo))
-                return
-              end
               assertEquals('function', type(ns.IsItemConduitByItemInfo))
             end,
             IsNodePendingModify = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsNodePendingModify))
-                return
-              end
               assertEquals('function', type(ns.IsNodePendingModify))
             end,
             IsUnselectedConduitPendingInSoulbind = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsUnselectedConduitPendingInSoulbind))
-                return
-              end
               assertEquals('function', type(ns.IsUnselectedConduitPendingInSoulbind))
             end,
             ModifyNode = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ModifyNode))
-                return
-              end
               assertEquals('function', type(ns.ModifyNode))
             end,
             SelectNode = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SelectNode))
-                return
-              end
               assertEquals('function', type(ns.SelectNode))
             end,
             UnmodifyNode = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.UnmodifyNode))
-                return
-              end
               assertEquals('function', type(ns.UnmodifyNode))
             end,
           }
@@ -10375,108 +7543,48 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CanPlayerUsePVPTalentUI = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanPlayerUsePVPTalentUI))
-                return
-              end
               assertEquals('function', type(ns.CanPlayerUsePVPTalentUI))
             end,
             CanPlayerUseTalentSpecUI = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanPlayerUseTalentSpecUI))
-                return
-              end
               assertEquals('function', type(ns.CanPlayerUseTalentSpecUI))
             end,
             CanPlayerUseTalentUI = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanPlayerUseTalentUI))
-                return
-              end
               assertEquals('function', type(ns.CanPlayerUseTalentUI))
             end,
             GetAllSelectedPvpTalentIDs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAllSelectedPvpTalentIDs))
-                return
-              end
               assertEquals('function', type(ns.GetAllSelectedPvpTalentIDs))
             end,
             GetInspectSelectedPvpTalent = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetInspectSelectedPvpTalent))
-                return
-              end
               assertEquals('function', type(ns.GetInspectSelectedPvpTalent))
             end,
             GetPvpTalentAlertStatus = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPvpTalentAlertStatus))
-                return
-              end
               assertEquals('function', type(ns.GetPvpTalentAlertStatus))
             end,
             GetPvpTalentSlotInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPvpTalentSlotInfo))
-                return
-              end
               assertEquals('function', type(ns.GetPvpTalentSlotInfo))
             end,
             GetPvpTalentSlotUnlockLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPvpTalentSlotUnlockLevel))
-                return
-              end
               assertEquals('function', type(ns.GetPvpTalentSlotUnlockLevel))
             end,
             GetPvpTalentUnlockLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPvpTalentUnlockLevel))
-                return
-              end
               assertEquals('function', type(ns.GetPvpTalentUnlockLevel))
             end,
             GetSpecIDs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSpecIDs))
-                return
-              end
               assertEquals('function', type(ns.GetSpecIDs))
             end,
             GetSpellsDisplay = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSpellsDisplay))
-                return
-              end
               assertEquals('function', type(ns.GetSpellsDisplay))
             end,
             IsInitialized = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsInitialized))
-                return
-              end
               assertEquals('function', type(ns.IsInitialized))
             end,
             IsPvpTalentLocked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsPvpTalentLocked))
-                return
-              end
               assertEquals('function', type(ns.IsPvpTalentLocked))
             end,
             MatchesCurrentSpecSet = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.MatchesCurrentSpecSet))
-                return
-              end
               assertEquals('function', type(ns.MatchesCurrentSpecSet))
             end,
             SetPvpTalentLocked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetPvpTalentLocked))
-                return
-              end
               assertEquals('function', type(ns.SetPvpTalentLocked))
             end,
           }
@@ -10514,45 +7622,21 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ContainsAnyDisenchantSpell = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ContainsAnyDisenchantSpell))
-                return
-              end
               assertEquals('function', type(ns.ContainsAnyDisenchantSpell))
             end,
             GetCurrentLevelSpells = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCurrentLevelSpells))
-                return
-              end
               assertEquals('function', type(ns.GetCurrentLevelSpells))
             end,
             GetSkillLineIndexByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSkillLineIndexByID))
-                return
-              end
               assertEquals('function', type(ns.GetSkillLineIndexByID))
             end,
             GetSpellInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSpellInfo))
-                return
-              end
               assertEquals('function', type(ns.GetSpellInfo))
             end,
             GetSpellLinkFromSpellID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSpellLinkFromSpellID))
-                return
-              end
               assertEquals('function', type(ns.GetSpellLinkFromSpellID))
             end,
             IsSpellDisabled = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSpellDisabled))
-                return
-              end
               assertEquals('function', type(ns.IsSpellDisabled))
             end,
           }
@@ -10567,24 +7651,12 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             AcknowledgeSplash = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AcknowledgeSplash))
-                return
-              end
               assertEquals('function', type(ns.AcknowledgeSplash))
             end,
             CanViewSplashScreen = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanViewSplashScreen))
-                return
-              end
               assertEquals('function', type(ns.CanViewSplashScreen))
             end,
             RequestLatestSplashScreen = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestLatestSplashScreen))
-                return
-              end
               assertEquals('function', type(ns.RequestLatestSplashScreen))
             end,
           }
@@ -10663,59 +7735,27 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetHighestPrioritySuperTrackingType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetHighestPrioritySuperTrackingType))
-                return
-              end
               assertEquals('function', type(ns.GetHighestPrioritySuperTrackingType))
             end,
             GetSuperTrackedQuestID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSuperTrackedQuestID))
-                return
-              end
               assertEquals('function', type(ns.GetSuperTrackedQuestID))
             end,
             IsSuperTrackingAnything = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSuperTrackingAnything))
-                return
-              end
               assertEquals('function', type(ns.IsSuperTrackingAnything))
             end,
             IsSuperTrackingCorpse = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSuperTrackingCorpse))
-                return
-              end
               assertEquals('function', type(ns.IsSuperTrackingCorpse))
             end,
             IsSuperTrackingQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSuperTrackingQuest))
-                return
-              end
               assertEquals('function', type(ns.IsSuperTrackingQuest))
             end,
             IsSuperTrackingUserWaypoint = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSuperTrackingUserWaypoint))
-                return
-              end
               assertEquals('function', type(ns.IsSuperTrackingUserWaypoint))
             end,
             SetSuperTrackedQuestID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetSuperTrackedQuestID))
-                return
-              end
               assertEquals('function', type(ns.SetSuperTrackedQuestID))
             end,
             SetSuperTrackedUserWaypoint = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetSuperTrackedUserWaypoint))
-                return
-              end
               assertEquals('function', type(ns.SetSuperTrackedUserWaypoint))
             end,
           }
@@ -10887,59 +7927,27 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ForceToyRefilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ForceToyRefilter))
-                return
-              end
               assertEquals('function', type(ns.ForceToyRefilter))
             end,
             GetIsFavorite = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetIsFavorite))
-                return
-              end
               assertEquals('function', type(ns.GetIsFavorite))
             end,
             GetNumFilteredToys = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumFilteredToys))
-                return
-              end
               assertEquals('function', type(ns.GetNumFilteredToys))
             end,
             GetNumLearnedDisplayedToys = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumLearnedDisplayedToys))
-                return
-              end
               assertEquals('function', type(ns.GetNumLearnedDisplayedToys))
             end,
             GetNumTotalDisplayedToys = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumTotalDisplayedToys))
-                return
-              end
               assertEquals('function', type(ns.GetNumTotalDisplayedToys))
             end,
             GetToyFromIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetToyFromIndex))
-                return
-              end
               assertEquals('function', type(ns.GetToyFromIndex))
             end,
             GetToyInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetToyInfo))
-                return
-              end
               assertEquals('function', type(ns.GetToyInfo))
             end,
             HasFavorites = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasFavorites))
-                return
-              end
               assertEquals('function', type(ns.HasFavorites))
             end,
           }
@@ -10988,157 +7996,69 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             CloseObliterumForge = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseObliterumForge))
-                return
-              end
               assertEquals('function', type(ns.CloseObliterumForge))
             end,
             CloseTradeSkill = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseTradeSkill))
-                return
-              end
               assertEquals('function', type(ns.CloseTradeSkill))
             end,
             CraftRecipe = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CraftRecipe))
-                return
-              end
               assertEquals('function', type(ns.CraftRecipe))
             end,
             GetAllProfessionTradeSkillLines = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAllProfessionTradeSkillLines))
-                return
-              end
               assertEquals('function', type(ns.GetAllProfessionTradeSkillLines))
             end,
             GetCategories = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCategories))
-                return
-              end
               assertEquals('function', type(ns.GetCategories))
             end,
             GetOptionalReagentBonusText = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOptionalReagentBonusText))
-                return
-              end
               assertEquals('function', type(ns.GetOptionalReagentBonusText))
             end,
             GetOptionalReagentInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOptionalReagentInfo))
-                return
-              end
               assertEquals('function', type(ns.GetOptionalReagentInfo))
             end,
             GetPendingObliterateItemID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPendingObliterateItemID))
-                return
-              end
               assertEquals('function', type(ns.GetPendingObliterateItemID))
             end,
             GetRecipeInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRecipeInfo))
-                return
-              end
               assertEquals('function', type(ns.GetRecipeInfo))
             end,
             GetRecipeNumReagents = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRecipeNumReagents))
-                return
-              end
               assertEquals('function', type(ns.GetRecipeNumReagents))
             end,
             GetRecipeReagentInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRecipeReagentInfo))
-                return
-              end
               assertEquals('function', type(ns.GetRecipeReagentInfo))
             end,
             GetRecipeRepeatCount = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetRecipeRepeatCount))
-                return
-              end
               assertEquals('function', type(ns.GetRecipeRepeatCount))
             end,
             GetTradeSkillDisplayName = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTradeSkillDisplayName))
-                return
-              end
               assertEquals('function', type(ns.GetTradeSkillDisplayName))
             end,
             GetTradeSkillLine = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTradeSkillLine))
-                return
-              end
               assertEquals('function', type(ns.GetTradeSkillLine))
             end,
             GetTradeSkillLineInfoByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTradeSkillLineInfoByID))
-                return
-              end
               assertEquals('function', type(ns.GetTradeSkillLineInfoByID))
             end,
             IsEmptySkillLineCategory = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsEmptySkillLineCategory))
-                return
-              end
               assertEquals('function', type(ns.IsEmptySkillLineCategory))
             end,
             IsNPCCrafting = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsNPCCrafting))
-                return
-              end
               assertEquals('function', type(ns.IsNPCCrafting))
             end,
             IsTradeSkillGuild = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsTradeSkillGuild))
-                return
-              end
               assertEquals('function', type(ns.IsTradeSkillGuild))
             end,
             IsTradeSkillReady = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsTradeSkillReady))
-                return
-              end
               assertEquals('function', type(ns.IsTradeSkillReady))
             end,
             SetOnlyShowLearnedRecipes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetOnlyShowLearnedRecipes))
-                return
-              end
               assertEquals('function', type(ns.SetOnlyShowLearnedRecipes))
             end,
             SetOnlyShowUnlearnedRecipes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetOnlyShowUnlearnedRecipes))
-                return
-              end
               assertEquals('function', type(ns.SetOnlyShowUnlearnedRecipes))
             end,
             SetRecipeRepeatCount = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetRecipeRepeatCount))
-                return
-              end
               assertEquals('function', type(ns.SetRecipeRepeatCount))
             end,
           }
@@ -11153,164 +8073,72 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ApplyAllPending = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ApplyAllPending))
-                return
-              end
               assertEquals('function', type(ns.ApplyAllPending))
             end,
             CanHaveSecondaryAppearanceForSlotID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanHaveSecondaryAppearanceForSlotID))
-                return
-              end
               assertEquals('function', type(ns.CanHaveSecondaryAppearanceForSlotID))
             end,
             CanTransmogItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanTransmogItem))
-                return
-              end
               assertEquals('function', type(ns.CanTransmogItem))
             end,
             CanTransmogItemWithItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanTransmogItemWithItem))
-                return
-              end
               assertEquals('function', type(ns.CanTransmogItemWithItem))
             end,
             ClearAllPending = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearAllPending))
-                return
-              end
               assertEquals('function', type(ns.ClearAllPending))
             end,
             ClearPending = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearPending))
-                return
-              end
               assertEquals('function', type(ns.ClearPending))
             end,
             Close = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.Close))
-                return
-              end
               assertEquals('function', type(ns.Close))
             end,
             ExtractTransmogIDList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ExtractTransmogIDList))
-                return
-              end
               assertEquals('function', type(ns.ExtractTransmogIDList))
             end,
             GetApplyCost = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetApplyCost))
-                return
-              end
               assertEquals('function', type(ns.GetApplyCost))
             end,
             GetApplyWarnings = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetApplyWarnings))
-                return
-              end
               assertEquals('function', type(ns.GetApplyWarnings))
             end,
             GetBaseCategory = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBaseCategory))
-                return
-              end
               assertEquals('function', type(ns.GetBaseCategory))
             end,
             GetCreatureDisplayIDForSource = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCreatureDisplayIDForSource))
-                return
-              end
               assertEquals('function', type(ns.GetCreatureDisplayIDForSource))
             end,
             GetItemIDForSource = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemIDForSource))
-                return
-              end
               assertEquals('function', type(ns.GetItemIDForSource))
             end,
             GetPending = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPending))
-                return
-              end
               assertEquals('function', type(ns.GetPending))
             end,
             GetSlotEffectiveCategory = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSlotEffectiveCategory))
-                return
-              end
               assertEquals('function', type(ns.GetSlotEffectiveCategory))
             end,
             GetSlotForInventoryType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSlotForInventoryType))
-                return
-              end
               assertEquals('function', type(ns.GetSlotForInventoryType))
             end,
             GetSlotInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSlotInfo))
-                return
-              end
               assertEquals('function', type(ns.GetSlotInfo))
             end,
             GetSlotUseError = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSlotUseError))
-                return
-              end
               assertEquals('function', type(ns.GetSlotUseError))
             end,
             GetSlotVisualInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSlotVisualInfo))
-                return
-              end
               assertEquals('function', type(ns.GetSlotVisualInfo))
             end,
             IsAtTransmogNPC = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsAtTransmogNPC))
-                return
-              end
               assertEquals('function', type(ns.IsAtTransmogNPC))
             end,
             IsSlotBeingCollapsed = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSlotBeingCollapsed))
-                return
-              end
               assertEquals('function', type(ns.IsSlotBeingCollapsed))
             end,
             LoadOutfit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.LoadOutfit))
-                return
-              end
               assertEquals('function', type(ns.LoadOutfit))
             end,
             SetPending = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetPending))
-                return
-              end
               assertEquals('function', type(ns.SetPending))
             end,
           }
@@ -11325,500 +8153,216 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             AccountCanCollectSource = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AccountCanCollectSource))
-                return
-              end
               assertEquals('function', type(ns.AccountCanCollectSource))
             end,
             AreAllCollectionTypeFiltersChecked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AreAllCollectionTypeFiltersChecked))
-                return
-              end
               assertEquals('function', type(ns.AreAllCollectionTypeFiltersChecked))
             end,
             AreAllSourceTypeFiltersChecked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AreAllSourceTypeFiltersChecked))
-                return
-              end
               assertEquals('function', type(ns.AreAllSourceTypeFiltersChecked))
             end,
             CanAppearanceHaveIllusion = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanAppearanceHaveIllusion))
-                return
-              end
               assertEquals('function', type(ns.CanAppearanceHaveIllusion))
             end,
             ClearNewAppearance = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearNewAppearance))
-                return
-              end
               assertEquals('function', type(ns.ClearNewAppearance))
             end,
             ClearSearch = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearSearch))
-                return
-              end
               assertEquals('function', type(ns.ClearSearch))
             end,
             DeleteOutfit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.DeleteOutfit))
-                return
-              end
               assertEquals('function', type(ns.DeleteOutfit))
             end,
             EndSearch = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.EndSearch))
-                return
-              end
               assertEquals('function', type(ns.EndSearch))
             end,
             GetAllAppearanceSources = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAllAppearanceSources))
-                return
-              end
               assertEquals('function', type(ns.GetAllAppearanceSources))
             end,
             GetAppearanceCameraID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAppearanceCameraID))
-                return
-              end
               assertEquals('function', type(ns.GetAppearanceCameraID))
             end,
             GetAppearanceCameraIDBySource = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAppearanceCameraIDBySource))
-                return
-              end
               assertEquals('function', type(ns.GetAppearanceCameraIDBySource))
             end,
             GetAppearanceInfoBySource = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAppearanceInfoBySource))
-                return
-              end
               assertEquals('function', type(ns.GetAppearanceInfoBySource))
             end,
             GetAppearanceSourceDrops = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAppearanceSourceDrops))
-                return
-              end
               assertEquals('function', type(ns.GetAppearanceSourceDrops))
             end,
             GetAppearanceSourceInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAppearanceSourceInfo))
-                return
-              end
               assertEquals('function', type(ns.GetAppearanceSourceInfo))
             end,
             GetAppearanceSources = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAppearanceSources))
-                return
-              end
               assertEquals('function', type(ns.GetAppearanceSources))
             end,
             GetArtifactAppearanceStrings = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetArtifactAppearanceStrings))
-                return
-              end
               assertEquals('function', type(ns.GetArtifactAppearanceStrings))
             end,
             GetCategoryAppearances = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCategoryAppearances))
-                return
-              end
               assertEquals('function', type(ns.GetCategoryAppearances))
             end,
             GetCategoryCollectedCount = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCategoryCollectedCount))
-                return
-              end
               assertEquals('function', type(ns.GetCategoryCollectedCount))
             end,
             GetCategoryForItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCategoryForItem))
-                return
-              end
               assertEquals('function', type(ns.GetCategoryForItem))
             end,
             GetCategoryInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCategoryInfo))
-                return
-              end
               assertEquals('function', type(ns.GetCategoryInfo))
             end,
             GetCategoryTotal = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCategoryTotal))
-                return
-              end
               assertEquals('function', type(ns.GetCategoryTotal))
             end,
             GetCollectedShown = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCollectedShown))
-                return
-              end
               assertEquals('function', type(ns.GetCollectedShown))
             end,
             GetFallbackWeaponAppearance = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetFallbackWeaponAppearance))
-                return
-              end
               assertEquals('function', type(ns.GetFallbackWeaponAppearance))
             end,
             GetIllusionInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetIllusionInfo))
-                return
-              end
               assertEquals('function', type(ns.GetIllusionInfo))
             end,
             GetIllusionStrings = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetIllusionStrings))
-                return
-              end
               assertEquals('function', type(ns.GetIllusionStrings))
             end,
             GetIllusions = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetIllusions))
-                return
-              end
               assertEquals('function', type(ns.GetIllusions))
             end,
             GetInspectItemTransmogInfoList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetInspectItemTransmogInfoList))
-                return
-              end
               assertEquals('function', type(ns.GetInspectItemTransmogInfoList))
             end,
             GetIsAppearanceFavorite = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetIsAppearanceFavorite))
-                return
-              end
               assertEquals('function', type(ns.GetIsAppearanceFavorite))
             end,
             GetItemInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemInfo))
-                return
-              end
               assertEquals('function', type(ns.GetItemInfo))
             end,
             GetItemTransmogInfoListFromOutfitHyperlink = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemTransmogInfoListFromOutfitHyperlink))
-                return
-              end
               assertEquals('function', type(ns.GetItemTransmogInfoListFromOutfitHyperlink))
             end,
             GetLatestAppearance = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetLatestAppearance))
-                return
-              end
               assertEquals('function', type(ns.GetLatestAppearance))
             end,
             GetNumMaxOutfits = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumMaxOutfits))
-                return
-              end
               assertEquals('function', type(ns.GetNumMaxOutfits))
             end,
             GetNumTransmogSources = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNumTransmogSources))
-                return
-              end
               assertEquals('function', type(ns.GetNumTransmogSources))
             end,
             GetOutfitHyperlinkFromItemTransmogInfoList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOutfitHyperlinkFromItemTransmogInfoList))
-                return
-              end
               assertEquals('function', type(ns.GetOutfitHyperlinkFromItemTransmogInfoList))
             end,
             GetOutfitInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOutfitInfo))
-                return
-              end
               assertEquals('function', type(ns.GetOutfitInfo))
             end,
             GetOutfitItemTransmogInfoList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOutfitItemTransmogInfoList))
-                return
-              end
               assertEquals('function', type(ns.GetOutfitItemTransmogInfoList))
             end,
             GetOutfits = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetOutfits))
-                return
-              end
               assertEquals('function', type(ns.GetOutfits))
             end,
             GetPairedArtifactAppearance = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetPairedArtifactAppearance))
-                return
-              end
               assertEquals('function', type(ns.GetPairedArtifactAppearance))
             end,
             GetSourceIcon = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSourceIcon))
-                return
-              end
               assertEquals('function', type(ns.GetSourceIcon))
             end,
             GetSourceInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSourceInfo))
-                return
-              end
               assertEquals('function', type(ns.GetSourceInfo))
             end,
             GetSourceItemID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSourceItemID))
-                return
-              end
               assertEquals('function', type(ns.GetSourceItemID))
             end,
             GetSourceRequiredHoliday = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSourceRequiredHoliday))
-                return
-              end
               assertEquals('function', type(ns.GetSourceRequiredHoliday))
             end,
             GetUncollectedShown = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetUncollectedShown))
-                return
-              end
               assertEquals('function', type(ns.GetUncollectedShown))
             end,
             HasFavorites = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasFavorites))
-                return
-              end
               assertEquals('function', type(ns.HasFavorites))
             end,
             IsAppearanceHiddenVisual = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsAppearanceHiddenVisual))
-                return
-              end
               assertEquals('function', type(ns.IsAppearanceHiddenVisual))
             end,
             IsCategoryValidForItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsCategoryValidForItem))
-                return
-              end
               assertEquals('function', type(ns.IsCategoryValidForItem))
             end,
             IsNewAppearance = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsNewAppearance))
-                return
-              end
               assertEquals('function', type(ns.IsNewAppearance))
             end,
             IsSearchDBLoading = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSearchDBLoading))
-                return
-              end
               assertEquals('function', type(ns.IsSearchDBLoading))
             end,
             IsSearchInProgress = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSearchInProgress))
-                return
-              end
               assertEquals('function', type(ns.IsSearchInProgress))
             end,
             IsSourceTypeFilterChecked = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSourceTypeFilterChecked))
-                return
-              end
               assertEquals('function', type(ns.IsSourceTypeFilterChecked))
             end,
             IsUsingDefaultFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsUsingDefaultFilters))
-                return
-              end
               assertEquals('function', type(ns.IsUsingDefaultFilters))
             end,
             ModifyOutfit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ModifyOutfit))
-                return
-              end
               assertEquals('function', type(ns.ModifyOutfit))
             end,
             NewOutfit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.NewOutfit))
-                return
-              end
               assertEquals('function', type(ns.NewOutfit))
             end,
             PlayerCanCollectSource = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PlayerCanCollectSource))
-                return
-              end
               assertEquals('function', type(ns.PlayerCanCollectSource))
             end,
             PlayerHasTransmog = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PlayerHasTransmog))
-                return
-              end
               assertEquals('function', type(ns.PlayerHasTransmog))
             end,
             PlayerHasTransmogByItemInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PlayerHasTransmogByItemInfo))
-                return
-              end
               assertEquals('function', type(ns.PlayerHasTransmogByItemInfo))
             end,
             PlayerHasTransmogItemModifiedAppearance = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PlayerHasTransmogItemModifiedAppearance))
-                return
-              end
               assertEquals('function', type(ns.PlayerHasTransmogItemModifiedAppearance))
             end,
             PlayerKnowsSource = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.PlayerKnowsSource))
-                return
-              end
               assertEquals('function', type(ns.PlayerKnowsSource))
             end,
             RenameOutfit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RenameOutfit))
-                return
-              end
               assertEquals('function', type(ns.RenameOutfit))
             end,
             SearchProgress = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SearchProgress))
-                return
-              end
               assertEquals('function', type(ns.SearchProgress))
             end,
             SearchSize = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SearchSize))
-                return
-              end
               assertEquals('function', type(ns.SearchSize))
             end,
             SetAllCollectionTypeFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetAllCollectionTypeFilters))
-                return
-              end
               assertEquals('function', type(ns.SetAllCollectionTypeFilters))
             end,
             SetAllSourceTypeFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetAllSourceTypeFilters))
-                return
-              end
               assertEquals('function', type(ns.SetAllSourceTypeFilters))
             end,
             SetCollectedShown = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetCollectedShown))
-                return
-              end
               assertEquals('function', type(ns.SetCollectedShown))
             end,
             SetDefaultFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetDefaultFilters))
-                return
-              end
               assertEquals('function', type(ns.SetDefaultFilters))
             end,
             SetIsAppearanceFavorite = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetIsAppearanceFavorite))
-                return
-              end
               assertEquals('function', type(ns.SetIsAppearanceFavorite))
             end,
             SetSearch = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetSearch))
-                return
-              end
               assertEquals('function', type(ns.SetSearch))
             end,
             SetSearchAndFilterCategory = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetSearchAndFilterCategory))
-                return
-              end
               assertEquals('function', type(ns.SetSearchAndFilterCategory))
             end,
             SetSourceTypeFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetSourceTypeFilter))
-                return
-              end
               assertEquals('function', type(ns.SetSourceTypeFilter))
             end,
             SetUncollectedShown = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetUncollectedShown))
-                return
-              end
               assertEquals('function', type(ns.SetUncollectedShown))
             end,
             UpdateUsableAppearances = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.UpdateUsableAppearances))
-                return
-              end
               assertEquals('function', type(ns.UpdateUsableAppearances))
             end,
           }
@@ -11833,213 +8377,93 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             ClearLatestSource = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearLatestSource))
-                return
-              end
               assertEquals('function', type(ns.ClearLatestSource))
             end,
             ClearNewSource = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearNewSource))
-                return
-              end
               assertEquals('function', type(ns.ClearNewSource))
             end,
             ClearSetNewSourcesForSlot = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClearSetNewSourcesForSlot))
-                return
-              end
               assertEquals('function', type(ns.ClearSetNewSourcesForSlot))
             end,
             GetAllSets = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAllSets))
-                return
-              end
               assertEquals('function', type(ns.GetAllSets))
             end,
             GetAllSourceIDs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetAllSourceIDs))
-                return
-              end
               assertEquals('function', type(ns.GetAllSourceIDs))
             end,
             GetBaseSetID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBaseSetID))
-                return
-              end
               assertEquals('function', type(ns.GetBaseSetID))
             end,
             GetBaseSets = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBaseSets))
-                return
-              end
               assertEquals('function', type(ns.GetBaseSets))
             end,
             GetBaseSetsCounts = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBaseSetsCounts))
-                return
-              end
               assertEquals('function', type(ns.GetBaseSetsCounts))
             end,
             GetBaseSetsFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetBaseSetsFilter))
-                return
-              end
               assertEquals('function', type(ns.GetBaseSetsFilter))
             end,
             GetCameraIDs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetCameraIDs))
-                return
-              end
               assertEquals('function', type(ns.GetCameraIDs))
             end,
             GetIsFavorite = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetIsFavorite))
-                return
-              end
               assertEquals('function', type(ns.GetIsFavorite))
             end,
             GetLatestSource = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetLatestSource))
-                return
-              end
               assertEquals('function', type(ns.GetLatestSource))
             end,
             GetSetInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSetInfo))
-                return
-              end
               assertEquals('function', type(ns.GetSetInfo))
             end,
             GetSetNewSources = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSetNewSources))
-                return
-              end
               assertEquals('function', type(ns.GetSetNewSources))
             end,
             GetSetPrimaryAppearances = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSetPrimaryAppearances))
-                return
-              end
               assertEquals('function', type(ns.GetSetPrimaryAppearances))
             end,
             GetSetsContainingSourceID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSetsContainingSourceID))
-                return
-              end
               assertEquals('function', type(ns.GetSetsContainingSourceID))
             end,
             GetSourceIDsForSlot = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSourceIDsForSlot))
-                return
-              end
               assertEquals('function', type(ns.GetSourceIDsForSlot))
             end,
             GetSourcesForSlot = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetSourcesForSlot))
-                return
-              end
               assertEquals('function', type(ns.GetSourcesForSlot))
             end,
             GetUsableSets = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetUsableSets))
-                return
-              end
               assertEquals('function', type(ns.GetUsableSets))
             end,
             GetVariantSets = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetVariantSets))
-                return
-              end
               assertEquals('function', type(ns.GetVariantSets))
             end,
             HasUsableSets = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasUsableSets))
-                return
-              end
               assertEquals('function', type(ns.HasUsableSets))
             end,
             IsBaseSetCollected = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsBaseSetCollected))
-                return
-              end
               assertEquals('function', type(ns.IsBaseSetCollected))
             end,
             IsNewSource = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsNewSource))
-                return
-              end
               assertEquals('function', type(ns.IsNewSource))
             end,
             IsSetVisible = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsSetVisible))
-                return
-              end
               assertEquals('function', type(ns.IsSetVisible))
             end,
             IsUsingDefaultBaseSetsFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.IsUsingDefaultBaseSetsFilters))
-                return
-              end
               assertEquals('function', type(ns.IsUsingDefaultBaseSetsFilters))
             end,
             SetBaseSetsFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetBaseSetsFilter))
-                return
-              end
               assertEquals('function', type(ns.SetBaseSetsFilter))
             end,
             SetDefaultBaseSetsFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetDefaultBaseSetsFilters))
-                return
-              end
               assertEquals('function', type(ns.SetDefaultBaseSetsFilters))
             end,
             SetHasNewSources = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetHasNewSources))
-                return
-              end
               assertEquals('function', type(ns.SetHasNewSources))
             end,
             SetHasNewSourcesForSlot = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetHasNewSourcesForSlot))
-                return
-              end
               assertEquals('function', type(ns.SetHasNewSourcesForSlot))
             end,
             SetIsFavorite = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.SetIsFavorite))
-                return
-              end
               assertEquals('function', type(ns.SetIsFavorite))
             end,
           }
@@ -12054,10 +8478,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             MonumentLoadList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.MonumentLoadList))
-                return
-              end
               assertEquals('function', type(ns.MonumentLoadList))
             end,
           }
@@ -12072,17 +8492,9 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             AbandonTutorialArea = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AbandonTutorialArea))
-                return
-              end
               assertEquals('function', type(ns.AbandonTutorialArea))
             end,
             ReturnToTutorialArea = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ReturnToTutorialArea))
-                return
-              end
               assertEquals('function', type(ns.ReturnToTutorialArea))
             end,
           }
@@ -12334,31 +8746,15 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             FindBestUniqueVignette = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.FindBestUniqueVignette))
-                return
-              end
               assertEquals('function', type(ns.FindBestUniqueVignette))
             end,
             GetVignetteInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetVignetteInfo))
-                return
-              end
               assertEquals('function', type(ns.GetVignetteInfo))
             end,
             GetVignettePosition = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetVignettePosition))
-                return
-              end
               assertEquals('function', type(ns.GetVignettePosition))
             end,
             GetVignettes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetVignettes))
-                return
-              end
               assertEquals('function', type(ns.GetVignettes))
             end,
           }
@@ -12612,101 +9008,45 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             AreRewardsForCurrentRewardPeriod = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.AreRewardsForCurrentRewardPeriod))
-                return
-              end
               assertEquals('function', type(ns.AreRewardsForCurrentRewardPeriod))
             end,
             CanClaimRewards = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CanClaimRewards))
-                return
-              end
               assertEquals('function', type(ns.CanClaimRewards))
             end,
             ClaimReward = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.ClaimReward))
-                return
-              end
               assertEquals('function', type(ns.ClaimReward))
             end,
             CloseInteraction = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.CloseInteraction))
-                return
-              end
               assertEquals('function', type(ns.CloseInteraction))
             end,
             GetActivities = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetActivities))
-                return
-              end
               assertEquals('function', type(ns.GetActivities))
             end,
             GetActivityEncounterInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetActivityEncounterInfo))
-                return
-              end
               assertEquals('function', type(ns.GetActivityEncounterInfo))
             end,
             GetConquestWeeklyProgress = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetConquestWeeklyProgress))
-                return
-              end
               assertEquals('function', type(ns.GetConquestWeeklyProgress))
             end,
             GetExampleRewardItemHyperlinks = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetExampleRewardItemHyperlinks))
-                return
-              end
               assertEquals('function', type(ns.GetExampleRewardItemHyperlinks))
             end,
             GetItemHyperlink = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemHyperlink))
-                return
-              end
               assertEquals('function', type(ns.GetItemHyperlink))
             end,
             GetNextMythicPlusIncrease = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetNextMythicPlusIncrease))
-                return
-              end
               assertEquals('function', type(ns.GetNextMythicPlusIncrease))
             end,
             HasAvailableRewards = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasAvailableRewards))
-                return
-              end
               assertEquals('function', type(ns.HasAvailableRewards))
             end,
             HasGeneratedRewards = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasGeneratedRewards))
-                return
-              end
               assertEquals('function', type(ns.HasGeneratedRewards))
             end,
             HasInteraction = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasInteraction))
-                return
-              end
               assertEquals('function', type(ns.HasInteraction))
             end,
             OnUIInteract = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.OnUIInteract))
-                return
-              end
               assertEquals('function', type(ns.OnUIInteract))
             end,
           }
@@ -12765,10 +9105,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             StartTokenSell = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.StartTokenSell))
-                return
-              end
               assertEquals('function', type(ns.StartTokenSell))
             end,
           }
@@ -12783,10 +9119,6 @@ G.GeneratedTestFailures = G.test(function()
           assert(getmetatable(ns) == nil)
           return {
             GetActiveAbilities = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetActiveAbilities))
-                return
-              end
               assertEquals('function', type(ns.GetActiveAbilities))
             end,
           }

@@ -133,7 +133,7 @@ G.GeneratedTestFailures = G.test(function()
           return {
 > for mname, method in sorted(v.methods) do
             $(mname) = function()
-> if method.flavors then
+> if method.flavors and (not v.flavors or #method.flavors < #v.flavors) then
               if $(badflavor(method.flavors)) then
                 assertEquals('nil', type(ns.$(mname)))
                 return
