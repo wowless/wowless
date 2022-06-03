@@ -2133,9 +2133,6 @@ function G.GeneratedTests()
             PostClub = function()
               assertEquals('function', type(ns.PostClub))
             end,
-            ReportPosting = function()
-              assertEquals('function', type(ns.ReportPosting))
-            end,
             RequestApplicantList = function()
               assertEquals('function', type(ns.RequestApplicantList))
             end,
@@ -5841,9 +5838,6 @@ function G.GeneratedTests()
             GetMentorLevelRequirement = function()
               assertEquals('function', type(ns.GetMentorLevelRequirement))
             end,
-            GetMentorOptionalAchievementIDs = function()
-              assertEquals('function', type(ns.GetMentorOptionalAchievementIDs))
-            end,
             GetMentorRequirements = function()
               assertEquals('function', type(ns.GetMentorRequirements))
             end,
@@ -7020,9 +7014,6 @@ function G.GeneratedTests()
             IsRecruitingEnabled = function()
               assertEquals('function', type(ns.IsRecruitingEnabled))
             end,
-            IsSendingEnabled = function()
-              assertEquals('function', type(ns.IsSendingEnabled))
-            end,
             RemoveRAFRecruit = function()
               assertEquals('function', type(ns.RemoveRAFRecruit))
             end,
@@ -7438,12 +7429,6 @@ function G.GeneratedTests()
             GetActiveSoulbindID = function()
               assertEquals('function', type(ns.GetActiveSoulbindID))
             end,
-            GetConduitCharges = function()
-              assertEquals('function', type(ns.GetConduitCharges))
-            end,
-            GetConduitChargesCapacity = function()
-              assertEquals('function', type(ns.GetConduitChargesCapacity))
-            end,
             GetConduitCollection = function()
               assertEquals('function', type(ns.GetConduitCollection))
             end,
@@ -7488,12 +7473,6 @@ function G.GeneratedTests()
             end,
             GetSpecsAssignedToSoulbind = function()
               assertEquals('function', type(ns.GetSpecsAssignedToSoulbind))
-            end,
-            GetTotalConduitChargesPending = function()
-              assertEquals('function', type(ns.GetTotalConduitChargesPending))
-            end,
-            GetTotalConduitChargesPendingInSoulbind = function()
-              assertEquals('function', type(ns.GetTotalConduitChargesPendingInSoulbind))
             end,
             GetTree = function()
               assertEquals('function', type(ns.GetTree))
