@@ -184,6 +184,11 @@ function G.GeneratedTests()
           end
 > end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
 > end
 > end

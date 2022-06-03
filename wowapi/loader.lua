@@ -328,13 +328,17 @@ local function loadFunctions(api, loader)
         return checkOutputs(bfn(checkInputs(unpack(t, 1, n))))
       end))
     end
+    local function outer(...)
+      return wrapimpl(...)
+    end
+    setfenv(outer, api.env)
     local dot = fn:find('%.')
     if dot then
       local p = fn:sub(1, dot - 1)
       fns[p] = fns[p] or {}
-      fns[p][fn:sub(dot + 1)] = wrapimpl
+      fns[p][fn:sub(dot + 1)] = outer
     else
-      fns[fn] = wrapimpl
+      fns[fn] = outer
     end
   end
   return fns

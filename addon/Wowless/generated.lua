@@ -11581,14 +11581,29 @@ function G.GeneratedTests()
         AcceptAreaSpiritHeal = function()
           local fn = _G.AcceptAreaSpiritHeal
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         AcceptBattlefieldPort = function()
           local fn = _G.AcceptBattlefieldPort
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         AddChatWindowMessages = function()
           local fn = _G.AddChatWindowMessages
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         AddQuestWatch = function()
           local fn = _G.AddQuestWatch
@@ -11597,38 +11612,83 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         AntiAliasingSupported = function()
           local fn = _G.AntiAliasingSupported
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         AreDangerousScriptsAllowed = function()
           local fn = _G.AreDangerousScriptsAllowed
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         AscendStop = function()
           local fn = _G.AscendStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         AssistUnit = function()
           local fn = _G.AssistUnit
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         AttackTarget = function()
           local fn = _G.AttackTarget
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         BNFeaturesEnabled = function()
           local fn = _G.BNFeaturesEnabled
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         BNFeaturesEnabledAndConnected = function()
           local fn = _G.BNFeaturesEnabledAndConnected
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         BNGetBlockedInfo = function()
           local fn = _G.BNGetBlockedInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         BNGetFriendInfo = function()
           local fn = _G.BNGetFriendInfo
@@ -11637,70 +11697,155 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         BNGetFriendInviteInfo = function()
           local fn = _G.BNGetFriendInviteInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         BNGetInfo = function()
           local fn = _G.BNGetInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         BNGetNumBlocked = function()
           local fn = _G.BNGetNumBlocked
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         BNGetNumFriendInvites = function()
           local fn = _G.BNGetNumFriendInvites
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         BNGetNumFriends = function()
           local fn = _G.BNGetNumFriends
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         BankButtonIDToInvSlotID = function()
           local fn = _G.BankButtonIDToInvSlotID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         BreakUpLargeNumbers = function()
           local fn = _G.BreakUpLargeNumbers
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CameraOrSelectOrMoveStart = function()
           local fn = _G.CameraOrSelectOrMoveStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CameraOrSelectOrMoveStop = function()
           local fn = _G.CameraOrSelectOrMoveStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CameraZoomIn = function()
           local fn = _G.CameraZoomIn
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CameraZoomOut = function()
           local fn = _G.CameraZoomOut
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanAffordMerchantItem = function()
           local fn = _G.CanAffordMerchantItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanAutoSetGamePadCursorControl = function()
           local fn = _G.CanAutoSetGamePadCursorControl
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanBeRaidTarget = function()
           local fn = _G.CanBeRaidTarget
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanEditGuildInfo = function()
           local fn = _G.CanEditGuildInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanEditMOTD = function()
           local fn = _G.CanEditMOTD
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanEditOfficerNote = function()
           local fn = _G.CanEditOfficerNote
@@ -11709,6 +11854,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanExitVehicle = function()
           local fn = _G.CanExitVehicle
@@ -11717,38 +11867,83 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanGuildBankRepair = function()
           local fn = _G.CanGuildBankRepair
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanGuildDemote = function()
           local fn = _G.CanGuildDemote
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanGuildInvite = function()
           local fn = _G.CanGuildInvite
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanGuildPromote = function()
           local fn = _G.CanGuildPromote
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanHearthAndResurrectFromArea = function()
           local fn = _G.CanHearthAndResurrectFromArea
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanInspect = function()
           local fn = _G.CanInspect
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanJoinBattlefieldAsGroup = function()
           local fn = _G.CanJoinBattlefieldAsGroup
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanMerchantRepair = function()
           local fn = _G.CanMerchantRepair
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanPartyLFGBackfill = function()
           local fn = _G.CanPartyLFGBackfill
@@ -11757,10 +11952,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanReplaceGuildMaster = function()
           local fn = _G.CanReplaceGuildMaster
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanSendSoRByText = function()
           local fn = _G.CanSendSoRByText
@@ -11769,10 +11974,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanSignPetition = function()
           local fn = _G.CanSignPetition
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanTrackBattlePets = function()
           local fn = _G.CanTrackBattlePets
@@ -11781,10 +11996,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanUpgradeExpansion = function()
           local fn = _G.CanUpgradeExpansion
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanUseVoidStorage = function()
           local fn = _G.CanUseVoidStorage
@@ -11793,42 +12018,92 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CanWithdrawGuildBankMoney = function()
           local fn = _G.CanWithdrawGuildBankMoney
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CancelEmote = function()
           local fn = _G.CancelEmote
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CancelLogout = function()
           local fn = _G.CancelLogout
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CancelShapeshiftForm = function()
           local fn = _G.CancelShapeshiftForm
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CancelSpellByName = function()
           local fn = _G.CancelSpellByName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CannotBeResurrected = function()
           local fn = _G.CannotBeResurrected
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CastPetAction = function()
           local fn = _G.CastPetAction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CastShapeshiftForm = function()
           local fn = _G.CastShapeshiftForm
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CastSpellByName = function()
           local fn = _G.CastSpellByName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CastingInfo = function()
           local fn = _G.CastingInfo
@@ -11837,6 +12112,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CenterCamera = function()
           local fn = _G.CenterCamera
@@ -11845,10 +12125,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ChangeActionBarPage = function()
           local fn = _G.ChangeActionBarPage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ChannelInfo = function()
           local fn = _G.ChannelInfo
@@ -11857,30 +12147,65 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CheckInbox = function()
           local fn = _G.CheckInbox
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ClearBattlemaster = function()
           local fn = _G.ClearBattlemaster
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ClearFocus = function()
           local fn = _G.ClearFocus
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ClearOverrideBindings = function()
           local fn = _G.ClearOverrideBindings
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ClearPartyAssignment = function()
           local fn = _G.ClearPartyAssignment
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ClearTarget = function()
           local fn = _G.ClearTarget
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseAuctionHouse = function()
           local fn = _G.CloseAuctionHouse
@@ -11889,10 +12214,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseBankFrame = function()
           local fn = _G.CloseBankFrame
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseCraft = function()
           local fn = _G.CloseCraft
@@ -11901,6 +12236,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseGossip = function()
           local fn = _G.CloseGossip
@@ -11909,10 +12249,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseGuildBankFrame = function()
           local fn = _G.CloseGuildBankFrame
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseGuildRegistrar = function()
           local fn = _G.CloseGuildRegistrar
@@ -11921,30 +12271,65 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseItemText = function()
           local fn = _G.CloseItemText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseLoot = function()
           local fn = _G.CloseLoot
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseMail = function()
           local fn = _G.CloseMail
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseMerchant = function()
           local fn = _G.CloseMerchant
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ClosePetStables = function()
           local fn = _G.ClosePetStables
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ClosePetition = function()
           local fn = _G.ClosePetition
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ClosePetitionRegistrar = function()
           local fn = _G.ClosePetitionRegistrar
@@ -11953,10 +12338,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseQuest = function()
           local fn = _G.CloseQuest
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseResearch = function()
           local fn = _G.CloseResearch
@@ -11965,18 +12360,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseSocketInfo = function()
           local fn = _G.CloseSocketInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseTabardCreation = function()
           local fn = _G.CloseTabardCreation
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseTrade = function()
           local fn = _G.CloseTrade
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseTradeSkill = function()
           local fn = _G.CloseTradeSkill
@@ -11985,10 +12400,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseTrainer = function()
           local fn = _G.CloseTrainer
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CloseVoidStorageFrame = function()
           local fn = _G.CloseVoidStorageFrame
@@ -11997,6 +12422,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CollapseSkillHeader = function()
           local fn = _G.CollapseSkillHeader
@@ -12005,46 +12435,101 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CombatLogAddFilter = function()
           local fn = _G.CombatLogAddFilter
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CombatLogGetCurrentEntry = function()
           local fn = _G.CombatLogGetCurrentEntry
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CombatLogGetCurrentEventInfo = function()
           local fn = _G.CombatLogGetCurrentEventInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CombatLogGetNumEntries = function()
           local fn = _G.CombatLogGetNumEntries
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CombatLogResetFilter = function()
           local fn = _G.CombatLogResetFilter
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CombatLogSetCurrentEntry = function()
           local fn = _G.CombatLogSetCurrentEntry
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CombatLog_Object_IsA = function()
           local fn = _G.CombatLog_Object_IsA
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CombatTextSetActiveUnit = function()
           local fn = _G.CombatTextSetActiveUnit
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ConsoleExec = function()
           local fn = _G.ConsoleExec
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ContainerIDToInventoryID = function()
           local fn = _G.ContainerIDToInventoryID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CraftIsEnchanting = function()
           local fn = _G.CraftIsEnchanting
@@ -12053,58 +12538,128 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CreateFont = function()
           local fn = _G.CreateFont
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CreateFrame = function()
           local fn = _G.CreateFrame
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CursorCanGoInSlot = function()
           local fn = _G.CursorCanGoInSlot
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         CursorHasItem = function()
           local fn = _G.CursorHasItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         DeathRecap_HasEvents = function()
           local fn = _G.DeathRecap_HasEvents
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         DeleteMacro = function()
           local fn = _G.DeleteMacro
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         DescendStop = function()
           local fn = _G.DescendStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         DisableAddOn = function()
           local fn = _G.DisableAddOn
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         Dismount = function()
           local fn = _G.Dismount
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         DoEmote = function()
           local fn = _G.DoEmote
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         DoesCurrentLocaleSellExpansionLevels = function()
           local fn = _G.DoesCurrentLocaleSellExpansionLevels
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         DoesSpellExist = function()
           local fn = _G.DoesSpellExist
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         DropCursorMoney = function()
           local fn = _G.DropCursorMoney
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         DumpMovementCapture = function()
           local fn = _G.DumpMovementCapture
@@ -12113,6 +12668,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EJ_GetCurrentTier = function()
           local fn = _G.EJ_GetCurrentTier
@@ -12121,6 +12681,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EJ_GetDifficulty = function()
           local fn = _G.EJ_GetDifficulty
@@ -12129,6 +12694,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EJ_GetEncounterInfo = function()
           local fn = _G.EJ_GetEncounterInfo
@@ -12137,6 +12707,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EJ_GetInstanceByIndex = function()
           local fn = _G.EJ_GetInstanceByIndex
@@ -12145,6 +12720,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EJ_GetInstanceInfo = function()
           local fn = _G.EJ_GetInstanceInfo
@@ -12153,6 +12733,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EJ_GetLootFilter = function()
           local fn = _G.EJ_GetLootFilter
@@ -12161,6 +12746,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EJ_GetNumLoot = function()
           local fn = _G.EJ_GetNumLoot
@@ -12169,6 +12759,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EJ_GetNumTiers = function()
           local fn = _G.EJ_GetNumTiers
@@ -12177,6 +12772,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EJ_GetTierInfo = function()
           local fn = _G.EJ_GetTierInfo
@@ -12185,6 +12785,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EJ_IsValidInstanceDifficulty = function()
           local fn = _G.EJ_IsValidInstanceDifficulty
@@ -12193,6 +12798,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EJ_SelectTier = function()
           local fn = _G.EJ_SelectTier
@@ -12201,22 +12811,47 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EnableAddOn = function()
           local fn = _G.EnableAddOn
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EnumerateFrames = function()
           local fn = _G.EnumerateFrames
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EnumerateServerChannels = function()
           local fn = _G.EnumerateServerChannels
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         EquipItemByName = function()
           local fn = _G.EquipItemByName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ExpandTrainerSkillLine = function()
           local fn = _G.ExpandTrainerSkillLine
@@ -12225,46 +12860,101 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         FillLocalizedClassList = function()
           local fn = _G.FillLocalizedClassList
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         FindSpellBookSlotBySpellID = function()
           local fn = _G.FindSpellBookSlotBySpellID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         FlashClientIcon = function()
           local fn = _G.FlashClientIcon
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         FlipCameraYaw = function()
           local fn = _G.FlipCameraYaw
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         FocusUnit = function()
           local fn = _G.FocusUnit
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         FollowUnit = function()
           local fn = _G.FollowUnit
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GMEuropaBugsEnabled = function()
           local fn = _G.GMEuropaBugsEnabled
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GMEuropaComplaintsEnabled = function()
           local fn = _G.GMEuropaComplaintsEnabled
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GMEuropaSuggestionsEnabled = function()
           local fn = _G.GMEuropaSuggestionsEnabled
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GMEuropaTicketsEnabled = function()
           local fn = _G.GMEuropaTicketsEnabled
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GMSubmitBug = function()
           local fn = _G.GMSubmitBug
@@ -12273,14 +12963,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GameMovieFinished = function()
           local fn = _G.GameMovieFinished
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAccountExpansionLevel = function()
           local fn = _G.GetAccountExpansionLevel
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAchievementCriteriaInfo = function()
           local fn = _G.GetAchievementCriteriaInfo
@@ -12289,6 +12994,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAchievementCriteriaInfoByID = function()
           local fn = _G.GetAchievementCriteriaInfoByID
@@ -12297,6 +13007,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAchievementInfo = function()
           local fn = _G.GetAchievementInfo
@@ -12305,6 +13020,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAchievementNumCriteria = function()
           local fn = _G.GetAchievementNumCriteria
@@ -12313,46 +13033,101 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActionBarPage = function()
           local fn = _G.GetActionBarPage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActionBarToggles = function()
           local fn = _G.GetActionBarToggles
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActionCharges = function()
           local fn = _G.GetActionCharges
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActionCooldown = function()
           local fn = _G.GetActionCooldown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActionCount = function()
           local fn = _G.GetActionCount
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActionInfo = function()
           local fn = _G.GetActionInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActionLossOfControlCooldown = function()
           local fn = _G.GetActionLossOfControlCooldown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActionText = function()
           local fn = _G.GetActionText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActionTexture = function()
           local fn = _G.GetActionTexture
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActiveLootRollIDs = function()
           local fn = _G.GetActiveLootRollIDs
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActiveQuestID = function()
           local fn = _G.GetActiveQuestID
@@ -12361,6 +13136,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActiveSpecGroup = function()
           local fn = _G.GetActiveSpecGroup
@@ -12369,38 +13149,83 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetActiveTitle = function()
           local fn = _G.GetActiveTitle
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAddOnDependencies = function()
           local fn = _G.GetAddOnDependencies
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAddOnEnableState = function()
           local fn = _G.GetAddOnEnableState
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAddOnInfo = function()
           local fn = _G.GetAddOnInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAddOnMemoryUsage = function()
           local fn = _G.GetAddOnMemoryUsage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAddOnMetadata = function()
           local fn = _G.GetAddOnMetadata
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAddOnOptionalDependencies = function()
           local fn = _G.GetAddOnOptionalDependencies
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAlternativeDefaultLanguage = function()
           local fn = _G.GetAlternativeDefaultLanguage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetArchaeologyInfo = function()
           local fn = _G.GetArchaeologyInfo
@@ -12409,6 +13234,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetArchaeologyRaceInfo = function()
           local fn = _G.GetArchaeologyRaceInfo
@@ -12417,10 +13247,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAreaSpiritHealerTime = function()
           local fn = _G.GetAreaSpiritHealerTime
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAreaText = function()
           local fn = _G.GetAreaText
@@ -12429,6 +13269,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetArenaOpponentSpec = function()
           local fn = _G.GetArenaOpponentSpec
@@ -12437,6 +13282,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetArenaTeam = function()
           local fn = _G.GetArenaTeam
@@ -12445,6 +13295,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetArmorPenetration = function()
           local fn = _G.GetArmorPenetration
@@ -12453,10 +13308,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAttackPowerForStat = function()
           local fn = _G.GetAttackPowerForStat
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAuctionDeposit = function()
           local fn = _G.GetAuctionDeposit
@@ -12465,6 +13330,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAuctionItemInfo = function()
           local fn = _G.GetAuctionItemInfo
@@ -12473,6 +13343,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAuctionItemLink = function()
           local fn = _G.GetAuctionItemLink
@@ -12481,6 +13356,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAuctionItemSubClasses = function()
           local fn = _G.GetAuctionItemSubClasses
@@ -12489,6 +13369,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAuctionItemTimeLeft = function()
           local fn = _G.GetAuctionItemTimeLeft
@@ -12497,6 +13382,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAuctionSellItemInfo = function()
           local fn = _G.GetAuctionSellItemInfo
@@ -12505,6 +13395,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAuctionSort = function()
           local fn = _G.GetAuctionSort
@@ -12513,18 +13408,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAutoCompleteRealms = function()
           local fn = _G.GetAutoCompleteRealms
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAutoDeclineGuildInvites = function()
           local fn = _G.GetAutoDeclineGuildInvites
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAvailableBandwidth = function()
           local fn = _G.GetAvailableBandwidth
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAvailableLocaleInfo = function()
           local fn = _G.GetAvailableLocaleInfo
@@ -12533,10 +13448,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAvailableLocales = function()
           local fn = _G.GetAvailableLocales
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAvailableQuestInfo = function()
           local fn = _G.GetAvailableQuestInfo
@@ -12545,10 +13470,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAvailableTitle = function()
           local fn = _G.GetAvailableTitle
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAverageItemLevel = function()
           local fn = _G.GetAverageItemLevel
@@ -12557,6 +13492,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetAvoidance = function()
           local fn = _G.GetAvoidance
@@ -12565,22 +13505,47 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBagName = function()
           local fn = _G.GetBagName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBagSlotFlag = function()
           local fn = _G.GetBagSlotFlag
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBankBagSlotFlag = function()
           local fn = _G.GetBankBagSlotFlag
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBankSlotCost = function()
           local fn = _G.GetBankSlotCost
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBattlefieldArenaFaction = function()
           local fn = _G.GetBattlefieldArenaFaction
@@ -12589,10 +13554,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBattlefieldFlagPosition = function()
           local fn = _G.GetBattlefieldFlagPosition
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBattlefieldInstanceInfo = function()
           local fn = _G.GetBattlefieldInstanceInfo
@@ -12601,14 +13576,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBattlefieldStatus = function()
           local fn = _G.GetBattlefieldStatus
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBattlegroundInfo = function()
           local fn = _G.GetBattlegroundInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBestRFChoice = function()
           local fn = _G.GetBestRFChoice
@@ -12617,6 +13607,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBidderAuctionItems = function()
           local fn = _G.GetBidderAuctionItems
@@ -12625,34 +13620,74 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBinding = function()
           local fn = _G.GetBinding
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBindingKey = function()
           local fn = _G.GetBindingKey
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBindingText = function()
           local fn = _G.GetBindingText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBuybackItemInfo = function()
           local fn = _G.GetBuybackItemInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetBuybackItemLink = function()
           local fn = _G.GetBuybackItemLink
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCVarInfo = function()
           local fn = _G.GetCVarInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCVarSettingValidity = function()
           local fn = _G.GetCVarSettingValidity
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCategoryAchievementPoints = function()
           local fn = _G.GetCategoryAchievementPoints
@@ -12661,6 +13696,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCategoryInfo = function()
           local fn = _G.GetCategoryInfo
@@ -12669,6 +13709,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCategoryList = function()
           local fn = _G.GetCategoryList
@@ -12677,42 +13722,92 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetChannelDisplayInfo = function()
           local fn = _G.GetChannelDisplayInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetChannelList = function()
           local fn = _G.GetChannelList
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetChatTypeIndex = function()
           local fn = _G.GetChatTypeIndex
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetChatWindowChannels = function()
           local fn = _G.GetChatWindowChannels
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetChatWindowInfo = function()
           local fn = _G.GetChatWindowInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetChatWindowMessages = function()
           local fn = _G.GetChatWindowMessages
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetChatWindowSavedDimensions = function()
           local fn = _G.GetChatWindowSavedDimensions
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetChatWindowSavedPosition = function()
           local fn = _G.GetChatWindowSavedPosition
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetClassInfo = function()
           local fn = _G.GetClassInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetClassicExpansionLevel = function()
           local fn = _G.GetClassicExpansionLevel
@@ -12721,46 +13816,101 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetClickFrame = function()
           local fn = _G.GetClickFrame
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetClientDisplayExpansionLevel = function()
           local fn = _G.GetClientDisplayExpansionLevel
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCoinText = function()
           local fn = _G.GetCoinText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCoinTextureString = function()
           local fn = _G.GetCoinTextureString
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCombatRating = function()
           local fn = _G.GetCombatRating
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCombatRatingBonus = function()
           local fn = _G.GetCombatRatingBonus
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetComboPoints = function()
           local fn = _G.GetComboPoints
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetContainerItemCooldown = function()
           local fn = _G.GetContainerItemCooldown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetContainerItemInfo = function()
           local fn = _G.GetContainerItemInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetContainerItemLink = function()
           local fn = _G.GetContainerItemLink
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetContainerItemQuestInfo = function()
           local fn = _G.GetContainerItemQuestInfo
@@ -12769,14 +13919,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetContainerNumFreeSlots = function()
           local fn = _G.GetContainerNumFreeSlots
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetContainerNumSlots = function()
           local fn = _G.GetContainerNumSlots
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCorruption = function()
           local fn = _G.GetCorruption
@@ -12785,6 +13950,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftButtonToken = function()
           local fn = _G.GetCraftButtonToken
@@ -12793,6 +13963,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftCooldown = function()
           local fn = _G.GetCraftCooldown
@@ -12801,6 +13976,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftDescription = function()
           local fn = _G.GetCraftDescription
@@ -12809,6 +13989,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftDisplaySkillLine = function()
           local fn = _G.GetCraftDisplaySkillLine
@@ -12817,6 +14002,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftFilter = function()
           local fn = _G.GetCraftFilter
@@ -12825,6 +14015,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftIcon = function()
           local fn = _G.GetCraftIcon
@@ -12833,6 +14028,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftInfo = function()
           local fn = _G.GetCraftInfo
@@ -12841,6 +14041,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftName = function()
           local fn = _G.GetCraftName
@@ -12849,6 +14054,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftNumMade = function()
           local fn = _G.GetCraftNumMade
@@ -12857,6 +14067,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftNumReagents = function()
           local fn = _G.GetCraftNumReagents
@@ -12865,6 +14080,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftReagentInfo = function()
           local fn = _G.GetCraftReagentInfo
@@ -12873,6 +14093,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftSelectionIndex = function()
           local fn = _G.GetCraftSelectionIndex
@@ -12881,6 +14106,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftSlots = function()
           local fn = _G.GetCraftSlots
@@ -12889,6 +14119,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCraftSpellFocus = function()
           local fn = _G.GetCraftSpellFocus
@@ -12897,10 +14132,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCritChance = function()
           local fn = _G.GetCritChance
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCritChanceFromAgility = function()
           local fn = _G.GetCritChanceFromAgility
@@ -12909,6 +14154,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCritChanceProvidesParryEffect = function()
           local fn = _G.GetCritChanceProvidesParryEffect
@@ -12917,86 +14167,191 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCurrentArenaSeason = function()
           local fn = _G.GetCurrentArenaSeason
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCurrentBindingSet = function()
           local fn = _G.GetCurrentBindingSet
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCurrentGuildBankTab = function()
           local fn = _G.GetCurrentGuildBankTab
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCurrentRegion = function()
           local fn = _G.GetCurrentRegion
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCurrentRegionName = function()
           local fn = _G.GetCurrentRegionName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCurrentResolution = function()
           local fn = _G.GetCurrentResolution
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCurrentScaledResolution = function()
           local fn = _G.GetCurrentScaledResolution
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCurrentTitle = function()
           local fn = _G.GetCurrentTitle
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCursorInfo = function()
           local fn = _G.GetCursorInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCursorMoney = function()
           local fn = _G.GetCursorMoney
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetCursorPosition = function()
           local fn = _G.GetCursorPosition
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetDailyQuestsCompleted = function()
           local fn = _G.GetDailyQuestsCompleted
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetDefaultLanguage = function()
           local fn = _G.GetDefaultLanguage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetDefaultScale = function()
           local fn = _G.GetDefaultScale
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetDefaultVideoOptions = function()
           local fn = _G.GetDefaultVideoOptions
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetDifficultyInfo = function()
           local fn = _G.GetDifficultyInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetDownloadedPercentage = function()
           local fn = _G.GetDownloadedPercentage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetDungeonDifficultyID = function()
           local fn = _G.GetDungeonDifficultyID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetExistingSocketInfo = function()
           local fn = _G.GetExistingSocketInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetExpansionDisplayInfo = function()
           local fn = _G.GetExpansionDisplayInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetExpansionForLevel = function()
           local fn = _G.GetExpansionForLevel
@@ -13005,18 +14360,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetExpansionLevel = function()
           local fn = _G.GetExpansionLevel
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetExpansionTrialInfo = function()
           local fn = _G.GetExpansionTrialInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetExpertise = function()
           local fn = _G.GetExpertise
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetExpertisePercent = function()
           local fn = _G.GetExpertisePercent
@@ -13025,6 +14400,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetExtraBarIndex = function()
           local fn = _G.GetExtraBarIndex
@@ -13033,18 +14413,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetFactionInfo = function()
           local fn = _G.GetFactionInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetFactionInfoByID = function()
           local fn = _G.GetFactionInfoByID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetFileStreamingStatus = function()
           local fn = _G.GetFileStreamingStatus
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetFirstTradeSkill = function()
           local fn = _G.GetFirstTradeSkill
@@ -13053,10 +14453,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetFramerate = function()
           local fn = _G.GetFramerate
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetFriendshipReputation = function()
           local fn = _G.GetFriendshipReputation
@@ -13065,6 +14475,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetFriendshipReputationRanks = function()
           local fn = _G.GetFriendshipReputationRanks
@@ -13073,18 +14488,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGMStatus = function()
           local fn = _G.GetGMStatus
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGMTicket = function()
           local fn = _G.GetGMTicket
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGameTime = function()
           local fn = _G.GetGameTime
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGossipActiveQuests = function()
           local fn = _G.GetGossipActiveQuests
@@ -13093,6 +14528,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGossipAvailableQuests = function()
           local fn = _G.GetGossipAvailableQuests
@@ -13101,6 +14541,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGossipOptions = function()
           local fn = _G.GetGossipOptions
@@ -13109,6 +14554,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGossipText = function()
           local fn = _G.GetGossipText
@@ -13117,42 +14567,92 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGreetingText = function()
           local fn = _G.GetGreetingText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGroupMemberCounts = function()
           local fn = _G.GetGroupMemberCounts
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildBankItemInfo = function()
           local fn = _G.GetGuildBankItemInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildBankItemLink = function()
           local fn = _G.GetGuildBankItemLink
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildBankMoney = function()
           local fn = _G.GetGuildBankMoney
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildBankMoneyTransaction = function()
           local fn = _G.GetGuildBankMoneyTransaction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildBankTabInfo = function()
           local fn = _G.GetGuildBankTabInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildBankText = function()
           local fn = _G.GetGuildBankText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildBankWithdrawMoney = function()
           local fn = _G.GetGuildBankWithdrawMoney
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildChallengeInfo = function()
           local fn = _G.GetGuildChallengeInfo
@@ -13161,6 +14661,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildEventInfo = function()
           local fn = _G.GetGuildEventInfo
@@ -13169,10 +14674,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildFactionGroup = function()
           local fn = _G.GetGuildFactionGroup
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildFactionInfo = function()
           local fn = _G.GetGuildFactionInfo
@@ -13181,18 +14696,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildInfo = function()
           local fn = _G.GetGuildInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildInfoText = function()
           local fn = _G.GetGuildInfoText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildLogoInfo = function()
           local fn = _G.GetGuildLogoInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildPerkInfo = function()
           local fn = _G.GetGuildPerkInfo
@@ -13201,10 +14736,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildRenameRequired = function()
           local fn = _G.GetGuildRenameRequired
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildRewardInfo = function()
           local fn = _G.GetGuildRewardInfo
@@ -13213,42 +14758,92 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildRosterInfo = function()
           local fn = _G.GetGuildRosterInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildRosterMOTD = function()
           local fn = _G.GetGuildRosterMOTD
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildRosterSelection = function()
           local fn = _G.GetGuildRosterSelection
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildRosterShowOffline = function()
           local fn = _G.GetGuildRosterShowOffline
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetGuildTabardFiles = function()
           local fn = _G.GetGuildTabardFiles
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetHaste = function()
           local fn = _G.GetHaste
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInboxHeaderInfo = function()
           local fn = _G.GetInboxHeaderInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInboxItemLink = function()
           local fn = _G.GetInboxItemLink
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInboxNumItems = function()
           local fn = _G.GetInboxNumItems
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInspectArenaTeamData = function()
           local fn = _G.GetInspectArenaTeamData
@@ -13257,10 +14852,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInspectHonorData = function()
           local fn = _G.GetInspectHonorData
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInspectPVPRankProgress = function()
           local fn = _G.GetInspectPVPRankProgress
@@ -13269,86 +14874,191 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInstanceInfo = function()
           local fn = _G.GetInstanceInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInstanceLockTimeRemaining = function()
           local fn = _G.GetInstanceLockTimeRemaining
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInventoryAlertStatus = function()
           local fn = _G.GetInventoryAlertStatus
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInventoryItemCooldown = function()
           local fn = _G.GetInventoryItemCooldown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInventoryItemCount = function()
           local fn = _G.GetInventoryItemCount
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInventoryItemDurability = function()
           local fn = _G.GetInventoryItemDurability
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInventoryItemID = function()
           local fn = _G.GetInventoryItemID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInventoryItemLink = function()
           local fn = _G.GetInventoryItemLink
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInventoryItemQuality = function()
           local fn = _G.GetInventoryItemQuality
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInventoryItemTexture = function()
           local fn = _G.GetInventoryItemTexture
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetInventorySlotInfo = function()
           local fn = _G.GetInventorySlotInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetItemClassInfo = function()
           local fn = _G.GetItemClassInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetItemCooldown = function()
           local fn = _G.GetItemCooldown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetItemCount = function()
           local fn = _G.GetItemCount
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetItemIcon = function()
           local fn = _G.GetItemIcon
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetItemInfo = function()
           local fn = _G.GetItemInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetItemInfoInstant = function()
           local fn = _G.GetItemInfoInstant
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetItemInventorySlotInfo = function()
           local fn = _G.GetItemInventorySlotInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetItemQualityColor = function()
           local fn = _G.GetItemQualityColor
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetItemSubClassInfo = function()
           local fn = _G.GetItemSubClassInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFDChoiceCollapseState = function()
           local fn = _G.GetLFDChoiceCollapseState
@@ -13357,6 +15067,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFDLockInfo = function()
           local fn = _G.GetLFDLockInfo
@@ -13365,6 +15080,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFDLockPlayerCount = function()
           local fn = _G.GetLFDLockPlayerCount
@@ -13373,6 +15093,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFDRoleRestrictions = function()
           local fn = _G.GetLFDRoleRestrictions
@@ -13381,6 +15106,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGBootProposal = function()
           local fn = _G.GetLFGBootProposal
@@ -13389,6 +15119,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGCategoryForID = function()
           local fn = _G.GetLFGCategoryForID
@@ -13397,6 +15132,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGCompletionReward = function()
           local fn = _G.GetLFGCompletionReward
@@ -13405,6 +15145,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGCompletionRewardItem = function()
           local fn = _G.GetLFGCompletionRewardItem
@@ -13413,6 +15158,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGCompletionRewardItemLink = function()
           local fn = _G.GetLFGCompletionRewardItemLink
@@ -13421,6 +15171,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGDeserterExpiration = function()
           local fn = _G.GetLFGDeserterExpiration
@@ -13429,6 +15184,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGDungeonInfo = function()
           local fn = _G.GetLFGDungeonInfo
@@ -13437,6 +15197,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGDungeonNumEncounters = function()
           local fn = _G.GetLFGDungeonNumEncounters
@@ -13445,6 +15210,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGDungeonRewardCapInfo = function()
           local fn = _G.GetLFGDungeonRewardCapInfo
@@ -13453,6 +15223,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGDungeonRewardInfo = function()
           local fn = _G.GetLFGDungeonRewardInfo
@@ -13461,6 +15236,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGDungeonRewards = function()
           local fn = _G.GetLFGDungeonRewards
@@ -13469,6 +15249,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGInfoServer = function()
           local fn = _G.GetLFGInfoServer
@@ -13477,6 +15262,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGProposal = function()
           local fn = _G.GetLFGProposal
@@ -13485,6 +15275,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGQueuedList = function()
           local fn = _G.GetLFGQueuedList
@@ -13493,6 +15288,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGRandomDungeonInfo = function()
           local fn = _G.GetLFGRandomDungeonInfo
@@ -13501,6 +15301,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGReadyCheckUpdate = function()
           local fn = _G.GetLFGReadyCheckUpdate
@@ -13509,6 +15314,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGRoleShortageRewards = function()
           local fn = _G.GetLFGRoleShortageRewards
@@ -13517,6 +15327,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGRoleUpdate = function()
           local fn = _G.GetLFGRoleUpdate
@@ -13525,6 +15340,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLFGRoles = function()
           local fn = _G.GetLFGRoles
@@ -13533,14 +15353,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLanguageByIndex = function()
           local fn = _G.GetLanguageByIndex
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLegacyRaidDifficultyID = function()
           local fn = _G.GetLegacyRaidDifficultyID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLifesteal = function()
           local fn = _G.GetLifesteal
@@ -13549,22 +15384,47 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLocale = function()
           local fn = _G.GetLocale
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLooseMacroIcons = function()
           local fn = _G.GetLooseMacroIcons
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLootMethod = function()
           local fn = _G.GetLootMethod
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLootSlotInfo = function()
           local fn = _G.GetLootSlotInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLootSpecialization = function()
           local fn = _G.GetLootSpecialization
@@ -13573,26 +15433,56 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetLootThreshold = function()
           local fn = _G.GetLootThreshold
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMacroIcons = function()
           local fn = _G.GetMacroIcons
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMacroIndexByName = function()
           local fn = _G.GetMacroIndexByName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMacroInfo = function()
           local fn = _G.GetMacroInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMasterLootCandidate = function()
           local fn = _G.GetMasterLootCandidate
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMasteryEffect = function()
           local fn = _G.GetMasteryEffect
@@ -13601,10 +15491,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMaxBattlefieldID = function()
           local fn = _G.GetMaxBattlefieldID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMaxDailyQuests = function()
           local fn = _G.GetMaxDailyQuests
@@ -13613,10 +15513,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMaxLevelForExpansionLevel = function()
           local fn = _G.GetMaxLevelForExpansionLevel
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMaxLevelForLatestExpansion = function()
           local fn = _G.GetMaxLevelForLatestExpansion
@@ -13625,6 +15535,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMaxLevelForPlayerExpansion = function()
           local fn = _G.GetMaxLevelForPlayerExpansion
@@ -13633,18 +15548,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMaxPlayerLevel = function()
           local fn = _G.GetMaxPlayerLevel
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMaxRenderScale = function()
           local fn = _G.GetMaxRenderScale
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMaximumExpansionLevel = function()
           local fn = _G.GetMaximumExpansionLevel
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMerchantCurrencies = function()
           local fn = _G.GetMerchantCurrencies
@@ -13653,6 +15588,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMerchantFilter = function()
           local fn = _G.GetMerchantFilter
@@ -13661,54 +15601,119 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMerchantItemID = function()
           local fn = _G.GetMerchantItemID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMerchantItemInfo = function()
           local fn = _G.GetMerchantItemInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMerchantItemLink = function()
           local fn = _G.GetMerchantItemLink
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMerchantNumItems = function()
           local fn = _G.GetMerchantNumItems
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMinRenderScale = function()
           local fn = _G.GetMinRenderScale
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMinimapZoneText = function()
           local fn = _G.GetMinimapZoneText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMinimumExpansionLevel = function()
           local fn = _G.GetMinimumExpansionLevel
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMirrorTimerInfo = function()
           local fn = _G.GetMirrorTimerInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetModifiedClick = function()
           local fn = _G.GetModifiedClick
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMoney = function()
           local fn = _G.GetMoney
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMouseFocus = function()
           local fn = _G.GetMouseFocus
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetMultiCastBarIndex = function()
           local fn = _G.GetMultiCastBarIndex
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNegativeCorruptionEffectInfo = function()
           local fn = _G.GetNegativeCorruptionEffectInfo
@@ -13717,30 +15722,65 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNetStats = function()
           local fn = _G.GetNetStats
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNewSocketInfo = function()
           local fn = _G.GetNewSocketInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNextPendingInviteConfirmation = function()
           local fn = _G.GetNextPendingInviteConfirmation
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNormalizedRealmName = function()
           local fn = _G.GetNormalizedRealmName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumActiveQuests = function()
           local fn = _G.GetNumActiveQuests
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumAddOns = function()
           local fn = _G.GetNumAddOns
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumArchaeologyRaces = function()
           local fn = _G.GetNumArchaeologyRaces
@@ -13749,6 +15789,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumArenaOpponentSpecs = function()
           local fn = _G.GetNumArenaOpponentSpecs
@@ -13757,10 +15802,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumArenaOpponents = function()
           local fn = _G.GetNumArenaOpponents
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumArtifactsByRace = function()
           local fn = _G.GetNumArtifactsByRace
@@ -13769,6 +15824,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumAuctionItems = function()
           local fn = _G.GetNumAuctionItems
@@ -13777,22 +15837,47 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumAvailableQuests = function()
           local fn = _G.GetNumAvailableQuests
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumBankSlots = function()
           local fn = _G.GetNumBankSlots
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumBattlefieldFlagPositions = function()
           local fn = _G.GetNumBattlefieldFlagPositions
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumBattlefieldScores = function()
           local fn = _G.GetNumBattlefieldScores
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumBattlefields = function()
           local fn = _G.GetNumBattlefields
@@ -13801,6 +15886,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumBattlegroundTypes = function()
           local fn = _G.GetNumBattlegroundTypes
@@ -13809,18 +15899,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumBindings = function()
           local fn = _G.GetNumBindings
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumBuybackItems = function()
           local fn = _G.GetNumBuybackItems
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumClasses = function()
           local fn = _G.GetNumClasses
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumCompletedAchievements = function()
           local fn = _G.GetNumCompletedAchievements
@@ -13829,6 +15939,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumCrafts = function()
           local fn = _G.GetNumCrafts
@@ -13837,18 +15952,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumDisplayChannels = function()
           local fn = _G.GetNumDisplayChannels
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumExpansions = function()
           local fn = _G.GetNumExpansions
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumFactions = function()
           local fn = _G.GetNumFactions
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumGossipAvailableQuests = function()
           local fn = _G.GetNumGossipAvailableQuests
@@ -13857,18 +15992,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumGroupMembers = function()
           local fn = _G.GetNumGroupMembers
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumGuildBankMoneyTransactions = function()
           local fn = _G.GetNumGuildBankMoneyTransactions
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumGuildBankTabs = function()
           local fn = _G.GetNumGuildBankTabs
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumGuildChallenges = function()
           local fn = _G.GetNumGuildChallenges
@@ -13877,6 +16032,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumGuildEvents = function()
           local fn = _G.GetNumGuildEvents
@@ -13885,10 +16045,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumGuildMembers = function()
           local fn = _G.GetNumGuildMembers
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumGuildNews = function()
           local fn = _G.GetNumGuildNews
@@ -13897,6 +16067,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumGuildPerks = function()
           local fn = _G.GetNumGuildPerks
@@ -13905,6 +16080,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumGuildRewards = function()
           local fn = _G.GetNumGuildRewards
@@ -13913,26 +16093,56 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumLanguages = function()
           local fn = _G.GetNumLanguages
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumLootItems = function()
           local fn = _G.GetNumLootItems
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumMacros = function()
           local fn = _G.GetNumMacros
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumPetitionNames = function()
           local fn = _G.GetNumPetitionNames
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumQuestChoices = function()
           local fn = _G.GetNumQuestChoices
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumQuestCurrencies = function()
           local fn = _G.GetNumQuestCurrencies
@@ -13941,18 +16151,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumQuestItems = function()
           local fn = _G.GetNumQuestItems
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumQuestLeaderBoards = function()
           local fn = _G.GetNumQuestLeaderBoards
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumQuestLogChoices = function()
           local fn = _G.GetNumQuestLogChoices
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumQuestLogEntries = function()
           local fn = _G.GetNumQuestLogEntries
@@ -13961,18 +16191,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumQuestLogRewardSpells = function()
           local fn = _G.GetNumQuestLogRewardSpells
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumQuestLogRewards = function()
           local fn = _G.GetNumQuestLogRewards
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumQuestRewards = function()
           local fn = _G.GetNumQuestRewards
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumQuestWatches = function()
           local fn = _G.GetNumQuestWatches
@@ -13981,6 +16231,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumRFDungeons = function()
           local fn = _G.GetNumRFDungeons
@@ -13989,6 +16244,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumRandomDungeons = function()
           local fn = _G.GetNumRandomDungeons
@@ -13997,6 +16257,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumRewardCurrencies = function()
           local fn = _G.GetNumRewardCurrencies
@@ -14005,14 +16270,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumRewardSpells = function()
           local fn = _G.GetNumRewardSpells
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumSavedInstances = function()
           local fn = _G.GetNumSavedInstances
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumSavedWorldBosses = function()
           local fn = _G.GetNumSavedWorldBosses
@@ -14021,10 +16301,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumShapeshiftForms = function()
           local fn = _G.GetNumShapeshiftForms
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumSkillLines = function()
           local fn = _G.GetNumSkillLines
@@ -14033,10 +16323,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumSockets = function()
           local fn = _G.GetNumSockets
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumSpecGroups = function()
           local fn = _G.GetNumSpecGroups
@@ -14045,6 +16345,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumSpecializations = function()
           local fn = _G.GetNumSpecializations
@@ -14053,6 +16358,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumSpecializationsForClassID = function()
           local fn = _G.GetNumSpecializationsForClassID
@@ -14061,14 +16371,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumSpellTabs = function()
           local fn = _G.GetNumSpellTabs
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumSubgroupMembers = function()
           local fn = _G.GetNumSubgroupMembers
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumTalentTabs = function()
           local fn = _G.GetNumTalentTabs
@@ -14077,6 +16402,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumTalents = function()
           local fn = _G.GetNumTalents
@@ -14085,14 +16415,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumTitles = function()
           local fn = _G.GetNumTitles
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumTrackingTypes = function()
           local fn = _G.GetNumTrackingTypes
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumTradeSkills = function()
           local fn = _G.GetNumTradeSkills
@@ -14101,10 +16446,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumTrainerServices = function()
           local fn = _G.GetNumTrainerServices
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumVoidTransferDeposit = function()
           local fn = _G.GetNumVoidTransferDeposit
@@ -14113,6 +16468,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetNumVoidTransferWithdrawal = function()
           local fn = _G.GetNumVoidTransferWithdrawal
@@ -14121,10 +16481,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetOptOutOfLoot = function()
           local fn = _G.GetOptOutOfLoot
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetOverrideBarIndex = function()
           local fn = _G.GetOverrideBarIndex
@@ -14133,6 +16503,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetOwnerAuctionItems = function()
           local fn = _G.GetOwnerAuctionItems
@@ -14141,6 +16516,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPVPLastWeekStats = function()
           local fn = _G.GetPVPLastWeekStats
@@ -14149,10 +16529,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPVPLifetimeStats = function()
           local fn = _G.GetPVPLifetimeStats
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPVPRankInfo = function()
           local fn = _G.GetPVPRankInfo
@@ -14161,6 +16551,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPVPRankProgress = function()
           local fn = _G.GetPVPRankProgress
@@ -14169,6 +16564,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPVPRoles = function()
           local fn = _G.GetPVPRoles
@@ -14177,10 +16577,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPVPSessionStats = function()
           local fn = _G.GetPVPSessionStats
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPVPThisWeekStats = function()
           local fn = _G.GetPVPThisWeekStats
@@ -14189,10 +16599,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPVPYesterdayStats = function()
           local fn = _G.GetPVPYesterdayStats
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPartyLFGID = function()
           local fn = _G.GetPartyLFGID
@@ -14201,18 +16621,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPetActionCooldown = function()
           local fn = _G.GetPetActionCooldown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPetActionInfo = function()
           local fn = _G.GetPetActionInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPetExperience = function()
           local fn = _G.GetPetExperience
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPetHappiness = function()
           local fn = _G.GetPetHappiness
@@ -14221,6 +16661,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPetTrainingPoints = function()
           local fn = _G.GetPetTrainingPoints
@@ -14229,26 +16674,56 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPetitionInfo = function()
           local fn = _G.GetPetitionInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPetitionNameInfo = function()
           local fn = _G.GetPetitionNameInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPhysicalScreenSize = function()
           local fn = _G.GetPhysicalScreenSize
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPlayerInfoByGUID = function()
           local fn = _G.GetPlayerInfoByGUID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetPlayerTradeMoney = function()
           local fn = _G.GetPlayerTradeMoney
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetProfessions = function()
           local fn = _G.GetProfessions
@@ -14257,14 +16732,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetProgressText = function()
           local fn = _G.GetProgressText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestBackgroundMaterial = function()
           local fn = _G.GetQuestBackgroundMaterial
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestCurrencyInfo = function()
           local fn = _G.GetQuestCurrencyInfo
@@ -14273,6 +16763,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestGreenRange = function()
           local fn = _G.GetQuestGreenRange
@@ -14281,10 +16776,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestID = function()
           local fn = _G.GetQuestID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestIndexForWatch = function()
           local fn = _G.GetQuestIndexForWatch
@@ -14293,10 +16798,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestItemInfo = function()
           local fn = _G.GetQuestItemInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestItemInfoLootType = function()
           local fn = _G.GetQuestItemInfoLootType
@@ -14305,14 +16820,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestItemLink = function()
           local fn = _G.GetQuestItemLink
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogChoiceInfo = function()
           local fn = _G.GetQuestLogChoiceInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogGroupNum = function()
           local fn = _G.GetQuestLogGroupNum
@@ -14321,6 +16851,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogIndexByID = function()
           local fn = _G.GetQuestLogIndexByID
@@ -14329,10 +16864,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogLeaderBoard = function()
           local fn = _G.GetQuestLogLeaderBoard
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogPushable = function()
           local fn = _G.GetQuestLogPushable
@@ -14341,10 +16886,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogQuestText = function()
           local fn = _G.GetQuestLogQuestText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogRequiredMoney = function()
           local fn = _G.GetQuestLogRequiredMoney
@@ -14353,26 +16908,56 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogRewardHonor = function()
           local fn = _G.GetQuestLogRewardHonor
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogRewardInfo = function()
           local fn = _G.GetQuestLogRewardInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogRewardMoney = function()
           local fn = _G.GetQuestLogRewardMoney
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogRewardSpell = function()
           local fn = _G.GetQuestLogRewardSpell
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogRewardTitle = function()
           local fn = _G.GetQuestLogRewardTitle
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogSelection = function()
           local fn = _G.GetQuestLogSelection
@@ -14381,10 +16966,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogTimeLeft = function()
           local fn = _G.GetQuestLogTimeLeft
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestLogTitle = function()
           local fn = _G.GetQuestLogTitle
@@ -14393,10 +16988,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestMoneyToGet = function()
           local fn = _G.GetQuestMoneyToGet
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestPOIs = function()
           local fn = _G.GetQuestPOIs
@@ -14405,10 +17010,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestPortraitTurnIn = function()
           local fn = _G.GetQuestPortraitTurnIn
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestTimers = function()
           local fn = _G.GetQuestTimers
@@ -14417,6 +17032,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetQuestsCompleted = function()
           local fn = _G.GetQuestsCompleted
@@ -14425,6 +17045,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRFDungeonInfo = function()
           local fn = _G.GetRFDungeonInfo
@@ -14433,18 +17058,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRaidDifficultyID = function()
           local fn = _G.GetRaidDifficultyID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRaidRosterInfo = function()
           local fn = _G.GetRaidRosterInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRaidTargetIndex = function()
           local fn = _G.GetRaidTargetIndex
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRandomDungeonBestChoice = function()
           local fn = _G.GetRandomDungeonBestChoice
@@ -14453,46 +17098,101 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRangedCritChance = function()
           local fn = _G.GetRangedCritChance
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetReadyCheckStatus = function()
           local fn = _G.GetReadyCheckStatus
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRealZoneText = function()
           local fn = _G.GetRealZoneText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRealmID = function()
           local fn = _G.GetRealmID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRealmName = function()
           local fn = _G.GetRealmName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetReleaseTimeRemaining = function()
           local fn = _G.GetReleaseTimeRemaining
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRepairAllCost = function()
           local fn = _G.GetRepairAllCost
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetResSicknessDuration = function()
           local fn = _G.GetResSicknessDuration
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRestState = function()
           local fn = _G.GetRestState
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRestrictedAccountData = function()
           local fn = _G.GetRestrictedAccountData
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRewardArtifactXP = function()
           local fn = _G.GetRewardArtifactXP
@@ -14501,14 +17201,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRewardHonor = function()
           local fn = _G.GetRewardHonor
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRewardMoney = function()
           local fn = _G.GetRewardMoney
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRewardSkillPoints = function()
           local fn = _G.GetRewardSkillPoints
@@ -14517,46 +17232,101 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRewardSpell = function()
           local fn = _G.GetRewardSpell
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRewardText = function()
           local fn = _G.GetRewardText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRewardTitle = function()
           local fn = _G.GetRewardTitle
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetRewardXP = function()
           local fn = _G.GetRewardXP
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSavedInstanceChatLink = function()
           local fn = _G.GetSavedInstanceChatLink
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSavedInstanceInfo = function()
           local fn = _G.GetSavedInstanceInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSchoolString = function()
           local fn = _G.GetSchoolString
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetScreenHeight = function()
           local fn = _G.GetScreenHeight
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetScreenResolutions = function()
           local fn = _G.GetScreenResolutions
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetScreenWidth = function()
           local fn = _G.GetScreenWidth
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSelectedAuctionItem = function()
           local fn = _G.GetSelectedAuctionItem
@@ -14565,6 +17335,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSelectedBattlefield = function()
           local fn = _G.GetSelectedBattlefield
@@ -14573,10 +17348,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSelectedFaction = function()
           local fn = _G.GetSelectedFaction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSelectedSkill = function()
           local fn = _G.GetSelectedSkill
@@ -14585,34 +17370,74 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSendMailPrice = function()
           local fn = _G.GetSendMailPrice
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetServerExpansionLevel = function()
           local fn = _G.GetServerExpansionLevel
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetServerTime = function()
           local fn = _G.GetServerTime
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetShapeshiftForm = function()
           local fn = _G.GetShapeshiftForm
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetShapeshiftFormCooldown = function()
           local fn = _G.GetShapeshiftFormCooldown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetShapeshiftFormID = function()
           local fn = _G.GetShapeshiftFormID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetShapeshiftFormInfo = function()
           local fn = _G.GetShapeshiftFormInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSkillLineInfo = function()
           local fn = _G.GetSkillLineInfo
@@ -14621,22 +17446,47 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSocketItemBoundTradeable = function()
           local fn = _G.GetSocketItemBoundTradeable
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSocketItemInfo = function()
           local fn = _G.GetSocketItemInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSocketItemRefundable = function()
           local fn = _G.GetSocketItemRefundable
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSocketTypes = function()
           local fn = _G.GetSocketTypes
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpecialization = function()
           local fn = _G.GetSpecialization
@@ -14645,6 +17495,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpecializationInfo = function()
           local fn = _G.GetSpecializationInfo
@@ -14653,6 +17508,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpecializationInfoByID = function()
           local fn = _G.GetSpecializationInfoByID
@@ -14661,6 +17521,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpecializationInfoForClassID = function()
           local fn = _G.GetSpecializationInfoForClassID
@@ -14669,6 +17534,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpecializationNameForSpecID = function()
           local fn = _G.GetSpecializationNameForSpecID
@@ -14677,6 +17547,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpecializationRole = function()
           local fn = _G.GetSpecializationRole
@@ -14685,6 +17560,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpeed = function()
           local fn = _G.GetSpeed
@@ -14693,38 +17573,83 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellAutocast = function()
           local fn = _G.GetSpellAutocast
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellBonusHealing = function()
           local fn = _G.GetSpellBonusHealing
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellBookItemInfo = function()
           local fn = _G.GetSpellBookItemInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellBookItemName = function()
           local fn = _G.GetSpellBookItemName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellBookItemTexture = function()
           local fn = _G.GetSpellBookItemTexture
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellConfirmationPromptsInfo = function()
           local fn = _G.GetSpellConfirmationPromptsInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellCooldown = function()
           local fn = _G.GetSpellCooldown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellCritChance = function()
           local fn = _G.GetSpellCritChance
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellCritChanceFromIntellect = function()
           local fn = _G.GetSpellCritChanceFromIntellect
@@ -14733,50 +17658,110 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellDescription = function()
           local fn = _G.GetSpellDescription
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellInfo = function()
           local fn = _G.GetSpellInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellSubtext = function()
           local fn = _G.GetSpellSubtext
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellTabInfo = function()
           local fn = _G.GetSpellTabInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSpellTexture = function()
           local fn = _G.GetSpellTexture
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetStablePetFoodTypes = function()
           local fn = _G.GetStablePetFoodTypes
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetStablePetInfo = function()
           local fn = _G.GetStablePetInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSubZoneText = function()
           local fn = _G.GetSubZoneText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetSummonFriendCooldown = function()
           local fn = _G.GetSummonFriendCooldown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTabardCreationCost = function()
           local fn = _G.GetTabardCreationCost
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTalentInfo = function()
           local fn = _G.GetTalentInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTalentInfoBySpecialization = function()
           local fn = _G.GetTalentInfoBySpecialization
@@ -14785,6 +17770,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTalentTabInfo = function()
           local fn = _G.GetTalentTabInfo
@@ -14793,26 +17783,56 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTargetTradeMoney = function()
           local fn = _G.GetTargetTradeMoney
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetText = function()
           local fn = _G.GetText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTime = function()
           local fn = _G.GetTime
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTitleName = function()
           local fn = _G.GetTitleName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTitleText = function()
           local fn = _G.GetTitleText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTotalAchievementPoints = function()
           local fn = _G.GetTotalAchievementPoints
@@ -14821,10 +17841,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTotemInfo = function()
           local fn = _G.GetTotemInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTrackedAchievements = function()
           local fn = _G.GetTrackedAchievements
@@ -14833,10 +17863,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTrackingInfo = function()
           local fn = _G.GetTrackingInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTrackingTexture = function()
           local fn = _G.GetTrackingTexture
@@ -14845,14 +17885,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradePlayerItemInfo = function()
           local fn = _G.GetTradePlayerItemInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradePlayerItemLink = function()
           local fn = _G.GetTradePlayerItemLink
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillCooldown = function()
           local fn = _G.GetTradeSkillCooldown
@@ -14861,6 +17916,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillIcon = function()
           local fn = _G.GetTradeSkillIcon
@@ -14869,6 +17929,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillInfo = function()
           local fn = _G.GetTradeSkillInfo
@@ -14877,6 +17942,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillInvSlotFilter = function()
           local fn = _G.GetTradeSkillInvSlotFilter
@@ -14885,6 +17955,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillInvSlots = function()
           local fn = _G.GetTradeSkillInvSlots
@@ -14893,6 +17968,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillLine = function()
           local fn = _G.GetTradeSkillLine
@@ -14901,6 +17981,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillNumMade = function()
           local fn = _G.GetTradeSkillNumMade
@@ -14909,6 +17994,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillNumReagents = function()
           local fn = _G.GetTradeSkillNumReagents
@@ -14917,6 +18007,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillReagentInfo = function()
           local fn = _G.GetTradeSkillReagentInfo
@@ -14925,6 +18020,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillSelectionIndex = function()
           local fn = _G.GetTradeSkillSelectionIndex
@@ -14933,6 +18033,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillSubClassFilter = function()
           local fn = _G.GetTradeSkillSubClassFilter
@@ -14941,6 +18046,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillSubClasses = function()
           local fn = _G.GetTradeSkillSubClasses
@@ -14949,6 +18059,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeSkillTools = function()
           local fn = _G.GetTradeSkillTools
@@ -14957,14 +18072,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeTargetItemInfo = function()
           local fn = _G.GetTradeTargetItemInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeTargetItemLink = function()
           local fn = _G.GetTradeTargetItemLink
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTradeskillRepeatCount = function()
           local fn = _G.GetTradeskillRepeatCount
@@ -14973,46 +18103,101 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTrainerGreetingText = function()
           local fn = _G.GetTrainerGreetingText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTrainerSelectionIndex = function()
           local fn = _G.GetTrainerSelectionIndex
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTrainerServiceAbilityReq = function()
           local fn = _G.GetTrainerServiceAbilityReq
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTrainerServiceCost = function()
           local fn = _G.GetTrainerServiceCost
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTrainerServiceInfo = function()
           local fn = _G.GetTrainerServiceInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTrainerServiceNumAbilityReq = function()
           local fn = _G.GetTrainerServiceNumAbilityReq
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTrainerServiceStepIndex = function()
           local fn = _G.GetTrainerServiceStepIndex
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTrainerServiceTypeFilter = function()
           local fn = _G.GetTrainerServiceTypeFilter
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTrainerTradeskillRankValues = function()
           local fn = _G.GetTrainerTradeskillRankValues
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetTutorialsEnabled = function()
           local fn = _G.GetTutorialsEnabled
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetUnitChargedPowerPoints = function()
           local fn = _G.GetUnitChargedPowerPoints
@@ -15021,6 +18206,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetUnitHealthRegenRateFromSpirit = function()
           local fn = _G.GetUnitHealthRegenRateFromSpirit
@@ -15029,6 +18219,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetUnitManaRegenRateFromSpirit = function()
           local fn = _G.GetUnitManaRegenRateFromSpirit
@@ -15037,10 +18232,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetUnitMaxHealthModifier = function()
           local fn = _G.GetUnitMaxHealthModifier
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetUnitPowerBarInfo = function()
           local fn = _G.GetUnitPowerBarInfo
@@ -15049,6 +18254,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetUnitPowerBarInfoByID = function()
           local fn = _G.GetUnitPowerBarInfoByID
@@ -15057,6 +18267,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetUnitPowerBarStrings = function()
           local fn = _G.GetUnitPowerBarStrings
@@ -15065,6 +18280,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetUnitPowerBarStringsByID = function()
           local fn = _G.GetUnitPowerBarStringsByID
@@ -15073,6 +18293,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetUnitPowerBarTextureInfo = function()
           local fn = _G.GetUnitPowerBarTextureInfo
@@ -15081,6 +18306,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetUnitPowerBarTextureInfoByID = function()
           local fn = _G.GetUnitPowerBarTextureInfoByID
@@ -15089,6 +18319,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetVehicleBarIndex = function()
           local fn = _G.GetVehicleBarIndex
@@ -15097,6 +18332,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetVersatilityBonus = function()
           local fn = _G.GetVersatilityBonus
@@ -15105,6 +18345,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetVoidItemInfo = function()
           local fn = _G.GetVoidItemInfo
@@ -15113,6 +18358,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetVoidTransferCost = function()
           local fn = _G.GetVoidTransferCost
@@ -15121,6 +18371,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetVoidTransferDepositInfo = function()
           local fn = _G.GetVoidTransferDepositInfo
@@ -15129,6 +18384,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetVoidTransferWithdrawalInfo = function()
           local fn = _G.GetVoidTransferWithdrawalInfo
@@ -15137,6 +18397,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetVoidUnlockCost = function()
           local fn = _G.GetVoidUnlockCost
@@ -15145,18 +18410,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetWatchedFactionInfo = function()
           local fn = _G.GetWatchedFactionInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetWeaponEnchantInfo = function()
           local fn = _G.GetWeaponEnchantInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetWebTicket = function()
           local fn = _G.GetWebTicket
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetWorldElapsedTimers = function()
           local fn = _G.GetWorldElapsedTimers
@@ -15165,6 +18450,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetWorldPVPQueueStatus = function()
           local fn = _G.GetWorldPVPQueueStatus
@@ -15173,30 +18463,65 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetXPExhaustion = function()
           local fn = _G.GetXPExhaustion
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetZonePVPInfo = function()
           local fn = _G.GetZonePVPInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GetZoneText = function()
           local fn = _G.GetZoneText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GuildControlGetNumRanks = function()
           local fn = _G.GuildControlGetNumRanks
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GuildControlGetRankName = function()
           local fn = _G.GuildControlGetRankName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GuildControlSetRank = function()
           local fn = _G.GuildControlSetRank
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GuildNewsSort = function()
           local fn = _G.GuildNewsSort
@@ -15205,6 +18530,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         GuildRoster = function()
           local fn = _G.GuildRoster
@@ -15213,10 +18543,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasAction = function()
           local fn = _G.HasAction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasArtifactEquipped = function()
           local fn = _G.HasArtifactEquipped
@@ -15225,14 +18565,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasBonusActionBar = function()
           local fn = _G.HasBonusActionBar
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasBoundGemProposed = function()
           local fn = _G.HasBoundGemProposed
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasCompletedAnyAchievement = function()
           local fn = _G.HasCompletedAnyAchievement
@@ -15241,6 +18596,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasExtraActionBar = function()
           local fn = _G.HasExtraActionBar
@@ -15249,6 +18609,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasFilledPetition = function()
           local fn = _G.HasFilledPetition
@@ -15257,6 +18622,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasKey = function()
           local fn = _G.HasKey
@@ -15265,6 +18635,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasLFGRestrictions = function()
           local fn = _G.HasLFGRestrictions
@@ -15273,14 +18648,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasLoadedCUFProfiles = function()
           local fn = _G.HasLoadedCUFProfiles
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasNewMail = function()
           local fn = _G.HasNewMail
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasOverrideActionBar = function()
           local fn = _G.HasOverrideActionBar
@@ -15289,22 +18679,47 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasPetSpells = function()
           local fn = _G.HasPetSpells
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasPetUI = function()
           local fn = _G.HasPetUI
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasSendMailItem = function()
           local fn = _G.HasSendMailItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasTempShapeshiftActionBar = function()
           local fn = _G.HasTempShapeshiftActionBar
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HasVehicleActionBar = function()
           local fn = _G.HasVehicleActionBar
@@ -15313,14 +18728,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HaveQuestData = function()
           local fn = _G.HaveQuestData
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HaveQuestRewardData = function()
           local fn = _G.HaveQuestRewardData
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         HonorSystemEnabled = function()
           local fn = _G.HonorSystemEnabled
@@ -15329,6 +18759,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         InActiveBattlefield = function()
           local fn = _G.InActiveBattlefield
@@ -15337,42 +18772,92 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         InCinematic = function()
           local fn = _G.InCinematic
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         InCombatLockdown = function()
           local fn = _G.InCombatLockdown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         InRepairMode = function()
           local fn = _G.InRepairMode
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         InboxItemCanDelete = function()
           local fn = _G.InboxItemCanDelete
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         InitiateTrade = function()
           local fn = _G.InitiateTrade
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         InteractUnit = function()
           local fn = _G.InteractUnit
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsAccountSecured = function()
           local fn = _G.IsAccountSecured
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsActionInRange = function()
           local fn = _G.IsActionInRange
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsActiveBattlefieldArena = function()
           local fn = _G.IsActiveBattlefieldArena
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsActiveQuestLegendary = function()
           local fn = _G.IsActiveQuestLegendary
@@ -15381,26 +18866,56 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsActiveQuestTrivial = function()
           local fn = _G.IsActiveQuestTrivial
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsAddOnLoadOnDemand = function()
           local fn = _G.IsAddOnLoadOnDemand
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsAddOnLoaded = function()
           local fn = _G.IsAddOnLoaded
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsAddonVersionCheckEnabled = function()
           local fn = _G.IsAddonVersionCheckEnabled
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsAltKeyDown = function()
           local fn = _G.IsAltKeyDown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsArtifactRelicItem = function()
           local fn = _G.IsArtifactRelicItem
@@ -15409,22 +18924,47 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsAttackAction = function()
           local fn = _G.IsAttackAction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsAutoRepeatAction = function()
           local fn = _G.IsAutoRepeatAction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsAutoRepeatSpell = function()
           local fn = _G.IsAutoRepeatSpell
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsBattlePayItem = function()
           local fn = _G.IsBattlePayItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsBattlefieldArena = function()
           local fn = _G.IsBattlefieldArena
@@ -15433,10 +18973,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsCemeterySelectionAvailable = function()
           local fn = _G.IsCemeterySelectionAvailable
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsCharacterNewlyBoosted = function()
           local fn = _G.IsCharacterNewlyBoosted
@@ -15445,22 +18995,47 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsConsumableAction = function()
           local fn = _G.IsConsumableAction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsConsumableItem = function()
           local fn = _G.IsConsumableItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsConsumableSpell = function()
           local fn = _G.IsConsumableSpell
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsContainerFiltered = function()
           local fn = _G.IsContainerFiltered
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsContainerItemAnUpgrade = function()
           local fn = _G.IsContainerItemAnUpgrade
@@ -15469,10 +19044,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsControlKeyDown = function()
           local fn = _G.IsControlKeyDown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsCorruptedItem = function()
           local fn = _G.IsCorruptedItem
@@ -15481,6 +19066,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsCosmeticItem = function()
           local fn = _G.IsCosmeticItem
@@ -15489,58 +19079,128 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsCurrentAction = function()
           local fn = _G.IsCurrentAction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsCurrentQuestFailed = function()
           local fn = _G.IsCurrentQuestFailed
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsCurrentSpell = function()
           local fn = _G.IsCurrentSpell
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsEncounterInProgress = function()
           local fn = _G.IsEncounterInProgress
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsEncounterLimitingResurrections = function()
           local fn = _G.IsEncounterLimitingResurrections
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsEquippedAction = function()
           local fn = _G.IsEquippedAction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsEquippedItem = function()
           local fn = _G.IsEquippedItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsEveryoneAssistant = function()
           local fn = _G.IsEveryoneAssistant
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsExpansionTrial = function()
           local fn = _G.IsExpansionTrial
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsFalling = function()
           local fn = _G.IsFalling
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsFishingLoot = function()
           local fn = _G.IsFishingLoot
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsGMClient = function()
           local fn = _G.IsGMClient
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsGuildLeader = function()
           local fn = _G.IsGuildLeader
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsInActiveWorldPVP = function()
           local fn = _G.IsInActiveWorldPVP
@@ -15549,18 +19209,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsInGroup = function()
           local fn = _G.IsInGroup
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsInGuild = function()
           local fn = _G.IsInGuild
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsInInstance = function()
           local fn = _G.IsInInstance
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsInJailersTower = function()
           local fn = _G.IsInJailersTower
@@ -15569,26 +19249,56 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsInRaid = function()
           local fn = _G.IsInRaid
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsInventoryItemLocked = function()
           local fn = _G.IsInventoryItemLocked
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsInventoryItemProfessionBag = function()
           local fn = _G.IsInventoryItemProfessionBag
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsItemAction = function()
           local fn = _G.IsItemAction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsItemInRange = function()
           local fn = _G.IsItemInRange
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsLFGDungeonJoinable = function()
           local fn = _G.IsLFGDungeonJoinable
@@ -15597,30 +19307,65 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsLoggedIn = function()
           local fn = _G.IsLoggedIn
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsMacClient = function()
           local fn = _G.IsMacClient
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsModifiedClick = function()
           local fn = _G.IsModifiedClick
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsMounted = function()
           local fn = _G.IsMounted
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsOnGlueScreen = function()
           local fn = _G.IsOnGlueScreen
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsPVPTimerRunning = function()
           local fn = _G.IsPVPTimerRunning
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsPartyLFG = function()
           local fn = _G.IsPartyLFG
@@ -15629,22 +19374,47 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsPassiveSpell = function()
           local fn = _G.IsPassiveSpell
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsPetAttackAction = function()
           local fn = _G.IsPetAttackAction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsPlayerInWorld = function()
           local fn = _G.IsPlayerInWorld
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsPlayerMoving = function()
           local fn = _G.IsPlayerMoving
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsPossessBarVisible = function()
           local fn = _G.IsPossessBarVisible
@@ -15653,18 +19423,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsPublicBuild = function()
           local fn = _G.IsPublicBuild
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsQuestCompletable = function()
           local fn = _G.IsQuestCompletable
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsQuestItemHidden = function()
           local fn = _G.IsQuestItemHidden
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsQuestWatched = function()
           local fn = _G.IsQuestWatched
@@ -15673,6 +19463,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsRaidMarkerActive = function()
           local fn = _G.IsRaidMarkerActive
@@ -15681,6 +19476,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsReagentBankUnlocked = function()
           local fn = _G.IsReagentBankUnlocked
@@ -15689,42 +19489,92 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsResting = function()
           local fn = _G.IsResting
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsRestrictedAccount = function()
           local fn = _G.IsRestrictedAccount
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsSelectedSpellBookItem = function()
           local fn = _G.IsSelectedSpellBookItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsShiftKeyDown = function()
           local fn = _G.IsShiftKeyDown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsSpellInRange = function()
           local fn = _G.IsSpellInRange
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsSpellKnown = function()
           local fn = _G.IsSpellKnown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsSpellKnownOrOverridesKnown = function()
           local fn = _G.IsSpellKnownOrOverridesKnown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsStackableAction = function()
           local fn = _G.IsStackableAction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsTestBuild = function()
           local fn = _G.IsTestBuild
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsThreatWarningEnabled = function()
           local fn = _G.IsThreatWarningEnabled
@@ -15733,22 +19583,47 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsTitleKnown = function()
           local fn = _G.IsTitleKnown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsTradeskillTrainer = function()
           local fn = _G.IsTradeskillTrainer
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsTrialAccount = function()
           local fn = _G.IsTrialAccount
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsTutorialFlagged = function()
           local fn = _G.IsTutorialFlagged
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsUnitModelReadyForUI = function()
           local fn = _G.IsUnitModelReadyForUI
@@ -15757,6 +19632,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsUnitOnQuest = function()
           local fn = _G.IsUnitOnQuest
@@ -15765,22 +19645,47 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsUsableAction = function()
           local fn = _G.IsUsableAction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsUsableItem = function()
           local fn = _G.IsUsableItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsUsableSpell = function()
           local fn = _G.IsUsableSpell
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsVeteranTrialAccount = function()
           local fn = _G.IsVeteranTrialAccount
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsVoidStorageReady = function()
           local fn = _G.IsVoidStorageReady
@@ -15789,42 +19694,92 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         IsWindowsClient = function()
           local fn = _G.IsWindowsClient
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ItemTextGetCreator = function()
           local fn = _G.ItemTextGetCreator
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ItemTextGetItem = function()
           local fn = _G.ItemTextGetItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ItemTextGetMaterial = function()
           local fn = _G.ItemTextGetMaterial
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ItemTextGetPage = function()
           local fn = _G.ItemTextGetPage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ItemTextGetText = function()
           local fn = _G.ItemTextGetText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ItemTextHasNextPage = function()
           local fn = _G.ItemTextHasNextPage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ItemTextIsFullPage = function()
           local fn = _G.ItemTextIsFullPage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         JumpOrAscendStart = function()
           local fn = _G.JumpOrAscendStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         KeyRingButtonIDToInvSlotID = function()
           local fn = _G.KeyRingButtonIDToInvSlotID
@@ -15833,110 +19788,245 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         LoadAddOn = function()
           local fn = _G.LoadAddOn
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         LoggingChat = function()
           local fn = _G.LoggingChat
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         LoggingCombat = function()
           local fn = _G.LoggingCombat
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         Logout = function()
           local fn = _G.Logout
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         LootSlotHasItem = function()
           local fn = _G.LootSlotHasItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         MoveAndSteerStart = function()
           local fn = _G.MoveAndSteerStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         MoveAndSteerStop = function()
           local fn = _G.MoveAndSteerStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         MoveBackwardStart = function()
           local fn = _G.MoveBackwardStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         MoveBackwardStop = function()
           local fn = _G.MoveBackwardStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         MoveForwardStart = function()
           local fn = _G.MoveForwardStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         MoveForwardStop = function()
           local fn = _G.MoveForwardStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         MoveViewInStart = function()
           local fn = _G.MoveViewInStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         MoveViewOutStart = function()
           local fn = _G.MoveViewOutStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         MultiSampleAntiAliasingSupported = function()
           local fn = _G.MultiSampleAntiAliasingSupported
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         NextView = function()
           local fn = _G.NextView
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         NoPlayTime = function()
           local fn = _G.NoPlayTime
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PartialPlayTime = function()
           local fn = _G.PartialPlayTime
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PetAttack = function()
           local fn = _G.PetAttack
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PetHasActionBar = function()
           local fn = _G.PetHasActionBar
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PickupContainerItem = function()
           local fn = _G.PickupContainerItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PickupInventoryItem = function()
           local fn = _G.PickupInventoryItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PitchDownStart = function()
           local fn = _G.PitchDownStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PitchDownStop = function()
           local fn = _G.PitchDownStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PitchUpStart = function()
           local fn = _G.PitchUpStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PitchUpStop = function()
           local fn = _G.PitchUpStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PlaySound = function()
           local fn = _G.PlaySound
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PlayerHasToy = function()
           local fn = _G.PlayerHasToy
@@ -15945,10 +20035,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PlayerIsPVPInactive = function()
           local fn = _G.PlayerIsPVPInactive
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PlayerVehicleHasComboPoints = function()
           local fn = _G.PlayerVehicleHasComboPoints
@@ -15957,30 +20057,65 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PrevView = function()
           local fn = _G.PrevView
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PromoteToLeader = function()
           local fn = _G.PromoteToLeader
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PutItemInBackpack = function()
           local fn = _G.PutItemInBackpack
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         PutItemInBag = function()
           local fn = _G.PutItemInBag
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         QueryGuildBankTab = function()
           local fn = _G.QueryGuildBankTab
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         QueryGuildBankText = function()
           local fn = _G.QueryGuildBankText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         QueryGuildNews = function()
           local fn = _G.QueryGuildNews
@@ -15989,6 +20124,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         QuestMapUpdateAllQuests = function()
           local fn = _G.QuestMapUpdateAllQuests
@@ -15997,6 +20137,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         QuestPOIUpdateIcons = function()
           local fn = _G.QuestPOIUpdateIcons
@@ -16005,26 +20150,56 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         Quit = function()
           local fn = _G.Quit
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RandomRoll = function()
           local fn = _G.RandomRoll
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RedockChatWindows = function()
           local fn = _G.RedockChatWindows
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RegisterStaticConstants = function()
           local fn = _G.RegisterStaticConstants
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RepopMe = function()
           local fn = _G.RepopMe
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RequestGuildChallengeInfo = function()
           local fn = _G.RequestGuildChallengeInfo
@@ -16033,6 +20208,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RequestGuildPartyState = function()
           local fn = _G.RequestGuildPartyState
@@ -16041,6 +20221,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RequestGuildRewards = function()
           local fn = _G.RequestGuildRewards
@@ -16049,6 +20234,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RequestLFDPartyLockInfo = function()
           local fn = _G.RequestLFDPartyLockInfo
@@ -16057,6 +20247,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RequestLFDPlayerLockInfo = function()
           local fn = _G.RequestLFDPlayerLockInfo
@@ -16065,6 +20260,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RequestPVPOptionsEnabled = function()
           local fn = _G.RequestPVPOptionsEnabled
@@ -16073,6 +20273,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RequestPVPRewards = function()
           local fn = _G.RequestPVPRewards
@@ -16081,10 +20286,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RequestRaidInfo = function()
           local fn = _G.RequestRaidInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RequestRandomBattlegroundInstanceInfo = function()
           local fn = _G.RequestRandomBattlegroundInstanceInfo
@@ -16093,6 +20308,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RequestRatedInfo = function()
           local fn = _G.RequestRatedInfo
@@ -16101,18 +20321,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RequestTimePlayed = function()
           local fn = _G.RequestTimePlayed
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ResetAddOns = function()
           local fn = _G.ResetAddOns
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ResetCursor = function()
           local fn = _G.ResetCursor
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ResetSetMerchantFilter = function()
           local fn = _G.ResetSetMerchantFilter
@@ -16121,50 +20361,110 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ResetView = function()
           local fn = _G.ResetView
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RespondInstanceLock = function()
           local fn = _G.RespondInstanceLock
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ResurrectGetOfferer = function()
           local fn = _G.ResurrectGetOfferer
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RollOnLoot = function()
           local fn = _G.RollOnLoot
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RunMacroText = function()
           local fn = _G.RunMacroText
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         RunScript = function()
           local fn = _G.RunScript
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SaveBindings = function()
           local fn = _G.SaveBindings
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SaveView = function()
           local fn = _G.SaveView
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         Screenshot = function()
           local fn = _G.Screenshot
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ScriptsDisallowedForBeta = function()
           local fn = _G.ScriptsDisallowedForBeta
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SecureCmdOptionParse = function()
           local fn = _G.SecureCmdOptionParse
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SelectCraft = function()
           local fn = _G.SelectCraft
@@ -16173,6 +20473,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SelectGossipOption = function()
           local fn = _G.SelectGossipOption
@@ -16181,6 +20486,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SelectQuestLogEntry = function()
           local fn = _G.SelectQuestLogEntry
@@ -16189,6 +20499,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SelectTradeSkill = function()
           local fn = _G.SelectTradeSkill
@@ -16197,10 +20512,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SendChatMessage = function()
           local fn = _G.SendChatMessage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SendSubscriptionInterstitialResponse = function()
           local fn = _G.SendSubscriptionInterstitialResponse
@@ -16209,18 +20534,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SendSystemMessage = function()
           local fn = _G.SendSystemMessage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetActionBarToggles = function()
           local fn = _G.SetActionBarToggles
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetActionUIButton = function()
           local fn = _G.SetActionUIButton
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetAuctionsTabShowing = function()
           local fn = _G.SetAuctionsTabShowing
@@ -16229,94 +20574,209 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetBagPortraitTexture = function()
           local fn = _G.SetBagPortraitTexture
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetBinding = function()
           local fn = _G.SetBinding
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetBindingClick = function()
           local fn = _G.SetBindingClick
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetChatWindowDocked = function()
           local fn = _G.SetChatWindowDocked
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetChatWindowLocked = function()
           local fn = _G.SetChatWindowLocked
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetChatWindowName = function()
           local fn = _G.SetChatWindowName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetChatWindowShown = function()
           local fn = _G.SetChatWindowShown
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetChatWindowSize = function()
           local fn = _G.SetChatWindowSize
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetChatWindowUninteractable = function()
           local fn = _G.SetChatWindowUninteractable
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetConsoleKey = function()
           local fn = _G.SetConsoleKey
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetCursor = function()
           local fn = _G.SetCursor
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetGuildRosterSelection = function()
           local fn = _G.SetGuildRosterSelection
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetInsertItemsLeftToRight = function()
           local fn = _G.SetInsertItemsLeftToRight
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetItemSearch = function()
           local fn = _G.SetItemSearch
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetModifiedClick = function()
           local fn = _G.SetModifiedClick
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetOverrideBindingClick = function()
           local fn = _G.SetOverrideBindingClick
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetPartyAssignment = function()
           local fn = _G.SetPartyAssignment
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetPetStablePaperdoll = function()
           local fn = _G.SetPetStablePaperdoll
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetPortraitTexture = function()
           local fn = _G.SetPortraitTexture
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetPortraitTextureFromCreatureDisplayID = function()
           local fn = _G.SetPortraitTextureFromCreatureDisplayID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetPortraitToTexture = function()
           local fn = _G.SetPortraitToTexture
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetRaidTarget = function()
           local fn = _G.SetRaidTarget
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetSelectedSkill = function()
           local fn = _G.SetSelectedSkill
@@ -16325,30 +20785,65 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetSendMailShowing = function()
           local fn = _G.SetSendMailShowing
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetTaxiBenchmarkMode = function()
           local fn = _G.SetTaxiBenchmarkMode
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetTradeMoney = function()
           local fn = _G.SetTradeMoney
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetTrainerServiceTypeFilter = function()
           local fn = _G.SetTrainerServiceTypeFilter
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetUIVisibility = function()
           local fn = _G.SetUIVisibility
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SetView = function()
           local fn = _G.SetView
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ShouldKnowUnitHealth = function()
           local fn = _G.ShouldKnowUnitHealth
@@ -16357,14 +20852,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ShowBossFrameWhenUninteractable = function()
           local fn = _G.ShowBossFrameWhenUninteractable
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SitStandOrDescendStart = function()
           local fn = _G.SitStandOrDescendStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SortAuctionClearSort = function()
           local fn = _G.SortAuctionClearSort
@@ -16373,6 +20883,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SortAuctionSetSort = function()
           local fn = _G.SortAuctionSetSort
@@ -16381,30 +20896,65 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SortQuestSortTypes = function()
           local fn = _G.SortQuestSortTypes
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SortQuests = function()
           local fn = _G.SortQuests
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         Sound_GameSystem_GetNumOutputDrivers = function()
           local fn = _G.Sound_GameSystem_GetNumOutputDrivers
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         Sound_GameSystem_GetOutputDriverNameByIndex = function()
           local fn = _G.Sound_GameSystem_GetOutputDriverNameByIndex
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SpellCanTargetItem = function()
           local fn = _G.SpellCanTargetItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SpellCanTargetItemID = function()
           local fn = _G.SpellCanTargetItemID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SpellCanTargetQuest = function()
           local fn = _G.SpellCanTargetQuest
@@ -16413,70 +20963,155 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SpellCancelQueuedSpell = function()
           local fn = _G.SpellCancelQueuedSpell
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SpellIsTargeting = function()
           local fn = _G.SpellIsTargeting
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SpellStopCasting = function()
           local fn = _G.SpellStopCasting
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SpellStopTargeting = function()
           local fn = _G.SpellStopTargeting
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         StartAttack = function()
           local fn = _G.StartAttack
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         StartAutoRun = function()
           local fn = _G.StartAutoRun
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         StartDuel = function()
           local fn = _G.StartDuel
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         StartWarGameByName = function()
           local fn = _G.StartWarGameByName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         StopAttack = function()
           local fn = _G.StopAttack
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         StopAutoRun = function()
           local fn = _G.StopAutoRun
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         StopMacro = function()
           local fn = _G.StopMacro
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         StoreSecureReference = function()
           local fn = _G.StoreSecureReference
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         StrafeLeftStart = function()
           local fn = _G.StrafeLeftStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         StrafeLeftStop = function()
           local fn = _G.StrafeLeftStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         StrafeRightStart = function()
           local fn = _G.StrafeRightStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         StrafeRightStop = function()
           local fn = _G.StrafeRightStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         SupportsClipCursor = function()
           local fn = _G.SupportsClipCursor
@@ -16485,38 +21120,83 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TargetLastEnemy = function()
           local fn = _G.TargetLastEnemy
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TargetLastTarget = function()
           local fn = _G.TargetLastTarget
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TargetNearestEnemy = function()
           local fn = _G.TargetNearestEnemy
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TargetNearestEnemyPlayer = function()
           local fn = _G.TargetNearestEnemyPlayer
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TargetNearestFriend = function()
           local fn = _G.TargetNearestFriend
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TargetNearestFriendPlayer = function()
           local fn = _G.TargetNearestFriendPlayer
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TargetPriorityHighlightEnd = function()
           local fn = _G.TargetPriorityHighlightEnd
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TargetPriorityHighlightStart = function()
           local fn = _G.TargetPriorityHighlightStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TargetSpellReplacesBonusTree = function()
           local fn = _G.TargetSpellReplacesBonusTree
@@ -16525,78 +21205,173 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TargetUnit = function()
           local fn = _G.TargetUnit
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ToggleAnimKitDisplay = function()
           local fn = _G.ToggleAnimKitDisplay
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ToggleAutoRun = function()
           local fn = _G.ToggleAutoRun
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ToggleDebugAIDisplay = function()
           local fn = _G.ToggleDebugAIDisplay
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TogglePVP = function()
           local fn = _G.TogglePVP
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ToggleRun = function()
           local fn = _G.ToggleRun
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ToggleSelfHighlight = function()
           local fn = _G.ToggleSelfHighlight
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ToggleSheath = function()
           local fn = _G.ToggleSheath
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ToggleWindowed = function()
           local fn = _G.ToggleWindowed
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         ToggleWorldMap = function()
           local fn = _G.ToggleWorldMap
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TriggerTutorial = function()
           local fn = _G.TriggerTutorial
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TurnLeftStart = function()
           local fn = _G.TurnLeftStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TurnLeftStop = function()
           local fn = _G.TurnLeftStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TurnOrActionStart = function()
           local fn = _G.TurnOrActionStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TurnOrActionStop = function()
           local fn = _G.TurnOrActionStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TurnRightStart = function()
           local fn = _G.TurnRightStart
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         TurnRightStop = function()
           local fn = _G.TurnRightStop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitAffectingCombat = function()
           local fn = _G.UnitAffectingCombat
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitAlliedRaceInfo = function()
           local fn = _G.UnitAlliedRaceInfo
@@ -16605,10 +21380,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitArmor = function()
           local fn = _G.UnitArmor
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitAttackBothHands = function()
           local fn = _G.UnitAttackBothHands
@@ -16617,18 +21402,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitAttackPower = function()
           local fn = _G.UnitAttackPower
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitAttackSpeed = function()
           local fn = _G.UnitAttackSpeed
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitAura = function()
           local fn = _G.UnitAura
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitAuraSlots = function()
           local fn = _G.UnitAuraSlots
@@ -16637,30 +21442,65 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitBuff = function()
           local fn = _G.UnitBuff
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitCanAssist = function()
           local fn = _G.UnitCanAssist
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitCanAttack = function()
           local fn = _G.UnitCanAttack
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitCanCooperate = function()
           local fn = _G.UnitCanCooperate
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitCastingInfo = function()
           local fn = _G.UnitCastingInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitChannelInfo = function()
           local fn = _G.UnitChannelInfo
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitCharacterPoints = function()
           local fn = _G.UnitCharacterPoints
@@ -16669,6 +21509,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitChromieTimeID = function()
           local fn = _G.UnitChromieTimeID
@@ -16677,26 +21522,56 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitClass = function()
           local fn = _G.UnitClass
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitClassBase = function()
           local fn = _G.UnitClassBase
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitClassification = function()
           local fn = _G.UnitClassification
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitDamage = function()
           local fn = _G.UnitDamage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitDebuff = function()
           local fn = _G.UnitDebuff
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitEffectiveLevel = function()
           local fn = _G.UnitEffectiveLevel
@@ -16705,22 +21580,47 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitExists = function()
           local fn = _G.UnitExists
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitFactionGroup = function()
           local fn = _G.UnitFactionGroup
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitFullName = function()
           local fn = _G.UnitFullName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitGUID = function()
           local fn = _G.UnitGUID
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitGetAvailableRoles = function()
           local fn = _G.UnitGetAvailableRoles
@@ -16729,10 +21629,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitGetIncomingHeals = function()
           local fn = _G.UnitGetIncomingHeals
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitGetTotalAbsorbs = function()
           local fn = _G.UnitGetTotalAbsorbs
@@ -16741,6 +21651,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitGetTotalHealAbsorbs = function()
           local fn = _G.UnitGetTotalHealAbsorbs
@@ -16749,18 +21664,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitGroupRolesAssigned = function()
           local fn = _G.UnitGroupRolesAssigned
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitHPPerStamina = function()
           local fn = _G.UnitHPPerStamina
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitHasIncomingResurrection = function()
           local fn = _G.UnitHasIncomingResurrection
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitHasLFGDeserter = function()
           local fn = _G.UnitHasLFGDeserter
@@ -16769,6 +21704,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitHasLFGRandomCooldown = function()
           local fn = _G.UnitHasLFGRandomCooldown
@@ -16777,10 +21717,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitHasRelicSlot = function()
           local fn = _G.UnitHasRelicSlot
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitHasVehiclePlayerFrameUI = function()
           local fn = _G.UnitHasVehiclePlayerFrameUI
@@ -16789,6 +21739,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitHasVehicleUI = function()
           local fn = _G.UnitHasVehicleUI
@@ -16797,14 +21752,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitHealth = function()
           local fn = _G.UnitHealth
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitHealthMax = function()
           local fn = _G.UnitHealthMax
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitHonor = function()
           local fn = _G.UnitHonor
@@ -16813,6 +21783,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitHonorLevel = function()
           local fn = _G.UnitHonorLevel
@@ -16821,6 +21796,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitHonorMax = function()
           local fn = _G.UnitHonorMax
@@ -16829,14 +21809,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitInBattleground = function()
           local fn = _G.UnitInBattleground
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitInParty = function()
           local fn = _G.UnitInParty
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitInPartyShard = function()
           local fn = _G.UnitInPartyShard
@@ -16845,14 +21840,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitInRaid = function()
           local fn = _G.UnitInRaid
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitInRange = function()
           local fn = _G.UnitInRange
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitInVehicle = function()
           local fn = _G.UnitInVehicle
@@ -16861,102 +21871,227 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsAFK = function()
           local fn = _G.UnitIsAFK
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsCharmed = function()
           local fn = _G.UnitIsCharmed
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsConnected = function()
           local fn = _G.UnitIsConnected
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsDND = function()
           local fn = _G.UnitIsDND
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsDead = function()
           local fn = _G.UnitIsDead
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsDeadOrGhost = function()
           local fn = _G.UnitIsDeadOrGhost
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsEnemy = function()
           local fn = _G.UnitIsEnemy
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsFeignDeath = function()
           local fn = _G.UnitIsFeignDeath
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsFriend = function()
           local fn = _G.UnitIsFriend
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsGhost = function()
           local fn = _G.UnitIsGhost
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsGroupAssistant = function()
           local fn = _G.UnitIsGroupAssistant
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsGroupLeader = function()
           local fn = _G.UnitIsGroupLeader
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsOtherPlayersPet = function()
           local fn = _G.UnitIsOtherPlayersPet
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsOwnerOrControllerOfUnit = function()
           local fn = _G.UnitIsOwnerOrControllerOfUnit
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsPVP = function()
           local fn = _G.UnitIsPVP
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsPVPFreeForAll = function()
           local fn = _G.UnitIsPVPFreeForAll
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsPlayer = function()
           local fn = _G.UnitIsPlayer
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsPossessed = function()
           local fn = _G.UnitIsPossessed
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsTapDenied = function()
           local fn = _G.UnitIsTapDenied
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsUnit = function()
           local fn = _G.UnitIsUnit
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitIsVisible = function()
           local fn = _G.UnitIsVisible
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitLevel = function()
           local fn = _G.UnitLevel
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitName = function()
           local fn = _G.UnitName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitNameUnmodified = function()
           local fn = _G.UnitNameUnmodified
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitNameplateShowsWidgetsOnly = function()
           local fn = _G.UnitNameplateShowsWidgetsOnly
@@ -16965,14 +22100,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitOnTaxi = function()
           local fn = _G.UnitOnTaxi
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPVPName = function()
           local fn = _G.UnitPVPName
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPVPRank = function()
           local fn = _G.UnitPVPRank
@@ -16981,6 +22131,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPhaseReason = function()
           local fn = _G.UnitPhaseReason
@@ -16989,26 +22144,56 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPlayerControlled = function()
           local fn = _G.UnitPlayerControlled
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPlayerOrPetInParty = function()
           local fn = _G.UnitPlayerOrPetInParty
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPlayerOrPetInRaid = function()
           local fn = _G.UnitPlayerOrPetInRaid
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPosition = function()
           local fn = _G.UnitPosition
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPower = function()
           local fn = _G.UnitPower
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPowerBarID = function()
           local fn = _G.UnitPowerBarID
@@ -17017,6 +22202,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPowerBarTimerInfo = function()
           local fn = _G.UnitPowerBarTimerInfo
@@ -17025,18 +22215,38 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPowerDisplayMod = function()
           local fn = _G.UnitPowerDisplayMod
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPowerMax = function()
           local fn = _G.UnitPowerMax
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPowerType = function()
           local fn = _G.UnitPowerType
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitPvpClassification = function()
           local fn = _G.UnitPvpClassification
@@ -17045,6 +22255,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitQuestTrivialLevelRange = function()
           local fn = _G.UnitQuestTrivialLevelRange
@@ -17053,6 +22268,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitQuestTrivialLevelRangeScaling = function()
           local fn = _G.UnitQuestTrivialLevelRangeScaling
@@ -17061,10 +22281,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitRace = function()
           local fn = _G.UnitRace
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitRangedAttack = function()
           local fn = _G.UnitRangedAttack
@@ -17073,14 +22303,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitReaction = function()
           local fn = _G.UnitReaction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitRealmRelationship = function()
           local fn = _G.UnitRealmRelationship
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitResistance = function()
           local fn = _G.UnitResistance
@@ -17089,14 +22334,29 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitSelectionColor = function()
           local fn = _G.UnitSelectionColor
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitSex = function()
           local fn = _G.UnitSex
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitStagger = function()
           local fn = _G.UnitStagger
@@ -17105,10 +22365,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitStat = function()
           local fn = _G.UnitStat
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitTargetsVehicleInRaidUI = function()
           local fn = _G.UnitTargetsVehicleInRaidUI
@@ -17117,10 +22387,20 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitThreatSituation = function()
           local fn = _G.UnitThreatSituation
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitTreatAsPlayerForDisplay = function()
           local fn = _G.UnitTreatAsPlayerForDisplay
@@ -17129,6 +22409,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitWidgetSet = function()
           local fn = _G.UnitWidgetSet
@@ -17137,26 +22422,56 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitXP = function()
           local fn = _G.UnitXP
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UnitXPMax = function()
           local fn = _G.UnitXPMax
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UpdateAddOnMemoryUsage = function()
           local fn = _G.UpdateAddOnMemoryUsage
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UseAction = function()
           local fn = _G.UseAction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         UseInventoryItem = function()
           local fn = _G.UseInventoryItem
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         VehicleAimDecrement = function()
           local fn = _G.VehicleAimDecrement
@@ -17165,6 +22480,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         VehicleAimDownStart = function()
           local fn = _G.VehicleAimDownStart
@@ -17173,6 +22493,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         VehicleAimDownStop = function()
           local fn = _G.VehicleAimDownStop
@@ -17181,6 +22506,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         VehicleAimIncrement = function()
           local fn = _G.VehicleAimIncrement
@@ -17189,6 +22519,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         VehicleAimUpStart = function()
           local fn = _G.VehicleAimUpStart
@@ -17197,6 +22532,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         VehicleAimUpStop = function()
           local fn = _G.VehicleAimUpStop
@@ -17205,6 +22545,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         VehicleExit = function()
           local fn = _G.VehicleExit
@@ -17213,6 +22558,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         VehicleNextSeat = function()
           local fn = _G.VehicleNextSeat
@@ -17221,6 +22571,11 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         VehiclePrevSeat = function()
           local fn = _G.VehiclePrevSeat
@@ -17229,46 +22584,101 @@ function G.GeneratedTests()
             return
           end
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         debugprofilestop = function()
           local fn = _G.debugprofilestop
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         geterrorhandler = function()
           local fn = _G.geterrorhandler
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         getfenv = function()
           local fn = _G.getfenv
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         hooksecurefunc = function()
           local fn = _G.hooksecurefunc
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         loadstring = function()
           local fn = _G.loadstring
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         securecall = function()
           local fn = _G.securecall
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         securecallfunction = function()
           local fn = _G.securecallfunction
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         secureexecuterange = function()
           local fn = _G.secureexecuterange
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         seterrorhandler = function()
           local fn = _G.seterrorhandler
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
         xpcall = function()
           local fn = _G.xpcall
           assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
         end,
       }
     end,
