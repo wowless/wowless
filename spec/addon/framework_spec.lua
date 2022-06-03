@@ -1,7 +1,7 @@
 describe('framework', function()
   local test = (function()
     local env = {}
-    loadfile('framework.lua')('foo', env)
+    loadfile('addon/Wowless/framework.lua')('foo', env)
     return env.test
   end)()
   it('works', function()
@@ -26,8 +26,8 @@ describe('framework', function()
     local expected = {
       a = {
         b = {
-          c = 'spec/framework_spec.lua:15: doh',
-          d = 'spec/framework_spec.lua:18: wow',
+          c = 'spec/addon/framework_spec.lua:15: doh',
+          d = 'spec/addon/framework_spec.lua:18: wow',
         },
       },
     }
