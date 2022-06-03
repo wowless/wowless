@@ -286,40 +286,43 @@ local asyncTests = {
   },
 }
 
-local function testTree()
-  return {
-    generated = G.GeneratedTests,
-    sync = syncTests,
-  }
-end
-
 _G.WowlessTestFailures = {}
-for scope, err in G.tests(testTree) do
-  if err then
-    local t = _G.WowlessTestFailures
-    for i = 1, #scope - 1 do
-      local k = scope[i]
-      t[k] = t[k] or {}
-      t = t[k]
-    end
-    t[scope[#scope]] = err
-  end
-end
-
 _G.WowlessTestsDone = false
 do
-  local asyncIndex, numAsyncTests, asyncPending = 0, #asyncTests, false
+  local syncIter, syncState = G.tests(function()
+    return {
+      generated = G.GeneratedTests,
+      sync = syncTests,
+    }
+  end)
+  local numSyncTests, asyncIndex, numAsyncTests, asyncPending = 0, 0, #asyncTests, false
   local totalTime, numFrames = 0, 0
   CreateFrame('Frame'):SetScript('OnUpdate', function(frame, elapsed)
     totalTime = totalTime + elapsed
     numFrames = numFrames + 1
+    local ts = debugprofilestop()
+    for scope, err in syncIter, syncState do
+      numSyncTests = numSyncTests + 1
+      if err then
+        local t = _G.WowlessTestFailures
+        for i = 1, #scope - 1 do
+          local k = scope[i]
+          t[k] = t[k] or {}
+          t = t[k]
+        end
+        t[scope[#scope]] = err
+      end
+      if numSyncTests % 100 == 0 and debugprofilestop() - ts >= elapsed / 2 then
+        return
+      end
+    end
     if not asyncPending then
       if asyncIndex == numAsyncTests then
         frame:SetScript('OnUpdate', nil)
         _G.WowlessTestsDone = true
         local print = DevTools_Dump and print or function() end
         print(('Wowless testing completed in %.1fs (%d frames).'):format(totalTime, numFrames))
-        print(('Ran %d async tests.'):format(numAsyncTests))
+        print(('Ran %d sync and %d async tests.'):format(numSyncTests, numAsyncTests))
         if not next(_G.WowlessTestFailures) then
           print('No errors.')
         else
