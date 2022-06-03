@@ -295,13 +295,6 @@ end) or {}
 _G.WowlessTestsDone = false
 
 do
-  local function checkSafely(name, fn)
-    local success, msg = pcall(fn)
-    if not success then
-      _G.WowlessTestFailures.async = _G.WowlessTestFailures.async or {}
-      _G.WowlessTestFailures.async[name] = msg
-    end
-  end
   local asyncIndex, numAsyncTests, asyncPending = 0, #asyncTests, false
   local totalTime, numFrames = 0, 0
   CreateFrame('Frame'):SetScript('OnUpdate', function(frame, elapsed)
@@ -328,7 +321,11 @@ do
         local test = asyncTests[asyncIndex]
         test.fn(function(check)
           asyncPending = false
-          checkSafely(test.name, check)
+          local success, msg = pcall(check)
+          if not success then
+            _G.WowlessTestFailures.async = _G.WowlessTestFailures.async or {}
+            _G.WowlessTestFailures.async[test.name] = msg
+          end
         end)
       end
     end
