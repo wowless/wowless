@@ -286,14 +286,27 @@ local asyncTests = {
   },
 }
 
-_G.WowlessTestFailures = G.test(function()
+local function testTree()
   return {
     generated = G.GeneratedTests,
     sync = syncTests,
   }
-end) or {}
-_G.WowlessTestsDone = false
+end
 
+_G.WowlessTestFailures = {}
+for scope, err in G.tests(testTree) do
+  if err then
+    local t = _G.WowlessTestFailures
+    for i = 1, #scope - 1 do
+      local k = scope[i]
+      t[k] = t[k] or {}
+      t = t[k]
+    end
+    t[scope[#scope]] = err
+  end
+end
+
+_G.WowlessTestsDone = false
 do
   local asyncIndex, numAsyncTests, asyncPending = 0, #asyncTests, false
   local totalTime, numFrames = 0, 0

@@ -1,39 +1,28 @@
 describe('framework', function()
-  local test = (function()
+  local tests = (function()
     local env = {}
     loadfile('addon/Wowless/framework.lua')('foo', env)
-    return env.test
+    return env.tests
   end)()
   it('works', function()
-    local order = {}
     local function input()
-      table.insert(order, 'top')
       return {
         a = function()
-          table.insert(order, 'a')
           return {
             b = function()
-              table.insert(order, 'b')
               return {
                 c = function()
-                  table.insert(order, 'c')
                   error('doh')
                 end,
                 d = function()
-                  table.insert(order, 'd')
                   error('wow')
                 end,
               }
             end,
             e = function()
-              table.insert(order, 'e')
               return {
-                f = function()
-                  table.insert(order, 'f')
-                end,
-                g = function()
-                  table.insert(order, 'g')
-                end,
+                f = function() end,
+                g = function() end,
               }
             end,
           }
@@ -41,14 +30,19 @@ describe('framework', function()
       }
     end
     local expected = {
-      a = {
-        b = {
-          c = 'spec/addon/framework_spec.lua:20: doh',
-          d = 'spec/addon/framework_spec.lua:24: wow',
-        },
-      },
+      { '' },
+      { 'a' },
+      { 'a.b' },
+      { 'a.b.c', 'spec/addon/framework_spec.lua:15: doh' },
+      { 'a.b.d', 'spec/addon/framework_spec.lua:18: wow' },
+      { 'a.e' },
+      { 'a.e.f' },
+      { 'a.e.g' },
     }
-    assert.same(expected, test(input))
-    assert.same('top,a,b,c,d,e,f,g', table.concat(order, ','))
+    local actual = {}
+    for t, r in tests(input) do
+      table.insert(actual, { table.concat(t, '.'), r })
+    end
+    assert.same(expected, actual)
   end)
 end)
