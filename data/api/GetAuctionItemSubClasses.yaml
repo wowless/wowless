@@ -1,3 +1,6 @@
 ---
 name: GetAuctionItemSubClasses
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

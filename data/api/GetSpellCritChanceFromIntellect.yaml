@@ -1,6 +1,9 @@
 ---
 name: GetSpellCritChanceFromIntellect
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 inputs:
 - - type: string
 outputs:

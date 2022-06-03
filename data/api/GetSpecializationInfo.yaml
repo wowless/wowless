@@ -1,6 +1,8 @@
 ---
 name: GetSpecializationInfo
 status: implemented
+flavors:
+- Mainline
 inputs:
 - - name: specIndex
     type: number

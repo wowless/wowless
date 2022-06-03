@@ -1,3 +1,5 @@
 ---
 name: EJ_GetTierInfo
 status: unimplemented
+flavors:
+- Mainline

@@ -1,3 +1,6 @@
 ---
 name: GetTradeSkillSubClasses
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

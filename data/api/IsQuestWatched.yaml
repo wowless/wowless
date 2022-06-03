@@ -1,3 +1,6 @@
 ---
 name: IsQuestWatched
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

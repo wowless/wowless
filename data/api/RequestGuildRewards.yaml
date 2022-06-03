@@ -1,3 +1,5 @@
 ---
 name: RequestGuildRewards
 status: unimplemented
+flavors:
+- Mainline

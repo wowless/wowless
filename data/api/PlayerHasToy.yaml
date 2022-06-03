@@ -1,6 +1,8 @@
 ---
 name: PlayerHasToy
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: itemID
     type: number

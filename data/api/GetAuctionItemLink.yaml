@@ -1,6 +1,9 @@
 ---
 name: GetAuctionItemLink
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 inputs:
 - - name: view
     type: string

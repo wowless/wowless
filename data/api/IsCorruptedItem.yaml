@@ -1,6 +1,8 @@
 ---
 name: IsCorruptedItem
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: itemLink
     type: string

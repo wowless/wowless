@@ -1,3 +1,5 @@
 ---
 name: IsThreatWarningEnabled
 status: unimplemented
+flavors:
+- Mainline

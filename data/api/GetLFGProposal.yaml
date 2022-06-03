@@ -1,3 +1,5 @@
 ---
 name: GetLFGProposal
 status: unimplemented
+flavors:
+- Mainline

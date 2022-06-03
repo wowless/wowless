@@ -1,3 +1,5 @@
 ---
 name: IsPartyLFG
 status: unimplemented
+flavors:
+- Mainline

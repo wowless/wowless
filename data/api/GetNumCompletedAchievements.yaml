@@ -1,6 +1,8 @@
 ---
 name: GetNumCompletedAchievements
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: forGuild
     nilable: true

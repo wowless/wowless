@@ -1,6 +1,8 @@
 ---
 name: GetBattlefieldArenaFaction
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

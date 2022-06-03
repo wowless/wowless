@@ -1,6 +1,8 @@
 ---
 name: UnitGetTotalHealAbsorbs
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - type: string
 outputs:

@@ -1,6 +1,8 @@
 ---
 name: GetRandomDungeonBestChoice
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

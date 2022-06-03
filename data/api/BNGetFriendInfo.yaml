@@ -1,6 +1,9 @@
 ---
 name: BNGetFriendInfo
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 inputs:
 - - name: index
     type: number

@@ -1,6 +1,8 @@
 ---
 name: IsInActiveWorldPVP
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - nilable: true
     type: string

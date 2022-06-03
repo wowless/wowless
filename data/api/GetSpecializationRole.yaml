@@ -1,6 +1,8 @@
 ---
 name: GetSpecializationRole
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: spec
     type: number

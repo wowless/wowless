@@ -1,6 +1,8 @@
 ---
 name: GetQuestItemInfoLootType
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: questItemType
     type: number

@@ -1,3 +1,5 @@
 ---
 name: HasCompletedAnyAchievement
 status: unimplemented
+flavors:
+- Mainline

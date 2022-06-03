@@ -1,6 +1,8 @@
 ---
 name: GetSpecializationNameForSpecID
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: specID
     type: number

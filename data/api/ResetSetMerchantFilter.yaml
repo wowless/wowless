@@ -1,6 +1,8 @@
 ---
 name: ResetSetMerchantFilter
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs: {}

@@ -1,6 +1,8 @@
 ---
 name: HasArtifactEquipped
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

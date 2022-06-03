@@ -1,3 +1,6 @@
 ---
 name: GetPVPLastWeekStats
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

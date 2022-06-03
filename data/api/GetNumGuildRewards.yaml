@@ -1,6 +1,8 @@
 ---
 name: GetNumGuildRewards
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

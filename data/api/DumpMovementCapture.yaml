@@ -1,6 +1,8 @@
 ---
 name: DumpMovementCapture
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs: {}

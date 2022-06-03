@@ -1,6 +1,8 @@
 ---
 name: VehicleAimDownStart
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs: {}

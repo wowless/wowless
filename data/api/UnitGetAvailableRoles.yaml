@@ -1,3 +1,5 @@
 ---
 name: UnitGetAvailableRoles
 status: unimplemented
+flavors:
+- Mainline

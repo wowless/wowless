@@ -1,3 +1,6 @@
 ---
 name: GetTradeSkillInvSlotFilter
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

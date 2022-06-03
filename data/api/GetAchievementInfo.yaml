@@ -1,6 +1,8 @@
 ---
 name: GetAchievementInfo
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - type: number
   - nilable: true

@@ -1,3 +1,5 @@
 ---
 name: UnitPowerBarTimerInfo
 status: unimplemented
+flavors:
+- Mainline

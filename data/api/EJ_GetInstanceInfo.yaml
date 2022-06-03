@@ -1,3 +1,5 @@
 ---
 name: EJ_GetInstanceInfo
 status: unimplemented
+flavors:
+- Mainline

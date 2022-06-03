@@ -1,3 +1,5 @@
 ---
 name: UnitAuraSlots
 status: unimplemented
+flavors:
+- Mainline

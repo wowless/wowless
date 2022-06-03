@@ -1,6 +1,9 @@
 ---
 name: GetNumQuestLogEntries
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 inputs:
 - {}
 outputs:

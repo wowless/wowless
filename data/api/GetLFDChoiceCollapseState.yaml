@@ -1,6 +1,8 @@
 ---
 name: GetLFDChoiceCollapseState
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: LFGCollapseList
     nilable: true

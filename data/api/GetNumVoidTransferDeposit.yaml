@@ -1,6 +1,8 @@
 ---
 name: GetNumVoidTransferDeposit
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

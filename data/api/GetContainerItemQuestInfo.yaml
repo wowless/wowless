@@ -1,3 +1,5 @@
 ---
 name: GetContainerItemQuestInfo
 status: unimplemented
+flavors:
+- Mainline

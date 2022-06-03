@@ -1,6 +1,9 @@
 ---
 name: GetInspectArenaTeamData
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 inputs:
 - - name: value.index
     type: number

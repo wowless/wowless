@@ -1,6 +1,8 @@
 ---
 name: GetAverageItemLevel
 status: unimplemented
+flavors:
+- Mainline
 outputs:
 - type: number
 - type: number

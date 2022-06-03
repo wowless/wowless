@@ -1,6 +1,8 @@
 ---
 name: GetGuildRewardInfo
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: index
     type: number

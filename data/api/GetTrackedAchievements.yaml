@@ -1,3 +1,5 @@
 ---
 name: GetTrackedAchievements
 status: unimplemented
+flavors:
+- Mainline

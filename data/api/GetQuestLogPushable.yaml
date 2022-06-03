@@ -1,3 +1,6 @@
 ---
 name: GetQuestLogPushable
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

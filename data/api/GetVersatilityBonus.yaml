@@ -1,6 +1,8 @@
 ---
 name: GetVersatilityBonus
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - type: number
 outputs:

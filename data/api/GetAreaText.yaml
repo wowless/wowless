@@ -1,6 +1,8 @@
 ---
 name: GetAreaText
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

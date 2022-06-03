@@ -1,3 +1,5 @@
 ---
 name: HasOverrideActionBar
 status: unimplemented
+flavors:
+- Mainline

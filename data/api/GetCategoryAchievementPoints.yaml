@@ -1,6 +1,8 @@
 ---
 name: GetCategoryAchievementPoints
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: categoryID
     type: number

@@ -1,6 +1,8 @@
 ---
 name: GetLFDLockInfo
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: dungeonID
     type: number

@@ -1,3 +1,5 @@
 ---
 name: GetLFGCategoryForID
 status: unimplemented
+flavors:
+- Mainline

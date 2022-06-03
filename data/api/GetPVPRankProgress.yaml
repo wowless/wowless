@@ -1,6 +1,9 @@
 ---
 name: GetPVPRankProgress
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 inputs:
 - {}
 outputs:

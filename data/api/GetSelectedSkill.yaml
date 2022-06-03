@@ -1,5 +1,8 @@
 ---
 name: GetSelectedSkill
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 outputs:
 - type: number

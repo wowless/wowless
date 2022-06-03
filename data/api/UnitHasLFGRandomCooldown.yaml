@@ -1,6 +1,8 @@
 ---
 name: UnitHasLFGRandomCooldown
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: unit
     type: unit

@@ -1,3 +1,5 @@
 ---
 name: RequestGuildChallengeInfo
 status: unimplemented
+flavors:
+- Mainline

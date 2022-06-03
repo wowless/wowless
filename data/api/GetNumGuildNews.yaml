@@ -1,6 +1,8 @@
 ---
 name: GetNumGuildNews
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

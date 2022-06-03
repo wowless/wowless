@@ -1,6 +1,9 @@
 ---
 name: GetUnitManaRegenRateFromSpirit
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 inputs:
 - - type: string
 outputs:

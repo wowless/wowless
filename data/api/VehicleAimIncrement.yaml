@@ -1,6 +1,8 @@
 ---
 name: VehicleAimIncrement
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: amount
     type: number

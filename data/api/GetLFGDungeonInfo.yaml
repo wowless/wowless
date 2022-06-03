@@ -1,6 +1,8 @@
 ---
 name: GetLFGDungeonInfo
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: dungeonID
     type: number

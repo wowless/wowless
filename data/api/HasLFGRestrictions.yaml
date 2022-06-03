@@ -1,3 +1,5 @@
 ---
 name: HasLFGRestrictions
 status: unimplemented
+flavors:
+- Mainline

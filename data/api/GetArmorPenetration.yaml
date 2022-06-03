@@ -1,6 +1,9 @@
 ---
 name: GetArmorPenetration
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 inputs:
 - {}
 outputs:

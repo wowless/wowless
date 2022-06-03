@@ -1,5 +1,8 @@
 ---
 name: GetQuestLogRequiredMoney
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 outputs:
 - type: number

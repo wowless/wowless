@@ -1,6 +1,8 @@
 ---
 name: GetSpecializationInfoForClassID
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: classID
     type: number

@@ -1,3 +1,6 @@
 ---
 name: GetPVPThisWeekStats
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

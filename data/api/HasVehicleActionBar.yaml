@@ -1,3 +1,5 @@
 ---
 name: HasVehicleActionBar
 status: unimplemented
+flavors:
+- Mainline

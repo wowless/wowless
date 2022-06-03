@@ -1,3 +1,6 @@
 ---
 name: CollapseSkillHeader
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

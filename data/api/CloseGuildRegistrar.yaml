@@ -1,6 +1,8 @@
 ---
 name: CloseGuildRegistrar
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs: {}

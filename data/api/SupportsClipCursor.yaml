@@ -1,3 +1,5 @@
 ---
 name: SupportsClipCursor
 status: unimplemented
+flavors:
+- Mainline

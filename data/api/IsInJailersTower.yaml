@@ -1,3 +1,5 @@
 ---
 name: IsInJailersTower
 status: unimplemented
+flavors:
+- Mainline

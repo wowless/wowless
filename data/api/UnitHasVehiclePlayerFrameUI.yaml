@@ -1,6 +1,8 @@
 ---
 name: UnitHasVehiclePlayerFrameUI
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - type: string
 outputs:

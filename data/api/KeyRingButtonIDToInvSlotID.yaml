@@ -1,3 +1,6 @@
 ---
 name: KeyRingButtonIDToInvSlotID
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

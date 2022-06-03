@@ -1,3 +1,5 @@
 ---
 name: SpellCanTargetQuest
 status: unimplemented
+flavors:
+- Mainline

@@ -1,6 +1,8 @@
 ---
 name: HasExtraActionBar
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

@@ -1,6 +1,9 @@
 ---
 name: ClosePetitionRegistrar
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 inputs:
 - {}
 outputs: {}

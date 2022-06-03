@@ -1,3 +1,6 @@
 ---
 name: GetCraftFilter
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

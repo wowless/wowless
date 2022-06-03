@@ -1,6 +1,8 @@
 ---
 name: CenterCamera
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs: {}

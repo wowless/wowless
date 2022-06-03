@@ -1,3 +1,5 @@
 ---
 name: IsPossessBarVisible
 status: unimplemented
+flavors:
+- Mainline

@@ -1,3 +1,6 @@
 ---
 name: SortAuctionClearSort
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

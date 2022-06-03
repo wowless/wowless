@@ -1,3 +1,5 @@
 ---
 name: CanPartyLFGBackfill
 status: unimplemented
+flavors:
+- Mainline

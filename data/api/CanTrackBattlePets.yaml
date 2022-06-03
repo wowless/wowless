@@ -1,3 +1,5 @@
 ---
 name: CanTrackBattlePets
 status: unimplemented
+flavors:
+- Mainline

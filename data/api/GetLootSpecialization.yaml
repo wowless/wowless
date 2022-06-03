@@ -1,3 +1,5 @@
 ---
 name: GetLootSpecialization
 status: unimplemented
+flavors:
+- Mainline

@@ -1,3 +1,5 @@
 ---
 name: QueryGuildNews
 status: unimplemented
+flavors:
+- Mainline

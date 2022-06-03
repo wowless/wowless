@@ -1,5 +1,7 @@
 ---
 name: GetPartyLFGID
 status: unimplemented
+flavors:
+- Mainline
 outputs:
 - type: number

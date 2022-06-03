@@ -1,3 +1,6 @@
 ---
 name: GetBidderAuctionItems
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

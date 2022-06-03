@@ -1,6 +1,9 @@
 ---
 name: AddQuestWatch
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 inputs:
 - - name: questIndex
     type: number

@@ -1,3 +1,6 @@
 ---
 name: SetSelectedSkill
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

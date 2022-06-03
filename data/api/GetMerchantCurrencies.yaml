@@ -1,6 +1,8 @@
 ---
 name: GetMerchantCurrencies
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs: {}

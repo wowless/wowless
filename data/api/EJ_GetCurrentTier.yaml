@@ -1,3 +1,5 @@
 ---
 name: EJ_GetCurrentTier
 status: unimplemented
+flavors:
+- Mainline

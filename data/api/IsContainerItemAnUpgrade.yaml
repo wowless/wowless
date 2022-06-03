@@ -1,3 +1,5 @@
 ---
 name: IsContainerItemAnUpgrade
 status: unimplemented
+flavors:
+- Mainline

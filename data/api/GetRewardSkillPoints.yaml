@@ -1,6 +1,8 @@
 ---
 name: GetRewardSkillPoints
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

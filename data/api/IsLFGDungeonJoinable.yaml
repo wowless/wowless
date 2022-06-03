@@ -1,6 +1,8 @@
 ---
 name: IsLFGDungeonJoinable
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: id
     type: number

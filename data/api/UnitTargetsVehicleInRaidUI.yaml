@@ -1,6 +1,8 @@
 ---
 name: UnitTargetsVehicleInRaidUI
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: unit
     type: unit

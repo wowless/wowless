@@ -1,3 +1,5 @@
 ---
 name: QuestPOIUpdateIcons
 status: unimplemented
+flavors:
+- Mainline

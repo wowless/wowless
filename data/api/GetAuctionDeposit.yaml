@@ -1,5 +1,8 @@
 ---
 name: GetAuctionDeposit
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 outputs:
 - type: number

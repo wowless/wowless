@@ -1,3 +1,6 @@
 ---
 name: IsUnitOnQuest
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

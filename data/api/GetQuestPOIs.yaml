@@ -1,6 +1,8 @@
 ---
 name: GetQuestPOIs
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: poiTable
     type: table

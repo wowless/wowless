@@ -1,6 +1,9 @@
 ---
 name: GetQuestsCompleted
 status: unimplemented
+flavors:
+- TBC
+- Vanilla
 inputs:
 - - name: table
     nilable: true

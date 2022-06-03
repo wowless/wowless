@@ -1,3 +1,6 @@
 ---
 name: GetCraftSlots
 status: unimplemented
+flavors:
+- TBC
+- Vanilla

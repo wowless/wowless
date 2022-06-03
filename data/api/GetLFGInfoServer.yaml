@@ -1,3 +1,5 @@
 ---
 name: GetLFGInfoServer
 status: unimplemented
+flavors:
+- Mainline

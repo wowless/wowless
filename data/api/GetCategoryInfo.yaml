@@ -1,6 +1,8 @@
 ---
 name: GetCategoryInfo
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - type: number
 outputs:

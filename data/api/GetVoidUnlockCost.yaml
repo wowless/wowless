@@ -1,6 +1,8 @@
 ---
 name: GetVoidUnlockCost
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

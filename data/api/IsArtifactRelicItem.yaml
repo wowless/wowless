@@ -1,6 +1,8 @@
 ---
 name: IsArtifactRelicItem
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - - name: itemIDOrLink
     type: string

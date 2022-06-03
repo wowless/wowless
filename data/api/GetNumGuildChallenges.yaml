@@ -1,6 +1,8 @@
 ---
 name: GetNumGuildChallenges
 status: unimplemented
+flavors:
+- Mainline
 inputs:
 - {}
 outputs:

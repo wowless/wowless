@@ -1,5 +1,7 @@
 ---
 name: GetExtraBarIndex
 status: unimplemented
+flavors:
+- Mainline
 outputs:
 - type: number
