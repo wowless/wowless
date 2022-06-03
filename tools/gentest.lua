@@ -121,13 +121,28 @@ G.GeneratedTestFailures = G.test(function()
       return {
 > for k, v in sorted(apiNamespaces) do
         $(k) = function()
+          local ns = _G.$(k)
 > if v.flavors then
           if $(badflavor(v.flavors)) then
-            assertEquals('nil', type(_G.$(k)))
+            assertEquals('nil', type(ns))
             return
           end
 > end
-          assertEquals('table', type(_G.$(k)))
+          assertEquals('table', type(ns))
+          assert(getmetatable(ns) == nil)
+          return {
+> for mname, method in sorted(v.methods) do
+            $(mname) = function()
+> if method.flavors then
+              if $(badflavor(method.flavors)) then
+                assertEquals('nil', type(ns.$(mname)))
+                return
+              end
+> end
+              assertEquals('function', type(ns.$(mname)))
+            end,
+> end
+          }
         end,
 > end
       }
