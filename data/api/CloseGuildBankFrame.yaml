@@ -1,9 +1,6 @@
 ---
 name: CloseGuildBankFrame
 status: unimplemented
-flavors:
-- Mainline
-- TBC
 inputs:
 - {}
 outputs: {}

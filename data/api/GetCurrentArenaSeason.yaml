@@ -1,9 +1,6 @@
 ---
 name: GetCurrentArenaSeason
 status: unimplemented
-flavors:
-- Mainline
-- TBC
 inputs:
 - {}
 outputs:

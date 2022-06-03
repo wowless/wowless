@@ -1,8 +1,6 @@
 ---
 name: GetRaidDifficultyID
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:

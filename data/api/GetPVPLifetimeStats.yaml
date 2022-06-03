@@ -1,9 +1,6 @@
 ---
 name: GetPVPLifetimeStats
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - {}
 outputs:

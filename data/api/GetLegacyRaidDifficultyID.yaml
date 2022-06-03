@@ -1,8 +1,6 @@
 ---
 name: GetLegacyRaidDifficultyID
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:

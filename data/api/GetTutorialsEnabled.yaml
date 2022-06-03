@@ -1,8 +1,6 @@
 ---
 name: GetTutorialsEnabled
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:

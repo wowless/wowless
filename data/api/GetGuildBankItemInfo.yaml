@@ -1,9 +1,6 @@
 ---
 name: GetGuildBankItemInfo
 status: unimplemented
-flavors:
-- Mainline
-- TBC
 inputs:
 - - name: tab
     type: number

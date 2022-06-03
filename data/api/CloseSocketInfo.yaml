@@ -1,9 +1,6 @@
 ---
 name: CloseSocketInfo
 status: unimplemented
-flavors:
-- Mainline
-- TBC
 inputs:
 - {}
 outputs: {}

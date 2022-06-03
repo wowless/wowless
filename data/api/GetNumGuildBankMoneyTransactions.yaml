@@ -1,9 +1,6 @@
 ---
 name: GetNumGuildBankMoneyTransactions
 status: unimplemented
-flavors:
-- Mainline
-- TBC
 inputs:
 - {}
 outputs:

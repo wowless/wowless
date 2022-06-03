@@ -1,9 +1,6 @@
 ---
 name: GetGuildBankWithdrawMoney
 status: unimplemented
-flavors:
-- Mainline
-- TBC
 inputs:
 - {}
 outputs:

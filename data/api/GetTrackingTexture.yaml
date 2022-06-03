@@ -2,6 +2,7 @@
 name: GetTrackingTexture
 status: unimplemented
 flavors:
+- TBC
 - Vanilla
 inputs:
 - {}

@@ -1,9 +1,6 @@
 ---
 name: GetExistingSocketInfo
 status: unimplemented
-flavors:
-- Mainline
-- TBC
 inputs:
 - - name: index
     type: number
