@@ -4476,10 +4476,6 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.HasActiveEntryInfo))
             end,
             HasActivityList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.HasActivityList))
-                return
-              end
               assertEquals('function', type(ns.HasActivityList))
             end,
             HasSearchResultInfo = function()
@@ -4500,10 +4496,6 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.IsPlayerAuthenticatedForLFG))
             end,
             RequestAvailableActivities = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.RequestAvailableActivities))
-                return
-              end
               assertEquals('function', type(ns.RequestAvailableActivities))
             end,
             Search = function()

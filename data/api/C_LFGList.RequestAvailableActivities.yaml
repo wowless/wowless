@@ -1,8 +1,6 @@
 ---
 name: C_LFGList.RequestAvailableActivities
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs: {}
