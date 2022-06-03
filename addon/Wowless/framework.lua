@@ -8,8 +8,14 @@ local function test(fn, ...)
     local arg = ...
     if success then
       if n == 1 and type(arg) == 'table' then
+        local keys = {}
+        for k in pairs(arg) do
+          table.insert(keys, k)
+        end
+        table.sort(keys)
         local failures = {}
-        for k, v in pairs(arg) do
+        for _, k in ipairs(keys) do
+          local v = arg[k]
           assert(type(k) == 'string', 'invalid test: bad return key')
           assert(type(v) == 'function', 'invalid test: bad return value')
           failures[k] = process(pcall(v))
