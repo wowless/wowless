@@ -29,6 +29,24 @@ for _, cfg in pairs(uiobjects) do
   end
 end
 
+do
+  local unavailable = {
+    'CreateForbiddenFrame',
+    'loadstring_untainted',
+    'ResetPerformanceValues',
+    'ToggleCollision',
+    'ToggleCollisionDisplay',
+    'TogglePerformancePause',
+    'TogglePerformanceValues',
+    'TogglePlayerBounds',
+    'TogglePortals',
+    'ToggleTris',
+  }
+  for _, k in ipairs(unavailable) do
+    apis[k] = nil
+  end
+end
+
 local objTypes = {}
 for _, cfg in pairs(uiobjects) do
   objTypes[cfg.name] = cfg.objectType or cfg.name
@@ -153,6 +171,24 @@ function G.GeneratedTests()
 > end
       }
     end,
+    globalApis = function()
+      return {
+> for k, v in sorted(apis) do
+> if not k:find('%.') then
+        $(k) = function()
+          local fn = _G.$(k)
+> if v.flavors then
+          if $(badflavor(v.flavors)) then
+            assertEquals('nil', type(fn))
+            return
+          end
+> end
+          assertEquals('function', type(fn))
+        end,
+> end
+> end
+      }
+    end,
     uiobjects = function()
       local function assertCreateFrame(ty)
         local function process(...)
@@ -232,6 +268,7 @@ end
   {
     _escape = '>',
     apiNamespaces = apiNamespaces,
+    apis = apis,
     badflavor = badflavor,
     frametypes = frametypes,
     next = next,

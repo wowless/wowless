@@ -1,5 +1,0 @@
----
-name: GetNumGuildMembershipRequests
-status: unimplemented
-outputs:
-- type: number

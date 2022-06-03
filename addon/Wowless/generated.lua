@@ -11576,6 +11576,5702 @@ function G.GeneratedTests()
         end,
       }
     end,
+    globalApis = function()
+      return {
+        AcceptAreaSpiritHeal = function()
+          local fn = _G.AcceptAreaSpiritHeal
+          assertEquals('function', type(fn))
+        end,
+        AcceptBattlefieldPort = function()
+          local fn = _G.AcceptBattlefieldPort
+          assertEquals('function', type(fn))
+        end,
+        AddChatWindowMessages = function()
+          local fn = _G.AddChatWindowMessages
+          assertEquals('function', type(fn))
+        end,
+        AddQuestWatch = function()
+          local fn = _G.AddQuestWatch
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        AntiAliasingSupported = function()
+          local fn = _G.AntiAliasingSupported
+          assertEquals('function', type(fn))
+        end,
+        AreDangerousScriptsAllowed = function()
+          local fn = _G.AreDangerousScriptsAllowed
+          assertEquals('function', type(fn))
+        end,
+        AscendStop = function()
+          local fn = _G.AscendStop
+          assertEquals('function', type(fn))
+        end,
+        AssistUnit = function()
+          local fn = _G.AssistUnit
+          assertEquals('function', type(fn))
+        end,
+        AttackTarget = function()
+          local fn = _G.AttackTarget
+          assertEquals('function', type(fn))
+        end,
+        BNFeaturesEnabled = function()
+          local fn = _G.BNFeaturesEnabled
+          assertEquals('function', type(fn))
+        end,
+        BNFeaturesEnabledAndConnected = function()
+          local fn = _G.BNFeaturesEnabledAndConnected
+          assertEquals('function', type(fn))
+        end,
+        BNGetBlockedInfo = function()
+          local fn = _G.BNGetBlockedInfo
+          assertEquals('function', type(fn))
+        end,
+        BNGetFriendInfo = function()
+          local fn = _G.BNGetFriendInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        BNGetFriendInviteInfo = function()
+          local fn = _G.BNGetFriendInviteInfo
+          assertEquals('function', type(fn))
+        end,
+        BNGetInfo = function()
+          local fn = _G.BNGetInfo
+          assertEquals('function', type(fn))
+        end,
+        BNGetNumBlocked = function()
+          local fn = _G.BNGetNumBlocked
+          assertEquals('function', type(fn))
+        end,
+        BNGetNumFriendInvites = function()
+          local fn = _G.BNGetNumFriendInvites
+          assertEquals('function', type(fn))
+        end,
+        BNGetNumFriends = function()
+          local fn = _G.BNGetNumFriends
+          assertEquals('function', type(fn))
+        end,
+        BankButtonIDToInvSlotID = function()
+          local fn = _G.BankButtonIDToInvSlotID
+          assertEquals('function', type(fn))
+        end,
+        BreakUpLargeNumbers = function()
+          local fn = _G.BreakUpLargeNumbers
+          assertEquals('function', type(fn))
+        end,
+        CameraOrSelectOrMoveStart = function()
+          local fn = _G.CameraOrSelectOrMoveStart
+          assertEquals('function', type(fn))
+        end,
+        CameraOrSelectOrMoveStop = function()
+          local fn = _G.CameraOrSelectOrMoveStop
+          assertEquals('function', type(fn))
+        end,
+        CameraZoomIn = function()
+          local fn = _G.CameraZoomIn
+          assertEquals('function', type(fn))
+        end,
+        CameraZoomOut = function()
+          local fn = _G.CameraZoomOut
+          assertEquals('function', type(fn))
+        end,
+        CanAffordMerchantItem = function()
+          local fn = _G.CanAffordMerchantItem
+          assertEquals('function', type(fn))
+        end,
+        CanAutoSetGamePadCursorControl = function()
+          local fn = _G.CanAutoSetGamePadCursorControl
+          assertEquals('function', type(fn))
+        end,
+        CanBeRaidTarget = function()
+          local fn = _G.CanBeRaidTarget
+          assertEquals('function', type(fn))
+        end,
+        CanEditGuildInfo = function()
+          local fn = _G.CanEditGuildInfo
+          assertEquals('function', type(fn))
+        end,
+        CanEditMOTD = function()
+          local fn = _G.CanEditMOTD
+          assertEquals('function', type(fn))
+        end,
+        CanEditOfficerNote = function()
+          local fn = _G.CanEditOfficerNote
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CanExitVehicle = function()
+          local fn = _G.CanExitVehicle
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CanGuildBankRepair = function()
+          local fn = _G.CanGuildBankRepair
+          assertEquals('function', type(fn))
+        end,
+        CanGuildDemote = function()
+          local fn = _G.CanGuildDemote
+          assertEquals('function', type(fn))
+        end,
+        CanGuildInvite = function()
+          local fn = _G.CanGuildInvite
+          assertEquals('function', type(fn))
+        end,
+        CanGuildPromote = function()
+          local fn = _G.CanGuildPromote
+          assertEquals('function', type(fn))
+        end,
+        CanHearthAndResurrectFromArea = function()
+          local fn = _G.CanHearthAndResurrectFromArea
+          assertEquals('function', type(fn))
+        end,
+        CanInspect = function()
+          local fn = _G.CanInspect
+          assertEquals('function', type(fn))
+        end,
+        CanJoinBattlefieldAsGroup = function()
+          local fn = _G.CanJoinBattlefieldAsGroup
+          assertEquals('function', type(fn))
+        end,
+        CanMerchantRepair = function()
+          local fn = _G.CanMerchantRepair
+          assertEquals('function', type(fn))
+        end,
+        CanPartyLFGBackfill = function()
+          local fn = _G.CanPartyLFGBackfill
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CanReplaceGuildMaster = function()
+          local fn = _G.CanReplaceGuildMaster
+          assertEquals('function', type(fn))
+        end,
+        CanSendSoRByText = function()
+          local fn = _G.CanSendSoRByText
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CanSignPetition = function()
+          local fn = _G.CanSignPetition
+          assertEquals('function', type(fn))
+        end,
+        CanTrackBattlePets = function()
+          local fn = _G.CanTrackBattlePets
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CanUpgradeExpansion = function()
+          local fn = _G.CanUpgradeExpansion
+          assertEquals('function', type(fn))
+        end,
+        CanUseVoidStorage = function()
+          local fn = _G.CanUseVoidStorage
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CanWithdrawGuildBankMoney = function()
+          local fn = _G.CanWithdrawGuildBankMoney
+          assertEquals('function', type(fn))
+        end,
+        CancelEmote = function()
+          local fn = _G.CancelEmote
+          assertEquals('function', type(fn))
+        end,
+        CancelLogout = function()
+          local fn = _G.CancelLogout
+          assertEquals('function', type(fn))
+        end,
+        CancelShapeshiftForm = function()
+          local fn = _G.CancelShapeshiftForm
+          assertEquals('function', type(fn))
+        end,
+        CancelSpellByName = function()
+          local fn = _G.CancelSpellByName
+          assertEquals('function', type(fn))
+        end,
+        CannotBeResurrected = function()
+          local fn = _G.CannotBeResurrected
+          assertEquals('function', type(fn))
+        end,
+        CastPetAction = function()
+          local fn = _G.CastPetAction
+          assertEquals('function', type(fn))
+        end,
+        CastShapeshiftForm = function()
+          local fn = _G.CastShapeshiftForm
+          assertEquals('function', type(fn))
+        end,
+        CastSpellByName = function()
+          local fn = _G.CastSpellByName
+          assertEquals('function', type(fn))
+        end,
+        CastingInfo = function()
+          local fn = _G.CastingInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CenterCamera = function()
+          local fn = _G.CenterCamera
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        ChangeActionBarPage = function()
+          local fn = _G.ChangeActionBarPage
+          assertEquals('function', type(fn))
+        end,
+        ChannelInfo = function()
+          local fn = _G.ChannelInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CheckInbox = function()
+          local fn = _G.CheckInbox
+          assertEquals('function', type(fn))
+        end,
+        ClearBattlemaster = function()
+          local fn = _G.ClearBattlemaster
+          assertEquals('function', type(fn))
+        end,
+        ClearFocus = function()
+          local fn = _G.ClearFocus
+          assertEquals('function', type(fn))
+        end,
+        ClearOverrideBindings = function()
+          local fn = _G.ClearOverrideBindings
+          assertEquals('function', type(fn))
+        end,
+        ClearPartyAssignment = function()
+          local fn = _G.ClearPartyAssignment
+          assertEquals('function', type(fn))
+        end,
+        ClearTarget = function()
+          local fn = _G.ClearTarget
+          assertEquals('function', type(fn))
+        end,
+        CloseAuctionHouse = function()
+          local fn = _G.CloseAuctionHouse
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CloseBankFrame = function()
+          local fn = _G.CloseBankFrame
+          assertEquals('function', type(fn))
+        end,
+        CloseCraft = function()
+          local fn = _G.CloseCraft
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CloseGossip = function()
+          local fn = _G.CloseGossip
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CloseGuildBankFrame = function()
+          local fn = _G.CloseGuildBankFrame
+          assertEquals('function', type(fn))
+        end,
+        CloseGuildRegistrar = function()
+          local fn = _G.CloseGuildRegistrar
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CloseItemText = function()
+          local fn = _G.CloseItemText
+          assertEquals('function', type(fn))
+        end,
+        CloseLoot = function()
+          local fn = _G.CloseLoot
+          assertEquals('function', type(fn))
+        end,
+        CloseMail = function()
+          local fn = _G.CloseMail
+          assertEquals('function', type(fn))
+        end,
+        CloseMerchant = function()
+          local fn = _G.CloseMerchant
+          assertEquals('function', type(fn))
+        end,
+        ClosePetStables = function()
+          local fn = _G.ClosePetStables
+          assertEquals('function', type(fn))
+        end,
+        ClosePetition = function()
+          local fn = _G.ClosePetition
+          assertEquals('function', type(fn))
+        end,
+        ClosePetitionRegistrar = function()
+          local fn = _G.ClosePetitionRegistrar
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CloseQuest = function()
+          local fn = _G.CloseQuest
+          assertEquals('function', type(fn))
+        end,
+        CloseResearch = function()
+          local fn = _G.CloseResearch
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CloseSocketInfo = function()
+          local fn = _G.CloseSocketInfo
+          assertEquals('function', type(fn))
+        end,
+        CloseTabardCreation = function()
+          local fn = _G.CloseTabardCreation
+          assertEquals('function', type(fn))
+        end,
+        CloseTrade = function()
+          local fn = _G.CloseTrade
+          assertEquals('function', type(fn))
+        end,
+        CloseTradeSkill = function()
+          local fn = _G.CloseTradeSkill
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CloseTrainer = function()
+          local fn = _G.CloseTrainer
+          assertEquals('function', type(fn))
+        end,
+        CloseVoidStorageFrame = function()
+          local fn = _G.CloseVoidStorageFrame
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CollapseSkillHeader = function()
+          local fn = _G.CollapseSkillHeader
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CombatLogAddFilter = function()
+          local fn = _G.CombatLogAddFilter
+          assertEquals('function', type(fn))
+        end,
+        CombatLogGetCurrentEntry = function()
+          local fn = _G.CombatLogGetCurrentEntry
+          assertEquals('function', type(fn))
+        end,
+        CombatLogGetCurrentEventInfo = function()
+          local fn = _G.CombatLogGetCurrentEventInfo
+          assertEquals('function', type(fn))
+        end,
+        CombatLogGetNumEntries = function()
+          local fn = _G.CombatLogGetNumEntries
+          assertEquals('function', type(fn))
+        end,
+        CombatLogResetFilter = function()
+          local fn = _G.CombatLogResetFilter
+          assertEquals('function', type(fn))
+        end,
+        CombatLogSetCurrentEntry = function()
+          local fn = _G.CombatLogSetCurrentEntry
+          assertEquals('function', type(fn))
+        end,
+        CombatLog_Object_IsA = function()
+          local fn = _G.CombatLog_Object_IsA
+          assertEquals('function', type(fn))
+        end,
+        CombatTextSetActiveUnit = function()
+          local fn = _G.CombatTextSetActiveUnit
+          assertEquals('function', type(fn))
+        end,
+        ConsoleExec = function()
+          local fn = _G.ConsoleExec
+          assertEquals('function', type(fn))
+        end,
+        ContainerIDToInventoryID = function()
+          local fn = _G.ContainerIDToInventoryID
+          assertEquals('function', type(fn))
+        end,
+        CraftIsEnchanting = function()
+          local fn = _G.CraftIsEnchanting
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        CreateFont = function()
+          local fn = _G.CreateFont
+          assertEquals('function', type(fn))
+        end,
+        CreateFrame = function()
+          local fn = _G.CreateFrame
+          assertEquals('function', type(fn))
+        end,
+        CursorCanGoInSlot = function()
+          local fn = _G.CursorCanGoInSlot
+          assertEquals('function', type(fn))
+        end,
+        CursorHasItem = function()
+          local fn = _G.CursorHasItem
+          assertEquals('function', type(fn))
+        end,
+        DeathRecap_HasEvents = function()
+          local fn = _G.DeathRecap_HasEvents
+          assertEquals('function', type(fn))
+        end,
+        DeleteMacro = function()
+          local fn = _G.DeleteMacro
+          assertEquals('function', type(fn))
+        end,
+        DescendStop = function()
+          local fn = _G.DescendStop
+          assertEquals('function', type(fn))
+        end,
+        DisableAddOn = function()
+          local fn = _G.DisableAddOn
+          assertEquals('function', type(fn))
+        end,
+        Dismount = function()
+          local fn = _G.Dismount
+          assertEquals('function', type(fn))
+        end,
+        DoEmote = function()
+          local fn = _G.DoEmote
+          assertEquals('function', type(fn))
+        end,
+        DoesCurrentLocaleSellExpansionLevels = function()
+          local fn = _G.DoesCurrentLocaleSellExpansionLevels
+          assertEquals('function', type(fn))
+        end,
+        DoesSpellExist = function()
+          local fn = _G.DoesSpellExist
+          assertEquals('function', type(fn))
+        end,
+        DropCursorMoney = function()
+          local fn = _G.DropCursorMoney
+          assertEquals('function', type(fn))
+        end,
+        DumpMovementCapture = function()
+          local fn = _G.DumpMovementCapture
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        EJ_GetCurrentTier = function()
+          local fn = _G.EJ_GetCurrentTier
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        EJ_GetDifficulty = function()
+          local fn = _G.EJ_GetDifficulty
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        EJ_GetEncounterInfo = function()
+          local fn = _G.EJ_GetEncounterInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        EJ_GetInstanceByIndex = function()
+          local fn = _G.EJ_GetInstanceByIndex
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        EJ_GetInstanceInfo = function()
+          local fn = _G.EJ_GetInstanceInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        EJ_GetLootFilter = function()
+          local fn = _G.EJ_GetLootFilter
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        EJ_GetNumLoot = function()
+          local fn = _G.EJ_GetNumLoot
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        EJ_GetNumTiers = function()
+          local fn = _G.EJ_GetNumTiers
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        EJ_GetTierInfo = function()
+          local fn = _G.EJ_GetTierInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        EJ_IsValidInstanceDifficulty = function()
+          local fn = _G.EJ_IsValidInstanceDifficulty
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        EJ_SelectTier = function()
+          local fn = _G.EJ_SelectTier
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        EnableAddOn = function()
+          local fn = _G.EnableAddOn
+          assertEquals('function', type(fn))
+        end,
+        EnumerateFrames = function()
+          local fn = _G.EnumerateFrames
+          assertEquals('function', type(fn))
+        end,
+        EnumerateServerChannels = function()
+          local fn = _G.EnumerateServerChannels
+          assertEquals('function', type(fn))
+        end,
+        EquipItemByName = function()
+          local fn = _G.EquipItemByName
+          assertEquals('function', type(fn))
+        end,
+        ExpandTrainerSkillLine = function()
+          local fn = _G.ExpandTrainerSkillLine
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        FillLocalizedClassList = function()
+          local fn = _G.FillLocalizedClassList
+          assertEquals('function', type(fn))
+        end,
+        FindSpellBookSlotBySpellID = function()
+          local fn = _G.FindSpellBookSlotBySpellID
+          assertEquals('function', type(fn))
+        end,
+        FlashClientIcon = function()
+          local fn = _G.FlashClientIcon
+          assertEquals('function', type(fn))
+        end,
+        FlipCameraYaw = function()
+          local fn = _G.FlipCameraYaw
+          assertEquals('function', type(fn))
+        end,
+        FocusUnit = function()
+          local fn = _G.FocusUnit
+          assertEquals('function', type(fn))
+        end,
+        FollowUnit = function()
+          local fn = _G.FollowUnit
+          assertEquals('function', type(fn))
+        end,
+        GMEuropaBugsEnabled = function()
+          local fn = _G.GMEuropaBugsEnabled
+          assertEquals('function', type(fn))
+        end,
+        GMEuropaComplaintsEnabled = function()
+          local fn = _G.GMEuropaComplaintsEnabled
+          assertEquals('function', type(fn))
+        end,
+        GMEuropaSuggestionsEnabled = function()
+          local fn = _G.GMEuropaSuggestionsEnabled
+          assertEquals('function', type(fn))
+        end,
+        GMEuropaTicketsEnabled = function()
+          local fn = _G.GMEuropaTicketsEnabled
+          assertEquals('function', type(fn))
+        end,
+        GMSubmitBug = function()
+          local fn = _G.GMSubmitBug
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GameMovieFinished = function()
+          local fn = _G.GameMovieFinished
+          assertEquals('function', type(fn))
+        end,
+        GetAccountExpansionLevel = function()
+          local fn = _G.GetAccountExpansionLevel
+          assertEquals('function', type(fn))
+        end,
+        GetAchievementCriteriaInfo = function()
+          local fn = _G.GetAchievementCriteriaInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAchievementCriteriaInfoByID = function()
+          local fn = _G.GetAchievementCriteriaInfoByID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAchievementInfo = function()
+          local fn = _G.GetAchievementInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAchievementNumCriteria = function()
+          local fn = _G.GetAchievementNumCriteria
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetActionBarPage = function()
+          local fn = _G.GetActionBarPage
+          assertEquals('function', type(fn))
+        end,
+        GetActionBarToggles = function()
+          local fn = _G.GetActionBarToggles
+          assertEquals('function', type(fn))
+        end,
+        GetActionCharges = function()
+          local fn = _G.GetActionCharges
+          assertEquals('function', type(fn))
+        end,
+        GetActionCooldown = function()
+          local fn = _G.GetActionCooldown
+          assertEquals('function', type(fn))
+        end,
+        GetActionCount = function()
+          local fn = _G.GetActionCount
+          assertEquals('function', type(fn))
+        end,
+        GetActionInfo = function()
+          local fn = _G.GetActionInfo
+          assertEquals('function', type(fn))
+        end,
+        GetActionLossOfControlCooldown = function()
+          local fn = _G.GetActionLossOfControlCooldown
+          assertEquals('function', type(fn))
+        end,
+        GetActionText = function()
+          local fn = _G.GetActionText
+          assertEquals('function', type(fn))
+        end,
+        GetActionTexture = function()
+          local fn = _G.GetActionTexture
+          assertEquals('function', type(fn))
+        end,
+        GetActiveLootRollIDs = function()
+          local fn = _G.GetActiveLootRollIDs
+          assertEquals('function', type(fn))
+        end,
+        GetActiveQuestID = function()
+          local fn = _G.GetActiveQuestID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetActiveSpecGroup = function()
+          local fn = _G.GetActiveSpecGroup
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetActiveTitle = function()
+          local fn = _G.GetActiveTitle
+          assertEquals('function', type(fn))
+        end,
+        GetAddOnDependencies = function()
+          local fn = _G.GetAddOnDependencies
+          assertEquals('function', type(fn))
+        end,
+        GetAddOnEnableState = function()
+          local fn = _G.GetAddOnEnableState
+          assertEquals('function', type(fn))
+        end,
+        GetAddOnInfo = function()
+          local fn = _G.GetAddOnInfo
+          assertEquals('function', type(fn))
+        end,
+        GetAddOnMemoryUsage = function()
+          local fn = _G.GetAddOnMemoryUsage
+          assertEquals('function', type(fn))
+        end,
+        GetAddOnMetadata = function()
+          local fn = _G.GetAddOnMetadata
+          assertEquals('function', type(fn))
+        end,
+        GetAddOnOptionalDependencies = function()
+          local fn = _G.GetAddOnOptionalDependencies
+          assertEquals('function', type(fn))
+        end,
+        GetAlternativeDefaultLanguage = function()
+          local fn = _G.GetAlternativeDefaultLanguage
+          assertEquals('function', type(fn))
+        end,
+        GetArchaeologyInfo = function()
+          local fn = _G.GetArchaeologyInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetArchaeologyRaceInfo = function()
+          local fn = _G.GetArchaeologyRaceInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAreaSpiritHealerTime = function()
+          local fn = _G.GetAreaSpiritHealerTime
+          assertEquals('function', type(fn))
+        end,
+        GetAreaText = function()
+          local fn = _G.GetAreaText
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetArenaOpponentSpec = function()
+          local fn = _G.GetArenaOpponentSpec
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetArenaTeam = function()
+          local fn = _G.GetArenaTeam
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetArmorPenetration = function()
+          local fn = _G.GetArmorPenetration
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAttackPowerForStat = function()
+          local fn = _G.GetAttackPowerForStat
+          assertEquals('function', type(fn))
+        end,
+        GetAuctionDeposit = function()
+          local fn = _G.GetAuctionDeposit
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAuctionItemInfo = function()
+          local fn = _G.GetAuctionItemInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAuctionItemLink = function()
+          local fn = _G.GetAuctionItemLink
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAuctionItemSubClasses = function()
+          local fn = _G.GetAuctionItemSubClasses
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAuctionItemTimeLeft = function()
+          local fn = _G.GetAuctionItemTimeLeft
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAuctionSellItemInfo = function()
+          local fn = _G.GetAuctionSellItemInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAuctionSort = function()
+          local fn = _G.GetAuctionSort
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAutoCompleteRealms = function()
+          local fn = _G.GetAutoCompleteRealms
+          assertEquals('function', type(fn))
+        end,
+        GetAutoDeclineGuildInvites = function()
+          local fn = _G.GetAutoDeclineGuildInvites
+          assertEquals('function', type(fn))
+        end,
+        GetAvailableBandwidth = function()
+          local fn = _G.GetAvailableBandwidth
+          assertEquals('function', type(fn))
+        end,
+        GetAvailableLocaleInfo = function()
+          local fn = _G.GetAvailableLocaleInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAvailableLocales = function()
+          local fn = _G.GetAvailableLocales
+          assertEquals('function', type(fn))
+        end,
+        GetAvailableQuestInfo = function()
+          local fn = _G.GetAvailableQuestInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAvailableTitle = function()
+          local fn = _G.GetAvailableTitle
+          assertEquals('function', type(fn))
+        end,
+        GetAverageItemLevel = function()
+          local fn = _G.GetAverageItemLevel
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetAvoidance = function()
+          local fn = _G.GetAvoidance
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetBagName = function()
+          local fn = _G.GetBagName
+          assertEquals('function', type(fn))
+        end,
+        GetBagSlotFlag = function()
+          local fn = _G.GetBagSlotFlag
+          assertEquals('function', type(fn))
+        end,
+        GetBankBagSlotFlag = function()
+          local fn = _G.GetBankBagSlotFlag
+          assertEquals('function', type(fn))
+        end,
+        GetBankSlotCost = function()
+          local fn = _G.GetBankSlotCost
+          assertEquals('function', type(fn))
+        end,
+        GetBattlefieldArenaFaction = function()
+          local fn = _G.GetBattlefieldArenaFaction
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetBattlefieldFlagPosition = function()
+          local fn = _G.GetBattlefieldFlagPosition
+          assertEquals('function', type(fn))
+        end,
+        GetBattlefieldInstanceInfo = function()
+          local fn = _G.GetBattlefieldInstanceInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetBattlefieldStatus = function()
+          local fn = _G.GetBattlefieldStatus
+          assertEquals('function', type(fn))
+        end,
+        GetBattlegroundInfo = function()
+          local fn = _G.GetBattlegroundInfo
+          assertEquals('function', type(fn))
+        end,
+        GetBestRFChoice = function()
+          local fn = _G.GetBestRFChoice
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetBidderAuctionItems = function()
+          local fn = _G.GetBidderAuctionItems
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetBinding = function()
+          local fn = _G.GetBinding
+          assertEquals('function', type(fn))
+        end,
+        GetBindingKey = function()
+          local fn = _G.GetBindingKey
+          assertEquals('function', type(fn))
+        end,
+        GetBindingText = function()
+          local fn = _G.GetBindingText
+          assertEquals('function', type(fn))
+        end,
+        GetBuybackItemInfo = function()
+          local fn = _G.GetBuybackItemInfo
+          assertEquals('function', type(fn))
+        end,
+        GetBuybackItemLink = function()
+          local fn = _G.GetBuybackItemLink
+          assertEquals('function', type(fn))
+        end,
+        GetCVarInfo = function()
+          local fn = _G.GetCVarInfo
+          assertEquals('function', type(fn))
+        end,
+        GetCVarSettingValidity = function()
+          local fn = _G.GetCVarSettingValidity
+          assertEquals('function', type(fn))
+        end,
+        GetCategoryAchievementPoints = function()
+          local fn = _G.GetCategoryAchievementPoints
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCategoryInfo = function()
+          local fn = _G.GetCategoryInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCategoryList = function()
+          local fn = _G.GetCategoryList
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetChannelDisplayInfo = function()
+          local fn = _G.GetChannelDisplayInfo
+          assertEquals('function', type(fn))
+        end,
+        GetChannelList = function()
+          local fn = _G.GetChannelList
+          assertEquals('function', type(fn))
+        end,
+        GetChatTypeIndex = function()
+          local fn = _G.GetChatTypeIndex
+          assertEquals('function', type(fn))
+        end,
+        GetChatWindowChannels = function()
+          local fn = _G.GetChatWindowChannels
+          assertEquals('function', type(fn))
+        end,
+        GetChatWindowInfo = function()
+          local fn = _G.GetChatWindowInfo
+          assertEquals('function', type(fn))
+        end,
+        GetChatWindowMessages = function()
+          local fn = _G.GetChatWindowMessages
+          assertEquals('function', type(fn))
+        end,
+        GetChatWindowSavedDimensions = function()
+          local fn = _G.GetChatWindowSavedDimensions
+          assertEquals('function', type(fn))
+        end,
+        GetChatWindowSavedPosition = function()
+          local fn = _G.GetChatWindowSavedPosition
+          assertEquals('function', type(fn))
+        end,
+        GetClassInfo = function()
+          local fn = _G.GetClassInfo
+          assertEquals('function', type(fn))
+        end,
+        GetClassicExpansionLevel = function()
+          local fn = _G.GetClassicExpansionLevel
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetClickFrame = function()
+          local fn = _G.GetClickFrame
+          assertEquals('function', type(fn))
+        end,
+        GetClientDisplayExpansionLevel = function()
+          local fn = _G.GetClientDisplayExpansionLevel
+          assertEquals('function', type(fn))
+        end,
+        GetCoinText = function()
+          local fn = _G.GetCoinText
+          assertEquals('function', type(fn))
+        end,
+        GetCoinTextureString = function()
+          local fn = _G.GetCoinTextureString
+          assertEquals('function', type(fn))
+        end,
+        GetCombatRating = function()
+          local fn = _G.GetCombatRating
+          assertEquals('function', type(fn))
+        end,
+        GetCombatRatingBonus = function()
+          local fn = _G.GetCombatRatingBonus
+          assertEquals('function', type(fn))
+        end,
+        GetComboPoints = function()
+          local fn = _G.GetComboPoints
+          assertEquals('function', type(fn))
+        end,
+        GetContainerItemCooldown = function()
+          local fn = _G.GetContainerItemCooldown
+          assertEquals('function', type(fn))
+        end,
+        GetContainerItemInfo = function()
+          local fn = _G.GetContainerItemInfo
+          assertEquals('function', type(fn))
+        end,
+        GetContainerItemLink = function()
+          local fn = _G.GetContainerItemLink
+          assertEquals('function', type(fn))
+        end,
+        GetContainerItemQuestInfo = function()
+          local fn = _G.GetContainerItemQuestInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetContainerNumFreeSlots = function()
+          local fn = _G.GetContainerNumFreeSlots
+          assertEquals('function', type(fn))
+        end,
+        GetContainerNumSlots = function()
+          local fn = _G.GetContainerNumSlots
+          assertEquals('function', type(fn))
+        end,
+        GetCorruption = function()
+          local fn = _G.GetCorruption
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftButtonToken = function()
+          local fn = _G.GetCraftButtonToken
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftCooldown = function()
+          local fn = _G.GetCraftCooldown
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftDescription = function()
+          local fn = _G.GetCraftDescription
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftDisplaySkillLine = function()
+          local fn = _G.GetCraftDisplaySkillLine
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftFilter = function()
+          local fn = _G.GetCraftFilter
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftIcon = function()
+          local fn = _G.GetCraftIcon
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftInfo = function()
+          local fn = _G.GetCraftInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftName = function()
+          local fn = _G.GetCraftName
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftNumMade = function()
+          local fn = _G.GetCraftNumMade
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftNumReagents = function()
+          local fn = _G.GetCraftNumReagents
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftReagentInfo = function()
+          local fn = _G.GetCraftReagentInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftSelectionIndex = function()
+          local fn = _G.GetCraftSelectionIndex
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftSlots = function()
+          local fn = _G.GetCraftSlots
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCraftSpellFocus = function()
+          local fn = _G.GetCraftSpellFocus
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCritChance = function()
+          local fn = _G.GetCritChance
+          assertEquals('function', type(fn))
+        end,
+        GetCritChanceFromAgility = function()
+          local fn = _G.GetCritChanceFromAgility
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCritChanceProvidesParryEffect = function()
+          local fn = _G.GetCritChanceProvidesParryEffect
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetCurrentArenaSeason = function()
+          local fn = _G.GetCurrentArenaSeason
+          assertEquals('function', type(fn))
+        end,
+        GetCurrentBindingSet = function()
+          local fn = _G.GetCurrentBindingSet
+          assertEquals('function', type(fn))
+        end,
+        GetCurrentGuildBankTab = function()
+          local fn = _G.GetCurrentGuildBankTab
+          assertEquals('function', type(fn))
+        end,
+        GetCurrentRegion = function()
+          local fn = _G.GetCurrentRegion
+          assertEquals('function', type(fn))
+        end,
+        GetCurrentRegionName = function()
+          local fn = _G.GetCurrentRegionName
+          assertEquals('function', type(fn))
+        end,
+        GetCurrentResolution = function()
+          local fn = _G.GetCurrentResolution
+          assertEquals('function', type(fn))
+        end,
+        GetCurrentScaledResolution = function()
+          local fn = _G.GetCurrentScaledResolution
+          assertEquals('function', type(fn))
+        end,
+        GetCurrentTitle = function()
+          local fn = _G.GetCurrentTitle
+          assertEquals('function', type(fn))
+        end,
+        GetCursorInfo = function()
+          local fn = _G.GetCursorInfo
+          assertEquals('function', type(fn))
+        end,
+        GetCursorMoney = function()
+          local fn = _G.GetCursorMoney
+          assertEquals('function', type(fn))
+        end,
+        GetCursorPosition = function()
+          local fn = _G.GetCursorPosition
+          assertEquals('function', type(fn))
+        end,
+        GetDailyQuestsCompleted = function()
+          local fn = _G.GetDailyQuestsCompleted
+          assertEquals('function', type(fn))
+        end,
+        GetDefaultLanguage = function()
+          local fn = _G.GetDefaultLanguage
+          assertEquals('function', type(fn))
+        end,
+        GetDefaultScale = function()
+          local fn = _G.GetDefaultScale
+          assertEquals('function', type(fn))
+        end,
+        GetDefaultVideoOptions = function()
+          local fn = _G.GetDefaultVideoOptions
+          assertEquals('function', type(fn))
+        end,
+        GetDifficultyInfo = function()
+          local fn = _G.GetDifficultyInfo
+          assertEquals('function', type(fn))
+        end,
+        GetDownloadedPercentage = function()
+          local fn = _G.GetDownloadedPercentage
+          assertEquals('function', type(fn))
+        end,
+        GetDungeonDifficultyID = function()
+          local fn = _G.GetDungeonDifficultyID
+          assertEquals('function', type(fn))
+        end,
+        GetExistingSocketInfo = function()
+          local fn = _G.GetExistingSocketInfo
+          assertEquals('function', type(fn))
+        end,
+        GetExpansionDisplayInfo = function()
+          local fn = _G.GetExpansionDisplayInfo
+          assertEquals('function', type(fn))
+        end,
+        GetExpansionForLevel = function()
+          local fn = _G.GetExpansionForLevel
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetExpansionLevel = function()
+          local fn = _G.GetExpansionLevel
+          assertEquals('function', type(fn))
+        end,
+        GetExpansionTrialInfo = function()
+          local fn = _G.GetExpansionTrialInfo
+          assertEquals('function', type(fn))
+        end,
+        GetExpertise = function()
+          local fn = _G.GetExpertise
+          assertEquals('function', type(fn))
+        end,
+        GetExpertisePercent = function()
+          local fn = _G.GetExpertisePercent
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetExtraBarIndex = function()
+          local fn = _G.GetExtraBarIndex
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetFactionInfo = function()
+          local fn = _G.GetFactionInfo
+          assertEquals('function', type(fn))
+        end,
+        GetFactionInfoByID = function()
+          local fn = _G.GetFactionInfoByID
+          assertEquals('function', type(fn))
+        end,
+        GetFileStreamingStatus = function()
+          local fn = _G.GetFileStreamingStatus
+          assertEquals('function', type(fn))
+        end,
+        GetFirstTradeSkill = function()
+          local fn = _G.GetFirstTradeSkill
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetFramerate = function()
+          local fn = _G.GetFramerate
+          assertEquals('function', type(fn))
+        end,
+        GetFriendshipReputation = function()
+          local fn = _G.GetFriendshipReputation
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetFriendshipReputationRanks = function()
+          local fn = _G.GetFriendshipReputationRanks
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetGMStatus = function()
+          local fn = _G.GetGMStatus
+          assertEquals('function', type(fn))
+        end,
+        GetGMTicket = function()
+          local fn = _G.GetGMTicket
+          assertEquals('function', type(fn))
+        end,
+        GetGameTime = function()
+          local fn = _G.GetGameTime
+          assertEquals('function', type(fn))
+        end,
+        GetGossipActiveQuests = function()
+          local fn = _G.GetGossipActiveQuests
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetGossipAvailableQuests = function()
+          local fn = _G.GetGossipAvailableQuests
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetGossipOptions = function()
+          local fn = _G.GetGossipOptions
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetGossipText = function()
+          local fn = _G.GetGossipText
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetGreetingText = function()
+          local fn = _G.GetGreetingText
+          assertEquals('function', type(fn))
+        end,
+        GetGroupMemberCounts = function()
+          local fn = _G.GetGroupMemberCounts
+          assertEquals('function', type(fn))
+        end,
+        GetGuildBankItemInfo = function()
+          local fn = _G.GetGuildBankItemInfo
+          assertEquals('function', type(fn))
+        end,
+        GetGuildBankItemLink = function()
+          local fn = _G.GetGuildBankItemLink
+          assertEquals('function', type(fn))
+        end,
+        GetGuildBankMoney = function()
+          local fn = _G.GetGuildBankMoney
+          assertEquals('function', type(fn))
+        end,
+        GetGuildBankMoneyTransaction = function()
+          local fn = _G.GetGuildBankMoneyTransaction
+          assertEquals('function', type(fn))
+        end,
+        GetGuildBankTabInfo = function()
+          local fn = _G.GetGuildBankTabInfo
+          assertEquals('function', type(fn))
+        end,
+        GetGuildBankText = function()
+          local fn = _G.GetGuildBankText
+          assertEquals('function', type(fn))
+        end,
+        GetGuildBankWithdrawMoney = function()
+          local fn = _G.GetGuildBankWithdrawMoney
+          assertEquals('function', type(fn))
+        end,
+        GetGuildChallengeInfo = function()
+          local fn = _G.GetGuildChallengeInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetGuildEventInfo = function()
+          local fn = _G.GetGuildEventInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetGuildFactionGroup = function()
+          local fn = _G.GetGuildFactionGroup
+          assertEquals('function', type(fn))
+        end,
+        GetGuildFactionInfo = function()
+          local fn = _G.GetGuildFactionInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetGuildInfo = function()
+          local fn = _G.GetGuildInfo
+          assertEquals('function', type(fn))
+        end,
+        GetGuildInfoText = function()
+          local fn = _G.GetGuildInfoText
+          assertEquals('function', type(fn))
+        end,
+        GetGuildLogoInfo = function()
+          local fn = _G.GetGuildLogoInfo
+          assertEquals('function', type(fn))
+        end,
+        GetGuildPerkInfo = function()
+          local fn = _G.GetGuildPerkInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetGuildRenameRequired = function()
+          local fn = _G.GetGuildRenameRequired
+          assertEquals('function', type(fn))
+        end,
+        GetGuildRewardInfo = function()
+          local fn = _G.GetGuildRewardInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetGuildRosterInfo = function()
+          local fn = _G.GetGuildRosterInfo
+          assertEquals('function', type(fn))
+        end,
+        GetGuildRosterMOTD = function()
+          local fn = _G.GetGuildRosterMOTD
+          assertEquals('function', type(fn))
+        end,
+        GetGuildRosterSelection = function()
+          local fn = _G.GetGuildRosterSelection
+          assertEquals('function', type(fn))
+        end,
+        GetGuildRosterShowOffline = function()
+          local fn = _G.GetGuildRosterShowOffline
+          assertEquals('function', type(fn))
+        end,
+        GetGuildTabardFiles = function()
+          local fn = _G.GetGuildTabardFiles
+          assertEquals('function', type(fn))
+        end,
+        GetHaste = function()
+          local fn = _G.GetHaste
+          assertEquals('function', type(fn))
+        end,
+        GetInboxHeaderInfo = function()
+          local fn = _G.GetInboxHeaderInfo
+          assertEquals('function', type(fn))
+        end,
+        GetInboxItemLink = function()
+          local fn = _G.GetInboxItemLink
+          assertEquals('function', type(fn))
+        end,
+        GetInboxNumItems = function()
+          local fn = _G.GetInboxNumItems
+          assertEquals('function', type(fn))
+        end,
+        GetInspectArenaTeamData = function()
+          local fn = _G.GetInspectArenaTeamData
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetInspectHonorData = function()
+          local fn = _G.GetInspectHonorData
+          assertEquals('function', type(fn))
+        end,
+        GetInspectPVPRankProgress = function()
+          local fn = _G.GetInspectPVPRankProgress
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetInstanceInfo = function()
+          local fn = _G.GetInstanceInfo
+          assertEquals('function', type(fn))
+        end,
+        GetInstanceLockTimeRemaining = function()
+          local fn = _G.GetInstanceLockTimeRemaining
+          assertEquals('function', type(fn))
+        end,
+        GetInventoryAlertStatus = function()
+          local fn = _G.GetInventoryAlertStatus
+          assertEquals('function', type(fn))
+        end,
+        GetInventoryItemCooldown = function()
+          local fn = _G.GetInventoryItemCooldown
+          assertEquals('function', type(fn))
+        end,
+        GetInventoryItemCount = function()
+          local fn = _G.GetInventoryItemCount
+          assertEquals('function', type(fn))
+        end,
+        GetInventoryItemDurability = function()
+          local fn = _G.GetInventoryItemDurability
+          assertEquals('function', type(fn))
+        end,
+        GetInventoryItemID = function()
+          local fn = _G.GetInventoryItemID
+          assertEquals('function', type(fn))
+        end,
+        GetInventoryItemLink = function()
+          local fn = _G.GetInventoryItemLink
+          assertEquals('function', type(fn))
+        end,
+        GetInventoryItemQuality = function()
+          local fn = _G.GetInventoryItemQuality
+          assertEquals('function', type(fn))
+        end,
+        GetInventoryItemTexture = function()
+          local fn = _G.GetInventoryItemTexture
+          assertEquals('function', type(fn))
+        end,
+        GetInventorySlotInfo = function()
+          local fn = _G.GetInventorySlotInfo
+          assertEquals('function', type(fn))
+        end,
+        GetItemClassInfo = function()
+          local fn = _G.GetItemClassInfo
+          assertEquals('function', type(fn))
+        end,
+        GetItemCooldown = function()
+          local fn = _G.GetItemCooldown
+          assertEquals('function', type(fn))
+        end,
+        GetItemCount = function()
+          local fn = _G.GetItemCount
+          assertEquals('function', type(fn))
+        end,
+        GetItemIcon = function()
+          local fn = _G.GetItemIcon
+          assertEquals('function', type(fn))
+        end,
+        GetItemInfo = function()
+          local fn = _G.GetItemInfo
+          assertEquals('function', type(fn))
+        end,
+        GetItemInfoInstant = function()
+          local fn = _G.GetItemInfoInstant
+          assertEquals('function', type(fn))
+        end,
+        GetItemInventorySlotInfo = function()
+          local fn = _G.GetItemInventorySlotInfo
+          assertEquals('function', type(fn))
+        end,
+        GetItemQualityColor = function()
+          local fn = _G.GetItemQualityColor
+          assertEquals('function', type(fn))
+        end,
+        GetItemSubClassInfo = function()
+          local fn = _G.GetItemSubClassInfo
+          assertEquals('function', type(fn))
+        end,
+        GetLFDChoiceCollapseState = function()
+          local fn = _G.GetLFDChoiceCollapseState
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFDLockInfo = function()
+          local fn = _G.GetLFDLockInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFDLockPlayerCount = function()
+          local fn = _G.GetLFDLockPlayerCount
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFDRoleRestrictions = function()
+          local fn = _G.GetLFDRoleRestrictions
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGBootProposal = function()
+          local fn = _G.GetLFGBootProposal
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGCategoryForID = function()
+          local fn = _G.GetLFGCategoryForID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGCompletionReward = function()
+          local fn = _G.GetLFGCompletionReward
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGCompletionRewardItem = function()
+          local fn = _G.GetLFGCompletionRewardItem
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGCompletionRewardItemLink = function()
+          local fn = _G.GetLFGCompletionRewardItemLink
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGDeserterExpiration = function()
+          local fn = _G.GetLFGDeserterExpiration
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGDungeonInfo = function()
+          local fn = _G.GetLFGDungeonInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGDungeonNumEncounters = function()
+          local fn = _G.GetLFGDungeonNumEncounters
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGDungeonRewardCapInfo = function()
+          local fn = _G.GetLFGDungeonRewardCapInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGDungeonRewardInfo = function()
+          local fn = _G.GetLFGDungeonRewardInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGDungeonRewards = function()
+          local fn = _G.GetLFGDungeonRewards
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGInfoServer = function()
+          local fn = _G.GetLFGInfoServer
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGProposal = function()
+          local fn = _G.GetLFGProposal
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGQueuedList = function()
+          local fn = _G.GetLFGQueuedList
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGRandomDungeonInfo = function()
+          local fn = _G.GetLFGRandomDungeonInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGReadyCheckUpdate = function()
+          local fn = _G.GetLFGReadyCheckUpdate
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGRoleShortageRewards = function()
+          local fn = _G.GetLFGRoleShortageRewards
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGRoleUpdate = function()
+          local fn = _G.GetLFGRoleUpdate
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLFGRoles = function()
+          local fn = _G.GetLFGRoles
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLanguageByIndex = function()
+          local fn = _G.GetLanguageByIndex
+          assertEquals('function', type(fn))
+        end,
+        GetLegacyRaidDifficultyID = function()
+          local fn = _G.GetLegacyRaidDifficultyID
+          assertEquals('function', type(fn))
+        end,
+        GetLifesteal = function()
+          local fn = _G.GetLifesteal
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLocale = function()
+          local fn = _G.GetLocale
+          assertEquals('function', type(fn))
+        end,
+        GetLooseMacroIcons = function()
+          local fn = _G.GetLooseMacroIcons
+          assertEquals('function', type(fn))
+        end,
+        GetLootMethod = function()
+          local fn = _G.GetLootMethod
+          assertEquals('function', type(fn))
+        end,
+        GetLootSlotInfo = function()
+          local fn = _G.GetLootSlotInfo
+          assertEquals('function', type(fn))
+        end,
+        GetLootSpecialization = function()
+          local fn = _G.GetLootSpecialization
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetLootThreshold = function()
+          local fn = _G.GetLootThreshold
+          assertEquals('function', type(fn))
+        end,
+        GetMacroIcons = function()
+          local fn = _G.GetMacroIcons
+          assertEquals('function', type(fn))
+        end,
+        GetMacroIndexByName = function()
+          local fn = _G.GetMacroIndexByName
+          assertEquals('function', type(fn))
+        end,
+        GetMacroInfo = function()
+          local fn = _G.GetMacroInfo
+          assertEquals('function', type(fn))
+        end,
+        GetMasterLootCandidate = function()
+          local fn = _G.GetMasterLootCandidate
+          assertEquals('function', type(fn))
+        end,
+        GetMasteryEffect = function()
+          local fn = _G.GetMasteryEffect
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetMaxBattlefieldID = function()
+          local fn = _G.GetMaxBattlefieldID
+          assertEquals('function', type(fn))
+        end,
+        GetMaxDailyQuests = function()
+          local fn = _G.GetMaxDailyQuests
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetMaxLevelForExpansionLevel = function()
+          local fn = _G.GetMaxLevelForExpansionLevel
+          assertEquals('function', type(fn))
+        end,
+        GetMaxLevelForLatestExpansion = function()
+          local fn = _G.GetMaxLevelForLatestExpansion
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetMaxLevelForPlayerExpansion = function()
+          local fn = _G.GetMaxLevelForPlayerExpansion
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetMaxPlayerLevel = function()
+          local fn = _G.GetMaxPlayerLevel
+          assertEquals('function', type(fn))
+        end,
+        GetMaxRenderScale = function()
+          local fn = _G.GetMaxRenderScale
+          assertEquals('function', type(fn))
+        end,
+        GetMaximumExpansionLevel = function()
+          local fn = _G.GetMaximumExpansionLevel
+          assertEquals('function', type(fn))
+        end,
+        GetMerchantCurrencies = function()
+          local fn = _G.GetMerchantCurrencies
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetMerchantFilter = function()
+          local fn = _G.GetMerchantFilter
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetMerchantItemID = function()
+          local fn = _G.GetMerchantItemID
+          assertEquals('function', type(fn))
+        end,
+        GetMerchantItemInfo = function()
+          local fn = _G.GetMerchantItemInfo
+          assertEquals('function', type(fn))
+        end,
+        GetMerchantItemLink = function()
+          local fn = _G.GetMerchantItemLink
+          assertEquals('function', type(fn))
+        end,
+        GetMerchantNumItems = function()
+          local fn = _G.GetMerchantNumItems
+          assertEquals('function', type(fn))
+        end,
+        GetMinRenderScale = function()
+          local fn = _G.GetMinRenderScale
+          assertEquals('function', type(fn))
+        end,
+        GetMinimapZoneText = function()
+          local fn = _G.GetMinimapZoneText
+          assertEquals('function', type(fn))
+        end,
+        GetMinimumExpansionLevel = function()
+          local fn = _G.GetMinimumExpansionLevel
+          assertEquals('function', type(fn))
+        end,
+        GetMirrorTimerInfo = function()
+          local fn = _G.GetMirrorTimerInfo
+          assertEquals('function', type(fn))
+        end,
+        GetModifiedClick = function()
+          local fn = _G.GetModifiedClick
+          assertEquals('function', type(fn))
+        end,
+        GetMoney = function()
+          local fn = _G.GetMoney
+          assertEquals('function', type(fn))
+        end,
+        GetMouseFocus = function()
+          local fn = _G.GetMouseFocus
+          assertEquals('function', type(fn))
+        end,
+        GetMultiCastBarIndex = function()
+          local fn = _G.GetMultiCastBarIndex
+          assertEquals('function', type(fn))
+        end,
+        GetNegativeCorruptionEffectInfo = function()
+          local fn = _G.GetNegativeCorruptionEffectInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNetStats = function()
+          local fn = _G.GetNetStats
+          assertEquals('function', type(fn))
+        end,
+        GetNewSocketInfo = function()
+          local fn = _G.GetNewSocketInfo
+          assertEquals('function', type(fn))
+        end,
+        GetNextPendingInviteConfirmation = function()
+          local fn = _G.GetNextPendingInviteConfirmation
+          assertEquals('function', type(fn))
+        end,
+        GetNormalizedRealmName = function()
+          local fn = _G.GetNormalizedRealmName
+          assertEquals('function', type(fn))
+        end,
+        GetNumActiveQuests = function()
+          local fn = _G.GetNumActiveQuests
+          assertEquals('function', type(fn))
+        end,
+        GetNumAddOns = function()
+          local fn = _G.GetNumAddOns
+          assertEquals('function', type(fn))
+        end,
+        GetNumArchaeologyRaces = function()
+          local fn = _G.GetNumArchaeologyRaces
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumArenaOpponentSpecs = function()
+          local fn = _G.GetNumArenaOpponentSpecs
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumArenaOpponents = function()
+          local fn = _G.GetNumArenaOpponents
+          assertEquals('function', type(fn))
+        end,
+        GetNumArtifactsByRace = function()
+          local fn = _G.GetNumArtifactsByRace
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumAuctionItems = function()
+          local fn = _G.GetNumAuctionItems
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumAvailableQuests = function()
+          local fn = _G.GetNumAvailableQuests
+          assertEquals('function', type(fn))
+        end,
+        GetNumBankSlots = function()
+          local fn = _G.GetNumBankSlots
+          assertEquals('function', type(fn))
+        end,
+        GetNumBattlefieldFlagPositions = function()
+          local fn = _G.GetNumBattlefieldFlagPositions
+          assertEquals('function', type(fn))
+        end,
+        GetNumBattlefieldScores = function()
+          local fn = _G.GetNumBattlefieldScores
+          assertEquals('function', type(fn))
+        end,
+        GetNumBattlefields = function()
+          local fn = _G.GetNumBattlefields
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumBattlegroundTypes = function()
+          local fn = _G.GetNumBattlegroundTypes
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumBindings = function()
+          local fn = _G.GetNumBindings
+          assertEquals('function', type(fn))
+        end,
+        GetNumBuybackItems = function()
+          local fn = _G.GetNumBuybackItems
+          assertEquals('function', type(fn))
+        end,
+        GetNumClasses = function()
+          local fn = _G.GetNumClasses
+          assertEquals('function', type(fn))
+        end,
+        GetNumCompletedAchievements = function()
+          local fn = _G.GetNumCompletedAchievements
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumCrafts = function()
+          local fn = _G.GetNumCrafts
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumDisplayChannels = function()
+          local fn = _G.GetNumDisplayChannels
+          assertEquals('function', type(fn))
+        end,
+        GetNumExpansions = function()
+          local fn = _G.GetNumExpansions
+          assertEquals('function', type(fn))
+        end,
+        GetNumFactions = function()
+          local fn = _G.GetNumFactions
+          assertEquals('function', type(fn))
+        end,
+        GetNumGossipAvailableQuests = function()
+          local fn = _G.GetNumGossipAvailableQuests
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumGroupMembers = function()
+          local fn = _G.GetNumGroupMembers
+          assertEquals('function', type(fn))
+        end,
+        GetNumGuildBankMoneyTransactions = function()
+          local fn = _G.GetNumGuildBankMoneyTransactions
+          assertEquals('function', type(fn))
+        end,
+        GetNumGuildBankTabs = function()
+          local fn = _G.GetNumGuildBankTabs
+          assertEquals('function', type(fn))
+        end,
+        GetNumGuildChallenges = function()
+          local fn = _G.GetNumGuildChallenges
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumGuildEvents = function()
+          local fn = _G.GetNumGuildEvents
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumGuildMembers = function()
+          local fn = _G.GetNumGuildMembers
+          assertEquals('function', type(fn))
+        end,
+        GetNumGuildNews = function()
+          local fn = _G.GetNumGuildNews
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumGuildPerks = function()
+          local fn = _G.GetNumGuildPerks
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumGuildRewards = function()
+          local fn = _G.GetNumGuildRewards
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumLanguages = function()
+          local fn = _G.GetNumLanguages
+          assertEquals('function', type(fn))
+        end,
+        GetNumLootItems = function()
+          local fn = _G.GetNumLootItems
+          assertEquals('function', type(fn))
+        end,
+        GetNumMacros = function()
+          local fn = _G.GetNumMacros
+          assertEquals('function', type(fn))
+        end,
+        GetNumPetitionNames = function()
+          local fn = _G.GetNumPetitionNames
+          assertEquals('function', type(fn))
+        end,
+        GetNumQuestChoices = function()
+          local fn = _G.GetNumQuestChoices
+          assertEquals('function', type(fn))
+        end,
+        GetNumQuestCurrencies = function()
+          local fn = _G.GetNumQuestCurrencies
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumQuestItems = function()
+          local fn = _G.GetNumQuestItems
+          assertEquals('function', type(fn))
+        end,
+        GetNumQuestLeaderBoards = function()
+          local fn = _G.GetNumQuestLeaderBoards
+          assertEquals('function', type(fn))
+        end,
+        GetNumQuestLogChoices = function()
+          local fn = _G.GetNumQuestLogChoices
+          assertEquals('function', type(fn))
+        end,
+        GetNumQuestLogEntries = function()
+          local fn = _G.GetNumQuestLogEntries
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumQuestLogRewardSpells = function()
+          local fn = _G.GetNumQuestLogRewardSpells
+          assertEquals('function', type(fn))
+        end,
+        GetNumQuestLogRewards = function()
+          local fn = _G.GetNumQuestLogRewards
+          assertEquals('function', type(fn))
+        end,
+        GetNumQuestRewards = function()
+          local fn = _G.GetNumQuestRewards
+          assertEquals('function', type(fn))
+        end,
+        GetNumQuestWatches = function()
+          local fn = _G.GetNumQuestWatches
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumRFDungeons = function()
+          local fn = _G.GetNumRFDungeons
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumRandomDungeons = function()
+          local fn = _G.GetNumRandomDungeons
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumRewardCurrencies = function()
+          local fn = _G.GetNumRewardCurrencies
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumRewardSpells = function()
+          local fn = _G.GetNumRewardSpells
+          assertEquals('function', type(fn))
+        end,
+        GetNumSavedInstances = function()
+          local fn = _G.GetNumSavedInstances
+          assertEquals('function', type(fn))
+        end,
+        GetNumSavedWorldBosses = function()
+          local fn = _G.GetNumSavedWorldBosses
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumShapeshiftForms = function()
+          local fn = _G.GetNumShapeshiftForms
+          assertEquals('function', type(fn))
+        end,
+        GetNumSkillLines = function()
+          local fn = _G.GetNumSkillLines
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumSockets = function()
+          local fn = _G.GetNumSockets
+          assertEquals('function', type(fn))
+        end,
+        GetNumSpecGroups = function()
+          local fn = _G.GetNumSpecGroups
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumSpecializations = function()
+          local fn = _G.GetNumSpecializations
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumSpecializationsForClassID = function()
+          local fn = _G.GetNumSpecializationsForClassID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumSpellTabs = function()
+          local fn = _G.GetNumSpellTabs
+          assertEquals('function', type(fn))
+        end,
+        GetNumSubgroupMembers = function()
+          local fn = _G.GetNumSubgroupMembers
+          assertEquals('function', type(fn))
+        end,
+        GetNumTalentTabs = function()
+          local fn = _G.GetNumTalentTabs
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumTalents = function()
+          local fn = _G.GetNumTalents
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumTitles = function()
+          local fn = _G.GetNumTitles
+          assertEquals('function', type(fn))
+        end,
+        GetNumTrackingTypes = function()
+          local fn = _G.GetNumTrackingTypes
+          assertEquals('function', type(fn))
+        end,
+        GetNumTradeSkills = function()
+          local fn = _G.GetNumTradeSkills
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumTrainerServices = function()
+          local fn = _G.GetNumTrainerServices
+          assertEquals('function', type(fn))
+        end,
+        GetNumVoidTransferDeposit = function()
+          local fn = _G.GetNumVoidTransferDeposit
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetNumVoidTransferWithdrawal = function()
+          local fn = _G.GetNumVoidTransferWithdrawal
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetOptOutOfLoot = function()
+          local fn = _G.GetOptOutOfLoot
+          assertEquals('function', type(fn))
+        end,
+        GetOverrideBarIndex = function()
+          local fn = _G.GetOverrideBarIndex
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetOwnerAuctionItems = function()
+          local fn = _G.GetOwnerAuctionItems
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetPVPLastWeekStats = function()
+          local fn = _G.GetPVPLastWeekStats
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetPVPLifetimeStats = function()
+          local fn = _G.GetPVPLifetimeStats
+          assertEquals('function', type(fn))
+        end,
+        GetPVPRankInfo = function()
+          local fn = _G.GetPVPRankInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetPVPRankProgress = function()
+          local fn = _G.GetPVPRankProgress
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetPVPRoles = function()
+          local fn = _G.GetPVPRoles
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetPVPSessionStats = function()
+          local fn = _G.GetPVPSessionStats
+          assertEquals('function', type(fn))
+        end,
+        GetPVPThisWeekStats = function()
+          local fn = _G.GetPVPThisWeekStats
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetPVPYesterdayStats = function()
+          local fn = _G.GetPVPYesterdayStats
+          assertEquals('function', type(fn))
+        end,
+        GetPartyLFGID = function()
+          local fn = _G.GetPartyLFGID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetPetActionCooldown = function()
+          local fn = _G.GetPetActionCooldown
+          assertEquals('function', type(fn))
+        end,
+        GetPetActionInfo = function()
+          local fn = _G.GetPetActionInfo
+          assertEquals('function', type(fn))
+        end,
+        GetPetExperience = function()
+          local fn = _G.GetPetExperience
+          assertEquals('function', type(fn))
+        end,
+        GetPetHappiness = function()
+          local fn = _G.GetPetHappiness
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetPetTrainingPoints = function()
+          local fn = _G.GetPetTrainingPoints
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetPetitionInfo = function()
+          local fn = _G.GetPetitionInfo
+          assertEquals('function', type(fn))
+        end,
+        GetPetitionNameInfo = function()
+          local fn = _G.GetPetitionNameInfo
+          assertEquals('function', type(fn))
+        end,
+        GetPhysicalScreenSize = function()
+          local fn = _G.GetPhysicalScreenSize
+          assertEquals('function', type(fn))
+        end,
+        GetPlayerInfoByGUID = function()
+          local fn = _G.GetPlayerInfoByGUID
+          assertEquals('function', type(fn))
+        end,
+        GetPlayerTradeMoney = function()
+          local fn = _G.GetPlayerTradeMoney
+          assertEquals('function', type(fn))
+        end,
+        GetProfessions = function()
+          local fn = _G.GetProfessions
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetProgressText = function()
+          local fn = _G.GetProgressText
+          assertEquals('function', type(fn))
+        end,
+        GetQuestBackgroundMaterial = function()
+          local fn = _G.GetQuestBackgroundMaterial
+          assertEquals('function', type(fn))
+        end,
+        GetQuestCurrencyInfo = function()
+          local fn = _G.GetQuestCurrencyInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetQuestGreenRange = function()
+          local fn = _G.GetQuestGreenRange
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetQuestID = function()
+          local fn = _G.GetQuestID
+          assertEquals('function', type(fn))
+        end,
+        GetQuestIndexForWatch = function()
+          local fn = _G.GetQuestIndexForWatch
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetQuestItemInfo = function()
+          local fn = _G.GetQuestItemInfo
+          assertEquals('function', type(fn))
+        end,
+        GetQuestItemInfoLootType = function()
+          local fn = _G.GetQuestItemInfoLootType
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetQuestItemLink = function()
+          local fn = _G.GetQuestItemLink
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogChoiceInfo = function()
+          local fn = _G.GetQuestLogChoiceInfo
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogGroupNum = function()
+          local fn = _G.GetQuestLogGroupNum
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogIndexByID = function()
+          local fn = _G.GetQuestLogIndexByID
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogLeaderBoard = function()
+          local fn = _G.GetQuestLogLeaderBoard
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogPushable = function()
+          local fn = _G.GetQuestLogPushable
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogQuestText = function()
+          local fn = _G.GetQuestLogQuestText
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogRequiredMoney = function()
+          local fn = _G.GetQuestLogRequiredMoney
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogRewardHonor = function()
+          local fn = _G.GetQuestLogRewardHonor
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogRewardInfo = function()
+          local fn = _G.GetQuestLogRewardInfo
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogRewardMoney = function()
+          local fn = _G.GetQuestLogRewardMoney
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogRewardSpell = function()
+          local fn = _G.GetQuestLogRewardSpell
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogRewardTitle = function()
+          local fn = _G.GetQuestLogRewardTitle
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogSelection = function()
+          local fn = _G.GetQuestLogSelection
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogTimeLeft = function()
+          local fn = _G.GetQuestLogTimeLeft
+          assertEquals('function', type(fn))
+        end,
+        GetQuestLogTitle = function()
+          local fn = _G.GetQuestLogTitle
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetQuestMoneyToGet = function()
+          local fn = _G.GetQuestMoneyToGet
+          assertEquals('function', type(fn))
+        end,
+        GetQuestPOIs = function()
+          local fn = _G.GetQuestPOIs
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetQuestPortraitTurnIn = function()
+          local fn = _G.GetQuestPortraitTurnIn
+          assertEquals('function', type(fn))
+        end,
+        GetQuestTimers = function()
+          local fn = _G.GetQuestTimers
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetQuestsCompleted = function()
+          local fn = _G.GetQuestsCompleted
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetRFDungeonInfo = function()
+          local fn = _G.GetRFDungeonInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetRaidDifficultyID = function()
+          local fn = _G.GetRaidDifficultyID
+          assertEquals('function', type(fn))
+        end,
+        GetRaidRosterInfo = function()
+          local fn = _G.GetRaidRosterInfo
+          assertEquals('function', type(fn))
+        end,
+        GetRaidTargetIndex = function()
+          local fn = _G.GetRaidTargetIndex
+          assertEquals('function', type(fn))
+        end,
+        GetRandomDungeonBestChoice = function()
+          local fn = _G.GetRandomDungeonBestChoice
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetRangedCritChance = function()
+          local fn = _G.GetRangedCritChance
+          assertEquals('function', type(fn))
+        end,
+        GetReadyCheckStatus = function()
+          local fn = _G.GetReadyCheckStatus
+          assertEquals('function', type(fn))
+        end,
+        GetRealZoneText = function()
+          local fn = _G.GetRealZoneText
+          assertEquals('function', type(fn))
+        end,
+        GetRealmID = function()
+          local fn = _G.GetRealmID
+          assertEquals('function', type(fn))
+        end,
+        GetRealmName = function()
+          local fn = _G.GetRealmName
+          assertEquals('function', type(fn))
+        end,
+        GetReleaseTimeRemaining = function()
+          local fn = _G.GetReleaseTimeRemaining
+          assertEquals('function', type(fn))
+        end,
+        GetRepairAllCost = function()
+          local fn = _G.GetRepairAllCost
+          assertEquals('function', type(fn))
+        end,
+        GetResSicknessDuration = function()
+          local fn = _G.GetResSicknessDuration
+          assertEquals('function', type(fn))
+        end,
+        GetRestState = function()
+          local fn = _G.GetRestState
+          assertEquals('function', type(fn))
+        end,
+        GetRestrictedAccountData = function()
+          local fn = _G.GetRestrictedAccountData
+          assertEquals('function', type(fn))
+        end,
+        GetRewardArtifactXP = function()
+          local fn = _G.GetRewardArtifactXP
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetRewardHonor = function()
+          local fn = _G.GetRewardHonor
+          assertEquals('function', type(fn))
+        end,
+        GetRewardMoney = function()
+          local fn = _G.GetRewardMoney
+          assertEquals('function', type(fn))
+        end,
+        GetRewardSkillPoints = function()
+          local fn = _G.GetRewardSkillPoints
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetRewardSpell = function()
+          local fn = _G.GetRewardSpell
+          assertEquals('function', type(fn))
+        end,
+        GetRewardText = function()
+          local fn = _G.GetRewardText
+          assertEquals('function', type(fn))
+        end,
+        GetRewardTitle = function()
+          local fn = _G.GetRewardTitle
+          assertEquals('function', type(fn))
+        end,
+        GetRewardXP = function()
+          local fn = _G.GetRewardXP
+          assertEquals('function', type(fn))
+        end,
+        GetSavedInstanceChatLink = function()
+          local fn = _G.GetSavedInstanceChatLink
+          assertEquals('function', type(fn))
+        end,
+        GetSavedInstanceInfo = function()
+          local fn = _G.GetSavedInstanceInfo
+          assertEquals('function', type(fn))
+        end,
+        GetSchoolString = function()
+          local fn = _G.GetSchoolString
+          assertEquals('function', type(fn))
+        end,
+        GetScreenHeight = function()
+          local fn = _G.GetScreenHeight
+          assertEquals('function', type(fn))
+        end,
+        GetScreenResolutions = function()
+          local fn = _G.GetScreenResolutions
+          assertEquals('function', type(fn))
+        end,
+        GetScreenWidth = function()
+          local fn = _G.GetScreenWidth
+          assertEquals('function', type(fn))
+        end,
+        GetSelectedAuctionItem = function()
+          local fn = _G.GetSelectedAuctionItem
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetSelectedBattlefield = function()
+          local fn = _G.GetSelectedBattlefield
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetSelectedFaction = function()
+          local fn = _G.GetSelectedFaction
+          assertEquals('function', type(fn))
+        end,
+        GetSelectedSkill = function()
+          local fn = _G.GetSelectedSkill
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetSendMailPrice = function()
+          local fn = _G.GetSendMailPrice
+          assertEquals('function', type(fn))
+        end,
+        GetServerExpansionLevel = function()
+          local fn = _G.GetServerExpansionLevel
+          assertEquals('function', type(fn))
+        end,
+        GetServerTime = function()
+          local fn = _G.GetServerTime
+          assertEquals('function', type(fn))
+        end,
+        GetShapeshiftForm = function()
+          local fn = _G.GetShapeshiftForm
+          assertEquals('function', type(fn))
+        end,
+        GetShapeshiftFormCooldown = function()
+          local fn = _G.GetShapeshiftFormCooldown
+          assertEquals('function', type(fn))
+        end,
+        GetShapeshiftFormID = function()
+          local fn = _G.GetShapeshiftFormID
+          assertEquals('function', type(fn))
+        end,
+        GetShapeshiftFormInfo = function()
+          local fn = _G.GetShapeshiftFormInfo
+          assertEquals('function', type(fn))
+        end,
+        GetSkillLineInfo = function()
+          local fn = _G.GetSkillLineInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetSocketItemBoundTradeable = function()
+          local fn = _G.GetSocketItemBoundTradeable
+          assertEquals('function', type(fn))
+        end,
+        GetSocketItemInfo = function()
+          local fn = _G.GetSocketItemInfo
+          assertEquals('function', type(fn))
+        end,
+        GetSocketItemRefundable = function()
+          local fn = _G.GetSocketItemRefundable
+          assertEquals('function', type(fn))
+        end,
+        GetSocketTypes = function()
+          local fn = _G.GetSocketTypes
+          assertEquals('function', type(fn))
+        end,
+        GetSpecialization = function()
+          local fn = _G.GetSpecialization
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetSpecializationInfo = function()
+          local fn = _G.GetSpecializationInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetSpecializationInfoByID = function()
+          local fn = _G.GetSpecializationInfoByID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetSpecializationInfoForClassID = function()
+          local fn = _G.GetSpecializationInfoForClassID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetSpecializationNameForSpecID = function()
+          local fn = _G.GetSpecializationNameForSpecID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetSpecializationRole = function()
+          local fn = _G.GetSpecializationRole
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetSpeed = function()
+          local fn = _G.GetSpeed
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetSpellAutocast = function()
+          local fn = _G.GetSpellAutocast
+          assertEquals('function', type(fn))
+        end,
+        GetSpellBonusHealing = function()
+          local fn = _G.GetSpellBonusHealing
+          assertEquals('function', type(fn))
+        end,
+        GetSpellBookItemInfo = function()
+          local fn = _G.GetSpellBookItemInfo
+          assertEquals('function', type(fn))
+        end,
+        GetSpellBookItemName = function()
+          local fn = _G.GetSpellBookItemName
+          assertEquals('function', type(fn))
+        end,
+        GetSpellBookItemTexture = function()
+          local fn = _G.GetSpellBookItemTexture
+          assertEquals('function', type(fn))
+        end,
+        GetSpellConfirmationPromptsInfo = function()
+          local fn = _G.GetSpellConfirmationPromptsInfo
+          assertEquals('function', type(fn))
+        end,
+        GetSpellCooldown = function()
+          local fn = _G.GetSpellCooldown
+          assertEquals('function', type(fn))
+        end,
+        GetSpellCritChance = function()
+          local fn = _G.GetSpellCritChance
+          assertEquals('function', type(fn))
+        end,
+        GetSpellCritChanceFromIntellect = function()
+          local fn = _G.GetSpellCritChanceFromIntellect
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetSpellDescription = function()
+          local fn = _G.GetSpellDescription
+          assertEquals('function', type(fn))
+        end,
+        GetSpellInfo = function()
+          local fn = _G.GetSpellInfo
+          assertEquals('function', type(fn))
+        end,
+        GetSpellSubtext = function()
+          local fn = _G.GetSpellSubtext
+          assertEquals('function', type(fn))
+        end,
+        GetSpellTabInfo = function()
+          local fn = _G.GetSpellTabInfo
+          assertEquals('function', type(fn))
+        end,
+        GetSpellTexture = function()
+          local fn = _G.GetSpellTexture
+          assertEquals('function', type(fn))
+        end,
+        GetStablePetFoodTypes = function()
+          local fn = _G.GetStablePetFoodTypes
+          assertEquals('function', type(fn))
+        end,
+        GetStablePetInfo = function()
+          local fn = _G.GetStablePetInfo
+          assertEquals('function', type(fn))
+        end,
+        GetSubZoneText = function()
+          local fn = _G.GetSubZoneText
+          assertEquals('function', type(fn))
+        end,
+        GetSummonFriendCooldown = function()
+          local fn = _G.GetSummonFriendCooldown
+          assertEquals('function', type(fn))
+        end,
+        GetTabardCreationCost = function()
+          local fn = _G.GetTabardCreationCost
+          assertEquals('function', type(fn))
+        end,
+        GetTalentInfo = function()
+          local fn = _G.GetTalentInfo
+          assertEquals('function', type(fn))
+        end,
+        GetTalentInfoBySpecialization = function()
+          local fn = _G.GetTalentInfoBySpecialization
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTalentTabInfo = function()
+          local fn = _G.GetTalentTabInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTargetTradeMoney = function()
+          local fn = _G.GetTargetTradeMoney
+          assertEquals('function', type(fn))
+        end,
+        GetText = function()
+          local fn = _G.GetText
+          assertEquals('function', type(fn))
+        end,
+        GetTime = function()
+          local fn = _G.GetTime
+          assertEquals('function', type(fn))
+        end,
+        GetTitleName = function()
+          local fn = _G.GetTitleName
+          assertEquals('function', type(fn))
+        end,
+        GetTitleText = function()
+          local fn = _G.GetTitleText
+          assertEquals('function', type(fn))
+        end,
+        GetTotalAchievementPoints = function()
+          local fn = _G.GetTotalAchievementPoints
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTotemInfo = function()
+          local fn = _G.GetTotemInfo
+          assertEquals('function', type(fn))
+        end,
+        GetTrackedAchievements = function()
+          local fn = _G.GetTrackedAchievements
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTrackingInfo = function()
+          local fn = _G.GetTrackingInfo
+          assertEquals('function', type(fn))
+        end,
+        GetTrackingTexture = function()
+          local fn = _G.GetTrackingTexture
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradePlayerItemInfo = function()
+          local fn = _G.GetTradePlayerItemInfo
+          assertEquals('function', type(fn))
+        end,
+        GetTradePlayerItemLink = function()
+          local fn = _G.GetTradePlayerItemLink
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillCooldown = function()
+          local fn = _G.GetTradeSkillCooldown
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillIcon = function()
+          local fn = _G.GetTradeSkillIcon
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillInfo = function()
+          local fn = _G.GetTradeSkillInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillInvSlotFilter = function()
+          local fn = _G.GetTradeSkillInvSlotFilter
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillInvSlots = function()
+          local fn = _G.GetTradeSkillInvSlots
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillLine = function()
+          local fn = _G.GetTradeSkillLine
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillNumMade = function()
+          local fn = _G.GetTradeSkillNumMade
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillNumReagents = function()
+          local fn = _G.GetTradeSkillNumReagents
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillReagentInfo = function()
+          local fn = _G.GetTradeSkillReagentInfo
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillSelectionIndex = function()
+          local fn = _G.GetTradeSkillSelectionIndex
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillSubClassFilter = function()
+          local fn = _G.GetTradeSkillSubClassFilter
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillSubClasses = function()
+          local fn = _G.GetTradeSkillSubClasses
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeSkillTools = function()
+          local fn = _G.GetTradeSkillTools
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTradeTargetItemInfo = function()
+          local fn = _G.GetTradeTargetItemInfo
+          assertEquals('function', type(fn))
+        end,
+        GetTradeTargetItemLink = function()
+          local fn = _G.GetTradeTargetItemLink
+          assertEquals('function', type(fn))
+        end,
+        GetTradeskillRepeatCount = function()
+          local fn = _G.GetTradeskillRepeatCount
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetTrainerGreetingText = function()
+          local fn = _G.GetTrainerGreetingText
+          assertEquals('function', type(fn))
+        end,
+        GetTrainerSelectionIndex = function()
+          local fn = _G.GetTrainerSelectionIndex
+          assertEquals('function', type(fn))
+        end,
+        GetTrainerServiceAbilityReq = function()
+          local fn = _G.GetTrainerServiceAbilityReq
+          assertEquals('function', type(fn))
+        end,
+        GetTrainerServiceCost = function()
+          local fn = _G.GetTrainerServiceCost
+          assertEquals('function', type(fn))
+        end,
+        GetTrainerServiceInfo = function()
+          local fn = _G.GetTrainerServiceInfo
+          assertEquals('function', type(fn))
+        end,
+        GetTrainerServiceNumAbilityReq = function()
+          local fn = _G.GetTrainerServiceNumAbilityReq
+          assertEquals('function', type(fn))
+        end,
+        GetTrainerServiceStepIndex = function()
+          local fn = _G.GetTrainerServiceStepIndex
+          assertEquals('function', type(fn))
+        end,
+        GetTrainerServiceTypeFilter = function()
+          local fn = _G.GetTrainerServiceTypeFilter
+          assertEquals('function', type(fn))
+        end,
+        GetTrainerTradeskillRankValues = function()
+          local fn = _G.GetTrainerTradeskillRankValues
+          assertEquals('function', type(fn))
+        end,
+        GetTutorialsEnabled = function()
+          local fn = _G.GetTutorialsEnabled
+          assertEquals('function', type(fn))
+        end,
+        GetUnitChargedPowerPoints = function()
+          local fn = _G.GetUnitChargedPowerPoints
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetUnitHealthRegenRateFromSpirit = function()
+          local fn = _G.GetUnitHealthRegenRateFromSpirit
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetUnitManaRegenRateFromSpirit = function()
+          local fn = _G.GetUnitManaRegenRateFromSpirit
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetUnitMaxHealthModifier = function()
+          local fn = _G.GetUnitMaxHealthModifier
+          assertEquals('function', type(fn))
+        end,
+        GetUnitPowerBarInfo = function()
+          local fn = _G.GetUnitPowerBarInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetUnitPowerBarInfoByID = function()
+          local fn = _G.GetUnitPowerBarInfoByID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetUnitPowerBarStrings = function()
+          local fn = _G.GetUnitPowerBarStrings
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetUnitPowerBarStringsByID = function()
+          local fn = _G.GetUnitPowerBarStringsByID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetUnitPowerBarTextureInfo = function()
+          local fn = _G.GetUnitPowerBarTextureInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetUnitPowerBarTextureInfoByID = function()
+          local fn = _G.GetUnitPowerBarTextureInfoByID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetVehicleBarIndex = function()
+          local fn = _G.GetVehicleBarIndex
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetVersatilityBonus = function()
+          local fn = _G.GetVersatilityBonus
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetVoidItemInfo = function()
+          local fn = _G.GetVoidItemInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetVoidTransferCost = function()
+          local fn = _G.GetVoidTransferCost
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetVoidTransferDepositInfo = function()
+          local fn = _G.GetVoidTransferDepositInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetVoidTransferWithdrawalInfo = function()
+          local fn = _G.GetVoidTransferWithdrawalInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetVoidUnlockCost = function()
+          local fn = _G.GetVoidUnlockCost
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetWatchedFactionInfo = function()
+          local fn = _G.GetWatchedFactionInfo
+          assertEquals('function', type(fn))
+        end,
+        GetWeaponEnchantInfo = function()
+          local fn = _G.GetWeaponEnchantInfo
+          assertEquals('function', type(fn))
+        end,
+        GetWebTicket = function()
+          local fn = _G.GetWebTicket
+          assertEquals('function', type(fn))
+        end,
+        GetWorldElapsedTimers = function()
+          local fn = _G.GetWorldElapsedTimers
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetWorldPVPQueueStatus = function()
+          local fn = _G.GetWorldPVPQueueStatus
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GetXPExhaustion = function()
+          local fn = _G.GetXPExhaustion
+          assertEquals('function', type(fn))
+        end,
+        GetZonePVPInfo = function()
+          local fn = _G.GetZonePVPInfo
+          assertEquals('function', type(fn))
+        end,
+        GetZoneText = function()
+          local fn = _G.GetZoneText
+          assertEquals('function', type(fn))
+        end,
+        GuildControlGetNumRanks = function()
+          local fn = _G.GuildControlGetNumRanks
+          assertEquals('function', type(fn))
+        end,
+        GuildControlGetRankName = function()
+          local fn = _G.GuildControlGetRankName
+          assertEquals('function', type(fn))
+        end,
+        GuildControlSetRank = function()
+          local fn = _G.GuildControlSetRank
+          assertEquals('function', type(fn))
+        end,
+        GuildNewsSort = function()
+          local fn = _G.GuildNewsSort
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        GuildRoster = function()
+          local fn = _G.GuildRoster
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        HasAction = function()
+          local fn = _G.HasAction
+          assertEquals('function', type(fn))
+        end,
+        HasArtifactEquipped = function()
+          local fn = _G.HasArtifactEquipped
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        HasBonusActionBar = function()
+          local fn = _G.HasBonusActionBar
+          assertEquals('function', type(fn))
+        end,
+        HasBoundGemProposed = function()
+          local fn = _G.HasBoundGemProposed
+          assertEquals('function', type(fn))
+        end,
+        HasCompletedAnyAchievement = function()
+          local fn = _G.HasCompletedAnyAchievement
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        HasExtraActionBar = function()
+          local fn = _G.HasExtraActionBar
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        HasFilledPetition = function()
+          local fn = _G.HasFilledPetition
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        HasKey = function()
+          local fn = _G.HasKey
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        HasLFGRestrictions = function()
+          local fn = _G.HasLFGRestrictions
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        HasLoadedCUFProfiles = function()
+          local fn = _G.HasLoadedCUFProfiles
+          assertEquals('function', type(fn))
+        end,
+        HasNewMail = function()
+          local fn = _G.HasNewMail
+          assertEquals('function', type(fn))
+        end,
+        HasOverrideActionBar = function()
+          local fn = _G.HasOverrideActionBar
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        HasPetSpells = function()
+          local fn = _G.HasPetSpells
+          assertEquals('function', type(fn))
+        end,
+        HasPetUI = function()
+          local fn = _G.HasPetUI
+          assertEquals('function', type(fn))
+        end,
+        HasSendMailItem = function()
+          local fn = _G.HasSendMailItem
+          assertEquals('function', type(fn))
+        end,
+        HasTempShapeshiftActionBar = function()
+          local fn = _G.HasTempShapeshiftActionBar
+          assertEquals('function', type(fn))
+        end,
+        HasVehicleActionBar = function()
+          local fn = _G.HasVehicleActionBar
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        HaveQuestData = function()
+          local fn = _G.HaveQuestData
+          assertEquals('function', type(fn))
+        end,
+        HaveQuestRewardData = function()
+          local fn = _G.HaveQuestRewardData
+          assertEquals('function', type(fn))
+        end,
+        HonorSystemEnabled = function()
+          local fn = _G.HonorSystemEnabled
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        InActiveBattlefield = function()
+          local fn = _G.InActiveBattlefield
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        InCinematic = function()
+          local fn = _G.InCinematic
+          assertEquals('function', type(fn))
+        end,
+        InCombatLockdown = function()
+          local fn = _G.InCombatLockdown
+          assertEquals('function', type(fn))
+        end,
+        InRepairMode = function()
+          local fn = _G.InRepairMode
+          assertEquals('function', type(fn))
+        end,
+        InboxItemCanDelete = function()
+          local fn = _G.InboxItemCanDelete
+          assertEquals('function', type(fn))
+        end,
+        InitiateTrade = function()
+          local fn = _G.InitiateTrade
+          assertEquals('function', type(fn))
+        end,
+        InteractUnit = function()
+          local fn = _G.InteractUnit
+          assertEquals('function', type(fn))
+        end,
+        IsAccountSecured = function()
+          local fn = _G.IsAccountSecured
+          assertEquals('function', type(fn))
+        end,
+        IsActionInRange = function()
+          local fn = _G.IsActionInRange
+          assertEquals('function', type(fn))
+        end,
+        IsActiveBattlefieldArena = function()
+          local fn = _G.IsActiveBattlefieldArena
+          assertEquals('function', type(fn))
+        end,
+        IsActiveQuestLegendary = function()
+          local fn = _G.IsActiveQuestLegendary
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsActiveQuestTrivial = function()
+          local fn = _G.IsActiveQuestTrivial
+          assertEquals('function', type(fn))
+        end,
+        IsAddOnLoadOnDemand = function()
+          local fn = _G.IsAddOnLoadOnDemand
+          assertEquals('function', type(fn))
+        end,
+        IsAddOnLoaded = function()
+          local fn = _G.IsAddOnLoaded
+          assertEquals('function', type(fn))
+        end,
+        IsAddonVersionCheckEnabled = function()
+          local fn = _G.IsAddonVersionCheckEnabled
+          assertEquals('function', type(fn))
+        end,
+        IsAltKeyDown = function()
+          local fn = _G.IsAltKeyDown
+          assertEquals('function', type(fn))
+        end,
+        IsArtifactRelicItem = function()
+          local fn = _G.IsArtifactRelicItem
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsAttackAction = function()
+          local fn = _G.IsAttackAction
+          assertEquals('function', type(fn))
+        end,
+        IsAutoRepeatAction = function()
+          local fn = _G.IsAutoRepeatAction
+          assertEquals('function', type(fn))
+        end,
+        IsAutoRepeatSpell = function()
+          local fn = _G.IsAutoRepeatSpell
+          assertEquals('function', type(fn))
+        end,
+        IsBattlePayItem = function()
+          local fn = _G.IsBattlePayItem
+          assertEquals('function', type(fn))
+        end,
+        IsBattlefieldArena = function()
+          local fn = _G.IsBattlefieldArena
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsCemeterySelectionAvailable = function()
+          local fn = _G.IsCemeterySelectionAvailable
+          assertEquals('function', type(fn))
+        end,
+        IsCharacterNewlyBoosted = function()
+          local fn = _G.IsCharacterNewlyBoosted
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsConsumableAction = function()
+          local fn = _G.IsConsumableAction
+          assertEquals('function', type(fn))
+        end,
+        IsConsumableItem = function()
+          local fn = _G.IsConsumableItem
+          assertEquals('function', type(fn))
+        end,
+        IsConsumableSpell = function()
+          local fn = _G.IsConsumableSpell
+          assertEquals('function', type(fn))
+        end,
+        IsContainerFiltered = function()
+          local fn = _G.IsContainerFiltered
+          assertEquals('function', type(fn))
+        end,
+        IsContainerItemAnUpgrade = function()
+          local fn = _G.IsContainerItemAnUpgrade
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsControlKeyDown = function()
+          local fn = _G.IsControlKeyDown
+          assertEquals('function', type(fn))
+        end,
+        IsCorruptedItem = function()
+          local fn = _G.IsCorruptedItem
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsCosmeticItem = function()
+          local fn = _G.IsCosmeticItem
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsCurrentAction = function()
+          local fn = _G.IsCurrentAction
+          assertEquals('function', type(fn))
+        end,
+        IsCurrentQuestFailed = function()
+          local fn = _G.IsCurrentQuestFailed
+          assertEquals('function', type(fn))
+        end,
+        IsCurrentSpell = function()
+          local fn = _G.IsCurrentSpell
+          assertEquals('function', type(fn))
+        end,
+        IsEncounterInProgress = function()
+          local fn = _G.IsEncounterInProgress
+          assertEquals('function', type(fn))
+        end,
+        IsEncounterLimitingResurrections = function()
+          local fn = _G.IsEncounterLimitingResurrections
+          assertEquals('function', type(fn))
+        end,
+        IsEquippedAction = function()
+          local fn = _G.IsEquippedAction
+          assertEquals('function', type(fn))
+        end,
+        IsEquippedItem = function()
+          local fn = _G.IsEquippedItem
+          assertEquals('function', type(fn))
+        end,
+        IsEveryoneAssistant = function()
+          local fn = _G.IsEveryoneAssistant
+          assertEquals('function', type(fn))
+        end,
+        IsExpansionTrial = function()
+          local fn = _G.IsExpansionTrial
+          assertEquals('function', type(fn))
+        end,
+        IsFalling = function()
+          local fn = _G.IsFalling
+          assertEquals('function', type(fn))
+        end,
+        IsFishingLoot = function()
+          local fn = _G.IsFishingLoot
+          assertEquals('function', type(fn))
+        end,
+        IsGMClient = function()
+          local fn = _G.IsGMClient
+          assertEquals('function', type(fn))
+        end,
+        IsGuildLeader = function()
+          local fn = _G.IsGuildLeader
+          assertEquals('function', type(fn))
+        end,
+        IsInActiveWorldPVP = function()
+          local fn = _G.IsInActiveWorldPVP
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsInGroup = function()
+          local fn = _G.IsInGroup
+          assertEquals('function', type(fn))
+        end,
+        IsInGuild = function()
+          local fn = _G.IsInGuild
+          assertEquals('function', type(fn))
+        end,
+        IsInInstance = function()
+          local fn = _G.IsInInstance
+          assertEquals('function', type(fn))
+        end,
+        IsInJailersTower = function()
+          local fn = _G.IsInJailersTower
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsInRaid = function()
+          local fn = _G.IsInRaid
+          assertEquals('function', type(fn))
+        end,
+        IsInventoryItemLocked = function()
+          local fn = _G.IsInventoryItemLocked
+          assertEquals('function', type(fn))
+        end,
+        IsInventoryItemProfessionBag = function()
+          local fn = _G.IsInventoryItemProfessionBag
+          assertEquals('function', type(fn))
+        end,
+        IsItemAction = function()
+          local fn = _G.IsItemAction
+          assertEquals('function', type(fn))
+        end,
+        IsItemInRange = function()
+          local fn = _G.IsItemInRange
+          assertEquals('function', type(fn))
+        end,
+        IsLFGDungeonJoinable = function()
+          local fn = _G.IsLFGDungeonJoinable
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsLoggedIn = function()
+          local fn = _G.IsLoggedIn
+          assertEquals('function', type(fn))
+        end,
+        IsMacClient = function()
+          local fn = _G.IsMacClient
+          assertEquals('function', type(fn))
+        end,
+        IsModifiedClick = function()
+          local fn = _G.IsModifiedClick
+          assertEquals('function', type(fn))
+        end,
+        IsMounted = function()
+          local fn = _G.IsMounted
+          assertEquals('function', type(fn))
+        end,
+        IsOnGlueScreen = function()
+          local fn = _G.IsOnGlueScreen
+          assertEquals('function', type(fn))
+        end,
+        IsPVPTimerRunning = function()
+          local fn = _G.IsPVPTimerRunning
+          assertEquals('function', type(fn))
+        end,
+        IsPartyLFG = function()
+          local fn = _G.IsPartyLFG
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsPassiveSpell = function()
+          local fn = _G.IsPassiveSpell
+          assertEquals('function', type(fn))
+        end,
+        IsPetAttackAction = function()
+          local fn = _G.IsPetAttackAction
+          assertEquals('function', type(fn))
+        end,
+        IsPlayerInWorld = function()
+          local fn = _G.IsPlayerInWorld
+          assertEquals('function', type(fn))
+        end,
+        IsPlayerMoving = function()
+          local fn = _G.IsPlayerMoving
+          assertEquals('function', type(fn))
+        end,
+        IsPossessBarVisible = function()
+          local fn = _G.IsPossessBarVisible
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsPublicBuild = function()
+          local fn = _G.IsPublicBuild
+          assertEquals('function', type(fn))
+        end,
+        IsQuestCompletable = function()
+          local fn = _G.IsQuestCompletable
+          assertEquals('function', type(fn))
+        end,
+        IsQuestItemHidden = function()
+          local fn = _G.IsQuestItemHidden
+          assertEquals('function', type(fn))
+        end,
+        IsQuestWatched = function()
+          local fn = _G.IsQuestWatched
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsRaidMarkerActive = function()
+          local fn = _G.IsRaidMarkerActive
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsReagentBankUnlocked = function()
+          local fn = _G.IsReagentBankUnlocked
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsResting = function()
+          local fn = _G.IsResting
+          assertEquals('function', type(fn))
+        end,
+        IsRestrictedAccount = function()
+          local fn = _G.IsRestrictedAccount
+          assertEquals('function', type(fn))
+        end,
+        IsSelectedSpellBookItem = function()
+          local fn = _G.IsSelectedSpellBookItem
+          assertEquals('function', type(fn))
+        end,
+        IsShiftKeyDown = function()
+          local fn = _G.IsShiftKeyDown
+          assertEquals('function', type(fn))
+        end,
+        IsSpellInRange = function()
+          local fn = _G.IsSpellInRange
+          assertEquals('function', type(fn))
+        end,
+        IsSpellKnown = function()
+          local fn = _G.IsSpellKnown
+          assertEquals('function', type(fn))
+        end,
+        IsSpellKnownOrOverridesKnown = function()
+          local fn = _G.IsSpellKnownOrOverridesKnown
+          assertEquals('function', type(fn))
+        end,
+        IsStackableAction = function()
+          local fn = _G.IsStackableAction
+          assertEquals('function', type(fn))
+        end,
+        IsTestBuild = function()
+          local fn = _G.IsTestBuild
+          assertEquals('function', type(fn))
+        end,
+        IsThreatWarningEnabled = function()
+          local fn = _G.IsThreatWarningEnabled
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsTitleKnown = function()
+          local fn = _G.IsTitleKnown
+          assertEquals('function', type(fn))
+        end,
+        IsTradeskillTrainer = function()
+          local fn = _G.IsTradeskillTrainer
+          assertEquals('function', type(fn))
+        end,
+        IsTrialAccount = function()
+          local fn = _G.IsTrialAccount
+          assertEquals('function', type(fn))
+        end,
+        IsTutorialFlagged = function()
+          local fn = _G.IsTutorialFlagged
+          assertEquals('function', type(fn))
+        end,
+        IsUnitModelReadyForUI = function()
+          local fn = _G.IsUnitModelReadyForUI
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsUnitOnQuest = function()
+          local fn = _G.IsUnitOnQuest
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsUsableAction = function()
+          local fn = _G.IsUsableAction
+          assertEquals('function', type(fn))
+        end,
+        IsUsableItem = function()
+          local fn = _G.IsUsableItem
+          assertEquals('function', type(fn))
+        end,
+        IsUsableSpell = function()
+          local fn = _G.IsUsableSpell
+          assertEquals('function', type(fn))
+        end,
+        IsVeteranTrialAccount = function()
+          local fn = _G.IsVeteranTrialAccount
+          assertEquals('function', type(fn))
+        end,
+        IsVoidStorageReady = function()
+          local fn = _G.IsVoidStorageReady
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        IsWindowsClient = function()
+          local fn = _G.IsWindowsClient
+          assertEquals('function', type(fn))
+        end,
+        ItemTextGetCreator = function()
+          local fn = _G.ItemTextGetCreator
+          assertEquals('function', type(fn))
+        end,
+        ItemTextGetItem = function()
+          local fn = _G.ItemTextGetItem
+          assertEquals('function', type(fn))
+        end,
+        ItemTextGetMaterial = function()
+          local fn = _G.ItemTextGetMaterial
+          assertEquals('function', type(fn))
+        end,
+        ItemTextGetPage = function()
+          local fn = _G.ItemTextGetPage
+          assertEquals('function', type(fn))
+        end,
+        ItemTextGetText = function()
+          local fn = _G.ItemTextGetText
+          assertEquals('function', type(fn))
+        end,
+        ItemTextHasNextPage = function()
+          local fn = _G.ItemTextHasNextPage
+          assertEquals('function', type(fn))
+        end,
+        ItemTextIsFullPage = function()
+          local fn = _G.ItemTextIsFullPage
+          assertEquals('function', type(fn))
+        end,
+        JumpOrAscendStart = function()
+          local fn = _G.JumpOrAscendStart
+          assertEquals('function', type(fn))
+        end,
+        KeyRingButtonIDToInvSlotID = function()
+          local fn = _G.KeyRingButtonIDToInvSlotID
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        LoadAddOn = function()
+          local fn = _G.LoadAddOn
+          assertEquals('function', type(fn))
+        end,
+        LoggingChat = function()
+          local fn = _G.LoggingChat
+          assertEquals('function', type(fn))
+        end,
+        LoggingCombat = function()
+          local fn = _G.LoggingCombat
+          assertEquals('function', type(fn))
+        end,
+        Logout = function()
+          local fn = _G.Logout
+          assertEquals('function', type(fn))
+        end,
+        LootSlotHasItem = function()
+          local fn = _G.LootSlotHasItem
+          assertEquals('function', type(fn))
+        end,
+        MoveAndSteerStart = function()
+          local fn = _G.MoveAndSteerStart
+          assertEquals('function', type(fn))
+        end,
+        MoveAndSteerStop = function()
+          local fn = _G.MoveAndSteerStop
+          assertEquals('function', type(fn))
+        end,
+        MoveBackwardStart = function()
+          local fn = _G.MoveBackwardStart
+          assertEquals('function', type(fn))
+        end,
+        MoveBackwardStop = function()
+          local fn = _G.MoveBackwardStop
+          assertEquals('function', type(fn))
+        end,
+        MoveForwardStart = function()
+          local fn = _G.MoveForwardStart
+          assertEquals('function', type(fn))
+        end,
+        MoveForwardStop = function()
+          local fn = _G.MoveForwardStop
+          assertEquals('function', type(fn))
+        end,
+        MoveViewInStart = function()
+          local fn = _G.MoveViewInStart
+          assertEquals('function', type(fn))
+        end,
+        MoveViewOutStart = function()
+          local fn = _G.MoveViewOutStart
+          assertEquals('function', type(fn))
+        end,
+        MultiSampleAntiAliasingSupported = function()
+          local fn = _G.MultiSampleAntiAliasingSupported
+          assertEquals('function', type(fn))
+        end,
+        NextView = function()
+          local fn = _G.NextView
+          assertEquals('function', type(fn))
+        end,
+        NoPlayTime = function()
+          local fn = _G.NoPlayTime
+          assertEquals('function', type(fn))
+        end,
+        PartialPlayTime = function()
+          local fn = _G.PartialPlayTime
+          assertEquals('function', type(fn))
+        end,
+        PetAttack = function()
+          local fn = _G.PetAttack
+          assertEquals('function', type(fn))
+        end,
+        PetHasActionBar = function()
+          local fn = _G.PetHasActionBar
+          assertEquals('function', type(fn))
+        end,
+        PickupContainerItem = function()
+          local fn = _G.PickupContainerItem
+          assertEquals('function', type(fn))
+        end,
+        PickupInventoryItem = function()
+          local fn = _G.PickupInventoryItem
+          assertEquals('function', type(fn))
+        end,
+        PitchDownStart = function()
+          local fn = _G.PitchDownStart
+          assertEquals('function', type(fn))
+        end,
+        PitchDownStop = function()
+          local fn = _G.PitchDownStop
+          assertEquals('function', type(fn))
+        end,
+        PitchUpStart = function()
+          local fn = _G.PitchUpStart
+          assertEquals('function', type(fn))
+        end,
+        PitchUpStop = function()
+          local fn = _G.PitchUpStop
+          assertEquals('function', type(fn))
+        end,
+        PlaySound = function()
+          local fn = _G.PlaySound
+          assertEquals('function', type(fn))
+        end,
+        PlayerHasToy = function()
+          local fn = _G.PlayerHasToy
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        PlayerIsPVPInactive = function()
+          local fn = _G.PlayerIsPVPInactive
+          assertEquals('function', type(fn))
+        end,
+        PlayerVehicleHasComboPoints = function()
+          local fn = _G.PlayerVehicleHasComboPoints
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        PrevView = function()
+          local fn = _G.PrevView
+          assertEquals('function', type(fn))
+        end,
+        PromoteToLeader = function()
+          local fn = _G.PromoteToLeader
+          assertEquals('function', type(fn))
+        end,
+        PutItemInBackpack = function()
+          local fn = _G.PutItemInBackpack
+          assertEquals('function', type(fn))
+        end,
+        PutItemInBag = function()
+          local fn = _G.PutItemInBag
+          assertEquals('function', type(fn))
+        end,
+        QueryGuildBankTab = function()
+          local fn = _G.QueryGuildBankTab
+          assertEquals('function', type(fn))
+        end,
+        QueryGuildBankText = function()
+          local fn = _G.QueryGuildBankText
+          assertEquals('function', type(fn))
+        end,
+        QueryGuildNews = function()
+          local fn = _G.QueryGuildNews
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        QuestMapUpdateAllQuests = function()
+          local fn = _G.QuestMapUpdateAllQuests
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        QuestPOIUpdateIcons = function()
+          local fn = _G.QuestPOIUpdateIcons
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        Quit = function()
+          local fn = _G.Quit
+          assertEquals('function', type(fn))
+        end,
+        RandomRoll = function()
+          local fn = _G.RandomRoll
+          assertEquals('function', type(fn))
+        end,
+        RedockChatWindows = function()
+          local fn = _G.RedockChatWindows
+          assertEquals('function', type(fn))
+        end,
+        RegisterStaticConstants = function()
+          local fn = _G.RegisterStaticConstants
+          assertEquals('function', type(fn))
+        end,
+        RepopMe = function()
+          local fn = _G.RepopMe
+          assertEquals('function', type(fn))
+        end,
+        RequestGuildChallengeInfo = function()
+          local fn = _G.RequestGuildChallengeInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        RequestGuildPartyState = function()
+          local fn = _G.RequestGuildPartyState
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        RequestGuildRewards = function()
+          local fn = _G.RequestGuildRewards
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        RequestLFDPartyLockInfo = function()
+          local fn = _G.RequestLFDPartyLockInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        RequestLFDPlayerLockInfo = function()
+          local fn = _G.RequestLFDPlayerLockInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        RequestPVPOptionsEnabled = function()
+          local fn = _G.RequestPVPOptionsEnabled
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        RequestPVPRewards = function()
+          local fn = _G.RequestPVPRewards
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        RequestRaidInfo = function()
+          local fn = _G.RequestRaidInfo
+          assertEquals('function', type(fn))
+        end,
+        RequestRandomBattlegroundInstanceInfo = function()
+          local fn = _G.RequestRandomBattlegroundInstanceInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        RequestRatedInfo = function()
+          local fn = _G.RequestRatedInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        RequestTimePlayed = function()
+          local fn = _G.RequestTimePlayed
+          assertEquals('function', type(fn))
+        end,
+        ResetAddOns = function()
+          local fn = _G.ResetAddOns
+          assertEquals('function', type(fn))
+        end,
+        ResetCursor = function()
+          local fn = _G.ResetCursor
+          assertEquals('function', type(fn))
+        end,
+        ResetSetMerchantFilter = function()
+          local fn = _G.ResetSetMerchantFilter
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        ResetView = function()
+          local fn = _G.ResetView
+          assertEquals('function', type(fn))
+        end,
+        RespondInstanceLock = function()
+          local fn = _G.RespondInstanceLock
+          assertEquals('function', type(fn))
+        end,
+        ResurrectGetOfferer = function()
+          local fn = _G.ResurrectGetOfferer
+          assertEquals('function', type(fn))
+        end,
+        RollOnLoot = function()
+          local fn = _G.RollOnLoot
+          assertEquals('function', type(fn))
+        end,
+        RunMacroText = function()
+          local fn = _G.RunMacroText
+          assertEquals('function', type(fn))
+        end,
+        RunScript = function()
+          local fn = _G.RunScript
+          assertEquals('function', type(fn))
+        end,
+        SaveBindings = function()
+          local fn = _G.SaveBindings
+          assertEquals('function', type(fn))
+        end,
+        SaveView = function()
+          local fn = _G.SaveView
+          assertEquals('function', type(fn))
+        end,
+        Screenshot = function()
+          local fn = _G.Screenshot
+          assertEquals('function', type(fn))
+        end,
+        ScriptsDisallowedForBeta = function()
+          local fn = _G.ScriptsDisallowedForBeta
+          assertEquals('function', type(fn))
+        end,
+        SecureCmdOptionParse = function()
+          local fn = _G.SecureCmdOptionParse
+          assertEquals('function', type(fn))
+        end,
+        SelectCraft = function()
+          local fn = _G.SelectCraft
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        SelectGossipOption = function()
+          local fn = _G.SelectGossipOption
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        SelectQuestLogEntry = function()
+          local fn = _G.SelectQuestLogEntry
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        SelectTradeSkill = function()
+          local fn = _G.SelectTradeSkill
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        SendChatMessage = function()
+          local fn = _G.SendChatMessage
+          assertEquals('function', type(fn))
+        end,
+        SendSubscriptionInterstitialResponse = function()
+          local fn = _G.SendSubscriptionInterstitialResponse
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        SendSystemMessage = function()
+          local fn = _G.SendSystemMessage
+          assertEquals('function', type(fn))
+        end,
+        SetActionBarToggles = function()
+          local fn = _G.SetActionBarToggles
+          assertEquals('function', type(fn))
+        end,
+        SetActionUIButton = function()
+          local fn = _G.SetActionUIButton
+          assertEquals('function', type(fn))
+        end,
+        SetAuctionsTabShowing = function()
+          local fn = _G.SetAuctionsTabShowing
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        SetBagPortraitTexture = function()
+          local fn = _G.SetBagPortraitTexture
+          assertEquals('function', type(fn))
+        end,
+        SetBinding = function()
+          local fn = _G.SetBinding
+          assertEquals('function', type(fn))
+        end,
+        SetBindingClick = function()
+          local fn = _G.SetBindingClick
+          assertEquals('function', type(fn))
+        end,
+        SetChatWindowDocked = function()
+          local fn = _G.SetChatWindowDocked
+          assertEquals('function', type(fn))
+        end,
+        SetChatWindowLocked = function()
+          local fn = _G.SetChatWindowLocked
+          assertEquals('function', type(fn))
+        end,
+        SetChatWindowName = function()
+          local fn = _G.SetChatWindowName
+          assertEquals('function', type(fn))
+        end,
+        SetChatWindowShown = function()
+          local fn = _G.SetChatWindowShown
+          assertEquals('function', type(fn))
+        end,
+        SetChatWindowSize = function()
+          local fn = _G.SetChatWindowSize
+          assertEquals('function', type(fn))
+        end,
+        SetChatWindowUninteractable = function()
+          local fn = _G.SetChatWindowUninteractable
+          assertEquals('function', type(fn))
+        end,
+        SetConsoleKey = function()
+          local fn = _G.SetConsoleKey
+          assertEquals('function', type(fn))
+        end,
+        SetCursor = function()
+          local fn = _G.SetCursor
+          assertEquals('function', type(fn))
+        end,
+        SetGuildRosterSelection = function()
+          local fn = _G.SetGuildRosterSelection
+          assertEquals('function', type(fn))
+        end,
+        SetInsertItemsLeftToRight = function()
+          local fn = _G.SetInsertItemsLeftToRight
+          assertEquals('function', type(fn))
+        end,
+        SetItemSearch = function()
+          local fn = _G.SetItemSearch
+          assertEquals('function', type(fn))
+        end,
+        SetModifiedClick = function()
+          local fn = _G.SetModifiedClick
+          assertEquals('function', type(fn))
+        end,
+        SetOverrideBindingClick = function()
+          local fn = _G.SetOverrideBindingClick
+          assertEquals('function', type(fn))
+        end,
+        SetPartyAssignment = function()
+          local fn = _G.SetPartyAssignment
+          assertEquals('function', type(fn))
+        end,
+        SetPetStablePaperdoll = function()
+          local fn = _G.SetPetStablePaperdoll
+          assertEquals('function', type(fn))
+        end,
+        SetPortraitTexture = function()
+          local fn = _G.SetPortraitTexture
+          assertEquals('function', type(fn))
+        end,
+        SetPortraitTextureFromCreatureDisplayID = function()
+          local fn = _G.SetPortraitTextureFromCreatureDisplayID
+          assertEquals('function', type(fn))
+        end,
+        SetPortraitToTexture = function()
+          local fn = _G.SetPortraitToTexture
+          assertEquals('function', type(fn))
+        end,
+        SetRaidTarget = function()
+          local fn = _G.SetRaidTarget
+          assertEquals('function', type(fn))
+        end,
+        SetSelectedSkill = function()
+          local fn = _G.SetSelectedSkill
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        SetSendMailShowing = function()
+          local fn = _G.SetSendMailShowing
+          assertEquals('function', type(fn))
+        end,
+        SetTaxiBenchmarkMode = function()
+          local fn = _G.SetTaxiBenchmarkMode
+          assertEquals('function', type(fn))
+        end,
+        SetTradeMoney = function()
+          local fn = _G.SetTradeMoney
+          assertEquals('function', type(fn))
+        end,
+        SetTrainerServiceTypeFilter = function()
+          local fn = _G.SetTrainerServiceTypeFilter
+          assertEquals('function', type(fn))
+        end,
+        SetUIVisibility = function()
+          local fn = _G.SetUIVisibility
+          assertEquals('function', type(fn))
+        end,
+        SetView = function()
+          local fn = _G.SetView
+          assertEquals('function', type(fn))
+        end,
+        ShouldKnowUnitHealth = function()
+          local fn = _G.ShouldKnowUnitHealth
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        ShowBossFrameWhenUninteractable = function()
+          local fn = _G.ShowBossFrameWhenUninteractable
+          assertEquals('function', type(fn))
+        end,
+        SitStandOrDescendStart = function()
+          local fn = _G.SitStandOrDescendStart
+          assertEquals('function', type(fn))
+        end,
+        SortAuctionClearSort = function()
+          local fn = _G.SortAuctionClearSort
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        SortAuctionSetSort = function()
+          local fn = _G.SortAuctionSetSort
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        SortQuestSortTypes = function()
+          local fn = _G.SortQuestSortTypes
+          assertEquals('function', type(fn))
+        end,
+        SortQuests = function()
+          local fn = _G.SortQuests
+          assertEquals('function', type(fn))
+        end,
+        Sound_GameSystem_GetNumOutputDrivers = function()
+          local fn = _G.Sound_GameSystem_GetNumOutputDrivers
+          assertEquals('function', type(fn))
+        end,
+        Sound_GameSystem_GetOutputDriverNameByIndex = function()
+          local fn = _G.Sound_GameSystem_GetOutputDriverNameByIndex
+          assertEquals('function', type(fn))
+        end,
+        SpellCanTargetItem = function()
+          local fn = _G.SpellCanTargetItem
+          assertEquals('function', type(fn))
+        end,
+        SpellCanTargetItemID = function()
+          local fn = _G.SpellCanTargetItemID
+          assertEquals('function', type(fn))
+        end,
+        SpellCanTargetQuest = function()
+          local fn = _G.SpellCanTargetQuest
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        SpellCancelQueuedSpell = function()
+          local fn = _G.SpellCancelQueuedSpell
+          assertEquals('function', type(fn))
+        end,
+        SpellIsTargeting = function()
+          local fn = _G.SpellIsTargeting
+          assertEquals('function', type(fn))
+        end,
+        SpellStopCasting = function()
+          local fn = _G.SpellStopCasting
+          assertEquals('function', type(fn))
+        end,
+        SpellStopTargeting = function()
+          local fn = _G.SpellStopTargeting
+          assertEquals('function', type(fn))
+        end,
+        StartAttack = function()
+          local fn = _G.StartAttack
+          assertEquals('function', type(fn))
+        end,
+        StartAutoRun = function()
+          local fn = _G.StartAutoRun
+          assertEquals('function', type(fn))
+        end,
+        StartDuel = function()
+          local fn = _G.StartDuel
+          assertEquals('function', type(fn))
+        end,
+        StartWarGameByName = function()
+          local fn = _G.StartWarGameByName
+          assertEquals('function', type(fn))
+        end,
+        StopAttack = function()
+          local fn = _G.StopAttack
+          assertEquals('function', type(fn))
+        end,
+        StopAutoRun = function()
+          local fn = _G.StopAutoRun
+          assertEquals('function', type(fn))
+        end,
+        StopMacro = function()
+          local fn = _G.StopMacro
+          assertEquals('function', type(fn))
+        end,
+        StoreSecureReference = function()
+          local fn = _G.StoreSecureReference
+          assertEquals('function', type(fn))
+        end,
+        StrafeLeftStart = function()
+          local fn = _G.StrafeLeftStart
+          assertEquals('function', type(fn))
+        end,
+        StrafeLeftStop = function()
+          local fn = _G.StrafeLeftStop
+          assertEquals('function', type(fn))
+        end,
+        StrafeRightStart = function()
+          local fn = _G.StrafeRightStart
+          assertEquals('function', type(fn))
+        end,
+        StrafeRightStop = function()
+          local fn = _G.StrafeRightStop
+          assertEquals('function', type(fn))
+        end,
+        SupportsClipCursor = function()
+          local fn = _G.SupportsClipCursor
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        TargetLastEnemy = function()
+          local fn = _G.TargetLastEnemy
+          assertEquals('function', type(fn))
+        end,
+        TargetLastTarget = function()
+          local fn = _G.TargetLastTarget
+          assertEquals('function', type(fn))
+        end,
+        TargetNearestEnemy = function()
+          local fn = _G.TargetNearestEnemy
+          assertEquals('function', type(fn))
+        end,
+        TargetNearestEnemyPlayer = function()
+          local fn = _G.TargetNearestEnemyPlayer
+          assertEquals('function', type(fn))
+        end,
+        TargetNearestFriend = function()
+          local fn = _G.TargetNearestFriend
+          assertEquals('function', type(fn))
+        end,
+        TargetNearestFriendPlayer = function()
+          local fn = _G.TargetNearestFriendPlayer
+          assertEquals('function', type(fn))
+        end,
+        TargetPriorityHighlightEnd = function()
+          local fn = _G.TargetPriorityHighlightEnd
+          assertEquals('function', type(fn))
+        end,
+        TargetPriorityHighlightStart = function()
+          local fn = _G.TargetPriorityHighlightStart
+          assertEquals('function', type(fn))
+        end,
+        TargetSpellReplacesBonusTree = function()
+          local fn = _G.TargetSpellReplacesBonusTree
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        TargetUnit = function()
+          local fn = _G.TargetUnit
+          assertEquals('function', type(fn))
+        end,
+        ToggleAnimKitDisplay = function()
+          local fn = _G.ToggleAnimKitDisplay
+          assertEquals('function', type(fn))
+        end,
+        ToggleAutoRun = function()
+          local fn = _G.ToggleAutoRun
+          assertEquals('function', type(fn))
+        end,
+        ToggleDebugAIDisplay = function()
+          local fn = _G.ToggleDebugAIDisplay
+          assertEquals('function', type(fn))
+        end,
+        TogglePVP = function()
+          local fn = _G.TogglePVP
+          assertEquals('function', type(fn))
+        end,
+        ToggleRun = function()
+          local fn = _G.ToggleRun
+          assertEquals('function', type(fn))
+        end,
+        ToggleSelfHighlight = function()
+          local fn = _G.ToggleSelfHighlight
+          assertEquals('function', type(fn))
+        end,
+        ToggleSheath = function()
+          local fn = _G.ToggleSheath
+          assertEquals('function', type(fn))
+        end,
+        ToggleWindowed = function()
+          local fn = _G.ToggleWindowed
+          assertEquals('function', type(fn))
+        end,
+        ToggleWorldMap = function()
+          local fn = _G.ToggleWorldMap
+          assertEquals('function', type(fn))
+        end,
+        TriggerTutorial = function()
+          local fn = _G.TriggerTutorial
+          assertEquals('function', type(fn))
+        end,
+        TurnLeftStart = function()
+          local fn = _G.TurnLeftStart
+          assertEquals('function', type(fn))
+        end,
+        TurnLeftStop = function()
+          local fn = _G.TurnLeftStop
+          assertEquals('function', type(fn))
+        end,
+        TurnOrActionStart = function()
+          local fn = _G.TurnOrActionStart
+          assertEquals('function', type(fn))
+        end,
+        TurnOrActionStop = function()
+          local fn = _G.TurnOrActionStop
+          assertEquals('function', type(fn))
+        end,
+        TurnRightStart = function()
+          local fn = _G.TurnRightStart
+          assertEquals('function', type(fn))
+        end,
+        TurnRightStop = function()
+          local fn = _G.TurnRightStop
+          assertEquals('function', type(fn))
+        end,
+        UnitAffectingCombat = function()
+          local fn = _G.UnitAffectingCombat
+          assertEquals('function', type(fn))
+        end,
+        UnitAlliedRaceInfo = function()
+          local fn = _G.UnitAlliedRaceInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitArmor = function()
+          local fn = _G.UnitArmor
+          assertEquals('function', type(fn))
+        end,
+        UnitAttackBothHands = function()
+          local fn = _G.UnitAttackBothHands
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitAttackPower = function()
+          local fn = _G.UnitAttackPower
+          assertEquals('function', type(fn))
+        end,
+        UnitAttackSpeed = function()
+          local fn = _G.UnitAttackSpeed
+          assertEquals('function', type(fn))
+        end,
+        UnitAura = function()
+          local fn = _G.UnitAura
+          assertEquals('function', type(fn))
+        end,
+        UnitAuraSlots = function()
+          local fn = _G.UnitAuraSlots
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitBuff = function()
+          local fn = _G.UnitBuff
+          assertEquals('function', type(fn))
+        end,
+        UnitCanAssist = function()
+          local fn = _G.UnitCanAssist
+          assertEquals('function', type(fn))
+        end,
+        UnitCanAttack = function()
+          local fn = _G.UnitCanAttack
+          assertEquals('function', type(fn))
+        end,
+        UnitCanCooperate = function()
+          local fn = _G.UnitCanCooperate
+          assertEquals('function', type(fn))
+        end,
+        UnitCastingInfo = function()
+          local fn = _G.UnitCastingInfo
+          assertEquals('function', type(fn))
+        end,
+        UnitChannelInfo = function()
+          local fn = _G.UnitChannelInfo
+          assertEquals('function', type(fn))
+        end,
+        UnitCharacterPoints = function()
+          local fn = _G.UnitCharacterPoints
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitChromieTimeID = function()
+          local fn = _G.UnitChromieTimeID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitClass = function()
+          local fn = _G.UnitClass
+          assertEquals('function', type(fn))
+        end,
+        UnitClassBase = function()
+          local fn = _G.UnitClassBase
+          assertEquals('function', type(fn))
+        end,
+        UnitClassification = function()
+          local fn = _G.UnitClassification
+          assertEquals('function', type(fn))
+        end,
+        UnitDamage = function()
+          local fn = _G.UnitDamage
+          assertEquals('function', type(fn))
+        end,
+        UnitDebuff = function()
+          local fn = _G.UnitDebuff
+          assertEquals('function', type(fn))
+        end,
+        UnitEffectiveLevel = function()
+          local fn = _G.UnitEffectiveLevel
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitExists = function()
+          local fn = _G.UnitExists
+          assertEquals('function', type(fn))
+        end,
+        UnitFactionGroup = function()
+          local fn = _G.UnitFactionGroup
+          assertEquals('function', type(fn))
+        end,
+        UnitFullName = function()
+          local fn = _G.UnitFullName
+          assertEquals('function', type(fn))
+        end,
+        UnitGUID = function()
+          local fn = _G.UnitGUID
+          assertEquals('function', type(fn))
+        end,
+        UnitGetAvailableRoles = function()
+          local fn = _G.UnitGetAvailableRoles
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitGetIncomingHeals = function()
+          local fn = _G.UnitGetIncomingHeals
+          assertEquals('function', type(fn))
+        end,
+        UnitGetTotalAbsorbs = function()
+          local fn = _G.UnitGetTotalAbsorbs
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitGetTotalHealAbsorbs = function()
+          local fn = _G.UnitGetTotalHealAbsorbs
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitGroupRolesAssigned = function()
+          local fn = _G.UnitGroupRolesAssigned
+          assertEquals('function', type(fn))
+        end,
+        UnitHPPerStamina = function()
+          local fn = _G.UnitHPPerStamina
+          assertEquals('function', type(fn))
+        end,
+        UnitHasIncomingResurrection = function()
+          local fn = _G.UnitHasIncomingResurrection
+          assertEquals('function', type(fn))
+        end,
+        UnitHasLFGDeserter = function()
+          local fn = _G.UnitHasLFGDeserter
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitHasLFGRandomCooldown = function()
+          local fn = _G.UnitHasLFGRandomCooldown
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitHasRelicSlot = function()
+          local fn = _G.UnitHasRelicSlot
+          assertEquals('function', type(fn))
+        end,
+        UnitHasVehiclePlayerFrameUI = function()
+          local fn = _G.UnitHasVehiclePlayerFrameUI
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitHasVehicleUI = function()
+          local fn = _G.UnitHasVehicleUI
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitHealth = function()
+          local fn = _G.UnitHealth
+          assertEquals('function', type(fn))
+        end,
+        UnitHealthMax = function()
+          local fn = _G.UnitHealthMax
+          assertEquals('function', type(fn))
+        end,
+        UnitHonor = function()
+          local fn = _G.UnitHonor
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitHonorLevel = function()
+          local fn = _G.UnitHonorLevel
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitHonorMax = function()
+          local fn = _G.UnitHonorMax
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitInBattleground = function()
+          local fn = _G.UnitInBattleground
+          assertEquals('function', type(fn))
+        end,
+        UnitInParty = function()
+          local fn = _G.UnitInParty
+          assertEquals('function', type(fn))
+        end,
+        UnitInPartyShard = function()
+          local fn = _G.UnitInPartyShard
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitInRaid = function()
+          local fn = _G.UnitInRaid
+          assertEquals('function', type(fn))
+        end,
+        UnitInRange = function()
+          local fn = _G.UnitInRange
+          assertEquals('function', type(fn))
+        end,
+        UnitInVehicle = function()
+          local fn = _G.UnitInVehicle
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitIsAFK = function()
+          local fn = _G.UnitIsAFK
+          assertEquals('function', type(fn))
+        end,
+        UnitIsCharmed = function()
+          local fn = _G.UnitIsCharmed
+          assertEquals('function', type(fn))
+        end,
+        UnitIsConnected = function()
+          local fn = _G.UnitIsConnected
+          assertEquals('function', type(fn))
+        end,
+        UnitIsDND = function()
+          local fn = _G.UnitIsDND
+          assertEquals('function', type(fn))
+        end,
+        UnitIsDead = function()
+          local fn = _G.UnitIsDead
+          assertEquals('function', type(fn))
+        end,
+        UnitIsDeadOrGhost = function()
+          local fn = _G.UnitIsDeadOrGhost
+          assertEquals('function', type(fn))
+        end,
+        UnitIsEnemy = function()
+          local fn = _G.UnitIsEnemy
+          assertEquals('function', type(fn))
+        end,
+        UnitIsFeignDeath = function()
+          local fn = _G.UnitIsFeignDeath
+          assertEquals('function', type(fn))
+        end,
+        UnitIsFriend = function()
+          local fn = _G.UnitIsFriend
+          assertEquals('function', type(fn))
+        end,
+        UnitIsGhost = function()
+          local fn = _G.UnitIsGhost
+          assertEquals('function', type(fn))
+        end,
+        UnitIsGroupAssistant = function()
+          local fn = _G.UnitIsGroupAssistant
+          assertEquals('function', type(fn))
+        end,
+        UnitIsGroupLeader = function()
+          local fn = _G.UnitIsGroupLeader
+          assertEquals('function', type(fn))
+        end,
+        UnitIsOtherPlayersPet = function()
+          local fn = _G.UnitIsOtherPlayersPet
+          assertEquals('function', type(fn))
+        end,
+        UnitIsOwnerOrControllerOfUnit = function()
+          local fn = _G.UnitIsOwnerOrControllerOfUnit
+          assertEquals('function', type(fn))
+        end,
+        UnitIsPVP = function()
+          local fn = _G.UnitIsPVP
+          assertEquals('function', type(fn))
+        end,
+        UnitIsPVPFreeForAll = function()
+          local fn = _G.UnitIsPVPFreeForAll
+          assertEquals('function', type(fn))
+        end,
+        UnitIsPlayer = function()
+          local fn = _G.UnitIsPlayer
+          assertEquals('function', type(fn))
+        end,
+        UnitIsPossessed = function()
+          local fn = _G.UnitIsPossessed
+          assertEquals('function', type(fn))
+        end,
+        UnitIsTapDenied = function()
+          local fn = _G.UnitIsTapDenied
+          assertEquals('function', type(fn))
+        end,
+        UnitIsUnit = function()
+          local fn = _G.UnitIsUnit
+          assertEquals('function', type(fn))
+        end,
+        UnitIsVisible = function()
+          local fn = _G.UnitIsVisible
+          assertEquals('function', type(fn))
+        end,
+        UnitLevel = function()
+          local fn = _G.UnitLevel
+          assertEquals('function', type(fn))
+        end,
+        UnitName = function()
+          local fn = _G.UnitName
+          assertEquals('function', type(fn))
+        end,
+        UnitNameUnmodified = function()
+          local fn = _G.UnitNameUnmodified
+          assertEquals('function', type(fn))
+        end,
+        UnitNameplateShowsWidgetsOnly = function()
+          local fn = _G.UnitNameplateShowsWidgetsOnly
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitOnTaxi = function()
+          local fn = _G.UnitOnTaxi
+          assertEquals('function', type(fn))
+        end,
+        UnitPVPName = function()
+          local fn = _G.UnitPVPName
+          assertEquals('function', type(fn))
+        end,
+        UnitPVPRank = function()
+          local fn = _G.UnitPVPRank
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitPhaseReason = function()
+          local fn = _G.UnitPhaseReason
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitPlayerControlled = function()
+          local fn = _G.UnitPlayerControlled
+          assertEquals('function', type(fn))
+        end,
+        UnitPlayerOrPetInParty = function()
+          local fn = _G.UnitPlayerOrPetInParty
+          assertEquals('function', type(fn))
+        end,
+        UnitPlayerOrPetInRaid = function()
+          local fn = _G.UnitPlayerOrPetInRaid
+          assertEquals('function', type(fn))
+        end,
+        UnitPosition = function()
+          local fn = _G.UnitPosition
+          assertEquals('function', type(fn))
+        end,
+        UnitPower = function()
+          local fn = _G.UnitPower
+          assertEquals('function', type(fn))
+        end,
+        UnitPowerBarID = function()
+          local fn = _G.UnitPowerBarID
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitPowerBarTimerInfo = function()
+          local fn = _G.UnitPowerBarTimerInfo
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitPowerDisplayMod = function()
+          local fn = _G.UnitPowerDisplayMod
+          assertEquals('function', type(fn))
+        end,
+        UnitPowerMax = function()
+          local fn = _G.UnitPowerMax
+          assertEquals('function', type(fn))
+        end,
+        UnitPowerType = function()
+          local fn = _G.UnitPowerType
+          assertEquals('function', type(fn))
+        end,
+        UnitPvpClassification = function()
+          local fn = _G.UnitPvpClassification
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitQuestTrivialLevelRange = function()
+          local fn = _G.UnitQuestTrivialLevelRange
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitQuestTrivialLevelRangeScaling = function()
+          local fn = _G.UnitQuestTrivialLevelRangeScaling
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitRace = function()
+          local fn = _G.UnitRace
+          assertEquals('function', type(fn))
+        end,
+        UnitRangedAttack = function()
+          local fn = _G.UnitRangedAttack
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitReaction = function()
+          local fn = _G.UnitReaction
+          assertEquals('function', type(fn))
+        end,
+        UnitRealmRelationship = function()
+          local fn = _G.UnitRealmRelationship
+          assertEquals('function', type(fn))
+        end,
+        UnitResistance = function()
+          local fn = _G.UnitResistance
+          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitSelectionColor = function()
+          local fn = _G.UnitSelectionColor
+          assertEquals('function', type(fn))
+        end,
+        UnitSex = function()
+          local fn = _G.UnitSex
+          assertEquals('function', type(fn))
+        end,
+        UnitStagger = function()
+          local fn = _G.UnitStagger
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitStat = function()
+          local fn = _G.UnitStat
+          assertEquals('function', type(fn))
+        end,
+        UnitTargetsVehicleInRaidUI = function()
+          local fn = _G.UnitTargetsVehicleInRaidUI
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitThreatSituation = function()
+          local fn = _G.UnitThreatSituation
+          assertEquals('function', type(fn))
+        end,
+        UnitTreatAsPlayerForDisplay = function()
+          local fn = _G.UnitTreatAsPlayerForDisplay
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitWidgetSet = function()
+          local fn = _G.UnitWidgetSet
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        UnitXP = function()
+          local fn = _G.UnitXP
+          assertEquals('function', type(fn))
+        end,
+        UnitXPMax = function()
+          local fn = _G.UnitXPMax
+          assertEquals('function', type(fn))
+        end,
+        UpdateAddOnMemoryUsage = function()
+          local fn = _G.UpdateAddOnMemoryUsage
+          assertEquals('function', type(fn))
+        end,
+        UseAction = function()
+          local fn = _G.UseAction
+          assertEquals('function', type(fn))
+        end,
+        UseInventoryItem = function()
+          local fn = _G.UseInventoryItem
+          assertEquals('function', type(fn))
+        end,
+        VehicleAimDecrement = function()
+          local fn = _G.VehicleAimDecrement
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        VehicleAimDownStart = function()
+          local fn = _G.VehicleAimDownStart
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        VehicleAimDownStop = function()
+          local fn = _G.VehicleAimDownStop
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        VehicleAimIncrement = function()
+          local fn = _G.VehicleAimIncrement
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        VehicleAimUpStart = function()
+          local fn = _G.VehicleAimUpStart
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        VehicleAimUpStop = function()
+          local fn = _G.VehicleAimUpStop
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        VehicleExit = function()
+          local fn = _G.VehicleExit
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        VehicleNextSeat = function()
+          local fn = _G.VehicleNextSeat
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        VehiclePrevSeat = function()
+          local fn = _G.VehiclePrevSeat
+          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+            assertEquals('nil', type(fn))
+            return
+          end
+          assertEquals('function', type(fn))
+        end,
+        debugprofilestop = function()
+          local fn = _G.debugprofilestop
+          assertEquals('function', type(fn))
+        end,
+        geterrorhandler = function()
+          local fn = _G.geterrorhandler
+          assertEquals('function', type(fn))
+        end,
+        getfenv = function()
+          local fn = _G.getfenv
+          assertEquals('function', type(fn))
+        end,
+        hooksecurefunc = function()
+          local fn = _G.hooksecurefunc
+          assertEquals('function', type(fn))
+        end,
+        loadstring = function()
+          local fn = _G.loadstring
+          assertEquals('function', type(fn))
+        end,
+        securecall = function()
+          local fn = _G.securecall
+          assertEquals('function', type(fn))
+        end,
+        securecallfunction = function()
+          local fn = _G.securecallfunction
+          assertEquals('function', type(fn))
+        end,
+        secureexecuterange = function()
+          local fn = _G.secureexecuterange
+          assertEquals('function', type(fn))
+        end,
+        seterrorhandler = function()
+          local fn = _G.seterrorhandler
+          assertEquals('function', type(fn))
+        end,
+        xpcall = function()
+          local fn = _G.xpcall
+          assertEquals('function', type(fn))
+        end,
+      }
+    end,
     uiobjects = function()
       local function assertCreateFrame(ty)
         local function process(...)
