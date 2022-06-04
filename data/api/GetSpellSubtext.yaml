@@ -2,6 +2,7 @@
 name: GetSpellSubtext
 status: unimplemented
 inputs:
-- - type: number
+- - nilable: true
+    type: number
 outputs:
 - type: nil

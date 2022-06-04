@@ -5,5 +5,6 @@ flavors:
 - Mainline
 inputs:
 - - name: amount
+    nilable: true
     type: number
 outputs: {}

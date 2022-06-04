@@ -3,6 +3,7 @@ name: UnitPlayerOrPetInParty
 status: unimplemented
 inputs:
 - - name: unit
+    nilable: true
     type: unit
 outputs:
 - name: value

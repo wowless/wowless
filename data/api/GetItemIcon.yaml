@@ -2,6 +2,7 @@
 name: GetItemIcon
 status: unimplemented
 inputs:
-- - type: number
+- - nilable: true
+    type: number
 outputs:
 - type: number

@@ -3,6 +3,7 @@ name: GetBankSlotCost
 status: unimplemented
 inputs:
 - - name: numSlots
+    nilable: true
     type: number
 outputs:
 - name: cost

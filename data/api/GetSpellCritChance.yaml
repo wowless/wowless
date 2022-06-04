@@ -3,6 +3,7 @@ name: GetSpellCritChance
 status: unimplemented
 inputs:
 - - name: school
+    nilable: true
     type: number
 outputs:
 - name: value

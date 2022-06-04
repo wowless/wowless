@@ -4,6 +4,7 @@ status: unimplemented
 flavors:
 - Mainline
 inputs:
-- - type: string
+- - nilable: true
+    type: string
 outputs:
 - type: boolean

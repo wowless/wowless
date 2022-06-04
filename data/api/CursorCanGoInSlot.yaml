@@ -3,6 +3,7 @@ name: CursorCanGoInSlot
 status: unimplemented
 inputs:
 - - name: slot
+    nilable: true
     type: number
 outputs:
 - name: value

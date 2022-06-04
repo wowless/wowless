@@ -3,6 +3,7 @@ name: UnitClassification
 status: unimplemented
 inputs:
 - - name: unit
+    nilable: true
     type: unit
 outputs:
 - name: classification

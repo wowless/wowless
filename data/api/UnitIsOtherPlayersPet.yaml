@@ -2,6 +2,7 @@
 name: UnitIsOtherPlayersPet
 status: unimplemented
 inputs:
-- - type: string
+- - nilable: true
+    type: string
 outputs:
 - type: boolean

@@ -3,6 +3,7 @@ name: IsConsumableSpell
 status: unimplemented
 inputs:
 - - name: spellName
+    nilable: true
     type: string
 outputs:
 - name: value

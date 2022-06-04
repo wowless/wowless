@@ -5,6 +5,7 @@ flavors:
 - Mainline
 inputs:
 - - name: index
+    nilable: true
     type: number
 outputs:
 - name: specID

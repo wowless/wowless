@@ -5,6 +5,7 @@ flavors:
 - Mainline
 inputs:
 - - name: unit
+    nilable: true
     type: unit
 outputs:
 - name: value

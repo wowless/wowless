@@ -2,6 +2,7 @@
 name: UnitIsPlayer
 status: implemented
 inputs:
-- - type: unit
+- - nilable: true
+    type: unit
 outputs:
 - type: boolean

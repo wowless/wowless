@@ -3,5 +3,6 @@ name: RunScript
 status: implemented
 inputs:
 - - name: script
+    nilable: true
     type: string
 outputs: {}

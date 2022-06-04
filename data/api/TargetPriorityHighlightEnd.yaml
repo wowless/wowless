@@ -2,5 +2,6 @@
 name: TargetPriorityHighlightEnd
 status: unimplemented
 inputs:
-- - type: boolean
+- - nilable: true
+    type: boolean
 outputs: {}

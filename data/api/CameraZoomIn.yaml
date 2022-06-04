@@ -3,5 +3,6 @@ name: CameraZoomIn
 status: unimplemented
 inputs:
 - - name: increment
+    nilable: true
     type: number
 outputs: {}

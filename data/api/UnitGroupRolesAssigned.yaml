@@ -3,6 +3,7 @@ name: UnitGroupRolesAssigned
 status: unimplemented
 inputs:
 - - name: unit
+    nilable: true
     type: string
 outputs:
 - name: role
