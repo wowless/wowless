@@ -291,6 +291,7 @@ _G.WowlessTestsDone = false
 do
   local syncIter, syncState = G.tests(function()
     return {
+      api = G.ApiTests,
       generated = G.GeneratedTests,
       sync = syncTests,
     }

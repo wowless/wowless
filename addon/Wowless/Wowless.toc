@@ -6,4 +6,5 @@ init.lua
 framework.lua
 test.xml
 generated.lua
+api.lua
 test.lua
