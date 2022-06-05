@@ -114,10 +114,33 @@ local function dateToCalendarTime(d)
   }
 end
 
+local productToFlavorMap = {
+  wow = 'Mainline',
+  wowt = 'Mainline',
+  wow_classic = 'TBC',
+  wow_classic_era = 'Vanilla',
+  wow_classic_era_ptr = 'Vanilla',
+  wow_classic_ptr = 'TBC',
+}
+
+local function productToFlavor(p)
+  return assert(productToFlavorMap[p], 'invalid product')
+end
+
+local function productList()
+  local t = {}
+  for k in pairs(productToFlavorMap) do
+    table.insert(t, k)
+  end
+  return t
+end
+
 return {
   calendarTimeToDate = calendarTimeToDate,
   dateToCalendarTime = dateToCalendarTime,
   mixin = mixin,
+  productList = productList,
+  productToFlavor = productToFlavor,
   readfile = readfile,
   recursiveMixin = recursiveMixin,
   strjoin = strjoin,

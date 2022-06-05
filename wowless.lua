@@ -1,21 +1,7 @@
-local productToFlavor = {
-  wow = 'Mainline',
-  wowt = 'Mainline',
-  wow_classic = 'TBC',
-  wow_classic_era = 'Vanilla',
-  wow_classic_era_ptr = 'Vanilla',
-  wow_classic_ptr = 'TBC',
-}
-local products = (function()
-  local t = {}
-  for k in pairs(productToFlavor) do
-    table.insert(t, k)
-  end
-  return t
-end)()
+local util = require('wowless.util')
 local args = (function()
   local parser = require('argparse')()
-  parser:option('-p --product', 'product tag'):count(1):choices(products)
+  parser:option('-p --product', 'product tag'):count(1):choices(util.productList())
   parser:option('-l --loglevel', 'log level', '0'):convert(tonumber)
   parser:option('-a --addondir', 'addon directory to test'):count('*')
   parser:option('-c --cascproxy', 'url prefix to cascproxy')
@@ -30,7 +16,7 @@ local api = require('wowless.runner').run({
   frame0 = args.frame0,
   loglevel = args.loglevel,
   otherAddonDirs = args.addondir,
-  version = productToFlavor[args.product],
+  version = util.productToFlavor(args.product),
 })
 if api.GetErrorCount() ~= 0 then
   io.stderr:write('failure on ' .. args.product .. '\n')

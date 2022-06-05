@@ -1,9 +1,17 @@
+local product = ...
+local flavor = require('wowless.util').productToFlavor(product)
 local dbset = {
   globalstrings = true,
 }
 for _, v in pairs(require('wowapi.data').apis) do
-  for _, db in ipairs(v.dbs or {}) do
-    dbset[db.name] = true
+  local flavors = {}
+  for _, f in ipairs(v.flavors or { 'Vanilla', 'TBC', 'Mainline' }) do
+    flavors[f] = true
+  end
+  if flavors[flavor] then
+    for _, db in ipairs(v.dbs or {}) do
+      dbset[db.name] = true
+    end
   end
 end
 local dblist = {}
