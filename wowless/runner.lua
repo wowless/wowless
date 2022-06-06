@@ -1,4 +1,5 @@
 local function run(cfg)
+  _G.loadstring = _G.loadstring_untainted or _G.loadstring -- tainted-lua rewrite hack
   local loglevel = cfg.loglevel or 0
   local time0 = os.clock()
   local function log(level, fmt, ...)

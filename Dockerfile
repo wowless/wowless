@@ -2,7 +2,9 @@ FROM debian:testing AS tainted-lua-builder
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
         build-essential \
+        ca-certificates \
         cmake \
+        git \
         libreadline-dev \
         ninja-build && \
     apt-get clean
