@@ -8,6 +8,7 @@ local args = (function()
   parser:option('-e --maxerrors', 'quit once this number of errors occur'):convert(tonumber)
   parser:flag('--allevents', 'send all nullary events')
   parser:flag('--frame0', 'write frame0 debug')
+  parser:flag('--taint', 'support taint handling')
   return parser:parse()
 end)()
 local api = require('wowless.runner').run({
@@ -17,6 +18,7 @@ local api = require('wowless.runner').run({
   frame0 = args.frame0,
   loglevel = args.loglevel,
   maxErrors = args.maxerrors,
+  taint = args.taint,
   otherAddonDirs = args.addondir,
   version = util.productToFlavor(args.product),
 })

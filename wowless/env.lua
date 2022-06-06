@@ -31,7 +31,6 @@ local function mkBaseEnv()
     difftime = os.difftime,
     error = error,
     floor = math.floor,
-    forceinsecure = function() end, -- TODO use real forceinsecure
     format = string.format,
     getmetatable = getmetatable,
     getn = table.getn,
@@ -145,9 +144,10 @@ local function dump(api)
   end
 end
 
-local function init(api, loader)
+local function init(api, loader, taint)
   api.env._G = api.env
   api.env.__dump = dump(api)
+  api.env.forceinsecure = taint and forceinsecure or function() end
   Mixin(api.env, mkBaseEnv())
   util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
   Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api, loader))
