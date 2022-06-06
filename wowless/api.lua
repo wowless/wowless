@@ -1,6 +1,6 @@
 local traceback = require('wowless.ext').traceback
 
-local function new(log)
+local function new(log, maxErrors)
   local allEventRegistrations = {}
   local env = {}
   local errors = 0
@@ -59,6 +59,10 @@ local function new(log)
   local function ErrorHandler(str)
     errors = errors + 1
     log(0, 'error: ' .. str .. '\n' .. traceback())
+    if maxErrors and errors >= maxErrors then
+      log(0, 'maxerrors reached, quitting')
+      os.exit(1)
+    end
   end
 
   local function CallSafely(fun)
