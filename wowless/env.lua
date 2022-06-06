@@ -32,7 +32,7 @@ local function mkBaseEnv()
     error = error,
     floor = math.floor,
     forceinsecure = function() end, -- TODO use real forceinsecure
-    format = ext.format,
+    format = string.format,
     getmetatable = getmetatable,
     getn = table.getn,
     gmatch = string.gmatch,
@@ -82,7 +82,7 @@ local function mkBaseEnv()
       byte = string.byte,
       char = string.char,
       find = string.find,
-      format = ext.format,
+      format = string.format,
       gmatch = string.gmatch,
       gsub = string.gsub,
       join = util.strjoin,

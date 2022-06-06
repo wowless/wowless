@@ -95,6 +95,14 @@ local syncTests = function()
         format('%100$d', unpack(t))
       end))
     end,
+    ['format handles %f'] = function()
+      assertEquals('inf', format('%f', 1 / 0))
+      assertEquals('nan', format('%f', 0 / 0))
+    end,
+    ['format handles %F'] = function()
+      assertEquals('INF', format('%F', 1 / 0))
+      assertEquals('NAN', format('%F', 0 / 0))
+    end,
     ['visible updated on kids before calling any OnShow'] = function()
       local p = CreateFrame('Frame')
       local k1 = CreateFrame('Frame', nil, p)
