@@ -6,8 +6,10 @@ inputs:
     type: unit
 outputs:
 - name: classFilename
+  nilable: true
   type: string
 - name: classID
+  nilable: true
   type: number
 dbs:
 - index: ID
