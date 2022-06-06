@@ -1,6 +1,40 @@
 ---
 name: Actor
+fields:
+  scale:
+    init: 1
+    type: number
 inherits:
 - ParentedObject
 - ScriptObject
-methods: {}
+methods:
+  ClearModel:
+    status: unimplemented
+  GetScale:
+    fields:
+    - name: scale
+    status: getter
+  Hide:
+    status: unimplemented
+  SetAlpha:
+    status: unimplemented
+  SetAnimation:
+    status: unimplemented
+  SetModelByFileID:
+    status: unimplemented
+  SetParticleOverrideScale:
+    status: unimplemented
+  SetPitch:
+    status: unimplemented
+  SetPosition:
+    status: unimplemented
+  SetRoll:
+    status: unimplemented
+  SetScale:
+    fields:
+    - name: scale
+    status: setter
+  SetYaw:
+    status: unimplemented
+  Show:
+    status: unimplemented

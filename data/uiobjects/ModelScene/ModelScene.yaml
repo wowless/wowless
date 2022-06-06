@@ -6,7 +6,7 @@ methods:
   ClearFog:
     status: unimplemented
   CreateActor:
-    status: unimplemented
+    status: implemented
   GetActorAtIndex:
     status: unimplemented
   GetCameraFarClip:
