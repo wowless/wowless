@@ -4,7 +4,8 @@
         "dockerfile": "Dockerfile"
     },
     "features": {
-        "docker-from-docker": {}
+        "docker-from-docker": {},
+        "github-cli": {}
     },
     "initializeCommand": "git submodule update --init --recursive",
     "name": "lua-wow-tools/wowless",
