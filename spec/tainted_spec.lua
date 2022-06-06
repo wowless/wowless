@@ -1,0 +1,6 @@
+describe('lua environment', function()
+  it('has tainted lua symbols', function()
+    assert.same('function', type(debug.microclock))
+    assert.same('function', type(loadstring_untainted))
+  end)
+end)

@@ -1,6 +1,7 @@
 return {
   _all = {
     ['defer-print'] = true,
+    lua = 'tainted-lua/build/linux/bin/Release/lua5.1',
     verbose = true,
   },
 }

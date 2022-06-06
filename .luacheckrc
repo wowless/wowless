@@ -1,7 +1,9 @@
 read_globals = {
+  'debug.microclock',
   'forceinsecure',
   'issecure',
   'issecurevariable',
+  'loadstring_untainted',
   'scrub',
   'securecall',
 }
