@@ -3,6 +3,8 @@ name: CinematicModel
 inherits:
 - PlayerModel
 methods:
+  InitializeCamera:
+    status: unimplemented
   SetFacingLeft:
     status: unimplemented
   SetHeightFactor:

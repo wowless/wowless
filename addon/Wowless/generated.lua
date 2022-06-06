@@ -22951,6 +22951,9 @@ function G.GeneratedTests()
             end,
             methods = function()
               return {
+                InitializeCamera = function()
+                  assertEquals('function', type(mt.__index.InitializeCamera))
+                end,
                 SetFacingLeft = function()
                   assertEquals('function', type(mt.__index.SetFacingLeft))
                 end,
