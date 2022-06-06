@@ -310,6 +310,7 @@ do
     totalTime = totalTime + elapsed
     numFrames = numFrames + 1
     local ts = debugprofilestop()
+    local budgetMillis = elapsed * 1000 / 2
     for scope, err in syncIter, syncState do
       numSyncTests = numSyncTests + 1
       if err then
@@ -321,7 +322,7 @@ do
         end
         t[scope[#scope]] = err
       end
-      if numSyncTests % 100 == 0 and debugprofilestop() - ts >= elapsed / 2 then
+      if numSyncTests % 100 == 0 and debugprofilestop() - ts >= budgetMillis then
         return
       end
     end

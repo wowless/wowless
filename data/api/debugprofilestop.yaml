@@ -1,6 +1,6 @@
 ---
 name: debugprofilestop
-status: unimplemented
+status: implemented
 inputs:
 - {}
 outputs:
