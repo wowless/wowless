@@ -10,6 +10,7 @@ outputs:
 - name: name
   type: string
 - name: title
+  nilable: true
   type: string
 - name: notes
   nilable: true
