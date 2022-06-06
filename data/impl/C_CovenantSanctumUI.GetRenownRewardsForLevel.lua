@@ -6,7 +6,7 @@ for row in renownrewards() do
       description = row.Description_lang,
       garrFollowerID = row.GarrFollowerID,
       icon = row.Icon,
-      itemID = row.ItemID,
+      itemID = row.ItemID ~= 0 and row.ItemID or nil,
       mountID = row.MountID,
       name = row.Name_lang,
       spellID = row.SpellID,
