@@ -7,5 +7,4 @@ inputs:
 - {}
 outputs:
 - name: questID
-  nilable: true
   type: number
