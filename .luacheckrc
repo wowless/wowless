@@ -1,5 +1,5 @@
 read_globals = {
-  'debug.microclock',
+  'debug.gettime',
   'forceinsecure',
   'issecure',
   'issecurevariable',

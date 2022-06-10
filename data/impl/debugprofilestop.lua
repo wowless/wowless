@@ -1,1 +1,1 @@
-return debug.microclock() / 1000
+return debug.gettime() * 1000
