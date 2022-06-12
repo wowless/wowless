@@ -1,20 +1,20 @@
-FROM debian:testing AS tainted-lua-builder
+FROM python:bullseye AS tainted-lua-builder
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
         build-essential \
         ca-certificates \
-        cmake \
         git \
         libreadline-dev \
         ninja-build && \
-    apt-get clean
+    apt-get clean && \
+    pip3 install cmake
 WORKDIR /build
 COPY tainted-lua .
 RUN cmake --preset linux && \
     cmake --build --preset linux && \
     cmake --install build/linux --prefix /opt/tainted-lua
 
-FROM debian:testing AS wowless-builder
+FROM python:bullseye AS wowless-builder
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
         build-essential \
@@ -24,17 +24,17 @@ RUN apt-get update && \
         libmagickwand-dev \
         libssl-dev \
         libyaml-dev \
-        libzip-dev \
-        lua5.1 \
-        luarocks && \
-    apt-get clean
+        libzip-dev && \
+    apt-get clean && \
+    pip3 install hererocks && \
+    hererocks -l 5.1 -r 3.8.0 /usr/local
 WORKDIR /wowless
 COPY wowless-scm-0.rockspec .
 RUN luarocks build --deps-only
 COPY wowless /wowless/wowless
 RUN luarocks build --no-install
 
-FROM debian:testing-slim AS runtime
+FROM debian:bullseye-slim AS runtime
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
         libexpat1 \
