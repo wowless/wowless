@@ -268,8 +268,10 @@ local function loader(api, cfg)
           end,
           binding = function(e)
             -- TODO interpret all binding attributes
-            local fn = 'return function(keystate) ' .. e.text .. ' end'
-            api.states.Bindings[e.attr.name] = setfenv(loadstr(fn, filename, e.line), api.env)()
+            if not e.attr.debug then -- TODO support debug bindings
+              local fn = 'return function(keystate) ' .. e.text .. ' end'
+              api.states.Bindings[e.attr.name] = setfenv(loadstr(fn, filename, e.line), api.env)()
+            end
           end,
           color = function(e, parent)
             local r, g, b, a = getColor(e)

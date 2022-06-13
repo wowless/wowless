@@ -14,6 +14,8 @@ type:
               required: true
               type:
                 ref: db
+    debug:
+      type: boolean
     flavors:
       type:
         schema: flavors

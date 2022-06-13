@@ -12,7 +12,7 @@ local function loadApis(flavor)
         end
       end
     end
-    if match then
+    if match and not yaml.debug then
       apis[fn] = yaml
     end
   end

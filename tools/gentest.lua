@@ -9,7 +9,9 @@ do
     if d ~= '.' and d ~= '..' then
       local filename = ('data/api/%s'):format(d)
       local cfg = yaml.parseFile(filename)
-      apis[cfg.name] = cfg
+      if not cfg.debug then
+        apis[cfg.name] = cfg
+      end
     end
   end
   for d in lfs.dir('data/uiobjects') do
@@ -33,14 +35,6 @@ do
   local unavailable = {
     'CreateForbiddenFrame',
     'loadstring_untainted',
-    'ResetPerformanceValues',
-    'ToggleCollision',
-    'ToggleCollisionDisplay',
-    'TogglePerformancePause',
-    'TogglePerformanceValues',
-    'TogglePlayerBounds',
-    'TogglePortals',
-    'ToggleTris',
   }
   for _, k in ipairs(unavailable) do
     apis[k] = nil
