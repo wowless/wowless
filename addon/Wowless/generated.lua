@@ -10282,6 +10282,9 @@ function G.GeneratedTests()
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
+            arshift = function()
+              return checkCFunc(ns.arshift)
+            end,
             band = function()
               return checkCFunc(ns.band)
             end,
@@ -10296,6 +10299,9 @@ function G.GeneratedTests()
             end,
             lshift = function()
               return checkCFunc(ns.lshift)
+            end,
+            mod = function()
+              return checkCFunc(ns.mod)
             end,
             rshift = function()
               return checkCFunc(ns.rshift)
@@ -10318,6 +10324,9 @@ function G.GeneratedTests()
             end,
             status = function()
               return checkCFunc(ns.status)
+            end,
+            wrap = function()
+              return checkCFunc(ns.wrap)
             end,
             yield = function()
               return checkCFunc(ns.yield)
