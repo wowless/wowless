@@ -134,6 +134,31 @@ local _, G = ...
 local assertEquals = _G.assertEquals
 local GetObjectType = CreateFrame('Frame').GetObjectType
 function G.GeneratedTests()
+  local function checkCFunc(func)
+    assertEquals('function', type(func))
+    return {
+      getfenv = function()
+        assertEquals(_G, getfenv(func))
+      end,
+      setfenv = function()
+        assertEquals(
+          false,
+          pcall(function()
+            setfenv(func, _G)
+          end)
+        )
+      end,
+    }
+  end
+  local function checkNotCFunc(func)
+    local ty = type(func)
+    if ty == 'function' then
+      -- Check that it is defined in Lua. This should not throw. It taints, alas.
+      setfenv(func, getfenv(func))
+    else
+      assertEquals('nil', ty)
+    end
+  end
   return {
     apiNamespaces = function()
       local function isLuaTest(f)
@@ -156,22 +181,6 @@ function G.GeneratedTests()
         end
         return tests
       end
-      local function checkFunc(func)
-        assertEquals('function', type(func))
-        return {
-          getfenv = function()
-            assertEquals(_G, getfenv(func))
-          end,
-          setfenv = function()
-            assertEquals(
-              false,
-              pcall(function()
-                setfenv(func, _G)
-              end)
-            )
-          end,
-        }
-      end
       return {
 > for k, v in sorted(apiNamespaces) do
         $(k) = function()
@@ -193,7 +202,7 @@ function G.GeneratedTests()
                 return
               end
 > end
-              return checkFunc(ns.$(mname))
+              return checkCFunc(ns.$(mname))
             end,
 > end
           })
@@ -206,19 +215,12 @@ function G.GeneratedTests()
 > for k, v in sorted(apis) do
 > if not k:find('%.') then
         $(k) = function()
-          local fn = _G.$(k)
 > if v.flavors then
           if $(badflavor(v.flavors)) then
-            assertEquals('nil', type(fn))
-            return
+            return checkNotCFunc(_G.$(k))
           end
 > end
-          assertEquals('function', type(fn))
-          return {
-            env = function()
-              assert(_G == getfenv(fn))
-            end,
-          }
+          return checkCFunc(_G.$(k))
         end,
 > end
 > end
