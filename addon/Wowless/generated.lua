@@ -3387,13 +3387,6 @@ function G.GeneratedTests()
             GetCurrentCalendarTime = function()
               assertEquals('function', type(ns.GetCurrentCalendarTime))
             end,
-            GetDateFromEpoch = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetDateFromEpoch))
-                return
-              end
-              assertEquals('function', type(ns.GetDateFromEpoch))
-            end,
             GetSecondsUntilDailyReset = function()
               assertEquals('function', type(ns.GetSecondsUntilDailyReset))
             end,
@@ -3403,26 +3396,7 @@ function G.GeneratedTests()
             GetServerTimeLocal = function()
               assertEquals('function', type(ns.GetServerTimeLocal))
             end,
-            GetTodaysDate = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetTodaysDate))
-                return
-              end
-              assertEquals('function', type(ns.GetTodaysDate))
-            end,
-            GetYesterdaysDate = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetYesterdaysDate))
-                return
-              end
-              assertEquals('function', type(ns.GetYesterdaysDate))
-            end,
           }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
           return tests
         end,
         C_DeathInfo = function()
