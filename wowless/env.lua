@@ -9,13 +9,6 @@ local function mkBaseEnv()
     assert = assert,
     ceil = math.ceil,
     collectgarbage = collectgarbage,
-    coroutine = {
-      create = coroutine.create,
-      resume = coroutine.resume,
-      running = coroutine.running,
-      status = coroutine.status,
-      yield = coroutine.yield,
-    },
     cos = math.cos,
     date = os.date,
     debugstack = ext.traceback,

@@ -10302,6 +10302,28 @@ function G.GeneratedTests()
             end,
           })
         end,
+        coroutine = function()
+          local ns = _G.coroutine
+          assertEquals('table', type(ns))
+          assert(getmetatable(ns) == nil)
+          return mkTests(ns, {
+            create = function()
+              return checkCFunc(ns.create)
+            end,
+            resume = function()
+              return checkCFunc(ns.resume)
+            end,
+            running = function()
+              return checkCFunc(ns.running)
+            end,
+            status = function()
+              return checkCFunc(ns.status)
+            end,
+            yield = function()
+              return checkCFunc(ns.yield)
+            end,
+          })
+        end,
       }
     end,
     globalApis = function()
