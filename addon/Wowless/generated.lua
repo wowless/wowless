@@ -18325,6 +18325,15 @@ function G.GeneratedTests()
             end,
           }
         end,
+        GetUnitSpeed = function()
+          local fn = _G.GetUnitSpeed
+          assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
+        end,
         GetVehicleBarIndex = function()
           local fn = _G.GetVehicleBarIndex
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -19560,6 +19569,15 @@ function G.GeneratedTests()
         end,
         IsStackableAction = function()
           local fn = _G.IsStackableAction
+          assertEquals('function', type(fn))
+          return {
+            env = function()
+              assert(_G == getfenv(fn))
+            end,
+          }
+        end,
+        IsStealthed = function()
+          local fn = _G.IsStealthed
           assertEquals('function', type(fn))
           return {
             env = function()
