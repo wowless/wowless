@@ -1,0 +1,14 @@
+---
+name: GetBuildInfo
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: version
+  type: string
+- name: build
+  type: string
+- name: date
+  type: string
+- name: tocversion
+  type: number

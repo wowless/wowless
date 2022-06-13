@@ -11079,6 +11079,9 @@ function G.GeneratedTests()
         GetBindingText = function()
           return checkCFunc(_G.GetBindingText)
         end,
+        GetBuildInfo = function()
+          return checkCFunc(_G.GetBuildInfo)
+        end,
         GetBuybackItemInfo = function()
           return checkCFunc(_G.GetBuybackItemInfo)
         end,
