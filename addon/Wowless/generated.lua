@@ -44,8 +44,14 @@ function G.GeneratedTests()
       end
       local function mkTests(ns, tests)
         for k, v in pairs(ns) do
-          -- Anything left over must be a FrameXML-defined function.
-          tests[k] = tests[k] or isLuaTest(v)
+          if ns == math and (k == 'huge' or k == 'pi') then -- TODO generalize
+            tests[k] = function()
+              assertEquals('number', type(v))
+            end
+          else
+            -- Anything left over must be a FrameXML-defined function.
+            tests[k] = tests[k] or isLuaTest(v)
+          end
         end
         return tests
       end
@@ -10330,6 +10336,94 @@ function G.GeneratedTests()
             end,
             yield = function()
               return checkCFunc(ns.yield)
+            end,
+          })
+        end,
+        math = function()
+          local ns = _G.math
+          assertEquals('table', type(ns))
+          assert(getmetatable(ns) == nil)
+          return mkTests(ns, {
+            abs = function()
+              return checkCFunc(ns.abs)
+            end,
+            acos = function()
+              return checkCFunc(ns.acos)
+            end,
+            asin = function()
+              return checkCFunc(ns.asin)
+            end,
+            atan = function()
+              return checkCFunc(ns.atan)
+            end,
+            atan2 = function()
+              return checkCFunc(ns.atan2)
+            end,
+            ceil = function()
+              return checkCFunc(ns.ceil)
+            end,
+            cos = function()
+              return checkCFunc(ns.cos)
+            end,
+            cosh = function()
+              return checkCFunc(ns.cosh)
+            end,
+            deg = function()
+              return checkCFunc(ns.deg)
+            end,
+            exp = function()
+              return checkCFunc(ns.exp)
+            end,
+            floor = function()
+              return checkCFunc(ns.floor)
+            end,
+            fmod = function()
+              return checkCFunc(ns.fmod)
+            end,
+            frexp = function()
+              return checkCFunc(ns.frexp)
+            end,
+            ldexp = function()
+              return checkCFunc(ns.ldexp)
+            end,
+            log = function()
+              return checkCFunc(ns.log)
+            end,
+            log10 = function()
+              return checkCFunc(ns.log10)
+            end,
+            max = function()
+              return checkCFunc(ns.max)
+            end,
+            min = function()
+              return checkCFunc(ns.min)
+            end,
+            modf = function()
+              return checkCFunc(ns.modf)
+            end,
+            pow = function()
+              return checkCFunc(ns.pow)
+            end,
+            rad = function()
+              return checkCFunc(ns.rad)
+            end,
+            random = function()
+              return checkCFunc(ns.random)
+            end,
+            sin = function()
+              return checkCFunc(ns.sin)
+            end,
+            sinh = function()
+              return checkCFunc(ns.sinh)
+            end,
+            sqrt = function()
+              return checkCFunc(ns.sqrt)
+            end,
+            tan = function()
+              return checkCFunc(ns.tan)
+            end,
+            tanh = function()
+              return checkCFunc(ns.tanh)
             end,
           })
         end,
