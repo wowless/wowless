@@ -10427,6 +10427,64 @@ function G.GeneratedTests()
             end,
           })
         end,
+        string = function()
+          local ns = _G.string
+          assertEquals('table', type(ns))
+          assert(getmetatable(ns) == nil)
+          return mkTests(ns, {
+            byte = function()
+              return checkCFunc(ns.byte)
+            end,
+            char = function()
+              return checkCFunc(ns.char)
+            end,
+            find = function()
+              return checkCFunc(ns.find)
+            end,
+            format = function()
+              return checkCFunc(ns.format)
+            end,
+            gfind = function()
+              return checkCFunc(ns.gfind)
+            end,
+            gmatch = function()
+              return checkCFunc(ns.gmatch)
+            end,
+            gsub = function()
+              return checkCFunc(ns.gsub)
+            end,
+            join = function()
+              return checkCFunc(ns.join)
+            end,
+            len = function()
+              return checkCFunc(ns.len)
+            end,
+            lower = function()
+              return checkCFunc(ns.lower)
+            end,
+            match = function()
+              return checkCFunc(ns.match)
+            end,
+            rep = function()
+              return checkCFunc(ns.rep)
+            end,
+            reverse = function()
+              return checkCFunc(ns.reverse)
+            end,
+            split = function()
+              return checkCFunc(ns.split)
+            end,
+            sub = function()
+              return checkCFunc(ns.sub)
+            end,
+            trim = function()
+              return checkCFunc(ns.trim)
+            end,
+            upper = function()
+              return checkCFunc(ns.upper)
+            end,
+          })
+        end,
       }
     end,
     globalApis = function()
