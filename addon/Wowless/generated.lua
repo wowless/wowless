@@ -4894,13 +4894,6 @@ function G.GeneratedTests()
             GetItemHyperlink = function()
               assertEquals('function', type(ns.GetItemHyperlink))
             end,
-            GetItemLevelIncrement = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                assertEquals('nil', type(ns.GetItemLevelIncrement))
-                return
-              end
-              assertEquals('function', type(ns.GetItemLevelIncrement))
-            end,
             GetItemUpgradeCurrentLevel = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetItemUpgradeCurrentLevel))
@@ -5120,9 +5113,6 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.GetActivityIDForQuestID))
             end,
-            GetActivityInfo = function()
-              assertEquals('function', type(ns.GetActivityInfo))
-            end,
             GetActivityInfoExpensive = function()
               assertEquals('function', type(ns.GetActivityInfoExpensive))
             end,
@@ -5211,9 +5201,6 @@ function G.GeneratedTests()
                 return
               end
               assertEquals('function', type(ns.GetAvailableRoles))
-            end,
-            GetCategoryInfo = function()
-              assertEquals('function', type(ns.GetCategoryInfo))
             end,
             GetDefaultLanguageSearchFilter = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -6882,15 +6869,6 @@ function G.GeneratedTests()
             end,
             GetNumRerolls = function()
               assertEquals('function', type(ns.GetNumRerolls))
-            end,
-            GetPlayerChoiceInfo = function()
-              assertEquals('function', type(ns.GetPlayerChoiceInfo))
-            end,
-            GetPlayerChoiceOptionInfo = function()
-              assertEquals('function', type(ns.GetPlayerChoiceOptionInfo))
-            end,
-            GetPlayerChoiceRewardInfo = function()
-              assertEquals('function', type(ns.GetPlayerChoiceRewardInfo))
             end,
             GetRemainingTime = function()
               assertEquals('function', type(ns.GetRemainingTime))
@@ -8725,9 +8703,6 @@ function G.GeneratedTests()
             GetConduitIDPendingInstall = function()
               assertEquals('function', type(ns.GetConduitIDPendingInstall))
             end,
-            GetConduitItemLevel = function()
-              assertEquals('function', type(ns.GetConduitItemLevel))
-            end,
             GetConduitQuality = function()
               assertEquals('function', type(ns.GetConduitQuality))
             end,
@@ -9578,9 +9553,6 @@ function G.GeneratedTests()
             GetBaseCategory = function()
               assertEquals('function', type(ns.GetBaseCategory))
             end,
-            GetCost = function()
-              assertEquals('function', type(ns.GetCost))
-            end,
             GetCreatureDisplayIDForSource = function()
               assertEquals('function', type(ns.GetCreatureDisplayIDForSource))
             end,
@@ -9640,9 +9612,6 @@ function G.GeneratedTests()
             CanAppearanceHaveIllusion = function()
               assertEquals('function', type(ns.CanAppearanceHaveIllusion))
             end,
-            CanSetFavoriteInCategory = function()
-              assertEquals('function', type(ns.CanSetFavoriteInCategory))
-            end,
             ClearNewAppearance = function()
               assertEquals('function', type(ns.ClearNewAppearance))
             end,
@@ -9700,14 +9669,8 @@ function G.GeneratedTests()
             GetFallbackWeaponAppearance = function()
               assertEquals('function', type(ns.GetFallbackWeaponAppearance))
             end,
-            GetIllusionFallbackWeaponSource = function()
-              assertEquals('function', type(ns.GetIllusionFallbackWeaponSource))
-            end,
             GetIllusionInfo = function()
               assertEquals('function', type(ns.GetIllusionInfo))
-            end,
-            GetIllusionSourceInfo = function()
-              assertEquals('function', type(ns.GetIllusionSourceInfo))
             end,
             GetIllusionStrings = function()
               assertEquals('function', type(ns.GetIllusionStrings))
@@ -9750,9 +9713,6 @@ function G.GeneratedTests()
             end,
             GetPairedArtifactAppearance = function()
               assertEquals('function', type(ns.GetPairedArtifactAppearance))
-            end,
-            GetShowMissingSourceInItemTooltips = function()
-              assertEquals('function', type(ns.GetShowMissingSourceInItemTooltips))
             end,
             GetSourceIcon = function()
               assertEquals('function', type(ns.GetSourceIcon))
@@ -9844,9 +9804,6 @@ function G.GeneratedTests()
             SetSearchAndFilterCategory = function()
               assertEquals('function', type(ns.SetSearchAndFilterCategory))
             end,
-            SetShowMissingSourceInItemTooltips = function()
-              assertEquals('function', type(ns.SetShowMissingSourceInItemTooltips))
-            end,
             SetSourceTypeFilter = function()
               assertEquals('function', type(ns.SetSourceTypeFilter))
             end,
@@ -9911,9 +9868,6 @@ function G.GeneratedTests()
             end,
             GetSetPrimaryAppearances = function()
               assertEquals('function', type(ns.GetSetPrimaryAppearances))
-            end,
-            GetSetSources = function()
-              assertEquals('function', type(ns.GetSetSources))
             end,
             GetSetsContainingSourceID = function()
               assertEquals('function', type(ns.GetSetsContainingSourceID))
