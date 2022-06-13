@@ -742,6 +742,8 @@ local function loader(api, cfg)
     local context = forAddon()
     context.loadFile(path.join(rootDir, 'Interface', 'GlobalEnvironment.lua'))
     assert(api.env.GetBuildInfo, 'missing client extract, cannot proceed')
+    api.env.GetBuildInfo = debug.newcfunction(api.env.GetBuildInfo)
+    api.env.C_CVar.GetCVarDefault = debug.newcfunction(api.env.C_CVar.GetCVarDefault)
     for row in db2rows('globalstrings') do
       api.env[row.BaseTag] = row.TagText_lang
     end
