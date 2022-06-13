@@ -10485,6 +10485,46 @@ function G.GeneratedTests()
             end,
           })
         end,
+        table = function()
+          local ns = _G.table
+          assertEquals('table', type(ns))
+          assert(getmetatable(ns) == nil)
+          return mkTests(ns, {
+            concat = function()
+              return checkCFunc(ns.concat)
+            end,
+            foreach = function()
+              return checkCFunc(ns.foreach)
+            end,
+            foreachi = function()
+              return checkCFunc(ns.foreachi)
+            end,
+            getn = function()
+              return checkCFunc(ns.getn)
+            end,
+            insert = function()
+              return checkCFunc(ns.insert)
+            end,
+            maxn = function()
+              return checkCFunc(ns.maxn)
+            end,
+            remove = function()
+              return checkCFunc(ns.remove)
+            end,
+            removemulti = function()
+              return checkCFunc(ns.removemulti)
+            end,
+            setn = function()
+              return checkCFunc(ns.setn)
+            end,
+            sort = function()
+              return checkCFunc(ns.sort)
+            end,
+            wipe = function()
+              return checkCFunc(ns.wipe)
+            end,
+          })
+        end,
       }
     end,
     globalApis = function()

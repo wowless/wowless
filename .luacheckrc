@@ -7,6 +7,8 @@ read_globals = {
   'loadstring_untainted',
   'scrub',
   'securecall',
+  'table.removemulti',
+  'table.wipe',
 }
 files['addon/Wowless'] = {
   read_globals = {

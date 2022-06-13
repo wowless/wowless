@@ -59,19 +59,6 @@ local function mkBaseEnv()
     strsub = string.sub,
     strtrim = util.strtrim,
     strupper = string.upper,
-    table = {
-      concat = table.concat,
-      foreach = function(t, fn)
-        for i, v in ipairs(t) do
-          fn(i, v)
-        end
-      end,
-      getn = table.getn,
-      insert = table.insert,
-      remove = table.remove,
-      sort = table.sort,
-      wipe = util.twipe,
-    },
     time = os.time,
     tinsert = table.insert,
     tonumber = tonumber,
