@@ -1,6 +1,3 @@
-local env, arg = ...
-if arg == nil or arg == 0 then
-  return env
-else
-  return getfenv(arg)
-end
+local env = ...
+local fenv = getfenv(select(2, ...))
+return fenv == _G and env or fenv
