@@ -24,6 +24,22 @@ function G.GeneratedTests()
         end
         return tests
       end
+      local function checkFunc(func)
+        assertEquals('function', type(func))
+        return {
+          getfenv = function()
+            assertEquals(_G, getfenv(func))
+          end,
+          setfenv = function()
+            assertEquals(
+              false,
+              pcall(function()
+                setfenv(func, _G)
+              end)
+            )
+          end,
+        }
+      end
       return {
         C_AccountInfo = function()
           local ns = _G.C_AccountInfo
@@ -35,13 +51,13 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.GetIDFromBattleNetAccountGUID))
                 return
               end
-              assertEquals('function', type(ns.GetIDFromBattleNetAccountGUID))
+              return checkFunc(ns.GetIDFromBattleNetAccountGUID)
             end,
             IsGUIDBattleNetAccountType = function()
-              assertEquals('function', type(ns.IsGUIDBattleNetAccountType))
+              return checkFunc(ns.IsGUIDBattleNetAccountType)
             end,
             IsGUIDRelatedToLocalAccount = function()
-              assertEquals('function', type(ns.IsGUIDRelatedToLocalAccount))
+              return checkFunc(ns.IsGUIDRelatedToLocalAccount)
             end,
           })
         end,
@@ -51,16 +67,16 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetRewardItemID = function()
-              assertEquals('function', type(ns.GetRewardItemID))
+              return checkFunc(ns.GetRewardItemID)
             end,
             GetSupercedingAchievements = function()
-              assertEquals('function', type(ns.GetSupercedingAchievements))
+              return checkFunc(ns.GetSupercedingAchievements)
             end,
             IsValidAchievement = function()
-              assertEquals('function', type(ns.IsValidAchievement))
+              return checkFunc(ns.IsValidAchievement)
             end,
             SetPortraitTexture = function()
-              assertEquals('function', type(ns.SetPortraitTexture))
+              return checkFunc(ns.SetPortraitTexture)
             end,
           })
         end,
@@ -74,78 +90,78 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.FindFlyoutActionButtons))
                 return
               end
-              assertEquals('function', type(ns.FindFlyoutActionButtons))
+              return checkFunc(ns.FindFlyoutActionButtons)
             end,
             FindPetActionButtons = function()
-              assertEquals('function', type(ns.FindPetActionButtons))
+              return checkFunc(ns.FindPetActionButtons)
             end,
             FindSpellActionButtons = function()
-              assertEquals('function', type(ns.FindSpellActionButtons))
+              return checkFunc(ns.FindSpellActionButtons)
             end,
             GetBonusBarIndexForSlot = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetBonusBarIndexForSlot))
                 return
               end
-              assertEquals('function', type(ns.GetBonusBarIndexForSlot))
+              return checkFunc(ns.GetBonusBarIndexForSlot)
             end,
             GetPetActionPetBarIndices = function()
-              assertEquals('function', type(ns.GetPetActionPetBarIndices))
+              return checkFunc(ns.GetPetActionPetBarIndices)
             end,
             HasFlyoutActionButtons = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.HasFlyoutActionButtons))
                 return
               end
-              assertEquals('function', type(ns.HasFlyoutActionButtons))
+              return checkFunc(ns.HasFlyoutActionButtons)
             end,
             HasPetActionButtons = function()
-              assertEquals('function', type(ns.HasPetActionButtons))
+              return checkFunc(ns.HasPetActionButtons)
             end,
             HasPetActionPetBarIndices = function()
-              assertEquals('function', type(ns.HasPetActionPetBarIndices))
+              return checkFunc(ns.HasPetActionPetBarIndices)
             end,
             HasSpellActionButtons = function()
-              assertEquals('function', type(ns.HasSpellActionButtons))
+              return checkFunc(ns.HasSpellActionButtons)
             end,
             IsAutoCastPetAction = function()
-              assertEquals('function', type(ns.IsAutoCastPetAction))
+              return checkFunc(ns.IsAutoCastPetAction)
             end,
             IsEnabledAutoCastPetAction = function()
-              assertEquals('function', type(ns.IsEnabledAutoCastPetAction))
+              return checkFunc(ns.IsEnabledAutoCastPetAction)
             end,
             IsHarmfulAction = function()
-              assertEquals('function', type(ns.IsHarmfulAction))
+              return checkFunc(ns.IsHarmfulAction)
             end,
             IsHelpfulAction = function()
-              assertEquals('function', type(ns.IsHelpfulAction))
+              return checkFunc(ns.IsHelpfulAction)
             end,
             IsOnBarOrSpecialBar = function()
-              assertEquals('function', type(ns.IsOnBarOrSpecialBar))
+              return checkFunc(ns.IsOnBarOrSpecialBar)
             end,
             PutActionInSlot = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.PutActionInSlot))
                 return
               end
-              assertEquals('function', type(ns.PutActionInSlot))
+              return checkFunc(ns.PutActionInSlot)
             end,
             ShouldOverrideBarShowHealthBar = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ShouldOverrideBarShowHealthBar))
                 return
               end
-              assertEquals('function', type(ns.ShouldOverrideBarShowHealthBar))
+              return checkFunc(ns.ShouldOverrideBarShowHealthBar)
             end,
             ShouldOverrideBarShowManaBar = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ShouldOverrideBarShowManaBar))
                 return
               end
-              assertEquals('function', type(ns.ShouldOverrideBarShowManaBar))
+              return checkFunc(ns.ShouldOverrideBarShowManaBar)
             end,
             ToggleAutoCastPetAction = function()
-              assertEquals('function', type(ns.ToggleAutoCastPetAction))
+              return checkFunc(ns.ToggleAutoCastPetAction)
             end,
           })
         end,
@@ -159,28 +175,28 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ActivateEntry = function()
-              assertEquals('function', type(ns.ActivateEntry))
+              return checkFunc(ns.ActivateEntry)
             end,
             CanBeShown = function()
-              assertEquals('function', type(ns.CanBeShown))
+              return checkFunc(ns.CanBeShown)
             end,
             GetNumAvailableSuggestions = function()
-              assertEquals('function', type(ns.GetNumAvailableSuggestions))
+              return checkFunc(ns.GetNumAvailableSuggestions)
             end,
             GetPrimaryOffset = function()
-              assertEquals('function', type(ns.GetPrimaryOffset))
+              return checkFunc(ns.GetPrimaryOffset)
             end,
             GetReward = function()
-              assertEquals('function', type(ns.GetReward))
+              return checkFunc(ns.GetReward)
             end,
             GetSuggestions = function()
-              assertEquals('function', type(ns.GetSuggestions))
+              return checkFunc(ns.GetSuggestions)
             end,
             SetPrimaryOffset = function()
-              assertEquals('function', type(ns.SetPrimaryOffset))
+              return checkFunc(ns.SetPrimaryOffset)
             end,
             UpdateSuggestions = function()
-              assertEquals('function', type(ns.UpdateSuggestions))
+              return checkFunc(ns.UpdateSuggestions)
             end,
           })
         end,
@@ -194,37 +210,37 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             Close = function()
-              assertEquals('function', type(ns.Close))
+              return checkFunc(ns.Close)
             end,
             GetMapID = function()
-              assertEquals('function', type(ns.GetMapID))
+              return checkFunc(ns.GetMapID)
             end,
             GetMapInsetDetailTileInfo = function()
-              assertEquals('function', type(ns.GetMapInsetDetailTileInfo))
+              return checkFunc(ns.GetMapInsetDetailTileInfo)
             end,
             GetMapInsetInfo = function()
-              assertEquals('function', type(ns.GetMapInsetInfo))
+              return checkFunc(ns.GetMapInsetInfo)
             end,
             GetNumMapInsets = function()
-              assertEquals('function', type(ns.GetNumMapInsets))
+              return checkFunc(ns.GetNumMapInsets)
             end,
             GetNumQuestOffers = function()
-              assertEquals('function', type(ns.GetNumQuestOffers))
+              return checkFunc(ns.GetNumQuestOffers)
             end,
             GetNumZoneChoices = function()
-              assertEquals('function', type(ns.GetNumZoneChoices))
+              return checkFunc(ns.GetNumZoneChoices)
             end,
             GetQuestInfo = function()
-              assertEquals('function', type(ns.GetQuestInfo))
+              return checkFunc(ns.GetQuestInfo)
             end,
             GetQuestOfferInfo = function()
-              assertEquals('function', type(ns.GetQuestOfferInfo))
+              return checkFunc(ns.GetQuestOfferInfo)
             end,
             GetZoneChoiceInfo = function()
-              assertEquals('function', type(ns.GetZoneChoiceInfo))
+              return checkFunc(ns.GetZoneChoiceInfo)
             end,
             StartQuest = function()
-              assertEquals('function', type(ns.StartQuest))
+              return checkFunc(ns.StartQuest)
             end,
           })
         end,
@@ -238,13 +254,13 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ClearAlliedRaceDetailsGiver = function()
-              assertEquals('function', type(ns.ClearAlliedRaceDetailsGiver))
+              return checkFunc(ns.ClearAlliedRaceDetailsGiver)
             end,
             GetAllRacialAbilitiesFromID = function()
-              assertEquals('function', type(ns.GetAllRacialAbilitiesFromID))
+              return checkFunc(ns.GetAllRacialAbilitiesFromID)
             end,
             GetRaceInfoByID = function()
-              assertEquals('function', type(ns.GetRaceInfoByID))
+              return checkFunc(ns.GetRaceInfoByID)
             end,
           })
         end,
@@ -258,25 +274,25 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CloseUI = function()
-              assertEquals('function', type(ns.CloseUI))
+              return checkFunc(ns.CloseUI)
             end,
             GetAnimaDiversionNodes = function()
-              assertEquals('function', type(ns.GetAnimaDiversionNodes))
+              return checkFunc(ns.GetAnimaDiversionNodes)
             end,
             GetOriginPosition = function()
-              assertEquals('function', type(ns.GetOriginPosition))
+              return checkFunc(ns.GetOriginPosition)
             end,
             GetReinforceProgress = function()
-              assertEquals('function', type(ns.GetReinforceProgress))
+              return checkFunc(ns.GetReinforceProgress)
             end,
             GetTextureKit = function()
-              assertEquals('function', type(ns.GetTextureKit))
+              return checkFunc(ns.GetTextureKit)
             end,
             OpenAnimaDiversionUI = function()
-              assertEquals('function', type(ns.OpenAnimaDiversionUI))
+              return checkFunc(ns.OpenAnimaDiversionUI)
             end,
             SelectAnimaNode = function()
-              assertEquals('function', type(ns.SelectAnimaNode))
+              return checkFunc(ns.SelectAnimaNode)
             end,
           })
         end,
@@ -290,10 +306,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetGardenData = function()
-              assertEquals('function', type(ns.GetGardenData))
+              return checkFunc(ns.GetGardenData)
             end,
             IsGardenAccessible = function()
-              assertEquals('function', type(ns.IsGardenAccessible))
+              return checkFunc(ns.IsGardenAccessible)
             end,
           })
         end,
@@ -303,27 +319,27 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetAreaPOIForMap = function()
-              assertEquals('function', type(ns.GetAreaPOIForMap))
+              return checkFunc(ns.GetAreaPOIForMap)
             end,
             GetAreaPOIInfo = function()
-              assertEquals('function', type(ns.GetAreaPOIInfo))
+              return checkFunc(ns.GetAreaPOIInfo)
             end,
             GetAreaPOISecondsLeft = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetAreaPOISecondsLeft))
                 return
               end
-              assertEquals('function', type(ns.GetAreaPOISecondsLeft))
+              return checkFunc(ns.GetAreaPOISecondsLeft)
             end,
             GetAreaPOITimeLeft = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetAreaPOITimeLeft))
                 return
               end
-              assertEquals('function', type(ns.GetAreaPOITimeLeft))
+              return checkFunc(ns.GetAreaPOITimeLeft)
             end,
             IsAreaPOITimed = function()
-              assertEquals('function', type(ns.IsAreaPOITimed))
+              return checkFunc(ns.IsAreaPOITimed)
             end,
           })
         end,
@@ -337,187 +353,187 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AddPower = function()
-              assertEquals('function', type(ns.AddPower))
+              return checkFunc(ns.AddPower)
             end,
             ApplyCursorRelicToSlot = function()
-              assertEquals('function', type(ns.ApplyCursorRelicToSlot))
+              return checkFunc(ns.ApplyCursorRelicToSlot)
             end,
             CanApplyArtifactRelic = function()
-              assertEquals('function', type(ns.CanApplyArtifactRelic))
+              return checkFunc(ns.CanApplyArtifactRelic)
             end,
             CanApplyCursorRelicToSlot = function()
-              assertEquals('function', type(ns.CanApplyCursorRelicToSlot))
+              return checkFunc(ns.CanApplyCursorRelicToSlot)
             end,
             CanApplyRelicItemIDToEquippedArtifactSlot = function()
-              assertEquals('function', type(ns.CanApplyRelicItemIDToEquippedArtifactSlot))
+              return checkFunc(ns.CanApplyRelicItemIDToEquippedArtifactSlot)
             end,
             CanApplyRelicItemIDToSlot = function()
-              assertEquals('function', type(ns.CanApplyRelicItemIDToSlot))
+              return checkFunc(ns.CanApplyRelicItemIDToSlot)
             end,
             CheckRespecNPC = function()
-              assertEquals('function', type(ns.CheckRespecNPC))
+              return checkFunc(ns.CheckRespecNPC)
             end,
             Clear = function()
-              assertEquals('function', type(ns.Clear))
+              return checkFunc(ns.Clear)
             end,
             ClearForgeCamera = function()
-              assertEquals('function', type(ns.ClearForgeCamera))
+              return checkFunc(ns.ClearForgeCamera)
             end,
             ConfirmRespec = function()
-              assertEquals('function', type(ns.ConfirmRespec))
+              return checkFunc(ns.ConfirmRespec)
             end,
             DoesEquippedArtifactHaveAnyRelicsSlotted = function()
-              assertEquals('function', type(ns.DoesEquippedArtifactHaveAnyRelicsSlotted))
+              return checkFunc(ns.DoesEquippedArtifactHaveAnyRelicsSlotted)
             end,
             GetAppearanceInfo = function()
-              assertEquals('function', type(ns.GetAppearanceInfo))
+              return checkFunc(ns.GetAppearanceInfo)
             end,
             GetAppearanceInfoByID = function()
-              assertEquals('function', type(ns.GetAppearanceInfoByID))
+              return checkFunc(ns.GetAppearanceInfoByID)
             end,
             GetAppearanceSetInfo = function()
-              assertEquals('function', type(ns.GetAppearanceSetInfo))
+              return checkFunc(ns.GetAppearanceSetInfo)
             end,
             GetArtifactArtInfo = function()
-              assertEquals('function', type(ns.GetArtifactArtInfo))
+              return checkFunc(ns.GetArtifactArtInfo)
             end,
             GetArtifactInfo = function()
-              assertEquals('function', type(ns.GetArtifactInfo))
+              return checkFunc(ns.GetArtifactInfo)
             end,
             GetArtifactItemID = function()
-              assertEquals('function', type(ns.GetArtifactItemID))
+              return checkFunc(ns.GetArtifactItemID)
             end,
             GetArtifactTier = function()
-              assertEquals('function', type(ns.GetArtifactTier))
+              return checkFunc(ns.GetArtifactTier)
             end,
             GetArtifactXPRewardTargetInfo = function()
-              assertEquals('function', type(ns.GetArtifactXPRewardTargetInfo))
+              return checkFunc(ns.GetArtifactXPRewardTargetInfo)
             end,
             GetCostForPointAtRank = function()
-              assertEquals('function', type(ns.GetCostForPointAtRank))
+              return checkFunc(ns.GetCostForPointAtRank)
             end,
             GetEquippedArtifactArtInfo = function()
-              assertEquals('function', type(ns.GetEquippedArtifactArtInfo))
+              return checkFunc(ns.GetEquippedArtifactArtInfo)
             end,
             GetEquippedArtifactInfo = function()
-              assertEquals('function', type(ns.GetEquippedArtifactInfo))
+              return checkFunc(ns.GetEquippedArtifactInfo)
             end,
             GetEquippedArtifactItemID = function()
-              assertEquals('function', type(ns.GetEquippedArtifactItemID))
+              return checkFunc(ns.GetEquippedArtifactItemID)
             end,
             GetEquippedArtifactNumRelicSlots = function()
-              assertEquals('function', type(ns.GetEquippedArtifactNumRelicSlots))
+              return checkFunc(ns.GetEquippedArtifactNumRelicSlots)
             end,
             GetEquippedArtifactRelicInfo = function()
-              assertEquals('function', type(ns.GetEquippedArtifactRelicInfo))
+              return checkFunc(ns.GetEquippedArtifactRelicInfo)
             end,
             GetEquippedRelicLockedReason = function()
-              assertEquals('function', type(ns.GetEquippedRelicLockedReason))
+              return checkFunc(ns.GetEquippedRelicLockedReason)
             end,
             GetForgeRotation = function()
-              assertEquals('function', type(ns.GetForgeRotation))
+              return checkFunc(ns.GetForgeRotation)
             end,
             GetItemLevelIncreaseProvidedByRelic = function()
-              assertEquals('function', type(ns.GetItemLevelIncreaseProvidedByRelic))
+              return checkFunc(ns.GetItemLevelIncreaseProvidedByRelic)
             end,
             GetMetaPowerInfo = function()
-              assertEquals('function', type(ns.GetMetaPowerInfo))
+              return checkFunc(ns.GetMetaPowerInfo)
             end,
             GetNumAppearanceSets = function()
-              assertEquals('function', type(ns.GetNumAppearanceSets))
+              return checkFunc(ns.GetNumAppearanceSets)
             end,
             GetNumObtainedArtifacts = function()
-              assertEquals('function', type(ns.GetNumObtainedArtifacts))
+              return checkFunc(ns.GetNumObtainedArtifacts)
             end,
             GetNumRelicSlots = function()
-              assertEquals('function', type(ns.GetNumRelicSlots))
+              return checkFunc(ns.GetNumRelicSlots)
             end,
             GetPointsRemaining = function()
-              assertEquals('function', type(ns.GetPointsRemaining))
+              return checkFunc(ns.GetPointsRemaining)
             end,
             GetPowerHyperlink = function()
-              assertEquals('function', type(ns.GetPowerHyperlink))
+              return checkFunc(ns.GetPowerHyperlink)
             end,
             GetPowerInfo = function()
-              assertEquals('function', type(ns.GetPowerInfo))
+              return checkFunc(ns.GetPowerInfo)
             end,
             GetPowerLinks = function()
-              assertEquals('function', type(ns.GetPowerLinks))
+              return checkFunc(ns.GetPowerLinks)
             end,
             GetPowers = function()
-              assertEquals('function', type(ns.GetPowers))
+              return checkFunc(ns.GetPowers)
             end,
             GetPowersAffectedByRelic = function()
-              assertEquals('function', type(ns.GetPowersAffectedByRelic))
+              return checkFunc(ns.GetPowersAffectedByRelic)
             end,
             GetPowersAffectedByRelicItemLink = function()
-              assertEquals('function', type(ns.GetPowersAffectedByRelicItemLink))
+              return checkFunc(ns.GetPowersAffectedByRelicItemLink)
             end,
             GetPreviewAppearance = function()
-              assertEquals('function', type(ns.GetPreviewAppearance))
+              return checkFunc(ns.GetPreviewAppearance)
             end,
             GetRelicInfo = function()
-              assertEquals('function', type(ns.GetRelicInfo))
+              return checkFunc(ns.GetRelicInfo)
             end,
             GetRelicInfoByItemID = function()
-              assertEquals('function', type(ns.GetRelicInfoByItemID))
+              return checkFunc(ns.GetRelicInfoByItemID)
             end,
             GetRelicLockedReason = function()
-              assertEquals('function', type(ns.GetRelicLockedReason))
+              return checkFunc(ns.GetRelicLockedReason)
             end,
             GetRelicSlotType = function()
-              assertEquals('function', type(ns.GetRelicSlotType))
+              return checkFunc(ns.GetRelicSlotType)
             end,
             GetRespecArtifactArtInfo = function()
-              assertEquals('function', type(ns.GetRespecArtifactArtInfo))
+              return checkFunc(ns.GetRespecArtifactArtInfo)
             end,
             GetRespecArtifactInfo = function()
-              assertEquals('function', type(ns.GetRespecArtifactInfo))
+              return checkFunc(ns.GetRespecArtifactInfo)
             end,
             GetRespecCost = function()
-              assertEquals('function', type(ns.GetRespecCost))
+              return checkFunc(ns.GetRespecCost)
             end,
             GetTotalPowerCost = function()
-              assertEquals('function', type(ns.GetTotalPowerCost))
+              return checkFunc(ns.GetTotalPowerCost)
             end,
             GetTotalPurchasedRanks = function()
-              assertEquals('function', type(ns.GetTotalPurchasedRanks))
+              return checkFunc(ns.GetTotalPurchasedRanks)
             end,
             IsArtifactDisabled = function()
-              assertEquals('function', type(ns.IsArtifactDisabled))
+              return checkFunc(ns.IsArtifactDisabled)
             end,
             IsAtForge = function()
-              assertEquals('function', type(ns.IsAtForge))
+              return checkFunc(ns.IsAtForge)
             end,
             IsEquippedArtifactDisabled = function()
-              assertEquals('function', type(ns.IsEquippedArtifactDisabled))
+              return checkFunc(ns.IsEquippedArtifactDisabled)
             end,
             IsEquippedArtifactMaxed = function()
-              assertEquals('function', type(ns.IsEquippedArtifactMaxed))
+              return checkFunc(ns.IsEquippedArtifactMaxed)
             end,
             IsMaxedByRulesOrEffect = function()
-              assertEquals('function', type(ns.IsMaxedByRulesOrEffect))
+              return checkFunc(ns.IsMaxedByRulesOrEffect)
             end,
             IsPowerKnown = function()
-              assertEquals('function', type(ns.IsPowerKnown))
+              return checkFunc(ns.IsPowerKnown)
             end,
             IsViewedArtifactEquipped = function()
-              assertEquals('function', type(ns.IsViewedArtifactEquipped))
+              return checkFunc(ns.IsViewedArtifactEquipped)
             end,
             SetAppearance = function()
-              assertEquals('function', type(ns.SetAppearance))
+              return checkFunc(ns.SetAppearance)
             end,
             SetForgeCamera = function()
-              assertEquals('function', type(ns.SetForgeCamera))
+              return checkFunc(ns.SetForgeCamera)
             end,
             SetForgeRotation = function()
-              assertEquals('function', type(ns.SetForgeRotation))
+              return checkFunc(ns.SetForgeRotation)
             end,
             SetPreviewAppearance = function()
-              assertEquals('function', type(ns.SetPreviewAppearance))
+              return checkFunc(ns.SetPreviewAppearance)
             end,
             ShouldSuppressForgeRotation = function()
-              assertEquals('function', type(ns.ShouldSuppressForgeRotation))
+              return checkFunc(ns.ShouldSuppressForgeRotation)
             end,
           })
         end,
@@ -531,250 +547,250 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CalculateCommodityDeposit = function()
-              assertEquals('function', type(ns.CalculateCommodityDeposit))
+              return checkFunc(ns.CalculateCommodityDeposit)
             end,
             CalculateItemDeposit = function()
-              assertEquals('function', type(ns.CalculateItemDeposit))
+              return checkFunc(ns.CalculateItemDeposit)
             end,
             CanCancelAuction = function()
-              assertEquals('function', type(ns.CanCancelAuction))
+              return checkFunc(ns.CanCancelAuction)
             end,
             CancelAuction = function()
-              assertEquals('function', type(ns.CancelAuction))
+              return checkFunc(ns.CancelAuction)
             end,
             CancelCommoditiesPurchase = function()
-              assertEquals('function', type(ns.CancelCommoditiesPurchase))
+              return checkFunc(ns.CancelCommoditiesPurchase)
             end,
             CancelSell = function()
-              assertEquals('function', type(ns.CancelSell))
+              return checkFunc(ns.CancelSell)
             end,
             CloseAuctionHouse = function()
-              assertEquals('function', type(ns.CloseAuctionHouse))
+              return checkFunc(ns.CloseAuctionHouse)
             end,
             ConfirmCommoditiesPurchase = function()
-              assertEquals('function', type(ns.ConfirmCommoditiesPurchase))
+              return checkFunc(ns.ConfirmCommoditiesPurchase)
             end,
             FavoritesAreAvailable = function()
-              assertEquals('function', type(ns.FavoritesAreAvailable))
+              return checkFunc(ns.FavoritesAreAvailable)
             end,
             GetAuctionInfoByID = function()
-              assertEquals('function', type(ns.GetAuctionInfoByID))
+              return checkFunc(ns.GetAuctionInfoByID)
             end,
             GetAuctionItemSubClasses = function()
-              assertEquals('function', type(ns.GetAuctionItemSubClasses))
+              return checkFunc(ns.GetAuctionItemSubClasses)
             end,
             GetAvailablePostCount = function()
-              assertEquals('function', type(ns.GetAvailablePostCount))
+              return checkFunc(ns.GetAvailablePostCount)
             end,
             GetBidInfo = function()
-              assertEquals('function', type(ns.GetBidInfo))
+              return checkFunc(ns.GetBidInfo)
             end,
             GetBidType = function()
-              assertEquals('function', type(ns.GetBidType))
+              return checkFunc(ns.GetBidType)
             end,
             GetBids = function()
-              assertEquals('function', type(ns.GetBids))
+              return checkFunc(ns.GetBids)
             end,
             GetBrowseResults = function()
-              assertEquals('function', type(ns.GetBrowseResults))
+              return checkFunc(ns.GetBrowseResults)
             end,
             GetCancelCost = function()
-              assertEquals('function', type(ns.GetCancelCost))
+              return checkFunc(ns.GetCancelCost)
             end,
             GetCommoditySearchResultInfo = function()
-              assertEquals('function', type(ns.GetCommoditySearchResultInfo))
+              return checkFunc(ns.GetCommoditySearchResultInfo)
             end,
             GetCommoditySearchResultsQuantity = function()
-              assertEquals('function', type(ns.GetCommoditySearchResultsQuantity))
+              return checkFunc(ns.GetCommoditySearchResultsQuantity)
             end,
             GetExtraBrowseInfo = function()
-              assertEquals('function', type(ns.GetExtraBrowseInfo))
+              return checkFunc(ns.GetExtraBrowseInfo)
             end,
             GetFilterGroups = function()
-              assertEquals('function', type(ns.GetFilterGroups))
+              return checkFunc(ns.GetFilterGroups)
             end,
             GetItemCommodityStatus = function()
-              assertEquals('function', type(ns.GetItemCommodityStatus))
+              return checkFunc(ns.GetItemCommodityStatus)
             end,
             GetItemKeyFromItem = function()
-              assertEquals('function', type(ns.GetItemKeyFromItem))
+              return checkFunc(ns.GetItemKeyFromItem)
             end,
             GetItemKeyInfo = function()
-              assertEquals('function', type(ns.GetItemKeyInfo))
+              return checkFunc(ns.GetItemKeyInfo)
             end,
             GetItemKeyRequiredLevel = function()
-              assertEquals('function', type(ns.GetItemKeyRequiredLevel))
+              return checkFunc(ns.GetItemKeyRequiredLevel)
             end,
             GetItemSearchResultInfo = function()
-              assertEquals('function', type(ns.GetItemSearchResultInfo))
+              return checkFunc(ns.GetItemSearchResultInfo)
             end,
             GetItemSearchResultsQuantity = function()
-              assertEquals('function', type(ns.GetItemSearchResultsQuantity))
+              return checkFunc(ns.GetItemSearchResultsQuantity)
             end,
             GetMaxBidItemBid = function()
-              assertEquals('function', type(ns.GetMaxBidItemBid))
+              return checkFunc(ns.GetMaxBidItemBid)
             end,
             GetMaxBidItemBuyout = function()
-              assertEquals('function', type(ns.GetMaxBidItemBuyout))
+              return checkFunc(ns.GetMaxBidItemBuyout)
             end,
             GetMaxCommoditySearchResultPrice = function()
-              assertEquals('function', type(ns.GetMaxCommoditySearchResultPrice))
+              return checkFunc(ns.GetMaxCommoditySearchResultPrice)
             end,
             GetMaxItemSearchResultBid = function()
-              assertEquals('function', type(ns.GetMaxItemSearchResultBid))
+              return checkFunc(ns.GetMaxItemSearchResultBid)
             end,
             GetMaxItemSearchResultBuyout = function()
-              assertEquals('function', type(ns.GetMaxItemSearchResultBuyout))
+              return checkFunc(ns.GetMaxItemSearchResultBuyout)
             end,
             GetMaxOwnedAuctionBid = function()
-              assertEquals('function', type(ns.GetMaxOwnedAuctionBid))
+              return checkFunc(ns.GetMaxOwnedAuctionBid)
             end,
             GetMaxOwnedAuctionBuyout = function()
-              assertEquals('function', type(ns.GetMaxOwnedAuctionBuyout))
+              return checkFunc(ns.GetMaxOwnedAuctionBuyout)
             end,
             GetNumBidTypes = function()
-              assertEquals('function', type(ns.GetNumBidTypes))
+              return checkFunc(ns.GetNumBidTypes)
             end,
             GetNumBids = function()
-              assertEquals('function', type(ns.GetNumBids))
+              return checkFunc(ns.GetNumBids)
             end,
             GetNumCommoditySearchResults = function()
-              assertEquals('function', type(ns.GetNumCommoditySearchResults))
+              return checkFunc(ns.GetNumCommoditySearchResults)
             end,
             GetNumItemSearchResults = function()
-              assertEquals('function', type(ns.GetNumItemSearchResults))
+              return checkFunc(ns.GetNumItemSearchResults)
             end,
             GetNumOwnedAuctionTypes = function()
-              assertEquals('function', type(ns.GetNumOwnedAuctionTypes))
+              return checkFunc(ns.GetNumOwnedAuctionTypes)
             end,
             GetNumOwnedAuctions = function()
-              assertEquals('function', type(ns.GetNumOwnedAuctions))
+              return checkFunc(ns.GetNumOwnedAuctions)
             end,
             GetNumReplicateItems = function()
-              assertEquals('function', type(ns.GetNumReplicateItems))
+              return checkFunc(ns.GetNumReplicateItems)
             end,
             GetOwnedAuctionInfo = function()
-              assertEquals('function', type(ns.GetOwnedAuctionInfo))
+              return checkFunc(ns.GetOwnedAuctionInfo)
             end,
             GetOwnedAuctionType = function()
-              assertEquals('function', type(ns.GetOwnedAuctionType))
+              return checkFunc(ns.GetOwnedAuctionType)
             end,
             GetOwnedAuctions = function()
-              assertEquals('function', type(ns.GetOwnedAuctions))
+              return checkFunc(ns.GetOwnedAuctions)
             end,
             GetQuoteDurationRemaining = function()
-              assertEquals('function', type(ns.GetQuoteDurationRemaining))
+              return checkFunc(ns.GetQuoteDurationRemaining)
             end,
             GetReplicateItemBattlePetInfo = function()
-              assertEquals('function', type(ns.GetReplicateItemBattlePetInfo))
+              return checkFunc(ns.GetReplicateItemBattlePetInfo)
             end,
             GetReplicateItemInfo = function()
-              assertEquals('function', type(ns.GetReplicateItemInfo))
+              return checkFunc(ns.GetReplicateItemInfo)
             end,
             GetReplicateItemLink = function()
-              assertEquals('function', type(ns.GetReplicateItemLink))
+              return checkFunc(ns.GetReplicateItemLink)
             end,
             GetReplicateItemTimeLeft = function()
-              assertEquals('function', type(ns.GetReplicateItemTimeLeft))
+              return checkFunc(ns.GetReplicateItemTimeLeft)
             end,
             GetTimeLeftBandInfo = function()
-              assertEquals('function', type(ns.GetTimeLeftBandInfo))
+              return checkFunc(ns.GetTimeLeftBandInfo)
             end,
             HasFavorites = function()
-              assertEquals('function', type(ns.HasFavorites))
+              return checkFunc(ns.HasFavorites)
             end,
             HasFullBidResults = function()
-              assertEquals('function', type(ns.HasFullBidResults))
+              return checkFunc(ns.HasFullBidResults)
             end,
             HasFullBrowseResults = function()
-              assertEquals('function', type(ns.HasFullBrowseResults))
+              return checkFunc(ns.HasFullBrowseResults)
             end,
             HasFullCommoditySearchResults = function()
-              assertEquals('function', type(ns.HasFullCommoditySearchResults))
+              return checkFunc(ns.HasFullCommoditySearchResults)
             end,
             HasFullItemSearchResults = function()
-              assertEquals('function', type(ns.HasFullItemSearchResults))
+              return checkFunc(ns.HasFullItemSearchResults)
             end,
             HasFullOwnedAuctionResults = function()
-              assertEquals('function', type(ns.HasFullOwnedAuctionResults))
+              return checkFunc(ns.HasFullOwnedAuctionResults)
             end,
             HasMaxFavorites = function()
-              assertEquals('function', type(ns.HasMaxFavorites))
+              return checkFunc(ns.HasMaxFavorites)
             end,
             HasSearchResults = function()
-              assertEquals('function', type(ns.HasSearchResults))
+              return checkFunc(ns.HasSearchResults)
             end,
             IsFavoriteItem = function()
-              assertEquals('function', type(ns.IsFavoriteItem))
+              return checkFunc(ns.IsFavoriteItem)
             end,
             IsSellItemValid = function()
-              assertEquals('function', type(ns.IsSellItemValid))
+              return checkFunc(ns.IsSellItemValid)
             end,
             IsThrottledMessageSystemReady = function()
-              assertEquals('function', type(ns.IsThrottledMessageSystemReady))
+              return checkFunc(ns.IsThrottledMessageSystemReady)
             end,
             MakeItemKey = function()
-              assertEquals('function', type(ns.MakeItemKey))
+              return checkFunc(ns.MakeItemKey)
             end,
             PlaceBid = function()
-              assertEquals('function', type(ns.PlaceBid))
+              return checkFunc(ns.PlaceBid)
             end,
             PostCommodity = function()
-              assertEquals('function', type(ns.PostCommodity))
+              return checkFunc(ns.PostCommodity)
             end,
             PostItem = function()
-              assertEquals('function', type(ns.PostItem))
+              return checkFunc(ns.PostItem)
             end,
             QueryBids = function()
-              assertEquals('function', type(ns.QueryBids))
+              return checkFunc(ns.QueryBids)
             end,
             QueryOwnedAuctions = function()
-              assertEquals('function', type(ns.QueryOwnedAuctions))
+              return checkFunc(ns.QueryOwnedAuctions)
             end,
             RefreshCommoditySearchResults = function()
-              assertEquals('function', type(ns.RefreshCommoditySearchResults))
+              return checkFunc(ns.RefreshCommoditySearchResults)
             end,
             RefreshItemSearchResults = function()
-              assertEquals('function', type(ns.RefreshItemSearchResults))
+              return checkFunc(ns.RefreshItemSearchResults)
             end,
             ReplicateItems = function()
-              assertEquals('function', type(ns.ReplicateItems))
+              return checkFunc(ns.ReplicateItems)
             end,
             RequestFavorites = function()
-              assertEquals('function', type(ns.RequestFavorites))
+              return checkFunc(ns.RequestFavorites)
             end,
             RequestMoreBrowseResults = function()
-              assertEquals('function', type(ns.RequestMoreBrowseResults))
+              return checkFunc(ns.RequestMoreBrowseResults)
             end,
             RequestMoreCommoditySearchResults = function()
-              assertEquals('function', type(ns.RequestMoreCommoditySearchResults))
+              return checkFunc(ns.RequestMoreCommoditySearchResults)
             end,
             RequestMoreItemSearchResults = function()
-              assertEquals('function', type(ns.RequestMoreItemSearchResults))
+              return checkFunc(ns.RequestMoreItemSearchResults)
             end,
             RequestOwnedAuctionBidderInfo = function()
-              assertEquals('function', type(ns.RequestOwnedAuctionBidderInfo))
+              return checkFunc(ns.RequestOwnedAuctionBidderInfo)
             end,
             SearchForFavorites = function()
-              assertEquals('function', type(ns.SearchForFavorites))
+              return checkFunc(ns.SearchForFavorites)
             end,
             SearchForItemKeys = function()
-              assertEquals('function', type(ns.SearchForItemKeys))
+              return checkFunc(ns.SearchForItemKeys)
             end,
             SendBrowseQuery = function()
-              assertEquals('function', type(ns.SendBrowseQuery))
+              return checkFunc(ns.SendBrowseQuery)
             end,
             SendSearchQuery = function()
-              assertEquals('function', type(ns.SendSearchQuery))
+              return checkFunc(ns.SendSearchQuery)
             end,
             SendSellSearchQuery = function()
-              assertEquals('function', type(ns.SendSellSearchQuery))
+              return checkFunc(ns.SendSellSearchQuery)
             end,
             SetFavoriteItem = function()
-              assertEquals('function', type(ns.SetFavoriteItem))
+              return checkFunc(ns.SetFavoriteItem)
             end,
             StartCommoditiesPurchase = function()
-              assertEquals('function', type(ns.StartCommoditiesPurchase))
+              return checkFunc(ns.StartCommoditiesPurchase)
             end,
           })
         end,
@@ -784,61 +800,61 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanSelectPower = function()
-              assertEquals('function', type(ns.CanSelectPower))
+              return checkFunc(ns.CanSelectPower)
             end,
             CloseAzeriteEmpoweredItemRespec = function()
-              assertEquals('function', type(ns.CloseAzeriteEmpoweredItemRespec))
+              return checkFunc(ns.CloseAzeriteEmpoweredItemRespec)
             end,
             ConfirmAzeriteEmpoweredItemRespec = function()
-              assertEquals('function', type(ns.ConfirmAzeriteEmpoweredItemRespec))
+              return checkFunc(ns.ConfirmAzeriteEmpoweredItemRespec)
             end,
             GetAllTierInfo = function()
-              assertEquals('function', type(ns.GetAllTierInfo))
+              return checkFunc(ns.GetAllTierInfo)
             end,
             GetAllTierInfoByItemID = function()
-              assertEquals('function', type(ns.GetAllTierInfoByItemID))
+              return checkFunc(ns.GetAllTierInfoByItemID)
             end,
             GetAzeriteEmpoweredItemRespecCost = function()
-              assertEquals('function', type(ns.GetAzeriteEmpoweredItemRespecCost))
+              return checkFunc(ns.GetAzeriteEmpoweredItemRespecCost)
             end,
             GetPowerInfo = function()
-              assertEquals('function', type(ns.GetPowerInfo))
+              return checkFunc(ns.GetPowerInfo)
             end,
             GetPowerText = function()
-              assertEquals('function', type(ns.GetPowerText))
+              return checkFunc(ns.GetPowerText)
             end,
             GetSpecsForPower = function()
-              assertEquals('function', type(ns.GetSpecsForPower))
+              return checkFunc(ns.GetSpecsForPower)
             end,
             HasAnyUnselectedPowers = function()
-              assertEquals('function', type(ns.HasAnyUnselectedPowers))
+              return checkFunc(ns.HasAnyUnselectedPowers)
             end,
             HasBeenViewed = function()
-              assertEquals('function', type(ns.HasBeenViewed))
+              return checkFunc(ns.HasBeenViewed)
             end,
             IsAzeriteEmpoweredItem = function()
-              assertEquals('function', type(ns.IsAzeriteEmpoweredItem))
+              return checkFunc(ns.IsAzeriteEmpoweredItem)
             end,
             IsAzeriteEmpoweredItemByID = function()
-              assertEquals('function', type(ns.IsAzeriteEmpoweredItemByID))
+              return checkFunc(ns.IsAzeriteEmpoweredItemByID)
             end,
             IsAzeritePreviewSourceDisplayable = function()
-              assertEquals('function', type(ns.IsAzeritePreviewSourceDisplayable))
+              return checkFunc(ns.IsAzeritePreviewSourceDisplayable)
             end,
             IsHeartOfAzerothEquipped = function()
-              assertEquals('function', type(ns.IsHeartOfAzerothEquipped))
+              return checkFunc(ns.IsHeartOfAzerothEquipped)
             end,
             IsPowerAvailableForSpec = function()
-              assertEquals('function', type(ns.IsPowerAvailableForSpec))
+              return checkFunc(ns.IsPowerAvailableForSpec)
             end,
             IsPowerSelected = function()
-              assertEquals('function', type(ns.IsPowerSelected))
+              return checkFunc(ns.IsPowerSelected)
             end,
             SelectPower = function()
-              assertEquals('function', type(ns.SelectPower))
+              return checkFunc(ns.SelectPower)
             end,
             SetHasBeenViewed = function()
-              assertEquals('function', type(ns.SetHasBeenViewed))
+              return checkFunc(ns.SetHasBeenViewed)
             end,
           })
         end,
@@ -848,67 +864,67 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ActivateEssence = function()
-              assertEquals('function', type(ns.ActivateEssence))
+              return checkFunc(ns.ActivateEssence)
             end,
             CanActivateEssence = function()
-              assertEquals('function', type(ns.CanActivateEssence))
+              return checkFunc(ns.CanActivateEssence)
             end,
             CanDeactivateEssence = function()
-              assertEquals('function', type(ns.CanDeactivateEssence))
+              return checkFunc(ns.CanDeactivateEssence)
             end,
             CanOpenUI = function()
-              assertEquals('function', type(ns.CanOpenUI))
+              return checkFunc(ns.CanOpenUI)
             end,
             ClearPendingActivationEssence = function()
-              assertEquals('function', type(ns.ClearPendingActivationEssence))
+              return checkFunc(ns.ClearPendingActivationEssence)
             end,
             CloseForge = function()
-              assertEquals('function', type(ns.CloseForge))
+              return checkFunc(ns.CloseForge)
             end,
             GetEssenceHyperlink = function()
-              assertEquals('function', type(ns.GetEssenceHyperlink))
+              return checkFunc(ns.GetEssenceHyperlink)
             end,
             GetEssenceInfo = function()
-              assertEquals('function', type(ns.GetEssenceInfo))
+              return checkFunc(ns.GetEssenceInfo)
             end,
             GetEssences = function()
-              assertEquals('function', type(ns.GetEssences))
+              return checkFunc(ns.GetEssences)
             end,
             GetMilestoneEssence = function()
-              assertEquals('function', type(ns.GetMilestoneEssence))
+              return checkFunc(ns.GetMilestoneEssence)
             end,
             GetMilestoneInfo = function()
-              assertEquals('function', type(ns.GetMilestoneInfo))
+              return checkFunc(ns.GetMilestoneInfo)
             end,
             GetMilestoneSpell = function()
-              assertEquals('function', type(ns.GetMilestoneSpell))
+              return checkFunc(ns.GetMilestoneSpell)
             end,
             GetMilestones = function()
-              assertEquals('function', type(ns.GetMilestones))
+              return checkFunc(ns.GetMilestones)
             end,
             GetNumUnlockedEssences = function()
-              assertEquals('function', type(ns.GetNumUnlockedEssences))
+              return checkFunc(ns.GetNumUnlockedEssences)
             end,
             GetNumUsableEssences = function()
-              assertEquals('function', type(ns.GetNumUsableEssences))
+              return checkFunc(ns.GetNumUsableEssences)
             end,
             GetPendingActivationEssence = function()
-              assertEquals('function', type(ns.GetPendingActivationEssence))
+              return checkFunc(ns.GetPendingActivationEssence)
             end,
             HasNeverActivatedAnyEssences = function()
-              assertEquals('function', type(ns.HasNeverActivatedAnyEssences))
+              return checkFunc(ns.HasNeverActivatedAnyEssences)
             end,
             HasPendingActivationEssence = function()
-              assertEquals('function', type(ns.HasPendingActivationEssence))
+              return checkFunc(ns.HasPendingActivationEssence)
             end,
             IsAtForge = function()
-              assertEquals('function', type(ns.IsAtForge))
+              return checkFunc(ns.IsAtForge)
             end,
             SetPendingActivationEssence = function()
-              assertEquals('function', type(ns.SetPendingActivationEssence))
+              return checkFunc(ns.SetPendingActivationEssence)
             end,
             UnlockMilestone = function()
-              assertEquals('function', type(ns.UnlockMilestone))
+              return checkFunc(ns.UnlockMilestone)
             end,
           })
         end,
@@ -918,31 +934,31 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             FindActiveAzeriteItem = function()
-              assertEquals('function', type(ns.FindActiveAzeriteItem))
+              return checkFunc(ns.FindActiveAzeriteItem)
             end,
             GetAzeriteItemXPInfo = function()
-              assertEquals('function', type(ns.GetAzeriteItemXPInfo))
+              return checkFunc(ns.GetAzeriteItemXPInfo)
             end,
             GetPowerLevel = function()
-              assertEquals('function', type(ns.GetPowerLevel))
+              return checkFunc(ns.GetPowerLevel)
             end,
             GetUnlimitedPowerLevel = function()
-              assertEquals('function', type(ns.GetUnlimitedPowerLevel))
+              return checkFunc(ns.GetUnlimitedPowerLevel)
             end,
             HasActiveAzeriteItem = function()
-              assertEquals('function', type(ns.HasActiveAzeriteItem))
+              return checkFunc(ns.HasActiveAzeriteItem)
             end,
             IsAzeriteItem = function()
-              assertEquals('function', type(ns.IsAzeriteItem))
+              return checkFunc(ns.IsAzeriteItem)
             end,
             IsAzeriteItemAtMaxLevel = function()
-              assertEquals('function', type(ns.IsAzeriteItemAtMaxLevel))
+              return checkFunc(ns.IsAzeriteItemAtMaxLevel)
             end,
             IsAzeriteItemByID = function()
-              assertEquals('function', type(ns.IsAzeriteItemByID))
+              return checkFunc(ns.IsAzeriteItemByID)
             end,
             IsAzeriteItemEnabled = function()
-              assertEquals('function', type(ns.IsAzeriteItemEnabled))
+              return checkFunc(ns.IsAzeriteItemEnabled)
             end,
           })
         end,
@@ -956,79 +972,79 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ApplyCustomizationChoices = function()
-              assertEquals('function', type(ns.ApplyCustomizationChoices))
+              return checkFunc(ns.ApplyCustomizationChoices)
             end,
             Cancel = function()
-              assertEquals('function', type(ns.Cancel))
+              return checkFunc(ns.Cancel)
             end,
             ClearPreviewChoices = function()
-              assertEquals('function', type(ns.ClearPreviewChoices))
+              return checkFunc(ns.ClearPreviewChoices)
             end,
             GetAvailableCustomizations = function()
-              assertEquals('function', type(ns.GetAvailableCustomizations))
+              return checkFunc(ns.GetAvailableCustomizations)
             end,
             GetCurrentCameraZoom = function()
-              assertEquals('function', type(ns.GetCurrentCameraZoom))
+              return checkFunc(ns.GetCurrentCameraZoom)
             end,
             GetCurrentCharacterData = function()
-              assertEquals('function', type(ns.GetCurrentCharacterData))
+              return checkFunc(ns.GetCurrentCharacterData)
             end,
             GetCurrentCost = function()
-              assertEquals('function', type(ns.GetCurrentCost))
+              return checkFunc(ns.GetCurrentCost)
             end,
             HasAnyChanges = function()
-              assertEquals('function', type(ns.HasAnyChanges))
+              return checkFunc(ns.HasAnyChanges)
             end,
             IsViewingAlteredForm = function()
-              assertEquals('function', type(ns.IsViewingAlteredForm))
+              return checkFunc(ns.IsViewingAlteredForm)
             end,
             MarkCustomizationChoiceAsSeen = function()
-              assertEquals('function', type(ns.MarkCustomizationChoiceAsSeen))
+              return checkFunc(ns.MarkCustomizationChoiceAsSeen)
             end,
             MarkCustomizationOptionAsSeen = function()
-              assertEquals('function', type(ns.MarkCustomizationOptionAsSeen))
+              return checkFunc(ns.MarkCustomizationOptionAsSeen)
             end,
             PreviewCustomizationChoice = function()
-              assertEquals('function', type(ns.PreviewCustomizationChoice))
+              return checkFunc(ns.PreviewCustomizationChoice)
             end,
             RandomizeCustomizationChoices = function()
-              assertEquals('function', type(ns.RandomizeCustomizationChoices))
+              return checkFunc(ns.RandomizeCustomizationChoices)
             end,
             ResetCameraRotation = function()
-              assertEquals('function', type(ns.ResetCameraRotation))
+              return checkFunc(ns.ResetCameraRotation)
             end,
             ResetCustomizationChoices = function()
-              assertEquals('function', type(ns.ResetCustomizationChoices))
+              return checkFunc(ns.ResetCustomizationChoices)
             end,
             RotateCamera = function()
-              assertEquals('function', type(ns.RotateCamera))
+              return checkFunc(ns.RotateCamera)
             end,
             SaveSeenChoices = function()
-              assertEquals('function', type(ns.SaveSeenChoices))
+              return checkFunc(ns.SaveSeenChoices)
             end,
             SetCameraDistanceOffset = function()
-              assertEquals('function', type(ns.SetCameraDistanceOffset))
+              return checkFunc(ns.SetCameraDistanceOffset)
             end,
             SetCameraZoomLevel = function()
-              assertEquals('function', type(ns.SetCameraZoomLevel))
+              return checkFunc(ns.SetCameraZoomLevel)
             end,
             SetCustomizationChoice = function()
-              assertEquals('function', type(ns.SetCustomizationChoice))
+              return checkFunc(ns.SetCustomizationChoice)
             end,
             SetModelDressState = function()
-              assertEquals('function', type(ns.SetModelDressState))
+              return checkFunc(ns.SetModelDressState)
             end,
             SetSelectedSex = function()
-              assertEquals('function', type(ns.SetSelectedSex))
+              return checkFunc(ns.SetSelectedSex)
             end,
             SetViewingAlteredForm = function()
-              assertEquals('function', type(ns.SetViewingAlteredForm))
+              return checkFunc(ns.SetViewingAlteredForm)
             end,
             SetViewingShapeshiftForm = function()
-              assertEquals('function', type(ns.SetViewingShapeshiftForm))
+              return checkFunc(ns.SetViewingShapeshiftForm)
             end,
             ZoomCamera = function()
-              assertEquals('function', type(ns.ZoomCamera))
+              return checkFunc(ns.ZoomCamera)
             end,
           })
         end,
@@ -1042,25 +1058,25 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetAccountInfoByGUID = function()
-              assertEquals('function', type(ns.GetAccountInfoByGUID))
+              return checkFunc(ns.GetAccountInfoByGUID)
             end,
             GetAccountInfoByID = function()
-              assertEquals('function', type(ns.GetAccountInfoByID))
+              return checkFunc(ns.GetAccountInfoByID)
             end,
             GetFriendAccountInfo = function()
-              assertEquals('function', type(ns.GetFriendAccountInfo))
+              return checkFunc(ns.GetFriendAccountInfo)
             end,
             GetFriendGameAccountInfo = function()
-              assertEquals('function', type(ns.GetFriendGameAccountInfo))
+              return checkFunc(ns.GetFriendGameAccountInfo)
             end,
             GetFriendNumGameAccounts = function()
-              assertEquals('function', type(ns.GetFriendNumGameAccounts))
+              return checkFunc(ns.GetFriendNumGameAccounts)
             end,
             GetGameAccountInfoByGUID = function()
-              assertEquals('function', type(ns.GetGameAccountInfoByGUID))
+              return checkFunc(ns.GetGameAccountInfoByGUID)
             end,
             GetGameAccountInfoByID = function()
-              assertEquals('function', type(ns.GetGameAccountInfoByID))
+              return checkFunc(ns.GetGameAccountInfoByID)
             end,
           })
         end,
@@ -1070,7 +1086,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             SendNotificationReceipt = function()
-              assertEquals('function', type(ns.SendNotificationReceipt))
+              return checkFunc(ns.SendNotificationReceipt)
             end,
           })
         end,
@@ -1084,28 +1100,28 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             Close = function()
-              assertEquals('function', type(ns.Close))
+              return checkFunc(ns.Close)
             end,
             GetHotItem = function()
-              assertEquals('function', type(ns.GetHotItem))
+              return checkFunc(ns.GetHotItem)
             end,
             GetItemInfoByID = function()
-              assertEquals('function', type(ns.GetItemInfoByID))
+              return checkFunc(ns.GetItemInfoByID)
             end,
             GetItemInfoByIndex = function()
-              assertEquals('function', type(ns.GetItemInfoByIndex))
+              return checkFunc(ns.GetItemInfoByIndex)
             end,
             GetNumItems = function()
-              assertEquals('function', type(ns.GetNumItems))
+              return checkFunc(ns.GetNumItems)
             end,
             IsViewOnly = function()
-              assertEquals('function', type(ns.IsViewOnly))
+              return checkFunc(ns.IsViewOnly)
             end,
             ItemPlaceBid = function()
-              assertEquals('function', type(ns.ItemPlaceBid))
+              return checkFunc(ns.ItemPlaceBid)
             end,
             RequestItems = function()
-              assertEquals('function', type(ns.RequestItems))
+              return checkFunc(ns.RequestItems)
             end,
           })
         end,
@@ -1115,28 +1131,28 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetCVar = function()
-              assertEquals('function', type(ns.GetCVar))
+              return checkFunc(ns.GetCVar)
             end,
             GetCVarBitfield = function()
-              assertEquals('function', type(ns.GetCVarBitfield))
+              return checkFunc(ns.GetCVarBitfield)
             end,
             GetCVarBool = function()
-              assertEquals('function', type(ns.GetCVarBool))
+              return checkFunc(ns.GetCVarBool)
             end,
             GetCVarDefault = function()
-              assertEquals('function', type(ns.GetCVarDefault))
+              return checkFunc(ns.GetCVarDefault)
             end,
             RegisterCVar = function()
-              assertEquals('function', type(ns.RegisterCVar))
+              return checkFunc(ns.RegisterCVar)
             end,
             ResetTestCVars = function()
-              assertEquals('function', type(ns.ResetTestCVars))
+              return checkFunc(ns.ResetTestCVars)
             end,
             SetCVar = function()
-              assertEquals('function', type(ns.SetCVar))
+              return checkFunc(ns.SetCVar)
             end,
             SetCVarBitfield = function()
-              assertEquals('function', type(ns.SetCVarBitfield))
+              return checkFunc(ns.SetCVarBitfield)
             end,
           })
         end,
@@ -1146,281 +1162,281 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AddEvent = function()
-              assertEquals('function', type(ns.AddEvent))
+              return checkFunc(ns.AddEvent)
             end,
             AreNamesReady = function()
-              assertEquals('function', type(ns.AreNamesReady))
+              return checkFunc(ns.AreNamesReady)
             end,
             CanAddEvent = function()
-              assertEquals('function', type(ns.CanAddEvent))
+              return checkFunc(ns.CanAddEvent)
             end,
             CanSendInvite = function()
-              assertEquals('function', type(ns.CanSendInvite))
+              return checkFunc(ns.CanSendInvite)
             end,
             CloseEvent = function()
-              assertEquals('function', type(ns.CloseEvent))
+              return checkFunc(ns.CloseEvent)
             end,
             ContextMenuEventCanComplain = function()
-              assertEquals('function', type(ns.ContextMenuEventCanComplain))
+              return checkFunc(ns.ContextMenuEventCanComplain)
             end,
             ContextMenuEventCanEdit = function()
-              assertEquals('function', type(ns.ContextMenuEventCanEdit))
+              return checkFunc(ns.ContextMenuEventCanEdit)
             end,
             ContextMenuEventCanRemove = function()
-              assertEquals('function', type(ns.ContextMenuEventCanRemove))
+              return checkFunc(ns.ContextMenuEventCanRemove)
             end,
             ContextMenuEventClipboard = function()
-              assertEquals('function', type(ns.ContextMenuEventClipboard))
+              return checkFunc(ns.ContextMenuEventClipboard)
             end,
             ContextMenuEventComplain = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ContextMenuEventComplain))
                 return
               end
-              assertEquals('function', type(ns.ContextMenuEventComplain))
+              return checkFunc(ns.ContextMenuEventComplain)
             end,
             ContextMenuEventCopy = function()
-              assertEquals('function', type(ns.ContextMenuEventCopy))
+              return checkFunc(ns.ContextMenuEventCopy)
             end,
             ContextMenuEventGetCalendarType = function()
-              assertEquals('function', type(ns.ContextMenuEventGetCalendarType))
+              return checkFunc(ns.ContextMenuEventGetCalendarType)
             end,
             ContextMenuEventPaste = function()
-              assertEquals('function', type(ns.ContextMenuEventPaste))
+              return checkFunc(ns.ContextMenuEventPaste)
             end,
             ContextMenuEventRemove = function()
-              assertEquals('function', type(ns.ContextMenuEventRemove))
+              return checkFunc(ns.ContextMenuEventRemove)
             end,
             ContextMenuEventSignUp = function()
-              assertEquals('function', type(ns.ContextMenuEventSignUp))
+              return checkFunc(ns.ContextMenuEventSignUp)
             end,
             ContextMenuGetEventIndex = function()
-              assertEquals('function', type(ns.ContextMenuGetEventIndex))
+              return checkFunc(ns.ContextMenuGetEventIndex)
             end,
             ContextMenuInviteAvailable = function()
-              assertEquals('function', type(ns.ContextMenuInviteAvailable))
+              return checkFunc(ns.ContextMenuInviteAvailable)
             end,
             ContextMenuInviteDecline = function()
-              assertEquals('function', type(ns.ContextMenuInviteDecline))
+              return checkFunc(ns.ContextMenuInviteDecline)
             end,
             ContextMenuInviteRemove = function()
-              assertEquals('function', type(ns.ContextMenuInviteRemove))
+              return checkFunc(ns.ContextMenuInviteRemove)
             end,
             ContextMenuInviteTentative = function()
-              assertEquals('function', type(ns.ContextMenuInviteTentative))
+              return checkFunc(ns.ContextMenuInviteTentative)
             end,
             ContextMenuSelectEvent = function()
-              assertEquals('function', type(ns.ContextMenuSelectEvent))
+              return checkFunc(ns.ContextMenuSelectEvent)
             end,
             CreateCommunitySignUpEvent = function()
-              assertEquals('function', type(ns.CreateCommunitySignUpEvent))
+              return checkFunc(ns.CreateCommunitySignUpEvent)
             end,
             CreateGuildAnnouncementEvent = function()
-              assertEquals('function', type(ns.CreateGuildAnnouncementEvent))
+              return checkFunc(ns.CreateGuildAnnouncementEvent)
             end,
             CreateGuildSignUpEvent = function()
-              assertEquals('function', type(ns.CreateGuildSignUpEvent))
+              return checkFunc(ns.CreateGuildSignUpEvent)
             end,
             CreatePlayerEvent = function()
-              assertEquals('function', type(ns.CreatePlayerEvent))
+              return checkFunc(ns.CreatePlayerEvent)
             end,
             EventAvailable = function()
-              assertEquals('function', type(ns.EventAvailable))
+              return checkFunc(ns.EventAvailable)
             end,
             EventCanEdit = function()
-              assertEquals('function', type(ns.EventCanEdit))
+              return checkFunc(ns.EventCanEdit)
             end,
             EventClearAutoApprove = function()
-              assertEquals('function', type(ns.EventClearAutoApprove))
+              return checkFunc(ns.EventClearAutoApprove)
             end,
             EventClearLocked = function()
-              assertEquals('function', type(ns.EventClearLocked))
+              return checkFunc(ns.EventClearLocked)
             end,
             EventClearModerator = function()
-              assertEquals('function', type(ns.EventClearModerator))
+              return checkFunc(ns.EventClearModerator)
             end,
             EventDecline = function()
-              assertEquals('function', type(ns.EventDecline))
+              return checkFunc(ns.EventDecline)
             end,
             EventGetCalendarType = function()
-              assertEquals('function', type(ns.EventGetCalendarType))
+              return checkFunc(ns.EventGetCalendarType)
             end,
             EventGetClubId = function()
-              assertEquals('function', type(ns.EventGetClubId))
+              return checkFunc(ns.EventGetClubId)
             end,
             EventGetInvite = function()
-              assertEquals('function', type(ns.EventGetInvite))
+              return checkFunc(ns.EventGetInvite)
             end,
             EventGetInviteResponseTime = function()
-              assertEquals('function', type(ns.EventGetInviteResponseTime))
+              return checkFunc(ns.EventGetInviteResponseTime)
             end,
             EventGetInviteSortCriterion = function()
-              assertEquals('function', type(ns.EventGetInviteSortCriterion))
+              return checkFunc(ns.EventGetInviteSortCriterion)
             end,
             EventGetSelectedInvite = function()
-              assertEquals('function', type(ns.EventGetSelectedInvite))
+              return checkFunc(ns.EventGetSelectedInvite)
             end,
             EventGetStatusOptions = function()
-              assertEquals('function', type(ns.EventGetStatusOptions))
+              return checkFunc(ns.EventGetStatusOptions)
             end,
             EventGetTextures = function()
-              assertEquals('function', type(ns.EventGetTextures))
+              return checkFunc(ns.EventGetTextures)
             end,
             EventGetTypes = function()
-              assertEquals('function', type(ns.EventGetTypes))
+              return checkFunc(ns.EventGetTypes)
             end,
             EventGetTypesDisplayOrdered = function()
-              assertEquals('function', type(ns.EventGetTypesDisplayOrdered))
+              return checkFunc(ns.EventGetTypesDisplayOrdered)
             end,
             EventHasPendingInvite = function()
-              assertEquals('function', type(ns.EventHasPendingInvite))
+              return checkFunc(ns.EventHasPendingInvite)
             end,
             EventHaveSettingsChanged = function()
-              assertEquals('function', type(ns.EventHaveSettingsChanged))
+              return checkFunc(ns.EventHaveSettingsChanged)
             end,
             EventInvite = function()
-              assertEquals('function', type(ns.EventInvite))
+              return checkFunc(ns.EventInvite)
             end,
             EventRemoveInvite = function()
-              assertEquals('function', type(ns.EventRemoveInvite))
+              return checkFunc(ns.EventRemoveInvite)
             end,
             EventRemoveInviteByGuid = function()
-              assertEquals('function', type(ns.EventRemoveInviteByGuid))
+              return checkFunc(ns.EventRemoveInviteByGuid)
             end,
             EventSelectInvite = function()
-              assertEquals('function', type(ns.EventSelectInvite))
+              return checkFunc(ns.EventSelectInvite)
             end,
             EventSetAutoApprove = function()
-              assertEquals('function', type(ns.EventSetAutoApprove))
+              return checkFunc(ns.EventSetAutoApprove)
             end,
             EventSetClubId = function()
-              assertEquals('function', type(ns.EventSetClubId))
+              return checkFunc(ns.EventSetClubId)
             end,
             EventSetDate = function()
-              assertEquals('function', type(ns.EventSetDate))
+              return checkFunc(ns.EventSetDate)
             end,
             EventSetDescription = function()
-              assertEquals('function', type(ns.EventSetDescription))
+              return checkFunc(ns.EventSetDescription)
             end,
             EventSetInviteStatus = function()
-              assertEquals('function', type(ns.EventSetInviteStatus))
+              return checkFunc(ns.EventSetInviteStatus)
             end,
             EventSetLocked = function()
-              assertEquals('function', type(ns.EventSetLocked))
+              return checkFunc(ns.EventSetLocked)
             end,
             EventSetModerator = function()
-              assertEquals('function', type(ns.EventSetModerator))
+              return checkFunc(ns.EventSetModerator)
             end,
             EventSetTextureID = function()
-              assertEquals('function', type(ns.EventSetTextureID))
+              return checkFunc(ns.EventSetTextureID)
             end,
             EventSetTime = function()
-              assertEquals('function', type(ns.EventSetTime))
+              return checkFunc(ns.EventSetTime)
             end,
             EventSetTitle = function()
-              assertEquals('function', type(ns.EventSetTitle))
+              return checkFunc(ns.EventSetTitle)
             end,
             EventSetType = function()
-              assertEquals('function', type(ns.EventSetType))
+              return checkFunc(ns.EventSetType)
             end,
             EventSignUp = function()
-              assertEquals('function', type(ns.EventSignUp))
+              return checkFunc(ns.EventSignUp)
             end,
             EventSortInvites = function()
-              assertEquals('function', type(ns.EventSortInvites))
+              return checkFunc(ns.EventSortInvites)
             end,
             EventTentative = function()
-              assertEquals('function', type(ns.EventTentative))
+              return checkFunc(ns.EventTentative)
             end,
             GetClubCalendarEvents = function()
-              assertEquals('function', type(ns.GetClubCalendarEvents))
+              return checkFunc(ns.GetClubCalendarEvents)
             end,
             GetDayEvent = function()
-              assertEquals('function', type(ns.GetDayEvent))
+              return checkFunc(ns.GetDayEvent)
             end,
             GetDefaultGuildFilter = function()
-              assertEquals('function', type(ns.GetDefaultGuildFilter))
+              return checkFunc(ns.GetDefaultGuildFilter)
             end,
             GetEventIndex = function()
-              assertEquals('function', type(ns.GetEventIndex))
+              return checkFunc(ns.GetEventIndex)
             end,
             GetEventIndexInfo = function()
-              assertEquals('function', type(ns.GetEventIndexInfo))
+              return checkFunc(ns.GetEventIndexInfo)
             end,
             GetEventInfo = function()
-              assertEquals('function', type(ns.GetEventInfo))
+              return checkFunc(ns.GetEventInfo)
             end,
             GetFirstPendingInvite = function()
-              assertEquals('function', type(ns.GetFirstPendingInvite))
+              return checkFunc(ns.GetFirstPendingInvite)
             end,
             GetGuildEventInfo = function()
-              assertEquals('function', type(ns.GetGuildEventInfo))
+              return checkFunc(ns.GetGuildEventInfo)
             end,
             GetGuildEventSelectionInfo = function()
-              assertEquals('function', type(ns.GetGuildEventSelectionInfo))
+              return checkFunc(ns.GetGuildEventSelectionInfo)
             end,
             GetHolidayInfo = function()
-              assertEquals('function', type(ns.GetHolidayInfo))
+              return checkFunc(ns.GetHolidayInfo)
             end,
             GetMaxCreateDate = function()
-              assertEquals('function', type(ns.GetMaxCreateDate))
+              return checkFunc(ns.GetMaxCreateDate)
             end,
             GetMinDate = function()
-              assertEquals('function', type(ns.GetMinDate))
+              return checkFunc(ns.GetMinDate)
             end,
             GetMonthInfo = function()
-              assertEquals('function', type(ns.GetMonthInfo))
+              return checkFunc(ns.GetMonthInfo)
             end,
             GetNextClubId = function()
-              assertEquals('function', type(ns.GetNextClubId))
+              return checkFunc(ns.GetNextClubId)
             end,
             GetNumDayEvents = function()
-              assertEquals('function', type(ns.GetNumDayEvents))
+              return checkFunc(ns.GetNumDayEvents)
             end,
             GetNumGuildEvents = function()
-              assertEquals('function', type(ns.GetNumGuildEvents))
+              return checkFunc(ns.GetNumGuildEvents)
             end,
             GetNumInvites = function()
-              assertEquals('function', type(ns.GetNumInvites))
+              return checkFunc(ns.GetNumInvites)
             end,
             GetNumPendingInvites = function()
-              assertEquals('function', type(ns.GetNumPendingInvites))
+              return checkFunc(ns.GetNumPendingInvites)
             end,
             GetRaidInfo = function()
-              assertEquals('function', type(ns.GetRaidInfo))
+              return checkFunc(ns.GetRaidInfo)
             end,
             IsActionPending = function()
-              assertEquals('function', type(ns.IsActionPending))
+              return checkFunc(ns.IsActionPending)
             end,
             IsEventOpen = function()
-              assertEquals('function', type(ns.IsEventOpen))
+              return checkFunc(ns.IsEventOpen)
             end,
             MassInviteCommunity = function()
-              assertEquals('function', type(ns.MassInviteCommunity))
+              return checkFunc(ns.MassInviteCommunity)
             end,
             MassInviteGuild = function()
-              assertEquals('function', type(ns.MassInviteGuild))
+              return checkFunc(ns.MassInviteGuild)
             end,
             OpenCalendar = function()
-              assertEquals('function', type(ns.OpenCalendar))
+              return checkFunc(ns.OpenCalendar)
             end,
             OpenEvent = function()
-              assertEquals('function', type(ns.OpenEvent))
+              return checkFunc(ns.OpenEvent)
             end,
             RemoveEvent = function()
-              assertEquals('function', type(ns.RemoveEvent))
+              return checkFunc(ns.RemoveEvent)
             end,
             SetAbsMonth = function()
-              assertEquals('function', type(ns.SetAbsMonth))
+              return checkFunc(ns.SetAbsMonth)
             end,
             SetMonth = function()
-              assertEquals('function', type(ns.SetMonth))
+              return checkFunc(ns.SetMonth)
             end,
             SetNextClubId = function()
-              assertEquals('function', type(ns.SetNextClubId))
+              return checkFunc(ns.SetNextClubId)
             end,
             UpdateEvent = function()
-              assertEquals('function', type(ns.UpdateEvent))
+              return checkFunc(ns.UpdateEvent)
             end,
           })
         end,
@@ -1434,34 +1450,34 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetAvailableCampaigns = function()
-              assertEquals('function', type(ns.GetAvailableCampaigns))
+              return checkFunc(ns.GetAvailableCampaigns)
             end,
             GetCampaignChapterInfo = function()
-              assertEquals('function', type(ns.GetCampaignChapterInfo))
+              return checkFunc(ns.GetCampaignChapterInfo)
             end,
             GetCampaignID = function()
-              assertEquals('function', type(ns.GetCampaignID))
+              return checkFunc(ns.GetCampaignID)
             end,
             GetCampaignInfo = function()
-              assertEquals('function', type(ns.GetCampaignInfo))
+              return checkFunc(ns.GetCampaignInfo)
             end,
             GetChapterIDs = function()
-              assertEquals('function', type(ns.GetChapterIDs))
+              return checkFunc(ns.GetChapterIDs)
             end,
             GetCurrentChapterID = function()
-              assertEquals('function', type(ns.GetCurrentChapterID))
+              return checkFunc(ns.GetCurrentChapterID)
             end,
             GetFailureReason = function()
-              assertEquals('function', type(ns.GetFailureReason))
+              return checkFunc(ns.GetFailureReason)
             end,
             GetState = function()
-              assertEquals('function', type(ns.GetState))
+              return checkFunc(ns.GetState)
             end,
             IsCampaignQuest = function()
-              assertEquals('function', type(ns.IsCampaignQuest))
+              return checkFunc(ns.IsCampaignQuest)
             end,
             UsesNormalQuestIcons = function()
-              assertEquals('function', type(ns.UsesNormalQuestIcons))
+              return checkFunc(ns.UsesNormalQuestIcons)
             end,
           })
         end,
@@ -1475,85 +1491,85 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanUseKeystoneInCurrentMap = function()
-              assertEquals('function', type(ns.CanUseKeystoneInCurrentMap))
+              return checkFunc(ns.CanUseKeystoneInCurrentMap)
             end,
             ClearKeystone = function()
-              assertEquals('function', type(ns.ClearKeystone))
+              return checkFunc(ns.ClearKeystone)
             end,
             CloseKeystoneFrame = function()
-              assertEquals('function', type(ns.CloseKeystoneFrame))
+              return checkFunc(ns.CloseKeystoneFrame)
             end,
             GetActiveChallengeMapID = function()
-              assertEquals('function', type(ns.GetActiveChallengeMapID))
+              return checkFunc(ns.GetActiveChallengeMapID)
             end,
             GetActiveKeystoneInfo = function()
-              assertEquals('function', type(ns.GetActiveKeystoneInfo))
+              return checkFunc(ns.GetActiveKeystoneInfo)
             end,
             GetAffixInfo = function()
-              assertEquals('function', type(ns.GetAffixInfo))
+              return checkFunc(ns.GetAffixInfo)
             end,
             GetCompletionInfo = function()
-              assertEquals('function', type(ns.GetCompletionInfo))
+              return checkFunc(ns.GetCompletionInfo)
             end,
             GetDeathCount = function()
-              assertEquals('function', type(ns.GetDeathCount))
+              return checkFunc(ns.GetDeathCount)
             end,
             GetDungeonScoreRarityColor = function()
-              assertEquals('function', type(ns.GetDungeonScoreRarityColor))
+              return checkFunc(ns.GetDungeonScoreRarityColor)
             end,
             GetGuildLeaders = function()
-              assertEquals('function', type(ns.GetGuildLeaders))
+              return checkFunc(ns.GetGuildLeaders)
             end,
             GetKeystoneLevelRarityColor = function()
-              assertEquals('function', type(ns.GetKeystoneLevelRarityColor))
+              return checkFunc(ns.GetKeystoneLevelRarityColor)
             end,
             GetMapScoreInfo = function()
-              assertEquals('function', type(ns.GetMapScoreInfo))
+              return checkFunc(ns.GetMapScoreInfo)
             end,
             GetMapTable = function()
-              assertEquals('function', type(ns.GetMapTable))
+              return checkFunc(ns.GetMapTable)
             end,
             GetMapUIInfo = function()
-              assertEquals('function', type(ns.GetMapUIInfo))
+              return checkFunc(ns.GetMapUIInfo)
             end,
             GetOverallDungeonScore = function()
-              assertEquals('function', type(ns.GetOverallDungeonScore))
+              return checkFunc(ns.GetOverallDungeonScore)
             end,
             GetPowerLevelDamageHealthMod = function()
-              assertEquals('function', type(ns.GetPowerLevelDamageHealthMod))
+              return checkFunc(ns.GetPowerLevelDamageHealthMod)
             end,
             GetSlottedKeystoneInfo = function()
-              assertEquals('function', type(ns.GetSlottedKeystoneInfo))
+              return checkFunc(ns.GetSlottedKeystoneInfo)
             end,
             GetSpecificDungeonOverallScoreRarityColor = function()
-              assertEquals('function', type(ns.GetSpecificDungeonOverallScoreRarityColor))
+              return checkFunc(ns.GetSpecificDungeonOverallScoreRarityColor)
             end,
             GetSpecificDungeonScoreRarityColor = function()
-              assertEquals('function', type(ns.GetSpecificDungeonScoreRarityColor))
+              return checkFunc(ns.GetSpecificDungeonScoreRarityColor)
             end,
             HasSlottedKeystone = function()
-              assertEquals('function', type(ns.HasSlottedKeystone))
+              return checkFunc(ns.HasSlottedKeystone)
             end,
             IsChallengeModeActive = function()
-              assertEquals('function', type(ns.IsChallengeModeActive))
+              return checkFunc(ns.IsChallengeModeActive)
             end,
             RemoveKeystone = function()
-              assertEquals('function', type(ns.RemoveKeystone))
+              return checkFunc(ns.RemoveKeystone)
             end,
             RequestLeaders = function()
-              assertEquals('function', type(ns.RequestLeaders))
+              return checkFunc(ns.RequestLeaders)
             end,
             Reset = function()
-              assertEquals('function', type(ns.Reset))
+              return checkFunc(ns.Reset)
             end,
             SetKeystoneTooltip = function()
-              assertEquals('function', type(ns.SetKeystoneTooltip))
+              return checkFunc(ns.SetKeystoneTooltip)
             end,
             SlotKeystone = function()
-              assertEquals('function', type(ns.SlotKeystone))
+              return checkFunc(ns.SlotKeystone)
             end,
             StartChallengeMode = function()
-              assertEquals('function', type(ns.StartChallengeMode))
+              return checkFunc(ns.StartChallengeMode)
             end,
           })
         end,
@@ -1567,72 +1583,72 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.AssignPCTDistribution))
                 return
               end
-              assertEquals('function', type(ns.AssignPCTDistribution))
+              return checkFunc(ns.AssignPCTDistribution)
             end,
             AssignPFCDistribution = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.AssignPFCDistribution))
                 return
               end
-              assertEquals('function', type(ns.AssignPFCDistribution))
+              return checkFunc(ns.AssignPFCDistribution)
             end,
             AssignUpgradeDistribution = function()
-              assertEquals('function', type(ns.AssignUpgradeDistribution))
+              return checkFunc(ns.AssignUpgradeDistribution)
             end,
             GetActiveCharacterUpgradeBoostType = function()
-              assertEquals('function', type(ns.GetActiveCharacterUpgradeBoostType))
+              return checkFunc(ns.GetActiveCharacterUpgradeBoostType)
             end,
             GetActiveClassTrialBoostType = function()
-              assertEquals('function', type(ns.GetActiveClassTrialBoostType))
+              return checkFunc(ns.GetActiveClassTrialBoostType)
             end,
             GetAutomaticBoost = function()
-              assertEquals('function', type(ns.GetAutomaticBoost))
+              return checkFunc(ns.GetAutomaticBoost)
             end,
             GetAutomaticBoostCharacter = function()
-              assertEquals('function', type(ns.GetAutomaticBoostCharacter))
+              return checkFunc(ns.GetAutomaticBoostCharacter)
             end,
             GetCharacterServiceDisplayData = function()
-              assertEquals('function', type(ns.GetCharacterServiceDisplayData))
+              return checkFunc(ns.GetCharacterServiceDisplayData)
             end,
             GetCharacterServiceDisplayDataByVASType = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCharacterServiceDisplayDataByVASType))
                 return
               end
-              assertEquals('function', type(ns.GetCharacterServiceDisplayDataByVASType))
+              return checkFunc(ns.GetCharacterServiceDisplayDataByVASType)
             end,
             GetCharacterServiceDisplayInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCharacterServiceDisplayInfo))
                 return
               end
-              assertEquals('function', type(ns.GetCharacterServiceDisplayInfo))
+              return checkFunc(ns.GetCharacterServiceDisplayInfo)
             end,
             GetCharacterServiceDisplayOrder = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCharacterServiceDisplayOrder))
                 return
               end
-              assertEquals('function', type(ns.GetCharacterServiceDisplayOrder))
+              return checkFunc(ns.GetCharacterServiceDisplayOrder)
             end,
             GetVASDistributions = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetVASDistributions))
                 return
               end
-              assertEquals('function', type(ns.GetVASDistributions))
+              return checkFunc(ns.GetVASDistributions)
             end,
             HasRequiredBoostForClassTrial = function()
-              assertEquals('function', type(ns.HasRequiredBoostForClassTrial))
+              return checkFunc(ns.HasRequiredBoostForClassTrial)
             end,
             HasRequiredBoostForUnrevoke = function()
-              assertEquals('function', type(ns.HasRequiredBoostForUnrevoke))
+              return checkFunc(ns.HasRequiredBoostForUnrevoke)
             end,
             SetAutomaticBoost = function()
-              assertEquals('function', type(ns.SetAutomaticBoost))
+              return checkFunc(ns.SetAutomaticBoost)
             end,
             SetAutomaticBoostCharacter = function()
-              assertEquals('function', type(ns.SetAutomaticBoostCharacter))
+              return checkFunc(ns.SetAutomaticBoostCharacter)
             end,
           })
         end,
@@ -1642,7 +1658,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ShouldSeeControlPopup = function()
-              assertEquals('function', type(ns.ShouldSeeControlPopup))
+              return checkFunc(ns.ShouldSeeControlPopup)
             end,
           })
         end,
@@ -1652,7 +1668,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetAllChatBubbles = function()
-              assertEquals('function', type(ns.GetAllChatBubbles))
+              return checkFunc(ns.GetAllChatBubbles)
             end,
           })
         end,
@@ -1666,147 +1682,147 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.CanReportPlayer))
                 return
               end
-              assertEquals('function', type(ns.CanReportPlayer))
+              return checkFunc(ns.CanReportPlayer)
             end,
             GetChannelInfoFromIdentifier = function()
-              assertEquals('function', type(ns.GetChannelInfoFromIdentifier))
+              return checkFunc(ns.GetChannelInfoFromIdentifier)
             end,
             GetChannelRosterInfo = function()
-              assertEquals('function', type(ns.GetChannelRosterInfo))
+              return checkFunc(ns.GetChannelRosterInfo)
             end,
             GetChannelRuleset = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetChannelRuleset))
                 return
               end
-              assertEquals('function', type(ns.GetChannelRuleset))
+              return checkFunc(ns.GetChannelRuleset)
             end,
             GetChannelRulesetForChannelID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetChannelRulesetForChannelID))
                 return
               end
-              assertEquals('function', type(ns.GetChannelRulesetForChannelID))
+              return checkFunc(ns.GetChannelRulesetForChannelID)
             end,
             GetChannelShortcut = function()
-              assertEquals('function', type(ns.GetChannelShortcut))
+              return checkFunc(ns.GetChannelShortcut)
             end,
             GetChannelShortcutForChannelID = function()
-              assertEquals('function', type(ns.GetChannelShortcutForChannelID))
+              return checkFunc(ns.GetChannelShortcutForChannelID)
             end,
             GetChatTypeName = function()
-              assertEquals('function', type(ns.GetChatTypeName))
+              return checkFunc(ns.GetChatTypeName)
             end,
             GetClubStreamIDs = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetClubStreamIDs))
                 return
               end
-              assertEquals('function', type(ns.GetClubStreamIDs))
+              return checkFunc(ns.GetClubStreamIDs)
             end,
             GetGeneralChannelID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetGeneralChannelID))
                 return
               end
-              assertEquals('function', type(ns.GetGeneralChannelID))
+              return checkFunc(ns.GetGeneralChannelID)
             end,
             GetGeneralChannelLocalID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetGeneralChannelLocalID))
                 return
               end
-              assertEquals('function', type(ns.GetGeneralChannelLocalID))
+              return checkFunc(ns.GetGeneralChannelLocalID)
             end,
             GetMentorChannelID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetMentorChannelID))
                 return
               end
-              assertEquals('function', type(ns.GetMentorChannelID))
+              return checkFunc(ns.GetMentorChannelID)
             end,
             GetNumActiveChannels = function()
-              assertEquals('function', type(ns.GetNumActiveChannels))
+              return checkFunc(ns.GetNumActiveChannels)
             end,
             GetNumReservedChatWindows = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumReservedChatWindows))
                 return
               end
-              assertEquals('function', type(ns.GetNumReservedChatWindows))
+              return checkFunc(ns.GetNumReservedChatWindows)
             end,
             GetRegisteredAddonMessagePrefixes = function()
-              assertEquals('function', type(ns.GetRegisteredAddonMessagePrefixes))
+              return checkFunc(ns.GetRegisteredAddonMessagePrefixes)
             end,
             IsAddonMessagePrefixRegistered = function()
-              assertEquals('function', type(ns.IsAddonMessagePrefixRegistered))
+              return checkFunc(ns.IsAddonMessagePrefixRegistered)
             end,
             IsChannelRegional = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsChannelRegional))
                 return
               end
-              assertEquals('function', type(ns.IsChannelRegional))
+              return checkFunc(ns.IsChannelRegional)
             end,
             IsChannelRegionalForChannelID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsChannelRegionalForChannelID))
                 return
               end
-              assertEquals('function', type(ns.IsChannelRegionalForChannelID))
+              return checkFunc(ns.IsChannelRegionalForChannelID)
             end,
             IsPartyChannelType = function()
-              assertEquals('function', type(ns.IsPartyChannelType))
+              return checkFunc(ns.IsPartyChannelType)
             end,
             IsRegionalServiceAvailable = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsRegionalServiceAvailable))
                 return
               end
-              assertEquals('function', type(ns.IsRegionalServiceAvailable))
+              return checkFunc(ns.IsRegionalServiceAvailable)
             end,
             IsValidChatLine = function()
-              assertEquals('function', type(ns.IsValidChatLine))
+              return checkFunc(ns.IsValidChatLine)
             end,
             RegisterAddonMessagePrefix = function()
-              assertEquals('function', type(ns.RegisterAddonMessagePrefix))
+              return checkFunc(ns.RegisterAddonMessagePrefix)
             end,
             ReplaceIconAndGroupExpressions = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ReplaceIconAndGroupExpressions))
                 return
               end
-              assertEquals('function', type(ns.ReplaceIconAndGroupExpressions))
+              return checkFunc(ns.ReplaceIconAndGroupExpressions)
             end,
             ReportPlayer = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ReportPlayer))
                 return
               end
-              assertEquals('function', type(ns.ReportPlayer))
+              return checkFunc(ns.ReportPlayer)
             end,
             ReportServerLag = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ReportServerLag))
                 return
               end
-              assertEquals('function', type(ns.ReportServerLag))
+              return checkFunc(ns.ReportServerLag)
             end,
             ResetDefaultZoneChannels = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ResetDefaultZoneChannels))
                 return
               end
-              assertEquals('function', type(ns.ResetDefaultZoneChannels))
+              return checkFunc(ns.ResetDefaultZoneChannels)
             end,
             SendAddonMessage = function()
-              assertEquals('function', type(ns.SendAddonMessage))
+              return checkFunc(ns.SendAddonMessage)
             end,
             SendAddonMessageLogged = function()
-              assertEquals('function', type(ns.SendAddonMessageLogged))
+              return checkFunc(ns.SendAddonMessageLogged)
             end,
             SwapChatChannelsByChannelIndex = function()
-              assertEquals('function', type(ns.SwapChatChannelsByChannelIndex))
+              return checkFunc(ns.SwapChatChannelsByChannelIndex)
             end,
           })
         end,
@@ -1820,16 +1836,16 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CloseUI = function()
-              assertEquals('function', type(ns.CloseUI))
+              return checkFunc(ns.CloseUI)
             end,
             GetChromieTimeExpansionOption = function()
-              assertEquals('function', type(ns.GetChromieTimeExpansionOption))
+              return checkFunc(ns.GetChromieTimeExpansionOption)
             end,
             GetChromieTimeExpansionOptions = function()
-              assertEquals('function', type(ns.GetChromieTimeExpansionOptions))
+              return checkFunc(ns.GetChromieTimeExpansionOptions)
             end,
             SelectChromieTimeOption = function()
-              assertEquals('function', type(ns.SelectChromieTimeOption))
+              return checkFunc(ns.SelectChromieTimeOption)
             end,
           })
         end,
@@ -1843,7 +1859,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetClassColor = function()
-              assertEquals('function', type(ns.GetClassColor))
+              return checkFunc(ns.GetClassColor)
             end,
           })
         end,
@@ -1857,10 +1873,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetClassTrialLogoutTimeSeconds = function()
-              assertEquals('function', type(ns.GetClassTrialLogoutTimeSeconds))
+              return checkFunc(ns.GetClassTrialLogoutTimeSeconds)
             end,
             IsClassTrialCharacter = function()
-              assertEquals('function', type(ns.IsClassTrialCharacter))
+              return checkFunc(ns.IsClassTrialCharacter)
             end,
           })
         end,
@@ -1874,37 +1890,37 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanSpellBeClickBound = function()
-              assertEquals('function', type(ns.CanSpellBeClickBound))
+              return checkFunc(ns.CanSpellBeClickBound)
             end,
             ExecuteBinding = function()
-              assertEquals('function', type(ns.ExecuteBinding))
+              return checkFunc(ns.ExecuteBinding)
             end,
             GetBindingType = function()
-              assertEquals('function', type(ns.GetBindingType))
+              return checkFunc(ns.GetBindingType)
             end,
             GetEffectiveInteractionButton = function()
-              assertEquals('function', type(ns.GetEffectiveInteractionButton))
+              return checkFunc(ns.GetEffectiveInteractionButton)
             end,
             GetProfileInfo = function()
-              assertEquals('function', type(ns.GetProfileInfo))
+              return checkFunc(ns.GetProfileInfo)
             end,
             GetStringFromModifiers = function()
-              assertEquals('function', type(ns.GetStringFromModifiers))
+              return checkFunc(ns.GetStringFromModifiers)
             end,
             GetTutorialShown = function()
-              assertEquals('function', type(ns.GetTutorialShown))
+              return checkFunc(ns.GetTutorialShown)
             end,
             MakeModifiers = function()
-              assertEquals('function', type(ns.MakeModifiers))
+              return checkFunc(ns.MakeModifiers)
             end,
             ResetCurrentProfile = function()
-              assertEquals('function', type(ns.ResetCurrentProfile))
+              return checkFunc(ns.ResetCurrentProfile)
             end,
             SetProfileByInfo = function()
-              assertEquals('function', type(ns.SetProfileByInfo))
+              return checkFunc(ns.SetProfileByInfo)
             end,
             SetTutorialShown = function()
-              assertEquals('function', type(ns.SetTutorialShown))
+              return checkFunc(ns.SetTutorialShown)
             end,
           })
         end,
@@ -1914,269 +1930,269 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AcceptInvitation = function()
-              assertEquals('function', type(ns.AcceptInvitation))
+              return checkFunc(ns.AcceptInvitation)
             end,
             AddClubStreamChatChannel = function()
-              assertEquals('function', type(ns.AddClubStreamChatChannel))
+              return checkFunc(ns.AddClubStreamChatChannel)
             end,
             AdvanceStreamViewMarker = function()
-              assertEquals('function', type(ns.AdvanceStreamViewMarker))
+              return checkFunc(ns.AdvanceStreamViewMarker)
             end,
             AssignMemberRole = function()
-              assertEquals('function', type(ns.AssignMemberRole))
+              return checkFunc(ns.AssignMemberRole)
             end,
             CanResolvePlayerLocationFromClubMessageData = function()
-              assertEquals('function', type(ns.CanResolvePlayerLocationFromClubMessageData))
+              return checkFunc(ns.CanResolvePlayerLocationFromClubMessageData)
             end,
             ClearAutoAdvanceStreamViewMarker = function()
-              assertEquals('function', type(ns.ClearAutoAdvanceStreamViewMarker))
+              return checkFunc(ns.ClearAutoAdvanceStreamViewMarker)
             end,
             ClearClubPresenceSubscription = function()
-              assertEquals('function', type(ns.ClearClubPresenceSubscription))
+              return checkFunc(ns.ClearClubPresenceSubscription)
             end,
             CompareBattleNetDisplayName = function()
-              assertEquals('function', type(ns.CompareBattleNetDisplayName))
+              return checkFunc(ns.CompareBattleNetDisplayName)
             end,
             CreateClub = function()
-              assertEquals('function', type(ns.CreateClub))
+              return checkFunc(ns.CreateClub)
             end,
             CreateStream = function()
-              assertEquals('function', type(ns.CreateStream))
+              return checkFunc(ns.CreateStream)
             end,
             CreateTicket = function()
-              assertEquals('function', type(ns.CreateTicket))
+              return checkFunc(ns.CreateTicket)
             end,
             DeclineInvitation = function()
-              assertEquals('function', type(ns.DeclineInvitation))
+              return checkFunc(ns.DeclineInvitation)
             end,
             DestroyClub = function()
-              assertEquals('function', type(ns.DestroyClub))
+              return checkFunc(ns.DestroyClub)
             end,
             DestroyMessage = function()
-              assertEquals('function', type(ns.DestroyMessage))
+              return checkFunc(ns.DestroyMessage)
             end,
             DestroyStream = function()
-              assertEquals('function', type(ns.DestroyStream))
+              return checkFunc(ns.DestroyStream)
             end,
             DestroyTicket = function()
-              assertEquals('function', type(ns.DestroyTicket))
+              return checkFunc(ns.DestroyTicket)
             end,
             DoesCommunityHaveMembersOfTheOppositeFaction = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.DoesCommunityHaveMembersOfTheOppositeFaction))
                 return
               end
-              assertEquals('function', type(ns.DoesCommunityHaveMembersOfTheOppositeFaction))
+              return checkFunc(ns.DoesCommunityHaveMembersOfTheOppositeFaction)
             end,
             EditClub = function()
-              assertEquals('function', type(ns.EditClub))
+              return checkFunc(ns.EditClub)
             end,
             EditMessage = function()
-              assertEquals('function', type(ns.EditMessage))
+              return checkFunc(ns.EditMessage)
             end,
             EditStream = function()
-              assertEquals('function', type(ns.EditStream))
+              return checkFunc(ns.EditStream)
             end,
             Flush = function()
-              assertEquals('function', type(ns.Flush))
+              return checkFunc(ns.Flush)
             end,
             FocusCommunityStreams = function()
-              assertEquals('function', type(ns.FocusCommunityStreams))
+              return checkFunc(ns.FocusCommunityStreams)
             end,
             FocusStream = function()
-              assertEquals('function', type(ns.FocusStream))
+              return checkFunc(ns.FocusStream)
             end,
             GetAssignableRoles = function()
-              assertEquals('function', type(ns.GetAssignableRoles))
+              return checkFunc(ns.GetAssignableRoles)
             end,
             GetAvatarIdList = function()
-              assertEquals('function', type(ns.GetAvatarIdList))
+              return checkFunc(ns.GetAvatarIdList)
             end,
             GetClubCapacity = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetClubCapacity))
                 return
               end
-              assertEquals('function', type(ns.GetClubCapacity))
+              return checkFunc(ns.GetClubCapacity)
             end,
             GetClubInfo = function()
-              assertEquals('function', type(ns.GetClubInfo))
+              return checkFunc(ns.GetClubInfo)
             end,
             GetClubLimits = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetClubLimits))
                 return
               end
-              assertEquals('function', type(ns.GetClubLimits))
+              return checkFunc(ns.GetClubLimits)
             end,
             GetClubMembers = function()
-              assertEquals('function', type(ns.GetClubMembers))
+              return checkFunc(ns.GetClubMembers)
             end,
             GetClubPrivileges = function()
-              assertEquals('function', type(ns.GetClubPrivileges))
+              return checkFunc(ns.GetClubPrivileges)
             end,
             GetClubStreamNotificationSettings = function()
-              assertEquals('function', type(ns.GetClubStreamNotificationSettings))
+              return checkFunc(ns.GetClubStreamNotificationSettings)
             end,
             GetCommunityNameResultText = function()
-              assertEquals('function', type(ns.GetCommunityNameResultText))
+              return checkFunc(ns.GetCommunityNameResultText)
             end,
             GetGuildClubId = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetGuildClubId))
                 return
               end
-              assertEquals('function', type(ns.GetGuildClubId))
+              return checkFunc(ns.GetGuildClubId)
             end,
             GetInfoFromLastCommunityChatLine = function()
-              assertEquals('function', type(ns.GetInfoFromLastCommunityChatLine))
+              return checkFunc(ns.GetInfoFromLastCommunityChatLine)
             end,
             GetInvitationCandidates = function()
-              assertEquals('function', type(ns.GetInvitationCandidates))
+              return checkFunc(ns.GetInvitationCandidates)
             end,
             GetInvitationInfo = function()
-              assertEquals('function', type(ns.GetInvitationInfo))
+              return checkFunc(ns.GetInvitationInfo)
             end,
             GetInvitationsForClub = function()
-              assertEquals('function', type(ns.GetInvitationsForClub))
+              return checkFunc(ns.GetInvitationsForClub)
             end,
             GetInvitationsForSelf = function()
-              assertEquals('function', type(ns.GetInvitationsForSelf))
+              return checkFunc(ns.GetInvitationsForSelf)
             end,
             GetLastTicketResponse = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetLastTicketResponse))
                 return
               end
-              assertEquals('function', type(ns.GetLastTicketResponse))
+              return checkFunc(ns.GetLastTicketResponse)
             end,
             GetMemberInfo = function()
-              assertEquals('function', type(ns.GetMemberInfo))
+              return checkFunc(ns.GetMemberInfo)
             end,
             GetMemberInfoForSelf = function()
-              assertEquals('function', type(ns.GetMemberInfoForSelf))
+              return checkFunc(ns.GetMemberInfoForSelf)
             end,
             GetMessageInfo = function()
-              assertEquals('function', type(ns.GetMessageInfo))
+              return checkFunc(ns.GetMessageInfo)
             end,
             GetMessageRanges = function()
-              assertEquals('function', type(ns.GetMessageRanges))
+              return checkFunc(ns.GetMessageRanges)
             end,
             GetMessagesBefore = function()
-              assertEquals('function', type(ns.GetMessagesBefore))
+              return checkFunc(ns.GetMessagesBefore)
             end,
             GetMessagesInRange = function()
-              assertEquals('function', type(ns.GetMessagesInRange))
+              return checkFunc(ns.GetMessagesInRange)
             end,
             GetStreamInfo = function()
-              assertEquals('function', type(ns.GetStreamInfo))
+              return checkFunc(ns.GetStreamInfo)
             end,
             GetStreamViewMarker = function()
-              assertEquals('function', type(ns.GetStreamViewMarker))
+              return checkFunc(ns.GetStreamViewMarker)
             end,
             GetStreams = function()
-              assertEquals('function', type(ns.GetStreams))
+              return checkFunc(ns.GetStreams)
             end,
             GetSubscribedClubs = function()
-              assertEquals('function', type(ns.GetSubscribedClubs))
+              return checkFunc(ns.GetSubscribedClubs)
             end,
             GetTickets = function()
-              assertEquals('function', type(ns.GetTickets))
+              return checkFunc(ns.GetTickets)
             end,
             IsAccountMuted = function()
-              assertEquals('function', type(ns.IsAccountMuted))
+              return checkFunc(ns.IsAccountMuted)
             end,
             IsBeginningOfStream = function()
-              assertEquals('function', type(ns.IsBeginningOfStream))
+              return checkFunc(ns.IsBeginningOfStream)
             end,
             IsEnabled = function()
-              assertEquals('function', type(ns.IsEnabled))
+              return checkFunc(ns.IsEnabled)
             end,
             IsRestricted = function()
-              assertEquals('function', type(ns.IsRestricted))
+              return checkFunc(ns.IsRestricted)
             end,
             IsSubscribedToStream = function()
-              assertEquals('function', type(ns.IsSubscribedToStream))
+              return checkFunc(ns.IsSubscribedToStream)
             end,
             KickMember = function()
-              assertEquals('function', type(ns.KickMember))
+              return checkFunc(ns.KickMember)
             end,
             LeaveClub = function()
-              assertEquals('function', type(ns.LeaveClub))
+              return checkFunc(ns.LeaveClub)
             end,
             RedeemTicket = function()
-              assertEquals('function', type(ns.RedeemTicket))
+              return checkFunc(ns.RedeemTicket)
             end,
             RequestInvitationsForClub = function()
-              assertEquals('function', type(ns.RequestInvitationsForClub))
+              return checkFunc(ns.RequestInvitationsForClub)
             end,
             RequestMoreMessagesBefore = function()
-              assertEquals('function', type(ns.RequestMoreMessagesBefore))
+              return checkFunc(ns.RequestMoreMessagesBefore)
             end,
             RequestTicket = function()
-              assertEquals('function', type(ns.RequestTicket))
+              return checkFunc(ns.RequestTicket)
             end,
             RequestTickets = function()
-              assertEquals('function', type(ns.RequestTickets))
+              return checkFunc(ns.RequestTickets)
             end,
             RevokeInvitation = function()
-              assertEquals('function', type(ns.RevokeInvitation))
+              return checkFunc(ns.RevokeInvitation)
             end,
             SendBattleTagFriendRequest = function()
-              assertEquals('function', type(ns.SendBattleTagFriendRequest))
+              return checkFunc(ns.SendBattleTagFriendRequest)
             end,
             SendCharacterInvitation = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SendCharacterInvitation))
                 return
               end
-              assertEquals('function', type(ns.SendCharacterInvitation))
+              return checkFunc(ns.SendCharacterInvitation)
             end,
             SendInvitation = function()
-              assertEquals('function', type(ns.SendInvitation))
+              return checkFunc(ns.SendInvitation)
             end,
             SendMessage = function()
-              assertEquals('function', type(ns.SendMessage))
+              return checkFunc(ns.SendMessage)
             end,
             SetAutoAdvanceStreamViewMarker = function()
-              assertEquals('function', type(ns.SetAutoAdvanceStreamViewMarker))
+              return checkFunc(ns.SetAutoAdvanceStreamViewMarker)
             end,
             SetAvatarTexture = function()
-              assertEquals('function', type(ns.SetAvatarTexture))
+              return checkFunc(ns.SetAvatarTexture)
             end,
             SetClubMemberNote = function()
-              assertEquals('function', type(ns.SetClubMemberNote))
+              return checkFunc(ns.SetClubMemberNote)
             end,
             SetClubPresenceSubscription = function()
-              assertEquals('function', type(ns.SetClubPresenceSubscription))
+              return checkFunc(ns.SetClubPresenceSubscription)
             end,
             SetClubStreamNotificationSettings = function()
-              assertEquals('function', type(ns.SetClubStreamNotificationSettings))
+              return checkFunc(ns.SetClubStreamNotificationSettings)
             end,
             SetCommunityID = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetCommunityID))
                 return
               end
-              assertEquals('function', type(ns.SetCommunityID))
+              return checkFunc(ns.SetCommunityID)
             end,
             SetFavorite = function()
-              assertEquals('function', type(ns.SetFavorite))
+              return checkFunc(ns.SetFavorite)
             end,
             SetSocialQueueingEnabled = function()
-              assertEquals('function', type(ns.SetSocialQueueingEnabled))
+              return checkFunc(ns.SetSocialQueueingEnabled)
             end,
             ShouldAllowClubType = function()
-              assertEquals('function', type(ns.ShouldAllowClubType))
+              return checkFunc(ns.ShouldAllowClubType)
             end,
             UnfocusAllStreams = function()
-              assertEquals('function', type(ns.UnfocusAllStreams))
+              return checkFunc(ns.UnfocusAllStreams)
             end,
             UnfocusStream = function()
-              assertEquals('function', type(ns.UnfocusStream))
+              return checkFunc(ns.UnfocusStream)
             end,
             ValidateText = function()
-              assertEquals('function', type(ns.ValidateText))
+              return checkFunc(ns.ValidateText)
             end,
           })
         end,
@@ -2190,163 +2206,163 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ApplicantAcceptClubInvite = function()
-              assertEquals('function', type(ns.ApplicantAcceptClubInvite))
+              return checkFunc(ns.ApplicantAcceptClubInvite)
             end,
             ApplicantDeclineClubInvite = function()
-              assertEquals('function', type(ns.ApplicantDeclineClubInvite))
+              return checkFunc(ns.ApplicantDeclineClubInvite)
             end,
             CancelMembershipRequest = function()
-              assertEquals('function', type(ns.CancelMembershipRequest))
+              return checkFunc(ns.CancelMembershipRequest)
             end,
             CheckAllPlayerApplicantSettings = function()
-              assertEquals('function', type(ns.CheckAllPlayerApplicantSettings))
+              return checkFunc(ns.CheckAllPlayerApplicantSettings)
             end,
             ClearAllFinderCache = function()
-              assertEquals('function', type(ns.ClearAllFinderCache))
+              return checkFunc(ns.ClearAllFinderCache)
             end,
             ClearClubApplicantsCache = function()
-              assertEquals('function', type(ns.ClearClubApplicantsCache))
+              return checkFunc(ns.ClearClubApplicantsCache)
             end,
             ClearClubFinderPostingsCache = function()
-              assertEquals('function', type(ns.ClearClubFinderPostingsCache))
+              return checkFunc(ns.ClearClubFinderPostingsCache)
             end,
             DoesPlayerBelongToClubFromClubGUID = function()
-              assertEquals('function', type(ns.DoesPlayerBelongToClubFromClubGUID))
+              return checkFunc(ns.DoesPlayerBelongToClubFromClubGUID)
             end,
             GetClubFinderDisableReason = function()
-              assertEquals('function', type(ns.GetClubFinderDisableReason))
+              return checkFunc(ns.GetClubFinderDisableReason)
             end,
             GetClubRecruitmentSettings = function()
-              assertEquals('function', type(ns.GetClubRecruitmentSettings))
+              return checkFunc(ns.GetClubRecruitmentSettings)
             end,
             GetClubTypeFromFinderGUID = function()
-              assertEquals('function', type(ns.GetClubTypeFromFinderGUID))
+              return checkFunc(ns.GetClubTypeFromFinderGUID)
             end,
             GetFocusIndexFromFlag = function()
-              assertEquals('function', type(ns.GetFocusIndexFromFlag))
+              return checkFunc(ns.GetFocusIndexFromFlag)
             end,
             GetPlayerApplicantLocaleFlags = function()
-              assertEquals('function', type(ns.GetPlayerApplicantLocaleFlags))
+              return checkFunc(ns.GetPlayerApplicantLocaleFlags)
             end,
             GetPlayerApplicantSettings = function()
-              assertEquals('function', type(ns.GetPlayerApplicantSettings))
+              return checkFunc(ns.GetPlayerApplicantSettings)
             end,
             GetPlayerClubApplicationStatus = function()
-              assertEquals('function', type(ns.GetPlayerClubApplicationStatus))
+              return checkFunc(ns.GetPlayerClubApplicationStatus)
             end,
             GetPlayerSettingsFocusFlagsSelectedCount = function()
-              assertEquals('function', type(ns.GetPlayerSettingsFocusFlagsSelectedCount))
+              return checkFunc(ns.GetPlayerSettingsFocusFlagsSelectedCount)
             end,
             GetPostingIDFromClubFinderGUID = function()
-              assertEquals('function', type(ns.GetPostingIDFromClubFinderGUID))
+              return checkFunc(ns.GetPostingIDFromClubFinderGUID)
             end,
             GetRecruitingClubInfoFromClubID = function()
-              assertEquals('function', type(ns.GetRecruitingClubInfoFromClubID))
+              return checkFunc(ns.GetRecruitingClubInfoFromClubID)
             end,
             GetRecruitingClubInfoFromFinderGUID = function()
-              assertEquals('function', type(ns.GetRecruitingClubInfoFromFinderGUID))
+              return checkFunc(ns.GetRecruitingClubInfoFromFinderGUID)
             end,
             GetStatusOfPostingFromClubId = function()
-              assertEquals('function', type(ns.GetStatusOfPostingFromClubId))
+              return checkFunc(ns.GetStatusOfPostingFromClubId)
             end,
             GetTotalMatchingCommunityListSize = function()
-              assertEquals('function', type(ns.GetTotalMatchingCommunityListSize))
+              return checkFunc(ns.GetTotalMatchingCommunityListSize)
             end,
             GetTotalMatchingGuildListSize = function()
-              assertEquals('function', type(ns.GetTotalMatchingGuildListSize))
+              return checkFunc(ns.GetTotalMatchingGuildListSize)
             end,
             HasAlreadyAppliedToLinkedPosting = function()
-              assertEquals('function', type(ns.HasAlreadyAppliedToLinkedPosting))
+              return checkFunc(ns.HasAlreadyAppliedToLinkedPosting)
             end,
             HasPostingBeenDelisted = function()
-              assertEquals('function', type(ns.HasPostingBeenDelisted))
+              return checkFunc(ns.HasPostingBeenDelisted)
             end,
             IsEnabled = function()
-              assertEquals('function', type(ns.IsEnabled))
+              return checkFunc(ns.IsEnabled)
             end,
             IsListingEnabledFromFlags = function()
-              assertEquals('function', type(ns.IsListingEnabledFromFlags))
+              return checkFunc(ns.IsListingEnabledFromFlags)
             end,
             IsPostingBanned = function()
-              assertEquals('function', type(ns.IsPostingBanned))
+              return checkFunc(ns.IsPostingBanned)
             end,
             LookupClubPostingFromClubFinderGUID = function()
-              assertEquals('function', type(ns.LookupClubPostingFromClubFinderGUID))
+              return checkFunc(ns.LookupClubPostingFromClubFinderGUID)
             end,
             PlayerGetClubInvitationList = function()
-              assertEquals('function', type(ns.PlayerGetClubInvitationList))
+              return checkFunc(ns.PlayerGetClubInvitationList)
             end,
             PlayerRequestPendingClubsList = function()
-              assertEquals('function', type(ns.PlayerRequestPendingClubsList))
+              return checkFunc(ns.PlayerRequestPendingClubsList)
             end,
             PlayerReturnPendingCommunitiesList = function()
-              assertEquals('function', type(ns.PlayerReturnPendingCommunitiesList))
+              return checkFunc(ns.PlayerReturnPendingCommunitiesList)
             end,
             PlayerReturnPendingGuildsList = function()
-              assertEquals('function', type(ns.PlayerReturnPendingGuildsList))
+              return checkFunc(ns.PlayerReturnPendingGuildsList)
             end,
             PostClub = function()
-              assertEquals('function', type(ns.PostClub))
+              return checkFunc(ns.PostClub)
             end,
             RequestApplicantList = function()
-              assertEquals('function', type(ns.RequestApplicantList))
+              return checkFunc(ns.RequestApplicantList)
             end,
             RequestClubsList = function()
-              assertEquals('function', type(ns.RequestClubsList))
+              return checkFunc(ns.RequestClubsList)
             end,
             RequestMembershipToClub = function()
-              assertEquals('function', type(ns.RequestMembershipToClub))
+              return checkFunc(ns.RequestMembershipToClub)
             end,
             RequestNextCommunityPage = function()
-              assertEquals('function', type(ns.RequestNextCommunityPage))
+              return checkFunc(ns.RequestNextCommunityPage)
             end,
             RequestNextGuildPage = function()
-              assertEquals('function', type(ns.RequestNextGuildPage))
+              return checkFunc(ns.RequestNextGuildPage)
             end,
             RequestPostingInformationFromClubId = function()
-              assertEquals('function', type(ns.RequestPostingInformationFromClubId))
+              return checkFunc(ns.RequestPostingInformationFromClubId)
             end,
             RequestSubscribedClubPostingIDs = function()
-              assertEquals('function', type(ns.RequestSubscribedClubPostingIDs))
+              return checkFunc(ns.RequestSubscribedClubPostingIDs)
             end,
             ResetClubPostingMapCache = function()
-              assertEquals('function', type(ns.ResetClubPostingMapCache))
+              return checkFunc(ns.ResetClubPostingMapCache)
             end,
             RespondToApplicant = function()
-              assertEquals('function', type(ns.RespondToApplicant))
+              return checkFunc(ns.RespondToApplicant)
             end,
             ReturnClubApplicantList = function()
-              assertEquals('function', type(ns.ReturnClubApplicantList))
+              return checkFunc(ns.ReturnClubApplicantList)
             end,
             ReturnMatchingCommunityList = function()
-              assertEquals('function', type(ns.ReturnMatchingCommunityList))
+              return checkFunc(ns.ReturnMatchingCommunityList)
             end,
             ReturnMatchingGuildList = function()
-              assertEquals('function', type(ns.ReturnMatchingGuildList))
+              return checkFunc(ns.ReturnMatchingGuildList)
             end,
             ReturnPendingClubApplicantList = function()
-              assertEquals('function', type(ns.ReturnPendingClubApplicantList))
+              return checkFunc(ns.ReturnPendingClubApplicantList)
             end,
             SendChatWhisper = function()
-              assertEquals('function', type(ns.SendChatWhisper))
+              return checkFunc(ns.SendChatWhisper)
             end,
             SetAllRecruitmentSettings = function()
-              assertEquals('function', type(ns.SetAllRecruitmentSettings))
+              return checkFunc(ns.SetAllRecruitmentSettings)
             end,
             SetPlayerApplicantLocaleFlags = function()
-              assertEquals('function', type(ns.SetPlayerApplicantLocaleFlags))
+              return checkFunc(ns.SetPlayerApplicantLocaleFlags)
             end,
             SetPlayerApplicantSettings = function()
-              assertEquals('function', type(ns.SetPlayerApplicantSettings))
+              return checkFunc(ns.SetPlayerApplicantSettings)
             end,
             SetRecruitmentLocale = function()
-              assertEquals('function', type(ns.SetRecruitmentLocale))
+              return checkFunc(ns.SetRecruitmentLocale)
             end,
             SetRecruitmentSettings = function()
-              assertEquals('function', type(ns.SetRecruitmentSettings))
+              return checkFunc(ns.SetRecruitmentSettings)
             end,
             ShouldShowClubFinder = function()
-              assertEquals('function', type(ns.ShouldShowClubFinder))
+              return checkFunc(ns.ShouldShowClubFinder)
             end,
           })
         end,
@@ -2356,403 +2372,403 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AddPlayerOverrideName = function()
-              assertEquals('function', type(ns.AddPlayerOverrideName))
+              return checkFunc(ns.AddPlayerOverrideName)
             end,
             AddTrackedDefensiveAuras = function()
-              assertEquals('function', type(ns.AddTrackedDefensiveAuras))
+              return checkFunc(ns.AddTrackedDefensiveAuras)
             end,
             AddTrackedOffensiveAuras = function()
-              assertEquals('function', type(ns.AddTrackedOffensiveAuras))
+              return checkFunc(ns.AddTrackedOffensiveAuras)
             end,
             AreTeamsSwapped = function()
-              assertEquals('function', type(ns.AreTeamsSwapped))
+              return checkFunc(ns.AreTeamsSwapped)
             end,
             AssignPlayerToTeam = function()
-              assertEquals('function', type(ns.AssignPlayerToTeam))
+              return checkFunc(ns.AssignPlayerToTeam)
             end,
             AssignPlayersToTeam = function()
-              assertEquals('function', type(ns.AssignPlayersToTeam))
+              return checkFunc(ns.AssignPlayersToTeam)
             end,
             AssignPlayersToTeamInCurrentInstance = function()
-              assertEquals('function', type(ns.AssignPlayersToTeamInCurrentInstance))
+              return checkFunc(ns.AssignPlayersToTeamInCurrentInstance)
             end,
             CanUseCommentatorCheats = function()
-              assertEquals('function', type(ns.CanUseCommentatorCheats))
+              return checkFunc(ns.CanUseCommentatorCheats)
             end,
             ClearCameraTarget = function()
-              assertEquals('function', type(ns.ClearCameraTarget))
+              return checkFunc(ns.ClearCameraTarget)
             end,
             ClearFollowTarget = function()
-              assertEquals('function', type(ns.ClearFollowTarget))
+              return checkFunc(ns.ClearFollowTarget)
             end,
             ClearLookAtTarget = function()
-              assertEquals('function', type(ns.ClearLookAtTarget))
+              return checkFunc(ns.ClearLookAtTarget)
             end,
             EnterInstance = function()
-              assertEquals('function', type(ns.EnterInstance))
+              return checkFunc(ns.EnterInstance)
             end,
             ExitInstance = function()
-              assertEquals('function', type(ns.ExitInstance))
+              return checkFunc(ns.ExitInstance)
             end,
             FindSpectatedUnit = function()
-              assertEquals('function', type(ns.FindSpectatedUnit))
+              return checkFunc(ns.FindSpectatedUnit)
             end,
             FindTeamNameInCurrentInstance = function()
-              assertEquals('function', type(ns.FindTeamNameInCurrentInstance))
+              return checkFunc(ns.FindTeamNameInCurrentInstance)
             end,
             FindTeamNameInDirectory = function()
-              assertEquals('function', type(ns.FindTeamNameInDirectory))
+              return checkFunc(ns.FindTeamNameInDirectory)
             end,
             FlushCommentatorHistory = function()
-              assertEquals('function', type(ns.FlushCommentatorHistory))
+              return checkFunc(ns.FlushCommentatorHistory)
             end,
             FollowPlayer = function()
-              assertEquals('function', type(ns.FollowPlayer))
+              return checkFunc(ns.FollowPlayer)
             end,
             FollowUnit = function()
-              assertEquals('function', type(ns.FollowUnit))
+              return checkFunc(ns.FollowUnit)
             end,
             ForceFollowTransition = function()
-              assertEquals('function', type(ns.ForceFollowTransition))
+              return checkFunc(ns.ForceFollowTransition)
             end,
             GetAdditionalCameraWeight = function()
-              assertEquals('function', type(ns.GetAdditionalCameraWeight))
+              return checkFunc(ns.GetAdditionalCameraWeight)
             end,
             GetAdditionalCameraWeightByToken = function()
-              assertEquals('function', type(ns.GetAdditionalCameraWeightByToken))
+              return checkFunc(ns.GetAdditionalCameraWeightByToken)
             end,
             GetAllPlayerOverrideNames = function()
-              assertEquals('function', type(ns.GetAllPlayerOverrideNames))
+              return checkFunc(ns.GetAllPlayerOverrideNames)
             end,
             GetCamera = function()
-              assertEquals('function', type(ns.GetCamera))
+              return checkFunc(ns.GetCamera)
             end,
             GetCameraCollision = function()
-              assertEquals('function', type(ns.GetCameraCollision))
+              return checkFunc(ns.GetCameraCollision)
             end,
             GetCameraPosition = function()
-              assertEquals('function', type(ns.GetCameraPosition))
+              return checkFunc(ns.GetCameraPosition)
             end,
             GetCommentatorHistory = function()
-              assertEquals('function', type(ns.GetCommentatorHistory))
+              return checkFunc(ns.GetCommentatorHistory)
             end,
             GetCurrentMapID = function()
-              assertEquals('function', type(ns.GetCurrentMapID))
+              return checkFunc(ns.GetCurrentMapID)
             end,
             GetDampeningPercent = function()
-              assertEquals('function', type(ns.GetDampeningPercent))
+              return checkFunc(ns.GetDampeningPercent)
             end,
             GetDistanceBeforeForcedHorizontalConvergence = function()
-              assertEquals('function', type(ns.GetDistanceBeforeForcedHorizontalConvergence))
+              return checkFunc(ns.GetDistanceBeforeForcedHorizontalConvergence)
             end,
             GetDurationToForceHorizontalConvergence = function()
-              assertEquals('function', type(ns.GetDurationToForceHorizontalConvergence))
+              return checkFunc(ns.GetDurationToForceHorizontalConvergence)
             end,
             GetExcludeDistance = function()
-              assertEquals('function', type(ns.GetExcludeDistance))
+              return checkFunc(ns.GetExcludeDistance)
             end,
             GetHardlockWeight = function()
-              assertEquals('function', type(ns.GetHardlockWeight))
+              return checkFunc(ns.GetHardlockWeight)
             end,
             GetHorizontalAngleThresholdToSmooth = function()
-              assertEquals('function', type(ns.GetHorizontalAngleThresholdToSmooth))
+              return checkFunc(ns.GetHorizontalAngleThresholdToSmooth)
             end,
             GetIndirectSpellID = function()
-              assertEquals('function', type(ns.GetIndirectSpellID))
+              return checkFunc(ns.GetIndirectSpellID)
             end,
             GetInstanceInfo = function()
-              assertEquals('function', type(ns.GetInstanceInfo))
+              return checkFunc(ns.GetInstanceInfo)
             end,
             GetLookAtLerpAmount = function()
-              assertEquals('function', type(ns.GetLookAtLerpAmount))
+              return checkFunc(ns.GetLookAtLerpAmount)
             end,
             GetMapInfo = function()
-              assertEquals('function', type(ns.GetMapInfo))
+              return checkFunc(ns.GetMapInfo)
             end,
             GetMatchDuration = function()
-              assertEquals('function', type(ns.GetMatchDuration))
+              return checkFunc(ns.GetMatchDuration)
             end,
             GetMaxNumPlayersPerTeam = function()
-              assertEquals('function', type(ns.GetMaxNumPlayersPerTeam))
+              return checkFunc(ns.GetMaxNumPlayersPerTeam)
             end,
             GetMaxNumTeams = function()
-              assertEquals('function', type(ns.GetMaxNumTeams))
+              return checkFunc(ns.GetMaxNumTeams)
             end,
             GetMode = function()
-              assertEquals('function', type(ns.GetMode))
+              return checkFunc(ns.GetMode)
             end,
             GetMsToHoldForHorizontalMovement = function()
-              assertEquals('function', type(ns.GetMsToHoldForHorizontalMovement))
+              return checkFunc(ns.GetMsToHoldForHorizontalMovement)
             end,
             GetMsToHoldForVerticalMovement = function()
-              assertEquals('function', type(ns.GetMsToHoldForVerticalMovement))
+              return checkFunc(ns.GetMsToHoldForVerticalMovement)
             end,
             GetMsToSmoothHorizontalChange = function()
-              assertEquals('function', type(ns.GetMsToSmoothHorizontalChange))
+              return checkFunc(ns.GetMsToSmoothHorizontalChange)
             end,
             GetMsToSmoothVerticalChange = function()
-              assertEquals('function', type(ns.GetMsToSmoothVerticalChange))
+              return checkFunc(ns.GetMsToSmoothVerticalChange)
             end,
             GetNumMaps = function()
-              assertEquals('function', type(ns.GetNumMaps))
+              return checkFunc(ns.GetNumMaps)
             end,
             GetNumPlayers = function()
-              assertEquals('function', type(ns.GetNumPlayers))
+              return checkFunc(ns.GetNumPlayers)
             end,
             GetOrCreateSeries = function()
-              assertEquals('function', type(ns.GetOrCreateSeries))
+              return checkFunc(ns.GetOrCreateSeries)
             end,
             GetPlayerAuraInfo = function()
-              assertEquals('function', type(ns.GetPlayerAuraInfo))
+              return checkFunc(ns.GetPlayerAuraInfo)
             end,
             GetPlayerAuraInfoByUnit = function()
-              assertEquals('function', type(ns.GetPlayerAuraInfoByUnit))
+              return checkFunc(ns.GetPlayerAuraInfoByUnit)
             end,
             GetPlayerCooldownInfo = function()
-              assertEquals('function', type(ns.GetPlayerCooldownInfo))
+              return checkFunc(ns.GetPlayerCooldownInfo)
             end,
             GetPlayerCooldownInfoByUnit = function()
-              assertEquals('function', type(ns.GetPlayerCooldownInfoByUnit))
+              return checkFunc(ns.GetPlayerCooldownInfoByUnit)
             end,
             GetPlayerCrowdControlInfo = function()
-              assertEquals('function', type(ns.GetPlayerCrowdControlInfo))
+              return checkFunc(ns.GetPlayerCrowdControlInfo)
             end,
             GetPlayerCrowdControlInfoByUnit = function()
-              assertEquals('function', type(ns.GetPlayerCrowdControlInfoByUnit))
+              return checkFunc(ns.GetPlayerCrowdControlInfoByUnit)
             end,
             GetPlayerData = function()
-              assertEquals('function', type(ns.GetPlayerData))
+              return checkFunc(ns.GetPlayerData)
             end,
             GetPlayerFlagInfo = function()
-              assertEquals('function', type(ns.GetPlayerFlagInfo))
+              return checkFunc(ns.GetPlayerFlagInfo)
             end,
             GetPlayerFlagInfoByUnit = function()
-              assertEquals('function', type(ns.GetPlayerFlagInfoByUnit))
+              return checkFunc(ns.GetPlayerFlagInfoByUnit)
             end,
             GetPlayerOverrideName = function()
-              assertEquals('function', type(ns.GetPlayerOverrideName))
+              return checkFunc(ns.GetPlayerOverrideName)
             end,
             GetPlayerSpellCharges = function()
-              assertEquals('function', type(ns.GetPlayerSpellCharges))
+              return checkFunc(ns.GetPlayerSpellCharges)
             end,
             GetPlayerSpellChargesByUnit = function()
-              assertEquals('function', type(ns.GetPlayerSpellChargesByUnit))
+              return checkFunc(ns.GetPlayerSpellChargesByUnit)
             end,
             GetPositionLerpAmount = function()
-              assertEquals('function', type(ns.GetPositionLerpAmount))
+              return checkFunc(ns.GetPositionLerpAmount)
             end,
             GetSmoothFollowTransitioning = function()
-              assertEquals('function', type(ns.GetSmoothFollowTransitioning))
+              return checkFunc(ns.GetSmoothFollowTransitioning)
             end,
             GetSoftlockWeight = function()
-              assertEquals('function', type(ns.GetSoftlockWeight))
+              return checkFunc(ns.GetSoftlockWeight)
             end,
             GetSpeedFactor = function()
-              assertEquals('function', type(ns.GetSpeedFactor))
+              return checkFunc(ns.GetSpeedFactor)
             end,
             GetStartLocation = function()
-              assertEquals('function', type(ns.GetStartLocation))
+              return checkFunc(ns.GetStartLocation)
             end,
             GetTeamColor = function()
-              assertEquals('function', type(ns.GetTeamColor))
+              return checkFunc(ns.GetTeamColor)
             end,
             GetTeamColorByUnit = function()
-              assertEquals('function', type(ns.GetTeamColorByUnit))
+              return checkFunc(ns.GetTeamColorByUnit)
             end,
             GetTimeLeftInMatch = function()
-              assertEquals('function', type(ns.GetTimeLeftInMatch))
+              return checkFunc(ns.GetTimeLeftInMatch)
             end,
             GetTrackedSpellID = function()
-              assertEquals('function', type(ns.GetTrackedSpellID))
+              return checkFunc(ns.GetTrackedSpellID)
             end,
             GetTrackedSpells = function()
-              assertEquals('function', type(ns.GetTrackedSpells))
+              return checkFunc(ns.GetTrackedSpells)
             end,
             GetTrackedSpellsByUnit = function()
-              assertEquals('function', type(ns.GetTrackedSpellsByUnit))
+              return checkFunc(ns.GetTrackedSpellsByUnit)
             end,
             GetUnitData = function()
-              assertEquals('function', type(ns.GetUnitData))
+              return checkFunc(ns.GetUnitData)
             end,
             GetWargameInfo = function()
-              assertEquals('function', type(ns.GetWargameInfo))
+              return checkFunc(ns.GetWargameInfo)
             end,
             HasTrackedAuras = function()
-              assertEquals('function', type(ns.HasTrackedAuras))
+              return checkFunc(ns.HasTrackedAuras)
             end,
             IsSmartCameraLocked = function()
-              assertEquals('function', type(ns.IsSmartCameraLocked))
+              return checkFunc(ns.IsSmartCameraLocked)
             end,
             IsSpectating = function()
-              assertEquals('function', type(ns.IsSpectating))
+              return checkFunc(ns.IsSpectating)
             end,
             IsTrackedDefensiveAura = function()
-              assertEquals('function', type(ns.IsTrackedDefensiveAura))
+              return checkFunc(ns.IsTrackedDefensiveAura)
             end,
             IsTrackedOffensiveAura = function()
-              assertEquals('function', type(ns.IsTrackedOffensiveAura))
+              return checkFunc(ns.IsTrackedOffensiveAura)
             end,
             IsTrackedSpell = function()
-              assertEquals('function', type(ns.IsTrackedSpell))
+              return checkFunc(ns.IsTrackedSpell)
             end,
             IsTrackedSpellByUnit = function()
-              assertEquals('function', type(ns.IsTrackedSpellByUnit))
+              return checkFunc(ns.IsTrackedSpellByUnit)
             end,
             IsUsingSmartCamera = function()
-              assertEquals('function', type(ns.IsUsingSmartCamera))
+              return checkFunc(ns.IsUsingSmartCamera)
             end,
             LookAtPlayer = function()
-              assertEquals('function', type(ns.LookAtPlayer))
+              return checkFunc(ns.LookAtPlayer)
             end,
             RemoveAllOverrideNames = function()
-              assertEquals('function', type(ns.RemoveAllOverrideNames))
+              return checkFunc(ns.RemoveAllOverrideNames)
             end,
             RemovePlayerOverrideName = function()
-              assertEquals('function', type(ns.RemovePlayerOverrideName))
+              return checkFunc(ns.RemovePlayerOverrideName)
             end,
             RequestPlayerCooldownInfo = function()
-              assertEquals('function', type(ns.RequestPlayerCooldownInfo))
+              return checkFunc(ns.RequestPlayerCooldownInfo)
             end,
             ResetFoVTarget = function()
-              assertEquals('function', type(ns.ResetFoVTarget))
+              return checkFunc(ns.ResetFoVTarget)
             end,
             ResetSeriesScores = function()
-              assertEquals('function', type(ns.ResetSeriesScores))
+              return checkFunc(ns.ResetSeriesScores)
             end,
             ResetSettings = function()
-              assertEquals('function', type(ns.ResetSettings))
+              return checkFunc(ns.ResetSettings)
             end,
             ResetTrackedAuras = function()
-              assertEquals('function', type(ns.ResetTrackedAuras))
+              return checkFunc(ns.ResetTrackedAuras)
             end,
             SetAdditionalCameraWeight = function()
-              assertEquals('function', type(ns.SetAdditionalCameraWeight))
+              return checkFunc(ns.SetAdditionalCameraWeight)
             end,
             SetAdditionalCameraWeightByToken = function()
-              assertEquals('function', type(ns.SetAdditionalCameraWeightByToken))
+              return checkFunc(ns.SetAdditionalCameraWeightByToken)
             end,
             SetBlocklistedAuras = function()
-              assertEquals('function', type(ns.SetBlocklistedAuras))
+              return checkFunc(ns.SetBlocklistedAuras)
             end,
             SetBlocklistedCooldowns = function()
-              assertEquals('function', type(ns.SetBlocklistedCooldowns))
+              return checkFunc(ns.SetBlocklistedCooldowns)
             end,
             SetCamera = function()
-              assertEquals('function', type(ns.SetCamera))
+              return checkFunc(ns.SetCamera)
             end,
             SetCameraCollision = function()
-              assertEquals('function', type(ns.SetCameraCollision))
+              return checkFunc(ns.SetCameraCollision)
             end,
             SetCameraPosition = function()
-              assertEquals('function', type(ns.SetCameraPosition))
+              return checkFunc(ns.SetCameraPosition)
             end,
             SetCheatsEnabled = function()
-              assertEquals('function', type(ns.SetCheatsEnabled))
+              return checkFunc(ns.SetCheatsEnabled)
             end,
             SetCommentatorHistory = function()
-              assertEquals('function', type(ns.SetCommentatorHistory))
+              return checkFunc(ns.SetCommentatorHistory)
             end,
             SetDistanceBeforeForcedHorizontalConvergence = function()
-              assertEquals('function', type(ns.SetDistanceBeforeForcedHorizontalConvergence))
+              return checkFunc(ns.SetDistanceBeforeForcedHorizontalConvergence)
             end,
             SetDurationToForceHorizontalConvergence = function()
-              assertEquals('function', type(ns.SetDurationToForceHorizontalConvergence))
+              return checkFunc(ns.SetDurationToForceHorizontalConvergence)
             end,
             SetExcludeDistance = function()
-              assertEquals('function', type(ns.SetExcludeDistance))
+              return checkFunc(ns.SetExcludeDistance)
             end,
             SetFollowCameraSpeeds = function()
-              assertEquals('function', type(ns.SetFollowCameraSpeeds))
+              return checkFunc(ns.SetFollowCameraSpeeds)
             end,
             SetHardlockWeight = function()
-              assertEquals('function', type(ns.SetHardlockWeight))
+              return checkFunc(ns.SetHardlockWeight)
             end,
             SetHorizontalAngleThresholdToSmooth = function()
-              assertEquals('function', type(ns.SetHorizontalAngleThresholdToSmooth))
+              return checkFunc(ns.SetHorizontalAngleThresholdToSmooth)
             end,
             SetLookAtLerpAmount = function()
-              assertEquals('function', type(ns.SetLookAtLerpAmount))
+              return checkFunc(ns.SetLookAtLerpAmount)
             end,
             SetMapAndInstanceIndex = function()
-              assertEquals('function', type(ns.SetMapAndInstanceIndex))
+              return checkFunc(ns.SetMapAndInstanceIndex)
             end,
             SetMouseDisabled = function()
-              assertEquals('function', type(ns.SetMouseDisabled))
+              return checkFunc(ns.SetMouseDisabled)
             end,
             SetMoveSpeed = function()
-              assertEquals('function', type(ns.SetMoveSpeed))
+              return checkFunc(ns.SetMoveSpeed)
             end,
             SetMsToHoldForHorizontalMovement = function()
-              assertEquals('function', type(ns.SetMsToHoldForHorizontalMovement))
+              return checkFunc(ns.SetMsToHoldForHorizontalMovement)
             end,
             SetMsToHoldForVerticalMovement = function()
-              assertEquals('function', type(ns.SetMsToHoldForVerticalMovement))
+              return checkFunc(ns.SetMsToHoldForVerticalMovement)
             end,
             SetMsToSmoothHorizontalChange = function()
-              assertEquals('function', type(ns.SetMsToSmoothHorizontalChange))
+              return checkFunc(ns.SetMsToSmoothHorizontalChange)
             end,
             SetMsToSmoothVerticalChange = function()
-              assertEquals('function', type(ns.SetMsToSmoothVerticalChange))
+              return checkFunc(ns.SetMsToSmoothVerticalChange)
             end,
             SetPositionLerpAmount = function()
-              assertEquals('function', type(ns.SetPositionLerpAmount))
+              return checkFunc(ns.SetPositionLerpAmount)
             end,
             SetRequestedDebuffCooldowns = function()
-              assertEquals('function', type(ns.SetRequestedDebuffCooldowns))
+              return checkFunc(ns.SetRequestedDebuffCooldowns)
             end,
             SetRequestedDefensiveCooldowns = function()
-              assertEquals('function', type(ns.SetRequestedDefensiveCooldowns))
+              return checkFunc(ns.SetRequestedDefensiveCooldowns)
             end,
             SetRequestedOffensiveCooldowns = function()
-              assertEquals('function', type(ns.SetRequestedOffensiveCooldowns))
+              return checkFunc(ns.SetRequestedOffensiveCooldowns)
             end,
             SetSeriesScore = function()
-              assertEquals('function', type(ns.SetSeriesScore))
+              return checkFunc(ns.SetSeriesScore)
             end,
             SetSeriesScores = function()
-              assertEquals('function', type(ns.SetSeriesScores))
+              return checkFunc(ns.SetSeriesScores)
             end,
             SetSmartCameraLocked = function()
-              assertEquals('function', type(ns.SetSmartCameraLocked))
+              return checkFunc(ns.SetSmartCameraLocked)
             end,
             SetSmoothFollowTransitioning = function()
-              assertEquals('function', type(ns.SetSmoothFollowTransitioning))
+              return checkFunc(ns.SetSmoothFollowTransitioning)
             end,
             SetSoftlockWeight = function()
-              assertEquals('function', type(ns.SetSoftlockWeight))
+              return checkFunc(ns.SetSoftlockWeight)
             end,
             SetSpeedFactor = function()
-              assertEquals('function', type(ns.SetSpeedFactor))
+              return checkFunc(ns.SetSpeedFactor)
             end,
             SetTargetHeightOffset = function()
-              assertEquals('function', type(ns.SetTargetHeightOffset))
+              return checkFunc(ns.SetTargetHeightOffset)
             end,
             SetUseSmartCamera = function()
-              assertEquals('function', type(ns.SetUseSmartCamera))
+              return checkFunc(ns.SetUseSmartCamera)
             end,
             SnapCameraLookAtPoint = function()
-              assertEquals('function', type(ns.SnapCameraLookAtPoint))
+              return checkFunc(ns.SnapCameraLookAtPoint)
             end,
             StartWargame = function()
-              assertEquals('function', type(ns.StartWargame))
+              return checkFunc(ns.StartWargame)
             end,
             SwapTeamSides = function()
-              assertEquals('function', type(ns.SwapTeamSides))
+              return checkFunc(ns.SwapTeamSides)
             end,
             ToggleCheats = function()
-              assertEquals('function', type(ns.ToggleCheats))
+              return checkFunc(ns.ToggleCheats)
             end,
             UpdateMapInfo = function()
-              assertEquals('function', type(ns.UpdateMapInfo))
+              return checkFunc(ns.UpdateMapInfo)
             end,
             UpdatePlayerInfo = function()
-              assertEquals('function', type(ns.UpdatePlayerInfo))
+              return checkFunc(ns.UpdatePlayerInfo)
             end,
             ZoomIn = function()
-              assertEquals('function', type(ns.ZoomIn))
+              return checkFunc(ns.ZoomIn)
             end,
             ZoomOut = function()
-              assertEquals('function', type(ns.ZoomOut))
+              return checkFunc(ns.ZoomOut)
             end,
           })
         end,
@@ -2762,19 +2778,19 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetAllCommands = function()
-              assertEquals('function', type(ns.GetAllCommands))
+              return checkFunc(ns.GetAllCommands)
             end,
             GetColorFromType = function()
-              assertEquals('function', type(ns.GetColorFromType))
+              return checkFunc(ns.GetColorFromType)
             end,
             GetFontHeight = function()
-              assertEquals('function', type(ns.GetFontHeight))
+              return checkFunc(ns.GetFontHeight)
             end,
             PrintAllMatchingCommands = function()
-              assertEquals('function', type(ns.PrintAllMatchingCommands))
+              return checkFunc(ns.PrintAllMatchingCommands)
             end,
             SetFontHeight = function()
-              assertEquals('function', type(ns.SetFontHeight))
+              return checkFunc(ns.SetFontHeight)
             end,
           })
         end,
@@ -2788,58 +2804,58 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             Close = function()
-              assertEquals('function', type(ns.Close))
+              return checkFunc(ns.Close)
             end,
             Contribute = function()
-              assertEquals('function', type(ns.Contribute))
+              return checkFunc(ns.Contribute)
             end,
             GetActive = function()
-              assertEquals('function', type(ns.GetActive))
+              return checkFunc(ns.GetActive)
             end,
             GetAtlases = function()
-              assertEquals('function', type(ns.GetAtlases))
+              return checkFunc(ns.GetAtlases)
             end,
             GetBuffs = function()
-              assertEquals('function', type(ns.GetBuffs))
+              return checkFunc(ns.GetBuffs)
             end,
             GetContributionAppearance = function()
-              assertEquals('function', type(ns.GetContributionAppearance))
+              return checkFunc(ns.GetContributionAppearance)
             end,
             GetContributionCollectorsForMap = function()
-              assertEquals('function', type(ns.GetContributionCollectorsForMap))
+              return checkFunc(ns.GetContributionCollectorsForMap)
             end,
             GetContributionResult = function()
-              assertEquals('function', type(ns.GetContributionResult))
+              return checkFunc(ns.GetContributionResult)
             end,
             GetDescription = function()
-              assertEquals('function', type(ns.GetDescription))
+              return checkFunc(ns.GetDescription)
             end,
             GetManagedContributionsForCreatureID = function()
-              assertEquals('function', type(ns.GetManagedContributionsForCreatureID))
+              return checkFunc(ns.GetManagedContributionsForCreatureID)
             end,
             GetName = function()
-              assertEquals('function', type(ns.GetName))
+              return checkFunc(ns.GetName)
             end,
             GetOrderIndex = function()
-              assertEquals('function', type(ns.GetOrderIndex))
+              return checkFunc(ns.GetOrderIndex)
             end,
             GetRequiredContributionCurrency = function()
-              assertEquals('function', type(ns.GetRequiredContributionCurrency))
+              return checkFunc(ns.GetRequiredContributionCurrency)
             end,
             GetRequiredContributionItem = function()
-              assertEquals('function', type(ns.GetRequiredContributionItem))
+              return checkFunc(ns.GetRequiredContributionItem)
             end,
             GetRewardQuestID = function()
-              assertEquals('function', type(ns.GetRewardQuestID))
+              return checkFunc(ns.GetRewardQuestID)
             end,
             GetState = function()
-              assertEquals('function', type(ns.GetState))
+              return checkFunc(ns.GetState)
             end,
             HasPendingContribution = function()
-              assertEquals('function', type(ns.HasPendingContribution))
+              return checkFunc(ns.HasPendingContribution)
             end,
             IsAwaitingRewardQuestData = function()
-              assertEquals('function', type(ns.IsAwaitingRewardQuestData))
+              return checkFunc(ns.IsAwaitingRewardQuestData)
             end,
           })
         end,
@@ -2853,10 +2869,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AreCallingsUnlocked = function()
-              assertEquals('function', type(ns.AreCallingsUnlocked))
+              return checkFunc(ns.AreCallingsUnlocked)
             end,
             RequestCallings = function()
-              assertEquals('function', type(ns.RequestCallings))
+              return checkFunc(ns.RequestCallings)
             end,
           })
         end,
@@ -2870,10 +2886,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CloseFromUI = function()
-              assertEquals('function', type(ns.CloseFromUI))
+              return checkFunc(ns.CloseFromUI)
             end,
             GetCovenantInfoForPlayerChoiceResponseID = function()
-              assertEquals('function', type(ns.GetCovenantInfoForPlayerChoiceResponseID))
+              return checkFunc(ns.GetCovenantInfoForPlayerChoiceResponseID)
             end,
           })
         end,
@@ -2887,52 +2903,52 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanAccessReservoir = function()
-              assertEquals('function', type(ns.CanAccessReservoir))
+              return checkFunc(ns.CanAccessReservoir)
             end,
             CanDepositAnima = function()
-              assertEquals('function', type(ns.CanDepositAnima))
+              return checkFunc(ns.CanDepositAnima)
             end,
             DepositAnima = function()
-              assertEquals('function', type(ns.DepositAnima))
+              return checkFunc(ns.DepositAnima)
             end,
             EndInteraction = function()
-              assertEquals('function', type(ns.EndInteraction))
+              return checkFunc(ns.EndInteraction)
             end,
             GetAnimaInfo = function()
-              assertEquals('function', type(ns.GetAnimaInfo))
+              return checkFunc(ns.GetAnimaInfo)
             end,
             GetCurrentTalentTreeID = function()
-              assertEquals('function', type(ns.GetCurrentTalentTreeID))
+              return checkFunc(ns.GetCurrentTalentTreeID)
             end,
             GetFeatures = function()
-              assertEquals('function', type(ns.GetFeatures))
+              return checkFunc(ns.GetFeatures)
             end,
             GetRenownLevel = function()
-              assertEquals('function', type(ns.GetRenownLevel))
+              return checkFunc(ns.GetRenownLevel)
             end,
             GetRenownLevels = function()
-              assertEquals('function', type(ns.GetRenownLevels))
+              return checkFunc(ns.GetRenownLevels)
             end,
             GetRenownRewardsForLevel = function()
-              assertEquals('function', type(ns.GetRenownRewardsForLevel))
+              return checkFunc(ns.GetRenownRewardsForLevel)
             end,
             GetSanctumType = function()
-              assertEquals('function', type(ns.GetSanctumType))
+              return checkFunc(ns.GetSanctumType)
             end,
             GetSoulCurrencies = function()
-              assertEquals('function', type(ns.GetSoulCurrencies))
+              return checkFunc(ns.GetSoulCurrencies)
             end,
             HasMaximumRenown = function()
-              assertEquals('function', type(ns.HasMaximumRenown))
+              return checkFunc(ns.HasMaximumRenown)
             end,
             IsPlayerInRenownCatchUpMode = function()
-              assertEquals('function', type(ns.IsPlayerInRenownCatchUpMode))
+              return checkFunc(ns.IsPlayerInRenownCatchUpMode)
             end,
             IsWeeklyRenownCapped = function()
-              assertEquals('function', type(ns.IsWeeklyRenownCapped))
+              return checkFunc(ns.IsWeeklyRenownCapped)
             end,
             RequestCatchUpState = function()
-              assertEquals('function', type(ns.RequestCatchUpState))
+              return checkFunc(ns.RequestCatchUpState)
             end,
           })
         end,
@@ -2946,13 +2962,13 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetActiveCovenantID = function()
-              assertEquals('function', type(ns.GetActiveCovenantID))
+              return checkFunc(ns.GetActiveCovenantID)
             end,
             GetCovenantData = function()
-              assertEquals('function', type(ns.GetCovenantData))
+              return checkFunc(ns.GetCovenantData)
             end,
             GetCovenantIDs = function()
-              assertEquals('function', type(ns.GetCovenantIDs))
+              return checkFunc(ns.GetCovenantIDs)
             end,
           })
         end,
@@ -2962,13 +2978,13 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetClassInfo = function()
-              assertEquals('function', type(ns.GetClassInfo))
+              return checkFunc(ns.GetClassInfo)
             end,
             GetFactionInfo = function()
-              assertEquals('function', type(ns.GetFactionInfo))
+              return checkFunc(ns.GetFactionInfo)
             end,
             GetRaceInfo = function()
-              assertEquals('function', type(ns.GetRaceInfo))
+              return checkFunc(ns.GetRaceInfo)
             end,
           })
         end,
@@ -2982,125 +2998,125 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.DoesWarModeBonusApply))
                 return
               end
-              assertEquals('function', type(ns.DoesWarModeBonusApply))
+              return checkFunc(ns.DoesWarModeBonusApply)
             end,
             ExpandCurrencyList = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ExpandCurrencyList))
                 return
               end
-              assertEquals('function', type(ns.ExpandCurrencyList))
+              return checkFunc(ns.ExpandCurrencyList)
             end,
             GetAzeriteCurrencyID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetAzeriteCurrencyID))
                 return
               end
-              assertEquals('function', type(ns.GetAzeriteCurrencyID))
+              return checkFunc(ns.GetAzeriteCurrencyID)
             end,
             GetBackpackCurrencyInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetBackpackCurrencyInfo))
                 return
               end
-              assertEquals('function', type(ns.GetBackpackCurrencyInfo))
+              return checkFunc(ns.GetBackpackCurrencyInfo)
             end,
             GetBasicCurrencyInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetBasicCurrencyInfo))
                 return
               end
-              assertEquals('function', type(ns.GetBasicCurrencyInfo))
+              return checkFunc(ns.GetBasicCurrencyInfo)
             end,
             GetCurrencyContainerInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCurrencyContainerInfo))
                 return
               end
-              assertEquals('function', type(ns.GetCurrencyContainerInfo))
+              return checkFunc(ns.GetCurrencyContainerInfo)
             end,
             GetCurrencyIDFromLink = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCurrencyIDFromLink))
                 return
               end
-              assertEquals('function', type(ns.GetCurrencyIDFromLink))
+              return checkFunc(ns.GetCurrencyIDFromLink)
             end,
             GetCurrencyInfo = function()
-              assertEquals('function', type(ns.GetCurrencyInfo))
+              return checkFunc(ns.GetCurrencyInfo)
             end,
             GetCurrencyInfoFromLink = function()
-              assertEquals('function', type(ns.GetCurrencyInfoFromLink))
+              return checkFunc(ns.GetCurrencyInfoFromLink)
             end,
             GetCurrencyLink = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCurrencyLink))
                 return
               end
-              assertEquals('function', type(ns.GetCurrencyLink))
+              return checkFunc(ns.GetCurrencyLink)
             end,
             GetCurrencyListInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCurrencyListInfo))
                 return
               end
-              assertEquals('function', type(ns.GetCurrencyListInfo))
+              return checkFunc(ns.GetCurrencyListInfo)
             end,
             GetCurrencyListLink = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCurrencyListLink))
                 return
               end
-              assertEquals('function', type(ns.GetCurrencyListLink))
+              return checkFunc(ns.GetCurrencyListLink)
             end,
             GetCurrencyListSize = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCurrencyListSize))
                 return
               end
-              assertEquals('function', type(ns.GetCurrencyListSize))
+              return checkFunc(ns.GetCurrencyListSize)
             end,
             GetFactionGrantedByCurrency = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetFactionGrantedByCurrency))
                 return
               end
-              assertEquals('function', type(ns.GetFactionGrantedByCurrency))
+              return checkFunc(ns.GetFactionGrantedByCurrency)
             end,
             GetWarResourcesCurrencyID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetWarResourcesCurrencyID))
                 return
               end
-              assertEquals('function', type(ns.GetWarResourcesCurrencyID))
+              return checkFunc(ns.GetWarResourcesCurrencyID)
             end,
             IsCurrencyContainer = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsCurrencyContainer))
                 return
               end
-              assertEquals('function', type(ns.IsCurrencyContainer))
+              return checkFunc(ns.IsCurrencyContainer)
             end,
             PickupCurrency = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.PickupCurrency))
                 return
               end
-              assertEquals('function', type(ns.PickupCurrency))
+              return checkFunc(ns.PickupCurrency)
             end,
             SetCurrencyBackpack = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetCurrencyBackpack))
                 return
               end
-              assertEquals('function', type(ns.SetCurrencyBackpack))
+              return checkFunc(ns.SetCurrencyBackpack)
             end,
             SetCurrencyUnused = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetCurrencyUnused))
                 return
               end
-              assertEquals('function', type(ns.SetCurrencyUnused))
+              return checkFunc(ns.SetCurrencyUnused)
             end,
           })
         end,
@@ -3114,24 +3130,24 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.DropCursorCommunitiesStream))
                 return
               end
-              assertEquals('function', type(ns.DropCursorCommunitiesStream))
+              return checkFunc(ns.DropCursorCommunitiesStream)
             end,
             GetCursorCommunitiesStream = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCursorCommunitiesStream))
                 return
               end
-              assertEquals('function', type(ns.GetCursorCommunitiesStream))
+              return checkFunc(ns.GetCursorCommunitiesStream)
             end,
             GetCursorItem = function()
-              assertEquals('function', type(ns.GetCursorItem))
+              return checkFunc(ns.GetCursorItem)
             end,
             SetCursorCommunitiesStream = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetCursorCommunitiesStream))
                 return
               end
-              assertEquals('function', type(ns.SetCursorCommunitiesStream))
+              return checkFunc(ns.SetCursorCommunitiesStream)
             end,
           })
         end,
@@ -3141,28 +3157,28 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AdjustTimeByDays = function()
-              assertEquals('function', type(ns.AdjustTimeByDays))
+              return checkFunc(ns.AdjustTimeByDays)
             end,
             AdjustTimeByMinutes = function()
-              assertEquals('function', type(ns.AdjustTimeByMinutes))
+              return checkFunc(ns.AdjustTimeByMinutes)
             end,
             CompareCalendarTime = function()
-              assertEquals('function', type(ns.CompareCalendarTime))
+              return checkFunc(ns.CompareCalendarTime)
             end,
             GetCalendarTimeFromEpoch = function()
-              assertEquals('function', type(ns.GetCalendarTimeFromEpoch))
+              return checkFunc(ns.GetCalendarTimeFromEpoch)
             end,
             GetCurrentCalendarTime = function()
-              assertEquals('function', type(ns.GetCurrentCalendarTime))
+              return checkFunc(ns.GetCurrentCalendarTime)
             end,
             GetSecondsUntilDailyReset = function()
-              assertEquals('function', type(ns.GetSecondsUntilDailyReset))
+              return checkFunc(ns.GetSecondsUntilDailyReset)
             end,
             GetSecondsUntilWeeklyReset = function()
-              assertEquals('function', type(ns.GetSecondsUntilWeeklyReset))
+              return checkFunc(ns.GetSecondsUntilWeeklyReset)
             end,
             GetServerTimeLocal = function()
-              assertEquals('function', type(ns.GetServerTimeLocal))
+              return checkFunc(ns.GetServerTimeLocal)
             end,
           })
         end,
@@ -3172,19 +3188,19 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetCorpseMapPosition = function()
-              assertEquals('function', type(ns.GetCorpseMapPosition))
+              return checkFunc(ns.GetCorpseMapPosition)
             end,
             GetDeathReleasePosition = function()
-              assertEquals('function', type(ns.GetDeathReleasePosition))
+              return checkFunc(ns.GetDeathReleasePosition)
             end,
             GetGraveyardsForMap = function()
-              assertEquals('function', type(ns.GetGraveyardsForMap))
+              return checkFunc(ns.GetGraveyardsForMap)
             end,
             GetSelfResurrectOptions = function()
-              assertEquals('function', type(ns.GetSelfResurrectOptions))
+              return checkFunc(ns.GetSelfResurrectOptions)
             end,
             UseSelfResurrectOption = function()
-              assertEquals('function', type(ns.UseSelfResurrectOption))
+              return checkFunc(ns.UseSelfResurrectOption)
             end,
           })
         end,
@@ -3198,43 +3214,43 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetDungeonEntrancesForMap = function()
-              assertEquals('function', type(ns.GetDungeonEntrancesForMap))
+              return checkFunc(ns.GetDungeonEntrancesForMap)
             end,
             GetEncountersOnMap = function()
-              assertEquals('function', type(ns.GetEncountersOnMap))
+              return checkFunc(ns.GetEncountersOnMap)
             end,
             GetLootInfo = function()
-              assertEquals('function', type(ns.GetLootInfo))
+              return checkFunc(ns.GetLootInfo)
             end,
             GetLootInfoByIndex = function()
-              assertEquals('function', type(ns.GetLootInfoByIndex))
+              return checkFunc(ns.GetLootInfoByIndex)
             end,
             GetSectionIconFlags = function()
-              assertEquals('function', type(ns.GetSectionIconFlags))
+              return checkFunc(ns.GetSectionIconFlags)
             end,
             GetSectionInfo = function()
-              assertEquals('function', type(ns.GetSectionInfo))
+              return checkFunc(ns.GetSectionInfo)
             end,
             GetSlotFilter = function()
-              assertEquals('function', type(ns.GetSlotFilter))
+              return checkFunc(ns.GetSlotFilter)
             end,
             InstanceHasLoot = function()
-              assertEquals('function', type(ns.InstanceHasLoot))
+              return checkFunc(ns.InstanceHasLoot)
             end,
             IsEncounterComplete = function()
-              assertEquals('function', type(ns.IsEncounterComplete))
+              return checkFunc(ns.IsEncounterComplete)
             end,
             ResetSlotFilter = function()
-              assertEquals('function', type(ns.ResetSlotFilter))
+              return checkFunc(ns.ResetSlotFilter)
             end,
             SetPreviewMythicPlusLevel = function()
-              assertEquals('function', type(ns.SetPreviewMythicPlusLevel))
+              return checkFunc(ns.SetPreviewMythicPlusLevel)
             end,
             SetPreviewPvpTier = function()
-              assertEquals('function', type(ns.SetPreviewPvpTier))
+              return checkFunc(ns.SetPreviewPvpTier)
             end,
             SetSlotFilter = function()
-              assertEquals('function', type(ns.SetSlotFilter))
+              return checkFunc(ns.SetSlotFilter)
             end,
           })
         end,
@@ -3244,73 +3260,73 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AssignSpecToEquipmentSet = function()
-              assertEquals('function', type(ns.AssignSpecToEquipmentSet))
+              return checkFunc(ns.AssignSpecToEquipmentSet)
             end,
             CanUseEquipmentSets = function()
-              assertEquals('function', type(ns.CanUseEquipmentSets))
+              return checkFunc(ns.CanUseEquipmentSets)
             end,
             ClearIgnoredSlotsForSave = function()
-              assertEquals('function', type(ns.ClearIgnoredSlotsForSave))
+              return checkFunc(ns.ClearIgnoredSlotsForSave)
             end,
             CreateEquipmentSet = function()
-              assertEquals('function', type(ns.CreateEquipmentSet))
+              return checkFunc(ns.CreateEquipmentSet)
             end,
             DeleteEquipmentSet = function()
-              assertEquals('function', type(ns.DeleteEquipmentSet))
+              return checkFunc(ns.DeleteEquipmentSet)
             end,
             EquipmentSetContainsLockedItems = function()
-              assertEquals('function', type(ns.EquipmentSetContainsLockedItems))
+              return checkFunc(ns.EquipmentSetContainsLockedItems)
             end,
             GetEquipmentSetAssignedSpec = function()
-              assertEquals('function', type(ns.GetEquipmentSetAssignedSpec))
+              return checkFunc(ns.GetEquipmentSetAssignedSpec)
             end,
             GetEquipmentSetForSpec = function()
-              assertEquals('function', type(ns.GetEquipmentSetForSpec))
+              return checkFunc(ns.GetEquipmentSetForSpec)
             end,
             GetEquipmentSetID = function()
-              assertEquals('function', type(ns.GetEquipmentSetID))
+              return checkFunc(ns.GetEquipmentSetID)
             end,
             GetEquipmentSetIDs = function()
-              assertEquals('function', type(ns.GetEquipmentSetIDs))
+              return checkFunc(ns.GetEquipmentSetIDs)
             end,
             GetEquipmentSetInfo = function()
-              assertEquals('function', type(ns.GetEquipmentSetInfo))
+              return checkFunc(ns.GetEquipmentSetInfo)
             end,
             GetIgnoredSlots = function()
-              assertEquals('function', type(ns.GetIgnoredSlots))
+              return checkFunc(ns.GetIgnoredSlots)
             end,
             GetItemIDs = function()
-              assertEquals('function', type(ns.GetItemIDs))
+              return checkFunc(ns.GetItemIDs)
             end,
             GetItemLocations = function()
-              assertEquals('function', type(ns.GetItemLocations))
+              return checkFunc(ns.GetItemLocations)
             end,
             GetNumEquipmentSets = function()
-              assertEquals('function', type(ns.GetNumEquipmentSets))
+              return checkFunc(ns.GetNumEquipmentSets)
             end,
             IgnoreSlotForSave = function()
-              assertEquals('function', type(ns.IgnoreSlotForSave))
+              return checkFunc(ns.IgnoreSlotForSave)
             end,
             IsSlotIgnoredForSave = function()
-              assertEquals('function', type(ns.IsSlotIgnoredForSave))
+              return checkFunc(ns.IsSlotIgnoredForSave)
             end,
             ModifyEquipmentSet = function()
-              assertEquals('function', type(ns.ModifyEquipmentSet))
+              return checkFunc(ns.ModifyEquipmentSet)
             end,
             PickupEquipmentSet = function()
-              assertEquals('function', type(ns.PickupEquipmentSet))
+              return checkFunc(ns.PickupEquipmentSet)
             end,
             SaveEquipmentSet = function()
-              assertEquals('function', type(ns.SaveEquipmentSet))
+              return checkFunc(ns.SaveEquipmentSet)
             end,
             UnassignEquipmentSetSpec = function()
-              assertEquals('function', type(ns.UnassignEquipmentSetSpec))
+              return checkFunc(ns.UnassignEquipmentSetSpec)
             end,
             UnignoreSlotForSave = function()
-              assertEquals('function', type(ns.UnignoreSlotForSave))
+              return checkFunc(ns.UnignoreSlotForSave)
             end,
             UseEquipmentSet = function()
-              assertEquals('function', type(ns.UseEquipmentSet))
+              return checkFunc(ns.UseEquipmentSet)
             end,
           })
         end,
@@ -3324,13 +3340,13 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetLevelUpDisplayToastsFromLevel = function()
-              assertEquals('function', type(ns.GetLevelUpDisplayToastsFromLevel))
+              return checkFunc(ns.GetLevelUpDisplayToastsFromLevel)
             end,
             GetNextToastToDisplay = function()
-              assertEquals('function', type(ns.GetNextToastToDisplay))
+              return checkFunc(ns.GetNextToastToDisplay)
             end,
             RemoveCurrentToast = function()
-              assertEquals('function', type(ns.RemoveCurrentToast))
+              return checkFunc(ns.RemoveCurrentToast)
             end,
           })
         end,
@@ -3344,10 +3360,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetFogOfWarForMap = function()
-              assertEquals('function', type(ns.GetFogOfWarForMap))
+              return checkFunc(ns.GetFogOfWarForMap)
             end,
             GetFogOfWarInfo = function()
-              assertEquals('function', type(ns.GetFogOfWarInfo))
+              return checkFunc(ns.GetFogOfWarInfo)
             end,
           })
         end,
@@ -3361,7 +3377,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetFrameVisibilityState = function()
-              assertEquals('function', type(ns.GetFrameVisibilityState))
+              return checkFunc(ns.GetFrameVisibilityState)
             end,
           })
         end,
@@ -3371,98 +3387,98 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AddFriend = function()
-              assertEquals('function', type(ns.AddFriend))
+              return checkFunc(ns.AddFriend)
             end,
             AddIgnore = function()
-              assertEquals('function', type(ns.AddIgnore))
+              return checkFunc(ns.AddIgnore)
             end,
             AddOrDelIgnore = function()
-              assertEquals('function', type(ns.AddOrDelIgnore))
+              return checkFunc(ns.AddOrDelIgnore)
             end,
             AddOrRemoveFriend = function()
-              assertEquals('function', type(ns.AddOrRemoveFriend))
+              return checkFunc(ns.AddOrRemoveFriend)
             end,
             DelIgnore = function()
-              assertEquals('function', type(ns.DelIgnore))
+              return checkFunc(ns.DelIgnore)
             end,
             DelIgnoreByIndex = function()
-              assertEquals('function', type(ns.DelIgnoreByIndex))
+              return checkFunc(ns.DelIgnoreByIndex)
             end,
             GetFriendInfo = function()
-              assertEquals('function', type(ns.GetFriendInfo))
+              return checkFunc(ns.GetFriendInfo)
             end,
             GetFriendInfoByIndex = function()
-              assertEquals('function', type(ns.GetFriendInfoByIndex))
+              return checkFunc(ns.GetFriendInfoByIndex)
             end,
             GetIgnoreName = function()
-              assertEquals('function', type(ns.GetIgnoreName))
+              return checkFunc(ns.GetIgnoreName)
             end,
             GetNumFriends = function()
-              assertEquals('function', type(ns.GetNumFriends))
+              return checkFunc(ns.GetNumFriends)
             end,
             GetNumIgnores = function()
-              assertEquals('function', type(ns.GetNumIgnores))
+              return checkFunc(ns.GetNumIgnores)
             end,
             GetNumOnlineFriends = function()
-              assertEquals('function', type(ns.GetNumOnlineFriends))
+              return checkFunc(ns.GetNumOnlineFriends)
             end,
             GetNumWhoResults = function()
-              assertEquals('function', type(ns.GetNumWhoResults))
+              return checkFunc(ns.GetNumWhoResults)
             end,
             GetSelectedFriend = function()
-              assertEquals('function', type(ns.GetSelectedFriend))
+              return checkFunc(ns.GetSelectedFriend)
             end,
             GetSelectedIgnore = function()
-              assertEquals('function', type(ns.GetSelectedIgnore))
+              return checkFunc(ns.GetSelectedIgnore)
             end,
             GetWhoInfo = function()
-              assertEquals('function', type(ns.GetWhoInfo))
+              return checkFunc(ns.GetWhoInfo)
             end,
             IsFriend = function()
-              assertEquals('function', type(ns.IsFriend))
+              return checkFunc(ns.IsFriend)
             end,
             IsIgnored = function()
-              assertEquals('function', type(ns.IsIgnored))
+              return checkFunc(ns.IsIgnored)
             end,
             IsIgnoredByGuid = function()
-              assertEquals('function', type(ns.IsIgnoredByGuid))
+              return checkFunc(ns.IsIgnoredByGuid)
             end,
             IsOnIgnoredList = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsOnIgnoredList))
                 return
               end
-              assertEquals('function', type(ns.IsOnIgnoredList))
+              return checkFunc(ns.IsOnIgnoredList)
             end,
             RemoveFriend = function()
-              assertEquals('function', type(ns.RemoveFriend))
+              return checkFunc(ns.RemoveFriend)
             end,
             RemoveFriendByIndex = function()
-              assertEquals('function', type(ns.RemoveFriendByIndex))
+              return checkFunc(ns.RemoveFriendByIndex)
             end,
             SendWho = function()
-              assertEquals('function', type(ns.SendWho))
+              return checkFunc(ns.SendWho)
             end,
             SetFriendNotes = function()
-              assertEquals('function', type(ns.SetFriendNotes))
+              return checkFunc(ns.SetFriendNotes)
             end,
             SetFriendNotesByIndex = function()
-              assertEquals('function', type(ns.SetFriendNotesByIndex))
+              return checkFunc(ns.SetFriendNotesByIndex)
             end,
             SetSelectedFriend = function()
-              assertEquals('function', type(ns.SetSelectedFriend))
+              return checkFunc(ns.SetSelectedFriend)
             end,
             SetSelectedIgnore = function()
-              assertEquals('function', type(ns.SetSelectedIgnore))
+              return checkFunc(ns.SetSelectedIgnore)
             end,
             SetWhoToUi = function()
-              assertEquals('function', type(ns.SetWhoToUi))
+              return checkFunc(ns.SetWhoToUi)
             end,
             ShowFriends = function()
-              assertEquals('function', type(ns.ShowFriends))
+              return checkFunc(ns.ShowFriends)
             end,
             SortWho = function()
-              assertEquals('function', type(ns.SortWho))
+              return checkFunc(ns.SortWho)
             end,
           })
         end,
@@ -3472,77 +3488,77 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AddSDLMapping = function()
-              assertEquals('function', type(ns.AddSDLMapping))
+              return checkFunc(ns.AddSDLMapping)
             end,
             ApplyConfigs = function()
-              assertEquals('function', type(ns.ApplyConfigs))
+              return checkFunc(ns.ApplyConfigs)
             end,
             AxisIndexToConfigName = function()
-              assertEquals('function', type(ns.AxisIndexToConfigName))
+              return checkFunc(ns.AxisIndexToConfigName)
             end,
             ButtonBindingToIndex = function()
-              assertEquals('function', type(ns.ButtonBindingToIndex))
+              return checkFunc(ns.ButtonBindingToIndex)
             end,
             ButtonIndexToBinding = function()
-              assertEquals('function', type(ns.ButtonIndexToBinding))
+              return checkFunc(ns.ButtonIndexToBinding)
             end,
             ButtonIndexToConfigName = function()
-              assertEquals('function', type(ns.ButtonIndexToConfigName))
+              return checkFunc(ns.ButtonIndexToConfigName)
             end,
             ClearLedColor = function()
-              assertEquals('function', type(ns.ClearLedColor))
+              return checkFunc(ns.ClearLedColor)
             end,
             DeleteConfig = function()
-              assertEquals('function', type(ns.DeleteConfig))
+              return checkFunc(ns.DeleteConfig)
             end,
             GetActiveDeviceID = function()
-              assertEquals('function', type(ns.GetActiveDeviceID))
+              return checkFunc(ns.GetActiveDeviceID)
             end,
             GetAllConfigIDs = function()
-              assertEquals('function', type(ns.GetAllConfigIDs))
+              return checkFunc(ns.GetAllConfigIDs)
             end,
             GetAllDeviceIDs = function()
-              assertEquals('function', type(ns.GetAllDeviceIDs))
+              return checkFunc(ns.GetAllDeviceIDs)
             end,
             GetCombinedDeviceID = function()
-              assertEquals('function', type(ns.GetCombinedDeviceID))
+              return checkFunc(ns.GetCombinedDeviceID)
             end,
             GetConfig = function()
-              assertEquals('function', type(ns.GetConfig))
+              return checkFunc(ns.GetConfig)
             end,
             GetDeviceMappedState = function()
-              assertEquals('function', type(ns.GetDeviceMappedState))
+              return checkFunc(ns.GetDeviceMappedState)
             end,
             GetDeviceRawState = function()
-              assertEquals('function', type(ns.GetDeviceRawState))
+              return checkFunc(ns.GetDeviceRawState)
             end,
             GetLedColor = function()
-              assertEquals('function', type(ns.GetLedColor))
+              return checkFunc(ns.GetLedColor)
             end,
             GetPowerLevel = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetPowerLevel))
                 return
               end
-              assertEquals('function', type(ns.GetPowerLevel))
+              return checkFunc(ns.GetPowerLevel)
             end,
             IsEnabled = function()
-              assertEquals('function', type(ns.IsEnabled))
+              return checkFunc(ns.IsEnabled)
             end,
             SetConfig = function()
-              assertEquals('function', type(ns.SetConfig))
+              return checkFunc(ns.SetConfig)
             end,
             SetLedColor = function()
-              assertEquals('function', type(ns.SetLedColor))
+              return checkFunc(ns.SetLedColor)
             end,
             SetVibration = function()
-              assertEquals('function', type(ns.SetVibration))
+              return checkFunc(ns.SetVibration)
             end,
             StickIndexToConfigName = function()
-              assertEquals('function', type(ns.StickIndexToConfigName))
+              return checkFunc(ns.StickIndexToConfigName)
             end,
             StopVibration = function()
-              assertEquals('function', type(ns.StopVibration))
+              return checkFunc(ns.StopVibration)
             end,
           })
         end,
@@ -3556,682 +3572,682 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AddFollowerToMission = function()
-              assertEquals('function', type(ns.AddFollowerToMission))
+              return checkFunc(ns.AddFollowerToMission)
             end,
             AllowMissionStartAboveSoftCap = function()
-              assertEquals('function', type(ns.AllowMissionStartAboveSoftCap))
+              return checkFunc(ns.AllowMissionStartAboveSoftCap)
             end,
             AreMissionFollowerRequirementsMet = function()
-              assertEquals('function', type(ns.AreMissionFollowerRequirementsMet))
+              return checkFunc(ns.AreMissionFollowerRequirementsMet)
             end,
             AssignFollowerToBuilding = function()
-              assertEquals('function', type(ns.AssignFollowerToBuilding))
+              return checkFunc(ns.AssignFollowerToBuilding)
             end,
             CanGenerateRecruits = function()
-              assertEquals('function', type(ns.CanGenerateRecruits))
+              return checkFunc(ns.CanGenerateRecruits)
             end,
             CanOpenMissionChest = function()
-              assertEquals('function', type(ns.CanOpenMissionChest))
+              return checkFunc(ns.CanOpenMissionChest)
             end,
             CanSetRecruitmentPreference = function()
-              assertEquals('function', type(ns.CanSetRecruitmentPreference))
+              return checkFunc(ns.CanSetRecruitmentPreference)
             end,
             CanSpellTargetFollowerIDWithAddAbility = function()
-              assertEquals('function', type(ns.CanSpellTargetFollowerIDWithAddAbility))
+              return checkFunc(ns.CanSpellTargetFollowerIDWithAddAbility)
             end,
             CanUpgradeGarrison = function()
-              assertEquals('function', type(ns.CanUpgradeGarrison))
+              return checkFunc(ns.CanUpgradeGarrison)
             end,
             CancelConstruction = function()
-              assertEquals('function', type(ns.CancelConstruction))
+              return checkFunc(ns.CancelConstruction)
             end,
             CastItemSpellOnFollowerAbility = function()
-              assertEquals('function', type(ns.CastItemSpellOnFollowerAbility))
+              return checkFunc(ns.CastItemSpellOnFollowerAbility)
             end,
             CastSpellOnFollower = function()
-              assertEquals('function', type(ns.CastSpellOnFollower))
+              return checkFunc(ns.CastSpellOnFollower)
             end,
             CastSpellOnFollowerAbility = function()
-              assertEquals('function', type(ns.CastSpellOnFollowerAbility))
+              return checkFunc(ns.CastSpellOnFollowerAbility)
             end,
             CastSpellOnMission = function()
-              assertEquals('function', type(ns.CastSpellOnMission))
+              return checkFunc(ns.CastSpellOnMission)
             end,
             ClearCompleteTalent = function()
-              assertEquals('function', type(ns.ClearCompleteTalent))
+              return checkFunc(ns.ClearCompleteTalent)
             end,
             CloseArchitect = function()
-              assertEquals('function', type(ns.CloseArchitect))
+              return checkFunc(ns.CloseArchitect)
             end,
             CloseGarrisonTradeskillNPC = function()
-              assertEquals('function', type(ns.CloseGarrisonTradeskillNPC))
+              return checkFunc(ns.CloseGarrisonTradeskillNPC)
             end,
             CloseMissionNPC = function()
-              assertEquals('function', type(ns.CloseMissionNPC))
+              return checkFunc(ns.CloseMissionNPC)
             end,
             CloseRecruitmentNPC = function()
-              assertEquals('function', type(ns.CloseRecruitmentNPC))
+              return checkFunc(ns.CloseRecruitmentNPC)
             end,
             CloseTalentNPC = function()
-              assertEquals('function', type(ns.CloseTalentNPC))
+              return checkFunc(ns.CloseTalentNPC)
             end,
             CloseTradeskillCrafter = function()
-              assertEquals('function', type(ns.CloseTradeskillCrafter))
+              return checkFunc(ns.CloseTradeskillCrafter)
             end,
             GenerateRecruits = function()
-              assertEquals('function', type(ns.GenerateRecruits))
+              return checkFunc(ns.GenerateRecruits)
             end,
             GetAllBonusAbilityEffects = function()
-              assertEquals('function', type(ns.GetAllBonusAbilityEffects))
+              return checkFunc(ns.GetAllBonusAbilityEffects)
             end,
             GetAllEncounterThreats = function()
-              assertEquals('function', type(ns.GetAllEncounterThreats))
+              return checkFunc(ns.GetAllEncounterThreats)
             end,
             GetAutoCombatDamageClassValues = function()
-              assertEquals('function', type(ns.GetAutoCombatDamageClassValues))
+              return checkFunc(ns.GetAutoCombatDamageClassValues)
             end,
             GetAutoMissionBoardState = function()
-              assertEquals('function', type(ns.GetAutoMissionBoardState))
+              return checkFunc(ns.GetAutoMissionBoardState)
             end,
             GetAutoMissionEnvironmentEffect = function()
-              assertEquals('function', type(ns.GetAutoMissionEnvironmentEffect))
+              return checkFunc(ns.GetAutoMissionEnvironmentEffect)
             end,
             GetAutoMissionTargetingInfo = function()
-              assertEquals('function', type(ns.GetAutoMissionTargetingInfo))
+              return checkFunc(ns.GetAutoMissionTargetingInfo)
             end,
             GetAutoMissionTargetingInfoForSpell = function()
-              assertEquals('function', type(ns.GetAutoMissionTargetingInfoForSpell))
+              return checkFunc(ns.GetAutoMissionTargetingInfoForSpell)
             end,
             GetAutoTroops = function()
-              assertEquals('function', type(ns.GetAutoTroops))
+              return checkFunc(ns.GetAutoTroops)
             end,
             GetAvailableMissions = function()
-              assertEquals('function', type(ns.GetAvailableMissions))
+              return checkFunc(ns.GetAvailableMissions)
             end,
             GetAvailableRecruits = function()
-              assertEquals('function', type(ns.GetAvailableRecruits))
+              return checkFunc(ns.GetAvailableRecruits)
             end,
             GetBasicMissionInfo = function()
-              assertEquals('function', type(ns.GetBasicMissionInfo))
+              return checkFunc(ns.GetBasicMissionInfo)
             end,
             GetBuffedFollowersForMission = function()
-              assertEquals('function', type(ns.GetBuffedFollowersForMission))
+              return checkFunc(ns.GetBuffedFollowersForMission)
             end,
             GetBuildingInfo = function()
-              assertEquals('function', type(ns.GetBuildingInfo))
+              return checkFunc(ns.GetBuildingInfo)
             end,
             GetBuildingLockInfo = function()
-              assertEquals('function', type(ns.GetBuildingLockInfo))
+              return checkFunc(ns.GetBuildingLockInfo)
             end,
             GetBuildingSizes = function()
-              assertEquals('function', type(ns.GetBuildingSizes))
+              return checkFunc(ns.GetBuildingSizes)
             end,
             GetBuildingSpecInfo = function()
-              assertEquals('function', type(ns.GetBuildingSpecInfo))
+              return checkFunc(ns.GetBuildingSpecInfo)
             end,
             GetBuildingTimeRemaining = function()
-              assertEquals('function', type(ns.GetBuildingTimeRemaining))
+              return checkFunc(ns.GetBuildingTimeRemaining)
             end,
             GetBuildingTooltip = function()
-              assertEquals('function', type(ns.GetBuildingTooltip))
+              return checkFunc(ns.GetBuildingTooltip)
             end,
             GetBuildingUpgradeInfo = function()
-              assertEquals('function', type(ns.GetBuildingUpgradeInfo))
+              return checkFunc(ns.GetBuildingUpgradeInfo)
             end,
             GetBuildings = function()
-              assertEquals('function', type(ns.GetBuildings))
+              return checkFunc(ns.GetBuildings)
             end,
             GetBuildingsForPlot = function()
-              assertEquals('function', type(ns.GetBuildingsForPlot))
+              return checkFunc(ns.GetBuildingsForPlot)
             end,
             GetBuildingsForSize = function()
-              assertEquals('function', type(ns.GetBuildingsForSize))
+              return checkFunc(ns.GetBuildingsForSize)
             end,
             GetClassSpecCategoryInfo = function()
-              assertEquals('function', type(ns.GetClassSpecCategoryInfo))
+              return checkFunc(ns.GetClassSpecCategoryInfo)
             end,
             GetCombatAllyMission = function()
-              assertEquals('function', type(ns.GetCombatAllyMission))
+              return checkFunc(ns.GetCombatAllyMission)
             end,
             GetCombatLogSpellInfo = function()
-              assertEquals('function', type(ns.GetCombatLogSpellInfo))
+              return checkFunc(ns.GetCombatLogSpellInfo)
             end,
             GetCompleteMissions = function()
-              assertEquals('function', type(ns.GetCompleteMissions))
+              return checkFunc(ns.GetCompleteMissions)
             end,
             GetCompleteTalent = function()
-              assertEquals('function', type(ns.GetCompleteTalent))
+              return checkFunc(ns.GetCompleteTalent)
             end,
             GetCurrencyTypes = function()
-              assertEquals('function', type(ns.GetCurrencyTypes))
+              return checkFunc(ns.GetCurrencyTypes)
             end,
             GetCurrentCypherEquipmentLevel = function()
-              assertEquals('function', type(ns.GetCurrentCypherEquipmentLevel))
+              return checkFunc(ns.GetCurrentCypherEquipmentLevel)
             end,
             GetCurrentGarrTalentTreeFriendshipFactionID = function()
-              assertEquals('function', type(ns.GetCurrentGarrTalentTreeFriendshipFactionID))
+              return checkFunc(ns.GetCurrentGarrTalentTreeFriendshipFactionID)
             end,
             GetCurrentGarrTalentTreeID = function()
-              assertEquals('function', type(ns.GetCurrentGarrTalentTreeID))
+              return checkFunc(ns.GetCurrentGarrTalentTreeID)
             end,
             GetCyphersToNextEquipmentLevel = function()
-              assertEquals('function', type(ns.GetCyphersToNextEquipmentLevel))
+              return checkFunc(ns.GetCyphersToNextEquipmentLevel)
             end,
             GetFollowerAbilities = function()
-              assertEquals('function', type(ns.GetFollowerAbilities))
+              return checkFunc(ns.GetFollowerAbilities)
             end,
             GetFollowerAbilityAtIndex = function()
-              assertEquals('function', type(ns.GetFollowerAbilityAtIndex))
+              return checkFunc(ns.GetFollowerAbilityAtIndex)
             end,
             GetFollowerAbilityAtIndexByID = function()
-              assertEquals('function', type(ns.GetFollowerAbilityAtIndexByID))
+              return checkFunc(ns.GetFollowerAbilityAtIndexByID)
             end,
             GetFollowerAbilityCounterMechanicInfo = function()
-              assertEquals('function', type(ns.GetFollowerAbilityCounterMechanicInfo))
+              return checkFunc(ns.GetFollowerAbilityCounterMechanicInfo)
             end,
             GetFollowerAbilityCountersForMechanicTypes = function()
-              assertEquals('function', type(ns.GetFollowerAbilityCountersForMechanicTypes))
+              return checkFunc(ns.GetFollowerAbilityCountersForMechanicTypes)
             end,
             GetFollowerAbilityDescription = function()
-              assertEquals('function', type(ns.GetFollowerAbilityDescription))
+              return checkFunc(ns.GetFollowerAbilityDescription)
             end,
             GetFollowerAbilityIcon = function()
-              assertEquals('function', type(ns.GetFollowerAbilityIcon))
+              return checkFunc(ns.GetFollowerAbilityIcon)
             end,
             GetFollowerAbilityInfo = function()
-              assertEquals('function', type(ns.GetFollowerAbilityInfo))
+              return checkFunc(ns.GetFollowerAbilityInfo)
             end,
             GetFollowerAbilityIsTrait = function()
-              assertEquals('function', type(ns.GetFollowerAbilityIsTrait))
+              return checkFunc(ns.GetFollowerAbilityIsTrait)
             end,
             GetFollowerAbilityLink = function()
-              assertEquals('function', type(ns.GetFollowerAbilityLink))
+              return checkFunc(ns.GetFollowerAbilityLink)
             end,
             GetFollowerAbilityName = function()
-              assertEquals('function', type(ns.GetFollowerAbilityName))
+              return checkFunc(ns.GetFollowerAbilityName)
             end,
             GetFollowerActivationCost = function()
-              assertEquals('function', type(ns.GetFollowerActivationCost))
+              return checkFunc(ns.GetFollowerActivationCost)
             end,
             GetFollowerAutoCombatSpells = function()
-              assertEquals('function', type(ns.GetFollowerAutoCombatSpells))
+              return checkFunc(ns.GetFollowerAutoCombatSpells)
             end,
             GetFollowerAutoCombatStats = function()
-              assertEquals('function', type(ns.GetFollowerAutoCombatStats))
+              return checkFunc(ns.GetFollowerAutoCombatStats)
             end,
             GetFollowerBiasForMission = function()
-              assertEquals('function', type(ns.GetFollowerBiasForMission))
+              return checkFunc(ns.GetFollowerBiasForMission)
             end,
             GetFollowerClassSpec = function()
-              assertEquals('function', type(ns.GetFollowerClassSpec))
+              return checkFunc(ns.GetFollowerClassSpec)
             end,
             GetFollowerClassSpecAtlas = function()
-              assertEquals('function', type(ns.GetFollowerClassSpecAtlas))
+              return checkFunc(ns.GetFollowerClassSpecAtlas)
             end,
             GetFollowerClassSpecByID = function()
-              assertEquals('function', type(ns.GetFollowerClassSpecByID))
+              return checkFunc(ns.GetFollowerClassSpecByID)
             end,
             GetFollowerClassSpecName = function()
-              assertEquals('function', type(ns.GetFollowerClassSpecName))
+              return checkFunc(ns.GetFollowerClassSpecName)
             end,
             GetFollowerDisplayID = function()
-              assertEquals('function', type(ns.GetFollowerDisplayID))
+              return checkFunc(ns.GetFollowerDisplayID)
             end,
             GetFollowerInfo = function()
-              assertEquals('function', type(ns.GetFollowerInfo))
+              return checkFunc(ns.GetFollowerInfo)
             end,
             GetFollowerInfoForBuilding = function()
-              assertEquals('function', type(ns.GetFollowerInfoForBuilding))
+              return checkFunc(ns.GetFollowerInfoForBuilding)
             end,
             GetFollowerIsTroop = function()
-              assertEquals('function', type(ns.GetFollowerIsTroop))
+              return checkFunc(ns.GetFollowerIsTroop)
             end,
             GetFollowerItemLevelAverage = function()
-              assertEquals('function', type(ns.GetFollowerItemLevelAverage))
+              return checkFunc(ns.GetFollowerItemLevelAverage)
             end,
             GetFollowerItems = function()
-              assertEquals('function', type(ns.GetFollowerItems))
+              return checkFunc(ns.GetFollowerItems)
             end,
             GetFollowerLevel = function()
-              assertEquals('function', type(ns.GetFollowerLevel))
+              return checkFunc(ns.GetFollowerLevel)
             end,
             GetFollowerLevelXP = function()
-              assertEquals('function', type(ns.GetFollowerLevelXP))
+              return checkFunc(ns.GetFollowerLevelXP)
             end,
             GetFollowerLink = function()
-              assertEquals('function', type(ns.GetFollowerLink))
+              return checkFunc(ns.GetFollowerLink)
             end,
             GetFollowerLinkByID = function()
-              assertEquals('function', type(ns.GetFollowerLinkByID))
+              return checkFunc(ns.GetFollowerLinkByID)
             end,
             GetFollowerMissionCompleteInfo = function()
-              assertEquals('function', type(ns.GetFollowerMissionCompleteInfo))
+              return checkFunc(ns.GetFollowerMissionCompleteInfo)
             end,
             GetFollowerMissionTimeLeft = function()
-              assertEquals('function', type(ns.GetFollowerMissionTimeLeft))
+              return checkFunc(ns.GetFollowerMissionTimeLeft)
             end,
             GetFollowerMissionTimeLeftSeconds = function()
-              assertEquals('function', type(ns.GetFollowerMissionTimeLeftSeconds))
+              return checkFunc(ns.GetFollowerMissionTimeLeftSeconds)
             end,
             GetFollowerModelItems = function()
-              assertEquals('function', type(ns.GetFollowerModelItems))
+              return checkFunc(ns.GetFollowerModelItems)
             end,
             GetFollowerName = function()
-              assertEquals('function', type(ns.GetFollowerName))
+              return checkFunc(ns.GetFollowerName)
             end,
             GetFollowerNameByID = function()
-              assertEquals('function', type(ns.GetFollowerNameByID))
+              return checkFunc(ns.GetFollowerNameByID)
             end,
             GetFollowerPortraitIconID = function()
-              assertEquals('function', type(ns.GetFollowerPortraitIconID))
+              return checkFunc(ns.GetFollowerPortraitIconID)
             end,
             GetFollowerPortraitIconIDByID = function()
-              assertEquals('function', type(ns.GetFollowerPortraitIconIDByID))
+              return checkFunc(ns.GetFollowerPortraitIconIDByID)
             end,
             GetFollowerQuality = function()
-              assertEquals('function', type(ns.GetFollowerQuality))
+              return checkFunc(ns.GetFollowerQuality)
             end,
             GetFollowerQualityTable = function()
-              assertEquals('function', type(ns.GetFollowerQualityTable))
+              return checkFunc(ns.GetFollowerQualityTable)
             end,
             GetFollowerRecentlyGainedAbilityIDs = function()
-              assertEquals('function', type(ns.GetFollowerRecentlyGainedAbilityIDs))
+              return checkFunc(ns.GetFollowerRecentlyGainedAbilityIDs)
             end,
             GetFollowerRecentlyGainedTraitIDs = function()
-              assertEquals('function', type(ns.GetFollowerRecentlyGainedTraitIDs))
+              return checkFunc(ns.GetFollowerRecentlyGainedTraitIDs)
             end,
             GetFollowerShipments = function()
-              assertEquals('function', type(ns.GetFollowerShipments))
+              return checkFunc(ns.GetFollowerShipments)
             end,
             GetFollowerSoftCap = function()
-              assertEquals('function', type(ns.GetFollowerSoftCap))
+              return checkFunc(ns.GetFollowerSoftCap)
             end,
             GetFollowerSourceTextByID = function()
-              assertEquals('function', type(ns.GetFollowerSourceTextByID))
+              return checkFunc(ns.GetFollowerSourceTextByID)
             end,
             GetFollowerSpecializationAtIndex = function()
-              assertEquals('function', type(ns.GetFollowerSpecializationAtIndex))
+              return checkFunc(ns.GetFollowerSpecializationAtIndex)
             end,
             GetFollowerStatus = function()
-              assertEquals('function', type(ns.GetFollowerStatus))
+              return checkFunc(ns.GetFollowerStatus)
             end,
             GetFollowerTraitAtIndex = function()
-              assertEquals('function', type(ns.GetFollowerTraitAtIndex))
+              return checkFunc(ns.GetFollowerTraitAtIndex)
             end,
             GetFollowerTraitAtIndexByID = function()
-              assertEquals('function', type(ns.GetFollowerTraitAtIndexByID))
+              return checkFunc(ns.GetFollowerTraitAtIndexByID)
             end,
             GetFollowerTypeByID = function()
-              assertEquals('function', type(ns.GetFollowerTypeByID))
+              return checkFunc(ns.GetFollowerTypeByID)
             end,
             GetFollowerTypeByMissionID = function()
-              assertEquals('function', type(ns.GetFollowerTypeByMissionID))
+              return checkFunc(ns.GetFollowerTypeByMissionID)
             end,
             GetFollowerUnderBiasReason = function()
-              assertEquals('function', type(ns.GetFollowerUnderBiasReason))
+              return checkFunc(ns.GetFollowerUnderBiasReason)
             end,
             GetFollowerXP = function()
-              assertEquals('function', type(ns.GetFollowerXP))
+              return checkFunc(ns.GetFollowerXP)
             end,
             GetFollowerXPTable = function()
-              assertEquals('function', type(ns.GetFollowerXPTable))
+              return checkFunc(ns.GetFollowerXPTable)
             end,
             GetFollowerZoneSupportAbilities = function()
-              assertEquals('function', type(ns.GetFollowerZoneSupportAbilities))
+              return checkFunc(ns.GetFollowerZoneSupportAbilities)
             end,
             GetFollowers = function()
-              assertEquals('function', type(ns.GetFollowers))
+              return checkFunc(ns.GetFollowers)
             end,
             GetFollowersSpellsForMission = function()
-              assertEquals('function', type(ns.GetFollowersSpellsForMission))
+              return checkFunc(ns.GetFollowersSpellsForMission)
             end,
             GetFollowersTraitsForMission = function()
-              assertEquals('function', type(ns.GetFollowersTraitsForMission))
+              return checkFunc(ns.GetFollowersTraitsForMission)
             end,
             GetGarrisonInfo = function()
-              assertEquals('function', type(ns.GetGarrisonInfo))
+              return checkFunc(ns.GetGarrisonInfo)
             end,
             GetGarrisonPlotsInstancesForMap = function()
-              assertEquals('function', type(ns.GetGarrisonPlotsInstancesForMap))
+              return checkFunc(ns.GetGarrisonPlotsInstancesForMap)
             end,
             GetGarrisonTalentTreeCurrencyTypes = function()
-              assertEquals('function', type(ns.GetGarrisonTalentTreeCurrencyTypes))
+              return checkFunc(ns.GetGarrisonTalentTreeCurrencyTypes)
             end,
             GetGarrisonTalentTreeType = function()
-              assertEquals('function', type(ns.GetGarrisonTalentTreeType))
+              return checkFunc(ns.GetGarrisonTalentTreeType)
             end,
             GetGarrisonUpgradeCost = function()
-              assertEquals('function', type(ns.GetGarrisonUpgradeCost))
+              return checkFunc(ns.GetGarrisonUpgradeCost)
             end,
             GetInProgressMissions = function()
-              assertEquals('function', type(ns.GetInProgressMissions))
+              return checkFunc(ns.GetInProgressMissions)
             end,
             GetLandingPageGarrisonType = function()
-              assertEquals('function', type(ns.GetLandingPageGarrisonType))
+              return checkFunc(ns.GetLandingPageGarrisonType)
             end,
             GetLandingPageItems = function()
-              assertEquals('function', type(ns.GetLandingPageItems))
+              return checkFunc(ns.GetLandingPageItems)
             end,
             GetLandingPageShipmentCount = function()
-              assertEquals('function', type(ns.GetLandingPageShipmentCount))
+              return checkFunc(ns.GetLandingPageShipmentCount)
             end,
             GetLandingPageShipmentInfo = function()
-              assertEquals('function', type(ns.GetLandingPageShipmentInfo))
+              return checkFunc(ns.GetLandingPageShipmentInfo)
             end,
             GetLandingPageShipmentInfoByContainerID = function()
-              assertEquals('function', type(ns.GetLandingPageShipmentInfoByContainerID))
+              return checkFunc(ns.GetLandingPageShipmentInfoByContainerID)
             end,
             GetLooseShipments = function()
-              assertEquals('function', type(ns.GetLooseShipments))
+              return checkFunc(ns.GetLooseShipments)
             end,
             GetMaxCypherEquipmentLevel = function()
-              assertEquals('function', type(ns.GetMaxCypherEquipmentLevel))
+              return checkFunc(ns.GetMaxCypherEquipmentLevel)
             end,
             GetMissionBonusAbilityEffects = function()
-              assertEquals('function', type(ns.GetMissionBonusAbilityEffects))
+              return checkFunc(ns.GetMissionBonusAbilityEffects)
             end,
             GetMissionCompleteEncounters = function()
-              assertEquals('function', type(ns.GetMissionCompleteEncounters))
+              return checkFunc(ns.GetMissionCompleteEncounters)
             end,
             GetMissionCost = function()
-              assertEquals('function', type(ns.GetMissionCost))
+              return checkFunc(ns.GetMissionCost)
             end,
             GetMissionDeploymentInfo = function()
-              assertEquals('function', type(ns.GetMissionDeploymentInfo))
+              return checkFunc(ns.GetMissionDeploymentInfo)
             end,
             GetMissionDisplayIDs = function()
-              assertEquals('function', type(ns.GetMissionDisplayIDs))
+              return checkFunc(ns.GetMissionDisplayIDs)
             end,
             GetMissionEncounterIconInfo = function()
-              assertEquals('function', type(ns.GetMissionEncounterIconInfo))
+              return checkFunc(ns.GetMissionEncounterIconInfo)
             end,
             GetMissionLink = function()
-              assertEquals('function', type(ns.GetMissionLink))
+              return checkFunc(ns.GetMissionLink)
             end,
             GetMissionMaxFollowers = function()
-              assertEquals('function', type(ns.GetMissionMaxFollowers))
+              return checkFunc(ns.GetMissionMaxFollowers)
             end,
             GetMissionName = function()
-              assertEquals('function', type(ns.GetMissionName))
+              return checkFunc(ns.GetMissionName)
             end,
             GetMissionRewardInfo = function()
-              assertEquals('function', type(ns.GetMissionRewardInfo))
+              return checkFunc(ns.GetMissionRewardInfo)
             end,
             GetMissionSuccessChance = function()
-              assertEquals('function', type(ns.GetMissionSuccessChance))
+              return checkFunc(ns.GetMissionSuccessChance)
             end,
             GetMissionTexture = function()
-              assertEquals('function', type(ns.GetMissionTexture))
+              return checkFunc(ns.GetMissionTexture)
             end,
             GetMissionTimes = function()
-              assertEquals('function', type(ns.GetMissionTimes))
+              return checkFunc(ns.GetMissionTimes)
             end,
             GetMissionUncounteredMechanics = function()
-              assertEquals('function', type(ns.GetMissionUncounteredMechanics))
+              return checkFunc(ns.GetMissionUncounteredMechanics)
             end,
             GetNumActiveFollowers = function()
-              assertEquals('function', type(ns.GetNumActiveFollowers))
+              return checkFunc(ns.GetNumActiveFollowers)
             end,
             GetNumFollowerActivationsRemaining = function()
-              assertEquals('function', type(ns.GetNumFollowerActivationsRemaining))
+              return checkFunc(ns.GetNumFollowerActivationsRemaining)
             end,
             GetNumFollowerDailyActivations = function()
-              assertEquals('function', type(ns.GetNumFollowerDailyActivations))
+              return checkFunc(ns.GetNumFollowerDailyActivations)
             end,
             GetNumFollowers = function()
-              assertEquals('function', type(ns.GetNumFollowers))
+              return checkFunc(ns.GetNumFollowers)
             end,
             GetNumFollowersForMechanic = function()
-              assertEquals('function', type(ns.GetNumFollowersForMechanic))
+              return checkFunc(ns.GetNumFollowersForMechanic)
             end,
             GetNumFollowersOnMission = function()
-              assertEquals('function', type(ns.GetNumFollowersOnMission))
+              return checkFunc(ns.GetNumFollowersOnMission)
             end,
             GetNumPendingShipments = function()
-              assertEquals('function', type(ns.GetNumPendingShipments))
+              return checkFunc(ns.GetNumPendingShipments)
             end,
             GetNumShipmentCurrencies = function()
-              assertEquals('function', type(ns.GetNumShipmentCurrencies))
+              return checkFunc(ns.GetNumShipmentCurrencies)
             end,
             GetNumShipmentReagents = function()
-              assertEquals('function', type(ns.GetNumShipmentReagents))
+              return checkFunc(ns.GetNumShipmentReagents)
             end,
             GetOwnedBuildingInfo = function()
-              assertEquals('function', type(ns.GetOwnedBuildingInfo))
+              return checkFunc(ns.GetOwnedBuildingInfo)
             end,
             GetOwnedBuildingInfoAbbrev = function()
-              assertEquals('function', type(ns.GetOwnedBuildingInfoAbbrev))
+              return checkFunc(ns.GetOwnedBuildingInfoAbbrev)
             end,
             GetPartyBuffs = function()
-              assertEquals('function', type(ns.GetPartyBuffs))
+              return checkFunc(ns.GetPartyBuffs)
             end,
             GetPartyMentorLevels = function()
-              assertEquals('function', type(ns.GetPartyMentorLevels))
+              return checkFunc(ns.GetPartyMentorLevels)
             end,
             GetPartyMissionInfo = function()
-              assertEquals('function', type(ns.GetPartyMissionInfo))
+              return checkFunc(ns.GetPartyMissionInfo)
             end,
             GetPendingShipmentInfo = function()
-              assertEquals('function', type(ns.GetPendingShipmentInfo))
+              return checkFunc(ns.GetPendingShipmentInfo)
             end,
             GetPlots = function()
-              assertEquals('function', type(ns.GetPlots))
+              return checkFunc(ns.GetPlots)
             end,
             GetPlotsForBuilding = function()
-              assertEquals('function', type(ns.GetPlotsForBuilding))
+              return checkFunc(ns.GetPlotsForBuilding)
             end,
             GetPossibleFollowersForBuilding = function()
-              assertEquals('function', type(ns.GetPossibleFollowersForBuilding))
+              return checkFunc(ns.GetPossibleFollowersForBuilding)
             end,
             GetRecruitAbilities = function()
-              assertEquals('function', type(ns.GetRecruitAbilities))
+              return checkFunc(ns.GetRecruitAbilities)
             end,
             GetRecruiterAbilityCategories = function()
-              assertEquals('function', type(ns.GetRecruiterAbilityCategories))
+              return checkFunc(ns.GetRecruiterAbilityCategories)
             end,
             GetRecruiterAbilityList = function()
-              assertEquals('function', type(ns.GetRecruiterAbilityList))
+              return checkFunc(ns.GetRecruiterAbilityList)
             end,
             GetRecruitmentPreferences = function()
-              assertEquals('function', type(ns.GetRecruitmentPreferences))
+              return checkFunc(ns.GetRecruitmentPreferences)
             end,
             GetShipDeathAnimInfo = function()
-              assertEquals('function', type(ns.GetShipDeathAnimInfo))
+              return checkFunc(ns.GetShipDeathAnimInfo)
             end,
             GetShipmentContainerInfo = function()
-              assertEquals('function', type(ns.GetShipmentContainerInfo))
+              return checkFunc(ns.GetShipmentContainerInfo)
             end,
             GetShipmentItemInfo = function()
-              assertEquals('function', type(ns.GetShipmentItemInfo))
+              return checkFunc(ns.GetShipmentItemInfo)
             end,
             GetShipmentReagentCurrencyInfo = function()
-              assertEquals('function', type(ns.GetShipmentReagentCurrencyInfo))
+              return checkFunc(ns.GetShipmentReagentCurrencyInfo)
             end,
             GetShipmentReagentInfo = function()
-              assertEquals('function', type(ns.GetShipmentReagentInfo))
+              return checkFunc(ns.GetShipmentReagentInfo)
             end,
             GetShipmentReagentItemLink = function()
-              assertEquals('function', type(ns.GetShipmentReagentItemLink))
+              return checkFunc(ns.GetShipmentReagentItemLink)
             end,
             GetSpecChangeCost = function()
-              assertEquals('function', type(ns.GetSpecChangeCost))
+              return checkFunc(ns.GetSpecChangeCost)
             end,
             GetTabForPlot = function()
-              assertEquals('function', type(ns.GetTabForPlot))
+              return checkFunc(ns.GetTabForPlot)
             end,
             GetTalentInfo = function()
-              assertEquals('function', type(ns.GetTalentInfo))
+              return checkFunc(ns.GetTalentInfo)
             end,
             GetTalentPointsSpentInTalentTree = function()
-              assertEquals('function', type(ns.GetTalentPointsSpentInTalentTree))
+              return checkFunc(ns.GetTalentPointsSpentInTalentTree)
             end,
             GetTalentTreeIDsByClassID = function()
-              assertEquals('function', type(ns.GetTalentTreeIDsByClassID))
+              return checkFunc(ns.GetTalentTreeIDsByClassID)
             end,
             GetTalentTreeInfo = function()
-              assertEquals('function', type(ns.GetTalentTreeInfo))
+              return checkFunc(ns.GetTalentTreeInfo)
             end,
             GetTalentTreeResetInfo = function()
-              assertEquals('function', type(ns.GetTalentTreeResetInfo))
+              return checkFunc(ns.GetTalentTreeResetInfo)
             end,
             GetTalentTreeTalentPointResearchInfo = function()
-              assertEquals('function', type(ns.GetTalentTreeTalentPointResearchInfo))
+              return checkFunc(ns.GetTalentTreeTalentPointResearchInfo)
             end,
             GetTalentUnlockWorldQuest = function()
-              assertEquals('function', type(ns.GetTalentUnlockWorldQuest))
+              return checkFunc(ns.GetTalentUnlockWorldQuest)
             end,
             HasAdventures = function()
-              assertEquals('function', type(ns.HasAdventures))
+              return checkFunc(ns.HasAdventures)
             end,
             HasGarrison = function()
-              assertEquals('function', type(ns.HasGarrison))
+              return checkFunc(ns.HasGarrison)
             end,
             HasShipyard = function()
-              assertEquals('function', type(ns.HasShipyard))
+              return checkFunc(ns.HasShipyard)
             end,
             IsAboveFollowerSoftCap = function()
-              assertEquals('function', type(ns.IsAboveFollowerSoftCap))
+              return checkFunc(ns.IsAboveFollowerSoftCap)
             end,
             IsAtGarrisonMissionNPC = function()
-              assertEquals('function', type(ns.IsAtGarrisonMissionNPC))
+              return checkFunc(ns.IsAtGarrisonMissionNPC)
             end,
             IsEnvironmentCountered = function()
-              assertEquals('function', type(ns.IsEnvironmentCountered))
+              return checkFunc(ns.IsEnvironmentCountered)
             end,
             IsFollowerCollected = function()
-              assertEquals('function', type(ns.IsFollowerCollected))
+              return checkFunc(ns.IsFollowerCollected)
             end,
             IsFollowerOnCompletedMission = function()
-              assertEquals('function', type(ns.IsFollowerOnCompletedMission))
+              return checkFunc(ns.IsFollowerOnCompletedMission)
             end,
             IsInvasionAvailable = function()
-              assertEquals('function', type(ns.IsInvasionAvailable))
+              return checkFunc(ns.IsInvasionAvailable)
             end,
             IsMechanicFullyCountered = function()
-              assertEquals('function', type(ns.IsMechanicFullyCountered))
+              return checkFunc(ns.IsMechanicFullyCountered)
             end,
             IsOnGarrisonMap = function()
-              assertEquals('function', type(ns.IsOnGarrisonMap))
+              return checkFunc(ns.IsOnGarrisonMap)
             end,
             IsOnShipmentQuestForNPC = function()
-              assertEquals('function', type(ns.IsOnShipmentQuestForNPC))
+              return checkFunc(ns.IsOnShipmentQuestForNPC)
             end,
             IsOnShipyardMap = function()
-              assertEquals('function', type(ns.IsOnShipyardMap))
+              return checkFunc(ns.IsOnShipyardMap)
             end,
             IsPlayerInGarrison = function()
-              assertEquals('function', type(ns.IsPlayerInGarrison))
+              return checkFunc(ns.IsPlayerInGarrison)
             end,
             IsTalentConditionMet = function()
-              assertEquals('function', type(ns.IsTalentConditionMet))
+              return checkFunc(ns.IsTalentConditionMet)
             end,
             IsUsingPartyGarrison = function()
-              assertEquals('function', type(ns.IsUsingPartyGarrison))
+              return checkFunc(ns.IsUsingPartyGarrison)
             end,
             IsVisitGarrisonAvailable = function()
-              assertEquals('function', type(ns.IsVisitGarrisonAvailable))
+              return checkFunc(ns.IsVisitGarrisonAvailable)
             end,
             MarkMissionComplete = function()
-              assertEquals('function', type(ns.MarkMissionComplete))
+              return checkFunc(ns.MarkMissionComplete)
             end,
             MissionBonusRoll = function()
-              assertEquals('function', type(ns.MissionBonusRoll))
+              return checkFunc(ns.MissionBonusRoll)
             end,
             PlaceBuilding = function()
-              assertEquals('function', type(ns.PlaceBuilding))
+              return checkFunc(ns.PlaceBuilding)
             end,
             RecruitFollower = function()
-              assertEquals('function', type(ns.RecruitFollower))
+              return checkFunc(ns.RecruitFollower)
             end,
             RegenerateCombatLog = function()
-              assertEquals('function', type(ns.RegenerateCombatLog))
+              return checkFunc(ns.RegenerateCombatLog)
             end,
             RemoveFollower = function()
-              assertEquals('function', type(ns.RemoveFollower))
+              return checkFunc(ns.RemoveFollower)
             end,
             RemoveFollowerFromBuilding = function()
-              assertEquals('function', type(ns.RemoveFollowerFromBuilding))
+              return checkFunc(ns.RemoveFollowerFromBuilding)
             end,
             RemoveFollowerFromMission = function()
-              assertEquals('function', type(ns.RemoveFollowerFromMission))
+              return checkFunc(ns.RemoveFollowerFromMission)
             end,
             RenameFollower = function()
-              assertEquals('function', type(ns.RenameFollower))
+              return checkFunc(ns.RenameFollower)
             end,
             RequestClassSpecCategoryInfo = function()
-              assertEquals('function', type(ns.RequestClassSpecCategoryInfo))
+              return checkFunc(ns.RequestClassSpecCategoryInfo)
             end,
             RequestGarrisonUpgradeable = function()
-              assertEquals('function', type(ns.RequestGarrisonUpgradeable))
+              return checkFunc(ns.RequestGarrisonUpgradeable)
             end,
             RequestLandingPageShipmentInfo = function()
-              assertEquals('function', type(ns.RequestLandingPageShipmentInfo))
+              return checkFunc(ns.RequestLandingPageShipmentInfo)
             end,
             RequestShipmentCreation = function()
-              assertEquals('function', type(ns.RequestShipmentCreation))
+              return checkFunc(ns.RequestShipmentCreation)
             end,
             RequestShipmentInfo = function()
-              assertEquals('function', type(ns.RequestShipmentInfo))
+              return checkFunc(ns.RequestShipmentInfo)
             end,
             ResearchTalent = function()
-              assertEquals('function', type(ns.ResearchTalent))
+              return checkFunc(ns.ResearchTalent)
             end,
             RushHealAllFollowers = function()
-              assertEquals('function', type(ns.RushHealAllFollowers))
+              return checkFunc(ns.RushHealAllFollowers)
             end,
             RushHealFollower = function()
-              assertEquals('function', type(ns.RushHealFollower))
+              return checkFunc(ns.RushHealFollower)
             end,
             SearchForFollower = function()
-              assertEquals('function', type(ns.SearchForFollower))
+              return checkFunc(ns.SearchForFollower)
             end,
             SetAutoCombatSpellFastForward = function()
-              assertEquals('function', type(ns.SetAutoCombatSpellFastForward))
+              return checkFunc(ns.SetAutoCombatSpellFastForward)
             end,
             SetBuildingActive = function()
-              assertEquals('function', type(ns.SetBuildingActive))
+              return checkFunc(ns.SetBuildingActive)
             end,
             SetBuildingSpecialization = function()
-              assertEquals('function', type(ns.SetBuildingSpecialization))
+              return checkFunc(ns.SetBuildingSpecialization)
             end,
             SetFollowerFavorite = function()
-              assertEquals('function', type(ns.SetFollowerFavorite))
+              return checkFunc(ns.SetFollowerFavorite)
             end,
             SetFollowerInactive = function()
-              assertEquals('function', type(ns.SetFollowerInactive))
+              return checkFunc(ns.SetFollowerInactive)
             end,
             SetRecruitmentPreferences = function()
-              assertEquals('function', type(ns.SetRecruitmentPreferences))
+              return checkFunc(ns.SetRecruitmentPreferences)
             end,
             SetUsingPartyGarrison = function()
-              assertEquals('function', type(ns.SetUsingPartyGarrison))
+              return checkFunc(ns.SetUsingPartyGarrison)
             end,
             ShouldShowMapTab = function()
-              assertEquals('function', type(ns.ShouldShowMapTab))
+              return checkFunc(ns.ShouldShowMapTab)
             end,
             ShowFollowerNameInErrorMessage = function()
-              assertEquals('function', type(ns.ShowFollowerNameInErrorMessage))
+              return checkFunc(ns.ShowFollowerNameInErrorMessage)
             end,
             StartMission = function()
-              assertEquals('function', type(ns.StartMission))
+              return checkFunc(ns.StartMission)
             end,
             SwapBuildings = function()
-              assertEquals('function', type(ns.SwapBuildings))
+              return checkFunc(ns.SwapBuildings)
             end,
             TargetSpellHasFollowerItemLevelUpgrade = function()
-              assertEquals('function', type(ns.TargetSpellHasFollowerItemLevelUpgrade))
+              return checkFunc(ns.TargetSpellHasFollowerItemLevelUpgrade)
             end,
             TargetSpellHasFollowerReroll = function()
-              assertEquals('function', type(ns.TargetSpellHasFollowerReroll))
+              return checkFunc(ns.TargetSpellHasFollowerReroll)
             end,
             TargetSpellHasFollowerTemporaryAbility = function()
-              assertEquals('function', type(ns.TargetSpellHasFollowerTemporaryAbility))
+              return checkFunc(ns.TargetSpellHasFollowerTemporaryAbility)
             end,
             UpgradeBuilding = function()
-              assertEquals('function', type(ns.UpgradeBuilding))
+              return checkFunc(ns.UpgradeBuilding)
             end,
             UpgradeGarrison = function()
-              assertEquals('function', type(ns.UpgradeGarrison))
+              return checkFunc(ns.UpgradeGarrison)
             end,
           })
         end,
@@ -4245,107 +4261,107 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.CloseGossip))
                 return
               end
-              assertEquals('function', type(ns.CloseGossip))
+              return checkFunc(ns.CloseGossip)
             end,
             ForceGossip = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ForceGossip))
                 return
               end
-              assertEquals('function', type(ns.ForceGossip))
+              return checkFunc(ns.ForceGossip)
             end,
             GetActiveQuests = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetActiveQuests))
                 return
               end
-              assertEquals('function', type(ns.GetActiveQuests))
+              return checkFunc(ns.GetActiveQuests)
             end,
             GetAvailableQuests = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetAvailableQuests))
                 return
               end
-              assertEquals('function', type(ns.GetAvailableQuests))
+              return checkFunc(ns.GetAvailableQuests)
             end,
             GetCompletedOptionDescriptionString = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCompletedOptionDescriptionString))
                 return
               end
-              assertEquals('function', type(ns.GetCompletedOptionDescriptionString))
+              return checkFunc(ns.GetCompletedOptionDescriptionString)
             end,
             GetCustomGossipDescriptionString = function()
-              assertEquals('function', type(ns.GetCustomGossipDescriptionString))
+              return checkFunc(ns.GetCustomGossipDescriptionString)
             end,
             GetNumActiveQuests = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumActiveQuests))
                 return
               end
-              assertEquals('function', type(ns.GetNumActiveQuests))
+              return checkFunc(ns.GetNumActiveQuests)
             end,
             GetNumAvailableQuests = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumAvailableQuests))
                 return
               end
-              assertEquals('function', type(ns.GetNumAvailableQuests))
+              return checkFunc(ns.GetNumAvailableQuests)
             end,
             GetNumOptions = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumOptions))
                 return
               end
-              assertEquals('function', type(ns.GetNumOptions))
+              return checkFunc(ns.GetNumOptions)
             end,
             GetOptions = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetOptions))
                 return
               end
-              assertEquals('function', type(ns.GetOptions))
+              return checkFunc(ns.GetOptions)
             end,
             GetPoiForUiMapID = function()
-              assertEquals('function', type(ns.GetPoiForUiMapID))
+              return checkFunc(ns.GetPoiForUiMapID)
             end,
             GetPoiInfo = function()
-              assertEquals('function', type(ns.GetPoiInfo))
+              return checkFunc(ns.GetPoiInfo)
             end,
             GetText = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetText))
                 return
               end
-              assertEquals('function', type(ns.GetText))
+              return checkFunc(ns.GetText)
             end,
             RefreshOptions = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.RefreshOptions))
                 return
               end
-              assertEquals('function', type(ns.RefreshOptions))
+              return checkFunc(ns.RefreshOptions)
             end,
             SelectActiveQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SelectActiveQuest))
                 return
               end
-              assertEquals('function', type(ns.SelectActiveQuest))
+              return checkFunc(ns.SelectActiveQuest)
             end,
             SelectAvailableQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SelectAvailableQuest))
                 return
               end
-              assertEquals('function', type(ns.SelectAvailableQuest))
+              return checkFunc(ns.SelectAvailableQuest)
             end,
             SelectOption = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SelectOption))
                 return
               end
-              assertEquals('function', type(ns.SelectOption))
+              return checkFunc(ns.SelectOption)
             end,
           })
         end,
@@ -4355,57 +4371,57 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanEditOfficerNote = function()
-              assertEquals('function', type(ns.CanEditOfficerNote))
+              return checkFunc(ns.CanEditOfficerNote)
             end,
             CanSpeakInGuildChat = function()
-              assertEquals('function', type(ns.CanSpeakInGuildChat))
+              return checkFunc(ns.CanSpeakInGuildChat)
             end,
             CanViewOfficerNote = function()
-              assertEquals('function', type(ns.CanViewOfficerNote))
+              return checkFunc(ns.CanViewOfficerNote)
             end,
             GetGuildNewsInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetGuildNewsInfo))
                 return
               end
-              assertEquals('function', type(ns.GetGuildNewsInfo))
+              return checkFunc(ns.GetGuildNewsInfo)
             end,
             GetGuildRankOrder = function()
-              assertEquals('function', type(ns.GetGuildRankOrder))
+              return checkFunc(ns.GetGuildRankOrder)
             end,
             GetGuildTabardInfo = function()
-              assertEquals('function', type(ns.GetGuildTabardInfo))
+              return checkFunc(ns.GetGuildTabardInfo)
             end,
             GuildControlGetRankFlags = function()
-              assertEquals('function', type(ns.GuildControlGetRankFlags))
+              return checkFunc(ns.GuildControlGetRankFlags)
             end,
             GuildRoster = function()
-              assertEquals('function', type(ns.GuildRoster))
+              return checkFunc(ns.GuildRoster)
             end,
             IsGuildOfficer = function()
-              assertEquals('function', type(ns.IsGuildOfficer))
+              return checkFunc(ns.IsGuildOfficer)
             end,
             IsGuildRankAssignmentAllowed = function()
-              assertEquals('function', type(ns.IsGuildRankAssignmentAllowed))
+              return checkFunc(ns.IsGuildRankAssignmentAllowed)
             end,
             QueryGuildMemberRecipes = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.QueryGuildMemberRecipes))
                 return
               end
-              assertEquals('function', type(ns.QueryGuildMemberRecipes))
+              return checkFunc(ns.QueryGuildMemberRecipes)
             end,
             QueryGuildMembersForRecipe = function()
-              assertEquals('function', type(ns.QueryGuildMembersForRecipe))
+              return checkFunc(ns.QueryGuildMembersForRecipe)
             end,
             RemoveFromGuild = function()
-              assertEquals('function', type(ns.RemoveFromGuild))
+              return checkFunc(ns.RemoveFromGuild)
             end,
             SetGuildRankOrder = function()
-              assertEquals('function', type(ns.SetGuildRankOrder))
+              return checkFunc(ns.SetGuildRankOrder)
             end,
             SetNote = function()
-              assertEquals('function', type(ns.SetNote))
+              return checkFunc(ns.SetNote)
             end,
           })
         end,
@@ -4419,76 +4435,76 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanHeirloomUpgradeFromPending = function()
-              assertEquals('function', type(ns.CanHeirloomUpgradeFromPending))
+              return checkFunc(ns.CanHeirloomUpgradeFromPending)
             end,
             CreateHeirloom = function()
-              assertEquals('function', type(ns.CreateHeirloom))
+              return checkFunc(ns.CreateHeirloom)
             end,
             GetClassAndSpecFilters = function()
-              assertEquals('function', type(ns.GetClassAndSpecFilters))
+              return checkFunc(ns.GetClassAndSpecFilters)
             end,
             GetCollectedHeirloomFilter = function()
-              assertEquals('function', type(ns.GetCollectedHeirloomFilter))
+              return checkFunc(ns.GetCollectedHeirloomFilter)
             end,
             GetHeirloomInfo = function()
-              assertEquals('function', type(ns.GetHeirloomInfo))
+              return checkFunc(ns.GetHeirloomInfo)
             end,
             GetHeirloomItemIDFromDisplayedIndex = function()
-              assertEquals('function', type(ns.GetHeirloomItemIDFromDisplayedIndex))
+              return checkFunc(ns.GetHeirloomItemIDFromDisplayedIndex)
             end,
             GetHeirloomItemIDs = function()
-              assertEquals('function', type(ns.GetHeirloomItemIDs))
+              return checkFunc(ns.GetHeirloomItemIDs)
             end,
             GetHeirloomLink = function()
-              assertEquals('function', type(ns.GetHeirloomLink))
+              return checkFunc(ns.GetHeirloomLink)
             end,
             GetHeirloomMaxUpgradeLevel = function()
-              assertEquals('function', type(ns.GetHeirloomMaxUpgradeLevel))
+              return checkFunc(ns.GetHeirloomMaxUpgradeLevel)
             end,
             GetHeirloomSourceFilter = function()
-              assertEquals('function', type(ns.GetHeirloomSourceFilter))
+              return checkFunc(ns.GetHeirloomSourceFilter)
             end,
             GetNumDisplayedHeirlooms = function()
-              assertEquals('function', type(ns.GetNumDisplayedHeirlooms))
+              return checkFunc(ns.GetNumDisplayedHeirlooms)
             end,
             GetNumHeirlooms = function()
-              assertEquals('function', type(ns.GetNumHeirlooms))
+              return checkFunc(ns.GetNumHeirlooms)
             end,
             GetNumKnownHeirlooms = function()
-              assertEquals('function', type(ns.GetNumKnownHeirlooms))
+              return checkFunc(ns.GetNumKnownHeirlooms)
             end,
             GetUncollectedHeirloomFilter = function()
-              assertEquals('function', type(ns.GetUncollectedHeirloomFilter))
+              return checkFunc(ns.GetUncollectedHeirloomFilter)
             end,
             IsItemHeirloom = function()
-              assertEquals('function', type(ns.IsItemHeirloom))
+              return checkFunc(ns.IsItemHeirloom)
             end,
             IsPendingHeirloomUpgrade = function()
-              assertEquals('function', type(ns.IsPendingHeirloomUpgrade))
+              return checkFunc(ns.IsPendingHeirloomUpgrade)
             end,
             PlayerHasHeirloom = function()
-              assertEquals('function', type(ns.PlayerHasHeirloom))
+              return checkFunc(ns.PlayerHasHeirloom)
             end,
             SetClassAndSpecFilters = function()
-              assertEquals('function', type(ns.SetClassAndSpecFilters))
+              return checkFunc(ns.SetClassAndSpecFilters)
             end,
             SetCollectedHeirloomFilter = function()
-              assertEquals('function', type(ns.SetCollectedHeirloomFilter))
+              return checkFunc(ns.SetCollectedHeirloomFilter)
             end,
             SetHeirloomSourceFilter = function()
-              assertEquals('function', type(ns.SetHeirloomSourceFilter))
+              return checkFunc(ns.SetHeirloomSourceFilter)
             end,
             SetSearch = function()
-              assertEquals('function', type(ns.SetSearch))
+              return checkFunc(ns.SetSearch)
             end,
             SetUncollectedHeirloomFilter = function()
-              assertEquals('function', type(ns.SetUncollectedHeirloomFilter))
+              return checkFunc(ns.SetUncollectedHeirloomFilter)
             end,
             ShouldShowHeirloomHelp = function()
-              assertEquals('function', type(ns.ShouldShowHeirloomHelp))
+              return checkFunc(ns.ShouldShowHeirloomHelp)
             end,
             UpgradeHeirloom = function()
-              assertEquals('function', type(ns.UpgradeHeirloom))
+              return checkFunc(ns.UpgradeHeirloom)
             end,
           })
         end,
@@ -4502,25 +4518,25 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AreAllCollectionFiltersChecked = function()
-              assertEquals('function', type(ns.AreAllCollectionFiltersChecked))
+              return checkFunc(ns.AreAllCollectionFiltersChecked)
             end,
             AreAllSourceFiltersChecked = function()
-              assertEquals('function', type(ns.AreAllSourceFiltersChecked))
+              return checkFunc(ns.AreAllSourceFiltersChecked)
             end,
             IsHeirloomSourceValid = function()
-              assertEquals('function', type(ns.IsHeirloomSourceValid))
+              return checkFunc(ns.IsHeirloomSourceValid)
             end,
             IsUsingDefaultFilters = function()
-              assertEquals('function', type(ns.IsUsingDefaultFilters))
+              return checkFunc(ns.IsUsingDefaultFilters)
             end,
             SetAllCollectionFilters = function()
-              assertEquals('function', type(ns.SetAllCollectionFilters))
+              return checkFunc(ns.SetAllCollectionFilters)
             end,
             SetAllSourceFilters = function()
-              assertEquals('function', type(ns.SetAllSourceFilters))
+              return checkFunc(ns.SetAllSourceFilters)
             end,
             SetDefaultFilters = function()
-              assertEquals('function', type(ns.SetDefaultFilters))
+              return checkFunc(ns.SetDefaultFilters)
             end,
           })
         end,
@@ -4534,10 +4550,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             HasIncomingSummon = function()
-              assertEquals('function', type(ns.HasIncomingSummon))
+              return checkFunc(ns.HasIncomingSummon)
             end,
             IncomingSummonStatus = function()
-              assertEquals('function', type(ns.IncomingSummonStatus))
+              return checkFunc(ns.IncomingSummonStatus)
             end,
           })
         end,
@@ -4551,16 +4567,16 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AreInvasionsAvailable = function()
-              assertEquals('function', type(ns.AreInvasionsAvailable))
+              return checkFunc(ns.AreInvasionsAvailable)
             end,
             GetInvasionForUiMapID = function()
-              assertEquals('function', type(ns.GetInvasionForUiMapID))
+              return checkFunc(ns.GetInvasionForUiMapID)
             end,
             GetInvasionInfo = function()
-              assertEquals('function', type(ns.GetInvasionInfo))
+              return checkFunc(ns.GetInvasionInfo)
             end,
             GetInvasionTimeLeft = function()
-              assertEquals('function', type(ns.GetInvasionTimeLeft))
+              return checkFunc(ns.GetInvasionTimeLeft)
             end,
           })
         end,
@@ -4574,22 +4590,22 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CloseIslandsQueueScreen = function()
-              assertEquals('function', type(ns.CloseIslandsQueueScreen))
+              return checkFunc(ns.CloseIslandsQueueScreen)
             end,
             GetIslandDifficultyInfo = function()
-              assertEquals('function', type(ns.GetIslandDifficultyInfo))
+              return checkFunc(ns.GetIslandDifficultyInfo)
             end,
             GetIslandsMaxGroupSize = function()
-              assertEquals('function', type(ns.GetIslandsMaxGroupSize))
+              return checkFunc(ns.GetIslandsMaxGroupSize)
             end,
             GetIslandsWeeklyQuestID = function()
-              assertEquals('function', type(ns.GetIslandsWeeklyQuestID))
+              return checkFunc(ns.GetIslandsWeeklyQuestID)
             end,
             QueueForIsland = function()
-              assertEquals('function', type(ns.QueueForIsland))
+              return checkFunc(ns.QueueForIsland)
             end,
             RequestPreloadRewardData = function()
-              assertEquals('function', type(ns.RequestPreloadRewardData))
+              return checkFunc(ns.RequestPreloadRewardData)
             end,
           })
         end,
@@ -4603,208 +4619,208 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.CanItemTransmogAppearance))
                 return
               end
-              assertEquals('function', type(ns.CanItemTransmogAppearance))
+              return checkFunc(ns.CanItemTransmogAppearance)
             end,
             CanScrapItem = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanScrapItem))
                 return
               end
-              assertEquals('function', type(ns.CanScrapItem))
+              return checkFunc(ns.CanScrapItem)
             end,
             CanViewItemPowers = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanViewItemPowers))
                 return
               end
-              assertEquals('function', type(ns.CanViewItemPowers))
+              return checkFunc(ns.CanViewItemPowers)
             end,
             DoesItemExist = function()
-              assertEquals('function', type(ns.DoesItemExist))
+              return checkFunc(ns.DoesItemExist)
             end,
             DoesItemExistByID = function()
-              assertEquals('function', type(ns.DoesItemExistByID))
+              return checkFunc(ns.DoesItemExistByID)
             end,
             DoesItemMatchBonusTreeReplacement = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.DoesItemMatchBonusTreeReplacement))
                 return
               end
-              assertEquals('function', type(ns.DoesItemMatchBonusTreeReplacement))
+              return checkFunc(ns.DoesItemMatchBonusTreeReplacement)
             end,
             GetAppliedItemTransmogInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetAppliedItemTransmogInfo))
                 return
               end
-              assertEquals('function', type(ns.GetAppliedItemTransmogInfo))
+              return checkFunc(ns.GetAppliedItemTransmogInfo)
             end,
             GetBaseItemTransmogInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetBaseItemTransmogInfo))
                 return
               end
-              assertEquals('function', type(ns.GetBaseItemTransmogInfo))
+              return checkFunc(ns.GetBaseItemTransmogInfo)
             end,
             GetCurrentItemLevel = function()
-              assertEquals('function', type(ns.GetCurrentItemLevel))
+              return checkFunc(ns.GetCurrentItemLevel)
             end,
             GetCurrentItemTransmogInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCurrentItemTransmogInfo))
                 return
               end
-              assertEquals('function', type(ns.GetCurrentItemTransmogInfo))
+              return checkFunc(ns.GetCurrentItemTransmogInfo)
             end,
             GetItemConversionOutputIcon = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetItemConversionOutputIcon))
                 return
               end
-              assertEquals('function', type(ns.GetItemConversionOutputIcon))
+              return checkFunc(ns.GetItemConversionOutputIcon)
             end,
             GetItemGUID = function()
-              assertEquals('function', type(ns.GetItemGUID))
+              return checkFunc(ns.GetItemGUID)
             end,
             GetItemID = function()
-              assertEquals('function', type(ns.GetItemID))
+              return checkFunc(ns.GetItemID)
             end,
             GetItemIcon = function()
-              assertEquals('function', type(ns.GetItemIcon))
+              return checkFunc(ns.GetItemIcon)
             end,
             GetItemIconByID = function()
-              assertEquals('function', type(ns.GetItemIconByID))
+              return checkFunc(ns.GetItemIconByID)
             end,
             GetItemInventoryType = function()
-              assertEquals('function', type(ns.GetItemInventoryType))
+              return checkFunc(ns.GetItemInventoryType)
             end,
             GetItemInventoryTypeByID = function()
-              assertEquals('function', type(ns.GetItemInventoryTypeByID))
+              return checkFunc(ns.GetItemInventoryTypeByID)
             end,
             GetItemLink = function()
-              assertEquals('function', type(ns.GetItemLink))
+              return checkFunc(ns.GetItemLink)
             end,
             GetItemName = function()
-              assertEquals('function', type(ns.GetItemName))
+              return checkFunc(ns.GetItemName)
             end,
             GetItemNameByID = function()
-              assertEquals('function', type(ns.GetItemNameByID))
+              return checkFunc(ns.GetItemNameByID)
             end,
             GetItemQuality = function()
-              assertEquals('function', type(ns.GetItemQuality))
+              return checkFunc(ns.GetItemQuality)
             end,
             GetItemQualityByID = function()
-              assertEquals('function', type(ns.GetItemQualityByID))
+              return checkFunc(ns.GetItemQualityByID)
             end,
             GetItemUniquenessByID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetItemUniquenessByID))
                 return
               end
-              assertEquals('function', type(ns.GetItemUniquenessByID))
+              return checkFunc(ns.GetItemUniquenessByID)
             end,
             GetLimitedCurrencyItemInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetLimitedCurrencyItemInfo))
                 return
               end
-              assertEquals('function', type(ns.GetLimitedCurrencyItemInfo))
+              return checkFunc(ns.GetLimitedCurrencyItemInfo)
             end,
             GetStackCount = function()
-              assertEquals('function', type(ns.GetStackCount))
+              return checkFunc(ns.GetStackCount)
             end,
             IsAnimaItemByID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsAnimaItemByID))
                 return
               end
-              assertEquals('function', type(ns.IsAnimaItemByID))
+              return checkFunc(ns.IsAnimaItemByID)
             end,
             IsBound = function()
-              assertEquals('function', type(ns.IsBound))
+              return checkFunc(ns.IsBound)
             end,
             IsDressableItemByID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsDressableItemByID))
                 return
               end
-              assertEquals('function', type(ns.IsDressableItemByID))
+              return checkFunc(ns.IsDressableItemByID)
             end,
             IsItemConduit = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsItemConduit))
                 return
               end
-              assertEquals('function', type(ns.IsItemConduit))
+              return checkFunc(ns.IsItemConduit)
             end,
             IsItemConvertibleAndValidForPlayer = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsItemConvertibleAndValidForPlayer))
                 return
               end
-              assertEquals('function', type(ns.IsItemConvertibleAndValidForPlayer))
+              return checkFunc(ns.IsItemConvertibleAndValidForPlayer)
             end,
             IsItemCorrupted = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsItemCorrupted))
                 return
               end
-              assertEquals('function', type(ns.IsItemCorrupted))
+              return checkFunc(ns.IsItemCorrupted)
             end,
             IsItemCorruptionRelated = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsItemCorruptionRelated))
                 return
               end
-              assertEquals('function', type(ns.IsItemCorruptionRelated))
+              return checkFunc(ns.IsItemCorruptionRelated)
             end,
             IsItemCorruptionResistant = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsItemCorruptionResistant))
                 return
               end
-              assertEquals('function', type(ns.IsItemCorruptionResistant))
+              return checkFunc(ns.IsItemCorruptionResistant)
             end,
             IsItemDataCached = function()
-              assertEquals('function', type(ns.IsItemDataCached))
+              return checkFunc(ns.IsItemDataCached)
             end,
             IsItemDataCachedByID = function()
-              assertEquals('function', type(ns.IsItemDataCachedByID))
+              return checkFunc(ns.IsItemDataCachedByID)
             end,
             IsItemKeystoneByID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsItemKeystoneByID))
                 return
               end
-              assertEquals('function', type(ns.IsItemKeystoneByID))
+              return checkFunc(ns.IsItemKeystoneByID)
             end,
             IsItemSpecificToPlayerClass = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsItemSpecificToPlayerClass))
                 return
               end
-              assertEquals('function', type(ns.IsItemSpecificToPlayerClass))
+              return checkFunc(ns.IsItemSpecificToPlayerClass)
             end,
             IsLocked = function()
-              assertEquals('function', type(ns.IsLocked))
+              return checkFunc(ns.IsLocked)
             end,
             LockItem = function()
-              assertEquals('function', type(ns.LockItem))
+              return checkFunc(ns.LockItem)
             end,
             LockItemByGUID = function()
-              assertEquals('function', type(ns.LockItemByGUID))
+              return checkFunc(ns.LockItemByGUID)
             end,
             RequestLoadItemData = function()
-              assertEquals('function', type(ns.RequestLoadItemData))
+              return checkFunc(ns.RequestLoadItemData)
             end,
             RequestLoadItemDataByID = function()
-              assertEquals('function', type(ns.RequestLoadItemDataByID))
+              return checkFunc(ns.RequestLoadItemDataByID)
             end,
             UnlockItem = function()
-              assertEquals('function', type(ns.UnlockItem))
+              return checkFunc(ns.UnlockItem)
             end,
             UnlockItemByGUID = function()
-              assertEquals('function', type(ns.UnlockItemByGUID))
+              return checkFunc(ns.UnlockItemByGUID)
             end,
           })
         end,
@@ -4818,40 +4834,40 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ClearPendingItem = function()
-              assertEquals('function', type(ns.ClearPendingItem))
+              return checkFunc(ns.ClearPendingItem)
             end,
             CloseUI = function()
-              assertEquals('function', type(ns.CloseUI))
+              return checkFunc(ns.CloseUI)
             end,
             GetChargeInfo = function()
-              assertEquals('function', type(ns.GetChargeInfo))
+              return checkFunc(ns.GetChargeInfo)
             end,
             GetItemConversionCurrencyCost = function()
-              assertEquals('function', type(ns.GetItemConversionCurrencyCost))
+              return checkFunc(ns.GetItemConversionCurrencyCost)
             end,
             GetItemInteractionInfo = function()
-              assertEquals('function', type(ns.GetItemInteractionInfo))
+              return checkFunc(ns.GetItemInteractionInfo)
             end,
             GetItemInteractionSpellId = function()
-              assertEquals('function', type(ns.GetItemInteractionSpellId))
+              return checkFunc(ns.GetItemInteractionSpellId)
             end,
             InitializeFrame = function()
-              assertEquals('function', type(ns.InitializeFrame))
+              return checkFunc(ns.InitializeFrame)
             end,
             PerformItemInteraction = function()
-              assertEquals('function', type(ns.PerformItemInteraction))
+              return checkFunc(ns.PerformItemInteraction)
             end,
             Reset = function()
-              assertEquals('function', type(ns.Reset))
+              return checkFunc(ns.Reset)
             end,
             SetCorruptionReforgerItemTooltip = function()
-              assertEquals('function', type(ns.SetCorruptionReforgerItemTooltip))
+              return checkFunc(ns.SetCorruptionReforgerItemTooltip)
             end,
             SetItemConversionOutputTooltip = function()
-              assertEquals('function', type(ns.SetItemConversionOutputTooltip))
+              return checkFunc(ns.SetItemConversionOutputTooltip)
             end,
             SetPendingItem = function()
-              assertEquals('function', type(ns.SetPendingItem))
+              return checkFunc(ns.SetPendingItem)
             end,
           })
         end,
@@ -4861,7 +4877,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CompleteSocketing = function()
-              assertEquals('function', type(ns.CompleteSocketing))
+              return checkFunc(ns.CompleteSocketing)
             end,
           })
         end,
@@ -4875,80 +4891,80 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.CanUpgradeItem))
                 return
               end
-              assertEquals('function', type(ns.CanUpgradeItem))
+              return checkFunc(ns.CanUpgradeItem)
             end,
             ClearItemUpgrade = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ClearItemUpgrade))
                 return
               end
-              assertEquals('function', type(ns.ClearItemUpgrade))
+              return checkFunc(ns.ClearItemUpgrade)
             end,
             CloseItemUpgrade = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CloseItemUpgrade))
                 return
               end
-              assertEquals('function', type(ns.CloseItemUpgrade))
+              return checkFunc(ns.CloseItemUpgrade)
             end,
             GetItemHyperlink = function()
-              assertEquals('function', type(ns.GetItemHyperlink))
+              return checkFunc(ns.GetItemHyperlink)
             end,
             GetItemUpgradeCurrentLevel = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetItemUpgradeCurrentLevel))
                 return
               end
-              assertEquals('function', type(ns.GetItemUpgradeCurrentLevel))
+              return checkFunc(ns.GetItemUpgradeCurrentLevel)
             end,
             GetItemUpgradeEffect = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetItemUpgradeEffect))
                 return
               end
-              assertEquals('function', type(ns.GetItemUpgradeEffect))
+              return checkFunc(ns.GetItemUpgradeEffect)
             end,
             GetItemUpgradeItemInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetItemUpgradeItemInfo))
                 return
               end
-              assertEquals('function', type(ns.GetItemUpgradeItemInfo))
+              return checkFunc(ns.GetItemUpgradeItemInfo)
             end,
             GetItemUpgradePvpItemLevelDeltaValues = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetItemUpgradePvpItemLevelDeltaValues))
                 return
               end
-              assertEquals('function', type(ns.GetItemUpgradePvpItemLevelDeltaValues))
+              return checkFunc(ns.GetItemUpgradePvpItemLevelDeltaValues)
             end,
             GetNumItemUpgradeEffects = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumItemUpgradeEffects))
                 return
               end
-              assertEquals('function', type(ns.GetNumItemUpgradeEffects))
+              return checkFunc(ns.GetNumItemUpgradeEffects)
             end,
             SetItemUpgradeFromCursorItem = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetItemUpgradeFromCursorItem))
                 return
               end
-              assertEquals('function', type(ns.SetItemUpgradeFromCursorItem))
+              return checkFunc(ns.SetItemUpgradeFromCursorItem)
             end,
             SetItemUpgradeFromLocation = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetItemUpgradeFromLocation))
                 return
               end
-              assertEquals('function', type(ns.SetItemUpgradeFromLocation))
+              return checkFunc(ns.SetItemUpgradeFromLocation)
             end,
             UpgradeItem = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.UpgradeItem))
                 return
               end
-              assertEquals('function', type(ns.UpgradeItem))
+              return checkFunc(ns.UpgradeItem)
             end,
           })
         end,
@@ -4958,7 +4974,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetCustomBindingType = function()
-              assertEquals('function', type(ns.GetCustomBindingType))
+              return checkFunc(ns.GetCustomBindingType)
             end,
           })
         end,
@@ -4968,41 +4984,41 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanPlayerUseGroupFinder = function()
-              assertEquals('function', type(ns.CanPlayerUseGroupFinder))
+              return checkFunc(ns.CanPlayerUseGroupFinder)
             end,
             CanPlayerUseLFD = function()
-              assertEquals('function', type(ns.CanPlayerUseLFD))
+              return checkFunc(ns.CanPlayerUseLFD)
             end,
             CanPlayerUseLFR = function()
-              assertEquals('function', type(ns.CanPlayerUseLFR))
+              return checkFunc(ns.CanPlayerUseLFR)
             end,
             CanPlayerUsePVP = function()
-              assertEquals('function', type(ns.CanPlayerUsePVP))
+              return checkFunc(ns.CanPlayerUsePVP)
             end,
             CanPlayerUsePremadeGroup = function()
-              assertEquals('function', type(ns.CanPlayerUsePremadeGroup))
+              return checkFunc(ns.CanPlayerUsePremadeGroup)
             end,
             ConfirmLfgExpandSearch = function()
-              assertEquals('function', type(ns.ConfirmLfgExpandSearch))
+              return checkFunc(ns.ConfirmLfgExpandSearch)
             end,
             GetAllEntriesForCategory = function()
-              assertEquals('function', type(ns.GetAllEntriesForCategory))
+              return checkFunc(ns.GetAllEntriesForCategory)
             end,
             GetDungeonInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetDungeonInfo))
                 return
               end
-              assertEquals('function', type(ns.GetDungeonInfo))
+              return checkFunc(ns.GetDungeonInfo)
             end,
             GetLFDLockStates = function()
-              assertEquals('function', type(ns.GetLFDLockStates))
+              return checkFunc(ns.GetLFDLockStates)
             end,
             GetRoleCheckDifficultyDetails = function()
-              assertEquals('function', type(ns.GetRoleCheckDifficultyDetails))
+              return checkFunc(ns.GetRoleCheckDifficultyDetails)
             end,
             HideNameFromUI = function()
-              assertEquals('function', type(ns.HideNameFromUI))
+              return checkFunc(ns.HideNameFromUI)
             end,
           })
         end,
@@ -5016,419 +5032,419 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.AcceptInvite))
                 return
               end
-              assertEquals('function', type(ns.AcceptInvite))
+              return checkFunc(ns.AcceptInvite)
             end,
             ApplyToGroup = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ApplyToGroup))
                 return
               end
-              assertEquals('function', type(ns.ApplyToGroup))
+              return checkFunc(ns.ApplyToGroup)
             end,
             CanActiveEntryUseAutoAccept = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanActiveEntryUseAutoAccept))
                 return
               end
-              assertEquals('function', type(ns.CanActiveEntryUseAutoAccept))
+              return checkFunc(ns.CanActiveEntryUseAutoAccept)
             end,
             CanCreateQuestGroup = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanCreateQuestGroup))
                 return
               end
-              assertEquals('function', type(ns.CanCreateQuestGroup))
+              return checkFunc(ns.CanCreateQuestGroup)
             end,
             CancelApplication = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CancelApplication))
                 return
               end
-              assertEquals('function', type(ns.CancelApplication))
+              return checkFunc(ns.CancelApplication)
             end,
             ClearApplicationTextFields = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ClearApplicationTextFields))
                 return
               end
-              assertEquals('function', type(ns.ClearApplicationTextFields))
+              return checkFunc(ns.ClearApplicationTextFields)
             end,
             ClearCreationTextFields = function()
-              assertEquals('function', type(ns.ClearCreationTextFields))
+              return checkFunc(ns.ClearCreationTextFields)
             end,
             ClearSearchResults = function()
-              assertEquals('function', type(ns.ClearSearchResults))
+              return checkFunc(ns.ClearSearchResults)
             end,
             ClearSearchTextFields = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ClearSearchTextFields))
                 return
               end
-              assertEquals('function', type(ns.ClearSearchTextFields))
+              return checkFunc(ns.ClearSearchTextFields)
             end,
             CopyActiveEntryInfoToCreationFields = function()
-              assertEquals('function', type(ns.CopyActiveEntryInfoToCreationFields))
+              return checkFunc(ns.CopyActiveEntryInfoToCreationFields)
             end,
             CreateListing = function()
-              assertEquals('function', type(ns.CreateListing))
+              return checkFunc(ns.CreateListing)
             end,
             DeclineApplicant = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.DeclineApplicant))
                 return
               end
-              assertEquals('function', type(ns.DeclineApplicant))
+              return checkFunc(ns.DeclineApplicant)
             end,
             DeclineInvite = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.DeclineInvite))
                 return
               end
-              assertEquals('function', type(ns.DeclineInvite))
+              return checkFunc(ns.DeclineInvite)
             end,
             DoesEntryTitleMatchPrebuiltTitle = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.DoesEntryTitleMatchPrebuiltTitle))
                 return
               end
-              assertEquals('function', type(ns.DoesEntryTitleMatchPrebuiltTitle))
+              return checkFunc(ns.DoesEntryTitleMatchPrebuiltTitle)
             end,
             GetActiveEntryInfo = function()
-              assertEquals('function', type(ns.GetActiveEntryInfo))
+              return checkFunc(ns.GetActiveEntryInfo)
             end,
             GetActivityFullName = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetActivityFullName))
                 return
               end
-              assertEquals('function', type(ns.GetActivityFullName))
+              return checkFunc(ns.GetActivityFullName)
             end,
             GetActivityGroupInfo = function()
-              assertEquals('function', type(ns.GetActivityGroupInfo))
+              return checkFunc(ns.GetActivityGroupInfo)
             end,
             GetActivityIDForQuestID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetActivityIDForQuestID))
                 return
               end
-              assertEquals('function', type(ns.GetActivityIDForQuestID))
+              return checkFunc(ns.GetActivityIDForQuestID)
             end,
             GetActivityInfoExpensive = function()
-              assertEquals('function', type(ns.GetActivityInfoExpensive))
+              return checkFunc(ns.GetActivityInfoExpensive)
             end,
             GetActivityInfoTable = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetActivityInfoTable))
                 return
               end
-              assertEquals('function', type(ns.GetActivityInfoTable))
+              return checkFunc(ns.GetActivityInfoTable)
             end,
             GetApplicantDungeonScoreForListing = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetApplicantDungeonScoreForListing))
                 return
               end
-              assertEquals('function', type(ns.GetApplicantDungeonScoreForListing))
+              return checkFunc(ns.GetApplicantDungeonScoreForListing)
             end,
             GetApplicantInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetApplicantInfo))
                 return
               end
-              assertEquals('function', type(ns.GetApplicantInfo))
+              return checkFunc(ns.GetApplicantInfo)
             end,
             GetApplicantMemberInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetApplicantMemberInfo))
                 return
               end
-              assertEquals('function', type(ns.GetApplicantMemberInfo))
+              return checkFunc(ns.GetApplicantMemberInfo)
             end,
             GetApplicantMemberStats = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetApplicantMemberStats))
                 return
               end
-              assertEquals('function', type(ns.GetApplicantMemberStats))
+              return checkFunc(ns.GetApplicantMemberStats)
             end,
             GetApplicantPvpRatingInfoForListing = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetApplicantPvpRatingInfoForListing))
                 return
               end
-              assertEquals('function', type(ns.GetApplicantPvpRatingInfoForListing))
+              return checkFunc(ns.GetApplicantPvpRatingInfoForListing)
             end,
             GetApplicants = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetApplicants))
                 return
               end
-              assertEquals('function', type(ns.GetApplicants))
+              return checkFunc(ns.GetApplicants)
             end,
             GetApplicationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetApplicationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetApplicationInfo))
+              return checkFunc(ns.GetApplicationInfo)
             end,
             GetApplications = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetApplications))
                 return
               end
-              assertEquals('function', type(ns.GetApplications))
+              return checkFunc(ns.GetApplications)
             end,
             GetAvailableActivities = function()
-              assertEquals('function', type(ns.GetAvailableActivities))
+              return checkFunc(ns.GetAvailableActivities)
             end,
             GetAvailableActivityGroups = function()
-              assertEquals('function', type(ns.GetAvailableActivityGroups))
+              return checkFunc(ns.GetAvailableActivityGroups)
             end,
             GetAvailableCategories = function()
-              assertEquals('function', type(ns.GetAvailableCategories))
+              return checkFunc(ns.GetAvailableCategories)
             end,
             GetAvailableLanguageSearchFilter = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetAvailableLanguageSearchFilter))
                 return
               end
-              assertEquals('function', type(ns.GetAvailableLanguageSearchFilter))
+              return checkFunc(ns.GetAvailableLanguageSearchFilter)
             end,
             GetAvailableRoles = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetAvailableRoles))
                 return
               end
-              assertEquals('function', type(ns.GetAvailableRoles))
+              return checkFunc(ns.GetAvailableRoles)
             end,
             GetDefaultLanguageSearchFilter = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetDefaultLanguageSearchFilter))
                 return
               end
-              assertEquals('function', type(ns.GetDefaultLanguageSearchFilter))
+              return checkFunc(ns.GetDefaultLanguageSearchFilter)
             end,
             GetFilteredSearchResults = function()
-              assertEquals('function', type(ns.GetFilteredSearchResults))
+              return checkFunc(ns.GetFilteredSearchResults)
             end,
             GetKeystoneForActivity = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetKeystoneForActivity))
                 return
               end
-              assertEquals('function', type(ns.GetKeystoneForActivity))
+              return checkFunc(ns.GetKeystoneForActivity)
             end,
             GetLanguageSearchFilter = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetLanguageSearchFilter))
                 return
               end
-              assertEquals('function', type(ns.GetLanguageSearchFilter))
+              return checkFunc(ns.GetLanguageSearchFilter)
             end,
             GetLfgCategoryInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetLfgCategoryInfo))
                 return
               end
-              assertEquals('function', type(ns.GetLfgCategoryInfo))
+              return checkFunc(ns.GetLfgCategoryInfo)
             end,
             GetNumApplicants = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumApplicants))
                 return
               end
-              assertEquals('function', type(ns.GetNumApplicants))
+              return checkFunc(ns.GetNumApplicants)
             end,
             GetNumApplications = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumApplications))
                 return
               end
-              assertEquals('function', type(ns.GetNumApplications))
+              return checkFunc(ns.GetNumApplications)
             end,
             GetNumInvitedApplicantMembers = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumInvitedApplicantMembers))
                 return
               end
-              assertEquals('function', type(ns.GetNumInvitedApplicantMembers))
+              return checkFunc(ns.GetNumInvitedApplicantMembers)
             end,
             GetNumPendingApplicantMembers = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumPendingApplicantMembers))
                 return
               end
-              assertEquals('function', type(ns.GetNumPendingApplicantMembers))
+              return checkFunc(ns.GetNumPendingApplicantMembers)
             end,
             GetOwnedKeystoneActivityAndGroupAndLevel = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetOwnedKeystoneActivityAndGroupAndLevel))
                 return
               end
-              assertEquals('function', type(ns.GetOwnedKeystoneActivityAndGroupAndLevel))
+              return checkFunc(ns.GetOwnedKeystoneActivityAndGroupAndLevel)
             end,
             GetPlaystyleString = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetPlaystyleString))
                 return
               end
-              assertEquals('function', type(ns.GetPlaystyleString))
+              return checkFunc(ns.GetPlaystyleString)
             end,
             GetRoleCheckInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetRoleCheckInfo))
                 return
               end
-              assertEquals('function', type(ns.GetRoleCheckInfo))
+              return checkFunc(ns.GetRoleCheckInfo)
             end,
             GetSearchResultEncounterInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetSearchResultEncounterInfo))
                 return
               end
-              assertEquals('function', type(ns.GetSearchResultEncounterInfo))
+              return checkFunc(ns.GetSearchResultEncounterInfo)
             end,
             GetSearchResultFriends = function()
-              assertEquals('function', type(ns.GetSearchResultFriends))
+              return checkFunc(ns.GetSearchResultFriends)
             end,
             GetSearchResultInfo = function()
-              assertEquals('function', type(ns.GetSearchResultInfo))
+              return checkFunc(ns.GetSearchResultInfo)
             end,
             GetSearchResultLeaderInfo = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetSearchResultLeaderInfo))
                 return
               end
-              assertEquals('function', type(ns.GetSearchResultLeaderInfo))
+              return checkFunc(ns.GetSearchResultLeaderInfo)
             end,
             GetSearchResultMemberCounts = function()
-              assertEquals('function', type(ns.GetSearchResultMemberCounts))
+              return checkFunc(ns.GetSearchResultMemberCounts)
             end,
             GetSearchResultMemberInfo = function()
-              assertEquals('function', type(ns.GetSearchResultMemberInfo))
+              return checkFunc(ns.GetSearchResultMemberInfo)
             end,
             GetSearchResults = function()
-              assertEquals('function', type(ns.GetSearchResults))
+              return checkFunc(ns.GetSearchResults)
             end,
             HasActiveEntryInfo = function()
-              assertEquals('function', type(ns.HasActiveEntryInfo))
+              return checkFunc(ns.HasActiveEntryInfo)
             end,
             HasActivityList = function()
-              assertEquals('function', type(ns.HasActivityList))
+              return checkFunc(ns.HasActivityList)
             end,
             HasSearchResultInfo = function()
-              assertEquals('function', type(ns.HasSearchResultInfo))
+              return checkFunc(ns.HasSearchResultInfo)
             end,
             InviteApplicant = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.InviteApplicant))
                 return
               end
-              assertEquals('function', type(ns.InviteApplicant))
+              return checkFunc(ns.InviteApplicant)
             end,
             IsCurrentlyApplying = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsCurrentlyApplying))
                 return
               end
-              assertEquals('function', type(ns.IsCurrentlyApplying))
+              return checkFunc(ns.IsCurrentlyApplying)
             end,
             IsLookingForGroupEnabled = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsLookingForGroupEnabled))
                 return
               end
-              assertEquals('function', type(ns.IsLookingForGroupEnabled))
+              return checkFunc(ns.IsLookingForGroupEnabled)
             end,
             IsPlayerAuthenticatedForLFG = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsPlayerAuthenticatedForLFG))
                 return
               end
-              assertEquals('function', type(ns.IsPlayerAuthenticatedForLFG))
+              return checkFunc(ns.IsPlayerAuthenticatedForLFG)
             end,
             RefreshApplicants = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.RefreshApplicants))
                 return
               end
-              assertEquals('function', type(ns.RefreshApplicants))
+              return checkFunc(ns.RefreshApplicants)
             end,
             RemoveApplicant = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.RemoveApplicant))
                 return
               end
-              assertEquals('function', type(ns.RemoveApplicant))
+              return checkFunc(ns.RemoveApplicant)
             end,
             RemoveListing = function()
-              assertEquals('function', type(ns.RemoveListing))
+              return checkFunc(ns.RemoveListing)
             end,
             ReportSearchResult = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ReportSearchResult))
                 return
               end
-              assertEquals('function', type(ns.ReportSearchResult))
+              return checkFunc(ns.ReportSearchResult)
             end,
             RequestAvailableActivities = function()
-              assertEquals('function', type(ns.RequestAvailableActivities))
+              return checkFunc(ns.RequestAvailableActivities)
             end,
             SaveLanguageSearchFilter = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SaveLanguageSearchFilter))
                 return
               end
-              assertEquals('function', type(ns.SaveLanguageSearchFilter))
+              return checkFunc(ns.SaveLanguageSearchFilter)
             end,
             Search = function()
-              assertEquals('function', type(ns.Search))
+              return checkFunc(ns.Search)
             end,
             SetApplicantMemberRole = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetApplicantMemberRole))
                 return
               end
-              assertEquals('function', type(ns.SetApplicantMemberRole))
+              return checkFunc(ns.SetApplicantMemberRole)
             end,
             SetEntryTitle = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetEntryTitle))
                 return
               end
-              assertEquals('function', type(ns.SetEntryTitle))
+              return checkFunc(ns.SetEntryTitle)
             end,
             SetSearchToActivity = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetSearchToActivity))
                 return
               end
-              assertEquals('function', type(ns.SetSearchToActivity))
+              return checkFunc(ns.SetSearchToActivity)
             end,
             SetSearchToQuestID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetSearchToQuestID))
                 return
               end
-              assertEquals('function', type(ns.SetSearchToQuestID))
+              return checkFunc(ns.SetSearchToQuestID)
             end,
             UpdateListing = function()
-              assertEquals('function', type(ns.UpdateListing))
+              return checkFunc(ns.UpdateListing)
             end,
             ValidateRequiredDungeonScore = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ValidateRequiredDungeonScore))
                 return
               end
-              assertEquals('function', type(ns.ValidateRequiredDungeonScore))
+              return checkFunc(ns.ValidateRequiredDungeonScore)
             end,
             ValidateRequiredPvpRatingForActivity = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ValidateRequiredPvpRatingForActivity))
                 return
               end
-              assertEquals('function', type(ns.ValidateRequiredPvpRatingForActivity))
+              return checkFunc(ns.ValidateRequiredPvpRatingForActivity)
             end,
           })
         end,
@@ -5442,67 +5458,67 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CloseRuneforgeInteraction = function()
-              assertEquals('function', type(ns.CloseRuneforgeInteraction))
+              return checkFunc(ns.CloseRuneforgeInteraction)
             end,
             CraftRuneforgeLegendary = function()
-              assertEquals('function', type(ns.CraftRuneforgeLegendary))
+              return checkFunc(ns.CraftRuneforgeLegendary)
             end,
             GetRuneforgeItemPreviewInfo = function()
-              assertEquals('function', type(ns.GetRuneforgeItemPreviewInfo))
+              return checkFunc(ns.GetRuneforgeItemPreviewInfo)
             end,
             GetRuneforgeLegendaryComponentInfo = function()
-              assertEquals('function', type(ns.GetRuneforgeLegendaryComponentInfo))
+              return checkFunc(ns.GetRuneforgeLegendaryComponentInfo)
             end,
             GetRuneforgeLegendaryCost = function()
-              assertEquals('function', type(ns.GetRuneforgeLegendaryCost))
+              return checkFunc(ns.GetRuneforgeLegendaryCost)
             end,
             GetRuneforgeLegendaryCraftSpellID = function()
-              assertEquals('function', type(ns.GetRuneforgeLegendaryCraftSpellID))
+              return checkFunc(ns.GetRuneforgeLegendaryCraftSpellID)
             end,
             GetRuneforgeLegendaryCurrencies = function()
-              assertEquals('function', type(ns.GetRuneforgeLegendaryCurrencies))
+              return checkFunc(ns.GetRuneforgeLegendaryCurrencies)
             end,
             GetRuneforgeLegendaryUpgradeCost = function()
-              assertEquals('function', type(ns.GetRuneforgeLegendaryUpgradeCost))
+              return checkFunc(ns.GetRuneforgeLegendaryUpgradeCost)
             end,
             GetRuneforgeModifierInfo = function()
-              assertEquals('function', type(ns.GetRuneforgeModifierInfo))
+              return checkFunc(ns.GetRuneforgeModifierInfo)
             end,
             GetRuneforgeModifiers = function()
-              assertEquals('function', type(ns.GetRuneforgeModifiers))
+              return checkFunc(ns.GetRuneforgeModifiers)
             end,
             GetRuneforgePowerInfo = function()
-              assertEquals('function', type(ns.GetRuneforgePowerInfo))
+              return checkFunc(ns.GetRuneforgePowerInfo)
             end,
             GetRuneforgePowerSlots = function()
-              assertEquals('function', type(ns.GetRuneforgePowerSlots))
+              return checkFunc(ns.GetRuneforgePowerSlots)
             end,
             GetRuneforgePowers = function()
-              assertEquals('function', type(ns.GetRuneforgePowers))
+              return checkFunc(ns.GetRuneforgePowers)
             end,
             GetRuneforgePowersByClassAndSpec = function()
-              assertEquals('function', type(ns.GetRuneforgePowersByClassAndSpec))
+              return checkFunc(ns.GetRuneforgePowersByClassAndSpec)
             end,
             GetRuneforgePowersByClassSpecAndCovenant = function()
-              assertEquals('function', type(ns.GetRuneforgePowersByClassSpecAndCovenant))
+              return checkFunc(ns.GetRuneforgePowersByClassSpecAndCovenant)
             end,
             IsRuneforgeLegendary = function()
-              assertEquals('function', type(ns.IsRuneforgeLegendary))
+              return checkFunc(ns.IsRuneforgeLegendary)
             end,
             IsRuneforgeLegendaryMaxLevel = function()
-              assertEquals('function', type(ns.IsRuneforgeLegendaryMaxLevel))
+              return checkFunc(ns.IsRuneforgeLegendaryMaxLevel)
             end,
             IsUpgradeItemValidForRuneforgeLegendary = function()
-              assertEquals('function', type(ns.IsUpgradeItemValidForRuneforgeLegendary))
+              return checkFunc(ns.IsUpgradeItemValidForRuneforgeLegendary)
             end,
             IsValidRuneforgeBaseItem = function()
-              assertEquals('function', type(ns.IsValidRuneforgeBaseItem))
+              return checkFunc(ns.IsValidRuneforgeBaseItem)
             end,
             MakeRuneforgeCraftDescription = function()
-              assertEquals('function', type(ns.MakeRuneforgeCraftDescription))
+              return checkFunc(ns.MakeRuneforgeCraftDescription)
             end,
             UpgradeRuneforgeLegendary = function()
-              assertEquals('function', type(ns.UpgradeRuneforgeLegendary))
+              return checkFunc(ns.UpgradeRuneforgeLegendary)
             end,
           })
         end,
@@ -5516,10 +5532,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             IsActionLocked = function()
-              assertEquals('function', type(ns.IsActionLocked))
+              return checkFunc(ns.IsActionLocked)
             end,
             IsSpellLocked = function()
-              assertEquals('function', type(ns.IsSpellLocked))
+              return checkFunc(ns.IsSpellLocked)
             end,
           })
         end,
@@ -5533,10 +5549,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ConvertFollowerLevel = function()
-              assertEquals('function', type(ns.ConvertFollowerLevel))
+              return checkFunc(ns.ConvertFollowerLevel)
             end,
             ConvertPlayerLevel = function()
-              assertEquals('function', type(ns.ConvertPlayerLevel))
+              return checkFunc(ns.ConvertPlayerLevel)
             end,
           })
         end,
@@ -5546,7 +5562,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             IsLegacyLootModeEnabled = function()
-              assertEquals('function', type(ns.IsLegacyLootModeEnabled))
+              return checkFunc(ns.IsLegacyLootModeEnabled)
             end,
           })
         end,
@@ -5556,25 +5572,25 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanMasterLoot = function()
-              assertEquals('function', type(ns.CanMasterLoot))
+              return checkFunc(ns.CanMasterLoot)
             end,
             GetExpiration = function()
-              assertEquals('function', type(ns.GetExpiration))
+              return checkFunc(ns.GetExpiration)
             end,
             GetItem = function()
-              assertEquals('function', type(ns.GetItem))
+              return checkFunc(ns.GetItem)
             end,
             GetNumItems = function()
-              assertEquals('function', type(ns.GetNumItems))
+              return checkFunc(ns.GetNumItems)
             end,
             GetPlayerInfo = function()
-              assertEquals('function', type(ns.GetPlayerInfo))
+              return checkFunc(ns.GetPlayerInfo)
             end,
             GiveMasterLoot = function()
-              assertEquals('function', type(ns.GiveMasterLoot))
+              return checkFunc(ns.GiveMasterLoot)
             end,
             SetExpiration = function()
-              assertEquals('function', type(ns.SetExpiration))
+              return checkFunc(ns.SetExpiration)
             end,
           })
         end,
@@ -5588,10 +5604,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetItemSetItems = function()
-              assertEquals('function', type(ns.GetItemSetItems))
+              return checkFunc(ns.GetItemSetItems)
             end,
             GetItemSets = function()
-              assertEquals('function', type(ns.GetItemSets))
+              return checkFunc(ns.GetItemSets)
             end,
           })
         end,
@@ -5605,7 +5621,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             RequestLoreTextForCampaignID = function()
-              assertEquals('function', type(ns.RequestLoreTextForCampaignID))
+              return checkFunc(ns.RequestLoreTextForCampaignID)
             end,
           })
         end,
@@ -5615,16 +5631,16 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetActiveLossOfControlData = function()
-              assertEquals('function', type(ns.GetActiveLossOfControlData))
+              return checkFunc(ns.GetActiveLossOfControlData)
             end,
             GetActiveLossOfControlDataByUnit = function()
-              assertEquals('function', type(ns.GetActiveLossOfControlDataByUnit))
+              return checkFunc(ns.GetActiveLossOfControlDataByUnit)
             end,
             GetActiveLossOfControlDataCount = function()
-              assertEquals('function', type(ns.GetActiveLossOfControlDataCount))
+              return checkFunc(ns.GetActiveLossOfControlDataCount)
             end,
             GetActiveLossOfControlDataCountByUnit = function()
-              assertEquals('function', type(ns.GetActiveLossOfControlDataCountByUnit))
+              return checkFunc(ns.GetActiveLossOfControlDataCountByUnit)
             end,
           })
         end,
@@ -5638,13 +5654,13 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.CanCheckInbox))
                 return
               end
-              assertEquals('function', type(ns.CanCheckInbox))
+              return checkFunc(ns.CanCheckInbox)
             end,
             HasInboxMoney = function()
-              assertEquals('function', type(ns.HasInboxMoney))
+              return checkFunc(ns.HasInboxMoney)
             end,
             IsCommandPending = function()
-              assertEquals('function', type(ns.IsCommandPending))
+              return checkFunc(ns.IsCommandPending)
             end,
           })
         end,
@@ -5658,163 +5674,163 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.CanSetUserWaypointOnMap))
                 return
               end
-              assertEquals('function', type(ns.CanSetUserWaypointOnMap))
+              return checkFunc(ns.CanSetUserWaypointOnMap)
             end,
             ClearUserWaypoint = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ClearUserWaypoint))
                 return
               end
-              assertEquals('function', type(ns.ClearUserWaypoint))
+              return checkFunc(ns.ClearUserWaypoint)
             end,
             CloseWorldMapInteraction = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CloseWorldMapInteraction))
                 return
               end
-              assertEquals('function', type(ns.CloseWorldMapInteraction))
+              return checkFunc(ns.CloseWorldMapInteraction)
             end,
             GetAreaInfo = function()
-              assertEquals('function', type(ns.GetAreaInfo))
+              return checkFunc(ns.GetAreaInfo)
             end,
             GetBestMapForUnit = function()
-              assertEquals('function', type(ns.GetBestMapForUnit))
+              return checkFunc(ns.GetBestMapForUnit)
             end,
             GetBountySetIDForMap = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetBountySetIDForMap))
                 return
               end
-              assertEquals('function', type(ns.GetBountySetIDForMap))
+              return checkFunc(ns.GetBountySetIDForMap)
             end,
             GetBountySetMaps = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetBountySetMaps))
                 return
               end
-              assertEquals('function', type(ns.GetBountySetMaps))
+              return checkFunc(ns.GetBountySetMaps)
             end,
             GetFallbackWorldMapID = function()
-              assertEquals('function', type(ns.GetFallbackWorldMapID))
+              return checkFunc(ns.GetFallbackWorldMapID)
             end,
             GetMapArtBackgroundAtlas = function()
-              assertEquals('function', type(ns.GetMapArtBackgroundAtlas))
+              return checkFunc(ns.GetMapArtBackgroundAtlas)
             end,
             GetMapArtHelpTextPosition = function()
-              assertEquals('function', type(ns.GetMapArtHelpTextPosition))
+              return checkFunc(ns.GetMapArtHelpTextPosition)
             end,
             GetMapArtID = function()
-              assertEquals('function', type(ns.GetMapArtID))
+              return checkFunc(ns.GetMapArtID)
             end,
             GetMapArtLayerTextures = function()
-              assertEquals('function', type(ns.GetMapArtLayerTextures))
+              return checkFunc(ns.GetMapArtLayerTextures)
             end,
             GetMapArtLayers = function()
-              assertEquals('function', type(ns.GetMapArtLayers))
+              return checkFunc(ns.GetMapArtLayers)
             end,
             GetMapBannersForMap = function()
-              assertEquals('function', type(ns.GetMapBannersForMap))
+              return checkFunc(ns.GetMapBannersForMap)
             end,
             GetMapChildrenInfo = function()
-              assertEquals('function', type(ns.GetMapChildrenInfo))
+              return checkFunc(ns.GetMapChildrenInfo)
             end,
             GetMapDisplayInfo = function()
-              assertEquals('function', type(ns.GetMapDisplayInfo))
+              return checkFunc(ns.GetMapDisplayInfo)
             end,
             GetMapGroupID = function()
-              assertEquals('function', type(ns.GetMapGroupID))
+              return checkFunc(ns.GetMapGroupID)
             end,
             GetMapGroupMembersInfo = function()
-              assertEquals('function', type(ns.GetMapGroupMembersInfo))
+              return checkFunc(ns.GetMapGroupMembersInfo)
             end,
             GetMapHighlightInfoAtPosition = function()
-              assertEquals('function', type(ns.GetMapHighlightInfoAtPosition))
+              return checkFunc(ns.GetMapHighlightInfoAtPosition)
             end,
             GetMapInfo = function()
-              assertEquals('function', type(ns.GetMapInfo))
+              return checkFunc(ns.GetMapInfo)
             end,
             GetMapInfoAtPosition = function()
-              assertEquals('function', type(ns.GetMapInfoAtPosition))
+              return checkFunc(ns.GetMapInfoAtPosition)
             end,
             GetMapLevels = function()
-              assertEquals('function', type(ns.GetMapLevels))
+              return checkFunc(ns.GetMapLevels)
             end,
             GetMapLinksForMap = function()
-              assertEquals('function', type(ns.GetMapLinksForMap))
+              return checkFunc(ns.GetMapLinksForMap)
             end,
             GetMapPosFromWorldPos = function()
-              assertEquals('function', type(ns.GetMapPosFromWorldPos))
+              return checkFunc(ns.GetMapPosFromWorldPos)
             end,
             GetMapRectOnMap = function()
-              assertEquals('function', type(ns.GetMapRectOnMap))
+              return checkFunc(ns.GetMapRectOnMap)
             end,
             GetMapWorldSize = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetMapWorldSize))
                 return
               end
-              assertEquals('function', type(ns.GetMapWorldSize))
+              return checkFunc(ns.GetMapWorldSize)
             end,
             GetPlayerMapPosition = function()
-              assertEquals('function', type(ns.GetPlayerMapPosition))
+              return checkFunc(ns.GetPlayerMapPosition)
             end,
             GetUserWaypoint = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetUserWaypoint))
                 return
               end
-              assertEquals('function', type(ns.GetUserWaypoint))
+              return checkFunc(ns.GetUserWaypoint)
             end,
             GetUserWaypointFromHyperlink = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetUserWaypointFromHyperlink))
                 return
               end
-              assertEquals('function', type(ns.GetUserWaypointFromHyperlink))
+              return checkFunc(ns.GetUserWaypointFromHyperlink)
             end,
             GetUserWaypointHyperlink = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetUserWaypointHyperlink))
                 return
               end
-              assertEquals('function', type(ns.GetUserWaypointHyperlink))
+              return checkFunc(ns.GetUserWaypointHyperlink)
             end,
             GetUserWaypointPositionForMap = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetUserWaypointPositionForMap))
                 return
               end
-              assertEquals('function', type(ns.GetUserWaypointPositionForMap))
+              return checkFunc(ns.GetUserWaypointPositionForMap)
             end,
             GetWorldPosFromMapPos = function()
-              assertEquals('function', type(ns.GetWorldPosFromMapPos))
+              return checkFunc(ns.GetWorldPosFromMapPos)
             end,
             HasUserWaypoint = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.HasUserWaypoint))
                 return
               end
-              assertEquals('function', type(ns.HasUserWaypoint))
+              return checkFunc(ns.HasUserWaypoint)
             end,
             IsMapValidForNavBarDropDown = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsMapValidForNavBarDropDown))
                 return
               end
-              assertEquals('function', type(ns.IsMapValidForNavBarDropDown))
+              return checkFunc(ns.IsMapValidForNavBarDropDown)
             end,
             MapHasArt = function()
-              assertEquals('function', type(ns.MapHasArt))
+              return checkFunc(ns.MapHasArt)
             end,
             RequestPreloadMap = function()
-              assertEquals('function', type(ns.RequestPreloadMap))
+              return checkFunc(ns.RequestPreloadMap)
             end,
             SetUserWaypoint = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetUserWaypoint))
                 return
               end
-              assertEquals('function', type(ns.SetUserWaypoint))
+              return checkFunc(ns.SetUserWaypoint)
             end,
           })
         end,
@@ -5824,10 +5840,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetExploredAreaIDsAtPosition = function()
-              assertEquals('function', type(ns.GetExploredAreaIDsAtPosition))
+              return checkFunc(ns.GetExploredAreaIDsAtPosition)
             end,
             GetExploredMapTextures = function()
-              assertEquals('function', type(ns.GetExploredMapTextures))
+              return checkFunc(ns.GetExploredMapTextures)
             end,
           })
         end,
@@ -5837,14 +5853,14 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetBuybackItemID = function()
-              assertEquals('function', type(ns.GetBuybackItemID))
+              return checkFunc(ns.GetBuybackItemID)
             end,
             IsMerchantItemRefundable = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsMerchantItemRefundable))
                 return
               end
-              assertEquals('function', type(ns.IsMerchantItemRefundable))
+              return checkFunc(ns.IsMerchantItemRefundable)
             end,
           })
         end,
@@ -5858,25 +5874,25 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetDrawGroundTextures = function()
-              assertEquals('function', type(ns.GetDrawGroundTextures))
+              return checkFunc(ns.GetDrawGroundTextures)
             end,
             GetUiMapID = function()
-              assertEquals('function', type(ns.GetUiMapID))
+              return checkFunc(ns.GetUiMapID)
             end,
             GetViewRadius = function()
-              assertEquals('function', type(ns.GetViewRadius))
+              return checkFunc(ns.GetViewRadius)
             end,
             IsRotateMinimapIgnored = function()
-              assertEquals('function', type(ns.IsRotateMinimapIgnored))
+              return checkFunc(ns.IsRotateMinimapIgnored)
             end,
             SetDrawGroundTextures = function()
-              assertEquals('function', type(ns.SetDrawGroundTextures))
+              return checkFunc(ns.SetDrawGroundTextures)
             end,
             SetIgnoreRotateMinimap = function()
-              assertEquals('function', type(ns.SetIgnoreRotateMinimap))
+              return checkFunc(ns.SetIgnoreRotateMinimap)
             end,
             ShouldUseHybridMinimap = function()
-              assertEquals('function', type(ns.ShouldUseHybridMinimap))
+              return checkFunc(ns.ShouldUseHybridMinimap)
             end,
           })
         end,
@@ -5886,28 +5902,28 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AddActiveModelScene = function()
-              assertEquals('function', type(ns.AddActiveModelScene))
+              return checkFunc(ns.AddActiveModelScene)
             end,
             AddActiveModelSceneActor = function()
-              assertEquals('function', type(ns.AddActiveModelSceneActor))
+              return checkFunc(ns.AddActiveModelSceneActor)
             end,
             ClearActiveModelScene = function()
-              assertEquals('function', type(ns.ClearActiveModelScene))
+              return checkFunc(ns.ClearActiveModelScene)
             end,
             ClearActiveModelSceneActor = function()
-              assertEquals('function', type(ns.ClearActiveModelSceneActor))
+              return checkFunc(ns.ClearActiveModelSceneActor)
             end,
             GetModelSceneActorDisplayInfoByID = function()
-              assertEquals('function', type(ns.GetModelSceneActorDisplayInfoByID))
+              return checkFunc(ns.GetModelSceneActorDisplayInfoByID)
             end,
             GetModelSceneActorInfoByID = function()
-              assertEquals('function', type(ns.GetModelSceneActorInfoByID))
+              return checkFunc(ns.GetModelSceneActorInfoByID)
             end,
             GetModelSceneCameraInfoByID = function()
-              assertEquals('function', type(ns.GetModelSceneCameraInfoByID))
+              return checkFunc(ns.GetModelSceneCameraInfoByID)
             end,
             GetModelSceneInfoByID = function()
-              assertEquals('function', type(ns.GetModelSceneInfoByID))
+              return checkFunc(ns.GetModelSceneInfoByID)
             end,
           })
         end,
@@ -5921,7 +5937,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetModifiedInstanceInfoFromMapID = function()
-              assertEquals('function', type(ns.GetModifiedInstanceInfoFromMapID))
+              return checkFunc(ns.GetModifiedInstanceInfoFromMapID)
             end,
           })
         end,
@@ -5935,124 +5951,124 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ApplyMountEquipment = function()
-              assertEquals('function', type(ns.ApplyMountEquipment))
+              return checkFunc(ns.ApplyMountEquipment)
             end,
             AreMountEquipmentEffectsSuppressed = function()
-              assertEquals('function', type(ns.AreMountEquipmentEffectsSuppressed))
+              return checkFunc(ns.AreMountEquipmentEffectsSuppressed)
             end,
             ClearFanfare = function()
-              assertEquals('function', type(ns.ClearFanfare))
+              return checkFunc(ns.ClearFanfare)
             end,
             ClearRecentFanfares = function()
-              assertEquals('function', type(ns.ClearRecentFanfares))
+              return checkFunc(ns.ClearRecentFanfares)
             end,
             Dismiss = function()
-              assertEquals('function', type(ns.Dismiss))
+              return checkFunc(ns.Dismiss)
             end,
             GetAppliedMountEquipmentID = function()
-              assertEquals('function', type(ns.GetAppliedMountEquipmentID))
+              return checkFunc(ns.GetAppliedMountEquipmentID)
             end,
             GetCollectedFilterSetting = function()
-              assertEquals('function', type(ns.GetCollectedFilterSetting))
+              return checkFunc(ns.GetCollectedFilterSetting)
             end,
             GetDisplayedMountAllCreatureDisplayInfo = function()
-              assertEquals('function', type(ns.GetDisplayedMountAllCreatureDisplayInfo))
+              return checkFunc(ns.GetDisplayedMountAllCreatureDisplayInfo)
             end,
             GetDisplayedMountInfo = function()
-              assertEquals('function', type(ns.GetDisplayedMountInfo))
+              return checkFunc(ns.GetDisplayedMountInfo)
             end,
             GetDisplayedMountInfoExtra = function()
-              assertEquals('function', type(ns.GetDisplayedMountInfoExtra))
+              return checkFunc(ns.GetDisplayedMountInfoExtra)
             end,
             GetIsFavorite = function()
-              assertEquals('function', type(ns.GetIsFavorite))
+              return checkFunc(ns.GetIsFavorite)
             end,
             GetMountAllCreatureDisplayInfoByID = function()
-              assertEquals('function', type(ns.GetMountAllCreatureDisplayInfoByID))
+              return checkFunc(ns.GetMountAllCreatureDisplayInfoByID)
             end,
             GetMountEquipmentUnlockLevel = function()
-              assertEquals('function', type(ns.GetMountEquipmentUnlockLevel))
+              return checkFunc(ns.GetMountEquipmentUnlockLevel)
             end,
             GetMountFromItem = function()
-              assertEquals('function', type(ns.GetMountFromItem))
+              return checkFunc(ns.GetMountFromItem)
             end,
             GetMountFromSpell = function()
-              assertEquals('function', type(ns.GetMountFromSpell))
+              return checkFunc(ns.GetMountFromSpell)
             end,
             GetMountIDs = function()
-              assertEquals('function', type(ns.GetMountIDs))
+              return checkFunc(ns.GetMountIDs)
             end,
             GetMountInfoByID = function()
-              assertEquals('function', type(ns.GetMountInfoByID))
+              return checkFunc(ns.GetMountInfoByID)
             end,
             GetMountInfoExtraByID = function()
-              assertEquals('function', type(ns.GetMountInfoExtraByID))
+              return checkFunc(ns.GetMountInfoExtraByID)
             end,
             GetMountUsabilityByID = function()
-              assertEquals('function', type(ns.GetMountUsabilityByID))
+              return checkFunc(ns.GetMountUsabilityByID)
             end,
             GetNumDisplayedMounts = function()
-              assertEquals('function', type(ns.GetNumDisplayedMounts))
+              return checkFunc(ns.GetNumDisplayedMounts)
             end,
             GetNumMounts = function()
-              assertEquals('function', type(ns.GetNumMounts))
+              return checkFunc(ns.GetNumMounts)
             end,
             GetNumMountsNeedingFanfare = function()
-              assertEquals('function', type(ns.GetNumMountsNeedingFanfare))
+              return checkFunc(ns.GetNumMountsNeedingFanfare)
             end,
             IsItemMountEquipment = function()
-              assertEquals('function', type(ns.IsItemMountEquipment))
+              return checkFunc(ns.IsItemMountEquipment)
             end,
             IsMountEquipmentApplied = function()
-              assertEquals('function', type(ns.IsMountEquipmentApplied))
+              return checkFunc(ns.IsMountEquipmentApplied)
             end,
             IsSourceChecked = function()
-              assertEquals('function', type(ns.IsSourceChecked))
+              return checkFunc(ns.IsSourceChecked)
             end,
             IsTypeChecked = function()
-              assertEquals('function', type(ns.IsTypeChecked))
+              return checkFunc(ns.IsTypeChecked)
             end,
             IsUsingDefaultFilters = function()
-              assertEquals('function', type(ns.IsUsingDefaultFilters))
+              return checkFunc(ns.IsUsingDefaultFilters)
             end,
             IsValidSourceFilter = function()
-              assertEquals('function', type(ns.IsValidSourceFilter))
+              return checkFunc(ns.IsValidSourceFilter)
             end,
             IsValidTypeFilter = function()
-              assertEquals('function', type(ns.IsValidTypeFilter))
+              return checkFunc(ns.IsValidTypeFilter)
             end,
             NeedsFanfare = function()
-              assertEquals('function', type(ns.NeedsFanfare))
+              return checkFunc(ns.NeedsFanfare)
             end,
             Pickup = function()
-              assertEquals('function', type(ns.Pickup))
+              return checkFunc(ns.Pickup)
             end,
             SetAllSourceFilters = function()
-              assertEquals('function', type(ns.SetAllSourceFilters))
+              return checkFunc(ns.SetAllSourceFilters)
             end,
             SetAllTypeFilters = function()
-              assertEquals('function', type(ns.SetAllTypeFilters))
+              return checkFunc(ns.SetAllTypeFilters)
             end,
             SetCollectedFilterSetting = function()
-              assertEquals('function', type(ns.SetCollectedFilterSetting))
+              return checkFunc(ns.SetCollectedFilterSetting)
             end,
             SetDefaultFilters = function()
-              assertEquals('function', type(ns.SetDefaultFilters))
+              return checkFunc(ns.SetDefaultFilters)
             end,
             SetIsFavorite = function()
-              assertEquals('function', type(ns.SetIsFavorite))
+              return checkFunc(ns.SetIsFavorite)
             end,
             SetSearch = function()
-              assertEquals('function', type(ns.SetSearch))
+              return checkFunc(ns.SetSearch)
             end,
             SetSourceFilter = function()
-              assertEquals('function', type(ns.SetSourceFilter))
+              return checkFunc(ns.SetSourceFilter)
             end,
             SetTypeFilter = function()
-              assertEquals('function', type(ns.SetTypeFilter))
+              return checkFunc(ns.SetTypeFilter)
             end,
             SummonByID = function()
-              assertEquals('function', type(ns.SummonByID))
+              return checkFunc(ns.SummonByID)
             end,
           })
         end,
@@ -6066,64 +6082,64 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetCurrentAffixes = function()
-              assertEquals('function', type(ns.GetCurrentAffixes))
+              return checkFunc(ns.GetCurrentAffixes)
             end,
             GetCurrentSeason = function()
-              assertEquals('function', type(ns.GetCurrentSeason))
+              return checkFunc(ns.GetCurrentSeason)
             end,
             GetCurrentSeasonValues = function()
-              assertEquals('function', type(ns.GetCurrentSeasonValues))
+              return checkFunc(ns.GetCurrentSeasonValues)
             end,
             GetLastWeeklyBestInformation = function()
-              assertEquals('function', type(ns.GetLastWeeklyBestInformation))
+              return checkFunc(ns.GetLastWeeklyBestInformation)
             end,
             GetOwnedKeystoneChallengeMapID = function()
-              assertEquals('function', type(ns.GetOwnedKeystoneChallengeMapID))
+              return checkFunc(ns.GetOwnedKeystoneChallengeMapID)
             end,
             GetOwnedKeystoneLevel = function()
-              assertEquals('function', type(ns.GetOwnedKeystoneLevel))
+              return checkFunc(ns.GetOwnedKeystoneLevel)
             end,
             GetOwnedKeystoneMapID = function()
-              assertEquals('function', type(ns.GetOwnedKeystoneMapID))
+              return checkFunc(ns.GetOwnedKeystoneMapID)
             end,
             GetRewardLevelForDifficultyLevel = function()
-              assertEquals('function', type(ns.GetRewardLevelForDifficultyLevel))
+              return checkFunc(ns.GetRewardLevelForDifficultyLevel)
             end,
             GetRewardLevelFromKeystoneLevel = function()
-              assertEquals('function', type(ns.GetRewardLevelFromKeystoneLevel))
+              return checkFunc(ns.GetRewardLevelFromKeystoneLevel)
             end,
             GetRunHistory = function()
-              assertEquals('function', type(ns.GetRunHistory))
+              return checkFunc(ns.GetRunHistory)
             end,
             GetSeasonBestAffixScoreInfoForMap = function()
-              assertEquals('function', type(ns.GetSeasonBestAffixScoreInfoForMap))
+              return checkFunc(ns.GetSeasonBestAffixScoreInfoForMap)
             end,
             GetSeasonBestForMap = function()
-              assertEquals('function', type(ns.GetSeasonBestForMap))
+              return checkFunc(ns.GetSeasonBestForMap)
             end,
             GetSeasonBestMythicRatingFromThisExpansion = function()
-              assertEquals('function', type(ns.GetSeasonBestMythicRatingFromThisExpansion))
+              return checkFunc(ns.GetSeasonBestMythicRatingFromThisExpansion)
             end,
             GetWeeklyBestForMap = function()
-              assertEquals('function', type(ns.GetWeeklyBestForMap))
+              return checkFunc(ns.GetWeeklyBestForMap)
             end,
             GetWeeklyChestRewardLevel = function()
-              assertEquals('function', type(ns.GetWeeklyChestRewardLevel))
+              return checkFunc(ns.GetWeeklyChestRewardLevel)
             end,
             IsMythicPlusActive = function()
-              assertEquals('function', type(ns.IsMythicPlusActive))
+              return checkFunc(ns.IsMythicPlusActive)
             end,
             IsWeeklyRewardAvailable = function()
-              assertEquals('function', type(ns.IsWeeklyRewardAvailable))
+              return checkFunc(ns.IsWeeklyRewardAvailable)
             end,
             RequestCurrentAffixes = function()
-              assertEquals('function', type(ns.RequestCurrentAffixes))
+              return checkFunc(ns.RequestCurrentAffixes)
             end,
             RequestMapInfo = function()
-              assertEquals('function', type(ns.RequestMapInfo))
+              return checkFunc(ns.RequestMapInfo)
             end,
             RequestRewards = function()
-              assertEquals('function', type(ns.RequestRewards))
+              return checkFunc(ns.RequestRewards)
             end,
           })
         end,
@@ -6133,73 +6149,73 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetNamePlateEnemyClickThrough = function()
-              assertEquals('function', type(ns.GetNamePlateEnemyClickThrough))
+              return checkFunc(ns.GetNamePlateEnemyClickThrough)
             end,
             GetNamePlateEnemyPreferredClickInsets = function()
-              assertEquals('function', type(ns.GetNamePlateEnemyPreferredClickInsets))
+              return checkFunc(ns.GetNamePlateEnemyPreferredClickInsets)
             end,
             GetNamePlateEnemySize = function()
-              assertEquals('function', type(ns.GetNamePlateEnemySize))
+              return checkFunc(ns.GetNamePlateEnemySize)
             end,
             GetNamePlateForUnit = function()
-              assertEquals('function', type(ns.GetNamePlateForUnit))
+              return checkFunc(ns.GetNamePlateForUnit)
             end,
             GetNamePlateFriendlyClickThrough = function()
-              assertEquals('function', type(ns.GetNamePlateFriendlyClickThrough))
+              return checkFunc(ns.GetNamePlateFriendlyClickThrough)
             end,
             GetNamePlateFriendlyPreferredClickInsets = function()
-              assertEquals('function', type(ns.GetNamePlateFriendlyPreferredClickInsets))
+              return checkFunc(ns.GetNamePlateFriendlyPreferredClickInsets)
             end,
             GetNamePlateFriendlySize = function()
-              assertEquals('function', type(ns.GetNamePlateFriendlySize))
+              return checkFunc(ns.GetNamePlateFriendlySize)
             end,
             GetNamePlateSelfClickThrough = function()
-              assertEquals('function', type(ns.GetNamePlateSelfClickThrough))
+              return checkFunc(ns.GetNamePlateSelfClickThrough)
             end,
             GetNamePlateSelfPreferredClickInsets = function()
-              assertEquals('function', type(ns.GetNamePlateSelfPreferredClickInsets))
+              return checkFunc(ns.GetNamePlateSelfPreferredClickInsets)
             end,
             GetNamePlateSelfSize = function()
-              assertEquals('function', type(ns.GetNamePlateSelfSize))
+              return checkFunc(ns.GetNamePlateSelfSize)
             end,
             GetNamePlates = function()
-              assertEquals('function', type(ns.GetNamePlates))
+              return checkFunc(ns.GetNamePlates)
             end,
             GetNumNamePlateMotionTypes = function()
-              assertEquals('function', type(ns.GetNumNamePlateMotionTypes))
+              return checkFunc(ns.GetNumNamePlateMotionTypes)
             end,
             GetTargetClampingInsets = function()
-              assertEquals('function', type(ns.GetTargetClampingInsets))
+              return checkFunc(ns.GetTargetClampingInsets)
             end,
             SetNamePlateEnemyClickThrough = function()
-              assertEquals('function', type(ns.SetNamePlateEnemyClickThrough))
+              return checkFunc(ns.SetNamePlateEnemyClickThrough)
             end,
             SetNamePlateEnemyPreferredClickInsets = function()
-              assertEquals('function', type(ns.SetNamePlateEnemyPreferredClickInsets))
+              return checkFunc(ns.SetNamePlateEnemyPreferredClickInsets)
             end,
             SetNamePlateEnemySize = function()
-              assertEquals('function', type(ns.SetNamePlateEnemySize))
+              return checkFunc(ns.SetNamePlateEnemySize)
             end,
             SetNamePlateFriendlyClickThrough = function()
-              assertEquals('function', type(ns.SetNamePlateFriendlyClickThrough))
+              return checkFunc(ns.SetNamePlateFriendlyClickThrough)
             end,
             SetNamePlateFriendlyPreferredClickInsets = function()
-              assertEquals('function', type(ns.SetNamePlateFriendlyPreferredClickInsets))
+              return checkFunc(ns.SetNamePlateFriendlyPreferredClickInsets)
             end,
             SetNamePlateFriendlySize = function()
-              assertEquals('function', type(ns.SetNamePlateFriendlySize))
+              return checkFunc(ns.SetNamePlateFriendlySize)
             end,
             SetNamePlateSelfClickThrough = function()
-              assertEquals('function', type(ns.SetNamePlateSelfClickThrough))
+              return checkFunc(ns.SetNamePlateSelfClickThrough)
             end,
             SetNamePlateSelfPreferredClickInsets = function()
-              assertEquals('function', type(ns.SetNamePlateSelfPreferredClickInsets))
+              return checkFunc(ns.SetNamePlateSelfPreferredClickInsets)
             end,
             SetNamePlateSelfSize = function()
-              assertEquals('function', type(ns.SetNamePlateSelfSize))
+              return checkFunc(ns.SetNamePlateSelfSize)
             end,
             SetTargetClampingInsets = function()
-              assertEquals('function', type(ns.SetTargetClampingInsets))
+              return checkFunc(ns.SetTargetClampingInsets)
             end,
           })
         end,
@@ -6213,19 +6229,19 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetDistance = function()
-              assertEquals('function', type(ns.GetDistance))
+              return checkFunc(ns.GetDistance)
             end,
             GetFrame = function()
-              assertEquals('function', type(ns.GetFrame))
+              return checkFunc(ns.GetFrame)
             end,
             GetTargetState = function()
-              assertEquals('function', type(ns.GetTargetState))
+              return checkFunc(ns.GetTargetState)
             end,
             HasValidScreenPosition = function()
-              assertEquals('function', type(ns.HasValidScreenPosition))
+              return checkFunc(ns.HasValidScreenPosition)
             end,
             WasClampedToScreen = function()
-              assertEquals('function', type(ns.WasClampedToScreen))
+              return checkFunc(ns.WasClampedToScreen)
             end,
           })
         end,
@@ -6235,13 +6251,13 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ClearAll = function()
-              assertEquals('function', type(ns.ClearAll))
+              return checkFunc(ns.ClearAll)
             end,
             IsNewItem = function()
-              assertEquals('function', type(ns.IsNewItem))
+              return checkFunc(ns.IsNewItem)
             end,
             RemoveNewItem = function()
-              assertEquals('function', type(ns.RemoveNewItem))
+              return checkFunc(ns.RemoveNewItem)
             end,
           })
         end,
@@ -6251,40 +6267,40 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetArmorEffectiveness = function()
-              assertEquals('function', type(ns.GetArmorEffectiveness))
+              return checkFunc(ns.GetArmorEffectiveness)
             end,
             GetArmorEffectivenessAgainstTarget = function()
-              assertEquals('function', type(ns.GetArmorEffectivenessAgainstTarget))
+              return checkFunc(ns.GetArmorEffectivenessAgainstTarget)
             end,
             GetInspectAzeriteItemEmpoweredChoices = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetInspectAzeriteItemEmpoweredChoices))
                 return
               end
-              assertEquals('function', type(ns.GetInspectAzeriteItemEmpoweredChoices))
+              return checkFunc(ns.GetInspectAzeriteItemEmpoweredChoices)
             end,
             GetInspectItemLevel = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetInspectItemLevel))
                 return
               end
-              assertEquals('function', type(ns.GetInspectItemLevel))
+              return checkFunc(ns.GetInspectItemLevel)
             end,
             GetMinItemLevel = function()
-              assertEquals('function', type(ns.GetMinItemLevel))
+              return checkFunc(ns.GetMinItemLevel)
             end,
             GetStaggerPercentage = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetStaggerPercentage))
                 return
               end
-              assertEquals('function', type(ns.GetStaggerPercentage))
+              return checkFunc(ns.GetStaggerPercentage)
             end,
             OffhandHasShield = function()
-              assertEquals('function', type(ns.OffhandHasShield))
+              return checkFunc(ns.OffhandHasShield)
             end,
             OffhandHasWeapon = function()
-              assertEquals('function', type(ns.OffhandHasWeapon))
+              return checkFunc(ns.OffhandHasWeapon)
             end,
           })
         end,
@@ -6298,135 +6314,135 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.AllowedToDoPartyConversion))
                 return
               end
-              assertEquals('function', type(ns.AllowedToDoPartyConversion))
+              return checkFunc(ns.AllowedToDoPartyConversion)
             end,
             CanFormCrossFactionParties = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanFormCrossFactionParties))
                 return
               end
-              assertEquals('function', type(ns.CanFormCrossFactionParties))
+              return checkFunc(ns.CanFormCrossFactionParties)
             end,
             CanInvite = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanInvite))
                 return
               end
-              assertEquals('function', type(ns.CanInvite))
+              return checkFunc(ns.CanInvite)
             end,
             ConfirmConvertToRaid = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ConfirmConvertToRaid))
                 return
               end
-              assertEquals('function', type(ns.ConfirmConvertToRaid))
+              return checkFunc(ns.ConfirmConvertToRaid)
             end,
             ConfirmInviteTravelPass = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ConfirmInviteTravelPass))
                 return
               end
-              assertEquals('function', type(ns.ConfirmInviteTravelPass))
+              return checkFunc(ns.ConfirmInviteTravelPass)
             end,
             ConfirmInviteUnit = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ConfirmInviteUnit))
                 return
               end
-              assertEquals('function', type(ns.ConfirmInviteUnit))
+              return checkFunc(ns.ConfirmInviteUnit)
             end,
             ConfirmLeaveParty = function()
-              assertEquals('function', type(ns.ConfirmLeaveParty))
+              return checkFunc(ns.ConfirmLeaveParty)
             end,
             ConfirmRequestInviteFromUnit = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ConfirmRequestInviteFromUnit))
                 return
               end
-              assertEquals('function', type(ns.ConfirmRequestInviteFromUnit))
+              return checkFunc(ns.ConfirmRequestInviteFromUnit)
             end,
             ConvertToParty = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ConvertToParty))
                 return
               end
-              assertEquals('function', type(ns.ConvertToParty))
+              return checkFunc(ns.ConvertToParty)
             end,
             ConvertToRaid = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ConvertToRaid))
                 return
               end
-              assertEquals('function', type(ns.ConvertToRaid))
+              return checkFunc(ns.ConvertToRaid)
             end,
             DoCountdown = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.DoCountdown))
                 return
               end
-              assertEquals('function', type(ns.DoCountdown))
+              return checkFunc(ns.DoCountdown)
             end,
             GetActiveCategories = function()
-              assertEquals('function', type(ns.GetActiveCategories))
+              return checkFunc(ns.GetActiveCategories)
             end,
             GetInviteConfirmationInvalidQueues = function()
-              assertEquals('function', type(ns.GetInviteConfirmationInvalidQueues))
+              return checkFunc(ns.GetInviteConfirmationInvalidQueues)
             end,
             GetInviteReferralInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetInviteReferralInfo))
                 return
               end
-              assertEquals('function', type(ns.GetInviteReferralInfo))
+              return checkFunc(ns.GetInviteReferralInfo)
             end,
             GetMinLevel = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetMinLevel))
                 return
               end
-              assertEquals('function', type(ns.GetMinLevel))
+              return checkFunc(ns.GetMinLevel)
             end,
             InviteUnit = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.InviteUnit))
                 return
               end
-              assertEquals('function', type(ns.InviteUnit))
+              return checkFunc(ns.InviteUnit)
             end,
             IsCrossFactionParty = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsCrossFactionParty))
                 return
               end
-              assertEquals('function', type(ns.IsCrossFactionParty))
+              return checkFunc(ns.IsCrossFactionParty)
             end,
             IsPartyFull = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsPartyFull))
                 return
               end
-              assertEquals('function', type(ns.IsPartyFull))
+              return checkFunc(ns.IsPartyFull)
             end,
             IsPartyInJailersTower = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsPartyInJailersTower))
                 return
               end
-              assertEquals('function', type(ns.IsPartyInJailersTower))
+              return checkFunc(ns.IsPartyInJailersTower)
             end,
             LeaveParty = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.LeaveParty))
                 return
               end
-              assertEquals('function', type(ns.LeaveParty))
+              return checkFunc(ns.LeaveParty)
             end,
             RequestInviteFromUnit = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.RequestInviteFromUnit))
                 return
               end
-              assertEquals('function', type(ns.RequestInviteFromUnit))
+              return checkFunc(ns.RequestInviteFromUnit)
             end,
           })
         end,
@@ -6440,7 +6456,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetPartyPoseInfoByMapID = function()
-              assertEquals('function', type(ns.GetPartyPoseInfoByMapID))
+              return checkFunc(ns.GetPartyPoseInfoByMapID)
             end,
           })
         end,
@@ -6454,172 +6470,172 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AcceptPVPDuel = function()
-              assertEquals('function', type(ns.AcceptPVPDuel))
+              return checkFunc(ns.AcceptPVPDuel)
             end,
             AcceptQueuedPVPMatch = function()
-              assertEquals('function', type(ns.AcceptQueuedPVPMatch))
+              return checkFunc(ns.AcceptQueuedPVPMatch)
             end,
             CanAcceptQueuedPVPMatch = function()
-              assertEquals('function', type(ns.CanAcceptQueuedPVPMatch))
+              return checkFunc(ns.CanAcceptQueuedPVPMatch)
             end,
             CanActivePetSwapOut = function()
-              assertEquals('function', type(ns.CanActivePetSwapOut))
+              return checkFunc(ns.CanActivePetSwapOut)
             end,
             CanPetSwapIn = function()
-              assertEquals('function', type(ns.CanPetSwapIn))
+              return checkFunc(ns.CanPetSwapIn)
             end,
             CancelPVPDuel = function()
-              assertEquals('function', type(ns.CancelPVPDuel))
+              return checkFunc(ns.CancelPVPDuel)
             end,
             ChangePet = function()
-              assertEquals('function', type(ns.ChangePet))
+              return checkFunc(ns.ChangePet)
             end,
             DeclineQueuedPVPMatch = function()
-              assertEquals('function', type(ns.DeclineQueuedPVPMatch))
+              return checkFunc(ns.DeclineQueuedPVPMatch)
             end,
             ForfeitGame = function()
-              assertEquals('function', type(ns.ForfeitGame))
+              return checkFunc(ns.ForfeitGame)
             end,
             GetAbilityEffectInfo = function()
-              assertEquals('function', type(ns.GetAbilityEffectInfo))
+              return checkFunc(ns.GetAbilityEffectInfo)
             end,
             GetAbilityInfo = function()
-              assertEquals('function', type(ns.GetAbilityInfo))
+              return checkFunc(ns.GetAbilityInfo)
             end,
             GetAbilityInfoByID = function()
-              assertEquals('function', type(ns.GetAbilityInfoByID))
+              return checkFunc(ns.GetAbilityInfoByID)
             end,
             GetAbilityProcTurnIndex = function()
-              assertEquals('function', type(ns.GetAbilityProcTurnIndex))
+              return checkFunc(ns.GetAbilityProcTurnIndex)
             end,
             GetAbilityState = function()
-              assertEquals('function', type(ns.GetAbilityState))
+              return checkFunc(ns.GetAbilityState)
             end,
             GetAbilityStateModification = function()
-              assertEquals('function', type(ns.GetAbilityStateModification))
+              return checkFunc(ns.GetAbilityStateModification)
             end,
             GetActivePet = function()
-              assertEquals('function', type(ns.GetActivePet))
+              return checkFunc(ns.GetActivePet)
             end,
             GetAllEffectNames = function()
-              assertEquals('function', type(ns.GetAllEffectNames))
+              return checkFunc(ns.GetAllEffectNames)
             end,
             GetAllStates = function()
-              assertEquals('function', type(ns.GetAllStates))
+              return checkFunc(ns.GetAllStates)
             end,
             GetAttackModifier = function()
-              assertEquals('function', type(ns.GetAttackModifier))
+              return checkFunc(ns.GetAttackModifier)
             end,
             GetAuraInfo = function()
-              assertEquals('function', type(ns.GetAuraInfo))
+              return checkFunc(ns.GetAuraInfo)
             end,
             GetBattleState = function()
-              assertEquals('function', type(ns.GetBattleState))
+              return checkFunc(ns.GetBattleState)
             end,
             GetBreedQuality = function()
-              assertEquals('function', type(ns.GetBreedQuality))
+              return checkFunc(ns.GetBreedQuality)
             end,
             GetDisplayID = function()
-              assertEquals('function', type(ns.GetDisplayID))
+              return checkFunc(ns.GetDisplayID)
             end,
             GetForfeitPenalty = function()
-              assertEquals('function', type(ns.GetForfeitPenalty))
+              return checkFunc(ns.GetForfeitPenalty)
             end,
             GetHealth = function()
-              assertEquals('function', type(ns.GetHealth))
+              return checkFunc(ns.GetHealth)
             end,
             GetIcon = function()
-              assertEquals('function', type(ns.GetIcon))
+              return checkFunc(ns.GetIcon)
             end,
             GetLevel = function()
-              assertEquals('function', type(ns.GetLevel))
+              return checkFunc(ns.GetLevel)
             end,
             GetMaxHealth = function()
-              assertEquals('function', type(ns.GetMaxHealth))
+              return checkFunc(ns.GetMaxHealth)
             end,
             GetName = function()
-              assertEquals('function', type(ns.GetName))
+              return checkFunc(ns.GetName)
             end,
             GetNumAuras = function()
-              assertEquals('function', type(ns.GetNumAuras))
+              return checkFunc(ns.GetNumAuras)
             end,
             GetNumPets = function()
-              assertEquals('function', type(ns.GetNumPets))
+              return checkFunc(ns.GetNumPets)
             end,
             GetPVPMatchmakingInfo = function()
-              assertEquals('function', type(ns.GetPVPMatchmakingInfo))
+              return checkFunc(ns.GetPVPMatchmakingInfo)
             end,
             GetPetSpeciesID = function()
-              assertEquals('function', type(ns.GetPetSpeciesID))
+              return checkFunc(ns.GetPetSpeciesID)
             end,
             GetPetType = function()
-              assertEquals('function', type(ns.GetPetType))
+              return checkFunc(ns.GetPetType)
             end,
             GetPlayerTrapAbility = function()
-              assertEquals('function', type(ns.GetPlayerTrapAbility))
+              return checkFunc(ns.GetPlayerTrapAbility)
             end,
             GetPower = function()
-              assertEquals('function', type(ns.GetPower))
+              return checkFunc(ns.GetPower)
             end,
             GetSelectedAction = function()
-              assertEquals('function', type(ns.GetSelectedAction))
+              return checkFunc(ns.GetSelectedAction)
             end,
             GetSpeed = function()
-              assertEquals('function', type(ns.GetSpeed))
+              return checkFunc(ns.GetSpeed)
             end,
             GetStateValue = function()
-              assertEquals('function', type(ns.GetStateValue))
+              return checkFunc(ns.GetStateValue)
             end,
             GetTurnTimeInfo = function()
-              assertEquals('function', type(ns.GetTurnTimeInfo))
+              return checkFunc(ns.GetTurnTimeInfo)
             end,
             GetXP = function()
-              assertEquals('function', type(ns.GetXP))
+              return checkFunc(ns.GetXP)
             end,
             IsInBattle = function()
-              assertEquals('function', type(ns.IsInBattle))
+              return checkFunc(ns.IsInBattle)
             end,
             IsPlayerNPC = function()
-              assertEquals('function', type(ns.IsPlayerNPC))
+              return checkFunc(ns.IsPlayerNPC)
             end,
             IsSkipAvailable = function()
-              assertEquals('function', type(ns.IsSkipAvailable))
+              return checkFunc(ns.IsSkipAvailable)
             end,
             IsTrapAvailable = function()
-              assertEquals('function', type(ns.IsTrapAvailable))
+              return checkFunc(ns.IsTrapAvailable)
             end,
             IsWaitingOnOpponent = function()
-              assertEquals('function', type(ns.IsWaitingOnOpponent))
+              return checkFunc(ns.IsWaitingOnOpponent)
             end,
             IsWildBattle = function()
-              assertEquals('function', type(ns.IsWildBattle))
+              return checkFunc(ns.IsWildBattle)
             end,
             SetPendingReportBattlePetTarget = function()
-              assertEquals('function', type(ns.SetPendingReportBattlePetTarget))
+              return checkFunc(ns.SetPendingReportBattlePetTarget)
             end,
             SetPendingReportTargetFromUnit = function()
-              assertEquals('function', type(ns.SetPendingReportTargetFromUnit))
+              return checkFunc(ns.SetPendingReportTargetFromUnit)
             end,
             ShouldShowPetSelect = function()
-              assertEquals('function', type(ns.ShouldShowPetSelect))
+              return checkFunc(ns.ShouldShowPetSelect)
             end,
             SkipTurn = function()
-              assertEquals('function', type(ns.SkipTurn))
+              return checkFunc(ns.SkipTurn)
             end,
             StartPVPDuel = function()
-              assertEquals('function', type(ns.StartPVPDuel))
+              return checkFunc(ns.StartPVPDuel)
             end,
             StartPVPMatchmaking = function()
-              assertEquals('function', type(ns.StartPVPMatchmaking))
+              return checkFunc(ns.StartPVPMatchmaking)
             end,
             StopPVPMatchmaking = function()
-              assertEquals('function', type(ns.StopPVPMatchmaking))
+              return checkFunc(ns.StopPVPMatchmaking)
             end,
             UseAbility = function()
-              assertEquals('function', type(ns.UseAbility))
+              return checkFunc(ns.UseAbility)
             end,
             UseTrap = function()
-              assertEquals('function', type(ns.UseTrap))
+              return checkFunc(ns.UseTrap)
             end,
           })
         end,
@@ -6633,7 +6649,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetPetTamersForMap = function()
-              assertEquals('function', type(ns.GetPetTamersForMap))
+              return checkFunc(ns.GetPetTamersForMap)
             end,
           })
         end,
@@ -6647,211 +6663,211 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CagePetByID = function()
-              assertEquals('function', type(ns.CagePetByID))
+              return checkFunc(ns.CagePetByID)
             end,
             ClearFanfare = function()
-              assertEquals('function', type(ns.ClearFanfare))
+              return checkFunc(ns.ClearFanfare)
             end,
             ClearRecentFanfares = function()
-              assertEquals('function', type(ns.ClearRecentFanfares))
+              return checkFunc(ns.ClearRecentFanfares)
             end,
             ClearSearchFilter = function()
-              assertEquals('function', type(ns.ClearSearchFilter))
+              return checkFunc(ns.ClearSearchFilter)
             end,
             FindPetIDByName = function()
-              assertEquals('function', type(ns.FindPetIDByName))
+              return checkFunc(ns.FindPetIDByName)
             end,
             GetBattlePetLink = function()
-              assertEquals('function', type(ns.GetBattlePetLink))
+              return checkFunc(ns.GetBattlePetLink)
             end,
             GetDisplayIDByIndex = function()
-              assertEquals('function', type(ns.GetDisplayIDByIndex))
+              return checkFunc(ns.GetDisplayIDByIndex)
             end,
             GetDisplayProbabilityByIndex = function()
-              assertEquals('function', type(ns.GetDisplayProbabilityByIndex))
+              return checkFunc(ns.GetDisplayProbabilityByIndex)
             end,
             GetNumCollectedInfo = function()
-              assertEquals('function', type(ns.GetNumCollectedInfo))
+              return checkFunc(ns.GetNumCollectedInfo)
             end,
             GetNumDisplays = function()
-              assertEquals('function', type(ns.GetNumDisplays))
+              return checkFunc(ns.GetNumDisplays)
             end,
             GetNumPetSources = function()
-              assertEquals('function', type(ns.GetNumPetSources))
+              return checkFunc(ns.GetNumPetSources)
             end,
             GetNumPetTypes = function()
-              assertEquals('function', type(ns.GetNumPetTypes))
+              return checkFunc(ns.GetNumPetTypes)
             end,
             GetNumPets = function()
-              assertEquals('function', type(ns.GetNumPets))
+              return checkFunc(ns.GetNumPets)
             end,
             GetNumPetsNeedingFanfare = function()
-              assertEquals('function', type(ns.GetNumPetsNeedingFanfare))
+              return checkFunc(ns.GetNumPetsNeedingFanfare)
             end,
             GetOwnedBattlePetString = function()
-              assertEquals('function', type(ns.GetOwnedBattlePetString))
+              return checkFunc(ns.GetOwnedBattlePetString)
             end,
             GetPetAbilityInfo = function()
-              assertEquals('function', type(ns.GetPetAbilityInfo))
+              return checkFunc(ns.GetPetAbilityInfo)
             end,
             GetPetAbilityList = function()
-              assertEquals('function', type(ns.GetPetAbilityList))
+              return checkFunc(ns.GetPetAbilityList)
             end,
             GetPetAbilityListTable = function()
-              assertEquals('function', type(ns.GetPetAbilityListTable))
+              return checkFunc(ns.GetPetAbilityListTable)
             end,
             GetPetCooldownByGUID = function()
-              assertEquals('function', type(ns.GetPetCooldownByGUID))
+              return checkFunc(ns.GetPetCooldownByGUID)
             end,
             GetPetInfoByIndex = function()
-              assertEquals('function', type(ns.GetPetInfoByIndex))
+              return checkFunc(ns.GetPetInfoByIndex)
             end,
             GetPetInfoByItemID = function()
-              assertEquals('function', type(ns.GetPetInfoByItemID))
+              return checkFunc(ns.GetPetInfoByItemID)
             end,
             GetPetInfoByPetID = function()
-              assertEquals('function', type(ns.GetPetInfoByPetID))
+              return checkFunc(ns.GetPetInfoByPetID)
             end,
             GetPetInfoBySpeciesID = function()
-              assertEquals('function', type(ns.GetPetInfoBySpeciesID))
+              return checkFunc(ns.GetPetInfoBySpeciesID)
             end,
             GetPetInfoTableByPetID = function()
-              assertEquals('function', type(ns.GetPetInfoTableByPetID))
+              return checkFunc(ns.GetPetInfoTableByPetID)
             end,
             GetPetLoadOutInfo = function()
-              assertEquals('function', type(ns.GetPetLoadOutInfo))
+              return checkFunc(ns.GetPetLoadOutInfo)
             end,
             GetPetModelSceneInfoBySpeciesID = function()
-              assertEquals('function', type(ns.GetPetModelSceneInfoBySpeciesID))
+              return checkFunc(ns.GetPetModelSceneInfoBySpeciesID)
             end,
             GetPetSortParameter = function()
-              assertEquals('function', type(ns.GetPetSortParameter))
+              return checkFunc(ns.GetPetSortParameter)
             end,
             GetPetStats = function()
-              assertEquals('function', type(ns.GetPetStats))
+              return checkFunc(ns.GetPetStats)
             end,
             GetPetSummonInfo = function()
-              assertEquals('function', type(ns.GetPetSummonInfo))
+              return checkFunc(ns.GetPetSummonInfo)
             end,
             GetPetTeamAverageLevel = function()
-              assertEquals('function', type(ns.GetPetTeamAverageLevel))
+              return checkFunc(ns.GetPetTeamAverageLevel)
             end,
             GetSummonBattlePetCooldown = function()
-              assertEquals('function', type(ns.GetSummonBattlePetCooldown))
+              return checkFunc(ns.GetSummonBattlePetCooldown)
             end,
             GetSummonRandomFavoritePetGUID = function()
-              assertEquals('function', type(ns.GetSummonRandomFavoritePetGUID))
+              return checkFunc(ns.GetSummonRandomFavoritePetGUID)
             end,
             GetSummonedPetGUID = function()
-              assertEquals('function', type(ns.GetSummonedPetGUID))
+              return checkFunc(ns.GetSummonedPetGUID)
             end,
             IsFilterChecked = function()
-              assertEquals('function', type(ns.IsFilterChecked))
+              return checkFunc(ns.IsFilterChecked)
             end,
             IsFindBattleEnabled = function()
-              assertEquals('function', type(ns.IsFindBattleEnabled))
+              return checkFunc(ns.IsFindBattleEnabled)
             end,
             IsJournalReadOnly = function()
-              assertEquals('function', type(ns.IsJournalReadOnly))
+              return checkFunc(ns.IsJournalReadOnly)
             end,
             IsJournalUnlocked = function()
-              assertEquals('function', type(ns.IsJournalUnlocked))
+              return checkFunc(ns.IsJournalUnlocked)
             end,
             IsPetSourceChecked = function()
-              assertEquals('function', type(ns.IsPetSourceChecked))
+              return checkFunc(ns.IsPetSourceChecked)
             end,
             IsPetTypeChecked = function()
-              assertEquals('function', type(ns.IsPetTypeChecked))
+              return checkFunc(ns.IsPetTypeChecked)
             end,
             IsUsingDefaultFilters = function()
-              assertEquals('function', type(ns.IsUsingDefaultFilters))
+              return checkFunc(ns.IsUsingDefaultFilters)
             end,
             PetCanBeReleased = function()
-              assertEquals('function', type(ns.PetCanBeReleased))
+              return checkFunc(ns.PetCanBeReleased)
             end,
             PetIsCapturable = function()
-              assertEquals('function', type(ns.PetIsCapturable))
+              return checkFunc(ns.PetIsCapturable)
             end,
             PetIsFavorite = function()
-              assertEquals('function', type(ns.PetIsFavorite))
+              return checkFunc(ns.PetIsFavorite)
             end,
             PetIsHurt = function()
-              assertEquals('function', type(ns.PetIsHurt))
+              return checkFunc(ns.PetIsHurt)
             end,
             PetIsLockedForConvert = function()
-              assertEquals('function', type(ns.PetIsLockedForConvert))
+              return checkFunc(ns.PetIsLockedForConvert)
             end,
             PetIsRevoked = function()
-              assertEquals('function', type(ns.PetIsRevoked))
+              return checkFunc(ns.PetIsRevoked)
             end,
             PetIsSlotted = function()
-              assertEquals('function', type(ns.PetIsSlotted))
+              return checkFunc(ns.PetIsSlotted)
             end,
             PetIsSummonable = function()
-              assertEquals('function', type(ns.PetIsSummonable))
+              return checkFunc(ns.PetIsSummonable)
             end,
             PetIsTradable = function()
-              assertEquals('function', type(ns.PetIsTradable))
+              return checkFunc(ns.PetIsTradable)
             end,
             PetIsUsable = function()
-              assertEquals('function', type(ns.PetIsUsable))
+              return checkFunc(ns.PetIsUsable)
             end,
             PetNeedsFanfare = function()
-              assertEquals('function', type(ns.PetNeedsFanfare))
+              return checkFunc(ns.PetNeedsFanfare)
             end,
             PetUsesRandomDisplay = function()
-              assertEquals('function', type(ns.PetUsesRandomDisplay))
+              return checkFunc(ns.PetUsesRandomDisplay)
             end,
             PickupPet = function()
-              assertEquals('function', type(ns.PickupPet))
+              return checkFunc(ns.PickupPet)
             end,
             PickupSummonRandomPet = function()
-              assertEquals('function', type(ns.PickupSummonRandomPet))
+              return checkFunc(ns.PickupSummonRandomPet)
             end,
             ReleasePetByID = function()
-              assertEquals('function', type(ns.ReleasePetByID))
+              return checkFunc(ns.ReleasePetByID)
             end,
             SetAbility = function()
-              assertEquals('function', type(ns.SetAbility))
+              return checkFunc(ns.SetAbility)
             end,
             SetAllPetSourcesChecked = function()
-              assertEquals('function', type(ns.SetAllPetSourcesChecked))
+              return checkFunc(ns.SetAllPetSourcesChecked)
             end,
             SetAllPetTypesChecked = function()
-              assertEquals('function', type(ns.SetAllPetTypesChecked))
+              return checkFunc(ns.SetAllPetTypesChecked)
             end,
             SetCustomName = function()
-              assertEquals('function', type(ns.SetCustomName))
+              return checkFunc(ns.SetCustomName)
             end,
             SetDefaultFilters = function()
-              assertEquals('function', type(ns.SetDefaultFilters))
+              return checkFunc(ns.SetDefaultFilters)
             end,
             SetFavorite = function()
-              assertEquals('function', type(ns.SetFavorite))
+              return checkFunc(ns.SetFavorite)
             end,
             SetFilterChecked = function()
-              assertEquals('function', type(ns.SetFilterChecked))
+              return checkFunc(ns.SetFilterChecked)
             end,
             SetPetLoadOutInfo = function()
-              assertEquals('function', type(ns.SetPetLoadOutInfo))
+              return checkFunc(ns.SetPetLoadOutInfo)
             end,
             SetPetSortParameter = function()
-              assertEquals('function', type(ns.SetPetSortParameter))
+              return checkFunc(ns.SetPetSortParameter)
             end,
             SetPetSourceChecked = function()
-              assertEquals('function', type(ns.SetPetSourceChecked))
+              return checkFunc(ns.SetPetSourceChecked)
             end,
             SetPetTypeFilter = function()
-              assertEquals('function', type(ns.SetPetTypeFilter))
+              return checkFunc(ns.SetPetTypeFilter)
             end,
             SetSearchFilter = function()
-              assertEquals('function', type(ns.SetSearchFilter))
+              return checkFunc(ns.SetSearchFilter)
             end,
             SummonPetByGUID = function()
-              assertEquals('function', type(ns.SummonPetByGUID))
+              return checkFunc(ns.SummonPetByGUID)
             end,
             SummonRandomPet = function()
-              assertEquals('function', type(ns.SummonRandomPet))
+              return checkFunc(ns.SummonRandomPet)
             end,
           })
         end,
@@ -6865,25 +6881,25 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetCurrentPlayerChoiceInfo = function()
-              assertEquals('function', type(ns.GetCurrentPlayerChoiceInfo))
+              return checkFunc(ns.GetCurrentPlayerChoiceInfo)
             end,
             GetNumRerolls = function()
-              assertEquals('function', type(ns.GetNumRerolls))
+              return checkFunc(ns.GetNumRerolls)
             end,
             GetRemainingTime = function()
-              assertEquals('function', type(ns.GetRemainingTime))
+              return checkFunc(ns.GetRemainingTime)
             end,
             IsWaitingForPlayerChoiceResponse = function()
-              assertEquals('function', type(ns.IsWaitingForPlayerChoiceResponse))
+              return checkFunc(ns.IsWaitingForPlayerChoiceResponse)
             end,
             OnUIClosed = function()
-              assertEquals('function', type(ns.OnUIClosed))
+              return checkFunc(ns.OnUIClosed)
             end,
             RequestRerollPlayerChoice = function()
-              assertEquals('function', type(ns.RequestRerollPlayerChoice))
+              return checkFunc(ns.RequestRerollPlayerChoice)
             end,
             SendPlayerChoiceResponse = function()
-              assertEquals('function', type(ns.SendPlayerChoiceResponse))
+              return checkFunc(ns.SendPlayerChoiceResponse)
             end,
           })
         end,
@@ -6897,112 +6913,112 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.CanPlayerEnterChromieTime))
                 return
               end
-              assertEquals('function', type(ns.CanPlayerEnterChromieTime))
+              return checkFunc(ns.CanPlayerEnterChromieTime)
             end,
             CanPlayerUseAreaLoot = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanPlayerUseAreaLoot))
                 return
               end
-              assertEquals('function', type(ns.CanPlayerUseAreaLoot))
+              return checkFunc(ns.CanPlayerUseAreaLoot)
             end,
             CanPlayerUseMountEquipment = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanPlayerUseMountEquipment))
                 return
               end
-              assertEquals('function', type(ns.CanPlayerUseMountEquipment))
+              return checkFunc(ns.CanPlayerUseMountEquipment)
             end,
             GUIDIsPlayer = function()
-              assertEquals('function', type(ns.GUIDIsPlayer))
+              return checkFunc(ns.GUIDIsPlayer)
             end,
             GetAlternateFormInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetAlternateFormInfo))
                 return
               end
-              assertEquals('function', type(ns.GetAlternateFormInfo))
+              return checkFunc(ns.GetAlternateFormInfo)
             end,
             GetClass = function()
-              assertEquals('function', type(ns.GetClass))
+              return checkFunc(ns.GetClass)
             end,
             GetContentDifficultyCreatureForPlayer = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetContentDifficultyCreatureForPlayer))
                 return
               end
-              assertEquals('function', type(ns.GetContentDifficultyCreatureForPlayer))
+              return checkFunc(ns.GetContentDifficultyCreatureForPlayer)
             end,
             GetContentDifficultyQuestForPlayer = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetContentDifficultyQuestForPlayer))
                 return
               end
-              assertEquals('function', type(ns.GetContentDifficultyQuestForPlayer))
+              return checkFunc(ns.GetContentDifficultyQuestForPlayer)
             end,
             GetInstancesUnlockedAtLevel = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetInstancesUnlockedAtLevel))
                 return
               end
-              assertEquals('function', type(ns.GetInstancesUnlockedAtLevel))
+              return checkFunc(ns.GetInstancesUnlockedAtLevel)
             end,
             GetName = function()
-              assertEquals('function', type(ns.GetName))
+              return checkFunc(ns.GetName)
             end,
             GetPlayerMythicPlusRatingSummary = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetPlayerMythicPlusRatingSummary))
                 return
               end
-              assertEquals('function', type(ns.GetPlayerMythicPlusRatingSummary))
+              return checkFunc(ns.GetPlayerMythicPlusRatingSummary)
             end,
             GetRace = function()
-              assertEquals('function', type(ns.GetRace))
+              return checkFunc(ns.GetRace)
             end,
             GetSex = function()
-              assertEquals('function', type(ns.GetSex))
+              return checkFunc(ns.GetSex)
             end,
             IsConnected = function()
-              assertEquals('function', type(ns.IsConnected))
+              return checkFunc(ns.IsConnected)
             end,
             IsPlayerEligibleForNPE = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsPlayerEligibleForNPE))
                 return
               end
-              assertEquals('function', type(ns.IsPlayerEligibleForNPE))
+              return checkFunc(ns.IsPlayerEligibleForNPE)
             end,
             IsPlayerEligibleForNPEv2 = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsPlayerEligibleForNPEv2))
                 return
               end
-              assertEquals('function', type(ns.IsPlayerEligibleForNPEv2))
+              return checkFunc(ns.IsPlayerEligibleForNPEv2)
             end,
             IsPlayerInChromieTime = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsPlayerInChromieTime))
                 return
               end
-              assertEquals('function', type(ns.IsPlayerInChromieTime))
+              return checkFunc(ns.IsPlayerInChromieTime)
             end,
             IsPlayerInGuildFromGUID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsPlayerInGuildFromGUID))
                 return
               end
-              assertEquals('function', type(ns.IsPlayerInGuildFromGUID))
+              return checkFunc(ns.IsPlayerInGuildFromGUID)
             end,
             IsPlayerNPERestricted = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsPlayerNPERestricted))
                 return
               end
-              assertEquals('function', type(ns.IsPlayerNPERestricted))
+              return checkFunc(ns.IsPlayerNPERestricted)
             end,
             UnitIsSameServer = function()
-              assertEquals('function', type(ns.UnitIsSameServer))
+              return checkFunc(ns.UnitIsSameServer)
             end,
           })
         end,
@@ -7016,19 +7032,19 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetMentorLevelRequirement = function()
-              assertEquals('function', type(ns.GetMentorLevelRequirement))
+              return checkFunc(ns.GetMentorLevelRequirement)
             end,
             GetMentorRequirements = function()
-              assertEquals('function', type(ns.GetMentorRequirements))
+              return checkFunc(ns.GetMentorRequirements)
             end,
             GetMentorshipStatus = function()
-              assertEquals('function', type(ns.GetMentorshipStatus))
+              return checkFunc(ns.GetMentorshipStatus)
             end,
             IsActivePlayerConsideredNewcomer = function()
-              assertEquals('function', type(ns.IsActivePlayerConsideredNewcomer))
+              return checkFunc(ns.IsActivePlayerConsideredNewcomer)
             end,
             IsMentorRestricted = function()
-              assertEquals('function', type(ns.IsMentorRestricted))
+              return checkFunc(ns.IsMentorRestricted)
             end,
           })
         end,
@@ -7042,16 +7058,16 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetChoices = function()
-              assertEquals('function', type(ns.GetChoices))
+              return checkFunc(ns.GetChoices)
             end,
             GetNumSuppressed = function()
-              assertEquals('function', type(ns.GetNumSuppressed))
+              return checkFunc(ns.GetNumSuppressed)
             end,
             GetProducts = function()
-              assertEquals('function', type(ns.GetProducts))
+              return checkFunc(ns.GetProducts)
             end,
             MakeSelection = function()
-              assertEquals('function', type(ns.MakeSelection))
+              return checkFunc(ns.MakeSelection)
             end,
           })
         end,
@@ -7065,488 +7081,488 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.CanDisplayDamage))
                 return
               end
-              assertEquals('function', type(ns.CanDisplayDamage))
+              return checkFunc(ns.CanDisplayDamage)
             end,
             CanDisplayDeaths = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanDisplayDeaths))
                 return
               end
-              assertEquals('function', type(ns.CanDisplayDeaths))
+              return checkFunc(ns.CanDisplayDeaths)
             end,
             CanDisplayHealing = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanDisplayHealing))
                 return
               end
-              assertEquals('function', type(ns.CanDisplayHealing))
+              return checkFunc(ns.CanDisplayHealing)
             end,
             CanDisplayHonorableKills = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanDisplayHonorableKills))
                 return
               end
-              assertEquals('function', type(ns.CanDisplayHonorableKills))
+              return checkFunc(ns.CanDisplayHonorableKills)
             end,
             CanDisplayKillingBlows = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanDisplayKillingBlows))
                 return
               end
-              assertEquals('function', type(ns.CanDisplayKillingBlows))
+              return checkFunc(ns.CanDisplayKillingBlows)
             end,
             CanPlayerUseRatedPVPUI = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanPlayerUseRatedPVPUI))
                 return
               end
-              assertEquals('function', type(ns.CanPlayerUseRatedPVPUI))
+              return checkFunc(ns.CanPlayerUseRatedPVPUI)
             end,
             CanToggleWarMode = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanToggleWarMode))
                 return
               end
-              assertEquals('function', type(ns.CanToggleWarMode))
+              return checkFunc(ns.CanToggleWarMode)
             end,
             CanToggleWarModeInArea = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanToggleWarModeInArea))
                 return
               end
-              assertEquals('function', type(ns.CanToggleWarModeInArea))
+              return checkFunc(ns.CanToggleWarModeInArea)
             end,
             DoesMatchOutcomeAffectRating = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.DoesMatchOutcomeAffectRating))
                 return
               end
-              assertEquals('function', type(ns.DoesMatchOutcomeAffectRating))
+              return checkFunc(ns.DoesMatchOutcomeAffectRating)
             end,
             GetActiveBrawlInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetActiveBrawlInfo))
                 return
               end
-              assertEquals('function', type(ns.GetActiveBrawlInfo))
+              return checkFunc(ns.GetActiveBrawlInfo)
             end,
             GetActiveMatchBracket = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetActiveMatchBracket))
                 return
               end
-              assertEquals('function', type(ns.GetActiveMatchBracket))
+              return checkFunc(ns.GetActiveMatchBracket)
             end,
             GetActiveMatchDuration = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetActiveMatchDuration))
                 return
               end
-              assertEquals('function', type(ns.GetActiveMatchDuration))
+              return checkFunc(ns.GetActiveMatchDuration)
             end,
             GetActiveMatchState = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetActiveMatchState))
                 return
               end
-              assertEquals('function', type(ns.GetActiveMatchState))
+              return checkFunc(ns.GetActiveMatchState)
             end,
             GetActiveMatchWinner = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetActiveMatchWinner))
                 return
               end
-              assertEquals('function', type(ns.GetActiveMatchWinner))
+              return checkFunc(ns.GetActiveMatchWinner)
             end,
             GetArenaCrowdControlInfo = function()
-              assertEquals('function', type(ns.GetArenaCrowdControlInfo))
+              return checkFunc(ns.GetArenaCrowdControlInfo)
             end,
             GetArenaRewards = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetArenaRewards))
                 return
               end
-              assertEquals('function', type(ns.GetArenaRewards))
+              return checkFunc(ns.GetArenaRewards)
             end,
             GetArenaSkirmishRewards = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetArenaSkirmishRewards))
                 return
               end
-              assertEquals('function', type(ns.GetArenaSkirmishRewards))
+              return checkFunc(ns.GetArenaSkirmishRewards)
             end,
             GetAvailableBrawlInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetAvailableBrawlInfo))
                 return
               end
-              assertEquals('function', type(ns.GetAvailableBrawlInfo))
+              return checkFunc(ns.GetAvailableBrawlInfo)
             end,
             GetBattlefieldFlagPosition = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetBattlefieldFlagPosition))
                 return
               end
-              assertEquals('function', type(ns.GetBattlefieldFlagPosition))
+              return checkFunc(ns.GetBattlefieldFlagPosition)
             end,
             GetBattlefieldVehicleInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetBattlefieldVehicleInfo))
                 return
               end
-              assertEquals('function', type(ns.GetBattlefieldVehicleInfo))
+              return checkFunc(ns.GetBattlefieldVehicleInfo)
             end,
             GetBattlefieldVehicles = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetBattlefieldVehicles))
                 return
               end
-              assertEquals('function', type(ns.GetBattlefieldVehicles))
+              return checkFunc(ns.GetBattlefieldVehicles)
             end,
             GetBrawlRewards = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetBrawlRewards))
                 return
               end
-              assertEquals('function', type(ns.GetBrawlRewards))
+              return checkFunc(ns.GetBrawlRewards)
             end,
             GetCustomVictoryStatID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCustomVictoryStatID))
                 return
               end
-              assertEquals('function', type(ns.GetCustomVictoryStatID))
+              return checkFunc(ns.GetCustomVictoryStatID)
             end,
             GetGlobalPvpScalingInfoForSpecID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetGlobalPvpScalingInfoForSpecID))
                 return
               end
-              assertEquals('function', type(ns.GetGlobalPvpScalingInfoForSpecID))
+              return checkFunc(ns.GetGlobalPvpScalingInfoForSpecID)
             end,
             GetHonorRewardInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetHonorRewardInfo))
                 return
               end
-              assertEquals('function', type(ns.GetHonorRewardInfo))
+              return checkFunc(ns.GetHonorRewardInfo)
             end,
             GetLevelUpBattlegrounds = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetLevelUpBattlegrounds))
                 return
               end
-              assertEquals('function', type(ns.GetLevelUpBattlegrounds))
+              return checkFunc(ns.GetLevelUpBattlegrounds)
             end,
             GetMatchPVPStatColumn = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetMatchPVPStatColumn))
                 return
               end
-              assertEquals('function', type(ns.GetMatchPVPStatColumn))
+              return checkFunc(ns.GetMatchPVPStatColumn)
             end,
             GetMatchPVPStatColumns = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetMatchPVPStatColumns))
                 return
               end
-              assertEquals('function', type(ns.GetMatchPVPStatColumns))
+              return checkFunc(ns.GetMatchPVPStatColumns)
             end,
             GetNextHonorLevelForReward = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNextHonorLevelForReward))
                 return
               end
-              assertEquals('function', type(ns.GetNextHonorLevelForReward))
+              return checkFunc(ns.GetNextHonorLevelForReward)
             end,
             GetOutdoorPvPWaitTime = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetOutdoorPvPWaitTime))
                 return
               end
-              assertEquals('function', type(ns.GetOutdoorPvPWaitTime))
+              return checkFunc(ns.GetOutdoorPvPWaitTime)
             end,
             GetPVPActiveMatchPersonalRatedInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetPVPActiveMatchPersonalRatedInfo))
                 return
               end
-              assertEquals('function', type(ns.GetPVPActiveMatchPersonalRatedInfo))
+              return checkFunc(ns.GetPVPActiveMatchPersonalRatedInfo)
             end,
             GetPVPSeasonRewardAchievementID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetPVPSeasonRewardAchievementID))
                 return
               end
-              assertEquals('function', type(ns.GetPVPSeasonRewardAchievementID))
+              return checkFunc(ns.GetPVPSeasonRewardAchievementID)
             end,
             GetPostMatchCurrencyRewards = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetPostMatchCurrencyRewards))
                 return
               end
-              assertEquals('function', type(ns.GetPostMatchCurrencyRewards))
+              return checkFunc(ns.GetPostMatchCurrencyRewards)
             end,
             GetPostMatchItemRewards = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetPostMatchItemRewards))
                 return
               end
-              assertEquals('function', type(ns.GetPostMatchItemRewards))
+              return checkFunc(ns.GetPostMatchItemRewards)
             end,
             GetPvpTierID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetPvpTierID))
                 return
               end
-              assertEquals('function', type(ns.GetPvpTierID))
+              return checkFunc(ns.GetPvpTierID)
             end,
             GetPvpTierInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetPvpTierInfo))
                 return
               end
-              assertEquals('function', type(ns.GetPvpTierInfo))
+              return checkFunc(ns.GetPvpTierInfo)
             end,
             GetRandomBGInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetRandomBGInfo))
                 return
               end
-              assertEquals('function', type(ns.GetRandomBGInfo))
+              return checkFunc(ns.GetRandomBGInfo)
             end,
             GetRandomBGRewards = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetRandomBGRewards))
                 return
               end
-              assertEquals('function', type(ns.GetRandomBGRewards))
+              return checkFunc(ns.GetRandomBGRewards)
             end,
             GetRandomEpicBGInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetRandomEpicBGInfo))
                 return
               end
-              assertEquals('function', type(ns.GetRandomEpicBGInfo))
+              return checkFunc(ns.GetRandomEpicBGInfo)
             end,
             GetRandomEpicBGRewards = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetRandomEpicBGRewards))
                 return
               end
-              assertEquals('function', type(ns.GetRandomEpicBGRewards))
+              return checkFunc(ns.GetRandomEpicBGRewards)
             end,
             GetRatedBGRewards = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetRatedBGRewards))
                 return
               end
-              assertEquals('function', type(ns.GetRatedBGRewards))
+              return checkFunc(ns.GetRatedBGRewards)
             end,
             GetRewardItemLevelsByTierEnum = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetRewardItemLevelsByTierEnum))
                 return
               end
-              assertEquals('function', type(ns.GetRewardItemLevelsByTierEnum))
+              return checkFunc(ns.GetRewardItemLevelsByTierEnum)
             end,
             GetScoreInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetScoreInfo))
                 return
               end
-              assertEquals('function', type(ns.GetScoreInfo))
+              return checkFunc(ns.GetScoreInfo)
             end,
             GetScoreInfoByPlayerGuid = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetScoreInfoByPlayerGuid))
                 return
               end
-              assertEquals('function', type(ns.GetScoreInfoByPlayerGuid))
+              return checkFunc(ns.GetScoreInfoByPlayerGuid)
             end,
             GetSeasonBestInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetSeasonBestInfo))
                 return
               end
-              assertEquals('function', type(ns.GetSeasonBestInfo))
+              return checkFunc(ns.GetSeasonBestInfo)
             end,
             GetSkirmishInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetSkirmishInfo))
                 return
               end
-              assertEquals('function', type(ns.GetSkirmishInfo))
+              return checkFunc(ns.GetSkirmishInfo)
             end,
             GetSpecialEventBrawlInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetSpecialEventBrawlInfo))
                 return
               end
-              assertEquals('function', type(ns.GetSpecialEventBrawlInfo))
+              return checkFunc(ns.GetSpecialEventBrawlInfo)
             end,
             GetTeamInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetTeamInfo))
                 return
               end
-              assertEquals('function', type(ns.GetTeamInfo))
+              return checkFunc(ns.GetTeamInfo)
             end,
             GetWarModeRewardBonus = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetWarModeRewardBonus))
                 return
               end
-              assertEquals('function', type(ns.GetWarModeRewardBonus))
+              return checkFunc(ns.GetWarModeRewardBonus)
             end,
             GetWarModeRewardBonusDefault = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetWarModeRewardBonusDefault))
                 return
               end
-              assertEquals('function', type(ns.GetWarModeRewardBonusDefault))
+              return checkFunc(ns.GetWarModeRewardBonusDefault)
             end,
             GetWeeklyChestInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetWeeklyChestInfo))
                 return
               end
-              assertEquals('function', type(ns.GetWeeklyChestInfo))
+              return checkFunc(ns.GetWeeklyChestInfo)
             end,
             HasArenaSkirmishWinToday = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.HasArenaSkirmishWinToday))
                 return
               end
-              assertEquals('function', type(ns.HasArenaSkirmishWinToday))
+              return checkFunc(ns.HasArenaSkirmishWinToday)
             end,
             IsActiveBattlefield = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsActiveBattlefield))
                 return
               end
-              assertEquals('function', type(ns.IsActiveBattlefield))
+              return checkFunc(ns.IsActiveBattlefield)
             end,
             IsActiveMatchRegistered = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsActiveMatchRegistered))
                 return
               end
-              assertEquals('function', type(ns.IsActiveMatchRegistered))
+              return checkFunc(ns.IsActiveMatchRegistered)
             end,
             IsArena = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsArena))
                 return
               end
-              assertEquals('function', type(ns.IsArena))
+              return checkFunc(ns.IsArena)
             end,
             IsBattleground = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsBattleground))
                 return
               end
-              assertEquals('function', type(ns.IsBattleground))
+              return checkFunc(ns.IsBattleground)
             end,
             IsBattlegroundEnlistmentBonusActive = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsBattlegroundEnlistmentBonusActive))
                 return
               end
-              assertEquals('function', type(ns.IsBattlegroundEnlistmentBonusActive))
+              return checkFunc(ns.IsBattlegroundEnlistmentBonusActive)
             end,
             IsInBrawl = function()
-              assertEquals('function', type(ns.IsInBrawl))
+              return checkFunc(ns.IsInBrawl)
             end,
             IsMatchConsideredArena = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsMatchConsideredArena))
                 return
               end
-              assertEquals('function', type(ns.IsMatchConsideredArena))
+              return checkFunc(ns.IsMatchConsideredArena)
             end,
             IsMatchFactional = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsMatchFactional))
                 return
               end
-              assertEquals('function', type(ns.IsMatchFactional))
+              return checkFunc(ns.IsMatchFactional)
             end,
             IsPVPMap = function()
-              assertEquals('function', type(ns.IsPVPMap))
+              return checkFunc(ns.IsPVPMap)
             end,
             IsRatedArena = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsRatedArena))
                 return
               end
-              assertEquals('function', type(ns.IsRatedArena))
+              return checkFunc(ns.IsRatedArena)
             end,
             IsRatedBattleground = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsRatedBattleground))
                 return
               end
-              assertEquals('function', type(ns.IsRatedBattleground))
+              return checkFunc(ns.IsRatedBattleground)
             end,
             IsRatedMap = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsRatedMap))
                 return
               end
-              assertEquals('function', type(ns.IsRatedMap))
+              return checkFunc(ns.IsRatedMap)
             end,
             IsSoloShuffle = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsSoloShuffle))
                 return
               end
-              assertEquals('function', type(ns.IsSoloShuffle))
+              return checkFunc(ns.IsSoloShuffle)
             end,
             IsWarModeActive = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsWarModeActive))
                 return
               end
-              assertEquals('function', type(ns.IsWarModeActive))
+              return checkFunc(ns.IsWarModeActive)
             end,
             IsWarModeDesired = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsWarModeDesired))
                 return
               end
-              assertEquals('function', type(ns.IsWarModeDesired))
+              return checkFunc(ns.IsWarModeDesired)
             end,
             IsWarModeFeatureEnabled = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsWarModeFeatureEnabled))
                 return
               end
-              assertEquals('function', type(ns.IsWarModeFeatureEnabled))
+              return checkFunc(ns.IsWarModeFeatureEnabled)
             end,
             JoinBrawl = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.JoinBrawl))
                 return
               end
-              assertEquals('function', type(ns.JoinBrawl))
+              return checkFunc(ns.JoinBrawl)
             end,
             RequestCrowdControlSpell = function()
-              assertEquals('function', type(ns.RequestCrowdControlSpell))
+              return checkFunc(ns.RequestCrowdControlSpell)
             end,
             SetWarModeDesired = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetWarModeDesired))
                 return
               end
-              assertEquals('function', type(ns.SetWarModeDesired))
+              return checkFunc(ns.SetWarModeDesired)
             end,
             ToggleWarMode = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ToggleWarMode))
                 return
               end
-              assertEquals('function', type(ns.ToggleWarMode))
+              return checkFunc(ns.ToggleWarMode)
             end,
           })
         end,
@@ -7560,19 +7576,19 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetAvailableQuestLines = function()
-              assertEquals('function', type(ns.GetAvailableQuestLines))
+              return checkFunc(ns.GetAvailableQuestLines)
             end,
             GetQuestLineInfo = function()
-              assertEquals('function', type(ns.GetQuestLineInfo))
+              return checkFunc(ns.GetQuestLineInfo)
             end,
             GetQuestLineQuests = function()
-              assertEquals('function', type(ns.GetQuestLineQuests))
+              return checkFunc(ns.GetQuestLineQuests)
             end,
             IsComplete = function()
-              assertEquals('function', type(ns.IsComplete))
+              return checkFunc(ns.IsComplete)
             end,
             RequestQuestLinesForMap = function()
-              assertEquals('function', type(ns.RequestQuestLinesForMap))
+              return checkFunc(ns.RequestQuestLinesForMap)
             end,
           })
         end,
@@ -7586,522 +7602,522 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.AbandonQuest))
                 return
               end
-              assertEquals('function', type(ns.AbandonQuest))
+              return checkFunc(ns.AbandonQuest)
             end,
             AddQuestWatch = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.AddQuestWatch))
                 return
               end
-              assertEquals('function', type(ns.AddQuestWatch))
+              return checkFunc(ns.AddQuestWatch)
             end,
             AddWorldQuestWatch = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.AddWorldQuestWatch))
                 return
               end
-              assertEquals('function', type(ns.AddWorldQuestWatch))
+              return checkFunc(ns.AddWorldQuestWatch)
             end,
             CanAbandonQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanAbandonQuest))
                 return
               end
-              assertEquals('function', type(ns.CanAbandonQuest))
+              return checkFunc(ns.CanAbandonQuest)
             end,
             GetAbandonQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetAbandonQuest))
                 return
               end
-              assertEquals('function', type(ns.GetAbandonQuest))
+              return checkFunc(ns.GetAbandonQuest)
             end,
             GetAbandonQuestItems = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetAbandonQuestItems))
                 return
               end
-              assertEquals('function', type(ns.GetAbandonQuestItems))
+              return checkFunc(ns.GetAbandonQuestItems)
             end,
             GetActiveThreatMaps = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetActiveThreatMaps))
                 return
               end
-              assertEquals('function', type(ns.GetActiveThreatMaps))
+              return checkFunc(ns.GetActiveThreatMaps)
             end,
             GetAllCompletedQuestIDs = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetAllCompletedQuestIDs))
                 return
               end
-              assertEquals('function', type(ns.GetAllCompletedQuestIDs))
+              return checkFunc(ns.GetAllCompletedQuestIDs)
             end,
             GetBountiesForMapID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetBountiesForMapID))
                 return
               end
-              assertEquals('function', type(ns.GetBountiesForMapID))
+              return checkFunc(ns.GetBountiesForMapID)
             end,
             GetBountySetInfoForMapID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetBountySetInfoForMapID))
                 return
               end
-              assertEquals('function', type(ns.GetBountySetInfoForMapID))
+              return checkFunc(ns.GetBountySetInfoForMapID)
             end,
             GetDistanceSqToQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetDistanceSqToQuest))
                 return
               end
-              assertEquals('function', type(ns.GetDistanceSqToQuest))
+              return checkFunc(ns.GetDistanceSqToQuest)
             end,
             GetInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetInfo))
                 return
               end
-              assertEquals('function', type(ns.GetInfo))
+              return checkFunc(ns.GetInfo)
             end,
             GetLogIndexForQuestID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetLogIndexForQuestID))
                 return
               end
-              assertEquals('function', type(ns.GetLogIndexForQuestID))
+              return checkFunc(ns.GetLogIndexForQuestID)
             end,
             GetMapForQuestPOIs = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetMapForQuestPOIs))
                 return
               end
-              assertEquals('function', type(ns.GetMapForQuestPOIs))
+              return checkFunc(ns.GetMapForQuestPOIs)
             end,
             GetMaxNumQuests = function()
-              assertEquals('function', type(ns.GetMaxNumQuests))
+              return checkFunc(ns.GetMaxNumQuests)
             end,
             GetMaxNumQuestsCanAccept = function()
-              assertEquals('function', type(ns.GetMaxNumQuestsCanAccept))
+              return checkFunc(ns.GetMaxNumQuestsCanAccept)
             end,
             GetNextWaypoint = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNextWaypoint))
                 return
               end
-              assertEquals('function', type(ns.GetNextWaypoint))
+              return checkFunc(ns.GetNextWaypoint)
             end,
             GetNextWaypointForMap = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNextWaypointForMap))
                 return
               end
-              assertEquals('function', type(ns.GetNextWaypointForMap))
+              return checkFunc(ns.GetNextWaypointForMap)
             end,
             GetNextWaypointText = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNextWaypointText))
                 return
               end
-              assertEquals('function', type(ns.GetNextWaypointText))
+              return checkFunc(ns.GetNextWaypointText)
             end,
             GetNumQuestLogEntries = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumQuestLogEntries))
                 return
               end
-              assertEquals('function', type(ns.GetNumQuestLogEntries))
+              return checkFunc(ns.GetNumQuestLogEntries)
             end,
             GetNumQuestObjectives = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumQuestObjectives))
                 return
               end
-              assertEquals('function', type(ns.GetNumQuestObjectives))
+              return checkFunc(ns.GetNumQuestObjectives)
             end,
             GetNumQuestWatches = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumQuestWatches))
                 return
               end
-              assertEquals('function', type(ns.GetNumQuestWatches))
+              return checkFunc(ns.GetNumQuestWatches)
             end,
             GetNumWorldQuestWatches = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumWorldQuestWatches))
                 return
               end
-              assertEquals('function', type(ns.GetNumWorldQuestWatches))
+              return checkFunc(ns.GetNumWorldQuestWatches)
             end,
             GetQuestAdditionalHighlights = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetQuestAdditionalHighlights))
                 return
               end
-              assertEquals('function', type(ns.GetQuestAdditionalHighlights))
+              return checkFunc(ns.GetQuestAdditionalHighlights)
             end,
             GetQuestDetailsTheme = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetQuestDetailsTheme))
                 return
               end
-              assertEquals('function', type(ns.GetQuestDetailsTheme))
+              return checkFunc(ns.GetQuestDetailsTheme)
             end,
             GetQuestDifficultyLevel = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetQuestDifficultyLevel))
                 return
               end
-              assertEquals('function', type(ns.GetQuestDifficultyLevel))
+              return checkFunc(ns.GetQuestDifficultyLevel)
             end,
             GetQuestIDForLogIndex = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetQuestIDForLogIndex))
                 return
               end
-              assertEquals('function', type(ns.GetQuestIDForLogIndex))
+              return checkFunc(ns.GetQuestIDForLogIndex)
             end,
             GetQuestIDForQuestWatchIndex = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetQuestIDForQuestWatchIndex))
                 return
               end
-              assertEquals('function', type(ns.GetQuestIDForQuestWatchIndex))
+              return checkFunc(ns.GetQuestIDForQuestWatchIndex)
             end,
             GetQuestIDForWorldQuestWatchIndex = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetQuestIDForWorldQuestWatchIndex))
                 return
               end
-              assertEquals('function', type(ns.GetQuestIDForWorldQuestWatchIndex))
+              return checkFunc(ns.GetQuestIDForWorldQuestWatchIndex)
             end,
             GetQuestInfo = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetQuestInfo))
                 return
               end
-              assertEquals('function', type(ns.GetQuestInfo))
+              return checkFunc(ns.GetQuestInfo)
             end,
             GetQuestLogPortraitGiver = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetQuestLogPortraitGiver))
                 return
               end
-              assertEquals('function', type(ns.GetQuestLogPortraitGiver))
+              return checkFunc(ns.GetQuestLogPortraitGiver)
             end,
             GetQuestObjectives = function()
-              assertEquals('function', type(ns.GetQuestObjectives))
+              return checkFunc(ns.GetQuestObjectives)
             end,
             GetQuestTagInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetQuestTagInfo))
                 return
               end
-              assertEquals('function', type(ns.GetQuestTagInfo))
+              return checkFunc(ns.GetQuestTagInfo)
             end,
             GetQuestType = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetQuestType))
                 return
               end
-              assertEquals('function', type(ns.GetQuestType))
+              return checkFunc(ns.GetQuestType)
             end,
             GetQuestWatchType = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetQuestWatchType))
                 return
               end
-              assertEquals('function', type(ns.GetQuestWatchType))
+              return checkFunc(ns.GetQuestWatchType)
             end,
             GetQuestsOnMap = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetQuestsOnMap))
                 return
               end
-              assertEquals('function', type(ns.GetQuestsOnMap))
+              return checkFunc(ns.GetQuestsOnMap)
             end,
             GetRequiredMoney = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetRequiredMoney))
                 return
               end
-              assertEquals('function', type(ns.GetRequiredMoney))
+              return checkFunc(ns.GetRequiredMoney)
             end,
             GetSelectedQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetSelectedQuest))
                 return
               end
-              assertEquals('function', type(ns.GetSelectedQuest))
+              return checkFunc(ns.GetSelectedQuest)
             end,
             GetSuggestedGroupSize = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetSuggestedGroupSize))
                 return
               end
-              assertEquals('function', type(ns.GetSuggestedGroupSize))
+              return checkFunc(ns.GetSuggestedGroupSize)
             end,
             GetTimeAllowed = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetTimeAllowed))
                 return
               end
-              assertEquals('function', type(ns.GetTimeAllowed))
+              return checkFunc(ns.GetTimeAllowed)
             end,
             GetTitleForLogIndex = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetTitleForLogIndex))
                 return
               end
-              assertEquals('function', type(ns.GetTitleForLogIndex))
+              return checkFunc(ns.GetTitleForLogIndex)
             end,
             GetTitleForQuestID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetTitleForQuestID))
                 return
               end
-              assertEquals('function', type(ns.GetTitleForQuestID))
+              return checkFunc(ns.GetTitleForQuestID)
             end,
             GetZoneStoryInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetZoneStoryInfo))
                 return
               end
-              assertEquals('function', type(ns.GetZoneStoryInfo))
+              return checkFunc(ns.GetZoneStoryInfo)
             end,
             HasActiveThreats = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.HasActiveThreats))
                 return
               end
-              assertEquals('function', type(ns.HasActiveThreats))
+              return checkFunc(ns.HasActiveThreats)
             end,
             IsAccountQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsAccountQuest))
                 return
               end
-              assertEquals('function', type(ns.IsAccountQuest))
+              return checkFunc(ns.IsAccountQuest)
             end,
             IsComplete = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsComplete))
                 return
               end
-              assertEquals('function', type(ns.IsComplete))
+              return checkFunc(ns.IsComplete)
             end,
             IsFailed = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsFailed))
                 return
               end
-              assertEquals('function', type(ns.IsFailed))
+              return checkFunc(ns.IsFailed)
             end,
             IsLegendaryQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsLegendaryQuest))
                 return
               end
-              assertEquals('function', type(ns.IsLegendaryQuest))
+              return checkFunc(ns.IsLegendaryQuest)
             end,
             IsOnMap = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsOnMap))
                 return
               end
-              assertEquals('function', type(ns.IsOnMap))
+              return checkFunc(ns.IsOnMap)
             end,
             IsOnQuest = function()
-              assertEquals('function', type(ns.IsOnQuest))
+              return checkFunc(ns.IsOnQuest)
             end,
             IsPushableQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsPushableQuest))
                 return
               end
-              assertEquals('function', type(ns.IsPushableQuest))
+              return checkFunc(ns.IsPushableQuest)
             end,
             IsQuestBounty = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsQuestBounty))
                 return
               end
-              assertEquals('function', type(ns.IsQuestBounty))
+              return checkFunc(ns.IsQuestBounty)
             end,
             IsQuestCalling = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsQuestCalling))
                 return
               end
-              assertEquals('function', type(ns.IsQuestCalling))
+              return checkFunc(ns.IsQuestCalling)
             end,
             IsQuestCriteriaForBounty = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsQuestCriteriaForBounty))
                 return
               end
-              assertEquals('function', type(ns.IsQuestCriteriaForBounty))
+              return checkFunc(ns.IsQuestCriteriaForBounty)
             end,
             IsQuestDisabledForSession = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsQuestDisabledForSession))
                 return
               end
-              assertEquals('function', type(ns.IsQuestDisabledForSession))
+              return checkFunc(ns.IsQuestDisabledForSession)
             end,
             IsQuestFlaggedCompleted = function()
-              assertEquals('function', type(ns.IsQuestFlaggedCompleted))
+              return checkFunc(ns.IsQuestFlaggedCompleted)
             end,
             IsQuestInvasion = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsQuestInvasion))
                 return
               end
-              assertEquals('function', type(ns.IsQuestInvasion))
+              return checkFunc(ns.IsQuestInvasion)
             end,
             IsQuestReplayable = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsQuestReplayable))
                 return
               end
-              assertEquals('function', type(ns.IsQuestReplayable))
+              return checkFunc(ns.IsQuestReplayable)
             end,
             IsQuestReplayedRecently = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsQuestReplayedRecently))
                 return
               end
-              assertEquals('function', type(ns.IsQuestReplayedRecently))
+              return checkFunc(ns.IsQuestReplayedRecently)
             end,
             IsQuestTask = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsQuestTask))
                 return
               end
-              assertEquals('function', type(ns.IsQuestTask))
+              return checkFunc(ns.IsQuestTask)
             end,
             IsQuestTrivial = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsQuestTrivial))
                 return
               end
-              assertEquals('function', type(ns.IsQuestTrivial))
+              return checkFunc(ns.IsQuestTrivial)
             end,
             IsRepeatableQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsRepeatableQuest))
                 return
               end
-              assertEquals('function', type(ns.IsRepeatableQuest))
+              return checkFunc(ns.IsRepeatableQuest)
             end,
             IsThreatQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsThreatQuest))
                 return
               end
-              assertEquals('function', type(ns.IsThreatQuest))
+              return checkFunc(ns.IsThreatQuest)
             end,
             IsUnitOnQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsUnitOnQuest))
                 return
               end
-              assertEquals('function', type(ns.IsUnitOnQuest))
+              return checkFunc(ns.IsUnitOnQuest)
             end,
             IsWorldQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsWorldQuest))
                 return
               end
-              assertEquals('function', type(ns.IsWorldQuest))
+              return checkFunc(ns.IsWorldQuest)
             end,
             QuestCanHaveWarModeBonus = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.QuestCanHaveWarModeBonus))
                 return
               end
-              assertEquals('function', type(ns.QuestCanHaveWarModeBonus))
+              return checkFunc(ns.QuestCanHaveWarModeBonus)
             end,
             QuestHasQuestSessionBonus = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.QuestHasQuestSessionBonus))
                 return
               end
-              assertEquals('function', type(ns.QuestHasQuestSessionBonus))
+              return checkFunc(ns.QuestHasQuestSessionBonus)
             end,
             QuestHasWarModeBonus = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.QuestHasWarModeBonus))
                 return
               end
-              assertEquals('function', type(ns.QuestHasWarModeBonus))
+              return checkFunc(ns.QuestHasWarModeBonus)
             end,
             ReadyForTurnIn = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ReadyForTurnIn))
                 return
               end
-              assertEquals('function', type(ns.ReadyForTurnIn))
+              return checkFunc(ns.ReadyForTurnIn)
             end,
             RemoveQuestWatch = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.RemoveQuestWatch))
                 return
               end
-              assertEquals('function', type(ns.RemoveQuestWatch))
+              return checkFunc(ns.RemoveQuestWatch)
             end,
             RemoveWorldQuestWatch = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.RemoveWorldQuestWatch))
                 return
               end
-              assertEquals('function', type(ns.RemoveWorldQuestWatch))
+              return checkFunc(ns.RemoveWorldQuestWatch)
             end,
             RequestLoadQuestByID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.RequestLoadQuestByID))
                 return
               end
-              assertEquals('function', type(ns.RequestLoadQuestByID))
+              return checkFunc(ns.RequestLoadQuestByID)
             end,
             SetAbandonQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetAbandonQuest))
                 return
               end
-              assertEquals('function', type(ns.SetAbandonQuest))
+              return checkFunc(ns.SetAbandonQuest)
             end,
             SetMapForQuestPOIs = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetMapForQuestPOIs))
                 return
               end
-              assertEquals('function', type(ns.SetMapForQuestPOIs))
+              return checkFunc(ns.SetMapForQuestPOIs)
             end,
             SetSelectedQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetSelectedQuest))
                 return
               end
-              assertEquals('function', type(ns.SetSelectedQuest))
+              return checkFunc(ns.SetSelectedQuest)
             end,
             ShouldDisplayTimeRemaining = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ShouldDisplayTimeRemaining))
                 return
               end
-              assertEquals('function', type(ns.ShouldDisplayTimeRemaining))
+              return checkFunc(ns.ShouldDisplayTimeRemaining)
             end,
             ShouldShowQuestRewards = function()
-              assertEquals('function', type(ns.ShouldShowQuestRewards))
+              return checkFunc(ns.ShouldShowQuestRewards)
             end,
             SortQuestWatches = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SortQuestWatches))
                 return
               end
-              assertEquals('function', type(ns.SortQuestWatches))
+              return checkFunc(ns.SortQuestWatches)
             end,
           })
         end,
@@ -8111,46 +8127,46 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanStart = function()
-              assertEquals('function', type(ns.CanStart))
+              return checkFunc(ns.CanStart)
             end,
             CanStop = function()
-              assertEquals('function', type(ns.CanStop))
+              return checkFunc(ns.CanStop)
             end,
             Exists = function()
-              assertEquals('function', type(ns.Exists))
+              return checkFunc(ns.Exists)
             end,
             GetAvailableSessionCommand = function()
-              assertEquals('function', type(ns.GetAvailableSessionCommand))
+              return checkFunc(ns.GetAvailableSessionCommand)
             end,
             GetPendingCommand = function()
-              assertEquals('function', type(ns.GetPendingCommand))
+              return checkFunc(ns.GetPendingCommand)
             end,
             GetProposedMaxLevelForSession = function()
-              assertEquals('function', type(ns.GetProposedMaxLevelForSession))
+              return checkFunc(ns.GetProposedMaxLevelForSession)
             end,
             GetSessionBeginDetails = function()
-              assertEquals('function', type(ns.GetSessionBeginDetails))
+              return checkFunc(ns.GetSessionBeginDetails)
             end,
             GetSuperTrackedQuest = function()
-              assertEquals('function', type(ns.GetSuperTrackedQuest))
+              return checkFunc(ns.GetSuperTrackedQuest)
             end,
             HasJoined = function()
-              assertEquals('function', type(ns.HasJoined))
+              return checkFunc(ns.HasJoined)
             end,
             HasPendingCommand = function()
-              assertEquals('function', type(ns.HasPendingCommand))
+              return checkFunc(ns.HasPendingCommand)
             end,
             RequestSessionStart = function()
-              assertEquals('function', type(ns.RequestSessionStart))
+              return checkFunc(ns.RequestSessionStart)
             end,
             RequestSessionStop = function()
-              assertEquals('function', type(ns.RequestSessionStop))
+              return checkFunc(ns.RequestSessionStop)
             end,
             SendSessionBeginResponse = function()
-              assertEquals('function', type(ns.SendSessionBeginResponse))
+              return checkFunc(ns.SendSessionBeginResponse)
             end,
             SetQuestIsSuperTracked = function()
-              assertEquals('function', type(ns.SetQuestIsSuperTracked))
+              return checkFunc(ns.SetQuestIsSuperTracked)
             end,
           })
         end,
@@ -8160,7 +8176,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             IsEncounterComplete = function()
-              assertEquals('function', type(ns.IsEncounterComplete))
+              return checkFunc(ns.IsEncounterComplete)
             end,
           })
         end,
@@ -8174,37 +8190,37 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ClaimActivityReward = function()
-              assertEquals('function', type(ns.ClaimActivityReward))
+              return checkFunc(ns.ClaimActivityReward)
             end,
             ClaimNextReward = function()
-              assertEquals('function', type(ns.ClaimNextReward))
+              return checkFunc(ns.ClaimNextReward)
             end,
             GenerateRecruitmentLink = function()
-              assertEquals('function', type(ns.GenerateRecruitmentLink))
+              return checkFunc(ns.GenerateRecruitmentLink)
             end,
             GetRAFInfo = function()
-              assertEquals('function', type(ns.GetRAFInfo))
+              return checkFunc(ns.GetRAFInfo)
             end,
             GetRAFSystemInfo = function()
-              assertEquals('function', type(ns.GetRAFSystemInfo))
+              return checkFunc(ns.GetRAFSystemInfo)
             end,
             GetRecruitActivityRequirementsText = function()
-              assertEquals('function', type(ns.GetRecruitActivityRequirementsText))
+              return checkFunc(ns.GetRecruitActivityRequirementsText)
             end,
             GetRecruitInfo = function()
-              assertEquals('function', type(ns.GetRecruitInfo))
+              return checkFunc(ns.GetRecruitInfo)
             end,
             IsEnabled = function()
-              assertEquals('function', type(ns.IsEnabled))
+              return checkFunc(ns.IsEnabled)
             end,
             IsRecruitingEnabled = function()
-              assertEquals('function', type(ns.IsRecruitingEnabled))
+              return checkFunc(ns.IsRecruitingEnabled)
             end,
             RemoveRAFRecruit = function()
-              assertEquals('function', type(ns.RemoveRAFRecruit))
+              return checkFunc(ns.RemoveRAFRecruit)
             end,
             RequestUpdatedRecruitmentInfo = function()
-              assertEquals('function', type(ns.RequestUpdatedRecruitmentInfo))
+              return checkFunc(ns.RequestUpdatedRecruitmentInfo)
             end,
           })
         end,
@@ -8214,93 +8230,93 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanReportPlayer = function()
-              assertEquals('function', type(ns.CanReportPlayer))
+              return checkFunc(ns.CanReportPlayer)
             end,
             CanReportPlayerForLanguage = function()
-              assertEquals('function', type(ns.CanReportPlayerForLanguage))
+              return checkFunc(ns.CanReportPlayerForLanguage)
             end,
             GetMajorCategoriesForReportType = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetMajorCategoriesForReportType))
                 return
               end
-              assertEquals('function', type(ns.GetMajorCategoriesForReportType))
+              return checkFunc(ns.GetMajorCategoriesForReportType)
             end,
             GetMajorCategoryString = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetMajorCategoryString))
                 return
               end
-              assertEquals('function', type(ns.GetMajorCategoryString))
+              return checkFunc(ns.GetMajorCategoryString)
             end,
             GetMinorCategoriesForReportTypeAndMajorCategory = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetMinorCategoriesForReportTypeAndMajorCategory))
                 return
               end
-              assertEquals('function', type(ns.GetMinorCategoriesForReportTypeAndMajorCategory))
+              return checkFunc(ns.GetMinorCategoriesForReportTypeAndMajorCategory)
             end,
             GetMinorCategoryString = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetMinorCategoryString))
                 return
               end
-              assertEquals('function', type(ns.GetMinorCategoryString))
+              return checkFunc(ns.GetMinorCategoryString)
             end,
             InitiateReportPlayer = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.InitiateReportPlayer))
                 return
               end
-              assertEquals('function', type(ns.InitiateReportPlayer))
+              return checkFunc(ns.InitiateReportPlayer)
             end,
             OpenReportPlayerDialog = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.OpenReportPlayerDialog))
                 return
               end
-              assertEquals('function', type(ns.OpenReportPlayerDialog))
+              return checkFunc(ns.OpenReportPlayerDialog)
             end,
             ReportServerLag = function()
-              assertEquals('function', type(ns.ReportServerLag))
+              return checkFunc(ns.ReportServerLag)
             end,
             ReportStuckInCombat = function()
-              assertEquals('function', type(ns.ReportStuckInCombat))
+              return checkFunc(ns.ReportStuckInCombat)
             end,
             SendReport = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SendReport))
                 return
               end
-              assertEquals('function', type(ns.SendReport))
+              return checkFunc(ns.SendReport)
             end,
             SendReportPlayer = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SendReportPlayer))
                 return
               end
-              assertEquals('function', type(ns.SendReportPlayer))
+              return checkFunc(ns.SendReportPlayer)
             end,
             SetPendingReportPetTarget = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetPendingReportPetTarget))
                 return
               end
-              assertEquals('function', type(ns.SetPendingReportPetTarget))
+              return checkFunc(ns.SetPendingReportPetTarget)
             end,
             SetPendingReportTarget = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetPendingReportTarget))
                 return
               end
-              assertEquals('function', type(ns.SetPendingReportTarget))
+              return checkFunc(ns.SetPendingReportTarget)
             end,
             SetPendingReportTargetByGuid = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetPendingReportTargetByGuid))
                 return
               end
-              assertEquals('function', type(ns.SetPendingReportTargetByGuid))
+              return checkFunc(ns.SetPendingReportTargetByGuid)
             end,
           })
         end,
@@ -8310,13 +8326,13 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetFactionParagonInfo = function()
-              assertEquals('function', type(ns.GetFactionParagonInfo))
+              return checkFunc(ns.GetFactionParagonInfo)
             end,
             IsFactionParagon = function()
-              assertEquals('function', type(ns.IsFactionParagon))
+              return checkFunc(ns.IsFactionParagon)
             end,
             RequestFactionParagonPreloadRewardData = function()
-              assertEquals('function', type(ns.RequestFactionParagonPreloadRewardData))
+              return checkFunc(ns.RequestFactionParagonPreloadRewardData)
             end,
           })
         end,
@@ -8330,7 +8346,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetDigSitesForMap = function()
-              assertEquals('function', type(ns.GetDigSitesForMap))
+              return checkFunc(ns.GetDigSitesForMap)
             end,
           })
         end,
@@ -8344,40 +8360,40 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetBonusStepRewardQuestID = function()
-              assertEquals('function', type(ns.GetBonusStepRewardQuestID))
+              return checkFunc(ns.GetBonusStepRewardQuestID)
             end,
             GetBonusSteps = function()
-              assertEquals('function', type(ns.GetBonusSteps))
+              return checkFunc(ns.GetBonusSteps)
             end,
             GetCriteriaInfo = function()
-              assertEquals('function', type(ns.GetCriteriaInfo))
+              return checkFunc(ns.GetCriteriaInfo)
             end,
             GetCriteriaInfoByStep = function()
-              assertEquals('function', type(ns.GetCriteriaInfoByStep))
+              return checkFunc(ns.GetCriteriaInfoByStep)
             end,
             GetInfo = function()
-              assertEquals('function', type(ns.GetInfo))
+              return checkFunc(ns.GetInfo)
             end,
             GetProvingGroundsInfo = function()
-              assertEquals('function', type(ns.GetProvingGroundsInfo))
+              return checkFunc(ns.GetProvingGroundsInfo)
             end,
             GetScenarioIconInfo = function()
-              assertEquals('function', type(ns.GetScenarioIconInfo))
+              return checkFunc(ns.GetScenarioIconInfo)
             end,
             GetStepInfo = function()
-              assertEquals('function', type(ns.GetStepInfo))
+              return checkFunc(ns.GetStepInfo)
             end,
             GetSupersededObjectives = function()
-              assertEquals('function', type(ns.GetSupersededObjectives))
+              return checkFunc(ns.GetSupersededObjectives)
             end,
             IsInScenario = function()
-              assertEquals('function', type(ns.IsInScenario))
+              return checkFunc(ns.IsInScenario)
             end,
             ShouldShowCriteria = function()
-              assertEquals('function', type(ns.ShouldShowCriteria))
+              return checkFunc(ns.ShouldShowCriteria)
             end,
             TreatScenarioAsDungeon = function()
-              assertEquals('function', type(ns.TreatScenarioAsDungeon))
+              return checkFunc(ns.TreatScenarioAsDungeon)
             end,
           })
         end,
@@ -8391,13 +8407,13 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetJailersTowerTypeString = function()
-              assertEquals('function', type(ns.GetJailersTowerTypeString))
+              return checkFunc(ns.GetJailersTowerTypeString)
             end,
             GetScenarioInfo = function()
-              assertEquals('function', type(ns.GetScenarioInfo))
+              return checkFunc(ns.GetScenarioInfo)
             end,
             GetScenarioStepInfo = function()
-              assertEquals('function', type(ns.GetScenarioStepInfo))
+              return checkFunc(ns.GetScenarioStepInfo)
             end,
           })
         end,
@@ -8411,40 +8427,40 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CloseScrappingMachine = function()
-              assertEquals('function', type(ns.CloseScrappingMachine))
+              return checkFunc(ns.CloseScrappingMachine)
             end,
             DropPendingScrapItemFromCursor = function()
-              assertEquals('function', type(ns.DropPendingScrapItemFromCursor))
+              return checkFunc(ns.DropPendingScrapItemFromCursor)
             end,
             GetCurrentPendingScrapItemLocationByIndex = function()
-              assertEquals('function', type(ns.GetCurrentPendingScrapItemLocationByIndex))
+              return checkFunc(ns.GetCurrentPendingScrapItemLocationByIndex)
             end,
             GetScrapSpellID = function()
-              assertEquals('function', type(ns.GetScrapSpellID))
+              return checkFunc(ns.GetScrapSpellID)
             end,
             GetScrappingMachineName = function()
-              assertEquals('function', type(ns.GetScrappingMachineName))
+              return checkFunc(ns.GetScrappingMachineName)
             end,
             HasScrappableItems = function()
-              assertEquals('function', type(ns.HasScrappableItems))
+              return checkFunc(ns.HasScrappableItems)
             end,
             RemoveAllScrapItems = function()
-              assertEquals('function', type(ns.RemoveAllScrapItems))
+              return checkFunc(ns.RemoveAllScrapItems)
             end,
             RemoveCurrentScrappingItem = function()
-              assertEquals('function', type(ns.RemoveCurrentScrappingItem))
+              return checkFunc(ns.RemoveCurrentScrappingItem)
             end,
             RemoveItemToScrap = function()
-              assertEquals('function', type(ns.RemoveItemToScrap))
+              return checkFunc(ns.RemoveItemToScrap)
             end,
             ScrapItems = function()
-              assertEquals('function', type(ns.ScrapItems))
+              return checkFunc(ns.ScrapItems)
             end,
             SetScrappingMachine = function()
-              assertEquals('function', type(ns.SetScrappingMachine))
+              return checkFunc(ns.SetScrappingMachine)
             end,
             ValidateScrappingList = function()
-              assertEquals('function', type(ns.ValidateScrappingList))
+              return checkFunc(ns.ValidateScrappingList)
             end,
           })
         end,
@@ -8454,7 +8470,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetAllScriptedAnimationEffects = function()
-              assertEquals('function', type(ns.GetAllScriptedAnimationEffects))
+              return checkFunc(ns.GetAllScriptedAnimationEffects)
             end,
           })
         end,
@@ -8468,10 +8484,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetActiveSeason = function()
-              assertEquals('function', type(ns.GetActiveSeason))
+              return checkFunc(ns.GetActiveSeason)
             end,
             HasActiveSeason = function()
-              assertEquals('function', type(ns.HasActiveSeason))
+              return checkFunc(ns.HasActiveSeason)
             end,
           })
         end,
@@ -8485,92 +8501,92 @@ function G.GeneratedTests()
                 assertEquals('nil', type(ns.GetLastAchievement))
                 return
               end
-              assertEquals('function', type(ns.GetLastAchievement))
+              return checkFunc(ns.GetLastAchievement)
             end,
             GetLastItem = function()
-              assertEquals('function', type(ns.GetLastItem))
+              return checkFunc(ns.GetLastItem)
             end,
             GetLastScreenshot = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetLastScreenshot))
                 return
               end
-              assertEquals('function', type(ns.GetLastScreenshot))
+              return checkFunc(ns.GetLastScreenshot)
             end,
             GetLastScreenshotIndex = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetLastScreenshotIndex))
                 return
               end
-              assertEquals('function', type(ns.GetLastScreenshotIndex))
+              return checkFunc(ns.GetLastScreenshotIndex)
             end,
             GetMaxTweetLength = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetMaxTweetLength))
                 return
               end
-              assertEquals('function', type(ns.GetMaxTweetLength))
+              return checkFunc(ns.GetMaxTweetLength)
             end,
             GetNumCharactersPerMedia = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetNumCharactersPerMedia))
                 return
               end
-              assertEquals('function', type(ns.GetNumCharactersPerMedia))
+              return checkFunc(ns.GetNumCharactersPerMedia)
             end,
             GetScreenshotByIndex = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetScreenshotByIndex))
                 return
               end
-              assertEquals('function', type(ns.GetScreenshotByIndex))
+              return checkFunc(ns.GetScreenshotByIndex)
             end,
             GetScreenshotInfoByIndex = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetScreenshotInfoByIndex))
                 return
               end
-              assertEquals('function', type(ns.GetScreenshotInfoByIndex))
+              return checkFunc(ns.GetScreenshotInfoByIndex)
             end,
             GetTweetLength = function()
-              assertEquals('function', type(ns.GetTweetLength))
+              return checkFunc(ns.GetTweetLength)
             end,
             IsSocialEnabled = function()
-              assertEquals('function', type(ns.IsSocialEnabled))
+              return checkFunc(ns.IsSocialEnabled)
             end,
             RegisterSocialBrowser = function()
-              assertEquals('function', type(ns.RegisterSocialBrowser))
+              return checkFunc(ns.RegisterSocialBrowser)
             end,
             SetTextureToScreenshot = function()
-              assertEquals('function', type(ns.SetTextureToScreenshot))
+              return checkFunc(ns.SetTextureToScreenshot)
             end,
             TwitterCheckStatus = function()
-              assertEquals('function', type(ns.TwitterCheckStatus))
+              return checkFunc(ns.TwitterCheckStatus)
             end,
             TwitterConnect = function()
-              assertEquals('function', type(ns.TwitterConnect))
+              return checkFunc(ns.TwitterConnect)
             end,
             TwitterDisconnect = function()
-              assertEquals('function', type(ns.TwitterDisconnect))
+              return checkFunc(ns.TwitterDisconnect)
             end,
             TwitterGetMSTillCanPost = function()
-              assertEquals('function', type(ns.TwitterGetMSTillCanPost))
+              return checkFunc(ns.TwitterGetMSTillCanPost)
             end,
             TwitterPostAchievement = function()
-              assertEquals('function', type(ns.TwitterPostAchievement))
+              return checkFunc(ns.TwitterPostAchievement)
             end,
             TwitterPostItem = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.TwitterPostItem))
                 return
               end
-              assertEquals('function', type(ns.TwitterPostItem))
+              return checkFunc(ns.TwitterPostItem)
             end,
             TwitterPostMessage = function()
-              assertEquals('function', type(ns.TwitterPostMessage))
+              return checkFunc(ns.TwitterPostMessage)
             end,
             TwitterPostScreenshot = function()
-              assertEquals('function', type(ns.TwitterPostScreenshot))
+              return checkFunc(ns.TwitterPostScreenshot)
             end,
           })
         end,
@@ -8584,28 +8600,28 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetAllGroups = function()
-              assertEquals('function', type(ns.GetAllGroups))
+              return checkFunc(ns.GetAllGroups)
             end,
             GetConfig = function()
-              assertEquals('function', type(ns.GetConfig))
+              return checkFunc(ns.GetConfig)
             end,
             GetGroupForPlayer = function()
-              assertEquals('function', type(ns.GetGroupForPlayer))
+              return checkFunc(ns.GetGroupForPlayer)
             end,
             GetGroupInfo = function()
-              assertEquals('function', type(ns.GetGroupInfo))
+              return checkFunc(ns.GetGroupInfo)
             end,
             GetGroupMembers = function()
-              assertEquals('function', type(ns.GetGroupMembers))
+              return checkFunc(ns.GetGroupMembers)
             end,
             GetGroupQueues = function()
-              assertEquals('function', type(ns.GetGroupQueues))
+              return checkFunc(ns.GetGroupQueues)
             end,
             RequestToJoin = function()
-              assertEquals('function', type(ns.RequestToJoin))
+              return checkFunc(ns.RequestToJoin)
             end,
             SignalToastDisplayed = function()
-              assertEquals('function', type(ns.SignalToastDisplayed))
+              return checkFunc(ns.SignalToastDisplayed)
             end,
           })
         end,
@@ -8615,22 +8631,22 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AcknowledgeRegionalChatDisabled = function()
-              assertEquals('function', type(ns.AcknowledgeRegionalChatDisabled))
+              return checkFunc(ns.AcknowledgeRegionalChatDisabled)
             end,
             IsChatDisabled = function()
-              assertEquals('function', type(ns.IsChatDisabled))
+              return checkFunc(ns.IsChatDisabled)
             end,
             IsMuted = function()
-              assertEquals('function', type(ns.IsMuted))
+              return checkFunc(ns.IsMuted)
             end,
             IsSilenced = function()
-              assertEquals('function', type(ns.IsSilenced))
+              return checkFunc(ns.IsSilenced)
             end,
             IsSquelched = function()
-              assertEquals('function', type(ns.IsSquelched))
+              return checkFunc(ns.IsSquelched)
             end,
             SetChatDisabled = function()
-              assertEquals('function', type(ns.SetChatDisabled))
+              return checkFunc(ns.SetChatDisabled)
             end,
           })
         end,
@@ -8644,121 +8660,121 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ActivateSoulbind = function()
-              assertEquals('function', type(ns.ActivateSoulbind))
+              return checkFunc(ns.ActivateSoulbind)
             end,
             CanActivateSoulbind = function()
-              assertEquals('function', type(ns.CanActivateSoulbind))
+              return checkFunc(ns.CanActivateSoulbind)
             end,
             CanModifySoulbind = function()
-              assertEquals('function', type(ns.CanModifySoulbind))
+              return checkFunc(ns.CanModifySoulbind)
             end,
             CanResetConduitsInSoulbind = function()
-              assertEquals('function', type(ns.CanResetConduitsInSoulbind))
+              return checkFunc(ns.CanResetConduitsInSoulbind)
             end,
             CanSwitchActiveSoulbindTreeBranch = function()
-              assertEquals('function', type(ns.CanSwitchActiveSoulbindTreeBranch))
+              return checkFunc(ns.CanSwitchActiveSoulbindTreeBranch)
             end,
             CloseUI = function()
-              assertEquals('function', type(ns.CloseUI))
+              return checkFunc(ns.CloseUI)
             end,
             CommitPendingConduitsInSoulbind = function()
-              assertEquals('function', type(ns.CommitPendingConduitsInSoulbind))
+              return checkFunc(ns.CommitPendingConduitsInSoulbind)
             end,
             FindNodeIDActuallyInstalled = function()
-              assertEquals('function', type(ns.FindNodeIDActuallyInstalled))
+              return checkFunc(ns.FindNodeIDActuallyInstalled)
             end,
             FindNodeIDAppearingInstalled = function()
-              assertEquals('function', type(ns.FindNodeIDAppearingInstalled))
+              return checkFunc(ns.FindNodeIDAppearingInstalled)
             end,
             FindNodeIDPendingInstall = function()
-              assertEquals('function', type(ns.FindNodeIDPendingInstall))
+              return checkFunc(ns.FindNodeIDPendingInstall)
             end,
             FindNodeIDPendingUninstall = function()
-              assertEquals('function', type(ns.FindNodeIDPendingUninstall))
+              return checkFunc(ns.FindNodeIDPendingUninstall)
             end,
             GetActiveSoulbindID = function()
-              assertEquals('function', type(ns.GetActiveSoulbindID))
+              return checkFunc(ns.GetActiveSoulbindID)
             end,
             GetConduitCollection = function()
-              assertEquals('function', type(ns.GetConduitCollection))
+              return checkFunc(ns.GetConduitCollection)
             end,
             GetConduitCollectionCount = function()
-              assertEquals('function', type(ns.GetConduitCollectionCount))
+              return checkFunc(ns.GetConduitCollectionCount)
             end,
             GetConduitCollectionData = function()
-              assertEquals('function', type(ns.GetConduitCollectionData))
+              return checkFunc(ns.GetConduitCollectionData)
             end,
             GetConduitCollectionDataAtCursor = function()
-              assertEquals('function', type(ns.GetConduitCollectionDataAtCursor))
+              return checkFunc(ns.GetConduitCollectionDataAtCursor)
             end,
             GetConduitCollectionDataByVirtualID = function()
-              assertEquals('function', type(ns.GetConduitCollectionDataByVirtualID))
+              return checkFunc(ns.GetConduitCollectionDataByVirtualID)
             end,
             GetConduitDisplayed = function()
-              assertEquals('function', type(ns.GetConduitDisplayed))
+              return checkFunc(ns.GetConduitDisplayed)
             end,
             GetConduitHyperlink = function()
-              assertEquals('function', type(ns.GetConduitHyperlink))
+              return checkFunc(ns.GetConduitHyperlink)
             end,
             GetConduitIDPendingInstall = function()
-              assertEquals('function', type(ns.GetConduitIDPendingInstall))
+              return checkFunc(ns.GetConduitIDPendingInstall)
             end,
             GetConduitQuality = function()
-              assertEquals('function', type(ns.GetConduitQuality))
+              return checkFunc(ns.GetConduitQuality)
             end,
             GetConduitRank = function()
-              assertEquals('function', type(ns.GetConduitRank))
+              return checkFunc(ns.GetConduitRank)
             end,
             GetConduitSpellID = function()
-              assertEquals('function', type(ns.GetConduitSpellID))
+              return checkFunc(ns.GetConduitSpellID)
             end,
             GetInstalledConduitID = function()
-              assertEquals('function', type(ns.GetInstalledConduitID))
+              return checkFunc(ns.GetInstalledConduitID)
             end,
             GetNode = function()
-              assertEquals('function', type(ns.GetNode))
+              return checkFunc(ns.GetNode)
             end,
             GetSoulbindData = function()
-              assertEquals('function', type(ns.GetSoulbindData))
+              return checkFunc(ns.GetSoulbindData)
             end,
             GetSpecsAssignedToSoulbind = function()
-              assertEquals('function', type(ns.GetSpecsAssignedToSoulbind))
+              return checkFunc(ns.GetSpecsAssignedToSoulbind)
             end,
             GetTree = function()
-              assertEquals('function', type(ns.GetTree))
+              return checkFunc(ns.GetTree)
             end,
             HasAnyInstalledConduitInSoulbind = function()
-              assertEquals('function', type(ns.HasAnyInstalledConduitInSoulbind))
+              return checkFunc(ns.HasAnyInstalledConduitInSoulbind)
             end,
             HasAnyPendingConduits = function()
-              assertEquals('function', type(ns.HasAnyPendingConduits))
+              return checkFunc(ns.HasAnyPendingConduits)
             end,
             HasPendingConduitsInSoulbind = function()
-              assertEquals('function', type(ns.HasPendingConduitsInSoulbind))
+              return checkFunc(ns.HasPendingConduitsInSoulbind)
             end,
             IsConduitInstalled = function()
-              assertEquals('function', type(ns.IsConduitInstalled))
+              return checkFunc(ns.IsConduitInstalled)
             end,
             IsConduitInstalledInSoulbind = function()
-              assertEquals('function', type(ns.IsConduitInstalledInSoulbind))
+              return checkFunc(ns.IsConduitInstalledInSoulbind)
             end,
             IsItemConduitByItemInfo = function()
-              assertEquals('function', type(ns.IsItemConduitByItemInfo))
+              return checkFunc(ns.IsItemConduitByItemInfo)
             end,
             IsNodePendingModify = function()
-              assertEquals('function', type(ns.IsNodePendingModify))
+              return checkFunc(ns.IsNodePendingModify)
             end,
             IsUnselectedConduitPendingInSoulbind = function()
-              assertEquals('function', type(ns.IsUnselectedConduitPendingInSoulbind))
+              return checkFunc(ns.IsUnselectedConduitPendingInSoulbind)
             end,
             ModifyNode = function()
-              assertEquals('function', type(ns.ModifyNode))
+              return checkFunc(ns.ModifyNode)
             end,
             SelectNode = function()
-              assertEquals('function', type(ns.SelectNode))
+              return checkFunc(ns.SelectNode)
             end,
             UnmodifyNode = function()
-              assertEquals('function', type(ns.UnmodifyNode))
+              return checkFunc(ns.UnmodifyNode)
             end,
           })
         end,
@@ -8772,49 +8788,49 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanPlayerUsePVPTalentUI = function()
-              assertEquals('function', type(ns.CanPlayerUsePVPTalentUI))
+              return checkFunc(ns.CanPlayerUsePVPTalentUI)
             end,
             CanPlayerUseTalentSpecUI = function()
-              assertEquals('function', type(ns.CanPlayerUseTalentSpecUI))
+              return checkFunc(ns.CanPlayerUseTalentSpecUI)
             end,
             CanPlayerUseTalentUI = function()
-              assertEquals('function', type(ns.CanPlayerUseTalentUI))
+              return checkFunc(ns.CanPlayerUseTalentUI)
             end,
             GetAllSelectedPvpTalentIDs = function()
-              assertEquals('function', type(ns.GetAllSelectedPvpTalentIDs))
+              return checkFunc(ns.GetAllSelectedPvpTalentIDs)
             end,
             GetInspectSelectedPvpTalent = function()
-              assertEquals('function', type(ns.GetInspectSelectedPvpTalent))
+              return checkFunc(ns.GetInspectSelectedPvpTalent)
             end,
             GetPvpTalentAlertStatus = function()
-              assertEquals('function', type(ns.GetPvpTalentAlertStatus))
+              return checkFunc(ns.GetPvpTalentAlertStatus)
             end,
             GetPvpTalentSlotInfo = function()
-              assertEquals('function', type(ns.GetPvpTalentSlotInfo))
+              return checkFunc(ns.GetPvpTalentSlotInfo)
             end,
             GetPvpTalentSlotUnlockLevel = function()
-              assertEquals('function', type(ns.GetPvpTalentSlotUnlockLevel))
+              return checkFunc(ns.GetPvpTalentSlotUnlockLevel)
             end,
             GetPvpTalentUnlockLevel = function()
-              assertEquals('function', type(ns.GetPvpTalentUnlockLevel))
+              return checkFunc(ns.GetPvpTalentUnlockLevel)
             end,
             GetSpecIDs = function()
-              assertEquals('function', type(ns.GetSpecIDs))
+              return checkFunc(ns.GetSpecIDs)
             end,
             GetSpellsDisplay = function()
-              assertEquals('function', type(ns.GetSpellsDisplay))
+              return checkFunc(ns.GetSpellsDisplay)
             end,
             IsInitialized = function()
-              assertEquals('function', type(ns.IsInitialized))
+              return checkFunc(ns.IsInitialized)
             end,
             IsPvpTalentLocked = function()
-              assertEquals('function', type(ns.IsPvpTalentLocked))
+              return checkFunc(ns.IsPvpTalentLocked)
             end,
             MatchesCurrentSpecSet = function()
-              assertEquals('function', type(ns.MatchesCurrentSpecSet))
+              return checkFunc(ns.MatchesCurrentSpecSet)
             end,
             SetPvpTalentLocked = function()
-              assertEquals('function', type(ns.SetPvpTalentLocked))
+              return checkFunc(ns.SetPvpTalentLocked)
             end,
           })
         end,
@@ -8824,20 +8840,20 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             DoesSpellExist = function()
-              assertEquals('function', type(ns.DoesSpellExist))
+              return checkFunc(ns.DoesSpellExist)
             end,
             GetMawPowerBorderAtlasBySpellID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetMawPowerBorderAtlasBySpellID))
                 return
               end
-              assertEquals('function', type(ns.GetMawPowerBorderAtlasBySpellID))
+              return checkFunc(ns.GetMawPowerBorderAtlasBySpellID)
             end,
             IsSpellDataCached = function()
-              assertEquals('function', type(ns.IsSpellDataCached))
+              return checkFunc(ns.IsSpellDataCached)
             end,
             RequestLoadSpellData = function()
-              assertEquals('function', type(ns.RequestLoadSpellData))
+              return checkFunc(ns.RequestLoadSpellData)
             end,
           })
         end,
@@ -8851,22 +8867,22 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ContainsAnyDisenchantSpell = function()
-              assertEquals('function', type(ns.ContainsAnyDisenchantSpell))
+              return checkFunc(ns.ContainsAnyDisenchantSpell)
             end,
             GetCurrentLevelSpells = function()
-              assertEquals('function', type(ns.GetCurrentLevelSpells))
+              return checkFunc(ns.GetCurrentLevelSpells)
             end,
             GetSkillLineIndexByID = function()
-              assertEquals('function', type(ns.GetSkillLineIndexByID))
+              return checkFunc(ns.GetSkillLineIndexByID)
             end,
             GetSpellInfo = function()
-              assertEquals('function', type(ns.GetSpellInfo))
+              return checkFunc(ns.GetSpellInfo)
             end,
             GetSpellLinkFromSpellID = function()
-              assertEquals('function', type(ns.GetSpellLinkFromSpellID))
+              return checkFunc(ns.GetSpellLinkFromSpellID)
             end,
             IsSpellDisabled = function()
-              assertEquals('function', type(ns.IsSpellDisabled))
+              return checkFunc(ns.IsSpellDisabled)
             end,
           })
         end,
@@ -8880,13 +8896,13 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AcknowledgeSplash = function()
-              assertEquals('function', type(ns.AcknowledgeSplash))
+              return checkFunc(ns.AcknowledgeSplash)
             end,
             CanViewSplashScreen = function()
-              assertEquals('function', type(ns.CanViewSplashScreen))
+              return checkFunc(ns.CanViewSplashScreen)
             end,
             RequestLatestSplashScreen = function()
-              assertEquals('function', type(ns.RequestLatestSplashScreen))
+              return checkFunc(ns.RequestLatestSplashScreen)
             end,
           })
         end,
@@ -8896,10 +8912,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetNumActivePets = function()
-              assertEquals('function', type(ns.GetNumActivePets))
+              return checkFunc(ns.GetNumActivePets)
             end,
             GetNumStablePets = function()
-              assertEquals('function', type(ns.GetNumStablePets))
+              return checkFunc(ns.GetNumStablePets)
             end,
           })
         end,
@@ -8909,20 +8925,20 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             DoesGroupHavePurchaseableProducts = function()
-              assertEquals('function', type(ns.DoesGroupHavePurchaseableProducts))
+              return checkFunc(ns.DoesGroupHavePurchaseableProducts)
             end,
             HasPurchaseableProducts = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.HasPurchaseableProducts))
                 return
               end
-              assertEquals('function', type(ns.HasPurchaseableProducts))
+              return checkFunc(ns.HasPurchaseableProducts)
             end,
             IsDisabledByParentalControls = function()
-              assertEquals('function', type(ns.IsDisabledByParentalControls))
+              return checkFunc(ns.IsDisabledByParentalControls)
             end,
             IsEnabled = function()
-              assertEquals('function', type(ns.IsEnabled))
+              return checkFunc(ns.IsEnabled)
             end,
           })
         end,
@@ -8932,25 +8948,25 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CancelSummon = function()
-              assertEquals('function', type(ns.CancelSummon))
+              return checkFunc(ns.CancelSummon)
             end,
             ConfirmSummon = function()
-              assertEquals('function', type(ns.ConfirmSummon))
+              return checkFunc(ns.ConfirmSummon)
             end,
             GetSummonConfirmAreaName = function()
-              assertEquals('function', type(ns.GetSummonConfirmAreaName))
+              return checkFunc(ns.GetSummonConfirmAreaName)
             end,
             GetSummonConfirmSummoner = function()
-              assertEquals('function', type(ns.GetSummonConfirmSummoner))
+              return checkFunc(ns.GetSummonConfirmSummoner)
             end,
             GetSummonConfirmTimeLeft = function()
-              assertEquals('function', type(ns.GetSummonConfirmTimeLeft))
+              return checkFunc(ns.GetSummonConfirmTimeLeft)
             end,
             GetSummonReason = function()
-              assertEquals('function', type(ns.GetSummonReason))
+              return checkFunc(ns.GetSummonReason)
             end,
             IsSummonSkippingStartExperience = function()
-              assertEquals('function', type(ns.IsSummonSkippingStartExperience))
+              return checkFunc(ns.IsSummonSkippingStartExperience)
             end,
           })
         end,
@@ -8964,28 +8980,28 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetHighestPrioritySuperTrackingType = function()
-              assertEquals('function', type(ns.GetHighestPrioritySuperTrackingType))
+              return checkFunc(ns.GetHighestPrioritySuperTrackingType)
             end,
             GetSuperTrackedQuestID = function()
-              assertEquals('function', type(ns.GetSuperTrackedQuestID))
+              return checkFunc(ns.GetSuperTrackedQuestID)
             end,
             IsSuperTrackingAnything = function()
-              assertEquals('function', type(ns.IsSuperTrackingAnything))
+              return checkFunc(ns.IsSuperTrackingAnything)
             end,
             IsSuperTrackingCorpse = function()
-              assertEquals('function', type(ns.IsSuperTrackingCorpse))
+              return checkFunc(ns.IsSuperTrackingCorpse)
             end,
             IsSuperTrackingQuest = function()
-              assertEquals('function', type(ns.IsSuperTrackingQuest))
+              return checkFunc(ns.IsSuperTrackingQuest)
             end,
             IsSuperTrackingUserWaypoint = function()
-              assertEquals('function', type(ns.IsSuperTrackingUserWaypoint))
+              return checkFunc(ns.IsSuperTrackingUserWaypoint)
             end,
             SetSuperTrackedQuestID = function()
-              assertEquals('function', type(ns.SetSuperTrackedQuestID))
+              return checkFunc(ns.SetSuperTrackedQuestID)
             end,
             SetSuperTrackedUserWaypoint = function()
-              assertEquals('function', type(ns.SetSuperTrackedUserWaypoint))
+              return checkFunc(ns.SetSuperTrackedUserWaypoint)
             end,
           })
         end,
@@ -8995,7 +9011,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetFrameStack = function()
-              assertEquals('function', type(ns.GetFrameStack))
+              return checkFunc(ns.GetFrameStack)
             end,
           })
         end,
@@ -9005,61 +9021,61 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetChannelEnabled = function()
-              assertEquals('function', type(ns.GetChannelEnabled))
+              return checkFunc(ns.GetChannelEnabled)
             end,
             GetCharacterSettingsSaved = function()
-              assertEquals('function', type(ns.GetCharacterSettingsSaved))
+              return checkFunc(ns.GetCharacterSettingsSaved)
             end,
             GetChatTypeEnabled = function()
-              assertEquals('function', type(ns.GetChatTypeEnabled))
+              return checkFunc(ns.GetChatTypeEnabled)
             end,
             GetSetting = function()
-              assertEquals('function', type(ns.GetSetting))
+              return checkFunc(ns.GetSetting)
             end,
             GetSpeechRate = function()
-              assertEquals('function', type(ns.GetSpeechRate))
+              return checkFunc(ns.GetSpeechRate)
             end,
             GetSpeechVolume = function()
-              assertEquals('function', type(ns.GetSpeechVolume))
+              return checkFunc(ns.GetSpeechVolume)
             end,
             GetVoiceOptionID = function()
-              assertEquals('function', type(ns.GetVoiceOptionID))
+              return checkFunc(ns.GetVoiceOptionID)
             end,
             GetVoiceOptionName = function()
-              assertEquals('function', type(ns.GetVoiceOptionName))
+              return checkFunc(ns.GetVoiceOptionName)
             end,
             MarkCharacterSettingsSaved = function()
-              assertEquals('function', type(ns.MarkCharacterSettingsSaved))
+              return checkFunc(ns.MarkCharacterSettingsSaved)
             end,
             SetChannelEnabled = function()
-              assertEquals('function', type(ns.SetChannelEnabled))
+              return checkFunc(ns.SetChannelEnabled)
             end,
             SetChannelKeyEnabled = function()
-              assertEquals('function', type(ns.SetChannelKeyEnabled))
+              return checkFunc(ns.SetChannelKeyEnabled)
             end,
             SetChatTypeEnabled = function()
-              assertEquals('function', type(ns.SetChatTypeEnabled))
+              return checkFunc(ns.SetChatTypeEnabled)
             end,
             SetDefaultSettings = function()
-              assertEquals('function', type(ns.SetDefaultSettings))
+              return checkFunc(ns.SetDefaultSettings)
             end,
             SetSetting = function()
-              assertEquals('function', type(ns.SetSetting))
+              return checkFunc(ns.SetSetting)
             end,
             SetSpeechRate = function()
-              assertEquals('function', type(ns.SetSpeechRate))
+              return checkFunc(ns.SetSpeechRate)
             end,
             SetSpeechVolume = function()
-              assertEquals('function', type(ns.SetSpeechVolume))
+              return checkFunc(ns.SetSpeechVolume)
             end,
             SetVoiceOption = function()
-              assertEquals('function', type(ns.SetVoiceOption))
+              return checkFunc(ns.SetVoiceOption)
             end,
             SetVoiceOptionName = function()
-              assertEquals('function', type(ns.SetVoiceOptionName))
+              return checkFunc(ns.SetVoiceOptionName)
             end,
             ShouldOverrideMessage = function()
-              assertEquals('function', type(ns.ShouldOverrideMessage))
+              return checkFunc(ns.ShouldOverrideMessage)
             end,
           })
         end,
@@ -9069,40 +9085,40 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             DoesMapShowTaskQuestObjectives = function()
-              assertEquals('function', type(ns.DoesMapShowTaskQuestObjectives))
+              return checkFunc(ns.DoesMapShowTaskQuestObjectives)
             end,
             GetQuestInfoByQuestID = function()
-              assertEquals('function', type(ns.GetQuestInfoByQuestID))
+              return checkFunc(ns.GetQuestInfoByQuestID)
             end,
             GetQuestLocation = function()
-              assertEquals('function', type(ns.GetQuestLocation))
+              return checkFunc(ns.GetQuestLocation)
             end,
             GetQuestProgressBarInfo = function()
-              assertEquals('function', type(ns.GetQuestProgressBarInfo))
+              return checkFunc(ns.GetQuestProgressBarInfo)
             end,
             GetQuestTimeLeftMinutes = function()
-              assertEquals('function', type(ns.GetQuestTimeLeftMinutes))
+              return checkFunc(ns.GetQuestTimeLeftMinutes)
             end,
             GetQuestTimeLeftSeconds = function()
-              assertEquals('function', type(ns.GetQuestTimeLeftSeconds))
+              return checkFunc(ns.GetQuestTimeLeftSeconds)
             end,
             GetQuestZoneID = function()
-              assertEquals('function', type(ns.GetQuestZoneID))
+              return checkFunc(ns.GetQuestZoneID)
             end,
             GetQuestsForPlayerByMapID = function()
-              assertEquals('function', type(ns.GetQuestsForPlayerByMapID))
+              return checkFunc(ns.GetQuestsForPlayerByMapID)
             end,
             GetThreatQuests = function()
-              assertEquals('function', type(ns.GetThreatQuests))
+              return checkFunc(ns.GetThreatQuests)
             end,
             GetUIWidgetSetIDFromQuestID = function()
-              assertEquals('function', type(ns.GetUIWidgetSetIDFromQuestID))
+              return checkFunc(ns.GetUIWidgetSetIDFromQuestID)
             end,
             IsActive = function()
-              assertEquals('function', type(ns.IsActive))
+              return checkFunc(ns.IsActive)
             end,
             RequestPreloadRewardData = function()
-              assertEquals('function', type(ns.RequestPreloadRewardData))
+              return checkFunc(ns.RequestPreloadRewardData)
             end,
           })
         end,
@@ -9112,17 +9128,17 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetAllTaxiNodes = function()
-              assertEquals('function', type(ns.GetAllTaxiNodes))
+              return checkFunc(ns.GetAllTaxiNodes)
             end,
             GetTaxiNodesForMap = function()
-              assertEquals('function', type(ns.GetTaxiNodesForMap))
+              return checkFunc(ns.GetTaxiNodesForMap)
             end,
             ShouldMapShowTaxiNodes = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.ShouldMapShowTaxiNodes))
                 return
               end
-              assertEquals('function', type(ns.ShouldMapShowTaxiNodes))
+              return checkFunc(ns.ShouldMapShowTaxiNodes)
             end,
           })
         end,
@@ -9132,7 +9148,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetAtlasInfo = function()
-              assertEquals('function', type(ns.GetAtlasInfo))
+              return checkFunc(ns.GetAtlasInfo)
             end,
           })
         end,
@@ -9142,7 +9158,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             After = function()
-              assertEquals('function', type(ns.After))
+              return checkFunc(ns.After)
             end,
           })
         end,
@@ -9156,82 +9172,82 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ForceToyRefilter = function()
-              assertEquals('function', type(ns.ForceToyRefilter))
+              return checkFunc(ns.ForceToyRefilter)
             end,
             GetCollectedShown = function()
-              assertEquals('function', type(ns.GetCollectedShown))
+              return checkFunc(ns.GetCollectedShown)
             end,
             GetIsFavorite = function()
-              assertEquals('function', type(ns.GetIsFavorite))
+              return checkFunc(ns.GetIsFavorite)
             end,
             GetNumFilteredToys = function()
-              assertEquals('function', type(ns.GetNumFilteredToys))
+              return checkFunc(ns.GetNumFilteredToys)
             end,
             GetNumLearnedDisplayedToys = function()
-              assertEquals('function', type(ns.GetNumLearnedDisplayedToys))
+              return checkFunc(ns.GetNumLearnedDisplayedToys)
             end,
             GetNumTotalDisplayedToys = function()
-              assertEquals('function', type(ns.GetNumTotalDisplayedToys))
+              return checkFunc(ns.GetNumTotalDisplayedToys)
             end,
             GetNumToys = function()
-              assertEquals('function', type(ns.GetNumToys))
+              return checkFunc(ns.GetNumToys)
             end,
             GetToyFromIndex = function()
-              assertEquals('function', type(ns.GetToyFromIndex))
+              return checkFunc(ns.GetToyFromIndex)
             end,
             GetToyInfo = function()
-              assertEquals('function', type(ns.GetToyInfo))
+              return checkFunc(ns.GetToyInfo)
             end,
             GetToyLink = function()
-              assertEquals('function', type(ns.GetToyLink))
+              return checkFunc(ns.GetToyLink)
             end,
             GetUncollectedShown = function()
-              assertEquals('function', type(ns.GetUncollectedShown))
+              return checkFunc(ns.GetUncollectedShown)
             end,
             GetUnusableShown = function()
-              assertEquals('function', type(ns.GetUnusableShown))
+              return checkFunc(ns.GetUnusableShown)
             end,
             HasFavorites = function()
-              assertEquals('function', type(ns.HasFavorites))
+              return checkFunc(ns.HasFavorites)
             end,
             IsExpansionTypeFilterChecked = function()
-              assertEquals('function', type(ns.IsExpansionTypeFilterChecked))
+              return checkFunc(ns.IsExpansionTypeFilterChecked)
             end,
             IsSourceTypeFilterChecked = function()
-              assertEquals('function', type(ns.IsSourceTypeFilterChecked))
+              return checkFunc(ns.IsSourceTypeFilterChecked)
             end,
             IsToyUsable = function()
-              assertEquals('function', type(ns.IsToyUsable))
+              return checkFunc(ns.IsToyUsable)
             end,
             PickupToyBoxItem = function()
-              assertEquals('function', type(ns.PickupToyBoxItem))
+              return checkFunc(ns.PickupToyBoxItem)
             end,
             SetAllExpansionTypeFilters = function()
-              assertEquals('function', type(ns.SetAllExpansionTypeFilters))
+              return checkFunc(ns.SetAllExpansionTypeFilters)
             end,
             SetAllSourceTypeFilters = function()
-              assertEquals('function', type(ns.SetAllSourceTypeFilters))
+              return checkFunc(ns.SetAllSourceTypeFilters)
             end,
             SetCollectedShown = function()
-              assertEquals('function', type(ns.SetCollectedShown))
+              return checkFunc(ns.SetCollectedShown)
             end,
             SetExpansionTypeFilter = function()
-              assertEquals('function', type(ns.SetExpansionTypeFilter))
+              return checkFunc(ns.SetExpansionTypeFilter)
             end,
             SetFilterString = function()
-              assertEquals('function', type(ns.SetFilterString))
+              return checkFunc(ns.SetFilterString)
             end,
             SetIsFavorite = function()
-              assertEquals('function', type(ns.SetIsFavorite))
+              return checkFunc(ns.SetIsFavorite)
             end,
             SetSourceTypeFilter = function()
-              assertEquals('function', type(ns.SetSourceTypeFilter))
+              return checkFunc(ns.SetSourceTypeFilter)
             end,
             SetUncollectedShown = function()
-              assertEquals('function', type(ns.SetUncollectedShown))
+              return checkFunc(ns.SetUncollectedShown)
             end,
             SetUnusableShown = function()
-              assertEquals('function', type(ns.SetUnusableShown))
+              return checkFunc(ns.SetUnusableShown)
             end,
           })
         end,
@@ -9241,31 +9257,31 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ClearFanfare = function()
-              assertEquals('function', type(ns.ClearFanfare))
+              return checkFunc(ns.ClearFanfare)
             end,
             IsToySourceValid = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsToySourceValid))
                 return
               end
-              assertEquals('function', type(ns.IsToySourceValid))
+              return checkFunc(ns.IsToySourceValid)
             end,
             IsUsingDefaultFilters = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.IsUsingDefaultFilters))
                 return
               end
-              assertEquals('function', type(ns.IsUsingDefaultFilters))
+              return checkFunc(ns.IsUsingDefaultFilters)
             end,
             NeedsFanfare = function()
-              assertEquals('function', type(ns.NeedsFanfare))
+              return checkFunc(ns.NeedsFanfare)
             end,
             SetDefaultFilters = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetDefaultFilters))
                 return
               end
-              assertEquals('function', type(ns.SetDefaultFilters))
+              return checkFunc(ns.SetDefaultFilters)
             end,
           })
         end,
@@ -9279,235 +9295,235 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AnyRecipeCategoriesFiltered = function()
-              assertEquals('function', type(ns.AnyRecipeCategoriesFiltered))
+              return checkFunc(ns.AnyRecipeCategoriesFiltered)
             end,
             AreAnyInventorySlotsFiltered = function()
-              assertEquals('function', type(ns.AreAnyInventorySlotsFiltered))
+              return checkFunc(ns.AreAnyInventorySlotsFiltered)
             end,
             CanObliterateCursorItem = function()
-              assertEquals('function', type(ns.CanObliterateCursorItem))
+              return checkFunc(ns.CanObliterateCursorItem)
             end,
             CanTradeSkillListLink = function()
-              assertEquals('function', type(ns.CanTradeSkillListLink))
+              return checkFunc(ns.CanTradeSkillListLink)
             end,
             ClearInventorySlotFilter = function()
-              assertEquals('function', type(ns.ClearInventorySlotFilter))
+              return checkFunc(ns.ClearInventorySlotFilter)
             end,
             ClearPendingObliterateItem = function()
-              assertEquals('function', type(ns.ClearPendingObliterateItem))
+              return checkFunc(ns.ClearPendingObliterateItem)
             end,
             ClearRecipeCategoryFilter = function()
-              assertEquals('function', type(ns.ClearRecipeCategoryFilter))
+              return checkFunc(ns.ClearRecipeCategoryFilter)
             end,
             ClearRecipeSourceTypeFilter = function()
-              assertEquals('function', type(ns.ClearRecipeSourceTypeFilter))
+              return checkFunc(ns.ClearRecipeSourceTypeFilter)
             end,
             CloseObliterumForge = function()
-              assertEquals('function', type(ns.CloseObliterumForge))
+              return checkFunc(ns.CloseObliterumForge)
             end,
             CloseTradeSkill = function()
-              assertEquals('function', type(ns.CloseTradeSkill))
+              return checkFunc(ns.CloseTradeSkill)
             end,
             CraftRecipe = function()
-              assertEquals('function', type(ns.CraftRecipe))
+              return checkFunc(ns.CraftRecipe)
             end,
             DropPendingObliterateItemFromCursor = function()
-              assertEquals('function', type(ns.DropPendingObliterateItemFromCursor))
+              return checkFunc(ns.DropPendingObliterateItemFromCursor)
             end,
             GetAllFilterableInventorySlots = function()
-              assertEquals('function', type(ns.GetAllFilterableInventorySlots))
+              return checkFunc(ns.GetAllFilterableInventorySlots)
             end,
             GetAllProfessionTradeSkillLines = function()
-              assertEquals('function', type(ns.GetAllProfessionTradeSkillLines))
+              return checkFunc(ns.GetAllProfessionTradeSkillLines)
             end,
             GetAllRecipeIDs = function()
-              assertEquals('function', type(ns.GetAllRecipeIDs))
+              return checkFunc(ns.GetAllRecipeIDs)
             end,
             GetCategories = function()
-              assertEquals('function', type(ns.GetCategories))
+              return checkFunc(ns.GetCategories)
             end,
             GetCategoryInfo = function()
-              assertEquals('function', type(ns.GetCategoryInfo))
+              return checkFunc(ns.GetCategoryInfo)
             end,
             GetFilterableInventorySlots = function()
-              assertEquals('function', type(ns.GetFilterableInventorySlots))
+              return checkFunc(ns.GetFilterableInventorySlots)
             end,
             GetFilteredRecipeIDs = function()
-              assertEquals('function', type(ns.GetFilteredRecipeIDs))
+              return checkFunc(ns.GetFilteredRecipeIDs)
             end,
             GetObliterateSpellID = function()
-              assertEquals('function', type(ns.GetObliterateSpellID))
+              return checkFunc(ns.GetObliterateSpellID)
             end,
             GetOnlyShowLearnedRecipes = function()
-              assertEquals('function', type(ns.GetOnlyShowLearnedRecipes))
+              return checkFunc(ns.GetOnlyShowLearnedRecipes)
             end,
             GetOnlyShowMakeableRecipes = function()
-              assertEquals('function', type(ns.GetOnlyShowMakeableRecipes))
+              return checkFunc(ns.GetOnlyShowMakeableRecipes)
             end,
             GetOnlyShowSkillUpRecipes = function()
-              assertEquals('function', type(ns.GetOnlyShowSkillUpRecipes))
+              return checkFunc(ns.GetOnlyShowSkillUpRecipes)
             end,
             GetOnlyShowUnlearnedRecipes = function()
-              assertEquals('function', type(ns.GetOnlyShowUnlearnedRecipes))
+              return checkFunc(ns.GetOnlyShowUnlearnedRecipes)
             end,
             GetOptionalReagentBonusText = function()
-              assertEquals('function', type(ns.GetOptionalReagentBonusText))
+              return checkFunc(ns.GetOptionalReagentBonusText)
             end,
             GetOptionalReagentInfo = function()
-              assertEquals('function', type(ns.GetOptionalReagentInfo))
+              return checkFunc(ns.GetOptionalReagentInfo)
             end,
             GetPendingObliterateItemID = function()
-              assertEquals('function', type(ns.GetPendingObliterateItemID))
+              return checkFunc(ns.GetPendingObliterateItemID)
             end,
             GetPendingObliterateItemLink = function()
-              assertEquals('function', type(ns.GetPendingObliterateItemLink))
+              return checkFunc(ns.GetPendingObliterateItemLink)
             end,
             GetRecipeCooldown = function()
-              assertEquals('function', type(ns.GetRecipeCooldown))
+              return checkFunc(ns.GetRecipeCooldown)
             end,
             GetRecipeDescription = function()
-              assertEquals('function', type(ns.GetRecipeDescription))
+              return checkFunc(ns.GetRecipeDescription)
             end,
             GetRecipeInfo = function()
-              assertEquals('function', type(ns.GetRecipeInfo))
+              return checkFunc(ns.GetRecipeInfo)
             end,
             GetRecipeItemLevelFilter = function()
-              assertEquals('function', type(ns.GetRecipeItemLevelFilter))
+              return checkFunc(ns.GetRecipeItemLevelFilter)
             end,
             GetRecipeItemLink = function()
-              assertEquals('function', type(ns.GetRecipeItemLink))
+              return checkFunc(ns.GetRecipeItemLink)
             end,
             GetRecipeItemNameFilter = function()
-              assertEquals('function', type(ns.GetRecipeItemNameFilter))
+              return checkFunc(ns.GetRecipeItemNameFilter)
             end,
             GetRecipeLink = function()
-              assertEquals('function', type(ns.GetRecipeLink))
+              return checkFunc(ns.GetRecipeLink)
             end,
             GetRecipeNumItemsProduced = function()
-              assertEquals('function', type(ns.GetRecipeNumItemsProduced))
+              return checkFunc(ns.GetRecipeNumItemsProduced)
             end,
             GetRecipeNumReagents = function()
-              assertEquals('function', type(ns.GetRecipeNumReagents))
+              return checkFunc(ns.GetRecipeNumReagents)
             end,
             GetRecipeReagentInfo = function()
-              assertEquals('function', type(ns.GetRecipeReagentInfo))
+              return checkFunc(ns.GetRecipeReagentInfo)
             end,
             GetRecipeReagentItemLink = function()
-              assertEquals('function', type(ns.GetRecipeReagentItemLink))
+              return checkFunc(ns.GetRecipeReagentItemLink)
             end,
             GetRecipeRepeatCount = function()
-              assertEquals('function', type(ns.GetRecipeRepeatCount))
+              return checkFunc(ns.GetRecipeRepeatCount)
             end,
             GetRecipeSourceText = function()
-              assertEquals('function', type(ns.GetRecipeSourceText))
+              return checkFunc(ns.GetRecipeSourceText)
             end,
             GetRecipeTools = function()
-              assertEquals('function', type(ns.GetRecipeTools))
+              return checkFunc(ns.GetRecipeTools)
             end,
             GetSubCategories = function()
-              assertEquals('function', type(ns.GetSubCategories))
+              return checkFunc(ns.GetSubCategories)
             end,
             GetTradeSkillDisplayName = function()
-              assertEquals('function', type(ns.GetTradeSkillDisplayName))
+              return checkFunc(ns.GetTradeSkillDisplayName)
             end,
             GetTradeSkillLine = function()
-              assertEquals('function', type(ns.GetTradeSkillLine))
+              return checkFunc(ns.GetTradeSkillLine)
             end,
             GetTradeSkillLineForRecipe = function()
-              assertEquals('function', type(ns.GetTradeSkillLineForRecipe))
+              return checkFunc(ns.GetTradeSkillLineForRecipe)
             end,
             GetTradeSkillLineInfoByID = function()
-              assertEquals('function', type(ns.GetTradeSkillLineInfoByID))
+              return checkFunc(ns.GetTradeSkillLineInfoByID)
             end,
             GetTradeSkillListLink = function()
-              assertEquals('function', type(ns.GetTradeSkillListLink))
+              return checkFunc(ns.GetTradeSkillListLink)
             end,
             GetTradeSkillTexture = function()
-              assertEquals('function', type(ns.GetTradeSkillTexture))
+              return checkFunc(ns.GetTradeSkillTexture)
             end,
             IsAnyRecipeFromSource = function()
-              assertEquals('function', type(ns.IsAnyRecipeFromSource))
+              return checkFunc(ns.IsAnyRecipeFromSource)
             end,
             IsDataSourceChanging = function()
-              assertEquals('function', type(ns.IsDataSourceChanging))
+              return checkFunc(ns.IsDataSourceChanging)
             end,
             IsEmptySkillLineCategory = function()
-              assertEquals('function', type(ns.IsEmptySkillLineCategory))
+              return checkFunc(ns.IsEmptySkillLineCategory)
             end,
             IsInventorySlotFiltered = function()
-              assertEquals('function', type(ns.IsInventorySlotFiltered))
+              return checkFunc(ns.IsInventorySlotFiltered)
             end,
             IsNPCCrafting = function()
-              assertEquals('function', type(ns.IsNPCCrafting))
+              return checkFunc(ns.IsNPCCrafting)
             end,
             IsRecipeCategoryFiltered = function()
-              assertEquals('function', type(ns.IsRecipeCategoryFiltered))
+              return checkFunc(ns.IsRecipeCategoryFiltered)
             end,
             IsRecipeFavorite = function()
-              assertEquals('function', type(ns.IsRecipeFavorite))
+              return checkFunc(ns.IsRecipeFavorite)
             end,
             IsRecipeRepeating = function()
-              assertEquals('function', type(ns.IsRecipeRepeating))
+              return checkFunc(ns.IsRecipeRepeating)
             end,
             IsRecipeSearchInProgress = function()
-              assertEquals('function', type(ns.IsRecipeSearchInProgress))
+              return checkFunc(ns.IsRecipeSearchInProgress)
             end,
             IsRecipeSourceTypeFiltered = function()
-              assertEquals('function', type(ns.IsRecipeSourceTypeFiltered))
+              return checkFunc(ns.IsRecipeSourceTypeFiltered)
             end,
             IsTradeSkillGuild = function()
-              assertEquals('function', type(ns.IsTradeSkillGuild))
+              return checkFunc(ns.IsTradeSkillGuild)
             end,
             IsTradeSkillGuildMember = function()
-              assertEquals('function', type(ns.IsTradeSkillGuildMember))
+              return checkFunc(ns.IsTradeSkillGuildMember)
             end,
             IsTradeSkillLinked = function()
-              assertEquals('function', type(ns.IsTradeSkillLinked))
+              return checkFunc(ns.IsTradeSkillLinked)
             end,
             IsTradeSkillReady = function()
-              assertEquals('function', type(ns.IsTradeSkillReady))
+              return checkFunc(ns.IsTradeSkillReady)
             end,
             ObliterateItem = function()
-              assertEquals('function', type(ns.ObliterateItem))
+              return checkFunc(ns.ObliterateItem)
             end,
             OpenTradeSkill = function()
-              assertEquals('function', type(ns.OpenTradeSkill))
+              return checkFunc(ns.OpenTradeSkill)
             end,
             SetInventorySlotFilter = function()
-              assertEquals('function', type(ns.SetInventorySlotFilter))
+              return checkFunc(ns.SetInventorySlotFilter)
             end,
             SetOnlyShowLearnedRecipes = function()
-              assertEquals('function', type(ns.SetOnlyShowLearnedRecipes))
+              return checkFunc(ns.SetOnlyShowLearnedRecipes)
             end,
             SetOnlyShowMakeableRecipes = function()
-              assertEquals('function', type(ns.SetOnlyShowMakeableRecipes))
+              return checkFunc(ns.SetOnlyShowMakeableRecipes)
             end,
             SetOnlyShowSkillUpRecipes = function()
-              assertEquals('function', type(ns.SetOnlyShowSkillUpRecipes))
+              return checkFunc(ns.SetOnlyShowSkillUpRecipes)
             end,
             SetOnlyShowUnlearnedRecipes = function()
-              assertEquals('function', type(ns.SetOnlyShowUnlearnedRecipes))
+              return checkFunc(ns.SetOnlyShowUnlearnedRecipes)
             end,
             SetRecipeCategoryFilter = function()
-              assertEquals('function', type(ns.SetRecipeCategoryFilter))
+              return checkFunc(ns.SetRecipeCategoryFilter)
             end,
             SetRecipeFavorite = function()
-              assertEquals('function', type(ns.SetRecipeFavorite))
+              return checkFunc(ns.SetRecipeFavorite)
             end,
             SetRecipeItemLevelFilter = function()
-              assertEquals('function', type(ns.SetRecipeItemLevelFilter))
+              return checkFunc(ns.SetRecipeItemLevelFilter)
             end,
             SetRecipeItemNameFilter = function()
-              assertEquals('function', type(ns.SetRecipeItemNameFilter))
+              return checkFunc(ns.SetRecipeItemNameFilter)
             end,
             SetRecipeRepeatCount = function()
-              assertEquals('function', type(ns.SetRecipeRepeatCount))
+              return checkFunc(ns.SetRecipeRepeatCount)
             end,
             SetRecipeSourceTypeFilter = function()
-              assertEquals('function', type(ns.SetRecipeSourceTypeFilter))
+              return checkFunc(ns.SetRecipeSourceTypeFilter)
             end,
             StopRecipeRepeat = function()
-              assertEquals('function', type(ns.StopRecipeRepeat))
+              return checkFunc(ns.StopRecipeRepeat)
             end,
           })
         end,
@@ -9521,73 +9537,73 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ApplyAllPending = function()
-              assertEquals('function', type(ns.ApplyAllPending))
+              return checkFunc(ns.ApplyAllPending)
             end,
             CanHaveSecondaryAppearanceForSlotID = function()
-              assertEquals('function', type(ns.CanHaveSecondaryAppearanceForSlotID))
+              return checkFunc(ns.CanHaveSecondaryAppearanceForSlotID)
             end,
             CanTransmogItem = function()
-              assertEquals('function', type(ns.CanTransmogItem))
+              return checkFunc(ns.CanTransmogItem)
             end,
             CanTransmogItemWithItem = function()
-              assertEquals('function', type(ns.CanTransmogItemWithItem))
+              return checkFunc(ns.CanTransmogItemWithItem)
             end,
             ClearAllPending = function()
-              assertEquals('function', type(ns.ClearAllPending))
+              return checkFunc(ns.ClearAllPending)
             end,
             ClearPending = function()
-              assertEquals('function', type(ns.ClearPending))
+              return checkFunc(ns.ClearPending)
             end,
             Close = function()
-              assertEquals('function', type(ns.Close))
+              return checkFunc(ns.Close)
             end,
             ExtractTransmogIDList = function()
-              assertEquals('function', type(ns.ExtractTransmogIDList))
+              return checkFunc(ns.ExtractTransmogIDList)
             end,
             GetApplyCost = function()
-              assertEquals('function', type(ns.GetApplyCost))
+              return checkFunc(ns.GetApplyCost)
             end,
             GetApplyWarnings = function()
-              assertEquals('function', type(ns.GetApplyWarnings))
+              return checkFunc(ns.GetApplyWarnings)
             end,
             GetBaseCategory = function()
-              assertEquals('function', type(ns.GetBaseCategory))
+              return checkFunc(ns.GetBaseCategory)
             end,
             GetCreatureDisplayIDForSource = function()
-              assertEquals('function', type(ns.GetCreatureDisplayIDForSource))
+              return checkFunc(ns.GetCreatureDisplayIDForSource)
             end,
             GetItemIDForSource = function()
-              assertEquals('function', type(ns.GetItemIDForSource))
+              return checkFunc(ns.GetItemIDForSource)
             end,
             GetPending = function()
-              assertEquals('function', type(ns.GetPending))
+              return checkFunc(ns.GetPending)
             end,
             GetSlotEffectiveCategory = function()
-              assertEquals('function', type(ns.GetSlotEffectiveCategory))
+              return checkFunc(ns.GetSlotEffectiveCategory)
             end,
             GetSlotForInventoryType = function()
-              assertEquals('function', type(ns.GetSlotForInventoryType))
+              return checkFunc(ns.GetSlotForInventoryType)
             end,
             GetSlotInfo = function()
-              assertEquals('function', type(ns.GetSlotInfo))
+              return checkFunc(ns.GetSlotInfo)
             end,
             GetSlotUseError = function()
-              assertEquals('function', type(ns.GetSlotUseError))
+              return checkFunc(ns.GetSlotUseError)
             end,
             GetSlotVisualInfo = function()
-              assertEquals('function', type(ns.GetSlotVisualInfo))
+              return checkFunc(ns.GetSlotVisualInfo)
             end,
             IsAtTransmogNPC = function()
-              assertEquals('function', type(ns.IsAtTransmogNPC))
+              return checkFunc(ns.IsAtTransmogNPC)
             end,
             IsSlotBeingCollapsed = function()
-              assertEquals('function', type(ns.IsSlotBeingCollapsed))
+              return checkFunc(ns.IsSlotBeingCollapsed)
             end,
             LoadOutfit = function()
-              assertEquals('function', type(ns.LoadOutfit))
+              return checkFunc(ns.LoadOutfit)
             end,
             SetPending = function()
-              assertEquals('function', type(ns.SetPending))
+              return checkFunc(ns.SetPending)
             end,
           })
         end,
@@ -9601,217 +9617,217 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AccountCanCollectSource = function()
-              assertEquals('function', type(ns.AccountCanCollectSource))
+              return checkFunc(ns.AccountCanCollectSource)
             end,
             AreAllCollectionTypeFiltersChecked = function()
-              assertEquals('function', type(ns.AreAllCollectionTypeFiltersChecked))
+              return checkFunc(ns.AreAllCollectionTypeFiltersChecked)
             end,
             AreAllSourceTypeFiltersChecked = function()
-              assertEquals('function', type(ns.AreAllSourceTypeFiltersChecked))
+              return checkFunc(ns.AreAllSourceTypeFiltersChecked)
             end,
             CanAppearanceHaveIllusion = function()
-              assertEquals('function', type(ns.CanAppearanceHaveIllusion))
+              return checkFunc(ns.CanAppearanceHaveIllusion)
             end,
             ClearNewAppearance = function()
-              assertEquals('function', type(ns.ClearNewAppearance))
+              return checkFunc(ns.ClearNewAppearance)
             end,
             ClearSearch = function()
-              assertEquals('function', type(ns.ClearSearch))
+              return checkFunc(ns.ClearSearch)
             end,
             DeleteOutfit = function()
-              assertEquals('function', type(ns.DeleteOutfit))
+              return checkFunc(ns.DeleteOutfit)
             end,
             EndSearch = function()
-              assertEquals('function', type(ns.EndSearch))
+              return checkFunc(ns.EndSearch)
             end,
             GetAllAppearanceSources = function()
-              assertEquals('function', type(ns.GetAllAppearanceSources))
+              return checkFunc(ns.GetAllAppearanceSources)
             end,
             GetAppearanceCameraID = function()
-              assertEquals('function', type(ns.GetAppearanceCameraID))
+              return checkFunc(ns.GetAppearanceCameraID)
             end,
             GetAppearanceCameraIDBySource = function()
-              assertEquals('function', type(ns.GetAppearanceCameraIDBySource))
+              return checkFunc(ns.GetAppearanceCameraIDBySource)
             end,
             GetAppearanceInfoBySource = function()
-              assertEquals('function', type(ns.GetAppearanceInfoBySource))
+              return checkFunc(ns.GetAppearanceInfoBySource)
             end,
             GetAppearanceSourceDrops = function()
-              assertEquals('function', type(ns.GetAppearanceSourceDrops))
+              return checkFunc(ns.GetAppearanceSourceDrops)
             end,
             GetAppearanceSourceInfo = function()
-              assertEquals('function', type(ns.GetAppearanceSourceInfo))
+              return checkFunc(ns.GetAppearanceSourceInfo)
             end,
             GetAppearanceSources = function()
-              assertEquals('function', type(ns.GetAppearanceSources))
+              return checkFunc(ns.GetAppearanceSources)
             end,
             GetArtifactAppearanceStrings = function()
-              assertEquals('function', type(ns.GetArtifactAppearanceStrings))
+              return checkFunc(ns.GetArtifactAppearanceStrings)
             end,
             GetCategoryAppearances = function()
-              assertEquals('function', type(ns.GetCategoryAppearances))
+              return checkFunc(ns.GetCategoryAppearances)
             end,
             GetCategoryCollectedCount = function()
-              assertEquals('function', type(ns.GetCategoryCollectedCount))
+              return checkFunc(ns.GetCategoryCollectedCount)
             end,
             GetCategoryForItem = function()
-              assertEquals('function', type(ns.GetCategoryForItem))
+              return checkFunc(ns.GetCategoryForItem)
             end,
             GetCategoryInfo = function()
-              assertEquals('function', type(ns.GetCategoryInfo))
+              return checkFunc(ns.GetCategoryInfo)
             end,
             GetCategoryTotal = function()
-              assertEquals('function', type(ns.GetCategoryTotal))
+              return checkFunc(ns.GetCategoryTotal)
             end,
             GetCollectedShown = function()
-              assertEquals('function', type(ns.GetCollectedShown))
+              return checkFunc(ns.GetCollectedShown)
             end,
             GetFallbackWeaponAppearance = function()
-              assertEquals('function', type(ns.GetFallbackWeaponAppearance))
+              return checkFunc(ns.GetFallbackWeaponAppearance)
             end,
             GetIllusionInfo = function()
-              assertEquals('function', type(ns.GetIllusionInfo))
+              return checkFunc(ns.GetIllusionInfo)
             end,
             GetIllusionStrings = function()
-              assertEquals('function', type(ns.GetIllusionStrings))
+              return checkFunc(ns.GetIllusionStrings)
             end,
             GetIllusions = function()
-              assertEquals('function', type(ns.GetIllusions))
+              return checkFunc(ns.GetIllusions)
             end,
             GetInspectItemTransmogInfoList = function()
-              assertEquals('function', type(ns.GetInspectItemTransmogInfoList))
+              return checkFunc(ns.GetInspectItemTransmogInfoList)
             end,
             GetIsAppearanceFavorite = function()
-              assertEquals('function', type(ns.GetIsAppearanceFavorite))
+              return checkFunc(ns.GetIsAppearanceFavorite)
             end,
             GetItemInfo = function()
-              assertEquals('function', type(ns.GetItemInfo))
+              return checkFunc(ns.GetItemInfo)
             end,
             GetItemTransmogInfoListFromOutfitHyperlink = function()
-              assertEquals('function', type(ns.GetItemTransmogInfoListFromOutfitHyperlink))
+              return checkFunc(ns.GetItemTransmogInfoListFromOutfitHyperlink)
             end,
             GetLatestAppearance = function()
-              assertEquals('function', type(ns.GetLatestAppearance))
+              return checkFunc(ns.GetLatestAppearance)
             end,
             GetNumMaxOutfits = function()
-              assertEquals('function', type(ns.GetNumMaxOutfits))
+              return checkFunc(ns.GetNumMaxOutfits)
             end,
             GetNumTransmogSources = function()
-              assertEquals('function', type(ns.GetNumTransmogSources))
+              return checkFunc(ns.GetNumTransmogSources)
             end,
             GetOutfitHyperlinkFromItemTransmogInfoList = function()
-              assertEquals('function', type(ns.GetOutfitHyperlinkFromItemTransmogInfoList))
+              return checkFunc(ns.GetOutfitHyperlinkFromItemTransmogInfoList)
             end,
             GetOutfitInfo = function()
-              assertEquals('function', type(ns.GetOutfitInfo))
+              return checkFunc(ns.GetOutfitInfo)
             end,
             GetOutfitItemTransmogInfoList = function()
-              assertEquals('function', type(ns.GetOutfitItemTransmogInfoList))
+              return checkFunc(ns.GetOutfitItemTransmogInfoList)
             end,
             GetOutfits = function()
-              assertEquals('function', type(ns.GetOutfits))
+              return checkFunc(ns.GetOutfits)
             end,
             GetPairedArtifactAppearance = function()
-              assertEquals('function', type(ns.GetPairedArtifactAppearance))
+              return checkFunc(ns.GetPairedArtifactAppearance)
             end,
             GetSourceIcon = function()
-              assertEquals('function', type(ns.GetSourceIcon))
+              return checkFunc(ns.GetSourceIcon)
             end,
             GetSourceInfo = function()
-              assertEquals('function', type(ns.GetSourceInfo))
+              return checkFunc(ns.GetSourceInfo)
             end,
             GetSourceItemID = function()
-              assertEquals('function', type(ns.GetSourceItemID))
+              return checkFunc(ns.GetSourceItemID)
             end,
             GetSourceRequiredHoliday = function()
-              assertEquals('function', type(ns.GetSourceRequiredHoliday))
+              return checkFunc(ns.GetSourceRequiredHoliday)
             end,
             GetUncollectedShown = function()
-              assertEquals('function', type(ns.GetUncollectedShown))
+              return checkFunc(ns.GetUncollectedShown)
             end,
             HasFavorites = function()
-              assertEquals('function', type(ns.HasFavorites))
+              return checkFunc(ns.HasFavorites)
             end,
             IsAppearanceHiddenVisual = function()
-              assertEquals('function', type(ns.IsAppearanceHiddenVisual))
+              return checkFunc(ns.IsAppearanceHiddenVisual)
             end,
             IsCategoryValidForItem = function()
-              assertEquals('function', type(ns.IsCategoryValidForItem))
+              return checkFunc(ns.IsCategoryValidForItem)
             end,
             IsNewAppearance = function()
-              assertEquals('function', type(ns.IsNewAppearance))
+              return checkFunc(ns.IsNewAppearance)
             end,
             IsSearchDBLoading = function()
-              assertEquals('function', type(ns.IsSearchDBLoading))
+              return checkFunc(ns.IsSearchDBLoading)
             end,
             IsSearchInProgress = function()
-              assertEquals('function', type(ns.IsSearchInProgress))
+              return checkFunc(ns.IsSearchInProgress)
             end,
             IsSourceTypeFilterChecked = function()
-              assertEquals('function', type(ns.IsSourceTypeFilterChecked))
+              return checkFunc(ns.IsSourceTypeFilterChecked)
             end,
             IsUsingDefaultFilters = function()
-              assertEquals('function', type(ns.IsUsingDefaultFilters))
+              return checkFunc(ns.IsUsingDefaultFilters)
             end,
             ModifyOutfit = function()
-              assertEquals('function', type(ns.ModifyOutfit))
+              return checkFunc(ns.ModifyOutfit)
             end,
             NewOutfit = function()
-              assertEquals('function', type(ns.NewOutfit))
+              return checkFunc(ns.NewOutfit)
             end,
             PlayerCanCollectSource = function()
-              assertEquals('function', type(ns.PlayerCanCollectSource))
+              return checkFunc(ns.PlayerCanCollectSource)
             end,
             PlayerHasTransmog = function()
-              assertEquals('function', type(ns.PlayerHasTransmog))
+              return checkFunc(ns.PlayerHasTransmog)
             end,
             PlayerHasTransmogByItemInfo = function()
-              assertEquals('function', type(ns.PlayerHasTransmogByItemInfo))
+              return checkFunc(ns.PlayerHasTransmogByItemInfo)
             end,
             PlayerHasTransmogItemModifiedAppearance = function()
-              assertEquals('function', type(ns.PlayerHasTransmogItemModifiedAppearance))
+              return checkFunc(ns.PlayerHasTransmogItemModifiedAppearance)
             end,
             PlayerKnowsSource = function()
-              assertEquals('function', type(ns.PlayerKnowsSource))
+              return checkFunc(ns.PlayerKnowsSource)
             end,
             RenameOutfit = function()
-              assertEquals('function', type(ns.RenameOutfit))
+              return checkFunc(ns.RenameOutfit)
             end,
             SearchProgress = function()
-              assertEquals('function', type(ns.SearchProgress))
+              return checkFunc(ns.SearchProgress)
             end,
             SearchSize = function()
-              assertEquals('function', type(ns.SearchSize))
+              return checkFunc(ns.SearchSize)
             end,
             SetAllCollectionTypeFilters = function()
-              assertEquals('function', type(ns.SetAllCollectionTypeFilters))
+              return checkFunc(ns.SetAllCollectionTypeFilters)
             end,
             SetAllSourceTypeFilters = function()
-              assertEquals('function', type(ns.SetAllSourceTypeFilters))
+              return checkFunc(ns.SetAllSourceTypeFilters)
             end,
             SetCollectedShown = function()
-              assertEquals('function', type(ns.SetCollectedShown))
+              return checkFunc(ns.SetCollectedShown)
             end,
             SetDefaultFilters = function()
-              assertEquals('function', type(ns.SetDefaultFilters))
+              return checkFunc(ns.SetDefaultFilters)
             end,
             SetIsAppearanceFavorite = function()
-              assertEquals('function', type(ns.SetIsAppearanceFavorite))
+              return checkFunc(ns.SetIsAppearanceFavorite)
             end,
             SetSearch = function()
-              assertEquals('function', type(ns.SetSearch))
+              return checkFunc(ns.SetSearch)
             end,
             SetSearchAndFilterCategory = function()
-              assertEquals('function', type(ns.SetSearchAndFilterCategory))
+              return checkFunc(ns.SetSearchAndFilterCategory)
             end,
             SetSourceTypeFilter = function()
-              assertEquals('function', type(ns.SetSourceTypeFilter))
+              return checkFunc(ns.SetSourceTypeFilter)
             end,
             SetUncollectedShown = function()
-              assertEquals('function', type(ns.SetUncollectedShown))
+              return checkFunc(ns.SetUncollectedShown)
             end,
             UpdateUsableAppearances = function()
-              assertEquals('function', type(ns.UpdateUsableAppearances))
+              return checkFunc(ns.UpdateUsableAppearances)
             end,
           })
         end,
@@ -9825,94 +9841,94 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ClearLatestSource = function()
-              assertEquals('function', type(ns.ClearLatestSource))
+              return checkFunc(ns.ClearLatestSource)
             end,
             ClearNewSource = function()
-              assertEquals('function', type(ns.ClearNewSource))
+              return checkFunc(ns.ClearNewSource)
             end,
             ClearSetNewSourcesForSlot = function()
-              assertEquals('function', type(ns.ClearSetNewSourcesForSlot))
+              return checkFunc(ns.ClearSetNewSourcesForSlot)
             end,
             GetAllSets = function()
-              assertEquals('function', type(ns.GetAllSets))
+              return checkFunc(ns.GetAllSets)
             end,
             GetAllSourceIDs = function()
-              assertEquals('function', type(ns.GetAllSourceIDs))
+              return checkFunc(ns.GetAllSourceIDs)
             end,
             GetBaseSetID = function()
-              assertEquals('function', type(ns.GetBaseSetID))
+              return checkFunc(ns.GetBaseSetID)
             end,
             GetBaseSets = function()
-              assertEquals('function', type(ns.GetBaseSets))
+              return checkFunc(ns.GetBaseSets)
             end,
             GetBaseSetsCounts = function()
-              assertEquals('function', type(ns.GetBaseSetsCounts))
+              return checkFunc(ns.GetBaseSetsCounts)
             end,
             GetBaseSetsFilter = function()
-              assertEquals('function', type(ns.GetBaseSetsFilter))
+              return checkFunc(ns.GetBaseSetsFilter)
             end,
             GetCameraIDs = function()
-              assertEquals('function', type(ns.GetCameraIDs))
+              return checkFunc(ns.GetCameraIDs)
             end,
             GetIsFavorite = function()
-              assertEquals('function', type(ns.GetIsFavorite))
+              return checkFunc(ns.GetIsFavorite)
             end,
             GetLatestSource = function()
-              assertEquals('function', type(ns.GetLatestSource))
+              return checkFunc(ns.GetLatestSource)
             end,
             GetSetInfo = function()
-              assertEquals('function', type(ns.GetSetInfo))
+              return checkFunc(ns.GetSetInfo)
             end,
             GetSetNewSources = function()
-              assertEquals('function', type(ns.GetSetNewSources))
+              return checkFunc(ns.GetSetNewSources)
             end,
             GetSetPrimaryAppearances = function()
-              assertEquals('function', type(ns.GetSetPrimaryAppearances))
+              return checkFunc(ns.GetSetPrimaryAppearances)
             end,
             GetSetsContainingSourceID = function()
-              assertEquals('function', type(ns.GetSetsContainingSourceID))
+              return checkFunc(ns.GetSetsContainingSourceID)
             end,
             GetSourceIDsForSlot = function()
-              assertEquals('function', type(ns.GetSourceIDsForSlot))
+              return checkFunc(ns.GetSourceIDsForSlot)
             end,
             GetSourcesForSlot = function()
-              assertEquals('function', type(ns.GetSourcesForSlot))
+              return checkFunc(ns.GetSourcesForSlot)
             end,
             GetUsableSets = function()
-              assertEquals('function', type(ns.GetUsableSets))
+              return checkFunc(ns.GetUsableSets)
             end,
             GetVariantSets = function()
-              assertEquals('function', type(ns.GetVariantSets))
+              return checkFunc(ns.GetVariantSets)
             end,
             HasUsableSets = function()
-              assertEquals('function', type(ns.HasUsableSets))
+              return checkFunc(ns.HasUsableSets)
             end,
             IsBaseSetCollected = function()
-              assertEquals('function', type(ns.IsBaseSetCollected))
+              return checkFunc(ns.IsBaseSetCollected)
             end,
             IsNewSource = function()
-              assertEquals('function', type(ns.IsNewSource))
+              return checkFunc(ns.IsNewSource)
             end,
             IsSetVisible = function()
-              assertEquals('function', type(ns.IsSetVisible))
+              return checkFunc(ns.IsSetVisible)
             end,
             IsUsingDefaultBaseSetsFilters = function()
-              assertEquals('function', type(ns.IsUsingDefaultBaseSetsFilters))
+              return checkFunc(ns.IsUsingDefaultBaseSetsFilters)
             end,
             SetBaseSetsFilter = function()
-              assertEquals('function', type(ns.SetBaseSetsFilter))
+              return checkFunc(ns.SetBaseSetsFilter)
             end,
             SetDefaultBaseSetsFilters = function()
-              assertEquals('function', type(ns.SetDefaultBaseSetsFilters))
+              return checkFunc(ns.SetDefaultBaseSetsFilters)
             end,
             SetHasNewSources = function()
-              assertEquals('function', type(ns.SetHasNewSources))
+              return checkFunc(ns.SetHasNewSources)
             end,
             SetHasNewSourcesForSlot = function()
-              assertEquals('function', type(ns.SetHasNewSourcesForSlot))
+              return checkFunc(ns.SetHasNewSourcesForSlot)
             end,
             SetIsFavorite = function()
-              assertEquals('function', type(ns.SetIsFavorite))
+              return checkFunc(ns.SetIsFavorite)
             end,
           })
         end,
@@ -9926,31 +9942,31 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             MonumentChangeAppearanceToTrophyID = function()
-              assertEquals('function', type(ns.MonumentChangeAppearanceToTrophyID))
+              return checkFunc(ns.MonumentChangeAppearanceToTrophyID)
             end,
             MonumentCloseMonumentUI = function()
-              assertEquals('function', type(ns.MonumentCloseMonumentUI))
+              return checkFunc(ns.MonumentCloseMonumentUI)
             end,
             MonumentGetCount = function()
-              assertEquals('function', type(ns.MonumentGetCount))
+              return checkFunc(ns.MonumentGetCount)
             end,
             MonumentGetSelectedTrophyID = function()
-              assertEquals('function', type(ns.MonumentGetSelectedTrophyID))
+              return checkFunc(ns.MonumentGetSelectedTrophyID)
             end,
             MonumentGetTrophyInfoByIndex = function()
-              assertEquals('function', type(ns.MonumentGetTrophyInfoByIndex))
+              return checkFunc(ns.MonumentGetTrophyInfoByIndex)
             end,
             MonumentLoadList = function()
-              assertEquals('function', type(ns.MonumentLoadList))
+              return checkFunc(ns.MonumentLoadList)
             end,
             MonumentLoadSelectedTrophyID = function()
-              assertEquals('function', type(ns.MonumentLoadSelectedTrophyID))
+              return checkFunc(ns.MonumentLoadSelectedTrophyID)
             end,
             MonumentRevertAppearanceToSaved = function()
-              assertEquals('function', type(ns.MonumentRevertAppearanceToSaved))
+              return checkFunc(ns.MonumentRevertAppearanceToSaved)
             end,
             MonumentSaveSelection = function()
-              assertEquals('function', type(ns.MonumentSaveSelection))
+              return checkFunc(ns.MonumentSaveSelection)
             end,
           })
         end,
@@ -9964,10 +9980,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AbandonTutorialArea = function()
-              assertEquals('function', type(ns.AbandonTutorialArea))
+              return checkFunc(ns.AbandonTutorialArea)
             end,
             ReturnToTutorialArea = function()
-              assertEquals('function', type(ns.ReturnToTutorialArea))
+              return checkFunc(ns.ReturnToTutorialArea)
             end,
           })
         end,
@@ -9977,19 +9993,19 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             DoesAnyDisplayHaveNotch = function()
-              assertEquals('function', type(ns.DoesAnyDisplayHaveNotch))
+              return checkFunc(ns.DoesAnyDisplayHaveNotch)
             end,
             GetTopLeftNotchSafeRegion = function()
-              assertEquals('function', type(ns.GetTopLeftNotchSafeRegion))
+              return checkFunc(ns.GetTopLeftNotchSafeRegion)
             end,
             GetTopRightNotchSafeRegion = function()
-              assertEquals('function', type(ns.GetTopRightNotchSafeRegion))
+              return checkFunc(ns.GetTopRightNotchSafeRegion)
             end,
             Reload = function()
-              assertEquals('function', type(ns.Reload))
+              return checkFunc(ns.Reload)
             end,
             ShouldUIParentAvoidNotch = function()
-              assertEquals('function', type(ns.ShouldUIParentAvoidNotch))
+              return checkFunc(ns.ShouldUIParentAvoidNotch)
             end,
           })
         end,
@@ -9999,189 +10015,189 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetAllWidgetsBySetID = function()
-              assertEquals('function', type(ns.GetAllWidgetsBySetID))
+              return checkFunc(ns.GetAllWidgetsBySetID)
             end,
             GetBelowMinimapWidgetSetID = function()
-              assertEquals('function', type(ns.GetBelowMinimapWidgetSetID))
+              return checkFunc(ns.GetBelowMinimapWidgetSetID)
             end,
             GetBulletTextListWidgetVisualizationInfo = function()
-              assertEquals('function', type(ns.GetBulletTextListWidgetVisualizationInfo))
+              return checkFunc(ns.GetBulletTextListWidgetVisualizationInfo)
             end,
             GetCaptureBarWidgetVisualizationInfo = function()
-              assertEquals('function', type(ns.GetCaptureBarWidgetVisualizationInfo))
+              return checkFunc(ns.GetCaptureBarWidgetVisualizationInfo)
             end,
             GetCaptureZoneVisualizationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetCaptureZoneVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetCaptureZoneVisualizationInfo))
+              return checkFunc(ns.GetCaptureZoneVisualizationInfo)
             end,
             GetDiscreteProgressStepsVisualizationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetDiscreteProgressStepsVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetDiscreteProgressStepsVisualizationInfo))
+              return checkFunc(ns.GetDiscreteProgressStepsVisualizationInfo)
             end,
             GetDoubleIconAndTextWidgetVisualizationInfo = function()
-              assertEquals('function', type(ns.GetDoubleIconAndTextWidgetVisualizationInfo))
+              return checkFunc(ns.GetDoubleIconAndTextWidgetVisualizationInfo)
             end,
             GetDoubleStateIconRowVisualizationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetDoubleStateIconRowVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetDoubleStateIconRowVisualizationInfo))
+              return checkFunc(ns.GetDoubleStateIconRowVisualizationInfo)
             end,
             GetDoubleStatusBarWidgetVisualizationInfo = function()
-              assertEquals('function', type(ns.GetDoubleStatusBarWidgetVisualizationInfo))
+              return checkFunc(ns.GetDoubleStatusBarWidgetVisualizationInfo)
             end,
             GetHorizontalCurrenciesWidgetVisualizationInfo = function()
-              assertEquals('function', type(ns.GetHorizontalCurrenciesWidgetVisualizationInfo))
+              return checkFunc(ns.GetHorizontalCurrenciesWidgetVisualizationInfo)
             end,
             GetIconAndTextWidgetVisualizationInfo = function()
-              assertEquals('function', type(ns.GetIconAndTextWidgetVisualizationInfo))
+              return checkFunc(ns.GetIconAndTextWidgetVisualizationInfo)
             end,
             GetIconTextAndBackgroundWidgetVisualizationInfo = function()
-              assertEquals('function', type(ns.GetIconTextAndBackgroundWidgetVisualizationInfo))
+              return checkFunc(ns.GetIconTextAndBackgroundWidgetVisualizationInfo)
             end,
             GetIconTextAndCurrenciesWidgetVisualizationInfo = function()
-              assertEquals('function', type(ns.GetIconTextAndCurrenciesWidgetVisualizationInfo))
+              return checkFunc(ns.GetIconTextAndCurrenciesWidgetVisualizationInfo)
             end,
             GetObjectiveTrackerWidgetSetID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetObjectiveTrackerWidgetSetID))
                 return
               end
-              assertEquals('function', type(ns.GetObjectiveTrackerWidgetSetID))
+              return checkFunc(ns.GetObjectiveTrackerWidgetSetID)
             end,
             GetPowerBarWidgetSetID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetPowerBarWidgetSetID))
                 return
               end
-              assertEquals('function', type(ns.GetPowerBarWidgetSetID))
+              return checkFunc(ns.GetPowerBarWidgetSetID)
             end,
             GetScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo = function()
-              assertEquals('function', type(ns.GetScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo))
+              return checkFunc(ns.GetScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo)
             end,
             GetScenarioHeaderTimerWidgetVisualizationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetScenarioHeaderTimerWidgetVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetScenarioHeaderTimerWidgetVisualizationInfo))
+              return checkFunc(ns.GetScenarioHeaderTimerWidgetVisualizationInfo)
             end,
             GetSpacerVisualizationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetSpacerVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetSpacerVisualizationInfo))
+              return checkFunc(ns.GetSpacerVisualizationInfo)
             end,
             GetSpellDisplayVisualizationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetSpellDisplayVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetSpellDisplayVisualizationInfo))
+              return checkFunc(ns.GetSpellDisplayVisualizationInfo)
             end,
             GetStackedResourceTrackerWidgetVisualizationInfo = function()
-              assertEquals('function', type(ns.GetStackedResourceTrackerWidgetVisualizationInfo))
+              return checkFunc(ns.GetStackedResourceTrackerWidgetVisualizationInfo)
             end,
             GetStatusBarWidgetVisualizationInfo = function()
-              assertEquals('function', type(ns.GetStatusBarWidgetVisualizationInfo))
+              return checkFunc(ns.GetStatusBarWidgetVisualizationInfo)
             end,
             GetTextColumnRowVisualizationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetTextColumnRowVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetTextColumnRowVisualizationInfo))
+              return checkFunc(ns.GetTextColumnRowVisualizationInfo)
             end,
             GetTextWithStateWidgetVisualizationInfo = function()
-              assertEquals('function', type(ns.GetTextWithStateWidgetVisualizationInfo))
+              return checkFunc(ns.GetTextWithStateWidgetVisualizationInfo)
             end,
             GetTextureAndTextRowVisualizationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetTextureAndTextRowVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetTextureAndTextRowVisualizationInfo))
+              return checkFunc(ns.GetTextureAndTextRowVisualizationInfo)
             end,
             GetTextureAndTextVisualizationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetTextureAndTextVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetTextureAndTextVisualizationInfo))
+              return checkFunc(ns.GetTextureAndTextVisualizationInfo)
             end,
             GetTextureWithAnimationVisualizationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetTextureWithAnimationVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetTextureWithAnimationVisualizationInfo))
+              return checkFunc(ns.GetTextureWithAnimationVisualizationInfo)
             end,
             GetTextureWithStateVisualizationInfo = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetTextureWithStateVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetTextureWithStateVisualizationInfo))
+              return checkFunc(ns.GetTextureWithStateVisualizationInfo)
             end,
             GetTopCenterWidgetSetID = function()
-              assertEquals('function', type(ns.GetTopCenterWidgetSetID))
+              return checkFunc(ns.GetTopCenterWidgetSetID)
             end,
             GetUnitPowerBarWidgetVisualizationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetUnitPowerBarWidgetVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetUnitPowerBarWidgetVisualizationInfo))
+              return checkFunc(ns.GetUnitPowerBarWidgetVisualizationInfo)
             end,
             GetWidgetSetInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetWidgetSetInfo))
                 return
               end
-              assertEquals('function', type(ns.GetWidgetSetInfo))
+              return checkFunc(ns.GetWidgetSetInfo)
             end,
             GetZoneControlVisualizationInfo = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetZoneControlVisualizationInfo))
                 return
               end
-              assertEquals('function', type(ns.GetZoneControlVisualizationInfo))
+              return checkFunc(ns.GetZoneControlVisualizationInfo)
             end,
             RegisterUnitForWidgetUpdates = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.RegisterUnitForWidgetUpdates))
                 return
               end
-              assertEquals('function', type(ns.RegisterUnitForWidgetUpdates))
+              return checkFunc(ns.RegisterUnitForWidgetUpdates)
             end,
             SetProcessingUnit = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetProcessingUnit))
                 return
               end
-              assertEquals('function', type(ns.SetProcessingUnit))
+              return checkFunc(ns.SetProcessingUnit)
             end,
             SetProcessingUnitGuid = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SetProcessingUnitGuid))
                 return
               end
-              assertEquals('function', type(ns.SetProcessingUnitGuid))
+              return checkFunc(ns.SetProcessingUnitGuid)
             end,
             UnregisterUnitForWidgetUpdates = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.UnregisterUnitForWidgetUpdates))
                 return
               end
-              assertEquals('function', type(ns.UnregisterUnitForWidgetUpdates))
+              return checkFunc(ns.UnregisterUnitForWidgetUpdates)
             end,
           })
         end,
@@ -10191,10 +10207,10 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             SubmitBug = function()
-              assertEquals('function', type(ns.SubmitBug))
+              return checkFunc(ns.SubmitBug)
             end,
             SubmitSuggestion = function()
-              assertEquals('function', type(ns.SubmitSuggestion))
+              return checkFunc(ns.SubmitSuggestion)
             end,
           })
         end,
@@ -10204,7 +10220,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetGxAdapterInfo = function()
-              assertEquals('function', type(ns.GetGxAdapterInfo))
+              return checkFunc(ns.GetGxAdapterInfo)
             end,
           })
         end,
@@ -10218,16 +10234,16 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             FindBestUniqueVignette = function()
-              assertEquals('function', type(ns.FindBestUniqueVignette))
+              return checkFunc(ns.FindBestUniqueVignette)
             end,
             GetVignetteInfo = function()
-              assertEquals('function', type(ns.GetVignetteInfo))
+              return checkFunc(ns.GetVignetteInfo)
             end,
             GetVignettePosition = function()
-              assertEquals('function', type(ns.GetVignettePosition))
+              return checkFunc(ns.GetVignettePosition)
             end,
             GetVignettes = function()
-              assertEquals('function', type(ns.GetVignettes))
+              return checkFunc(ns.GetVignettes)
             end,
           })
         end,
@@ -10237,236 +10253,236 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             ActivateChannel = function()
-              assertEquals('function', type(ns.ActivateChannel))
+              return checkFunc(ns.ActivateChannel)
             end,
             ActivateChannelTranscription = function()
-              assertEquals('function', type(ns.ActivateChannelTranscription))
+              return checkFunc(ns.ActivateChannelTranscription)
             end,
             BeginLocalCapture = function()
-              assertEquals('function', type(ns.BeginLocalCapture))
+              return checkFunc(ns.BeginLocalCapture)
             end,
             CanPlayerUseVoiceChat = function()
-              assertEquals('function', type(ns.CanPlayerUseVoiceChat))
+              return checkFunc(ns.CanPlayerUseVoiceChat)
             end,
             CreateChannel = function()
-              assertEquals('function', type(ns.CreateChannel))
+              return checkFunc(ns.CreateChannel)
             end,
             DeactivateChannel = function()
-              assertEquals('function', type(ns.DeactivateChannel))
+              return checkFunc(ns.DeactivateChannel)
             end,
             DeactivateChannelTranscription = function()
-              assertEquals('function', type(ns.DeactivateChannelTranscription))
+              return checkFunc(ns.DeactivateChannelTranscription)
             end,
             EndLocalCapture = function()
-              assertEquals('function', type(ns.EndLocalCapture))
+              return checkFunc(ns.EndLocalCapture)
             end,
             GetActiveChannelID = function()
-              assertEquals('function', type(ns.GetActiveChannelID))
+              return checkFunc(ns.GetActiveChannelID)
             end,
             GetActiveChannelType = function()
-              assertEquals('function', type(ns.GetActiveChannelType))
+              return checkFunc(ns.GetActiveChannelType)
             end,
             GetAvailableInputDevices = function()
-              assertEquals('function', type(ns.GetAvailableInputDevices))
+              return checkFunc(ns.GetAvailableInputDevices)
             end,
             GetAvailableOutputDevices = function()
-              assertEquals('function', type(ns.GetAvailableOutputDevices))
+              return checkFunc(ns.GetAvailableOutputDevices)
             end,
             GetChannel = function()
-              assertEquals('function', type(ns.GetChannel))
+              return checkFunc(ns.GetChannel)
             end,
             GetChannelForChannelType = function()
-              assertEquals('function', type(ns.GetChannelForChannelType))
+              return checkFunc(ns.GetChannelForChannelType)
             end,
             GetChannelForCommunityStream = function()
-              assertEquals('function', type(ns.GetChannelForCommunityStream))
+              return checkFunc(ns.GetChannelForCommunityStream)
             end,
             GetCommunicationMode = function()
-              assertEquals('function', type(ns.GetCommunicationMode))
+              return checkFunc(ns.GetCommunicationMode)
             end,
             GetCurrentVoiceChatConnectionStatusCode = function()
-              assertEquals('function', type(ns.GetCurrentVoiceChatConnectionStatusCode))
+              return checkFunc(ns.GetCurrentVoiceChatConnectionStatusCode)
             end,
             GetInputVolume = function()
-              assertEquals('function', type(ns.GetInputVolume))
+              return checkFunc(ns.GetInputVolume)
             end,
             GetJoinClubVoiceChannelError = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetJoinClubVoiceChannelError))
                 return
               end
-              assertEquals('function', type(ns.GetJoinClubVoiceChannelError))
+              return checkFunc(ns.GetJoinClubVoiceChannelError)
             end,
             GetLocalPlayerActiveChannelMemberInfo = function()
-              assertEquals('function', type(ns.GetLocalPlayerActiveChannelMemberInfo))
+              return checkFunc(ns.GetLocalPlayerActiveChannelMemberInfo)
             end,
             GetLocalPlayerMemberID = function()
-              assertEquals('function', type(ns.GetLocalPlayerMemberID))
+              return checkFunc(ns.GetLocalPlayerMemberID)
             end,
             GetMasterVolumeScale = function()
-              assertEquals('function', type(ns.GetMasterVolumeScale))
+              return checkFunc(ns.GetMasterVolumeScale)
             end,
             GetMemberGUID = function()
-              assertEquals('function', type(ns.GetMemberGUID))
+              return checkFunc(ns.GetMemberGUID)
             end,
             GetMemberID = function()
-              assertEquals('function', type(ns.GetMemberID))
+              return checkFunc(ns.GetMemberID)
             end,
             GetMemberInfo = function()
-              assertEquals('function', type(ns.GetMemberInfo))
+              return checkFunc(ns.GetMemberInfo)
             end,
             GetMemberName = function()
-              assertEquals('function', type(ns.GetMemberName))
+              return checkFunc(ns.GetMemberName)
             end,
             GetMemberVolume = function()
-              assertEquals('function', type(ns.GetMemberVolume))
+              return checkFunc(ns.GetMemberVolume)
             end,
             GetOutputVolume = function()
-              assertEquals('function', type(ns.GetOutputVolume))
+              return checkFunc(ns.GetOutputVolume)
             end,
             GetPTTButtonPressedState = function()
-              assertEquals('function', type(ns.GetPTTButtonPressedState))
+              return checkFunc(ns.GetPTTButtonPressedState)
             end,
             GetProcesses = function()
-              assertEquals('function', type(ns.GetProcesses))
+              return checkFunc(ns.GetProcesses)
             end,
             GetPushToTalkBinding = function()
-              assertEquals('function', type(ns.GetPushToTalkBinding))
+              return checkFunc(ns.GetPushToTalkBinding)
             end,
             GetRemoteTtsVoices = function()
-              assertEquals('function', type(ns.GetRemoteTtsVoices))
+              return checkFunc(ns.GetRemoteTtsVoices)
             end,
             GetTtsVoices = function()
-              assertEquals('function', type(ns.GetTtsVoices))
+              return checkFunc(ns.GetTtsVoices)
             end,
             GetVADSensitivity = function()
-              assertEquals('function', type(ns.GetVADSensitivity))
+              return checkFunc(ns.GetVADSensitivity)
             end,
             IsChannelJoinPending = function()
-              assertEquals('function', type(ns.IsChannelJoinPending))
+              return checkFunc(ns.IsChannelJoinPending)
             end,
             IsDeafened = function()
-              assertEquals('function', type(ns.IsDeafened))
+              return checkFunc(ns.IsDeafened)
             end,
             IsEnabled = function()
-              assertEquals('function', type(ns.IsEnabled))
+              return checkFunc(ns.IsEnabled)
             end,
             IsLoggedIn = function()
-              assertEquals('function', type(ns.IsLoggedIn))
+              return checkFunc(ns.IsLoggedIn)
             end,
             IsMemberLocalPlayer = function()
-              assertEquals('function', type(ns.IsMemberLocalPlayer))
+              return checkFunc(ns.IsMemberLocalPlayer)
             end,
             IsMemberMuted = function()
-              assertEquals('function', type(ns.IsMemberMuted))
+              return checkFunc(ns.IsMemberMuted)
             end,
             IsMemberMutedForAll = function()
-              assertEquals('function', type(ns.IsMemberMutedForAll))
+              return checkFunc(ns.IsMemberMutedForAll)
             end,
             IsMemberSilenced = function()
-              assertEquals('function', type(ns.IsMemberSilenced))
+              return checkFunc(ns.IsMemberSilenced)
             end,
             IsMuted = function()
-              assertEquals('function', type(ns.IsMuted))
+              return checkFunc(ns.IsMuted)
             end,
             IsParentalDisabled = function()
-              assertEquals('function', type(ns.IsParentalDisabled))
+              return checkFunc(ns.IsParentalDisabled)
             end,
             IsParentalMuted = function()
-              assertEquals('function', type(ns.IsParentalMuted))
+              return checkFunc(ns.IsParentalMuted)
             end,
             IsPlayerUsingVoice = function()
-              assertEquals('function', type(ns.IsPlayerUsingVoice))
+              return checkFunc(ns.IsPlayerUsingVoice)
             end,
             IsSilenced = function()
-              assertEquals('function', type(ns.IsSilenced))
+              return checkFunc(ns.IsSilenced)
             end,
             IsSpeakForMeActive = function()
-              assertEquals('function', type(ns.IsSpeakForMeActive))
+              return checkFunc(ns.IsSpeakForMeActive)
             end,
             IsSpeakForMeAllowed = function()
-              assertEquals('function', type(ns.IsSpeakForMeAllowed))
+              return checkFunc(ns.IsSpeakForMeAllowed)
             end,
             IsTranscriptionAllowed = function()
-              assertEquals('function', type(ns.IsTranscriptionAllowed))
+              return checkFunc(ns.IsTranscriptionAllowed)
             end,
             LeaveChannel = function()
-              assertEquals('function', type(ns.LeaveChannel))
+              return checkFunc(ns.LeaveChannel)
             end,
             Login = function()
-              assertEquals('function', type(ns.Login))
+              return checkFunc(ns.Login)
             end,
             Logout = function()
-              assertEquals('function', type(ns.Logout))
+              return checkFunc(ns.Logout)
             end,
             MarkChannelsDiscovered = function()
-              assertEquals('function', type(ns.MarkChannelsDiscovered))
+              return checkFunc(ns.MarkChannelsDiscovered)
             end,
             RequestJoinAndActivateCommunityStreamChannel = function()
-              assertEquals('function', type(ns.RequestJoinAndActivateCommunityStreamChannel))
+              return checkFunc(ns.RequestJoinAndActivateCommunityStreamChannel)
             end,
             RequestJoinChannelByChannelType = function()
-              assertEquals('function', type(ns.RequestJoinChannelByChannelType))
+              return checkFunc(ns.RequestJoinChannelByChannelType)
             end,
             SetCommunicationMode = function()
-              assertEquals('function', type(ns.SetCommunicationMode))
+              return checkFunc(ns.SetCommunicationMode)
             end,
             SetDeafened = function()
-              assertEquals('function', type(ns.SetDeafened))
+              return checkFunc(ns.SetDeafened)
             end,
             SetInputDevice = function()
-              assertEquals('function', type(ns.SetInputDevice))
+              return checkFunc(ns.SetInputDevice)
             end,
             SetInputVolume = function()
-              assertEquals('function', type(ns.SetInputVolume))
+              return checkFunc(ns.SetInputVolume)
             end,
             SetMasterVolumeScale = function()
-              assertEquals('function', type(ns.SetMasterVolumeScale))
+              return checkFunc(ns.SetMasterVolumeScale)
             end,
             SetMemberMuted = function()
-              assertEquals('function', type(ns.SetMemberMuted))
+              return checkFunc(ns.SetMemberMuted)
             end,
             SetMemberVolume = function()
-              assertEquals('function', type(ns.SetMemberVolume))
+              return checkFunc(ns.SetMemberVolume)
             end,
             SetMuted = function()
-              assertEquals('function', type(ns.SetMuted))
+              return checkFunc(ns.SetMuted)
             end,
             SetOutputDevice = function()
-              assertEquals('function', type(ns.SetOutputDevice))
+              return checkFunc(ns.SetOutputDevice)
             end,
             SetOutputVolume = function()
-              assertEquals('function', type(ns.SetOutputVolume))
+              return checkFunc(ns.SetOutputVolume)
             end,
             SetPortraitTexture = function()
-              assertEquals('function', type(ns.SetPortraitTexture))
+              return checkFunc(ns.SetPortraitTexture)
             end,
             SetPushToTalkBinding = function()
-              assertEquals('function', type(ns.SetPushToTalkBinding))
+              return checkFunc(ns.SetPushToTalkBinding)
             end,
             SetVADSensitivity = function()
-              assertEquals('function', type(ns.SetVADSensitivity))
+              return checkFunc(ns.SetVADSensitivity)
             end,
             ShouldDiscoverChannels = function()
-              assertEquals('function', type(ns.ShouldDiscoverChannels))
+              return checkFunc(ns.ShouldDiscoverChannels)
             end,
             SpeakRemoteTextSample = function()
-              assertEquals('function', type(ns.SpeakRemoteTextSample))
+              return checkFunc(ns.SpeakRemoteTextSample)
             end,
             SpeakText = function()
-              assertEquals('function', type(ns.SpeakText))
+              return checkFunc(ns.SpeakText)
             end,
             StopSpeakingText = function()
-              assertEquals('function', type(ns.StopSpeakingText))
+              return checkFunc(ns.StopSpeakingText)
             end,
             ToggleDeafened = function()
-              assertEquals('function', type(ns.ToggleDeafened))
+              return checkFunc(ns.ToggleDeafened)
             end,
             ToggleMemberMuted = function()
-              assertEquals('function', type(ns.ToggleMemberMuted))
+              return checkFunc(ns.ToggleMemberMuted)
             end,
             ToggleMuted = function()
-              assertEquals('function', type(ns.ToggleMuted))
+              return checkFunc(ns.ToggleMuted)
             end,
           })
         end,
@@ -10480,46 +10496,46 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AreRewardsForCurrentRewardPeriod = function()
-              assertEquals('function', type(ns.AreRewardsForCurrentRewardPeriod))
+              return checkFunc(ns.AreRewardsForCurrentRewardPeriod)
             end,
             CanClaimRewards = function()
-              assertEquals('function', type(ns.CanClaimRewards))
+              return checkFunc(ns.CanClaimRewards)
             end,
             ClaimReward = function()
-              assertEquals('function', type(ns.ClaimReward))
+              return checkFunc(ns.ClaimReward)
             end,
             CloseInteraction = function()
-              assertEquals('function', type(ns.CloseInteraction))
+              return checkFunc(ns.CloseInteraction)
             end,
             GetActivities = function()
-              assertEquals('function', type(ns.GetActivities))
+              return checkFunc(ns.GetActivities)
             end,
             GetActivityEncounterInfo = function()
-              assertEquals('function', type(ns.GetActivityEncounterInfo))
+              return checkFunc(ns.GetActivityEncounterInfo)
             end,
             GetConquestWeeklyProgress = function()
-              assertEquals('function', type(ns.GetConquestWeeklyProgress))
+              return checkFunc(ns.GetConquestWeeklyProgress)
             end,
             GetExampleRewardItemHyperlinks = function()
-              assertEquals('function', type(ns.GetExampleRewardItemHyperlinks))
+              return checkFunc(ns.GetExampleRewardItemHyperlinks)
             end,
             GetItemHyperlink = function()
-              assertEquals('function', type(ns.GetItemHyperlink))
+              return checkFunc(ns.GetItemHyperlink)
             end,
             GetNextMythicPlusIncrease = function()
-              assertEquals('function', type(ns.GetNextMythicPlusIncrease))
+              return checkFunc(ns.GetNextMythicPlusIncrease)
             end,
             HasAvailableRewards = function()
-              assertEquals('function', type(ns.HasAvailableRewards))
+              return checkFunc(ns.HasAvailableRewards)
             end,
             HasGeneratedRewards = function()
-              assertEquals('function', type(ns.HasGeneratedRewards))
+              return checkFunc(ns.HasGeneratedRewards)
             end,
             HasInteraction = function()
-              assertEquals('function', type(ns.HasInteraction))
+              return checkFunc(ns.HasInteraction)
             end,
             OnUIInteract = function()
-              assertEquals('function', type(ns.OnUIInteract))
+              return checkFunc(ns.OnUIInteract)
             end,
           })
         end,
@@ -10529,13 +10545,13 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             IsFrameWidget = function()
-              assertEquals('function', type(ns.IsFrameWidget))
+              return checkFunc(ns.IsFrameWidget)
             end,
             IsRenderableWidget = function()
-              assertEquals('function', type(ns.IsRenderableWidget))
+              return checkFunc(ns.IsRenderableWidget)
             end,
             IsWidget = function()
-              assertEquals('function', type(ns.IsWidget))
+              return checkFunc(ns.IsWidget)
             end,
           })
         end,
@@ -10545,44 +10561,44 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             BuyToken = function()
-              assertEquals('function', type(ns.BuyToken))
+              return checkFunc(ns.BuyToken)
             end,
             GetCommerceSystemStatus = function()
-              assertEquals('function', type(ns.GetCommerceSystemStatus))
+              return checkFunc(ns.GetCommerceSystemStatus)
             end,
             GetCurrentMarketPrice = function()
-              assertEquals('function', type(ns.GetCurrentMarketPrice))
+              return checkFunc(ns.GetCurrentMarketPrice)
             end,
             GetGuaranteedPrice = function()
-              assertEquals('function', type(ns.GetGuaranteedPrice))
+              return checkFunc(ns.GetGuaranteedPrice)
             end,
             GetListedAuctionableTokenInfo = function()
-              assertEquals('function', type(ns.GetListedAuctionableTokenInfo))
+              return checkFunc(ns.GetListedAuctionableTokenInfo)
             end,
             GetNumListedAuctionableTokens = function()
-              assertEquals('function', type(ns.GetNumListedAuctionableTokens))
+              return checkFunc(ns.GetNumListedAuctionableTokens)
             end,
             IsAuctionableWowToken = function()
-              assertEquals('function', type(ns.IsAuctionableWowToken))
+              return checkFunc(ns.IsAuctionableWowToken)
             end,
             IsConsumableWowToken = function()
-              assertEquals('function', type(ns.IsConsumableWowToken))
+              return checkFunc(ns.IsConsumableWowToken)
             end,
             SellToken = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.SellToken))
                 return
               end
-              assertEquals('function', type(ns.SellToken))
+              return checkFunc(ns.SellToken)
             end,
             UpdateListedAuctionableTokens = function()
-              assertEquals('function', type(ns.UpdateListedAuctionableTokens))
+              return checkFunc(ns.UpdateListedAuctionableTokens)
             end,
             UpdateMarketPrice = function()
-              assertEquals('function', type(ns.UpdateMarketPrice))
+              return checkFunc(ns.UpdateMarketPrice)
             end,
             UpdateTokenCount = function()
-              assertEquals('function', type(ns.UpdateTokenCount))
+              return checkFunc(ns.UpdateTokenCount)
             end,
           })
         end,
@@ -10596,7 +10612,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             StartTokenSell = function()
-              assertEquals('function', type(ns.StartTokenSell))
+              return checkFunc(ns.StartTokenSell)
             end,
           })
         end,
@@ -10610,7 +10626,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetActiveAbilities = function()
-              assertEquals('function', type(ns.GetActiveAbilities))
+              return checkFunc(ns.GetActiveAbilities)
             end,
           })
         end,
@@ -10620,16 +10636,16 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetCharacterTemplateSetIndex = function()
-              assertEquals('function', type(ns.GetCharacterTemplateSetIndex))
+              return checkFunc(ns.GetCharacterTemplateSetIndex)
             end,
             IsEnabled = function()
-              assertEquals('function', type(ns.IsEnabled))
+              return checkFunc(ns.IsEnabled)
             end,
             ShutdownSession = function()
-              assertEquals('function', type(ns.ShutdownSession))
+              return checkFunc(ns.ShutdownSession)
             end,
             StartSession = function()
-              assertEquals('function', type(ns.StartSession))
+              return checkFunc(ns.StartSession)
             end,
           })
         end,

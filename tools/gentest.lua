@@ -156,6 +156,22 @@ function G.GeneratedTests()
         end
         return tests
       end
+      local function checkFunc(func)
+        assertEquals('function', type(func))
+        return {
+          getfenv = function()
+            assertEquals(_G, getfenv(func))
+          end,
+          setfenv = function()
+            assertEquals(
+              false,
+              pcall(function()
+                setfenv(func, _G)
+              end)
+            )
+          end,
+        }
+      end
       return {
 > for k, v in sorted(apiNamespaces) do
         $(k) = function()
@@ -177,7 +193,7 @@ function G.GeneratedTests()
                 return
               end
 > end
-              assertEquals('function', type(ns.$(mname)))
+              return checkFunc(ns.$(mname))
             end,
 > end
           })
