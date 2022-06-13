@@ -10277,6 +10277,31 @@ function G.GeneratedTests()
             end,
           })
         end,
+        bit = function()
+          local ns = _G.bit
+          assertEquals('table', type(ns))
+          assert(getmetatable(ns) == nil)
+          return mkTests(ns, {
+            band = function()
+              return checkCFunc(ns.band)
+            end,
+            bnot = function()
+              return checkCFunc(ns.bnot)
+            end,
+            bor = function()
+              return checkCFunc(ns.bor)
+            end,
+            bxor = function()
+              return checkCFunc(ns.bxor)
+            end,
+            lshift = function()
+              return checkCFunc(ns.lshift)
+            end,
+            rshift = function()
+              return checkCFunc(ns.rshift)
+            end,
+          })
+        end,
       }
     end,
     globalApis = function()

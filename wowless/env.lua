@@ -1,4 +1,3 @@
-local bitlib = require('bit')
 local ext = require('wowless.ext')
 local utf8 = require('lua-utf8')
 local util = require('wowless.util')
@@ -8,14 +7,6 @@ local function mkBaseEnv()
   return {
     abs = math.abs,
     assert = assert,
-    bit = {
-      band = bitlib.band,
-      bnot = bitlib.bnot,
-      bor = bitlib.bor,
-      bxor = bitlib.bxor,
-      lshift = bitlib.lshift,
-      rshift = bitlib.rshift,
-    },
     ceil = math.ceil,
     collectgarbage = collectgarbage,
     coroutine = {
