@@ -1,5 +1,6 @@
 read_globals = {
   'debug.gettime',
+  'debug.newcfunction',
   'forceinsecure',
   'issecure',
   'issecurevariable',
