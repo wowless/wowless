@@ -1,3 +1,9 @@
 ---
 name: IsPublicBuild
 status: unimplemented
+inputs:
+- {}
+outputs:
+- name: value
+  stub: true
+  type: boolean
