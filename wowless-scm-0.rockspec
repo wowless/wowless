@@ -18,7 +18,6 @@ dependencies = {
   'luadbd',
   'luaexpat',
   'luamagick',
-  'luautf8',
   'lua-path',
   'lua-resty-tsort',
   'lyaml',

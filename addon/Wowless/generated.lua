@@ -14852,6 +14852,24 @@ function G.GeneratedTests()
         setmetatable = function()
           return checkCFunc(_G.setmetatable)
         end,
+        strcmputf8i = function()
+          return checkCFunc(_G.strcmputf8i)
+        end,
+        strconcat = function()
+          return checkCFunc(_G.strconcat)
+        end,
+        strjoin = function()
+          return checkCFunc(_G.strjoin)
+        end,
+        strlenutf8 = function()
+          return checkCFunc(_G.strlenutf8)
+        end,
+        strsplit = function()
+          return checkCFunc(_G.strsplit)
+        end,
+        strtrim = function()
+          return checkCFunc(_G.strtrim)
+        end,
         tonumber = function()
           return checkCFunc(_G.tonumber)
         end,

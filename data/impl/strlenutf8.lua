@@ -1,0 +1,1 @@
+return strlenutf8(...)

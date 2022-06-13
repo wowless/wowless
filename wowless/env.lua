@@ -1,5 +1,4 @@
 local ext = require('wowless.ext')
-local utf8 = require('lua-utf8')
 local util = require('wowless.util')
 local Mixin = util.mixin
 
@@ -30,17 +29,12 @@ local function mkBaseEnv()
     sin = math.sin,
     sort = table.sort,
     strbyte = string.byte,
-    strcmputf8i = utf8.ncasecmp,
     strfind = string.find,
-    strjoin = util.strjoin,
     strlen = string.len,
-    strlenutf8 = utf8.len,
     strlower = string.lower,
     strmatch = string.match,
     strrep = string.rep,
-    strsplit = util.strsplit,
     strsub = string.sub,
-    strtrim = util.strtrim,
     strupper = string.upper,
     time = os.time,
     tinsert = table.insert,

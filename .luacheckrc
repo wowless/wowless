@@ -7,6 +7,12 @@ read_globals = {
   'loadstring_untainted',
   'scrub',
   'securecall',
+  'strcmputf8i',
+  'strconcat',
+  'strjoin',
+  'strlenutf8',
+  'strsplit',
+  'strtrim',
   'table.removemulti',
   'table.wipe',
 }
