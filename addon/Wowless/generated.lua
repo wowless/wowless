@@ -4,12 +4,32 @@ local GetObjectType = CreateFrame('Frame').GetObjectType
 function G.GeneratedTests()
   return {
     apiNamespaces = function()
+      local function isLuaTest(f)
+        return function()
+          assertEquals('function', type(f))
+          return {
+            env = function()
+              assertEquals(_G, getfenv(f))
+            end,
+            isLua = function()
+              setfenv(f, getfenv(f)) -- This taints, alas.
+            end,
+          }
+        end
+      end
+      local function mkTests(ns, tests)
+        for k, v in pairs(ns) do
+          -- Anything left over must be a FrameXML-defined function.
+          tests[k] = tests[k] or isLuaTest(v)
+        end
+        return tests
+      end
       return {
         C_AccountInfo = function()
           local ns = _G.C_AccountInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetIDFromBattleNetAccountGUID = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetIDFromBattleNetAccountGUID))
@@ -23,19 +43,13 @@ function G.GeneratedTests()
             IsGUIDRelatedToLocalAccount = function()
               assertEquals('function', type(ns.IsGUIDRelatedToLocalAccount))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_AchievementInfo = function()
           local ns = _G.C_AchievementInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetRewardItemID = function()
               assertEquals('function', type(ns.GetRewardItemID))
             end,
@@ -48,19 +62,13 @@ function G.GeneratedTests()
             SetPortraitTexture = function()
               assertEquals('function', type(ns.SetPortraitTexture))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ActionBar = function()
           local ns = _G.C_ActionBar
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             FindFlyoutActionButtons = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.FindFlyoutActionButtons))
@@ -139,13 +147,7 @@ function G.GeneratedTests()
             ToggleAutoCastPetAction = function()
               assertEquals('function', type(ns.ToggleAutoCastPetAction))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_AdventureJournal = function()
           local ns = _G.C_AdventureJournal
@@ -155,7 +157,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ActivateEntry = function()
               assertEquals('function', type(ns.ActivateEntry))
             end,
@@ -180,13 +182,7 @@ function G.GeneratedTests()
             UpdateSuggestions = function()
               assertEquals('function', type(ns.UpdateSuggestions))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_AdventureMap = function()
           local ns = _G.C_AdventureMap
@@ -196,7 +192,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             Close = function()
               assertEquals('function', type(ns.Close))
             end,
@@ -230,13 +226,7 @@ function G.GeneratedTests()
             StartQuest = function()
               assertEquals('function', type(ns.StartQuest))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_AlliedRaces = function()
           local ns = _G.C_AlliedRaces
@@ -246,7 +236,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ClearAlliedRaceDetailsGiver = function()
               assertEquals('function', type(ns.ClearAlliedRaceDetailsGiver))
             end,
@@ -256,13 +246,7 @@ function G.GeneratedTests()
             GetRaceInfoByID = function()
               assertEquals('function', type(ns.GetRaceInfoByID))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_AnimaDiversion = function()
           local ns = _G.C_AnimaDiversion
@@ -272,7 +256,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CloseUI = function()
               assertEquals('function', type(ns.CloseUI))
             end,
@@ -294,13 +278,7 @@ function G.GeneratedTests()
             SelectAnimaNode = function()
               assertEquals('function', type(ns.SelectAnimaNode))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ArdenwealdGardening = function()
           local ns = _G.C_ArdenwealdGardening
@@ -310,26 +288,20 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetGardenData = function()
               assertEquals('function', type(ns.GetGardenData))
             end,
             IsGardenAccessible = function()
               assertEquals('function', type(ns.IsGardenAccessible))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_AreaPoiInfo = function()
           local ns = _G.C_AreaPoiInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetAreaPOIForMap = function()
               assertEquals('function', type(ns.GetAreaPOIForMap))
             end,
@@ -353,13 +325,7 @@ function G.GeneratedTests()
             IsAreaPOITimed = function()
               assertEquals('function', type(ns.IsAreaPOITimed))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ArtifactUI = function()
           local ns = _G.C_ArtifactUI
@@ -369,7 +335,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AddPower = function()
               assertEquals('function', type(ns.AddPower))
             end,
@@ -553,13 +519,7 @@ function G.GeneratedTests()
             ShouldSuppressForgeRotation = function()
               assertEquals('function', type(ns.ShouldSuppressForgeRotation))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_AuctionHouse = function()
           local ns = _G.C_AuctionHouse
@@ -569,7 +529,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CalculateCommodityDeposit = function()
               assertEquals('function', type(ns.CalculateCommodityDeposit))
             end,
@@ -816,19 +776,13 @@ function G.GeneratedTests()
             StartCommoditiesPurchase = function()
               assertEquals('function', type(ns.StartCommoditiesPurchase))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_AzeriteEmpoweredItem = function()
           local ns = _G.C_AzeriteEmpoweredItem
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanSelectPower = function()
               assertEquals('function', type(ns.CanSelectPower))
             end,
@@ -886,19 +840,13 @@ function G.GeneratedTests()
             SetHasBeenViewed = function()
               assertEquals('function', type(ns.SetHasBeenViewed))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_AzeriteEssence = function()
           local ns = _G.C_AzeriteEssence
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ActivateEssence = function()
               assertEquals('function', type(ns.ActivateEssence))
             end,
@@ -962,19 +910,13 @@ function G.GeneratedTests()
             UnlockMilestone = function()
               assertEquals('function', type(ns.UnlockMilestone))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_AzeriteItem = function()
           local ns = _G.C_AzeriteItem
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             FindActiveAzeriteItem = function()
               assertEquals('function', type(ns.FindActiveAzeriteItem))
             end,
@@ -1002,13 +944,7 @@ function G.GeneratedTests()
             IsAzeriteItemEnabled = function()
               assertEquals('function', type(ns.IsAzeriteItemEnabled))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_BarberShop = function()
           local ns = _G.C_BarberShop
@@ -1018,7 +954,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ApplyCustomizationChoices = function()
               assertEquals('function', type(ns.ApplyCustomizationChoices))
             end,
@@ -1094,13 +1030,7 @@ function G.GeneratedTests()
             ZoomCamera = function()
               assertEquals('function', type(ns.ZoomCamera))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_BattleNet = function()
           local ns = _G.C_BattleNet
@@ -1110,7 +1040,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetAccountInfoByGUID = function()
               assertEquals('function', type(ns.GetAccountInfoByGUID))
             end,
@@ -1132,29 +1062,17 @@ function G.GeneratedTests()
             GetGameAccountInfoByID = function()
               assertEquals('function', type(ns.GetGameAccountInfoByID))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_BehavioralMessaging = function()
           local ns = _G.C_BehavioralMessaging
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             SendNotificationReceipt = function()
               assertEquals('function', type(ns.SendNotificationReceipt))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_BlackMarket = function()
           local ns = _G.C_BlackMarket
@@ -1164,7 +1082,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             Close = function()
               assertEquals('function', type(ns.Close))
             end,
@@ -1189,19 +1107,13 @@ function G.GeneratedTests()
             RequestItems = function()
               assertEquals('function', type(ns.RequestItems))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_CVar = function()
           local ns = _G.C_CVar
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetCVar = function()
               assertEquals('function', type(ns.GetCVar))
             end,
@@ -1226,19 +1138,13 @@ function G.GeneratedTests()
             SetCVarBitfield = function()
               assertEquals('function', type(ns.SetCVarBitfield))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Calendar = function()
           local ns = _G.C_Calendar
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AddEvent = function()
               assertEquals('function', type(ns.AddEvent))
             end,
@@ -1516,13 +1422,7 @@ function G.GeneratedTests()
             UpdateEvent = function()
               assertEquals('function', type(ns.UpdateEvent))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_CampaignInfo = function()
           local ns = _G.C_CampaignInfo
@@ -1532,7 +1432,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetAvailableCampaigns = function()
               assertEquals('function', type(ns.GetAvailableCampaigns))
             end,
@@ -1563,13 +1463,7 @@ function G.GeneratedTests()
             UsesNormalQuestIcons = function()
               assertEquals('function', type(ns.UsesNormalQuestIcons))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ChallengeMode = function()
           local ns = _G.C_ChallengeMode
@@ -1579,7 +1473,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanUseKeystoneInCurrentMap = function()
               assertEquals('function', type(ns.CanUseKeystoneInCurrentMap))
             end,
@@ -1661,19 +1555,13 @@ function G.GeneratedTests()
             StartChallengeMode = function()
               assertEquals('function', type(ns.StartChallengeMode))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_CharacterServices = function()
           local ns = _G.C_CharacterServices
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AssignPCTDistribution = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.AssignPCTDistribution))
@@ -1746,51 +1634,33 @@ function G.GeneratedTests()
             SetAutomaticBoostCharacter = function()
               assertEquals('function', type(ns.SetAutomaticBoostCharacter))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_CharacterServicesPublic = function()
           local ns = _G.C_CharacterServicesPublic
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ShouldSeeControlPopup = function()
               assertEquals('function', type(ns.ShouldSeeControlPopup))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ChatBubbles = function()
           local ns = _G.C_ChatBubbles
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetAllChatBubbles = function()
               assertEquals('function', type(ns.GetAllChatBubbles))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ChatInfo = function()
           local ns = _G.C_ChatInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanReportPlayer = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanReportPlayer))
@@ -1938,13 +1808,7 @@ function G.GeneratedTests()
             SwapChatChannelsByChannelIndex = function()
               assertEquals('function', type(ns.SwapChatChannelsByChannelIndex))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ChromieTime = function()
           local ns = _G.C_ChromieTime
@@ -1954,7 +1818,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CloseUI = function()
               assertEquals('function', type(ns.CloseUI))
             end,
@@ -1967,13 +1831,7 @@ function G.GeneratedTests()
             SelectChromieTimeOption = function()
               assertEquals('function', type(ns.SelectChromieTimeOption))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ClassColor = function()
           local ns = _G.C_ClassColor
@@ -1983,17 +1841,11 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetClassColor = function()
               assertEquals('function', type(ns.GetClassColor))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ClassTrial = function()
           local ns = _G.C_ClassTrial
@@ -2003,20 +1855,14 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetClassTrialLogoutTimeSeconds = function()
               assertEquals('function', type(ns.GetClassTrialLogoutTimeSeconds))
             end,
             IsClassTrialCharacter = function()
               assertEquals('function', type(ns.IsClassTrialCharacter))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ClickBindings = function()
           local ns = _G.C_ClickBindings
@@ -2026,7 +1872,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanSpellBeClickBound = function()
               assertEquals('function', type(ns.CanSpellBeClickBound))
             end,
@@ -2060,19 +1906,13 @@ function G.GeneratedTests()
             SetTutorialShown = function()
               assertEquals('function', type(ns.SetTutorialShown))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Club = function()
           local ns = _G.C_Club
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AcceptInvitation = function()
               assertEquals('function', type(ns.AcceptInvitation))
             end,
@@ -2338,13 +2178,7 @@ function G.GeneratedTests()
             ValidateText = function()
               assertEquals('function', type(ns.ValidateText))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ClubFinder = function()
           local ns = _G.C_ClubFinder
@@ -2354,7 +2188,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ApplicantAcceptClubInvite = function()
               assertEquals('function', type(ns.ApplicantAcceptClubInvite))
             end,
@@ -2514,19 +2348,13 @@ function G.GeneratedTests()
             ShouldShowClubFinder = function()
               assertEquals('function', type(ns.ShouldShowClubFinder))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Commentator = function()
           local ns = _G.C_Commentator
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AddPlayerOverrideName = function()
               assertEquals('function', type(ns.AddPlayerOverrideName))
             end,
@@ -2926,19 +2754,13 @@ function G.GeneratedTests()
             ZoomOut = function()
               assertEquals('function', type(ns.ZoomOut))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Console = function()
           local ns = _G.C_Console
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetAllCommands = function()
               assertEquals('function', type(ns.GetAllCommands))
             end,
@@ -2954,13 +2776,7 @@ function G.GeneratedTests()
             SetFontHeight = function()
               assertEquals('function', type(ns.SetFontHeight))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ContributionCollector = function()
           local ns = _G.C_ContributionCollector
@@ -2970,7 +2786,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             Close = function()
               assertEquals('function', type(ns.Close))
             end,
@@ -3025,13 +2841,7 @@ function G.GeneratedTests()
             IsAwaitingRewardQuestData = function()
               assertEquals('function', type(ns.IsAwaitingRewardQuestData))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_CovenantCallings = function()
           local ns = _G.C_CovenantCallings
@@ -3041,20 +2851,14 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AreCallingsUnlocked = function()
               assertEquals('function', type(ns.AreCallingsUnlocked))
             end,
             RequestCallings = function()
               assertEquals('function', type(ns.RequestCallings))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_CovenantPreview = function()
           local ns = _G.C_CovenantPreview
@@ -3064,20 +2868,14 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CloseFromUI = function()
               assertEquals('function', type(ns.CloseFromUI))
             end,
             GetCovenantInfoForPlayerChoiceResponseID = function()
               assertEquals('function', type(ns.GetCovenantInfoForPlayerChoiceResponseID))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_CovenantSanctumUI = function()
           local ns = _G.C_CovenantSanctumUI
@@ -3087,7 +2885,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanAccessReservoir = function()
               assertEquals('function', type(ns.CanAccessReservoir))
             end,
@@ -3136,13 +2934,7 @@ function G.GeneratedTests()
             RequestCatchUpState = function()
               assertEquals('function', type(ns.RequestCatchUpState))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Covenants = function()
           local ns = _G.C_Covenants
@@ -3152,7 +2944,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetActiveCovenantID = function()
               assertEquals('function', type(ns.GetActiveCovenantID))
             end,
@@ -3162,19 +2954,13 @@ function G.GeneratedTests()
             GetCovenantIDs = function()
               assertEquals('function', type(ns.GetCovenantIDs))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_CreatureInfo = function()
           local ns = _G.C_CreatureInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetClassInfo = function()
               assertEquals('function', type(ns.GetClassInfo))
             end,
@@ -3184,19 +2970,13 @@ function G.GeneratedTests()
             GetRaceInfo = function()
               assertEquals('function', type(ns.GetRaceInfo))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_CurrencyInfo = function()
           local ns = _G.C_CurrencyInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             DoesWarModeBonusApply = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.DoesWarModeBonusApply))
@@ -3322,19 +3102,13 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.SetCurrencyUnused))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Cursor = function()
           local ns = _G.C_Cursor
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             DropCursorCommunitiesStream = function()
               if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.DropCursorCommunitiesStream))
@@ -3359,19 +3133,13 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.SetCursorCommunitiesStream))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_DateAndTime = function()
           local ns = _G.C_DateAndTime
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AdjustTimeByDays = function()
               assertEquals('function', type(ns.AdjustTimeByDays))
             end,
@@ -3396,14 +3164,13 @@ function G.GeneratedTests()
             GetServerTimeLocal = function()
               assertEquals('function', type(ns.GetServerTimeLocal))
             end,
-          }
-          return tests
+          })
         end,
         C_DeathInfo = function()
           local ns = _G.C_DeathInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetCorpseMapPosition = function()
               assertEquals('function', type(ns.GetCorpseMapPosition))
             end,
@@ -3419,13 +3186,7 @@ function G.GeneratedTests()
             UseSelfResurrectOption = function()
               assertEquals('function', type(ns.UseSelfResurrectOption))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_EncounterJournal = function()
           local ns = _G.C_EncounterJournal
@@ -3435,7 +3196,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetDungeonEntrancesForMap = function()
               assertEquals('function', type(ns.GetDungeonEntrancesForMap))
             end,
@@ -3475,19 +3236,13 @@ function G.GeneratedTests()
             SetSlotFilter = function()
               assertEquals('function', type(ns.SetSlotFilter))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_EquipmentSet = function()
           local ns = _G.C_EquipmentSet
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AssignSpecToEquipmentSet = function()
               assertEquals('function', type(ns.AssignSpecToEquipmentSet))
             end,
@@ -3557,13 +3312,7 @@ function G.GeneratedTests()
             UseEquipmentSet = function()
               assertEquals('function', type(ns.UseEquipmentSet))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_EventToastManager = function()
           local ns = _G.C_EventToastManager
@@ -3573,7 +3322,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetLevelUpDisplayToastsFromLevel = function()
               assertEquals('function', type(ns.GetLevelUpDisplayToastsFromLevel))
             end,
@@ -3583,13 +3332,7 @@ function G.GeneratedTests()
             RemoveCurrentToast = function()
               assertEquals('function', type(ns.RemoveCurrentToast))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_FogOfWar = function()
           local ns = _G.C_FogOfWar
@@ -3599,20 +3342,14 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetFogOfWarForMap = function()
               assertEquals('function', type(ns.GetFogOfWarForMap))
             end,
             GetFogOfWarInfo = function()
               assertEquals('function', type(ns.GetFogOfWarInfo))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_FrameManager = function()
           local ns = _G.C_FrameManager
@@ -3622,23 +3359,17 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetFrameVisibilityState = function()
               assertEquals('function', type(ns.GetFrameVisibilityState))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_FriendList = function()
           local ns = _G.C_FriendList
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AddFriend = function()
               assertEquals('function', type(ns.AddFriend))
             end,
@@ -3733,19 +3464,13 @@ function G.GeneratedTests()
             SortWho = function()
               assertEquals('function', type(ns.SortWho))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_GamePad = function()
           local ns = _G.C_GamePad
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AddSDLMapping = function()
               assertEquals('function', type(ns.AddSDLMapping))
             end,
@@ -3819,13 +3544,7 @@ function G.GeneratedTests()
             StopVibration = function()
               assertEquals('function', type(ns.StopVibration))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Garrison = function()
           local ns = _G.C_Garrison
@@ -3835,7 +3554,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AddFollowerToMission = function()
               assertEquals('function', type(ns.AddFollowerToMission))
             end,
@@ -4514,19 +4233,13 @@ function G.GeneratedTests()
             UpgradeGarrison = function()
               assertEquals('function', type(ns.UpgradeGarrison))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_GossipInfo = function()
           local ns = _G.C_GossipInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CloseGossip = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CloseGossip))
@@ -4634,19 +4347,13 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.SelectOption))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_GuildInfo = function()
           local ns = _G.C_GuildInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanEditOfficerNote = function()
               assertEquals('function', type(ns.CanEditOfficerNote))
             end,
@@ -4700,13 +4407,7 @@ function G.GeneratedTests()
             SetNote = function()
               assertEquals('function', type(ns.SetNote))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Heirloom = function()
           local ns = _G.C_Heirloom
@@ -4716,7 +4417,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanHeirloomUpgradeFromPending = function()
               assertEquals('function', type(ns.CanHeirloomUpgradeFromPending))
             end,
@@ -4789,13 +4490,7 @@ function G.GeneratedTests()
             UpgradeHeirloom = function()
               assertEquals('function', type(ns.UpgradeHeirloom))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_HeirloomInfo = function()
           local ns = _G.C_HeirloomInfo
@@ -4805,7 +4500,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AreAllCollectionFiltersChecked = function()
               assertEquals('function', type(ns.AreAllCollectionFiltersChecked))
             end,
@@ -4827,13 +4522,7 @@ function G.GeneratedTests()
             SetDefaultFilters = function()
               assertEquals('function', type(ns.SetDefaultFilters))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_IncomingSummon = function()
           local ns = _G.C_IncomingSummon
@@ -4843,20 +4532,14 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             HasIncomingSummon = function()
               assertEquals('function', type(ns.HasIncomingSummon))
             end,
             IncomingSummonStatus = function()
               assertEquals('function', type(ns.IncomingSummonStatus))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_InvasionInfo = function()
           local ns = _G.C_InvasionInfo
@@ -4866,7 +4549,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AreInvasionsAvailable = function()
               assertEquals('function', type(ns.AreInvasionsAvailable))
             end,
@@ -4879,13 +4562,7 @@ function G.GeneratedTests()
             GetInvasionTimeLeft = function()
               assertEquals('function', type(ns.GetInvasionTimeLeft))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_IslandsQueue = function()
           local ns = _G.C_IslandsQueue
@@ -4895,7 +4572,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CloseIslandsQueueScreen = function()
               assertEquals('function', type(ns.CloseIslandsQueueScreen))
             end,
@@ -4914,19 +4591,13 @@ function G.GeneratedTests()
             RequestPreloadRewardData = function()
               assertEquals('function', type(ns.RequestPreloadRewardData))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Item = function()
           local ns = _G.C_Item
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanItemTransmogAppearance = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanItemTransmogAppearance))
@@ -5135,13 +4806,7 @@ function G.GeneratedTests()
             UnlockItemByGUID = function()
               assertEquals('function', type(ns.UnlockItemByGUID))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ItemInteraction = function()
           local ns = _G.C_ItemInteraction
@@ -5151,7 +4816,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ClearPendingItem = function()
               assertEquals('function', type(ns.ClearPendingItem))
             end,
@@ -5188,35 +4853,23 @@ function G.GeneratedTests()
             SetPendingItem = function()
               assertEquals('function', type(ns.SetPendingItem))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ItemSocketInfo = function()
           local ns = _G.C_ItemSocketInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CompleteSocketing = function()
               assertEquals('function', type(ns.CompleteSocketing))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ItemUpgrade = function()
           local ns = _G.C_ItemUpgrade
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanUpgradeItem = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanUpgradeItem))
@@ -5304,35 +4957,23 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.UpgradeItem))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_KeyBindings = function()
           local ns = _G.C_KeyBindings
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetCustomBindingType = function()
               assertEquals('function', type(ns.GetCustomBindingType))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_LFGInfo = function()
           local ns = _G.C_LFGInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanPlayerUseGroupFinder = function()
               assertEquals('function', type(ns.CanPlayerUseGroupFinder))
             end,
@@ -5370,19 +5011,13 @@ function G.GeneratedTests()
             HideNameFromUI = function()
               assertEquals('function', type(ns.HideNameFromUI))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_LFGList = function()
           local ns = _G.C_LFGList
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AcceptInvite = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.AcceptInvite))
@@ -5808,13 +5443,7 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.ValidateRequiredPvpRatingForActivity))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_LegendaryCrafting = function()
           local ns = _G.C_LegendaryCrafting
@@ -5824,7 +5453,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CloseRuneforgeInteraction = function()
               assertEquals('function', type(ns.CloseRuneforgeInteraction))
             end,
@@ -5888,13 +5517,7 @@ function G.GeneratedTests()
             UpgradeRuneforgeLegendary = function()
               assertEquals('function', type(ns.UpgradeRuneforgeLegendary))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_LevelLink = function()
           local ns = _G.C_LevelLink
@@ -5904,20 +5527,14 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             IsActionLocked = function()
               assertEquals('function', type(ns.IsActionLocked))
             end,
             IsSpellLocked = function()
               assertEquals('function', type(ns.IsSpellLocked))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_LevelSquish = function()
           local ns = _G.C_LevelSquish
@@ -5927,42 +5544,30 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ConvertFollowerLevel = function()
               assertEquals('function', type(ns.ConvertFollowerLevel))
             end,
             ConvertPlayerLevel = function()
               assertEquals('function', type(ns.ConvertPlayerLevel))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Loot = function()
           local ns = _G.C_Loot
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             IsLegacyLootModeEnabled = function()
               assertEquals('function', type(ns.IsLegacyLootModeEnabled))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_LootHistory = function()
           local ns = _G.C_LootHistory
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanMasterLoot = function()
               assertEquals('function', type(ns.CanMasterLoot))
             end,
@@ -5984,13 +5589,7 @@ function G.GeneratedTests()
             SetExpiration = function()
               assertEquals('function', type(ns.SetExpiration))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_LootJournal = function()
           local ns = _G.C_LootJournal
@@ -6000,20 +5599,14 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetItemSetItems = function()
               assertEquals('function', type(ns.GetItemSetItems))
             end,
             GetItemSets = function()
               assertEquals('function', type(ns.GetItemSets))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_LoreText = function()
           local ns = _G.C_LoreText
@@ -6023,23 +5616,17 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             RequestLoreTextForCampaignID = function()
               assertEquals('function', type(ns.RequestLoreTextForCampaignID))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_LossOfControl = function()
           local ns = _G.C_LossOfControl
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetActiveLossOfControlData = function()
               assertEquals('function', type(ns.GetActiveLossOfControlData))
             end,
@@ -6052,19 +5639,13 @@ function G.GeneratedTests()
             GetActiveLossOfControlDataCountByUnit = function()
               assertEquals('function', type(ns.GetActiveLossOfControlDataCountByUnit))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Mail = function()
           local ns = _G.C_Mail
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanCheckInbox = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanCheckInbox))
@@ -6078,19 +5659,13 @@ function G.GeneratedTests()
             IsCommandPending = function()
               assertEquals('function', type(ns.IsCommandPending))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Map = function()
           local ns = _G.C_Map
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanSetUserWaypointOnMap = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanSetUserWaypointOnMap))
@@ -6254,38 +5829,26 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.SetUserWaypoint))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_MapExplorationInfo = function()
           local ns = _G.C_MapExplorationInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetExploredAreaIDsAtPosition = function()
               assertEquals('function', type(ns.GetExploredAreaIDsAtPosition))
             end,
             GetExploredMapTextures = function()
               assertEquals('function', type(ns.GetExploredMapTextures))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_MerchantFrame = function()
           local ns = _G.C_MerchantFrame
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetBuybackItemID = function()
               assertEquals('function', type(ns.GetBuybackItemID))
             end,
@@ -6296,13 +5859,7 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.IsMerchantItemRefundable))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Minimap = function()
           local ns = _G.C_Minimap
@@ -6312,7 +5869,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetDrawGroundTextures = function()
               assertEquals('function', type(ns.GetDrawGroundTextures))
             end,
@@ -6334,19 +5891,13 @@ function G.GeneratedTests()
             ShouldUseHybridMinimap = function()
               assertEquals('function', type(ns.ShouldUseHybridMinimap))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ModelInfo = function()
           local ns = _G.C_ModelInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AddActiveModelScene = function()
               assertEquals('function', type(ns.AddActiveModelScene))
             end,
@@ -6371,13 +5922,7 @@ function G.GeneratedTests()
             GetModelSceneInfoByID = function()
               assertEquals('function', type(ns.GetModelSceneInfoByID))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ModifiedInstance = function()
           local ns = _G.C_ModifiedInstance
@@ -6387,17 +5932,11 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetModifiedInstanceInfoFromMapID = function()
               assertEquals('function', type(ns.GetModifiedInstanceInfoFromMapID))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_MountJournal = function()
           local ns = _G.C_MountJournal
@@ -6407,7 +5946,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ApplyMountEquipment = function()
               assertEquals('function', type(ns.ApplyMountEquipment))
             end,
@@ -6528,13 +6067,7 @@ function G.GeneratedTests()
             SummonByID = function()
               assertEquals('function', type(ns.SummonByID))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_MythicPlus = function()
           local ns = _G.C_MythicPlus
@@ -6544,7 +6077,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetCurrentAffixes = function()
               assertEquals('function', type(ns.GetCurrentAffixes))
             end,
@@ -6605,19 +6138,13 @@ function G.GeneratedTests()
             RequestRewards = function()
               assertEquals('function', type(ns.RequestRewards))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_NamePlate = function()
           local ns = _G.C_NamePlate
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetNamePlateEnemyClickThrough = function()
               assertEquals('function', type(ns.GetNamePlateEnemyClickThrough))
             end,
@@ -6687,13 +6214,7 @@ function G.GeneratedTests()
             SetTargetClampingInsets = function()
               assertEquals('function', type(ns.SetTargetClampingInsets))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Navigation = function()
           local ns = _G.C_Navigation
@@ -6703,7 +6224,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetDistance = function()
               assertEquals('function', type(ns.GetDistance))
             end,
@@ -6719,19 +6240,13 @@ function G.GeneratedTests()
             WasClampedToScreen = function()
               assertEquals('function', type(ns.WasClampedToScreen))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_NewItems = function()
           local ns = _G.C_NewItems
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ClearAll = function()
               assertEquals('function', type(ns.ClearAll))
             end,
@@ -6741,19 +6256,13 @@ function G.GeneratedTests()
             RemoveNewItem = function()
               assertEquals('function', type(ns.RemoveNewItem))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_PaperDollInfo = function()
           local ns = _G.C_PaperDollInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetArmorEffectiveness = function()
               assertEquals('function', type(ns.GetArmorEffectiveness))
             end,
@@ -6790,19 +6299,13 @@ function G.GeneratedTests()
             OffhandHasWeapon = function()
               assertEquals('function', type(ns.OffhandHasWeapon))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_PartyInfo = function()
           local ns = _G.C_PartyInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AllowedToDoPartyConversion = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.AllowedToDoPartyConversion))
@@ -6938,13 +6441,7 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.RequestInviteFromUnit))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_PartyPose = function()
           local ns = _G.C_PartyPose
@@ -6954,17 +6451,11 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetPartyPoseInfoByMapID = function()
               assertEquals('function', type(ns.GetPartyPoseInfoByMapID))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_PetBattles = function()
           local ns = _G.C_PetBattles
@@ -6974,7 +6465,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AcceptPVPDuel = function()
               assertEquals('function', type(ns.AcceptPVPDuel))
             end,
@@ -7143,13 +6634,7 @@ function G.GeneratedTests()
             UseTrap = function()
               assertEquals('function', type(ns.UseTrap))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_PetInfo = function()
           local ns = _G.C_PetInfo
@@ -7159,17 +6644,11 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetPetTamersForMap = function()
               assertEquals('function', type(ns.GetPetTamersForMap))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_PetJournal = function()
           local ns = _G.C_PetJournal
@@ -7179,7 +6658,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CagePetByID = function()
               assertEquals('function', type(ns.CagePetByID))
             end,
@@ -7387,13 +6866,7 @@ function G.GeneratedTests()
             SummonRandomPet = function()
               assertEquals('function', type(ns.SummonRandomPet))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_PlayerChoice = function()
           local ns = _G.C_PlayerChoice
@@ -7403,7 +6876,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetCurrentPlayerChoiceInfo = function()
               assertEquals('function', type(ns.GetCurrentPlayerChoiceInfo))
             end,
@@ -7434,19 +6907,13 @@ function G.GeneratedTests()
             SendPlayerChoiceResponse = function()
               assertEquals('function', type(ns.SendPlayerChoiceResponse))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_PlayerInfo = function()
           local ns = _G.C_PlayerInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanPlayerEnterChromieTime = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanPlayerEnterChromieTime))
@@ -7559,13 +7026,7 @@ function G.GeneratedTests()
             UnitIsSameServer = function()
               assertEquals('function', type(ns.UnitIsSameServer))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_PlayerMentorship = function()
           local ns = _G.C_PlayerMentorship
@@ -7575,7 +7036,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetMentorLevelRequirement = function()
               assertEquals('function', type(ns.GetMentorLevelRequirement))
             end,
@@ -7591,13 +7052,7 @@ function G.GeneratedTests()
             IsMentorRestricted = function()
               assertEquals('function', type(ns.IsMentorRestricted))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ProductChoice = function()
           local ns = _G.C_ProductChoice
@@ -7607,7 +7062,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetChoices = function()
               assertEquals('function', type(ns.GetChoices))
             end,
@@ -7620,19 +7075,13 @@ function G.GeneratedTests()
             MakeSelection = function()
               assertEquals('function', type(ns.MakeSelection))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_PvP = function()
           local ns = _G.C_PvP
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanDisplayDamage = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.CanDisplayDamage))
@@ -8121,13 +7570,7 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.ToggleWarMode))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_QuestLine = function()
           local ns = _G.C_QuestLine
@@ -8137,7 +7580,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetAvailableQuestLines = function()
               assertEquals('function', type(ns.GetAvailableQuestLines))
             end,
@@ -8153,19 +7596,13 @@ function G.GeneratedTests()
             RequestQuestLinesForMap = function()
               assertEquals('function', type(ns.RequestQuestLinesForMap))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_QuestLog = function()
           local ns = _G.C_QuestLog
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AbandonQuest = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.AbandonQuest))
@@ -8688,19 +8125,13 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.SortQuestWatches))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_QuestSession = function()
           local ns = _G.C_QuestSession
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanStart = function()
               assertEquals('function', type(ns.CanStart))
             end,
@@ -8743,29 +8174,17 @@ function G.GeneratedTests()
             SetQuestIsSuperTracked = function()
               assertEquals('function', type(ns.SetQuestIsSuperTracked))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_RaidLocks = function()
           local ns = _G.C_RaidLocks
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             IsEncounterComplete = function()
               assertEquals('function', type(ns.IsEncounterComplete))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_RecruitAFriend = function()
           local ns = _G.C_RecruitAFriend
@@ -8775,7 +8194,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ClaimActivityReward = function()
               assertEquals('function', type(ns.ClaimActivityReward))
             end,
@@ -8809,19 +8228,13 @@ function G.GeneratedTests()
             RequestUpdatedRecruitmentInfo = function()
               assertEquals('function', type(ns.RequestUpdatedRecruitmentInfo))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ReportSystem = function()
           local ns = _G.C_ReportSystem
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanReportPlayer = function()
               assertEquals('function', type(ns.CanReportPlayer))
             end,
@@ -8911,19 +8324,13 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.SetPendingReportTargetByGuid))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Reputation = function()
           local ns = _G.C_Reputation
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetFactionParagonInfo = function()
               assertEquals('function', type(ns.GetFactionParagonInfo))
             end,
@@ -8933,13 +8340,7 @@ function G.GeneratedTests()
             RequestFactionParagonPreloadRewardData = function()
               assertEquals('function', type(ns.RequestFactionParagonPreloadRewardData))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ResearchInfo = function()
           local ns = _G.C_ResearchInfo
@@ -8949,17 +8350,11 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetDigSitesForMap = function()
               assertEquals('function', type(ns.GetDigSitesForMap))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Scenario = function()
           local ns = _G.C_Scenario
@@ -8969,7 +8364,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetBonusStepRewardQuestID = function()
               assertEquals('function', type(ns.GetBonusStepRewardQuestID))
             end,
@@ -9006,13 +8401,7 @@ function G.GeneratedTests()
             TreatScenarioAsDungeon = function()
               assertEquals('function', type(ns.TreatScenarioAsDungeon))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ScenarioInfo = function()
           local ns = _G.C_ScenarioInfo
@@ -9022,7 +8411,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetJailersTowerTypeString = function()
               assertEquals('function', type(ns.GetJailersTowerTypeString))
             end,
@@ -9032,13 +8421,7 @@ function G.GeneratedTests()
             GetScenarioStepInfo = function()
               assertEquals('function', type(ns.GetScenarioStepInfo))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ScrappingMachineUI = function()
           local ns = _G.C_ScrappingMachineUI
@@ -9048,7 +8431,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CloseScrappingMachine = function()
               assertEquals('function', type(ns.CloseScrappingMachine))
             end,
@@ -9085,29 +8468,17 @@ function G.GeneratedTests()
             ValidateScrappingList = function()
               assertEquals('function', type(ns.ValidateScrappingList))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ScriptedAnimations = function()
           local ns = _G.C_ScriptedAnimations
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetAllScriptedAnimationEffects = function()
               assertEquals('function', type(ns.GetAllScriptedAnimationEffects))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Seasons = function()
           local ns = _G.C_Seasons
@@ -9117,26 +8488,20 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetActiveSeason = function()
               assertEquals('function', type(ns.GetActiveSeason))
             end,
             HasActiveSeason = function()
               assertEquals('function', type(ns.HasActiveSeason))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Social = function()
           local ns = _G.C_Social
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetLastAchievement = function()
               if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                 assertEquals('nil', type(ns.GetLastAchievement))
@@ -9229,13 +8594,7 @@ function G.GeneratedTests()
             TwitterPostScreenshot = function()
               assertEquals('function', type(ns.TwitterPostScreenshot))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_SocialQueue = function()
           local ns = _G.C_SocialQueue
@@ -9245,7 +8604,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetAllGroups = function()
               assertEquals('function', type(ns.GetAllGroups))
             end,
@@ -9270,19 +8629,13 @@ function G.GeneratedTests()
             SignalToastDisplayed = function()
               assertEquals('function', type(ns.SignalToastDisplayed))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_SocialRestrictions = function()
           local ns = _G.C_SocialRestrictions
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AcknowledgeRegionalChatDisabled = function()
               assertEquals('function', type(ns.AcknowledgeRegionalChatDisabled))
             end,
@@ -9301,13 +8654,7 @@ function G.GeneratedTests()
             SetChatDisabled = function()
               assertEquals('function', type(ns.SetChatDisabled))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Soulbinds = function()
           local ns = _G.C_Soulbinds
@@ -9317,7 +8664,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ActivateSoulbind = function()
               assertEquals('function', type(ns.ActivateSoulbind))
             end,
@@ -9438,13 +8785,7 @@ function G.GeneratedTests()
             UnmodifyNode = function()
               assertEquals('function', type(ns.UnmodifyNode))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_SpecializationInfo = function()
           local ns = _G.C_SpecializationInfo
@@ -9454,7 +8795,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CanPlayerUsePVPTalentUI = function()
               assertEquals('function', type(ns.CanPlayerUsePVPTalentUI))
             end,
@@ -9500,19 +8841,13 @@ function G.GeneratedTests()
             SetPvpTalentLocked = function()
               assertEquals('function', type(ns.SetPvpTalentLocked))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Spell = function()
           local ns = _G.C_Spell
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             DoesSpellExist = function()
               assertEquals('function', type(ns.DoesSpellExist))
             end,
@@ -9529,13 +8864,7 @@ function G.GeneratedTests()
             RequestLoadSpellData = function()
               assertEquals('function', type(ns.RequestLoadSpellData))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_SpellBook = function()
           local ns = _G.C_SpellBook
@@ -9545,7 +8874,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ContainsAnyDisenchantSpell = function()
               assertEquals('function', type(ns.ContainsAnyDisenchantSpell))
             end,
@@ -9564,13 +8893,7 @@ function G.GeneratedTests()
             IsSpellDisabled = function()
               assertEquals('function', type(ns.IsSpellDisabled))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_SplashScreen = function()
           local ns = _G.C_SplashScreen
@@ -9580,7 +8903,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AcknowledgeSplash = function()
               assertEquals('function', type(ns.AcknowledgeSplash))
             end,
@@ -9590,38 +8913,26 @@ function G.GeneratedTests()
             RequestLatestSplashScreen = function()
               assertEquals('function', type(ns.RequestLatestSplashScreen))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_StableInfo = function()
           local ns = _G.C_StableInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetNumActivePets = function()
               assertEquals('function', type(ns.GetNumActivePets))
             end,
             GetNumStablePets = function()
               assertEquals('function', type(ns.GetNumStablePets))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_StorePublic = function()
           local ns = _G.C_StorePublic
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             DoesGroupHavePurchaseableProducts = function()
               assertEquals('function', type(ns.DoesGroupHavePurchaseableProducts))
             end,
@@ -9638,19 +8949,13 @@ function G.GeneratedTests()
             IsEnabled = function()
               assertEquals('function', type(ns.IsEnabled))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_SummonInfo = function()
           local ns = _G.C_SummonInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             CancelSummon = function()
               assertEquals('function', type(ns.CancelSummon))
             end,
@@ -9672,13 +8977,7 @@ function G.GeneratedTests()
             IsSummonSkippingStartExperience = function()
               assertEquals('function', type(ns.IsSummonSkippingStartExperience))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_SuperTrack = function()
           local ns = _G.C_SuperTrack
@@ -9688,7 +8987,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetHighestPrioritySuperTrackingType = function()
               assertEquals('function', type(ns.GetHighestPrioritySuperTrackingType))
             end,
@@ -9713,35 +9012,23 @@ function G.GeneratedTests()
             SetSuperTrackedUserWaypoint = function()
               assertEquals('function', type(ns.SetSuperTrackedUserWaypoint))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_System = function()
           local ns = _G.C_System
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetFrameStack = function()
               assertEquals('function', type(ns.GetFrameStack))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_TTSSettings = function()
           local ns = _G.C_TTSSettings
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetChannelEnabled = function()
               assertEquals('function', type(ns.GetChannelEnabled))
             end,
@@ -9799,19 +9086,13 @@ function G.GeneratedTests()
             ShouldOverrideMessage = function()
               assertEquals('function', type(ns.ShouldOverrideMessage))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_TaskQuest = function()
           local ns = _G.C_TaskQuest
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             DoesMapShowTaskQuestObjectives = function()
               assertEquals('function', type(ns.DoesMapShowTaskQuestObjectives))
             end,
@@ -9848,19 +9129,13 @@ function G.GeneratedTests()
             RequestPreloadRewardData = function()
               assertEquals('function', type(ns.RequestPreloadRewardData))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_TaxiMap = function()
           local ns = _G.C_TaxiMap
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetAllTaxiNodes = function()
               assertEquals('function', type(ns.GetAllTaxiNodes))
             end,
@@ -9874,40 +9149,27 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.ShouldMapShowTaxiNodes))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Texture = function()
           local ns = _G.C_Texture
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetAtlasInfo = function()
               assertEquals('function', type(ns.GetAtlasInfo))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Timer = function()
           local ns = _G.C_Timer
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             After = function()
               assertEquals('function', type(ns.After))
             end,
-          }
-          return tests
+          })
         end,
         C_ToyBox = function()
           local ns = _G.C_ToyBox
@@ -9917,7 +9179,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ForceToyRefilter = function()
               assertEquals('function', type(ns.ForceToyRefilter))
             end,
@@ -9996,19 +9258,13 @@ function G.GeneratedTests()
             SetUnusableShown = function()
               assertEquals('function', type(ns.SetUnusableShown))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ToyBoxInfo = function()
           local ns = _G.C_ToyBoxInfo
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ClearFanfare = function()
               assertEquals('function', type(ns.ClearFanfare))
             end,
@@ -10036,13 +9292,7 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.SetDefaultFilters))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_TradeSkillUI = function()
           local ns = _G.C_TradeSkillUI
@@ -10052,7 +9302,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AnyRecipeCategoriesFiltered = function()
               assertEquals('function', type(ns.AnyRecipeCategoriesFiltered))
             end,
@@ -10284,13 +9534,7 @@ function G.GeneratedTests()
             StopRecipeRepeat = function()
               assertEquals('function', type(ns.StopRecipeRepeat))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Transmog = function()
           local ns = _G.C_Transmog
@@ -10300,7 +9544,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ApplyAllPending = function()
               assertEquals('function', type(ns.ApplyAllPending))
             end,
@@ -10373,13 +9617,7 @@ function G.GeneratedTests()
             SetPending = function()
               assertEquals('function', type(ns.SetPending))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_TransmogCollection = function()
           local ns = _G.C_TransmogCollection
@@ -10389,7 +9627,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AccountCanCollectSource = function()
               assertEquals('function', type(ns.AccountCanCollectSource))
             end,
@@ -10618,13 +9856,7 @@ function G.GeneratedTests()
             UpdateUsableAppearances = function()
               assertEquals('function', type(ns.UpdateUsableAppearances))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_TransmogSets = function()
           local ns = _G.C_TransmogSets
@@ -10634,7 +9866,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ClearLatestSource = function()
               assertEquals('function', type(ns.ClearLatestSource))
             end,
@@ -10728,13 +9960,7 @@ function G.GeneratedTests()
             SetIsFavorite = function()
               assertEquals('function', type(ns.SetIsFavorite))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Trophy = function()
           local ns = _G.C_Trophy
@@ -10744,7 +9970,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             MonumentChangeAppearanceToTrophyID = function()
               assertEquals('function', type(ns.MonumentChangeAppearanceToTrophyID))
             end,
@@ -10772,13 +9998,7 @@ function G.GeneratedTests()
             MonumentSaveSelection = function()
               assertEquals('function', type(ns.MonumentSaveSelection))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Tutorial = function()
           local ns = _G.C_Tutorial
@@ -10788,26 +10008,20 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AbandonTutorialArea = function()
               assertEquals('function', type(ns.AbandonTutorialArea))
             end,
             ReturnToTutorialArea = function()
               assertEquals('function', type(ns.ReturnToTutorialArea))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_UI = function()
           local ns = _G.C_UI
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             DoesAnyDisplayHaveNotch = function()
               assertEquals('function', type(ns.DoesAnyDisplayHaveNotch))
             end,
@@ -10823,19 +10037,13 @@ function G.GeneratedTests()
             ShouldUIParentAvoidNotch = function()
               assertEquals('function', type(ns.ShouldUIParentAvoidNotch))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_UIWidgetManager = function()
           local ns = _G.C_UIWidgetManager
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetAllWidgetsBySetID = function()
               assertEquals('function', type(ns.GetAllWidgetsBySetID))
             end,
@@ -11021,48 +10229,30 @@ function G.GeneratedTests()
               end
               assertEquals('function', type(ns.UnregisterUnitForWidgetUpdates))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_UserFeedback = function()
           local ns = _G.C_UserFeedback
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             SubmitBug = function()
               assertEquals('function', type(ns.SubmitBug))
             end,
             SubmitSuggestion = function()
               assertEquals('function', type(ns.SubmitSuggestion))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_VideoOptions = function()
           local ns = _G.C_VideoOptions
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetGxAdapterInfo = function()
               assertEquals('function', type(ns.GetGxAdapterInfo))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_VignetteInfo = function()
           local ns = _G.C_VignetteInfo
@@ -11072,7 +10262,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             FindBestUniqueVignette = function()
               assertEquals('function', type(ns.FindBestUniqueVignette))
             end,
@@ -11085,19 +10275,13 @@ function G.GeneratedTests()
             GetVignettes = function()
               assertEquals('function', type(ns.GetVignettes))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_VoiceChat = function()
           local ns = _G.C_VoiceChat
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             ActivateChannel = function()
               assertEquals('function', type(ns.ActivateChannel))
             end,
@@ -11330,13 +10514,7 @@ function G.GeneratedTests()
             ToggleMuted = function()
               assertEquals('function', type(ns.ToggleMuted))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_WeeklyRewards = function()
           local ns = _G.C_WeeklyRewards
@@ -11346,7 +10524,7 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             AreRewardsForCurrentRewardPeriod = function()
               assertEquals('function', type(ns.AreRewardsForCurrentRewardPeriod))
             end,
@@ -11389,19 +10567,13 @@ function G.GeneratedTests()
             OnUIInteract = function()
               assertEquals('function', type(ns.OnUIInteract))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_Widget = function()
           local ns = _G.C_Widget
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             IsFrameWidget = function()
               assertEquals('function', type(ns.IsFrameWidget))
             end,
@@ -11411,19 +10583,13 @@ function G.GeneratedTests()
             IsWidget = function()
               assertEquals('function', type(ns.IsWidget))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_WowTokenPublic = function()
           local ns = _G.C_WowTokenPublic
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             BuyToken = function()
               assertEquals('function', type(ns.BuyToken))
             end,
@@ -11464,13 +10630,7 @@ function G.GeneratedTests()
             UpdateTokenCount = function()
               assertEquals('function', type(ns.UpdateTokenCount))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_WowTokenUI = function()
           local ns = _G.C_WowTokenUI
@@ -11480,17 +10640,11 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             StartTokenSell = function()
               assertEquals('function', type(ns.StartTokenSell))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         C_ZoneAbility = function()
           local ns = _G.C_ZoneAbility
@@ -11500,23 +10654,17 @@ function G.GeneratedTests()
           end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetActiveAbilities = function()
               assertEquals('function', type(ns.GetActiveAbilities))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
         Kiosk = function()
           local ns = _G.Kiosk
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
             GetCharacterTemplateSetIndex = function()
               assertEquals('function', type(ns.GetCharacterTemplateSetIndex))
             end,
@@ -11529,13 +10677,7 @@ function G.GeneratedTests()
             StartSession = function()
               assertEquals('function', type(ns.StartSession))
             end,
-          }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-          return tests
+          })
         end,
       }
     end,

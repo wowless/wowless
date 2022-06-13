@@ -136,6 +136,26 @@ local GetObjectType = CreateFrame('Frame').GetObjectType
 function G.GeneratedTests()
   return {
     apiNamespaces = function()
+      local function isLuaTest(f)
+        return function()
+          assertEquals('function', type(f))
+          return {
+            env = function()
+              assertEquals(_G, getfenv(f))
+            end,
+            isLua = function()
+              setfenv(f, getfenv(f)) -- This taints, alas.
+            end,
+          }
+        end
+      end
+      local function mkTests(ns, tests)
+        for k, v in pairs(ns) do
+          -- Anything left over must be a FrameXML-defined function.
+          tests[k] = tests[k] or isLuaTest(v)
+        end
+        return tests
+      end
       return {
 > for k, v in sorted(apiNamespaces) do
         $(k) = function()
@@ -148,7 +168,7 @@ function G.GeneratedTests()
 > end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local tests = {
+          return mkTests(ns, {
 > for mname, method in sorted(v.methods) do
             $(mname) = function()
 > if method.flavors and (not v.flavors or #method.flavors < #v.flavors) then
@@ -160,15 +180,7 @@ function G.GeneratedTests()
               assertEquals('function', type(ns.$(mname)))
             end,
 > end
-          }
-> if k ~= 'C_Timer' and k ~= 'C_DateAndTime' then -- TODO generalize lua/C check
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
-> end
-          return tests
+          })
         end,
 > end
       }
