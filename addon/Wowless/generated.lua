@@ -14783,8 +14783,17 @@ function G.GeneratedTests()
         collectgarbage = function()
           return checkCFunc(_G.collectgarbage)
         end,
+        date = function()
+          return checkCFunc(_G.date)
+        end,
         debugprofilestop = function()
           return checkCFunc(_G.debugprofilestop)
+        end,
+        debugstack = function()
+          return checkCFunc(_G.debugstack)
+        end,
+        difftime = function()
+          return checkCFunc(_G.difftime)
         end,
         error = function()
           return checkCFunc(_G.error)
@@ -14869,6 +14878,9 @@ function G.GeneratedTests()
         end,
         strtrim = function()
           return checkCFunc(_G.strtrim)
+        end,
+        time = function()
+          return checkCFunc(_G.time)
         end,
         tonumber = function()
           return checkCFunc(_G.tonumber)

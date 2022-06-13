@@ -1,4 +1,3 @@
-local ext = require('wowless.ext')
 local util = require('wowless.util')
 local Mixin = util.mixin
 
@@ -7,9 +6,6 @@ local function mkBaseEnv()
     abs = math.abs,
     ceil = math.ceil,
     cos = math.cos,
-    date = os.date,
-    debugstack = ext.traceback,
-    difftime = os.difftime,
     floor = math.floor,
     format = string.format,
     getn = table.getn,
@@ -36,10 +32,9 @@ local function mkBaseEnv()
     strrep = string.rep,
     strsub = string.sub,
     strupper = string.upper,
-    time = os.time,
     tinsert = table.insert,
     tremove = table.remove,
-    wipe = util.twipe,
+    wipe = table.wipe,
   }
 end
 
