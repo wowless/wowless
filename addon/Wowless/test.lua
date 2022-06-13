@@ -100,8 +100,8 @@ local syncTests = function()
       assertEquals('nan', format('%f', 0 / 0):sub(-3))
     end,
     ['format handles %F'] = function()
-      assertEquals('INF', format('%F', 1 / 0):sub(-3))
-      assertEquals('NAN', format('%F', 0 / 0):sub(-3))
+      assertEquals('inf', format('%F', 1 / 0):sub(-3))
+      assertEquals('nan', format('%F', 0 / 0):sub(-3))
     end,
     ['visible updated on kids before calling any OnShow'] = function()
       local p = CreateFrame('Frame')
