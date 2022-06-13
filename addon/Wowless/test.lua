@@ -337,9 +337,8 @@ do
           print('No errors.')
         else
           print('There were errors.')
-          if DevTools_Dump then
-            DevTools_Dump(_G.WowlessTestFailures)
-          end
+          local dump = _G.__dump or DevTools_Dump
+          dump(_G.WowlessTestFailures)
         end
       else
         asyncIndex = asyncIndex + 1

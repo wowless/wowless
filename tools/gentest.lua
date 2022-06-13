@@ -161,11 +161,13 @@ function G.GeneratedTests()
             end,
 > end
           }
+> if k ~= 'C_Timer' then -- TODO generalize lua/C check
           for k in pairs(ns) do
             tests[k] = tests[k] or function()
               error('missing')
             end
           end
+> end
           return tests
         end,
 > end

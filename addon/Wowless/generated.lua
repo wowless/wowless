@@ -9932,18 +9932,7 @@ function G.GeneratedTests()
             After = function()
               assertEquals('function', type(ns.After))
             end,
-            NewTicker = function()
-              assertEquals('function', type(ns.NewTicker))
-            end,
-            NewTimer = function()
-              assertEquals('function', type(ns.NewTimer))
-            end,
           }
-          for k in pairs(ns) do
-            tests[k] = tests[k] or function()
-              error('missing')
-            end
-          end
           return tests
         end,
         C_ToyBox = function()
