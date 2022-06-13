@@ -198,8 +198,7 @@ function G.GeneratedTests()
             $(mname) = function()
 > if method.flavors and (not v.flavors or #method.flavors < #v.flavors) then
               if $(badflavor(method.flavors)) then
-                assertEquals('nil', type(ns.$(mname)))
-                return
+                return checkNotCFunc(ns.$(mname))
               end
 > end
               return checkCFunc(ns.$(mname))
