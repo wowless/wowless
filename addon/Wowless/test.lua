@@ -186,6 +186,16 @@ local syncTests = function()
         end)
       )
     end,
+    ['table'] = function()
+      return {
+        wipe = function()
+          local t = { 1, 2, 3 }
+          local w = table.wipe(t)
+          assertEquals(w, t)
+          assertEquals(nil, next(t))
+        end,
+      }
+    end,
     ['version'] = function()
       local id = _G.WOW_PROJECT_ID
       if id == 1 then

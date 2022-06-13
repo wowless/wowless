@@ -14777,8 +14777,17 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.VehiclePrevSeat)
         end,
+        assert = function()
+          return checkCFunc(_G.assert)
+        end,
+        collectgarbage = function()
+          return checkCFunc(_G.collectgarbage)
+        end,
         debugprofilestop = function()
           return checkCFunc(_G.debugprofilestop)
+        end,
+        error = function()
+          return checkCFunc(_G.error)
         end,
         geterrorhandler = function()
           return checkCFunc(_G.geterrorhandler)
@@ -14786,11 +14795,44 @@ function G.GeneratedTests()
         getfenv = function()
           return checkCFunc(_G.getfenv)
         end,
+        getmetatable = function()
+          return checkCFunc(_G.getmetatable)
+        end,
         hooksecurefunc = function()
           return checkCFunc(_G.hooksecurefunc)
         end,
+        ipairs = function()
+          return checkCFunc(_G.ipairs)
+        end,
+        issecure = function()
+          return checkCFunc(_G.issecure)
+        end,
+        issecurevariable = function()
+          return checkCFunc(_G.issecurevariable)
+        end,
         loadstring = function()
           return checkCFunc(_G.loadstring)
+        end,
+        newproxy = function()
+          return checkCFunc(_G.newproxy)
+        end,
+        next = function()
+          return checkCFunc(_G.next)
+        end,
+        pairs = function()
+          return checkCFunc(_G.pairs)
+        end,
+        pcall = function()
+          return checkCFunc(_G.pcall)
+        end,
+        rawget = function()
+          return checkCFunc(_G.rawget)
+        end,
+        rawset = function()
+          return checkCFunc(_G.rawset)
+        end,
+        scrub = function()
+          return checkCFunc(_G.scrub)
         end,
         securecall = function()
           return checkCFunc(_G.securecall)
@@ -14801,8 +14843,26 @@ function G.GeneratedTests()
         secureexecuterange = function()
           return checkCFunc(_G.secureexecuterange)
         end,
+        select = function()
+          return checkCFunc(_G.select)
+        end,
         seterrorhandler = function()
           return checkCFunc(_G.seterrorhandler)
+        end,
+        setmetatable = function()
+          return checkCFunc(_G.setmetatable)
+        end,
+        tonumber = function()
+          return checkCFunc(_G.tonumber)
+        end,
+        tostring = function()
+          return checkCFunc(_G.tostring)
+        end,
+        type = function()
+          return checkCFunc(_G.type)
+        end,
+        unpack = function()
+          return checkCFunc(_G.unpack)
         end,
         xpcall = function()
           return checkCFunc(_G.xpcall)
