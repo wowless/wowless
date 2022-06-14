@@ -5,7 +5,6 @@ local function mkBaseEnv()
   return {
     abs = math.abs,
     ceil = math.ceil,
-    cos = math.cos,
     floor = math.floor,
     format = string.format,
     getn = table.getn,
@@ -22,7 +21,6 @@ local function mkBaseEnv()
     rad = math.rad,
     random = math.random,
     setfenv = setfenv,
-    sin = math.sin,
     sort = table.sort,
     strbyte = string.byte,
     strfind = string.find,

@@ -144,13 +144,14 @@ function G.GeneratedTests()
       end,
     }
   end
+  local function checkLuaFunc(func)
+    assertEquals('function', type(func))
+    -- Check that it is defined in Lua. This should not throw. It taints, alas.
+    setfenv(func, getfenv(func))
+  end
   local function checkNotCFunc(func)
-    local ty = type(func)
-    if ty == 'function' then
-      -- Check that it is defined in Lua. This should not throw. It taints, alas.
-      setfenv(func, getfenv(func))
-    else
-      assertEquals('nil', ty)
+    if func ~= nil then
+      checkLuaFunc(func)
     end
   end
   return {
@@ -219,7 +220,11 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.$(k))
           end
 > end
+> if v.nowrap then
+          return checkLuaFunc(_G.$(k))
+> else
           return checkCFunc(_G.$(k))
+> end
         end,
 > end
 > end

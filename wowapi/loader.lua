@@ -328,7 +328,15 @@ local function loadFunctions(api, loader)
         return checkOutputs(bfn(checkInputs(unpack(t, 1, n))))
       end))
     end
-    local outer = debug.newcfunction(wrapimpl)
+
+    local outer
+    if apicfg.nowrap then
+      outer = function(...)
+        return wrapimpl(...)
+      end
+    else
+      outer = debug.newcfunction(wrapimpl)
+    end
     local dot = fn:find('%.')
     if dot then
       local p = fn:sub(1, dot - 1)

@@ -18,13 +18,14 @@ function G.GeneratedTests()
       end,
     }
   end
+  local function checkLuaFunc(func)
+    assertEquals('function', type(func))
+    -- Check that it is defined in Lua. This should not throw. It taints, alas.
+    setfenv(func, getfenv(func))
+  end
   local function checkNotCFunc(func)
-    local ty = type(func)
-    if ty == 'function' then
-      -- Check that it is defined in Lua. This should not throw. It taints, alas.
-      setfenv(func, getfenv(func))
-    else
-      assertEquals('nil', ty)
+    if func ~= nil then
+      checkLuaFunc(func)
     end
   end
   return {
@@ -14777,11 +14778,26 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.VehiclePrevSeat)
         end,
+        acos = function()
+          return checkLuaFunc(_G.acos)
+        end,
+        asin = function()
+          return checkLuaFunc(_G.asin)
+        end,
         assert = function()
           return checkCFunc(_G.assert)
         end,
+        atan = function()
+          return checkLuaFunc(_G.atan)
+        end,
+        atan2 = function()
+          return checkLuaFunc(_G.atan2)
+        end,
         collectgarbage = function()
           return checkCFunc(_G.collectgarbage)
+        end,
+        cos = function()
+          return checkLuaFunc(_G.cos)
         end,
         date = function()
           return checkCFunc(_G.date)
@@ -14861,6 +14877,9 @@ function G.GeneratedTests()
         setmetatable = function()
           return checkCFunc(_G.setmetatable)
         end,
+        sin = function()
+          return checkLuaFunc(_G.sin)
+        end,
         strcmputf8i = function()
           return checkCFunc(_G.strcmputf8i)
         end,
@@ -14878,6 +14897,9 @@ function G.GeneratedTests()
         end,
         strtrim = function()
           return checkCFunc(_G.strtrim)
+        end,
+        tan = function()
+          return checkLuaFunc(_G.tan)
         end,
         time = function()
           return checkCFunc(_G.time)
