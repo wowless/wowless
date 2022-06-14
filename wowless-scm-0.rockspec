@@ -12,7 +12,6 @@ dependencies = {
   'cluacov',
   'date',
   'http',
-  'json-lua',
   'libdeflate',
   'luacheck',
   'luadbd',
