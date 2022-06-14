@@ -220,7 +220,9 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.$(k))
           end
 > end
-> if v.nowrap then
+> if v.alias then
+          assertEquals(_G.$(k), _G.$(v.alias))
+> elseif v.nowrap then
           return checkLuaFunc(_G.$(k))
 > else
           return checkCFunc(_G.$(k))

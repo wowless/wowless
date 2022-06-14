@@ -3,9 +3,6 @@ local Mixin = util.mixin
 
 local function mkBaseEnv()
   return {
-    abs = math.abs,
-    ceil = math.ceil,
-    floor = math.floor,
     format = string.format,
     getn = table.getn,
     gmatch = string.gmatch,
@@ -14,12 +11,7 @@ local function mkBaseEnv()
       huge = math.huge,
       pi = math.pi,
     },
-    max = math.max,
-    min = math.min,
-    mod = math.fmod,
     PI = math.pi,
-    rad = math.rad,
-    random = math.random,
     setfenv = setfenv,
     sort = table.sort,
     strbyte = string.byte,

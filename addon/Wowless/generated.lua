@@ -14778,6 +14778,9 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.VehiclePrevSeat)
         end,
+        abs = function()
+          assertEquals(_G.abs, _G.math.abs)
+        end,
         acos = function()
           return checkLuaFunc(_G.acos)
         end,
@@ -14792,6 +14795,9 @@ function G.GeneratedTests()
         end,
         atan2 = function()
           return checkLuaFunc(_G.atan2)
+        end,
+        ceil = function()
+          assertEquals(_G.ceil, _G.math.ceil)
         end,
         collectgarbage = function()
           return checkCFunc(_G.collectgarbage)
@@ -14808,11 +14814,23 @@ function G.GeneratedTests()
         debugstack = function()
           return checkCFunc(_G.debugstack)
         end,
+        deg = function()
+          assertEquals(_G.deg, _G.math.deg)
+        end,
         difftime = function()
           return checkCFunc(_G.difftime)
         end,
         error = function()
           return checkCFunc(_G.error)
+        end,
+        exp = function()
+          assertEquals(_G.exp, _G.math.exp)
+        end,
+        floor = function()
+          assertEquals(_G.floor, _G.math.floor)
+        end,
+        frexp = function()
+          assertEquals(_G.frexp, _G.math.frexp)
         end,
         geterrorhandler = function()
           return checkCFunc(_G.geterrorhandler)
@@ -14835,8 +14853,26 @@ function G.GeneratedTests()
         issecurevariable = function()
           return checkCFunc(_G.issecurevariable)
         end,
+        ldexp = function()
+          assertEquals(_G.ldexp, _G.math.ldexp)
+        end,
         loadstring = function()
           return checkCFunc(_G.loadstring)
+        end,
+        log = function()
+          assertEquals(_G.log, _G.math.log)
+        end,
+        log10 = function()
+          assertEquals(_G.log10, _G.math.log10)
+        end,
+        max = function()
+          assertEquals(_G.max, _G.math.max)
+        end,
+        min = function()
+          assertEquals(_G.min, _G.math.min)
+        end,
+        mod = function()
+          assertEquals(_G.mod, _G.math.fmod)
         end,
         newproxy = function()
           return checkCFunc(_G.newproxy)
@@ -14849,6 +14885,12 @@ function G.GeneratedTests()
         end,
         pcall = function()
           return checkCFunc(_G.pcall)
+        end,
+        rad = function()
+          assertEquals(_G.rad, _G.math.rad)
+        end,
+        random = function()
+          assertEquals(_G.random, _G.math.random)
         end,
         rawget = function()
           return checkCFunc(_G.rawget)
@@ -14879,6 +14921,9 @@ function G.GeneratedTests()
         end,
         sin = function()
           return checkLuaFunc(_G.sin)
+        end,
+        sqrt = function()
+          assertEquals(_G.sqrt, _G.math.sqrt)
         end,
         strcmputf8i = function()
           return checkCFunc(_G.strcmputf8i)

@@ -17,7 +17,7 @@ describe('api', function()
               assert.Nil(output.stub, 'implemented apis cannot specify return values')
             end
           else
-            error('unsupported status')
+            assert(t.alias, 'unsupported status')
           end
         end)
       end)

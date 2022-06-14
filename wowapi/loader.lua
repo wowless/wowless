@@ -209,142 +209,153 @@ end
 local function loadFunctions(api, loader)
   local fns = {}
   local db2s = mkdb2s(api.env)
+  local aliases = {}
   for fn, apicfg in pairs(loadApis(loader.version)) do
-    local bfn = getFn(api, loader, apicfg, db2s)
-    local function doCheckInputs(sig, ...)
-      local args = {}
-      for i, param in ipairs(sig) do
-        local arg = select(i, ...)
-        if arg == nil then
-          assert(
-            param.nilable or param.default ~= nil,
-            ('arg %d (%q) of %q is not nilable, but nil was passed'):format(i, tostring(param.name), fn)
-          )
-        else
-          local ty = type(arg)
-          -- Simulate C lua_tonumber and lua_tostring.
-          if param.type == 'number' and ty == 'string' then
-            arg = tonumber(arg) or arg
-            ty = type(arg)
-          elseif param.type == 'string' and ty == 'number' then
-            arg = tostring(arg) or arg
-            ty = type(arg)
-          elseif param.type == 'unknown' or data.structures[param.type] ~= nil then
-            ty = param.type
-          elseif param.type == 'unit' and ty == 'string' then
-            arg = resolveUnit(api.states.Units, arg)
-            ty = 'unit'
-          end
-          assert(
-            ty == param.type,
-            ('arg %d (%q) of %q is of type %q, but %q was passed'):format(i, tostring(param.name), fn, param.type, ty)
-          )
-          args[i] = arg
-        end
-      end
-      return unpack(args, 1, select('#', ...))
-    end
-    local checkInputs = (function()
-      if not apicfg.inputs then
-        return function(...)
-          return ...
-        end
-      elseif #apicfg.inputs == 1 then
-        return function(...)
-          return doCheckInputs(apicfg.inputs[1], ...)
-        end
-      else
-        return function(...)
-          local t = { ... }
-          local n = select('#', ...)
-          for _, sig in ipairs(apicfg.inputs) do
-            local result = {
-              pcall(function()
-                return doCheckInputs(sig, unpack(t, 1, n))
-              end),
-            }
-            if result[1] then
-              return unpack(result, 2)
+    if apicfg.alias then
+      aliases[fn] = apicfg.alias
+    else
+      local bfn = getFn(api, loader, apicfg, db2s)
+      local function doCheckInputs(sig, ...)
+        local args = {}
+        for i, param in ipairs(sig) do
+          local arg = select(i, ...)
+          if arg == nil then
+            assert(
+              param.nilable or param.default ~= nil,
+              ('arg %d (%q) of %q is not nilable, but nil was passed'):format(i, tostring(param.name), fn)
+            )
+          else
+            local ty = type(arg)
+            -- Simulate C lua_tonumber and lua_tostring.
+            if param.type == 'number' and ty == 'string' then
+              arg = tonumber(arg) or arg
+              ty = type(arg)
+            elseif param.type == 'string' and ty == 'number' then
+              arg = tostring(arg) or arg
+              ty = type(arg)
+            elseif param.type == 'unknown' or data.structures[param.type] ~= nil then
+              ty = param.type
+            elseif param.type == 'unit' and ty == 'string' then
+              arg = resolveUnit(api.states.Units, arg)
+              ty = 'unit'
             end
+            assert(
+              ty == param.type,
+              ('arg %d (%q) of %q is of type %q, but %q was passed'):format(i, tostring(param.name), fn, param.type, ty)
+            )
+            args[i] = arg
           end
-          error('args matched no input signature of ' .. fn)
         end
+        return unpack(args, 1, select('#', ...))
       end
-    end)()
-    local checkOutputs = (function()
-      if not apicfg.outputs then
-        return function(...)
-          return ...
+      local checkInputs = (function()
+        if not apicfg.inputs then
+          return function(...)
+            return ...
+          end
+        elseif #apicfg.inputs == 1 then
+          return function(...)
+            return doCheckInputs(apicfg.inputs[1], ...)
+          end
+        else
+          return function(...)
+            local t = { ... }
+            local n = select('#', ...)
+            for _, sig in ipairs(apicfg.inputs) do
+              local result = {
+                pcall(function()
+                  return doCheckInputs(sig, unpack(t, 1, n))
+                end),
+              }
+              if result[1] then
+                return unpack(result, 2)
+              end
+            end
+            error('args matched no input signature of ' .. fn)
+          end
         end
-      else
-        local nilableTypes = {
-          ['nil'] = true,
-          oneornil = true,
-          unknown = true,
-        }
-        local supportedTypes = {
-          boolean = true,
-          number = true,
-          string = true,
-        }
-        return function(...)
-          for i, out in ipairs(apicfg.outputs) do
-            local arg = select(i, ...)
-            if arg == nil then
-              assert(
-                out.nilable or nilableTypes[out.type],
-                ('output %d (%q) of %q is not nilable, but nil was returned'):format(i, tostring(out.name), fn)
-              )
-            elseif supportedTypes[out.type] then
-              local ty = type(arg)
-              assert(
-                ty == out.type,
-                ('output %d (%q) of %q is of type %q, but %q was returned'):format(
-                  i,
-                  tostring(out.name),
-                  fn,
-                  out.type,
-                  ty
+      end)()
+      local checkOutputs = (function()
+        if not apicfg.outputs then
+          return function(...)
+            return ...
+          end
+        else
+          local nilableTypes = {
+            ['nil'] = true,
+            oneornil = true,
+            unknown = true,
+          }
+          local supportedTypes = {
+            boolean = true,
+            number = true,
+            string = true,
+          }
+          return function(...)
+            for i, out in ipairs(apicfg.outputs) do
+              local arg = select(i, ...)
+              if arg == nil then
+                assert(
+                  out.nilable or nilableTypes[out.type],
+                  ('output %d (%q) of %q is not nilable, but nil was returned'):format(i, tostring(out.name), fn)
                 )
-              )
+              elseif supportedTypes[out.type] then
+                local ty = type(arg)
+                assert(
+                  ty == out.type,
+                  ('output %d (%q) of %q is of type %q, but %q was returned'):format(
+                    i,
+                    tostring(out.name),
+                    fn,
+                    out.type,
+                    ty
+                  )
+                )
+              end
             end
+            return ...
           end
-          return ...
         end
+      end)()
+      local function wrapimpl(...)
+        api.log(4, 'entering %s', apicfg.name)
+        local t = { ... }
+        local n = select('#', ...)
+        return (function(success, ...)
+          api.log(4, 'leaving %s (%s)', apicfg.name, success and 'success' or 'failure')
+          if success then
+            return ...
+          else
+            error((...), 3)
+          end
+        end)(pcall(function()
+          return checkOutputs(bfn(checkInputs(unpack(t, 1, n))))
+        end))
       end
-    end)()
-    local function wrapimpl(...)
-      api.log(4, 'entering %s', apicfg.name)
-      local t = { ... }
-      local n = select('#', ...)
-      return (function(success, ...)
-        api.log(4, 'leaving %s (%s)', apicfg.name, success and 'success' or 'failure')
-        if success then
-          return ...
-        else
-          error((...), 3)
-        end
-      end)(pcall(function()
-        return checkOutputs(bfn(checkInputs(unpack(t, 1, n))))
-      end))
-    end
 
-    local outer
-    if apicfg.nowrap then
-      outer = function(...)
-        return wrapimpl(...)
+      local outer
+      if apicfg.nowrap then
+        outer = function(...)
+          return wrapimpl(...)
+        end
+      else
+        outer = debug.newcfunction(wrapimpl)
       end
-    else
-      outer = debug.newcfunction(wrapimpl)
+      local dot = fn:find('%.')
+      if dot then
+        local p = fn:sub(1, dot - 1)
+        fns[p] = fns[p] or {}
+        fns[p][fn:sub(dot + 1)] = outer
+      else
+        fns[fn] = outer
+      end
     end
-    local dot = fn:find('%.')
-    if dot then
-      local p = fn:sub(1, dot - 1)
-      fns[p] = fns[p] or {}
-      fns[p][fn:sub(dot + 1)] = outer
-    else
-      fns[fn] = outer
-    end
+  end
+  for k, v in pairs(aliases) do
+    local dot = assert(v:find('%.'))
+    local ns = v:sub(1, dot - 1)
+    local fn = v:sub(dot + 1)
+    fns[k] = fns[ns][fn]
   end
   return fns
 end
