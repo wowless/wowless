@@ -3,28 +3,12 @@ local Mixin = util.mixin
 
 local function mkBaseEnv()
   return {
-    format = string.format,
-    getn = table.getn,
-    gmatch = string.gmatch,
-    gsub = string.gsub,
     math = {
       huge = math.huge,
       pi = math.pi,
     },
     PI = math.pi,
     setfenv = setfenv,
-    sort = table.sort,
-    strbyte = string.byte,
-    strfind = string.find,
-    strlen = string.len,
-    strlower = string.lower,
-    strmatch = string.match,
-    strrep = string.rep,
-    strsub = string.sub,
-    strupper = string.upper,
-    tinsert = table.insert,
-    tremove = table.remove,
-    wipe = table.wipe,
   }
 end
 

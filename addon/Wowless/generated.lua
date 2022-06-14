@@ -14829,6 +14829,9 @@ function G.GeneratedTests()
         floor = function()
           assertEquals(_G.floor, _G.math.floor)
         end,
+        format = function()
+          assertEquals(_G.format, _G.string.format)
+        end,
         frexp = function()
           assertEquals(_G.frexp, _G.math.frexp)
         end,
@@ -14840,6 +14843,15 @@ function G.GeneratedTests()
         end,
         getmetatable = function()
           return checkCFunc(_G.getmetatable)
+        end,
+        getn = function()
+          assertEquals(_G.getn, _G.table.getn)
+        end,
+        gmatch = function()
+          assertEquals(_G.gmatch, _G.string.gmatch)
+        end,
+        gsub = function()
+          assertEquals(_G.gsub, _G.string.gsub)
         end,
         hooksecurefunc = function()
           return checkCFunc(_G.hooksecurefunc)
@@ -14922,8 +14934,14 @@ function G.GeneratedTests()
         sin = function()
           return checkLuaFunc(_G.sin)
         end,
+        sort = function()
+          assertEquals(_G.sort, _G.table.sort)
+        end,
         sqrt = function()
           assertEquals(_G.sqrt, _G.math.sqrt)
+        end,
+        strbyte = function()
+          assertEquals(_G.strbyte, _G.string.byte)
         end,
         strcmputf8i = function()
           return checkCFunc(_G.strcmputf8i)
@@ -14931,17 +14949,38 @@ function G.GeneratedTests()
         strconcat = function()
           return checkCFunc(_G.strconcat)
         end,
+        strfind = function()
+          assertEquals(_G.strfind, _G.string.find)
+        end,
         strjoin = function()
           return checkCFunc(_G.strjoin)
+        end,
+        strlen = function()
+          assertEquals(_G.strlen, _G.string.len)
         end,
         strlenutf8 = function()
           return checkCFunc(_G.strlenutf8)
         end,
+        strlower = function()
+          assertEquals(_G.strlower, _G.string.lower)
+        end,
+        strmatch = function()
+          assertEquals(_G.strmatch, _G.string.match)
+        end,
+        strrep = function()
+          assertEquals(_G.strrep, _G.string.rep)
+        end,
         strsplit = function()
           return checkCFunc(_G.strsplit)
         end,
+        strsub = function()
+          assertEquals(_G.strsub, _G.string.sub)
+        end,
         strtrim = function()
           return checkCFunc(_G.strtrim)
+        end,
+        strupper = function()
+          assertEquals(_G.strupper, _G.string.upper)
         end,
         tan = function()
           return checkLuaFunc(_G.tan)
@@ -14949,17 +14988,26 @@ function G.GeneratedTests()
         time = function()
           return checkCFunc(_G.time)
         end,
+        tinsert = function()
+          assertEquals(_G.tinsert, _G.table.insert)
+        end,
         tonumber = function()
           return checkCFunc(_G.tonumber)
         end,
         tostring = function()
           return checkCFunc(_G.tostring)
         end,
+        tremove = function()
+          assertEquals(_G.tremove, _G.table.remove)
+        end,
         type = function()
           return checkCFunc(_G.type)
         end,
         unpack = function()
           return checkCFunc(_G.unpack)
+        end,
+        wipe = function()
+          assertEquals(_G.wipe, _G.table.wipe)
         end,
         xpcall = function()
           return checkCFunc(_G.xpcall)
