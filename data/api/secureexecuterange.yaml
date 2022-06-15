@@ -1,5 +1,3 @@
 ---
 name: secureexecuterange
-status: unimplemented
-outputs:
-- type: number
+stdlib: secureexecuterange
