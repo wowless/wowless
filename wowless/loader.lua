@@ -229,7 +229,7 @@ local function loader(api, cfg)
             if anchor.attr.relativeto then
               relativeTo = api.ParentSub(anchor.attr.relativeto, parent:GetParent())
             elseif anchor.attr.relativekey then
-              local parts = { util.strsplit('.', anchor.attr.relativekey) }
+              local parts = { strsplit('.', anchor.attr.relativekey) }
               if #parts == 1 then
                 relativeTo = api.ParentSub(anchor.attr.relativekey, parent:GetParent())
               else

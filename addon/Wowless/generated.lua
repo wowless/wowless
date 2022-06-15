@@ -10455,7 +10455,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.gsub)
             end,
             join = function()
-              return checkCFunc(ns.join)
+              assert(ns.join)
             end,
             len = function()
               return checkCFunc(ns.len)
@@ -10473,13 +10473,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.reverse)
             end,
             split = function()
-              return checkCFunc(ns.split)
+              assert(ns.split)
             end,
             sub = function()
               return checkCFunc(ns.sub)
             end,
             trim = function()
-              return checkCFunc(ns.trim)
+              assert(ns.trim)
             end,
             upper = function()
               return checkCFunc(ns.upper)
@@ -14959,7 +14959,7 @@ function G.GeneratedTests()
           assertEquals(_G.strfind, _G.string.find)
         end,
         strjoin = function()
-          return checkCFunc(_G.strjoin)
+          assertEquals(_G.strjoin, _G.string.join)
         end,
         strlen = function()
           assertEquals(_G.strlen, _G.string.len)
@@ -14977,13 +14977,13 @@ function G.GeneratedTests()
           assertEquals(_G.strrep, _G.string.rep)
         end,
         strsplit = function()
-          return checkCFunc(_G.strsplit)
+          assertEquals(_G.strsplit, _G.string.split)
         end,
         strsub = function()
           assertEquals(_G.strsub, _G.string.sub)
         end,
         strtrim = function()
-          return checkCFunc(_G.strtrim)
+          assertEquals(_G.strtrim, _G.string.trim)
         end,
         strupper = function()
           assertEquals(_G.strupper, _G.string.upper)

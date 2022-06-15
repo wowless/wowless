@@ -59,37 +59,6 @@ local readfile = (function()
   end
 end)()
 
-local function strjoin(sep, ...)
-  return table.concat({ ... }, sep)
-end
-
-local function strsplit(sep, s, n)
-  assert(string.len(sep) == 1)
-  n = n or math.huge
-  local result = {}
-  while true do
-    local pos = string.find(s, '%' .. sep)
-    if not pos or #result == n - 1 then
-      table.insert(result, s)
-      return unpack(result)
-    end
-    table.insert(result, s:sub(0, pos - 1))
-    s = s:sub(pos + 1)
-  end
-end
-
-local function strtrim(s)
-  local ret = s:gsub('^%s*', ''):gsub('%s*$', '')
-  return ret
-end
-
-local function tappend(t, t2)
-  for _, v in ipairs(t2) do
-    table.insert(t, v)
-  end
-  return t
-end
-
 local date = require('date')
 
 local function calendarTimeToDate(ct)
@@ -136,8 +105,4 @@ return {
   productToFlavor = productToFlavor,
   readfile = readfile,
   recursiveMixin = recursiveMixin,
-  strjoin = strjoin,
-  strsplit = strsplit,
-  strtrim = strtrim,
-  tappend = tappend,
 }
