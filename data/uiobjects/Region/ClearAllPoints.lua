@@ -1,3 +1,3 @@
 return (function(self)
-  util.twipe(u(self).points)
+  table.wipe(u(self).points)
 end)(...)

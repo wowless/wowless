@@ -90,13 +90,6 @@ local function tappend(t, t2)
   return t
 end
 
-local function twipe(t)
-  for k in pairs(t) do
-    t[k] = nil
-  end
-  return t
-end
-
 local date = require('date')
 
 local function calendarTimeToDate(ct)
@@ -147,5 +140,4 @@ return {
   strsplit = strsplit,
   strtrim = strtrim,
   tappend = tappend,
-  twipe = twipe,
 }

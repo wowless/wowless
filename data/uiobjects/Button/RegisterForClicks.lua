@@ -18,7 +18,7 @@ local validValues = (function()
 end)()
 return (function(self, ...)
   local ud = u(self)
-  util.twipe(ud.registeredClicks)
+  table.wipe(ud.registeredClicks)
   for i = 1, select('#', ...) do
     local clickType = select(i, ...)
     assert(type(clickType) == 'string', 'expected string, got ' .. type(clickType))
