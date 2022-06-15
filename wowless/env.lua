@@ -3,10 +3,6 @@ local Mixin = util.mixin
 
 local function mkBaseEnv()
   return {
-    math = {
-      huge = math.huge,
-      pi = math.pi,
-    },
     PI = math.pi,
   }
 end

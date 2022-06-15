@@ -45,14 +45,8 @@ function G.GeneratedTests()
       end
       local function mkTests(ns, tests)
         for k, v in pairs(ns) do
-          if ns == math and (k == 'huge' or k == 'pi') then -- TODO generalize
-            tests[k] = function()
-              assertEquals('number', type(v))
-            end
-          else
-            -- Anything left over must be a FrameXML-defined function.
-            tests[k] = tests[k] or isLuaTest(v)
-          end
+          -- Anything left over must be a FrameXML-defined function.
+          tests[k] = tests[k] or isLuaTest(v)
         end
         return tests
       end
@@ -10336,7 +10330,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.wrap)
             end,
             yield = function()
-              return checkCFunc(ns.yield)
+              assert(ns.yield)
             end,
           })
         end,
@@ -10384,6 +10378,9 @@ function G.GeneratedTests()
             frexp = function()
               return checkCFunc(ns.frexp)
             end,
+            huge = function()
+              assert(ns.huge)
+            end,
             ldexp = function()
               return checkCFunc(ns.ldexp)
             end,
@@ -10401,6 +10398,9 @@ function G.GeneratedTests()
             end,
             modf = function()
               return checkCFunc(ns.modf)
+            end,
+            pi = function()
+              assert(ns.pi)
             end,
             pow = function()
               return checkCFunc(ns.pow)
