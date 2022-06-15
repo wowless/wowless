@@ -1,5 +1,3 @@
 ---
 name: loadstring
-status: implemented
-frameworks:
-- env
+stdlib: loadstring

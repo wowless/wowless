@@ -1,5 +1,3 @@
 ---
 name: loadstring_untainted
-status: implemented
-frameworks:
-- env
+stdlib: loadstring_untainted

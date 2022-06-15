@@ -1,3 +1,3 @@
 ---
 name: bit.rshift
-status: implemented
+stdlib: bit.rshift

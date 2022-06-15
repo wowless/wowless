@@ -1,3 +1,3 @@
 ---
 name: string.find
-status: implemented
+stdlib: string.find

@@ -1,3 +1,3 @@
 ---
 name: math.pow
-status: implemented
+stdlib: math.pow

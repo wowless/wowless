@@ -1,3 +1,3 @@
 ---
 name: string.gmatch
-status: implemented
+stdlib: string.gmatch

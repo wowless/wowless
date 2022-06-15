@@ -1,3 +1,3 @@
 ---
 name: pcall
-status: implemented
+stdlib: pcall

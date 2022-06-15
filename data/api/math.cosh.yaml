@@ -1,3 +1,3 @@
 ---
 name: math.cosh
-status: implemented
+stdlib: math.cosh
