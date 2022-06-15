@@ -226,7 +226,12 @@ function G.GeneratedTests()
 > if v.alias then
           assertEquals(_G.$(k), _G.$(v.alias))
 > elseif v.stdlib then
-          assert(_G.$(k))
+>   local ty = type(tget(_G, v.stdlib))
+>   if ty == 'function' then
+          return checkCFunc(_G.$(k))
+>   else
+          assertEquals('$(ty)', type(_G.$(k)))
+>   end
 > elseif v.nowrap then
           return checkLuaFunc(_G.$(k))
 > else
