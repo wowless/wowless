@@ -1,5 +1,6 @@
 local data = require('wowapi.data')
 local plprettywrite = require('pl.pretty').write
+local util = require('wowless.util')
 
 local function loadApis(flavor)
   local apis = {}
@@ -206,28 +207,6 @@ local function resolveUnit(units, unit)
   return guid and units.guids[guid] or nil
 end
 
-local function tget(t, s)
-  local dot = s:find('%.')
-  if dot then
-    local p = s:sub(1, dot - 1)
-    assert(t[p])
-    return t[p][s:sub(dot + 1)]
-  else
-    return t[s]
-  end
-end
-
-local function tset(t, s, v)
-  local dot = s:find('%.')
-  if dot then
-    local p = s:sub(1, dot - 1)
-    t[p] = t[p] or {}
-    t[p][s:sub(dot + 1)] = v
-  else
-    t[s] = v
-  end
-end
-
 local function loadFunctions(api, loader)
   local fns = {}
   local db2s = mkdb2s(api.env)
@@ -236,7 +215,7 @@ local function loadFunctions(api, loader)
     if apicfg.alias then
       aliases[fn] = apicfg.alias
     elseif apicfg.stdlib then
-      tset(fns, fn, tget(_G, apicfg.stdlib))
+      util.tset(fns, fn, util.tget(_G, apicfg.stdlib))
     else
       local bfn = getFn(api, loader, apicfg, db2s)
       local function doCheckInputs(sig, ...)
@@ -365,11 +344,11 @@ local function loadFunctions(api, loader)
       else
         outer = debug.newcfunction(wrapimpl)
       end
-      tset(fns, fn, outer)
+      util.tset(fns, fn, outer)
     end
   end
   for k, v in pairs(aliases) do
-    fns[k] = tget(fns, v)
+    fns[k] = util.tget(fns, v)
   end
   return fns
 end

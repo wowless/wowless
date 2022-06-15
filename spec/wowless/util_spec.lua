@@ -1,3 +1,20 @@
 describe('util', function()
-  -- TODO write tests
+  local util = require('wowless.util')
+  describe('tget', function()
+    local tget = util.tget
+    it('works', function()
+      assert.Nil(tget({}, 'foo'))
+      assert.same(42, tget({ foo = 42 }, 'foo'))
+      assert.Nil(tget({}, 'foo.bar'))
+      assert.Nil(tget({ foo = {} }, 'foo.bar'))
+      assert.same(42, tget({ foo = { bar = 42 } }, 'foo.bar'))
+    end)
+  end)
+  describe('tset', function()
+    local tset = util.tset
+    it('works', function()
+      assert.same({ foo = 42 }, tset({}, 'foo', 42))
+      assert.same({ foo = { bar = 42 } }, tset({}, 'foo.bar', 42))
+    end)
+  end)
 end)

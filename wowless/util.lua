@@ -59,6 +59,28 @@ local readfile = (function()
   end
 end)()
 
+local function tget(t, s)
+  local dot = s:find('%.')
+  if dot then
+    local p = s:sub(1, dot - 1)
+    return t[p] and t[p][s:sub(dot + 1)]
+  else
+    return t[s]
+  end
+end
+
+local function tset(t, s, v)
+  local dot = s:find('%.')
+  if dot then
+    local p = s:sub(1, dot - 1)
+    t[p] = t[p] or {}
+    t[p][s:sub(dot + 1)] = v
+  else
+    t[s] = v
+  end
+  return t
+end
+
 local date = require('date')
 
 local function calendarTimeToDate(ct)
@@ -105,4 +127,6 @@ return {
   productToFlavor = productToFlavor,
   readfile = readfile,
   recursiveMixin = recursiveMixin,
+  tget = tget,
+  tset = tset,
 }
