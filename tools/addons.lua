@@ -1,6 +1,7 @@
 local github = {
   ['ferronn-dev/ferronnizer'] = 'Ferronnizer.zip',
   ['ferronn-dev/olliverrstravels'] = 'OlliverrsTravels.zip',
+  ['nevcairiel/bartender4'] = 'Bartender4*.zip',
   ['questie/questie'] = 'Questie*.zip',
 }
 os.execute((assert(require('pl.template').substitute(
