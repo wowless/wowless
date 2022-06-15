@@ -220,6 +220,8 @@ function G.GeneratedTests()
 > end
 > if v.alias then
           assertEquals(_G.$(k), _G.$(v.alias))
+> elseif v.stdlib then
+          assert(_G.$(k))
 > elseif v.nowrap then
           return checkLuaFunc(_G.$(k))
 > else

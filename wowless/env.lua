@@ -1,12 +1,6 @@
 local util = require('wowless.util')
 local Mixin = util.mixin
 
-local function mkBaseEnv()
-  return {
-    PI = math.pi,
-  }
-end
-
 local function dump(api)
   local d = require('pl.pretty').dump
   return function(...)
@@ -25,7 +19,6 @@ local function init(api, loader, taint)
   api.env._G = api.env
   api.env.__dump = dump(api)
   api.env.forceinsecure = taint and forceinsecure or function() end
-  Mixin(api.env, mkBaseEnv())
   util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
   Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api, loader))
   if loader.version == 'Mainline' then

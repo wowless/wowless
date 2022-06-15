@@ -13782,6 +13782,9 @@ function G.GeneratedTests()
         NoPlayTime = function()
           return checkCFunc(_G.NoPlayTime)
         end,
+        PI = function()
+          assert(_G.PI)
+        end,
         PartialPlayTime = function()
           return checkCFunc(_G.PartialPlayTime)
         end,
@@ -14929,7 +14932,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.seterrorhandler)
         end,
         setfenv = function()
-          return checkCFunc(_G.setfenv)
+          assert(_G.setfenv)
         end,
         setmetatable = function()
           return checkCFunc(_G.setmetatable)
