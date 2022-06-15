@@ -49,10 +49,6 @@ function G.GeneratedTests()
             tests[k] = function()
               assertEquals('number', type(v))
             end
-          elseif ns == coroutine and k == 'yield' then
-            tests[k] = function()
-              checkCFunc(v)
-            end
           else
             -- Anything left over must be a FrameXML-defined function.
             tests[k] = tests[k] or isLuaTest(v)
@@ -10338,6 +10334,9 @@ function G.GeneratedTests()
             end,
             wrap = function()
               return checkCFunc(ns.wrap)
+            end,
+            yield = function()
+              return checkCFunc(ns.yield)
             end,
           })
         end,

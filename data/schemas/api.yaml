@@ -10,6 +10,13 @@ type:
         required: true
         type: string
   - record:
+      name:
+        required: true
+        type: string
+      stdlib:
+        required: true
+        type: string
+  - record:
       comment:
         type: string
       dbs:

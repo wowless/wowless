@@ -206,6 +206,28 @@ local function resolveUnit(units, unit)
   return guid and units.guids[guid] or nil
 end
 
+local function tget(t, s)
+  local dot = s:find('%.')
+  if dot then
+    local p = s:sub(1, dot - 1)
+    assert(t[p])
+    return t[p][s:sub(dot + 1)]
+  else
+    return t[s]
+  end
+end
+
+local function tset(t, s, v)
+  local dot = s:find('%.')
+  if dot then
+    local p = s:sub(1, dot - 1)
+    t[p] = t[p] or {}
+    t[p][s:sub(dot + 1)] = v
+  else
+    t[s] = v
+  end
+end
+
 local function loadFunctions(api, loader)
   local fns = {}
   local db2s = mkdb2s(api.env)
@@ -213,6 +235,8 @@ local function loadFunctions(api, loader)
   for fn, apicfg in pairs(loadApis(loader.version)) do
     if apicfg.alias then
       aliases[fn] = apicfg.alias
+    elseif apicfg.stdlib then
+      tset(fns, fn, tget(_G, apicfg.stdlib))
     else
       local bfn = getFn(api, loader, apicfg, db2s)
       local function doCheckInputs(sig, ...)
@@ -341,21 +365,11 @@ local function loadFunctions(api, loader)
       else
         outer = debug.newcfunction(wrapimpl)
       end
-      local dot = fn:find('%.')
-      if dot then
-        local p = fn:sub(1, dot - 1)
-        fns[p] = fns[p] or {}
-        fns[p][fn:sub(dot + 1)] = outer
-      else
-        fns[fn] = outer
-      end
+      tset(fns, fn, outer)
     end
   end
   for k, v in pairs(aliases) do
-    local dot = assert(v:find('%.'))
-    local ns = v:sub(1, dot - 1)
-    local fn = v:sub(dot + 1)
-    fns[k] = fns[ns][fn]
+    fns[k] = tget(fns, v)
   end
   return fns
 end
