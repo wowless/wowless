@@ -197,7 +197,12 @@ function G.GeneratedTests()
               end
 > end
 > if method.stdlib then
-              assert(ns.$(mname))
+>   local ty = type(tget(_G, method.stdlib))
+>   if ty == 'function' then
+              return checkCFunc(ns.$(mname))
+>   else
+              assertEquals('$(ty)', type(ns.$(mname)))
+>   end
 > else
               return checkCFunc(ns.$(mname))
 > end
@@ -310,6 +315,7 @@ end
 ]],
   {
     _escape = '>',
+    _G = _G,
     apiNamespaces = apiNamespaces,
     apis = apis,
     badflavor = badflavor,
@@ -317,6 +323,8 @@ end
     next = next,
     objTypes = objTypes,
     sorted = require('pl.tablex').sort,
+    tget = require('wowless.util').tget,
+    type = type,
     uiobjects = uiobjects,
   }
 ))

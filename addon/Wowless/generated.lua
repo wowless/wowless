@@ -10330,7 +10330,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.wrap)
             end,
             yield = function()
-              assert(ns.yield)
+              return checkCFunc(ns.yield)
             end,
           })
         end,
@@ -10379,7 +10379,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.frexp)
             end,
             huge = function()
-              assert(ns.huge)
+              assertEquals('number', type(ns.huge))
             end,
             ldexp = function()
               return checkCFunc(ns.ldexp)
@@ -10400,7 +10400,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.modf)
             end,
             pi = function()
-              assert(ns.pi)
+              assertEquals('number', type(ns.pi))
             end,
             pow = function()
               return checkCFunc(ns.pow)
@@ -10455,7 +10455,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.gsub)
             end,
             join = function()
-              assert(ns.join)
+              return checkCFunc(ns.join)
             end,
             len = function()
               return checkCFunc(ns.len)
@@ -10473,13 +10473,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.reverse)
             end,
             split = function()
-              assert(ns.split)
+              return checkCFunc(ns.split)
             end,
             sub = function()
               return checkCFunc(ns.sub)
             end,
             trim = function()
-              assert(ns.trim)
+              return checkCFunc(ns.trim)
             end,
             upper = function()
               return checkCFunc(ns.upper)
