@@ -3,6 +3,9 @@ local Mixin = util.mixin
 
 local function mkBaseEnv()
   return {
+    coroutine = {
+      yield = coroutine.yield,
+    },
     math = {
       huge = math.huge,
       pi = math.pi,

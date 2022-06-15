@@ -186,6 +186,23 @@ local syncTests = function()
         end)
       )
     end,
+    ['coroutine'] = function()
+      local log = {}
+      local co = coroutine.create(function()
+        table.insert(log, 'b')
+        coroutine.yield()
+        table.insert(log, 'e')
+      end)
+      table.insert(log, 'a')
+      assert(coroutine.resume(co))
+      table.insert(log, 'c')
+      assertEquals('suspended', coroutine.status(co))
+      table.insert(log, 'd')
+      assert(coroutine.resume(co))
+      table.insert(log, 'f')
+      assertEquals('dead', coroutine.status(co))
+      assertEquals('a,b,c,d,e,f', table.concat(log, ','))
+    end,
     ['table'] = function()
       return {
         wipe = function()
