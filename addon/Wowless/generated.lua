@@ -14928,6 +14928,9 @@ function G.GeneratedTests()
         seterrorhandler = function()
           return checkCFunc(_G.seterrorhandler)
         end,
+        setfenv = function()
+          return checkCFunc(_G.setfenv)
+        end,
         setmetatable = function()
           return checkCFunc(_G.setmetatable)
         end,

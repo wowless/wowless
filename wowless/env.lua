@@ -8,7 +8,6 @@ local function mkBaseEnv()
       pi = math.pi,
     },
     PI = math.pi,
-    setfenv = setfenv,
   }
 end
 
