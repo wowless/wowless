@@ -1,0 +1,5 @@
+---
+name: GetJournalInfoForSpellConfirmation
+status: unimplemented
+flavors:
+- Mainline

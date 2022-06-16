@@ -1,0 +1,5 @@
+---
+name: GetLFDRoleLockInfo
+status: unimplemented
+flavors:
+- Mainline

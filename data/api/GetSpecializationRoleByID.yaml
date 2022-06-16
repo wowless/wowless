@@ -1,0 +1,5 @@
+---
+name: GetSpecializationRoleByID
+status: unimplemented
+flavors:
+- Mainline

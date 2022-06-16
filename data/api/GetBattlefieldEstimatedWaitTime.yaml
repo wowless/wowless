@@ -1,0 +1,5 @@
+---
+name: GetBattlefieldEstimatedWaitTime
+status: unimplemented
+flavors:
+- Mainline

@@ -1,0 +1,5 @@
+---
+name: GetTimePreciseSec
+status: unimplemented
+flavors:
+- Mainline

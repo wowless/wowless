@@ -1,0 +1,5 @@
+---
+name: GetTrainerServiceSkillReq
+status: unimplemented
+flavors:
+- Mainline

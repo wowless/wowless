@@ -1,0 +1,5 @@
+---
+name: GetTargetTradeCurrency
+status: unimplemented
+flavors:
+- Mainline

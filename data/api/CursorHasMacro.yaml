@@ -1,0 +1,5 @@
+---
+name: CursorHasMacro
+status: unimplemented
+flavors:
+- Mainline

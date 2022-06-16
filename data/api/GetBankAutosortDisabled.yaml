@@ -1,0 +1,5 @@
+---
+name: GetBankAutosortDisabled
+status: unimplemented
+flavors:
+- Mainline

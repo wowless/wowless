@@ -1,0 +1,5 @@
+---
+name: CombatLogSetRetentionTime
+status: unimplemented
+flavors:
+- Mainline

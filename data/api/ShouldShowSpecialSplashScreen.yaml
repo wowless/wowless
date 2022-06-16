@@ -1,0 +1,5 @@
+---
+name: ShouldShowSpecialSplashScreen
+status: unimplemented
+flavors:
+- Mainline

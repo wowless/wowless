@@ -1,0 +1,5 @@
+---
+name: DoesTemplateExist
+status: unimplemented
+flavors:
+- Mainline

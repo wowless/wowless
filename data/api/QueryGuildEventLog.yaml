@@ -1,0 +1,5 @@
+---
+name: QueryGuildEventLog
+status: unimplemented
+flavors:
+- Mainline

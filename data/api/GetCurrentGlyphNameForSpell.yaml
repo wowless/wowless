@@ -1,0 +1,5 @@
+---
+name: GetCurrentGlyphNameForSpell
+status: unimplemented
+flavors:
+- Mainline

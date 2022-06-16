@@ -1,0 +1,5 @@
+---
+name: GetSpellPowerCost
+status: unimplemented
+flavors:
+- Mainline

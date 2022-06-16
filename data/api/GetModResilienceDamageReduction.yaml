@@ -1,0 +1,5 @@
+---
+name: GetModResilienceDamageReduction
+status: unimplemented
+flavors:
+- Mainline

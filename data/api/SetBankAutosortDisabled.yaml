@@ -1,0 +1,5 @@
+---
+name: SetBankAutosortDisabled
+status: unimplemented
+flavors:
+- Mainline

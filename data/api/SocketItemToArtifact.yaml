@@ -1,0 +1,5 @@
+---
+name: SocketItemToArtifact
+status: unimplemented
+flavors:
+- Mainline

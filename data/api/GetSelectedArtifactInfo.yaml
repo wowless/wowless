@@ -1,0 +1,5 @@
+---
+name: GetSelectedArtifactInfo
+status: unimplemented
+flavors:
+- Mainline

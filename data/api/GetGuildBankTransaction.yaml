@@ -1,0 +1,5 @@
+---
+name: GetGuildBankTransaction
+status: unimplemented
+flavors:
+- Mainline

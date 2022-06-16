@@ -1,0 +1,5 @@
+---
+name: IsGamePadCursorControlEnabled
+status: unimplemented
+flavors:
+- Mainline

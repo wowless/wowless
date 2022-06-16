@@ -1,0 +1,5 @@
+---
+name: CanEditGuildEvent
+status: unimplemented
+flavors:
+- Mainline

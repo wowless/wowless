@@ -1,0 +1,5 @@
+---
+name: KBQuery_GetArticleHeaderCount
+status: unimplemented
+flavors:
+- Mainline

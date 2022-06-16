@@ -1,0 +1,5 @@
+---
+name: MacOptions_SetOSShortcutsDisabled
+status: unimplemented
+flavors:
+- Mainline

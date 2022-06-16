@@ -1,0 +1,5 @@
+---
+name: GetCurrentEventID
+status: unimplemented
+flavors:
+- Mainline

@@ -1,0 +1,5 @@
+---
+name: GetCursorDelta
+status: unimplemented
+flavors:
+- Mainline

@@ -1,0 +1,5 @@
+---
+name: UpdateInventoryAlertStatus
+status: unimplemented
+flavors:
+- Mainline

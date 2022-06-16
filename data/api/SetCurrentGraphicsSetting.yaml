@@ -1,0 +1,5 @@
+---
+name: SetCurrentGraphicsSetting
+status: unimplemented
+flavors:
+- Mainline

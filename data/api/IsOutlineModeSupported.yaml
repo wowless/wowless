@@ -1,0 +1,5 @@
+---
+name: IsOutlineModeSupported
+status: unimplemented
+flavors:
+- Mainline

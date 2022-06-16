@@ -1,0 +1,5 @@
+---
+name: DeleteCursorItem
+status: unimplemented
+flavors:
+- Mainline

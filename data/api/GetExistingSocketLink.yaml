@@ -1,0 +1,5 @@
+---
+name: GetExistingSocketLink
+status: unimplemented
+flavors:
+- Mainline

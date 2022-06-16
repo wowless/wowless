@@ -1,0 +1,5 @@
+---
+name: CanItemBeSocketedToArtifact
+status: unimplemented
+flavors:
+- Mainline

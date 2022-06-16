@@ -1,0 +1,5 @@
+---
+name: LeaveChannelByLocalID
+status: unimplemented
+flavors:
+- Mainline

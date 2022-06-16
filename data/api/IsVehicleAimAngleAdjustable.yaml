@@ -1,0 +1,5 @@
+---
+name: IsVehicleAimAngleAdjustable
+status: unimplemented
+flavors:
+- Mainline

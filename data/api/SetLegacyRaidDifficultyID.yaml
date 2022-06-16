@@ -1,0 +1,5 @@
+---
+name: SetLegacyRaidDifficultyID
+status: unimplemented
+flavors:
+- Mainline

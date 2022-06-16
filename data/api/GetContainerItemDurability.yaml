@@ -1,0 +1,5 @@
+---
+name: GetContainerItemDurability
+status: unimplemented
+flavors:
+- Mainline

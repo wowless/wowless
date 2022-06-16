@@ -1,0 +1,5 @@
+---
+name: CheckInteractDistance
+status: unimplemented
+flavors:
+- Mainline

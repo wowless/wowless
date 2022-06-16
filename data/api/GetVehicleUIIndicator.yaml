@@ -1,0 +1,5 @@
+---
+name: GetVehicleUIIndicator
+status: unimplemented
+flavors:
+- Mainline

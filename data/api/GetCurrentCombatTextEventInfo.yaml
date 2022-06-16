@@ -1,0 +1,5 @@
+---
+name: GetCurrentCombatTextEventInfo
+status: unimplemented
+flavors:
+- Mainline

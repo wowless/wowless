@@ -1,0 +1,5 @@
+---
+name: IsDesaturateSupported
+status: unimplemented
+flavors:
+- Mainline

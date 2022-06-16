@@ -1,0 +1,5 @@
+---
+name: GetInstanceLockTimeRemainingEncounter
+status: unimplemented
+flavors:
+- Mainline

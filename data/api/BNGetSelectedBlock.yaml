@@ -1,0 +1,5 @@
+---
+name: BNGetSelectedBlock
+status: unimplemented
+flavors:
+- Mainline

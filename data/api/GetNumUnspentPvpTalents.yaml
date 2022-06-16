@@ -1,0 +1,5 @@
+---
+name: GetNumUnspentPvpTalents
+status: unimplemented
+flavors:
+- Mainline

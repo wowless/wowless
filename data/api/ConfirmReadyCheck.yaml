@@ -1,0 +1,5 @@
+---
+name: ConfirmReadyCheck
+status: unimplemented
+flavors:
+- Mainline

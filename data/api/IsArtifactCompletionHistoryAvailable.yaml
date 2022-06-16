@@ -1,0 +1,5 @@
+---
+name: IsArtifactCompletionHistoryAvailable
+status: unimplemented
+flavors:
+- Mainline

@@ -1,0 +1,5 @@
+---
+name: GetMaxSpellStartRecoveryOffset
+status: unimplemented
+flavors:
+- Mainline

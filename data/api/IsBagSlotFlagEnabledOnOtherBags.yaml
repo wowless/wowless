@@ -1,0 +1,5 @@
+---
+name: IsBagSlotFlagEnabledOnOtherBags
+status: unimplemented
+flavors:
+- Mainline

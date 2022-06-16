@@ -1,0 +1,5 @@
+---
+name: UnitInVehicleControlSeat
+status: unimplemented
+flavors:
+- Mainline

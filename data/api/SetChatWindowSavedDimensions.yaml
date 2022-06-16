@@ -1,0 +1,5 @@
+---
+name: SetChatWindowSavedDimensions
+status: unimplemented
+flavors:
+- Mainline

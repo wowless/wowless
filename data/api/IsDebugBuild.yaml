@@ -1,0 +1,5 @@
+---
+name: IsDebugBuild
+status: unimplemented
+flavors:
+- Mainline

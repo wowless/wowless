@@ -1,0 +1,5 @@
+---
+name: GetFramesRegisteredForEvent
+status: unimplemented
+flavors:
+- Mainline

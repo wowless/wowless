@@ -1,0 +1,5 @@
+---
+name: GetTrainerServiceLevelReq
+status: unimplemented
+flavors:
+- Mainline

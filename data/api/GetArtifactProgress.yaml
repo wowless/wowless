@@ -1,0 +1,5 @@
+---
+name: GetArtifactProgress
+status: unimplemented
+flavors:
+- Mainline

@@ -1,0 +1,5 @@
+---
+name: GetUICameraInfo
+status: unimplemented
+flavors:
+- Mainline

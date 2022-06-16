@@ -1,0 +1,5 @@
+---
+name: SetChatWindowSavedPosition
+status: unimplemented
+flavors:
+- Mainline

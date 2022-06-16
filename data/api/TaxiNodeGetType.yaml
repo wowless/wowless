@@ -1,0 +1,5 @@
+---
+name: TaxiNodeGetType
+status: unimplemented
+flavors:
+- Mainline
