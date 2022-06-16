@@ -10879,6 +10879,9 @@ function G.GeneratedTests()
         CreateFont = function()
           return checkCFunc(_G.CreateFont)
         end,
+        CreateForbiddenFrame = function()
+          assertEquals(_G.SecureCapsuleGet == nil, _G.CreateForbiddenFrame ~= nil) -- addon_spec hack
+        end,
         CreateFrame = function()
           return checkCFunc(_G.CreateFrame)
         end,
@@ -14856,6 +14859,9 @@ function G.GeneratedTests()
         end,
         loadstring = function()
           return checkCFunc(_G.loadstring)
+        end,
+        loadstring_untainted = function()
+          assertEquals(_G.SecureCapsuleGet == nil, _G.loadstring_untainted ~= nil) -- addon_spec hack
         end,
         log = function()
           assertEquals(_G.log, _G.math.log)

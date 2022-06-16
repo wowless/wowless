@@ -31,15 +31,10 @@ for _, cfg in pairs(uiobjects) do
   end
 end
 
-do
-  local unavailable = {
-    'CreateForbiddenFrame',
-    'loadstring_untainted',
-  }
-  for _, k in ipairs(unavailable) do
-    apis[k] = nil
-  end
-end
+local unavailableApis = {
+  CreateForbiddenFrame = true,
+  loadstring_untainted = true,
+}
 
 local objTypes = {}
 for _, cfg in pairs(uiobjects) do
@@ -221,7 +216,9 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.$(k))
           end
 > end
-> if v.alias then
+> if unavailableApis[k] then
+          assertEquals(_G.SecureCapsuleGet == nil, _G.$(k) ~= nil) -- addon_spec hack
+> elseif v.alias then
           assertEquals(_G.$(k), _G.$(v.alias))
 > elseif v.stdlib then
 >   local ty = type(tget(_G, v.stdlib))
@@ -330,6 +327,7 @@ end
     tget = require('wowless.util').tget,
     type = type,
     uiobjects = uiobjects,
+    unavailableApis = unavailableApis,
   }
 ))
 
