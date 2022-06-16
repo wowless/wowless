@@ -1,6 +1,3 @@
 ---
 name: CursorHasSpell
 status: unimplemented
-flavors:
-- Mainline
-- TBC

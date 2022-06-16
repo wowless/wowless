@@ -3,3 +3,4 @@ name: GetAbandonQuestItems
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

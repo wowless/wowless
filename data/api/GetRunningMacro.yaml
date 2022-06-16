@@ -1,6 +1,3 @@
 ---
 name: GetRunningMacro
 status: unimplemented
-flavors:
-- Mainline
-- TBC

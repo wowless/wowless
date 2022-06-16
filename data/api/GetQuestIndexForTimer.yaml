@@ -3,3 +3,4 @@ name: GetQuestIndexForTimer
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

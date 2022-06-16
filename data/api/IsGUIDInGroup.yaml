@@ -1,6 +1,3 @@
 ---
 name: IsGUIDInGroup
 status: unimplemented
-flavors:
-- Mainline
-- TBC

@@ -1,6 +1,3 @@
 ---
 name: PlaySoundFile
 status: unimplemented
-flavors:
-- Mainline
-- TBC

@@ -1,6 +1,3 @@
 ---
 name: ShowBuybackSellCursor
 status: unimplemented
-flavors:
-- Mainline
-- TBC

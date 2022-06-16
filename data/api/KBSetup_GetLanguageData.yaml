@@ -1,6 +1,3 @@
 ---
 name: KBSetup_GetLanguageData
 status: unimplemented
-flavors:
-- Mainline
-- TBC

@@ -1,6 +1,3 @@
 ---
 name: LeaveChannelByName
 status: unimplemented
-flavors:
-- Mainline
-- TBC

@@ -1,6 +1,3 @@
 ---
 name: GetAddOnCPUUsage
 status: unimplemented
-flavors:
-- Mainline
-- TBC

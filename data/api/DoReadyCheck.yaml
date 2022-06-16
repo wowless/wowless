@@ -1,6 +1,3 @@
 ---
 name: DoReadyCheck
 status: unimplemented
-flavors:
-- Mainline
-- TBC

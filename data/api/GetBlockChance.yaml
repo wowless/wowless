@@ -1,6 +1,3 @@
 ---
 name: GetBlockChance
 status: unimplemented
-flavors:
-- Mainline
-- TBC

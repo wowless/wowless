@@ -1,6 +1,3 @@
 ---
 name: TaxiIsDirectFlight
 status: unimplemented
-flavors:
-- Mainline
-- TBC

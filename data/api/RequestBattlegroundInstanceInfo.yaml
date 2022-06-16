@@ -1,6 +1,3 @@
 ---
 name: RequestBattlegroundInstanceInfo
 status: unimplemented
-flavors:
-- Mainline
-- TBC

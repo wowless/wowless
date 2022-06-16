@@ -1,6 +1,3 @@
 ---
 name: ChannelSetAllSilent
 status: unimplemented
-flavors:
-- Mainline
-- TBC

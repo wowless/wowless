@@ -1,6 +1,3 @@
 ---
 name: GetBindingAction
 status: unimplemented
-flavors:
-- Mainline
-- TBC

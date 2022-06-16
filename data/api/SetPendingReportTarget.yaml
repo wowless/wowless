@@ -3,3 +3,4 @@ name: SetPendingReportTarget
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

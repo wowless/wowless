@@ -3,3 +3,4 @@ name: CanSendAuctionQuery
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

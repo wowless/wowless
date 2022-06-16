@@ -3,3 +3,4 @@ name: GetCraftReagentItemLink
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

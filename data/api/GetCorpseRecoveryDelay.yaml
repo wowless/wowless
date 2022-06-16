@@ -1,6 +1,3 @@
 ---
 name: GetCorpseRecoveryDelay
 status: unimplemented
-flavors:
-- Mainline
-- TBC

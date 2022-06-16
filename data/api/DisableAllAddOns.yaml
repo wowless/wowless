@@ -1,6 +1,3 @@
 ---
 name: DisableAllAddOns
 status: unimplemented
-flavors:
-- Mainline
-- TBC

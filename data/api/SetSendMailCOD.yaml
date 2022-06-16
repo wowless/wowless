@@ -1,6 +1,3 @@
 ---
 name: SetSendMailCOD
 status: unimplemented
-flavors:
-- Mainline
-- TBC

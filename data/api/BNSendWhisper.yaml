@@ -1,6 +1,3 @@
 ---
 name: BNSendWhisper
 status: unimplemented
-flavors:
-- Mainline
-- TBC

@@ -3,3 +3,4 @@ name: GetSuperTrackedQuestID
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

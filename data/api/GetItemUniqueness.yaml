@@ -1,6 +1,3 @@
 ---
 name: GetItemUniqueness
 status: unimplemented
-flavors:
-- Mainline
-- TBC

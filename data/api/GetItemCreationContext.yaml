@@ -1,6 +1,3 @@
 ---
 name: GetItemCreationContext
 status: unimplemented
-flavors:
-- Mainline
-- TBC

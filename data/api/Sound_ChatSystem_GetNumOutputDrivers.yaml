@@ -1,6 +1,3 @@
 ---
 name: Sound_ChatSystem_GetNumOutputDrivers
 status: unimplemented
-flavors:
-- Mainline
-- TBC

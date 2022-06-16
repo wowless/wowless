@@ -1,6 +1,3 @@
 ---
 name: GetTaxiBenchmarkMode
 status: unimplemented
-flavors:
-- Mainline
-- TBC

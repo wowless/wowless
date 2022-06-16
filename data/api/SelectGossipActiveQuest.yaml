@@ -3,3 +3,4 @@ name: SelectGossipActiveQuest
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

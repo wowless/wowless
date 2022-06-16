@@ -3,3 +3,4 @@ name: GetTradeSkillItemLevelFilter
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

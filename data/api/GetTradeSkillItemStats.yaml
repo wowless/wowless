@@ -3,3 +3,4 @@ name: GetTradeSkillItemStats
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

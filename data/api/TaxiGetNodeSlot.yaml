@@ -1,6 +1,3 @@
 ---
 name: TaxiGetNodeSlot
 status: unimplemented
-flavors:
-- Mainline
-- TBC

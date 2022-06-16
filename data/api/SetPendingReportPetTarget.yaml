@@ -3,3 +3,4 @@ name: SetPendingReportPetTarget
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

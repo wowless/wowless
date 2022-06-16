@@ -1,6 +1,3 @@
 ---
 name: GetGraphicsDropdownIndexByMasterIndex
 status: unimplemented
-flavors:
-- Mainline
-- TBC

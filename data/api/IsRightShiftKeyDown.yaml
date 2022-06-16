@@ -1,6 +1,3 @@
 ---
 name: IsRightShiftKeyDown
 status: unimplemented
-flavors:
-- Mainline
-- TBC

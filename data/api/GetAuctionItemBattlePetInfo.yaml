@@ -3,3 +3,4 @@ name: GetAuctionItemBattlePetInfo
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

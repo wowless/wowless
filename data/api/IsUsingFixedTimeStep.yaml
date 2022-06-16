@@ -1,6 +1,3 @@
 ---
 name: IsUsingFixedTimeStep
 status: unimplemented
-flavors:
-- Mainline
-- TBC

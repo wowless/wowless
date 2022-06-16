@@ -1,6 +1,3 @@
 ---
 name: CheckBinderDist
 status: unimplemented
-flavors:
-- Mainline
-- TBC

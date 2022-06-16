@@ -3,3 +3,4 @@ name: BNGetGameAccountInfoByGUID
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

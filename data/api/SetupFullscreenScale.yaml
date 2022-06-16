@@ -1,6 +1,3 @@
 ---
 name: SetupFullscreenScale
 status: unimplemented
-flavors:
-- Mainline
-- TBC

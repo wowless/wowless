@@ -1,6 +1,3 @@
 ---
 name: ClosestUnitPosition
 status: unimplemented
-flavors:
-- Mainline
-- TBC

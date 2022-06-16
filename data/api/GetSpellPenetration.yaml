@@ -1,6 +1,3 @@
 ---
 name: GetSpellPenetration
 status: unimplemented
-flavors:
-- Mainline
-- TBC

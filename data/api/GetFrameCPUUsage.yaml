@@ -1,6 +1,3 @@
 ---
 name: GetFrameCPUUsage
 status: unimplemented
-flavors:
-- Mainline
-- TBC

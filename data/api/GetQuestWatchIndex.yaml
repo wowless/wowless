@@ -3,3 +3,4 @@ name: GetQuestWatchIndex
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

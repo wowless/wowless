@@ -1,6 +1,3 @@
 ---
 name: GetPendingInviteConfirmations
 status: unimplemented
-flavors:
-- Mainline
-- TBC

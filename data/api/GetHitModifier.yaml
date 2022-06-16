@@ -1,6 +1,3 @@
 ---
 name: GetHitModifier
 status: unimplemented
-flavors:
-- Mainline
-- TBC

@@ -1,6 +1,3 @@
 ---
 name: GetContainerItemID
 status: unimplemented
-flavors:
-- Mainline
-- TBC

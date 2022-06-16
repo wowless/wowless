@@ -3,3 +3,4 @@ name: GetNumStableSlots
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

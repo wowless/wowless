@@ -1,6 +1,3 @@
 ---
 name: ShowRepairCursor
 status: unimplemented
-flavors:
-- Mainline
-- TBC

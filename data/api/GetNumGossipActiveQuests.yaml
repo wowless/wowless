@@ -3,3 +3,4 @@ name: GetNumGossipActiveQuests
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

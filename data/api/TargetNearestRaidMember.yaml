@@ -1,6 +1,3 @@
 ---
 name: TargetNearestRaidMember
 status: unimplemented
-flavors:
-- Mainline
-- TBC

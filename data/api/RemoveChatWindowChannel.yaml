@@ -1,6 +1,3 @@
 ---
 name: RemoveChatWindowChannel
 status: unimplemented
-flavors:
-- Mainline
-- TBC

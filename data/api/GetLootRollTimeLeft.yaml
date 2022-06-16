@@ -1,6 +1,3 @@
 ---
 name: GetLootRollTimeLeft
 status: unimplemented
-flavors:
-- Mainline
-- TBC

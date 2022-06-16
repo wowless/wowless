@@ -3,3 +3,4 @@ name: MacOptions_HasNewStyleUniversalAccess
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

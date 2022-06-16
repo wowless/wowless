@@ -1,6 +1,3 @@
 ---
 name: GetNetIpTypes
 status: unimplemented
-flavors:
-- Mainline
-- TBC

@@ -1,6 +1,3 @@
 ---
 name: GetSpellHitModifier
 status: unimplemented
-flavors:
-- Mainline
-- TBC

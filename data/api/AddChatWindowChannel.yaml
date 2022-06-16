@@ -1,6 +1,3 @@
 ---
 name: AddChatWindowChannel
 status: unimplemented
-flavors:
-- Mainline
-- TBC

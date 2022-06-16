@@ -3,3 +3,4 @@ name: GetCraftRecipeLink
 status: unimplemented
 flavors:
 - TBC
+- Vanilla

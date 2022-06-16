@@ -1,6 +1,3 @@
 ---
 name: KBQuery_GetTotalArticleCount
 status: unimplemented
-flavors:
-- Mainline
-- TBC
