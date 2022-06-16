@@ -126,9 +126,8 @@ local text = assert(plsub(
   [[
 local _, G = ...
 local assertEquals = _G.assertEquals
-local GetObjectType = CreateFrame('Frame').GetObjectType
 function G.GeneratedTests()
-  local function checkCFunc(func)
+  local function checkFunc(func, isLua)
     assertEquals('function', type(func))
     return {
       getfenv = function()
@@ -136,43 +135,33 @@ function G.GeneratedTests()
       end,
       setfenv = function()
         assertEquals(
-          false,
+          isLua,
           pcall(function()
-            setfenv(func, _G)
+            setfenv(func, _G) -- This taints when successful, alas.
           end)
         )
       end,
     }
   end
+  local function checkCFunc(func)
+    return checkFunc(func, false)
+  end
   local function checkLuaFunc(func)
-    assertEquals('function', type(func))
-    -- Check that it is defined in Lua. This should not throw. It taints, alas.
-    setfenv(func, getfenv(func))
+    return checkFunc(func, true)
   end
   local function checkNotCFunc(func)
     if func ~= nil then
-      checkLuaFunc(func)
+      return checkLuaFunc(func)
     end
   end
   return {
     apiNamespaces = function()
-      local function isLuaTest(f)
-        return function()
-          assertEquals('function', type(f))
-          return {
-            env = function()
-              assertEquals(_G, getfenv(f))
-            end,
-            isLua = function()
-              setfenv(f, getfenv(f)) -- This taints, alas.
-            end,
-          }
-        end
-      end
       local function mkTests(ns, tests)
         for k, v in pairs(ns) do
           -- Anything left over must be a FrameXML-defined function.
-          tests[k] = tests[k] or isLuaTest(v)
+          tests[k] = tests[k] or function()
+            return checkLuaFunc(v)
+          end
         end
         return tests
       end
@@ -260,6 +249,7 @@ function G.GeneratedTests()
         local expectedErr = 'CreateFrame: Unknown frame type \'' .. ty .. '\''
         assertEquals(expectedErr, err:sub(err:len() - expectedErr:len() + 1))
       end
+      local GetObjectType = CreateFrame('Frame').GetObjectType
       return {
 > for k, v in sorted(uiobjects) do
         $(k) = function()
