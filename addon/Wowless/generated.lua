@@ -1,6 +1,7 @@
 local _, G = ...
 local assertEquals = _G.assertEquals
 function G.GeneratedTests()
+  local cfuncs = {}
   local function checkFunc(func, isLua)
     assertEquals('function', type(func))
     return {
@@ -15,6 +16,10 @@ function G.GeneratedTests()
           end)
         )
       end,
+      unique = not isLua and function()
+        assertEquals(nil, cfuncs[func])
+        cfuncs[func] = true
+      end or nil,
     }
   end
   local function checkCFunc(func)
@@ -33,8 +38,12 @@ function G.GeneratedTests()
       local function mkTests(ns, tests)
         for k, v in pairs(ns) do
           -- Anything left over must be a FrameXML-defined function.
-          tests[k] = tests[k] or function()
-            return checkLuaFunc(v)
+          if not tests[k] then
+            tests['~' .. k] = function()
+              if not cfuncs[v] then
+                return checkLuaFunc(v)
+              end
+            end
           end
         end
         return tests
@@ -5350,9 +5359,6 @@ function G.GeneratedTests()
             GetRuneforgePowers = function()
               return checkCFunc(ns.GetRuneforgePowers)
             end,
-            GetRuneforgePowersByClassAndSpec = function()
-              return checkCFunc(ns.GetRuneforgePowersByClassAndSpec)
-            end,
             GetRuneforgePowersByClassSpecAndCovenant = function()
               return checkCFunc(ns.GetRuneforgePowersByClassSpecAndCovenant)
             end,
@@ -10612,12 +10618,6 @@ function G.GeneratedTests()
         CanEditMOTD = function()
           return checkCFunc(_G.CanEditMOTD)
         end,
-        CanEditOfficerNote = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-            return checkNotCFunc(_G.CanEditOfficerNote)
-          end
-          return checkCFunc(_G.CanEditOfficerNote)
-        end,
         CanExitVehicle = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.CanExitVehicle)
@@ -13248,12 +13248,6 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.GuildNewsSort)
           end
           return checkCFunc(_G.GuildNewsSort)
-        end,
-        GuildRoster = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-            return checkNotCFunc(_G.GuildRoster)
-          end
-          return checkCFunc(_G.GuildRoster)
         end,
         HasAction = function()
           return checkCFunc(_G.HasAction)

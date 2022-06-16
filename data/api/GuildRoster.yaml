@@ -1,9 +1,0 @@
----
-name: GuildRoster
-status: unimplemented
-flavors:
-- TBC
-- Vanilla
-inputs:
-- {}
-outputs: {}

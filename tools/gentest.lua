@@ -127,6 +127,7 @@ local text = assert(plsub(
 local _, G = ...
 local assertEquals = _G.assertEquals
 function G.GeneratedTests()
+  local cfuncs = {}
   local function checkFunc(func, isLua)
     assertEquals('function', type(func))
     return {
@@ -141,6 +142,10 @@ function G.GeneratedTests()
           end)
         )
       end,
+      unique = not isLua and function()
+        assertEquals(nil, cfuncs[func])
+        cfuncs[func] = true
+      end or nil,
     }
   end
   local function checkCFunc(func)
@@ -159,8 +164,12 @@ function G.GeneratedTests()
       local function mkTests(ns, tests)
         for k, v in pairs(ns) do
           -- Anything left over must be a FrameXML-defined function.
-          tests[k] = tests[k] or function()
-            return checkLuaFunc(v)
+          if not tests[k] then
+            tests['~' .. k] = function()
+              if not cfuncs[v] then
+                return checkLuaFunc(v)
+              end
+            end
           end
         end
         return tests
