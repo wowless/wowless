@@ -10524,7 +10524,7 @@ function G.GeneratedTests()
       }
     end,
     globalApis = function()
-      return {
+      local tests = {
         AcceptAreaSpiritHeal = function()
           return checkCFunc(_G.AcceptAreaSpiritHeal)
         end,
@@ -15002,6 +15002,16 @@ function G.GeneratedTests()
           return checkCFunc(_G.xpcall)
         end,
       }
+      for k, v in pairs(_G) do
+        if type(v) == 'function' and not tests[k] then
+          tests['~' .. k] = function()
+            if not cfuncs[v] then
+              return checkLuaFunc(v)
+            end
+          end
+        end
+      end
+      return tests
     end,
     uiobjects = function()
       local function assertCreateFrame(ty)
