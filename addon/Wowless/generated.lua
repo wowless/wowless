@@ -29,7 +29,7 @@ function G.GeneratedTests()
     return checkFunc(func, true)
   end
   local function checkNotCFunc(func)
-    if func ~= nil then
+    if func ~= nil and not cfuncs[func] then
       return checkLuaFunc(func)
     end
   end
@@ -10525,6 +10525,12 @@ function G.GeneratedTests()
     end,
     globalApis = function()
       local tests = {
+        AbandonQuest = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.AbandonQuest)
+          end
+          return checkCFunc(_G.AbandonQuest)
+        end,
         AbandonSkill = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.AbandonSkill)
@@ -10533,6 +10539,12 @@ function G.GeneratedTests()
         end,
         AcceptAreaSpiritHeal = function()
           return checkCFunc(_G.AcceptAreaSpiritHeal)
+        end,
+        AcceptArenaTeam = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.AcceptArenaTeam)
+          end
+          return checkCFunc(_G.AcceptArenaTeam)
         end,
         AcceptBattlefieldPort = function()
           return checkCFunc(_G.AcceptBattlefieldPort)
@@ -10696,6 +10708,42 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.AreTalentsLocked)
         end,
+        ArenaTeamDisband = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ArenaTeamDisband)
+          end
+          return checkCFunc(_G.ArenaTeamDisband)
+        end,
+        ArenaTeamInviteByName = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ArenaTeamInviteByName)
+          end
+          return checkCFunc(_G.ArenaTeamInviteByName)
+        end,
+        ArenaTeamLeave = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ArenaTeamLeave)
+          end
+          return checkCFunc(_G.ArenaTeamLeave)
+        end,
+        ArenaTeamRoster = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ArenaTeamRoster)
+          end
+          return checkCFunc(_G.ArenaTeamRoster)
+        end,
+        ArenaTeamSetLeaderByName = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ArenaTeamSetLeaderByName)
+          end
+          return checkCFunc(_G.ArenaTeamSetLeaderByName)
+        end,
+        ArenaTeamUninviteByName = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ArenaTeamUninviteByName)
+          end
+          return checkCFunc(_G.ArenaTeamUninviteByName)
+        end,
         AscendStop = function()
           return checkCFunc(_G.AscendStop)
         end,
@@ -10786,6 +10834,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.BNGetFOFInfo)
         end,
+        BNGetFriendGameAccountInfo = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.BNGetFriendGameAccountInfo)
+          end
+          return checkCFunc(_G.BNGetFriendGameAccountInfo)
+        end,
         BNGetFriendIndex = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.BNGetFriendIndex)
@@ -10798,8 +10852,26 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.BNGetFriendInfo)
         end,
+        BNGetFriendInfoByID = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.BNGetFriendInfoByID)
+          end
+          return checkCFunc(_G.BNGetFriendInfoByID)
+        end,
         BNGetFriendInviteInfo = function()
           return checkCFunc(_G.BNGetFriendInviteInfo)
+        end,
+        BNGetGameAccountInfo = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.BNGetGameAccountInfo)
+          end
+          return checkCFunc(_G.BNGetGameAccountInfo)
+        end,
+        BNGetGameAccountInfoByGUID = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.BNGetGameAccountInfoByGUID)
+          end
+          return checkCFunc(_G.BNGetGameAccountInfoByGUID)
         end,
         BNGetInfo = function()
           return checkCFunc(_G.BNGetInfo)
@@ -10812,6 +10884,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.BNGetNumFOF)
           end
           return checkCFunc(_G.BNGetNumFOF)
+        end,
+        BNGetNumFriendGameAccounts = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.BNGetNumFriendGameAccounts)
+          end
+          return checkCFunc(_G.BNGetNumFriendGameAccounts)
         end,
         BNGetNumFriendInvites = function()
           return checkCFunc(_G.BNGetNumFriendInvites)
@@ -10996,6 +11074,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.BattlefieldMgrQueueRequest)
         end,
+        BattlefieldSetPendingReportTarget = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.BattlefieldSetPendingReportTarget)
+          end
+          return checkCFunc(_G.BattlefieldSetPendingReportTarget)
+        end,
         BeginTrade = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.BeginTrade)
@@ -11010,6 +11094,12 @@ function G.GeneratedTests()
         end,
         BreakUpLargeNumbers = function()
           return checkCFunc(_G.BreakUpLargeNumbers)
+        end,
+        BuyArenaCharter = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.BuyArenaCharter)
+          end
+          return checkCFunc(_G.BuyArenaCharter)
         end,
         BuyGuildBankTab = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -11035,6 +11125,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.BuyReagentBank)
         end,
+        BuyStableSlot = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.BuyStableSlot)
+          end
+          return checkCFunc(_G.BuyStableSlot)
+        end,
         BuyTrainerService = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.BuyTrainerService)
@@ -11046,6 +11142,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.BuybackItem)
           end
           return checkCFunc(_G.BuybackItem)
+        end,
+        CalculateAuctionDeposit = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CalculateAuctionDeposit)
+          end
+          return checkCFunc(_G.CalculateAuctionDeposit)
         end,
         CalculateStringEditDistance = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -11071,6 +11173,12 @@ function G.GeneratedTests()
         CameraZoomOut = function()
           return checkCFunc(_G.CameraZoomOut)
         end,
+        CanAbandonQuest = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CanAbandonQuest)
+          end
+          return checkCFunc(_G.CanAbandonQuest)
+        end,
         CanAffordMerchantItem = function()
           return checkCFunc(_G.CanAffordMerchantItem)
         end,
@@ -11079,6 +11187,12 @@ function G.GeneratedTests()
         end,
         CanBeRaidTarget = function()
           return checkCFunc(_G.CanBeRaidTarget)
+        end,
+        CanCancelAuction = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CanCancelAuction)
+          end
+          return checkCFunc(_G.CanCancelAuction)
         end,
         CanCancelScene = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -11151,6 +11265,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.CanGamePadControlCursor)
           end
           return checkCFunc(_G.CanGamePadControlCursor)
+        end,
+        CanGrantLevel = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CanGrantLevel)
+          end
+          return checkCFunc(_G.CanGrantLevel)
         end,
         CanGuildBankRepair = function()
           return checkCFunc(_G.CanGuildBankRepair)
@@ -11226,6 +11346,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.CanScanResearchSite)
           end
           return checkCFunc(_G.CanScanResearchSite)
+        end,
+        CanSendAuctionQuery = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CanSendAuctionQuery)
+          end
+          return checkCFunc(_G.CanSendAuctionQuery)
         end,
         CanSendSoRByText = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -11308,6 +11434,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.CancelAreaSpiritHeal)
         end,
+        CancelAuction = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CancelAuction)
+          end
+          return checkCFunc(_G.CancelAuction)
+        end,
         CancelDuel = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.CancelDuel)
@@ -11356,11 +11488,23 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.CancelScene)
         end,
+        CancelSell = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CancelSell)
+          end
+          return checkCFunc(_G.CancelSell)
+        end,
         CancelShapeshiftForm = function()
           return checkCFunc(_G.CancelShapeshiftForm)
         end,
         CancelSpellByName = function()
           return checkCFunc(_G.CancelSpellByName)
+        end,
+        CancelTrackingBuff = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CancelTrackingBuff)
+          end
+          return checkCFunc(_G.CancelTrackingBuff)
         end,
         CancelTrade = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -11518,6 +11662,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.CheckTalentMasterDist)
         end,
+        ClassicExpansionAtLeast = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ClassicExpansionAtLeast)
+          end
+          return checkCFunc(_G.ClassicExpansionAtLeast)
+        end,
         ClearAchievementComparisonUnit = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.ClearAchievementComparisonUnit)
@@ -11611,6 +11761,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.ClearVoidTransferDepositSlot)
         end,
+        ClickAuctionSellItemButton = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ClickAuctionSellItemButton)
+          end
+          return checkCFunc(_G.ClickAuctionSellItemButton)
+        end,
         ClickSendMailItemButton = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.ClickSendMailItemButton)
@@ -11622,6 +11778,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.ClickSocketButton)
           end
           return checkCFunc(_G.ClickSocketButton)
+        end,
+        ClickStablePet = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ClickStablePet)
+          end
+          return checkCFunc(_G.ClickStablePet)
         end,
         ClickTargetTradeButton = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -11658,6 +11820,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.ClickWorldMapActionButton)
           end
           return checkCFunc(_G.ClickWorldMapActionButton)
+        end,
+        CloseArenaTeamRoster = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CloseArenaTeamRoster)
+          end
+          return checkCFunc(_G.CloseArenaTeamRoster)
         end,
         CloseAuctionHouse = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -11776,6 +11944,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.CollapseAllFactionHeaders)
         end,
+        CollapseCraftSkillLine = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CollapseCraftSkillLine)
+          end
+          return checkCFunc(_G.CollapseCraftSkillLine)
+        end,
         CollapseFactionHeader = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.CollapseFactionHeader)
@@ -11799,6 +11973,18 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.CollapseSkillHeader)
           end
           return checkCFunc(_G.CollapseSkillHeader)
+        end,
+        CollapseTradeSkillSubClass = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CollapseTradeSkillSubClass)
+          end
+          return checkCFunc(_G.CollapseTradeSkillSubClass)
+        end,
+        CollapseTrainerSkillLine = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CollapseTrainerSkillLine)
+          end
+          return checkCFunc(_G.CollapseTrainerSkillLine)
         end,
         CollapseWarGameHeader = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -11853,6 +12039,12 @@ function G.GeneratedTests()
         end,
         CombatTextSetActiveUnit = function()
           return checkCFunc(_G.CombatTextSetActiveUnit)
+        end,
+        ComplainInboxItem = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ComplainInboxItem)
+          end
+          return checkCFunc(_G.ComplainInboxItem)
         end,
         CompleteLFGReadyCheck = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -11920,6 +12112,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.ConfirmOnUse)
         end,
+        ConfirmPetUnlearn = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ConfirmPetUnlearn)
+          end
+          return checkCFunc(_G.ConfirmPetUnlearn)
+        end,
         ConfirmReadyCheck = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.ConfirmReadyCheck)
@@ -11950,6 +12148,18 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.ContainerRefundItemPurchase)
         end,
+        ConvertToParty = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ConvertToParty)
+          end
+          return checkCFunc(_G.ConvertToParty)
+        end,
+        ConvertToRaid = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ConvertToRaid)
+          end
+          return checkCFunc(_G.ConvertToRaid)
+        end,
         CopyToClipboard = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.CopyToClipboard)
@@ -11961,6 +12171,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.CraftIsEnchanting)
           end
           return checkCFunc(_G.CraftIsEnchanting)
+        end,
+        CraftOnlyShowMakeable = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.CraftOnlyShowMakeable)
+          end
+          return checkCFunc(_G.CraftOnlyShowMakeable)
         end,
         CreateFont = function()
           return checkCFunc(_G.CreateFont)
@@ -12012,6 +12228,12 @@ function G.GeneratedTests()
         end,
         DeathRecap_HasEvents = function()
           return checkCFunc(_G.DeathRecap_HasEvents)
+        end,
+        DeclineArenaTeam = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.DeclineArenaTeam)
+          end
+          return checkCFunc(_G.DeclineArenaTeam)
         end,
         DeclineChannelInvite = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -12145,6 +12367,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.DisplayChannelOwner)
         end,
+        DoCraft = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.DoCraft)
+          end
+          return checkCFunc(_G.DoCraft)
+        end,
         DoEmote = function()
           return checkCFunc(_G.DoEmote)
         end,
@@ -12159,6 +12387,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.DoReadyCheck)
           end
           return checkCFunc(_G.DoReadyCheck)
+        end,
+        DoTradeSkill = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.DoTradeSkill)
+          end
+          return checkCFunc(_G.DoTradeSkill)
         end,
         DoesCurrentLocaleSellExpansionLevels = function()
           return checkCFunc(_G.DoesCurrentLocaleSellExpansionLevels)
@@ -12481,6 +12715,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.ExpandAllFactionHeaders)
         end,
+        ExpandCraftSkillLine = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ExpandCraftSkillLine)
+          end
+          return checkCFunc(_G.ExpandCraftSkillLine)
+        end,
         ExpandFactionHeader = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.ExpandFactionHeader)
@@ -12498,6 +12738,18 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.ExpandQuestHeader)
           end
           return checkCFunc(_G.ExpandQuestHeader)
+        end,
+        ExpandSkillHeader = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ExpandSkillHeader)
+          end
+          return checkCFunc(_G.ExpandSkillHeader)
+        end,
+        ExpandTradeSkillSubClass = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ExpandTradeSkillSubClass)
+          end
+          return checkCFunc(_G.ExpandTradeSkillSubClass)
         end,
         ExpandTrainerSkillLine = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -12564,6 +12816,12 @@ function G.GeneratedTests()
         end,
         FollowUnit = function()
           return checkCFunc(_G.FollowUnit)
+        end,
+        ForceGossip = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ForceGossip)
+          end
+          return checkCFunc(_G.ForceGossip)
         end,
         ForceLogout = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -12643,6 +12901,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.GMSubmitBug)
         end,
+        GMSubmitSuggestion = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GMSubmitSuggestion)
+          end
+          return checkCFunc(_G.GMSubmitSuggestion)
+        end,
         GMSurveyAnswer = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.GMSurveyAnswer)
@@ -12681,6 +12945,18 @@ function G.GeneratedTests()
         end,
         GameMovieFinished = function()
           return checkCFunc(_G.GameMovieFinished)
+        end,
+        GetAbandonQuestItems = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetAbandonQuestItems)
+          end
+          return checkCFunc(_G.GetAbandonQuestItems)
+        end,
+        GetAbandonQuestName = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetAbandonQuestName)
+          end
+          return checkCFunc(_G.GetAbandonQuestName)
         end,
         GetAccountExpansionLevel = function()
           return checkCFunc(_G.GetAccountExpansionLevel)
@@ -12892,6 +13168,36 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.GetArenaTeam)
         end,
+        GetArenaTeamGdfInfo = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetArenaTeamGdfInfo)
+          end
+          return checkCFunc(_G.GetArenaTeamGdfInfo)
+        end,
+        GetArenaTeamIndexBySize = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetArenaTeamIndexBySize)
+          end
+          return checkCFunc(_G.GetArenaTeamIndexBySize)
+        end,
+        GetArenaTeamRosterInfo = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetArenaTeamRosterInfo)
+          end
+          return checkCFunc(_G.GetArenaTeamRosterInfo)
+        end,
+        GetArenaTeamRosterSelection = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetArenaTeamRosterSelection)
+          end
+          return checkCFunc(_G.GetArenaTeamRosterSelection)
+        end,
+        GetArenaTeamRosterShowOffline = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetArenaTeamRosterShowOffline)
+          end
+          return checkCFunc(_G.GetArenaTeamRosterShowOffline)
+        end,
         GetArmorPenetration = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.GetArmorPenetration)
@@ -12910,6 +13216,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.GetArtifactProgress)
         end,
+        GetAtlasInfo = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetAtlasInfo)
+          end
+          return checkCFunc(_G.GetAtlasInfo)
+        end,
         GetAttackPowerForStat = function()
           return checkCFunc(_G.GetAttackPowerForStat)
         end,
@@ -12918,6 +13230,18 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.GetAuctionDeposit)
           end
           return checkCFunc(_G.GetAuctionDeposit)
+        end,
+        GetAuctionHouseDepositRate = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetAuctionHouseDepositRate)
+          end
+          return checkCFunc(_G.GetAuctionHouseDepositRate)
+        end,
+        GetAuctionItemBattlePetInfo = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetAuctionItemBattlePetInfo)
+          end
+          return checkCFunc(_G.GetAuctionItemBattlePetInfo)
         end,
         GetAuctionItemInfo = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -13107,6 +13431,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.GetBattlefieldStatData)
           end
           return checkCFunc(_G.GetBattlefieldStatData)
+        end,
+        GetBattlefieldStatInfo = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetBattlefieldStatInfo)
+          end
+          return checkCFunc(_G.GetBattlefieldStatInfo)
         end,
         GetBattlefieldStatus = function()
           return checkCFunc(_G.GetBattlefieldStatus)
@@ -13483,6 +13813,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.GetCraftInfo)
         end,
+        GetCraftItemLink = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetCraftItemLink)
+          end
+          return checkCFunc(_G.GetCraftItemLink)
+        end,
         GetCraftName = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.GetCraftName)
@@ -13507,11 +13843,29 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.GetCraftReagentInfo)
         end,
+        GetCraftReagentItemLink = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetCraftReagentItemLink)
+          end
+          return checkCFunc(_G.GetCraftReagentItemLink)
+        end,
+        GetCraftRecipeLink = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetCraftRecipeLink)
+          end
+          return checkCFunc(_G.GetCraftRecipeLink)
+        end,
         GetCraftSelectionIndex = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.GetCraftSelectionIndex)
           end
           return checkCFunc(_G.GetCraftSelectionIndex)
+        end,
+        GetCraftSkillLine = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetCraftSkillLine)
+          end
+          return checkCFunc(_G.GetCraftSkillLine)
         end,
         GetCraftSlots = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -13696,6 +14050,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.GetDungeonForRandomSlot)
         end,
+        GetDungeonInfo = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetDungeonInfo)
+          end
+          return checkCFunc(_G.GetDungeonInfo)
+        end,
         GetEquipmentNameFromSpell = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.GetEquipmentNameFromSpell)
@@ -13785,6 +14145,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.GetFilteredAchievementID)
           end
           return checkCFunc(_G.GetFilteredAchievementID)
+        end,
+        GetFirstBagBankSlotIndex = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetFirstBagBankSlotIndex)
+          end
+          return checkCFunc(_G.GetFirstBagBankSlotIndex)
         end,
         GetFirstTradeSkill = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -14286,6 +14652,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.GetInviteConfirmationInfo)
           end
           return checkCFunc(_G.GetInviteConfirmationInfo)
+        end,
+        GetInviteReferralInfo = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetInviteReferralInfo)
+          end
+          return checkCFunc(_G.GetInviteReferralInfo)
         end,
         GetItemChildInfo = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -15079,6 +15451,12 @@ function G.GeneratedTests()
         GetNextPendingInviteConfirmation = function()
           return checkCFunc(_G.GetNextPendingInviteConfirmation)
         end,
+        GetNextStableSlotCost = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetNextStableSlotCost)
+          end
+          return checkCFunc(_G.GetNextStableSlotCost)
+        end,
         GetNormalizedRealmName = function()
           return checkCFunc(_G.GetNormalizedRealmName)
         end,
@@ -15102,6 +15480,12 @@ function G.GeneratedTests()
         end,
         GetNumArenaOpponents = function()
           return checkCFunc(_G.GetNumArenaOpponents)
+        end,
+        GetNumArenaTeamMembers = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetNumArenaTeamMembers)
+          end
+          return checkCFunc(_G.GetNumArenaTeamMembers)
         end,
         GetNumArtifactsByRace = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -15132,6 +15516,12 @@ function G.GeneratedTests()
         end,
         GetNumBattlefieldScores = function()
           return checkCFunc(_G.GetNumBattlefieldScores)
+        end,
+        GetNumBattlefieldStats = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetNumBattlefieldStats)
+          end
+          return checkCFunc(_G.GetNumBattlefieldStats)
         end,
         GetNumBattlefieldVehicles = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -15235,11 +15625,23 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.GetNumFrames)
         end,
+        GetNumGossipActiveQuests = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetNumGossipActiveQuests)
+          end
+          return checkCFunc(_G.GetNumGossipActiveQuests)
+        end,
         GetNumGossipAvailableQuests = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.GetNumGossipAvailableQuests)
           end
           return checkCFunc(_G.GetNumGossipAvailableQuests)
+        end,
+        GetNumGossipOptions = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetNumGossipOptions)
+          end
+          return checkCFunc(_G.GetNumGossipOptions)
         end,
         GetNumGroupChannels = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -15324,6 +15726,12 @@ function G.GeneratedTests()
         end,
         GetNumPetitionNames = function()
           return checkCFunc(_G.GetNumPetitionNames)
+        end,
+        GetNumPrimaryProfessions = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetNumPrimaryProfessions)
+          end
+          return checkCFunc(_G.GetNumPrimaryProfessions)
         end,
         GetNumQuestChoices = function()
           return checkCFunc(_G.GetNumQuestChoices)
@@ -15457,6 +15865,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.GetNumSkillLines)
         end,
+        GetNumSoRRemaining = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetNumSoRRemaining)
+          end
+          return checkCFunc(_G.GetNumSoRRemaining)
+        end,
         GetNumSockets = function()
           return checkCFunc(_G.GetNumSockets)
         end,
@@ -15480,6 +15894,12 @@ function G.GeneratedTests()
         end,
         GetNumSpellTabs = function()
           return checkCFunc(_G.GetNumSpellTabs)
+        end,
+        GetNumStableSlots = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetNumStableSlots)
+          end
+          return checkCFunc(_G.GetNumStableSlots)
         end,
         GetNumSubgroupMembers = function()
           return checkCFunc(_G.GetNumSubgroupMembers)
@@ -15760,6 +16180,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.GetPetIcon)
         end,
+        GetPetLoyalty = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetPetLoyalty)
+          end
+          return checkCFunc(_G.GetPetLoyalty)
+        end,
         GetPetMeleeHaste = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.GetPetMeleeHaste)
@@ -15792,6 +16218,12 @@ function G.GeneratedTests()
         end,
         GetPetitionInfo = function()
           return checkCFunc(_G.GetPetitionInfo)
+        end,
+        GetPetitionItemPrice = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetPetitionItemPrice)
+          end
+          return checkCFunc(_G.GetPetitionItemPrice)
         end,
         GetPetitionNameInfo = function()
           return checkCFunc(_G.GetPetitionNameInfo)
@@ -15951,6 +16383,12 @@ function G.GeneratedTests()
         end,
         GetQuestID = function()
           return checkCFunc(_G.GetQuestID)
+        end,
+        GetQuestIndexForTimer = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetQuestIndexForTimer)
+          end
+          return checkCFunc(_G.GetQuestIndexForTimer)
         end,
         GetQuestIndexForWatch = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -16195,6 +16633,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.GetQuestSpellLink)
         end,
+        GetQuestTagInfo = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetQuestTagInfo)
+          end
+          return checkCFunc(_G.GetQuestTagInfo)
+        end,
         GetQuestText = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.GetQuestText)
@@ -16212,6 +16656,18 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.GetQuestUiMapID)
           end
           return checkCFunc(_G.GetQuestUiMapID)
+        end,
+        GetQuestWatchIndex = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetQuestWatchIndex)
+          end
+          return checkCFunc(_G.GetQuestWatchIndex)
+        end,
+        GetQuestWatchInfo = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetQuestWatchInfo)
+          end
+          return checkCFunc(_G.GetQuestWatchInfo)
         end,
         GetQuestsCompleted = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -16518,6 +16974,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.GetSelectedSkill)
           end
           return checkCFunc(_G.GetSelectedSkill)
+        end,
+        GetSelectedStablePet = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetSelectedStablePet)
+          end
+          return checkCFunc(_G.GetSelectedStablePet)
         end,
         GetSelectedWarGameType = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -16858,6 +17320,12 @@ function G.GeneratedTests()
         GetSubZoneText = function()
           return checkCFunc(_G.GetSubZoneText)
         end,
+        GetSuggestedGroupNum = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetSuggestedGroupNum)
+          end
+          return checkCFunc(_G.GetSuggestedGroupNum)
+        end,
         GetSuggestedGroupSize = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.GetSuggestedGroupSize)
@@ -16866,6 +17334,12 @@ function G.GeneratedTests()
         end,
         GetSummonFriendCooldown = function()
           return checkCFunc(_G.GetSummonFriendCooldown)
+        end,
+        GetSuperTrackedQuestID = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetSuperTrackedQuestID)
+          end
+          return checkCFunc(_G.GetSuperTrackedQuestID)
         end,
         GetTabardCreationCost = function()
           return checkCFunc(_G.GetTabardCreationCost)
@@ -16896,6 +17370,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.GetTalentLink)
           end
           return checkCFunc(_G.GetTalentLink)
+        end,
+        GetTalentPrereqs = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetTalentPrereqs)
+          end
+          return checkCFunc(_G.GetTalentPrereqs)
         end,
         GetTalentTabInfo = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -17068,6 +17548,30 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.GetTradeSkillInvSlots)
         end,
+        GetTradeSkillItemLevelFilter = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetTradeSkillItemLevelFilter)
+          end
+          return checkCFunc(_G.GetTradeSkillItemLevelFilter)
+        end,
+        GetTradeSkillItemLink = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetTradeSkillItemLink)
+          end
+          return checkCFunc(_G.GetTradeSkillItemLink)
+        end,
+        GetTradeSkillItemNameFilter = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetTradeSkillItemNameFilter)
+          end
+          return checkCFunc(_G.GetTradeSkillItemNameFilter)
+        end,
+        GetTradeSkillItemStats = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetTradeSkillItemStats)
+          end
+          return checkCFunc(_G.GetTradeSkillItemStats)
+        end,
         GetTradeSkillLine = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.GetTradeSkillLine)
@@ -17091,6 +17595,18 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.GetTradeSkillReagentInfo)
           end
           return checkCFunc(_G.GetTradeSkillReagentInfo)
+        end,
+        GetTradeSkillReagentItemLink = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetTradeSkillReagentItemLink)
+          end
+          return checkCFunc(_G.GetTradeSkillReagentItemLink)
+        end,
+        GetTradeSkillRecipeLink = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetTradeSkillRecipeLink)
+          end
+          return checkCFunc(_G.GetTradeSkillRecipeLink)
         end,
         GetTradeSkillSelectionIndex = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -17205,6 +17721,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.GetUICameraInfo)
           end
           return checkCFunc(_G.GetUICameraInfo)
+        end,
+        GetUITextureKitInfo = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GetUITextureKitInfo)
+          end
+          return checkCFunc(_G.GetUITextureKitInfo)
         end,
         GetUnitChargedPowerPoints = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -17449,6 +17971,12 @@ function G.GeneratedTests()
         GuildControlGetNumRanks = function()
           return checkCFunc(_G.GuildControlGetNumRanks)
         end,
+        GuildControlGetRankFlags = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GuildControlGetRankFlags)
+          end
+          return checkCFunc(_G.GuildControlGetRankFlags)
+        end,
         GuildControlGetRankName = function()
           return checkCFunc(_G.GuildControlGetRankName)
         end,
@@ -17532,6 +18060,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.GuildPromote)
           end
           return checkCFunc(_G.GuildPromote)
+        end,
+        GuildRosterSendSoR = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.GuildRosterSendSoR)
+          end
+          return checkCFunc(_G.GuildRosterSendSoR)
         end,
         GuildRosterSetOfficerNote = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -17637,6 +18171,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.HasInboxItem)
           end
           return checkCFunc(_G.HasInboxItem)
+        end,
+        HasInspectHonorData = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.HasInspectHonorData)
+          end
+          return checkCFunc(_G.HasInspectHonorData)
         end,
         HasKey = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -17764,6 +18304,12 @@ function G.GeneratedTests()
         InteractUnit = function()
           return checkCFunc(_G.InteractUnit)
         end,
+        InviteUnit = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.InviteUnit)
+          end
+          return checkCFunc(_G.InviteUnit)
+        end,
         Is64BitClient = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.Is64BitClient)
@@ -17812,6 +18358,12 @@ function G.GeneratedTests()
         IsAltKeyDown = function()
           return checkCFunc(_G.IsAltKeyDown)
         end,
+        IsArenaSeasonActive = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.IsArenaSeasonActive)
+          end
+          return checkCFunc(_G.IsArenaSeasonActive)
+        end,
         IsArenaSkirmish = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.IsArenaSkirmish)
@@ -17856,6 +18408,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.IsAttackSpell)
           end
           return checkCFunc(_G.IsAttackSpell)
+        end,
+        IsAuctionSortReversed = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.IsAuctionSortReversed)
+          end
+          return checkCFunc(_G.IsAuctionSortReversed)
         end,
         IsAutoRepeatAction = function()
           return checkCFunc(_G.IsAutoRepeatAction)
@@ -18024,6 +18582,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.IsDisplayChannelOwner)
           end
           return checkCFunc(_G.IsDisplayChannelOwner)
+        end,
+        IsDressableItem = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.IsDressableItem)
+          end
+          return checkCFunc(_G.IsDressableItem)
         end,
         IsDualWielding = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -18433,6 +18997,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.IsPetAttackActive)
         end,
+        IsPlayerAttacking = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.IsPlayerAttacking)
+          end
+          return checkCFunc(_G.IsPlayerAttacking)
+        end,
         IsPlayerInWorld = function()
           return checkCFunc(_G.IsPlayerInWorld)
         end,
@@ -18468,6 +19038,18 @@ function G.GeneratedTests()
         end,
         IsQuestCompletable = function()
           return checkCFunc(_G.IsQuestCompletable)
+        end,
+        IsQuestComplete = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.IsQuestComplete)
+          end
+          return checkCFunc(_G.IsQuestComplete)
+        end,
+        IsQuestHardWatched = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.IsQuestHardWatched)
+          end
+          return checkCFunc(_G.IsQuestHardWatched)
         end,
         IsQuestIDValidSpellTarget = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -18525,6 +19107,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.IsRecruitAFriendLinked)
           end
           return checkCFunc(_G.IsRecruitAFriendLinked)
+        end,
+        IsReferAFriendLinked = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.IsReferAFriendLinked)
+          end
+          return checkCFunc(_G.IsReferAFriendLinked)
         end,
         IsReplacingUnit = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -18676,6 +19264,12 @@ function G.GeneratedTests()
         IsTradeskillTrainer = function()
           return checkCFunc(_G.IsTradeskillTrainer)
         end,
+        IsTrainerServiceLearnSpell = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.IsTrainerServiceLearnSpell)
+          end
+          return checkCFunc(_G.IsTrainerServiceLearnSpell)
+        end,
         IsTrialAccount = function()
           return checkCFunc(_G.IsTrialAccount)
         end,
@@ -18693,6 +19287,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.IsUnitOnQuest)
           end
           return checkCFunc(_G.IsUnitOnQuest)
+        end,
+        IsUnitOnQuestByQuestID = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.IsUnitOnQuestByQuestID)
+          end
+          return checkCFunc(_G.IsUnitOnQuestByQuestID)
         end,
         IsUsableAction = function()
           return checkCFunc(_G.IsUsableAction)
@@ -19051,6 +19651,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.LeaveLFG)
         end,
+        LeaveParty = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.LeaveParty)
+          end
+          return checkCFunc(_G.LeaveParty)
+        end,
         LeaveSingleLFG = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.LeaveSingleLFG)
@@ -19125,6 +19731,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.MacOptions_HasNewStyleInputMonitoring)
           end
           return checkCFunc(_G.MacOptions_HasNewStyleInputMonitoring)
+        end,
+        MacOptions_HasNewStyleUniversalAccess = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.MacOptions_HasNewStyleUniversalAccess)
+          end
+          return checkCFunc(_G.MacOptions_HasNewStyleUniversalAccess)
         end,
         MacOptions_IsInputMonitoringEnabled = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -19573,6 +20185,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.PlaceAction)
         end,
+        PlaceAuctionBid = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.PlaceAuctionBid)
+          end
+          return checkCFunc(_G.PlaceAuctionBid)
+        end,
         PlaceRaidMarker = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.PlaceRaidMarker)
@@ -19645,6 +20263,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.PortGraveyard)
         end,
+        PostAuction = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.PostAuction)
+          end
+          return checkCFunc(_G.PostAuction)
+        end,
         PreloadMovie = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.PreloadMovie)
@@ -19686,6 +20310,12 @@ function G.GeneratedTests()
         end,
         PutItemInBag = function()
           return checkCFunc(_G.PutItemInBag)
+        end,
+        QueryAuctionItems = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.QueryAuctionItems)
+          end
+          return checkCFunc(_G.QueryAuctionItems)
         end,
         QueryGuildBankLog = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -19885,6 +20515,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.RemovePvpTalent)
         end,
+        RemoveQuestWatch = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.RemoveQuestWatch)
+          end
+          return checkCFunc(_G.RemoveQuestWatch)
+        end,
         RemoveTalent = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.RemoveTalent)
@@ -19995,6 +20631,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.RequestGuildRewards)
           end
           return checkCFunc(_G.RequestGuildRewards)
+        end,
+        RequestInspectHonorData = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.RequestInspectHonorData)
+          end
+          return checkCFunc(_G.RequestInspectHonorData)
         end,
         RequestLFDPartyLockInfo = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -20269,6 +20911,18 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.SelectCraft)
         end,
+        SelectGossipActiveQuest = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SelectGossipActiveQuest)
+          end
+          return checkCFunc(_G.SelectGossipActiveQuest)
+        end,
+        SelectGossipAvailableQuest = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SelectGossipAvailableQuest)
+          end
+          return checkCFunc(_G.SelectGossipAvailableQuest)
+        end,
         SelectGossipOption = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.SelectGossipOption)
@@ -20314,6 +20968,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.SendMail)
         end,
+        SendSoRByText = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SendSoRByText)
+          end
+          return checkCFunc(_G.SendSoRByText)
+        end,
         SendSubscriptionInterstitialResponse = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.SendSubscriptionInterstitialResponse)
@@ -20322,6 +20982,12 @@ function G.GeneratedTests()
         end,
         SendSystemMessage = function()
           return checkCFunc(_G.SendSystemMessage)
+        end,
+        SetAbandonQuest = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetAbandonQuest)
+          end
+          return checkCFunc(_G.SetAbandonQuest)
         end,
         SetAchievementComparisonUnit = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -20358,6 +21024,18 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.SetAllowLowLevelRaid)
           end
           return checkCFunc(_G.SetAllowLowLevelRaid)
+        end,
+        SetArenaTeamRosterSelection = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetArenaTeamRosterSelection)
+          end
+          return checkCFunc(_G.SetArenaTeamRosterSelection)
+        end,
+        SetArenaTeamRosterShowOffline = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetArenaTeamRosterShowOffline)
+          end
+          return checkCFunc(_G.SetArenaTeamRosterShowOffline)
         end,
         SetAuctionsTabShowing = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -20502,6 +21180,12 @@ function G.GeneratedTests()
         end,
         SetConsoleKey = function()
           return checkCFunc(_G.SetConsoleKey)
+        end,
+        SetCraftFilter = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetCraftFilter)
+          end
+          return checkCFunc(_G.SetCraftFilter)
         end,
         SetCurrentGraphicsSetting = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -20836,6 +21520,24 @@ function G.GeneratedTests()
         SetPartyAssignment = function()
           return checkCFunc(_G.SetPartyAssignment)
         end,
+        SetPendingReportArenaTeamName = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetPendingReportArenaTeamName)
+          end
+          return checkCFunc(_G.SetPendingReportArenaTeamName)
+        end,
+        SetPendingReportPetTarget = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetPendingReportPetTarget)
+          end
+          return checkCFunc(_G.SetPendingReportPetTarget)
+        end,
+        SetPendingReportTarget = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetPendingReportTarget)
+          end
+          return checkCFunc(_G.SetPendingReportTarget)
+        end,
         SetPetSlot = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.SetPetSlot)
@@ -20905,6 +21607,18 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.SetSelectedArtifact)
         end,
+        SetSelectedAuctionItem = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetSelectedAuctionItem)
+          end
+          return checkCFunc(_G.SetSelectedAuctionItem)
+        end,
+        SetSelectedBattlefield = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetSelectedBattlefield)
+          end
+          return checkCFunc(_G.SetSelectedBattlefield)
+        end,
         SetSelectedDisplayChannel = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.SetSelectedDisplayChannel)
@@ -20968,6 +21682,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.SetSpellbookPetAction)
         end,
+        SetSuperTrackedQuestID = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetSuperTrackedQuestID)
+          end
+          return checkCFunc(_G.SetSuperTrackedQuestID)
+        end,
         SetTaxiBenchmarkMode = function()
           return checkCFunc(_G.SetTaxiBenchmarkMode)
         end,
@@ -20991,6 +21711,30 @@ function G.GeneratedTests()
         end,
         SetTradeMoney = function()
           return checkCFunc(_G.SetTradeMoney)
+        end,
+        SetTradeSkillInvSlotFilter = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetTradeSkillInvSlotFilter)
+          end
+          return checkCFunc(_G.SetTradeSkillInvSlotFilter)
+        end,
+        SetTradeSkillItemLevelFilter = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetTradeSkillItemLevelFilter)
+          end
+          return checkCFunc(_G.SetTradeSkillItemLevelFilter)
+        end,
+        SetTradeSkillItemNameFilter = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetTradeSkillItemNameFilter)
+          end
+          return checkCFunc(_G.SetTradeSkillItemNameFilter)
+        end,
+        SetTradeSkillSubClassFilter = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SetTradeSkillSubClassFilter)
+          end
+          return checkCFunc(_G.SetTradeSkillSubClassFilter)
         end,
         SetTrainerServiceTypeFilter = function()
           return checkCFunc(_G.SetTrainerServiceTypeFilter)
@@ -21052,11 +21796,23 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.ShowBuybackSellCursor)
         end,
+        ShowCloak = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ShowCloak)
+          end
+          return checkCFunc(_G.ShowCloak)
+        end,
         ShowContainerSellCursor = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.ShowContainerSellCursor)
           end
           return checkCFunc(_G.ShowContainerSellCursor)
+        end,
+        ShowHelm = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ShowHelm)
+          end
+          return checkCFunc(_G.ShowHelm)
         end,
         ShowInventorySellCursor = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -21081,6 +21837,18 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.ShowRepairCursor)
           end
           return checkCFunc(_G.ShowRepairCursor)
+        end,
+        ShowingCloak = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ShowingCloak)
+          end
+          return checkCFunc(_G.ShowingCloak)
+        end,
+        ShowingHelm = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.ShowingHelm)
+          end
+          return checkCFunc(_G.ShowingHelm)
         end,
         SignPetition = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -21115,11 +21883,29 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.SolveArtifact)
         end,
+        SortArenaTeamRoster = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SortArenaTeamRoster)
+          end
+          return checkCFunc(_G.SortArenaTeamRoster)
+        end,
+        SortAuctionApplySort = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SortAuctionApplySort)
+          end
+          return checkCFunc(_G.SortAuctionApplySort)
+        end,
         SortAuctionClearSort = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.SortAuctionClearSort)
           end
           return checkCFunc(_G.SortAuctionClearSort)
+        end,
+        SortAuctionItems = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SortAuctionItems)
+          end
+          return checkCFunc(_G.SortAuctionItems)
         end,
         SortAuctionSetSort = function()
           if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
@@ -21165,6 +21951,12 @@ function G.GeneratedTests()
         end,
         SortQuestSortTypes = function()
           return checkCFunc(_G.SortQuestSortTypes)
+        end,
+        SortQuestWatches = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.SortQuestWatches)
+          end
+          return checkCFunc(_G.SortQuestWatches)
         end,
         SortQuests = function()
           return checkCFunc(_G.SortQuests)
@@ -21331,8 +22123,20 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.SplitGuildBankItem)
         end,
+        StablePet = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.StablePet)
+          end
+          return checkCFunc(_G.StablePet)
+        end,
         StartAttack = function()
           return checkCFunc(_G.StartAttack)
+        end,
+        StartAuction = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.StartAuction)
+          end
+          return checkCFunc(_G.StartAuction)
         end,
         StartAutoRun = function()
           return checkCFunc(_G.StartAutoRun)
@@ -21670,8 +22474,20 @@ function G.GeneratedTests()
         ToggleWindowed = function()
           return checkCFunc(_G.ToggleWindowed)
         end,
+        TradeSkillOnlyShowMakeable = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.TradeSkillOnlyShowMakeable)
+          end
+          return checkCFunc(_G.TradeSkillOnlyShowMakeable)
+        end,
         TriggerTutorial = function()
           return checkCFunc(_G.TriggerTutorial)
+        end,
+        TurnInArenaPetition = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.TurnInArenaPetition)
+          end
+          return checkCFunc(_G.TurnInArenaPetition)
         end,
         TurnInGuildCharter = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -21829,6 +22645,12 @@ function G.GeneratedTests()
         UnitDebuff = function()
           return checkCFunc(_G.UnitDebuff)
         end,
+        UnitDefense = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.UnitDefense)
+          end
+          return checkCFunc(_G.UnitDefense)
+        end,
         UnitDetailedThreatSituation = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
             return checkNotCFunc(_G.UnitDetailedThreatSituation)
@@ -21964,6 +22786,12 @@ function G.GeneratedTests()
           end
           return checkCFunc(_G.UnitInPartyShard)
         end,
+        UnitInPhase = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.UnitInPhase)
+          end
+          return checkCFunc(_G.UnitInPhase)
+        end,
         UnitInRaid = function()
           return checkCFunc(_G.UnitInRaid)
         end,
@@ -22011,6 +22839,12 @@ function G.GeneratedTests()
         end,
         UnitIsCharmed = function()
           return checkCFunc(_G.UnitIsCharmed)
+        end,
+        UnitIsCivilian = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.UnitIsCivilian)
+          end
+          return checkCFunc(_G.UnitIsCivilian)
         end,
         UnitIsConnected = function()
           return checkCFunc(_G.UnitIsConnected)
@@ -22410,6 +23244,12 @@ function G.GeneratedTests()
             return checkNotCFunc(_G.UnmuteSoundFile)
           end
           return checkCFunc(_G.UnmuteSoundFile)
+        end,
+        UnstablePet = function()
+          if WOW_PROJECT_ID ~= WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return checkNotCFunc(_G.UnstablePet)
+          end
+          return checkCFunc(_G.UnstablePet)
         end,
         UpdateAddOnCPUUsage = function()
           if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
