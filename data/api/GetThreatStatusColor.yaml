@@ -1,0 +1,5 @@
+---
+name: GetThreatStatusColor
+status: unimplemented
+flavors:
+- Mainline

@@ -1,0 +1,5 @@
+---
+name: IsSpellValidForPendingGlyph
+status: unimplemented
+flavors:
+- Mainline

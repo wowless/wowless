@@ -1,0 +1,5 @@
+---
+name: RemoveItemFromArtifact
+status: unimplemented
+flavors:
+- Mainline

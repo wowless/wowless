@@ -1,0 +1,6 @@
+---
+name: GuildControlGetRankFlags
+status: unimplemented
+flavors:
+- TBC
+- Vanilla

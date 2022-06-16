@@ -1,0 +1,5 @@
+---
+name: HasPendingGlyphCast
+status: unimplemented
+flavors:
+- Mainline

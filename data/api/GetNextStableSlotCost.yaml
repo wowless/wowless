@@ -1,0 +1,6 @@
+---
+name: GetNextStableSlotCost
+status: unimplemented
+flavors:
+- TBC
+- Vanilla

@@ -1,0 +1,5 @@
+---
+name: IsAllowedToUserTeleport
+status: unimplemented
+flavors:
+- Mainline

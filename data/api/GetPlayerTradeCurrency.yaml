@@ -1,0 +1,5 @@
+---
+name: GetPlayerTradeCurrency
+status: unimplemented
+flavors:
+- Mainline

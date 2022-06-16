@@ -1,0 +1,5 @@
+---
+name: GetCombatRatingBonusForCombatRatingValue
+status: unimplemented
+flavors:
+- Mainline

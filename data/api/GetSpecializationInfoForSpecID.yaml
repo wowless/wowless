@@ -1,0 +1,5 @@
+---
+name: GetSpecializationInfoForSpecID
+status: unimplemented
+flavors:
+- Mainline

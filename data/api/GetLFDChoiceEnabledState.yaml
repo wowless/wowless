@@ -1,0 +1,5 @@
+---
+name: GetLFDChoiceEnabledState
+status: unimplemented
+flavors:
+- Mainline

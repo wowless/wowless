@@ -150,7 +150,7 @@ function G.GeneratedTests()
     return checkFunc(func, true)
   end
   local function checkNotCFunc(func)
-    if func ~= nil then
+    if func ~= nil and not cfuncs[func] then
       return checkLuaFunc(func)
     end
   end
@@ -207,7 +207,7 @@ function G.GeneratedTests()
       }
     end,
     globalApis = function()
-      return {
+      local tests = {
 > for k, v in sorted(apis) do
 > if not k:find('%.') then
         $(k) = function()
@@ -236,6 +236,16 @@ function G.GeneratedTests()
 > end
 > end
       }
+      for k, v in pairs(_G) do
+        if type(v) == 'function' and not tests[k] then
+          tests['~' .. k] = function()
+            if not cfuncs[v] then
+              return checkLuaFunc(v)
+            end
+          end
+        end
+      end
+      return tests
     end,
     uiobjects = function()
       local function assertCreateFrame(ty)

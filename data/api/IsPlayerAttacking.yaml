@@ -1,0 +1,6 @@
+---
+name: IsPlayerAttacking
+status: unimplemented
+flavors:
+- TBC
+- Vanilla

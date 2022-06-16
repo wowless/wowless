@@ -1,0 +1,5 @@
+---
+name: SetCursorVirtualItem
+status: unimplemented
+flavors:
+- Mainline

@@ -1,0 +1,5 @@
+---
+name: SetPOIIconOverlapDistance
+status: unimplemented
+flavors:
+- Mainline
