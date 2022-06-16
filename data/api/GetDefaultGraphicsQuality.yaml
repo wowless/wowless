@@ -3,3 +3,4 @@ name: GetDefaultGraphicsQuality
 status: unimplemented
 flavors:
 - Mainline
+- TBC

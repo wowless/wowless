@@ -3,3 +3,4 @@ name: PickupPlayerMoney
 status: unimplemented
 flavors:
 - Mainline
+- TBC

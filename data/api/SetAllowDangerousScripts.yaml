@@ -3,3 +3,4 @@ name: SetAllowDangerousScripts
 status: unimplemented
 flavors:
 - Mainline
+- TBC

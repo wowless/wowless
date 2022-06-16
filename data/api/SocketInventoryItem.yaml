@@ -3,3 +3,4 @@ name: SocketInventoryItem
 status: unimplemented
 flavors:
 - Mainline
+- TBC

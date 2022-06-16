@@ -3,3 +3,4 @@ name: KBArticle_IsLoaded
 status: unimplemented
 flavors:
 - Mainline
+- TBC

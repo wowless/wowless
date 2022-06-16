@@ -10532,7 +10532,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.AbandonQuest)
         end,
         AbandonSkill = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AbandonSkill)
           end
           return checkCFunc(_G.AbandonSkill)
@@ -10550,19 +10550,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.AcceptBattlefieldPort)
         end,
         AcceptDuel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AcceptDuel)
           end
           return checkCFunc(_G.AcceptDuel)
         end,
         AcceptGroup = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AcceptGroup)
           end
           return checkCFunc(_G.AcceptGroup)
         end,
         AcceptGuild = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AcceptGuild)
           end
           return checkCFunc(_G.AcceptGuild)
@@ -10574,37 +10574,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.AcceptProposal)
         end,
         AcceptQuest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AcceptQuest)
           end
           return checkCFunc(_G.AcceptQuest)
         end,
         AcceptResurrect = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AcceptResurrect)
           end
           return checkCFunc(_G.AcceptResurrect)
         end,
         AcceptSockets = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AcceptSockets)
           end
           return checkCFunc(_G.AcceptSockets)
         end,
         AcceptSpellConfirmationPrompt = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AcceptSpellConfirmationPrompt)
           end
           return checkCFunc(_G.AcceptSpellConfirmationPrompt)
         end,
         AcceptTrade = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AcceptTrade)
           end
           return checkCFunc(_G.AcceptTrade)
         end,
         AcceptXPLoss = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AcceptXPLoss)
           end
           return checkCFunc(_G.AcceptXPLoss)
@@ -10616,19 +10616,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.AcknowledgeAutoAcceptQuest)
         end,
         AcknowledgeSurvey = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AcknowledgeSurvey)
           end
           return checkCFunc(_G.AcknowledgeSurvey)
         end,
         ActionBindsItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ActionBindsItem)
           end
           return checkCFunc(_G.ActionBindsItem)
         end,
         ActionHasRange = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ActionHasRange)
           end
           return checkCFunc(_G.ActionHasRange)
@@ -10640,7 +10640,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.AddAutoQuestPopUp)
         end,
         AddChatWindowChannel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AddChatWindowChannel)
           end
           return checkCFunc(_G.AddChatWindowChannel)
@@ -10661,13 +10661,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.AddTrackedAchievement)
         end,
         AddTradeMoney = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AddTradeMoney)
           end
           return checkCFunc(_G.AddTradeMoney)
         end,
         Ambiguate = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.Ambiguate)
           end
           return checkCFunc(_G.Ambiguate)
@@ -10760,55 +10760,55 @@ function G.GeneratedTests()
           return checkCFunc(_G.AttackTarget)
         end,
         AutoChooseCurrentGraphicsSetting = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AutoChooseCurrentGraphicsSetting)
           end
           return checkCFunc(_G.AutoChooseCurrentGraphicsSetting)
         end,
         AutoEquipCursorItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AutoEquipCursorItem)
           end
           return checkCFunc(_G.AutoEquipCursorItem)
         end,
         AutoLootMailItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AutoLootMailItem)
           end
           return checkCFunc(_G.AutoLootMailItem)
         end,
         AutoStoreGuildBankItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.AutoStoreGuildBankItem)
           end
           return checkCFunc(_G.AutoStoreGuildBankItem)
         end,
         BNAcceptFriendInvite = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNAcceptFriendInvite)
           end
           return checkCFunc(_G.BNAcceptFriendInvite)
         end,
         BNCheckBattleTagInviteToGuildMember = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNCheckBattleTagInviteToGuildMember)
           end
           return checkCFunc(_G.BNCheckBattleTagInviteToGuildMember)
         end,
         BNCheckBattleTagInviteToUnit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNCheckBattleTagInviteToUnit)
           end
           return checkCFunc(_G.BNCheckBattleTagInviteToUnit)
         end,
         BNConnected = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNConnected)
           end
           return checkCFunc(_G.BNConnected)
         end,
         BNDeclineFriendInvite = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNDeclineFriendInvite)
           end
           return checkCFunc(_G.BNDeclineFriendInvite)
@@ -10823,13 +10823,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.BNGetBlockedInfo)
         end,
         BNGetDisplayName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNGetDisplayName)
           end
           return checkCFunc(_G.BNGetDisplayName)
         end,
         BNGetFOFInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNGetFOFInfo)
           end
           return checkCFunc(_G.BNGetFOFInfo)
@@ -10841,7 +10841,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.BNGetFriendGameAccountInfo)
         end,
         BNGetFriendIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNGetFriendIndex)
           end
           return checkCFunc(_G.BNGetFriendIndex)
@@ -10880,7 +10880,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.BNGetNumBlocked)
         end,
         BNGetNumFOF = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNGetNumFOF)
           end
           return checkCFunc(_G.BNGetNumFOF)
@@ -10898,115 +10898,115 @@ function G.GeneratedTests()
           return checkCFunc(_G.BNGetNumFriends)
         end,
         BNGetSelectedBlock = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNGetSelectedBlock)
           end
           return checkCFunc(_G.BNGetSelectedBlock)
         end,
         BNGetSelectedFriend = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNGetSelectedFriend)
           end
           return checkCFunc(_G.BNGetSelectedFriend)
         end,
         BNInviteFriend = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNInviteFriend)
           end
           return checkCFunc(_G.BNInviteFriend)
         end,
         BNIsBlocked = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNIsBlocked)
           end
           return checkCFunc(_G.BNIsBlocked)
         end,
         BNIsFriend = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNIsFriend)
           end
           return checkCFunc(_G.BNIsFriend)
         end,
         BNIsSelf = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNIsSelf)
           end
           return checkCFunc(_G.BNIsSelf)
         end,
         BNRemoveFriend = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNRemoveFriend)
           end
           return checkCFunc(_G.BNRemoveFriend)
         end,
         BNRequestFOFInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNRequestFOFInfo)
           end
           return checkCFunc(_G.BNRequestFOFInfo)
         end,
         BNRequestInviteFriend = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNRequestInviteFriend)
           end
           return checkCFunc(_G.BNRequestInviteFriend)
         end,
         BNSendFriendInvite = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSendFriendInvite)
           end
           return checkCFunc(_G.BNSendFriendInvite)
         end,
         BNSendFriendInviteByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSendFriendInviteByID)
           end
           return checkCFunc(_G.BNSendFriendInviteByID)
         end,
         BNSendGameData = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSendGameData)
           end
           return checkCFunc(_G.BNSendGameData)
         end,
         BNSendSoR = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSendSoR)
           end
           return checkCFunc(_G.BNSendSoR)
         end,
         BNSendVerifiedBattleTagInvite = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSendVerifiedBattleTagInvite)
           end
           return checkCFunc(_G.BNSendVerifiedBattleTagInvite)
         end,
         BNSendWhisper = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSendWhisper)
           end
           return checkCFunc(_G.BNSendWhisper)
         end,
         BNSetAFK = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSetAFK)
           end
           return checkCFunc(_G.BNSetAFK)
         end,
         BNSetBlocked = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSetBlocked)
           end
           return checkCFunc(_G.BNSetBlocked)
         end,
         BNSetCustomMessage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSetCustomMessage)
           end
           return checkCFunc(_G.BNSetCustomMessage)
         end,
         BNSetDND = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSetDND)
           end
           return checkCFunc(_G.BNSetDND)
@@ -11018,31 +11018,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.BNSetFriendFavoriteFlag)
         end,
         BNSetFriendNote = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSetFriendNote)
           end
           return checkCFunc(_G.BNSetFriendNote)
         end,
         BNSetSelectedBlock = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSetSelectedBlock)
           end
           return checkCFunc(_G.BNSetSelectedBlock)
         end,
         BNSetSelectedFriend = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSetSelectedFriend)
           end
           return checkCFunc(_G.BNSetSelectedFriend)
         end,
         BNSummonFriendByIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNSummonFriendByIndex)
           end
           return checkCFunc(_G.BNSummonFriendByIndex)
         end,
         BNTokenFindName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BNTokenFindName)
           end
           return checkCFunc(_G.BNTokenFindName)
@@ -11081,13 +11081,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.BattlefieldSetPendingReportTarget)
         end,
         BeginTrade = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BeginTrade)
           end
           return checkCFunc(_G.BeginTrade)
         end,
         BindEnchant = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BindEnchant)
           end
           return checkCFunc(_G.BindEnchant)
@@ -11102,19 +11102,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.BuyArenaCharter)
         end,
         BuyGuildBankTab = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BuyGuildBankTab)
           end
           return checkCFunc(_G.BuyGuildBankTab)
         end,
         BuyGuildCharter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BuyGuildCharter)
           end
           return checkCFunc(_G.BuyGuildCharter)
         end,
         BuyMerchantItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BuyMerchantItem)
           end
           return checkCFunc(_G.BuyMerchantItem)
@@ -11132,13 +11132,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.BuyStableSlot)
         end,
         BuyTrainerService = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BuyTrainerService)
           end
           return checkCFunc(_G.BuyTrainerService)
         end,
         BuybackItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.BuybackItem)
           end
           return checkCFunc(_G.BuybackItem)
@@ -11150,7 +11150,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CalculateAuctionDeposit)
         end,
         CalculateStringEditDistance = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CalculateStringEditDistance)
           end
           return checkCFunc(_G.CalculateStringEditDistance)
@@ -11195,7 +11195,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanCancelAuction)
         end,
         CanCancelScene = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanCancelScene)
           end
           return checkCFunc(_G.CanCancelScene)
@@ -11207,19 +11207,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanChangePlayerDifficulty)
         end,
         CanComplainInboxItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanComplainInboxItem)
           end
           return checkCFunc(_G.CanComplainInboxItem)
         end,
         CanDualWield = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanDualWield)
           end
           return checkCFunc(_G.CanDualWield)
         end,
         CanEditGuildBankTabInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanEditGuildBankTabInfo)
           end
           return checkCFunc(_G.CanEditGuildBankTabInfo)
@@ -11234,7 +11234,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanEditGuildInfo)
         end,
         CanEditGuildTabInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanEditGuildTabInfo)
           end
           return checkCFunc(_G.CanEditGuildTabInfo)
@@ -11243,7 +11243,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanEditMOTD)
         end,
         CanEditPublicNote = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanEditPublicNote)
           end
           return checkCFunc(_G.CanEditPublicNote)
@@ -11261,7 +11261,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanExitVehicle)
         end,
         CanGamePadControlCursor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanGamePadControlCursor)
           end
           return checkCFunc(_G.CanGamePadControlCursor)
@@ -11285,7 +11285,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanGuildPromote)
         end,
         CanGuildRemove = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanGuildRemove)
           end
           return checkCFunc(_G.CanGuildRemove)
@@ -11294,7 +11294,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanHearthAndResurrectFromArea)
         end,
         CanInitiateWarGame = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanInitiateWarGame)
           end
           return checkCFunc(_G.CanInitiateWarGame)
@@ -11312,7 +11312,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanJoinBattlefieldAsGroup)
         end,
         CanLootUnit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanLootUnit)
           end
           return checkCFunc(_G.CanLootUnit)
@@ -11336,7 +11336,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanReplaceGuildMaster)
         end,
         CanResetTutorials = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanResetTutorials)
           end
           return checkCFunc(_G.CanResetTutorials)
@@ -11366,7 +11366,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanShowAchievementUI)
         end,
         CanShowResetInstances = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanShowResetInstances)
           end
           return checkCFunc(_G.CanShowResetInstances)
@@ -11381,7 +11381,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanSolveArtifact)
         end,
         CanSummonFriend = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CanSummonFriend)
           end
           return checkCFunc(_G.CanSummonFriend)
@@ -11429,7 +11429,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanWithdrawGuildBankMoney)
         end,
         CancelAreaSpiritHeal = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CancelAreaSpiritHeal)
           end
           return checkCFunc(_G.CancelAreaSpiritHeal)
@@ -11441,7 +11441,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CancelAuction)
         end,
         CancelDuel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CancelDuel)
           end
           return checkCFunc(_G.CancelDuel)
@@ -11450,7 +11450,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CancelEmote)
         end,
         CancelItemTempEnchantment = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CancelItemTempEnchantment)
           end
           return checkCFunc(_G.CancelItemTempEnchantment)
@@ -11465,25 +11465,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.CancelMasterLootRoll)
         end,
         CancelPendingEquip = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CancelPendingEquip)
           end
           return checkCFunc(_G.CancelPendingEquip)
         end,
         CancelPetPossess = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CancelPetPossess)
           end
           return checkCFunc(_G.CancelPetPossess)
         end,
         CancelPreloadingMovie = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CancelPreloadingMovie)
           end
           return checkCFunc(_G.CancelPreloadingMovie)
         end,
         CancelScene = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CancelScene)
           end
           return checkCFunc(_G.CancelScene)
@@ -11507,19 +11507,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.CancelTrackingBuff)
         end,
         CancelTrade = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CancelTrade)
           end
           return checkCFunc(_G.CancelTrade)
         end,
         CancelTradeAccept = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CancelTradeAccept)
           end
           return checkCFunc(_G.CancelTradeAccept)
         end,
         CancelUnitBuff = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CancelUnitBuff)
           end
           return checkCFunc(_G.CancelUnitBuff)
@@ -11528,7 +11528,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CannotBeResurrected)
         end,
         CaseAccentInsensitiveParse = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CaseAccentInsensitiveParse)
           end
           return checkCFunc(_G.CaseAccentInsensitiveParse)
@@ -11540,13 +11540,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.CastShapeshiftForm)
         end,
         CastSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CastSpell)
           end
           return checkCFunc(_G.CastSpell)
         end,
         CastSpellByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CastSpellByID)
           end
           return checkCFunc(_G.CastSpellByID)
@@ -11570,13 +11570,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.ChangeActionBarPage)
         end,
         ChangeChatColor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ChangeChatColor)
           end
           return checkCFunc(_G.ChangeChatColor)
         end,
         ChannelBan = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ChannelBan)
           end
           return checkCFunc(_G.ChannelBan)
@@ -11588,55 +11588,55 @@ function G.GeneratedTests()
           return checkCFunc(_G.ChannelInfo)
         end,
         ChannelInvite = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ChannelInvite)
           end
           return checkCFunc(_G.ChannelInvite)
         end,
         ChannelKick = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ChannelKick)
           end
           return checkCFunc(_G.ChannelKick)
         end,
         ChannelModerator = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ChannelModerator)
           end
           return checkCFunc(_G.ChannelModerator)
         end,
         ChannelSetAllSilent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ChannelSetAllSilent)
           end
           return checkCFunc(_G.ChannelSetAllSilent)
         end,
         ChannelSetPartyMemberSilent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ChannelSetPartyMemberSilent)
           end
           return checkCFunc(_G.ChannelSetPartyMemberSilent)
         end,
         ChannelToggleAnnouncements = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ChannelToggleAnnouncements)
           end
           return checkCFunc(_G.ChannelToggleAnnouncements)
         end,
         ChannelUnban = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ChannelUnban)
           end
           return checkCFunc(_G.ChannelUnban)
         end,
         ChannelUnmoderator = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ChannelUnmoderator)
           end
           return checkCFunc(_G.ChannelUnmoderator)
         end,
         CheckBinderDist = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CheckBinderDist)
           end
           return checkCFunc(_G.CheckBinderDist)
@@ -11645,19 +11645,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.CheckInbox)
         end,
         CheckInteractDistance = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CheckInteractDistance)
           end
           return checkCFunc(_G.CheckInteractDistance)
         end,
         CheckSpiritHealerDist = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CheckSpiritHealerDist)
           end
           return checkCFunc(_G.CheckSpiritHealerDist)
         end,
         CheckTalentMasterDist = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CheckTalentMasterDist)
           end
           return checkCFunc(_G.CheckTalentMasterDist)
@@ -11687,7 +11687,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClearAllLFGDungeons)
         end,
         ClearAllTracking = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ClearAllTracking)
           end
           return checkCFunc(_G.ClearAllTracking)
@@ -11702,7 +11702,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClearBattlemaster)
         end,
         ClearCursor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ClearCursor)
           end
           return checkCFunc(_G.ClearCursor)
@@ -11723,7 +11723,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClearFocus)
         end,
         ClearInspectPlayer = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ClearInspectPlayer)
           end
           return checkCFunc(_G.ClearInspectPlayer)
@@ -11741,7 +11741,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClearRaidMarker)
         end,
         ClearSendMail = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ClearSendMail)
           end
           return checkCFunc(_G.ClearSendMail)
@@ -11750,7 +11750,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClearTarget)
         end,
         ClearTutorials = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ClearTutorials)
           end
           return checkCFunc(_G.ClearTutorials)
@@ -11768,13 +11768,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClickAuctionSellItemButton)
         end,
         ClickSendMailItemButton = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ClickSendMailItemButton)
           end
           return checkCFunc(_G.ClickSendMailItemButton)
         end,
         ClickSocketButton = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ClickSocketButton)
           end
           return checkCFunc(_G.ClickSocketButton)
@@ -11786,13 +11786,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClickStablePet)
         end,
         ClickTargetTradeButton = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ClickTargetTradeButton)
           end
           return checkCFunc(_G.ClickTargetTradeButton)
         end,
         ClickTradeButton = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ClickTradeButton)
           end
           return checkCFunc(_G.ClickTradeButton)
@@ -11858,7 +11858,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CloseGuildRegistrar)
         end,
         CloseGuildRoster = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CloseGuildRoster)
           end
           return checkCFunc(_G.CloseGuildRoster)
@@ -11903,7 +11903,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CloseTabardCreation)
         end,
         CloseTaxiMap = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CloseTaxiMap)
           end
           return checkCFunc(_G.CloseTaxiMap)
@@ -11927,19 +11927,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.CloseVoidStorageFrame)
         end,
         ClosestGameObjectPosition = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ClosestGameObjectPosition)
           end
           return checkCFunc(_G.ClosestGameObjectPosition)
         end,
         ClosestUnitPosition = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ClosestUnitPosition)
           end
           return checkCFunc(_G.ClosestUnitPosition)
         end,
         CollapseAllFactionHeaders = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CollapseAllFactionHeaders)
           end
           return checkCFunc(_G.CollapseAllFactionHeaders)
@@ -11951,7 +11951,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CollapseCraftSkillLine)
         end,
         CollapseFactionHeader = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CollapseFactionHeader)
           end
           return checkCFunc(_G.CollapseFactionHeader)
@@ -11963,7 +11963,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CollapseGuildTradeSkillHeader)
         end,
         CollapseQuestHeader = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CollapseQuestHeader)
           end
           return checkCFunc(_G.CollapseQuestHeader)
@@ -11996,13 +11996,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.CombatLogAddFilter)
         end,
         CombatLogAdvanceEntry = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CombatLogAdvanceEntry)
           end
           return checkCFunc(_G.CombatLogAdvanceEntry)
         end,
         CombatLogClearEntries = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CombatLogClearEntries)
           end
           return checkCFunc(_G.CombatLogClearEntries)
@@ -12017,7 +12017,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CombatLogGetNumEntries)
         end,
         CombatLogGetRetentionTime = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CombatLogGetRetentionTime)
           end
           return checkCFunc(_G.CombatLogGetRetentionTime)
@@ -12029,7 +12029,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CombatLogSetCurrentEntry)
         end,
         CombatLogSetRetentionTime = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CombatLogSetRetentionTime)
           end
           return checkCFunc(_G.CombatLogSetRetentionTime)
@@ -12059,13 +12059,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.CompleteLFGRoleCheck)
         end,
         CompleteQuest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CompleteQuest)
           end
           return checkCFunc(_G.CompleteQuest)
         end,
         ConfirmAcceptQuest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ConfirmAcceptQuest)
           end
           return checkCFunc(_G.ConfirmAcceptQuest)
@@ -12077,37 +12077,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.ConfirmBNRequestInviteFriend)
         end,
         ConfirmBindOnUse = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ConfirmBindOnUse)
           end
           return checkCFunc(_G.ConfirmBindOnUse)
         end,
         ConfirmBinder = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ConfirmBinder)
           end
           return checkCFunc(_G.ConfirmBinder)
         end,
         ConfirmLootRoll = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ConfirmLootRoll)
           end
           return checkCFunc(_G.ConfirmLootRoll)
         end,
         ConfirmLootSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ConfirmLootSlot)
           end
           return checkCFunc(_G.ConfirmLootSlot)
         end,
         ConfirmNoRefundOnUse = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ConfirmNoRefundOnUse)
           end
           return checkCFunc(_G.ConfirmNoRefundOnUse)
         end,
         ConfirmOnUse = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ConfirmOnUse)
           end
           return checkCFunc(_G.ConfirmOnUse)
@@ -12119,19 +12119,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.ConfirmPetUnlearn)
         end,
         ConfirmReadyCheck = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ConfirmReadyCheck)
           end
           return checkCFunc(_G.ConfirmReadyCheck)
         end,
         ConfirmTalentWipe = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ConfirmTalentWipe)
           end
           return checkCFunc(_G.ConfirmTalentWipe)
         end,
         ConsoleAddMessage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ConsoleAddMessage)
           end
           return checkCFunc(_G.ConsoleAddMessage)
@@ -12143,7 +12143,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ContainerIDToInventoryID)
         end,
         ContainerRefundItemPurchase = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ContainerRefundItemPurchase)
           end
           return checkCFunc(_G.ContainerRefundItemPurchase)
@@ -12161,7 +12161,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ConvertToRaid)
         end,
         CopyToClipboard = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CopyToClipboard)
           end
           return checkCFunc(_G.CopyToClipboard)
@@ -12185,13 +12185,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.CreateFrame)
         end,
         CreateMacro = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CreateMacro)
           end
           return checkCFunc(_G.CreateMacro)
         end,
         CreateNewRaidProfile = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CreateNewRaidProfile)
           end
           return checkCFunc(_G.CreateNewRaidProfile)
@@ -12203,25 +12203,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.CursorHasItem)
         end,
         CursorHasMacro = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CursorHasMacro)
           end
           return checkCFunc(_G.CursorHasMacro)
         end,
         CursorHasMoney = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CursorHasMoney)
           end
           return checkCFunc(_G.CursorHasMoney)
         end,
         CursorHasSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.CursorHasSpell)
           end
           return checkCFunc(_G.CursorHasSpell)
         end,
         DeathRecap_GetEvents = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DeathRecap_GetEvents)
           end
           return checkCFunc(_G.DeathRecap_GetEvents)
@@ -12236,61 +12236,61 @@ function G.GeneratedTests()
           return checkCFunc(_G.DeclineArenaTeam)
         end,
         DeclineChannelInvite = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DeclineChannelInvite)
           end
           return checkCFunc(_G.DeclineChannelInvite)
         end,
         DeclineGroup = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DeclineGroup)
           end
           return checkCFunc(_G.DeclineGroup)
         end,
         DeclineGuild = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DeclineGuild)
           end
           return checkCFunc(_G.DeclineGuild)
         end,
         DeclineName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DeclineName)
           end
           return checkCFunc(_G.DeclineName)
         end,
         DeclineQuest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DeclineQuest)
           end
           return checkCFunc(_G.DeclineQuest)
         end,
         DeclineResurrect = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DeclineResurrect)
           end
           return checkCFunc(_G.DeclineResurrect)
         end,
         DeclineSpellConfirmationPrompt = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DeclineSpellConfirmationPrompt)
           end
           return checkCFunc(_G.DeclineSpellConfirmationPrompt)
         end,
         DeleteCursorItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DeleteCursorItem)
           end
           return checkCFunc(_G.DeleteCursorItem)
         end,
         DeleteGMTicket = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DeleteGMTicket)
           end
           return checkCFunc(_G.DeleteGMTicket)
         end,
         DeleteInboxItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DeleteInboxItem)
           end
           return checkCFunc(_G.DeleteInboxItem)
@@ -12299,19 +12299,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.DeleteMacro)
         end,
         DeleteRaidProfile = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DeleteRaidProfile)
           end
           return checkCFunc(_G.DeleteRaidProfile)
         end,
         DemoteAssistant = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DemoteAssistant)
           end
           return checkCFunc(_G.DemoteAssistant)
         end,
         DepositGuildBankMoney = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DepositGuildBankMoney)
           end
           return checkCFunc(_G.DepositGuildBankMoney)
@@ -12326,13 +12326,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.DescendStop)
         end,
         DestroyTotem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DestroyTotem)
           end
           return checkCFunc(_G.DestroyTotem)
         end,
         DetectWowMouse = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DetectWowMouse)
           end
           return checkCFunc(_G.DetectWowMouse)
@@ -12341,13 +12341,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.DisableAddOn)
         end,
         DisableAllAddOns = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DisableAllAddOns)
           end
           return checkCFunc(_G.DisableAllAddOns)
         end,
         DisableSpellAutocast = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DisableSpellAutocast)
           end
           return checkCFunc(_G.DisableSpellAutocast)
@@ -12362,7 +12362,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.Dismount)
         end,
         DisplayChannelOwner = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DisplayChannelOwner)
           end
           return checkCFunc(_G.DisplayChannelOwner)
@@ -12383,7 +12383,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.DoMasterLootRoll)
         end,
         DoReadyCheck = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DoReadyCheck)
           end
           return checkCFunc(_G.DoReadyCheck)
@@ -12398,7 +12398,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.DoesCurrentLocaleSellExpansionLevels)
         end,
         DoesItemContainSpec = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DoesItemContainSpec)
           end
           return checkCFunc(_G.DoesItemContainSpec)
@@ -12407,7 +12407,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.DoesSpellExist)
         end,
         DoesTemplateExist = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DoesTemplateExist)
           end
           return checkCFunc(_G.DoesTemplateExist)
@@ -12416,7 +12416,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.DropCursorMoney)
         end,
         DropItemOnUnit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.DropItemOnUnit)
           end
           return checkCFunc(_G.DropItemOnUnit)
@@ -12644,7 +12644,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.EJ_SetSearch)
         end,
         EditMacro = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.EditMacro)
           end
           return checkCFunc(_G.EditMacro)
@@ -12659,25 +12659,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.EnableAddOn)
         end,
         EnableAllAddOns = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.EnableAllAddOns)
           end
           return checkCFunc(_G.EnableAllAddOns)
         end,
         EnableSpellAutocast = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.EnableSpellAutocast)
           end
           return checkCFunc(_G.EnableSpellAutocast)
         end,
         EndBoundTradeable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.EndBoundTradeable)
           end
           return checkCFunc(_G.EndBoundTradeable)
         end,
         EndRefund = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.EndRefund)
           end
           return checkCFunc(_G.EndRefund)
@@ -12689,7 +12689,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.EnumerateServerChannels)
         end,
         EquipCursorItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.EquipCursorItem)
           end
           return checkCFunc(_G.EquipCursorItem)
@@ -12698,7 +12698,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.EquipItemByName)
         end,
         EquipPendingItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.EquipPendingItem)
           end
           return checkCFunc(_G.EquipPendingItem)
@@ -12710,7 +12710,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ExecuteVoidTransfer)
         end,
         ExpandAllFactionHeaders = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ExpandAllFactionHeaders)
           end
           return checkCFunc(_G.ExpandAllFactionHeaders)
@@ -12722,7 +12722,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ExpandCraftSkillLine)
         end,
         ExpandFactionHeader = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ExpandFactionHeader)
           end
           return checkCFunc(_G.ExpandFactionHeader)
@@ -12734,7 +12734,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ExpandGuildTradeSkillHeader)
         end,
         ExpandQuestHeader = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ExpandQuestHeader)
           end
           return checkCFunc(_G.ExpandQuestHeader)
@@ -12764,7 +12764,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ExpandWarGameHeader)
         end,
         FactionToggleAtWar = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.FactionToggleAtWar)
           end
           return checkCFunc(_G.FactionToggleAtWar)
@@ -12773,7 +12773,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.FillLocalizedClassList)
         end,
         FindBaseSpellByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.FindBaseSpellByID)
           end
           return checkCFunc(_G.FindBaseSpellByID)
@@ -12788,13 +12788,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.FindSpellBookSlotBySpellID)
         end,
         FindSpellOverrideByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.FindSpellOverrideByID)
           end
           return checkCFunc(_G.FindSpellOverrideByID)
         end,
         FlagTutorial = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.FlagTutorial)
           end
           return checkCFunc(_G.FlagTutorial)
@@ -12824,25 +12824,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.ForceGossip)
         end,
         ForceLogout = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ForceLogout)
           end
           return checkCFunc(_G.ForceLogout)
         end,
         ForceQuit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ForceQuit)
           end
           return checkCFunc(_G.ForceQuit)
         end,
         ForfeitDuel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ForfeitDuel)
           end
           return checkCFunc(_G.ForfeitDuel)
         end,
         FrameXML_Debug = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.FrameXML_Debug)
           end
           return checkCFunc(_G.FrameXML_Debug)
@@ -12860,37 +12860,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.GMEuropaTicketsEnabled)
         end,
         GMItemRestorationButtonEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GMItemRestorationButtonEnabled)
           end
           return checkCFunc(_G.GMItemRestorationButtonEnabled)
         end,
         GMQuickTicketSystemEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GMQuickTicketSystemEnabled)
           end
           return checkCFunc(_G.GMQuickTicketSystemEnabled)
         end,
         GMQuickTicketSystemThrottled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GMQuickTicketSystemThrottled)
           end
           return checkCFunc(_G.GMQuickTicketSystemThrottled)
         end,
         GMReportLag = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GMReportLag)
           end
           return checkCFunc(_G.GMReportLag)
         end,
         GMRequestPlayerInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GMRequestPlayerInfo)
           end
           return checkCFunc(_G.GMRequestPlayerInfo)
         end,
         GMResponseResolve = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GMResponseResolve)
           end
           return checkCFunc(_G.GMResponseResolve)
@@ -12908,37 +12908,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.GMSubmitSuggestion)
         end,
         GMSurveyAnswer = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GMSurveyAnswer)
           end
           return checkCFunc(_G.GMSurveyAnswer)
         end,
         GMSurveyAnswerSubmit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GMSurveyAnswerSubmit)
           end
           return checkCFunc(_G.GMSurveyAnswerSubmit)
         end,
         GMSurveyCommentSubmit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GMSurveyCommentSubmit)
           end
           return checkCFunc(_G.GMSurveyCommentSubmit)
         end,
         GMSurveyNumAnswers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GMSurveyNumAnswers)
           end
           return checkCFunc(_G.GMSurveyNumAnswers)
         end,
         GMSurveyQuestion = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GMSurveyQuestion)
           end
           return checkCFunc(_G.GMSurveyQuestion)
         end,
         GMSurveySubmit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GMSurveySubmit)
           end
           return checkCFunc(_G.GMSurveySubmit)
@@ -13034,7 +13034,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAchievementSearchSize)
         end,
         GetActionAutocast = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetActionAutocast)
           end
           return checkCFunc(_G.GetActionAutocast)
@@ -13073,7 +13073,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetActiveArtifactByRace)
         end,
         GetActiveLevel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetActiveLevel)
           end
           return checkCFunc(_G.GetActiveLevel)
@@ -13097,7 +13097,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetActiveTitle)
         end,
         GetAddOnCPUUsage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetAddOnCPUUsage)
           end
           return checkCFunc(_G.GetAddOnCPUUsage)
@@ -13121,7 +13121,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAddOnOptionalDependencies)
         end,
         GetAllowLowLevelRaid = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetAllowLowLevelRaid)
           end
           return checkCFunc(_G.GetAllowLowLevelRaid)
@@ -13280,7 +13280,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAuctionSort)
         end,
         GetAutoCompletePresenceID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetAutoCompletePresenceID)
           end
           return checkCFunc(_G.GetAutoCompletePresenceID)
@@ -13289,7 +13289,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAutoCompleteRealms)
         end,
         GetAutoCompleteResults = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetAutoCompleteResults)
           end
           return checkCFunc(_G.GetAutoCompleteResults)
@@ -13307,7 +13307,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAvailableBandwidth)
         end,
         GetAvailableLevel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetAvailableLevel)
           end
           return checkCFunc(_G.GetAvailableLevel)
@@ -13343,7 +13343,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAvoidance)
         end,
         GetBackgroundLoadingStatus = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBackgroundLoadingStatus)
           end
           return checkCFunc(_G.GetBackgroundLoadingStatus)
@@ -13379,7 +13379,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBattlefieldArenaFaction)
         end,
         GetBattlefieldEstimatedWaitTime = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBattlefieldEstimatedWaitTime)
           end
           return checkCFunc(_G.GetBattlefieldEstimatedWaitTime)
@@ -13391,7 +13391,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBattlefieldFlagPosition)
         end,
         GetBattlefieldInstanceExpiration = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBattlefieldInstanceExpiration)
           end
           return checkCFunc(_G.GetBattlefieldInstanceExpiration)
@@ -13403,31 +13403,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBattlefieldInstanceInfo)
         end,
         GetBattlefieldInstanceRunTime = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBattlefieldInstanceRunTime)
           end
           return checkCFunc(_G.GetBattlefieldInstanceRunTime)
         end,
         GetBattlefieldMapIconScale = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBattlefieldMapIconScale)
           end
           return checkCFunc(_G.GetBattlefieldMapIconScale)
         end,
         GetBattlefieldPortExpiration = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBattlefieldPortExpiration)
           end
           return checkCFunc(_G.GetBattlefieldPortExpiration)
         end,
         GetBattlefieldScore = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBattlefieldScore)
           end
           return checkCFunc(_G.GetBattlefieldScore)
         end,
         GetBattlefieldStatData = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBattlefieldStatData)
           end
           return checkCFunc(_G.GetBattlefieldStatData)
@@ -13442,19 +13442,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBattlefieldStatus)
         end,
         GetBattlefieldTeamInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBattlefieldTeamInfo)
           end
           return checkCFunc(_G.GetBattlefieldTeamInfo)
         end,
         GetBattlefieldTimeWaited = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBattlefieldTimeWaited)
           end
           return checkCFunc(_G.GetBattlefieldTimeWaited)
         end,
         GetBattlefieldWinner = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBattlefieldWinner)
           end
           return checkCFunc(_G.GetBattlefieldWinner)
@@ -13463,7 +13463,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBattlegroundInfo)
         end,
         GetBattlegroundPoints = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBattlegroundPoints)
           end
           return checkCFunc(_G.GetBattlegroundPoints)
@@ -13487,13 +13487,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBidderAuctionItems)
         end,
         GetBillingTimeRested = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBillingTimeRested)
           end
           return checkCFunc(_G.GetBillingTimeRested)
         end,
         GetBindLocation = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBindLocation)
           end
           return checkCFunc(_G.GetBindLocation)
@@ -13502,13 +13502,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBinding)
         end,
         GetBindingAction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBindingAction)
           end
           return checkCFunc(_G.GetBindingAction)
         end,
         GetBindingByKey = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBindingByKey)
           end
           return checkCFunc(_G.GetBindingByKey)
@@ -13520,19 +13520,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBindingText)
         end,
         GetBlockChance = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBlockChance)
           end
           return checkCFunc(_G.GetBlockChance)
         end,
         GetBonusBarIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBonusBarIndex)
           end
           return checkCFunc(_G.GetBonusBarIndex)
         end,
         GetBonusBarOffset = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetBonusBarOffset)
           end
           return checkCFunc(_G.GetBonusBarOffset)
@@ -13553,13 +13553,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCVarSettingValidity)
         end,
         GetCallPetSpellInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetCallPetSpellInfo)
           end
           return checkCFunc(_G.GetCallPetSpellInfo)
         end,
         GetCameraZoom = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetCameraZoom)
           end
           return checkCFunc(_G.GetCameraZoom)
@@ -13589,7 +13589,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCategoryNumAchievements)
         end,
         GetCemeteryPreference = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetCemeteryPreference)
           end
           return checkCFunc(_G.GetCemeteryPreference)
@@ -13601,7 +13601,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetChannelList)
         end,
         GetChannelName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetChannelName)
           end
           return checkCFunc(_G.GetChannelName)
@@ -13640,7 +13640,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetClientDisplayExpansionLevel)
         end,
         GetCoinIcon = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetCoinIcon)
           end
           return checkCFunc(_G.GetCoinIcon)
@@ -13691,7 +13691,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetComparisonStatistic)
         end,
         GetContainerFreeSlots = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetContainerFreeSlots)
           end
           return checkCFunc(_G.GetContainerFreeSlots)
@@ -13700,7 +13700,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetContainerItemCooldown)
         end,
         GetContainerItemDurability = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetContainerItemDurability)
           end
           return checkCFunc(_G.GetContainerItemDurability)
@@ -13712,7 +13712,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetContainerItemEquipmentSetInfo)
         end,
         GetContainerItemID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetContainerItemID)
           end
           return checkCFunc(_G.GetContainerItemID)
@@ -13724,19 +13724,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetContainerItemLink)
         end,
         GetContainerItemPurchaseCurrency = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetContainerItemPurchaseCurrency)
           end
           return checkCFunc(_G.GetContainerItemPurchaseCurrency)
         end,
         GetContainerItemPurchaseInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetContainerItemPurchaseInfo)
           end
           return checkCFunc(_G.GetContainerItemPurchaseInfo)
         end,
         GetContainerItemPurchaseItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetContainerItemPurchaseItem)
           end
           return checkCFunc(_G.GetContainerItemPurchaseItem)
@@ -13754,7 +13754,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetContainerNumSlots)
         end,
         GetCorpseRecoveryDelay = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetCorpseRecoveryDelay)
           end
           return checkCFunc(_G.GetCorpseRecoveryDelay)
@@ -13895,7 +13895,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCritChanceProvidesParryEffect)
         end,
         GetCriteriaSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetCriteriaSpell)
           end
           return checkCFunc(_G.GetCriteriaSpell)
@@ -13907,13 +13907,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCurrentBindingSet)
         end,
         GetCurrentCombatTextEventInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetCurrentCombatTextEventInfo)
           end
           return checkCFunc(_G.GetCurrentCombatTextEventInfo)
         end,
         GetCurrentEventID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetCurrentEventID)
           end
           return checkCFunc(_G.GetCurrentEventID)
@@ -13925,7 +13925,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCurrentGlyphNameForSpell)
         end,
         GetCurrentGraphicsSetting = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetCurrentGraphicsSetting)
           end
           return checkCFunc(_G.GetCurrentGraphicsSetting)
@@ -13934,7 +13934,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCurrentGuildBankTab)
         end,
         GetCurrentKeyBoardFocus = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetCurrentKeyBoardFocus)
           end
           return checkCFunc(_G.GetCurrentKeyBoardFocus)
@@ -13961,7 +13961,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCurrentTitle)
         end,
         GetCursorDelta = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetCursorDelta)
           end
           return checkCFunc(_G.GetCursorDelta)
@@ -13979,13 +13979,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetDailyQuestsCompleted)
         end,
         GetDeathRecapLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetDeathRecapLink)
           end
           return checkCFunc(_G.GetDeathRecapLink)
         end,
         GetDefaultGraphicsQuality = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetDefaultGraphicsQuality)
           end
           return checkCFunc(_G.GetDefaultGraphicsQuality)
@@ -13997,7 +13997,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetDefaultScale)
         end,
         GetDefaultVideoOption = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetDefaultVideoOption)
           end
           return checkCFunc(_G.GetDefaultVideoOption)
@@ -14006,19 +14006,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetDefaultVideoOptions)
         end,
         GetDefaultVideoQualityOption = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetDefaultVideoQualityOption)
           end
           return checkCFunc(_G.GetDefaultVideoQualityOption)
         end,
         GetDemotionRank = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetDemotionRank)
           end
           return checkCFunc(_G.GetDemotionRank)
         end,
         GetDetailedItemLevelInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetDetailedItemLevelInfo)
           end
           return checkCFunc(_G.GetDetailedItemLevelInfo)
@@ -14027,13 +14027,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetDifficultyInfo)
         end,
         GetDodgeChance = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetDodgeChance)
           end
           return checkCFunc(_G.GetDodgeChance)
         end,
         GetDodgeChanceFromAttribute = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetDodgeChanceFromAttribute)
           end
           return checkCFunc(_G.GetDodgeChanceFromAttribute)
@@ -14063,13 +14063,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetEquipmentNameFromSpell)
         end,
         GetEventCPUUsage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetEventCPUUsage)
           end
           return checkCFunc(_G.GetEventCPUUsage)
         end,
         GetEventTime = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetEventTime)
           end
           return checkCFunc(_G.GetEventTime)
@@ -14078,7 +14078,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetExistingSocketInfo)
         end,
         GetExistingSocketLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetExistingSocketLink)
           end
           return checkCFunc(_G.GetExistingSocketLink)
@@ -14132,7 +14132,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetFailedTalentIDs)
         end,
         GetFileIDFromPath = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetFileIDFromPath)
           end
           return checkCFunc(_G.GetFileIDFromPath)
@@ -14189,19 +14189,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetFollowerTypeIDFromSpell)
         end,
         GetFontInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetFontInfo)
           end
           return checkCFunc(_G.GetFontInfo)
         end,
         GetFonts = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetFonts)
           end
           return checkCFunc(_G.GetFonts)
         end,
         GetFrameCPUUsage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetFrameCPUUsage)
           end
           return checkCFunc(_G.GetFrameCPUUsage)
@@ -14210,7 +14210,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetFramerate)
         end,
         GetFramesRegisteredForEvent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetFramesRegisteredForEvent)
           end
           return checkCFunc(_G.GetFramesRegisteredForEvent)
@@ -14228,7 +14228,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetFriendshipReputationRanks)
         end,
         GetFunctionCPUUsage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetFunctionCPUUsage)
           end
           return checkCFunc(_G.GetFunctionCPUUsage)
@@ -14240,7 +14240,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGMTicket)
         end,
         GetGameMessageInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetGameMessageInfo)
           end
           return checkCFunc(_G.GetGameMessageInfo)
@@ -14273,13 +14273,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGossipText)
         end,
         GetGraphicsAPIs = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetGraphicsAPIs)
           end
           return checkCFunc(_G.GetGraphicsAPIs)
         end,
         GetGraphicsDropdownIndexByMasterIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetGraphicsDropdownIndexByMasterIndex)
           end
           return checkCFunc(_G.GetGraphicsDropdownIndexByMasterIndex)
@@ -14309,7 +14309,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildAchievementNumMembers)
         end,
         GetGuildBankBonusDepositMoney = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetGuildBankBonusDepositMoney)
           end
           return checkCFunc(_G.GetGuildBankBonusDepositMoney)
@@ -14327,7 +14327,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildBankMoneyTransaction)
         end,
         GetGuildBankTabCost = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetGuildBankTabCost)
           end
           return checkCFunc(_G.GetGuildBankTabCost)
@@ -14336,7 +14336,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildBankTabInfo)
         end,
         GetGuildBankTabPermissions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetGuildBankTabPermissions)
           end
           return checkCFunc(_G.GetGuildBankTabPermissions)
@@ -14345,13 +14345,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildBankText)
         end,
         GetGuildBankTransaction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetGuildBankTransaction)
           end
           return checkCFunc(_G.GetGuildBankTransaction)
         end,
         GetGuildBankWithdrawGoldLimit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetGuildBankWithdrawGoldLimit)
           end
           return checkCFunc(_G.GetGuildBankWithdrawGoldLimit)
@@ -14372,7 +14372,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildChallengeInfo)
         end,
         GetGuildCharterCost = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetGuildCharterCost)
           end
           return checkCFunc(_G.GetGuildCharterCost)
@@ -14468,7 +14468,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildRosterLargestAchievementPoints)
         end,
         GetGuildRosterLastOnline = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetGuildRosterLastOnline)
           end
           return checkCFunc(_G.GetGuildRosterLastOnline)
@@ -14495,13 +14495,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetHaste)
         end,
         GetHitModifier = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetHitModifier)
           end
           return checkCFunc(_G.GetHitModifier)
         end,
         GetHomePartyInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetHomePartyInfo)
           end
           return checkCFunc(_G.GetHomePartyInfo)
@@ -14510,13 +14510,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetInboxHeaderInfo)
         end,
         GetInboxInvoiceInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetInboxInvoiceInfo)
           end
           return checkCFunc(_G.GetInboxInvoiceInfo)
         end,
         GetInboxItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetInboxItem)
           end
           return checkCFunc(_G.GetInboxItem)
@@ -14528,13 +14528,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetInboxNumItems)
         end,
         GetInboxText = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetInboxText)
           end
           return checkCFunc(_G.GetInboxText)
         end,
         GetInsertItemsLeftToRight = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetInsertItemsLeftToRight)
           end
           return checkCFunc(_G.GetInsertItemsLeftToRight)
@@ -14585,7 +14585,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetInspectTalent)
         end,
         GetInstanceBootTimeRemaining = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetInstanceBootTimeRemaining)
           end
           return checkCFunc(_G.GetInstanceBootTimeRemaining)
@@ -14597,7 +14597,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetInstanceLockTimeRemaining)
         end,
         GetInstanceLockTimeRemainingEncounter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetInstanceLockTimeRemainingEncounter)
           end
           return checkCFunc(_G.GetInstanceLockTimeRemainingEncounter)
@@ -14606,7 +14606,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetInventoryAlertStatus)
         end,
         GetInventoryItemBroken = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetInventoryItemBroken)
           end
           return checkCFunc(_G.GetInventoryItemBroken)
@@ -14621,7 +14621,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetInventoryItemDurability)
         end,
         GetInventoryItemEquippedUnusable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetInventoryItemEquippedUnusable)
           end
           return checkCFunc(_G.GetInventoryItemEquippedUnusable)
@@ -14639,7 +14639,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetInventoryItemTexture)
         end,
         GetInventoryItemsForSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetInventoryItemsForSlot)
           end
           return checkCFunc(_G.GetInventoryItemsForSlot)
@@ -14648,7 +14648,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetInventorySlotInfo)
         end,
         GetInviteConfirmationInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetInviteConfirmationInfo)
           end
           return checkCFunc(_G.GetInviteConfirmationInfo)
@@ -14660,7 +14660,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetInviteReferralInfo)
         end,
         GetItemChildInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetItemChildInfo)
           end
           return checkCFunc(_G.GetItemChildInfo)
@@ -14675,19 +14675,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetItemCount)
         end,
         GetItemCreationContext = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetItemCreationContext)
           end
           return checkCFunc(_G.GetItemCreationContext)
         end,
         GetItemFamily = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetItemFamily)
           end
           return checkCFunc(_G.GetItemFamily)
         end,
         GetItemGem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetItemGem)
           end
           return checkCFunc(_G.GetItemGem)
@@ -14714,31 +14714,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetItemQualityColor)
         end,
         GetItemSetInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetItemSetInfo)
           end
           return checkCFunc(_G.GetItemSetInfo)
         end,
         GetItemSpecInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetItemSpecInfo)
           end
           return checkCFunc(_G.GetItemSpecInfo)
         end,
         GetItemSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetItemSpell)
           end
           return checkCFunc(_G.GetItemSpell)
         end,
         GetItemStatDelta = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetItemStatDelta)
           end
           return checkCFunc(_G.GetItemStatDelta)
         end,
         GetItemStats = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetItemStats)
           end
           return checkCFunc(_G.GetItemStats)
@@ -14747,7 +14747,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetItemSubClassInfo)
         end,
         GetItemUniqueness = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetItemUniqueness)
           end
           return checkCFunc(_G.GetItemUniqueness)
@@ -15038,7 +15038,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetLatestCompletedComparisonAchievements)
         end,
         GetLatestThreeSenders = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetLatestThreeSenders)
           end
           return checkCFunc(_G.GetLatestThreeSenders)
@@ -15065,7 +15065,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetLifesteal)
         end,
         GetLocalGameTime = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetLocalGameTime)
           end
           return checkCFunc(_G.GetLocalGameTime)
@@ -15077,13 +15077,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetLooseMacroIcons)
         end,
         GetLooseMacroItemIcons = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetLooseMacroItemIcons)
           end
           return checkCFunc(_G.GetLooseMacroItemIcons)
         end,
         GetLootInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetLootInfo)
           end
           return checkCFunc(_G.GetLootInfo)
@@ -15092,19 +15092,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetLootMethod)
         end,
         GetLootRollItemInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetLootRollItemInfo)
           end
           return checkCFunc(_G.GetLootRollItemInfo)
         end,
         GetLootRollItemLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetLootRollItemLink)
           end
           return checkCFunc(_G.GetLootRollItemLink)
         end,
         GetLootRollTimeLeft = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetLootRollTimeLeft)
           end
           return checkCFunc(_G.GetLootRollTimeLeft)
@@ -15113,19 +15113,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetLootSlotInfo)
         end,
         GetLootSlotLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetLootSlotLink)
           end
           return checkCFunc(_G.GetLootSlotLink)
         end,
         GetLootSlotType = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetLootSlotType)
           end
           return checkCFunc(_G.GetLootSlotType)
         end,
         GetLootSourceInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetLootSourceInfo)
           end
           return checkCFunc(_G.GetLootSourceInfo)
@@ -15140,7 +15140,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetLootThreshold)
         end,
         GetMacroBody = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMacroBody)
           end
           return checkCFunc(_G.GetMacroBody)
@@ -15155,25 +15155,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMacroInfo)
         end,
         GetMacroItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMacroItem)
           end
           return checkCFunc(_G.GetMacroItem)
         end,
         GetMacroItemIcons = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMacroItemIcons)
           end
           return checkCFunc(_G.GetMacroItemIcons)
         end,
         GetMacroSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMacroSpell)
           end
           return checkCFunc(_G.GetMacroSpell)
         end,
         GetManaRegen = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetManaRegen)
           end
           return checkCFunc(_G.GetManaRegen)
@@ -15236,7 +15236,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMaxLevelForPlayerExpansion)
         end,
         GetMaxNumCUFProfiles = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMaxNumCUFProfiles)
           end
           return checkCFunc(_G.GetMaxNumCUFProfiles)
@@ -15254,7 +15254,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMaxRewardCurrencies)
         end,
         GetMaxSpellStartRecoveryOffset = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMaxSpellStartRecoveryOffset)
           end
           return checkCFunc(_G.GetMaxSpellStartRecoveryOffset)
@@ -15269,7 +15269,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMaximumExpansionLevel)
         end,
         GetMeleeHaste = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMeleeHaste)
           end
           return checkCFunc(_G.GetMeleeHaste)
@@ -15287,13 +15287,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMerchantFilter)
         end,
         GetMerchantItemCostInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMerchantItemCostInfo)
           end
           return checkCFunc(_G.GetMerchantItemCostInfo)
         end,
         GetMerchantItemCostItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMerchantItemCostItem)
           end
           return checkCFunc(_G.GetMerchantItemCostItem)
@@ -15308,7 +15308,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMerchantItemLink)
         end,
         GetMerchantItemMaxStack = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMerchantItemMaxStack)
           end
           return checkCFunc(_G.GetMerchantItemMaxStack)
@@ -15329,7 +15329,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMirrorTimerInfo)
         end,
         GetMirrorTimerProgress = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMirrorTimerProgress)
           end
           return checkCFunc(_G.GetMirrorTimerProgress)
@@ -15344,7 +15344,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetModifiedClick)
         end,
         GetModifiedClickAction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetModifiedClickAction)
           end
           return checkCFunc(_G.GetModifiedClickAction)
@@ -15353,37 +15353,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMoney)
         end,
         GetMonitorAspectRatio = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMonitorAspectRatio)
           end
           return checkCFunc(_G.GetMonitorAspectRatio)
         end,
         GetMonitorCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMonitorCount)
           end
           return checkCFunc(_G.GetMonitorCount)
         end,
         GetMonitorName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMonitorName)
           end
           return checkCFunc(_G.GetMonitorName)
         end,
         GetMouseButtonClicked = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMouseButtonClicked)
           end
           return checkCFunc(_G.GetMouseButtonClicked)
         end,
         GetMouseButtonName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMouseButtonName)
           end
           return checkCFunc(_G.GetMouseButtonName)
         end,
         GetMouseClickFocus = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMouseClickFocus)
           end
           return checkCFunc(_G.GetMouseClickFocus)
@@ -15392,13 +15392,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMouseFocus)
         end,
         GetMouseMotionFocus = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMouseMotionFocus)
           end
           return checkCFunc(_G.GetMouseMotionFocus)
         end,
         GetMovieDownloadProgress = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetMovieDownloadProgress)
           end
           return checkCFunc(_G.GetMovieDownloadProgress)
@@ -15419,7 +15419,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNegativeCorruptionEffectInfo)
         end,
         GetNetIpTypes = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNetIpTypes)
           end
           return checkCFunc(_G.GetNetIpTypes)
@@ -15431,7 +15431,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNewSocketInfo)
         end,
         GetNewSocketLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNewSocketLink)
           end
           return checkCFunc(_G.GetNewSocketLink)
@@ -15443,7 +15443,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNextAchievement)
         end,
         GetNextCompleatedTutorial = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNextCompleatedTutorial)
           end
           return checkCFunc(_G.GetNextCompleatedTutorial)
@@ -15548,7 +15548,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumBuybackItems)
         end,
         GetNumChannelMembers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNumChannelMembers)
           end
           return checkCFunc(_G.GetNumChannelMembers)
@@ -15581,7 +15581,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumCrafts)
         end,
         GetNumDeclensionSets = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNumDeclensionSets)
           end
           return checkCFunc(_G.GetNumDeclensionSets)
@@ -15620,7 +15620,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumFlyouts)
         end,
         GetNumFrames = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNumFrames)
           end
           return checkCFunc(_G.GetNumFrames)
@@ -15644,7 +15644,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumGossipOptions)
         end,
         GetNumGroupChannels = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNumGroupChannels)
           end
           return checkCFunc(_G.GetNumGroupChannels)
@@ -15659,7 +15659,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumGuildBankTabs)
         end,
         GetNumGuildBankTransactions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNumGuildBankTransactions)
           end
           return checkCFunc(_G.GetNumGuildBankTransactions)
@@ -15713,13 +15713,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumMacros)
         end,
         GetNumMembersInRank = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNumMembersInRank)
           end
           return checkCFunc(_G.GetNumMembersInRank)
         end,
         GetNumModifiedClickActions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNumModifiedClickActions)
           end
           return checkCFunc(_G.GetNumModifiedClickActions)
@@ -15743,7 +15743,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumQuestCurrencies)
         end,
         GetNumQuestItemDrops = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNumQuestItemDrops)
           end
           return checkCFunc(_G.GetNumQuestItemDrops)
@@ -15809,7 +15809,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumRFDungeons)
         end,
         GetNumRaidProfiles = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNumRaidProfiles)
           end
           return checkCFunc(_G.GetNumRaidProfiles)
@@ -15836,7 +15836,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumRewardSpells)
         end,
         GetNumRoutes = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetNumRoutes)
           end
           return checkCFunc(_G.GetNumRoutes)
@@ -15980,19 +15980,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumWorldPVPAreas)
         end,
         GetOSLocale = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetOSLocale)
           end
           return checkCFunc(_G.GetOSLocale)
         end,
         GetObjectIconTextureCoords = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetObjectIconTextureCoords)
           end
           return checkCFunc(_G.GetObjectIconTextureCoords)
         end,
         GetObjectiveText = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetObjectiveText)
           end
           return checkCFunc(_G.GetObjectiveText)
@@ -16031,13 +16031,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetOwnerAuctionItems)
         end,
         GetPOITextureCoords = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPOITextureCoords)
           end
           return checkCFunc(_G.GetPOITextureCoords)
         end,
         GetPVPDesired = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPVPDesired)
           end
           return checkCFunc(_G.GetPVPDesired)
@@ -16085,7 +16085,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPVPThisWeekStats)
         end,
         GetPVPTimer = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPVPTimer)
           end
           return checkCFunc(_G.GetPVPTimer)
@@ -16094,19 +16094,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPVPYesterdayStats)
         end,
         GetParryChance = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetParryChance)
           end
           return checkCFunc(_G.GetParryChance)
         end,
         GetParryChanceFromAttribute = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetParryChanceFromAttribute)
           end
           return checkCFunc(_G.GetParryChanceFromAttribute)
         end,
         GetPartyAssignment = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPartyAssignment)
           end
           return checkCFunc(_G.GetPartyAssignment)
@@ -16130,7 +16130,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPendingGlyphName)
         end,
         GetPendingInviteConfirmations = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPendingInviteConfirmations)
           end
           return checkCFunc(_G.GetPendingInviteConfirmations)
@@ -16148,13 +16148,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPetActionInfo)
         end,
         GetPetActionSlotUsable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPetActionSlotUsable)
           end
           return checkCFunc(_G.GetPetActionSlotUsable)
         end,
         GetPetActionsUsable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPetActionsUsable)
           end
           return checkCFunc(_G.GetPetActionsUsable)
@@ -16163,7 +16163,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPetExperience)
         end,
         GetPetFoodTypes = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPetFoodTypes)
           end
           return checkCFunc(_G.GetPetFoodTypes)
@@ -16175,7 +16175,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPetHappiness)
         end,
         GetPetIcon = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPetIcon)
           end
           return checkCFunc(_G.GetPetIcon)
@@ -16187,13 +16187,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPetLoyalty)
         end,
         GetPetMeleeHaste = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPetMeleeHaste)
           end
           return checkCFunc(_G.GetPetMeleeHaste)
         end,
         GetPetSpellBonusDamage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPetSpellBonusDamage)
           end
           return checkCFunc(_G.GetPetSpellBonusDamage)
@@ -16205,7 +16205,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPetTalentTree)
         end,
         GetPetTimeRemaining = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPetTimeRemaining)
           end
           return checkCFunc(_G.GetPetTimeRemaining)
@@ -16238,7 +16238,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPlayerAuraBySpellID)
         end,
         GetPlayerFacing = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPlayerFacing)
           end
           return checkCFunc(_G.GetPlayerFacing)
@@ -16256,25 +16256,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPlayerTradeMoney)
         end,
         GetPossessInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPossessInfo)
           end
           return checkCFunc(_G.GetPossessInfo)
         end,
         GetPowerRegen = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPowerRegen)
           end
           return checkCFunc(_G.GetPowerRegen)
         end,
         GetPowerRegenForPowerType = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPowerRegenForPowerType)
           end
           return checkCFunc(_G.GetPowerRegenForPowerType)
         end,
         GetPrevCompleatedTutorial = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPrevCompleatedTutorial)
           end
           return checkCFunc(_G.GetPrevCompleatedTutorial)
@@ -16286,7 +16286,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPreviousAchievement)
         end,
         GetPreviousArenaSeason = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPreviousArenaSeason)
           end
           return checkCFunc(_G.GetPreviousArenaSeason)
@@ -16298,7 +16298,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPrimarySpecialization)
         end,
         GetProfessionInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetProfessionInfo)
           end
           return checkCFunc(_G.GetProfessionInfo)
@@ -16313,7 +16313,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetProgressText)
         end,
         GetPromotionRank = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetPromotionRank)
           end
           return checkCFunc(_G.GetPromotionRank)
@@ -16370,7 +16370,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestExpansion)
         end,
         GetQuestFactionGroup = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetQuestFactionGroup)
           end
           return checkCFunc(_G.GetQuestFactionGroup)
@@ -16448,13 +16448,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestLogIndexByID)
         end,
         GetQuestLogItemDrop = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetQuestLogItemDrop)
           end
           return checkCFunc(_G.GetQuestLogItemDrop)
         end,
         GetQuestLogItemLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetQuestLogItemLink)
           end
           return checkCFunc(_G.GetQuestLogItemLink)
@@ -16478,7 +16478,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestLogQuestText)
         end,
         GetQuestLogQuestType = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetQuestLogQuestType)
           end
           return checkCFunc(_G.GetQuestLogQuestType)
@@ -16553,7 +16553,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestLogSpecialItemInfo)
         end,
         GetQuestLogSpellLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetQuestLogSpellLink)
           end
           return checkCFunc(_G.GetQuestLogSpellLink)
@@ -16595,7 +16595,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestPOIs)
         end,
         GetQuestPortraitGiver = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetQuestPortraitGiver)
           end
           return checkCFunc(_G.GetQuestPortraitGiver)
@@ -16610,13 +16610,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestProgressBarPercent)
         end,
         GetQuestResetTime = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetQuestResetTime)
           end
           return checkCFunc(_G.GetQuestResetTime)
         end,
         GetQuestReward = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetQuestReward)
           end
           return checkCFunc(_G.GetQuestReward)
@@ -16628,7 +16628,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestSortIndex)
         end,
         GetQuestSpellLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetQuestSpellLink)
           end
           return checkCFunc(_G.GetQuestSpellLink)
@@ -16640,7 +16640,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestTagInfo)
         end,
         GetQuestText = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetQuestText)
           end
           return checkCFunc(_G.GetQuestText)
@@ -16685,25 +16685,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetRaidDifficultyID)
         end,
         GetRaidProfileFlattenedOptions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetRaidProfileFlattenedOptions)
           end
           return checkCFunc(_G.GetRaidProfileFlattenedOptions)
         end,
         GetRaidProfileName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetRaidProfileName)
           end
           return checkCFunc(_G.GetRaidProfileName)
         end,
         GetRaidProfileOption = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetRaidProfileOption)
           end
           return checkCFunc(_G.GetRaidProfileOption)
         end,
         GetRaidProfileSavedPosition = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetRaidProfileSavedPosition)
           end
           return checkCFunc(_G.GetRaidProfileSavedPosition)
@@ -16736,7 +16736,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetRangedCritChance)
         end,
         GetRangedHaste = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetRangedHaste)
           end
           return checkCFunc(_G.GetRangedHaste)
@@ -16751,7 +16751,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetReadyCheckStatus)
         end,
         GetReadyCheckTimeLeft = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetReadyCheckTimeLeft)
           end
           return checkCFunc(_G.GetReadyCheckTimeLeft)
@@ -16877,13 +16877,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetRuneCount)
         end,
         GetRunningMacro = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetRunningMacro)
           end
           return checkCFunc(_G.GetRunningMacro)
         end,
         GetRunningMacroButton = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetRunningMacroButton)
           end
           return checkCFunc(_G.GetRunningMacroButton)
@@ -16892,7 +16892,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSavedInstanceChatLink)
         end,
         GetSavedInstanceEncounterInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSavedInstanceEncounterInfo)
           end
           return checkCFunc(_G.GetSavedInstanceEncounterInfo)
@@ -16916,7 +16916,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSchoolString)
         end,
         GetScreenDPIScale = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetScreenDPIScale)
           end
           return checkCFunc(_G.GetScreenDPIScale)
@@ -16931,13 +16931,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetScreenWidth)
         end,
         GetScriptCPUUsage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetScriptCPUUsage)
           end
           return checkCFunc(_G.GetScriptCPUUsage)
         end,
         GetSecondsUntilParentalControlsKick = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSecondsUntilParentalControlsKick)
           end
           return checkCFunc(_G.GetSecondsUntilParentalControlsKick)
@@ -16961,7 +16961,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSelectedBattlefield)
         end,
         GetSelectedDisplayChannel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSelectedDisplayChannel)
           end
           return checkCFunc(_G.GetSelectedDisplayChannel)
@@ -16988,25 +16988,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSelectedWarGameType)
         end,
         GetSendMailCOD = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSendMailCOD)
           end
           return checkCFunc(_G.GetSendMailCOD)
         end,
         GetSendMailItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSendMailItem)
           end
           return checkCFunc(_G.GetSendMailItem)
         end,
         GetSendMailItemLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSendMailItemLink)
           end
           return checkCFunc(_G.GetSendMailItemLink)
         end,
         GetSendMailMoney = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSendMailMoney)
           end
           return checkCFunc(_G.GetSendMailMoney)
@@ -17021,7 +17021,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetServerTime)
         end,
         GetSessionTime = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSessionTime)
           end
           return checkCFunc(_G.GetSessionTime)
@@ -17045,13 +17045,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetShapeshiftFormInfo)
         end,
         GetSheathState = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSheathState)
           end
           return checkCFunc(_G.GetSheathState)
         end,
         GetShieldBlock = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetShieldBlock)
           end
           return checkCFunc(_G.GetShieldBlock)
@@ -17168,13 +17168,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSpellAvailableLevel)
         end,
         GetSpellBaseCooldown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSpellBaseCooldown)
           end
           return checkCFunc(_G.GetSpellBaseCooldown)
         end,
         GetSpellBonusDamage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSpellBonusDamage)
           end
           return checkCFunc(_G.GetSpellBonusDamage)
@@ -17192,7 +17192,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSpellBookItemTexture)
         end,
         GetSpellCharges = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSpellCharges)
           end
           return checkCFunc(_G.GetSpellCharges)
@@ -17204,7 +17204,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSpellCooldown)
         end,
         GetSpellCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSpellCount)
           end
           return checkCFunc(_G.GetSpellCount)
@@ -17222,7 +17222,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSpellDescription)
         end,
         GetSpellHitModifier = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSpellHitModifier)
           end
           return checkCFunc(_G.GetSpellHitModifier)
@@ -17237,37 +17237,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSpellLevelLearned)
         end,
         GetSpellLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSpellLink)
           end
           return checkCFunc(_G.GetSpellLink)
         end,
         GetSpellLossOfControlCooldown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSpellLossOfControlCooldown)
           end
           return checkCFunc(_G.GetSpellLossOfControlCooldown)
         end,
         GetSpellPenetration = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSpellPenetration)
           end
           return checkCFunc(_G.GetSpellPenetration)
         end,
         GetSpellPowerCost = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSpellPowerCost)
           end
           return checkCFunc(_G.GetSpellPowerCost)
         end,
         GetSpellQueueWindow = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSpellQueueWindow)
           end
           return checkCFunc(_G.GetSpellQueueWindow)
         end,
         GetSpellRank = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSpellRank)
           end
           return checkCFunc(_G.GetSpellRank)
@@ -17282,7 +17282,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSpellTexture)
         end,
         GetSpellTradeSkillLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetSpellTradeSkillLink)
           end
           return checkCFunc(_G.GetSpellTradeSkillLink)
@@ -17345,7 +17345,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTabardCreationCost)
         end,
         GetTabardInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTabardInfo)
           end
           return checkCFunc(_G.GetTabardInfo)
@@ -17366,7 +17366,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTalentInfoBySpecialization)
         end,
         GetTalentLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTalentLink)
           end
           return checkCFunc(_G.GetTalentLink)
@@ -17417,19 +17417,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTasksTable)
         end,
         GetTaxiBenchmarkMode = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTaxiBenchmarkMode)
           end
           return checkCFunc(_G.GetTaxiBenchmarkMode)
         end,
         GetTaxiMapID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTaxiMapID)
           end
           return checkCFunc(_G.GetTaxiMapID)
         end,
         GetTempShapeshiftBarIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTempShapeshiftBarIndex)
           end
           return checkCFunc(_G.GetTempShapeshiftBarIndex)
@@ -17444,7 +17444,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetThreatStatusColor)
         end,
         GetTickTime = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTickTime)
           end
           return checkCFunc(_G.GetTickTime)
@@ -17453,13 +17453,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTime)
         end,
         GetTimePreciseSec = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTimePreciseSec)
           end
           return checkCFunc(_G.GetTimePreciseSec)
         end,
         GetTimeToWellRested = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTimeToWellRested)
           end
           return checkCFunc(_G.GetTimeToWellRested)
@@ -17471,7 +17471,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTitleText)
         end,
         GetToolTipInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetToolTipInfo)
           end
           return checkCFunc(_G.GetToolTipInfo)
@@ -17483,7 +17483,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTotalAchievementPoints)
         end,
         GetTotemCannotDismiss = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTotemCannotDismiss)
           end
           return checkCFunc(_G.GetTotemCannotDismiss)
@@ -17492,7 +17492,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTotemInfo)
         end,
         GetTotemTimeLeft = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTotemTimeLeft)
           end
           return checkCFunc(_G.GetTotemTimeLeft)
@@ -17657,13 +17657,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTrainerServiceCost)
         end,
         GetTrainerServiceDescription = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTrainerServiceDescription)
           end
           return checkCFunc(_G.GetTrainerServiceDescription)
         end,
         GetTrainerServiceIcon = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTrainerServiceIcon)
           end
           return checkCFunc(_G.GetTrainerServiceIcon)
@@ -17672,13 +17672,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTrainerServiceInfo)
         end,
         GetTrainerServiceItemLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTrainerServiceItemLink)
           end
           return checkCFunc(_G.GetTrainerServiceItemLink)
         end,
         GetTrainerServiceLevelReq = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTrainerServiceLevelReq)
           end
           return checkCFunc(_G.GetTrainerServiceLevelReq)
@@ -17687,13 +17687,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTrainerServiceNumAbilityReq)
         end,
         GetTrainerServiceSkillLine = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTrainerServiceSkillLine)
           end
           return checkCFunc(_G.GetTrainerServiceSkillLine)
         end,
         GetTrainerServiceSkillReq = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetTrainerServiceSkillReq)
           end
           return checkCFunc(_G.GetTrainerServiceSkillReq)
@@ -17717,7 +17717,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTutorialsEnabled)
         end,
         GetUICameraInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetUICameraInfo)
           end
           return checkCFunc(_G.GetUICameraInfo)
@@ -17735,7 +17735,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetUnitChargedPowerPoints)
         end,
         GetUnitHealthModifier = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetUnitHealthModifier)
           end
           return checkCFunc(_G.GetUnitHealthModifier)
@@ -17792,7 +17792,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetUnitPowerBarTextureInfoByID)
         end,
         GetUnitPowerModifier = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetUnitPowerModifier)
           end
           return checkCFunc(_G.GetUnitPowerModifier)
@@ -17825,13 +17825,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetVersatilityBonus)
         end,
         GetVideoCaps = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetVideoCaps)
           end
           return checkCFunc(_G.GetVideoCaps)
         end,
         GetVideoOptions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetVideoOptions)
           end
           return checkCFunc(_G.GetVideoOptions)
@@ -17879,7 +17879,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetVoidUnlockCost)
         end,
         GetWarGameQueueStatus = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GetWarGameQueueStatus)
           end
           return checkCFunc(_G.GetWarGameQueueStatus)
@@ -17939,31 +17939,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetZoneText)
         end,
         GiveMasterLoot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GiveMasterLoot)
           end
           return checkCFunc(_G.GiveMasterLoot)
         end,
         GroupHasOfflineMember = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GroupHasOfflineMember)
           end
           return checkCFunc(_G.GroupHasOfflineMember)
         end,
         GuildControlAddRank = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildControlAddRank)
           end
           return checkCFunc(_G.GuildControlAddRank)
         end,
         GuildControlDelRank = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildControlDelRank)
           end
           return checkCFunc(_G.GuildControlDelRank)
         end,
         GuildControlGetAllowedShifts = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildControlGetAllowedShifts)
           end
           return checkCFunc(_G.GuildControlGetAllowedShifts)
@@ -17981,7 +17981,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GuildControlGetRankName)
         end,
         GuildControlSaveRank = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildControlSaveRank)
           end
           return checkCFunc(_G.GuildControlSaveRank)
@@ -17990,55 +17990,55 @@ function G.GeneratedTests()
           return checkCFunc(_G.GuildControlSetRank)
         end,
         GuildControlSetRankFlag = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildControlSetRankFlag)
           end
           return checkCFunc(_G.GuildControlSetRankFlag)
         end,
         GuildControlShiftRankDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildControlShiftRankDown)
           end
           return checkCFunc(_G.GuildControlShiftRankDown)
         end,
         GuildControlShiftRankUp = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildControlShiftRankUp)
           end
           return checkCFunc(_G.GuildControlShiftRankUp)
         end,
         GuildDemote = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildDemote)
           end
           return checkCFunc(_G.GuildDemote)
         end,
         GuildDisband = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildDisband)
           end
           return checkCFunc(_G.GuildDisband)
         end,
         GuildInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildInfo)
           end
           return checkCFunc(_G.GuildInfo)
         end,
         GuildInvite = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildInvite)
           end
           return checkCFunc(_G.GuildInvite)
         end,
         GuildLeave = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildLeave)
           end
           return checkCFunc(_G.GuildLeave)
         end,
         GuildMasterAbsent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildMasterAbsent)
           end
           return checkCFunc(_G.GuildMasterAbsent)
@@ -18056,7 +18056,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GuildNewsSort)
         end,
         GuildPromote = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildPromote)
           end
           return checkCFunc(_G.GuildPromote)
@@ -18068,37 +18068,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.GuildRosterSendSoR)
         end,
         GuildRosterSetOfficerNote = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildRosterSetOfficerNote)
           end
           return checkCFunc(_G.GuildRosterSetOfficerNote)
         end,
         GuildRosterSetPublicNote = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildRosterSetPublicNote)
           end
           return checkCFunc(_G.GuildRosterSetPublicNote)
         end,
         GuildSetLeader = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildSetLeader)
           end
           return checkCFunc(_G.GuildSetLeader)
         end,
         GuildSetMOTD = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildSetMOTD)
           end
           return checkCFunc(_G.GuildSetMOTD)
         end,
         GuildUninvite = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.GuildUninvite)
           end
           return checkCFunc(_G.GuildUninvite)
         end,
         HandleAtlasMemberCommand = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.HandleAtlasMemberCommand)
           end
           return checkCFunc(_G.HandleAtlasMemberCommand)
@@ -18137,7 +18137,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.HasCompletedAnyAchievement)
         end,
         HasDualWieldPenalty = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.HasDualWieldPenalty)
           end
           return checkCFunc(_G.HasDualWieldPenalty)
@@ -18155,19 +18155,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.HasFilledPetition)
         end,
         HasFullControl = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.HasFullControl)
           end
           return checkCFunc(_G.HasFullControl)
         end,
         HasIgnoreDualWieldWeapon = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.HasIgnoreDualWieldWeapon)
           end
           return checkCFunc(_G.HasIgnoreDualWieldWeapon)
         end,
         HasInboxItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.HasInboxItem)
           end
           return checkCFunc(_G.HasInboxItem)
@@ -18197,7 +18197,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.HasNewMail)
         end,
         HasNoReleaseAura = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.HasNoReleaseAura)
           end
           return checkCFunc(_G.HasNoReleaseAura)
@@ -18239,7 +18239,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.HasVehicleActionBar)
         end,
         HasWandEquipped = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.HasWandEquipped)
           end
           return checkCFunc(_G.HasWandEquipped)
@@ -18251,13 +18251,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.HaveQuestRewardData)
         end,
         HearthAndResurrectFromArea = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.HearthAndResurrectFromArea)
           end
           return checkCFunc(_G.HearthAndResurrectFromArea)
         end,
         HideRepairCursor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.HideRepairCursor)
           end
           return checkCFunc(_G.HideRepairCursor)
@@ -18311,7 +18311,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.InviteUnit)
         end,
         Is64BitClient = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.Is64BitClient)
           end
           return checkCFunc(_G.Is64BitClient)
@@ -18365,13 +18365,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsArenaSeasonActive)
         end,
         IsArenaSkirmish = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsArenaSkirmish)
           end
           return checkCFunc(_G.IsArenaSkirmish)
         end,
         IsArenaTeamCaptain = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsArenaTeamCaptain)
           end
           return checkCFunc(_G.IsArenaTeamCaptain)
@@ -18404,7 +18404,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsAttackAction)
         end,
         IsAttackSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsAttackSpell)
           end
           return checkCFunc(_G.IsAttackSpell)
@@ -18422,25 +18422,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsAutoRepeatSpell)
         end,
         IsAvailableQuestTrivial = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsAvailableQuestTrivial)
           end
           return checkCFunc(_G.IsAvailableQuestTrivial)
         end,
         IsBNLogin = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsBNLogin)
           end
           return checkCFunc(_G.IsBNLogin)
         end,
         IsBagSlotFlagEnabledOnOtherBags = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsBagSlotFlagEnabledOnOtherBags)
           end
           return checkCFunc(_G.IsBagSlotFlagEnabledOnOtherBags)
         end,
         IsBagSlotFlagEnabledOnOtherBankBags = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsBagSlotFlagEnabledOnOtherBankBags)
           end
           return checkCFunc(_G.IsBagSlotFlagEnabledOnOtherBankBags)
@@ -18455,7 +18455,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsBattlefieldArena)
         end,
         IsBindingForGamePad = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsBindingForGamePad)
           end
           return checkCFunc(_G.IsBindingForGamePad)
@@ -18482,25 +18482,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsCharacterNewlyBoosted)
         end,
         IsChatAFK = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsChatAFK)
           end
           return checkCFunc(_G.IsChatAFK)
         end,
         IsChatChannelRaid = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsChatChannelRaid)
           end
           return checkCFunc(_G.IsChatChannelRaid)
         end,
         IsChatDND = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsChatDND)
           end
           return checkCFunc(_G.IsChatDND)
         end,
         IsCompetitiveModeEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsCompetitiveModeEnabled)
           end
           return checkCFunc(_G.IsCompetitiveModeEnabled)
@@ -18542,7 +18542,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsCurrentAction)
         end,
         IsCurrentItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsCurrentItem)
           end
           return checkCFunc(_G.IsCurrentItem)
@@ -18554,7 +18554,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsCurrentSpell)
         end,
         IsDebugBuild = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsDebugBuild)
           end
           return checkCFunc(_G.IsDebugBuild)
@@ -18566,19 +18566,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsDemonHunterAvailable)
         end,
         IsDesaturateSupported = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsDesaturateSupported)
           end
           return checkCFunc(_G.IsDesaturateSupported)
         end,
         IsDisplayChannelModerator = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsDisplayChannelModerator)
           end
           return checkCFunc(_G.IsDisplayChannelModerator)
         end,
         IsDisplayChannelOwner = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsDisplayChannelOwner)
           end
           return checkCFunc(_G.IsDisplayChannelOwner)
@@ -18590,7 +18590,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsDressableItem)
         end,
         IsDualWielding = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsDualWielding)
           end
           return checkCFunc(_G.IsDualWielding)
@@ -18602,13 +18602,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsEncounterLimitingResurrections)
         end,
         IsEncounterSuppressingRelease = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsEncounterSuppressingRelease)
           end
           return checkCFunc(_G.IsEncounterSuppressingRelease)
         end,
         IsEquippableItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsEquippableItem)
           end
           return checkCFunc(_G.IsEquippableItem)
@@ -18620,13 +18620,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsEquippedItem)
         end,
         IsEquippedItemType = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsEquippedItemType)
           end
           return checkCFunc(_G.IsEquippedItemType)
         end,
         IsEuropeanNumbers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsEuropeanNumbers)
           end
           return checkCFunc(_G.IsEuropeanNumbers)
@@ -18638,7 +18638,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsExpansionTrial)
         end,
         IsFactionInactive = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsFactionInactive)
           end
           return checkCFunc(_G.IsFactionInactive)
@@ -18650,13 +18650,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsFishingLoot)
         end,
         IsFlyableArea = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsFlyableArea)
           end
           return checkCFunc(_G.IsFlyableArea)
         end,
         IsFlying = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsFlying)
           end
           return checkCFunc(_G.IsFlying)
@@ -18665,19 +18665,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsGMClient)
         end,
         IsGUIDInGroup = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsGUIDInGroup)
           end
           return checkCFunc(_G.IsGUIDInGroup)
         end,
         IsGamePadCursorControlEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsGamePadCursorControlEnabled)
           end
           return checkCFunc(_G.IsGamePadCursorControlEnabled)
         end,
         IsGamePadFreelookEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsGamePadFreelookEnabled)
           end
           return checkCFunc(_G.IsGamePadFreelookEnabled)
@@ -18686,37 +18686,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsGuildLeader)
         end,
         IsGuildMember = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsGuildMember)
           end
           return checkCFunc(_G.IsGuildMember)
         end,
         IsGuildRankAssignmentAllowed = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsGuildRankAssignmentAllowed)
           end
           return checkCFunc(_G.IsGuildRankAssignmentAllowed)
         end,
         IsHarmfulItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsHarmfulItem)
           end
           return checkCFunc(_G.IsHarmfulItem)
         end,
         IsHarmfulSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsHarmfulSpell)
           end
           return checkCFunc(_G.IsHarmfulSpell)
         end,
         IsHelpfulItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsHelpfulItem)
           end
           return checkCFunc(_G.IsHelpfulItem)
         end,
         IsHelpfulSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsHelpfulSpell)
           end
           return checkCFunc(_G.IsHelpfulSpell)
@@ -18728,19 +18728,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsInActiveWorldPVP)
         end,
         IsInArenaTeam = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsInArenaTeam)
           end
           return checkCFunc(_G.IsInArenaTeam)
         end,
         IsInAuthenticatedRank = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsInAuthenticatedRank)
           end
           return checkCFunc(_G.IsInAuthenticatedRank)
         end,
         IsInCinematicScene = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsInCinematicScene)
           end
           return checkCFunc(_G.IsInCinematicScene)
@@ -18752,7 +18752,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsInGuild)
         end,
         IsInGuildGroup = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsInGuildGroup)
           end
           return checkCFunc(_G.IsInGuildGroup)
@@ -18782,7 +18782,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsInScenarioGroup)
         end,
         IsIndoors = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsIndoors)
           end
           return checkCFunc(_G.IsIndoors)
@@ -18818,7 +18818,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsJailersTowerLayerTimeLocked)
         end,
         IsKeyDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsKeyDown)
           end
           return checkCFunc(_G.IsKeyDown)
@@ -18836,37 +18836,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsLFGDungeonJoinable)
         end,
         IsLeftAltKeyDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsLeftAltKeyDown)
           end
           return checkCFunc(_G.IsLeftAltKeyDown)
         end,
         IsLeftControlKeyDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsLeftControlKeyDown)
           end
           return checkCFunc(_G.IsLeftControlKeyDown)
         end,
         IsLeftMetaKeyDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsLeftMetaKeyDown)
           end
           return checkCFunc(_G.IsLeftMetaKeyDown)
         end,
         IsLeftShiftKeyDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsLeftShiftKeyDown)
           end
           return checkCFunc(_G.IsLeftShiftKeyDown)
         end,
         IsLegacyDifficulty = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsLegacyDifficulty)
           end
           return checkCFunc(_G.IsLegacyDifficulty)
         end,
         IsLinuxClient = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsLinuxClient)
           end
           return checkCFunc(_G.IsLinuxClient)
@@ -18878,13 +18878,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsMacClient)
         end,
         IsMasterLooter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsMasterLooter)
           end
           return checkCFunc(_G.IsMasterLooter)
         end,
         IsMetaKeyDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsMetaKeyDown)
           end
           return checkCFunc(_G.IsMetaKeyDown)
@@ -18893,7 +18893,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsModifiedClick)
         end,
         IsModifierKeyDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsModifierKeyDown)
           end
           return checkCFunc(_G.IsModifierKeyDown)
@@ -18902,25 +18902,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsMounted)
         end,
         IsMouseButtonDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsMouseButtonDown)
           end
           return checkCFunc(_G.IsMouseButtonDown)
         end,
         IsMouselooking = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsMouselooking)
           end
           return checkCFunc(_G.IsMouselooking)
         end,
         IsMovieLocal = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsMovieLocal)
           end
           return checkCFunc(_G.IsMovieLocal)
         end,
         IsMoviePlayable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsMoviePlayable)
           end
           return checkCFunc(_G.IsMoviePlayable)
@@ -18935,25 +18935,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsOnGroundFloorInJailersTower)
         end,
         IsOnTournamentRealm = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsOnTournamentRealm)
           end
           return checkCFunc(_G.IsOnTournamentRealm)
         end,
         IsOutOfBounds = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsOutOfBounds)
           end
           return checkCFunc(_G.IsOutOfBounds)
         end,
         IsOutdoors = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsOutdoors)
           end
           return checkCFunc(_G.IsOutdoors)
         end,
         IsOutlineModeSupported = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsOutlineModeSupported)
           end
           return checkCFunc(_G.IsOutlineModeSupported)
@@ -18983,7 +18983,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsPendingGlyphRemoval)
         end,
         IsPetActive = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsPetActive)
           end
           return checkCFunc(_G.IsPetActive)
@@ -18992,7 +18992,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsPetAttackAction)
         end,
         IsPetAttackActive = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsPetAttackActive)
           end
           return checkCFunc(_G.IsPetAttackActive)
@@ -19016,7 +19016,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsPlayerNeutral)
         end,
         IsPlayerSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsPlayerSpell)
           end
           return checkCFunc(_G.IsPlayerSpell)
@@ -19085,7 +19085,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsRaidMarkerActive)
         end,
         IsRangedWeapon = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsRangedWeapon)
           end
           return checkCFunc(_G.IsRangedWeapon)
@@ -19097,7 +19097,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsReagentBankUnlocked)
         end,
         IsRecognizedName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsRecognizedName)
           end
           return checkCFunc(_G.IsRecognizedName)
@@ -19115,7 +19115,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsReferAFriendLinked)
         end,
         IsReplacingUnit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsReplacingUnit)
           end
           return checkCFunc(_G.IsReplacingUnit)
@@ -19127,25 +19127,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsRestrictedAccount)
         end,
         IsRightAltKeyDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsRightAltKeyDown)
           end
           return checkCFunc(_G.IsRightAltKeyDown)
         end,
         IsRightControlKeyDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsRightControlKeyDown)
           end
           return checkCFunc(_G.IsRightControlKeyDown)
         end,
         IsRightMetaKeyDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsRightMetaKeyDown)
           end
           return checkCFunc(_G.IsRightMetaKeyDown)
         end,
         IsRightShiftKeyDown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsRightShiftKeyDown)
           end
           return checkCFunc(_G.IsRightShiftKeyDown)
@@ -19208,19 +19208,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsStoryQuest)
         end,
         IsSubZonePVPPOI = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsSubZonePVPPOI)
           end
           return checkCFunc(_G.IsSubZonePVPPOI)
         end,
         IsSubmerged = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsSubmerged)
           end
           return checkCFunc(_G.IsSubmerged)
         end,
         IsSwimming = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsSwimming)
           end
           return checkCFunc(_G.IsSwimming)
@@ -19304,7 +19304,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsUsableSpell)
         end,
         IsUsingFixedTimeStep = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsUsingFixedTimeStep)
           end
           return checkCFunc(_G.IsUsingFixedTimeStep)
@@ -19337,7 +19337,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsVoidStorageReady)
         end,
         IsWargame = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.IsWargame)
           end
           return checkCFunc(_G.IsWargame)
@@ -19364,7 +19364,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ItemCanTargetGarrisonFollowerAbility)
         end,
         ItemHasRange = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ItemHasRange)
           end
           return checkCFunc(_G.ItemHasRange)
@@ -19391,31 +19391,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.ItemTextIsFullPage)
         end,
         ItemTextNextPage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ItemTextNextPage)
           end
           return checkCFunc(_G.ItemTextNextPage)
         end,
         ItemTextPrevPage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ItemTextPrevPage)
           end
           return checkCFunc(_G.ItemTextPrevPage)
         end,
         JoinArena = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.JoinArena)
           end
           return checkCFunc(_G.JoinArena)
         end,
         JoinBattlefield = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.JoinBattlefield)
           end
           return checkCFunc(_G.JoinBattlefield)
         end,
         JoinChannelByName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.JoinChannelByName)
           end
           return checkCFunc(_G.JoinChannelByName)
@@ -19427,7 +19427,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.JoinLFG)
         end,
         JoinPermanentChannel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.JoinPermanentChannel)
           end
           return checkCFunc(_G.JoinPermanentChannel)
@@ -19445,13 +19445,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.JoinSingleLFG)
         end,
         JoinSkirmish = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.JoinSkirmish)
           end
           return checkCFunc(_G.JoinSkirmish)
         end,
         JoinTemporaryChannel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.JoinTemporaryChannel)
           end
           return checkCFunc(_G.JoinTemporaryChannel)
@@ -19460,133 +19460,133 @@ function G.GeneratedTests()
           return checkCFunc(_G.JumpOrAscendStart)
         end,
         KBArticle_BeginLoading = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBArticle_BeginLoading)
           end
           return checkCFunc(_G.KBArticle_BeginLoading)
         end,
         KBArticle_GetData = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBArticle_GetData)
           end
           return checkCFunc(_G.KBArticle_GetData)
         end,
         KBArticle_IsLoaded = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBArticle_IsLoaded)
           end
           return checkCFunc(_G.KBArticle_IsLoaded)
         end,
         KBQuery_BeginLoading = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBQuery_BeginLoading)
           end
           return checkCFunc(_G.KBQuery_BeginLoading)
         end,
         KBQuery_GetArticleHeaderCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBQuery_GetArticleHeaderCount)
           end
           return checkCFunc(_G.KBQuery_GetArticleHeaderCount)
         end,
         KBQuery_GetArticleHeaderData = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBQuery_GetArticleHeaderData)
           end
           return checkCFunc(_G.KBQuery_GetArticleHeaderData)
         end,
         KBQuery_GetTotalArticleCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBQuery_GetTotalArticleCount)
           end
           return checkCFunc(_G.KBQuery_GetTotalArticleCount)
         end,
         KBQuery_IsLoaded = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBQuery_IsLoaded)
           end
           return checkCFunc(_G.KBQuery_IsLoaded)
         end,
         KBSetup_BeginLoading = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSetup_BeginLoading)
           end
           return checkCFunc(_G.KBSetup_BeginLoading)
         end,
         KBSetup_GetArticleHeaderCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSetup_GetArticleHeaderCount)
           end
           return checkCFunc(_G.KBSetup_GetArticleHeaderCount)
         end,
         KBSetup_GetArticleHeaderData = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSetup_GetArticleHeaderData)
           end
           return checkCFunc(_G.KBSetup_GetArticleHeaderData)
         end,
         KBSetup_GetCategoryCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSetup_GetCategoryCount)
           end
           return checkCFunc(_G.KBSetup_GetCategoryCount)
         end,
         KBSetup_GetCategoryData = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSetup_GetCategoryData)
           end
           return checkCFunc(_G.KBSetup_GetCategoryData)
         end,
         KBSetup_GetLanguageCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSetup_GetLanguageCount)
           end
           return checkCFunc(_G.KBSetup_GetLanguageCount)
         end,
         KBSetup_GetLanguageData = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSetup_GetLanguageData)
           end
           return checkCFunc(_G.KBSetup_GetLanguageData)
         end,
         KBSetup_GetSubCategoryCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSetup_GetSubCategoryCount)
           end
           return checkCFunc(_G.KBSetup_GetSubCategoryCount)
         end,
         KBSetup_GetSubCategoryData = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSetup_GetSubCategoryData)
           end
           return checkCFunc(_G.KBSetup_GetSubCategoryData)
         end,
         KBSetup_GetTotalArticleCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSetup_GetTotalArticleCount)
           end
           return checkCFunc(_G.KBSetup_GetTotalArticleCount)
         end,
         KBSetup_IsLoaded = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSetup_IsLoaded)
           end
           return checkCFunc(_G.KBSetup_IsLoaded)
         end,
         KBSystem_GetMOTD = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSystem_GetMOTD)
           end
           return checkCFunc(_G.KBSystem_GetMOTD)
         end,
         KBSystem_GetServerNotice = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSystem_GetServerNotice)
           end
           return checkCFunc(_G.KBSystem_GetServerNotice)
         end,
         KBSystem_GetServerStatus = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.KBSystem_GetServerStatus)
           end
           return checkCFunc(_G.KBSystem_GetServerStatus)
@@ -19616,7 +19616,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.LearnPvpTalents)
         end,
         LearnTalent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.LearnTalent)
           end
           return checkCFunc(_G.LearnTalent)
@@ -19628,19 +19628,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.LearnTalents)
         end,
         LeaveBattlefield = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.LeaveBattlefield)
           end
           return checkCFunc(_G.LeaveBattlefield)
         end,
         LeaveChannelByLocalID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.LeaveChannelByLocalID)
           end
           return checkCFunc(_G.LeaveChannelByLocalID)
         end,
         LeaveChannelByName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.LeaveChannelByName)
           end
           return checkCFunc(_G.LeaveChannelByName)
@@ -19664,13 +19664,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.LeaveSingleLFG)
         end,
         ListChannelByName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ListChannelByName)
           end
           return checkCFunc(_G.ListChannelByName)
         end,
         ListChannels = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ListChannels)
           end
           return checkCFunc(_G.ListChannels)
@@ -19679,13 +19679,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.LoadAddOn)
         end,
         LoadBindings = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.LoadBindings)
           end
           return checkCFunc(_G.LoadBindings)
         end,
         LoadURLIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.LoadURLIndex)
           end
           return checkCFunc(_G.LoadURLIndex)
@@ -19700,13 +19700,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.Logout)
         end,
         LootMoneyNotify = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.LootMoneyNotify)
           end
           return checkCFunc(_G.LootMoneyNotify)
         end,
         LootSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.LootSlot)
           end
           return checkCFunc(_G.LootSlot)
@@ -19715,13 +19715,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.LootSlotHasItem)
         end,
         MacOptions_AreOSShortcutsDisabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MacOptions_AreOSShortcutsDisabled)
           end
           return checkCFunc(_G.MacOptions_AreOSShortcutsDisabled)
         end,
         MacOptions_GetGameBundleName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MacOptions_GetGameBundleName)
           end
           return checkCFunc(_G.MacOptions_GetGameBundleName)
@@ -19751,7 +19751,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.MacOptions_IsMicrophoneEnabled)
         end,
         MacOptions_IsUniversalAccessEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MacOptions_IsUniversalAccessEnabled)
           end
           return checkCFunc(_G.MacOptions_IsUniversalAccessEnabled)
@@ -19769,31 +19769,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.MacOptions_OpenMicrophoneRequestDialogue)
         end,
         MacOptions_OpenUniversalAccess = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MacOptions_OpenUniversalAccess)
           end
           return checkCFunc(_G.MacOptions_OpenUniversalAccess)
         end,
         MacOptions_SetOSShortcutsDisabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MacOptions_SetOSShortcutsDisabled)
           end
           return checkCFunc(_G.MacOptions_SetOSShortcutsDisabled)
         end,
         MouseOverrideCinematicDisable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MouseOverrideCinematicDisable)
           end
           return checkCFunc(_G.MouseOverrideCinematicDisable)
         end,
         MouselookStart = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MouselookStart)
           end
           return checkCFunc(_G.MouselookStart)
         end,
         MouselookStop = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MouselookStop)
           end
           return checkCFunc(_G.MouselookStop)
@@ -19817,13 +19817,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.MoveForwardStop)
         end,
         MoveViewDownStart = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MoveViewDownStart)
           end
           return checkCFunc(_G.MoveViewDownStart)
         end,
         MoveViewDownStop = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MoveViewDownStop)
           end
           return checkCFunc(_G.MoveViewDownStop)
@@ -19832,19 +19832,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.MoveViewInStart)
         end,
         MoveViewInStop = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MoveViewInStop)
           end
           return checkCFunc(_G.MoveViewInStop)
         end,
         MoveViewLeftStart = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MoveViewLeftStart)
           end
           return checkCFunc(_G.MoveViewLeftStart)
         end,
         MoveViewLeftStop = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MoveViewLeftStop)
           end
           return checkCFunc(_G.MoveViewLeftStop)
@@ -19853,31 +19853,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.MoveViewOutStart)
         end,
         MoveViewOutStop = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MoveViewOutStop)
           end
           return checkCFunc(_G.MoveViewOutStop)
         end,
         MoveViewRightStart = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MoveViewRightStart)
           end
           return checkCFunc(_G.MoveViewRightStart)
         end,
         MoveViewRightStop = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MoveViewRightStop)
           end
           return checkCFunc(_G.MoveViewRightStop)
         end,
         MoveViewUpStart = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MoveViewUpStart)
           end
           return checkCFunc(_G.MoveViewUpStart)
         end,
         MoveViewUpStop = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MoveViewUpStop)
           end
           return checkCFunc(_G.MoveViewUpStop)
@@ -19886,7 +19886,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.MultiSampleAntiAliasingSupported)
         end,
         MuteSoundFile = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.MuteSoundFile)
           end
           return checkCFunc(_G.MuteSoundFile)
@@ -19904,37 +19904,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.NoPlayTime)
         end,
         NotWhileDeadError = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.NotWhileDeadError)
           end
           return checkCFunc(_G.NotWhileDeadError)
         end,
         NotifyInspect = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.NotifyInspect)
           end
           return checkCFunc(_G.NotifyInspect)
         end,
         NumTaxiNodes = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.NumTaxiNodes)
           end
           return checkCFunc(_G.NumTaxiNodes)
         end,
         OfferPetition = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.OfferPetition)
           end
           return checkCFunc(_G.OfferPetition)
         end,
         OpenTrainer = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.OpenTrainer)
           end
           return checkCFunc(_G.OpenTrainer)
         end,
         OpeningCinematic = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.OpeningCinematic)
           end
           return checkCFunc(_G.OpeningCinematic)
@@ -19952,13 +19952,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.PartyLFGStartBackfill)
         end,
         PetAbandon = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetAbandon)
           end
           return checkCFunc(_G.PetAbandon)
         end,
         PetAggressiveMode = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetAggressiveMode)
           end
           return checkCFunc(_G.PetAggressiveMode)
@@ -19973,19 +19973,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.PetAttack)
         end,
         PetCanBeAbandoned = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetCanBeAbandoned)
           end
           return checkCFunc(_G.PetCanBeAbandoned)
         end,
         PetCanBeDismissed = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetCanBeDismissed)
           end
           return checkCFunc(_G.PetCanBeDismissed)
         end,
         PetCanBeRenamed = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetCanBeRenamed)
           end
           return checkCFunc(_G.PetCanBeRenamed)
@@ -19997,19 +19997,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.PetDefensiveAssistMode)
         end,
         PetDefensiveMode = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetDefensiveMode)
           end
           return checkCFunc(_G.PetDefensiveMode)
         end,
         PetDismiss = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetDismiss)
           end
           return checkCFunc(_G.PetDismiss)
         end,
         PetFollow = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetFollow)
           end
           return checkCFunc(_G.PetFollow)
@@ -20018,55 +20018,55 @@ function G.GeneratedTests()
           return checkCFunc(_G.PetHasActionBar)
         end,
         PetHasSpellbook = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetHasSpellbook)
           end
           return checkCFunc(_G.PetHasSpellbook)
         end,
         PetMoveTo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetMoveTo)
           end
           return checkCFunc(_G.PetMoveTo)
         end,
         PetPassiveMode = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetPassiveMode)
           end
           return checkCFunc(_G.PetPassiveMode)
         end,
         PetRename = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetRename)
           end
           return checkCFunc(_G.PetRename)
         end,
         PetStopAttack = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetStopAttack)
           end
           return checkCFunc(_G.PetStopAttack)
         end,
         PetUsesPetFrame = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetUsesPetFrame)
           end
           return checkCFunc(_G.PetUsesPetFrame)
         end,
         PetWait = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PetWait)
           end
           return checkCFunc(_G.PetWait)
         end,
         PickupAction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupAction)
           end
           return checkCFunc(_G.PickupAction)
         end,
         PickupBagFromSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupBagFromSlot)
           end
           return checkCFunc(_G.PickupBagFromSlot)
@@ -20081,13 +20081,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.PickupContainerItem)
         end,
         PickupGuildBankItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupGuildBankItem)
           end
           return checkCFunc(_G.PickupGuildBankItem)
         end,
         PickupGuildBankMoney = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupGuildBankMoney)
           end
           return checkCFunc(_G.PickupGuildBankMoney)
@@ -20096,37 +20096,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.PickupInventoryItem)
         end,
         PickupItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupItem)
           end
           return checkCFunc(_G.PickupItem)
         end,
         PickupMacro = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupMacro)
           end
           return checkCFunc(_G.PickupMacro)
         end,
         PickupMerchantItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupMerchantItem)
           end
           return checkCFunc(_G.PickupMerchantItem)
         end,
         PickupPetAction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupPetAction)
           end
           return checkCFunc(_G.PickupPetAction)
         end,
         PickupPetSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupPetSpell)
           end
           return checkCFunc(_G.PickupPetSpell)
         end,
         PickupPlayerMoney = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupPlayerMoney)
           end
           return checkCFunc(_G.PickupPlayerMoney)
@@ -20138,19 +20138,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.PickupPvpTalent)
         end,
         PickupSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupSpell)
           end
           return checkCFunc(_G.PickupSpell)
         end,
         PickupSpellBookItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupSpellBookItem)
           end
           return checkCFunc(_G.PickupSpellBookItem)
         end,
         PickupStablePet = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupStablePet)
           end
           return checkCFunc(_G.PickupStablePet)
@@ -20162,7 +20162,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PickupTalent)
         end,
         PickupTradeMoney = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PickupTradeMoney)
           end
           return checkCFunc(_G.PickupTradeMoney)
@@ -20180,7 +20180,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PitchUpStop)
         end,
         PlaceAction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PlaceAction)
           end
           return checkCFunc(_G.PlaceAction)
@@ -20204,7 +20204,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PlayAutoAcceptQuestSound)
         end,
         PlayMusic = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PlayMusic)
           end
           return checkCFunc(_G.PlayMusic)
@@ -20213,31 +20213,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.PlaySound)
         end,
         PlaySoundFile = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PlaySoundFile)
           end
           return checkCFunc(_G.PlaySoundFile)
         end,
         PlayVocalErrorSoundID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PlayVocalErrorSoundID)
           end
           return checkCFunc(_G.PlayVocalErrorSoundID)
         end,
         PlayerCanTeleport = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PlayerCanTeleport)
           end
           return checkCFunc(_G.PlayerCanTeleport)
         end,
         PlayerEffectiveAttackPower = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PlayerEffectiveAttackPower)
           end
           return checkCFunc(_G.PlayerEffectiveAttackPower)
         end,
         PlayerHasHearthstone = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PlayerHasHearthstone)
           end
           return checkCFunc(_G.PlayerHasHearthstone)
@@ -20270,7 +20270,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PostAuction)
         end,
         PreloadMovie = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PreloadMovie)
           end
           return checkCFunc(_G.PreloadMovie)
@@ -20291,7 +20291,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ProcessQuestLogRewardFactions)
         end,
         PromoteToAssistant = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PromoteToAssistant)
           end
           return checkCFunc(_G.PromoteToAssistant)
@@ -20300,7 +20300,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PromoteToLeader)
         end,
         PurchaseSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.PurchaseSlot)
           end
           return checkCFunc(_G.PurchaseSlot)
@@ -20318,7 +20318,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.QueryAuctionItems)
         end,
         QueryGuildBankLog = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.QueryGuildBankLog)
           end
           return checkCFunc(_G.QueryGuildBankLog)
@@ -20348,7 +20348,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.QueryGuildRecipes)
         end,
         QuestChooseRewardError = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.QuestChooseRewardError)
           end
           return checkCFunc(_G.QuestChooseRewardError)
@@ -20378,7 +20378,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.QuestHasPOIInfo)
         end,
         QuestIsDaily = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.QuestIsDaily)
           end
           return checkCFunc(_G.QuestIsDaily)
@@ -20402,7 +20402,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.QuestIsWeekly)
         end,
         QuestLogPushQuest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.QuestLogPushQuest)
           end
           return checkCFunc(_G.QuestLogPushQuest)
@@ -20447,13 +20447,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.Quit)
         end,
         RaidProfileExists = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RaidProfileExists)
           end
           return checkCFunc(_G.RaidProfileExists)
         end,
         RaidProfileHasUnsavedChanges = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RaidProfileHasUnsavedChanges)
           end
           return checkCFunc(_G.RaidProfileHasUnsavedChanges)
@@ -20492,13 +20492,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.RemoveAutoQuestPopUp)
         end,
         RemoveChatWindowChannel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RemoveChatWindowChannel)
           end
           return checkCFunc(_G.RemoveChatWindowChannel)
         end,
         RemoveChatWindowMessages = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RemoveChatWindowMessages)
           end
           return checkCFunc(_G.RemoveChatWindowMessages)
@@ -20534,37 +20534,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.RemoveTrackedAchievement)
         end,
         RenamePetition = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RenamePetition)
           end
           return checkCFunc(_G.RenamePetition)
         end,
         ReopenInteraction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ReopenInteraction)
           end
           return checkCFunc(_G.ReopenInteraction)
         end,
         RepairAllItems = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RepairAllItems)
           end
           return checkCFunc(_G.RepairAllItems)
         end,
         ReplaceEnchant = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ReplaceEnchant)
           end
           return checkCFunc(_G.ReplaceEnchant)
         end,
         ReplaceGuildMaster = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ReplaceGuildMaster)
           end
           return checkCFunc(_G.ReplaceGuildMaster)
         end,
         ReplaceTradeEnchant = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ReplaceTradeEnchant)
           end
           return checkCFunc(_G.ReplaceTradeEnchant)
@@ -20573,19 +20573,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.RepopMe)
         end,
         ReportBug = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ReportBug)
           end
           return checkCFunc(_G.ReportBug)
         end,
         ReportPlayerIsPVPAFK = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ReportPlayerIsPVPAFK)
           end
           return checkCFunc(_G.ReportPlayerIsPVPAFK)
         end,
         ReportSuggestion = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ReportSuggestion)
           end
           return checkCFunc(_G.ReportSuggestion)
@@ -20597,13 +20597,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.RequestArtifactCompletionHistory)
         end,
         RequestBattlefieldScoreData = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RequestBattlefieldScoreData)
           end
           return checkCFunc(_G.RequestBattlefieldScoreData)
         end,
         RequestBattlegroundInstanceInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RequestBattlegroundInstanceInfo)
           end
           return checkCFunc(_G.RequestBattlegroundInstanceInfo)
@@ -20681,7 +20681,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.RequestTimePlayed)
         end,
         RequeueSkirmish = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RequeueSkirmish)
           end
           return checkCFunc(_G.RequeueSkirmish)
@@ -20690,19 +20690,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.ResetAddOns)
         end,
         ResetCPUUsage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ResetCPUUsage)
           end
           return checkCFunc(_G.ResetCPUUsage)
         end,
         ResetChatColors = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ResetChatColors)
           end
           return checkCFunc(_G.ResetChatColors)
         end,
         ResetChatWindows = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ResetChatWindows)
           end
           return checkCFunc(_G.ResetChatWindows)
@@ -20711,13 +20711,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.ResetCursor)
         end,
         ResetDisabledAddOns = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ResetDisabledAddOns)
           end
           return checkCFunc(_G.ResetDisabledAddOns)
         end,
         ResetInstances = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ResetInstances)
           end
           return checkCFunc(_G.ResetInstances)
@@ -20729,7 +20729,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ResetSetMerchantFilter)
         end,
         ResetTutorials = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ResetTutorials)
           end
           return checkCFunc(_G.ResetTutorials)
@@ -20738,7 +20738,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ResetView)
         end,
         ResistancePercent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ResistancePercent)
           end
           return checkCFunc(_G.ResistancePercent)
@@ -20747,25 +20747,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.RespondInstanceLock)
         end,
         RespondMailLockSendItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RespondMailLockSendItem)
           end
           return checkCFunc(_G.RespondMailLockSendItem)
         end,
         RespondToInviteConfirmation = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RespondToInviteConfirmation)
           end
           return checkCFunc(_G.RespondToInviteConfirmation)
         end,
         RestartGx = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RestartGx)
           end
           return checkCFunc(_G.RestartGx)
         end,
         RestoreRaidProfileFromCopy = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RestoreRaidProfileFromCopy)
           end
           return checkCFunc(_G.RestoreRaidProfileFromCopy)
@@ -20774,25 +20774,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.ResurrectGetOfferer)
         end,
         ResurrectHasSickness = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ResurrectHasSickness)
           end
           return checkCFunc(_G.ResurrectHasSickness)
         end,
         ResurrectHasTimer = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ResurrectHasTimer)
           end
           return checkCFunc(_G.ResurrectHasTimer)
         end,
         RetrieveCorpse = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RetrieveCorpse)
           end
           return checkCFunc(_G.RetrieveCorpse)
         end,
         ReturnInboxItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ReturnInboxItem)
           end
           return checkCFunc(_G.ReturnInboxItem)
@@ -20801,13 +20801,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.RollOnLoot)
         end,
         RunBinding = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RunBinding)
           end
           return checkCFunc(_G.RunBinding)
         end,
         RunMacro = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.RunMacro)
           end
           return checkCFunc(_G.RunMacro)
@@ -20819,7 +20819,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.RunScript)
         end,
         SaveAddOns = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SaveAddOns)
           end
           return checkCFunc(_G.SaveAddOns)
@@ -20828,7 +20828,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SaveBindings)
         end,
         SaveRaidProfileCopy = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SaveRaidProfileCopy)
           end
           return checkCFunc(_G.SaveRaidProfileCopy)
@@ -20894,13 +20894,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SecureCmdOptionParse)
         end,
         SelectActiveQuest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SelectActiveQuest)
           end
           return checkCFunc(_G.SelectActiveQuest)
         end,
         SelectAvailableQuest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SelectAvailableQuest)
           end
           return checkCFunc(_G.SelectAvailableQuest)
@@ -20942,19 +20942,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.SelectTradeSkill)
         end,
         SelectTrainerService = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SelectTrainerService)
           end
           return checkCFunc(_G.SelectTrainerService)
         end,
         SelectedRealmName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SelectedRealmName)
           end
           return checkCFunc(_G.SelectedRealmName)
         end,
         SellCursorItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SellCursorItem)
           end
           return checkCFunc(_G.SellCursorItem)
@@ -20963,7 +20963,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SendChatMessage)
         end,
         SendMail = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SendMail)
           end
           return checkCFunc(_G.SendMail)
@@ -21008,19 +21008,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetActionUIButton)
         end,
         SetAddonVersionCheck = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetAddonVersionCheck)
           end
           return checkCFunc(_G.SetAddonVersionCheck)
         end,
         SetAllowDangerousScripts = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetAllowDangerousScripts)
           end
           return checkCFunc(_G.SetAllowDangerousScripts)
         end,
         SetAllowLowLevelRaid = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetAllowLowLevelRaid)
           end
           return checkCFunc(_G.SetAllowLowLevelRaid)
@@ -21044,7 +21044,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetAuctionsTabShowing)
         end,
         SetAutoDeclineGuildInvites = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetAutoDeclineGuildInvites)
           end
           return checkCFunc(_G.SetAutoDeclineGuildInvites)
@@ -21059,7 +21059,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetBagPortraitTexture)
         end,
         SetBagSlotFlag = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetBagSlotFlag)
           end
           return checkCFunc(_G.SetBagSlotFlag)
@@ -21071,7 +21071,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetBankAutosortDisabled)
         end,
         SetBankBagSlotFlag = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetBankBagSlotFlag)
           end
           return checkCFunc(_G.SetBankBagSlotFlag)
@@ -21083,7 +21083,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetBarSlotFromIntro)
         end,
         SetBattlefieldScoreFaction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetBattlefieldScoreFaction)
           end
           return checkCFunc(_G.SetBattlefieldScoreFaction)
@@ -21095,55 +21095,55 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetBindingClick)
         end,
         SetBindingItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetBindingItem)
           end
           return checkCFunc(_G.SetBindingItem)
         end,
         SetBindingMacro = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetBindingMacro)
           end
           return checkCFunc(_G.SetBindingMacro)
         end,
         SetBindingSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetBindingSpell)
           end
           return checkCFunc(_G.SetBindingSpell)
         end,
         SetCemeteryPreference = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetCemeteryPreference)
           end
           return checkCFunc(_G.SetCemeteryPreference)
         end,
         SetChannelOwner = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetChannelOwner)
           end
           return checkCFunc(_G.SetChannelOwner)
         end,
         SetChannelPassword = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetChannelPassword)
           end
           return checkCFunc(_G.SetChannelPassword)
         end,
         SetChatColorNameByClass = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetChatColorNameByClass)
           end
           return checkCFunc(_G.SetChatColorNameByClass)
         end,
         SetChatWindowAlpha = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetChatWindowAlpha)
           end
           return checkCFunc(_G.SetChatWindowAlpha)
         end,
         SetChatWindowColor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetChatWindowColor)
           end
           return checkCFunc(_G.SetChatWindowColor)
@@ -21158,13 +21158,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetChatWindowName)
         end,
         SetChatWindowSavedDimensions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetChatWindowSavedDimensions)
           end
           return checkCFunc(_G.SetChatWindowSavedDimensions)
         end,
         SetChatWindowSavedPosition = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetChatWindowSavedPosition)
           end
           return checkCFunc(_G.SetChatWindowSavedPosition)
@@ -21188,19 +21188,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetCraftFilter)
         end,
         SetCurrentGraphicsSetting = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetCurrentGraphicsSetting)
           end
           return checkCFunc(_G.SetCurrentGraphicsSetting)
         end,
         SetCurrentGuildBankTab = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetCurrentGuildBankTab)
           end
           return checkCFunc(_G.SetCurrentGuildBankTab)
         end,
         SetCurrentTitle = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetCurrentTitle)
           end
           return checkCFunc(_G.SetCurrentTitle)
@@ -21215,37 +21215,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetCursorVirtualItem)
         end,
         SetDefaultVideoOptions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetDefaultVideoOptions)
           end
           return checkCFunc(_G.SetDefaultVideoOptions)
         end,
         SetDungeonDifficultyID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetDungeonDifficultyID)
           end
           return checkCFunc(_G.SetDungeonDifficultyID)
         end,
         SetEuropeanNumbers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetEuropeanNumbers)
           end
           return checkCFunc(_G.SetEuropeanNumbers)
         end,
         SetEveryoneIsAssistant = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetEveryoneIsAssistant)
           end
           return checkCFunc(_G.SetEveryoneIsAssistant)
         end,
         SetFactionActive = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetFactionActive)
           end
           return checkCFunc(_G.SetFactionActive)
         end,
         SetFactionInactive = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetFactionInactive)
           end
           return checkCFunc(_G.SetFactionInactive)
@@ -21257,55 +21257,55 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetFocusedAchievement)
         end,
         SetGamePadCursorControl = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetGamePadCursorControl)
           end
           return checkCFunc(_G.SetGamePadCursorControl)
         end,
         SetGamePadFreeLook = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetGamePadFreeLook)
           end
           return checkCFunc(_G.SetGamePadFreeLook)
         end,
         SetGuildBankTabInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetGuildBankTabInfo)
           end
           return checkCFunc(_G.SetGuildBankTabInfo)
         end,
         SetGuildBankTabItemWithdraw = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetGuildBankTabItemWithdraw)
           end
           return checkCFunc(_G.SetGuildBankTabItemWithdraw)
         end,
         SetGuildBankTabPermissions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetGuildBankTabPermissions)
           end
           return checkCFunc(_G.SetGuildBankTabPermissions)
         end,
         SetGuildBankText = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetGuildBankText)
           end
           return checkCFunc(_G.SetGuildBankText)
         end,
         SetGuildBankWithdrawGoldLimit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetGuildBankWithdrawGoldLimit)
           end
           return checkCFunc(_G.SetGuildBankWithdrawGoldLimit)
         end,
         SetGuildInfoText = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetGuildInfoText)
           end
           return checkCFunc(_G.SetGuildInfoText)
         end,
         SetGuildMemberRank = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetGuildMemberRank)
           end
           return checkCFunc(_G.SetGuildMemberRank)
@@ -21320,7 +21320,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetGuildRosterSelection)
         end,
         SetGuildRosterShowOffline = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetGuildRosterShowOffline)
           end
           return checkCFunc(_G.SetGuildRosterShowOffline)
@@ -21338,7 +21338,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetGuildTradeSkillItemNameFilter)
         end,
         SetInWorldUIVisibility = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetInWorldUIVisibility)
           end
           return checkCFunc(_G.SetInWorldUIVisibility)
@@ -21347,7 +21347,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetInsertItemsLeftToRight)
         end,
         SetInventoryPortraitTexture = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetInventoryPortraitTexture)
           end
           return checkCFunc(_G.SetInventoryPortraitTexture)
@@ -21392,19 +21392,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetLFGRoles)
         end,
         SetLegacyRaidDifficultyID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetLegacyRaidDifficultyID)
           end
           return checkCFunc(_G.SetLegacyRaidDifficultyID)
         end,
         SetLootMethod = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetLootMethod)
           end
           return checkCFunc(_G.SetLootMethod)
         end,
         SetLootPortrait = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetLootPortrait)
           end
           return checkCFunc(_G.SetLootPortrait)
@@ -21416,19 +21416,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetLootSpecialization)
         end,
         SetLootThreshold = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetLootThreshold)
           end
           return checkCFunc(_G.SetLootThreshold)
         end,
         SetMacroItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetMacroItem)
           end
           return checkCFunc(_G.SetMacroItem)
         end,
         SetMacroSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetMacroSpell)
           end
           return checkCFunc(_G.SetMacroSpell)
@@ -21443,13 +21443,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetModifiedClick)
         end,
         SetMouselookOverrideBinding = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetMouselookOverrideBinding)
           end
           return checkCFunc(_G.SetMouselookOverrideBinding)
         end,
         SetMoveEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetMoveEnabled)
           end
           return checkCFunc(_G.SetMoveEnabled)
@@ -21461,13 +21461,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetMultiCastSpell)
         end,
         SetOptOutOfLoot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetOptOutOfLoot)
           end
           return checkCFunc(_G.SetOptOutOfLoot)
         end,
         SetOverrideBinding = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetOverrideBinding)
           end
           return checkCFunc(_G.SetOverrideBinding)
@@ -21476,19 +21476,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetOverrideBindingClick)
         end,
         SetOverrideBindingItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetOverrideBindingItem)
           end
           return checkCFunc(_G.SetOverrideBindingItem)
         end,
         SetOverrideBindingMacro = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetOverrideBindingMacro)
           end
           return checkCFunc(_G.SetOverrideBindingMacro)
         end,
         SetOverrideBindingSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetOverrideBindingSpell)
           end
           return checkCFunc(_G.SetOverrideBindingSpell)
@@ -21506,7 +21506,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetPOIIconOverlapPushDistance)
         end,
         SetPVP = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetPVP)
           end
           return checkCFunc(_G.SetPVP)
@@ -21557,25 +21557,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetPortraitToTexture)
         end,
         SetRaidDifficultyID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetRaidDifficultyID)
           end
           return checkCFunc(_G.SetRaidDifficultyID)
         end,
         SetRaidProfileOption = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetRaidProfileOption)
           end
           return checkCFunc(_G.SetRaidProfileOption)
         end,
         SetRaidProfileSavedPosition = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetRaidProfileSavedPosition)
           end
           return checkCFunc(_G.SetRaidProfileSavedPosition)
         end,
         SetRaidSubgroup = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetRaidSubgroup)
           end
           return checkCFunc(_G.SetRaidSubgroup)
@@ -21584,7 +21584,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetRaidTarget)
         end,
         SetRaidTargetProtected = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetRaidTargetProtected)
           end
           return checkCFunc(_G.SetRaidTargetProtected)
@@ -21596,7 +21596,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetSavedInstanceExtend)
         end,
         SetScreenResolution = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetScreenResolution)
           end
           return checkCFunc(_G.SetScreenResolution)
@@ -21620,19 +21620,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetSelectedBattlefield)
         end,
         SetSelectedDisplayChannel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetSelectedDisplayChannel)
           end
           return checkCFunc(_G.SetSelectedDisplayChannel)
         end,
         SetSelectedFaction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetSelectedFaction)
           end
           return checkCFunc(_G.SetSelectedFaction)
         end,
         SetSelectedScreenResolutionIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetSelectedScreenResolutionIndex)
           end
           return checkCFunc(_G.SetSelectedScreenResolutionIndex)
@@ -21650,13 +21650,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetSelectedWarGameType)
         end,
         SetSendMailCOD = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetSendMailCOD)
           end
           return checkCFunc(_G.SetSendMailCOD)
         end,
         SetSendMailMoney = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetSendMailMoney)
           end
           return checkCFunc(_G.SetSendMailMoney)
@@ -21677,7 +21677,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetSpecialization)
         end,
         SetSpellbookPetAction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetSpellbookPetAction)
           end
           return checkCFunc(_G.SetSpellbookPetAction)
@@ -21692,13 +21692,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetTaxiBenchmarkMode)
         end,
         SetTaxiMap = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetTaxiMap)
           end
           return checkCFunc(_G.SetTaxiMap)
         end,
         SetTracking = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetTracking)
           end
           return checkCFunc(_G.SetTracking)
@@ -21740,7 +21740,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetTrainerServiceTypeFilter)
         end,
         SetTurnEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetTurnEnabled)
           end
           return checkCFunc(_G.SetTurnEnabled)
@@ -21752,13 +21752,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetView)
         end,
         SetWatchedFactionIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetWatchedFactionIndex)
           end
           return checkCFunc(_G.SetWatchedFactionIndex)
         end,
         SetupFullscreenScale = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SetupFullscreenScale)
           end
           return checkCFunc(_G.SetupFullscreenScale)
@@ -21791,7 +21791,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ShowBossFrameWhenUninteractable)
         end,
         ShowBuybackSellCursor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ShowBuybackSellCursor)
           end
           return checkCFunc(_G.ShowBuybackSellCursor)
@@ -21803,7 +21803,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ShowCloak)
         end,
         ShowContainerSellCursor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ShowContainerSellCursor)
           end
           return checkCFunc(_G.ShowContainerSellCursor)
@@ -21815,25 +21815,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.ShowHelm)
         end,
         ShowInventorySellCursor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ShowInventorySellCursor)
           end
           return checkCFunc(_G.ShowInventorySellCursor)
         end,
         ShowQuestComplete = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ShowQuestComplete)
           end
           return checkCFunc(_G.ShowQuestComplete)
         end,
         ShowQuestOffer = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ShowQuestOffer)
           end
           return checkCFunc(_G.ShowQuestOffer)
         end,
         ShowRepairCursor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ShowRepairCursor)
           end
           return checkCFunc(_G.ShowRepairCursor)
@@ -21851,7 +21851,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ShowingHelm)
         end,
         SignPetition = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SignPetition)
           end
           return checkCFunc(_G.SignPetition)
@@ -21860,13 +21860,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SitStandOrDescendStart)
         end,
         SocketContainerItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SocketContainerItem)
           end
           return checkCFunc(_G.SocketContainerItem)
         end,
         SocketInventoryItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SocketInventoryItem)
           end
           return checkCFunc(_G.SocketInventoryItem)
@@ -21932,13 +21932,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SortBankBags)
         end,
         SortBattlefieldScoreData = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SortBattlefieldScoreData)
           end
           return checkCFunc(_G.SortBattlefieldScoreData)
         end,
         SortGuildRoster = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SortGuildRoster)
           end
           return checkCFunc(_G.SortGuildRoster)
@@ -21968,37 +21968,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.SortReagentBankBags)
         end,
         Sound_ChatSystem_GetInputDriverNameByIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.Sound_ChatSystem_GetInputDriverNameByIndex)
           end
           return checkCFunc(_G.Sound_ChatSystem_GetInputDriverNameByIndex)
         end,
         Sound_ChatSystem_GetNumInputDrivers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.Sound_ChatSystem_GetNumInputDrivers)
           end
           return checkCFunc(_G.Sound_ChatSystem_GetNumInputDrivers)
         end,
         Sound_ChatSystem_GetNumOutputDrivers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.Sound_ChatSystem_GetNumOutputDrivers)
           end
           return checkCFunc(_G.Sound_ChatSystem_GetNumOutputDrivers)
         end,
         Sound_ChatSystem_GetOutputDriverNameByIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.Sound_ChatSystem_GetOutputDriverNameByIndex)
           end
           return checkCFunc(_G.Sound_ChatSystem_GetOutputDriverNameByIndex)
         end,
         Sound_GameSystem_GetInputDriverNameByIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.Sound_GameSystem_GetInputDriverNameByIndex)
           end
           return checkCFunc(_G.Sound_GameSystem_GetInputDriverNameByIndex)
         end,
         Sound_GameSystem_GetNumInputDrivers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.Sound_GameSystem_GetNumInputDrivers)
           end
           return checkCFunc(_G.Sound_GameSystem_GetNumInputDrivers)
@@ -22010,7 +22010,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.Sound_GameSystem_GetOutputDriverNameByIndex)
         end,
         Sound_GameSystem_RestartSoundSystem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.Sound_GameSystem_RestartSoundSystem)
           end
           return checkCFunc(_G.Sound_GameSystem_RestartSoundSystem)
@@ -22046,7 +22046,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SpellCanTargetQuest)
         end,
         SpellCanTargetUnit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SpellCanTargetUnit)
           end
           return checkCFunc(_G.SpellCanTargetUnit)
@@ -22055,19 +22055,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.SpellCancelQueuedSpell)
         end,
         SpellGetVisibilityInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SpellGetVisibilityInfo)
           end
           return checkCFunc(_G.SpellGetVisibilityInfo)
         end,
         SpellHasRange = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SpellHasRange)
           end
           return checkCFunc(_G.SpellHasRange)
         end,
         SpellIsAlwaysShown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SpellIsAlwaysShown)
           end
           return checkCFunc(_G.SpellIsAlwaysShown)
@@ -22079,7 +22079,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SpellIsPriorityAura)
         end,
         SpellIsSelfBuff = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SpellIsSelfBuff)
           end
           return checkCFunc(_G.SpellIsSelfBuff)
@@ -22094,13 +22094,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SpellStopTargeting)
         end,
         SpellTargetItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SpellTargetItem)
           end
           return checkCFunc(_G.SpellTargetItem)
         end,
         SpellTargetUnit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SpellTargetUnit)
           end
           return checkCFunc(_G.SpellTargetUnit)
@@ -22112,13 +22112,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SplashFrameCanBeShown)
         end,
         SplitContainerItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SplitContainerItem)
           end
           return checkCFunc(_G.SplitContainerItem)
         end,
         SplitGuildBankItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SplitGuildBankItem)
           end
           return checkCFunc(_G.SplitGuildBankItem)
@@ -22157,13 +22157,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.StartSpectatorSoloShuffleWarGame)
         end,
         StartSpectatorWarGame = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.StartSpectatorWarGame)
           end
           return checkCFunc(_G.StartSpectatorWarGame)
         end,
         StartWarGame = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.StartWarGame)
           end
           return checkCFunc(_G.StartWarGame)
@@ -22178,7 +22178,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.StopAutoRun)
         end,
         StopCinematic = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.StopCinematic)
           end
           return checkCFunc(_G.StopCinematic)
@@ -22187,13 +22187,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.StopMacro)
         end,
         StopMusic = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.StopMusic)
           end
           return checkCFunc(_G.StopMusic)
         end,
         StopSound = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.StopSound)
           end
           return checkCFunc(_G.StopSound)
@@ -22214,19 +22214,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.StrafeRightStop)
         end,
         Stuck = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.Stuck)
           end
           return checkCFunc(_G.Stuck)
         end,
         SubmitRequiredGuildRename = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SubmitRequiredGuildRename)
           end
           return checkCFunc(_G.SubmitRequiredGuildRename)
         end,
         SummonFriend = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SummonFriend)
           end
           return checkCFunc(_G.SummonFriend)
@@ -22250,7 +22250,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SurrenderArena)
         end,
         SwapRaidSubgroup = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.SwapRaidSubgroup)
           end
           return checkCFunc(_G.SwapRaidSubgroup)
@@ -22262,43 +22262,43 @@ function G.GeneratedTests()
           return checkCFunc(_G.SwitchAchievementSearchTab)
         end,
         TakeInboxItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TakeInboxItem)
           end
           return checkCFunc(_G.TakeInboxItem)
         end,
         TakeInboxMoney = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TakeInboxMoney)
           end
           return checkCFunc(_G.TakeInboxMoney)
         end,
         TakeInboxTextItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TakeInboxTextItem)
           end
           return checkCFunc(_G.TakeInboxTextItem)
         end,
         TakeTaxiNode = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TakeTaxiNode)
           end
           return checkCFunc(_G.TakeTaxiNode)
         end,
         TargetDirectionEnemy = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TargetDirectionEnemy)
           end
           return checkCFunc(_G.TargetDirectionEnemy)
         end,
         TargetDirectionFinished = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TargetDirectionFinished)
           end
           return checkCFunc(_G.TargetDirectionFinished)
         end,
         TargetDirectionFriend = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TargetDirectionFriend)
           end
           return checkCFunc(_G.TargetDirectionFriend)
@@ -22307,7 +22307,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.TargetLastEnemy)
         end,
         TargetLastFriend = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TargetLastFriend)
           end
           return checkCFunc(_G.TargetLastFriend)
@@ -22316,7 +22316,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.TargetLastTarget)
         end,
         TargetNearest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TargetNearest)
           end
           return checkCFunc(_G.TargetNearest)
@@ -22334,13 +22334,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.TargetNearestFriendPlayer)
         end,
         TargetNearestPartyMember = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TargetNearestPartyMember)
           end
           return checkCFunc(_G.TargetNearestPartyMember)
         end,
         TargetNearestRaidMember = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TargetNearestRaidMember)
           end
           return checkCFunc(_G.TargetNearestRaidMember)
@@ -22358,7 +22358,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.TargetSpellReplacesBonusTree)
         end,
         TargetTotem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TargetTotem)
           end
           return checkCFunc(_G.TargetTotem)
@@ -22367,73 +22367,73 @@ function G.GeneratedTests()
           return checkCFunc(_G.TargetUnit)
         end,
         TaxiGetDestX = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TaxiGetDestX)
           end
           return checkCFunc(_G.TaxiGetDestX)
         end,
         TaxiGetDestY = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TaxiGetDestY)
           end
           return checkCFunc(_G.TaxiGetDestY)
         end,
         TaxiGetNodeSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TaxiGetNodeSlot)
           end
           return checkCFunc(_G.TaxiGetNodeSlot)
         end,
         TaxiGetSrcX = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TaxiGetSrcX)
           end
           return checkCFunc(_G.TaxiGetSrcX)
         end,
         TaxiGetSrcY = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TaxiGetSrcY)
           end
           return checkCFunc(_G.TaxiGetSrcY)
         end,
         TaxiIsDirectFlight = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TaxiIsDirectFlight)
           end
           return checkCFunc(_G.TaxiIsDirectFlight)
         end,
         TaxiNodeCost = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TaxiNodeCost)
           end
           return checkCFunc(_G.TaxiNodeCost)
         end,
         TaxiNodeGetType = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TaxiNodeGetType)
           end
           return checkCFunc(_G.TaxiNodeGetType)
         end,
         TaxiNodeName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TaxiNodeName)
           end
           return checkCFunc(_G.TaxiNodeName)
         end,
         TaxiNodePosition = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TaxiNodePosition)
           end
           return checkCFunc(_G.TaxiNodePosition)
         end,
         TaxiRequestEarlyLanding = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TaxiRequestEarlyLanding)
           end
           return checkCFunc(_G.TaxiRequestEarlyLanding)
         end,
         TimeoutResurrect = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TimeoutResurrect)
           end
           return checkCFunc(_G.TimeoutResurrect)
@@ -22451,7 +22451,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.TogglePVP)
         end,
         TogglePetAutocast = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TogglePetAutocast)
           end
           return checkCFunc(_G.TogglePetAutocast)
@@ -22466,7 +22466,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ToggleSheath)
         end,
         ToggleSpellAutocast = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.ToggleSpellAutocast)
           end
           return checkCFunc(_G.ToggleSpellAutocast)
@@ -22490,7 +22490,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.TurnInArenaPetition)
         end,
         TurnInGuildCharter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.TurnInGuildCharter)
           end
           return checkCFunc(_G.TurnInGuildCharter)
@@ -22514,7 +22514,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.TurnRightStop)
         end,
         UninviteUnit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UninviteUnit)
           end
           return checkCFunc(_G.UninviteUnit)
@@ -22628,13 +22628,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitControllingVehicle)
         end,
         UnitCreatureFamily = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitCreatureFamily)
           end
           return checkCFunc(_G.UnitCreatureFamily)
         end,
         UnitCreatureType = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitCreatureType)
           end
           return checkCFunc(_G.UnitCreatureType)
@@ -22652,13 +22652,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitDefense)
         end,
         UnitDetailedThreatSituation = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitDetailedThreatSituation)
           end
           return checkCFunc(_G.UnitDetailedThreatSituation)
         end,
         UnitDistanceSquared = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitDistanceSquared)
           end
           return checkCFunc(_G.UnitDistanceSquared)
@@ -22763,7 +22763,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitHonorMax)
         end,
         UnitInAnyGroup = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitInAnyGroup)
           end
           return checkCFunc(_G.UnitInAnyGroup)
@@ -22772,7 +22772,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitInBattleground)
         end,
         UnitInOtherParty = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitInOtherParty)
           end
           return checkCFunc(_G.UnitInOtherParty)
@@ -22799,7 +22799,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitInRange)
         end,
         UnitInSubgroup = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitInSubgroup)
           end
           return checkCFunc(_G.UnitInSubgroup)
@@ -22850,13 +22850,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitIsConnected)
         end,
         UnitIsControlling = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitIsControlling)
           end
           return checkCFunc(_G.UnitIsControlling)
         end,
         UnitIsCorpse = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitIsCorpse)
           end
           return checkCFunc(_G.UnitIsCorpse)
@@ -22889,7 +22889,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitIsGroupLeader)
         end,
         UnitIsInMyGuild = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitIsInMyGuild)
           end
           return checkCFunc(_G.UnitIsInMyGuild)
@@ -22919,7 +22919,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitIsPVPFreeForAll)
         end,
         UnitIsPVPSanctuary = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitIsPVPSanctuary)
           end
           return checkCFunc(_G.UnitIsPVPSanctuary)
@@ -22937,13 +22937,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitIsQuestBoss)
         end,
         UnitIsRaidOfficer = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitIsRaidOfficer)
           end
           return checkCFunc(_G.UnitIsRaidOfficer)
         end,
         UnitIsSameServer = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitIsSameServer)
           end
           return checkCFunc(_G.UnitIsSameServer)
@@ -22952,13 +22952,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitIsTapDenied)
         end,
         UnitIsTrivial = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitIsTrivial)
           end
           return checkCFunc(_G.UnitIsTrivial)
         end,
         UnitIsUnconscious = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitIsUnconscious)
           end
           return checkCFunc(_G.UnitIsUnconscious)
@@ -22976,7 +22976,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitIsWildBattlePet)
         end,
         UnitLeadsAnyGroup = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitLeadsAnyGroup)
           end
           return checkCFunc(_G.UnitLeadsAnyGroup)
@@ -23084,13 +23084,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitRangedAttack)
         end,
         UnitRangedAttackPower = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitRangedAttackPower)
           end
           return checkCFunc(_G.UnitRangedAttackPower)
         end,
         UnitRangedDamage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitRangedDamage)
           end
           return checkCFunc(_G.UnitRangedDamage)
@@ -23117,7 +23117,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitSelectionType)
         end,
         UnitSetRole = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitSetRole)
           end
           return checkCFunc(_G.UnitSetRole)
@@ -23126,7 +23126,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitSex)
         end,
         UnitShouldDisplayName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitShouldDisplayName)
           end
           return checkCFunc(_G.UnitShouldDisplayName)
@@ -23159,7 +23159,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitTargetsVehicleInRaidUI)
         end,
         UnitThreatPercentageOfLead = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitThreatPercentageOfLead)
           end
           return checkCFunc(_G.UnitThreatPercentageOfLead)
@@ -23174,13 +23174,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitTreatAsPlayerForDisplay)
         end,
         UnitTrialBankedLevels = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitTrialBankedLevels)
           end
           return checkCFunc(_G.UnitTrialBankedLevels)
         end,
         UnitTrialXP = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnitTrialXP)
           end
           return checkCFunc(_G.UnitTrialXP)
@@ -23240,7 +23240,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnlockVoidStorage)
         end,
         UnmuteSoundFile = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UnmuteSoundFile)
           end
           return checkCFunc(_G.UnmuteSoundFile)
@@ -23252,7 +23252,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnstablePet)
         end,
         UpdateAddOnCPUUsage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UpdateAddOnCPUUsage)
           end
           return checkCFunc(_G.UpdateAddOnCPUUsage)
@@ -23261,7 +23261,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UpdateAddOnMemoryUsage)
         end,
         UpdateInventoryAlertStatus = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UpdateInventoryAlertStatus)
           end
           return checkCFunc(_G.UpdateInventoryAlertStatus)
@@ -23273,7 +23273,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UpdateWarGamesList)
         end,
         UpdateWindow = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UpdateWindow)
           end
           return checkCFunc(_G.UpdateWindow)
@@ -23282,13 +23282,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UseAction)
         end,
         UseContainerItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UseContainerItem)
           end
           return checkCFunc(_G.UseContainerItem)
         end,
         UseHearthstone = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UseHearthstone)
           end
           return checkCFunc(_G.UseHearthstone)
@@ -23297,7 +23297,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UseInventoryItem)
         end,
         UseItemByName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.UseItemByName)
           end
           return checkCFunc(_G.UseItemByName)
@@ -23423,13 +23423,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.ViewGuildRecipes)
         end,
         WarGameRespond = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.WarGameRespond)
           end
           return checkCFunc(_G.WarGameRespond)
         end,
         WithdrawGuildBankMoney = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.WithdrawGuildBankMoney)
           end
           return checkCFunc(_G.WithdrawGuildBankMoney)
@@ -23441,7 +23441,7 @@ function G.GeneratedTests()
           return checkLuaFunc(_G.acos)
         end,
         addframetext = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.addframetext)
           end
           return checkCFunc(_G.addframetext)
@@ -23471,13 +23471,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.date)
         end,
         debuglocals = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.debuglocals)
           end
           return checkCFunc(_G.debuglocals)
         end,
         debugprofilestart = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.debugprofilestart)
           end
           return checkCFunc(_G.debugprofilestart)
@@ -23501,7 +23501,7 @@ function G.GeneratedTests()
           assertEquals(_G.exp, _G.math.exp)
         end,
         fastrandom = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.fastrandom)
           end
           return checkCFunc(_G.fastrandom)
@@ -23510,7 +23510,7 @@ function G.GeneratedTests()
           assertEquals(_G.floor, _G.math.floor)
         end,
         forceinsecure = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.forceinsecure)
           end
           return checkCFunc(_G.forceinsecure)
@@ -23522,7 +23522,7 @@ function G.GeneratedTests()
           assertEquals(_G.frexp, _G.math.frexp)
         end,
         gcinfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.gcinfo)
           end
           return checkCFunc(_G.gcinfo)
@@ -23597,7 +23597,7 @@ function G.GeneratedTests()
           assertEquals(_G.random, _G.math.random)
         end,
         rawequal = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.rawequal)
           end
           return checkCFunc(_G.rawequal)
@@ -23675,7 +23675,7 @@ function G.GeneratedTests()
           assertEquals(_G.strsplit, _G.string.split)
         end,
         strsplittable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
             return checkNotCFunc(_G.strsplittable)
           end
           return checkCFunc(_G.strsplittable)

@@ -3,3 +3,4 @@ name: GetRaidProfileName
 status: unimplemented
 flavors:
 - Mainline
+- TBC

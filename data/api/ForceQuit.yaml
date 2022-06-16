@@ -3,3 +3,4 @@ name: ForceQuit
 status: unimplemented
 flavors:
 - Mainline
+- TBC

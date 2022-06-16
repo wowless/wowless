@@ -3,3 +3,4 @@ name: GetSpellCount
 status: unimplemented
 flavors:
 - Mainline
+- TBC

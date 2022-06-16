@@ -3,3 +3,4 @@ name: SetRaidTargetProtected
 status: unimplemented
 flavors:
 - Mainline
+- TBC

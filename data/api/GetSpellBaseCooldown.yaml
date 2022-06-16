@@ -3,3 +3,4 @@ name: GetSpellBaseCooldown
 status: unimplemented
 flavors:
 - Mainline
+- TBC

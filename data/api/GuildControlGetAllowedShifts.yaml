@@ -3,3 +3,4 @@ name: GuildControlGetAllowedShifts
 status: unimplemented
 flavors:
 - Mainline
+- TBC

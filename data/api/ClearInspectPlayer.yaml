@@ -3,3 +3,4 @@ name: ClearInspectPlayer
 status: unimplemented
 flavors:
 - Mainline
+- TBC

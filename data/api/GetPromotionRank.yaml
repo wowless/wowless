@@ -3,3 +3,4 @@ name: GetPromotionRank
 status: unimplemented
 flavors:
 - Mainline
+- TBC

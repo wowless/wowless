@@ -3,3 +3,4 @@ name: QueryGuildBankLog
 status: unimplemented
 flavors:
 - Mainline
+- TBC

@@ -3,3 +3,4 @@ name: GetSpellTradeSkillLink
 status: unimplemented
 flavors:
 - Mainline
+- TBC

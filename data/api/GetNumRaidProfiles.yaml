@@ -3,3 +3,4 @@ name: GetNumRaidProfiles
 status: unimplemented
 flavors:
 - Mainline
+- TBC

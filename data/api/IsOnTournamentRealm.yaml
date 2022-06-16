@@ -3,3 +3,4 @@ name: IsOnTournamentRealm
 status: unimplemented
 flavors:
 - Mainline
+- TBC

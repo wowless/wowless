@@ -3,3 +3,4 @@ name: GetVideoCaps
 status: unimplemented
 flavors:
 - Mainline
+- TBC

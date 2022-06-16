@@ -3,3 +3,4 @@ name: SpellGetVisibilityInfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

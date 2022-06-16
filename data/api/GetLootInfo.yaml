@@ -3,3 +3,4 @@ name: GetLootInfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

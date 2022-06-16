@@ -3,3 +3,4 @@ name: CanGuildRemove
 status: unimplemented
 flavors:
 - Mainline
+- TBC

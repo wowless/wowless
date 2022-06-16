@@ -3,3 +3,4 @@ name: KBSystem_GetServerNotice
 status: unimplemented
 flavors:
 - Mainline
+- TBC

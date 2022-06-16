@@ -3,3 +3,4 @@ name: GetFontInfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

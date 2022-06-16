@@ -3,3 +3,4 @@ name: IsGuildRankAssignmentAllowed
 status: unimplemented
 flavors:
 - Mainline
+- TBC

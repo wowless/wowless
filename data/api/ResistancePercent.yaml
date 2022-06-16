@@ -3,3 +3,4 @@ name: ResistancePercent
 status: unimplemented
 flavors:
 - Mainline
+- TBC

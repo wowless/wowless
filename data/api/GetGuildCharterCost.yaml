@@ -3,3 +3,4 @@ name: GetGuildCharterCost
 status: unimplemented
 flavors:
 - Mainline
+- TBC

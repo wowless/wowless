@@ -3,3 +3,4 @@ name: BNRequestFOFInfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

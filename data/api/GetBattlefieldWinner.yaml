@@ -3,3 +3,4 @@ name: GetBattlefieldWinner
 status: unimplemented
 flavors:
 - Mainline
+- TBC

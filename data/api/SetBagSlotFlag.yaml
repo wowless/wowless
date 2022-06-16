@@ -3,3 +3,4 @@ name: SetBagSlotFlag
 status: unimplemented
 flavors:
 - Mainline
+- TBC

@@ -3,3 +3,4 @@ name: IsPlayerSpell
 status: unimplemented
 flavors:
 - Mainline
+- TBC

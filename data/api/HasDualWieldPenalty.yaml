@@ -3,3 +3,4 @@ name: HasDualWieldPenalty
 status: unimplemented
 flavors:
 - Mainline
+- TBC

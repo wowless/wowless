@@ -3,3 +3,4 @@ name: MacOptions_AreOSShortcutsDisabled
 status: unimplemented
 flavors:
 - Mainline
+- TBC

@@ -3,3 +3,4 @@ name: PickupSpellBookItem
 status: unimplemented
 flavors:
 - Mainline
+- TBC

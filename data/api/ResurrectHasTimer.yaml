@@ -3,3 +3,4 @@ name: ResurrectHasTimer
 status: unimplemented
 flavors:
 - Mainline
+- TBC

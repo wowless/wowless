@@ -3,3 +3,4 @@ name: CancelTrade
 status: unimplemented
 flavors:
 - Mainline
+- TBC

@@ -3,3 +3,4 @@ name: GetInviteConfirmationInfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

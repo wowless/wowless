@@ -3,3 +3,4 @@ name: SetGuildRosterShowOffline
 status: unimplemented
 flavors:
 - Mainline
+- TBC

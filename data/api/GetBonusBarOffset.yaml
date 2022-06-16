@@ -3,3 +3,4 @@ name: GetBonusBarOffset
 status: unimplemented
 flavors:
 - Mainline
+- TBC

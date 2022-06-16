@@ -3,3 +3,4 @@ name: ChannelToggleAnnouncements
 status: unimplemented
 flavors:
 - Mainline
+- TBC

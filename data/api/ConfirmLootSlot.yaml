@@ -3,3 +3,4 @@ name: ConfirmLootSlot
 status: unimplemented
 flavors:
 - Mainline
+- TBC

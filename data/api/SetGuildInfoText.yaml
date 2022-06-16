@@ -3,3 +3,4 @@ name: SetGuildInfoText
 status: unimplemented
 flavors:
 - Mainline
+- TBC

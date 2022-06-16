@@ -3,3 +3,4 @@ name: GetPreviousArenaSeason
 status: unimplemented
 flavors:
 - Mainline
+- TBC

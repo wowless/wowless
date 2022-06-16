@@ -3,3 +3,4 @@ name: CreateNewRaidProfile
 status: unimplemented
 flavors:
 - Mainline
+- TBC

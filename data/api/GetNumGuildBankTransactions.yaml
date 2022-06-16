@@ -3,3 +3,4 @@ name: GetNumGuildBankTransactions
 status: unimplemented
 flavors:
 - Mainline
+- TBC

@@ -3,3 +3,4 @@ name: ResetInstances
 status: unimplemented
 flavors:
 - Mainline
+- TBC

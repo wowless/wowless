@@ -3,3 +3,4 @@ name: GuildControlSetRankFlag
 status: unimplemented
 flavors:
 - Mainline
+- TBC

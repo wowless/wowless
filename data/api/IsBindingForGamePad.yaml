@@ -3,3 +3,4 @@ name: IsBindingForGamePad
 status: unimplemented
 flavors:
 - Mainline
+- TBC

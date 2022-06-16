@@ -3,3 +3,4 @@ name: HasIgnoreDualWieldWeapon
 status: unimplemented
 flavors:
 - Mainline
+- TBC

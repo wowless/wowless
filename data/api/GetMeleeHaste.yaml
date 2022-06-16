@@ -3,3 +3,4 @@ name: GetMeleeHaste
 status: unimplemented
 flavors:
 - Mainline
+- TBC

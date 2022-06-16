@@ -3,3 +3,4 @@ name: GetMacroItemIcons
 status: unimplemented
 flavors:
 - Mainline
+- TBC

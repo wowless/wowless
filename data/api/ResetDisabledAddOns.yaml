@@ -3,3 +3,4 @@ name: ResetDisabledAddOns
 status: unimplemented
 flavors:
 - Mainline
+- TBC

@@ -3,3 +3,4 @@ name: GetBattlefieldInstanceExpiration
 status: unimplemented
 flavors:
 - Mainline
+- TBC

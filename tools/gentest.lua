@@ -155,7 +155,7 @@ function G.GeneratedTests()
     return checkFunc(func, true)
   end
   local function checkNotCFunc(func)
-    if func ~= nil then
+    if func ~= nil and not cfuncs[func] then
       return checkLuaFunc(func)
     end
   end

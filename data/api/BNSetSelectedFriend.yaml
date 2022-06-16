@@ -3,3 +3,4 @@ name: BNSetSelectedFriend
 status: unimplemented
 flavors:
 - Mainline
+- TBC

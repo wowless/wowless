@@ -3,3 +3,4 @@ name: MacOptions_GetGameBundleName
 status: unimplemented
 flavors:
 - Mainline
+- TBC

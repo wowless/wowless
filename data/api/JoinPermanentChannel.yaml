@@ -3,3 +3,4 @@ name: JoinPermanentChannel
 status: unimplemented
 flavors:
 - Mainline
+- TBC

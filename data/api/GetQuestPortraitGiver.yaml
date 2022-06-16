@@ -3,3 +3,4 @@ name: GetQuestPortraitGiver
 status: unimplemented
 flavors:
 - Mainline
+- TBC

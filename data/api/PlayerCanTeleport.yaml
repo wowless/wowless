@@ -3,3 +3,4 @@ name: PlayerCanTeleport
 status: unimplemented
 flavors:
 - Mainline
+- TBC

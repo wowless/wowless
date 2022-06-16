@@ -3,3 +3,4 @@ name: IsGamePadFreelookEnabled
 status: unimplemented
 flavors:
 - Mainline
+- TBC

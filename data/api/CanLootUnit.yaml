@@ -3,3 +3,4 @@ name: CanLootUnit
 status: unimplemented
 flavors:
 - Mainline
+- TBC

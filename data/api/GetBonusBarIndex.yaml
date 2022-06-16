@@ -3,3 +3,4 @@ name: GetBonusBarIndex
 status: unimplemented
 flavors:
 - Mainline
+- TBC

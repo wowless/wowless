@@ -3,3 +3,4 @@ name: GetItemSpell
 status: unimplemented
 flavors:
 - Mainline
+- TBC

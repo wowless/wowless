@@ -3,3 +3,4 @@ name: SetBindingSpell
 status: unimplemented
 flavors:
 - Mainline
+- TBC

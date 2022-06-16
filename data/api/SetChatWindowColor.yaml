@@ -3,3 +3,4 @@ name: SetChatWindowColor
 status: unimplemented
 flavors:
 - Mainline
+- TBC

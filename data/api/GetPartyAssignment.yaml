@@ -3,3 +3,4 @@ name: GetPartyAssignment
 status: unimplemented
 flavors:
 - Mainline
+- TBC

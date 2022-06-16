@@ -3,3 +3,4 @@ name: KBSetup_GetArticleHeaderData
 status: unimplemented
 flavors:
 - Mainline
+- TBC

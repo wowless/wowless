@@ -3,3 +3,4 @@ name: CursorHasMoney
 status: unimplemented
 flavors:
 - Mainline
+- TBC

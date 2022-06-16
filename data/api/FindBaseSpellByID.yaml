@@ -3,3 +3,4 @@ name: FindBaseSpellByID
 status: unimplemented
 flavors:
 - Mainline
+- TBC

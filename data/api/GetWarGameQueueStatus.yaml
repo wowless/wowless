@@ -3,3 +3,4 @@ name: GetWarGameQueueStatus
 status: unimplemented
 flavors:
 - Mainline
+- TBC

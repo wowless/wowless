@@ -3,3 +3,4 @@ name: GetSpellLossOfControlCooldown
 status: unimplemented
 flavors:
 - Mainline
+- TBC

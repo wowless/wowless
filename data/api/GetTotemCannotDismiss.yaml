@@ -3,3 +3,4 @@ name: GetTotemCannotDismiss
 status: unimplemented
 flavors:
 - Mainline
+- TBC

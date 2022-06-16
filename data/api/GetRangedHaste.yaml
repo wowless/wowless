@@ -3,3 +3,4 @@ name: GetRangedHaste
 status: unimplemented
 flavors:
 - Mainline
+- TBC

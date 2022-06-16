@@ -3,3 +3,4 @@ name: SelectTrainerService
 status: unimplemented
 flavors:
 - Mainline
+- TBC

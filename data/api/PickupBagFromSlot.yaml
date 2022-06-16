@@ -3,3 +3,4 @@ name: PickupBagFromSlot
 status: unimplemented
 flavors:
 - Mainline
+- TBC

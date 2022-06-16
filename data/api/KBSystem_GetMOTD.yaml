@@ -3,3 +3,4 @@ name: KBSystem_GetMOTD
 status: unimplemented
 flavors:
 - Mainline
+- TBC

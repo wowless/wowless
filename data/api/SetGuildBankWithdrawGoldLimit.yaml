@@ -3,3 +3,4 @@ name: SetGuildBankWithdrawGoldLimit
 status: unimplemented
 flavors:
 - Mainline
+- TBC

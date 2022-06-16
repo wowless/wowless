@@ -3,3 +3,4 @@ name: SetGuildBankTabPermissions
 status: unimplemented
 flavors:
 - Mainline
+- TBC

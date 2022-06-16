@@ -3,3 +3,4 @@ name: IsPetAttackActive
 status: unimplemented
 flavors:
 - Mainline
+- TBC

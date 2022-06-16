@@ -3,3 +3,4 @@ name: GetSavedInstanceEncounterInfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

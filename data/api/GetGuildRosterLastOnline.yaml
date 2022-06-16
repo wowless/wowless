@@ -3,3 +3,4 @@ name: GetGuildRosterLastOnline
 status: unimplemented
 flavors:
 - Mainline
+- TBC

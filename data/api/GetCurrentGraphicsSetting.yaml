@@ -3,3 +3,4 @@ name: GetCurrentGraphicsSetting
 status: unimplemented
 flavors:
 - Mainline
+- TBC

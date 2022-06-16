@@ -3,3 +3,4 @@ name: UpdateAddOnCPUUsage
 status: unimplemented
 flavors:
 - Mainline
+- TBC

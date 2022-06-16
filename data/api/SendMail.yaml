@@ -3,3 +3,4 @@ name: SendMail
 status: unimplemented
 flavors:
 - Mainline
+- TBC

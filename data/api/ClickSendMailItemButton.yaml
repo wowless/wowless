@@ -3,3 +3,4 @@ name: ClickSendMailItemButton
 status: unimplemented
 flavors:
 - Mainline
+- TBC

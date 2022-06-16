@@ -3,3 +3,4 @@ name: EnableSpellAutocast
 status: unimplemented
 flavors:
 - Mainline
+- TBC

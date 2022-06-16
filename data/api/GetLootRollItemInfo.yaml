@@ -3,3 +3,4 @@ name: GetLootRollItemInfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

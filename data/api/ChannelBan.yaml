@@ -3,3 +3,4 @@ name: ChannelBan
 status: unimplemented
 flavors:
 - Mainline
+- TBC

@@ -3,3 +3,4 @@ name: ResetChatWindows
 status: unimplemented
 flavors:
 - Mainline
+- TBC

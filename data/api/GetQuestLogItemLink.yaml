@@ -3,3 +3,4 @@ name: GetQuestLogItemLink
 status: unimplemented
 flavors:
 - Mainline
+- TBC

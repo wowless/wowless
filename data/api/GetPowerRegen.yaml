@@ -3,3 +3,4 @@ name: GetPowerRegen
 status: unimplemented
 flavors:
 - Mainline
+- TBC

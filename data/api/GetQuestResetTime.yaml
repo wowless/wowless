@@ -3,3 +3,4 @@ name: GetQuestResetTime
 status: unimplemented
 flavors:
 - Mainline
+- TBC

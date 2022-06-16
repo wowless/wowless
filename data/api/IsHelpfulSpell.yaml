@@ -3,3 +3,4 @@ name: IsHelpfulSpell
 status: unimplemented
 flavors:
 - Mainline
+- TBC

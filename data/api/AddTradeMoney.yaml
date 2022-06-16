@@ -3,3 +3,4 @@ name: AddTradeMoney
 status: unimplemented
 flavors:
 - Mainline
+- TBC

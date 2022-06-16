@@ -3,3 +3,4 @@ name: GetItemStatDelta
 status: unimplemented
 flavors:
 - Mainline
+- TBC

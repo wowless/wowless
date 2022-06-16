@@ -3,3 +3,4 @@ name: gcinfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

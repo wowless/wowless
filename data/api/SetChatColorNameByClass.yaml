@@ -3,3 +3,4 @@ name: SetChatColorNameByClass
 status: unimplemented
 flavors:
 - Mainline
+- TBC

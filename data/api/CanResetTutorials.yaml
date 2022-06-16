@@ -3,3 +3,4 @@ name: CanResetTutorials
 status: unimplemented
 flavors:
 - Mainline
+- TBC

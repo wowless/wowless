@@ -3,3 +3,4 @@ name: GetSendMailMoney
 status: unimplemented
 flavors:
 - Mainline
+- TBC

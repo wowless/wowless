@@ -3,3 +3,4 @@ name: IsInGuildGroup
 status: unimplemented
 flavors:
 - Mainline
+- TBC

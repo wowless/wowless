@@ -3,3 +3,4 @@ name: GetCallPetSpellInfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

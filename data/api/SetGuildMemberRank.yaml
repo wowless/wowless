@@ -3,3 +3,4 @@ name: SetGuildMemberRank
 status: unimplemented
 flavors:
 - Mainline
+- TBC

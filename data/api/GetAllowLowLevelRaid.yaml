@@ -3,3 +3,4 @@ name: GetAllowLowLevelRaid
 status: unimplemented
 flavors:
 - Mainline
+- TBC

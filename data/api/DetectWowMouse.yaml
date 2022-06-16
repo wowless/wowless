@@ -3,3 +3,4 @@ name: DetectWowMouse
 status: unimplemented
 flavors:
 - Mainline
+- TBC

@@ -3,3 +3,4 @@ name: IsEncounterSuppressingRelease
 status: unimplemented
 flavors:
 - Mainline
+- TBC

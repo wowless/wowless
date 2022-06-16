@@ -3,3 +3,4 @@ name: KBArticle_GetData
 status: unimplemented
 flavors:
 - Mainline
+- TBC

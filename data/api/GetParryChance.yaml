@@ -3,3 +3,4 @@ name: GetParryChance
 status: unimplemented
 flavors:
 - Mainline
+- TBC

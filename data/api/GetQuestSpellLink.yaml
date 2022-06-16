@@ -3,3 +3,4 @@ name: GetQuestSpellLink
 status: unimplemented
 flavors:
 - Mainline
+- TBC

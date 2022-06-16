@@ -3,3 +3,4 @@ name: WithdrawGuildBankMoney
 status: unimplemented
 flavors:
 - Mainline
+- TBC

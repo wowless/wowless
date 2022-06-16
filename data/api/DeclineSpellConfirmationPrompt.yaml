@@ -3,3 +3,4 @@ name: DeclineSpellConfirmationPrompt
 status: unimplemented
 flavors:
 - Mainline
+- TBC

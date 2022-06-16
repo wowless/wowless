@@ -3,3 +3,4 @@ name: GetChannelName
 status: unimplemented
 flavors:
 - Mainline
+- TBC

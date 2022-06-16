@@ -3,3 +3,4 @@ name: CheckSpiritHealerDist
 status: unimplemented
 flavors:
 - Mainline
+- TBC

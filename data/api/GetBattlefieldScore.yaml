@@ -3,3 +3,4 @@ name: GetBattlefieldScore
 status: unimplemented
 flavors:
 - Mainline
+- TBC

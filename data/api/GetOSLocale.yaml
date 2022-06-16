@@ -3,3 +3,4 @@ name: GetOSLocale
 status: unimplemented
 flavors:
 - Mainline
+- TBC

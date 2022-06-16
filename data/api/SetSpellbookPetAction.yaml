@@ -3,3 +3,4 @@ name: SetSpellbookPetAction
 status: unimplemented
 flavors:
 - Mainline
+- TBC

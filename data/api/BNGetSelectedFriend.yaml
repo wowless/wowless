@@ -3,3 +3,4 @@ name: BNGetSelectedFriend
 status: unimplemented
 flavors:
 - Mainline
+- TBC

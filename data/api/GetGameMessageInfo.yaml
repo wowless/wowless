@@ -3,3 +3,4 @@ name: GetGameMessageInfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

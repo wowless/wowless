@@ -3,3 +3,4 @@ name: GetSecondsUntilParentalControlsKick
 status: unimplemented
 flavors:
 - Mainline
+- TBC

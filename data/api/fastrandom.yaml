@@ -3,3 +3,4 @@ name: fastrandom
 status: unimplemented
 flavors:
 - Mainline
+- TBC

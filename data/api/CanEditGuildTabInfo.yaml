@@ -3,3 +3,4 @@ name: CanEditGuildTabInfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

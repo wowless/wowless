@@ -3,3 +3,4 @@ name: GetSendMailItemLink
 status: unimplemented
 flavors:
 - Mainline
+- TBC

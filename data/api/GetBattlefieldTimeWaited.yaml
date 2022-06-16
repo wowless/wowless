@@ -3,3 +3,4 @@ name: GetBattlefieldTimeWaited
 status: unimplemented
 flavors:
 - Mainline
+- TBC

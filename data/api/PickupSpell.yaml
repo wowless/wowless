@@ -3,3 +3,4 @@ name: PickupSpell
 status: unimplemented
 flavors:
 - Mainline
+- TBC

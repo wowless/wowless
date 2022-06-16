@@ -3,3 +3,4 @@ name: SetAddonVersionCheck
 status: unimplemented
 flavors:
 - Mainline
+- TBC

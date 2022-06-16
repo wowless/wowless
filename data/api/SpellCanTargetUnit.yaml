@@ -3,3 +3,4 @@ name: SpellCanTargetUnit
 status: unimplemented
 flavors:
 - Mainline
+- TBC

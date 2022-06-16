@@ -3,3 +3,4 @@ name: BNSendGameData
 status: unimplemented
 flavors:
 - Mainline
+- TBC

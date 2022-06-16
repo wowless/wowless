@@ -3,3 +3,4 @@ name: GetActionAutocast
 status: unimplemented
 flavors:
 - Mainline
+- TBC

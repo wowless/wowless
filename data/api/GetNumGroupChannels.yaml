@@ -3,3 +3,4 @@ name: GetNumGroupChannels
 status: unimplemented
 flavors:
 - Mainline
+- TBC

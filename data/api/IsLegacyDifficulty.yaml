@@ -3,3 +3,4 @@ name: IsLegacyDifficulty
 status: unimplemented
 flavors:
 - Mainline
+- TBC

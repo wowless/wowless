@@ -3,3 +3,4 @@ name: TargetLastFriend
 status: unimplemented
 flavors:
 - Mainline
+- TBC

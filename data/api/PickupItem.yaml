@@ -3,3 +3,4 @@ name: PickupItem
 status: unimplemented
 flavors:
 - Mainline
+- TBC

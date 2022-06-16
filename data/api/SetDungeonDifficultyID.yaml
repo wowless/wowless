@@ -3,3 +3,4 @@ name: SetDungeonDifficultyID
 status: unimplemented
 flavors:
 - Mainline
+- TBC

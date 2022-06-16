@@ -3,3 +3,4 @@ name: PlayerEffectiveAttackPower
 status: unimplemented
 flavors:
 - Mainline
+- TBC

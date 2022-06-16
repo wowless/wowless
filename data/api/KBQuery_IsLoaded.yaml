@@ -3,3 +3,4 @@ name: KBQuery_IsLoaded
 status: unimplemented
 flavors:
 - Mainline
+- TBC

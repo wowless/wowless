@@ -3,3 +3,4 @@ name: GetSessionTime
 status: unimplemented
 flavors:
 - Mainline
+- TBC

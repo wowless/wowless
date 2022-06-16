@@ -3,3 +3,4 @@ name: SetRaidSubgroup
 status: unimplemented
 flavors:
 - Mainline
+- TBC

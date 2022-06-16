@@ -3,3 +3,4 @@ name: BindEnchant
 status: unimplemented
 flavors:
 - Mainline
+- TBC

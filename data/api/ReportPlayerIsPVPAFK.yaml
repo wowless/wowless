@@ -3,3 +3,4 @@ name: ReportPlayerIsPVPAFK
 status: unimplemented
 flavors:
 - Mainline
+- TBC

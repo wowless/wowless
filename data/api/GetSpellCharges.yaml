@@ -3,3 +3,4 @@ name: GetSpellCharges
 status: unimplemented
 flavors:
 - Mainline
+- TBC

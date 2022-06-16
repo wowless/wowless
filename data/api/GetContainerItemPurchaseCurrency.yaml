@@ -3,3 +3,4 @@ name: GetContainerItemPurchaseCurrency
 status: unimplemented
 flavors:
 - Mainline
+- TBC

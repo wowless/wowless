@@ -3,3 +3,4 @@ name: SortBattlefieldScoreData
 status: unimplemented
 flavors:
 - Mainline
+- TBC

@@ -3,3 +3,4 @@ name: EndBoundTradeable
 status: unimplemented
 flavors:
 - Mainline
+- TBC

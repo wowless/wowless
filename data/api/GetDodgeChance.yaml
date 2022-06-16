@@ -3,3 +3,4 @@ name: GetDodgeChance
 status: unimplemented
 flavors:
 - Mainline
+- TBC

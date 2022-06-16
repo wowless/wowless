@@ -3,3 +3,4 @@ name: GetTrainerServiceDescription
 status: unimplemented
 flavors:
 - Mainline
+- TBC

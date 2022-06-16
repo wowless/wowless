@@ -3,3 +3,4 @@ name: IsCompetitiveModeEnabled
 status: unimplemented
 flavors:
 - Mainline
+- TBC

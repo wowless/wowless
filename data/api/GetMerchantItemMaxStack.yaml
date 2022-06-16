@@ -3,3 +3,4 @@ name: GetMerchantItemMaxStack
 status: unimplemented
 flavors:
 - Mainline
+- TBC

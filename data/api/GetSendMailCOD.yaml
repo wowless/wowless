@@ -3,3 +3,4 @@ name: GetSendMailCOD
 status: unimplemented
 flavors:
 - Mainline
+- TBC

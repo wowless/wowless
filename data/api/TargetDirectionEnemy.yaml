@@ -3,3 +3,4 @@ name: TargetDirectionEnemy
 status: unimplemented
 flavors:
 - Mainline
+- TBC

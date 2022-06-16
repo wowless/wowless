@@ -3,3 +3,4 @@ name: GuildUninvite
 status: unimplemented
 flavors:
 - Mainline
+- TBC

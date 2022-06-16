@@ -3,3 +3,4 @@ name: DepositGuildBankMoney
 status: unimplemented
 flavors:
 - Mainline
+- TBC

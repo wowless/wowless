@@ -3,3 +3,4 @@ name: GetInventoryItemEquippedUnusable
 status: unimplemented
 flavors:
 - Mainline
+- TBC

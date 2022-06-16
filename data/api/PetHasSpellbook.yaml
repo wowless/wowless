@@ -3,3 +3,4 @@ name: PetHasSpellbook
 status: unimplemented
 flavors:
 - Mainline
+- TBC

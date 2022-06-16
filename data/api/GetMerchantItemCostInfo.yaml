@@ -3,3 +3,4 @@ name: GetMerchantItemCostInfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

@@ -3,3 +3,4 @@ name: GetHomePartyInfo
 status: unimplemented
 flavors:
 - Mainline
+- TBC

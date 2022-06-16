@@ -3,3 +3,4 @@ name: KBSetup_GetSubCategoryCount
 status: unimplemented
 flavors:
 - Mainline
+- TBC

@@ -3,3 +3,4 @@ name: CombatLogAdvanceEntry
 status: unimplemented
 flavors:
 - Mainline
+- TBC

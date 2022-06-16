@@ -3,3 +3,4 @@ name: GiveMasterLoot
 status: unimplemented
 flavors:
 - Mainline
+- TBC
