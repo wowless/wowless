@@ -129,11 +129,11 @@ function G.GeneratedTests()
       getfenv = function()
         assertEquals(_G, getfenv(func))
       end,
-      setfenv = function()
+      impltype = function()
         assertEquals(
           isLua,
           pcall(function()
-            setfenv(func, _G) -- This taints when successful, alas.
+            coroutine.create(func)
           end)
         )
       end,
