@@ -119,7 +119,7 @@ local function mkBaseUIObjectTypes(api, loader)
   for name, data in pairs(require('wowapi.data').uiobjects) do
     local function wrap(fname, fn)
       setfenv(fn, env)
-      return function(self, ...)
+      return debug.newcfunction(function(self, ...)
         assert(
           api.InheritsFrom(u(self).type, name:lower()),
           ('invalid self to %s.%s, got %s'):format(name, fname, tostring(u(self).type))
@@ -139,7 +139,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end)(pcall(function()
           return fn(self, unpack(t, 1, n))
         end))
-      end
+      end)
     end
     local function wrapAll(map)
       local mm = {}

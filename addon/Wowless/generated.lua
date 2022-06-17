@@ -21255,7 +21255,7 @@ function G.GeneratedTests()
             methods = function()
               return {
                 NavigateHome = function()
-                  assertEquals('function', type(__index.NavigateHome))
+                  return checkCFunc(__index.NavigateHome)
                 end,
               }
             end,
@@ -21285,124 +21285,124 @@ function G.GeneratedTests()
             methods = function()
               return {
                 Click = function()
-                  assertEquals('function', type(__index.Click))
+                  return checkCFunc(__index.Click)
                 end,
                 Disable = function()
-                  assertEquals('function', type(__index.Disable))
+                  return checkCFunc(__index.Disable)
                 end,
                 Enable = function()
-                  assertEquals('function', type(__index.Enable))
+                  return checkCFunc(__index.Enable)
                 end,
                 GetButtonState = function()
-                  assertEquals('function', type(__index.GetButtonState))
+                  return checkCFunc(__index.GetButtonState)
                 end,
                 GetDisabledFontObject = function()
-                  assertEquals('function', type(__index.GetDisabledFontObject))
+                  return checkCFunc(__index.GetDisabledFontObject)
                 end,
                 GetDisabledTexture = function()
-                  assertEquals('function', type(__index.GetDisabledTexture))
+                  return checkCFunc(__index.GetDisabledTexture)
                 end,
                 GetFontString = function()
-                  assertEquals('function', type(__index.GetFontString))
+                  return checkCFunc(__index.GetFontString)
                 end,
                 GetHighlightFontObject = function()
-                  assertEquals('function', type(__index.GetHighlightFontObject))
+                  return checkCFunc(__index.GetHighlightFontObject)
                 end,
                 GetHighlightTexture = function()
-                  assertEquals('function', type(__index.GetHighlightTexture))
+                  return checkCFunc(__index.GetHighlightTexture)
                 end,
                 GetMotionScriptsWhileDisabled = function()
-                  assertEquals('function', type(__index.GetMotionScriptsWhileDisabled))
+                  return checkCFunc(__index.GetMotionScriptsWhileDisabled)
                 end,
                 GetNormalFontObject = function()
-                  assertEquals('function', type(__index.GetNormalFontObject))
+                  return checkCFunc(__index.GetNormalFontObject)
                 end,
                 GetNormalTexture = function()
-                  assertEquals('function', type(__index.GetNormalTexture))
+                  return checkCFunc(__index.GetNormalTexture)
                 end,
                 GetPushedTextOffset = function()
-                  assertEquals('function', type(__index.GetPushedTextOffset))
+                  return checkCFunc(__index.GetPushedTextOffset)
                 end,
                 GetPushedTexture = function()
-                  assertEquals('function', type(__index.GetPushedTexture))
+                  return checkCFunc(__index.GetPushedTexture)
                 end,
                 GetText = function()
-                  assertEquals('function', type(__index.GetText))
+                  return checkCFunc(__index.GetText)
                 end,
                 GetTextHeight = function()
-                  assertEquals('function', type(__index.GetTextHeight))
+                  return checkCFunc(__index.GetTextHeight)
                 end,
                 GetTextWidth = function()
-                  assertEquals('function', type(__index.GetTextWidth))
+                  return checkCFunc(__index.GetTextWidth)
                 end,
                 IsEnabled = function()
-                  assertEquals('function', type(__index.IsEnabled))
+                  return checkCFunc(__index.IsEnabled)
                 end,
                 LockHighlight = function()
-                  assertEquals('function', type(__index.LockHighlight))
+                  return checkCFunc(__index.LockHighlight)
                 end,
                 RegisterForClicks = function()
-                  assertEquals('function', type(__index.RegisterForClicks))
+                  return checkCFunc(__index.RegisterForClicks)
                 end,
                 RegisterForMouse = function()
-                  assertEquals('function', type(__index.RegisterForMouse))
+                  return checkCFunc(__index.RegisterForMouse)
                 end,
                 SetButtonState = function()
-                  assertEquals('function', type(__index.SetButtonState))
+                  return checkCFunc(__index.SetButtonState)
                 end,
                 SetDisabledAtlas = function()
-                  assertEquals('function', type(__index.SetDisabledAtlas))
+                  return checkCFunc(__index.SetDisabledAtlas)
                 end,
                 SetDisabledFontObject = function()
-                  assertEquals('function', type(__index.SetDisabledFontObject))
+                  return checkCFunc(__index.SetDisabledFontObject)
                 end,
                 SetDisabledTexture = function()
-                  assertEquals('function', type(__index.SetDisabledTexture))
+                  return checkCFunc(__index.SetDisabledTexture)
                 end,
                 SetEnabled = function()
-                  assertEquals('function', type(__index.SetEnabled))
+                  return checkCFunc(__index.SetEnabled)
                 end,
                 SetFontString = function()
-                  assertEquals('function', type(__index.SetFontString))
+                  return checkCFunc(__index.SetFontString)
                 end,
                 SetFormattedText = function()
-                  assertEquals('function', type(__index.SetFormattedText))
+                  return checkCFunc(__index.SetFormattedText)
                 end,
                 SetHighlightAtlas = function()
-                  assertEquals('function', type(__index.SetHighlightAtlas))
+                  return checkCFunc(__index.SetHighlightAtlas)
                 end,
                 SetHighlightFontObject = function()
-                  assertEquals('function', type(__index.SetHighlightFontObject))
+                  return checkCFunc(__index.SetHighlightFontObject)
                 end,
                 SetHighlightTexture = function()
-                  assertEquals('function', type(__index.SetHighlightTexture))
+                  return checkCFunc(__index.SetHighlightTexture)
                 end,
                 SetMotionScriptsWhileDisabled = function()
-                  assertEquals('function', type(__index.SetMotionScriptsWhileDisabled))
+                  return checkCFunc(__index.SetMotionScriptsWhileDisabled)
                 end,
                 SetNormalAtlas = function()
-                  assertEquals('function', type(__index.SetNormalAtlas))
+                  return checkCFunc(__index.SetNormalAtlas)
                 end,
                 SetNormalFontObject = function()
-                  assertEquals('function', type(__index.SetNormalFontObject))
+                  return checkCFunc(__index.SetNormalFontObject)
                 end,
                 SetNormalTexture = function()
-                  assertEquals('function', type(__index.SetNormalTexture))
+                  return checkCFunc(__index.SetNormalTexture)
                 end,
                 SetPushedAtlas = function()
-                  assertEquals('function', type(__index.SetPushedAtlas))
+                  return checkCFunc(__index.SetPushedAtlas)
                 end,
                 SetPushedTextOffset = function()
-                  assertEquals('function', type(__index.SetPushedTextOffset))
+                  return checkCFunc(__index.SetPushedTextOffset)
                 end,
                 SetPushedTexture = function()
-                  assertEquals('function', type(__index.SetPushedTexture))
+                  return checkCFunc(__index.SetPushedTexture)
                 end,
                 SetText = function()
-                  assertEquals('function', type(__index.SetText))
+                  return checkCFunc(__index.SetText)
                 end,
                 UnlockHighlight = function()
-                  assertEquals('function', type(__index.UnlockHighlight))
+                  return checkCFunc(__index.UnlockHighlight)
                 end,
               }
             end,
@@ -21432,22 +21432,22 @@ function G.GeneratedTests()
             methods = function()
               return {
                 GetChecked = function()
-                  assertEquals('function', type(__index.GetChecked))
+                  return checkCFunc(__index.GetChecked)
                 end,
                 GetCheckedTexture = function()
-                  assertEquals('function', type(__index.GetCheckedTexture))
+                  return checkCFunc(__index.GetCheckedTexture)
                 end,
                 GetDisabledCheckedTexture = function()
-                  assertEquals('function', type(__index.GetDisabledCheckedTexture))
+                  return checkCFunc(__index.GetDisabledCheckedTexture)
                 end,
                 SetChecked = function()
-                  assertEquals('function', type(__index.SetChecked))
+                  return checkCFunc(__index.SetChecked)
                 end,
                 SetCheckedTexture = function()
-                  assertEquals('function', type(__index.SetCheckedTexture))
+                  return checkCFunc(__index.SetCheckedTexture)
                 end,
                 SetDisabledCheckedTexture = function()
-                  assertEquals('function', type(__index.SetDisabledCheckedTexture))
+                  return checkCFunc(__index.SetDisabledCheckedTexture)
                 end,
               }
             end,
@@ -21500,16 +21500,16 @@ function G.GeneratedTests()
             methods = function()
               return {
                 InitializeCamera = function()
-                  assertEquals('function', type(__index.InitializeCamera))
+                  return checkCFunc(__index.InitializeCamera)
                 end,
                 SetFacingLeft = function()
-                  assertEquals('function', type(__index.SetFacingLeft))
+                  return checkCFunc(__index.SetFacingLeft)
                 end,
                 SetHeightFactor = function()
-                  assertEquals('function', type(__index.SetHeightFactor))
+                  return checkCFunc(__index.SetHeightFactor)
                 end,
                 SetTargetDistance = function()
-                  assertEquals('function', type(__index.SetTargetDistance))
+                  return checkCFunc(__index.SetTargetDistance)
                 end,
               }
             end,
@@ -21539,40 +21539,40 @@ function G.GeneratedTests()
             methods = function()
               return {
                 GetColorHSV = function()
-                  assertEquals('function', type(__index.GetColorHSV))
+                  return checkCFunc(__index.GetColorHSV)
                 end,
                 GetColorRGB = function()
-                  assertEquals('function', type(__index.GetColorRGB))
+                  return checkCFunc(__index.GetColorRGB)
                 end,
                 GetColorValueTexture = function()
-                  assertEquals('function', type(__index.GetColorValueTexture))
+                  return checkCFunc(__index.GetColorValueTexture)
                 end,
                 GetColorValueThumbTexture = function()
-                  assertEquals('function', type(__index.GetColorValueThumbTexture))
+                  return checkCFunc(__index.GetColorValueThumbTexture)
                 end,
                 GetColorWheelTexture = function()
-                  assertEquals('function', type(__index.GetColorWheelTexture))
+                  return checkCFunc(__index.GetColorWheelTexture)
                 end,
                 GetColorWheelThumbTexture = function()
-                  assertEquals('function', type(__index.GetColorWheelThumbTexture))
+                  return checkCFunc(__index.GetColorWheelThumbTexture)
                 end,
                 SetColorHSV = function()
-                  assertEquals('function', type(__index.SetColorHSV))
+                  return checkCFunc(__index.SetColorHSV)
                 end,
                 SetColorRGB = function()
-                  assertEquals('function', type(__index.SetColorRGB))
+                  return checkCFunc(__index.SetColorRGB)
                 end,
                 SetColorValueTexture = function()
-                  assertEquals('function', type(__index.SetColorValueTexture))
+                  return checkCFunc(__index.SetColorValueTexture)
                 end,
                 SetColorValueThumbTexture = function()
-                  assertEquals('function', type(__index.SetColorValueThumbTexture))
+                  return checkCFunc(__index.SetColorValueThumbTexture)
                 end,
                 SetColorWheelTexture = function()
-                  assertEquals('function', type(__index.SetColorWheelTexture))
+                  return checkCFunc(__index.SetColorWheelTexture)
                 end,
                 SetColorWheelThumbTexture = function()
-                  assertEquals('function', type(__index.SetColorWheelThumbTexture))
+                  return checkCFunc(__index.SetColorWheelThumbTexture)
                 end,
               }
             end,
@@ -21605,94 +21605,94 @@ function G.GeneratedTests()
             methods = function()
               return {
                 Clear = function()
-                  assertEquals('function', type(__index.Clear))
+                  return checkCFunc(__index.Clear)
                 end,
                 GetCooldownDisplayDuration = function()
-                  assertEquals('function', type(__index.GetCooldownDisplayDuration))
+                  return checkCFunc(__index.GetCooldownDisplayDuration)
                 end,
                 GetCooldownDuration = function()
-                  assertEquals('function', type(__index.GetCooldownDuration))
+                  return checkCFunc(__index.GetCooldownDuration)
                 end,
                 GetCooldownTimes = function()
-                  assertEquals('function', type(__index.GetCooldownTimes))
+                  return checkCFunc(__index.GetCooldownTimes)
                 end,
                 GetDrawBling = function()
-                  assertEquals('function', type(__index.GetDrawBling))
+                  return checkCFunc(__index.GetDrawBling)
                 end,
                 GetDrawEdge = function()
-                  assertEquals('function', type(__index.GetDrawEdge))
+                  return checkCFunc(__index.GetDrawEdge)
                 end,
                 GetDrawSwipe = function()
-                  assertEquals('function', type(__index.GetDrawSwipe))
+                  return checkCFunc(__index.GetDrawSwipe)
                 end,
                 GetEdgeScale = function()
-                  assertEquals('function', type(__index.GetEdgeScale))
+                  return checkCFunc(__index.GetEdgeScale)
                 end,
                 GetReverse = function()
-                  assertEquals('function', type(__index.GetReverse))
+                  return checkCFunc(__index.GetReverse)
                 end,
                 GetRotation = function()
-                  assertEquals('function', type(__index.GetRotation))
+                  return checkCFunc(__index.GetRotation)
                 end,
                 IsPaused = function()
-                  assertEquals('function', type(__index.IsPaused))
+                  return checkCFunc(__index.IsPaused)
                 end,
                 Pause = function()
-                  assertEquals('function', type(__index.Pause))
+                  return checkCFunc(__index.Pause)
                 end,
                 Resume = function()
-                  assertEquals('function', type(__index.Resume))
+                  return checkCFunc(__index.Resume)
                 end,
                 SetBlingTexture = function()
-                  assertEquals('function', type(__index.SetBlingTexture))
+                  return checkCFunc(__index.SetBlingTexture)
                 end,
                 SetCooldown = function()
-                  assertEquals('function', type(__index.SetCooldown))
+                  return checkCFunc(__index.SetCooldown)
                 end,
                 SetCooldownDuration = function()
-                  assertEquals('function', type(__index.SetCooldownDuration))
+                  return checkCFunc(__index.SetCooldownDuration)
                 end,
                 SetCooldownUNIX = function()
-                  assertEquals('function', type(__index.SetCooldownUNIX))
+                  return checkCFunc(__index.SetCooldownUNIX)
                 end,
                 SetCountdownAbbrevThreshold = function()
-                  assertEquals('function', type(__index.SetCountdownAbbrevThreshold))
+                  return checkCFunc(__index.SetCountdownAbbrevThreshold)
                 end,
                 SetCountdownFont = function()
-                  assertEquals('function', type(__index.SetCountdownFont))
+                  return checkCFunc(__index.SetCountdownFont)
                 end,
                 SetDrawBling = function()
-                  assertEquals('function', type(__index.SetDrawBling))
+                  return checkCFunc(__index.SetDrawBling)
                 end,
                 SetDrawEdge = function()
-                  assertEquals('function', type(__index.SetDrawEdge))
+                  return checkCFunc(__index.SetDrawEdge)
                 end,
                 SetDrawSwipe = function()
-                  assertEquals('function', type(__index.SetDrawSwipe))
+                  return checkCFunc(__index.SetDrawSwipe)
                 end,
                 SetEdgeScale = function()
-                  assertEquals('function', type(__index.SetEdgeScale))
+                  return checkCFunc(__index.SetEdgeScale)
                 end,
                 SetEdgeTexture = function()
-                  assertEquals('function', type(__index.SetEdgeTexture))
+                  return checkCFunc(__index.SetEdgeTexture)
                 end,
                 SetHideCountdownNumbers = function()
-                  assertEquals('function', type(__index.SetHideCountdownNumbers))
+                  return checkCFunc(__index.SetHideCountdownNumbers)
                 end,
                 SetReverse = function()
-                  assertEquals('function', type(__index.SetReverse))
+                  return checkCFunc(__index.SetReverse)
                 end,
                 SetRotation = function()
-                  assertEquals('function', type(__index.SetRotation))
+                  return checkCFunc(__index.SetRotation)
                 end,
                 SetSwipeColor = function()
-                  assertEquals('function', type(__index.SetSwipeColor))
+                  return checkCFunc(__index.SetSwipeColor)
                 end,
                 SetSwipeTexture = function()
-                  assertEquals('function', type(__index.SetSwipeTexture))
+                  return checkCFunc(__index.SetSwipeTexture)
                 end,
                 SetUseCircularEdge = function()
-                  assertEquals('function', type(__index.SetUseCircularEdge))
+                  return checkCFunc(__index.SetUseCircularEdge)
                 end,
               }
             end,
@@ -21722,7 +21722,7 @@ function G.GeneratedTests()
             methods = function()
               return {
                 SetAutoDress = function()
-                  assertEquals('function', type(__index.SetAutoDress))
+                  return checkCFunc(__index.SetAutoDress)
                 end,
               }
             end,
@@ -21754,115 +21754,115 @@ function G.GeneratedTests()
             methods = function()
               return {
                 AddHistoryLine = function()
-                  assertEquals('function', type(__index.AddHistoryLine))
+                  return checkCFunc(__index.AddHistoryLine)
                 end,
                 ClearFocus = function()
-                  assertEquals('function', type(__index.ClearFocus))
+                  return checkCFunc(__index.ClearFocus)
                 end,
                 ClearHistory = function()
-                  assertEquals('function', type(__index.ClearHistory))
+                  return checkCFunc(__index.ClearHistory)
                 end,
                 Disable = function()
-                  assertEquals('function', type(__index.Disable))
+                  return checkCFunc(__index.Disable)
                 end,
                 Enable = function()
-                  assertEquals('function', type(__index.Enable))
+                  return checkCFunc(__index.Enable)
                 end,
                 GetHistoryLines = function()
-                  assertEquals('function', type(__index.GetHistoryLines))
+                  return checkCFunc(__index.GetHistoryLines)
                 end,
                 GetInputLanguage = function()
-                  assertEquals('function', type(__index.GetInputLanguage))
+                  return checkCFunc(__index.GetInputLanguage)
                 end,
                 GetMaxBytes = function()
-                  assertEquals('function', type(__index.GetMaxBytes))
+                  return checkCFunc(__index.GetMaxBytes)
                 end,
                 GetMaxLetters = function()
-                  assertEquals('function', type(__index.GetMaxLetters))
+                  return checkCFunc(__index.GetMaxLetters)
                 end,
                 GetNumber = function()
-                  assertEquals('function', type(__index.GetNumber))
+                  return checkCFunc(__index.GetNumber)
                 end,
                 GetText = function()
-                  assertEquals('function', type(__index.GetText))
+                  return checkCFunc(__index.GetText)
                 end,
                 HasFocus = function()
-                  assertEquals('function', type(__index.HasFocus))
+                  return checkCFunc(__index.HasFocus)
                 end,
                 HighlightText = function()
-                  assertEquals('function', type(__index.HighlightText))
+                  return checkCFunc(__index.HighlightText)
                 end,
                 Insert = function()
-                  assertEquals('function', type(__index.Insert))
+                  return checkCFunc(__index.Insert)
                 end,
                 IsAutoFocus = function()
-                  assertEquals('function', type(__index.IsAutoFocus))
+                  return checkCFunc(__index.IsAutoFocus)
                 end,
                 IsCountInvisibleLetters = function()
-                  assertEquals('function', type(__index.IsCountInvisibleLetters))
+                  return checkCFunc(__index.IsCountInvisibleLetters)
                 end,
                 IsEnabled = function()
-                  assertEquals('function', type(__index.IsEnabled))
+                  return checkCFunc(__index.IsEnabled)
                 end,
                 IsMultiLine = function()
-                  assertEquals('function', type(__index.IsMultiLine))
+                  return checkCFunc(__index.IsMultiLine)
                 end,
                 IsSecureText = function()
-                  assertEquals('function', type(__index.IsSecureText))
+                  return checkCFunc(__index.IsSecureText)
                 end,
                 SetAltArrowKeyMode = function()
-                  assertEquals('function', type(__index.SetAltArrowKeyMode))
+                  return checkCFunc(__index.SetAltArrowKeyMode)
                 end,
                 SetAutoFocus = function()
-                  assertEquals('function', type(__index.SetAutoFocus))
+                  return checkCFunc(__index.SetAutoFocus)
                 end,
                 SetCountInvisibleLetters = function()
-                  assertEquals('function', type(__index.SetCountInvisibleLetters))
+                  return checkCFunc(__index.SetCountInvisibleLetters)
                 end,
                 SetCursorPosition = function()
-                  assertEquals('function', type(__index.SetCursorPosition))
+                  return checkCFunc(__index.SetCursorPosition)
                 end,
                 SetEnabled = function()
-                  assertEquals('function', type(__index.SetEnabled))
+                  return checkCFunc(__index.SetEnabled)
                 end,
                 SetFocus = function()
-                  assertEquals('function', type(__index.SetFocus))
+                  return checkCFunc(__index.SetFocus)
                 end,
                 SetHighlightColor = function()
-                  assertEquals('function', type(__index.SetHighlightColor))
+                  return checkCFunc(__index.SetHighlightColor)
                 end,
                 SetHistoryLines = function()
-                  assertEquals('function', type(__index.SetHistoryLines))
+                  return checkCFunc(__index.SetHistoryLines)
                 end,
                 SetMaxBytes = function()
-                  assertEquals('function', type(__index.SetMaxBytes))
+                  return checkCFunc(__index.SetMaxBytes)
                 end,
                 SetMaxLetters = function()
-                  assertEquals('function', type(__index.SetMaxLetters))
+                  return checkCFunc(__index.SetMaxLetters)
                 end,
                 SetMultiLine = function()
-                  assertEquals('function', type(__index.SetMultiLine))
+                  return checkCFunc(__index.SetMultiLine)
                 end,
                 SetNumber = function()
-                  assertEquals('function', type(__index.SetNumber))
+                  return checkCFunc(__index.SetNumber)
                 end,
                 SetNumeric = function()
-                  assertEquals('function', type(__index.SetNumeric))
+                  return checkCFunc(__index.SetNumeric)
                 end,
                 SetSecureText = function()
-                  assertEquals('function', type(__index.SetSecureText))
+                  return checkCFunc(__index.SetSecureText)
                 end,
                 SetSecurityDisablePaste = function()
-                  assertEquals('function', type(__index.SetSecurityDisablePaste))
+                  return checkCFunc(__index.SetSecurityDisablePaste)
                 end,
                 SetSecurityDisableSetText = function()
-                  assertEquals('function', type(__index.SetSecurityDisableSetText))
+                  return checkCFunc(__index.SetSecurityDisableSetText)
                 end,
                 SetText = function()
-                  assertEquals('function', type(__index.SetText))
+                  return checkCFunc(__index.SetText)
                 end,
                 SetTextInsets = function()
-                  assertEquals('function', type(__index.SetTextInsets))
+                  return checkCFunc(__index.SetTextInsets)
                 end,
               }
             end,
@@ -21908,196 +21908,196 @@ function G.GeneratedTests()
             methods = function()
               return {
                 CreateFontString = function()
-                  assertEquals('function', type(__index.CreateFontString))
+                  return checkCFunc(__index.CreateFontString)
                 end,
                 CreateLine = function()
-                  assertEquals('function', type(__index.CreateLine))
+                  return checkCFunc(__index.CreateLine)
                 end,
                 CreateMaskTexture = function()
-                  assertEquals('function', type(__index.CreateMaskTexture))
+                  return checkCFunc(__index.CreateMaskTexture)
                 end,
                 CreateTexture = function()
-                  assertEquals('function', type(__index.CreateTexture))
+                  return checkCFunc(__index.CreateTexture)
                 end,
                 DesaturateHierarchy = function()
-                  assertEquals('function', type(__index.DesaturateHierarchy))
+                  return checkCFunc(__index.DesaturateHierarchy)
                 end,
                 DisableDrawLayer = function()
-                  assertEquals('function', type(__index.DisableDrawLayer))
+                  return checkCFunc(__index.DisableDrawLayer)
                 end,
                 EnableKeyboard = function()
-                  assertEquals('function', type(__index.EnableKeyboard))
+                  return checkCFunc(__index.EnableKeyboard)
                 end,
                 EnableMouse = function()
-                  assertEquals('function', type(__index.EnableMouse))
+                  return checkCFunc(__index.EnableMouse)
                 end,
                 EnableMouseWheel = function()
-                  assertEquals('function', type(__index.EnableMouseWheel))
+                  return checkCFunc(__index.EnableMouseWheel)
                 end,
                 GetAttribute = function()
-                  assertEquals('function', type(__index.GetAttribute))
+                  return checkCFunc(__index.GetAttribute)
                 end,
                 GetChildren = function()
-                  assertEquals('function', type(__index.GetChildren))
+                  return checkCFunc(__index.GetChildren)
                 end,
                 GetFrameLevel = function()
-                  assertEquals('function', type(__index.GetFrameLevel))
+                  return checkCFunc(__index.GetFrameLevel)
                 end,
                 GetFrameStrata = function()
-                  assertEquals('function', type(__index.GetFrameStrata))
+                  return checkCFunc(__index.GetFrameStrata)
                 end,
                 GetHyperlinksEnabled = function()
-                  assertEquals('function', type(__index.GetHyperlinksEnabled))
+                  return checkCFunc(__index.GetHyperlinksEnabled)
                 end,
                 GetID = function()
-                  assertEquals('function', type(__index.GetID))
+                  return checkCFunc(__index.GetID)
                 end,
                 GetMaxResize = function()
-                  assertEquals('function', type(__index.GetMaxResize))
+                  return checkCFunc(__index.GetMaxResize)
                 end,
                 GetMinResize = function()
-                  assertEquals('function', type(__index.GetMinResize))
+                  return checkCFunc(__index.GetMinResize)
                 end,
                 GetNumChildren = function()
-                  assertEquals('function', type(__index.GetNumChildren))
+                  return checkCFunc(__index.GetNumChildren)
                 end,
                 GetNumRegions = function()
-                  assertEquals('function', type(__index.GetNumRegions))
+                  return checkCFunc(__index.GetNumRegions)
                 end,
                 GetPropagateKeyboardInput = function()
-                  assertEquals('function', type(__index.GetPropagateKeyboardInput))
+                  return checkCFunc(__index.GetPropagateKeyboardInput)
                 end,
                 GetRegions = function()
-                  assertEquals('function', type(__index.GetRegions))
+                  return checkCFunc(__index.GetRegions)
                 end,
                 IgnoreDepth = function()
-                  assertEquals('function', type(__index.IgnoreDepth))
+                  return checkCFunc(__index.IgnoreDepth)
                 end,
                 IsClampedToScreen = function()
-                  assertEquals('function', type(__index.IsClampedToScreen))
+                  return checkCFunc(__index.IsClampedToScreen)
                 end,
                 IsEventRegistered = function()
-                  assertEquals('function', type(__index.IsEventRegistered))
+                  return checkCFunc(__index.IsEventRegistered)
                 end,
                 IsMouseClickEnabled = function()
-                  assertEquals('function', type(__index.IsMouseClickEnabled))
+                  return checkCFunc(__index.IsMouseClickEnabled)
                 end,
                 IsMouseEnabled = function()
-                  assertEquals('function', type(__index.IsMouseEnabled))
+                  return checkCFunc(__index.IsMouseEnabled)
                 end,
                 IsMouseMotionEnabled = function()
-                  assertEquals('function', type(__index.IsMouseMotionEnabled))
+                  return checkCFunc(__index.IsMouseMotionEnabled)
                 end,
                 IsMouseWheelEnabled = function()
-                  assertEquals('function', type(__index.IsMouseWheelEnabled))
+                  return checkCFunc(__index.IsMouseWheelEnabled)
                 end,
                 IsMovable = function()
-                  assertEquals('function', type(__index.IsMovable))
+                  return checkCFunc(__index.IsMovable)
                 end,
                 IsResizable = function()
-                  assertEquals('function', type(__index.IsResizable))
+                  return checkCFunc(__index.IsResizable)
                 end,
                 IsToplevel = function()
-                  assertEquals('function', type(__index.IsToplevel))
+                  return checkCFunc(__index.IsToplevel)
                 end,
                 IsUserPlaced = function()
-                  assertEquals('function', type(__index.IsUserPlaced))
+                  return checkCFunc(__index.IsUserPlaced)
                 end,
                 Raise = function()
-                  assertEquals('function', type(__index.Raise))
+                  return checkCFunc(__index.Raise)
                 end,
                 RegisterAllEvents = function()
-                  assertEquals('function', type(__index.RegisterAllEvents))
+                  return checkCFunc(__index.RegisterAllEvents)
                 end,
                 RegisterEvent = function()
-                  assertEquals('function', type(__index.RegisterEvent))
+                  return checkCFunc(__index.RegisterEvent)
                 end,
                 RegisterForDrag = function()
-                  assertEquals('function', type(__index.RegisterForDrag))
+                  return checkCFunc(__index.RegisterForDrag)
                 end,
                 RegisterUnitEvent = function()
-                  assertEquals('function', type(__index.RegisterUnitEvent))
+                  return checkCFunc(__index.RegisterUnitEvent)
                 end,
                 SetAttribute = function()
-                  assertEquals('function', type(__index.SetAttribute))
+                  return checkCFunc(__index.SetAttribute)
                 end,
                 SetAttributeNoHandler = function()
-                  assertEquals('function', type(__index.SetAttributeNoHandler))
+                  return checkCFunc(__index.SetAttributeNoHandler)
                 end,
                 SetClampRectInsets = function()
-                  assertEquals('function', type(__index.SetClampRectInsets))
+                  return checkCFunc(__index.SetClampRectInsets)
                 end,
                 SetClampedToScreen = function()
-                  assertEquals('function', type(__index.SetClampedToScreen))
+                  return checkCFunc(__index.SetClampedToScreen)
                 end,
                 SetClipsChildren = function()
-                  assertEquals('function', type(__index.SetClipsChildren))
+                  return checkCFunc(__index.SetClipsChildren)
                 end,
                 SetDepth = function()
-                  assertEquals('function', type(__index.SetDepth))
+                  return checkCFunc(__index.SetDepth)
                 end,
                 SetDontSavePosition = function()
-                  assertEquals('function', type(__index.SetDontSavePosition))
+                  return checkCFunc(__index.SetDontSavePosition)
                 end,
                 SetFixedFrameLevel = function()
-                  assertEquals('function', type(__index.SetFixedFrameLevel))
+                  return checkCFunc(__index.SetFixedFrameLevel)
                 end,
                 SetFixedFrameStrata = function()
-                  assertEquals('function', type(__index.SetFixedFrameStrata))
+                  return checkCFunc(__index.SetFixedFrameStrata)
                 end,
                 SetFrameLevel = function()
-                  assertEquals('function', type(__index.SetFrameLevel))
+                  return checkCFunc(__index.SetFrameLevel)
                 end,
                 SetFrameStrata = function()
-                  assertEquals('function', type(__index.SetFrameStrata))
+                  return checkCFunc(__index.SetFrameStrata)
                 end,
                 SetHitRectInsets = function()
-                  assertEquals('function', type(__index.SetHitRectInsets))
+                  return checkCFunc(__index.SetHitRectInsets)
                 end,
                 SetHyperlinksEnabled = function()
-                  assertEquals('function', type(__index.SetHyperlinksEnabled))
+                  return checkCFunc(__index.SetHyperlinksEnabled)
                 end,
                 SetID = function()
-                  assertEquals('function', type(__index.SetID))
+                  return checkCFunc(__index.SetID)
                 end,
                 SetMaxResize = function()
-                  assertEquals('function', type(__index.SetMaxResize))
+                  return checkCFunc(__index.SetMaxResize)
                 end,
                 SetMinResize = function()
-                  assertEquals('function', type(__index.SetMinResize))
+                  return checkCFunc(__index.SetMinResize)
                 end,
                 SetMouseClickEnabled = function()
-                  assertEquals('function', type(__index.SetMouseClickEnabled))
+                  return checkCFunc(__index.SetMouseClickEnabled)
                 end,
                 SetMouseMotionEnabled = function()
-                  assertEquals('function', type(__index.SetMouseMotionEnabled))
+                  return checkCFunc(__index.SetMouseMotionEnabled)
                 end,
                 SetMovable = function()
-                  assertEquals('function', type(__index.SetMovable))
+                  return checkCFunc(__index.SetMovable)
                 end,
                 SetPropagateKeyboardInput = function()
-                  assertEquals('function', type(__index.SetPropagateKeyboardInput))
+                  return checkCFunc(__index.SetPropagateKeyboardInput)
                 end,
                 SetResizable = function()
-                  assertEquals('function', type(__index.SetResizable))
+                  return checkCFunc(__index.SetResizable)
                 end,
                 SetToplevel = function()
-                  assertEquals('function', type(__index.SetToplevel))
+                  return checkCFunc(__index.SetToplevel)
                 end,
                 SetUserPlaced = function()
-                  assertEquals('function', type(__index.SetUserPlaced))
+                  return checkCFunc(__index.SetUserPlaced)
                 end,
                 StartMoving = function()
-                  assertEquals('function', type(__index.StartMoving))
+                  return checkCFunc(__index.StartMoving)
                 end,
                 StopMovingOrSizing = function()
-                  assertEquals('function', type(__index.StopMovingOrSizing))
+                  return checkCFunc(__index.StopMovingOrSizing)
                 end,
                 UnregisterAllEvents = function()
-                  assertEquals('function', type(__index.UnregisterAllEvents))
+                  return checkCFunc(__index.UnregisterAllEvents)
                 end,
                 UnregisterEvent = function()
-                  assertEquals('function', type(__index.UnregisterEvent))
+                  return checkCFunc(__index.UnregisterEvent)
                 end,
               }
             end,
@@ -22131,562 +22131,562 @@ function G.GeneratedTests()
                     assertEquals('nil', type(__index.AddAtlas))
                     return
                   end
-                  assertEquals('function', type(__index.AddAtlas))
+                  return checkCFunc(__index.AddAtlas)
                 end,
                 AddDoubleLine = function()
-                  assertEquals('function', type(__index.AddDoubleLine))
+                  return checkCFunc(__index.AddDoubleLine)
                 end,
                 AddFontStrings = function()
-                  assertEquals('function', type(__index.AddFontStrings))
+                  return checkCFunc(__index.AddFontStrings)
                 end,
                 AddLine = function()
-                  assertEquals('function', type(__index.AddLine))
+                  return checkCFunc(__index.AddLine)
                 end,
                 AddSpellByID = function()
-                  assertEquals('function', type(__index.AddSpellByID))
+                  return checkCFunc(__index.AddSpellByID)
                 end,
                 AddTexture = function()
-                  assertEquals('function', type(__index.AddTexture))
+                  return checkCFunc(__index.AddTexture)
                 end,
                 AdvanceSecondaryCompareItem = function()
-                  assertEquals('function', type(__index.AdvanceSecondaryCompareItem))
+                  return checkCFunc(__index.AdvanceSecondaryCompareItem)
                 end,
                 AppendText = function()
-                  assertEquals('function', type(__index.AppendText))
+                  return checkCFunc(__index.AppendText)
                 end,
                 ClearLines = function()
-                  assertEquals('function', type(__index.ClearLines))
+                  return checkCFunc(__index.ClearLines)
                 end,
                 CopyTooltip = function()
-                  assertEquals('function', type(__index.CopyTooltip))
+                  return checkCFunc(__index.CopyTooltip)
                 end,
                 FadeOut = function()
-                  assertEquals('function', type(__index.FadeOut))
+                  return checkCFunc(__index.FadeOut)
                 end,
                 GetAnchorType = function()
-                  assertEquals('function', type(__index.GetAnchorType))
+                  return checkCFunc(__index.GetAnchorType)
                 end,
                 GetAzeritePowerID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.GetAzeritePowerID))
                     return
                   end
-                  assertEquals('function', type(__index.GetAzeritePowerID))
+                  return checkCFunc(__index.GetAzeritePowerID)
                 end,
                 GetCustomLineSpacing = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.GetCustomLineSpacing))
                     return
                   end
-                  assertEquals('function', type(__index.GetCustomLineSpacing))
+                  return checkCFunc(__index.GetCustomLineSpacing)
                 end,
                 GetItem = function()
-                  assertEquals('function', type(__index.GetItem))
+                  return checkCFunc(__index.GetItem)
                 end,
                 GetMinimumWidth = function()
-                  assertEquals('function', type(__index.GetMinimumWidth))
+                  return checkCFunc(__index.GetMinimumWidth)
                 end,
                 GetOwner = function()
-                  assertEquals('function', type(__index.GetOwner))
+                  return checkCFunc(__index.GetOwner)
                 end,
                 GetPadding = function()
-                  assertEquals('function', type(__index.GetPadding))
+                  return checkCFunc(__index.GetPadding)
                 end,
                 GetSpell = function()
-                  assertEquals('function', type(__index.GetSpell))
+                  return checkCFunc(__index.GetSpell)
                 end,
                 GetUnit = function()
-                  assertEquals('function', type(__index.GetUnit))
+                  return checkCFunc(__index.GetUnit)
                 end,
                 IsEquippedItem = function()
-                  assertEquals('function', type(__index.IsEquippedItem))
+                  return checkCFunc(__index.IsEquippedItem)
                 end,
                 IsOwned = function()
-                  assertEquals('function', type(__index.IsOwned))
+                  return checkCFunc(__index.IsOwned)
                 end,
                 IsUnit = function()
-                  assertEquals('function', type(__index.IsUnit))
+                  return checkCFunc(__index.IsUnit)
                 end,
                 NumLines = function()
-                  assertEquals('function', type(__index.NumLines))
+                  return checkCFunc(__index.NumLines)
                 end,
                 ResetSecondaryCompareItem = function()
-                  assertEquals('function', type(__index.ResetSecondaryCompareItem))
+                  return checkCFunc(__index.ResetSecondaryCompareItem)
                 end,
                 SetAchievementByID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetAchievementByID))
                     return
                   end
-                  assertEquals('function', type(__index.SetAchievementByID))
+                  return checkCFunc(__index.SetAchievementByID)
                 end,
                 SetAction = function()
-                  assertEquals('function', type(__index.SetAction))
+                  return checkCFunc(__index.SetAction)
                 end,
                 SetAllowShowWithNoLines = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetAllowShowWithNoLines))
                     return
                   end
-                  assertEquals('function', type(__index.SetAllowShowWithNoLines))
+                  return checkCFunc(__index.SetAllowShowWithNoLines)
                 end,
                 SetAnchorType = function()
-                  assertEquals('function', type(__index.SetAnchorType))
+                  return checkCFunc(__index.SetAnchorType)
                 end,
                 SetArtifactItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetArtifactItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetArtifactItem))
+                  return checkCFunc(__index.SetArtifactItem)
                 end,
                 SetArtifactPowerByID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetArtifactPowerByID))
                     return
                   end
-                  assertEquals('function', type(__index.SetArtifactPowerByID))
+                  return checkCFunc(__index.SetArtifactPowerByID)
                 end,
                 SetAuctionItem = function()
                   if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetAuctionItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetAuctionItem))
+                  return checkCFunc(__index.SetAuctionItem)
                 end,
                 SetAuctionSellItem = function()
                   if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetAuctionSellItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetAuctionSellItem))
+                  return checkCFunc(__index.SetAuctionSellItem)
                 end,
                 SetAzeriteEssence = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetAzeriteEssence))
                     return
                   end
-                  assertEquals('function', type(__index.SetAzeriteEssence))
+                  return checkCFunc(__index.SetAzeriteEssence)
                 end,
                 SetAzeriteEssenceSlot = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetAzeriteEssenceSlot))
                     return
                   end
-                  assertEquals('function', type(__index.SetAzeriteEssenceSlot))
+                  return checkCFunc(__index.SetAzeriteEssenceSlot)
                 end,
                 SetAzeritePower = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetAzeritePower))
                     return
                   end
-                  assertEquals('function', type(__index.SetAzeritePower))
+                  return checkCFunc(__index.SetAzeritePower)
                 end,
                 SetBackpackToken = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetBackpackToken))
                     return
                   end
-                  assertEquals('function', type(__index.SetBackpackToken))
+                  return checkCFunc(__index.SetBackpackToken)
                 end,
                 SetBagItem = function()
-                  assertEquals('function', type(__index.SetBagItem))
+                  return checkCFunc(__index.SetBagItem)
                 end,
                 SetBagItemChild = function()
-                  assertEquals('function', type(__index.SetBagItemChild))
+                  return checkCFunc(__index.SetBagItemChild)
                 end,
                 SetBuybackItem = function()
-                  assertEquals('function', type(__index.SetBuybackItem))
+                  return checkCFunc(__index.SetBuybackItem)
                 end,
                 SetCompanionPet = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetCompanionPet))
                     return
                   end
-                  assertEquals('function', type(__index.SetCompanionPet))
+                  return checkCFunc(__index.SetCompanionPet)
                 end,
                 SetCompareAzeritePower = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetCompareAzeritePower))
                     return
                   end
-                  assertEquals('function', type(__index.SetCompareAzeritePower))
+                  return checkCFunc(__index.SetCompareAzeritePower)
                 end,
                 SetCompareItem = function()
-                  assertEquals('function', type(__index.SetCompareItem))
+                  return checkCFunc(__index.SetCompareItem)
                 end,
                 SetConduit = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetConduit))
                     return
                   end
-                  assertEquals('function', type(__index.SetConduit))
+                  return checkCFunc(__index.SetConduit)
                 end,
                 SetCraftItem = function()
                   if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetCraftItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetCraftItem))
+                  return checkCFunc(__index.SetCraftItem)
                 end,
                 SetCraftSpell = function()
                   if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetCraftSpell))
                     return
                   end
-                  assertEquals('function', type(__index.SetCraftSpell))
+                  return checkCFunc(__index.SetCraftSpell)
                 end,
                 SetCurrencyByID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetCurrencyByID))
                     return
                   end
-                  assertEquals('function', type(__index.SetCurrencyByID))
+                  return checkCFunc(__index.SetCurrencyByID)
                 end,
                 SetCurrencyToken = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetCurrencyToken))
                     return
                   end
-                  assertEquals('function', type(__index.SetCurrencyToken))
+                  return checkCFunc(__index.SetCurrencyToken)
                 end,
                 SetCurrencyTokenByID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetCurrencyTokenByID))
                     return
                   end
-                  assertEquals('function', type(__index.SetCurrencyTokenByID))
+                  return checkCFunc(__index.SetCurrencyTokenByID)
                 end,
                 SetCustomLineSpacing = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetCustomLineSpacing))
                     return
                   end
-                  assertEquals('function', type(__index.SetCustomLineSpacing))
+                  return checkCFunc(__index.SetCustomLineSpacing)
                 end,
                 SetEnhancedConduit = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetEnhancedConduit))
                     return
                   end
-                  assertEquals('function', type(__index.SetEnhancedConduit))
+                  return checkCFunc(__index.SetEnhancedConduit)
                 end,
                 SetEquipmentSet = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetEquipmentSet))
                     return
                   end
-                  assertEquals('function', type(__index.SetEquipmentSet))
+                  return checkCFunc(__index.SetEquipmentSet)
                 end,
                 SetExistingSocketGem = function()
-                  assertEquals('function', type(__index.SetExistingSocketGem))
+                  return checkCFunc(__index.SetExistingSocketGem)
                 end,
                 SetFrameStack = function()
-                  assertEquals('function', type(__index.SetFrameStack))
+                  return checkCFunc(__index.SetFrameStack)
                 end,
                 SetGuildBankItem = function()
-                  assertEquals('function', type(__index.SetGuildBankItem))
+                  return checkCFunc(__index.SetGuildBankItem)
                 end,
                 SetHeirloomByItemID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetHeirloomByItemID))
                     return
                   end
-                  assertEquals('function', type(__index.SetHeirloomByItemID))
+                  return checkCFunc(__index.SetHeirloomByItemID)
                 end,
                 SetHyperlink = function()
-                  assertEquals('function', type(__index.SetHyperlink))
+                  return checkCFunc(__index.SetHyperlink)
                 end,
                 SetInboxItem = function()
-                  assertEquals('function', type(__index.SetInboxItem))
+                  return checkCFunc(__index.SetInboxItem)
                 end,
                 SetInstanceLockEncountersComplete = function()
-                  assertEquals('function', type(__index.SetInstanceLockEncountersComplete))
+                  return checkCFunc(__index.SetInstanceLockEncountersComplete)
                 end,
                 SetInventoryItem = function()
-                  assertEquals('function', type(__index.SetInventoryItem))
+                  return checkCFunc(__index.SetInventoryItem)
                 end,
                 SetInventoryItemByID = function()
-                  assertEquals('function', type(__index.SetInventoryItemByID))
+                  return checkCFunc(__index.SetInventoryItemByID)
                 end,
                 SetItemByID = function()
-                  assertEquals('function', type(__index.SetItemByID))
+                  return checkCFunc(__index.SetItemByID)
                 end,
                 SetItemKey = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetItemKey))
                     return
                   end
-                  assertEquals('function', type(__index.SetItemKey))
+                  return checkCFunc(__index.SetItemKey)
                 end,
                 SetLFGDungeonReward = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetLFGDungeonReward))
                     return
                   end
-                  assertEquals('function', type(__index.SetLFGDungeonReward))
+                  return checkCFunc(__index.SetLFGDungeonReward)
                 end,
                 SetLFGDungeonShortageReward = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetLFGDungeonShortageReward))
                     return
                   end
-                  assertEquals('function', type(__index.SetLFGDungeonShortageReward))
+                  return checkCFunc(__index.SetLFGDungeonShortageReward)
                 end,
                 SetLootCurrency = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetLootCurrency))
                     return
                   end
-                  assertEquals('function', type(__index.SetLootCurrency))
+                  return checkCFunc(__index.SetLootCurrency)
                 end,
                 SetLootItem = function()
-                  assertEquals('function', type(__index.SetLootItem))
+                  return checkCFunc(__index.SetLootItem)
                 end,
                 SetLootRollItem = function()
-                  assertEquals('function', type(__index.SetLootRollItem))
+                  return checkCFunc(__index.SetLootRollItem)
                 end,
                 SetMerchantCostItem = function()
-                  assertEquals('function', type(__index.SetMerchantCostItem))
+                  return checkCFunc(__index.SetMerchantCostItem)
                 end,
                 SetMerchantItem = function()
-                  assertEquals('function', type(__index.SetMerchantItem))
+                  return checkCFunc(__index.SetMerchantItem)
                 end,
                 SetMinimumWidth = function()
-                  assertEquals('function', type(__index.SetMinimumWidth))
+                  return checkCFunc(__index.SetMinimumWidth)
                 end,
                 SetMountBySpellID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetMountBySpellID))
                     return
                   end
-                  assertEquals('function', type(__index.SetMountBySpellID))
+                  return checkCFunc(__index.SetMountBySpellID)
                 end,
                 SetOwnedItemByID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetOwnedItemByID))
                     return
                   end
-                  assertEquals('function', type(__index.SetOwnedItemByID))
+                  return checkCFunc(__index.SetOwnedItemByID)
                 end,
                 SetOwner = function()
-                  assertEquals('function', type(__index.SetOwner))
+                  return checkCFunc(__index.SetOwner)
                 end,
                 SetPadding = function()
-                  assertEquals('function', type(__index.SetPadding))
+                  return checkCFunc(__index.SetPadding)
                 end,
                 SetPetAction = function()
-                  assertEquals('function', type(__index.SetPetAction))
+                  return checkCFunc(__index.SetPetAction)
                 end,
                 SetPossession = function()
-                  assertEquals('function', type(__index.SetPossession))
+                  return checkCFunc(__index.SetPossession)
                 end,
                 SetPvpBrawl = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetPvpBrawl))
                     return
                   end
-                  assertEquals('function', type(__index.SetPvpBrawl))
+                  return checkCFunc(__index.SetPvpBrawl)
                 end,
                 SetPvpTalent = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetPvpTalent))
                     return
                   end
-                  assertEquals('function', type(__index.SetPvpTalent))
+                  return checkCFunc(__index.SetPvpTalent)
                 end,
                 SetQuestCurrency = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetQuestCurrency))
                     return
                   end
-                  assertEquals('function', type(__index.SetQuestCurrency))
+                  return checkCFunc(__index.SetQuestCurrency)
                 end,
                 SetQuestItem = function()
-                  assertEquals('function', type(__index.SetQuestItem))
+                  return checkCFunc(__index.SetQuestItem)
                 end,
                 SetQuestLogCurrency = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetQuestLogCurrency))
                     return
                   end
-                  assertEquals('function', type(__index.SetQuestLogCurrency))
+                  return checkCFunc(__index.SetQuestLogCurrency)
                 end,
                 SetQuestLogItem = function()
-                  assertEquals('function', type(__index.SetQuestLogItem))
+                  return checkCFunc(__index.SetQuestLogItem)
                 end,
                 SetQuestLogRewardSpell = function()
-                  assertEquals('function', type(__index.SetQuestLogRewardSpell))
+                  return checkCFunc(__index.SetQuestLogRewardSpell)
                 end,
                 SetQuestLogSpecialItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetQuestLogSpecialItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetQuestLogSpecialItem))
+                  return checkCFunc(__index.SetQuestLogSpecialItem)
                 end,
                 SetQuestPartyProgress = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetQuestPartyProgress))
                     return
                   end
-                  assertEquals('function', type(__index.SetQuestPartyProgress))
+                  return checkCFunc(__index.SetQuestPartyProgress)
                 end,
                 SetQuestRewardSpell = function()
-                  assertEquals('function', type(__index.SetQuestRewardSpell))
+                  return checkCFunc(__index.SetQuestRewardSpell)
                 end,
                 SetRecipeRankInfo = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetRecipeRankInfo))
                     return
                   end
-                  assertEquals('function', type(__index.SetRecipeRankInfo))
+                  return checkCFunc(__index.SetRecipeRankInfo)
                 end,
                 SetRecipeReagentItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetRecipeReagentItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetRecipeReagentItem))
+                  return checkCFunc(__index.SetRecipeReagentItem)
                 end,
                 SetRecipeResultItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetRecipeResultItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetRecipeResultItem))
+                  return checkCFunc(__index.SetRecipeResultItem)
                 end,
                 SetRuneforgeResultItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetRuneforgeResultItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetRuneforgeResultItem))
+                  return checkCFunc(__index.SetRuneforgeResultItem)
                 end,
                 SetSendMailItem = function()
-                  assertEquals('function', type(__index.SetSendMailItem))
+                  return checkCFunc(__index.SetSendMailItem)
                 end,
                 SetShapeshift = function()
-                  assertEquals('function', type(__index.SetShapeshift))
+                  return checkCFunc(__index.SetShapeshift)
                 end,
                 SetShrinkToFitWrapped = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetShrinkToFitWrapped))
                     return
                   end
-                  assertEquals('function', type(__index.SetShrinkToFitWrapped))
+                  return checkCFunc(__index.SetShrinkToFitWrapped)
                 end,
                 SetSocketGem = function()
-                  assertEquals('function', type(__index.SetSocketGem))
+                  return checkCFunc(__index.SetSocketGem)
                 end,
                 SetSocketedItem = function()
-                  assertEquals('function', type(__index.SetSocketedItem))
+                  return checkCFunc(__index.SetSocketedItem)
                 end,
                 SetSocketedRelic = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetSocketedRelic))
                     return
                   end
-                  assertEquals('function', type(__index.SetSocketedRelic))
+                  return checkCFunc(__index.SetSocketedRelic)
                 end,
                 SetSpellBookItem = function()
-                  assertEquals('function', type(__index.SetSpellBookItem))
+                  return checkCFunc(__index.SetSpellBookItem)
                 end,
                 SetSpellByID = function()
-                  assertEquals('function', type(__index.SetSpellByID))
+                  return checkCFunc(__index.SetSpellByID)
                 end,
                 SetTalent = function()
-                  assertEquals('function', type(__index.SetTalent))
+                  return checkCFunc(__index.SetTalent)
                 end,
                 SetText = function()
-                  assertEquals('function', type(__index.SetText))
+                  return checkCFunc(__index.SetText)
                 end,
                 SetTotem = function()
-                  assertEquals('function', type(__index.SetTotem))
+                  return checkCFunc(__index.SetTotem)
                 end,
                 SetToyByItemID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetToyByItemID))
                     return
                   end
-                  assertEquals('function', type(__index.SetToyByItemID))
+                  return checkCFunc(__index.SetToyByItemID)
                 end,
                 SetTrackingSpell = function()
                   if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetTrackingSpell))
                     return
                   end
-                  assertEquals('function', type(__index.SetTrackingSpell))
+                  return checkCFunc(__index.SetTrackingSpell)
                 end,
                 SetTradePlayerItem = function()
-                  assertEquals('function', type(__index.SetTradePlayerItem))
+                  return checkCFunc(__index.SetTradePlayerItem)
                 end,
                 SetTradeSkillItem = function()
                   if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetTradeSkillItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetTradeSkillItem))
+                  return checkCFunc(__index.SetTradeSkillItem)
                 end,
                 SetTradeTargetItem = function()
-                  assertEquals('function', type(__index.SetTradeTargetItem))
+                  return checkCFunc(__index.SetTradeTargetItem)
                 end,
                 SetTrainerService = function()
-                  assertEquals('function', type(__index.SetTrainerService))
+                  return checkCFunc(__index.SetTrainerService)
                 end,
                 SetTransmogrifyItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetTransmogrifyItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetTransmogrifyItem))
+                  return checkCFunc(__index.SetTransmogrifyItem)
                 end,
                 SetUnit = function()
-                  assertEquals('function', type(__index.SetUnit))
+                  return checkCFunc(__index.SetUnit)
                 end,
                 SetUnitAura = function()
-                  assertEquals('function', type(__index.SetUnitAura))
+                  return checkCFunc(__index.SetUnitAura)
                 end,
                 SetUnitBuff = function()
-                  assertEquals('function', type(__index.SetUnitBuff))
+                  return checkCFunc(__index.SetUnitBuff)
                 end,
                 SetUnitDebuff = function()
-                  assertEquals('function', type(__index.SetUnitDebuff))
+                  return checkCFunc(__index.SetUnitDebuff)
                 end,
                 SetUpgradeItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetUpgradeItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetUpgradeItem))
+                  return checkCFunc(__index.SetUpgradeItem)
                 end,
                 SetVoidDepositItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetVoidDepositItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetVoidDepositItem))
+                  return checkCFunc(__index.SetVoidDepositItem)
                 end,
                 SetVoidItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetVoidItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetVoidItem))
+                  return checkCFunc(__index.SetVoidItem)
                 end,
                 SetVoidWithdrawalItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetVoidWithdrawalItem))
                     return
                   end
-                  assertEquals('function', type(__index.SetVoidWithdrawalItem))
+                  return checkCFunc(__index.SetVoidWithdrawalItem)
                 end,
                 SetWeeklyReward = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetWeeklyReward))
                     return
                   end
-                  assertEquals('function', type(__index.SetWeeklyReward))
+                  return checkCFunc(__index.SetWeeklyReward)
                 end,
               }
             end,
@@ -22725,10 +22725,10 @@ function G.GeneratedTests()
             methods = function()
               return {
                 AddMessage = function()
-                  assertEquals('function', type(__index.AddMessage))
+                  return checkCFunc(__index.AddMessage)
                 end,
                 Clear = function()
-                  assertEquals('function', type(__index.Clear))
+                  return checkCFunc(__index.Clear)
                 end,
               }
             end,
@@ -22758,28 +22758,28 @@ function G.GeneratedTests()
             methods = function()
               return {
                 ClearModel = function()
-                  assertEquals('function', type(__index.ClearModel))
+                  return checkCFunc(__index.ClearModel)
                 end,
                 GetModelScale = function()
-                  assertEquals('function', type(__index.GetModelScale))
+                  return checkCFunc(__index.GetModelScale)
                 end,
                 SetFacing = function()
-                  assertEquals('function', type(__index.SetFacing))
+                  return checkCFunc(__index.SetFacing)
                 end,
                 SetLight = function()
-                  assertEquals('function', type(__index.SetLight))
+                  return checkCFunc(__index.SetLight)
                 end,
                 SetModel = function()
-                  assertEquals('function', type(__index.SetModel))
+                  return checkCFunc(__index.SetModel)
                 end,
                 SetModelScale = function()
-                  assertEquals('function', type(__index.SetModelScale))
+                  return checkCFunc(__index.SetModelScale)
                 end,
                 SetPosition = function()
-                  assertEquals('function', type(__index.SetPosition))
+                  return checkCFunc(__index.SetPosition)
                 end,
                 TransformCameraSpaceToModelSpace = function()
-                  assertEquals('function', type(__index.TransformCameraSpaceToModelSpace))
+                  return checkCFunc(__index.TransformCameraSpaceToModelSpace)
                 end,
               }
             end,
@@ -22809,147 +22809,147 @@ function G.GeneratedTests()
             methods = function()
               return {
                 ClearFog = function()
-                  assertEquals('function', type(__index.ClearFog))
+                  return checkCFunc(__index.ClearFog)
                 end,
                 CreateActor = function()
-                  assertEquals('function', type(__index.CreateActor))
+                  return checkCFunc(__index.CreateActor)
                 end,
                 GetActorAtIndex = function()
-                  assertEquals('function', type(__index.GetActorAtIndex))
+                  return checkCFunc(__index.GetActorAtIndex)
                 end,
                 GetCameraFarClip = function()
-                  assertEquals('function', type(__index.GetCameraFarClip))
+                  return checkCFunc(__index.GetCameraFarClip)
                 end,
                 GetCameraFieldOfView = function()
-                  assertEquals('function', type(__index.GetCameraFieldOfView))
+                  return checkCFunc(__index.GetCameraFieldOfView)
                 end,
                 GetCameraForward = function()
-                  assertEquals('function', type(__index.GetCameraForward))
+                  return checkCFunc(__index.GetCameraForward)
                 end,
                 GetCameraNearClip = function()
-                  assertEquals('function', type(__index.GetCameraNearClip))
+                  return checkCFunc(__index.GetCameraNearClip)
                 end,
                 GetCameraPosition = function()
-                  assertEquals('function', type(__index.GetCameraPosition))
+                  return checkCFunc(__index.GetCameraPosition)
                 end,
                 GetCameraRight = function()
-                  assertEquals('function', type(__index.GetCameraRight))
+                  return checkCFunc(__index.GetCameraRight)
                 end,
                 GetCameraUp = function()
-                  assertEquals('function', type(__index.GetCameraUp))
+                  return checkCFunc(__index.GetCameraUp)
                 end,
                 GetDrawLayer = function()
-                  assertEquals('function', type(__index.GetDrawLayer))
+                  return checkCFunc(__index.GetDrawLayer)
                 end,
                 GetFogColor = function()
-                  assertEquals('function', type(__index.GetFogColor))
+                  return checkCFunc(__index.GetFogColor)
                 end,
                 GetFogFar = function()
-                  assertEquals('function', type(__index.GetFogFar))
+                  return checkCFunc(__index.GetFogFar)
                 end,
                 GetFogNear = function()
-                  assertEquals('function', type(__index.GetFogNear))
+                  return checkCFunc(__index.GetFogNear)
                 end,
                 GetLightAmbientColor = function()
-                  assertEquals('function', type(__index.GetLightAmbientColor))
+                  return checkCFunc(__index.GetLightAmbientColor)
                 end,
                 GetLightDiffuseColor = function()
-                  assertEquals('function', type(__index.GetLightDiffuseColor))
+                  return checkCFunc(__index.GetLightDiffuseColor)
                 end,
                 GetLightDirection = function()
-                  assertEquals('function', type(__index.GetLightDirection))
+                  return checkCFunc(__index.GetLightDirection)
                 end,
                 GetLightPosition = function()
-                  assertEquals('function', type(__index.GetLightPosition))
+                  return checkCFunc(__index.GetLightPosition)
                 end,
                 GetLightType = function()
-                  assertEquals('function', type(__index.GetLightType))
+                  return checkCFunc(__index.GetLightType)
                 end,
                 GetNumActors = function()
-                  assertEquals('function', type(__index.GetNumActors))
+                  return checkCFunc(__index.GetNumActors)
                 end,
                 GetViewInsets = function()
-                  assertEquals('function', type(__index.GetViewInsets))
+                  return checkCFunc(__index.GetViewInsets)
                 end,
                 GetViewTranslation = function()
-                  assertEquals('function', type(__index.GetViewTranslation))
+                  return checkCFunc(__index.GetViewTranslation)
                 end,
                 IsLightVisible = function()
-                  assertEquals('function', type(__index.IsLightVisible))
+                  return checkCFunc(__index.IsLightVisible)
                 end,
                 Project3DPointTo2D = function()
-                  assertEquals('function', type(__index.Project3DPointTo2D))
+                  return checkCFunc(__index.Project3DPointTo2D)
                 end,
                 SetCameraFarClip = function()
-                  assertEquals('function', type(__index.SetCameraFarClip))
+                  return checkCFunc(__index.SetCameraFarClip)
                 end,
                 SetCameraFieldOfView = function()
-                  assertEquals('function', type(__index.SetCameraFieldOfView))
+                  return checkCFunc(__index.SetCameraFieldOfView)
                 end,
                 SetCameraNearClip = function()
-                  assertEquals('function', type(__index.SetCameraNearClip))
+                  return checkCFunc(__index.SetCameraNearClip)
                 end,
                 SetCameraOrientationByAxisVectors = function()
-                  assertEquals('function', type(__index.SetCameraOrientationByAxisVectors))
+                  return checkCFunc(__index.SetCameraOrientationByAxisVectors)
                 end,
                 SetCameraOrientationByYawPitchRoll = function()
-                  assertEquals('function', type(__index.SetCameraOrientationByYawPitchRoll))
+                  return checkCFunc(__index.SetCameraOrientationByYawPitchRoll)
                 end,
                 SetCameraPosition = function()
-                  assertEquals('function', type(__index.SetCameraPosition))
+                  return checkCFunc(__index.SetCameraPosition)
                 end,
                 SetDesaturation = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetDesaturation))
                     return
                   end
-                  assertEquals('function', type(__index.SetDesaturation))
+                  return checkCFunc(__index.SetDesaturation)
                 end,
                 SetDrawLayer = function()
-                  assertEquals('function', type(__index.SetDrawLayer))
+                  return checkCFunc(__index.SetDrawLayer)
                 end,
                 SetFogColor = function()
-                  assertEquals('function', type(__index.SetFogColor))
+                  return checkCFunc(__index.SetFogColor)
                 end,
                 SetFogFar = function()
-                  assertEquals('function', type(__index.SetFogFar))
+                  return checkCFunc(__index.SetFogFar)
                 end,
                 SetFogNear = function()
-                  assertEquals('function', type(__index.SetFogNear))
+                  return checkCFunc(__index.SetFogNear)
                 end,
                 SetLightAmbientColor = function()
-                  assertEquals('function', type(__index.SetLightAmbientColor))
+                  return checkCFunc(__index.SetLightAmbientColor)
                 end,
                 SetLightDiffuseColor = function()
-                  assertEquals('function', type(__index.SetLightDiffuseColor))
+                  return checkCFunc(__index.SetLightDiffuseColor)
                 end,
                 SetLightDirection = function()
-                  assertEquals('function', type(__index.SetLightDirection))
+                  return checkCFunc(__index.SetLightDirection)
                 end,
                 SetLightPosition = function()
-                  assertEquals('function', type(__index.SetLightPosition))
+                  return checkCFunc(__index.SetLightPosition)
                 end,
                 SetLightType = function()
-                  assertEquals('function', type(__index.SetLightType))
+                  return checkCFunc(__index.SetLightType)
                 end,
                 SetLightVisible = function()
-                  assertEquals('function', type(__index.SetLightVisible))
+                  return checkCFunc(__index.SetLightVisible)
                 end,
                 SetPaused = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                     assertEquals('nil', type(__index.SetPaused))
                     return
                   end
-                  assertEquals('function', type(__index.SetPaused))
+                  return checkCFunc(__index.SetPaused)
                 end,
                 SetViewInsets = function()
-                  assertEquals('function', type(__index.SetViewInsets))
+                  return checkCFunc(__index.SetViewInsets)
                 end,
                 SetViewTranslation = function()
-                  assertEquals('function', type(__index.SetViewTranslation))
+                  return checkCFunc(__index.SetViewTranslation)
                 end,
                 TakeActor = function()
-                  assertEquals('function', type(__index.TakeActor))
+                  return checkCFunc(__index.TakeActor)
                 end,
               }
             end,
@@ -22979,13 +22979,13 @@ function G.GeneratedTests()
             methods = function()
               return {
                 EnableSubtitles = function()
-                  assertEquals('function', type(__index.EnableSubtitles))
+                  return checkCFunc(__index.EnableSubtitles)
                 end,
                 StartMovie = function()
-                  assertEquals('function', type(__index.StartMovie))
+                  return checkCFunc(__index.StartMovie)
                 end,
                 StopMovie = function()
-                  assertEquals('function', type(__index.StopMovie))
+                  return checkCFunc(__index.StopMovie)
                 end,
               }
             end,
@@ -23047,40 +23047,40 @@ function G.GeneratedTests()
             methods = function()
               return {
                 FreezeAnimation = function()
-                  assertEquals('function', type(__index.FreezeAnimation))
+                  return checkCFunc(__index.FreezeAnimation)
                 end,
                 GetDisplayInfo = function()
-                  assertEquals('function', type(__index.GetDisplayInfo))
+                  return checkCFunc(__index.GetDisplayInfo)
                 end,
                 RefreshCamera = function()
-                  assertEquals('function', type(__index.RefreshCamera))
+                  return checkCFunc(__index.RefreshCamera)
                 end,
                 RefreshUnit = function()
-                  assertEquals('function', type(__index.RefreshUnit))
+                  return checkCFunc(__index.RefreshUnit)
                 end,
                 SetAnimation = function()
-                  assertEquals('function', type(__index.SetAnimation))
+                  return checkCFunc(__index.SetAnimation)
                 end,
                 SetCamDistanceScale = function()
-                  assertEquals('function', type(__index.SetCamDistanceScale))
+                  return checkCFunc(__index.SetCamDistanceScale)
                 end,
                 SetDisplayInfo = function()
-                  assertEquals('function', type(__index.SetDisplayInfo))
+                  return checkCFunc(__index.SetDisplayInfo)
                 end,
                 SetDoBlend = function()
-                  assertEquals('function', type(__index.SetDoBlend))
+                  return checkCFunc(__index.SetDoBlend)
                 end,
                 SetKeepModelOnHide = function()
-                  assertEquals('function', type(__index.SetKeepModelOnHide))
+                  return checkCFunc(__index.SetKeepModelOnHide)
                 end,
                 SetPortraitZoom = function()
-                  assertEquals('function', type(__index.SetPortraitZoom))
+                  return checkCFunc(__index.SetPortraitZoom)
                 end,
                 SetRotation = function()
-                  assertEquals('function', type(__index.SetRotation))
+                  return checkCFunc(__index.SetRotation)
                 end,
                 SetUnit = function()
-                  assertEquals('function', type(__index.SetUnit))
+                  return checkCFunc(__index.SetUnit)
                 end,
               }
             end,
@@ -23176,31 +23176,31 @@ function G.GeneratedTests()
             methods = function()
               return {
                 GetHorizontalScroll = function()
-                  assertEquals('function', type(__index.GetHorizontalScroll))
+                  return checkCFunc(__index.GetHorizontalScroll)
                 end,
                 GetHorizontalScrollRange = function()
-                  assertEquals('function', type(__index.GetHorizontalScrollRange))
+                  return checkCFunc(__index.GetHorizontalScrollRange)
                 end,
                 GetScrollChild = function()
-                  assertEquals('function', type(__index.GetScrollChild))
+                  return checkCFunc(__index.GetScrollChild)
                 end,
                 GetVerticalScroll = function()
-                  assertEquals('function', type(__index.GetVerticalScroll))
+                  return checkCFunc(__index.GetVerticalScroll)
                 end,
                 GetVerticalScrollRange = function()
-                  assertEquals('function', type(__index.GetVerticalScrollRange))
+                  return checkCFunc(__index.GetVerticalScrollRange)
                 end,
                 SetHorizontalScroll = function()
-                  assertEquals('function', type(__index.SetHorizontalScroll))
+                  return checkCFunc(__index.SetHorizontalScroll)
                 end,
                 SetScrollChild = function()
-                  assertEquals('function', type(__index.SetScrollChild))
+                  return checkCFunc(__index.SetScrollChild)
                 end,
                 SetVerticalScroll = function()
-                  assertEquals('function', type(__index.SetVerticalScroll))
+                  return checkCFunc(__index.SetVerticalScroll)
                 end,
                 UpdateScrollChildRect = function()
-                  assertEquals('function', type(__index.UpdateScrollChildRect))
+                  return checkCFunc(__index.UpdateScrollChildRect)
                 end,
               }
             end,
@@ -23230,10 +23230,10 @@ function G.GeneratedTests()
             methods = function()
               return {
                 GetContentHeight = function()
-                  assertEquals('function', type(__index.GetContentHeight))
+                  return checkCFunc(__index.GetContentHeight)
                 end,
                 SetText = function()
-                  assertEquals('function', type(__index.SetText))
+                  return checkCFunc(__index.SetText)
                 end,
               }
             end,
@@ -23263,61 +23263,61 @@ function G.GeneratedTests()
             methods = function()
               return {
                 Disable = function()
-                  assertEquals('function', type(__index.Disable))
+                  return checkCFunc(__index.Disable)
                 end,
                 Enable = function()
-                  assertEquals('function', type(__index.Enable))
+                  return checkCFunc(__index.Enable)
                 end,
                 GetMinMaxValues = function()
-                  assertEquals('function', type(__index.GetMinMaxValues))
+                  return checkCFunc(__index.GetMinMaxValues)
                 end,
                 GetObeyStepOnDrag = function()
-                  assertEquals('function', type(__index.GetObeyStepOnDrag))
+                  return checkCFunc(__index.GetObeyStepOnDrag)
                 end,
                 GetOrientation = function()
-                  assertEquals('function', type(__index.GetOrientation))
+                  return checkCFunc(__index.GetOrientation)
                 end,
                 GetStepsPerPage = function()
-                  assertEquals('function', type(__index.GetStepsPerPage))
+                  return checkCFunc(__index.GetStepsPerPage)
                 end,
                 GetThumbTexture = function()
-                  assertEquals('function', type(__index.GetThumbTexture))
+                  return checkCFunc(__index.GetThumbTexture)
                 end,
                 GetValue = function()
-                  assertEquals('function', type(__index.GetValue))
+                  return checkCFunc(__index.GetValue)
                 end,
                 GetValueStep = function()
-                  assertEquals('function', type(__index.GetValueStep))
+                  return checkCFunc(__index.GetValueStep)
                 end,
                 IsDraggingThumb = function()
-                  assertEquals('function', type(__index.IsDraggingThumb))
+                  return checkCFunc(__index.IsDraggingThumb)
                 end,
                 IsEnabled = function()
-                  assertEquals('function', type(__index.IsEnabled))
+                  return checkCFunc(__index.IsEnabled)
                 end,
                 SetEnabled = function()
-                  assertEquals('function', type(__index.SetEnabled))
+                  return checkCFunc(__index.SetEnabled)
                 end,
                 SetMinMaxValues = function()
-                  assertEquals('function', type(__index.SetMinMaxValues))
+                  return checkCFunc(__index.SetMinMaxValues)
                 end,
                 SetObeyStepOnDrag = function()
-                  assertEquals('function', type(__index.SetObeyStepOnDrag))
+                  return checkCFunc(__index.SetObeyStepOnDrag)
                 end,
                 SetOrientation = function()
-                  assertEquals('function', type(__index.SetOrientation))
+                  return checkCFunc(__index.SetOrientation)
                 end,
                 SetStepsPerPage = function()
-                  assertEquals('function', type(__index.SetStepsPerPage))
+                  return checkCFunc(__index.SetStepsPerPage)
                 end,
                 SetThumbTexture = function()
-                  assertEquals('function', type(__index.SetThumbTexture))
+                  return checkCFunc(__index.SetThumbTexture)
                 end,
                 SetValue = function()
-                  assertEquals('function', type(__index.SetValue))
+                  return checkCFunc(__index.SetValue)
                 end,
                 SetValueStep = function()
-                  assertEquals('function', type(__index.SetValueStep))
+                  return checkCFunc(__index.SetValueStep)
                 end,
               }
             end,
@@ -23347,58 +23347,58 @@ function G.GeneratedTests()
             methods = function()
               return {
                 GetFillStyle = function()
-                  assertEquals('function', type(__index.GetFillStyle))
+                  return checkCFunc(__index.GetFillStyle)
                 end,
                 GetMinMaxValues = function()
-                  assertEquals('function', type(__index.GetMinMaxValues))
+                  return checkCFunc(__index.GetMinMaxValues)
                 end,
                 GetOrientation = function()
-                  assertEquals('function', type(__index.GetOrientation))
+                  return checkCFunc(__index.GetOrientation)
                 end,
                 GetReverseFill = function()
-                  assertEquals('function', type(__index.GetReverseFill))
+                  return checkCFunc(__index.GetReverseFill)
                 end,
                 GetRotatesTexture = function()
-                  assertEquals('function', type(__index.GetRotatesTexture))
+                  return checkCFunc(__index.GetRotatesTexture)
                 end,
                 GetStatusBarAtlas = function()
-                  assertEquals('function', type(__index.GetStatusBarAtlas))
+                  return checkCFunc(__index.GetStatusBarAtlas)
                 end,
                 GetStatusBarColor = function()
-                  assertEquals('function', type(__index.GetStatusBarColor))
+                  return checkCFunc(__index.GetStatusBarColor)
                 end,
                 GetStatusBarTexture = function()
-                  assertEquals('function', type(__index.GetStatusBarTexture))
+                  return checkCFunc(__index.GetStatusBarTexture)
                 end,
                 GetValue = function()
-                  assertEquals('function', type(__index.GetValue))
+                  return checkCFunc(__index.GetValue)
                 end,
                 SetFillStyle = function()
-                  assertEquals('function', type(__index.SetFillStyle))
+                  return checkCFunc(__index.SetFillStyle)
                 end,
                 SetMinMaxValues = function()
-                  assertEquals('function', type(__index.SetMinMaxValues))
+                  return checkCFunc(__index.SetMinMaxValues)
                 end,
                 SetOrientation = function()
-                  assertEquals('function', type(__index.SetOrientation))
+                  return checkCFunc(__index.SetOrientation)
                 end,
                 SetReverseFill = function()
-                  assertEquals('function', type(__index.SetReverseFill))
+                  return checkCFunc(__index.SetReverseFill)
                 end,
                 SetRotatesTexture = function()
-                  assertEquals('function', type(__index.SetRotatesTexture))
+                  return checkCFunc(__index.SetRotatesTexture)
                 end,
                 SetStatusBarAtlas = function()
-                  assertEquals('function', type(__index.SetStatusBarAtlas))
+                  return checkCFunc(__index.SetStatusBarAtlas)
                 end,
                 SetStatusBarColor = function()
-                  assertEquals('function', type(__index.SetStatusBarColor))
+                  return checkCFunc(__index.SetStatusBarColor)
                 end,
                 SetStatusBarTexture = function()
-                  assertEquals('function', type(__index.SetStatusBarTexture))
+                  return checkCFunc(__index.SetStatusBarTexture)
                 end,
                 SetValue = function()
-                  assertEquals('function', type(__index.SetValue))
+                  return checkCFunc(__index.SetValue)
                 end,
               }
             end,
@@ -23428,13 +23428,13 @@ function G.GeneratedTests()
             methods = function()
               return {
                 GetLowerEmblemTexture = function()
-                  assertEquals('function', type(__index.GetLowerEmblemTexture))
+                  return checkCFunc(__index.GetLowerEmblemTexture)
                 end,
                 GetUpperEmblemTexture = function()
-                  assertEquals('function', type(__index.GetUpperEmblemTexture))
+                  return checkCFunc(__index.GetUpperEmblemTexture)
                 end,
                 InitializeTabardColors = function()
-                  assertEquals('function', type(__index.InitializeTabardColors))
+                  return checkCFunc(__index.InitializeTabardColors)
                 end,
               }
             end,
@@ -23476,31 +23476,31 @@ function G.GeneratedTests()
             methods = function()
               return {
                 AddUnit = function()
-                  assertEquals('function', type(__index.AddUnit))
+                  return checkCFunc(__index.AddUnit)
                 end,
                 ClearUnits = function()
-                  assertEquals('function', type(__index.ClearUnits))
+                  return checkCFunc(__index.ClearUnits)
                 end,
                 FinalizeUnits = function()
-                  assertEquals('function', type(__index.FinalizeUnits))
+                  return checkCFunc(__index.FinalizeUnits)
                 end,
                 GetMouseOverUnits = function()
-                  assertEquals('function', type(__index.GetMouseOverUnits))
+                  return checkCFunc(__index.GetMouseOverUnits)
                 end,
                 SetPlayerPingScale = function()
-                  assertEquals('function', type(__index.SetPlayerPingScale))
+                  return checkCFunc(__index.SetPlayerPingScale)
                 end,
                 SetPlayerPingTexture = function()
-                  assertEquals('function', type(__index.SetPlayerPingTexture))
+                  return checkCFunc(__index.SetPlayerPingTexture)
                 end,
                 SetUiMapID = function()
-                  assertEquals('function', type(__index.SetUiMapID))
+                  return checkCFunc(__index.SetUiMapID)
                 end,
                 StartPlayerPing = function()
-                  assertEquals('function', type(__index.StartPlayerPing))
+                  return checkCFunc(__index.StartPlayerPing)
                 end,
                 StopPlayerPing = function()
-                  assertEquals('function', type(__index.StopPlayerPing))
+                  return checkCFunc(__index.StopPlayerPing)
                 end,
               }
             end,

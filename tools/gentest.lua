@@ -312,7 +312,7 @@ function G.GeneratedTests()
                     return
                   end
 > end
-                  assertEquals('function', type(__index.$(mname)))
+                  return checkCFunc(__index.$(mname))
                 end,
 > end
               }
