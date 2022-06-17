@@ -36,6 +36,5 @@ files['data/uiobjects'] = {
     'm',
     'u',
     'UpdateVisible',
-    'util',
   },
 }

@@ -109,7 +109,6 @@ local function mkBaseUIObjectTypes(api, loader)
     m = m,
     u = u,
     UpdateVisible = UpdateVisible,
-    util = require('wowless.util'),
   }
   for k, v in pairs(_G) do
     env[k] = v
