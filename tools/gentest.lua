@@ -282,26 +282,17 @@ function G.GeneratedTests()
       end
       local GetObjectType = CreateFrame('Frame').GetObjectType
       local indexes = {}
-      return {
-> for k, v in sorted(uiobjects) do
-        $(k) = function()
-> if frametypes[k] and v.flavors then
-          if $(badflavor(v.flavors)) then
-            assertCreateFrameFails('$(k)')
-            return
-          end
-> end
-> if frametypes[k] then
-          local frame = assertCreateFrame('$(k)')
-          local frame2 = assertCreateFrame('$(k)')
-> if k == 'EditBox' then
+      local function mkTests(name, objectTypeName, tests)
+        local frame = assertCreateFrame(name)
+        local frame2 = assertCreateFrame(name)
+        if name == 'EditBox' then
           frame:Hide() -- captures input focus otherwise
           frame2:Hide() -- captures input focus otherwise
-> end
-          assertEquals('$(objTypes[k])', GetObjectType(frame))
-          local mt = getmetatable(frame)
-          assert(mt == getmetatable(frame2))
-> if k ~= 'FogOfWarFrame' then
+        end
+        assertEquals(objectTypeName, GetObjectType(frame))
+        local mt = getmetatable(frame)
+        assert(mt == getmetatable(frame2))
+        if name ~= 'FogOfWarFrame' or WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
           assert(mt ~= nil)
           assert(getmetatable(mt) == nil)
           local mtk, __index = next(mt)
@@ -319,25 +310,37 @@ function G.GeneratedTests()
               assert(getmetatable(udv) == nil)
               assert(next(frame, udk) == nil)
             end,
-> if next(v.methods) then
             methods = function()
-              return {
-> for mname, method in sorted(v.methods) do
-                $(mname) = function()
-> if method.flavors then
-                  if $(badflavor(method.flavors)) then
-                    assertEquals('nil', type(__index.$(mname)))
-                    return
-                  end
-> end
-                  return checkCFunc(__index.$(mname))
-                end,
-> end
-              }
+              return tests(__index)
             end,
-> end
           }
+        end
+      end
+      return {
+> for k, v in sorted(uiobjects) do
+        $(k) = function()
+> if frametypes[k] and v.flavors then
+          if $(badflavor(v.flavors)) then
+            assertCreateFrameFails('$(k)')
+            return
+          end
 > end
+> if frametypes[k] then
+          return mkTests('$(k)', '$(objTypes[k])', function(__index)
+            return {
+> for mname, method in sorted(v.methods) do
+              $(mname) = function()
+> if method.flavors then
+                if $(badflavor(method.flavors)) then
+                  assertEquals('nil', type(__index.$(mname)))
+                  return
+                end
+> end
+                return checkCFunc(__index.$(mname))
+              end,
+> end
+            }
+          end)
 > else
           assertCreateFrameFails('$(k)')
 > end
