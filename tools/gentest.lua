@@ -41,6 +41,21 @@ for _, cfg in pairs(uiobjects) do
   objTypes[cfg.name] = cfg.objectType or cfg.name
 end
 
+do
+  local function fixup(cfg)
+    for _, inhname in ipairs(cfg.inherits) do
+      local inh = uiobjects[inhname]
+      fixup(inh)
+      for n, m in pairs(inh.methods) do
+        cfg.methods[n] = m
+      end
+    end
+  end
+  for _, cfg in pairs(uiobjects) do
+    fixup(cfg)
+  end
+end
+
 local frametypes = {}
 do
   local function addtype(ty)
