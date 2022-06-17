@@ -21318,6 +21318,9 @@ function G.GeneratedTests()
               SetOrder = function()
                 return checkCFunc(__index.SetOrder)
               end,
+              SetParent = function()
+                return checkCFunc(__index.SetParent)
+              end,
               SetScript = function()
                 return checkCFunc(__index.SetScript)
               end,

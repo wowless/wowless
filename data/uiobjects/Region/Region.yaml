@@ -136,8 +136,6 @@ methods:
     fields:
     - name: isIgnoringParentScale
     status: setter
-  SetParent:
-    status: implemented
   SetPoint:
     status: implemented
   SetScale:

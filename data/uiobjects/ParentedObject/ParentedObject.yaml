@@ -28,3 +28,5 @@ methods:
     status: getter
   SetForbidden:
     status: implemented
+  SetParent:
+    status: implemented
