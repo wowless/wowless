@@ -21348,8 +21348,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -21453,6 +21462,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -21501,6 +21513,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -21531,11 +21546,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -21684,6 +21705,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -21705,8 +21729,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               Click = function()
                 return checkCFunc(__index.Click)
@@ -21846,6 +21879,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -21909,6 +21945,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEnabled = function()
                 return checkCFunc(__index.IsEnabled)
               end,
@@ -21942,11 +21981,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -22155,6 +22200,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -22179,8 +22227,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               Click = function()
                 return checkCFunc(__index.Click)
@@ -22329,6 +22386,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -22392,6 +22452,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEnabled = function()
                 return checkCFunc(__index.IsEnabled)
               end,
@@ -22425,11 +22488,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -22647,6 +22716,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -22671,8 +22743,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -22776,6 +22857,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -22824,6 +22908,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -22854,11 +22941,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -23004,6 +23097,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -23025,11 +23121,20 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
               end,
               ClearModel = function()
                 return checkCFunc(__index.ClearModel)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -23142,6 +23247,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -23193,6 +23301,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -23223,11 +23334,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -23427,6 +23544,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -23451,8 +23571,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -23574,6 +23703,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -23622,6 +23754,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -23652,11 +23787,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -23820,6 +23961,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -23844,11 +23988,20 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               Clear = function()
                 return checkCFunc(__index.Clear)
               end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -23973,6 +24126,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -24027,6 +24183,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -24057,6 +24216,9 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
@@ -24065,6 +24227,9 @@ function G.GeneratedTests()
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -24267,6 +24432,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -24288,11 +24456,20 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
               end,
               ClearModel = function()
                 return checkCFunc(__index.ClearModel)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -24405,6 +24582,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -24453,6 +24633,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -24483,11 +24666,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -24681,6 +24870,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -24708,6 +24900,9 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
               end,
@@ -24716,6 +24911,12 @@ function G.GeneratedTests()
               end,
               ClearHistory = function()
                 return checkCFunc(__index.ClearHistory)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -24846,6 +25047,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -24924,6 +25128,9 @@ function G.GeneratedTests()
               IsCountInvisibleLetters = function()
                 return checkCFunc(__index.IsCountInvisibleLetters)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEnabled = function()
                 return checkCFunc(__index.IsEnabled)
               end,
@@ -24960,11 +25167,17 @@ function G.GeneratedTests()
               IsMultiLine = function()
                 return checkCFunc(__index.IsMultiLine)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -25194,6 +25407,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -25215,8 +25431,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -25320,6 +25545,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -25371,6 +25599,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -25401,11 +25632,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -25554,6 +25791,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -25581,8 +25821,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -25644,6 +25893,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetRect = function()
                 return checkCFunc(__index.GetRect)
               end,
@@ -25701,6 +25953,9 @@ function G.GeneratedTests()
               IsAnchoringRestricted = function()
                 return checkCFunc(__index.IsAnchoringRestricted)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
@@ -25713,11 +25968,17 @@ function G.GeneratedTests()
               IsMouseOver = function()
                 return checkCFunc(__index.IsMouseOver)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsShown = function()
                 return checkCFunc(__index.IsShown)
@@ -25821,6 +26082,9 @@ function G.GeneratedTests()
               Show = function()
                 return checkCFunc(__index.Show)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
             }
           end)
         end,
@@ -25833,8 +26097,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -25938,6 +26211,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -25986,6 +26262,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -26016,11 +26295,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -26166,6 +26451,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -26215,11 +26503,20 @@ function G.GeneratedTests()
               AppendText = function()
                 return checkCFunc(__index.AppendText)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
               end,
               ClearLines = function()
                 return checkCFunc(__index.ClearLines)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CopyTooltip = function()
                 return checkCFunc(__index.CopyTooltip)
@@ -26358,6 +26655,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -26412,6 +26712,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEquippedItem = function()
                 return checkCFunc(__index.IsEquippedItem)
               end,
@@ -26445,6 +26748,9 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
@@ -26453,6 +26759,9 @@ function G.GeneratedTests()
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -27082,6 +27391,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -27121,11 +27433,20 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               Clear = function()
                 return checkCFunc(__index.Clear)
               end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -27229,6 +27550,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -27277,6 +27601,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -27307,11 +27634,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -27457,6 +27790,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -27478,11 +27814,20 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
               end,
               ClearModel = function()
                 return checkCFunc(__index.ClearModel)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -27589,6 +27934,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -27637,6 +27985,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -27667,11 +28018,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -27832,6 +28189,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -27856,11 +28216,20 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
               end,
               ClearFog = function()
                 return checkCFunc(__index.ClearFog)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateActor = function()
                 return checkCFunc(__index.CreateActor)
@@ -28021,6 +28390,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -28075,6 +28447,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -28108,11 +28483,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -28329,6 +28710,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -28353,8 +28737,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -28461,6 +28854,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -28509,6 +28905,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -28539,11 +28938,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -28692,6 +29097,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovie = function()
                 return checkCFunc(__index.StopMovie)
               end,
@@ -28716,8 +29124,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -28821,6 +29238,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -28869,6 +29289,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -28899,11 +29322,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -29049,6 +29478,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -29079,11 +29511,20 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
               end,
               ClearModel = function()
                 return checkCFunc(__index.ClearModel)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -29196,6 +29637,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -29244,6 +29688,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -29274,11 +29721,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -29469,6 +29922,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -29497,8 +29953,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -29605,6 +30070,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -29653,6 +30121,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -29683,11 +30154,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -29850,6 +30327,9 @@ function G.GeneratedTests()
               end,
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
+              end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
               end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
@@ -29885,8 +30365,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -29993,6 +30482,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -30041,6 +30533,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -30071,11 +30566,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -30239,6 +30740,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -30263,8 +30767,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -30374,6 +30887,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -30431,6 +30947,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -30461,11 +30980,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -30620,6 +31145,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -30644,8 +31172,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -30758,6 +31295,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -30818,6 +31358,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -30848,11 +31391,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -31028,6 +31577,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -31049,8 +31601,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -31169,6 +31730,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -31229,6 +31793,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsDraggingThumb = function()
                 return checkCFunc(__index.IsDraggingThumb)
               end,
@@ -31265,11 +31832,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -31439,6 +32012,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -31460,8 +32036,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -31574,6 +32159,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -31640,6 +32228,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -31670,11 +32261,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -31847,6 +32444,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -31868,11 +32468,20 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
               end,
               ClearModel = function()
                 return checkCFunc(__index.ClearModel)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -31988,6 +32597,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -32042,6 +32654,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -32072,11 +32687,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -32267,6 +32888,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
@@ -32294,8 +32918,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -32348,6 +32981,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetRect = function()
                 return checkCFunc(__index.GetRect)
               end,
@@ -32390,6 +33026,9 @@ function G.GeneratedTests()
               IsDesaturated = function()
                 return checkCFunc(__index.IsDesaturated)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
@@ -32402,11 +33041,17 @@ function G.GeneratedTests()
               IsMouseOver = function()
                 return checkCFunc(__index.IsMouseOver)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsShown = function()
                 return checkCFunc(__index.IsShown)
@@ -32510,6 +33155,9 @@ function G.GeneratedTests()
               Show = function()
                 return checkCFunc(__index.Show)
               end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
+              end,
             }
           end)
         end,
@@ -32534,8 +33182,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeProtectedState = function()
+                return checkCFunc(__index.CanChangeProtectedState)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearPointByName = function()
+                return checkCFunc(__index.ClearPointByName)
+              end,
+              ClearPointsOffset = function()
+                return checkCFunc(__index.ClearPointsOffset)
               end,
               ClearUnits = function()
                 return checkCFunc(__index.ClearUnits)
@@ -32648,6 +33305,9 @@ function G.GeneratedTests()
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
+              GetPointByName = function()
+                return checkCFunc(__index.GetPointByName)
+              end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
               end,
@@ -32696,6 +33356,9 @@ function G.GeneratedTests()
               IsClampedToScreen = function()
                 return checkCFunc(__index.IsClampedToScreen)
               end,
+              IsDragging = function()
+                return checkCFunc(__index.IsDragging)
+              end,
               IsEventRegistered = function()
                 return checkCFunc(__index.IsEventRegistered)
               end,
@@ -32726,11 +33389,17 @@ function G.GeneratedTests()
               IsMovable = function()
                 return checkCFunc(__index.IsMovable)
               end,
+              IsObjectLoaded = function()
+                return checkCFunc(__index.IsObjectLoaded)
+              end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
+              end,
+              IsRectValid = function()
+                return checkCFunc(__index.IsRectValid)
               end,
               IsResizable = function()
                 return checkCFunc(__index.IsResizable)
@@ -32887,6 +33556,9 @@ function G.GeneratedTests()
               end,
               StartPlayerPing = function()
                 return checkCFunc(__index.StartPlayerPing)
+              end,
+              StopAnimating = function()
+                return checkCFunc(__index.StopAnimating)
               end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)

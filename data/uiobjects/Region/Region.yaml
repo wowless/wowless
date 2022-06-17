@@ -42,8 +42,14 @@ inherits:
 methods:
   AdjustPointsOffset:
     status: unimplemented
+  CanChangeProtectedState:
+    status: unimplemented
   ClearAllPoints:
     status: implemented
+  ClearPointByName:
+    status: unimplemented
+  ClearPointsOffset:
+    status: unimplemented
   CreateAnimationGroup:
     status: implemented
   GetAlpha:
@@ -72,6 +78,8 @@ methods:
     status: implemented
   GetPoint:
     status: implemented
+  GetPointByName:
+    status: unimplemented
   GetRect:
     fields:
     - name: bottom
@@ -102,6 +110,8 @@ methods:
     status: implemented
   IsAnchoringRestricted:
     status: unimplemented
+  IsDragging:
+    status: unimplemented
   IsIgnoringParentAlpha:
     fields:
     - name: isIgnoringParentAlpha
@@ -112,8 +122,12 @@ methods:
     status: getter
   IsMouseOver:
     status: unimplemented
+  IsObjectLoaded:
+    status: unimplemented
   IsProtected:
     status: implemented
+  IsRectValid:
+    status: unimplemented
   IsShown:
     fields:
     - name: shown
@@ -153,3 +167,5 @@ methods:
     status: setter
   Show:
     status: implemented
+  StopAnimating:
+    status: unimplemented
