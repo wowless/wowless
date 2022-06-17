@@ -21219,17 +21219,18 @@ function G.GeneratedTests()
       end
       local GetObjectType = CreateFrame('Frame').GetObjectType
       local indexes = {}
-      local function mkTests(name, objectTypeName, tests)
-        local frame = assertCreateFrame(name)
-        local frame2 = assertCreateFrame(name)
-        if name == 'EditBox' then
-          frame:Hide() -- captures input focus otherwise
-          frame2:Hide() -- captures input focus otherwise
+      local function mkTests(objectTypeName, factory, tests)
+        local obj = factory()
+        local obj2 = factory()
+        if objectTypeName == 'EditBox' then
+          obj:Hide() -- captures input focus otherwise
+          obj2:Hide() -- captures input focus otherwise
         end
-        assertEquals(objectTypeName, GetObjectType(frame))
-        local mt = getmetatable(frame)
-        assert(mt == getmetatable(frame2))
-        if name ~= 'FogOfWarFrame' or WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+        assert(obj ~= obj2)
+        assertEquals(objectTypeName, GetObjectType(obj))
+        local mt = getmetatable(obj)
+        assert(mt == getmetatable(obj2))
+        if objectTypeName ~= 'FogOfWarFrame' or WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
           assert(mt ~= nil)
           assert(getmetatable(mt) == nil)
           local mtk, __index = next(mt)
@@ -21241,11 +21242,11 @@ function G.GeneratedTests()
           indexes[__index] = true
           return {
             contents = function()
-              local udk, udv = next(frame)
+              local udk, udv = next(obj)
               assertEquals(udk, 0)
               assertEquals('userdata', type(udv))
               assert(getmetatable(udv) == nil)
-              assert(next(frame, udk) == nil)
+              assert(next(obj, udk) == nil)
             end,
             methods = function()
               return tests(__index)
@@ -21267,7 +21268,10 @@ function G.GeneratedTests()
           assertCreateFrameFails('AnimationGroup')
         end,
         Browser = function()
-          return mkTests('Browser', 'Browser', function(__index)
+          local function factory()
+            return assertCreateFrame('Browser')
+          end
+          return mkTests('Browser', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -21621,7 +21625,10 @@ function G.GeneratedTests()
           end)
         end,
         Button = function()
-          return mkTests('Button', 'Button', function(__index)
+          local function factory()
+            return assertCreateFrame('Button')
+          end
+          return mkTests('Button', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -22092,7 +22099,10 @@ function G.GeneratedTests()
           end)
         end,
         CheckButton = function()
-          return mkTests('CheckButton', 'CheckButton', function(__index)
+          local function factory()
+            return assertCreateFrame('CheckButton')
+          end
+          return mkTests('CheckButton', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -22581,7 +22591,10 @@ function G.GeneratedTests()
           end)
         end,
         Checkout = function()
-          return mkTests('Checkout', 'BlizzardCheckout', function(__index)
+          local function factory()
+            return assertCreateFrame('Checkout')
+          end
+          return mkTests('BlizzardCheckout', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -22932,7 +22945,10 @@ function G.GeneratedTests()
           end)
         end,
         CinematicModel = function()
-          return mkTests('CinematicModel', 'CinematicModel', function(__index)
+          local function factory()
+            return assertCreateFrame('CinematicModel')
+          end
+          return mkTests('CinematicModel', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -23355,7 +23371,10 @@ function G.GeneratedTests()
           end)
         end,
         ColorSelect = function()
-          return mkTests('ColorSelect', 'ColorSelect', function(__index)
+          local function factory()
+            return assertCreateFrame('ColorSelect')
+          end
+          return mkTests('ColorSelect', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -23745,7 +23764,10 @@ function G.GeneratedTests()
           assertCreateFrameFails('ControlPoint')
         end,
         Cooldown = function()
-          return mkTests('Cooldown', 'Cooldown', function(__index)
+          local function factory()
+            return assertCreateFrame('Cooldown')
+          end
+          return mkTests('Cooldown', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -24186,7 +24208,10 @@ function G.GeneratedTests()
           end)
         end,
         DressUpModel = function()
-          return mkTests('DressUpModel', 'DressUpModel', function(__index)
+          local function factory()
+            return assertCreateFrame('DressUpModel')
+          end
+          return mkTests('DressUpModel', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -24600,7 +24625,10 @@ function G.GeneratedTests()
           end)
         end,
         EditBox = function()
-          return mkTests('EditBox', 'EditBox', function(__index)
+          local function factory()
+            return assertCreateFrame('EditBox')
+          end
+          return mkTests('EditBox', factory, function(__index)
             return {
               AddHistoryLine = function()
                 return checkCFunc(__index.AddHistoryLine)
@@ -25107,7 +25135,10 @@ function G.GeneratedTests()
           end)
         end,
         FogOfWarFrame = function()
-          return mkTests('FogOfWarFrame', 'FogOfWarFrame', function(__index)
+          local function factory()
+            return assertCreateFrame('FogOfWarFrame')
+          end
+          return mkTests('FogOfWarFrame', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -25470,10 +25501,262 @@ function G.GeneratedTests()
           assertCreateFrameFails('FontInstance')
         end,
         FontString = function()
-          assertCreateFrameFails('FontString')
+          local function factory()
+            return CreateFrame('Frame'):CreateFontString()
+          end
+          return mkTests('FontString', factory, function(__index)
+            return {
+              AdjustPointsOffset = function()
+                return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              ClearAllPoints = function()
+                return checkCFunc(__index.ClearAllPoints)
+              end,
+              CreateAnimationGroup = function()
+                return checkCFunc(__index.CreateAnimationGroup)
+              end,
+              GetAlpha = function()
+                return checkCFunc(__index.GetAlpha)
+              end,
+              GetAnimationGroups = function()
+                return checkCFunc(__index.GetAnimationGroups)
+              end,
+              GetBottom = function()
+                return checkCFunc(__index.GetBottom)
+              end,
+              GetCenter = function()
+                return checkCFunc(__index.GetCenter)
+              end,
+              GetDebugName = function()
+                return checkCFunc(__index.GetDebugName)
+              end,
+              GetDrawLayer = function()
+                return checkCFunc(__index.GetDrawLayer)
+              end,
+              GetEffectiveScale = function()
+                return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetFont = function()
+                return checkCFunc(__index.GetFont)
+              end,
+              GetFontObject = function()
+                return checkCFunc(__index.GetFontObject)
+              end,
+              GetHeight = function()
+                return checkCFunc(__index.GetHeight)
+              end,
+              GetLeft = function()
+                return checkCFunc(__index.GetLeft)
+              end,
+              GetLineHeight = function()
+                return checkCFunc(__index.GetLineHeight)
+              end,
+              GetMaxLines = function()
+                return checkCFunc(__index.GetMaxLines)
+              end,
+              GetName = function()
+                return checkCFunc(__index.GetName)
+              end,
+              GetNumLines = function()
+                return checkCFunc(__index.GetNumLines)
+              end,
+              GetNumPoints = function()
+                return checkCFunc(__index.GetNumPoints)
+              end,
+              GetObjectType = function()
+                return checkCFunc(__index.GetObjectType)
+              end,
+              GetParent = function()
+                return checkCFunc(__index.GetParent)
+              end,
+              GetPoint = function()
+                return checkCFunc(__index.GetPoint)
+              end,
+              GetRect = function()
+                return checkCFunc(__index.GetRect)
+              end,
+              GetRight = function()
+                return checkCFunc(__index.GetRight)
+              end,
+              GetScale = function()
+                return checkCFunc(__index.GetScale)
+              end,
+              GetScaledRect = function()
+                return checkCFunc(__index.GetScaledRect)
+              end,
+              GetShadowColor = function()
+                return checkCFunc(__index.GetShadowColor)
+              end,
+              GetShadowOffset = function()
+                return checkCFunc(__index.GetShadowOffset)
+              end,
+              GetSize = function()
+                return checkCFunc(__index.GetSize)
+              end,
+              GetSpacing = function()
+                return checkCFunc(__index.GetSpacing)
+              end,
+              GetStringHeight = function()
+                return checkCFunc(__index.GetStringHeight)
+              end,
+              GetStringWidth = function()
+                return checkCFunc(__index.GetStringWidth)
+              end,
+              GetText = function()
+                return checkCFunc(__index.GetText)
+              end,
+              GetTextColor = function()
+                return checkCFunc(__index.GetTextColor)
+              end,
+              GetTextScale = function()
+                return checkCFunc(__index.GetTextScale)
+              end,
+              GetTop = function()
+                return checkCFunc(__index.GetTop)
+              end,
+              GetUnboundedStringWidth = function()
+                return checkCFunc(__index.GetUnboundedStringWidth)
+              end,
+              GetWidth = function()
+                return checkCFunc(__index.GetWidth)
+              end,
+              GetWrappedWidth = function()
+                return checkCFunc(__index.GetWrappedWidth)
+              end,
+              Hide = function()
+                return checkCFunc(__index.Hide)
+              end,
+              IsAnchoringRestricted = function()
+                return checkCFunc(__index.IsAnchoringRestricted)
+              end,
+              IsForbidden = function()
+                return checkCFunc(__index.IsForbidden)
+              end,
+              IsIgnoringParentAlpha = function()
+                return checkCFunc(__index.IsIgnoringParentAlpha)
+              end,
+              IsIgnoringParentScale = function()
+                return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsMouseOver = function()
+                return checkCFunc(__index.IsMouseOver)
+              end,
+              IsObjectType = function()
+                return checkCFunc(__index.IsObjectType)
+              end,
+              IsProtected = function()
+                return checkCFunc(__index.IsProtected)
+              end,
+              IsShown = function()
+                return checkCFunc(__index.IsShown)
+              end,
+              IsTruncated = function()
+                return checkCFunc(__index.IsTruncated)
+              end,
+              IsVisible = function()
+                return checkCFunc(__index.IsVisible)
+              end,
+              SetAllPoints = function()
+                return checkCFunc(__index.SetAllPoints)
+              end,
+              SetAlpha = function()
+                return checkCFunc(__index.SetAlpha)
+              end,
+              SetDrawLayer = function()
+                return checkCFunc(__index.SetDrawLayer)
+              end,
+              SetFont = function()
+                return checkCFunc(__index.SetFont)
+              end,
+              SetFontObject = function()
+                return checkCFunc(__index.SetFontObject)
+              end,
+              SetForbidden = function()
+                return checkCFunc(__index.SetForbidden)
+              end,
+              SetFormattedText = function()
+                return checkCFunc(__index.SetFormattedText)
+              end,
+              SetHeight = function()
+                return checkCFunc(__index.SetHeight)
+              end,
+              SetIgnoreParentAlpha = function()
+                return checkCFunc(__index.SetIgnoreParentAlpha)
+              end,
+              SetIgnoreParentScale = function()
+                return checkCFunc(__index.SetIgnoreParentScale)
+              end,
+              SetIndentedWordWrap = function()
+                return checkCFunc(__index.SetIndentedWordWrap)
+              end,
+              SetJustifyH = function()
+                return checkCFunc(__index.SetJustifyH)
+              end,
+              SetJustifyV = function()
+                return checkCFunc(__index.SetJustifyV)
+              end,
+              SetMaxLines = function()
+                return checkCFunc(__index.SetMaxLines)
+              end,
+              SetNonSpaceWrap = function()
+                return checkCFunc(__index.SetNonSpaceWrap)
+              end,
+              SetParent = function()
+                return checkCFunc(__index.SetParent)
+              end,
+              SetPoint = function()
+                return checkCFunc(__index.SetPoint)
+              end,
+              SetScale = function()
+                return checkCFunc(__index.SetScale)
+              end,
+              SetShadowColor = function()
+                return checkCFunc(__index.SetShadowColor)
+              end,
+              SetShadowOffset = function()
+                return checkCFunc(__index.SetShadowOffset)
+              end,
+              SetShown = function()
+                return checkCFunc(__index.SetShown)
+              end,
+              SetSize = function()
+                return checkCFunc(__index.SetSize)
+              end,
+              SetSpacing = function()
+                return checkCFunc(__index.SetSpacing)
+              end,
+              SetText = function()
+                return checkCFunc(__index.SetText)
+              end,
+              SetTextColor = function()
+                return checkCFunc(__index.SetTextColor)
+              end,
+              SetTextHeight = function()
+                return checkCFunc(__index.SetTextHeight)
+              end,
+              SetTextScale = function()
+                return checkCFunc(__index.SetTextScale)
+              end,
+              SetVertexColor = function()
+                return checkCFunc(__index.SetVertexColor)
+              end,
+              SetWidth = function()
+                return checkCFunc(__index.SetWidth)
+              end,
+              SetWordWrap = function()
+                return checkCFunc(__index.SetWordWrap)
+              end,
+              Show = function()
+                return checkCFunc(__index.Show)
+              end,
+            }
+          end)
         end,
         Frame = function()
-          return mkTests('Frame', 'Frame', function(__index)
+          local function factory()
+            return assertCreateFrame('Frame')
+          end
+          return mkTests('Frame', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -25824,7 +26107,10 @@ function G.GeneratedTests()
           end)
         end,
         GameTooltip = function()
-          return mkTests('GameTooltip', 'GameTooltip', function(__index)
+          local function factory()
+            return assertCreateFrame('GameTooltip')
+          end
+          return mkTests('GameTooltip', factory, function(__index)
             return {
               AddAtlas = function()
                 if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -26746,7 +27032,10 @@ function G.GeneratedTests()
           assertCreateFrameFails('MaskTexture')
         end,
         MessageFrame = function()
-          return mkTests('MessageFrame', 'MessageFrame', function(__index)
+          local function factory()
+            return assertCreateFrame('MessageFrame')
+          end
+          return mkTests('MessageFrame', factory, function(__index)
             return {
               AddMessage = function()
                 return checkCFunc(__index.AddMessage)
@@ -27103,7 +27392,10 @@ function G.GeneratedTests()
           end)
         end,
         Model = function()
-          return mkTests('Model', 'Model', function(__index)
+          local function factory()
+            return assertCreateFrame('Model')
+          end
+          return mkTests('Model', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -27478,7 +27770,10 @@ function G.GeneratedTests()
           end)
         end,
         ModelScene = function()
-          return mkTests('ModelScene', 'ModelScene', function(__index)
+          local function factory()
+            return assertCreateFrame('ModelScene')
+          end
+          return mkTests('ModelScene', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -27972,7 +28267,10 @@ function G.GeneratedTests()
           end)
         end,
         MovieFrame = function()
-          return mkTests('MovieFrame', 'MovieFrame', function(__index)
+          local function factory()
+            return assertCreateFrame('MovieFrame')
+          end
+          return mkTests('MovieFrame', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -28332,7 +28630,10 @@ function G.GeneratedTests()
           end)
         end,
         OffScreenFrame = function()
-          return mkTests('OffScreenFrame', 'OffScreenFrame', function(__index)
+          local function factory()
+            return assertCreateFrame('OffScreenFrame')
+          end
+          return mkTests('OffScreenFrame', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -28692,7 +28993,10 @@ function G.GeneratedTests()
           assertCreateFrameFails('Path')
         end,
         PlayerModel = function()
-          return mkTests('PlayerModel', 'PlayerModel', function(__index)
+          local function factory()
+            return assertCreateFrame('PlayerModel')
+          end
+          return mkTests('PlayerModel', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -29107,7 +29411,10 @@ function G.GeneratedTests()
             assertCreateFrameFails('QuestPOIFrame')
             return
           end
-          return mkTests('QuestPOIFrame', 'QuestPOIFrame', function(__index)
+          local function factory()
+            return assertCreateFrame('QuestPOIFrame')
+          end
+          return mkTests('QuestPOIFrame', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -29492,7 +29799,10 @@ function G.GeneratedTests()
             assertCreateFrameFails('ScenarioPOIFrame')
             return
           end
-          return mkTests('ScenarioPOIFrame', 'ScenarioPOIFrame', function(__index)
+          local function factory()
+            return assertCreateFrame('ScenarioPOIFrame')
+          end
+          return mkTests('ScenarioPOIFrame', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -29867,7 +30177,10 @@ function G.GeneratedTests()
           assertCreateFrameFails('ScriptObject')
         end,
         ScrollFrame = function()
-          return mkTests('ScrollFrame', 'ScrollFrame', function(__index)
+          local function factory()
+            return assertCreateFrame('ScrollFrame')
+          end
+          return mkTests('ScrollFrame', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -30245,7 +30558,10 @@ function G.GeneratedTests()
           end)
         end,
         SimpleHTML = function()
-          return mkTests('SimpleHTML', 'SimpleHTML', function(__index)
+          local function factory()
+            return assertCreateFrame('SimpleHTML')
+          end
+          return mkTests('SimpleHTML', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -30647,7 +30963,10 @@ function G.GeneratedTests()
           end)
         end,
         Slider = function()
-          return mkTests('Slider', 'Slider', function(__index)
+          local function factory()
+            return assertCreateFrame('Slider')
+          end
+          return mkTests('Slider', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -31055,7 +31374,10 @@ function G.GeneratedTests()
           end)
         end,
         StatusBar = function()
-          return mkTests('StatusBar', 'StatusBar', function(__index)
+          local function factory()
+            return assertCreateFrame('StatusBar')
+          end
+          return mkTests('StatusBar', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -31460,7 +31782,10 @@ function G.GeneratedTests()
           end)
         end,
         TabardModel = function()
-          return mkTests('TabardModel', 'TabardModel', function(__index)
+          local function factory()
+            return assertCreateFrame('TabardModel')
+          end
+          return mkTests('TabardModel', factory, function(__index)
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
@@ -31880,7 +32205,235 @@ function G.GeneratedTests()
           end)
         end,
         Texture = function()
-          assertCreateFrameFails('Texture')
+          local function factory()
+            return CreateFrame('Frame'):CreateTexture()
+          end
+          return mkTests('Texture', factory, function(__index)
+            return {
+              AddMaskTexture = function()
+                return checkCFunc(__index.AddMaskTexture)
+              end,
+              AdjustPointsOffset = function()
+                return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              ClearAllPoints = function()
+                return checkCFunc(__index.ClearAllPoints)
+              end,
+              CreateAnimationGroup = function()
+                return checkCFunc(__index.CreateAnimationGroup)
+              end,
+              GetAlpha = function()
+                return checkCFunc(__index.GetAlpha)
+              end,
+              GetAnimationGroups = function()
+                return checkCFunc(__index.GetAnimationGroups)
+              end,
+              GetAtlas = function()
+                return checkCFunc(__index.GetAtlas)
+              end,
+              GetBottom = function()
+                return checkCFunc(__index.GetBottom)
+              end,
+              GetCenter = function()
+                return checkCFunc(__index.GetCenter)
+              end,
+              GetDebugName = function()
+                return checkCFunc(__index.GetDebugName)
+              end,
+              GetDrawLayer = function()
+                return checkCFunc(__index.GetDrawLayer)
+              end,
+              GetEffectiveScale = function()
+                return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetHeight = function()
+                return checkCFunc(__index.GetHeight)
+              end,
+              GetHorizTile = function()
+                return checkCFunc(__index.GetHorizTile)
+              end,
+              GetLeft = function()
+                return checkCFunc(__index.GetLeft)
+              end,
+              GetName = function()
+                return checkCFunc(__index.GetName)
+              end,
+              GetNumPoints = function()
+                return checkCFunc(__index.GetNumPoints)
+              end,
+              GetObjectType = function()
+                return checkCFunc(__index.GetObjectType)
+              end,
+              GetParent = function()
+                return checkCFunc(__index.GetParent)
+              end,
+              GetPoint = function()
+                return checkCFunc(__index.GetPoint)
+              end,
+              GetRect = function()
+                return checkCFunc(__index.GetRect)
+              end,
+              GetRight = function()
+                return checkCFunc(__index.GetRight)
+              end,
+              GetScale = function()
+                return checkCFunc(__index.GetScale)
+              end,
+              GetScaledRect = function()
+                return checkCFunc(__index.GetScaledRect)
+              end,
+              GetSize = function()
+                return checkCFunc(__index.GetSize)
+              end,
+              GetTexCoord = function()
+                return checkCFunc(__index.GetTexCoord)
+              end,
+              GetTexture = function()
+                return checkCFunc(__index.GetTexture)
+              end,
+              GetTop = function()
+                return checkCFunc(__index.GetTop)
+              end,
+              GetVertTile = function()
+                return checkCFunc(__index.GetVertTile)
+              end,
+              GetVertexColor = function()
+                return checkCFunc(__index.GetVertexColor)
+              end,
+              GetWidth = function()
+                return checkCFunc(__index.GetWidth)
+              end,
+              Hide = function()
+                return checkCFunc(__index.Hide)
+              end,
+              IsAnchoringRestricted = function()
+                return checkCFunc(__index.IsAnchoringRestricted)
+              end,
+              IsDesaturated = function()
+                return checkCFunc(__index.IsDesaturated)
+              end,
+              IsForbidden = function()
+                return checkCFunc(__index.IsForbidden)
+              end,
+              IsIgnoringParentAlpha = function()
+                return checkCFunc(__index.IsIgnoringParentAlpha)
+              end,
+              IsIgnoringParentScale = function()
+                return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsMouseOver = function()
+                return checkCFunc(__index.IsMouseOver)
+              end,
+              IsObjectType = function()
+                return checkCFunc(__index.IsObjectType)
+              end,
+              IsProtected = function()
+                return checkCFunc(__index.IsProtected)
+              end,
+              IsShown = function()
+                return checkCFunc(__index.IsShown)
+              end,
+              IsVisible = function()
+                return checkCFunc(__index.IsVisible)
+              end,
+              RemoveMaskTexture = function()
+                return checkCFunc(__index.RemoveMaskTexture)
+              end,
+              SetAllPoints = function()
+                return checkCFunc(__index.SetAllPoints)
+              end,
+              SetAlpha = function()
+                return checkCFunc(__index.SetAlpha)
+              end,
+              SetAtlas = function()
+                return checkCFunc(__index.SetAtlas)
+              end,
+              SetBlendMode = function()
+                return checkCFunc(__index.SetBlendMode)
+              end,
+              SetColorTexture = function()
+                return checkCFunc(__index.SetColorTexture)
+              end,
+              SetDesaturated = function()
+                return checkCFunc(__index.SetDesaturated)
+              end,
+              SetDesaturation = function()
+                return checkCFunc(__index.SetDesaturation)
+              end,
+              SetDrawLayer = function()
+                return checkCFunc(__index.SetDrawLayer)
+              end,
+              SetForbidden = function()
+                return checkCFunc(__index.SetForbidden)
+              end,
+              SetGradient = function()
+                return checkCFunc(__index.SetGradient)
+              end,
+              SetGradientAlpha = function()
+                return checkCFunc(__index.SetGradientAlpha)
+              end,
+              SetHeight = function()
+                return checkCFunc(__index.SetHeight)
+              end,
+              SetHorizTile = function()
+                return checkCFunc(__index.SetHorizTile)
+              end,
+              SetIgnoreParentAlpha = function()
+                return checkCFunc(__index.SetIgnoreParentAlpha)
+              end,
+              SetIgnoreParentScale = function()
+                return checkCFunc(__index.SetIgnoreParentScale)
+              end,
+              SetMask = function()
+                return checkCFunc(__index.SetMask)
+              end,
+              SetNonBlocking = function()
+                return checkCFunc(__index.SetNonBlocking)
+              end,
+              SetParent = function()
+                return checkCFunc(__index.SetParent)
+              end,
+              SetPoint = function()
+                return checkCFunc(__index.SetPoint)
+              end,
+              SetRotation = function()
+                return checkCFunc(__index.SetRotation)
+              end,
+              SetScale = function()
+                return checkCFunc(__index.SetScale)
+              end,
+              SetShown = function()
+                return checkCFunc(__index.SetShown)
+              end,
+              SetSize = function()
+                return checkCFunc(__index.SetSize)
+              end,
+              SetSnapToPixelGrid = function()
+                return checkCFunc(__index.SetSnapToPixelGrid)
+              end,
+              SetTexCoord = function()
+                return checkCFunc(__index.SetTexCoord)
+              end,
+              SetTexelSnappingBias = function()
+                return checkCFunc(__index.SetTexelSnappingBias)
+              end,
+              SetTexture = function()
+                return checkCFunc(__index.SetTexture)
+              end,
+              SetVertTile = function()
+                return checkCFunc(__index.SetVertTile)
+              end,
+              SetVertexColor = function()
+                return checkCFunc(__index.SetVertexColor)
+              end,
+              SetWidth = function()
+                return checkCFunc(__index.SetWidth)
+              end,
+              Show = function()
+                return checkCFunc(__index.Show)
+              end,
+            }
+          end)
         end,
         TextureCoordTranslation = function()
           assertCreateFrameFails('TextureCoordTranslation')
@@ -31892,7 +32445,10 @@ function G.GeneratedTests()
           assertCreateFrameFails('UIObject')
         end,
         UnitPositionFrame = function()
-          return mkTests('UnitPositionFrame', 'UnitPositionFrame', function(__index)
+          local function factory()
+            return assertCreateFrame('UnitPositionFrame')
+          end
+          return mkTests('UnitPositionFrame', factory, function(__index)
             return {
               AddUnit = function()
                 return checkCFunc(__index.AddUnit)

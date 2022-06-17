@@ -282,17 +282,18 @@ function G.GeneratedTests()
       end
       local GetObjectType = CreateFrame('Frame').GetObjectType
       local indexes = {}
-      local function mkTests(name, objectTypeName, tests)
-        local frame = assertCreateFrame(name)
-        local frame2 = assertCreateFrame(name)
-        if name == 'EditBox' then
-          frame:Hide() -- captures input focus otherwise
-          frame2:Hide() -- captures input focus otherwise
+      local function mkTests(objectTypeName, factory, tests)
+        local obj = factory()
+        local obj2 = factory()
+        if objectTypeName == 'EditBox' then
+          obj:Hide() -- captures input focus otherwise
+          obj2:Hide() -- captures input focus otherwise
         end
-        assertEquals(objectTypeName, GetObjectType(frame))
-        local mt = getmetatable(frame)
-        assert(mt == getmetatable(frame2))
-        if name ~= 'FogOfWarFrame' or WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+        assert(obj ~= obj2)
+        assertEquals(objectTypeName, GetObjectType(obj))
+        local mt = getmetatable(obj)
+        assert(mt == getmetatable(obj2))
+        if objectTypeName ~= 'FogOfWarFrame' or WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
           assert(mt ~= nil)
           assert(getmetatable(mt) == nil)
           local mtk, __index = next(mt)
@@ -304,11 +305,11 @@ function G.GeneratedTests()
           indexes[__index] = true
           return {
             contents = function()
-              local udk, udv = next(frame)
+              local udk, udv = next(obj)
               assertEquals(udk, 0)
               assertEquals('userdata', type(udv))
               assert(getmetatable(udv) == nil)
-              assert(next(frame, udk) == nil)
+              assert(next(obj, udk) == nil)
             end,
             methods = function()
               return tests(__index)
@@ -325,8 +326,17 @@ function G.GeneratedTests()
             return
           end
 > end
-> if frametypes[k] then
-          return mkTests('$(k)', '$(objTypes[k])', function(__index)
+> if frametypes[k] or k == 'FontString' or k == 'Texture' then
+          local function factory()
+> if k == 'Texture' then
+            return CreateFrame('Frame'):CreateTexture()
+> elseif k == 'FontString' then
+            return CreateFrame('Frame'):CreateFontString()
+> else
+            return assertCreateFrame('$(k)')
+> end
+          end
+          return mkTests('$(objTypes[k])', factory, function(__index)
             return {
 > for mname, method in sorted(v.methods) do
               $(mname) = function()

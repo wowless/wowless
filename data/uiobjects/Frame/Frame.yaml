@@ -86,6 +86,8 @@ methods:
     status: implemented
   GetChildren:
     status: implemented
+  GetEffectiveAlpha:
+    status: implemented
   GetFrameLevel:
     fields:
     - name: frameLevel

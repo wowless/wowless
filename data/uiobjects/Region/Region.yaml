@@ -58,8 +58,6 @@ methods:
     status: getter
   GetCenter:
     status: implemented
-  GetEffectiveAlpha:
-    status: implemented
   GetEffectiveScale:
     status: implemented
   GetHeight:
