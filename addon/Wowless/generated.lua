@@ -21262,7 +21262,76 @@ function G.GeneratedTests()
           assertCreateFrameFails('Alpha')
         end,
         Animation = function()
-          assertCreateFrameFails('Animation')
+          local function factory()
+            return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation()
+          end
+          return mkTests('Animation', factory, function(__index)
+            return {
+              GetDebugName = function()
+                return checkCFunc(__index.GetDebugName)
+              end,
+              GetEndDelay = function()
+                return checkCFunc(__index.GetEndDelay)
+              end,
+              GetName = function()
+                return checkCFunc(__index.GetName)
+              end,
+              GetObjectType = function()
+                return checkCFunc(__index.GetObjectType)
+              end,
+              GetParent = function()
+                return checkCFunc(__index.GetParent)
+              end,
+              GetScript = function()
+                return checkCFunc(__index.GetScript)
+              end,
+              GetSmoothing = function()
+                return checkCFunc(__index.GetSmoothing)
+              end,
+              GetStartDelay = function()
+                return checkCFunc(__index.GetStartDelay)
+              end,
+              HasScript = function()
+                return checkCFunc(__index.HasScript)
+              end,
+              HookScript = function()
+                return checkCFunc(__index.HookScript)
+              end,
+              IsForbidden = function()
+                return checkCFunc(__index.IsForbidden)
+              end,
+              IsObjectType = function()
+                return checkCFunc(__index.IsObjectType)
+              end,
+              Restart = function()
+                return checkCFunc(__index.Restart)
+              end,
+              SetDuration = function()
+                return checkCFunc(__index.SetDuration)
+              end,
+              SetEndDelay = function()
+                return checkCFunc(__index.SetEndDelay)
+              end,
+              SetForbidden = function()
+                return checkCFunc(__index.SetForbidden)
+              end,
+              SetOrder = function()
+                return checkCFunc(__index.SetOrder)
+              end,
+              SetScript = function()
+                return checkCFunc(__index.SetScript)
+              end,
+              SetSmoothing = function()
+                return checkCFunc(__index.SetSmoothing)
+              end,
+              SetStartDelay = function()
+                return checkCFunc(__index.SetStartDelay)
+              end,
+              SetTarget = function()
+                return checkCFunc(__index.SetTarget)
+              end,
+            }
+          end)
         end,
         AnimationGroup = function()
           assertCreateFrameFails('AnimationGroup')

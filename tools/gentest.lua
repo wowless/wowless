@@ -326,12 +326,14 @@ function G.GeneratedTests()
             return
           end
 > end
-> if frametypes[k] or k == 'FontString' or k == 'Texture' then
+> if frametypes[k] or k == 'Animation' or k == 'FontString' or k == 'Texture' then
           local function factory()
-> if k == 'Texture' then
-            return CreateFrame('Frame'):CreateTexture()
+> if k == 'Animation' then
+            return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation()
 > elseif k == 'FontString' then
             return CreateFrame('Frame'):CreateFontString()
+> elseif k == 'Texture' then
+            return CreateFrame('Frame'):CreateTexture()
 > else
             return assertCreateFrame('$(k)')
 > end
