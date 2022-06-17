@@ -11,5 +11,9 @@ methods:
     status: getter
   GetObjectType:
     status: implemented
+  GetSourceLocation:
+    flavors:
+    - Mainline
+    status: unimplemented
   IsObjectType:
     status: implemented

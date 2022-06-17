@@ -3,9 +3,37 @@ name: TabardModel
 inherits:
 - PlayerModel
 methods:
+  CanSaveTabardNow:
+    status: unimplemented
+  CycleVariation:
+    status: unimplemented
+  GetLowerBackgroundFileName:
+    status: unimplemented
+  GetLowerEmblemFile:
+    flavors:
+    - Mainline
+    status: unimplemented
+  GetLowerEmblemFileName:
+    flavors:
+    - TBC
+    - Vanilla
+    status: unimplemented
   GetLowerEmblemTexture:
+    status: unimplemented
+  GetUpperBackgroundFileName:
+    status: unimplemented
+  GetUpperEmblemFile:
+    flavors:
+    - Mainline
+    status: unimplemented
+  GetUpperEmblemFileName:
+    flavors:
+    - TBC
+    - Vanilla
     status: unimplemented
   GetUpperEmblemTexture:
     status: unimplemented
   InitializeTabardColors:
+    status: unimplemented
+  Save:
     status: unimplemented

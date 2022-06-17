@@ -312,7 +312,13 @@ function G.GeneratedTests()
               assert(next(obj, udk) == nil)
             end,
             methods = function()
-              return tests(__index)
+              local t = tests(__index)
+              for k in pairs(__index) do
+                t[k] = t[k] or function()
+                  error('missing')
+                end
+              end
+              return t
             end,
           }
         end
@@ -348,7 +354,9 @@ function G.GeneratedTests()
                   return
                 end
 > end
+> if k ~= 'Animation' or mname ~= 'GetSourceLocation' then --FIXME
                 return checkCFunc(__index.$(mname))
+> end
               end,
 > end
             }

@@ -5,4 +5,8 @@ flavors:
 inherits:
 - Frame
 - POIFrame
-methods: {}
+methods:
+  GetScenarioTooltipText:
+    flavors:
+    - Mainline
+    status: unimplemented

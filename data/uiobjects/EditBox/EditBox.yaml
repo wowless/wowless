@@ -36,12 +36,24 @@ methods:
     status: unimplemented
   ClearFocus:
     status: unimplemented
+  ClearHighlightText:
+    status: unimplemented
   ClearHistory:
     status: unimplemented
   Disable:
     status: implemented
   Enable:
     status: implemented
+  GetAltArrowKeyMode:
+    status: unimplemented
+  GetBlinkSpeed:
+    status: unimplemented
+  GetCursorPosition:
+    status: unimplemented
+  GetDisplayText:
+    status: unimplemented
+  GetHighlightColor:
+    status: unimplemented
   GetHistoryLines:
     fields:
     - name: historyLines
@@ -60,10 +72,18 @@ methods:
     outputs:
     - type: number
     status: unimplemented
+  GetNumLetters:
+    status: unimplemented
   GetText:
     fields:
     - name: editboxText
     status: getter
+  GetTextInsets:
+    status: unimplemented
+  GetUTF8CursorPosition:
+    status: unimplemented
+  GetVisibleTextByteLimit:
+    status: unimplemented
   HasFocus:
     status: unimplemented
   HighlightText:
@@ -82,10 +102,16 @@ methods:
     fields:
     - name: enabled
     status: getter
+  IsInIMECompositionMode:
+    status: unimplemented
   IsMultiLine:
     fields:
     - name: isMultiLine
     status: getter
+  IsNumeric:
+    status: unimplemented
+  IsPassword:
+    status: unimplemented
   IsSecureText:
     fields:
     - name: isSecureText
@@ -96,6 +122,8 @@ methods:
     fields:
     - name: isAutoFocus
     status: setter
+  SetBlinkSpeed:
+    status: unimplemented
   SetCountInvisibleLetters:
     fields:
     - name: isCountInvisibleLetters
@@ -130,6 +158,8 @@ methods:
     status: unimplemented
   SetNumeric:
     status: unimplemented
+  SetPassword:
+    status: unimplemented
   SetSecureText:
     fields:
     - name: isSecureText
@@ -143,4 +173,8 @@ methods:
     - name: editboxText
     status: setter
   SetTextInsets:
+    status: unimplemented
+  SetVisibleTextByteLimit:
+    status: unimplemented
+  ToggleInputLanguage:
     status: unimplemented

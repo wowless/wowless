@@ -8,5 +8,11 @@ methods:
     outputs:
     - type: number
     status: unimplemented
+  GetHyperlinkFormat:
+    status: unimplemented
+  GetTextData:
+    status: unimplemented
+  SetHyperlinkFormat:
+    status: unimplemented
   SetText:
     status: unimplemented

@@ -2,4 +2,18 @@
 name: OffScreenFrame
 inherits:
 - Frame
-methods: {}
+methods:
+  ApplySnapshot:
+    status: unimplemented
+  Flush:
+    status: unimplemented
+  GetMaxSnapshots:
+    status: unimplemented
+  IsSnapshotValid:
+    status: unimplemented
+  SetMaxSnapshots:
+    status: unimplemented
+  TakeSnapshot:
+    status: unimplemented
+  UsesNPOT:
+    status: unimplemented

@@ -7,6 +7,12 @@ methods:
     status: implemented
   GetFontObject:
     status: implemented
+  GetIndentedWordWrap:
+    status: unimplemented
+  GetJustifyH:
+    status: unimplemented
+  GetJustifyV:
+    status: unimplemented
   GetShadowColor:
     outputs:
     - type: number

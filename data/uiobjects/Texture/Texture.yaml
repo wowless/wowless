@@ -42,10 +42,22 @@ methods:
     status: unimplemented
   GetAtlas:
     status: unimplemented
+  GetBlendMode:
+    status: unimplemented
+  GetDesaturation:
+    status: unimplemented
   GetHorizTile:
     fields:
     - name: horizTile
     status: getter
+  GetMaskTexture:
+    status: unimplemented
+  GetNonBlocking:
+    status: unimplemented
+  GetNumMaskTextures:
+    status: unimplemented
+  GetRotation:
+    status: unimplemented
   GetTexCoord:
     fields:
     - name: tlx
@@ -57,17 +69,27 @@ methods:
     - name: brx
     - name: bry
     status: getter
+  GetTexelSnappingBias:
+    status: unimplemented
   GetTexture:
     fields:
     - name: texture
     status: getter
+  GetTextureFileID:
+    status: unimplemented
+  GetTextureFilePath:
+    status: unimplemented
   GetVertexColor:
+    status: unimplemented
+  GetVertexOffset:
     status: unimplemented
   GetVertTile:
     fields:
     - name: vertTile
     status: getter
   IsDesaturated:
+    status: unimplemented
+  IsSnappingToPixelGrid:
     status: unimplemented
   RemoveMaskTexture:
     status: unimplemented
@@ -105,6 +127,8 @@ methods:
     fields:
     - name: texture
     status: setter
+  SetVertexOffset:
+    status: unimplemented
   SetVertTile:
     fields:
     - name: vertTile

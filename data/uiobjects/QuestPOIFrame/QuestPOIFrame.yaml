@@ -5,4 +5,12 @@ flavors:
 inherits:
 - Frame
 - POIFrame
-methods: {}
+methods:
+  GetNumTooltips:
+    flavors:
+    - Mainline
+    status: unimplemented
+  GetTooltipIndex:
+    flavors:
+    - Mainline
+    status: unimplemented

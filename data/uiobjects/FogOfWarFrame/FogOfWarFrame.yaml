@@ -3,7 +3,47 @@ name: FogOfWarFrame
 inherits:
 - Frame
 methods:
+  GetFogOfWarBackgroundAtlas:
+    flavors:
+    - Mainline
+    status: unimplemented
+  GetFogOfWarBackgroundTexture:
+    flavors:
+    - Mainline
+    status: unimplemented
+  GetFogOfWarMaskAtlas:
+    flavors:
+    - Mainline
+    status: unimplemented
+  GetFogOfWarMaskTexture:
+    flavors:
+    - Mainline
+    status: unimplemented
+  GetMaskScalar:
+    flavors:
+    - Mainline
+    status: unimplemented
   GetUiMapID:
+    status: unimplemented
+  SetFogOfWarBackgroundAtlas:
+    flavors:
+    - Mainline
+    status: unimplemented
+  SetFogOfWarBackgroundTexture:
+    flavors:
+    - Mainline
+    status: unimplemented
+  SetFogOfWarMaskAtlas:
+    flavors:
+    - Mainline
+    status: unimplemented
+  SetFogOfWarMaskTexture:
+    flavors:
+    - Mainline
+    status: unimplemented
+  SetMaskScalar:
+    flavors:
+    - Mainline
     status: unimplemented
   SetUiMapID:
     status: unimplemented

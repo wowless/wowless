@@ -14,6 +14,16 @@ inherits:
 - FontInstance
 - LayeredRegion
 methods:
+  CalculateScreenAreaFromCharacterSpan:
+    status: unimplemented
+  CanNonSpaceWrap:
+    status: unimplemented
+  CanWordWrap:
+    status: unimplemented
+  FindCharacterIndexAtCoordinate:
+    status: unimplemented
+  GetFieldSize:
+    status: unimplemented
   GetLineHeight:
     outputs:
     - type: number
@@ -51,6 +61,10 @@ methods:
     - type: number
     status: unimplemented
   IsTruncated:
+    status: unimplemented
+  SetAlphaGradient:
+    status: unimplemented
+  SetFixedColor:
     status: unimplemented
   SetFormattedText:
     status: unimplemented

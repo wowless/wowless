@@ -3,5 +3,27 @@ name: Browser
 inherits:
 - Frame
 methods:
+  ClearFocus:
+    status: unimplemented
+  CopyExternalLink:
+    status: unimplemented
+  DeleteCookies:
+    status: unimplemented
+  NavigateBack:
+    status: unimplemented
+  NavigateForward:
+    status: unimplemented
   NavigateHome:
+    status: unimplemented
+  NavigateReload:
+    status: unimplemented
+  NavigateStop:
+    status: unimplemented
+  OpenExternalLink:
+    status: unimplemented
+  OpenTicket:
+    status: unimplemented
+  SetFocus:
+    status: unimplemented
+  SetZoom:
     status: unimplemented

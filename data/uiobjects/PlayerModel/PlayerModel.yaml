@@ -3,9 +3,21 @@ name: PlayerModel
 inherits:
 - Model
 methods:
+  ApplySpellVisualKit:
+    status: unimplemented
+  CanSetUnit:
+    status: unimplemented
   FreezeAnimation:
     status: unimplemented
   GetDisplayInfo:
+    status: unimplemented
+  GetDoBlend:
+    status: unimplemented
+  GetKeepModelOnHide:
+    status: unimplemented
+  HasAnimation:
+    status: unimplemented
+  PlayAnimKit:
     status: unimplemented
   RefreshCamera:
     status: unimplemented
@@ -13,11 +25,21 @@ methods:
     status: unimplemented
   SetAnimation:
     status: unimplemented
+  SetBarberShopAlternateForm:
+    status: unimplemented
   SetCamDistanceScale:
+    status: unimplemented
+  SetCreature:
+    status: unimplemented
+  SetCustomRace:
     status: unimplemented
   SetDisplayInfo:
     status: unimplemented
   SetDoBlend:
+    status: unimplemented
+  SetItem:
+    status: unimplemented
+  SetItemAppearance:
     status: unimplemented
   SetKeepModelOnHide:
     status: unimplemented
@@ -26,4 +48,10 @@ methods:
   SetRotation:
     status: unimplemented
   SetUnit:
+    status: unimplemented
+  StopAnimKit:
+    status: unimplemented
+  ZeroCachedCenterXY:
+    flavors:
+    - Mainline
     status: unimplemented

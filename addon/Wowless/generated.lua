@@ -21249,7 +21249,13 @@ function G.GeneratedTests()
               assert(next(obj, udk) == nil)
             end,
             methods = function()
-              return tests(__index)
+              local t = tests(__index)
+              for k in pairs(__index) do
+                t[k] = t[k] or function()
+                  error('missing')
+                end
+              end
+              return t
             end,
           }
         end
@@ -21270,6 +21276,12 @@ function G.GeneratedTests()
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
               end,
+              GetDuration = function()
+                return checkCFunc(__index.GetDuration)
+              end,
+              GetElapsed = function()
+                return checkCFunc(__index.GetElapsed)
+              end,
               GetEndDelay = function()
                 return checkCFunc(__index.GetEndDelay)
               end,
@@ -21279,17 +21291,38 @@ function G.GeneratedTests()
               GetObjectType = function()
                 return checkCFunc(__index.GetObjectType)
               end,
+              GetOrder = function()
+                return checkCFunc(__index.GetOrder)
+              end,
               GetParent = function()
                 return checkCFunc(__index.GetParent)
+              end,
+              GetProgress = function()
+                return checkCFunc(__index.GetProgress)
+              end,
+              GetRegionParent = function()
+                return checkCFunc(__index.GetRegionParent)
               end,
               GetScript = function()
                 return checkCFunc(__index.GetScript)
               end,
+              GetSmoothProgress = function()
+                return checkCFunc(__index.GetSmoothProgress)
+              end,
               GetSmoothing = function()
                 return checkCFunc(__index.GetSmoothing)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+              end,
               GetStartDelay = function()
                 return checkCFunc(__index.GetStartDelay)
+              end,
+              GetTarget = function()
+                return checkCFunc(__index.GetTarget)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -21297,14 +21330,38 @@ function G.GeneratedTests()
               HookScript = function()
                 return checkCFunc(__index.HookScript)
               end,
+              IsDelaying = function()
+                return checkCFunc(__index.IsDelaying)
+              end,
+              IsDone = function()
+                return checkCFunc(__index.IsDone)
+              end,
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
               end,
+              IsPaused = function()
+                return checkCFunc(__index.IsPaused)
+              end,
+              IsPlaying = function()
+                return checkCFunc(__index.IsPlaying)
+              end,
+              IsStopped = function()
+                return checkCFunc(__index.IsStopped)
+              end,
+              Pause = function()
+                return checkCFunc(__index.Pause)
+              end,
+              Play = function()
+                return checkCFunc(__index.Play)
+              end,
               Restart = function()
                 return checkCFunc(__index.Restart)
+              end,
+              SetChildKey = function()
+                return checkCFunc(__index.SetChildKey)
               end,
               SetDuration = function()
                 return checkCFunc(__index.SetDuration)
@@ -21321,8 +21378,14 @@ function G.GeneratedTests()
               SetParent = function()
                 return checkCFunc(__index.SetParent)
               end,
+              SetPlaying = function()
+                return checkCFunc(__index.SetPlaying)
+              end,
               SetScript = function()
                 return checkCFunc(__index.SetScript)
+              end,
+              SetSmoothProgress = function()
+                return checkCFunc(__index.SetSmoothProgress)
               end,
               SetSmoothing = function()
                 return checkCFunc(__index.SetSmoothing)
@@ -21332,6 +21395,12 @@ function G.GeneratedTests()
               end,
               SetTarget = function()
                 return checkCFunc(__index.SetTarget)
+              end,
+              SetTargetKey = function()
+                return checkCFunc(__index.SetTargetKey)
+              end,
+              Stop = function()
+                return checkCFunc(__index.Stop)
               end,
             }
           end)
@@ -21348,17 +21417,26 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
               end,
+              ClearFocus = function()
+                return checkCFunc(__index.ClearFocus)
+              end,
               ClearPointByName = function()
                 return checkCFunc(__index.ClearPointByName)
               end,
               ClearPointsOffset = function()
                 return checkCFunc(__index.ClearPointsOffset)
+              end,
+              CopyExternalLink = function()
+                return checkCFunc(__index.CopyExternalLink)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -21375,11 +21453,26 @@ function G.GeneratedTests()
               CreateTexture = function()
                 return checkCFunc(__index.CreateTexture)
               end,
+              DeleteCookies = function()
+                return checkCFunc(__index.DeleteCookies)
+              end,
               DesaturateHierarchy = function()
                 return checkCFunc(__index.DesaturateHierarchy)
               end,
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
+              end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
               end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
@@ -21389,6 +21482,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -21402,20 +21498,41 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -21425,6 +21542,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -21489,11 +21609,24 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -21522,11 +21655,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -21573,8 +21718,29 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
+              NavigateBack = function()
+                return checkCFunc(__index.NavigateBack)
+              end,
+              NavigateForward = function()
+                return checkCFunc(__index.NavigateForward)
+              end,
               NavigateHome = function()
                 return checkCFunc(__index.NavigateHome)
+              end,
+              NavigateReload = function()
+                return checkCFunc(__index.NavigateReload)
+              end,
+              NavigateStop = function()
+                return checkCFunc(__index.NavigateStop)
+              end,
+              OpenExternalLink = function()
+                return checkCFunc(__index.OpenExternalLink)
+              end,
+              OpenTicket = function()
+                return checkCFunc(__index.OpenTicket)
               end,
               Raise = function()
                 return checkCFunc(__index.Raise)
@@ -21590,6 +21756,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -21618,14 +21787,26 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
+              SetFocus = function()
+                return checkCFunc(__index.SetFocus)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -21699,11 +21880,17 @@ function G.GeneratedTests()
               SetWidth = function()
                 return checkCFunc(__index.SetWidth)
               end,
+              SetZoom = function()
+                return checkCFunc(__index.SetZoom)
+              end,
               Show = function()
                 return checkCFunc(__index.Show)
               end,
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
+              end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
               end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
@@ -21728,6 +21915,9 @@ function G.GeneratedTests()
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -21768,8 +21958,20 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
               Enable = function()
                 return checkCFunc(__index.Enable)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
               end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
@@ -21779,6 +21981,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -21792,6 +21997,9 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetButtonState = function()
                 return checkCFunc(__index.GetButtonState)
               end,
@@ -21801,8 +22009,14 @@ function G.GeneratedTests()
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
               end,
               GetDisabledFontObject = function()
                 return checkCFunc(__index.GetDisabledFontObject)
@@ -21810,11 +22024,23 @@ function G.GeneratedTests()
               GetDisabledTexture = function()
                 return checkCFunc(__index.GetDisabledTexture)
               end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
+              end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFontString = function()
                 return checkCFunc(__index.GetFontString)
@@ -21833,6 +22059,9 @@ function G.GeneratedTests()
               end,
               GetHighlightTexture = function()
                 return checkCFunc(__index.GetHighlightTexture)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -21912,6 +22141,13 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetText = function()
                 return checkCFunc(__index.GetText)
               end,
@@ -21926,6 +22162,12 @@ function G.GeneratedTests()
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -21957,11 +22199,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -22011,6 +22265,9 @@ function G.GeneratedTests()
               LockHighlight = function()
                 return checkCFunc(__index.LockHighlight)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -22031,6 +22288,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -22071,6 +22331,9 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetEnabled = function()
                 return checkCFunc(__index.SetEnabled)
               end,
@@ -22080,6 +22343,9 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetFontString = function()
                 return checkCFunc(__index.SetFontString)
               end,
@@ -22088,6 +22354,9 @@ function G.GeneratedTests()
               end,
               SetFormattedText = function()
                 return checkCFunc(__index.SetFormattedText)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -22200,6 +22469,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -22226,6 +22498,9 @@ function G.GeneratedTests()
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -22266,8 +22541,20 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
               Enable = function()
                 return checkCFunc(__index.Enable)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
               end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
@@ -22277,6 +22564,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -22289,6 +22579,9 @@ function G.GeneratedTests()
               end,
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
+              end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
               end,
               GetButtonState = function()
                 return checkCFunc(__index.GetButtonState)
@@ -22305,8 +22598,14 @@ function G.GeneratedTests()
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
               end,
               GetDisabledCheckedTexture = function()
                 return checkCFunc(__index.GetDisabledCheckedTexture)
@@ -22317,11 +22616,23 @@ function G.GeneratedTests()
               GetDisabledTexture = function()
                 return checkCFunc(__index.GetDisabledTexture)
               end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
+              end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFontString = function()
                 return checkCFunc(__index.GetFontString)
@@ -22340,6 +22651,9 @@ function G.GeneratedTests()
               end,
               GetHighlightTexture = function()
                 return checkCFunc(__index.GetHighlightTexture)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -22419,6 +22733,13 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetText = function()
                 return checkCFunc(__index.GetText)
               end,
@@ -22433,6 +22754,12 @@ function G.GeneratedTests()
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -22464,11 +22791,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -22518,6 +22857,9 @@ function G.GeneratedTests()
               LockHighlight = function()
                 return checkCFunc(__index.LockHighlight)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -22538,6 +22880,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -22587,6 +22932,9 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetEnabled = function()
                 return checkCFunc(__index.SetEnabled)
               end,
@@ -22596,6 +22944,9 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetFontString = function()
                 return checkCFunc(__index.SetFontString)
               end,
@@ -22604,6 +22955,9 @@ function G.GeneratedTests()
               end,
               SetFormattedText = function()
                 return checkCFunc(__index.SetFormattedText)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -22716,6 +23070,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -22743,17 +23100,32 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
+              CancelOpenCheckout = function()
+                return checkCFunc(__index.CancelOpenCheckout)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearFocus = function()
+                return checkCFunc(__index.ClearFocus)
               end,
               ClearPointByName = function()
                 return checkCFunc(__index.ClearPointByName)
               end,
               ClearPointsOffset = function()
                 return checkCFunc(__index.ClearPointsOffset)
+              end,
+              CloseCheckout = function()
+                return checkCFunc(__index.CloseCheckout)
+              end,
+              CopyExternalLink = function()
+                return checkCFunc(__index.CopyExternalLink)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -22776,6 +23148,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -22784,6 +23168,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -22797,20 +23184,41 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -22820,6 +23228,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -22884,11 +23295,24 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -22917,11 +23341,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -22968,6 +23404,15 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
+              OpenCheckout = function()
+                return checkCFunc(__index.OpenCheckout)
+              end,
+              OpenExternalLink = function()
+                return checkCFunc(__index.OpenExternalLink)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -22982,6 +23427,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -23010,14 +23458,26 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
+              SetFocus = function()
+                return checkCFunc(__index.SetFocus)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -23091,11 +23551,17 @@ function G.GeneratedTests()
               SetWidth = function()
                 return checkCFunc(__index.SetWidth)
               end,
+              SetZoom = function()
+                return checkCFunc(__index.SetZoom)
+              end,
               Show = function()
                 return checkCFunc(__index.Show)
               end,
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
+              end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
               end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
@@ -23121,11 +23587,26 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              AdvanceTime = function()
+                return checkCFunc(__index.AdvanceTime)
+              end,
+              ApplySpellVisualKit = function()
+                return checkCFunc(__index.ApplySpellVisualKit)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
+              CanSetUnit = function()
+                return checkCFunc(__index.CanSetUnit)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearFog = function()
+                return checkCFunc(__index.ClearFog)
               end,
               ClearModel = function()
                 return checkCFunc(__index.ClearModel)
@@ -23135,6 +23616,9 @@ function G.GeneratedTests()
               end,
               ClearPointsOffset = function()
                 return checkCFunc(__index.ClearPointsOffset)
+              end,
+              ClearTransform = function()
+                return checkCFunc(__index.ClearTransform)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -23157,6 +23641,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -23165,6 +23661,12 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              EquipItem = function()
+                return checkCFunc(__index.EquipItem)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               FreezeAnimation = function()
                 return checkCFunc(__index.FreezeAnimation)
@@ -23181,23 +23683,77 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
+              GetCameraDistance = function()
+                return checkCFunc(__index.GetCameraDistance)
+              end,
+              GetCameraFacing = function()
+                return checkCFunc(__index.GetCameraFacing)
+              end,
+              GetCameraPosition = function()
+                return checkCFunc(__index.GetCameraPosition)
+              end,
+              GetCameraRoll = function()
+                return checkCFunc(__index.GetCameraRoll)
+              end,
+              GetCameraTarget = function()
+                return checkCFunc(__index.GetCameraTarget)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDesaturation = function()
+                return checkCFunc(__index.GetDesaturation)
               end,
               GetDisplayInfo = function()
                 return checkCFunc(__index.GetDisplayInfo)
               end,
+              GetDoBlend = function()
+                return checkCFunc(__index.GetDoBlend)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
+              end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFacing = function()
+                return checkCFunc(__index.GetFacing)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
+              end,
+              GetFogColor = function()
+                return checkCFunc(__index.GetFogColor)
+              end,
+              GetFogFar = function()
+                return checkCFunc(__index.GetFogFar)
+              end,
+              GetFogNear = function()
+                return checkCFunc(__index.GetFogNear)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -23208,20 +23764,38 @@ function G.GeneratedTests()
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
               end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
+              end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
               end,
               GetID = function()
                 return checkCFunc(__index.GetID)
               end,
+              GetKeepModelOnHide = function()
+                return checkCFunc(__index.GetKeepModelOnHide)
+              end,
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
+              end,
+              GetLight = function()
+                return checkCFunc(__index.GetLight)
               end,
               GetMaxResize = function()
                 return checkCFunc(__index.GetMaxResize)
               end,
               GetMinResize = function()
                 return checkCFunc(__index.GetMinResize)
+              end,
+              GetModelAlpha = function()
+                return checkCFunc(__index.GetModelAlpha)
+              end,
+              GetModelDrawLayer = function()
+                return checkCFunc(__index.GetModelDrawLayer)
+              end,
+              GetModelFileID = function()
+                return checkCFunc(__index.GetModelFileID)
               end,
               GetModelScale = function()
                 return checkCFunc(__index.GetModelScale)
@@ -23244,11 +23818,20 @@ function G.GeneratedTests()
               GetParent = function()
                 return checkCFunc(__index.GetParent)
               end,
+              GetPaused = function()
+                return checkCFunc(__index.GetPaused)
+              end,
+              GetPitch = function()
+                return checkCFunc(__index.GetPitch)
+              end,
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
               GetPointByName = function()
                 return checkCFunc(__index.GetPointByName)
+              end,
+              GetPosition = function()
+                return checkCFunc(__index.GetPosition)
               end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
@@ -23262,6 +23845,9 @@ function G.GeneratedTests()
               GetRight = function()
                 return checkCFunc(__index.GetRight)
               end,
+              GetRoll = function()
+                return checkCFunc(__index.GetRoll)
+              end,
               GetScale = function()
                 return checkCFunc(__index.GetScale)
               end,
@@ -23271,14 +23857,48 @@ function G.GeneratedTests()
               GetScript = function()
                 return checkCFunc(__index.GetScript)
               end,
+              GetShadowEffect = function()
+                return checkCFunc(__index.GetShadowEffect)
+              end,
               GetSize = function()
                 return checkCFunc(__index.GetSize)
+              end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
               end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
+              GetViewInsets = function()
+                return checkCFunc(__index.GetViewInsets)
+              end,
+              GetViewTranslation = function()
+                return checkCFunc(__index.GetViewTranslation)
+              end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              GetWorldScale = function()
+                return checkCFunc(__index.GetWorldScale)
+              end,
+              HasAnimation = function()
+                return checkCFunc(__index.HasAnimation)
+              end,
+              HasAttachmentPoints = function()
+                return checkCFunc(__index.HasAttachmentPoints)
+              end,
+              HasCustomCamera = function()
+                return checkCFunc(__index.HasCustomCamera)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -23295,6 +23915,9 @@ function G.GeneratedTests()
               InitializeCamera = function()
                 return checkCFunc(__index.InitializeCamera)
               end,
+              InitializePanCamera = function()
+                return checkCFunc(__index.InitializePanCamera)
+              end,
               IsAnchoringRestricted = function()
                 return checkCFunc(__index.IsAnchoringRestricted)
               end,
@@ -23310,11 +23933,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -23358,8 +23993,20 @@ function G.GeneratedTests()
               IsUserPlaced = function()
                 return checkCFunc(__index.IsUserPlaced)
               end,
+              IsUsingModelCenterToTransform = function()
+                return checkCFunc(__index.IsUsingModelCenterToTransform)
+              end,
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
+              end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
+              MakeCurrentCameraCustom = function()
+                return checkCFunc(__index.MakeCurrentCameraCustom)
+              end,
+              PlayAnimKit = function()
+                return checkCFunc(__index.PlayAnimKit)
               end,
               Raise = function()
                 return checkCFunc(__index.Raise)
@@ -23382,11 +24029,20 @@ function G.GeneratedTests()
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
               end,
+              ReplaceIconTexture = function()
+                return checkCFunc(__index.ReplaceIconTexture)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
+              end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
               end,
               SetAlpha = function()
                 return checkCFunc(__index.SetAlpha)
+              end,
+              SetAnimOffset = function()
+                return checkCFunc(__index.SetAnimOffset)
               end,
               SetAnimation = function()
                 return checkCFunc(__index.SetAnimation)
@@ -23397,8 +24053,29 @@ function G.GeneratedTests()
               SetAttributeNoHandler = function()
                 return checkCFunc(__index.SetAttributeNoHandler)
               end,
+              SetBarberShopAlternateForm = function()
+                return checkCFunc(__index.SetBarberShopAlternateForm)
+              end,
               SetCamDistanceScale = function()
                 return checkCFunc(__index.SetCamDistanceScale)
+              end,
+              SetCamera = function()
+                return checkCFunc(__index.SetCamera)
+              end,
+              SetCameraDistance = function()
+                return checkCFunc(__index.SetCameraDistance)
+              end,
+              SetCameraFacing = function()
+                return checkCFunc(__index.SetCameraFacing)
+              end,
+              SetCameraPosition = function()
+                return checkCFunc(__index.SetCameraPosition)
+              end,
+              SetCameraRoll = function()
+                return checkCFunc(__index.SetCameraRoll)
+              end,
+              SetCameraTarget = function()
+                return checkCFunc(__index.SetCameraTarget)
               end,
               SetClampRectInsets = function()
                 return checkCFunc(__index.SetClampRectInsets)
@@ -23409,8 +24086,23 @@ function G.GeneratedTests()
               SetClipsChildren = function()
                 return checkCFunc(__index.SetClipsChildren)
               end,
+              SetCreature = function()
+                return checkCFunc(__index.SetCreature)
+              end,
+              SetCreatureData = function()
+                return checkCFunc(__index.SetCreatureData)
+              end,
+              SetCustomCamera = function()
+                return checkCFunc(__index.SetCustomCamera)
+              end,
+              SetCustomRace = function()
+                return checkCFunc(__index.SetCustomRace)
+              end,
               SetDepth = function()
                 return checkCFunc(__index.SetDepth)
+              end,
+              SetDesaturation = function()
+                return checkCFunc(__index.SetDesaturation)
               end,
               SetDisplayInfo = function()
                 return checkCFunc(__index.SetDisplayInfo)
@@ -23421,11 +24113,17 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFacing = function()
                 return checkCFunc(__index.SetFacing)
               end,
               SetFacingLeft = function()
                 return checkCFunc(__index.SetFacingLeft)
+              end,
+              SetFadeTimes = function()
+                return checkCFunc(__index.SetFadeTimes)
               end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
@@ -23433,14 +24131,32 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
+              SetFogColor = function()
+                return checkCFunc(__index.SetFogColor)
+              end,
+              SetFogFar = function()
+                return checkCFunc(__index.SetFogFar)
+              end,
+              SetFogNear = function()
+                return checkCFunc(__index.SetFogNear)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
               end,
               SetFrameStrata = function()
                 return checkCFunc(__index.SetFrameStrata)
+              end,
+              SetGlow = function()
+                return checkCFunc(__index.SetGlow)
               end,
               SetHeight = function()
                 return checkCFunc(__index.SetHeight)
@@ -23463,6 +24179,15 @@ function G.GeneratedTests()
               SetIgnoreParentScale = function()
                 return checkCFunc(__index.SetIgnoreParentScale)
               end,
+              SetItem = function()
+                return checkCFunc(__index.SetItem)
+              end,
+              SetItemAppearance = function()
+                return checkCFunc(__index.SetItemAppearance)
+              end,
+              SetJumpInfo = function()
+                return checkCFunc(__index.SetJumpInfo)
+              end,
               SetKeepModelOnHide = function()
                 return checkCFunc(__index.SetKeepModelOnHide)
               end,
@@ -23478,6 +24203,12 @@ function G.GeneratedTests()
               SetModel = function()
                 return checkCFunc(__index.SetModel)
               end,
+              SetModelAlpha = function()
+                return checkCFunc(__index.SetModelAlpha)
+              end,
+              SetModelDrawLayer = function()
+                return checkCFunc(__index.SetModelDrawLayer)
+              end,
               SetModelScale = function()
                 return checkCFunc(__index.SetModelScale)
               end,
@@ -23490,8 +24221,20 @@ function G.GeneratedTests()
               SetMovable = function()
                 return checkCFunc(__index.SetMovable)
               end,
+              SetPanDistance = function()
+                return checkCFunc(__index.SetPanDistance)
+              end,
               SetParent = function()
                 return checkCFunc(__index.SetParent)
+              end,
+              SetParticlesEnabled = function()
+                return checkCFunc(__index.SetParticlesEnabled)
+              end,
+              SetPaused = function()
+                return checkCFunc(__index.SetPaused)
+              end,
+              SetPitch = function()
+                return checkCFunc(__index.SetPitch)
               end,
               SetPoint = function()
                 return checkCFunc(__index.SetPoint)
@@ -23508,6 +24251,9 @@ function G.GeneratedTests()
               SetResizable = function()
                 return checkCFunc(__index.SetResizable)
               end,
+              SetRoll = function()
+                return checkCFunc(__index.SetRoll)
+              end,
               SetRotation = function()
                 return checkCFunc(__index.SetRotation)
               end,
@@ -23517,11 +24263,23 @@ function G.GeneratedTests()
               SetScript = function()
                 return checkCFunc(__index.SetScript)
               end,
+              SetSequence = function()
+                return checkCFunc(__index.SetSequence)
+              end,
+              SetSequenceTime = function()
+                return checkCFunc(__index.SetSequenceTime)
+              end,
+              SetShadowEffect = function()
+                return checkCFunc(__index.SetShadowEffect)
+              end,
               SetShown = function()
                 return checkCFunc(__index.SetShown)
               end,
               SetSize = function()
                 return checkCFunc(__index.SetSize)
+              end,
+              SetSpellVisualKit = function()
+                return checkCFunc(__index.SetSpellVisualKit)
               end,
               SetTargetDistance = function()
                 return checkCFunc(__index.SetTargetDistance)
@@ -23529,11 +24287,20 @@ function G.GeneratedTests()
               SetToplevel = function()
                 return checkCFunc(__index.SetToplevel)
               end,
+              SetTransform = function()
+                return checkCFunc(__index.SetTransform)
+              end,
               SetUnit = function()
                 return checkCFunc(__index.SetUnit)
               end,
               SetUserPlaced = function()
                 return checkCFunc(__index.SetUserPlaced)
+              end,
+              SetViewInsets = function()
+                return checkCFunc(__index.SetViewInsets)
+              end,
+              SetViewTranslation = function()
+                return checkCFunc(__index.SetViewTranslation)
               end,
               SetWidth = function()
                 return checkCFunc(__index.SetWidth)
@@ -23544,20 +24311,45 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartPan = function()
+                return checkCFunc(__index.StartPan)
+              end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
+              StopAnimKit = function()
+                return checkCFunc(__index.StopAnimKit)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
+              StopPan = function()
+                return checkCFunc(__index.StopPan)
+              end,
               TransformCameraSpaceToModelSpace = function()
                 return checkCFunc(__index.TransformCameraSpaceToModelSpace)
+              end,
+              UnequipItems = function()
+                return checkCFunc(__index.UnequipItems)
               end,
               UnregisterAllEvents = function()
                 return checkCFunc(__index.UnregisterAllEvents)
               end,
               UnregisterEvent = function()
                 return checkCFunc(__index.UnregisterEvent)
+              end,
+              UseModelCenterToTransform = function()
+                return checkCFunc(__index.UseModelCenterToTransform)
+              end,
+              ZeroCachedCenterXY = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.ZeroCachedCenterXY))
+                  return
+                end
+                return checkCFunc(__index.ZeroCachedCenterXY)
               end,
             }
           end)
@@ -23570,6 +24362,9 @@ function G.GeneratedTests()
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -23604,6 +24399,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -23612,6 +24419,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -23625,11 +24435,17 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
+              end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
               end,
               GetColorHSV = function()
                 return checkCFunc(__index.GetColorHSV)
@@ -23652,11 +24468,26 @@ function G.GeneratedTests()
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
               end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
+              end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -23666,6 +24497,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -23730,11 +24564,24 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -23763,11 +24610,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -23814,6 +24673,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -23828,6 +24690,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -23874,14 +24739,23 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -23961,6 +24835,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -23987,6 +24864,9 @@ function G.GeneratedTests()
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -24024,6 +24904,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -24032,6 +24924,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -24045,11 +24940,17 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
+              end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
               end,
               GetCooldownDisplayDuration = function()
                 return checkCFunc(__index.GetCooldownDisplayDuration)
@@ -24062,6 +24963,12 @@ function G.GeneratedTests()
               end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetDrawBling = function()
                 return checkCFunc(__index.GetDrawBling)
@@ -24078,8 +24985,17 @@ function G.GeneratedTests()
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -24089,6 +25005,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -24159,11 +25078,24 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -24192,11 +25124,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -24246,6 +25190,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Pause = function()
                 return checkCFunc(__index.Pause)
               end,
@@ -24266,6 +25213,9 @@ function G.GeneratedTests()
               end,
               Resume = function()
                 return checkCFunc(__index.Resume)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -24318,6 +25268,9 @@ function G.GeneratedTests()
               SetDrawEdge = function()
                 return checkCFunc(__index.SetDrawEdge)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetDrawSwipe = function()
                 return checkCFunc(__index.SetDrawSwipe)
               end,
@@ -24333,8 +25286,14 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -24432,6 +25391,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -24456,11 +25418,26 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              AdvanceTime = function()
+                return checkCFunc(__index.AdvanceTime)
+              end,
+              ApplySpellVisualKit = function()
+                return checkCFunc(__index.ApplySpellVisualKit)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
+              CanSetUnit = function()
+                return checkCFunc(__index.CanSetUnit)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearFog = function()
+                return checkCFunc(__index.ClearFog)
               end,
               ClearModel = function()
                 return checkCFunc(__index.ClearModel)
@@ -24470,6 +25447,9 @@ function G.GeneratedTests()
               end,
               ClearPointsOffset = function()
                 return checkCFunc(__index.ClearPointsOffset)
+              end,
+              ClearTransform = function()
+                return checkCFunc(__index.ClearTransform)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -24492,6 +25472,21 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              Dress = function()
+                return checkCFunc(__index.Dress)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -24500,6 +25495,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               FreezeAnimation = function()
                 return checkCFunc(__index.FreezeAnimation)
@@ -24513,8 +25511,29 @@ function G.GeneratedTests()
               GetAttribute = function()
                 return checkCFunc(__index.GetAttribute)
               end,
+              GetAutoDress = function()
+                return checkCFunc(__index.GetAutoDress)
+              end,
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
+              end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
+              GetCameraDistance = function()
+                return checkCFunc(__index.GetCameraDistance)
+              end,
+              GetCameraFacing = function()
+                return checkCFunc(__index.GetCameraFacing)
+              end,
+              GetCameraPosition = function()
+                return checkCFunc(__index.GetCameraPosition)
+              end,
+              GetCameraRoll = function()
+                return checkCFunc(__index.GetCameraRoll)
+              end,
+              GetCameraTarget = function()
+                return checkCFunc(__index.GetCameraTarget)
               end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
@@ -24522,17 +25541,53 @@ function G.GeneratedTests()
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDesaturation = function()
+                return checkCFunc(__index.GetDesaturation)
               end,
               GetDisplayInfo = function()
                 return checkCFunc(__index.GetDisplayInfo)
               end,
+              GetDoBlend = function()
+                return checkCFunc(__index.GetDoBlend)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
+              end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFacing = function()
+                return checkCFunc(__index.GetFacing)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
+              end,
+              GetFogColor = function()
+                return checkCFunc(__index.GetFogColor)
+              end,
+              GetFogFar = function()
+                return checkCFunc(__index.GetFogFar)
+              end,
+              GetFogNear = function()
+                return checkCFunc(__index.GetFogNear)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -24543,20 +25598,52 @@ function G.GeneratedTests()
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
               end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
+              end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
               end,
               GetID = function()
                 return checkCFunc(__index.GetID)
               end,
+              GetItemTransmogInfo = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetItemTransmogInfo))
+                  return
+                end
+                return checkCFunc(__index.GetItemTransmogInfo)
+              end,
+              GetItemTransmogInfoList = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetItemTransmogInfoList))
+                  return
+                end
+                return checkCFunc(__index.GetItemTransmogInfoList)
+              end,
+              GetKeepModelOnHide = function()
+                return checkCFunc(__index.GetKeepModelOnHide)
+              end,
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
+              end,
+              GetLight = function()
+                return checkCFunc(__index.GetLight)
               end,
               GetMaxResize = function()
                 return checkCFunc(__index.GetMaxResize)
               end,
               GetMinResize = function()
                 return checkCFunc(__index.GetMinResize)
+              end,
+              GetModelAlpha = function()
+                return checkCFunc(__index.GetModelAlpha)
+              end,
+              GetModelDrawLayer = function()
+                return checkCFunc(__index.GetModelDrawLayer)
+              end,
+              GetModelFileID = function()
+                return checkCFunc(__index.GetModelFileID)
               end,
               GetModelScale = function()
                 return checkCFunc(__index.GetModelScale)
@@ -24573,17 +25660,33 @@ function G.GeneratedTests()
               GetNumRegions = function()
                 return checkCFunc(__index.GetNumRegions)
               end,
+              GetObeyHideInTransmogFlag = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetObeyHideInTransmogFlag))
+                  return
+                end
+                return checkCFunc(__index.GetObeyHideInTransmogFlag)
+              end,
               GetObjectType = function()
                 return checkCFunc(__index.GetObjectType)
               end,
               GetParent = function()
                 return checkCFunc(__index.GetParent)
               end,
+              GetPaused = function()
+                return checkCFunc(__index.GetPaused)
+              end,
+              GetPitch = function()
+                return checkCFunc(__index.GetPitch)
+              end,
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
               GetPointByName = function()
                 return checkCFunc(__index.GetPointByName)
+              end,
+              GetPosition = function()
+                return checkCFunc(__index.GetPosition)
               end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
@@ -24597,6 +25700,9 @@ function G.GeneratedTests()
               GetRight = function()
                 return checkCFunc(__index.GetRight)
               end,
+              GetRoll = function()
+                return checkCFunc(__index.GetRoll)
+              end,
               GetScale = function()
                 return checkCFunc(__index.GetScale)
               end,
@@ -24606,14 +25712,65 @@ function G.GeneratedTests()
               GetScript = function()
                 return checkCFunc(__index.GetScript)
               end,
+              GetShadowEffect = function()
+                return checkCFunc(__index.GetShadowEffect)
+              end,
+              GetSheathed = function()
+                return checkCFunc(__index.GetSheathed)
+              end,
               GetSize = function()
                 return checkCFunc(__index.GetSize)
+              end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
               end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
+              GetUseTransmogChoices = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetUseTransmogChoices))
+                  return
+                end
+                return checkCFunc(__index.GetUseTransmogChoices)
+              end,
+              GetUseTransmogSkin = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetUseTransmogSkin))
+                  return
+                end
+                return checkCFunc(__index.GetUseTransmogSkin)
+              end,
+              GetViewInsets = function()
+                return checkCFunc(__index.GetViewInsets)
+              end,
+              GetViewTranslation = function()
+                return checkCFunc(__index.GetViewTranslation)
+              end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              GetWorldScale = function()
+                return checkCFunc(__index.GetWorldScale)
+              end,
+              HasAnimation = function()
+                return checkCFunc(__index.HasAnimation)
+              end,
+              HasAttachmentPoints = function()
+                return checkCFunc(__index.HasAttachmentPoints)
+              end,
+              HasCustomCamera = function()
+                return checkCFunc(__index.HasCustomCamera)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -24642,11 +25799,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -24690,8 +25859,20 @@ function G.GeneratedTests()
               IsUserPlaced = function()
                 return checkCFunc(__index.IsUserPlaced)
               end,
+              IsUsingModelCenterToTransform = function()
+                return checkCFunc(__index.IsUsingModelCenterToTransform)
+              end,
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
+              end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
+              MakeCurrentCameraCustom = function()
+                return checkCFunc(__index.MakeCurrentCameraCustom)
+              end,
+              PlayAnimKit = function()
+                return checkCFunc(__index.PlayAnimKit)
               end,
               Raise = function()
                 return checkCFunc(__index.Raise)
@@ -24714,6 +25895,12 @@ function G.GeneratedTests()
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
               end,
+              ReplaceIconTexture = function()
+                return checkCFunc(__index.ReplaceIconTexture)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
+              end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
               end,
@@ -24732,8 +25919,29 @@ function G.GeneratedTests()
               SetAutoDress = function()
                 return checkCFunc(__index.SetAutoDress)
               end,
+              SetBarberShopAlternateForm = function()
+                return checkCFunc(__index.SetBarberShopAlternateForm)
+              end,
               SetCamDistanceScale = function()
                 return checkCFunc(__index.SetCamDistanceScale)
+              end,
+              SetCamera = function()
+                return checkCFunc(__index.SetCamera)
+              end,
+              SetCameraDistance = function()
+                return checkCFunc(__index.SetCameraDistance)
+              end,
+              SetCameraFacing = function()
+                return checkCFunc(__index.SetCameraFacing)
+              end,
+              SetCameraPosition = function()
+                return checkCFunc(__index.SetCameraPosition)
+              end,
+              SetCameraRoll = function()
+                return checkCFunc(__index.SetCameraRoll)
+              end,
+              SetCameraTarget = function()
+                return checkCFunc(__index.SetCameraTarget)
               end,
               SetClampRectInsets = function()
                 return checkCFunc(__index.SetClampRectInsets)
@@ -24744,8 +25952,20 @@ function G.GeneratedTests()
               SetClipsChildren = function()
                 return checkCFunc(__index.SetClipsChildren)
               end,
+              SetCreature = function()
+                return checkCFunc(__index.SetCreature)
+              end,
+              SetCustomCamera = function()
+                return checkCFunc(__index.SetCustomCamera)
+              end,
+              SetCustomRace = function()
+                return checkCFunc(__index.SetCustomRace)
+              end,
               SetDepth = function()
                 return checkCFunc(__index.SetDepth)
+              end,
+              SetDesaturation = function()
+                return checkCFunc(__index.SetDesaturation)
               end,
               SetDisplayInfo = function()
                 return checkCFunc(__index.SetDisplayInfo)
@@ -24756,6 +25976,9 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFacing = function()
                 return checkCFunc(__index.SetFacing)
               end,
@@ -24765,14 +25988,32 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
+              SetFogColor = function()
+                return checkCFunc(__index.SetFogColor)
+              end,
+              SetFogFar = function()
+                return checkCFunc(__index.SetFogFar)
+              end,
+              SetFogNear = function()
+                return checkCFunc(__index.SetFogNear)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
               end,
               SetFrameStrata = function()
                 return checkCFunc(__index.SetFrameStrata)
+              end,
+              SetGlow = function()
+                return checkCFunc(__index.SetGlow)
               end,
               SetHeight = function()
                 return checkCFunc(__index.SetHeight)
@@ -24792,6 +26033,19 @@ function G.GeneratedTests()
               SetIgnoreParentScale = function()
                 return checkCFunc(__index.SetIgnoreParentScale)
               end,
+              SetItem = function()
+                return checkCFunc(__index.SetItem)
+              end,
+              SetItemAppearance = function()
+                return checkCFunc(__index.SetItemAppearance)
+              end,
+              SetItemTransmogInfo = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.SetItemTransmogInfo))
+                  return
+                end
+                return checkCFunc(__index.SetItemTransmogInfo)
+              end,
               SetKeepModelOnHide = function()
                 return checkCFunc(__index.SetKeepModelOnHide)
               end,
@@ -24807,6 +26061,12 @@ function G.GeneratedTests()
               SetModel = function()
                 return checkCFunc(__index.SetModel)
               end,
+              SetModelAlpha = function()
+                return checkCFunc(__index.SetModelAlpha)
+              end,
+              SetModelDrawLayer = function()
+                return checkCFunc(__index.SetModelDrawLayer)
+              end,
               SetModelScale = function()
                 return checkCFunc(__index.SetModelScale)
               end,
@@ -24819,8 +26079,24 @@ function G.GeneratedTests()
               SetMovable = function()
                 return checkCFunc(__index.SetMovable)
               end,
+              SetObeyHideInTransmogFlag = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.SetObeyHideInTransmogFlag))
+                  return
+                end
+                return checkCFunc(__index.SetObeyHideInTransmogFlag)
+              end,
               SetParent = function()
                 return checkCFunc(__index.SetParent)
+              end,
+              SetParticlesEnabled = function()
+                return checkCFunc(__index.SetParticlesEnabled)
+              end,
+              SetPaused = function()
+                return checkCFunc(__index.SetPaused)
+              end,
+              SetPitch = function()
+                return checkCFunc(__index.SetPitch)
               end,
               SetPoint = function()
                 return checkCFunc(__index.SetPoint)
@@ -24837,6 +26113,9 @@ function G.GeneratedTests()
               SetResizable = function()
                 return checkCFunc(__index.SetResizable)
               end,
+              SetRoll = function()
+                return checkCFunc(__index.SetRoll)
+              end,
               SetRotation = function()
                 return checkCFunc(__index.SetRotation)
               end,
@@ -24845,6 +26124,18 @@ function G.GeneratedTests()
               end,
               SetScript = function()
                 return checkCFunc(__index.SetScript)
+              end,
+              SetSequence = function()
+                return checkCFunc(__index.SetSequence)
+              end,
+              SetSequenceTime = function()
+                return checkCFunc(__index.SetSequenceTime)
+              end,
+              SetShadowEffect = function()
+                return checkCFunc(__index.SetShadowEffect)
+              end,
+              SetSheathed = function()
+                return checkCFunc(__index.SetSheathed)
               end,
               SetShown = function()
                 return checkCFunc(__index.SetShown)
@@ -24855,11 +26146,34 @@ function G.GeneratedTests()
               SetToplevel = function()
                 return checkCFunc(__index.SetToplevel)
               end,
+              SetTransform = function()
+                return checkCFunc(__index.SetTransform)
+              end,
               SetUnit = function()
                 return checkCFunc(__index.SetUnit)
               end,
+              SetUseTransmogChoices = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.SetUseTransmogChoices))
+                  return
+                end
+                return checkCFunc(__index.SetUseTransmogChoices)
+              end,
+              SetUseTransmogSkin = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.SetUseTransmogSkin))
+                  return
+                end
+                return checkCFunc(__index.SetUseTransmogSkin)
+              end,
               SetUserPlaced = function()
                 return checkCFunc(__index.SetUserPlaced)
+              end,
+              SetViewInsets = function()
+                return checkCFunc(__index.SetViewInsets)
+              end,
+              SetViewTranslation = function()
+                return checkCFunc(__index.SetViewTranslation)
               end,
               SetWidth = function()
                 return checkCFunc(__index.SetWidth)
@@ -24870,6 +26184,12 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
+              StopAnimKit = function()
+                return checkCFunc(__index.StopAnimKit)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -24879,11 +26199,30 @@ function G.GeneratedTests()
               TransformCameraSpaceToModelSpace = function()
                 return checkCFunc(__index.TransformCameraSpaceToModelSpace)
               end,
+              TryOn = function()
+                return checkCFunc(__index.TryOn)
+              end,
+              Undress = function()
+                return checkCFunc(__index.Undress)
+              end,
+              UndressSlot = function()
+                return checkCFunc(__index.UndressSlot)
+              end,
               UnregisterAllEvents = function()
                 return checkCFunc(__index.UnregisterAllEvents)
               end,
               UnregisterEvent = function()
                 return checkCFunc(__index.UnregisterEvent)
+              end,
+              UseModelCenterToTransform = function()
+                return checkCFunc(__index.UseModelCenterToTransform)
+              end,
+              ZeroCachedCenterXY = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.ZeroCachedCenterXY))
+                  return
+                end
+                return checkCFunc(__index.ZeroCachedCenterXY)
               end,
             }
           end)
@@ -24900,6 +26239,9 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
@@ -24908,6 +26250,9 @@ function G.GeneratedTests()
               end,
               ClearFocus = function()
                 return checkCFunc(__index.ClearFocus)
+              end,
+              ClearHighlightText = function()
+                return checkCFunc(__index.ClearHighlightText)
               end,
               ClearHistory = function()
                 return checkCFunc(__index.ClearHistory)
@@ -24942,8 +26287,20 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
               Enable = function()
                 return checkCFunc(__index.Enable)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
               end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
@@ -24954,8 +26311,14 @@ function G.GeneratedTests()
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
               end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
+              end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
+              end,
+              GetAltArrowKeyMode = function()
+                return checkCFunc(__index.GetAltArrowKeyMode)
               end,
               GetAnimationGroups = function()
                 return checkCFunc(__index.GetAnimationGroups)
@@ -24963,8 +26326,14 @@ function G.GeneratedTests()
               GetAttribute = function()
                 return checkCFunc(__index.GetAttribute)
               end,
+              GetBlinkSpeed = function()
+                return checkCFunc(__index.GetBlinkSpeed)
+              end,
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
+              end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
               end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
@@ -24972,14 +26341,38 @@ function G.GeneratedTests()
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
+              GetCursorPosition = function()
+                return checkCFunc(__index.GetCursorPosition)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDisplayText = function()
+                return checkCFunc(__index.GetDisplayText)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFont = function()
                 return checkCFunc(__index.GetFont)
@@ -24996,8 +26389,14 @@ function G.GeneratedTests()
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
               end,
+              GetHighlightColor = function()
+                return checkCFunc(__index.GetHighlightColor)
+              end,
               GetHistoryLines = function()
                 return checkCFunc(__index.GetHistoryLines)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -25005,8 +26404,17 @@ function G.GeneratedTests()
               GetID = function()
                 return checkCFunc(__index.GetID)
               end,
+              GetIndentedWordWrap = function()
+                return checkCFunc(__index.GetIndentedWordWrap)
+              end,
               GetInputLanguage = function()
                 return checkCFunc(__index.GetInputLanguage)
+              end,
+              GetJustifyH = function()
+                return checkCFunc(__index.GetJustifyH)
+              end,
+              GetJustifyV = function()
+                return checkCFunc(__index.GetJustifyV)
               end,
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
@@ -25028,6 +26436,9 @@ function G.GeneratedTests()
               end,
               GetNumChildren = function()
                 return checkCFunc(__index.GetNumChildren)
+              end,
+              GetNumLetters = function()
+                return checkCFunc(__index.GetNumLetters)
               end,
               GetNumPoints = function()
                 return checkCFunc(__index.GetNumPoints)
@@ -25080,6 +26491,13 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetSpacing = function()
                 return checkCFunc(__index.GetSpacing)
               end,
@@ -25089,11 +26507,26 @@ function G.GeneratedTests()
               GetTextColor = function()
                 return checkCFunc(__index.GetTextColor)
               end,
+              GetTextInsets = function()
+                return checkCFunc(__index.GetTextInsets)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
+              GetUTF8CursorPosition = function()
+                return checkCFunc(__index.GetUTF8CursorPosition)
+              end,
+              GetVisibleTextByteLimit = function()
+                return checkCFunc(__index.GetVisibleTextByteLimit)
+              end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasFocus = function()
                 return checkCFunc(__index.HasFocus)
@@ -25140,11 +26573,26 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsInIMECompositionMode = function()
+                return checkCFunc(__index.IsInIMECompositionMode)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -25167,11 +26615,17 @@ function G.GeneratedTests()
               IsMultiLine = function()
                 return checkCFunc(__index.IsMultiLine)
               end,
+              IsNumeric = function()
+                return checkCFunc(__index.IsNumeric)
+              end,
               IsObjectLoaded = function()
                 return checkCFunc(__index.IsObjectLoaded)
               end,
               IsObjectType = function()
                 return checkCFunc(__index.IsObjectType)
+              end,
+              IsPassword = function()
+                return checkCFunc(__index.IsPassword)
               end,
               IsProtected = function()
                 return checkCFunc(__index.IsProtected)
@@ -25197,6 +26651,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -25211,6 +26668,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -25229,6 +26689,9 @@ function G.GeneratedTests()
               end,
               SetAutoFocus = function()
                 return checkCFunc(__index.SetAutoFocus)
+              end,
+              SetBlinkSpeed = function()
+                return checkCFunc(__index.SetBlinkSpeed)
               end,
               SetClampRectInsets = function()
                 return checkCFunc(__index.SetClampRectInsets)
@@ -25251,6 +26714,9 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetEnabled = function()
                 return checkCFunc(__index.SetEnabled)
               end,
@@ -25259,6 +26725,9 @@ function G.GeneratedTests()
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
+              end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
               end,
               SetFocus = function()
                 return checkCFunc(__index.SetFocus)
@@ -25271,6 +26740,9 @@ function G.GeneratedTests()
               end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -25344,6 +26816,9 @@ function G.GeneratedTests()
               SetParent = function()
                 return checkCFunc(__index.SetParent)
               end,
+              SetPassword = function()
+                return checkCFunc(__index.SetPassword)
+              end,
               SetPoint = function()
                 return checkCFunc(__index.SetPoint)
               end,
@@ -25398,6 +26873,9 @@ function G.GeneratedTests()
               SetUserPlaced = function()
                 return checkCFunc(__index.SetUserPlaced)
               end,
+              SetVisibleTextByteLimit = function()
+                return checkCFunc(__index.SetVisibleTextByteLimit)
+              end,
               SetWidth = function()
                 return checkCFunc(__index.SetWidth)
               end,
@@ -25407,11 +26885,17 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
+              end,
+              ToggleInputLanguage = function()
+                return checkCFunc(__index.ToggleInputLanguage)
               end,
               UnregisterAllEvents = function()
                 return checkCFunc(__index.UnregisterAllEvents)
@@ -25430,6 +26914,9 @@ function G.GeneratedTests()
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -25464,6 +26951,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -25472,6 +26971,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -25485,20 +26987,69 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
+              end,
+              GetFogOfWarBackgroundAtlas = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetFogOfWarBackgroundAtlas))
+                  return
+                end
+                return checkCFunc(__index.GetFogOfWarBackgroundAtlas)
+              end,
+              GetFogOfWarBackgroundTexture = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetFogOfWarBackgroundTexture))
+                  return
+                end
+                return checkCFunc(__index.GetFogOfWarBackgroundTexture)
+              end,
+              GetFogOfWarMaskAtlas = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetFogOfWarMaskAtlas))
+                  return
+                end
+                return checkCFunc(__index.GetFogOfWarMaskAtlas)
+              end,
+              GetFogOfWarMaskTexture = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetFogOfWarMaskTexture))
+                  return
+                end
+                return checkCFunc(__index.GetFogOfWarMaskTexture)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -25509,6 +27060,9 @@ function G.GeneratedTests()
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
               end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
+              end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
               end,
@@ -25517,6 +27071,13 @@ function G.GeneratedTests()
               end,
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
+              end,
+              GetMaskScalar = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetMaskScalar))
+                  return
+                end
+                return checkCFunc(__index.GetMaskScalar)
               end,
               GetMaxResize = function()
                 return checkCFunc(__index.GetMaxResize)
@@ -25572,6 +27133,13 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
@@ -25580,6 +27148,12 @@ function G.GeneratedTests()
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -25608,11 +27182,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -25659,6 +27245,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -25673,6 +27262,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -25701,14 +27293,51 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
+              SetFogOfWarBackgroundAtlas = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.SetFogOfWarBackgroundAtlas))
+                  return
+                end
+                return checkCFunc(__index.SetFogOfWarBackgroundAtlas)
+              end,
+              SetFogOfWarBackgroundTexture = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.SetFogOfWarBackgroundTexture))
+                  return
+                end
+                return checkCFunc(__index.SetFogOfWarBackgroundTexture)
+              end,
+              SetFogOfWarMaskAtlas = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.SetFogOfWarMaskAtlas))
+                  return
+                end
+                return checkCFunc(__index.SetFogOfWarMaskAtlas)
+              end,
+              SetFogOfWarMaskTexture = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.SetFogOfWarMaskTexture))
+                  return
+                end
+                return checkCFunc(__index.SetFogOfWarMaskTexture)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -25733,6 +27362,13 @@ function G.GeneratedTests()
               end,
               SetIgnoreParentScale = function()
                 return checkCFunc(__index.SetIgnoreParentScale)
+              end,
+              SetMaskScalar = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.SetMaskScalar))
+                  return
+                end
+                return checkCFunc(__index.SetMaskScalar)
               end,
               SetMaxResize = function()
                 return checkCFunc(__index.SetMaxResize)
@@ -25791,6 +27427,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -25821,8 +27460,17 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CalculateScreenAreaFromCharacterSpan = function()
+                return checkCFunc(__index.CalculateScreenAreaFromCharacterSpan)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
+              end,
+              CanNonSpaceWrap = function()
+                return checkCFunc(__index.CanNonSpaceWrap)
+              end,
+              CanWordWrap = function()
+                return checkCFunc(__index.CanWordWrap)
               end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
@@ -25835,6 +27483,9 @@ function G.GeneratedTests()
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
+              end,
+              FindCharacterIndexAtCoordinate = function()
+                return checkCFunc(__index.FindCharacterIndexAtCoordinate)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -25857,6 +27508,9 @@ function G.GeneratedTests()
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
               end,
+              GetFieldSize = function()
+                return checkCFunc(__index.GetFieldSize)
+              end,
               GetFont = function()
                 return checkCFunc(__index.GetFont)
               end,
@@ -25865,6 +27519,15 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetIndentedWordWrap = function()
+                return checkCFunc(__index.GetIndentedWordWrap)
+              end,
+              GetJustifyH = function()
+                return checkCFunc(__index.GetJustifyH)
+              end,
+              GetJustifyV = function()
+                return checkCFunc(__index.GetJustifyV)
               end,
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
@@ -25916,6 +27579,13 @@ function G.GeneratedTests()
               end,
               GetSize = function()
                 return checkCFunc(__index.GetSize)
+              end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
               end,
               GetSpacing = function()
                 return checkCFunc(__index.GetSpacing)
@@ -25995,8 +27665,14 @@ function G.GeneratedTests()
               SetAlpha = function()
                 return checkCFunc(__index.SetAlpha)
               end,
+              SetAlphaGradient = function()
+                return checkCFunc(__index.SetAlphaGradient)
+              end,
               SetDrawLayer = function()
                 return checkCFunc(__index.SetDrawLayer)
+              end,
+              SetFixedColor = function()
+                return checkCFunc(__index.SetFixedColor)
               end,
               SetFont = function()
                 return checkCFunc(__index.SetFont)
@@ -26097,6 +27773,9 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
@@ -26130,6 +27809,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -26138,6 +27829,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -26151,20 +27845,41 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -26174,6 +27889,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -26238,11 +27956,24 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -26271,11 +28002,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -26322,6 +28065,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -26336,6 +28082,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -26364,14 +28113,23 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -26451,6 +28209,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -26503,6 +28264,9 @@ function G.GeneratedTests()
               AppendText = function()
                 return checkCFunc(__index.AppendText)
               end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
@@ -26542,6 +28306,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -26550,6 +28326,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               FadeOut = function()
                 return checkCFunc(__index.FadeOut)
@@ -26576,11 +28355,17 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
+              end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
               end,
               GetCustomLineSpacing = function()
                 if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -26592,11 +28377,26 @@ function G.GeneratedTests()
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
               end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
+              end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -26606,6 +28406,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -26682,6 +28485,13 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetSpell = function()
                 return checkCFunc(__index.GetSpell)
               end,
@@ -26693,6 +28503,12 @@ function G.GeneratedTests()
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -26724,11 +28540,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -26781,6 +28609,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               NumLines = function()
                 return checkCFunc(__index.NumLines)
               end,
@@ -26801,6 +28632,9 @@ function G.GeneratedTests()
               end,
               ResetSecondaryCompareItem = function()
                 return checkCFunc(__index.ResetSecondaryCompareItem)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAchievementByID = function()
                 if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
@@ -26980,6 +28814,9 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetEnhancedConduit = function()
                 if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
                   assertEquals('nil', type(__index.SetEnhancedConduit))
@@ -27003,8 +28840,14 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -27277,6 +29120,13 @@ function G.GeneratedTests()
                 end
                 return checkCFunc(__index.SetSocketedRelic)
               end,
+              SetSpecialPvpBrawl = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.SetSpecialPvpBrawl))
+                  return
+                end
+                return checkCFunc(__index.SetSpecialPvpBrawl)
+              end,
               SetSpellBookItem = function()
                 return checkCFunc(__index.SetSpellBookItem)
               end,
@@ -27391,6 +29241,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -27433,6 +29286,9 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
@@ -27469,6 +29325,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -27477,6 +29345,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -27490,20 +29361,59 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFadeDuration = function()
+                return checkCFunc(__index.GetFadeDuration)
+              end,
+              GetFadePower = function()
+                return checkCFunc(__index.GetFadePower)
+              end,
+              GetFading = function()
+                return checkCFunc(__index.GetFading)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
+              end,
+              GetFont = function()
+                return checkCFunc(__index.GetFont)
+              end,
+              GetFontObject = function()
+                return checkCFunc(__index.GetFontObject)
+              end,
+              GetFontStringByID = function()
+                return checkCFunc(__index.GetFontStringByID)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -27514,11 +29424,26 @@ function G.GeneratedTests()
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
               end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
+              end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
               end,
               GetID = function()
                 return checkCFunc(__index.GetID)
+              end,
+              GetIndentedWordWrap = function()
+                return checkCFunc(__index.GetIndentedWordWrap)
+              end,
+              GetInsertMode = function()
+                return checkCFunc(__index.GetInsertMode)
+              end,
+              GetJustifyH = function()
+                return checkCFunc(__index.GetJustifyH)
+              end,
+              GetJustifyV = function()
+                return checkCFunc(__index.GetJustifyV)
               end,
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
@@ -27574,14 +29499,45 @@ function G.GeneratedTests()
               GetScript = function()
                 return checkCFunc(__index.GetScript)
               end,
+              GetShadowColor = function()
+                return checkCFunc(__index.GetShadowColor)
+              end,
+              GetShadowOffset = function()
+                return checkCFunc(__index.GetShadowOffset)
+              end,
               GetSize = function()
                 return checkCFunc(__index.GetSize)
+              end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
+              GetSpacing = function()
+                return checkCFunc(__index.GetSpacing)
+              end,
+              GetTextColor = function()
+                return checkCFunc(__index.GetTextColor)
+              end,
+              GetTimeVisible = function()
+                return checkCFunc(__index.GetTimeVisible)
               end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
+              end,
+              HasMessageByID = function()
+                return checkCFunc(__index.HasMessageByID)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -27610,11 +29566,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -27661,6 +29629,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -27675,6 +29646,12 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              ResetMessageFadeByID = function()
+                return checkCFunc(__index.ResetMessageFadeByID)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -27703,14 +29680,38 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
+              SetFadeDuration = function()
+                return checkCFunc(__index.SetFadeDuration)
+              end,
+              SetFadePower = function()
+                return checkCFunc(__index.SetFadePower)
+              end,
+              SetFading = function()
+                return checkCFunc(__index.SetFading)
+              end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
+              SetFont = function()
+                return checkCFunc(__index.SetFont)
+              end,
+              SetFontObject = function()
+                return checkCFunc(__index.SetFontObject)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -27735,6 +29736,18 @@ function G.GeneratedTests()
               end,
               SetIgnoreParentScale = function()
                 return checkCFunc(__index.SetIgnoreParentScale)
+              end,
+              SetIndentedWordWrap = function()
+                return checkCFunc(__index.SetIndentedWordWrap)
+              end,
+              SetInsertMode = function()
+                return checkCFunc(__index.SetInsertMode)
+              end,
+              SetJustifyH = function()
+                return checkCFunc(__index.SetJustifyH)
+              end,
+              SetJustifyV = function()
+                return checkCFunc(__index.SetJustifyV)
               end,
               SetMaxResize = function()
                 return checkCFunc(__index.SetMaxResize)
@@ -27769,11 +29782,26 @@ function G.GeneratedTests()
               SetScript = function()
                 return checkCFunc(__index.SetScript)
               end,
+              SetShadowColor = function()
+                return checkCFunc(__index.SetShadowColor)
+              end,
+              SetShadowOffset = function()
+                return checkCFunc(__index.SetShadowOffset)
+              end,
               SetShown = function()
                 return checkCFunc(__index.SetShown)
               end,
               SetSize = function()
                 return checkCFunc(__index.SetSize)
+              end,
+              SetSpacing = function()
+                return checkCFunc(__index.SetSpacing)
+              end,
+              SetTextColor = function()
+                return checkCFunc(__index.SetTextColor)
+              end,
+              SetTimeVisible = function()
+                return checkCFunc(__index.SetTimeVisible)
               end,
               SetToplevel = function()
                 return checkCFunc(__index.SetToplevel)
@@ -27789,6 +29817,9 @@ function G.GeneratedTests()
               end,
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
+              end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
               end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
@@ -27814,11 +29845,20 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              AdvanceTime = function()
+                return checkCFunc(__index.AdvanceTime)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearFog = function()
+                return checkCFunc(__index.ClearFog)
               end,
               ClearModel = function()
                 return checkCFunc(__index.ClearModel)
@@ -27828,6 +29868,9 @@ function G.GeneratedTests()
               end,
               ClearPointsOffset = function()
                 return checkCFunc(__index.ClearPointsOffset)
+              end,
+              ClearTransform = function()
+                return checkCFunc(__index.ClearTransform)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -27850,6 +29893,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -27858,6 +29913,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -27871,20 +29929,71 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
+              GetCameraDistance = function()
+                return checkCFunc(__index.GetCameraDistance)
+              end,
+              GetCameraFacing = function()
+                return checkCFunc(__index.GetCameraFacing)
+              end,
+              GetCameraPosition = function()
+                return checkCFunc(__index.GetCameraPosition)
+              end,
+              GetCameraRoll = function()
+                return checkCFunc(__index.GetCameraRoll)
+              end,
+              GetCameraTarget = function()
+                return checkCFunc(__index.GetCameraTarget)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDesaturation = function()
+                return checkCFunc(__index.GetDesaturation)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFacing = function()
+                return checkCFunc(__index.GetFacing)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
+              end,
+              GetFogColor = function()
+                return checkCFunc(__index.GetFogColor)
+              end,
+              GetFogFar = function()
+                return checkCFunc(__index.GetFogFar)
+              end,
+              GetFogNear = function()
+                return checkCFunc(__index.GetFogNear)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -27895,6 +30004,9 @@ function G.GeneratedTests()
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
               end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
+              end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
               end,
@@ -27904,11 +30016,23 @@ function G.GeneratedTests()
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
               end,
+              GetLight = function()
+                return checkCFunc(__index.GetLight)
+              end,
               GetMaxResize = function()
                 return checkCFunc(__index.GetMaxResize)
               end,
               GetMinResize = function()
                 return checkCFunc(__index.GetMinResize)
+              end,
+              GetModelAlpha = function()
+                return checkCFunc(__index.GetModelAlpha)
+              end,
+              GetModelDrawLayer = function()
+                return checkCFunc(__index.GetModelDrawLayer)
+              end,
+              GetModelFileID = function()
+                return checkCFunc(__index.GetModelFileID)
               end,
               GetModelScale = function()
                 return checkCFunc(__index.GetModelScale)
@@ -27931,11 +30055,20 @@ function G.GeneratedTests()
               GetParent = function()
                 return checkCFunc(__index.GetParent)
               end,
+              GetPaused = function()
+                return checkCFunc(__index.GetPaused)
+              end,
+              GetPitch = function()
+                return checkCFunc(__index.GetPitch)
+              end,
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
               GetPointByName = function()
                 return checkCFunc(__index.GetPointByName)
+              end,
+              GetPosition = function()
+                return checkCFunc(__index.GetPosition)
               end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
@@ -27949,6 +30082,9 @@ function G.GeneratedTests()
               GetRight = function()
                 return checkCFunc(__index.GetRight)
               end,
+              GetRoll = function()
+                return checkCFunc(__index.GetRoll)
+              end,
               GetScale = function()
                 return checkCFunc(__index.GetScale)
               end,
@@ -27958,14 +30094,45 @@ function G.GeneratedTests()
               GetScript = function()
                 return checkCFunc(__index.GetScript)
               end,
+              GetShadowEffect = function()
+                return checkCFunc(__index.GetShadowEffect)
+              end,
               GetSize = function()
                 return checkCFunc(__index.GetSize)
+              end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
               end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
+              GetViewInsets = function()
+                return checkCFunc(__index.GetViewInsets)
+              end,
+              GetViewTranslation = function()
+                return checkCFunc(__index.GetViewTranslation)
+              end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              GetWorldScale = function()
+                return checkCFunc(__index.GetWorldScale)
+              end,
+              HasAttachmentPoints = function()
+                return checkCFunc(__index.HasAttachmentPoints)
+              end,
+              HasCustomCamera = function()
+                return checkCFunc(__index.HasCustomCamera)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -27994,11 +30161,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -28042,8 +30221,17 @@ function G.GeneratedTests()
               IsUserPlaced = function()
                 return checkCFunc(__index.IsUserPlaced)
               end,
+              IsUsingModelCenterToTransform = function()
+                return checkCFunc(__index.IsUsingModelCenterToTransform)
+              end,
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
+              end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
+              MakeCurrentCameraCustom = function()
+                return checkCFunc(__index.MakeCurrentCameraCustom)
               end,
               Raise = function()
                 return checkCFunc(__index.Raise)
@@ -28060,6 +30248,12 @@ function G.GeneratedTests()
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
               end,
+              ReplaceIconTexture = function()
+                return checkCFunc(__index.ReplaceIconTexture)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
+              end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
               end,
@@ -28072,6 +30266,24 @@ function G.GeneratedTests()
               SetAttributeNoHandler = function()
                 return checkCFunc(__index.SetAttributeNoHandler)
               end,
+              SetCamera = function()
+                return checkCFunc(__index.SetCamera)
+              end,
+              SetCameraDistance = function()
+                return checkCFunc(__index.SetCameraDistance)
+              end,
+              SetCameraFacing = function()
+                return checkCFunc(__index.SetCameraFacing)
+              end,
+              SetCameraPosition = function()
+                return checkCFunc(__index.SetCameraPosition)
+              end,
+              SetCameraRoll = function()
+                return checkCFunc(__index.SetCameraRoll)
+              end,
+              SetCameraTarget = function()
+                return checkCFunc(__index.SetCameraTarget)
+              end,
               SetClampRectInsets = function()
                 return checkCFunc(__index.SetClampRectInsets)
               end,
@@ -28081,11 +30293,20 @@ function G.GeneratedTests()
               SetClipsChildren = function()
                 return checkCFunc(__index.SetClipsChildren)
               end,
+              SetCustomCamera = function()
+                return checkCFunc(__index.SetCustomCamera)
+              end,
               SetDepth = function()
                 return checkCFunc(__index.SetDepth)
               end,
+              SetDesaturation = function()
+                return checkCFunc(__index.SetDesaturation)
+              end,
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
+              end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
               end,
               SetFacing = function()
                 return checkCFunc(__index.SetFacing)
@@ -28096,14 +30317,32 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
+              SetFogColor = function()
+                return checkCFunc(__index.SetFogColor)
+              end,
+              SetFogFar = function()
+                return checkCFunc(__index.SetFogFar)
+              end,
+              SetFogNear = function()
+                return checkCFunc(__index.SetFogNear)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
               end,
               SetFrameStrata = function()
                 return checkCFunc(__index.SetFrameStrata)
+              end,
+              SetGlow = function()
+                return checkCFunc(__index.SetGlow)
               end,
               SetHeight = function()
                 return checkCFunc(__index.SetHeight)
@@ -28135,6 +30374,12 @@ function G.GeneratedTests()
               SetModel = function()
                 return checkCFunc(__index.SetModel)
               end,
+              SetModelAlpha = function()
+                return checkCFunc(__index.SetModelAlpha)
+              end,
+              SetModelDrawLayer = function()
+                return checkCFunc(__index.SetModelDrawLayer)
+              end,
               SetModelScale = function()
                 return checkCFunc(__index.SetModelScale)
               end,
@@ -28150,6 +30395,15 @@ function G.GeneratedTests()
               SetParent = function()
                 return checkCFunc(__index.SetParent)
               end,
+              SetParticlesEnabled = function()
+                return checkCFunc(__index.SetParticlesEnabled)
+              end,
+              SetPaused = function()
+                return checkCFunc(__index.SetPaused)
+              end,
+              SetPitch = function()
+                return checkCFunc(__index.SetPitch)
+              end,
               SetPoint = function()
                 return checkCFunc(__index.SetPoint)
               end,
@@ -28162,11 +30416,23 @@ function G.GeneratedTests()
               SetResizable = function()
                 return checkCFunc(__index.SetResizable)
               end,
+              SetRoll = function()
+                return checkCFunc(__index.SetRoll)
+              end,
               SetScale = function()
                 return checkCFunc(__index.SetScale)
               end,
               SetScript = function()
                 return checkCFunc(__index.SetScript)
+              end,
+              SetSequence = function()
+                return checkCFunc(__index.SetSequence)
+              end,
+              SetSequenceTime = function()
+                return checkCFunc(__index.SetSequenceTime)
+              end,
+              SetShadowEffect = function()
+                return checkCFunc(__index.SetShadowEffect)
               end,
               SetShown = function()
                 return checkCFunc(__index.SetShown)
@@ -28177,8 +30443,17 @@ function G.GeneratedTests()
               SetToplevel = function()
                 return checkCFunc(__index.SetToplevel)
               end,
+              SetTransform = function()
+                return checkCFunc(__index.SetTransform)
+              end,
               SetUserPlaced = function()
                 return checkCFunc(__index.SetUserPlaced)
+              end,
+              SetViewInsets = function()
+                return checkCFunc(__index.SetViewInsets)
+              end,
+              SetViewTranslation = function()
+                return checkCFunc(__index.SetViewTranslation)
               end,
               SetWidth = function()
                 return checkCFunc(__index.SetWidth)
@@ -28188,6 +30463,9 @@ function G.GeneratedTests()
               end,
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
+              end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
               end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
@@ -28204,6 +30482,9 @@ function G.GeneratedTests()
               UnregisterEvent = function()
                 return checkCFunc(__index.UnregisterEvent)
               end,
+              UseModelCenterToTransform = function()
+                return checkCFunc(__index.UseModelCenterToTransform)
+              end,
             }
           end)
         end,
@@ -28215,6 +30496,9 @@ function G.GeneratedTests()
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -28255,6 +30539,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -28263,6 +30559,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetActorAtIndex = function()
                 return checkCFunc(__index.GetActorAtIndex)
@@ -28278,6 +30577,9 @@ function G.GeneratedTests()
               end,
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
+              end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
               end,
               GetCameraFarClip = function()
                 return checkCFunc(__index.GetCameraFarClip)
@@ -28306,8 +30608,17 @@ function G.GeneratedTests()
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetDrawLayer = function()
                 return checkCFunc(__index.GetDrawLayer)
@@ -28315,8 +30626,17 @@ function G.GeneratedTests()
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFogColor = function()
                 return checkCFunc(__index.GetFogColor)
@@ -28335,6 +30655,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -28417,6 +30740,13 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
@@ -28428,6 +30758,12 @@ function G.GeneratedTests()
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -28456,11 +30792,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsLightVisible = function()
                 return checkCFunc(__index.IsLightVisible)
@@ -28510,6 +30858,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Project3DPointTo2D = function()
                 return checkCFunc(__index.Project3DPointTo2D)
               end,
@@ -28527,6 +30878,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -28583,11 +30937,17 @@ function G.GeneratedTests()
               SetDrawLayer = function()
                 return checkCFunc(__index.SetDrawLayer)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
+              end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
               end,
               SetFogColor = function()
                 return checkCFunc(__index.SetFogColor)
@@ -28600,6 +30960,9 @@ function G.GeneratedTests()
               end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -28710,6 +31073,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -28736,6 +31102,9 @@ function G.GeneratedTests()
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -28770,6 +31139,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -28781,6 +31162,9 @@ function G.GeneratedTests()
               end,
               EnableSubtitles = function()
                 return checkCFunc(__index.EnableSubtitles)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -28794,20 +31178,41 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -28817,6 +31222,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -28881,11 +31289,24 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -28914,11 +31335,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -28965,6 +31398,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -28979,6 +31415,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -29007,14 +31446,23 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -29097,6 +31545,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -29124,6 +31575,12 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              ApplySnapshot = function()
+                return checkCFunc(__index.ApplySnapshot)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
@@ -29157,6 +31614,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -29165,6 +31634,12 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
+              end,
+              Flush = function()
+                return checkCFunc(__index.Flush)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -29178,20 +31653,41 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -29201,6 +31697,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -29213,6 +31712,9 @@ function G.GeneratedTests()
               end,
               GetMaxResize = function()
                 return checkCFunc(__index.GetMaxResize)
+              end,
+              GetMaxSnapshots = function()
+                return checkCFunc(__index.GetMaxSnapshots)
               end,
               GetMinResize = function()
                 return checkCFunc(__index.GetMinResize)
@@ -29265,11 +31767,24 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -29298,11 +31813,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -29340,6 +31867,9 @@ function G.GeneratedTests()
               IsShown = function()
                 return checkCFunc(__index.IsShown)
               end,
+              IsSnapshotValid = function()
+                return checkCFunc(__index.IsSnapshotValid)
+              end,
               IsToplevel = function()
                 return checkCFunc(__index.IsToplevel)
               end,
@@ -29348,6 +31878,9 @@ function G.GeneratedTests()
               end,
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
+              end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
               end,
               Raise = function()
                 return checkCFunc(__index.Raise)
@@ -29363,6 +31896,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -29391,14 +31927,23 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -29426,6 +31971,9 @@ function G.GeneratedTests()
               end,
               SetMaxResize = function()
                 return checkCFunc(__index.SetMaxResize)
+              end,
+              SetMaxSnapshots = function()
+                return checkCFunc(__index.SetMaxSnapshots)
               end,
               SetMinResize = function()
                 return checkCFunc(__index.SetMinResize)
@@ -29478,17 +32026,26 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
               StopMovingOrSizing = function()
                 return checkCFunc(__index.StopMovingOrSizing)
               end,
+              TakeSnapshot = function()
+                return checkCFunc(__index.TakeSnapshot)
+              end,
               UnregisterAllEvents = function()
                 return checkCFunc(__index.UnregisterAllEvents)
               end,
               UnregisterEvent = function()
                 return checkCFunc(__index.UnregisterEvent)
+              end,
+              UsesNPOT = function()
+                return checkCFunc(__index.UsesNPOT)
               end,
             }
           end)
@@ -29511,11 +32068,26 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              AdvanceTime = function()
+                return checkCFunc(__index.AdvanceTime)
+              end,
+              ApplySpellVisualKit = function()
+                return checkCFunc(__index.ApplySpellVisualKit)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
+              CanSetUnit = function()
+                return checkCFunc(__index.CanSetUnit)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearFog = function()
+                return checkCFunc(__index.ClearFog)
               end,
               ClearModel = function()
                 return checkCFunc(__index.ClearModel)
@@ -29525,6 +32097,9 @@ function G.GeneratedTests()
               end,
               ClearPointsOffset = function()
                 return checkCFunc(__index.ClearPointsOffset)
+              end,
+              ClearTransform = function()
+                return checkCFunc(__index.ClearTransform)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -29547,6 +32122,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -29555,6 +32142,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               FreezeAnimation = function()
                 return checkCFunc(__index.FreezeAnimation)
@@ -29571,23 +32161,77 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
+              GetCameraDistance = function()
+                return checkCFunc(__index.GetCameraDistance)
+              end,
+              GetCameraFacing = function()
+                return checkCFunc(__index.GetCameraFacing)
+              end,
+              GetCameraPosition = function()
+                return checkCFunc(__index.GetCameraPosition)
+              end,
+              GetCameraRoll = function()
+                return checkCFunc(__index.GetCameraRoll)
+              end,
+              GetCameraTarget = function()
+                return checkCFunc(__index.GetCameraTarget)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDesaturation = function()
+                return checkCFunc(__index.GetDesaturation)
               end,
               GetDisplayInfo = function()
                 return checkCFunc(__index.GetDisplayInfo)
               end,
+              GetDoBlend = function()
+                return checkCFunc(__index.GetDoBlend)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
+              end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFacing = function()
+                return checkCFunc(__index.GetFacing)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
+              end,
+              GetFogColor = function()
+                return checkCFunc(__index.GetFogColor)
+              end,
+              GetFogFar = function()
+                return checkCFunc(__index.GetFogFar)
+              end,
+              GetFogNear = function()
+                return checkCFunc(__index.GetFogNear)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -29598,20 +32242,38 @@ function G.GeneratedTests()
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
               end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
+              end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
               end,
               GetID = function()
                 return checkCFunc(__index.GetID)
               end,
+              GetKeepModelOnHide = function()
+                return checkCFunc(__index.GetKeepModelOnHide)
+              end,
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
+              end,
+              GetLight = function()
+                return checkCFunc(__index.GetLight)
               end,
               GetMaxResize = function()
                 return checkCFunc(__index.GetMaxResize)
               end,
               GetMinResize = function()
                 return checkCFunc(__index.GetMinResize)
+              end,
+              GetModelAlpha = function()
+                return checkCFunc(__index.GetModelAlpha)
+              end,
+              GetModelDrawLayer = function()
+                return checkCFunc(__index.GetModelDrawLayer)
+              end,
+              GetModelFileID = function()
+                return checkCFunc(__index.GetModelFileID)
               end,
               GetModelScale = function()
                 return checkCFunc(__index.GetModelScale)
@@ -29634,11 +32296,20 @@ function G.GeneratedTests()
               GetParent = function()
                 return checkCFunc(__index.GetParent)
               end,
+              GetPaused = function()
+                return checkCFunc(__index.GetPaused)
+              end,
+              GetPitch = function()
+                return checkCFunc(__index.GetPitch)
+              end,
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
               GetPointByName = function()
                 return checkCFunc(__index.GetPointByName)
+              end,
+              GetPosition = function()
+                return checkCFunc(__index.GetPosition)
               end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
@@ -29652,6 +32323,9 @@ function G.GeneratedTests()
               GetRight = function()
                 return checkCFunc(__index.GetRight)
               end,
+              GetRoll = function()
+                return checkCFunc(__index.GetRoll)
+              end,
               GetScale = function()
                 return checkCFunc(__index.GetScale)
               end,
@@ -29661,14 +32335,48 @@ function G.GeneratedTests()
               GetScript = function()
                 return checkCFunc(__index.GetScript)
               end,
+              GetShadowEffect = function()
+                return checkCFunc(__index.GetShadowEffect)
+              end,
               GetSize = function()
                 return checkCFunc(__index.GetSize)
+              end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
               end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
+              GetViewInsets = function()
+                return checkCFunc(__index.GetViewInsets)
+              end,
+              GetViewTranslation = function()
+                return checkCFunc(__index.GetViewTranslation)
+              end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              GetWorldScale = function()
+                return checkCFunc(__index.GetWorldScale)
+              end,
+              HasAnimation = function()
+                return checkCFunc(__index.HasAnimation)
+              end,
+              HasAttachmentPoints = function()
+                return checkCFunc(__index.HasAttachmentPoints)
+              end,
+              HasCustomCamera = function()
+                return checkCFunc(__index.HasCustomCamera)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -29697,11 +32405,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -29745,8 +32465,20 @@ function G.GeneratedTests()
               IsUserPlaced = function()
                 return checkCFunc(__index.IsUserPlaced)
               end,
+              IsUsingModelCenterToTransform = function()
+                return checkCFunc(__index.IsUsingModelCenterToTransform)
+              end,
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
+              end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
+              MakeCurrentCameraCustom = function()
+                return checkCFunc(__index.MakeCurrentCameraCustom)
+              end,
+              PlayAnimKit = function()
+                return checkCFunc(__index.PlayAnimKit)
               end,
               Raise = function()
                 return checkCFunc(__index.Raise)
@@ -29769,6 +32501,12 @@ function G.GeneratedTests()
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
               end,
+              ReplaceIconTexture = function()
+                return checkCFunc(__index.ReplaceIconTexture)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
+              end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
               end,
@@ -29784,8 +32522,29 @@ function G.GeneratedTests()
               SetAttributeNoHandler = function()
                 return checkCFunc(__index.SetAttributeNoHandler)
               end,
+              SetBarberShopAlternateForm = function()
+                return checkCFunc(__index.SetBarberShopAlternateForm)
+              end,
               SetCamDistanceScale = function()
                 return checkCFunc(__index.SetCamDistanceScale)
+              end,
+              SetCamera = function()
+                return checkCFunc(__index.SetCamera)
+              end,
+              SetCameraDistance = function()
+                return checkCFunc(__index.SetCameraDistance)
+              end,
+              SetCameraFacing = function()
+                return checkCFunc(__index.SetCameraFacing)
+              end,
+              SetCameraPosition = function()
+                return checkCFunc(__index.SetCameraPosition)
+              end,
+              SetCameraRoll = function()
+                return checkCFunc(__index.SetCameraRoll)
+              end,
+              SetCameraTarget = function()
+                return checkCFunc(__index.SetCameraTarget)
               end,
               SetClampRectInsets = function()
                 return checkCFunc(__index.SetClampRectInsets)
@@ -29796,8 +32555,20 @@ function G.GeneratedTests()
               SetClipsChildren = function()
                 return checkCFunc(__index.SetClipsChildren)
               end,
+              SetCreature = function()
+                return checkCFunc(__index.SetCreature)
+              end,
+              SetCustomCamera = function()
+                return checkCFunc(__index.SetCustomCamera)
+              end,
+              SetCustomRace = function()
+                return checkCFunc(__index.SetCustomRace)
+              end,
               SetDepth = function()
                 return checkCFunc(__index.SetDepth)
+              end,
+              SetDesaturation = function()
+                return checkCFunc(__index.SetDesaturation)
               end,
               SetDisplayInfo = function()
                 return checkCFunc(__index.SetDisplayInfo)
@@ -29808,6 +32579,9 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFacing = function()
                 return checkCFunc(__index.SetFacing)
               end,
@@ -29817,14 +32591,32 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
+              SetFogColor = function()
+                return checkCFunc(__index.SetFogColor)
+              end,
+              SetFogFar = function()
+                return checkCFunc(__index.SetFogFar)
+              end,
+              SetFogNear = function()
+                return checkCFunc(__index.SetFogNear)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
               end,
               SetFrameStrata = function()
                 return checkCFunc(__index.SetFrameStrata)
+              end,
+              SetGlow = function()
+                return checkCFunc(__index.SetGlow)
               end,
               SetHeight = function()
                 return checkCFunc(__index.SetHeight)
@@ -29844,6 +32636,12 @@ function G.GeneratedTests()
               SetIgnoreParentScale = function()
                 return checkCFunc(__index.SetIgnoreParentScale)
               end,
+              SetItem = function()
+                return checkCFunc(__index.SetItem)
+              end,
+              SetItemAppearance = function()
+                return checkCFunc(__index.SetItemAppearance)
+              end,
               SetKeepModelOnHide = function()
                 return checkCFunc(__index.SetKeepModelOnHide)
               end,
@@ -29858,6 +32656,12 @@ function G.GeneratedTests()
               end,
               SetModel = function()
                 return checkCFunc(__index.SetModel)
+              end,
+              SetModelAlpha = function()
+                return checkCFunc(__index.SetModelAlpha)
+              end,
+              SetModelDrawLayer = function()
+                return checkCFunc(__index.SetModelDrawLayer)
               end,
               SetModelScale = function()
                 return checkCFunc(__index.SetModelScale)
@@ -29874,6 +32678,15 @@ function G.GeneratedTests()
               SetParent = function()
                 return checkCFunc(__index.SetParent)
               end,
+              SetParticlesEnabled = function()
+                return checkCFunc(__index.SetParticlesEnabled)
+              end,
+              SetPaused = function()
+                return checkCFunc(__index.SetPaused)
+              end,
+              SetPitch = function()
+                return checkCFunc(__index.SetPitch)
+              end,
               SetPoint = function()
                 return checkCFunc(__index.SetPoint)
               end,
@@ -29889,6 +32702,9 @@ function G.GeneratedTests()
               SetResizable = function()
                 return checkCFunc(__index.SetResizable)
               end,
+              SetRoll = function()
+                return checkCFunc(__index.SetRoll)
+              end,
               SetRotation = function()
                 return checkCFunc(__index.SetRotation)
               end,
@@ -29897,6 +32713,15 @@ function G.GeneratedTests()
               end,
               SetScript = function()
                 return checkCFunc(__index.SetScript)
+              end,
+              SetSequence = function()
+                return checkCFunc(__index.SetSequence)
+              end,
+              SetSequenceTime = function()
+                return checkCFunc(__index.SetSequenceTime)
+              end,
+              SetShadowEffect = function()
+                return checkCFunc(__index.SetShadowEffect)
               end,
               SetShown = function()
                 return checkCFunc(__index.SetShown)
@@ -29907,11 +32732,20 @@ function G.GeneratedTests()
               SetToplevel = function()
                 return checkCFunc(__index.SetToplevel)
               end,
+              SetTransform = function()
+                return checkCFunc(__index.SetTransform)
+              end,
               SetUnit = function()
                 return checkCFunc(__index.SetUnit)
               end,
               SetUserPlaced = function()
                 return checkCFunc(__index.SetUserPlaced)
+              end,
+              SetViewInsets = function()
+                return checkCFunc(__index.SetViewInsets)
+              end,
+              SetViewTranslation = function()
+                return checkCFunc(__index.SetViewTranslation)
               end,
               SetWidth = function()
                 return checkCFunc(__index.SetWidth)
@@ -29921,6 +32755,12 @@ function G.GeneratedTests()
               end,
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
+              end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
+              StopAnimKit = function()
+                return checkCFunc(__index.StopAnimKit)
               end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
@@ -29937,6 +32777,16 @@ function G.GeneratedTests()
               UnregisterEvent = function()
                 return checkCFunc(__index.UnregisterEvent)
               end,
+              UseModelCenterToTransform = function()
+                return checkCFunc(__index.UseModelCenterToTransform)
+              end,
+              ZeroCachedCenterXY = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.ZeroCachedCenterXY))
+                  return
+                end
+                return checkCFunc(__index.ZeroCachedCenterXY)
+              end,
             }
           end)
         end,
@@ -29952,6 +32802,9 @@ function G.GeneratedTests()
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -29986,17 +32839,44 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              DrawAll = function()
+                return checkCFunc(__index.DrawAll)
+              end,
+              DrawBlob = function()
+                return checkCFunc(__index.DrawBlob)
+              end,
               DrawNone = function()
                 return checkCFunc(__index.DrawNone)
               end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
+              end,
+              EnableMerging = function()
+                return checkCFunc(__index.EnableMerging)
               end,
               EnableMouse = function()
                 return checkCFunc(__index.EnableMouse)
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              EnableSmoothing = function()
+                return checkCFunc(__index.EnableSmoothing)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -30010,20 +32890,41 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -30034,6 +32935,9 @@ function G.GeneratedTests()
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
               end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
+              end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
               end,
@@ -30042,6 +32946,9 @@ function G.GeneratedTests()
               end,
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
+              end,
+              GetMapID = function()
+                return checkCFunc(__index.GetMapID)
               end,
               GetMaxResize = function()
                 return checkCFunc(__index.GetMaxResize)
@@ -30060,6 +32967,13 @@ function G.GeneratedTests()
               end,
               GetNumRegions = function()
                 return checkCFunc(__index.GetNumRegions)
+              end,
+              GetNumTooltips = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetNumTooltips))
+                  return
+                end
+                return checkCFunc(__index.GetNumTooltips)
               end,
               GetObjectType = function()
                 return checkCFunc(__index.GetObjectType)
@@ -30097,11 +33011,31 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
+              GetTooltipIndex = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetTooltipIndex))
+                  return
+                end
+                return checkCFunc(__index.GetTooltipIndex)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -30130,11 +33064,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -30181,6 +33127,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -30195,6 +33144,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -30232,6 +33184,9 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFillAlpha = function()
                 return checkCFunc(__index.SetFillAlpha)
               end,
@@ -30244,8 +33199,14 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -30277,6 +33238,9 @@ function G.GeneratedTests()
               SetMaxResize = function()
                 return checkCFunc(__index.SetMaxResize)
               end,
+              SetMergeThreshold = function()
+                return checkCFunc(__index.SetMergeThreshold)
+              end,
               SetMinResize = function()
                 return checkCFunc(__index.SetMinResize)
               end,
@@ -30288,6 +33252,9 @@ function G.GeneratedTests()
               end,
               SetMovable = function()
                 return checkCFunc(__index.SetMovable)
+              end,
+              SetNumSplinePoints = function()
+                return checkCFunc(__index.SetNumSplinePoints)
               end,
               SetParent = function()
                 return checkCFunc(__index.SetParent)
@@ -30328,6 +33295,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -30339,6 +33309,9 @@ function G.GeneratedTests()
               end,
               UnregisterEvent = function()
                 return checkCFunc(__index.UnregisterEvent)
+              end,
+              UpdateMouseOverTooltip = function()
+                return checkCFunc(__index.UpdateMouseOverTooltip)
               end,
             }
           end)
@@ -30365,6 +33338,9 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
@@ -30398,17 +33374,44 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              DrawAll = function()
+                return checkCFunc(__index.DrawAll)
+              end,
+              DrawBlob = function()
+                return checkCFunc(__index.DrawBlob)
+              end,
               DrawNone = function()
                 return checkCFunc(__index.DrawNone)
               end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
+              end,
+              EnableMerging = function()
+                return checkCFunc(__index.EnableMerging)
               end,
               EnableMouse = function()
                 return checkCFunc(__index.EnableMouse)
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              EnableSmoothing = function()
+                return checkCFunc(__index.EnableSmoothing)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -30422,20 +33425,41 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -30446,6 +33470,9 @@ function G.GeneratedTests()
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
               end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
+              end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
               end,
@@ -30454,6 +33481,9 @@ function G.GeneratedTests()
               end,
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
+              end,
+              GetMapID = function()
+                return checkCFunc(__index.GetMapID)
               end,
               GetMaxResize = function()
                 return checkCFunc(__index.GetMaxResize)
@@ -30503,17 +33533,37 @@ function G.GeneratedTests()
               GetScaledRect = function()
                 return checkCFunc(__index.GetScaledRect)
               end,
+              GetScenarioTooltipText = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetScenarioTooltipText))
+                  return
+                end
+                return checkCFunc(__index.GetScenarioTooltipText)
+              end,
               GetScript = function()
                 return checkCFunc(__index.GetScript)
               end,
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -30542,11 +33592,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -30593,6 +33655,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -30607,6 +33672,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -30644,6 +33712,9 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFillAlpha = function()
                 return checkCFunc(__index.SetFillAlpha)
               end,
@@ -30656,8 +33727,14 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -30689,6 +33766,9 @@ function G.GeneratedTests()
               SetMaxResize = function()
                 return checkCFunc(__index.SetMaxResize)
               end,
+              SetMergeThreshold = function()
+                return checkCFunc(__index.SetMergeThreshold)
+              end,
               SetMinResize = function()
                 return checkCFunc(__index.SetMinResize)
               end,
@@ -30700,6 +33780,9 @@ function G.GeneratedTests()
               end,
               SetMovable = function()
                 return checkCFunc(__index.SetMovable)
+              end,
+              SetNumSplinePoints = function()
+                return checkCFunc(__index.SetNumSplinePoints)
               end,
               SetParent = function()
                 return checkCFunc(__index.SetParent)
@@ -30740,6 +33823,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -30751,6 +33837,9 @@ function G.GeneratedTests()
               end,
               UnregisterEvent = function()
                 return checkCFunc(__index.UnregisterEvent)
+              end,
+              UpdateMouseOverTooltip = function()
+                return checkCFunc(__index.UpdateMouseOverTooltip)
               end,
             }
           end)
@@ -30766,6 +33855,9 @@ function G.GeneratedTests()
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -30800,6 +33892,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -30808,6 +33912,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -30821,20 +33928,41 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -30844,6 +33972,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHorizontalScroll = function()
                 return checkCFunc(__index.GetHorizontalScroll)
@@ -30917,6 +34048,13 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
@@ -30928,6 +34066,12 @@ function G.GeneratedTests()
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -30956,11 +34100,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -31007,6 +34163,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -31021,6 +34180,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -31049,14 +34211,23 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -31145,6 +34316,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -31171,6 +34345,9 @@ function G.GeneratedTests()
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -31205,6 +34382,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -31213,6 +34402,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -31226,11 +34418,17 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
+              end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
               end,
               GetContentHeight = function()
                 return checkCFunc(__index.GetContentHeight)
@@ -31238,11 +34436,26 @@ function G.GeneratedTests()
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
               end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
+              end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFont = function()
                 return checkCFunc(__index.GetFont)
@@ -31259,11 +34472,26 @@ function G.GeneratedTests()
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
               end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
+              end,
+              GetHyperlinkFormat = function()
+                return checkCFunc(__index.GetHyperlinkFormat)
+              end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
               end,
               GetID = function()
                 return checkCFunc(__index.GetID)
+              end,
+              GetIndentedWordWrap = function()
+                return checkCFunc(__index.GetIndentedWordWrap)
+              end,
+              GetJustifyH = function()
+                return checkCFunc(__index.GetJustifyH)
+              end,
+              GetJustifyV = function()
+                return checkCFunc(__index.GetJustifyV)
               end,
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
@@ -31328,17 +34556,33 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetSpacing = function()
                 return checkCFunc(__index.GetSpacing)
               end,
               GetTextColor = function()
                 return checkCFunc(__index.GetTextColor)
               end,
+              GetTextData = function()
+                return checkCFunc(__index.GetTextData)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -31367,11 +34611,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -31418,6 +34674,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -31432,6 +34691,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -31460,11 +34722,17 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
+              end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
               end,
               SetFont = function()
                 return checkCFunc(__index.SetFont)
@@ -31474,6 +34742,9 @@ function G.GeneratedTests()
               end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -31486,6 +34757,9 @@ function G.GeneratedTests()
               end,
               SetHitRectInsets = function()
                 return checkCFunc(__index.SetHitRectInsets)
+              end,
+              SetHyperlinkFormat = function()
+                return checkCFunc(__index.SetHyperlinkFormat)
               end,
               SetHyperlinksEnabled = function()
                 return checkCFunc(__index.SetHyperlinksEnabled)
@@ -31577,6 +34851,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -31600,6 +34877,9 @@ function G.GeneratedTests()
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -31637,8 +34917,20 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
               Enable = function()
                 return checkCFunc(__index.Enable)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
               end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
@@ -31648,6 +34940,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -31661,20 +34956,41 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -31684,6 +35000,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -31757,6 +35076,13 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetStepsPerPage = function()
                 return checkCFunc(__index.GetStepsPerPage)
               end,
@@ -31774,6 +35100,12 @@ function G.GeneratedTests()
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -31808,11 +35140,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -31859,6 +35203,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -31873,6 +35220,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -31901,6 +35251,9 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetEnabled = function()
                 return checkCFunc(__index.SetEnabled)
               end,
@@ -31910,8 +35263,14 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -32012,6 +35371,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -32035,6 +35397,9 @@ function G.GeneratedTests()
             return {
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -32069,6 +35434,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -32077,6 +35454,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               GetAlpha = function()
                 return checkCFunc(__index.GetAlpha)
@@ -32090,23 +35470,44 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
               end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
               GetFillStyle = function()
                 return checkCFunc(__index.GetFillStyle)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -32116,6 +35517,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -32192,6 +35596,13 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetStatusBarAtlas = function()
                 return checkCFunc(__index.GetStatusBarAtlas)
               end,
@@ -32209,6 +35620,12 @@ function G.GeneratedTests()
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -32237,11 +35654,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -32288,6 +35717,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -32302,6 +35734,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -32330,6 +35765,9 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFillStyle = function()
                 return checkCFunc(__index.SetFillStyle)
               end,
@@ -32339,8 +35777,14 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -32444,6 +35888,9 @@ function G.GeneratedTests()
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
               end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
               end,
@@ -32468,11 +35915,29 @@ function G.GeneratedTests()
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
               end,
+              AdvanceTime = function()
+                return checkCFunc(__index.AdvanceTime)
+              end,
+              ApplySpellVisualKit = function()
+                return checkCFunc(__index.ApplySpellVisualKit)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
+              end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
               end,
+              CanSaveTabardNow = function()
+                return checkCFunc(__index.CanSaveTabardNow)
+              end,
+              CanSetUnit = function()
+                return checkCFunc(__index.CanSetUnit)
+              end,
               ClearAllPoints = function()
                 return checkCFunc(__index.ClearAllPoints)
+              end,
+              ClearFog = function()
+                return checkCFunc(__index.ClearFog)
               end,
               ClearModel = function()
                 return checkCFunc(__index.ClearModel)
@@ -32482,6 +35947,9 @@ function G.GeneratedTests()
               end,
               ClearPointsOffset = function()
                 return checkCFunc(__index.ClearPointsOffset)
+              end,
+              ClearTransform = function()
+                return checkCFunc(__index.ClearTransform)
               end,
               CreateAnimationGroup = function()
                 return checkCFunc(__index.CreateAnimationGroup)
@@ -32498,11 +35966,26 @@ function G.GeneratedTests()
               CreateTexture = function()
                 return checkCFunc(__index.CreateTexture)
               end,
+              CycleVariation = function()
+                return checkCFunc(__index.CycleVariation)
+              end,
               DesaturateHierarchy = function()
                 return checkCFunc(__index.DesaturateHierarchy)
               end,
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
+              end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
               end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
@@ -32512,6 +35995,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               FreezeAnimation = function()
                 return checkCFunc(__index.FreezeAnimation)
@@ -32528,23 +36014,77 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
+              GetCameraDistance = function()
+                return checkCFunc(__index.GetCameraDistance)
+              end,
+              GetCameraFacing = function()
+                return checkCFunc(__index.GetCameraFacing)
+              end,
+              GetCameraPosition = function()
+                return checkCFunc(__index.GetCameraPosition)
+              end,
+              GetCameraRoll = function()
+                return checkCFunc(__index.GetCameraRoll)
+              end,
+              GetCameraTarget = function()
+                return checkCFunc(__index.GetCameraTarget)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDesaturation = function()
+                return checkCFunc(__index.GetDesaturation)
               end,
               GetDisplayInfo = function()
                 return checkCFunc(__index.GetDisplayInfo)
               end,
+              GetDoBlend = function()
+                return checkCFunc(__index.GetDoBlend)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
+              end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFacing = function()
+                return checkCFunc(__index.GetFacing)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
+              end,
+              GetFogColor = function()
+                return checkCFunc(__index.GetFogColor)
+              end,
+              GetFogFar = function()
+                return checkCFunc(__index.GetFogFar)
+              end,
+              GetFogNear = function()
+                return checkCFunc(__index.GetFogNear)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -32555,14 +36095,40 @@ function G.GeneratedTests()
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
               end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
+              end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
               end,
               GetID = function()
                 return checkCFunc(__index.GetID)
               end,
+              GetKeepModelOnHide = function()
+                return checkCFunc(__index.GetKeepModelOnHide)
+              end,
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
+              end,
+              GetLight = function()
+                return checkCFunc(__index.GetLight)
+              end,
+              GetLowerBackgroundFileName = function()
+                return checkCFunc(__index.GetLowerBackgroundFileName)
+              end,
+              GetLowerEmblemFile = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetLowerEmblemFile))
+                  return
+                end
+                return checkCFunc(__index.GetLowerEmblemFile)
+              end,
+              GetLowerEmblemFileName = function()
+                if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetLowerEmblemFileName))
+                  return
+                end
+                return checkCFunc(__index.GetLowerEmblemFileName)
               end,
               GetLowerEmblemTexture = function()
                 return checkCFunc(__index.GetLowerEmblemTexture)
@@ -32572,6 +36138,15 @@ function G.GeneratedTests()
               end,
               GetMinResize = function()
                 return checkCFunc(__index.GetMinResize)
+              end,
+              GetModelAlpha = function()
+                return checkCFunc(__index.GetModelAlpha)
+              end,
+              GetModelDrawLayer = function()
+                return checkCFunc(__index.GetModelDrawLayer)
+              end,
+              GetModelFileID = function()
+                return checkCFunc(__index.GetModelFileID)
               end,
               GetModelScale = function()
                 return checkCFunc(__index.GetModelScale)
@@ -32594,11 +36169,20 @@ function G.GeneratedTests()
               GetParent = function()
                 return checkCFunc(__index.GetParent)
               end,
+              GetPaused = function()
+                return checkCFunc(__index.GetPaused)
+              end,
+              GetPitch = function()
+                return checkCFunc(__index.GetPitch)
+              end,
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
               GetPointByName = function()
                 return checkCFunc(__index.GetPointByName)
+              end,
+              GetPosition = function()
+                return checkCFunc(__index.GetPosition)
               end,
               GetPropagateKeyboardInput = function()
                 return checkCFunc(__index.GetPropagateKeyboardInput)
@@ -32612,6 +36196,9 @@ function G.GeneratedTests()
               GetRight = function()
                 return checkCFunc(__index.GetRight)
               end,
+              GetRoll = function()
+                return checkCFunc(__index.GetRoll)
+              end,
               GetScale = function()
                 return checkCFunc(__index.GetScale)
               end,
@@ -32621,17 +36208,68 @@ function G.GeneratedTests()
               GetScript = function()
                 return checkCFunc(__index.GetScript)
               end,
+              GetShadowEffect = function()
+                return checkCFunc(__index.GetShadowEffect)
+              end,
               GetSize = function()
                 return checkCFunc(__index.GetSize)
+              end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
               end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
+              GetUpperBackgroundFileName = function()
+                return checkCFunc(__index.GetUpperBackgroundFileName)
+              end,
+              GetUpperEmblemFile = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetUpperEmblemFile))
+                  return
+                end
+                return checkCFunc(__index.GetUpperEmblemFile)
+              end,
+              GetUpperEmblemFileName = function()
+                if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetUpperEmblemFileName))
+                  return
+                end
+                return checkCFunc(__index.GetUpperEmblemFileName)
+              end,
               GetUpperEmblemTexture = function()
                 return checkCFunc(__index.GetUpperEmblemTexture)
               end,
+              GetViewInsets = function()
+                return checkCFunc(__index.GetViewInsets)
+              end,
+              GetViewTranslation = function()
+                return checkCFunc(__index.GetViewTranslation)
+              end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              GetWorldScale = function()
+                return checkCFunc(__index.GetWorldScale)
+              end,
+              HasAnimation = function()
+                return checkCFunc(__index.HasAnimation)
+              end,
+              HasAttachmentPoints = function()
+                return checkCFunc(__index.HasAttachmentPoints)
+              end,
+              HasCustomCamera = function()
+                return checkCFunc(__index.HasCustomCamera)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -32663,11 +36301,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -32711,8 +36361,20 @@ function G.GeneratedTests()
               IsUserPlaced = function()
                 return checkCFunc(__index.IsUserPlaced)
               end,
+              IsUsingModelCenterToTransform = function()
+                return checkCFunc(__index.IsUsingModelCenterToTransform)
+              end,
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
+              end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
+              MakeCurrentCameraCustom = function()
+                return checkCFunc(__index.MakeCurrentCameraCustom)
+              end,
+              PlayAnimKit = function()
+                return checkCFunc(__index.PlayAnimKit)
               end,
               Raise = function()
                 return checkCFunc(__index.Raise)
@@ -32735,6 +36397,15 @@ function G.GeneratedTests()
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
               end,
+              ReplaceIconTexture = function()
+                return checkCFunc(__index.ReplaceIconTexture)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
+              end,
+              Save = function()
+                return checkCFunc(__index.Save)
+              end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
               end,
@@ -32750,8 +36421,29 @@ function G.GeneratedTests()
               SetAttributeNoHandler = function()
                 return checkCFunc(__index.SetAttributeNoHandler)
               end,
+              SetBarberShopAlternateForm = function()
+                return checkCFunc(__index.SetBarberShopAlternateForm)
+              end,
               SetCamDistanceScale = function()
                 return checkCFunc(__index.SetCamDistanceScale)
+              end,
+              SetCamera = function()
+                return checkCFunc(__index.SetCamera)
+              end,
+              SetCameraDistance = function()
+                return checkCFunc(__index.SetCameraDistance)
+              end,
+              SetCameraFacing = function()
+                return checkCFunc(__index.SetCameraFacing)
+              end,
+              SetCameraPosition = function()
+                return checkCFunc(__index.SetCameraPosition)
+              end,
+              SetCameraRoll = function()
+                return checkCFunc(__index.SetCameraRoll)
+              end,
+              SetCameraTarget = function()
+                return checkCFunc(__index.SetCameraTarget)
               end,
               SetClampRectInsets = function()
                 return checkCFunc(__index.SetClampRectInsets)
@@ -32762,8 +36454,20 @@ function G.GeneratedTests()
               SetClipsChildren = function()
                 return checkCFunc(__index.SetClipsChildren)
               end,
+              SetCreature = function()
+                return checkCFunc(__index.SetCreature)
+              end,
+              SetCustomCamera = function()
+                return checkCFunc(__index.SetCustomCamera)
+              end,
+              SetCustomRace = function()
+                return checkCFunc(__index.SetCustomRace)
+              end,
               SetDepth = function()
                 return checkCFunc(__index.SetDepth)
+              end,
+              SetDesaturation = function()
+                return checkCFunc(__index.SetDesaturation)
               end,
               SetDisplayInfo = function()
                 return checkCFunc(__index.SetDisplayInfo)
@@ -32774,6 +36478,9 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFacing = function()
                 return checkCFunc(__index.SetFacing)
               end,
@@ -32783,14 +36490,32 @@ function G.GeneratedTests()
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
+              SetFogColor = function()
+                return checkCFunc(__index.SetFogColor)
+              end,
+              SetFogFar = function()
+                return checkCFunc(__index.SetFogFar)
+              end,
+              SetFogNear = function()
+                return checkCFunc(__index.SetFogNear)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
               end,
               SetFrameStrata = function()
                 return checkCFunc(__index.SetFrameStrata)
+              end,
+              SetGlow = function()
+                return checkCFunc(__index.SetGlow)
               end,
               SetHeight = function()
                 return checkCFunc(__index.SetHeight)
@@ -32810,6 +36535,12 @@ function G.GeneratedTests()
               SetIgnoreParentScale = function()
                 return checkCFunc(__index.SetIgnoreParentScale)
               end,
+              SetItem = function()
+                return checkCFunc(__index.SetItem)
+              end,
+              SetItemAppearance = function()
+                return checkCFunc(__index.SetItemAppearance)
+              end,
               SetKeepModelOnHide = function()
                 return checkCFunc(__index.SetKeepModelOnHide)
               end,
@@ -32824,6 +36555,12 @@ function G.GeneratedTests()
               end,
               SetModel = function()
                 return checkCFunc(__index.SetModel)
+              end,
+              SetModelAlpha = function()
+                return checkCFunc(__index.SetModelAlpha)
+              end,
+              SetModelDrawLayer = function()
+                return checkCFunc(__index.SetModelDrawLayer)
               end,
               SetModelScale = function()
                 return checkCFunc(__index.SetModelScale)
@@ -32840,6 +36577,15 @@ function G.GeneratedTests()
               SetParent = function()
                 return checkCFunc(__index.SetParent)
               end,
+              SetParticlesEnabled = function()
+                return checkCFunc(__index.SetParticlesEnabled)
+              end,
+              SetPaused = function()
+                return checkCFunc(__index.SetPaused)
+              end,
+              SetPitch = function()
+                return checkCFunc(__index.SetPitch)
+              end,
               SetPoint = function()
                 return checkCFunc(__index.SetPoint)
               end,
@@ -32855,6 +36601,9 @@ function G.GeneratedTests()
               SetResizable = function()
                 return checkCFunc(__index.SetResizable)
               end,
+              SetRoll = function()
+                return checkCFunc(__index.SetRoll)
+              end,
               SetRotation = function()
                 return checkCFunc(__index.SetRotation)
               end,
@@ -32863,6 +36612,15 @@ function G.GeneratedTests()
               end,
               SetScript = function()
                 return checkCFunc(__index.SetScript)
+              end,
+              SetSequence = function()
+                return checkCFunc(__index.SetSequence)
+              end,
+              SetSequenceTime = function()
+                return checkCFunc(__index.SetSequenceTime)
+              end,
+              SetShadowEffect = function()
+                return checkCFunc(__index.SetShadowEffect)
               end,
               SetShown = function()
                 return checkCFunc(__index.SetShown)
@@ -32873,11 +36631,20 @@ function G.GeneratedTests()
               SetToplevel = function()
                 return checkCFunc(__index.SetToplevel)
               end,
+              SetTransform = function()
+                return checkCFunc(__index.SetTransform)
+              end,
               SetUnit = function()
                 return checkCFunc(__index.SetUnit)
               end,
               SetUserPlaced = function()
                 return checkCFunc(__index.SetUserPlaced)
+              end,
+              SetViewInsets = function()
+                return checkCFunc(__index.SetViewInsets)
+              end,
+              SetViewTranslation = function()
+                return checkCFunc(__index.SetViewTranslation)
               end,
               SetWidth = function()
                 return checkCFunc(__index.SetWidth)
@@ -32887,6 +36654,12 @@ function G.GeneratedTests()
               end,
               StartMoving = function()
                 return checkCFunc(__index.StartMoving)
+              end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
+              end,
+              StopAnimKit = function()
+                return checkCFunc(__index.StopAnimKit)
               end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)
@@ -32902,6 +36675,16 @@ function G.GeneratedTests()
               end,
               UnregisterEvent = function()
                 return checkCFunc(__index.UnregisterEvent)
+              end,
+              UseModelCenterToTransform = function()
+                return checkCFunc(__index.UseModelCenterToTransform)
+              end,
+              ZeroCachedCenterXY = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.ZeroCachedCenterXY))
+                  return
+                end
+                return checkCFunc(__index.ZeroCachedCenterXY)
               end,
             }
           end)
@@ -32942,6 +36725,9 @@ function G.GeneratedTests()
               GetAtlas = function()
                 return checkCFunc(__index.GetAtlas)
               end,
+              GetBlendMode = function()
+                return checkCFunc(__index.GetBlendMode)
+              end,
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
@@ -32950,6 +36736,9 @@ function G.GeneratedTests()
               end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDesaturation = function()
+                return checkCFunc(__index.GetDesaturation)
               end,
               GetDrawLayer = function()
                 return checkCFunc(__index.GetDrawLayer)
@@ -32966,8 +36755,17 @@ function G.GeneratedTests()
               GetLeft = function()
                 return checkCFunc(__index.GetLeft)
               end,
+              GetMaskTexture = function()
+                return checkCFunc(__index.GetMaskTexture)
+              end,
               GetName = function()
                 return checkCFunc(__index.GetName)
+              end,
+              GetNonBlocking = function()
+                return checkCFunc(__index.GetNonBlocking)
+              end,
+              GetNumMaskTextures = function()
+                return checkCFunc(__index.GetNumMaskTextures)
               end,
               GetNumPoints = function()
                 return checkCFunc(__index.GetNumPoints)
@@ -32990,6 +36788,9 @@ function G.GeneratedTests()
               GetRight = function()
                 return checkCFunc(__index.GetRight)
               end,
+              GetRotation = function()
+                return checkCFunc(__index.GetRotation)
+              end,
               GetScale = function()
                 return checkCFunc(__index.GetScale)
               end,
@@ -32999,11 +36800,27 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTexCoord = function()
                 return checkCFunc(__index.GetTexCoord)
               end,
+              GetTexelSnappingBias = function()
+                return checkCFunc(__index.GetTexelSnappingBias)
+              end,
               GetTexture = function()
                 return checkCFunc(__index.GetTexture)
+              end,
+              GetTextureFileID = function()
+                return checkCFunc(__index.GetTextureFileID)
+              end,
+              GetTextureFilePath = function()
+                return checkCFunc(__index.GetTextureFilePath)
               end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
@@ -33013,6 +36830,9 @@ function G.GeneratedTests()
               end,
               GetVertexColor = function()
                 return checkCFunc(__index.GetVertexColor)
+              end,
+              GetVertexOffset = function()
+                return checkCFunc(__index.GetVertexOffset)
               end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
@@ -33055,6 +36875,9 @@ function G.GeneratedTests()
               end,
               IsShown = function()
                 return checkCFunc(__index.IsShown)
+              end,
+              IsSnappingToPixelGrid = function()
+                return checkCFunc(__index.IsSnappingToPixelGrid)
               end,
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
@@ -33149,6 +36972,9 @@ function G.GeneratedTests()
               SetVertexColor = function()
                 return checkCFunc(__index.SetVertexColor)
               end,
+              SetVertexOffset = function()
+                return checkCFunc(__index.SetVertexOffset)
+              end,
               SetWidth = function()
                 return checkCFunc(__index.SetWidth)
               end,
@@ -33179,8 +37005,17 @@ function G.GeneratedTests()
               AddUnit = function()
                 return checkCFunc(__index.AddUnit)
               end,
+              AddUnitAtlas = function()
+                return checkCFunc(__index.AddUnitAtlas)
+              end,
+              AddUnitFileID = function()
+                return checkCFunc(__index.AddUnitFileID)
+              end,
               AdjustPointsOffset = function()
                 return checkCFunc(__index.AdjustPointsOffset)
+              end,
+              CanChangeAttribute = function()
+                return checkCFunc(__index.CanChangeAttribute)
               end,
               CanChangeProtectedState = function()
                 return checkCFunc(__index.CanChangeProtectedState)
@@ -33218,6 +37053,18 @@ function G.GeneratedTests()
               DisableDrawLayer = function()
                 return checkCFunc(__index.DisableDrawLayer)
               end,
+              DoesClipChildren = function()
+                return checkCFunc(__index.DoesClipChildren)
+              end,
+              EnableDrawLayer = function()
+                return checkCFunc(__index.EnableDrawLayer)
+              end,
+              EnableGamePadButton = function()
+                return checkCFunc(__index.EnableGamePadButton)
+              end,
+              EnableGamePadStick = function()
+                return checkCFunc(__index.EnableGamePadStick)
+              end,
               EnableKeyboard = function()
                 return checkCFunc(__index.EnableKeyboard)
               end,
@@ -33226,6 +37073,9 @@ function G.GeneratedTests()
               end,
               EnableMouseWheel = function()
                 return checkCFunc(__index.EnableMouseWheel)
+              end,
+              ExecuteAttribute = function()
+                return checkCFunc(__index.ExecuteAttribute)
               end,
               FinalizeUnits = function()
                 return checkCFunc(__index.FinalizeUnits)
@@ -33242,20 +37092,41 @@ function G.GeneratedTests()
               GetBottom = function()
                 return checkCFunc(__index.GetBottom)
               end,
+              GetBoundsRect = function()
+                return checkCFunc(__index.GetBoundsRect)
+              end,
               GetCenter = function()
                 return checkCFunc(__index.GetCenter)
               end,
               GetChildren = function()
                 return checkCFunc(__index.GetChildren)
               end,
+              GetClampRectInsets = function()
+                return checkCFunc(__index.GetClampRectInsets)
+              end,
               GetDebugName = function()
                 return checkCFunc(__index.GetDebugName)
+              end,
+              GetDepth = function()
+                return checkCFunc(__index.GetDepth)
+              end,
+              GetDontSavePosition = function()
+                return checkCFunc(__index.GetDontSavePosition)
               end,
               GetEffectiveAlpha = function()
                 return checkCFunc(__index.GetEffectiveAlpha)
               end,
+              GetEffectiveDepth = function()
+                return checkCFunc(__index.GetEffectiveDepth)
+              end,
               GetEffectiveScale = function()
                 return checkCFunc(__index.GetEffectiveScale)
+              end,
+              GetEffectivelyFlattensRenderLayers = function()
+                return checkCFunc(__index.GetEffectivelyFlattensRenderLayers)
+              end,
+              GetFlattensRenderLayers = function()
+                return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFrameLevel = function()
                 return checkCFunc(__index.GetFrameLevel)
@@ -33265,6 +37136,9 @@ function G.GeneratedTests()
               end,
               GetHeight = function()
                 return checkCFunc(__index.GetHeight)
+              end,
+              GetHitRectInsets = function()
+                return checkCFunc(__index.GetHitRectInsets)
               end,
               GetHyperlinksEnabled = function()
                 return checkCFunc(__index.GetHyperlinksEnabled)
@@ -33302,6 +37176,9 @@ function G.GeneratedTests()
               GetParent = function()
                 return checkCFunc(__index.GetParent)
               end,
+              GetPlayerPingScale = function()
+                return checkCFunc(__index.GetPlayerPingScale)
+              end,
               GetPoint = function()
                 return checkCFunc(__index.GetPoint)
               end,
@@ -33332,11 +37209,27 @@ function G.GeneratedTests()
               GetSize = function()
                 return checkCFunc(__index.GetSize)
               end,
+              GetSourceLocation = function()
+                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                  assertEquals('nil', type(__index.GetSourceLocation))
+                  return
+                end
+                return checkCFunc(__index.GetSourceLocation)
+              end,
               GetTop = function()
                 return checkCFunc(__index.GetTop)
               end,
+              GetUiMapID = function()
+                return checkCFunc(__index.GetUiMapID)
+              end,
               GetWidth = function()
                 return checkCFunc(__index.GetWidth)
+              end,
+              HasFixedFrameLevel = function()
+                return checkCFunc(__index.HasFixedFrameLevel)
+              end,
+              HasFixedFrameStrata = function()
+                return checkCFunc(__index.HasFixedFrameStrata)
               end,
               HasScript = function()
                 return checkCFunc(__index.HasScript)
@@ -33365,11 +37258,23 @@ function G.GeneratedTests()
               IsForbidden = function()
                 return checkCFunc(__index.IsForbidden)
               end,
+              IsGamePadButtonEnabled = function()
+                return checkCFunc(__index.IsGamePadButtonEnabled)
+              end,
+              IsGamePadStickEnabled = function()
+                return checkCFunc(__index.IsGamePadStickEnabled)
+              end,
+              IsIgnoringDepth = function()
+                return checkCFunc(__index.IsIgnoringDepth)
+              end,
               IsIgnoringParentAlpha = function()
                 return checkCFunc(__index.IsIgnoringParentAlpha)
               end,
               IsIgnoringParentScale = function()
                 return checkCFunc(__index.IsIgnoringParentScale)
+              end,
+              IsKeyboardEnabled = function()
+                return checkCFunc(__index.IsKeyboardEnabled)
               end,
               IsMouseClickEnabled = function()
                 return checkCFunc(__index.IsMouseClickEnabled)
@@ -33416,6 +37321,9 @@ function G.GeneratedTests()
               IsVisible = function()
                 return checkCFunc(__index.IsVisible)
               end,
+              Lower = function()
+                return checkCFunc(__index.Lower)
+              end,
               Raise = function()
                 return checkCFunc(__index.Raise)
               end,
@@ -33430,6 +37338,9 @@ function G.GeneratedTests()
               end,
               RegisterUnitEvent = function()
                 return checkCFunc(__index.RegisterUnitEvent)
+              end,
+              RotateTextures = function()
+                return checkCFunc(__index.RotateTextures)
               end,
               SetAllPoints = function()
                 return checkCFunc(__index.SetAllPoints)
@@ -33458,14 +37369,23 @@ function G.GeneratedTests()
               SetDontSavePosition = function()
                 return checkCFunc(__index.SetDontSavePosition)
               end,
+              SetDrawLayerEnabled = function()
+                return checkCFunc(__index.SetDrawLayerEnabled)
+              end,
               SetFixedFrameLevel = function()
                 return checkCFunc(__index.SetFixedFrameLevel)
               end,
               SetFixedFrameStrata = function()
                 return checkCFunc(__index.SetFixedFrameStrata)
               end,
+              SetFlattensRenderLayers = function()
+                return checkCFunc(__index.SetFlattensRenderLayers)
+              end,
               SetForbidden = function()
                 return checkCFunc(__index.SetForbidden)
+              end,
+              SetFrameBuffer = function()
+                return checkCFunc(__index.SetFrameBuffer)
               end,
               SetFrameLevel = function()
                 return checkCFunc(__index.SetFrameLevel)
@@ -33542,6 +37462,9 @@ function G.GeneratedTests()
               SetUiMapID = function()
                 return checkCFunc(__index.SetUiMapID)
               end,
+              SetUnitColor = function()
+                return checkCFunc(__index.SetUnitColor)
+              end,
               SetUserPlaced = function()
                 return checkCFunc(__index.SetUserPlaced)
               end,
@@ -33556,6 +37479,9 @@ function G.GeneratedTests()
               end,
               StartPlayerPing = function()
                 return checkCFunc(__index.StartPlayerPing)
+              end,
+              StartSizing = function()
+                return checkCFunc(__index.StartSizing)
               end,
               StopAnimating = function()
                 return checkCFunc(__index.StopAnimating)

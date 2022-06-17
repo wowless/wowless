@@ -6,23 +6,133 @@ fields:
 inherits:
 - Frame
 methods:
+  AdvanceTime:
+    status: unimplemented
+  ClearFog:
+    status: unimplemented
   ClearModel:
+    status: unimplemented
+  ClearTransform:
+    status: unimplemented
+  GetCameraDistance:
+    status: unimplemented
+  GetCameraFacing:
+    status: unimplemented
+  GetCameraPosition:
+    status: unimplemented
+  GetCameraRoll:
+    status: unimplemented
+  GetCameraTarget:
+    status: unimplemented
+  GetDesaturation:
+    status: unimplemented
+  GetFacing:
+    status: unimplemented
+  GetFogColor:
+    status: unimplemented
+  GetFogFar:
+    status: unimplemented
+  GetFogNear:
+    status: unimplemented
+  GetLight:
+    status: unimplemented
+  GetModelAlpha:
+    status: unimplemented
+  GetModelDrawLayer:
+    status: unimplemented
+  GetModelFileID:
     status: unimplemented
   GetModelScale:
     fields:
     - name: modelScale
     status: getter
+  GetPaused:
+    status: unimplemented
+  GetPitch:
+    status: unimplemented
+  GetPosition:
+    status: unimplemented
+  GetRoll:
+    status: unimplemented
+  GetShadowEffect:
+    status: unimplemented
+  GetViewInsets:
+    status: unimplemented
+  GetViewTranslation:
+    status: unimplemented
+  GetWorldScale:
+    status: unimplemented
+  HasAttachmentPoints:
+    status: unimplemented
+  HasCustomCamera:
+    status: unimplemented
+  IsUsingModelCenterToTransform:
+    status: unimplemented
+  MakeCurrentCameraCustom:
+    status: unimplemented
+  ReplaceIconTexture:
+    status: unimplemented
+  SetCamera:
+    status: unimplemented
+  SetCameraDistance:
+    status: unimplemented
+  SetCameraFacing:
+    status: unimplemented
+  SetCameraPosition:
+    status: unimplemented
+  SetCameraRoll:
+    status: unimplemented
+  SetCameraTarget:
+    status: unimplemented
+  SetCustomCamera:
+    status: unimplemented
+  SetDesaturation:
+    status: unimplemented
   SetFacing:
+    status: unimplemented
+  SetFogColor:
+    status: unimplemented
+  SetFogFar:
+    status: unimplemented
+  SetFogNear:
+    status: unimplemented
+  SetGlow:
     status: unimplemented
   SetLight:
     status: unimplemented
   SetModel:
     status: unimplemented
+  SetModelAlpha:
+    status: unimplemented
+  SetModelDrawLayer:
+    status: unimplemented
   SetModelScale:
     fields:
     - name: modelScale
     status: setter
+  SetParticlesEnabled:
+    status: unimplemented
+  SetPaused:
+    status: unimplemented
+  SetPitch:
+    status: unimplemented
   SetPosition:
     status: unimplemented
+  SetRoll:
+    status: unimplemented
+  SetSequence:
+    status: unimplemented
+  SetSequenceTime:
+    status: unimplemented
+  SetShadowEffect:
+    status: unimplemented
+  SetTransform:
+    status: unimplemented
+  SetViewInsets:
+    status: unimplemented
+  SetViewTranslation:
+    status: unimplemented
   TransformCameraSpaceToModelSpace:
+    status: unimplemented
+  UseModelCenterToTransform:
     status: unimplemented

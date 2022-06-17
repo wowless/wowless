@@ -2,5 +2,21 @@
 name: Checkout
 inherits:
 - Frame
-methods: {}
+methods:
+  CancelOpenCheckout:
+    status: unimplemented
+  ClearFocus:
+    status: unimplemented
+  CloseCheckout:
+    status: unimplemented
+  CopyExternalLink:
+    status: unimplemented
+  OpenCheckout:
+    status: unimplemented
+  OpenExternalLink:
+    status: unimplemented
+  SetFocus:
+    status: unimplemented
+  SetZoom:
+    status: unimplemented
 objectType: BlizzardCheckout

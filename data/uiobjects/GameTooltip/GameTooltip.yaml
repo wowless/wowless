@@ -299,6 +299,10 @@ methods:
     status: unimplemented
   SetSocketGem:
     status: unimplemented
+  SetSpecialPvpBrawl:
+    flavors:
+    - Mainline
+    status: unimplemented
   SetSpellBookItem:
     status: unimplemented
   SetSpellByID:

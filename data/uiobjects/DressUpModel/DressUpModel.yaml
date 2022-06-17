@@ -3,5 +3,55 @@ name: DressUpModel
 inherits:
 - PlayerModel
 methods:
+  Dress:
+    status: unimplemented
+  GetAutoDress:
+    status: unimplemented
+  GetItemTransmogInfo:
+    flavors:
+    - Mainline
+    status: unimplemented
+  GetItemTransmogInfoList:
+    flavors:
+    - Mainline
+    status: unimplemented
+  GetObeyHideInTransmogFlag:
+    flavors:
+    - Mainline
+    status: unimplemented
+  GetSheathed:
+    status: unimplemented
+  GetUseTransmogChoices:
+    flavors:
+    - Mainline
+    status: unimplemented
+  GetUseTransmogSkin:
+    flavors:
+    - Mainline
+    status: unimplemented
   SetAutoDress:
+    status: unimplemented
+  SetItemTransmogInfo:
+    flavors:
+    - Mainline
+    status: unimplemented
+  SetObeyHideInTransmogFlag:
+    flavors:
+    - Mainline
+    status: unimplemented
+  SetSheathed:
+    status: unimplemented
+  SetUseTransmogChoices:
+    flavors:
+    - Mainline
+    status: unimplemented
+  SetUseTransmogSkin:
+    flavors:
+    - Mainline
+    status: unimplemented
+  TryOn:
+    status: unimplemented
+  Undress:
+    status: unimplemented
+  UndressSlot:
     status: unimplemented
