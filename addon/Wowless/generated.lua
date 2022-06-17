@@ -21218,6 +21218,7 @@ function G.GeneratedTests()
         assertEquals(expectedErr, err:sub(err:len() - expectedErr:len() + 1))
       end
       local GetObjectType = CreateFrame('Frame').GetObjectType
+      local indexes = {}
       return {
         Actor = function()
           assertCreateFrameFails('Actor')
@@ -21244,6 +21245,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21274,6 +21277,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21421,6 +21426,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21466,6 +21473,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21489,6 +21498,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21528,6 +21539,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21594,6 +21607,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21711,6 +21726,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21743,6 +21760,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21897,6 +21916,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -22116,6 +22137,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -22714,6 +22737,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -22747,6 +22772,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -22798,6 +22825,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -22968,6 +22997,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23004,6 +23035,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23036,6 +23069,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23103,6 +23138,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23139,6 +23176,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23165,6 +23204,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23219,6 +23260,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23252,6 +23295,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23336,6 +23381,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23417,6 +23464,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23465,6 +23514,8 @@ function G.GeneratedTests()
           assertEquals('table', type(__index))
           assertEquals(nil, next(mt, mtk))
           assertEquals(nil, getmetatable(__index))
+          assertEquals(nil, indexes[__index])
+          indexes[__index] = true
           return {
             contents = function()
               local udk, udv = next(frame)
