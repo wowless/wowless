@@ -287,6 +287,12 @@ function G.GeneratedTests()
           assert(mt == getmetatable(frame2))
 > if k ~= 'FogOfWarFrame' then
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -302,11 +308,11 @@ function G.GeneratedTests()
                 $(mname) = function()
 > if method.flavors then
                   if $(badflavor(method.flavors)) then
-                    assertEquals('nil', type(mt.__index.$(mname)))
+                    assertEquals('nil', type(__index.$(mname)))
                     return
                   end
 > end
-                  assertEquals('function', type(mt.__index.$(mname)))
+                  assertEquals('function', type(__index.$(mname)))
                 end,
 > end
               }

@@ -21238,6 +21238,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21249,7 +21255,7 @@ function G.GeneratedTests()
             methods = function()
               return {
                 NavigateHome = function()
-                  assertEquals('function', type(mt.__index.NavigateHome))
+                  assertEquals('function', type(__index.NavigateHome))
                 end,
               }
             end,
@@ -21262,6 +21268,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21273,124 +21285,124 @@ function G.GeneratedTests()
             methods = function()
               return {
                 Click = function()
-                  assertEquals('function', type(mt.__index.Click))
+                  assertEquals('function', type(__index.Click))
                 end,
                 Disable = function()
-                  assertEquals('function', type(mt.__index.Disable))
+                  assertEquals('function', type(__index.Disable))
                 end,
                 Enable = function()
-                  assertEquals('function', type(mt.__index.Enable))
+                  assertEquals('function', type(__index.Enable))
                 end,
                 GetButtonState = function()
-                  assertEquals('function', type(mt.__index.GetButtonState))
+                  assertEquals('function', type(__index.GetButtonState))
                 end,
                 GetDisabledFontObject = function()
-                  assertEquals('function', type(mt.__index.GetDisabledFontObject))
+                  assertEquals('function', type(__index.GetDisabledFontObject))
                 end,
                 GetDisabledTexture = function()
-                  assertEquals('function', type(mt.__index.GetDisabledTexture))
+                  assertEquals('function', type(__index.GetDisabledTexture))
                 end,
                 GetFontString = function()
-                  assertEquals('function', type(mt.__index.GetFontString))
+                  assertEquals('function', type(__index.GetFontString))
                 end,
                 GetHighlightFontObject = function()
-                  assertEquals('function', type(mt.__index.GetHighlightFontObject))
+                  assertEquals('function', type(__index.GetHighlightFontObject))
                 end,
                 GetHighlightTexture = function()
-                  assertEquals('function', type(mt.__index.GetHighlightTexture))
+                  assertEquals('function', type(__index.GetHighlightTexture))
                 end,
                 GetMotionScriptsWhileDisabled = function()
-                  assertEquals('function', type(mt.__index.GetMotionScriptsWhileDisabled))
+                  assertEquals('function', type(__index.GetMotionScriptsWhileDisabled))
                 end,
                 GetNormalFontObject = function()
-                  assertEquals('function', type(mt.__index.GetNormalFontObject))
+                  assertEquals('function', type(__index.GetNormalFontObject))
                 end,
                 GetNormalTexture = function()
-                  assertEquals('function', type(mt.__index.GetNormalTexture))
+                  assertEquals('function', type(__index.GetNormalTexture))
                 end,
                 GetPushedTextOffset = function()
-                  assertEquals('function', type(mt.__index.GetPushedTextOffset))
+                  assertEquals('function', type(__index.GetPushedTextOffset))
                 end,
                 GetPushedTexture = function()
-                  assertEquals('function', type(mt.__index.GetPushedTexture))
+                  assertEquals('function', type(__index.GetPushedTexture))
                 end,
                 GetText = function()
-                  assertEquals('function', type(mt.__index.GetText))
+                  assertEquals('function', type(__index.GetText))
                 end,
                 GetTextHeight = function()
-                  assertEquals('function', type(mt.__index.GetTextHeight))
+                  assertEquals('function', type(__index.GetTextHeight))
                 end,
                 GetTextWidth = function()
-                  assertEquals('function', type(mt.__index.GetTextWidth))
+                  assertEquals('function', type(__index.GetTextWidth))
                 end,
                 IsEnabled = function()
-                  assertEquals('function', type(mt.__index.IsEnabled))
+                  assertEquals('function', type(__index.IsEnabled))
                 end,
                 LockHighlight = function()
-                  assertEquals('function', type(mt.__index.LockHighlight))
+                  assertEquals('function', type(__index.LockHighlight))
                 end,
                 RegisterForClicks = function()
-                  assertEquals('function', type(mt.__index.RegisterForClicks))
+                  assertEquals('function', type(__index.RegisterForClicks))
                 end,
                 RegisterForMouse = function()
-                  assertEquals('function', type(mt.__index.RegisterForMouse))
+                  assertEquals('function', type(__index.RegisterForMouse))
                 end,
                 SetButtonState = function()
-                  assertEquals('function', type(mt.__index.SetButtonState))
+                  assertEquals('function', type(__index.SetButtonState))
                 end,
                 SetDisabledAtlas = function()
-                  assertEquals('function', type(mt.__index.SetDisabledAtlas))
+                  assertEquals('function', type(__index.SetDisabledAtlas))
                 end,
                 SetDisabledFontObject = function()
-                  assertEquals('function', type(mt.__index.SetDisabledFontObject))
+                  assertEquals('function', type(__index.SetDisabledFontObject))
                 end,
                 SetDisabledTexture = function()
-                  assertEquals('function', type(mt.__index.SetDisabledTexture))
+                  assertEquals('function', type(__index.SetDisabledTexture))
                 end,
                 SetEnabled = function()
-                  assertEquals('function', type(mt.__index.SetEnabled))
+                  assertEquals('function', type(__index.SetEnabled))
                 end,
                 SetFontString = function()
-                  assertEquals('function', type(mt.__index.SetFontString))
+                  assertEquals('function', type(__index.SetFontString))
                 end,
                 SetFormattedText = function()
-                  assertEquals('function', type(mt.__index.SetFormattedText))
+                  assertEquals('function', type(__index.SetFormattedText))
                 end,
                 SetHighlightAtlas = function()
-                  assertEquals('function', type(mt.__index.SetHighlightAtlas))
+                  assertEquals('function', type(__index.SetHighlightAtlas))
                 end,
                 SetHighlightFontObject = function()
-                  assertEquals('function', type(mt.__index.SetHighlightFontObject))
+                  assertEquals('function', type(__index.SetHighlightFontObject))
                 end,
                 SetHighlightTexture = function()
-                  assertEquals('function', type(mt.__index.SetHighlightTexture))
+                  assertEquals('function', type(__index.SetHighlightTexture))
                 end,
                 SetMotionScriptsWhileDisabled = function()
-                  assertEquals('function', type(mt.__index.SetMotionScriptsWhileDisabled))
+                  assertEquals('function', type(__index.SetMotionScriptsWhileDisabled))
                 end,
                 SetNormalAtlas = function()
-                  assertEquals('function', type(mt.__index.SetNormalAtlas))
+                  assertEquals('function', type(__index.SetNormalAtlas))
                 end,
                 SetNormalFontObject = function()
-                  assertEquals('function', type(mt.__index.SetNormalFontObject))
+                  assertEquals('function', type(__index.SetNormalFontObject))
                 end,
                 SetNormalTexture = function()
-                  assertEquals('function', type(mt.__index.SetNormalTexture))
+                  assertEquals('function', type(__index.SetNormalTexture))
                 end,
                 SetPushedAtlas = function()
-                  assertEquals('function', type(mt.__index.SetPushedAtlas))
+                  assertEquals('function', type(__index.SetPushedAtlas))
                 end,
                 SetPushedTextOffset = function()
-                  assertEquals('function', type(mt.__index.SetPushedTextOffset))
+                  assertEquals('function', type(__index.SetPushedTextOffset))
                 end,
                 SetPushedTexture = function()
-                  assertEquals('function', type(mt.__index.SetPushedTexture))
+                  assertEquals('function', type(__index.SetPushedTexture))
                 end,
                 SetText = function()
-                  assertEquals('function', type(mt.__index.SetText))
+                  assertEquals('function', type(__index.SetText))
                 end,
                 UnlockHighlight = function()
-                  assertEquals('function', type(mt.__index.UnlockHighlight))
+                  assertEquals('function', type(__index.UnlockHighlight))
                 end,
               }
             end,
@@ -21403,6 +21415,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21414,22 +21432,22 @@ function G.GeneratedTests()
             methods = function()
               return {
                 GetChecked = function()
-                  assertEquals('function', type(mt.__index.GetChecked))
+                  assertEquals('function', type(__index.GetChecked))
                 end,
                 GetCheckedTexture = function()
-                  assertEquals('function', type(mt.__index.GetCheckedTexture))
+                  assertEquals('function', type(__index.GetCheckedTexture))
                 end,
                 GetDisabledCheckedTexture = function()
-                  assertEquals('function', type(mt.__index.GetDisabledCheckedTexture))
+                  assertEquals('function', type(__index.GetDisabledCheckedTexture))
                 end,
                 SetChecked = function()
-                  assertEquals('function', type(mt.__index.SetChecked))
+                  assertEquals('function', type(__index.SetChecked))
                 end,
                 SetCheckedTexture = function()
-                  assertEquals('function', type(mt.__index.SetCheckedTexture))
+                  assertEquals('function', type(__index.SetCheckedTexture))
                 end,
                 SetDisabledCheckedTexture = function()
-                  assertEquals('function', type(mt.__index.SetDisabledCheckedTexture))
+                  assertEquals('function', type(__index.SetDisabledCheckedTexture))
                 end,
               }
             end,
@@ -21442,6 +21460,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21459,6 +21483,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21470,16 +21500,16 @@ function G.GeneratedTests()
             methods = function()
               return {
                 InitializeCamera = function()
-                  assertEquals('function', type(mt.__index.InitializeCamera))
+                  assertEquals('function', type(__index.InitializeCamera))
                 end,
                 SetFacingLeft = function()
-                  assertEquals('function', type(mt.__index.SetFacingLeft))
+                  assertEquals('function', type(__index.SetFacingLeft))
                 end,
                 SetHeightFactor = function()
-                  assertEquals('function', type(mt.__index.SetHeightFactor))
+                  assertEquals('function', type(__index.SetHeightFactor))
                 end,
                 SetTargetDistance = function()
-                  assertEquals('function', type(mt.__index.SetTargetDistance))
+                  assertEquals('function', type(__index.SetTargetDistance))
                 end,
               }
             end,
@@ -21492,6 +21522,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21503,40 +21539,40 @@ function G.GeneratedTests()
             methods = function()
               return {
                 GetColorHSV = function()
-                  assertEquals('function', type(mt.__index.GetColorHSV))
+                  assertEquals('function', type(__index.GetColorHSV))
                 end,
                 GetColorRGB = function()
-                  assertEquals('function', type(mt.__index.GetColorRGB))
+                  assertEquals('function', type(__index.GetColorRGB))
                 end,
                 GetColorValueTexture = function()
-                  assertEquals('function', type(mt.__index.GetColorValueTexture))
+                  assertEquals('function', type(__index.GetColorValueTexture))
                 end,
                 GetColorValueThumbTexture = function()
-                  assertEquals('function', type(mt.__index.GetColorValueThumbTexture))
+                  assertEquals('function', type(__index.GetColorValueThumbTexture))
                 end,
                 GetColorWheelTexture = function()
-                  assertEquals('function', type(mt.__index.GetColorWheelTexture))
+                  assertEquals('function', type(__index.GetColorWheelTexture))
                 end,
                 GetColorWheelThumbTexture = function()
-                  assertEquals('function', type(mt.__index.GetColorWheelThumbTexture))
+                  assertEquals('function', type(__index.GetColorWheelThumbTexture))
                 end,
                 SetColorHSV = function()
-                  assertEquals('function', type(mt.__index.SetColorHSV))
+                  assertEquals('function', type(__index.SetColorHSV))
                 end,
                 SetColorRGB = function()
-                  assertEquals('function', type(mt.__index.SetColorRGB))
+                  assertEquals('function', type(__index.SetColorRGB))
                 end,
                 SetColorValueTexture = function()
-                  assertEquals('function', type(mt.__index.SetColorValueTexture))
+                  assertEquals('function', type(__index.SetColorValueTexture))
                 end,
                 SetColorValueThumbTexture = function()
-                  assertEquals('function', type(mt.__index.SetColorValueThumbTexture))
+                  assertEquals('function', type(__index.SetColorValueThumbTexture))
                 end,
                 SetColorWheelTexture = function()
-                  assertEquals('function', type(mt.__index.SetColorWheelTexture))
+                  assertEquals('function', type(__index.SetColorWheelTexture))
                 end,
                 SetColorWheelThumbTexture = function()
-                  assertEquals('function', type(mt.__index.SetColorWheelThumbTexture))
+                  assertEquals('function', type(__index.SetColorWheelThumbTexture))
                 end,
               }
             end,
@@ -21552,6 +21588,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21563,94 +21605,94 @@ function G.GeneratedTests()
             methods = function()
               return {
                 Clear = function()
-                  assertEquals('function', type(mt.__index.Clear))
+                  assertEquals('function', type(__index.Clear))
                 end,
                 GetCooldownDisplayDuration = function()
-                  assertEquals('function', type(mt.__index.GetCooldownDisplayDuration))
+                  assertEquals('function', type(__index.GetCooldownDisplayDuration))
                 end,
                 GetCooldownDuration = function()
-                  assertEquals('function', type(mt.__index.GetCooldownDuration))
+                  assertEquals('function', type(__index.GetCooldownDuration))
                 end,
                 GetCooldownTimes = function()
-                  assertEquals('function', type(mt.__index.GetCooldownTimes))
+                  assertEquals('function', type(__index.GetCooldownTimes))
                 end,
                 GetDrawBling = function()
-                  assertEquals('function', type(mt.__index.GetDrawBling))
+                  assertEquals('function', type(__index.GetDrawBling))
                 end,
                 GetDrawEdge = function()
-                  assertEquals('function', type(mt.__index.GetDrawEdge))
+                  assertEquals('function', type(__index.GetDrawEdge))
                 end,
                 GetDrawSwipe = function()
-                  assertEquals('function', type(mt.__index.GetDrawSwipe))
+                  assertEquals('function', type(__index.GetDrawSwipe))
                 end,
                 GetEdgeScale = function()
-                  assertEquals('function', type(mt.__index.GetEdgeScale))
+                  assertEquals('function', type(__index.GetEdgeScale))
                 end,
                 GetReverse = function()
-                  assertEquals('function', type(mt.__index.GetReverse))
+                  assertEquals('function', type(__index.GetReverse))
                 end,
                 GetRotation = function()
-                  assertEquals('function', type(mt.__index.GetRotation))
+                  assertEquals('function', type(__index.GetRotation))
                 end,
                 IsPaused = function()
-                  assertEquals('function', type(mt.__index.IsPaused))
+                  assertEquals('function', type(__index.IsPaused))
                 end,
                 Pause = function()
-                  assertEquals('function', type(mt.__index.Pause))
+                  assertEquals('function', type(__index.Pause))
                 end,
                 Resume = function()
-                  assertEquals('function', type(mt.__index.Resume))
+                  assertEquals('function', type(__index.Resume))
                 end,
                 SetBlingTexture = function()
-                  assertEquals('function', type(mt.__index.SetBlingTexture))
+                  assertEquals('function', type(__index.SetBlingTexture))
                 end,
                 SetCooldown = function()
-                  assertEquals('function', type(mt.__index.SetCooldown))
+                  assertEquals('function', type(__index.SetCooldown))
                 end,
                 SetCooldownDuration = function()
-                  assertEquals('function', type(mt.__index.SetCooldownDuration))
+                  assertEquals('function', type(__index.SetCooldownDuration))
                 end,
                 SetCooldownUNIX = function()
-                  assertEquals('function', type(mt.__index.SetCooldownUNIX))
+                  assertEquals('function', type(__index.SetCooldownUNIX))
                 end,
                 SetCountdownAbbrevThreshold = function()
-                  assertEquals('function', type(mt.__index.SetCountdownAbbrevThreshold))
+                  assertEquals('function', type(__index.SetCountdownAbbrevThreshold))
                 end,
                 SetCountdownFont = function()
-                  assertEquals('function', type(mt.__index.SetCountdownFont))
+                  assertEquals('function', type(__index.SetCountdownFont))
                 end,
                 SetDrawBling = function()
-                  assertEquals('function', type(mt.__index.SetDrawBling))
+                  assertEquals('function', type(__index.SetDrawBling))
                 end,
                 SetDrawEdge = function()
-                  assertEquals('function', type(mt.__index.SetDrawEdge))
+                  assertEquals('function', type(__index.SetDrawEdge))
                 end,
                 SetDrawSwipe = function()
-                  assertEquals('function', type(mt.__index.SetDrawSwipe))
+                  assertEquals('function', type(__index.SetDrawSwipe))
                 end,
                 SetEdgeScale = function()
-                  assertEquals('function', type(mt.__index.SetEdgeScale))
+                  assertEquals('function', type(__index.SetEdgeScale))
                 end,
                 SetEdgeTexture = function()
-                  assertEquals('function', type(mt.__index.SetEdgeTexture))
+                  assertEquals('function', type(__index.SetEdgeTexture))
                 end,
                 SetHideCountdownNumbers = function()
-                  assertEquals('function', type(mt.__index.SetHideCountdownNumbers))
+                  assertEquals('function', type(__index.SetHideCountdownNumbers))
                 end,
                 SetReverse = function()
-                  assertEquals('function', type(mt.__index.SetReverse))
+                  assertEquals('function', type(__index.SetReverse))
                 end,
                 SetRotation = function()
-                  assertEquals('function', type(mt.__index.SetRotation))
+                  assertEquals('function', type(__index.SetRotation))
                 end,
                 SetSwipeColor = function()
-                  assertEquals('function', type(mt.__index.SetSwipeColor))
+                  assertEquals('function', type(__index.SetSwipeColor))
                 end,
                 SetSwipeTexture = function()
-                  assertEquals('function', type(mt.__index.SetSwipeTexture))
+                  assertEquals('function', type(__index.SetSwipeTexture))
                 end,
                 SetUseCircularEdge = function()
-                  assertEquals('function', type(mt.__index.SetUseCircularEdge))
+                  assertEquals('function', type(__index.SetUseCircularEdge))
                 end,
               }
             end,
@@ -21663,6 +21705,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21674,7 +21722,7 @@ function G.GeneratedTests()
             methods = function()
               return {
                 SetAutoDress = function()
-                  assertEquals('function', type(mt.__index.SetAutoDress))
+                  assertEquals('function', type(__index.SetAutoDress))
                 end,
               }
             end,
@@ -21689,6 +21737,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21700,115 +21754,115 @@ function G.GeneratedTests()
             methods = function()
               return {
                 AddHistoryLine = function()
-                  assertEquals('function', type(mt.__index.AddHistoryLine))
+                  assertEquals('function', type(__index.AddHistoryLine))
                 end,
                 ClearFocus = function()
-                  assertEquals('function', type(mt.__index.ClearFocus))
+                  assertEquals('function', type(__index.ClearFocus))
                 end,
                 ClearHistory = function()
-                  assertEquals('function', type(mt.__index.ClearHistory))
+                  assertEquals('function', type(__index.ClearHistory))
                 end,
                 Disable = function()
-                  assertEquals('function', type(mt.__index.Disable))
+                  assertEquals('function', type(__index.Disable))
                 end,
                 Enable = function()
-                  assertEquals('function', type(mt.__index.Enable))
+                  assertEquals('function', type(__index.Enable))
                 end,
                 GetHistoryLines = function()
-                  assertEquals('function', type(mt.__index.GetHistoryLines))
+                  assertEquals('function', type(__index.GetHistoryLines))
                 end,
                 GetInputLanguage = function()
-                  assertEquals('function', type(mt.__index.GetInputLanguage))
+                  assertEquals('function', type(__index.GetInputLanguage))
                 end,
                 GetMaxBytes = function()
-                  assertEquals('function', type(mt.__index.GetMaxBytes))
+                  assertEquals('function', type(__index.GetMaxBytes))
                 end,
                 GetMaxLetters = function()
-                  assertEquals('function', type(mt.__index.GetMaxLetters))
+                  assertEquals('function', type(__index.GetMaxLetters))
                 end,
                 GetNumber = function()
-                  assertEquals('function', type(mt.__index.GetNumber))
+                  assertEquals('function', type(__index.GetNumber))
                 end,
                 GetText = function()
-                  assertEquals('function', type(mt.__index.GetText))
+                  assertEquals('function', type(__index.GetText))
                 end,
                 HasFocus = function()
-                  assertEquals('function', type(mt.__index.HasFocus))
+                  assertEquals('function', type(__index.HasFocus))
                 end,
                 HighlightText = function()
-                  assertEquals('function', type(mt.__index.HighlightText))
+                  assertEquals('function', type(__index.HighlightText))
                 end,
                 Insert = function()
-                  assertEquals('function', type(mt.__index.Insert))
+                  assertEquals('function', type(__index.Insert))
                 end,
                 IsAutoFocus = function()
-                  assertEquals('function', type(mt.__index.IsAutoFocus))
+                  assertEquals('function', type(__index.IsAutoFocus))
                 end,
                 IsCountInvisibleLetters = function()
-                  assertEquals('function', type(mt.__index.IsCountInvisibleLetters))
+                  assertEquals('function', type(__index.IsCountInvisibleLetters))
                 end,
                 IsEnabled = function()
-                  assertEquals('function', type(mt.__index.IsEnabled))
+                  assertEquals('function', type(__index.IsEnabled))
                 end,
                 IsMultiLine = function()
-                  assertEquals('function', type(mt.__index.IsMultiLine))
+                  assertEquals('function', type(__index.IsMultiLine))
                 end,
                 IsSecureText = function()
-                  assertEquals('function', type(mt.__index.IsSecureText))
+                  assertEquals('function', type(__index.IsSecureText))
                 end,
                 SetAltArrowKeyMode = function()
-                  assertEquals('function', type(mt.__index.SetAltArrowKeyMode))
+                  assertEquals('function', type(__index.SetAltArrowKeyMode))
                 end,
                 SetAutoFocus = function()
-                  assertEquals('function', type(mt.__index.SetAutoFocus))
+                  assertEquals('function', type(__index.SetAutoFocus))
                 end,
                 SetCountInvisibleLetters = function()
-                  assertEquals('function', type(mt.__index.SetCountInvisibleLetters))
+                  assertEquals('function', type(__index.SetCountInvisibleLetters))
                 end,
                 SetCursorPosition = function()
-                  assertEquals('function', type(mt.__index.SetCursorPosition))
+                  assertEquals('function', type(__index.SetCursorPosition))
                 end,
                 SetEnabled = function()
-                  assertEquals('function', type(mt.__index.SetEnabled))
+                  assertEquals('function', type(__index.SetEnabled))
                 end,
                 SetFocus = function()
-                  assertEquals('function', type(mt.__index.SetFocus))
+                  assertEquals('function', type(__index.SetFocus))
                 end,
                 SetHighlightColor = function()
-                  assertEquals('function', type(mt.__index.SetHighlightColor))
+                  assertEquals('function', type(__index.SetHighlightColor))
                 end,
                 SetHistoryLines = function()
-                  assertEquals('function', type(mt.__index.SetHistoryLines))
+                  assertEquals('function', type(__index.SetHistoryLines))
                 end,
                 SetMaxBytes = function()
-                  assertEquals('function', type(mt.__index.SetMaxBytes))
+                  assertEquals('function', type(__index.SetMaxBytes))
                 end,
                 SetMaxLetters = function()
-                  assertEquals('function', type(mt.__index.SetMaxLetters))
+                  assertEquals('function', type(__index.SetMaxLetters))
                 end,
                 SetMultiLine = function()
-                  assertEquals('function', type(mt.__index.SetMultiLine))
+                  assertEquals('function', type(__index.SetMultiLine))
                 end,
                 SetNumber = function()
-                  assertEquals('function', type(mt.__index.SetNumber))
+                  assertEquals('function', type(__index.SetNumber))
                 end,
                 SetNumeric = function()
-                  assertEquals('function', type(mt.__index.SetNumeric))
+                  assertEquals('function', type(__index.SetNumeric))
                 end,
                 SetSecureText = function()
-                  assertEquals('function', type(mt.__index.SetSecureText))
+                  assertEquals('function', type(__index.SetSecureText))
                 end,
                 SetSecurityDisablePaste = function()
-                  assertEquals('function', type(mt.__index.SetSecurityDisablePaste))
+                  assertEquals('function', type(__index.SetSecurityDisablePaste))
                 end,
                 SetSecurityDisableSetText = function()
-                  assertEquals('function', type(mt.__index.SetSecurityDisableSetText))
+                  assertEquals('function', type(__index.SetSecurityDisableSetText))
                 end,
                 SetText = function()
-                  assertEquals('function', type(mt.__index.SetText))
+                  assertEquals('function', type(__index.SetText))
                 end,
                 SetTextInsets = function()
-                  assertEquals('function', type(mt.__index.SetTextInsets))
+                  assertEquals('function', type(__index.SetTextInsets))
                 end,
               }
             end,
@@ -21837,6 +21891,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -21848,196 +21908,196 @@ function G.GeneratedTests()
             methods = function()
               return {
                 CreateFontString = function()
-                  assertEquals('function', type(mt.__index.CreateFontString))
+                  assertEquals('function', type(__index.CreateFontString))
                 end,
                 CreateLine = function()
-                  assertEquals('function', type(mt.__index.CreateLine))
+                  assertEquals('function', type(__index.CreateLine))
                 end,
                 CreateMaskTexture = function()
-                  assertEquals('function', type(mt.__index.CreateMaskTexture))
+                  assertEquals('function', type(__index.CreateMaskTexture))
                 end,
                 CreateTexture = function()
-                  assertEquals('function', type(mt.__index.CreateTexture))
+                  assertEquals('function', type(__index.CreateTexture))
                 end,
                 DesaturateHierarchy = function()
-                  assertEquals('function', type(mt.__index.DesaturateHierarchy))
+                  assertEquals('function', type(__index.DesaturateHierarchy))
                 end,
                 DisableDrawLayer = function()
-                  assertEquals('function', type(mt.__index.DisableDrawLayer))
+                  assertEquals('function', type(__index.DisableDrawLayer))
                 end,
                 EnableKeyboard = function()
-                  assertEquals('function', type(mt.__index.EnableKeyboard))
+                  assertEquals('function', type(__index.EnableKeyboard))
                 end,
                 EnableMouse = function()
-                  assertEquals('function', type(mt.__index.EnableMouse))
+                  assertEquals('function', type(__index.EnableMouse))
                 end,
                 EnableMouseWheel = function()
-                  assertEquals('function', type(mt.__index.EnableMouseWheel))
+                  assertEquals('function', type(__index.EnableMouseWheel))
                 end,
                 GetAttribute = function()
-                  assertEquals('function', type(mt.__index.GetAttribute))
+                  assertEquals('function', type(__index.GetAttribute))
                 end,
                 GetChildren = function()
-                  assertEquals('function', type(mt.__index.GetChildren))
+                  assertEquals('function', type(__index.GetChildren))
                 end,
                 GetFrameLevel = function()
-                  assertEquals('function', type(mt.__index.GetFrameLevel))
+                  assertEquals('function', type(__index.GetFrameLevel))
                 end,
                 GetFrameStrata = function()
-                  assertEquals('function', type(mt.__index.GetFrameStrata))
+                  assertEquals('function', type(__index.GetFrameStrata))
                 end,
                 GetHyperlinksEnabled = function()
-                  assertEquals('function', type(mt.__index.GetHyperlinksEnabled))
+                  assertEquals('function', type(__index.GetHyperlinksEnabled))
                 end,
                 GetID = function()
-                  assertEquals('function', type(mt.__index.GetID))
+                  assertEquals('function', type(__index.GetID))
                 end,
                 GetMaxResize = function()
-                  assertEquals('function', type(mt.__index.GetMaxResize))
+                  assertEquals('function', type(__index.GetMaxResize))
                 end,
                 GetMinResize = function()
-                  assertEquals('function', type(mt.__index.GetMinResize))
+                  assertEquals('function', type(__index.GetMinResize))
                 end,
                 GetNumChildren = function()
-                  assertEquals('function', type(mt.__index.GetNumChildren))
+                  assertEquals('function', type(__index.GetNumChildren))
                 end,
                 GetNumRegions = function()
-                  assertEquals('function', type(mt.__index.GetNumRegions))
+                  assertEquals('function', type(__index.GetNumRegions))
                 end,
                 GetPropagateKeyboardInput = function()
-                  assertEquals('function', type(mt.__index.GetPropagateKeyboardInput))
+                  assertEquals('function', type(__index.GetPropagateKeyboardInput))
                 end,
                 GetRegions = function()
-                  assertEquals('function', type(mt.__index.GetRegions))
+                  assertEquals('function', type(__index.GetRegions))
                 end,
                 IgnoreDepth = function()
-                  assertEquals('function', type(mt.__index.IgnoreDepth))
+                  assertEquals('function', type(__index.IgnoreDepth))
                 end,
                 IsClampedToScreen = function()
-                  assertEquals('function', type(mt.__index.IsClampedToScreen))
+                  assertEquals('function', type(__index.IsClampedToScreen))
                 end,
                 IsEventRegistered = function()
-                  assertEquals('function', type(mt.__index.IsEventRegistered))
+                  assertEquals('function', type(__index.IsEventRegistered))
                 end,
                 IsMouseClickEnabled = function()
-                  assertEquals('function', type(mt.__index.IsMouseClickEnabled))
+                  assertEquals('function', type(__index.IsMouseClickEnabled))
                 end,
                 IsMouseEnabled = function()
-                  assertEquals('function', type(mt.__index.IsMouseEnabled))
+                  assertEquals('function', type(__index.IsMouseEnabled))
                 end,
                 IsMouseMotionEnabled = function()
-                  assertEquals('function', type(mt.__index.IsMouseMotionEnabled))
+                  assertEquals('function', type(__index.IsMouseMotionEnabled))
                 end,
                 IsMouseWheelEnabled = function()
-                  assertEquals('function', type(mt.__index.IsMouseWheelEnabled))
+                  assertEquals('function', type(__index.IsMouseWheelEnabled))
                 end,
                 IsMovable = function()
-                  assertEquals('function', type(mt.__index.IsMovable))
+                  assertEquals('function', type(__index.IsMovable))
                 end,
                 IsResizable = function()
-                  assertEquals('function', type(mt.__index.IsResizable))
+                  assertEquals('function', type(__index.IsResizable))
                 end,
                 IsToplevel = function()
-                  assertEquals('function', type(mt.__index.IsToplevel))
+                  assertEquals('function', type(__index.IsToplevel))
                 end,
                 IsUserPlaced = function()
-                  assertEquals('function', type(mt.__index.IsUserPlaced))
+                  assertEquals('function', type(__index.IsUserPlaced))
                 end,
                 Raise = function()
-                  assertEquals('function', type(mt.__index.Raise))
+                  assertEquals('function', type(__index.Raise))
                 end,
                 RegisterAllEvents = function()
-                  assertEquals('function', type(mt.__index.RegisterAllEvents))
+                  assertEquals('function', type(__index.RegisterAllEvents))
                 end,
                 RegisterEvent = function()
-                  assertEquals('function', type(mt.__index.RegisterEvent))
+                  assertEquals('function', type(__index.RegisterEvent))
                 end,
                 RegisterForDrag = function()
-                  assertEquals('function', type(mt.__index.RegisterForDrag))
+                  assertEquals('function', type(__index.RegisterForDrag))
                 end,
                 RegisterUnitEvent = function()
-                  assertEquals('function', type(mt.__index.RegisterUnitEvent))
+                  assertEquals('function', type(__index.RegisterUnitEvent))
                 end,
                 SetAttribute = function()
-                  assertEquals('function', type(mt.__index.SetAttribute))
+                  assertEquals('function', type(__index.SetAttribute))
                 end,
                 SetAttributeNoHandler = function()
-                  assertEquals('function', type(mt.__index.SetAttributeNoHandler))
+                  assertEquals('function', type(__index.SetAttributeNoHandler))
                 end,
                 SetClampRectInsets = function()
-                  assertEquals('function', type(mt.__index.SetClampRectInsets))
+                  assertEquals('function', type(__index.SetClampRectInsets))
                 end,
                 SetClampedToScreen = function()
-                  assertEquals('function', type(mt.__index.SetClampedToScreen))
+                  assertEquals('function', type(__index.SetClampedToScreen))
                 end,
                 SetClipsChildren = function()
-                  assertEquals('function', type(mt.__index.SetClipsChildren))
+                  assertEquals('function', type(__index.SetClipsChildren))
                 end,
                 SetDepth = function()
-                  assertEquals('function', type(mt.__index.SetDepth))
+                  assertEquals('function', type(__index.SetDepth))
                 end,
                 SetDontSavePosition = function()
-                  assertEquals('function', type(mt.__index.SetDontSavePosition))
+                  assertEquals('function', type(__index.SetDontSavePosition))
                 end,
                 SetFixedFrameLevel = function()
-                  assertEquals('function', type(mt.__index.SetFixedFrameLevel))
+                  assertEquals('function', type(__index.SetFixedFrameLevel))
                 end,
                 SetFixedFrameStrata = function()
-                  assertEquals('function', type(mt.__index.SetFixedFrameStrata))
+                  assertEquals('function', type(__index.SetFixedFrameStrata))
                 end,
                 SetFrameLevel = function()
-                  assertEquals('function', type(mt.__index.SetFrameLevel))
+                  assertEquals('function', type(__index.SetFrameLevel))
                 end,
                 SetFrameStrata = function()
-                  assertEquals('function', type(mt.__index.SetFrameStrata))
+                  assertEquals('function', type(__index.SetFrameStrata))
                 end,
                 SetHitRectInsets = function()
-                  assertEquals('function', type(mt.__index.SetHitRectInsets))
+                  assertEquals('function', type(__index.SetHitRectInsets))
                 end,
                 SetHyperlinksEnabled = function()
-                  assertEquals('function', type(mt.__index.SetHyperlinksEnabled))
+                  assertEquals('function', type(__index.SetHyperlinksEnabled))
                 end,
                 SetID = function()
-                  assertEquals('function', type(mt.__index.SetID))
+                  assertEquals('function', type(__index.SetID))
                 end,
                 SetMaxResize = function()
-                  assertEquals('function', type(mt.__index.SetMaxResize))
+                  assertEquals('function', type(__index.SetMaxResize))
                 end,
                 SetMinResize = function()
-                  assertEquals('function', type(mt.__index.SetMinResize))
+                  assertEquals('function', type(__index.SetMinResize))
                 end,
                 SetMouseClickEnabled = function()
-                  assertEquals('function', type(mt.__index.SetMouseClickEnabled))
+                  assertEquals('function', type(__index.SetMouseClickEnabled))
                 end,
                 SetMouseMotionEnabled = function()
-                  assertEquals('function', type(mt.__index.SetMouseMotionEnabled))
+                  assertEquals('function', type(__index.SetMouseMotionEnabled))
                 end,
                 SetMovable = function()
-                  assertEquals('function', type(mt.__index.SetMovable))
+                  assertEquals('function', type(__index.SetMovable))
                 end,
                 SetPropagateKeyboardInput = function()
-                  assertEquals('function', type(mt.__index.SetPropagateKeyboardInput))
+                  assertEquals('function', type(__index.SetPropagateKeyboardInput))
                 end,
                 SetResizable = function()
-                  assertEquals('function', type(mt.__index.SetResizable))
+                  assertEquals('function', type(__index.SetResizable))
                 end,
                 SetToplevel = function()
-                  assertEquals('function', type(mt.__index.SetToplevel))
+                  assertEquals('function', type(__index.SetToplevel))
                 end,
                 SetUserPlaced = function()
-                  assertEquals('function', type(mt.__index.SetUserPlaced))
+                  assertEquals('function', type(__index.SetUserPlaced))
                 end,
                 StartMoving = function()
-                  assertEquals('function', type(mt.__index.StartMoving))
+                  assertEquals('function', type(__index.StartMoving))
                 end,
                 StopMovingOrSizing = function()
-                  assertEquals('function', type(mt.__index.StopMovingOrSizing))
+                  assertEquals('function', type(__index.StopMovingOrSizing))
                 end,
                 UnregisterAllEvents = function()
-                  assertEquals('function', type(mt.__index.UnregisterAllEvents))
+                  assertEquals('function', type(__index.UnregisterAllEvents))
                 end,
                 UnregisterEvent = function()
-                  assertEquals('function', type(mt.__index.UnregisterEvent))
+                  assertEquals('function', type(__index.UnregisterEvent))
                 end,
               }
             end,
@@ -22050,6 +22110,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -22062,565 +22128,565 @@ function G.GeneratedTests()
               return {
                 AddAtlas = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.AddAtlas))
+                    assertEquals('nil', type(__index.AddAtlas))
                     return
                   end
-                  assertEquals('function', type(mt.__index.AddAtlas))
+                  assertEquals('function', type(__index.AddAtlas))
                 end,
                 AddDoubleLine = function()
-                  assertEquals('function', type(mt.__index.AddDoubleLine))
+                  assertEquals('function', type(__index.AddDoubleLine))
                 end,
                 AddFontStrings = function()
-                  assertEquals('function', type(mt.__index.AddFontStrings))
+                  assertEquals('function', type(__index.AddFontStrings))
                 end,
                 AddLine = function()
-                  assertEquals('function', type(mt.__index.AddLine))
+                  assertEquals('function', type(__index.AddLine))
                 end,
                 AddSpellByID = function()
-                  assertEquals('function', type(mt.__index.AddSpellByID))
+                  assertEquals('function', type(__index.AddSpellByID))
                 end,
                 AddTexture = function()
-                  assertEquals('function', type(mt.__index.AddTexture))
+                  assertEquals('function', type(__index.AddTexture))
                 end,
                 AdvanceSecondaryCompareItem = function()
-                  assertEquals('function', type(mt.__index.AdvanceSecondaryCompareItem))
+                  assertEquals('function', type(__index.AdvanceSecondaryCompareItem))
                 end,
                 AppendText = function()
-                  assertEquals('function', type(mt.__index.AppendText))
+                  assertEquals('function', type(__index.AppendText))
                 end,
                 ClearLines = function()
-                  assertEquals('function', type(mt.__index.ClearLines))
+                  assertEquals('function', type(__index.ClearLines))
                 end,
                 CopyTooltip = function()
-                  assertEquals('function', type(mt.__index.CopyTooltip))
+                  assertEquals('function', type(__index.CopyTooltip))
                 end,
                 FadeOut = function()
-                  assertEquals('function', type(mt.__index.FadeOut))
+                  assertEquals('function', type(__index.FadeOut))
                 end,
                 GetAnchorType = function()
-                  assertEquals('function', type(mt.__index.GetAnchorType))
+                  assertEquals('function', type(__index.GetAnchorType))
                 end,
                 GetAzeritePowerID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.GetAzeritePowerID))
+                    assertEquals('nil', type(__index.GetAzeritePowerID))
                     return
                   end
-                  assertEquals('function', type(mt.__index.GetAzeritePowerID))
+                  assertEquals('function', type(__index.GetAzeritePowerID))
                 end,
                 GetCustomLineSpacing = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.GetCustomLineSpacing))
+                    assertEquals('nil', type(__index.GetCustomLineSpacing))
                     return
                   end
-                  assertEquals('function', type(mt.__index.GetCustomLineSpacing))
+                  assertEquals('function', type(__index.GetCustomLineSpacing))
                 end,
                 GetItem = function()
-                  assertEquals('function', type(mt.__index.GetItem))
+                  assertEquals('function', type(__index.GetItem))
                 end,
                 GetMinimumWidth = function()
-                  assertEquals('function', type(mt.__index.GetMinimumWidth))
+                  assertEquals('function', type(__index.GetMinimumWidth))
                 end,
                 GetOwner = function()
-                  assertEquals('function', type(mt.__index.GetOwner))
+                  assertEquals('function', type(__index.GetOwner))
                 end,
                 GetPadding = function()
-                  assertEquals('function', type(mt.__index.GetPadding))
+                  assertEquals('function', type(__index.GetPadding))
                 end,
                 GetSpell = function()
-                  assertEquals('function', type(mt.__index.GetSpell))
+                  assertEquals('function', type(__index.GetSpell))
                 end,
                 GetUnit = function()
-                  assertEquals('function', type(mt.__index.GetUnit))
+                  assertEquals('function', type(__index.GetUnit))
                 end,
                 IsEquippedItem = function()
-                  assertEquals('function', type(mt.__index.IsEquippedItem))
+                  assertEquals('function', type(__index.IsEquippedItem))
                 end,
                 IsOwned = function()
-                  assertEquals('function', type(mt.__index.IsOwned))
+                  assertEquals('function', type(__index.IsOwned))
                 end,
                 IsUnit = function()
-                  assertEquals('function', type(mt.__index.IsUnit))
+                  assertEquals('function', type(__index.IsUnit))
                 end,
                 NumLines = function()
-                  assertEquals('function', type(mt.__index.NumLines))
+                  assertEquals('function', type(__index.NumLines))
                 end,
                 ResetSecondaryCompareItem = function()
-                  assertEquals('function', type(mt.__index.ResetSecondaryCompareItem))
+                  assertEquals('function', type(__index.ResetSecondaryCompareItem))
                 end,
                 SetAchievementByID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetAchievementByID))
+                    assertEquals('nil', type(__index.SetAchievementByID))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetAchievementByID))
+                  assertEquals('function', type(__index.SetAchievementByID))
                 end,
                 SetAction = function()
-                  assertEquals('function', type(mt.__index.SetAction))
+                  assertEquals('function', type(__index.SetAction))
                 end,
                 SetAllowShowWithNoLines = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetAllowShowWithNoLines))
+                    assertEquals('nil', type(__index.SetAllowShowWithNoLines))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetAllowShowWithNoLines))
+                  assertEquals('function', type(__index.SetAllowShowWithNoLines))
                 end,
                 SetAnchorType = function()
-                  assertEquals('function', type(mt.__index.SetAnchorType))
+                  assertEquals('function', type(__index.SetAnchorType))
                 end,
                 SetArtifactItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetArtifactItem))
+                    assertEquals('nil', type(__index.SetArtifactItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetArtifactItem))
+                  assertEquals('function', type(__index.SetArtifactItem))
                 end,
                 SetArtifactPowerByID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetArtifactPowerByID))
+                    assertEquals('nil', type(__index.SetArtifactPowerByID))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetArtifactPowerByID))
+                  assertEquals('function', type(__index.SetArtifactPowerByID))
                 end,
                 SetAuctionItem = function()
                   if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetAuctionItem))
+                    assertEquals('nil', type(__index.SetAuctionItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetAuctionItem))
+                  assertEquals('function', type(__index.SetAuctionItem))
                 end,
                 SetAuctionSellItem = function()
                   if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetAuctionSellItem))
+                    assertEquals('nil', type(__index.SetAuctionSellItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetAuctionSellItem))
+                  assertEquals('function', type(__index.SetAuctionSellItem))
                 end,
                 SetAzeriteEssence = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetAzeriteEssence))
+                    assertEquals('nil', type(__index.SetAzeriteEssence))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetAzeriteEssence))
+                  assertEquals('function', type(__index.SetAzeriteEssence))
                 end,
                 SetAzeriteEssenceSlot = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetAzeriteEssenceSlot))
+                    assertEquals('nil', type(__index.SetAzeriteEssenceSlot))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetAzeriteEssenceSlot))
+                  assertEquals('function', type(__index.SetAzeriteEssenceSlot))
                 end,
                 SetAzeritePower = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetAzeritePower))
+                    assertEquals('nil', type(__index.SetAzeritePower))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetAzeritePower))
+                  assertEquals('function', type(__index.SetAzeritePower))
                 end,
                 SetBackpackToken = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetBackpackToken))
+                    assertEquals('nil', type(__index.SetBackpackToken))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetBackpackToken))
+                  assertEquals('function', type(__index.SetBackpackToken))
                 end,
                 SetBagItem = function()
-                  assertEquals('function', type(mt.__index.SetBagItem))
+                  assertEquals('function', type(__index.SetBagItem))
                 end,
                 SetBagItemChild = function()
-                  assertEquals('function', type(mt.__index.SetBagItemChild))
+                  assertEquals('function', type(__index.SetBagItemChild))
                 end,
                 SetBuybackItem = function()
-                  assertEquals('function', type(mt.__index.SetBuybackItem))
+                  assertEquals('function', type(__index.SetBuybackItem))
                 end,
                 SetCompanionPet = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetCompanionPet))
+                    assertEquals('nil', type(__index.SetCompanionPet))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetCompanionPet))
+                  assertEquals('function', type(__index.SetCompanionPet))
                 end,
                 SetCompareAzeritePower = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetCompareAzeritePower))
+                    assertEquals('nil', type(__index.SetCompareAzeritePower))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetCompareAzeritePower))
+                  assertEquals('function', type(__index.SetCompareAzeritePower))
                 end,
                 SetCompareItem = function()
-                  assertEquals('function', type(mt.__index.SetCompareItem))
+                  assertEquals('function', type(__index.SetCompareItem))
                 end,
                 SetConduit = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetConduit))
+                    assertEquals('nil', type(__index.SetConduit))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetConduit))
+                  assertEquals('function', type(__index.SetConduit))
                 end,
                 SetCraftItem = function()
                   if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetCraftItem))
+                    assertEquals('nil', type(__index.SetCraftItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetCraftItem))
+                  assertEquals('function', type(__index.SetCraftItem))
                 end,
                 SetCraftSpell = function()
                   if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetCraftSpell))
+                    assertEquals('nil', type(__index.SetCraftSpell))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetCraftSpell))
+                  assertEquals('function', type(__index.SetCraftSpell))
                 end,
                 SetCurrencyByID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetCurrencyByID))
+                    assertEquals('nil', type(__index.SetCurrencyByID))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetCurrencyByID))
+                  assertEquals('function', type(__index.SetCurrencyByID))
                 end,
                 SetCurrencyToken = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetCurrencyToken))
+                    assertEquals('nil', type(__index.SetCurrencyToken))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetCurrencyToken))
+                  assertEquals('function', type(__index.SetCurrencyToken))
                 end,
                 SetCurrencyTokenByID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetCurrencyTokenByID))
+                    assertEquals('nil', type(__index.SetCurrencyTokenByID))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetCurrencyTokenByID))
+                  assertEquals('function', type(__index.SetCurrencyTokenByID))
                 end,
                 SetCustomLineSpacing = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetCustomLineSpacing))
+                    assertEquals('nil', type(__index.SetCustomLineSpacing))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetCustomLineSpacing))
+                  assertEquals('function', type(__index.SetCustomLineSpacing))
                 end,
                 SetEnhancedConduit = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetEnhancedConduit))
+                    assertEquals('nil', type(__index.SetEnhancedConduit))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetEnhancedConduit))
+                  assertEquals('function', type(__index.SetEnhancedConduit))
                 end,
                 SetEquipmentSet = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetEquipmentSet))
+                    assertEquals('nil', type(__index.SetEquipmentSet))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetEquipmentSet))
+                  assertEquals('function', type(__index.SetEquipmentSet))
                 end,
                 SetExistingSocketGem = function()
-                  assertEquals('function', type(mt.__index.SetExistingSocketGem))
+                  assertEquals('function', type(__index.SetExistingSocketGem))
                 end,
                 SetFrameStack = function()
-                  assertEquals('function', type(mt.__index.SetFrameStack))
+                  assertEquals('function', type(__index.SetFrameStack))
                 end,
                 SetGuildBankItem = function()
-                  assertEquals('function', type(mt.__index.SetGuildBankItem))
+                  assertEquals('function', type(__index.SetGuildBankItem))
                 end,
                 SetHeirloomByItemID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetHeirloomByItemID))
+                    assertEquals('nil', type(__index.SetHeirloomByItemID))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetHeirloomByItemID))
+                  assertEquals('function', type(__index.SetHeirloomByItemID))
                 end,
                 SetHyperlink = function()
-                  assertEquals('function', type(mt.__index.SetHyperlink))
+                  assertEquals('function', type(__index.SetHyperlink))
                 end,
                 SetInboxItem = function()
-                  assertEquals('function', type(mt.__index.SetInboxItem))
+                  assertEquals('function', type(__index.SetInboxItem))
                 end,
                 SetInstanceLockEncountersComplete = function()
-                  assertEquals('function', type(mt.__index.SetInstanceLockEncountersComplete))
+                  assertEquals('function', type(__index.SetInstanceLockEncountersComplete))
                 end,
                 SetInventoryItem = function()
-                  assertEquals('function', type(mt.__index.SetInventoryItem))
+                  assertEquals('function', type(__index.SetInventoryItem))
                 end,
                 SetInventoryItemByID = function()
-                  assertEquals('function', type(mt.__index.SetInventoryItemByID))
+                  assertEquals('function', type(__index.SetInventoryItemByID))
                 end,
                 SetItemByID = function()
-                  assertEquals('function', type(mt.__index.SetItemByID))
+                  assertEquals('function', type(__index.SetItemByID))
                 end,
                 SetItemKey = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetItemKey))
+                    assertEquals('nil', type(__index.SetItemKey))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetItemKey))
+                  assertEquals('function', type(__index.SetItemKey))
                 end,
                 SetLFGDungeonReward = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetLFGDungeonReward))
+                    assertEquals('nil', type(__index.SetLFGDungeonReward))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetLFGDungeonReward))
+                  assertEquals('function', type(__index.SetLFGDungeonReward))
                 end,
                 SetLFGDungeonShortageReward = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetLFGDungeonShortageReward))
+                    assertEquals('nil', type(__index.SetLFGDungeonShortageReward))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetLFGDungeonShortageReward))
+                  assertEquals('function', type(__index.SetLFGDungeonShortageReward))
                 end,
                 SetLootCurrency = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetLootCurrency))
+                    assertEquals('nil', type(__index.SetLootCurrency))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetLootCurrency))
+                  assertEquals('function', type(__index.SetLootCurrency))
                 end,
                 SetLootItem = function()
-                  assertEquals('function', type(mt.__index.SetLootItem))
+                  assertEquals('function', type(__index.SetLootItem))
                 end,
                 SetLootRollItem = function()
-                  assertEquals('function', type(mt.__index.SetLootRollItem))
+                  assertEquals('function', type(__index.SetLootRollItem))
                 end,
                 SetMerchantCostItem = function()
-                  assertEquals('function', type(mt.__index.SetMerchantCostItem))
+                  assertEquals('function', type(__index.SetMerchantCostItem))
                 end,
                 SetMerchantItem = function()
-                  assertEquals('function', type(mt.__index.SetMerchantItem))
+                  assertEquals('function', type(__index.SetMerchantItem))
                 end,
                 SetMinimumWidth = function()
-                  assertEquals('function', type(mt.__index.SetMinimumWidth))
+                  assertEquals('function', type(__index.SetMinimumWidth))
                 end,
                 SetMountBySpellID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetMountBySpellID))
+                    assertEquals('nil', type(__index.SetMountBySpellID))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetMountBySpellID))
+                  assertEquals('function', type(__index.SetMountBySpellID))
                 end,
                 SetOwnedItemByID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetOwnedItemByID))
+                    assertEquals('nil', type(__index.SetOwnedItemByID))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetOwnedItemByID))
+                  assertEquals('function', type(__index.SetOwnedItemByID))
                 end,
                 SetOwner = function()
-                  assertEquals('function', type(mt.__index.SetOwner))
+                  assertEquals('function', type(__index.SetOwner))
                 end,
                 SetPadding = function()
-                  assertEquals('function', type(mt.__index.SetPadding))
+                  assertEquals('function', type(__index.SetPadding))
                 end,
                 SetPetAction = function()
-                  assertEquals('function', type(mt.__index.SetPetAction))
+                  assertEquals('function', type(__index.SetPetAction))
                 end,
                 SetPossession = function()
-                  assertEquals('function', type(mt.__index.SetPossession))
+                  assertEquals('function', type(__index.SetPossession))
                 end,
                 SetPvpBrawl = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetPvpBrawl))
+                    assertEquals('nil', type(__index.SetPvpBrawl))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetPvpBrawl))
+                  assertEquals('function', type(__index.SetPvpBrawl))
                 end,
                 SetPvpTalent = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetPvpTalent))
+                    assertEquals('nil', type(__index.SetPvpTalent))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetPvpTalent))
+                  assertEquals('function', type(__index.SetPvpTalent))
                 end,
                 SetQuestCurrency = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetQuestCurrency))
+                    assertEquals('nil', type(__index.SetQuestCurrency))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetQuestCurrency))
+                  assertEquals('function', type(__index.SetQuestCurrency))
                 end,
                 SetQuestItem = function()
-                  assertEquals('function', type(mt.__index.SetQuestItem))
+                  assertEquals('function', type(__index.SetQuestItem))
                 end,
                 SetQuestLogCurrency = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetQuestLogCurrency))
+                    assertEquals('nil', type(__index.SetQuestLogCurrency))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetQuestLogCurrency))
+                  assertEquals('function', type(__index.SetQuestLogCurrency))
                 end,
                 SetQuestLogItem = function()
-                  assertEquals('function', type(mt.__index.SetQuestLogItem))
+                  assertEquals('function', type(__index.SetQuestLogItem))
                 end,
                 SetQuestLogRewardSpell = function()
-                  assertEquals('function', type(mt.__index.SetQuestLogRewardSpell))
+                  assertEquals('function', type(__index.SetQuestLogRewardSpell))
                 end,
                 SetQuestLogSpecialItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetQuestLogSpecialItem))
+                    assertEquals('nil', type(__index.SetQuestLogSpecialItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetQuestLogSpecialItem))
+                  assertEquals('function', type(__index.SetQuestLogSpecialItem))
                 end,
                 SetQuestPartyProgress = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetQuestPartyProgress))
+                    assertEquals('nil', type(__index.SetQuestPartyProgress))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetQuestPartyProgress))
+                  assertEquals('function', type(__index.SetQuestPartyProgress))
                 end,
                 SetQuestRewardSpell = function()
-                  assertEquals('function', type(mt.__index.SetQuestRewardSpell))
+                  assertEquals('function', type(__index.SetQuestRewardSpell))
                 end,
                 SetRecipeRankInfo = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetRecipeRankInfo))
+                    assertEquals('nil', type(__index.SetRecipeRankInfo))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetRecipeRankInfo))
+                  assertEquals('function', type(__index.SetRecipeRankInfo))
                 end,
                 SetRecipeReagentItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetRecipeReagentItem))
+                    assertEquals('nil', type(__index.SetRecipeReagentItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetRecipeReagentItem))
+                  assertEquals('function', type(__index.SetRecipeReagentItem))
                 end,
                 SetRecipeResultItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetRecipeResultItem))
+                    assertEquals('nil', type(__index.SetRecipeResultItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetRecipeResultItem))
+                  assertEquals('function', type(__index.SetRecipeResultItem))
                 end,
                 SetRuneforgeResultItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetRuneforgeResultItem))
+                    assertEquals('nil', type(__index.SetRuneforgeResultItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetRuneforgeResultItem))
+                  assertEquals('function', type(__index.SetRuneforgeResultItem))
                 end,
                 SetSendMailItem = function()
-                  assertEquals('function', type(mt.__index.SetSendMailItem))
+                  assertEquals('function', type(__index.SetSendMailItem))
                 end,
                 SetShapeshift = function()
-                  assertEquals('function', type(mt.__index.SetShapeshift))
+                  assertEquals('function', type(__index.SetShapeshift))
                 end,
                 SetShrinkToFitWrapped = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetShrinkToFitWrapped))
+                    assertEquals('nil', type(__index.SetShrinkToFitWrapped))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetShrinkToFitWrapped))
+                  assertEquals('function', type(__index.SetShrinkToFitWrapped))
                 end,
                 SetSocketGem = function()
-                  assertEquals('function', type(mt.__index.SetSocketGem))
+                  assertEquals('function', type(__index.SetSocketGem))
                 end,
                 SetSocketedItem = function()
-                  assertEquals('function', type(mt.__index.SetSocketedItem))
+                  assertEquals('function', type(__index.SetSocketedItem))
                 end,
                 SetSocketedRelic = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetSocketedRelic))
+                    assertEquals('nil', type(__index.SetSocketedRelic))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetSocketedRelic))
+                  assertEquals('function', type(__index.SetSocketedRelic))
                 end,
                 SetSpellBookItem = function()
-                  assertEquals('function', type(mt.__index.SetSpellBookItem))
+                  assertEquals('function', type(__index.SetSpellBookItem))
                 end,
                 SetSpellByID = function()
-                  assertEquals('function', type(mt.__index.SetSpellByID))
+                  assertEquals('function', type(__index.SetSpellByID))
                 end,
                 SetTalent = function()
-                  assertEquals('function', type(mt.__index.SetTalent))
+                  assertEquals('function', type(__index.SetTalent))
                 end,
                 SetText = function()
-                  assertEquals('function', type(mt.__index.SetText))
+                  assertEquals('function', type(__index.SetText))
                 end,
                 SetTotem = function()
-                  assertEquals('function', type(mt.__index.SetTotem))
+                  assertEquals('function', type(__index.SetTotem))
                 end,
                 SetToyByItemID = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetToyByItemID))
+                    assertEquals('nil', type(__index.SetToyByItemID))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetToyByItemID))
+                  assertEquals('function', type(__index.SetToyByItemID))
                 end,
                 SetTrackingSpell = function()
                   if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetTrackingSpell))
+                    assertEquals('nil', type(__index.SetTrackingSpell))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetTrackingSpell))
+                  assertEquals('function', type(__index.SetTrackingSpell))
                 end,
                 SetTradePlayerItem = function()
-                  assertEquals('function', type(mt.__index.SetTradePlayerItem))
+                  assertEquals('function', type(__index.SetTradePlayerItem))
                 end,
                 SetTradeSkillItem = function()
                   if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetTradeSkillItem))
+                    assertEquals('nil', type(__index.SetTradeSkillItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetTradeSkillItem))
+                  assertEquals('function', type(__index.SetTradeSkillItem))
                 end,
                 SetTradeTargetItem = function()
-                  assertEquals('function', type(mt.__index.SetTradeTargetItem))
+                  assertEquals('function', type(__index.SetTradeTargetItem))
                 end,
                 SetTrainerService = function()
-                  assertEquals('function', type(mt.__index.SetTrainerService))
+                  assertEquals('function', type(__index.SetTrainerService))
                 end,
                 SetTransmogrifyItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetTransmogrifyItem))
+                    assertEquals('nil', type(__index.SetTransmogrifyItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetTransmogrifyItem))
+                  assertEquals('function', type(__index.SetTransmogrifyItem))
                 end,
                 SetUnit = function()
-                  assertEquals('function', type(mt.__index.SetUnit))
+                  assertEquals('function', type(__index.SetUnit))
                 end,
                 SetUnitAura = function()
-                  assertEquals('function', type(mt.__index.SetUnitAura))
+                  assertEquals('function', type(__index.SetUnitAura))
                 end,
                 SetUnitBuff = function()
-                  assertEquals('function', type(mt.__index.SetUnitBuff))
+                  assertEquals('function', type(__index.SetUnitBuff))
                 end,
                 SetUnitDebuff = function()
-                  assertEquals('function', type(mt.__index.SetUnitDebuff))
+                  assertEquals('function', type(__index.SetUnitDebuff))
                 end,
                 SetUpgradeItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetUpgradeItem))
+                    assertEquals('nil', type(__index.SetUpgradeItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetUpgradeItem))
+                  assertEquals('function', type(__index.SetUpgradeItem))
                 end,
                 SetVoidDepositItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetVoidDepositItem))
+                    assertEquals('nil', type(__index.SetVoidDepositItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetVoidDepositItem))
+                  assertEquals('function', type(__index.SetVoidDepositItem))
                 end,
                 SetVoidItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetVoidItem))
+                    assertEquals('nil', type(__index.SetVoidItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetVoidItem))
+                  assertEquals('function', type(__index.SetVoidItem))
                 end,
                 SetVoidWithdrawalItem = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetVoidWithdrawalItem))
+                    assertEquals('nil', type(__index.SetVoidWithdrawalItem))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetVoidWithdrawalItem))
+                  assertEquals('function', type(__index.SetVoidWithdrawalItem))
                 end,
                 SetWeeklyReward = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetWeeklyReward))
+                    assertEquals('nil', type(__index.SetWeeklyReward))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetWeeklyReward))
+                  assertEquals('function', type(__index.SetWeeklyReward))
                 end,
               }
             end,
@@ -22642,6 +22708,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -22653,10 +22725,10 @@ function G.GeneratedTests()
             methods = function()
               return {
                 AddMessage = function()
-                  assertEquals('function', type(mt.__index.AddMessage))
+                  assertEquals('function', type(__index.AddMessage))
                 end,
                 Clear = function()
-                  assertEquals('function', type(mt.__index.Clear))
+                  assertEquals('function', type(__index.Clear))
                 end,
               }
             end,
@@ -22669,6 +22741,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -22680,28 +22758,28 @@ function G.GeneratedTests()
             methods = function()
               return {
                 ClearModel = function()
-                  assertEquals('function', type(mt.__index.ClearModel))
+                  assertEquals('function', type(__index.ClearModel))
                 end,
                 GetModelScale = function()
-                  assertEquals('function', type(mt.__index.GetModelScale))
+                  assertEquals('function', type(__index.GetModelScale))
                 end,
                 SetFacing = function()
-                  assertEquals('function', type(mt.__index.SetFacing))
+                  assertEquals('function', type(__index.SetFacing))
                 end,
                 SetLight = function()
-                  assertEquals('function', type(mt.__index.SetLight))
+                  assertEquals('function', type(__index.SetLight))
                 end,
                 SetModel = function()
-                  assertEquals('function', type(mt.__index.SetModel))
+                  assertEquals('function', type(__index.SetModel))
                 end,
                 SetModelScale = function()
-                  assertEquals('function', type(mt.__index.SetModelScale))
+                  assertEquals('function', type(__index.SetModelScale))
                 end,
                 SetPosition = function()
-                  assertEquals('function', type(mt.__index.SetPosition))
+                  assertEquals('function', type(__index.SetPosition))
                 end,
                 TransformCameraSpaceToModelSpace = function()
-                  assertEquals('function', type(mt.__index.TransformCameraSpaceToModelSpace))
+                  assertEquals('function', type(__index.TransformCameraSpaceToModelSpace))
                 end,
               }
             end,
@@ -22714,6 +22792,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -22725,147 +22809,147 @@ function G.GeneratedTests()
             methods = function()
               return {
                 ClearFog = function()
-                  assertEquals('function', type(mt.__index.ClearFog))
+                  assertEquals('function', type(__index.ClearFog))
                 end,
                 CreateActor = function()
-                  assertEquals('function', type(mt.__index.CreateActor))
+                  assertEquals('function', type(__index.CreateActor))
                 end,
                 GetActorAtIndex = function()
-                  assertEquals('function', type(mt.__index.GetActorAtIndex))
+                  assertEquals('function', type(__index.GetActorAtIndex))
                 end,
                 GetCameraFarClip = function()
-                  assertEquals('function', type(mt.__index.GetCameraFarClip))
+                  assertEquals('function', type(__index.GetCameraFarClip))
                 end,
                 GetCameraFieldOfView = function()
-                  assertEquals('function', type(mt.__index.GetCameraFieldOfView))
+                  assertEquals('function', type(__index.GetCameraFieldOfView))
                 end,
                 GetCameraForward = function()
-                  assertEquals('function', type(mt.__index.GetCameraForward))
+                  assertEquals('function', type(__index.GetCameraForward))
                 end,
                 GetCameraNearClip = function()
-                  assertEquals('function', type(mt.__index.GetCameraNearClip))
+                  assertEquals('function', type(__index.GetCameraNearClip))
                 end,
                 GetCameraPosition = function()
-                  assertEquals('function', type(mt.__index.GetCameraPosition))
+                  assertEquals('function', type(__index.GetCameraPosition))
                 end,
                 GetCameraRight = function()
-                  assertEquals('function', type(mt.__index.GetCameraRight))
+                  assertEquals('function', type(__index.GetCameraRight))
                 end,
                 GetCameraUp = function()
-                  assertEquals('function', type(mt.__index.GetCameraUp))
+                  assertEquals('function', type(__index.GetCameraUp))
                 end,
                 GetDrawLayer = function()
-                  assertEquals('function', type(mt.__index.GetDrawLayer))
+                  assertEquals('function', type(__index.GetDrawLayer))
                 end,
                 GetFogColor = function()
-                  assertEquals('function', type(mt.__index.GetFogColor))
+                  assertEquals('function', type(__index.GetFogColor))
                 end,
                 GetFogFar = function()
-                  assertEquals('function', type(mt.__index.GetFogFar))
+                  assertEquals('function', type(__index.GetFogFar))
                 end,
                 GetFogNear = function()
-                  assertEquals('function', type(mt.__index.GetFogNear))
+                  assertEquals('function', type(__index.GetFogNear))
                 end,
                 GetLightAmbientColor = function()
-                  assertEquals('function', type(mt.__index.GetLightAmbientColor))
+                  assertEquals('function', type(__index.GetLightAmbientColor))
                 end,
                 GetLightDiffuseColor = function()
-                  assertEquals('function', type(mt.__index.GetLightDiffuseColor))
+                  assertEquals('function', type(__index.GetLightDiffuseColor))
                 end,
                 GetLightDirection = function()
-                  assertEquals('function', type(mt.__index.GetLightDirection))
+                  assertEquals('function', type(__index.GetLightDirection))
                 end,
                 GetLightPosition = function()
-                  assertEquals('function', type(mt.__index.GetLightPosition))
+                  assertEquals('function', type(__index.GetLightPosition))
                 end,
                 GetLightType = function()
-                  assertEquals('function', type(mt.__index.GetLightType))
+                  assertEquals('function', type(__index.GetLightType))
                 end,
                 GetNumActors = function()
-                  assertEquals('function', type(mt.__index.GetNumActors))
+                  assertEquals('function', type(__index.GetNumActors))
                 end,
                 GetViewInsets = function()
-                  assertEquals('function', type(mt.__index.GetViewInsets))
+                  assertEquals('function', type(__index.GetViewInsets))
                 end,
                 GetViewTranslation = function()
-                  assertEquals('function', type(mt.__index.GetViewTranslation))
+                  assertEquals('function', type(__index.GetViewTranslation))
                 end,
                 IsLightVisible = function()
-                  assertEquals('function', type(mt.__index.IsLightVisible))
+                  assertEquals('function', type(__index.IsLightVisible))
                 end,
                 Project3DPointTo2D = function()
-                  assertEquals('function', type(mt.__index.Project3DPointTo2D))
+                  assertEquals('function', type(__index.Project3DPointTo2D))
                 end,
                 SetCameraFarClip = function()
-                  assertEquals('function', type(mt.__index.SetCameraFarClip))
+                  assertEquals('function', type(__index.SetCameraFarClip))
                 end,
                 SetCameraFieldOfView = function()
-                  assertEquals('function', type(mt.__index.SetCameraFieldOfView))
+                  assertEquals('function', type(__index.SetCameraFieldOfView))
                 end,
                 SetCameraNearClip = function()
-                  assertEquals('function', type(mt.__index.SetCameraNearClip))
+                  assertEquals('function', type(__index.SetCameraNearClip))
                 end,
                 SetCameraOrientationByAxisVectors = function()
-                  assertEquals('function', type(mt.__index.SetCameraOrientationByAxisVectors))
+                  assertEquals('function', type(__index.SetCameraOrientationByAxisVectors))
                 end,
                 SetCameraOrientationByYawPitchRoll = function()
-                  assertEquals('function', type(mt.__index.SetCameraOrientationByYawPitchRoll))
+                  assertEquals('function', type(__index.SetCameraOrientationByYawPitchRoll))
                 end,
                 SetCameraPosition = function()
-                  assertEquals('function', type(mt.__index.SetCameraPosition))
+                  assertEquals('function', type(__index.SetCameraPosition))
                 end,
                 SetDesaturation = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetDesaturation))
+                    assertEquals('nil', type(__index.SetDesaturation))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetDesaturation))
+                  assertEquals('function', type(__index.SetDesaturation))
                 end,
                 SetDrawLayer = function()
-                  assertEquals('function', type(mt.__index.SetDrawLayer))
+                  assertEquals('function', type(__index.SetDrawLayer))
                 end,
                 SetFogColor = function()
-                  assertEquals('function', type(mt.__index.SetFogColor))
+                  assertEquals('function', type(__index.SetFogColor))
                 end,
                 SetFogFar = function()
-                  assertEquals('function', type(mt.__index.SetFogFar))
+                  assertEquals('function', type(__index.SetFogFar))
                 end,
                 SetFogNear = function()
-                  assertEquals('function', type(mt.__index.SetFogNear))
+                  assertEquals('function', type(__index.SetFogNear))
                 end,
                 SetLightAmbientColor = function()
-                  assertEquals('function', type(mt.__index.SetLightAmbientColor))
+                  assertEquals('function', type(__index.SetLightAmbientColor))
                 end,
                 SetLightDiffuseColor = function()
-                  assertEquals('function', type(mt.__index.SetLightDiffuseColor))
+                  assertEquals('function', type(__index.SetLightDiffuseColor))
                 end,
                 SetLightDirection = function()
-                  assertEquals('function', type(mt.__index.SetLightDirection))
+                  assertEquals('function', type(__index.SetLightDirection))
                 end,
                 SetLightPosition = function()
-                  assertEquals('function', type(mt.__index.SetLightPosition))
+                  assertEquals('function', type(__index.SetLightPosition))
                 end,
                 SetLightType = function()
-                  assertEquals('function', type(mt.__index.SetLightType))
+                  assertEquals('function', type(__index.SetLightType))
                 end,
                 SetLightVisible = function()
-                  assertEquals('function', type(mt.__index.SetLightVisible))
+                  assertEquals('function', type(__index.SetLightVisible))
                 end,
                 SetPaused = function()
                   if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
-                    assertEquals('nil', type(mt.__index.SetPaused))
+                    assertEquals('nil', type(__index.SetPaused))
                     return
                   end
-                  assertEquals('function', type(mt.__index.SetPaused))
+                  assertEquals('function', type(__index.SetPaused))
                 end,
                 SetViewInsets = function()
-                  assertEquals('function', type(mt.__index.SetViewInsets))
+                  assertEquals('function', type(__index.SetViewInsets))
                 end,
                 SetViewTranslation = function()
-                  assertEquals('function', type(mt.__index.SetViewTranslation))
+                  assertEquals('function', type(__index.SetViewTranslation))
                 end,
                 TakeActor = function()
-                  assertEquals('function', type(mt.__index.TakeActor))
+                  assertEquals('function', type(__index.TakeActor))
                 end,
               }
             end,
@@ -22878,6 +22962,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -22889,13 +22979,13 @@ function G.GeneratedTests()
             methods = function()
               return {
                 EnableSubtitles = function()
-                  assertEquals('function', type(mt.__index.EnableSubtitles))
+                  assertEquals('function', type(__index.EnableSubtitles))
                 end,
                 StartMovie = function()
-                  assertEquals('function', type(mt.__index.StartMovie))
+                  assertEquals('function', type(__index.StartMovie))
                 end,
                 StopMovie = function()
-                  assertEquals('function', type(mt.__index.StopMovie))
+                  assertEquals('function', type(__index.StopMovie))
                 end,
               }
             end,
@@ -22908,6 +22998,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -22934,6 +23030,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -22945,40 +23047,40 @@ function G.GeneratedTests()
             methods = function()
               return {
                 FreezeAnimation = function()
-                  assertEquals('function', type(mt.__index.FreezeAnimation))
+                  assertEquals('function', type(__index.FreezeAnimation))
                 end,
                 GetDisplayInfo = function()
-                  assertEquals('function', type(mt.__index.GetDisplayInfo))
+                  assertEquals('function', type(__index.GetDisplayInfo))
                 end,
                 RefreshCamera = function()
-                  assertEquals('function', type(mt.__index.RefreshCamera))
+                  assertEquals('function', type(__index.RefreshCamera))
                 end,
                 RefreshUnit = function()
-                  assertEquals('function', type(mt.__index.RefreshUnit))
+                  assertEquals('function', type(__index.RefreshUnit))
                 end,
                 SetAnimation = function()
-                  assertEquals('function', type(mt.__index.SetAnimation))
+                  assertEquals('function', type(__index.SetAnimation))
                 end,
                 SetCamDistanceScale = function()
-                  assertEquals('function', type(mt.__index.SetCamDistanceScale))
+                  assertEquals('function', type(__index.SetCamDistanceScale))
                 end,
                 SetDisplayInfo = function()
-                  assertEquals('function', type(mt.__index.SetDisplayInfo))
+                  assertEquals('function', type(__index.SetDisplayInfo))
                 end,
                 SetDoBlend = function()
-                  assertEquals('function', type(mt.__index.SetDoBlend))
+                  assertEquals('function', type(__index.SetDoBlend))
                 end,
                 SetKeepModelOnHide = function()
-                  assertEquals('function', type(mt.__index.SetKeepModelOnHide))
+                  assertEquals('function', type(__index.SetKeepModelOnHide))
                 end,
                 SetPortraitZoom = function()
-                  assertEquals('function', type(mt.__index.SetPortraitZoom))
+                  assertEquals('function', type(__index.SetPortraitZoom))
                 end,
                 SetRotation = function()
-                  assertEquals('function', type(mt.__index.SetRotation))
+                  assertEquals('function', type(__index.SetRotation))
                 end,
                 SetUnit = function()
-                  assertEquals('function', type(mt.__index.SetUnit))
+                  assertEquals('function', type(__index.SetUnit))
                 end,
               }
             end,
@@ -22995,6 +23097,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23025,6 +23133,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23045,6 +23159,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23056,31 +23176,31 @@ function G.GeneratedTests()
             methods = function()
               return {
                 GetHorizontalScroll = function()
-                  assertEquals('function', type(mt.__index.GetHorizontalScroll))
+                  assertEquals('function', type(__index.GetHorizontalScroll))
                 end,
                 GetHorizontalScrollRange = function()
-                  assertEquals('function', type(mt.__index.GetHorizontalScrollRange))
+                  assertEquals('function', type(__index.GetHorizontalScrollRange))
                 end,
                 GetScrollChild = function()
-                  assertEquals('function', type(mt.__index.GetScrollChild))
+                  assertEquals('function', type(__index.GetScrollChild))
                 end,
                 GetVerticalScroll = function()
-                  assertEquals('function', type(mt.__index.GetVerticalScroll))
+                  assertEquals('function', type(__index.GetVerticalScroll))
                 end,
                 GetVerticalScrollRange = function()
-                  assertEquals('function', type(mt.__index.GetVerticalScrollRange))
+                  assertEquals('function', type(__index.GetVerticalScrollRange))
                 end,
                 SetHorizontalScroll = function()
-                  assertEquals('function', type(mt.__index.SetHorizontalScroll))
+                  assertEquals('function', type(__index.SetHorizontalScroll))
                 end,
                 SetScrollChild = function()
-                  assertEquals('function', type(mt.__index.SetScrollChild))
+                  assertEquals('function', type(__index.SetScrollChild))
                 end,
                 SetVerticalScroll = function()
-                  assertEquals('function', type(mt.__index.SetVerticalScroll))
+                  assertEquals('function', type(__index.SetVerticalScroll))
                 end,
                 UpdateScrollChildRect = function()
-                  assertEquals('function', type(mt.__index.UpdateScrollChildRect))
+                  assertEquals('function', type(__index.UpdateScrollChildRect))
                 end,
               }
             end,
@@ -23093,6 +23213,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23104,10 +23230,10 @@ function G.GeneratedTests()
             methods = function()
               return {
                 GetContentHeight = function()
-                  assertEquals('function', type(mt.__index.GetContentHeight))
+                  assertEquals('function', type(__index.GetContentHeight))
                 end,
                 SetText = function()
-                  assertEquals('function', type(mt.__index.SetText))
+                  assertEquals('function', type(__index.SetText))
                 end,
               }
             end,
@@ -23120,6 +23246,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23131,61 +23263,61 @@ function G.GeneratedTests()
             methods = function()
               return {
                 Disable = function()
-                  assertEquals('function', type(mt.__index.Disable))
+                  assertEquals('function', type(__index.Disable))
                 end,
                 Enable = function()
-                  assertEquals('function', type(mt.__index.Enable))
+                  assertEquals('function', type(__index.Enable))
                 end,
                 GetMinMaxValues = function()
-                  assertEquals('function', type(mt.__index.GetMinMaxValues))
+                  assertEquals('function', type(__index.GetMinMaxValues))
                 end,
                 GetObeyStepOnDrag = function()
-                  assertEquals('function', type(mt.__index.GetObeyStepOnDrag))
+                  assertEquals('function', type(__index.GetObeyStepOnDrag))
                 end,
                 GetOrientation = function()
-                  assertEquals('function', type(mt.__index.GetOrientation))
+                  assertEquals('function', type(__index.GetOrientation))
                 end,
                 GetStepsPerPage = function()
-                  assertEquals('function', type(mt.__index.GetStepsPerPage))
+                  assertEquals('function', type(__index.GetStepsPerPage))
                 end,
                 GetThumbTexture = function()
-                  assertEquals('function', type(mt.__index.GetThumbTexture))
+                  assertEquals('function', type(__index.GetThumbTexture))
                 end,
                 GetValue = function()
-                  assertEquals('function', type(mt.__index.GetValue))
+                  assertEquals('function', type(__index.GetValue))
                 end,
                 GetValueStep = function()
-                  assertEquals('function', type(mt.__index.GetValueStep))
+                  assertEquals('function', type(__index.GetValueStep))
                 end,
                 IsDraggingThumb = function()
-                  assertEquals('function', type(mt.__index.IsDraggingThumb))
+                  assertEquals('function', type(__index.IsDraggingThumb))
                 end,
                 IsEnabled = function()
-                  assertEquals('function', type(mt.__index.IsEnabled))
+                  assertEquals('function', type(__index.IsEnabled))
                 end,
                 SetEnabled = function()
-                  assertEquals('function', type(mt.__index.SetEnabled))
+                  assertEquals('function', type(__index.SetEnabled))
                 end,
                 SetMinMaxValues = function()
-                  assertEquals('function', type(mt.__index.SetMinMaxValues))
+                  assertEquals('function', type(__index.SetMinMaxValues))
                 end,
                 SetObeyStepOnDrag = function()
-                  assertEquals('function', type(mt.__index.SetObeyStepOnDrag))
+                  assertEquals('function', type(__index.SetObeyStepOnDrag))
                 end,
                 SetOrientation = function()
-                  assertEquals('function', type(mt.__index.SetOrientation))
+                  assertEquals('function', type(__index.SetOrientation))
                 end,
                 SetStepsPerPage = function()
-                  assertEquals('function', type(mt.__index.SetStepsPerPage))
+                  assertEquals('function', type(__index.SetStepsPerPage))
                 end,
                 SetThumbTexture = function()
-                  assertEquals('function', type(mt.__index.SetThumbTexture))
+                  assertEquals('function', type(__index.SetThumbTexture))
                 end,
                 SetValue = function()
-                  assertEquals('function', type(mt.__index.SetValue))
+                  assertEquals('function', type(__index.SetValue))
                 end,
                 SetValueStep = function()
-                  assertEquals('function', type(mt.__index.SetValueStep))
+                  assertEquals('function', type(__index.SetValueStep))
                 end,
               }
             end,
@@ -23198,6 +23330,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23209,58 +23347,58 @@ function G.GeneratedTests()
             methods = function()
               return {
                 GetFillStyle = function()
-                  assertEquals('function', type(mt.__index.GetFillStyle))
+                  assertEquals('function', type(__index.GetFillStyle))
                 end,
                 GetMinMaxValues = function()
-                  assertEquals('function', type(mt.__index.GetMinMaxValues))
+                  assertEquals('function', type(__index.GetMinMaxValues))
                 end,
                 GetOrientation = function()
-                  assertEquals('function', type(mt.__index.GetOrientation))
+                  assertEquals('function', type(__index.GetOrientation))
                 end,
                 GetReverseFill = function()
-                  assertEquals('function', type(mt.__index.GetReverseFill))
+                  assertEquals('function', type(__index.GetReverseFill))
                 end,
                 GetRotatesTexture = function()
-                  assertEquals('function', type(mt.__index.GetRotatesTexture))
+                  assertEquals('function', type(__index.GetRotatesTexture))
                 end,
                 GetStatusBarAtlas = function()
-                  assertEquals('function', type(mt.__index.GetStatusBarAtlas))
+                  assertEquals('function', type(__index.GetStatusBarAtlas))
                 end,
                 GetStatusBarColor = function()
-                  assertEquals('function', type(mt.__index.GetStatusBarColor))
+                  assertEquals('function', type(__index.GetStatusBarColor))
                 end,
                 GetStatusBarTexture = function()
-                  assertEquals('function', type(mt.__index.GetStatusBarTexture))
+                  assertEquals('function', type(__index.GetStatusBarTexture))
                 end,
                 GetValue = function()
-                  assertEquals('function', type(mt.__index.GetValue))
+                  assertEquals('function', type(__index.GetValue))
                 end,
                 SetFillStyle = function()
-                  assertEquals('function', type(mt.__index.SetFillStyle))
+                  assertEquals('function', type(__index.SetFillStyle))
                 end,
                 SetMinMaxValues = function()
-                  assertEquals('function', type(mt.__index.SetMinMaxValues))
+                  assertEquals('function', type(__index.SetMinMaxValues))
                 end,
                 SetOrientation = function()
-                  assertEquals('function', type(mt.__index.SetOrientation))
+                  assertEquals('function', type(__index.SetOrientation))
                 end,
                 SetReverseFill = function()
-                  assertEquals('function', type(mt.__index.SetReverseFill))
+                  assertEquals('function', type(__index.SetReverseFill))
                 end,
                 SetRotatesTexture = function()
-                  assertEquals('function', type(mt.__index.SetRotatesTexture))
+                  assertEquals('function', type(__index.SetRotatesTexture))
                 end,
                 SetStatusBarAtlas = function()
-                  assertEquals('function', type(mt.__index.SetStatusBarAtlas))
+                  assertEquals('function', type(__index.SetStatusBarAtlas))
                 end,
                 SetStatusBarColor = function()
-                  assertEquals('function', type(mt.__index.SetStatusBarColor))
+                  assertEquals('function', type(__index.SetStatusBarColor))
                 end,
                 SetStatusBarTexture = function()
-                  assertEquals('function', type(mt.__index.SetStatusBarTexture))
+                  assertEquals('function', type(__index.SetStatusBarTexture))
                 end,
                 SetValue = function()
-                  assertEquals('function', type(mt.__index.SetValue))
+                  assertEquals('function', type(__index.SetValue))
                 end,
               }
             end,
@@ -23273,6 +23411,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23284,13 +23428,13 @@ function G.GeneratedTests()
             methods = function()
               return {
                 GetLowerEmblemTexture = function()
-                  assertEquals('function', type(mt.__index.GetLowerEmblemTexture))
+                  assertEquals('function', type(__index.GetLowerEmblemTexture))
                 end,
                 GetUpperEmblemTexture = function()
-                  assertEquals('function', type(mt.__index.GetUpperEmblemTexture))
+                  assertEquals('function', type(__index.GetUpperEmblemTexture))
                 end,
                 InitializeTabardColors = function()
-                  assertEquals('function', type(mt.__index.InitializeTabardColors))
+                  assertEquals('function', type(__index.InitializeTabardColors))
                 end,
               }
             end,
@@ -23315,6 +23459,12 @@ function G.GeneratedTests()
           local mt = getmetatable(frame)
           assert(mt == getmetatable(frame2))
           assert(mt ~= nil)
+          assert(getmetatable(mt) == nil)
+          local mtk, __index = next(mt)
+          assertEquals('__index', mtk)
+          assertEquals('table', type(__index))
+          assertEquals(nil, next(mt, mtk))
+          assertEquals(nil, getmetatable(__index))
           return {
             contents = function()
               local udk, udv = next(frame)
@@ -23326,31 +23476,31 @@ function G.GeneratedTests()
             methods = function()
               return {
                 AddUnit = function()
-                  assertEquals('function', type(mt.__index.AddUnit))
+                  assertEquals('function', type(__index.AddUnit))
                 end,
                 ClearUnits = function()
-                  assertEquals('function', type(mt.__index.ClearUnits))
+                  assertEquals('function', type(__index.ClearUnits))
                 end,
                 FinalizeUnits = function()
-                  assertEquals('function', type(mt.__index.FinalizeUnits))
+                  assertEquals('function', type(__index.FinalizeUnits))
                 end,
                 GetMouseOverUnits = function()
-                  assertEquals('function', type(mt.__index.GetMouseOverUnits))
+                  assertEquals('function', type(__index.GetMouseOverUnits))
                 end,
                 SetPlayerPingScale = function()
-                  assertEquals('function', type(mt.__index.SetPlayerPingScale))
+                  assertEquals('function', type(__index.SetPlayerPingScale))
                 end,
                 SetPlayerPingTexture = function()
-                  assertEquals('function', type(mt.__index.SetPlayerPingTexture))
+                  assertEquals('function', type(__index.SetPlayerPingTexture))
                 end,
                 SetUiMapID = function()
-                  assertEquals('function', type(mt.__index.SetUiMapID))
+                  assertEquals('function', type(__index.SetUiMapID))
                 end,
                 StartPlayerPing = function()
-                  assertEquals('function', type(mt.__index.StartPlayerPing))
+                  assertEquals('function', type(__index.StartPlayerPing))
                 end,
                 StopPlayerPing = function()
-                  assertEquals('function', type(mt.__index.StopPlayerPing))
+                  assertEquals('function', type(__index.StopPlayerPing))
                 end,
               }
             end,
