@@ -1,0 +1,3 @@
+local self, text = ...
+local ud = u(self)
+ud.editboxText = ud.editboxText .. text

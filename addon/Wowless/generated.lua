@@ -27028,6 +27028,12 @@ function G.GeneratedTests()
         Line = function()
           assertCreateFrameFails('Line')
         end,
+        LineScale = function()
+          assertCreateFrameFails('LineScale')
+        end,
+        LineTranslation = function()
+          assertCreateFrameFails('LineTranslation')
+        end,
         MaskTexture = function()
           assertCreateFrameFails('MaskTexture')
         end,

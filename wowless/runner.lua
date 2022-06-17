@@ -300,6 +300,10 @@ local function run(cfg)
       api.SendEvent(k)
     end
   end
+  if api.states.Addons.KethoDoc then
+    api.env.KethoDoc:DumpWidgetAPI()
+    print(api.env.KethoEditBox.EditBox:GetText())
+  end
   api.SendEvent('PLAYER_LOGOUT')
   return api
 end

@@ -69,7 +69,7 @@ methods:
   HighlightText:
     status: unimplemented
   Insert:
-    status: unimplemented
+    status: implemented
   IsAutoFocus:
     fields:
     - name: isAutoFocus
