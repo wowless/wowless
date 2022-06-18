@@ -5,7 +5,7 @@ inherits:
 - Frame
 methods:
   AddMessage:
-    status: unimplemented
+    status: implemented
   Clear:
     status: unimplemented
   GetFadeDuration:
