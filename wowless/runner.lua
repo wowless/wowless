@@ -305,6 +305,7 @@ local function run(cfg)
     print(api.env.KethoEditBox.EditBox:GetText())
   end
   api.SendEvent('PLAYER_LOGOUT')
+  loader.saveAllVariables()
   return api
 end
 

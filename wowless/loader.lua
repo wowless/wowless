@@ -720,6 +720,7 @@ local function loader(api, cfg)
       for _, file in ipairs(toc.files) do
         context.loadFile(file)
       end
+      context.loadFile(('out/SavedVariables/%s.lua'):format(addonName))
       toc.loaded = true
       api.log(1, 'done loading %s', addonName)
       api.SendEvent('ADDON_LOADED', addonName)
@@ -772,10 +773,34 @@ local function loader(api, cfg)
     end
   end
 
+  local function saveAllVariables()
+    local w = require('pl.pretty').write
+    for _, v in pairs(addonData) do
+      if v.loaded then
+        local t = {}
+        for _, attr in ipairs({ 'SavedVariables', 'SavedVariablesPerCharacter' }) do
+          for var in (v.attrs[attr] or ''):gmatch('[^, ]+') do
+            local val = api.env[var]
+            if val ~= nil then
+              table.insert(t, var)
+              table.insert(t, ' = ')
+              table.insert(t, type(val) == 'table' and w(val) or tostring(val))
+              table.insert(t, '\n')
+            end
+          end
+        end
+        if next(t) then
+          require('pl.file').write(('out/SavedVariables/%s.lua'):format(v.name), table.concat(t, ''))
+        end
+      end
+    end
+  end
+
   return {
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
     loadXml = forAddon().loadXml,
+    saveAllVariables = saveAllVariables,
     version = version,
   }
 end
