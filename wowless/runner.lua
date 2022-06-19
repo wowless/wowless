@@ -257,12 +257,13 @@ local function run(cfg)
     local cmdBlacklist = { -- TODO remove this; these require a better SecureCmdOptionParse
       BENCHMARK = true,
       CASTRANDOM = true,
+      LOOT_MASTER = true, -- broken
       PTRFEEDBACK = true, -- this just seems broken with an empty string
       USERANDOM = true,
     }
     local cmds = {}
     for k, v in pairs(api.env) do
-      local cmd = k:match('^SLASH_(%a+)1$')
+      local cmd = k:match('^SLASH_(.+)1$')
       if cmd and not cmdBlacklist[cmd] then
         cmds[cmd] = v
       end
