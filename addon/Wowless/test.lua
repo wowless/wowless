@@ -319,6 +319,23 @@ local asyncTests = {
       SendSystemMessage(msg)
     end,
   },
+  {
+    name = 'RequestTimePlayed',
+    fn = function(done)
+      local frame = CreateFrame('Frame')
+      frame:RegisterEvent('TIME_PLAYED_MSG')
+      frame:SetScript('OnEvent', function(_, _, total, level, ...)
+        local nextra = select('#', ...)
+        done(function()
+          assertEquals(0, nextra)
+          assertEquals('number', type(total))
+          assertEquals('number', type(level))
+          assert(total >= level)
+        end)
+      end)
+      RequestTimePlayed()
+    end,
+  },
 }
 
 _G.WowlessTestFailures = {}

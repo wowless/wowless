@@ -23,6 +23,7 @@ files['addon/Wowless'] = {
     'debugprofilestop',
     'DevTools_Dump',
     'format',
+    'RequestTimePlayed',
     'SendSystemMessage',
     'WOW_PROJECT_ID',
     'WOW_PROJECT_MAINLINE',

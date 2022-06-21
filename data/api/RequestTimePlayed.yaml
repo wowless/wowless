@@ -1,6 +1,10 @@
 ---
 name: RequestTimePlayed
-status: unimplemented
+status: implemented
 inputs:
 - {}
 outputs: {}
+frameworks:
+- api
+states:
+- Time
