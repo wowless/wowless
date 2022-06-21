@@ -144,10 +144,20 @@ local function loader(api, cfg)
     end
 
     local function loadLuaString(filename, str, line)
+      local before = api.env.ScrollingMessageFrameMixin
       local fn = setfenv(loadstr(str, filename, line), api.env)
       api.CallSafely(function()
         fn(addonName, addonEnv)
       end)
+      -- Super hacky hack to hook ScrollingMessageFrameMixin.AddMessage
+      local after = api.env.ScrollingMessageFrameMixin
+      if after and not before then
+        local f = after.AddMessage
+        after.AddMessage = function(self, text, ...)
+          api.log(1, '[%s] %s', self:GetDebugName(), tostring(text))
+          f(self, text, ...)
+        end
+      end
     end
 
     local loadFile
