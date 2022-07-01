@@ -3,3 +3,13 @@ name: GetSavedWorldBossInfo
 status: unimplemented
 flavors:
 - Mainline
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: name
+  type: string
+- name: worldBossID
+  type: number
+- name: reset
+  type: number
