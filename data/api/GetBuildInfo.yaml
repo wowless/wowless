@@ -1,6 +1,6 @@
 ---
 name: GetBuildInfo
-status: unimplemented
+status: implemented
 inputs:
 - {}
 outputs:
@@ -12,3 +12,5 @@ outputs:
   type: string
 - name: tocversion
   type: number
+frameworks:
+- loader
