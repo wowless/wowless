@@ -72,6 +72,7 @@ local function loader(api, cfg)
           if data and data:sub(1, 3) == '\239\187\191' then
             data = data:sub(4)
           end
+          api.log(2, 'successfully fetched cascproxy %s', fpath)
           return data
         end
       end
@@ -487,7 +488,8 @@ local function loader(api, cfg)
           local phase = phases[phaseName]
           return function(obj)
             for _, inh in ipairs(e.attr.inherits or {}) do
-              api.templates[string.lower(inh)]['init' .. phaseName](obj)
+              local t = assert(api.templates[string.lower(inh)], 'unknown template ' .. inh)
+              t['init' .. phaseName](obj)
             end
             phase(e, obj)
           end
@@ -653,7 +655,7 @@ local function loader(api, cfg)
     local attrs = {}
     local files = {}
     local dir = path.dirname(tocFile)
-    for line in util.readfile(tocFile):gmatch('[^\r\n]+') do
+    for line in readFile(tocFile):gmatch('[^\r\n]+') do
       line = line:match('^%s*(.-)%s*$')
       if line:sub(1, 3) == '## ' then
         local key, value = line:match('([^:]+): (.*)', 4)
@@ -675,8 +677,17 @@ local function loader(api, cfg)
     end)
   end
 
+  local function db2rows(name)
+    local dbd = require('luadbd').dbds[name]
+    local v, b = api.env.GetBuildInfo()
+    local bversion = v .. '.' .. b
+    local build = assert(dbd:build(bversion), ('cannot load %s in %s'):format(name, bversion))
+    return build:rows(readFile(cfg.cascproxy and dbd.fdid or path.join(rootDir, 'db2', name .. '.db2')))
+  end
+
   local addonData = assert(api.states.Addons)
-  do
+
+  local function initAddons()
     local function maybeAdd(dir)
       local name = path.basename(dir)
       if not addonData[name] then
@@ -699,11 +710,13 @@ local function loader(api, cfg)
         end
       end
     end
+    if rootDir then
+      for row in db2rows('manifestinterfacetocdata') do
+        maybeAdd(path.join(rootDir, path.dirname(row.FilePath)))
+      end
+    end
     for _, d in ipairs(otherAddonDirs) do
       maybeAddAll(path.dirname(d))
-    end
-    if rootDir then
-      maybeAddAll(path.join(rootDir, 'Interface', 'AddOns'))
     end
   end
 
@@ -741,14 +754,6 @@ local function loader(api, cfg)
     return pcall(function()
       doLoadAddon(addonName)
     end)
-  end
-
-  local function db2rows(name)
-    local dbd = require('luadbd').dbds[name]
-    local v, b = api.env.GetBuildInfo()
-    local bversion = v .. '.' .. b
-    local build = assert(dbd:build(bversion), ('cannot load %s in %s'):format(name, bversion))
-    return build:rows(readFile(cfg.cascproxy and dbd.fdid or path.join(rootDir, 'db2', name .. '.db2')))
   end
 
   local function loadFrameXml()
@@ -807,6 +812,7 @@ local function loader(api, cfg)
   end
 
   return {
+    initAddons = initAddons,
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
     loadXml = forAddon().loadXml,

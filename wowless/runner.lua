@@ -15,6 +15,7 @@ local function run(cfg)
     version = cfg.version,
   })
   require('wowless.env').init(api, loader, cfg.taint)
+  loader.initAddons()
   if cfg.dir then
     loader.loadFrameXml()
   end

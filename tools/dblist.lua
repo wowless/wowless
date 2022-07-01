@@ -2,6 +2,7 @@ local product = ...
 local flavor = require('wowless.util').productToFlavor(product)
 local dbset = {
   globalstrings = true,
+  manifestinterfacetocdata = true,
 }
 for _, v in pairs(require('wowapi.data').apis) do
   local flavors = {}
