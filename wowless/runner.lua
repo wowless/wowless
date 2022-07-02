@@ -131,6 +131,21 @@ local function run(cfg)
               or r:IsObjectType('Button') and r:GetNormalTexture()
               or r:IsObjectType('StatusBar') and r:GetStatusBarTexture()
               or nil
+            if cfg.cascproxy and t then
+              local x = t:GetTexture()
+              if x then
+                pcall(function()
+                  local f = tonumber(x)
+                  if f == nil then
+                    f = require('path').join(cfg.dir, x)
+                    if f:sub(-4):lower() ~= '.blp' then
+                      f = f .. '.blp'
+                    end
+                  end
+                  loader.readFile(f)
+                end)
+              end
+            end
             return t
               and {
                 coords = (function()
