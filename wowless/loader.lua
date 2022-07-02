@@ -59,7 +59,7 @@ local function loader(api, cfg)
       local skip = cfg.rootDir:len() + 2
       local prefix = '/product/' .. cfg.rootDir:sub(10)
       local function fetch(stream, f)
-        local fpath = prefix .. (type(f) == 'number' and '/fdid/' .. f or '/name/' .. f:sub(skip))
+        local fpath = prefix .. (type(f) == 'number' and '/fdid/' .. f or '/name/' .. f:sub(skip):gsub('\\', '/'))
         api.log(2, 'fetching cascproxy %s', fpath)
         local req = mkreq()
         req:append(':authority', cfg.cascproxy)
