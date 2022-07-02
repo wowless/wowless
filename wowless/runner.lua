@@ -131,21 +131,6 @@ local function run(cfg)
               or r:IsObjectType('Button') and r:GetNormalTexture()
               or r:IsObjectType('StatusBar') and r:GetStatusBarTexture()
               or nil
-            if cfg.cascproxy and t then
-              local x = t:GetTexture()
-              if x then
-                pcall(function()
-                  local f = tonumber(x)
-                  if f == nil then
-                    f = require('path').join(cfg.dir, x)
-                    if f:sub(-4):lower() ~= '.blp' then
-                      f = f .. '.blp'
-                    end
-                  end
-                  loader.readFile(f)
-                end)
-              end
-            end
             return t
               and {
                 coords = (function()
@@ -182,13 +167,36 @@ local function run(cfg)
       pwand:set_color(c)
       return pwand
     end
+    local red, green, blue = color('red'), color('green'), color('blue')
     local dwand = magick.new_drawing_wand()
     dwand:set_fill_opacity(0)
-    dwand:set_stroke_color(color('blue'))
     for _, v in pairs(ret) do
       if v.content.texture then
         local r = v.rect
-        dwand:rectangle(r.left, screenHeight - r.top, r.right, screenHeight - r.bottom)
+        local left, top, right, bottom = r.left, screenHeight - r.top, r.right, screenHeight - r.bottom
+        if cfg.cascproxy and v.content.texture.path then
+          local success = pcall(function()
+            local x = v.content.texture.path
+            local f = tonumber(x)
+            if f == nil then
+              f = require('path').join(cfg.dir, x)
+              if f:sub(-4):lower() ~= '.blp' then
+                f = f .. '.blp'
+              end
+            end
+            return loader.readFile(f)
+          end)
+          if success then
+            dwand:set_stroke_color(green)
+            dwand:rectangle(left, top, right, bottom)
+          else
+            dwand:set_stroke_color(red)
+            dwand:rectangle(left, top, right, bottom)
+          end
+        else
+          dwand:set_stroke_color(blue)
+          dwand:rectangle(left, top, right, bottom)
+        end
       end
     end
     local mwand = magick.new_magick_wand()
