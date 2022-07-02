@@ -629,6 +629,24 @@ local function loader(api, cfg)
     Mainline = 'Mainline',
   }
 
+  local function parseToc(tocFile, content)
+    local attrs = {}
+    local files = {}
+    local dir = path.dirname(tocFile)
+    for line in content:gmatch('[^\r\n]+') do
+      line = line:match('^%s*(.-)%s*$')
+      if line:sub(1, 3) == '## ' then
+        local key, value = line:match('([^:]+): (.*)', 4)
+        if key then
+          attrs[key] = value
+        end
+      elseif line ~= '' and line:sub(1, 1) ~= '#' then
+        table.insert(files, path.join(dir, line))
+      end
+    end
+    return { attrs = attrs, files = files }
+  end
+
   local function resolveTocDir(tocDir)
     api.log(1, 'resolving %s', tocDir)
     local base = path.basename(tocDir)
@@ -642,31 +660,16 @@ local function loader(api, cfg)
       }
     for _, try in ipairs(toTry) do
       local tocFile = path.join(tocDir, base .. try .. '.toc')
-      if path.isfile(tocFile) then
+      local success, content = pcall(function()
+        return readFile(tocFile)
+      end)
+      if success then
         api.log(1, 'using toc %s', tocFile)
-        return tocFile
+        return parseToc(tocFile, content)
       end
     end
     api.log(1, 'no valid toc for %s', tocDir)
     return nil
-  end
-
-  local function parseToc(tocFile)
-    local attrs = {}
-    local files = {}
-    local dir = path.dirname(tocFile)
-    for line in readFile(tocFile):gmatch('[^\r\n]+') do
-      line = line:match('^%s*(.-)%s*$')
-      if line:sub(1, 3) == '## ' then
-        local key, value = line:match('([^:]+): (.*)', 4)
-        if key then
-          attrs[key] = value
-        end
-      elseif line ~= '' and line:sub(1, 1) ~= '#' then
-        table.insert(files, path.join(dir, line))
-      end
-    end
-    return { attrs = attrs, files = files }
   end
 
   do
@@ -691,9 +694,8 @@ local function loader(api, cfg)
     local function maybeAdd(dir)
       local name = path.basename(dir)
       if not addonData[name] then
-        local tocFile = resolveTocDir(dir)
-        if tocFile then
-          local addon = parseToc(tocFile)
+        local addon = resolveTocDir(dir)
+        if addon then
           addon.name = name
           addonData[name] = addon
           table.insert(addonData, addon)
@@ -765,7 +767,7 @@ local function loader(api, cfg)
     for row in db2rows('globalstrings') do
       api.env[row.BaseTag] = row.TagText_lang
     end
-    for _, file in ipairs(parseToc(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML'))).files) do
+    for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do
       context.loadFile(file)
     end
     if version then
