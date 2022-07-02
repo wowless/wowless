@@ -174,8 +174,8 @@ local pixelFormats = {
   end,
 }
 
-local function read(filename)
-  local f = assert(io.open(filename))
+local function read(bytes)
+  local f = vstruct.cursor(bytes)
   local header = blpHeader:read(f)
   assert(header.magic == 'BLP2')
   assert(header.version == 1)
@@ -185,7 +185,6 @@ local function read(filename)
   assert(header.height % 4 == 0)
   assert(header.mipOffsets[1] == 20 + 64 + 64 + 1024) -- header size
   local rgba = assert(pixelFormats[header.pixelFormat])(f, header)
-  assert(f:close())
   return header.width, header.height, rgba
 end
 
