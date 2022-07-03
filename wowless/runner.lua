@@ -161,48 +161,7 @@ local function run(cfg)
       end
     end
     require('pl.file').write('frame0.yaml', require('wowapi.yaml').pprint(ret))
-    local magick = require('luamagick')
-    local function color(c)
-      local pwand = magick.new_pixel_wand()
-      pwand:set_color(c)
-      return pwand
-    end
-    local red, green, blue = color('red'), color('green'), color('blue')
-    local dwand = magick.new_drawing_wand()
-    dwand:set_fill_opacity(0)
-    for _, v in pairs(ret) do
-      if v.content.texture then
-        local r = v.rect
-        local left, top, right, bottom = r.left, screenHeight - r.top, r.right, screenHeight - r.bottom
-        if cfg.cascproxy and v.content.texture.path then
-          local success = pcall(function()
-            local x = v.content.texture.path
-            local f = tonumber(x)
-            if f == nil then
-              f = require('path').join(cfg.dir, x)
-              if f:sub(-4):lower() ~= '.blp' then
-                f = f .. '.blp'
-              end
-            end
-            return loader.readFile(f)
-          end)
-          if success then
-            dwand:set_stroke_color(green)
-            dwand:rectangle(left, top, right, bottom)
-          else
-            dwand:set_stroke_color(red)
-            dwand:rectangle(left, top, right, bottom)
-          end
-        else
-          dwand:set_stroke_color(blue)
-          dwand:rectangle(left, top, right, bottom)
-        end
-      end
-    end
-    local mwand = magick.new_magick_wand()
-    assert(mwand:new_image(screenWidth, screenHeight, color('none')))
-    mwand:draw_image(dwand)
-    assert(mwand:write_image('frame0.png'))
+    require('wowless.render').render(ret, screenWidth, screenHeight, cfg.cascproxy, cfg.dir, 'frame0.png')
     os.exit(0)
   end
   local clickBlacklist = {

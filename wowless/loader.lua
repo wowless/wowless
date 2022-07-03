@@ -798,7 +798,6 @@ local function loader(api, cfg)
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
     loadXml = forAddon().loadXml,
-    readFile = readFile,
     saveAllVariables = saveAllVariables,
     version = version,
   }
