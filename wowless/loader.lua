@@ -49,47 +49,24 @@ local function loader(api, cfg)
   local intrinsics = {}
   local readFile = (function()
     if cfg and cfg.cascproxy and cfg.rootDir then
-      local host, port = require('http.util').split_authority(cfg.cascproxy)
-      local conn = require('http.client').connect({
-        host = host,
-        port = port,
-        tls = false,
-      })
-      local mkreq = require('http.headers').new
+      local conn = require('wowless.http').connect(cfg.cascproxy)
       local skip = cfg.rootDir:len() + 2
       local prefix = '/product/' .. cfg.rootDir:sub(10)
-      local function fetch(stream, f)
+      return function(f)
         if type(f) == 'string' and f:sub(1, cfg.rootDir:len()) ~= cfg.rootDir then
           return util.readfile(f)
         end
         local fpath = prefix .. (type(f) == 'number' and '/fdid/' .. f or '/name/' .. f:sub(skip):gsub('\\', '/'))
         api.log(2, 'fetching cascproxy %s', fpath)
-        local req = mkreq()
-        req:append(':authority', cfg.cascproxy)
-        req:append(':method', 'GET')
-        req:append(':path', fpath)
-        assert(stream:write_headers(req, true))
-        local res = assert(stream:get_headers())
-        if res:get(':status') == '200' then
-          local data = stream:get_body_as_string()
-          if data and data:sub(1, 3) == '\239\187\191' then
-            data = data:sub(4)
-          end
-          api.log(2, 'successfully fetched cascproxy %s', fpath)
-          return data
+        local data = conn(fpath)
+        if not data then
+          return util.readfile(f)
         end
-      end
-      local function stream(f)
-        local s = assert(conn:new_stream())
-        local data = fetch(s, f)
-        s:shutdown()
+        api.log(2, 'successfully fetched cascproxy %s', fpath)
+        if data:sub(1, 3) == '\239\187\191' then
+          data = data:sub(4)
+        end
         return data
-      end
-      return function(f)
-        local success, data = pcall(function()
-          return stream(f)
-        end)
-        return success and data or util.readfile(f)
       end
     else
       return util.readfile
