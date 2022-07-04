@@ -5,4 +5,5 @@ inputs:
 - {}
 outputs:
 - name: status
+  stub: 0
   type: number
