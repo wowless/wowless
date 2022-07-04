@@ -46,8 +46,8 @@ local function run(cfg)
         addPoints(r)
       end
     end
-    local screenWidth = 1024
-    local screenHeight = 768
+    local screenWidth = 1280
+    local screenHeight = 720
     local rects = {
       ['<screen>'] = {
         bottom = 0,

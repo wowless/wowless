@@ -23,23 +23,36 @@ local function render(data, screenWidth, screenHeight, authority, rootDir, outfi
           fpath = fpath .. '.blp'
         end
         local content = conn(fpath)
-        local success, png = pcall(function()
-          return require('wowless.png').write(require('wowless.blp').read(content))
+        local success, width, height, png = pcall(function()
+          local width, height, rgba = require('wowless.blp').read(content)
+          return width, height, require('wowless.png').write(width, height, rgba)
         end)
         local c = v.content.texture.coords
-        if
-          success
-          and c.blx == 0
-          and c.bly == 1
-          and c.brx == 1
-          and c.bry == 1
-          and c.tlx == 0
-          and c.tly == 0
-          and c.trx == 1
-          and c.try == 0
-        then
+        if success then
           local twand = magick.new_magick_wand()
           assert(twand:read_image_blob(png))
+          assert(twand:distort_image(magick.DistortImageMethod.BilinearDistortion, {
+            -- Top left
+            0,
+            0,
+            c.tlx * width,
+            c.tly * height,
+            -- Top right
+            width,
+            0,
+            c.trx * width,
+            c.try * height,
+            -- Bottom right
+            width,
+            height,
+            c.brx * width,
+            c.bry * height,
+            -- Bottom left
+            0,
+            height,
+            c.blx * width,
+            c.bly * height,
+          }))
           assert(mwand:composite_image(twand, magick.CompositeOperator.OverCompositeOp, left, top))
         else
           dwand:set_stroke_color(red)
