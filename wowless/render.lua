@@ -17,12 +17,17 @@ local function render(data, screenWidth, screenHeight, authority, rootDir, outfi
       local left, top, right, bottom = r.left, screenHeight - r.top, r.right, screenHeight - r.bottom
       local x = v.content.texture.path
       if conn and x then
-        local prefix = '/product/' .. rootDir:sub(10)
-        local fpath = prefix .. (tonumber(x) and '/fdid/' .. x or '/name/' .. x:gsub('\\', '/'))
-        if fpath:sub(-4):lower() ~= '.blp' then
-          fpath = fpath .. '.blp'
+        local fpath
+        if tonumber(x) then
+          fpath = '/fdid/' .. x
+        else
+          fpath = '/name/' .. x:gsub('\\', '/')
+          if fpath:sub(-4):lower() ~= '.blp' then
+            fpath = fpath .. '.blp'
+          end
         end
-        local content = conn(fpath)
+        fpath = '/product/' .. rootDir:sub(10) .. fpath
+        local content = fpath:find(' ') and '' or conn(fpath)
         local success, width, height, png = pcall(function()
           local width, height, rgba = require('wowless.blp').read(content)
           return width, height, require('wowless.png').write(width, height, rgba)
