@@ -406,6 +406,11 @@ local function loader(api, cfg)
               mixin(obj, env[m])
             end
           end,
+          setallpoints = function(obj, value)
+            if value and not obj:IsObjectType('texture') then
+              obj:SetAllPoints()
+            end
+          end,
         }
 
         local function processAttr(attr, obj, v)
@@ -461,6 +466,10 @@ local function loader(api, cfg)
           Kids = function(e, obj)
             processKids(e, obj, 'late')
             processAttrs(e, obj, 'late')
+            -- Implicit setallpoints hack for textures.
+            if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
+              obj:SetAllPoints()
+            end
           end,
         }
 

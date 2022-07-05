@@ -35,8 +35,7 @@ attributes:
       method: SetScale
     type: number
   setallpoints:
-    impl:
-      method: SetAllPoints
+    impl: internal
     type: boolean
   virtual:
     type: boolean
