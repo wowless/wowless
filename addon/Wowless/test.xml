@@ -1,5 +1,6 @@
 <Ui>
   <Script>
+    _G.IsWowless = __dump ~= nil
     _G.WowlessLog = {}
     local function log(fmt, ...)
       table.insert(_G.WowlessLog, string.format(fmt, ...))
@@ -214,6 +215,54 @@
         check(1, 1, 1, 0, 0, 1, 0, 0, self.Override:GetTexCoord())
         check(1, 0, 1, 1, 0, 0, 0, 1, self.PartialOverride:GetTexCoord())
         check(1, 0, 1, 1, 0, 0, 0, 1, self.MultipleOverride:GetTexCoord())
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame>
+    <Size x='300' y='200' />
+    <Layers>
+      <Layer>
+        <Texture parentKey='NoPoints' />
+        <Texture parentKey='NoPointsSetFalse' setallpoints='false' />
+        <Texture parentKey='OnePoint'>
+          <Anchors>
+            <Anchor point='CENTER' />
+          </Anchors>
+        </Texture>
+        <Texture parentKey='OnePointSetTrue' setallpoints='true'>
+          <Anchors>
+            <Anchor point='CENTER' />
+          </Anchors>
+        </Texture>
+        <Texture parentKey='Sized'>
+          <Size x='32' y='32' />
+        </Texture>
+      </Layer>
+    </Layers>
+    <Scripts>
+      <OnLoad>
+        if not IsWowless then
+          local function checkPoint(ep, err, erp, ex, ey, ...)
+            assertEquals(5, select('#', ...))
+            local ap, arr, arp, ax, ay = ...
+            assertEquals(ep, ap)
+            assertEquals(err, arr)
+            assertEquals(erp, arp)
+            assertEquals(ex, ax)
+            assertEquals(ey, ay)
+          end
+          assertEquals(2, self.NoPoints:GetNumPoints())
+          checkPoint('TOPLEFT', self, 'TOPLEFT', 0, 0, self.NoPoints:GetPoint(1))
+          checkPoint('BOTTOMRIGHT', self, 'BOTTOMRIGHT', 0, 0, self.NoPoints:GetPoint(2))
+          assertEquals(2, self.NoPointsSetFalse:GetNumPoints())
+          assertEquals(1, self.OnePoint:GetNumPoints())
+          checkPoint('CENTER', self, 'CENTER', 0, 0, self.OnePoint:GetPoint(1))
+          assertEquals(1, self.OnePointSetTrue:GetNumPoints())
+          assertEquals(2, self.Sized:GetNumPoints())
+          checkPoint('TOPLEFT', self, 'TOPLEFT', 0, 0, self.Sized:GetPoint(1))
+          checkPoint('BOTTOMRIGHT', self, 'BOTTOMRIGHT', 0, 0, self.Sized:GetPoint(2))
+        end
       </OnLoad>
     </Scripts>
   </Frame>
