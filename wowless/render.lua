@@ -86,46 +86,46 @@ local function frames2rects(frames, screenWidth, screenHeight)
     end
   end
   local ret = {}
-  for r, rect in pairs(rects) do
-    if next(rect) and r:IsVisible() then
-      local content = {
-        string = r:IsObjectType('FontString') and r:GetText() or nil,
-        texture = (function()
-          local t = r:IsObjectType('Texture') and r
-            or r:IsObjectType('Button') and r:GetNormalTexture()
-            or r:IsObjectType('StatusBar') and r:GetStatusBarTexture()
-            or nil
-          return t
-            and (function()
-              local drawLayer, drawSubLayer = t:GetDrawLayer()
-              return {
-                coords = (function()
-                  local tlx, tly, blx, bly, trx, try, brx, bry = t:GetTexCoord()
-                  return {
-                    blx = blx,
-                    bly = bly,
-                    brx = brx,
-                    bry = bry,
-                    tlx = tlx,
-                    tly = tly,
-                    trx = trx,
-                    try = try,
-                  }
-                end)(),
-                drawLayer = drawLayer,
-                drawSubLayer = drawSubLayer,
-                horizTile = t:GetHorizTile(),
-                path = t:GetTexture(),
-                vertTile = t:GetVertTile(),
-              }
-            end)()
-        end)(),
-      }
-      if next(content) then
-        ret[r:GetDebugName()] = {
-          content = content,
-          rect = rect,
+  for _, frame in ipairs(frames) do
+    for _, r in ipairs({ frame:GetRegions() }) do
+      local rect = rects[r]
+      if rect and next(rect) and r:IsVisible() then
+        local content = {
+          string = r:IsObjectType('FontString') and r:GetText() or nil,
+          texture = (function()
+            local t = r:IsObjectType('Texture') and r or nil
+            return t
+              and (function()
+                local drawLayer, drawSubLayer = t:GetDrawLayer()
+                return {
+                  coords = (function()
+                    local tlx, tly, blx, bly, trx, try, brx, bry = t:GetTexCoord()
+                    return {
+                      blx = blx,
+                      bly = bly,
+                      brx = brx,
+                      bry = bry,
+                      tlx = tlx,
+                      tly = tly,
+                      trx = trx,
+                      try = try,
+                    }
+                  end)(),
+                  drawLayer = drawLayer,
+                  drawSubLayer = drawSubLayer,
+                  horizTile = t:GetHorizTile(),
+                  path = t:GetTexture(),
+                  vertTile = t:GetVertTile(),
+                }
+              end)()
+          end)(),
         }
+        if next(content) then
+          ret[r:GetDebugName()] = {
+            content = content,
+            rect = rect,
+          }
+        end
       end
     end
   end
