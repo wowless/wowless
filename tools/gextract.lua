@@ -25,8 +25,6 @@ end
 do
   local scrape = require('tools.scrapelib')(arg[1])
 
-  print(string.format('function GetBuildInfo()\n  return %q, %q, %q, %d\nend', unpack(scrape.BuildInfo)))
-
   print('C_CVar = C_CVar or {}')
   print('C_CVar.GetCVarDefault = (function()')
   print('  local t = {')
