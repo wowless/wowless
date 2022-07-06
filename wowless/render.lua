@@ -134,6 +134,8 @@ local function frames2rects(frames, screenWidth, screenHeight)
       table.insert(ret, {
         name = frame:GetDebugName(),
         regions = regions,
+        strata = frame:GetFrameStrata(),
+        strataLevel = frame:GetFrameLevel(),
       })
     end
   end
