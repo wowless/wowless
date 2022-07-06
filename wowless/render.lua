@@ -142,6 +142,26 @@ local function frames2rects(frames, screenWidth, screenHeight)
   return ret
 end
 
+local strata = {
+  WORLD = 1,
+  BACKGROUND = 2,
+  LOW = 3,
+  MEDIUM = 4,
+  HIGH = 5,
+  DIALOG = 6,
+  FULLSCREEN = 7,
+  FULLSCREEN_DIALOG = 8,
+  TOOLTIP = 9,
+}
+
+local layers = {
+  BACKGROUND = 1,
+  BORDER = 2,
+  ARTWORK = 3,
+  OVERLAY = 4,
+  HIGHLIGHT = 5,
+}
+
 local function rects2png(data, screenWidth, screenHeight, authority, rootDir, outfile)
   local magick = require('luamagick')
   local function color(c)
@@ -155,8 +175,19 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
   local conn = authority and require('wowless.http').connect(authority)
   local mwand = magick.new_magick_wand()
   assert(mwand:new_image(screenWidth, screenHeight, color('none')))
-  for _, f in pairs(data) do
-    for _, v in pairs(f.regions) do
+
+  table.sort(data, function(a, b)
+    local sa = strata[a.strata] or 0
+    local sb = strata[b.strata] or 0
+    return sa < sb or sa == sb and (a.strataLevel or 0) < (b.strataLevel or 0)
+  end)
+  for _, f in ipairs(data) do
+    table.sort(f.regions, function(a, b)
+      local la = layers[a.drawLayer] or 0
+      local lb = layers[b.drawLayer] or 0
+      return la < lb or la == lb and (a.drawSubLayer or 0) < (b.drawSubLayer or 0)
+    end)
+    for _, v in ipairs(f.regions) do
       if v.content.texture then
         local r = v.rect
         local left, top, right, bottom = r.left, screenHeight - r.top, r.right, screenHeight - r.bottom
