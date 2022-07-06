@@ -110,6 +110,7 @@ local function frames2rects(frames, screenWidth, screenHeight)
                   try = try,
                 }
               end)(),
+              drawLayer = t:GetDrawLayer(),
               horizTile = t:GetHorizTile(),
               path = t:GetTexture(),
               vertTile = t:GetVertTile(),
