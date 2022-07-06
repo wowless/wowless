@@ -14,17 +14,16 @@ local function frames2rects(frames, screenWidth, screenHeight)
       addPoints(r)
     end
   end
-  local rects = {
-    ['<screen>'] = {
-      bottom = 0,
-      left = 0,
-      right = screenWidth,
-      top = screenHeight,
-    },
+  local screen = {
+    bottom = 0,
+    left = 0,
+    right = screenWidth,
+    top = screenHeight,
   }
+  local rects = {}
   local function p2c(r, i)
     local p, rt, rp, px, py = r:GetPoint(i)
-    local pr = assert(rects[rt == nil and '<screen>' or rt], 'moo ' .. r:GetDebugName()) -- relies on tsort
+    local pr = rt == nil and screen or assert(rects[rt], 'moo ' .. r:GetDebugName()) -- relies on tsort
     local x = (function()
       if rp == 'TOPLEFT' or rp == 'LEFT' or rp == 'BOTTOMLEFT' then
         return pr.left
@@ -86,7 +85,6 @@ local function frames2rects(frames, screenWidth, screenHeight)
       }
     end
   end
-  rects['<screen>'] = nil
   local ret = {}
   for r, rect in pairs(rects) do
     if next(rect) and r:IsVisible() then
