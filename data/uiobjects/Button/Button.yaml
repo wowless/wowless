@@ -115,9 +115,7 @@ methods:
       nilable: true
     status: setter
   SetDisabledAtlas:
-    fields:
-    - name: disabledTexture
-    status: setter
+    status: implemented
   SetDisabledFontObject:
     status: unimplemented
   SetDisabledTexture:
@@ -133,9 +131,7 @@ methods:
   SetFormattedText:
     status: implemented
   SetHighlightAtlas:
-    fields:
-    - name: highlightTexture
-    status: setter
+    status: implemented
   SetHighlightFontObject:
     status: unimplemented
   SetHighlightTexture:
@@ -147,9 +143,7 @@ methods:
     - name: motionScriptsWhileDisabled
     status: setter
   SetNormalAtlas:
-    fields:
-    - name: normalTexture
-    status: setter
+    status: implemented
   SetNormalFontObject:
     fields:
     - name: normalFontObject
@@ -159,9 +153,7 @@ methods:
     - name: normalTexture
     status: setter
   SetPushedAtlas:
-    fields:
-    - name: pushedTexture
-    status: setter
+    status: implemented
   SetPushedTextOffset:
     fields:
     - name: pushedTextOffsetX

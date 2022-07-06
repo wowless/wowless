@@ -1,0 +1,5 @@
+return (function(self, atlas)
+  local ud = u(self)
+  ud.pushedTexture = ud.pushedTexture or self:CreateTexture()
+  ud.pushedTexture:SetAtlas(atlas)
+end)(...)
