@@ -16,7 +16,7 @@ local function render(data, screenWidth, screenHeight, authority, rootDir, outfi
       local r = v.rect
       local left, top, right, bottom = r.left, screenHeight - r.top, r.right, screenHeight - r.bottom
       local x = v.content.texture.path
-      if conn and x then
+      if conn and x and left < right and top < bottom then
         local fpath
         if tonumber(x) then
           fpath = '/fdid/' .. x
@@ -38,26 +38,27 @@ local function render(data, screenWidth, screenHeight, authority, rootDir, outfi
           assert(twand:read_image_blob(png))
           assert(twand:distort_image(magick.DistortImageMethod.BilinearDistortion, {
             -- Top left
-            0,
-            0,
             c.tlx * width,
             c.tly * height,
-            -- Top right
-            width,
             0,
+            0,
+            -- Top right
             c.trx * width,
             c.try * height,
-            -- Bottom right
             width,
-            height,
+            0,
+            -- Bottom right
             c.brx * width,
             c.bry * height,
-            -- Bottom left
-            0,
+            width,
             height,
+            -- Bottom left
             c.blx * width,
             c.bly * height,
+            0,
+            height,
           }))
+          -- TODO resize
           assert(mwand:composite_image(twand, magick.CompositeOperator.OverCompositeOp, left, top))
         else
           dwand:set_stroke_color(red)
