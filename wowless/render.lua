@@ -96,25 +96,29 @@ local function frames2rects(frames, screenWidth, screenHeight)
             or r:IsObjectType('StatusBar') and r:GetStatusBarTexture()
             or nil
           return t
-            and {
-              coords = (function()
-                local tlx, tly, blx, bly, trx, try, brx, bry = t:GetTexCoord()
-                return {
-                  blx = blx,
-                  bly = bly,
-                  brx = brx,
-                  bry = bry,
-                  tlx = tlx,
-                  tly = tly,
-                  trx = trx,
-                  try = try,
-                }
-              end)(),
-              drawLayer = t:GetDrawLayer(),
-              horizTile = t:GetHorizTile(),
-              path = t:GetTexture(),
-              vertTile = t:GetVertTile(),
-            }
+            and (function()
+              local drawLayer, drawSubLayer = t:GetDrawLayer()
+              return {
+                coords = (function()
+                  local tlx, tly, blx, bly, trx, try, brx, bry = t:GetTexCoord()
+                  return {
+                    blx = blx,
+                    bly = bly,
+                    brx = brx,
+                    bry = bry,
+                    tlx = tlx,
+                    tly = tly,
+                    trx = trx,
+                    try = try,
+                  }
+                end)(),
+                drawLayer = drawLayer,
+                drawSubLayer = drawSubLayer,
+                horizTile = t:GetHorizTile(),
+                path = t:GetTexture(),
+                vertTile = t:GetVertTile(),
+              }
+            end)()
         end)(),
       }
       if next(content) then
