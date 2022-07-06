@@ -45,20 +45,20 @@ local function render(data, screenWidth, screenHeight, authority, rootDir, outfi
             -- Top right
             c.trx * width,
             c.try * height,
-            width,
+            right - left,
             0,
             -- Bottom right
             c.brx * width,
             c.bry * height,
-            width,
-            height,
+            right - left,
+            bottom - top,
             -- Bottom left
             c.blx * width,
             c.bly * height,
             0,
-            height,
+            bottom - top,
           }))
-          -- TODO resize
+          assert(twand:crop_image(right - left, bottom - top, 0, 0))
           assert(mwand:composite_image(twand, magick.CompositeOperator.OverCompositeOp, left, top))
         else
           dwand:set_stroke_color(red)
