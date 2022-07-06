@@ -87,6 +87,7 @@ local function frames2rects(frames, screenWidth, screenHeight)
   end
   local ret = {}
   for _, frame in ipairs(frames) do
+    local regions = {}
     for _, r in ipairs({ frame:GetRegions() }) do
       local rect = rects[r]
       if rect and next(rect) and r:IsVisible() then
@@ -121,12 +122,19 @@ local function frames2rects(frames, screenWidth, screenHeight)
           end)(),
         }
         if next(content) then
-          ret[r:GetDebugName()] = {
+          table.insert(regions, {
             content = content,
+            name = r:GetDebugName(),
             rect = rect,
-          }
+          })
         end
       end
+    end
+    if next(regions) then
+      table.insert(ret, {
+        name = frame:GetDebugName(),
+        regions = regions,
+      })
     end
   end
   return ret
@@ -145,62 +153,64 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
   local conn = authority and require('wowless.http').connect(authority)
   local mwand = magick.new_magick_wand()
   assert(mwand:new_image(screenWidth, screenHeight, color('none')))
-  for _, v in pairs(data) do
-    if v.content.texture then
-      local r = v.rect
-      local left, top, right, bottom = r.left, screenHeight - r.top, r.right, screenHeight - r.bottom
-      local x = v.content.texture.path
-      if conn and x and left < right and top < bottom then
-        local fpath
-        if tonumber(x) then
-          fpath = '/fdid/' .. x
-        else
-          fpath = '/name/' .. x:gsub('\\', '/')
-          if fpath:sub(-4):lower() ~= '.blp' then
-            fpath = fpath .. '.blp'
+  for _, f in pairs(data) do
+    for _, v in pairs(f.regions) do
+      if v.content.texture then
+        local r = v.rect
+        local left, top, right, bottom = r.left, screenHeight - r.top, r.right, screenHeight - r.bottom
+        local x = v.content.texture.path
+        if conn and x and left < right and top < bottom then
+          local fpath
+          if tonumber(x) then
+            fpath = '/fdid/' .. x
+          else
+            fpath = '/name/' .. x:gsub('\\', '/')
+            if fpath:sub(-4):lower() ~= '.blp' then
+              fpath = fpath .. '.blp'
+            end
           end
-        end
-        fpath = '/product/' .. rootDir:sub(10) .. fpath
-        local content = fpath:find(' ') and '' or conn(fpath)
-        local success, width, height, png = pcall(function()
-          local width, height, rgba = require('wowless.blp').read(content)
-          return width, height, require('wowless.png').write(width, height, rgba)
-        end)
-        local c = v.content.texture.coords
-        if success then
-          local twand = magick.new_magick_wand()
-          assert(twand:read_image_blob(png))
-          assert(twand:distort_image(magick.DistortImageMethod.BilinearDistortion, {
-            -- Top left
-            c.tlx * width,
-            c.tly * height,
-            0,
-            0,
-            -- Top right
-            c.trx * width,
-            c.try * height,
-            right - left,
-            0,
-            -- Bottom right
-            c.brx * width,
-            c.bry * height,
-            right - left,
-            bottom - top,
-            -- Bottom left
-            c.blx * width,
-            c.bly * height,
-            0,
-            bottom - top,
-          }))
-          assert(twand:crop_image(right - left, bottom - top, 0, 0))
-          assert(mwand:composite_image(twand, magick.CompositeOperator.OverCompositeOp, left, top))
+          fpath = '/product/' .. rootDir:sub(10) .. fpath
+          local content = fpath:find(' ') and '' or conn(fpath)
+          local success, width, height, png = pcall(function()
+            local width, height, rgba = require('wowless.blp').read(content)
+            return width, height, require('wowless.png').write(width, height, rgba)
+          end)
+          local c = v.content.texture.coords
+          if success then
+            local twand = magick.new_magick_wand()
+            assert(twand:read_image_blob(png))
+            assert(twand:distort_image(magick.DistortImageMethod.BilinearDistortion, {
+              -- Top left
+              c.tlx * width,
+              c.tly * height,
+              0,
+              0,
+              -- Top right
+              c.trx * width,
+              c.try * height,
+              right - left,
+              0,
+              -- Bottom right
+              c.brx * width,
+              c.bry * height,
+              right - left,
+              bottom - top,
+              -- Bottom left
+              c.blx * width,
+              c.bly * height,
+              0,
+              bottom - top,
+            }))
+            assert(twand:crop_image(right - left, bottom - top, 0, 0))
+            assert(mwand:composite_image(twand, magick.CompositeOperator.OverCompositeOp, left, top))
+          else
+            dwand:set_stroke_color(red)
+            dwand:rectangle(left, top, right, bottom)
+          end
         else
-          dwand:set_stroke_color(red)
+          dwand:set_stroke_color(blue)
           dwand:rectangle(left, top, right, bottom)
         end
-      else
-        dwand:set_stroke_color(blue)
-        dwand:rectangle(left, top, right, bottom)
       end
     end
   end
