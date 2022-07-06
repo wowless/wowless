@@ -13,17 +13,6 @@ end
 
 local function otherConstants(data)
   local keys = {
-    'BINDING_HEADER_MOVEMENT',
-    'ITEM_QUALITY0_DESC',
-    'ITEM_QUALITY1_DESC',
-    'ITEM_QUALITY2_DESC',
-    'ITEM_QUALITY3_DESC',
-    'ITEM_QUALITY4_DESC',
-    'ITEM_QUALITY5_DESC',
-    'ITEM_QUALITY6_DESC',
-    'ITEM_QUALITY7_DESC',
-    'ITEM_QUALITY8_DESC',
-    'ITEM_QUALITY9_DESC',
     'UK_AADC_POPUP_TEXT',
   }
   local result = {}
