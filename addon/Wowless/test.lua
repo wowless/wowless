@@ -3,6 +3,32 @@ local assertEquals = _G.assertEquals
 
 local syncTests = function()
   return {
+    ['button states'] = function()
+      local b = CreateFrame('Button')
+      assertEquals('NORMAL', b:GetButtonState())
+      assertEquals(true, b:IsEnabled())
+      b:Disable()
+      assertEquals('DISABLED', b:GetButtonState())
+      assertEquals(false, b:IsEnabled())
+      b:Enable()
+      assertEquals('NORMAL', b:GetButtonState())
+      assertEquals(true, b:IsEnabled())
+      b:SetButtonState('PUSHED')
+      assertEquals('PUSHED', b:GetButtonState())
+      assertEquals(true, b:IsEnabled())
+      b:SetButtonState('DISABLED')
+      assertEquals('DISABLED', b:GetButtonState())
+      assertEquals(false, b:IsEnabled())
+      assertEquals(
+        false,
+        pcall(function()
+          b:SetButtonState('rofl')
+        end)
+      )
+      b:SetButtonState('PUSHED')
+      assertEquals('PUSHED', b:GetButtonState())
+      assertEquals(true, b:IsEnabled())
+    end,
     ['button text'] = function()
       local f = CreateFrame('Button')
       assert(f:GetNumRegions() == 0)
@@ -31,32 +57,6 @@ local syncTests = function()
       assert(g:GetNumRegions() == 0)
       assert(g:GetText() == nil)
       assert(g:GetFontString() == nil)
-    end,
-    ['button states'] = function()
-      local b = CreateFrame('Button')
-      assertEquals('NORMAL', b:GetButtonState())
-      assertEquals(true, b:IsEnabled())
-      b:Disable()
-      assertEquals('DISABLED', b:GetButtonState())
-      assertEquals(false, b:IsEnabled())
-      b:Enable()
-      assertEquals('NORMAL', b:GetButtonState())
-      assertEquals(true, b:IsEnabled())
-      b:SetButtonState('PUSHED')
-      assertEquals('PUSHED', b:GetButtonState())
-      assertEquals(true, b:IsEnabled())
-      b:SetButtonState('DISABLED')
-      assertEquals('DISABLED', b:GetButtonState())
-      assertEquals(false, b:IsEnabled())
-      assertEquals(
-        false,
-        pcall(function()
-          b:SetButtonState('rofl')
-        end)
-      )
-      b:SetButtonState('PUSHED')
-      assertEquals('PUSHED', b:GetButtonState())
-      assertEquals(true, b:IsEnabled())
     end,
     ['button textures'] = function()
       local b = CreateFrame('Button')
@@ -103,6 +103,66 @@ local syncTests = function()
       assertEquals(true, pt:IsShown())
       assertEquals(true, ht:IsShown())
     end,
+    ['coroutine'] = function()
+      local log = {}
+      local co = coroutine.create(function()
+        table.insert(log, 'b')
+        coroutine.yield()
+        table.insert(log, 'e')
+      end)
+      table.insert(log, 'a')
+      assert(coroutine.resume(co))
+      table.insert(log, 'c')
+      assertEquals('suspended', coroutine.status(co))
+      table.insert(log, 'd')
+      assert(coroutine.resume(co))
+      table.insert(log, 'f')
+      assertEquals('dead', coroutine.status(co))
+      assertEquals('a,b,c,d,e,f', table.concat(log, ','))
+    end,
+    ['format'] = function()
+      return {
+        ['format missing numbers'] = function()
+          assertEquals('0', format('%d'))
+        end,
+        ['format nil numbers'] = function()
+          assertEquals('0', format('%d', nil))
+        end,
+        ['does not format missing strings'] = function()
+          assert(not pcall(function()
+            format('%s')
+          end))
+        end,
+        ['does not format nil strings'] = function()
+          assert(not pcall(function()
+            format('%s', nil)
+          end))
+        end,
+        ['format handles indexed substitution'] = function()
+          assertEquals(' 7   moo', format('%2$2d %1$5s', 'moo', 7))
+        end,
+        ['format handles up to index 99 substitution'] = function()
+          local t = {}
+          for i = 1, 100 do
+            t[i] = i
+          end
+          for i = 1, 99 do
+            assertEquals(tostring(i), format('%' .. i .. '$d', unpack(t)))
+          end
+          assert(not pcall(function()
+            format('%100$d', unpack(t))
+          end))
+        end,
+        ['format handles %f'] = function()
+          assertEquals('inf', format('%f', 1 / 0):sub(-3))
+          assertEquals('nan', format('%f', 0 / 0):sub(-3))
+        end,
+        ['format handles %F'] = function()
+          assertEquals('inf', format('%F', 1 / 0):sub(-3))
+          assertEquals('nan', format('%F', 0 / 0):sub(-3))
+        end,
+      }
+    end,
     ['frame kid order'] = function()
       local f = CreateFrame('Frame')
       local g = CreateFrame('Frame')
@@ -135,44 +195,44 @@ local syncTests = function()
       assert(select(2, f:GetChildren()) == i)
       assert(select(3, f:GetChildren()) == h)
     end,
-    ['format missing numbers'] = function()
-      assertEquals('0', format('%d'))
+    ['ScrollFrame:SetScrollChild'] = function()
+      local f = CreateFrame('ScrollFrame')
+      assertEquals(nil, f:GetScrollChild())
+      local g = CreateFrame('Frame', 'WowlessScrollFrameChild')
+      f:SetScrollChild(g)
+      assertEquals(g, f:GetScrollChild())
+      f:SetScrollChild(nil)
+      assertEquals(nil, f:GetScrollChild())
+      f:SetScrollChild('WowlessScrollFrameChild')
+      assertEquals(g, f:GetScrollChild())
+      assertEquals(
+        false,
+        pcall(function()
+          f:SetScrollChild()
+        end)
+      )
     end,
-    ['format nil numbers'] = function()
-      assertEquals('0', format('%d', nil))
+    ['table'] = function()
+      return {
+        wipe = function()
+          local t = { 1, 2, 3 }
+          local w = table.wipe(t)
+          assertEquals(w, t)
+          assertEquals(nil, next(t))
+        end,
+      }
     end,
-    ['does not format missing strings'] = function()
-      assert(not pcall(function()
-        format('%s')
-      end))
-    end,
-    ['does not format nil strings'] = function()
-      assert(not pcall(function()
-        format('%s', nil)
-      end))
-    end,
-    ['format handles indexed substitution'] = function()
-      assertEquals(' 7   moo', format('%2$2d %1$5s', 'moo', 7))
-    end,
-    ['format handles up to index 99 substitution'] = function()
-      local t = {}
-      for i = 1, 100 do
-        t[i] = i
+    ['version'] = function()
+      local id = _G.WOW_PROJECT_ID
+      if id == 1 then
+        assertEquals(id, _G.WOW_PROJECT_MAINLINE)
+      elseif id == 2 then
+        assertEquals(id, _G.WOW_PROJECT_CLASSIC)
+      elseif id == 5 then
+        assertEquals(id, _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
+      else
+        error('invalid WOW_PROJECT_ID')
       end
-      for i = 1, 99 do
-        assertEquals(tostring(i), format('%' .. i .. '$d', unpack(t)))
-      end
-      assert(not pcall(function()
-        format('%100$d', unpack(t))
-      end))
-    end,
-    ['format handles %f'] = function()
-      assertEquals('inf', format('%f', 1 / 0):sub(-3))
-      assertEquals('nan', format('%f', 0 / 0):sub(-3))
-    end,
-    ['format handles %F'] = function()
-      assertEquals('inf', format('%F', 1 / 0):sub(-3))
-      assertEquals('nan', format('%F', 0 / 0):sub(-3))
     end,
     ['visible updated on kids before calling any OnShow'] = function()
       local p = CreateFrame('Frame')
@@ -239,62 +299,6 @@ local syncTests = function()
         'parent' .. (',true'):rep(6),
       }, '\n')
       assertEquals(expected, table.concat(log, '\n'))
-    end,
-    ['ScrollFrame:SetScrollChild'] = function()
-      local f = CreateFrame('ScrollFrame')
-      assertEquals(nil, f:GetScrollChild())
-      local g = CreateFrame('Frame', 'WowlessScrollFrameChild')
-      f:SetScrollChild(g)
-      assertEquals(g, f:GetScrollChild())
-      f:SetScrollChild(nil)
-      assertEquals(nil, f:GetScrollChild())
-      f:SetScrollChild('WowlessScrollFrameChild')
-      assertEquals(g, f:GetScrollChild())
-      assertEquals(
-        false,
-        pcall(function()
-          f:SetScrollChild()
-        end)
-      )
-    end,
-    ['coroutine'] = function()
-      local log = {}
-      local co = coroutine.create(function()
-        table.insert(log, 'b')
-        coroutine.yield()
-        table.insert(log, 'e')
-      end)
-      table.insert(log, 'a')
-      assert(coroutine.resume(co))
-      table.insert(log, 'c')
-      assertEquals('suspended', coroutine.status(co))
-      table.insert(log, 'd')
-      assert(coroutine.resume(co))
-      table.insert(log, 'f')
-      assertEquals('dead', coroutine.status(co))
-      assertEquals('a,b,c,d,e,f', table.concat(log, ','))
-    end,
-    ['table'] = function()
-      return {
-        wipe = function()
-          local t = { 1, 2, 3 }
-          local w = table.wipe(t)
-          assertEquals(w, t)
-          assertEquals(nil, next(t))
-        end,
-      }
-    end,
-    ['version'] = function()
-      local id = _G.WOW_PROJECT_ID
-      if id == 1 then
-        assertEquals(id, _G.WOW_PROJECT_MAINLINE)
-      elseif id == 2 then
-        assertEquals(id, _G.WOW_PROJECT_CLASSIC)
-      elseif id == 5 then
-        assertEquals(id, _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
-      else
-        error('invalid WOW_PROJECT_ID')
-      end
     end,
   }
 end
