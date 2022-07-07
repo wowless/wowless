@@ -1,3 +1,3 @@
 return (function(self)
-  u(self).enabled = false
+  self:SetButtonState('DISABLED')
 end)(...)

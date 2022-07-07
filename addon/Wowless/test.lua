@@ -33,9 +33,6 @@ local syncTests = function()
       assert(g:GetFontString() == nil)
     end,
     ['button states'] = function()
-      if _G.IsWowless then
-        return
-      end
       local b = CreateFrame('Button')
       assertEquals('NORMAL', b:GetButtonState())
       assertEquals(true, b:IsEnabled())

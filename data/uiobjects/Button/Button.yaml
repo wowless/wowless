@@ -13,9 +13,6 @@ fields:
   disabledTexture:
     nilable: true
     type: texture
-  enabled:
-    init: true
-    type: boolean
   highlightTexture:
     nilable: true
     type: texture
@@ -99,9 +96,7 @@ methods:
     - type: number
     status: unimplemented
   IsEnabled:
-    fields:
-    - name: enabled
-    status: getter
+    status: implemented
   LockHighlight:
     status: unimplemented
   RegisterForClicks:
@@ -109,11 +104,7 @@ methods:
   RegisterForMouse:
     status: unimplemented
   SetButtonState:
-    fields:
-    - name: buttonState
-    - name: buttonLocked
-      nilable: true
-    status: setter
+    status: implemented
   SetDisabledAtlas:
     status: implemented
   SetDisabledFontObject:
