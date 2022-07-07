@@ -202,9 +202,6 @@ local syncTests = function()
           }
         end,
         ['level'] = function()
-          if _G.IsWowless then
-            return
-          end
           local f = CreateFrame('Frame')
           local g = CreateFrame('Frame')
           local h = CreateFrame('Frame')

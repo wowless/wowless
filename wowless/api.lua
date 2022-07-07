@@ -40,6 +40,9 @@ local function new(log, maxErrors)
       table.insert(u(parent).childrenList, obj)
       u(parent).childrenSet[obj] = #u(parent).childrenList
     end
+    if parent and u(parent).frameLevel and u(obj).frameLevel and not u(obj).hasFixedFrameLevel then
+      obj:SetFrameLevel(u(parent).frameLevel + 1)
+    end
   end
 
   local parentMatch = '$[pP][aA][rR][eE][nN][tT]'

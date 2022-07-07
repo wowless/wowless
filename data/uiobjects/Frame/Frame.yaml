@@ -5,11 +5,17 @@ fields:
     init: {}
     type: table
   frameLevel:
-    init: 1
+    init: 0
     type: number
   frameStrata:
     init: MEDIUM
     type: string
+  hasFixedFrameLevel:
+    init: false
+    type: boolean
+  hasFixedFrameStrata:
+    init: false
+    type: boolean
   hyperlinksEnabled:
     init: false
     type: boolean
@@ -153,9 +159,13 @@ methods:
   GetRegions:
     status: implemented
   HasFixedFrameLevel:
-    status: unimplemented
+    fields:
+    - name: hasFixedFrameLevel
+    status: getter
   HasFixedFrameStrata:
-    status: unimplemented
+    fields:
+    - name: hasFixedFrameStrata
+    status: getter
   IgnoreDepth:
     status: unimplemented
   IsClampedToScreen:
@@ -235,17 +245,19 @@ methods:
   SetDrawLayerEnabled:
     status: unimplemented
   SetFixedFrameLevel:
-    status: unimplemented
+    fields:
+    - name: hasFixedFrameLevel
+    status: setter
   SetFixedFrameStrata:
-    status: unimplemented
+    fields:
+    - name: hasFixedFrameStrata
+    status: setter
   SetFlattensRenderLayers:
     status: unimplemented
   SetFrameBuffer:
     status: unimplemented
   SetFrameLevel:
-    fields:
-    - name: frameLevel
-    status: setter
+    status: implemented
   SetFrameStrata:
     fields:
     - name: frameStrata

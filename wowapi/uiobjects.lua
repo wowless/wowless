@@ -161,7 +161,7 @@ local function mkBaseUIObjectTypes(api, loader)
       return function(self)
         local ud = u(self)
         for fname, field in pairs(cfg.fields or {}) do
-          if field.init then
+          if field.init ~= nil then
             ud[fname] = type(field.init) == 'table' and deepcopy(field.init) or field.init
           end
         end
