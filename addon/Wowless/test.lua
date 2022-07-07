@@ -59,9 +59,6 @@ local syncTests = function()
       assertEquals(true, b:IsEnabled())
     end,
     ['button textures'] = function()
-      if _G.IsWowless then
-        return
-      end
       local b = CreateFrame('Button')
       assertEquals(nil, b:GetDisabledTexture())
       assertEquals(nil, b:GetHighlightTexture())

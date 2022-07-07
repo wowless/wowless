@@ -113,6 +113,7 @@ local function mkBaseUIObjectTypes(api, loader)
     api = api,
     kids = kids,
     m = m,
+    toTexture = toTexture,
     u = u,
     UpdateVisible = UpdateVisible,
   }
@@ -169,7 +170,7 @@ local function mkBaseUIObjectTypes(api, loader)
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
       if method.status == 'implemented' then
-        mixin[mname] = assert(lua[mname])
+        mixin[mname] = assert(lua[mname], ('function required on %s.%s'):format(name, mname))
       elseif method.status == 'getter' then
         mixin[mname] = function(self)
           local ud = u(self)

@@ -35,6 +35,7 @@ files['data/uiobjects'] = {
     'api',
     'kids',
     'm',
+    'toTexture',
     'u',
     'UpdateVisible',
   },

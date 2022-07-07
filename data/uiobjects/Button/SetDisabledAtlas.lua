@@ -1,5 +1,8 @@
 return (function(self, atlas)
-  local ud = u(self)
-  ud.disabledTexture = ud.disabledTexture or self:CreateTexture()
-  ud.disabledTexture:SetAtlas(atlas)
+  local t = self:GetDisabledTexture()
+  if not t then
+    t = self:CreateTexture()
+    self:SetDisabledTexture(t)
+  end
+  t:SetAtlas(atlas)
 end)(...)

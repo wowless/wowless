@@ -1,5 +1,8 @@
 return (function(self, atlas)
-  local ud = u(self)
-  ud.highlightTexture = ud.highlightTexture or self:CreateTexture()
-  ud.highlightTexture:SetAtlas(atlas)
+  local t = self:GetHighlightTexture()
+  if not t then
+    t = self:CreateTexture()
+    self:SetHighlightTexture(t)
+  end
+  t:SetAtlas(atlas)
 end)(...)

@@ -1,5 +1,8 @@
 return (function(self, atlas)
-  local ud = u(self)
-  ud.normalTexture = ud.normalTexture or self:CreateTexture()
-  ud.normalTexture:SetAtlas(atlas)
+  local t = self:GetNormalTexture()
+  if not t then
+    t = self:CreateTexture()
+    self:SetNormalTexture(t)
+  end
+  t:SetAtlas(atlas)
 end)(...)

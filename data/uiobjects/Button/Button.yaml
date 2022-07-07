@@ -110,13 +110,9 @@ methods:
   SetDisabledFontObject:
     status: unimplemented
   SetDisabledTexture:
-    fields:
-    - name: disabledTexture
-    status: setter
+    status: implemented
   SetEnabled:
-    fields:
-    - name: enabled
-    status: setter
+    status: implemented
   SetFontString:
     status: implemented
   SetFormattedText:
@@ -140,9 +136,7 @@ methods:
     - name: normalFontObject
     status: setter
   SetNormalTexture:
-    fields:
-    - name: normalTexture
-    status: setter
+    status: implemented
   SetPushedAtlas:
     status: implemented
   SetPushedTextOffset:
@@ -151,9 +145,7 @@ methods:
     - name: pushedTextOffsetY
     status: setter
   SetPushedTexture:
-    fields:
-    - name: pushedTexture
-    status: setter
+    status: implemented
   SetText:
     status: implemented
   UnlockHighlight:
