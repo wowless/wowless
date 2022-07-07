@@ -183,12 +183,14 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
   end)
   for _, f in ipairs(data) do
     table.sort(f.regions, function(a, b)
-      local la = layers[a.drawLayer] or 0
-      local lb = layers[b.drawLayer] or 0
-      return la < lb or la == lb and (a.drawSubLayer or 0) < (b.drawSubLayer or 0)
+      local aa = a.content.texture or {}
+      local bb = b.content.texture or {}
+      local la = layers[aa.drawLayer] or 0
+      local lb = layers[bb.drawLayer] or 0
+      return la < lb or la == lb and (aa.drawSubLayer or 0) < (bb.drawSubLayer or 0)
     end)
     for _, v in ipairs(f.regions) do
-      if v.content.texture then
+      if v.content.texture and v.content.texture.drawLayer ~= 'HIGHLIGHT' then
         local r = v.rect
         local left, top, right, bottom = r.left, screenHeight - r.top, r.right, screenHeight - r.bottom
         local x = v.content.texture.path

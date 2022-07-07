@@ -122,9 +122,7 @@ methods:
   SetHighlightFontObject:
     status: unimplemented
   SetHighlightTexture:
-    fields:
-    - name: highlightTexture
-    status: setter
+    status: implemented
   SetMotionScriptsWhileDisabled:
     fields:
     - name: motionScriptsWhileDisabled
