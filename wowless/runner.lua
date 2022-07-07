@@ -30,6 +30,11 @@ local function run(cfg)
   api.SendEvent('TRIAL_STATUS_UPDATE')
   api.SendEvent('DISPLAY_SIZE_CHANGED')
   api.SendEvent('SPELLS_CHANGED')
+  if cfg.debug then
+    print('_, api = debug.getlocal(3, 5)')
+    debug.debug()
+    os.exit(0)
+  end
   if cfg.frame0 then
     local render = require('wowless.render')
     local screenWidth, screenHeight = 1280, 720

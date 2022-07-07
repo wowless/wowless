@@ -7,6 +7,7 @@ local args = (function()
   parser:option('-c --cascproxy', 'url prefix to cascproxy')
   parser:option('-e --maxerrors', 'quit once this number of errors occur'):convert(tonumber)
   parser:flag('--allevents', 'send all nullary events')
+  parser:flag('--debug', 'enter debug mode after load')
   parser:flag('--frame0', 'write frame0 debug')
   parser:flag('--taint', 'support taint handling')
   return parser:parse()
@@ -14,6 +15,7 @@ end)()
 local api = require('wowless.runner').run({
   allevents = args.allevents,
   cascproxy = args.cascproxy,
+  debug = args.debug,
   dir = 'extracts/' .. args.product,
   frame0 = args.frame0,
   loglevel = args.loglevel,
