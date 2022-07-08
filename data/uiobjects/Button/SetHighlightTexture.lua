@@ -1,11 +1,11 @@
 return (function(self, tex)
   local t = toTexture(self, tex)
   if t then
-    t:Show()
+    t:SetParent(self)
+    t:ClearAllPoints()
+    t:SetAllPoints()
     t:SetDrawLayer('HIGHLIGHT')
-    if t:GetParent() == self and t:GetNumPoints() == 0 then
-      t:SetAllPoints()
-    end
+    t:Show()
   end
   u(self).highlightTexture = t
 end)(...)

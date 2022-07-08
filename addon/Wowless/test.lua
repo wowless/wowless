@@ -61,9 +61,6 @@ local syncTests = function()
     ['button textures'] = function()
       return {
         ['parent'] = function()
-          if _G.IsWowless then
-            return
-          end
           local function init()
             local b = CreateFrame('Button')
             local t = b:CreateTexture()
@@ -81,6 +78,9 @@ local syncTests = function()
               assertEquals(t, b:GetPushedTexture())
             end,
             ['reparent clears'] = function()
+              if _G.IsWowless then
+                return
+              end
               local b, t, f = init()
               t:SetParent(f)
               assertEquals(0, b:GetNumRegions())
@@ -93,12 +93,18 @@ local syncTests = function()
               assertEquals(b, t:GetParent())
             end,
             ['reuse texture with name'] = function()
+              if _G.IsWowless then
+                return
+              end
               local b, t = init()
               b:SetNormalTexture(136235)
               assertEquals(1, b:GetNumRegions())
               assertEquals(136235, t:GetTexture())
             end,
             ['round trip clears'] = function()
+              if _G.IsWowless then
+                return
+              end
               local b, t, f = init()
               t:SetParent(f)
               t:SetParent(b)
