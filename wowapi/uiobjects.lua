@@ -1,9 +1,9 @@
 local util = require('wowless.util')
 local Mixin = util.mixin
 
-local function toTexture(parent, tex)
+local function toTexture(parent, tex, obj)
   if type(tex) == 'string' or type(tex) == 'number' then
-    local t = parent:CreateTexture()
+    local t = obj or parent:CreateTexture()
     t:SetTexture(tex)
     return t
   else

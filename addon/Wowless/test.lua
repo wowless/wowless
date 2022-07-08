@@ -93,13 +93,10 @@ local syncTests = function()
               assertEquals(b, t:GetParent())
             end,
             ['reuse texture with name'] = function()
-              if _G.IsWowless then
-                return
-              end
               local b, t = init()
               b:SetNormalTexture(136235)
               assertEquals(1, b:GetNumRegions())
-              assertEquals(136235, t:GetTexture())
+              assertEquals(136235, tonumber(t:GetTexture())) -- TODO remove tonumber
             end,
             ['round trip clears'] = function()
               if _G.IsWowless then

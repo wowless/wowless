@@ -1,6 +1,6 @@
 return (function(self, tex)
   local ud = u(self)
-  local t = toTexture(self, tex)
+  local t = toTexture(self, tex, ud.normalTexture)
   if t then
     t:SetParent(self)
     t:ClearAllPoints()
