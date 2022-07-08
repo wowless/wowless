@@ -1,4 +1,4 @@
 return (function(self)
   local fs = u(self).fontstring
-  return fs and u(fs).parent == self and m(fs, 'GetText') or nil
+  return fs and m(fs, 'GetText')
 end)(...)
