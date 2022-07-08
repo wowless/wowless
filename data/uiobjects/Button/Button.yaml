@@ -57,7 +57,9 @@ methods:
     - name: disabledTexture
     status: getter
   GetFontString:
-    status: implemented
+    fields:
+    - name: fontstring
+    status: getter
   GetHighlightFontObject:
     status: unimplemented
   GetHighlightTexture:

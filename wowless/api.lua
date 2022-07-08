@@ -28,12 +28,26 @@ local function new(log, maxErrors)
     return uiobjectTypes[string.lower(t)] ~= nil
   end
 
+  local parentFieldsToClear = {
+    'disabledTexture',
+    'fontstring',
+    'highlightTexture',
+    'normalTexture',
+    'pushedTexture',
+  }
+
   local function SetParent(obj, parent)
     if u(obj).parent == parent then
       return
     end
     if u(obj).parent then
-      u(u(obj).parent).childrenSet[obj] = nil
+      local up = u(u(obj).parent)
+      up.childrenSet[obj] = nil
+      for _, f in ipairs(parentFieldsToClear) do
+        if up[f] == obj then
+          up[f] = nil
+        end
+      end
     end
     u(obj).parent = parent
     if parent then

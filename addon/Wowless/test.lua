@@ -78,9 +78,6 @@ local syncTests = function()
               assertEquals(t, b:GetPushedTexture())
             end,
             ['reparent clears'] = function()
-              if _G.IsWowless then
-                return
-              end
               local b, t, f = init()
               t:SetParent(f)
               assertEquals(0, b:GetNumRegions())
@@ -99,9 +96,6 @@ local syncTests = function()
               assertEquals(136235, tonumber(t:GetTexture())) -- TODO remove tonumber
             end,
             ['round trip clears'] = function()
-              if _G.IsWowless then
-                return
-              end
               local b, t, f = init()
               t:SetParent(f)
               t:SetParent(b)
