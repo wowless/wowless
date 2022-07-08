@@ -13,6 +13,18 @@ fields:
   bry:
     init: 1
     type: number
+  colorTextureA:
+    nilable: true
+    type: number
+  colorTextureB:
+    nilable: true
+    type: number
+  colorTextureG:
+    nilable: true
+    type: number
+  colorTextureR:
+    nilable: true
+    type: number
   horizTile:
     init: false
     type: boolean
@@ -80,7 +92,12 @@ methods:
   GetTextureFilePath:
     status: unimplemented
   GetVertexColor:
-    status: unimplemented
+    fields:
+    - name: vertexColorR
+    - name: vertexColorG
+    - name: vertexColorB
+    - name: vertexColorA
+    status: getter
   GetVertexOffset:
     status: unimplemented
   GetVertTile:
@@ -98,7 +115,7 @@ methods:
   SetBlendMode:
     status: unimplemented
   SetColorTexture:
-    status: unimplemented
+    status: implemented
   SetDesaturated:
     status: unimplemented
   SetDesaturation:
@@ -124,9 +141,7 @@ methods:
   SetTexelSnappingBias:
     status: unimplemented
   SetTexture:
-    fields:
-    - name: texture
-    status: setter
+    status: implemented
   SetVertexOffset:
     status: unimplemented
   SetVertTile:

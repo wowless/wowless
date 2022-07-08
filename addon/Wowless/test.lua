@@ -93,7 +93,7 @@ local syncTests = function()
               local b, t = init()
               b:SetNormalTexture(136235)
               assertEquals(1, b:GetNumRegions())
-              assertEquals(136235, tonumber(t:GetTexture())) -- TODO remove tonumber
+              assertEquals(136235, t:GetTexture())
             end,
             ['round trip clears'] = function()
               local b, t, f = init()
@@ -329,6 +329,24 @@ local syncTests = function()
           assertEquals(nil, next(t))
         end,
       }
+    end,
+    ['texture'] = function()
+      local function check4(e1, e2, e3, e4, ...)
+        assertEquals(4, select('#', ...))
+        local a1, a2, a3, a4 = ...
+        assertEquals(e1, a1)
+        assertEquals(e2, a2)
+        assertEquals(e3, a3)
+        assertEquals(e4, a4)
+      end
+      local t = CreateFrame('Frame'):CreateTexture()
+      t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
+      assertEquals(nil, t:GetTexture())
+      check4(1, 1, 1, 1, t:GetVertexColor())
+      t:SetTexture(136235)
+      assertEquals(136235, t:GetTexture())
+      t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
+      assertEquals(nil, t:GetTexture())
     end,
     ['version'] = function()
       local id = _G.WOW_PROJECT_ID

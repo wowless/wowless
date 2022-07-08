@@ -7,6 +7,18 @@ fields:
   sublevel:
     init: 0
     type: number
+  vertexColorA:
+    init: 1
+    type: number
+  vertexColorB:
+    init: 1
+    type: number
+  vertexColorG:
+    init: 1
+    type: number
+  vertexColorR:
+    init: 1
+    type: number
 inherits:
 - Region
 methods:
@@ -22,4 +34,9 @@ methods:
       nilable: true
     status: setter
   SetVertexColor:
-    status: unimplemented
+    fields:
+    - name: vertexColorR
+    - name: vertexColorG
+    - name: vertexColorB
+    - name: vertexColorA
+    status: setter

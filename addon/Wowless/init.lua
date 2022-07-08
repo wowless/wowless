@@ -3,7 +3,11 @@ local function quote(v)
 end
 
 local function assertEquals(expected, actual)
-  if expected ~= actual then
+  local check = expected == actual
+  if type(expected) == 'number' and type(actual) == 'number' then
+    check = abs(expected - actual) < 0.0001
+  end
+  if not check then
     error(string.format('want %s, got %s', quote(expected), quote(actual)))
   end
 end
