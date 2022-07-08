@@ -264,4 +264,17 @@
       </OnLoad>
     </Scripts>
   </Frame>
+
+  <Frame>
+    <Layers>
+      <Layer level='OVERLAY'>
+        <Texture parentKey='Overlay' />
+      </Layer>
+    </Layers>
+    <Scripts>
+      <OnLoad>
+        assertEquals('OVERLAY', self.Overlay:GetDrawLayer())
+      </OnLoad>
+    </Scripts>
+  </Frame>
 </Ui>

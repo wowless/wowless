@@ -457,6 +457,9 @@ local function loader(api, cfg)
 
         local phases = {
           EarlyAttrs = function(e, obj)
+            if ctx.layer and obj.SetDrawLayer then
+              obj:SetDrawLayer(ctx.layer)
+            end
             processAttrs(e, obj, 'early')
           end,
           Attrs = function(e, obj)
