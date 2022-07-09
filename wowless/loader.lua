@@ -210,7 +210,7 @@ local function loader(api, cfg)
           if name then
             return assert(api.env[name], ('unknown color %q'):format(name)):GetRGBA()
           else
-            return e.attr.r, e.attr.g, e.attr.b, e.attr.a
+            return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
           end
         end
 
