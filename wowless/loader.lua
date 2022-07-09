@@ -206,9 +206,9 @@ local function loader(api, cfg)
         end
 
         local function getColor(e)
-          if e.attr.name or e.attr.color then
-            local env = ctx.useAddonEnv and addonEnv or api.env
-            return env[e.attr.name or e.attr.color]:GetRGBA()
+          local name = e.attr.name or e.attr.color
+          if name then
+            return assert(api.env[name], ('unknown color %q'):format(name)):GetRGBA()
           else
             return e.attr.r, e.attr.g, e.attr.b, e.attr.a
           end
