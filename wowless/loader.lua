@@ -102,14 +102,6 @@ local function loader(api, cfg)
     end
   end
 
-  local function getColor(e)
-    if e.attr.name then
-      return _G[e.attr.name]:GetRGBA()
-    else
-      return e.attr.r, e.attr.g, e.attr.b, e.attr.a
-    end
-  end
-
   local function getInsets(e)
     local kid = e.kids[#e.kids]
     local function v(k)
@@ -210,6 +202,15 @@ local function loader(api, cfg)
               bindingType = 0
             end
             api.SetScript(obj, script.type, bindingType, fn)
+          end
+        end
+
+        local function getColor(e)
+          if e.attr.name or e.attr.color then
+            local env = ctx.useAddonEnv and addonEnv or api.env
+            return env[e.attr.name or e.attr.color]:GetRGBA()
+          else
+            return e.attr.r, e.attr.g, e.attr.b, e.attr.a
           end
         end
 

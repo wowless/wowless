@@ -34,9 +34,4 @@ methods:
       nilable: true
     status: setter
   SetVertexColor:
-    fields:
-    - name: vertexColorR
-    - name: vertexColorG
-    - name: vertexColorB
-    - name: vertexColorA
-    status: setter
+    status: implemented

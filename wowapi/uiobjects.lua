@@ -198,7 +198,7 @@ local function mkBaseUIObjectTypes(api, loader)
             elseif ty == 'texture' then
               ud[f.name] = toTexture(self, v)
             elseif ty == 'number' then
-              ud[f.name] = assert(tonumber(v))
+              ud[f.name] = assert(tonumber(v), ('want number, got %s'):format(type(v)))
             elseif ty == 'string' then
               ud[f.name] = tostring(v)
             elseif ty == 'font' then
