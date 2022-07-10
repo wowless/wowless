@@ -177,6 +177,37 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
   local mwand = magick.new_magick_wand()
   assert(mwand:new_image(screenWidth, screenHeight, color('none')))
 
+  local product = rootDir:sub(10)
+  local blobs = {}
+  local function getblob(path)
+    local fpath
+    if tonumber(path) then
+      fpath = '/fdid/' .. path
+    else
+      fpath = '/name/' .. path:lower():gsub('\\', '/')
+      if fpath:sub(-4) ~= '.blp' then
+        fpath = fpath .. '.blp'
+      end
+    end
+    local prev = blobs[fpath]
+    if prev then
+      return prev.width, prev.height, prev.png
+    end
+    local content = conn('/product/' .. product .. fpath)
+    local success, width, height, png = pcall(function()
+      local width, height, rgba = require('wowless.blp').read(content)
+      return width, height, require('wowless.png').write(width, height, rgba)
+    end)
+    if success then
+      blobs[fpath] = {
+        height = height,
+        png = png,
+        width = width,
+      }
+      return width, height, png
+    end
+  end
+
   table.sort(data, function(a, b)
     local sa = strata[a.strata] or 0
     local sb = strata[b.strata] or 0
@@ -196,23 +227,9 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
         local left, top, right, bottom = r.left, screenHeight - r.top, r.right, screenHeight - r.bottom
         local x = v.content.texture.path
         if conn and x and left < right and top < bottom then
-          local fpath
-          if tonumber(x) then
-            fpath = '/fdid/' .. x
-          else
-            fpath = '/name/' .. x:gsub('\\', '/')
-            if fpath:sub(-4):lower() ~= '.blp' then
-              fpath = fpath .. '.blp'
-            end
-          end
-          fpath = '/product/' .. rootDir:sub(10) .. fpath
-          local content = fpath:find(' ') and '' or conn(fpath)
-          local success, width, height, png = pcall(function()
-            local width, height, rgba = require('wowless.blp').read(content)
-            return width, height, require('wowless.png').write(width, height, rgba)
-          end)
+          local width, height, png = getblob(x)
           local c = v.content.texture.coords
-          if success then
+          if png then
             local twand = magick.new_magick_wand()
             assert(twand:read_image_blob(png))
             assert(twand:distort_image(magick.DistortImageMethod.BilinearDistortion, {
