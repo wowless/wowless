@@ -28,6 +28,9 @@ fields:
   horizTile:
     init: false
     type: boolean
+  maskName:
+    nilable: true
+    type: string
   texture:
     nilable: true
     type: string
@@ -129,7 +132,9 @@ methods:
     - name: horizTile
     status: setter
   SetMask:
-    status: unimplemented
+    fields:
+    - name: maskName
+    status: setter
   SetNonBlocking:
     status: unimplemented
   SetRotation:

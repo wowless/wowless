@@ -1,4 +1,4 @@
-local function frames2rects(frames, screenWidth, screenHeight)
+local function frames2rects(api, screenWidth, screenHeight)
   local tt = require('resty.tsort').new()
   local function addPoints(r)
     for i = 1, r:GetNumPoints() do
@@ -8,7 +8,7 @@ local function frames2rects(frames, screenWidth, screenHeight)
       end
     end
   end
-  for _, frame in ipairs(frames) do
+  for _, frame in ipairs(api.frames) do
     addPoints(frame)
     for _, r in ipairs({ frame:GetRegions() }) do
       addPoints(r)
@@ -86,7 +86,7 @@ local function frames2rects(frames, screenWidth, screenHeight)
     end
   end
   local ret = {}
-  for _, frame in ipairs(frames) do
+  for _, frame in ipairs(api.frames) do
     local regions = {}
     for _, r in ipairs({ frame:GetRegions() }) do
       local rect = rects[r]
@@ -115,6 +115,7 @@ local function frames2rects(frames, screenWidth, screenHeight)
                   drawLayer = drawLayer,
                   drawSubLayer = drawSubLayer,
                   horizTile = t:GetHorizTile(),
+                  maskPath = api.UserData(t).maskName,
                   path = t:GetTexture(),
                   vertTile = t:GetVertTile(),
                 }
