@@ -8,7 +8,7 @@ local function assertEquals(expected, actual)
     check = abs(expected - actual) < 0.0001
   end
   if not check then
-    error(string.format('want %s, got %s', quote(expected), quote(actual)))
+    error(string.format('want %s, got %s', quote(expected), quote(actual)), 2)
   end
 end
 
