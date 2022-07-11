@@ -281,7 +281,13 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
               bottom - top,
             }))
             assert(twand:crop_image(right - left, bottom - top, 0, 0))
-            assert(mwand:composite_image(twand, magick.CompositeOperator.OverCompositeOp, left, top))
+            local op
+            if v.content.texture.blendMode == 'ADD' then
+              op = magick.CompositeOperator.PlusCompositeOp
+            else
+              op = magick.CompositeOperator.OverCompositeOp
+            end
+            assert(mwand:composite_image(twand, op, left, top))
           else
             dwand:set_stroke_color(red)
             dwand:rectangle(left, top, right, bottom)
