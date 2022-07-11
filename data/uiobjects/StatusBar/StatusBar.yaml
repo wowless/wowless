@@ -81,9 +81,7 @@ methods:
       nilable: true
     status: setter
   SetStatusBarTexture:
-    fields:
-    - name: statusBarTexture
-    status: setter
+    status: implemented
   SetValue:
     fields:
     - name: value
