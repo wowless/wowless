@@ -24,13 +24,9 @@ methods:
     - name: disabledCheckedTexture
     status: getter
   SetChecked:
-    fields:
-    - name: checked
-    status: setter
+    status: implemented
   SetCheckedTexture:
-    fields:
-    - name: checkedTexture
-    status: setter
+    status: implemented
   SetDisabledCheckedTexture:
     fields:
     - name: disabledCheckedTexture
