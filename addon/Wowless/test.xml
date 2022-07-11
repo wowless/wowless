@@ -277,4 +277,14 @@
       </OnLoad>
     </Scripts>
   </Frame>
+
+  <CheckButton>
+    <HighlightTexture parentKey='Kid' />
+    <Scripts>
+      <OnLoad>
+        assertEquals(self.Kid, self:GetHighlightTexture())
+        assertEquals('Texture', self.Kid:GetObjectType())
+      </OnLoad>
+    </Scripts>
+  </CheckButton>
 </Ui>
