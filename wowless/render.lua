@@ -232,6 +232,31 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
           if png then
             local twand = magick.new_magick_wand()
             assert(twand:read_image_blob(png))
+            if v.content.texture.maskPath then
+              local mwidth, mheight, mpng = getblob(v.content.texture.maskPath)
+              if mpng then
+                local maskwand = magick.new_magick_wand()
+                assert(maskwand:read_image_blob(mpng))
+                assert(maskwand:distort_image(magick.DistortImageMethod.BilinearDistortion, {
+                  -- Top right
+                  mwidth,
+                  0,
+                  width,
+                  0,
+                  -- Bottom right
+                  mwidth,
+                  mheight,
+                  width,
+                  height,
+                  -- Bottom left
+                  0,
+                  mheight,
+                  0,
+                  height,
+                }))
+                assert(twand:composite_image(maskwand, magick.CompositeOperator.DstInCompositeOp, 0, 0))
+              end
+            end
             assert(twand:distort_image(magick.DistortImageMethod.BilinearDistortion, {
               -- Top left
               c.tlx * width,
