@@ -1,6 +1,25 @@
 local addonName, G = ...
 local assertEquals = _G.assertEquals
 
+local function check0(...)
+  assertEquals(0, select('#', ...))
+end
+
+local function check1(e1, ...)
+  assertEquals(1, select('#', ...))
+  local a1 = ...
+  assertEquals(e1, a1)
+end
+
+local function check4(e1, e2, e3, e4, ...)
+  assertEquals(4, select('#', ...))
+  local a1, a2, a3, a4 = ...
+  assertEquals(e1, a1)
+  assertEquals(e2, a2)
+  assertEquals(e3, a3)
+  assertEquals(e4, a4)
+end
+
 local syncTests = function()
   return {
     ['button states'] = function()
@@ -320,6 +339,22 @@ local syncTests = function()
         end)
       )
     end,
+    ['status bar'] = function()
+      local sb = CreateFrame('StatusBar')
+      check1(nil, sb:GetStatusBarTexture())
+      check4(1, 1, 1, 1, sb:GetStatusBarColor())
+      check1(nil, sb:GetStatusBarTexture())
+      check0(sb:SetStatusBarColor(0, 1, 0, 1))
+      check4(1, 1, 1, 1, sb:GetStatusBarColor())
+      sb:SetStatusBarTexture('interface/icons/temp')
+      local t = sb:GetStatusBarTexture()
+      assert(t ~= nil)
+      check4(1, 1, 1, 1, sb:GetStatusBarColor())
+      check4(1, 1, 1, 1, t:GetVertexColor())
+      check0(t:SetVertexColor(0.8, 0.6, 0.4, 0.2))
+      check4(0.8, 0.6, 0.4, 0.2, sb:GetStatusBarColor())
+      check4(0.8, 0.6, 0.4, 0.2, t:GetVertexColor())
+    end,
     ['table'] = function()
       return {
         wipe = function()
@@ -331,14 +366,6 @@ local syncTests = function()
       }
     end,
     ['texture'] = function()
-      local function check4(e1, e2, e3, e4, ...)
-        assertEquals(4, select('#', ...))
-        local a1, a2, a3, a4 = ...
-        assertEquals(e1, a1)
-        assertEquals(e2, a2)
-        assertEquals(e3, a3)
-        assertEquals(e4, a4)
-      end
       local t = CreateFrame('Frame'):CreateTexture()
       assertEquals('BLEND', t:GetBlendMode())
       t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
