@@ -271,6 +271,7 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
                 assert(twand:composite_image(maskwand, magick.CompositeOperator.DstInCompositeOp, 0, 0))
               end
             end
+            assert(twand:set_image_extent(math.max(width, right - left), math.max(height, bottom - top)))
             assert(twand:distort_image(magick.DistortImageMethod.BilinearDistortion, {
               -- Top left
               c.tlx * width,
