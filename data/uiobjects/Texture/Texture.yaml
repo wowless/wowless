@@ -121,7 +121,9 @@ methods:
   SetAtlas:
     status: implemented
   SetBlendMode:
-    status: unimplemented
+    fields:
+    - name: blendMode
+    status: setter
   SetColorTexture:
     status: implemented
   SetDesaturated:

@@ -279,11 +279,12 @@
   </Frame>
 
   <CheckButton>
-    <HighlightTexture parentKey='Kid' />
+    <HighlightTexture parentKey='Kid' alphaMode='ADD' />
     <Scripts>
       <OnLoad>
         assertEquals(self.Kid, self:GetHighlightTexture())
         assertEquals('Texture', self.Kid:GetObjectType())
+        assertEquals('ADD', self.Kid:GetBlendMode())
       </OnLoad>
     </Scripts>
   </CheckButton>
