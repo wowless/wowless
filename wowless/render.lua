@@ -99,6 +99,7 @@ local function frames2rects(api, screenWidth, screenHeight)
               and (function()
                 local drawLayer, drawSubLayer = t:GetDrawLayer()
                 return {
+                  alpha = t:GetAlpha() * frame:GetEffectiveAlpha(),
                   blendMode = t:GetBlendMode(),
                   coords = (function()
                     local tlx, tly, blx, bly, trx, try, brx, bry = t:GetTexCoord()
@@ -287,7 +288,9 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
             else
               op = magick.CompositeOperator.OverCompositeOp
             end
-            assert(mwand:composite_image(twand, op, left, top))
+            if v.content.texture.alpha > 0 then
+              assert(mwand:composite_image(twand, op, left, top))
+            end
           else
             dwand:set_stroke_color(red)
             dwand:rectangle(left, top, right, bottom)
