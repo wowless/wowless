@@ -340,6 +340,7 @@ local syncTests = function()
         assertEquals(e4, a4)
       end
       local t = CreateFrame('Frame'):CreateTexture()
+      assertEquals('BLEND', t:GetBlendMode())
       t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
       assertEquals(nil, t:GetTexture())
       check4(1, 1, 1, 1, t:GetVertexColor())

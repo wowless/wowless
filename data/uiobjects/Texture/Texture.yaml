@@ -1,6 +1,9 @@
 ---
 name: Texture
 fields:
+  blendMode:
+    init: BLEND
+    type: string
   blx:
     init: 0
     type: number
@@ -58,7 +61,9 @@ methods:
   GetAtlas:
     status: unimplemented
   GetBlendMode:
-    status: unimplemented
+    fields:
+    - name: blendMode
+    status: getter
   GetDesaturation:
     status: unimplemented
   GetHorizTile:

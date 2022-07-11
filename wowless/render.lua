@@ -99,6 +99,7 @@ local function frames2rects(api, screenWidth, screenHeight)
               and (function()
                 local drawLayer, drawSubLayer = t:GetDrawLayer()
                 return {
+                  blendMode = t:GetBlendMode(),
                   coords = (function()
                     local tlx, tly, blx, bly, trx, try, brx, bry = t:GetTexCoord()
                     return {
