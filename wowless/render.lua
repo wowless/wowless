@@ -101,6 +101,12 @@ local function frames2rects(api, screenWidth, screenHeight)
                 return {
                   alpha = t:GetAlpha() * frame:GetEffectiveAlpha(),
                   blendMode = t:GetBlendMode(),
+                  color = api.UserData(t).colorTextureR and {
+                    alpha = api.UserData(t).colorTextureA,
+                    blue = api.UserData(t).colorTextureB,
+                    green = api.UserData(t).colorTextureG,
+                    red = api.UserData(t).colorTextureR,
+                  },
                   coords = (function()
                     local tlx, tly, blx, bly, trx, try, brx, bry = t:GetTexCoord()
                     return {
@@ -119,6 +125,12 @@ local function frames2rects(api, screenWidth, screenHeight)
                   horizTile = t:GetHorizTile(),
                   maskPath = api.UserData(t).maskName,
                   path = t:GetTexture(),
+                  vertexColor = api.UserData(t).vertexColorR and {
+                    alpha = api.UserData(t).vertexColorA,
+                    blue = api.UserData(t).vertexColorB,
+                    green = api.UserData(t).vertexColorG,
+                    red = api.UserData(t).vertexColorR,
+                  },
                   vertTile = t:GetVertTile(),
                 }
               end)()
