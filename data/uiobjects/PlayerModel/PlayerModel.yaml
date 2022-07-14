@@ -52,6 +52,7 @@ methods:
   StopAnimKit:
     status: unimplemented
   ZeroCachedCenterXY:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented

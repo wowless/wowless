@@ -7,10 +7,12 @@ inherits:
 - POIFrame
 methods:
   GetNumTooltips:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetTooltipIndex:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented

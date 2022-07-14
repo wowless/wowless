@@ -10,26 +10,32 @@ methods:
   GetLowerBackgroundFileName:
     status: unimplemented
   GetLowerEmblemFile:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetLowerEmblemFileName:
-    flavors:
-    - TBC
-    - Vanilla
+    products:
+    - wow_classic
+    - wow_classic_ptr
+    - wow_classic_era
+    - wow_classic_era_ptr
     status: unimplemented
   GetLowerEmblemTexture:
     status: unimplemented
   GetUpperBackgroundFileName:
     status: unimplemented
   GetUpperEmblemFile:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetUpperEmblemFileName:
-    flavors:
-    - TBC
-    - Vanilla
+    products:
+    - wow_classic
+    - wow_classic_ptr
+    - wow_classic_era
+    - wow_classic_era_ptr
     status: unimplemented
   GetUpperEmblemTexture:
     status: unimplemented

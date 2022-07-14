@@ -4,46 +4,56 @@ inherits:
 - Frame
 methods:
   GetFogOfWarBackgroundAtlas:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetFogOfWarBackgroundTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetFogOfWarMaskAtlas:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetFogOfWarMaskTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetMaskScalar:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetUiMapID:
     status: unimplemented
   SetFogOfWarBackgroundAtlas:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetFogOfWarBackgroundTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetFogOfWarMaskAtlas:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetFogOfWarMaskTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetMaskScalar:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetUiMapID:
     status: unimplemented

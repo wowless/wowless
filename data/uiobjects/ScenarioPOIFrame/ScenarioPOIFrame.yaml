@@ -7,6 +7,7 @@ inherits:
 - POIFrame
 methods:
   GetScenarioTooltipText:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented

@@ -77,8 +77,9 @@ methods:
   SetCameraPosition:
     status: unimplemented
   SetDesaturation:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetDrawLayer:
     status: unimplemented
@@ -101,8 +102,9 @@ methods:
   SetLightVisible:
     status: unimplemented
   SetPaused:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetViewInsets:
     status: unimplemented

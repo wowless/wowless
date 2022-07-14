@@ -8,8 +8,9 @@ inherits:
 - Frame
 methods:
   AddAtlas:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   AddDoubleLine:
     status: unimplemented
@@ -34,12 +35,14 @@ methods:
   GetAnchorType:
     status: unimplemented
   GetAzeritePowerID:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetCustomLineSpacing:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetItem:
     status: unimplemented
@@ -70,50 +73,62 @@ methods:
   ResetSecondaryCompareItem:
     status: unimplemented
   SetAchievementByID:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetAction:
     status: unimplemented
   SetAllowShowWithNoLines:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetAnchorType:
     status: unimplemented
   SetArtifactItem:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetArtifactPowerByID:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetAuctionItem:
-    flavors:
-    - TBC
-    - Vanilla
+    products:
+    - wow_classic
+    - wow_classic_ptr
+    - wow_classic_era
+    - wow_classic_era_ptr
     status: unimplemented
   SetAuctionSellItem:
-    flavors:
-    - TBC
-    - Vanilla
+    products:
+    - wow_classic
+    - wow_classic_ptr
+    - wow_classic_era
+    - wow_classic_era_ptr
     status: unimplemented
   SetAzeriteEssence:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetAzeriteEssenceSlot:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetAzeritePower:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetBackpackToken:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetBagItem:
     status: unimplemented
@@ -122,52 +137,65 @@ methods:
   SetBuybackItem:
     status: unimplemented
   SetCompanionPet:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetCompareAzeritePower:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetCompareItem:
     status: unimplemented
   SetConduit:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetCraftItem:
-    flavors:
-    - TBC
-    - Vanilla
+    products:
+    - wow_classic
+    - wow_classic_ptr
+    - wow_classic_era
+    - wow_classic_era_ptr
     status: unimplemented
   SetCraftSpell:
-    flavors:
-    - TBC
-    - Vanilla
+    products:
+    - wow_classic
+    - wow_classic_ptr
+    - wow_classic_era
+    - wow_classic_era_ptr
     status: unimplemented
   SetCurrencyByID:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetCurrencyToken:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetCurrencyTokenByID:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetCustomLineSpacing:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetEnhancedConduit:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetEquipmentSet:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetExistingSocketGem:
     status: unimplemented
@@ -176,8 +204,9 @@ methods:
   SetGuildBankItem:
     status: unimplemented
   SetHeirloomByItemID:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetHyperlink:
     status: unimplemented
@@ -192,20 +221,24 @@ methods:
   SetItemByID:
     status: unimplemented
   SetItemKey:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetLFGDungeonReward:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetLFGDungeonShortageReward:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetLootCurrency:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetLootItem:
     status: unimplemented
@@ -218,12 +251,14 @@ methods:
   SetMinimumWidth:
     status: unimplemented
   SetMountBySpellID:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetOwnedItemByID:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetOwner:
     fields:
@@ -236,72 +271,85 @@ methods:
   SetPossession:
     status: unimplemented
   SetPvpBrawl:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetPvpTalent:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetQuestCurrency:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetQuestItem:
     status: unimplemented
   SetQuestLogCurrency:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetQuestLogItem:
     status: unimplemented
   SetQuestLogRewardSpell:
     status: unimplemented
   SetQuestLogSpecialItem:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetQuestPartyProgress:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetQuestRewardSpell:
     status: unimplemented
   SetRecipeRankInfo:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetRecipeReagentItem:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetRecipeResultItem:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetRuneforgeResultItem:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetSendMailItem:
     status: unimplemented
   SetShapeshift:
     status: unimplemented
   SetShrinkToFitWrapped:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetSocketedItem:
     status: unimplemented
   SetSocketedRelic:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetSocketGem:
     status: unimplemented
   SetSpecialPvpBrawl:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetSpellBookItem:
     status: unimplemented
@@ -314,28 +362,34 @@ methods:
   SetTotem:
     status: unimplemented
   SetToyByItemID:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetTrackingSpell:
-    flavors:
-    - TBC
-    - Vanilla
+    products:
+    - wow_classic
+    - wow_classic_ptr
+    - wow_classic_era
+    - wow_classic_era_ptr
     status: unimplemented
   SetTradePlayerItem:
     status: unimplemented
   SetTradeSkillItem:
-    flavors:
-    - TBC
-    - Vanilla
+    products:
+    - wow_classic
+    - wow_classic_ptr
+    - wow_classic_era
+    - wow_classic_era_ptr
     status: unimplemented
   SetTradeTargetItem:
     status: unimplemented
   SetTrainerService:
     status: unimplemented
   SetTransmogrifyItem:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetUnit:
     status: unimplemented
@@ -346,22 +400,27 @@ methods:
   SetUnitDebuff:
     status: unimplemented
   SetUpgradeItem:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetVoidDepositItem:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetVoidItem:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetVoidWithdrawalItem:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetWeeklyReward:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
