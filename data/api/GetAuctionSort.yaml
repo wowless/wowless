@@ -1,9 +1,6 @@
 ---
 name: GetAuctionSort
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - - name: type
     type: string
@@ -12,3 +9,8 @@ outputs:
   type: string
 - name: reversed
   type: boolean
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

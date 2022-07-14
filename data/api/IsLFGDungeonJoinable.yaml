@@ -1,8 +1,6 @@
 ---
 name: IsLFGDungeonJoinable
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: id
     type: number
@@ -15,3 +13,6 @@ outputs:
   type: boolean
 - name: totalGroupSizeRequired
   type: number
+products:
+- wow
+- wowt

@@ -1,11 +1,12 @@
 ---
 name: C_ToyBox.GetIsFavorite
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: itemID
     type: number
 outputs:
 - name: isFavorite
   type: boolean
+products:
+- wow
+- wowt

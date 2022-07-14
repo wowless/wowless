@@ -1,5 +1,6 @@
 ---
 name: GetTalentInfoByID
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

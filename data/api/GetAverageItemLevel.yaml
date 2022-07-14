@@ -1,9 +1,10 @@
 ---
 name: GetAverageItemLevel
 status: unimplemented
-flavors:
-- Mainline
 outputs:
 - type: number
 - type: number
 - type: number
+products:
+- wow
+- wowt

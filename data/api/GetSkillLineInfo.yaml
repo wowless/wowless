@@ -1,9 +1,6 @@
 ---
 name: GetSkillLineInfo
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - - name: index
     type: number
@@ -34,3 +31,8 @@ outputs:
   type: number
 - name: skillDescription
   type: string
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

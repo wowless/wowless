@@ -1,5 +1,6 @@
 ---
 name: GetAchievementNumRewards
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

@@ -1,8 +1,6 @@
 ---
 name: C_ChallengeMode.GetMapTable
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
@@ -11,3 +9,6 @@ outputs:
   stub:
   - 42
   type: table
+products:
+- wow
+- wowt

@@ -1,10 +1,11 @@
 ---
 name: C_TradeSkillUI.IsTradeSkillGuild
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
 - name: value
   type: boolean
+products:
+- wow
+- wowt

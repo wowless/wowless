@@ -1,11 +1,12 @@
 ---
 name: PlayerHasToy
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: itemID
     type: number
 outputs:
 - name: value
   type: boolean
+products:
+- wow
+- wowt

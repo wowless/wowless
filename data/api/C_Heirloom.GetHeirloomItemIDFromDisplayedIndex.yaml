@@ -1,11 +1,12 @@
 ---
 name: C_Heirloom.GetHeirloomItemIDFromDisplayedIndex
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: index
     type: number
 outputs:
 - name: itemID
   type: number
+products:
+- wow
+- wowt

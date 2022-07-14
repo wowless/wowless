@@ -1,10 +1,11 @@
 ---
 name: GetNumVoidTransferDeposit
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
 - name: numDeposits
   type: number
+products:
+- wow
+- wowt

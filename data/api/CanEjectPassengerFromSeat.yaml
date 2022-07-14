@@ -1,5 +1,6 @@
 ---
 name: CanEjectPassengerFromSeat
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

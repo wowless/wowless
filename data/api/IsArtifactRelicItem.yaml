@@ -1,11 +1,12 @@
 ---
 name: IsArtifactRelicItem
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: itemIDOrLink
     type: string
 outputs:
 - name: value
   type: boolean
+products:
+- wow
+- wowt

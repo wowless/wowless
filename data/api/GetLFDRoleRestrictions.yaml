@@ -1,8 +1,6 @@
 ---
 name: GetLFDRoleRestrictions
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: dungeonID
     type: number
@@ -13,3 +11,6 @@ outputs:
   type: boolean
 - name: dpsLocked
   type: boolean
+products:
+- wow
+- wowt

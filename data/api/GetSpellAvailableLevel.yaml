@@ -1,5 +1,6 @@
 ---
 name: GetSpellAvailableLevel
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

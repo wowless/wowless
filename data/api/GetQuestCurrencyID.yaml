@@ -1,5 +1,6 @@
 ---
 name: GetQuestCurrencyID
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

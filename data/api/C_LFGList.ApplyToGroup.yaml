@@ -1,5 +1,6 @@
 ---
 name: C_LFGList.ApplyToGroup
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

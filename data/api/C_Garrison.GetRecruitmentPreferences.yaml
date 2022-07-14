@@ -1,8 +1,6 @@
 ---
 name: C_Garrison.GetRecruitmentPreferences
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
@@ -16,3 +14,6 @@ outputs:
   type: number
 - name: id
   type: number
+products:
+- wow
+- wowt

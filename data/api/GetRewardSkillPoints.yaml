@@ -1,8 +1,6 @@
 ---
 name: GetRewardSkillPoints
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
@@ -12,3 +10,6 @@ outputs:
   type: number
 - name: skillPoints
   type: number
+products:
+- wow
+- wowt

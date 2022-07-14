@@ -1,8 +1,6 @@
 ---
 name: GetLFGCompletionReward
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
@@ -26,3 +24,6 @@ outputs:
   type: number
 - name: numRewards
   type: number
+products:
+- wow
+- wowt

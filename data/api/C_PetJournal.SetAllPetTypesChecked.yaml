@@ -1,5 +1,6 @@
 ---
 name: C_PetJournal.SetAllPetTypesChecked
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

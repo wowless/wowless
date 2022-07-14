@@ -1,7 +1,8 @@
 ---
 name: C_Garrison.GetBuildingSizes
 status: unimplemented
-flavors:
-- Mainline
 outputs:
 - type: table
+products:
+- wow
+- wowt

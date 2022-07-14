@@ -1,11 +1,12 @@
 ---
 name: C_TradeSkillUI.GetPendingObliterateItemID
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
 - name: itemID
   nilable: true
   type: number
+products:
+- wow
+- wowt

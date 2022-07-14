@@ -1,9 +1,10 @@
 ---
 name: HasArtifactEquipped
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
 - type: oneornil
+products:
+- wow
+- wowt

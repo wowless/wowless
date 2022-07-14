@@ -1,8 +1,6 @@
 ---
 name: GetSpecializationInfoForClassID
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: classID
     type: number
@@ -24,3 +22,6 @@ outputs:
   type: boolean
 - name: isAllowed
   type: boolean
+products:
+- wow
+- wowt

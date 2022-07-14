@@ -1,8 +1,6 @@
 ---
 name: GetLFDLockInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: dungeonID
     type: number
@@ -21,3 +19,6 @@ outputs:
   type: string
 - name: secondReasonString
   type: string
+products:
+- wow
+- wowt

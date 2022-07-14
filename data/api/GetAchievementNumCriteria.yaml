@@ -1,10 +1,11 @@
 ---
 name: GetAchievementNumCriteria
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: achievementID
     type: number
 outputs:
 - type: number
+products:
+- wow
+- wowt

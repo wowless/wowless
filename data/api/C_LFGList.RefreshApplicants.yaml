@@ -1,5 +1,6 @@
 ---
 name: C_LFGList.RefreshApplicants
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

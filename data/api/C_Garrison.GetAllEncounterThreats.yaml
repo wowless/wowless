@@ -1,7 +1,8 @@
 ---
 name: C_Garrison.GetAllEncounterThreats
 status: unimplemented
-flavors:
-- Mainline
 outputs:
 - type: table
+products:
+- wow
+- wowt

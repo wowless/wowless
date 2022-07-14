@@ -1,11 +1,12 @@
 ---
 name: GetLFGCompletionRewardItemLink
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: index
     type: number
 outputs:
 - name: rewardItemLink
   type: string
+products:
+- wow
+- wowt

@@ -1,11 +1,12 @@
 ---
 name: GetCategoryInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - type: number
 outputs:
 - type: string
 - type: number
 - type: number
+products:
+- wow
+- wowt

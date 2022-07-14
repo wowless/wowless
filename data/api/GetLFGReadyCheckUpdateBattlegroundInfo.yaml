@@ -1,5 +1,6 @@
 ---
 name: GetLFGReadyCheckUpdateBattlegroundInfo
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

@@ -1,11 +1,12 @@
 ---
 name: GetActiveQuestID
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: index
     type: number
 outputs:
 - name: activeQuestID
   type: number
+products:
+- wow
+- wowt

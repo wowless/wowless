@@ -1,9 +1,6 @@
 ---
 name: GetCraftInfo
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - - name: index
     type: number
@@ -23,3 +20,8 @@ outputs:
   type: number
 - name: requiredLevel
   type: number
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

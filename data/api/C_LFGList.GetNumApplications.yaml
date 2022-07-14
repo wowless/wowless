@@ -1,8 +1,6 @@
 ---
 name: C_LFGList.GetNumApplications
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
@@ -10,3 +8,6 @@ outputs:
   type: number
 - name: numActiveApplications
   type: number
+products:
+- wow
+- wowt

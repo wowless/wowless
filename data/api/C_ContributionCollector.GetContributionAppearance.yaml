@@ -1,8 +1,6 @@
 ---
 name: C_ContributionCollector.GetContributionAppearance
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: contributionID
     type: number
@@ -11,3 +9,6 @@ inputs:
 outputs:
 - name: appearance
   type: C_ContributionCollector.ContributionAppearance
+products:
+- wow
+- wowt

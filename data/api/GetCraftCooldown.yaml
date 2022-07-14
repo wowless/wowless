@@ -1,9 +1,6 @@
 ---
 name: GetCraftCooldown
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - - name: id
     type: number
@@ -11,3 +8,8 @@ outputs:
 - name: craftCooldownTime
   nilable: true
   type: number
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

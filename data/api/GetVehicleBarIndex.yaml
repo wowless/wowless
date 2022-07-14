@@ -1,9 +1,10 @@
 ---
 name: GetVehicleBarIndex
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
 - type: number
+products:
+- wow
+- wowt

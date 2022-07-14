@@ -1,5 +1,6 @@
 ---
 name: C_PetBattles.IsWaitingOnOpponent
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

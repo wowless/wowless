@@ -1,9 +1,10 @@
 ---
 name: UnitHonor
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - type: string
 outputs:
 - type: number
+products:
+- wow
+- wowt

@@ -1,5 +1,6 @@
 ---
 name: UnitWeaponAttackPower
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

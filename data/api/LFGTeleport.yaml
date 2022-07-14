@@ -1,5 +1,6 @@
 ---
 name: LFGTeleport
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

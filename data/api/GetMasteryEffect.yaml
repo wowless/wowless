@@ -1,8 +1,6 @@
 ---
 name: GetMasteryEffect
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
@@ -10,3 +8,6 @@ outputs:
   type: number
 - name: bonusCoefficient
   type: number
+products:
+- wow
+- wowt

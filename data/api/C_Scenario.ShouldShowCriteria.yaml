@@ -1,5 +1,6 @@
 ---
 name: C_Scenario.ShouldShowCriteria
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

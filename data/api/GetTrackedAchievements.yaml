@@ -1,5 +1,6 @@
 ---
 name: GetTrackedAchievements
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

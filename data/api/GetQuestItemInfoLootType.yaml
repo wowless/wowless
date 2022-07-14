@@ -1,8 +1,6 @@
 ---
 name: GetQuestItemInfoLootType
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: questItemType
     type: number
@@ -11,3 +9,6 @@ inputs:
 outputs:
 - name: lootType
   type: number
+products:
+- wow
+- wowt

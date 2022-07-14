@@ -1,5 +1,6 @@
 ---
 name: C_Heirloom.PlayerHasHeirloom
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

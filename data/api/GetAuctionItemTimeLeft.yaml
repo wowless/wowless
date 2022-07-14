@@ -1,9 +1,6 @@
 ---
 name: GetAuctionItemTimeLeft
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - - name: type
     type: string
@@ -12,3 +9,8 @@ inputs:
 outputs:
 - name: timeLeft
   type: number
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

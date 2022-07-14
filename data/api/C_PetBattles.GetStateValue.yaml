@@ -1,5 +1,6 @@
 ---
 name: C_PetBattles.GetStateValue
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

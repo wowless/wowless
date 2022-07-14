@@ -1,5 +1,6 @@
 ---
 name: CanScanResearchSite
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

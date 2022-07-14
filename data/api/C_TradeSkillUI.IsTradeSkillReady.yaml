@@ -1,9 +1,10 @@
 ---
 name: C_TradeSkillUI.IsTradeSkillReady
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
 - type: boolean
+products:
+- wow
+- wowt

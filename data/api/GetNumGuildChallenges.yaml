@@ -1,10 +1,11 @@
 ---
 name: GetNumGuildChallenges
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
 - name: numChallenges
   type: number
+products:
+- wow
+- wowt

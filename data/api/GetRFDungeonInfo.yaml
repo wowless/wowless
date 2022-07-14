@@ -1,8 +1,6 @@
 ---
 name: GetRFDungeonInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: index
     type: number
@@ -19,3 +17,6 @@ outputs:
   type: number
 - name: maxLevel
   type: number
+products:
+- wow
+- wowt

@@ -1,8 +1,6 @@
 ---
 name: GetVoidItemInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: page
     type: number
@@ -21,3 +19,6 @@ outputs:
   type: boolean
 - name: quality
   type: number
+products:
+- wow
+- wowt

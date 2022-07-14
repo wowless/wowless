@@ -1,8 +1,6 @@
 ---
 name: GetNumCompletedAchievements
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: forGuild
     nilable: true
@@ -12,3 +10,6 @@ outputs:
   type: number
 - name: numCompleted
   type: number
+products:
+- wow
+- wowt

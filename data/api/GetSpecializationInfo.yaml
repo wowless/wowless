@@ -1,8 +1,6 @@
 ---
 name: GetSpecializationInfo
 status: implemented
-flavors:
-- Mainline
 inputs:
 - - name: specIndex
     type: number
@@ -33,5 +31,8 @@ outputs:
   type: number
 dbs:
 - name: chrspecialization
+products:
+- wow
+- wowt
 states:
 - Units

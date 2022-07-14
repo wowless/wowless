@@ -1,5 +1,6 @@
 ---
 name: C_Garrison.SearchForFollower
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

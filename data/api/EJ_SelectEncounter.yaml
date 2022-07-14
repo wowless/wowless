@@ -1,5 +1,6 @@
 ---
 name: EJ_SelectEncounter
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

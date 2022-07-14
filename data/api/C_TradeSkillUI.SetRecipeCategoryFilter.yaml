@@ -1,5 +1,6 @@
 ---
 name: C_TradeSkillUI.SetRecipeCategoryFilter
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

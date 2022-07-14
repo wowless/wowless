@@ -1,9 +1,10 @@
 ---
 name: C_PetJournal.SummonRandomPet
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: onlyFavorites
     type: boolean
 outputs: {}
+products:
+- wow
+- wowt
