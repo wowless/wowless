@@ -1,15 +1,10 @@
 expose('addon', function()
-  local versions = {
-    'Vanilla',
-    'TBC',
-    'Mainline',
-  }
-  for _, version in ipairs(versions) do
-    describe(version, function()
+  for _, product in ipairs(require('wowless.util').productList()) do
+    describe(product, function()
       it('runs', function()
         local api = require('wowless.runner').run({
           otherAddonDirs = { 'addon/Wowless' },
-          version = version,
+          product = product,
         })
         assert.True(api.env.WowlessTestsDone)
         assert:set_parameter('TableFormatLevel', -1)

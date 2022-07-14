@@ -22,9 +22,6 @@ type:
                 - literal: string
                 - literal: table
                 - literal: texture
-    flavors:
-      type:
-        schema: flavors
     inherits:
       type:
         sequenceof:
@@ -44,9 +41,6 @@ type:
                       type: boolean
                     required:
                       type: boolean
-            flavors:
-              type:
-                schema: flavors
             outputs:
               type:
                 sequenceof:
@@ -58,6 +52,9 @@ type:
                       type:
                         oneof:
                         - literal: number
+            products:
+              type:
+                schema: products
             status:
               required: true
               type:
@@ -71,3 +68,6 @@ type:
       type: string
     objectType:
       type: string
+    products:
+      type:
+        schema: products

@@ -1,7 +1,5 @@
 ---
 name: ScenarioPOIFrame
-flavors:
-- Mainline
 inherits:
 - Frame
 - POIFrame
@@ -11,3 +9,6 @@ methods:
     - wow
     - wowt
     status: unimplemented
+products:
+- wow
+- wowt

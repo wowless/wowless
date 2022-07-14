@@ -31,9 +31,6 @@ type:
                   ref: db
       debug:
         type: boolean
-      flavors:
-        type:
-          schema: flavors
       frameworks:
         type:
           sequenceof:
@@ -110,6 +107,9 @@ type:
                   - literal: table
                   - literal: unknown
                   - ref: structure
+      products:
+        type:
+          schema: products
       protection:
         type:
           oneof:

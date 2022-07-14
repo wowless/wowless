@@ -1,6 +1,7 @@
 ---
 name: INVENTORY_SEARCH_UPDATE
 status: implemented
-flavors:
-- Mainline
 payload: {}
+products:
+- wow
+- wowt

@@ -38,7 +38,7 @@ end)()
 
 local function loader(api, cfg)
   local rootDir = cfg and cfg.rootDir
-  local version = cfg and cfg.version
+  local product = cfg and cfg.product
   local otherAddonDirs = cfg and cfg.otherAddonDirs or {}
 
   local lfs = require('lfs')
@@ -616,6 +616,15 @@ local function loader(api, cfg)
     }
   end
 
+  local productToFlavor = {
+    wow = 'Mainline',
+    wowt = 'Mainline',
+    wow_classic = 'TBC',
+    wow_classic_era = 'Vanilla',
+    wow_classic_era_ptr = 'Vanilla',
+    wow_classic_ptr = 'TBC',
+  }
+
   local alternateVersionNames = {
     Vanilla = 'Classic',
     TBC = 'BCC',
@@ -643,7 +652,8 @@ local function loader(api, cfg)
   local function resolveTocDir(tocDir)
     api.log(1, 'resolving %s', tocDir)
     local base = path.basename(tocDir)
-    local toTry = not version and { '' }
+    local version = productToFlavor[product]
+    local toTry = not product and { '' }
       or {
         '_' .. version,
         '-' .. version,
@@ -762,13 +772,13 @@ local function loader(api, cfg)
     for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do
       context.loadFile(file)
     end
-    if version then
+    if product then
       local frameXmlBindingsDirMap = {
         Mainline = 'Interface',
         TBC = 'Interface_TBC',
         Vanilla = 'Interface_Vanilla',
       }
-      context.loadFile(path.join(rootDir, frameXmlBindingsDirMap[version], 'FrameXML', 'Bindings.xml'))
+      context.loadFile(path.join(rootDir, frameXmlBindingsDirMap[productToFlavor[product]], 'FrameXML', 'Bindings.xml'))
     end
     local blizzardAddons = {}
     for name, toc in pairs(addonData) do
@@ -810,8 +820,8 @@ local function loader(api, cfg)
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
     loadXml = forAddon().loadXml,
+    product = product,
     saveAllVariables = saveAllVariables,
-    version = version,
   }
 end
 

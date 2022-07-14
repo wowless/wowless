@@ -2,13 +2,13 @@ local data = require('wowapi.data')
 local plprettywrite = require('pl.pretty').write
 local util = require('wowless.util')
 
-local function loadApis(flavor)
+local function loadApis(product)
   local apis = {}
   for fn, yaml in pairs(data.apis) do
-    local match = not yaml.flavors
-    if yaml.flavors then
-      for _, f in ipairs(yaml.flavors) do
-        if flavor == f then
+    local match = not yaml.products
+    if yaml.products then
+      for _, p in ipairs(yaml.products) do
+        if product == p then
           match = true
         end
       end
@@ -211,7 +211,7 @@ local function loadFunctions(api, loader)
   local fns = {}
   local db2s = mkdb2s(api.env)
   local aliases = {}
-  for fn, apicfg in pairs(loadApis(loader.version)) do
+  for fn, apicfg in pairs(loadApis(loader.product)) do
     if apicfg.alias then
       aliases[fn] = apicfg.alias
     elseif apicfg.stdlib then

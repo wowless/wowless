@@ -1,6 +1,7 @@
 ---
 name: PARTY_INVITE_CANCEL
 status: implemented
-flavors:
-- Mainline
 payload: {}
+products:
+- wow
+- wowt
