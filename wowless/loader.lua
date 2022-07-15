@@ -619,6 +619,7 @@ local function loader(api, cfg)
   local productToFlavor = {
     wow = 'Mainline',
     wowt = 'Mainline',
+    wow_beta = 'Mainline',
     wow_classic = 'TBC',
     wow_classic_beta = 'Wrath',
     wow_classic_era = 'Vanilla',

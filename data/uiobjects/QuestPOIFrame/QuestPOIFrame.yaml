@@ -7,13 +7,16 @@ methods:
   GetNumTooltips:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetTooltipIndex:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
 products:
 - wow
+- wow_beta
 - wowt

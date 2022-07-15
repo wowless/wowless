@@ -6,26 +6,31 @@ methods:
   GetFogOfWarBackgroundAtlas:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetFogOfWarBackgroundTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetFogOfWarMaskAtlas:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetFogOfWarMaskTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetMaskScalar:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetUiMapID:
@@ -33,26 +38,31 @@ methods:
   SetFogOfWarBackgroundAtlas:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetFogOfWarBackgroundTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetFogOfWarMaskAtlas:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetFogOfWarMaskTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetMaskScalar:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetUiMapID:

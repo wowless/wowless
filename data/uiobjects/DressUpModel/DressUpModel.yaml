@@ -10,16 +10,19 @@ methods:
   GetItemTransmogInfo:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetItemTransmogInfoList:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetObeyHideInTransmogFlag:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetSheathed:
@@ -27,11 +30,13 @@ methods:
   GetUseTransmogChoices:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetUseTransmogSkin:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetAutoDress:
@@ -39,11 +44,13 @@ methods:
   SetItemTransmogInfo:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetObeyHideInTransmogFlag:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetSheathed:
@@ -51,11 +58,13 @@ methods:
   SetUseTransmogChoices:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetUseTransmogSkin:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   TryOn:

@@ -102,6 +102,7 @@ local function productList()
   return {
     'wow',
     'wowt',
+    'wow_beta',
     'wow_classic',
     'wow_classic_beta',
     'wow_classic_era',

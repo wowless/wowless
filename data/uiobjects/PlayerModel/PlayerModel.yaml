@@ -54,5 +54,6 @@ methods:
   ZeroCachedCenterXY:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented

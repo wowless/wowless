@@ -10,6 +10,7 @@ methods:
   AddAtlas:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   AddDoubleLine:
@@ -37,11 +38,13 @@ methods:
   GetAzeritePowerID:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetCustomLineSpacing:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetItem:
@@ -75,6 +78,7 @@ methods:
   SetAchievementByID:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetAction:
@@ -82,6 +86,7 @@ methods:
   SetAllowShowWithNoLines:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetAnchorType:
@@ -89,11 +94,13 @@ methods:
   SetArtifactItem:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetArtifactPowerByID:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetAuctionItem:
@@ -115,21 +122,25 @@ methods:
   SetAzeriteEssence:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetAzeriteEssenceSlot:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetAzeritePower:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetBackpackToken:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetBagItem:
@@ -141,11 +152,13 @@ methods:
   SetCompanionPet:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetCompareAzeritePower:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetCompareItem:
@@ -153,6 +166,7 @@ methods:
   SetConduit:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetCraftItem:
@@ -174,31 +188,37 @@ methods:
   SetCurrencyByID:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetCurrencyToken:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetCurrencyTokenByID:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetCustomLineSpacing:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetEnhancedConduit:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetEquipmentSet:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetExistingSocketGem:
@@ -210,6 +230,7 @@ methods:
   SetHeirloomByItemID:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetHyperlink:
@@ -227,21 +248,25 @@ methods:
   SetItemKey:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetLFGDungeonReward:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetLFGDungeonShortageReward:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetLootCurrency:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetLootItem:
@@ -257,11 +282,13 @@ methods:
   SetMountBySpellID:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetOwnedItemByID:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetOwner:
@@ -277,16 +304,19 @@ methods:
   SetPvpBrawl:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetPvpTalent:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetQuestCurrency:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetQuestItem:
@@ -294,6 +324,7 @@ methods:
   SetQuestLogCurrency:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetQuestLogItem:
@@ -303,11 +334,13 @@ methods:
   SetQuestLogSpecialItem:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetQuestPartyProgress:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetQuestRewardSpell:
@@ -315,21 +348,25 @@ methods:
   SetRecipeRankInfo:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetRecipeReagentItem:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetRecipeResultItem:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetRuneforgeResultItem:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetSendMailItem:
@@ -339,6 +376,7 @@ methods:
   SetShrinkToFitWrapped:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetSocketedItem:
@@ -346,6 +384,7 @@ methods:
   SetSocketedRelic:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetSocketGem:
@@ -353,6 +392,7 @@ methods:
   SetSpecialPvpBrawl:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetSpellBookItem:
@@ -368,6 +408,7 @@ methods:
   SetToyByItemID:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetTrackingSpell:
@@ -395,6 +436,7 @@ methods:
   SetTransmogrifyItem:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetUnit:
@@ -408,25 +450,30 @@ methods:
   SetUpgradeItem:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetVoidDepositItem:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetVoidItem:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetVoidWithdrawalItem:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetWeeklyReward:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented

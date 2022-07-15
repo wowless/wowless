@@ -112,6 +112,7 @@ end
 local productToProjectID = {
   wow = 'WOW_PROJECT_MAINLINE',
   wowt = 'WOW_PROJECT_MAINLINE',
+  wow_beta = 'WOW_PROJECT_MAINLINE',
   wow_classic = 'WOW_PROJECT_BURNING_CRUSADE_CLASSIC',
   wow_classic_beta = 'WOW_PROJECT_BURNING_CRUSADE_CLASSIC',
   wow_classic_era = 'WOW_PROJECT_CLASSIC',

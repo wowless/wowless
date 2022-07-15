@@ -12,6 +12,7 @@ methods:
   GetLowerEmblemFile:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetLowerEmblemFileName:
@@ -29,6 +30,7 @@ methods:
   GetUpperEmblemFile:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   GetUpperEmblemFileName:

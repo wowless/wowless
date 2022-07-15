@@ -7,8 +7,10 @@ methods:
   GetScenarioTooltipText:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
 products:
 - wow
+- wow_beta
 - wowt

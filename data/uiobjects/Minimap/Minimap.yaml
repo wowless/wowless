@@ -18,36 +18,43 @@ methods:
   SetArchBlobInsideAlpha:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetArchBlobInsideTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetArchBlobOutsideAlpha:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetArchBlobOutsideTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetArchBlobRingAlpha:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetArchBlobRingScalar:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetArchBlobRingTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetBlipTexture:
@@ -65,41 +72,49 @@ methods:
   SetQuestBlobInsideAlpha:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetQuestBlobInsideTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetQuestBlobOutsideAlpha:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetQuestBlobOutsideSelectedTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetQuestBlobOutsideTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetQuestBlobRingAlpha:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetQuestBlobRingScalar:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetQuestBlobRingTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetStaticPOIArrowTexture:
@@ -107,41 +122,49 @@ methods:
   SetTaskBlobInsideAlpha:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetTaskBlobInsideTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetTaskBlobOutsideAlpha:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetTaskBlobOutsideSelectedTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetTaskBlobOutsideTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetTaskBlobRingAlpha:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetTaskBlobRingScalar:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetTaskBlobRingTexture:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetZoom:

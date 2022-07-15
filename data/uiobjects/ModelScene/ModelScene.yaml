@@ -79,6 +79,7 @@ methods:
   SetDesaturation:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetDrawLayer:
@@ -104,6 +105,7 @@ methods:
   SetPaused:
     products:
     - wow
+    - wow_beta
     - wowt
     status: unimplemented
   SetViewInsets:

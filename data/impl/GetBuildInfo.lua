@@ -8,6 +8,8 @@ elseif p == 'wow_classic_beta' then
   return '3.4.0', '44644', 'Jul 12 2022', 30400
 elseif p == 'wow' or p == 'wowt' then
   return '9.2.5', '44325', 'Jun 22 2022', 90205
+elseif p == 'wow_beta' then
+  return '10.0.0', '44649', 'Jul 12 2022', 100000
 else
   error('invalid version')
 end
