@@ -620,15 +620,17 @@ local function loader(api, cfg)
     wow = 'Mainline',
     wowt = 'Mainline',
     wow_classic = 'TBC',
+    wow_classic_beta = 'Wrath',
     wow_classic_era = 'Vanilla',
     wow_classic_era_ptr = 'Vanilla',
     wow_classic_ptr = 'TBC',
   }
 
   local alternateVersionNames = {
-    Vanilla = 'Classic',
-    TBC = 'BCC',
     Mainline = 'Mainline',
+    TBC = 'BCC',
+    Vanilla = 'Classic',
+    Wrath = 'Wrath',
   }
 
   local function parseToc(tocFile, content)

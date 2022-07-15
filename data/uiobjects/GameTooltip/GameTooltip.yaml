@@ -99,6 +99,7 @@ methods:
   SetAuctionItem:
     products:
     - wow_classic
+    - wow_classic_beta
     - wow_classic_ptr
     - wow_classic_era
     - wow_classic_era_ptr
@@ -106,6 +107,7 @@ methods:
   SetAuctionSellItem:
     products:
     - wow_classic
+    - wow_classic_beta
     - wow_classic_ptr
     - wow_classic_era
     - wow_classic_era_ptr
@@ -156,6 +158,7 @@ methods:
   SetCraftItem:
     products:
     - wow_classic
+    - wow_classic_beta
     - wow_classic_ptr
     - wow_classic_era
     - wow_classic_era_ptr
@@ -163,6 +166,7 @@ methods:
   SetCraftSpell:
     products:
     - wow_classic
+    - wow_classic_beta
     - wow_classic_ptr
     - wow_classic_era
     - wow_classic_era_ptr
@@ -369,6 +373,7 @@ methods:
   SetTrackingSpell:
     products:
     - wow_classic
+    - wow_classic_beta
     - wow_classic_ptr
     - wow_classic_era
     - wow_classic_era_ptr
@@ -378,6 +383,7 @@ methods:
   SetTradeSkillItem:
     products:
     - wow_classic
+    - wow_classic_beta
     - wow_classic_ptr
     - wow_classic_era
     - wow_classic_era_ptr

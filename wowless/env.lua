@@ -25,7 +25,7 @@ local function init(api, loader, taint)
   if p == 'wow_classic_era' or p == 'wow_classic_era_ptr' then
     api.env.WOW_PROJECT_ID = 2
     api.env.WOW_PROJECT_CLASSIC = 2
-  elseif p == 'wow_classic' or p == 'wow_classic_ptr' then
+  elseif p == 'wow_classic' or p == 'wow_classic_beta' or p == 'wow_classic_ptr' then
     api.env.WOW_PROJECT_ID = 5
     api.env.WOW_PROJECT_BURNING_CRUSADE_CLASSIC = 5
   elseif p == 'wow' or p == 'wowt' then
