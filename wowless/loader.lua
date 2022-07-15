@@ -766,8 +766,7 @@ local function loader(api, cfg)
 
   local function loadFrameXml()
     local context = forAddon()
-    context.loadFile(path.join(rootDir, 'Interface', 'GlobalEnvironment.lua'))
-    assert(api.env.Enum, 'missing client extract, cannot proceed')
+    mixin(api.env, require('wowapi.yaml').parseFile(('data/globals/%s.yaml'):format(product)))
     do
       -- TODO put this somewhere else
       local cvarDefaults = {}
