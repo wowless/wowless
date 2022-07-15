@@ -237,12 +237,12 @@ local syncTests = function()
           end))
         end,
         ['format handles %f'] = function()
-          assertEquals('inf', format('%f', 1 / 0):sub(-3))
-          assertEquals('nan', format('%f', 0 / 0):sub(-3))
+          assertEquals('inf', format('%f', math.huge):sub(-3))
+          assertEquals('nan', format('%f', -math.sin(math.huge)):sub(-3))
         end,
         ['format handles %F'] = function()
-          assertEquals('inf', format('%F', 1 / 0):sub(-3))
-          assertEquals('nan', format('%F', 0 / 0):sub(-3))
+          assertEquals('inf', format('%F', math.huge):sub(-3))
+          assertEquals('nan', format('%F', -math.sin(math.huge)):sub(-3))
         end,
       }
     end,
