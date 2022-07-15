@@ -17,7 +17,6 @@ bin/run.sh --product wow
 The above will:
 
 * use [wowcig] to download WoW client Lua/XML interface code
-* download and process `_G` extracts on wowless cloud storage
 * load WoW retail FrameXML
 * mess around with the frames created: click around, mouse over things, etc.
 
