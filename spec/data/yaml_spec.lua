@@ -11,6 +11,10 @@ local dirschemas = {
   xml = 'xml',
 }
 
+local fileschemas = {
+  cvars = 'cvars',
+}
+
 describe('yaml', function()
   for dir, schemaname in pairs(dirschemas) do
     describe(dir, function()
@@ -34,6 +38,19 @@ describe('yaml', function()
           end)
         end
       end
+    end)
+  end
+  for file, schemaname in pairs(fileschemas) do
+    describe(file, function()
+      local schema = yaml.parseFile('data/schemas/' .. schemaname .. '.yaml').type
+      local str = plfile.read('data/' .. file .. '.yaml')
+      local data = yaml.parse(str)
+      it('is correctly formatted', function()
+        assert.same(str, yaml.pprint(data))
+      end)
+      it('schema validates', function()
+        validate(schema, data)
+      end)
     end)
   end
 end)

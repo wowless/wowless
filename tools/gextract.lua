@@ -23,21 +23,7 @@ local function otherConstants(data)
 end
 
 do
-  local scrape = require('tools.scrapelib')(arg[1])
-
-  print('C_CVar = C_CVar or {}')
-  print('C_CVar.GetCVarDefault = (function()')
-  print('  local t = {')
-  for k, v in require('pl.tablex').sort(scrape.CVarDefaults) do
-    print(string.format('    [%q] = %q,', k, v))
-  end
-  print('  }')
-  print('  return function(k)')
-  print('    return t[k]')
-  print('  end')
-  print('end)()')
-
-  local data = scrape.Data
+  local data = require('tools.scrapelib')(arg[1]).Data
 
   local result = {}
   recursiveMixin(result, { Constants = data:resolve(data:global('sConstants')) })
