@@ -99,16 +99,12 @@ local function dateToCalendarTime(d)
 end
 
 local function productList()
-  return {
-    'wow',
-    'wowt',
-    'wow_beta',
-    'wow_classic',
-    'wow_classic_beta',
-    'wow_classic_era',
-    'wow_classic_era_ptr',
-    'wow_classic_ptr',
-  }
+  local t = {}
+  for k in pairs(require('wowapi.data').builds) do
+    table.insert(t, k)
+  end
+  table.sort(t)
+  return t
 end
 
 return {

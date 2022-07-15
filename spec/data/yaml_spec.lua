@@ -12,6 +12,7 @@ local dirschemas = {
 }
 
 local fileschemas = {
+  builds = 'builds',
   cvars = 'cvars',
 }
 

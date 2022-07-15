@@ -1,0 +1,20 @@
+---
+name: builds
+type:
+  mapof:
+    record:
+      build:
+        required: true
+        type: string
+      date:
+        required: true
+        type: string
+      flavor:
+        required: true
+        type: string
+      tocversion:
+        required: true
+        type: number
+      version:
+        required: true
+        type: string

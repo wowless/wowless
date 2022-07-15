@@ -616,16 +616,13 @@ local function loader(api, cfg)
     }
   end
 
-  local productToFlavor = {
-    wow = 'Mainline',
-    wowt = 'Mainline',
-    wow_beta = 'Mainline',
-    wow_classic = 'TBC',
-    wow_classic_beta = 'Wrath',
-    wow_classic_era = 'Vanilla',
-    wow_classic_era_ptr = 'Vanilla',
-    wow_classic_ptr = 'TBC',
-  }
+  local productToFlavor = (function()
+    local t = {}
+    for k, v in pairs(require('wowapi.data').builds) do
+      t[k] = v.flavor
+    end
+    return t
+  end)()
 
   local alternateVersionNames = {
     Mainline = 'Mainline',
@@ -766,7 +763,7 @@ local function loader(api, cfg)
 
   local function loadFrameXml()
     local context = forAddon()
-    mixin(api.env, require('wowapi.yaml').parseFile(('data/globals/%s.yaml'):format(product)))
+    mixin(api.env, (require('wowapi.yaml').parseFile(('data/globals/%s.yaml'):format(product))))
     do
       -- TODO put this somewhere else
       local cvarDefaults = {}
