@@ -1,10 +1,10 @@
 describe('loader', function()
   local loader = require('wowapi.loader')
 
-  for _, v in ipairs({ 'Vanilla', 'TBC', 'Mainline' }) do
-    it('loads ' .. v, function()
+  for _, p in ipairs(require('wowless.util').productList()) do
+    it('loads ' .. p, function()
       local api = { env = {}, states = {} }
-      local wowlessLoader = { version = v }
+      local wowlessLoader = { product = p }
       assert.same('table', type(loader.loadFunctions(api, wowlessLoader)))
     end)
   end
