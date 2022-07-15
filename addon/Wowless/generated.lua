@@ -21188,8 +21188,12 @@ function G.GeneratedTests()
           return checkCFunc(_G.xpcall)
         end,
       }
+      local ptrhooked = { -- TODO test these better
+        QuestMapLogTitleButton_OnEnter = true,
+        SetItemRef = true,
+      }
       for k, v in pairs(_G) do
-        if type(v) == 'function' and not tests[k] then
+        if type(v) == 'function' and not tests[k] and not ptrhooked[k] then
           tests['~' .. k] = function()
             if not cfuncs[v] then
               return checkLuaFunc(v)
