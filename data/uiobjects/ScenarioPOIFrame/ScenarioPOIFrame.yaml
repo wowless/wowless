@@ -1,12 +1,14 @@
 ---
 name: ScenarioPOIFrame
-flavors:
-- Mainline
 inherits:
 - Frame
 - POIFrame
 methods:
   GetScenarioTooltipText:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
+products:
+- wow
+- wowt

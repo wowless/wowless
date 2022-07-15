@@ -1,5 +1,6 @@
 ---
 name: C_TradeSkillUI.ClearRecipeSourceTypeFilter
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

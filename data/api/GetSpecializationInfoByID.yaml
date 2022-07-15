@@ -1,8 +1,6 @@
 ---
 name: GetSpecializationInfoByID
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: specID
     type: number
@@ -27,3 +25,6 @@ outputs:
 - name: className
   stub: Warrior
   type: string
+products:
+- wow
+- wowt

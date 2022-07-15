@@ -1,8 +1,6 @@
 ---
 name: GetArchaeologyRaceInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: raceIndex
     type: number
@@ -17,3 +15,6 @@ outputs:
   type: number
 - name: projectAmount
   type: number
+products:
+- wow
+- wowt

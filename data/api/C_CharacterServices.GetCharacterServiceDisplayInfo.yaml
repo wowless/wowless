@@ -1,5 +1,6 @@
 ---
 name: C_CharacterServices.GetCharacterServiceDisplayInfo
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

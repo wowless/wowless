@@ -1,8 +1,6 @@
 ---
 name: GetLFGDungeonRewards
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: dungeonID
     type: number
@@ -21,3 +19,6 @@ outputs:
   type: number
 - name: spellID
   type: number
+products:
+- wow
+- wowt

@@ -1,9 +1,6 @@
 ---
 name: GetNumQuestLogEntries
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - {}
 outputs:
@@ -11,3 +8,8 @@ outputs:
   type: number
 - name: numQuests
   type: number
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

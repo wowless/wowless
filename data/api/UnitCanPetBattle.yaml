@@ -1,5 +1,6 @@
 ---
 name: UnitCanPetBattle
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

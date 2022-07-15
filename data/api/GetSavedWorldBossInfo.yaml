@@ -1,8 +1,6 @@
 ---
 name: GetSavedWorldBossInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: index
     type: number
@@ -13,3 +11,6 @@ outputs:
   type: number
 - name: reset
   type: number
+products:
+- wow
+- wowt

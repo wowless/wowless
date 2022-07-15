@@ -12,8 +12,9 @@ methods:
   GetObjectType:
     status: implemented
   GetSourceLocation:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   IsObjectType:
     status: implemented

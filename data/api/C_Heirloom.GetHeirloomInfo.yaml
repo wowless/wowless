@@ -1,8 +1,6 @@
 ---
 name: C_Heirloom.GetHeirloomInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: itemID
     type: number
@@ -27,3 +25,6 @@ outputs:
   type: number
 - name: maxLevel
   type: number
+products:
+- wow
+- wowt

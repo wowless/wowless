@@ -1,5 +1,6 @@
 ---
 name: GetGuildNewsSort
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

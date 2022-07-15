@@ -1,5 +1,6 @@
 ---
 name: MacOptions_IsMicrophoneEnabled
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

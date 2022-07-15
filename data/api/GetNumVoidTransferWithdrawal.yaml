@@ -1,10 +1,11 @@
 ---
 name: GetNumVoidTransferWithdrawal
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
 - name: numWithdrawals
   type: number
+products:
+- wow
+- wowt

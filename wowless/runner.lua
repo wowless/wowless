@@ -11,8 +11,8 @@ local function run(cfg)
   local loader = require('wowless.loader').loader(api, {
     cascproxy = cfg.cascproxy,
     otherAddonDirs = cfg.otherAddonDirs,
+    product = cfg.product,
     rootDir = cfg.dir,
-    version = cfg.version,
   })
   require('wowless.env').init(api, loader, cfg.taint)
   loader.initAddons()
@@ -135,7 +135,7 @@ local function run(cfg)
       api.SendEvent('EXECUTE_CHAT_LINE', v)
     end
   end
-  if cfg.allevents or cfg.version ~= 'Mainline' then
+  if cfg.allevents or not (cfg.product == 'wow' or cfg.product == 'wowt') then
     local eventBlacklist = {
       BARBER_SHOP_OPEN = true, -- issue #111
       INSPECT_HONOR_UPDATE = true, -- INSPECTED_UNIT shenanigans
@@ -150,11 +150,11 @@ local function run(cfg)
     }
     local keys = {}
     for k, v in pairs(require('wowapi.data').events) do
-      local flavors = {}
-      for _, flavor in ipairs(v.flavors or {}) do
-        flavors[flavor] = true
+      local products = {}
+      for _, product in ipairs(v.products or {}) do
+        products[product] = true
       end
-      if not eventBlacklist[k] and not next(v.payload) and (not v.flavors or flavors[cfg.version]) then
+      if not eventBlacklist[k] and not next(v.payload) and (not v.products or products[cfg.product]) then
         table.insert(keys, k)
       end
     end

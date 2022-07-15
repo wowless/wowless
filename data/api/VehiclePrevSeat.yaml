@@ -1,8 +1,9 @@
 ---
 name: VehiclePrevSeat
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs: {}
+products:
+- wow
+- wowt

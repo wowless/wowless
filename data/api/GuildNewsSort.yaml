@@ -1,9 +1,10 @@
 ---
 name: GuildNewsSort
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: unknown
     type: number
 outputs: {}
+products:
+- wow
+- wowt

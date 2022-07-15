@@ -1,16 +1,19 @@
 ---
 name: QuestPOIFrame
-flavors:
-- Mainline
 inherits:
 - Frame
 - POIFrame
 methods:
   GetNumTooltips:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetTooltipIndex:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
+products:
+- wow
+- wowt

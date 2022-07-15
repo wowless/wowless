@@ -20,9 +20,9 @@ local api = require('wowless.runner').run({
   frame0 = args.frame0,
   loglevel = args.loglevel,
   maxErrors = args.maxerrors,
-  taint = args.taint,
   otherAddonDirs = args.addondir,
-  version = util.productToFlavor(args.product),
+  product = args.product,
+  taint = args.taint,
 })
 if api.GetErrorCount() ~= 0 then
   io.stderr:write('failure on ' .. args.product .. '\n')

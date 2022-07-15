@@ -1,12 +1,14 @@
 ---
 name: GetTradeSkillIcon
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - - name: skillIndex
     type: number
 outputs:
 - name: texture
   type: number
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

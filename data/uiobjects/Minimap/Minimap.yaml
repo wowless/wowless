@@ -16,32 +16,39 @@ methods:
   PingLocation:
     status: unimplemented
   SetArchBlobInsideAlpha:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetArchBlobInsideTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetArchBlobOutsideAlpha:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetArchBlobOutsideTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetArchBlobRingAlpha:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetArchBlobRingScalar:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetArchBlobRingTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetBlipTexture:
     status: unimplemented
@@ -56,70 +63,86 @@ methods:
   SetPOIArrowTexture:
     status: unimplemented
   SetQuestBlobInsideAlpha:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetQuestBlobInsideTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetQuestBlobOutsideAlpha:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetQuestBlobOutsideSelectedTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetQuestBlobOutsideTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetQuestBlobRingAlpha:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetQuestBlobRingScalar:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetQuestBlobRingTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetStaticPOIArrowTexture:
     status: unimplemented
   SetTaskBlobInsideAlpha:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetTaskBlobInsideTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetTaskBlobOutsideAlpha:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetTaskBlobOutsideSelectedTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetTaskBlobOutsideTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetTaskBlobRingAlpha:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetTaskBlobRingScalar:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetTaskBlobRingTexture:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetZoom:
     status: unimplemented

@@ -1,5 +1,6 @@
 ---
 name: C_LFGList.GetRoleCheckInfo
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

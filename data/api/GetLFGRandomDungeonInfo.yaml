@@ -1,8 +1,6 @@
 ---
 name: GetLFGRandomDungeonInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: index
     type: number
@@ -11,3 +9,6 @@ outputs:
   type: number
 - name: name
   type: string
+products:
+- wow
+- wowt

@@ -1,8 +1,6 @@
 ---
 name: GetTalentInfoBySpecialization
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: specIndex
     type: number
@@ -33,3 +31,6 @@ outputs:
   type: boolean
 - name: grantedByAura
   type: boolean
+products:
+- wow
+- wowt

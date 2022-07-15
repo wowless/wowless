@@ -1,11 +1,12 @@
 ---
 name: GetPVPRoles
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
 - type: boolean
 - type: boolean
 - type: boolean
+products:
+- wow
+- wowt

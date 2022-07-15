@@ -1,8 +1,6 @@
 ---
 name: C_TransmogCollection.GetCategoryAppearances
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: category
     type: number
@@ -14,3 +12,6 @@ outputs:
 - innerType: C_TransmogCollection.TransmogCategoryAppearanceInfo
   name: appearances
   type: table
+products:
+- wow
+- wowt

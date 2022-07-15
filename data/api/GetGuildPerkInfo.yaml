@@ -1,8 +1,6 @@
 ---
 name: GetGuildPerkInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: index
     nilable: true
@@ -14,3 +12,6 @@ outputs:
   type: number
 - name: iconTexture
   type: number
+products:
+- wow
+- wowt

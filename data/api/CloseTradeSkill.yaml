@@ -1,9 +1,11 @@
 ---
 name: CloseTradeSkill
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - {}
 outputs: {}
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

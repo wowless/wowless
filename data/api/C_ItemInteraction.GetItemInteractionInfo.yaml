@@ -1,8 +1,6 @@
 ---
 name: C_ItemInteraction.GetItemInteractionInfo
 status: implemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
@@ -12,3 +10,6 @@ outputs:
 dbs:
 - index: ID
   name: uiiteminteraction
+products:
+- wow
+- wowt

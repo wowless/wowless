@@ -1,8 +1,6 @@
 ---
 name: GetGuildFactionInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
@@ -18,3 +16,6 @@ outputs:
   type: number
 - name: barValue
   type: number
+products:
+- wow
+- wowt

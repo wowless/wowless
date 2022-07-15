@@ -1,9 +1,0 @@
----
-name: flavors
-type:
-  enumset:
-    nonempty: true
-    values:
-    - Mainline
-    - TBC
-    - Vanilla

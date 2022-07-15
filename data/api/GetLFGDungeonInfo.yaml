@@ -1,8 +1,6 @@
 ---
 name: GetLFGDungeonInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: dungeonID
     type: number
@@ -49,3 +47,6 @@ outputs:
   type: number
 - name: isScalingDungeon
   type: boolean
+products:
+- wow
+- wowt

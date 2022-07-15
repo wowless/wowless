@@ -1,11 +1,12 @@
 ---
 name: IsActiveQuestLegendary
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: index
     type: number
 outputs:
 - name: isActiveQuestLegendary
   type: boolean
+products:
+- wow
+- wowt

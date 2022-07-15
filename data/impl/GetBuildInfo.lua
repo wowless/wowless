@@ -1,9 +1,10 @@
 local loader = ...
-if loader.version == 'Vanilla' then
+local p = loader.product
+if p == 'wow_classic_era' or p == 'wow_classic_era_ptr' then
   return '1.14.3', '44403', 'Jun 27 2022', 11403
-elseif loader.version == 'TBC' then
+elseif p == 'wow_classic' or p == 'wow_classic_ptr' then
   return '2.5.4', '44400', 'Jun 27 2022', 20504
-elseif loader.version == 'Mainline' then
+elseif p == 'wow' or p == 'wowt' then
   return '9.2.5', '44325', 'Jun 22 2022', 90205
 else
   error('invalid version')

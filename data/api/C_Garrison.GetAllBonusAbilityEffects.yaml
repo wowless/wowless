@@ -1,5 +1,6 @@
 ---
 name: C_Garrison.GetAllBonusAbilityEffects
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

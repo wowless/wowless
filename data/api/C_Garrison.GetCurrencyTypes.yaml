@@ -1,8 +1,6 @@
 ---
 name: C_Garrison.GetCurrencyTypes
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: garrisonType
     type: number
@@ -11,3 +9,6 @@ outputs:
   type: number
 - name: secondaryCurrency
   type: number
+products:
+- wow
+- wowt

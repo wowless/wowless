@@ -1,8 +1,6 @@
 ---
 name: GetFriendshipReputation
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: factionID
     nilable: true
@@ -27,3 +25,6 @@ outputs:
   type: number
 - name: nextFriendThreshold
   type: number
+products:
+- wow
+- wowt

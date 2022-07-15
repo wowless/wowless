@@ -1,5 +1,6 @@
 ---
 name: EJ_IsSearchFinished
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

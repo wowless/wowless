@@ -1,9 +1,6 @@
 ---
 name: GetTalentTabInfo
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - - type: number
   - nilable: true
@@ -13,3 +10,8 @@ outputs:
 - type: string
 - type: number
 - type: string
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

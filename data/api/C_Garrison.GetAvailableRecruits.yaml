@@ -1,10 +1,11 @@
 ---
 name: C_Garrison.GetAvailableRecruits
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - {}
 outputs:
 - name: followers
   type: table
+products:
+- wow
+- wowt

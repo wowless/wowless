@@ -1,5 +1,6 @@
 ---
 name: C_Garrison.CanGenerateRecruits
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

@@ -1,5 +1,6 @@
 ---
 name: C_AdventureMap.GetNumQuestOffers
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

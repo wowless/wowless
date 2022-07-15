@@ -1,5 +1,6 @@
 ---
 name: LearnTalents
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

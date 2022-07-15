@@ -1,8 +1,6 @@
 ---
 name: GetLFDChoiceCollapseState
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: LFGCollapseList
     nilable: true
@@ -10,3 +8,6 @@ inputs:
 outputs:
 - name: LFGCollapseList
   type: table
+products:
+- wow
+- wowt

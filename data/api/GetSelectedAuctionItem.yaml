@@ -1,12 +1,14 @@
 ---
 name: GetSelectedAuctionItem
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - - name: type
     type: string
 outputs:
 - name: index
   type: number
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

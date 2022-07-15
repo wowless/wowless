@@ -1,5 +1,6 @@
 ---
 name: C_Scenario.GetInfo
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

@@ -1,5 +1,6 @@
 ---
 name: EJ_GetEncounterInfoByIndex
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

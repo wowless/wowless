@@ -1,11 +1,12 @@
 ---
 name: UnitHasLFGRandomCooldown
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: unit
     type: unit
 outputs:
 - name: value
   type: boolean
+products:
+- wow
+- wowt

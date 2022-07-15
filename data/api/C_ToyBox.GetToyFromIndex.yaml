@@ -1,11 +1,12 @@
 ---
 name: C_ToyBox.GetToyFromIndex
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: itemIndex
     type: number
 outputs:
 - name: itemID
   type: number
+products:
+- wow
+- wowt

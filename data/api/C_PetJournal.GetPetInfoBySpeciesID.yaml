@@ -1,8 +1,6 @@
 ---
 name: C_PetJournal.GetPetInfoBySpeciesID
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - type: number
 outputs:
@@ -18,3 +16,6 @@ outputs:
 - type: boolean
 - type: boolean
 - type: number
+products:
+- wow
+- wowt

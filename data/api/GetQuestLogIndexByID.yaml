@@ -1,12 +1,14 @@
 ---
 name: GetQuestLogIndexByID
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - - name: questID
     type: number
 outputs:
 - name: questLogIndex
   type: number
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

@@ -1,9 +1,10 @@
 ---
 name: EJ_SelectTier
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: tier
     type: number
 outputs: {}
+products:
+- wow
+- wowt

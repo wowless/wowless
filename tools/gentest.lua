@@ -80,18 +80,19 @@ do
     end
   end
   for _, v in pairs(apiNamespaces) do
-    local flavors = {}
+    local allProducts = require('wowless.util').productList()
+    local products = {}
     for _, m in pairs(v.methods) do
-      for _, flavor in ipairs(m.flavors or { 'Vanilla', 'TBC', 'Mainline' }) do
-        flavors[flavor] = true
+      for _, product in ipairs(m.products or allProducts) do
+        products[product] = true
       end
     end
-    local flist = {}
-    for f in pairs(flavors) do
-      table.insert(flist, f)
+    local plist = {}
+    for f in pairs(products) do
+      table.insert(plist, f)
     end
-    assert(next(flist))
-    v.flavors = #flist ~= 3 and flist or nil
+    assert(next(plist))
+    v.products = #plist ~= #allProducts and plist or nil
   end
   local unavailable = {
     -- These are grabbed by FrameXML and are unavailable by the time addons run.
@@ -108,23 +109,35 @@ do
   end
 end
 
-local function badflavor(flavors)
-  local ids = {
-    Mainline = 'WOW_PROJECT_MAINLINE',
-    TBC = 'WOW_PROJECT_BURNING_CRUSADE_CLASSIC',
-    Vanilla = 'WOW_PROJECT_CLASSIC',
-  }
-  if #flavors == 1 then
-    return 'WOW_PROJECT_ID ~= ' .. assert(ids[flavors[1]])
-  elseif #flavors == 2 then
-    assert(ids[flavors[1]])
-    ids[flavors[1]] = nil
-    assert(ids[flavors[2]])
-    ids[flavors[2]] = nil
-    local _, v = next(ids)
-    return 'WOW_PROJECT_ID == ' .. v
+local productToProjectID = {
+  wow = 'WOW_PROJECT_MAINLINE',
+  wowt = 'WOW_PROJECT_MAINLINE',
+  wow_classic = 'WOW_PROJECT_BURNING_CRUSADE_CLASSIC',
+  wow_classic_era = 'WOW_PROJECT_CLASSIC',
+  wow_classic_era_ptr = 'WOW_PROJECT_CLASSIC',
+  wow_classic_ptr = 'WOW_PROJECT_BURNING_CRUSADE_CLASSIC',
+}
+
+local function badproduct(products)
+  -- TODO better product identification
+  local allProjectIDs = {}
+  for _, p in pairs(productToProjectID) do
+    allProjectIDs[p] = true
+  end
+  local projectIDs = {}
+  for _, p in ipairs(products) do
+    projectIDs[productToProjectID[p]] = true
+  end
+  local p1 = assert(next(projectIDs))
+  local p2 = next(projectIDs, p1)
+  if p2 == nil then
+    return 'WOW_PROJECT_ID ~= ' .. p1
   else
-    error('invalid flavor setting')
+    allProjectIDs[p1] = nil
+    allProjectIDs[p2] = nil
+    local p3 = assert(next(allProjectIDs))
+    assert(next(allProjectIDs, p3) == nil)
+    return 'WOW_PROJECT_ID == ' .. p3
   end
 end
 
@@ -188,8 +201,8 @@ function G.GeneratedTests()
 > for k, v in sorted(apiNamespaces) do
         $(k) = function()
           local ns = _G.$(k)
-> if v.flavors then
-          if $(badflavor(v.flavors)) then
+> if v.products then
+          if $(badproduct(v.products)) then
             assertEquals('nil', type(ns))
             return
           end
@@ -199,8 +212,8 @@ function G.GeneratedTests()
           return mkTests(ns, {
 > for mname, method in sorted(v.methods) do
             $(mname) = function()
-> if method.flavors and (not v.flavors or #method.flavors < #v.flavors) then
-              if $(badflavor(method.flavors)) then
+> if method.products and (not v.products or #method.products < #v.products) then
+              if $(badproduct(method.products)) then
                 return checkNotCFunc(ns.$(mname))
               end
 > end
@@ -226,8 +239,8 @@ function G.GeneratedTests()
 > for k, v in sorted(apis) do
 > if not k:find('%.') then
         $(k) = function()
-> if v.flavors then
-          if $(badflavor(v.flavors)) then
+> if v.products then
+          if $(badproduct(v.products)) then
             return checkNotCFunc(_G.$(k))
           end
 > end
@@ -326,8 +339,8 @@ function G.GeneratedTests()
       return {
 > for k, v in sorted(uiobjects) do
         $(k) = function()
-> if frametypes[k] and v.flavors then
-          if $(badflavor(v.flavors)) then
+> if frametypes[k] and v.products then
+          if $(badproduct(v.products)) then
             assertCreateFrameFails('$(k)')
             return
           end
@@ -348,8 +361,8 @@ function G.GeneratedTests()
             return {
 > for mname, method in sorted(v.methods) do
               $(mname) = function()
-> if method.flavors then
-                if $(badflavor(method.flavors)) then
+> if method.products then
+                if $(badproduct(method.products)) then
                   assertEquals('nil', type(__index.$(mname)))
                   return
                 end
@@ -376,7 +389,7 @@ end
     _G = _G,
     apiNamespaces = apiNamespaces,
     apis = apis,
-    badflavor = badflavor,
+    badproduct = badproduct,
     frametypes = frametypes,
     next = next,
     objTypes = objTypes,

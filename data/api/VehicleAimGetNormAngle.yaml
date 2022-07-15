@@ -1,5 +1,6 @@
 ---
 name: VehicleAimGetNormAngle
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

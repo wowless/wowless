@@ -1,11 +1,12 @@
 ---
 name: UnitStagger
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: unit
     type: unit
 outputs:
 - name: stagger
   type: number
+products:
+- wow
+- wowt

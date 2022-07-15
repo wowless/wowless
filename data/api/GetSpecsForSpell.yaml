@@ -1,5 +1,6 @@
 ---
 name: GetSpecsForSpell
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

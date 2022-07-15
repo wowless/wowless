@@ -1,5 +1,6 @@
 ---
 name: PickupPvpTalent
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

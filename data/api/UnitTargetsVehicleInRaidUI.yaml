@@ -1,8 +1,6 @@
 ---
 name: UnitTargetsVehicleInRaidUI
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: unit
     nilable: true
@@ -10,3 +8,6 @@ inputs:
 outputs:
 - name: value
   type: boolean
+products:
+- wow
+- wowt

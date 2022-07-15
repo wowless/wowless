@@ -1,8 +1,10 @@
 ---
 name: GetMaxDailyQuests
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 outputs:
 - type: number
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

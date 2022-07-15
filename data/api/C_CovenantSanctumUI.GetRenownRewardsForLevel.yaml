@@ -1,8 +1,6 @@
 ---
 name: C_CovenantSanctumUI.GetRenownRewardsForLevel
 status: implemented
-flavors:
-- Mainline
 inputs:
 - - name: covenantID
     type: number
@@ -14,3 +12,6 @@ outputs:
   type: table
 dbs:
 - name: renownrewards
+products:
+- wow
+- wowt

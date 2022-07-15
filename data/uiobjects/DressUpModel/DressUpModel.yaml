@@ -8,46 +8,55 @@ methods:
   GetAutoDress:
     status: unimplemented
   GetItemTransmogInfo:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetItemTransmogInfoList:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetObeyHideInTransmogFlag:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetSheathed:
     status: unimplemented
   GetUseTransmogChoices:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   GetUseTransmogSkin:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetAutoDress:
     status: unimplemented
   SetItemTransmogInfo:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetObeyHideInTransmogFlag:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetSheathed:
     status: unimplemented
   SetUseTransmogChoices:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   SetUseTransmogSkin:
-    flavors:
-    - Mainline
+    products:
+    - wow
+    - wowt
     status: unimplemented
   TryOn:
     status: unimplemented

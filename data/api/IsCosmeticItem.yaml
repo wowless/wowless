@@ -1,9 +1,10 @@
 ---
 name: IsCosmeticItem
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: itemIDOrLink
     type: string
 outputs: {}
+products:
+- wow
+- wowt

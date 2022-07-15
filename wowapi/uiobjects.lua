@@ -235,10 +235,10 @@ local function mkBaseUIObjectTypes(api, loader)
       else
         error(('unsupported method status %q on %s.%s'):format(method.status, name, mname))
       end
-      if method.flavors then
+      if method.products then
         local supported = false
-        for _, flavor in ipairs(method.flavors) do
-          supported = supported or flavor == loader.version
+        for _, product in ipairs(method.products) do
+          supported = supported or product == loader.product
         end
         if not supported then
           mixin[mname] = nil
@@ -246,11 +246,11 @@ local function mkBaseUIObjectTypes(api, loader)
       end
     end
     local supported = false
-    if not cfg.flavors then
+    if not cfg.products then
       supported = true
     else
-      for _, flavor in ipairs(cfg.flavors) do
-        supported = supported or flavor == loader.version
+      for _, product in ipairs(cfg.products) do
+        supported = supported or product == loader.product
       end
     end
     if supported then

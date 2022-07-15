@@ -1,5 +1,6 @@
 ---
 name: C_Garrison.GetFollowerNameByID
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

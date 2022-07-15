@@ -1,9 +1,10 @@
 ---
 name: GetVersatilityBonus
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - type: number
 outputs:
 - type: number
+products:
+- wow
+- wowt

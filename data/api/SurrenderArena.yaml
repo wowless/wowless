@@ -1,5 +1,6 @@
 ---
 name: SurrenderArena
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

@@ -1,5 +1,6 @@
 ---
 name: C_ToyBox.SetAllSourceTypeFilters
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

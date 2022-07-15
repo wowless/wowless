@@ -1,11 +1,12 @@
 ---
 name: C_Heirloom.GetHeirloomMaxUpgradeLevel
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: itemID
     type: number
 outputs:
 - name: upgradeLevel
   type: number
+products:
+- wow
+- wowt

@@ -1,5 +1,6 @@
 ---
 name: ClearRaidMarker
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

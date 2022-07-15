@@ -1,8 +1,6 @@
 ---
 name: GetAvailableQuestInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: index
     type: number
@@ -17,3 +15,6 @@ outputs:
   type: boolean
 - name: questID
   type: number
+products:
+- wow
+- wowt

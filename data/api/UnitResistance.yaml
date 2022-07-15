@@ -1,9 +1,6 @@
 ---
 name: UnitResistance
 status: unimplemented
-flavors:
-- TBC
-- Vanilla
 inputs:
 - - name: unit
     type: string
@@ -18,3 +15,8 @@ outputs:
   type: number
 - name: negative
   type: number
+products:
+- wow_classic
+- wow_classic_ptr
+- wow_classic_era
+- wow_classic_era_ptr

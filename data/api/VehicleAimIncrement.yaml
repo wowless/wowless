@@ -1,10 +1,11 @@
 ---
 name: VehicleAimIncrement
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - name: amount
     nilable: true
     type: number
 outputs: {}
+products:
+- wow
+- wowt

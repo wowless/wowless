@@ -2,9 +2,6 @@
 name: event
 type:
   record:
-    flavors:
-      type:
-        schema: flavors
     name:
       required: true
       type: string
@@ -32,6 +29,9 @@ type:
                 - literal: table
                 - literal: unknown
                 - ref: structure
+    products:
+      type:
+        schema: products
     status:
       required: true
       type:

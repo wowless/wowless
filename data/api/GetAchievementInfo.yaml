@@ -1,8 +1,6 @@
 ---
 name: GetAchievementInfo
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - type: number
   - nilable: true
@@ -23,3 +21,6 @@ outputs:
 - type: boolean
 - type: string
 - type: boolean
+products:
+- wow
+- wowt

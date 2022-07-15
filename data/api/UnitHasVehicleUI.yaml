@@ -1,10 +1,11 @@
 ---
 name: UnitHasVehicleUI
 status: unimplemented
-flavors:
-- Mainline
 inputs:
 - - nilable: true
     type: string
 outputs:
 - type: oneornil
+products:
+- wow
+- wowt

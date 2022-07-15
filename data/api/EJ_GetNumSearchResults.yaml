@@ -1,5 +1,6 @@
 ---
 name: EJ_GetNumSearchResults
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt

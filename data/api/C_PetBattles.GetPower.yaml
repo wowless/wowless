@@ -1,5 +1,6 @@
 ---
 name: C_PetBattles.GetPower
 status: unimplemented
-flavors:
-- Mainline
+products:
+- wow
+- wowt
