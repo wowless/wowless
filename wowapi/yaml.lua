@@ -1,4 +1,4 @@
-local emitter = require('yaml').emitter
+local mkemitter = require('yaml').emitter
 local parse = require('lyaml').load
 
 local fieldOrder = {
@@ -43,7 +43,8 @@ local function keycomp(a, b)
 end
 
 local function api2yaml(api)
-  local emit = emitter().emit
+  local emitter = mkemitter()
+  local emit = emitter.emit
   assert(emit({ type = 'STREAM_START' }))
   assert(emit({ type = 'DOCUMENT_START' }))
   local function run(v)
