@@ -36,7 +36,8 @@ local function keycomp(a, b)
   if ta == 'number' then
     return a < b
   elseif ta == 'string' then
-    return a:lower() < b:lower()
+    local la, lb = a:lower(), b:lower()
+    return la < lb or la == lb and a < b
   else
     error('invalid table key type ' .. ta)
   end

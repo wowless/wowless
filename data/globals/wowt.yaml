@@ -1336,8 +1336,8 @@ Enum:
     ItemDeletion: 14
     ItemRefund: 2
     Last: 52
-    LfgReward: 11
     LFGReward: 11
+    LfgReward: 11
     Loot: 9
     Pushloot: 22
     PvPCompletionBonus: 19
@@ -2244,12 +2244,12 @@ Enum:
     MaxValue: 2
     MinValue: 1
     NumValues: 2
-  LfgEntryPlaystyle:
+  LFGEntryPlaystyle:
     Casual: 2
     Hardcore: 3
     None: 0
     Standard: 1
-  LFGEntryPlaystyle:
+  LfgEntryPlaystyle:
     Casual: 2
     Hardcore: 3
     None: 0
@@ -2258,13 +2258,13 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
-  LfgListDisplayType:
+  LFGListDisplayType:
     ClassEnumerate: 2
     HideAll: 3
     PlayerCount: 4
     RoleCount: 0
     RoleEnumerate: 1
-  LFGListDisplayType:
+  LfgListDisplayType:
     ClassEnumerate: 2
     HideAll: 3
     PlayerCount: 4
@@ -2616,7 +2616,7 @@ Enum:
     MaxValue: 8
     MinValue: 0
     NumValues: 9
-  PetbattleState:
+  PetBattleState:
     Created: 0
     CreatedFailed: 4
     FinalRound: 5
@@ -2624,7 +2624,7 @@ Enum:
     RoundInProgress: 2
     WaitingForFrontPets: 3
     WaitingPreBattle: 1
-  PetBattleState:
+  PetbattleState:
     Created: 0
     CreatedFailed: 4
     FinalRound: 5
@@ -3620,12 +3620,12 @@ Enum:
     MaxValue: 23
     MinValue: 0
     NumValues: 24
-  Unitsex:
+  UnitSex:
     Both: 3
     Female: 1
     Male: 0
     None: 2
-  UnitSex:
+  Unitsex:
     Both: 3
     Female: 1
     Male: 0
