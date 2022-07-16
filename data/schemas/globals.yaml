@@ -1,0 +1,5 @@
+---
+name: globals
+type:
+  mapof:
+    schema: any

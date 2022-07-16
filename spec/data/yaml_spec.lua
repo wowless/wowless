@@ -4,11 +4,16 @@ local validate = require('wowapi.schema').validate
 
 local dirschemas = {
   api = 'api',
+  globals = 'globals',
   events = 'event',
   schemas = 'schema',
   state = 'state',
   structures = 'structure',
   xml = 'xml',
+}
+
+local skipname = {
+  globals = true,
 }
 
 local fileschemas = {
@@ -30,9 +35,11 @@ describe('yaml', function()
             it('is correctly formatted', function()
               assert.same(str, yaml.pprint(data))
             end)
-            it('has the right name', function()
-              assert.same(name, data.name)
-            end)
+            if not skipname[schemaname] then
+              it('has the right name', function()
+                assert.same(name, data.name)
+              end)
+            end
             it('schema validates', function()
               validate(schema, data)
             end)
