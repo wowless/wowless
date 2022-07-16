@@ -21,18 +21,8 @@ local function init(api, loader, taint)
   api.env.forceinsecure = taint and forceinsecure or function() end
   util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
   Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api, loader))
-  local p = loader.product
-  if p == 'wow_classic_era' or p == 'wow_classic_era_ptr' then
-    api.env.WOW_PROJECT_ID = 2
-    api.env.WOW_PROJECT_CLASSIC = 2
-  elseif p == 'wow_classic' or p == 'wow_classic_beta' or p == 'wow_classic_ptr' then
-    api.env.WOW_PROJECT_ID = 5
-    api.env.WOW_PROJECT_BURNING_CRUSADE_CLASSIC = 5
-  elseif p == 'wow' or p == 'wowt' or p == 'wow_beta' then
-    api.env.WOW_PROJECT_ID = 1
-    api.env.WOW_PROJECT_MAINLINE = 1
-  elseif p ~= nil then
-    error('invalid product')
+  if loader.product then
+    Mixin(api.env, (require('wowapi.yaml').parseFile(('data/globals/%s.yaml'):format(loader.product))))
   end
 end
 

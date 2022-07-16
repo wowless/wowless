@@ -763,7 +763,6 @@ local function loader(api, cfg)
 
   local function loadFrameXml()
     local context = forAddon()
-    mixin(api.env, (require('wowapi.yaml').parseFile(('data/globals/%s.yaml'):format(product))))
     do
       -- TODO put this somewhere else
       local cvarDefaults = {}
