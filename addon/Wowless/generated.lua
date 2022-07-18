@@ -13,6 +13,15 @@ local runtimeProduct = (function()
     error('invalid product')
   end
 end)()
+local function tget(t, s)
+  local dot = s:find('%.')
+  if dot then
+    local p = s:sub(1, dot - 1)
+    return t[p] and t[p][s:sub(dot + 1)]
+  else
+    return t[s]
+  end
+end
 function G.GeneratedTests()
   local cfuncs = {}
   local function checkFunc(func, isLua)
@@ -129,9 +138,9 @@ function G.GeneratedTests()
           if cfg.secureCapsule then
             assertEquals(_G.SecureCapsuleGet == nil, func ~= nil) -- addon_spec hack
           elseif cfg.alias then
-            assertEquals(func, assert(cfg.alias[1]))
+            assertEquals(func, assert(tget(_G, cfg.alias)))
           elseif cfg.stdlib then
-            local ty = type(cfg.stdlib[1])
+            local ty = type(tget(_G, cfg.stdlib))
             if ty == 'function' then
               return checkCFunc(func)
             else

@@ -6536,7 +6536,7 @@ G.GlobalApis = {
   OpenTrainer = true,
   OpeningCinematic = true,
   PI = {
-    stdlib = { _G.math.pi },
+    stdlib = 'math.pi',
   },
   PartialPlayTime = true,
   PartyLFGStartBackfill = {
@@ -8732,7 +8732,7 @@ G.GlobalApis = {
   WarGameRespond = true,
   WithdrawGuildBankMoney = true,
   abs = {
-    alias = { _G.math.abs },
+    alias = 'math.abs',
   },
   acos = {
     nowrap = true,
@@ -8742,7 +8742,7 @@ G.GlobalApis = {
     nowrap = true,
   },
   assert = {
-    stdlib = { _G.assert },
+    stdlib = 'assert',
   },
   atan = {
     nowrap = true,
@@ -8751,221 +8751,221 @@ G.GlobalApis = {
     nowrap = true,
   },
   ceil = {
-    alias = { _G.math.ceil },
+    alias = 'math.ceil',
   },
   collectgarbage = {
-    stdlib = { _G.collectgarbage },
+    stdlib = 'collectgarbage',
   },
   cos = {
     nowrap = true,
   },
   date = {
-    stdlib = { _G.date },
+    stdlib = 'date',
   },
   debuglocals = true,
   debugprofilestart = true,
   debugprofilestop = true,
   debugstack = true,
   deg = {
-    alias = { _G.math.deg },
+    alias = 'math.deg',
   },
   difftime = {
-    stdlib = { _G.difftime },
+    stdlib = 'difftime',
   },
   error = {
-    stdlib = { _G.error },
+    stdlib = 'error',
   },
   exp = {
-    alias = { _G.math.exp },
+    alias = 'math.exp',
   },
   fastrandom = true,
   floor = {
-    alias = { _G.math.floor },
+    alias = 'math.floor',
   },
   forceinsecure = true,
   format = {
-    alias = { _G.string.format },
+    alias = 'string.format',
   },
   frexp = {
-    alias = { _G.math.frexp },
+    alias = 'math.frexp',
   },
   gcinfo = true,
   geterrorhandler = {
-    stdlib = { _G.geterrorhandler },
+    stdlib = 'geterrorhandler',
   },
   getfenv = true,
   getmetatable = {
-    stdlib = { _G.getmetatable },
+    stdlib = 'getmetatable',
   },
   getn = {
-    alias = { _G.table.getn },
+    alias = 'table.getn',
   },
   gmatch = {
-    alias = { _G.string.gmatch },
+    alias = 'string.gmatch',
   },
   gsub = {
-    alias = { _G.string.gsub },
+    alias = 'string.gsub',
   },
   hooksecurefunc = true,
   ipairs = {
-    stdlib = { _G.ipairs },
+    stdlib = 'ipairs',
   },
   issecure = {
-    stdlib = { _G.issecure },
+    stdlib = 'issecure',
   },
   issecurevariable = {
-    stdlib = { _G.issecurevariable },
+    stdlib = 'issecurevariable',
   },
   ldexp = {
-    alias = { _G.math.ldexp },
+    alias = 'math.ldexp',
   },
   loadstring = {
-    stdlib = { _G.loadstring },
+    stdlib = 'loadstring',
   },
   loadstring_untainted = {
     secureCapsule = true,
-    stdlib = { _G.loadstring_untainted },
+    stdlib = 'loadstring_untainted',
   },
   log = {
-    alias = { _G.math.log },
+    alias = 'math.log',
   },
   log10 = {
-    alias = { _G.math.log10 },
+    alias = 'math.log10',
   },
   max = {
-    alias = { _G.math.max },
+    alias = 'math.max',
   },
   min = {
-    alias = { _G.math.min },
+    alias = 'math.min',
   },
   mod = {
-    alias = { _G.math.fmod },
+    alias = 'math.fmod',
   },
   newproxy = {
-    stdlib = { _G.newproxy },
+    stdlib = 'newproxy',
   },
   next = {
-    stdlib = { _G.next },
+    stdlib = 'next',
   },
   pairs = {
-    stdlib = { _G.pairs },
+    stdlib = 'pairs',
   },
   pcall = {
-    stdlib = { _G.pcall },
+    stdlib = 'pcall',
   },
   rad = {
-    alias = { _G.math.rad },
+    alias = 'math.rad',
   },
   random = {
-    alias = { _G.math.random },
+    alias = 'math.random',
   },
   rawequal = true,
   rawget = {
-    stdlib = { _G.rawget },
+    stdlib = 'rawget',
   },
   rawset = {
-    stdlib = { _G.rawset },
+    stdlib = 'rawset',
   },
   scrub = {
-    stdlib = { _G.scrub },
+    stdlib = 'scrub',
   },
   securecall = true,
   securecallfunction = {
-    stdlib = { _G.securecallfunction },
+    stdlib = 'securecallfunction',
   },
   secureexecuterange = {
-    stdlib = { _G.secureexecuterange },
+    stdlib = 'secureexecuterange',
   },
   select = {
-    stdlib = { _G.select },
+    stdlib = 'select',
   },
   seterrorhandler = true,
   setfenv = {
-    stdlib = { _G.setfenv },
+    stdlib = 'setfenv',
   },
   setmetatable = {
-    stdlib = { _G.setmetatable },
+    stdlib = 'setmetatable',
   },
   sin = {
     nowrap = true,
   },
   sort = {
-    alias = { _G.table.sort },
+    alias = 'table.sort',
   },
   sqrt = {
-    alias = { _G.math.sqrt },
+    alias = 'math.sqrt',
   },
   strbyte = {
-    alias = { _G.string.byte },
+    alias = 'string.byte',
   },
   strcmputf8i = {
-    stdlib = { _G.strcmputf8i },
+    stdlib = 'strcmputf8i',
   },
   strconcat = {
-    stdlib = { _G.strconcat },
+    stdlib = 'strconcat',
   },
   strfind = {
-    alias = { _G.string.find },
+    alias = 'string.find',
   },
   strjoin = {
-    alias = { _G.string.join },
+    alias = 'string.join',
   },
   strlen = {
-    alias = { _G.string.len },
+    alias = 'string.len',
   },
   strlenutf8 = {
-    stdlib = { _G.strlenutf8 },
+    stdlib = 'strlenutf8',
   },
   strlower = {
-    alias = { _G.string.lower },
+    alias = 'string.lower',
   },
   strmatch = {
-    alias = { _G.string.match },
+    alias = 'string.match',
   },
   strrep = {
-    alias = { _G.string.rep },
+    alias = 'string.rep',
   },
   strsplit = {
-    alias = { _G.string.split },
+    alias = 'string.split',
   },
   strsplittable = true,
   strsub = {
-    alias = { _G.string.sub },
+    alias = 'string.sub',
   },
   strtrim = {
-    alias = { _G.string.trim },
+    alias = 'string.trim',
   },
   strupper = {
-    alias = { _G.string.upper },
+    alias = 'string.upper',
   },
   tan = {
     nowrap = true,
   },
   time = {
-    stdlib = { _G.time },
+    stdlib = 'time',
   },
   tinsert = {
-    alias = { _G.table.insert },
+    alias = 'table.insert',
   },
   tonumber = {
-    stdlib = { _G.tonumber },
+    stdlib = 'tonumber',
   },
   tostring = {
-    stdlib = { _G.tostring },
+    stdlib = 'tostring',
   },
   tremove = {
-    alias = { _G.table.remove },
+    alias = 'table.remove',
   },
   type = {
-    stdlib = { _G.type },
+    stdlib = 'type',
   },
   unpack = {
-    stdlib = { _G.unpack },
+    stdlib = 'unpack',
   },
   wipe = {
-    alias = { _G.table.wipe },
+    alias = 'table.wipe',
   },
   xpcall = {
-    stdlib = { _G.xpcall },
+    stdlib = 'xpcall',
   },
 }

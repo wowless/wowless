@@ -119,49 +119,35 @@ uiobjects.Minimap = nil
 uiobjects.WorldFrame = nil
 
 local cvars = (function()
-  local s = require('pl.pretty').write((require('wowapi.yaml').parseFile('data/cvars.yaml')))
-  return 'local _, G = ...\nG.CVars = ' .. s .. '\n'
+  local t = require('wowapi.yaml').parseFile('data/cvars.yaml')
+  return 'local _, G = ...\nG.CVars = ' .. require('pl.pretty').write(t) .. '\n'
 end)()
+
+local function mapify(t)
+  if t then
+    local tt = {}
+    for _, p in ipairs(t) do
+      tt[p] = true
+    end
+    return tt
+  end
+end
 
 local globalApis = (function()
   local t = {}
-  table.insert(t, 'local _, G = ...')
-  table.insert(t, 'G.GlobalApis = {')
-  for k, v in sorted(apis) do
+  for k, v in pairs(apis) do
     if not k:find('%.') then
-      table.insert(t, '') -- to be filled in later
-      local idx = #t
-      if v.alias then
-        table.insert(t, '    alias = { _G.' .. v.alias .. ' },')
-      end
-      if v.nowrap then
-        table.insert(t, '    nowrap = true,')
-      end
-      if v.products then
-        table.sort(v.products)
-        table.insert(t, '    products = {')
-        for _, p in ipairs(v.products) do
-          table.insert(t, '      ' .. p .. ' = true,')
-        end
-        table.insert(t, '    },')
-      end
-      if unavailableApis[k] then
-        table.insert(t, '    secureCapsule = true,')
-      end
-      if v.stdlib then
-        table.insert(t, '    stdlib = { _G.' .. v.stdlib .. ' },')
-      end
-      if t[idx + 1] then
-        t[idx] = '  ' .. k .. ' = {'
-        table.insert(t, '  },')
-      else
-        t[idx] = '  ' .. k .. ' = true,'
-      end
+      local vv = {
+        alias = v.alias,
+        nowrap = v.nowrap,
+        products = mapify(v.products),
+        secureCapsule = unavailableApis[k] and true,
+        stdlib = v.stdlib,
+      }
+      t[k] = next(vv) and vv or true
     end
   end
-  table.insert(t, '}')
-  table.insert(t, '')
-  return table.concat(t, '\n')
+  return 'local _, G = ...\nG.GlobalApis = ' .. require('pl.pretty').write(t) .. '\n'
 end)()
 
 local namespaceApis = (function()
