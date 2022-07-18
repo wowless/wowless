@@ -209,6 +209,8 @@ local filemap = (function()
   for k, v in pairs(tablemap) do
     local nn, tt = v()
     local ss = 'local _, G = ...\nG.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
+    -- workaround tainted-lua issue with formatting %d
+    ss = ss:gsub('DeprecatedCurrencyFlag = [-0-9]+', 'DeprecatedCurrencyFlag = 2147483648')
     t['addon/Wowless/' .. k .. '.lua'] = stylua(ss)
   end
   return t

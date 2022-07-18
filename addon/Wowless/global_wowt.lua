@@ -1501,7 +1501,7 @@ G.Globals_wowt = {
       CurrencyTradable = 1,
       CurrencyUpdateVersionIgnoreMax = 512,
       Currency_100_Scaler = 8,
-      DeprecatedCurrencyFlag = 2147483647,
+      DeprecatedCurrencyFlag = 2147483648,
     },
     CurrencyFlagsB = {
       CurrencyBNoNotificationMailOnOfflineProgress = 4,
