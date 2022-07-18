@@ -109,38 +109,8 @@ do
   end
 end
 
-local productToProjectID = {
-  wow = 'WOW_PROJECT_MAINLINE',
-  wowt = 'WOW_PROJECT_MAINLINE',
-  wow_beta = 'WOW_PROJECT_MAINLINE',
-  wow_classic = 'WOW_PROJECT_BURNING_CRUSADE_CLASSIC',
-  wow_classic_beta = 'WOW_PROJECT_BURNING_CRUSADE_CLASSIC',
-  wow_classic_era = 'WOW_PROJECT_CLASSIC',
-  wow_classic_era_ptr = 'WOW_PROJECT_CLASSIC',
-  wow_classic_ptr = 'WOW_PROJECT_BURNING_CRUSADE_CLASSIC',
-}
-
 local function badproduct(products)
-  -- TODO better product identification
-  local allProjectIDs = {}
-  for _, p in pairs(productToProjectID) do
-    allProjectIDs[p] = true
-  end
-  local projectIDs = {}
-  for _, p in ipairs(products) do
-    projectIDs[productToProjectID[p]] = true
-  end
-  local p1 = assert(next(projectIDs))
-  local p2 = next(projectIDs, p1)
-  if p2 == nil then
-    return 'WOW_PROJECT_ID ~= ' .. p1
-  else
-    allProjectIDs[p1] = nil
-    allProjectIDs[p2] = nil
-    local p3 = assert(next(allProjectIDs))
-    assert(next(allProjectIDs, p3) == nil)
-    return 'WOW_PROJECT_ID == ' .. p3
-  end
+  return 'badProduct(\'' .. table.concat(products, ',') .. '\')'
 end
 
 -- TODO figure out the right approach for these
@@ -151,6 +121,27 @@ local text = assert(plsub(
   [[
 local _, G = ...
 local assertEquals = _G.assertEquals
+local runtimeProduct = (function()
+  if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+    return IsTestBuild() and 'wow_classic_era_ptr' or 'wow_classic_era'
+  elseif WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+    local wrath = GetBuildInfo():sub(1, 1) == '3'
+    return wrath and 'wow_classic_beta' or IsTestBuild() and 'wow_classic_ptr' or 'wow_classic'
+  elseif WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+    local dragon = GetBuildInfo():sub(1, 1) ~= '9'
+    return dragon and 'wow_beta' or IsTestBuild() and 'wowt' or 'wow'
+  else
+    error('invalid product')
+  end
+end)()
+local function badProduct(s)
+  for p in string.gmatch(s, '[^,]+') do
+    if p == runtimeProduct then
+      return false
+    end
+  end
+  return true
+end
 function G.GeneratedTests()
   local cfuncs = {}
   local function checkFunc(func, isLua)

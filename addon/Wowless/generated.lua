@@ -1,5 +1,26 @@
 local _, G = ...
 local assertEquals = _G.assertEquals
+local runtimeProduct = (function()
+  if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+    return IsTestBuild() and 'wow_classic_era_ptr' or 'wow_classic_era'
+  elseif WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+    local wrath = GetBuildInfo():sub(1, 1) == '3'
+    return wrath and 'wow_classic_beta' or IsTestBuild() and 'wow_classic_ptr' or 'wow_classic'
+  elseif WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+    local dragon = GetBuildInfo():sub(1, 1) ~= '9'
+    return dragon and 'wow_beta' or IsTestBuild() and 'wowt' or 'wow'
+  else
+    error('invalid product')
+  end
+end)()
+local function badProduct(s)
+  for p in string.gmatch(s, '[^,]+') do
+    if p == runtimeProduct then
+      return false
+    end
+  end
+  return true
+end
 function G.GeneratedTests()
   local cfuncs = {}
   local function checkFunc(func, isLua)
@@ -55,7 +76,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetIDFromBattleNetAccountGUID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetIDFromBattleNetAccountGUID)
               end
               return checkCFunc(ns.GetIDFromBattleNetAccountGUID)
@@ -93,7 +114,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             FindFlyoutActionButtons = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.FindFlyoutActionButtons)
               end
               return checkCFunc(ns.FindFlyoutActionButtons)
@@ -105,7 +126,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.FindSpellActionButtons)
             end,
             GetBonusBarIndexForSlot = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetBonusBarIndexForSlot)
               end
               return checkCFunc(ns.GetBonusBarIndexForSlot)
@@ -114,7 +135,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetPetActionPetBarIndices)
             end,
             HasFlyoutActionButtons = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.HasFlyoutActionButtons)
               end
               return checkCFunc(ns.HasFlyoutActionButtons)
@@ -144,19 +165,19 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsOnBarOrSpecialBar)
             end,
             PutActionInSlot = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.PutActionInSlot)
               end
               return checkCFunc(ns.PutActionInSlot)
             end,
             ShouldOverrideBarShowHealthBar = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ShouldOverrideBarShowHealthBar)
               end
               return checkCFunc(ns.ShouldOverrideBarShowHealthBar)
             end,
             ShouldOverrideBarShowManaBar = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ShouldOverrideBarShowManaBar)
               end
               return checkCFunc(ns.ShouldOverrideBarShowManaBar)
@@ -168,7 +189,7 @@ function G.GeneratedTests()
         end,
         C_AdventureJournal = function()
           local ns = _G.C_AdventureJournal
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -203,7 +224,7 @@ function G.GeneratedTests()
         end,
         C_AdventureMap = function()
           local ns = _G.C_AdventureMap
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -247,7 +268,7 @@ function G.GeneratedTests()
         end,
         C_AlliedRaces = function()
           local ns = _G.C_AlliedRaces
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -267,7 +288,7 @@ function G.GeneratedTests()
         end,
         C_AnimaDiversion = function()
           local ns = _G.C_AnimaDiversion
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -299,7 +320,7 @@ function G.GeneratedTests()
         end,
         C_ArdenwealdGardening = function()
           local ns = _G.C_ArdenwealdGardening
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -326,13 +347,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetAreaPOIInfo)
             end,
             GetAreaPOISecondsLeft = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetAreaPOISecondsLeft)
               end
               return checkCFunc(ns.GetAreaPOISecondsLeft)
             end,
             GetAreaPOITimeLeft = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.GetAreaPOITimeLeft)
               end
               return checkCFunc(ns.GetAreaPOITimeLeft)
@@ -344,7 +365,7 @@ function G.GeneratedTests()
         end,
         C_ArtifactUI = function()
           local ns = _G.C_ArtifactUI
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -538,7 +559,7 @@ function G.GeneratedTests()
         end,
         C_AuctionHouse = function()
           local ns = _G.C_AuctionHouse
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -963,7 +984,7 @@ function G.GeneratedTests()
         end,
         C_BarberShop = function()
           local ns = _G.C_BarberShop
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -1049,7 +1070,7 @@ function G.GeneratedTests()
         end,
         C_BattleNet = function()
           local ns = _G.C_BattleNet
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -1091,7 +1112,7 @@ function G.GeneratedTests()
         end,
         C_BlackMarket = function()
           local ns = _G.C_BlackMarket
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -1188,7 +1209,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.ContextMenuEventClipboard)
             end,
             ContextMenuEventComplain = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.ContextMenuEventComplain)
               end
               return checkCFunc(ns.ContextMenuEventComplain)
@@ -1440,7 +1461,7 @@ function G.GeneratedTests()
         end,
         C_CampaignInfo = function()
           local ns = _G.C_CampaignInfo
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -1481,7 +1502,7 @@ function G.GeneratedTests()
         end,
         C_ChallengeMode = function()
           local ns = _G.C_ChallengeMode
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -1577,13 +1598,13 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AssignPCTDistribution = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.AssignPCTDistribution)
               end
               return checkCFunc(ns.AssignPCTDistribution)
             end,
             AssignPFCDistribution = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.AssignPFCDistribution)
               end
               return checkCFunc(ns.AssignPFCDistribution)
@@ -1607,25 +1628,25 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetCharacterServiceDisplayData)
             end,
             GetCharacterServiceDisplayDataByVASType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetCharacterServiceDisplayDataByVASType)
               end
               return checkCFunc(ns.GetCharacterServiceDisplayDataByVASType)
             end,
             GetCharacterServiceDisplayInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetCharacterServiceDisplayInfo)
               end
               return checkCFunc(ns.GetCharacterServiceDisplayInfo)
             end,
             GetCharacterServiceDisplayOrder = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.GetCharacterServiceDisplayOrder)
               end
               return checkCFunc(ns.GetCharacterServiceDisplayOrder)
             end,
             GetVASDistributions = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetVASDistributions)
               end
               return checkCFunc(ns.GetVASDistributions)
@@ -1670,7 +1691,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanReportPlayer = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.CanReportPlayer)
               end
               return checkCFunc(ns.CanReportPlayer)
@@ -1682,13 +1703,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetChannelRosterInfo)
             end,
             GetChannelRuleset = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetChannelRuleset)
               end
               return checkCFunc(ns.GetChannelRuleset)
             end,
             GetChannelRulesetForChannelID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetChannelRulesetForChannelID)
               end
               return checkCFunc(ns.GetChannelRulesetForChannelID)
@@ -1703,25 +1724,25 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetChatTypeName)
             end,
             GetClubStreamIDs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetClubStreamIDs)
               end
               return checkCFunc(ns.GetClubStreamIDs)
             end,
             GetGeneralChannelID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetGeneralChannelID)
               end
               return checkCFunc(ns.GetGeneralChannelID)
             end,
             GetGeneralChannelLocalID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetGeneralChannelLocalID)
               end
               return checkCFunc(ns.GetGeneralChannelLocalID)
             end,
             GetMentorChannelID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetMentorChannelID)
               end
               return checkCFunc(ns.GetMentorChannelID)
@@ -1730,7 +1751,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetNumActiveChannels)
             end,
             GetNumReservedChatWindows = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumReservedChatWindows)
               end
               return checkCFunc(ns.GetNumReservedChatWindows)
@@ -1742,13 +1763,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsAddonMessagePrefixRegistered)
             end,
             IsChannelRegional = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsChannelRegional)
               end
               return checkCFunc(ns.IsChannelRegional)
             end,
             IsChannelRegionalForChannelID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsChannelRegionalForChannelID)
               end
               return checkCFunc(ns.IsChannelRegionalForChannelID)
@@ -1757,7 +1778,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsPartyChannelType)
             end,
             IsRegionalServiceAvailable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsRegionalServiceAvailable)
               end
               return checkCFunc(ns.IsRegionalServiceAvailable)
@@ -1769,25 +1790,25 @@ function G.GeneratedTests()
               return checkCFunc(ns.RegisterAddonMessagePrefix)
             end,
             ReplaceIconAndGroupExpressions = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ReplaceIconAndGroupExpressions)
               end
               return checkCFunc(ns.ReplaceIconAndGroupExpressions)
             end,
             ReportPlayer = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.ReportPlayer)
               end
               return checkCFunc(ns.ReportPlayer)
             end,
             ReportServerLag = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.ReportServerLag)
               end
               return checkCFunc(ns.ReportServerLag)
             end,
             ResetDefaultZoneChannels = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ResetDefaultZoneChannels)
               end
               return checkCFunc(ns.ResetDefaultZoneChannels)
@@ -1805,7 +1826,7 @@ function G.GeneratedTests()
         end,
         C_ChromieTime = function()
           local ns = _G.C_ChromieTime
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -1828,7 +1849,7 @@ function G.GeneratedTests()
         end,
         C_ClassColor = function()
           local ns = _G.C_ClassColor
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -1842,7 +1863,7 @@ function G.GeneratedTests()
         end,
         C_ClassTrial = function()
           local ns = _G.C_ClassTrial
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -1859,7 +1880,7 @@ function G.GeneratedTests()
         end,
         C_ClickBindings = function()
           local ns = _G.C_ClickBindings
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -1955,7 +1976,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.DestroyTicket)
             end,
             DoesCommunityHaveMembersOfTheOppositeFaction = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.DoesCommunityHaveMembersOfTheOppositeFaction)
               end
               return checkCFunc(ns.DoesCommunityHaveMembersOfTheOppositeFaction)
@@ -1985,7 +2006,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetAvatarIdList)
             end,
             GetClubCapacity = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetClubCapacity)
               end
               return checkCFunc(ns.GetClubCapacity)
@@ -1994,7 +2015,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetClubInfo)
             end,
             GetClubLimits = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetClubLimits)
               end
               return checkCFunc(ns.GetClubLimits)
@@ -2012,7 +2033,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetCommunityNameResultText)
             end,
             GetGuildClubId = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetGuildClubId)
               end
               return checkCFunc(ns.GetGuildClubId)
@@ -2033,7 +2054,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetInvitationsForSelf)
             end,
             GetLastTicketResponse = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetLastTicketResponse)
               end
               return checkCFunc(ns.GetLastTicketResponse)
@@ -2114,7 +2135,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.SendBattleTagFriendRequest)
             end,
             SendCharacterInvitation = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SendCharacterInvitation)
               end
               return checkCFunc(ns.SendCharacterInvitation)
@@ -2141,7 +2162,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.SetClubStreamNotificationSettings)
             end,
             SetCommunityID = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.SetCommunityID)
               end
               return checkCFunc(ns.SetCommunityID)
@@ -2168,7 +2189,7 @@ function G.GeneratedTests()
         end,
         C_ClubFinder = function()
           local ns = _G.C_ClubFinder
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -2766,7 +2787,7 @@ function G.GeneratedTests()
         end,
         C_ContributionCollector = function()
           local ns = _G.C_ContributionCollector
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -2831,7 +2852,7 @@ function G.GeneratedTests()
         end,
         C_CovenantCallings = function()
           local ns = _G.C_CovenantCallings
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -2848,7 +2869,7 @@ function G.GeneratedTests()
         end,
         C_CovenantPreview = function()
           local ns = _G.C_CovenantPreview
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -2865,7 +2886,7 @@ function G.GeneratedTests()
         end,
         C_CovenantSanctumUI = function()
           local ns = _G.C_CovenantSanctumUI
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -2924,7 +2945,7 @@ function G.GeneratedTests()
         end,
         C_Covenants = function()
           local ns = _G.C_Covenants
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -2964,43 +2985,43 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             DoesWarModeBonusApply = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.DoesWarModeBonusApply)
               end
               return checkCFunc(ns.DoesWarModeBonusApply)
             end,
             ExpandCurrencyList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ExpandCurrencyList)
               end
               return checkCFunc(ns.ExpandCurrencyList)
             end,
             GetAzeriteCurrencyID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetAzeriteCurrencyID)
               end
               return checkCFunc(ns.GetAzeriteCurrencyID)
             end,
             GetBackpackCurrencyInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetBackpackCurrencyInfo)
               end
               return checkCFunc(ns.GetBackpackCurrencyInfo)
             end,
             GetBasicCurrencyInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetBasicCurrencyInfo)
               end
               return checkCFunc(ns.GetBasicCurrencyInfo)
             end,
             GetCurrencyContainerInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetCurrencyContainerInfo)
               end
               return checkCFunc(ns.GetCurrencyContainerInfo)
             end,
             GetCurrencyIDFromLink = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetCurrencyIDFromLink)
               end
               return checkCFunc(ns.GetCurrencyIDFromLink)
@@ -3012,61 +3033,61 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetCurrencyInfoFromLink)
             end,
             GetCurrencyLink = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetCurrencyLink)
               end
               return checkCFunc(ns.GetCurrencyLink)
             end,
             GetCurrencyListInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetCurrencyListInfo)
               end
               return checkCFunc(ns.GetCurrencyListInfo)
             end,
             GetCurrencyListLink = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetCurrencyListLink)
               end
               return checkCFunc(ns.GetCurrencyListLink)
             end,
             GetCurrencyListSize = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetCurrencyListSize)
               end
               return checkCFunc(ns.GetCurrencyListSize)
             end,
             GetFactionGrantedByCurrency = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetFactionGrantedByCurrency)
               end
               return checkCFunc(ns.GetFactionGrantedByCurrency)
             end,
             GetWarResourcesCurrencyID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetWarResourcesCurrencyID)
               end
               return checkCFunc(ns.GetWarResourcesCurrencyID)
             end,
             IsCurrencyContainer = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsCurrencyContainer)
               end
               return checkCFunc(ns.IsCurrencyContainer)
             end,
             PickupCurrency = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.PickupCurrency)
               end
               return checkCFunc(ns.PickupCurrency)
             end,
             SetCurrencyBackpack = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetCurrencyBackpack)
               end
               return checkCFunc(ns.SetCurrencyBackpack)
             end,
             SetCurrencyUnused = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetCurrencyUnused)
               end
               return checkCFunc(ns.SetCurrencyUnused)
@@ -3079,13 +3100,13 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             DropCursorCommunitiesStream = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.DropCursorCommunitiesStream)
               end
               return checkCFunc(ns.DropCursorCommunitiesStream)
             end,
             GetCursorCommunitiesStream = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.GetCursorCommunitiesStream)
               end
               return checkCFunc(ns.GetCursorCommunitiesStream)
@@ -3094,7 +3115,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetCursorItem)
             end,
             SetCursorCommunitiesStream = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.SetCursorCommunitiesStream)
               end
               return checkCFunc(ns.SetCursorCommunitiesStream)
@@ -3156,7 +3177,7 @@ function G.GeneratedTests()
         end,
         C_EncounterJournal = function()
           local ns = _G.C_EncounterJournal
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -3282,7 +3303,7 @@ function G.GeneratedTests()
         end,
         C_EventToastManager = function()
           local ns = _G.C_EventToastManager
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -3302,7 +3323,7 @@ function G.GeneratedTests()
         end,
         C_FogOfWar = function()
           local ns = _G.C_FogOfWar
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -3319,7 +3340,7 @@ function G.GeneratedTests()
         end,
         C_FrameManager = function()
           local ns = _G.C_FrameManager
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -3394,7 +3415,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsIgnoredByGuid)
             end,
             IsOnIgnoredList = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsOnIgnoredList)
               end
               return checkCFunc(ns.IsOnIgnoredList)
@@ -3485,7 +3506,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetLedColor)
             end,
             GetPowerLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetPowerLevel)
               end
               return checkCFunc(ns.GetPowerLevel)
@@ -3512,7 +3533,7 @@ function G.GeneratedTests()
         end,
         C_Garrison = function()
           local ns = _G.C_Garrison
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -4205,31 +4226,31 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CloseGossip = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CloseGossip)
               end
               return checkCFunc(ns.CloseGossip)
             end,
             ForceGossip = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ForceGossip)
               end
               return checkCFunc(ns.ForceGossip)
             end,
             GetActiveQuests = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetActiveQuests)
               end
               return checkCFunc(ns.GetActiveQuests)
             end,
             GetAvailableQuests = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetAvailableQuests)
               end
               return checkCFunc(ns.GetAvailableQuests)
             end,
             GetCompletedOptionDescriptionString = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetCompletedOptionDescriptionString)
               end
               return checkCFunc(ns.GetCompletedOptionDescriptionString)
@@ -4238,25 +4259,25 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetCustomGossipDescriptionString)
             end,
             GetNumActiveQuests = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumActiveQuests)
               end
               return checkCFunc(ns.GetNumActiveQuests)
             end,
             GetNumAvailableQuests = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumAvailableQuests)
               end
               return checkCFunc(ns.GetNumAvailableQuests)
             end,
             GetNumOptions = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumOptions)
               end
               return checkCFunc(ns.GetNumOptions)
             end,
             GetOptions = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetOptions)
               end
               return checkCFunc(ns.GetOptions)
@@ -4268,31 +4289,31 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetPoiInfo)
             end,
             GetText = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetText)
               end
               return checkCFunc(ns.GetText)
             end,
             RefreshOptions = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.RefreshOptions)
               end
               return checkCFunc(ns.RefreshOptions)
             end,
             SelectActiveQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SelectActiveQuest)
               end
               return checkCFunc(ns.SelectActiveQuest)
             end,
             SelectAvailableQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SelectAvailableQuest)
               end
               return checkCFunc(ns.SelectAvailableQuest)
             end,
             SelectOption = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SelectOption)
               end
               return checkCFunc(ns.SelectOption)
@@ -4314,7 +4335,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.CanViewOfficerNote)
             end,
             GetGuildNewsInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetGuildNewsInfo)
               end
               return checkCFunc(ns.GetGuildNewsInfo)
@@ -4338,7 +4359,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsGuildRankAssignmentAllowed)
             end,
             QueryGuildMemberRecipes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.QueryGuildMemberRecipes)
               end
               return checkCFunc(ns.QueryGuildMemberRecipes)
@@ -4359,7 +4380,7 @@ function G.GeneratedTests()
         end,
         C_Heirloom = function()
           local ns = _G.C_Heirloom
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -4442,7 +4463,7 @@ function G.GeneratedTests()
         end,
         C_HeirloomInfo = function()
           local ns = _G.C_HeirloomInfo
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -4474,7 +4495,7 @@ function G.GeneratedTests()
         end,
         C_IncomingSummon = function()
           local ns = _G.C_IncomingSummon
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -4491,7 +4512,7 @@ function G.GeneratedTests()
         end,
         C_InvasionInfo = function()
           local ns = _G.C_InvasionInfo
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -4514,7 +4535,7 @@ function G.GeneratedTests()
         end,
         C_IslandsQueue = function()
           local ns = _G.C_IslandsQueue
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -4547,19 +4568,19 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanItemTransmogAppearance = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanItemTransmogAppearance)
               end
               return checkCFunc(ns.CanItemTransmogAppearance)
             end,
             CanScrapItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanScrapItem)
               end
               return checkCFunc(ns.CanScrapItem)
             end,
             CanViewItemPowers = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanViewItemPowers)
               end
               return checkCFunc(ns.CanViewItemPowers)
@@ -4571,19 +4592,19 @@ function G.GeneratedTests()
               return checkCFunc(ns.DoesItemExistByID)
             end,
             DoesItemMatchBonusTreeReplacement = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.DoesItemMatchBonusTreeReplacement)
               end
               return checkCFunc(ns.DoesItemMatchBonusTreeReplacement)
             end,
             GetAppliedItemTransmogInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetAppliedItemTransmogInfo)
               end
               return checkCFunc(ns.GetAppliedItemTransmogInfo)
             end,
             GetBaseItemTransmogInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetBaseItemTransmogInfo)
               end
               return checkCFunc(ns.GetBaseItemTransmogInfo)
@@ -4592,13 +4613,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetCurrentItemLevel)
             end,
             GetCurrentItemTransmogInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetCurrentItemTransmogInfo)
               end
               return checkCFunc(ns.GetCurrentItemTransmogInfo)
             end,
             GetItemConversionOutputIcon = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetItemConversionOutputIcon)
               end
               return checkCFunc(ns.GetItemConversionOutputIcon)
@@ -4637,13 +4658,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetItemQualityByID)
             end,
             GetItemUniquenessByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetItemUniquenessByID)
               end
               return checkCFunc(ns.GetItemUniquenessByID)
             end,
             GetLimitedCurrencyItemInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetLimitedCurrencyItemInfo)
               end
               return checkCFunc(ns.GetLimitedCurrencyItemInfo)
@@ -4652,7 +4673,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetStackCount)
             end,
             IsAnimaItemByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsAnimaItemByID)
               end
               return checkCFunc(ns.IsAnimaItemByID)
@@ -4661,37 +4682,37 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsBound)
             end,
             IsDressableItemByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsDressableItemByID)
               end
               return checkCFunc(ns.IsDressableItemByID)
             end,
             IsItemConduit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsItemConduit)
               end
               return checkCFunc(ns.IsItemConduit)
             end,
             IsItemConvertibleAndValidForPlayer = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsItemConvertibleAndValidForPlayer)
               end
               return checkCFunc(ns.IsItemConvertibleAndValidForPlayer)
             end,
             IsItemCorrupted = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsItemCorrupted)
               end
               return checkCFunc(ns.IsItemCorrupted)
             end,
             IsItemCorruptionRelated = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsItemCorruptionRelated)
               end
               return checkCFunc(ns.IsItemCorruptionRelated)
             end,
             IsItemCorruptionResistant = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsItemCorruptionResistant)
               end
               return checkCFunc(ns.IsItemCorruptionResistant)
@@ -4703,13 +4724,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsItemDataCachedByID)
             end,
             IsItemKeystoneByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsItemKeystoneByID)
               end
               return checkCFunc(ns.IsItemKeystoneByID)
             end,
             IsItemSpecificToPlayerClass = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsItemSpecificToPlayerClass)
               end
               return checkCFunc(ns.IsItemSpecificToPlayerClass)
@@ -4739,7 +4760,7 @@ function G.GeneratedTests()
         end,
         C_ItemInteraction = function()
           local ns = _G.C_ItemInteraction
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -4800,19 +4821,19 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanUpgradeItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanUpgradeItem)
               end
               return checkCFunc(ns.CanUpgradeItem)
             end,
             ClearItemUpgrade = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ClearItemUpgrade)
               end
               return checkCFunc(ns.ClearItemUpgrade)
             end,
             CloseItemUpgrade = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CloseItemUpgrade)
               end
               return checkCFunc(ns.CloseItemUpgrade)
@@ -4821,49 +4842,49 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetItemHyperlink)
             end,
             GetItemUpgradeCurrentLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetItemUpgradeCurrentLevel)
               end
               return checkCFunc(ns.GetItemUpgradeCurrentLevel)
             end,
             GetItemUpgradeEffect = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetItemUpgradeEffect)
               end
               return checkCFunc(ns.GetItemUpgradeEffect)
             end,
             GetItemUpgradeItemInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetItemUpgradeItemInfo)
               end
               return checkCFunc(ns.GetItemUpgradeItemInfo)
             end,
             GetItemUpgradePvpItemLevelDeltaValues = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetItemUpgradePvpItemLevelDeltaValues)
               end
               return checkCFunc(ns.GetItemUpgradePvpItemLevelDeltaValues)
             end,
             GetNumItemUpgradeEffects = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumItemUpgradeEffects)
               end
               return checkCFunc(ns.GetNumItemUpgradeEffects)
             end,
             SetItemUpgradeFromCursorItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetItemUpgradeFromCursorItem)
               end
               return checkCFunc(ns.SetItemUpgradeFromCursorItem)
             end,
             SetItemUpgradeFromLocation = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetItemUpgradeFromLocation)
               end
               return checkCFunc(ns.SetItemUpgradeFromLocation)
             end,
             UpgradeItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.UpgradeItem)
               end
               return checkCFunc(ns.UpgradeItem)
@@ -4907,7 +4928,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetAllEntriesForCategory)
             end,
             GetDungeonInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetDungeonInfo)
               end
               return checkCFunc(ns.GetDungeonInfo)
@@ -4929,37 +4950,37 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AcceptInvite = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.AcceptInvite)
               end
               return checkCFunc(ns.AcceptInvite)
             end,
             ApplyToGroup = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ApplyToGroup)
               end
               return checkCFunc(ns.ApplyToGroup)
             end,
             CanActiveEntryUseAutoAccept = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanActiveEntryUseAutoAccept)
               end
               return checkCFunc(ns.CanActiveEntryUseAutoAccept)
             end,
             CanCreateQuestGroup = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanCreateQuestGroup)
               end
               return checkCFunc(ns.CanCreateQuestGroup)
             end,
             CancelApplication = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CancelApplication)
               end
               return checkCFunc(ns.CancelApplication)
             end,
             ClearApplicationTextFields = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ClearApplicationTextFields)
               end
               return checkCFunc(ns.ClearApplicationTextFields)
@@ -4971,7 +4992,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.ClearSearchResults)
             end,
             ClearSearchTextFields = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ClearSearchTextFields)
               end
               return checkCFunc(ns.ClearSearchTextFields)
@@ -4983,19 +5004,19 @@ function G.GeneratedTests()
               return checkCFunc(ns.CreateListing)
             end,
             DeclineApplicant = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.DeclineApplicant)
               end
               return checkCFunc(ns.DeclineApplicant)
             end,
             DeclineInvite = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.DeclineInvite)
               end
               return checkCFunc(ns.DeclineInvite)
             end,
             DoesEntryTitleMatchPrebuiltTitle = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.DoesEntryTitleMatchPrebuiltTitle)
               end
               return checkCFunc(ns.DoesEntryTitleMatchPrebuiltTitle)
@@ -5004,7 +5025,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetActiveEntryInfo)
             end,
             GetActivityFullName = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetActivityFullName)
               end
               return checkCFunc(ns.GetActivityFullName)
@@ -5013,13 +5034,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetActivityGroupInfo)
             end,
             GetActivityIDForQuestID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetActivityIDForQuestID)
               end
               return checkCFunc(ns.GetActivityIDForQuestID)
             end,
             GetActivityInfo = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.GetActivityInfo)
               end
               return checkCFunc(ns.GetActivityInfo)
@@ -5028,55 +5049,55 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetActivityInfoExpensive)
             end,
             GetActivityInfoTable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetActivityInfoTable)
               end
               return checkCFunc(ns.GetActivityInfoTable)
             end,
             GetApplicantDungeonScoreForListing = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetApplicantDungeonScoreForListing)
               end
               return checkCFunc(ns.GetApplicantDungeonScoreForListing)
             end,
             GetApplicantInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetApplicantInfo)
               end
               return checkCFunc(ns.GetApplicantInfo)
             end,
             GetApplicantMemberInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetApplicantMemberInfo)
               end
               return checkCFunc(ns.GetApplicantMemberInfo)
             end,
             GetApplicantMemberStats = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetApplicantMemberStats)
               end
               return checkCFunc(ns.GetApplicantMemberStats)
             end,
             GetApplicantPvpRatingInfoForListing = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetApplicantPvpRatingInfoForListing)
               end
               return checkCFunc(ns.GetApplicantPvpRatingInfoForListing)
             end,
             GetApplicants = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetApplicants)
               end
               return checkCFunc(ns.GetApplicants)
             end,
             GetApplicationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetApplicationInfo)
               end
               return checkCFunc(ns.GetApplicationInfo)
             end,
             GetApplications = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetApplications)
               end
               return checkCFunc(ns.GetApplications)
@@ -5091,25 +5112,25 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetAvailableCategories)
             end,
             GetAvailableLanguageSearchFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetAvailableLanguageSearchFilter)
               end
               return checkCFunc(ns.GetAvailableLanguageSearchFilter)
             end,
             GetAvailableRoles = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetAvailableRoles)
               end
               return checkCFunc(ns.GetAvailableRoles)
             end,
             GetCategoryInfo = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.GetCategoryInfo)
               end
               return checkCFunc(ns.GetCategoryInfo)
             end,
             GetDefaultLanguageSearchFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetDefaultLanguageSearchFilter)
               end
               return checkCFunc(ns.GetDefaultLanguageSearchFilter)
@@ -5118,67 +5139,67 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetFilteredSearchResults)
             end,
             GetKeystoneForActivity = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetKeystoneForActivity)
               end
               return checkCFunc(ns.GetKeystoneForActivity)
             end,
             GetLanguageSearchFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetLanguageSearchFilter)
               end
               return checkCFunc(ns.GetLanguageSearchFilter)
             end,
             GetLfgCategoryInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetLfgCategoryInfo)
               end
               return checkCFunc(ns.GetLfgCategoryInfo)
             end,
             GetNumApplicants = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumApplicants)
               end
               return checkCFunc(ns.GetNumApplicants)
             end,
             GetNumApplications = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumApplications)
               end
               return checkCFunc(ns.GetNumApplications)
             end,
             GetNumInvitedApplicantMembers = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumInvitedApplicantMembers)
               end
               return checkCFunc(ns.GetNumInvitedApplicantMembers)
             end,
             GetNumPendingApplicantMembers = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumPendingApplicantMembers)
               end
               return checkCFunc(ns.GetNumPendingApplicantMembers)
             end,
             GetOwnedKeystoneActivityAndGroupAndLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetOwnedKeystoneActivityAndGroupAndLevel)
               end
               return checkCFunc(ns.GetOwnedKeystoneActivityAndGroupAndLevel)
             end,
             GetPlaystyleString = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetPlaystyleString)
               end
               return checkCFunc(ns.GetPlaystyleString)
             end,
             GetRoleCheckInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetRoleCheckInfo)
               end
               return checkCFunc(ns.GetRoleCheckInfo)
             end,
             GetSearchResultEncounterInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetSearchResultEncounterInfo)
               end
               return checkCFunc(ns.GetSearchResultEncounterInfo)
@@ -5190,7 +5211,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetSearchResultInfo)
             end,
             GetSearchResultLeaderInfo = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.GetSearchResultLeaderInfo)
               end
               return checkCFunc(ns.GetSearchResultLeaderInfo)
@@ -5214,37 +5235,37 @@ function G.GeneratedTests()
               return checkCFunc(ns.HasSearchResultInfo)
             end,
             InviteApplicant = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.InviteApplicant)
               end
               return checkCFunc(ns.InviteApplicant)
             end,
             IsCurrentlyApplying = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsCurrentlyApplying)
               end
               return checkCFunc(ns.IsCurrentlyApplying)
             end,
             IsLookingForGroupEnabled = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.IsLookingForGroupEnabled)
               end
               return checkCFunc(ns.IsLookingForGroupEnabled)
             end,
             IsPlayerAuthenticatedForLFG = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsPlayerAuthenticatedForLFG)
               end
               return checkCFunc(ns.IsPlayerAuthenticatedForLFG)
             end,
             RefreshApplicants = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.RefreshApplicants)
               end
               return checkCFunc(ns.RefreshApplicants)
             end,
             RemoveApplicant = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.RemoveApplicant)
               end
               return checkCFunc(ns.RemoveApplicant)
@@ -5253,7 +5274,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.RemoveListing)
             end,
             ReportSearchResult = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.ReportSearchResult)
               end
               return checkCFunc(ns.ReportSearchResult)
@@ -5262,7 +5283,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.RequestAvailableActivities)
             end,
             SaveLanguageSearchFilter = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SaveLanguageSearchFilter)
               end
               return checkCFunc(ns.SaveLanguageSearchFilter)
@@ -5271,25 +5292,25 @@ function G.GeneratedTests()
               return checkCFunc(ns.Search)
             end,
             SetApplicantMemberRole = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetApplicantMemberRole)
               end
               return checkCFunc(ns.SetApplicantMemberRole)
             end,
             SetEntryTitle = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetEntryTitle)
               end
               return checkCFunc(ns.SetEntryTitle)
             end,
             SetSearchToActivity = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetSearchToActivity)
               end
               return checkCFunc(ns.SetSearchToActivity)
             end,
             SetSearchToQuestID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetSearchToQuestID)
               end
               return checkCFunc(ns.SetSearchToQuestID)
@@ -5298,13 +5319,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.UpdateListing)
             end,
             ValidateRequiredDungeonScore = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ValidateRequiredDungeonScore)
               end
               return checkCFunc(ns.ValidateRequiredDungeonScore)
             end,
             ValidateRequiredPvpRatingForActivity = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ValidateRequiredPvpRatingForActivity)
               end
               return checkCFunc(ns.ValidateRequiredPvpRatingForActivity)
@@ -5313,7 +5334,7 @@ function G.GeneratedTests()
         end,
         C_LegendaryCrafting = function()
           local ns = _G.C_LegendaryCrafting
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -5384,7 +5405,7 @@ function G.GeneratedTests()
         end,
         C_LevelLink = function()
           local ns = _G.C_LevelLink
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -5401,7 +5422,7 @@ function G.GeneratedTests()
         end,
         C_LevelSquish = function()
           local ns = _G.C_LevelSquish
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -5456,7 +5477,7 @@ function G.GeneratedTests()
         end,
         C_LootJournal = function()
           local ns = _G.C_LootJournal
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -5473,7 +5494,7 @@ function G.GeneratedTests()
         end,
         C_LoreText = function()
           local ns = _G.C_LoreText
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -5510,7 +5531,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanCheckInbox = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanCheckInbox)
               end
               return checkCFunc(ns.CanCheckInbox)
@@ -5529,19 +5550,19 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanSetUserWaypointOnMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanSetUserWaypointOnMap)
               end
               return checkCFunc(ns.CanSetUserWaypointOnMap)
             end,
             ClearUserWaypoint = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ClearUserWaypoint)
               end
               return checkCFunc(ns.ClearUserWaypoint)
             end,
             CloseWorldMapInteraction = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CloseWorldMapInteraction)
               end
               return checkCFunc(ns.CloseWorldMapInteraction)
@@ -5553,13 +5574,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetBestMapForUnit)
             end,
             GetBountySetIDForMap = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.GetBountySetIDForMap)
               end
               return checkCFunc(ns.GetBountySetIDForMap)
             end,
             GetBountySetMaps = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetBountySetMaps)
               end
               return checkCFunc(ns.GetBountySetMaps)
@@ -5619,7 +5640,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetMapRectOnMap)
             end,
             GetMapWorldSize = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetMapWorldSize)
               end
               return checkCFunc(ns.GetMapWorldSize)
@@ -5628,25 +5649,25 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetPlayerMapPosition)
             end,
             GetUserWaypoint = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetUserWaypoint)
               end
               return checkCFunc(ns.GetUserWaypoint)
             end,
             GetUserWaypointFromHyperlink = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetUserWaypointFromHyperlink)
               end
               return checkCFunc(ns.GetUserWaypointFromHyperlink)
             end,
             GetUserWaypointHyperlink = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetUserWaypointHyperlink)
               end
               return checkCFunc(ns.GetUserWaypointHyperlink)
             end,
             GetUserWaypointPositionForMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetUserWaypointPositionForMap)
               end
               return checkCFunc(ns.GetUserWaypointPositionForMap)
@@ -5655,13 +5676,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetWorldPosFromMapPos)
             end,
             HasUserWaypoint = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.HasUserWaypoint)
               end
               return checkCFunc(ns.HasUserWaypoint)
             end,
             IsMapValidForNavBarDropDown = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsMapValidForNavBarDropDown)
               end
               return checkCFunc(ns.IsMapValidForNavBarDropDown)
@@ -5673,7 +5694,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.RequestPreloadMap)
             end,
             SetUserWaypoint = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetUserWaypoint)
               end
               return checkCFunc(ns.SetUserWaypoint)
@@ -5702,7 +5723,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetBuybackItemID)
             end,
             IsMerchantItemRefundable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsMerchantItemRefundable)
               end
               return checkCFunc(ns.IsMerchantItemRefundable)
@@ -5711,7 +5732,7 @@ function G.GeneratedTests()
         end,
         C_Minimap = function()
           local ns = _G.C_Minimap
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -5774,7 +5795,7 @@ function G.GeneratedTests()
         end,
         C_ModifiedInstance = function()
           local ns = _G.C_ModifiedInstance
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -5788,7 +5809,7 @@ function G.GeneratedTests()
         end,
         C_MountJournal = function()
           local ns = _G.C_MountJournal
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -5919,7 +5940,7 @@ function G.GeneratedTests()
         end,
         C_MythicPlus = function()
           local ns = _G.C_MythicPlus
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -6066,7 +6087,7 @@ function G.GeneratedTests()
         end,
         C_Navigation = function()
           local ns = _G.C_Navigation
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -6118,13 +6139,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetArmorEffectivenessAgainstTarget)
             end,
             GetInspectAzeriteItemEmpoweredChoices = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetInspectAzeriteItemEmpoweredChoices)
               end
               return checkCFunc(ns.GetInspectAzeriteItemEmpoweredChoices)
             end,
             GetInspectItemLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetInspectItemLevel)
               end
               return checkCFunc(ns.GetInspectItemLevel)
@@ -6133,7 +6154,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetMinItemLevel)
             end,
             GetStaggerPercentage = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetStaggerPercentage)
               end
               return checkCFunc(ns.GetStaggerPercentage)
@@ -6152,37 +6173,37 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AllowedToDoPartyConversion = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.AllowedToDoPartyConversion)
               end
               return checkCFunc(ns.AllowedToDoPartyConversion)
             end,
             CanFormCrossFactionParties = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanFormCrossFactionParties)
               end
               return checkCFunc(ns.CanFormCrossFactionParties)
             end,
             CanInvite = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanInvite)
               end
               return checkCFunc(ns.CanInvite)
             end,
             ConfirmConvertToRaid = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ConfirmConvertToRaid)
               end
               return checkCFunc(ns.ConfirmConvertToRaid)
             end,
             ConfirmInviteTravelPass = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ConfirmInviteTravelPass)
               end
               return checkCFunc(ns.ConfirmInviteTravelPass)
             end,
             ConfirmInviteUnit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ConfirmInviteUnit)
               end
               return checkCFunc(ns.ConfirmInviteUnit)
@@ -6191,25 +6212,25 @@ function G.GeneratedTests()
               return checkCFunc(ns.ConfirmLeaveParty)
             end,
             ConfirmRequestInviteFromUnit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ConfirmRequestInviteFromUnit)
               end
               return checkCFunc(ns.ConfirmRequestInviteFromUnit)
             end,
             ConvertToParty = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ConvertToParty)
               end
               return checkCFunc(ns.ConvertToParty)
             end,
             ConvertToRaid = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ConvertToRaid)
               end
               return checkCFunc(ns.ConvertToRaid)
             end,
             DoCountdown = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.DoCountdown)
               end
               return checkCFunc(ns.DoCountdown)
@@ -6221,49 +6242,49 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetInviteConfirmationInvalidQueues)
             end,
             GetInviteReferralInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetInviteReferralInfo)
               end
               return checkCFunc(ns.GetInviteReferralInfo)
             end,
             GetMinLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetMinLevel)
               end
               return checkCFunc(ns.GetMinLevel)
             end,
             InviteUnit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.InviteUnit)
               end
               return checkCFunc(ns.InviteUnit)
             end,
             IsCrossFactionParty = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsCrossFactionParty)
               end
               return checkCFunc(ns.IsCrossFactionParty)
             end,
             IsPartyFull = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsPartyFull)
               end
               return checkCFunc(ns.IsPartyFull)
             end,
             IsPartyInJailersTower = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsPartyInJailersTower)
               end
               return checkCFunc(ns.IsPartyInJailersTower)
             end,
             LeaveParty = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.LeaveParty)
               end
               return checkCFunc(ns.LeaveParty)
             end,
             RequestInviteFromUnit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.RequestInviteFromUnit)
               end
               return checkCFunc(ns.RequestInviteFromUnit)
@@ -6272,7 +6293,7 @@ function G.GeneratedTests()
         end,
         C_PartyPose = function()
           local ns = _G.C_PartyPose
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -6286,7 +6307,7 @@ function G.GeneratedTests()
         end,
         C_PetBattles = function()
           local ns = _G.C_PetBattles
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -6465,7 +6486,7 @@ function G.GeneratedTests()
         end,
         C_PetInfo = function()
           local ns = _G.C_PetInfo
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -6479,7 +6500,7 @@ function G.GeneratedTests()
         end,
         C_PetJournal = function()
           local ns = _G.C_PetJournal
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -6697,7 +6718,7 @@ function G.GeneratedTests()
         end,
         C_PlayerChoice = function()
           local ns = _G.C_PlayerChoice
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -6733,19 +6754,19 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanPlayerEnterChromieTime = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanPlayerEnterChromieTime)
               end
               return checkCFunc(ns.CanPlayerEnterChromieTime)
             end,
             CanPlayerUseAreaLoot = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanPlayerUseAreaLoot)
               end
               return checkCFunc(ns.CanPlayerUseAreaLoot)
             end,
             CanPlayerUseMountEquipment = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanPlayerUseMountEquipment)
               end
               return checkCFunc(ns.CanPlayerUseMountEquipment)
@@ -6754,7 +6775,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GUIDIsPlayer)
             end,
             GetAlternateFormInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetAlternateFormInfo)
               end
               return checkCFunc(ns.GetAlternateFormInfo)
@@ -6763,19 +6784,19 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetClass)
             end,
             GetContentDifficultyCreatureForPlayer = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetContentDifficultyCreatureForPlayer)
               end
               return checkCFunc(ns.GetContentDifficultyCreatureForPlayer)
             end,
             GetContentDifficultyQuestForPlayer = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetContentDifficultyQuestForPlayer)
               end
               return checkCFunc(ns.GetContentDifficultyQuestForPlayer)
             end,
             GetInstancesUnlockedAtLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetInstancesUnlockedAtLevel)
               end
               return checkCFunc(ns.GetInstancesUnlockedAtLevel)
@@ -6784,7 +6805,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetName)
             end,
             GetPlayerMythicPlusRatingSummary = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetPlayerMythicPlusRatingSummary)
               end
               return checkCFunc(ns.GetPlayerMythicPlusRatingSummary)
@@ -6799,31 +6820,31 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsConnected)
             end,
             IsPlayerEligibleForNPE = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsPlayerEligibleForNPE)
               end
               return checkCFunc(ns.IsPlayerEligibleForNPE)
             end,
             IsPlayerEligibleForNPEv2 = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsPlayerEligibleForNPEv2)
               end
               return checkCFunc(ns.IsPlayerEligibleForNPEv2)
             end,
             IsPlayerInChromieTime = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsPlayerInChromieTime)
               end
               return checkCFunc(ns.IsPlayerInChromieTime)
             end,
             IsPlayerInGuildFromGUID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsPlayerInGuildFromGUID)
               end
               return checkCFunc(ns.IsPlayerInGuildFromGUID)
             end,
             IsPlayerNPERestricted = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsPlayerNPERestricted)
               end
               return checkCFunc(ns.IsPlayerNPERestricted)
@@ -6835,7 +6856,7 @@ function G.GeneratedTests()
         end,
         C_PlayerMentorship = function()
           local ns = _G.C_PlayerMentorship
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -6861,7 +6882,7 @@ function G.GeneratedTests()
         end,
         C_ProductChoice = function()
           local ns = _G.C_ProductChoice
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_ptr,wow_classic_era,wow_classic_beta,wow_classic_era_ptr') then
             assertEquals('nil', type(ns))
             return
           end
@@ -6888,85 +6909,85 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             CanDisplayDamage = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanDisplayDamage)
               end
               return checkCFunc(ns.CanDisplayDamage)
             end,
             CanDisplayDeaths = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanDisplayDeaths)
               end
               return checkCFunc(ns.CanDisplayDeaths)
             end,
             CanDisplayHealing = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanDisplayHealing)
               end
               return checkCFunc(ns.CanDisplayHealing)
             end,
             CanDisplayHonorableKills = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanDisplayHonorableKills)
               end
               return checkCFunc(ns.CanDisplayHonorableKills)
             end,
             CanDisplayKillingBlows = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanDisplayKillingBlows)
               end
               return checkCFunc(ns.CanDisplayKillingBlows)
             end,
             CanPlayerUseRatedPVPUI = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanPlayerUseRatedPVPUI)
               end
               return checkCFunc(ns.CanPlayerUseRatedPVPUI)
             end,
             CanToggleWarMode = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanToggleWarMode)
               end
               return checkCFunc(ns.CanToggleWarMode)
             end,
             CanToggleWarModeInArea = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanToggleWarModeInArea)
               end
               return checkCFunc(ns.CanToggleWarModeInArea)
             end,
             DoesMatchOutcomeAffectRating = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.DoesMatchOutcomeAffectRating)
               end
               return checkCFunc(ns.DoesMatchOutcomeAffectRating)
             end,
             GetActiveBrawlInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetActiveBrawlInfo)
               end
               return checkCFunc(ns.GetActiveBrawlInfo)
             end,
             GetActiveMatchBracket = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetActiveMatchBracket)
               end
               return checkCFunc(ns.GetActiveMatchBracket)
             end,
             GetActiveMatchDuration = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetActiveMatchDuration)
               end
               return checkCFunc(ns.GetActiveMatchDuration)
             end,
             GetActiveMatchState = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetActiveMatchState)
               end
               return checkCFunc(ns.GetActiveMatchState)
             end,
             GetActiveMatchWinner = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetActiveMatchWinner)
               end
               return checkCFunc(ns.GetActiveMatchWinner)
@@ -6975,253 +6996,253 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetArenaCrowdControlInfo)
             end,
             GetArenaRewards = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetArenaRewards)
               end
               return checkCFunc(ns.GetArenaRewards)
             end,
             GetArenaSkirmishRewards = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetArenaSkirmishRewards)
               end
               return checkCFunc(ns.GetArenaSkirmishRewards)
             end,
             GetAvailableBrawlInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetAvailableBrawlInfo)
               end
               return checkCFunc(ns.GetAvailableBrawlInfo)
             end,
             GetBattlefieldFlagPosition = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetBattlefieldFlagPosition)
               end
               return checkCFunc(ns.GetBattlefieldFlagPosition)
             end,
             GetBattlefieldVehicleInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetBattlefieldVehicleInfo)
               end
               return checkCFunc(ns.GetBattlefieldVehicleInfo)
             end,
             GetBattlefieldVehicles = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetBattlefieldVehicles)
               end
               return checkCFunc(ns.GetBattlefieldVehicles)
             end,
             GetBrawlRewards = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetBrawlRewards)
               end
               return checkCFunc(ns.GetBrawlRewards)
             end,
             GetCustomVictoryStatID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetCustomVictoryStatID)
               end
               return checkCFunc(ns.GetCustomVictoryStatID)
             end,
             GetGlobalPvpScalingInfoForSpecID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetGlobalPvpScalingInfoForSpecID)
               end
               return checkCFunc(ns.GetGlobalPvpScalingInfoForSpecID)
             end,
             GetHonorRewardInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetHonorRewardInfo)
               end
               return checkCFunc(ns.GetHonorRewardInfo)
             end,
             GetLevelUpBattlegrounds = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetLevelUpBattlegrounds)
               end
               return checkCFunc(ns.GetLevelUpBattlegrounds)
             end,
             GetMatchPVPStatColumn = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetMatchPVPStatColumn)
               end
               return checkCFunc(ns.GetMatchPVPStatColumn)
             end,
             GetMatchPVPStatColumns = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetMatchPVPStatColumns)
               end
               return checkCFunc(ns.GetMatchPVPStatColumns)
             end,
             GetNextHonorLevelForReward = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNextHonorLevelForReward)
               end
               return checkCFunc(ns.GetNextHonorLevelForReward)
             end,
             GetOutdoorPvPWaitTime = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetOutdoorPvPWaitTime)
               end
               return checkCFunc(ns.GetOutdoorPvPWaitTime)
             end,
             GetPVPActiveMatchPersonalRatedInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetPVPActiveMatchPersonalRatedInfo)
               end
               return checkCFunc(ns.GetPVPActiveMatchPersonalRatedInfo)
             end,
             GetPVPSeasonRewardAchievementID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetPVPSeasonRewardAchievementID)
               end
               return checkCFunc(ns.GetPVPSeasonRewardAchievementID)
             end,
             GetPostMatchCurrencyRewards = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetPostMatchCurrencyRewards)
               end
               return checkCFunc(ns.GetPostMatchCurrencyRewards)
             end,
             GetPostMatchItemRewards = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetPostMatchItemRewards)
               end
               return checkCFunc(ns.GetPostMatchItemRewards)
             end,
             GetPvpTierID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetPvpTierID)
               end
               return checkCFunc(ns.GetPvpTierID)
             end,
             GetPvpTierInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetPvpTierInfo)
               end
               return checkCFunc(ns.GetPvpTierInfo)
             end,
             GetRandomBGInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetRandomBGInfo)
               end
               return checkCFunc(ns.GetRandomBGInfo)
             end,
             GetRandomBGRewards = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetRandomBGRewards)
               end
               return checkCFunc(ns.GetRandomBGRewards)
             end,
             GetRandomEpicBGInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetRandomEpicBGInfo)
               end
               return checkCFunc(ns.GetRandomEpicBGInfo)
             end,
             GetRandomEpicBGRewards = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetRandomEpicBGRewards)
               end
               return checkCFunc(ns.GetRandomEpicBGRewards)
             end,
             GetRatedBGRewards = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetRatedBGRewards)
               end
               return checkCFunc(ns.GetRatedBGRewards)
             end,
             GetRewardItemLevelsByTierEnum = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetRewardItemLevelsByTierEnum)
               end
               return checkCFunc(ns.GetRewardItemLevelsByTierEnum)
             end,
             GetScoreInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetScoreInfo)
               end
               return checkCFunc(ns.GetScoreInfo)
             end,
             GetScoreInfoByPlayerGuid = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetScoreInfoByPlayerGuid)
               end
               return checkCFunc(ns.GetScoreInfoByPlayerGuid)
             end,
             GetSeasonBestInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetSeasonBestInfo)
               end
               return checkCFunc(ns.GetSeasonBestInfo)
             end,
             GetSkirmishInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetSkirmishInfo)
               end
               return checkCFunc(ns.GetSkirmishInfo)
             end,
             GetSpecialEventBrawlInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetSpecialEventBrawlInfo)
               end
               return checkCFunc(ns.GetSpecialEventBrawlInfo)
             end,
             GetTeamInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetTeamInfo)
               end
               return checkCFunc(ns.GetTeamInfo)
             end,
             GetWarModeRewardBonus = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetWarModeRewardBonus)
               end
               return checkCFunc(ns.GetWarModeRewardBonus)
             end,
             GetWarModeRewardBonusDefault = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetWarModeRewardBonusDefault)
               end
               return checkCFunc(ns.GetWarModeRewardBonusDefault)
             end,
             GetWeeklyChestInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetWeeklyChestInfo)
               end
               return checkCFunc(ns.GetWeeklyChestInfo)
             end,
             HasArenaSkirmishWinToday = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.HasArenaSkirmishWinToday)
               end
               return checkCFunc(ns.HasArenaSkirmishWinToday)
             end,
             IsActiveBattlefield = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsActiveBattlefield)
               end
               return checkCFunc(ns.IsActiveBattlefield)
             end,
             IsActiveMatchRegistered = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsActiveMatchRegistered)
               end
               return checkCFunc(ns.IsActiveMatchRegistered)
             end,
             IsArena = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsArena)
               end
               return checkCFunc(ns.IsArena)
             end,
             IsBattleground = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsBattleground)
               end
               return checkCFunc(ns.IsBattleground)
             end,
             IsBattlegroundEnlistmentBonusActive = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsBattlegroundEnlistmentBonusActive)
               end
               return checkCFunc(ns.IsBattlegroundEnlistmentBonusActive)
@@ -7230,13 +7251,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsInBrawl)
             end,
             IsMatchConsideredArena = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsMatchConsideredArena)
               end
               return checkCFunc(ns.IsMatchConsideredArena)
             end,
             IsMatchFactional = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsMatchFactional)
               end
               return checkCFunc(ns.IsMatchFactional)
@@ -7245,49 +7266,49 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsPVPMap)
             end,
             IsRatedArena = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsRatedArena)
               end
               return checkCFunc(ns.IsRatedArena)
             end,
             IsRatedBattleground = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsRatedBattleground)
               end
               return checkCFunc(ns.IsRatedBattleground)
             end,
             IsRatedMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsRatedMap)
               end
               return checkCFunc(ns.IsRatedMap)
             end,
             IsSoloShuffle = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsSoloShuffle)
               end
               return checkCFunc(ns.IsSoloShuffle)
             end,
             IsWarModeActive = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsWarModeActive)
               end
               return checkCFunc(ns.IsWarModeActive)
             end,
             IsWarModeDesired = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsWarModeDesired)
               end
               return checkCFunc(ns.IsWarModeDesired)
             end,
             IsWarModeFeatureEnabled = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsWarModeFeatureEnabled)
               end
               return checkCFunc(ns.IsWarModeFeatureEnabled)
             end,
             JoinBrawl = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.JoinBrawl)
               end
               return checkCFunc(ns.JoinBrawl)
@@ -7296,13 +7317,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.RequestCrowdControlSpell)
             end,
             SetWarModeDesired = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetWarModeDesired)
               end
               return checkCFunc(ns.SetWarModeDesired)
             end,
             ToggleWarMode = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ToggleWarMode)
               end
               return checkCFunc(ns.ToggleWarMode)
@@ -7311,7 +7332,7 @@ function G.GeneratedTests()
         end,
         C_QuestLine = function()
           local ns = _G.C_QuestLine
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -7341,85 +7362,85 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             AbandonQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.AbandonQuest)
               end
               return checkCFunc(ns.AbandonQuest)
             end,
             AddQuestWatch = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.AddQuestWatch)
               end
               return checkCFunc(ns.AddQuestWatch)
             end,
             AddWorldQuestWatch = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.AddWorldQuestWatch)
               end
               return checkCFunc(ns.AddWorldQuestWatch)
             end,
             CanAbandonQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.CanAbandonQuest)
               end
               return checkCFunc(ns.CanAbandonQuest)
             end,
             GetAbandonQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetAbandonQuest)
               end
               return checkCFunc(ns.GetAbandonQuest)
             end,
             GetAbandonQuestItems = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetAbandonQuestItems)
               end
               return checkCFunc(ns.GetAbandonQuestItems)
             end,
             GetActiveThreatMaps = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetActiveThreatMaps)
               end
               return checkCFunc(ns.GetActiveThreatMaps)
             end,
             GetAllCompletedQuestIDs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetAllCompletedQuestIDs)
               end
               return checkCFunc(ns.GetAllCompletedQuestIDs)
             end,
             GetBountiesForMapID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetBountiesForMapID)
               end
               return checkCFunc(ns.GetBountiesForMapID)
             end,
             GetBountySetInfoForMapID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetBountySetInfoForMapID)
               end
               return checkCFunc(ns.GetBountySetInfoForMapID)
             end,
             GetDistanceSqToQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetDistanceSqToQuest)
               end
               return checkCFunc(ns.GetDistanceSqToQuest)
             end,
             GetInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetInfo)
               end
               return checkCFunc(ns.GetInfo)
             end,
             GetLogIndexForQuestID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetLogIndexForQuestID)
               end
               return checkCFunc(ns.GetLogIndexForQuestID)
             end,
             GetMapForQuestPOIs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetMapForQuestPOIs)
               end
               return checkCFunc(ns.GetMapForQuestPOIs)
@@ -7431,91 +7452,91 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetMaxNumQuestsCanAccept)
             end,
             GetNextWaypoint = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNextWaypoint)
               end
               return checkCFunc(ns.GetNextWaypoint)
             end,
             GetNextWaypointForMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNextWaypointForMap)
               end
               return checkCFunc(ns.GetNextWaypointForMap)
             end,
             GetNextWaypointText = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNextWaypointText)
               end
               return checkCFunc(ns.GetNextWaypointText)
             end,
             GetNumQuestLogEntries = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumQuestLogEntries)
               end
               return checkCFunc(ns.GetNumQuestLogEntries)
             end,
             GetNumQuestObjectives = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumQuestObjectives)
               end
               return checkCFunc(ns.GetNumQuestObjectives)
             end,
             GetNumQuestWatches = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumQuestWatches)
               end
               return checkCFunc(ns.GetNumQuestWatches)
             end,
             GetNumWorldQuestWatches = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetNumWorldQuestWatches)
               end
               return checkCFunc(ns.GetNumWorldQuestWatches)
             end,
             GetQuestAdditionalHighlights = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetQuestAdditionalHighlights)
               end
               return checkCFunc(ns.GetQuestAdditionalHighlights)
             end,
             GetQuestDetailsTheme = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetQuestDetailsTheme)
               end
               return checkCFunc(ns.GetQuestDetailsTheme)
             end,
             GetQuestDifficultyLevel = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetQuestDifficultyLevel)
               end
               return checkCFunc(ns.GetQuestDifficultyLevel)
             end,
             GetQuestIDForLogIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetQuestIDForLogIndex)
               end
               return checkCFunc(ns.GetQuestIDForLogIndex)
             end,
             GetQuestIDForQuestWatchIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetQuestIDForQuestWatchIndex)
               end
               return checkCFunc(ns.GetQuestIDForQuestWatchIndex)
             end,
             GetQuestIDForWorldQuestWatchIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetQuestIDForWorldQuestWatchIndex)
               end
               return checkCFunc(ns.GetQuestIDForWorldQuestWatchIndex)
             end,
             GetQuestInfo = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.GetQuestInfo)
               end
               return checkCFunc(ns.GetQuestInfo)
             end,
             GetQuestLogPortraitGiver = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetQuestLogPortraitGiver)
               end
               return checkCFunc(ns.GetQuestLogPortraitGiver)
@@ -7524,103 +7545,103 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetQuestObjectives)
             end,
             GetQuestTagInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetQuestTagInfo)
               end
               return checkCFunc(ns.GetQuestTagInfo)
             end,
             GetQuestType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetQuestType)
               end
               return checkCFunc(ns.GetQuestType)
             end,
             GetQuestWatchType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetQuestWatchType)
               end
               return checkCFunc(ns.GetQuestWatchType)
             end,
             GetQuestsOnMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetQuestsOnMap)
               end
               return checkCFunc(ns.GetQuestsOnMap)
             end,
             GetRequiredMoney = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetRequiredMoney)
               end
               return checkCFunc(ns.GetRequiredMoney)
             end,
             GetSelectedQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetSelectedQuest)
               end
               return checkCFunc(ns.GetSelectedQuest)
             end,
             GetSuggestedGroupSize = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetSuggestedGroupSize)
               end
               return checkCFunc(ns.GetSuggestedGroupSize)
             end,
             GetTimeAllowed = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetTimeAllowed)
               end
               return checkCFunc(ns.GetTimeAllowed)
             end,
             GetTitleForLogIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetTitleForLogIndex)
               end
               return checkCFunc(ns.GetTitleForLogIndex)
             end,
             GetTitleForQuestID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetTitleForQuestID)
               end
               return checkCFunc(ns.GetTitleForQuestID)
             end,
             GetZoneStoryInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetZoneStoryInfo)
               end
               return checkCFunc(ns.GetZoneStoryInfo)
             end,
             HasActiveThreats = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.HasActiveThreats)
               end
               return checkCFunc(ns.HasActiveThreats)
             end,
             IsAccountQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsAccountQuest)
               end
               return checkCFunc(ns.IsAccountQuest)
             end,
             IsComplete = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsComplete)
               end
               return checkCFunc(ns.IsComplete)
             end,
             IsFailed = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsFailed)
               end
               return checkCFunc(ns.IsFailed)
             end,
             IsLegendaryQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsLegendaryQuest)
               end
               return checkCFunc(ns.IsLegendaryQuest)
             end,
             IsOnMap = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsOnMap)
               end
               return checkCFunc(ns.IsOnMap)
@@ -7629,31 +7650,31 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsOnQuest)
             end,
             IsPushableQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsPushableQuest)
               end
               return checkCFunc(ns.IsPushableQuest)
             end,
             IsQuestBounty = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsQuestBounty)
               end
               return checkCFunc(ns.IsQuestBounty)
             end,
             IsQuestCalling = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsQuestCalling)
               end
               return checkCFunc(ns.IsQuestCalling)
             end,
             IsQuestCriteriaForBounty = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsQuestCriteriaForBounty)
               end
               return checkCFunc(ns.IsQuestCriteriaForBounty)
             end,
             IsQuestDisabledForSession = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsQuestDisabledForSession)
               end
               return checkCFunc(ns.IsQuestDisabledForSession)
@@ -7662,121 +7683,121 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsQuestFlaggedCompleted)
             end,
             IsQuestInvasion = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsQuestInvasion)
               end
               return checkCFunc(ns.IsQuestInvasion)
             end,
             IsQuestReplayable = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsQuestReplayable)
               end
               return checkCFunc(ns.IsQuestReplayable)
             end,
             IsQuestReplayedRecently = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsQuestReplayedRecently)
               end
               return checkCFunc(ns.IsQuestReplayedRecently)
             end,
             IsQuestTask = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsQuestTask)
               end
               return checkCFunc(ns.IsQuestTask)
             end,
             IsQuestTrivial = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsQuestTrivial)
               end
               return checkCFunc(ns.IsQuestTrivial)
             end,
             IsRepeatableQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsRepeatableQuest)
               end
               return checkCFunc(ns.IsRepeatableQuest)
             end,
             IsThreatQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsThreatQuest)
               end
               return checkCFunc(ns.IsThreatQuest)
             end,
             IsUnitOnQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsUnitOnQuest)
               end
               return checkCFunc(ns.IsUnitOnQuest)
             end,
             IsWorldQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsWorldQuest)
               end
               return checkCFunc(ns.IsWorldQuest)
             end,
             QuestCanHaveWarModeBonus = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.QuestCanHaveWarModeBonus)
               end
               return checkCFunc(ns.QuestCanHaveWarModeBonus)
             end,
             QuestHasQuestSessionBonus = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.QuestHasQuestSessionBonus)
               end
               return checkCFunc(ns.QuestHasQuestSessionBonus)
             end,
             QuestHasWarModeBonus = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.QuestHasWarModeBonus)
               end
               return checkCFunc(ns.QuestHasWarModeBonus)
             end,
             ReadyForTurnIn = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ReadyForTurnIn)
               end
               return checkCFunc(ns.ReadyForTurnIn)
             end,
             RemoveQuestWatch = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.RemoveQuestWatch)
               end
               return checkCFunc(ns.RemoveQuestWatch)
             end,
             RemoveWorldQuestWatch = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.RemoveWorldQuestWatch)
               end
               return checkCFunc(ns.RemoveWorldQuestWatch)
             end,
             RequestLoadQuestByID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.RequestLoadQuestByID)
               end
               return checkCFunc(ns.RequestLoadQuestByID)
             end,
             SetAbandonQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetAbandonQuest)
               end
               return checkCFunc(ns.SetAbandonQuest)
             end,
             SetMapForQuestPOIs = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetMapForQuestPOIs)
               end
               return checkCFunc(ns.SetMapForQuestPOIs)
             end,
             SetSelectedQuest = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetSelectedQuest)
               end
               return checkCFunc(ns.SetSelectedQuest)
             end,
             ShouldDisplayTimeRemaining = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ShouldDisplayTimeRemaining)
               end
               return checkCFunc(ns.ShouldDisplayTimeRemaining)
@@ -7785,7 +7806,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.ShouldShowQuestRewards)
             end,
             SortQuestWatches = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SortQuestWatches)
               end
               return checkCFunc(ns.SortQuestWatches)
@@ -7853,7 +7874,7 @@ function G.GeneratedTests()
         end,
         C_RecruitAFriend = function()
           local ns = _G.C_RecruitAFriend
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -7907,37 +7928,37 @@ function G.GeneratedTests()
               return checkCFunc(ns.CanReportPlayerForLanguage)
             end,
             GetMajorCategoriesForReportType = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetMajorCategoriesForReportType)
               end
               return checkCFunc(ns.GetMajorCategoriesForReportType)
             end,
             GetMajorCategoryString = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetMajorCategoryString)
               end
               return checkCFunc(ns.GetMajorCategoryString)
             end,
             GetMinorCategoriesForReportTypeAndMajorCategory = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetMinorCategoriesForReportTypeAndMajorCategory)
               end
               return checkCFunc(ns.GetMinorCategoriesForReportTypeAndMajorCategory)
             end,
             GetMinorCategoryString = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetMinorCategoryString)
               end
               return checkCFunc(ns.GetMinorCategoryString)
             end,
             InitiateReportPlayer = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.InitiateReportPlayer)
               end
               return checkCFunc(ns.InitiateReportPlayer)
             end,
             OpenReportPlayerDialog = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.OpenReportPlayerDialog)
               end
               return checkCFunc(ns.OpenReportPlayerDialog)
@@ -7949,31 +7970,31 @@ function G.GeneratedTests()
               return checkCFunc(ns.ReportStuckInCombat)
             end,
             SendReport = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SendReport)
               end
               return checkCFunc(ns.SendReport)
             end,
             SendReportPlayer = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.SendReportPlayer)
               end
               return checkCFunc(ns.SendReportPlayer)
             end,
             SetPendingReportPetTarget = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.SetPendingReportPetTarget)
               end
               return checkCFunc(ns.SetPendingReportPetTarget)
             end,
             SetPendingReportTarget = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.SetPendingReportTarget)
               end
               return checkCFunc(ns.SetPendingReportTarget)
             end,
             SetPendingReportTargetByGuid = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.SetPendingReportTargetByGuid)
               end
               return checkCFunc(ns.SetPendingReportTargetByGuid)
@@ -7998,7 +8019,7 @@ function G.GeneratedTests()
         end,
         C_ResearchInfo = function()
           local ns = _G.C_ResearchInfo
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -8012,7 +8033,7 @@ function G.GeneratedTests()
         end,
         C_Scenario = function()
           local ns = _G.C_Scenario
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -8059,7 +8080,7 @@ function G.GeneratedTests()
         end,
         C_ScenarioInfo = function()
           local ns = _G.C_ScenarioInfo
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -8079,7 +8100,7 @@ function G.GeneratedTests()
         end,
         C_ScrappingMachineUI = function()
           local ns = _G.C_ScrappingMachineUI
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -8136,7 +8157,7 @@ function G.GeneratedTests()
         end,
         C_Seasons = function()
           local ns = _G.C_Seasons
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_ptr,wow_classic_era,wow_classic_beta,wow_classic_era_ptr') then
             assertEquals('nil', type(ns))
             return
           end
@@ -8157,7 +8178,7 @@ function G.GeneratedTests()
           assert(getmetatable(ns) == nil)
           return mkTests(ns, {
             GetLastAchievement = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetLastAchievement)
               end
               return checkCFunc(ns.GetLastAchievement)
@@ -8166,37 +8187,37 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetLastItem)
             end,
             GetLastScreenshot = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.GetLastScreenshot)
               end
               return checkCFunc(ns.GetLastScreenshot)
             end,
             GetLastScreenshotIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetLastScreenshotIndex)
               end
               return checkCFunc(ns.GetLastScreenshotIndex)
             end,
             GetMaxTweetLength = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetMaxTweetLength)
               end
               return checkCFunc(ns.GetMaxTweetLength)
             end,
             GetNumCharactersPerMedia = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.GetNumCharactersPerMedia)
               end
               return checkCFunc(ns.GetNumCharactersPerMedia)
             end,
             GetScreenshotByIndex = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.GetScreenshotByIndex)
               end
               return checkCFunc(ns.GetScreenshotByIndex)
             end,
             GetScreenshotInfoByIndex = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetScreenshotInfoByIndex)
               end
               return checkCFunc(ns.GetScreenshotInfoByIndex)
@@ -8229,7 +8250,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.TwitterPostAchievement)
             end,
             TwitterPostItem = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.TwitterPostItem)
               end
               return checkCFunc(ns.TwitterPostItem)
@@ -8244,7 +8265,7 @@ function G.GeneratedTests()
         end,
         C_SocialQueue = function()
           local ns = _G.C_SocialQueue
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -8304,7 +8325,7 @@ function G.GeneratedTests()
         end,
         C_Soulbinds = function()
           local ns = _G.C_Soulbinds
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -8432,7 +8453,7 @@ function G.GeneratedTests()
         end,
         C_SpecializationInfo = function()
           local ns = _G.C_SpecializationInfo
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -8495,7 +8516,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.DoesSpellExist)
             end,
             GetMawPowerBorderAtlasBySpellID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetMawPowerBorderAtlasBySpellID)
               end
               return checkCFunc(ns.GetMawPowerBorderAtlasBySpellID)
@@ -8510,7 +8531,7 @@ function G.GeneratedTests()
         end,
         C_SpellBook = function()
           local ns = _G.C_SpellBook
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -8539,7 +8560,7 @@ function G.GeneratedTests()
         end,
         C_SplashScreen = function()
           local ns = _G.C_SplashScreen
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -8579,7 +8600,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.DoesGroupHavePurchaseableProducts)
             end,
             HasPurchaseableProducts = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.HasPurchaseableProducts)
               end
               return checkCFunc(ns.HasPurchaseableProducts)
@@ -8622,7 +8643,7 @@ function G.GeneratedTests()
         end,
         C_SuperTrack = function()
           local ns = _G.C_SuperTrack
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -8784,7 +8805,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetTaxiNodesForMap)
             end,
             ShouldMapShowTaxiNodes = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.ShouldMapShowTaxiNodes)
               end
               return checkCFunc(ns.ShouldMapShowTaxiNodes)
@@ -8813,7 +8834,7 @@ function G.GeneratedTests()
         end,
         C_ToyBox = function()
           local ns = _G.C_ToyBox
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -8909,13 +8930,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.ClearFanfare)
             end,
             IsToySourceValid = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsToySourceValid)
               end
               return checkCFunc(ns.IsToySourceValid)
             end,
             IsUsingDefaultFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.IsUsingDefaultFilters)
               end
               return checkCFunc(ns.IsUsingDefaultFilters)
@@ -8924,7 +8945,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.NeedsFanfare)
             end,
             SetDefaultFilters = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetDefaultFilters)
               end
               return checkCFunc(ns.SetDefaultFilters)
@@ -8933,7 +8954,7 @@ function G.GeneratedTests()
         end,
         C_TradeSkillUI = function()
           local ns = _G.C_TradeSkillUI
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -9175,7 +9196,7 @@ function G.GeneratedTests()
         end,
         C_Transmog = function()
           local ns = _G.C_Transmog
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -9255,7 +9276,7 @@ function G.GeneratedTests()
         end,
         C_TransmogCollection = function()
           local ns = _G.C_TransmogCollection
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -9479,7 +9500,7 @@ function G.GeneratedTests()
         end,
         C_TransmogSets = function()
           local ns = _G.C_TransmogSets
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -9580,7 +9601,7 @@ function G.GeneratedTests()
         end,
         C_Trophy = function()
           local ns = _G.C_Trophy
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -9618,7 +9639,7 @@ function G.GeneratedTests()
         end,
         C_Tutorial = function()
           local ns = _G.C_Tutorial
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -9673,13 +9694,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetCaptureBarWidgetVisualizationInfo)
             end,
             GetCaptureZoneVisualizationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetCaptureZoneVisualizationInfo)
               end
               return checkCFunc(ns.GetCaptureZoneVisualizationInfo)
             end,
             GetDiscreteProgressStepsVisualizationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetDiscreteProgressStepsVisualizationInfo)
               end
               return checkCFunc(ns.GetDiscreteProgressStepsVisualizationInfo)
@@ -9688,7 +9709,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetDoubleIconAndTextWidgetVisualizationInfo)
             end,
             GetDoubleStateIconRowVisualizationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetDoubleStateIconRowVisualizationInfo)
               end
               return checkCFunc(ns.GetDoubleStateIconRowVisualizationInfo)
@@ -9709,13 +9730,13 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetIconTextAndCurrenciesWidgetVisualizationInfo)
             end,
             GetObjectiveTrackerWidgetSetID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetObjectiveTrackerWidgetSetID)
               end
               return checkCFunc(ns.GetObjectiveTrackerWidgetSetID)
             end,
             GetPowerBarWidgetSetID = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetPowerBarWidgetSetID)
               end
               return checkCFunc(ns.GetPowerBarWidgetSetID)
@@ -9724,19 +9745,19 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo)
             end,
             GetScenarioHeaderTimerWidgetVisualizationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetScenarioHeaderTimerWidgetVisualizationInfo)
               end
               return checkCFunc(ns.GetScenarioHeaderTimerWidgetVisualizationInfo)
             end,
             GetSpacerVisualizationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetSpacerVisualizationInfo)
               end
               return checkCFunc(ns.GetSpacerVisualizationInfo)
             end,
             GetSpellDisplayVisualizationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetSpellDisplayVisualizationInfo)
               end
               return checkCFunc(ns.GetSpellDisplayVisualizationInfo)
@@ -9748,7 +9769,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetStatusBarWidgetVisualizationInfo)
             end,
             GetTextColumnRowVisualizationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetTextColumnRowVisualizationInfo)
               end
               return checkCFunc(ns.GetTextColumnRowVisualizationInfo)
@@ -9757,25 +9778,25 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetTextWithStateWidgetVisualizationInfo)
             end,
             GetTextureAndTextRowVisualizationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetTextureAndTextRowVisualizationInfo)
               end
               return checkCFunc(ns.GetTextureAndTextRowVisualizationInfo)
             end,
             GetTextureAndTextVisualizationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetTextureAndTextVisualizationInfo)
               end
               return checkCFunc(ns.GetTextureAndTextVisualizationInfo)
             end,
             GetTextureWithAnimationVisualizationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetTextureWithAnimationVisualizationInfo)
               end
               return checkCFunc(ns.GetTextureWithAnimationVisualizationInfo)
             end,
             GetTextureWithStateVisualizationInfo = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.GetTextureWithStateVisualizationInfo)
               end
               return checkCFunc(ns.GetTextureWithStateVisualizationInfo)
@@ -9784,43 +9805,43 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetTopCenterWidgetSetID)
             end,
             GetUnitPowerBarWidgetVisualizationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetUnitPowerBarWidgetVisualizationInfo)
               end
               return checkCFunc(ns.GetUnitPowerBarWidgetVisualizationInfo)
             end,
             GetWidgetSetInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetWidgetSetInfo)
               end
               return checkCFunc(ns.GetWidgetSetInfo)
             end,
             GetZoneControlVisualizationInfo = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetZoneControlVisualizationInfo)
               end
               return checkCFunc(ns.GetZoneControlVisualizationInfo)
             end,
             RegisterUnitForWidgetUpdates = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.RegisterUnitForWidgetUpdates)
               end
               return checkCFunc(ns.RegisterUnitForWidgetUpdates)
             end,
             SetProcessingUnit = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetProcessingUnit)
               end
               return checkCFunc(ns.SetProcessingUnit)
             end,
             SetProcessingUnitGuid = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.SetProcessingUnitGuid)
               end
               return checkCFunc(ns.SetProcessingUnitGuid)
             end,
             UnregisterUnitForWidgetUpdates = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.UnregisterUnitForWidgetUpdates)
               end
               return checkCFunc(ns.UnregisterUnitForWidgetUpdates)
@@ -9852,7 +9873,7 @@ function G.GeneratedTests()
         end,
         C_VignetteInfo = function()
           local ns = _G.C_VignetteInfo
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -9933,7 +9954,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.GetInputVolume)
             end,
             GetJoinClubVoiceChannelError = function()
-              if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+              if badProduct('wow,wowt,wow_beta') then
                 return checkNotCFunc(ns.GetJoinClubVoiceChannelError)
               end
               return checkCFunc(ns.GetJoinClubVoiceChannelError)
@@ -10113,7 +10134,7 @@ function G.GeneratedTests()
         end,
         C_WeeklyRewards = function()
           local ns = _G.C_WeeklyRewards
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -10210,7 +10231,7 @@ function G.GeneratedTests()
               return checkCFunc(ns.IsConsumableWowToken)
             end,
             SellToken = function()
-              if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+              if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                 return checkNotCFunc(ns.SellToken)
               end
               return checkCFunc(ns.SellToken)
@@ -10228,7 +10249,7 @@ function G.GeneratedTests()
         end,
         C_WowTokenUI = function()
           local ns = _G.C_WowTokenUI
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -10242,7 +10263,7 @@ function G.GeneratedTests()
         end,
         C_ZoneAbility = function()
           local ns = _G.C_ZoneAbility
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wowt,wow_beta,wow') then
             assertEquals('nil', type(ns))
             return
           end
@@ -10526,7 +10547,7 @@ function G.GeneratedTests()
     globalApis = function()
       local tests = {
         AbandonQuest = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.AbandonQuest)
           end
           return checkCFunc(_G.AbandonQuest)
@@ -10538,7 +10559,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.AcceptAreaSpiritHeal)
         end,
         AcceptArenaTeam = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.AcceptArenaTeam)
           end
           return checkCFunc(_G.AcceptArenaTeam)
@@ -10556,7 +10577,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.AcceptGuild)
         end,
         AcceptProposal = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.AcceptProposal)
           end
           return checkCFunc(_G.AcceptProposal)
@@ -10580,7 +10601,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.AcceptXPLoss)
         end,
         AcknowledgeAutoAcceptQuest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.AcknowledgeAutoAcceptQuest)
           end
           return checkCFunc(_G.AcknowledgeAutoAcceptQuest)
@@ -10595,7 +10616,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ActionHasRange)
         end,
         AddAutoQuestPopUp = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.AddAutoQuestPopUp)
           end
           return checkCFunc(_G.AddAutoQuestPopUp)
@@ -10607,13 +10628,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.AddChatWindowMessages)
         end,
         AddQuestWatch = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.AddQuestWatch)
           end
           return checkCFunc(_G.AddQuestWatch)
         end,
         AddTrackedAchievement = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.AddTrackedAchievement)
           end
           return checkCFunc(_G.AddTrackedAchievement)
@@ -10628,25 +10649,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.AntiAliasingSupported)
         end,
         ArchaeologyGetIconInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ArchaeologyGetIconInfo)
           end
           return checkCFunc(_G.ArchaeologyGetIconInfo)
         end,
         ArchaeologyMapUpdateAll = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ArchaeologyMapUpdateAll)
           end
           return checkCFunc(_G.ArchaeologyMapUpdateAll)
         end,
         ArcheologyGetVisibleBlobID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ArcheologyGetVisibleBlobID)
           end
           return checkCFunc(_G.ArcheologyGetVisibleBlobID)
         end,
         AreAccountAchievementsHidden = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.AreAccountAchievementsHidden)
           end
           return checkCFunc(_G.AreAccountAchievementsHidden)
@@ -10655,43 +10676,43 @@ function G.GeneratedTests()
           return checkCFunc(_G.AreDangerousScriptsAllowed)
         end,
         AreTalentsLocked = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.AreTalentsLocked)
           end
           return checkCFunc(_G.AreTalentsLocked)
         end,
         ArenaTeamDisband = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ArenaTeamDisband)
           end
           return checkCFunc(_G.ArenaTeamDisband)
         end,
         ArenaTeamInviteByName = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ArenaTeamInviteByName)
           end
           return checkCFunc(_G.ArenaTeamInviteByName)
         end,
         ArenaTeamLeave = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ArenaTeamLeave)
           end
           return checkCFunc(_G.ArenaTeamLeave)
         end,
         ArenaTeamRoster = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ArenaTeamRoster)
           end
           return checkCFunc(_G.ArenaTeamRoster)
         end,
         ArenaTeamSetLeaderByName = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ArenaTeamSetLeaderByName)
           end
           return checkCFunc(_G.ArenaTeamSetLeaderByName)
         end,
         ArenaTeamUninviteByName = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ArenaTeamUninviteByName)
           end
           return checkCFunc(_G.ArenaTeamUninviteByName)
@@ -10703,7 +10724,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.AssistUnit)
         end,
         AttachGlyphToSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.AttachGlyphToSpell)
           end
           return checkCFunc(_G.AttachGlyphToSpell)
@@ -10754,7 +10775,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.BNGetFOFInfo)
         end,
         BNGetFriendGameAccountInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.BNGetFriendGameAccountInfo)
           end
           return checkCFunc(_G.BNGetFriendGameAccountInfo)
@@ -10763,13 +10784,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.BNGetFriendIndex)
         end,
         BNGetFriendInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.BNGetFriendInfo)
           end
           return checkCFunc(_G.BNGetFriendInfo)
         end,
         BNGetFriendInfoByID = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.BNGetFriendInfoByID)
           end
           return checkCFunc(_G.BNGetFriendInfoByID)
@@ -10778,13 +10799,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.BNGetFriendInviteInfo)
         end,
         BNGetGameAccountInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.BNGetGameAccountInfo)
           end
           return checkCFunc(_G.BNGetGameAccountInfo)
         end,
         BNGetGameAccountInfoByGUID = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.BNGetGameAccountInfoByGUID)
           end
           return checkCFunc(_G.BNGetGameAccountInfoByGUID)
@@ -10799,7 +10820,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.BNGetNumFOF)
         end,
         BNGetNumFriendGameAccounts = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.BNGetNumFriendGameAccounts)
           end
           return checkCFunc(_G.BNGetNumFriendGameAccounts)
@@ -10868,7 +10889,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.BNSetDND)
         end,
         BNSetFriendFavoriteFlag = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.BNSetFriendFavoriteFlag)
           end
           return checkCFunc(_G.BNSetFriendFavoriteFlag)
@@ -10892,31 +10913,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.BankButtonIDToInvSlotID)
         end,
         BattlefieldMgrEntryInviteResponse = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.BattlefieldMgrEntryInviteResponse)
           end
           return checkCFunc(_G.BattlefieldMgrEntryInviteResponse)
         end,
         BattlefieldMgrExitRequest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.BattlefieldMgrExitRequest)
           end
           return checkCFunc(_G.BattlefieldMgrExitRequest)
         end,
         BattlefieldMgrQueueInviteResponse = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.BattlefieldMgrQueueInviteResponse)
           end
           return checkCFunc(_G.BattlefieldMgrQueueInviteResponse)
         end,
         BattlefieldMgrQueueRequest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.BattlefieldMgrQueueRequest)
           end
           return checkCFunc(_G.BattlefieldMgrQueueRequest)
         end,
         BattlefieldSetPendingReportTarget = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.BattlefieldSetPendingReportTarget)
           end
           return checkCFunc(_G.BattlefieldSetPendingReportTarget)
@@ -10931,7 +10952,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.BreakUpLargeNumbers)
         end,
         BuyArenaCharter = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.BuyArenaCharter)
           end
           return checkCFunc(_G.BuyArenaCharter)
@@ -10946,13 +10967,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.BuyMerchantItem)
         end,
         BuyReagentBank = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.BuyReagentBank)
           end
           return checkCFunc(_G.BuyReagentBank)
         end,
         BuyStableSlot = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.BuyStableSlot)
           end
           return checkCFunc(_G.BuyStableSlot)
@@ -10964,7 +10985,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.BuybackItem)
         end,
         CalculateAuctionDeposit = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CalculateAuctionDeposit)
           end
           return checkCFunc(_G.CalculateAuctionDeposit)
@@ -10973,7 +10994,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CalculateStringEditDistance)
         end,
         CallCompanion = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CallCompanion)
           end
           return checkCFunc(_G.CallCompanion)
@@ -10991,7 +11012,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CameraZoomOut)
         end,
         CanAbandonQuest = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CanAbandonQuest)
           end
           return checkCFunc(_G.CanAbandonQuest)
@@ -11006,7 +11027,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanBeRaidTarget)
         end,
         CanCancelAuction = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CanCancelAuction)
           end
           return checkCFunc(_G.CanCancelAuction)
@@ -11015,7 +11036,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanCancelScene)
         end,
         CanChangePlayerDifficulty = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanChangePlayerDifficulty)
           end
           return checkCFunc(_G.CanChangePlayerDifficulty)
@@ -11030,7 +11051,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanEditGuildBankTabInfo)
         end,
         CanEditGuildEvent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanEditGuildEvent)
           end
           return checkCFunc(_G.CanEditGuildEvent)
@@ -11048,13 +11069,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanEditPublicNote)
         end,
         CanEjectPassengerFromSeat = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanEjectPassengerFromSeat)
           end
           return checkCFunc(_G.CanEjectPassengerFromSeat)
         end,
         CanExitVehicle = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanExitVehicle)
           end
           return checkCFunc(_G.CanExitVehicle)
@@ -11063,7 +11084,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanGamePadControlCursor)
         end,
         CanGrantLevel = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CanGrantLevel)
           end
           return checkCFunc(_G.CanGrantLevel)
@@ -11093,7 +11114,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanInspect)
         end,
         CanItemBeSocketedToArtifact = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanItemBeSocketedToArtifact)
           end
           return checkCFunc(_G.CanItemBeSocketedToArtifact)
@@ -11105,7 +11126,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanLootUnit)
         end,
         CanMapChangeDifficulty = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanMapChangeDifficulty)
           end
           return checkCFunc(_G.CanMapChangeDifficulty)
@@ -11114,7 +11135,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanMerchantRepair)
         end,
         CanPartyLFGBackfill = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanPartyLFGBackfill)
           end
           return checkCFunc(_G.CanPartyLFGBackfill)
@@ -11126,25 +11147,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanResetTutorials)
         end,
         CanScanResearchSite = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanScanResearchSite)
           end
           return checkCFunc(_G.CanScanResearchSite)
         end,
         CanSendAuctionQuery = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CanSendAuctionQuery)
           end
           return checkCFunc(_G.CanSendAuctionQuery)
         end,
         CanSendSoRByText = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CanSendSoRByText)
           end
           return checkCFunc(_G.CanSendSoRByText)
         end,
         CanShowAchievementUI = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanShowAchievementUI)
           end
           return checkCFunc(_G.CanShowAchievementUI)
@@ -11156,7 +11177,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanSignPetition)
         end,
         CanSolveArtifact = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanSolveArtifact)
           end
           return checkCFunc(_G.CanSolveArtifact)
@@ -11165,25 +11186,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanSummonFriend)
         end,
         CanSurrenderArena = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanSurrenderArena)
           end
           return checkCFunc(_G.CanSurrenderArena)
         end,
         CanSwitchVehicleSeat = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanSwitchVehicleSeat)
           end
           return checkCFunc(_G.CanSwitchVehicleSeat)
         end,
         CanSwitchVehicleSeats = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanSwitchVehicleSeats)
           end
           return checkCFunc(_G.CanSwitchVehicleSeats)
         end,
         CanTrackBattlePets = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanTrackBattlePets)
           end
           return checkCFunc(_G.CanTrackBattlePets)
@@ -11192,13 +11213,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.CanUpgradeExpansion)
         end,
         CanUseVoidStorage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanUseVoidStorage)
           end
           return checkCFunc(_G.CanUseVoidStorage)
         end,
         CanViewGuildRecipes = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CanViewGuildRecipes)
           end
           return checkCFunc(_G.CanViewGuildRecipes)
@@ -11210,7 +11231,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CancelAreaSpiritHeal)
         end,
         CancelAuction = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CancelAuction)
           end
           return checkCFunc(_G.CancelAuction)
@@ -11228,7 +11249,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CancelLogout)
         end,
         CancelMasterLootRoll = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CancelMasterLootRoll)
           end
           return checkCFunc(_G.CancelMasterLootRoll)
@@ -11246,7 +11267,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CancelScene)
         end,
         CancelSell = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CancelSell)
           end
           return checkCFunc(_G.CancelSell)
@@ -11258,7 +11279,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CancelSpellByName)
         end,
         CancelTrackingBuff = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CancelTrackingBuff)
           end
           return checkCFunc(_G.CancelTrackingBuff)
@@ -11294,13 +11315,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.CastSpellByName)
         end,
         CastingInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CastingInfo)
           end
           return checkCFunc(_G.CastingInfo)
         end,
         CenterCamera = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CenterCamera)
           end
           return checkCFunc(_G.CenterCamera)
@@ -11315,7 +11336,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ChannelBan)
         end,
         ChannelInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ChannelInfo)
           end
           return checkCFunc(_G.ChannelInfo)
@@ -11360,25 +11381,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.CheckTalentMasterDist)
         end,
         ClassicExpansionAtLeast = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ClassicExpansionAtLeast)
           end
           return checkCFunc(_G.ClassicExpansionAtLeast)
         end,
         ClearAchievementComparisonUnit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ClearAchievementComparisonUnit)
           end
           return checkCFunc(_G.ClearAchievementComparisonUnit)
         end,
         ClearAchievementSearchString = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ClearAchievementSearchString)
           end
           return checkCFunc(_G.ClearAchievementSearchString)
         end,
         ClearAllLFGDungeons = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ClearAllLFGDungeons)
           end
           return checkCFunc(_G.ClearAllLFGDungeons)
@@ -11387,7 +11408,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClearAllTracking)
         end,
         ClearAutoAcceptQuestSound = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ClearAutoAcceptQuestSound)
           end
           return checkCFunc(_G.ClearAutoAcceptQuestSound)
@@ -11399,13 +11420,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClearCursor)
         end,
         ClearFailedPVPTalentIDs = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ClearFailedPVPTalentIDs)
           end
           return checkCFunc(_G.ClearFailedPVPTalentIDs)
         end,
         ClearFailedTalentIDs = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ClearFailedTalentIDs)
           end
           return checkCFunc(_G.ClearFailedTalentIDs)
@@ -11423,7 +11444,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClearPartyAssignment)
         end,
         ClearRaidMarker = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ClearRaidMarker)
           end
           return checkCFunc(_G.ClearRaidMarker)
@@ -11438,13 +11459,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClearTutorials)
         end,
         ClearVoidTransferDepositSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ClearVoidTransferDepositSlot)
           end
           return checkCFunc(_G.ClearVoidTransferDepositSlot)
         end,
         ClickAuctionSellItemButton = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ClickAuctionSellItemButton)
           end
           return checkCFunc(_G.ClickAuctionSellItemButton)
@@ -11456,7 +11477,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClickSocketButton)
         end,
         ClickStablePet = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ClickStablePet)
           end
           return checkCFunc(_G.ClickStablePet)
@@ -11468,37 +11489,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClickTradeButton)
         end,
         ClickVoidStorageSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ClickVoidStorageSlot)
           end
           return checkCFunc(_G.ClickVoidStorageSlot)
         end,
         ClickVoidTransferDepositSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ClickVoidTransferDepositSlot)
           end
           return checkCFunc(_G.ClickVoidTransferDepositSlot)
         end,
         ClickVoidTransferWithdrawalSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ClickVoidTransferWithdrawalSlot)
           end
           return checkCFunc(_G.ClickVoidTransferWithdrawalSlot)
         end,
         ClickWorldMapActionButton = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ClickWorldMapActionButton)
           end
           return checkCFunc(_G.ClickWorldMapActionButton)
         end,
         CloseArenaTeamRoster = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CloseArenaTeamRoster)
           end
           return checkCFunc(_G.CloseArenaTeamRoster)
         end,
         CloseAuctionHouse = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CloseAuctionHouse)
           end
           return checkCFunc(_G.CloseAuctionHouse)
@@ -11507,13 +11528,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.CloseBankFrame)
         end,
         CloseCraft = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CloseCraft)
           end
           return checkCFunc(_G.CloseCraft)
         end,
         CloseGossip = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CloseGossip)
           end
           return checkCFunc(_G.CloseGossip)
@@ -11522,7 +11543,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CloseGuildBankFrame)
         end,
         CloseGuildRegistrar = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CloseGuildRegistrar)
           end
           return checkCFunc(_G.CloseGuildRegistrar)
@@ -11549,7 +11570,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ClosePetition)
         end,
         ClosePetitionRegistrar = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ClosePetitionRegistrar)
           end
           return checkCFunc(_G.ClosePetitionRegistrar)
@@ -11558,7 +11579,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CloseQuest)
         end,
         CloseResearch = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CloseResearch)
           end
           return checkCFunc(_G.CloseResearch)
@@ -11576,7 +11597,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CloseTrade)
         end,
         CloseTradeSkill = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CloseTradeSkill)
           end
           return checkCFunc(_G.CloseTradeSkill)
@@ -11585,7 +11606,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CloseTrainer)
         end,
         CloseVoidStorageFrame = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CloseVoidStorageFrame)
           end
           return checkCFunc(_G.CloseVoidStorageFrame)
@@ -11600,7 +11621,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CollapseAllFactionHeaders)
         end,
         CollapseCraftSkillLine = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CollapseCraftSkillLine)
           end
           return checkCFunc(_G.CollapseCraftSkillLine)
@@ -11609,7 +11630,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.CollapseFactionHeader)
         end,
         CollapseGuildTradeSkillHeader = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CollapseGuildTradeSkillHeader)
           end
           return checkCFunc(_G.CollapseGuildTradeSkillHeader)
@@ -11618,25 +11639,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.CollapseQuestHeader)
         end,
         CollapseSkillHeader = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CollapseSkillHeader)
           end
           return checkCFunc(_G.CollapseSkillHeader)
         end,
         CollapseTradeSkillSubClass = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CollapseTradeSkillSubClass)
           end
           return checkCFunc(_G.CollapseTradeSkillSubClass)
         end,
         CollapseTrainerSkillLine = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CollapseTrainerSkillLine)
           end
           return checkCFunc(_G.CollapseTrainerSkillLine)
         end,
         CollapseWarGameHeader = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CollapseWarGameHeader)
           end
           return checkCFunc(_G.CollapseWarGameHeader)
@@ -11678,19 +11699,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.CombatTextSetActiveUnit)
         end,
         ComplainInboxItem = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ComplainInboxItem)
           end
           return checkCFunc(_G.ComplainInboxItem)
         end,
         CompleteLFGReadyCheck = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CompleteLFGReadyCheck)
           end
           return checkCFunc(_G.CompleteLFGReadyCheck)
         end,
         CompleteLFGRoleCheck = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.CompleteLFGRoleCheck)
           end
           return checkCFunc(_G.CompleteLFGRoleCheck)
@@ -11702,7 +11723,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ConfirmAcceptQuest)
         end,
         ConfirmBNRequestInviteFriend = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ConfirmBNRequestInviteFriend)
           end
           return checkCFunc(_G.ConfirmBNRequestInviteFriend)
@@ -11726,7 +11747,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ConfirmOnUse)
         end,
         ConfirmPetUnlearn = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ConfirmPetUnlearn)
           end
           return checkCFunc(_G.ConfirmPetUnlearn)
@@ -11750,13 +11771,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.ContainerRefundItemPurchase)
         end,
         ConvertToParty = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ConvertToParty)
           end
           return checkCFunc(_G.ConvertToParty)
         end,
         ConvertToRaid = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ConvertToRaid)
           end
           return checkCFunc(_G.ConvertToRaid)
@@ -11765,13 +11786,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.CopyToClipboard)
         end,
         CraftIsEnchanting = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CraftIsEnchanting)
           end
           return checkCFunc(_G.CraftIsEnchanting)
         end,
         CraftOnlyShowMakeable = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.CraftOnlyShowMakeable)
           end
           return checkCFunc(_G.CraftOnlyShowMakeable)
@@ -11813,7 +11834,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.DeathRecap_HasEvents)
         end,
         DeclineArenaTeam = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.DeclineArenaTeam)
           end
           return checkCFunc(_G.DeclineArenaTeam)
@@ -11861,7 +11882,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.DepositGuildBankMoney)
         end,
         DepositReagentBank = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.DepositReagentBank)
           end
           return checkCFunc(_G.DepositReagentBank)
@@ -11885,7 +11906,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.DisableSpellAutocast)
         end,
         DismissCompanion = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.DismissCompanion)
           end
           return checkCFunc(_G.DismissCompanion)
@@ -11897,7 +11918,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.DisplayChannelOwner)
         end,
         DoCraft = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.DoCraft)
           end
           return checkCFunc(_G.DoCraft)
@@ -11906,7 +11927,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.DoEmote)
         end,
         DoMasterLootRoll = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.DoMasterLootRoll)
           end
           return checkCFunc(_G.DoMasterLootRoll)
@@ -11915,7 +11936,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.DoReadyCheck)
         end,
         DoTradeSkill = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.DoTradeSkill)
           end
           return checkCFunc(_G.DoTradeSkill)
@@ -11939,223 +11960,223 @@ function G.GeneratedTests()
           return checkCFunc(_G.DropItemOnUnit)
         end,
         DumpMovementCapture = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.DumpMovementCapture)
           end
           return checkCFunc(_G.DumpMovementCapture)
         end,
         DungeonAppearsInRandomLFD = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.DungeonAppearsInRandomLFD)
           end
           return checkCFunc(_G.DungeonAppearsInRandomLFD)
         end,
         EJ_ClearSearch = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_ClearSearch)
           end
           return checkCFunc(_G.EJ_ClearSearch)
         end,
         EJ_EndSearch = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_EndSearch)
           end
           return checkCFunc(_G.EJ_EndSearch)
         end,
         EJ_GetContentTuningID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetContentTuningID)
           end
           return checkCFunc(_G.EJ_GetContentTuningID)
         end,
         EJ_GetCreatureInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetCreatureInfo)
           end
           return checkCFunc(_G.EJ_GetCreatureInfo)
         end,
         EJ_GetCurrentTier = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetCurrentTier)
           end
           return checkCFunc(_G.EJ_GetCurrentTier)
         end,
         EJ_GetDifficulty = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetDifficulty)
           end
           return checkCFunc(_G.EJ_GetDifficulty)
         end,
         EJ_GetEncounterInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetEncounterInfo)
           end
           return checkCFunc(_G.EJ_GetEncounterInfo)
         end,
         EJ_GetEncounterInfoByIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetEncounterInfoByIndex)
           end
           return checkCFunc(_G.EJ_GetEncounterInfoByIndex)
         end,
         EJ_GetInstanceByIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetInstanceByIndex)
           end
           return checkCFunc(_G.EJ_GetInstanceByIndex)
         end,
         EJ_GetInstanceForMap = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetInstanceForMap)
           end
           return checkCFunc(_G.EJ_GetInstanceForMap)
         end,
         EJ_GetInstanceInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetInstanceInfo)
           end
           return checkCFunc(_G.EJ_GetInstanceInfo)
         end,
         EJ_GetInvTypeSortOrder = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetInvTypeSortOrder)
           end
           return checkCFunc(_G.EJ_GetInvTypeSortOrder)
         end,
         EJ_GetLootFilter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetLootFilter)
           end
           return checkCFunc(_G.EJ_GetLootFilter)
         end,
         EJ_GetMapEncounter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetMapEncounter)
           end
           return checkCFunc(_G.EJ_GetMapEncounter)
         end,
         EJ_GetNumEncountersForLootByIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetNumEncountersForLootByIndex)
           end
           return checkCFunc(_G.EJ_GetNumEncountersForLootByIndex)
         end,
         EJ_GetNumLoot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetNumLoot)
           end
           return checkCFunc(_G.EJ_GetNumLoot)
         end,
         EJ_GetNumSearchResults = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetNumSearchResults)
           end
           return checkCFunc(_G.EJ_GetNumSearchResults)
         end,
         EJ_GetNumTiers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetNumTiers)
           end
           return checkCFunc(_G.EJ_GetNumTiers)
         end,
         EJ_GetSearchProgress = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetSearchProgress)
           end
           return checkCFunc(_G.EJ_GetSearchProgress)
         end,
         EJ_GetSearchResult = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetSearchResult)
           end
           return checkCFunc(_G.EJ_GetSearchResult)
         end,
         EJ_GetSearchSize = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetSearchSize)
           end
           return checkCFunc(_G.EJ_GetSearchSize)
         end,
         EJ_GetSectionPath = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetSectionPath)
           end
           return checkCFunc(_G.EJ_GetSectionPath)
         end,
         EJ_GetTierInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_GetTierInfo)
           end
           return checkCFunc(_G.EJ_GetTierInfo)
         end,
         EJ_HandleLinkPath = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_HandleLinkPath)
           end
           return checkCFunc(_G.EJ_HandleLinkPath)
         end,
         EJ_InstanceIsRaid = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_InstanceIsRaid)
           end
           return checkCFunc(_G.EJ_InstanceIsRaid)
         end,
         EJ_IsLootListOutOfDate = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_IsLootListOutOfDate)
           end
           return checkCFunc(_G.EJ_IsLootListOutOfDate)
         end,
         EJ_IsSearchFinished = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_IsSearchFinished)
           end
           return checkCFunc(_G.EJ_IsSearchFinished)
         end,
         EJ_IsValidInstanceDifficulty = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_IsValidInstanceDifficulty)
           end
           return checkCFunc(_G.EJ_IsValidInstanceDifficulty)
         end,
         EJ_ResetLootFilter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_ResetLootFilter)
           end
           return checkCFunc(_G.EJ_ResetLootFilter)
         end,
         EJ_SelectEncounter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_SelectEncounter)
           end
           return checkCFunc(_G.EJ_SelectEncounter)
         end,
         EJ_SelectInstance = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_SelectInstance)
           end
           return checkCFunc(_G.EJ_SelectInstance)
         end,
         EJ_SelectTier = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_SelectTier)
           end
           return checkCFunc(_G.EJ_SelectTier)
         end,
         EJ_SetDifficulty = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_SetDifficulty)
           end
           return checkCFunc(_G.EJ_SetDifficulty)
         end,
         EJ_SetLootFilter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_SetLootFilter)
           end
           return checkCFunc(_G.EJ_SetLootFilter)
         end,
         EJ_SetSearch = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EJ_SetSearch)
           end
           return checkCFunc(_G.EJ_SetSearch)
@@ -12164,7 +12185,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.EditMacro)
         end,
         EjectPassengerFromSeat = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.EjectPassengerFromSeat)
           end
           return checkCFunc(_G.EjectPassengerFromSeat)
@@ -12200,7 +12221,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.EquipPendingItem)
         end,
         ExecuteVoidTransfer = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ExecuteVoidTransfer)
           end
           return checkCFunc(_G.ExecuteVoidTransfer)
@@ -12209,7 +12230,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ExpandAllFactionHeaders)
         end,
         ExpandCraftSkillLine = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ExpandCraftSkillLine)
           end
           return checkCFunc(_G.ExpandCraftSkillLine)
@@ -12218,7 +12239,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ExpandFactionHeader)
         end,
         ExpandGuildTradeSkillHeader = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ExpandGuildTradeSkillHeader)
           end
           return checkCFunc(_G.ExpandGuildTradeSkillHeader)
@@ -12227,25 +12248,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.ExpandQuestHeader)
         end,
         ExpandSkillHeader = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ExpandSkillHeader)
           end
           return checkCFunc(_G.ExpandSkillHeader)
         end,
         ExpandTradeSkillSubClass = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ExpandTradeSkillSubClass)
           end
           return checkCFunc(_G.ExpandTradeSkillSubClass)
         end,
         ExpandTrainerSkillLine = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ExpandTrainerSkillLine)
           end
           return checkCFunc(_G.ExpandTrainerSkillLine)
         end,
         ExpandWarGameHeader = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ExpandWarGameHeader)
           end
           return checkCFunc(_G.ExpandWarGameHeader)
@@ -12260,7 +12281,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.FindBaseSpellByID)
         end,
         FindFlyoutSlotBySpellID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.FindFlyoutSlotBySpellID)
           end
           return checkCFunc(_G.FindFlyoutSlotBySpellID)
@@ -12281,7 +12302,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.FlipCameraYaw)
         end,
         FlyoutHasSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.FlyoutHasSpell)
           end
           return checkCFunc(_G.FlyoutHasSpell)
@@ -12293,7 +12314,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.FollowUnit)
         end,
         ForceGossip = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ForceGossip)
           end
           return checkCFunc(_G.ForceGossip)
@@ -12341,13 +12362,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GMResponseResolve)
         end,
         GMSubmitBug = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GMSubmitBug)
           end
           return checkCFunc(_G.GMSubmitBug)
         end,
         GMSubmitSuggestion = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GMSubmitSuggestion)
           end
           return checkCFunc(_G.GMSubmitSuggestion)
@@ -12374,13 +12395,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GameMovieFinished)
         end,
         GetAbandonQuestItems = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetAbandonQuestItems)
           end
           return checkCFunc(_G.GetAbandonQuestItems)
         end,
         GetAbandonQuestName = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetAbandonQuestName)
           end
           return checkCFunc(_G.GetAbandonQuestName)
@@ -12389,73 +12410,73 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAccountExpansionLevel)
         end,
         GetAchievementCategory = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAchievementCategory)
           end
           return checkCFunc(_G.GetAchievementCategory)
         end,
         GetAchievementComparisonInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAchievementComparisonInfo)
           end
           return checkCFunc(_G.GetAchievementComparisonInfo)
         end,
         GetAchievementCriteriaInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAchievementCriteriaInfo)
           end
           return checkCFunc(_G.GetAchievementCriteriaInfo)
         end,
         GetAchievementCriteriaInfoByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAchievementCriteriaInfoByID)
           end
           return checkCFunc(_G.GetAchievementCriteriaInfoByID)
         end,
         GetAchievementGuildRep = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAchievementGuildRep)
           end
           return checkCFunc(_G.GetAchievementGuildRep)
         end,
         GetAchievementInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAchievementInfo)
           end
           return checkCFunc(_G.GetAchievementInfo)
         end,
         GetAchievementLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAchievementLink)
           end
           return checkCFunc(_G.GetAchievementLink)
         end,
         GetAchievementNumCriteria = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAchievementNumCriteria)
           end
           return checkCFunc(_G.GetAchievementNumCriteria)
         end,
         GetAchievementNumRewards = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAchievementNumRewards)
           end
           return checkCFunc(_G.GetAchievementNumRewards)
         end,
         GetAchievementReward = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAchievementReward)
           end
           return checkCFunc(_G.GetAchievementReward)
         end,
         GetAchievementSearchProgress = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAchievementSearchProgress)
           end
           return checkCFunc(_G.GetAchievementSearchProgress)
         end,
         GetAchievementSearchSize = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAchievementSearchSize)
           end
           return checkCFunc(_G.GetAchievementSearchSize)
@@ -12491,7 +12512,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetActionTexture)
         end,
         GetActiveArtifactByRace = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetActiveArtifactByRace)
           end
           return checkCFunc(_G.GetActiveArtifactByRace)
@@ -12503,13 +12524,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetActiveLootRollIDs)
         end,
         GetActiveQuestID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetActiveQuestID)
           end
           return checkCFunc(_G.GetActiveQuestID)
         end,
         GetActiveSpecGroup = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetActiveSpecGroup)
           end
           return checkCFunc(_G.GetActiveSpecGroup)
@@ -12545,19 +12566,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAlternativeDefaultLanguage)
         end,
         GetArchaeologyInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetArchaeologyInfo)
           end
           return checkCFunc(_G.GetArchaeologyInfo)
         end,
         GetArchaeologyRaceInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetArchaeologyRaceInfo)
           end
           return checkCFunc(_G.GetArchaeologyRaceInfo)
         end,
         GetArchaeologyRaceInfoByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetArchaeologyRaceInfoByID)
           end
           return checkCFunc(_G.GetArchaeologyRaceInfoByID)
@@ -12566,73 +12587,73 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAreaSpiritHealerTime)
         end,
         GetAreaText = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAreaText)
           end
           return checkCFunc(_G.GetAreaText)
         end,
         GetArenaOpponentSpec = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetArenaOpponentSpec)
           end
           return checkCFunc(_G.GetArenaOpponentSpec)
         end,
         GetArenaTeam = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetArenaTeam)
           end
           return checkCFunc(_G.GetArenaTeam)
         end,
         GetArenaTeamGdfInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetArenaTeamGdfInfo)
           end
           return checkCFunc(_G.GetArenaTeamGdfInfo)
         end,
         GetArenaTeamIndexBySize = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetArenaTeamIndexBySize)
           end
           return checkCFunc(_G.GetArenaTeamIndexBySize)
         end,
         GetArenaTeamRosterInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetArenaTeamRosterInfo)
           end
           return checkCFunc(_G.GetArenaTeamRosterInfo)
         end,
         GetArenaTeamRosterSelection = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetArenaTeamRosterSelection)
           end
           return checkCFunc(_G.GetArenaTeamRosterSelection)
         end,
         GetArenaTeamRosterShowOffline = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetArenaTeamRosterShowOffline)
           end
           return checkCFunc(_G.GetArenaTeamRosterShowOffline)
         end,
         GetArmorPenetration = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetArmorPenetration)
           end
           return checkCFunc(_G.GetArmorPenetration)
         end,
         GetArtifactInfoByRace = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetArtifactInfoByRace)
           end
           return checkCFunc(_G.GetArtifactInfoByRace)
         end,
         GetArtifactProgress = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetArtifactProgress)
           end
           return checkCFunc(_G.GetArtifactProgress)
         end,
         GetAtlasInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetAtlasInfo)
           end
           return checkCFunc(_G.GetAtlasInfo)
@@ -12641,55 +12662,55 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAttackPowerForStat)
         end,
         GetAuctionDeposit = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetAuctionDeposit)
           end
           return checkCFunc(_G.GetAuctionDeposit)
         end,
         GetAuctionHouseDepositRate = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetAuctionHouseDepositRate)
           end
           return checkCFunc(_G.GetAuctionHouseDepositRate)
         end,
         GetAuctionItemBattlePetInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetAuctionItemBattlePetInfo)
           end
           return checkCFunc(_G.GetAuctionItemBattlePetInfo)
         end,
         GetAuctionItemInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetAuctionItemInfo)
           end
           return checkCFunc(_G.GetAuctionItemInfo)
         end,
         GetAuctionItemLink = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetAuctionItemLink)
           end
           return checkCFunc(_G.GetAuctionItemLink)
         end,
         GetAuctionItemSubClasses = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetAuctionItemSubClasses)
           end
           return checkCFunc(_G.GetAuctionItemSubClasses)
         end,
         GetAuctionItemTimeLeft = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetAuctionItemTimeLeft)
           end
           return checkCFunc(_G.GetAuctionItemTimeLeft)
         end,
         GetAuctionSellItemInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetAuctionSellItemInfo)
           end
           return checkCFunc(_G.GetAuctionSellItemInfo)
         end,
         GetAuctionSort = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetAuctionSort)
           end
           return checkCFunc(_G.GetAuctionSort)
@@ -12707,7 +12728,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAutoDeclineGuildInvites)
         end,
         GetAutoQuestPopUp = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAutoQuestPopUp)
           end
           return checkCFunc(_G.GetAutoQuestPopUp)
@@ -12719,7 +12740,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAvailableLevel)
         end,
         GetAvailableLocaleInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAvailableLocaleInfo)
           end
           return checkCFunc(_G.GetAvailableLocaleInfo)
@@ -12728,7 +12749,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAvailableLocales)
         end,
         GetAvailableQuestInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAvailableQuestInfo)
           end
           return checkCFunc(_G.GetAvailableQuestInfo)
@@ -12737,13 +12758,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetAvailableTitle)
         end,
         GetAverageItemLevel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAverageItemLevel)
           end
           return checkCFunc(_G.GetAverageItemLevel)
         end,
         GetAvoidance = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetAvoidance)
           end
           return checkCFunc(_G.GetAvoidance)
@@ -12752,7 +12773,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBackgroundLoadingStatus)
         end,
         GetBackpackAutosortDisabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetBackpackAutosortDisabled)
           end
           return checkCFunc(_G.GetBackpackAutosortDisabled)
@@ -12764,7 +12785,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBagSlotFlag)
         end,
         GetBankAutosortDisabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetBankAutosortDisabled)
           end
           return checkCFunc(_G.GetBankAutosortDisabled)
@@ -12776,7 +12797,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBankSlotCost)
         end,
         GetBattlefieldArenaFaction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetBattlefieldArenaFaction)
           end
           return checkCFunc(_G.GetBattlefieldArenaFaction)
@@ -12785,7 +12806,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBattlefieldEstimatedWaitTime)
         end,
         GetBattlefieldFlagPosition = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetBattlefieldFlagPosition)
           end
           return checkCFunc(_G.GetBattlefieldFlagPosition)
@@ -12794,7 +12815,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBattlefieldInstanceExpiration)
         end,
         GetBattlefieldInstanceInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetBattlefieldInstanceInfo)
           end
           return checkCFunc(_G.GetBattlefieldInstanceInfo)
@@ -12815,7 +12836,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBattlefieldStatData)
         end,
         GetBattlefieldStatInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetBattlefieldStatInfo)
           end
           return checkCFunc(_G.GetBattlefieldStatInfo)
@@ -12839,19 +12860,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetBattlegroundPoints)
         end,
         GetBestFlexRaidChoice = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetBestFlexRaidChoice)
           end
           return checkCFunc(_G.GetBestFlexRaidChoice)
         end,
         GetBestRFChoice = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetBestRFChoice)
           end
           return checkCFunc(_G.GetBestRFChoice)
         end,
         GetBidderAuctionItems = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetBidderAuctionItems)
           end
           return checkCFunc(_G.GetBidderAuctionItems)
@@ -12908,25 +12929,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCameraZoom)
         end,
         GetCategoryAchievementPoints = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetCategoryAchievementPoints)
           end
           return checkCFunc(_G.GetCategoryAchievementPoints)
         end,
         GetCategoryInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetCategoryInfo)
           end
           return checkCFunc(_G.GetCategoryInfo)
         end,
         GetCategoryList = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetCategoryList)
           end
           return checkCFunc(_G.GetCategoryList)
         end,
         GetCategoryNumAchievements = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetCategoryNumAchievements)
           end
           return checkCFunc(_G.GetCategoryNumAchievements)
@@ -12965,7 +12986,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetClassInfo)
         end,
         GetClassicExpansionLevel = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetClassicExpansionLevel)
           end
           return checkCFunc(_G.GetClassicExpansionLevel)
@@ -12992,7 +13013,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCombatRatingBonus)
         end,
         GetCombatRatingBonusForCombatRatingValue = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetCombatRatingBonusForCombatRatingValue)
           end
           return checkCFunc(_G.GetCombatRatingBonusForCombatRatingValue)
@@ -13001,25 +13022,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetComboPoints)
         end,
         GetCompanionInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetCompanionInfo)
           end
           return checkCFunc(_G.GetCompanionInfo)
         end,
         GetComparisonAchievementPoints = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetComparisonAchievementPoints)
           end
           return checkCFunc(_G.GetComparisonAchievementPoints)
         end,
         GetComparisonCategoryNumAchievements = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetComparisonCategoryNumAchievements)
           end
           return checkCFunc(_G.GetComparisonCategoryNumAchievements)
         end,
         GetComparisonStatistic = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetComparisonStatistic)
           end
           return checkCFunc(_G.GetComparisonStatistic)
@@ -13034,7 +13055,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetContainerItemDurability)
         end,
         GetContainerItemEquipmentSetInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetContainerItemEquipmentSetInfo)
           end
           return checkCFunc(_G.GetContainerItemEquipmentSetInfo)
@@ -13058,7 +13079,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetContainerItemPurchaseItem)
         end,
         GetContainerItemQuestInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetContainerItemQuestInfo)
           end
           return checkCFunc(_G.GetContainerItemQuestInfo)
@@ -13073,121 +13094,121 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCorpseRecoveryDelay)
         end,
         GetCorruption = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetCorruption)
           end
           return checkCFunc(_G.GetCorruption)
         end,
         GetCorruptionResistance = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetCorruptionResistance)
           end
           return checkCFunc(_G.GetCorruptionResistance)
         end,
         GetCraftButtonToken = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftButtonToken)
           end
           return checkCFunc(_G.GetCraftButtonToken)
         end,
         GetCraftCooldown = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftCooldown)
           end
           return checkCFunc(_G.GetCraftCooldown)
         end,
         GetCraftDescription = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftDescription)
           end
           return checkCFunc(_G.GetCraftDescription)
         end,
         GetCraftDisplaySkillLine = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftDisplaySkillLine)
           end
           return checkCFunc(_G.GetCraftDisplaySkillLine)
         end,
         GetCraftFilter = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftFilter)
           end
           return checkCFunc(_G.GetCraftFilter)
         end,
         GetCraftIcon = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftIcon)
           end
           return checkCFunc(_G.GetCraftIcon)
         end,
         GetCraftInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftInfo)
           end
           return checkCFunc(_G.GetCraftInfo)
         end,
         GetCraftItemLink = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftItemLink)
           end
           return checkCFunc(_G.GetCraftItemLink)
         end,
         GetCraftName = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftName)
           end
           return checkCFunc(_G.GetCraftName)
         end,
         GetCraftNumMade = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftNumMade)
           end
           return checkCFunc(_G.GetCraftNumMade)
         end,
         GetCraftNumReagents = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftNumReagents)
           end
           return checkCFunc(_G.GetCraftNumReagents)
         end,
         GetCraftReagentInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftReagentInfo)
           end
           return checkCFunc(_G.GetCraftReagentInfo)
         end,
         GetCraftReagentItemLink = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftReagentItemLink)
           end
           return checkCFunc(_G.GetCraftReagentItemLink)
         end,
         GetCraftRecipeLink = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftRecipeLink)
           end
           return checkCFunc(_G.GetCraftRecipeLink)
         end,
         GetCraftSelectionIndex = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftSelectionIndex)
           end
           return checkCFunc(_G.GetCraftSelectionIndex)
         end,
         GetCraftSkillLine = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftSkillLine)
           end
           return checkCFunc(_G.GetCraftSkillLine)
         end,
         GetCraftSlots = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftSlots)
           end
           return checkCFunc(_G.GetCraftSlots)
         end,
         GetCraftSpellFocus = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCraftSpellFocus)
           end
           return checkCFunc(_G.GetCraftSpellFocus)
@@ -13196,13 +13217,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCritChance)
         end,
         GetCritChanceFromAgility = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetCritChanceFromAgility)
           end
           return checkCFunc(_G.GetCritChanceFromAgility)
         end,
         GetCritChanceProvidesParryEffect = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetCritChanceProvidesParryEffect)
           end
           return checkCFunc(_G.GetCritChanceProvidesParryEffect)
@@ -13223,7 +13244,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCurrentEventID)
         end,
         GetCurrentGlyphNameForSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetCurrentGlyphNameForSpell)
           end
           return checkCFunc(_G.GetCurrentGlyphNameForSpell)
@@ -13238,7 +13259,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetCurrentKeyBoardFocus)
         end,
         GetCurrentLevelFeatures = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetCurrentLevelFeatures)
           end
           return checkCFunc(_G.GetCurrentLevelFeatures)
@@ -13316,19 +13337,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetDungeonDifficultyID)
         end,
         GetDungeonForRandomSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetDungeonForRandomSlot)
           end
           return checkCFunc(_G.GetDungeonForRandomSlot)
         end,
         GetDungeonInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetDungeonInfo)
           end
           return checkCFunc(_G.GetDungeonInfo)
         end,
         GetEquipmentNameFromSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetEquipmentNameFromSpell)
           end
           return checkCFunc(_G.GetEquipmentNameFromSpell)
@@ -13349,7 +13370,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetExpansionDisplayInfo)
         end,
         GetExpansionForLevel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetExpansionForLevel)
           end
           return checkCFunc(_G.GetExpansionForLevel)
@@ -13364,13 +13385,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetExpertise)
         end,
         GetExpertisePercent = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetExpertisePercent)
           end
           return checkCFunc(_G.GetExpertisePercent)
         end,
         GetExtraBarIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetExtraBarIndex)
           end
           return checkCFunc(_G.GetExtraBarIndex)
@@ -13382,13 +13403,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetFactionInfoByID)
         end,
         GetFailedPVPTalentIDs = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetFailedPVPTalentIDs)
           end
           return checkCFunc(_G.GetFailedPVPTalentIDs)
         end,
         GetFailedTalentIDs = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetFailedTalentIDs)
           end
           return checkCFunc(_G.GetFailedTalentIDs)
@@ -13400,49 +13421,49 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetFileStreamingStatus)
         end,
         GetFilteredAchievementID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetFilteredAchievementID)
           end
           return checkCFunc(_G.GetFilteredAchievementID)
         end,
         GetFirstBagBankSlotIndex = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetFirstBagBankSlotIndex)
           end
           return checkCFunc(_G.GetFirstBagBankSlotIndex)
         end,
         GetFirstTradeSkill = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetFirstTradeSkill)
           end
           return checkCFunc(_G.GetFirstTradeSkill)
         end,
         GetFlexRaidDungeonInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetFlexRaidDungeonInfo)
           end
           return checkCFunc(_G.GetFlexRaidDungeonInfo)
         end,
         GetFlyoutID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetFlyoutID)
           end
           return checkCFunc(_G.GetFlyoutID)
         end,
         GetFlyoutInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetFlyoutInfo)
           end
           return checkCFunc(_G.GetFlyoutInfo)
         end,
         GetFlyoutSlotInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetFlyoutSlotInfo)
           end
           return checkCFunc(_G.GetFlyoutSlotInfo)
         end,
         GetFollowerTypeIDFromSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetFollowerTypeIDFromSpell)
           end
           return checkCFunc(_G.GetFollowerTypeIDFromSpell)
@@ -13463,13 +13484,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetFramesRegisteredForEvent)
         end,
         GetFriendshipReputation = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetFriendshipReputation)
           end
           return checkCFunc(_G.GetFriendshipReputation)
         end,
         GetFriendshipReputationRanks = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetFriendshipReputationRanks)
           end
           return checkCFunc(_G.GetFriendshipReputationRanks)
@@ -13490,25 +13511,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGameTime)
         end,
         GetGossipActiveQuests = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetGossipActiveQuests)
           end
           return checkCFunc(_G.GetGossipActiveQuests)
         end,
         GetGossipAvailableQuests = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetGossipAvailableQuests)
           end
           return checkCFunc(_G.GetGossipAvailableQuests)
         end,
         GetGossipOptions = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetGossipOptions)
           end
           return checkCFunc(_G.GetGossipOptions)
         end,
         GetGossipText = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetGossipText)
           end
           return checkCFunc(_G.GetGossipText)
@@ -13526,19 +13547,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGroupMemberCounts)
         end,
         GetGuildAchievementMemberInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildAchievementMemberInfo)
           end
           return checkCFunc(_G.GetGuildAchievementMemberInfo)
         end,
         GetGuildAchievementMembers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildAchievementMembers)
           end
           return checkCFunc(_G.GetGuildAchievementMembers)
         end,
         GetGuildAchievementNumMembers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildAchievementNumMembers)
           end
           return checkCFunc(_G.GetGuildAchievementNumMembers)
@@ -13580,13 +13601,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildBankWithdrawMoney)
         end,
         GetGuildCategoryList = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildCategoryList)
           end
           return checkCFunc(_G.GetGuildCategoryList)
         end,
         GetGuildChallengeInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildChallengeInfo)
           end
           return checkCFunc(_G.GetGuildChallengeInfo)
@@ -13595,13 +13616,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildCharterCost)
         end,
         GetGuildEventInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildEventInfo)
           end
           return checkCFunc(_G.GetGuildEventInfo)
         end,
         GetGuildExpirationTime = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildExpirationTime)
           end
           return checkCFunc(_G.GetGuildExpirationTime)
@@ -13610,7 +13631,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildFactionGroup)
         end,
         GetGuildFactionInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildFactionInfo)
           end
           return checkCFunc(_G.GetGuildFactionInfo)
@@ -13625,43 +13646,43 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildLogoInfo)
         end,
         GetGuildMemberRecipes = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildMemberRecipes)
           end
           return checkCFunc(_G.GetGuildMemberRecipes)
         end,
         GetGuildNewsFilters = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildNewsFilters)
           end
           return checkCFunc(_G.GetGuildNewsFilters)
         end,
         GetGuildNewsMemberName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildNewsMemberName)
           end
           return checkCFunc(_G.GetGuildNewsMemberName)
         end,
         GetGuildNewsSort = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildNewsSort)
           end
           return checkCFunc(_G.GetGuildNewsSort)
         end,
         GetGuildPerkInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildPerkInfo)
           end
           return checkCFunc(_G.GetGuildPerkInfo)
         end,
         GetGuildRecipeInfoPostQuery = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildRecipeInfoPostQuery)
           end
           return checkCFunc(_G.GetGuildRecipeInfoPostQuery)
         end,
         GetGuildRecipeMember = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildRecipeMember)
           end
           return checkCFunc(_G.GetGuildRecipeMember)
@@ -13670,7 +13691,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildRenameRequired)
         end,
         GetGuildRewardInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildRewardInfo)
           end
           return checkCFunc(_G.GetGuildRewardInfo)
@@ -13679,7 +13700,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildRosterInfo)
         end,
         GetGuildRosterLargestAchievementPoints = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildRosterLargestAchievementPoints)
           end
           return checkCFunc(_G.GetGuildRosterLargestAchievementPoints)
@@ -13700,7 +13721,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetGuildTabardFiles)
         end,
         GetGuildTradeSkillInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetGuildTradeSkillInfo)
           end
           return checkCFunc(_G.GetGuildTradeSkillInfo)
@@ -13736,19 +13757,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetInsertItemsLeftToRight)
         end,
         GetInspectArenaData = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetInspectArenaData)
           end
           return checkCFunc(_G.GetInspectArenaData)
         end,
         GetInspectArenaTeamData = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetInspectArenaTeamData)
           end
           return checkCFunc(_G.GetInspectArenaTeamData)
         end,
         GetInspectGuildInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetInspectGuildInfo)
           end
           return checkCFunc(_G.GetInspectGuildInfo)
@@ -13757,25 +13778,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetInspectHonorData)
         end,
         GetInspectPVPRankProgress = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetInspectPVPRankProgress)
           end
           return checkCFunc(_G.GetInspectPVPRankProgress)
         end,
         GetInspectRatedBGData = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetInspectRatedBGData)
           end
           return checkCFunc(_G.GetInspectRatedBGData)
         end,
         GetInspectSpecialization = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetInspectSpecialization)
           end
           return checkCFunc(_G.GetInspectSpecialization)
         end,
         GetInspectTalent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetInspectTalent)
           end
           return checkCFunc(_G.GetInspectTalent)
@@ -13832,7 +13853,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetInviteConfirmationInfo)
         end,
         GetInviteReferralInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetInviteReferralInfo)
           end
           return checkCFunc(_G.GetInviteReferralInfo)
@@ -13871,7 +13892,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetItemInventorySlotInfo)
         end,
         GetItemLevelColor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetItemLevelColor)
           end
           return checkCFunc(_G.GetItemLevelColor)
@@ -13901,271 +13922,271 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetItemUniqueness)
         end,
         GetJailersTowerLevel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetJailersTowerLevel)
           end
           return checkCFunc(_G.GetJailersTowerLevel)
         end,
         GetJournalInfoForSpellConfirmation = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetJournalInfoForSpellConfirmation)
           end
           return checkCFunc(_G.GetJournalInfoForSpellConfirmation)
         end,
         GetLFDChoiceCollapseState = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFDChoiceCollapseState)
           end
           return checkCFunc(_G.GetLFDChoiceCollapseState)
         end,
         GetLFDChoiceEnabledState = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFDChoiceEnabledState)
           end
           return checkCFunc(_G.GetLFDChoiceEnabledState)
         end,
         GetLFDChoiceOrder = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFDChoiceOrder)
           end
           return checkCFunc(_G.GetLFDChoiceOrder)
         end,
         GetLFDLockInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFDLockInfo)
           end
           return checkCFunc(_G.GetLFDLockInfo)
         end,
         GetLFDLockPlayerCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFDLockPlayerCount)
           end
           return checkCFunc(_G.GetLFDLockPlayerCount)
         end,
         GetLFDRoleLockInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFDRoleLockInfo)
           end
           return checkCFunc(_G.GetLFDRoleLockInfo)
         end,
         GetLFDRoleRestrictions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFDRoleRestrictions)
           end
           return checkCFunc(_G.GetLFDRoleRestrictions)
         end,
         GetLFGBootProposal = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGBootProposal)
           end
           return checkCFunc(_G.GetLFGBootProposal)
         end,
         GetLFGCategoryForID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGCategoryForID)
           end
           return checkCFunc(_G.GetLFGCategoryForID)
         end,
         GetLFGCompletionReward = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGCompletionReward)
           end
           return checkCFunc(_G.GetLFGCompletionReward)
         end,
         GetLFGCompletionRewardItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGCompletionRewardItem)
           end
           return checkCFunc(_G.GetLFGCompletionRewardItem)
         end,
         GetLFGCompletionRewardItemLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGCompletionRewardItemLink)
           end
           return checkCFunc(_G.GetLFGCompletionRewardItemLink)
         end,
         GetLFGDeserterExpiration = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGDeserterExpiration)
           end
           return checkCFunc(_G.GetLFGDeserterExpiration)
         end,
         GetLFGDungeonEncounterInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGDungeonEncounterInfo)
           end
           return checkCFunc(_G.GetLFGDungeonEncounterInfo)
         end,
         GetLFGDungeonInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGDungeonInfo)
           end
           return checkCFunc(_G.GetLFGDungeonInfo)
         end,
         GetLFGDungeonNumEncounters = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGDungeonNumEncounters)
           end
           return checkCFunc(_G.GetLFGDungeonNumEncounters)
         end,
         GetLFGDungeonRewardCapBarInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGDungeonRewardCapBarInfo)
           end
           return checkCFunc(_G.GetLFGDungeonRewardCapBarInfo)
         end,
         GetLFGDungeonRewardCapInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGDungeonRewardCapInfo)
           end
           return checkCFunc(_G.GetLFGDungeonRewardCapInfo)
         end,
         GetLFGDungeonRewardInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGDungeonRewardInfo)
           end
           return checkCFunc(_G.GetLFGDungeonRewardInfo)
         end,
         GetLFGDungeonRewardLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGDungeonRewardLink)
           end
           return checkCFunc(_G.GetLFGDungeonRewardLink)
         end,
         GetLFGDungeonRewards = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGDungeonRewards)
           end
           return checkCFunc(_G.GetLFGDungeonRewards)
         end,
         GetLFGDungeonShortageRewardInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGDungeonShortageRewardInfo)
           end
           return checkCFunc(_G.GetLFGDungeonShortageRewardInfo)
         end,
         GetLFGDungeonShortageRewardLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGDungeonShortageRewardLink)
           end
           return checkCFunc(_G.GetLFGDungeonShortageRewardLink)
         end,
         GetLFGInfoServer = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGInfoServer)
           end
           return checkCFunc(_G.GetLFGInfoServer)
         end,
         GetLFGInviteRoleAvailability = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGInviteRoleAvailability)
           end
           return checkCFunc(_G.GetLFGInviteRoleAvailability)
         end,
         GetLFGInviteRoleRestrictions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGInviteRoleRestrictions)
           end
           return checkCFunc(_G.GetLFGInviteRoleRestrictions)
         end,
         GetLFGProposal = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGProposal)
           end
           return checkCFunc(_G.GetLFGProposal)
         end,
         GetLFGProposalEncounter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGProposalEncounter)
           end
           return checkCFunc(_G.GetLFGProposalEncounter)
         end,
         GetLFGProposalMember = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGProposalMember)
           end
           return checkCFunc(_G.GetLFGProposalMember)
         end,
         GetLFGQueueStats = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGQueueStats)
           end
           return checkCFunc(_G.GetLFGQueueStats)
         end,
         GetLFGQueuedList = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGQueuedList)
           end
           return checkCFunc(_G.GetLFGQueuedList)
         end,
         GetLFGRandomCooldownExpiration = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGRandomCooldownExpiration)
           end
           return checkCFunc(_G.GetLFGRandomCooldownExpiration)
         end,
         GetLFGRandomDungeonInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGRandomDungeonInfo)
           end
           return checkCFunc(_G.GetLFGRandomDungeonInfo)
         end,
         GetLFGReadyCheckUpdate = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGReadyCheckUpdate)
           end
           return checkCFunc(_G.GetLFGReadyCheckUpdate)
         end,
         GetLFGReadyCheckUpdateBattlegroundInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGReadyCheckUpdateBattlegroundInfo)
           end
           return checkCFunc(_G.GetLFGReadyCheckUpdateBattlegroundInfo)
         end,
         GetLFGRoleShortageRewards = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGRoleShortageRewards)
           end
           return checkCFunc(_G.GetLFGRoleShortageRewards)
         end,
         GetLFGRoleUpdate = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGRoleUpdate)
           end
           return checkCFunc(_G.GetLFGRoleUpdate)
         end,
         GetLFGRoleUpdateBattlegroundInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGRoleUpdateBattlegroundInfo)
           end
           return checkCFunc(_G.GetLFGRoleUpdateBattlegroundInfo)
         end,
         GetLFGRoleUpdateMember = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGRoleUpdateMember)
           end
           return checkCFunc(_G.GetLFGRoleUpdateMember)
         end,
         GetLFGRoleUpdateSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGRoleUpdateSlot)
           end
           return checkCFunc(_G.GetLFGRoleUpdateSlot)
         end,
         GetLFGRoles = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGRoles)
           end
           return checkCFunc(_G.GetLFGRoles)
         end,
         GetLFGSuspendedPlayers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFGSuspendedPlayers)
           end
           return checkCFunc(_G.GetLFGSuspendedPlayers)
         end,
         GetLFRChoiceOrder = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLFRChoiceOrder)
           end
           return checkCFunc(_G.GetLFRChoiceOrder)
@@ -14174,13 +14195,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetLanguageByIndex)
         end,
         GetLatestCompletedAchievements = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLatestCompletedAchievements)
           end
           return checkCFunc(_G.GetLatestCompletedAchievements)
         end,
         GetLatestCompletedComparisonAchievements = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLatestCompletedComparisonAchievements)
           end
           return checkCFunc(_G.GetLatestCompletedComparisonAchievements)
@@ -14189,13 +14210,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetLatestThreeSenders)
         end,
         GetLatestUpdatedComparisonStats = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLatestUpdatedComparisonStats)
           end
           return checkCFunc(_G.GetLatestUpdatedComparisonStats)
         end,
         GetLatestUpdatedStats = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLatestUpdatedStats)
           end
           return checkCFunc(_G.GetLatestUpdatedStats)
@@ -14204,7 +14225,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetLegacyRaidDifficultyID)
         end,
         GetLifesteal = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLifesteal)
           end
           return checkCFunc(_G.GetLifesteal)
@@ -14249,7 +14270,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetLootSourceInfo)
         end,
         GetLootSpecialization = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetLootSpecialization)
           end
           return checkCFunc(_G.GetLootSpecialization)
@@ -14285,25 +14306,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMasterLootCandidate)
         end,
         GetMastery = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetMastery)
           end
           return checkCFunc(_G.GetMastery)
         end,
         GetMasteryEffect = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetMasteryEffect)
           end
           return checkCFunc(_G.GetMasteryEffect)
         end,
         GetMawPowerLinkBySpellID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetMawPowerLinkBySpellID)
           end
           return checkCFunc(_G.GetMawPowerLinkBySpellID)
         end,
         GetMaxArenaCurrency = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetMaxArenaCurrency)
           end
           return checkCFunc(_G.GetMaxArenaCurrency)
@@ -14312,13 +14333,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMaxBattlefieldID)
         end,
         GetMaxCombatRatingBonus = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetMaxCombatRatingBonus)
           end
           return checkCFunc(_G.GetMaxCombatRatingBonus)
         end,
         GetMaxDailyQuests = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetMaxDailyQuests)
           end
           return checkCFunc(_G.GetMaxDailyQuests)
@@ -14327,13 +14348,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMaxLevelForExpansionLevel)
         end,
         GetMaxLevelForLatestExpansion = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetMaxLevelForLatestExpansion)
           end
           return checkCFunc(_G.GetMaxLevelForLatestExpansion)
         end,
         GetMaxLevelForPlayerExpansion = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetMaxLevelForPlayerExpansion)
           end
           return checkCFunc(_G.GetMaxLevelForPlayerExpansion)
@@ -14348,7 +14369,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMaxRenderScale)
         end,
         GetMaxRewardCurrencies = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetMaxRewardCurrencies)
           end
           return checkCFunc(_G.GetMaxRewardCurrencies)
@@ -14357,7 +14378,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMaxSpellStartRecoveryOffset)
         end,
         GetMaxTalentTier = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetMaxTalentTier)
           end
           return checkCFunc(_G.GetMaxTalentTier)
@@ -14369,13 +14390,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMeleeHaste)
         end,
         GetMerchantCurrencies = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetMerchantCurrencies)
           end
           return checkCFunc(_G.GetMerchantCurrencies)
         end,
         GetMerchantFilter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetMerchantFilter)
           end
           return checkCFunc(_G.GetMerchantFilter)
@@ -14417,7 +14438,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMirrorTimerProgress)
         end,
         GetModResilienceDamageReduction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetModResilienceDamageReduction)
           end
           return checkCFunc(_G.GetModResilienceDamageReduction)
@@ -14462,13 +14483,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetMultiCastBarIndex)
         end,
         GetMultiCastTotemSpells = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetMultiCastTotemSpells)
           end
           return checkCFunc(_G.GetMultiCastTotemSpells)
         end,
         GetNegativeCorruptionEffectInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNegativeCorruptionEffectInfo)
           end
           return checkCFunc(_G.GetNegativeCorruptionEffectInfo)
@@ -14486,7 +14507,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNewSocketLink)
         end,
         GetNextAchievement = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNextAchievement)
           end
           return checkCFunc(_G.GetNextAchievement)
@@ -14498,7 +14519,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNextPendingInviteConfirmation)
         end,
         GetNextStableSlotCost = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNextStableSlotCost)
           end
           return checkCFunc(_G.GetNextStableSlotCost)
@@ -14513,13 +14534,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumAddOns)
         end,
         GetNumArchaeologyRaces = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumArchaeologyRaces)
           end
           return checkCFunc(_G.GetNumArchaeologyRaces)
         end,
         GetNumArenaOpponentSpecs = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumArenaOpponentSpecs)
           end
           return checkCFunc(_G.GetNumArenaOpponentSpecs)
@@ -14528,25 +14549,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumArenaOpponents)
         end,
         GetNumArenaTeamMembers = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumArenaTeamMembers)
           end
           return checkCFunc(_G.GetNumArenaTeamMembers)
         end,
         GetNumArtifactsByRace = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumArtifactsByRace)
           end
           return checkCFunc(_G.GetNumArtifactsByRace)
         end,
         GetNumAuctionItems = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumAuctionItems)
           end
           return checkCFunc(_G.GetNumAuctionItems)
         end,
         GetNumAutoQuestPopUps = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumAutoQuestPopUps)
           end
           return checkCFunc(_G.GetNumAutoQuestPopUps)
@@ -14564,25 +14585,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumBattlefieldScores)
         end,
         GetNumBattlefieldStats = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumBattlefieldStats)
           end
           return checkCFunc(_G.GetNumBattlefieldStats)
         end,
         GetNumBattlefieldVehicles = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumBattlefieldVehicles)
           end
           return checkCFunc(_G.GetNumBattlefieldVehicles)
         end,
         GetNumBattlefields = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumBattlefields)
           end
           return checkCFunc(_G.GetNumBattlefields)
         end,
         GetNumBattlegroundTypes = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumBattlegroundTypes)
           end
           return checkCFunc(_G.GetNumBattlegroundTypes)
@@ -14600,25 +14621,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumClasses)
         end,
         GetNumCompanions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumCompanions)
           end
           return checkCFunc(_G.GetNumCompanions)
         end,
         GetNumComparisonCompletedAchievements = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumComparisonCompletedAchievements)
           end
           return checkCFunc(_G.GetNumComparisonCompletedAchievements)
         end,
         GetNumCompletedAchievements = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumCompletedAchievements)
           end
           return checkCFunc(_G.GetNumCompletedAchievements)
         end,
         GetNumCrafts = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumCrafts)
           end
           return checkCFunc(_G.GetNumCrafts)
@@ -14630,7 +14651,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumDisplayChannels)
         end,
         GetNumDungeonForRandomSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumDungeonForRandomSlot)
           end
           return checkCFunc(_G.GetNumDungeonForRandomSlot)
@@ -14642,19 +14663,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumFactions)
         end,
         GetNumFilteredAchievements = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumFilteredAchievements)
           end
           return checkCFunc(_G.GetNumFilteredAchievements)
         end,
         GetNumFlexRaidDungeons = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumFlexRaidDungeons)
           end
           return checkCFunc(_G.GetNumFlexRaidDungeons)
         end,
         GetNumFlyouts = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumFlyouts)
           end
           return checkCFunc(_G.GetNumFlyouts)
@@ -14663,19 +14684,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumFrames)
         end,
         GetNumGossipActiveQuests = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumGossipActiveQuests)
           end
           return checkCFunc(_G.GetNumGossipActiveQuests)
         end,
         GetNumGossipAvailableQuests = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumGossipAvailableQuests)
           end
           return checkCFunc(_G.GetNumGossipAvailableQuests)
         end,
         GetNumGossipOptions = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumGossipOptions)
           end
           return checkCFunc(_G.GetNumGossipOptions)
@@ -14696,13 +14717,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumGuildBankTransactions)
         end,
         GetNumGuildChallenges = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumGuildChallenges)
           end
           return checkCFunc(_G.GetNumGuildChallenges)
         end,
         GetNumGuildEvents = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumGuildEvents)
           end
           return checkCFunc(_G.GetNumGuildEvents)
@@ -14711,25 +14732,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumGuildMembers)
         end,
         GetNumGuildNews = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumGuildNews)
           end
           return checkCFunc(_G.GetNumGuildNews)
         end,
         GetNumGuildPerks = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumGuildPerks)
           end
           return checkCFunc(_G.GetNumGuildPerks)
         end,
         GetNumGuildRewards = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumGuildRewards)
           end
           return checkCFunc(_G.GetNumGuildRewards)
         end,
         GetNumGuildTradeSkill = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumGuildTradeSkill)
           end
           return checkCFunc(_G.GetNumGuildTradeSkill)
@@ -14753,7 +14774,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumPetitionNames)
         end,
         GetNumPrimaryProfessions = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumPrimaryProfessions)
           end
           return checkCFunc(_G.GetNumPrimaryProfessions)
@@ -14762,7 +14783,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumQuestChoices)
         end,
         GetNumQuestCurrencies = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumQuestCurrencies)
           end
           return checkCFunc(_G.GetNumQuestCurrencies)
@@ -14780,19 +14801,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumQuestLogChoices)
         end,
         GetNumQuestLogEntries = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumQuestLogEntries)
           end
           return checkCFunc(_G.GetNumQuestLogEntries)
         end,
         GetNumQuestLogRewardCurrencies = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumQuestLogRewardCurrencies)
           end
           return checkCFunc(_G.GetNumQuestLogRewardCurrencies)
         end,
         GetNumQuestLogRewardFactions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumQuestLogRewardFactions)
           end
           return checkCFunc(_G.GetNumQuestLogRewardFactions)
@@ -14804,13 +14825,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumQuestLogRewards)
         end,
         GetNumQuestLogTasks = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumQuestLogTasks)
           end
           return checkCFunc(_G.GetNumQuestLogTasks)
         end,
         GetNumQuestPOIWorldEffects = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumQuestPOIWorldEffects)
           end
           return checkCFunc(_G.GetNumQuestPOIWorldEffects)
@@ -14819,13 +14840,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumQuestRewards)
         end,
         GetNumQuestWatches = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumQuestWatches)
           end
           return checkCFunc(_G.GetNumQuestWatches)
         end,
         GetNumRFDungeons = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumRFDungeons)
           end
           return checkCFunc(_G.GetNumRFDungeons)
@@ -14834,19 +14855,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumRaidProfiles)
         end,
         GetNumRandomDungeons = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumRandomDungeons)
           end
           return checkCFunc(_G.GetNumRandomDungeons)
         end,
         GetNumRandomScenarios = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumRandomScenarios)
           end
           return checkCFunc(_G.GetNumRandomScenarios)
         end,
         GetNumRewardCurrencies = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumRewardCurrencies)
           end
           return checkCFunc(_G.GetNumRewardCurrencies)
@@ -14861,13 +14882,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumSavedInstances)
         end,
         GetNumSavedWorldBosses = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumSavedWorldBosses)
           end
           return checkCFunc(_G.GetNumSavedWorldBosses)
         end,
         GetNumScenarios = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumScenarios)
           end
           return checkCFunc(_G.GetNumScenarios)
@@ -14876,13 +14897,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumShapeshiftForms)
         end,
         GetNumSkillLines = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumSkillLines)
           end
           return checkCFunc(_G.GetNumSkillLines)
         end,
         GetNumSoRRemaining = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumSoRRemaining)
           end
           return checkCFunc(_G.GetNumSoRRemaining)
@@ -14891,19 +14912,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumSockets)
         end,
         GetNumSpecGroups = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumSpecGroups)
           end
           return checkCFunc(_G.GetNumSpecGroups)
         end,
         GetNumSpecializations = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumSpecializations)
           end
           return checkCFunc(_G.GetNumSpecializations)
         end,
         GetNumSpecializationsForClassID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumSpecializationsForClassID)
           end
           return checkCFunc(_G.GetNumSpecializationsForClassID)
@@ -14912,7 +14933,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumSpellTabs)
         end,
         GetNumStableSlots = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumStableSlots)
           end
           return checkCFunc(_G.GetNumStableSlots)
@@ -14921,13 +14942,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumSubgroupMembers)
         end,
         GetNumTalentTabs = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumTalentTabs)
           end
           return checkCFunc(_G.GetNumTalentTabs)
         end,
         GetNumTalents = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumTalents)
           end
           return checkCFunc(_G.GetNumTalents)
@@ -14936,7 +14957,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumTitles)
         end,
         GetNumTrackedAchievements = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumTrackedAchievements)
           end
           return checkCFunc(_G.GetNumTrackedAchievements)
@@ -14945,7 +14966,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumTrackingTypes)
         end,
         GetNumTradeSkills = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetNumTradeSkills)
           end
           return checkCFunc(_G.GetNumTradeSkills)
@@ -14954,43 +14975,43 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetNumTrainerServices)
         end,
         GetNumTreasurePickerItems = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumTreasurePickerItems)
           end
           return checkCFunc(_G.GetNumTreasurePickerItems)
         end,
         GetNumUnspentPvpTalents = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumUnspentPvpTalents)
           end
           return checkCFunc(_G.GetNumUnspentPvpTalents)
         end,
         GetNumUnspentTalents = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumUnspentTalents)
           end
           return checkCFunc(_G.GetNumUnspentTalents)
         end,
         GetNumVoidTransferDeposit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumVoidTransferDeposit)
           end
           return checkCFunc(_G.GetNumVoidTransferDeposit)
         end,
         GetNumVoidTransferWithdrawal = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumVoidTransferWithdrawal)
           end
           return checkCFunc(_G.GetNumVoidTransferWithdrawal)
         end,
         GetNumWarGameTypes = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumWarGameTypes)
           end
           return checkCFunc(_G.GetNumWarGameTypes)
         end,
         GetNumWorldPVPAreas = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetNumWorldPVPAreas)
           end
           return checkCFunc(_G.GetNumWorldPVPAreas)
@@ -15008,31 +15029,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetOptOutOfLoot)
         end,
         GetOverrideAPBySpellPower = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetOverrideAPBySpellPower)
           end
           return checkCFunc(_G.GetOverrideAPBySpellPower)
         end,
         GetOverrideBarIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetOverrideBarIndex)
           end
           return checkCFunc(_G.GetOverrideBarIndex)
         end,
         GetOverrideBarSkin = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetOverrideBarSkin)
           end
           return checkCFunc(_G.GetOverrideBarSkin)
         end,
         GetOverrideSpellPowerByAP = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetOverrideSpellPowerByAP)
           end
           return checkCFunc(_G.GetOverrideSpellPowerByAP)
         end,
         GetOwnerAuctionItems = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetOwnerAuctionItems)
           end
           return checkCFunc(_G.GetOwnerAuctionItems)
@@ -15044,13 +15065,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPVPDesired)
         end,
         GetPVPGearStatRules = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPVPGearStatRules)
           end
           return checkCFunc(_G.GetPVPGearStatRules)
         end,
         GetPVPLastWeekStats = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetPVPLastWeekStats)
           end
           return checkCFunc(_G.GetPVPLastWeekStats)
@@ -15059,19 +15080,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPVPLifetimeStats)
         end,
         GetPVPRankInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetPVPRankInfo)
           end
           return checkCFunc(_G.GetPVPRankInfo)
         end,
         GetPVPRankProgress = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetPVPRankProgress)
           end
           return checkCFunc(_G.GetPVPRankProgress)
         end,
         GetPVPRoles = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPVPRoles)
           end
           return checkCFunc(_G.GetPVPRoles)
@@ -15080,7 +15101,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPVPSessionStats)
         end,
         GetPVPThisWeekStats = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetPVPThisWeekStats)
           end
           return checkCFunc(_G.GetPVPThisWeekStats)
@@ -15101,19 +15122,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPartyAssignment)
         end,
         GetPartyLFGBackfillInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPartyLFGBackfillInfo)
           end
           return checkCFunc(_G.GetPartyLFGBackfillInfo)
         end,
         GetPartyLFGID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPartyLFGID)
           end
           return checkCFunc(_G.GetPartyLFGID)
         end,
         GetPendingGlyphName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPendingGlyphName)
           end
           return checkCFunc(_G.GetPendingGlyphName)
@@ -15122,7 +15143,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPendingInviteConfirmations)
         end,
         GetPersonalRatedInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPersonalRatedInfo)
           end
           return checkCFunc(_G.GetPersonalRatedInfo)
@@ -15146,7 +15167,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPetFoodTypes)
         end,
         GetPetHappiness = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetPetHappiness)
           end
           return checkCFunc(_G.GetPetHappiness)
@@ -15155,7 +15176,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPetIcon)
         end,
         GetPetLoyalty = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetPetLoyalty)
           end
           return checkCFunc(_G.GetPetLoyalty)
@@ -15167,7 +15188,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPetSpellBonusDamage)
         end,
         GetPetTalentTree = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPetTalentTree)
           end
           return checkCFunc(_G.GetPetTalentTree)
@@ -15176,7 +15197,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPetTimeRemaining)
         end,
         GetPetTrainingPoints = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetPetTrainingPoints)
           end
           return checkCFunc(_G.GetPetTrainingPoints)
@@ -15185,7 +15206,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPetitionInfo)
         end,
         GetPetitionItemPrice = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetPetitionItemPrice)
           end
           return checkCFunc(_G.GetPetitionItemPrice)
@@ -15197,7 +15218,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPhysicalScreenSize)
         end,
         GetPlayerAuraBySpellID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPlayerAuraBySpellID)
           end
           return checkCFunc(_G.GetPlayerAuraBySpellID)
@@ -15209,7 +15230,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPlayerInfoByGUID)
         end,
         GetPlayerTradeCurrency = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPlayerTradeCurrency)
           end
           return checkCFunc(_G.GetPlayerTradeCurrency)
@@ -15230,7 +15251,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPrevCompleatedTutorial)
         end,
         GetPreviousAchievement = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPreviousAchievement)
           end
           return checkCFunc(_G.GetPreviousAchievement)
@@ -15239,7 +15260,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPreviousArenaSeason)
         end,
         GetPrimarySpecialization = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPrimarySpecialization)
           end
           return checkCFunc(_G.GetPrimarySpecialization)
@@ -15248,7 +15269,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetProfessionInfo)
         end,
         GetProfessions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetProfessions)
           end
           return checkCFunc(_G.GetProfessions)
@@ -15260,31 +15281,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetPromotionRank)
         end,
         GetPvpPowerDamage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPvpPowerDamage)
           end
           return checkCFunc(_G.GetPvpPowerDamage)
         end,
         GetPvpPowerHealing = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPvpPowerHealing)
           end
           return checkCFunc(_G.GetPvpPowerHealing)
         end,
         GetPvpTalentInfoByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPvpTalentInfoByID)
           end
           return checkCFunc(_G.GetPvpTalentInfoByID)
         end,
         GetPvpTalentInfoBySpecialization = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPvpTalentInfoBySpecialization)
           end
           return checkCFunc(_G.GetPvpTalentInfoBySpecialization)
         end,
         GetPvpTalentLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetPvpTalentLink)
           end
           return checkCFunc(_G.GetPvpTalentLink)
@@ -15293,19 +15314,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestBackgroundMaterial)
         end,
         GetQuestCurrencyID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestCurrencyID)
           end
           return checkCFunc(_G.GetQuestCurrencyID)
         end,
         GetQuestCurrencyInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestCurrencyInfo)
           end
           return checkCFunc(_G.GetQuestCurrencyInfo)
         end,
         GetQuestExpansion = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestExpansion)
           end
           return checkCFunc(_G.GetQuestExpansion)
@@ -15314,7 +15335,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestFactionGroup)
         end,
         GetQuestGreenRange = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestGreenRange)
           end
           return checkCFunc(_G.GetQuestGreenRange)
@@ -15323,13 +15344,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestID)
         end,
         GetQuestIndexForTimer = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestIndexForTimer)
           end
           return checkCFunc(_G.GetQuestIndexForTimer)
         end,
         GetQuestIndexForWatch = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestIndexForWatch)
           end
           return checkCFunc(_G.GetQuestIndexForWatch)
@@ -15338,7 +15359,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestItemInfo)
         end,
         GetQuestItemInfoLootType = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestItemInfoLootType)
           end
           return checkCFunc(_G.GetQuestItemInfoLootType)
@@ -15347,7 +15368,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestItemLink)
         end,
         GetQuestLink = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestLink)
           end
           return checkCFunc(_G.GetQuestLink)
@@ -15356,31 +15377,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestLogChoiceInfo)
         end,
         GetQuestLogChoiceInfoLootType = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestLogChoiceInfoLootType)
           end
           return checkCFunc(_G.GetQuestLogChoiceInfoLootType)
         end,
         GetQuestLogCompletionText = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestLogCompletionText)
           end
           return checkCFunc(_G.GetQuestLogCompletionText)
         end,
         GetQuestLogCriteriaSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestLogCriteriaSpell)
           end
           return checkCFunc(_G.GetQuestLogCriteriaSpell)
         end,
         GetQuestLogGroupNum = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestLogGroupNum)
           end
           return checkCFunc(_G.GetQuestLogGroupNum)
         end,
         GetQuestLogIndexByID = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestLogIndexByID)
           end
           return checkCFunc(_G.GetQuestLogIndexByID)
@@ -15395,13 +15416,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestLogLeaderBoard)
         end,
         GetQuestLogPortraitTurnIn = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestLogPortraitTurnIn)
           end
           return checkCFunc(_G.GetQuestLogPortraitTurnIn)
         end,
         GetQuestLogPushable = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestLogPushable)
           end
           return checkCFunc(_G.GetQuestLogPushable)
@@ -15413,25 +15434,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestLogQuestType)
         end,
         GetQuestLogRequiredMoney = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestLogRequiredMoney)
           end
           return checkCFunc(_G.GetQuestLogRequiredMoney)
         end,
         GetQuestLogRewardArtifactXP = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestLogRewardArtifactXP)
           end
           return checkCFunc(_G.GetQuestLogRewardArtifactXP)
         end,
         GetQuestLogRewardCurrencyInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestLogRewardCurrencyInfo)
           end
           return checkCFunc(_G.GetQuestLogRewardCurrencyInfo)
         end,
         GetQuestLogRewardFactionInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestLogRewardFactionInfo)
           end
           return checkCFunc(_G.GetQuestLogRewardFactionInfo)
@@ -15446,7 +15467,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestLogRewardMoney)
         end,
         GetQuestLogRewardSkillPoints = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestLogRewardSkillPoints)
           end
           return checkCFunc(_G.GetQuestLogRewardSkillPoints)
@@ -15458,25 +15479,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestLogRewardTitle)
         end,
         GetQuestLogRewardXP = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestLogRewardXP)
           end
           return checkCFunc(_G.GetQuestLogRewardXP)
         end,
         GetQuestLogSelection = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestLogSelection)
           end
           return checkCFunc(_G.GetQuestLogSelection)
         end,
         GetQuestLogSpecialItemCooldown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestLogSpecialItemCooldown)
           end
           return checkCFunc(_G.GetQuestLogSpecialItemCooldown)
         end,
         GetQuestLogSpecialItemInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestLogSpecialItemInfo)
           end
           return checkCFunc(_G.GetQuestLogSpecialItemInfo)
@@ -15488,7 +15509,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestLogTimeLeft)
         end,
         GetQuestLogTitle = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestLogTitle)
           end
           return checkCFunc(_G.GetQuestLogTitle)
@@ -15497,25 +15518,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestMoneyToGet)
         end,
         GetQuestObjectiveInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestObjectiveInfo)
           end
           return checkCFunc(_G.GetQuestObjectiveInfo)
         end,
         GetQuestPOIBlobCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestPOIBlobCount)
           end
           return checkCFunc(_G.GetQuestPOIBlobCount)
         end,
         GetQuestPOILeaderBoard = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestPOILeaderBoard)
           end
           return checkCFunc(_G.GetQuestPOILeaderBoard)
         end,
         GetQuestPOIs = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestPOIs)
           end
           return checkCFunc(_G.GetQuestPOIs)
@@ -15527,7 +15548,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestPortraitTurnIn)
         end,
         GetQuestProgressBarPercent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestProgressBarPercent)
           end
           return checkCFunc(_G.GetQuestProgressBarPercent)
@@ -15539,7 +15560,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestReward)
         end,
         GetQuestSortIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestSortIndex)
           end
           return checkCFunc(_G.GetQuestSortIndex)
@@ -15548,7 +15569,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestSpellLink)
         end,
         GetQuestTagInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestTagInfo)
           end
           return checkCFunc(_G.GetQuestTagInfo)
@@ -15557,37 +15578,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetQuestText)
         end,
         GetQuestTimers = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestTimers)
           end
           return checkCFunc(_G.GetQuestTimers)
         end,
         GetQuestUiMapID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetQuestUiMapID)
           end
           return checkCFunc(_G.GetQuestUiMapID)
         end,
         GetQuestWatchIndex = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestWatchIndex)
           end
           return checkCFunc(_G.GetQuestWatchIndex)
         end,
         GetQuestWatchInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestWatchInfo)
           end
           return checkCFunc(_G.GetQuestWatchInfo)
         end,
         GetQuestsCompleted = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetQuestsCompleted)
           end
           return checkCFunc(_G.GetQuestsCompleted)
         end,
         GetRFDungeonInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRFDungeonInfo)
           end
           return checkCFunc(_G.GetRFDungeonInfo)
@@ -15614,19 +15635,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetRaidTargetIndex)
         end,
         GetRandomDungeonBestChoice = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRandomDungeonBestChoice)
           end
           return checkCFunc(_G.GetRandomDungeonBestChoice)
         end,
         GetRandomScenarioBestChoice = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRandomScenarioBestChoice)
           end
           return checkCFunc(_G.GetRandomScenarioBestChoice)
         end,
         GetRandomScenarioInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRandomScenarioInfo)
           end
           return checkCFunc(_G.GetRandomScenarioInfo)
@@ -15638,7 +15659,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetRangedHaste)
         end,
         GetRatedBattleGroundInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRatedBattleGroundInfo)
           end
           return checkCFunc(_G.GetRatedBattleGroundInfo)
@@ -15650,7 +15671,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetReadyCheckTimeLeft)
         end,
         GetReagentBankCost = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetReagentBankCost)
           end
           return checkCFunc(_G.GetReagentBankCost)
@@ -15680,7 +15701,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetRestrictedAccountData)
         end,
         GetRewardArtifactXP = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRewardArtifactXP)
           end
           return checkCFunc(_G.GetRewardArtifactXP)
@@ -15692,55 +15713,55 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetRewardMoney)
         end,
         GetRewardNumSkillUps = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRewardNumSkillUps)
           end
           return checkCFunc(_G.GetRewardNumSkillUps)
         end,
         GetRewardPackArtifactPower = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRewardPackArtifactPower)
           end
           return checkCFunc(_G.GetRewardPackArtifactPower)
         end,
         GetRewardPackCurrencies = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRewardPackCurrencies)
           end
           return checkCFunc(_G.GetRewardPackCurrencies)
         end,
         GetRewardPackItems = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRewardPackItems)
           end
           return checkCFunc(_G.GetRewardPackItems)
         end,
         GetRewardPackMoney = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRewardPackMoney)
           end
           return checkCFunc(_G.GetRewardPackMoney)
         end,
         GetRewardPackTitle = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRewardPackTitle)
           end
           return checkCFunc(_G.GetRewardPackTitle)
         end,
         GetRewardPackTitleName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRewardPackTitleName)
           end
           return checkCFunc(_G.GetRewardPackTitleName)
         end,
         GetRewardSkillLineID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRewardSkillLineID)
           end
           return checkCFunc(_G.GetRewardSkillLineID)
         end,
         GetRewardSkillPoints = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRewardSkillPoints)
           end
           return checkCFunc(_G.GetRewardSkillPoints)
@@ -15758,13 +15779,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetRewardXP)
         end,
         GetRuneCooldown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRuneCooldown)
           end
           return checkCFunc(_G.GetRuneCooldown)
         end,
         GetRuneCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetRuneCount)
           end
           return checkCFunc(_G.GetRuneCount)
@@ -15785,13 +15806,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSavedInstanceInfo)
         end,
         GetSavedWorldBossInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSavedWorldBossInfo)
           end
           return checkCFunc(_G.GetSavedWorldBossInfo)
         end,
         GetScenariosChoiceOrder = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetScenariosChoiceOrder)
           end
           return checkCFunc(_G.GetScenariosChoiceOrder)
@@ -15818,19 +15839,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSecondsUntilParentalControlsKick)
         end,
         GetSelectedArtifactInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSelectedArtifactInfo)
           end
           return checkCFunc(_G.GetSelectedArtifactInfo)
         end,
         GetSelectedAuctionItem = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetSelectedAuctionItem)
           end
           return checkCFunc(_G.GetSelectedAuctionItem)
         end,
         GetSelectedBattlefield = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetSelectedBattlefield)
           end
           return checkCFunc(_G.GetSelectedBattlefield)
@@ -15842,19 +15863,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSelectedFaction)
         end,
         GetSelectedSkill = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetSelectedSkill)
           end
           return checkCFunc(_G.GetSelectedSkill)
         end,
         GetSelectedStablePet = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetSelectedStablePet)
           end
           return checkCFunc(_G.GetSelectedStablePet)
         end,
         GetSelectedWarGameType = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSelectedWarGameType)
           end
           return checkCFunc(_G.GetSelectedWarGameType)
@@ -15884,7 +15905,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSessionTime)
         end,
         GetSetBonusesForSpecializationByItemID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSetBonusesForSpecializationByItemID)
           end
           return checkCFunc(_G.GetSetBonusesForSpecializationByItemID)
@@ -15908,7 +15929,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetShieldBlock)
         end,
         GetSkillLineInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetSkillLineInfo)
           end
           return checkCFunc(_G.GetSkillLineInfo)
@@ -15926,85 +15947,85 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSocketTypes)
         end,
         GetSortBagsRightToLeft = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSortBagsRightToLeft)
           end
           return checkCFunc(_G.GetSortBagsRightToLeft)
         end,
         GetSpecChangeCost = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpecChangeCost)
           end
           return checkCFunc(_G.GetSpecChangeCost)
         end,
         GetSpecialization = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpecialization)
           end
           return checkCFunc(_G.GetSpecialization)
         end,
         GetSpecializationInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpecializationInfo)
           end
           return checkCFunc(_G.GetSpecializationInfo)
         end,
         GetSpecializationInfoByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpecializationInfoByID)
           end
           return checkCFunc(_G.GetSpecializationInfoByID)
         end,
         GetSpecializationInfoForClassID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpecializationInfoForClassID)
           end
           return checkCFunc(_G.GetSpecializationInfoForClassID)
         end,
         GetSpecializationInfoForSpecID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpecializationInfoForSpecID)
           end
           return checkCFunc(_G.GetSpecializationInfoForSpecID)
         end,
         GetSpecializationMasterySpells = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpecializationMasterySpells)
           end
           return checkCFunc(_G.GetSpecializationMasterySpells)
         end,
         GetSpecializationNameForSpecID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpecializationNameForSpecID)
           end
           return checkCFunc(_G.GetSpecializationNameForSpecID)
         end,
         GetSpecializationRole = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpecializationRole)
           end
           return checkCFunc(_G.GetSpecializationRole)
         end,
         GetSpecializationRoleByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpecializationRoleByID)
           end
           return checkCFunc(_G.GetSpecializationRoleByID)
         end,
         GetSpecializationSpells = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpecializationSpells)
           end
           return checkCFunc(_G.GetSpecializationSpells)
         end,
         GetSpecsForSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpecsForSpell)
           end
           return checkCFunc(_G.GetSpecsForSpell)
         end,
         GetSpeed = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpeed)
           end
           return checkCFunc(_G.GetSpeed)
@@ -16013,7 +16034,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSpellAutocast)
         end,
         GetSpellAvailableLevel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpellAvailableLevel)
           end
           return checkCFunc(_G.GetSpellAvailableLevel)
@@ -16052,7 +16073,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSpellCritChance)
         end,
         GetSpellCritChanceFromIntellect = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetSpellCritChanceFromIntellect)
           end
           return checkCFunc(_G.GetSpellCritChanceFromIntellect)
@@ -16067,7 +16088,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSpellInfo)
         end,
         GetSpellLevelLearned = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpellLevelLearned)
           end
           return checkCFunc(_G.GetSpellLevelLearned)
@@ -16103,7 +16124,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSpellTradeSkillLink)
         end,
         GetSpellsForCharacterUpgradeTier = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSpellsForCharacterUpgradeTier)
           end
           return checkCFunc(_G.GetSpellsForCharacterUpgradeTier)
@@ -16115,19 +16136,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetStablePetInfo)
         end,
         GetStatistic = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetStatistic)
           end
           return checkCFunc(_G.GetStatistic)
         end,
         GetStatisticsCategoryList = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetStatisticsCategoryList)
           end
           return checkCFunc(_G.GetStatisticsCategoryList)
         end,
         GetSturdiness = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSturdiness)
           end
           return checkCFunc(_G.GetSturdiness)
@@ -16136,13 +16157,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSubZoneText)
         end,
         GetSuggestedGroupNum = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetSuggestedGroupNum)
           end
           return checkCFunc(_G.GetSuggestedGroupNum)
         end,
         GetSuggestedGroupSize = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetSuggestedGroupSize)
           end
           return checkCFunc(_G.GetSuggestedGroupSize)
@@ -16151,7 +16172,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetSummonFriendCooldown)
         end,
         GetSuperTrackedQuestID = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetSuperTrackedQuestID)
           end
           return checkCFunc(_G.GetSuperTrackedQuestID)
@@ -16166,13 +16187,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTalentInfo)
         end,
         GetTalentInfoByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetTalentInfoByID)
           end
           return checkCFunc(_G.GetTalentInfoByID)
         end,
         GetTalentInfoBySpecialization = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetTalentInfoBySpecialization)
           end
           return checkCFunc(_G.GetTalentInfoBySpecialization)
@@ -16181,25 +16202,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTalentLink)
         end,
         GetTalentPrereqs = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTalentPrereqs)
           end
           return checkCFunc(_G.GetTalentPrereqs)
         end,
         GetTalentTabInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTalentTabInfo)
           end
           return checkCFunc(_G.GetTalentTabInfo)
         end,
         GetTalentTierInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetTalentTierInfo)
           end
           return checkCFunc(_G.GetTalentTierInfo)
         end,
         GetTargetTradeCurrency = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetTargetTradeCurrency)
           end
           return checkCFunc(_G.GetTargetTradeCurrency)
@@ -16208,19 +16229,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTargetTradeMoney)
         end,
         GetTaskInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetTaskInfo)
           end
           return checkCFunc(_G.GetTaskInfo)
         end,
         GetTaskPOIs = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetTaskPOIs)
           end
           return checkCFunc(_G.GetTaskPOIs)
         end,
         GetTasksTable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetTasksTable)
           end
           return checkCFunc(_G.GetTasksTable)
@@ -16238,7 +16259,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetText)
         end,
         GetThreatStatusColor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetThreatStatusColor)
           end
           return checkCFunc(_G.GetThreatStatusColor)
@@ -16265,7 +16286,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetToolTipInfo)
         end,
         GetTotalAchievementPoints = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetTotalAchievementPoints)
           end
           return checkCFunc(_G.GetTotalAchievementPoints)
@@ -16280,7 +16301,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTotemTimeLeft)
         end,
         GetTrackedAchievements = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetTrackedAchievements)
           end
           return checkCFunc(_G.GetTrackedAchievements)
@@ -16289,7 +16310,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTrackingInfo)
         end,
         GetTrackingTexture = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTrackingTexture)
           end
           return checkCFunc(_G.GetTrackingTexture)
@@ -16301,115 +16322,115 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTradePlayerItemLink)
         end,
         GetTradeSkillCooldown = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillCooldown)
           end
           return checkCFunc(_G.GetTradeSkillCooldown)
         end,
         GetTradeSkillIcon = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillIcon)
           end
           return checkCFunc(_G.GetTradeSkillIcon)
         end,
         GetTradeSkillInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillInfo)
           end
           return checkCFunc(_G.GetTradeSkillInfo)
         end,
         GetTradeSkillInvSlotFilter = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillInvSlotFilter)
           end
           return checkCFunc(_G.GetTradeSkillInvSlotFilter)
         end,
         GetTradeSkillInvSlots = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillInvSlots)
           end
           return checkCFunc(_G.GetTradeSkillInvSlots)
         end,
         GetTradeSkillItemLevelFilter = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillItemLevelFilter)
           end
           return checkCFunc(_G.GetTradeSkillItemLevelFilter)
         end,
         GetTradeSkillItemLink = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillItemLink)
           end
           return checkCFunc(_G.GetTradeSkillItemLink)
         end,
         GetTradeSkillItemNameFilter = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillItemNameFilter)
           end
           return checkCFunc(_G.GetTradeSkillItemNameFilter)
         end,
         GetTradeSkillItemStats = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillItemStats)
           end
           return checkCFunc(_G.GetTradeSkillItemStats)
         end,
         GetTradeSkillLine = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillLine)
           end
           return checkCFunc(_G.GetTradeSkillLine)
         end,
         GetTradeSkillNumMade = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillNumMade)
           end
           return checkCFunc(_G.GetTradeSkillNumMade)
         end,
         GetTradeSkillNumReagents = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillNumReagents)
           end
           return checkCFunc(_G.GetTradeSkillNumReagents)
         end,
         GetTradeSkillReagentInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillReagentInfo)
           end
           return checkCFunc(_G.GetTradeSkillReagentInfo)
         end,
         GetTradeSkillReagentItemLink = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillReagentItemLink)
           end
           return checkCFunc(_G.GetTradeSkillReagentItemLink)
         end,
         GetTradeSkillRecipeLink = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillRecipeLink)
           end
           return checkCFunc(_G.GetTradeSkillRecipeLink)
         end,
         GetTradeSkillSelectionIndex = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillSelectionIndex)
           end
           return checkCFunc(_G.GetTradeSkillSelectionIndex)
         end,
         GetTradeSkillSubClassFilter = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillSubClassFilter)
           end
           return checkCFunc(_G.GetTradeSkillSubClassFilter)
         end,
         GetTradeSkillSubClasses = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillSubClasses)
           end
           return checkCFunc(_G.GetTradeSkillSubClasses)
         end,
         GetTradeSkillTools = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeSkillTools)
           end
           return checkCFunc(_G.GetTradeSkillTools)
@@ -16421,7 +16442,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTradeTargetItemLink)
         end,
         GetTradeskillRepeatCount = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetTradeskillRepeatCount)
           end
           return checkCFunc(_G.GetTradeskillRepeatCount)
@@ -16472,7 +16493,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetTrainerTradeskillRankValues)
         end,
         GetTreasurePickerItemInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetTreasurePickerItemInfo)
           end
           return checkCFunc(_G.GetTreasurePickerItemInfo)
@@ -16484,13 +16505,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetUICameraInfo)
         end,
         GetUITextureKitInfo = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetUITextureKitInfo)
           end
           return checkCFunc(_G.GetUITextureKitInfo)
         end,
         GetUnitChargedPowerPoints = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetUnitChargedPowerPoints)
           end
           return checkCFunc(_G.GetUnitChargedPowerPoints)
@@ -16499,13 +16520,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetUnitHealthModifier)
         end,
         GetUnitHealthRegenRateFromSpirit = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetUnitHealthRegenRateFromSpirit)
           end
           return checkCFunc(_G.GetUnitHealthRegenRateFromSpirit)
         end,
         GetUnitManaRegenRateFromSpirit = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GetUnitManaRegenRateFromSpirit)
           end
           return checkCFunc(_G.GetUnitManaRegenRateFromSpirit)
@@ -16514,37 +16535,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetUnitMaxHealthModifier)
         end,
         GetUnitPowerBarInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetUnitPowerBarInfo)
           end
           return checkCFunc(_G.GetUnitPowerBarInfo)
         end,
         GetUnitPowerBarInfoByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetUnitPowerBarInfoByID)
           end
           return checkCFunc(_G.GetUnitPowerBarInfoByID)
         end,
         GetUnitPowerBarStrings = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetUnitPowerBarStrings)
           end
           return checkCFunc(_G.GetUnitPowerBarStrings)
         end,
         GetUnitPowerBarStringsByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetUnitPowerBarStringsByID)
           end
           return checkCFunc(_G.GetUnitPowerBarStringsByID)
         end,
         GetUnitPowerBarTextureInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetUnitPowerBarTextureInfo)
           end
           return checkCFunc(_G.GetUnitPowerBarTextureInfo)
         end,
         GetUnitPowerBarTextureInfoByID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetUnitPowerBarTextureInfoByID)
           end
           return checkCFunc(_G.GetUnitPowerBarTextureInfoByID)
@@ -16556,25 +16577,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetUnitSpeed)
         end,
         GetVehicleBarIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetVehicleBarIndex)
           end
           return checkCFunc(_G.GetVehicleBarIndex)
         end,
         GetVehicleUIIndicator = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetVehicleUIIndicator)
           end
           return checkCFunc(_G.GetVehicleUIIndicator)
         end,
         GetVehicleUIIndicatorSeat = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetVehicleUIIndicatorSeat)
           end
           return checkCFunc(_G.GetVehicleUIIndicatorSeat)
         end,
         GetVersatilityBonus = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetVersatilityBonus)
           end
           return checkCFunc(_G.GetVersatilityBonus)
@@ -16586,43 +16607,43 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetVideoOptions)
         end,
         GetVoidItemHyperlinkString = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetVoidItemHyperlinkString)
           end
           return checkCFunc(_G.GetVoidItemHyperlinkString)
         end,
         GetVoidItemInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetVoidItemInfo)
           end
           return checkCFunc(_G.GetVoidItemInfo)
         end,
         GetVoidStorageSlotPageIndex = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetVoidStorageSlotPageIndex)
           end
           return checkCFunc(_G.GetVoidStorageSlotPageIndex)
         end,
         GetVoidTransferCost = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetVoidTransferCost)
           end
           return checkCFunc(_G.GetVoidTransferCost)
         end,
         GetVoidTransferDepositInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetVoidTransferDepositInfo)
           end
           return checkCFunc(_G.GetVoidTransferDepositInfo)
         end,
         GetVoidTransferWithdrawalInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetVoidTransferWithdrawalInfo)
           end
           return checkCFunc(_G.GetVoidTransferWithdrawalInfo)
         end,
         GetVoidUnlockCost = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetVoidUnlockCost)
           end
           return checkCFunc(_G.GetVoidUnlockCost)
@@ -16631,7 +16652,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetWarGameQueueStatus)
         end,
         GetWarGameTypeInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetWarGameTypeInfo)
           end
           return checkCFunc(_G.GetWarGameTypeInfo)
@@ -16646,31 +16667,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.GetWebTicket)
         end,
         GetWorldElapsedTime = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetWorldElapsedTime)
           end
           return checkCFunc(_G.GetWorldElapsedTime)
         end,
         GetWorldElapsedTimers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetWorldElapsedTimers)
           end
           return checkCFunc(_G.GetWorldElapsedTimers)
         end,
         GetWorldMapActionButtonSpellInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetWorldMapActionButtonSpellInfo)
           end
           return checkCFunc(_G.GetWorldMapActionButtonSpellInfo)
         end,
         GetWorldPVPAreaInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetWorldPVPAreaInfo)
           end
           return checkCFunc(_G.GetWorldPVPAreaInfo)
         end,
         GetWorldPVPQueueStatus = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GetWorldPVPQueueStatus)
           end
           return checkCFunc(_G.GetWorldPVPQueueStatus)
@@ -16703,7 +16724,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GuildControlGetNumRanks)
         end,
         GuildControlGetRankFlags = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GuildControlGetRankFlags)
           end
           return checkCFunc(_G.GuildControlGetRankFlags)
@@ -16745,13 +16766,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.GuildMasterAbsent)
         end,
         GuildNewsSetSticky = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GuildNewsSetSticky)
           end
           return checkCFunc(_G.GuildNewsSetSticky)
         end,
         GuildNewsSort = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.GuildNewsSort)
           end
           return checkCFunc(_G.GuildNewsSort)
@@ -16760,7 +16781,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.GuildPromote)
         end,
         GuildRosterSendSoR = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.GuildRosterSendSoR)
           end
           return checkCFunc(_G.GuildRosterSendSoR)
@@ -16784,7 +16805,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.HandleAtlasMemberCommand)
         end,
         HasAPEffectsSpellPower = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.HasAPEffectsSpellPower)
           end
           return checkCFunc(_G.HasAPEffectsSpellPower)
@@ -16793,13 +16814,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.HasAction)
         end,
         HasArtifactEquipped = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.HasArtifactEquipped)
           end
           return checkCFunc(_G.HasArtifactEquipped)
         end,
         HasAttachedGlyph = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.HasAttachedGlyph)
           end
           return checkCFunc(_G.HasAttachedGlyph)
@@ -16811,7 +16832,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.HasBoundGemProposed)
         end,
         HasCompletedAnyAchievement = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.HasCompletedAnyAchievement)
           end
           return checkCFunc(_G.HasCompletedAnyAchievement)
@@ -16820,13 +16841,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.HasDualWieldPenalty)
         end,
         HasExtraActionBar = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.HasExtraActionBar)
           end
           return checkCFunc(_G.HasExtraActionBar)
         end,
         HasFilledPetition = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.HasFilledPetition)
           end
           return checkCFunc(_G.HasFilledPetition)
@@ -16841,19 +16862,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.HasInboxItem)
         end,
         HasInspectHonorData = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.HasInspectHonorData)
           end
           return checkCFunc(_G.HasInspectHonorData)
         end,
         HasKey = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.HasKey)
           end
           return checkCFunc(_G.HasKey)
         end,
         HasLFGRestrictions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.HasLFGRestrictions)
           end
           return checkCFunc(_G.HasLFGRestrictions)
@@ -16868,13 +16889,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.HasNoReleaseAura)
         end,
         HasOverrideActionBar = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.HasOverrideActionBar)
           end
           return checkCFunc(_G.HasOverrideActionBar)
         end,
         HasPendingGlyphCast = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.HasPendingGlyphCast)
           end
           return checkCFunc(_G.HasPendingGlyphCast)
@@ -16886,7 +16907,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.HasPetUI)
         end,
         HasSPEffectsAttackPower = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.HasSPEffectsAttackPower)
           end
           return checkCFunc(_G.HasSPEffectsAttackPower)
@@ -16898,7 +16919,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.HasTempShapeshiftActionBar)
         end,
         HasVehicleActionBar = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.HasVehicleActionBar)
           end
           return checkCFunc(_G.HasVehicleActionBar)
@@ -16919,13 +16940,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.HideRepairCursor)
         end,
         HonorSystemEnabled = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.HonorSystemEnabled)
           end
           return checkCFunc(_G.HonorSystemEnabled)
         end,
         InActiveBattlefield = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.InActiveBattlefield)
           end
           return checkCFunc(_G.InActiveBattlefield)
@@ -16937,7 +16958,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.InCombatLockdown)
         end,
         InGuildParty = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.InGuildParty)
           end
           return checkCFunc(_G.InGuildParty)
@@ -16949,7 +16970,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.InboxItemCanDelete)
         end,
         InitiateRolePoll = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.InitiateRolePoll)
           end
           return checkCFunc(_G.InitiateRolePoll)
@@ -16961,7 +16982,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.InteractUnit)
         end,
         InviteUnit = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.InviteUnit)
           end
           return checkCFunc(_G.InviteUnit)
@@ -16973,7 +16994,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsAccountSecured)
         end,
         IsAchievementEligible = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsAchievementEligible)
           end
           return checkCFunc(_G.IsAchievementEligible)
@@ -16985,7 +17006,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsActiveBattlefieldArena)
         end,
         IsActiveQuestLegendary = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsActiveQuestLegendary)
           end
           return checkCFunc(_G.IsActiveQuestLegendary)
@@ -17003,7 +17024,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsAddonVersionCheckEnabled)
         end,
         IsAllowedToUserTeleport = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsAllowedToUserTeleport)
           end
           return checkCFunc(_G.IsAllowedToUserTeleport)
@@ -17012,7 +17033,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsAltKeyDown)
         end,
         IsArenaSeasonActive = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.IsArenaSeasonActive)
           end
           return checkCFunc(_G.IsArenaSeasonActive)
@@ -17024,25 +17045,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsArenaTeamCaptain)
         end,
         IsArtifactCompletionHistoryAvailable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsArtifactCompletionHistoryAvailable)
           end
           return checkCFunc(_G.IsArtifactCompletionHistoryAvailable)
         end,
         IsArtifactPowerItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsArtifactPowerItem)
           end
           return checkCFunc(_G.IsArtifactPowerItem)
         end,
         IsArtifactRelicItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsArtifactRelicItem)
           end
           return checkCFunc(_G.IsArtifactRelicItem)
         end,
         IsAtStableMaster = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsAtStableMaster)
           end
           return checkCFunc(_G.IsAtStableMaster)
@@ -17054,7 +17075,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsAttackSpell)
         end,
         IsAuctionSortReversed = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.IsAuctionSortReversed)
           end
           return checkCFunc(_G.IsAuctionSortReversed)
@@ -17081,7 +17102,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsBattlePayItem)
         end,
         IsBattlefieldArena = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.IsBattlefieldArena)
           end
           return checkCFunc(_G.IsBattlefieldArena)
@@ -17090,13 +17111,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsBindingForGamePad)
         end,
         IsBreadcrumbQuest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsBreadcrumbQuest)
           end
           return checkCFunc(_G.IsBreadcrumbQuest)
         end,
         IsCastingGlyph = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsCastingGlyph)
           end
           return checkCFunc(_G.IsCastingGlyph)
@@ -17105,7 +17126,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsCemeterySelectionAvailable)
         end,
         IsCharacterNewlyBoosted = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsCharacterNewlyBoosted)
           end
           return checkCFunc(_G.IsCharacterNewlyBoosted)
@@ -17135,7 +17156,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsContainerFiltered)
         end,
         IsContainerItemAnUpgrade = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsContainerItemAnUpgrade)
           end
           return checkCFunc(_G.IsContainerItemAnUpgrade)
@@ -17144,13 +17165,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsControlKeyDown)
         end,
         IsCorruptedItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsCorruptedItem)
           end
           return checkCFunc(_G.IsCorruptedItem)
         end,
         IsCosmeticItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsCosmeticItem)
           end
           return checkCFunc(_G.IsCosmeticItem)
@@ -17171,7 +17192,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsDebugBuild)
         end,
         IsDemonHunterAvailable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsDemonHunterAvailable)
           end
           return checkCFunc(_G.IsDemonHunterAvailable)
@@ -17186,7 +17207,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsDisplayChannelOwner)
         end,
         IsDressableItem = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.IsDressableItem)
           end
           return checkCFunc(_G.IsDressableItem)
@@ -17273,7 +17294,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsHelpfulSpell)
         end,
         IsInActiveWorldPVP = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsInActiveWorldPVP)
           end
           return checkCFunc(_G.IsInActiveWorldPVP)
@@ -17300,13 +17321,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsInInstance)
         end,
         IsInJailersTower = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsInJailersTower)
           end
           return checkCFunc(_G.IsInJailersTower)
         end,
         IsInLFGDungeon = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsInLFGDungeon)
           end
           return checkCFunc(_G.IsInLFGDungeon)
@@ -17315,7 +17336,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsInRaid)
         end,
         IsInScenarioGroup = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsInScenarioGroup)
           end
           return checkCFunc(_G.IsInScenarioGroup)
@@ -17324,13 +17345,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsIndoors)
         end,
         IsInsane = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsInsane)
           end
           return checkCFunc(_G.IsInsane)
         end,
         IsInventoryItemAnUpgrade = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsInventoryItemAnUpgrade)
           end
           return checkCFunc(_G.IsInventoryItemAnUpgrade)
@@ -17348,7 +17369,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsItemInRange)
         end,
         IsJailersTowerLayerTimeLocked = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsJailersTowerLayerTimeLocked)
           end
           return checkCFunc(_G.IsJailersTowerLayerTimeLocked)
@@ -17357,13 +17378,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsKeyDown)
         end,
         IsLFGComplete = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsLFGComplete)
           end
           return checkCFunc(_G.IsLFGComplete)
         end,
         IsLFGDungeonJoinable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsLFGDungeonJoinable)
           end
           return checkCFunc(_G.IsLFGDungeonJoinable)
@@ -17423,7 +17444,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsOnGlueScreen)
         end,
         IsOnGroundFloorInJailersTower = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsOnGroundFloorInJailersTower)
           end
           return checkCFunc(_G.IsOnGroundFloorInJailersTower)
@@ -17444,13 +17465,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsPVPTimerRunning)
         end,
         IsPartyLFG = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsPartyLFG)
           end
           return checkCFunc(_G.IsPartyLFG)
         end,
         IsPartyWorldPVP = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsPartyWorldPVP)
           end
           return checkCFunc(_G.IsPartyWorldPVP)
@@ -17459,7 +17480,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsPassiveSpell)
         end,
         IsPendingGlyphRemoval = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsPendingGlyphRemoval)
           end
           return checkCFunc(_G.IsPendingGlyphRemoval)
@@ -17474,7 +17495,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsPetAttackActive)
         end,
         IsPlayerAttacking = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.IsPlayerAttacking)
           end
           return checkCFunc(_G.IsPlayerAttacking)
@@ -17486,7 +17507,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsPlayerMoving)
         end,
         IsPlayerNeutral = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsPlayerNeutral)
           end
           return checkCFunc(_G.IsPlayerNeutral)
@@ -17495,7 +17516,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsPlayerSpell)
         end,
         IsPossessBarVisible = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsPossessBarVisible)
           end
           return checkCFunc(_G.IsPossessBarVisible)
@@ -17504,7 +17525,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsPublicBuild)
         end,
         IsPvpTalentSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsPvpTalentSpell)
           end
           return checkCFunc(_G.IsPvpTalentSpell)
@@ -17513,19 +17534,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsQuestCompletable)
         end,
         IsQuestComplete = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.IsQuestComplete)
           end
           return checkCFunc(_G.IsQuestComplete)
         end,
         IsQuestHardWatched = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.IsQuestHardWatched)
           end
           return checkCFunc(_G.IsQuestHardWatched)
         end,
         IsQuestIDValidSpellTarget = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsQuestIDValidSpellTarget)
           end
           return checkCFunc(_G.IsQuestIDValidSpellTarget)
@@ -17534,25 +17555,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsQuestItemHidden)
         end,
         IsQuestLogSpecialItemInRange = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsQuestLogSpecialItemInRange)
           end
           return checkCFunc(_G.IsQuestLogSpecialItemInRange)
         end,
         IsQuestSequenced = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsQuestSequenced)
           end
           return checkCFunc(_G.IsQuestSequenced)
         end,
         IsQuestWatched = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.IsQuestWatched)
           end
           return checkCFunc(_G.IsQuestWatched)
         end,
         IsRaidMarkerActive = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsRaidMarkerActive)
           end
           return checkCFunc(_G.IsRaidMarkerActive)
@@ -17561,7 +17582,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsRangedWeapon)
         end,
         IsReagentBankUnlocked = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsReagentBankUnlocked)
           end
           return checkCFunc(_G.IsReagentBankUnlocked)
@@ -17570,13 +17591,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsRecognizedName)
         end,
         IsRecruitAFriendLinked = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsRecruitAFriendLinked)
           end
           return checkCFunc(_G.IsRecruitAFriendLinked)
         end,
         IsReferAFriendLinked = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.IsReferAFriendLinked)
           end
           return checkCFunc(_G.IsReferAFriendLinked)
@@ -17606,7 +17627,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsSelectedSpellBookItem)
         end,
         IsServerControlledBackfill = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsServerControlledBackfill)
           end
           return checkCFunc(_G.IsServerControlledBackfill)
@@ -17615,7 +17636,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsShiftKeyDown)
         end,
         IsSpellClassOrSpec = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsSpellClassOrSpec)
           end
           return checkCFunc(_G.IsSpellClassOrSpec)
@@ -17630,19 +17651,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsSpellKnownOrOverridesKnown)
         end,
         IsSpellOverlayed = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsSpellOverlayed)
           end
           return checkCFunc(_G.IsSpellOverlayed)
         end,
         IsSpellValidForPendingGlyph = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsSpellValidForPendingGlyph)
           end
           return checkCFunc(_G.IsSpellValidForPendingGlyph)
         end,
         IsSplashFramePrimaryFeatureUnlocked = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsSplashFramePrimaryFeatureUnlocked)
           end
           return checkCFunc(_G.IsSplashFramePrimaryFeatureUnlocked)
@@ -17654,7 +17675,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsStealthed)
         end,
         IsStoryQuest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsStoryQuest)
           end
           return checkCFunc(_G.IsStoryQuest)
@@ -17669,7 +17690,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsSwimming)
         end,
         IsTalentSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsTalentSpell)
           end
           return checkCFunc(_G.IsTalentSpell)
@@ -17678,7 +17699,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsTestBuild)
         end,
         IsThreatWarningEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsThreatWarningEnabled)
           end
           return checkCFunc(_G.IsThreatWarningEnabled)
@@ -17687,19 +17708,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsTitleKnown)
         end,
         IsTrackedAchievement = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsTrackedAchievement)
           end
           return checkCFunc(_G.IsTrackedAchievement)
         end,
         IsTrackingBattlePets = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsTrackingBattlePets)
           end
           return checkCFunc(_G.IsTrackingBattlePets)
         end,
         IsTrackingHiddenQuests = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsTrackingHiddenQuests)
           end
           return checkCFunc(_G.IsTrackingHiddenQuests)
@@ -17708,7 +17729,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsTradeskillTrainer)
         end,
         IsTrainerServiceLearnSpell = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.IsTrainerServiceLearnSpell)
           end
           return checkCFunc(_G.IsTrainerServiceLearnSpell)
@@ -17720,19 +17741,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsTutorialFlagged)
         end,
         IsUnitModelReadyForUI = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsUnitModelReadyForUI)
           end
           return checkCFunc(_G.IsUnitModelReadyForUI)
         end,
         IsUnitOnQuest = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.IsUnitOnQuest)
           end
           return checkCFunc(_G.IsUnitOnQuest)
         end,
         IsUnitOnQuestByQuestID = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.IsUnitOnQuestByQuestID)
           end
           return checkCFunc(_G.IsUnitOnQuestByQuestID)
@@ -17750,19 +17771,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsUsingFixedTimeStep)
         end,
         IsUsingVehicleControls = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsUsingVehicleControls)
           end
           return checkCFunc(_G.IsUsingVehicleControls)
         end,
         IsVehicleAimAngleAdjustable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsVehicleAimAngleAdjustable)
           end
           return checkCFunc(_G.IsVehicleAimAngleAdjustable)
         end,
         IsVehicleAimPowerAdjustable = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsVehicleAimPowerAdjustable)
           end
           return checkCFunc(_G.IsVehicleAimPowerAdjustable)
@@ -17771,7 +17792,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsVeteranTrialAccount)
         end,
         IsVoidStorageReady = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsVoidStorageReady)
           end
           return checkCFunc(_G.IsVoidStorageReady)
@@ -17783,19 +17804,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.IsWindowsClient)
         end,
         IsXPUserDisabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.IsXPUserDisabled)
           end
           return checkCFunc(_G.IsXPUserDisabled)
         end,
         ItemAddedToArtifact = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ItemAddedToArtifact)
           end
           return checkCFunc(_G.ItemAddedToArtifact)
         end,
         ItemCanTargetGarrisonFollowerAbility = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ItemCanTargetGarrisonFollowerAbility)
           end
           return checkCFunc(_G.ItemCanTargetGarrisonFollowerAbility)
@@ -17840,7 +17861,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.JoinChannelByName)
         end,
         JoinLFG = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.JoinLFG)
           end
           return checkCFunc(_G.JoinLFG)
@@ -17849,13 +17870,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.JoinPermanentChannel)
         end,
         JoinRatedBattlefield = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.JoinRatedBattlefield)
           end
           return checkCFunc(_G.JoinRatedBattlefield)
         end,
         JoinSingleLFG = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.JoinSingleLFG)
           end
           return checkCFunc(_G.JoinSingleLFG)
@@ -17936,25 +17957,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.KBSystem_GetServerStatus)
         end,
         KeyRingButtonIDToInvSlotID = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.KeyRingButtonIDToInvSlotID)
           end
           return checkCFunc(_G.KeyRingButtonIDToInvSlotID)
         end,
         LFGTeleport = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.LFGTeleport)
           end
           return checkCFunc(_G.LFGTeleport)
         end,
         LearnPvpTalent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.LearnPvpTalent)
           end
           return checkCFunc(_G.LearnPvpTalent)
         end,
         LearnPvpTalents = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.LearnPvpTalents)
           end
           return checkCFunc(_G.LearnPvpTalents)
@@ -17963,7 +17984,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.LearnTalent)
         end,
         LearnTalents = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.LearnTalents)
           end
           return checkCFunc(_G.LearnTalents)
@@ -17978,19 +17999,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.LeaveChannelByName)
         end,
         LeaveLFG = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.LeaveLFG)
           end
           return checkCFunc(_G.LeaveLFG)
         end,
         LeaveParty = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.LeaveParty)
           end
           return checkCFunc(_G.LeaveParty)
         end,
         LeaveSingleLFG = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.LeaveSingleLFG)
           end
           return checkCFunc(_G.LeaveSingleLFG)
@@ -18035,25 +18056,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.MacOptions_GetGameBundleName)
         end,
         MacOptions_HasNewStyleInputMonitoring = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.MacOptions_HasNewStyleInputMonitoring)
           end
           return checkCFunc(_G.MacOptions_HasNewStyleInputMonitoring)
         end,
         MacOptions_HasNewStyleUniversalAccess = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.MacOptions_HasNewStyleUniversalAccess)
           end
           return checkCFunc(_G.MacOptions_HasNewStyleUniversalAccess)
         end,
         MacOptions_IsInputMonitoringEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.MacOptions_IsInputMonitoringEnabled)
           end
           return checkCFunc(_G.MacOptions_IsInputMonitoringEnabled)
         end,
         MacOptions_IsMicrophoneEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.MacOptions_IsMicrophoneEnabled)
           end
           return checkCFunc(_G.MacOptions_IsMicrophoneEnabled)
@@ -18062,13 +18083,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.MacOptions_IsUniversalAccessEnabled)
         end,
         MacOptions_OpenInputMonitoring = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.MacOptions_OpenInputMonitoring)
           end
           return checkCFunc(_G.MacOptions_OpenInputMonitoring)
         end,
         MacOptions_OpenMicrophoneRequestDialogue = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.MacOptions_OpenMicrophoneRequestDialogue)
           end
           return checkCFunc(_G.MacOptions_OpenMicrophoneRequestDialogue)
@@ -18149,7 +18170,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.MuteSoundFile)
         end,
         NeutralPlayerSelectFaction = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.NeutralPlayerSelectFaction)
           end
           return checkCFunc(_G.NeutralPlayerSelectFaction)
@@ -18185,7 +18206,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PartialPlayTime)
         end,
         PartyLFGStartBackfill = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.PartyLFGStartBackfill)
           end
           return checkCFunc(_G.PartyLFGStartBackfill)
@@ -18197,7 +18218,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PetAggressiveMode)
         end,
         PetAssistMode = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.PetAssistMode)
           end
           return checkCFunc(_G.PetAssistMode)
@@ -18215,7 +18236,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PetCanBeRenamed)
         end,
         PetDefensiveAssistMode = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.PetDefensiveAssistMode)
           end
           return checkCFunc(_G.PetDefensiveAssistMode)
@@ -18260,7 +18281,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PickupBagFromSlot)
         end,
         PickupCompanion = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.PickupCompanion)
           end
           return checkCFunc(_G.PickupCompanion)
@@ -18296,7 +18317,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PickupPlayerMoney)
         end,
         PickupPvpTalent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.PickupPvpTalent)
           end
           return checkCFunc(_G.PickupPvpTalent)
@@ -18311,7 +18332,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PickupStablePet)
         end,
         PickupTalent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.PickupTalent)
           end
           return checkCFunc(_G.PickupTalent)
@@ -18335,19 +18356,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.PlaceAction)
         end,
         PlaceAuctionBid = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.PlaceAuctionBid)
           end
           return checkCFunc(_G.PlaceAuctionBid)
         end,
         PlaceRaidMarker = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.PlaceRaidMarker)
           end
           return checkCFunc(_G.PlaceRaidMarker)
         end,
         PlayAutoAcceptQuestSound = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.PlayAutoAcceptQuestSound)
           end
           return checkCFunc(_G.PlayAutoAcceptQuestSound)
@@ -18374,7 +18395,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PlayerHasHearthstone)
         end,
         PlayerHasToy = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.PlayerHasToy)
           end
           return checkCFunc(_G.PlayerHasToy)
@@ -18383,19 +18404,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.PlayerIsPVPInactive)
         end,
         PlayerVehicleHasComboPoints = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.PlayerVehicleHasComboPoints)
           end
           return checkCFunc(_G.PlayerVehicleHasComboPoints)
         end,
         PortGraveyard = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.PortGraveyard)
           end
           return checkCFunc(_G.PortGraveyard)
         end,
         PostAuction = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.PostAuction)
           end
           return checkCFunc(_G.PostAuction)
@@ -18407,13 +18428,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.PrevView)
         end,
         ProcessExceptionClient = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ProcessExceptionClient)
           end
           return checkCFunc(_G.ProcessExceptionClient)
         end,
         ProcessQuestLogRewardFactions = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ProcessQuestLogRewardFactions)
           end
           return checkCFunc(_G.ProcessQuestLogRewardFactions)
@@ -18434,7 +18455,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.PutItemInBag)
         end,
         QueryAuctionItems = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.QueryAuctionItems)
           end
           return checkCFunc(_G.QueryAuctionItems)
@@ -18449,19 +18470,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.QueryGuildBankText)
         end,
         QueryGuildEventLog = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QueryGuildEventLog)
           end
           return checkCFunc(_G.QueryGuildEventLog)
         end,
         QueryGuildNews = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QueryGuildNews)
           end
           return checkCFunc(_G.QueryGuildNews)
         end,
         QueryGuildRecipes = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QueryGuildRecipes)
           end
           return checkCFunc(_G.QueryGuildRecipes)
@@ -18470,25 +18491,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.QuestChooseRewardError)
         end,
         QuestFlagsPVP = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestFlagsPVP)
           end
           return checkCFunc(_G.QuestFlagsPVP)
         end,
         QuestGetAutoAccept = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestGetAutoAccept)
           end
           return checkCFunc(_G.QuestGetAutoAccept)
         end,
         QuestGetAutoLaunched = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestGetAutoLaunched)
           end
           return checkCFunc(_G.QuestGetAutoLaunched)
         end,
         QuestHasPOIInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestHasPOIInfo)
           end
           return checkCFunc(_G.QuestHasPOIInfo)
@@ -18497,19 +18518,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.QuestIsDaily)
         end,
         QuestIsFromAdventureMap = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestIsFromAdventureMap)
           end
           return checkCFunc(_G.QuestIsFromAdventureMap)
         end,
         QuestIsFromAreaTrigger = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestIsFromAreaTrigger)
           end
           return checkCFunc(_G.QuestIsFromAreaTrigger)
         end,
         QuestIsWeekly = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestIsWeekly)
           end
           return checkCFunc(_G.QuestIsWeekly)
@@ -18518,37 +18539,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.QuestLogPushQuest)
         end,
         QuestLogRewardHasTreasurePicker = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestLogRewardHasTreasurePicker)
           end
           return checkCFunc(_G.QuestLogRewardHasTreasurePicker)
         end,
         QuestLogShouldShowPortrait = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestLogShouldShowPortrait)
           end
           return checkCFunc(_G.QuestLogShouldShowPortrait)
         end,
         QuestMapUpdateAllQuests = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestMapUpdateAllQuests)
           end
           return checkCFunc(_G.QuestMapUpdateAllQuests)
         end,
         QuestPOIGetIconInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestPOIGetIconInfo)
           end
           return checkCFunc(_G.QuestPOIGetIconInfo)
         end,
         QuestPOIGetSecondaryLocations = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestPOIGetSecondaryLocations)
           end
           return checkCFunc(_G.QuestPOIGetSecondaryLocations)
         end,
         QuestPOIUpdateIcons = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.QuestPOIUpdateIcons)
           end
           return checkCFunc(_G.QuestPOIUpdateIcons)
@@ -18566,7 +18587,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.RandomRoll)
         end,
         ReagentBankButtonIDToInvSlotID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ReagentBankButtonIDToInvSlotID)
           end
           return checkCFunc(_G.ReagentBankButtonIDToInvSlotID)
@@ -18575,7 +18596,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.RedockChatWindows)
         end,
         RefreshLFGList = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RefreshLFGList)
           end
           return checkCFunc(_G.RefreshLFGList)
@@ -18584,13 +18605,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.RegisterStaticConstants)
         end,
         RejectProposal = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RejectProposal)
           end
           return checkCFunc(_G.RejectProposal)
         end,
         RemoveAutoQuestPopUp = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RemoveAutoQuestPopUp)
           end
           return checkCFunc(_G.RemoveAutoQuestPopUp)
@@ -18602,31 +18623,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.RemoveChatWindowMessages)
         end,
         RemoveItemFromArtifact = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RemoveItemFromArtifact)
           end
           return checkCFunc(_G.RemoveItemFromArtifact)
         end,
         RemovePvpTalent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RemovePvpTalent)
           end
           return checkCFunc(_G.RemovePvpTalent)
         end,
         RemoveQuestWatch = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.RemoveQuestWatch)
           end
           return checkCFunc(_G.RemoveQuestWatch)
         end,
         RemoveTalent = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RemoveTalent)
           end
           return checkCFunc(_G.RemoveTalent)
         end,
         RemoveTrackedAchievement = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RemoveTrackedAchievement)
           end
           return checkCFunc(_G.RemoveTrackedAchievement)
@@ -18662,7 +18683,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ReportSuggestion)
         end,
         RequestArtifactCompletionHistory = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RequestArtifactCompletionHistory)
           end
           return checkCFunc(_G.RequestArtifactCompletionHistory)
@@ -18674,55 +18695,55 @@ function G.GeneratedTests()
           return checkCFunc(_G.RequestBattlegroundInstanceInfo)
         end,
         RequestBottomLeftActionBar = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RequestBottomLeftActionBar)
           end
           return checkCFunc(_G.RequestBottomLeftActionBar)
         end,
         RequestGuildChallengeInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RequestGuildChallengeInfo)
           end
           return checkCFunc(_G.RequestGuildChallengeInfo)
         end,
         RequestGuildPartyState = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RequestGuildPartyState)
           end
           return checkCFunc(_G.RequestGuildPartyState)
         end,
         RequestGuildRewards = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RequestGuildRewards)
           end
           return checkCFunc(_G.RequestGuildRewards)
         end,
         RequestInspectHonorData = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.RequestInspectHonorData)
           end
           return checkCFunc(_G.RequestInspectHonorData)
         end,
         RequestLFDPartyLockInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RequestLFDPartyLockInfo)
           end
           return checkCFunc(_G.RequestLFDPartyLockInfo)
         end,
         RequestLFDPlayerLockInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RequestLFDPlayerLockInfo)
           end
           return checkCFunc(_G.RequestLFDPlayerLockInfo)
         end,
         RequestPVPOptionsEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RequestPVPOptionsEnabled)
           end
           return checkCFunc(_G.RequestPVPOptionsEnabled)
         end,
         RequestPVPRewards = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RequestPVPRewards)
           end
           return checkCFunc(_G.RequestPVPRewards)
@@ -18731,13 +18752,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.RequestRaidInfo)
         end,
         RequestRandomBattlegroundInstanceInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RequestRandomBattlegroundInstanceInfo)
           end
           return checkCFunc(_G.RequestRandomBattlegroundInstanceInfo)
         end,
         RequestRatedInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.RequestRatedInfo)
           end
           return checkCFunc(_G.RequestRatedInfo)
@@ -18770,7 +18791,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ResetInstances)
         end,
         ResetSetMerchantFilter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ResetSetMerchantFilter)
           end
           return checkCFunc(_G.ResetSetMerchantFilter)
@@ -18848,49 +18869,49 @@ function G.GeneratedTests()
           return checkCFunc(_G.ScriptsDisallowedForBeta)
         end,
         SearchLFGGetEncounterResults = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SearchLFGGetEncounterResults)
           end
           return checkCFunc(_G.SearchLFGGetEncounterResults)
         end,
         SearchLFGGetJoinedID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SearchLFGGetJoinedID)
           end
           return checkCFunc(_G.SearchLFGGetJoinedID)
         end,
         SearchLFGGetNumResults = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SearchLFGGetNumResults)
           end
           return checkCFunc(_G.SearchLFGGetNumResults)
         end,
         SearchLFGGetPartyResults = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SearchLFGGetPartyResults)
           end
           return checkCFunc(_G.SearchLFGGetPartyResults)
         end,
         SearchLFGGetResults = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SearchLFGGetResults)
           end
           return checkCFunc(_G.SearchLFGGetResults)
         end,
         SearchLFGJoin = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SearchLFGJoin)
           end
           return checkCFunc(_G.SearchLFGJoin)
         end,
         SearchLFGLeave = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SearchLFGLeave)
           end
           return checkCFunc(_G.SearchLFGLeave)
         end,
         SearchLFGSort = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SearchLFGSort)
           end
           return checkCFunc(_G.SearchLFGSort)
@@ -18905,37 +18926,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.SelectAvailableQuest)
         end,
         SelectCraft = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SelectCraft)
           end
           return checkCFunc(_G.SelectCraft)
         end,
         SelectGossipActiveQuest = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SelectGossipActiveQuest)
           end
           return checkCFunc(_G.SelectGossipActiveQuest)
         end,
         SelectGossipAvailableQuest = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SelectGossipAvailableQuest)
           end
           return checkCFunc(_G.SelectGossipAvailableQuest)
         end,
         SelectGossipOption = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SelectGossipOption)
           end
           return checkCFunc(_G.SelectGossipOption)
         end,
         SelectQuestLogEntry = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SelectQuestLogEntry)
           end
           return checkCFunc(_G.SelectQuestLogEntry)
         end,
         SelectTradeSkill = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SelectTradeSkill)
           end
           return checkCFunc(_G.SelectTradeSkill)
@@ -18956,13 +18977,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SendMail)
         end,
         SendSoRByText = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SendSoRByText)
           end
           return checkCFunc(_G.SendSoRByText)
         end,
         SendSubscriptionInterstitialResponse = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SendSubscriptionInterstitialResponse)
           end
           return checkCFunc(_G.SendSubscriptionInterstitialResponse)
@@ -18971,19 +18992,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.SendSystemMessage)
         end,
         SetAbandonQuest = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetAbandonQuest)
           end
           return checkCFunc(_G.SetAbandonQuest)
         end,
         SetAchievementComparisonUnit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetAchievementComparisonUnit)
           end
           return checkCFunc(_G.SetAchievementComparisonUnit)
         end,
         SetAchievementSearchString = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetAchievementSearchString)
           end
           return checkCFunc(_G.SetAchievementSearchString)
@@ -19004,19 +19025,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetAllowLowLevelRaid)
         end,
         SetArenaTeamRosterSelection = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetArenaTeamRosterSelection)
           end
           return checkCFunc(_G.SetArenaTeamRosterSelection)
         end,
         SetArenaTeamRosterShowOffline = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetArenaTeamRosterShowOffline)
           end
           return checkCFunc(_G.SetArenaTeamRosterShowOffline)
         end,
         SetAuctionsTabShowing = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetAuctionsTabShowing)
           end
           return checkCFunc(_G.SetAuctionsTabShowing)
@@ -19025,7 +19046,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetAutoDeclineGuildInvites)
         end,
         SetBackpackAutosortDisabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetBackpackAutosortDisabled)
           end
           return checkCFunc(_G.SetBackpackAutosortDisabled)
@@ -19037,7 +19058,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetBagSlotFlag)
         end,
         SetBankAutosortDisabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetBankAutosortDisabled)
           end
           return checkCFunc(_G.SetBankAutosortDisabled)
@@ -19046,7 +19067,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetBankBagSlotFlag)
         end,
         SetBarSlotFromIntro = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetBarSlotFromIntro)
           end
           return checkCFunc(_G.SetBarSlotFromIntro)
@@ -19115,7 +19136,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetConsoleKey)
         end,
         SetCraftFilter = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetCraftFilter)
           end
           return checkCFunc(_G.SetCraftFilter)
@@ -19133,7 +19154,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetCursor)
         end,
         SetCursorVirtualItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetCursorVirtualItem)
           end
           return checkCFunc(_G.SetCursorVirtualItem)
@@ -19157,7 +19178,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetFactionInactive)
         end,
         SetFocusedAchievement = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetFocusedAchievement)
           end
           return checkCFunc(_G.SetFocusedAchievement)
@@ -19190,7 +19211,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetGuildMemberRank)
         end,
         SetGuildNewsFilter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetGuildNewsFilter)
           end
           return checkCFunc(_G.SetGuildNewsFilter)
@@ -19202,13 +19223,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetGuildRosterShowOffline)
         end,
         SetGuildTradeSkillCategoryFilter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetGuildTradeSkillCategoryFilter)
           end
           return checkCFunc(_G.SetGuildTradeSkillCategoryFilter)
         end,
         SetGuildTradeSkillItemNameFilter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetGuildTradeSkillItemNameFilter)
           end
           return checkCFunc(_G.SetGuildTradeSkillItemNameFilter)
@@ -19226,37 +19247,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetItemSearch)
         end,
         SetLFGBootVote = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetLFGBootVote)
           end
           return checkCFunc(_G.SetLFGBootVote)
         end,
         SetLFGComment = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetLFGComment)
           end
           return checkCFunc(_G.SetLFGComment)
         end,
         SetLFGDungeon = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetLFGDungeon)
           end
           return checkCFunc(_G.SetLFGDungeon)
         end,
         SetLFGDungeonEnabled = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetLFGDungeonEnabled)
           end
           return checkCFunc(_G.SetLFGDungeonEnabled)
         end,
         SetLFGHeaderCollapsed = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetLFGHeaderCollapsed)
           end
           return checkCFunc(_G.SetLFGHeaderCollapsed)
         end,
         SetLFGRoles = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetLFGRoles)
           end
           return checkCFunc(_G.SetLFGRoles)
@@ -19271,7 +19292,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetLootPortrait)
         end,
         SetLootSpecialization = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetLootSpecialization)
           end
           return checkCFunc(_G.SetLootSpecialization)
@@ -19286,7 +19307,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetMacroSpell)
         end,
         SetMerchantFilter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetMerchantFilter)
           end
           return checkCFunc(_G.SetMerchantFilter)
@@ -19301,7 +19322,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetMoveEnabled)
         end,
         SetMultiCastSpell = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetMultiCastSpell)
           end
           return checkCFunc(_G.SetMultiCastSpell)
@@ -19325,13 +19346,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetOverrideBindingSpell)
         end,
         SetPOIIconOverlapDistance = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetPOIIconOverlapDistance)
           end
           return checkCFunc(_G.SetPOIIconOverlapDistance)
         end,
         SetPOIIconOverlapPushDistance = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetPOIIconOverlapPushDistance)
           end
           return checkCFunc(_G.SetPOIIconOverlapPushDistance)
@@ -19340,7 +19361,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetPVP)
         end,
         SetPVPRoles = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetPVPRoles)
           end
           return checkCFunc(_G.SetPVPRoles)
@@ -19349,25 +19370,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetPartyAssignment)
         end,
         SetPendingReportArenaTeamName = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetPendingReportArenaTeamName)
           end
           return checkCFunc(_G.SetPendingReportArenaTeamName)
         end,
         SetPendingReportPetTarget = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetPendingReportPetTarget)
           end
           return checkCFunc(_G.SetPendingReportPetTarget)
         end,
         SetPendingReportTarget = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetPendingReportTarget)
           end
           return checkCFunc(_G.SetPendingReportTarget)
         end,
         SetPetSlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetPetSlot)
           end
           return checkCFunc(_G.SetPetSlot)
@@ -19403,7 +19424,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetRaidTargetProtected)
         end,
         SetSavedInstanceExtend = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetSavedInstanceExtend)
           end
           return checkCFunc(_G.SetSavedInstanceExtend)
@@ -19412,19 +19433,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetScreenResolution)
         end,
         SetSelectedArtifact = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetSelectedArtifact)
           end
           return checkCFunc(_G.SetSelectedArtifact)
         end,
         SetSelectedAuctionItem = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetSelectedAuctionItem)
           end
           return checkCFunc(_G.SetSelectedAuctionItem)
         end,
         SetSelectedBattlefield = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetSelectedBattlefield)
           end
           return checkCFunc(_G.SetSelectedBattlefield)
@@ -19439,13 +19460,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetSelectedScreenResolutionIndex)
         end,
         SetSelectedSkill = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetSelectedSkill)
           end
           return checkCFunc(_G.SetSelectedSkill)
         end,
         SetSelectedWarGameType = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetSelectedWarGameType)
           end
           return checkCFunc(_G.SetSelectedWarGameType)
@@ -19460,13 +19481,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetSendMailShowing)
         end,
         SetSortBagsRightToLeft = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetSortBagsRightToLeft)
           end
           return checkCFunc(_G.SetSortBagsRightToLeft)
         end,
         SetSpecialization = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetSpecialization)
           end
           return checkCFunc(_G.SetSpecialization)
@@ -19475,7 +19496,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetSpellbookPetAction)
         end,
         SetSuperTrackedQuestID = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetSuperTrackedQuestID)
           end
           return checkCFunc(_G.SetSuperTrackedQuestID)
@@ -19490,7 +19511,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetTracking)
         end,
         SetTradeCurrency = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SetTradeCurrency)
           end
           return checkCFunc(_G.SetTradeCurrency)
@@ -19499,25 +19520,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetTradeMoney)
         end,
         SetTradeSkillInvSlotFilter = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetTradeSkillInvSlotFilter)
           end
           return checkCFunc(_G.SetTradeSkillInvSlotFilter)
         end,
         SetTradeSkillItemLevelFilter = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetTradeSkillItemLevelFilter)
           end
           return checkCFunc(_G.SetTradeSkillItemLevelFilter)
         end,
         SetTradeSkillItemNameFilter = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetTradeSkillItemNameFilter)
           end
           return checkCFunc(_G.SetTradeSkillItemNameFilter)
         end,
         SetTradeSkillSubClassFilter = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SetTradeSkillSubClassFilter)
           end
           return checkCFunc(_G.SetTradeSkillSubClassFilter)
@@ -19541,25 +19562,25 @@ function G.GeneratedTests()
           return checkCFunc(_G.SetupFullscreenScale)
         end,
         ShouldKnowUnitHealth = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ShouldKnowUnitHealth)
           end
           return checkCFunc(_G.ShouldKnowUnitHealth)
         end,
         ShouldShowIslandsWeeklyPOI = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ShouldShowIslandsWeeklyPOI)
           end
           return checkCFunc(_G.ShouldShowIslandsWeeklyPOI)
         end,
         ShouldShowSpecialSplashScreen = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ShouldShowSpecialSplashScreen)
           end
           return checkCFunc(_G.ShouldShowSpecialSplashScreen)
         end,
         ShowAccountAchievements = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ShowAccountAchievements)
           end
           return checkCFunc(_G.ShowAccountAchievements)
@@ -19571,7 +19592,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ShowBuybackSellCursor)
         end,
         ShowCloak = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ShowCloak)
           end
           return checkCFunc(_G.ShowCloak)
@@ -19580,7 +19601,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ShowContainerSellCursor)
         end,
         ShowHelm = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ShowHelm)
           end
           return checkCFunc(_G.ShowHelm)
@@ -19598,13 +19619,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.ShowRepairCursor)
         end,
         ShowingCloak = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ShowingCloak)
           end
           return checkCFunc(_G.ShowingCloak)
         end,
         ShowingHelm = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.ShowingHelm)
           end
           return checkCFunc(_G.ShowingHelm)
@@ -19622,61 +19643,61 @@ function G.GeneratedTests()
           return checkCFunc(_G.SocketInventoryItem)
         end,
         SocketItemToArtifact = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SocketItemToArtifact)
           end
           return checkCFunc(_G.SocketItemToArtifact)
         end,
         SolveArtifact = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SolveArtifact)
           end
           return checkCFunc(_G.SolveArtifact)
         end,
         SortArenaTeamRoster = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SortArenaTeamRoster)
           end
           return checkCFunc(_G.SortArenaTeamRoster)
         end,
         SortAuctionApplySort = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SortAuctionApplySort)
           end
           return checkCFunc(_G.SortAuctionApplySort)
         end,
         SortAuctionClearSort = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SortAuctionClearSort)
           end
           return checkCFunc(_G.SortAuctionClearSort)
         end,
         SortAuctionItems = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SortAuctionItems)
           end
           return checkCFunc(_G.SortAuctionItems)
         end,
         SortAuctionSetSort = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SortAuctionSetSort)
           end
           return checkCFunc(_G.SortAuctionSetSort)
         end,
         SortBGList = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SortBGList)
           end
           return checkCFunc(_G.SortBGList)
         end,
         SortBags = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SortBags)
           end
           return checkCFunc(_G.SortBags)
         end,
         SortBankBags = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SortBankBags)
           end
           return checkCFunc(_G.SortBankBags)
@@ -19688,7 +19709,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SortGuildRoster)
         end,
         SortGuildTradeSkill = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SortGuildTradeSkill)
           end
           return checkCFunc(_G.SortGuildTradeSkill)
@@ -19697,7 +19718,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SortQuestSortTypes)
         end,
         SortQuestWatches = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.SortQuestWatches)
           end
           return checkCFunc(_G.SortQuestWatches)
@@ -19706,7 +19727,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SortQuests)
         end,
         SortReagentBankBags = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SortReagentBankBags)
           end
           return checkCFunc(_G.SortReagentBankBags)
@@ -19739,19 +19760,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.Sound_GameSystem_RestartSoundSystem)
         end,
         SpellCanTargetGarrisonFollower = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SpellCanTargetGarrisonFollower)
           end
           return checkCFunc(_G.SpellCanTargetGarrisonFollower)
         end,
         SpellCanTargetGarrisonFollowerAbility = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SpellCanTargetGarrisonFollowerAbility)
           end
           return checkCFunc(_G.SpellCanTargetGarrisonFollowerAbility)
         end,
         SpellCanTargetGarrisonMission = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SpellCanTargetGarrisonMission)
           end
           return checkCFunc(_G.SpellCanTargetGarrisonMission)
@@ -19763,7 +19784,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SpellCanTargetItemID)
         end,
         SpellCanTargetQuest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SpellCanTargetQuest)
           end
           return checkCFunc(_G.SpellCanTargetQuest)
@@ -19784,7 +19805,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SpellIsAlwaysShown)
         end,
         SpellIsPriorityAura = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SpellIsPriorityAura)
           end
           return checkCFunc(_G.SpellIsPriorityAura)
@@ -19808,7 +19829,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SpellTargetUnit)
         end,
         SplashFrameCanBeShown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SplashFrameCanBeShown)
           end
           return checkCFunc(_G.SplashFrameCanBeShown)
@@ -19820,7 +19841,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SplitGuildBankItem)
         end,
         StablePet = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.StablePet)
           end
           return checkCFunc(_G.StablePet)
@@ -19829,7 +19850,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.StartAttack)
         end,
         StartAuction = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.StartAuction)
           end
           return checkCFunc(_G.StartAuction)
@@ -19841,13 +19862,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.StartDuel)
         end,
         StartSoloShuffleWarGameByName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.StartSoloShuffleWarGameByName)
           end
           return checkCFunc(_G.StartSoloShuffleWarGameByName)
         end,
         StartSpectatorSoloShuffleWarGame = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.StartSpectatorSoloShuffleWarGame)
           end
           return checkCFunc(_G.StartSpectatorSoloShuffleWarGame)
@@ -19904,19 +19925,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.SummonFriend)
         end,
         SummonRandomCritter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SummonRandomCritter)
           end
           return checkCFunc(_G.SummonRandomCritter)
         end,
         SupportsClipCursor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SupportsClipCursor)
           end
           return checkCFunc(_G.SupportsClipCursor)
         end,
         SurrenderArena = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SurrenderArena)
           end
           return checkCFunc(_G.SurrenderArena)
@@ -19925,7 +19946,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.SwapRaidSubgroup)
         end,
         SwitchAchievementSearchTab = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.SwitchAchievementSearchTab)
           end
           return checkCFunc(_G.SwitchAchievementSearchTab)
@@ -19988,7 +20009,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.TargetPriorityHighlightStart)
         end,
         TargetSpellReplacesBonusTree = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.TargetSpellReplacesBonusTree)
           end
           return checkCFunc(_G.TargetSpellReplacesBonusTree)
@@ -20066,7 +20087,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.ToggleWindowed)
         end,
         TradeSkillOnlyShowMakeable = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.TradeSkillOnlyShowMakeable)
           end
           return checkCFunc(_G.TradeSkillOnlyShowMakeable)
@@ -20075,7 +20096,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.TriggerTutorial)
         end,
         TurnInArenaPetition = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.TurnInArenaPetition)
           end
           return checkCFunc(_G.TurnInArenaPetition)
@@ -20108,7 +20129,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitAffectingCombat)
         end,
         UnitAlliedRaceInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitAlliedRaceInfo)
           end
           return checkCFunc(_G.UnitAlliedRaceInfo)
@@ -20117,7 +20138,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitArmor)
         end,
         UnitAttackBothHands = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.UnitAttackBothHands)
           end
           return checkCFunc(_G.UnitAttackBothHands)
@@ -20132,31 +20153,31 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitAura)
         end,
         UnitAuraBySlot = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitAuraBySlot)
           end
           return checkCFunc(_G.UnitAuraBySlot)
         end,
         UnitAuraSlots = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitAuraSlots)
           end
           return checkCFunc(_G.UnitAuraSlots)
         end,
         UnitBattlePetLevel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitBattlePetLevel)
           end
           return checkCFunc(_G.UnitBattlePetLevel)
         end,
         UnitBattlePetSpeciesID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitBattlePetSpeciesID)
           end
           return checkCFunc(_G.UnitBattlePetSpeciesID)
         end,
         UnitBattlePetType = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitBattlePetType)
           end
           return checkCFunc(_G.UnitBattlePetType)
@@ -20174,7 +20195,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitCanCooperate)
         end,
         UnitCanPetBattle = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitCanPetBattle)
           end
           return checkCFunc(_G.UnitCanPetBattle)
@@ -20186,13 +20207,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitChannelInfo)
         end,
         UnitCharacterPoints = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.UnitCharacterPoints)
           end
           return checkCFunc(_G.UnitCharacterPoints)
         end,
         UnitChromieTimeID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitChromieTimeID)
           end
           return checkCFunc(_G.UnitChromieTimeID)
@@ -20207,7 +20228,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitClassification)
         end,
         UnitControllingVehicle = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitControllingVehicle)
           end
           return checkCFunc(_G.UnitControllingVehicle)
@@ -20225,7 +20246,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitDebuff)
         end,
         UnitDefense = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.UnitDefense)
           end
           return checkCFunc(_G.UnitDefense)
@@ -20237,7 +20258,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitDistanceSquared)
         end,
         UnitEffectiveLevel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitEffectiveLevel)
           end
           return checkCFunc(_G.UnitEffectiveLevel)
@@ -20255,7 +20276,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitGUID)
         end,
         UnitGetAvailableRoles = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitGetAvailableRoles)
           end
           return checkCFunc(_G.UnitGetAvailableRoles)
@@ -20264,13 +20285,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitGetIncomingHeals)
         end,
         UnitGetTotalAbsorbs = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitGetTotalAbsorbs)
           end
           return checkCFunc(_G.UnitGetTotalAbsorbs)
         end,
         UnitGetTotalHealAbsorbs = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitGetTotalHealAbsorbs)
           end
           return checkCFunc(_G.UnitGetTotalHealAbsorbs)
@@ -20285,13 +20306,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitHasIncomingResurrection)
         end,
         UnitHasLFGDeserter = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitHasLFGDeserter)
           end
           return checkCFunc(_G.UnitHasLFGDeserter)
         end,
         UnitHasLFGRandomCooldown = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitHasLFGRandomCooldown)
           end
           return checkCFunc(_G.UnitHasLFGRandomCooldown)
@@ -20300,13 +20321,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitHasRelicSlot)
         end,
         UnitHasVehiclePlayerFrameUI = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitHasVehiclePlayerFrameUI)
           end
           return checkCFunc(_G.UnitHasVehiclePlayerFrameUI)
         end,
         UnitHasVehicleUI = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitHasVehicleUI)
           end
           return checkCFunc(_G.UnitHasVehicleUI)
@@ -20318,19 +20339,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitHealthMax)
         end,
         UnitHonor = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitHonor)
           end
           return checkCFunc(_G.UnitHonor)
         end,
         UnitHonorLevel = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitHonorLevel)
           end
           return checkCFunc(_G.UnitHonorLevel)
         end,
         UnitHonorMax = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitHonorMax)
           end
           return checkCFunc(_G.UnitHonorMax)
@@ -20348,13 +20369,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitInParty)
         end,
         UnitInPartyShard = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitInPartyShard)
           end
           return checkCFunc(_G.UnitInPartyShard)
         end,
         UnitInPhase = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.UnitInPhase)
           end
           return checkCFunc(_G.UnitInPhase)
@@ -20369,19 +20390,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitInSubgroup)
         end,
         UnitInVehicle = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitInVehicle)
           end
           return checkCFunc(_G.UnitInVehicle)
         end,
         UnitInVehicleControlSeat = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitInVehicleControlSeat)
           end
           return checkCFunc(_G.UnitInVehicleControlSeat)
         end,
         UnitInVehicleHidesPetFrame = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitInVehicleHidesPetFrame)
           end
           return checkCFunc(_G.UnitInVehicleHidesPetFrame)
@@ -20390,13 +20411,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitIsAFK)
         end,
         UnitIsBattlePet = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitIsBattlePet)
           end
           return checkCFunc(_G.UnitIsBattlePet)
         end,
         UnitIsBattlePetCompanion = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitIsBattlePetCompanion)
           end
           return checkCFunc(_G.UnitIsBattlePetCompanion)
@@ -20405,7 +20426,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitIsCharmed)
         end,
         UnitIsCivilian = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.UnitIsCivilian)
           end
           return checkCFunc(_G.UnitIsCivilian)
@@ -20450,13 +20471,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitIsInMyGuild)
         end,
         UnitIsMercenary = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitIsMercenary)
           end
           return checkCFunc(_G.UnitIsMercenary)
         end,
         UnitIsOtherPlayersBattlePet = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitIsOtherPlayersBattlePet)
           end
           return checkCFunc(_G.UnitIsOtherPlayersBattlePet)
@@ -20483,7 +20504,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitIsPossessed)
         end,
         UnitIsQuestBoss = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitIsQuestBoss)
           end
           return checkCFunc(_G.UnitIsQuestBoss)
@@ -20510,7 +20531,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitIsVisible)
         end,
         UnitIsWildBattlePet = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitIsWildBattlePet)
           end
           return checkCFunc(_G.UnitIsWildBattlePet)
@@ -20528,13 +20549,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitNameUnmodified)
         end,
         UnitNameplateShowsWidgetsOnly = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitNameplateShowsWidgetsOnly)
           end
           return checkCFunc(_G.UnitNameplateShowsWidgetsOnly)
         end,
         UnitNumPowerBarTimers = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitNumPowerBarTimers)
           end
           return checkCFunc(_G.UnitNumPowerBarTimers)
@@ -20546,13 +20567,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitPVPName)
         end,
         UnitPVPRank = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.UnitPVPRank)
           end
           return checkCFunc(_G.UnitPVPRank)
         end,
         UnitPhaseReason = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitPhaseReason)
           end
           return checkCFunc(_G.UnitPhaseReason)
@@ -20573,13 +20594,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitPower)
         end,
         UnitPowerBarID = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitPowerBarID)
           end
           return checkCFunc(_G.UnitPowerBarID)
         end,
         UnitPowerBarTimerInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitPowerBarTimerInfo)
           end
           return checkCFunc(_G.UnitPowerBarTimerInfo)
@@ -20594,19 +20615,19 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitPowerType)
         end,
         UnitPvpClassification = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitPvpClassification)
           end
           return checkCFunc(_G.UnitPvpClassification)
         end,
         UnitQuestTrivialLevelRange = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitQuestTrivialLevelRange)
           end
           return checkCFunc(_G.UnitQuestTrivialLevelRange)
         end,
         UnitQuestTrivialLevelRangeScaling = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitQuestTrivialLevelRangeScaling)
           end
           return checkCFunc(_G.UnitQuestTrivialLevelRangeScaling)
@@ -20615,7 +20636,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitRace)
         end,
         UnitRangedAttack = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.UnitRangedAttack)
           end
           return checkCFunc(_G.UnitRangedAttack)
@@ -20633,7 +20654,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitRealmRelationship)
         end,
         UnitResistance = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.UnitResistance)
           end
           return checkCFunc(_G.UnitResistance)
@@ -20642,7 +20663,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitSelectionColor)
         end,
         UnitSelectionType = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitSelectionType)
           end
           return checkCFunc(_G.UnitSelectionType)
@@ -20657,13 +20678,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitShouldDisplayName)
         end,
         UnitSpellHaste = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitSpellHaste)
           end
           return checkCFunc(_G.UnitSpellHaste)
         end,
         UnitStagger = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitStagger)
           end
           return checkCFunc(_G.UnitStagger)
@@ -20672,13 +20693,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitStat)
         end,
         UnitSwitchToVehicleSeat = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitSwitchToVehicleSeat)
           end
           return checkCFunc(_G.UnitSwitchToVehicleSeat)
         end,
         UnitTargetsVehicleInRaidUI = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitTargetsVehicleInRaidUI)
           end
           return checkCFunc(_G.UnitTargetsVehicleInRaidUI)
@@ -20690,7 +20711,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitThreatSituation)
         end,
         UnitTreatAsPlayerForDisplay = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitTreatAsPlayerForDisplay)
           end
           return checkCFunc(_G.UnitTreatAsPlayerForDisplay)
@@ -20702,37 +20723,37 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitTrialXP)
         end,
         UnitUsingVehicle = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitUsingVehicle)
           end
           return checkCFunc(_G.UnitUsingVehicle)
         end,
         UnitVehicleSeatCount = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitVehicleSeatCount)
           end
           return checkCFunc(_G.UnitVehicleSeatCount)
         end,
         UnitVehicleSeatInfo = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitVehicleSeatInfo)
           end
           return checkCFunc(_G.UnitVehicleSeatInfo)
         end,
         UnitVehicleSkin = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitVehicleSkin)
           end
           return checkCFunc(_G.UnitVehicleSkin)
         end,
         UnitWeaponAttackPower = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitWeaponAttackPower)
           end
           return checkCFunc(_G.UnitWeaponAttackPower)
         end,
         UnitWidgetSet = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnitWidgetSet)
           end
           return checkCFunc(_G.UnitWidgetSet)
@@ -20744,13 +20765,13 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnitXPMax)
         end,
         UnlearnSpecialization = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnlearnSpecialization)
           end
           return checkCFunc(_G.UnlearnSpecialization)
         end,
         UnlockVoidStorage = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UnlockVoidStorage)
           end
           return checkCFunc(_G.UnlockVoidStorage)
@@ -20759,7 +20780,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UnmuteSoundFile)
         end,
         UnstablePet = function()
-          if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+          if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
             return checkNotCFunc(_G.UnstablePet)
           end
           return checkCFunc(_G.UnstablePet)
@@ -20774,7 +20795,7 @@ function G.GeneratedTests()
           return checkCFunc(_G.UpdateInventoryAlertStatus)
         end,
         UpdateWarGamesList = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UpdateWarGamesList)
           end
           return checkCFunc(_G.UpdateWarGamesList)
@@ -20798,121 +20819,121 @@ function G.GeneratedTests()
           return checkCFunc(_G.UseItemByName)
         end,
         UseQuestLogSpecialItem = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UseQuestLogSpecialItem)
           end
           return checkCFunc(_G.UseQuestLogSpecialItem)
         end,
         UseToy = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UseToy)
           end
           return checkCFunc(_G.UseToy)
         end,
         UseToyByName = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UseToyByName)
           end
           return checkCFunc(_G.UseToyByName)
         end,
         UseWorldMapActionButtonSpellOnQuest = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.UseWorldMapActionButtonSpellOnQuest)
           end
           return checkCFunc(_G.UseWorldMapActionButtonSpellOnQuest)
         end,
         VehicleAimDecrement = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleAimDecrement)
           end
           return checkCFunc(_G.VehicleAimDecrement)
         end,
         VehicleAimDownStart = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleAimDownStart)
           end
           return checkCFunc(_G.VehicleAimDownStart)
         end,
         VehicleAimDownStop = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleAimDownStop)
           end
           return checkCFunc(_G.VehicleAimDownStop)
         end,
         VehicleAimGetAngle = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleAimGetAngle)
           end
           return checkCFunc(_G.VehicleAimGetAngle)
         end,
         VehicleAimGetNormAngle = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleAimGetNormAngle)
           end
           return checkCFunc(_G.VehicleAimGetNormAngle)
         end,
         VehicleAimGetNormPower = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleAimGetNormPower)
           end
           return checkCFunc(_G.VehicleAimGetNormPower)
         end,
         VehicleAimIncrement = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleAimIncrement)
           end
           return checkCFunc(_G.VehicleAimIncrement)
         end,
         VehicleAimRequestAngle = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleAimRequestAngle)
           end
           return checkCFunc(_G.VehicleAimRequestAngle)
         end,
         VehicleAimRequestNormAngle = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleAimRequestNormAngle)
           end
           return checkCFunc(_G.VehicleAimRequestNormAngle)
         end,
         VehicleAimSetNormPower = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleAimSetNormPower)
           end
           return checkCFunc(_G.VehicleAimSetNormPower)
         end,
         VehicleAimUpStart = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleAimUpStart)
           end
           return checkCFunc(_G.VehicleAimUpStart)
         end,
         VehicleAimUpStop = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleAimUpStop)
           end
           return checkCFunc(_G.VehicleAimUpStop)
         end,
         VehicleExit = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleExit)
           end
           return checkCFunc(_G.VehicleExit)
         end,
         VehicleNextSeat = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehicleNextSeat)
           end
           return checkCFunc(_G.VehicleNextSeat)
         end,
         VehiclePrevSeat = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.VehiclePrevSeat)
           end
           return checkCFunc(_G.VehiclePrevSeat)
         end,
         ViewGuildRecipes = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wowt,wow_beta') then
             return checkNotCFunc(_G.ViewGuildRecipes)
           end
           return checkCFunc(_G.ViewGuildRecipes)
@@ -21317,7 +21338,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSmoothing)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -21614,7 +21635,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -22146,7 +22167,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -22738,7 +22759,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -23300,7 +23321,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -23868,7 +23889,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -24349,7 +24370,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.UseModelCenterToTransform)
               end,
               ZeroCachedCenterXY = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.ZeroCachedCenterXY))
                   return
                 end
@@ -24569,7 +24590,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -25083,7 +25104,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -25612,14 +25633,14 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetID)
               end,
               GetItemTransmogInfo = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetItemTransmogInfo))
                   return
                 end
                 return checkCFunc(__index.GetItemTransmogInfo)
               end,
               GetItemTransmogInfoList = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetItemTransmogInfoList))
                   return
                 end
@@ -25665,7 +25686,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetNumRegions)
               end,
               GetObeyHideInTransmogFlag = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetObeyHideInTransmogFlag))
                   return
                 end
@@ -25726,7 +25747,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -25736,14 +25757,14 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetTop)
               end,
               GetUseTransmogChoices = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetUseTransmogChoices))
                   return
                 end
                 return checkCFunc(__index.GetUseTransmogChoices)
               end,
               GetUseTransmogSkin = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetUseTransmogSkin))
                   return
                 end
@@ -26044,7 +26065,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetItemAppearance)
               end,
               SetItemTransmogInfo = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetItemTransmogInfo))
                   return
                 end
@@ -26084,7 +26105,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetMovable)
               end,
               SetObeyHideInTransmogFlag = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetObeyHideInTransmogFlag))
                   return
                 end
@@ -26157,14 +26178,14 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetUnit)
               end,
               SetUseTransmogChoices = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetUseTransmogChoices))
                   return
                 end
                 return checkCFunc(__index.SetUseTransmogChoices)
               end,
               SetUseTransmogSkin = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetUseTransmogSkin))
                   return
                 end
@@ -26222,7 +26243,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.UseModelCenterToTransform)
               end,
               ZeroCachedCenterXY = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.ZeroCachedCenterXY))
                   return
                 end
@@ -26496,7 +26517,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -27028,28 +27049,28 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetFlattensRenderLayers)
               end,
               GetFogOfWarBackgroundAtlas = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetFogOfWarBackgroundAtlas))
                   return
                 end
                 return checkCFunc(__index.GetFogOfWarBackgroundAtlas)
               end,
               GetFogOfWarBackgroundTexture = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetFogOfWarBackgroundTexture))
                   return
                 end
                 return checkCFunc(__index.GetFogOfWarBackgroundTexture)
               end,
               GetFogOfWarMaskAtlas = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetFogOfWarMaskAtlas))
                   return
                 end
                 return checkCFunc(__index.GetFogOfWarMaskAtlas)
               end,
               GetFogOfWarMaskTexture = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetFogOfWarMaskTexture))
                   return
                 end
@@ -27077,7 +27098,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetLeft)
               end,
               GetMaskScalar = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetMaskScalar))
                   return
                 end
@@ -27138,7 +27159,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -27310,28 +27331,28 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetFlattensRenderLayers)
               end,
               SetFogOfWarBackgroundAtlas = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetFogOfWarBackgroundAtlas))
                   return
                 end
                 return checkCFunc(__index.SetFogOfWarBackgroundAtlas)
               end,
               SetFogOfWarBackgroundTexture = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetFogOfWarBackgroundTexture))
                   return
                 end
                 return checkCFunc(__index.SetFogOfWarBackgroundTexture)
               end,
               SetFogOfWarMaskAtlas = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetFogOfWarMaskAtlas))
                   return
                 end
                 return checkCFunc(__index.SetFogOfWarMaskAtlas)
               end,
               SetFogOfWarMaskTexture = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetFogOfWarMaskTexture))
                   return
                 end
@@ -27368,7 +27389,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetIgnoreParentScale)
               end,
               SetMaskScalar = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetMaskScalar))
                   return
                 end
@@ -27585,7 +27606,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -27961,7 +27982,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -28238,7 +28259,7 @@ function G.GeneratedTests()
           return mkTests('GameTooltip', factory, function(__index)
             return {
               AddAtlas = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.AddAtlas))
                   return
                 end
@@ -28350,7 +28371,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetAttribute)
               end,
               GetAzeritePowerID = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetAzeritePowerID))
                   return
                 end
@@ -28372,7 +28393,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetClampRectInsets)
               end,
               GetCustomLineSpacing = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetCustomLineSpacing))
                   return
                 end
@@ -28490,7 +28511,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -28641,7 +28662,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.RotateTextures)
               end,
               SetAchievementByID = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetAchievementByID))
                   return
                 end
@@ -28654,7 +28675,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetAllPoints)
               end,
               SetAllowShowWithNoLines = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetAllowShowWithNoLines))
                   return
                 end
@@ -28667,14 +28688,14 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetAnchorType)
               end,
               SetArtifactItem = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetArtifactItem))
                   return
                 end
                 return checkCFunc(__index.SetArtifactItem)
               end,
               SetArtifactPowerByID = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetArtifactPowerByID))
                   return
                 end
@@ -28687,42 +28708,42 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetAttributeNoHandler)
               end,
               SetAuctionItem = function()
-                if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                   assertEquals('nil', type(__index.SetAuctionItem))
                   return
                 end
                 return checkCFunc(__index.SetAuctionItem)
               end,
               SetAuctionSellItem = function()
-                if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                   assertEquals('nil', type(__index.SetAuctionSellItem))
                   return
                 end
                 return checkCFunc(__index.SetAuctionSellItem)
               end,
               SetAzeriteEssence = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetAzeriteEssence))
                   return
                 end
                 return checkCFunc(__index.SetAzeriteEssence)
               end,
               SetAzeriteEssenceSlot = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetAzeriteEssenceSlot))
                   return
                 end
                 return checkCFunc(__index.SetAzeriteEssenceSlot)
               end,
               SetAzeritePower = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetAzeritePower))
                   return
                 end
                 return checkCFunc(__index.SetAzeritePower)
               end,
               SetBackpackToken = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetBackpackToken))
                   return
                 end
@@ -28747,14 +28768,14 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetClipsChildren)
               end,
               SetCompanionPet = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetCompanionPet))
                   return
                 end
                 return checkCFunc(__index.SetCompanionPet)
               end,
               SetCompareAzeritePower = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetCompareAzeritePower))
                   return
                 end
@@ -28764,49 +28785,49 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetCompareItem)
               end,
               SetConduit = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetConduit))
                   return
                 end
                 return checkCFunc(__index.SetConduit)
               end,
               SetCraftItem = function()
-                if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                   assertEquals('nil', type(__index.SetCraftItem))
                   return
                 end
                 return checkCFunc(__index.SetCraftItem)
               end,
               SetCraftSpell = function()
-                if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                   assertEquals('nil', type(__index.SetCraftSpell))
                   return
                 end
                 return checkCFunc(__index.SetCraftSpell)
               end,
               SetCurrencyByID = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetCurrencyByID))
                   return
                 end
                 return checkCFunc(__index.SetCurrencyByID)
               end,
               SetCurrencyToken = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetCurrencyToken))
                   return
                 end
                 return checkCFunc(__index.SetCurrencyToken)
               end,
               SetCurrencyTokenByID = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetCurrencyTokenByID))
                   return
                 end
                 return checkCFunc(__index.SetCurrencyTokenByID)
               end,
               SetCustomLineSpacing = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetCustomLineSpacing))
                   return
                 end
@@ -28822,14 +28843,14 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetDrawLayerEnabled)
               end,
               SetEnhancedConduit = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetEnhancedConduit))
                   return
                 end
                 return checkCFunc(__index.SetEnhancedConduit)
               end,
               SetEquipmentSet = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetEquipmentSet))
                   return
                 end
@@ -28869,7 +28890,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetHeight)
               end,
               SetHeirloomByItemID = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetHeirloomByItemID))
                   return
                 end
@@ -28909,28 +28930,28 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetItemByID)
               end,
               SetItemKey = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetItemKey))
                   return
                 end
                 return checkCFunc(__index.SetItemKey)
               end,
               SetLFGDungeonReward = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetLFGDungeonReward))
                   return
                 end
                 return checkCFunc(__index.SetLFGDungeonReward)
               end,
               SetLFGDungeonShortageReward = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetLFGDungeonShortageReward))
                   return
                 end
                 return checkCFunc(__index.SetLFGDungeonShortageReward)
               end,
               SetLootCurrency = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetLootCurrency))
                   return
                 end
@@ -28958,7 +28979,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetMinimumWidth)
               end,
               SetMountBySpellID = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetMountBySpellID))
                   return
                 end
@@ -28974,7 +28995,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetMovable)
               end,
               SetOwnedItemByID = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetOwnedItemByID))
                   return
                 end
@@ -29002,21 +29023,21 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetPropagateKeyboardInput)
               end,
               SetPvpBrawl = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetPvpBrawl))
                   return
                 end
                 return checkCFunc(__index.SetPvpBrawl)
               end,
               SetPvpTalent = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetPvpTalent))
                   return
                 end
                 return checkCFunc(__index.SetPvpTalent)
               end,
               SetQuestCurrency = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetQuestCurrency))
                   return
                 end
@@ -29026,7 +29047,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetQuestItem)
               end,
               SetQuestLogCurrency = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetQuestLogCurrency))
                   return
                 end
@@ -29039,14 +29060,14 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetQuestLogRewardSpell)
               end,
               SetQuestLogSpecialItem = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetQuestLogSpecialItem))
                   return
                 end
                 return checkCFunc(__index.SetQuestLogSpecialItem)
               end,
               SetQuestPartyProgress = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetQuestPartyProgress))
                   return
                 end
@@ -29056,21 +29077,21 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetQuestRewardSpell)
               end,
               SetRecipeRankInfo = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetRecipeRankInfo))
                   return
                 end
                 return checkCFunc(__index.SetRecipeRankInfo)
               end,
               SetRecipeReagentItem = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetRecipeReagentItem))
                   return
                 end
                 return checkCFunc(__index.SetRecipeReagentItem)
               end,
               SetRecipeResultItem = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetRecipeResultItem))
                   return
                 end
@@ -29080,7 +29101,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetResizable)
               end,
               SetRuneforgeResultItem = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetRuneforgeResultItem))
                   return
                 end
@@ -29102,7 +29123,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetShown)
               end,
               SetShrinkToFitWrapped = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetShrinkToFitWrapped))
                   return
                 end
@@ -29118,14 +29139,14 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetSocketedItem)
               end,
               SetSocketedRelic = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetSocketedRelic))
                   return
                 end
                 return checkCFunc(__index.SetSocketedRelic)
               end,
               SetSpecialPvpBrawl = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetSpecialPvpBrawl))
                   return
                 end
@@ -29150,14 +29171,14 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetTotem)
               end,
               SetToyByItemID = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetToyByItemID))
                   return
                 end
                 return checkCFunc(__index.SetToyByItemID)
               end,
               SetTrackingSpell = function()
-                if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                   assertEquals('nil', type(__index.SetTrackingSpell))
                   return
                 end
@@ -29167,7 +29188,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetTradePlayerItem)
               end,
               SetTradeSkillItem = function()
-                if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                   assertEquals('nil', type(__index.SetTradeSkillItem))
                   return
                 end
@@ -29180,7 +29201,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetTrainerService)
               end,
               SetTransmogrifyItem = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetTransmogrifyItem))
                   return
                 end
@@ -29199,7 +29220,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetUnitDebuff)
               end,
               SetUpgradeItem = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetUpgradeItem))
                   return
                 end
@@ -29209,28 +29230,28 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetUserPlaced)
               end,
               SetVoidDepositItem = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetVoidDepositItem))
                   return
                 end
                 return checkCFunc(__index.SetVoidDepositItem)
               end,
               SetVoidItem = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetVoidItem))
                   return
                 end
                 return checkCFunc(__index.SetVoidItem)
               end,
               SetVoidWithdrawalItem = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetVoidWithdrawalItem))
                   return
                 end
                 return checkCFunc(__index.SetVoidWithdrawalItem)
               end,
               SetWeeklyReward = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetWeeklyReward))
                   return
                 end
@@ -29513,7 +29534,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -30105,7 +30126,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -30745,7 +30766,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -30929,7 +30950,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetDepth)
               end,
               SetDesaturation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetDesaturation))
                   return
                 end
@@ -31029,7 +31050,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.SetParent)
               end,
               SetPaused = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.SetPaused))
                   return
                 end
@@ -31294,7 +31315,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -31772,7 +31793,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -32346,7 +32367,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -32785,7 +32806,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.UseModelCenterToTransform)
               end,
               ZeroCachedCenterXY = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.ZeroCachedCenterXY))
                   return
                 end
@@ -32795,7 +32816,7 @@ function G.GeneratedTests()
           end)
         end,
         QuestPOIFrame = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wow_beta,wowt') then
             assertCreateFrameFails('QuestPOIFrame')
             return
           end
@@ -32973,7 +32994,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetNumRegions)
               end,
               GetNumTooltips = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetNumTooltips))
                   return
                 end
@@ -33016,14 +33037,14 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
                 return checkCFunc(__index.GetSourceLocation)
               end,
               GetTooltipIndex = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetTooltipIndex))
                   return
                 end
@@ -33330,7 +33351,7 @@ function G.GeneratedTests()
           assertCreateFrameFails('Scale')
         end,
         ScenarioPOIFrame = function()
-          if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+          if badProduct('wow,wow_beta,wowt') then
             assertCreateFrameFails('ScenarioPOIFrame')
             return
           end
@@ -33538,7 +33559,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetScaledRect)
               end,
               GetScenarioTooltipText = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetScenarioTooltipText))
                   return
                 end
@@ -33551,7 +33572,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -34053,7 +34074,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -34561,7 +34582,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -35081,7 +35102,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -35601,7 +35622,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -36121,14 +36142,14 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetLowerBackgroundFileName)
               end,
               GetLowerEmblemFile = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetLowerEmblemFile))
                   return
                 end
                 return checkCFunc(__index.GetLowerEmblemFile)
               end,
               GetLowerEmblemFileName = function()
-                if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                   assertEquals('nil', type(__index.GetLowerEmblemFileName))
                   return
                 end
@@ -36219,7 +36240,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -36232,14 +36253,14 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetUpperBackgroundFileName)
               end,
               GetUpperEmblemFile = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetUpperEmblemFile))
                   return
                 end
                 return checkCFunc(__index.GetUpperEmblemFile)
               end,
               GetUpperEmblemFileName = function()
-                if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+                if badProduct('wow_classic,wow_classic_beta,wow_classic_ptr,wow_classic_era,wow_classic_era_ptr') then
                   assertEquals('nil', type(__index.GetUpperEmblemFileName))
                   return
                 end
@@ -36684,7 +36705,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.UseModelCenterToTransform)
               end,
               ZeroCachedCenterXY = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.ZeroCachedCenterXY))
                   return
                 end
@@ -36805,7 +36826,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
@@ -37214,7 +37235,7 @@ function G.GeneratedTests()
                 return checkCFunc(__index.GetSize)
               end,
               GetSourceLocation = function()
-                if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+                if badProduct('wow,wow_beta,wowt') then
                   assertEquals('nil', type(__index.GetSourceLocation))
                   return
                 end
