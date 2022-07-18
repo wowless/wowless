@@ -119,23 +119,8 @@ uiobjects.Minimap = nil
 uiobjects.WorldFrame = nil
 
 local cvars = (function()
-  local t = {}
-  table.insert(t, 'local _, G = ...')
-  table.insert(t, 'G.CVars = {')
-  for k, v in sorted((require('wowapi.yaml').parseFile('data/cvars.yaml'))) do
-    if type(v) == 'string' then
-      table.insert(t, '  [\'' .. k .. '\'] = \'' .. v .. '\',')
-    else
-      table.insert(t, '  [\'' .. k .. '\'] = {')
-      for pk, pv in sorted(v) do
-        table.insert(t, '    ' .. pk .. ' = \'' .. pv .. '\',')
-      end
-      table.insert(t, '  },')
-    end
-  end
-  table.insert(t, '}')
-  table.insert(t, '')
-  return table.concat(t, '\n')
+  local s = require('pl.pretty').write((require('wowapi.yaml').parseFile('data/cvars.yaml')))
+  return 'local _, G = ...\nG.CVars = ' .. s .. '\n'
 end)()
 
 local globalApis = (function()
@@ -266,11 +251,20 @@ local uiobjectApis = (function()
   return table.concat(t, '\n')
 end)()
 
+local function stylua(s)
+  local fn = os.tmpname()
+  require('pl.file').write(fn, s)
+  os.execute('stylua ' .. fn)
+  local ret = require('pl.file').read(fn)
+  os.remove(fn)
+  return ret
+end
+
 local filemap = {
-  ['addon/Wowless/cvars.lua'] = cvars,
-  ['addon/Wowless/globalapis.lua'] = globalApis,
-  ['addon/Wowless/namespaceapis.lua'] = namespaceApis,
-  ['addon/Wowless/uiobjectapis.lua'] = uiobjectApis,
+  ['addon/Wowless/cvars.lua'] = stylua(cvars),
+  ['addon/Wowless/globalapis.lua'] = stylua(globalApis),
+  ['addon/Wowless/namespaceapis.lua'] = stylua(namespaceApis),
+  ['addon/Wowless/uiobjectapis.lua'] = stylua(uiobjectApis),
 }
 
 -- Hack so test doesn't have side effects.
