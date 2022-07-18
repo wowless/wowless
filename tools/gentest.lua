@@ -258,6 +258,8 @@ function G.GeneratedTests()
 > end
       }
       local ptrhooked = { -- TODO test these better
+        FauxScrollFrame_Update = true,
+        QuestLog_Update = true,
         QuestMapLogTitleButton_OnEnter = true,
         SetItemRef = true,
       }
