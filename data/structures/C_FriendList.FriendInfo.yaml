@@ -18,8 +18,12 @@ fields:
   type: string
 - name: level
   type: number
+- name: mobile
+  type: boolean
 - name: name
   type: string
 - name: notes
   nilable: true
   type: string
+- name: rafLinkType
+  type: number

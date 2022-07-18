@@ -13,33 +13,6 @@ payload:
 - name: isNewGuild
   nilable: true
   type: boolean
-- name: bkgColorR
+- name: tabardInfo
   nilable: true
-  type: number
-- name: bkgColorG
-  nilable: true
-  type: number
-- name: bkgColorB
-  nilable: true
-  type: number
-- name: borderColorR
-  nilable: true
-  type: number
-- name: borderColorG
-  nilable: true
-  type: number
-- name: borderColorB
-  nilable: true
-  type: number
-- name: emblemColorR
-  nilable: true
-  type: number
-- name: emblemColorG
-  nilable: true
-  type: number
-- name: emblemColorB
-  nilable: true
-  type: number
-- name: emblemFilename
-  nilable: true
-  type: string
+  type: unknown

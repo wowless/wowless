@@ -10,6 +10,9 @@ fields:
   type: string
 - name: clubType
   type: number
+- name: crossFaction
+  nilable: true
+  type: boolean
 - name: description
   type: string
 - name: favoriteTimeStamp

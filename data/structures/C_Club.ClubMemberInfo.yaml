@@ -14,6 +14,9 @@ fields:
 - name: clubType
   nilable: true
   type: number
+- name: faction
+  nilable: true
+  type: number
 - name: guid
   nilable: true
   type: string
@@ -54,6 +57,9 @@ fields:
 - name: officerNote
   nilable: true
   type: string
+- name: overallDungeonScore
+  nilable: true
+  type: number
 - name: presence
   type: number
 - name: profession1ID

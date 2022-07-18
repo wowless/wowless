@@ -13,6 +13,5 @@ fields:
 - mixin: Vector2DMixin
   name: position
   type: Vector2D
-- name: textureKitPrefix
-  nilable: true
+- name: textureKit
   type: string

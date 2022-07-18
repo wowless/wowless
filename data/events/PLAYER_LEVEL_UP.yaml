@@ -20,5 +20,3 @@ payload:
   type: number
 - name: intellectDelta
   type: number
-- name: spiritDelta
-  type: number

@@ -16,3 +16,5 @@ payload:
   type: boolean
 - name: inviterGUID
   type: string
+- name: questSessionActive
+  type: boolean

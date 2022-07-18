@@ -11,8 +11,12 @@ fields:
   type: Vector2D
 - name: slotIndex
   type: number
-- name: state
-  type: number
-- name: textureKitPrefix
+- name: specialIconCostString
   nilable: true
   type: string
+- name: state
+  type: number
+- name: textureKit
+  type: string
+- name: useSpecialIcon
+  type: boolean

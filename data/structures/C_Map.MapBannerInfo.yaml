@@ -8,3 +8,6 @@ fields:
   type: string
 - name: name
   type: string
+- name: uiTextureKit
+  nilable: true
+  type: string

@@ -20,6 +20,9 @@ fields:
 - name: textureIndex
   nilable: true
   type: number
+- name: uiTextureKit
+  nilable: true
+  type: string
 - name: widgetSetID
   nilable: true
   type: number

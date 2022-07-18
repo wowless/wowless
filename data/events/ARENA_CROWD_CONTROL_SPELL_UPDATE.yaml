@@ -6,5 +6,3 @@ payload:
   type: string
 - name: spellID
   type: number
-- name: itemID
-  type: number

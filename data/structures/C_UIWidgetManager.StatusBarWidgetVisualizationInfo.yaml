@@ -6,21 +6,56 @@ fields:
   type: number
 - name: barMin
   type: number
+- name: barTextEnabledState
+  type: number
+- name: barTextFontType
+  type: number
+- name: barTextSizeType
+  type: number
 - name: barValue
   type: number
-- name: barValueInSeconds
+- name: barValueTextType
   type: number
-- name: barWidth
+- name: colorTint
   type: number
-- name: fillTextureKitID
+- name: fillMotionType
   type: number
-- name: frameTextureKitID
+- name: frameTextureKit
+  type: string
+- name: hasTimer
+  type: boolean
+- name: inAnimType
+  type: number
+- name: layoutDirection
+  type: number
+- name: modelSceneLayer
   type: number
 - name: orderIndex
+  type: number
+- name: outAnimType
+  type: number
+- name: overrideBarText
+  type: string
+- name: overrideBarTextShownType
+  type: number
+- innerType: number
+  name: partitionValues
+  type: table
+- name: scriptedAnimationEffectID
   type: number
 - name: shownState
   type: number
 - name: text
   type: string
+- name: textureKit
+  type: string
+- name: tooltip
+  type: string
+- name: tooltipLoc
+  type: number
+- name: widgetScale
+  type: number
+- name: widgetSizeSetting
+  type: number
 - name: widgetTag
   type: string

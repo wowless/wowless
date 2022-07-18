@@ -5,11 +5,31 @@ fields:
 - innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
   name: currencies
   type: table
-- name: frameTextureKitID
+- name: frameTextureKit
+  type: string
+- name: hasTimer
+  type: boolean
+- name: headerText
+  type: string
+- name: inAnimType
+  type: number
+- name: layoutDirection
+  type: number
+- name: modelSceneLayer
   type: number
 - name: orderIndex
   type: number
+- name: outAnimType
+  type: number
+- name: scriptedAnimationEffectID
+  type: number
 - name: shownState
+  type: number
+- name: textureKit
+  type: string
+- name: widgetScale
+  type: number
+- name: widgetSizeSetting
   type: number
 - name: widgetTag
   type: string

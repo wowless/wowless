@@ -6,3 +6,5 @@ payload:
   type: number
 - name: newLevel
   type: number
+- name: real
+  type: boolean

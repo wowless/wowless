@@ -18,6 +18,10 @@ fields:
   type: number
 - name: name
   type: string
+- name: soloShuffleRoundLosses
+  type: number
+- name: soloShuffleRoundWins
+  type: number
 - name: specialization
   type: number
 - name: unitToken
