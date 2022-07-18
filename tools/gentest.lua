@@ -94,6 +94,11 @@ do
     end
     assert(next(plist))
     v.products = #plist ~= #allProducts and plist or nil
+    for _, m in pairs(v.methods) do
+      if m.products and #m.products == #plist then
+        m.products = nil
+      end
+    end
   end
   local unavailable = {
     -- These are grabbed by FrameXML and are unavailable by the time addons run.

@@ -81,62 +81,14 @@ G.NamespaceApis = {
   },
   C_AdventureJournal = {
     methods = {
-      ActivateEntry = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanBeShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumAvailableSuggestions = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPrimaryOffset = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetReward = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSuggestions = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPrimaryOffset = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      UpdateSuggestions = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ActivateEntry = true,
+      CanBeShown = true,
+      GetNumAvailableSuggestions = true,
+      GetPrimaryOffset = true,
+      GetReward = true,
+      GetSuggestions = true,
+      SetPrimaryOffset = true,
+      UpdateSuggestions = true,
     },
     products = {
       wow = true,
@@ -146,83 +98,17 @@ G.NamespaceApis = {
   },
   C_AdventureMap = {
     methods = {
-      Close = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMapID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMapInsetDetailTileInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMapInsetInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumMapInsets = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumQuestOffers = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumZoneChoices = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetQuestInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetQuestOfferInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetZoneChoiceInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      StartQuest = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      Close = true,
+      GetMapID = true,
+      GetMapInsetDetailTileInfo = true,
+      GetMapInsetInfo = true,
+      GetNumMapInsets = true,
+      GetNumQuestOffers = true,
+      GetNumZoneChoices = true,
+      GetQuestInfo = true,
+      GetQuestOfferInfo = true,
+      GetZoneChoiceInfo = true,
+      StartQuest = true,
     },
     products = {
       wow = true,
@@ -232,27 +118,9 @@ G.NamespaceApis = {
   },
   C_AlliedRaces = {
     methods = {
-      ClearAlliedRaceDetailsGiver = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAllRacialAbilitiesFromID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRaceInfoByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ClearAlliedRaceDetailsGiver = true,
+      GetAllRacialAbilitiesFromID = true,
+      GetRaceInfoByID = true,
     },
     products = {
       wow = true,
@@ -262,55 +130,13 @@ G.NamespaceApis = {
   },
   C_AnimaDiversion = {
     methods = {
-      CloseUI = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAnimaDiversionNodes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOriginPosition = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetReinforceProgress = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTextureKit = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      OpenAnimaDiversionUI = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SelectAnimaNode = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CloseUI = true,
+      GetAnimaDiversionNodes = true,
+      GetOriginPosition = true,
+      GetReinforceProgress = true,
+      GetTextureKit = true,
+      OpenAnimaDiversionUI = true,
+      SelectAnimaNode = true,
     },
     products = {
       wow = true,
@@ -320,20 +146,8 @@ G.NamespaceApis = {
   },
   C_ArdenwealdGardening = {
     methods = {
-      GetGardenData = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsGardenAccessible = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetGardenData = true,
+      IsGardenAccessible = true,
     },
     products = {
       wow = true,
@@ -366,433 +180,67 @@ G.NamespaceApis = {
   },
   C_ArtifactUI = {
     methods = {
-      AddPower = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ApplyCursorRelicToSlot = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanApplyArtifactRelic = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanApplyCursorRelicToSlot = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanApplyRelicItemIDToEquippedArtifactSlot = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanApplyRelicItemIDToSlot = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CheckRespecNPC = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      Clear = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearForgeCamera = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ConfirmRespec = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      DoesEquippedArtifactHaveAnyRelicsSlotted = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAppearanceInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAppearanceInfoByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAppearanceSetInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetArtifactArtInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetArtifactInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetArtifactItemID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetArtifactTier = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetArtifactXPRewardTargetInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCostForPointAtRank = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetEquippedArtifactArtInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetEquippedArtifactInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetEquippedArtifactItemID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetEquippedArtifactNumRelicSlots = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetEquippedArtifactRelicInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetEquippedRelicLockedReason = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetForgeRotation = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemLevelIncreaseProvidedByRelic = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMetaPowerInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumAppearanceSets = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumObtainedArtifacts = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumRelicSlots = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPointsRemaining = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPowerHyperlink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPowerInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPowerLinks = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPowers = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPowersAffectedByRelic = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPowersAffectedByRelicItemLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPreviewAppearance = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRelicInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRelicInfoByItemID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRelicLockedReason = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRelicSlotType = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRespecArtifactArtInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRespecArtifactInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRespecCost = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTotalPowerCost = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTotalPurchasedRanks = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsArtifactDisabled = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsAtForge = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsEquippedArtifactDisabled = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsEquippedArtifactMaxed = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsMaxedByRulesOrEffect = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsPowerKnown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsViewedArtifactEquipped = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAppearance = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetForgeCamera = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetForgeRotation = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPreviewAppearance = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ShouldSuppressForgeRotation = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      AddPower = true,
+      ApplyCursorRelicToSlot = true,
+      CanApplyArtifactRelic = true,
+      CanApplyCursorRelicToSlot = true,
+      CanApplyRelicItemIDToEquippedArtifactSlot = true,
+      CanApplyRelicItemIDToSlot = true,
+      CheckRespecNPC = true,
+      Clear = true,
+      ClearForgeCamera = true,
+      ConfirmRespec = true,
+      DoesEquippedArtifactHaveAnyRelicsSlotted = true,
+      GetAppearanceInfo = true,
+      GetAppearanceInfoByID = true,
+      GetAppearanceSetInfo = true,
+      GetArtifactArtInfo = true,
+      GetArtifactInfo = true,
+      GetArtifactItemID = true,
+      GetArtifactTier = true,
+      GetArtifactXPRewardTargetInfo = true,
+      GetCostForPointAtRank = true,
+      GetEquippedArtifactArtInfo = true,
+      GetEquippedArtifactInfo = true,
+      GetEquippedArtifactItemID = true,
+      GetEquippedArtifactNumRelicSlots = true,
+      GetEquippedArtifactRelicInfo = true,
+      GetEquippedRelicLockedReason = true,
+      GetForgeRotation = true,
+      GetItemLevelIncreaseProvidedByRelic = true,
+      GetMetaPowerInfo = true,
+      GetNumAppearanceSets = true,
+      GetNumObtainedArtifacts = true,
+      GetNumRelicSlots = true,
+      GetPointsRemaining = true,
+      GetPowerHyperlink = true,
+      GetPowerInfo = true,
+      GetPowerLinks = true,
+      GetPowers = true,
+      GetPowersAffectedByRelic = true,
+      GetPowersAffectedByRelicItemLink = true,
+      GetPreviewAppearance = true,
+      GetRelicInfo = true,
+      GetRelicInfoByItemID = true,
+      GetRelicLockedReason = true,
+      GetRelicSlotType = true,
+      GetRespecArtifactArtInfo = true,
+      GetRespecArtifactInfo = true,
+      GetRespecCost = true,
+      GetTotalPowerCost = true,
+      GetTotalPurchasedRanks = true,
+      IsArtifactDisabled = true,
+      IsAtForge = true,
+      IsEquippedArtifactDisabled = true,
+      IsEquippedArtifactMaxed = true,
+      IsMaxedByRulesOrEffect = true,
+      IsPowerKnown = true,
+      IsViewedArtifactEquipped = true,
+      SetAppearance = true,
+      SetForgeCamera = true,
+      SetForgeRotation = true,
+      SetPreviewAppearance = true,
+      ShouldSuppressForgeRotation = true,
     },
     products = {
       wow = true,
@@ -802,580 +250,88 @@ G.NamespaceApis = {
   },
   C_AuctionHouse = {
     methods = {
-      CalculateCommodityDeposit = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CalculateItemDeposit = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanCancelAuction = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CancelAuction = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CancelCommoditiesPurchase = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CancelSell = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseAuctionHouse = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ConfirmCommoditiesPurchase = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      FavoritesAreAvailable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAuctionInfoByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAuctionItemSubClasses = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAvailablePostCount = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBidInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBidType = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBids = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBrowseResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCancelCost = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCommoditySearchResultInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCommoditySearchResultsQuantity = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetExtraBrowseInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFilterGroups = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemCommodityStatus = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemKeyFromItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemKeyInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemKeyRequiredLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemSearchResultInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemSearchResultsQuantity = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMaxBidItemBid = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMaxBidItemBuyout = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMaxCommoditySearchResultPrice = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMaxItemSearchResultBid = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMaxItemSearchResultBuyout = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMaxOwnedAuctionBid = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMaxOwnedAuctionBuyout = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumBidTypes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumBids = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumCommoditySearchResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumItemSearchResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumOwnedAuctionTypes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumOwnedAuctions = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumReplicateItems = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOwnedAuctionInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOwnedAuctionType = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOwnedAuctions = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetQuoteDurationRemaining = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetReplicateItemBattlePetInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetReplicateItemInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetReplicateItemLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetReplicateItemTimeLeft = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTimeLeftBandInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasFavorites = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasFullBidResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasFullBrowseResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasFullCommoditySearchResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasFullItemSearchResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasFullOwnedAuctionResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasMaxFavorites = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasSearchResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsFavoriteItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSellItemValid = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsThrottledMessageSystemReady = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MakeItemKey = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PlaceBid = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PostCommodity = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PostItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      QueryBids = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      QueryOwnedAuctions = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RefreshCommoditySearchResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RefreshItemSearchResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ReplicateItems = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestFavorites = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestMoreBrowseResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestMoreCommoditySearchResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestMoreItemSearchResults = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestOwnedAuctionBidderInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SearchForFavorites = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SearchForItemKeys = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SendBrowseQuery = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SendSearchQuery = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SendSellSearchQuery = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetFavoriteItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      StartCommoditiesPurchase = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CalculateCommodityDeposit = true,
+      CalculateItemDeposit = true,
+      CanCancelAuction = true,
+      CancelAuction = true,
+      CancelCommoditiesPurchase = true,
+      CancelSell = true,
+      CloseAuctionHouse = true,
+      ConfirmCommoditiesPurchase = true,
+      FavoritesAreAvailable = true,
+      GetAuctionInfoByID = true,
+      GetAuctionItemSubClasses = true,
+      GetAvailablePostCount = true,
+      GetBidInfo = true,
+      GetBidType = true,
+      GetBids = true,
+      GetBrowseResults = true,
+      GetCancelCost = true,
+      GetCommoditySearchResultInfo = true,
+      GetCommoditySearchResultsQuantity = true,
+      GetExtraBrowseInfo = true,
+      GetFilterGroups = true,
+      GetItemCommodityStatus = true,
+      GetItemKeyFromItem = true,
+      GetItemKeyInfo = true,
+      GetItemKeyRequiredLevel = true,
+      GetItemSearchResultInfo = true,
+      GetItemSearchResultsQuantity = true,
+      GetMaxBidItemBid = true,
+      GetMaxBidItemBuyout = true,
+      GetMaxCommoditySearchResultPrice = true,
+      GetMaxItemSearchResultBid = true,
+      GetMaxItemSearchResultBuyout = true,
+      GetMaxOwnedAuctionBid = true,
+      GetMaxOwnedAuctionBuyout = true,
+      GetNumBidTypes = true,
+      GetNumBids = true,
+      GetNumCommoditySearchResults = true,
+      GetNumItemSearchResults = true,
+      GetNumOwnedAuctionTypes = true,
+      GetNumOwnedAuctions = true,
+      GetNumReplicateItems = true,
+      GetOwnedAuctionInfo = true,
+      GetOwnedAuctionType = true,
+      GetOwnedAuctions = true,
+      GetQuoteDurationRemaining = true,
+      GetReplicateItemBattlePetInfo = true,
+      GetReplicateItemInfo = true,
+      GetReplicateItemLink = true,
+      GetReplicateItemTimeLeft = true,
+      GetTimeLeftBandInfo = true,
+      HasFavorites = true,
+      HasFullBidResults = true,
+      HasFullBrowseResults = true,
+      HasFullCommoditySearchResults = true,
+      HasFullItemSearchResults = true,
+      HasFullOwnedAuctionResults = true,
+      HasMaxFavorites = true,
+      HasSearchResults = true,
+      IsFavoriteItem = true,
+      IsSellItemValid = true,
+      IsThrottledMessageSystemReady = true,
+      MakeItemKey = true,
+      PlaceBid = true,
+      PostCommodity = true,
+      PostItem = true,
+      QueryBids = true,
+      QueryOwnedAuctions = true,
+      RefreshCommoditySearchResults = true,
+      RefreshItemSearchResults = true,
+      ReplicateItems = true,
+      RequestFavorites = true,
+      RequestMoreBrowseResults = true,
+      RequestMoreCommoditySearchResults = true,
+      RequestMoreItemSearchResults = true,
+      RequestOwnedAuctionBidderInfo = true,
+      SearchForFavorites = true,
+      SearchForItemKeys = true,
+      SendBrowseQuery = true,
+      SendSearchQuery = true,
+      SendSellSearchQuery = true,
+      SetFavoriteItem = true,
+      StartCommoditiesPurchase = true,
     },
     products = {
       wow = true,
@@ -1446,181 +402,31 @@ G.NamespaceApis = {
   },
   C_BarberShop = {
     methods = {
-      ApplyCustomizationChoices = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      Cancel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearPreviewChoices = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAvailableCustomizations = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrentCameraZoom = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrentCharacterData = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrentCost = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasAnyChanges = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsViewingAlteredForm = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MarkCustomizationChoiceAsSeen = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MarkCustomizationOptionAsSeen = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PreviewCustomizationChoice = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RandomizeCustomizationChoices = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ResetCameraRotation = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ResetCustomizationChoices = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RotateCamera = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SaveSeenChoices = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetCameraDistanceOffset = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetCameraZoomLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetCustomizationChoice = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetModelDressState = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetSelectedSex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetViewingAlteredForm = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetViewingShapeshiftForm = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ZoomCamera = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ApplyCustomizationChoices = true,
+      Cancel = true,
+      ClearPreviewChoices = true,
+      GetAvailableCustomizations = true,
+      GetCurrentCameraZoom = true,
+      GetCurrentCharacterData = true,
+      GetCurrentCost = true,
+      HasAnyChanges = true,
+      IsViewingAlteredForm = true,
+      MarkCustomizationChoiceAsSeen = true,
+      MarkCustomizationOptionAsSeen = true,
+      PreviewCustomizationChoice = true,
+      RandomizeCustomizationChoices = true,
+      ResetCameraRotation = true,
+      ResetCustomizationChoices = true,
+      RotateCamera = true,
+      SaveSeenChoices = true,
+      SetCameraDistanceOffset = true,
+      SetCameraZoomLevel = true,
+      SetCustomizationChoice = true,
+      SetModelDressState = true,
+      SetSelectedSex = true,
+      SetViewingAlteredForm = true,
+      SetViewingShapeshiftForm = true,
+      ZoomCamera = true,
     },
     products = {
       wow = true,
@@ -1630,55 +436,13 @@ G.NamespaceApis = {
   },
   C_BattleNet = {
     methods = {
-      GetAccountInfoByGUID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAccountInfoByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFriendAccountInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFriendGameAccountInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFriendNumGameAccounts = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetGameAccountInfoByGUID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetGameAccountInfoByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetAccountInfoByGUID = true,
+      GetAccountInfoByID = true,
+      GetFriendAccountInfo = true,
+      GetFriendGameAccountInfo = true,
+      GetFriendNumGameAccounts = true,
+      GetGameAccountInfoByGUID = true,
+      GetGameAccountInfoByID = true,
     },
     products = {
       wow = true,
@@ -1693,62 +457,14 @@ G.NamespaceApis = {
   },
   C_BlackMarket = {
     methods = {
-      Close = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetHotItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemInfoByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemInfoByIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumItems = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsViewOnly = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ItemPlaceBid = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestItems = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      Close = true,
+      GetHotItem = true,
+      GetItemInfoByID = true,
+      GetItemInfoByIndex = true,
+      GetNumItems = true,
+      IsViewOnly = true,
+      ItemPlaceBid = true,
+      RequestItems = true,
     },
     products = {
       wow = true,
@@ -1873,76 +589,16 @@ G.NamespaceApis = {
   },
   C_CampaignInfo = {
     methods = {
-      GetAvailableCampaigns = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCampaignChapterInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCampaignID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCampaignInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetChapterIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrentChapterID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFailureReason = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetState = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsCampaignQuest = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      UsesNormalQuestIcons = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetAvailableCampaigns = true,
+      GetCampaignChapterInfo = true,
+      GetCampaignID = true,
+      GetCampaignInfo = true,
+      GetChapterIDs = true,
+      GetCurrentChapterID = true,
+      GetFailureReason = true,
+      GetState = true,
+      IsCampaignQuest = true,
+      UsesNormalQuestIcons = true,
     },
     products = {
       wow = true,
@@ -1952,195 +608,33 @@ G.NamespaceApis = {
   },
   C_ChallengeMode = {
     methods = {
-      CanUseKeystoneInCurrentMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearKeystone = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseKeystoneFrame = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetActiveChallengeMapID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetActiveKeystoneInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAffixInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCompletionInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetDeathCount = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetDungeonScoreRarityColor = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetGuildLeaders = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetKeystoneLevelRarityColor = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMapScoreInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMapTable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMapUIInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOverallDungeonScore = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPowerLevelDamageHealthMod = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSlottedKeystoneInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSpecificDungeonOverallScoreRarityColor = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSpecificDungeonScoreRarityColor = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasSlottedKeystone = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsChallengeModeActive = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RemoveKeystone = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestLeaders = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      Reset = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetKeystoneTooltip = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SlotKeystone = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      StartChallengeMode = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CanUseKeystoneInCurrentMap = true,
+      ClearKeystone = true,
+      CloseKeystoneFrame = true,
+      GetActiveChallengeMapID = true,
+      GetActiveKeystoneInfo = true,
+      GetAffixInfo = true,
+      GetCompletionInfo = true,
+      GetDeathCount = true,
+      GetDungeonScoreRarityColor = true,
+      GetGuildLeaders = true,
+      GetKeystoneLevelRarityColor = true,
+      GetMapScoreInfo = true,
+      GetMapTable = true,
+      GetMapUIInfo = true,
+      GetOverallDungeonScore = true,
+      GetPowerLevelDamageHealthMod = true,
+      GetSlottedKeystoneInfo = true,
+      GetSpecificDungeonOverallScoreRarityColor = true,
+      GetSpecificDungeonScoreRarityColor = true,
+      HasSlottedKeystone = true,
+      IsChallengeModeActive = true,
+      RemoveKeystone = true,
+      RequestLeaders = true,
+      Reset = true,
+      SetKeystoneTooltip = true,
+      SlotKeystone = true,
+      StartChallengeMode = true,
     },
     products = {
       wow = true,
@@ -2347,34 +841,10 @@ G.NamespaceApis = {
   },
   C_ChromieTime = {
     methods = {
-      CloseUI = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetChromieTimeExpansionOption = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetChromieTimeExpansionOptions = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SelectChromieTimeOption = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CloseUI = true,
+      GetChromieTimeExpansionOption = true,
+      GetChromieTimeExpansionOptions = true,
+      SelectChromieTimeOption = true,
     },
     products = {
       wow = true,
@@ -2384,13 +854,7 @@ G.NamespaceApis = {
   },
   C_ClassColor = {
     methods = {
-      GetClassColor = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetClassColor = true,
     },
     products = {
       wow = true,
@@ -2400,20 +864,8 @@ G.NamespaceApis = {
   },
   C_ClassTrial = {
     methods = {
-      GetClassTrialLogoutTimeSeconds = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsClassTrialCharacter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetClassTrialLogoutTimeSeconds = true,
+      IsClassTrialCharacter = true,
     },
     products = {
       wow = true,
@@ -2423,83 +875,17 @@ G.NamespaceApis = {
   },
   C_ClickBindings = {
     methods = {
-      CanSpellBeClickBound = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ExecuteBinding = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBindingType = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetEffectiveInteractionButton = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetProfileInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetStringFromModifiers = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTutorialShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MakeModifiers = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ResetCurrentProfile = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetProfileByInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetTutorialShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CanSpellBeClickBound = true,
+      ExecuteBinding = true,
+      GetBindingType = true,
+      GetEffectiveInteractionButton = true,
+      GetProfileInfo = true,
+      GetStringFromModifiers = true,
+      GetTutorialShown = true,
+      MakeModifiers = true,
+      ResetCurrentProfile = true,
+      SetProfileByInfo = true,
+      SetTutorialShown = true,
     },
     products = {
       wow = true,
@@ -2636,377 +1022,59 @@ G.NamespaceApis = {
   },
   C_ClubFinder = {
     methods = {
-      ApplicantAcceptClubInvite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ApplicantDeclineClubInvite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CancelMembershipRequest = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CheckAllPlayerApplicantSettings = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearAllFinderCache = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearClubApplicantsCache = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearClubFinderPostingsCache = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      DoesPlayerBelongToClubFromClubGUID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetClubFinderDisableReason = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetClubRecruitmentSettings = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetClubTypeFromFinderGUID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFocusIndexFromFlag = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPlayerApplicantLocaleFlags = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPlayerApplicantSettings = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPlayerClubApplicationStatus = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPlayerSettingsFocusFlagsSelectedCount = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPostingIDFromClubFinderGUID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecruitingClubInfoFromClubID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecruitingClubInfoFromFinderGUID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetStatusOfPostingFromClubId = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTotalMatchingCommunityListSize = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTotalMatchingGuildListSize = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasAlreadyAppliedToLinkedPosting = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasPostingBeenDelisted = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsEnabled = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsListingEnabledFromFlags = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsPostingBanned = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      LookupClubPostingFromClubFinderGUID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PlayerGetClubInvitationList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PlayerRequestPendingClubsList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PlayerReturnPendingCommunitiesList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PlayerReturnPendingGuildsList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PostClub = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestApplicantList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestClubsList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestMembershipToClub = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestNextCommunityPage = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestNextGuildPage = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestPostingInformationFromClubId = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestSubscribedClubPostingIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ResetClubPostingMapCache = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RespondToApplicant = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ReturnClubApplicantList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ReturnMatchingCommunityList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ReturnMatchingGuildList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ReturnPendingClubApplicantList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SendChatWhisper = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAllRecruitmentSettings = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPlayerApplicantLocaleFlags = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPlayerApplicantSettings = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetRecruitmentLocale = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetRecruitmentSettings = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ShouldShowClubFinder = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ApplicantAcceptClubInvite = true,
+      ApplicantDeclineClubInvite = true,
+      CancelMembershipRequest = true,
+      CheckAllPlayerApplicantSettings = true,
+      ClearAllFinderCache = true,
+      ClearClubApplicantsCache = true,
+      ClearClubFinderPostingsCache = true,
+      DoesPlayerBelongToClubFromClubGUID = true,
+      GetClubFinderDisableReason = true,
+      GetClubRecruitmentSettings = true,
+      GetClubTypeFromFinderGUID = true,
+      GetFocusIndexFromFlag = true,
+      GetPlayerApplicantLocaleFlags = true,
+      GetPlayerApplicantSettings = true,
+      GetPlayerClubApplicationStatus = true,
+      GetPlayerSettingsFocusFlagsSelectedCount = true,
+      GetPostingIDFromClubFinderGUID = true,
+      GetRecruitingClubInfoFromClubID = true,
+      GetRecruitingClubInfoFromFinderGUID = true,
+      GetStatusOfPostingFromClubId = true,
+      GetTotalMatchingCommunityListSize = true,
+      GetTotalMatchingGuildListSize = true,
+      HasAlreadyAppliedToLinkedPosting = true,
+      HasPostingBeenDelisted = true,
+      IsEnabled = true,
+      IsListingEnabledFromFlags = true,
+      IsPostingBanned = true,
+      LookupClubPostingFromClubFinderGUID = true,
+      PlayerGetClubInvitationList = true,
+      PlayerRequestPendingClubsList = true,
+      PlayerReturnPendingCommunitiesList = true,
+      PlayerReturnPendingGuildsList = true,
+      PostClub = true,
+      RequestApplicantList = true,
+      RequestClubsList = true,
+      RequestMembershipToClub = true,
+      RequestNextCommunityPage = true,
+      RequestNextGuildPage = true,
+      RequestPostingInformationFromClubId = true,
+      RequestSubscribedClubPostingIDs = true,
+      ResetClubPostingMapCache = true,
+      RespondToApplicant = true,
+      ReturnClubApplicantList = true,
+      ReturnMatchingCommunityList = true,
+      ReturnMatchingGuildList = true,
+      ReturnPendingClubApplicantList = true,
+      SendChatWhisper = true,
+      SetAllRecruitmentSettings = true,
+      SetPlayerApplicantLocaleFlags = true,
+      SetPlayerApplicantSettings = true,
+      SetRecruitmentLocale = true,
+      SetRecruitmentSettings = true,
+      ShouldShowClubFinder = true,
     },
     products = {
       wow = true,
@@ -3162,132 +1230,24 @@ G.NamespaceApis = {
   },
   C_ContributionCollector = {
     methods = {
-      Close = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      Contribute = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetActive = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAtlases = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBuffs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetContributionAppearance = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetContributionCollectorsForMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetContributionResult = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetDescription = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetManagedContributionsForCreatureID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetName = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOrderIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRequiredContributionCurrency = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRequiredContributionItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRewardQuestID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetState = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasPendingContribution = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsAwaitingRewardQuestData = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      Close = true,
+      Contribute = true,
+      GetActive = true,
+      GetAtlases = true,
+      GetBuffs = true,
+      GetContributionAppearance = true,
+      GetContributionCollectorsForMap = true,
+      GetContributionResult = true,
+      GetDescription = true,
+      GetManagedContributionsForCreatureID = true,
+      GetName = true,
+      GetOrderIndex = true,
+      GetRequiredContributionCurrency = true,
+      GetRequiredContributionItem = true,
+      GetRewardQuestID = true,
+      GetState = true,
+      HasPendingContribution = true,
+      IsAwaitingRewardQuestData = true,
     },
     products = {
       wow = true,
@@ -3297,20 +1257,8 @@ G.NamespaceApis = {
   },
   C_CovenantCallings = {
     methods = {
-      AreCallingsUnlocked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestCallings = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      AreCallingsUnlocked = true,
+      RequestCallings = true,
     },
     products = {
       wow = true,
@@ -3320,20 +1268,8 @@ G.NamespaceApis = {
   },
   C_CovenantPreview = {
     methods = {
-      CloseFromUI = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCovenantInfoForPlayerChoiceResponseID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CloseFromUI = true,
+      GetCovenantInfoForPlayerChoiceResponseID = true,
     },
     products = {
       wow = true,
@@ -3343,118 +1279,22 @@ G.NamespaceApis = {
   },
   C_CovenantSanctumUI = {
     methods = {
-      CanAccessReservoir = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanDepositAnima = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      DepositAnima = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      EndInteraction = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAnimaInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrentTalentTreeID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFeatures = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRenownLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRenownLevels = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRenownRewardsForLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSanctumType = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSoulCurrencies = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasMaximumRenown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsPlayerInRenownCatchUpMode = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsWeeklyRenownCapped = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestCatchUpState = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CanAccessReservoir = true,
+      CanDepositAnima = true,
+      DepositAnima = true,
+      EndInteraction = true,
+      GetAnimaInfo = true,
+      GetCurrentTalentTreeID = true,
+      GetFeatures = true,
+      GetRenownLevel = true,
+      GetRenownLevels = true,
+      GetRenownRewardsForLevel = true,
+      GetSanctumType = true,
+      GetSoulCurrencies = true,
+      HasMaximumRenown = true,
+      IsPlayerInRenownCatchUpMode = true,
+      IsWeeklyRenownCapped = true,
+      RequestCatchUpState = true,
     },
     products = {
       wow = true,
@@ -3464,27 +1304,9 @@ G.NamespaceApis = {
   },
   C_Covenants = {
     methods = {
-      GetActiveCovenantID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCovenantData = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCovenantIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetActiveCovenantID = true,
+      GetCovenantData = true,
+      GetCovenantIDs = true,
     },
     products = {
       wow = true,
@@ -3679,97 +1501,19 @@ G.NamespaceApis = {
   },
   C_EncounterJournal = {
     methods = {
-      GetDungeonEntrancesForMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetEncountersOnMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetLootInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetLootInfoByIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSectionIconFlags = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSectionInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSlotFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      InstanceHasLoot = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsEncounterComplete = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ResetSlotFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPreviewMythicPlusLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPreviewPvpTier = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetSlotFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetDungeonEntrancesForMap = true,
+      GetEncountersOnMap = true,
+      GetLootInfo = true,
+      GetLootInfoByIndex = true,
+      GetSectionIconFlags = true,
+      GetSectionInfo = true,
+      GetSlotFilter = true,
+      InstanceHasLoot = true,
+      IsEncounterComplete = true,
+      ResetSlotFilter = true,
+      SetPreviewMythicPlusLevel = true,
+      SetPreviewPvpTier = true,
+      SetSlotFilter = true,
     },
     products = {
       wow = true,
@@ -3806,27 +1550,9 @@ G.NamespaceApis = {
   },
   C_EventToastManager = {
     methods = {
-      GetLevelUpDisplayToastsFromLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNextToastToDisplay = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RemoveCurrentToast = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetLevelUpDisplayToastsFromLevel = true,
+      GetNextToastToDisplay = true,
+      RemoveCurrentToast = true,
     },
     products = {
       wow = true,
@@ -3836,20 +1562,8 @@ G.NamespaceApis = {
   },
   C_FogOfWar = {
     methods = {
-      GetFogOfWarForMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFogOfWarInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetFogOfWarForMap = true,
+      GetFogOfWarInfo = true,
     },
     products = {
       wow = true,
@@ -3859,13 +1573,7 @@ G.NamespaceApis = {
   },
   C_FrameManager = {
     methods = {
-      GetFrameVisibilityState = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetFrameVisibilityState = true,
     },
     products = {
       wow = true,
@@ -3948,1588 +1656,232 @@ G.NamespaceApis = {
   },
   C_Garrison = {
     methods = {
-      AddFollowerToMission = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      AllowMissionStartAboveSoftCap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      AreMissionFollowerRequirementsMet = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      AssignFollowerToBuilding = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanGenerateRecruits = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanOpenMissionChest = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanSetRecruitmentPreference = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanSpellTargetFollowerIDWithAddAbility = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanUpgradeGarrison = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CancelConstruction = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CastItemSpellOnFollowerAbility = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CastSpellOnFollower = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CastSpellOnFollowerAbility = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CastSpellOnMission = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearCompleteTalent = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseArchitect = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseGarrisonTradeskillNPC = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseMissionNPC = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseRecruitmentNPC = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseTalentNPC = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseTradeskillCrafter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GenerateRecruits = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAllBonusAbilityEffects = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAllEncounterThreats = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAutoCombatDamageClassValues = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAutoMissionBoardState = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAutoMissionEnvironmentEffect = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAutoMissionTargetingInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAutoMissionTargetingInfoForSpell = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAutoTroops = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAvailableMissions = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAvailableRecruits = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBasicMissionInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBuffedFollowersForMission = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBuildingInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBuildingLockInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBuildingSizes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBuildingSpecInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBuildingTimeRemaining = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBuildingTooltip = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBuildingUpgradeInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBuildings = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBuildingsForPlot = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBuildingsForSize = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetClassSpecCategoryInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCombatAllyMission = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCombatLogSpellInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCompleteMissions = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCompleteTalent = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrencyTypes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrentCypherEquipmentLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrentGarrTalentTreeFriendshipFactionID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrentGarrTalentTreeID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCyphersToNextEquipmentLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAbilities = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAbilityAtIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAbilityAtIndexByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAbilityCounterMechanicInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAbilityCountersForMechanicTypes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAbilityDescription = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAbilityIcon = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAbilityInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAbilityIsTrait = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAbilityLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAbilityName = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerActivationCost = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAutoCombatSpells = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerAutoCombatStats = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerBiasForMission = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerClassSpec = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerClassSpecAtlas = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerClassSpecByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerClassSpecName = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerDisplayID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerInfoForBuilding = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerIsTroop = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerItemLevelAverage = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerItems = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerLevelXP = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerLinkByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerMissionCompleteInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerMissionTimeLeft = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerMissionTimeLeftSeconds = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerModelItems = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerName = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerNameByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerPortraitIconID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerPortraitIconIDByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerQuality = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerQualityTable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerRecentlyGainedAbilityIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerRecentlyGainedTraitIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerShipments = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerSoftCap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerSourceTextByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerSpecializationAtIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerStatus = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerTraitAtIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerTraitAtIndexByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerTypeByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerTypeByMissionID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerUnderBiasReason = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerXP = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerXPTable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowerZoneSupportAbilities = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowers = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowersSpellsForMission = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFollowersTraitsForMission = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetGarrisonInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetGarrisonPlotsInstancesForMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetGarrisonTalentTreeCurrencyTypes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetGarrisonTalentTreeType = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetGarrisonUpgradeCost = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetInProgressMissions = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetLandingPageGarrisonType = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetLandingPageItems = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetLandingPageShipmentCount = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetLandingPageShipmentInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetLandingPageShipmentInfoByContainerID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetLooseShipments = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMaxCypherEquipmentLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionBonusAbilityEffects = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionCompleteEncounters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionCost = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionDeploymentInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionDisplayIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionEncounterIconInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionMaxFollowers = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionName = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionRewardInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionSuccessChance = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionTexture = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionTimes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMissionUncounteredMechanics = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumActiveFollowers = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumFollowerActivationsRemaining = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumFollowerDailyActivations = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumFollowers = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumFollowersForMechanic = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumFollowersOnMission = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumPendingShipments = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumShipmentCurrencies = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumShipmentReagents = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOwnedBuildingInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOwnedBuildingInfoAbbrev = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPartyBuffs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPartyMentorLevels = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPartyMissionInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPendingShipmentInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPlots = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPlotsForBuilding = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPossibleFollowersForBuilding = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecruitAbilities = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecruiterAbilityCategories = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecruiterAbilityList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecruitmentPreferences = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetShipDeathAnimInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetShipmentContainerInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetShipmentItemInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetShipmentReagentCurrencyInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetShipmentReagentInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetShipmentReagentItemLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSpecChangeCost = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTabForPlot = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTalentInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTalentPointsSpentInTalentTree = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTalentTreeIDsByClassID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTalentTreeInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTalentTreeResetInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTalentTreeTalentPointResearchInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTalentUnlockWorldQuest = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasAdventures = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasGarrison = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasShipyard = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsAboveFollowerSoftCap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsAtGarrisonMissionNPC = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsEnvironmentCountered = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsFollowerCollected = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsFollowerOnCompletedMission = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsInvasionAvailable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsMechanicFullyCountered = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsOnGarrisonMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsOnShipmentQuestForNPC = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsOnShipyardMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsPlayerInGarrison = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsTalentConditionMet = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsUsingPartyGarrison = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsVisitGarrisonAvailable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MarkMissionComplete = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MissionBonusRoll = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PlaceBuilding = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RecruitFollower = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RegenerateCombatLog = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RemoveFollower = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RemoveFollowerFromBuilding = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RemoveFollowerFromMission = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RenameFollower = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestClassSpecCategoryInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestGarrisonUpgradeable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestLandingPageShipmentInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestShipmentCreation = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestShipmentInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ResearchTalent = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RushHealAllFollowers = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RushHealFollower = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SearchForFollower = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAutoCombatSpellFastForward = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetBuildingActive = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetBuildingSpecialization = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetFollowerFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetFollowerInactive = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetRecruitmentPreferences = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetUsingPartyGarrison = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ShouldShowMapTab = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ShowFollowerNameInErrorMessage = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      StartMission = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SwapBuildings = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      TargetSpellHasFollowerItemLevelUpgrade = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      TargetSpellHasFollowerReroll = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      TargetSpellHasFollowerTemporaryAbility = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      UpgradeBuilding = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      UpgradeGarrison = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      AddFollowerToMission = true,
+      AllowMissionStartAboveSoftCap = true,
+      AreMissionFollowerRequirementsMet = true,
+      AssignFollowerToBuilding = true,
+      CanGenerateRecruits = true,
+      CanOpenMissionChest = true,
+      CanSetRecruitmentPreference = true,
+      CanSpellTargetFollowerIDWithAddAbility = true,
+      CanUpgradeGarrison = true,
+      CancelConstruction = true,
+      CastItemSpellOnFollowerAbility = true,
+      CastSpellOnFollower = true,
+      CastSpellOnFollowerAbility = true,
+      CastSpellOnMission = true,
+      ClearCompleteTalent = true,
+      CloseArchitect = true,
+      CloseGarrisonTradeskillNPC = true,
+      CloseMissionNPC = true,
+      CloseRecruitmentNPC = true,
+      CloseTalentNPC = true,
+      CloseTradeskillCrafter = true,
+      GenerateRecruits = true,
+      GetAllBonusAbilityEffects = true,
+      GetAllEncounterThreats = true,
+      GetAutoCombatDamageClassValues = true,
+      GetAutoMissionBoardState = true,
+      GetAutoMissionEnvironmentEffect = true,
+      GetAutoMissionTargetingInfo = true,
+      GetAutoMissionTargetingInfoForSpell = true,
+      GetAutoTroops = true,
+      GetAvailableMissions = true,
+      GetAvailableRecruits = true,
+      GetBasicMissionInfo = true,
+      GetBuffedFollowersForMission = true,
+      GetBuildingInfo = true,
+      GetBuildingLockInfo = true,
+      GetBuildingSizes = true,
+      GetBuildingSpecInfo = true,
+      GetBuildingTimeRemaining = true,
+      GetBuildingTooltip = true,
+      GetBuildingUpgradeInfo = true,
+      GetBuildings = true,
+      GetBuildingsForPlot = true,
+      GetBuildingsForSize = true,
+      GetClassSpecCategoryInfo = true,
+      GetCombatAllyMission = true,
+      GetCombatLogSpellInfo = true,
+      GetCompleteMissions = true,
+      GetCompleteTalent = true,
+      GetCurrencyTypes = true,
+      GetCurrentCypherEquipmentLevel = true,
+      GetCurrentGarrTalentTreeFriendshipFactionID = true,
+      GetCurrentGarrTalentTreeID = true,
+      GetCyphersToNextEquipmentLevel = true,
+      GetFollowerAbilities = true,
+      GetFollowerAbilityAtIndex = true,
+      GetFollowerAbilityAtIndexByID = true,
+      GetFollowerAbilityCounterMechanicInfo = true,
+      GetFollowerAbilityCountersForMechanicTypes = true,
+      GetFollowerAbilityDescription = true,
+      GetFollowerAbilityIcon = true,
+      GetFollowerAbilityInfo = true,
+      GetFollowerAbilityIsTrait = true,
+      GetFollowerAbilityLink = true,
+      GetFollowerAbilityName = true,
+      GetFollowerActivationCost = true,
+      GetFollowerAutoCombatSpells = true,
+      GetFollowerAutoCombatStats = true,
+      GetFollowerBiasForMission = true,
+      GetFollowerClassSpec = true,
+      GetFollowerClassSpecAtlas = true,
+      GetFollowerClassSpecByID = true,
+      GetFollowerClassSpecName = true,
+      GetFollowerDisplayID = true,
+      GetFollowerInfo = true,
+      GetFollowerInfoForBuilding = true,
+      GetFollowerIsTroop = true,
+      GetFollowerItemLevelAverage = true,
+      GetFollowerItems = true,
+      GetFollowerLevel = true,
+      GetFollowerLevelXP = true,
+      GetFollowerLink = true,
+      GetFollowerLinkByID = true,
+      GetFollowerMissionCompleteInfo = true,
+      GetFollowerMissionTimeLeft = true,
+      GetFollowerMissionTimeLeftSeconds = true,
+      GetFollowerModelItems = true,
+      GetFollowerName = true,
+      GetFollowerNameByID = true,
+      GetFollowerPortraitIconID = true,
+      GetFollowerPortraitIconIDByID = true,
+      GetFollowerQuality = true,
+      GetFollowerQualityTable = true,
+      GetFollowerRecentlyGainedAbilityIDs = true,
+      GetFollowerRecentlyGainedTraitIDs = true,
+      GetFollowerShipments = true,
+      GetFollowerSoftCap = true,
+      GetFollowerSourceTextByID = true,
+      GetFollowerSpecializationAtIndex = true,
+      GetFollowerStatus = true,
+      GetFollowerTraitAtIndex = true,
+      GetFollowerTraitAtIndexByID = true,
+      GetFollowerTypeByID = true,
+      GetFollowerTypeByMissionID = true,
+      GetFollowerUnderBiasReason = true,
+      GetFollowerXP = true,
+      GetFollowerXPTable = true,
+      GetFollowerZoneSupportAbilities = true,
+      GetFollowers = true,
+      GetFollowersSpellsForMission = true,
+      GetFollowersTraitsForMission = true,
+      GetGarrisonInfo = true,
+      GetGarrisonPlotsInstancesForMap = true,
+      GetGarrisonTalentTreeCurrencyTypes = true,
+      GetGarrisonTalentTreeType = true,
+      GetGarrisonUpgradeCost = true,
+      GetInProgressMissions = true,
+      GetLandingPageGarrisonType = true,
+      GetLandingPageItems = true,
+      GetLandingPageShipmentCount = true,
+      GetLandingPageShipmentInfo = true,
+      GetLandingPageShipmentInfoByContainerID = true,
+      GetLooseShipments = true,
+      GetMaxCypherEquipmentLevel = true,
+      GetMissionBonusAbilityEffects = true,
+      GetMissionCompleteEncounters = true,
+      GetMissionCost = true,
+      GetMissionDeploymentInfo = true,
+      GetMissionDisplayIDs = true,
+      GetMissionEncounterIconInfo = true,
+      GetMissionLink = true,
+      GetMissionMaxFollowers = true,
+      GetMissionName = true,
+      GetMissionRewardInfo = true,
+      GetMissionSuccessChance = true,
+      GetMissionTexture = true,
+      GetMissionTimes = true,
+      GetMissionUncounteredMechanics = true,
+      GetNumActiveFollowers = true,
+      GetNumFollowerActivationsRemaining = true,
+      GetNumFollowerDailyActivations = true,
+      GetNumFollowers = true,
+      GetNumFollowersForMechanic = true,
+      GetNumFollowersOnMission = true,
+      GetNumPendingShipments = true,
+      GetNumShipmentCurrencies = true,
+      GetNumShipmentReagents = true,
+      GetOwnedBuildingInfo = true,
+      GetOwnedBuildingInfoAbbrev = true,
+      GetPartyBuffs = true,
+      GetPartyMentorLevels = true,
+      GetPartyMissionInfo = true,
+      GetPendingShipmentInfo = true,
+      GetPlots = true,
+      GetPlotsForBuilding = true,
+      GetPossibleFollowersForBuilding = true,
+      GetRecruitAbilities = true,
+      GetRecruiterAbilityCategories = true,
+      GetRecruiterAbilityList = true,
+      GetRecruitmentPreferences = true,
+      GetShipDeathAnimInfo = true,
+      GetShipmentContainerInfo = true,
+      GetShipmentItemInfo = true,
+      GetShipmentReagentCurrencyInfo = true,
+      GetShipmentReagentInfo = true,
+      GetShipmentReagentItemLink = true,
+      GetSpecChangeCost = true,
+      GetTabForPlot = true,
+      GetTalentInfo = true,
+      GetTalentPointsSpentInTalentTree = true,
+      GetTalentTreeIDsByClassID = true,
+      GetTalentTreeInfo = true,
+      GetTalentTreeResetInfo = true,
+      GetTalentTreeTalentPointResearchInfo = true,
+      GetTalentUnlockWorldQuest = true,
+      HasAdventures = true,
+      HasGarrison = true,
+      HasShipyard = true,
+      IsAboveFollowerSoftCap = true,
+      IsAtGarrisonMissionNPC = true,
+      IsEnvironmentCountered = true,
+      IsFollowerCollected = true,
+      IsFollowerOnCompletedMission = true,
+      IsInvasionAvailable = true,
+      IsMechanicFullyCountered = true,
+      IsOnGarrisonMap = true,
+      IsOnShipmentQuestForNPC = true,
+      IsOnShipyardMap = true,
+      IsPlayerInGarrison = true,
+      IsTalentConditionMet = true,
+      IsUsingPartyGarrison = true,
+      IsVisitGarrisonAvailable = true,
+      MarkMissionComplete = true,
+      MissionBonusRoll = true,
+      PlaceBuilding = true,
+      RecruitFollower = true,
+      RegenerateCombatLog = true,
+      RemoveFollower = true,
+      RemoveFollowerFromBuilding = true,
+      RemoveFollowerFromMission = true,
+      RenameFollower = true,
+      RequestClassSpecCategoryInfo = true,
+      RequestGarrisonUpgradeable = true,
+      RequestLandingPageShipmentInfo = true,
+      RequestShipmentCreation = true,
+      RequestShipmentInfo = true,
+      ResearchTalent = true,
+      RushHealAllFollowers = true,
+      RushHealFollower = true,
+      SearchForFollower = true,
+      SetAutoCombatSpellFastForward = true,
+      SetBuildingActive = true,
+      SetBuildingSpecialization = true,
+      SetFollowerFavorite = true,
+      SetFollowerInactive = true,
+      SetRecruitmentPreferences = true,
+      SetUsingPartyGarrison = true,
+      ShouldShowMapTab = true,
+      ShowFollowerNameInErrorMessage = true,
+      StartMission = true,
+      SwapBuildings = true,
+      TargetSpellHasFollowerItemLevelUpgrade = true,
+      TargetSpellHasFollowerReroll = true,
+      TargetSpellHasFollowerTemporaryAbility = true,
+      UpgradeBuilding = true,
+      UpgradeGarrison = true,
     },
     products = {
       wow = true,
@@ -5675,174 +2027,30 @@ G.NamespaceApis = {
   },
   C_Heirloom = {
     methods = {
-      CanHeirloomUpgradeFromPending = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CreateHeirloom = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetClassAndSpecFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCollectedHeirloomFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetHeirloomInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetHeirloomItemIDFromDisplayedIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetHeirloomItemIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetHeirloomLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetHeirloomMaxUpgradeLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetHeirloomSourceFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumDisplayedHeirlooms = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumHeirlooms = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumKnownHeirlooms = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetUncollectedHeirloomFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsItemHeirloom = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsPendingHeirloomUpgrade = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PlayerHasHeirloom = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetClassAndSpecFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetCollectedHeirloomFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetHeirloomSourceFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetSearch = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetUncollectedHeirloomFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ShouldShowHeirloomHelp = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      UpgradeHeirloom = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CanHeirloomUpgradeFromPending = true,
+      CreateHeirloom = true,
+      GetClassAndSpecFilters = true,
+      GetCollectedHeirloomFilter = true,
+      GetHeirloomInfo = true,
+      GetHeirloomItemIDFromDisplayedIndex = true,
+      GetHeirloomItemIDs = true,
+      GetHeirloomLink = true,
+      GetHeirloomMaxUpgradeLevel = true,
+      GetHeirloomSourceFilter = true,
+      GetNumDisplayedHeirlooms = true,
+      GetNumHeirlooms = true,
+      GetNumKnownHeirlooms = true,
+      GetUncollectedHeirloomFilter = true,
+      IsItemHeirloom = true,
+      IsPendingHeirloomUpgrade = true,
+      PlayerHasHeirloom = true,
+      SetClassAndSpecFilters = true,
+      SetCollectedHeirloomFilter = true,
+      SetHeirloomSourceFilter = true,
+      SetSearch = true,
+      SetUncollectedHeirloomFilter = true,
+      ShouldShowHeirloomHelp = true,
+      UpgradeHeirloom = true,
     },
     products = {
       wow = true,
@@ -5852,55 +2060,13 @@ G.NamespaceApis = {
   },
   C_HeirloomInfo = {
     methods = {
-      AreAllCollectionFiltersChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      AreAllSourceFiltersChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsHeirloomSourceValid = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsUsingDefaultFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAllCollectionFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAllSourceFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetDefaultFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      AreAllCollectionFiltersChecked = true,
+      AreAllSourceFiltersChecked = true,
+      IsHeirloomSourceValid = true,
+      IsUsingDefaultFilters = true,
+      SetAllCollectionFilters = true,
+      SetAllSourceFilters = true,
+      SetDefaultFilters = true,
     },
     products = {
       wow = true,
@@ -5910,20 +2076,8 @@ G.NamespaceApis = {
   },
   C_IncomingSummon = {
     methods = {
-      HasIncomingSummon = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IncomingSummonStatus = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      HasIncomingSummon = true,
+      IncomingSummonStatus = true,
     },
     products = {
       wow = true,
@@ -5933,34 +2087,10 @@ G.NamespaceApis = {
   },
   C_InvasionInfo = {
     methods = {
-      AreInvasionsAvailable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetInvasionForUiMapID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetInvasionInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetInvasionTimeLeft = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      AreInvasionsAvailable = true,
+      GetInvasionForUiMapID = true,
+      GetInvasionInfo = true,
+      GetInvasionTimeLeft = true,
     },
     products = {
       wow = true,
@@ -5970,48 +2100,12 @@ G.NamespaceApis = {
   },
   C_IslandsQueue = {
     methods = {
-      CloseIslandsQueueScreen = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetIslandDifficultyInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetIslandsMaxGroupSize = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetIslandsWeeklyQuestID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      QueueForIsland = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestPreloadRewardData = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CloseIslandsQueueScreen = true,
+      GetIslandDifficultyInfo = true,
+      GetIslandsMaxGroupSize = true,
+      GetIslandsWeeklyQuestID = true,
+      QueueForIsland = true,
+      RequestPreloadRewardData = true,
     },
     products = {
       wow = true,
@@ -6183,90 +2277,18 @@ G.NamespaceApis = {
   },
   C_ItemInteraction = {
     methods = {
-      ClearPendingItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseUI = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetChargeInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemConversionCurrencyCost = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemInteractionInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemInteractionSpellId = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      InitializeFrame = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PerformItemInteraction = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      Reset = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetCorruptionReforgerItemTooltip = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetItemConversionOutputTooltip = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPendingItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ClearPendingItem = true,
+      CloseUI = true,
+      GetChargeInfo = true,
+      GetItemConversionCurrencyCost = true,
+      GetItemInteractionInfo = true,
+      GetItemInteractionSpellId = true,
+      InitializeFrame = true,
+      PerformItemInteraction = true,
+      Reset = true,
+      SetCorruptionReforgerItemTooltip = true,
+      SetItemConversionOutputTooltip = true,
+      SetPendingItem = true,
     },
     products = {
       wow = true,
@@ -6790,146 +2812,26 @@ G.NamespaceApis = {
   },
   C_LegendaryCrafting = {
     methods = {
-      CloseRuneforgeInteraction = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CraftRuneforgeLegendary = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRuneforgeItemPreviewInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRuneforgeLegendaryComponentInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRuneforgeLegendaryCost = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRuneforgeLegendaryCraftSpellID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRuneforgeLegendaryCurrencies = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRuneforgeLegendaryUpgradeCost = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRuneforgeModifierInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRuneforgeModifiers = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRuneforgePowerInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRuneforgePowerSlots = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRuneforgePowers = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRuneforgePowersByClassSpecAndCovenant = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsRuneforgeLegendary = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsRuneforgeLegendaryMaxLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsUpgradeItemValidForRuneforgeLegendary = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsValidRuneforgeBaseItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MakeRuneforgeCraftDescription = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      UpgradeRuneforgeLegendary = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CloseRuneforgeInteraction = true,
+      CraftRuneforgeLegendary = true,
+      GetRuneforgeItemPreviewInfo = true,
+      GetRuneforgeLegendaryComponentInfo = true,
+      GetRuneforgeLegendaryCost = true,
+      GetRuneforgeLegendaryCraftSpellID = true,
+      GetRuneforgeLegendaryCurrencies = true,
+      GetRuneforgeLegendaryUpgradeCost = true,
+      GetRuneforgeModifierInfo = true,
+      GetRuneforgeModifiers = true,
+      GetRuneforgePowerInfo = true,
+      GetRuneforgePowerSlots = true,
+      GetRuneforgePowers = true,
+      GetRuneforgePowersByClassSpecAndCovenant = true,
+      IsRuneforgeLegendary = true,
+      IsRuneforgeLegendaryMaxLevel = true,
+      IsUpgradeItemValidForRuneforgeLegendary = true,
+      IsValidRuneforgeBaseItem = true,
+      MakeRuneforgeCraftDescription = true,
+      UpgradeRuneforgeLegendary = true,
     },
     products = {
       wow = true,
@@ -6939,20 +2841,8 @@ G.NamespaceApis = {
   },
   C_LevelLink = {
     methods = {
-      IsActionLocked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSpellLocked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      IsActionLocked = true,
+      IsSpellLocked = true,
     },
     products = {
       wow = true,
@@ -6962,20 +2852,8 @@ G.NamespaceApis = {
   },
   C_LevelSquish = {
     methods = {
-      ConvertFollowerLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ConvertPlayerLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ConvertFollowerLevel = true,
+      ConvertPlayerLevel = true,
     },
     products = {
       wow = true,
@@ -7001,20 +2879,8 @@ G.NamespaceApis = {
   },
   C_LootJournal = {
     methods = {
-      GetItemSetItems = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemSets = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetItemSetItems = true,
+      GetItemSets = true,
     },
     products = {
       wow = true,
@@ -7024,13 +2890,7 @@ G.NamespaceApis = {
   },
   C_LoreText = {
     methods = {
-      RequestLoreTextForCampaignID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      RequestLoreTextForCampaignID = true,
     },
     products = {
       wow = true,
@@ -7200,55 +3060,13 @@ G.NamespaceApis = {
   },
   C_Minimap = {
     methods = {
-      GetDrawGroundTextures = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetUiMapID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetViewRadius = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsRotateMinimapIgnored = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetDrawGroundTextures = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetIgnoreRotateMinimap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ShouldUseHybridMinimap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetDrawGroundTextures = true,
+      GetUiMapID = true,
+      GetViewRadius = true,
+      IsRotateMinimapIgnored = true,
+      SetDrawGroundTextures = true,
+      SetIgnoreRotateMinimap = true,
+      ShouldUseHybridMinimap = true,
     },
     products = {
       wow = true,
@@ -7270,13 +3088,7 @@ G.NamespaceApis = {
   },
   C_ModifiedInstance = {
     methods = {
-      GetModifiedInstanceInfoFromMapID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetModifiedInstanceInfoFromMapID = true,
     },
     products = {
       wow = true,
@@ -7286,286 +3098,46 @@ G.NamespaceApis = {
   },
   C_MountJournal = {
     methods = {
-      ApplyMountEquipment = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      AreMountEquipmentEffectsSuppressed = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearFanfare = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearRecentFanfares = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      Dismiss = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAppliedMountEquipmentID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCollectedFilterSetting = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetDisplayedMountAllCreatureDisplayInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetDisplayedMountInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetDisplayedMountInfoExtra = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetIsFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMountAllCreatureDisplayInfoByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMountEquipmentUnlockLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMountFromItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMountFromSpell = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMountIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMountInfoByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMountInfoExtraByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMountUsabilityByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumDisplayedMounts = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumMounts = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumMountsNeedingFanfare = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsItemMountEquipment = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsMountEquipmentApplied = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSourceChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsTypeChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsUsingDefaultFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsValidSourceFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsValidTypeFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      NeedsFanfare = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      Pickup = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAllSourceFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAllTypeFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetCollectedFilterSetting = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetDefaultFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetIsFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetSearch = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetSourceFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetTypeFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SummonByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ApplyMountEquipment = true,
+      AreMountEquipmentEffectsSuppressed = true,
+      ClearFanfare = true,
+      ClearRecentFanfares = true,
+      Dismiss = true,
+      GetAppliedMountEquipmentID = true,
+      GetCollectedFilterSetting = true,
+      GetDisplayedMountAllCreatureDisplayInfo = true,
+      GetDisplayedMountInfo = true,
+      GetDisplayedMountInfoExtra = true,
+      GetIsFavorite = true,
+      GetMountAllCreatureDisplayInfoByID = true,
+      GetMountEquipmentUnlockLevel = true,
+      GetMountFromItem = true,
+      GetMountFromSpell = true,
+      GetMountIDs = true,
+      GetMountInfoByID = true,
+      GetMountInfoExtraByID = true,
+      GetMountUsabilityByID = true,
+      GetNumDisplayedMounts = true,
+      GetNumMounts = true,
+      GetNumMountsNeedingFanfare = true,
+      IsItemMountEquipment = true,
+      IsMountEquipmentApplied = true,
+      IsSourceChecked = true,
+      IsTypeChecked = true,
+      IsUsingDefaultFilters = true,
+      IsValidSourceFilter = true,
+      IsValidTypeFilter = true,
+      NeedsFanfare = true,
+      Pickup = true,
+      SetAllSourceFilters = true,
+      SetAllTypeFilters = true,
+      SetCollectedFilterSetting = true,
+      SetDefaultFilters = true,
+      SetIsFavorite = true,
+      SetSearch = true,
+      SetSourceFilter = true,
+      SetTypeFilter = true,
+      SummonByID = true,
     },
     products = {
       wow = true,
@@ -7575,146 +3147,26 @@ G.NamespaceApis = {
   },
   C_MythicPlus = {
     methods = {
-      GetCurrentAffixes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrentSeason = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrentSeasonValues = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetLastWeeklyBestInformation = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOwnedKeystoneChallengeMapID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOwnedKeystoneLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOwnedKeystoneMapID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRewardLevelForDifficultyLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRewardLevelFromKeystoneLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRunHistory = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSeasonBestAffixScoreInfoForMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSeasonBestForMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSeasonBestMythicRatingFromThisExpansion = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetWeeklyBestForMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetWeeklyChestRewardLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsMythicPlusActive = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsWeeklyRewardAvailable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestCurrentAffixes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestMapInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestRewards = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetCurrentAffixes = true,
+      GetCurrentSeason = true,
+      GetCurrentSeasonValues = true,
+      GetLastWeeklyBestInformation = true,
+      GetOwnedKeystoneChallengeMapID = true,
+      GetOwnedKeystoneLevel = true,
+      GetOwnedKeystoneMapID = true,
+      GetRewardLevelForDifficultyLevel = true,
+      GetRewardLevelFromKeystoneLevel = true,
+      GetRunHistory = true,
+      GetSeasonBestAffixScoreInfoForMap = true,
+      GetSeasonBestForMap = true,
+      GetSeasonBestMythicRatingFromThisExpansion = true,
+      GetWeeklyBestForMap = true,
+      GetWeeklyChestRewardLevel = true,
+      IsMythicPlusActive = true,
+      IsWeeklyRewardAvailable = true,
+      RequestCurrentAffixes = true,
+      RequestMapInfo = true,
+      RequestRewards = true,
     },
     products = {
       wow = true,
@@ -7751,41 +3203,11 @@ G.NamespaceApis = {
   },
   C_Navigation = {
     methods = {
-      GetDistance = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFrame = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTargetState = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasValidScreenPosition = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      WasClampedToScreen = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetDistance = true,
+      GetFrame = true,
+      GetTargetState = true,
+      HasValidScreenPosition = true,
+      WasClampedToScreen = true,
     },
     products = {
       wow = true,
@@ -7965,13 +3387,7 @@ G.NamespaceApis = {
   },
   C_PartyPose = {
     methods = {
-      GetPartyPoseInfoByMapID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetPartyPoseInfoByMapID = true,
     },
     products = {
       wow = true,
@@ -7981,398 +3397,62 @@ G.NamespaceApis = {
   },
   C_PetBattles = {
     methods = {
-      AcceptPVPDuel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      AcceptQueuedPVPMatch = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanAcceptQueuedPVPMatch = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanActivePetSwapOut = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanPetSwapIn = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CancelPVPDuel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ChangePet = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      DeclineQueuedPVPMatch = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ForfeitGame = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAbilityEffectInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAbilityInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAbilityInfoByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAbilityProcTurnIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAbilityState = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAbilityStateModification = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetActivePet = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAllEffectNames = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAllStates = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAttackModifier = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAuraInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBattleState = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBreedQuality = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetDisplayID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetForfeitPenalty = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetHealth = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetIcon = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMaxHealth = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetName = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumAuras = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumPets = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPVPMatchmakingInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetSpeciesID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetType = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPlayerTrapAbility = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPower = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSelectedAction = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSpeed = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetStateValue = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTurnTimeInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetXP = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsInBattle = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsPlayerNPC = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSkipAvailable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsTrapAvailable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsWaitingOnOpponent = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsWildBattle = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPendingReportBattlePetTarget = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPendingReportTargetFromUnit = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ShouldShowPetSelect = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SkipTurn = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      StartPVPDuel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      StartPVPMatchmaking = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      StopPVPMatchmaking = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      UseAbility = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      UseTrap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      AcceptPVPDuel = true,
+      AcceptQueuedPVPMatch = true,
+      CanAcceptQueuedPVPMatch = true,
+      CanActivePetSwapOut = true,
+      CanPetSwapIn = true,
+      CancelPVPDuel = true,
+      ChangePet = true,
+      DeclineQueuedPVPMatch = true,
+      ForfeitGame = true,
+      GetAbilityEffectInfo = true,
+      GetAbilityInfo = true,
+      GetAbilityInfoByID = true,
+      GetAbilityProcTurnIndex = true,
+      GetAbilityState = true,
+      GetAbilityStateModification = true,
+      GetActivePet = true,
+      GetAllEffectNames = true,
+      GetAllStates = true,
+      GetAttackModifier = true,
+      GetAuraInfo = true,
+      GetBattleState = true,
+      GetBreedQuality = true,
+      GetDisplayID = true,
+      GetForfeitPenalty = true,
+      GetHealth = true,
+      GetIcon = true,
+      GetLevel = true,
+      GetMaxHealth = true,
+      GetName = true,
+      GetNumAuras = true,
+      GetNumPets = true,
+      GetPVPMatchmakingInfo = true,
+      GetPetSpeciesID = true,
+      GetPetType = true,
+      GetPlayerTrapAbility = true,
+      GetPower = true,
+      GetSelectedAction = true,
+      GetSpeed = true,
+      GetStateValue = true,
+      GetTurnTimeInfo = true,
+      GetXP = true,
+      IsInBattle = true,
+      IsPlayerNPC = true,
+      IsSkipAvailable = true,
+      IsTrapAvailable = true,
+      IsWaitingOnOpponent = true,
+      IsWildBattle = true,
+      SetPendingReportBattlePetTarget = true,
+      SetPendingReportTargetFromUnit = true,
+      ShouldShowPetSelect = true,
+      SkipTurn = true,
+      StartPVPDuel = true,
+      StartPVPMatchmaking = true,
+      StopPVPMatchmaking = true,
+      UseAbility = true,
+      UseTrap = true,
     },
     products = {
       wow = true,
@@ -8382,13 +3462,7 @@ G.NamespaceApis = {
   },
   C_PetInfo = {
     methods = {
-      GetPetTamersForMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetPetTamersForMap = true,
     },
     products = {
       wow = true,
@@ -8398,489 +3472,75 @@ G.NamespaceApis = {
   },
   C_PetJournal = {
     methods = {
-      CagePetByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearFanfare = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearRecentFanfares = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearSearchFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      FindPetIDByName = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBattlePetLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetDisplayIDByIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetDisplayProbabilityByIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumCollectedInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumDisplays = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumPetSources = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumPetTypes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumPets = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumPetsNeedingFanfare = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOwnedBattlePetString = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetAbilityInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetAbilityList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetAbilityListTable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetCooldownByGUID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetInfoByIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetInfoByItemID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetInfoByPetID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetInfoBySpeciesID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetInfoTableByPetID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetLoadOutInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetModelSceneInfoBySpeciesID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetSortParameter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetStats = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetSummonInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPetTeamAverageLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSummonBattlePetCooldown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSummonRandomFavoritePetGUID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSummonedPetGUID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsFilterChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsFindBattleEnabled = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsJournalReadOnly = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsJournalUnlocked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsPetSourceChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsPetTypeChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsUsingDefaultFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PetCanBeReleased = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PetIsCapturable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PetIsFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PetIsHurt = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PetIsLockedForConvert = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PetIsRevoked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PetIsSlotted = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PetIsSummonable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PetIsTradable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PetIsUsable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PetNeedsFanfare = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PetUsesRandomDisplay = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PickupPet = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PickupSummonRandomPet = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ReleasePetByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAbility = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAllPetSourcesChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAllPetTypesChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetCustomName = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetDefaultFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetFilterChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPetLoadOutInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPetSortParameter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPetSourceChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPetTypeFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetSearchFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SummonPetByGUID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SummonRandomPet = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CagePetByID = true,
+      ClearFanfare = true,
+      ClearRecentFanfares = true,
+      ClearSearchFilter = true,
+      FindPetIDByName = true,
+      GetBattlePetLink = true,
+      GetDisplayIDByIndex = true,
+      GetDisplayProbabilityByIndex = true,
+      GetNumCollectedInfo = true,
+      GetNumDisplays = true,
+      GetNumPetSources = true,
+      GetNumPetTypes = true,
+      GetNumPets = true,
+      GetNumPetsNeedingFanfare = true,
+      GetOwnedBattlePetString = true,
+      GetPetAbilityInfo = true,
+      GetPetAbilityList = true,
+      GetPetAbilityListTable = true,
+      GetPetCooldownByGUID = true,
+      GetPetInfoByIndex = true,
+      GetPetInfoByItemID = true,
+      GetPetInfoByPetID = true,
+      GetPetInfoBySpeciesID = true,
+      GetPetInfoTableByPetID = true,
+      GetPetLoadOutInfo = true,
+      GetPetModelSceneInfoBySpeciesID = true,
+      GetPetSortParameter = true,
+      GetPetStats = true,
+      GetPetSummonInfo = true,
+      GetPetTeamAverageLevel = true,
+      GetSummonBattlePetCooldown = true,
+      GetSummonRandomFavoritePetGUID = true,
+      GetSummonedPetGUID = true,
+      IsFilterChecked = true,
+      IsFindBattleEnabled = true,
+      IsJournalReadOnly = true,
+      IsJournalUnlocked = true,
+      IsPetSourceChecked = true,
+      IsPetTypeChecked = true,
+      IsUsingDefaultFilters = true,
+      PetCanBeReleased = true,
+      PetIsCapturable = true,
+      PetIsFavorite = true,
+      PetIsHurt = true,
+      PetIsLockedForConvert = true,
+      PetIsRevoked = true,
+      PetIsSlotted = true,
+      PetIsSummonable = true,
+      PetIsTradable = true,
+      PetIsUsable = true,
+      PetNeedsFanfare = true,
+      PetUsesRandomDisplay = true,
+      PickupPet = true,
+      PickupSummonRandomPet = true,
+      ReleasePetByID = true,
+      SetAbility = true,
+      SetAllPetSourcesChecked = true,
+      SetAllPetTypesChecked = true,
+      SetCustomName = true,
+      SetDefaultFilters = true,
+      SetFavorite = true,
+      SetFilterChecked = true,
+      SetPetLoadOutInfo = true,
+      SetPetSortParameter = true,
+      SetPetSourceChecked = true,
+      SetPetTypeFilter = true,
+      SetSearchFilter = true,
+      SummonPetByGUID = true,
+      SummonRandomPet = true,
     },
     products = {
       wow = true,
@@ -8890,55 +3550,13 @@ G.NamespaceApis = {
   },
   C_PlayerChoice = {
     methods = {
-      GetCurrentPlayerChoiceInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumRerolls = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRemainingTime = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsWaitingForPlayerChoiceResponse = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      OnUIClosed = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestRerollPlayerChoice = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SendPlayerChoiceResponse = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetCurrentPlayerChoiceInfo = true,
+      GetNumRerolls = true,
+      GetRemainingTime = true,
+      IsWaitingForPlayerChoiceResponse = true,
+      OnUIClosed = true,
+      RequestRerollPlayerChoice = true,
+      SendPlayerChoiceResponse = true,
     },
     products = {
       wow = true,
@@ -9050,41 +3668,11 @@ G.NamespaceApis = {
   },
   C_PlayerMentorship = {
     methods = {
-      GetMentorLevelRequirement = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMentorRequirements = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetMentorshipStatus = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsActivePlayerConsideredNewcomer = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsMentorRestricted = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetMentorLevelRequirement = true,
+      GetMentorRequirements = true,
+      GetMentorshipStatus = true,
+      IsActivePlayerConsideredNewcomer = true,
+      IsMentorRestricted = true,
     },
     products = {
       wow = true,
@@ -9094,42 +3682,10 @@ G.NamespaceApis = {
   },
   C_ProductChoice = {
     methods = {
-      GetChoices = {
-        products = {
-          wow_classic = true,
-          wow_classic_beta = true,
-          wow_classic_era = true,
-          wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
-        },
-      },
-      GetNumSuppressed = {
-        products = {
-          wow_classic = true,
-          wow_classic_beta = true,
-          wow_classic_era = true,
-          wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
-        },
-      },
-      GetProducts = {
-        products = {
-          wow_classic = true,
-          wow_classic_beta = true,
-          wow_classic_era = true,
-          wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
-        },
-      },
-      MakeSelection = {
-        products = {
-          wow_classic = true,
-          wow_classic_beta = true,
-          wow_classic_era = true,
-          wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
-        },
-      },
+      GetChoices = true,
+      GetNumSuppressed = true,
+      GetProducts = true,
+      MakeSelection = true,
     },
     products = {
       wow_classic = true,
@@ -9625,41 +4181,11 @@ G.NamespaceApis = {
   },
   C_QuestLine = {
     methods = {
-      GetAvailableQuestLines = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetQuestLineInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetQuestLineQuests = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsComplete = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestQuestLinesForMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetAvailableQuestLines = true,
+      GetQuestLineInfo = true,
+      GetQuestLineQuests = true,
+      IsComplete = true,
+      RequestQuestLinesForMap = true,
     },
     products = {
       wow = true,
@@ -10208,83 +4734,17 @@ G.NamespaceApis = {
   },
   C_RecruitAFriend = {
     methods = {
-      ClaimActivityReward = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClaimNextReward = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GenerateRecruitmentLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRAFInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRAFSystemInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecruitActivityRequirementsText = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecruitInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsEnabled = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsRecruitingEnabled = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RemoveRAFRecruit = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestUpdatedRecruitmentInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ClaimActivityReward = true,
+      ClaimNextReward = true,
+      GenerateRecruitmentLink = true,
+      GetRAFInfo = true,
+      GetRAFSystemInfo = true,
+      GetRecruitActivityRequirementsText = true,
+      GetRecruitInfo = true,
+      IsEnabled = true,
+      IsRecruitingEnabled = true,
+      RemoveRAFRecruit = true,
+      RequestUpdatedRecruitmentInfo = true,
     },
     products = {
       wow = true,
@@ -10398,13 +4858,7 @@ G.NamespaceApis = {
   },
   C_ResearchInfo = {
     methods = {
-      GetDigSitesForMap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetDigSitesForMap = true,
     },
     products = {
       wow = true,
@@ -10414,90 +4868,18 @@ G.NamespaceApis = {
   },
   C_Scenario = {
     methods = {
-      GetBonusStepRewardQuestID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBonusSteps = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCriteriaInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCriteriaInfoByStep = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetProvingGroundsInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetScenarioIconInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetStepInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSupersededObjectives = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsInScenario = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ShouldShowCriteria = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      TreatScenarioAsDungeon = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetBonusStepRewardQuestID = true,
+      GetBonusSteps = true,
+      GetCriteriaInfo = true,
+      GetCriteriaInfoByStep = true,
+      GetInfo = true,
+      GetProvingGroundsInfo = true,
+      GetScenarioIconInfo = true,
+      GetStepInfo = true,
+      GetSupersededObjectives = true,
+      IsInScenario = true,
+      ShouldShowCriteria = true,
+      TreatScenarioAsDungeon = true,
     },
     products = {
       wow = true,
@@ -10507,27 +4889,9 @@ G.NamespaceApis = {
   },
   C_ScenarioInfo = {
     methods = {
-      GetJailersTowerTypeString = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetScenarioInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetScenarioStepInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetJailersTowerTypeString = true,
+      GetScenarioInfo = true,
+      GetScenarioStepInfo = true,
     },
     products = {
       wow = true,
@@ -10537,90 +4901,18 @@ G.NamespaceApis = {
   },
   C_ScrappingMachineUI = {
     methods = {
-      CloseScrappingMachine = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      DropPendingScrapItemFromCursor = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrentPendingScrapItemLocationByIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetScrapSpellID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetScrappingMachineName = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasScrappableItems = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RemoveAllScrapItems = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RemoveCurrentScrappingItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RemoveItemToScrap = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ScrapItems = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetScrappingMachine = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ValidateScrappingList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CloseScrappingMachine = true,
+      DropPendingScrapItemFromCursor = true,
+      GetCurrentPendingScrapItemLocationByIndex = true,
+      GetScrapSpellID = true,
+      GetScrappingMachineName = true,
+      HasScrappableItems = true,
+      RemoveAllScrapItems = true,
+      RemoveCurrentScrappingItem = true,
+      RemoveItemToScrap = true,
+      ScrapItems = true,
+      SetScrappingMachine = true,
+      ValidateScrappingList = true,
     },
     products = {
       wow = true,
@@ -10635,24 +4927,8 @@ G.NamespaceApis = {
   },
   C_Seasons = {
     methods = {
-      GetActiveSeason = {
-        products = {
-          wow_classic = true,
-          wow_classic_beta = true,
-          wow_classic_era = true,
-          wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
-        },
-      },
-      HasActiveSeason = {
-        products = {
-          wow_classic = true,
-          wow_classic_beta = true,
-          wow_classic_era = true,
-          wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
-        },
-      },
+      GetActiveSeason = true,
+      HasActiveSeason = true,
     },
     products = {
       wow_classic = true,
@@ -10742,62 +5018,14 @@ G.NamespaceApis = {
   },
   C_SocialQueue = {
     methods = {
-      GetAllGroups = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConfig = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetGroupForPlayer = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetGroupInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetGroupMembers = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetGroupQueues = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestToJoin = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SignalToastDisplayed = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetAllGroups = true,
+      GetConfig = true,
+      GetGroupForPlayer = true,
+      GetGroupInfo = true,
+      GetGroupMembers = true,
+      GetGroupQueues = true,
+      RequestToJoin = true,
+      SignalToastDisplayed = true,
     },
     products = {
       wow = true,
@@ -10817,279 +5045,45 @@ G.NamespaceApis = {
   },
   C_Soulbinds = {
     methods = {
-      ActivateSoulbind = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanActivateSoulbind = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanModifySoulbind = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanResetConduitsInSoulbind = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanSwitchActiveSoulbindTreeBranch = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseUI = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CommitPendingConduitsInSoulbind = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      FindNodeIDActuallyInstalled = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      FindNodeIDAppearingInstalled = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      FindNodeIDPendingInstall = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      FindNodeIDPendingUninstall = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetActiveSoulbindID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConduitCollection = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConduitCollectionCount = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConduitCollectionData = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConduitCollectionDataAtCursor = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConduitCollectionDataByVirtualID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConduitDisplayed = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConduitHyperlink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConduitIDPendingInstall = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConduitQuality = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConduitRank = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConduitSpellID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetInstalledConduitID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNode = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSoulbindData = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSpecsAssignedToSoulbind = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTree = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasAnyInstalledConduitInSoulbind = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasAnyPendingConduits = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasPendingConduitsInSoulbind = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsConduitInstalled = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsConduitInstalledInSoulbind = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsItemConduitByItemInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsNodePendingModify = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsUnselectedConduitPendingInSoulbind = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ModifyNode = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SelectNode = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      UnmodifyNode = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ActivateSoulbind = true,
+      CanActivateSoulbind = true,
+      CanModifySoulbind = true,
+      CanResetConduitsInSoulbind = true,
+      CanSwitchActiveSoulbindTreeBranch = true,
+      CloseUI = true,
+      CommitPendingConduitsInSoulbind = true,
+      FindNodeIDActuallyInstalled = true,
+      FindNodeIDAppearingInstalled = true,
+      FindNodeIDPendingInstall = true,
+      FindNodeIDPendingUninstall = true,
+      GetActiveSoulbindID = true,
+      GetConduitCollection = true,
+      GetConduitCollectionCount = true,
+      GetConduitCollectionData = true,
+      GetConduitCollectionDataAtCursor = true,
+      GetConduitCollectionDataByVirtualID = true,
+      GetConduitDisplayed = true,
+      GetConduitHyperlink = true,
+      GetConduitIDPendingInstall = true,
+      GetConduitQuality = true,
+      GetConduitRank = true,
+      GetConduitSpellID = true,
+      GetInstalledConduitID = true,
+      GetNode = true,
+      GetSoulbindData = true,
+      GetSpecsAssignedToSoulbind = true,
+      GetTree = true,
+      HasAnyInstalledConduitInSoulbind = true,
+      HasAnyPendingConduits = true,
+      HasPendingConduitsInSoulbind = true,
+      IsConduitInstalled = true,
+      IsConduitInstalledInSoulbind = true,
+      IsItemConduitByItemInfo = true,
+      IsNodePendingModify = true,
+      IsUnselectedConduitPendingInSoulbind = true,
+      ModifyNode = true,
+      SelectNode = true,
+      UnmodifyNode = true,
     },
     products = {
       wow = true,
@@ -11099,111 +5093,21 @@ G.NamespaceApis = {
   },
   C_SpecializationInfo = {
     methods = {
-      CanPlayerUsePVPTalentUI = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanPlayerUseTalentSpecUI = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanPlayerUseTalentUI = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAllSelectedPvpTalentIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetInspectSelectedPvpTalent = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPvpTalentAlertStatus = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPvpTalentSlotInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPvpTalentSlotUnlockLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPvpTalentUnlockLevel = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSpecIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSpellsDisplay = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsInitialized = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsPvpTalentLocked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MatchesCurrentSpecSet = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPvpTalentLocked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      CanPlayerUsePVPTalentUI = true,
+      CanPlayerUseTalentSpecUI = true,
+      CanPlayerUseTalentUI = true,
+      GetAllSelectedPvpTalentIDs = true,
+      GetInspectSelectedPvpTalent = true,
+      GetPvpTalentAlertStatus = true,
+      GetPvpTalentSlotInfo = true,
+      GetPvpTalentSlotUnlockLevel = true,
+      GetPvpTalentUnlockLevel = true,
+      GetSpecIDs = true,
+      GetSpellsDisplay = true,
+      IsInitialized = true,
+      IsPvpTalentLocked = true,
+      MatchesCurrentSpecSet = true,
+      SetPvpTalentLocked = true,
     },
     products = {
       wow = true,
@@ -11227,48 +5131,12 @@ G.NamespaceApis = {
   },
   C_SpellBook = {
     methods = {
-      ContainsAnyDisenchantSpell = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCurrentLevelSpells = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSkillLineIndexByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSpellInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSpellLinkFromSpellID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSpellDisabled = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ContainsAnyDisenchantSpell = true,
+      GetCurrentLevelSpells = true,
+      GetSkillLineIndexByID = true,
+      GetSpellInfo = true,
+      GetSpellLinkFromSpellID = true,
+      IsSpellDisabled = true,
     },
     products = {
       wow = true,
@@ -11278,27 +5146,9 @@ G.NamespaceApis = {
   },
   C_SplashScreen = {
     methods = {
-      AcknowledgeSplash = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanViewSplashScreen = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RequestLatestSplashScreen = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      AcknowledgeSplash = true,
+      CanViewSplashScreen = true,
+      RequestLatestSplashScreen = true,
     },
     products = {
       wow = true,
@@ -11341,62 +5191,14 @@ G.NamespaceApis = {
   },
   C_SuperTrack = {
     methods = {
-      GetHighestPrioritySuperTrackingType = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSuperTrackedQuestID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSuperTrackingAnything = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSuperTrackingCorpse = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSuperTrackingQuest = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSuperTrackingUserWaypoint = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetSuperTrackedQuestID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetSuperTrackedUserWaypoint = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetHighestPrioritySuperTrackingType = true,
+      GetSuperTrackedQuestID = true,
+      IsSuperTrackingAnything = true,
+      IsSuperTrackingCorpse = true,
+      IsSuperTrackingQuest = true,
+      IsSuperTrackingUserWaypoint = true,
+      SetSuperTrackedQuestID = true,
+      SetSuperTrackedUserWaypoint = true,
     },
     products = {
       wow = true,
@@ -11473,188 +5275,32 @@ G.NamespaceApis = {
   },
   C_ToyBox = {
     methods = {
-      ForceToyRefilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCollectedShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetIsFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumFilteredToys = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumLearnedDisplayedToys = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumTotalDisplayedToys = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumToys = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetToyFromIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetToyInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetToyLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetUncollectedShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetUnusableShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasFavorites = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsExpansionTypeFilterChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSourceTypeFilterChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsToyUsable = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PickupToyBoxItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAllExpansionTypeFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAllSourceTypeFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetCollectedShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetExpansionTypeFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetFilterString = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetIsFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetSourceTypeFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetUncollectedShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetUnusableShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ForceToyRefilter = true,
+      GetCollectedShown = true,
+      GetIsFavorite = true,
+      GetNumFilteredToys = true,
+      GetNumLearnedDisplayedToys = true,
+      GetNumTotalDisplayedToys = true,
+      GetNumToys = true,
+      GetToyFromIndex = true,
+      GetToyInfo = true,
+      GetToyLink = true,
+      GetUncollectedShown = true,
+      GetUnusableShown = true,
+      HasFavorites = true,
+      IsExpansionTypeFilterChecked = true,
+      IsSourceTypeFilterChecked = true,
+      IsToyUsable = true,
+      PickupToyBoxItem = true,
+      SetAllExpansionTypeFilters = true,
+      SetAllSourceTypeFilters = true,
+      SetCollectedShown = true,
+      SetExpansionTypeFilter = true,
+      SetFilterString = true,
+      SetIsFavorite = true,
+      SetSourceTypeFilter = true,
+      SetUncollectedShown = true,
+      SetUnusableShown = true,
     },
     products = {
       wow = true,
@@ -11691,545 +5337,83 @@ G.NamespaceApis = {
   },
   C_TradeSkillUI = {
     methods = {
-      AnyRecipeCategoriesFiltered = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      AreAnyInventorySlotsFiltered = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanObliterateCursorItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanTradeSkillListLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearInventorySlotFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearPendingObliterateItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearRecipeCategoryFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearRecipeSourceTypeFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseObliterumForge = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseTradeSkill = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CraftRecipe = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      DropPendingObliterateItemFromCursor = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAllFilterableInventorySlots = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAllProfessionTradeSkillLines = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAllRecipeIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCategories = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCategoryInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFilterableInventorySlots = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFilteredRecipeIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetObliterateSpellID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOnlyShowLearnedRecipes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOnlyShowMakeableRecipes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOnlyShowSkillUpRecipes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOnlyShowUnlearnedRecipes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOptionalReagentBonusText = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOptionalReagentInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPendingObliterateItemID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPendingObliterateItemLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeCooldown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeDescription = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeItemLevelFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeItemLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeItemNameFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeNumItemsProduced = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeNumReagents = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeReagentInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeReagentItemLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeRepeatCount = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeSourceText = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetRecipeTools = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSubCategories = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTradeSkillDisplayName = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTradeSkillLine = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTradeSkillLineForRecipe = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTradeSkillLineInfoByID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTradeSkillListLink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetTradeSkillTexture = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsAnyRecipeFromSource = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsDataSourceChanging = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsEmptySkillLineCategory = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsInventorySlotFiltered = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsNPCCrafting = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsRecipeCategoryFiltered = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsRecipeFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsRecipeRepeating = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsRecipeSearchInProgress = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsRecipeSourceTypeFiltered = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsTradeSkillGuild = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsTradeSkillGuildMember = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsTradeSkillLinked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsTradeSkillReady = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ObliterateItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      OpenTradeSkill = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetInventorySlotFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetOnlyShowLearnedRecipes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetOnlyShowMakeableRecipes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetOnlyShowSkillUpRecipes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetOnlyShowUnlearnedRecipes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetRecipeCategoryFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetRecipeFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetRecipeItemLevelFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetRecipeItemNameFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetRecipeRepeatCount = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetRecipeSourceTypeFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      StopRecipeRepeat = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      AnyRecipeCategoriesFiltered = true,
+      AreAnyInventorySlotsFiltered = true,
+      CanObliterateCursorItem = true,
+      CanTradeSkillListLink = true,
+      ClearInventorySlotFilter = true,
+      ClearPendingObliterateItem = true,
+      ClearRecipeCategoryFilter = true,
+      ClearRecipeSourceTypeFilter = true,
+      CloseObliterumForge = true,
+      CloseTradeSkill = true,
+      CraftRecipe = true,
+      DropPendingObliterateItemFromCursor = true,
+      GetAllFilterableInventorySlots = true,
+      GetAllProfessionTradeSkillLines = true,
+      GetAllRecipeIDs = true,
+      GetCategories = true,
+      GetCategoryInfo = true,
+      GetFilterableInventorySlots = true,
+      GetFilteredRecipeIDs = true,
+      GetObliterateSpellID = true,
+      GetOnlyShowLearnedRecipes = true,
+      GetOnlyShowMakeableRecipes = true,
+      GetOnlyShowSkillUpRecipes = true,
+      GetOnlyShowUnlearnedRecipes = true,
+      GetOptionalReagentBonusText = true,
+      GetOptionalReagentInfo = true,
+      GetPendingObliterateItemID = true,
+      GetPendingObliterateItemLink = true,
+      GetRecipeCooldown = true,
+      GetRecipeDescription = true,
+      GetRecipeInfo = true,
+      GetRecipeItemLevelFilter = true,
+      GetRecipeItemLink = true,
+      GetRecipeItemNameFilter = true,
+      GetRecipeLink = true,
+      GetRecipeNumItemsProduced = true,
+      GetRecipeNumReagents = true,
+      GetRecipeReagentInfo = true,
+      GetRecipeReagentItemLink = true,
+      GetRecipeRepeatCount = true,
+      GetRecipeSourceText = true,
+      GetRecipeTools = true,
+      GetSubCategories = true,
+      GetTradeSkillDisplayName = true,
+      GetTradeSkillLine = true,
+      GetTradeSkillLineForRecipe = true,
+      GetTradeSkillLineInfoByID = true,
+      GetTradeSkillListLink = true,
+      GetTradeSkillTexture = true,
+      IsAnyRecipeFromSource = true,
+      IsDataSourceChanging = true,
+      IsEmptySkillLineCategory = true,
+      IsInventorySlotFiltered = true,
+      IsNPCCrafting = true,
+      IsRecipeCategoryFiltered = true,
+      IsRecipeFavorite = true,
+      IsRecipeRepeating = true,
+      IsRecipeSearchInProgress = true,
+      IsRecipeSourceTypeFiltered = true,
+      IsTradeSkillGuild = true,
+      IsTradeSkillGuildMember = true,
+      IsTradeSkillLinked = true,
+      IsTradeSkillReady = true,
+      ObliterateItem = true,
+      OpenTradeSkill = true,
+      SetInventorySlotFilter = true,
+      SetOnlyShowLearnedRecipes = true,
+      SetOnlyShowMakeableRecipes = true,
+      SetOnlyShowSkillUpRecipes = true,
+      SetOnlyShowUnlearnedRecipes = true,
+      SetRecipeCategoryFilter = true,
+      SetRecipeFavorite = true,
+      SetRecipeItemLevelFilter = true,
+      SetRecipeItemNameFilter = true,
+      SetRecipeRepeatCount = true,
+      SetRecipeSourceTypeFilter = true,
+      StopRecipeRepeat = true,
     },
     products = {
       wow = true,
@@ -12239,167 +5423,29 @@ G.NamespaceApis = {
   },
   C_Transmog = {
     methods = {
-      ApplyAllPending = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanHaveSecondaryAppearanceForSlotID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanTransmogItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanTransmogItemWithItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearAllPending = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearPending = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      Close = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ExtractTransmogIDList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetApplyCost = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetApplyWarnings = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBaseCategory = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCreatureDisplayIDForSource = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemIDForSource = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPending = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSlotEffectiveCategory = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSlotForInventoryType = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSlotInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSlotUseError = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSlotVisualInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsAtTransmogNPC = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSlotBeingCollapsed = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      LoadOutfit = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetPending = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ApplyAllPending = true,
+      CanHaveSecondaryAppearanceForSlotID = true,
+      CanTransmogItem = true,
+      CanTransmogItemWithItem = true,
+      ClearAllPending = true,
+      ClearPending = true,
+      Close = true,
+      ExtractTransmogIDList = true,
+      GetApplyCost = true,
+      GetApplyWarnings = true,
+      GetBaseCategory = true,
+      GetCreatureDisplayIDForSource = true,
+      GetItemIDForSource = true,
+      GetPending = true,
+      GetSlotEffectiveCategory = true,
+      GetSlotForInventoryType = true,
+      GetSlotInfo = true,
+      GetSlotUseError = true,
+      GetSlotVisualInfo = true,
+      IsAtTransmogNPC = true,
+      IsSlotBeingCollapsed = true,
+      LoadOutfit = true,
+      SetPending = true,
     },
     products = {
       wow = true,
@@ -12409,503 +5455,77 @@ G.NamespaceApis = {
   },
   C_TransmogCollection = {
     methods = {
-      AccountCanCollectSource = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      AreAllCollectionTypeFiltersChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      AreAllSourceTypeFiltersChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanAppearanceHaveIllusion = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearNewAppearance = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearSearch = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      DeleteOutfit = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      EndSearch = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAllAppearanceSources = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAppearanceCameraID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAppearanceCameraIDBySource = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAppearanceInfoBySource = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAppearanceSourceDrops = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAppearanceSourceInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAppearanceSources = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetArtifactAppearanceStrings = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCategoryAppearances = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCategoryCollectedCount = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCategoryForItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCategoryInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCategoryTotal = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCollectedShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetFallbackWeaponAppearance = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetIllusionInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetIllusionStrings = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetIllusions = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetInspectItemTransmogInfoList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetIsAppearanceFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemTransmogInfoListFromOutfitHyperlink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetLatestAppearance = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumMaxOutfits = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNumTransmogSources = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOutfitHyperlinkFromItemTransmogInfoList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOutfitInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOutfitItemTransmogInfoList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetOutfits = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetPairedArtifactAppearance = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSourceIcon = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSourceInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSourceItemID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSourceRequiredHoliday = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetUncollectedShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasFavorites = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsAppearanceHiddenVisual = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsCategoryValidForItem = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsNewAppearance = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSearchDBLoading = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSearchInProgress = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSourceTypeFilterChecked = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsUsingDefaultFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ModifyOutfit = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      NewOutfit = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PlayerCanCollectSource = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PlayerHasTransmog = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PlayerHasTransmogByItemInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PlayerHasTransmogItemModifiedAppearance = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      PlayerKnowsSource = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      RenameOutfit = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SearchProgress = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SearchSize = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAllCollectionTypeFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetAllSourceTypeFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetCollectedShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetDefaultFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetIsAppearanceFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetSearch = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetSearchAndFilterCategory = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetSourceTypeFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetUncollectedShown = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      UpdateUsableAppearances = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      AccountCanCollectSource = true,
+      AreAllCollectionTypeFiltersChecked = true,
+      AreAllSourceTypeFiltersChecked = true,
+      CanAppearanceHaveIllusion = true,
+      ClearNewAppearance = true,
+      ClearSearch = true,
+      DeleteOutfit = true,
+      EndSearch = true,
+      GetAllAppearanceSources = true,
+      GetAppearanceCameraID = true,
+      GetAppearanceCameraIDBySource = true,
+      GetAppearanceInfoBySource = true,
+      GetAppearanceSourceDrops = true,
+      GetAppearanceSourceInfo = true,
+      GetAppearanceSources = true,
+      GetArtifactAppearanceStrings = true,
+      GetCategoryAppearances = true,
+      GetCategoryCollectedCount = true,
+      GetCategoryForItem = true,
+      GetCategoryInfo = true,
+      GetCategoryTotal = true,
+      GetCollectedShown = true,
+      GetFallbackWeaponAppearance = true,
+      GetIllusionInfo = true,
+      GetIllusionStrings = true,
+      GetIllusions = true,
+      GetInspectItemTransmogInfoList = true,
+      GetIsAppearanceFavorite = true,
+      GetItemInfo = true,
+      GetItemTransmogInfoListFromOutfitHyperlink = true,
+      GetLatestAppearance = true,
+      GetNumMaxOutfits = true,
+      GetNumTransmogSources = true,
+      GetOutfitHyperlinkFromItemTransmogInfoList = true,
+      GetOutfitInfo = true,
+      GetOutfitItemTransmogInfoList = true,
+      GetOutfits = true,
+      GetPairedArtifactAppearance = true,
+      GetSourceIcon = true,
+      GetSourceInfo = true,
+      GetSourceItemID = true,
+      GetSourceRequiredHoliday = true,
+      GetUncollectedShown = true,
+      HasFavorites = true,
+      IsAppearanceHiddenVisual = true,
+      IsCategoryValidForItem = true,
+      IsNewAppearance = true,
+      IsSearchDBLoading = true,
+      IsSearchInProgress = true,
+      IsSourceTypeFilterChecked = true,
+      IsUsingDefaultFilters = true,
+      ModifyOutfit = true,
+      NewOutfit = true,
+      PlayerCanCollectSource = true,
+      PlayerHasTransmog = true,
+      PlayerHasTransmogByItemInfo = true,
+      PlayerHasTransmogItemModifiedAppearance = true,
+      PlayerKnowsSource = true,
+      RenameOutfit = true,
+      SearchProgress = true,
+      SearchSize = true,
+      SetAllCollectionTypeFilters = true,
+      SetAllSourceTypeFilters = true,
+      SetCollectedShown = true,
+      SetDefaultFilters = true,
+      SetIsAppearanceFavorite = true,
+      SetSearch = true,
+      SetSearchAndFilterCategory = true,
+      SetSourceTypeFilter = true,
+      SetUncollectedShown = true,
+      UpdateUsableAppearances = true,
     },
     products = {
       wow = true,
@@ -12915,216 +5535,36 @@ G.NamespaceApis = {
   },
   C_TransmogSets = {
     methods = {
-      ClearLatestSource = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearNewSource = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClearSetNewSourcesForSlot = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAllSets = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetAllSourceIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBaseSetID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBaseSets = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBaseSetsCounts = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetBaseSetsFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetCameraIDs = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetIsFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetLatestSource = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSetInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSetNewSources = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSetPrimaryAppearances = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSetsContainingSourceID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSourceIDsForSlot = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetSourcesForSlot = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetUsableSets = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetVariantSets = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasUsableSets = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsBaseSetCollected = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsNewSource = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsSetVisible = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      IsUsingDefaultBaseSetsFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetBaseSetsFilter = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetDefaultBaseSetsFilters = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetHasNewSources = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetHasNewSourcesForSlot = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      SetIsFavorite = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ClearLatestSource = true,
+      ClearNewSource = true,
+      ClearSetNewSourcesForSlot = true,
+      GetAllSets = true,
+      GetAllSourceIDs = true,
+      GetBaseSetID = true,
+      GetBaseSets = true,
+      GetBaseSetsCounts = true,
+      GetBaseSetsFilter = true,
+      GetCameraIDs = true,
+      GetIsFavorite = true,
+      GetLatestSource = true,
+      GetSetInfo = true,
+      GetSetNewSources = true,
+      GetSetPrimaryAppearances = true,
+      GetSetsContainingSourceID = true,
+      GetSourceIDsForSlot = true,
+      GetSourcesForSlot = true,
+      GetUsableSets = true,
+      GetVariantSets = true,
+      HasUsableSets = true,
+      IsBaseSetCollected = true,
+      IsNewSource = true,
+      IsSetVisible = true,
+      IsUsingDefaultBaseSetsFilters = true,
+      SetBaseSetsFilter = true,
+      SetDefaultBaseSetsFilters = true,
+      SetHasNewSources = true,
+      SetHasNewSourcesForSlot = true,
+      SetIsFavorite = true,
     },
     products = {
       wow = true,
@@ -13134,69 +5574,15 @@ G.NamespaceApis = {
   },
   C_Trophy = {
     methods = {
-      MonumentChangeAppearanceToTrophyID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MonumentCloseMonumentUI = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MonumentGetCount = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MonumentGetSelectedTrophyID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MonumentGetTrophyInfoByIndex = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MonumentLoadList = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MonumentLoadSelectedTrophyID = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MonumentRevertAppearanceToSaved = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      MonumentSaveSelection = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      MonumentChangeAppearanceToTrophyID = true,
+      MonumentCloseMonumentUI = true,
+      MonumentGetCount = true,
+      MonumentGetSelectedTrophyID = true,
+      MonumentGetTrophyInfoByIndex = true,
+      MonumentLoadList = true,
+      MonumentLoadSelectedTrophyID = true,
+      MonumentRevertAppearanceToSaved = true,
+      MonumentSaveSelection = true,
     },
     products = {
       wow = true,
@@ -13206,20 +5592,8 @@ G.NamespaceApis = {
   },
   C_Tutorial = {
     methods = {
-      AbandonTutorialArea = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ReturnToTutorialArea = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      AbandonTutorialArea = true,
+      ReturnToTutorialArea = true,
     },
     products = {
       wow = true,
@@ -13410,34 +5784,10 @@ G.NamespaceApis = {
   },
   C_VignetteInfo = {
     methods = {
-      FindBestUniqueVignette = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetVignetteInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetVignettePosition = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetVignettes = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      FindBestUniqueVignette = true,
+      GetVignetteInfo = true,
+      GetVignettePosition = true,
+      GetVignettes = true,
     },
     products = {
       wow = true,
@@ -13533,104 +5883,20 @@ G.NamespaceApis = {
   },
   C_WeeklyRewards = {
     methods = {
-      AreRewardsForCurrentRewardPeriod = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CanClaimRewards = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ClaimReward = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      CloseInteraction = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetActivities = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetActivityEncounterInfo = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetConquestWeeklyProgress = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetExampleRewardItemHyperlinks = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetItemHyperlink = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      GetNextMythicPlusIncrease = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasAvailableRewards = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasGeneratedRewards = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      HasInteraction = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      OnUIInteract = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      AreRewardsForCurrentRewardPeriod = true,
+      CanClaimRewards = true,
+      ClaimReward = true,
+      CloseInteraction = true,
+      GetActivities = true,
+      GetActivityEncounterInfo = true,
+      GetConquestWeeklyProgress = true,
+      GetExampleRewardItemHyperlinks = true,
+      GetItemHyperlink = true,
+      GetNextMythicPlusIncrease = true,
+      HasAvailableRewards = true,
+      HasGeneratedRewards = true,
+      HasInteraction = true,
+      OnUIInteract = true,
     },
     products = {
       wow = true,
@@ -13671,13 +5937,7 @@ G.NamespaceApis = {
   },
   C_WowTokenUI = {
     methods = {
-      StartTokenSell = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      StartTokenSell = true,
     },
     products = {
       wow = true,
@@ -13687,13 +5947,7 @@ G.NamespaceApis = {
   },
   C_ZoneAbility = {
     methods = {
-      GetActiveAbilities = {
-        products = {
-          wow = true,
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      GetActiveAbilities = true,
     },
     products = {
       wow = true,
