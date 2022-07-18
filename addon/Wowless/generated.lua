@@ -97,6 +97,25 @@ function G.GeneratedTests()
       end
       return tests
     end,
+    cvars = function()
+      local t = {}
+      for _, command in ipairs(_G.C_Console.GetAllCommands()) do
+        local name = command.command
+        t[name] = _G.C_CVar.GetCVarDefault(name)
+      end
+      local tests = {}
+      for name, cfg in pairs(G.CVars) do
+        tests[name] = function()
+          assertEquals(t[name], type(cfg) == 'string' and cfg or cfg[runtimeProduct])
+        end
+      end
+      for k, v in pairs(t) do
+        tests[k] = tests[k] or function()
+          error(format('missing cvar %q with default %q', k, v))
+        end
+      end
+      return tests
+    end,
     globalApis = function()
       local tests = {}
       local empty = {}

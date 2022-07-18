@@ -23,6 +23,21 @@ local function init(api, loader, taint)
   Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api, loader))
   if loader.product then
     Mixin(api.env, (require('wowapi.yaml').parseFile(('data/globals/%s.yaml'):format(loader.product))))
+    -- TODO put this somewhere else
+    local cvarDefaults = {}
+    for k, v in pairs(require('wowapi.data').cvars) do
+      cvarDefaults[k] = type(v) == 'string' and v or v[loader.product]
+    end
+    api.env.C_CVar.GetCVarDefault = debug.newcfunction(function(k)
+      return cvarDefaults[k]
+    end)
+    api.env.C_Console.GetAllCommands = debug.newcfunction(function()
+      local t = {}
+      for k in require('pl.tablex').sort(cvarDefaults) do
+        table.insert(t, { command = k })
+      end
+      return t
+    end)
   end
 end
 

@@ -118,6 +118,26 @@ end
 uiobjects.Minimap = nil
 uiobjects.WorldFrame = nil
 
+local cvars = (function()
+  local t = {}
+  table.insert(t, 'local _, G = ...')
+  table.insert(t, 'G.CVars = {')
+  for k, v in sorted((require('wowapi.yaml').parseFile('data/cvars.yaml'))) do
+    if type(v) == 'string' then
+      table.insert(t, '  [\'' .. k .. '\'] = \'' .. v .. '\',')
+    else
+      table.insert(t, '  [\'' .. k .. '\'] = {')
+      for pk, pv in sorted(v) do
+        table.insert(t, '    ' .. pk .. ' = \'' .. pv .. '\',')
+      end
+      table.insert(t, '  },')
+    end
+  end
+  table.insert(t, '}')
+  table.insert(t, '')
+  return table.concat(t, '\n')
+end)()
+
 local globalApis = (function()
   local t = {}
   table.insert(t, 'local _, G = ...')
@@ -247,6 +267,7 @@ local uiobjectApis = (function()
 end)()
 
 local filemap = {
+  ['addon/Wowless/cvars.lua'] = cvars,
   ['addon/Wowless/globalapis.lua'] = globalApis,
   ['addon/Wowless/namespaceapis.lua'] = namespaceApis,
   ['addon/Wowless/uiobjectapis.lua'] = uiobjectApis,

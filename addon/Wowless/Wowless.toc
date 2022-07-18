@@ -5,6 +5,7 @@
 init.lua
 framework.lua
 test.xml
+cvars.lua
 globalapis.lua
 namespaceapis.lua
 uiobjectapis.lua

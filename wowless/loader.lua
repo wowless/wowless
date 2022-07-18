@@ -763,16 +763,6 @@ local function loader(api, cfg)
 
   local function loadFrameXml()
     local context = forAddon()
-    do
-      -- TODO put this somewhere else
-      local cvarDefaults = {}
-      for k, v in pairs(require('wowapi.data').cvars) do
-        cvarDefaults[k] = type(v) == 'table' and v[product] or v
-      end
-      api.env.C_CVar.GetCVarDefault = debug.newcfunction(function(k)
-        return cvarDefaults[k]
-      end)
-    end
     for row in db2rows('globalstrings') do
       api.env[row.BaseTag] = row.TagText_lang
     end
