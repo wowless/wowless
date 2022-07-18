@@ -197,6 +197,13 @@ local tablemap = {
   end,
 }
 
+for _, p in ipairs(require('wowless.util').productList()) do
+  tablemap['global_' .. p] = function()
+    local cfg = require('wowapi.yaml').parseFile('data/globals/' .. p .. '.yaml')
+    return 'Globals_' .. p, cfg
+  end
+end
+
 local filemap = (function()
   local t = {}
   for k, v in pairs(tablemap) do

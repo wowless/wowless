@@ -9,6 +9,14 @@ cvars.lua
 globalapis.lua
 namespaceapis.lua
 uiobjectapis.lua
+global_wow.lua
+global_wow_beta.lua
+global_wow_classic.lua
+global_wow_classic_beta.lua
+global_wow_classic_era.lua
+global_wow_classic_era_ptr.lua
+global_wow_classic_ptr.lua
+global_wowt.lua
 generated.lua
 api.lua
 test.lua

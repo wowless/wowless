@@ -34,6 +34,9 @@ files['addon/Wowless'] = {
     'WOW_PROJECT_MAINLINE',
   },
 }
+files['addon/Wowless/global_*'] = {
+  max_line_length = false,
+}
 -- TODO remove this when it is no longer necessary
 files['data/uiobjects'] = {
   read_globals = {

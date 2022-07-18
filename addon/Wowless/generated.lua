@@ -170,6 +170,52 @@ function G.GeneratedTests()
       end
       return tests
     end,
+    globals = function()
+      local function assertRecursivelyEqual(expected, actual)
+        assertEquals(type(expected), type(actual))
+        if type(expected) == 'table' then
+          local t = {}
+          for k, v in pairs(expected) do
+            t[k] = function()
+              return assertRecursivelyEqual(v, actual[k])
+            end
+          end
+          for k, v in pairs(actual) do
+            t[k] = t[k]
+              or function()
+                error(('missing key %q with value %s'):format(k, tostring(v)))
+              end
+          end
+          return t
+        end
+      end
+      local data = G['Globals_' .. runtimeProduct]
+      if _G.SecureCapsuleGet ~= nil then -- addon_spec hack
+        -- TODO grab these a la theflatdumper
+        local toskip = {
+          'BattlepayBannerType',
+          'BattlepayCardType',
+          'BattlepayDisplayFlag',
+          'BattlepayGroupDisplayType',
+          'BattlepayProductDecorator',
+          'BattlepayProductGroupFlag',
+          'PurchaseEligibility',
+          'StoreError',
+          'VasError',
+          'VasServiceType',
+        }
+        for _, v in ipairs(toskip) do
+          data.Enum[v] = nil
+        end
+      end
+      local tests = {}
+      for k, v in pairs(data) do
+        tests[k] = function()
+          return assertRecursivelyEqual(v, _G[k])
+        end
+      end
+      return tests
+    end,
     uiobjects = function()
       local function assertCreateFrame(ty)
         local function process(...)
