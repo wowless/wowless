@@ -152,46 +152,21 @@ end)()
 
 local namespaceApis = (function()
   local t = {}
-  table.insert(t, 'local _, G = ...')
-  table.insert(t, 'G.NamespaceApis = {')
   for k, v in sorted(apiNamespaces) do
-    table.insert(t, '  ' .. k .. ' = {')
-    table.insert(t, '    methods = {')
-    for mk, mv in sorted(v.methods) do
-      table.insert(t, '') -- to be filled in later
-      local idx = #t
-      if mv.products then
-        table.sort(mv.products)
-        table.insert(t, '        products = {')
-        for _, p in ipairs(mv.products) do
-          table.insert(t, '          ' .. p .. ' = true,')
-        end
-        table.insert(t, '        },')
-      end
-      if mv.stdlib then
-        table.insert(t, '        stdlib = { _G.' .. mv.stdlib .. ' },')
-      end
-      if t[idx + 1] then
-        t[idx] = '      ' .. mk .. ' = {'
-        table.insert(t, '      },')
-      else
-        t[idx] = '      ' .. mk .. ' = true,'
-      end
+    local mt = {}
+    for mk, mv in pairs(v.methods) do
+      local tt = {
+        products = mapify(mv.products),
+        stdlib = mv.stdlib,
+      }
+      mt[mk] = next(tt) and tt or true
     end
-    table.insert(t, '    },')
-    if v.products then
-      table.sort(v.products)
-      table.insert(t, '    products = {')
-      for _, p in ipairs(v.products) do
-        table.insert(t, '      ' .. p .. ' = true,')
-      end
-      table.insert(t, '    },')
-    end
-    table.insert(t, '  },')
+    t[k] = {
+      methods = mt,
+      products = mapify(v.products),
+    }
   end
-  table.insert(t, '}')
-  table.insert(t, '')
-  return table.concat(t, '\n')
+  return 'local _, G = ...\nG.NamespaceApis = ' .. require('pl.pretty').write(t) .. '\n'
 end)()
 
 local uiobjectApis = (function()

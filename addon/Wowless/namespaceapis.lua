@@ -5966,233 +5966,233 @@ G.NamespaceApis = {
   bit = {
     methods = {
       arshift = {
-        stdlib = { _G.bit.arshift },
+        stdlib = 'bit.arshift',
       },
       band = {
-        stdlib = { _G.bit.band },
+        stdlib = 'bit.band',
       },
       bnot = {
-        stdlib = { _G.bit.bnot },
+        stdlib = 'bit.bnot',
       },
       bor = {
-        stdlib = { _G.bit.bor },
+        stdlib = 'bit.bor',
       },
       bxor = {
-        stdlib = { _G.bit.bxor },
+        stdlib = 'bit.bxor',
       },
       lshift = {
-        stdlib = { _G.bit.lshift },
+        stdlib = 'bit.lshift',
       },
       mod = {
-        stdlib = { _G.bit.mod },
+        stdlib = 'bit.mod',
       },
       rshift = {
-        stdlib = { _G.bit.rshift },
+        stdlib = 'bit.rshift',
       },
     },
   },
   coroutine = {
     methods = {
       create = {
-        stdlib = { _G.coroutine.create },
+        stdlib = 'coroutine.create',
       },
       resume = {
-        stdlib = { _G.coroutine.resume },
+        stdlib = 'coroutine.resume',
       },
       running = {
-        stdlib = { _G.coroutine.running },
+        stdlib = 'coroutine.running',
       },
       status = {
-        stdlib = { _G.coroutine.status },
+        stdlib = 'coroutine.status',
       },
       wrap = {
-        stdlib = { _G.coroutine.wrap },
+        stdlib = 'coroutine.wrap',
       },
       yield = {
-        stdlib = { _G.coroutine.yield },
+        stdlib = 'coroutine.yield',
       },
     },
   },
   math = {
     methods = {
       abs = {
-        stdlib = { _G.math.abs },
+        stdlib = 'math.abs',
       },
       acos = {
-        stdlib = { _G.math.acos },
+        stdlib = 'math.acos',
       },
       asin = {
-        stdlib = { _G.math.asin },
+        stdlib = 'math.asin',
       },
       atan = {
-        stdlib = { _G.math.atan },
+        stdlib = 'math.atan',
       },
       atan2 = {
-        stdlib = { _G.math.atan2 },
+        stdlib = 'math.atan2',
       },
       ceil = {
-        stdlib = { _G.math.ceil },
+        stdlib = 'math.ceil',
       },
       cos = {
-        stdlib = { _G.math.cos },
+        stdlib = 'math.cos',
       },
       cosh = {
-        stdlib = { _G.math.cosh },
+        stdlib = 'math.cosh',
       },
       deg = {
-        stdlib = { _G.math.deg },
+        stdlib = 'math.deg',
       },
       exp = {
-        stdlib = { _G.math.exp },
+        stdlib = 'math.exp',
       },
       floor = {
-        stdlib = { _G.math.floor },
+        stdlib = 'math.floor',
       },
       fmod = {
-        stdlib = { _G.math.fmod },
+        stdlib = 'math.fmod',
       },
       frexp = {
-        stdlib = { _G.math.frexp },
+        stdlib = 'math.frexp',
       },
       huge = {
-        stdlib = { _G.math.huge },
+        stdlib = 'math.huge',
       },
       ldexp = {
-        stdlib = { _G.math.ldexp },
+        stdlib = 'math.ldexp',
       },
       log = {
-        stdlib = { _G.math.log },
+        stdlib = 'math.log',
       },
       log10 = {
-        stdlib = { _G.math.log10 },
+        stdlib = 'math.log10',
       },
       max = {
-        stdlib = { _G.math.max },
+        stdlib = 'math.max',
       },
       min = {
-        stdlib = { _G.math.min },
+        stdlib = 'math.min',
       },
       modf = {
-        stdlib = { _G.math.modf },
+        stdlib = 'math.modf',
       },
       pi = {
-        stdlib = { _G.math.pi },
+        stdlib = 'math.pi',
       },
       pow = {
-        stdlib = { _G.math.pow },
+        stdlib = 'math.pow',
       },
       rad = {
-        stdlib = { _G.math.rad },
+        stdlib = 'math.rad',
       },
       random = {
-        stdlib = { _G.math.random },
+        stdlib = 'math.random',
       },
       sin = {
-        stdlib = { _G.math.sin },
+        stdlib = 'math.sin',
       },
       sinh = {
-        stdlib = { _G.math.sinh },
+        stdlib = 'math.sinh',
       },
       sqrt = {
-        stdlib = { _G.math.sqrt },
+        stdlib = 'math.sqrt',
       },
       tan = {
-        stdlib = { _G.math.tan },
+        stdlib = 'math.tan',
       },
       tanh = {
-        stdlib = { _G.math.tanh },
+        stdlib = 'math.tanh',
       },
     },
   },
   string = {
     methods = {
       byte = {
-        stdlib = { _G.string.byte },
+        stdlib = 'string.byte',
       },
       char = {
-        stdlib = { _G.string.char },
+        stdlib = 'string.char',
       },
       find = {
-        stdlib = { _G.string.find },
+        stdlib = 'string.find',
       },
       format = {
-        stdlib = { _G.string.format },
+        stdlib = 'string.format',
       },
       gfind = {
-        stdlib = { _G.string.gfind },
+        stdlib = 'string.gfind',
       },
       gmatch = {
-        stdlib = { _G.string.gmatch },
+        stdlib = 'string.gmatch',
       },
       gsub = {
-        stdlib = { _G.string.gsub },
+        stdlib = 'string.gsub',
       },
       join = {
-        stdlib = { _G.strjoin },
+        stdlib = 'strjoin',
       },
       len = {
-        stdlib = { _G.string.len },
+        stdlib = 'string.len',
       },
       lower = {
-        stdlib = { _G.string.lower },
+        stdlib = 'string.lower',
       },
       match = {
-        stdlib = { _G.string.match },
+        stdlib = 'string.match',
       },
       rep = {
-        stdlib = { _G.string.rep },
+        stdlib = 'string.rep',
       },
       reverse = {
-        stdlib = { _G.string.reverse },
+        stdlib = 'string.reverse',
       },
       split = {
-        stdlib = { _G.strsplit },
+        stdlib = 'strsplit',
       },
       sub = {
-        stdlib = { _G.string.sub },
+        stdlib = 'string.sub',
       },
       trim = {
-        stdlib = { _G.strtrim },
+        stdlib = 'strtrim',
       },
       upper = {
-        stdlib = { _G.string.upper },
+        stdlib = 'string.upper',
       },
     },
   },
   table = {
     methods = {
       concat = {
-        stdlib = { _G.table.concat },
+        stdlib = 'table.concat',
       },
       foreach = {
-        stdlib = { _G.table.foreach },
+        stdlib = 'table.foreach',
       },
       foreachi = {
-        stdlib = { _G.table.foreachi },
+        stdlib = 'table.foreachi',
       },
       getn = {
-        stdlib = { _G.table.getn },
+        stdlib = 'table.getn',
       },
       insert = {
-        stdlib = { _G.table.insert },
+        stdlib = 'table.insert',
       },
       maxn = {
-        stdlib = { _G.table.maxn },
+        stdlib = 'table.maxn',
       },
       remove = {
-        stdlib = { _G.table.remove },
+        stdlib = 'table.remove',
       },
       removemulti = {
-        stdlib = { _G.table.removemulti },
+        stdlib = 'table.removemulti',
       },
       setn = {
-        stdlib = { _G.table.setn },
+        stdlib = 'table.setn',
       },
       sort = {
-        stdlib = { _G.table.sort },
+        stdlib = 'table.sort',
       },
       wipe = {
-        stdlib = { _G.table.wipe },
+        stdlib = 'table.wipe',
       },
     },
   },

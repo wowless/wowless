@@ -90,7 +90,7 @@ function G.GeneratedTests()
                 return checkNotCFunc(func)
               end
               if mcfg.stdlib then
-                local ty = type(mcfg.stdlib[1])
+                local ty = type(tget(_G, mcfg.stdlib))
                 if ty == 'function' then
                   return checkCFunc(func)
                 else
