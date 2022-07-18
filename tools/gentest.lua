@@ -159,6 +159,50 @@ local globalApis = (function()
   return table.concat(t, '\n')
 end)()
 
+local namespaceApis = (function()
+  local t = {}
+  table.insert(t, 'local _, G = ...')
+  table.insert(t, 'G.NamespaceApis = {')
+  for k, v in sorted(apiNamespaces) do
+    table.insert(t, '  ' .. k .. ' = {')
+    table.insert(t, '    methods = {')
+    for mk, mv in sorted(v.methods) do
+      table.insert(t, '') -- to be filled in later
+      local idx = #t
+      if mv.products then
+        table.sort(mv.products)
+        table.insert(t, '        products = {')
+        for _, p in ipairs(mv.products) do
+          table.insert(t, '          ' .. p .. ' = true,')
+        end
+        table.insert(t, '        },')
+      end
+      if mv.stdlib then
+        table.insert(t, '        stdlib = { _G.' .. mv.stdlib .. ' },')
+      end
+      if t[idx + 1] then
+        t[idx] = '      ' .. mk .. ' = {'
+        table.insert(t, '      },')
+      else
+        t[idx] = '      ' .. mk .. ' = true,'
+      end
+    end
+    table.insert(t, '    },')
+    if v.products then
+      table.sort(v.products)
+      table.insert(t, '    products = {')
+      for _, p in ipairs(v.products) do
+        table.insert(t, '      ' .. p .. ' = true,')
+      end
+      table.insert(t, '    },')
+    end
+    table.insert(t, '  },')
+  end
+  table.insert(t, '}')
+  table.insert(t, '')
+  return table.concat(t, '\n')
+end)()
+
 local text = assert(plsub(
   [[
 local _, G = ...
@@ -232,42 +276,41 @@ function G.GeneratedTests()
         end
         return tests
       end
-      return {
-> for k, v in sorted(apiNamespaces) do
-        $(k) = function()
-          local ns = _G.$(k)
-> if v.products then
-          if $(badproduct(v.products)) then
+      local tests = {}
+      local empty = {}
+      for name, ncfg in pairs(G.NamespaceApis) do
+        tests[name] = function()
+          local ns = _G[name]
+          if ncfg.products and not ncfg.products[runtimeProduct] then
             assertEquals('nil', type(ns))
             return
           end
-> end
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          return mkTests(ns, {
-> for mname, method in sorted(v.methods) do
-            $(mname) = function()
-> if method.products and (not v.products or #method.products < #v.products) then
-              if $(badproduct(method.products)) then
-                return checkNotCFunc(ns.$(mname))
+          local mtests = {}
+          for mname, mcfg in pairs(ncfg.methods) do
+            mcfg = mcfg == true and empty or mcfg
+            mtests[mname] = function()
+              local func = ns[mname]
+              if mcfg.products and not mcfg.products[runtimeProduct] then
+                return checkNotCFunc(func)
               end
-> end
-> if method.stdlib then
->   local ty = type(tget(_G, method.stdlib))
->   if ty == 'function' then
-              return checkCFunc(ns.$(mname))
->   else
-              assertEquals('$(ty)', type(ns.$(mname)))
->   end
-> else
-              return checkCFunc(ns.$(mname))
-> end
-            end,
-> end
-          })
-        end,
-> end
-      }
+              if mcfg.stdlib then
+                local ty = type(mcfg.stdlib[1])
+                if ty == 'function' then
+                  return checkCFunc(func)
+                else
+                  assertEquals(ty, type(func))
+                end
+              else
+                return checkCFunc(func)
+              end
+            end
+          end
+          return mkTests(ns, mtests)
+        end
+      end
+      return tests
     end,
     globalApis = function()
       local tests = {}
@@ -443,6 +486,7 @@ end
 local filemap = {
   ['addon/Wowless/generated.lua'] = text,
   ['addon/Wowless/globalapis.lua'] = globalApis,
+  ['addon/Wowless/namespaceapis.lua'] = namespaceApis,
 }
 
 -- Hack so test doesn't have side effects.

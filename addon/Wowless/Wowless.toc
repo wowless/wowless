@@ -6,6 +6,7 @@ init.lua
 framework.lua
 test.xml
 globalapis.lua
+namespaceapis.lua
 generated.lua
 api.lua
 test.lua
