@@ -1,4 +1,4 @@
-local indir, outdir = unpack(arg)
+local indir, outdir = 'extracts', 'data/api'
 local lfs = require('lfs')
 local writeFile = require('pl.file').write
 local pprintYaml = require('wowapi.yaml').pprint
