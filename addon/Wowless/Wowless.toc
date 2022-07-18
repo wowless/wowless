@@ -7,6 +7,7 @@ framework.lua
 test.xml
 globalapis.lua
 namespaceapis.lua
+uiobjectapis.lua
 generated.lua
 api.lua
 test.lua

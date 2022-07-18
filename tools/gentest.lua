@@ -208,6 +208,49 @@ local namespaceApis = (function()
   return table.concat(t, '\n')
 end)()
 
+local uiobjectApis = (function()
+  local t = {}
+  table.insert(t, 'local _, G = ...')
+  table.insert(t, 'G.UIObjectApis = {')
+  for k, v in sorted(uiobjects) do
+    table.insert(t, '  ' .. k .. ' = {')
+    table.insert(t, '    frametype = ' .. tostring(not not frametypes[k]) .. ',')
+    table.insert(t, '    methods = {')
+    for mk, mv in sorted(v.methods) do
+      table.insert(t, '') -- to be filled in later
+      local idx = #t
+      if mv.products and (not v.products or #mv.products < #v.products) then
+        table.sort(mv.products)
+        table.insert(t, '        products = {')
+        for _, p in ipairs(mv.products) do
+          table.insert(t, '          ' .. p .. ' = true,')
+        end
+        table.insert(t, '        },')
+      end
+      if t[idx + 1] then
+        t[idx] = '      ' .. mk .. ' = {'
+        table.insert(t, '      },')
+      else
+        t[idx] = '      ' .. mk .. ' = true,'
+      end
+    end
+    table.insert(t, '    },')
+    table.insert(t, '    objtype = \'' .. objTypes[k] .. '\',')
+    if v.products then
+      table.sort(v.products)
+      table.insert(t, '    products = {')
+      for _, p in ipairs(v.products) do
+        table.insert(t, '      ' .. p .. ' = true,')
+      end
+      table.insert(t, '    },')
+    end
+    table.insert(t, '  },')
+  end
+  table.insert(t, '}')
+  table.insert(t, '')
+  return table.concat(t, '\n')
+end)()
+
 local text = assert(plsub(
   [[
 local _, G = ...
@@ -225,14 +268,6 @@ local runtimeProduct = (function()
     error('invalid product')
   end
 end)()
-local function badProduct(s)
-  for p in string.gmatch(s, '[^,]+') do
-    if p == runtimeProduct then
-      return false
-    end
-  end
-  return true
-end
 function G.GeneratedTests()
   local cfuncs = {}
   local function checkFunc(func, isLua)
@@ -423,50 +458,42 @@ function G.GeneratedTests()
           }
         end
       end
-      return {
-> for k, v in sorted(uiobjects) do
-        $(k) = function()
-> if frametypes[k] and v.products then
-          if $(badproduct(v.products)) then
-            assertCreateFrameFails('$(k)')
-            return
-          end
-> end
-> if frametypes[k] or k == 'Animation' or k == 'FontString' or k == 'Texture' then
-          local function factory()
-> if k == 'Animation' then
+      local tests = {}
+      local empty = {}
+      for name, cfg in pairs(G.UIObjectApis) do
+        local function factory()
+          if name == 'Animation' then
             return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation()
-> elseif k == 'FontString' then
+          elseif name == 'FontString' then
             return CreateFrame('Frame'):CreateFontString()
-> elseif k == 'Texture' then
+          elseif name == 'Texture' then
             return CreateFrame('Frame'):CreateTexture()
-> else
-            return assertCreateFrame('$(k)')
-> end
+          else
+            return assertCreateFrame(name)
           end
-          return mkTests('$(objTypes[k])', factory, function(__index)
-            return {
-> for mname, method in sorted(v.methods) do
-              $(mname) = function()
-> if method.products then
-                if $(badproduct(method.products)) then
-                  assertEquals('nil', type(__index.$(mname)))
-                  return
+        end
+        tests[name] = function()
+          if not cfg.frametype or cfg.products and not cfg.products[runtimeProduct] then
+            assertCreateFrameFails(name)
+          else
+            return mkTests(cfg.objtype, factory, function(__index)
+              local mtests = {}
+              for mname, mcfg in pairs(cfg.methods) do
+                mtests[mname] = function()
+                  mcfg = mcfg == true and empty or mcfg
+                  if mcfg.products and not mcfg.products[runtimeProduct] then
+                    assertEquals('nil', type(__index[mname]))
+                  elseif name ~= 'Animation' or mname ~= 'GetSourceLocation' then --FIXME
+                    return checkCFunc(__index[mname])
+                  end
                 end
-> end
-> if k ~= 'Animation' or mname ~= 'GetSourceLocation' then --FIXME
-                return checkCFunc(__index.$(mname))
-> end
-              end,
-> end
-            }
-          end)
-> else
-          assertCreateFrameFails('$(k)')
-> end
-        end,
-> end
-      }
+              end
+              return mtests
+            end)
+          end
+        end
+      end
+      return tests
     end,
   }
 end
@@ -492,6 +519,7 @@ local filemap = {
   ['addon/Wowless/generated.lua'] = text,
   ['addon/Wowless/globalapis.lua'] = globalApis,
   ['addon/Wowless/namespaceapis.lua'] = namespaceApis,
+  ['addon/Wowless/uiobjectapis.lua'] = uiobjectApis,
 }
 
 -- Hack so test doesn't have side effects.
