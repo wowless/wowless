@@ -9,6 +9,6 @@
     },
     "initializeCommand": "git submodule update --init --recursive",
     "name": "lua-wow-tools/wowless",
-    "postCreateCommand": "pre-commit install && pre-commit run -a -v",
+    "postCreateCommand": "pre-commit install && pre-commit run -a -v --show-diff-on-failure",
     "remoteUser": "vscode"
 }
