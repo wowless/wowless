@@ -1,4 +1,5 @@
 local plsub = require('pl.template').substitute
+local sorted = require('pl.tablex').sort
 
 local apis = {}
 local uiobjects = {}
@@ -117,6 +118,47 @@ end
 uiobjects.Minimap = nil
 uiobjects.WorldFrame = nil
 
+local globalApis = (function()
+  local t = {}
+  table.insert(t, 'local _, G = ...')
+  table.insert(t, 'G.GlobalApis = {')
+  for k, v in sorted(apis) do
+    if not k:find('%.') then
+      table.insert(t, '') -- to be filled in later
+      local idx = #t
+      if v.alias then
+        table.insert(t, '    alias = { _G.' .. v.alias .. ' },')
+      end
+      if v.nowrap then
+        table.insert(t, '    nowrap = true,')
+      end
+      if v.products then
+        table.sort(v.products)
+        table.insert(t, '    products = {')
+        for _, p in ipairs(v.products) do
+          table.insert(t, '      ' .. p .. ' = true,')
+        end
+        table.insert(t, '    },')
+      end
+      if unavailableApis[k] then
+        table.insert(t, '    secureCapsule = true,')
+      end
+      if v.stdlib then
+        table.insert(t, '    stdlib = { _G.' .. v.stdlib .. ' },')
+      end
+      if t[idx + 1] then
+        t[idx] = '  ' .. k .. ' = {'
+        table.insert(t, '  },')
+      else
+        t[idx] = '  ' .. k .. ' = true,'
+      end
+    end
+  end
+  table.insert(t, '}')
+  table.insert(t, '')
+  return table.concat(t, '\n')
+end)()
+
 local text = assert(plsub(
   [[
 local _, G = ...
@@ -228,35 +270,33 @@ function G.GeneratedTests()
       }
     end,
     globalApis = function()
-      local tests = {
-> for k, v in sorted(apis) do
-> if not k:find('%.') then
-        $(k) = function()
-> if v.products then
-          if $(badproduct(v.products)) then
-            return checkNotCFunc(_G.$(k))
+      local tests = {}
+      local empty = {}
+      for name, cfg in pairs(G.GlobalApis) do
+        cfg = cfg == true and empty or cfg
+        tests[name] = function()
+          local func = _G[name]
+          if cfg.products and not cfg.products[runtimeProduct] then
+            return checkNotCFunc(func)
           end
-> end
-> if unavailableApis[k] then
-          assertEquals(_G.SecureCapsuleGet == nil, _G.$(k) ~= nil) -- addon_spec hack
-> elseif v.alias then
-          assertEquals(_G.$(k), _G.$(v.alias))
-> elseif v.stdlib then
->   local ty = type(tget(_G, v.stdlib))
->   if ty == 'function' then
-          return checkCFunc(_G.$(k))
->   else
-          assertEquals('$(ty)', type(_G.$(k)))
->   end
-> elseif v.nowrap then
-          return checkLuaFunc(_G.$(k))
-> else
-          return checkCFunc(_G.$(k))
-> end
-        end,
-> end
-> end
-      }
+          if cfg.secureCapsule then
+            assertEquals(_G.SecureCapsuleGet == nil, func ~= nil) -- addon_spec hack
+          elseif cfg.alias then
+            assertEquals(func, assert(cfg.alias[1]))
+          elseif cfg.stdlib then
+            local ty = type(cfg.stdlib[1])
+            if ty == 'function' then
+              return checkCFunc(func)
+            else
+              assertEquals(ty, type(func))
+            end
+          elseif cfg.nowrap then
+            return checkLuaFunc(func)
+          else
+            return checkCFunc(func)
+          end
+        end
+      end
       local ptrhooked = { -- TODO test these better
         FauxScrollFrame_Update = true,
         QuestLog_Update = true,
@@ -392,7 +432,7 @@ end
     frametypes = frametypes,
     next = next,
     objTypes = objTypes,
-    sorted = require('pl.tablex').sort,
+    sorted = sorted,
     tget = require('wowless.util').tget,
     type = type,
     uiobjects = uiobjects,
@@ -400,8 +440,17 @@ end
   }
 ))
 
+local filemap = {
+  ['addon/Wowless/generated.lua'] = text,
+  ['addon/Wowless/globalapis.lua'] = globalApis,
+}
+
 -- Hack so test doesn't have side effects.
 if select('#', ...) == 0 then
-  require('pl.file').write('addon/Wowless/generated.lua', text)
+  local w = require('pl.file').write
+  for k, v in pairs(filemap) do
+    w(k, v)
+  end
+else
+  return filemap
 end
-return text

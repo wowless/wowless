@@ -1,7 +1,9 @@
 describe('gentest', function()
-  it('is consistent with addon', function()
-    local addon = require('pl.file').read('addon/Wowless/generated.lua')
-    local gentest = loadfile('tools/gentest.lua')(nil)
-    assert(gentest == addon)
-  end)
+  local filemap = loadfile('tools/gentest.lua')(nil)
+  for k, v in pairs(filemap) do
+    it(k .. ' is consistent', function()
+      local addon = require('pl.file').read(k)
+      assert(v == addon)
+    end)
+  end
 end)
