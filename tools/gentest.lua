@@ -171,45 +171,22 @@ end)()
 
 local uiobjectApis = (function()
   local t = {}
-  table.insert(t, 'local _, G = ...')
-  table.insert(t, 'G.UIObjectApis = {')
-  for k, v in sorted(uiobjects) do
-    table.insert(t, '  ' .. k .. ' = {')
-    table.insert(t, '    frametype = ' .. tostring(not not frametypes[k]) .. ',')
-    table.insert(t, '    methods = {')
-    for mk, mv in sorted(v.methods) do
-      table.insert(t, '') -- to be filled in later
-      local idx = #t
-      if mv.products and (not v.products or #mv.products < #v.products) then
-        table.sort(mv.products)
-        table.insert(t, '        products = {')
-        for _, p in ipairs(mv.products) do
-          table.insert(t, '          ' .. p .. ' = true,')
-        end
-        table.insert(t, '        },')
-      end
-      if t[idx + 1] then
-        t[idx] = '      ' .. mk .. ' = {'
-        table.insert(t, '      },')
-      else
-        t[idx] = '      ' .. mk .. ' = true,'
-      end
+  for k, v in pairs(uiobjects) do
+    local mt = {}
+    for mk, mv in pairs(v.methods) do
+      local tt = {
+        products = mv.products and (not v.products or #mv.products < #v.products) and mapify(mv.products) or nil,
+      }
+      mt[mk] = next(tt) and tt or true
     end
-    table.insert(t, '    },')
-    table.insert(t, '    objtype = \'' .. objTypes[k] .. '\',')
-    if v.products then
-      table.sort(v.products)
-      table.insert(t, '    products = {')
-      for _, p in ipairs(v.products) do
-        table.insert(t, '      ' .. p .. ' = true,')
-      end
-      table.insert(t, '    },')
-    end
-    table.insert(t, '  },')
+    t[k] = {
+      frametype = not not frametypes[k],
+      methods = mt,
+      objtype = objTypes[k],
+      products = mapify(v.products),
+    }
   end
-  table.insert(t, '}')
-  table.insert(t, '')
-  return table.concat(t, '\n')
+  return 'local _, G = ...\nG.UIObjectApis = ' .. require('pl.pretty').write(t) .. '\n'
 end)()
 
 local function stylua(s)
