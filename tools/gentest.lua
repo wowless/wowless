@@ -118,11 +118,6 @@ end
 uiobjects.Minimap = nil
 uiobjects.WorldFrame = nil
 
-local cvars = (function()
-  local t = require('wowapi.yaml').parseFile('data/cvars.yaml')
-  return 'local _, G = ...\nG.CVars = ' .. require('pl.pretty').write(t) .. '\n'
-end)()
-
 local function mapify(t)
   if t then
     local tt = {}
@@ -133,62 +128,6 @@ local function mapify(t)
   end
 end
 
-local globalApis = (function()
-  local t = {}
-  for k, v in pairs(apis) do
-    if not k:find('%.') then
-      local vv = {
-        alias = v.alias,
-        nowrap = v.nowrap,
-        products = mapify(v.products),
-        secureCapsule = unavailableApis[k] and true,
-        stdlib = v.stdlib,
-      }
-      t[k] = next(vv) and vv or true
-    end
-  end
-  return 'local _, G = ...\nG.GlobalApis = ' .. require('pl.pretty').write(t) .. '\n'
-end)()
-
-local namespaceApis = (function()
-  local t = {}
-  for k, v in sorted(apiNamespaces) do
-    local mt = {}
-    for mk, mv in pairs(v.methods) do
-      local tt = {
-        products = mapify(mv.products),
-        stdlib = mv.stdlib,
-      }
-      mt[mk] = next(tt) and tt or true
-    end
-    t[k] = {
-      methods = mt,
-      products = mapify(v.products),
-    }
-  end
-  return 'local _, G = ...\nG.NamespaceApis = ' .. require('pl.pretty').write(t) .. '\n'
-end)()
-
-local uiobjectApis = (function()
-  local t = {}
-  for k, v in pairs(uiobjects) do
-    local mt = {}
-    for mk, mv in pairs(v.methods) do
-      local tt = {
-        products = mv.products and (not v.products or #mv.products < #v.products) and mapify(mv.products) or nil,
-      }
-      mt[mk] = next(tt) and tt or true
-    end
-    t[k] = {
-      frametype = not not frametypes[k],
-      methods = mt,
-      objtype = objTypes[k],
-      products = mapify(v.products),
-    }
-  end
-  return 'local _, G = ...\nG.UIObjectApis = ' .. require('pl.pretty').write(t) .. '\n'
-end)()
-
 local function stylua(s)
   local fn = os.tmpname()
   require('pl.file').write(fn, s)
@@ -198,12 +137,75 @@ local function stylua(s)
   return ret
 end
 
-local filemap = {
-  ['addon/Wowless/cvars.lua'] = stylua(cvars),
-  ['addon/Wowless/globalapis.lua'] = stylua(globalApis),
-  ['addon/Wowless/namespaceapis.lua'] = stylua(namespaceApis),
-  ['addon/Wowless/uiobjectapis.lua'] = stylua(uiobjectApis),
+local tablemap = {
+  cvars = function()
+    local t = require('wowapi.yaml').parseFile('data/cvars.yaml')
+    return 'CVars', t
+  end,
+  globalapis = function()
+    local t = {}
+    for k, v in pairs(apis) do
+      if not k:find('%.') then
+        local vv = {
+          alias = v.alias,
+          nowrap = v.nowrap,
+          products = mapify(v.products),
+          secureCapsule = unavailableApis[k] and true,
+          stdlib = v.stdlib,
+        }
+        t[k] = next(vv) and vv or true
+      end
+    end
+    return 'GlobalApis', t
+  end,
+  namespaceapis = function()
+    local t = {}
+    for k, v in sorted(apiNamespaces) do
+      local mt = {}
+      for mk, mv in pairs(v.methods) do
+        local tt = {
+          products = mapify(mv.products),
+          stdlib = mv.stdlib,
+        }
+        mt[mk] = next(tt) and tt or true
+      end
+      t[k] = {
+        methods = mt,
+        products = mapify(v.products),
+      }
+    end
+    return 'NamespaceApis', t
+  end,
+  uiobjectapis = function()
+    local t = {}
+    for k, v in pairs(uiobjects) do
+      local mt = {}
+      for mk, mv in pairs(v.methods) do
+        local tt = {
+          products = mv.products and (not v.products or #mv.products < #v.products) and mapify(mv.products) or nil,
+        }
+        mt[mk] = next(tt) and tt or true
+      end
+      t[k] = {
+        frametype = not not frametypes[k],
+        methods = mt,
+        objtype = objTypes[k],
+        products = mapify(v.products),
+      }
+    end
+    return 'UIObjectApis', t
+  end,
 }
+
+local filemap = (function()
+  local t = {}
+  for k, v in pairs(tablemap) do
+    local nn, tt = v()
+    local ss = 'local _, G = ...\nG.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
+    t['addon/Wowless/' .. k .. '.lua'] = stylua(ss)
+  end
+  return t
+end)()
 
 -- Hack so test doesn't have side effects.
 if select('#', ...) == 0 then
