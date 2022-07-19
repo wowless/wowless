@@ -172,8 +172,9 @@ function G.GeneratedTests()
     end,
     globals = function()
       local function assertRecursivelyEqual(expected, actual)
-        assertEquals(type(expected), type(actual))
-        if type(expected) == 'table' then
+        local ty = type(expected)
+        assertEquals(ty, type(actual))
+        if ty == 'table' then
           local t = {}
           for k, v in pairs(expected) do
             t[k] = function()
@@ -187,6 +188,8 @@ function G.GeneratedTests()
               end
           end
           return t
+        elseif ty == 'string' or ty == 'number' or ty == 'boolean' then
+          assertEquals(expected, actual)
         end
       end
       local data = G['Globals_' .. runtimeProduct]
