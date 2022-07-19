@@ -4,7 +4,7 @@ local args = (function()
   return parser:parse()
 end)()
 if not next(args.types) then
-  args.types = { 'apis', 'events', 'structures' }
+  args.types = { 'apis', 'enums', 'events', 'structures' }
 end
 local enabledTypes = {}
 for _, ty in ipairs(args.types) do
@@ -289,4 +289,30 @@ if enabledTypes.events then
       )
     end
   end
+end
+if enabledTypes.enums then
+  local t = {}
+  for _, v in pairs(tabs) do
+    if v.Type == 'Enumeration' then
+      local vt = {}
+      assert(type(v.MinValue) == 'number')
+      assert(type(v.MaxValue) == 'number')
+      assert(type(v.NumValues) == 'number')
+      assert(type(v.Fields) == 'table')
+      for _, fv in ipairs(v.Fields) do
+        assert(type(fv.Name) == 'string', 'missing name for field of ' .. v.Name)
+        assert(fv.Type == v.Name, 'wrong type for ' .. v.Name .. '.' .. fv.Name)
+        assert(type(fv.EnumValue) == 'number')
+        vt[fv.Name] = fv.EnumValue
+      end
+      t[v.Name] = vt
+      t[v.Name .. 'Meta'] = {
+        MaxValue = v.MaxValue,
+        MinValue = v.MinValue,
+        NumValues = v.NumValues,
+      }
+    end
+  end
+  -- TODO do something more interesting with this data
+  print(require('wowapi.yaml').pprint(t))
 end
