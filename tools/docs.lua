@@ -25,19 +25,25 @@ local products = { -- priority order
 }
 local docs = {}
 local enum = {}
-for _, product in ipairs(products) do
-  local docdir = 'extracts/' .. product .. '/Interface/AddOns/Blizzard_APIDocumentation'
-  for f in lfs.dir(docdir) do
-    if f:sub(-4) == '.lua' then
-      pcall(setfenv(loadfile(docdir .. '/' .. f), {
-        APIDocumentation = {
-          AddDocumentationTable = function(_, t)
-            docs[f] = docs[f] or t
-          end,
-        },
-      }))
+local function processDocDir(docdir)
+  if lfs.attributes(docdir) then
+    for f in lfs.dir(docdir) do
+      if f:sub(-4) == '.lua' then
+        pcall(setfenv(loadfile(docdir .. '/' .. f), {
+          APIDocumentation = {
+            AddDocumentationTable = function(_, t)
+              docs[f] = docs[f] or t
+            end,
+          },
+        }))
+      end
     end
   end
+end
+for _, product in ipairs(products) do
+  local prefix = 'extracts/' .. product .. '/Interface/AddOns/'
+  processDocDir(prefix .. 'Blizzard_APIDocumentation')
+  processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
   local globals = require('wowapi.yaml').parseFile('data/globals/' .. product .. '.yaml')
   for en, em in pairs(globals.Enum) do
     enum[en] = enum[en] or em
@@ -51,23 +57,29 @@ local expectedTopLevelFields = {
   Tables = true,
   Type = true,
 }
+local expectedTypes = {
+  ScriptObject = true,
+  System = true,
+}
 local tabs, funcs, events = {}, {}, {}
 for f, t in pairs(docs) do
   for k in pairs(t) do
     assert(expectedTopLevelFields[k], ('unexpected field %q in %q'):format(k, f))
   end
-  assert(not t.Type or t.Type == 'System', f)
-  for _, tab in ipairs(t.Tables or {}) do
-    local name = (t.Namespace and (t.Namespace .. '.') or '') .. tab.Name
-    tabs[name] = tabs[name] or tab
-  end
-  for _, func in ipairs(t.Functions or {}) do
-    local name = (t.Namespace and (t.Namespace .. '.') or '') .. func.Name
-    funcs[name] = funcs[name] or func
-  end
-  for _, event in ipairs(t.Events or {}) do
-    local name = (t.Namespace and (t.Namespace .. '.') or '') .. event.Name
-    events[name] = events[name] or event
+  assert(not t.Type or expectedTypes[t.Type], 'unexpected type in ' .. f)
+  if not t.Type or t.Type == 'System' then
+    for _, tab in ipairs(t.Tables or {}) do
+      local name = (t.Namespace and (t.Namespace .. '.') or '') .. tab.Name
+      tabs[name] = tabs[name] or tab
+    end
+    for _, func in ipairs(t.Functions or {}) do
+      local name = (t.Namespace and (t.Namespace .. '.') or '') .. func.Name
+      funcs[name] = funcs[name] or func
+    end
+    for _, event in ipairs(t.Events or {}) do
+      local name = (t.Namespace and (t.Namespace .. '.') or '') .. event.Name
+      events[name] = events[name] or event
+    end
   end
 end
 local types = {
