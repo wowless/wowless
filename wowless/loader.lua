@@ -756,9 +756,14 @@ local function loader(api, cfg)
   end
 
   local function loadAddon(addonName)
-    return pcall(function()
+    local success = pcall(function()
       doLoadAddon(addonName)
     end)
+    if success then
+      return true
+    else
+      return false, 'LOAD_FAILED'
+    end
   end
 
   local function loadFrameXml()
