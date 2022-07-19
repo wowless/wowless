@@ -7,8 +7,7 @@
         "docker-from-docker": {},
         "github-cli": {}
     },
-    "initializeCommand": "git submodule update --init --recursive",
     "name": "lua-wow-tools/wowless",
-    "postCreateCommand": "pre-commit install && pre-commit run -a -v --show-diff-on-failure",
+    "postCreateCommand": "git submodule update --init --recursive && pre-commit install && pre-commit run -a -v --show-diff-on-failure",
     "remoteUser": "vscode"
 }
