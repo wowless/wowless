@@ -59,6 +59,21 @@ Constants:
     MainHandTransmogIsPairedWeapon: 0
     NoTransmogID: 0
 Enum:
+  ActionBarOrientation:
+    Horizontal: 0
+    Vertical: 1
+  ActionBarOrientationMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  ActionBarVisibleSetting:
+    Always: 0
+    InCombat: 1
+    OutOfCombat: 2
+  ActionBarVisibleSettingMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   AddSoulbindConduitReason:
     Cheat: 1
     None: 0
@@ -91,12 +106,15 @@ Enum:
     BoundItem: 16
     ConjuredItem: 17
     DatabaseError: 10
+    DoubleBid: 23
     EquippedBag: 20
+    FavoritesMaxed: 24
     HasRestriction: 6
     HigherBid: 1
     IsBag: 19
     IsBusy: 7
     ItemHasQuote: 9
+    ItemNotAvailable: 25
     ItemNotFound: 4
     LimitedDurationItem: 18
     LootItem: 22
@@ -110,9 +128,19 @@ Enum:
     UsedCharges: 14
     WrappedItem: 21
   AuctionHouseErrorMeta:
-    MaxValue: 22
+    MaxValue: 25
     MinValue: 0
-    NumValues: 23
+    NumValues: 26
+  AuctionHouseExtraColumn:
+    Ilvl: 1
+    Level: 3
+    None: 0
+    Skill: 4
+    Slots: 2
+  AuctionHouseExtraColumnMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   AuctionHouseFilter:
     ArtifactQuality: 11
     CommonQuality: 6
@@ -201,6 +229,19 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  BagSlotFlags:
+    BagSlotPriorityFlagsAll: 62
+    BagSlotValidFlagsAll: 63
+    DisableAutoSort: 1
+    PriorityConsumables: 4
+    PriorityEquipment: 2
+    PriorityJunk: 16
+    PriorityQuestItems: 32
+    PriorityTradeGoods: 8
+  BagSlotFlagsMeta:
+    MaxValue: 63
+    MinValue: 1
+    NumValues: 8
   BattlepayBannerType:
     Discount: 1
     Featured: 2
@@ -537,11 +578,19 @@ Enum:
     MaxValue: 5
     MinValue: 0
     NumValues: 6
+  BindingSet:
+    Account: 1
+    Character: 2
+    Current: 3
+    Default: 0
+  BindingSetMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   BrawlType:
     Arena: 2
     Battleground: 1
     LFG: 3
-    Lfg: 3
     None: 0
     SoloShuffle: 4
   BrawlTypeMeta:
@@ -808,6 +857,14 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  CastBarSize:
+    Large: 2
+    Medium: 1
+    Small: 0
+  CastBarSizeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   CharacterServiceInfoFlag:
     RestrictToRecommendedSpecs: 1
   CharacterServiceInfoFlagMeta:
@@ -832,8 +889,8 @@ Enum:
     Communities: 4
     Custom: 1
     None: 0
-    Private_Party: 2
-    Public_Party: 3
+    PrivateParty: 2
+    PublicParty: 3
   ChatChannelTypeMeta:
     MaxValue: 4
     MinValue: 0
@@ -1131,6 +1188,19 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  ConfigurationWarning:
+    ConsoleDeviceSseOutdated: 2
+    DeviceBlocklisted: 5
+    DriverBlocklisted: 3
+    DriverOutOfDate: 4
+    GraphicsApiWillBeOutdated: 6
+    OsBitsWillBeOutdated: 7
+    ShaderModelIsOutdated: 1
+    ShaderModelWillBeOutdated: 0
+  ConfigurationWarningMeta:
+    MaxValue: 7
+    MinValue: 0
+    NumValues: 8
   ConquestProgressBarDisplayType:
     AdditionalChest: 1
     FirstChest: 0
@@ -1237,6 +1307,28 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  CraftingOrderCustomerCategoryType:
+    Primary: 0
+    Secondary: 1
+    Tertiary: 2
+  CraftingOrderCustomerCategoryTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  CraftingReagentItemFlag:
+    TooltipShowsAsStatModifications: 0
+  CraftingReagentItemFlagMeta:
+    MaxValue: 0
+    MinValue: 0
+    NumValues: 1
+  CraftingReagentType:
+    Basic: 1
+    Finishing: 2
+    Optional: 0
+  CraftingReagentTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   CurrencyDestroyReason:
     BonusRoll: 9
     Capped: 6
@@ -1335,10 +1427,10 @@ Enum:
     GuildBankWithdrawal: 21
     ItemDeletion: 14
     ItemRefund: 2
-    Last: 52
+    Last: 54
     LFGReward: 11
-    LfgReward: 11
     Loot: 9
+    PlayerTrait: 52
     Pushloot: 22
     PvPCompletionBonus: 19
     PvPDrop: 24
@@ -1351,6 +1443,7 @@ Enum:
     QuestRewardIgnoreCaps: 29
     RandomBattleground: 16
     RatedBattleground: 15
+    RenownRepGain: 53
     Script: 20
     Spell: 13
     Trade: 12
@@ -1363,9 +1456,9 @@ Enum:
     WorldQuestReward: 35
     WorldQuestRewardIgnoreCaps: 36
   CurrencySourceMeta:
-    MaxValue: 52
+    MaxValue: 54
     MinValue: 0
-    NumValues: 53
+    NumValues: 55
   CurrencyTokenCategoryFlags:
     FlagPlayerItemAssignment: 2
     FlagSortLast: 1
@@ -1440,6 +1533,63 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  EditModeActionBarSetting:
+    HideBarArt: 6
+    HideBarScrolling: 8
+    IconPadding: 4
+    IconSize: 3
+    NumIcons: 2
+    NumRows: 1
+    Orientation: 0
+    SnapToSide: 7
+    VisibleSetting: 5
+  EditModeActionBarSettingMeta:
+    MaxValue: 8
+    MinValue: 0
+    NumValues: 9
+  EditModeCastBarSetting:
+    BarSize: 0
+  EditModeCastBarSettingMeta:
+    MaxValue: 0
+    MinValue: 0
+    NumValues: 1
+  EditModeLayoutType:
+    Account: 1
+    Character: 2
+    Preset: 0
+  EditModeLayoutTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  EditModeMinimapSetting:
+    HeaderUnderneath: 0
+  EditModeMinimapSettingMeta:
+    MaxValue: 0
+    MinValue: 0
+    NumValues: 1
+  EditModePresetLayouts:
+    Classic: 1
+    Modern: 0
+  EditModePresetLayoutsMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  EditModeSettingDisplayType:
+    Checkbox: 1
+    Dropdown: 0
+    Slider: 2
+  EditModeSettingDisplayTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  EditModeSystem:
+    ActionBar: 0
+    CastBar: 1
+    Minimap: 2
+  EditModeSystemMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   EnvironmentalDamageFlags:
     DmgIsPct: 2
     OneTime: 1
@@ -1492,12 +1642,13 @@ Enum:
     QuestBossEmote: 10
     QuestTurnedIn: 12
     Scenario: 14
+    SpellLearned: 21
     SpellScript: 18
     WorldStateChange: 13
   EventToastEventTypeMeta:
-    MaxValue: 20
+    MaxValue: 21
     MinValue: 0
-    NumValues: 21
+    NumValues: 22
   FlightPathFaction:
     Alliance: 2
     Horde: 1
@@ -1778,6 +1929,30 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  GraphicsValidationResult:
+    CpuMem_2: 5
+    CpuMem_4: 6
+    DualCore: 4
+    GpuDriver: 17
+    Graphics: 3
+    Illegal: 1
+    MacOsUnsupported: 15
+    Needs_5_0: 7
+    Needs_6_0: 8
+    NeedsMacOs_10_13: 10
+    NeedsMacOs_10_14: 11
+    NeedsMacOs_10_15: 12
+    NeedsMacOs_11_0: 13
+    NeedsRt: 9
+    NeedsWindows_10: 14
+    Supported: 0
+    Unknown: 18
+    Unsupported: 2
+    WindowsUnsupported: 16
+  GraphicsValidationResultMeta:
+    MaxValue: 18
+    MinValue: 0
+    NumValues: 19
   HolidayCalendarFlags:
     Alliance: 1
     Horde: 2
@@ -1789,12 +1964,13 @@ Enum:
     DontDisplayBanner: 8
     DontDisplayEnd: 4
     DontShowInCalendar: 2
+    DurationUseMinutes: 32
     IsRegionwide: 1
     NotAvailableClientSide: 16
   HolidayFlagsMeta:
-    MaxValue: 16
+    MaxValue: 32
     MinValue: 1
-    NumValues: 5
+    NumValues: 6
   IconAndTextWidgetState:
     Hidden: 0
     Shown: 1
@@ -1828,6 +2004,10 @@ Enum:
     IndexBodyType: 4
     IndexChestType: 5
     IndexCloakType: 16
+    IndexEquipablespellDefensiveType: 33
+    IndexEquipablespellMobilityType: 34
+    IndexEquipablespellOffensiveType: 31
+    IndexEquipablespellUtilityType: 32
     IndexFeetType: 8
     IndexFingerType: 11
     IndexHandType: 10
@@ -1836,6 +2016,8 @@ Enum:
     IndexLegsType: 7
     IndexNeckType: 2
     IndexNonEquipType: 0
+    IndexProfessionGearType: 30
+    IndexProfessionToolType: 29
     IndexQuiverType: 27
     IndexRangedrightType: 26
     IndexRangedType: 15
@@ -1852,9 +2034,9 @@ Enum:
     IndexWeaponType: 13
     IndexWristType: 9
   InventoryTypeMeta:
-    MaxValue: 28
+    MaxValue: 34
     MinValue: 0
-    NumValues: 29
+    NumValues: 35
   ItemArmorSubclass:
     Cloth: 1
     Cosmetic: 5
@@ -1884,6 +2066,7 @@ Enum:
     Key: 13
     Miscellaneous: 15
     PermanentObsolete: 14
+    Profession: 19
     Projectile: 6
     Questitem: 12
     Quiver: 11
@@ -1916,9 +2099,9 @@ Enum:
     MinValue: 1
     NumValues: 18
   ItemClassMeta:
-    MaxValue: 18
+    MaxValue: 19
     MinValue: 0
-    NumValues: 19
+    NumValues: 20
   ItemCommodityStatus:
     Commodity: 2
     Item: 1
@@ -2042,6 +2225,35 @@ Enum:
     MaxValue: 96
     MinValue: 0
     NumValues: 97
+  ItemGemColor:
+    Arcane: 1024
+    Blood: 128
+    Blue: 8
+    Cogwheel: 32
+    Cypher: 8388608
+    DominationBlood: 1048576
+    DominationFrost: 2097152
+    DominationUnholy: 4194304
+    Fel: 512
+    Fire: 4096
+    Frost: 2048
+    Holy: 65536
+    Hydraulic: 16
+    Iron: 64
+    Life: 16384
+    Meta: 1
+    PunchcardBlue: 524288
+    PunchcardRed: 131072
+    PunchcardYellow: 262144
+    Red: 2
+    Shadow: 256
+    Water: 8192
+    Wind: 32768
+    Yellow: 4
+  ItemGemColorMeta:
+    MaxValue: 8388608
+    MinValue: 1
+    NumValues: 24
   ItemGemSubclass:
     Agility: 1
     Artifactrelic: 11
@@ -2114,6 +2326,25 @@ Enum:
     MaxValue: 37
     MinValue: 0
     NumValues: 38
+  ItemProfessionSubclass:
+    Alchemy: 2
+    Archaeology: 13
+    Blacksmithing: 0
+    Cooking: 4
+    Enchanting: 8
+    Engineering: 7
+    Fishing: 9
+    Herbalism: 3
+    Inscription: 12
+    Jewelcrafting: 11
+    Leatherworking: 1
+    Mining: 5
+    Skinning: 10
+    Tailoring: 6
+  ItemProfessionSubclassMeta:
+    MaxValue: 13
+    MinValue: 0
+    NumValues: 14
   ItemQuality:
     Artifact: 6
     Common: 1
@@ -2182,6 +2413,35 @@ Enum:
     MaxValue: 15
     MinValue: 0
     NumValues: 16
+  ItemSocketType:
+    Arcane: 12
+    Blood: 9
+    Blue: 4
+    Cogwheel: 6
+    Cypher: 23
+    Domination: 22
+    Fel: 11
+    Fire: 14
+    Frost: 13
+    Holy: 18
+    Hydraulic: 5
+    Iron: 8
+    Life: 16
+    Meta: 1
+    None: 0
+    Prismatic: 7
+    PunchcardBlue: 21
+    PunchcardRed: 19
+    PunchcardYellow: 20
+    Red: 2
+    Shadow: 10
+    Water: 15
+    Wind: 17
+    Yellow: 3
+  ItemSocketTypeMeta:
+    MaxValue: 23
+    MinValue: 0
+    NumValues: 24
   ItemTryOnReason:
     DataPending: 3
     NotEquippable: 2
@@ -2260,6 +2520,7 @@ Enum:
     NumValues: 4
   LFGListDisplayType:
     ClassEnumerate: 2
+    Comment: 5
     HideAll: 3
     PlayerCount: 4
     RoleCount: 0
@@ -2271,9 +2532,9 @@ Enum:
     RoleCount: 0
     RoleEnumerate: 1
   LFGListDisplayTypeMeta:
-    MaxValue: 4
+    MaxValue: 5
     MinValue: 0
-    NumValues: 5
+    NumValues: 6
   LFGListFilter:
     NotRecommended: 2
     PvE: 4
@@ -2321,6 +2582,32 @@ Enum:
     MaxValue: 5
     MinValue: 0
     NumValues: 6
+  MinimapTrackingFilter:
+    Auctioneer: 1
+    Banker: 2
+    Barber: 262144
+    Battlemaster: 4
+    Digsites: 131072
+    Focus: 32768
+    Innkeeper: 32
+    ItemUpgrade: 524288
+    Mailbox: 64
+    POI: 8192
+    QuestPoIs: 65536
+    Repair: 512
+    Stablemaster: 2048
+    Target: 16384
+    TaxiNode: 8
+    TrainerProfession: 128
+    Transmogrifier: 4096
+    TrivialQuests: 1024
+    Unfiltered: 0
+    VenderFood: 16
+    VendorReagent: 256
+  MinimapTrackingFilterMeta:
+    MaxValue: 524288
+    MinValue: 0
+    NumValues: 21
   ModelSceneSetting:
     AlignLightToOrbitDelta: 1
   ModelSceneSettingMeta:
@@ -2354,19 +2641,21 @@ Enum:
     NumValues: 20
   MountType:
     Aquatic: 2
+    Dragonriding: 3
     Flying: 1
     Ground: 0
   MountTypeFlag:
     IsAquaticMount: 2
+    IsDragonRidingMount: 4
     IsFlyingMount: 1
   MountTypeFlagMeta:
-    MaxValue: 2
+    MaxValue: 4
     MinValue: 1
-    NumValues: 2
-  MountTypeMeta:
-    MaxValue: 2
-    MinValue: 0
     NumValues: 3
+  MountTypeMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   NavigationState:
     InRange: 2
     Invalid: 0
@@ -2375,6 +2664,35 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  NodeOpFailureReason:
+    DataError: 13
+    EntryNotFound: 19
+    HasMutuallyExclusiveEdge: 4
+    LevelTooLow: 22
+    MaxRank: 12
+    MissingAchievement: 8
+    MissingEdgeConnection: 1
+    MissingQuest: 9
+    MissingRequiredEdge: 3
+    NodeNotFound: 18
+    None: 0
+    NotEnoughCurrency: 15
+    NotEnoughCurrencySpent: 6
+    NotEnoughGold: 16
+    NotEnoughGoldSpent: 7
+    NotEnoughSourcedCurrency: 14
+    NotEnoughSourcedCurrencySpent: 5
+    RequiredForCondition: 20
+    RequiredForEdge: 2
+    SameSelection: 17
+    TreeFlaggedNoRefund: 23
+    WrongSelection: 11
+    WrongSpec: 10
+    WrongTreeID: 21
+  NodeOpFailureReasonMeta:
+    MaxValue: 23
+    MinValue: 0
+    NumValues: 24
   OptionalReagentItemFlag:
     TooltipShowsAsStatModifications: 0
   OptionalReagentItemFlagMeta:
@@ -2735,12 +3053,81 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  PointsModifierSourceType:
+    AreaGroup: 48
+    AutoMissionScalar: 52
+    BaseItemLevel: 5
+    ChallengeModeLevel: 16
+    CraftSkill: 58
+    CreatureClassification: 29
+    CurrencyMaxDelta: 17
+    CurrencyQuantity: 47
+    FollowerLevelForCurrentShipment: 13
+    FollowerLevelInBuilding: 10
+    FollowerQualityForCurrentShipment: 14
+    FollowerQualityInBuilding: 11
+    HasLegendaryCloakUpdgradeAvailable: 43
+    HonorEarnedThisPvPMatch: 30
+    InstanceGroupSize: 7
+    ItemLevelHighWaterMarkAverage: 24
+    JailersTowerActiveFloorDifficulty: 41
+    LootLevel: 6
+    NumGroupFriends: 12
+    NumLooters: 4
+    NumLootSourceAuraStacks: 42
+    NumPlayersThatGainedDungeonScore: 56
+    NumTappers: 31
+    NumWeeklyRewardsThresholdsEarned: 59
+    ObjectLabelID: 49
+    ObjectLevel: 44
+    ParagonLevel: 55
+    PassesTreasureTrackingQuestEligibility: 21
+    PercentThroughContentTuning: 45
+    PercentThroughExpansion: 51
+    PlayerCondition: 20
+    PlayerKeystoneLevel: 19
+    PlayerLevel: 0
+    PlayerLevelContentTuningMax: 33
+    ProfessionQualityLevel: 57
+    ProfessionRatingGatherDiscover: 62
+    ProfessionRatingGatherExtra: 61
+    ProgressiveEventItemWinCount: 3
+    ProgressiveEventMissCount: 2
+    ProgressiveEventNumRemainingForClass: 28
+    ProgressiveEventNumRemainingForLootSpec: 26
+    ProgressiveEventNumWinsForLootSpec: 25
+    PvPBracketRatingCurrentInstance: 22
+    PvPBracketRatingSpecific: 15
+    PvPJackpotTier: 32
+    PvPTeamSize: 23
+    PvPTier: 46
+    QuestExpansionID: 39
+    QuestItemGroupMissCount: 8
+    RenownCatchup: 53
+    RenownRapidCatchup: 54
+    Reserved_2: 40
+    SalvagedItemIsCloth: 34
+    SalvagedItemIsLeather: 35
+    SalvagedItemIsMail: 36
+    SalvagedItemIsMisc: 38
+    SalvagedItemIsPlate: 37
+    SalvagedItemLevel: 60
+    SkillRank: 1
+    TreasureItemPvalue: 9
+    WeeklyMythicPlusCount: 50
+    WorldStateExpression: 27
+    WorldStateValue: 18
+  PointsModifierSourceTypeMeta:
+    MaxValue: 62
+    MinValue: 0
+    NumValues: 63
   PowerType:
     Alternate: 10
     ArcaneCharges: 16
     Chi: 12
     ComboPoints: 4
     Energy: 3
+    Essence: 19
     Focus: 2
     Fury: 17
     HealthCost: -2
@@ -2750,18 +3137,110 @@ Enum:
     Maelstrom: 11
     Mana: 0
     None: -1
-    NumPowerTypes: 19
+    NumPowerTypes: 23
     Obsolete: 14
     Obsolete2: 15
     Pain: 18
     Rage: 1
+    RuneBlood: 20
+    RuneFrost: 21
     Runes: 5
+    RuneUnholy: 22
     RunicPower: 6
     SoulShards: 7
   PowerTypeMeta:
-    MaxValue: 19
+    MaxValue: 23
     MinValue: -2
+    NumValues: 26
+  Profession:
+    Alchemy: 3
+    Archaeology: 14
+    Blacksmithing: 1
+    Cooking: 5
+    Enchanting: 9
+    Engineering: 8
+    FirstAid: 0
+    Fishing: 10
+    Herbalism: 4
+    Inscription: 13
+    Jewelcrafting: 12
+    Leatherworking: 2
+    Mining: 6
+    Skinning: 11
+    Tailoring: 7
+  ProfessionEffect:
+    ModCraftCrit: 9
+    ModCraftCritSize: 20
+    ModCraftExtra: 15
+    ModCraftExtraQuantity: 18
+    ModCraftReduction: 10
+    ModCraftReductionQuantity: 21
+    ModCraftTimeDecrease: 14
+    ModGatherDiscover: 13
+    ModGatherExtra: 11
+    ModGatherExtraQuantity: 19
+    ModGatherRange: 17
+    ModGatherTimeDecrease: 12
+    ModGatherTimeIncrease: 16
+    Skill: 0
+    StatCraftingSpeed: 6
+    StatDeftness: 4
+    StatFinesse: 3
+    StatInspiration: 1
+    StatMulticraft: 7
+    StatPerception: 5
+    StatResourcefulness: 2
+    UnlockReagentSlot: 8
+  ProfessionEffectMeta:
+    MaxValue: 21
+    MinValue: 0
     NumValues: 22
+  ProfessionMeta:
+    MaxValue: 14
+    MinValue: 0
+    NumValues: 15
+  ProfessionRating:
+    CraftCrit: 0
+    CraftExtra: 6
+    CraftReduction: 1
+    CraftTimeDecrease: 5
+    GatherDiscover: 4
+    GatherExtra: 2
+    GatherRange: 8
+    GatherTimeDecrease: 3
+    GatherTimeIncrease: 7
+  ProfessionRatingMeta:
+    MaxValue: 8
+    MinValue: 0
+    NumValues: 9
+  ProfessionRatingType:
+    Craft: 0
+    Gather: 1
+  ProfessionRatingTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  ProfessionsSpecPathState:
+    Completed: 2
+    Locked: 0
+    Progressing: 1
+  ProfessionsSpecPathStateMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  ProfessionsSpecTabState:
+    Locked: 0
+    Unlocked: 1
+  ProfessionsSpecTabStateMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  ProfTraitPerkNodeFlags:
+    UnlocksSubpath: 1
+  ProfTraitPerkNodeFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   PurchaseEligibility:
     ExpansionTooHigh: 4
     ExpansionTooLow: 3
@@ -3009,19 +3488,28 @@ Enum:
     Mail: 12
     Pet: 9
     PvP: 13
+    PvPScoreboard: 14
   ReportTypeMeta:
-    MaxValue: 13
+    MaxValue: 14
     MinValue: 0
-    NumValues: 14
+    NumValues: 15
   RuneforgePowerFilter:
     All: 0
     Available: 2
     Relevant: 1
     Unavailable: 3
+  RuneforgePowerFilterMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   RuneforgePowerState:
     Available: 0
     Invalid: 2
     Unavailable: 1
+  RuneforgePowerStateMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ScriptedAnimationBehavior:
     None: 0
     SourceCollideWithTarget: 4
@@ -3058,6 +3546,12 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  SharedStringFlag:
+    InternalOnly: 1
+  SharedStringFlagMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   SkinningState:
     Looting: 3
     None: 0
@@ -3267,6 +3761,180 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  TradeskillOrderDuration:
+    Long: 3
+    Medium: 2
+    Short: 1
+  TradeskillOrderDurationMeta:
+    MaxValue: 3
+    MinValue: 1
+    NumValues: 3
+  TradeskillOrderRecipient:
+    Guild: 2
+    Private: 3
+    Public: 1
+  TradeskillOrderRecipientMeta:
+    MaxValue: 3
+    MinValue: 1
+    NumValues: 3
+  TradeskillOrderStatus:
+    Completed: 3
+    Expired: 4
+    Started: 2
+    Unclaimed: 1
+  TradeskillOrderStatusMeta:
+    MaxValue: 4
+    MinValue: 1
+    NumValues: 4
+  TradeskillRecipeType:
+    Item: 1
+    Salvage: 2
+  TradeskillRecipeTypeMeta:
+    MaxValue: 2
+    MinValue: 1
+    NumValues: 2
+  TradeskillRelativeDifficulty:
+    Easy: 2
+    Medium: 1
+    Optimal: 0
+    Trivial: 3
+  TradeskillRelativeDifficultyMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
+  TraitCombatConfigFlags:
+    ActiveForSpec: 1
+  TraitCombatConfigFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
+  TraitCondFlag:
+    IsAlwaysMet: 2
+    IsGate: 1
+    IsSufficient: 4
+  TraitCondFlagMeta:
+    MaxValue: 4
+    MinValue: 1
+    NumValues: 3
+  TraitConditionType:
+    Available: 0
+    Granted: 2
+    Increased: 3
+    Visible: 1
+  TraitConditionTypeMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
+  TraitConfigDbState:
+    Created: 1
+    Deleted: 3
+    Ready: 0
+    Removed: 2
+  TraitConfigDbStateMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
+  TraitConfigType:
+    Combat: 1
+    Invalid: 0
+    Profession: 2
+  TraitConfigTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  TraitCostDefinitionType:
+    Gold: 3
+    Item: 2
+    PrimaryCurrency: 0
+    SecondaryCurrency: 1
+  TraitCostDefinitionTypeMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
+  TraitCurrencyFlag:
+    ShowQuantityAsSpent: 1
+    TraitSourcedShowMax: 2
+    UseClassIcon: 4
+    UseSpecIcon: 8
+  TraitCurrencyFlagMeta:
+    MaxValue: 8
+    MinValue: 1
+    NumValues: 4
+  TraitCurrencyType:
+    CurrencyTypesBased: 1
+    Gold: 0
+    TraitSourced: 2
+  TraitCurrencyTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  TraitEdgeType:
+    DeprecatedRankConnection: 1
+    DeprecatedSelectionOption: 5
+    MutuallyExclusive: 4
+    RequiredForAvailability: 3
+    SufficientForAvailability: 2
+    VisualOnly: 0
+  TraitEdgeTypeMeta:
+    MaxValue: 5
+    MinValue: 0
+    NumValues: 6
+  TraitEdgeVisualStyle:
+    None: 0
+    Straight: 1
+  TraitEdgeVisualStyleMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  TraitNodeEntryType:
+    DeprecatedSelect: 4
+    DragAndDrop: 5
+    ProfPath: 7
+    ProfPathUnlock: 9
+    ProfPerk: 8
+    SpendCircle: 2
+    SpendDiamond: 6
+    SpendHex: 0
+    SpendSmallCircle: 3
+    SpendSquare: 1
+  TraitNodeEntryTypeMeta:
+    MaxValue: 9
+    MinValue: 0
+    NumValues: 10
+  TraitNodeFlag:
+    ShowMultipleIcons: 1
+  TraitNodeFlagMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
+  TraitNodeGroupFlag:
+    AvailableByDefault: 1
+  TraitNodeGroupFlagMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
+  TraitNodeType:
+    Selection: 2
+    Single: 0
+    Tiered: 1
+  TraitNodeTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  TraitPointsOperationType:
+    Multiply: 1
+    None: -1
+    Set: 0
+  TraitPointsOperationTypeMeta:
+    MaxValue: 1
+    MinValue: -1
+    NumValues: 3
+  TraitTreeFlag:
+    CannotRefund: 1
+  TraitTreeFlagMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   TransmogCameraVariation:
     CloakBackpack: 1
     None: 0
@@ -3624,6 +4292,7 @@ Enum:
     Both: 3
     Female: 1
     Male: 0
+    Neutral: 4
     None: 2
   Unitsex:
     Both: 3
@@ -3631,9 +4300,9 @@ Enum:
     Male: 0
     None: 2
   UnitSexMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   ValidateNameResult:
     NameConsecutiveSpaces: 13
     NameDeclensionDoesntMatchBaseName: 16

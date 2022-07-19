@@ -1,5 +1,6 @@
 local args = (function()
   local parser = require('argparse')()
+  parser:option('-p --products', 'products to process'):count('*')
   parser:option('-t --types', 'types to write'):count('*')
   return parser:parse()
 end)()
@@ -13,16 +14,17 @@ end
 local lfs = require('lfs')
 local writeFile = require('pl.file').write
 local pprintYaml = require('wowapi.yaml').pprint
-local products = { -- priority order
-  'wow_beta',
-  'wowt',
-  'wow',
-  'wow_classic_beta',
-  'wow_classic_ptr',
-  'wow_classic',
-  'wow_classic_era_ptr',
-  'wow_classic_era',
-}
+local products = next(args.products) and args.products
+  or { -- priority order
+    'wow_beta',
+    'wowt',
+    'wow',
+    'wow_classic_beta',
+    'wow_classic_ptr',
+    'wow_classic',
+    'wow_classic_era_ptr',
+    'wow_classic_era',
+  }
 local docs = {}
 local enum = {}
 local function processDocDir(docdir)
@@ -325,6 +327,13 @@ if enabledTypes.enums then
       }
     end
   end
-  -- TODO do something more interesting with this data
-  print(require('wowapi.yaml').pprint(t))
+  for _, p in ipairs(products) do
+    local y = require('wowapi.yaml')
+    local f = 'data/globals/' .. p .. '.yaml'
+    local g = y.parseFile(f)
+    for k, v in pairs(t) do
+      g.Enum[k] = v
+    end
+    require('pl.file').write(f, y.pprint(g))
+  end
 end
