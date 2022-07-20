@@ -188,6 +188,8 @@ if enabledTypes.apis then
       }
       if apis[name] then
         tt.products = apis[name].products
+      elseif #products < #require('wowless.util').productList() then
+        tt.products = products
       end
       writeFile('data/api/' .. name .. '.yaml', pprintYaml(tt))
     end

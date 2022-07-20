@@ -2400,6 +2400,21 @@ G.GlobalApis = {
       wow_classic_ptr = true,
     },
   },
+  GetEmpowerHoldAtMaxTime = {
+    products = {
+      wow_beta = true,
+    },
+  },
+  GetEmpowerMinHoldTime = {
+    products = {
+      wow_beta = true,
+    },
+  },
+  GetEmpowerStageDuration = {
+    products = {
+      wow_beta = true,
+    },
+  },
   GetEquipmentNameFromSpell = {
     products = {
       wow = true,
@@ -6015,6 +6030,11 @@ G.GlobalApis = {
       wow_classic_era = true,
       wow_classic_era_ptr = true,
       wow_classic_ptr = true,
+    },
+  },
+  IsPlayerInGuildFromGUID = {
+    products = {
+      wow_beta = true,
     },
   },
   IsPlayerInWorld = true,

@@ -8,7 +8,7 @@ inputs:
     name: numCasts
     type: number
   - innerType: unknown
-    name: optionalReagents
+    name: craftingReagents
     nilable: true
     type: table
   - name: recipeLevel

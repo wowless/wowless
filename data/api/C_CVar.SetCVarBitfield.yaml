@@ -8,9 +8,6 @@ inputs:
     type: number
   - name: value
     type: boolean
-  - name: scriptCVar
-    nilable: true
-    type: string
 outputs:
 - name: success
   type: boolean

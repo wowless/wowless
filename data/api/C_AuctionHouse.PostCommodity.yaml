@@ -11,7 +11,9 @@ inputs:
     type: number
   - name: unitPrice
     type: number
-outputs: {}
+outputs:
+- name: needsConfirmation
+  type: boolean
 products:
 - wow
 - wowt

@@ -15,7 +15,9 @@ inputs:
   - name: buyout
     nilable: true
     type: number
-outputs: {}
+outputs:
+- name: needsConfirmation
+  type: boolean
 products:
 - wow
 - wowt

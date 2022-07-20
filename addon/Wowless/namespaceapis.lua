@@ -17,6 +17,11 @@ G.NamespaceApis = {
     methods = {
       GetRewardItemID = true,
       GetSupercedingAchievements = true,
+      IsGuildAchievement = {
+        products = {
+          wow_beta = true,
+        },
+      },
       IsValidAchievement = true,
       SetPortraitTexture = true,
     },
@@ -37,6 +42,11 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wowt = true,
+        },
+      },
+      GetItemActionOnEquipSpellID = {
+        products = {
+          wow_beta = true,
         },
       },
       GetPetActionPetBarIndices = true,
@@ -258,6 +268,16 @@ G.NamespaceApis = {
       CancelSell = true,
       CloseAuctionHouse = true,
       ConfirmCommoditiesPurchase = true,
+      ConfirmPostCommodity = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      ConfirmPostItem = {
+        products = {
+          wow_beta = true,
+        },
+      },
       FavoritesAreAvailable = true,
       GetAuctionInfoByID = true,
       GetAuctionItemSubClasses = true,
@@ -425,6 +445,11 @@ G.NamespaceApis = {
       SetModelDressState = true,
       SetSelectedSex = true,
       SetViewingAlteredForm = true,
+      SetViewingChrModel = {
+        products = {
+          wow_beta = true,
+        },
+      },
       SetViewingShapeshiftForm = true,
       ZoomCamera = true,
     },
@@ -862,6 +887,20 @@ G.NamespaceApis = {
       wowt = true,
     },
   },
+  C_ClassTalents = {
+    methods = {
+      CanChangeTalents = true,
+      CommitConfig = true,
+      GetActiveConfigID = true,
+      GetConfigIDsBySpecID = true,
+      LoadConfig = true,
+      RequestNewConfig = true,
+      SaveConfig = true,
+    },
+    products = {
+      wow_beta = true,
+    },
+  },
   C_ClassTrial = {
     methods = {
       GetClassTrialLogoutTimeSeconds = true,
@@ -1228,6 +1267,15 @@ G.NamespaceApis = {
       SetFontHeight = true,
     },
   },
+  C_Container = {
+    methods = {
+      GetBagSlotFlag = true,
+      SetBagSlotFlag = true,
+    },
+    products = {
+      wow_beta = true,
+    },
+  },
   C_ContributionCollector = {
     methods = {
       Close = true,
@@ -1312,6 +1360,21 @@ G.NamespaceApis = {
       wow = true,
       wow_beta = true,
       wowt = true,
+    },
+  },
+  C_CraftingOrders = {
+    methods = {
+      CloseCustomerCraftingOrders = true,
+      GetCustomerCategories = true,
+      GetCustomerOptions = true,
+      ParseCustomerOptions = true,
+      TEST_SignalHideCrafter = true,
+      TEST_SignalHideCustomer = true,
+      TEST_SignalShowCrafter = true,
+      TEST_SignalShowCustomer = true,
+    },
+    products = {
+      wow_beta = true,
     },
   },
   C_CreatureInfo = {
@@ -1499,6 +1562,21 @@ G.NamespaceApis = {
       UseSelfResurrectOption = true,
     },
   },
+  C_EditMode = {
+    methods = {
+      ConvertLayoutInfoToHyperlink = true,
+      ConvertLayoutInfoToString = true,
+      ConvertStringToLayoutInfo = true,
+      GetEditModeInfo = true,
+      OnLayoutAdded = true,
+      OnLayoutDeleted = true,
+      SaveEditModeInfo = true,
+      SetActiveLayout = true,
+    },
+    products = {
+      wow_beta = true,
+    },
+  },
   C_EncounterJournal = {
     methods = {
       GetDungeonEntrancesForMap = true,
@@ -1558,6 +1636,15 @@ G.NamespaceApis = {
       wow = true,
       wow_beta = true,
       wowt = true,
+    },
+  },
+  C_EventUtils = {
+    methods = {
+      IsEventValid = true,
+      NotifySettingsLoaded = true,
+    },
+    products = {
+      wow_beta = true,
     },
   },
   C_FogOfWar = {
@@ -2181,6 +2268,16 @@ G.NamespaceApis = {
       GetItemInventoryType = true,
       GetItemInventoryTypeByID = true,
       GetItemLink = true,
+      GetItemMaxStackSize = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetItemMaxStackSizeByID = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetItemName = true,
       GetItemNameByID = true,
       GetItemQuality = true,
@@ -3060,12 +3157,72 @@ G.NamespaceApis = {
   },
   C_Minimap = {
     methods = {
+      CanTrackBattlePets = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      ClearAllTracking = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetDrawGroundTextures = true,
+      GetNumQuestPOIWorldEffects = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetNumTrackingTypes = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetObjectIconTextureCoords = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetPOITextureCoords = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetTrackingFilter = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetTrackingInfo = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetUiMapID = true,
       GetViewRadius = true,
+      IsFilteredOut = {
+        products = {
+          wow_beta = true,
+        },
+      },
       IsRotateMinimapIgnored = true,
+      IsTrackingBattlePets = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      IsTrackingHiddenQuests = {
+        products = {
+          wow_beta = true,
+        },
+      },
       SetDrawGroundTextures = true,
       SetIgnoreRotateMinimap = true,
+      SetTracking = {
+        products = {
+          wow_beta = true,
+        },
+      },
       ShouldUseHybridMinimap = true,
     },
     products = {
@@ -3106,6 +3263,11 @@ G.NamespaceApis = {
       GetAppliedMountEquipmentID = true,
       GetCollectedFilterSetting = true,
       GetDisplayedMountAllCreatureDisplayInfo = true,
+      GetDisplayedMountID = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetDisplayedMountInfo = true,
       GetDisplayedMountInfoExtra = true,
       GetIsFavorite = true,
@@ -3505,6 +3667,11 @@ G.NamespaceApis = {
       GetSummonBattlePetCooldown = true,
       GetSummonRandomFavoritePetGUID = true,
       GetSummonedPetGUID = true,
+      HasFavoritePets = {
+        products = {
+          wow_beta = true,
+        },
+      },
       IsFilterChecked = true,
       IsFindBattleEnabled = true,
       IsJournalReadOnly = true,
@@ -3539,6 +3706,11 @@ G.NamespaceApis = {
       SetPetSourceChecked = true,
       SetPetTypeFilter = true,
       SetSearchFilter = true,
+      SpellTargetBattlePet = {
+        products = {
+          wow_beta = true,
+        },
+      },
       SummonPetByGUID = true,
       SummonRandomPet = true,
     },
@@ -3693,6 +3865,35 @@ G.NamespaceApis = {
       wow_classic_era = true,
       wow_classic_era_ptr = true,
       wow_classic_ptr = true,
+    },
+  },
+  C_ProfSpecs = {
+    methods = {
+      CanRefundPath = true,
+      CanUnlockTab = true,
+      GetChildrenForPath = true,
+      GetConfigIDForSkillLine = true,
+      GetDescriptionForPath = true,
+      GetDescriptionForPerk = true,
+      GetEntryIDForPerk = true,
+      GetPerksForPath = true,
+      GetRootPathForTab = true,
+      GetSourceTextForPath = true,
+      GetSpecTabIDsForSkillLine = true,
+      GetSpendCurrencyForPath = true,
+      GetSpendEntryForPath = true,
+      GetStateForPath = true,
+      GetStateForTab = true,
+      GetTabInfo = true,
+      GetUnlockEntryForPath = true,
+      GetUnlockRankForPerk = true,
+      GetUnspentPointsForSkillLine = true,
+      PerkIsEarned = true,
+      ShouldShowSpecForSkillLine = true,
+      SkillLineHasSpecialization = true,
+    },
+    products = {
+      wow_beta = true,
     },
   },
   C_PvP = {
@@ -4177,6 +4378,14 @@ G.NamespaceApis = {
           wowt = true,
         },
       },
+    },
+  },
+  C_QuestItemUse = {
+    methods = {
+      CanUseQuestItemOnObject = true,
+    },
+    products = {
+      wow_beta = true,
     },
   },
   C_QuestLine = {
@@ -4707,6 +4916,19 @@ G.NamespaceApis = {
           wowt = true,
         },
       },
+      UnitIsRelatedToActiveQuest = {
+        products = {
+          wow_beta = true,
+        },
+      },
+    },
+  },
+  C_QuestOffer = {
+    methods = {
+      GetHideRequiredItemsOnTurnIn = true,
+    },
+    products = {
+      wow_beta = true,
     },
   },
   C_QuestSession = {
@@ -5133,9 +5355,19 @@ G.NamespaceApis = {
     methods = {
       ContainsAnyDisenchantSpell = true,
       GetCurrentLevelSpells = true,
+      GetDeadlyDebuffInfo = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetSkillLineIndexByID = true,
       GetSpellInfo = true,
       GetSpellLinkFromSpellID = true,
+      GetTrackedNameplateSpells = {
+        products = {
+          wow_beta = true,
+        },
+      },
       IsSpellDisabled = true,
     },
     products = {
@@ -5266,11 +5498,26 @@ G.NamespaceApis = {
   C_Texture = {
     methods = {
       GetAtlasInfo = true,
+      GetFilenameFromFileDataID = {
+        products = {
+          wow_beta = true,
+        },
+      },
     },
   },
   C_Timer = {
     methods = {
       After = true,
+      NewTicker = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      NewTimer = {
+        products = {
+          wow_beta = true,
+        },
+      },
     },
   },
   C_ToyBox = {
@@ -5345,17 +5592,72 @@ G.NamespaceApis = {
       ClearPendingObliterateItem = true,
       ClearRecipeCategoryFilter = true,
       ClearRecipeSourceTypeFilter = true,
+      CloseCraftingOrders = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      CloseCustomerOrders = {
+        products = {
+          wow_beta = true,
+        },
+      },
       CloseObliterumForge = true,
       CloseTradeSkill = true,
+      ContinueRecast = {
+        products = {
+          wow_beta = true,
+        },
+      },
       CraftRecipe = true,
+      CraftSalvage = {
+        products = {
+          wow_beta = true,
+        },
+      },
       DropPendingObliterateItemFromCursor = true,
       GetAllFilterableInventorySlots = true,
       GetAllProfessionTradeSkillLines = true,
       GetAllRecipeIDs = true,
+      GetBaseProfessionInfo = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetCategories = true,
       GetCategoryInfo = true,
+      GetChildProfessionInfo = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetChildProfessionInfos = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetCraftingOperationInfo = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetCraftingReagentBonusText = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetFactionSpecificOutputItem = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetFilterableInventorySlots = true,
       GetFilteredRecipeIDs = true,
+      GetItemReagentQualityByItemInfo = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetObliterateSpellID = true,
       GetOnlyShowLearnedRecipes = true,
       GetOnlyShowMakeableRecipes = true,
@@ -5365,8 +5667,48 @@ G.NamespaceApis = {
       GetOptionalReagentInfo = true,
       GetPendingObliterateItemID = true,
       GetPendingObliterateItemLink = true,
+      GetProfessionChildSkillLineID = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetProfessionGearShown = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetProfessionInfoBySkillLineID = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetProfessionSkillLineID = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetProfessionSlots = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetProfessionSpells = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetReagentSlotStatus = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetRecipeCooldown = true,
       GetRecipeDescription = true,
+      GetRecipeFixedReagentItemLink = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetRecipeInfo = true,
       GetRecipeItemLevelFilter = true,
       GetRecipeItemLink = true,
@@ -5374,11 +5716,36 @@ G.NamespaceApis = {
       GetRecipeLink = true,
       GetRecipeNumItemsProduced = true,
       GetRecipeNumReagents = true,
+      GetRecipeOutputItemData = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetRecipeQualityReagentItemLink = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetRecipeReagentInfo = true,
       GetRecipeReagentItemLink = true,
       GetRecipeRepeatCount = true,
+      GetRecipeSchematic = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetRecipeSourceText = true,
       GetRecipeTools = true,
+      GetRecipesTracked = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetSalvagableItemIDs = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetSubCategories = true,
       GetTradeSkillDisplayName = true,
       GetTradeSkillLine = true,
@@ -5386,6 +5753,11 @@ G.NamespaceApis = {
       GetTradeSkillLineInfoByID = true,
       GetTradeSkillListLink = true,
       GetTradeSkillTexture = true,
+      HasRecipesTracked = {
+        products = {
+          wow_beta = true,
+        },
+      },
       IsAnyRecipeFromSource = true,
       IsDataSourceChanging = true,
       IsEmptySkillLineCategory = true,
@@ -5393,32 +5765,104 @@ G.NamespaceApis = {
       IsNPCCrafting = true,
       IsRecipeCategoryFiltered = true,
       IsRecipeFavorite = true,
+      IsRecipeInSkillLine = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      IsRecipeProfessionLearned = {
+        products = {
+          wow_beta = true,
+        },
+      },
       IsRecipeRepeating = true,
       IsRecipeSearchInProgress = true,
       IsRecipeSourceTypeFiltered = true,
+      IsRecipeTracked = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      IsRuneforging = {
+        products = {
+          wow_beta = true,
+        },
+      },
       IsTradeSkillGuild = true,
       IsTradeSkillGuildMember = true,
       IsTradeSkillLinked = true,
       IsTradeSkillReady = true,
       ObliterateItem = true,
+      OpenRecipe = {
+        products = {
+          wow_beta = true,
+        },
+      },
       OpenTradeSkill = true,
       SetInventorySlotFilter = true,
       SetOnlyShowLearnedRecipes = true,
       SetOnlyShowMakeableRecipes = true,
       SetOnlyShowSkillUpRecipes = true,
       SetOnlyShowUnlearnedRecipes = true,
+      SetProfessionChildSkillLineID = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      SetProfessionGearShown = {
+        products = {
+          wow_beta = true,
+        },
+      },
       SetRecipeCategoryFilter = true,
       SetRecipeFavorite = true,
       SetRecipeItemLevelFilter = true,
       SetRecipeItemNameFilter = true,
       SetRecipeRepeatCount = true,
       SetRecipeSourceTypeFilter = true,
+      SetRecipeTracked = {
+        products = {
+          wow_beta = true,
+        },
+      },
       StopRecipeRepeat = true,
     },
     products = {
       wow = true,
       wow_beta = true,
       wowt = true,
+    },
+  },
+  C_Traits = {
+    methods = {
+      CanPurchaseRank = true,
+      CanRefundRank = true,
+      CommitConfig = true,
+      ConfigHasStagedChanges = true,
+      GetConditionInfo = true,
+      GetConfigInfo = true,
+      GetConfigsByType = true,
+      GetDefinitionInfo = true,
+      GetEntryInfo = true,
+      GetNodeCost = true,
+      GetNodeInfo = true,
+      GetStagedChangesCost = true,
+      GetTraitCurrencyInfo = true,
+      GetTraitDescription = true,
+      GetTreeCurrencyInfo = true,
+      GetTreeInfo = true,
+      GetTreeNodes = true,
+      PurchaseRank = true,
+      RefundAllRanks = true,
+      RefundRank = true,
+      ResetTree = true,
+      RollbackConfig = true,
+      SetSelection = true,
+      StageConfig = true,
+      TalentTestUnlearnSpells = true,
+    },
+    products = {
+      wow_beta = true,
     },
   },
   C_Transmog = {
@@ -5610,6 +6054,14 @@ G.NamespaceApis = {
       ShouldUIParentAvoidNotch = true,
     },
   },
+  C_UIColor = {
+    methods = {
+      GetColors = true,
+    },
+    products = {
+      wow_beta = true,
+    },
+  },
   C_UIWidgetManager = {
     methods = {
       GetAllWidgetsBySetID = true,
@@ -5771,6 +6223,18 @@ G.NamespaceApis = {
       },
     },
   },
+  C_UnitAuras = {
+    methods = {
+      GetAuraDataByAuraInstanceID = true,
+      GetAuraDataBySlot = true,
+      GetCooldownAuraBySpellID = true,
+      GetPlayerAuraBySpellID = true,
+      IsAuraFilteredOutByInstanceID = true,
+    },
+    products = {
+      wow_beta = true,
+    },
+  },
   C_UserFeedback = {
     methods = {
       SubmitBug = true,
@@ -5779,7 +6243,27 @@ G.NamespaceApis = {
   },
   C_VideoOptions = {
     methods = {
+      GetCurrentGameWindowSize = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetDefaultGameWindowSize = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetGameWindowSizes = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetGxAdapterInfo = true,
+      SetGameWindowSize = {
+        products = {
+          wow_beta = true,
+        },
+      },
     },
   },
   C_VignetteInfo = {
@@ -5853,6 +6337,11 @@ G.NamespaceApis = {
       IsSpeakForMeActive = true,
       IsSpeakForMeAllowed = true,
       IsTranscriptionAllowed = true,
+      IsVoiceChatConnected = {
+        products = {
+          wow_beta = true,
+        },
+      },
       LeaveChannel = true,
       Login = true,
       Logout = true,
@@ -5943,6 +6432,15 @@ G.NamespaceApis = {
       wow = true,
       wow_beta = true,
       wowt = true,
+    },
+  },
+  C_XMLUtil = {
+    methods = {
+      GetTemplateInfo = true,
+      GetTemplates = true,
+    },
+    products = {
+      wow_beta = true,
     },
   },
   C_ZoneAbility = {
