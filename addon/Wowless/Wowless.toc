@@ -2,6 +2,7 @@
 ## Interface-Classic: 11401
 ## Interface-BCC: 20503
 ## SavedVariables: WowlessLastTestFailures
+util.lua
 init.lua
 framework.lua
 test.xml

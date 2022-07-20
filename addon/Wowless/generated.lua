@@ -191,27 +191,6 @@ function G.GeneratedTests()
   end
 
   local function globals()
-    local function assertRecursivelyEqual(expected, actual)
-      local ty = type(expected)
-      assertEquals(ty, type(actual))
-      if ty == 'table' then
-        local t = {}
-        for k, v in pairs(expected) do
-          t[k] = function()
-            return assertRecursivelyEqual(v, actual[k])
-          end
-        end
-        for k, v in pairs(actual) do
-          t[k] = t[k]
-            or function()
-              error(('missing key %q with value %s'):format(k, tostring(v)))
-            end
-        end
-        return t
-      elseif ty == 'string' or ty == 'number' or ty == 'boolean' then
-        assertEquals(expected, actual)
-      end
-    end
     local data = G['Globals_' .. runtimeProduct]
     if _G.SecureCapsuleGet ~= nil then -- addon_spec hack
       -- TODO grab these a la theflatdumper
@@ -234,7 +213,7 @@ function G.GeneratedTests()
     local tests = {}
     for k, v in pairs(data) do
       tests[k] = function()
-        return assertRecursivelyEqual(v, _G[k])
+        return G.assertRecursivelyEqual(v, _G[k])
       end
     end
     return tests
