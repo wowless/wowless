@@ -23,6 +23,7 @@ end
 local getStub = (function()
   local defaultOutputs = {
     boolean = 'false',
+    ['function'] = 'function() end',
     ['nil'] = 'nil',
     number = '1',
     oneornil = 'nil',

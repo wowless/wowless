@@ -122,7 +122,14 @@ local function t2ty(t, ns, mixin)
   elseif ns and tys[ns .. '.' .. t] then
     local n = ns .. '.' .. t
     local b = tabs[n]
-    return b and b.Type == 'Structure' and n or 'number'
+    if b then
+      if b.Type == 'Structure' then
+        return n
+      elseif b.Type == 'CallbackType' then
+        return 'function'
+      end
+    end
+    error('confused by ' .. n)
   elseif tys[t] then
     return t
   else

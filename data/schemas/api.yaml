@@ -59,6 +59,7 @@ type:
                   type:
                     oneof:
                     - literal: boolean
+                    - literal: function
                     - literal: number
                     - literal: string
                     - literal: table
@@ -100,6 +101,7 @@ type:
                 type:
                   oneof:
                   - literal: boolean
+                  - literal: function
                   - literal: nil
                   - literal: number
                   - literal: oneornil
