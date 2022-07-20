@@ -225,6 +225,10 @@ methods:
     status: unimplemented
   SetFrameStack:
     status: unimplemented
+  SetGlyph:
+    products:
+    - wow_classic_beta
+    status: unimplemented
   SetGuildBankItem:
     status: unimplemented
   SetHeirloomByItemID:

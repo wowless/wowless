@@ -3099,6 +3099,11 @@ G.UIObjectApis = {
       SetFrameLevel = true,
       SetFrameStack = true,
       SetFrameStrata = true,
+      SetGlyph = {
+        products = {
+          wow_classic_beta = true,
+        },
+      },
       SetGuildBankItem = true,
       SetHeight = true,
       SetHeirloomByItemID = {
