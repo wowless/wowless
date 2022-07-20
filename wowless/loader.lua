@@ -178,13 +178,13 @@ local function loader(api, cfg)
               local bfn = fn
               if script.attr.inherit == 'prepend' then
                 fn = function(...)
-                  bfn(...)
                   old(...)
+                  bfn(...)
                 end
               elseif script.attr.inherit == 'append' then
                 fn = function(...)
-                  old(...)
                   bfn(...)
+                  old(...)
                 end
               else
                 error('invalid inherit tag on script')

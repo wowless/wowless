@@ -288,4 +288,59 @@
       </OnLoad>
     </Scripts>
   </CheckButton>
+
+  <Script>
+    _G.WowlessLog = {}
+  </Script>
+  <Frame name='WowlessScriptInherit' virtual='true'>
+    <Scripts>
+      <OnLoad>
+        table.insert(_G.WowlessLog, self.name .. ':base')
+      </OnLoad>
+    </Scripts>
+  </Frame>
+  <Frame>
+    <Frames>
+      <Frame inherits='WowlessScriptInherit'>
+        <KeyValues>
+          <KeyValue key='name' value='unspecified' />
+        </KeyValues>
+        <Scripts>
+          <OnLoad>
+            table.insert(_G.WowlessLog, self.name)
+          </OnLoad>
+        </Scripts>
+      </Frame>
+      <Frame inherits='WowlessScriptInherit'>
+        <KeyValues>
+          <KeyValue key='name' value='prepend' />
+        </KeyValues>
+        <Scripts>
+          <OnLoad inherit='prepend'>
+            table.insert(_G.WowlessLog, self.name)
+          </OnLoad>
+        </Scripts>
+      </Frame>
+      <Frame inherits='WowlessScriptInherit'>
+        <KeyValues>
+          <KeyValue key='name' value='append' />
+        </KeyValues>
+        <Scripts>
+          <OnLoad inherit='append'>
+            table.insert(_G.WowlessLog, self.name)
+          </OnLoad>
+        </Scripts>
+      </Frame>
+    </Frames>
+  </Frame>
+  <Script>
+    local expected = {
+      'unspecified',
+      'prepend:base',
+      'prepend',
+      'append',
+      'append:base',
+    }
+    assertEquals(table.concat(expected, ','), table.concat(_G.WowlessLog, ','))
+  </Script>
 </Ui>
