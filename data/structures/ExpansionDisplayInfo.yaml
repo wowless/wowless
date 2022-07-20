@@ -7,5 +7,9 @@ fields:
 - innerType: ExpansionDisplayInfoFeature
   name: features
   type: table
+- name: highResBackgroundID
+  type: number
 - name: logo
+  type: number
+- name: lowResBackgroundID
   type: number

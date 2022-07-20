@@ -5,6 +5,8 @@ fields:
 - name: alternateFormRaceData
   nilable: true
   type: unknown
+- name: createScreenIconAtlas
+  type: string
 - name: fileName
   type: string
 - name: name

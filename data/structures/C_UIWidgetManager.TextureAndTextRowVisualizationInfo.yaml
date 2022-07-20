@@ -5,6 +5,9 @@ fields:
 - innerType: C_UIWidgetManager.TextureAndTextEntryInfo
   name: entries
   type: table
+- name: fixedWidth
+  nilable: true
+  type: number
 - name: frameTextureKit
   type: string
 - name: hasTimer

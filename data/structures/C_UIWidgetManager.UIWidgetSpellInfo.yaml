@@ -8,6 +8,8 @@ fields:
   type: number
 - name: iconSizeType
   type: number
+- name: isLootObject
+  type: boolean
 - name: spellID
   type: number
 - name: stackDisplay
