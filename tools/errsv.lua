@@ -43,6 +43,14 @@ for k, v in pairs(data.generated.uiobjects) do
         if not match then
           table.insert(m.products, product)
         end
+      elseif mv:match(': want "nil", got "function"') then
+        local m = assert(u.methods[mk])
+        -- TODO handle explicitly adding all other products
+        for i, p in ipairs(m.products) do
+          if p == product then
+            table.remove(m.products, i)
+          end
+        end
       end
     end
     write(uf, yaml.pprint(u))
