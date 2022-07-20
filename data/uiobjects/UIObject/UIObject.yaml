@@ -15,6 +15,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_beta
     - wowt
     status: unimplemented
   IsObjectType:
