@@ -6,6 +6,7 @@ inputs:
     type: string
 outputs:
 - name: valid
+  stub: true
   type: boolean
 products:
 - wow_beta

@@ -40,6 +40,10 @@ fields:
 inherits:
 - Frame
 methods:
+  ClearHighlightTexture:
+    products:
+    - wow_beta
+    status: unimplemented
   Click:
     status: implemented
   Disable:

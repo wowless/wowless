@@ -369,6 +369,11 @@ G.UIObjectApis = {
       CanChangeAttribute = true,
       CanChangeProtectedState = true,
       ClearAllPoints = true,
+      ClearHighlightTexture = {
+        products = {
+          wow_beta = true,
+        },
+      },
       ClearPointByName = true,
       ClearPointsOffset = true,
       Click = true,
@@ -572,6 +577,11 @@ G.UIObjectApis = {
       CanChangeAttribute = true,
       CanChangeProtectedState = true,
       ClearAllPoints = true,
+      ClearHighlightTexture = {
+        products = {
+          wow_beta = true,
+        },
+      },
       ClearPointByName = true,
       ClearPointsOffset = true,
       Click = true,
