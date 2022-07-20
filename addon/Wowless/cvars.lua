@@ -517,7 +517,6 @@ G.CVars = {
   SpellScriptEventLog = '0',
   SpellTargeting = '0',
   SplineOpt = '1',
-  TTSUseCharacterSettings = '1',
   TargetNearestUseNew = '1',
   TargetPriorityCombatLock = '1',
   TargetPriorityCombatLockContextualRelaxation = '1',

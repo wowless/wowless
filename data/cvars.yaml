@@ -2099,7 +2099,6 @@ transmogCurrentSpecOnly: '0'
 transmogrifyShowCollected: '1'
 transmogrifyShowUncollected: '0'
 transmogrifySourceFilters: '0'
-TTSUseCharacterSettings: '1'
 TurnSpeed:
   wow: '180'
   wow_beta: '180'

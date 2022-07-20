@@ -22,6 +22,15 @@ local function tget(t, s)
     return t[s]
   end
 end
+-- Do this early to avoid issues with deferred cvar creation.
+local cvarDefaults = (function()
+  local t = {}
+  for _, command in ipairs(_G.C_Console.GetAllCommands()) do
+    local name = command.command
+    t[name] = _G.C_CVar.GetCVarDefault(name)
+  end
+  return t
+end)()
 function G.GeneratedTests()
   local cfuncs = {}
   local function checkFunc(func, isLua)
@@ -107,20 +116,20 @@ function G.GeneratedTests()
       return tests
     end,
     cvars = function()
-      local t = {}
-      for _, command in ipairs(_G.C_Console.GetAllCommands()) do
-        local name = command.command
-        t[name] = _G.C_CVar.GetCVarDefault(name)
-      end
       local tests = {}
       for name, cfg in pairs(G.CVars) do
         tests[name] = function()
-          assertEquals(t[name], type(cfg) == 'string' and cfg or cfg[runtimeProduct])
+          assertEquals(cvarDefaults[name], type(cfg) == 'string' and cfg or cfg[runtimeProduct])
         end
       end
-      for k, v in pairs(t) do
-        tests[k] = tests[k] or function()
-          error(format('missing cvar %q with default %q', k, v))
+      local toskip = {
+        TTSUseCharacterSettings = true,
+      }
+      for k, v in pairs(cvarDefaults) do
+        if not tests[k] and not toskip[k] then
+          tests[k] = function()
+            error(format('missing cvar %q with default %q', k, v))
+          end
         end
       end
       return tests
