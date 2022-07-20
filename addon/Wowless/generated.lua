@@ -216,6 +216,24 @@ function G.GeneratedTests()
         return G.assertRecursivelyEqual(v, _G[k])
       end
     end
+    local genums = {}
+    for k, v in pairs(_G) do
+      if k:sub(1, 7) == 'NUM_LE_' then
+        genums[k:sub(4, -2)] = v
+        tests[k] = tests[k] or function()
+          error('missing, has value ' .. v)
+        end
+      end
+    end
+    for k, v in pairs(_G) do
+      for gk in pairs(genums) do
+        if k:sub(1, #gk) == gk then
+          tests[k] = tests[k] or function()
+            error('missing, has value ' .. v)
+          end
+        end
+      end
+    end
     return tests
   end
 
