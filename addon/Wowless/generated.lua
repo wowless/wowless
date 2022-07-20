@@ -219,7 +219,7 @@ function G.GeneratedTests()
     local genums = {}
     for k, v in pairs(_G) do
       if k:sub(1, 7) == 'NUM_LE_' then
-        genums[k:sub(4, -2)] = v
+        genums[k:sub(5, -2)] = v
         tests[k] = tests[k] or function()
           error('missing, has value ' .. v)
         end
