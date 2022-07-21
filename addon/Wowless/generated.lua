@@ -322,7 +322,7 @@ function G.GeneratedTests()
               mtests[mname] = function()
                 mcfg = mcfg == true and empty or mcfg
                 if mcfg.products and not mcfg.products[runtimeProduct] then
-                  assertEquals('nil', type(__index[mname]))
+                  assertEquals('nil', type(__index[mname]), 'product disabled')
                 elseif name ~= 'Animation' or mname ~= 'GetSourceLocation' then --FIXME
                   return checkCFunc(__index[mname])
                 end

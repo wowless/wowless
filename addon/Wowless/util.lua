@@ -4,13 +4,13 @@ local function quote(v)
   return type(v) == 'string' and string.format('%q', v) or tostring(v)
 end
 
-local function assertEquals(expected, actual)
+local function assertEquals(expected, actual, msg)
   local check = expected == actual
   if type(expected) == 'number' and type(actual) == 'number' then
     check = abs(expected - actual) < 0.0001
   end
   if not check then
-    error(string.format('want %s, got %s', quote(expected), quote(actual)), 2)
+    error(string.format('%swant %s, got %s', msg and msg .. ': ' or '', quote(expected), quote(actual)), 2)
   end
 end
 

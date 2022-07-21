@@ -29,7 +29,7 @@ for k, v in pairs(data.generated.uiobjects) do
     local uf = 'data/uiobjects/' .. k .. '/' .. k .. '.yaml'
     local u = yaml.parseFile(uf)
     for mk, mv in pairs(v.methods) do
-      if mv:match(': missing$') then
+      if mv:match(': missing$') or mv:match(': product disabled: want "nil", got "function"') then
         local m = u.methods[mk]
         if not m then
           m = { products = {}, status = 'unimplemented' }
@@ -43,14 +43,7 @@ for k, v in pairs(data.generated.uiobjects) do
         if not match then
           table.insert(m.products, product)
         end
-      elseif mv:match(': want "nil", got "function"') then
-        local m = assert(u.methods[mk])
-        -- TODO handle explicitly adding all other products
-        for i, p in ipairs(m.products) do
-          if p == product then
-            table.remove(m.products, i)
-          end
-        end
+        table.sort(m.products)
       end
     end
     write(uf, yaml.pprint(u))

@@ -2996,6 +2996,7 @@ G.UIObjectApis = {
         products = {
           wow = true,
           wow_beta = true,
+          wow_classic_beta = true,
           wowt = true,
         },
       },
@@ -3056,6 +3057,7 @@ G.UIObjectApis = {
         products = {
           wow = true,
           wow_beta = true,
+          wow_classic_beta = true,
           wowt = true,
         },
       },
@@ -3063,6 +3065,7 @@ G.UIObjectApis = {
         products = {
           wow = true,
           wow_beta = true,
+          wow_classic_beta = true,
           wowt = true,
         },
       },
@@ -3087,6 +3090,7 @@ G.UIObjectApis = {
         products = {
           wow = true,
           wow_beta = true,
+          wow_classic_beta = true,
           wowt = true,
         },
       },
@@ -3149,6 +3153,7 @@ G.UIObjectApis = {
         products = {
           wow = true,
           wow_beta = true,
+          wow_classic_beta = true,
           wowt = true,
         },
       },
@@ -3201,6 +3206,7 @@ G.UIObjectApis = {
         products = {
           wow = true,
           wow_beta = true,
+          wow_classic_beta = true,
           wowt = true,
         },
       },
@@ -3209,6 +3215,7 @@ G.UIObjectApis = {
         products = {
           wow = true,
           wow_beta = true,
+          wow_classic_beta = true,
           wowt = true,
         },
       },
@@ -3218,6 +3225,7 @@ G.UIObjectApis = {
         products = {
           wow = true,
           wow_beta = true,
+          wow_classic_beta = true,
           wowt = true,
         },
       },
