@@ -3,6 +3,15 @@
         "context": "..",
         "dockerfile": "Dockerfile"
     },
+    "customizations": {
+      "codespaces": {
+        "repositories": {
+          "lua-wow-tools/*": {
+            "permissions": "write-all"
+          }
+        }
+      }
+    },
     "features": {
         "docker-from-docker": {},
         "github-cli": {}
