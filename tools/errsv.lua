@@ -18,13 +18,18 @@ do
       local want, got = v:match('want (%d+), got (%d+)')
       if want then
         g[k] = tonumber(got)
+      else
+        local val = v:match(': missing, has value (%d+)$')
+        if val then
+          g[k] = tonumber(val)
+        end
       end
     end
   end
   write(gf, yaml.pprint(g))
 end
 
-for k, v in pairs(data.generated.uiobjects) do
+for k, v in pairs(data.generated.uiobjects or {}) do
   if v.methods then
     local uf = 'data/uiobjects/' .. k .. '/' .. k .. '.yaml'
     local u = yaml.parseFile(uf)
