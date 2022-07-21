@@ -1,0 +1,11 @@
+---
+name: GlobalColor
+versions:
+- fields:
+    Color: 2
+    ID: 0
+    LuaConstantName: 1
+  products:
+  - wow_beta
+  sig: si
+fdid: 4328468

@@ -1,0 +1,19 @@
+---
+name: PaperDollItemFrame
+versions:
+- fields:
+    ID: 0
+    ItemButtonName: 1
+    SlotIconFileID: 2
+    SlotNumber: 3
+  products:
+  - wow
+  - wow_beta
+  - wow_classic
+  - wow_classic_beta
+  - wow_classic_era
+  - wow_classic_era_ptr
+  - wow_classic_ptr
+  - wowt
+  sig: siu
+fdid: 1252503

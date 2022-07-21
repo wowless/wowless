@@ -1,0 +1,18 @@
+---
+name: ChrClassesXPowerTypes
+versions:
+- fields:
+    ClassID: 2
+    ID: 0
+    PowerType: 1
+  products:
+  - wow
+  - wow_beta
+  - wow_classic
+  - wow_classic_beta
+  - wow_classic_era
+  - wow_classic_era_ptr
+  - wow_classic_ptr
+  - wowt
+  sig: iF
+fdid: 1121420

@@ -1,0 +1,27 @@
+---
+name: UiTextureAtlasMember
+versions:
+- fields:
+    CommittedBottom: 7
+    CommittedFlags: 11
+    CommittedLeft: 4
+    CommittedName: 1
+    CommittedRight: 5
+    CommittedTop: 6
+    ID: 2
+    OverrideHeight: 10
+    OverrideWidth: 9
+    UiCanvasID: 12
+    UiTextureAtlasElementID: 8
+    UiTextureAtlasID: 3
+  products:
+  - wow
+  - wow_beta
+  - wow_classic
+  - wow_classic_beta
+  - wow_classic_era
+  - wow_classic_era_ptr
+  - wow_classic_ptr
+  - wowt
+  sig: siuiiiiuiiiu
+fdid: 897532

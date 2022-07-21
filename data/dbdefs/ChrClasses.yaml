@@ -1,0 +1,110 @@
+---
+name: ChrClasses
+versions:
+- fields:
+    ArmorTypeMask: 13
+    AttackPowerPerAgility: 21
+    AttackPowerPerStrength: 22
+    CinematicSequenceID: 15
+    CreateScreenFileDataID: 7
+    DamageBonusStat: 24
+    DefaultSpec: 16
+    DisplayPower: 19
+    Filename: 2
+    Flags: 14
+    HasRelicSlot: 25
+    HasStrengthAttackBonus: 17
+    IconFileDataID: 9
+    ID: 6
+    LowResScreenFileDataID: 10
+    Name_female_lang: 4
+    Name_lang: 1
+    Name_male_lang: 3
+    PetNameToken: 5
+    PrimaryStatPriority: 18
+    RangedAttackPowerPerAgility: 20
+    RolesMask: 12
+    SelectScreenFileDataID: 8
+    SpellClassSet: 23
+    StartingLevel: 11
+  products:
+  - wow_classic
+  - wow_classic_era
+  - wow_classic_era_ptr
+  - wow_classic_ptr
+  sig: sssssiuuuuiuuuuuuuuuuuuuu
+- fields:
+    AlteredFormCharacterCreationIdleVisualFallback: 27
+    ArmorTypeMask: 19
+    AttackPowerPerAgility: 34
+    AttackPowerPerStrength: 35
+    CharacterCreationAnimLoopWaitTimeMsFallback: 28
+    CharacterCreationGroundVisualFallback: 26
+    CharacterCreationIdleGroundVisualFallback: 25
+    CinematicSequenceID: 29
+    ClassColorB: 39
+    ClassColorG: 38
+    ClassColorR: 37
+    CreateScreenFileDataID: 12
+    DefaultSpec: 30
+    Description_lang: 6
+    DisabledString_lang: 8
+    DisplayPower: 32
+    FemaleCharacterCreationIdleVisualFallback: 24
+    FemaleCharacterCreationVisualFallback: 23
+    Field_9_0_1_34490_018: 20
+    Filename: 2
+    Flags: 16
+    Hyphenated_name_female_lang: 10
+    Hyphenated_name_male_lang: 9
+    IconFileDataID: 14
+    ID: 11
+    LowResScreenFileDataID: 15
+    MaleCharacterCreationIdleVisualFallback: 22
+    MaleCharacterCreationVisualFallback: 21
+    Name_female_lang: 4
+    Name_lang: 1
+    Name_male_lang: 3
+    PetNameToken: 5
+    PrimaryStatPriority: 31
+    RangedAttackPowerPerAgility: 33
+    RoleInfoString_lang: 7
+    RolesMask: 18
+    SelectScreenFileDataID: 13
+    SpellClassSet: 36
+    SpellTextureBlobFileDataID: 17
+  products:
+  - wow
+  - wow_beta
+  - wowt
+  sig: ssssssssssiuuuuiuuuiiiiiiiiiuuuuuuuuuuu
+- fields:
+    ArmorTypeMask: 14
+    AttackPowerPerAgility: 21
+    AttackPowerPerStrength: 22
+    CinematicSequenceID: 15
+    CreateScreenFileDataID: 7
+    DamageBonusStat: 24
+    DefaultSpec: 16
+    DisplayPower: 19
+    Filename: 2
+    Flags: 11
+    HasRelicSlot: 25
+    HasStrengthAttackBonus: 17
+    IconFileDataID: 9
+    ID: 6
+    LowResScreenFileDataID: 10
+    Name_female_lang: 4
+    Name_lang: 1
+    Name_male_lang: 3
+    PetNameToken: 5
+    PrimaryStatPriority: 18
+    RangedAttackPowerPerAgility: 20
+    RolesMask: 13
+    SelectScreenFileDataID: 8
+    SpellClassSet: 23
+    StartingLevel: 12
+  products:
+  - wow_classic_beta
+  sig: sssssiuuuuiiuuuuuuuuuuuuu
+fdid: 1361031

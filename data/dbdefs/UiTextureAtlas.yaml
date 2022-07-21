@@ -1,0 +1,20 @@
+---
+name: UiTextureAtlas
+versions:
+- fields:
+    AtlasHeight: 3
+    AtlasWidth: 2
+    FileDataID: 1
+    ID: 0
+    UiCanvasID: 4
+  products:
+  - wow
+  - wow_beta
+  - wow_classic
+  - wow_classic_beta
+  - wow_classic_era
+  - wow_classic_era_ptr
+  - wow_classic_ptr
+  - wowt
+  sig: iuuu
+fdid: 897470
