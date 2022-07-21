@@ -30,7 +30,7 @@ outputs:
 - name: primaryStat
   type: number
 dbs:
-- name: chrspecialization
+- name: ChrSpecialization
 products:
 - wow
 - wowt

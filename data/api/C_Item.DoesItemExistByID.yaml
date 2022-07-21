@@ -9,4 +9,4 @@ outputs:
   type: boolean
 dbs:
 - index: ID
-  name: item
+  name: Item

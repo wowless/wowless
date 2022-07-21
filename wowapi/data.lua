@@ -33,6 +33,7 @@ return {
   apis = loaddir('api', 'yaml'),
   builds = extLoaders.yaml('data/builds.yaml'),
   cvars = extLoaders.yaml('data/cvars.yaml'),
+  dbdefs = loaddir('dbdefs', 'yaml'),
   events = loaddir('events', 'yaml'),
   impl = loaddir('impl', 'lua'),
   schemas = loaddir('schemas', 'yaml'),

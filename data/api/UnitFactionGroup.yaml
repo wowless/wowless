@@ -13,4 +13,4 @@ outputs:
   type: string
 dbs:
 - index: InternalName
-  name: factiongroup
+  name: FactionGroup

@@ -13,4 +13,4 @@ outputs:
   type: number
 dbs:
 - index: ID
-  name: chrclasses
+  name: ChrClasses

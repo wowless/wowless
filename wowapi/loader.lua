@@ -136,7 +136,7 @@ local function doGetFn(api, loader, apicfg, db2s)
         (function()
           if not db.index then
             return function()
-              local t = db2s[db.name].data
+              local t = db2s[db.name:lower()].data
               local idx = 0
               return function()
                 idx = idx + 1
@@ -148,7 +148,7 @@ local function doGetFn(api, loader, apicfg, db2s)
               return type(x) == 'string' and x:lower() or x
             end
             return function(k)
-              local db2 = db2s[db.name]
+              local db2 = db2s[db.name:lower()]
               local index = db2.indices[db.index]
               if not index then
                 index = {}

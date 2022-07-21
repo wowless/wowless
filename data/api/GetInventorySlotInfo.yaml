@@ -9,4 +9,4 @@ outputs:
 - name: texture
   type: number
 dbs:
-- name: paperdollitemframe
+- name: PaperDollItemFrame

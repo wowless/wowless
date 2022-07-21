@@ -8,4 +8,4 @@ outputs:
   name: scriptedAnimationEffects
   type: table
 dbs:
-- name: uiscriptedanimationeffect
+- name: UIScriptedAnimationEffect

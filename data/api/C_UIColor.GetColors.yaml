@@ -8,6 +8,6 @@ outputs:
   name: colors
   type: table
 dbs:
-- name: globalcolor
+- name: GlobalColor
 products:
 - wow_beta

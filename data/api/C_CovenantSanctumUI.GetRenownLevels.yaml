@@ -9,7 +9,7 @@ outputs:
   name: levels
   type: table
 dbs:
-- name: renownrewards
+- name: RenownRewards
 products:
 - wow
 - wowt

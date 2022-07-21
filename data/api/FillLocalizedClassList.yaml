@@ -11,4 +11,4 @@ outputs:
 - name: classTable
   type: table
 dbs:
-- name: chrclasses
+- name: ChrClasses

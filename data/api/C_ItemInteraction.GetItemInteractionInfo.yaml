@@ -9,7 +9,7 @@ outputs:
   type: C_ItemInteraction.ItemInteractionFrameInfo
 dbs:
 - index: ID
-  name: uiiteminteraction
+  name: UiItemInteraction
 products:
 - wow
 - wowt

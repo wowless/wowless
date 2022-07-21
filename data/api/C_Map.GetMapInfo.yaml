@@ -10,4 +10,4 @@ outputs:
   type: C_Map.UiMapDetails
 dbs:
 - index: ID
-  name: uimap
+  name: UiMap

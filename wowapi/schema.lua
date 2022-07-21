@@ -1,6 +1,6 @@
 local wdata = require('wowapi.data')
 local domains = {
-  db = require('luadbd').dbds,
+  db = wdata.dbdefs,
   schema = wdata.schemas,
   state = wdata.state,
   structure = wdata.structures,

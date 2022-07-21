@@ -10,6 +10,6 @@ outputs:
   type: C_Texture.AtlasInfo
 dbs:
 - index: ID
-  name: uitextureatlas
+  name: UiTextureAtlas
 - index: CommittedName
-  name: uitextureatlasmember
+  name: UiTextureAtlasMember

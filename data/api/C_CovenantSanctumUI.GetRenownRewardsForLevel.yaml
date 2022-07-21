@@ -11,7 +11,7 @@ outputs:
   name: rewards
   type: table
 dbs:
-- name: renownrewards
+- name: RenownRewards
 products:
 - wow
 - wowt

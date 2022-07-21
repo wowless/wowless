@@ -684,6 +684,7 @@ local function loader(api, cfg)
   end
 
   local function db2rows(name)
+    name = name:lower()
     local dbd = require('luadbd').dbds[name]
     local v, b = api.env.GetBuildInfo()
     local bversion = v .. '.' .. b
