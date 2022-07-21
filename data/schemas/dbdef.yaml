@@ -1,0 +1,26 @@
+---
+name: dbdef
+type:
+  record:
+    fdid:
+      required: true
+      type: number
+    name:
+      required: true
+      type: string
+    versions:
+      required: true
+      type:
+        sequenceof:
+          record:
+            fields:
+              required: true
+              type:
+                mapof: number
+            products:
+              required: true
+              type:
+                schema: products
+            sig:
+              required: true
+              type: string
