@@ -684,12 +684,9 @@ local function loader(api, cfg)
   end
 
   local function db2rows(name)
-    name = name:lower()
-    local dbd = require('luadbd').dbds[name]
-    local v, b = api.env.GetBuildInfo()
-    local bversion = v .. '.' .. b
-    local build = assert(dbd:build(bversion), ('cannot load %s in %s'):format(name, bversion))
-    return build:rows(readFile(cfg.cascproxy and dbd.fdid or path.join(rootDir, 'db2', name .. '.db2')))
+    -- TODO reenable cascproxy here
+    local data = readFile(path.join(rootDir, 'db2', name .. '.db2'))
+    return require('wowless.db')(product, name, data)
   end
 
   local addonData = assert(api.states.Addons)
@@ -717,7 +714,7 @@ local function loader(api, cfg)
       end
     end
     if rootDir then
-      for row in db2rows('manifestinterfacetocdata') do
+      for row in db2rows('ManifestInterfaceTOCData') do
         maybeAdd(path.join(rootDir, path.dirname(row.FilePath)))
       end
     end
@@ -769,7 +766,7 @@ local function loader(api, cfg)
 
   local function loadFrameXml()
     local context = forAddon()
-    for row in db2rows('globalstrings') do
+    for row in db2rows('GlobalStrings') do
       api.env[row.BaseTag] = row.TagText_lang
     end
     for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do

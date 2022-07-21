@@ -90,19 +90,14 @@ local getStub = (function()
 end)()
 
 -- TODO rationalize this with wowless loader
-local function mkdb2s(env)
-  -- Do this lazily because env.GetBuildInfo() isn't available till very late.
-  local dbds = require('luadbd').dbds
+local function mkdb2s(product)
   local join = require('path').join
   local read = require('pl.file').read
+  local rows = require('wowless.db')
   return setmetatable({}, {
     __index = function(dbs, db)
-      local v, b = env.GetBuildInfo()
-      local version = v .. '.' .. b
-      local dbd = dbds[db]
-      local build = assert(dbd:build(version), ('cannot load %s in %s'):format(db, version))
       local t = {}
-      for row in build:rows(read(join('extracts', version, 'db2', db .. '.db2'))) do
+      for row in rows(product, db, read(join('extracts', product, 'db2', db:lower() .. '.db2'))) do
         table.insert(t, row)
       end
       dbs[db] = {
@@ -136,7 +131,7 @@ local function doGetFn(api, loader, apicfg, db2s)
         (function()
           if not db.index then
             return function()
-              local t = db2s[db.name:lower()].data
+              local t = db2s[db.name].data
               local idx = 0
               return function()
                 idx = idx + 1
@@ -148,7 +143,7 @@ local function doGetFn(api, loader, apicfg, db2s)
               return type(x) == 'string' and x:lower() or x
             end
             return function(k)
-              local db2 = db2s[db.name:lower()]
+              local db2 = db2s[db.name]
               local index = db2.indices[db.index]
               if not index then
                 index = {}
@@ -210,7 +205,7 @@ end
 
 local function loadFunctions(api, loader)
   local fns = {}
-  local db2s = mkdb2s(api.env)
+  local db2s = mkdb2s(loader.product)
   local aliases = {}
   for fn, apicfg in pairs(loadApis(loader.product)) do
     if apicfg.alias then
