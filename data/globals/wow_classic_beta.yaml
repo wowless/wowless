@@ -2,6 +2,7 @@
 Constants:
   CalendarGetEventTypeConstants:
     DEFAULT_CALENDAR_GET_EVENT_TYPE: 0
+  CharCustomizationConstants: {}
   CurrencyConsts:
     ACCOUNT_WIDE_HONOR_CURRENCY_ID: 1585
     ACCOUNT_WIDE_HONOR_LEVEL_CURRENCY_ID: 1586
@@ -53,7 +54,7 @@ Constants:
   PvpInfoConsts:
     MaxPlayersPerInstance: 80
   QuestWatchConsts_Classic:
-    MAX_QUEST_WATCHES: 5
+    MAX_QUEST_WATCHES: 25
     MAX_WORLD_QUEST_HARD_WATCHES: 5
     MAX_WORLD_QUEST_WATCHES: 1
 Enum:
@@ -89,26 +90,26 @@ Enum:
     UsedCharges: 14
     WrappedItem: 21
   AuctionHouseErrorMeta:
-    MaxValue: 22
+    MaxValue: 25
     MinValue: 0
-    NumValues: 23
+    NumValues: 26
   AuctionHouseFilter:
-    ArtifactQuality: 10
-    CommonQuality: 5
-    EpicQuality: 8
-    ExactMatch: 3
-    LegendaryCraftedItemOnly: 11
-    LegendaryQuality: 9
-    PoorQuality: 4
-    RareQuality: 7
-    UncollectedOnly: 0
-    UncommonQuality: 6
-    UpgradesOnly: 2
-    UsableOnly: 1
+    ArtifactQuality: 11
+    CommonQuality: 6
+    EpicQuality: 9
+    ExactMatch: 4
+    LegendaryCraftedItemOnly: 12
+    LegendaryQuality: 10
+    PoorQuality: 5
+    RareQuality: 8
+    UncollectedOnly: 1
+    UncommonQuality: 7
+    UpgradesOnly: 3
+    UsableOnly: 2
   AuctionHouseFilterMeta:
-    MaxValue: 11
+    MaxValue: 12
     MinValue: 0
-    NumValues: 12
+    NumValues: 13
   AuctionHouseItemSortOrder:
     Bid: 0
     Buyout: 1
@@ -490,9 +491,9 @@ Enum:
     LFG: 3
     None: 0
   BrawlTypeMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   CalendarCommandType:
     Complain: 10
     Create: 0
@@ -719,6 +720,8 @@ Enum:
     MaxValue: 1
     MinValue: 1
     NumValues: 1
+  CharCustomizationType: {}
+  CharCustomizationTypeMeta: {}
   ChatChannelRuleset:
     ChromieTimeBuringCrusade: 4
     ChromieTimeCataclysm: 3
@@ -1275,6 +1278,8 @@ Enum:
     MaxValue: 14
     MinValue: 0
     NumValues: 15
+  GamePadPowerLevel: {}
+  GamePadPowerLevelMeta: {}
   GarrAutoBoardIndex:
     AllyCenterFront: 3
     AllyLeftBack: 0
@@ -1506,9 +1511,9 @@ Enum:
     IsRegionwide: 1
     NotAvailableClientSide: 16
   HolidayFlagsMeta:
-    MaxValue: 16
+    MaxValue: 32
     MinValue: 1
-    NumValues: 5
+    NumValues: 6
   IconAndTextWidgetState:
     Hidden: 0
     Shown: 1
@@ -1638,6 +1643,10 @@ Enum:
     MaxValue: 7
     MinValue: 0
     NumValues: 8
+  ItemCreationContext: {}
+  ItemCreationContextMeta: {}
+  ItemGemColor: {}
+  ItemGemColorMeta: {}
   ItemGemSubclass:
     Blue: 1
     Green: 4
@@ -1664,6 +1673,8 @@ Enum:
     MaxValue: 6
     MinValue: 0
     NumValues: 7
+  ItemModification: {}
+  ItemModificationMeta: {}
   ItemQuality:
     Artifact: 6
     Epic: 4
@@ -1711,6 +1722,12 @@ Enum:
     MaxValue: 4
     MinValue: 1
     NumValues: 3
+  ItemSocketType: {}
+  ItemSocketTypeMeta: {}
+  ItemSubclassDisplay: {}
+  ItemSubclassDisplayMeta: {}
+  ItemSubclassFlag: {}
+  ItemSubclassFlagMeta: {}
   ItemWeaponSubclass:
     Axe1H: 0
     Axe2H: 1
@@ -1744,6 +1761,8 @@ Enum:
     MaxValue: 2
     MinValue: 1
     NumValues: 2
+  LFGListDisplayType: {}
+  LFGListDisplayTypeMeta: {}
   LFGListFilter:
     NotRecommended: 2
     PvE: 4
@@ -2116,7 +2135,7 @@ Enum:
     Maelstrom: 11
     Mana: 0
     None: -1
-    NumPowerTypes: 19
+    NumPowerTypes: 23
     Obsolete2: 15
     Pain: 18
     Rage: 1
@@ -2124,9 +2143,9 @@ Enum:
     RunicPower: 6
     SoulShards: 7
   PowerTypeMeta:
-    MaxValue: 19
+    MaxValue: 23
     MinValue: -2
-    NumValues: 22
+    NumValues: 26
   PurchaseEligibility:
     ExpansionTooHigh: 4
     ExpansionTooLow: 3
@@ -2138,6 +2157,8 @@ Enum:
     MaxValue: 5
     MinValue: 0
     NumValues: 6
+  PvPFaction: {}
+  PvPFactionMeta: {}
   QuestLineFloorLocation:
     Above: 0
     Below: 1
@@ -2251,36 +2272,36 @@ Enum:
     MinValue: 0
     NumValues: 4
   ReportMinorCategory:
-    Advertisement: 9
-    Afk: 3
-    BlockingProgress: 5
-    Boosting: 1
-    Botting: 7
-    BTag: 10
+    Advertisement: 256
+    Afk: 8
+    BlockingProgress: 32
+    Boosting: 2
+    Botting: 128
+    BTag: 512
     CustomGameName: 12
-    GroupName: 11
-    Hacking: 6
+    GroupName: 1024
+    Hacking: 64
     Inaproppriate: 8
-    IntentionallyFeeding: 4
-    Spam: 2
-    TextChat: 0
+    IntentionallyFeeding: 16
+    Spam: 4
+    TextChat: 1
     VoiceChat: 13
   ReportMinorCategoryMeta:
-    MaxValue: 13
-    MinValue: 0
-    NumValues: 14
+    MaxValue: 16384
+    MinValue: 1
+    NumValues: 15
   ReportType:
     Chat: 0
     ClubFinder: 2
-    ClubMember: 4
-    Friend: 6
+    ClubMember: 6
+    Friend: 8
     GroupFinder: 3
-    GroupMember: 5
+    GroupMember: 7
     InWorld: 1
   ReportTypeMeta:
-    MaxValue: 6
+    MaxValue: 14
     MinValue: 0
-    NumValues: 7
+    NumValues: 15
   ScriptedAnimationBehavior:
     None: 0
     SourceCollideWithTarget: 4
@@ -2424,6 +2445,8 @@ Enum:
     MaxValue: 29
     MinValue: 0
     NumValues: 30
+  TransmogModification: {}
+  TransmogModificationMeta: {}
   TransmogSearchType:
     BaseSets: 2
     Items: 1
@@ -2447,6 +2470,8 @@ Enum:
     MaxValue: 9
     MinValue: 0
     NumValues: 10
+  TransmogType: {}
+  TransmogTypeMeta: {}
   TransmogUseErrorType:
     Ability: 3
     Faction: 4
@@ -2481,7 +2506,7 @@ Enum:
     Ammo: 8
     BattlePet: 17
     CommunitiesStream: 20
-    ConduitCollectionItem: 21
+    ConduitCollectionItem: 20
     Currency: 14
     Default: 0
     EquipmentSet: 13
@@ -2499,9 +2524,9 @@ Enum:
     Toy: 19
     VoidItem: 16
   UICursorTypeMeta:
-    MaxValue: 21
+    MaxValue: 20
     MinValue: 0
-    NumValues: 21
+    NumValues: 20
   UIItemInteractionFlags:
     ClickShowsFlyout: 8
     ConfirmationHasDelay: 2
