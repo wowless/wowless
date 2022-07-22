@@ -77,10 +77,10 @@ local function applyPatterns(tx, ty)
   end
 end
 
-do
+if data.generated.globals then
   local gf = 'data/globals/' .. product .. '.yaml'
   local g = yaml.parseFile(gf)
-  applyPatterns(g, data.generated.globals)
+  applyPatterns(g, data.generated.globals or {})
   write(gf, yaml.pprint(g))
 end
 
@@ -112,6 +112,33 @@ local function removeProduct(products)
     end
   end
   return newproducts
+end
+
+for ns, nt in pairs(data.generated.apiNamespaces or {}) do
+  if type(nt) == 'string' then
+    assert(nt:match(': want "nil", got "table"$'))
+    -- This means we're missing the namespace completely, but unfortunately right now
+    -- generated.lua doesn't tell us what APIs are missing, so given our current data
+    -- model we can't actually remedy this yet.
+  elseif type(nt) == 'table' then
+    for mn, mv in pairs(nt) do
+      if mn:sub(1, 1) ~= '~' then
+        local apifile = 'data/api/' .. ns .. '.' .. mn .. '.yaml'
+        local api = yaml.parseFile(apifile)
+        if type(mv) == 'string' then
+          assert(mv:match(': want "function", got "nil"$'))
+          api.products = removeProduct(api.products)
+        elseif type(mv) == 'table' then
+          assert(true) -- TODO
+        else
+          error('unexpected type for ' .. ns .. '.' .. mn)
+        end
+        write(apifile, yaml.pprint(api))
+      end
+    end
+  else
+    error('unexpected type for ' .. ns)
+  end
 end
 
 for k, v in pairs(data.generated.globalApis or {}) do
