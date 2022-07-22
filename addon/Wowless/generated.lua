@@ -138,7 +138,7 @@ function G.GeneratedTests()
         G.check1(true, _G.IsPublicBuild())
       end,
       IsTestBuild = function()
-        G.check1(false, IsTestBuild())
+        G.check1(b.test, IsTestBuild())
       end,
     }
   end

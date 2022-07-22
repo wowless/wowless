@@ -111,6 +111,7 @@ local function mkBaseUIObjectTypes(api, loader)
 
   local env = {
     api = api,
+    build = require('wowapi.data').builds[loader.product],
     kids = kids,
     m = m,
     toTexture = toTexture,

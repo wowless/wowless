@@ -92,9 +92,7 @@ methods:
   GetTexelSnappingBias:
     status: unimplemented
   GetTexture:
-    fields:
-    - name: texture
-    status: getter
+    status: implemented
   GetTextureFileID:
     status: unimplemented
   GetTextureFilePath:

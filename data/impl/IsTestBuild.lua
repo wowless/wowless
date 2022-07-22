@@ -1,0 +1,3 @@
+local loader = ...
+local b = assert(require('wowapi.data').builds[loader.product], 'invalid product')
+return b.test

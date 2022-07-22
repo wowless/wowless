@@ -12,6 +12,9 @@ type:
       flavor:
         required: true
         type: string
+      test:
+        required: true
+        type: boolean
       tocversion:
         required: true
         type: number
