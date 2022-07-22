@@ -1,6 +1,22 @@
 ---
 name: GetQuestLogRewardCurrencyInfo
 status: unimplemented
+inputs:
+- - name: i
+    type: number
+  - name: questID
+    type: number
+outputs:
+- name: name
+  type: string
+- name: texture
+  type: string
+- name: numItems
+  type: number
+- name: currencyID
+  type: number
+- name: quality
+  type: number
 products:
 - wow
 - wow_beta

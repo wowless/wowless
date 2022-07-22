@@ -1,3 +1,9 @@
 ---
 name: GetBattlefieldPortExpiration
 status: unimplemented
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: expiration
+  type: number
