@@ -67,5 +67,11 @@ end
 
 local api = proto2api(io.read('*a'))
 local filename = ('data/api/%s.yaml'):format(api.name)
+do
+  local success, existingApi = pcall(function()
+    return require('wowapi.yaml').parseFile(filename)
+  end)
+  api.products = success and existingApi.products or nil
+end
 require('pl.file').write(filename, require('wowapi.yaml').pprint(api))
 print(filename)
