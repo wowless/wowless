@@ -628,7 +628,7 @@ local function loader(api, cfg)
     Mainline = 'Mainline',
     TBC = 'BCC',
     Vanilla = 'Classic',
-    Wrath = 'Wrath',
+    Wrath = 'WOTLKC',
   }
 
   local function parseToc(tocFile, content)
@@ -778,6 +778,7 @@ local function loader(api, cfg)
         Mainline = 'Interface',
         TBC = 'Interface_TBC',
         Vanilla = 'Interface_Vanilla',
+        Wrath = 'Interface_Wrath',
       }
       context.loadFile(path.join(rootDir, frameXmlBindingsDirMap[productToFlavor[product]], 'FrameXML', 'Bindings.xml'))
     end
