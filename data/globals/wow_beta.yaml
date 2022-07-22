@@ -1427,9 +1427,11 @@ Enum:
     GuildBankWithdrawal: 21
     ItemDeletion: 14
     ItemRefund: 2
-    Last: 54
+    Last: 56
     LFGReward: 11
     Loot: 9
+    PhBuffer_53: 53
+    PhBuffer_54: 54
     PlayerTrait: 52
     Pushloot: 22
     PvPCompletionBonus: 19
@@ -1443,7 +1445,7 @@ Enum:
     QuestRewardIgnoreCaps: 29
     RandomBattleground: 16
     RatedBattleground: 15
-    RenownRepGain: 53
+    RenownRepGain: 55
     Script: 20
     Spell: 13
     Trade: 12
@@ -1456,9 +1458,9 @@ Enum:
     WorldQuestReward: 35
     WorldQuestRewardIgnoreCaps: 36
   CurrencySourceMeta:
-    MaxValue: 54
+    MaxValue: 56
     MinValue: 0
-    NumValues: 55
+    NumValues: 57
   CurrencyTokenCategoryFlags:
     FlagPlayerItemAssignment: 2
     FlagSortLast: 1
@@ -1468,6 +1470,76 @@ Enum:
     MaxValue: 8
     MinValue: 1
     NumValues: 4
+  Cursormode:
+    AttackCursor: 4
+    AttackErrorCursor: 33
+    BuyCursor: 3
+    BuyErrorCursor: 32
+    CastCursor: 2
+    CastErrorCursor: 31
+    CustomCursor: 57
+    GatherCursor: 13
+    GatherErrorCursor: 42
+    InnkeeperCursor: 22
+    InnkeeperErrorCursor: 51
+    InspectCursor: 7
+    InspectErrorCursor: 36
+    InteractCursor: 5
+    InteractErrorCursor: 34
+    ItemCursor: 19
+    ItemErrorCursor: 48
+    LockCursor: 14
+    LockErrorCursor: 43
+    LootAllCursor: 16
+    LootAllErrorCursor: 45
+    MailCursor: 15
+    MailErrorCursor: 44
+    MapPinCursor: 29
+    MapPinErrorCursor: 56
+    MineCursor: 11
+    MineErrorCursor: 40
+    NoCursor: 0
+    PickupCursor: 8
+    PickupErrorCursor: 37
+    PointCursor: 1
+    PointErrorCursor: 30
+    QuestCursor: 23
+    QuestErrorCursor: 52
+    QuestRepeatableCursor: 24
+    QuestRepeatableErrorCursor: 53
+    QuestTurninCursor: 25
+    QuestTurninErrorCursor: 54
+    RepairCursor: 17
+    RepairErrorCursor: 46
+    RepairnpcCursor: 18
+    RepairnpcErrorCursor: 47
+    SkinAllianceCursor: 21
+    SkinAllianceErrorCursor: 50
+    SkinCursor: 12
+    SkinErrorCursor: 41
+    SkinHordeCursor: 20
+    SkinHordeErrorCursor: 49
+    SpeakCursor: 6
+    SpeakErrorCursor: 35
+    TaxiCursor: 9
+    TaxiErrorCursor: 38
+    TrainerCursor: 10
+    TrainerErrorCursor: 39
+    UIMoveCursor: 27
+    UIResizeCursor: 28
+    VehicleCursor: 26
+    VehicleErrorCursor: 55
+  CursormodeMeta:
+    MaxValue: 57
+    MinValue: 0
+    NumValues: 58
+  CursorStyle:
+    Crosshair: 1
+    Mouse: 0
+  CursorStyleMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   CustomBindingType:
     VoicePushToTalk: 0
   CustomBindingTypeMeta:
@@ -1534,6 +1606,7 @@ Enum:
     MinValue: 0
     NumValues: 2
   EditModeActionBarSetting:
+    AlwaysShowButtons: 9
     HideBarArt: 6
     HideBarScrolling: 8
     IconPadding: 4
@@ -1544,9 +1617,9 @@ Enum:
     SnapToSide: 7
     VisibleSetting: 5
   EditModeActionBarSettingMeta:
-    MaxValue: 8
+    MaxValue: 9
     MinValue: 0
-    NumValues: 9
+    NumValues: 10
   EditModeCastBarSetting:
     BarSize: 0
   EditModeCastBarSettingMeta:
@@ -2442,6 +2515,30 @@ Enum:
     MaxValue: 23
     MinValue: 0
     NumValues: 24
+  ItemSubclassDisplay:
+    HideSubclassInAuction: 2
+    HideSubclassInTooltips: 1
+    ShowItemCount: 4
+  ItemSubclassDisplayMeta:
+    MaxValue: 4
+    MinValue: 1
+    NumValues: 3
+  ItemSubclassFlag:
+    ArmorsubclassLfgscalingarmor: 1024
+    ItemsubclassQuivernotrequired: 64
+    ItemsubclassUsesInvtype: 512
+    WeaponsubclassCanparry: 1
+    WeaponsubclassDeprecatedReuseMe: 256
+    WeaponsubclassIsrifle: 8
+    WeaponsubclassIsthrown: 16
+    WeaponsubclassIsunarmed: 4
+    WeaponsubclassRanged: 128
+    WeaponsubclassRighthandRanged: 32
+    WeaponsubclassSetfingerseq: 2
+  ItemSubclassFlagMeta:
+    MaxValue: 1024
+    MinValue: 1
+    NumValues: 11
   ItemTryOnReason:
     DataPending: 3
     NotEquippable: 2
@@ -3230,11 +3327,12 @@ Enum:
     NumValues: 3
   ProfessionsSpecTabState:
     Locked: 0
+    Unlockable: 2
     Unlocked: 1
   ProfessionsSpecTabStateMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 0
-    NumValues: 2
+    NumValues: 3
   ProfTraitPerkNodeFlags:
     UnlocksSubpath: 1
   ProfTraitPerkNodeFlagsMeta:
