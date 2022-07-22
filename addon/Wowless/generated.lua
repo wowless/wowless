@@ -124,6 +124,25 @@ function G.GeneratedTests()
     return tests
   end
 
+  local function build()
+    local b = G.Builds[runtimeProduct]
+    assert(b, 'no build')
+    return {
+      GetBuildInfo = function()
+        G.check4(b.version, b.build, b.date, b.tocversion, GetBuildInfo())
+      end,
+      IsDebugBuild = function()
+        G.check1(false, _G.IsDebugBuild())
+      end,
+      IsPublicBuild = function()
+        G.check1(true, _G.IsPublicBuild())
+      end,
+      IsTestBuild = function()
+        G.check1(false, IsTestBuild())
+      end,
+    }
+  end
+
   local function cvars()
     local tests = {}
     for name, cfg in pairs(G.CVars) do
@@ -338,6 +357,7 @@ function G.GeneratedTests()
 
   return {
     apiNamespaces = apiNamespaces,
+    build = build,
     cvars = cvars,
     globalApis = globalApis,
     globals = globals,

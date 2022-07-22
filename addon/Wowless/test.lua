@@ -1,24 +1,9 @@
 local addonName, G = ...
 local assertEquals = _G.assertEquals
 
-local function check0(...)
-  assertEquals(0, select('#', ...))
-end
-
-local function check1(e1, ...)
-  assertEquals(1, select('#', ...))
-  local a1 = ...
-  assertEquals(e1, a1)
-end
-
-local function check4(e1, e2, e3, e4, ...)
-  assertEquals(4, select('#', ...))
-  local a1, a2, a3, a4 = ...
-  assertEquals(e1, a1)
-  assertEquals(e2, a2)
-  assertEquals(e3, a3)
-  assertEquals(e4, a4)
-end
+local check0 = G.check0
+local check1 = G.check1
+local check4 = G.check4
 
 local syncTests = function()
   return {

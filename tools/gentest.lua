@@ -138,6 +138,10 @@ local function stylua(s)
 end
 
 local tablemap = {
+  builds = function()
+    local t = require('wowapi.yaml').parseFile('data/builds.yaml')
+    return 'Builds', t
+  end,
   cvars = function()
     local t = require('wowapi.yaml').parseFile('data/cvars.yaml')
     return 'CVars', t
