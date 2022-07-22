@@ -11,38 +11,53 @@ local yaml = require('wowapi.yaml')
 local write = require('pl.file').write
 
 local getPatternValue = (function()
+  local function constant(x)
+    return function()
+      return x
+    end
+  end
+  local function mustnumber(x)
+    return assert(tonumber(x))
+  end
   local patterns = {
     {
       pattern = ': want %d+, got (%d+)$',
-      value = tonumber,
+      value = mustnumber,
+    },
+    {
+      pattern = ': want ".+", got "nil"$',
+      value = constant(nil),
     },
     {
       pattern = ': missing, has value (%d+)$',
-      value = tonumber,
+      value = mustnumber,
     },
     {
       pattern = ': missing key ".+" with value (%d+)$',
-      value = tonumber,
+      value = mustnumber,
     },
     {
       pattern = ': missing key ".+" with value table: 0x[0-9a-f]+$',
-      value = function()
-        return {}
-      end,
+      value = constant({}),
     },
   }
 
+  local function forwardValue(a1, ...)
+    assert(select('#', ...) == 0)
+    return a1
+  end
+
   local function forwardMatch(fn, a1, ...)
     if a1 then
-      return assert((fn(a1, ...)))
+      return true, forwardValue(fn(a1, ...))
     end
   end
 
   return function(v)
     for _, p in ipairs(patterns) do
-      local vv = forwardMatch(p.value, v:match(p.pattern))
-      if vv then
-        return vv
+      local match, value = forwardMatch(p.value, v:match(p.pattern))
+      if match then
+        return true, value
       end
     end
     print(('warning: no pattern matched %q'):format(v))
@@ -54,9 +69,9 @@ local function applyPatterns(tx, ty)
     if type(v) == 'table' then
       applyPatterns(tx[k], v)
     else
-      local vv = getPatternValue(v)
-      if vv then
-        tx[k] = vv
+      local match, value = getPatternValue(v)
+      if match then
+        tx[k] = value
       end
     end
   end
