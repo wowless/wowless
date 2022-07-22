@@ -240,6 +240,7 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
         local r = v.rect
         local left, top, right, bottom = r.left, screenHeight - r.top, r.right, screenHeight - r.bottom
         local x = v.content.texture.path
+        x = x ~= 'FileData ID 0' and x or nil
         if conn and x and left < right and top < bottom then
           local width, height, png = getblob(x)
           local c = v.content.texture.coords
