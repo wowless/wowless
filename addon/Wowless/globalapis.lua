@@ -56,6 +56,11 @@ G.GlobalApis = {
   },
   AddChatWindowChannel = true,
   AddChatWindowMessages = true,
+  AddPreviewTalentPoints = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   AddQuestWatch = {
     products = {
       wow_classic = true,
@@ -976,6 +981,11 @@ G.GlobalApis = {
       wowt = true,
     },
   },
+  ConfirmBarbersChoice = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   ConfirmBindOnUse = true,
   ConfirmBinder = true,
   ConfirmLootRoll = true,
@@ -1421,6 +1431,11 @@ G.GlobalApis = {
       wow_classic_ptr = true,
     },
   },
+  ExpandCurrencyList = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   ExpandFactionHeader = true,
   ExpandGuildTradeSkillHeader = {
     products = {
@@ -1679,6 +1694,11 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wowt = true,
+    },
+  },
+  GetActiveTalentGroup = {
+    products = {
+      wow_classic_beta = true,
     },
   },
   GetActiveTitle = true,
@@ -1946,6 +1966,11 @@ G.GlobalApis = {
       wowt = true,
     },
   },
+  GetBackpackCurrencyInfo = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetBagName = true,
   GetBagSlotFlag = true,
   GetBankAutosortDisabled = {
@@ -2111,6 +2136,11 @@ G.GlobalApis = {
     },
   },
   GetComboPoints = true,
+  GetCompanionCooldown = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetCompanionInfo = {
     products = {
       wow = true,
@@ -2364,7 +2394,37 @@ G.GlobalApis = {
     },
   },
   GetCriteriaSpell = true,
+  GetCurrencyInfo = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
+  GetCurrencyLink = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
+  GetCurrencyListInfo = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
+  GetCurrencyListLink = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
+  GetCurrencyListSize = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetCurrentArenaSeason = true,
+  GetCurrentArenaSeasonUsesTeams = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetCurrentBindingSet = true,
   GetCurrentCombatTextEventInfo = true,
   GetCurrentEventID = true,
@@ -2580,6 +2640,16 @@ G.GlobalApis = {
   GetGMTicket = true,
   GetGameMessageInfo = true,
   GetGameTime = true,
+  GetGlyphLink = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
+  GetGlyphSocketInfo = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetGossipActiveQuests = {
     products = {
       wow_classic = true,
@@ -2620,6 +2690,11 @@ G.GlobalApis = {
   GetGraphicsDropdownIndexByMasterIndex = true,
   GetGreetingText = true,
   GetGroupMemberCounts = true,
+  GetGroupPreviewTalentPointsSpent = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetGuildAchievementMemberInfo = {
     products = {
       wow = true,
@@ -3597,6 +3672,11 @@ G.GlobalApis = {
     },
   },
   GetNumFrames = true,
+  GetNumGlyphSockets = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetNumGossipActiveQuests = {
     products = {
       wow_classic = true,
@@ -3850,6 +3930,11 @@ G.GlobalApis = {
     },
   },
   GetNumSubgroupMembers = true,
+  GetNumTalentGroups = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetNumTalentTabs = {
     products = {
       wow_classic = true,
@@ -4053,6 +4138,11 @@ G.GlobalApis = {
       wowt = true,
     },
   },
+  GetPendingGlyphInfo = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetPendingGlyphName = {
     products = {
       wow = true,
@@ -4147,6 +4237,11 @@ G.GlobalApis = {
   GetPowerRegen = true,
   GetPowerRegenForPowerType = true,
   GetPrevCompleatedTutorial = true,
+  GetPreviewTalentPointsSpent = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetPreviousAchievement = {
     products = {
       wow = true,
@@ -4156,6 +4251,11 @@ G.GlobalApis = {
     },
   },
   GetPreviousArenaSeason = true,
+  GetPreviousArenaSeasonUsesTeams = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetPrimarySpecialization = {
     products = {
       wow = true,
@@ -4349,6 +4449,11 @@ G.GlobalApis = {
       wow_classic_ptr = true,
     },
   },
+  GetQuestLogRewardArenaPoints = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetQuestLogRewardArtifactXP = {
     products = {
       wow = true,
@@ -4382,6 +4487,11 @@ G.GlobalApis = {
     },
   },
   GetQuestLogRewardSpell = true,
+  GetQuestLogRewardTalents = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetQuestLogRewardTitle = true,
   GetQuestLogRewardXP = {
     products = {
@@ -4591,6 +4701,11 @@ G.GlobalApis = {
   GetResSicknessDuration = true,
   GetRestState = true,
   GetRestrictedAccountData = true,
+  GetRewardArenaPoints = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetRewardArtifactXP = {
     products = {
       wow = true,
@@ -4664,6 +4779,11 @@ G.GlobalApis = {
     },
   },
   GetRewardSpell = true,
+  GetRewardTalentPoints = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetRewardText = true,
   GetRewardTitle = true,
   GetRewardXP = true,
@@ -4680,6 +4800,11 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wowt = true,
+    },
+  },
+  GetRuneType = {
+    products = {
+      wow_classic_beta = true,
     },
   },
   GetRunningMacro = true,
@@ -5001,6 +5126,11 @@ G.GlobalApis = {
   },
   GetTabardCreationCost = true,
   GetTabardInfo = true,
+  GetTalentGroupRole = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetTalentInfo = true,
   GetTalentInfoByID = {
     products = {
@@ -5130,6 +5260,11 @@ G.GlobalApis = {
       wow_classic_ptr = true,
     },
   },
+  GetTradeSkillDescription = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetTradeSkillIcon = {
     products = {
       wow_classic = true,
@@ -5209,6 +5344,11 @@ G.GlobalApis = {
       wow_classic_era = true,
       wow_classic_era_ptr = true,
       wow_classic_ptr = true,
+    },
+  },
+  GetTradeSkillListLink = {
+    products = {
+      wow_classic_beta = true,
     },
   },
   GetTradeSkillNumMade = {
@@ -5407,6 +5547,11 @@ G.GlobalApis = {
   },
   GetUnitPowerModifier = true,
   GetUnitSpeed = true,
+  GetUnspentTalentPoints = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GetVehicleBarIndex = {
     products = {
       wow = true,
@@ -5538,6 +5683,11 @@ G.GlobalApis = {
   GetZonePVPInfo = true,
   GetZoneText = true,
   GiveMasterLoot = true,
+  GlyphMatchesSocket = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   GroupHasOfflineMember = true,
   GuildControlAddRank = true,
   GuildControlDelRank = true,
@@ -6317,6 +6467,11 @@ G.GlobalApis = {
       wowt = true,
     },
   },
+  IsTradeSkillLinked = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   IsTradeskillTrainer = true,
   IsTrainerServiceLearnSpell = {
     products = {
@@ -6488,6 +6643,11 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wowt = true,
+    },
+  },
+  LearnPreviewTalents = {
+    products = {
+      wow_classic_beta = true,
     },
   },
   LearnPvpTalent = {
@@ -6689,6 +6849,11 @@ G.GlobalApis = {
     },
   },
   PickupContainerItem = true,
+  PickupCurrency = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   PickupGuildBankItem = true,
   PickupGuildBankMoney = true,
   PickupInventoryItem = true,
@@ -6728,6 +6893,11 @@ G.GlobalApis = {
       wow_classic_era = true,
       wow_classic_era_ptr = true,
       wow_classic_ptr = true,
+    },
+  },
+  PlaceGlyphInSocket = {
+    products = {
+      wow_classic_beta = true,
     },
   },
   PlaceRaidMarker = {
@@ -6967,6 +7137,11 @@ G.GlobalApis = {
   },
   RemoveChatWindowChannel = true,
   RemoveChatWindowMessages = true,
+  RemoveGlyphFromSocket = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   RemoveItemFromArtifact = {
     products = {
       wow = true,
@@ -7061,6 +7236,11 @@ G.GlobalApis = {
       wow_classic_ptr = true,
     },
   },
+  RequestInviteFromUnit = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   RequestLFDPartyLockInfo = {
     products = {
       wow = true,
@@ -7113,7 +7293,17 @@ G.GlobalApis = {
   ResetChatWindows = true,
   ResetCursor = true,
   ResetDisabledAddOns = true,
+  ResetGroupPreviewTalentPoints = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   ResetInstances = true,
+  ResetPreviewTalentPoints = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   ResetSetMerchantFilter = {
     products = {
       wow = true,
@@ -7306,6 +7496,11 @@ G.GlobalApis = {
   },
   SetActionBarToggles = true,
   SetActionUIButton = true,
+  SetActiveTalentGroup = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   SetAddonVersionCheck = true,
   SetAllowDangerousScripts = true,
   SetAllowLowLevelRaid = true,
@@ -7389,6 +7584,16 @@ G.GlobalApis = {
       wow_classic_era = true,
       wow_classic_era_ptr = true,
       wow_classic_ptr = true,
+    },
+  },
+  SetCurrencyBackpack = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
+  SetCurrencyUnused = {
+    products = {
+      wow_classic_beta = true,
     },
   },
   SetCurrentGraphicsSetting = true,
@@ -7674,6 +7879,11 @@ G.GlobalApis = {
       wow_classic_ptr = true,
     },
   },
+  SetTalentGroupRole = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   SetTaxiBenchmarkMode = true,
   SetTaxiMap = true,
   SetTracking = true,
@@ -7727,6 +7937,11 @@ G.GlobalApis = {
   SetView = true,
   SetWatchedFactionIndex = true,
   SetupFullscreenScale = true,
+  ShiftQuestWatches = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   ShouldKnowUnitHealth = {
     products = {
       wow_classic = true,
@@ -8022,6 +8237,11 @@ G.GlobalApis = {
   StopMacro = true,
   StopMusic = true,
   StopSound = true,
+  StopTradeSkillRepeat = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   StoreSecureReference = true,
   StrafeLeftStart = true,
   StrafeLeftStop = true,
@@ -8649,6 +8869,11 @@ G.GlobalApis = {
       wowt = true,
     },
   },
+  UnitVehicleSkinType = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
   UnitWeaponAttackPower = {
     products = {
       wow = true,
@@ -8828,6 +9053,16 @@ G.GlobalApis = {
       wow_beta = true,
       wow_classic_beta = true,
       wowt = true,
+    },
+  },
+  VehicleCameraZoomIn = {
+    products = {
+      wow_classic_beta = true,
+    },
+  },
+  VehicleCameraZoomOut = {
+    products = {
+      wow_classic_beta = true,
     },
   },
   VehicleExit = {
