@@ -8,5 +8,6 @@ outputs:
   type: C_BarberShop.BarberShopCharacterData
 products:
 - wow
-- wowt
 - wow_beta
+- wow_classic_beta
+- wowt

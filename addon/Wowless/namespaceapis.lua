@@ -427,20 +427,68 @@ G.NamespaceApis = {
       ApplyCustomizationChoices = true,
       Cancel = true,
       ClearPreviewChoices = true,
+      CycleCharCustomization = {
+        products = {
+          wow_classic_beta = true,
+        },
+      },
       GetAvailableCustomizations = true,
+      GetBarbersChoiceCost = {
+        products = {
+          wow_classic_beta = true,
+        },
+      },
       GetCurrentCameraZoom = true,
       GetCurrentCharacterData = true,
       GetCurrentCost = true,
+      GetCustomizationTypeInfo = {
+        products = {
+          wow_classic_beta = true,
+        },
+      },
       HasAnyChanges = true,
+      IsValidCustomizationType = {
+        products = {
+          wow_classic_beta = true,
+        },
+      },
       IsViewingAlteredForm = true,
-      MarkCustomizationChoiceAsSeen = true,
-      MarkCustomizationOptionAsSeen = true,
+      IsViewingNativeSex = {
+        products = {
+          wow_classic_beta = true,
+        },
+      },
+      IsViewingVisibleSex = {
+        products = {
+          wow_classic_beta = true,
+        },
+      },
+      MarkCustomizationChoiceAsSeen = {
+        products = {
+          wow = true,
+          wow_beta = true,
+          wowt = true,
+        },
+      },
+      MarkCustomizationOptionAsSeen = {
+        products = {
+          wow = true,
+          wow_beta = true,
+          wowt = true,
+        },
+      },
       PreviewCustomizationChoice = true,
       RandomizeCustomizationChoices = true,
       ResetCameraRotation = true,
       ResetCustomizationChoices = true,
       RotateCamera = true,
-      SaveSeenChoices = true,
+      SaveSeenChoices = {
+        products = {
+          wow = true,
+          wow_beta = true,
+          wowt = true,
+        },
+      },
       SetCameraDistanceOffset = true,
       SetCameraZoomLevel = true,
       SetCustomizationChoice = true,
@@ -458,6 +506,7 @@ G.NamespaceApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
