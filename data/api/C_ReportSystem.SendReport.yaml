@@ -12,5 +12,6 @@ inputs:
 outputs: {}
 products:
 - wow
-- wowt
 - wow_beta
+- wow_classic_beta
+- wowt

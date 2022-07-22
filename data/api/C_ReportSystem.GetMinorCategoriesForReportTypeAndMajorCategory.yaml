@@ -12,5 +12,6 @@ outputs:
   type: table
 products:
 - wow
-- wowt
 - wow_beta
+- wow_classic_beta
+- wowt

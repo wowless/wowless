@@ -129,7 +129,13 @@ for ns, nt in pairs(data.generated.apiNamespaces or {}) do
           assert(mv:match(': want "function", got "nil"$'))
           api.products = removeProduct(api.products)
         elseif type(mv) == 'table' then
-          assert(true) -- TODO
+          assert(next(mv) == 'impltype')
+          assert(next(mv, 'impltype') == nil)
+          assert(
+            mv.impltype:match(': bad argument #1 to \'create\' %(Lua function expected%): want true, got false$'),
+            mn
+          )
+          api.products = addProduct(api.products)
         else
           error('unexpected type for ' .. ns .. '.' .. mn)
         end
