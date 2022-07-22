@@ -33,6 +33,10 @@ local getPatternValue = (function()
       value = mustnumber,
     },
     {
+      pattern = ': missing cvar ".+" with default "(.+)"$',
+      value = tostring,
+    },
+    {
       pattern = ': missing key ".+" with value (%d+)$',
       value = mustnumber,
     },
@@ -75,6 +79,20 @@ local function applyPatterns(tx, ty)
       end
     end
   end
+end
+
+if data.generated.cvars then
+  local cvarsfile = 'data/cvars.yaml'
+  local cvars = yaml.parseFile(cvarsfile)
+  for k, v in pairs(data.generated.cvars) do
+    assert(type(v) == 'string')
+    local match, value = getPatternValue(v)
+    if match then
+      cvars[k] = cvars[k] or {}
+      cvars[k][product] = value
+    end
+  end
+  write(cvarsfile, yaml.pprint(cvars))
 end
 
 if data.generated.globals then

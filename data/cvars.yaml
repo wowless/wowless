@@ -9,6 +9,8 @@ advJournalLastOpened:
   wow: '0'
   wow_beta: '0'
   wowt: '0'
+agentLogLevel:
+  wow_classic_beta: '1'
 agentUID: ''
 AIBrain: '0'
 AIController: '0'
@@ -128,6 +130,8 @@ calendarShowBattlegrounds: '1'
 calendarShowDarkmoon: '1'
 calendarShowHolidays: '1'
 calendarShowLockouts: '1'
+calendarShowResets:
+  wow_classic_beta: '0'
 calendarShowWeeklyHolidays: '1'
 cameraBobbing: '0'
 cameraBobbingSmoothSpeed: '0.8'
@@ -601,7 +605,15 @@ CustomWindowEventLog: '0'
 daltonize: '1'
 DamageCalculator: '0'
 dangerousShipyardMissionWarningAlreadyShown: '0'
+debugAllocTrackStacktrace:
+  wow_classic_beta: '0'
 debugGameEvents: '0'
+debugLog0:
+  wow_classic_beta: '0'
+debugLog1:
+  wow_classic_beta: '0'
+debugLog2:
+  wow_classic_beta: '0'
 DebugTorsoTwist: '0'
 DepthBasedOpacity:
   wow: '1'
@@ -663,6 +675,8 @@ enableMouseSpeed: '0'
 enableMovePad: '0'
 enablePetBattleFloatingCombatText: '1'
 enablePVPNotifyAFK: '1'
+enableRefHistory:
+  wow_classic_beta: '1'
 enableRuneSpentAnim: '1'
 enableSourceLocationLookup:
   wow: '0'
@@ -683,6 +697,10 @@ entityShadowFadeScale:
   wow_classic_era_ptr: '25'
   wow_classic_ptr: '25'
   wowt: '50'
+equipmentManager:
+  wow_classic_beta: '0'
+ErrorFileLog:
+  wow_classic_beta: '0'
 ErrorFilter: all
 ErrorLevelMax: '3'
 ErrorLevelMin: '2'
@@ -1709,6 +1727,8 @@ ShakeStrengthUI: '1'
 shipyardMissionTutorialAreaBuff: '0'
 shipyardMissionTutorialBlockade: '0'
 shipyardMissionTutorialFirst: '0'
+ShowAllSpellRanks:
+  wow_classic_beta: '1'
 showArenaEnemyCastbar: '1'
 showArenaEnemyFrames: '1'
 showArenaEnemyPets: '1'
@@ -2060,6 +2080,8 @@ test_cameraTargetFocusInteractStrengthPitch: '0.75'
 test_cameraTargetFocusInteractStrengthYaw: '1.0'
 textLocale: ''
 textToSpeech: '0'
+textureErrorColors:
+  wow_classic_beta: '1'
 textureFilteringMode: '5'
 threatPlaySounds:
   wow: '1'
@@ -2095,6 +2117,8 @@ trackedWorldQuests:
   wow_beta: ''
   wowt: ''
 trackerFilter:
+  wow_classic_beta: '0'
+trackerSorting:
   wow_classic_beta: '0'
 trackQuestSorting: top
 transmogCurrentSpecOnly: '0'
@@ -2167,6 +2191,8 @@ unitsLookAtPlayers:
   wow_beta: '1'
   wowt: '1'
 useCompactPartyFrames: '0'
+useDebugAllocators:
+  wow_classic_beta: '0'
 useHighResolutionUITextures: '0'
 useIPv6: '0'
 useUiScale: '0'
@@ -2205,6 +2231,8 @@ wardrobeSourceFilters: '0'
 watchFrameBaseAlpha: '0'
 watchFrameIgnoreCursor: '0'
 watchFrameState: '0'
+watchFrameWidth:
+  wow_classic_beta: '0'
 waterDetail: '0'
 weatherDensity:
   wow: '2'
