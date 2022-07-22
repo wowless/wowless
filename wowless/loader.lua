@@ -816,6 +816,7 @@ local function loader(api, cfg)
   end
 
   return {
+    db2rows = db2rows,
     initAddons = initAddons,
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,

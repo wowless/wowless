@@ -89,15 +89,11 @@ local getStub = (function()
   end
 end)()
 
--- TODO rationalize this with wowless loader
-local function mkdb2s(product)
-  local join = require('path').join
-  local read = require('pl.file').read
-  local rows = require('wowless.db')
+local function mkdb2s(loader)
   return setmetatable({}, {
     __index = function(dbs, db)
       local t = {}
-      for row in rows(product, db, read(join('extracts', product, 'db2', db:lower() .. '.db2'))) do
+      for row in loader.db2rows(db) do
         table.insert(t, row)
       end
       dbs[db] = {
@@ -205,7 +201,7 @@ end
 
 local function loadFunctions(api, loader)
   local fns = {}
-  local db2s = mkdb2s(loader.product)
+  local db2s = mkdb2s(loader)
   local aliases = {}
   for fn, apicfg in pairs(loadApis(loader.product)) do
     if apicfg.alias then
