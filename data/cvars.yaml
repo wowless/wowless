@@ -2094,6 +2094,8 @@ trackedWorldQuests:
   wow: ''
   wow_beta: ''
   wowt: ''
+trackerFilter:
+  wow_classic_beta: '0'
 trackQuestSorting: top
 transmogCurrentSpecOnly: '0'
 transmogrifyShowCollected: '1'

@@ -2385,6 +2385,9 @@ G.CVars = {
     wow_beta = '',
     wowt = '',
   },
+  trackerFilter = {
+    wow_classic_beta = '0',
+  },
   transmogCurrentSpecOnly = '0',
   transmogrifyShowCollected = '1',
   transmogrifyShowUncollected = '0',

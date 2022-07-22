@@ -1,8 +1,31 @@
 ---
 name: GetPersonalRatedInfo
 status: unimplemented
-products:
-- wow
-- wow_beta
-- wow_classic_beta
-- wowt
+inputs:
+- - name: bracketIndex
+    type: number
+outputs:
+- name: rating
+  type: number
+- name: seasonBest
+  type: number
+- name: weeklyBest
+  type: number
+- name: seasonPlayed
+  type: number
+- name: seasonWon
+  type: number
+- name: weeklyPlayed
+  type: number
+- name: weeklyWon
+  type: number
+- name: lastWeeksBest
+  type: number
+- name: hasWon
+  type: number
+- name: pvpTier
+  type: number
+- name: ranking
+  type: number
+- name: teamSize
+  type: number
