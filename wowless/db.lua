@@ -1,4 +1,5 @@
 local dbs = {}
+local fdids = {}
 for dbname, dbdef in pairs(require('wowapi.data').dbdefs) do
   local dbdata = {}
   for _, version in ipairs(dbdef.versions) do
@@ -17,6 +18,11 @@ for dbname, dbdef in pairs(require('wowapi.data').dbdefs) do
     end
   end
   dbs[dbname] = dbdata
+  fdids[dbname] = dbdef.fdid
+end
+
+local function fdid(dbname)
+  return (assert(fdids[dbname]))
 end
 
 local dbcrows = require('dbc').rows
@@ -31,4 +37,7 @@ local function rows(product, dbname, data)
   return wrapfn, iterdata
 end
 
-return rows
+return {
+  fdid = fdid,
+  rows = rows,
+}

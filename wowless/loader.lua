@@ -683,10 +683,11 @@ local function loader(api, cfg)
     end)
   end
 
+  local wdb = require('wowless.db')
+
   local function db2rows(name)
-    -- TODO reenable cascproxy here
-    local data = readFile(path.join(rootDir, 'db2', name .. '.db2'))
-    return require('wowless.db')(product, name, data)
+    local data = readFile(cfg.cascproxy and wdb.fdid(name) or path.join(rootDir, 'db2', name .. '.db2'))
+    return wdb.rows(product, name, data)
   end
 
   local addonData = assert(api.states.Addons)
