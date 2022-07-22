@@ -84,6 +84,29 @@ do
   write(gf, yaml.pprint(g))
 end
 
+for k, v in pairs(data.generated.globalApis or {}) do
+  if k:sub(1, 1) ~= '~' then
+    local apifile = 'data/api/' .. k .. '.yaml'
+    local api = yaml.parseFile(apifile)
+    if type(v) == 'string' then
+      assert(v:match(': want "function", got "nil"$'))
+      local newproducts = {}
+      for _, p in ipairs(api.products or require('wowless.util').productList()) do
+        if p ~= product then
+          table.insert(newproducts, p)
+        end
+      end
+      api.products = newproducts
+    elseif type(v) == 'table' then
+      -- TODO something
+      assert(true)
+    else
+      error('invalid type at globalApi ' .. k)
+    end
+    write(apifile, yaml.pprint(api))
+  end
+end
+
 for k, v in pairs(data.generated.uiobjects or {}) do
   if v.methods then
     local uf = 'data/uiobjects/' .. k .. '/' .. k .. '.yaml'
