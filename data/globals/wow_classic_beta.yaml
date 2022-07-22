@@ -71,12 +71,15 @@ Enum:
     BoundItem: 16
     ConjuredItem: 17
     DatabaseError: 10
+    DoubleBid: 23
     EquippedBag: 20
+    FavoritesMaxed: 24
     HasRestriction: 6
     HigherBid: 1
     IsBag: 19
     IsBusy: 7
     ItemHasQuote: 9
+    ItemNotAvailable: 25
     ItemNotFound: 4
     LimitedDurationItem: 18
     LootItem: 22
@@ -100,6 +103,7 @@ Enum:
     ExactMatch: 4
     LegendaryCraftedItemOnly: 12
     LegendaryQuality: 10
+    None: 0
     PoorQuality: 5
     RareQuality: 8
     UncollectedOnly: 1
@@ -373,6 +377,7 @@ Enum:
     NumValues: 8
   BattlePetNpcTeamFlag:
     MatchPlayerHighPetLevel: 1
+    NoPlayerXP: 2
     NoPlayerXp: 2
   BattlePetNpcTeamFlagMeta:
     MaxValue: 2
@@ -490,6 +495,7 @@ Enum:
     Battleground: 1
     LFG: 3
     None: 0
+    SoloShuffle: 4
   BrawlTypeMeta:
     MaxValue: 4
     MinValue: 0
@@ -581,6 +587,7 @@ Enum:
     Player: 1
     PlayerCreated: 3395
     RaidLockout: 128
+    RaidReset: 512
     RaidResetDeprecated: 512
     System: 4
   CalendarEventBitsMeta:
@@ -697,6 +704,7 @@ Enum:
     HolidayWeekly: 5
     Player: 0
     RaidLockout: 2
+    RaidReset: 3
     RaidResetDeprecated: 3
   CalendarTypeMeta:
     MaxValue: 7
@@ -1083,6 +1091,7 @@ Enum:
     DeprecatedCurrencyFlag: 2147483648
   CurrencyFlagsB:
     CurrencyBNoNotificationMailOnOfflineProgress: 4
+    CurrencyBShowQuestXPGainInTooltip: 2
     CurrencyBShowQuestXpGainInTooltip: 2
     CurrencyBUseTotalEarnedForEarned: 1
   CurrencyFlagsBMeta:
@@ -1508,6 +1517,7 @@ Enum:
     DontDisplayBanner: 8
     DontDisplayEnd: 4
     DontShowInCalendar: 2
+    DurationUseMinutes: 32
     IsRegionwide: 1
     NotAvailableClientSide: 16
   HolidayFlagsMeta:
@@ -2125,6 +2135,7 @@ Enum:
     Chi: 12
     ComboPoints: 14
     Energy: 3
+    Essence: 19
     Focus: 2
     Fury: 17
     Happiness: 4
@@ -2139,7 +2150,10 @@ Enum:
     Obsolete2: 15
     Pain: 18
     Rage: 1
+    RuneBlood: 20
+    RuneFrost: 21
     Runes: 5
+    RuneUnholy: 22
     RunicPower: 6
     SoulShards: 7
   PowerTypeMeta:
@@ -2278,11 +2292,15 @@ Enum:
     Boosting: 2
     Botting: 128
     BTag: 512
+    CharacterName: 2048
     CustomGameName: 12
+    Description: 8192
     GroupName: 1024
+    GuildName: 4096
     Hacking: 64
     Inaproppriate: 8
     IntentionallyFeeding: 16
+    Name: 16384
     Spam: 4
     TextChat: 1
     VoiceChat: 13
@@ -2291,13 +2309,23 @@ Enum:
     MinValue: 1
     NumValues: 15
   ReportType:
+    BattlePet: 10
+    Calendar: 11
     Chat: 0
     ClubFinder: 2
+    ClubFinderApplicant: 3
+    ClubFinderPosting: 2
     ClubMember: 6
     Friend: 8
     GroupFinder: 3
+    GroupFinderApplicant: 5
+    GroupFinderPosting: 4
     GroupMember: 7
     InWorld: 1
+    Mail: 12
+    Pet: 9
+    PvP: 13
+    PvPScoreboard: 14
   ReportTypeMeta:
     MaxValue: 14
     MinValue: 0
