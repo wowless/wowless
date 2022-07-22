@@ -9,3 +9,4 @@ outputs:
   type: boolean
 products:
 - wow_beta
+- wow_classic_beta

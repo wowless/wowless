@@ -84,22 +84,48 @@ do
   write(gf, yaml.pprint(g))
 end
 
+local allProducts = require('wowless.util').productList()
+
+local function addProduct(products)
+  local newproducts = {}
+  local match = false
+  for _, p in ipairs(products or {}) do
+    table.insert(newproducts, p)
+    match = match or p == product
+  end
+  if not match then
+    table.insert(newproducts, product)
+  end
+  if #newproducts == #allProducts then
+    return nil
+  else
+    table.sort(newproducts)
+    return newproducts
+  end
+end
+
+local function removeProduct(products)
+  local newproducts = {}
+  for _, p in ipairs(products or allProducts) do
+    if p ~= product then
+      table.insert(newproducts, p)
+    end
+  end
+  return newproducts
+end
+
 for k, v in pairs(data.generated.globalApis or {}) do
   if k:sub(1, 1) ~= '~' then
     local apifile = 'data/api/' .. k .. '.yaml'
     local api = yaml.parseFile(apifile)
     if type(v) == 'string' then
       assert(v:match(': want "function", got "nil"$'))
-      local newproducts = {}
-      for _, p in ipairs(api.products or require('wowless.util').productList()) do
-        if p ~= product then
-          table.insert(newproducts, p)
-        end
-      end
-      api.products = newproducts
+      api.products = removeProduct(api.products)
     elseif type(v) == 'table' then
-      -- TODO something
-      assert(true)
+      assert(next(v) == 'impltype')
+      assert(next(v, 'impltype') == nil)
+      assert(v.impltype:match(': bad argument #1 to \'create\' %(Lua function expected%): want true, got false$'), k)
+      api.products = addProduct(api.products)
     else
       error('invalid type at globalApi ' .. k)
     end
@@ -118,15 +144,7 @@ for k, v in pairs(data.generated.uiobjects or {}) do
           m = { products = {}, status = 'unimplemented' }
           u.methods[mk] = m
         end
-        assert(m.products)
-        local match = false
-        for _, p in ipairs(m.products) do
-          match = match or p == product
-        end
-        if not match then
-          table.insert(m.products, product)
-        end
-        table.sort(m.products)
+        m.products = addProduct(m.products)
       end
     end
     write(uf, yaml.pprint(u))

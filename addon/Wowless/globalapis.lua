@@ -69,6 +69,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -365,6 +366,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -398,6 +400,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -408,6 +411,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -426,6 +430,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -502,6 +507,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -533,6 +539,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -668,6 +675,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -1080,6 +1088,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -1550,6 +1559,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -1557,6 +1567,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -1564,6 +1575,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -1571,6 +1583,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -1585,6 +1598,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -1592,6 +1606,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -1599,6 +1614,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -1606,6 +1622,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -1613,6 +1630,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -2030,6 +2048,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -2037,6 +2056,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -2044,6 +2064,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -2051,6 +2072,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -2093,6 +2115,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -2100,6 +2123,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -2107,6 +2131,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -2114,6 +2139,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -2137,6 +2163,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -2645,6 +2672,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -2757,6 +2785,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3179,6 +3208,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3186,6 +3216,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3194,6 +3225,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3201,6 +3233,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3309,6 +3342,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3372,6 +3406,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3390,6 +3425,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3487,6 +3523,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3498,6 +3535,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3505,6 +3543,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3512,6 +3551,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3600,6 +3640,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3652,6 +3693,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3672,6 +3714,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3734,6 +3777,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3829,6 +3873,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3907,6 +3952,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -3914,6 +3960,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4018,6 +4065,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4052,6 +4100,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4102,6 +4151,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4163,6 +4213,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4170,6 +4221,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4222,6 +4274,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4237,6 +4290,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4306,6 +4360,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4332,6 +4387,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4348,6 +4404,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4355,6 +4412,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4413,6 +4471,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4440,6 +4499,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4611,6 +4671,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4892,6 +4953,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -4899,6 +4961,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -5016,6 +5079,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -5030,6 +5094,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -5040,6 +5105,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -5345,6 +5411,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -5463,6 +5530,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -5554,6 +5622,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -5609,6 +5678,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -5634,6 +5704,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -5675,6 +5746,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -5695,6 +5767,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -5755,6 +5828,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -5893,6 +5967,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -6033,6 +6108,7 @@ G.GlobalApis = {
   IsPlayerInGuildFromGUID = {
     products = {
       wow_beta = true,
+      wow_classic_beta = true,
     },
   },
   IsPlayerInWorld = true,
@@ -6091,6 +6167,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -6213,6 +6290,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -6221,6 +6299,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -6283,6 +6362,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -6290,6 +6370,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -6297,6 +6378,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -6314,6 +6396,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -6601,6 +6684,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -6735,6 +6819,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -6916,6 +7001,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -7015,6 +7101,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -7206,6 +7293,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -7432,6 +7520,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -7778,6 +7867,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8138,6 +8228,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8171,6 +8262,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8211,6 +8303,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8218,6 +8311,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8271,6 +8365,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8278,6 +8373,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8285,6 +8381,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8507,6 +8604,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8525,6 +8623,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8546,6 +8645,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8609,6 +8709,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8637,6 +8738,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8644,6 +8746,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8651,6 +8754,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8658,6 +8762,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8665,6 +8770,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8672,6 +8778,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8679,6 +8786,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8686,6 +8794,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8693,6 +8802,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8700,6 +8810,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8707,6 +8818,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8714,6 +8826,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8721,6 +8834,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8728,6 +8842,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
@@ -8735,6 +8850,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wowt = true,
     },
   },
