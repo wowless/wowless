@@ -2775,6 +2775,11 @@ G.NamespaceApis = {
           wowt = true,
         },
       },
+      GetRoles = {
+        products = {
+          wow_classic_beta = true,
+        },
+      },
       GetSearchResultEncounterInfo = {
         products = {
           wow = true,
@@ -2854,6 +2859,11 @@ G.NamespaceApis = {
         },
       },
       RequestAvailableActivities = true,
+      RequestInvite = {
+        products = {
+          wow_classic_beta = true,
+        },
+      },
       SaveLanguageSearchFilter = {
         products = {
           wow = true,
@@ -2874,6 +2884,11 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wowt = true,
+        },
+      },
+      SetRoles = {
+        products = {
+          wow_classic_beta = true,
         },
       },
       SetSearchToActivity = {
