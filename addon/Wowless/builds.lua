@@ -1,8 +1,8 @@
 local _, G = ...
 G.Builds = {
   wow = {
-    build = '44325',
-    date = 'Jun 22 2022',
+    build = '44730',
+    date = 'Jul 18 2022',
     flavor = 'Mainline',
     ptr = false,
     test = false,

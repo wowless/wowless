@@ -156,6 +156,7 @@ function G.GeneratedTests()
       end
     end
     local toskip = {
+      PraiseTheSun = true,
       TTSUseCharacterSettings = true,
     }
     for k, v in pairs(cvarDefaults) do

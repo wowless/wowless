@@ -270,18 +270,8 @@ G.NamespaceApis = {
       CancelSell = true,
       CloseAuctionHouse = true,
       ConfirmCommoditiesPurchase = true,
-      ConfirmPostCommodity = {
-        products = {
-          wow_beta = true,
-          wowt = true,
-        },
-      },
-      ConfirmPostItem = {
-        products = {
-          wow_beta = true,
-          wowt = true,
-        },
-      },
+      ConfirmPostCommodity = true,
+      ConfirmPostItem = true,
       FavoritesAreAvailable = true,
       GetAuctionInfoByID = true,
       GetAuctionItemSubClasses = true,
