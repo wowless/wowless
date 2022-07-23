@@ -4151,7 +4151,14 @@ G.GlobalApis = {
     },
   },
   GetPendingInviteConfirmations = true,
-  GetPersonalRatedInfo = true,
+  GetPersonalRatedInfo = {
+    products = {
+      wow = true,
+      wow_beta = true,
+      wow_classic_beta = true,
+      wowt = true,
+    },
+  },
   GetPetActionCooldown = true,
   GetPetActionInfo = true,
   GetPetActionSlotUsable = true,

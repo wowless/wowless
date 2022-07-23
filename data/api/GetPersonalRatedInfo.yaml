@@ -29,3 +29,8 @@ outputs:
   type: number
 - name: teamSize
   type: number
+products:
+- wow
+- wow_beta
+- wow_classic_beta
+- wowt
