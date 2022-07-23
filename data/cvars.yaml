@@ -82,7 +82,6 @@ autoOpenLootHistory: '0'
 AutoPushSpellToActionBar:
   wow: '1'
   wow_beta: '1'
-  wowt: '1'
 autoQuestPopUps: ''
 autoQuestProgress: '1'
 autoQuestWatch: '1'
@@ -111,6 +110,10 @@ Brightness: '50.000000'
 bspcache: '1'
 buffDurations: '1'
 cacaoBilateralSimilarityDistanceSigma: '0.01'
+CACHE-WGOB-GameObjectsHotfixCount:
+  wowt: ''
+CACHE-WGOB-GameObjectsRecordCount:
+  wowt: ''
 CACHE-WQST-QuestObjectiveHotfixCount:
   wow: ''
   wow_beta: ''
@@ -1014,6 +1017,12 @@ interactOnLeftClick:
   wow_classic_era_ptr: '0'
   wow_classic_ptr: '0'
   wowt: '1'
+KioskCanSessionExpire:
+  wowt: '1'
+KioskCharacterTemplateSet:
+  wowt: '0'
+KioskLobbyKickSeconds:
+  wowt: '30'
 lastAddonVersion: '0'
 lastCharacterGuid: '0'
 lastCharacterIndex: '0'
@@ -1044,7 +1053,6 @@ lastVoidStorageTutorial: '0'
 latestSplashScreen:
   wow: '0'
   wow_beta: '0'
-  wowt: '0'
 latestTransmogSetSource: '0'
 launchAgent: '1'
 lfdCollapsedHeaders: ''

@@ -29,6 +29,10 @@ local getPatternValue = (function()
       value = constant(nil),
     },
     {
+      pattern = ': want ".*", got nil$',
+      value = constant(nil),
+    },
+    {
       pattern = ': want ".*", got "(.*)"$',
       value = tostring,
     },

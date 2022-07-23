@@ -12,11 +12,16 @@ G.CVars = {
   AutoPushSpellToActionBar = {
     wow = '1',
     wow_beta = '1',
-    wowt = '1',
   },
   BeckonTriggerEventlog = '0',
   BehaviorTree = '0',
   Brightness = '50.000000',
+  ['CACHE-WGOB-GameObjectsHotfixCount'] = {
+    wowt = '',
+  },
+  ['CACHE-WGOB-GameObjectsRecordCount'] = {
+    wowt = '',
+  },
   ['CACHE-WQST-QuestObjectiveHotfixCount'] = {
     wow = '',
     wow_beta = '',
@@ -204,6 +209,15 @@ G.CVars = {
   ImpactModelCollisionMelee = '1',
   ImpactModelCollisionMissile = '1',
   ImpactModelCollisionRanged = '1',
+  KioskCanSessionExpire = {
+    wowt = '1',
+  },
+  KioskCharacterTemplateSet = {
+    wowt = '0',
+  },
+  KioskLobbyKickSeconds = {
+    wowt = '30',
+  },
   M2ForceAdditiveParticleSort = '0',
   M2UseInstancing = '1',
   M2UseThreads = '1',
@@ -1559,7 +1573,6 @@ G.CVars = {
   latestSplashScreen = {
     wow = '0',
     wow_beta = '0',
-    wowt = '0',
   },
   latestTransmogSetSource = '0',
   launchAgent = '1',
