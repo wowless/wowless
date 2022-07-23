@@ -147,7 +147,7 @@ function G.GeneratedTests()
     local tests = {}
     for name, cfg in pairs(G.CVars) do
       tests[name] = function()
-        assertEquals(cvarDefaults[name], type(cfg) == 'string' and cfg or cfg[runtimeProduct])
+        assertEquals(type(cfg) == 'string' and cfg or cfg[runtimeProduct], cvarDefaults[name])
       end
     end
     local toskip = {

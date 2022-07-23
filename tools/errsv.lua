@@ -25,15 +25,23 @@ local getPatternValue = (function()
       value = mustnumber,
     },
     {
-      pattern = ': want ".+", got "nil"$',
+      pattern = ': want ".*", got "nil"$',
       value = constant(nil),
+    },
+    {
+      pattern = ': want ".*", got "(.*)"$',
+      value = tostring,
+    },
+    {
+      pattern = ': want nil, got "(.*)"$',
+      value = tostring,
     },
     {
       pattern = ': missing, has value (%d+)$',
       value = mustnumber,
     },
     {
-      pattern = ': missing cvar ".+" with default "(.+)"$',
+      pattern = ': missing cvar ".+" with default "(.*)"$',
       value = tostring,
     },
     {
@@ -81,9 +89,39 @@ local function applyPatterns(tx, ty)
   end
 end
 
+local allProducts = require('wowless.util').productList()
+
+local function explode(cvars)
+  for k, v in pairs(cvars) do
+    if type(v) == 'string' then
+      local t = {}
+      for _, p in ipairs(allProducts) do
+        t[p] = v
+      end
+      cvars[k] = t
+    end
+  end
+end
+
+local function implode(cvars)
+  for k, t in pairs(cvars) do
+    local vals = {}
+    for _, v in pairs(t) do
+      vals[v] = (vals[v] or 0) + 1
+    end
+    local vk, vv = next(vals)
+    if not vk then
+      cvars[k] = nil
+    elseif vv == #allProducts then
+      cvars[k] = vk
+    end
+  end
+end
+
 if data.generated.cvars then
   local cvarsfile = 'data/cvars.yaml'
   local cvars = yaml.parseFile(cvarsfile)
+  explode(cvars)
   for k, v in pairs(data.generated.cvars) do
     assert(type(v) == 'string')
     local match, value = getPatternValue(v)
@@ -92,6 +130,7 @@ if data.generated.cvars then
       cvars[k][product] = value
     end
   end
+  implode(cvars)
   write(cvarsfile, yaml.pprint(cvars))
 end
 
@@ -101,8 +140,6 @@ if data.generated.globals then
   applyPatterns(g, data.generated.globals or {})
   write(gf, yaml.pprint(g))
 end
-
-local allProducts = require('wowless.util').productList()
 
 local function addProduct(products)
   local newproducts = {}

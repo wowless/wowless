@@ -11,7 +11,15 @@ advJournalLastOpened:
   wowt: '0'
 agentLogLevel:
   wow_classic_beta: '1'
-agentUID: ''
+agentUID:
+  wow: ''
+  wow_beta: ''
+  wow_classic: ''
+  wow_classic_beta: wow_beta
+  wow_classic_era: ''
+  wow_classic_era_ptr: ''
+  wow_classic_ptr: ''
+  wowt: ''
 AIBrain: '0'
 AIController: '0'
 AIControllerEventLog: '0'
@@ -182,6 +190,7 @@ CameraFollowYawSpeed:
 cameraFov:
   wow: '90'
   wow_beta: '90'
+  wow_classic_beta: '90'
   wowt: '90'
 cameraFoVSmoothSpeed: '0.5'
 cameraGroundSmoothSpeed: '7.5'
@@ -605,6 +614,8 @@ CustomWindowEventLog: '0'
 daltonize: '1'
 DamageCalculator: '0'
 dangerousShipyardMissionWarningAlreadyShown: '0'
+debugAllocSingleBlade:
+  wow_classic_beta: ''
 debugAllocTrackStacktrace:
   wow_classic_beta: '0'
 debugGameEvents: '0'
@@ -681,6 +692,7 @@ enableRuneSpentAnim: '1'
 enableSourceLocationLookup:
   wow: '0'
   wow_beta: '0'
+  wow_classic_beta: '0'
   wowt: '0'
 enableTwitter: '0'
 enableWowMouse: '0'
@@ -711,7 +723,7 @@ farclip:
   wow: '1000'
   wow_beta: '1000'
   wow_classic: '2112'
-  wow_classic_beta: '2112'
+  wow_classic_beta: '5108'
   wow_classic_era: '2112'
   wow_classic_era_ptr: '2112'
   wow_classic_ptr: '2112'
@@ -813,6 +825,7 @@ fstack_showhidden: '0'
 fstack_showhighlight:
   wow: '1'
   wow_beta: '1'
+  wow_classic_beta: '1'
   wowt: '1'
 fstack_showRaisedFrameLevels:
   wow: '0'
@@ -965,7 +978,7 @@ horizonStart:
   wow: '800'
   wow_beta: '800'
   wow_classic: '777'
-  wow_classic_beta: '777'
+  wow_classic_beta: '1277'
   wow_classic_era: '777'
   wow_classic_era_ptr: '777'
   wow_classic_ptr: '777'
@@ -1441,7 +1454,15 @@ physicsLevel:
 PlayerSpawnTracking: '0'
 playerStatLeftDropdown: ''
 playerStatRightDropdown: ''
-playIntroMovie: '5'
+playIntroMovie:
+  wow: '5'
+  wow_beta: '5'
+  wow_classic: '5'
+  wow_classic_beta: '0'
+  wow_classic_era: '5'
+  wow_classic_era_ptr: '5'
+  wow_classic_ptr: '5'
+  wowt: '5'
 POIShiftComplete: '0.3'
 portal: ''
 predictedHealth: '1'
@@ -1688,7 +1709,15 @@ screenEdgeFlash:
 screenshotFormat: jpeg
 screenshotQuality: '3'
 screenshotSizeOverride: '0x0'
-scriptErrors: '0'
+scriptErrors:
+  wow: '0'
+  wow_beta: '0'
+  wow_classic: '0'
+  wow_classic_beta: '1'
+  wow_classic_era: '0'
+  wow_classic_era_ptr: '0'
+  wow_classic_ptr: '0'
+  wowt: '0'
 scriptProfile: '0'
 scriptWarnings: '0'
 secondaryProfessionsFilter: '1'
@@ -2086,18 +2115,22 @@ textureFilteringMode: '5'
 threatPlaySounds:
   wow: '1'
   wow_beta: '1'
+  wow_classic_beta: '1'
   wowt: '1'
 threatShowNumeric:
   wow: '0'
   wow_beta: '0'
+  wow_classic_beta: '0'
   wowt: '0'
 threatWarning:
   wow: '3'
   wow_beta: '3'
+  wow_classic_beta: '3'
   wowt: '3'
 threatWorldText:
   wow: '1'
   wow_beta: '1'
+  wow_classic_beta: '1'
   wowt: '1'
 timeMgrAlarmEnabled: '0'
 timeMgrAlarmMessage: ''
@@ -2117,7 +2150,7 @@ trackedWorldQuests:
   wow_beta: ''
   wowt: ''
 trackerFilter:
-  wow_classic_beta: '0'
+  wow_classic_beta: '7'
 trackerSorting:
   wow_classic_beta: '0'
 trackQuestSorting: top
