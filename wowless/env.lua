@@ -38,7 +38,7 @@ local function init(api, loader, taint)
       return t
     end)
     api.env.__wowless = {
-      dump = dump,
+      dump = dump(api),
       product = loader.product,
     }
   end
