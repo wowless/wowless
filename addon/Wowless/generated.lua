@@ -2,18 +2,32 @@ local _, G = ...
 local assertEquals = _G.assertEquals
 
 local runtimeProduct = (function()
+  local portal = _G.GetCVar('portal')
+  local isPTR
+  if portal == 'test' then
+    isPTR = true
+  elseif portal == '' then
+    isPTR = false
+  else
+    error('invalid value for portal cvar: ' .. portal)
+  end
   if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
-    return IsTestBuild() and 'wow_classic_era_ptr' or 'wow_classic_era'
+    return isPTR and 'wow_classic_era_ptr' or 'wow_classic_era'
   elseif WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
     local wrath = GetBuildInfo():sub(1, 1) == '3'
-    return wrath and 'wow_classic_beta' or IsTestBuild() and 'wow_classic_ptr' or 'wow_classic'
+    return wrath and 'wow_classic_beta' or isPTR and 'wow_classic_ptr' or 'wow_classic'
   elseif WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
     local dragon = GetBuildInfo():sub(1, 1) ~= '9'
-    return dragon and 'wow_beta' or IsTestBuild() and 'wowt' or 'wow'
+    return dragon and 'wow_beta' or isPTR and 'wowt' or 'wow'
   else
     error('invalid product')
   end
 end)()
+
+do
+  local print = print or _G.__wowless.dump
+  print('Wowless thinks this is ' .. runtimeProduct .. '.')
+end
 
 local function tget(t, s)
   local dot = s:find('%.')
@@ -256,6 +270,12 @@ function G.GeneratedTests()
     return tests
   end
 
+  local function productTest()
+    if _G.__wowless then
+      assertEquals(_G.__wowless.product, runtimeProduct)
+    end
+  end
+
   local function uiobjects()
     local function assertCreateFrame(ty)
       local function process(...)
@@ -361,6 +381,7 @@ function G.GeneratedTests()
     cvars = cvars,
     globalApis = globalApis,
     globals = globals,
+    product = productTest,
     uiobjects = uiobjects,
   }
 end

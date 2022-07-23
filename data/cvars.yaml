@@ -17,8 +17,8 @@ agentUID:
   wow_classic: ''
   wow_classic_beta: wow_beta
   wow_classic_era: ''
-  wow_classic_era_ptr: ''
-  wow_classic_ptr: ''
+  wow_classic_era_ptr: wow_ptr
+  wow_classic_ptr: wow_ptr
   wowt: ''
 AIBrain: '0'
 AIController: '0'

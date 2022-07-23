@@ -1,6 +1,5 @@
 <Ui>
   <Script>
-    _G.IsWowless = __dump ~= nil
     _G.WowlessLog = {}
     local function log(fmt, ...)
       table.insert(_G.WowlessLog, string.format(fmt, ...))

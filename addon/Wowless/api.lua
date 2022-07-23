@@ -58,4 +58,4 @@ local function apiTests()
     end),
   }
 end
-G.ApiTests = _G.__dump == nil and apiTests or nil -- TODO stop skipping wowless itself
+G.ApiTests = _G.__wowless == nil and apiTests or nil -- TODO stop skipping wowless itself

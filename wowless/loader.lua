@@ -683,6 +683,10 @@ local function loader(api, cfg)
     end)
   end
 
+  if product then
+    api.states.CVars.portal = require('wowapi.data').builds[product].ptr and 'test' or ''
+  end
+
   local wdb = require('wowless.db')
 
   local function db2rows(name)

@@ -595,7 +595,7 @@ do
           print('No errors.')
         else
           print('There were errors.')
-          local dump = _G.__dump or DevTools_Dump
+          local dump = _G.__wowless and _G.__wowless.dump or DevTools_Dump
           dump(_G.WowlessTestFailures)
         end
       else
