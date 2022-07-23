@@ -2,15 +2,7 @@ local _, G = ...
 local assertEquals = _G.assertEquals
 
 local runtimeProduct = (function()
-  local portal = _G.GetCVar('portal')
-  local isPTR
-  if portal == 'test' then
-    isPTR = true
-  elseif portal == '' then
-    isPTR = false
-  else
-    error('invalid value for portal cvar: ' .. portal)
-  end
+  local isPTR = _G.GetCVar('portal') == 'test'
   if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
     return isPTR and 'wow_classic_era_ptr' or 'wow_classic_era'
   elseif WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
@@ -38,16 +30,6 @@ local function tget(t, s)
     return t[s]
   end
 end
-
--- Do this early to avoid issues with deferred cvar creation.
-local cvarDefaults = (function()
-  local t = {}
-  for _, command in ipairs(_G.C_Console.GetAllCommands()) do
-    local name = command.command
-    t[name] = _G.C_CVar.GetCVarDefault(name)
-  end
-  return t
-end)()
 
 function G.GeneratedTests()
   local cfuncs = {}
@@ -158,6 +140,15 @@ function G.GeneratedTests()
   end
 
   local function cvars()
+    -- Do this early to avoid issues with deferred cvar creation.
+    local cvarDefaults = (function()
+      local t = {}
+      for _, command in ipairs(_G.C_Console.GetAllCommands()) do
+        local name = command.command
+        t[name] = _G.C_CVar.GetCVarDefault(name)
+      end
+      return t
+    end)()
     local tests = {}
     for name, cfg in pairs(G.CVars) do
       tests[name] = function()

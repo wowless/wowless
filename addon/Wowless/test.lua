@@ -564,7 +564,18 @@ do
   end)
   local numSyncTests, asyncIndex, numAsyncTests, asyncPending = 0, 0, #asyncTests, false
   local totalTime, numFrames = 0, 0
+  local variablesLoaded = false
+  do
+    local f = CreateFrame('Frame')
+    f:SetScript('OnEvent', function()
+      variablesLoaded = true
+    end)
+    f:RegisterEvent('VARIABLES_LOADED')
+  end
   CreateFrame('Frame'):SetScript('OnUpdate', function(frame, elapsed)
+    if not variablesLoaded then
+      return
+    end
     totalTime = totalTime + elapsed
     numFrames = numFrames + 1
     local ts = debugprofilestop()
