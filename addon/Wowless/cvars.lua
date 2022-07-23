@@ -141,6 +141,7 @@ G.CVars = {
   EnableBlinkApplicationIcon = '1',
   ErrorFileLog = {
     wow_classic_beta = '0',
+    wowt = '0',
   },
   ErrorFilter = 'all',
   ErrorLevelMax = '3',
@@ -251,6 +252,9 @@ G.CVars = {
   Pathing = '0',
   PhaseHistory = '0',
   PlayerSpawnTracking = '0',
+  PraiseTheSun = {
+    wowt = '0',
+  },
   PreemptiveCastEnable = '0',
   PreventOsIdleSleep = '0',
   ProcDebugEventLog = '0',
@@ -642,6 +646,7 @@ G.CVars = {
   advancedWatchFrame = '0',
   agentLogLevel = {
     wow_classic_beta = '1',
+    wowt = '1',
   },
   agentUID = {
     wow = '',
@@ -651,7 +656,7 @@ G.CVars = {
     wow_classic_era = '',
     wow_classic_era_ptr = 'wow_ptr',
     wow_classic_ptr = 'wow_ptr',
-    wowt = '',
+    wowt = 'wow_ptr',
   },
   allowCompareWithToggle = '1',
   alwaysCompareItems = '0',
@@ -1163,19 +1168,24 @@ G.CVars = {
   dangerousShipyardMissionWarningAlreadyShown = '0',
   debugAllocSingleBlade = {
     wow_classic_beta = '',
+    wowt = '',
   },
   debugAllocTrackStacktrace = {
     wow_classic_beta = '0',
+    wowt = '0',
   },
   debugGameEvents = '0',
   debugLog0 = {
     wow_classic_beta = '0',
+    wowt = '0',
   },
   debugLog1 = {
     wow_classic_beta = '0',
+    wowt = '0',
   },
   debugLog2 = {
     wow_classic_beta = '0',
+    wowt = '0',
   },
   deselectOnClick = '0',
   digSites = '1',
@@ -1231,6 +1241,7 @@ G.CVars = {
   enablePetBattleFloatingCombatText = '1',
   enableRefHistory = {
     wow_classic_beta = '1',
+    wowt = '1',
   },
   enableRuneSpentAnim = '1',
   enableSourceLocationLookup = {
@@ -1853,7 +1864,7 @@ G.CVars = {
     wow_classic_era = '1',
     wow_classic_era_ptr = '1',
     wow_classic_ptr = '1',
-    wowt = '0',
+    wowt = '1',
   },
   nameplateShowFriendlyPets = {
     wow = '0',
@@ -2093,7 +2104,7 @@ G.CVars = {
     wow_classic_era = '0',
     wow_classic_era_ptr = '0',
     wow_classic_ptr = '0',
-    wowt = '0',
+    wowt = '1',
   },
   scriptProfile = '0',
   scriptWarnings = '0',
@@ -2502,6 +2513,7 @@ G.CVars = {
   useCompactPartyFrames = '0',
   useDebugAllocators = {
     wow_classic_beta = '0',
+    wowt = '0',
   },
   useHighResolutionUITextures = '0',
   useIPv6 = '0',

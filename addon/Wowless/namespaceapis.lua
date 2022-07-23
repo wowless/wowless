@@ -273,11 +273,13 @@ G.NamespaceApis = {
       ConfirmPostCommodity = {
         products = {
           wow_beta = true,
+          wowt = true,
         },
       },
       ConfirmPostItem = {
         products = {
           wow_beta = true,
+          wowt = true,
         },
       },
       FavoritesAreAvailable = true,
