@@ -322,13 +322,65 @@ local syncTests = function()
             GetAnchorType = function()
               assertEquals('ANCHOR_NONE', f(1, gt:GetAnchorType()))
             end,
+            GetChildren = function()
+              f(0, gt:GetChildren())
+            end,
+            GetNumChildren = function()
+              assertEquals(0, f(1, gt:GetNumChildren()))
+            end,
+            GetNumRegions = function()
+              assertEquals(0, f(1, gt:GetNumRegions()))
+            end,
             GetOwner = function()
               assertEquals(nil, f(1, gt:GetOwner()))
+            end,
+            GetRegions = function()
+              f(0, gt:GetRegions())
             end,
             NumLines = function()
               assertEquals(0, f(1, gt:NumLines()))
             end,
           }
+        end,
+        Kids = function()
+          if _G.__wowless then
+            return
+          end
+          local parent = f(1, CreateFrame('Frame'))
+          local gt = f(1, CreateFrame('GameTooltip'))
+          local fs1 = f(1, parent:CreateFontString())
+          local fs2 = f(1, parent:CreateFontString())
+          f(0, gt:AddFontStrings(fs1, fs2))
+          f(0, gt:GetRegions())
+          assertEquals(0, f(1, fs1:GetNumPoints()))
+          assertEquals(0, f(1, fs2:GetNumPoints()))
+          f(0, gt:SetOwner(parent, 'ANCHOR_NONE'))
+          f(0, gt:GetRegions())
+          assertEquals(0, f(1, fs1:GetNumPoints()))
+          assertEquals(0, f(1, fs2:GetNumPoints()))
+          f(0, gt:SetText('Hello, world!'))
+          f(2, gt:GetRegions())
+          assertEquals(2, f(1, fs1:GetNumPoints()))
+          local p1point, p1relativeTo, p1relativePoint, p1x, p1y = f(5, fs1:GetPoint(1))
+          assertEquals('TOP', p1point)
+          assertEquals(gt, p1relativeTo)
+          assertEquals('TOP', p1relativePoint)
+          assertEquals(0, p1x)
+          assertEquals(-10, p1y)
+          local p2point, p2relativeTo, p2relativePoint, p2x, p2y = f(5, fs1:GetPoint(2))
+          assertEquals('LEFT', p2point)
+          assertEquals(gt, p2relativeTo)
+          assertEquals('LEFT', p2relativePoint)
+          assertEquals(10, p2x)
+          assertEquals(0, p2y)
+          assertEquals(1, f(1, fs2:GetNumPoints()))
+          local p3point, p3relativeTo, p3relativePoint, p3x, p3y = f(5, fs2:GetPoint(1))
+          assertEquals('RIGHT', p3point)
+          assertEquals(fs1, p3relativeTo)
+          assertEquals('LEFT', p3relativePoint)
+          assertEquals(40.4, p3x)
+          assertEquals(0, p3y)
+          f(0, gt:Show())
         end,
         SetOwner = function()
           return {
