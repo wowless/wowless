@@ -307,6 +307,92 @@ local syncTests = function()
         end,
       }
     end,
+
+    GameTooltip = function()
+      local f = function(n, ...)
+        if n ~= select('#', ...) then
+          error('wrong number of return values', 2)
+        end
+        return ...
+      end
+      return {
+        init = function()
+          local gt = f(1, CreateFrame('GameTooltip'))
+          return {
+            GetAnchorType = function()
+              assertEquals('ANCHOR_NONE', f(1, gt:GetAnchorType()))
+            end,
+            GetOwner = function()
+              assertEquals(nil, f(1, gt:GetOwner()))
+            end,
+            NumLines = function()
+              assertEquals(0, f(1, gt:NumLines()))
+            end,
+          }
+        end,
+        SetOwner = function()
+          return {
+            AnchorTypes = function()
+              local gt = f(1, CreateFrame('GameTooltip'))
+              local owner = f(1, CreateFrame('Frame'))
+              local anchorTypes = {
+                'ANCHOR_BOTTOM',
+                'ANCHOR_BOTTOMLEFT',
+                'ANCHOR_BOTTOMRIGHT',
+                'ANCHOR_CURSOR',
+                'ANCHOR_LEFT',
+                'ANCHOR_NONE',
+                'ANCHOR_PRESERVE',
+                'ANCHOR_RIGHT',
+                'ANCHOR_TOP',
+                'ANCHOR_TOPLEFT',
+                'ANCHOR_TOPRIGHT',
+              }
+              local tests = {}
+              for _, anchorType in ipairs(anchorTypes) do
+                tests[anchorType] = function()
+                  f(0, gt:SetOwner(owner, anchorType))
+                  assertEquals(anchorType, f(1, gt:GetAnchorType()))
+                end
+              end
+              return tests
+            end,
+            InvalidAnchorType = function()
+              local gt = f(1, CreateFrame('GameTooltip'))
+              local owner = f(1, CreateFrame('Frame'))
+              f(0, gt:SetOwner(owner, 'invalid'))
+              assertEquals('ANCHOR_LEFT', f(1, gt:GetAnchorType()))
+            end,
+            NoArgs = function()
+              local gt = f(1, CreateFrame('GameTooltip'))
+              assertEquals(
+                false,
+                pcall(function()
+                  gt:SetOwner()
+                end)
+              )
+            end,
+            OneArg = function()
+              local gt = f(1, CreateFrame('GameTooltip'))
+              local owner = f(1, CreateFrame('Frame'))
+              f(0, gt:SetOwner(owner))
+              return {
+                GetAnchorType = function()
+                  assertEquals('ANCHOR_LEFT', f(1, gt:GetAnchorType()))
+                end,
+                GetOwner = function()
+                  assertEquals(owner, f(1, gt:GetOwner()))
+                end,
+                IsOwned = function()
+                  assertEquals(true, f(1, gt:IsOwned(owner)))
+                end,
+              }
+            end,
+          }
+        end,
+      }
+    end,
+
     ['ScrollFrame:SetScrollChild'] = function()
       local f = CreateFrame('ScrollFrame')
       assertEquals(nil, f:GetScrollChild())

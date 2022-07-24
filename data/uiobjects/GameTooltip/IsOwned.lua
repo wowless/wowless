@@ -1,3 +1,4 @@
-return (function(self)
-  return u(self).tooltipOwner ~= nil
+return (function(self, owner)
+  assert(owner)
+  return u(self).tooltipOwner == owner
 end)(...)

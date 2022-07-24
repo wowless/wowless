@@ -1,6 +1,12 @@
 ---
 name: GameTooltip
 fields:
+  tooltipAnchorType:
+    init: ANCHOR_NONE
+    type: string
+  tooltipLines:
+    init: 0
+    type: number
   tooltipOwner:
     nilable: true
     type: table
@@ -34,7 +40,9 @@ methods:
   FadeOut:
     status: unimplemented
   GetAnchorType:
-    status: unimplemented
+    fields:
+    - name: tooltipAnchorType
+    status: getter
   GetAzeritePowerID:
     products:
     - wow
@@ -70,9 +78,9 @@ methods:
   IsUnit:
     status: unimplemented
   NumLines:
-    outputs:
-    - type: number
-    status: unimplemented
+    fields:
+    - name: tooltipLines
+    status: getter
   ResetSecondaryCompareItem:
     status: unimplemented
   SetAchievementByID:
@@ -301,9 +309,7 @@ methods:
     - wowt
     status: unimplemented
   SetOwner:
-    fields:
-    - name: tooltipOwner
-    status: setter
+    status: implemented
   SetPadding:
     status: unimplemented
   SetPetAction:
