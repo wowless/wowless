@@ -1,3 +1,3 @@
 return (function(self)
-  self:SetButtonState('NORMAL')
+  self:SetEnabled(true)
 end)(...)
