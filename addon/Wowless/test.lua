@@ -518,7 +518,7 @@ local syncTests = function()
           local gt = f(1, CreateFrame('GameTooltip'))
           return {
             GetAnchorType = function()
-              assertEquals('ANCHOR_NONE', f(1, gt:GetAnchorType()))
+              assertEquals('ANCHOR_', f(1, gt:GetAnchorType()):sub(1, 7))
             end,
             GetChildren = function()
               f(0, gt:GetChildren())
