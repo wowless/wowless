@@ -149,35 +149,134 @@ local syncTests = function()
       }
       return checkStateMachine(states, transitions, 'normal')
     end,
+
     ['button text'] = function()
       local f = CreateFrame('Button')
-      assert(f:GetNumRegions() == 0)
-      assert(f:GetFontString() == nil)
-      f:SetText('Moo')
-      assert(f:GetNumRegions() == 1)
-      local fs = f:GetFontString()
-      assert(fs ~= nil)
-      assert(f:GetRegions() == fs)
-      assert(fs:GetParent() == f)
-      assert(f:GetText() == 'Moo')
-      assert(fs:GetText() == 'Moo')
       local g = CreateFrame('Button')
-      assert(g:GetText() == nil)
-      g:SetFontString(fs)
-      assert(g:GetText() == 'Moo')
-      assert(g:GetRegions() == fs)
-      assert(fs:GetParent() == g)
-      assert(f:GetText() == nil)
-      assert(f:GetNumRegions() == 0)
-      fs:SetParent(f)
-      assert(fs:GetParent() == f)
-      assert(f:GetNumRegions() == 1)
-      assert(f:GetText() == nil)
-      assert(f:GetFontString() == nil)
-      assert(g:GetNumRegions() == 0)
-      assert(g:GetText() == nil)
-      assert(g:GetFontString() == nil)
+      local garbage = CreateFrame('Frame')
+      local states = {
+        both = function()
+          local ffs = assert(f:GetFontString())
+          check1(1, f:GetNumRegions())
+          assertEquals(ffs, (f:GetRegions()))
+          assertEquals(f, ffs:GetParent())
+          check1('Moo', f:GetText())
+          check1('Moo', ffs:GetText())
+          local gfs = assert(g:GetFontString())
+          check1(1, g:GetNumRegions())
+          assertEquals(gfs, (g:GetRegions()))
+          assertEquals(g, gfs:GetParent())
+          check1('Moo', g:GetText())
+          check1('Moo', gfs:GetText())
+        end,
+        fstr = function()
+          check1(1, f:GetNumRegions())
+          check1('FontString', f:GetRegions():GetObjectType())
+          check1(nil, f:GetFontString())
+          check1(nil, f:GetText())
+          check1(0, g:GetNumRegions())
+          check1(nil, g:GetFontString())
+          check1(nil, g:GetText())
+        end,
+        ftext = function()
+          local ffs = assert(f:GetFontString(), 'missing font string')
+          check1(1, f:GetNumRegions())
+          assertEquals(ffs, (f:GetRegions()))
+          assertEquals(f, ffs:GetParent())
+          check1('Moo', f:GetText())
+          check1('Moo', ffs:GetText())
+          check1(0, g:GetNumRegions())
+          check1(nil, g:GetFontString())
+          check1(nil, g:GetText())
+        end,
+        gtext = function()
+          check1(0, f:GetNumRegions())
+          check1(nil, f:GetFontString())
+          check1(nil, f:GetText())
+          local gfs = assert(g:GetFontString(), 'missing font string')
+          check1(1, g:GetNumRegions())
+          assertEquals(gfs, (g:GetRegions()))
+          assertEquals(g, gfs:GetParent())
+          check1('Moo', g:GetText())
+          check1('Moo', gfs:GetText())
+        end,
+        reset = function()
+          check1(0, f:GetNumRegions())
+          check1(nil, f:GetFontString())
+          check1(nil, f:GetText())
+          check1(0, g:GetNumRegions())
+          check1(nil, g:GetFontString())
+          check1(nil, g:GetText())
+        end,
+      }
+      local transitions = {
+        Hack = { -- TODO remove when we can walk from init
+          edges = { reset = 'both' },
+          func = function()
+            check0(f:SetText('Moo'))
+            check0(g:SetText('Moo'))
+          end,
+        },
+        Hack2 = {
+          edges = { reset = 'fstr' },
+          func = function()
+            f:CreateFontString()
+          end,
+        },
+        Reset = {
+          to = 'reset',
+          func = function()
+            local function trash(...)
+              for i = 1, select('#', ...) do
+                select(i, ...):SetParent(garbage)
+              end
+            end
+            trash(f:GetRegions())
+            trash(g:GetRegions())
+          end,
+        },
+        SetFontStringFtoG = {
+          edges = {
+            ftext = 'gtext',
+          },
+          func = function()
+            check0(g:SetFontString(f:GetFontString()))
+          end,
+        },
+        SetParentGtoF = {
+          edges = {
+            gtext = 'fstr',
+          },
+          func = function()
+            check0(g:GetFontString():SetParent(f))
+          end,
+        },
+        SetTextF = {
+          edges = {
+            both = 'both',
+            ftext = 'ftext',
+            gtext = 'both',
+            reset = 'ftext',
+          },
+          func = function()
+            check0(f:SetText('Moo'))
+          end,
+        },
+        SetTextG = {
+          edges = {
+            both = 'both',
+            ftext = 'both',
+            gtext = 'gtext',
+            reset = 'gtext',
+          },
+          func = function()
+            check0(g:SetText('Moo'))
+          end,
+        },
+      }
+      return checkStateMachine(states, transitions, 'reset')
     end,
+
     ['button textures'] = function()
       return {
         ['parent'] = function()
