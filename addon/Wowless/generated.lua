@@ -150,17 +150,26 @@ function G.GeneratedTests()
       return t
     end)()
     local tests = {}
+    local toskipin = {
+      mouseSpeed = true, -- varies based on host?
+      RenderScale = true, -- varies based on host?
+    }
+    for name in pairs(toskipin) do
+      tests[name] = function() end
+    end
     for name, cfg in pairs(G.CVars) do
-      tests[name] = function()
-        assertEquals(type(cfg) == 'string' and cfg or cfg[runtimeProduct], cvarDefaults[name])
+      if not tests[name] then
+        tests[name] = function()
+          assertEquals(type(cfg) == 'string' and cfg or cfg[runtimeProduct], cvarDefaults[name])
+        end
       end
     end
-    local toskip = {
-      PraiseTheSun = true,
+    local toskipout = {
+      PraiseTheSun = true, -- set in FrameXML
       TTSUseCharacterSettings = true,
     }
     for k, v in pairs(cvarDefaults) do
-      if not tests[k] and not toskip[k] then
+      if not tests[k] and not toskipout[k] then
         tests[k] = function()
           error(format('missing cvar %q with default %q', k, v))
         end
