@@ -5,33 +5,148 @@ local check0 = G.check0
 local check1 = G.check1
 local check4 = G.check4
 
+local function checkStateMachine(states, transitions, init, x)
+  local edges = {}
+  for s in pairs(states) do
+    edges[s] = {}
+    for ss in pairs(states) do
+      edges[s][ss] = {}
+    end
+  end
+  for k, v in pairs(transitions) do
+    if v.edges then
+      for from, to in pairs(v.edges) do
+        edges[from][to][k] = true
+      end
+    else
+      for s in pairs(states) do
+        edges[s][v.to or s][k] = true
+      end
+    end
+  end
+  local frominit = {}
+  for k in pairs(edges) do
+    local t = next(edges[init][k])
+    assert(t, 'no way to ' .. k .. ' from ' .. init) -- TODO generalize
+    frominit[k] = t
+  end
+  local toinit = {}
+  for k, v in pairs(edges) do
+    local t = next(v[init])
+    assert(t, 'no way back to ' .. init .. ' from ' .. k) -- TODO generalize
+    toinit[k] = t
+  end
+  local function trimerr(s)
+    return s:sub(select(2, s:find(':%d+: ')) + 1)
+  end
+  local function checkState(s, n)
+    local success, msg = pcall(function()
+      states[s](x)
+    end)
+    if not success then
+      error(('%s state: %s'):format(n, trimerr(msg)))
+    end
+  end
+  for from, tos in pairs(edges) do
+    for to, ts in pairs(tos) do
+      for t in pairs(ts) do
+        local success, msg = pcall(function()
+          checkState(init, 'init')
+          transitions[frominit[from]].func(x)
+          checkState(from, 'from')
+          transitions[t].func(x)
+          checkState(to, 'to')
+          transitions[toinit[to]].func(x)
+          checkState(init, 'postinit(' .. toinit[to] .. ')')
+        end)
+        if not success then
+          error(('failure on %s -> %s transition %s: %s'):format(from, to, t, trimerr(msg)))
+        end
+      end
+    end
+  end
+end
+
 local syncTests = function()
   return {
     ['button states'] = function()
-      local b = CreateFrame('Button')
-      assertEquals('NORMAL', b:GetButtonState())
-      assertEquals(true, b:IsEnabled())
-      b:Disable()
-      assertEquals('DISABLED', b:GetButtonState())
-      assertEquals(false, b:IsEnabled())
-      b:Enable()
-      assertEquals('NORMAL', b:GetButtonState())
-      assertEquals(true, b:IsEnabled())
-      b:SetButtonState('PUSHED')
-      assertEquals('PUSHED', b:GetButtonState())
-      assertEquals(true, b:IsEnabled())
-      b:SetButtonState('DISABLED')
-      assertEquals('DISABLED', b:GetButtonState())
-      assertEquals(false, b:IsEnabled())
-      assertEquals(
-        false,
-        pcall(function()
-          b:SetButtonState('rofl')
-        end)
-      )
-      b:SetButtonState('PUSHED')
-      assertEquals('PUSHED', b:GetButtonState())
-      assertEquals(true, b:IsEnabled())
+      local states = {
+        disabled = function(b)
+          assertEquals(false, b:IsEnabled())
+          assertEquals('DISABLED', b:GetButtonState())
+        end,
+        normal = function(b)
+          assertEquals(true, b:IsEnabled())
+          assertEquals('NORMAL', b:GetButtonState())
+        end,
+        pushed = function(b)
+          assertEquals(true, b:IsEnabled())
+          assertEquals('PUSHED', b:GetButtonState())
+        end,
+      }
+      local transitions = {
+        disable = {
+          func = function(b)
+            b:Disable()
+          end,
+          to = 'disabled',
+        },
+        enable = {
+          edges = {
+            disabled = 'normal',
+            normal = 'normal',
+            pushed = 'pushed',
+          },
+          func = function(b)
+            b:Enable()
+          end,
+        },
+        error = {
+          func = function(b)
+            assertEquals(
+              false,
+              pcall(function()
+                b:SetButtonState('bad')
+              end)
+            )
+          end,
+        },
+        setEnabledFalse = {
+          to = 'disabled',
+          func = function(b)
+            b:SetEnabled(false)
+          end,
+        },
+        setEnabledTrue = {
+          edges = {
+            disabled = 'normal',
+            normal = 'normal',
+            pushed = 'pushed',
+          },
+          func = function(b)
+            b:SetEnabled(true)
+          end,
+        },
+        setStateDisabled = {
+          to = 'disabled',
+          func = function(b)
+            b:SetButtonState('DISABLED')
+          end,
+        },
+        setStateNormal = {
+          to = 'normal',
+          func = function(b)
+            b:SetButtonState('NORMAL')
+          end,
+        },
+        setStatePushed = {
+          to = 'pushed',
+          func = function(b)
+            b:SetButtonState('PUSHED')
+          end,
+        },
+      }
+      return checkStateMachine(states, transitions, 'normal', CreateFrame('Button'))
     end,
     ['button text'] = function()
       local f = CreateFrame('Button')

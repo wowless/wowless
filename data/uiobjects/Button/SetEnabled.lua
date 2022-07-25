@@ -1,3 +1,6 @@
 return (function(self, value)
-  self:SetButtonState(value and 'NORMAL' or 'DISABLED')
+  value = not not value
+  if value ~= self:IsEnabled() then
+    self:SetButtonState(value and 'NORMAL' or 'DISABLED')
+  end
 end)(...)
