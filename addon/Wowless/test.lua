@@ -6,7 +6,47 @@ local check1 = G.check1
 local check4 = G.check4
 
 local function checkStateMachine(states, transitions, init, x)
-  -- TODO the thing
+  local edges = {}
+  for s in pairs(states) do
+    edges[s] = {}
+    for ss in pairs(states) do
+      edges[s][ss] = {}
+    end
+  end
+  for k, v in pairs(transitions) do
+    for s in pairs(states) do
+      edges[s][v.to or s][k] = true
+    end
+  end
+  local frominit = {}
+  for k in pairs(edges) do
+    local t = next(edges[init][k])
+    assert(t, 'no way to ' .. k .. ' from ' .. init) -- TODO generalize
+    frominit[k] = t
+  end
+  local toinit = {}
+  for k, v in pairs(edges) do
+    local t = next(v[init])
+    assert(t, 'no way back to ' .. init .. ' from ' .. k) -- TODO generalize
+    toinit[k] = t
+  end
+  for from, tos in pairs(edges) do
+    for to, ts in pairs(tos) do
+      for t in pairs(ts) do
+        local success, msg = pcall(function()
+          states[init](x)
+          transitions[frominit[from]].func(x)
+          states[from](x)
+          transitions[t].func(x)
+          states[to](x)
+          transitions[toinit[to]].func(x)
+        end)
+        if not success then
+          error(('failure on %q -> %q transition %q: %s'):format(from, to, t, msg))
+        end
+      end
+    end
+  end
 end
 
 local syncTests = function()
@@ -34,7 +74,6 @@ local syncTests = function()
           end,
         },
         enable = {
-          from = 'disabled',
           to = 'normal',
           func = function(b)
             b:Enable()
@@ -50,19 +89,31 @@ local syncTests = function()
             )
           end,
         },
-        setDisabled = {
+        setEnabledFalse = {
+          to = 'disabled',
+          func = function(b)
+            b:SetEnabled(false)
+          end,
+        },
+        setEnabledTrue = {
+          to = 'normal',
+          func = function(b)
+            b:SetEnabled(true)
+          end,
+        },
+        setStateDisabled = {
           to = 'disabled',
           func = function(b)
             b:SetButtonState('DISABLED')
           end,
         },
-        setNormal = {
+        setStateNormal = {
           to = 'normal',
           func = function(b)
             b:SetButtonState('NORMAL')
           end,
         },
-        setPushed = {
+        setStatePushed = {
           to = 'pushed',
           func = function(b)
             b:SetButtonState('PUSHED')
