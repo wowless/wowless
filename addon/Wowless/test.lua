@@ -5,7 +5,7 @@ local check0 = G.check0
 local check1 = G.check1
 local check4 = G.check4
 
-local function checkStateMachine(states, transitions, init, x)
+local function checkStateMachine(states, transitions, init)
   local edges = {}
   for s in pairs(states) do
     edges[s] = {}
@@ -41,7 +41,7 @@ local function checkStateMachine(states, transitions, init, x)
   end
   local function checkState(s, n)
     local success, msg = pcall(function()
-      states[s](x)
+      states[s]()
     end)
     if not success then
       error(('%s state: %s'):format(n, trimerr(msg)))
@@ -52,11 +52,11 @@ local function checkStateMachine(states, transitions, init, x)
       for t in pairs(ts) do
         local success, msg = pcall(function()
           checkState(init, 'init')
-          transitions[frominit[from]].func(x)
+          transitions[frominit[from]].func()
           checkState(from, 'from')
-          transitions[t].func(x)
+          transitions[t].func()
           checkState(to, 'to')
-          transitions[toinit[to]].func(x)
+          transitions[toinit[to]].func()
           checkState(init, 'postinit(' .. toinit[to] .. ')')
         end)
         if not success then
@@ -70,23 +70,24 @@ end
 local syncTests = function()
   return {
     ['button states'] = function()
+      local b = CreateFrame('Button')
       local states = {
-        disabled = function(b)
+        disabled = function()
           assertEquals(false, b:IsEnabled())
           assertEquals('DISABLED', b:GetButtonState())
         end,
-        normal = function(b)
+        normal = function()
           assertEquals(true, b:IsEnabled())
           assertEquals('NORMAL', b:GetButtonState())
         end,
-        pushed = function(b)
+        pushed = function()
           assertEquals(true, b:IsEnabled())
           assertEquals('PUSHED', b:GetButtonState())
         end,
       }
       local transitions = {
         disable = {
-          func = function(b)
+          func = function()
             b:Disable()
           end,
           to = 'disabled',
@@ -97,12 +98,12 @@ local syncTests = function()
             normal = 'normal',
             pushed = 'pushed',
           },
-          func = function(b)
+          func = function()
             b:Enable()
           end,
         },
         error = {
-          func = function(b)
+          func = function()
             assertEquals(
               false,
               pcall(function()
@@ -113,7 +114,7 @@ local syncTests = function()
         },
         setEnabledFalse = {
           to = 'disabled',
-          func = function(b)
+          func = function()
             b:SetEnabled(false)
           end,
         },
@@ -123,30 +124,30 @@ local syncTests = function()
             normal = 'normal',
             pushed = 'pushed',
           },
-          func = function(b)
+          func = function()
             b:SetEnabled(true)
           end,
         },
         setStateDisabled = {
           to = 'disabled',
-          func = function(b)
+          func = function()
             b:SetButtonState('DISABLED')
           end,
         },
         setStateNormal = {
           to = 'normal',
-          func = function(b)
+          func = function()
             b:SetButtonState('NORMAL')
           end,
         },
         setStatePushed = {
           to = 'pushed',
-          func = function(b)
+          func = function()
             b:SetButtonState('PUSHED')
           end,
         },
       }
-      return checkStateMachine(states, transitions, 'normal', CreateFrame('Button'))
+      return checkStateMachine(states, transitions, 'normal')
     end,
     ['button text'] = function()
       local f = CreateFrame('Button')
@@ -579,17 +580,18 @@ local syncTests = function()
     end,
 
     StatusBar = function()
+      local sb = CreateFrame('StatusBar')
       local states = {
-        colorTexture = function(sb)
+        colorTexture = function()
           local t = assert(sb:GetStatusBarTexture())
           check4(0.8, 0.6, 0.4, 0.2, t:GetVertexColor())
           check4(0.8, 0.6, 0.4, 0.2, sb:GetStatusBarColor())
         end,
-        empty = function(sb)
+        empty = function()
           check1(nil, sb:GetStatusBarTexture())
           check4(1, 1, 1, 1, sb:GetStatusBarColor())
         end,
-        resetTexture = function(sb)
+        resetTexture = function()
           local t = assert(sb:GetStatusBarTexture())
           check4(1, 1, 1, 1, t:GetVertexColor())
           check4(1, 1, 1, 1, sb:GetStatusBarColor())
@@ -598,7 +600,7 @@ local syncTests = function()
       local transitions = {
         Hack = { -- TODO remove when we can walk from init
           to = 'colorTexture',
-          func = function(sb)
+          func = function()
             check0(sb:SetStatusBarTexture('interface/icons/temp'))
             check0(sb:SetStatusBarColor(0.8, 0.6, 0.4, 0.2))
           end,
@@ -609,7 +611,7 @@ local syncTests = function()
             empty = 'empty',
             resetTexture = 'colorTexture',
           },
-          func = function(sb)
+          func = function()
             check0(sb:SetStatusBarColor(0.8, 0.6, 0.4, 0.2))
           end,
         },
@@ -619,18 +621,18 @@ local syncTests = function()
             empty = 'resetTexture',
             resetTexture = 'resetTexture',
           },
-          func = function(sb)
+          func = function()
             check0(sb:SetStatusBarTexture('interface/icons/temp'))
           end,
         },
         SetStatusBarTextureNil = {
           to = 'empty',
-          func = function(sb)
+          func = function()
             check0(sb:SetStatusBarTexture(nil))
           end,
         },
       }
-      return checkStateMachine(states, transitions, 'empty', CreateFrame('StatusBar'))
+      return checkStateMachine(states, transitions, 'empty')
     end,
 
     ['table'] = function()
