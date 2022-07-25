@@ -14,8 +14,14 @@ local function checkStateMachine(states, transitions, init, x)
     end
   end
   for k, v in pairs(transitions) do
-    for s in pairs(states) do
-      edges[s][v.to or s][k] = true
+    if v.edges then
+      for from, to in pairs(v.edges) do
+        edges[from][to][k] = true
+      end
+    else
+      for s in pairs(states) do
+        edges[s][v.to or s][k] = true
+      end
     end
   end
   local frominit = {}
@@ -31,7 +37,7 @@ local function checkStateMachine(states, transitions, init, x)
     toinit[k] = t
   end
   local function trimerr(s)
-    return s:sub(39) -- TODO something smarter
+    return s:sub(select(2, s:find(':%d+: ')) + 1)
   end
   local function checkState(s, n)
     local success, msg = pcall(function()
@@ -80,13 +86,17 @@ local syncTests = function()
       }
       local transitions = {
         disable = {
-          to = 'disabled',
           func = function(b)
             b:Disable()
           end,
+          to = 'disabled',
         },
         enable = {
-          to = 'normal',
+          edges = {
+            disabled = 'normal',
+            normal = 'normal',
+            pushed = 'pushed',
+          },
           func = function(b)
             b:Enable()
           end,
@@ -108,7 +118,11 @@ local syncTests = function()
           end,
         },
         setEnabledTrue = {
-          to = 'normal',
+          edges = {
+            disabled = 'normal',
+            normal = 'normal',
+            pushed = 'pushed',
+          },
           func = function(b)
             b:SetEnabled(true)
           end,
