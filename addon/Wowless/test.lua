@@ -577,22 +577,62 @@ local syncTests = function()
         end)
       )
     end,
-    ['status bar'] = function()
-      local sb = CreateFrame('StatusBar')
-      check1(nil, sb:GetStatusBarTexture())
-      check4(1, 1, 1, 1, sb:GetStatusBarColor())
-      check1(nil, sb:GetStatusBarTexture())
-      check0(sb:SetStatusBarColor(0, 1, 0, 1))
-      check4(1, 1, 1, 1, sb:GetStatusBarColor())
-      sb:SetStatusBarTexture('interface/icons/temp')
-      local t = sb:GetStatusBarTexture()
-      assert(t ~= nil)
-      check4(1, 1, 1, 1, sb:GetStatusBarColor())
-      check4(1, 1, 1, 1, t:GetVertexColor())
-      check0(t:SetVertexColor(0.8, 0.6, 0.4, 0.2))
-      check4(0.8, 0.6, 0.4, 0.2, sb:GetStatusBarColor())
-      check4(0.8, 0.6, 0.4, 0.2, t:GetVertexColor())
+
+    StatusBar = function()
+      local states = {
+        colorTexture = function(sb)
+          local t = assert(sb:GetStatusBarTexture())
+          check4(0.8, 0.6, 0.4, 0.2, t:GetVertexColor())
+          check4(0.8, 0.6, 0.4, 0.2, sb:GetStatusBarColor())
+        end,
+        empty = function(sb)
+          check1(nil, sb:GetStatusBarTexture())
+          check4(1, 1, 1, 1, sb:GetStatusBarColor())
+        end,
+        resetTexture = function(sb)
+          local t = assert(sb:GetStatusBarTexture())
+          check4(1, 1, 1, 1, t:GetVertexColor())
+          check4(1, 1, 1, 1, sb:GetStatusBarColor())
+        end,
+      }
+      local transitions = {
+        Hack = { -- TODO remove when we can walk from init
+          to = 'colorTexture',
+          func = function(sb)
+            check0(sb:SetStatusBarTexture('interface/icons/temp'))
+            check0(sb:SetStatusBarColor(0.8, 0.6, 0.4, 0.2))
+          end,
+        },
+        SetStatusBarColor = {
+          edges = {
+            colorTexture = 'colorTexture',
+            empty = 'empty',
+            resetTexture = 'colorTexture',
+          },
+          func = function(sb)
+            check0(sb:SetStatusBarColor(0.8, 0.6, 0.4, 0.2))
+          end,
+        },
+        SetStatusBarTexture = {
+          edges = {
+            colorTexture = 'colorTexture',
+            empty = 'resetTexture',
+            resetTexture = 'resetTexture',
+          },
+          func = function(sb)
+            check0(sb:SetStatusBarTexture('interface/icons/temp'))
+          end,
+        },
+        SetStatusBarTextureNil = {
+          to = 'empty',
+          func = function(sb)
+            check0(sb:SetStatusBarTexture(nil))
+          end,
+        },
+      }
+      return checkStateMachine(states, transitions, 'empty', CreateFrame('StatusBar'))
     end,
+
     ['table'] = function()
       return {
         wipe = function()
