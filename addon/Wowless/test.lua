@@ -51,7 +51,7 @@ local function checkStateMachine(states, transitions, init, x)
           transitions[t].func(x)
           checkState(to, 'to')
           transitions[toinit[to]].func(x)
-          checkState(init, 'postinit')
+          checkState(init, 'postinit(' .. toinit[to] .. ')')
         end)
         if not success then
           error(('failure on %s -> %s transition %s: %s'):format(from, to, t, trimerr(msg)))
