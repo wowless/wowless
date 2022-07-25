@@ -30,19 +30,31 @@ local function checkStateMachine(states, transitions, init, x)
     assert(t, 'no way back to ' .. init .. ' from ' .. k) -- TODO generalize
     toinit[k] = t
   end
+  local function trimerr(s)
+    return s:sub(39) -- TODO something smarter
+  end
+  local function checkState(s, n)
+    local success, msg = pcall(function()
+      states[s](x)
+    end)
+    if not success then
+      error(('%s state: %s'):format(n, trimerr(msg)))
+    end
+  end
   for from, tos in pairs(edges) do
     for to, ts in pairs(tos) do
       for t in pairs(ts) do
         local success, msg = pcall(function()
-          states[init](x)
+          checkState(init, 'init')
           transitions[frominit[from]].func(x)
-          states[from](x)
+          checkState(from, 'from')
           transitions[t].func(x)
-          states[to](x)
+          checkState(to, 'to')
           transitions[toinit[to]].func(x)
+          checkState(init, 'postinit')
         end)
         if not success then
-          error(('failure on %q -> %q transition %q: %s'):format(from, to, t, msg))
+          error(('failure on %s -> %s transition %s: %s'):format(from, to, t, trimerr(msg)))
         end
       end
     end
