@@ -42,9 +42,16 @@ local function run(cfg)
   if cfg.frame0 then
     local render = require('wowless.render')
     local screenWidth, screenHeight = 1280, 720
-    local rects = render.frames2rects(api, screenWidth, screenHeight)
-    require('pl.file').write('frame0.yaml', require('wowapi.yaml').pprint(rects))
-    render.rects2png(rects, screenWidth, screenHeight, cfg.cascproxy, cfg.dir, 'frame0.png')
+    local function doit(name)
+      local rects = render.frames2rects(api, screenWidth, screenHeight)
+      require('pl.file').write(name .. '.yaml', require('wowapi.yaml').pprint(rects))
+      render.rects2png(rects, screenWidth, screenHeight, cfg.cascproxy, cfg.dir, name .. '.png')
+    end
+    doit('frame0')
+    if api.env.ToggleTalentFrame then
+      api.CallSafely(api.env.ToggleTalentFrame)
+      doit('frame1')
+    end
     os.exit(0)
   end
   local clickBlacklist = {
