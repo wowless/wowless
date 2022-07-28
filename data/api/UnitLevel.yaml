@@ -1,7 +1,9 @@
 ---
 name: UnitLevel
-status: unimplemented
+status: implemented
 inputs:
-- - type: string
+- - name: unit
+    type: unit
 outputs:
-- type: number
+- name: level
+  type: number

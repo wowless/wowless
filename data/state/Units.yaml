@@ -9,6 +9,7 @@ value:
       faction: Horde
       guid: Player-1096-06DF65C1
       isplayer: true
+      level: 30
       name: Unitname
       race: 2
       sex: 2

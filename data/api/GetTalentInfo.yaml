@@ -1,14 +1,5 @@
 ---
 name: GetTalentInfo
-status: unimplemented
-outputs:
-- nilable: true
-  type: unknown
-- nilable: true
-  type: unknown
-- nilable: true
-  type: unknown
-- nilable: true
-  type: unknown
-- stub: 0
-  type: unknown
+status: implemented
+frameworks:
+- loader
