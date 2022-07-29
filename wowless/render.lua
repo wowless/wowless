@@ -125,6 +125,7 @@ local function frames2rects(api, screenWidth, screenHeight)
                   horizTile = t:GetHorizTile(),
                   maskPath = api.UserData(t).maskName,
                   path = t:GetTexture(),
+                  scale = t:GetEffectiveScale(),
                   vertexColor = api.UserData(t).vertexColorR and {
                     alpha = api.UserData(t).vertexColorA,
                     blue = api.UserData(t).vertexColorB,
