@@ -4,6 +4,7 @@ local ret = {}
 local builds = require('wowapi.yaml').parseFile('data/builds.yaml')
 for product, build in pairs(builds) do
   for _, db in ipairs(dblist(product)) do
+    db = db:lower()
     local dbd = dbds[db]
     local v = (function()
       for _, version in ipairs(dbd.versions) do
