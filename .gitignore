@@ -1,3 +1,5 @@
+.ninja_log
+build.ninja
 cache
 extracts
 frame0.png
@@ -6,5 +8,6 @@ frame1.png
 frame1.yaml
 luacov.*
 out/
+test.out
 wowless/*.o
 wowless/*.so
