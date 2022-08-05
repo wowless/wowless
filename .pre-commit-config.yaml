@@ -32,6 +32,10 @@ repos:
     entry: luacheck
     language: system
     types: [lua]
+  - id: addon-chmod
+    name: addon execute bits
+    entry: chmod 755
+    language: system
   - id: local-test
     name: build and test
     entry: lua tools/mkninja.lua && ninja
