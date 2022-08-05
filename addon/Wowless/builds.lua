@@ -1,8 +1,8 @@
 local _, G = ...
 G.Builds = {
   wow = {
-    build = '44730',
-    date = 'Jul 18 2022',
+    build = '44908',
+    date = 'Jul 29 2022',
     flavor = 'Mainline',
     ptr = false,
     test = false,
@@ -19,8 +19,8 @@ G.Builds = {
     version = '10.0.0',
   },
   wow_classic = {
-    build = '44400',
-    date = 'Jun 27 2022',
+    build = '44833',
+    date = 'Jul 25 2022',
     flavor = 'TBC',
     ptr = false,
     test = false,
@@ -37,8 +37,8 @@ G.Builds = {
     version = '3.4.0',
   },
   wow_classic_era = {
-    build = '44403',
-    date = 'Jun 27 2022',
+    build = '44834',
+    date = 'Jul 25 2022',
     flavor = 'Vanilla',
     ptr = false,
     test = false,
@@ -46,8 +46,8 @@ G.Builds = {
     version = '1.14.3',
   },
   wow_classic_era_ptr = {
-    build = '44403',
-    date = 'Jun 27 2022',
+    build = '44834',
+    date = 'Jul 25 2022',
     flavor = 'Vanilla',
     ptr = true,
     test = false,
