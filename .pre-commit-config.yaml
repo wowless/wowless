@@ -36,6 +36,7 @@ repos:
     name: addon execute bits
     entry: chmod 755
     language: system
+    files: ^addon/
   - id: local-test
     name: build and test
     entry: lua tools/mkninja.lua && ninja
