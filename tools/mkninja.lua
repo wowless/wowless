@@ -18,7 +18,6 @@ local addonGeneratedFiles = (function()
   for i, v in ipairs(t) do
     t[i] = 'addon/Wowless/' .. v .. '.lua'
   end
-  table.sort(t)
   return table.concat(t, ' ')
 end)()
 
@@ -34,34 +33,76 @@ local wowlessFiles = (function()
       table.insert(t, k)
     end
   end
-  table.sort(t)
   return table.concat(t, ' ')
 end)()
 
-local out = {
-  'rule mkaddon',
-  '  command = ' .. taintedLua .. ' tools/gentest.lua',
-  'rule mktaintedlua',
-  '  command = cd tainted-lua && rm -rf build && cmake --preset linux && cmake --build --preset linux',
-  'rule mktestout',
-  '  command = bash -c "set -o pipefail && busted 2>&1 | tee test.out"',
-  'rule mkwowlessext',
-  '  command = luarocks build --no-install',
-  'build | ' .. addonGeneratedFiles .. ': mkaddon | ' .. taintedLua .. ' ' .. wowlessFiles,
-  'build | ' .. taintedLua .. ': mktaintedlua | ' .. (function()
-    local f = io.popen('find tainted-lua -type f -not -path \'tainted-lua/build/*\'')
-    local deps = f:read('*a')
-    f:close()
-    return deps:gsub('\n', ' ')
-  end)(),
-  'build | test.out: mktestout | .busted wowless/ext.so '
-    .. addonGeneratedFiles
-    .. ' '
-    .. taintedLua
-    .. ' '
-    .. wowlessFiles,
-  'build | wowless/ext.so wowless/ext.o: mkwowlessext | wowless-scm-0.rockspec wowless/ext.c',
+local rules = {
+  mkaddon = taintedLua .. ' tools/gentest.lua',
+  mktaintedlua = 'cd tainted-lua && rm -rf build && cmake --preset linux && cmake --build --preset linux',
+  mktestout = 'bash -c "set -o pipefail && busted 2>&1 | tee test.out"',
+  mkwowlessext = 'luarocks build --no-install',
 }
+
+local builds = {
+  {
+    ins = { taintedLua, wowlessFiles },
+    rule = 'mkaddon',
+    outs = addonGeneratedFiles,
+  },
+  {
+    ins = (function()
+      local f = io.popen('find tainted-lua -type f -not -path \'tainted-lua/build/*\'')
+      local deps = f:read('*a')
+      f:close()
+      return deps:gsub('\n', ' ')
+    end)(),
+    rule = 'mktaintedlua',
+    outs = taintedLua,
+  },
+  {
+    ins = { '.busted', 'wowless/ext.so', addonGeneratedFiles, taintedLua, wowlessFiles },
+    rule = 'mktestout',
+    outs = 'test.out',
+  },
+  {
+    ins = { 'wowless-scm-0.rockspec', 'wowless/ext.c' },
+    rule = 'mkwowlessext',
+    outs = { 'wowless/ext.o', 'wowless/ext.so' },
+  },
+}
+
+local function flatten(x)
+  local t = {}
+  local function doit(y)
+    if type(y) == 'string' then
+      table.insert(t, y)
+    else
+      for _, z in ipairs(y) do
+        doit(z)
+      end
+    end
+  end
+  doit(x)
+  table.sort(t)
+  return table.concat(t, ' ')
+end
+
+local rulenames = {}
+for k in pairs(rules) do
+  table.insert(rulenames, k)
+end
+table.sort(rulenames)
+
+local out = {}
+for _, k in ipairs(rulenames) do
+  table.insert(out, 'rule ' .. k)
+  table.insert(out, '  command = ' .. rules[k])
+end
+for _, b in ipairs(builds) do
+  local ins = flatten(b.ins)
+  local outs = flatten(b.outs)
+  table.insert(out, 'build | ' .. outs .. ': ' .. b.rule .. ' | ' .. ins)
+end
 
 local f = io.open('build.ninja', 'w')
 f:write(table.concat(out, '\n'))
