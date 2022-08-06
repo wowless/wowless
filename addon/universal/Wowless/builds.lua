@@ -64,8 +64,8 @@ G.Builds = {
     version = '3.4.0',
   },
   wowt = {
-    build = '44767',
-    date = 'Jul 20 2022',
+    build = '44931',
+    date = 'Aug  1 2022',
     flavor = 'Mainline',
     ptr = true,
     test = true,
