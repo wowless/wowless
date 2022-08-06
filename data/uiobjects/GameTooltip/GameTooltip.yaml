@@ -150,6 +150,7 @@ methods:
     - wow
     - wow_beta
     - wow_classic_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetBagItem:
@@ -205,6 +206,7 @@ methods:
     - wow
     - wow_beta
     - wow_classic_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetCurrencyTokenByID:
@@ -212,6 +214,7 @@ methods:
     - wow
     - wow_beta
     - wow_classic_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetCustomLineSpacing:
@@ -231,6 +234,7 @@ methods:
     - wow
     - wow_beta
     - wow_classic_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetExistingSocketGem:
@@ -240,6 +244,7 @@ methods:
   SetGlyph:
     products:
     - wow_classic_beta
+    - wow_classic_ptr
     status: unimplemented
   SetGuildBankItem:
     status: unimplemented
@@ -284,6 +289,7 @@ methods:
     - wow
     - wow_beta
     - wow_classic_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetLootItem:
@@ -333,6 +339,7 @@ methods:
     - wow
     - wow_beta
     - wow_classic_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetQuestItem:
@@ -342,6 +349,7 @@ methods:
     - wow
     - wow_beta
     - wow_classic_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetQuestLogItem:
@@ -353,6 +361,7 @@ methods:
     - wow
     - wow_beta
     - wow_classic_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetQuestPartyProgress:

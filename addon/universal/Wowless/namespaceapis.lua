@@ -77,6 +77,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -85,6 +86,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -422,12 +424,14 @@ G.NamespaceApis = {
       CycleCharCustomization = {
         products = {
           wow_classic_beta = true,
+          wow_classic_ptr = true,
         },
       },
       GetAvailableCustomizations = true,
       GetBarbersChoiceCost = {
         products = {
           wow_classic_beta = true,
+          wow_classic_ptr = true,
         },
       },
       GetCurrentCameraZoom = true,
@@ -436,23 +440,27 @@ G.NamespaceApis = {
       GetCustomizationTypeInfo = {
         products = {
           wow_classic_beta = true,
+          wow_classic_ptr = true,
         },
       },
       HasAnyChanges = true,
       IsValidCustomizationType = {
         products = {
           wow_classic_beta = true,
+          wow_classic_ptr = true,
         },
       },
       IsViewingAlteredForm = true,
       IsViewingNativeSex = {
         products = {
           wow_classic_beta = true,
+          wow_classic_ptr = true,
         },
       },
       IsViewingVisibleSex = {
         products = {
           wow_classic_beta = true,
+          wow_classic_ptr = true,
         },
       },
       MarkCustomizationChoiceAsSeen = {
@@ -499,6 +507,7 @@ G.NamespaceApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -568,7 +577,6 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
       ContextMenuEventCopy = true,
@@ -881,7 +889,6 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
       ReportServerLag = {
@@ -1459,6 +1466,7 @@ G.NamespaceApis = {
         products = {
           wow = true,
           wow_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -1467,6 +1475,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -1558,7 +1567,6 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
       GetCursorCommunitiesStream = {
@@ -1566,7 +1574,6 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
       GetCursorItem = true,
@@ -1575,7 +1582,6 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
     },
@@ -1733,6 +1739,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -1771,6 +1778,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -2644,7 +2652,6 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
       GetActivityInfoExpensive = true,
@@ -2653,6 +2660,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -2819,6 +2827,7 @@ G.NamespaceApis = {
       GetRoles = {
         products = {
           wow_classic_beta = true,
+          wow_classic_ptr = true,
         },
       },
       GetSearchResultEncounterInfo = {
@@ -2873,6 +2882,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -2896,13 +2906,13 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
       RequestAvailableActivities = true,
       RequestInvite = {
         products = {
           wow_classic_beta = true,
+          wow_classic_ptr = true,
         },
       },
       SaveLanguageSearchFilter = {
@@ -2930,6 +2940,7 @@ G.NamespaceApis = {
       SetRoles = {
         products = {
           wow_classic_beta = true,
+          wow_classic_ptr = true,
         },
       },
       SetSearchToActivity = {
@@ -3578,6 +3589,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -3822,6 +3834,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -4209,10 +4222,16 @@ G.NamespaceApis = {
           wowt = true,
         },
       },
+      GetRandomBGLossRewards = {
+        products = {
+          wow_classic_ptr = true,
+        },
+      },
       GetRandomBGRewards = {
         products = {
           wow = true,
           wow_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -5041,6 +5060,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -5049,6 +5069,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -5057,6 +5078,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -5065,6 +5087,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -5073,7 +5096,6 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
       OpenReportPlayerDialog = {
@@ -5081,7 +5103,6 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
       ReportServerLag = true,
@@ -5091,6 +5112,7 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wow_classic_beta = true,
+          wow_classic_ptr = true,
           wowt = true,
         },
       },
@@ -5099,7 +5121,6 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
       SetPendingReportPetTarget = {
@@ -5107,7 +5128,6 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
       SetPendingReportTarget = {
@@ -5115,7 +5135,6 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
       SetPendingReportTargetByGuid = {
@@ -5123,7 +5142,6 @@ G.NamespaceApis = {
           wow_classic = true,
           wow_classic_era = true,
           wow_classic_era_ptr = true,
-          wow_classic_ptr = true,
         },
       },
     },

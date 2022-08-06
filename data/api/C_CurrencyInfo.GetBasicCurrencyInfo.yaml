@@ -12,5 +12,6 @@ outputs:
   type: C_CurrencyInfo.CurrencyDisplayInfo
 products:
 - wow
-- wowt
 - wow_beta
+- wow_classic_ptr
+- wowt

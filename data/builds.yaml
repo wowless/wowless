@@ -48,13 +48,13 @@ wow_classic_era_ptr:
   tocversion: 11403
   version: 1.14.3
 wow_classic_ptr:
-  build: '44400'
-  date: Jun 27 2022
-  flavor: TBC
+  build: '44930'
+  date: Aug  1 2022
+  flavor: Wrath
   ptr: true
-  test: false
-  tocversion: 20504
-  version: 2.5.4
+  test: true
+  tocversion: 30400
+  version: 3.4.0
 wowt:
   build: '44767'
   date: Jul 20 2022

@@ -129,6 +129,7 @@ G.CVars = {
   EnableBlinkApplicationIcon = '1',
   ErrorFileLog = {
     wow_classic_beta = '0',
+    wow_classic_ptr = '0',
     wowt = '0',
   },
   ErrorFilter = 'all',
@@ -410,6 +411,7 @@ G.CVars = {
   ShakeStrengthUI = '1',
   ShowAllSpellRanks = {
     wow_classic_beta = '1',
+    wow_classic_ptr = '1',
   },
   ShowClassColorInFriendlyNameplate = {
     wow = '1',
@@ -454,6 +456,7 @@ G.CVars = {
   Sound_EnableDSPEffects = {
     wow = '1',
     wow_beta = '1',
+    wow_classic_ptr = '1',
     wowt = '1',
   },
   Sound_EnableDialog = '1',
@@ -631,6 +634,7 @@ G.CVars = {
   advancedWatchFrame = '0',
   agentLogLevel = {
     wow_classic_beta = '1',
+    wow_classic_ptr = '1',
     wowt = '1',
   },
   agentUID = {
@@ -729,6 +733,7 @@ G.CVars = {
   calendarShowLockouts = '1',
   calendarShowResets = {
     wow_classic_beta = '0',
+    wow_classic_ptr = '0',
   },
   calendarShowWeeklyHolidays = '1',
   cameraBobbing = '0',
@@ -751,6 +756,7 @@ G.CVars = {
     wow = '90',
     wow_beta = '90',
     wow_classic_beta = '90',
+    wow_classic_ptr = '90',
     wowt = '90',
   },
   cameraGroundSmoothSpeed = '7.5',
@@ -1153,23 +1159,28 @@ G.CVars = {
   dangerousShipyardMissionWarningAlreadyShown = '0',
   debugAllocSingleBlade = {
     wow_classic_beta = '',
+    wow_classic_ptr = '',
     wowt = '',
   },
   debugAllocTrackStacktrace = {
     wow_classic_beta = '0',
+    wow_classic_ptr = '0',
     wowt = '0',
   },
   debugGameEvents = '0',
   debugLog0 = {
     wow_classic_beta = '0',
+    wow_classic_ptr = '0',
     wowt = '0',
   },
   debugLog1 = {
     wow_classic_beta = '0',
+    wow_classic_ptr = '0',
     wowt = '0',
   },
   debugLog2 = {
     wow_classic_beta = '0',
+    wow_classic_ptr = '0',
     wowt = '0',
   },
   deselectOnClick = '0',
@@ -1226,6 +1237,7 @@ G.CVars = {
   enablePetBattleFloatingCombatText = '1',
   enableRefHistory = {
     wow_classic_beta = '1',
+    wow_classic_ptr = '1',
     wowt = '1',
   },
   enableRuneSpentAnim = '1',
@@ -1233,6 +1245,7 @@ G.CVars = {
     wow = '0',
     wow_beta = '0',
     wow_classic_beta = '0',
+    wow_classic_ptr = '0',
     wowt = '0',
   },
   enableTwitter = '0',
@@ -1253,6 +1266,7 @@ G.CVars = {
   },
   equipmentManager = {
     wow_classic_beta = '0',
+    wow_classic_ptr = '0',
   },
   expandUpgradePanel = '1',
   farclip = {
@@ -1262,7 +1276,7 @@ G.CVars = {
     wow_classic_beta = '5108',
     wow_classic_era = '2112',
     wow_classic_era_ptr = '2112',
-    wow_classic_ptr = '2112',
+    wow_classic_ptr = '5108',
     wowt = '1000',
   },
   ffxAntiAliasingMode = '0',
@@ -1371,6 +1385,7 @@ G.CVars = {
     wow = '1',
     wow_beta = '1',
     wow_classic_beta = '1',
+    wow_classic_ptr = '1',
     wowt = '1',
   },
   fstack_showregions = '1',
@@ -1486,7 +1501,7 @@ G.CVars = {
     wow_classic_beta = '1277',
     wow_classic_era = '777',
     wow_classic_era_ptr = '777',
-    wow_classic_ptr = '777',
+    wow_classic_ptr = '1277',
     wowt = '800',
   },
   hotReloadModels = '1',
@@ -1968,7 +1983,7 @@ G.CVars = {
     wow_classic_beta = '0',
     wow_classic_era = '5',
     wow_classic_era_ptr = '5',
-    wow_classic_ptr = '5',
+    wow_classic_ptr = '0',
     wowt = '5',
   },
   playerStatLeftDropdown = '',
@@ -1980,6 +1995,9 @@ G.CVars = {
   preloadPlayerModels = '1',
   preloadStreamingDistObject = '64',
   preloadStreamingDistTerrain = '256',
+  previewTalents = {
+    wow_classic_ptr = '0',
+  },
   primaryProfessionsFilter = '1',
   processAffinityMask = '0',
   profanityFilter = '1',
@@ -2088,7 +2106,7 @@ G.CVars = {
     wow_classic_beta = '1',
     wow_classic_era = '0',
     wow_classic_era_ptr = '0',
-    wow_classic_ptr = '0',
+    wow_classic_ptr = '1',
     wowt = '1',
   },
   scriptProfile = '0',
@@ -2406,30 +2424,35 @@ G.CVars = {
   textToSpeech = '0',
   textureErrorColors = {
     wow_classic_beta = '1',
+    wow_classic_ptr = '1',
   },
   textureFilteringMode = '5',
   threatPlaySounds = {
     wow = '1',
     wow_beta = '1',
     wow_classic_beta = '1',
+    wow_classic_ptr = '1',
     wowt = '1',
   },
   threatShowNumeric = {
     wow = '0',
     wow_beta = '0',
     wow_classic_beta = '0',
+    wow_classic_ptr = '0',
     wowt = '0',
   },
   threatWarning = {
     wow = '3',
     wow_beta = '3',
     wow_classic_beta = '3',
+    wow_classic_ptr = '3',
     wowt = '3',
   },
   threatWorldText = {
     wow = '1',
     wow_beta = '1',
     wow_classic_beta = '1',
+    wow_classic_ptr = '1',
     wowt = '1',
   },
   timeMgrAlarmEnabled = '0',
@@ -2453,9 +2476,11 @@ G.CVars = {
   },
   trackerFilter = {
     wow_classic_beta = '7',
+    wow_classic_ptr = '7',
   },
   trackerSorting = {
     wow_classic_beta = '0',
+    wow_classic_ptr = '0',
   },
   transmogCurrentSpecOnly = '0',
   transmogrifyShowCollected = '1',
@@ -2498,6 +2523,7 @@ G.CVars = {
   useCompactPartyFrames = '0',
   useDebugAllocators = {
     wow_classic_beta = '0',
+    wow_classic_ptr = '0',
     wowt = '0',
   },
   useHighResolutionUITextures = '0',
@@ -2531,6 +2557,7 @@ G.CVars = {
   watchFrameState = '0',
   watchFrameWidth = {
     wow_classic_beta = '0',
+    wow_classic_ptr = '0',
   },
   waterDetail = '0',
   weatherDensity = {

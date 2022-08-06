@@ -59,6 +59,7 @@ G.GlobalApis = {
   AddPreviewTalentPoints = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   AddQuestWatch = {
@@ -75,6 +76,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -321,7 +323,6 @@ G.GlobalApis = {
       wow_classic = true,
       wow_classic_era = true,
       wow_classic_era_ptr = true,
-      wow_classic_ptr = true,
     },
   },
   BeginTrade = true,
@@ -372,6 +373,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -406,6 +408,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -417,6 +420,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -436,6 +440,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -513,6 +518,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -545,6 +551,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -681,6 +688,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -955,7 +963,6 @@ G.GlobalApis = {
       wow_classic = true,
       wow_classic_era = true,
       wow_classic_era_ptr = true,
-      wow_classic_ptr = true,
     },
   },
   CompleteLFGReadyCheck = {
@@ -984,6 +991,7 @@ G.GlobalApis = {
   ConfirmBarbersChoice = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   ConfirmBindOnUse = true,
@@ -1099,6 +1107,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -1434,6 +1443,7 @@ G.GlobalApis = {
   ExpandCurrencyList = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   ExpandFactionHeader = true,
@@ -1575,6 +1585,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -1583,6 +1594,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -1591,6 +1603,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -1599,6 +1612,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -1614,6 +1628,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -1622,6 +1637,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -1630,6 +1646,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -1638,6 +1655,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -1646,6 +1664,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -1699,6 +1718,7 @@ G.GlobalApis = {
   GetActiveTalentGroup = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetActiveTitle = true,
@@ -1969,6 +1989,7 @@ G.GlobalApis = {
   GetBackpackCurrencyInfo = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetBagName = true,
@@ -1987,6 +2008,11 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wowt = true,
+    },
+  },
+  GetBattlefieldAutoQueueMapName = {
+    products = {
+      wow_classic_ptr = true,
     },
   },
   GetBattlefieldEstimatedWaitTime = true,
@@ -2074,6 +2100,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -2082,6 +2109,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -2090,6 +2118,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -2098,6 +2127,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -2139,6 +2169,7 @@ G.GlobalApis = {
   GetCompanionCooldown = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetCompanionInfo = {
@@ -2146,6 +2177,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -2154,6 +2186,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -2162,6 +2195,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -2170,6 +2204,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -2194,6 +2229,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -2397,32 +2433,38 @@ G.GlobalApis = {
   GetCurrencyInfo = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetCurrencyLink = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetCurrencyListInfo = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetCurrencyListLink = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetCurrencyListSize = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetCurrentArenaSeason = true,
   GetCurrentArenaSeasonUsesTeams = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetCurrentBindingSet = true,
@@ -2643,11 +2685,13 @@ G.GlobalApis = {
   GetGlyphLink = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetGlyphSocketInfo = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetGossipActiveQuests = {
@@ -2693,6 +2737,7 @@ G.GlobalApis = {
   GetGroupPreviewTalentPointsSpent = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetGuildAchievementMemberInfo = {
@@ -2748,6 +2793,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -2861,6 +2907,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3284,6 +3331,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3292,6 +3340,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3301,6 +3350,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3309,6 +3359,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3418,6 +3469,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3482,6 +3534,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3501,6 +3554,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3599,6 +3653,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3611,6 +3666,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3619,6 +3675,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3627,6 +3684,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3675,6 +3733,7 @@ G.GlobalApis = {
   GetNumGlyphSockets = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetNumGossipActiveQuests = {
@@ -3721,6 +3780,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3774,6 +3834,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3795,6 +3856,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3858,6 +3920,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -3933,6 +3996,7 @@ G.GlobalApis = {
   GetNumTalentGroups = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetNumTalentTabs = {
@@ -3959,6 +4023,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4038,6 +4103,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4046,6 +4112,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4141,6 +4208,7 @@ G.GlobalApis = {
   GetPendingGlyphInfo = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetPendingGlyphName = {
@@ -4156,6 +4224,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4191,6 +4260,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4240,6 +4310,7 @@ G.GlobalApis = {
   GetPreviewTalentPointsSpent = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetPreviousAchievement = {
@@ -4247,6 +4318,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4254,6 +4326,7 @@ G.GlobalApis = {
   GetPreviousArenaSeasonUsesTeams = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetPrimarySpecialization = {
@@ -4314,6 +4387,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4322,6 +4396,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4375,6 +4450,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4391,6 +4467,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4452,6 +4529,7 @@ G.GlobalApis = {
   GetQuestLogRewardArenaPoints = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetQuestLogRewardArtifactXP = {
@@ -4466,6 +4544,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4490,6 +4569,7 @@ G.GlobalApis = {
   GetQuestLogRewardTalents = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetQuestLogRewardTitle = true,
@@ -4498,6 +4578,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4515,6 +4596,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4523,6 +4605,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4582,6 +4665,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4610,6 +4694,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4704,6 +4789,7 @@ G.GlobalApis = {
   GetRewardArenaPoints = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetRewardArtifactXP = {
@@ -4782,6 +4868,7 @@ G.GlobalApis = {
   GetRewardTalentPoints = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetRewardText = true,
@@ -4792,6 +4879,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -4805,6 +4893,7 @@ G.GlobalApis = {
   GetRuneType = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetRunningMacro = true,
@@ -5079,6 +5168,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -5087,6 +5177,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -5129,6 +5220,7 @@ G.GlobalApis = {
   GetTalentGroupRole = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetTalentInfo = true,
@@ -5210,6 +5302,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -5225,6 +5318,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -5236,6 +5330,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -5263,6 +5358,7 @@ G.GlobalApis = {
   GetTradeSkillDescription = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetTradeSkillIcon = {
@@ -5349,6 +5445,7 @@ G.GlobalApis = {
   GetTradeSkillListLink = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetTradeSkillNumMade = {
@@ -5550,6 +5647,7 @@ G.GlobalApis = {
   GetUnspentTalentPoints = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GetVehicleBarIndex = {
@@ -5557,6 +5655,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -5676,6 +5775,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -5686,6 +5786,7 @@ G.GlobalApis = {
   GlyphMatchesSocket = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   GroupHasOfflineMember = true,
@@ -5773,6 +5874,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -5829,6 +5931,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -5855,6 +5958,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -5897,6 +6001,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -5918,6 +6023,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -5979,6 +6085,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -6118,6 +6225,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -6259,6 +6367,7 @@ G.GlobalApis = {
     products = {
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   IsPlayerInWorld = true,
@@ -6275,6 +6384,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -6318,6 +6428,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -6441,6 +6552,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -6450,6 +6562,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -6470,6 +6583,7 @@ G.GlobalApis = {
   IsTradeSkillLinked = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   IsTradeskillTrainer = true,
@@ -6518,6 +6632,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -6526,6 +6641,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -6534,6 +6650,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -6552,6 +6669,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -6581,6 +6699,11 @@ G.GlobalApis = {
   ItemTextPrevPage = true,
   JoinArena = true,
   JoinBattlefield = true,
+  JoinBattlefieldAutoQueue = {
+    products = {
+      wow_classic_ptr = true,
+    },
+  },
   JoinChannelByName = true,
   JoinLFG = {
     products = {
@@ -6648,6 +6771,7 @@ G.GlobalApis = {
   LearnPreviewTalents = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   LearnPvpTalent = {
@@ -6845,6 +6969,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -6852,6 +6977,7 @@ G.GlobalApis = {
   PickupCurrency = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   PickupGuildBankItem = true,
@@ -6898,6 +7024,7 @@ G.GlobalApis = {
   PlaceGlyphInSocket = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   PlaceRaidMarker = {
@@ -6990,6 +7117,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -7140,6 +7268,7 @@ G.GlobalApis = {
   RemoveGlyphFromSocket = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   RemoveItemFromArtifact = {
@@ -7177,6 +7306,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -7239,6 +7369,7 @@ G.GlobalApis = {
   RequestInviteFromUnit = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   RequestLFDPartyLockInfo = {
@@ -7266,6 +7397,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -7282,6 +7414,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -7296,12 +7429,14 @@ G.GlobalApis = {
   ResetGroupPreviewTalentPoints = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   ResetInstances = true,
   ResetPreviewTalentPoints = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   ResetSetMerchantFilter = {
@@ -7484,6 +7619,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -7499,6 +7635,7 @@ G.GlobalApis = {
   SetActiveTalentGroup = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   SetAddonVersionCheck = true,
@@ -7589,11 +7726,13 @@ G.GlobalApis = {
   SetCurrencyBackpack = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   SetCurrencyUnused = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   SetCurrentGraphicsSetting = true,
@@ -7726,6 +7865,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -7772,7 +7912,6 @@ G.GlobalApis = {
       wow_classic = true,
       wow_classic_era = true,
       wow_classic_era_ptr = true,
-      wow_classic_ptr = true,
     },
   },
   SetPendingReportTarget = {
@@ -7780,7 +7919,6 @@ G.GlobalApis = {
       wow_classic = true,
       wow_classic_era = true,
       wow_classic_era_ptr = true,
-      wow_classic_ptr = true,
     },
   },
   SetPetSlot = {
@@ -7882,6 +8020,7 @@ G.GlobalApis = {
   SetTalentGroupRole = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   SetTaxiBenchmarkMode = true,
@@ -7940,6 +8079,7 @@ G.GlobalApis = {
   ShiftQuestWatches = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   ShouldKnowUnitHealth = {
@@ -8083,6 +8223,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8240,6 +8381,7 @@ G.GlobalApis = {
   StopTradeSkillRepeat = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   StoreSecureReference = true,
@@ -8449,6 +8591,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8483,6 +8626,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8524,6 +8668,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8532,6 +8677,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8586,6 +8732,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8594,6 +8741,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8602,6 +8750,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8825,6 +8974,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8844,6 +8994,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8866,12 +9017,14 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
   UnitVehicleSkinType = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   UnitWeaponAttackPower = {
@@ -8935,6 +9088,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8964,6 +9118,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8972,6 +9127,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8980,6 +9136,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8988,6 +9145,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -8996,6 +9154,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -9004,6 +9163,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -9012,6 +9172,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -9020,6 +9181,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -9028,6 +9190,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -9036,6 +9199,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -9044,6 +9208,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -9052,17 +9217,20 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
   VehicleCameraZoomIn = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   VehicleCameraZoomOut = {
     products = {
       wow_classic_beta = true,
+      wow_classic_ptr = true,
     },
   },
   VehicleExit = {
@@ -9070,6 +9238,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -9078,6 +9247,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
@@ -9086,6 +9256,7 @@ G.GlobalApis = {
       wow = true,
       wow_beta = true,
       wow_classic_beta = true,
+      wow_classic_ptr = true,
       wowt = true,
     },
   },
