@@ -18,22 +18,30 @@ local addonGeneratedFiles = (function()
   for i, v in ipairs(t) do
     t[i] = 'addon/Wowless/' .. v .. '.lua'
   end
-  return table.concat(t, ' ')
+  return t
 end)()
 
 local taintedLua = 'tainted-lua/build/linux/bin/Release/lua5.1'
 
 local wowlessFiles = (function()
+  local skip = {
+    ['tools/mkninja.lua'] = true,
+    ['wowless/ext.o'] = true,
+    ['wowless/ext.so'] = true,
+  }
+  for _, k in ipairs(addonGeneratedFiles) do
+    skip[k] = true
+  end
   local f = io.popen('find addon data tools wowapi wowless -type f')
   local deps = f:read('*a')
   f:close()
   local t = {}
   for k in deps:gmatch('[^\n]+') do
-    if not addonGeneratedFiles:find(k) and k ~= 'wowless/ext.o' and k ~= 'wowless/ext.so' then
+    if not skip[k] then
       table.insert(t, k)
     end
   end
-  return table.concat(t, ' ')
+  return t
 end)()
 
 local rules = {
