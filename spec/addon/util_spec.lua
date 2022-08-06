@@ -1,6 +1,6 @@
 describe('util', function()
   local env = {}
-  loadfile('addon/Wowless/util.lua')('foo', env)
+  loadfile('addon/universal/Wowless/util.lua')('foo', env)
 
   describe('assertRecursivelyEqual', function()
     local f = assert(env.assertRecursivelyEqual)

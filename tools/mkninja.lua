@@ -30,7 +30,7 @@ local addonGeneratedTypes = {
 
 local addonGeneratedFiles = {}
 for k in pairs(addonGeneratedTypes) do
-  table.insert(addonGeneratedFiles, 'addon/Wowless/' .. k .. '.lua')
+  table.insert(addonGeneratedFiles, 'addon/universal/Wowless/' .. k .. '.lua')
 end
 
 local taintedLua = 'tainted-lua/build/linux/bin/Release/lua5.1'
@@ -83,7 +83,7 @@ for k, v in pairs(addonGeneratedTypes) do
     args = { ['type'] = k },
     ins = { taintedLua, v },
     rule = 'mkaddon',
-    outs = 'addon/Wowless/' .. k .. '.lua',
+    outs = 'addon/universal/Wowless/' .. k .. '.lua',
   })
 end
 

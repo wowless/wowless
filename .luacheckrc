@@ -16,7 +16,7 @@ read_globals = {
   'table.removemulti',
   'table.wipe',
 }
-files['addon/Wowless'] = {
+files['addon/universal/Wowless'] = {
   read_globals = {
     'abs',
     'C_CovenantSanctumUI',
@@ -34,7 +34,7 @@ files['addon/Wowless'] = {
     'WOW_PROJECT_MAINLINE',
   },
 }
-files['addon/Wowless/global_*'] = {
+files['addon/universal/Wowless/global_*'] = {
   max_line_length = false,
 }
 -- TODO remove this when it is no longer necessary
