@@ -2012,6 +2012,7 @@ G.GlobalApis = {
   },
   GetBattlefieldAutoQueueMapName = {
     products = {
+      wow_classic_beta = true,
       wow_classic_ptr = true,
     },
   },
@@ -6384,6 +6385,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wow_classic_ptr = true,
       wowt = true,
     },
@@ -6701,6 +6703,7 @@ G.GlobalApis = {
   JoinBattlefield = true,
   JoinBattlefieldAutoQueue = {
     products = {
+      wow_classic_beta = true,
       wow_classic_ptr = true,
     },
   },
@@ -7397,6 +7400,7 @@ G.GlobalApis = {
     products = {
       wow = true,
       wow_beta = true,
+      wow_classic_beta = true,
       wow_classic_ptr = true,
       wowt = true,
     },

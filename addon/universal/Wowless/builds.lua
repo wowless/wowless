@@ -28,8 +28,8 @@ G.Builds = {
     version = '2.5.4',
   },
   wow_classic_beta = {
-    build = '44729',
-    date = 'Jul 18 2022',
+    build = '44930',
+    date = 'Aug  1 2022',
     flavor = 'Wrath',
     ptr = true,
     test = true,

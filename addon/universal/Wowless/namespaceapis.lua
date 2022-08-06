@@ -1466,6 +1466,7 @@ G.NamespaceApis = {
         products = {
           wow = true,
           wow_beta = true,
+          wow_classic_beta = true,
           wow_classic_ptr = true,
           wowt = true,
         },
@@ -4224,6 +4225,7 @@ G.NamespaceApis = {
       },
       GetRandomBGLossRewards = {
         products = {
+          wow_classic_beta = true,
           wow_classic_ptr = true,
         },
       },
@@ -4231,6 +4233,7 @@ G.NamespaceApis = {
         products = {
           wow = true,
           wow_beta = true,
+          wow_classic_beta = true,
           wow_classic_ptr = true,
           wowt = true,
         },

@@ -456,6 +456,7 @@ G.CVars = {
   Sound_EnableDSPEffects = {
     wow = '1',
     wow_beta = '1',
+    wow_classic_beta = '1',
     wow_classic_ptr = '1',
     wowt = '1',
   },
@@ -1996,6 +1997,7 @@ G.CVars = {
   preloadStreamingDistObject = '64',
   preloadStreamingDistTerrain = '256',
   previewTalents = {
+    wow_classic_beta = '0',
     wow_classic_ptr = '0',
   },
   primaryProfessionsFilter = '1',
