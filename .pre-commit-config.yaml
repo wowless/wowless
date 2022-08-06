@@ -39,7 +39,7 @@ repos:
     files: ^addon/
   - id: local-test
     name: build and test
-    entry: lua tools/mkninja.lua && ninja
+    entry: sh -c "lua tools/mkninja.lua && ninja"
     language: system
     pass_filenames: false
   - id: docker-build-and-run
