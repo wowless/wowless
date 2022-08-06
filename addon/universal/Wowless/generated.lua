@@ -1,25 +1,8 @@
 local _, G = ...
 local assertEquals = _G.assertEquals
 
-local runtimeProduct = (function()
-  local isPTR = _G.GetCVar('portal') == 'test'
-  if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
-    return isPTR and 'wow_classic_era_ptr' or 'wow_classic_era'
-  elseif WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
-    local wrath = GetBuildInfo():sub(1, 1) == '3'
-    return wrath and 'wow_classic_beta' or isPTR and 'wow_classic_ptr' or 'wow_classic'
-  elseif WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
-    local dragon = GetBuildInfo():sub(1, 1) ~= '9'
-    return dragon and 'wow_beta' or isPTR and 'wowt' or 'wow'
-  else
-    error('invalid product')
-  end
-end)()
-
-do
-  local print = print or _G.__wowless.dump
-  print('Wowless thinks this is ' .. runtimeProduct .. '.')
-end
+assert(_G.WowlessData, 'missing WowlessData')
+local runtimeProduct = assert(_G.WowlessData.product, 'missing product')
 
 local function tget(t, s)
   local dot = s:find('%.')

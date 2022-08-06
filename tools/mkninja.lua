@@ -45,7 +45,7 @@ local wowlessFiles = (function()
     skip[k] = true
   end
   local t = {}
-  for _, k in ipairs(find('addon data tools wowapi wowless')) do
+  for _, k in ipairs(find('addon data spec tools wowapi wowless')) do
     if not skip[k] then
       table.insert(t, k)
     end

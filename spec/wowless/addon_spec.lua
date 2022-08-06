@@ -3,7 +3,10 @@ expose('addon', function()
     describe(product, function()
       it('runs', function()
         local api = require('wowless.runner').run({
-          otherAddonDirs = { 'addon/universal/Wowless' },
+          otherAddonDirs = {
+            'addon/' .. product .. '/WowlessData',
+            'addon/universal/Wowless',
+          },
           product = product,
         })
         assert.True(api.env.WowlessTestsDone)
