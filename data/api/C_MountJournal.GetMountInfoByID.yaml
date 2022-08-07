@@ -30,6 +30,8 @@ outputs:
   type: boolean
 - name: mountID
   type: number
+- name: isForDragonriding
+  type: boolean
 products:
 - wow
 - wowt

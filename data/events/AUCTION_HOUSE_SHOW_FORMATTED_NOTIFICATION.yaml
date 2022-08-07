@@ -6,3 +6,6 @@ payload:
   type: number
 - name: text
   type: string
+- name: auctionID
+  nilable: true
+  type: number

@@ -13,6 +13,8 @@ fields:
 - name: crossFactionListing
   nilable: true
   type: boolean
+- name: hasSelf
+  type: boolean
 - name: isDelisted
   type: boolean
 - name: isWarMode

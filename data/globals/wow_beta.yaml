@@ -1472,67 +1472,69 @@ Enum:
     NumValues: 4
   Cursormode:
     AttackCursor: 4
-    AttackErrorCursor: 33
+    AttackErrorCursor: 34
     BuyCursor: 3
-    BuyErrorCursor: 32
+    BuyErrorCursor: 33
+    CampaignQuestCursor: 23
+    CampaignQuestErrorCursor: 53
     CastCursor: 2
-    CastErrorCursor: 31
-    CustomCursor: 57
+    CastErrorCursor: 32
+    CustomCursor: 59
     GatherCursor: 13
-    GatherErrorCursor: 42
+    GatherErrorCursor: 43
     InnkeeperCursor: 22
-    InnkeeperErrorCursor: 51
+    InnkeeperErrorCursor: 52
     InspectCursor: 7
-    InspectErrorCursor: 36
+    InspectErrorCursor: 37
     InteractCursor: 5
-    InteractErrorCursor: 34
+    InteractErrorCursor: 35
     ItemCursor: 19
-    ItemErrorCursor: 48
+    ItemErrorCursor: 49
     LockCursor: 14
-    LockErrorCursor: 43
+    LockErrorCursor: 44
     LootAllCursor: 16
-    LootAllErrorCursor: 45
+    LootAllErrorCursor: 46
     MailCursor: 15
-    MailErrorCursor: 44
-    MapPinCursor: 29
-    MapPinErrorCursor: 56
+    MailErrorCursor: 45
+    MapPinCursor: 30
+    MapPinErrorCursor: 58
     MineCursor: 11
-    MineErrorCursor: 40
+    MineErrorCursor: 41
     NoCursor: 0
     PickupCursor: 8
-    PickupErrorCursor: 37
+    PickupErrorCursor: 38
     PointCursor: 1
-    PointErrorCursor: 30
-    QuestCursor: 23
-    QuestErrorCursor: 52
-    QuestRepeatableCursor: 24
-    QuestRepeatableErrorCursor: 53
-    QuestTurninCursor: 25
-    QuestTurninErrorCursor: 54
+    PointErrorCursor: 31
+    QuestCursor: 24
+    QuestErrorCursor: 54
+    QuestRepeatableCursor: 25
+    QuestRepeatableErrorCursor: 55
+    QuestTurninCursor: 26
+    QuestTurninErrorCursor: 56
     RepairCursor: 17
-    RepairErrorCursor: 46
+    RepairErrorCursor: 47
     RepairnpcCursor: 18
-    RepairnpcErrorCursor: 47
+    RepairnpcErrorCursor: 48
     SkinAllianceCursor: 21
-    SkinAllianceErrorCursor: 50
+    SkinAllianceErrorCursor: 51
     SkinCursor: 12
-    SkinErrorCursor: 41
+    SkinErrorCursor: 42
     SkinHordeCursor: 20
-    SkinHordeErrorCursor: 49
+    SkinHordeErrorCursor: 50
     SpeakCursor: 6
-    SpeakErrorCursor: 35
+    SpeakErrorCursor: 36
     TaxiCursor: 9
-    TaxiErrorCursor: 38
+    TaxiErrorCursor: 39
     TrainerCursor: 10
-    TrainerErrorCursor: 39
-    UIMoveCursor: 27
-    UIResizeCursor: 28
-    VehicleCursor: 26
-    VehicleErrorCursor: 55
+    TrainerErrorCursor: 40
+    UIMoveCursor: 28
+    UIResizeCursor: 29
+    VehicleCursor: 27
+    VehicleErrorCursor: 57
   CursormodeMeta:
-    MaxValue: 57
+    MaxValue: 59
     MinValue: 0
-    NumValues: 58
+    NumValues: 60
   CursorStyle:
     Crosshair: 1
     Mouse: 0
@@ -1605,6 +1607,18 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  EditModeAccountSetting:
+    GridSpacing: 1
+    SettingsExpanded: 2
+    ShowGrid: 0
+    ShowPetActionBar: 5
+    ShowPossessActionBar: 6
+    ShowStanceBar: 4
+    ShowTargetAndFocus: 3
+  EditModeAccountSettingMeta:
+    MaxValue: 6
+    MinValue: 0
+    NumValues: 7
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
     HideBarArt: 6
@@ -1620,6 +1634,19 @@ Enum:
     MaxValue: 9
     MinValue: 0
     NumValues: 10
+  EditModeActionBarSystemIndices:
+    Bar2: 2
+    Bar3: 3
+    MainBar: 1
+    PetActionBar: 12
+    PossessActionBar: 13
+    RightBar1: 4
+    RightBar2: 5
+    StanceBar: 11
+  EditModeActionBarSystemIndicesMeta:
+    MaxValue: 13
+    MinValue: 1
+    NumValues: 8
   EditModeCastBarSetting:
     BarSize: 0
   EditModeCastBarSettingMeta:
@@ -1659,9 +1686,27 @@ Enum:
     ActionBar: 0
     CastBar: 1
     Minimap: 2
+    UnitFrame: 3
   EditModeSystemMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
+    NumValues: 4
+  EditModeUnitFrameSetting:
+    BuffsOnTop: 2
+    CastBarUnderneath: 1
+    HidePortrait: 0
+    UseLargerFrame: 3
+  EditModeUnitFrameSettingMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
+  EditModeUnitFrameSystemIndices:
+    Focus: 3
+    Player: 1
+    Target: 2
+  EditModeUnitFrameSystemIndicesMeta:
+    MaxValue: 3
+    MinValue: 1
     NumValues: 3
   EnvironmentalDamageFlags:
     DmgIsPct: 2
@@ -1717,11 +1762,12 @@ Enum:
     Scenario: 14
     SpellLearned: 21
     SpellScript: 18
+    TreasureItem: 22
     WorldStateChange: 13
   EventToastEventTypeMeta:
-    MaxValue: 21
+    MaxValue: 22
     MinValue: 0
-    NumValues: 22
+    NumValues: 23
   FlightPathFaction:
     Alliance: 2
     Horde: 1
@@ -3266,6 +3312,8 @@ Enum:
     Skinning: 11
     Tailoring: 7
   ProfessionEffect:
+    DecreaseDifficulty: 22
+    IncreaseDifficulty: 23
     ModCraftCrit: 9
     ModCraftCritSize: 20
     ModCraftExtra: 15
@@ -3279,6 +3327,7 @@ Enum:
     ModGatherRange: 17
     ModGatherTimeDecrease: 12
     ModGatherTimeIncrease: 16
+    ModSkillGain: 24
     Skill: 0
     StatCraftingSpeed: 6
     StatDeftness: 4
@@ -3289,9 +3338,9 @@ Enum:
     StatResourcefulness: 2
     UnlockReagentSlot: 8
   ProfessionEffectMeta:
-    MaxValue: 21
+    MaxValue: 24
     MinValue: 0
-    NumValues: 22
+    NumValues: 25
   ProfessionMeta:
     MaxValue: 14
     MinValue: 0
@@ -3637,6 +3686,15 @@ Enum:
     MaxValue: 6
     MinValue: 0
     NumValues: 7
+  ScrubStringFlags:
+    AllowBarCodes: 2
+    None: 0
+    StripControlCodes: 4
+    TruncateNewLines: 1
+  ScrubStringFlagsMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 4
   SelfResurrectOptionType:
     Item: 1
     Spell: 0
@@ -3934,12 +3992,13 @@ Enum:
     NumValues: 4
   TraitConfigType:
     Combat: 1
+    Generic: 3
     Invalid: 0
     Profession: 2
   TraitConfigTypeMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   TraitCostDefinitionType:
     Gold: 3
     Item: 2
@@ -4402,24 +4461,24 @@ Enum:
     MinValue: 0
     NumValues: 5
   ValidateNameResult:
-    NameConsecutiveSpaces: 13
-    NameDeclensionDoesntMatchBaseName: 16
-    NameFailure: 1
-    NameInvalidApostrophe: 9
-    NameInvalidCharacter: 5
-    NameInvalidSpace: 12
-    NameMixedLanguages: 6
-    NameMultipleApostrophes: 10
-    NameNoName: 2
-    NameProfane: 7
-    NameReserved: 8
-    NameRussianConsecutiveSilentCharacters: 14
-    NameRussianSilentCharacterAtBeginningOrEnd: 15
-    NameSpacesDisallowed: 17
-    NameSuccess: 0
-    NameThreeConsecutive: 11
-    NameTooLong: 4
-    NameTooShort: 3
+    ConsecutiveSpaces: 13
+    DeclensionDoesntMatchBaseName: 16
+    Failure: 1
+    InvalidApostrophe: 9
+    InvalidCharacter: 5
+    InvalidSpace: 12
+    MixedLanguages: 6
+    MultipleApostrophes: 10
+    NoName: 2
+    Profane: 7
+    Reserved: 8
+    RussianConsecutiveSilentCharacters: 14
+    RussianSilentCharacterAtBeginningOrEnd: 15
+    SpacesDisallowed: 17
+    Success: 0
+    ThreeConsecutive: 11
+    TooLong: 4
+    TooShort: 3
   ValidateNameResultMeta:
     MaxValue: 17
     MinValue: 0

@@ -36,5 +36,7 @@ fields:
   type: string
 - name: showQuickJoinToast
   type: boolean
+- name: useDungeonRoleExpectations
+  type: boolean
 - name: useHonorLevel
   type: boolean

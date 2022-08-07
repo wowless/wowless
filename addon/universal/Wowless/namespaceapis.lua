@@ -662,6 +662,14 @@ G.NamespaceApis = {
       UpdateEvent = true,
     },
   },
+  C_CameraDefaults = {
+    methods = {
+      GetCameraFOVDefaults = true,
+    },
+    products = {
+      wow_beta = true,
+    },
+  },
   C_CampaignInfo = {
     methods = {
       GetAvailableCampaigns = true,
@@ -1613,10 +1621,14 @@ G.NamespaceApis = {
       ConvertLayoutInfoToHyperlink = true,
       ConvertLayoutInfoToString = true,
       ConvertStringToLayoutInfo = true,
+      GetAccountSettings = true,
       GetEditModeInfo = true,
+      GetLayouts = true,
       OnLayoutAdded = true,
       OnLayoutDeleted = true,
       SaveEditModeInfo = true,
+      SaveLayouts = true,
+      SetAccountSetting = true,
       SetActiveLayout = true,
     },
     products = {
@@ -3329,6 +3341,11 @@ G.NamespaceApis = {
       ClearRecentFanfares = true,
       Dismiss = true,
       GetAppliedMountEquipmentID = true,
+      GetCollectedDragonridingMounts = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetCollectedFilterSetting = true,
       GetDisplayedMountAllCreatureDisplayInfo = true,
       GetDisplayedMountID = {
@@ -3380,6 +3397,11 @@ G.NamespaceApis = {
       GetCurrentAffixes = true,
       GetCurrentSeason = true,
       GetCurrentSeasonValues = true,
+      GetCurrentUIDisplaySeason = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetLastWeeklyBestInformation = true,
       GetOwnedKeystoneChallengeMapID = true,
       GetOwnedKeystoneLevel = true,
@@ -3945,6 +3967,7 @@ G.NamespaceApis = {
       CanUnlockTab = true,
       GetChildrenForPath = true,
       GetConfigIDForSkillLine = true,
+      GetDefaultSpecSkillLine = true,
       GetDescriptionForPath = true,
       GetDescriptionForPerk = true,
       GetEntryIDForPerk = true,
@@ -3952,6 +3975,7 @@ G.NamespaceApis = {
       GetRootPathForTab = true,
       GetSourceTextForPath = true,
       GetSpecTabIDsForSkillLine = true,
+      GetSpecTabInfo = true,
       GetSpendCurrencyForPath = true,
       GetSpendEntryForPath = true,
       GetStateForPath = true,
@@ -3962,6 +3986,7 @@ G.NamespaceApis = {
       GetUnspentPointsForSkillLine = true,
       PerkIsEarned = true,
       ShouldShowSpecForSkillLine = true,
+      ShouldShowSpecTab = true,
       SkillLineHasSpecialization = true,
     },
     products = {
@@ -4257,6 +4282,11 @@ G.NamespaceApis = {
           wow = true,
           wow_beta = true,
           wowt = true,
+        },
+      },
+      GetRatedSoloShuffleMinItemLevel = {
+        products = {
+          wow_beta = true,
         },
       },
       GetRewardItemLevelsByTierEnum = {
@@ -5391,6 +5421,15 @@ G.NamespaceApis = {
       wowt = true,
     },
   },
+  C_Sound = {
+    methods = {
+      GetSoundScaledVolume = true,
+      IsPlaying = true,
+    },
+    products = {
+      wow_beta = true,
+    },
+  },
   C_SpecializationInfo = {
     methods = {
       CanPlayerUsePVPTalentUI = true,
@@ -5434,6 +5473,11 @@ G.NamespaceApis = {
       ContainsAnyDisenchantSpell = true,
       GetCurrentLevelSpells = true,
       GetDeadlyDebuffInfo = {
+        products = {
+          wow_beta = true,
+        },
+      },
+      GetOverrideSpell = {
         products = {
           wow_beta = true,
         },
@@ -5775,6 +5819,11 @@ G.NamespaceApis = {
           wow_beta = true,
         },
       },
+      GetReagentDifficultyText = {
+        products = {
+          wow_beta = true,
+        },
+      },
       GetReagentSlotStatus = {
         products = {
           wow_beta = true,
@@ -5915,9 +5964,11 @@ G.NamespaceApis = {
     methods = {
       CanPurchaseRank = true,
       CanRefundRank = true,
+      CloseTraitSystemInteraction = true,
       CommitConfig = true,
       ConfigHasStagedChanges = true,
       GetConditionInfo = true,
+      GetConfigIDBySystemID = true,
       GetConfigInfo = true,
       GetConfigsByType = true,
       GetDefinitionInfo = true,

@@ -8,6 +8,8 @@ fields:
 - name: battlePetLink
   nilable: true
   type: string
+- name: battlePetSpeciesID
+  type: number
 - name: iconFileID
   type: number
 - name: isCommodity
@@ -16,6 +18,8 @@ fields:
   type: boolean
 - name: isPet
   type: boolean
+- name: itemID
+  type: number
 - name: itemName
   type: string
 - name: quality
