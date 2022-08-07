@@ -5,7 +5,7 @@ local args = (function()
   return parser:parse()
 end)()
 if not next(args.types) then
-  args.types = { 'apis', 'enums', 'events', 'structures' }
+  args.types = { 'apis', 'constants', 'enums', 'events', 'structures' }
 end
 local enabledTypes = {}
 for _, ty in ipairs(args.types) do
@@ -313,6 +313,7 @@ if enabledTypes.events then
     end
   end
 end
+
 if enabledTypes.enums then
   local t = {}
   for _, v in pairs(tabs) do
@@ -342,6 +343,32 @@ if enabledTypes.enums then
     local g = y.parseFile(f)
     for k, v in pairs(t) do
       g.Enum[k] = v
+    end
+    require('pl.file').write(f, y.pprint(g))
+  end
+end
+
+if enabledTypes.constants then
+  local t = {}
+  for _, v in pairs(tabs) do
+    if v.Type == 'Constants' then
+      local vt = {}
+      assert(type(v.Values) == 'table')
+      for _, fv in ipairs(v.Values) do
+        assert(type(fv.Name) == 'string', 'missing name for field of ' .. v.Name)
+        -- TODO fv.Type validation
+        -- TODO support non-number-literal constants
+        vt[fv.Name] = type(fv.Value) == 'number' and fv.Value or 0
+      end
+      t[v.Name] = vt
+    end
+  end
+  for _, p in ipairs(products) do
+    local y = require('wowapi.yaml')
+    local f = 'data/globals/' .. p .. '.yaml'
+    local g = y.parseFile(f)
+    for k, v in pairs(t) do
+      g.Constants[k] = v
     end
     require('pl.file').write(f, y.pprint(g))
   end

@@ -32,11 +32,23 @@ G.Globals_wow_beta = {
       QUESTIONMARK_INV_ICON = 134400,
       WAR_RESOURCES_CURRENCY_ID = 1560,
     },
+    EditModeConsts = {
+      EditModeDefaultGridSpacing = 40,
+      EditModeMaxGridSpacing = 80,
+      EditModeMinGridSpacing = 20,
+    },
     ITEM_WEAPON_SUBCLASSConstants = {
       ITEM_WEAPON_SUBCLASS_NONE = -1,
     },
     LevelConstsExposed = {
+      MIN_ACHIEVEMENT_LEVEL = 10,
       MIN_RES_SICKNESS_LEVEL = 10,
+    },
+    ProfessionConsts = {
+      CLASSIC_PROFESSION_PARENT_TIER_INDEX = 4,
+      NUM_PRIMARY_PROFESSIONS = 2,
+      RUNEFORGING_ROOT_CATEGORY_ID = 210,
+      RUNEFORGING_SKILL_LINE_ID = 960,
     },
     ProfessionIDs = {
       PROFESSION_ALCHEMY = 171,
