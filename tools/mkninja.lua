@@ -53,11 +53,27 @@ local wowlessFiles = (function()
   return t
 end)()
 
+local pools = {
+  fetch_pool = 1,
+}
+
 local rules = {
-  mkaddon = taintedLua .. ' tools/gentest.lua -f $type',
-  mktaintedlua = 'cd tainted-lua && rm -rf build && cmake --preset linux && cmake --build --preset linux',
-  mktestout = 'bash -c "set -o pipefail && busted 2>&1 | tee test.out"',
-  mkwowlessext = 'luarocks build --no-install',
+  fetch = {
+    command = 'lua tools/fetch.lua $product && touch extracts/$product.stamp',
+    pool = 'fetch_pool',
+  },
+  mkaddon = {
+    command = taintedLua .. ' tools/gentest.lua -f $type',
+  },
+  mktaintedlua = {
+    command = 'cd tainted-lua && rm -rf build && cmake --preset linux && cmake --build --preset linux',
+  },
+  mktestout = {
+    command = 'bash -c "set -o pipefail && busted 2>&1 | tee test.out"',
+  },
+  mkwowlessext = {
+    command = 'luarocks build --no-install',
+  },
 }
 
 local builds = {
@@ -87,6 +103,15 @@ for k, v in pairs(addonGeneratedTypes) do
   })
 end
 
+for _, p in ipairs(require('wowless.util').productList()) do
+  table.insert(builds, {
+    args = { product = p },
+    ins = { 'data/builds.yaml', 'tools/fetch.lua' },
+    rule = 'fetch',
+    outs = 'extracts/' .. p .. '.stamp',
+  })
+end
+
 local function flatten(x)
   local t = {}
   local function doit(y)
@@ -110,9 +135,15 @@ end
 table.sort(rulenames)
 
 local out = {}
+for p, n in pairs(pools) do
+  table.insert(out, 'pool ' .. p)
+  table.insert(out, '  depth = ' .. n)
+end
 for _, k in ipairs(rulenames) do
   table.insert(out, 'rule ' .. k)
-  table.insert(out, '  command = ' .. rules[k])
+  for rk, rv in pairs(rules[k]) do
+    table.insert(out, '  ' .. rk .. ' = ' .. rv)
+  end
 end
 for _, b in ipairs(builds) do
   local ins = flatten(b.ins)
@@ -122,6 +153,7 @@ for _, b in ipairs(builds) do
     table.insert(out, '  ' .. k .. ' = ' .. v)
   end
 end
+table.insert(out, 'default test.out')
 
 local f = io.open('build.ninja', 'w')
 f:write(table.concat(out, '\n'))

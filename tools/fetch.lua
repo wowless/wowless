@@ -1,9 +1,12 @@
 local args = (function()
   local parser = require('argparse')()
   parser:argument('product', 'product to fetch')
+  parser:flag('-v --verbose', 'verbose')
   return parser:parse()
 end)()
 local product = args.product
+
+local log = args.verbose and print or function() end
 
 local productToSuffix = {
   wow = 'Mainline',
@@ -35,7 +38,7 @@ local handle = (function()
     cdn = cdn,
     ckey = ckey,
     locale = casc.locale.US,
-    log = print,
+    log = log,
     zerofillEncryptedChunks = true,
   })
   if not handle then
@@ -64,7 +67,7 @@ path.remove(path.join(outdir, product))
 require('lfs').link(build, path.join(outdir, product), true)
 
 local function save(fn, content)
-  print('writing', fn)
+  log('writing', fn)
   path.mkdir(path.dirname(path.join(outdir, build, fn)))
   require('pl.file').write(path.join(outdir, build, fn), content)
 end
