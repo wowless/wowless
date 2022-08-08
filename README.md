@@ -10,14 +10,12 @@ Running on WoW client Lua/XML code requires some additional steps.
 From inside the container:
 
 ```sh
-bin/wowcig.sh
+lua tools/fetch.sh wow
 bin/run.sh --product wow
 ```
 
 The above will:
 
-* use [wowcig] to download WoW client Lua/XML interface code
-* load WoW retail FrameXML
+* download WoW retail client Lua/XML interface code
+* evaluate that code
 * mess around with the frames created: click around, mouse over things, etc.
-
-[wowcig]: https://github.com/lua-wow-tools/wowcig

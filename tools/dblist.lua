@@ -1,7 +1,7 @@
 return function(product)
   local dbset = {
-    globalstrings = true,
-    manifestinterfacetocdata = true,
+    GlobalStrings = true,
+    ManifestInterfaceTOCData = true,
   }
   for _, v in pairs(require('wowapi.data').apis) do
     local products = {}

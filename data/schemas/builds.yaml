@@ -12,6 +12,9 @@ type:
       flavor:
         required: true
         type: string
+      hash:
+        required: true
+        type: string
       ptr:
         required: true
         type: boolean
