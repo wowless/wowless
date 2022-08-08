@@ -55,6 +55,7 @@ end)()
 
 local pools = {
   fetch_pool = 1,
+  run_pool = 2,
 }
 
 local rules = {
@@ -73,6 +74,10 @@ local rules = {
   },
   mkwowlessext = {
     command = 'luarocks build --no-install',
+  },
+  run = {
+    command = taintedLua .. ' wowless.lua -p $product -e1 > out/$product.txt || true',
+    pool = 'run_pool',
   },
 }
 
@@ -109,6 +114,12 @@ for _, p in ipairs(require('wowless.util').productList()) do
     ins = { 'data/builds.yaml', 'tools/fetch.lua' },
     rule = 'fetch',
     outs = 'extracts/' .. p .. '.stamp',
+  })
+  table.insert(builds, {
+    args = { product = p },
+    ins = { 'wowless/ext.so', taintedLua, wowlessFiles },
+    rule = 'run',
+    outs = 'out/' .. p .. '.txt',
   })
 end
 
