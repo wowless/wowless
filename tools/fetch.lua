@@ -113,7 +113,6 @@ end
 for _, db in ipairs(require('tools.dblist')(product)) do
   save(path.join('db2', db .. '.db2'), handle:readFile(dbs.fdid(db)))
 end
-os.exit(0)
 
 processTocDir('Interface/FrameXML')
 do
