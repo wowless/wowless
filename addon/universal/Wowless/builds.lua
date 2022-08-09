@@ -11,7 +11,7 @@ G.Builds = {
     version = '9.2.5',
   },
   wow_beta = {
-    build = '44649',
+    build = '44895',
     date = 'Jul 12 2022',
     flavor = 'Mainline',
     hash = '1f55c275a6919d7954c520d8b854e268',
@@ -71,10 +71,10 @@ G.Builds = {
     version = '3.4.0',
   },
   wowt = {
-    build = '44931',
+    build = '44981',
     date = 'Aug  1 2022',
     flavor = 'Mainline',
-    hash = 'd309ce3bb48470fa113eab5a39ea403a',
+    hash = '3c2879060be7997717c1947a8a7b9d30',
     ptr = true,
     test = true,
     tocversion = 90207,
