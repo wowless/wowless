@@ -1,4 +1,17 @@
 .ninja_log
+addon/universal/Wowless/builds.lua
+addon/universal/Wowless/cvars.lua
+addon/universal/Wowless/global_wow.lua
+addon/universal/Wowless/global_wow_beta.lua
+addon/universal/Wowless/global_wow_classic.lua
+addon/universal/Wowless/global_wow_classic_beta.lua
+addon/universal/Wowless/global_wow_classic_era.lua
+addon/universal/Wowless/global_wow_classic_era_ptr.lua
+addon/universal/Wowless/global_wow_classic_ptr.lua
+addon/universal/Wowless/global_wowt.lua
+addon/universal/Wowless/globalapis.lua
+addon/universal/Wowless/namespaceapis.lua
+addon/universal/Wowless/uiobjectapis.lua
 build.ninja
 cache
 extracts
