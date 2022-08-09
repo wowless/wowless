@@ -4,16 +4,18 @@ local extLoaders = {
 }
 
 local function loaddir(dir, ext)
-  local len = ext:len()
-  local loader = extLoaders[ext]
-  local t = {}
-  for f in require('lfs').dir('data/' .. dir) do
-    if f:sub(-1 - len) == '.' .. ext then
-      local fn = f:sub(1, -2 - len)
-      t[fn] = loader('data/' .. dir .. '/' .. f)
+  return function()
+    local len = ext:len()
+    local loader = extLoaders[ext]
+    local t = {}
+    for f in require('lfs').dir('data/' .. dir) do
+      if f:sub(-1 - len) == '.' .. ext then
+        local fn = f:sub(1, -2 - len)
+        t[fn] = loader('data/' .. dir .. '/' .. f)
+      end
     end
+    return t
   end
-  return t
 end
 
 local function loadUIObjects()
@@ -22,23 +24,37 @@ local function loadUIObjects()
     if d ~= '.' and d ~= '..' then
       uiobjects[d] = {
         cfg = extLoaders.yaml(('data/uiobjects/%s/%s.yaml'):format(d, d)),
-        methods = loaddir('uiobjects/' .. d, 'lua'),
+        methods = loaddir('uiobjects/' .. d, 'lua')(),
       }
     end
   end
   return uiobjects
 end
 
-return {
+local function lazyyaml(f)
+  return function()
+    return extLoaders.yaml('data/' .. f .. '.yaml')
+  end
+end
+
+local fns = {
   apis = loaddir('api', 'yaml'),
-  builds = extLoaders.yaml('data/builds.yaml'),
-  cvars = extLoaders.yaml('data/cvars.yaml'),
+  builds = lazyyaml('builds'),
+  cvars = lazyyaml('cvars'),
   dbdefs = loaddir('dbdefs', 'yaml'),
   events = loaddir('events', 'yaml'),
   impl = loaddir('impl', 'lua'),
   schemas = loaddir('schemas', 'yaml'),
   state = loaddir('state', 'yaml'),
   structures = loaddir('structures', 'yaml'),
-  uiobjects = loadUIObjects(),
+  uiobjects = loadUIObjects,
   xml = loaddir('xml', 'yaml'),
 }
+
+return setmetatable({}, {
+  __index = function(t, k)
+    local v = assert(fns[k]())
+    t[k] = v
+    return v
+  end,
+})
