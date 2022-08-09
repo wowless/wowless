@@ -108,6 +108,7 @@ for k, v in pairs(addonGeneratedTypes) do
   })
 end
 
+local runouts = {}
 for _, p in ipairs(require('wowless.util').productList()) do
   local stamp = 'extracts/' .. p .. '.stamp'
   table.insert(builds, {
@@ -116,13 +117,21 @@ for _, p in ipairs(require('wowless.util').productList()) do
     rule = 'fetch',
     outs = stamp,
   })
+  local runout = 'out/' .. p .. '.txt'
+  table.insert(runouts, runout)
   table.insert(builds, {
     args = { product = p },
     ins = { 'wowless/ext.so', stamp, taintedLua, wowlessFiles },
     rule = 'run',
-    outs = 'out/' .. p .. '.txt',
+    outs = runout,
   })
 end
+
+table.insert(builds, {
+  ins = runouts,
+  rule = 'phony',
+  outs = 'outs',
+})
 
 local function flatten(x)
   local t = {}
