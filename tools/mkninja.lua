@@ -109,15 +109,16 @@ for k, v in pairs(addonGeneratedTypes) do
 end
 
 for _, p in ipairs(require('wowless.util').productList()) do
+  local stamp = 'extracts/' .. p .. '.stamp'
   table.insert(builds, {
     args = { product = p },
     ins = { 'data/builds.yaml', 'tools/fetch.lua' },
     rule = 'fetch',
-    outs = 'extracts/' .. p .. '.stamp',
+    outs = stamp,
   })
   table.insert(builds, {
     args = { product = p },
-    ins = { 'wowless/ext.so', taintedLua, wowlessFiles },
+    ins = { 'wowless/ext.so', stamp, taintedLua, wowlessFiles },
     rule = 'run',
     outs = 'out/' .. p .. '.txt',
   })
