@@ -28,6 +28,9 @@ end)()
 local dbs = require('wowless.db')
 assert(dbs.fdid('ManifestInterfaceTOCData'), 'missing manifest')
 
+local path = require('path')
+path.mkdir('cache')
+
 local handle = (function()
   local casc = require('casc')
   local _, cdn, ckey = casc.cdnbuild('http://us.patch.battle.net:1119/' .. product, 'us')
@@ -47,8 +50,6 @@ local handle = (function()
   end
   return handle
 end)()
-
-local path = require('path')
 
 local function normalizePath(p)
   -- path.normalize does not normalize x/../y to y.
