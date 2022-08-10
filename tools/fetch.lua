@@ -46,7 +46,7 @@ local handle = (function()
   })
   if not handle then
     print('unable to open ' .. build .. ': ' .. err)
-    os.exit()
+    os.exit(1)
   end
   return handle
 end)()
@@ -62,15 +62,15 @@ local function joinRelative(relativeTo, suffix)
   return normalizePath(path.join(path.dirname(relativeTo), suffix))
 end
 
-local outdir = 'extracts'
-path.mkdir(path.join(outdir, build))
-path.remove(path.join(outdir, product))
-require('lfs').link(build, path.join(outdir, product), true)
+local outdir = path.join('extracts', product)
+if path.isdir(outdir) then
+  require('pl.dir').rmtree(outdir)
+end
 
 local function save(fn, content)
   log('writing', fn)
-  path.mkdir(path.dirname(path.join(outdir, build, fn)))
-  require('pl.file').write(path.join(outdir, build, fn), content)
+  path.mkdir(path.dirname(path.join(outdir, fn)))
+  require('pl.file').write(path.join(outdir, fn), content)
 end
 
 local processFile = (function()
