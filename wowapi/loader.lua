@@ -23,7 +23,6 @@ end
 local function loadSqls(product, apis)
   local function lookup(stmt)
     for row in stmt:rows() do -- luacheck: ignore 512
-      require('pl.pretty').dump(row)
       return unpack(row)
     end
   end
