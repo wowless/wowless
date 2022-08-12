@@ -60,7 +60,7 @@ local pools = {
 
 local rules = {
   fetch = {
-    command = 'lua tools/fetch.lua $product && touch extracts/$product.stamp',
+    command = 'lua tools/fetch.lua $product && touch $out',
     pool = 'fetch_pool',
   },
   mkaddon = {
@@ -70,13 +70,13 @@ local rules = {
     command = 'cd tainted-lua && rm -rf build && cmake --preset linux && cmake --build --preset linux',
   },
   mktestout = {
-    command = 'bash -c "set -o pipefail && busted 2>&1 | tee test.out"',
+    command = 'bash -c "set -o pipefail && busted 2>&1 | tee $out"',
   },
   mkwowlessext = {
     command = 'luarocks build --no-install',
   },
   run = {
-    command = taintedLua .. ' wowless.lua -p $product -e1 > out/$product.txt || true',
+    command = taintedLua .. ' wowless.lua -p $product -e1 > $out || true',
     pool = 'run_pool',
   },
 }
@@ -84,23 +84,23 @@ local rules = {
 local builds = {
   {
     ins = addonGeneratedFiles,
-    rule = 'phony',
     outs = 'addon',
+    rule = 'phony',
   },
   {
     ins = find('tainted-lua -not -path \'tainted-lua/build/*\''),
+    outs_implicit = taintedLua,
     rule = 'mktaintedlua',
-    outs = taintedLua,
   },
   {
     ins = { '.busted', 'wowless/ext.so', addonGeneratedFiles, taintedLua, wowlessFiles },
-    rule = 'mktestout',
     outs = 'test.out',
+    rule = 'mktestout',
   },
   {
     ins = { 'wowless-scm-0.rockspec', 'wowless/ext.c' },
+    outs_implicit = { 'wowless/ext.o', 'wowless/ext.so' },
     rule = 'mkwowlessext',
-    outs = { 'wowless/ext.o', 'wowless/ext.so' },
   },
 }
 
@@ -108,27 +108,27 @@ for k, v in pairs(addonGeneratedTypes) do
   table.insert(builds, {
     args = { ['type'] = k },
     ins = { taintedLua, v },
+    outs_implicit = 'addon/universal/Wowless/' .. k .. '.lua',
     rule = 'mkaddon',
-    outs = 'addon/universal/Wowless/' .. k .. '.lua',
   })
 end
 
 local runouts = {}
 for _, p in ipairs(require('wowless.util').productList()) do
-  local stamp = 'extracts/' .. p .. '.stamp'
+  local stamp = 'build/extracts/' .. p .. '.stamp'
   table.insert(builds, {
     args = { product = p },
     ins = { 'data/builds.yaml', 'tools/fetch.lua' },
-    rule = 'fetch',
     outs = stamp,
+    rule = 'fetch',
   })
   local runout = 'out/' .. p .. '.txt'
   table.insert(runouts, runout)
   table.insert(builds, {
     args = { product = p },
     ins = { 'wowless/ext.so', stamp, taintedLua, wowlessFiles },
-    rule = 'run',
     outs = runout,
+    rule = 'run',
   })
 end
 
@@ -172,9 +172,19 @@ for _, k in ipairs(rulenames) do
   end
 end
 for _, b in ipairs(builds) do
-  local ins = flatten(b.ins)
-  local outs = flatten(b.outs)
-  table.insert(out, 'build | ' .. outs .. ': ' .. b.rule .. ' | ' .. ins)
+  local bb = { 'build' }
+  if b.outs then
+    table.insert(bb, flatten(b.outs))
+  end
+  if b.outs_implicit then
+    table.insert(bb, '|')
+    table.insert(bb, flatten(b.outs_implicit))
+  end
+  table.insert(bb, ':')
+  table.insert(bb, b.rule)
+  table.insert(bb, '|')
+  table.insert(bb, flatten(b.ins))
+  table.insert(out, table.concat(bb, ' '))
   for k, v in pairs(b.args or {}) do
     table.insert(out, '  ' .. k .. ' = ' .. v)
   end
