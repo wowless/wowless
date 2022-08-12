@@ -39,7 +39,7 @@ local function loadSqls(product, apis)
     return function(...)
       stmt:reset()
       stmt:bind_values(...)
-      return f()
+      return f(stmt)
     end
   end
   local lookups = {}
