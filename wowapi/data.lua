@@ -46,16 +46,16 @@ local fns = {
   events = loaddir('events', 'yaml'),
   impl = loaddir('impl', 'lua'),
   schemas = loaddir('schemas', 'yaml'),
+  sqllookup = loaddir('sql/lookup', 'sql'),
   state = loaddir('state', 'yaml'),
   structures = loaddir('structures', 'yaml'),
-  sql = loaddir('sql', 'sql'),
   uiobjects = loadUIObjects,
   xml = loaddir('xml', 'yaml'),
 }
 
 return setmetatable({}, {
   __index = function(t, k)
-    local v = assert(fns[k]())
+    local v = assert(assert(fns[k], 'bad key ' .. k)())
     t[k] = v
     return v
   end,
