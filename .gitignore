@@ -12,6 +12,7 @@ addon/universal/Wowless/global_wowt.lua
 addon/universal/Wowless/globalapis.lua
 addon/universal/Wowless/namespaceapis.lua
 addon/universal/Wowless/uiobjectapis.lua
+build/
 build.ninja
 cache
 extracts

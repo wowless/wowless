@@ -9,8 +9,6 @@ local function find(spec)
   return t
 end
 
-local apifiles = find('data/api')
-
 -- TODO get this from gentest.lua
 local addonGeneratedTypes = {
   builds = { 'data/builds.yaml' },
@@ -23,8 +21,8 @@ local addonGeneratedTypes = {
   global_wow_classic_era_ptr = { 'data/globals/wow_classic_era_ptr.yaml' },
   global_wow_classic_ptr = { 'data/globals/wow_classic_ptr.yaml' },
   global_wowt = { 'data/globals/wowt.yaml' },
-  globalapis = apifiles,
-  namespaceapis = apifiles,
+  globalapis = { 'build/api.stamp' },
+  namespaceapis = { 'build/api.stamp' },
   uiobjectapis = find('data/uiobjects -name \'*.yaml\''),
 }
 
@@ -34,24 +32,6 @@ for k in pairs(addonGeneratedTypes) do
 end
 
 local taintedLua = 'tainted-lua/build/linux/bin/Release/lua5.1'
-
-local wowlessFiles = (function()
-  local skip = {
-    ['tools/mkninja.lua'] = true,
-    ['wowless/ext.o'] = true,
-    ['wowless/ext.so'] = true,
-  }
-  for _, k in ipairs(addonGeneratedFiles) do
-    skip[k] = true
-  end
-  local t = {}
-  for _, k in ipairs(find('addon data spec tools wowapi wowless')) do
-    if not skip[k] then
-      table.insert(t, k)
-    end
-  end
-  return t
-end)()
 
 local pools = {
   fetch_pool = 1,
@@ -79,6 +59,9 @@ local rules = {
     command = taintedLua .. ' wowless.lua -p $product -e1 > $out || true',
     pool = 'run_pool',
   },
+  stamp = {
+    command = 'touch $out',
+  },
 }
 
 local builds = {
@@ -93,7 +76,36 @@ local builds = {
     rule = 'mktaintedlua',
   },
   {
-    ins = { '.busted', 'wowless/ext.so', addonGeneratedFiles, taintedLua, wowlessFiles },
+    ins = find('data/api'),
+    outs = 'build/api.stamp',
+    rule = 'stamp',
+  },
+  {
+    ins = {
+      'build/api.stamp',
+      (function()
+        local skip = {
+          ['tools/mkninja.lua'] = true,
+          ['wowless/ext.o'] = true,
+          ['wowless/ext.so'] = true,
+        }
+        for _, k in ipairs(addonGeneratedFiles) do
+          skip[k] = true
+        end
+        local t = {}
+        for _, k in ipairs(find('addon data spec tools wowapi wowless -not -path \'data/api/*\'')) do
+          if not skip[k] then
+            table.insert(t, k)
+          end
+        end
+        return t
+      end)(),
+    },
+    outs = 'build/wowless.stamp',
+    rule = 'stamp',
+  },
+  {
+    ins = { '.busted', 'wowless/ext.so', 'build/wowless.stamp', addonGeneratedFiles, taintedLua },
     outs = 'test.out',
     rule = 'mktestout',
   },
@@ -126,7 +138,7 @@ for _, p in ipairs(require('wowless.util').productList()) do
   table.insert(runouts, runout)
   table.insert(builds, {
     args = { product = p },
-    ins = { 'wowless/ext.so', stamp, taintedLua, wowlessFiles },
+    ins = { 'wowless/ext.so', 'build/wowless.stamp', stamp, taintedLua },
     outs = runout,
     rule = 'run',
   })
