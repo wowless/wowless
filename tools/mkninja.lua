@@ -83,6 +83,11 @@ local rules = {
 
 local builds = {
   {
+    ins = addonGeneratedFiles,
+    rule = 'phony',
+    outs = 'addon',
+  },
+  {
     ins = find('tainted-lua -not -path \'tainted-lua/build/*\''),
     rule = 'mktaintedlua',
     outs = taintedLua,

@@ -12,7 +12,6 @@ advJournalLastOpened:
 agentLogLevel:
   wow_classic_beta: '1'
   wow_classic_ptr: '1'
-  wowt: '1'
 agentUID:
   wow: ''
   wow_beta: ''
@@ -112,18 +111,44 @@ Brightness: '50.000000'
 bspcache: '1'
 buffDurations: '1'
 cacaoBilateralSimilarityDistanceSigma: '0.01'
+CACHE-WGOB-GameObjectsHotfixCount:
+  wow_classic_beta: ''
+  wow_classic_ptr: ''
+  wowt: ''
+CACHE-WGOB-GameObjectsRecordCount:
+  wow_classic_beta: ''
+  wow_classic_ptr: ''
+  wowt: ''
 CACHE-WQST-QuestObjectiveHotfixCount:
   wow_beta: ''
+  wow_classic_beta: ''
+  wow_classic_ptr: ''
+  wowt: ''
 CACHE-WQST-QuestObjectiveRecordCount:
   wow_beta: ''
+  wow_classic_beta: ''
+  wow_classic_ptr: ''
+  wowt: ''
 CACHE-WQST-QuestObjectiveXEffectHotfixCount:
   wow_beta: ''
+  wow_classic_beta: ''
+  wow_classic_ptr: ''
+  wowt: ''
 CACHE-WQST-QuestObjectiveXEffectRecordCount:
   wow_beta: ''
+  wow_classic_beta: ''
+  wow_classic_ptr: ''
+  wowt: ''
 CACHE-WQST-QuestV2HotfixCount:
   wow_beta: ''
+  wow_classic_beta: ''
+  wow_classic_ptr: ''
+  wowt: ''
 CACHE-WQST-QuestV2RecordCount:
   wow_beta: ''
+  wow_classic_beta: ''
+  wow_classic_ptr: ''
+  wowt: ''
 calendarShowBattlegrounds: '1'
 calendarShowDarkmoon: '1'
 calendarShowHolidays: '1'
@@ -609,24 +634,19 @@ dangerousShipyardMissionWarningAlreadyShown: '0'
 debugAllocSingleBlade:
   wow_classic_beta: ''
   wow_classic_ptr: ''
-  wowt: ''
 debugAllocTrackStacktrace:
   wow_classic_beta: '0'
   wow_classic_ptr: '0'
-  wowt: '0'
 debugGameEvents: '0'
 debugLog0:
   wow_classic_beta: '0'
   wow_classic_ptr: '0'
-  wowt: '0'
 debugLog1:
   wow_classic_beta: '0'
   wow_classic_ptr: '0'
-  wowt: '0'
 debugLog2:
   wow_classic_beta: '0'
   wow_classic_ptr: '0'
-  wowt: '0'
 DebugTorsoTwist: '0'
 DepthBasedOpacity:
   wow: '1'
@@ -691,7 +711,6 @@ enablePVPNotifyAFK: '1'
 enableRefHistory:
   wow_classic_beta: '1'
   wow_classic_ptr: '1'
-  wowt: '1'
 enableRuneSpentAnim: '1'
 enableSourceLocationLookup:
   wow: '0'
@@ -720,7 +739,6 @@ equipmentManager:
 ErrorFileLog:
   wow_classic_beta: '0'
   wow_classic_ptr: '0'
-  wowt: '0'
 ErrorFilter: all
 ErrorLevelMax: '3'
 ErrorLevelMin: '2'
@@ -1053,6 +1071,9 @@ lfdSelectedDungeons: ''
 lfgAutoFill: '0'
 lfgAutoJoin: '0'
 lfgListSearchLanguages: '0'
+lfgNewPlayerFriendly:
+  wow_classic_beta: '0'
+  wow_classic_ptr: '0'
 lfgSelectedRoles: '0'
 lfGuildComment: ''
 lfGuildSettings: '1'
@@ -1347,7 +1368,7 @@ nameplateShowFriendlyNPCs:
   wow_classic_era: '1'
   wow_classic_era_ptr: '1'
   wow_classic_ptr: '1'
-  wowt: '1'
+  wowt: '0'
 nameplateShowFriendlyPets:
   wow: '0'
   wow_beta: '0'
@@ -1729,7 +1750,7 @@ scriptErrors:
   wow_classic_era: '0'
   wow_classic_era_ptr: '0'
   wow_classic_ptr: '1'
-  wowt: '1'
+  wowt: '0'
 scriptProfile: '0'
 scriptWarnings: '0'
 secondaryProfessionsFilter: '1'
@@ -2249,7 +2270,6 @@ useCompactPartyFrames: '0'
 useDebugAllocators:
   wow_classic_beta: '0'
   wow_classic_ptr: '0'
-  wowt: '0'
 useHighResolutionUITextures: '0'
 useIPv6: '0'
 useUiScale: '0'

@@ -27,10 +27,10 @@ wow_classic:
   tocversion: 20504
   version: 2.5.4
 wow_classic_beta:
-  build: '44930'
-  date: Aug  1 2022
+  build: '45043'
+  date: Aug  9 2022
   flavor: Wrath
-  hash: a906cea9b3594b09e6d7b47771ad06cb
+  hash: a1057346b76b640d04a7ea773da1de1e
   ptr: true
   test: true
   tocversion: 30400
@@ -54,20 +54,20 @@ wow_classic_era_ptr:
   tocversion: 11403
   version: 1.14.3
 wow_classic_ptr:
-  build: '44930'
-  date: Aug  1 2022
+  build: '45043'
+  date: Aug  9 2022
   flavor: Wrath
-  hash: 2b8ab6ddd1cd8262d68f2ba1b2d2a14d
+  hash: 280a76ee0019a715311231ac9a87fc22
   ptr: true
   test: true
   tocversion: 30400
   version: 3.4.0
 wowt:
   build: '44981'
-  date: Aug  1 2022
+  date: Aug  4 2022
   flavor: Mainline
   hash: 3c2879060be7997717c1947a8a7b9d30
   ptr: true
-  test: true
+  test: false
   tocversion: 90207
   version: 9.2.7
