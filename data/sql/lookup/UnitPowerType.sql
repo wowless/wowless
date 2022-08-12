@@ -5,6 +5,6 @@ FROM
   PowerType p
   JOIN ChrClassesXPowerTypes x ON x.PowerType == p.PowerTypeEnum
 WHERE
-  x.ClassID & (1 << @1) != 0
+  x.ClassID = ?1
 LIMIT
   1;

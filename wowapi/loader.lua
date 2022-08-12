@@ -113,25 +113,9 @@ local function doGetFn(api, loader, apicfg, db2s, sqlite)
     if not stmt then
       error('could not prepare ' .. apicfg.name .. ': ' .. sqlite:errmsg())
     end
-    local outs = {}
-    for i = 1, stmt:bind_parameter_count() do
-      local parts = {}
-      for part in stmt:bind_parameter_name(i):sub(2):gmatch('[^:]+') do
-        table.insert(parts, part)
-      end
-      for j = 2, #parts do
-        parts[j] = parts[j - 1] .. '.' .. parts[j]
-      end
-      table.insert(outs, table.concat(parts, ' and '))
-    end
-    local ins = {}
-    for _, input in ipairs(apicfg.inputs[1]) do
-      table.insert(ins, input.name)
-    end
-    local mapper = loadstring('local ' .. table.concat(ins, ',') .. ' = ...; return ' .. table.concat(outs, ','))
-    return function(...)
+    return function()
       stmt:reset()
-      stmt:bind_values(mapper(...))
+      stmt:bind_values(1)
       for row in stmt:rows() do -- luacheck: ignore 512
         require('pl.pretty').dump(row)
         return unpack(row)
