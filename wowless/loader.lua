@@ -39,6 +39,7 @@ end)()
 local function loader(api, cfg)
   local rootDir = cfg and cfg.rootDir
   local product = cfg and cfg.product
+  assert(product, 'loader requires a product')
   local otherAddonDirs = cfg and cfg.otherAddonDirs or {}
 
   local lfs = require('lfs')
@@ -653,14 +654,13 @@ local function loader(api, cfg)
     api.log(1, 'resolving %s', tocDir)
     local base = path.basename(tocDir)
     local version = productToFlavor[product]
-    local toTry = not product and { '' }
-      or {
-        '_' .. version,
-        '-' .. version,
-        '_' .. alternateVersionNames[version],
-        '-' .. alternateVersionNames[version],
-        '',
-      }
+    local toTry = {
+      '_' .. version,
+      '-' .. version,
+      '_' .. alternateVersionNames[version],
+      '-' .. alternateVersionNames[version],
+      '',
+    }
     for _, try in ipairs(toTry) do
       local tocFile = path.join(tocDir, base .. try .. '.toc')
       local success, content = pcall(function()
@@ -683,9 +683,7 @@ local function loader(api, cfg)
     end)
   end
 
-  if product then
-    api.states.CVars.portal = require('wowapi.data').builds[product].ptr and 'test' or ''
-  end
+  api.states.CVars.portal = require('wowapi.data').builds[product].ptr and 'test' or ''
 
   local wdb = require('wowless.db')
 
@@ -777,15 +775,13 @@ local function loader(api, cfg)
     for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do
       context.loadFile(file)
     end
-    if product then
-      local frameXmlBindingsDirMap = {
-        Mainline = 'Interface',
-        TBC = 'Interface_TBC',
-        Vanilla = 'Interface_Vanilla',
-        Wrath = 'Interface_Wrath',
-      }
-      context.loadFile(path.join(rootDir, frameXmlBindingsDirMap[productToFlavor[product]], 'FrameXML', 'Bindings.xml'))
-    end
+    local frameXmlBindingsDirMap = {
+      Mainline = 'Interface',
+      TBC = 'Interface_TBC',
+      Vanilla = 'Interface_Vanilla',
+      Wrath = 'Interface_Wrath',
+    }
+    context.loadFile(path.join(rootDir, frameXmlBindingsDirMap[productToFlavor[product]], 'FrameXML', 'Bindings.xml'))
     local blizzardAddons = {}
     for name, toc in pairs(addonData) do
       if type(name) == 'string' and name:sub(1, 9) == 'Blizzard_' and toc.attrs.LoadOnDemand ~= '1' then

@@ -1,5 +1,0 @@
-describe('runner', function()
-  it('runs on empty configuration', function()
-    assert.Not.Nil(require('wowless.runner').run({}))
-  end)
-end)
