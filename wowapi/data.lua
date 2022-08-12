@@ -1,5 +1,6 @@
 local extLoaders = {
   lua = loadfile,
+  sql = require('pl.file').read,
   yaml = require('wowapi.yaml').parseFile,
 }
 
@@ -47,6 +48,7 @@ local fns = {
   schemas = loaddir('schemas', 'yaml'),
   state = loaddir('state', 'yaml'),
   structures = loaddir('structures', 'yaml'),
+  sql = loaddir('sql', 'sql'),
   uiobjects = loadUIObjects,
   xml = loaddir('xml', 'yaml'),
 }
