@@ -21,27 +21,29 @@ local function mkdb(theProduct)
           end)
           table.insert(dbinit, ('CREATE TABLE %s (%s)'):format(dbdef.name, table.concat(fields, ',')))
           local data = require('pl.file').read(('extracts/%s/db2/%s.db2'):format(theProduct, dbdef.name:lower()))
-          for row in require('dbc').rows(data, '{' .. version.sig:gsub('%.', '%?') .. '}') do
-            local values = {}
-            for _, field in ipairs(fields) do
-              local value = row[version.fields[field]]
-              local ty = type(value)
-              if ty == 'table' then
-                value = value[1]
-                ty = type(value)
+          if data then
+            for row in require('dbc').rows(data, '{' .. version.sig:gsub('%.', '%?') .. '}') do
+              local values = {}
+              for _, field in ipairs(fields) do
+                local value = row[version.fields[field]]
+                local ty = type(value)
+                if ty == 'table' then
+                  value = value[1]
+                  ty = type(value)
+                end
+                if ty == 'nil' then
+                  value = 'NULL'
+                elseif ty == 'string' then
+                  value = quote(value)
+                elseif ty == 'number' then
+                  value = tostring(value)
+                else
+                  error('unexpected value of type ' .. ty .. ' on field ' .. field .. ' of table ' .. dbdef.name)
+                end
+                table.insert(values, value)
               end
-              if ty == 'nil' then
-                value = 'NULL'
-              elseif ty == 'string' then
-                value = quote(value)
-              elseif ty == 'number' then
-                value = tostring(value)
-              else
-                error('unexpected value of type ' .. ty .. ' on field ' .. field .. ' of table ' .. dbdef.name)
-              end
-              table.insert(values, value)
+              table.insert(dbinit, ('INSERT INTO %s VALUES (%s)'):format(dbdef.name, table.concat(values, ',')))
             end
-            table.insert(dbinit, ('INSERT INTO %s VALUES (%s)'):format(dbdef.name, table.concat(values, ',')))
           end
         end
       end
