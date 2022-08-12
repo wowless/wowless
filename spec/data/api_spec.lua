@@ -12,7 +12,10 @@ describe('api', function()
             assert.Nil(t.states, 'unimplemented apis cannot specify states')
             assert.Nil(data.impl[t.name], 'unimplemented apis cannot have an implementation')
           elseif t.status == 'implemented' then
-            assert.Not.Nil(data.impl[t.name], 'implemented apis must have an implementation')
+            local lua = data.impl[t.name]
+            local sql = data.sql[t.name]
+            assert.Not.Nil(lua or sql, 'implemented apis must have an implementation')
+            assert.True(not (lua and sql), 'apis cannot be implemented by both lua and sql')
             for _, output in ipairs(t.outputs or {}) do
               assert.Nil(output.stub, 'implemented apis cannot specify return values')
             end

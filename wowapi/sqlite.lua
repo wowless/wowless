@@ -55,4 +55,14 @@ local function mkdb(theProduct)
   return db
 end
 
-return mkdb
+-- TODO precompute sqlite dbs to avoid needing this hack for test performance
+local cache = {}
+return function(p)
+  if not p then
+    return nil -- TODO remove this
+  end
+  if not cache[p] then
+    cache[p] = mkdb(p)
+  end
+  return cache[p]
+end
