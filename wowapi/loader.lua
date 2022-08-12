@@ -135,8 +135,7 @@ local function doGetFn(api, loader, apicfg, db2s, sqlite)
     return function(...)
       stmt:reset()
       stmt:bind_values(mapper(...))
-      local row = stmt:rows()()
-      if row then
+      for row in stmt:rows() do -- luacheck: ignore 512
         require('pl.pretty').dump(row)
         return unpack(row)
       end
