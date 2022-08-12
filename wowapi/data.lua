@@ -46,6 +46,7 @@ local fns = {
   events = loaddir('events', 'yaml'),
   impl = loaddir('impl', 'lua'),
   schemas = loaddir('schemas', 'yaml'),
+  sqlcursor = loaddir('sql/cursor', 'sql'),
   sqllookup = loaddir('sql/lookup', 'sql'),
   state = loaddir('state', 'yaml'),
   structures = loaddir('structures', 'yaml'),
