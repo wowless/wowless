@@ -51,8 +51,6 @@ type:
           oneof:
           - literal: db
           - literal: schema
-          - literal: sqlcursor
-          - literal: sqllookup
           - literal: state
           - literal: structure
           - literal: uiobject

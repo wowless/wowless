@@ -1,8 +1,8 @@
-local GetColorsSqlCursor = ...
+local globalcolor = ...
 local t = {}
-for tag in GetColorsSqlCursor() do
+for row in globalcolor() do
   table.insert(t, {
-    baseTag = tag,
+    baseTag = row.LuaConstantName,
     color = { -- TODO parse the color field
       r = 0.25,
       g = 0.35,

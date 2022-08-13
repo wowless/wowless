@@ -1,4 +1,0 @@
-SELECT
-  LuaConstantName
-FROM
-  GlobalColor;

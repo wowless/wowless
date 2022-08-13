@@ -7,7 +7,7 @@ outputs:
 - innerType: C_UIColor.DBColorExport
   name: colors
   type: table
+dbs:
+- name: GlobalColor
 products:
 - wow_beta
-sqls:
-- cursor: C_UIColor.GetColors

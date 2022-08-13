@@ -1,19 +1,19 @@
-local GetAtlasInfoSqlLookup, atlasName = ...
--- stylua: ignore
-local atlasHeight, atlasWidth, fileDataID, committedBottom,
-      committedFlags, committedLeft, committedRight,
-      committedTop, overrideHeight, overrideWidth = GetAtlasInfoSqlLookup(atlasName)
-if atlasHeight then
-  local band = require('bit').band
-  return {
-    bottomTexCoord = committedBottom / atlasHeight,
-    file = fileDataID,
-    height = overrideHeight ~= 0 and overrideHeight or committedBottom - committedTop,
-    leftTexCoord = committedLeft / atlasWidth,
-    rightTexCoord = committedRight / atlasWidth,
-    tilesHorizontally = band(committedFlags, 0x4) ~= 0,
-    tilesVertically = band(committedFlags, 0x2) ~= 0,
-    topTexCoord = committedTop / atlasHeight,
-    width = overrideWidth ~= 0 and overrideWidth or committedRight - committedLeft,
-  }
+local uitextureatlas, uitextureatlasmember, atlasName = ...
+local m = uitextureatlasmember(atlasName)
+if m then
+  local a = uitextureatlas(m.UiTextureAtlasID)
+  if a then
+    local band = require('bit').band
+    return {
+      bottomTexCoord = m.CommittedBottom / a.AtlasHeight,
+      file = a.FileDataID,
+      height = m.OverrideHeight ~= 0 and m.OverrideHeight or m.CommittedBottom - m.CommittedTop,
+      leftTexCoord = m.CommittedLeft / a.AtlasWidth,
+      rightTexCoord = m.CommittedRight / a.AtlasWidth,
+      tilesHorizontally = band(m.CommittedFlags, 0x4) ~= 0,
+      tilesVertically = band(m.CommittedFlags, 0x2) ~= 0,
+      topTexCoord = m.CommittedTop / a.AtlasHeight,
+      width = m.OverrideWidth ~= 0 and m.OverrideWidth or m.CommittedRight - m.CommittedLeft,
+    }
+  end
 end
