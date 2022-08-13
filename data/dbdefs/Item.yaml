@@ -26,6 +26,30 @@ versions:
   - wow_classic
   - wow_classic_era
   - wow_classic_era_ptr
+  sig: uuuiiuuuiuiuiuu{5u}{7i}{5u}{5u}
+- fields:
+    ClassID: 1
+    Field_3_4_0_43659_004: 5
+    Field_3_4_0_43659_006: 7
+    Field_3_4_0_43659_007: 8
+    Field_3_4_0_43659_009: 10
+    Field_3_4_0_43659_012: 13
+    Field_3_4_0_43659_013: 14
+    Field_3_4_0_43659_014: 15
+    Field_3_4_0_43659_015: 16
+    Field_3_4_0_43659_016: 17
+    Field_3_4_0_43659_017: 18
+    Field_3_4_0_43659_018: 19
+    IconFileDataID: 11
+    ID: 0
+    InventoryType: 4
+    ItemGroupSoundsID: 12
+    Material: 3
+    SheatheType: 6
+    Sound_override_subclassID: 9
+    SubclassID: 2
+  products:
+  - wow_classic_beta
   - wow_classic_ptr
   sig: uuuiiuuuiuiuiuu{5u}{7i}{5u}{5u}
 - fields:
@@ -60,28 +84,4 @@ versions:
   products:
   - wow_beta
   sig: uuuiuiiuiii
-- fields:
-    ClassID: 1
-    Field_3_4_0_43659_004: 5
-    Field_3_4_0_43659_006: 7
-    Field_3_4_0_43659_007: 8
-    Field_3_4_0_43659_009: 10
-    Field_3_4_0_43659_012: 13
-    Field_3_4_0_43659_013: 14
-    Field_3_4_0_43659_014: 15
-    Field_3_4_0_43659_015: 16
-    Field_3_4_0_43659_016: 17
-    Field_3_4_0_43659_017: 18
-    Field_3_4_0_43659_018: 19
-    IconFileDataID: 11
-    ID: 0
-    InventoryType: 4
-    ItemGroupSoundsID: 12
-    Material: 3
-    SheatheType: 6
-    Sound_override_subclassID: 9
-    SubclassID: 2
-  products:
-  - wow_classic_beta
-  sig: uuuiiuuuiuiuiuu{5u}{7i}{5u}{5u}
 fdid: 841626
