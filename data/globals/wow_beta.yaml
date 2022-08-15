@@ -39,6 +39,7 @@ Constants:
     MIN_RES_SICKNESS_LEVEL: 10
   ProfessionConsts:
     CLASSIC_PROFESSION_PARENT_TIER_INDEX: 4
+    MAX_CRAFTING_REAGENT_SLOTS: 12
     NUM_PRIMARY_PROFESSIONS: 2
     RUNEFORGING_ROOT_CATEGORY_ID: 210
     RUNEFORGING_SKILL_LINE_ID: 960
@@ -1620,15 +1621,17 @@ Enum:
   EditModeAccountSetting:
     GridSpacing: 1
     SettingsExpanded: 2
+    ShowCastBar: 7
+    ShowEncounterBar: 8
     ShowGrid: 0
     ShowPetActionBar: 5
     ShowPossessActionBar: 6
     ShowStanceBar: 4
     ShowTargetAndFocus: 3
   EditModeAccountSettingMeta:
-    MaxValue: 6
+    MaxValue: 8
     MinValue: 0
-    NumValues: 7
+    NumValues: 9
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
     HideBarArt: 6
@@ -1659,10 +1662,11 @@ Enum:
     NumValues: 8
   EditModeCastBarSetting:
     BarSize: 0
+    LockToPlayerFrame: 1
   EditModeCastBarSettingMeta:
-    MaxValue: 0
+    MaxValue: 1
     MinValue: 0
-    NumValues: 1
+    NumValues: 2
   EditModeLayoutType:
     Account: 1
     Character: 2
@@ -1695,12 +1699,13 @@ Enum:
   EditModeSystem:
     ActionBar: 0
     CastBar: 1
+    EncounterBar: 4
     Minimap: 2
     UnitFrame: 3
   EditModeSystemMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   EditModeUnitFrameSetting:
     BuffsOnTop: 2
     CastBarUnderneath: 1
@@ -2704,6 +2709,14 @@ Enum:
   LinkedCurrencyFlagsMeta:
     MaxValue: 4
     MinValue: 1
+    NumValues: 3
+  LoadConfigResult:
+    Error: 0
+    LoadInProgress: 2
+    NoChangesNecessary: 1
+  LoadConfigResultMeta:
+    MaxValue: 2
+    MinValue: 0
     NumValues: 3
   ManipulatorEventType:
     Complete: 2
@@ -3968,6 +3981,14 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  TradeskillSlotDataType:
+    Currency: 3
+    ModifiedReagent: 2
+    Reagent: 1
+  TradeskillSlotDataTypeMeta:
+    MaxValue: 3
+    MinValue: 1
+    NumValues: 3
   TraitCombatConfigFlags:
     ActiveForSpec: 1
   TraitCombatConfigFlagsMeta:
