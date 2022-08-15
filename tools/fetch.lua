@@ -124,4 +124,5 @@ do
   for row in dbs.rows(product, 'ManifestInterfaceTOCData', tocdata) do
     processTocDir(normalizePath(row.FilePath))
   end
+  processTocDir('Interface/AddOns/Blizzard_APIDocumentationGenerated')
 end
