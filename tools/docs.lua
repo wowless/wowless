@@ -69,7 +69,7 @@ for f, t in pairs(docs) do
     assert(expectedTopLevelFields[k], ('unexpected field %q in %q'):format(k, f))
   end
   assert(not t.Type or expectedTypes[t.Type], 'unexpected type in ' .. f)
-  if not t.Type or t.Type == 'System' then
+  if not t.Type or t.Type == 'System' and t.Namespace ~= 'C_ConfigurationWarnings' then
     for _, tab in ipairs(t.Tables or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. tab.Name
       tabs[name] = tabs[name] or tab

@@ -109,8 +109,6 @@ local tablemap = {
       'C_SecureTransfer',
       'C_StoreSecure',
       'C_WowTokenSecure',
-      -- This is documented but does not actually seem to exist.
-      'C_ConfigurationWarnings',
     }
     for _, k in ipairs(unavailable) do
       assert(apiNamespaces[k])
