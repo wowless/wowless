@@ -17,6 +17,9 @@ fields:
 - name: isAvailable
   nilable: true
   type: boolean
+- name: isCascadeRepurchasable
+  nilable: true
+  type: boolean
 - name: isVisible
   nilable: true
   type: boolean

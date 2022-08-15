@@ -6,5 +6,5 @@ inputs:
     name: itemLocation
     type: table
 outputs:
-- name: itemGuid
+- name: itemGUID
   type: string

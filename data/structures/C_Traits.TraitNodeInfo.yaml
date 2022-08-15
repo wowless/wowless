@@ -28,6 +28,8 @@ fields:
   type: table
 - name: isAvailable
   type: boolean
+- name: isCascadeRepurchasable
+  type: boolean
 - name: isVisible
   type: boolean
 - name: maxRanks
