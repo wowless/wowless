@@ -49,10 +49,6 @@ local tablemap = {
     local t = require('wowapi.yaml').parseFile('data/builds.yaml')
     return 'Builds', t
   end,
-  cvars = function()
-    local t = require('wowapi.yaml').parseFile('data/cvars.yaml')
-    return 'CVars', t
-  end,
   globalapis = function()
     local unavailableApis = {
       CreateForbiddenFrame = true,
@@ -196,7 +192,18 @@ local tablemap = {
   end,
 }
 
+local lazycvars = lazy(function()
+  return require('wowapi.yaml').parseFile('data/cvars.yaml')
+end)
+
 local ptablemap = {
+  cvars = function(p)
+    local t = {}
+    for k, v in pairs(lazycvars()) do
+      t[k] = type(v) == 'string' and v or v[p]
+    end
+    return 'CVars', t
+  end,
   globals = function(p)
     local cfg = require('wowapi.yaml').parseFile('data/globals/' .. p .. '.yaml')
     return 'Globals', cfg
@@ -248,8 +255,16 @@ local filemap = (function()
         t['addon/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
       end
     elseif k == 'toc' then
+      local tt = {}
+      for kk in pairs(ptablemap) do
+        table.insert(tt, kk .. '.lua')
+      end
+      table.sort(tt)
+      table.insert(tt, 1, 'product.lua')
+      table.insert(tt, '')
+      local content = table.concat(tt, '\n')
       for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
-        t['addon/' .. p .. '/WowlessData/WowlessData.toc'] = 'product.lua\nglobals.lua\n'
+        t['addon/' .. p .. '/WowlessData/WowlessData.toc'] = content
       end
     else
       error('invalid file type ' .. k)

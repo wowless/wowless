@@ -14,12 +14,14 @@ local productList = require('wowless.util').productList()
 -- TODO get this from gentest.lua
 local addonGeneratedTypes = {
   builds = { 'data/builds.yaml' },
-  cvars = { 'data/cvars.yaml' },
   globalapis = { 'build/api.stamp' },
   namespaceapis = { 'build/api.stamp' },
   uiobjectapis = find('data/uiobjects -name \'*.yaml\''),
 }
 local perProductAddonGeneratedTypes = {
+  cvars = function()
+    return { 'data/cvars.yaml' }
+  end,
   globals = function(p)
     return { 'data/globals/' .. p .. '.yaml' }
   end,

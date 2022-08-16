@@ -140,10 +140,10 @@ function G.GeneratedTests()
     for name in pairs(toskipin) do
       tests[name] = function() end
     end
-    for name, cfg in pairs(G.CVars) do
+    for name, value in pairs(_G.WowlessData.CVars) do
       if not tests[name] then
         tests[name] = function()
-          assertEquals(type(cfg) == 'string' and cfg or cfg[runtimeProduct], cvarDefaults[name])
+          assertEquals(value, cvarDefaults[name])
         end
       end
     end
