@@ -9,26 +9,30 @@ local function find(spec)
   return t
 end
 
+local productList = require('wowless.util').productList()
+
 -- TODO get this from gentest.lua
 local addonGeneratedTypes = {
   builds = { 'data/builds.yaml' },
   cvars = { 'data/cvars.yaml' },
-  global_wow = { 'data/globals/wow.yaml' },
-  global_wow_beta = { 'data/globals/wow_beta.yaml' },
-  global_wow_classic = { 'data/globals/wow_classic.yaml' },
-  global_wow_classic_beta = { 'data/globals/wow_classic_beta.yaml' },
-  global_wow_classic_era = { 'data/globals/wow_classic_era.yaml' },
-  global_wow_classic_era_ptr = { 'data/globals/wow_classic_era_ptr.yaml' },
-  global_wow_classic_ptr = { 'data/globals/wow_classic_ptr.yaml' },
-  global_wowt = { 'data/globals/wowt.yaml' },
   globalapis = { 'build/api.stamp' },
   namespaceapis = { 'build/api.stamp' },
   uiobjectapis = find('data/uiobjects -name \'*.yaml\''),
+}
+local perProductAddonGeneratedTypes = {
+  globals = function(p)
+    return { 'data/globals/' .. p .. '.yaml' }
+  end,
 }
 
 local addonGeneratedFiles = {}
 for k in pairs(addonGeneratedTypes) do
   table.insert(addonGeneratedFiles, 'addon/universal/Wowless/' .. k .. '.lua')
+end
+for k in pairs(perProductAddonGeneratedTypes) do
+  for _, p in ipairs(productList) do
+    table.insert(addonGeneratedFiles, 'addon/' .. p .. '/WowlessData/' .. k .. '.lua')
+  end
 end
 
 local taintedLua = 'tainted-lua/build/linux/bin/Release/lua5.1'
@@ -44,7 +48,7 @@ local rules = {
     pool = 'fetch_pool',
   },
   mkaddon = {
-    command = taintedLua .. ' tools/gentest.lua -f $type',
+    command = taintedLua .. ' tools/gentest.lua -f $type $productarg',
   },
   mktaintedlua = {
     command = 'cd tainted-lua && rm -rf build && cmake --preset linux && cmake --build --preset linux',
@@ -129,9 +133,19 @@ for k, v in pairs(addonGeneratedTypes) do
     rule = 'mkaddon',
   })
 end
+for k, v in pairs(perProductAddonGeneratedTypes) do
+  for _, p in ipairs(productList) do
+    table.insert(builds, {
+      args = { productarg = '-p ' .. p, ['type'] = k },
+      ins = { taintedLua, v(p), 'tools/gentest.lua' },
+      outs_implicit = 'addon/' .. p .. '/WowlessData/' .. k .. '.lua',
+      rule = 'mkaddon',
+    })
+  end
+end
 
 local runouts = {}
-for _, p in ipairs(require('wowless.util').productList()) do
+for _, p in ipairs(productList) do
   local stamp = 'build/extracts/' .. p .. '.stamp'
   table.insert(builds, {
     args = { product = p },

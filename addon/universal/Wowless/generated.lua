@@ -208,7 +208,7 @@ function G.GeneratedTests()
   end
 
   local function globals()
-    local data = G['Globals_' .. runtimeProduct]
+    local data = _G.WowlessData.Globals
     if _G.SecureCapsuleGet ~= nil then -- addon_spec hack
       -- TODO grab these a la theflatdumper
       local toskip = {

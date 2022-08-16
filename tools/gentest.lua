@@ -196,27 +196,55 @@ local tablemap = {
   end,
 }
 
-for _, p in ipairs(require('wowless.util').productList()) do
-  tablemap['global_' .. p] = function()
+local ptablemap = {
+  globals = function(p)
     local cfg = require('wowapi.yaml').parseFile('data/globals/' .. p .. '.yaml')
-    return 'Globals_' .. p, cfg
-  end
-end
+    return 'Globals', cfg
+  end,
+}
 
 local args = (function()
   local parser = require('argparse')()
   parser:flag('-n --dryrun', 'do not write files')
   parser:option('-f --file', 'files to generate, default all'):count('*')
+  parser:option('-p --product', 'products to generate, default all'):count('*')
   return parser:parse()
 end)()
 local filemap = (function()
   local t = {}
-  for _, k in ipairs(next(args.file) and args.file or require('pl.tablex').keys(tablemap)) do
-    local nn, tt = tablemap[k]()
-    local ss = 'local _, G = ...\nG.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
+  local files = (function()
+    if next(args.file) then
+      return mapify(args.file)
+    else
+      local tt = {}
+      for k in pairs(tablemap) do
+        tt[k] = true
+      end
+      for k in pairs(ptablemap) do
+        tt[k] = true
+      end
+      return tt
+    end
+  end)()
+  local function style(ss)
     -- workaround tainted-lua issue with formatting %d
     ss = ss:gsub('DeprecatedCurrencyFlag = [-0-9]+', 'DeprecatedCurrencyFlag = 2147483648')
-    t['addon/universal/Wowless/' .. k .. '.lua'] = stylua(ss)
+    return stylua(ss)
+  end
+  for k in pairs(files) do
+    if tablemap[k] then
+      local nn, tt = tablemap[k]()
+      local ss = 'local _, G = ...\nG.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
+      t['addon/universal/Wowless/' .. k .. '.lua'] = style(ss)
+    elseif ptablemap[k] then
+      for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
+        local nn, tt = ptablemap[k](p)
+        local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
+        t['addon/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
+      end
+    else
+      error('invalid file type ' .. k)
+    end
   end
   return t
 end)()
