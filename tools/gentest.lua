@@ -203,12 +203,12 @@ for _, p in ipairs(require('wowless.util').productList()) do
   end
 end
 
-local args = (function(...)
+local args = (function()
   local parser = require('argparse')()
   parser:flag('-n --dryrun', 'do not write files')
   parser:option('-f --file', 'files to generate, default all'):count('*')
-  return parser:parse({ ... })
-end)(...)
+  return parser:parse()
+end)()
 local filemap = (function()
   local t = {}
   for _, k in ipairs(next(args.file) and args.file or require('pl.tablex').keys(tablemap)) do
@@ -228,5 +228,3 @@ if not args.dryrun then
     os.execute('chmod a+x ' .. k)
   end
 end
-
-return filemap
