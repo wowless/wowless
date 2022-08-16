@@ -124,7 +124,7 @@ local builds = {
 for k, v in pairs(addonGeneratedTypes) do
   table.insert(builds, {
     args = { ['type'] = k },
-    ins = { taintedLua, v },
+    ins = { taintedLua, v, 'tools/gentest.lua' },
     outs_implicit = 'addon/universal/Wowless/' .. k .. '.lua',
     rule = 'mkaddon',
   })
