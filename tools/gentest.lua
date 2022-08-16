@@ -247,6 +247,10 @@ local filemap = (function()
         local ss = ('_G.WowlessData = { product = %q }'):format(p)
         t['addon/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
       end
+    elseif k == 'toc' then
+      for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
+        t['addon/' .. p .. '/WowlessData/WowlessData.toc'] = 'product.lua\nglobals.lua\n'
+      end
     else
       error('invalid file type ' .. k)
     end
