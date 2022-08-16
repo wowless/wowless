@@ -242,6 +242,11 @@ local filemap = (function()
         local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
         t['addon/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
       end
+    elseif k == 'product' then
+      for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
+        local ss = ('_G.WowlessData = { product = %q }'):format(p)
+        t['addon/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
+      end
     else
       error('invalid file type ' .. k)
     end

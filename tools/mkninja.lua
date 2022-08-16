@@ -23,6 +23,9 @@ local perProductAddonGeneratedTypes = {
   globals = function(p)
     return { 'data/globals/' .. p .. '.yaml' }
   end,
+  product = function()
+    return {}
+  end,
 }
 
 local addonGeneratedFiles = {}
