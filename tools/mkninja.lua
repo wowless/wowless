@@ -66,6 +66,11 @@ local rules = {
 
 local builds = {
   {
+    ins = { 'test.out', 'outs' },
+    outs = 'all',
+    rule = 'phony',
+  },
+  {
     ins = addonGeneratedFiles,
     outs = 'addon',
     rule = 'phony',
