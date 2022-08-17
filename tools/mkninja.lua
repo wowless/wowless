@@ -12,9 +12,7 @@ end
 local productList = require('wowless.util').productList()
 
 -- TODO get this from gentest.lua
-local addonGeneratedTypes = {
-  uiobjectapis = find('data/uiobjects -name \'*.yaml\''),
-}
+local addonGeneratedTypes = {}
 local perProductAddonGeneratedTypes = {
   build = function()
     return { 'data/builds.yaml' }
@@ -33,6 +31,9 @@ local perProductAddonGeneratedTypes = {
   end,
   product = function()
     return {}
+  end,
+  uiobjectapis = function()
+    return find('data/uiobjects -name \'*.yaml\'')
   end,
 }
 

@@ -308,8 +308,7 @@ function G.GeneratedTests()
       end
     end
     local tests = {}
-    local empty = {}
-    for name, cfg in pairs(G.UIObjectApis) do
+    for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
       local function factory()
         if name == 'Animation' then
           return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation()
@@ -322,17 +321,14 @@ function G.GeneratedTests()
         end
       end
       tests[name] = function()
-        if not cfg.frametype or cfg.products and not cfg.products[runtimeProduct] then
+        if cfg == false or not cfg.frametype then
           assertCreateFrameFails(name)
         else
           return mkTests(cfg.objtype, factory, function(__index)
             local mtests = {}
-            for mname, mcfg in pairs(cfg.methods) do
+            for mname in pairs(cfg.methods) do
               mtests[mname] = function()
-                mcfg = mcfg == true and empty or mcfg
-                if mcfg.products and not mcfg.products[runtimeProduct] then
-                  assertEquals('nil', type(__index[mname]), 'product disabled')
-                elseif name ~= 'Animation' or mname ~= 'GetSourceLocation' then --FIXME
+                if name ~= 'Animation' or mname ~= 'GetSourceLocation' then --FIXME
                   return checkCFunc(__index[mname])
                 end
               end

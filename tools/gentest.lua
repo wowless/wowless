@@ -44,71 +44,7 @@ local function stylua(s)
   return ret
 end
 
-local tablemap = {
-  uiobjectapis = function()
-    local uiobjects = {}
-    for d in lfs.dir('data/uiobjects') do
-      if d ~= '.' and d ~= '..' then
-        local filename = ('data/uiobjects/%s/%s.yaml'):format(d, d)
-        local cfg = yaml.parseFile(filename)
-        uiobjects[cfg.name] = cfg
-      end
-    end
-    local inhrev = {}
-    for _, cfg in pairs(uiobjects) do
-      for _, inh in ipairs(cfg.inherits) do
-        inhrev[inh] = inhrev[inh] or {}
-        table.insert(inhrev[inh], cfg.name)
-      end
-    end
-    local objTypes = {}
-    for _, cfg in pairs(uiobjects) do
-      objTypes[cfg.name] = cfg.objectType or cfg.name
-    end
-    local function fixup(cfg)
-      for _, inhname in ipairs(cfg.inherits) do
-        local inh = uiobjects[inhname]
-        fixup(inh)
-        for n, m in pairs(inh.methods) do
-          cfg.methods[n] = m
-        end
-      end
-    end
-    for _, cfg in pairs(uiobjects) do
-      fixup(cfg)
-    end
-    local frametypes = {}
-    local function addtype(ty)
-      if not frametypes[ty] then
-        frametypes[ty] = true
-        for _, inh in ipairs(inhrev[ty] or {}) do
-          addtype(inh)
-        end
-      end
-    end
-    addtype('Frame')
-    -- TODO figure out the right approach for these
-    uiobjects.Minimap = nil
-    uiobjects.WorldFrame = nil
-    local t = {}
-    for k, v in pairs(uiobjects) do
-      local mt = {}
-      for mk, mv in pairs(v.methods) do
-        local tt = {
-          products = mv.products and (not v.products or #mv.products < #v.products) and mapify(mv.products) or nil,
-        }
-        mt[mk] = next(tt) and tt or true
-      end
-      t[k] = {
-        frametype = not not frametypes[k],
-        methods = mt,
-        objtype = objTypes[k],
-        products = mapify(v.products),
-      }
-    end
-    return 'UIObjectApis', t
-  end,
-}
+local tablemap = {}
 
 local ptablemap = {
   build = (function()
@@ -187,6 +123,71 @@ local ptablemap = {
       t[k] = mt
     end
     return 'NamespaceApis', t
+  end,
+  uiobjectapis = function(p)
+    local uiobjects = {}
+    for d in lfs.dir('data/uiobjects') do
+      if d ~= '.' and d ~= '..' then
+        local filename = ('data/uiobjects/%s/%s.yaml'):format(d, d)
+        local cfg = yaml.parseFile(filename)
+        uiobjects[cfg.name] = cfg
+      end
+    end
+    local inhrev = {}
+    for _, cfg in pairs(uiobjects) do
+      for _, inh in ipairs(cfg.inherits) do
+        inhrev[inh] = inhrev[inh] or {}
+        table.insert(inhrev[inh], cfg.name)
+      end
+    end
+    local objTypes = {}
+    for _, cfg in pairs(uiobjects) do
+      objTypes[cfg.name] = cfg.objectType or cfg.name
+    end
+    local function fixup(cfg)
+      for _, inhname in ipairs(cfg.inherits) do
+        local inh = uiobjects[inhname]
+        fixup(inh)
+        for n, m in pairs(inh.methods) do
+          cfg.methods[n] = m
+        end
+      end
+    end
+    for _, cfg in pairs(uiobjects) do
+      fixup(cfg)
+    end
+    local frametypes = {}
+    local function addtype(ty)
+      if not frametypes[ty] then
+        frametypes[ty] = true
+        for _, inh in ipairs(inhrev[ty] or {}) do
+          addtype(inh)
+        end
+      end
+    end
+    addtype('Frame')
+    -- TODO figure out the right approach for these
+    uiobjects.Minimap = nil
+    uiobjects.WorldFrame = nil
+    local t = {}
+    for k, v in pairs(uiobjects) do
+      if v.products and not mapify(v.products)[p] then
+        t[k] = false
+      else
+        local mt = {}
+        for mk, mv in pairs(v.methods) do
+          if not mv.products or mapify(mv.products)[p] then
+            mt[mk] = true
+          end
+        end
+        t[k] = {
+          frametype = not not frametypes[k],
+          methods = mt,
+          objtype = objTypes[k],
+        }
+      end
+    end
+    return 'UIObjectApis', t
   end,
 }
 
