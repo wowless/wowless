@@ -163,7 +163,7 @@ local function doGetFn(api, loader, apicfg, db2s, sqls)
     for _, st in ipairs(apicfg.states or {}) do
       table.insert(args, api.states[st])
     end
-    for _, db in ipairs(not apicfg.sqls and apicfg.dbs or {}) do
+    for _, db in ipairs(apicfg.dbs or {}) do
       table.insert(
         args,
         (function()

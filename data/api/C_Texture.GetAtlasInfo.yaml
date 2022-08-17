@@ -8,8 +8,5 @@ outputs:
 - name: info
   nilable: true
   type: C_Texture.AtlasInfo
-dbs:
-- name: UiTextureAtlas
-- name: UiTextureAtlasMember
 sqls:
 - lookup: C_Texture.GetAtlasInfo

@@ -19,8 +19,5 @@ outputs:
 - name: altB
   nilable: true
   type: number
-dbs:
-- name: ChrClassesXPowerTypes
-- name: PowerType
 sqls:
 - lookup: UnitPowerType

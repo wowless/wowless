@@ -10,7 +10,7 @@ SELECT
   m.OverrideHeight,
   m.OverrideWidth
 FROM
-  UITextureAtlasMember m
+  UiTextureAtlasMember m
   JOIN UiTextureAtlas a ON a.ID = m.UiTextureAtlasID
 WHERE
   m.CommittedName = ?1;
