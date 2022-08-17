@@ -44,8 +44,6 @@ local function stylua(s)
   return ret
 end
 
-local tablemap = {}
-
 local ptablemap = {
   build = (function()
     local lazybuilds = lazy(function()
@@ -205,9 +203,6 @@ local filemap = (function()
       return mapify(args.file)
     else
       local tt = {}
-      for k in pairs(tablemap) do
-        tt[k] = true
-      end
       for k in pairs(ptablemap) do
         tt[k] = true
       end
@@ -220,11 +215,7 @@ local filemap = (function()
     return stylua(ss)
   end
   for k in pairs(files) do
-    if tablemap[k] then
-      local nn, tt = tablemap[k]()
-      local ss = 'local _, G = ...\nG.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
-      t['addon/universal/Wowless/' .. k .. '.lua'] = style(ss)
-    elseif ptablemap[k] then
+    if ptablemap[k] then
       for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
         local nn, tt = ptablemap[k](p)
         local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'

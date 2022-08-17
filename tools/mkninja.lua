@@ -12,7 +12,6 @@ end
 local productList = require('wowless.util').productList()
 
 -- TODO get this from gentest.lua
-local addonGeneratedTypes = {}
 local perProductAddonGeneratedTypes = {
   build = function()
     return { 'data/builds.yaml' }
@@ -38,9 +37,6 @@ local perProductAddonGeneratedTypes = {
 }
 
 local addonGeneratedFiles = {}
-for k in pairs(addonGeneratedTypes) do
-  table.insert(addonGeneratedFiles, 'addon/universal/Wowless/' .. k .. '.lua')
-end
 for _, p in ipairs(productList) do
   local prefix = 'addon/' .. p .. '/WowlessData/'
   table.insert(addonGeneratedFiles, prefix .. 'WowlessData.toc')
@@ -139,14 +135,6 @@ local builds = {
   },
 }
 
-for k, v in pairs(addonGeneratedTypes) do
-  table.insert(builds, {
-    args = { ['type'] = k },
-    ins = { taintedLua, v, 'tools/gentest.lua' },
-    outs_implicit = 'addon/universal/Wowless/' .. k .. '.lua',
-    rule = 'mkaddon',
-  })
-end
 for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { productarg = '-p ' .. p, ['type'] = 'toc' },
