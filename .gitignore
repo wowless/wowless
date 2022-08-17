@@ -1,5 +1,4 @@
 .ninja_log
-addon/universal/Wowless/globalapis.lua
 addon/universal/Wowless/namespaceapis.lua
 addon/universal/Wowless/uiobjectapis.lua
 addon/wow/WowlessData/

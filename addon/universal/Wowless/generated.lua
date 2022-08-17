@@ -164,13 +164,10 @@ function G.GeneratedTests()
   local function globalApis()
     local tests = {}
     local empty = {}
-    for name, cfg in pairs(G.GlobalApis) do
+    for name, cfg in pairs(_G.WowlessData.GlobalApis) do
       cfg = cfg == true and empty or cfg
       tests[name] = function()
         local func = _G[name]
-        if cfg.products and not cfg.products[runtimeProduct] then
-          return checkNotCFunc(func)
-        end
         if cfg.secureCapsule then
           assertEquals(_G.SecureCapsuleGet == nil, func ~= nil) -- addon_spec hack
         elseif cfg.alias then

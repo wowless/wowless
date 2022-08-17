@@ -45,26 +45,6 @@ local function stylua(s)
 end
 
 local tablemap = {
-  globalapis = function()
-    local unavailableApis = {
-      CreateForbiddenFrame = true,
-      loadstring_untainted = true,
-    }
-    local t = {}
-    for k, v in pairs(apis()) do
-      if not k:find('%.') then
-        local vv = {
-          alias = v.alias,
-          nowrap = v.nowrap,
-          products = mapify(v.products),
-          secureCapsule = unavailableApis[k] and true,
-          stdlib = v.stdlib,
-        }
-        t[k] = next(vv) and vv or true
-      end
-    end
-    return 'GlobalApis', t
-  end,
   namespaceapis = function()
     local apiNamespaces = {}
     for k, v in pairs(apis()) do
@@ -209,6 +189,25 @@ local ptablemap = {
       return 'CVars', t
     end
   end)(),
+  globalapis = function(p)
+    local unavailableApis = {
+      CreateForbiddenFrame = true,
+      loadstring_untainted = true,
+    }
+    local t = {}
+    for k, v in pairs(apis()) do
+      if not k:find('%.') and (not v.products or mapify(v.products)[p]) then
+        local vv = {
+          alias = v.alias,
+          nowrap = v.nowrap,
+          secureCapsule = unavailableApis[k] and true,
+          stdlib = v.stdlib,
+        }
+        t[k] = next(vv) and vv or true
+      end
+    end
+    return 'GlobalApis', t
+  end,
   globals = function(p)
     local cfg = require('wowapi.yaml').parseFile('data/globals/' .. p .. '.yaml')
     return 'Globals', cfg
