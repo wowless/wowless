@@ -1,11 +1,19 @@
 ---
 name: GetNumTalents
-status: unimplemented
+status: implemented
+inputs:
+- - name: tabIndex
+    type: number
 outputs:
-- type: number
+- name: numTalents
+  type: number
 products:
 - wow_classic
 - wow_classic_beta
 - wow_classic_ptr
 - wow_classic_era
 - wow_classic_era_ptr
+sqls:
+- lookup: GetNumTalents
+states:
+- Units
