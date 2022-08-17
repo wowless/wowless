@@ -1,5 +1,7 @@
 ---
 name: GetScreenWidth
-status: unimplemented
+status: implemented
 outputs:
 - type: number
+states:
+- System

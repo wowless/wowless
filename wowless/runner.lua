@@ -43,7 +43,7 @@ local function run(cfg)
   end
   if cfg.frame0 then
     local render = require('wowless.render')
-    local screenWidth, screenHeight = 1280, 720
+    local screenWidth, screenHeight = api.states.System.screenWidth, api.states.System.screenHeight
     local function doit(name)
       local rects = render.frames2rects(api, screenWidth, screenHeight)
       require('pl.file').write(name .. '.yaml', require('wowapi.yaml').pprint(rects))
