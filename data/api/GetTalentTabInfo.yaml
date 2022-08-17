@@ -1,19 +1,29 @@
 ---
 name: GetTalentTabInfo
-status: unimplemented
+status: implemented
 inputs:
-- - type: number
-  - nilable: true
+- - name: index
+    type: number
+  - name: isInspect
+    nilable: true
     type: boolean
 outputs:
-- type: string
-- type: string
-- type: number
-- type: string
-- type: number
+- name: name
+  type: string
+- name: texture
+  nilable: true
+  type: string
+- name: pointsSpent
+  type: number
+- name: fileName
+  type: string
 products:
 - wow_classic
 - wow_classic_beta
 - wow_classic_ptr
 - wow_classic_era
 - wow_classic_era_ptr
+sqls:
+- lookup: GetTalentTabInfo
+states:
+- Units
