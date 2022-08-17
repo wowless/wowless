@@ -104,7 +104,7 @@ function G.GeneratedTests()
   end
 
   local function build()
-    local b = G.Builds[runtimeProduct]
+    local b = _G.WowlessData.Build
     assert(b, 'no build')
     return {
       GetBuildInfo = function()

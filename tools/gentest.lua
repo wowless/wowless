@@ -45,10 +45,6 @@ local function stylua(s)
 end
 
 local tablemap = {
-  builds = function()
-    local t = require('wowapi.yaml').parseFile('data/builds.yaml')
-    return 'Builds', t
-  end,
   globalapis = function()
     local unavailableApis = {
       CreateForbiddenFrame = true,
@@ -192,18 +188,27 @@ local tablemap = {
   end,
 }
 
-local lazycvars = lazy(function()
-  return require('wowapi.yaml').parseFile('data/cvars.yaml')
-end)
-
 local ptablemap = {
-  cvars = function(p)
-    local t = {}
-    for k, v in pairs(lazycvars()) do
-      t[k] = type(v) == 'string' and v or v[p]
+  build = (function()
+    local lazybuilds = lazy(function()
+      return require('wowapi.yaml').parseFile('data/builds.yaml')
+    end)
+    return function(p)
+      return 'Build', lazybuilds()[p]
     end
-    return 'CVars', t
-  end,
+  end)(),
+  cvars = (function()
+    local lazycvars = lazy(function()
+      return require('wowapi.yaml').parseFile('data/cvars.yaml')
+    end)
+    return function(p)
+      local t = {}
+      for k, v in pairs(lazycvars()) do
+        t[k] = type(v) == 'string' and v or v[p]
+      end
+      return 'CVars', t
+    end
+  end)(),
   globals = function(p)
     local cfg = require('wowapi.yaml').parseFile('data/globals/' .. p .. '.yaml')
     return 'Globals', cfg
