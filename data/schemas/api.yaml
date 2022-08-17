@@ -125,10 +125,16 @@ type:
                 cursor:
                   type:
                     ref: sqlcursor
+                products:
+                  type:
+                    schema: products
             - record:
                 lookup:
                   type:
                     ref: sqllookup
+                products:
+                  type:
+                    schema: products
       states:
         type:
           sequenceof:

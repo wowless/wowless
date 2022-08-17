@@ -2,18 +2,19 @@ local data = require('wowapi.data')
 local plprettywrite = require('pl.pretty').write
 local util = require('wowless.util')
 
+local function supportsProduct(product, products)
+  for _, p in ipairs(products or {}) do
+    if p == product then
+      return true
+    end
+  end
+  return not products
+end
+
 local function loadApis(product)
   local apis = {}
   for fn, yaml in pairs(data.apis) do
-    local match = not yaml.products
-    if yaml.products then
-      for _, p in ipairs(yaml.products) do
-        if product == p then
-          match = true
-        end
-      end
-    end
-    if match and not yaml.debug then
+    if supportsProduct(product, yaml.products) and not yaml.debug then
       apis[fn] = yaml
     end
   end
@@ -45,14 +46,16 @@ local function loadSqls(product, apis)
   local cursors = {}
   for n, api in pairs(apis) do
     for _, sql in ipairs(api.sqls or {}) do
-      if sql.lookup then
-        local sn = sql.lookup
-        lookups[sn] = lookups[sn] or prep(sn, data.sqllookup[sn], lookup)
-      elseif sql.cursor then
-        local sn = sql.cursor
-        cursors[sn] = cursors[sn] or prep(sn, data.sqlcursor[sn], cursor)
-      else
-        error('invalid sql spec for ' .. n)
+      if supportsProduct(product, sql.products) then
+        if sql.lookup then
+          local sn = sql.lookup
+          lookups[sn] = lookups[sn] or prep(sn, data.sqllookup[sn], lookup)
+        elseif sql.cursor then
+          local sn = sql.cursor
+          cursors[sn] = cursors[sn] or prep(sn, data.sqlcursor[sn], cursor)
+        else
+          error('invalid sql spec for ' .. n)
+        end
       end
     end
   end
