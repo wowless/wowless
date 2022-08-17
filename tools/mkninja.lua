@@ -100,6 +100,11 @@ local builds = {
     rule = 'stamp',
   },
   {
+    ins = find('data/sql'),
+    outs = 'build/sql.stamp',
+    rule = 'stamp',
+  },
+  {
     ins = {
       'build/api.stamp',
       (function()
@@ -158,7 +163,7 @@ for _, p in ipairs(productList) do
   local stamp = 'build/extracts/' .. p .. '.stamp'
   table.insert(builds, {
     args = { product = p },
-    ins = { 'data/builds.yaml', 'tools/fetch.lua' },
+    ins = { 'build/sql.stamp', 'data/builds.yaml', 'tools/dblist.lua', 'tools/fetch.lua' },
     outs = stamp,
     rule = 'fetch',
   })
