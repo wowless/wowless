@@ -45,64 +45,6 @@ local function stylua(s)
 end
 
 local tablemap = {
-  namespaceapis = function()
-    local apiNamespaces = {}
-    for k, v in pairs(apis()) do
-      local p = k:find('%.')
-      if p then
-        local name = k:sub(1, p - 1)
-        apiNamespaces[name] = apiNamespaces[name] or { methods = {} }
-        apiNamespaces[name].methods[k:sub(p + 1)] = v
-      end
-    end
-    for _, v in pairs(apiNamespaces) do
-      local allProducts = require('wowless.util').productList()
-      local products = {}
-      for _, m in pairs(v.methods) do
-        for _, product in ipairs(m.products or allProducts) do
-          products[product] = true
-        end
-      end
-      local plist = {}
-      for f in pairs(products) do
-        table.insert(plist, f)
-      end
-      assert(next(plist))
-      v.products = #plist ~= #allProducts and plist or nil
-      for _, m in pairs(v.methods) do
-        if m.products and #m.products == #plist then
-          m.products = nil
-        end
-      end
-    end
-    local unavailable = {
-      -- These are grabbed by FrameXML and are unavailable by the time addons run.
-      'C_AuthChallenge',
-      'C_SecureTransfer',
-      'C_StoreSecure',
-      'C_WowTokenSecure',
-    }
-    for _, k in ipairs(unavailable) do
-      assert(apiNamespaces[k])
-      apiNamespaces[k] = nil
-    end
-    local t = {}
-    for k, v in pairs(apiNamespaces) do
-      local mt = {}
-      for mk, mv in pairs(v.methods) do
-        local tt = {
-          products = mapify(mv.products),
-          stdlib = mv.stdlib,
-        }
-        mt[mk] = next(tt) and tt or true
-      end
-      t[k] = {
-        methods = mt,
-        products = mapify(v.products),
-      }
-    end
-    return 'NamespaceApis', t
-  end,
   uiobjectapis = function()
     local uiobjects = {}
     for d in lfs.dir('data/uiobjects') do
@@ -211,6 +153,40 @@ local ptablemap = {
   globals = function(p)
     local cfg = require('wowapi.yaml').parseFile('data/globals/' .. p .. '.yaml')
     return 'Globals', cfg
+  end,
+  namespaceapis = function(p)
+    local apiNamespaces = {}
+    for k, v in pairs(apis()) do
+      local dot = k:find('%.')
+      if dot and (not v.products or mapify(v.products)[p]) then
+        local name = k:sub(1, dot - 1)
+        apiNamespaces[name] = apiNamespaces[name] or { methods = {} }
+        apiNamespaces[name].methods[k:sub(dot + 1)] = v
+      end
+    end
+    local unavailable = {
+      -- These are grabbed by FrameXML and are unavailable by the time addons run.
+      'C_AuthChallenge',
+      'C_SecureTransfer',
+      'C_StoreSecure',
+      'C_WowTokenSecure',
+    }
+    for _, k in ipairs(unavailable) do
+      assert(apiNamespaces[k])
+      apiNamespaces[k] = nil
+    end
+    local t = {}
+    for k, v in pairs(apiNamespaces) do
+      local mt = {}
+      for mk, mv in pairs(v.methods) do
+        local tt = {
+          stdlib = mv.stdlib,
+        }
+        mt[mk] = next(tt) and tt or true
+      end
+      t[k] = mt
+    end
+    return 'NamespaceApis', t
   end,
 }
 

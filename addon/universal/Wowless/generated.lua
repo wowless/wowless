@@ -58,9 +58,7 @@ function G.GeneratedTests()
         -- Anything left over must be a FrameXML-defined function.
         if not tests[k] then
           tests['~' .. k] = function()
-            if not cfuncs[v] then
-              return checkLuaFunc(v)
-            end
+            return checkNotCFunc(v)
           end
         end
       end
@@ -68,23 +66,16 @@ function G.GeneratedTests()
     end
     local tests = {}
     local empty = {}
-    for name, ncfg in pairs(G.NamespaceApis) do
+    for name, ncfg in pairs(_G.WowlessData.NamespaceApis) do
       tests[name] = function()
         local ns = _G[name]
-        if ncfg.products and not ncfg.products[runtimeProduct] then
-          assertEquals('nil', type(ns))
-          return
-        end
         assertEquals('table', type(ns))
         assert(getmetatable(ns) == nil)
         local mtests = {}
-        for mname, mcfg in pairs(ncfg.methods) do
+        for mname, mcfg in pairs(ncfg) do
           mcfg = mcfg == true and empty or mcfg
           mtests[mname] = function()
             local func = ns[mname]
-            if mcfg.products and not mcfg.products[runtimeProduct] then
-              return checkNotCFunc(func)
-            end
             if mcfg.stdlib then
               local ty = type(tget(_G, mcfg.stdlib))
               if ty == 'function' then
@@ -195,9 +186,7 @@ function G.GeneratedTests()
     for k, v in pairs(_G) do
       if type(v) == 'function' and not tests[k] and not ptrhooked[k] then
         tests['~' .. k] = function()
-          if not cfuncs[v] then
-            return checkLuaFunc(v)
-          end
+          return checkNotCFunc(v)
         end
       end
     end
