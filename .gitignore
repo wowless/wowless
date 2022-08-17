@@ -1,12 +1,5 @@
 .ninja_log
-addon/wow/WowlessData/
-addon/wow_beta/WowlessData/
-addon/wow_classic/WowlessData/
-addon/wow_classic_beta/WowlessData/
-addon/wow_classic_era/WowlessData/
-addon/wow_classic_era_ptr/WowlessData/
-addon/wow_classic_ptr/WowlessData/
-addon/wowt/WowlessData/
+addon/perproduct/
 build/
 build.ninja
 cache
