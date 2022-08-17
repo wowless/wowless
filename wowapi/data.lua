@@ -1,5 +1,6 @@
 local extLoaders = {
   lua = loadfile,
+  sql = require('pl.file').read,
   yaml = require('wowapi.yaml').parseFile,
 }
 
@@ -45,6 +46,8 @@ local fns = {
   events = loaddir('events', 'yaml'),
   impl = loaddir('impl', 'lua'),
   schemas = loaddir('schemas', 'yaml'),
+  sqlcursor = loaddir('sql/cursor', 'sql'),
+  sqllookup = loaddir('sql/lookup', 'sql'),
   state = loaddir('state', 'yaml'),
   structures = loaddir('structures', 'yaml'),
   uiobjects = loadUIObjects,
@@ -53,7 +56,7 @@ local fns = {
 
 return setmetatable({}, {
   __index = function(t, k)
-    local v = assert(fns[k]())
+    local v = assert(assert(fns[k], 'bad key ' .. k)())
     t[k] = v
     return v
   end,

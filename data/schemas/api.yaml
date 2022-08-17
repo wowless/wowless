@@ -117,6 +117,18 @@ type:
           oneof:
           - literal: hardware
           - literal: secure
+      sqls:
+        type:
+          sequenceof:
+            oneof:
+            - record:
+                cursor:
+                  type:
+                    ref: sqlcursor
+            - record:
+                lookup:
+                  type:
+                    ref: sqllookup
       states:
         type:
           sequenceof:

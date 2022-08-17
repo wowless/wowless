@@ -9,7 +9,7 @@ outputs:
   nilable: true
   type: C_Texture.AtlasInfo
 dbs:
-- index: ID
-  name: UiTextureAtlas
-- index: CommittedName
-  name: UiTextureAtlasMember
+- name: UiTextureAtlas
+- name: UiTextureAtlasMember
+sqls:
+- lookup: C_Texture.GetAtlasInfo

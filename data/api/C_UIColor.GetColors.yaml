@@ -11,3 +11,5 @@ dbs:
 - name: GlobalColor
 products:
 - wow_beta
+sqls:
+- cursor: C_UIColor.GetColors
