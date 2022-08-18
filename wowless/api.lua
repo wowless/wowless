@@ -151,8 +151,8 @@ local function new(log, maxErrors)
       name = objname,
       type = typename,
     }
-    SetParent(obj, parent)
     type.constructor(obj)
+    SetParent(obj, parent)
     if InheritsFrom(typename, 'frame') then
       table.insert(frames, obj)
       u(obj).frameIndex = #frames

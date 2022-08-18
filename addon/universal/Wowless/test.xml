@@ -342,4 +342,23 @@
     }
     assertEquals(table.concat(expected, ','), table.concat(_G.WowlessLog, ','))
   </Script>
+
+  <Frame>
+    <Frames>
+      <Frame>
+        <Scripts>
+          <OnLoad>
+            assertEquals('MEDIUM', self:GetFrameStrata())
+            assertEquals(1, self:GetFrameLevel())
+          </OnLoad>
+        </Scripts>
+      </Frame>
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        assertEquals('MEDIUM', self:GetFrameStrata())
+        assertEquals(0, self:GetFrameLevel())
+      </OnLoad>
+    </Scripts>
+  </Frame>
 </Ui>
