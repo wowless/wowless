@@ -7,10 +7,6 @@ util.lua
 init.lua
 framework.lua
 test.xml
-builds.lua
-globalapis.lua
-namespaceapis.lua
-uiobjectapis.lua
 generated.lua
 api.lua
 test.lua
