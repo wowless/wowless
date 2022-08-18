@@ -34,6 +34,7 @@ local function new(log, maxErrors)
     'highlightTexture',
     'normalTexture',
     'pushedTexture',
+    'scrollChild',
   }
 
   local function SetParent(obj, parent)

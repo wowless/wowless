@@ -643,22 +643,29 @@ local syncTests = function()
       }
     end,
 
-    ['ScrollFrame:SetScrollChild'] = function()
-      local f = CreateFrame('ScrollFrame')
-      assertEquals(nil, f:GetScrollChild())
-      local g = CreateFrame('Frame', 'WowlessScrollFrameChild')
-      f:SetScrollChild(g)
-      assertEquals(g, f:GetScrollChild())
-      f:SetScrollChild(nil)
-      assertEquals(nil, f:GetScrollChild())
-      f:SetScrollChild('WowlessScrollFrameChild')
-      assertEquals(g, f:GetScrollChild())
-      assertEquals(
-        false,
-        pcall(function()
-          f:SetScrollChild()
-        end)
-      )
+    ScrollFrame = function()
+      return {
+        SetScrollChild = function()
+          local f = CreateFrame('ScrollFrame')
+          assertEquals(nil, f:GetScrollChild())
+          local g = CreateFrame('Frame', 'WowlessScrollFrameChild')
+          f:SetScrollChild(g)
+          assertEquals(g, f:GetScrollChild())
+          assertEquals(f, g:GetParent())
+          f:SetScrollChild(nil)
+          assertEquals(nil, f:GetScrollChild())
+          assertEquals(f, g:GetParent())
+          f:SetScrollChild('WowlessScrollFrameChild')
+          assertEquals(g, f:GetScrollChild())
+          assertEquals(f, g:GetParent())
+          assertEquals(
+            false,
+            pcall(function()
+              f:SetScrollChild()
+            end)
+          )
+        end,
+      }
     end,
 
     StatusBar = function()
