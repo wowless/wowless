@@ -2,6 +2,9 @@
 
 A headless WoW client Lua and FrameXML interpreter. Intended for addon testing.
 
+Wowless is still pre-alpha. If you're interested in Wowless development,
+join the Discord at <https://discord.gg/rTwWcfJXuz>.
+
 Development is easiest with VSCode and Docker.
 Use `Clone Repository in Container Volume...`, select this repository to clone,
 and then watch as VSCode builds a container and installs all necessary dependencies.
