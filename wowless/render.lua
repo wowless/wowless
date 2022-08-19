@@ -46,44 +46,33 @@ local function frames2rects(api, screenWidth, screenHeight)
   end
   for _, r in ipairs(assert(tt:sort())) do
     local points = {}
-    if r:GetNumPoints() == 1 and r:GetPoint(1) == 'CENTER' then
-      local _, x, y = p2c(r, 1)
-      local w, h = r:GetSize()
-      rects[r] = {
-        bottom = y and y - (h / 2),
-        left = x and x - (w / 2),
-        right = x and x + (w / 2),
-        top = y and y + (h / 2),
-      }
-    else
-      for i = 1, r:GetNumPoints() do
-        local p, x, y = p2c(r, i)
-        points[p] = { x = x, y = y }
-      end
-      local pts = {
-        bottom = points.BOTTOMLEFT or points.BOTTOM or points.BOTTOMRIGHT,
-        left = points.TOPLEFT or points.LEFT or points.BOTTOMLEFT,
-        midx = points.TOP or points.BOTTOM,
-        midy = points.LEFT or points.RIGHT,
-        right = points.TOPRIGHT or points.RIGHT or points.BOTTOMRIGHT,
-        top = points.TOPLEFT or points.TOP or points.TOPRIGHT,
-      }
-      local w, h = r:GetSize()
-      rects[r] = {
-        bottom = pts.bottom and pts.bottom.y
-          or pts.top and pts.top.y and pts.top.y - h
-          or pts.midy and pts.midy.y and pts.midy.y - h / 2,
-        left = pts.left and pts.left.x
-          or pts.right and pts.right.x and pts.right.x - w
-          or pts.midx and pts.midx.x and pts.midx.x - w / 2,
-        right = pts.right and pts.right.x
-          or pts.left and pts.left.x and pts.left.x + w
-          or pts.midx and pts.midx.x and pts.midx.x + w / 2,
-        top = pts.top and pts.top.y
-          or pts.bottom and pts.bottom.y and pts.bottom.y + h
-          or pts.midy and pts.midy.y and pts.midy.y + h / 2,
-      }
+    for i = 1, r:GetNumPoints() do
+      local p, x, y = p2c(r, i)
+      points[p] = { x = x, y = y }
     end
+    local pts = {
+      bottom = points.BOTTOMLEFT or points.BOTTOM or points.BOTTOMRIGHT,
+      left = points.TOPLEFT or points.LEFT or points.BOTTOMLEFT,
+      midx = points.TOP or points.CENTER or points.BOTTOM,
+      midy = points.LEFT or points.CENTER or points.RIGHT,
+      right = points.TOPRIGHT or points.RIGHT or points.BOTTOMRIGHT,
+      top = points.TOPLEFT or points.TOP or points.TOPRIGHT,
+    }
+    local w, h = r:GetSize()
+    rects[r] = {
+      bottom = pts.bottom and pts.bottom.y
+        or pts.top and pts.top.y and pts.top.y - h
+        or pts.midy and pts.midy.y and pts.midy.y - h / 2,
+      left = pts.left and pts.left.x
+        or pts.right and pts.right.x and pts.right.x - w
+        or pts.midx and pts.midx.x and pts.midx.x - w / 2,
+      right = pts.right and pts.right.x
+        or pts.left and pts.left.x and pts.left.x + w
+        or pts.midx and pts.midx.x and pts.midx.x + w / 2,
+      top = pts.top and pts.top.y
+        or pts.bottom and pts.bottom.y and pts.bottom.y + h
+        or pts.midy and pts.midy.y and pts.midy.y + h / 2,
+    }
   end
   local ret = {}
   for _, frame in ipairs(api.frames) do
