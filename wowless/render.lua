@@ -243,6 +243,11 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
                 local maskwand = magick.new_magick_wand()
                 assert(maskwand:read_image_blob(mpng))
                 assert(maskwand:distort_image(magick.DistortImageMethod.BilinearDistortion, {
+                  -- Top left
+                  mwidth,
+                  mheight,
+                  0,
+                  0,
                   -- Top right
                   mwidth,
                   0,
