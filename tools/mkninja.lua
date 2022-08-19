@@ -23,7 +23,7 @@ local perProductAddonGeneratedTypes = {
     return { 'build/api.stamp' }
   end,
   globals = function(p)
-    return { 'data/globals/' .. p .. '.yaml' }
+    return { 'data/products/' .. p .. '/globals.yaml' }
   end,
   namespaceapis = function()
     return { 'build/api.stamp' }

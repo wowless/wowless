@@ -80,7 +80,7 @@ local ptablemap = {
     return 'GlobalApis', t
   end,
   globals = function(p)
-    local cfg = require('wowapi.yaml').parseFile('data/globals/' .. p .. '.yaml')
+    local cfg = require('wowapi.yaml').parseFile('data/products/' .. p .. '/globals.yaml')
     return 'Globals', cfg
   end,
   namespaceapis = function(p)

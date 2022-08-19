@@ -139,7 +139,7 @@ if data.generated.cvars then
 end
 
 if data.generated.globals then
-  local gf = 'data/globals/' .. product .. '.yaml'
+  local gf = 'data/products/' .. product .. '/globals.yaml'
   local g = yaml.parseFile(gf)
   applyPatterns(g, data.generated.globals or {})
   write(gf, yaml.pprint(g))

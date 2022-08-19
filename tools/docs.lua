@@ -46,7 +46,7 @@ for _, product in ipairs(products) do
   local prefix = 'extracts/' .. product .. '/Interface/AddOns/'
   processDocDir(prefix .. 'Blizzard_APIDocumentation')
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
-  local globals = require('wowapi.yaml').parseFile('data/globals/' .. product .. '.yaml')
+  local globals = require('wowapi.yaml').parseFile('data/products/' .. product .. '/globals.yaml')
   for en, em in pairs(globals.Enum) do
     enum[en] = enum[en] or em
   end
@@ -339,7 +339,7 @@ if enabledTypes.enums then
   end
   for _, p in ipairs(products) do
     local y = require('wowapi.yaml')
-    local f = 'data/globals/' .. p .. '.yaml'
+    local f = 'data/products/' .. p .. '/globals.yaml'
     local g = y.parseFile(f)
     for k, v in pairs(t) do
       g.Enum[k] = v
@@ -365,7 +365,7 @@ if enabledTypes.constants then
   end
   for _, p in ipairs(products) do
     local y = require('wowapi.yaml')
-    local f = 'data/globals/' .. p .. '.yaml'
+    local f = 'data/products/' .. p .. '/globals.yaml'
     local g = y.parseFile(f)
     for k, v in pairs(t) do
       g.Constants[k] = v
