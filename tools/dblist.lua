@@ -15,21 +15,18 @@ return function(product)
     GlobalStrings = true,
     ManifestInterfaceTOCData = true,
   }
+  local productapis = require('wowapi.yaml').parseFile('data/products/' .. product .. '/apis.yaml')
+  local allapis = require('wowapi.data').apis
   local sqls = {}
-  for _, v in pairs(require('wowapi.data').apis) do
-    local products = {}
-    for _, f in ipairs(v.products or {}) do
-      products[f] = true
+  for _, apiname in pairs(productapis) do
+    local api = allapis[apiname]
+    for _, db in ipairs(api.dbs or {}) do
+      dbset[db.name] = true
     end
-    if not v.products or products[product] then
-      for _, db in ipairs(v.dbs or {}) do
-        dbset[db.name] = true
-      end
-      for _, sql in ipairs(v.sqls or {}) do
-        if productEnabled(product, sql.products) then
-          local kk = sql.lookup and 'lookup' or 'cursor'
-          table.insert(sqls, kk .. '/' .. sql[kk])
-        end
+    for _, sql in ipairs(api.sqls or {}) do
+      if productEnabled(product, sql.products) then
+        local kk = sql.lookup and 'lookup' or 'cursor'
+        table.insert(sqls, kk .. '/' .. sql[kk])
       end
     end
   end
