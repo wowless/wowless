@@ -32,12 +32,6 @@ local function loadUIObjects()
   return uiobjects
 end
 
-local function lazyyaml(f)
-  return function()
-    return extLoaders.yaml('data/' .. f .. '.yaml')
-  end
-end
-
 local function perproduct(f)
   return function()
     local t = {}
@@ -51,7 +45,7 @@ end
 local fns = {
   apis = loaddir('api', 'yaml'),
   builds = perproduct('build'),
-  cvars = lazyyaml('cvars'),
+  cvars = perproduct('cvars'),
   dbdefs = loaddir('dbdefs', 'yaml'),
   events = loaddir('events', 'yaml'),
   impl = loaddir('impl', 'lua'),

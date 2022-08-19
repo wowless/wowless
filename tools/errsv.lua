@@ -95,46 +95,10 @@ end
 
 local allProducts = require('wowless.util').productList()
 
-local function explode(cvars)
-  for k, v in pairs(cvars) do
-    if type(v) == 'string' then
-      local t = {}
-      for _, p in ipairs(allProducts) do
-        t[p] = v
-      end
-      cvars[k] = t
-    end
-  end
-end
-
-local function implode(cvars)
-  for k, t in pairs(cvars) do
-    local vals = {}
-    for _, v in pairs(t) do
-      vals[v] = (vals[v] or 0) + 1
-    end
-    local vk, vv = next(vals)
-    if not vk then
-      cvars[k] = nil
-    elseif vv == #allProducts then
-      cvars[k] = vk
-    end
-  end
-end
-
 if data.generated.cvars then
-  local cvarsfile = 'data/cvars.yaml'
+  local cvarsfile = 'data/products/' .. product .. '/cvars.yaml'
   local cvars = yaml.parseFile(cvarsfile)
-  explode(cvars)
-  for k, v in pairs(data.generated.cvars) do
-    assert(type(v) == 'string')
-    local match, value = getPatternValue(v)
-    if match then
-      cvars[k] = cvars[k] or {}
-      cvars[k][product] = value
-    end
-  end
-  implode(cvars)
+  applyPatterns(cvars, data.generated.cvars)
   write(cvarsfile, yaml.pprint(cvars))
 end
 

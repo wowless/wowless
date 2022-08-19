@@ -21,10 +21,13 @@ local function init(api, loader, taint)
   util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
   Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api, loader))
   if loader.product then
-    Mixin(api.env, (require('wowapi.yaml').parseFile(('data/products/%s/globals.yaml'):format(loader.product))))
+    local function load(f)
+      return (require('wowapi.yaml').parseFile(('data/products/%s/%s.yaml'):format(loader.product, f)))
+    end
+    Mixin(api.env, load('globals'))
     -- TODO put this somewhere else
     local cvarDefaults = {}
-    for k, v in pairs(require('wowapi.data').cvars) do
+    for k, v in pairs(load('cvars')) do
       cvarDefaults[k] = type(v) == 'string' and v or v[loader.product]
     end
     api.env.C_CVar.GetCVarDefault = debug.newcfunction(function(k)

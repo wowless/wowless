@@ -1,7 +1,4 @@
 ---
 name: cvars
 type:
-  mapof:
-    oneof:
-    - string
-    - mapof: string
+  mapof: string

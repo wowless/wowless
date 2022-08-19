@@ -46,20 +46,13 @@ end
 
 local ptablemap = {
   build = function(p)
-    return 'Build', require('wowapi.yaml').parseFile('data/products/' .. p .. '/build.yaml')
+    local cfg = require('wowapi.yaml').parseFile('data/products/' .. p .. '/build.yaml')
+    return 'Build', cfg
   end,
-  cvars = (function()
-    local lazycvars = lazy(function()
-      return require('wowapi.yaml').parseFile('data/cvars.yaml')
-    end)
-    return function(p)
-      local t = {}
-      for k, v in pairs(lazycvars()) do
-        t[k] = type(v) == 'string' and v or v[p]
-      end
-      return 'CVars', t
-    end
-  end)(),
+  cvars = function(p)
+    local cfg = require('wowapi.yaml').parseFile('data/products/' .. p .. '/cvars.yaml')
+    return 'CVars', cfg
+  end,
   globalapis = function(p)
     local unavailableApis = {
       CreateForbiddenFrame = true,
