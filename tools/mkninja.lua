@@ -199,20 +199,16 @@ local function flatten(x)
   return table.concat(t, ' ')
 end
 
-local rulenames = {}
-for k in pairs(rules) do
-  table.insert(rulenames, k)
-end
-table.sort(rulenames)
+local sorted = require('pl.tablex').sort
 
 local out = {}
 for p, n in pairs(pools) do
   table.insert(out, 'pool ' .. p)
   table.insert(out, '  depth = ' .. n)
 end
-for _, k in ipairs(rulenames) do
+for k, v in sorted(rules) do
   table.insert(out, 'rule ' .. k)
-  for rk, rv in pairs(rules[k]) do
+  for rk, rv in sorted(v) do
     table.insert(out, '  ' .. rk .. ' = ' .. rv)
   end
 end
@@ -230,7 +226,7 @@ for _, b in ipairs(builds) do
   table.insert(bb, '|')
   table.insert(bb, flatten(b.ins))
   table.insert(out, table.concat(bb, ' '))
-  for k, v in pairs(b.args or {}) do
+  for k, v in sorted(b.args or {}) do
     table.insert(out, '  ' .. k .. ' = ' .. v)
   end
 end
