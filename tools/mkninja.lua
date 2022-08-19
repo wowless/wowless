@@ -58,7 +58,7 @@ local rules = {
     pool = 'fetch_pool',
   },
   mkaddon = {
-    command = taintedLua .. ' tools/gentest.lua -f $type $productarg',
+    command = taintedLua .. ' tools/gentest.lua -f $type -p $product',
   },
   mktaintedlua = {
     command = 'cd tainted-lua && rm -rf build && cmake --preset linux && cmake --build --preset linux',
@@ -143,14 +143,14 @@ local builds = {
 for _, p in ipairs(productList) do
   local prefix = 'addon/perproduct/' .. p .. '/WowlessData/'
   table.insert(builds, {
-    args = { productarg = '-p ' .. p, ['type'] = 'toc' },
+    args = { product = p, ['type'] = 'toc' },
     ins = { taintedLua, 'tools/gentest.lua' },
     outs_implicit = prefix .. 'WowlessData.toc',
     rule = 'mkaddon',
   })
   for k, v in pairs(perProductAddonGeneratedTypes) do
     table.insert(builds, {
-      args = { productarg = '-p ' .. p, ['type'] = k },
+      args = { product = p, ['type'] = k },
       ins = { taintedLua, v(p), 'tools/gentest.lua' },
       outs_implicit = prefix .. k .. '.lua',
       rule = 'mkaddon',
