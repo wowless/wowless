@@ -45,14 +45,9 @@ local function stylua(s)
 end
 
 local ptablemap = {
-  build = (function()
-    local lazybuilds = lazy(function()
-      return require('wowapi.yaml').parseFile('data/builds.yaml')
-    end)
-    return function(p)
-      return 'Build', lazybuilds()[p]
-    end
-  end)(),
+  build = function(p)
+    return 'Build', require('wowapi.yaml').parseFile('data/products/' .. p .. '/build.yaml')
+  end,
   cvars = (function()
     local lazycvars = lazy(function()
       return require('wowapi.yaml').parseFile('data/cvars.yaml')

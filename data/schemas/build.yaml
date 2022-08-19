@@ -1,0 +1,28 @@
+---
+name: build
+type:
+  record:
+    build:
+      required: true
+      type: string
+    date:
+      required: true
+      type: string
+    flavor:
+      required: true
+      type: string
+    hash:
+      required: true
+      type: string
+    ptr:
+      required: true
+      type: boolean
+    test:
+      required: true
+      type: boolean
+    tocversion:
+      required: true
+      type: number
+    version:
+      required: true
+      type: string

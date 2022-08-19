@@ -100,8 +100,8 @@ end
 
 local function productList()
   local t = {}
-  for k in pairs(require('wowapi.yaml').parseFile('data/builds.yaml')) do
-    table.insert(t, k)
+  for _, k in ipairs(require('pl.dir').getdirectories('data/products')) do
+    table.insert(t, k:sub(15))
   end
   table.sort(t)
   return t

@@ -18,8 +18,11 @@ local skipname = {
 }
 
 local fileschemas = {
-  builds = 'builds',
   cvars = 'cvars',
+}
+
+local productschemas = {
+  build = 'build',
 }
 
 describe('yaml', function()
@@ -61,5 +64,20 @@ describe('yaml', function()
         validate(schema, data)
       end)
     end)
+  end
+  for _, d in ipairs(require('pl.dir').getdirectories('data/products')) do
+    for file, schemaname in pairs(productschemas) do
+      describe(d .. '/' .. file, function()
+        local schema = yaml.parseFile('data/schemas/' .. schemaname .. '.yaml').type
+        local str = plfile.read(d .. '/' .. file .. '.yaml')
+        local data = yaml.parse(str)
+        it('is correctly formatted', function()
+          assert.same(str, yaml.pprint(data))
+        end)
+        it('schema validates', function()
+          validate(schema, data)
+        end)
+      end)
+    end
   end
 end)

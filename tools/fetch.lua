@@ -20,10 +20,7 @@ local productToSuffix = {
 }
 local tocSuffix = assert(productToSuffix[product], 'invalid product')
 
-local build = (function()
-  local builds = require('wowapi.yaml').parseFile('data/builds.yaml')
-  return assert(builds[product], 'invalid product').hash
-end)()
+local build = require('wowapi.yaml').parseFile('data/products/' .. product .. '/build.yaml').hash
 
 local dbs = require('wowless.db')
 assert(dbs.fdid('ManifestInterfaceTOCData'), 'missing manifest')

@@ -38,9 +38,19 @@ local function lazyyaml(f)
   end
 end
 
+local function perproduct(f)
+  return function()
+    local t = {}
+    for _, d in ipairs(require('pl.dir').getdirectories('data/products')) do
+      t[require('path').basename(d)] = extLoaders.yaml(d .. '/' .. f .. '.yaml')
+    end
+    return t
+  end
+end
+
 local fns = {
   apis = loaddir('api', 'yaml'),
-  builds = lazyyaml('builds'),
+  builds = perproduct('build'),
   cvars = lazyyaml('cvars'),
   dbdefs = loaddir('dbdefs', 'yaml'),
   events = loaddir('events', 'yaml'),

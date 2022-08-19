@@ -13,8 +13,8 @@ local productList = require('wowless.util').productList()
 
 -- TODO get this from gentest.lua
 local perProductAddonGeneratedTypes = {
-  build = function()
-    return { 'data/builds.yaml' }
+  build = function(p)
+    return { 'data/products/' .. p .. '/build.yaml' }
   end,
   cvars = function()
     return { 'data/cvars.yaml' }
@@ -163,7 +163,12 @@ for _, p in ipairs(productList) do
   local stamp = 'build/extracts/' .. p .. '.stamp'
   table.insert(builds, {
     args = { product = p },
-    ins = { 'build/sql.stamp', 'data/builds.yaml', 'tools/dblist.lua', 'tools/fetch.lua' },
+    ins = {
+      'build/sql.stamp',
+      'data/products/' .. p .. '/build.yaml',
+      'tools/dblist.lua',
+      'tools/fetch.lua',
+    },
     outs = stamp,
     rule = 'fetch',
   })

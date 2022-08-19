@@ -1,7 +1,7 @@
 local dblist = require('tools.dblist')
 local dbds = require('luadbd').dbds
 local ret = {}
-local builds = require('wowapi.yaml').parseFile('data/builds.yaml')
+local builds = require('wowapi.data').builds
 for product, build in pairs(builds) do
   for _, db in ipairs(dblist(product)) do
     db = db:lower()
