@@ -3,8 +3,9 @@ return (function(self, tex)
   local t = toTexture(self, tex, ud.highlightTexture)
   if t then
     t:SetParent(self)
-    t:ClearAllPoints()
-    t:SetAllPoints()
+    if t:GetNumPoints() == 0 then
+      t:SetAllPoints()
+    end
     t:SetDrawLayer('HIGHLIGHT')
     t:Show()
   end
