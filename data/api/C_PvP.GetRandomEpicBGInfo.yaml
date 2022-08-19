@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: info
   type: C_PvP.RandomBGInfo
-products:
-- wow
-- wowt
-- wow_beta

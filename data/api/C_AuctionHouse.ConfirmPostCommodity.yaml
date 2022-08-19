@@ -12,7 +12,3 @@ inputs:
   - name: unitPrice
     type: number
 outputs: {}
-products:
-- wow
-- wow_beta
-- wowt

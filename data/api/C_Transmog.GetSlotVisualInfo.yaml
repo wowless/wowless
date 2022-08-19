@@ -24,7 +24,3 @@ outputs:
   type: boolean
 - name: itemSubclass
   type: number
-products:
-- wow
-- wowt
-- wow_beta

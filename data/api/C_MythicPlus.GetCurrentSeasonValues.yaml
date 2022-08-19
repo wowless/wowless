@@ -10,7 +10,3 @@ outputs:
   type: number
 - name: rewardSeasonID
   type: number
-products:
-- wow
-- wowt
-- wow_beta

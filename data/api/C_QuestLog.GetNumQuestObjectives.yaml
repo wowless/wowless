@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: leaderboardCount
   type: number
-products:
-- wow
-- wowt
-- wow_beta

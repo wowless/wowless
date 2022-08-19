@@ -9,5 +9,3 @@ outputs:
   name: itemLocation
   nilable: true
   type: table
-products:
-- wow_beta

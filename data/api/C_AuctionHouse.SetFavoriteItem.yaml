@@ -7,7 +7,3 @@ inputs:
   - name: setFavorite
     type: boolean
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

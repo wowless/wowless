@@ -8,7 +8,3 @@ outputs:
   nilable: true
   stub: 22
   type: number
-products:
-- wow
-- wowt
-- wow_beta

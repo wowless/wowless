@@ -7,7 +7,3 @@ outputs:
 - innerType: C_MythicPlus.MythicPlusKeystoneAffix
   name: affixIDs
   type: table
-products:
-- wow
-- wowt
-- wow_beta

@@ -10,7 +10,3 @@ outputs:
 dbs:
 - index: ID
   name: UiItemInteraction
-products:
-- wow
-- wowt
-- wow_beta

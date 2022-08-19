@@ -8,7 +8,3 @@ outputs:
   type: number
 - name: numActiveApplications
   type: number
-products:
-- wow
-- wowt
-- wow_beta

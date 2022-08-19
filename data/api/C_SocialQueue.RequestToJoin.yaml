@@ -16,7 +16,3 @@ inputs:
 outputs:
 - name: requestSuccessful
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

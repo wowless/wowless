@@ -16,5 +16,3 @@ outputs:
   name: currencyRewards
   nilable: true
   type: table
-products:
-- wow_beta

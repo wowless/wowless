@@ -6,5 +6,3 @@ inputs:
 outputs:
 - name: minItemLevel
   type: number
-products:
-- wow_beta

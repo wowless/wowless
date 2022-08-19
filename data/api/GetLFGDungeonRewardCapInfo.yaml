@@ -27,7 +27,3 @@ outputs:
   type: number
 - name: isWeekly
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

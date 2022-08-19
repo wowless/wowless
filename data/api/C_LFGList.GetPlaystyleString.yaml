@@ -9,7 +9,3 @@ inputs:
 outputs:
 - name: playstyleString
   type: string
-products:
-- wow
-- wowt
-- wow_beta

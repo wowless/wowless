@@ -9,7 +9,3 @@ outputs:
   name: iconFlags
   nilable: true
   type: table
-products:
-- wow
-- wowt
-- wow_beta

@@ -8,7 +8,3 @@ outputs:
 - name: slotInfo
   nilable: true
   type: C_SpecializationInfo.PvpTalentSlotInfo
-products:
-- wow
-- wowt
-- wow_beta

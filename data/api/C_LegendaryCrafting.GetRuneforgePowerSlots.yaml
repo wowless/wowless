@@ -8,7 +8,3 @@ outputs:
 - innerType: string
   name: slotNames
   type: table
-products:
-- wow
-- wowt
-- wow_beta

@@ -9,5 +9,3 @@ inputs:
 outputs:
 - name: canRefund
   type: boolean
-products:
-- wow_beta

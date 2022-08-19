@@ -11,7 +11,3 @@ outputs:
   type: string
 - name: speciesName
   type: string
-products:
-- wow
-- wowt
-- wow_beta

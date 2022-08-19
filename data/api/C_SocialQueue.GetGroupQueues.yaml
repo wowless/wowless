@@ -8,7 +8,3 @@ outputs:
 - innerType: C_SocialQueue.SocialQueueGroupQueueInfo
   name: queues
   type: table
-products:
-- wow
-- wowt
-- wow_beta

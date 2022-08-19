@@ -10,7 +10,3 @@ inputs:
   - name: separateOwnerItems
     type: boolean
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

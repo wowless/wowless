@@ -11,5 +11,3 @@ outputs:
 - name: info
   nilable: true
   type: unknown
-products:
-- wow_beta

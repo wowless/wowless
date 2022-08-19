@@ -7,5 +7,3 @@ inputs:
 outputs:
 - name: hasChanges
   type: boolean
-products:
-- wow_beta

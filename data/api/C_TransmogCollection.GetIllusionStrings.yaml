@@ -12,7 +12,3 @@ outputs:
 - name: sourceText
   nilable: true
   type: string
-products:
-- wow
-- wowt
-- wow_beta

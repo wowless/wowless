@@ -8,7 +8,3 @@ outputs:
 - innerType: number
   name: questIDs
   type: table
-products:
-- wow
-- wowt
-- wow_beta

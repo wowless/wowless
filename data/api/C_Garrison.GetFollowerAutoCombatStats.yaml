@@ -8,7 +8,3 @@ outputs:
 - name: autoCombatInfo
   nilable: true
   type: C_Garrison.FollowerAutoCombatStatsInfo
-products:
-- wow
-- wowt
-- wow_beta

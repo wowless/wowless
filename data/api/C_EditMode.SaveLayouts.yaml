@@ -5,5 +5,3 @@ inputs:
 - - name: saveInfo
     type: C_EditMode.EditModeLayouts
 outputs: {}
-products:
-- wow_beta

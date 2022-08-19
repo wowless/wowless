@@ -11,7 +11,3 @@ outputs:
 - default: 0
   name: currencyAmount
   type: number
-products:
-- wow
-- wowt
-- wow_beta

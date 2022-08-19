@@ -5,5 +5,3 @@ inputs:
 - - name: recipeID
     type: number
 outputs: {}
-products:
-- wow_beta

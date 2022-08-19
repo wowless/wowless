@@ -9,7 +9,3 @@ outputs:
   stub:
   - 42
   type: table
-products:
-- wow
-- wowt
-- wow_beta

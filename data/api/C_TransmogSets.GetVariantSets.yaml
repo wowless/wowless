@@ -8,7 +8,3 @@ outputs:
 - innerType: C_TransmogSets.TransmogSetInfo
   name: sets
   type: table
-products:
-- wow
-- wowt
-- wow_beta

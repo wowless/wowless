@@ -19,7 +19,3 @@ outputs:
   type: string
 - name: secondReasonString
   type: string
-products:
-- wow
-- wowt
-- wow_beta

@@ -12,7 +12,3 @@ outputs:
   type: string
 - name: outUpgradedEffect
   type: string
-products:
-- wow
-- wowt
-- wow_beta

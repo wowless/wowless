@@ -5,7 +5,3 @@ inputs:
 - - name: tier
     type: number
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

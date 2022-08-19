@@ -11,7 +11,3 @@ outputs:
   type: number
 - name: reset
   type: number
-products:
-- wow
-- wowt
-- wow_beta

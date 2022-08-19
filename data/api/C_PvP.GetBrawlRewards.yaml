@@ -19,7 +19,3 @@ outputs:
   type: table
 - name: hasWon
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

@@ -3,7 +3,3 @@ name: EJ_GetNumLoot
 status: unimplemented
 outputs:
 - type: number
-products:
-- wow
-- wowt
-- wow_beta

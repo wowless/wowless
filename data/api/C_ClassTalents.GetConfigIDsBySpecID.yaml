@@ -9,5 +9,3 @@ outputs:
 - innerType: number
   name: configIDs
   type: table
-products:
-- wow_beta

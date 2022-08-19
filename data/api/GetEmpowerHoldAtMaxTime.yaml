@@ -6,5 +6,3 @@ inputs:
 outputs:
 - name: holdAtMaxTime
   type: number
-products:
-- wow_beta

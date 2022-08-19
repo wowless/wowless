@@ -9,5 +9,3 @@ inputs:
 outputs:
 - name: treeInfo
   type: C_Traits.TraitTreeInfo
-products:
-- wow_beta

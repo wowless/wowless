@@ -11,7 +11,3 @@ outputs:
   type: boolean
 - name: dpsLocked
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

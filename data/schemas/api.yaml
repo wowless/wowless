@@ -109,9 +109,6 @@ type:
                   - literal: table
                   - literal: unknown
                   - ref: structure
-      products:
-        type:
-          schema: products
       protection:
         type:
           oneof:

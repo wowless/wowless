@@ -8,7 +8,3 @@ outputs:
 - innerType: number
   name: itemModifiedAppearanceIDs
   type: table
-products:
-- wow
-- wowt
-- wow_beta

@@ -9,7 +9,3 @@ inputs:
     name: upgradeItem
     type: table
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

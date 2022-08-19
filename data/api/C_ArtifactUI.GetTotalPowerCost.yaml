@@ -11,7 +11,3 @@ inputs:
 outputs:
 - name: totalArtifactPowerCost
   type: number
-products:
-- wow
-- wowt
-- wow_beta

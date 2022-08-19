@@ -7,5 +7,3 @@ outputs:
 - innerType: C_EditMode.EditModeSettingInfo
   name: accountSettings
   type: table
-products:
-- wow_beta

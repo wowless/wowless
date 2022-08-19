@@ -7,5 +7,3 @@ outputs:
 - innerType: unknown
   name: infos
   type: table
-products:
-- wow_beta

@@ -7,7 +7,3 @@ outputs:
 - name: brawlInfo
   nilable: true
   type: C_PvP.PvpBrawlInfo
-products:
-- wow
-- wowt
-- wow_beta

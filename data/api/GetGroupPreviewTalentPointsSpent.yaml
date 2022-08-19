@@ -9,6 +9,3 @@ inputs:
 outputs:
 - name: talentPoints
   type: number
-products:
-- wow_classic_beta
-- wow_classic_ptr

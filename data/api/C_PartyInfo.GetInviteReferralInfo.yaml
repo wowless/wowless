@@ -15,7 +15,3 @@ outputs:
   type: boolean
 - name: outClubId
   type: string
-products:
-- wow
-- wowt
-- wow_beta

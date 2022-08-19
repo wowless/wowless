@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: weeklyProgress
   type: C_WeeklyRewards.ConquestWeeklyProgress
-products:
-- wow
-- wowt
-- wow_beta

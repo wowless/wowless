@@ -8,7 +8,3 @@ outputs:
 - name: campaignInfo
   nilable: true
   type: C_CampaignInfo.CampaignInfo
-products:
-- wow
-- wowt
-- wow_beta

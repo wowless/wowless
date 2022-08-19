@@ -19,7 +19,3 @@ outputs:
   type: number
 - name: spellID
   type: number
-products:
-- wow
-- wowt
-- wow_beta

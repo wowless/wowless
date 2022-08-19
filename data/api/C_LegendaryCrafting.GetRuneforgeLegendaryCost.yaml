@@ -9,7 +9,3 @@ outputs:
 - innerType: unknown
   name: cost
   type: table
-products:
-- wow
-- wowt
-- wow_beta

@@ -7,7 +7,3 @@ outputs:
 - innerType: C_ZoneAbility.ZoneAbilityInfo
   name: zoneAbilities
   type: table
-products:
-- wow
-- wowt
-- wow_beta

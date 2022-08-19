@@ -14,5 +14,3 @@ outputs:
   type: number
 - name: textureCoordsW
   type: number
-products:
-- wow_beta

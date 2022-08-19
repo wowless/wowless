@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: removalSuccessful
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

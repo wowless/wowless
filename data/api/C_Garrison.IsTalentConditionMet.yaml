@@ -10,7 +10,3 @@ outputs:
 - name: failureString
   nilable: true
   type: string
-products:
-- wow
-- wowt
-- wow_beta

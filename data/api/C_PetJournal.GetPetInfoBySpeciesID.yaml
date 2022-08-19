@@ -16,7 +16,3 @@ outputs:
 - type: boolean
 - type: boolean
 - type: number
-products:
-- wow
-- wowt
-- wow_beta

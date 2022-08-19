@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: postingBanned
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

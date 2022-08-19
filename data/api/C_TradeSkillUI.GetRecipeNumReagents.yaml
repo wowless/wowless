@@ -10,7 +10,3 @@ inputs:
 outputs:
 - name: numReagents
   type: number
-products:
-- wow
-- wowt
-- wow_beta

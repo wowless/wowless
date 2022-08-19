@@ -11,7 +11,3 @@ outputs:
 - innerType: C_TradeSkillUI.OptionalReagentSlot
   name: slots
   type: table
-products:
-- wow
-- wowt
-- wow_beta

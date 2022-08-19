@@ -11,5 +11,3 @@ outputs:
 - innerType: number
   name: knownSpells
   type: table
-products:
-- wow_beta

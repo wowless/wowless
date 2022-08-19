@@ -3,7 +3,3 @@ name: C_PetJournal.GetNumPetSources
 status: unimplemented
 outputs:
 - type: number
-products:
-- wow
-- wowt
-- wow_beta

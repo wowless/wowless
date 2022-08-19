@@ -11,7 +11,3 @@ outputs:
 - name: recipeInfo
   nilable: true
   type: unknown
-products:
-- wow
-- wowt
-- wow_beta

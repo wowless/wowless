@@ -12,7 +12,3 @@ outputs:
 - innerType: C_LootJournal.LootJournalItemSetInfo
   name: itemSets
   type: table
-products:
-- wow
-- wowt
-- wow_beta

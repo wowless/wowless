@@ -13,7 +13,3 @@ outputs:
   type: string
 - name: link
   type: string
-products:
-- wow
-- wowt
-- wow_beta

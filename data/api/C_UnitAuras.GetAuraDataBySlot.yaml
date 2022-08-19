@@ -10,5 +10,3 @@ outputs:
 - name: aura
   nilable: true
   type: table
-products:
-- wow_beta

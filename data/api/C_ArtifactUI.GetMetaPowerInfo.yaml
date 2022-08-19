@@ -10,7 +10,3 @@ outputs:
   type: number
 - name: currentRank
   type: number
-products:
-- wow
-- wowt
-- wow_beta

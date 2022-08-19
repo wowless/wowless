@@ -5,7 +5,3 @@ inputs:
 - - name: type
     type: number
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

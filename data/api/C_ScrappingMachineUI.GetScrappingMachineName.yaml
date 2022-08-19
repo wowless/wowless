@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: name
   type: string
-products:
-- wow
-- wowt
-- wow_beta

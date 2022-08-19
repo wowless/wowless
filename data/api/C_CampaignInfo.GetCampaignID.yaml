@@ -8,7 +8,3 @@ outputs:
 - name: campaignID
   stub: 0
   type: number
-products:
-- wow
-- wowt
-- wow_beta

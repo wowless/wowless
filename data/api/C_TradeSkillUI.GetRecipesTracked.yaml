@@ -7,5 +7,3 @@ outputs:
 - innerType: number
   name: recipeIDs
   type: table
-products:
-- wow_beta

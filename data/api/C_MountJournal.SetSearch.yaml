@@ -5,7 +5,3 @@ inputs:
 - - name: searchValue
     type: string
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

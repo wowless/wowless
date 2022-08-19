@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: keyStoneLevel
   type: number
-products:
-- wow
-- wowt
-- wow_beta

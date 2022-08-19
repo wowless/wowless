@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: areAllSourceTypeFiltersChecked
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

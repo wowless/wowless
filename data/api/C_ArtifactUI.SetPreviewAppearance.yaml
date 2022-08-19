@@ -6,7 +6,3 @@ inputs:
     name: artifactAppearanceID
     type: number
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

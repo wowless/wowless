@@ -7,5 +7,3 @@ inputs:
 outputs:
 - name: duration
   type: number
-products:
-- wow_beta

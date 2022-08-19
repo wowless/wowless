@@ -9,7 +9,3 @@ outputs:
   type: number
 - name: screenHeight
   type: number
-products:
-- wow
-- wowt
-- wow_beta

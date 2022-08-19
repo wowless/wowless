@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: winner
   type: number
-products:
-- wow
-- wowt
-- wow_beta

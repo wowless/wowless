@@ -12,10 +12,12 @@ local function supportsProduct(product, products)
 end
 
 local function loadApis(product)
+  local cfg = require('wowapi.yaml').parseFile('data/products/' .. product .. '/apis.yaml')
   local apis = {}
-  for fn, yaml in pairs(data.apis) do
-    if supportsProduct(product, yaml.products) and not yaml.debug then
-      apis[fn] = yaml
+  for name, apiname in pairs(cfg) do
+    local api = data.apis[apiname]
+    if not api.debug then
+      apis[name] = api
     end
   end
   return apis

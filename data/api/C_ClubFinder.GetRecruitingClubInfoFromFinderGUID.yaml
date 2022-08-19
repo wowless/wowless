@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: clubInfo
   type: C_ClubFinder.RecruitingClubInfo
-products:
-- wow
-- wowt
-- wow_beta

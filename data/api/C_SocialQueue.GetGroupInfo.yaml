@@ -21,7 +21,3 @@ outputs:
   type: boolean
 - name: leaderGUID
   type: string
-products:
-- wow
-- wowt
-- wow_beta

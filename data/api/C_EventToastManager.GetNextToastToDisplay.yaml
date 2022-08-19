@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: toastInfo
   type: C_EventToastManager.EventToastInfo
-products:
-- wow
-- wowt
-- wow_beta

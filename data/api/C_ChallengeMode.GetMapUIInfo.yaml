@@ -16,7 +16,3 @@ outputs:
   type: number
 - name: backgroundTexture
   type: number
-products:
-- wow
-- wowt
-- wow_beta

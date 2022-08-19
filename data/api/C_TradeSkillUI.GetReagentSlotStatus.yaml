@@ -11,5 +11,3 @@ outputs:
   type: boolean
 - name: lockedReason
   type: string
-products:
-- wow_beta

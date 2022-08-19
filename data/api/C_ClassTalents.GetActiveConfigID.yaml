@@ -7,5 +7,3 @@ outputs:
 - name: activeConfigID
   nilable: true
   type: number
-products:
-- wow_beta

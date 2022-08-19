@@ -9,7 +9,3 @@ inputs:
 outputs:
 - name: type
   type: number
-products:
-- wow
-- wowt
-- wow_beta

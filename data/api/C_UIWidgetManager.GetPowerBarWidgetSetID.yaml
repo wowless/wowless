@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: setID
   type: number
-products:
-- wow
-- wowt
-- wow_beta

@@ -9,7 +9,3 @@ inputs:
 outputs:
 - name: squishedLevel
   type: number
-products:
-- wow
-- wowt
-- wow_beta

@@ -10,5 +10,3 @@ inputs:
 outputs:
 - name: result
   type: boolean
-products:
-- wow_beta

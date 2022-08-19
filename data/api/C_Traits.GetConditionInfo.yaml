@@ -9,5 +9,3 @@ inputs:
 outputs:
 - name: condInfo
   type: C_Traits.TraitCondInfo
-products:
-- wow_beta

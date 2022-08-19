@@ -16,7 +16,3 @@ inputs:
     name: maxLevelFilter
     type: number
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

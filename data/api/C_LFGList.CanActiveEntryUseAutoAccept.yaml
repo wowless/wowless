@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: canUseAutoAccept
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

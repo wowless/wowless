@@ -12,7 +12,3 @@ outputs:
 - innerType: C_Garrison.AutoMissionTargetingInfo
   name: targetInfo
   type: table
-products:
-- wow
-- wowt
-- wow_beta

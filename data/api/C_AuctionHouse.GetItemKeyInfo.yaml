@@ -11,7 +11,3 @@ outputs:
 - name: itemKeyInfo
   nilable: true
   type: C_AuctionHouse.ItemKeyInfo
-products:
-- wow
-- wowt
-- wow_beta

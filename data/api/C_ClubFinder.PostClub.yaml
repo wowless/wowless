@@ -23,7 +23,3 @@ inputs:
 outputs:
 - name: succesful
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

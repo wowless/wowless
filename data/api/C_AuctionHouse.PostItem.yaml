@@ -18,7 +18,3 @@ inputs:
 outputs:
 - name: needsConfirmation
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

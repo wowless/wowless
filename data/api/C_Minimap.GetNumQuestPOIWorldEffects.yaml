@@ -6,5 +6,3 @@ inputs:
 outputs:
 - name: worldEffectCount
   type: number
-products:
-- wow_beta

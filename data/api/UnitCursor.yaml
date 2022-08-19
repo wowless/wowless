@@ -14,5 +14,3 @@ outputs:
 - name: texture
   nilable: true
   type: number
-products:
-- wow_beta

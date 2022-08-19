@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: artifactArtInfo
   type: C_ArtifactUI.ArtifactArtInfo
-products:
-- wow
-- wowt
-- wow_beta

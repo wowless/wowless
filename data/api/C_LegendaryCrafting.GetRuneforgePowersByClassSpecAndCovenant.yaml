@@ -18,7 +18,3 @@ outputs:
 - innerType: number
   name: runeforgePowerIDs
   type: table
-products:
-- wow
-- wowt
-- wow_beta

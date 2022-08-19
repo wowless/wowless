@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: chargeInfo
   type: C_ItemInteraction.ItemInteractionChargeInfo
-products:
-- wow
-- wowt
-- wow_beta

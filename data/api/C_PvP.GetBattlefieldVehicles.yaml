@@ -8,7 +8,3 @@ outputs:
 - innerType: C_PvP.BattlefieldVehicleInfo
   name: vehicles
   type: table
-products:
-- wow
-- wowt
-- wow_beta

@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: progress
   type: number
-products:
-- wow
-- wowt
-- wow_beta

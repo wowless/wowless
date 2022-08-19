@@ -11,7 +11,3 @@ inputs:
 outputs:
 - name: bestDungeonScoreForListing
   type: C_LFGList.BestDungeonScoreMapInfo
-products:
-- wow
-- wowt
-- wow_beta

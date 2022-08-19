@@ -8,7 +8,3 @@ outputs:
   type: number
 - name: numTotal
   type: number
-products:
-- wow
-- wowt
-- wow_beta

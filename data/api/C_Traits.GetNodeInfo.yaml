@@ -9,5 +9,3 @@ inputs:
 outputs:
 - name: nodeInfo
   type: C_Traits.TraitNodeInfo
-products:
-- wow_beta

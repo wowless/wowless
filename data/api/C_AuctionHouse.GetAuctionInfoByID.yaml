@@ -8,7 +8,3 @@ outputs:
 - name: priceInfo
   nilable: true
   type: C_AuctionHouse.AuctionInfo
-products:
-- wow
-- wowt
-- wow_beta

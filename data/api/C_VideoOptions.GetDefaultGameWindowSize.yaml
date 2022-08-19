@@ -8,5 +8,3 @@ outputs:
 - mixin: Vector2DMixin
   name: size
   type: Vector2D
-products:
-- wow_beta

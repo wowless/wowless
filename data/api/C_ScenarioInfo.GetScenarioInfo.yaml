@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: scenarioInfo
   type: C_ScenarioInfo.ScenarioInformation
-products:
-- wow
-- wowt
-- wow_beta

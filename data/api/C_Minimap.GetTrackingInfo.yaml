@@ -18,5 +18,3 @@ outputs:
 - name: spellID
   nilable: true
   type: number
-products:
-- wow_beta

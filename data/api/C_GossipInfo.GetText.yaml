@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: gossipText
   type: string
-products:
-- wow
-- wowt
-- wow_beta

@@ -9,5 +9,3 @@ inputs:
 outputs:
 - name: link
   type: string
-products:
-- wow_beta

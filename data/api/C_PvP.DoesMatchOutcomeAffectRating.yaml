@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: doesAffect
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

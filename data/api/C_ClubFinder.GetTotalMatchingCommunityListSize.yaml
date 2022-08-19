@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: totalSize
   type: number
-products:
-- wow
-- wowt
-- wow_beta

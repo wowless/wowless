@@ -17,7 +17,3 @@ outputs:
   type: number
 - name: maxLevel
   type: number
-products:
-- wow
-- wowt
-- wow_beta

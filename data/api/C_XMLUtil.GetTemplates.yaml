@@ -7,5 +7,3 @@ outputs:
 - innerType: C_XMLUtil.XMLTemplateListInfo
   name: templates
   type: table
-products:
-- wow_beta

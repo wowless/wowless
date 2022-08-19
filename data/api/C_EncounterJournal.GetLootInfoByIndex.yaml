@@ -10,7 +10,3 @@ inputs:
 outputs:
 - name: itemInfo
   type: C_EncounterJournal.EncounterJournalItemInfo
-products:
-- wow
-- wowt
-- wow_beta

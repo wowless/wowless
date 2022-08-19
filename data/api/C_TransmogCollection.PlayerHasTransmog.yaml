@@ -10,7 +10,3 @@ inputs:
 outputs:
 - name: hasTransmog
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

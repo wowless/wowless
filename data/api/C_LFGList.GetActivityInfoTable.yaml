@@ -13,9 +13,3 @@ inputs:
 outputs:
 - name: activityInfo
   type: C_LFGList.GroupFinderActivityInfo
-products:
-- wow
-- wow_beta
-- wow_classic_beta
-- wow_classic_ptr
-- wowt

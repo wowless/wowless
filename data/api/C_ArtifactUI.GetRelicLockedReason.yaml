@@ -8,7 +8,3 @@ outputs:
 - name: lockedReason
   nilable: true
   type: string
-products:
-- wow
-- wowt
-- wow_beta

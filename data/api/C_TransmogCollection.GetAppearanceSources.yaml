@@ -15,7 +15,3 @@ outputs:
 - innerType: unknown
   name: sources
   type: table
-products:
-- wow
-- wowt
-- wow_beta

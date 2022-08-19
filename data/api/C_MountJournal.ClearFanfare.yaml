@@ -5,7 +5,3 @@ inputs:
 - - name: mountID
     type: number
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

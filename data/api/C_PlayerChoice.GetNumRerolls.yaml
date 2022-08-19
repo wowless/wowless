@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: numRerolls
   type: number
-products:
-- wow
-- wowt
-- wow_beta

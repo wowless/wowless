@@ -5,7 +5,3 @@ inputs:
 - - name: displayIndex
     type: number
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

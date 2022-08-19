@@ -12,7 +12,3 @@ outputs:
   type: boolean
 - name: pvpTierMaxFromWins
   type: number
-products:
-- wow
-- wowt
-- wow_beta

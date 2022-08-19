@@ -3,7 +3,3 @@ name: GetAvailableLocaleInfo
 status: unimplemented
 outputs:
 - type: table
-products:
-- wow
-- wowt
-- wow_beta

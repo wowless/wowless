@@ -7,7 +7,3 @@ outputs:
 - innerType: number
   name: powerID
   type: table
-products:
-- wow
-- wowt
-- wow_beta

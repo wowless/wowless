@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: set
   type: C_TransmogSets.TransmogSetInfo
-products:
-- wow
-- wowt
-- wow_beta

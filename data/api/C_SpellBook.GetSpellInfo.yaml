@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: spellInfo
   type: C_SpellBook.SpellInfo
-products:
-- wow
-- wowt
-- wow_beta

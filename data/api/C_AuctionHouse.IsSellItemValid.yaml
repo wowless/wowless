@@ -11,7 +11,3 @@ inputs:
 outputs:
 - name: valid
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

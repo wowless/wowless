@@ -5,5 +5,3 @@ inputs:
 - - name: flag
     type: boolean
 outputs: {}
-products:
-- wow_beta

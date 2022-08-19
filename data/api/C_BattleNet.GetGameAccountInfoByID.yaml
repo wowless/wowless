@@ -8,7 +8,3 @@ outputs:
 - name: gameAccountInfo
   nilable: true
   type: C_BattleNet.BNetGameAccountInfo
-products:
-- wow
-- wowt
-- wow_beta

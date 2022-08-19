@@ -1,0 +1,5 @@
+---
+name: apis
+type:
+  mapof:
+    ref: api

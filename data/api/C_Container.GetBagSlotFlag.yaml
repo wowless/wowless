@@ -9,5 +9,3 @@ inputs:
 outputs:
 - name: isSet
   type: boolean
-products:
-- wow_beta

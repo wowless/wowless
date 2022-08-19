@@ -6,7 +6,3 @@ inputs:
     nilable: true
     type: string
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

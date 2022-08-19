@@ -6,5 +6,3 @@ inputs:
 outputs:
 - name: defaultSpecSkillLine
   type: number
-products:
-- wow_beta

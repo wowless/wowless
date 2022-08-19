@@ -15,5 +15,3 @@ outputs:
 - name: icon
   nilable: true
   type: number
-products:
-- wow_beta

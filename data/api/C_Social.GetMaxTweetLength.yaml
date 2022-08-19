@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: maxTweetLength
   type: number
-products:
-- wow
-- wowt
-- wow_beta

@@ -8,5 +8,3 @@ outputs:
 - innerType: string
   name: items
   type: table
-products:
-- wow_beta

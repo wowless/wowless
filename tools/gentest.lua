@@ -17,9 +17,7 @@ local apis = lazy(function()
     if d ~= '.' and d ~= '..' then
       local filename = ('data/api/%s'):format(d)
       local cfg = yaml.parseFile(filename)
-      if not cfg.debug then
-        t[cfg.name] = cfg
-      end
+      t[cfg.name] = cfg
     end
   end
   return t
@@ -44,46 +42,51 @@ local function stylua(s)
   return ret
 end
 
+local function perproduct(p, f)
+  return (require('wowapi.yaml').parseFile(('data/products/%s/%s.yaml'):format(p, f)))
+end
+
 local ptablemap = {
   build = function(p)
-    local cfg = require('wowapi.yaml').parseFile('data/products/' .. p .. '/build.yaml')
-    return 'Build', cfg
+    return 'Build', perproduct(p, 'build')
   end,
   cvars = function(p)
-    local cfg = require('wowapi.yaml').parseFile('data/products/' .. p .. '/cvars.yaml')
-    return 'CVars', cfg
+    return 'CVars', perproduct(p, 'cvars')
   end,
   globalapis = function(p)
     local unavailableApis = {
       CreateForbiddenFrame = true,
       loadstring_untainted = true,
     }
+    local allapis = apis()
     local t = {}
-    for k, v in pairs(apis()) do
-      if not k:find('%.') and (not v.products or mapify(v.products)[p]) then
+    for name, apiname in pairs(perproduct(p, 'apis')) do
+      local api = assert(allapis[apiname], 'no api ' .. apiname)
+      if not name:find('%.') and not api.debug then
         local vv = {
-          alias = v.alias,
-          nowrap = v.nowrap,
-          secureCapsule = unavailableApis[k] and true,
-          stdlib = v.stdlib,
+          alias = api.alias,
+          nowrap = api.nowrap,
+          secureCapsule = unavailableApis[name] and true,
+          stdlib = api.stdlib,
         }
-        t[k] = next(vv) and vv or true
+        t[name] = next(vv) and vv or true
       end
     end
     return 'GlobalApis', t
   end,
   globals = function(p)
-    local cfg = require('wowapi.yaml').parseFile('data/products/' .. p .. '/globals.yaml')
-    return 'Globals', cfg
+    return 'Globals', perproduct(p, 'globals')
   end,
   namespaceapis = function(p)
     local apiNamespaces = {}
-    for k, v in pairs(apis()) do
+    local allapis = apis()
+    for k, apiname in pairs(perproduct(p, 'apis')) do
+      local api = assert(allapis[apiname], 'no api ' .. apiname)
       local dot = k:find('%.')
-      if dot and (not v.products or mapify(v.products)[p]) then
+      if dot and not api.debug then
         local name = k:sub(1, dot - 1)
         apiNamespaces[name] = apiNamespaces[name] or { methods = {} }
-        apiNamespaces[name].methods[k:sub(dot + 1)] = v
+        apiNamespaces[name].methods[k:sub(dot + 1)] = api
       end
     end
     local unavailable = {

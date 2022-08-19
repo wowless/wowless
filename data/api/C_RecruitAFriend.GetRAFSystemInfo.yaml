@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: systemInfo
   type: C_RecruitAFriend.RafSystemInfo
-products:
-- wow
-- wowt
-- wow_beta

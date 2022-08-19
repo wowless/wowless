@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: missionDeploymentInfo
   type: C_Garrison.MissionDeploymentInfo
-products:
-- wow
-- wowt
-- wow_beta

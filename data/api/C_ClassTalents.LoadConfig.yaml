@@ -9,5 +9,3 @@ inputs:
 outputs:
 - name: result
   type: number
-products:
-- wow_beta

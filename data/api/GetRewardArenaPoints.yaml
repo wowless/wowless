@@ -6,6 +6,3 @@ inputs:
 outputs:
 - name: arenaPoints
   type: number
-products:
-- wow_classic_beta
-- wow_classic_ptr

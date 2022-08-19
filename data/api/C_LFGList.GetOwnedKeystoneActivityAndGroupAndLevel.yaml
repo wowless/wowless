@@ -12,7 +12,3 @@ outputs:
   type: number
 - name: keystoneLevel
   type: number
-products:
-- wow
-- wowt
-- wow_beta

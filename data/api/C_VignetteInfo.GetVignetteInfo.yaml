@@ -8,7 +8,3 @@ outputs:
 - name: vignetteInfo
   nilable: true
   type: C_VignetteInfo.VignetteInfo
-products:
-- wow
-- wowt
-- wow_beta

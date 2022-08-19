@@ -3,7 +3,3 @@ name: C_PetBattles.GetDisplayID
 status: unimplemented
 outputs:
 - type: number
-products:
-- wow
-- wowt
-- wow_beta

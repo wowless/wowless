@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: hasNewSources
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

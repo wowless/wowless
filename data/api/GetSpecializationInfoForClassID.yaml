@@ -22,7 +22,3 @@ outputs:
   type: boolean
 - name: isAllowed
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

@@ -12,5 +12,3 @@ outputs:
 - innerType: C_Traits.TreeCurrencyInfo
   name: treeCurrencyInfo
   type: table
-products:
-- wow_beta

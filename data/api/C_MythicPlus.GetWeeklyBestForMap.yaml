@@ -19,7 +19,3 @@ outputs:
   type: table
 - name: dungeonScore
   type: number
-products:
-- wow
-- wowt
-- wow_beta

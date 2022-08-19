@@ -12,7 +12,3 @@ outputs:
   type: table
 - name: optionalCompleteAtLeastCount
   type: number
-products:
-- wow
-- wowt
-- wow_beta

@@ -5,5 +5,3 @@ inputs:
 - - name: deletedLayoutIndex
     type: number
 outputs: {}
-products:
-- wow_beta

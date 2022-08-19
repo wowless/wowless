@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: modifierString
   type: string
-products:
-- wow
-- wowt
-- wow_beta

@@ -9,5 +9,3 @@ inputs:
 outputs:
 - name: entryInfo
   type: C_Traits.TraitEntryInfo
-products:
-- wow_beta

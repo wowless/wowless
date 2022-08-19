@@ -14,7 +14,3 @@ outputs:
   type: number
 - name: id
   type: number
-products:
-- wow
-- wowt
-- wow_beta

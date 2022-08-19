@@ -13,5 +13,3 @@ inputs:
 outputs:
 - name: canUse
   type: boolean
-products:
-- wow_beta

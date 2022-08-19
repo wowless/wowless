@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: choiceInfo
   type: C_PlayerChoice.PlayerChoiceInfo
-products:
-- wow
-- wowt
-- wow_beta

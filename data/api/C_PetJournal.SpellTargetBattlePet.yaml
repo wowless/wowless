@@ -5,5 +5,3 @@ inputs:
 - - name: battlePetGUID
     type: string
 outputs: {}
-products:
-- wow_beta

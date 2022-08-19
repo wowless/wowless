@@ -10,7 +10,3 @@ outputs:
 - name: errorDescription
   nilable: true
   type: string
-products:
-- wow
-- wowt
-- wow_beta

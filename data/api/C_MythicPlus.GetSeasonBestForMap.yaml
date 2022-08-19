@@ -11,7 +11,3 @@ outputs:
 - name: overtimeInfo
   nilable: true
   type: C_MythicPlus.MapSeasonBestInfo
-products:
-- wow
-- wowt
-- wow_beta

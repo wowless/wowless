@@ -11,7 +11,3 @@ outputs:
 - name: limitOncePerTooltip
   nilable: true
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

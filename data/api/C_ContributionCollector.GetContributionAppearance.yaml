@@ -9,7 +9,3 @@ inputs:
 outputs:
 - name: appearance
   type: C_ContributionCollector.ContributionAppearance
-products:
-- wow
-- wowt
-- wow_beta

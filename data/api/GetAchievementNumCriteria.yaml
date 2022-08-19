@@ -6,9 +6,3 @@ inputs:
     type: number
 outputs:
 - type: number
-products:
-- wow
-- wow_beta
-- wow_classic_beta
-- wow_classic_ptr
-- wowt

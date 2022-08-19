@@ -5,7 +5,3 @@ inputs:
 - - name: questId
     type: number
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

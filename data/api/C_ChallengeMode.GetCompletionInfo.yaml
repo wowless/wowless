@@ -33,7 +33,3 @@ outputs:
 - innerType: C_ChallengeMode.ChallengeModeCompletionMemberInfo
   name: members
   type: table
-products:
-- wow
-- wowt
-- wow_beta

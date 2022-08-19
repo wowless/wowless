@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: available
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

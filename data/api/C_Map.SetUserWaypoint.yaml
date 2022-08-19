@@ -5,7 +5,3 @@ inputs:
 - - name: point
     type: table
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

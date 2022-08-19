@@ -3,7 +3,3 @@ name: GetNumSpecializationsForClassID
 status: unimplemented
 outputs:
 - type: number
-products:
-- wow
-- wowt
-- wow_beta

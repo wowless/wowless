@@ -7,9 +7,3 @@ outputs:
 - type: string
 - type: number
 - type: number
-products:
-- wow
-- wow_beta
-- wow_classic_beta
-- wow_classic_ptr
-- wowt

@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: ratingSummary
   type: C_PlayerInfo.MythicPlusRatingSummary
-products:
-- wow
-- wowt
-- wow_beta

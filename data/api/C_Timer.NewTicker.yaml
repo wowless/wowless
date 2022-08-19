@@ -12,5 +12,3 @@ inputs:
 outputs:
 - name: cbObject
   type: function
-products:
-- wow_beta

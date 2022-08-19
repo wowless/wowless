@@ -6,5 +6,3 @@ inputs:
 outputs:
 - name: minHoldTime
   type: number
-products:
-- wow_beta

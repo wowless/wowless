@@ -21,7 +21,3 @@ outputs:
   type: number
 - name: quality
   type: number
-products:
-- wow
-- wowt
-- wow_beta

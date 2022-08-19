@@ -12,7 +12,3 @@ outputs:
   type: table
 dbs:
 - name: RenownRewards
-products:
-- wow
-- wowt
-- wow_beta

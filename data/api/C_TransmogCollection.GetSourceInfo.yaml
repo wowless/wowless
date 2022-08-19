@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: sourceInfo
   type: unknown
-products:
-- wow
-- wowt
-- wow_beta

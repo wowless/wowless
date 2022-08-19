@@ -19,7 +19,3 @@ outputs:
 - default: false
   name: canOffHand
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

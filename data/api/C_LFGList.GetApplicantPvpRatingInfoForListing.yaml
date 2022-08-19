@@ -11,7 +11,3 @@ inputs:
 outputs:
 - name: pvpRatingInfo
   type: C_LFGList.PvpRatingInfo
-products:
-- wow
-- wowt
-- wow_beta

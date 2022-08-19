@@ -8,7 +8,3 @@ inputs:
 outputs:
 - name: isCommodity
   type: number
-products:
-- wow
-- wowt
-- wow_beta

@@ -17,7 +17,3 @@ outputs:
 - name: portraitGiverModelSceneID
   nilable: true
   type: number
-products:
-- wow
-- wowt
-- wow_beta

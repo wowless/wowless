@@ -16,5 +16,3 @@ inputs:
 outputs:
 - name: overrideSpellID
   type: number
-products:
-- wow_beta

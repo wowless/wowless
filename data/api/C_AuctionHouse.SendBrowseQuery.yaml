@@ -5,7 +5,3 @@ inputs:
 - - name: query
     type: C_AuctionHouse.AuctionHouseBrowseQuery
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

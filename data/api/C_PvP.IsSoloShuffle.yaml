@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: isSoloShuffle
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

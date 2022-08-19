@@ -33,7 +33,3 @@ outputs:
   type: boolean
 - name: tier
   type: number
-products:
-- wow
-- wowt
-- wow_beta

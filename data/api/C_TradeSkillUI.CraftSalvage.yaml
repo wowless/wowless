@@ -11,5 +11,3 @@ inputs:
     name: itemLocation
     type: table
 outputs: {}
-products:
-- wow_beta

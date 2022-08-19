@@ -8,7 +8,3 @@ outputs:
 - mixin: ColorMixin
   name: specificDungeonOverallScoreColor
   type: Color
-products:
-- wow
-- wowt
-- wow_beta

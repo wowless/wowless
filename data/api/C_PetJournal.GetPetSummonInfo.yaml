@@ -11,7 +11,3 @@ outputs:
   type: number
 - name: errorText
   type: string
-products:
-- wow
-- wowt
-- wow_beta

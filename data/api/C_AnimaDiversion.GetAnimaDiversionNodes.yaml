@@ -7,7 +7,3 @@ outputs:
 - innerType: C_AnimaDiversion.AnimaDiversionNodeInfo
   name: animaNodes
   type: table
-products:
-- wow
-- wowt
-- wow_beta

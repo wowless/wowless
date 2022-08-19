@@ -7,7 +7,3 @@ outputs:
 - name: description
   nilable: true
   type: string
-products:
-- wow
-- wowt
-- wow_beta

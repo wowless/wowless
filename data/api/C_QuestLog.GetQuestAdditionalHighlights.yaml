@@ -15,7 +15,3 @@ outputs:
   type: boolean
 - name: treasures
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

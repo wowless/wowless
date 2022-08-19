@@ -13,7 +13,3 @@ outputs:
 - name: autoCombatAutoAttack
   nilable: true
   type: C_Garrison.AutoCombatSpellInfo
-products:
-- wow
-- wowt
-- wow_beta

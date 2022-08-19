@@ -47,7 +47,3 @@ outputs:
   type: number
 - name: isScalingDungeon
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

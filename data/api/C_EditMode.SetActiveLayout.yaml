@@ -5,5 +5,3 @@ inputs:
 - - name: activeLayout
     type: number
 outputs: {}
-products:
-- wow_beta

@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: itemInfo
   type: C_ItemUpgrade.ItemUpgradeItemInfo
-products:
-- wow
-- wowt
-- wow_beta

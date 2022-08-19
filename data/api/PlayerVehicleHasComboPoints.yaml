@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: vehicleHasComboPoints
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

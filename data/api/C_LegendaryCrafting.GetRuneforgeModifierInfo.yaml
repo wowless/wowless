@@ -19,7 +19,3 @@ outputs:
 - innerType: string
   name: description
   type: table
-products:
-- wow
-- wowt
-- wow_beta

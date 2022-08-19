@@ -3,7 +3,3 @@ name: C_Garrison.GetAllEncounterThreats
 status: unimplemented
 outputs:
 - type: table
-products:
-- wow
-- wowt
-- wow_beta

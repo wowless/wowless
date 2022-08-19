@@ -10,7 +10,3 @@ outputs:
 - name: questLineInfo
   nilable: true
   type: C_QuestLine.QuestLineInfo
-products:
-- wow
-- wowt
-- wow_beta

@@ -11,5 +11,3 @@ inputs:
 outputs:
 - name: canPurchase
   type: boolean
-products:
-- wow_beta

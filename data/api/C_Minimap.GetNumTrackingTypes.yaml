@@ -6,5 +6,3 @@ inputs:
 outputs:
 - name: numTrackingTypes
   type: number
-products:
-- wow_beta

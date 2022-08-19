@@ -19,14 +19,14 @@ local perProductAddonGeneratedTypes = {
   cvars = function(p)
     return { 'data/products/' .. p .. '/cvars.yaml' }
   end,
-  globalapis = function()
-    return { 'build/api.stamp' }
+  globalapis = function(p)
+    return { 'data/products/' .. p .. '/apis.yaml', 'build/api.stamp' }
   end,
   globals = function(p)
     return { 'data/products/' .. p .. '/globals.yaml' }
   end,
-  namespaceapis = function()
-    return { 'build/api.stamp' }
+  namespaceapis = function(p)
+    return { 'data/products/' .. p .. '/apis.yaml', 'build/api.stamp' }
   end,
   product = function()
     return {}

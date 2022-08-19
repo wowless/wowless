@@ -5,7 +5,3 @@ inputs:
 - - name: index
     type: number
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

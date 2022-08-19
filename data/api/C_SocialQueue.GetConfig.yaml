@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: config
   type: C_SocialQueue.SocialQueueConfig
-products:
-- wow
-- wowt
-- wow_beta

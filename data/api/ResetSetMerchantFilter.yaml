@@ -4,7 +4,3 @@ status: unimplemented
 inputs:
 - {}
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

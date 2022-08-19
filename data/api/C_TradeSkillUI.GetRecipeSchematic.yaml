@@ -12,5 +12,3 @@ inputs:
 outputs:
 - name: schematic
   type: unknown
-products:
-- wow_beta

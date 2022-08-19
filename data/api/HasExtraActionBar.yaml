@@ -5,7 +5,3 @@ inputs:
 - {}
 outputs:
 - type: oneornil
-products:
-- wow
-- wowt
-- wow_beta

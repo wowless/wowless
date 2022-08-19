@@ -10,7 +10,3 @@ outputs:
 - name: result
   nilable: true
   type: C_AuctionHouse.ItemSearchResultInfo
-products:
-- wow
-- wowt
-- wow_beta

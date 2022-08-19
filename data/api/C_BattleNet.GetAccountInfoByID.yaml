@@ -11,7 +11,3 @@ outputs:
 - name: accountInfo
   nilable: true
   type: C_BattleNet.BNetAccountInfo
-products:
-- wow
-- wowt
-- wow_beta

@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: canSendThrottledMessage
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

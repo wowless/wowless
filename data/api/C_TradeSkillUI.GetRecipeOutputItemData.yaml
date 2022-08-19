@@ -11,5 +11,3 @@ inputs:
 outputs:
 - name: outputInfo
   type: unknown
-products:
-- wow_beta

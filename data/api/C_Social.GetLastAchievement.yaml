@@ -12,7 +12,3 @@ outputs:
   type: string
 - name: iconFileID
   type: number
-products:
-- wow
-- wowt
-- wow_beta

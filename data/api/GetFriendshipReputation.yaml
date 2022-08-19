@@ -25,7 +25,3 @@ outputs:
   type: number
 - name: nextFriendThreshold
   type: number
-products:
-- wow
-- wowt
-- wow_beta

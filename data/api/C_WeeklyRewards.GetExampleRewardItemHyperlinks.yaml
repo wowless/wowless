@@ -9,7 +9,3 @@ outputs:
   type: string
 - name: upgradeHyperlink
   type: string
-products:
-- wow
-- wowt
-- wow_beta

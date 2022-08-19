@@ -13,7 +13,3 @@ outputs:
   type: boolean
 - name: totalGroupSizeRequired
   type: number
-products:
-- wow
-- wowt
-- wow_beta

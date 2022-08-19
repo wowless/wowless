@@ -12,7 +12,3 @@ outputs:
 - innerType: string
   name: groupGUIDs
   type: table
-products:
-- wow
-- wowt
-- wow_beta

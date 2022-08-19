@@ -7,7 +7,5 @@ outputs:
 - innerType: C_UIColor.DBColorExport
   name: colors
   type: table
-products:
-- wow_beta
 sqls:
 - cursor: C_UIColor.GetColors

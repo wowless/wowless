@@ -9,7 +9,3 @@ inputs:
 outputs:
 - name: passes
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

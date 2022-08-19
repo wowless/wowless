@@ -7,7 +7,3 @@ inputs:
   - name: character
     type: string
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

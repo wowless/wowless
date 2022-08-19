@@ -8,7 +8,3 @@ outputs:
 - name: clubInfo
   nilable: true
   type: C_ClubFinder.RecruitingClubInfo
-products:
-- wow
-- wowt
-- wow_beta

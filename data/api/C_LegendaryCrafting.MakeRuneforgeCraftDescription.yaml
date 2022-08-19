@@ -13,7 +13,3 @@ inputs:
 outputs:
 - name: description
   type: unknown
-products:
-- wow
-- wowt
-- wow_beta

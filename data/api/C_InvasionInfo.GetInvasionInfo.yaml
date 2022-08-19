@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: invasionInfo
   type: C_InvasionInfo.InvasionMapInfo
-products:
-- wow
-- wowt
-- wow_beta

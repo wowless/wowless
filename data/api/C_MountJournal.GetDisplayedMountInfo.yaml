@@ -32,7 +32,3 @@ outputs:
   type: number
 - name: isForDragonriding
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

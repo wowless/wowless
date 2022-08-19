@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: yards
   type: number
-products:
-- wow
-- wowt
-- wow_beta

@@ -8,7 +8,3 @@ outputs:
 - innerType: C_QuestLog.QuestOnMapInfo
   name: quests
   type: table
-products:
-- wow
-- wowt
-- wow_beta

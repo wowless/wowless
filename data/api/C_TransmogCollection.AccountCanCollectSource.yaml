@@ -9,7 +9,3 @@ outputs:
   type: boolean
 - name: canCollect
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

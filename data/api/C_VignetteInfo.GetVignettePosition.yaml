@@ -11,7 +11,3 @@ outputs:
   name: vignettePosition
   nilable: true
   type: Vector2D
-products:
-- wow
-- wowt
-- wow_beta

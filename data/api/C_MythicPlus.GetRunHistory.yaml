@@ -12,7 +12,3 @@ outputs:
 - innerType: C_MythicPlus.MythicPlusRunInfo
   name: runs
   type: table
-products:
-- wow
-- wowt
-- wow_beta

@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: canBeBound
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

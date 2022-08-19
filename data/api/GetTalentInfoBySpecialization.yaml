@@ -31,7 +31,3 @@ outputs:
   type: boolean
 - name: grantedByAura
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

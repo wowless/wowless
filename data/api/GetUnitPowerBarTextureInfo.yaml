@@ -20,7 +20,3 @@ outputs:
   type: number
 - name: colorA
   type: number
-products:
-- wow
-- wowt
-- wow_beta

@@ -8,7 +8,3 @@ inputs:
 outputs:
 - name: isCorruptionResistant
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

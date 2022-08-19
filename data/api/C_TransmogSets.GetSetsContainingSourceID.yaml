@@ -8,7 +8,3 @@ outputs:
 - innerType: number
   name: setIDs
   type: table
-products:
-- wow
-- wowt
-- wow_beta

@@ -12,7 +12,3 @@ outputs:
 - innerType: C_TransmogCollection.TransmogCategoryAppearanceInfo
   name: appearances
   type: table
-products:
-- wow
-- wowt
-- wow_beta

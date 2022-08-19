@@ -5,5 +5,3 @@ inputs:
 - - name: addedLayoutIndex
     type: number
 outputs: {}
-products:
-- wow_beta

@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: activeQuestID
   type: number
-products:
-- wow
-- wowt
-- wow_beta

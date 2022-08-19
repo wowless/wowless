@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: info
   type: C_RecruitAFriend.RafInfo
-products:
-- wow
-- wowt
-- wow_beta

@@ -8,5 +8,3 @@ outputs:
 - innerType: C_Traits.TraitCurrencyCost
   name: costs
   type: table
-products:
-- wow_beta

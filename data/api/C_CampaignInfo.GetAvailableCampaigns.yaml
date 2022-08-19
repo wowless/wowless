@@ -7,7 +7,3 @@ outputs:
 - innerType: number
   name: campaignIDs
   type: table
-products:
-- wow
-- wowt
-- wow_beta

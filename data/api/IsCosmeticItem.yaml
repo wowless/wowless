@@ -5,7 +5,3 @@ inputs:
 - - name: itemIDOrLink
     type: string
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

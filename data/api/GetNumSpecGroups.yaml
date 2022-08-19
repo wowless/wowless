@@ -3,7 +3,3 @@ name: GetNumSpecGroups
 status: unimplemented
 outputs:
 - type: number
-products:
-- wow
-- wowt
-- wow_beta

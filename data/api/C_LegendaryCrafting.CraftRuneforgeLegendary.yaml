@@ -5,7 +5,3 @@ inputs:
 - - name: description
     type: unknown
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

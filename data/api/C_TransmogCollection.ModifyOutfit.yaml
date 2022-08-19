@@ -8,7 +8,3 @@ inputs:
     name: itemTransmogInfoList
     type: table
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

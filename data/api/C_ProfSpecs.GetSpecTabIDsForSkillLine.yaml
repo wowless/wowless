@@ -8,5 +8,3 @@ outputs:
 - innerType: number
   name: specTabIDs
   type: table
-products:
-- wow_beta

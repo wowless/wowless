@@ -8,5 +8,3 @@ outputs:
 - name: rootPathID
   nilable: true
   type: number
-products:
-- wow_beta

@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: isBounty
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

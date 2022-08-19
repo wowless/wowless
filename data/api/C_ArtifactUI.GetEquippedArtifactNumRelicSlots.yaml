@@ -8,7 +8,3 @@ inputs:
 outputs:
 - name: numRelicSlots
   type: number
-products:
-- wow
-- wowt
-- wow_beta

@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: voidStorageUnlockCost
   type: number
-products:
-- wow
-- wowt
-- wow_beta

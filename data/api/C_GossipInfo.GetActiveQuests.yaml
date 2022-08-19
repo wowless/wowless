@@ -7,7 +7,3 @@ outputs:
 - innerType: C_GossipInfo.GossipQuestUIInfo
   name: info
   type: table
-products:
-- wow
-- wowt
-- wow_beta

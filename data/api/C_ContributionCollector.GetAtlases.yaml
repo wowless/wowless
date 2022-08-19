@@ -8,7 +8,3 @@ outputs:
 - innerType: string
   name: atlasName
   type: table
-products:
-- wow
-- wowt
-- wow_beta

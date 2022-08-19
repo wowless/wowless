@@ -8,7 +8,3 @@ inputs:
 outputs:
 - name: componentInfo
   type: unknown
-products:
-- wow
-- wowt
-- wow_beta

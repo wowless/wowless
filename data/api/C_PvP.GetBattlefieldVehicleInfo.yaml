@@ -9,7 +9,3 @@ inputs:
 outputs:
 - name: info
   type: C_PvP.BattlefieldVehicleInfo
-products:
-- wow
-- wowt
-- wow_beta

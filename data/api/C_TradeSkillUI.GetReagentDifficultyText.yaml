@@ -10,5 +10,3 @@ inputs:
 outputs:
 - name: bonusText
   type: string
-products:
-- wow_beta

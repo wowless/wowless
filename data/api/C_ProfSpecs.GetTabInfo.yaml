@@ -8,5 +8,3 @@ outputs:
 - name: tabInfo
   nilable: true
   type: unknown
-products:
-- wow_beta

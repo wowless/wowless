@@ -7,5 +7,3 @@ outputs:
 - innerType: number
   name: spellIDs
   type: table
-products:
-- wow_beta

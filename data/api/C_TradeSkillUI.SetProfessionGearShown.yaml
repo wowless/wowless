@@ -5,5 +5,3 @@ inputs:
 - - name: shown
     type: boolean
 outputs: {}
-products:
-- wow_beta

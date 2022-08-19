@@ -10,7 +10,3 @@ outputs:
 - innerType: C_WeeklyRewards.WeeklyRewardActivityEncounterInfo
   name: info
   type: table
-products:
-- wow
-- wowt
-- wow_beta

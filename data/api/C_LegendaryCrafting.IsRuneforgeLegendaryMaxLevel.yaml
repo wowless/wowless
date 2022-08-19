@@ -8,7 +8,3 @@ inputs:
 outputs:
 - name: isMaxLevel
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: isLegendaryQuest
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

@@ -12,7 +12,3 @@ outputs:
   type: C_Club.ClubInfo
 - name: showError
   type: boolean
-products:
-- wow
-- wowt
-- wow_beta

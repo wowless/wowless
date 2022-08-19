@@ -5,7 +5,3 @@ inputs:
 - - name: tokenGUID
     type: string
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

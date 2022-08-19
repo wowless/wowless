@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: numOwnedAuctionTypes
   type: number
-products:
-- wow
-- wowt
-- wow_beta

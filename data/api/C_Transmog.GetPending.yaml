@@ -9,7 +9,3 @@ outputs:
 - mixin: TransmogPendingInfoMixin
   name: pendingInfo
   type: table
-products:
-- wow
-- wowt
-- wow_beta

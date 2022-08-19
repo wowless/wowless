@@ -7,7 +7,3 @@ outputs:
 - innerType: C_CovenantSanctumUI.CovenantSanctumFeatureInfo
   name: features
   type: table
-products:
-- wow
-- wowt
-- wow_beta

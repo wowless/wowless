@@ -17,7 +17,3 @@ outputs:
   type: boolean
 - name: itemQuality
   type: number
-products:
-- wow
-- wowt
-- wow_beta

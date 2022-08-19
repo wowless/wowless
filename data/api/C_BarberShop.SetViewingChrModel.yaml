@@ -6,5 +6,3 @@ inputs:
     nilable: true
     type: number
 outputs: {}
-products:
-- wow_beta

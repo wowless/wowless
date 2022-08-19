@@ -7,7 +7,3 @@ outputs:
 - innerType: number
   name: uiMapIDs
   type: table
-products:
-- wow
-- wowt
-- wow_beta

@@ -8,7 +8,3 @@ outputs:
 - name: ownedAuction
   nilable: true
   type: C_AuctionHouse.OwnedAuctionInfo
-products:
-- wow
-- wowt
-- wow_beta

@@ -9,7 +9,3 @@ outputs:
 - name: nextTierID
   nilable: true
   type: number
-products:
-- wow
-- wowt
-- wow_beta

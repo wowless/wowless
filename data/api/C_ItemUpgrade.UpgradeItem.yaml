@@ -6,7 +6,3 @@ inputs:
     name: numUpgrades
     type: number
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

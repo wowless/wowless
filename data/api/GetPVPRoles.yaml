@@ -7,7 +7,3 @@ outputs:
 - type: boolean
 - type: boolean
 - type: boolean
-products:
-- wow
-- wowt
-- wow_beta

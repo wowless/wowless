@@ -7,7 +7,3 @@ outputs:
 - innerType: number
   name: currencyIDs
   type: table
-products:
-- wow
-- wowt
-- wow_beta

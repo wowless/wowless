@@ -7,7 +7,3 @@ inputs:
 outputs:
 - name: numSearchResults
   type: number
-products:
-- wow
-- wowt
-- wow_beta

@@ -6,7 +6,3 @@ inputs:
     name: isSpecialBrawl
     type: boolean
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

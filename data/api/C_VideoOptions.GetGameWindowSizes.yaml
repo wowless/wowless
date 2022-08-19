@@ -10,5 +10,3 @@ outputs:
 - innerType: table
   name: sizes
   type: table
-products:
-- wow_beta

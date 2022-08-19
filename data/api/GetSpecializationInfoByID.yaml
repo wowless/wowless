@@ -25,7 +25,3 @@ outputs:
 - name: className
   stub: Warrior
   type: string
-products:
-- wow
-- wowt
-- wow_beta

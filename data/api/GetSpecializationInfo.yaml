@@ -31,9 +31,5 @@ outputs:
   type: number
 dbs:
 - name: ChrSpecialization
-products:
-- wow
-- wowt
-- wow_beta
 states:
 - Units

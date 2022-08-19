@@ -7,5 +7,3 @@ inputs:
 outputs:
 - name: tracked
   type: boolean
-products:
-- wow_beta

@@ -6,7 +6,3 @@ inputs:
 outputs:
 - name: equipmentLevel
   type: number
-products:
-- wow
-- wowt
-- wow_beta

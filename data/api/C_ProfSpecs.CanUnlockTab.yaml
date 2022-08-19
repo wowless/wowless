@@ -9,5 +9,3 @@ inputs:
 outputs:
 - name: canUnlock
   type: boolean
-products:
-- wow_beta

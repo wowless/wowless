@@ -24,7 +24,3 @@ outputs:
   type: number
 - name: itemSubClass
   type: number
-products:
-- wow
-- wowt
-- wow_beta

@@ -11,7 +11,3 @@ inputs:
     nilable: true
     type: boolean
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

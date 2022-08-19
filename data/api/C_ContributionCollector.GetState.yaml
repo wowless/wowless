@@ -15,7 +15,3 @@ outputs:
   type: number
 - name: startTime
   type: number
-products:
-- wow
-- wowt
-- wow_beta

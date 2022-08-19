@@ -10,7 +10,3 @@ inputs:
     name: specIDs
     type: table
 outputs: {}
-products:
-- wow
-- wowt
-- wow_beta

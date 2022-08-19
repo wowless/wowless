@@ -7,5 +7,3 @@ inputs:
 outputs:
 - name: hasSpecialization
   type: boolean
-products:
-- wow_beta
