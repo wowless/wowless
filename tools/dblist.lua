@@ -1,15 +1,3 @@
-local function productEnabled(p, ps)
-  if not ps then
-    return true
-  end
-  for _, pp in ipairs(ps) do
-    if p == pp then
-      return true
-    end
-  end
-  return false
-end
-
 return function(product)
   local dbset = {
     GlobalStrings = true,
@@ -24,10 +12,8 @@ return function(product)
       dbset[db.name] = true
     end
     for _, sql in ipairs(api.sqls or {}) do
-      if productEnabled(product, sql.products) then
-        local kk = sql.lookup and 'lookup' or 'cursor'
-        table.insert(sqls, kk .. '/' .. sql[kk])
-      end
+      local kk = sql.lookup and 'lookup' or 'cursor'
+      table.insert(sqls, kk .. '/' .. sql[kk])
     end
   end
   for _, sql in ipairs(sqls) do
