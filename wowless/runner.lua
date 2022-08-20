@@ -45,10 +45,9 @@ local function run(cfg)
     local render = require('wowless.render')
     local screenWidth, screenHeight = api.states.System.screenWidth, api.states.System.screenHeight
     local function doit(name)
-      local rects = render.frames2rects(api, screenWidth, screenHeight)
-      local prefix = 'out/' .. cfg.product .. '/' .. name
-      require('pl.file').write(prefix .. '.yaml', require('wowapi.yaml').pprint(rects))
-      render.rects2png(rects, screenWidth, screenHeight, cfg.cascproxy, cfg.dir, prefix .. '.png')
+      local data = render.frames2rects(api, cfg.product, screenWidth, screenHeight)
+      local fn = 'out/' .. cfg.product .. '/' .. name .. '.yaml'
+      require('pl.file').write(fn, require('wowapi.yaml').pprint(data))
     end
     doit('frame0')
     if api.env.ToggleTalentFrame then

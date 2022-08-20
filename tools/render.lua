@@ -1,2 +1,10 @@
-local t = require('wowapi.yaml').parseFile('frame0.yaml')
-require('wowless.render').rects2png(t, 1280, 720, 'localhost:8080', 'extracts/wow_classic_beta', 'frame0.png')
+local args = (function()
+  local parser = require('argparse')()
+  parser:argument('input', 'input file')
+  parser:option('-c --cascproxy', 'cascproxy for textures')
+  parser:option('-o --output', 'output file')
+  return parser:parse()
+end)()
+local t = require('wowapi.yaml').parseFile(args.input)
+local out = args.output or require('pl.path').splitext(args.input) .. '.png'
+require('wowless.render').rects2png(t, args.cascproxy, out)

@@ -1,4 +1,4 @@
-local function frames2rects(api, screenWidth, screenHeight)
+local function frames2rects(api, product, screenWidth, screenHeight)
   local tt = require('resty.tsort').new()
   local function addPoints(r)
     for i = 1, r:GetNumPoints() do
@@ -74,7 +74,7 @@ local function frames2rects(api, screenWidth, screenHeight)
         or pts.midy and pts.midy.y and pts.midy.y + h / 2,
     }
   end
-  local ret = {}
+  local frames = {}
   for _, frame in ipairs(api.frames) do
     local regions = {}
     for _, r in ipairs({ frame:GetRegions() }) do
@@ -136,7 +136,7 @@ local function frames2rects(api, screenWidth, screenHeight)
       end
     end
     if next(regions) then
-      table.insert(ret, {
+      table.insert(frames, {
         name = frame:GetDebugName(),
         regions = regions,
         strata = frame:GetFrameStrata(),
@@ -144,7 +144,12 @@ local function frames2rects(api, screenWidth, screenHeight)
       })
     end
   end
-  return ret
+  return {
+    frames = frames,
+    product = product,
+    screenHeight = screenHeight,
+    screenWidth = screenWidth,
+  }
 end
 
 local strata = {
@@ -167,7 +172,7 @@ local layers = {
   HIGHLIGHT = 5,
 }
 
-local function rects2png(data, screenWidth, screenHeight, authority, rootDir, outfile)
+local function rects2png(data, authority, outfile)
   local magick = require('luamagick')
   local function color(c)
     local pwand = magick.new_pixel_wand()
@@ -179,9 +184,8 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
   dwand:set_fill_opacity(0)
   local conn = authority and require('wowless.http').connect(authority)
   local mwand = magick.new_magick_wand()
-  assert(mwand:new_image(screenWidth, screenHeight, color('none')))
+  assert(mwand:new_image(data.screenWidth, data.screenHeight, color('none')))
 
-  local product = rootDir:sub(10)
   local blobs = {}
   local function getblob(path)
     local fpath
@@ -197,7 +201,7 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
     if prev then
       return prev.width, prev.height, prev.png
     end
-    local content = conn('/product/' .. product .. fpath)
+    local content = conn('/product/' .. data.product .. fpath)
     local success, width, height, png = pcall(function()
       local width, height, rgba = require('wowless.blp').read(content)
       return width, height, require('wowless.png').write(width, height, rgba)
@@ -212,12 +216,12 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
     end
   end
 
-  table.sort(data, function(a, b)
+  table.sort(data.frames, function(a, b)
     local sa = strata[a.strata] or 0
     local sb = strata[b.strata] or 0
     return sa < sb or sa == sb and (a.strataLevel or 0) < (b.strataLevel or 0)
   end)
-  for _, f in ipairs(data) do
+  for _, f in ipairs(data.frames) do
     table.sort(f.regions, function(a, b)
       local aa = a.content.texture or {}
       local bb = b.content.texture or {}
@@ -228,7 +232,7 @@ local function rects2png(data, screenWidth, screenHeight, authority, rootDir, ou
     for _, v in ipairs(f.regions) do
       if v.content.texture and v.content.texture.drawLayer ~= 'HIGHLIGHT' then
         local r = v.rect
-        local left, top, right, bottom = r.left, screenHeight - r.top, r.right, screenHeight - r.bottom
+        local left, top, right, bottom = r.left, data.screenHeight - r.top, r.right, data.screenHeight - r.bottom
         local x = v.content.texture.path
         x = x ~= 'FileData ID 0' and x or nil
         if conn and x and left < right and top < bottom then
