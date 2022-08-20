@@ -70,7 +70,7 @@ local rules = {
     command = 'luarocks build --no-install',
   },
   run = {
-    command = taintedLua .. ' wowless.lua -p $product -e1 > $out || true',
+    command = taintedLua .. ' wowless.lua -p $product -e5 > $out || true',
     pool = 'run_pool',
   },
   stamp = {
