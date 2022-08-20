@@ -4,10 +4,6 @@
 /build.ninja
 /cache
 /extracts
-/frame0.png
-/frame0.yaml
-/frame1.png
-/frame1.yaml
 /luacov.*
 /out/
 /test.out

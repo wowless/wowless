@@ -46,8 +46,9 @@ local function run(cfg)
     local screenWidth, screenHeight = api.states.System.screenWidth, api.states.System.screenHeight
     local function doit(name)
       local rects = render.frames2rects(api, screenWidth, screenHeight)
-      require('pl.file').write(name .. '.yaml', require('wowapi.yaml').pprint(rects))
-      render.rects2png(rects, screenWidth, screenHeight, cfg.cascproxy, cfg.dir, name .. '.png')
+      local prefix = 'out/' .. cfg.product .. '/' .. name
+      require('pl.file').write(prefix .. '.yaml', require('wowapi.yaml').pprint(rects))
+      render.rects2png(rects, screenWidth, screenHeight, cfg.cascproxy, cfg.dir, prefix .. '.png')
     end
     doit('frame0')
     if api.env.ToggleTalentFrame then
