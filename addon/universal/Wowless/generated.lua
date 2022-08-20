@@ -119,7 +119,9 @@ function G.GeneratedTests()
       local t = {}
       for _, command in ipairs(_G.C_Console.GetAllCommands()) do
         local name = command.command
-        t[name] = _G.C_CVar.GetCVarDefault(name)
+        if name:sub(1, 6) ~= 'CACHE-' then
+          t[name] = _G.C_CVar.GetCVarDefault(name)
+        end
       end
       return t
     end)()
