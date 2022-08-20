@@ -745,18 +745,6 @@ local syncTests = function()
       t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
       assertEquals(IsTestBuild() and 'FileData ID 0' or nil, t:GetTexture())
     end,
-    ['version'] = function()
-      local id = _G.WOW_PROJECT_ID
-      if id == 1 then
-        assertEquals(id, _G.WOW_PROJECT_MAINLINE)
-      elseif id == 2 then
-        assertEquals(id, _G.WOW_PROJECT_CLASSIC)
-      elseif id == 5 then
-        assertEquals(id, _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
-      else
-        error('invalid WOW_PROJECT_ID')
-      end
-    end,
     ['visible updated on kids before calling any OnShow'] = function()
       local p = CreateFrame('Frame')
       local k1 = CreateFrame('Frame', nil, p)
