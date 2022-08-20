@@ -58,7 +58,7 @@ local rules = {
     pool = 'fetch_pool',
   },
   frame0 = {
-    command = taintedLua .. ' wowless.lua -p $product -e5 --frame0 > /dev/null || true',
+    command = taintedLua .. ' wowless.lua -p $product -e5 --frame0 > $out || true',
     pool = 'run_pool',
   },
   mkaddon = {
@@ -190,6 +190,7 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p },
     ins = { 'wowless/ext.so', 'build/wowless.stamp', stamp, taintedLua },
+    outs = 'out/' .. p .. '/frame0log.txt',
     outs_implicit = { 'out/' .. p .. '/frame0.yaml', 'out/' .. p .. '/frame1.yaml' },
     rule = 'frame0',
   })
