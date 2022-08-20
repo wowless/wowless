@@ -693,16 +693,6 @@ C_Item.UnlockItemByGUID: C_Item.UnlockItemByGUID
 C_ItemSocketInfo.CompleteSocketing: C_ItemSocketInfo.CompleteSocketing
 C_ItemUpgrade.GetItemHyperlink: C_ItemUpgrade.GetItemHyperlink
 C_KeyBindings.GetCustomBindingType: C_KeyBindings.GetCustomBindingType
-C_LFGInfo.CanPlayerUseGroupFinder: C_LFGInfo.CanPlayerUseGroupFinder
-C_LFGInfo.CanPlayerUseLFD: C_LFGInfo.CanPlayerUseLFD
-C_LFGInfo.CanPlayerUseLFR: C_LFGInfo.CanPlayerUseLFR
-C_LFGInfo.CanPlayerUsePremadeGroup: C_LFGInfo.CanPlayerUsePremadeGroup
-C_LFGInfo.CanPlayerUsePVP: C_LFGInfo.CanPlayerUsePVP
-C_LFGInfo.ConfirmLfgExpandSearch: C_LFGInfo.ConfirmLfgExpandSearch
-C_LFGInfo.GetAllEntriesForCategory: C_LFGInfo.GetAllEntriesForCategory
-C_LFGInfo.GetLFDLockStates: C_LFGInfo.GetLFDLockStates
-C_LFGInfo.GetRoleCheckDifficultyDetails: C_LFGInfo.GetRoleCheckDifficultyDetails
-C_LFGInfo.HideNameFromUI: C_LFGInfo.HideNameFromUI
 C_LFGList.ClearCreationTextFields: C_LFGList.ClearCreationTextFields
 C_LFGList.ClearSearchResults: C_LFGList.ClearSearchResults
 C_LFGList.CopyActiveEntryInfoToCreationFields: C_LFGList.CopyActiveEntryInfoToCreationFields
@@ -1227,6 +1217,7 @@ CombatLogResetFilter: CombatLogResetFilter
 CombatLogSetCurrentEntry: CombatLogSetCurrentEntry
 CombatLogSetRetentionTime: CombatLogSetRetentionTime
 CombatTextSetActiveUnit: CombatTextSetActiveUnit
+CompleteLFGReadyCheck: CompleteLFGReadyCheck
 CompleteQuest: CompleteQuest
 ConfirmAcceptQuest: ConfirmAcceptQuest
 ConfirmBarbersChoice: ConfirmBarbersChoice
@@ -1701,6 +1692,7 @@ GetMacroSpell: GetMacroSpell
 GetManaRegen: GetManaRegen
 GetMasterLootCandidate: GetMasterLootCandidate
 GetMaxBattlefieldID: GetMaxBattlefieldID
+GetMaxCombatRatingBonus: GetMaxCombatRatingBonus
 GetMaxDailyQuests: GetMaxDailyQuests
 GetMaximumExpansionLevel: GetMaximumExpansionLevel
 GetMaxLevelForExpansionLevel: GetMaxLevelForExpansionLevel
