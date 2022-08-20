@@ -749,7 +749,7 @@ local function loader(api, cfg)
       for _, file in ipairs(toc.files) do
         context.loadFile(file)
       end
-      context.loadFile(('out/SavedVariables/%s.lua'):format(addonName))
+      context.loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName))
       toc.loaded = true
       api.log(1, 'done loading %s', addonName)
       api.SendEvent('ADDON_LOADED', addonName)
@@ -811,7 +811,9 @@ local function loader(api, cfg)
           end
         end
         if next(t) then
-          require('pl.file').write(('out/SavedVariables/%s.lua'):format(v.name), table.concat(t, ''))
+          local fn = ('out/%s/SavedVariables/%s.lua'):format(product, v.name)
+          assert(require('pl.dir').makepath(path.dirname(fn)))
+          assert(require('pl.file').write(fn, table.concat(t, '')))
         end
       end
     end
