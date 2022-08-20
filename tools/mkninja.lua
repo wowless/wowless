@@ -172,7 +172,7 @@ for _, p in ipairs(productList) do
     outs = stamp,
     rule = 'fetch',
   })
-  local runout = 'out/' .. p .. '.txt'
+  local runout = 'out/' .. p .. '/log.txt'
   table.insert(runouts, runout)
   table.insert(builds, {
     args = { product = p },
