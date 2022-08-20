@@ -31,6 +31,7 @@ Constants:
   EditModeConsts:
     EditModeDefaultGridSpacing: 40
     EditModeMaxGridSpacing: 80
+    EditModeMaxLayoutsPerType: 5
     EditModeMinGridSpacing: 20
   ITEM_WEAPON_SUBCLASSConstants:
     ITEM_WEAPON_SUBCLASS_NONE: -1
@@ -1623,15 +1624,16 @@ Enum:
     SettingsExpanded: 2
     ShowCastBar: 7
     ShowEncounterBar: 8
+    ShowExtraAbilities: 9
     ShowGrid: 0
     ShowPetActionBar: 5
     ShowPossessActionBar: 6
     ShowStanceBar: 4
     ShowTargetAndFocus: 3
   EditModeAccountSettingMeta:
-    MaxValue: 8
+    MaxValue: 9
     MinValue: 0
-    NumValues: 9
+    NumValues: 10
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
     HideBarArt: 6
@@ -1700,12 +1702,13 @@ Enum:
     ActionBar: 0
     CastBar: 1
     EncounterBar: 4
+    ExtraAbilities: 5
     Minimap: 2
     UnitFrame: 3
   EditModeSystemMeta:
-    MaxValue: 4
+    MaxValue: 5
     MinValue: 0
-    NumValues: 5
+    NumValues: 6
   EditModeUnitFrameSetting:
     BuffsOnTop: 2
     CastBarUnderneath: 1
@@ -2047,6 +2050,76 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  GossipNpcOption:
+    AdventureMap: 31
+    ArtifactRespec: 21
+    Auctioneer: 10
+    AzeriteRespec: 35
+    Banker: 6
+    BarbersChoice: 52
+    Battlemaster: 9
+    Binder: 5
+    BlackMarketAuctionHouse: 46
+    CemeterySelect: 22
+    ChromieTimeNpc: 40
+    ContributionCollector: 33
+    CovenantPreviewNpc: 41
+    CovenantRenownNpc: 45
+    DisableXPGain: 16
+    EnableXPGain: 17
+    GarrisonArchitect: 26
+    GarrisonMissionNpc: 27
+    GarrisonRecruitment: 30
+    GarrisonTalent: 32
+    GarrisonTradeskillNpc: 29
+    GlyphMaster: 24
+    GuildBanker: 14
+    IslandsMissionNpc: 36
+    LFGDungeon: 20
+    Mailbox: 18
+    NewPlayerGuide: 43
+    None: 0
+    PerksProgramVendor: 47
+    PetitionVendor: 7
+    PetSpecializationMaster: 13
+    ProfessionsCraftingOrder: 48
+    ProfessionsCustomerOrder: 50
+    ProfessionsOpen: 49
+    QueueScenario: 25
+    RuneforgeLegendaryCrafting: 42
+    RuneforgeLegendaryUpgrade: 44
+    ShipmentCrafter: 28
+    Soulbind: 39
+    SpecializationMaster: 23
+    Spellclick: 15
+    SpiritHealer: 4
+    Stablemaster: 12
+    TabardVendor: 8
+    TalentMaster: 11
+    Taxinode: 2
+    Trainer: 3
+    TraitSystem: 51
+    Transmogrify: 34
+    UIItemInteraction: 37
+    Vendor: 1
+    WorldMap: 38
+    WorldPvPQueue: 19
+  GossipNpcOptionDisplayFlags:
+    ForceInteractionOnSingleChoice: 1
+  GossipNpcOptionDisplayFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
+  GossipNpcOptionMeta:
+    MaxValue: 52
+    MinValue: 0
+    NumValues: 53
+  GossipOptionRecFlags:
+    QuestLabelPrepend: 1
+  GossipOptionRecFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   GossipOptionRewardType:
     Currency: 1
     Item: 0
@@ -2714,10 +2787,29 @@ Enum:
     Error: 0
     LoadInProgress: 2
     NoChangesNecessary: 1
+    Ready: 3
   LoadConfigResultMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
+  MajorFactionFeatureAbility:
+    Fishing: 1
+    Generic: 0
+    Hunts: 2
+  MajorFactionFeatureAbilityMeta:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  MajorFactionType:
+    DragonscaleExpedition: 1
+    IskaaraTuskarr: 3
+    MaruukCentaur: 2
+    None: 0
+    ValdrakkenAccord: 4
+  MajorFactionTypeMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   ManipulatorEventType:
     Complete: 2
     Delete: 3
@@ -2769,11 +2861,12 @@ Enum:
     TrivialQuests: 1024
     Unfiltered: 0
     VenderFood: 16
+    VendorPoison: 1048576
     VendorReagent: 256
   MinimapTrackingFilterMeta:
-    MaxValue: 524288
+    MaxValue: 1048576
     MinValue: 0
-    NumValues: 21
+    NumValues: 22
   ModelSceneSetting:
     AlignLightToOrbitDelta: 1
   ModelSceneSettingMeta:
@@ -2840,6 +2933,7 @@ Enum:
     MissingEdgeConnection: 1
     MissingQuest: 9
     MissingRequiredEdge: 3
+    NodeNeverPurchasable: 24
     NodeNotFound: 18
     None: 0
     NotEnoughCurrency: 15
@@ -2856,9 +2950,9 @@ Enum:
     WrongSpec: 10
     WrongTreeID: 21
   NodeOpFailureReasonMeta:
-    MaxValue: 23
+    MaxValue: 24
     MinValue: 0
-    NumValues: 24
+    NumValues: 25
   OptionalReagentItemFlag:
     TooltipShowsAsStatModifications: 0
   OptionalReagentItemFlagMeta:
@@ -3203,6 +3297,75 @@ Enum:
     MaxValue: 2
     MinValue: 1
     NumValues: 2
+  PlayerInteractionType:
+    AdventureJournal: 54
+    AdventureMap: 28
+    AlliedRaceDetailsGiver: 9
+    AnimaDiversion: 47
+    AreaSpiritHealer: 19
+    ArtifactForge: 38
+    Auctioneer: 21
+    AzeriteForge: 56
+    AzeriteRespec: 42
+    Banker: 8
+    BarbersChoice: 62
+    BattleMaster: 23
+    Binder: 20
+    BlackMarketAuctioneer: 27
+    ChromieTime: 45
+    ContributionCollector: 41
+    CovenantPreview: 46
+    CovenantSanctum: 51
+    GarrArchitect: 30
+    GarrMission: 32
+    GarrRecruitment: 34
+    GarrTalent: 35
+    GarrTradeskill: 31
+    Gossip: 3
+    GuildBanker: 10
+    IslandQueue: 43
+    Item: 2
+    ItemInteraction: 44
+    ItemUpgrade: 53
+    JailersTowerBuffs: 63
+    LegendaryCrafting: 48
+    LFGDungeon: 25
+    MailInfo: 17
+    Merchant: 5
+    NewPlayerGuide: 52
+    None: 0
+    ObliterumForge: 39
+    PerksProgramVendor: 57
+    PetitionVendor: 13
+    PlayerChoice: 37
+    Professions: 59
+    ProfessionsCraftingOrder: 58
+    ProfessionsCustomerOrder: 60
+    QuestGiver: 4
+    Registrar: 11
+    Renown: 55
+    ScrappingMachine: 40
+    ShipmentCrafter: 33
+    Soulbind: 50
+    SpecializationMaster: 16
+    SpiritHealer: 18
+    StableMaster: 22
+    TabardVendor: 14
+    TalentMaster: 15
+    TaxiNode: 6
+    TradePartner: 1
+    Trainer: 7
+    TraitSystem: 61
+    Transmogrifier: 24
+    Trophy: 36
+    Vendor: 12
+    VoidStorageBanker: 26
+    WeeklyRewards: 49
+    WorldMap: 29
+  PlayerInteractionTypeMeta:
+    MaxValue: 63
+    MinValue: 0
+    NumValues: 64
   PlayerMentorshipApplicationResult:
     AlreadyMentor: 1
     Ineligible: 2
@@ -3394,6 +3557,14 @@ Enum:
     Locked: 0
     Progressing: 1
   ProfessionsSpecPathStateMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  ProfessionsSpecPerkState:
+    Earned: 2
+    Pending: 1
+    Unearned: 0
+  ProfessionsSpecPerkStateMeta:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
@@ -4090,11 +4261,12 @@ Enum:
     MinValue: 0
     NumValues: 10
   TraitNodeFlag:
+    NeverPurchasable: 2
     ShowMultipleIcons: 1
   TraitNodeFlagMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 1
-    NumValues: 1
+    NumValues: 2
   TraitNodeGroupFlag:
     AvailableByDefault: 1
   TraitNodeGroupFlagMeta:
