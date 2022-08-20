@@ -57,6 +57,10 @@ local rules = {
     command = 'lua tools/fetch.lua $product && touch $out',
     pool = 'fetch_pool',
   },
+  frame0 = {
+    command = taintedLua .. ' wowless.lua -p $product -e5 --frame0 > /dev/null || true',
+    pool = 'run_pool',
+  },
   mkaddon = {
     command = taintedLua .. ' tools/gentest.lua -f $type -p $product',
   },
@@ -68,6 +72,9 @@ local rules = {
   },
   mkwowlessext = {
     command = 'luarocks build --no-install',
+  },
+  render = {
+    command = 'lua tools/render.lua $in',
   },
   run = {
     command = taintedLua .. ' wowless.lua -p $product -e5 > $out || true',
@@ -180,6 +187,22 @@ for _, p in ipairs(productList) do
     outs = runout,
     rule = 'run',
   })
+  table.insert(builds, {
+    args = { product = p },
+    ins = { 'wowless/ext.so', 'build/wowless.stamp', stamp, taintedLua },
+    outs_implicit = { 'out/' .. p .. '/frame0.yaml', 'out/' .. p .. '/frame1.yaml' },
+    rule = 'frame0',
+  })
+  for i = 0, 1 do
+    local prefix = 'out/' .. p .. '/frame' .. i
+    table.insert(builds, {
+      args = { product = p },
+      ins = { prefix .. '.yaml' },
+      ins_implicit = { 'tools/render.lua', 'wowless/render.lua' },
+      outs = { prefix .. '.png' },
+      rule = 'render',
+    })
+  end
 end
 
 table.insert(builds, {
@@ -228,8 +251,13 @@ for _, b in ipairs(builds) do
   end
   table.insert(bb, ':')
   table.insert(bb, b.rule)
-  table.insert(bb, '|')
-  table.insert(bb, flatten(b.ins))
+  if b.ins then
+    table.insert(bb, flatten(b.ins))
+  end
+  if b.ins_implicit then
+    table.insert(bb, '|')
+    table.insert(bb, flatten(b.ins_implicit))
+  end
   table.insert(out, table.concat(bb, ' '))
   for k, v in sorted(b.args or {}) do
     table.insert(out, '  ' .. k .. ' = ' .. v)
