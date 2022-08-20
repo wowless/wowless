@@ -2023,7 +2023,7 @@ GetSuperTrackedQuestID: GetSuperTrackedQuestID
 GetTabardCreationCost: GetTabardCreationCost
 GetTabardInfo: GetTabardInfo
 GetTalentGroupRole: GetTalentGroupRole
-GetTalentInfo: GetTalentInfo
+GetTalentInfo: GetTalentInfo_Vanilla
 GetTalentLink: GetTalentLink
 GetTalentPrereqs: GetTalentPrereqs
 GetTalentTabInfo: GetTalentTabInfo

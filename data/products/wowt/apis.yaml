@@ -3744,7 +3744,7 @@ GetSuggestedGroupSize: GetSuggestedGroupSize
 GetSummonFriendCooldown: GetSummonFriendCooldown
 GetTabardCreationCost: GetTabardCreationCost
 GetTabardInfo: GetTabardInfo
-GetTalentInfo: GetTalentInfo
+GetTalentInfo: GetTalentInfo_Mainline
 GetTalentInfoByID: GetTalentInfoByID
 GetTalentInfoBySpecialization: GetTalentInfoBySpecialization
 GetTalentLink: GetTalentLink

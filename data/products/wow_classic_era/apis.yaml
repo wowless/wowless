@@ -1906,7 +1906,7 @@ GetSummonFriendCooldown: GetSummonFriendCooldown
 GetSuperTrackedQuestID: GetSuperTrackedQuestID
 GetTabardCreationCost: GetTabardCreationCost
 GetTabardInfo: GetTabardInfo
-GetTalentInfo: GetTalentInfo
+GetTalentInfo: GetTalentInfo_Vanilla
 GetTalentLink: GetTalentLink
 GetTalentPrereqs: GetTalentPrereqs
 GetTalentTabInfo: GetTalentTabInfo
