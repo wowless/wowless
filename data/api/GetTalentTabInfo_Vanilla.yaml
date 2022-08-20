@@ -1,5 +1,5 @@
 ---
-name: GetTalentTabInfo
+name: GetTalentTabInfo_Vanilla
 status: implemented
 inputs:
 - - name: index
@@ -11,8 +11,7 @@ outputs:
 - name: name
   type: string
 - name: texture
-  nilable: true
-  type: string
+  type: nil
 - name: pointsSpent
   type: number
 - name: fileName

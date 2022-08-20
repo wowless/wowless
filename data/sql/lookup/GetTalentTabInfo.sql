@@ -1,7 +1,5 @@
 SELECT
   Name_lang,
-  NULL,
-  0,
   BackgroundFile
 FROM
   TalentTab

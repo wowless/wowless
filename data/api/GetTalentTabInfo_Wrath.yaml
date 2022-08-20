@@ -1,0 +1,24 @@
+---
+name: GetTalentTabInfo_Wrath
+status: implemented
+inputs:
+- - name: index
+    type: number
+  - name: isInspect
+    nilable: true
+    type: boolean
+outputs:
+- name: name
+  type: string
+- name: texture
+  type: nil
+- name: pointsSpent
+  type: number
+- name: fileName
+  type: string
+- name: previewPointsSpent
+  type: number
+sqls:
+- lookup: GetTalentTabInfo
+states:
+- Units
