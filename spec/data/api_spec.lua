@@ -1,6 +1,12 @@
 describe('api', function()
-  local data = require('wowapi.data')
   local yaml = require('wowapi.yaml')
+  local used = {}
+  for _, d in ipairs(require('pl.dir').getdirectories('data/products')) do
+    for _, v in pairs(yaml.parseFile(d .. '/apis.yaml')) do
+      used[v] = true
+    end
+  end
+  local data = require('wowapi.data')
   for filename in require('lfs').dir('data/api') do
     if filename ~= '.' and filename ~= '..' then
       assert(filename:sub(-5) == '.yaml', 'invalid file ' .. filename)
@@ -19,6 +25,9 @@ describe('api', function()
           else
             assert(t.alias or t.stdlib, 'unsupported status')
           end
+        end)
+        it('is used by at least one product', function()
+          assert(used[t.name])
         end)
       end)
     end
