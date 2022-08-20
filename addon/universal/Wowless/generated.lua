@@ -224,12 +224,15 @@ function G.GeneratedTests()
     local genums = {}
     for k, v in pairs(_G) do
       if k:sub(1, 7) == 'NUM_LE_' then
-        genums[k:sub(5, -2)] = v
+        genums[k:sub(5, -2)] = true
         tests[k] = tests[k] or function()
           error('missing, has value ' .. v)
         end
       end
     end
+    -- LE_EXPANSION works differently for some reason
+    assert(genums.LE_EXPANSION == nil)
+    genums.LE_EXPANSION = true
     for k, v in pairs(_G) do
       for gk in pairs(genums) do
         if k:sub(1, #gk) == gk then
