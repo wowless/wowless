@@ -139,10 +139,24 @@ end
 
 for ns, nt in pairs(data.generated.apiNamespaces or {}) do
   if type(nt) == 'string' then
-    assert(nt:match(': want "nil", got "table"$'))
-    -- This means we're missing the namespace completely, but unfortunately right now
-    -- generated.lua doesn't tell us what APIs are missing, so given our current data
-    -- model we can't actually remedy this yet.
+    if nt:match(': want "nil", got "table"$') then
+      -- This means we're missing the namespace completely, but unfortunately right now
+      -- generated.lua doesn't tell us what APIs are missing, so given our current data
+      -- model we can't actually remedy this yet.
+      assert(true)
+    elseif nt:match(': want "table", got "nil"$') then
+      local fn = 'data/products/' .. product .. '/apis.yaml'
+      local apis = yaml.parseFile(fn)
+      local pre = ns .. '.'
+      for k in pairs(apis) do
+        if k:sub(1, pre:len()) == pre then
+          apis[k] = nil
+        end
+      end
+      write(fn, yaml.pprint(apis))
+    else
+      error('unexpected string: ' .. nt)
+    end
   elseif type(nt) == 'table' then
     for mn, mv in pairs(nt) do
       if mn:sub(1, 1) == '~' then
