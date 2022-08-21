@@ -124,7 +124,9 @@ local builds = {
           skip[k] = true
         end
         local t = {}
-        for _, k in ipairs(find('addon data spec tools wowapi wowless -not -path \'data/api/*\'')) do
+        for _, k in
+          ipairs(find('addon data spec tools wowapi wowless -not -path \'data/api/*\' -not -path \'data/products/*\''))
+        do
           if not skip[k] then
             table.insert(t, k)
           end
@@ -167,7 +169,7 @@ end
 
 local runouts = {}
 for _, p in ipairs(productList) do
-  local stamp = 'build/products/' .. p .. '/fetch.stamp'
+  local fetchStamp = 'build/products/' .. p .. '/fetch.stamp'
   table.insert(builds, {
     args = { product = p },
     ins = {
@@ -176,20 +178,26 @@ for _, p in ipairs(productList) do
       'tools/dblist.lua',
       'tools/fetch.lua',
     },
-    outs = stamp,
+    outs = fetchStamp,
     rule = 'fetch',
+  })
+  local dataStamp = 'build/products/' .. p .. '/data.stamp'
+  table.insert(builds, {
+    ins = find('data/products/' .. p),
+    outs = dataStamp,
+    rule = 'stamp',
   })
   local runout = 'out/' .. p .. '/log.txt'
   table.insert(runouts, runout)
   table.insert(builds, {
     args = { product = p },
-    ins = { 'wowless/ext.so', 'build/wowless.stamp', stamp, taintedLua },
+    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua },
     outs = runout,
     rule = 'run',
   })
   table.insert(builds, {
     args = { product = p },
-    ins = { 'wowless/ext.so', 'build/wowless.stamp', stamp, taintedLua },
+    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua },
     outs = 'out/' .. p .. '/frame0log.txt',
     outs_implicit = { 'out/' .. p .. '/frame0.yaml', 'out/' .. p .. '/frame1.yaml' },
     rule = 'frame0',
