@@ -167,7 +167,7 @@ end
 
 local runouts = {}
 for _, p in ipairs(productList) do
-  local stamp = 'build/extracts/' .. p .. '.stamp'
+  local stamp = 'build/products/' .. p .. '/fetch.stamp'
   table.insert(builds, {
     args = { product = p },
     ins = {
