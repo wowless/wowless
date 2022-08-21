@@ -6,4 +6,4 @@ for tier, column in sql(units.guids[units.aliases.player].class, tabIndex, talen
   t[num + 2] = column
   num = num + 4
 end
-return unpack(t)
+return unpack(t, 1, num)
