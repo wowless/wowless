@@ -271,6 +271,10 @@ local function rects2png(data, authority, outfile)
                 assert(twand:composite_image(maskwand, magick.CompositeOperator.DstInCompositeOp, 0, 0))
               end
             end
+            -- This is not consistent with the client, but avoids very weird effects.
+            for ck, cv in pairs(c) do
+              c[ck] = cv > 1.0 and 1.0 or cv < 0.0 and 0.0 or cv
+            end
             assert(twand:set_image_extent(math.max(width, right - left), math.max(height, bottom - top)))
             assert(twand:distort_image(magick.DistortImageMethod.BilinearDistortion, {
               -- Top left
