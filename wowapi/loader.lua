@@ -14,7 +14,7 @@ local function loadApis(product)
   return apis
 end
 
-local function loadSqls(product, apis)
+local function loadSqls(loader, apis)
   local function lookup(stmt)
     for row in stmt:rows() do -- luacheck: ignore 512
       return unpack(row)
@@ -23,7 +23,7 @@ local function loadSqls(product, apis)
   local function cursor(stmt)
     return stmt:urows()
   end
-  local sqlite = require('wowapi.sqlite')(product)
+  local sqlite = loader.sqlitedb
   local function prep(fn, sql, f)
     local stmt = sqlite:prepare(sql)
     if not stmt then
@@ -241,7 +241,7 @@ end
 local function loadFunctions(api, loader)
   local fns = {}
   local apis = loadApis(loader.product)
-  local sqls = loadSqls(loader.product, apis)
+  local sqls = loadSqls(loader, apis)
   local db2s = mkdb2s(loader)
   local aliases = {}
   for fn, apicfg in pairs(apis) do

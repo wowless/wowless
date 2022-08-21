@@ -692,6 +692,9 @@ local function loader(api, cfg)
     return wdb.rows(product, name, data)
   end
 
+  local sqlitecreator, sqlitepopulator = require('wowapi.sqlite')(product)
+  local sqlitedb = sqlitecreator()
+
   local addonData = assert(api.states.Addons)
 
   local function initAddons()
@@ -768,6 +771,7 @@ local function loader(api, cfg)
   end
 
   local function loadFrameXml()
+    sqlitepopulator(sqlitedb)
     local context = forAddon()
     for row in db2rows('GlobalStrings') do
       api.env[row.BaseTag] = row.TagText_lang
@@ -827,6 +831,7 @@ local function loader(api, cfg)
     loadXml = forAddon().loadXml,
     product = product,
     saveAllVariables = saveAllVariables,
+    sqlitedb = sqlitedb,
   }
 end
 
