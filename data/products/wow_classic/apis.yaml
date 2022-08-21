@@ -1908,7 +1908,7 @@ GetTabardCreationCost: GetTabardCreationCost
 GetTabardInfo: GetTabardInfo
 GetTalentInfo: GetTalentInfo_Vanilla
 GetTalentLink: GetTalentLink
-GetTalentPrereqs: GetTalentPrereqs
+GetTalentPrereqs: GetTalentPrereqs_Vanilla
 GetTalentTabInfo: GetTalentTabInfo_Vanilla
 GetTargetTradeMoney: GetTargetTradeMoney
 GetTaxiBenchmarkMode: GetTaxiBenchmarkMode

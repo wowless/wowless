@@ -1,0 +1,12 @@
+---
+name: GetTalentPrereqs_Wrath
+status: implemented
+inputs:
+- - name: tabIndex
+    type: number
+  - name: talentIndex
+    type: number
+sqls:
+- cursor: GetTalentPrereqs
+states:
+- Units

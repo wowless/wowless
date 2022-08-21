@@ -2025,7 +2025,7 @@ GetTabardInfo: GetTabardInfo
 GetTalentGroupRole: GetTalentGroupRole
 GetTalentInfo: GetTalentInfo_Vanilla
 GetTalentLink: GetTalentLink
-GetTalentPrereqs: GetTalentPrereqs
+GetTalentPrereqs: GetTalentPrereqs_Wrath
 GetTalentTabInfo: GetTalentTabInfo_Wrath
 GetTargetTradeMoney: GetTargetTradeMoney
 GetTaxiBenchmarkMode: GetTaxiBenchmarkMode
