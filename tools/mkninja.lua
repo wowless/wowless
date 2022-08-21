@@ -38,7 +38,7 @@ local perProductAddonGeneratedTypes = {
 
 local addonGeneratedFiles = {}
 for _, p in ipairs(productList) do
-  local prefix = 'addon/perproduct/' .. p .. '/WowlessData/'
+  local prefix = 'build/products/' .. p .. '/WowlessData/'
   table.insert(addonGeneratedFiles, prefix .. 'WowlessData.toc')
   for k in pairs(perProductAddonGeneratedTypes) do
     table.insert(addonGeneratedFiles, prefix .. k .. '.lua')
@@ -148,7 +148,7 @@ local builds = {
 }
 
 for _, p in ipairs(productList) do
-  local prefix = 'addon/perproduct/' .. p .. '/WowlessData/'
+  local prefix = 'build/products/' .. p .. '/WowlessData/'
   table.insert(builds, {
     args = { product = p, ['type'] = 'toc' },
     ins = { taintedLua, 'tools/gentest.lua' },

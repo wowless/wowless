@@ -16,7 +16,7 @@ read_globals = {
   'table.removemulti',
   'table.wipe',
 }
-files['addon/universal/Wowless'] = {
+files['addon/Wowless'] = {
   read_globals = {
     'abs',
     'C_CovenantSanctumUI',

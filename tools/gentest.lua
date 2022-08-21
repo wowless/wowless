@@ -210,12 +210,12 @@ local filemap = (function()
       for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
         local nn, tt = ptablemap[k](p)
         local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
-        t['addon/perproduct/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
+        t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
       end
     elseif k == 'product' then
       for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
         local ss = ('_G.WowlessData = { product = %q }'):format(p)
-        t['addon/perproduct/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
+        t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
       end
     elseif k == 'toc' then
       local tt = {}
@@ -227,7 +227,7 @@ local filemap = (function()
       table.insert(tt, '')
       local content = table.concat(tt, '\n')
       for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
-        t['addon/perproduct/' .. p .. '/WowlessData/WowlessData.toc'] = content
+        t['build/products/' .. p .. '/WowlessData/WowlessData.toc'] = content
       end
     else
       error('invalid file type ' .. k)

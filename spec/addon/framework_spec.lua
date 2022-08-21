@@ -1,7 +1,7 @@
 describe('framework', function()
   local tests = (function()
     local env = {}
-    loadfile('addon/universal/Wowless/framework.lua')('foo', env)
+    loadfile('addon/Wowless/framework.lua')('foo', env)
     return env.tests
   end)()
   it('works', function()

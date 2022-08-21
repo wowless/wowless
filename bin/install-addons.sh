@@ -6,7 +6,7 @@ then
   echo "$wowroot is not a directory"
   exit 1
 fi
-addonroot="$(dirname "$(dirname "$(readlink -f "$0")")")/addon"
+wowless="$(dirname "$(dirname "$(readlink -f "$0")")")"
 function install() {
   wowproduct="$1"
   addonproduct="$2"
@@ -14,8 +14,8 @@ function install() {
   if [ -d "$wowdir" ]
   then
     echo "installing in $wowproduct"
-    ln -sf "$addonroot/universal/Wowless" "$wowdir"
-    ln -sf "$addonroot/perproduct/$addonproduct/WowlessData" "$wowdir"
+    ln -sf "$wowless/addon/Wowless" "$wowdir"
+    ln -sf "$wowless/build/products/$addonproduct/WowlessData" "$wowdir"
   fi
 }
 install _retail_ wow

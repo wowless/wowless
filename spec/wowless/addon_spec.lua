@@ -4,8 +4,8 @@ expose('addon', function()
       it('runs', function()
         local api = require('wowless.runner').run({
           otherAddonDirs = {
-            'addon/perproduct/' .. product .. '/WowlessData',
-            'addon/universal/Wowless',
+            'addon/Wowless',
+            'build/products/' .. product .. '/WowlessData',
           },
           product = product,
         })
