@@ -149,11 +149,6 @@ local builds = {
     rule = 'stamp',
   },
   {
-    ins = { '.busted', 'wowless/ext.so', 'build/wowless.stamp', addonGeneratedFiles, taintedLua },
-    outs = 'test.out',
-    rule = 'mktestout',
-  },
-  {
     ins = { 'wowless-scm-0.rockspec', 'wowless/ext.c' },
     outs_implicit = { 'wowless/ext.o', 'wowless/ext.so' },
     rule = 'mkwowlessext',
@@ -178,6 +173,7 @@ for _, p in ipairs(productList) do
   end
 end
 
+local schemadbs = {}
 local runouts = {}
 for _, p in ipairs(productList) do
   local fetchStamp = 'build/products/' .. p .. '/fetch.stamp'
@@ -200,15 +196,18 @@ for _, p in ipairs(productList) do
   })
   local runout = 'out/' .. p .. '/log.txt'
   table.insert(runouts, runout)
+  local schemadb = 'build/products/' .. p .. '/schema.db'
+  local datadb = 'build/products/' .. p .. '/data.db'
+  table.insert(schemadbs, schemadb)
   table.insert(builds, {
     args = { product = p },
-    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua },
+    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua, datadb },
     outs = runout,
     rule = 'run',
   })
   table.insert(builds, {
     args = { product = p },
-    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua },
+    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua, datadb },
     outs = 'out/' .. p .. '/frame0log.txt',
     outs_implicit = { 'out/' .. p .. '/frame0.yaml', 'out/' .. p .. '/frame1.yaml' },
     rule = 'frame0',
@@ -226,17 +225,22 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p },
     ins_implicit = { 'build/dbdefs.stamp', 'tools/sqlite.lua', 'wowapi/sqlite.lua' },
-    outs_implicit = { 'build/products/' .. p .. '/schema.db' },
+    outs_implicit = schemadb,
     rule = 'dbschema',
   })
   table.insert(builds, {
     args = { product = p },
     ins_implicit = { 'build/dbdefs.stamp', 'tools/sqlite.lua', 'wowapi/sqlite.lua', fetchStamp },
-    outs_implicit = { 'build/products/' .. p .. '/data.db' },
+    outs_implicit = datadb,
     rule = 'dbdata',
   })
 end
 
+table.insert(builds, {
+  ins = { '.busted', 'wowless/ext.so', 'build/wowless.stamp', addonGeneratedFiles, taintedLua, schemadbs },
+  outs = 'test.out',
+  rule = 'mktestout',
+})
 table.insert(builds, {
   ins = runouts,
   rule = 'phony',
