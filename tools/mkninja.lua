@@ -53,6 +53,12 @@ local pools = {
 }
 
 local rules = {
+  dbdata = {
+    command = 'lua tools/sqlite.lua -f $product',
+  },
+  dbschema = {
+    command = 'lua tools/sqlite.lua $product',
+  },
   fetch = {
     command = 'lua tools/fetch.lua $product && touch $out',
     pool = 'fetch_pool',
@@ -104,6 +110,11 @@ local builds = {
   {
     ins = find('data/api'),
     outs = 'build/api.stamp',
+    rule = 'stamp',
+  },
+  {
+    ins = find('data/dbdefs'),
+    outs = 'build/dbdefs.stamp',
     rule = 'stamp',
   },
   {
@@ -212,6 +223,18 @@ for _, p in ipairs(productList) do
       rule = 'render',
     })
   end
+  table.insert(builds, {
+    args = { product = p },
+    ins_implicit = { 'build/dbdefs.stamp', 'tools/sqlite.lua', 'wowapi/sqlite.lua' },
+    outs_implicit = { 'build/products/' .. p .. '/schema.db' },
+    rule = 'dbschema',
+  })
+  table.insert(builds, {
+    args = { product = p },
+    ins_implicit = { 'build/dbdefs.stamp', 'tools/sqlite.lua', 'wowapi/sqlite.lua', fetchStamp },
+    outs_implicit = { 'build/products/' .. p .. '/data.db' },
+    rule = 'dbdata',
+  })
 end
 
 table.insert(builds, {

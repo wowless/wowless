@@ -30,15 +30,17 @@ local function factory(theProduct)
     end
   end
 
-  local function create()
+  local function create(filename)
     local dbinit = { 'BEGIN' }
     for k, v in pairs(defs) do
       table.insert(dbinit, ('CREATE TABLE %s (%s)'):format(k, table.concat(v.fields, ',')))
     end
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
-    local db = lsqlite3.open_memory()
-    assert(db:exec(table.concat(dbinit, ';\n')) == lsqlite3.OK)
+    local db = filename and lsqlite3.open(filename) or lsqlite3.open_memory()
+    if db:exec(table.concat(dbinit, ';\n')) ~= lsqlite3.OK then
+      error('sqlite failure: ' .. db:errmsg())
+    end
     return db
   end
 
