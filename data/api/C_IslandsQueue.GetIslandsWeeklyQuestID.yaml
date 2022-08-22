@@ -5,5 +5,5 @@ inputs:
 - {}
 outputs:
 - name: questID
-  nilable: true
+  stub: 1
   type: number
