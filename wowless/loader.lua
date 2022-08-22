@@ -117,12 +117,14 @@ local function loader(api, cfg)
       return assert(loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\')))
     end
 
-    local function loadLuaString(filename, str, line)
+    local function loadLuaString(filename, str, line, closureTaint)
       local before = api.env.ScrollingMessageFrameMixin
       local fn = setfenv(loadstr(str, filename, line), api.env)
       api.CallSafely(function()
+        debug.setnewclosuretaint(closureTaint)
         fn(addonName, addonEnv)
       end)
+      debug.setnewclosuretaint(nil)
       -- Super hacky hack to hook ScrollingMessageFrameMixin.AddMessage
       local after = api.env.ScrollingMessageFrameMixin
       if after and not before then
@@ -588,7 +590,7 @@ local function loader(api, cfg)
       end)
     end
 
-    function loadFile(filename)
+    function loadFile(filename, closureTaint)
       filename = path.normalize(filename)
       api.CallSafely(function()
         api.log(2, 'loading file %s', filename)
@@ -604,7 +606,7 @@ local function loader(api, cfg)
           return readFile(filename)
         end)
         if success then
-          loadFn(filename, content)
+          loadFn(filename, content, nil, closureTaint)
         else
           api.log(1, 'skipping missing file %s', filename)
         end
@@ -753,7 +755,10 @@ local function loader(api, cfg)
       for _, file in ipairs(toc.files) do
         context.loadFile(file)
       end
-      context.loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName))
+      context.loadFile(
+        ('out/%s/SavedVariables/%s.lua'):format(product, addonName),
+        toc.fdid and 'SavedVariables' or nil
+      )
       toc.loaded = true
       api.log(1, 'done loading %s', addonName)
       api.SendEvent('ADDON_LOADED', addonName)
