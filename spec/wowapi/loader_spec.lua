@@ -3,7 +3,11 @@ describe('loader', function()
 
   for _, p in ipairs(require('wowless.util').productList()) do
     it('loads ' .. p, function()
-      local api = { env = {}, states = {} }
+      local api = {
+        env = {},
+        log = function() end,
+        states = {},
+      }
       local wowlessLoader = {
         product = p,
         sqlitedb = require('wowapi.sqlite')(p)(),

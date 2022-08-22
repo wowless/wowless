@@ -239,6 +239,7 @@ local function resolveUnit(units, unit)
 end
 
 local function loadFunctions(api, loader)
+  api.log(1, 'loading functions')
   local fns = {}
   local apis = loadApis(loader.product)
   local sqls = loadSqls(loader, apis)
@@ -383,6 +384,7 @@ local function loadFunctions(api, loader)
   for k, v in pairs(aliases) do
     fns[k] = util.tget(fns, v)
   end
+  api.log(1, 'functions loaded')
   return fns
 end
 
