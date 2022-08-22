@@ -8,19 +8,7 @@ local product = args.product
 
 local log = args.verbose and print or function() end
 
-local productToSuffix = {
-  wow = 'Mainline',
-  wowt = 'Mainline',
-  wow_beta = 'Mainline',
-  wow_classic = 'TBC',
-  wow_classic_beta = 'Wrath',
-  wow_classic_era = 'Vanilla',
-  wow_classic_era_ptr = 'Vanilla',
-  wow_classic_ptr = 'Wrath',
-}
-local tocSuffix = assert(productToSuffix[product], 'invalid product')
-
-local build = require('wowapi.yaml').parseFile('data/products/' .. product .. '/build.yaml').hash
+local build = require('wowapi.yaml').parseFile('data/products/' .. product .. '/build.yaml')
 
 local dbs = require('wowless.db')
 assert(dbs.fdid('ManifestInterfaceTOCData'), 'missing manifest')
@@ -32,7 +20,7 @@ local handle = (function()
   local casc = require('casc')
   local _, cdn, ckey = casc.cdnbuild('http://us.patch.battle.net:1119/' .. product, 'us')
   local handle, err = casc.open({
-    bkey = build,
+    bkey = build.hash,
     cache = 'cache',
     cacheFiles = true,
     cdn = cdn,
@@ -42,7 +30,7 @@ local handle = (function()
     zerofillEncryptedChunks = true,
   })
   if not handle then
-    print('unable to open ' .. build .. ': ' .. err)
+    print('unable to open ' .. build.hash .. ': ' .. err)
     os.exit(1)
   end
   return handle
@@ -95,7 +83,7 @@ end)()
 
 local function processTocDir(dir)
   local addonName = path.basename(dir)
-  local tocName = path.join(dir, addonName .. '_' .. tocSuffix .. '.toc')
+  local tocName = path.join(dir, addonName .. '_' .. build.flavor .. '.toc')
   local content = handle:readFile(tocName)
   if not content then
     tocName = path.join(dir, addonName .. '.toc')
