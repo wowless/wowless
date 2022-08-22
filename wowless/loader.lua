@@ -698,12 +698,13 @@ local function loader(api, cfg)
   local addonData = assert(api.states.Addons)
 
   local function initAddons()
-    local function maybeAdd(dir)
+    local function maybeAdd(dir, fdid)
       local name = path.basename(dir)
       if not addonData[name] then
         local addon = resolveTocDir(dir)
         if addon then
           addon.name = name
+          addon.fdid = fdid
           addonData[name] = addon
           table.insert(addonData, addon)
         end
@@ -721,7 +722,7 @@ local function loader(api, cfg)
     end
     if rootDir then
       for row in db2rows('ManifestInterfaceTOCData') do
-        maybeAdd(path.join(rootDir, path.dirname(row.FilePath)))
+        maybeAdd(path.join(rootDir, path.dirname(row.FilePath)), row.ID)
       end
     end
     for _, d in ipairs(otherAddonDirs) do
@@ -788,11 +789,13 @@ local function loader(api, cfg)
     context.loadFile(path.join(rootDir, frameXmlBindingsDirMap[productToFlavor[product]], 'FrameXML', 'Bindings.xml'))
     local blizzardAddons = {}
     for name, toc in pairs(addonData) do
-      if type(name) == 'string' and name:sub(1, 9) == 'Blizzard_' and toc.attrs.LoadOnDemand ~= '1' then
+      if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' then
         table.insert(blizzardAddons, name)
       end
     end
-    table.sort(blizzardAddons)
+    table.sort(blizzardAddons, function(a, b)
+      return addonData[a].fdid < addonData[b].fdid
+    end)
     for _, name in ipairs(blizzardAddons) do
       loadAddon(name)
     end
