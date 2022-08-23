@@ -47,7 +47,7 @@ local function factory(theProduct)
   local function populate(db)
     local dbinit = { 'BEGIN' }
     for k, v in pairs(defs) do
-      local data = require('pl.file').read(('extracts/%s/db2/%s.db2'):format(theProduct, k:lower()))
+      local data = require('pl.file').read(('extracts/%s/db2/%s.db2'):format(theProduct, k))
       assert(data, 'missing db2 for ' .. k)
       for row in require('dbc').rows(data, '{' .. v.version.sig:gsub('%.', '%?') .. '}') do
         local values = {}
