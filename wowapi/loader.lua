@@ -346,19 +346,13 @@ local function loadFunctions(api, loader)
           end
         end
       end)()
-      local function wrapimpl(...)
+      local function thefunc(...)
         return checkOutputs(bfn(checkInputs(...)))
       end
-
-      local outer
-      if apicfg.nowrap then
-        outer = function(...)
-          return wrapimpl(...)
-        end
-      else
-        outer = debug.newcfunction(wrapimpl)
+      if not apicfg.nowrap then
+        thefunc = debug.newcfunction(thefunc)
       end
-      util.tset(fns, fn, outer)
+      util.tset(fns, fn, thefunc)
     end
   end
   for k, v in pairs(aliases) do
