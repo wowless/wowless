@@ -83,8 +83,8 @@ local function new(log, maxErrors)
     end
   end
 
-  local function CallSafely(fun)
-    return xpcall(fun, ErrorHandler)
+  local function CallSafely(fun, ...)
+    return xpcall(fun, ErrorHandler, ...)
   end
 
   local function GetDebugName(frame)
@@ -124,14 +124,13 @@ local function new(log, maxErrors)
   local function RunScript(obj, name, ...)
     local ud = u(obj)
     if ud.scripts then
-      local args = { ... }
       for i = 0, 2 do
         local script = ud.scripts[i][string.lower(name)]
         if script then
           log(4, 'begin %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
-          CallSafely(function()
-            script(obj, unpack(args))
-          end)
+          CallSafely(function(...)
+            script(obj, ...)
+          end, ...)
           log(4, 'end %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
         end
       end
