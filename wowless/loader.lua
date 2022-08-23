@@ -111,12 +111,21 @@ local function loader(api, cfg)
     return v('left'), v('right'), v('top'), v('bottom')
   end
 
-  local function forAddon(addonName, addonEnv)
-    local function loadstr(str, filename, line)
-      local pre = line and string.rep('\n', line - 1) or ''
-      return assert(loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\')))
-    end
+  local function loadstr(str, filename, line)
+    local pre = line and string.rep('\n', line - 1) or ''
+    return assert(loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\')))
+  end
 
+  local function getColor(e)
+    local name = e.attr.name or e.attr.color
+    if name then
+      return assert(api.env[name], ('unknown color %q'):format(name)):GetRGBA()
+    else
+      return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
+    end
+  end
+
+  local function forAddon(addonName, addonEnv)
     local function loadLuaString(filename, str, line, closureTaint)
       local before = api.env.ScrollingMessageFrameMixin
       local fn = setfenv(loadstr(str, filename, line), api.env)
@@ -205,15 +214,6 @@ local function loader(api, cfg)
               bindingType = 0
             end
             api.SetScript(obj, script.type, bindingType, fn)
-          end
-        end
-
-        local function getColor(e)
-          local name = e.attr.name or e.attr.color
-          if name then
-            return assert(api.env[name], ('unknown color %q'):format(name)):GetRGBA()
-          else
-            return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
           end
         end
 
