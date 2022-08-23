@@ -347,17 +347,7 @@ local function loadFunctions(api, loader)
         end
       end)()
       local function wrapimpl(...)
-        local t = { ... }
-        local n = select('#', ...)
-        return (function(success, ...)
-          if success then
-            return ...
-          else
-            error((...), 3)
-          end
-        end)(pcall(function()
-          return checkOutputs(bfn(checkInputs(unpack(t, 1, n))))
-        end))
+        return checkOutputs(bfn(checkInputs(...)))
       end
 
       local outer
