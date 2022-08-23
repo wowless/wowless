@@ -241,7 +241,7 @@ for _, p in ipairs(productList) do
   table.insert(runtimes, datalua)
   table.insert(builds, {
     args = { product = p },
-    ins_implicit = { 'tools/prep.lua', 'build/api.stamp', 'data/products/' .. p .. '/apis.yaml' },
+    ins_implicit = { 'tools/prep.lua', 'build/api.stamp', dataStamp },
     outs_implicit = datalua,
     rule = 'prep',
   })

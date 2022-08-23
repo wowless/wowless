@@ -20,15 +20,10 @@ local function init(api, loader, taint)
   api.env.forceinsecure = taint and forceinsecure or function() end
   util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
   Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api, loader))
-  local function load(f)
-    return (require('wowapi.yaml').parseFile(('data/products/%s/%s.yaml'):format(loader.product, f)))
-  end
-  Mixin(api.env, load('globals'))
+  local data = require('build.products.' .. loader.product .. '.data')
+  Mixin(api.env, data.globals)
   -- TODO put this somewhere else
-  local cvarDefaults = {}
-  for k, v in pairs(load('cvars')) do
-    cvarDefaults[k] = type(v) == 'string' and v or v[loader.product]
-  end
+  local cvarDefaults = data.cvars
   api.env.C_CVar.GetCVarDefault = debug.newcfunction(function(k)
     return cvarDefaults[k]
   end)
