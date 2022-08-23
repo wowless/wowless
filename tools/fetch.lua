@@ -84,18 +84,27 @@ end)()
 local function processTocDir(dir)
   local addonName = path.basename(dir)
   local tocName = path.join(dir, addonName .. '_' .. build.flavor .. '.toc')
-  local content = handle:readFile(tocName)
-  if not content then
+  local tocContent = handle:readFile(tocName)
+  if not tocContent then
     tocName = path.join(dir, addonName .. '.toc')
-    content = handle:readFile(tocName)
+    tocContent = handle:readFile(tocName)
   end
-  if content then
-    save(tocName, content)
-    for line in content:gmatch('[^\r\n]+') do
+  if tocContent then
+    save(tocName, tocContent)
+    for line in tocContent:gmatch('[^\r\n]+') do
       if line:sub(1, 1) ~= '#' then
         processFile(joinRelative(tocName, line:gsub('%s*$', '')))
       end
     end
+  end
+  local bindingsName = path.join(dir, 'Bindings.xml')
+  local bindingsContent = handle:readFile(bindingsName)
+  if not bindingsContent then
+    bindingsName = bindingsName:gsub('^Interface/', 'Interface_' .. build.flavor .. '/')
+    bindingsContent = handle:readFile(bindingsName)
+  end
+  if bindingsContent then
+    save(bindingsName, bindingsContent)
   end
 end
 
