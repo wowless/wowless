@@ -131,13 +131,9 @@ local function mkBaseUIObjectTypes(api, loader)
           api.InheritsFrom(u(self).type, name:lower()),
           ('invalid self to %s.%s, got %s'):format(name, fname, tostring(u(self).type))
         )
-        local dname = api.GetDebugName(self)
-        dname = dname == '' and ('<' .. name .. '>') or dname
-        log(4, 'entering %s:%s', dname, fname)
         local t = { ... }
         local n = select('#', ...)
         return (function(success, ...)
-          log(4, 'leaving %s:%s (%s)', dname, fname, success and 'success' or 'failure')
           if success then
             return ...
           else

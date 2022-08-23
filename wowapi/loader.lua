@@ -347,11 +347,9 @@ local function loadFunctions(api, loader)
         end
       end)()
       local function wrapimpl(...)
-        api.log(4, 'entering %s', apicfg.name)
         local t = { ... }
         local n = select('#', ...)
         return (function(success, ...)
-          api.log(4, 'leaving %s (%s)', apicfg.name, success and 'success' or 'failure')
           if success then
             return ...
           else
