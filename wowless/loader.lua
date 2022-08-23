@@ -612,10 +612,7 @@ local function loader(api, cfg)
       end)
     end
 
-    return {
-      loadFile = loadFile,
-      loadXml = loadXml,
-    }
+    return loadFile
   end
 
   local productToFlavor = (function()
@@ -752,14 +749,11 @@ local function loader(api, cfg)
         end
       end
       api.log(1, 'loading addon files for %s', addonName)
-      local context = forAddon(addonName, {})
+      local loadFile = forAddon(addonName, {})
       for _, file in ipairs(toc.files) do
-        context.loadFile(file)
+        loadFile(file)
       end
-      context.loadFile(
-        ('out/%s/SavedVariables/%s.lua'):format(product, addonName),
-        toc.fdid and 'SavedVariables' or nil
-      )
+      loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.fdid and 'SavedVariables' or nil)
       toc.loaded = true
       api.log(1, 'done loading %s', addonName)
       api.SendEvent('ADDON_LOADED', addonName)
@@ -778,12 +772,12 @@ local function loader(api, cfg)
   end
 
   local function loadFrameXml()
-    local context = forAddon()
+    local loadFile = forAddon()
     for row in db2rows('GlobalStrings') do
       api.env[row.BaseTag] = row.TagText_lang
     end
     for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do
-      context.loadFile(file)
+      loadFile(file)
     end
     local frameXmlBindingsDirMap = {
       Mainline = 'Interface',
@@ -791,7 +785,7 @@ local function loader(api, cfg)
       Vanilla = 'Interface_Vanilla',
       Wrath = 'Interface_Wrath',
     }
-    context.loadFile(path.join(rootDir, frameXmlBindingsDirMap[productToFlavor[product]], 'FrameXML', 'Bindings.xml'))
+    loadFile(path.join(rootDir, frameXmlBindingsDirMap[productToFlavor[product]], 'FrameXML', 'Bindings.xml'))
     local blizzardAddons = {}
     for name, toc in pairs(addonData) do
       if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' then
@@ -836,7 +830,6 @@ local function loader(api, cfg)
     initAddons = initAddons,
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
-    loadXml = forAddon().loadXml,
     product = product,
     saveAllVariables = saveAllVariables,
     sqlitedb = sqlitedb,
