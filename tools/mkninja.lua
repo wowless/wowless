@@ -234,6 +234,12 @@ for _, p in ipairs(productList) do
     outs_implicit = datadb,
     rule = 'dbdata',
   })
+  table.insert(builds, {
+    args = { product = p },
+    ins = datadb,
+    outs = p,
+    rule = 'phony',
+  })
 end
 
 table.insert(builds, {

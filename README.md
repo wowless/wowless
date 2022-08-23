@@ -15,7 +15,7 @@ Running on WoW client Lua/XML code requires some additional steps.
 From inside the container:
 
 ```sh
-lua tools/fetch.sh wow
+ninja wow
 bin/run.sh --product wow
 ```
 
