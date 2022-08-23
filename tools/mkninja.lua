@@ -79,6 +79,9 @@ local rules = {
   mkwowlessext = {
     command = 'luarocks build --no-install',
   },
+  prep = {
+    command = 'lua tools/prep.lua $product',
+  },
   render = {
     command = 'lua tools/render.lua $in',
   },
@@ -173,7 +176,7 @@ for _, p in ipairs(productList) do
   end
 end
 
-local schemadbs = {}
+local runtimes = {}
 local runouts = {}
 for _, p in ipairs(productList) do
   local fetchStamp = 'build/products/' .. p .. '/fetch.stamp'
@@ -198,7 +201,7 @@ for _, p in ipairs(productList) do
   table.insert(runouts, runout)
   local schemadb = 'build/products/' .. p .. '/schema.db'
   local datadb = 'build/products/' .. p .. '/data.db'
-  table.insert(schemadbs, schemadb)
+  table.insert(runtimes, schemadb)
   table.insert(builds, {
     args = { product = p },
     ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua, datadb },
@@ -234,16 +237,24 @@ for _, p in ipairs(productList) do
     outs_implicit = datadb,
     rule = 'dbdata',
   })
+  local datalua = 'build/products/' .. p .. '/data.lua'
+  table.insert(runtimes, datalua)
   table.insert(builds, {
     args = { product = p },
-    ins = datadb,
+    ins_implicit = { 'tools/prep.lua', 'build/api.stamp', 'data/products/' .. p .. '/apis.yaml' },
+    outs_implicit = datalua,
+    rule = 'prep',
+  })
+  table.insert(builds, {
+    args = { product = p },
+    ins = { datadb, datalua },
     outs = p,
     rule = 'phony',
   })
 end
 
 table.insert(builds, {
-  ins = { '.busted', 'wowless/ext.so', 'build/wowless.stamp', addonGeneratedFiles, taintedLua, schemadbs },
+  ins = { '.busted', 'wowless/ext.so', 'build/wowless.stamp', addonGeneratedFiles, taintedLua, runtimes },
   outs = 'test.out',
   rule = 'mktestout',
 })

@@ -3,15 +3,7 @@ local plprettywrite = require('pl.pretty').write
 local util = require('wowless.util')
 
 local function loadApis(product)
-  local cfg = require('wowapi.yaml').parseFile('data/products/' .. product .. '/apis.yaml')
-  local apis = {}
-  for name, apiname in pairs(cfg) do
-    local api = data.apis[apiname]
-    if not api.debug then
-      apis[name] = api
-    end
-  end
-  return apis
+  return require('build.products.' .. product .. '.data').apis
 end
 
 local function loadSqls(loader, apis)
