@@ -249,10 +249,9 @@ local function loadFunctions(api, loader)
         for i, param in ipairs(sig) do
           local arg = select(i, ...)
           if arg == nil then
-            assert(
-              param.nilable or param.default ~= nil,
-              ('arg %d (%q) of %q is not nilable, but nil was passed'):format(i, tostring(param.name), fn)
-            )
+            if not param.nilable and param.default == nil then
+              error(('arg %d (%q) of %q is not nilable, but nil was passed'):format(i, tostring(param.name), fn))
+            end
           else
             local ty = type(arg)
             -- Simulate C lua_tonumber and lua_tostring.
@@ -268,10 +267,17 @@ local function loadFunctions(api, loader)
               arg = resolveUnit(api.states.Units, arg)
               ty = 'unit'
             end
-            assert(
-              ty == param.type,
-              ('arg %d (%q) of %q is of type %q, but %q was passed'):format(i, tostring(param.name), fn, param.type, ty)
-            )
+            if ty ~= param.type then
+              error(
+                ('arg %d (%q) of %q is of type %q, but %q was passed'):format(
+                  i,
+                  tostring(param.name),
+                  fn,
+                  param.type,
+                  ty
+                )
+              )
+            end
             args[i] = arg
           end
         end
@@ -324,22 +330,22 @@ local function loadFunctions(api, loader)
             for i, out in ipairs(apicfg.outputs) do
               local arg = select(i, ...)
               if arg == nil then
-                assert(
-                  out.nilable or nilableTypes[out.type],
-                  ('output %d (%q) of %q is not nilable, but nil was returned'):format(i, tostring(out.name), fn)
-                )
+                if not out.nilable and not nilableTypes[out.type] then
+                  error(('output %d (%q) of %q is not nilable, but nil was returned'):format(i, tostring(out.name), fn))
+                end
               elseif supportedTypes[out.type] then
                 local ty = type(arg)
-                assert(
-                  ty == out.type,
-                  ('output %d (%q) of %q is of type %q, but %q was returned'):format(
-                    i,
-                    tostring(out.name),
-                    fn,
-                    out.type,
-                    ty
+                if ty ~= out.type then
+                  error(
+                    ('output %d (%q) of %q is of type %q, but %q was returned'):format(
+                      i,
+                      tostring(out.name),
+                      fn,
+                      out.type,
+                      ty
+                    )
                   )
-                )
+                end
               end
             end
             return ...
