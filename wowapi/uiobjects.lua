@@ -124,13 +124,13 @@ local function mkBaseUIObjectTypes(api, loader)
 
   local uiobjects = {}
   for name, data in pairs(require('wowapi.data').uiobjects) do
+    local lname = name:lower()
     local function wrap(fname, fn)
       setfenv(fn, env)
       return function(self, ...)
-        assert(
-          api.InheritsFrom(u(self).type, name:lower()),
-          ('invalid self to %s.%s, got %s'):format(name, fname, tostring(u(self).type))
-        )
+        if not api.InheritsFrom(u(self).type, lname) then
+          error(('invalid self to %s.%s, got %s'):format(name, fname, tostring(u(self).type)))
+        end
         return fn(self, ...)
       end
     end
