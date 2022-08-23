@@ -615,13 +615,7 @@ local function loader(api, cfg)
     return loadFile
   end
 
-  local productToFlavor = (function()
-    local t = {}
-    for k, v in pairs(require('wowapi.data').builds) do
-      t[k] = v.flavor
-    end
-    return t
-  end)()
+  local build = require('build.products.' .. product .. '.data').build
 
   local alternateVersionNames = {
     Mainline = 'Mainline',
@@ -651,7 +645,7 @@ local function loader(api, cfg)
   local function resolveTocDir(tocDir)
     api.log(1, 'resolving %s', tocDir)
     local base = path.basename(tocDir)
-    local version = productToFlavor[product]
+    local version = build.flavor
     local toTry = {
       '_' .. version,
       '-' .. version,
@@ -681,7 +675,7 @@ local function loader(api, cfg)
     end)
   end
 
-  api.states.CVars.portal = require('wowapi.data').builds[product].ptr and 'test' or ''
+  api.states.CVars.portal = build.ptr and 'test' or ''
 
   local wdb = require('wowless.db')
 
@@ -785,7 +779,7 @@ local function loader(api, cfg)
       Vanilla = 'Interface_Vanilla',
       Wrath = 'Interface_Wrath',
     }
-    loadFile(path.join(rootDir, frameXmlBindingsDirMap[productToFlavor[product]], 'FrameXML', 'Bindings.xml'))
+    loadFile(path.join(rootDir, frameXmlBindingsDirMap[build.flavor], 'FrameXML', 'Bindings.xml'))
     local blizzardAddons = {}
     for name, toc in pairs(addonData) do
       if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' then
