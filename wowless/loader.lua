@@ -144,6 +144,58 @@ local function loader(api, cfg)
     end
   end
 
+  local function loadScript(script, obj, env, filename, intrinsic)
+    local fn
+    if script.attr['function'] then
+      local fnattr = script.attr['function']
+      fn = function(...)
+        assert(env[fnattr], 'unknown script function ' .. fnattr)
+        env[fnattr](...)
+      end
+    elseif script.attr.method then
+      local mattr = script.attr.method
+      fn = function(x, ...)
+        assert(x[mattr], 'unknown script method ' .. mattr)
+        x[mattr](x, ...)
+      end
+    elseif script.text then
+      local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
+      local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
+      fn = setfenv(loadstr(fnstr, filename, script.line), env)()
+    end
+    if fn then
+      local old = obj:GetScript(script.type)
+      if old and script.attr.inherit then
+        local bfn = fn
+        if script.attr.inherit == 'prepend' then
+          fn = function(...)
+            old(...)
+            bfn(...)
+          end
+        elseif script.attr.inherit == 'append' then
+          fn = function(...)
+            bfn(...)
+            old(...)
+          end
+        else
+          error('invalid inherit tag on script')
+        end
+      end
+      assert(not script.attr.intrinsicorder or intrinsic, 'intrinsicOrder on non-intrinsic')
+      local bindingType = 1
+      if script.attr.intrinsicorder == 'precall' then
+        bindingType = 0
+      elseif script.attr.intrinsicorder == 'postcall' then
+        bindingType = 2
+      elseif script.attr.intrinsicorder then
+        error('invalid intrinsicOrder tag on script')
+      elseif intrinsic then
+        bindingType = 0
+      end
+      api.SetScript(obj, script.type, bindingType, fn)
+    end
+  end
+
   local function forAddon(addonName, addonEnv)
     local loadFile
 
@@ -160,60 +212,6 @@ local function loader(api, cfg)
         local function loadElements(t, parent)
           for _, v in ipairs(t) do
             loadElement(v, parent)
-          end
-        end
-
-        local function loadScript(script, obj)
-          local fn
-          if script.attr['function'] then
-            local fnattr = script.attr['function']
-            local env = ctx.useAddonEnv and addonEnv or api.env
-            fn = function(...)
-              assert(env[fnattr], 'unknown script function ' .. fnattr)
-              env[fnattr](...)
-            end
-          elseif script.attr.method then
-            local mattr = script.attr.method
-            fn = function(x, ...)
-              assert(x[mattr], 'unknown script method ' .. mattr)
-              x[mattr](x, ...)
-            end
-          elseif script.text then
-            local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
-            local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-            local env = ctx.useAddonEnv and addonEnv or api.env
-            fn = setfenv(loadstr(fnstr, filename, script.line), env)()
-          end
-          if fn then
-            local old = obj:GetScript(script.type)
-            if old and script.attr.inherit then
-              local bfn = fn
-              if script.attr.inherit == 'prepend' then
-                fn = function(...)
-                  old(...)
-                  bfn(...)
-                end
-              elseif script.attr.inherit == 'append' then
-                fn = function(...)
-                  bfn(...)
-                  old(...)
-                end
-              else
-                error('invalid inherit tag on script')
-              end
-            end
-            assert(not script.attr.intrinsicorder or ctx.intrinsic, 'intrinsicOrder on non-intrinsic')
-            local bindingType = 1
-            if script.attr.intrinsicorder == 'precall' then
-              bindingType = 0
-            elseif script.attr.intrinsicorder == 'postcall' then
-              bindingType = 2
-            elseif script.attr.intrinsicorder then
-              error('invalid intrinsicOrder tag on script')
-            elseif ctx.intrinsic then
-              bindingType = 0
-            end
-            api.SetScript(obj, script.type, bindingType, fn)
           end
         end
 
@@ -542,7 +540,8 @@ local function loader(api, cfg)
             local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
             local fn = xmllang[e.type]
             if type(impl) == 'table' and impl.script then
-              loadScript(e, parent)
+              local env = ctx.useAddonEnv and addonEnv or api.env
+              loadScript(e, parent, env, filename, ctx.intrinsic)
             elseif type(impl) == 'table' and impl.scope then
               withContext({ [impl.scope] = true }).loadElements(e.kids, parent)
             elseif type(impl) == 'table' then
