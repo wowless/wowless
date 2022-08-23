@@ -131,17 +131,7 @@ local function mkBaseUIObjectTypes(api, loader)
           api.InheritsFrom(u(self).type, name:lower()),
           ('invalid self to %s.%s, got %s'):format(name, fname, tostring(u(self).type))
         )
-        local t = { ... }
-        local n = select('#', ...)
-        return (function(success, ...)
-          if success then
-            return ...
-          else
-            error((...), 3)
-          end
-        end)(pcall(function()
-          return fn(self, unpack(t, 1, n))
-        end))
+        return fn(self, ...)
       end
     end
     local function wrapAll(map)
