@@ -125,26 +125,27 @@ local function loader(api, cfg)
     end
   end
 
-  local function forAddon(addonName, addonEnv)
-    local function loadLuaString(filename, str, line, closureTaint)
-      local before = api.env.ScrollingMessageFrameMixin
-      local fn = setfenv(loadstr(str, filename, line), api.env)
-      api.CallSafely(function()
-        debug.setnewclosuretaint(closureTaint)
-        fn(addonName, addonEnv)
-      end)
-      debug.setnewclosuretaint(nil)
-      -- Super hacky hack to hook ScrollingMessageFrameMixin.AddMessage
-      local after = api.env.ScrollingMessageFrameMixin
-      if after and not before then
-        local f = after.AddMessage
-        after.AddMessage = function(self, text, ...)
-          api.log(1, '[%s] %s', self:GetDebugName(), tostring(text))
-          f(self, text, ...)
-        end
+  local function loadLuaString(filename, str, line, closureTaint, ...)
+    local before = api.env.ScrollingMessageFrameMixin
+    local fn = setfenv(loadstr(str, filename, line), api.env)
+    local argt, argn = { ... }, select('#', ...)
+    api.CallSafely(function()
+      debug.setnewclosuretaint(closureTaint)
+      fn(unpack(argt, 1, argn))
+    end)
+    debug.setnewclosuretaint(nil)
+    -- Super hacky hack to hook ScrollingMessageFrameMixin.AddMessage
+    local after = api.env.ScrollingMessageFrameMixin
+    if after and not before then
+      local f = after.AddMessage
+      after.AddMessage = function(self, text, ...)
+        api.log(1, '[%s] %s', self:GetDebugName(), tostring(text))
+        f(self, text, ...)
       end
     end
+  end
 
+  local function forAddon(addonName, addonEnv)
     local loadFile
 
     local function loadXml(filename, xmlstr)
@@ -606,7 +607,7 @@ local function loader(api, cfg)
           return readFile(filename)
         end)
         if success then
-          loadFn(filename, content, nil, closureTaint)
+          loadFn(filename, content, nil, closureTaint, addonName, addonEnv)
         else
           api.log(1, 'skipping missing file %s', filename)
         end
