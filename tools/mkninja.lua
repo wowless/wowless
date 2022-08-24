@@ -121,6 +121,11 @@ local builds = {
     rule = 'stamp',
   },
   {
+    ins = find('data/impl'),
+    outs = 'build/impl.stamp',
+    rule = 'stamp',
+  },
+  {
     ins = find('data/sql'),
     outs = 'build/sql.stamp',
     rule = 'stamp',
@@ -128,6 +133,7 @@ local builds = {
   {
     ins = {
       'build/api.stamp',
+      'build/dbdefs.stamp',
       (function()
         local skip = {
           ['tools/mkninja.lua'] = true,
@@ -137,10 +143,22 @@ local builds = {
         for _, k in ipairs(addonGeneratedFiles) do
           skip[k] = true
         end
+        local globaldirs = {
+          'addon',
+          'data/dbdefs',
+          'data/events',
+          'data/schemas',
+          'data/state',
+          'data/structures',
+          'data/uiobjects',
+          'data/xml',
+          'spec',
+          'tools',
+          'wowapi',
+          'wowless',
+        }
         local t = {}
-        for _, k in
-          ipairs(find('addon data spec tools wowapi wowless -not -path \'data/api/*\' -not -path \'data/products/*\''))
-        do
+        for _, k in ipairs(find(table.concat(globaldirs, ' '))) do
           if not skip[k] then
             table.insert(t, k)
           end
@@ -201,16 +219,17 @@ for _, p in ipairs(productList) do
   table.insert(runouts, runout)
   local schemadb = 'build/products/' .. p .. '/schema.db'
   local datadb = 'build/products/' .. p .. '/data.db'
+  local datalua = 'build/products/' .. p .. '/data.lua'
   table.insert(runtimes, schemadb)
   table.insert(builds, {
     args = { product = p },
-    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua, datadb },
+    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua, datadb, datalua },
     outs = runout,
     rule = 'run',
   })
   table.insert(builds, {
     args = { product = p },
-    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua, datadb },
+    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua, datadb, datalua },
     outs = 'out/' .. p .. '/frame0log.txt',
     outs_implicit = { 'out/' .. p .. '/frame0.yaml', 'out/' .. p .. '/frame1.yaml' },
     rule = 'frame0',
@@ -237,11 +256,16 @@ for _, p in ipairs(productList) do
     outs_implicit = datadb,
     rule = 'dbdata',
   })
-  local datalua = 'build/products/' .. p .. '/data.lua'
   table.insert(runtimes, datalua)
   table.insert(builds, {
     args = { product = p },
-    ins_implicit = { 'tools/prep.lua', 'build/api.stamp', dataStamp },
+    ins_implicit = {
+      'tools/prep.lua',
+      'build/api.stamp',
+      'build/impl.stamp',
+      'build/sql.stamp',
+      dataStamp,
+    },
     outs_implicit = datalua,
     rule = 'prep',
   })
