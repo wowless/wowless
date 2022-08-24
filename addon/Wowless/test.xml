@@ -377,7 +377,7 @@
         local foo = self.foo:GetScript('OnEvent')
         local bar = self.bar:GetScript('OnEvent')
         assert(foo ~= nil)
-        assert(__wowless or foo == bar) -- TODO fix wowless
+        assertEquals(__wowless == nil, foo == bar) -- TODO fix wowless
       </OnLoad>
     </Scripts>
   </Frame>
@@ -385,6 +385,6 @@
   <Script>
     local foo = getmetatable(CreateFrame('WowlessIntrinsicType'))
     local bar = getmetatable(CreateFrame('Frame'))
-    assert(__wowless or foo == bar) -- TODO fix wowless
+    assertEquals(__wowless == nil, foo == bar) -- TODO fix wowless
   </Script>
 </Ui>
