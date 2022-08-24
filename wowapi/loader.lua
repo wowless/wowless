@@ -57,7 +57,17 @@ local function mkdb2s(loader)
       end
       dbs[db] = {
         data = t,
-        indices = {},
+        indices = setmetatable({}, {
+          __index = function(indices, name)
+            local index = {}
+            for _, row in ipairs(t) do
+              local rowkey = row[name]
+              index[rowkey] = index[rowkey] or row
+            end
+            indices[name] = index
+            return index
+          end,
+        }),
       }
       return dbs[db]
     end,
@@ -94,21 +104,8 @@ local function doGetFn(api, loader, apicfg, impls, db2s, sqls)
               end
             end
           else
-            local function keyify(x)
-              return type(x) == 'string' and x:lower() or x
-            end
             return function(k)
-              local db2 = db2s[db.name]
-              local index = db2.indices[db.index]
-              if not index then
-                index = {}
-                for _, row in ipairs(db2.data) do
-                  local rowkey = keyify(row[db.index])
-                  index[rowkey] = index[rowkey] or row
-                end
-                db2.indices[db.index] = index
-              end
-              return index[keyify(k)]
+              return db2s[db.name].indices[db.index][k]
             end
           end
         end)()
