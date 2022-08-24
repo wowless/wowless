@@ -1,12 +1,7 @@
 local data = require('wowapi.data')
 local util = require('wowless.util')
 
-local function loadApis(product)
-  return require('build.products.' .. product .. '.data').apis
-end
-
-local function loadSqls(loader, apis)
-  local datalua = require('build.products.' .. loader.product .. '.data')
+local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
   local function lookup(stmt)
     for row in stmt:rows() do -- luacheck: ignore 512
       return unpack(row)
@@ -15,11 +10,10 @@ local function loadSqls(loader, apis)
   local function cursor(stmt)
     return stmt:urows()
   end
-  local sqlite = loader.sqlitedb
   local function prep(fn, sql, f)
-    local stmt = sqlite:prepare(sql)
+    local stmt = sqlitedb:prepare(sql)
     if not stmt then
-      error('could not prepare ' .. fn .. ': ' .. sqlite:errmsg())
+      error('could not prepare ' .. fn .. ': ' .. sqlitedb:errmsg())
     end
     return function(...)
       stmt:reset()
@@ -28,19 +22,12 @@ local function loadSqls(loader, apis)
     end
   end
   local lookups = {}
+  for k, v in pairs(lookupSqls) do
+    lookups[k] = prep(k, v, lookup)
+  end
   local cursors = {}
-  for n, api in pairs(apis) do
-    for _, sql in ipairs(api.sqls or {}) do
-      if sql.lookup then
-        local sn = sql.lookup
-        lookups[sn] = lookups[sn] or prep(sn, datalua.sqllookups[sn], lookup)
-      elseif sql.cursor then
-        local sn = sql.cursor
-        cursors[sn] = cursors[sn] or prep(sn, datalua.sqlcursors[sn], cursor)
-      else
-        error('invalid sql spec for ' .. n)
-      end
-    end
+  for k, v in pairs(cursorSqls) do
+    cursors[k] = prep(k, v, cursor)
   end
   return {
     cursors = cursors,
@@ -105,11 +92,12 @@ end
 
 local function loadFunctions(api, loader)
   api.log(1, 'loading functions')
-  local apis = loadApis(loader.product)
-  local sqls = loadSqls(loader, apis)
+  local datalua = require('build.products.' .. loader.product .. '.data')
+  local apis = datalua.apis
+  local sqls = loadSqls(loader.sqlitedb, datalua.sqlcursors, datalua.sqllookups)
   local db2s = mkdb2s(loader)
   local impls = {}
-  for k, v in pairs(require('build.products.' .. loader.product .. '.data').impls) do
+  for k, v in pairs(datalua.impls) do
     impls[k] = loadstring(v)
   end
 
