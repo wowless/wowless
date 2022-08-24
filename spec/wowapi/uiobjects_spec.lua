@@ -13,7 +13,7 @@ describe('uiobjects', function()
         return {}
       end,
     }
-    local loader = {}
+    local loader = { product = 'wow' }
     local t = assert(fn(api, loader))
     for k, v in pairs(t) do
       local success, msg = pcall(function()
