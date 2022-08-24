@@ -381,4 +381,10 @@
       </OnLoad>
     </Scripts>
   </Frame>
+
+  <Script>
+    local foo = getmetatable(CreateFrame('WowlessIntrinsicType'))
+    local bar = getmetatable(CreateFrame('Frame'))
+    assert(__wowless or foo == bar) -- TODO fix wowless
+  </Script>
 </Ui>
