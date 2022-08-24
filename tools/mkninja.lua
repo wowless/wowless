@@ -131,9 +131,15 @@ local builds = {
     rule = 'stamp',
   },
   {
+    ins = find('data/structures'),
+    outs = 'build/structures.stamp',
+    rule = 'stamp',
+  },
+  {
     ins = {
       'build/api.stamp',
       'build/dbdefs.stamp',
+      'build/structures.stamp',
       (function()
         local skip = {
           ['tools/mkninja.lua'] = true,
@@ -149,7 +155,6 @@ local builds = {
           'data/events',
           'data/schemas',
           'data/state',
-          'data/structures',
           'data/uiobjects',
           'data/xml',
           'spec',
@@ -264,6 +269,7 @@ for _, p in ipairs(productList) do
       'build/api.stamp',
       'build/impl.stamp',
       'build/sql.stamp',
+      'build/structures.stamp',
       dataStamp,
     },
     outs_implicit = datalua,
