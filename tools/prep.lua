@@ -45,7 +45,9 @@ local getStub = (function()
         if field.mixin then
           v = ('Mixin(%s,%s)'):format(v, field.mixin)
         end
-        table.insert(t, ('[%q]=%s'):format(field.name, v))
+        if v ~= 'nil' then
+          table.insert(t, ('[%q]=%s'):format(field.name, v))
+        end
       end
       structureDefaults[name] = '{' .. table.concat(t, ',') .. '}'
     else
