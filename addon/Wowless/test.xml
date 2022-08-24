@@ -158,8 +158,7 @@
     assertEquals(true, obj ~= nil)
     assertEquals('Frame', obj:GetObjectType())
     assertEquals(true, obj:IsObjectType('Frame'))
-    -- TODO test intrinsic IsObjectType in the client
-    -- assertEquals(false, obj:IsObjectType('WowlessIntrinsicType'))
+    assertEquals(__wowless ~= nil, obj:IsObjectType('WowlessIntrinsicType')) -- TODO fix wowless
   </Script>
   <WowlessIntrinsicType>
     <Scripts>
@@ -173,8 +172,7 @@
   </WowlessIntrinsicType>
   <Include file='evenmoreintrinsic.xml' />
   <Script>
-    -- TODO disabled until wowless supports LUA_WARNING
-    -- assertEquals(false, pcall(function() CreateFrame('WowlessEvenMoreIntrinsicType') end))
+    assertEquals(false, pcall(function() CreateFrame('WowlessEvenMoreIntrinsicType') end))
   </Script>
 
   <Script>
