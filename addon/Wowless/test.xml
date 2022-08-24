@@ -385,6 +385,6 @@
   <Script>
     local foo = getmetatable(CreateFrame('WowlessIntrinsicType'))
     local bar = getmetatable(CreateFrame('Frame'))
-    assertEquals(__wowless == nil, foo == bar) -- TODO fix wowless
+    assertEquals(foo, bar)
   </Script>
 </Ui>

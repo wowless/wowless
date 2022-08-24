@@ -512,7 +512,7 @@ local function loader(api, cfg)
               api.uiobjectTypes[name] = {
                 constructor = base.constructor,
                 inherits = { basetype },
-                metatable = { __index = base.metatable.__index },
+                metatable = base.metatable,
                 name = base.name,
                 template = template,
               }
