@@ -361,4 +361,26 @@
       </OnLoad>
     </Scripts>
   </Frame>
+
+  <Frame name='WowlessScriptIdentityTemplate' virtual='true'>
+    <Scripts>
+      <OnEvent>
+        -- No real behavior, this just needs to exist.
+      </OnEvent>
+    </Scripts>
+  </Frame>
+  <Frame>
+    <Frames>
+      <Frame parentKey='foo' inherits='WowlessScriptIdentityTemplate' />
+      <Frame parentKey='bar' inherits='WowlessScriptIdentityTemplate' />
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        local foo = self.foo:GetScript('OnEvent')
+        local bar = self.bar:GetScript('OnEvent')
+        assert(foo ~= nil)
+        assert(__wowless or foo == bar) -- TODO fix wowless
+      </OnLoad>
+    </Scripts>
+  </Frame>
 </Ui>
