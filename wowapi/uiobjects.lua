@@ -211,14 +211,11 @@ local function mkBaseUIObjectTypes(api, loader)
       elseif method.status == 'unimplemented' then
         -- TODO unify this with loader.lua
         local t = {}
-        local n = method.outputs and #method.outputs or 0
         for _, output in ipairs(method.outputs or {}) do
           assert(output.type == 'number', ('unsupported type in %s.%s'):format(name, mname))
           table.insert(t, 1)
         end
-        mixin[mname] = function()
-          return unpack(t, 1, n)
-        end
+        mixin[mname] = loadstring('return ' .. table.concat(t, ', '))
       else
         error(('unsupported method status %q on %s.%s'):format(method.status, name, mname))
       end
