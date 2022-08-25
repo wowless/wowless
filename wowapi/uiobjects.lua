@@ -109,9 +109,11 @@ local function mkBaseUIObjectTypes(api, loader)
     return result
   end
 
+  local datalua = require('build.products.' .. loader.product .. '.data')
+
   local env = {
     api = api,
-    build = require('build.products.' .. loader.product .. '.data').build,
+    build = datalua.build,
     kids = kids,
     m = m,
     toTexture = toTexture,
@@ -123,7 +125,7 @@ local function mkBaseUIObjectTypes(api, loader)
   end
 
   local uiobjects = {}
-  for name, data in pairs(require('wowapi.data').uiobjects) do
+  for name, cfg in pairs(datalua.uiobjects) do
     local lname = name:lower()
     local function wrap(fname, fn)
       setfenv(fn, env)
@@ -141,8 +143,6 @@ local function mkBaseUIObjectTypes(api, loader)
       end
       return mm
     end
-    local cfg = data.cfg
-    local lua = data.methods
     local constructor = (function()
       local deepcopy = require('pl.tablex').deepcopy
       return function(self)
@@ -157,7 +157,7 @@ local function mkBaseUIObjectTypes(api, loader)
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
       if method.status == 'implemented' then
-        mixin[mname] = assert(lua[mname], ('function required on %s.%s'):format(name, mname))
+        mixin[mname] = assert(loadstring(method.impl), ('function required on %s.%s'):format(name, mname))
       elseif method.status == 'getter' then
         mixin[mname] = function(self)
           local ud = u(self)
@@ -222,32 +222,13 @@ local function mkBaseUIObjectTypes(api, loader)
       else
         error(('unsupported method status %q on %s.%s'):format(method.status, name, mname))
       end
-      if method.products then
-        local supported = false
-        for _, product in ipairs(method.products) do
-          supported = supported or product == loader.product
-        end
-        if not supported then
-          mixin[mname] = nil
-        end
-      end
     end
-    local supported = false
-    if not cfg.products then
-      supported = true
-    else
-      for _, product in ipairs(cfg.products) do
-        supported = supported or product == loader.product
-      end
-    end
-    if supported then
-      uiobjects[name] = {
-        cfg = cfg,
-        constructor = wrap('<init>', constructor),
-        inherits = cfg.inherits,
-        mixin = wrapAll(mixin),
-      }
-    end
+    uiobjects[name] = {
+      cfg = cfg,
+      constructor = wrap('<init>', constructor),
+      inherits = cfg.inherits,
+      mixin = wrapAll(mixin),
+    }
   end
   return flatten(uiobjects)
 end

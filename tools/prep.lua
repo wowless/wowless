@@ -111,6 +111,37 @@ do
   end
 end
 
+local function supported(obj)
+  if not obj.products then
+    return true
+  end
+  for _, p in ipairs(obj.products) do
+    if p == args.product then
+      return true
+    end
+  end
+  return false
+end
+
+local uiobjects = {}
+for _, d in ipairs(require('pl.dir').getdirectories('data/uiobjects')) do
+  local name = d:match('/(%a+)$')
+  local cfg = parseYaml(d .. '/' .. name .. '.yaml')
+  if supported(cfg) then
+    local methods = {}
+    for k, v in pairs(cfg.methods or {}) do
+      if supported(v) then
+        if v.status == 'implemented' then
+          v.impl = readFile('data/uiobjects/' .. name .. '/' .. k .. '.lua')
+        end
+        methods[k] = v
+      end
+    end
+    cfg.methods = methods
+    uiobjects[cfg.name] = cfg
+  end
+end
+
 local data = {
   apis = apis,
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
@@ -119,6 +150,7 @@ local data = {
   impls = impls,
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
+  uiobjects = uiobjects,
 }
 local txt = 'return ' .. plprettywrite(data)
 assert(require('pl.file').write('build/products/' .. args.product .. '/data.lua', txt))
