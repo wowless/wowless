@@ -9,12 +9,14 @@ inputs:
     type: boolean
 outputs:
 - name: name
+  nilable: true
   type: string
 - name: texture
   type: nil
 - name: pointsSpent
   type: number
 - name: fileName
+  nilable: true
   type: string
 - name: previewPointsSpent
   type: number
