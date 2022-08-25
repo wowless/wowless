@@ -159,14 +159,13 @@ local function mkBaseUIObjectTypes(api, loader)
       if method.status == 'implemented' then
         mixin[mname] = assert(loadstring(method.impl), ('function required on %s.%s'):format(name, mname))
       elseif method.status == 'getter' then
-        mixin[mname] = function(self)
-          local ud = u(self)
-          local t = {}
-          for i, f in ipairs(method.fields) do
-            t[i] = ud[f.name]
-          end
-          return unpack(t, 1, #method.fields)
+        local t = {}
+        for _, f in ipairs(method.fields) do
+          table.insert(t, 'x.' .. f.name)
         end
+        local src = 'function(x) x=u(x);return ' .. table.concat(t, ',') .. ' end'
+        src = 'local u = ...;return ' .. src
+        mixin[mname] = assert(loadstring(src))(u)
       elseif method.status == 'setter' then
         mixin[mname] = function(self, ...)
           local n = select('#', ...)
