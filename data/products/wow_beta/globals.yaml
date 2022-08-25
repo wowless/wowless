@@ -6488,9 +6488,3 @@ NUM_LE_UNIT_STATS: 4
 NUM_LE_VAS_PURCHASE_STATES: 8
 NUM_LE_WORLD_ELAPSED_TIMER_TYPES: 3
 NUM_LE_WOW_CONNECTION_STATES: 3
-UK_AADC_POPUP_TEXT: World of Warcraft is an online game that includes interactions
-  with other players. Please be cautious and do not share personal information with
-  people you do not know.|n|nAs well, please be mindful of our community interaction
-  policies and report any harassment, abusive behavior or chat, or other conduct intended
-  to undermine or disrupt the game experience using our in-game reporting options;
-  we'll review chat records and take appropriate action.
