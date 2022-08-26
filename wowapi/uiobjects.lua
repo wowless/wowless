@@ -165,7 +165,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end
         local src = 'function(x) x=u(x);return ' .. table.concat(t, ',') .. ' end'
         src = 'local u = ...;return ' .. src
-        mixin[mname] = assert(loadstring(src))(u)
+        mixin[mname] = assert(loadstring(src, name .. '_' .. mname))(u)
       elseif method.status == 'setter' then
         mixin[mname] = function(self, ...)
           local n = select('#', ...)
