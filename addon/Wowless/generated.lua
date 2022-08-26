@@ -272,8 +272,8 @@ function G.GeneratedTests()
     local GetObjectType = CreateFrame('Frame').GetObjectType
     local indexes = {}
     local function mkTests(objectTypeName, factory, tests)
-      local obj = factory()
-      local obj2 = factory()
+      local obj = assert(factory(), 'factory failed')
+      local obj2 = assert(factory(), 'factory failed')
       if objectTypeName == 'EditBox' then
         obj:Hide() -- captures input focus otherwise
         obj2:Hide() -- captures input focus otherwise
@@ -334,6 +334,9 @@ function G.GeneratedTests()
       LineTranslation = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('LineTranslation')
       end,
+      MaskTexture = function()
+        return CreateFrame('Frame'):CreateMaskTexture()
+      end,
       Path = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path')
       end,
@@ -368,6 +371,12 @@ function G.GeneratedTests()
         SetPoint = true,
         SetSize = true,
         SetWidth = true,
+      },
+      MaskTexture = {
+        AddMaskTexture = true,
+        GetMaskTexture = true,
+        GetNumMaskTextures = true,
+        RemoveMaskTexture = true,
       },
     }
     local tests = {}
