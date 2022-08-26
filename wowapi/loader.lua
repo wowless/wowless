@@ -255,6 +255,9 @@ local function loadFunctions(api, loader)
         return fn
       end
       local function doCheckOutputs(...)
+        if select('#', ...) == 0 and apicfg.mayreturnnothing then
+          return
+        end
         for i, out in ipairs(apicfg.outputs) do
           local arg = select(i, ...)
           if arg == nil then

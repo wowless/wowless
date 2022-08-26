@@ -66,6 +66,8 @@ type:
                     - literal: unit
                     - literal: unknown
                     - ref: structure
+      mayreturnnothing:
+        type: boolean
       name:
         required: true
         type: string
