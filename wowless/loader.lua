@@ -196,6 +196,21 @@ local function loader(api, cfg)
     end
   end
 
+  local function navigate(obj, key)
+    for _, p in ipairs({ strsplit('.', key) }) do
+      if p == '$parent' or p == '$parentKey' then
+        obj = obj:GetParent()
+      else
+        if not obj[p] then
+          api.log(1, 'invalid relativeKey %q', key)
+          return nil
+        end
+        obj = obj[p]
+      end
+    end
+    return obj
+  end
+
   local function forAddon(addonName, addonEnv)
     local loadFile
 
@@ -222,26 +237,7 @@ local function loader(api, cfg)
             if anchor.attr.relativeto then
               relativeTo = api.ParentSub(anchor.attr.relativeto, parent:GetParent())
             elseif anchor.attr.relativekey then
-              local parts = { strsplit('.', anchor.attr.relativekey) }
-              if #parts == 1 then
-                relativeTo = api.ParentSub(anchor.attr.relativekey, parent:GetParent())
-              else
-                local obj = parent
-                for i = 1, #parts do
-                  local p = parts[i]
-                  if p == '$parent' or p == '$parentKey' then
-                    obj = obj:GetParent()
-                  else
-                    if not obj[p] then
-                      api.log(1, 'invalid relativeKey %q', anchor.attr.relativekey)
-                      obj = nil
-                      break
-                    end
-                    obj = obj[p]
-                  end
-                end
-                relativeTo = obj
-              end
+              relativeTo = navigate(parent, anchor.attr.relativekey)
             else
               relativeTo = api.UserData(parent).parent
             end
@@ -319,7 +315,9 @@ local function loader(api, cfg)
             parent[a.key] = parseTypedValue(a.type, a.value)
           end,
           maskedtexture = function(e, parent)
-            parent:GetParent()[e.attr.childkey]:AddMaskTexture(parent)
+            local t = navigate(parent:GetParent(), e.attr.childkey)
+            assert(t, 'cannot find maskedtexture childkey ' .. e.attr.childkey)
+            t:AddMaskTexture(parent)
           end,
           maxresize = function(e, parent)
             parent:SetMaxResize(getXY(e.kids[#e.kids]))
