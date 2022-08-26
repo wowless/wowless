@@ -156,8 +156,9 @@ local function mkBaseUIObjectTypes(api, loader)
     end)()
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
+      local fname = name .. ':' .. mname
       if method.status == 'implemented' then
-        mixin[mname] = assert(loadstring(method.impl), ('function required on %s.%s'):format(name, mname))
+        mixin[mname] = assert(loadstring(method.impl, fname), 'function required on ' .. fname)
       elseif method.status == 'getter' then
         local t = {}
         for _, f in ipairs(method.fields) do
@@ -165,7 +166,7 @@ local function mkBaseUIObjectTypes(api, loader)
         end
         local src = 'function(x) x=u(x);return ' .. table.concat(t, ',') .. ' end'
         src = 'local u = ...;return ' .. src
-        mixin[mname] = assert(loadstring(src, name .. '_' .. mname))(u)
+        mixin[mname] = assert(loadstring(src, fname))(u)
       elseif method.status == 'setter' then
         mixin[mname] = function(self, ...)
           local ud = u(self)
@@ -208,12 +209,12 @@ local function mkBaseUIObjectTypes(api, loader)
         -- TODO unify this with loader.lua
         local t = {}
         for _, output in ipairs(method.outputs or {}) do
-          assert(output.type == 'number', ('unsupported type in %s.%s'):format(name, mname))
+          assert(output.type == 'number', 'unsupported type in ' .. fname)
           table.insert(t, 1)
         end
-        mixin[mname] = loadstring('return ' .. table.concat(t, ', '))
+        mixin[mname] = loadstring('return ' .. table.concat(t, ', '), fname)
       else
-        error(('unsupported method status %q on %s.%s'):format(method.status, name, mname))
+        error(('unsupported method status %q on %s'):format(method.status, fname))
       end
     end
     uiobjects[name] = {
