@@ -3,6 +3,10 @@ name: Alpha
 inherits:
 - Animation
 methods:
+  GetFromAlpha:
+    status: unimplemented
+  GetToAlpha:
+    status: unimplemented
   SetFromAlpha:
     status: unimplemented
   SetToAlpha:

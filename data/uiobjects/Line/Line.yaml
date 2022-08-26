@@ -7,6 +7,10 @@ fields:
 inherits:
 - Texture
 methods:
+  GetEndPoint:
+    status: unimplemented
+  GetStartPoint:
+    status: unimplemented
   GetThickness:
     fields:
     - name: thickness

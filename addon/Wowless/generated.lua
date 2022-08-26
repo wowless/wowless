@@ -313,6 +313,9 @@ function G.GeneratedTests()
       end
     end
     local factories = {
+      Alpha = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Alpha')
+      end,
       Animation = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation()
       end,
@@ -322,8 +325,20 @@ function G.GeneratedTests()
       FontString = function()
         return CreateFrame('Frame'):CreateFontString()
       end,
+      Line = function()
+        return CreateFrame('Frame'):CreateLine()
+      end,
+      LineScale = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('LineScale')
+      end,
+      LineTranslation = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('LineTranslation')
+      end,
       Path = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path')
+      end,
+      Rotation = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Rotation')
       end,
       Scale = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Scale')
@@ -331,9 +346,29 @@ function G.GeneratedTests()
       Texture = function()
         return CreateFrame('Frame'):CreateTexture()
       end,
+      Translation = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Translation')
+      end,
     }
     local exceptions = { -- TODO remove need for this
       AnimationGroup = { SetParent = true },
+      Line = {
+        AddMaskTexture = true,
+        AdjustPointsOffset = true,
+        ClearPointByName = true,
+        ClearPointsOffset = true,
+        GetMaskTexture = true,
+        GetNumMaskTextures = true,
+        GetNumPoints = true,
+        GetPoint = true,
+        GetPointByName = true,
+        RemoveMaskTexture = true,
+        SetAllPoints = true,
+        SetHeight = true,
+        SetPoint = true,
+        SetSize = true,
+        SetWidth = true,
+      },
     }
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do

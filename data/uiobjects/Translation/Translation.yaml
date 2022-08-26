@@ -3,5 +3,7 @@ name: Translation
 inherits:
 - Animation
 methods:
+  GetOffset:
+    status: unimplemented
   SetOffset:
     status: unimplemented
