@@ -137,7 +137,7 @@ local function new(log, maxErrors)
     end
   end
 
-  local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg)
+  local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id)
     local objname = ParentSub(objnamearg, parent)
     assert(typename, 'must specify type for ' .. tostring(objname))
     local type = uiobjectTypes[typename]
@@ -188,6 +188,9 @@ local function new(log, maxErrors)
       log(4, 'initializing children for ' .. tostring(template.name))
       template.initKids(obj)
     end
+    if id then
+      obj:SetID(id)
+    end
     RunScript(obj, 'OnLoad')
     if InheritsFrom(typename, 'region') and obj:IsVisible() then
       RunScript(obj, 'OnShow')
@@ -195,7 +198,7 @@ local function new(log, maxErrors)
     return obj
   end
 
-  local function CreateFrame(type, name, parent, templateNames)
+  local function CreateFrame(type, name, parent, templateNames, id)
     local ltype = string.lower(type)
     assert(
       IsIntrinsicType(ltype) and InheritsFrom(ltype, 'frame'),
@@ -207,7 +210,7 @@ local function new(log, maxErrors)
       assert(template, 'unknown template ' .. templateName)
       table.insert(tmpls, template)
     end
-    return CreateUIObject(ltype, name, parent, nil, tmpls)
+    return CreateUIObject(ltype, name, parent, nil, tmpls, id)
   end
 
   local function SetScript(obj, name, bindingType, script)
