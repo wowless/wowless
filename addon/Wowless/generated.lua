@@ -325,6 +325,9 @@ function G.GeneratedTests()
       AnimationGroup = function()
         return CreateFrame('Frame'):CreateAnimationGroup()
       end,
+      ControlPoint = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path'):CreateControlPoint()
+      end,
       FontString = function()
         return CreateFrame('Frame'):CreateFontString()
       end,

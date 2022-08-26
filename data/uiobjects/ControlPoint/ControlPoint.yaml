@@ -2,4 +2,12 @@
 name: ControlPoint
 inherits:
 - ParentedObject
-methods: {}
+methods:
+  GetOffset:
+    status: unimplemented
+  GetOrder:
+    status: unimplemented
+  SetOffset:
+    status: unimplemented
+  SetOrder:
+    status: unimplemented
