@@ -39,8 +39,6 @@ type:
                       type: string
                     nilable:
                       type: boolean
-                    required:
-                      type: boolean
             outputs:
               type:
                 sequenceof:

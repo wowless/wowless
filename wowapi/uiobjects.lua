@@ -168,7 +168,6 @@ local function mkBaseUIObjectTypes(api, loader)
         mixin[mname] = assert(loadstring(src, name .. '_' .. mname))(u)
       elseif method.status == 'setter' then
         mixin[mname] = function(self, ...)
-          local n = select('#', ...)
           local ud = u(self)
           for i, f in ipairs(method.fields) do
             local v = select(i, ...)
@@ -176,8 +175,6 @@ local function mkBaseUIObjectTypes(api, loader)
             local ty = cf.type
             if ty == 'boolean' then
               ud[f.name] = not not v
-            elseif i > n then
-              assert(not f.required, ('value required on %s.%s.%s'):format(name, mname, f.name))
             elseif v == nil then
               assert(f.nilable or cf.nilable, ('cannot set nil on %s.%s.%s'):format(name, mname, f.name))
               ud[f.name] = nil
