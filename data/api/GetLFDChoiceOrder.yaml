@@ -1,3 +1,7 @@
 ---
 name: GetLFDChoiceOrder
 status: unimplemented
+inputs:
+- {}
+outputs:
+- type: table
