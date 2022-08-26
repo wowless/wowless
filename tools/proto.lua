@@ -11,14 +11,14 @@ local function ident(n)
     return n[1]
   elseif n.tag == 'Index' then
     assert.same(2, #n)
-    assert.same('Id', n[1].tag)
+    local id = ident(n[1])
     assert.same('String', n[2].tag)
-    return n[1][1] .. '.' .. n[2][1]
+    return id .. '.' .. n[2][1]
   elseif n.tag == 'Invoke' then
     assert.same(2, #n)
-    assert.same('Id', n[1].tag)
+    local id = ident(n[1])
     assert.same('String', n[2].tag)
-    return n[1][1] .. '.' .. n[2][1]
+    return id .. '.' .. n[2][1]
   else
     error('unexpected tag ' .. tostring(n.tag))
   end
