@@ -269,7 +269,6 @@ function G.GeneratedTests()
       local expectedErr = 'CreateFrame: Unknown frame type \'' .. ty .. '\''
       assertEquals(expectedErr, err:sub(err:len() - expectedErr:len() + 1))
     end
-    local GetObjectType = CreateFrame('Frame').GetObjectType
     local indexes = {}
     local function mkTests(objectTypeName, factory, tests)
       local obj = assert(factory(), 'factory failed')
@@ -279,11 +278,14 @@ function G.GeneratedTests()
         obj2:Hide() -- captures input focus otherwise
       end
       assert(obj ~= obj2)
-      assertEquals(objectTypeName, GetObjectType(obj))
       local mt = getmetatable(obj)
       assert(mt == getmetatable(obj2))
-      if objectTypeName ~= 'FogOfWarFrame' or WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then
+      if objectTypeName == 'FogOfWarFrame' and WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+        assert(mt == nil)
+        assertEquals(objectTypeName, CreateFrame('Frame').GetObjectType(obj))
+      else
         assert(mt ~= nil)
+        assertEquals(objectTypeName, obj:GetObjectType())
         assert(getmetatable(mt) == nil)
         local mtk, __index = next(mt)
         assertEquals('__index', mtk)
@@ -328,6 +330,13 @@ function G.GeneratedTests()
       ControlPoint = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path'):CreateControlPoint()
       end,
+      Font = (function()
+        local count = 0
+        return function()
+          count = count + 1
+          return CreateFont('WowlessFont' .. count)
+        end
+      end)(),
       FontString = function()
         return CreateFrame('Frame'):CreateFontString()
       end,

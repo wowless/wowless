@@ -21,6 +21,7 @@ files['addon/Wowless'] = {
   read_globals = {
     'abs',
     'C_CovenantSanctumUI',
+    'CreateFont',
     'CreateFrame',
     'debugprofilestop',
     'DevTools_Dump',

@@ -5,3 +5,7 @@ inherits:
 methods:
   CopyFontObject:
     status: unimplemented
+  GetAlpha:
+    status: unimplemented
+  SetAlpha:
+    status: unimplemented
