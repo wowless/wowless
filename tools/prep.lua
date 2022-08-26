@@ -36,6 +36,9 @@ local getStub = (function()
         if structures[field.type] then
           ensureStructureDefault(field.type)
           v = structureDefaults[field.type]
+        elseif field.type == 'table' and structures[field.innerType] then
+          ensureStructureDefault(field.innerType)
+          v = '{' .. structureDefaults[field.innerType] .. '}'
         elseif field.stub then
           assert(type(field.stub) == 'string', 'only string stubs supported in structures')
           v = string.format('%q', field.stub)
