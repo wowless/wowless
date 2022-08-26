@@ -313,6 +313,9 @@ function G.GeneratedTests()
       end
     end
     local factories = {
+      Actor = function()
+        return CreateFrame('ModelScene'):CreateActor()
+      end,
       Alpha = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Alpha')
       end,
@@ -354,6 +357,7 @@ function G.GeneratedTests()
       end,
     }
     local exceptions = { -- TODO remove need for this
+      Actor = { SetParent = true },
       AnimationGroup = { SetParent = true },
       Line = {
         AddMaskTexture = true,

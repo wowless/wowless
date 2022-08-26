@@ -6,25 +6,172 @@ fields:
     type: number
 inherits:
 - ParentedObject
-- ScriptObject
 methods:
+  AttachToMount:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  CalculateMountScale:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
   ClearModel:
+    status: unimplemented
+  Dress:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  GetActiveBoundingBox:
+    status: unimplemented
+  GetAlpha:
+    status: unimplemented
+  GetAnimation:
+    status: unimplemented
+  GetAnimationBlendOperation:
+    status: unimplemented
+  GetAnimationVariation:
+    status: unimplemented
+  GetAutoDress:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  GetDesaturation:
+    status: unimplemented
+  GetItemTransmogInfo:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  GetItemTransmogInfoList:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  GetMaxBoundingBox:
+    status: unimplemented
+  GetModelFileID:
+    status: unimplemented
+  GetModelPath:
+    status: unimplemented
+  GetModelUnitGUID:
+    status: unimplemented
+  GetObeyHideInTransmogFlag:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  GetParticleOverrideScale:
+    status: unimplemented
+  GetPaused:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  GetPitch:
+    status: unimplemented
+  GetPosition:
+    status: unimplemented
+  GetRoll:
     status: unimplemented
   GetScale:
     fields:
     - name: scale
     status: getter
+  GetSheathed:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  GetSpellVisualKit:
+    status: unimplemented
+  GetUseTransmogChoices:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  GetUseTransmogSkin:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  GetYaw:
+    status: unimplemented
   Hide:
+    status: unimplemented
+  IsLoaded:
+    status: unimplemented
+  IsShown:
+    status: unimplemented
+  IsUsingCenterForOrigin:
+    status: unimplemented
+  IsVisible:
+    status: unimplemented
+  PlayAnimationKit:
     status: unimplemented
   SetAlpha:
     status: unimplemented
   SetAnimation:
     status: unimplemented
+  SetAnimationBlendOperation:
+    status: unimplemented
+  SetAutoDress:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  SetDesaturation:
+    status: unimplemented
+  SetItemTransmogInfo:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  SetModelByCreatureDisplayID:
+    status: unimplemented
   SetModelByFileID:
+    status: unimplemented
+  SetModelByPath:
+    status: unimplemented
+  SetModelByUnit:
+    status: unimplemented
+  SetObeyHideInTransmogFlag:
+    products:
+    - wow
+    - wow_beta
+    - wowt
     status: unimplemented
   SetParticleOverrideScale:
     status: unimplemented
+  SetPaused:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
   SetPitch:
+    status: unimplemented
+  SetPlayerModelFromGlues:
+    products:
+    - wow
+    - wow_beta
+    - wowt
     status: unimplemented
   SetPosition:
     status: unimplemented
@@ -34,7 +181,52 @@ methods:
     fields:
     - name: scale
     status: setter
+  SetSheathed:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  SetShown:
+    status: unimplemented
+  SetSpellVisualKit:
+    status: unimplemented
+  SetUseCenterForOrigin:
+    status: unimplemented
+  SetUseTransmogChoices:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  SetUseTransmogSkin:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
   SetYaw:
     status: unimplemented
   Show:
     status: unimplemented
+  StopAnimationKit:
+    status: unimplemented
+  TryOn:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  Undress:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+  UndressSlot:
+    products:
+    - wow
+    - wow_beta
+    - wowt
+    status: unimplemented
+objectType: ModelSceneActor
