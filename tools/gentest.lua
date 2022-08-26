@@ -173,6 +173,7 @@ local ptablemap = {
           frametype = not not frametypes[k],
           methods = mt,
           objtype = objTypes[k],
+          virtual = v.virtual,
         }
       end
     end

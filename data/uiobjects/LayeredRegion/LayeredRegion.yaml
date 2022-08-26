@@ -35,3 +35,4 @@ methods:
     status: setter
   SetVertexColor:
     status: implemented
+virtual: true

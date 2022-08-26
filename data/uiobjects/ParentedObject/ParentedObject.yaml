@@ -30,3 +30,4 @@ methods:
     status: implemented
   SetParent:
     status: implemented
+virtual: true

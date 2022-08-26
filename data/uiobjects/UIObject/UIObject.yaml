@@ -13,3 +13,4 @@ methods:
     status: implemented
   IsObjectType:
     status: implemented
+virtual: true

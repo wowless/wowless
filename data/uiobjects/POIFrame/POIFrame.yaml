@@ -32,3 +32,4 @@ methods:
     status: unimplemented
   UpdateMouseOverTooltip:
     status: unimplemented
+virtual: true

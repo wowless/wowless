@@ -69,3 +69,5 @@ type:
     products:
       type:
         schema: products
+    virtual:
+      type: boolean

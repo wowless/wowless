@@ -405,11 +405,12 @@ function G.GeneratedTests()
           if not cfg.frametype then
             assertCreateFrameFails(name)
           end
-          local factory = factories[name]
-            or cfg.frametype and function()
-              return assertCreateFrame(name)
-            end
-          if factory then
+          if not cfg.virtual and name ~= 'TextureCoordTranslation' then -- FIXME
+            local factory = factories[name]
+              or cfg.frametype and function()
+                return assertCreateFrame(name)
+              end
+            assert(factory, 'missing factory')
             return mkTests(cfg.objtype, factory, function(__index)
               local mtests = {}
               for mname in pairs(cfg.methods) do

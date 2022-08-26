@@ -177,3 +177,4 @@ methods:
     status: implemented
   StopAnimating:
     status: unimplemented
+virtual: true
