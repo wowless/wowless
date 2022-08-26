@@ -333,9 +333,7 @@ function G.GeneratedTests()
             local mtests = {}
             for mname in pairs(cfg.methods) do
               mtests[mname] = function()
-                if name ~= 'Animation' or mname ~= 'GetSourceLocation' then --FIXME
-                  return checkCFunc(__index[mname])
-                end
+                return checkCFunc(__index[mname])
               end
             end
             return mtests
