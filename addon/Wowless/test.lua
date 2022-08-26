@@ -970,11 +970,15 @@ do
     if not asyncPending then
       if asyncIndex == numAsyncTests then
         frame:SetScript('OnUpdate', nil)
-        -- TODO check LUA_WARNINGS here
         _G.WowlessTestFailures.LUA_WARNING = select(
           2,
           pcall(function()
             assertEquals(#G.ExpectedLuaWarnings, #G.ActualLuaWarnings)
+            for i, e in ipairs(G.ExpectedLuaWarnings) do
+              local a = G.ActualLuaWarnings[i]
+              assertEquals(e.warnType, a.warnType)
+              assertEquals(e.warnText, a.warnText)
+            end
           end)
         )
         _G.WowlessTestsDone = true

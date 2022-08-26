@@ -230,11 +230,10 @@ local function new(log, maxErrors)
   local function CreateFrame(type, name, parent, templateNames, id)
     local ltype = string.lower(type)
     if not IsIntrinsicType(ltype) or not InheritsFrom(ltype, 'frame') then
-      local msg = 'CreateFrame: Unknown frame type \'' .. type .. '\''
       if not uiobjectTypes[ltype] or ltype == 'texture' or ltype == 'line' or ltype == 'fontstring' then
-        SendEvent('LUA_WARNING', 0, msg)
+        SendEvent('LUA_WARNING', 0, 'Unknown frame type: ' .. type)
       end
-      error(msg)
+      error('CreateFrame: Unknown frame type \'' .. type .. '\'')
     end
     local tmpls = {}
     for templateName in string.gmatch(templateNames or '', '[^, ]+') do
