@@ -970,6 +970,10 @@ do
     if not asyncPending then
       if asyncIndex == numAsyncTests then
         frame:SetScript('OnUpdate', nil)
+        -- TODO check LUA_WARNINGS here
+        if #G.LuaWarnings ~= 0 and #G.LuaWarnings ~= 4 and #G.LuaWarnings ~= 6 then -- FIXME
+          _G.WowlessTestFailures.LUA_WARNING = 'wrong number of LUA_WARNINGs'
+        end
         _G.WowlessTestsDone = true
         local print = DevTools_Dump and print or function() end
         print(('Wowless testing completed in %.1fs (%d frames).'):format(totalTime, numFrames))
@@ -981,6 +985,10 @@ do
           local dump = _G.__wowless and _G.__wowless.dump or DevTools_Dump
           dump(_G.WowlessTestFailures)
         end
+        if _G.UIParent then
+          _G.UIParent:RegisterEvent('LUA_WARNING')
+        end
+        G.LuaWarningsFrame:UnregisterAllEvents()
       else
         asyncIndex = asyncIndex + 1
         asyncPending = true
