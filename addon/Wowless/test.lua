@@ -971,9 +971,12 @@ do
       if asyncIndex == numAsyncTests then
         frame:SetScript('OnUpdate', nil)
         -- TODO check LUA_WARNINGS here
-        if #G.LuaWarnings ~= 0 and #G.LuaWarnings ~= 4 and #G.LuaWarnings ~= 6 then -- FIXME
-          _G.WowlessTestFailures.LUA_WARNING = 'wrong number of LUA_WARNINGs'
-        end
+        _G.WowlessTestFailures.LUA_WARNING = select(
+          2,
+          pcall(function()
+            assertEquals(#G.ExpectedLuaWarnings, #G.ActualLuaWarnings)
+          end)
+        )
         _G.WowlessTestsDone = true
         local print = DevTools_Dump and print or function() end
         print(('Wowless testing completed in %.1fs (%d frames).'):format(totalTime, numFrames))

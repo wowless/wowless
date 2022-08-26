@@ -395,15 +395,30 @@ function G.GeneratedTests()
         RemoveMaskTexture = true,
       },
     }
+    local warners = {
+      FontString = true,
+      Line = true,
+      Texture = true,
+    }
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
       tests[name] = function()
         local exc = exceptions[name]
         if cfg == false then
           assertCreateFrameFails(name)
+          table.insert(G.ExpectedLuaWarnings, {
+            warnText = 'Unknown frame type: ' .. name,
+            warnType = 0,
+          })
         else
           if not cfg.frametype then
             assertCreateFrameFails(name)
+            if warners[name] then
+              table.insert(G.ExpectedLuaWarnings, {
+                warnText = 'Unknown frame type: ' .. name,
+                warnType = 0,
+              })
+            end
           end
           if not cfg.virtual and name ~= 'TextureCoordTranslation' then -- FIXME
             local factory = factories[name]

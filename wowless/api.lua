@@ -198,21 +198,6 @@ local function new(log, maxErrors)
     return obj
   end
 
-  local function CreateFrame(type, name, parent, templateNames, id)
-    local ltype = string.lower(type)
-    assert(
-      IsIntrinsicType(ltype) and InheritsFrom(ltype, 'frame'),
-      'CreateFrame: Unknown frame type \'' .. type .. '\''
-    )
-    local tmpls = {}
-    for templateName in string.gmatch(templateNames or '', '[^, ]+') do
-      local template = templates[string.lower(templateName)]
-      assert(template, 'unknown template ' .. templateName)
-      table.insert(tmpls, template)
-    end
-    return CreateUIObject(ltype, name, parent, nil, tmpls, id)
-  end
-
   local function SetScript(obj, name, bindingType, script)
     local ud = u(obj)
     log(4, 'setting %s[%d] for %s %s', name, bindingType, ud.type, GetDebugName(obj))
@@ -240,6 +225,24 @@ local function new(log, maxErrors)
     for _, reg in ipairs(regs) do
       RunScript(reg, 'OnEvent', event, ...)
     end
+  end
+
+  local function CreateFrame(type, name, parent, templateNames, id)
+    local ltype = string.lower(type)
+    if not IsIntrinsicType(ltype) or not InheritsFrom(ltype, 'frame') then
+      local msg = 'CreateFrame: Unknown frame type \'' .. type .. '\''
+      if not uiobjectTypes[ltype] or ltype == 'texture' or ltype == 'line' or ltype == 'fontstring' then
+        SendEvent('LUA_WARNING', 0, msg)
+      end
+      error(msg)
+    end
+    local tmpls = {}
+    for templateName in string.gmatch(templateNames or '', '[^, ]+') do
+      local template = templates[string.lower(templateName)]
+      assert(template, 'unknown template ' .. templateName)
+      table.insert(tmpls, template)
+    end
+    return CreateUIObject(ltype, name, parent, nil, tmpls, id)
   end
 
   local function NextFrame(elapsed)
