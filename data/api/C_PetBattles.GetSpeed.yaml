@@ -1,3 +1,11 @@
 ---
 name: C_PetBattles.GetSpeed
 status: unimplemented
+inputs:
+- - name: petOwner
+    type: number
+  - name: petIndex
+    type: number
+outputs:
+- name: speed
+  type: number

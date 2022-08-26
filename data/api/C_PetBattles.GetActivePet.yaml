@@ -1,3 +1,9 @@
 ---
 name: C_PetBattles.GetActivePet
 status: unimplemented
+inputs:
+- - name: petOwner
+    type: number
+outputs:
+- name: petIndex
+  type: number
