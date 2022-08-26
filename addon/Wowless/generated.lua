@@ -312,32 +312,56 @@ function G.GeneratedTests()
         }
       end
     end
+    local factories = {
+      Animation = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation()
+      end,
+      AnimationGroup = function()
+        return CreateFrame('Frame'):CreateAnimationGroup()
+      end,
+      FontString = function()
+        return CreateFrame('Frame'):CreateFontString()
+      end,
+      Path = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path')
+      end,
+      Scale = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Scale')
+      end,
+      Texture = function()
+        return CreateFrame('Frame'):CreateTexture()
+      end,
+    }
+    local exceptions = { -- TODO remove need for this
+      AnimationGroup = { SetParent = true },
+    }
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
-      local function factory()
-        if name == 'Animation' then
-          return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation()
-        elseif name == 'FontString' then
-          return CreateFrame('Frame'):CreateFontString()
-        elseif name == 'Texture' then
-          return CreateFrame('Frame'):CreateTexture()
-        else
-          return assertCreateFrame(name)
-        end
-      end
       tests[name] = function()
-        if cfg == false or not cfg.frametype then
+        local exc = exceptions[name]
+        if cfg == false then
           assertCreateFrameFails(name)
         else
-          return mkTests(cfg.objtype, factory, function(__index)
-            local mtests = {}
-            for mname in pairs(cfg.methods) do
-              mtests[mname] = function()
-                return checkCFunc(__index[mname])
-              end
+          if not cfg.frametype then
+            assertCreateFrameFails(name)
+          end
+          local factory = factories[name]
+            or cfg.frametype and function()
+              return assertCreateFrame(name)
             end
-            return mtests
-          end)
+          if factory then
+            return mkTests(cfg.objtype, factory, function(__index)
+              local mtests = {}
+              for mname in pairs(cfg.methods) do
+                mtests[mname] = function()
+                  if not exc or not exc[mname] then
+                    return checkCFunc(__index[mname])
+                  end
+                end
+              end
+              return mtests
+            end)
+          end
         end
       end
     end

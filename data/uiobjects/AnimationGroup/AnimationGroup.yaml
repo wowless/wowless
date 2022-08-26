@@ -10,9 +10,49 @@ methods:
     status: unimplemented
   GetAnimations:
     status: implemented
+  GetDuration:
+    products:
+    - wow_classic_era
+    status: unimplemented
+  GetLooping:
+    products:
+    - wow_classic_era
+    status: unimplemented
+  GetLoopState:
+    products:
+    - wow_classic_era
+    status: unimplemented
+  GetProgress:
+    products:
+    - wow_classic_era
+    status: unimplemented
+  IsDone:
+    products:
+    - wow_classic_era
+    status: unimplemented
+  IsPaused:
+    products:
+    - wow_classic_era
+    status: unimplemented
+  IsPendingFinish:
+    products:
+    - wow_classic_era
+    status: unimplemented
   IsPlaying:
     status: unimplemented
+  IsSetToFinalAlpha:
+    products:
+    - wow_classic_era
+    status: unimplemented
+  Pause:
+    products:
+    - wow_classic_era
+    status: unimplemented
   Play:
+    status: unimplemented
+  RemoveAnimations:
+    products:
+    - wow_classic_era
     status: unimplemented
   Restart:
     status: unimplemented
