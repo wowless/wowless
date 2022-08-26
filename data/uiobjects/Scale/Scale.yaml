@@ -4,20 +4,12 @@ inherits:
 - Animation
 methods:
   GetFromScale:
-    products:
-    - wow_classic_era
     status: unimplemented
   GetOrigin:
-    products:
-    - wow_classic_era
     status: unimplemented
   GetScale:
-    products:
-    - wow_classic_era
     status: unimplemented
   GetToScale:
-    products:
-    - wow_classic_era
     status: unimplemented
   SetFromScale:
     status: unimplemented

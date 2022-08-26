@@ -6,18 +6,10 @@ methods:
   CreateControlPoint:
     status: implemented
   GetControlPoints:
-    products:
-    - wow_classic_era
     status: unimplemented
   GetCurve:
-    products:
-    - wow_classic_era
     status: unimplemented
   GetMaxOrder:
-    products:
-    - wow_classic_era
     status: unimplemented
   SetCurve:
-    products:
-    - wow_classic_era
     status: unimplemented

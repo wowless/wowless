@@ -11,13 +11,5 @@ methods:
     status: getter
   GetObjectType:
     status: implemented
-  GetSourceLocation:
-    products:
-    - wow
-    - wow_beta
-    - wow_classic_beta
-    - wow_classic_ptr
-    - wowt
-    status: unimplemented
   IsObjectType:
     status: implemented
