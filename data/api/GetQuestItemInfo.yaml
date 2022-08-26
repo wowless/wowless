@@ -17,3 +17,6 @@ outputs:
   type: number
 - name: isUsable
   type: oneornil
+- name: itemID
+  stub: 17
+  type: number
