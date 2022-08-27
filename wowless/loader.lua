@@ -577,7 +577,10 @@ local function loader(api, cfg)
       end
 
       return api.CallSafely(function()
-        local root = parseXml(xmlstr)
+        local root, warnings = parseXml(xmlstr)
+        for _, warning in ipairs(warnings) do
+          api.log(3, filename .. ': ' .. warning)
+        end
         local ctx = {
           ignoreVirtual = false,
           intrinsic = false,

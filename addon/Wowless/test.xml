@@ -401,6 +401,6 @@
     </Scripts>
   </Actor>
   <Script>
-    assertEquals(__wowless == nil, CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate').loaded == true) -- TODO fix wowless
+    assert(CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate').loaded)
   </Script>
 </Ui>
