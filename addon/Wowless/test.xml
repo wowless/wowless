@@ -403,4 +403,18 @@
   <Script>
     assert(CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate').loaded)
   </Script>
+
+  <Frame>
+    <Layers>
+      <Layer>
+        <Texture>
+          <Scripts>
+            <OnLoad>
+              error('textures should not support scripts')
+            </OnLoad>
+          </Scripts>
+        </Texture>
+      </Layer>
+    </Layers>
+  </Frame>
 </Ui>
