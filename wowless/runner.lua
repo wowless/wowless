@@ -148,33 +148,31 @@ local function run(cfg)
       api.SendEvent('EXECUTE_CHAT_LINE', v)
     end
   end
-  if cfg.allevents or not (cfg.product == 'wow' or cfg.product == 'wowt') then
-    local eventBlacklist = {
-      BARBER_SHOP_OPEN = true, -- issue #111
-      INSPECT_HONOR_UPDATE = true, -- INSPECTED_UNIT shenanigans
-      INSTANCE_LOCK_START = true,
-      INSTANCE_LOCK_WARNING = true,
-      MAIL_INBOX_UPDATE = true, -- InboxFrame.openMailID not set when it should be
-      OPEN_MASTER_LOOT_LIST = true,
-      PLAYER_LOGIN = true,
-      PLAYER_LOGOUT = true,
-      UPDATE_MASTER_LOOT_LIST = true,
-      VARIABLES_LOADED = true,
-    }
-    local keys = {}
-    for k, v in pairs(require('wowapi.data').events) do
-      local products = {}
-      for _, product in ipairs(v.products or {}) do
-        products[product] = true
-      end
-      if not eventBlacklist[k] and not next(v.payload) and (not v.products or products[cfg.product]) then
-        table.insert(keys, k)
-      end
+  local eventBlacklist = {
+    BARBER_SHOP_OPEN = true, -- issue #111
+    INSPECT_HONOR_UPDATE = true, -- INSPECTED_UNIT shenanigans
+    INSTANCE_LOCK_START = true,
+    INSTANCE_LOCK_WARNING = true,
+    MAIL_INBOX_UPDATE = true, -- InboxFrame.openMailID not set when it should be
+    OPEN_MASTER_LOOT_LIST = true,
+    PLAYER_LOGIN = true,
+    PLAYER_LOGOUT = true,
+    UPDATE_MASTER_LOOT_LIST = true,
+    VARIABLES_LOADED = true,
+  }
+  local keys = {}
+  for k, v in pairs(require('wowapi.data').events) do
+    local products = {}
+    for _, product in ipairs(v.products or {}) do
+      products[product] = true
     end
-    table.sort(keys)
-    for _, k in ipairs(keys) do
-      api.SendEvent(k)
+    if not eventBlacklist[k] and not next(v.payload) and (not v.products or products[cfg.product]) then
+      table.insert(keys, k)
     end
+  end
+  table.sort(keys)
+  for _, k in ipairs(keys) do
+    api.SendEvent(k)
   end
   if api.states.Addons.KethoDoc then
     api.env.KethoDoc:DumpWidgetAPI()
