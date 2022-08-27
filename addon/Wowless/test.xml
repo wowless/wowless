@@ -391,4 +391,16 @@
     local bar = getmetatable(CreateFrame('Frame'))
     assertEquals(foo, bar)
   </Script>
+
+  <!-- Actors support scripts through XML even though they aren't ScriptObjects. -->
+  <Actor name='WowlessActorTemplate' virtual='true'>
+    <Scripts>
+      <OnLoad>
+        self.loaded = true
+      </OnLoad>
+    </Scripts>
+  </Actor>
+  <Script>
+    assertEquals(__wowless == nil, CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate').loaded == true) -- TODO fix wowless
+  </Script>
 </Ui>

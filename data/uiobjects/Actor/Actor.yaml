@@ -6,6 +6,7 @@ fields:
     type: number
 inherits:
 - ParentedObject
+- ScriptObject
 methods:
   AttachToMount:
     products:
