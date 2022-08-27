@@ -127,6 +127,8 @@ local function t2ty(t, ns, mixin)
         return n
       elseif b.Type == 'CallbackType' then
         return 'function'
+      elseif b.Type == 'Enumeration' then
+        return 'number'
       end
     end
     error('confused by ' .. n)

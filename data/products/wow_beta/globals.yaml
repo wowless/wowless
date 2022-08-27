@@ -66,6 +66,10 @@ Constants:
     MAX_QUEST_WATCHES: 25
     MAX_WORLD_QUEST_WATCHES_AUTOMATIC: 1
     MAX_WORLD_QUEST_WATCHES_MANUAL: 5
+  TraitConsts:
+    COMMIT_COMBAT_TRAIT_CONFIG_CHANGES_SPELL_ID: 384255
+    INSPECT_TRAIT_CONFIG_ID: -1
+    MAX_COMBAT_TRAIT_CONFIGS: 10
   Transmog:
     MainHandTransmogIsIndividualWeapon: -1
     MainHandTransmogIsPairedWeapon: 0
@@ -80,12 +84,13 @@ Enum:
     NumValues: 2
   ActionBarVisibleSetting:
     Always: 0
+    Hidden: 3
     InCombat: 1
     OutOfCombat: 2
   ActionBarVisibleSettingMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   AddSoulbindConduitReason:
     Cheat: 1
     None: 0
@@ -221,6 +226,31 @@ Enum:
     Active: 0
     Sold: 1
   AuctionStatusMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  AuraFrameIconDirection:
+    Down: 0
+    Left: 0
+    Right: 1
+    Up: 1
+  AuraFrameIconDirectionMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 4
+  AuraFrameIconWrap:
+    Down: 0
+    Left: 0
+    Right: 1
+    Up: 1
+  AuraFrameIconWrapMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 4
+  AuraFrameOrientation:
+    Horizontal: 0
+    Vertical: 1
+  AuraFrameOrientationMeta:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
@@ -1622,18 +1652,22 @@ Enum:
   EditModeAccountSetting:
     GridSpacing: 1
     SettingsExpanded: 2
+    ShowBuffFrame: 10
     ShowCastBar: 7
+    ShowDebuffFrame: 11
     ShowEncounterBar: 8
     ShowExtraAbilities: 9
     ShowGrid: 0
+    ShowPartyFrames: 12
     ShowPetActionBar: 5
     ShowPossessActionBar: 6
+    ShowRaidFrames: 13
     ShowStanceBar: 4
     ShowTargetAndFocus: 3
   EditModeAccountSettingMeta:
-    MaxValue: 9
+    MaxValue: 13
     MinValue: 0
-    NumValues: 10
+    NumValues: 14
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
     HideBarArt: 6
@@ -1662,6 +1696,26 @@ Enum:
     MaxValue: 13
     MinValue: 1
     NumValues: 8
+  EditModeAuraFrameSetting:
+    IconDirection: 2
+    IconLimitBuffFrame: 3
+    IconLimitDebuffFrame: 4
+    IconPadding: 6
+    IconSize: 5
+    IconWrap: 1
+    Orientation: 0
+    ShowFull: 7
+  EditModeAuraFrameSettingMeta:
+    MaxValue: 7
+    MinValue: 0
+    NumValues: 8
+  EditModeAuraFrameSystemIndices:
+    BuffFrame: 1
+    DebuffFrame: 2
+  EditModeAuraFrameSystemIndicesMeta:
+    MaxValue: 2
+    MinValue: 1
+    NumValues: 2
   EditModeCastBarSetting:
     BarSize: 0
     LockToPlayerFrame: 1
@@ -1700,32 +1754,38 @@ Enum:
     NumValues: 3
   EditModeSystem:
     ActionBar: 0
+    AuraFrame: 6
     CastBar: 1
     EncounterBar: 4
     ExtraAbilities: 5
     Minimap: 2
     UnitFrame: 3
   EditModeSystemMeta:
-    MaxValue: 5
+    MaxValue: 6
     MinValue: 0
-    NumValues: 6
+    NumValues: 7
   EditModeUnitFrameSetting:
     BuffsOnTop: 2
     CastBarUnderneath: 1
     HidePortrait: 0
+    ShowPartyFrameBackground: 5
+    UseHorizontalGroups: 6
     UseLargerFrame: 3
+    UseRaidStylePartyFrames: 4
   EditModeUnitFrameSettingMeta:
-    MaxValue: 3
+    MaxValue: 6
     MinValue: 0
-    NumValues: 4
+    NumValues: 7
   EditModeUnitFrameSystemIndices:
     Focus: 3
+    Party: 4
     Player: 1
+    Raid: 5
     Target: 2
   EditModeUnitFrameSystemIndicesMeta:
-    MaxValue: 3
+    MaxValue: 5
     MinValue: 1
-    NumValues: 3
+    NumValues: 5
   EnvironmentalDamageFlags:
     DmgIsPct: 2
     OneTime: 1
@@ -2077,6 +2137,7 @@ Enum:
     IslandsMissionNpc: 36
     LFGDungeon: 20
     Mailbox: 18
+    MajorFactionRenown: 53
     NewPlayerGuide: 43
     None: 0
     PerksProgramVendor: 47
@@ -2111,9 +2172,9 @@ Enum:
     MinValue: 1
     NumValues: 1
   GossipNpcOptionMeta:
-    MaxValue: 52
+    MaxValue: 53
     MinValue: 0
-    NumValues: 53
+    NumValues: 54
   GossipOptionRecFlags:
     QuestLabelPrepend: 1
   GossipOptionRecFlagsMeta:
@@ -3331,6 +3392,7 @@ Enum:
     LegendaryCrafting: 48
     LFGDungeon: 25
     MailInfo: 17
+    MajorFactionRenown: 64
     Merchant: 5
     NewPlayerGuide: 52
     None: 0
@@ -3363,9 +3425,9 @@ Enum:
     WeeklyRewards: 49
     WorldMap: 29
   PlayerInteractionTypeMeta:
-    MaxValue: 63
+    MaxValue: 64
     MinValue: 0
-    NumValues: 64
+    NumValues: 65
   PlayerMentorshipApplicationResult:
     AlreadyMentor: 1
     Ineligible: 2
@@ -3418,8 +3480,9 @@ Enum:
     PlayerLevel: 0
     PlayerLevelContentTuningMax: 33
     ProfessionQualityLevel: 57
-    ProfessionRatingGatherDiscover: 62
-    ProfessionRatingGatherExtra: 61
+    ProfessionRatingFinessePercent: 61
+    ProfessionRatingPerceptionPercent: 62
+    ProfessionTraitRanksByLabel: 63
     ProgressiveEventItemWinCount: 3
     ProgressiveEventMissCount: 2
     ProgressiveEventNumRemainingForClass: 28
@@ -3447,9 +3510,9 @@ Enum:
     WorldStateExpression: 27
     WorldStateValue: 18
   PointsModifierSourceTypeMeta:
-    MaxValue: 62
+    MaxValue: 63
     MinValue: 0
-    NumValues: 63
+    NumValues: 64
   PowerType:
     Alternate: 10
     ArcaneCharges: 16
@@ -3498,22 +3561,23 @@ Enum:
     Skinning: 11
     Tailoring: 7
   ProfessionEffect:
+    AccumulateRanksByLabel: 25
     DecreaseDifficulty: 22
     IncreaseDifficulty: 23
-    ModCraftCrit: 9
     ModCraftCritSize: 20
-    ModCraftExtra: 15
     ModCraftExtraQuantity: 18
-    ModCraftReduction: 10
+    ModCraftingSpeed: 14
     ModCraftReductionQuantity: 21
-    ModCraftTimeDecrease: 14
-    ModGatherDiscover: 13
-    ModGatherExtra: 11
+    ModDeftness: 12
+    ModFinesse: 11
     ModGatherExtraQuantity: 19
-    ModGatherRange: 17
-    ModGatherTimeDecrease: 12
-    ModGatherTimeIncrease: 16
+    ModInspiration: 9
+    ModMulticraft: 15
+    ModPerception: 13
+    ModResourcefulness: 10
     ModSkillGain: 24
+    ModUnused_1: 16
+    ModUnused_2: 17
     Skill: 0
     StatCraftingSpeed: 6
     StatDeftness: 4
@@ -3524,23 +3588,23 @@ Enum:
     StatResourcefulness: 2
     UnlockReagentSlot: 8
   ProfessionEffectMeta:
-    MaxValue: 24
+    MaxValue: 25
     MinValue: 0
-    NumValues: 25
+    NumValues: 26
   ProfessionMeta:
     MaxValue: 14
     MinValue: 0
     NumValues: 15
   ProfessionRating:
-    CraftCrit: 0
-    CraftExtra: 6
-    CraftReduction: 1
-    CraftTimeDecrease: 5
-    GatherDiscover: 4
-    GatherExtra: 2
-    GatherRange: 8
-    GatherTimeDecrease: 3
-    GatherTimeIncrease: 7
+    CraftingSpeed: 5
+    Deftness: 3
+    Finesse: 2
+    Inspiration: 0
+    Multicraft: 6
+    Perception: 4
+    Resourcefulness: 1
+    Unused_1: 7
+    Unused_2: 8
   ProfessionRatingMeta:
     MaxValue: 8
     MinValue: 0
@@ -3955,6 +4019,20 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  SpellDisplayBorderColor:
+    Black: 1
+    Blue: 8
+    Green: 7
+    None: 0
+    Orange: 5
+    Purple: 6
+    Red: 3
+    White: 2
+    Yellow: 4
+  SpellDisplayBorderColorMeta:
+    MaxValue: 8
+    MinValue: 0
+    NumValues: 9
   SpellDisplayIconDisplayType:
     Buff: 0
     Circular: 2
@@ -4162,10 +4240,11 @@ Enum:
     NumValues: 3
   TraitCombatConfigFlags:
     ActiveForSpec: 1
+    StarterBuild: 2
   TraitCombatConfigFlagsMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 1
-    NumValues: 1
+    NumValues: 2
   TraitCondFlag:
     IsAlwaysMet: 2
     IsGate: 1
@@ -4291,10 +4370,11 @@ Enum:
     NumValues: 3
   TraitTreeFlag:
     CannotRefund: 1
+    HideSingleRankNumbers: 2
   TraitTreeFlagMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 1
-    NumValues: 1
+    NumValues: 2
   TransmogCameraVariation:
     CloakBackpack: 1
     None: 0
