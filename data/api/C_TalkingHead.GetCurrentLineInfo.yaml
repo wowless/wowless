@@ -1,0 +1,26 @@
+---
+name: C_TalkingHead.GetCurrentLineInfo
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: displayInfo
+  type: string
+- name: cameraID
+  type: string
+- name: vo
+  type: string
+- name: duration
+  type: string
+- name: lineNumber
+  type: string
+- name: numLines
+  type: string
+- name: name
+  type: string
+- name: text
+  type: string
+- name: isNewTalkingHead
+  type: string
+- name: textureKit
+  type: string

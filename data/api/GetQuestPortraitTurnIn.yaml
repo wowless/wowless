@@ -5,6 +5,7 @@ inputs:
 - {}
 outputs:
 - name: questPortrait
+  stub: 0
   type: number
 - name: questPortraitText
   type: string
