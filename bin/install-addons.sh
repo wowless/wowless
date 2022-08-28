@@ -15,6 +15,7 @@ function install() {
   then
     echo "installing in $wowproduct"
     ln -sf "$wowless/addon/Wowless" "$wowdir"
+    ln -sf "$wowless/addon/WowlessTracker" "$wowdir"
     ln -sf "$wowless/build/products/$addonproduct/WowlessData" "$wowdir"
   fi
 }
