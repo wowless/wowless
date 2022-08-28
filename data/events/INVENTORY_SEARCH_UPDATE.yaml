@@ -2,6 +2,3 @@
 name: INVENTORY_SEARCH_UPDATE
 status: implemented
 payload: {}
-products:
-- wow
-- wowt

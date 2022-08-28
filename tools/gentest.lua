@@ -57,9 +57,7 @@ local ptablemap = {
     local t = {}
     for _, f in ipairs(require('pl.dir').getfiles('data/events')) do
       local ev = yaml.parseFile(f)
-      if not ev.products or mapify(ev.products)[p] then
-        t[ev.name] = true
-      end
+      t[ev.name] = not (ev.products and not mapify(ev.products)[p])
     end
     return 'Events', t
   end,
