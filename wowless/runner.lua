@@ -155,6 +155,7 @@ local function run(cfg)
     INSTANCE_LOCK_WARNING = true,
     MAIL_INBOX_UPDATE = true, -- InboxFrame.openMailID not set when it should be
     OPEN_MASTER_LOOT_LIST = true,
+    PARTY_INVITE_CANCEL = true, -- broken on vanilla
     PLAYER_LOGIN = true,
     PLAYER_LOGOUT = true,
     UPDATE_MASTER_LOOT_LIST = true,
