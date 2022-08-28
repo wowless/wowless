@@ -126,6 +126,15 @@ local function supported(obj)
   return false
 end
 
+local events = {}
+for _, f in ipairs(require('pl.dir').getfiles('data/events')) do
+  local cfg = parseYaml(f)
+  if supported(cfg) then
+    cfg.products = nil
+    events[cfg.name] = cfg
+  end
+end
+
 local uiobjects = {}
 for _, d in ipairs(require('pl.dir').getdirectories('data/uiobjects')) do
   local name = d:match('/(%a+)$')
@@ -149,6 +158,7 @@ local data = {
   apis = apis,
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
   cvars = parseYaml('data/products/' .. product .. '/cvars.yaml'),
+  events = events,
   globals = parseYaml('data/products/' .. product .. '/globals.yaml'),
   impls = impls,
   sqlcursors = sqlcursors,

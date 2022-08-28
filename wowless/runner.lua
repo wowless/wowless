@@ -169,12 +169,8 @@ local function run(cfg)
     table = '{}',
     unknown = 'nil',
   }
-  for k, v in pairs(require('wowapi.data').events) do
-    local products = {}
-    for _, product in ipairs(v.products or {}) do
-      products[product] = true
-    end
-    if not eventBlacklist[k] and (not v.products or products[cfg.product]) then
+  for k, v in pairs(require('build.products.' .. cfg.product .. '.data').events) do
+    if not eventBlacklist[k] then
       local payload = {}
       for _, p in ipairs(v.payload or {}) do
         local pv = typeToPayload[p.type] or 'nil'
