@@ -161,18 +161,34 @@ local function run(cfg)
     VARIABLES_LOADED = true,
   }
   local keys = {}
+  local payloads = {}
+  local typeToPayload = {
+    boolean = 'false',
+    number = '1',
+    string = '\'\'',
+    table = '{}',
+    unknown = 'nil',
+  }
   for k, v in pairs(require('wowapi.data').events) do
     local products = {}
     for _, product in ipairs(v.products or {}) do
       products[product] = true
     end
-    if not eventBlacklist[k] and not next(v.payload) and (not v.products or products[cfg.product]) then
-      table.insert(keys, k)
+    if not eventBlacklist[k] and (not v.products or products[cfg.product]) then
+      local payload = {}
+      for _, p in ipairs(v.payload or {}) do
+        local pv = typeToPayload[p.type] or 'nil'
+        table.insert(payload, pv)
+      end
+      if not next(payload) or cfg.allevents then
+        table.insert(keys, k)
+        payloads[k] = loadstring('return ' .. table.concat(payload, ','))
+      end
     end
   end
   table.sort(keys)
   for _, k in ipairs(keys) do
-    api.SendEvent(k)
+    api.SendEvent(k, payloads[k]())
   end
   if api.states.Addons.KethoDoc then
     api.env.KethoDoc:DumpWidgetAPI()
