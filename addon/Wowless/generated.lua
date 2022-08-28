@@ -158,15 +158,13 @@ function G.GeneratedTests()
     local tests = {}
     local frame = CreateFrame('Frame')
     for k, v in pairs(_G.WowlessData.Events) do
-      if v or not _G.__wowless then -- TODO fix wowless
-        tests[k] = function()
-          assertEquals(
-            v,
-            pcall(function()
-              frame:RegisterEvent(k)
-            end)
-          )
-        end
+      tests[k] = function()
+        assertEquals(
+          v,
+          pcall(function()
+            frame:RegisterEvent(k)
+          end)
+        )
       end
     end
     return tests

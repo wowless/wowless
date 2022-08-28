@@ -1,6 +1,6 @@
 local traceback = require('wowless.ext').traceback
 
-local function new(log, maxErrors)
+local function new(log, maxErrors, product)
   local allEventRegistrations = {}
   local env = {}
   local errors = 0
@@ -210,12 +210,12 @@ local function new(log, maxErrors)
       local arg = select(i, ...)
       table.insert(largs, type(arg) == 'string' and ('%q'):format(arg) or tostring(arg))
     end
+    event = event:upper()
     log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
-    local ev = string.lower(event)
     -- Snapshot current registrations since handlers can mutate them.
     local regs = {}
-    for i, frame in ipairs(eventRegistrations[ev] or {}) do
-      assert(u(frame).registeredEvents[ev] == i, 'event registration invariant violated')
+    for i, frame in ipairs(eventRegistrations[event] or {}) do
+      assert(u(frame).registeredEvents[event] == i, 'event registration invariant violated')
       table.insert(regs, frame)
     end
     for i, frame in ipairs(allEventRegistrations) do
@@ -263,8 +263,11 @@ local function new(log, maxErrors)
     return errors
   end
 
+  local eventConfigs = require('build.products.' .. product .. '.data').events
+
   local function RegisterEvent(frame, event)
-    event = event:lower()
+    event = event:upper()
+    assert(eventConfigs[event], 'cannot register ' .. event)
     local ud = u(frame)
     if not ud.registeredEvents[event] and not ud.registeredAllEvents then
       local reg = eventRegistrations[event]
@@ -278,7 +281,7 @@ local function new(log, maxErrors)
   end
 
   local function UnregisterEvent(frame, event)
-    event = event:lower()
+    event = event:upper()
     local ud = u(frame)
     local idx = ud.registeredEvents[event]
     if idx then
@@ -317,7 +320,7 @@ local function new(log, maxErrors)
   end
 
   local function IsEventRegistered(frame, event)
-    event = event:lower()
+    event = event:upper()
     local ud = u(frame)
     return ud.registeredAllEvents or ud.registeredEvents[event]
   end

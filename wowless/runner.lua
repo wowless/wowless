@@ -9,7 +9,7 @@ local function run(cfg)
       print(string.format('[%.3f] ' .. fmt, os.clock() - time0, ...))
     end
   end
-  local api = require('wowless.api').new(log, cfg.maxErrors)
+  local api = require('wowless.api').new(log, cfg.maxErrors, cfg.product)
   local loader = require('wowless.loader').loader(api, {
     cascproxy = cfg.cascproxy,
     otherAddonDirs = cfg.otherAddonDirs,

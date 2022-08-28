@@ -1,5 +1,6 @@
-local api = require('wowless.api').new(function() end)
-local loader = require('wowless.loader').loader(api, { product = 'wow' })
+local product = 'wow'
+local api = require('wowless.api').new(function() end, nil, product)
+local loader = require('wowless.loader').loader(api, { product = product })
 require('wowless.env').init(api, loader)
 
 describe('frame', function()
