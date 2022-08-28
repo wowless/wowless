@@ -53,6 +53,16 @@ local ptablemap = {
   cvars = function(p)
     return 'CVars', perproduct(p, 'cvars')
   end,
+  events = function(p)
+    local t = {}
+    for _, f in ipairs(require('pl.dir').getfiles('data/events')) do
+      local ev = yaml.parseFile(f)
+      if not ev.products or mapify(ev.products)[p] then
+        t[ev.name] = true
+      end
+    end
+    return 'Events', t
+  end,
   globalapis = function(p)
     local unavailableApis = {
       CreateForbiddenFrame = true,

@@ -19,6 +19,9 @@ local perProductAddonGeneratedTypes = {
   cvars = function(p)
     return { 'data/products/' .. p .. '/cvars.yaml' }
   end,
+  events = function()
+    return find('data/events')
+  end,
   globalapis = function(p)
     return { 'data/products/' .. p .. '/apis.yaml', 'build/api.stamp' }
   end,

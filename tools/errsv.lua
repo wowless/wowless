@@ -203,6 +203,14 @@ for ns, nt in pairs(data.generated.apiNamespaces or {}) do
   end
 end
 
+for k, v in pairs(data.generated.events or {}) do
+  assert(v:match('Attempt to register unknown event'))
+  local fn = 'data/events/' .. k .. '.yaml'
+  local ev = yaml.parseFile(fn)
+  ev.products = removeProduct(ev.products)
+  write(fn, yaml.pprint(ev))
+end
+
 for k, v in pairs(data.generated.globalApis or {}) do
   if k:sub(1, 1) == '~' then
     k = k:sub(2)

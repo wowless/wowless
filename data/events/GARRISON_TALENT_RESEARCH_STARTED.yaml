@@ -8,3 +8,9 @@ payload:
   type: number
 - name: garrTalentID
   type: number
+products:
+- wow
+- wow_beta
+- wow_classic_beta
+- wow_classic_ptr
+- wowt

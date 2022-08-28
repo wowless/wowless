@@ -12,3 +12,9 @@ payload:
   type: number
 - name: plotInstanceID
   type: number
+products:
+- wow
+- wow_beta
+- wow_classic_beta
+- wow_classic_ptr
+- wowt

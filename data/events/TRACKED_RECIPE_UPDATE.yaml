@@ -6,3 +6,7 @@ payload:
   type: number
 - name: tracked
   type: boolean
+products:
+- wow_beta
+- wow_classic_beta
+- wow_classic_ptr

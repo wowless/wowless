@@ -154,6 +154,17 @@ function G.GeneratedTests()
     return tests
   end
 
+  local function events()
+    local tests = {}
+    local frame = CreateFrame('Frame')
+    for k in pairs(_G.WowlessData.Events) do
+      tests[k] = function()
+        frame:RegisterEvent(k)
+      end
+    end
+    return tests
+  end
+
   local function globalApis()
     local tests = {}
     local empty = {}
@@ -454,6 +465,7 @@ function G.GeneratedTests()
     apiNamespaces = apiNamespaces,
     build = build,
     cvars = cvars,
+    events = events,
     globalApis = globalApis,
     globals = globals,
     product = productTest,

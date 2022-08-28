@@ -6,3 +6,9 @@ payload:
   type: number
 - name: clubFinderGUID
   type: string
+products:
+- wow
+- wow_beta
+- wow_classic_beta
+- wow_classic_ptr
+- wowt

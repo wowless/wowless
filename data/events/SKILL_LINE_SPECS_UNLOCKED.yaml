@@ -6,3 +6,7 @@ payload:
   type: number
 - name: tradeSkillID
   type: number
+products:
+- wow_beta
+- wow_classic_beta
+- wow_classic_ptr

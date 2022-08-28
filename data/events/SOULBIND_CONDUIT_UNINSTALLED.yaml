@@ -6,3 +6,9 @@ payload:
   type: number
 - name: data
   type: C_Soulbinds.SoulbindConduitData
+products:
+- wow
+- wow_beta
+- wow_classic_beta
+- wow_classic_ptr
+- wowt
