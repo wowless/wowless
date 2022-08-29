@@ -92,17 +92,6 @@ local ptablemap = {
         apiNamespaces[name].methods[k:sub(dot + 1)] = api
       end
     end
-    local unavailable = {
-      -- These are grabbed by FrameXML and are unavailable by the time addons run.
-      'C_AuthChallenge',
-      'C_SecureTransfer',
-      'C_StoreSecure',
-      'C_WowTokenSecure',
-    }
-    for _, k in ipairs(unavailable) do
-      assert(apiNamespaces[k])
-      apiNamespaces[k] = nil
-    end
     local t = {}
     for k, v in pairs(apiNamespaces) do
       local mt = {}

@@ -70,7 +70,7 @@ function G.GeneratedTests()
     local empty = {}
     for name, ncfg in pairs(_G.WowlessData.NamespaceApis) do
       tests[name] = function()
-        local ns = _G[name]
+        local ns = _G[name] or capsuleEnv[name]
         assertEquals('table', type(ns))
         assert(getmetatable(ns) == nil)
         local mtests = {}
