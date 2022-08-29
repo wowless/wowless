@@ -58,7 +58,10 @@ local ptablemap = {
     local t = {}
     for _, f in ipairs(require('pl.dir').getfiles('data/events')) do
       local cfg = yaml.parseFile(f)
-      t[cfg.name] = supported[cfg.name] ~= nil
+      t[cfg.name] = {
+        payload = #cfg.payload,
+        registerable = supported[cfg.name] ~= nil,
+      }
     end
     return 'Events', t
   end,

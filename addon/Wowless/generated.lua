@@ -162,7 +162,7 @@ function G.GeneratedTests()
     for k, v in pairs(_G.WowlessData.Events) do
       tests[k] = function()
         assertEquals(
-          v,
+          v.registerable,
           pcall(function()
             frame:RegisterEvent(k)
           end)
