@@ -155,6 +155,7 @@ local function run(cfg)
     OPEN_MASTER_LOOT_LIST = true,
     PLAYER_LOGIN = true,
     PLAYER_LOGOUT = true,
+    STORE_GUILD_MASTER_INFO_RECEIVED = true, -- SelectedRealm shenanigans
     UPDATE_MASTER_LOOT_LIST = true,
     VARIABLES_LOADED = true,
   }

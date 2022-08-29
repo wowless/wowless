@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 product="$1"
 shift
 ninja "$product"
