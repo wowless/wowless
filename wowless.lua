@@ -6,6 +6,7 @@ local args = (function()
   parser:option('-a --addondir', 'addon directory to test'):count('*')
   parser:option('-c --cascproxy', 'url prefix to cascproxy')
   parser:option('-e --maxerrors', 'quit once this number of errors occur'):convert(tonumber)
+  parser:option('-s --scripts', 'scripts to execute')
   parser:flag('--allevents', 'send all nullary events')
   parser:flag('--debug', 'enter debug mode after load')
   parser:flag('--frame0', 'write frame0 debug')
@@ -22,6 +23,7 @@ local api = require('wowless.runner').run({
   maxErrors = args.maxerrors,
   otherAddonDirs = args.addondir,
   product = args.product,
+  scripts = args.scripts,
   taint = args.taint,
 })
 if api.GetErrorCount() ~= 0 then
