@@ -184,10 +184,6 @@ local function run(cfg)
   for _, k in ipairs(keys) do
     api.SendEvent(k, payloads[k]())
   end
-  if api.states.Addons.KethoDoc then
-    api.env.KethoDoc:DumpWidgetAPI()
-    print(api.env.KethoEditBox.EditBox:GetText())
-  end
   api.SendEvent('PLAYER_LOGOUT')
   loader.saveAllVariables()
   return api
