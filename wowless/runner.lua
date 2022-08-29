@@ -19,10 +19,6 @@ local function run(cfg)
     rootDir = cfg.dir,
   })
   require('wowless.env').init(api, loader, cfg.taint)
-  if not cfg.dir then -- Hack for addon_spec :(
-    api.env.GetCVar = api.env.C_CVar.GetCVar
-    api.env.print = function() end
-  end
   loader.initAddons()
   if cfg.dir then
     loader.loadFrameXml()
