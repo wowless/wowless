@@ -912,10 +912,13 @@ C_StorePublic.IsDisabledByParentalControls: C_StorePublic.IsDisabledByParentalCo
 C_StorePublic.IsEnabled: C_StorePublic.IsEnabled
 C_StoreSecure.GetCurrencyID: C_StoreSecure.GetCurrencyID
 C_StoreSecure.GetFailureInfo: C_StoreSecure.GetFailureInfo
+C_StoreSecure.GetProductGroups: C_StoreSecure.GetProductGroups
 C_StoreSecure.GetProductList: C_StoreSecure.GetProductList
 C_StoreSecure.GetPurchaseList: C_StoreSecure.GetPurchaseList
+C_StoreSecure.GetUnrevokedBoostInfo: C_StoreSecure.GetUnrevokedBoostInfo
 C_StoreSecure.HasPurchaseInProgress: C_StoreSecure.HasPurchaseInProgress
 C_StoreSecure.IsAvailable: C_StoreSecure.IsAvailable
+C_StoreSecure.PurchaseProductConfirm: C_StoreSecure.PurchaseProductConfirm
 C_SummonInfo.CancelSummon: C_SummonInfo.CancelSummon
 C_SummonInfo.ConfirmSummon: C_SummonInfo.ConfirmSummon
 C_SummonInfo.GetSummonConfirmAreaName: C_SummonInfo.GetSummonConfirmAreaName
