@@ -157,10 +157,8 @@ local function run(cfg)
     INSTANCE_LOCK_WARNING = true,
     MAIL_INBOX_UPDATE = true, -- InboxFrame.openMailID not set when it should be
     OPEN_MASTER_LOOT_LIST = true,
-    PARTY_INVITE_CANCEL = true, -- broken on vanilla
     PLAYER_LOGIN = true,
     PLAYER_LOGOUT = true,
-    SECURE_TRANSFER_CONFIRM_SEND_MAIL = true, -- uses nonexistent C_SecureTransfer
     UPDATE_MASTER_LOOT_LIST = true,
     VARIABLES_LOADED = true,
   }
@@ -174,7 +172,7 @@ local function run(cfg)
     unknown = 'nil',
   }
   for k, v in pairs(require('build.products.' .. cfg.product .. '.data').events) do
-    if not eventBlacklist[k] then
+    if not v.neverSent and not eventBlacklist[k] then
       local payload = {}
       for _, p in ipairs(v.payload or {}) do
         local pv = typeToPayload[p.type] or 'nil'

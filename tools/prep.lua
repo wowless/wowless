@@ -127,8 +127,10 @@ local function supported(obj)
 end
 
 local events = {}
-for k in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
-  events[k] = parseYaml('data/events/' .. k .. '.yaml')
+for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
+  local cfg = parseYaml('data/events/' .. k .. '.yaml')
+  cfg.neverSent = not v or nil
+  events[k] = cfg
 end
 
 local uiobjects = {}

@@ -54,11 +54,11 @@ local ptablemap = {
     return 'CVars', perproduct(p, 'cvars')
   end,
   events = function(p)
-    local tru = perproduct(p, 'events')
+    local supported = perproduct(p, 'events')
     local t = {}
     for _, f in ipairs(require('pl.dir').getfiles('data/events')) do
       local cfg = yaml.parseFile(f)
-      t[cfg.name] = not not tru[cfg.name]
+      t[cfg.name] = supported[cfg.name] ~= nil
     end
     return 'Events', t
   end,
