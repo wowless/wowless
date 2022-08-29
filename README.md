@@ -15,8 +15,7 @@ Running on WoW client Lua/XML code requires some additional steps.
 From inside the container:
 
 ```sh
-ninja wow
-bin/run.sh --product wow
+bin/run.sh wow
 ```
 
 The above will:
@@ -28,5 +27,5 @@ The above will:
 To run an addon through it, download it into the container, then run:
 
 ```sh
-bin/run.sh --product wow --addondir path/to/your/AddonName
+bin/run.sh wow --addondir path/to/your/AddonName
 ```
