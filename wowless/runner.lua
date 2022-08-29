@@ -1,7 +1,9 @@
 local function run(cfg)
   assert(cfg, 'missing configuration')
   assert(cfg.product, 'missing product')
-  _G.loadstring = _G.loadstring_untainted or _G.loadstring -- tainted-lua rewrite hack
+  _G.loadstring = debug.newcfunction(function(...)
+    return _G.loadstring_untainted(...) -- tainted-lua rewrite hack
+  end)
   local loglevel = cfg.loglevel or 0
   local time0 = os.clock()
   local function log(level, fmt, ...)

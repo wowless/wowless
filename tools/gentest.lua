@@ -62,10 +62,6 @@ local ptablemap = {
     return 'Events', t
   end,
   globalapis = function(p)
-    local unavailableApis = {
-      CreateForbiddenFrame = true,
-      loadstring_untainted = true,
-    }
     local allapis = apis()
     local t = {}
     for name, apiname in pairs(perproduct(p, 'apis')) do
@@ -74,7 +70,6 @@ local ptablemap = {
         local vv = {
           alias = api.alias,
           nowrap = api.nowrap,
-          secureCapsule = unavailableApis[name] and true,
           stdlib = api.stdlib,
         }
         t[name] = next(vv) and vv or true

@@ -1,6 +1,8 @@
 local _, G = ...
 local assertEquals = _G.assertEquals
 
+local capsuleEnv = _G.SimpleCheckout and getfenv(_G.SimpleCheckout.OnLoad) or {}
+
 assert(_G.WowlessData, 'missing WowlessData')
 local runtimeProduct = assert(_G.WowlessData.product, 'missing product')
 
@@ -17,11 +19,11 @@ end
 function G.GeneratedTests()
   local cfuncs = {}
 
-  local function checkFunc(func, isLua)
+  local function checkFunc(func, isLua, env)
     assertEquals('function', type(func))
     return {
       getfenv = function()
-        assertEquals(_G, getfenv(func))
+        assertEquals(env or _G, getfenv(func))
       end,
       impltype = function()
         assertEquals(
@@ -38,17 +40,17 @@ function G.GeneratedTests()
     }
   end
 
-  local function checkCFunc(func)
-    return checkFunc(func, false)
+  local function checkCFunc(func, env)
+    return checkFunc(func, false, env)
   end
 
-  local function checkLuaFunc(func)
-    return checkFunc(func, true)
+  local function checkLuaFunc(func, env)
+    return checkFunc(func, true, env)
   end
 
-  local function checkNotCFunc(func)
+  local function checkNotCFunc(func, env)
     if func ~= nil and not cfuncs[func] then
-      return checkLuaFunc(func)
+      return checkLuaFunc(func, env)
     end
   end
 
@@ -176,10 +178,8 @@ function G.GeneratedTests()
     for name, cfg in pairs(_G.WowlessData.GlobalApis) do
       cfg = cfg == true and empty or cfg
       tests[name] = function()
-        local func = _G[name]
-        if cfg.secureCapsule then
-          assertEquals(_G.SecureCapsuleGet == nil, func ~= nil) -- addon_spec hack
-        elseif cfg.alias then
+        local func = _G[name] or capsuleEnv[name]
+        if cfg.alias then
           assertEquals(func, assert(tget(_G, cfg.alias)))
         elseif cfg.stdlib then
           local ty = type(tget(_G, cfg.stdlib))
@@ -195,19 +195,27 @@ function G.GeneratedTests()
         end
       end
     end
-    local ptrhooked = { -- TODO test these better
+    local toskip = { -- TODO test these better
+      -- PTR hooked
       FauxScrollFrame_Update = true,
       QuestLog_Update = true,
       QuestMapLogTitleButton_OnEnter = true,
       SetItemRef = true,
+      -- SecureCapsule-grabbed Lua functions defined outside capsule
+      CreateFromSecureMixins = true,
+      SecureMixin = true,
     }
-    for k, v in pairs(_G) do
-      if type(v) == 'function' and not tests[k] and not ptrhooked[k] then
-        tests['~' .. k] = function()
-          return checkNotCFunc(v)
+    local function checkEnv(env)
+      for k, v in pairs(env) do
+        if type(v) == 'function' and not tests[k] and not tests['~' .. k] and not toskip[k] then
+          tests['~' .. k] = function()
+            return checkNotCFunc(v, env)
+          end
         end
       end
     end
+    checkEnv(_G)
+    checkEnv(capsuleEnv)
     return tests
   end
 
