@@ -5,9 +5,3 @@ payload:
 - mixin: TransmogLocationMixin
   name: transmogLocation
   type: table
-products:
-- wow
-- wow_beta
-- wow_classic_beta
-- wow_classic_ptr
-- wowt

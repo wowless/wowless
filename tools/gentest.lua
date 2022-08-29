@@ -54,10 +54,11 @@ local ptablemap = {
     return 'CVars', perproduct(p, 'cvars')
   end,
   events = function(p)
+    local tru = perproduct(p, 'events')
     local t = {}
     for _, f in ipairs(require('pl.dir').getfiles('data/events')) do
-      local ev = yaml.parseFile(f)
-      t[ev.name] = not (ev.products and not mapify(ev.products)[p])
+      local cfg = yaml.parseFile(f)
+      t[cfg.name] = not not tru[cfg.name]
     end
     return 'Events', t
   end,

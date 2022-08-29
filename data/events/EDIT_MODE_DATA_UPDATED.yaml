@@ -6,7 +6,3 @@ payload:
   type: C_EditMode.EditModeInfo
 - name: fromServer
   type: boolean
-products:
-- wow_beta
-- wow_classic_beta
-- wow_classic_ptr

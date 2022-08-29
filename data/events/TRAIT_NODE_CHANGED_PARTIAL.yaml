@@ -6,7 +6,3 @@ payload:
   type: number
 - name: info
   type: C_Traits.TraitNodeInfoPartial
-products:
-- wow_beta
-- wow_classic_beta
-- wow_classic_ptr

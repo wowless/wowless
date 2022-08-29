@@ -5,9 +5,3 @@ payload:
 - name: info
   nilable: true
   type: C_SplashScreen.SplashScreenInfo
-products:
-- wow
-- wow_beta
-- wow_classic_beta
-- wow_classic_ptr
-- wowt

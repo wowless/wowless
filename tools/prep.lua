@@ -127,12 +127,8 @@ local function supported(obj)
 end
 
 local events = {}
-for _, f in ipairs(require('pl.dir').getfiles('data/events')) do
-  local cfg = parseYaml(f)
-  if supported(cfg) then
-    cfg.products = nil
-    events[cfg.name] = cfg
-  end
+for k in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
+  events[k] = parseYaml('data/events/' .. k .. '.yaml')
 end
 
 local uiobjects = {}
