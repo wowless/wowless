@@ -29,9 +29,6 @@ type:
                 - literal: table
                 - literal: unknown
                 - ref: structure
-    products:
-      type:
-        schema: products
     status:
       required: true
       type:
