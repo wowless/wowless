@@ -1,0 +1,7 @@
+---
+name: C_SharedCharacterServices.HasFreePromotionalUpgrade
+status: unimplemented
+inputs:
+- {}
+outputs:
+- type: boolean
