@@ -16,6 +16,7 @@ local productschemas = {
   apis = 'apis',
   build = 'build',
   cvars = 'cvars',
+  events = 'events',
   globals = 'globals',
 }
 

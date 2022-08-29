@@ -1,0 +1,4 @@
+---
+name: events
+type:
+  mapof: boolean
