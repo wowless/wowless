@@ -160,6 +160,7 @@ local function run(cfg)
     PARTY_INVITE_CANCEL = true, -- broken on vanilla
     PLAYER_LOGIN = true,
     PLAYER_LOGOUT = true,
+    SECURE_TRANSFER_CONFIRM_SEND_MAIL = true, -- uses nonexistent C_SecureTransfer
     UPDATE_MASTER_LOOT_LIST = true,
     VARIABLES_LOADED = true,
   }
