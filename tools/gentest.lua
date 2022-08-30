@@ -54,14 +54,21 @@ local ptablemap = {
     return 'CVars', perproduct(p, 'cvars')
   end,
   events = function(p)
-    local supported = perproduct(p, 'events')
-    local t = {}
+    local evs = {}
     for _, f in ipairs(require('pl.dir').getfiles('data/events')) do
       local cfg = yaml.parseFile(f)
-      t[cfg.name] = {
-        payload = #cfg.payload,
-        registerable = supported[cfg.name] ~= nil,
+      evs[cfg.name] = cfg
+    end
+    local t = {}
+    for k, v in pairs(perproduct(p, 'events')) do
+      t[k] = {
+        payload = v == false and -1 or #evs[v == true and k or v].payload,
+        registerable = true,
       }
+    end
+    for _, v in pairs(evs) do
+      local k = v.eventname or v.name
+      t[k] = t[k] or { payload = -1, registerable = false }
     end
     return 'Events', t
   end,

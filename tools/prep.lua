@@ -128,8 +128,8 @@ end
 
 local events = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
-  local cfg = parseYaml('data/events/' .. k .. '.yaml')
-  cfg.neverSent = not v or nil
+  local cfg = parseYaml('data/events/' .. (type(v) == 'string' and v or k) .. '.yaml')
+  cfg.neverSent = v == false or nil
   events[k] = cfg
 end
 

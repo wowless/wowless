@@ -1,4 +1,7 @@
 ---
 name: events
 type:
-  mapof: boolean
+  mapof:
+    oneof:
+    - boolean
+    - ref: event
