@@ -2518,6 +2518,15 @@ Enum:
     MaxValue: 15
     MinValue: 0
     NumValues: 16
+  RafLinkType:
+    Both: 3
+    Friend: 2
+    None: 0
+    Recruit: 1
+  RafLinkTypeMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   RelativeContentDifficulty:
     Difficult: 3
     Easy: 1
