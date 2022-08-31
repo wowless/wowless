@@ -203,12 +203,14 @@ for ns, nt in pairs(data.generated.apiNamespaces or {}) do
   end
 end
 
-for k, v in pairs(data.generated.events or {}) do
-  assert(v:match('Attempt to register unknown event'))
-  local fn = 'data/events/' .. k .. '.yaml'
-  local ev = yaml.parseFile(fn)
-  ev.products = removeProduct(ev.products)
-  write(fn, yaml.pprint(ev))
+do
+  local fn = 'data/products/' .. product .. '/events.yaml'
+  local evs = yaml.parseFile(fn)
+  for k, v in pairs(data.generated.events or {}) do
+    assert(v:match('Attempt to register unknown event'))
+    evs[k] = nil
+  end
+  write(fn, yaml.pprint(evs))
 end
 
 for k, v in pairs(data.generated.globalApis or {}) do

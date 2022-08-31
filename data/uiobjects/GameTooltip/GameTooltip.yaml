@@ -149,6 +149,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic
     - wow_classic_beta
     - wow_classic_ptr
     - wowt
@@ -205,6 +206,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic
     - wow_classic_beta
     - wow_classic_ptr
     - wowt
@@ -213,6 +215,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic
     - wow_classic_beta
     - wow_classic_ptr
     - wowt
@@ -233,6 +236,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic
     - wow_classic_beta
     - wow_classic_ptr
     - wowt
@@ -243,6 +247,7 @@ methods:
     status: unimplemented
   SetGlyph:
     products:
+    - wow_classic
     - wow_classic_beta
     - wow_classic_ptr
     status: unimplemented
@@ -288,6 +293,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic
     - wow_classic_beta
     - wow_classic_ptr
     - wowt
@@ -338,6 +344,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic
     - wow_classic_beta
     - wow_classic_ptr
     - wowt
@@ -348,6 +355,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic
     - wow_classic_beta
     - wow_classic_ptr
     - wowt
@@ -360,6 +368,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic
     - wow_classic_beta
     - wow_classic_ptr
     - wowt

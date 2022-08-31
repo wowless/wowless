@@ -1,9 +1,9 @@
 ---
-build: '44833'
-date: Jul 25 2022
-flavor: TBC
-hash: 6c37f5836b397404c64887f638732142
+build: '45327'
+date: Aug 25 2022
+flavor: Wrath
+hash: 4c101cabe237a8c9d9ccfcb31b57078a
 ptr: false
 test: false
-tocversion: 20504
-version: 2.5.4
+tocversion: 30400
+version: 3.4.0
