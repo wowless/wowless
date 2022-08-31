@@ -2,37 +2,6 @@
 name: ChrClasses
 versions:
 - fields:
-    ArmorTypeMask: 13
-    AttackPowerPerAgility: 21
-    AttackPowerPerStrength: 22
-    CinematicSequenceID: 15
-    CreateScreenFileDataID: 7
-    DamageBonusStat: 24
-    DefaultSpec: 16
-    DisplayPower: 19
-    Filename: 2
-    Flags: 14
-    HasRelicSlot: 25
-    HasStrengthAttackBonus: 17
-    IconFileDataID: 9
-    ID: 6
-    LowResScreenFileDataID: 10
-    Name_female_lang: 4
-    Name_lang: 1
-    Name_male_lang: 3
-    PetNameToken: 5
-    PrimaryStatPriority: 18
-    RangedAttackPowerPerAgility: 20
-    RolesMask: 12
-    SelectScreenFileDataID: 8
-    SpellClassSet: 23
-    StartingLevel: 11
-  products:
-  - wow_classic
-  - wow_classic_era
-  - wow_classic_era_ptr
-  sig: sssssiuuuuiuuuuuuuuuuuuuu
-- fields:
     ArmorTypeMask: 14
     AttackPowerPerAgility: 21
     AttackPowerPerStrength: 22
@@ -59,9 +28,40 @@ versions:
     SpellClassSet: 23
     StartingLevel: 12
   products:
+  - wow_classic
   - wow_classic_beta
   - wow_classic_ptr
   sig: sssssiuuuuiiuuuuuuuuuuuuu
+- fields:
+    ArmorTypeMask: 13
+    AttackPowerPerAgility: 21
+    AttackPowerPerStrength: 22
+    CinematicSequenceID: 15
+    CreateScreenFileDataID: 7
+    DamageBonusStat: 24
+    DefaultSpec: 16
+    DisplayPower: 19
+    Filename: 2
+    Flags: 14
+    HasRelicSlot: 25
+    HasStrengthAttackBonus: 17
+    IconFileDataID: 9
+    ID: 6
+    LowResScreenFileDataID: 10
+    Name_female_lang: 4
+    Name_lang: 1
+    Name_male_lang: 3
+    PetNameToken: 5
+    PrimaryStatPriority: 18
+    RangedAttackPowerPerAgility: 20
+    RolesMask: 12
+    SelectScreenFileDataID: 8
+    SpellClassSet: 23
+    StartingLevel: 11
+  products:
+  - wow_classic_era
+  - wow_classic_era_ptr
+  sig: sssssiuuuuiuuuuuuuuuuuuuu
 - fields:
     AlteredFormCharacterCreationIdleVisualFallback: 27
     ArmorTypeMask: 19

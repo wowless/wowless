@@ -19,9 +19,9 @@ versions:
     TierID: 2
   products:
   - wow_classic
-  - wow_classic_era
-  - wow_classic_era_ptr
-  sig: suuuuuuiii{2u}{9i}{3i}{3i}
+  - wow_classic_beta
+  - wow_classic_ptr
+  sig: suuuuuuiii{2i}{9i}{3i}{3i}
 - fields:
     CategoryMask: 11
     ClassID: 6
@@ -39,7 +39,7 @@ versions:
     TabID: 5
     TierID: 2
   products:
-  - wow_classic_beta
-  - wow_classic_ptr
-  sig: suuuuuuiii{2i}{9i}{3i}{3i}
+  - wow_classic_era
+  - wow_classic_era_ptr
+  sig: suuuuuuiii{2u}{9i}{3i}{3i}
 fdid: 1369062

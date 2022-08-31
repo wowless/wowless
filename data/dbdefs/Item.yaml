@@ -2,32 +2,6 @@
 name: Item
 versions:
 - fields:
-    AmmunitionType: 15
-    ClassID: 1
-    ContentTuningID: 13
-    DamageType: 16
-    IconFileDataID: 11
-    ID: 0
-    InventoryType: 4
-    ItemGroupSoundsID: 12
-    ItemRandomSuffixGroupID: 8
-    Material: 3
-    MaxDamage: 19
-    MaxDurability: 14
-    MinDamage: 18
-    ModifiedCraftingReagentItemID: 10
-    RandomSelect: 7
-    RequiredLevel: 5
-    Resistances: 17
-    SheatheType: 6
-    Sound_override_subclassID: 9
-    SubclassID: 2
-  products:
-  - wow_classic
-  - wow_classic_era
-  - wow_classic_era_ptr
-  sig: uuuiiuuuiuiuiuu{5u}{7i}{5u}{5u}
-- fields:
     ClassID: 1
     Field_3_4_0_43659_004: 5
     Field_3_4_0_43659_006: 7
@@ -49,8 +23,34 @@ versions:
     Sound_override_subclassID: 9
     SubclassID: 2
   products:
+  - wow_classic
   - wow_classic_beta
   - wow_classic_ptr
+  sig: uuuiiuuuiuiuiuu{5u}{7i}{5u}{5u}
+- fields:
+    AmmunitionType: 15
+    ClassID: 1
+    ContentTuningID: 13
+    DamageType: 16
+    IconFileDataID: 11
+    ID: 0
+    InventoryType: 4
+    ItemGroupSoundsID: 12
+    ItemRandomSuffixGroupID: 8
+    Material: 3
+    MaxDamage: 19
+    MaxDurability: 14
+    MinDamage: 18
+    ModifiedCraftingReagentItemID: 10
+    RandomSelect: 7
+    RequiredLevel: 5
+    Resistances: 17
+    SheatheType: 6
+    Sound_override_subclassID: 9
+    SubclassID: 2
+  products:
+  - wow_classic_era
+  - wow_classic_era_ptr
   sig: uuuiiuuuiuiuiuu{5u}{7i}{5u}{5u}
 - fields:
     ClassID: 1
