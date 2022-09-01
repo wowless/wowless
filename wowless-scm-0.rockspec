@@ -30,5 +30,6 @@ build = {
   type = 'builtin',
   modules = {
     ['wowless.ext'] = 'wowless/ext.c',
+    ['wowless.sandbox'] = 'wowless/sandbox.c',
   },
 }
