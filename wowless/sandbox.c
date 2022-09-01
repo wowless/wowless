@@ -34,7 +34,8 @@ static int wowless_sandbox_eval(lua_State *L) {
   }
   int n = lua_gettop(S);
   for (int i = 1; i <= n; ++i) {
-    switch (lua_type(S, i)) {
+    int ty = lua_type(S, i);
+    switch (ty) {
       case LUA_TNUMBER:
         lua_pushnumber(L, lua_tonumber(S, i));
         break;
@@ -48,7 +49,9 @@ static int wowless_sandbox_eval(lua_State *L) {
         lua_pushnil(L);
         break;
       default:
-        lua_pushstring(L, "invalid type");
+        lua_pushstring(L, "invalid type: ");
+        lua_pushstring(L, lua_typename(S, ty));
+        lua_concat(L, 2);
         lua_error(L);
     }
   }
