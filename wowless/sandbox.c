@@ -41,6 +41,12 @@ static int wowless_sandbox_eval(lua_State *L) {
       case LUA_TSTRING:
         lua_pushstring(L, lua_tostring(S, i));
         break;
+      case LUA_TBOOLEAN:
+        lua_pushboolean(L, lua_toboolean(S, i));
+        break;
+      case LUA_TNIL:
+        lua_pushnil(L);
+        break;
       default:
         lua_pushstring(L, "invalid type");
         lua_error(L);
