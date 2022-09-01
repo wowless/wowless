@@ -2,7 +2,7 @@ local function run(cfg)
   assert(cfg, 'missing configuration')
   assert(cfg.product, 'missing product')
   _G.loadstring = debug.newcfunction(function(...)
-    return _G.loadstring_untainted(...) -- tainted-lua rewrite hack
+    return _G.loadstring_untainted(...) -- elune rewrite hack
   end)
   local loglevel = cfg.loglevel or 0
   local time0 = os.clock()

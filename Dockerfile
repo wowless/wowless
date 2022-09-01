@@ -1,4 +1,4 @@
-FROM python:bullseye AS tainted-lua-builder
+FROM python:bullseye AS elune-builder
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
         build-essential \
@@ -9,10 +9,10 @@ RUN apt-get update && \
     apt-get clean && \
     pip3 install cmake
 WORKDIR /build
-COPY tainted-lua .
+COPY elune .
 RUN cmake --preset linux && \
     cmake --build --preset linux && \
-    cmake --install build/linux --prefix /opt/tainted-lua
+    cmake --install build/linux --prefix /opt/elune
 
 FROM python:bullseye AS wowless-builder
 RUN apt-get update && \
@@ -44,7 +44,7 @@ RUN apt-get update && \
         libzip4 && \
     apt-get clean
 WORKDIR /wowless
-COPY --from=tainted-lua-builder /opt/tainted-lua /opt/tainted-lua
+COPY --from=elune-builder /opt/elune /opt/elune
 COPY --from=wowless-builder /usr/local/lib/lua /usr/local/lib/lua
 COPY --from=wowless-builder /usr/local/share/lua /usr/local/share/lua
 COPY --from=wowless-builder /wowless/wowless wowless
@@ -52,4 +52,4 @@ COPY data data
 COPY tools tools
 COPY wowapi wowapi
 COPY wowless.lua .
-ENTRYPOINT ["/opt/tainted-lua/bin/lua5.1", "wowless.lua"]
+ENTRYPOINT ["/opt/elune/bin/lua5.1", "wowless.lua"]

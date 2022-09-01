@@ -48,7 +48,7 @@ for _, p in ipairs(productList) do
   end
 end
 
-local taintedLua = 'tainted-lua/build/linux/bin/Release/lua5.1'
+local elune = 'elune/build/linux/bin/Release/lua5.1'
 
 local pools = {
   fetch_pool = 1,
@@ -67,14 +67,14 @@ local rules = {
     pool = 'fetch_pool',
   },
   frame0 = {
-    command = taintedLua .. ' wowless.lua -p $product -e5 --frame0 > $out || true',
+    command = elune .. ' wowless.lua -p $product -e5 --frame0 > $out || true',
     pool = 'run_pool',
   },
   mkaddon = {
-    command = taintedLua .. ' tools/gentest.lua -f $type -p $product',
+    command = elune .. ' tools/gentest.lua -f $type -p $product',
   },
-  mktaintedlua = {
-    command = 'cd tainted-lua && rm -rf build && cmake --preset linux && cmake --build --preset linux',
+  mkelune = {
+    command = 'cd elune && rm -rf build && cmake --preset linux && cmake --build --preset linux',
   },
   mktestout = {
     command = 'bash -c "set -o pipefail && busted 2>&1 | tee $out"',
@@ -89,7 +89,7 @@ local rules = {
     command = 'lua tools/render.lua $in',
   },
   run = {
-    command = taintedLua .. ' wowless.lua -p $product -e5 > $out || true',
+    command = elune .. ' wowless.lua -p $product -e5 > $out || true',
     pool = 'run_pool',
   },
   stamp = {
@@ -109,9 +109,9 @@ local builds = {
     rule = 'phony',
   },
   {
-    ins = find('tainted-lua -not -path \'tainted-lua/build/*\''),
-    outs_implicit = taintedLua,
-    rule = 'mktaintedlua',
+    ins = find('elune -not -path \'elune/build/*\''),
+    outs_implicit = elune,
+    rule = 'mkelune',
   },
   {
     ins = find('data/api'),
@@ -198,14 +198,14 @@ for _, p in ipairs(productList) do
   local prefix = 'build/products/' .. p .. '/WowlessData/'
   table.insert(builds, {
     args = { product = p, ['type'] = 'toc' },
-    ins = { taintedLua, 'tools/gentest.lua' },
+    ins = { elune, 'tools/gentest.lua' },
     outs_implicit = prefix .. 'WowlessData.toc',
     rule = 'mkaddon',
   })
   for k, v in pairs(perProductAddonGeneratedTypes) do
     table.insert(builds, {
       args = { product = p, ['type'] = k },
-      ins = { taintedLua, v(p), 'tools/gentest.lua' },
+      ins = { elune, v(p), 'tools/gentest.lua' },
       outs_implicit = prefix .. k .. '.lua',
       rule = 'mkaddon',
     })
@@ -241,13 +241,13 @@ for _, p in ipairs(productList) do
   table.insert(runtimes, schemadb)
   table.insert(builds, {
     args = { product = p },
-    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua, datadb, datalua },
+    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, elune, datadb, datalua },
     outs = runout,
     rule = 'run',
   })
   table.insert(builds, {
     args = { product = p },
-    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, taintedLua, datadb, datalua },
+    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, elune, datadb, datalua },
     outs = 'out/' .. p .. '/frame0log.txt',
     outs_implicit = { 'out/' .. p .. '/frame0.yaml', 'out/' .. p .. '/frame1.yaml' },
     rule = 'frame0',
@@ -299,7 +299,7 @@ for _, p in ipairs(productList) do
 end
 
 table.insert(builds, {
-  ins = { '.busted', 'wowless/ext.so', 'build/wowless.stamp', addonGeneratedFiles, taintedLua, runtimes },
+  ins = { '.busted', 'wowless/ext.so', 'build/wowless.stamp', addonGeneratedFiles, elune, runtimes },
   outs = 'test.out',
   rule = 'mktestout',
 })

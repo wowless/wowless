@@ -2,7 +2,7 @@ return {
   _all = {
     ['auto-insulate'] = false,
     ['defer-print'] = true,
-    lua = 'tainted-lua/build/linux/bin/Release/lua5.1',
+    lua = 'elune/build/linux/bin/Release/lua5.1',
     verbose = true,
   },
 }

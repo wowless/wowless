@@ -1,3 +1,3 @@
-[submodule "tainted-lua"]
-	path = tainted-lua
-	url = https://github.com/Meorawr/tainted-lua
+[submodule "elune"]
+	path = elune
+	url = https://github.com/Meorawr/elune

@@ -205,7 +205,7 @@ local filemap = (function()
     end
   end)()
   local function style(ss)
-    -- workaround tainted-lua issue with formatting %d
+    -- workaround elune issue with formatting %d
     ss = ss:gsub('DeprecatedCurrencyFlag = [-0-9]+', 'DeprecatedCurrencyFlag = 2147483648')
     return stylua(ss)
   end

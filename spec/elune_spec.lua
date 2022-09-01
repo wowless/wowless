@@ -1,5 +1,5 @@
 describe('lua environment', function()
-  it('has tainted lua symbols', function()
+  it('has elune symbols', function()
     assert.same('function', type(debug.gettime))
     assert.same('function', type(loadstring_untainted))
   end)
