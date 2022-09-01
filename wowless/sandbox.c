@@ -27,6 +27,7 @@ static int wowless_sandbox_gc(lua_State *L) {
 static int wowless_sandbox_eval(lua_State *L) {
   lua_State *S = check_sandbox(L);
   const char *str = luaL_checkstring(L, 2);
+  lua_settop(S, 0);
   if (luaL_dostring(S, str) != 0) {
     lua_pushstring(L, "eval error");
     lua_error(L);
@@ -41,12 +42,10 @@ static int wowless_sandbox_eval(lua_State *L) {
         lua_pushstring(L, lua_tostring(S, i));
         break;
       default:
-        lua_settop(S, 0);
         lua_pushstring(L, "invalid type");
         lua_error(L);
     }
   }
-  lua_settop(S, 0);
   return n;
 }
 
