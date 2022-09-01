@@ -27,8 +27,27 @@ static int wowless_sandbox_gc(lua_State *L) {
 static int wowless_sandbox_eval(lua_State *L) {
   lua_State *S = check_sandbox(L);
   const char *str = luaL_checkstring(L, 2);
-  lua_pushnumber(L, luaL_dostring(S, str));
-  return 1;
+  if (luaL_dostring(S, str) != 0) {
+    lua_pushstring(L, "eval error");
+    lua_error(L);
+  }
+  int n = lua_gettop(S);
+  for (int i = 1; i <= n; ++i) {
+    switch (lua_type(S, i)) {
+      case LUA_TNUMBER:
+        lua_pushnumber(L, lua_tonumber(S, i));
+        break;
+      case LUA_TSTRING:
+        lua_pushstring(L, lua_tostring(S, i));
+        break;
+      default:
+        lua_settop(S, 0);
+        lua_pushstring(L, "invalid type");
+        lua_error(L);
+    }
+  }
+  lua_settop(S, 0);
+  return n;
 }
 
 static struct luaL_Reg sandbox_index[] = {
