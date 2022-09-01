@@ -8,6 +8,8 @@ read_globals = {
   'loadstring_untainted',
   'scrub',
   'securecall',
+  'secureexecuterange',
+  'seterrorhandler',
   'strcmputf8i',
   'strconcat',
   'strjoin',

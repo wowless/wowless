@@ -668,6 +668,25 @@ local syncTests = function()
       }
     end,
 
+    secureexecuterange = function()
+      return {
+        empty = function()
+          check0(secureexecuterange({}, error))
+        end,
+        nonempty = function()
+          local log = {}
+          check0(secureexecuterange({ 'foo', 'bar' }, function(...)
+            table.insert(log, '[')
+            for i = 1, select('#', ...) do
+              table.insert(log, (select(i, ...)))
+            end
+            table.insert(log, ']')
+          end, 'baz', 'quux'))
+          assertEquals('[,1,foo,baz,quux,],[,2,bar,baz,quux,]', table.concat(log, ','))
+        end,
+      }
+    end,
+
     StatusBar = function()
       local sb = CreateFrame('StatusBar')
       local states = {
