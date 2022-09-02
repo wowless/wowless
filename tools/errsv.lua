@@ -206,8 +206,13 @@ do
   local fn = 'data/products/' .. product .. '/events.yaml'
   local evs = yaml.parseFile(fn)
   for k, v in pairs(data.generated.events or {}) do
-    assert(v:match('Attempt to register unknown event'))
-    evs[k] = nil
+    if v:match('Frame:RegisterEvent%(%): Attempt to register unknown event ".+": want true, got false$') then
+      evs[k] = nil
+    elseif v:match(': want false, got true$') then
+      evs[k] = true
+    else
+      error('unexpected pattern for ' .. k)
+    end
   end
   write(fn, yaml.pprint(evs))
 end
