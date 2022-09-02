@@ -80,5 +80,13 @@ methods:
     status: unimplemented
   SetTargetKey:
     status: unimplemented
+  SetTargetName:
+    products:
+    - wow_beta
+    status: unimplemented
+  SetTargetParent:
+    products:
+    - wow_beta
+    status: unimplemented
   Stop:
     status: unimplemented
