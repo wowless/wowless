@@ -12,7 +12,6 @@ AcceptResurrect: AcceptResurrect
 AcceptSockets: AcceptSockets
 AcceptSpellConfirmationPrompt: AcceptSpellConfirmationPrompt
 AcceptTrade: AcceptTrade
-AcceptXPLoss: AcceptXPLoss
 AcknowledgeAutoAcceptQuest: AcknowledgeAutoAcceptQuest
 AcknowledgeSurvey: AcknowledgeSurvey
 acos: acos
@@ -2894,7 +2893,6 @@ CanSummonFriend: CanSummonFriend
 CanSurrenderArena: CanSurrenderArena
 CanSwitchVehicleSeat: CanSwitchVehicleSeat
 CanSwitchVehicleSeats: CanSwitchVehicleSeats
-CanTrackBattlePets: CanTrackBattlePets
 CanUpgradeExpansion: CanUpgradeExpansion
 CanUseVoidStorage: CanUseVoidStorage
 CanViewGuildRecipes: CanViewGuildRecipes
@@ -2918,15 +2916,11 @@ ChannelSetPartyMemberSilent: ChannelSetPartyMemberSilent
 ChannelToggleAnnouncements: ChannelToggleAnnouncements
 ChannelUnban: ChannelUnban
 ChannelUnmoderator: ChannelUnmoderator
-CheckBinderDist: CheckBinderDist
 CheckInbox: CheckInbox
 CheckInteractDistance: CheckInteractDistance
-CheckSpiritHealerDist: CheckSpiritHealerDist
-CheckTalentMasterDist: CheckTalentMasterDist
 ClearAchievementComparisonUnit: ClearAchievementComparisonUnit
 ClearAchievementSearchString: ClearAchievementSearchString
 ClearAllLFGDungeons: ClearAllLFGDungeons
-ClearAllTracking: ClearAllTracking
 ClearAutoAcceptQuestSound: ClearAutoAcceptQuestSound
 ClearBattlemaster: ClearBattlemaster
 ClearCursor: ClearCursor
@@ -2968,7 +2962,6 @@ CloseTabardCreation: CloseTabardCreation
 CloseTaxiMap: CloseTaxiMap
 CloseTrade: CloseTrade
 CloseTrainer: CloseTrainer
-CloseVoidStorageFrame: CloseVoidStorageFrame
 CollapseAllFactionHeaders: CollapseAllFactionHeaders
 CollapseFactionHeader: CollapseFactionHeader
 CollapseGuildTradeSkillHeader: CollapseGuildTradeSkillHeader
@@ -2991,7 +2984,6 @@ CompleteLFGReadyCheck: CompleteLFGReadyCheck
 CompleteLFGRoleCheck: CompleteLFGRoleCheck
 CompleteQuest: CompleteQuest
 ConfirmAcceptQuest: ConfirmAcceptQuest
-ConfirmBinder: ConfirmBinder
 ConfirmBindOnUse: ConfirmBindOnUse
 ConfirmBNRequestInviteFriend: ConfirmBNRequestInviteFriend
 ConfirmLootRoll: ConfirmLootRoll
@@ -3207,9 +3199,7 @@ GetAvoidance: GetAvoidance
 GetBackgroundLoadingStatus: GetBackgroundLoadingStatus
 GetBackpackAutosortDisabled: GetBackpackAutosortDisabled
 GetBagName: GetBagName
-GetBagSlotFlag: GetBagSlotFlag
 GetBankAutosortDisabled: GetBankAutosortDisabled
-GetBankBagSlotFlag: GetBankBagSlotFlag
 GetBankSlotCost: GetBankSlotCost
 GetBattlefieldArenaFaction: GetBattlefieldArenaFaction
 GetBattlefieldEstimatedWaitTime: GetBattlefieldEstimatedWaitTime
@@ -3300,7 +3290,6 @@ GetCurrentKeyBoardFocus: GetCurrentKeyBoardFocus
 GetCurrentLevelFeatures: GetCurrentLevelFeatures
 GetCurrentRegion: GetCurrentRegion
 GetCurrentRegionName: GetCurrentRegionName
-GetCurrentResolution: GetCurrentResolution
 GetCurrentScaledResolution: GetCurrentScaledResolution
 GetCurrentTitle: GetCurrentTitle
 GetCursorDelta: GetCursorDelta
@@ -3308,15 +3297,10 @@ GetCursorInfo: GetCursorInfo
 GetCursorMoney: GetCursorMoney
 GetCursorPosition: GetCursorPosition
 GetCVarInfo: GetCVarInfo
-GetCVarSettingValidity: GetCVarSettingValidity
 GetDailyQuestsCompleted: GetDailyQuestsCompleted
 GetDeathRecapLink: GetDeathRecapLink
-GetDefaultGraphicsQuality: GetDefaultGraphicsQuality
 GetDefaultLanguage: GetDefaultLanguage
 GetDefaultScale: GetDefaultScale
-GetDefaultVideoOption: GetDefaultVideoOption
-GetDefaultVideoOptions: GetDefaultVideoOptions
-GetDefaultVideoQualityOption: GetDefaultVideoQualityOption
 GetDemotionRank: GetDemotionRank
 GetDetailedItemLevelInfo: GetDetailedItemLevelInfo
 GetDifficultyInfo: GetDifficultyInfo
@@ -3358,15 +3342,13 @@ GetFonts: GetFonts
 GetFrameCPUUsage: GetFrameCPUUsage
 GetFramerate: GetFramerate
 GetFramesRegisteredForEvent: GetFramesRegisteredForEvent
-GetFriendshipReputation: GetFriendshipReputation
-GetFriendshipReputationRanks: GetFriendshipReputationRanks
 GetFunctionCPUUsage: GetFunctionCPUUsage
 GetGameMessageInfo: GetGameMessageInfo
 GetGameTime: GetGameTime
 GetGMStatus: GetGMStatus
 GetGMTicket: GetGMTicket
 GetGraphicsAPIs: GetGraphicsAPIs
-GetGraphicsDropdownIndexByMasterIndex: GetGraphicsDropdownIndexByMasterIndex
+GetGraphicsCVarValueForQualityLevel: GetGraphicsCVarValueForQualityLevel
 GetGreetingText: GetGreetingText
 GetGroupMemberCounts: GetGroupMemberCounts
 GetGuildAchievementMemberInfo: GetGuildAchievementMemberInfo
@@ -3656,7 +3638,6 @@ GetNumQuestLogRewardFactions: GetNumQuestLogRewardFactions
 GetNumQuestLogRewards: GetNumQuestLogRewards
 GetNumQuestLogRewardSpells: GetNumQuestLogRewardSpells
 GetNumQuestLogTasks: GetNumQuestLogTasks
-GetNumQuestPOIWorldEffects: GetNumQuestPOIWorldEffects
 GetNumQuestRewards: GetNumQuestRewards
 GetNumRaidProfiles: GetNumRaidProfiles
 GetNumRandomDungeons: GetNumRandomDungeons
@@ -3677,7 +3658,6 @@ GetNumSpellTabs: GetNumSpellTabs
 GetNumSubgroupMembers: GetNumSubgroupMembers
 GetNumTitles: GetNumTitles
 GetNumTrackedAchievements: GetNumTrackedAchievements
-GetNumTrackingTypes: GetNumTrackingTypes
 GetNumTrainerServices: GetNumTrainerServices
 GetNumTreasurePickerItems: GetNumTreasurePickerItems
 GetNumUnspentPvpTalents: GetNumUnspentPvpTalents
@@ -3686,7 +3666,6 @@ GetNumVoidTransferDeposit: GetNumVoidTransferDeposit
 GetNumVoidTransferWithdrawal: GetNumVoidTransferWithdrawal
 GetNumWarGameTypes: GetNumWarGameTypes
 GetNumWorldPVPAreas: GetNumWorldPVPAreas
-GetObjectIconTextureCoords: GetObjectIconTextureCoords
 GetObjectiveText: GetObjectiveText
 GetOptOutOfLoot: GetOptOutOfLoot
 GetOSLocale: GetOSLocale
@@ -3716,12 +3695,10 @@ GetPetSpellBonusDamage: GetPetSpellBonusDamage
 GetPetTalentTree: GetPetTalentTree
 GetPetTimeRemaining: GetPetTimeRemaining
 GetPhysicalScreenSize: GetPhysicalScreenSize
-GetPlayerAuraBySpellID: GetPlayerAuraBySpellID
 GetPlayerFacing: GetPlayerFacing
 GetPlayerInfoByGUID: GetPlayerInfoByGUID
 GetPlayerTradeCurrency: GetPlayerTradeCurrency
 GetPlayerTradeMoney: GetPlayerTradeMoney
-GetPOITextureCoords: GetPOITextureCoords
 GetPossessInfo: GetPossessInfo
 GetPowerRegen: GetPowerRegen
 GetPowerRegenForPowerType: GetPowerRegenForPowerType
@@ -3846,7 +3823,6 @@ GetScenariosChoiceOrder: GetScenariosChoiceOrder
 GetSchoolString: GetSchoolString
 GetScreenDPIScale: GetScreenDPIScale
 GetScreenHeight: GetScreenHeight
-GetScreenResolutions: GetScreenResolutions
 GetScreenWidth: GetScreenWidth
 GetScriptCPUUsage: GetScriptCPUUsage
 GetSecondsUntilParentalControlsKick: GetSecondsUntilParentalControlsKick
@@ -3946,13 +3922,11 @@ GetTimePreciseSec: GetTimePreciseSec
 GetTimeToWellRested: GetTimeToWellRested
 GetTitleName: GetTitleName
 GetTitleText: GetTitleText
-GetToolTipInfo: GetToolTipInfo
 GetTotalAchievementPoints: GetTotalAchievementPoints
 GetTotemCannotDismiss: GetTotemCannotDismiss
 GetTotemInfo: GetTotemInfo
 GetTotemTimeLeft: GetTotemTimeLeft
 GetTrackedAchievements: GetTrackedAchievements
-GetTrackingInfo: GetTrackingInfo
 GetTradePlayerItemInfo: GetTradePlayerItemInfo
 GetTradePlayerItemLink: GetTradePlayerItemLink
 GetTradeTargetItemInfo: GetTradeTargetItemInfo
@@ -3991,7 +3965,6 @@ GetVehicleUIIndicator: GetVehicleUIIndicator
 GetVehicleUIIndicatorSeat: GetVehicleUIIndicatorSeat
 GetVersatilityBonus: GetVersatilityBonus
 GetVideoCaps: GetVideoCaps
-GetVideoOptions: GetVideoOptions
 GetVoidItemHyperlinkString: GetVoidItemHyperlinkString
 GetVoidItemInfo: GetVoidItemInfo
 GetVoidStorageSlotPageIndex: GetVoidStorageSlotPageIndex
@@ -4094,7 +4067,6 @@ InGuildParty: InGuildParty
 InitiateRolePoll: InitiateRolePoll
 InitiateTrade: InitiateTrade
 InRepairMode: InRepairMode
-InteractUnit: InteractUnit
 ipairs: ipairs
 Is64BitClient: Is64BitClient
 IsAccountSecured: IsAccountSecured
@@ -4119,8 +4091,6 @@ IsAttackSpell: IsAttackSpell
 IsAutoRepeatAction: IsAutoRepeatAction
 IsAutoRepeatSpell: IsAutoRepeatSpell
 IsAvailableQuestTrivial: IsAvailableQuestTrivial
-IsBagSlotFlagEnabledOnOtherBags: IsBagSlotFlagEnabledOnOtherBags
-IsBagSlotFlagEnabledOnOtherBankBags: IsBagSlotFlagEnabledOnOtherBankBags
 IsBattlePayItem: IsBattlePayItem
 IsBindingForGamePad: IsBindingForGamePad
 IsBNLogin: IsBNLogin
@@ -4168,6 +4138,8 @@ IsFlying: IsFlying
 IsGamePadCursorControlEnabled: IsGamePadCursorControlEnabled
 IsGamePadFreelookEnabled: IsGamePadFreelookEnabled
 IsGMClient: IsGMClient
+IsGraphicsCVarValueSupported: IsGraphicsCVarValueSupported
+IsGraphicsSettingValueSupported: IsGraphicsSettingValueSupported
 IsGUIDInGroup: IsGUIDInGroup
 IsGuildLeader: IsGuildLeader
 IsGuildMember: IsGuildMember
@@ -4235,6 +4207,7 @@ IsPlayerMoving: IsPlayerMoving
 IsPlayerNeutral: IsPlayerNeutral
 IsPlayerSpell: IsPlayerSpell
 IsPossessBarVisible: IsPossessBarVisible
+IsPressHoldReleaseSpell: IsPressHoldReleaseSpell
 IsPublicBuild: IsPublicBuild
 IsPvpTalentSpell: IsPvpTalentSpell
 IsPVPTimerRunning: IsPVPTimerRunning
@@ -4248,7 +4221,6 @@ IsRangedWeapon: IsRangedWeapon
 IsReagentBankUnlocked: IsReagentBankUnlocked
 IsRecognizedName: IsRecognizedName
 IsRecruitAFriendLinked: IsRecruitAFriendLinked
-IsReplacingUnit: IsReplacingUnit
 IsResting: IsResting
 IsRestrictedAccount: IsRestrictedAccount
 IsRightAltKeyDown: IsRightAltKeyDown
@@ -4260,6 +4232,7 @@ issecurevariable: issecurevariable
 IsSelectedSpellBookItem: IsSelectedSpellBookItem
 IsServerControlledBackfill: IsServerControlledBackfill
 IsShiftKeyDown: IsShiftKeyDown
+IsSpecializationActivateSpell: IsSpecializationActivateSpell
 IsSpellClassOrSpec: IsSpellClassOrSpec
 IsSpellInRange: IsSpellInRange
 IsSpellKnown: IsSpellKnown
@@ -4274,12 +4247,11 @@ IsSubmerged: IsSubmerged
 IsSubZonePVPPOI: IsSubZonePVPPOI
 IsSwimming: IsSwimming
 IsTalentSpell: IsTalentSpell
+IsTargetLoose: IsTargetLoose
 IsTestBuild: IsTestBuild
 IsThreatWarningEnabled: IsThreatWarningEnabled
 IsTitleKnown: IsTitleKnown
 IsTrackedAchievement: IsTrackedAchievement
-IsTrackingBattlePets: IsTrackingBattlePets
-IsTrackingHiddenQuests: IsTrackingHiddenQuests
 IsTradeskillTrainer: IsTradeskillTrainer
 IsTrialAccount: IsTrialAccount
 IsTutorialFlagged: IsTutorialFlagged
@@ -4314,6 +4286,7 @@ JoinChannelByName: JoinChannelByName
 JoinLFG: JoinLFG
 JoinPermanentChannel: JoinPermanentChannel
 JoinRatedBattlefield: JoinRatedBattlefield
+JoinRatedSoloShuffle: JoinRatedSoloShuffle
 JoinSingleLFG: JoinSingleLFG
 JoinSkirmish: JoinSkirmish
 JoinTemporaryChannel: JoinTemporaryChannel
@@ -4370,16 +4343,6 @@ Logout: Logout
 LootMoneyNotify: LootMoneyNotify
 LootSlot: LootSlot
 LootSlotHasItem: LootSlotHasItem
-MacOptions_AreOSShortcutsDisabled: MacOptions_AreOSShortcutsDisabled
-MacOptions_GetGameBundleName: MacOptions_GetGameBundleName
-MacOptions_HasNewStyleInputMonitoring: MacOptions_HasNewStyleInputMonitoring
-MacOptions_IsInputMonitoringEnabled: MacOptions_IsInputMonitoringEnabled
-MacOptions_IsMicrophoneEnabled: MacOptions_IsMicrophoneEnabled
-MacOptions_IsUniversalAccessEnabled: MacOptions_IsUniversalAccessEnabled
-MacOptions_OpenInputMonitoring: MacOptions_OpenInputMonitoring
-MacOptions_OpenMicrophoneRequestDialogue: MacOptions_OpenMicrophoneRequestDialogue
-MacOptions_OpenUniversalAccess: MacOptions_OpenUniversalAccess
-MacOptions_SetOSShortcutsDisabled: MacOptions_SetOSShortcutsDisabled
 math.abs: math.abs
 math.acos: math.acos
 math.asin: math.asin
@@ -4552,6 +4515,7 @@ RedockChatWindows: RedockChatWindows
 RefreshLFGList: RefreshLFGList
 RegisterStaticConstants: RegisterStaticConstants
 RejectProposal: RejectProposal
+ReleaseAction: ReleaseAction
 RemoveAutoQuestPopUp: RemoveAutoQuestPopUp
 RemoveChatWindowChannel: RemoveChatWindowChannel
 RemoveChatWindowMessages: RemoveChatWindowMessages
@@ -4560,7 +4524,6 @@ RemovePvpTalent: RemovePvpTalent
 RemoveTalent: RemoveTalent
 RemoveTrackedAchievement: RemoveTrackedAchievement
 RenamePetition: RenamePetition
-ReopenInteraction: ReopenInteraction
 RepairAllItems: RepairAllItems
 ReplaceEnchant: ReplaceEnchant
 ReplaceGuildMaster: ReplaceGuildMaster
@@ -4651,9 +4614,7 @@ SetAllowLowLevelRaid: SetAllowLowLevelRaid
 SetAutoDeclineGuildInvites: SetAutoDeclineGuildInvites
 SetBackpackAutosortDisabled: SetBackpackAutosortDisabled
 SetBagPortraitTexture: SetBagPortraitTexture
-SetBagSlotFlag: SetBagSlotFlag
 SetBankAutosortDisabled: SetBankAutosortDisabled
-SetBankBagSlotFlag: SetBankBagSlotFlag
 SetBarSlotFromIntro: SetBarSlotFromIntro
 SetBattlefieldScoreFaction: SetBattlefieldScoreFaction
 SetBinding: SetBinding
@@ -4681,7 +4642,6 @@ SetCurrentGuildBankTab: SetCurrentGuildBankTab
 SetCurrentTitle: SetCurrentTitle
 SetCursor: SetCursor
 SetCursorVirtualItem: SetCursorVirtualItem
-SetDefaultVideoOptions: SetDefaultVideoOptions
 SetDungeonDifficultyID: SetDungeonDifficultyID
 seterrorhandler: seterrorhandler
 SetEuropeanNumbers: SetEuropeanNumbers
@@ -4705,7 +4665,6 @@ SetGuildRosterShowOffline: SetGuildRosterShowOffline
 SetGuildTradeSkillCategoryFilter: SetGuildTradeSkillCategoryFilter
 SetGuildTradeSkillItemNameFilter: SetGuildTradeSkillItemNameFilter
 SetInsertItemsLeftToRight: SetInsertItemsLeftToRight
-SetInventoryPortraitTexture: SetInventoryPortraitTexture
 SetInWorldUIVisibility: SetInWorldUIVisibility
 SetItemSearch: SetItemSearch
 SetLegacyRaidDifficultyID: SetLegacyRaidDifficultyID
@@ -4750,7 +4709,6 @@ SetRaidSubgroup: SetRaidSubgroup
 SetRaidTarget: SetRaidTarget
 SetRaidTargetProtected: SetRaidTargetProtected
 SetSavedInstanceExtend: SetSavedInstanceExtend
-SetScreenResolution: SetScreenResolution
 SetSelectedArtifact: SetSelectedArtifact
 SetSelectedDisplayChannel: SetSelectedDisplayChannel
 SetSelectedFaction: SetSelectedFaction
@@ -4764,12 +4722,12 @@ SetSpecialization: SetSpecialization
 SetSpellbookPetAction: SetSpellbookPetAction
 SetTaxiBenchmarkMode: SetTaxiBenchmarkMode
 SetTaxiMap: SetTaxiMap
-SetTracking: SetTracking
 SetTradeCurrency: SetTradeCurrency
 SetTradeMoney: SetTradeMoney
 SetTrainerServiceTypeFilter: SetTrainerServiceTypeFilter
 SetTurnEnabled: SetTurnEnabled
 SetUIVisibility: SetUIVisibility
+SetUnitCursorTexture: SetUnitCursorTexture
 SetupFullscreenScale: SetupFullscreenScale
 SetView: SetView
 SetWatchedFactionIndex: SetWatchedFactionIndex
@@ -4779,7 +4737,6 @@ ShowAccountAchievements: ShowAccountAchievements
 ShowBossFrameWhenUninteractable: ShowBossFrameWhenUninteractable
 ShowBuybackSellCursor: ShowBuybackSellCursor
 ShowContainerSellCursor: ShowContainerSellCursor
-ShowInventorySellCursor: ShowInventorySellCursor
 ShowQuestComplete: ShowQuestComplete
 ShowQuestOffer: ShowQuestOffer
 ShowRepairCursor: ShowRepairCursor
@@ -4922,6 +4879,7 @@ TargetNearestRaidMember: TargetNearestRaidMember
 TargetPriorityHighlightEnd: TargetPriorityHighlightEnd
 TargetPriorityHighlightStart: TargetPriorityHighlightStart
 TargetSpellReplacesBonusTree: TargetSpellReplacesBonusTree
+TargetToggle: TargetToggle
 TargetTotem: TargetTotem
 TargetUnit: TargetUnit
 TaxiGetDestX: TaxiGetDestX
@@ -4993,7 +4951,6 @@ UnitClassification: UnitClassification
 UnitControllingVehicle: UnitControllingVehicle
 UnitCreatureFamily: UnitCreatureFamily
 UnitCreatureType: UnitCreatureType
-UnitCursor: UnitCursor
 UnitDamage: UnitDamage
 UnitDebuff: UnitDebuff
 UnitDetailedThreatSituation: UnitDetailedThreatSituation
@@ -5044,10 +5001,12 @@ UnitIsDND: UnitIsDND
 UnitIsEnemy: UnitIsEnemy
 UnitIsFeignDeath: UnitIsFeignDeath
 UnitIsFriend: UnitIsFriend
+UnitIsGameObject: UnitIsGameObject
 UnitIsGhost: UnitIsGhost
 UnitIsGroupAssistant: UnitIsGroupAssistant
 UnitIsGroupLeader: UnitIsGroupLeader
 UnitIsInMyGuild: UnitIsInMyGuild
+UnitIsInteractable: UnitIsInteractable
 UnitIsMercenary: UnitIsMercenary
 UnitIsOtherPlayersBattlePet: UnitIsOtherPlayersBattlePet
 UnitIsOtherPlayersPet: UnitIsOtherPlayersPet
@@ -5153,4 +5112,5 @@ ViewGuildRecipes: ViewGuildRecipes
 WarGameRespond: WarGameRespond
 wipe: wipe
 WithdrawGuildBankMoney: WithdrawGuildBankMoney
+WorldLootObjectExists: WorldLootObjectExists
 xpcall: xpcall
