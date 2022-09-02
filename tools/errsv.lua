@@ -49,11 +49,11 @@ local getPatternValue = (function()
       value = tostring,
     },
     {
-      pattern = ': missing key ".+" with value (%d+)$',
+      pattern = ': missing key ".+" with value (-?%d+)$',
       value = mustnumber,
     },
     {
-      pattern = ': missing key ".+" with value table: 0x[0-9a-f]+$',
+      pattern = ': missing key ".+" with value table: [0-9a-fA-Fx]+$',
       value = constant({}),
     },
   }
