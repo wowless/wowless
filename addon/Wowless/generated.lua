@@ -4,7 +4,6 @@ local assertEquals = _G.assertEquals
 local capsuleEnv = _G.SimpleCheckout and getfenv(_G.SimpleCheckout.OnLoad) or {}
 
 assert(_G.WowlessData, 'missing WowlessData')
-local runtimeProduct = assert(_G.WowlessData.product, 'missing product')
 
 local function tget(t, s)
   local dot = s:find('%.')
@@ -269,12 +268,6 @@ function G.GeneratedTests()
     return tests
   end
 
-  local function productTest()
-    if _G.__wowless then
-      assertEquals(_G.__wowless.product, runtimeProduct)
-    end
-  end
-
   local function uiobjects()
     local function assertCreateFrame(ty)
       local function process(...)
@@ -481,7 +474,6 @@ function G.GeneratedTests()
     events = events,
     globalApis = globalApis,
     globals = globals,
-    product = productTest,
     uiobjects = uiobjects,
   }
 end
