@@ -4,7 +4,10 @@ Constants:
     DEFAULT_CALENDAR_GET_EVENT_TYPE: 0
   Callings:
     MaxCallings: 3
-  CharCustomizationConstants: {}
+  CharCustomizationConstants:
+    CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_FIRST: 5
+    CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_LAST: 8
+    NUM_CUSTOM_DISPLAY: 4
   CurrencyConsts:
     ACCOUNT_WIDE_HONOR_CURRENCY_ID: 1585
     ACCOUNT_WIDE_HONOR_LEVEL_CURRENCY_ID: 1586
@@ -900,8 +903,23 @@ Enum:
     MaxValue: 1
     MinValue: 1
     NumValues: 1
-  CharCustomizationType: {}
-  CharCustomizationTypeMeta: {}
+  CharCustomizationType:
+    CustomOptionFacewear: 7
+    CustomOptionHorn: 6
+    CustomOptionTattoo: 5
+    CustomOptionTattooColor: 8
+    Face: 1
+    Facepaint: 10
+    FacepaintColor: 11
+    FacialHair: 4
+    Hair: 2
+    HairColor: 3
+    Outfit: 9
+    Skin: 0
+  CharCustomizationTypeMeta:
+    MaxValue: 11
+    MinValue: 0
+    NumValues: 12
   ChatChannelRuleset:
     ChromieTimeBuringCrusade: 4
     ChromieTimeCataclysm: 3
@@ -1704,8 +1722,15 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
-  EditModeChatFrameSetting: {}
-  EditModeChatFrameSettingMeta: {}
+  EditModeChatFrameSetting:
+    HeightHundreds: 2
+    HeightTensAndOnes: 3
+    WidthHundreds: 0
+    WidthTensAndOnes: 1
+  EditModeChatFrameSettingMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   EditModeLayoutType:
     Account: 1
     Character: 2
@@ -2715,8 +2740,15 @@ Enum:
     MaxValue: 23
     MinValue: 0
     NumValues: 24
-  ItemSoundType: {}
-  ItemSoundTypeMeta: {}
+  ItemSoundType:
+    Close: 3
+    Drop: 1
+    Pickup: 0
+    Use: 2
+  ItemSoundTypeMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   ItemSubclassDisplay:
     HideSubclassInAuction: 2
     HideSubclassInTooltips: 1
@@ -3562,8 +3594,13 @@ Enum:
     Mining: 6
     Skinning: 11
     Tailoring: 7
-  ProfessionActionType: {}
-  ProfessionActionTypeMeta: {}
+  ProfessionActionType:
+    Craft: 0
+    Gather: 1
+  ProfessionActionTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   ProfessionEffect:
     AccumulateRanksByLabel: 25
     DecreaseDifficulty: 22
@@ -4356,8 +4393,12 @@ Enum:
     MaxValue: 1
     MinValue: -1
     NumValues: 3
-  TraitSystemFlag: {}
-  TraitSystemFlagMeta: {}
+  TraitSystemFlag:
+    AllowMultipleLoadoutsPerTree: 1
+  TraitSystemFlagMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   TraitTreeFlag:
     CannotRefund: 1
     HideSingleRankNumbers: 2
