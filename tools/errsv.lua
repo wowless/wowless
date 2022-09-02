@@ -93,8 +93,6 @@ local function applyPatterns(tx, ty)
   end
 end
 
-local allProducts = require('wowless.util').productList()
-
 if data.generated.cvars then
   local cvarsfile = 'data/products/' .. product .. '/cvars.yaml'
   local cvars = yaml.parseFile(cvarsfile)
@@ -107,24 +105,6 @@ if data.generated.globals then
   local g = yaml.parseFile(gf)
   applyPatterns(g, data.generated.globals or {})
   write(gf, yaml.pprint(g))
-end
-
-local function addProduct(products)
-  local newproducts = {}
-  local match = false
-  for _, p in ipairs(products or {}) do
-    table.insert(newproducts, p)
-    match = match or p == product
-  end
-  if not match then
-    table.insert(newproducts, product)
-  end
-  if #newproducts == #allProducts then
-    return nil
-  else
-    table.sort(newproducts)
-    return newproducts
-  end
 end
 
 local function ensureExists(k)
@@ -248,18 +228,14 @@ end
 
 for k, v in pairs(data.generated.uiobjects or {}) do
   if v.methods then
-    local uf = 'data/uiobjects/' .. k .. '/' .. k .. '.yaml'
-    local u = yaml.parseFile(uf)
     for mk, mv in pairs(v.methods) do
       if mv:match(': missing$') or mv:match(': product disabled: want "nil", got "function"') then
-        local m = u.methods[mk]
-        if not m then
-          m = { products = {}, status = 'unimplemented' }
-          u.methods[mk] = m
-        end
-        m.products = addProduct(m.products)
+        print('add ' .. k .. '.' .. mk)
+      elseif mv:match(': want "function", got "nil"$') then
+        print('delete ' .. k .. '.' .. mk)
+      else
+        error('weird error for ' .. k .. '.' .. mk)
       end
     end
-    write(uf, yaml.pprint(u))
   end
 end
