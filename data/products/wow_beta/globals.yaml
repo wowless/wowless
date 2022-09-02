@@ -70,6 +70,7 @@ Constants:
     COMMIT_COMBAT_TRAIT_CONFIG_CHANGES_SPELL_ID: 384255
     INSPECT_TRAIT_CONFIG_ID: -1
     MAX_COMBAT_TRAIT_CONFIGS: 10
+    STARTER_BUILD_TRAIT_CONFIG_ID: -2
   Transmog:
     MainHandTransmogIsIndividualWeapon: -1
     MainHandTransmogIsPairedWeapon: 0
@@ -1514,69 +1515,71 @@ Enum:
     NumValues: 4
   Cursormode:
     AttackCursor: 4
-    AttackErrorCursor: 34
+    AttackErrorCursor: 35
     BuyCursor: 3
-    BuyErrorCursor: 33
+    BuyErrorCursor: 34
     CampaignQuestCursor: 23
-    CampaignQuestErrorCursor: 53
+    CampaignQuestErrorCursor: 54
+    CampaignQuestTurninCursor: 24
+    CampaignQuestTurninErrorCursor: 55
     CastCursor: 2
-    CastErrorCursor: 32
-    CustomCursor: 59
+    CastErrorCursor: 33
+    CustomCursor: 61
     GatherCursor: 13
-    GatherErrorCursor: 43
+    GatherErrorCursor: 44
     InnkeeperCursor: 22
-    InnkeeperErrorCursor: 52
+    InnkeeperErrorCursor: 53
     InspectCursor: 7
-    InspectErrorCursor: 37
+    InspectErrorCursor: 38
     InteractCursor: 5
-    InteractErrorCursor: 35
+    InteractErrorCursor: 36
     ItemCursor: 19
-    ItemErrorCursor: 49
+    ItemErrorCursor: 50
     LockCursor: 14
-    LockErrorCursor: 44
+    LockErrorCursor: 45
     LootAllCursor: 16
-    LootAllErrorCursor: 46
+    LootAllErrorCursor: 47
     MailCursor: 15
-    MailErrorCursor: 45
-    MapPinCursor: 30
-    MapPinErrorCursor: 58
+    MailErrorCursor: 46
+    MapPinCursor: 31
+    MapPinErrorCursor: 60
     MineCursor: 11
-    MineErrorCursor: 41
+    MineErrorCursor: 42
     NoCursor: 0
     PickupCursor: 8
-    PickupErrorCursor: 38
+    PickupErrorCursor: 39
     PointCursor: 1
-    PointErrorCursor: 31
-    QuestCursor: 24
-    QuestErrorCursor: 54
-    QuestRepeatableCursor: 25
-    QuestRepeatableErrorCursor: 55
-    QuestTurninCursor: 26
-    QuestTurninErrorCursor: 56
+    PointErrorCursor: 32
+    QuestCursor: 25
+    QuestErrorCursor: 56
+    QuestRepeatableCursor: 26
+    QuestRepeatableErrorCursor: 57
+    QuestTurninCursor: 27
+    QuestTurninErrorCursor: 58
     RepairCursor: 17
-    RepairErrorCursor: 47
+    RepairErrorCursor: 48
     RepairnpcCursor: 18
-    RepairnpcErrorCursor: 48
+    RepairnpcErrorCursor: 49
     SkinAllianceCursor: 21
-    SkinAllianceErrorCursor: 51
+    SkinAllianceErrorCursor: 52
     SkinCursor: 12
-    SkinErrorCursor: 42
+    SkinErrorCursor: 43
     SkinHordeCursor: 20
-    SkinHordeErrorCursor: 50
+    SkinHordeErrorCursor: 51
     SpeakCursor: 6
-    SpeakErrorCursor: 36
+    SpeakErrorCursor: 37
     TaxiCursor: 9
-    TaxiErrorCursor: 39
+    TaxiErrorCursor: 40
     TrainerCursor: 10
-    TrainerErrorCursor: 40
-    UIMoveCursor: 28
-    UIResizeCursor: 29
-    VehicleCursor: 27
-    VehicleErrorCursor: 57
+    TrainerErrorCursor: 41
+    UIMoveCursor: 29
+    UIResizeCursor: 30
+    VehicleCursor: 28
+    VehicleErrorCursor: 59
   CursormodeMeta:
-    MaxValue: 59
+    MaxValue: 61
     MinValue: 0
-    NumValues: 60
+    NumValues: 62
   CursorStyle:
     Crosshair: 1
     Mouse: 0
@@ -1663,11 +1666,13 @@ Enum:
     ShowPossessActionBar: 6
     ShowRaidFrames: 13
     ShowStanceBar: 4
+    ShowTalkingHeadFrame: 14
     ShowTargetAndFocus: 3
+    ShowVehicleLeaveButton: 15
   EditModeAccountSettingMeta:
-    MaxValue: 13
+    MaxValue: 15
     MinValue: 0
-    NumValues: 14
+    NumValues: 16
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
     HideBarArt: 6
@@ -1723,6 +1728,15 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  EditModeChatFrameSetting:
+    HeightHundreds: 2
+    HeightTensAndOnes: 3
+    WidthHundreds: 0
+    WidthTensAndOnes: 1
+  EditModeChatFrameSettingMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   EditModeLayoutType:
     Account: 1
     Character: 2
@@ -1756,14 +1770,17 @@ Enum:
     ActionBar: 0
     AuraFrame: 6
     CastBar: 1
+    ChatFrame: 8
     EncounterBar: 4
     ExtraAbilities: 5
     Minimap: 2
+    TalkingHeadFrame: 7
     UnitFrame: 3
+    VehicleLeaveButton: 9
   EditModeSystemMeta:
-    MaxValue: 6
+    MaxValue: 9
     MinValue: 0
-    NumValues: 7
+    NumValues: 10
   EditModeUnitFrameSetting:
     BuffsOnTop: 2
     CastBarUnderneath: 1
@@ -3560,6 +3577,13 @@ Enum:
     Mining: 6
     Skinning: 11
     Tailoring: 7
+  ProfessionActionType:
+    Craft: 0
+    Gather: 1
+  ProfessionActionTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   ProfessionEffect:
     AccumulateRanksByLabel: 25
     DecreaseDifficulty: 22
@@ -4240,11 +4264,12 @@ Enum:
     NumValues: 3
   TraitCombatConfigFlags:
     ActiveForSpec: 1
+    SharedActionBars: 4
     StarterBuild: 2
   TraitCombatConfigFlagsMeta:
-    MaxValue: 2
+    MaxValue: 4
     MinValue: 1
-    NumValues: 2
+    NumValues: 3
   TraitCondFlag:
     IsAlwaysMet: 2
     IsGate: 1
@@ -4368,6 +4393,12 @@ Enum:
     MaxValue: 1
     MinValue: -1
     NumValues: 3
+  TraitSystemFlag:
+    AllowMultipleLoadoutsPerTree: 1
+  TraitSystemFlagMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   TraitTreeFlag:
     CannotRefund: 1
     HideSingleRankNumbers: 2
