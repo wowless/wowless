@@ -46,7 +46,19 @@ methods:
     status: unimplemented
   ClearAllPoints:
     status: implemented
+  ClearPoint:
+    products:
+    - wow_beta
+    status: unimplemented
   ClearPointByName:
+    products:
+    - wow
+    - wowt
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: unimplemented
   ClearPointsOffset:
     status: unimplemented
@@ -159,6 +171,10 @@ methods:
     fields:
     - name: isIgnoringParentScale
     status: setter
+  SetPassThroughButtons:
+    products:
+    - wow_beta
+    status: unimplemented
   SetPoint:
     status: implemented
   SetScale:

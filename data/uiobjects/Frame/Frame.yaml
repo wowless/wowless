@@ -109,12 +109,28 @@ methods:
   GetClampRectInsets:
     status: unimplemented
   GetDepth:
+    products:
+    - wow
+    - wowt
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: unimplemented
   GetDontSavePosition:
     status: unimplemented
   GetEffectiveAlpha:
     status: implemented
   GetEffectiveDepth:
+    products:
+    - wow
+    - wowt
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: unimplemented
   GetEffectivelyFlattensRenderLayers:
     status: unimplemented
@@ -142,11 +158,27 @@ methods:
     fields:
     - name: maxResizeWidth
     - name: maxResizeHeight
+    products:
+    - wow
+    - wowt
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: getter
   GetMinResize:
     fields:
     - name: minResizeWidth
     - name: minResizeHeight
+    products:
+    - wow
+    - wowt
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: getter
   GetNumChildren:
     status: implemented
@@ -158,6 +190,10 @@ methods:
     status: getter
   GetRegions:
     status: implemented
+  GetResizeBounds:
+    products:
+    - wow_beta
+    status: unimplemented
   HasFixedFrameLevel:
     fields:
     - name: hasFixedFrameLevel
@@ -167,6 +203,14 @@ methods:
     - name: hasFixedFrameStrata
     status: getter
   IgnoreDepth:
+    products:
+    - wow
+    - wowt
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: unimplemented
   IsClampedToScreen:
     fields:
@@ -179,6 +223,14 @@ methods:
   IsGamePadStickEnabled:
     status: unimplemented
   IsIgnoringDepth:
+    products:
+    - wow
+    - wowt
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: unimplemented
   IsKeyboardEnabled:
     status: unimplemented
@@ -239,6 +291,14 @@ methods:
   SetClipsChildren:
     status: unimplemented
   SetDepth:
+    products:
+    - wow
+    - wowt
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: unimplemented
   SetDontSavePosition:
     status: unimplemented
@@ -255,6 +315,14 @@ methods:
   SetFlattensRenderLayers:
     status: unimplemented
   SetFrameBuffer:
+    products:
+    - wow
+    - wowt
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: unimplemented
   SetFrameLevel:
     status: implemented
@@ -272,15 +340,35 @@ methods:
     fields:
     - name: id
     status: setter
+  SetIsFrameBuffer:
+    products:
+    - wow_beta
+    status: unimplemented
   SetMaxResize:
     fields:
     - name: maxResizeWidth
     - name: maxResizeHeight
+    products:
+    - wow
+    - wowt
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: setter
   SetMinResize:
     fields:
     - name: minResizeWidth
     - name: minResizeHeight
+    products:
+    - wow
+    - wowt
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: setter
   SetMouseClickEnabled:
     fields:
@@ -302,6 +390,10 @@ methods:
     fields:
     - name: resizable
     status: setter
+  SetResizeBounds:
+    products:
+    - wow_beta
+    status: unimplemented
   SetToplevel:
     fields:
     - name: toplevel
