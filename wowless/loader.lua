@@ -756,12 +756,13 @@ local function loader(api, cfg)
   end
 
   local function loadAddon(addonName)
-    local success = pcall(function()
+    local success, msg = pcall(function()
       doLoadAddon(addonName)
     end)
     if success then
       return true
     else
+      api.log(1, 'loading %s failed: %s', addonName, tostring(msg))
       return false, 'LOAD_FAILED'
     end
   end
