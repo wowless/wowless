@@ -20,7 +20,7 @@ local function recursiveMixin(t, u, failOnOverwrite)
   return t
 end
 
-local readfile = (function()
+local _ = (function()
   local lfs = require('lfs')
   local path = require('path')
   local cachedDirs = {}
@@ -56,6 +56,23 @@ local readfile = (function()
       content = content:sub(4)
     end
     return content
+  end
+end)()
+
+local readfile = (function()
+  local path = require('path')
+  local function getContent(fn)
+    local f = assert(io.open(fn, 'rb'))
+    local content = f:read('*all')
+    f:close()
+    if content:sub(1, 3) == '\239\187\191' then
+      content = content:sub(4)
+    end
+    return content
+  end
+  return function(filename)
+    local fullname = path.normalize(path.join(path.currentdir(), filename))
+    return getContent(fullname)
   end
 end)()
 
