@@ -20,47 +20,45 @@ local function recursiveMixin(t, u, failOnOverwrite)
   return t
 end
 
-local _ = (function()
+local readfile = (function()
   local lfs = require('lfs')
-  local path = require('path')
-  local cachedDirs = {}
-  local nameCache = {}
-  local function cacheDir(dir)
-    if not cachedDirs[dir] then
-      cachedDirs[dir] = true
-      cacheDir(path.dirname(dir))
-      if dir == '' then
-        for f in lfs.dir('.') do
-          nameCache[f:lower()] = f
-        end
-      else
-        local rdir = assert(nameCache[dir], 'unknown directory ' .. dir)
-        for f in lfs.dir(rdir) do
-          local fn = path.join(rdir, f)
-          nameCache[fn:lower()] = fn
-        end
+  local function dirtab(dir, t)
+    for f in lfs.dir(dir .. '/') do
+      local ff = dir .. '/' .. f
+      local k = f:lower()
+      if lfs.attributes(ff, 'mode') ~= 'directory' then
+        assert(t[k] == nil, 'multiple directory entries called ' .. ff)
+        t[k] = ff
+      elseif f ~= '.' and f ~= '..' then
+        assert(type(t[k]) ~= 'string', 'multiple directory entries called ' .. ff)
+        t[k] = t[k] or {}
+        table.insert(t[k], ff)
       end
     end
   end
-  local function resolveCase(name)
-    local lname = name:lower()
-    cacheDir(path.dirname(lname))
-    return assert(nameCache[lname], 'unknown file ' .. name)
-  end
-  return function(filename)
-    local fn = resolveCase(path.normalize(filename))
-    local f = assert(io.open(fn:gsub('\\', '/'), 'rb'))
-    local content = f:read('*all')
-    f:close()
-    if content:sub(1, 3) == '\239\187\191' then
-      content = content:sub(4)
+  local cache = {}
+  dirtab('', cache)
+  local function resolve(p)
+    local c = cache
+    local dd = ''
+    for k in p:gmatch('[^/]+') do
+      dd = dd .. '/' .. k
+      local ck = c[k]
+      assert(ck ~= nil, 'unknown ' .. dd)
+      if type(ck) == 'string' then
+        return ck
+      elseif type(next(ck)) == 'number' then
+        local t = {}
+        for _, d in ipairs(ck) do
+          dirtab(d, t)
+        end
+        c[k] = t
+        ck = t
+      end
+      c = ck
     end
-    return content
+    error('landed on a directory')
   end
-end)()
-
-local readfile = (function()
-  local path = require('path')
   local function getContent(fn)
     local f = assert(io.open(fn, 'rb'))
     local content = f:read('*all')
@@ -70,9 +68,10 @@ local readfile = (function()
     end
     return content
   end
+  local path = require('path')
   return function(filename)
     local fullname = path.normalize(path.join(path.currentdir(), filename))
-    return getContent(fullname)
+    return getContent(resolve(fullname:lower()))
   end
 end)()
 
