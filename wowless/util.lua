@@ -42,12 +42,11 @@ local readfile = (function()
     local c = cache
     local dd = ''
     for k in p:gmatch('[^/]+') do
+      assert(type(c) == 'table', dd .. ' is not a directory')
       dd = dd .. '/' .. k
       local ck = c[k]
       assert(ck ~= nil, 'unknown ' .. dd)
-      if type(ck) == 'string' then
-        return ck
-      elseif type(next(ck)) == 'number' then
+      if type(ck) == 'table' and type(next(ck)) == 'number' then
         local t = {}
         for _, d in ipairs(ck) do
           dirtab(d, t)
@@ -57,7 +56,7 @@ local readfile = (function()
       end
       c = ck
     end
-    error('landed on a directory')
+    return c
   end
   local function getContent(fn)
     local f = assert(io.open(fn, 'rb'))
