@@ -122,7 +122,6 @@ versions:
     UnalteredVisualRaceID: 23
   products:
   - wow
-  - wowt
   sig: sssssssssssssssiiiiiiiiiiiii{3i}{3i}iiiiiiiiiii..........iiiiii
 - fields:
     Alliance: 21
@@ -180,5 +179,6 @@ versions:
     UnalteredVisualRaceID: 23
   products:
   - wow_beta
+  - wowt
   sig: sssssssssssssssiiiiiiiiiiiii{3i}{3i}iiiiiiiiiii..........iiiiiii
 fdid: 1305311
