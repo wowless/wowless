@@ -56,6 +56,22 @@ local function apiTests()
         end,
       }
     end),
+    error = function()
+      return {
+        nullary = function()
+          local success, msg = pcall(error)
+          assertEquals(false, success)
+          assertEquals(nil, msg)
+        end,
+        unary = function()
+          local success, msg = pcall(function()
+            error('moo')
+          end)
+          assertEquals(false, success)
+          assertEquals('moo', msg:match('[\\/]Wowless[\\/]api.lua:%d+: (%a+)$'))
+        end,
+      }
+    end,
   }
 end
 G.ApiTests = _G.__wowless == nil and apiTests or nil -- TODO stop skipping wowless itself
