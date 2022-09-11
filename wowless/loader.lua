@@ -42,7 +42,6 @@ local function loader(api, cfg)
   assert(product, 'loader requires a product')
   local otherAddonDirs = cfg and cfg.otherAddonDirs or {}
 
-  local lfs = require('lfs')
   local path = require('path')
   local parseXml = require('wowless.xml').newParser()
   local util = require('wowless.util')
@@ -693,6 +692,7 @@ local function loader(api, cfg)
   local addonData = assert(api.states.Addons)
 
   local function initAddons()
+    local lfs = require('lfs')
     local function maybeAdd(dir, fdid)
       local name = path.basename(dir)
       if not addonData[name] then
@@ -705,12 +705,17 @@ local function loader(api, cfg)
         end
       end
     end
+    local function isdir(d)
+      return lfs.attributes(d, 'mode') == 'directory'
+    end
     local function maybeAddAll(dir)
-      local attrs = lfs.attributes(dir)
-      if attrs and attrs.mode == 'directory' then
+      if isdir(dir) then
         for d in lfs.dir(dir) do
           if d ~= '.' and d ~= '..' then
-            maybeAdd(path.join(dir, d))
+            local dd = path.join(dir, d)
+            if isdir(dd) then
+              maybeAdd(dd)
+            end
           end
         end
       end
@@ -721,7 +726,8 @@ local function loader(api, cfg)
       end
     end
     for _, d in ipairs(otherAddonDirs) do
-      maybeAddAll(path.dirname(d))
+      local dir = path.dirname(d)
+      maybeAddAll(dir == '' and '.' or dir)
     end
   end
 
