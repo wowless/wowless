@@ -25,7 +25,15 @@ type:
       mapof:
         required: true
         type:
-          schema: schematype
+          record:
+            key:
+              required: true
+              type:
+                schema: schematype
+            value:
+              required: true
+              type:
+                schema: schematype
   - record:
       oneof:
         required: true
@@ -37,13 +45,15 @@ type:
         required: true
         type:
           mapof:
-            record:
-              required:
-                type: boolean
-              type:
-                required: true
+            key: string
+            value:
+              record:
+                required:
+                  type: boolean
                 type:
-                  schema: schematype
+                  required: true
+                  type:
+                    schema: schematype
   - record:
       ref:
         required: true

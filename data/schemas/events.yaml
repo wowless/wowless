@@ -2,6 +2,8 @@
 name: events
 type:
   mapof:
-    oneof:
-    - boolean
-    - ref: event
+    key: string
+    value:
+      oneof:
+      - boolean
+      - ref: event

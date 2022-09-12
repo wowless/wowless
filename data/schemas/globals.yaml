@@ -2,4 +2,7 @@
 name: globals
 type:
   mapof:
-    schema: any
+    key:
+      schema: any
+    value:
+      schema: any

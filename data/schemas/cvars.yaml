@@ -1,4 +1,6 @@
 ---
 name: cvars
 type:
-  mapof: string
+  mapof:
+    key: string
+    value: string

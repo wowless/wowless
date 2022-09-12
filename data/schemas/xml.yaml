@@ -5,40 +5,42 @@ type:
     attributes:
       type:
         mapof:
-          record:
-            impl:
+          key: string
+          value:
+            record:
+              impl:
+                type:
+                  oneof:
+                  - literal: internal
+                  - literal: loadfile
+                  - record:
+                      field:
+                        required: true
+                        type: string
+                  - record:
+                      method:
+                        required: true
+                        type: string
+                  - record:
+                      scope:
+                        required: true
+                        type: string
+              phase:
+                type:
+                  oneof:
+                  - literal: early
+                  - literal: middle
+                  - literal: late
+              required:
+                type: boolean
               type:
-                oneof:
-                - literal: internal
-                - literal: loadfile
-                - record:
-                    field:
-                      required: true
-                      type: string
-                - record:
-                    method:
-                      required: true
-                      type: string
-                - record:
-                    scope:
-                      required: true
-                      type: string
-            phase:
-              type:
-                oneof:
-                - literal: early
-                - literal: middle
-                - literal: late
-            required:
-              type: boolean
-            type:
-              required: true
-              type:
-                oneof:
-                - literal: boolean
-                - literal: number
-                - literal: string
-                - literal: stringlist
+                required: true
+                type:
+                  oneof:
+                  - literal: boolean
+                  - literal: number
+                  - literal: string
+                  - literal: stringlist
     contents:
       type:
         oneof:

@@ -38,10 +38,12 @@ local function validate(schematype, v)
       assert(not info.required or v[field] ~= nil, 'missing required field ' .. field)
     end
   elseif schematype.mapof then
+    local kty = assert(schematype.mapof.key, 'missing key type')
+    local vty = assert(schematype.mapof.value, 'missing value type')
     assert(type(v) == 'table', 'expected table')
     for k2, v2 in pairs(v) do
-      assert(type(k2) == 'string', 'expected string key')
-      validate(schematype.mapof, v2)
+      validate(kty, k2)
+      validate(vty, v2)
     end
   elseif schematype.sequenceof then
     assert(type(v) == 'table', 'expected table')

@@ -143,8 +143,23 @@ describe('schema', function()
       end)
     end)
     describe('mapof', function()
-      local mstr = { mapof = 'string' }
-      local mnest = { mapof = { mapof = 'string' } }
+      local mstr = {
+        mapof = {
+          key = 'string',
+          value = 'string',
+        },
+      }
+      local mnest = {
+        mapof = {
+          key = 'string',
+          value = {
+            mapof = {
+              key = 'string',
+              value = 'string',
+            },
+          },
+        },
+      }
       it('rejects nil', function()
         reject(mstr, nil)
         reject(mnest, nil)
@@ -242,7 +257,7 @@ describe('schema', function()
           oneof = {
             'string',
             'boolean',
-            { mapof = 'string' },
+            { mapof = { key = 'string', value = 'string' } },
             { sequenceof = 'string' },
           },
         }
@@ -258,7 +273,7 @@ describe('schema', function()
             {
               oneof = {
                 'boolean',
-                { mapof = 'string' },
+                { mapof = { key = 'string', value = 'string' } },
                 { sequenceof = 'string' },
               },
             },

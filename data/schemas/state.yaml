@@ -9,4 +9,6 @@ type:
       required: true
       type:
         mapof:
-          schema: any
+          key: string
+          value:
+            schema: any

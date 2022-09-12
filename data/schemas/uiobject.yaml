@@ -5,23 +5,25 @@ type:
     fields:
       type:
         mapof:
-          record:
-            init:
+          key: string
+          value:
+            record:
+              init:
+                type:
+                  schema: any
+              nilable:
+                type: boolean
               type:
-                schema: any
-            nilable:
-              type: boolean
-            type:
-              required: true
-              type:
-                oneof:
-                - literal: boolean
-                - literal: font
-                - literal: frame
-                - literal: number
-                - literal: string
-                - literal: table
-                - literal: texture
+                required: true
+                type:
+                  oneof:
+                  - literal: boolean
+                  - literal: font
+                  - literal: frame
+                  - literal: number
+                  - literal: string
+                  - literal: table
+                  - literal: texture
     inherits:
       type:
         sequenceof:
@@ -29,38 +31,40 @@ type:
     methods:
       type:
         mapof:
-          record:
-            fields:
-              type:
-                sequenceof:
-                  record:
-                    name:
-                      required: true
-                      type: string
-                    nilable:
-                      type: boolean
-            outputs:
-              type:
-                sequenceof:
-                  record:
-                    name:
-                      type: string
-                    type:
-                      required: true
+          key: string
+          value:
+            record:
+              fields:
+                type:
+                  sequenceof:
+                    record:
+                      name:
+                        required: true
+                        type: string
+                      nilable:
+                        type: boolean
+              outputs:
+                type:
+                  sequenceof:
+                    record:
+                      name:
+                        type: string
                       type:
-                        oneof:
-                        - literal: number
-            products:
-              type:
-                schema: products
-            status:
-              required: true
-              type:
-                oneof:
-                - literal: getter
-                - literal: implemented
-                - literal: setter
-                - literal: unimplemented
+                        required: true
+                        type:
+                          oneof:
+                          - literal: number
+              products:
+                type:
+                  schema: products
+              status:
+                required: true
+                type:
+                  oneof:
+                  - literal: getter
+                  - literal: implemented
+                  - literal: setter
+                  - literal: unimplemented
     name:
       required: true
       type: string

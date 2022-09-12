@@ -16,7 +16,9 @@ type:
             fields:
               required: true
               type:
-                mapof: number
+                mapof:
+                  key: string
+                  value: number
             products:
               required: true
               type:
