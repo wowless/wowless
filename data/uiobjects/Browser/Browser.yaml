@@ -1,7 +1,7 @@
 ---
 name: Browser
 inherits:
-- Frame
+  Frame: {}
 methods:
   ClearFocus:
     status: unimplemented

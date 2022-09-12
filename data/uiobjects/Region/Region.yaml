@@ -38,7 +38,7 @@ fields:
     init: 0
     type: number
 inherits:
-- ParentedObject
+  ParentedObject: {}
 methods:
   AdjustPointsOffset:
     status: unimplemented

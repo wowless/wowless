@@ -8,7 +8,7 @@ fields:
   swipeTexture:
     type: texture
 inherits:
-- Frame
+  Frame: {}
 methods:
   Clear:
     status: unimplemented

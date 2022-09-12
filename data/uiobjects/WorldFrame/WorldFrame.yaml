@@ -1,5 +1,5 @@
 ---
 name: WorldFrame
 inherits:
-- Frame
+  Frame: {}
 methods: {}

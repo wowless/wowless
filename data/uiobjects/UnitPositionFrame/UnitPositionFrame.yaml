@@ -1,7 +1,7 @@
 ---
 name: UnitPositionFrame
 inherits:
-- Frame
+  Frame: {}
 methods:
   AddUnit:
     status: unimplemented

@@ -4,7 +4,7 @@ fields:
   modelScale:
     type: number
 inherits:
-- Frame
+  Frame: {}
 methods:
   AdvanceTime:
     status: unimplemented

@@ -1,8 +1,8 @@
 ---
 name: QuestPOIFrame
 inherits:
-- Frame
-- POIFrame
+  Frame: {}
+  POIFrame: {}
 methods:
   GetNumTooltips:
     products:

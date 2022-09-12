@@ -13,7 +13,7 @@ fields:
     init: 0
     type: number
 inherits:
-- Frame
+  Frame: {}
 methods:
   GetFillStyle:
     status: unimplemented

@@ -11,8 +11,8 @@ fields:
     init: 1
     type: number
 inherits:
-- FontInstance
-- LayeredRegion
+  FontInstance: {}
+  LayeredRegion: {}
 methods:
   CalculateScreenAreaFromCharacterSpan:
     status: unimplemented

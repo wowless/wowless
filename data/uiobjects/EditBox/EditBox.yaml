@@ -29,8 +29,8 @@ fields:
     init: 64
     type: number
 inherits:
-- FontInstance
-- Frame
+  FontInstance: {}
+  Frame: {}
 methods:
   AddHistoryLine:
     status: unimplemented

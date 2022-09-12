@@ -64,9 +64,9 @@ fields:
     init: false
     type: boolean
 inherits:
-- ParentedObject
-- Region
-- ScriptObject
+  ParentedObject: {}
+  Region: {}
+  ScriptObject: {}
 methods:
   CanChangeAttribute:
     status: unimplemented

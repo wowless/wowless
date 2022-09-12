@@ -1,8 +1,8 @@
 ---
 name: ScenarioPOIFrame
 inherits:
-- Frame
-- POIFrame
+  Frame: {}
+  POIFrame: {}
 methods:
   GetScenarioTooltipText:
     products:

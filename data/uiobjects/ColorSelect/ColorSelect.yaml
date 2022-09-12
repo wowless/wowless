@@ -10,7 +10,7 @@ fields:
   colorWheelThumbTexture:
     type: texture
 inherits:
-- Frame
+  Frame: {}
 methods:
   GetColorHSV:
     outputs:

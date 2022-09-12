@@ -1,7 +1,7 @@
 ---
 name: ControlPoint
 inherits:
-- ParentedObject
+  ParentedObject: {}
 methods:
   GetOffset:
     status: unimplemented

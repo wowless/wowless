@@ -1,7 +1,7 @@
 ---
 name: Font
 inherits:
-- FontInstance
+  FontInstance: {}
 methods:
   CopyFontObject:
     status: unimplemented

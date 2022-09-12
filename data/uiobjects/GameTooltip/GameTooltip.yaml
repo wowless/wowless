@@ -11,7 +11,7 @@ fields:
     nilable: true
     type: table
 inherits:
-- Frame
+  Frame: {}
 methods:
   AddAtlas:
     products:

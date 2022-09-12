@@ -9,8 +9,8 @@ fields:
   startDelay:
     type: number
 inherits:
-- ParentedObject
-- ScriptObject
+  ParentedObject: {}
+  ScriptObject: {}
 methods:
   GetDuration:
     status: unimplemented

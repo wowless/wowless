@@ -1,7 +1,7 @@
 ---
 name: Rotation
 inherits:
-- Animation
+  Animation: {}
 methods:
   GetDegrees:
     status: unimplemented

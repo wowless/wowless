@@ -5,8 +5,8 @@ fields:
     init: 1
     type: number
 inherits:
-- ParentedObject
-- ScriptObject
+  ParentedObject: {}
+  ScriptObject: {}
 methods:
   AttachToMount:
     products:

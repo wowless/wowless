@@ -1,7 +1,7 @@
 ---
 name: Alpha
 inherits:
-- Animation
+  Animation: {}
 methods:
   GetFromAlpha:
     status: unimplemented

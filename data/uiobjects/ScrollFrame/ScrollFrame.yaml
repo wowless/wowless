@@ -5,7 +5,7 @@ fields:
     nilable: true
     type: frame
 inherits:
-- Frame
+  Frame: {}
 methods:
   GetHorizontalScroll:
     outputs:

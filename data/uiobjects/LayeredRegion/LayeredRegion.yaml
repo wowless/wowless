@@ -20,7 +20,7 @@ fields:
     init: 1
     type: number
 inherits:
-- Region
+  Region: {}
 methods:
   GetDrawLayer:
     fields:

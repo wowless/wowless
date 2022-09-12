@@ -26,8 +26,11 @@ type:
                   - literal: texture
     inherits:
       type:
-        sequenceof:
-          ref: uiobject
+        mapof:
+          key:
+            ref: uiobject
+          value:
+            record: {}
     methods:
       type:
         mapof:

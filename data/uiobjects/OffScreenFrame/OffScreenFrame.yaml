@@ -1,7 +1,7 @@
 ---
 name: OffScreenFrame
 inherits:
-- Frame
+  Frame: {}
 methods:
   ApplySnapshot:
     status: unimplemented

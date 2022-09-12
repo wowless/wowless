@@ -38,7 +38,7 @@ fields:
       leftbuttonup: true
     type: table
 inherits:
-- Frame
+  Frame: {}
 methods:
   ClearHighlightTexture:
     products:

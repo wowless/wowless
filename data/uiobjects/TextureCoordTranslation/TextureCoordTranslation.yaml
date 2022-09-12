@@ -1,5 +1,5 @@
 ---
 name: TextureCoordTranslation
 inherits:
-- Animation
+  Animation: {}
 methods: {}

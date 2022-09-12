@@ -1,5 +1,5 @@
 ---
 name: LineTranslation
 inherits:
-- Translation
+  Translation: {}
 methods: {}

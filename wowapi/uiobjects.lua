@@ -74,7 +74,7 @@ local function mkBaseUIObjectTypes(api, loader)
         local ty = types[k]
         local inherits = {}
         local metaindex = Mixin({}, ty.mixin)
-        for _, inh in ipairs(ty.inherits) do
+        for inh in pairs(ty.inherits) do
           flattenOne(inh)
           table.insert(inherits, string.lower(inh))
           for mk, mv in pairs(result[string.lower(inh)].metatable.__index) do

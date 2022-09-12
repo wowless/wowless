@@ -53,8 +53,8 @@ fields:
     init: false
     type: boolean
 inherits:
-- LayeredRegion
-- ParentedObject
+  LayeredRegion: {}
+  ParentedObject: {}
 methods:
   AddMaskTexture:
     status: unimplemented

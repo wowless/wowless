@@ -1,7 +1,7 @@
 ---
 name: ModelScene
 inherits:
-- Frame
+  Frame: {}
 methods:
   ClearFog:
     status: unimplemented

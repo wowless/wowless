@@ -1,7 +1,7 @@
 ---
 name: PlayerModel
 inherits:
-- Model
+  Model: {}
 methods:
   ApplySpellVisualKit:
     status: unimplemented

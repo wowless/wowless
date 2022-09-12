@@ -1,7 +1,7 @@
 ---
 name: Path
 inherits:
-- Animation
+  Animation: {}
 methods:
   CreateControlPoint:
     status: implemented

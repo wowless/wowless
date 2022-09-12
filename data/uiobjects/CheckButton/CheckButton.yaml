@@ -9,7 +9,7 @@ fields:
   disabledCheckedTexture:
     type: texture
 inherits:
-- Button
+  Button: {}
 methods:
   GetChecked:
     fields:

@@ -1,8 +1,8 @@
 ---
 name: AnimationGroup
 inherits:
-- ParentedObject
-- ScriptObject
+  ParentedObject: {}
+  ScriptObject: {}
 methods:
   CreateAnimation:
     status: implemented

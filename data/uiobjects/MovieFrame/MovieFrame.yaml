@@ -1,7 +1,7 @@
 ---
 name: MovieFrame
 inherits:
-- Frame
+  Frame: {}
 methods:
   EnableSubtitles:
     status: unimplemented

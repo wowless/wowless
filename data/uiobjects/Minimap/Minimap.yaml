@@ -1,7 +1,7 @@
 ---
 name: Minimap
 inherits:
-- Frame
+  Frame: {}
 methods:
   GetPingPosition:
     status: unimplemented

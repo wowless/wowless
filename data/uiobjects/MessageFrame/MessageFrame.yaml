@@ -1,8 +1,8 @@
 ---
 name: MessageFrame
 inherits:
-- FontInstance
-- Frame
+  FontInstance: {}
+  Frame: {}
 methods:
   AddMessage:
     status: implemented

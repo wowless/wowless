@@ -5,7 +5,7 @@ fields:
     init: 1
     type: number
 inherits:
-- Texture
+  Texture: {}
 methods:
   GetEndPoint:
     status: unimplemented

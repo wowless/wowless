@@ -14,7 +14,7 @@ fields:
     nilable: true
     type: table
 inherits:
-- UIObject
+  UIObject: {}
 methods:
   GetDebugName:
     status: implemented

@@ -1,8 +1,8 @@
 ---
 name: SimpleHTML
 inherits:
-- FontInstance
-- Frame
+  FontInstance: {}
+  Frame: {}
 methods:
   GetContentHeight:
     outputs:

@@ -127,7 +127,7 @@ local ptablemap = {
     end
     local inhrev = {}
     for _, cfg in pairs(uiobjects) do
-      for _, inh in ipairs(cfg.inherits) do
+      for inh in pairs(cfg.inherits) do
         inhrev[inh] = inhrev[inh] or {}
         table.insert(inhrev[inh], cfg.name)
       end
@@ -137,7 +137,7 @@ local ptablemap = {
       objTypes[cfg.name] = cfg.objectType or cfg.name
     end
     local function fixup(cfg)
-      for _, inhname in ipairs(cfg.inherits) do
+      for inhname in pairs(cfg.inherits) do
         local inh = uiobjects[inhname]
         fixup(inh)
         for n, m in pairs(inh.methods) do
