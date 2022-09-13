@@ -38,6 +38,10 @@ fields:
     init: 0
     type: number
 inherits:
+  MouseMixin:
+    products:
+    - wow_beta
+    - wowt
   ParentedObject: {}
 methods:
   AdjustPointsOffset:

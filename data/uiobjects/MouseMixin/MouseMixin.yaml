@@ -1,0 +1,43 @@
+---
+name: MouseMixin
+fields:
+  mouseClickEnabled:
+    init: true
+    type: boolean
+  mouseMotionEnabled:
+    init: true
+    type: boolean
+  mouseWheelEnabled:
+    init: false
+    type: boolean
+inherits: {}
+methods:
+  EnableMouse:
+    status: implemented
+  EnableMouseWheel:
+    fields:
+    - name: mouseWheelEnabled
+    status: setter
+  IsMouseClickEnabled:
+    fields:
+    - name: mouseClickEnabled
+    status: getter
+  IsMouseEnabled:
+    status: implemented
+  IsMouseMotionEnabled:
+    fields:
+    - name: mouseMotionEnabled
+    status: getter
+  IsMouseWheelEnabled:
+    fields:
+    - name: mouseWheelEnabled
+    status: getter
+  SetMouseClickEnabled:
+    fields:
+    - name: mouseClickEnabled
+    status: setter
+  SetMouseMotionEnabled:
+    fields:
+    - name: mouseMotionEnabled
+    status: setter
+virtual: true

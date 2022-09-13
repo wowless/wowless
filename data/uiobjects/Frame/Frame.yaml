@@ -36,15 +36,6 @@ fields:
     type: number
   minResizeWidth:
     type: number
-  mouseClickEnabled:
-    init: true
-    type: boolean
-  mouseMotionEnabled:
-    init: true
-    type: boolean
-  mouseWheelEnabled:
-    init: false
-    type: boolean
   movable:
     init: false
     type: boolean
@@ -64,6 +55,14 @@ fields:
     init: false
     type: boolean
 inherits:
+  MouseMixin:
+    products:
+    - wow
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
   ParentedObject: {}
   Region: {}
   ScriptObject: {}
@@ -92,12 +91,6 @@ methods:
     status: unimplemented
   EnableKeyboard:
     status: unimplemented
-  EnableMouse:
-    status: implemented
-  EnableMouseWheel:
-    fields:
-    - name: mouseWheelEnabled
-    status: setter
   ExecuteAttribute:
     status: unimplemented
   GetAttribute:
@@ -229,20 +222,6 @@ methods:
     status: unimplemented
   IsKeyboardEnabled:
     status: unimplemented
-  IsMouseClickEnabled:
-    fields:
-    - name: mouseClickEnabled
-    status: getter
-  IsMouseEnabled:
-    status: implemented
-  IsMouseMotionEnabled:
-    fields:
-    - name: mouseMotionEnabled
-    status: getter
-  IsMouseWheelEnabled:
-    fields:
-    - name: mouseWheelEnabled
-    status: getter
   IsMovable:
     fields:
     - name: movable
@@ -361,14 +340,6 @@ methods:
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
-    status: setter
-  SetMouseClickEnabled:
-    fields:
-    - name: mouseClickEnabled
-    status: setter
-  SetMouseMotionEnabled:
-    fields:
-    - name: mouseMotionEnabled
     status: setter
   SetMovable:
     fields:
