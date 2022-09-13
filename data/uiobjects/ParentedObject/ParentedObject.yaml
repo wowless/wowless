@@ -7,13 +7,18 @@ fields:
   childrenSet:
     init: {}
     type: table
-  forbidden:
-    init: false
-    type: boolean
   parent:
     nilable: true
     type: table
 inherits:
+  ForbiddenMixin:
+    products:
+    - wow
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
   UIObject: {}
 methods:
   GetDebugName:
@@ -22,12 +27,6 @@ methods:
     fields:
     - name: parent
     status: getter
-  IsForbidden:
-    fields:
-    - name: forbidden
-    status: getter
-  SetForbidden:
-    status: implemented
   SetParent:
     status: implemented
 virtual: true

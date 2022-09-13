@@ -1,0 +1,15 @@
+---
+name: ForbiddenMixin
+fields:
+  forbidden:
+    init: false
+    type: boolean
+inherits: {}
+methods:
+  IsForbidden:
+    fields:
+    - name: forbidden
+    status: getter
+  SetForbidden:
+    status: implemented
+virtual: true

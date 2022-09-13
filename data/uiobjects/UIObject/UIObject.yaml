@@ -3,7 +3,11 @@ name: UIObject
 fields:
   name:
     type: string
-inherits: {}
+inherits:
+  ForbiddenMixin:
+    products:
+    - wow_beta
+    - wowt
 methods:
   GetName:
     fields:
