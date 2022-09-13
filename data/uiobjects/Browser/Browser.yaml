@@ -19,6 +19,11 @@ methods:
     status: unimplemented
   NavigateStop:
     status: unimplemented
+  NavigateTo:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   OpenExternalLink:
     status: unimplemented
   OpenTicket:

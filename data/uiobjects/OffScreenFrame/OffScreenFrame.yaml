@@ -15,5 +15,10 @@ methods:
     status: unimplemented
   TakeSnapshot:
     status: unimplemented
+  TestPrintToFile:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   UsesNPOT:
     status: unimplemented

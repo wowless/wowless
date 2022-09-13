@@ -10,6 +10,11 @@ methods:
     status: unimplemented
   GetAnimations:
     status: implemented
+  GetAnimationSpeedMultiplier:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   GetDuration:
     status: unimplemented
   GetLooping:
@@ -35,6 +40,11 @@ methods:
   RemoveAnimations:
     status: unimplemented
   Restart:
+    status: unimplemented
+  SetAnimationSpeedMultiplier:
+    products:
+    - wow_beta
+    - wowt
     status: unimplemented
   SetLooping:
     status: unimplemented

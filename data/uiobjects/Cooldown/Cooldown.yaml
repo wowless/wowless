@@ -74,5 +74,10 @@ methods:
     fields:
     - name: swipeTexture
     status: setter
+  SetTexCoordRange:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   SetUseCircularEdge:
     status: unimplemented

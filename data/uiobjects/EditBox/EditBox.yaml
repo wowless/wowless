@@ -86,6 +86,11 @@ methods:
     status: unimplemented
   HasFocus:
     status: unimplemented
+  HasText:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   HighlightText:
     status: unimplemented
   Insert:

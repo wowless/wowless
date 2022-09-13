@@ -12,6 +12,11 @@ fields:
 inherits:
   Frame: {}
 methods:
+  ClearColorWheelTexture:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   GetColorHSV:
     outputs:
     - name: h
