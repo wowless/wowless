@@ -111,7 +111,6 @@ methods:
   GetDepth:
     products:
     - wow
-    - wowt
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -125,7 +124,6 @@ methods:
   GetEffectiveDepth:
     products:
     - wow
-    - wowt
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -160,7 +158,6 @@ methods:
     - name: maxResizeHeight
     products:
     - wow
-    - wowt
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -173,7 +170,6 @@ methods:
     - name: minResizeHeight
     products:
     - wow
-    - wowt
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -193,6 +189,7 @@ methods:
   GetResizeBounds:
     products:
     - wow_beta
+    - wowt
     status: unimplemented
   HasFixedFrameLevel:
     fields:
@@ -205,7 +202,6 @@ methods:
   IgnoreDepth:
     products:
     - wow
-    - wowt
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -225,7 +221,6 @@ methods:
   IsIgnoringDepth:
     products:
     - wow
-    - wowt
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -293,7 +288,6 @@ methods:
   SetDepth:
     products:
     - wow
-    - wowt
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -317,7 +311,6 @@ methods:
   SetFrameBuffer:
     products:
     - wow
-    - wowt
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -343,6 +336,7 @@ methods:
   SetIsFrameBuffer:
     products:
     - wow_beta
+    - wowt
     status: unimplemented
   SetMaxResize:
     fields:
@@ -350,7 +344,6 @@ methods:
     - name: maxResizeHeight
     products:
     - wow
-    - wowt
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -363,7 +356,6 @@ methods:
     - name: minResizeHeight
     products:
     - wow
-    - wowt
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -393,6 +385,7 @@ methods:
   SetResizeBounds:
     products:
     - wow_beta
+    - wowt
     status: unimplemented
   SetToplevel:
     fields:

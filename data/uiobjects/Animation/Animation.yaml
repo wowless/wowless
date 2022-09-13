@@ -83,10 +83,12 @@ methods:
   SetTargetName:
     products:
     - wow_beta
+    - wowt
     status: unimplemented
   SetTargetParent:
     products:
     - wow_beta
+    - wowt
     status: unimplemented
   Stop:
     status: unimplemented
