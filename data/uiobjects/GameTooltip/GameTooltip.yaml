@@ -29,6 +29,11 @@ methods:
     status: unimplemented
   AddTexture:
     status: unimplemented
+  AddTraitEntry:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   AdvanceSecondaryCompareItem:
     status: unimplemented
   AppendText:
@@ -269,7 +274,17 @@ methods:
     status: unimplemented
   SetInventoryItemByID:
     status: unimplemented
+  SetItemByGUID:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   SetItemByID:
+    status: unimplemented
+  SetItemByIDWithQuality:
+    products:
+    - wow_beta
+    - wowt
     status: unimplemented
   SetItemKey:
     products:
@@ -340,6 +355,11 @@ methods:
     - wow_beta
     - wowt
     status: unimplemented
+  SetQualityReagentSlotItemByID:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   SetQuestCurrency:
     products:
     - wow
@@ -396,8 +416,6 @@ methods:
   SetRecipeResultItem:
     products:
     - wow
-    - wow_beta
-    - wowt
     status: unimplemented
   SetRuneforgeResultItem:
     products:
@@ -481,7 +499,17 @@ methods:
     status: unimplemented
   SetUnitBuff:
     status: unimplemented
+  SetUnitBuffByAuraInstanceID:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   SetUnitDebuff:
+    status: unimplemented
+  SetUnitDebuffByAuraInstanceID:
+    products:
+    - wow_beta
+    - wowt
     status: unimplemented
   SetUpgradeItem:
     products:
