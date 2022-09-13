@@ -49,16 +49,24 @@ local function checkStateMachine(states, transitions, init)
       error(('%s state: %s'):format(n, trimerr(msg)))
     end
   end
+  local function checkTransition(t, n)
+    local success, msg = pcall(function()
+      transitions[t].func()
+    end)
+    if not success then
+      error(('%s transition: %s'):format(n, trimerr(msg)))
+    end
+  end
   for from, tos in pairs(edges) do
     for to, ts in pairs(tos) do
       for t in pairs(ts) do
         local success, msg = pcall(function()
           checkState(init, 'init')
-          transitions[frominit[from]].func()
+          checkTransition(frominit[from], 'init -> from')
           checkState(from, 'from')
-          transitions[t].func()
+          checkTransition(t, 'from -> to')
           checkState(to, 'to')
-          transitions[toinit[to]].func()
+          checkTransition(toinit[to], 'to -> init')
           checkState(init, 'postinit(' .. toinit[to] .. ')')
         end)
         if not success then
