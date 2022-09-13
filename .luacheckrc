@@ -45,6 +45,7 @@ files['data/uiobjects'] = {
     'build',
     'kids',
     'm',
+    'runtimeProduct',
     'toTexture',
     'u',
     'UpdateVisible',

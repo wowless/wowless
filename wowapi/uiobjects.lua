@@ -130,6 +130,7 @@ local function mkBaseUIObjectTypes(api, loader)
     build = datalua.build,
     kids = kids,
     m = m,
+    runtimeProduct = loader.product,
     toTexture = toTexture,
     u = u,
     UpdateVisible = UpdateVisible,
