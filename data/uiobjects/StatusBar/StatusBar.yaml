@@ -29,9 +29,21 @@ methods:
   GetRotatesTexture:
     status: unimplemented
   GetStatusBarAtlas:
+    products:
+    - wow
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: unimplemented
   GetStatusBarColor:
     status: implemented
+  GetStatusBarDesaturation:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   GetStatusBarTexture:
     fields:
     - name: statusBarTexture
@@ -40,6 +52,16 @@ methods:
     fields:
     - name: value
     status: getter
+  IsStatusBarDesaturated:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
+  SetColorFill:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   SetFillStyle:
     status: unimplemented
   SetMinMaxValues:
@@ -54,9 +76,26 @@ methods:
   SetRotatesTexture:
     status: unimplemented
   SetStatusBarAtlas:
+    products:
+    - wow
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: unimplemented
   SetStatusBarColor:
     status: implemented
+  SetStatusBarDesaturated:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
+  SetStatusBarDesaturation:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   SetStatusBarTexture:
     status: implemented
   SetValue:
