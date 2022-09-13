@@ -38,7 +38,8 @@ local function checkStateMachine(states, transitions, init)
     toinit[k] = t
   end
   local function trimerr(s)
-    return s:sub(select(2, s:find(':%d+: ')) + 1)
+    local _, n = s:find(':%d+: ')
+    return n and s:sub(n + 1) or s
   end
   local function checkState(s, n)
     local success, msg = pcall(function()
