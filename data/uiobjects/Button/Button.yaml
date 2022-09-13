@@ -40,9 +40,25 @@ fields:
 inherits:
   Frame: {}
 methods:
+  ClearDisabledTexture:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   ClearHighlightTexture:
     products:
     - wow_beta
+    - wowt
+    status: unimplemented
+  ClearNormalTexture:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
+  ClearPushedTexture:
+    products:
+    - wow_beta
+    - wowt
     status: unimplemented
   Click:
     status: implemented
@@ -126,6 +142,11 @@ methods:
   SetHighlightAtlas:
     status: implemented
   SetHighlightFontObject:
+    status: unimplemented
+  SetHighlightLocked:
+    products:
+    - wow_beta
+    - wowt
     status: unimplemented
   SetHighlightTexture:
     status: implemented
