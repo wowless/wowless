@@ -77,6 +77,13 @@ methods:
   GetMaskTexture:
     status: unimplemented
   GetNonBlocking:
+    products:
+    - wow
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: unimplemented
   GetNumMaskTextures:
     status: unimplemented
@@ -114,6 +121,11 @@ methods:
     fields:
     - name: vertTile
     status: getter
+  IsBlockingLoadRequested:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   IsDesaturated:
     status: unimplemented
   IsSnappingToPixelGrid:
@@ -126,6 +138,11 @@ methods:
     fields:
     - name: blendMode
     status: setter
+  SetBlockingLoadsRequested:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   SetColorTexture:
     status: implemented
   SetDesaturated:
@@ -135,6 +152,13 @@ methods:
   SetGradient:
     status: unimplemented
   SetGradientAlpha:
+    products:
+    - wow
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: unimplemented
   SetHorizTile:
     fields:
@@ -145,6 +169,13 @@ methods:
     - name: maskName
     status: setter
   SetNonBlocking:
+    products:
+    - wow
+    - wow_classic
+    - wow_classic_beta
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
     status: unimplemented
   SetRotation:
     status: unimplemented
