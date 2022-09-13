@@ -30,7 +30,10 @@ type:
           key:
             ref: uiobject
           value:
-            record: {}
+            record:
+              products:
+                type:
+                  schema: products
     methods:
       type:
         mapof:

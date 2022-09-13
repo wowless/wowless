@@ -55,6 +55,10 @@ fields:
 inherits:
   LayeredRegion: {}
   ParentedObject: {}
+  ScriptObject:
+    products:
+    - wow_beta
+    - wowt
 methods:
   AddMaskTexture:
     status: unimplemented

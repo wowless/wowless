@@ -13,6 +13,10 @@ fields:
 inherits:
   FontInstance: {}
   LayeredRegion: {}
+  ScriptObject:
+    products:
+    - wow_beta
+    - wowt
 methods:
   CalculateScreenAreaFromCharacterSpan:
     status: unimplemented

@@ -33,6 +33,10 @@ local function mapify(t)
   end
 end
 
+local function hasproduct(t, p)
+  return not t.products or mapify(t.products)[p]
+end
+
 local function stylua(s)
   local fn = os.tmpname()
   require('pl.file').write(fn, s)
@@ -127,9 +131,11 @@ local ptablemap = {
     end
     local inhrev = {}
     for _, cfg in pairs(uiobjects) do
-      for inh in pairs(cfg.inherits) do
-        inhrev[inh] = inhrev[inh] or {}
-        table.insert(inhrev[inh], cfg.name)
+      for inh, t in pairs(cfg.inherits) do
+        if hasproduct(t, p) then
+          inhrev[inh] = inhrev[inh] or {}
+          table.insert(inhrev[inh], cfg.name)
+        end
       end
     end
     local objTypes = {}
@@ -137,11 +143,13 @@ local ptablemap = {
       objTypes[cfg.name] = cfg.objectType or cfg.name
     end
     local function fixup(cfg)
-      for inhname in pairs(cfg.inherits) do
-        local inh = uiobjects[inhname]
-        fixup(inh)
-        for n, m in pairs(inh.methods) do
-          cfg.methods[n] = m
+      for inhname, t in pairs(cfg.inherits) do
+        if hasproduct(t, p) then
+          local inh = uiobjects[inhname]
+          fixup(inh)
+          for n, m in pairs(inh.methods) do
+            cfg.methods[n] = m
+          end
         end
       end
     end
@@ -163,12 +171,12 @@ local ptablemap = {
     uiobjects.WorldFrame = nil
     local t = {}
     for k, v in pairs(uiobjects) do
-      if v.products and not mapify(v.products)[p] then
+      if not hasproduct(v, p) then
         t[k] = false
       else
         local mt = {}
         for mk, mv in pairs(v.methods) do
-          if not mv.products or mapify(mv.products)[p] then
+          if hasproduct(mv, p) then
             mt[mk] = true
           end
         end

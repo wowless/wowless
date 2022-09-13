@@ -11,6 +11,18 @@ local function toTexture(parent, tex, obj)
   end
 end
 
+local function hasproduct(t, p)
+  if not t.products then
+    return true
+  end
+  for _, k in ipairs(t.products) do
+    if k == p then
+      return true
+    end
+  end
+  return false
+end
+
 local function mkBaseUIObjectTypes(api, loader)
   local log = api.log or function() end
 
@@ -74,12 +86,14 @@ local function mkBaseUIObjectTypes(api, loader)
         local ty = types[k]
         local inherits = {}
         local metaindex = Mixin({}, ty.mixin)
-        for inh in pairs(ty.inherits) do
-          flattenOne(inh)
-          table.insert(inherits, string.lower(inh))
-          for mk, mv in pairs(result[string.lower(inh)].metatable.__index) do
-            assert(not metaindex[mk] or metaindex[mk] == mv, 'multiple implementations of ' .. mk)
-            metaindex[mk] = mv
+        for inh, t in pairs(ty.inherits) do
+          if hasproduct(t, loader.product) then
+            flattenOne(inh)
+            table.insert(inherits, string.lower(inh))
+            for mk, mv in pairs(result[string.lower(inh)].metatable.__index) do
+              assert(not metaindex[mk] or metaindex[mk] == mv, 'multiple implementations of ' .. mk)
+              metaindex[mk] = mv
+            end
           end
         end
         result[lk] = {
