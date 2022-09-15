@@ -1641,6 +1641,7 @@ Enum:
   EditModeAccountSetting:
     GridSpacing: 1
     SettingsExpanded: 2
+    ShowArenaFrames: 17
     ShowBossFrames: 16
     ShowBuffFrame: 10
     ShowCastBar: 7
@@ -1648,6 +1649,7 @@ Enum:
     ShowEncounterBar: 8
     ShowExtraAbilities: 9
     ShowGrid: 0
+    ShowLootFrame: 18
     ShowPartyFrames: 12
     ShowPetActionBar: 5
     ShowPossessActionBar: 6
@@ -1657,9 +1659,9 @@ Enum:
     ShowTargetAndFocus: 3
     ShowVehicleLeaveButton: 15
   EditModeAccountSettingMeta:
-    MaxValue: 16
+    MaxValue: 18
     MinValue: 0
-    NumValues: 17
+    NumValues: 19
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
     HideBarArt: 6
@@ -1760,14 +1762,15 @@ Enum:
     ChatFrame: 8
     EncounterBar: 4
     ExtraAbilities: 5
+    LootFrame: 10
     Minimap: 2
     TalkingHeadFrame: 7
     UnitFrame: 3
     VehicleLeaveButton: 9
   EditModeSystemMeta:
-    MaxValue: 9
+    MaxValue: 10
     MinValue: 0
-    NumValues: 10
+    NumValues: 11
   EditModeUnitFrameSetting:
     BuffsOnTop: 2
     CastBarOnSide: 7
@@ -1790,6 +1793,7 @@ Enum:
     MinValue: 0
     NumValues: 16
   EditModeUnitFrameSystemIndices:
+    Arena: 7
     Boss: 6
     Focus: 3
     Party: 4
@@ -1797,9 +1801,9 @@ Enum:
     Raid: 5
     Target: 2
   EditModeUnitFrameSystemIndicesMeta:
-    MaxValue: 6
+    MaxValue: 7
     MinValue: 1
-    NumValues: 6
+    NumValues: 7
   EnvironmentalDamageFlags:
     DmgIsPct: 2
     OneTime: 1
@@ -4259,12 +4263,14 @@ Enum:
     MinValue: 1
     NumValues: 4
   TradeskillRecipeType:
+    Enchant: 3
     Item: 1
+    Recraft: 4
     Salvage: 2
   TradeskillRecipeTypeMeta:
-    MaxValue: 2
+    MaxValue: 4
     MinValue: 1
-    NumValues: 2
+    NumValues: 4
   TradeskillRelativeDifficulty:
     Easy: 2
     Medium: 1
