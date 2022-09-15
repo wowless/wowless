@@ -64,7 +64,9 @@ static int wowless_sandbox_eval(lua_State *L) {
   const char *str = luaL_checkstring(L, 2);
   lua_settop(S, 0);
   if (luaL_dostring(S, str) != 0) {
-    lua_pushstring(L, "eval error");
+    lua_pushstring(L, "eval error: ");
+    copy_value(L, S, -1);
+    lua_concat(L, 2);
     lua_error(L);
   }
   int n = lua_gettop(S);
