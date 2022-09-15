@@ -54,13 +54,13 @@ describe('sandbox', function()
       assert.same(
         { 'bar', 'moo 42', 'bar', nil },
         sandbox:eval([[
-        local t = setmetatable({ foo = "bar" }, {
-          __index = function(_, k)
-            return 'moo ' .. k
-          end,
-        })
-        return apply("foobar", t)
-      ]])
+          local t = setmetatable({ foo = "bar" }, {
+            __index = function(_, k)
+              return 'moo ' .. k
+            end,
+          })
+          return apply("foobar", t)
+        ]])
       )
     end)
   end)

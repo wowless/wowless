@@ -28,7 +28,6 @@ static void copy_or_proxy_value(lua_State *L, lua_State *S, int i) {
       lua_pushstring(L, lua_tostring(S, i));
       break;
     case LUA_TTABLE: {
-      /* TODO also cache the proxies on the base side. */
       tableproxy *tp = lua_newuserdata(L, sizeof(tableproxy));
       luaL_getmetatable(L, tableproxy_metatable_name);
       lua_setmetatable(L, -2);
