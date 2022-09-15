@@ -93,6 +93,17 @@ static int wowless_tableproxy_get(lua_State *L) {
   return 1;
 }
 
+static int wowless_tableproxy_set(lua_State *L) {
+  tableproxy *tp = check_tableproxy(L, 1);
+  lua_State *S = tp->S;
+  luaL_checkany(L, 2);
+  luaL_checkany(L, 3);
+  copy_value(S, L, 2);
+  copy_value(S, L, 3);
+  lua_settable(S, tp->index);
+  return 0;
+}
+
 static int wowless_tableproxy_rawget(lua_State *L) {
   tableproxy *tp = check_tableproxy(L, 1);
   lua_State *S = tp->S;
@@ -104,9 +115,22 @@ static int wowless_tableproxy_rawget(lua_State *L) {
   return 1;
 }
 
+static int wowless_tableproxy_rawset(lua_State *L) {
+  tableproxy *tp = check_tableproxy(L, 1);
+  lua_State *S = tp->S;
+  luaL_checkany(L, 2);
+  luaL_checkany(L, 3);
+  copy_value(S, L, 2);
+  copy_value(S, L, 3);
+  lua_rawset(S, tp->index);
+  return 0;
+}
+
 static struct luaL_Reg tableproxy_index[] = {
   {"get", wowless_tableproxy_get},
+  {"set", wowless_tableproxy_set},
   {"rawget", wowless_tableproxy_rawget},
+  {"rawset", wowless_tableproxy_rawset},
   {NULL, NULL},
 };
 
