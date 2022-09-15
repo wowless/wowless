@@ -74,6 +74,10 @@ describe('sandbox', function()
         t:set('baz', 72)
       end
       assert.same(72, sandbox:eval('apply("foobar", t); return t.baz'))
+      _G.foobar = function(t)
+        t:set('baz', nil)
+      end
+      assert.same('moo baz', sandbox:eval('apply("foobar", t); return t.baz'))
     end)
   end)
 end)
