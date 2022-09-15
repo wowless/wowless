@@ -50,7 +50,9 @@ static int sandboxapply(lua_State *S) {
     copy_value(L, S, i);
   }
   if (lua_pcall(L, sandbox_top - 1, LUA_MULTRET, 0) != 0) {
+    lua_pushstring(S, "apply error: ");
     copy_value(S, L, -1);
+    lua_concat(S, 2);
     lua_error(S);
   }
   int host_top = lua_gettop(L);
