@@ -74,18 +74,18 @@ static int wowless_sandbox_create(lua_State *L) {
   return 1;
 }
 
-static lua_State *check_sandbox(lua_State *L) {
-  return *(lua_State **)luaL_checkudata(L, 1, sandbox_metatable_name);
+static lua_State *check_sandbox(lua_State *L, int index) {
+  return *(lua_State **)luaL_checkudata(L, index, sandbox_metatable_name);
 }
 
 static int wowless_sandbox_gc(lua_State *L) {
-  lua_State *S = check_sandbox(L);
+  lua_State *S = check_sandbox(L, 1);
   lua_close(S);
   return 0;
 }
 
 static int wowless_sandbox_eval(lua_State *L) {
-  lua_State *S = check_sandbox(L);
+  lua_State *S = check_sandbox(L, 1);
   const char *str = luaL_checkstring(L, 2);
   lua_settop(S, 0);
   if (luaL_dostring(S, str) != 0) {
