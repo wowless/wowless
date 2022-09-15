@@ -35,11 +35,11 @@ describe('sandbox', function()
     assert.same(true, lib.create():eval('return require == nil'))
   end)
   describe('apply', function()
-    _G.foobar = function(x, y, ...)
-      return x + 1, tostring(y), ...
-    end
     local sandbox = lib.create()
     it('works', function()
+      _G.foobar = function(x, y, ...)
+        return x + 1, tostring(y), ...
+      end
       assert.same({ 2, '4', 9 }, { sandbox:eval('return apply("foobar", 1, 4, 9)') })
     end)
     it('throws appropriately', function()
@@ -47,6 +47,21 @@ describe('sandbox', function()
         sandbox:eval('return apply("nonsense")')
       end, 'eval error: apply error: attempt to call a nil value')
     end)
+    it('proxies tables', function()
+      _G.foobar = function(t)
+        return { t:get('foo'), t:get(42), t:rawget('foo'), t:rawget(42) }
+      end
+      assert.same(
+        { 'bar', 'moo 42', 'bar', nil },
+        sandbox:eval([[
+        local t = setmetatable({ foo = "bar" }, {
+          __index = function(_, k)
+            return 'moo ' .. k
+          end,
+        })
+        return apply("foobar", t)
+      ]])
+      )
+    end)
   end)
-  _G.foobar = nil
 end)
