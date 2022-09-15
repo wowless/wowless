@@ -711,6 +711,7 @@ C_LFGList.GetAvailableCategories: C_LFGList.GetAvailableCategories
 C_LFGList.GetCategoryInfo: C_LFGList.GetCategoryInfo
 C_LFGList.GetFilteredSearchResults: C_LFGList.GetFilteredSearchResults
 C_LFGList.GetRoles: C_LFGList.GetRoles
+C_LFGList.GetSavedRoles: C_LFGList.GetSavedRoles
 C_LFGList.GetSearchResultFriends: C_LFGList.GetSearchResultFriends
 C_LFGList.GetSearchResultInfo: C_LFGList.GetSearchResultInfo
 C_LFGList.GetSearchResultLeaderInfo: C_LFGList.GetSearchResultLeaderInfo
