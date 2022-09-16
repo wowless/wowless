@@ -7,74 +7,60 @@ extern int lua_absindex(lua_State *, int);
 static const char sandbox_metatable_name[] = "wowless sandbox";
 static const char tableproxy_metatable_name[] = "wowless tableproxy";
 
-typedef struct {
-  lua_State *S;
-  int index;
-} tableproxy;
-
-static void copy_or_proxy_value(lua_State *L, lua_State *S, int i) {
-  int ty = lua_type(S, i);
+static void copy_scalar(lua_State *err, lua_State *to, lua_State *from, int index) {
+  int ty = lua_type(from, index);
   switch (ty) {
     case LUA_TNIL:
-      lua_pushnil(L);
+      lua_pushnil(to);
       break;
     case LUA_TBOOLEAN:
-      lua_pushboolean(L, lua_toboolean(S, i));
+      lua_pushboolean(to, lua_toboolean(from, index));
       break;
     case LUA_TNUMBER:
-      lua_pushnumber(L, lua_tonumber(S, i));
+      lua_pushnumber(to, lua_tonumber(from, index));
       break;
     case LUA_TSTRING:
-      lua_pushstring(L, lua_tostring(S, i));
+      lua_pushstring(to, lua_tostring(from, index));
       break;
-    case LUA_TTABLE: {
-      tableproxy *tp = lua_newuserdata(L, sizeof(tableproxy));
-      luaL_getmetatable(L, tableproxy_metatable_name);
-      lua_setmetatable(L, -2);
-      tp->S = S;
-      tp->index = lua_absindex(S, i);
-      break;
-    }
     default:
-      lua_pushstring(L, "invalid type: ");
-      lua_pushstring(L, lua_typename(S, ty));
-      lua_concat(L, 2);
-      lua_error(L);
+      lua_pushstring(err, "invalid type: ");
+      lua_pushstring(err, lua_typename(from, ty));
+      lua_concat(err, 2);
+      lua_error(err);
   }
 }
 
-static void copy_value(lua_State *L, lua_State *S, int i) {
-  int ty = lua_type(S, i);
-  switch (ty) {
-    case LUA_TNIL:
-      lua_pushnil(L);
-      break;
-    case LUA_TBOOLEAN:
-      lua_pushboolean(L, lua_toboolean(S, i));
-      break;
-    case LUA_TNUMBER:
-      lua_pushnumber(L, lua_tonumber(S, i));
-      break;
-    case LUA_TSTRING:
-      lua_pushstring(L, lua_tostring(S, i));
-      break;
-    case LUA_TTABLE:
-      lua_newtable(L);
-      lua_pushvalue(S, i);
-      lua_pushnil(S);
-      while (lua_next(S, -2) != 0) {
-        copy_value(L, S, -2);
-        copy_value(L, S, -1);
-        lua_rawset(L, -3);
-        lua_pop(S, 1);
-      }
-      lua_pop(S, 1);
-      break;
-    default:
-      lua_pushstring(L, "invalid type: ");
-      lua_pushstring(L, lua_typename(S, ty));
-      lua_concat(L, 2);
-      lua_error(L);
+typedef struct {
+  lua_State *state;
+  int index;
+} tableproxy;
+
+static void proxy_value(lua_State *err, lua_State *to, lua_State *from, int index) {
+  if (lua_type(from, index) == LUA_TTABLE) {
+    tableproxy *tp = lua_newuserdata(to, sizeof(tableproxy));
+    luaL_getmetatable(to, tableproxy_metatable_name);
+    lua_setmetatable(to, -2);
+    tp->state = from;
+    tp->index = lua_absindex(from, index);
+  } else {
+    copy_scalar(err, to, from, index);
+  }
+}
+
+static void copy_value(lua_State *err, lua_State *to, lua_State *from, int index) {
+  if (lua_type(from, index) == LUA_TTABLE) {
+    lua_newtable(to);
+    lua_pushvalue(from, index);
+    lua_pushnil(from);
+    while (lua_next(from, -2) != 0) {
+      copy_value(err, to, from, -2);
+      copy_value(err, to, from, -1);
+      lua_rawset(to, -3);
+      lua_pop(from, 1);
+    }
+    lua_pop(from, 1);
+  } else {
+    copy_scalar(err, to, from, index);
   }
 }
 
@@ -84,44 +70,44 @@ static tableproxy *check_tableproxy(lua_State *L, int index) {
 
 static int wowless_tableproxy_get(lua_State *L) {
   tableproxy *tp = check_tableproxy(L, 1);
-  lua_State *S = tp->S;
+  lua_State *S = tp->state;
   luaL_checkany(L, 2);
-  copy_value(S, L, 2);
+  copy_value(L, S, L, 2);
   lua_gettable(S, tp->index);
-  copy_or_proxy_value(L, S, -1);
+  proxy_value(L, L, S, -1);
   lua_pop(S, 1);
   return 1;
 }
 
 static int wowless_tableproxy_set(lua_State *L) {
   tableproxy *tp = check_tableproxy(L, 1);
-  lua_State *S = tp->S;
+  lua_State *S = tp->state;
   luaL_checkany(L, 2);
   luaL_checkany(L, 3);
-  copy_value(S, L, 2);
-  copy_value(S, L, 3);
+  copy_value(L, S, L, 2);
+  copy_value(L, S, L, 3);
   lua_settable(S, tp->index);
   return 0;
 }
 
 static int wowless_tableproxy_rawget(lua_State *L) {
   tableproxy *tp = check_tableproxy(L, 1);
-  lua_State *S = tp->S;
+  lua_State *S = tp->state;
   luaL_checkany(L, 2);
-  copy_value(S, L, 2);
+  copy_value(L, S, L, 2);
   lua_rawget(S, tp->index);
-  copy_or_proxy_value(L, S, -1);
+  proxy_value(L, L, S, -1);
   lua_pop(S, 1);
   return 1;
 }
 
 static int wowless_tableproxy_rawset(lua_State *L) {
   tableproxy *tp = check_tableproxy(L, 1);
-  lua_State *S = tp->S;
+  lua_State *S = tp->state;
   luaL_checkany(L, 2);
   luaL_checkany(L, 3);
-  copy_value(S, L, 2);
-  copy_value(S, L, 3);
+  copy_value(L, S, L, 2);
+  copy_value(L, S, L, 3);
   lua_rawset(S, tp->index);
   return 0;
 }
@@ -141,17 +127,17 @@ static int sandboxapply(lua_State *S) {
   lua_getglobal(L, str);
   int sandbox_top = lua_gettop(S);
   for (int i = 2; i <= sandbox_top; ++i) {
-    copy_or_proxy_value(L, S, i);
+    proxy_value(L, L, S, i);
   }
   if (lua_pcall(L, sandbox_top - 1, LUA_MULTRET, 0) != 0) {
     lua_pushstring(S, "apply error: ");
-    copy_value(S, L, -1);
+    copy_value(L, S, L, -1);
     lua_concat(S, 2);
     lua_error(S);
   }
   int host_top = lua_gettop(L);
   for (int i = old_host_top + 1; i <= host_top; ++i) {
-    copy_value(S, L, i);
+    copy_value(L, S, L, i);
   }
   return host_top - old_host_top;
 }
@@ -184,13 +170,13 @@ static int wowless_sandbox_eval(lua_State *L) {
   lua_settop(S, 0);
   if (luaL_dostring(S, str) != 0) {
     lua_pushstring(L, "eval error: ");
-    copy_value(L, S, -1);
+    copy_value(L, L, S, -1);
     lua_concat(L, 2);
     lua_error(L);
   }
   int n = lua_gettop(S);
   for (int i = 1; i <= n; ++i) {
-    copy_value(L, S, i);
+    copy_value(L, L, S, i);
   }
   return n;
 }
