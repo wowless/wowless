@@ -325,10 +325,16 @@ local function loader(api, cfg)
             t:AddMaskTexture(parent)
           end,
           maxresize = function(e, parent)
-            parent:SetMaxResize(getXY(e.kids[#e.kids]))
+            -- TODO fix for dragonflight
+            if parent.SetMaxResize then
+              parent:SetMaxResize(getXY(e.kids[#e.kids]))
+            end
           end,
           minresize = function(e, parent)
-            parent:SetMinResize(getXY(e.kids[#e.kids]))
+            -- TODO fix for dragonflight
+            if parent.SetMinResize then
+              parent:SetMinResize(getXY(e.kids[#e.kids]))
+            end
           end,
           modifiedclick = function(e)
             api.states.ModifiedClicks[e.attr.action] = e.attr.default
