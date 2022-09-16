@@ -714,6 +714,7 @@ local syncTests = function()
 
     StatusBar = function()
       local sb = CreateFrame('StatusBar')
+      local nilparent = CreateFrame('Frame')
       local states = {
         colorTexture = function()
           local t = assert(sb:GetStatusBarTexture())
@@ -761,7 +762,10 @@ local syncTests = function()
         SetStatusBarTextureNil = {
           to = 'empty',
           func = function()
-            check0(sb:SetStatusBarTexture(nil))
+            local t = sb:GetStatusBarTexture()
+            if t then
+              t:SetParent(nilparent)
+            end
           end,
         },
       }

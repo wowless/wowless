@@ -35,6 +35,7 @@ local function new(log, maxErrors, product)
     'normalTexture',
     'pushedTexture',
     'scrollChild',
+    'statusBarTexture',
   }
 
   local function SetParent(obj, parent)
