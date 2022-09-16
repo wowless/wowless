@@ -518,8 +518,9 @@ local syncTests = function()
 
     GameTooltip = function()
       local f = function(n, ...)
-        if n ~= select('#', ...) then
-          error('wrong number of return values', 2)
+        local k = select('#', ...)
+        if n ~= k then
+          error(string.format('wrong number of return values: want %d, got %d', n, k), 2)
         end
         return ...
       end
@@ -551,7 +552,7 @@ local syncTests = function()
           }
         end,
         Kids = function()
-          if _G.__wowless then
+          if _G.__wowless or runtimeProduct == 'wow_beta' or runtimeProduct == 'wowt' then
             return
           end
           local parent = f(1, CreateFrame('Frame'))
