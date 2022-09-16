@@ -70,8 +70,8 @@ static tableproxy *check_tableproxy(lua_State *L, int index) {
 
 static int wowless_tableproxy_get(lua_State *L) {
   tableproxy *tp = check_tableproxy(L, 1);
-  lua_State *S = tp->state;
   luaL_checkany(L, 2);
+  lua_State *S = tp->state;
   copy_value(L, S, L, 2);
   lua_gettable(S, tp->index);
   proxy_value(L, L, S, -1);
@@ -81,9 +81,9 @@ static int wowless_tableproxy_get(lua_State *L) {
 
 static int wowless_tableproxy_set(lua_State *L) {
   tableproxy *tp = check_tableproxy(L, 1);
-  lua_State *S = tp->state;
   luaL_checkany(L, 2);
   luaL_checkany(L, 3);
+  lua_State *S = tp->state;
   copy_value(L, S, L, 2);
   copy_value(L, S, L, 3);
   lua_settable(S, tp->index);
@@ -92,8 +92,8 @@ static int wowless_tableproxy_set(lua_State *L) {
 
 static int wowless_tableproxy_rawget(lua_State *L) {
   tableproxy *tp = check_tableproxy(L, 1);
-  lua_State *S = tp->state;
   luaL_checkany(L, 2);
+  lua_State *S = tp->state;
   copy_value(L, S, L, 2);
   lua_rawget(S, tp->index);
   proxy_value(L, L, S, -1);
@@ -103,9 +103,9 @@ static int wowless_tableproxy_rawget(lua_State *L) {
 
 static int wowless_tableproxy_rawset(lua_State *L) {
   tableproxy *tp = check_tableproxy(L, 1);
-  lua_State *S = tp->state;
   luaL_checkany(L, 2);
   luaL_checkany(L, 3);
+  lua_State *S = tp->state;
   copy_value(L, S, L, 2);
   copy_value(L, S, L, 3);
   lua_rawset(S, tp->index);
