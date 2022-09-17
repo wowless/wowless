@@ -7,6 +7,6 @@ outputs:
 - name: info
   nilable: true
   type: C_ItemInteraction.ItemInteractionFrameInfo
-dbs:
-- index: ID
-  name: UiItemInteraction
+sqls:
+- lookup: C_ItemInteraction.GetItemInteractionInfo
+  table: true
