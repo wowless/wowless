@@ -29,7 +29,7 @@ outputs:
   type: string
 - name: primaryStat
   type: number
-dbs:
-- name: ChrSpecialization
+sqls:
+- lookup: GetSpecializationInfo
 states:
 - Units
