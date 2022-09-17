@@ -124,10 +124,14 @@ type:
                 cursor:
                   type:
                     ref: sqlcursor
+                table:
+                  type: boolean
             - record:
                 lookup:
                   type:
                     ref: sqllookup
+                table:
+                  type: boolean
       states:
         type:
           sequenceof:

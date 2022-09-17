@@ -104,9 +104,15 @@ do
       end
       for _, sql in ipairs(apicfg.sqls or {}) do
         if sql.cursor then
-          sqlcursors[sql.cursor] = readFile('data/sql/cursor/' .. sql.cursor .. '.sql')
+          sqlcursors[sql.cursor] = {
+            sql = readFile('data/sql/cursor/' .. sql.cursor .. '.sql'),
+            table = sql.table,
+          }
         elseif sql.lookup then
-          sqllookups[sql.lookup] = readFile('data/sql/lookup/' .. sql.lookup .. '.sql')
+          sqllookups[sql.lookup] = {
+            sql = readFile('data/sql/lookup/' .. sql.lookup .. '.sql'),
+            table = sql.table,
+          }
         end
       end
       apis[name] = apicfg

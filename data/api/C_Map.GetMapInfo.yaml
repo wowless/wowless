@@ -8,6 +8,6 @@ outputs:
 - name: info
   nilable: true
   type: C_Map.UiMapDetails
-dbs:
-- index: ID
-  name: UiMap
+sqls:
+- lookup: C_Map.GetMapInfo
+  table: true

@@ -2,23 +2,29 @@ local data = require('wowapi.data')
 local util = require('wowless.util')
 
 local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
-  local function lookup(stmt)
-    for row in stmt:rows() do -- luacheck: ignore 512
-      return unpack(row)
+  local function lookup(stmt, isTable)
+    if isTable then
+      for row in stmt:nrows() do -- luacheck: ignore 512
+        return row
+      end
+    else
+      for row in stmt:rows() do -- luacheck: ignore 512
+        return unpack(row)
+      end
     end
   end
   local function cursor(stmt)
-    return stmt:urows()
+    return stmt:urows() -- TODO support table mode
   end
   local function prep(fn, sql, f)
-    local stmt = sqlitedb:prepare(sql)
+    local stmt = sqlitedb:prepare(sql.sql)
     if not stmt then
       error('could not prepare ' .. fn .. ': ' .. sqlitedb:errmsg())
     end
     return function(...)
       stmt:reset()
       stmt:bind_values(...)
-      return f(stmt)
+      return f(stmt, sql.table)
     end
   end
   local lookups = {}
