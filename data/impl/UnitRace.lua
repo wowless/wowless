@@ -1,8 +1,4 @@
-local chrraces, unit = ...
+local sql, unit = ...
 if unit then
-  for row in chrraces() do
-    if row.ID == unit.race then
-      return row.Name_lang, row.ClientFileString, row.ID
-    end
-  end
+  return sql(unit.race)
 end
