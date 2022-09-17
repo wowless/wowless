@@ -7,6 +7,5 @@ inputs:
 outputs:
 - name: itemExists
   type: boolean
-dbs:
-- index: ID
-  name: Item
+sqls:
+- lookup: C_Item.DoesItemExistByID
