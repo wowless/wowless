@@ -8,6 +8,6 @@ outputs:
 - name: classInfo
   nilable: true
   type: C_CreatureInfo.ClassInfo
-dbs:
-- index: ID
-  name: ChrClasses
+sqls:
+- lookup: C_CreatureInfo.GetClassInfo
+  table: true
