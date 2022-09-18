@@ -1,16 +1,6 @@
-local renownrewards, covenantID = ...
+local sql, covenantID = ...
 local t = {}
-for row in renownrewards() do
-  if row.CovenantID == covenantID then
-    table.insert(t, {
-      isCapstore = false,
-      isMilestone = false,
-      level = row.Level,
-      locked = false,
-    })
-  end
+for row in sql(covenantID) do
+  table.insert(t, row)
 end
-table.sort(t, function(a, b)
-  return a.level < b.level
-end)
 return t
