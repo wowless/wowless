@@ -1,25 +1,6 @@
-local renownrewards, covenantID, renownLevel = ...
+local sql, covenantID, renownLevel = ...
 local t = {}
-for row in renownrewards() do
-  if row.CovenantID == covenantID and row.Level == renownLevel then
-    table.insert(t, {
-      description = row.Description_lang,
-      garrFollowerID = row.GarrFollowerID,
-      icon = row.Icon,
-      itemID = row.ItemID ~= 0 and row.ItemID or nil,
-      mountID = row.MountID,
-      name = row.Name_lang,
-      spellID = row.SpellID,
-      titleMaskID = row.CharTitlesID,
-      toastDescription = row.ToastDescription_lang,
-      transmogID = row.TransmogID,
-      transmogIllusionSourceID = row.TransmogIllusionID,
-      transmogSetID = row.TransmogSetID,
-      uiOrder = row.UiOrder,
-    })
-  end
+for row in sql(covenantID, renownLevel) do
+  table.insert(t, row)
 end
-table.sort(t, function(a, b)
-  return a.uiOrder < b.uiOrder
-end)
 return t
