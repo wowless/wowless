@@ -1,6 +1,5 @@
-local chrclasses, classTable, isFemale = ...
-local col = isFemale and 'Name_female_lang' or 'Name_male_lang'
-for row in chrclasses() do
-  classTable[row.Filename] = row[col]
+local sql, classTable, isFemale = ...
+for filename, name in sql(isFemale) do
+  classTable[filename] = name
 end
 return classTable
