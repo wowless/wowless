@@ -45,32 +45,6 @@ local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
   }
 end
 
-local function mkdb2s(loader)
-  local alldbs = setmetatable({}, {
-    __index = function(dbs, db)
-      local t = {}
-      for row in loader.db2rows(db) do
-        table.insert(t, row)
-      end
-      dbs[db] = t
-      return dbs[db]
-    end,
-  })
-  return setmetatable({}, {
-    __index = function(t, dbname)
-      t[dbname] = function()
-        local rows = alldbs[dbname]
-        local idx = 0
-        return function()
-          idx = idx + 1
-          return rows[idx]
-        end
-      end
-      return t[dbname]
-    end,
-  })
-end
-
 local function resolveUnit(units, unit)
   -- TODO complete unit resolution
   local guid = units.aliases[unit:lower()]
@@ -82,7 +56,6 @@ local function loadFunctions(api, loader)
   local datalua = require('build.products.' .. loader.product .. '.data')
   local apis = datalua.apis
   local sqls = loadSqls(loader.sqlitedb, datalua.sqlcursors, datalua.sqllookups)
-  local db2s = mkdb2s(loader)
   local impls = {}
   for k, v in pairs(datalua.impls) do
     impls[k] = loadstring(v)
@@ -188,9 +161,6 @@ local function loadFunctions(api, loader)
       end
       for _, st in ipairs(apicfg.states or {}) do
         table.insert(args, api.states[st])
-      end
-      for _, db in ipairs(apicfg.dbs or {}) do
-        table.insert(args, db2s[db.name])
       end
       for _, sql in ipairs(apicfg.sqls or {}) do
         table.insert(args, sql.lookup and sqls.lookups[sql.lookup] or sqls.cursors[sql.cursor])

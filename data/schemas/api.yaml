@@ -19,14 +19,6 @@ type:
   - record:
       comment:
         type: string
-      dbs:
-        type:
-          sequenceof:
-            record:
-              name:
-                required: true
-                type:
-                  ref: db
       debug:
         type: boolean
       frameworks:
