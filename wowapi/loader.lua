@@ -13,8 +13,12 @@ local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
       end
     end
   end
-  local function cursor(stmt)
-    return stmt:urows() -- TODO support table mode
+  local function cursor(stmt, isTable)
+    if isTable then
+      return stmt:nrows()
+    else
+      return stmt:urows()
+    end
   end
   local function prep(fn, sql, f)
     local stmt = sqlitedb:prepare(sql.sql)
