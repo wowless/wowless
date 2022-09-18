@@ -689,13 +689,6 @@ local function loader(api, cfg)
 
   api.states.CVars.portal = build.ptr and 'test' or ''
 
-  local wdb = require('wowless.db')
-
-  local function db2rows(name)
-    local data = readFile(cfg.cascproxy and wdb.fdid(name) or path.join(rootDir, 'db2', name .. '.db2'))
-    return wdb.rows(product, name, data)
-  end
-
   local sqlitedb = (function()
     local dbfile = ('build/products/%s/%s.db'):format(product, rootDir and 'data' or 'schema')
     return require('lsqlite3').open(dbfile)
@@ -733,8 +726,8 @@ local function loader(api, cfg)
       end
     end
     if rootDir then
-      for row in db2rows('ManifestInterfaceTOCData') do
-        maybeAdd(path.join(rootDir, path.dirname(row.FilePath)), row.ID)
+      for filepath, fdid in sqlitedb:urows('SELECT FilePath, ID FROM ManifestInterfaceTOCData') do
+        maybeAdd(path.join(rootDir, path.dirname(filepath)), fdid)
       end
     end
     for _, d in ipairs(otherAddonDirs) do
@@ -787,8 +780,8 @@ local function loader(api, cfg)
 
   local function loadFrameXml()
     local loadFile = forAddon()
-    for row in db2rows('GlobalStrings') do
-      api.env[row.BaseTag] = row.TagText_lang
+    for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
+      api.env[tag] = text
     end
     for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do
       loadFile(file)
@@ -840,7 +833,6 @@ local function loader(api, cfg)
   end
 
   return {
-    db2rows = db2rows,
     initAddons = initAddons,
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
