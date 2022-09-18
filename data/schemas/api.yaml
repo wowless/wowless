@@ -23,8 +23,6 @@ type:
         type:
           sequenceof:
             record:
-              index:
-                type: string
               name:
                 required: true
                 type:

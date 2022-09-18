@@ -48,43 +48,20 @@ local function mkdb2s(loader)
       for row in loader.db2rows(db) do
         table.insert(t, row)
       end
-      dbs[db] = {
-        data = t,
-        indices = setmetatable({}, {
-          __index = function(indices, name)
-            local index = {}
-            for _, row in ipairs(t) do
-              local rowkey = row[name]
-              index[rowkey] = index[rowkey] or row
-            end
-            indices[name] = index
-            return index
-          end,
-        }),
-      }
+      dbs[db] = t
       return dbs[db]
     end,
   })
   return setmetatable({}, {
     __index = function(t, dbname)
-      t[dbname] = {
-        cursor = function()
-          local rows = alldbs[dbname].data
-          local idx = 0
-          return function()
-            idx = idx + 1
-            return rows[idx]
-          end
-        end,
-        lookup = setmetatable({}, {
-          __index = function(lookups, index)
-            lookups[index] = function(k)
-              return alldbs[dbname].indices[index][k]
-            end
-            return lookups[index]
-          end,
-        }),
-      }
+      t[dbname] = function()
+        local rows = alldbs[dbname]
+        local idx = 0
+        return function()
+          idx = idx + 1
+          return rows[idx]
+        end
+      end
       return t[dbname]
     end,
   })
@@ -209,8 +186,7 @@ local function loadFunctions(api, loader)
         table.insert(args, api.states[st])
       end
       for _, db in ipairs(apicfg.dbs or {}) do
-        local db2 = db2s[db.name]
-        table.insert(args, db.index and db2.lookup[db.index] or db2.cursor)
+        table.insert(args, db2s[db.name])
       end
       for _, sql in ipairs(apicfg.sqls or {}) do
         table.insert(args, sql.lookup and sqls.lookups[sql.lookup] or sqls.cursors[sql.cursor])
