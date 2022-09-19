@@ -1,6 +1,7 @@
 local require = require
 _G.require = function(k, ...)
   assert(k:sub(1, 6) ~= 'tools.')
+  assert(k ~= 'wowapi.yaml')
   return require(k, ...)
 end
 local util = require('wowless.util')
