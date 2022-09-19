@@ -264,7 +264,8 @@ local function new(log, maxErrors, product)
     return errors
   end
 
-  local eventConfigs = require('build.products.' .. product .. '.data').events
+  local datalua = require('build.products.' .. product .. '.data')
+  local eventConfigs = datalua.events
 
   local function RegisterEvent(frame, event)
     event = event:upper()
@@ -326,8 +327,8 @@ local function new(log, maxErrors, product)
     return ud.registeredAllEvents or ud.registeredEvents[event]
   end
 
-  for _, data in pairs(require('wowapi.data').state) do
-    states[data.name] = require('pl.tablex').deepcopy(data.value)
+  for k, v in pairs(datalua.state) do
+    states[k] = require('pl.tablex').deepcopy(v)
   end
   seterrorhandler(ErrorHandler)
 

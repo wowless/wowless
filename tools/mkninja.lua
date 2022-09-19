@@ -139,6 +139,11 @@ local builds = {
     rule = 'stamp',
   },
   {
+    ins = find('data/state'),
+    outs = 'build/state.stamp',
+    rule = 'stamp',
+  },
+  {
     ins = find('data/structures'),
     outs = 'build/structures.stamp',
     rule = 'stamp',
@@ -153,6 +158,7 @@ local builds = {
       'build/api.stamp',
       'build/dbdefs.stamp',
       'build/events.stamp',
+      'build/state.stamp',
       'build/structures.stamp',
       'build/uiobjects.stamp',
       (function()
@@ -168,7 +174,6 @@ local builds = {
           'addon',
           'data/dbdefs',
           'data/schemas',
-          'data/state',
           'data/xml',
           'spec',
           'tools',
@@ -283,6 +288,7 @@ for _, p in ipairs(productList) do
       'build/events.stamp',
       'build/impl.stamp',
       'build/sql.stamp',
+      'build/state.stamp',
       'build/structures.stamp',
       'build/uiobjects.stamp',
       dataStamp,

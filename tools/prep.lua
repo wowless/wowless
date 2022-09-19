@@ -139,6 +139,12 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
   events[k] = cfg
 end
 
+local state = {}
+for _, f in ipairs(require('pl.dir').getfiles('data/state')) do
+  local cfg = parseYaml(f)
+  state[cfg.name] = cfg.value
+end
+
 local uiobjects = {}
 for _, d in ipairs(require('pl.dir').getdirectories('data/uiobjects')) do
   local name = d:match('/(%a+)$')
@@ -167,6 +173,7 @@ local data = {
   impls = impls,
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
+  state = state,
   uiobjects = uiobjects,
 }
 local txt = 'return ' .. plprettywrite(data)
