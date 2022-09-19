@@ -14,10 +14,11 @@ end
 local plprettywrite = require('pl.pretty').write
 
 if product == 'xml' or product == 'structures' then
+  local isxml = product == 'xml'
   local data = {}
   for _, f in ipairs(require('pl.dir').getfiles('data/' .. product)) do
     local cfg = parseYaml(f)
-    data[cfg.name] = cfg
+    data[cfg.name] = isxml and cfg or true
   end
   local txt = 'return ' .. plprettywrite(data)
   assert(require('pl.file').write('build/' .. product .. '.lua', txt))

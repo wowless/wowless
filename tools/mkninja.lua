@@ -311,7 +311,7 @@ for _, p in ipairs(productList) do
   })
   table.insert(builds, {
     args = { product = p },
-    ins = { datadb, datalua },
+    ins = { datadb, datalua, 'build/structures.lua', 'build/xml.lua' },
     outs = p,
     rule = 'phony',
   })
