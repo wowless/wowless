@@ -1,6 +1,6 @@
 local xmlimpls = (function()
   local mixin = require('wowless.util').mixin
-  local tree = require('wowapi.data').xml
+  local tree = require('build.xml')
   local newtree = {}
   for k, v in pairs(tree) do
     local attrs = mixin({}, v.attributes)

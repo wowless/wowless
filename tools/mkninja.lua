@@ -154,6 +154,12 @@ local builds = {
     rule = 'stamp',
   },
   {
+    args = { product = 'xml' },
+    ins_implicit = { find('data/xml'), 'tools/prep.lua' },
+    outs_implicit = 'build/xml.lua',
+    rule = 'prep',
+  },
+  {
     ins = {
       'build/api.stamp',
       'build/dbdefs.stamp',
@@ -161,6 +167,7 @@ local builds = {
       'build/state.stamp',
       'build/structures.stamp',
       'build/uiobjects.stamp',
+      'build/xml.lua',
       (function()
         local skip = {
           ['tools/mkninja.lua'] = true,
@@ -174,7 +181,6 @@ local builds = {
           'addon',
           'data/dbdefs',
           'data/schemas',
-          'data/xml',
           'spec',
           'tools',
           'wowapi',

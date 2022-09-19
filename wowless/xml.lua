@@ -49,7 +49,7 @@ local function preprocess(tree)
   return newtree
 end
 
-local lang = preprocess(require('wowapi.data').xml)
+local lang = preprocess(require('build.xml'))
 
 local attrBasedElementMT = {
   __index = (function()
