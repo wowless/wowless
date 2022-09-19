@@ -297,7 +297,7 @@ function G.GeneratedTests()
       assert(obj ~= obj2)
       local mt = getmetatable(obj)
       assert(mt == getmetatable(obj2))
-      if objectTypeName == 'FogOfWarFrame' and WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
+      if objectTypeName == 'FogOfWarFrame' and _G.WowlessData.Build.flavor ~= 'Mainline' then
         assert(mt == nil)
         assertEquals(objectTypeName, CreateFrame('Frame').GetObjectType(obj))
       else

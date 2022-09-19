@@ -1,7 +1,7 @@
 local _, G = ...
 local assertEquals = _G.assertEquals
 local function mainline(x)
-  return WOW_PROJECT_ID == WOW_PROJECT_MAINLINE and x or nil
+  return _G.WowlessData.Build.flavor == 'Mainline' and x or nil
 end
 local function numkeys(t)
   local n = 0

@@ -138,6 +138,8 @@ local function new(log, maxErrors, product)
     end
   end
 
+  local datalua = require('build.products.' .. product .. '.data')
+
   local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id)
     local objname = ParentSub(objnamearg, parent)
     assert(typename, 'must specify type for ' .. tostring(objname))
@@ -195,6 +197,10 @@ local function new(log, maxErrors, product)
     RunScript(obj, 'OnLoad')
     if InheritsFrom(typename, 'region') and obj:IsVisible() then
       RunScript(obj, 'OnShow')
+    end
+    -- I have found a theory for this hack but this comment is too small to contain it.
+    if typename == 'fogofwarframe' and datalua.build.flavor ~= 'Mainline' then
+      setmetatable(obj, nil)
     end
     return obj
   end
@@ -254,7 +260,7 @@ local function new(log, maxErrors, product)
       CallSafely(timer.val)
     end
     for _, frame in ipairs(frames) do
-      if frame:IsVisible() then
+      if frame.IsVisible and frame:IsVisible() then
         RunScript(frame, 'OnUpdate', 1)
       end
     end
@@ -264,7 +270,6 @@ local function new(log, maxErrors, product)
     return errors
   end
 
-  local datalua = require('build.products.' .. product .. '.data')
   local eventConfigs = datalua.events
 
   local function RegisterEvent(frame, event)
