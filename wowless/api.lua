@@ -341,6 +341,7 @@ local function new(log, maxErrors, product)
     CallSafely = CallSafely,
     CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,
+    datalua = datalua,
     env = env,
     ErrorHandler = ErrorHandler,
     frames = frames,

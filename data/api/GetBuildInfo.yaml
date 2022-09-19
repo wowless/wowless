@@ -13,4 +13,4 @@ outputs:
 - name: tocversion
   type: number
 frameworks:
-- loader
+- api
