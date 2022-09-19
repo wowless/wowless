@@ -1,3 +1,8 @@
+local require = require
+_G.require = function(k, ...)
+  assert(k:sub(1, 6) ~= 'tools.')
+  return require(k, ...)
+end
 local util = require('wowless.util')
 local args = (function()
   local parser = require('argparse')()
