@@ -154,6 +154,12 @@ local builds = {
     rule = 'stamp',
   },
   {
+    args = { product = 'structures' },
+    ins_implicit = { find('data/structures'), 'tools/prep.lua' },
+    outs_implicit = 'build/structures.lua',
+    rule = 'prep',
+  },
+  {
     args = { product = 'xml' },
     ins_implicit = { find('data/xml'), 'tools/prep.lua' },
     outs_implicit = 'build/xml.lua',
@@ -165,6 +171,7 @@ local builds = {
       'build/dbdefs.stamp',
       'build/events.stamp',
       'build/state.stamp',
+      'build/structures.lua',
       'build/structures.stamp',
       'build/uiobjects.stamp',
       'build/xml.lua',

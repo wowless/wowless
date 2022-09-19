@@ -1,4 +1,4 @@
-local data = require('wowapi.data')
+local structures = require('build.structures')
 local util = require('wowless.util')
 
 local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
@@ -105,7 +105,7 @@ local function loadFunctions(api, loader)
           elseif param.type == 'string' and ty == 'number' then
             arg = tostring(arg) or arg
             ty = type(arg)
-          elseif param.type == 'unknown' or data.structures[param.type] ~= nil then
+          elseif param.type == 'unknown' or structures[param.type] ~= nil then
             ty = param.type
           elseif param.type == 'unit' and ty == 'string' then
             arg = resolveUnit(api.states.Units, arg)
