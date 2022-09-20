@@ -15,9 +15,8 @@ local function dump(api)
   end
 end
 
-local function init(api, loader, taint)
+local function init(api, loader)
   api.env._G = api.env('getenv')
-  api.env.forceinsecure = taint and forceinsecure or function() end
   Mixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
   Mixin(api.env, api.datalua.globals)
   api.env.__wowless = {

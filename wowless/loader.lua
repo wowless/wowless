@@ -831,7 +831,6 @@ local function loader(api, cfg)
     initAddons = initAddons,
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
-    product = product,
     saveAllVariables = saveAllVariables,
     sqlitedb = sqlitedb,
   }

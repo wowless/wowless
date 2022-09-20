@@ -18,7 +18,7 @@ local function run(cfg)
     product = cfg.product,
     rootDir = cfg.dir,
   })
-  require('wowless.env').init(api, loader, cfg.taint)
+  require('wowless.env').init(api, loader)
   loader.initAddons()
   if cfg.dir then
     loader.loadFrameXml()
