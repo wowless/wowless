@@ -185,7 +185,7 @@ local function run(cfg)
         USERANDOM = true,
       }
       local cmds = {}
-      for k, v in pairs(api.env) do
+      for k, v in pairs(api.env('get')) do
         local cmd = k:match('^SLASH_(.+)1$')
         if cmd and not cmdBlacklist[cmd] then
           cmds[cmd] = v

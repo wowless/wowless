@@ -16,7 +16,7 @@ local function dump(api)
 end
 
 local function init(api, loader, taint)
-  api.env._G = api.env
+  api.env._G = api.env('get')
   api.env.forceinsecure = taint and forceinsecure or function() end
   util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
   Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api, loader))

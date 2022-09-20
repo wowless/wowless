@@ -1,8 +1,34 @@
 local traceback = require('wowless.ext').traceback
 
+local function mkenv()
+  local t = {}
+  local api = {
+    get = function()
+      return t
+    end,
+    set = function(f)
+      return setfenv(f, t)
+    end,
+  }
+  local p = newproxy(true)
+  require('wowless.util').mixin(getmetatable(p), {
+    __call = function(_, x, ...)
+      return api[x](...)
+    end,
+    __index = function(_, k)
+      return t[k]
+    end,
+    __metatable = 'wowless environment',
+    __newindex = function(_, k, v)
+      t[k] = v
+    end,
+  })
+  return p
+end
+
 local function new(log, maxErrors, product)
   local allEventRegistrations = {}
-  local env = {}
+  local env = mkenv()
   local errors = 0
   local eventRegistrations = {}
   local frames = {}
