@@ -53,7 +53,7 @@ end
 
 local function loadFunctions(api, loader)
   api.log(1, 'loading functions')
-  local datalua = require('build.products.' .. loader.product .. '.data')
+  local datalua = api.datalua
   local apis = datalua.apis
   local sqls = loadSqls(loader.sqlitedb, datalua.sqlcursors, datalua.sqllookups)
   local impls = {}
