@@ -23,7 +23,7 @@ local function hasproduct(t, p)
   return false
 end
 
-local function mkBaseUIObjectTypes(api, loader)
+local function mkBaseUIObjectTypes(api)
   local log = api.log or function() end
 
   local function u(x)
@@ -87,7 +87,7 @@ local function mkBaseUIObjectTypes(api, loader)
         local inherits = {}
         local metaindex = Mixin({}, ty.mixin)
         for inh, t in pairs(ty.inherits) do
-          if hasproduct(t, loader.product) then
+          if hasproduct(t, api.product) then
             flattenOne(inh)
             table.insert(inherits, string.lower(inh))
             for mk, mv in pairs(result[string.lower(inh)].metatable.__index) do
@@ -123,14 +123,12 @@ local function mkBaseUIObjectTypes(api, loader)
     return result
   end
 
-  local datalua = require('build.products.' .. loader.product .. '.data')
-
   local env = {
     api = api,
-    build = datalua.build,
+    build = api.datalua.build,
     kids = kids,
     m = m,
-    runtimeProduct = loader.product,
+    runtimeProduct = api.product,
     toTexture = toTexture,
     u = u,
     UpdateVisible = UpdateVisible,
@@ -140,7 +138,7 @@ local function mkBaseUIObjectTypes(api, loader)
   end
 
   local uiobjects = {}
-  for name, cfg in pairs(datalua.uiobjects) do
+  for name, cfg in pairs(api.datalua.uiobjects) do
     local lname = name:lower()
     local function wrap(fname, fn)
       setfenv(fn, env)

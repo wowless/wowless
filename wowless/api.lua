@@ -363,7 +363,7 @@ local function new(log, maxErrors, product)
   end
   seterrorhandler(ErrorHandler)
 
-  return {
+  local api = {
     CallSafely = CallSafely,
     CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,
@@ -379,6 +379,7 @@ local function new(log, maxErrors, product)
     log = log,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
+    product = product,
     RegisterAllEvents = RegisterAllEvents,
     RegisterEvent = RegisterEvent,
     RunScript = RunScript,
@@ -392,6 +393,8 @@ local function new(log, maxErrors, product)
     UnregisterEvent = UnregisterEvent,
     UserData = u,
   }
+  require('wowless.util').mixin(uiobjectTypes, require('wowapi.uiobjects')(api))
+  return api
 end
 
 return {
