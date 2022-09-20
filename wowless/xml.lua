@@ -3,7 +3,10 @@ local mixin = require('wowless.util').mixin
 local function preprocess(tree)
   local newtree = {}
   for k, v in pairs(tree) do
-    local attrs = mixin({}, v.attributes)
+    local attrs = {}
+    for ak, av in pairs(v.attributes or {}) do
+      attrs[ak] = av.type
+    end
     local kids = {}
     local text = false
     if type(v.contents) == 'table' then
@@ -24,7 +27,7 @@ local function preprocess(tree)
       t = tree[t.extends]
       for ak, av in pairs(t.attributes or {}) do
         assert(not attrs[ak], ak .. ' is already an attribute of ' .. k)
-        attrs[ak] = av
+        attrs[ak] = av.type
       end
       if type(t.contents) == 'table' then
         for _, kid in ipairs(t.contents or {}) do
@@ -39,7 +42,7 @@ local function preprocess(tree)
       end
     end
     assert(not text or #kids == 0, 'both text and kids on ' .. k)
-    newtree[k:lower()] = mixin({}, v, {
+    newtree[k:lower()] = mixin({}, {
       attributes = attrs,
       children = kids,
       supertypes = supertypes,
@@ -148,7 +151,7 @@ local function parseRoot(root, intrinsics, snapshot)
       if not attr then
         table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
       else
-        local vv = attributeTypes[attr.type](v)
+        local vv = attributeTypes[attr](v)
         if vv == nil then
           table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
         else
