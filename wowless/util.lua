@@ -7,19 +7,6 @@ local function mixin(t, ...)
   return t
 end
 
-local function recursiveMixin(t, u, failOnOverwrite)
-  for k, v in pairs(u) do
-    local tv = t[k]
-    if tv == nil or type(tv) ~= 'table' or type(v) ~= 'table' then
-      assert(tv == nil or not failOnOverwrite, ('overwriting %q'):format(k))
-      t[k] = v
-    else
-      recursiveMixin(tv, v, failOnOverwrite)
-    end
-  end
-  return t
-end
-
 local readfile = (function()
   local lfs = require('lfs')
   local function dirtab(dir, t)
@@ -128,7 +115,6 @@ return {
   mixin = mixin,
   productList = productList,
   readfile = readfile,
-  recursiveMixin = recursiveMixin,
   tget = tget,
   tset = tset,
 }
