@@ -1,7 +1,7 @@
 local _, G = ...
 local assertEquals = _G.assertEquals
 local function mainline(x)
-  return WOW_PROJECT_ID == WOW_PROJECT_MAINLINE and x or nil
+  return _G.WowlessData.Build.flavor == 'Mainline' and x or nil
 end
 local function numkeys(t)
   local n = 0
@@ -64,9 +64,7 @@ local function apiTests()
           assertEquals(nil, msg)
         end,
         unary = function()
-          local success, msg = pcall(function()
-            error('moo')
-          end)
+          local success, msg = pcall(error, 'moo')
           assertEquals(false, success)
           assertEquals('moo', msg:match('[\\/]Wowless[\\/]api.lua:%d+: (%a+)$'))
         end,

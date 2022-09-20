@@ -10,5 +10,5 @@ inputs:
 outputs:
 - name: classTable
   type: table
-dbs:
-- name: ChrClasses
+sqls:
+- cursor: FillLocalizedClassList

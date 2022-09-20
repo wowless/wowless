@@ -1,6 +1,6 @@
 local xmlimpls = (function()
   local mixin = require('wowless.util').mixin
-  local tree = require('wowapi.data').xml
+  local tree = require('build.xml')
   local newtree = {}
   for k, v in pairs(tree) do
     local attrs = mixin({}, v.attributes)
@@ -613,9 +613,7 @@ local function loader(api, cfg)
         else
           error('unknown file type ' .. filename)
         end
-        local success, content = pcall(function()
-          return readFile(filename)
-        end)
+        local success, content = pcall(readFile, filename)
         if success then
           loadFn(filename, content, nil, closureTaint, addonName, addonEnv)
         else
@@ -667,9 +665,7 @@ local function loader(api, cfg)
     }
     for _, try in ipairs(toTry) do
       local tocFile = path.join(tocDir, base .. try .. '.toc')
-      local success, content = pcall(function()
-        return readFile(tocFile)
-      end)
+      local success, content = pcall(readFile, tocFile)
       if success then
         api.log(1, 'using toc %s', tocFile)
         return parseToc(tocFile, content)
@@ -688,13 +684,6 @@ local function loader(api, cfg)
   end
 
   api.states.CVars.portal = build.ptr and 'test' or ''
-
-  local wdb = require('wowless.db')
-
-  local function db2rows(name)
-    local data = readFile(cfg.cascproxy and wdb.fdid(name) or path.join(rootDir, 'db2', name .. '.db2'))
-    return wdb.rows(product, name, data)
-  end
 
   local sqlitedb = (function()
     local dbfile = ('build/products/%s/%s.db'):format(product, rootDir and 'data' or 'schema')
@@ -733,8 +722,8 @@ local function loader(api, cfg)
       end
     end
     if rootDir then
-      for row in db2rows('ManifestInterfaceTOCData') do
-        maybeAdd(path.join(rootDir, path.dirname(row.FilePath)), row.ID)
+      for filepath, fdid in sqlitedb:urows('SELECT FilePath, ID FROM ManifestInterfaceTOCData') do
+        maybeAdd(path.join(rootDir, path.dirname(filepath)), fdid)
       end
     end
     for _, d in ipairs(otherAddonDirs) do
@@ -774,9 +763,7 @@ local function loader(api, cfg)
   end
 
   local function loadAddon(addonName)
-    local success, msg = pcall(function()
-      doLoadAddon(addonName)
-    end)
+    local success, msg = pcall(doLoadAddon, addonName)
     if success then
       return true
     else
@@ -787,8 +774,8 @@ local function loader(api, cfg)
 
   local function loadFrameXml()
     local loadFile = forAddon()
-    for row in db2rows('GlobalStrings') do
-      api.env[row.BaseTag] = row.TagText_lang
+    for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
+      api.env[tag] = text
     end
     for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do
       loadFile(file)
@@ -840,7 +827,6 @@ local function loader(api, cfg)
   end
 
   return {
-    db2rows = db2rows,
     initAddons = initAddons,
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,

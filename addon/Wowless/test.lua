@@ -42,17 +42,13 @@ local function checkStateMachine(states, transitions, init)
     return n and s:sub(n + 1) or s
   end
   local function checkState(s, n)
-    local success, msg = pcall(function()
-      states[s]()
-    end)
+    local success, msg = pcall(states[s])
     if not success then
       error(('%s state: %s'):format(n, trimerr(msg)))
     end
   end
   local function checkTransition(t, n)
-    local success, msg = pcall(function()
-      transitions[t].func()
-    end)
+    local success, msg = pcall(transitions[t].func)
     if not success then
       error(('%s transition: %s'):format(n, trimerr(msg)))
     end
@@ -114,12 +110,7 @@ local syncTests = function()
         },
         error = {
           func = function()
-            assertEquals(
-              false,
-              pcall(function()
-                b:SetButtonState('bad')
-              end)
-            )
+            assertEquals(false, pcall(b.SetButtonState, b, 'bad'))
           end,
         },
         setEnabledFalse = {
@@ -405,14 +396,10 @@ local syncTests = function()
           assertEquals('0', format('%d', nil))
         end,
         ['does not format missing strings'] = function()
-          assert(not pcall(function()
-            format('%s')
-          end))
+          assert(not pcall(format, '%s'))
         end,
         ['does not format nil strings'] = function()
-          assert(not pcall(function()
-            format('%s', nil)
-          end))
+          assert(not pcall(format, '%s', nil))
         end,
         ['format handles indexed substitution'] = function()
           assertEquals(' 7   moo', format('%2$2d %1$5s', 'moo', 7))
@@ -425,9 +412,7 @@ local syncTests = function()
           for i = 1, 99 do
             assertEquals(tostring(i), format('%' .. i .. '$d', unpack(t)))
           end
-          assert(not pcall(function()
-            format('%100$d', unpack(t))
-          end))
+          assert(not pcall(format, '%100$d', unpack(t)))
         end,
         ['format handles %f'] = function()
           assertEquals('inf', format('%f', math.huge):sub(-3))
@@ -626,12 +611,7 @@ local syncTests = function()
             end,
             NoArgs = function()
               local gt = f(1, CreateFrame('GameTooltip'))
-              assertEquals(
-                false,
-                pcall(function()
-                  gt:SetOwner()
-                end)
-              )
+              assertEquals(false, pcall(gt.SetOwner, gt))
             end,
             OneArg = function()
               local gt = f(1, CreateFrame('GameTooltip'))
@@ -664,18 +644,8 @@ local syncTests = function()
           assertEquals(g, f:GetScrollChild())
           assertEquals(f, g:GetParent())
           if runtimeProduct == 'wowt' or runtimeProduct == 'wow_beta' then
-            assertEquals(
-              false,
-              pcall(function()
-                f:SetScrollChild(nil)
-              end)
-            )
-            assertEquals(
-              false,
-              pcall(function()
-                f:SetScrollChild('WowlessScrollFrameChild')
-              end)
-            )
+            assertEquals(false, pcall(f.SetScrollChild, f, nil))
+            assertEquals(false, pcall(f.SetScrollChild, f, 'WowlessScrollFrameChild'))
           else
             f:SetScrollChild(nil)
             assertEquals(nil, f:GetScrollChild())
@@ -684,12 +654,7 @@ local syncTests = function()
             assertEquals(g, f:GetScrollChild())
             assertEquals(f, g:GetParent())
           end
-          assertEquals(
-            false,
-            pcall(function()
-              f:SetScrollChild()
-            end)
-          )
+          assertEquals(false, pcall(f.SetScrollChild, f))
         end,
       }
     end,

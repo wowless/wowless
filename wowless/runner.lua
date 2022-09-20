@@ -98,7 +98,7 @@ local function run(cfg)
     end,
     enterleave = function()
       for _, frame in ipairs(api.frames) do
-        if frame:IsVisible() then
+        if frame.IsVisible and frame:IsVisible() then
           api.log(2, 'enter/leave %s', api.GetDebugName(frame))
           api.RunScript(frame, 'OnEnter', true)
           api.RunScript(frame, 'OnLeave', true)

@@ -11,5 +11,5 @@ outputs:
   type: string
 - name: id
   type: number
-dbs:
-- name: ChrRaces
+sqls:
+- lookup: UnitRace

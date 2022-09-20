@@ -8,5 +8,5 @@ outputs:
   type: number
 - name: texture
   type: number
-dbs:
-- name: PaperDollItemFrame
+sqls:
+- lookup: GetInventorySlotInfo

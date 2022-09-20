@@ -1,24 +1,34 @@
-local data = require('wowapi.data')
+local structures = require('build.structures')
 local util = require('wowless.util')
 
 local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
-  local function lookup(stmt)
-    for row in stmt:rows() do -- luacheck: ignore 512
-      return unpack(row)
+  local function lookup(stmt, isTable)
+    if isTable then
+      for row in stmt:nrows() do -- luacheck: ignore 512
+        return row
+      end
+    else
+      for row in stmt:rows() do -- luacheck: ignore 512
+        return unpack(row)
+      end
     end
   end
-  local function cursor(stmt)
-    return stmt:urows()
+  local function cursor(stmt, isTable)
+    if isTable then
+      return stmt:nrows()
+    else
+      return stmt:urows()
+    end
   end
   local function prep(fn, sql, f)
-    local stmt = sqlitedb:prepare(sql)
+    local stmt = sqlitedb:prepare(sql.sql)
     if not stmt then
       error('could not prepare ' .. fn .. ': ' .. sqlitedb:errmsg())
     end
     return function(...)
       stmt:reset()
       stmt:bind_values(...)
-      return f(stmt)
+      return f(stmt, sql.table)
     end
   end
   local lookups = {}
@@ -35,55 +45,6 @@ local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
   }
 end
 
-local function mkdb2s(loader)
-  local alldbs = setmetatable({}, {
-    __index = function(dbs, db)
-      local t = {}
-      for row in loader.db2rows(db) do
-        table.insert(t, row)
-      end
-      dbs[db] = {
-        data = t,
-        indices = setmetatable({}, {
-          __index = function(indices, name)
-            local index = {}
-            for _, row in ipairs(t) do
-              local rowkey = row[name]
-              index[rowkey] = index[rowkey] or row
-            end
-            indices[name] = index
-            return index
-          end,
-        }),
-      }
-      return dbs[db]
-    end,
-  })
-  return setmetatable({}, {
-    __index = function(t, dbname)
-      t[dbname] = {
-        cursor = function()
-          local rows = alldbs[dbname].data
-          local idx = 0
-          return function()
-            idx = idx + 1
-            return rows[idx]
-          end
-        end,
-        lookup = setmetatable({}, {
-          __index = function(lookups, index)
-            lookups[index] = function(k)
-              return alldbs[dbname].indices[index][k]
-            end
-            return lookups[index]
-          end,
-        }),
-      }
-      return t[dbname]
-    end,
-  })
-end
-
 local function resolveUnit(units, unit)
   -- TODO complete unit resolution
   local guid = units.aliases[unit:lower()]
@@ -95,7 +56,6 @@ local function loadFunctions(api, loader)
   local datalua = require('build.products.' .. loader.product .. '.data')
   local apis = datalua.apis
   local sqls = loadSqls(loader.sqlitedb, datalua.sqlcursors, datalua.sqllookups)
-  local db2s = mkdb2s(loader)
   local impls = {}
   for k, v in pairs(datalua.impls) do
     impls[k] = loadstring(v)
@@ -145,7 +105,7 @@ local function loadFunctions(api, loader)
           elseif param.type == 'string' and ty == 'number' then
             arg = tostring(arg) or arg
             ty = type(arg)
-          elseif param.type == 'unknown' or data.structures[param.type] ~= nil then
+          elseif param.type == 'unknown' or structures[param.type] ~= nil then
             ty = param.type
           elseif param.type == 'unit' and ty == 'string' then
             arg = resolveUnit(api.states.Units, arg)
@@ -201,10 +161,6 @@ local function loadFunctions(api, loader)
       end
       for _, st in ipairs(apicfg.states or {}) do
         table.insert(args, api.states[st])
-      end
-      for _, db in ipairs(apicfg.dbs or {}) do
-        local db2 = db2s[db.name]
-        table.insert(args, db.index and db2.lookup[db.index] or db2.cursor)
       end
       for _, sql in ipairs(apicfg.sqls or {}) do
         table.insert(args, sql.lookup and sqls.lookups[sql.lookup] or sqls.cursors[sql.cursor])

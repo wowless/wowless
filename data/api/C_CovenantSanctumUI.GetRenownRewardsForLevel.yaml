@@ -10,5 +10,6 @@ outputs:
 - innerType: C_CovenantSanctumUI.CovenantSanctumRenownRewardInfo
   name: rewards
   type: table
-dbs:
-- name: RenownRewards
+sqls:
+- cursor: C_CovenantSanctumUI.GetRenownRewardsForLevel
+  table: true

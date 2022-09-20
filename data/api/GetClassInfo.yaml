@@ -11,6 +11,5 @@ outputs:
   type: string
 - name: classID
   type: number
-dbs:
-- index: ID
-  name: ChrClasses
+sqls:
+- lookup: GetClassInfo

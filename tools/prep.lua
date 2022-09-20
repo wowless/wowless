@@ -13,6 +13,18 @@ local function readFile(...)
 end
 local plprettywrite = require('pl.pretty').write
 
+if product == 'xml' or product == 'structures' then
+  local isxml = product == 'xml'
+  local data = {}
+  for _, f in ipairs(require('pl.dir').getfiles('data/' .. product)) do
+    local cfg = parseYaml(f)
+    data[cfg.name] = isxml and cfg or true
+  end
+  local txt = 'return ' .. plprettywrite(data)
+  assert(require('pl.file').write('build/' .. product .. '.lua', txt))
+  return
+end
+
 local getStub = (function()
   local structures = require('wowapi.data').structures
   local defaultOutputs = {
@@ -104,9 +116,15 @@ do
       end
       for _, sql in ipairs(apicfg.sqls or {}) do
         if sql.cursor then
-          sqlcursors[sql.cursor] = readFile('data/sql/cursor/' .. sql.cursor .. '.sql')
+          sqlcursors[sql.cursor] = {
+            sql = readFile('data/sql/cursor/' .. sql.cursor .. '.sql'),
+            table = sql.table,
+          }
         elseif sql.lookup then
-          sqllookups[sql.lookup] = readFile('data/sql/lookup/' .. sql.lookup .. '.sql')
+          sqllookups[sql.lookup] = {
+            sql = readFile('data/sql/lookup/' .. sql.lookup .. '.sql'),
+            table = sql.table,
+          }
         end
       end
       apis[name] = apicfg
@@ -131,6 +149,12 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
   local cfg = parseYaml('data/events/' .. (type(v) == 'string' and v or k) .. '.yaml')
   cfg.neverSent = v == false or nil
   events[k] = cfg
+end
+
+local state = {}
+for _, f in ipairs(require('pl.dir').getfiles('data/state')) do
+  local cfg = parseYaml(f)
+  state[cfg.name] = cfg.value
 end
 
 local uiobjects = {}
@@ -161,6 +185,7 @@ local data = {
   impls = impls,
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
+  state = state,
   uiobjects = uiobjects,
 }
 local txt = 'return ' .. plprettywrite(data)

@@ -19,16 +19,12 @@ local function connect(authority)
   end
   local function stream(path)
     local s = assert(conn:new_stream())
-    local success, data = pcall(function()
-      return fetch(s, path)
-    end)
+    local success, data = pcall(fetch, s, path)
     s:shutdown()
     return success and data or nil
   end
   return function(path)
-    local success, data = pcall(function()
-      return stream(path)
-    end)
+    local success, data = pcall(stream, path)
     return success and data or nil
   end
 end
