@@ -6,6 +6,9 @@ local function mkenv()
     getenv = function()
       return t
     end,
+    set = function(k, v)
+      t[k] = v
+    end,
     setfenv = function(f)
       return setfenv(f, t)
     end,
@@ -19,8 +22,8 @@ local function mkenv()
       return t[k]
     end,
     __metatable = 'wowless environment',
-    __newindex = function(_, k, v)
-      t[k] = v
+    __newindex = function(_, k)
+      error('invalid env __newindex: ' .. tostring(k))
     end,
   })
   return p
@@ -204,7 +207,7 @@ local function new(log, maxErrors, product)
       if env[objname] then
         log(3, 'overwriting global ' .. objname)
       end
-      env[objname] = obj
+      env('set', objname, obj)
       if addonEnv then
         addonEnv[objname] = obj
       end

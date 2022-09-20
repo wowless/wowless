@@ -776,7 +776,7 @@ local function loader(api, cfg)
   local function loadFrameXml()
     local loadFile = forAddon()
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
-      api.env[tag] = text
+      api.env('set', tag, text)
     end
     for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do
       loadFile(file)

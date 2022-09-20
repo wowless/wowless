@@ -8,7 +8,7 @@ local tbl, name, fn
 if arg3 ~= nil then
   tbl, name, fn = arg1, arg2, arg3
 else
-  tbl, name, fn = env, arg1, arg2
+  tbl, name, fn = env('getenv'), arg1, arg2
 end
 local oldfn = tbl[name]
 tbl[name] = function(...)
