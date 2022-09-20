@@ -3,10 +3,10 @@ local traceback = require('wowless.ext').traceback
 local function mkenv()
   local t = {}
   local api = {
-    get = function()
+    getenv = function()
       return t
     end,
-    set = function(f)
+    setfenv = function(f)
       return setfenv(f, t)
     end,
   }
