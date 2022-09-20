@@ -64,9 +64,7 @@ local function apiTests()
           assertEquals(nil, msg)
         end,
         unary = function()
-          local success, msg = pcall(function()
-            error('moo')
-          end)
+          local success, msg = pcall(error, 'moo')
           assertEquals(false, success)
           assertEquals('moo', msg:match('[\\/]Wowless[\\/]api.lua:%d+: (%a+)$'))
         end,

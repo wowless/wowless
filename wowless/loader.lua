@@ -613,9 +613,7 @@ local function loader(api, cfg)
         else
           error('unknown file type ' .. filename)
         end
-        local success, content = pcall(function()
-          return readFile(filename)
-        end)
+        local success, content = pcall(readFile, filename)
         if success then
           loadFn(filename, content, nil, closureTaint, addonName, addonEnv)
         else
@@ -667,9 +665,7 @@ local function loader(api, cfg)
     }
     for _, try in ipairs(toTry) do
       local tocFile = path.join(tocDir, base .. try .. '.toc')
-      local success, content = pcall(function()
-        return readFile(tocFile)
-      end)
+      local success, content = pcall(readFile, tocFile)
       if success then
         api.log(1, 'using toc %s', tocFile)
         return parseToc(tocFile, content)
@@ -767,9 +763,7 @@ local function loader(api, cfg)
   end
 
   local function loadAddon(addonName)
-    local success, msg = pcall(function()
-      doLoadAddon(addonName)
-    end)
+    local success, msg = pcall(doLoadAddon, addonName)
     if success then
       return true
     else

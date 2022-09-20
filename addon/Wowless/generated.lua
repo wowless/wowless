@@ -25,12 +25,7 @@ function G.GeneratedTests()
         assertEquals(env or _G, getfenv(func))
       end,
       impltype = function()
-        assertEquals(
-          isLua,
-          pcall(function()
-            coroutine.create(func)
-          end)
-        )
+        assertEquals(isLua, pcall(coroutine.create, func))
       end,
       unique = not isLua and function()
         assertEquals(nil, cfuncs[func])
@@ -160,12 +155,7 @@ function G.GeneratedTests()
     local frame = CreateFrame('Frame')
     for k, v in pairs(_G.WowlessData.Events) do
       tests[k] = function()
-        assertEquals(
-          v.registerable,
-          pcall(function()
-            frame:RegisterEvent(k)
-          end)
-        )
+        assertEquals(v.registerable, pcall(frame.RegisterEvent, frame, k))
       end
     end
     return tests
@@ -279,9 +269,7 @@ function G.GeneratedTests()
       return process(CreateFrame(ty))
     end
     local function assertCreateFrameFails(ty)
-      local success, err = pcall(function()
-        CreateFrame(ty)
-      end)
+      local success, err = pcall(CreateFrame, ty)
       assert(not success)
       local expectedErr = 'CreateFrame: Unknown frame type \'' .. ty .. '\''
       assertEquals(expectedErr, err:sub(err:len() - expectedErr:len() + 1))
