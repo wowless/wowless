@@ -1,3 +1,5 @@
+local deepcopy = require('pl.tablex').deepcopy
+
 local function dump(api)
   local d = require('pl.pretty').dump
   return function(...)
@@ -15,10 +17,10 @@ end
 local function init(api, loader)
   api.impls = require('wowapi.loader').loadFunctions(api, loader)
   api.env.set('_G', api.env.getenv())
-  for k, v in pairs(api.impls) do
+  for k, v in pairs(deepcopy(api.impls)) do
     api.env.set(k, v)
   end
-  for k, v in pairs(api.datalua.globals) do
+  for k, v in pairs(deepcopy(api.datalua.globals)) do
     api.env.set(k, v)
   end
   api.env.set('__wowless', {
