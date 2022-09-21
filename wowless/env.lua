@@ -13,8 +13,9 @@ local function dump(api)
 end
 
 local function init(api, loader)
+  api.impls = require('wowapi.loader').loadFunctions(api, loader)
   api.env.set('_G', api.env.getenv())
-  for k, v in pairs(require('wowapi.loader').loadFunctions(api, loader)) do
+  for k, v in pairs(api.impls) do
     api.env.set(k, v)
   end
   for k, v in pairs(api.datalua.globals) do
