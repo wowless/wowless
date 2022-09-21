@@ -8,6 +8,6 @@ outputs:
   nilable: true
   type: string
 frameworks:
-- env
+- datalua
 states:
 - CVars
