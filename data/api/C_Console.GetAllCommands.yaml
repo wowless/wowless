@@ -8,4 +8,4 @@ outputs:
   name: commands
   type: table
 frameworks:
-- api
+- datalua

@@ -2,4 +2,4 @@
 name: C_CVar.GetCVarDefault
 status: implemented
 frameworks:
-- api
+- datalua
