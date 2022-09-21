@@ -14,8 +14,5 @@ return (function(self, index)
   if u(self).points[idx] then
     assert(type(u(self).points[idx][4]) ~= 'table')
     return unpack(u(self).points[idx])
-  else
-    api.log(1, 'returning fake point')
-    return 'CENTER', api.env.UIParent, 'CENTER', 0, 0
   end
 end)(...)

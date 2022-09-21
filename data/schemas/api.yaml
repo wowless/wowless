@@ -26,6 +26,7 @@ type:
           sequenceof:
             oneof:
             - literal: api
+            - literal: datalua
             - literal: env
             - literal: loader
       inputs:

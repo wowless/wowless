@@ -53,7 +53,7 @@ end
 
 local function loadFunctions(api, loader)
   api.log(1, 'loading functions')
-  local datalua = require('build.products.' .. loader.product .. '.data')
+  local datalua = api.datalua
   local apis = datalua.apis
   local sqls = loadSqls(loader.sqlitedb, datalua.sqlcursors, datalua.sqllookups)
   local impls = {}
@@ -63,6 +63,7 @@ local function loadFunctions(api, loader)
 
   local frameworks = {
     api = api, -- TODO replace api framework with something finer grained
+    datalua = api.datalua,
     env = api.env,
     loader = loader,
   }
@@ -196,7 +197,7 @@ local function loadFunctions(api, loader)
         for idx, mixin in pairs(mixins) do
           local t = select(idx, ...)
           if t then
-            api.env.Mixin(t, api.env[mixin])
+            util.mixin(t, api.env[mixin])
           end
         end
         return ...

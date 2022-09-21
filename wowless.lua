@@ -16,7 +16,6 @@ local args = (function()
   parser:flag('--allevents', 'send all nullary events')
   parser:flag('--debug', 'enter debug mode after load')
   parser:flag('--frame0', 'write frame0 debug')
-  parser:flag('--taint', 'support taint handling')
   return parser:parse()
 end)()
 local api = require('wowless.runner').run({
@@ -30,7 +29,6 @@ local api = require('wowless.runner').run({
   otherAddonDirs = args.addondir,
   product = args.product,
   scripts = args.scripts,
-  taint = args.taint,
 })
 if api.GetErrorCount() ~= 0 then
   io.stderr:write('failure on ' .. args.product .. '\n')

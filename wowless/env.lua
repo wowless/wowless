@@ -1,5 +1,5 @@
-local util = require('wowless.util')
-local Mixin = util.mixin
+local Mixin = require('wowless.util').mixin
+local deepcopy = require('pl.tablex').deepcopy
 
 local function dump(api)
   local d = require('pl.pretty').dump
@@ -15,28 +15,14 @@ local function dump(api)
   end
 end
 
-local function init(api, loader, taint)
+local function init(api, loader)
+  api.impls = require('wowapi.loader').loadFunctions(api, loader)
   api.env._G = api.env
-  api.env.forceinsecure = taint and forceinsecure or function() end
-  util.recursiveMixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
-  Mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api, loader))
-  local data = require('build.products.' .. loader.product .. '.data')
-  Mixin(api.env, data.globals)
-  -- TODO put this somewhere else
-  local cvarDefaults = data.cvars
-  api.env.C_CVar.GetCVarDefault = debug.newcfunction(function(k)
-    return cvarDefaults[k]
-  end)
-  api.env.C_Console.GetAllCommands = debug.newcfunction(function()
-    local t = {}
-    for k in require('pl.tablex').sort(cvarDefaults) do
-      table.insert(t, { command = k })
-    end
-    return t
-  end)
+  Mixin(api.env, deepcopy(api.impls))
+  Mixin(api.env, deepcopy(api.datalua.globals))
   api.env.__wowless = {
     dump = dump(api),
-    product = loader.product,
+    product = api.product,
   }
 end
 
