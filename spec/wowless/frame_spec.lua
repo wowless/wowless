@@ -142,7 +142,7 @@ describe('frame', function()
 
   it('gets a new method when hooked', function()
     local f = api.impls.CreateFrame('frame')
-    api.env.hooksecurefunc(f, 'Show', function() end)
+    api.impls.hooksecurefunc(f, 'Show', function() end)
     assert.Not.same(f.Show, getmetatable(f).__index.Show)
   end)
 
