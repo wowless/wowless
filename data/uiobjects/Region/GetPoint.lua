@@ -16,6 +16,6 @@ return (function(self, index)
     return unpack(u(self).points[idx])
   else
     api.log(1, 'returning fake point')
-    return 'CENTER', api.env.UIParent, 'CENTER', 0, 0
+    return 'CENTER', api.env('get', 'UIParent'), 'CENTER', 0, 0
   end
 end)(...)

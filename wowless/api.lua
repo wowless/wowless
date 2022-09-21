@@ -3,6 +3,9 @@ local traceback = require('wowless.ext').traceback
 local function mkenv()
   local t = {}
   local api = {
+    get = function(k)
+      return t[k]
+    end,
     getenv = function()
       return t
     end,
@@ -19,7 +22,7 @@ local function mkenv()
       return api[x](...)
     end,
     __index = function(_, k)
-      return t[k]
+      error('invalid env __index: ' .. tostring(k))
     end,
     __metatable = 'wowless environment',
     __newindex = function(_, k)
@@ -204,7 +207,7 @@ local function new(log, maxErrors, product)
     if objname then
       objname = ParentSub(objnamearg, u(obj).parent)
       u(obj).name = objname
-      if env[objname] then
+      if env('get', objname) then
         log(3, 'overwriting global ' .. objname)
       end
       env('set', objname, obj)

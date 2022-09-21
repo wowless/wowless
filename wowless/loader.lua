@@ -78,7 +78,7 @@ local function loader(api, cfg)
     if type == 'number' then
       return tonumber(value)
     elseif type == 'global' then
-      local t = api.env
+      local t = api.env('getenv')
       for part in value:gmatch('[^.]+') do
         t = t[part]
       end
@@ -118,14 +118,14 @@ local function loader(api, cfg)
   local function getColor(e)
     local name = e.attr.name or e.attr.color
     if name then
-      return assert(api.env[name], ('unknown color %q'):format(name)):GetRGBA()
+      return assert(api.env('get', name), ('unknown color %q'):format(name)):GetRGBA()
     else
       return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
     end
   end
 
   local function loadLuaString(filename, str, line, closureTaint, ...)
-    local before = api.env.ScrollingMessageFrameMixin
+    local before = api.env('get', 'ScrollingMessageFrameMixin')
     local fn = api.env('setfenv', loadstr(str, filename, line))
     api.CallSafely(function(...)
       debug.setnewclosuretaint(closureTaint)
@@ -133,7 +133,7 @@ local function loader(api, cfg)
     end, ...)
     debug.setnewclosuretaint(nil)
     -- Super hacky hack to hook ScrollingMessageFrameMixin.AddMessage
-    local after = api.env.ScrollingMessageFrameMixin
+    local after = api.env('get', 'ScrollingMessageFrameMixin')
     if after and not before then
       local f = after.AddMessage
       after.AddMessage = function(self, text, ...)
@@ -148,8 +148,9 @@ local function loader(api, cfg)
     if script.attr['function'] then
       local fnattr = script.attr['function']
       fn = function(...)
-        assert(env[fnattr], 'unknown script function ' .. fnattr)
-        env[fnattr](...)
+        local f = env == api.env and api.env('get', fnattr) or env[fnattr]
+        assert(f, 'unknown script function ' .. fnattr)
+        f(...)
       end
     elseif script.attr.method then
       local mattr = script.attr.method
@@ -391,13 +392,12 @@ local function loader(api, cfg)
             api.UserData(obj).shown = not value
           end,
           mixin = function(obj, value)
-            local env = ctx.useAddonEnv and addonEnv or api.env
             for _, m in ipairs(value) do
-              mixin(obj, env[m])
+              mixin(obj, ctx.useAddonEnv and addonEnv and addonEnv[m] or api.env('get', m))
             end
           end,
           parent = function(obj, value)
-            api.SetParent(obj, api.env[value])
+            api.SetParent(obj, api.env('get', value))
           end,
           parentarray = function(obj, value)
             local p = api.UserData(obj).parent
@@ -413,9 +413,8 @@ local function loader(api, cfg)
             end
           end,
           securemixin = function(obj, value)
-            local env = ctx.useAddonEnv and addonEnv or api.env
             for _, m in ipairs(value) do
-              mixin(obj, env[m])
+              mixin(obj, ctx.useAddonEnv and addonEnv and addonEnv[m] or api.env('get', m))
             end
           end,
           setallpoints = function(obj, value)
@@ -809,7 +808,7 @@ local function loader(api, cfg)
         local t = {}
         for _, attr in ipairs({ 'SavedVariables', 'SavedVariablesPerCharacter' }) do
           for var in (v.attrs[attr] or ''):gmatch('[^, ]+') do
-            local val = api.env[var]
+            local val = api.env('get', var)
             if val ~= nil then
               table.insert(t, var)
               table.insert(t, ' = ')

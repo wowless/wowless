@@ -9,9 +9,9 @@ expose('addon', function()
           },
           product = product,
         })
-        assert.True(api.env.WowlessTestsDone)
+        assert.True(api.env('get', 'WowlessTestsDone'))
         assert:set_parameter('TableFormatLevel', -1)
-        assert.same({}, api.env.WowlessTestFailures)
+        assert.same({}, api.env('get', 'WowlessTestFailures'))
         assert.same(0, api.GetErrorCount())
       end)
     end)

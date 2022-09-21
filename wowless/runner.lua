@@ -48,8 +48,8 @@ local function run(cfg)
       require('pl.file').write(fn, require('wowapi.yaml').pprint(data))
     end
     doit('frame0')
-    if api.env.ToggleTalentFrame then
-      api.CallSafely(api.env.ToggleTalentFrame)
+    if api.env('get', 'ToggleTalentFrame') then
+      api.CallSafely(api.env('get', 'ToggleTalentFrame'))
       doit('frame1')
     end
     os.exit(0)
@@ -152,7 +152,7 @@ local function run(cfg)
       api.SendEvent('LOOT_CLOSED')
     end,
     macrotext = function()
-      local b = api.env.ActionButton1
+      local b = api.env('get', 'ActionButton1')
       if b then
         b:SetAttribute('type', 'macro')
         b:SetAttribute('macrotext', '/startattack')

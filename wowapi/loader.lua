@@ -196,7 +196,7 @@ local function loadFunctions(api, loader)
         for idx, mixin in pairs(mixins) do
           local t = select(idx, ...)
           if t then
-            api.env.Mixin(t, api.env[mixin])
+            util.mixin(t, api.env('get', mixin))
           end
         end
         return ...

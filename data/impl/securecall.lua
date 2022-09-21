@@ -1,7 +1,8 @@
 local env, func = ...
 assert(func, 'securecall of nil function')
 if type(func) == 'string' then
-  assert(env[func], 'securecall of unknown function ' .. func)
-  func = env[func]
+  local f = env('get', func)
+  assert(f, 'securecall of unknown function ' .. func)
+  func = f
 end
 return securecall(func, select(3, ...))
