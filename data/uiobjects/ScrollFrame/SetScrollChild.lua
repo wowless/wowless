@@ -6,7 +6,7 @@ return (function(self, ...)
     'Usage: self:SetScrollChild(scrollChild)'
   )
   if type(scrollChild) == 'string' then
-    scrollChild = api.env('get', scrollChild)
+    scrollChild = api.env.get(scrollChild)
   end
   local old = u(self).scrollChild
   if old then

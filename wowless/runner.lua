@@ -48,8 +48,8 @@ local function run(cfg)
       require('pl.file').write(fn, require('wowapi.yaml').pprint(data))
     end
     doit('frame0')
-    if api.env('get', 'ToggleTalentFrame') then
-      api.CallSafely(api.env('get', 'ToggleTalentFrame'))
+    if api.env.get('ToggleTalentFrame') then
+      api.CallSafely(api.env.get('ToggleTalentFrame'))
       doit('frame1')
     end
     os.exit(0)
@@ -152,7 +152,7 @@ local function run(cfg)
       api.SendEvent('LOOT_CLOSED')
     end,
     macrotext = function()
-      local b = api.env('get', 'ActionButton1')
+      local b = api.env.get('ActionButton1')
       if b then
         b:SetAttribute('type', 'macro')
         b:SetAttribute('macrotext', '/startattack')
@@ -185,7 +185,7 @@ local function run(cfg)
         USERANDOM = true,
       }
       local cmds = {}
-      for k, v in pairs(api.env('getenv')) do
+      for k, v in pairs(api.env.getenv()) do
         local cmd = k:match('^SLASH_(.+)1$')
         if cmd and not cmdBlacklist[cmd] then
           cmds[cmd] = v

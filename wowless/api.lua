@@ -2,28 +2,22 @@ local traceback = require('wowless.ext').traceback
 
 local function mkenv()
   local t = {}
-  local api = {
-    get = function(k)
-      return t[k]
-    end,
-    getenv = function()
-      return t
-    end,
-    set = function(k, v)
-      t[k] = v
-    end,
-    setfenv = function(f)
-      return setfenv(f, t)
-    end,
-  }
   local p = newproxy(true)
   require('wowless.util').mixin(getmetatable(p), {
-    __call = function(_, x, ...)
-      return api[x](...)
-    end,
-    __index = function(_, k)
-      error('invalid env __index: ' .. tostring(k))
-    end,
+    __index = {
+      get = function(k)
+        return t[k]
+      end,
+      getenv = function()
+        return t
+      end,
+      set = function(k, v)
+        t[k] = v
+      end,
+      setfenv = function(f)
+        return setfenv(f, t)
+      end,
+    },
     __metatable = 'wowless environment',
     __newindex = function(_, k)
       error('invalid env __newindex: ' .. tostring(k))
@@ -207,10 +201,10 @@ local function new(log, maxErrors, product)
     if objname then
       objname = ParentSub(objnamearg, u(obj).parent)
       u(obj).name = objname
-      if env('get', objname) then
+      if env.get(objname) then
         log(3, 'overwriting global ' .. objname)
       end
-      env('set', objname, obj)
+      env.set(objname, obj)
       if addonEnv then
         addonEnv[objname] = obj
       end

@@ -13,14 +13,14 @@ local function dump(api)
 end
 
 local function init(api, loader)
-  api.env('set', '_G', api.env('getenv'))
+  api.env.set('_G', api.env.getenv())
   for k, v in pairs(require('wowapi.loader').loadFunctions(api, loader)) do
-    api.env('set', k, v)
+    api.env.set(k, v)
   end
   for k, v in pairs(api.datalua.globals) do
-    api.env('set', k, v)
+    api.env.set(k, v)
   end
-  api.env('set', '__wowless', {
+  api.env.set('__wowless', {
     dump = dump(api),
     product = api.product,
   })
