@@ -3,7 +3,7 @@ return (function(self, name)
     -- TODO error here instead of silently ignoring
     return
   end
-  local t = api.env.C_Texture.GetAtlasInfo(name)
+  local t = api.impls.C_Texture.GetAtlasInfo(name)
   if t == nil then
     -- TODO determine if we should error here instead of silently ignoring
     return

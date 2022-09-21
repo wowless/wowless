@@ -16,8 +16,9 @@ local function dump(api)
 end
 
 local function init(api, loader)
+  api.impls = require('wowapi.loader').loadFunctions(api, loader)
   api.env._G = api.env
-  Mixin(api.env, require('wowapi.loader').loadFunctions(api, loader))
+  Mixin(api.env, api.impls)
   Mixin(api.env, api.datalua.globals)
   api.env.__wowless = {
     dump = dump(api),
