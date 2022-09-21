@@ -63,6 +63,7 @@ local function loadFunctions(api, loader)
 
   local frameworks = {
     api = api, -- TODO replace api framework with something finer grained
+    datalua = api.datalua,
     env = api.env,
     loader = loader,
   }

@@ -13,4 +13,4 @@ outputs:
 - name: tocversion
   type: number
 frameworks:
-- api
+- datalua
