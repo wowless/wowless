@@ -181,8 +181,39 @@ static int wowless_sandbox_eval(lua_State *L) {
   return n;
 }
 
+static int invokefromregistry(lua_State *S) {
+  lua_State *L = (lua_State *)lua_touserdata(S, lua_upvalueindex(1));
+  int old_host_top = lua_gettop(L);
+  lua_rawgeti(L, LUA_REGISTRYINDEX, lua_tonumber(S, lua_upvalueindex(2)));
+  int sandbox_top = lua_gettop(S);
+  for (int i = 1; i <= sandbox_top; ++i) {
+    proxy_value(L, L, S, i);
+  }
+  if (lua_pcall(L, sandbox_top, LUA_MULTRET, 0) != 0) {
+    copy_value(L, S, L, -1);
+    lua_error(S);
+  }
+  int host_top = lua_gettop(L);
+  for (int i = old_host_top + 1; i <= host_top; ++i) {
+    copy_value(L, S, L, i);
+  }
+  return host_top - old_host_top;
+}
+
+static int wowless_sandbox_register(lua_State *L) {
+  lua_State *S = check_sandbox(L, 1);
+  const char *name = luaL_checkstring(L, 2);
+  luaL_checktype(L, 3, LUA_TFUNCTION);
+  lua_pushlightuserdata(S, L);
+  lua_pushnumber(S, luaL_ref(L, LUA_REGISTRYINDEX));
+  lua_pushcclosure(S, invokefromregistry, 2);
+  lua_setglobal(S, name);
+  return 0;
+}
+
 static struct luaL_Reg sandbox_index[] = {
   {"eval", wowless_sandbox_eval},
+  {"register", wowless_sandbox_register},
   {NULL, NULL},
 };
 
