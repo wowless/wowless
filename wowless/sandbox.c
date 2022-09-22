@@ -120,37 +120,12 @@ static struct luaL_Reg tableproxy_index[] = {
   {NULL, NULL},
 };
 
-static int sandboxapply(lua_State *S) {
-  const char *str = luaL_checkstring(S, 1);
-  lua_State *L = (lua_State *)lua_touserdata(S, lua_upvalueindex(1));
-  int old_host_top = lua_gettop(L);
-  lua_getglobal(L, str);
-  int sandbox_top = lua_gettop(S);
-  for (int i = 2; i <= sandbox_top; ++i) {
-    proxy_value(L, L, S, i);
-  }
-  if (lua_pcall(L, sandbox_top - 1, LUA_MULTRET, 0) != 0) {
-    lua_pushstring(S, "apply error: ");
-    copy_value(L, S, L, -1);
-    lua_concat(S, 2);
-    lua_error(S);
-  }
-  int host_top = lua_gettop(L);
-  for (int i = old_host_top + 1; i <= host_top; ++i) {
-    copy_value(L, S, L, i);
-  }
-  return host_top - old_host_top;
-}
-
 static int wowless_sandbox_create(lua_State *L) {
   lua_State **p = lua_newuserdata(L, sizeof(*p));
   luaL_getmetatable(L, sandbox_metatable_name);
   lua_setmetatable(L, -2);
   *p = luaL_newstate();
   luaL_openlibsx(*p, 1); /* elune libs only */
-  lua_pushlightuserdata(*p, L);
-  lua_pushcclosure(*p, sandboxapply, 1);
-  lua_setglobal(*p, "apply");
   return 1;
 }
 
