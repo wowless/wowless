@@ -139,6 +139,18 @@ static int wowless_sandbox_gc(lua_State *L) {
   return 0;
 }
 
+static int wowless_sandbox_dofile(lua_State *L) {
+  lua_State *S = check_sandbox(L, 1);
+  const char *filename = luaL_checkstring(L, 2);
+  if (luaL_dofile(S, filename) != 0) {
+    lua_pushstring(L, "dofile error: ");
+    copy_value(L, L, S, -1);
+    lua_concat(L, 2);
+    lua_error(L);
+  }
+  return 0;
+}
+
 static int wowless_sandbox_eval(lua_State *L) {
   lua_State *S = check_sandbox(L, 1);
   const char *str = luaL_checkstring(L, 2);
@@ -187,6 +199,7 @@ static int wowless_sandbox_register(lua_State *L) {
 }
 
 static struct luaL_Reg sandbox_index[] = {
+  {"dofile", wowless_sandbox_dofile},
   {"eval", wowless_sandbox_eval},
   {"register", wowless_sandbox_register},
   {NULL, NULL},
