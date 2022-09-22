@@ -33,7 +33,12 @@ describe('hooksecurefunc', function()
       hookWasCalled = true
     end
     local env = { moocow = func }
-    hooksecurefunc(env, 'moocow', hook)
+    local apienv = {
+      getenv = function()
+        return env
+      end,
+    }
+    hooksecurefunc(apienv, 'moocow', hook)
     assert.Not.equals(func, env.moocow)
     assert.Not.equals(hook, env.moocow)
     check(env.moocow())

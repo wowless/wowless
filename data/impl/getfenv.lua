@@ -1,3 +1,3 @@
 local env = ...
 local fenv = getfenv(select(2, ...))
-return fenv == _G and env or fenv
+return fenv == _G and env.getenv() or fenv
