@@ -147,7 +147,7 @@ do
           assert(next(mv) == 'impltype')
           assert(next(mv, 'impltype') == nil)
           assert(
-            mv.impltype:match(': bad argument #1 to \'create\' %(Lua function expected%): want true, got false$'),
+            mv.impltype:match(': bad argument #1 to \'[^\']+\' %(Lua function expected%): want true, got false$'),
             mn
           )
           local funcname = ns .. '.' .. mn
@@ -205,7 +205,7 @@ do
       k = k:sub(2)
       assert(next(v) == 'impltype')
       assert(next(v, 'impltype') == nil)
-      assert(v.impltype:match(': bad argument #1 to \'create\' %(Lua function expected%): want true, got false$'), k)
+      assert(v.impltype:match(': bad argument #1 to \'[^\']+\' %(Lua function expected%): want true, got false$'), k)
       apis[k] = k
       ensureExists(k)
     else

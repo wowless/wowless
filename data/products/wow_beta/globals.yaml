@@ -42,6 +42,8 @@ Constants:
   LevelConstsExposed:
     MIN_ACHIEVEMENT_LEVEL: 10
     MIN_RES_SICKNESS_LEVEL: 10
+  LootConsts:
+    MasterLootQualityThreshold: 5
   ProfessionConsts:
     CLASSIC_PROFESSION_PARENT_TIER_INDEX: 4
     MAX_CRAFTING_REAGENT_SLOTS: 12
@@ -889,14 +891,6 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
-  CastBarSize:
-    Large: 2
-    Medium: 1
-    Small: 0
-  CastBarSizeMeta:
-    MaxValue: 2
-    MinValue: 0
-    NumValues: 3
   CharacterServiceInfoFlag:
     RestrictToRecommendedSpecs: 1
   CharacterServiceInfoFlagMeta:
@@ -1535,7 +1529,7 @@ Enum:
     LootAllErrorCursor: 47
     MailCursor: 15
     MailErrorCursor: 46
-    MapPinCursor: 31
+    MapPinCursor: 29
     MapPinErrorCursor: 60
     MineCursor: 11
     MineErrorCursor: 42
@@ -1566,8 +1560,8 @@ Enum:
     TaxiErrorCursor: 40
     TrainerCursor: 10
     TrainerErrorCursor: 41
-    UIMoveCursor: 29
-    UIResizeCursor: 30
+    UIMoveCursor: 30
+    UIResizeCursor: 31
     VehicleCursor: 28
     VehicleErrorCursor: 59
   CursormodeMeta:
@@ -1650,12 +1644,14 @@ Enum:
     GridSpacing: 1
     SettingsExpanded: 2
     ShowArenaFrames: 17
+    ShowBossFrames: 16
     ShowBuffFrame: 10
     ShowCastBar: 7
     ShowDebuffFrame: 11
     ShowEncounterBar: 8
     ShowExtraAbilities: 9
     ShowGrid: 0
+    ShowHudTooltip: 19
     ShowLootFrame: 18
     ShowPartyFrames: 12
     ShowPetActionBar: 5
@@ -1666,11 +1662,12 @@ Enum:
     ShowTargetAndFocus: 3
     ShowVehicleLeaveButton: 15
   EditModeAccountSettingMeta:
-    MaxValue: 18
+    MaxValue: 19
     MinValue: 0
-    NumValues: 19
+    NumValues: 20
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
+    DeprecatedSnapToSide: 7
     HideBarArt: 6
     HideBarScrolling: 8
     IconPadding: 4
@@ -1678,7 +1675,6 @@ Enum:
     NumIcons: 2
     NumRows: 1
     Orientation: 0
-    SnapToSide: 7
     VisibleSetting: 5
   EditModeActionBarSettingMeta:
     MaxValue: 9
@@ -1769,29 +1765,40 @@ Enum:
     ChatFrame: 8
     EncounterBar: 4
     ExtraAbilities: 5
+    HudTooltip: 11
     LootFrame: 10
     Minimap: 2
     TalkingHeadFrame: 7
     UnitFrame: 3
     VehicleLeaveButton: 9
   EditModeSystemMeta:
-    MaxValue: 10
+    MaxValue: 11
     MinValue: 0
-    NumValues: 11
+    NumValues: 12
   EditModeUnitFrameSetting:
     BuffsOnTop: 2
+    CastBarOnSide: 7
     CastBarUnderneath: 1
+    DisplayBorder: 12
+    FrameHeight: 11
+    FrameWidth: 10
     HidePortrait: 0
+    RaidGroupDisplayType: 13
+    RowSize: 15
+    ShowCastTime: 8
     ShowPartyFrameBackground: 5
+    SortPlayersBy: 14
     UseHorizontalGroups: 6
     UseLargerFrame: 3
     UseRaidStylePartyFrames: 4
+    ViewRaidSize: 9
   EditModeUnitFrameSettingMeta:
-    MaxValue: 6
+    MaxValue: 15
     MinValue: 0
-    NumValues: 7
+    NumValues: 16
   EditModeUnitFrameSystemIndices:
     Arena: 7
+    Boss: 6
     Focus: 3
     Party: 4
     Player: 1
@@ -2216,26 +2223,28 @@ Enum:
     CpuMem_2: 5
     CpuMem_4: 6
     DualCore: 4
-    GpuDriver: 17
+    GpuDriver: 19
     Graphics: 3
     Illegal: 1
-    MacOsUnsupported: 15
+    MacOsUnsupported: 17
     Needs_5_0: 7
     Needs_6_0: 8
-    NeedsMacOs_10_13: 10
-    NeedsMacOs_10_14: 11
-    NeedsMacOs_10_15: 12
-    NeedsMacOs_11_0: 13
+    NeedsDx12: 10
+    NeedsDx12Vrs2: 11
+    NeedsMacOs_10_13: 12
+    NeedsMacOs_10_14: 13
+    NeedsMacOs_10_15: 14
+    NeedsMacOs_11_0: 15
     NeedsRt: 9
-    NeedsWindows_10: 14
+    NeedsWindows_10: 16
     Supported: 0
-    Unknown: 18
+    Unknown: 20
     Unsupported: 2
-    WindowsUnsupported: 16
+    WindowsUnsupported: 18
   GraphicsValidationResultMeta:
-    MaxValue: 18
+    MaxValue: 20
     MinValue: 0
-    NumValues: 19
+    NumValues: 21
   HolidayCalendarFlags:
     Alliance: 1
     Horde: 2
@@ -2894,6 +2903,15 @@ Enum:
     NoChangesNecessary: 1
     Ready: 3
   LoadConfigResultMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
+  LootSlotType:
+    Currency: 3
+    Item: 1
+    Money: 2
+    None: 0
+  LootSlotTypeMeta:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
@@ -3884,6 +3902,15 @@ Enum:
     MaxValue: 7
     MinValue: 0
     NumValues: 8
+  RaidGroupDisplayType:
+    CombineGroupsHorizontal: 3
+    CombineGroupsVertical: 2
+    SeparateGroupsHorizontal: 1
+    SeparateGroupsVertical: 0
+  RaidGroupDisplayTypeMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   RelativeContentDifficulty:
     Difficult: 3
     Easy: 1
@@ -4013,6 +4040,23 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  SoftTargetEnableFlags:
+    Any: 3
+    Gamepad: 1
+    Kbm: 2
+    None: 0
+  SoftTargetEnableFlagsMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
+  SortPlayersBy:
+    Alphabetical: 2
+    Group: 1
+    Role: 0
+  SortPlayersByMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   SoulbindConduitFlags:
     VisibleToGetallsoulbindconduitScript: 1
   SoulbindConduitFlagsMeta:
@@ -4373,10 +4417,12 @@ Enum:
   TraitNodeFlag:
     NeverPurchasable: 2
     ShowMultipleIcons: 1
+    TestGridPositioned: 8
+    TestPositionLocked: 4
   TraitNodeFlagMeta:
-    MaxValue: 2
+    MaxValue: 8
     MinValue: 1
-    NumValues: 2
+    NumValues: 4
   TraitNodeGroupFlag:
     AvailableByDefault: 1
   TraitNodeGroupFlagMeta:
@@ -4744,6 +4790,7 @@ Enum:
     DoubleIconAndText: 5
     DoubleStateIconRow: 14
     DoubleStatusBar: 3
+    FillUpFrames: 24
     HorizontalCurrencies: 9
     IconAndText: 0
     IconTextAndBackground: 4
@@ -4762,9 +4809,9 @@ Enum:
     UnitPowerBar: 23
     ZoneControl: 16
   UIWidgetVisualizationTypeMeta:
-    MaxValue: 23
+    MaxValue: 24
     MinValue: 0
-    NumValues: 24
+    NumValues: 25
   UnitSex:
     Both: 3
     Female: 1
@@ -4886,6 +4933,14 @@ Enum:
     MaxValue: 9
     MinValue: 0
     NumValues: 10
+  ViewRaidSize:
+    Forty: 2
+    Ten: 0
+    TwentyFive: 1
+  ViewRaidSizeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   VignetteType:
     Normal: 0
     PvPBounty: 1
