@@ -20,7 +20,7 @@ for apiname, apidataname in pairs(apiscfg) do
   end
 end
 local function emitFunc(name, cfg)
-  table.insert(t, ('static int wowapi_%s(lua_State *L) {'):format(name:gsub('%.', '_')))
+  table.insert(t, ('static int wowapi_%s(lua_State *L) {'):format(name))
   if cfg.inputs and #cfg.inputs == 1 then -- TODO dump multi-input configs
     for i, param in ipairs(cfg.inputs[1]) do
       if param.type == 'number' and not param.nilable then
@@ -87,14 +87,32 @@ for ns, nsv in sorted(namespaces) do
   for apiname, apicfg in sorted(nsv) do
     emitFunc(ns .. '_' .. apiname, apicfg)
   end
+  table.insert(t, ('static struct luaL_Reg wowapi_%s_index[] = {'):format(ns))
+  for apiname in sorted(nsv) do
+    table.insert(t, ('  {"%s", wowapi_%s},'):format(apiname, ns .. '_' .. apiname))
+  end
+  table.insert(t, '  {NULL, NULL},')
+  table.insert(t, '};')
+  table.insert(t, '')
 end
 for apiname, apicfg in sorted(globals) do
   emitFunc(apiname, apicfg)
 end
 table.insert(t, 'static struct luaL_Reg wowapi_index[] = {')
-for apiname in sorted(apiscfg) do
-  local n = apiname:gsub('%.', '_')
-  table.insert(t, ('  {"%s", wowapi_%s},'):format(n, n))
+for apiname in sorted(globals) do
+  table.insert(t, ('  {"%s", wowapi_%s},'):format(apiname, apiname))
+end
+table.insert(t, '  {NULL, NULL},')
+table.insert(t, '};')
+table.insert(t, '')
+table.insert(t, 'struct wowapi_namespace {')
+table.insert(t, '  char *name;')
+table.insert(t, '  luaL_Reg *index;')
+table.insert(t, '};')
+table.insert(t, '')
+table.insert(t, 'static struct wowapi_namespace wowapi_namespaces[] = {')
+for ns in sorted(namespaces) do
+  table.insert(t, ('  {"%s", wowapi_%s_index},'):format(ns, ns))
 end
 table.insert(t, '  {NULL, NULL},')
 table.insert(t, '};')
@@ -104,6 +122,14 @@ table.insert(t, '  lua_newtable(L);')
 table.insert(t, '  for (luaL_Reg *r = wowapi_index; r->name != NULL; ++r) {')
 table.insert(t, '    lua_pushcfunction(L, r->func);')
 table.insert(t, '    lua_setfield(L, -2, r->name);')
+table.insert(t, '  }')
+table.insert(t, '  for (struct wowapi_namespace *ns = wowapi_namespaces; ns->name != NULL; ++ns) {')
+table.insert(t, '    lua_newtable(L);')
+table.insert(t, '    for (luaL_Reg *r = ns->index; r->name != NULL; ++r) {')
+table.insert(t, '      lua_pushcfunction(L, r->func);')
+table.insert(t, '      lua_setfield(L, -2, r->name);')
+table.insert(t, '    }')
+table.insert(t, '    lua_setfield(L, -2, ns->name);')
 table.insert(t, '  }')
 table.insert(t, '  return 1;')
 table.insert(t, '}')
