@@ -7,11 +7,22 @@ table.insert(t, '#include <lua.h>')
 table.insert(t, '#include <lauxlib.h>')
 table.insert(t, '')
 local apiscfg = parseYaml('data/products/' .. product .. '/apis.yaml')
-for apiname, apidataname in sorted(apiscfg) do
+local namespaces, globals = {}, {}
+for apiname, apidataname in pairs(apiscfg) do
   local apicfg = parseYaml('data/api/' .. apidataname .. '.yaml')
-  table.insert(t, ('static int wowapi_%s(lua_State *L) {'):format(apiname:gsub('%.', '_')))
-  if apicfg.inputs and #apicfg.inputs == 1 then -- TODO dump multi-input configs
-    for i, param in ipairs(apicfg.inputs[1]) do
+  local pos = apiname:find('%.')
+  if pos then
+    local ns = apiname:sub(1, pos - 1)
+    namespaces[ns] = namespaces[ns] or {}
+    namespaces[ns][apiname:sub(pos + 1)] = apicfg
+  else
+    globals[apiname] = apicfg
+  end
+end
+local function emitFunc(name, cfg)
+  table.insert(t, ('static int wowapi_%s(lua_State *L) {'):format(name:gsub('%.', '_')))
+  if cfg.inputs and #cfg.inputs == 1 then -- TODO dump multi-input configs
+    for i, param in ipairs(cfg.inputs[1]) do
       if param.type == 'number' and not param.nilable then
         table.insert(t, ('  lua_Number arg%d = luaL_checknumber(L, %d);'):format(i, i))
       elseif param.type == 'string' and not param.nilable then
@@ -27,14 +38,14 @@ for apiname, apidataname in sorted(apiscfg) do
       elseif param.type == 'unit' and not param.nilable then
         table.insert(t, ('  const char *arg%d = luaL_checkstring(L, %d);'):format(i, i))
       elseif not param.nilable and param.type == 'unknown' then
-        error('invalid param on ' .. apidataname)
+        error('invalid param on ' .. cfg.name)
       end
     end
   end
-  if apicfg.status == 'implemented' then
-    table.insert(t, '/* TODO invoke implementation */')
-  elseif apicfg.outputs then
-    for _, out in ipairs(apicfg.outputs) do
+  if cfg.status == 'implemented' then
+    table.insert(t, '  /* TODO invoke implementation */')
+  elseif cfg.outputs then
+    for _, out in ipairs(cfg.outputs) do
       if out.stub or out.default then
         local value = out.stub or out.default
         local ty = type(value)
@@ -65,12 +76,20 @@ for apiname, apidataname in sorted(apiscfg) do
         table.insert(t, '  lua_pushnil(L); /* lies */')
       end
     end
-    table.insert(t, ('  return %d;'):format(#apicfg.outputs))
+    table.insert(t, ('  return %d;'):format(#cfg.outputs))
   else
     table.insert(t, '  return 0;')
   end
   table.insert(t, '}')
   table.insert(t, '')
+end
+for ns, nsv in sorted(namespaces) do
+  for apiname, apicfg in sorted(nsv) do
+    emitFunc(ns .. '_' .. apiname, apicfg)
+  end
+end
+for apiname, apicfg in sorted(globals) do
+  emitFunc(apiname, apicfg)
 end
 table.insert(t, 'static struct luaL_Reg wowapi_index[] = {')
 for apiname in sorted(apiscfg) do
