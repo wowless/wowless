@@ -1,22 +1,20 @@
 local product = arg[1]
-local parseYaml = require('wowapi.yaml').parseFile
+local apis = require('build.products.' .. product .. '.data').apis
 local structures = require('build.structures')
 local sorted = require('pl.tablex').sort
 local t = {}
 table.insert(t, '#include <lua.h>')
 table.insert(t, '#include <lauxlib.h>')
 table.insert(t, '')
-local apiscfg = parseYaml('data/products/' .. product .. '/apis.yaml')
 local namespaces, globals = {}, {}
-for apiname, apidataname in pairs(apiscfg) do
-  local apicfg = parseYaml('data/api/' .. apidataname .. '.yaml')
-  local pos = apiname:find('%.')
+for name, cfg in pairs(apis) do
+  local pos = name:find('%.')
   if pos then
-    local ns = apiname:sub(1, pos - 1)
+    local ns = name:sub(1, pos - 1)
     namespaces[ns] = namespaces[ns] or {}
-    namespaces[ns][apiname:sub(pos + 1)] = apicfg
+    namespaces[ns][name:sub(pos + 1)] = cfg
   else
-    globals[apiname] = apicfg
+    globals[name] = cfg
   end
 end
 local function emitFunc(name, cfg)
