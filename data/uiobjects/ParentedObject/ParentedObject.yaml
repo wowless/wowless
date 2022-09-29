@@ -27,6 +27,16 @@ methods:
     fields:
     - name: parent
     status: getter
+  GetParentKey:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   SetParent:
     status: implemented
+  SetParentKey:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
 virtual: true
