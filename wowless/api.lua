@@ -18,9 +18,6 @@ local function mkenv()
       set = function(k, v)
         t[k] = v
       end,
-      setfenv = function(f)
-        return setfenv(f, t)
-      end,
     },
     __metatable = 'wowless environment',
     __newindex = function(_, k)
