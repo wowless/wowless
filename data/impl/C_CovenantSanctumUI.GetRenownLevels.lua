@@ -1,6 +1,11 @@
 local sql, covenantID = ...
 local t = {}
-for row in sql(covenantID) do
-  table.insert(t, row)
+for level in sql(covenantID) do
+  table.insert(t, {
+    isCapstone = false,
+    isMilestone = false,
+    level = level,
+    locked = false,
+  })
 end
 return t

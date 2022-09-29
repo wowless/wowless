@@ -2,6 +2,7 @@ local traceback = require('wowless.ext').traceback
 
 local function mkenv()
   local t = {}
+  t._G = t
   local p = newproxy(true)
   require('wowless.util').mixin(getmetatable(p), {
     __index = {
@@ -11,11 +12,11 @@ local function mkenv()
       getenv = function()
         return t
       end,
+      keys = function()
+        return next, t, nil
+      end,
       set = function(k, v)
         t[k] = v
-      end,
-      setfenv = function(f)
-        return setfenv(f, t)
       end,
     },
     __metatable = 'wowless environment',

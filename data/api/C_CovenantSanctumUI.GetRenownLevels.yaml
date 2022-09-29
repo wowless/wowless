@@ -10,4 +10,3 @@ outputs:
   type: table
 sqls:
 - cursor: C_CovenantSanctumUI.GetRenownLevels
-  table: true

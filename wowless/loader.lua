@@ -78,9 +78,15 @@ local function loader(api, cfg)
     if type == 'number' then
       return tonumber(value)
     elseif type == 'global' then
-      local t = api.env.getenv()
+      local t
+      local first = true
       for part in value:gmatch('[^.]+') do
-        t = t[part]
+        if first then
+          t = api.env.get(part)
+          first = false
+        else
+          t = t[part]
+        end
       end
       return t
     elseif type == 'boolean' or type == 'bool' then
@@ -126,7 +132,7 @@ local function loader(api, cfg)
 
   local function loadLuaString(filename, str, line, closureTaint, ...)
     local before = api.env.get('ScrollingMessageFrameMixin')
-    local fn = api.env.setfenv(loadstr(str, filename, line))
+    local fn = setfenv(loadstr(str, filename, line), api.env.getenv())
     api.CallSafely(function(...)
       debug.setnewclosuretaint(closureTaint)
       fn(...)
@@ -162,7 +168,7 @@ local function loader(api, cfg)
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
       local tfn = loadstr(fnstr, filename, script.line)
-      fn = (env == api.env and api.env.setfenv(tfn) or setfenv(tfn, env))()
+      fn = setfenv(tfn, env == api.env and api.env.getenv() or env)()
     end
     if fn then
       local old = obj:GetScript(script.type)
@@ -260,7 +266,7 @@ local function loader(api, cfg)
             -- TODO interpret all binding attributes
             if not e.attr.debug then -- TODO support debug bindings
               local fn = 'return function(keystate) ' .. e.text .. ' end'
-              api.states.Bindings[e.attr.name] = api.env.setfenv(loadstr(fn, filename, e.line))()
+              api.states.Bindings[e.attr.name] = setfenv(loadstr(fn, filename, e.line), api.env.getenv())()
             end
           end,
           color = function(e, parent)

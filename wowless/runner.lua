@@ -18,7 +18,7 @@ local function run(cfg)
     product = cfg.product,
     rootDir = cfg.dir,
   })
-  require('wowless.env').init(api, loader)
+  require('wowless.env').init(api, loader, not cfg.dir)
   loader.initAddons()
   if cfg.dir then
     loader.loadFrameXml()
@@ -185,10 +185,10 @@ local function run(cfg)
         USERANDOM = true,
       }
       local cmds = {}
-      for k, v in pairs(api.env.getenv()) do
+      for k in api.env.keys() do
         local cmd = k:match('^SLASH_(.+)1$')
         if cmd and not cmdBlacklist[cmd] then
-          cmds[cmd] = v
+          cmds[cmd] = api.env.get(k)
         end
       end
       for k, v in require('pl.tablex').sort(cmds) do
