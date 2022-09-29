@@ -78,9 +78,15 @@ local function loader(api, cfg)
     if type == 'number' then
       return tonumber(value)
     elseif type == 'global' then
-      local t = api.env.getenv()
+      local t
+      local first = true
       for part in value:gmatch('[^.]+') do
-        t = t[part]
+        if first then
+          t = api.env.get(part)
+          first = false
+        else
+          t = t[part]
+        end
       end
       return t
     elseif type == 'boolean' or type == 'bool' then
