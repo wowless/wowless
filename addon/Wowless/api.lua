@@ -13,6 +13,13 @@ local function numkeys(t)
 end
 local function apiTests()
   return {
+    C_AreaPoiInfo = function()
+      return {
+        GetAreaPOIInfo = function()
+          assert(_G.C_AreaPoiInfo.GetAreaPOIInfo(1, 1), 'doh')
+        end,
+      }
+    end,
     C_CovenantSanctumUI = mainline(function()
       return {
         GetRenownLevels = function()
