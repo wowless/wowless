@@ -12,6 +12,9 @@ local function mkenv()
       getenv = function()
         return t
       end,
+      keys = function()
+        return next, t, nil
+      end,
       set = function(k, v)
         t[k] = v
       end,

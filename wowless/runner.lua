@@ -185,10 +185,10 @@ local function run(cfg)
         USERANDOM = true,
       }
       local cmds = {}
-      for k, v in pairs(api.env.getenv()) do
+      for k in api.env.keys() do
         local cmd = k:match('^SLASH_(.+)1$')
         if cmd and not cmdBlacklist[cmd] then
-          cmds[cmd] = v
+          cmds[cmd] = api.env.get(k)
         end
       end
       for k, v in require('pl.tablex').sort(cmds) do
