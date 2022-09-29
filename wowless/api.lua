@@ -2,6 +2,7 @@ local traceback = require('wowless.ext').traceback
 
 local function mkenv()
   local t = {}
+  t._G = t
   local p = newproxy(true)
   require('wowless.util').mixin(getmetatable(p), {
     __index = {

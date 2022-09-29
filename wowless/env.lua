@@ -16,7 +16,6 @@ end
 
 local function init(api, loader, lite)
   api.impls = require('wowapi.loader').loadFunctions(api, loader)
-  api.env.set('_G', api.env.getenv())
   for k, v in pairs(deepcopy(api.impls)) do
     api.env.set(k, v)
   end
