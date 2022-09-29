@@ -15,13 +15,14 @@ local function dump(api)
   end
 end
 
-local function init(api, loader)
+local function init(api, loader, lite)
   api.impls = require('wowapi.loader').loadFunctions(api, loader)
   api.env._G = api.env
   Mixin(api.env, deepcopy(api.impls))
   Mixin(api.env, deepcopy(api.datalua.globals))
   api.env.__wowless = {
     dump = dump(api),
+    lite = lite,
     product = api.product,
   }
 end

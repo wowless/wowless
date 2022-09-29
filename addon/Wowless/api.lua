@@ -3,6 +3,7 @@ local assertEquals = _G.assertEquals
 local function mainline(x)
   return _G.WowlessData.Build.flavor == 'Mainline' and x or nil
 end
+local islite = _G.__wowless and _G.__wowless.lite
 local function numkeys(t)
   local n = 0
   for _ in pairs(t) do
@@ -34,8 +35,8 @@ local function apiTests()
           for i = 1, 4 do
             tests[tostring(i)] = function()
               local t = check(C_CovenantSanctumUI.GetRenownLevels(i))
-              assertEquals(80, #t)
-              assertEquals(80, numkeys(t))
+              assertEquals(islite and 0 or 80, #t)
+              assertEquals(islite and 0 or 80, numkeys(t))
               local tt = {}
               for j, v in ipairs(t) do
                 tt[tostring(j)] = function()
@@ -72,4 +73,4 @@ local function apiTests()
     end,
   }
 end
-G.ApiTests = _G.__wowless == nil and apiTests or nil -- TODO stop skipping wowless itself
+G.ApiTests = apiTests

@@ -1,8 +1,5 @@
 SELECT
-  Level as level,
-  FALSE as isCapstone,
-  FALSE as isMilestone,
-  FALSE as locked
+  DISTINCT Level AS level
 FROM
   RenownRewards
 WHERE
