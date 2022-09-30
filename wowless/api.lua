@@ -1,5 +1,10 @@
 local traceback = require('wowless.ext').traceback
 
+local function isscalar(x)
+  local t = type(x)
+  return t == 'nil' or t == 'number' or t == 'string' or t == 'boolean'
+end
+
 local function mkenv()
   local t = {}
   t._G = t
@@ -7,6 +12,7 @@ local function mkenv()
   require('wowless.util').mixin(getmetatable(p), {
     __index = {
       get = function(k)
+        assert(isscalar(k))
         return t[k]
       end,
       getenv = function()
@@ -16,6 +22,7 @@ local function mkenv()
         return next, t, nil
       end,
       set = function(k, v)
+        assert(isscalar(k))
         t[k] = v
       end,
     },
