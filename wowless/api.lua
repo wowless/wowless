@@ -5,6 +5,14 @@ local function isscalar(x)
   return t == 'nil' or t == 'number' or t == 'string' or t == 'boolean'
 end
 
+local function nextscalarkey(t, k)
+  k = next(t, k)
+  while k ~= nil and not isscalar(k) do
+    k = next(t, k)
+  end
+  return k
+end
+
 local function mkenv()
   local t = {}
   t._G = t
@@ -19,7 +27,7 @@ local function mkenv()
         return t
       end,
       keys = function()
-        return next, t, nil
+        return nextscalarkey, t, nil
       end,
       set = function(k, v)
         assert(isscalar(k))
