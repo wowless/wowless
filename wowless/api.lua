@@ -20,7 +20,9 @@ local function mkenv()
   require('wowless.util').mixin(getmetatable(p), {
     __index = {
       get = function(k)
-        assert(isscalar(k))
+        if not isscalar(k) then
+          error(('bad key %q'):format(tostring(k)))
+        end
         return t[k]
       end,
       getenv = function()
@@ -30,7 +32,9 @@ local function mkenv()
         return nextscalarkey, t, nil
       end,
       set = function(k, v)
-        assert(isscalar(k))
+        if not isscalar(k) then
+          error(('bad key %q'):format(tostring(k)))
+        end
         t[k] = v
       end,
     },
