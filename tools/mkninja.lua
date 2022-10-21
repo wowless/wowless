@@ -282,13 +282,13 @@ for _, p in ipairs(productList) do
   end
   table.insert(builds, {
     args = { product = p },
-    ins_implicit = { 'build/dbdefs.stamp', 'tools/sqlite.lua', 'wowapi/sqlite.lua' },
+    ins_implicit = { 'build/dbdefs.stamp', 'tools/sqlite.lua' },
     outs_implicit = schemadb,
     rule = 'dbschema',
   })
   table.insert(builds, {
     args = { product = p },
-    ins_implicit = { 'build/dbdefs.stamp', 'tools/sqlite.lua', 'wowapi/sqlite.lua', fetchStamp },
+    ins_implicit = { 'build/dbdefs.stamp', 'tools/sqlite.lua', fetchStamp },
     outs_implicit = datadb,
     rule = 'dbdata',
   })
