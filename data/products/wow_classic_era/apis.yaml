@@ -889,6 +889,7 @@ C_StoreSecure.GetCharactersForRealm: C_StoreSecure.GetCharactersForRealm
 C_StoreSecure.GetConfirmationInfo: C_StoreSecure.GetConfirmationInfo
 C_StoreSecure.GetCurrencyID: C_StoreSecure.GetCurrencyID
 C_StoreSecure.GetCurrentRealmCategory: C_StoreSecure.GetCurrentRealmCategory
+C_StoreSecure.GetCurrentRealmContentSet: C_StoreSecure.GetCurrentRealmContentSet
 C_StoreSecure.GetEligibleRacesForVASService: C_StoreSecure.GetEligibleRacesForVASService
 C_StoreSecure.GetEntryInfo: C_StoreSecure.GetEntryInfo
 C_StoreSecure.GetFailureInfo: C_StoreSecure.GetFailureInfo
