@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: docker/setup-buildx-action@v1
-    - uses: docker/build-push-action@v2
+    - uses: docker/login-action@v1
       with:
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-        file: .devcontainer/Dockerfile
-        load: true
-        tags: moo
-    - run: docker run -t -v $PWD:/moo moo bash -c \
-           "cd /moo && bash -c $(jq .postCreateCommand .devcontainer/devcontainer.json)"
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - uses: devcontainers/ci@v0.2
+      with:
+        imageName: ghcr.io/lua-wow-tools/wowless-devcontainer
+        refFilterForPush: refs/heads/main
+        runCmd: true
