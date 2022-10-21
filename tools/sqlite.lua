@@ -47,29 +47,34 @@ local function factory(theProduct)
   local function populate(db)
     local dbinit = { 'BEGIN' }
     for k, v in pairs(defs) do
-      local data = require('pl.file').read(('extracts/%s/db2/%s.db2'):format(theProduct, k))
-      assert(data, 'missing db2 for ' .. k)
-      for row in require('dbc').rows(data, '{' .. v.version.sig:gsub('%.', '%?') .. '}') do
-        local values = {}
-        for _, field in ipairs(v.fields) do
-          local value = row[v.version.fields[field]]
-          local ty = type(value)
-          if ty == 'table' then
-            value = value[1]
-            ty = type(value)
+      local success, msg = pcall(function()
+        local data = require('pl.file').read(('extracts/%s/db2/%s.db2'):format(theProduct, k))
+        assert(data, 'missing db2 for ' .. k)
+        for row in require('dbc').rows(data, '{' .. v.version.sig:gsub('%.', '%?') .. '}') do
+          local values = {}
+          for _, field in ipairs(v.fields) do
+            local value = row[v.version.fields[field]]
+            local ty = type(value)
+            if ty == 'table' then
+              value = value[1]
+              ty = type(value)
+            end
+            if ty == 'nil' then
+              value = 'NULL'
+            elseif ty == 'string' then
+              value = quote(value)
+            elseif ty == 'number' then
+              value = tostring(value)
+            else
+              error('unexpected value of type ' .. ty .. ' on field ' .. field .. ' of table ' .. k)
+            end
+            table.insert(values, value)
           end
-          if ty == 'nil' then
-            value = 'NULL'
-          elseif ty == 'string' then
-            value = quote(value)
-          elseif ty == 'number' then
-            value = tostring(value)
-          else
-            error('unexpected value of type ' .. ty .. ' on field ' .. field .. ' of table ' .. k)
-          end
-          table.insert(values, value)
+          table.insert(dbinit, ('INSERT INTO %s VALUES (%s)'):format(k, table.concat(values, ',')))
         end
-        table.insert(dbinit, ('INSERT INTO %s VALUES (%s)'):format(k, table.concat(values, ',')))
+      end)
+      if not success then
+        error('failed to populate ' .. k .. ': ' .. msg)
       end
     end
     table.insert(dbinit, 'COMMIT')
