@@ -148,6 +148,11 @@ methods:
     status: unimplemented
   SetModelByFileID:
     status: unimplemented
+  SetModelByHyperlink:
+    products:
+    - wow_beta
+    - wowt
+    status: unimplemented
   SetModelByPath:
     status: unimplemented
   SetModelByUnit:
