@@ -10,8 +10,7 @@ local log = args.verbose and print or function() end
 
 local build = require('wowapi.yaml').parseFile('data/products/' .. product .. '/build.yaml')
 
-local dbs = require('wowless.db')
-assert(dbs.fdid('ManifestInterfaceTOCData'), 'missing manifest')
+local dbs = require('wowapi.data').dbdefs
 
 local path = require('path')
 path.mkdir('cache')
@@ -109,14 +108,15 @@ local function processTocDir(dir)
 end
 
 for _, db in ipairs(require('tools.dblist')(product)) do
-  save(path.join('db2', db .. '.db2'), handle:readFile(dbs.fdid(db)))
+  save(path.join('db2', db .. '.db2'), handle:readFile(dbs[db].fdid))
 end
 
 processTocDir('Interface/FrameXML')
 do
-  local tocdata = handle:readFile(dbs.fdid('ManifestInterfaceTOCData'))
-  for row in dbs.rows(product, 'ManifestInterfaceTOCData', tocdata) do
-    processTocDir(normalizePath(row.FilePath))
+  -- Yes, ManifestInterfaceTOCData fdid and sig are hardcoded.
+  local tocdata = handle:readFile(1267335)
+  for _, filepath in require('dbc').rows(tocdata, 's') do
+    processTocDir(normalizePath(filepath))
   end
   processTocDir('Interface/AddOns/Blizzard_APIDocumentationGenerated')
 end
