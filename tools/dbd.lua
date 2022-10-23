@@ -1,5 +1,66 @@
+local dbds = (function()
+  local dbcsig = require('luadbd.sig')
+
+  local dbdMT = {
+    __index = {
+      build = require('luadbd.build'),
+    },
+  }
+
+  local buildMT = {
+    __index = {
+      rows = require('luadbd.dbcwrap').build,
+    },
+  }
+
+  local db2s = (function()
+    local t = {}
+    local listfile = require('pl.file').read('vendor/listfile/community-listfile.csv')
+    for line in listfile:gmatch('[^\r\n]+') do
+      local id, name = line:match('(%d+);dbfilesclient/([a-z0-9-_]+).db2')
+      if id then
+        t[name] = tonumber(id)
+      end
+    end
+    return t
+  end)()
+
+  local dbds = (function()
+    local t = {}
+    local dbdparse = require('luadbd.parser').dbd
+    for _, f in ipairs(require('pl.dir').getfiles('vendor/dbdefs/definitions')) do
+      local tn = assert(f:match('vendor/dbdefs/definitions/(.*)%.dbd'))
+      local dbd = assert(dbdparse(require('pl.file').read(f)))
+      dbd.name = tn
+      t[string.lower(tn)] = dbd
+    end
+    return t
+  end)()
+
+  local ret = {}
+  for tn, dbd in pairs(dbds) do
+    local fdid = db2s[tn]
+    if fdid then
+      dbd.fdid = fdid
+      ret[tn] = setmetatable(dbd, dbdMT)
+      for _, version in ipairs(dbd.versions) do
+        local sig, fields = dbcsig(dbd, version)
+        version.sig = sig
+        version.fields = fields
+        version.rowMT = {
+          __index = function(t, k)
+            local i = fields[k]
+            return i and t[i] or nil
+          end,
+        }
+        setmetatable(version, buildMT)
+      end
+    end
+  end
+  return ret
+end)()
+
 local dblist = require('tools.dblist')
-local dbds = require('luadbd').dbds
 local ret = {}
 local builds = require('wowapi.data').builds
 for product, build in pairs(builds) do
