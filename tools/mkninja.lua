@@ -59,6 +59,9 @@ local rules = {
   dbdata = {
     command = 'lua tools/sqlite.lua -f $product',
   },
+  dblist = {
+    command = 'lua tools/dblist.lua $product',
+  },
   dbschema = {
     command = 'lua tools/sqlite.lua $product',
   },
@@ -230,16 +233,32 @@ for _, p in ipairs(productList) do
   end
 end
 
+local dblists = {}
 local runtimes = {}
 local runouts = {}
 for _, p in ipairs(productList) do
+  local dblist = 'build/products/' .. p .. '/dblist.lua'
+  table.insert(dblists, dblist)
+  table.insert(builds, {
+    args = {
+      product = p,
+      restat = 1,
+    },
+    ins = {
+      'build/api.stamp',
+      'build/sql.stamp',
+      'data/products/' .. p .. '/apis.yaml',
+      'tools/dblist.lua',
+    },
+    outs = dblist,
+    rule = 'dblist',
+  })
   local fetchStamp = 'build/products/' .. p .. '/fetch.stamp'
   table.insert(builds, {
     args = { product = p },
     ins = {
-      'build/sql.stamp',
+      dblist,
       'data/products/' .. p .. '/build.yaml',
-      'tools/dblist.lua',
       'tools/fetch.lua',
       'vendor/tactkeys/WoW.txt',
     },
@@ -319,7 +338,7 @@ for _, p in ipairs(productList) do
 end
 
 table.insert(builds, {
-  ins = { '.busted', 'wowless/ext.so', 'build/wowless.stamp', addonGeneratedFiles, elune, runtimes },
+  ins = { '.busted', 'wowless/ext.so', 'build/wowless.stamp', addonGeneratedFiles, dblists, elune, runtimes },
   outs = 'test.out',
   rule = 'mktestout',
 })

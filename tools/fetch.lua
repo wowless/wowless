@@ -118,7 +118,7 @@ local function processTocDir(dir)
   end
 end
 
-for _, db in ipairs(require('tools.dblist')(product)) do
+for _, db in ipairs(require('build.products.' .. product .. '.dblist')) do
   save(path.join('db2', db .. '.db2'), handle:readFile(dbs[db].fdid))
 end
 

@@ -1,4 +1,10 @@
-return function(product)
+local args = (function()
+  local parser = require('argparse')()
+  parser:argument('product', 'product to fetch')
+  return parser:parse()
+end)()
+
+local function dblist(product)
   local dbset = {
     GlobalStrings = true,
     ManifestInterfaceTOCData = true,
@@ -30,10 +36,17 @@ return function(product)
       end
     end
   end
-  local dblist = {}
+  local t = {}
   for db in pairs(dbset) do
-    table.insert(dblist, db)
+    table.insert(t, db)
   end
-  table.sort(dblist)
-  return dblist
+  table.sort(t)
+  return t
+end
+
+local filelib = require('pl.file')
+local filename = 'build/products/' .. args.product .. '/dblist.lua'
+local content = 'return ' .. require('pl.pretty').write(dblist(args.product)) .. '\n'
+if filelib.read(filename) ~= content then
+  filelib.write(filename, content)
 end

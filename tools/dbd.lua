@@ -60,11 +60,11 @@ local dbds = (function()
   return ret
 end)()
 
-local dblist = require('tools.dblist')
 local ret = {}
 local builds = require('wowapi.data').builds
 for product, build in pairs(builds) do
-  for _, db in ipairs(dblist(product)) do
+  os.execute('ninja build/products/' .. product .. '/dblist.lua')
+  for _, db in ipairs(require('build.products.' .. product .. '.dblist')) do
     db = db:lower()
     local dbd = dbds[db]
     local v = (function()
