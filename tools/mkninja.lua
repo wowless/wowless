@@ -240,7 +240,10 @@ for _, p in ipairs(productList) do
   local dblist = 'build/products/' .. p .. '/dblist.lua'
   table.insert(dblists, dblist)
   table.insert(builds, {
-    args = { product = p },
+    args = {
+      product = p,
+      restat = 1,
+    },
     ins = {
       'build/api.stamp',
       'build/sql.stamp',

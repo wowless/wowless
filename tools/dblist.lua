@@ -44,7 +44,9 @@ local function dblist(product)
   return t
 end
 
-require('pl.file').write(
-  'build/products/' .. args.product .. '/dblist.lua',
-  'return ' .. require('pl.pretty').write(dblist(args.product)) .. '\n'
-)
+local filelib = require('pl.file')
+local filename = 'build/products/' .. args.product .. '/dblist.lua'
+local content = 'return ' .. require('pl.pretty').write(dblist(args.product)) .. '\n'
+if filelib.read(filename) ~= content then
+  filelib.write(filename, content)
+end
