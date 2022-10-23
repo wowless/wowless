@@ -56,6 +56,9 @@ local pools = {
 }
 
 local rules = {
+  curl = {
+    command = 'curl -o $out $url',
+  },
   dbdata = {
     command = 'lua tools/sqlite.lua -f $product',
   },
@@ -210,6 +213,13 @@ local builds = {
     outs_implicit = { 'wowless/ext.o', 'wowless/ext.so' },
     rule = 'mkwowlessext',
   },
+  {
+    args = {
+      url = 'https://raw.githubusercontent.com/wowdev/TACTKeys/master/WoW.txt',
+    },
+    outs = { 'build/tactkeys.txt' },
+    rule = 'curl',
+  },
 }
 
 for _, p in ipairs(productList) do
@@ -238,6 +248,7 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins = {
       'build/sql.stamp',
+      'build/tactkeys.txt',
       'data/products/' .. p .. '/build.yaml',
       'tools/dblist.lua',
       'tools/fetch.lua',
