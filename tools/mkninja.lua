@@ -48,7 +48,7 @@ for _, p in ipairs(productList) do
   end
 end
 
-local elune = 'elune/build/linux/bin/Release/lua5.1'
+local elune = 'vendor/elune/build/linux/bin/Release/lua5.1'
 
 local pools = {
   fetch_pool = 1,
@@ -74,7 +74,7 @@ local rules = {
     command = elune .. ' tools/gentest.lua -f $type -p $product',
   },
   mkelune = {
-    command = 'cd elune && rm -rf build && cmake --preset linux && cmake --build --preset linux',
+    command = 'cd vendor/elune && rm -rf build && cmake --preset linux && cmake --build --preset linux',
   },
   mktestout = {
     command = 'bash -c "set -o pipefail && busted 2>&1 | tee $out"',
@@ -109,7 +109,7 @@ local builds = {
     rule = 'phony',
   },
   {
-    ins = find('elune -not -path \'elune/build/*\''),
+    ins = find('vendor/elune -not -path \'vendor/elune/build/*\''),
     outs_implicit = elune,
     rule = 'mkelune',
   },

@@ -1,9 +1,9 @@
-[submodule "elune"]
-	path = elune
-	url = https://github.com/Meorawr/elune
 [submodule "vendor/dbdefs"]
 	path = vendor/dbdefs
 	url = https://github.com/wowdev/wowdbdefs
+[submodule "vendor/elune"]
+	path = vendor/elune
+	url = https://github.com/meorawr/elune
 [submodule "vendor/listfile"]
 	path = vendor/listfile
 	url = https://github.com/wowdev/wow-listfile
