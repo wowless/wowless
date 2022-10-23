@@ -241,6 +241,7 @@ for _, p in ipairs(productList) do
       'data/products/' .. p .. '/build.yaml',
       'tools/dblist.lua',
       'tools/fetch.lua',
+      'vendor/tactkeys/WoW.txt',
     },
     outs = fetchStamp,
     rule = 'fetch',

@@ -15,6 +15,16 @@ local dbs = require('wowapi.data').dbdefs
 local path = require('path')
 path.mkdir('cache')
 
+local encryptionKeys = (function()
+  local wowtxt = require('pl.file').read('vendor/tactkeys/WoW.txt')
+  local ret = {}
+  for line in wowtxt:gmatch('[^\r\n]+') do
+    local k, v = line:match('^([0-9A-F]+) ([0-9A-F]+)')
+    ret[k:lower()] = v:lower()
+  end
+  return ret
+end)()
+
 local handle = (function()
   local casc = require('casc')
   local _, cdn, ckey = casc.cdnbuild('http://us.patch.battle.net:1119/' .. product, 'us')
@@ -24,6 +34,7 @@ local handle = (function()
     cacheFiles = true,
     cdn = cdn,
     ckey = ckey,
+    keys = encryptionKeys,
     locale = casc.locale.US,
     log = log,
     zerofillEncryptedChunks = true,
