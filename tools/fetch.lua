@@ -16,7 +16,7 @@ local path = require('path')
 path.mkdir('cache')
 
 local encryptionKeys = (function()
-  local wowtxt = require('pl.file').read('build/tactkeys.txt')
+  local wowtxt = require('pl.file').read('vendor/tactkeys/WoW.txt')
   local ret = {}
   for line in wowtxt:gmatch('[^\r\n]+') do
     local k, v = line:match('^([0-9A-F]+) ([0-9A-F]+)')

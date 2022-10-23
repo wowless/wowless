@@ -1,3 +1,6 @@
 [submodule "elune"]
 	path = elune
 	url = https://github.com/Meorawr/elune
+[submodule "vendor/tactkeys"]
+	path = vendor/tactkeys
+	url = https://github.com/wowdev/TACTKeys
