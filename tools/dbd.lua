@@ -1,18 +1,6 @@
 local dbds = (function()
   local dbcsig = require('luadbd.sig')
 
-  local dbdMT = {
-    __index = {
-      build = require('luadbd.build'),
-    },
-  }
-
-  local buildMT = {
-    __index = {
-      rows = require('luadbd.dbcwrap').build,
-    },
-  }
-
   local db2s = (function()
     local t = {}
     local listfile = require('pl.file').read('vendor/listfile/community-listfile.csv')
@@ -41,19 +29,12 @@ local dbds = (function()
   for tn, dbd in pairs(dbds) do
     local fdid = db2s[tn]
     if fdid then
+      ret[tn] = dbd
       dbd.fdid = fdid
-      ret[tn] = setmetatable(dbd, dbdMT)
       for _, version in ipairs(dbd.versions) do
         local sig, fields = dbcsig(dbd, version)
         version.sig = sig
         version.fields = fields
-        version.rowMT = {
-          __index = function(t, k)
-            local i = fields[k]
-            return i and t[i] or nil
-          end,
-        }
-        setmetatable(version, buildMT)
       end
     end
   end
