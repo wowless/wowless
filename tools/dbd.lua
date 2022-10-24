@@ -1,35 +1,20 @@
 local dbds = (function()
   local dbcsig = require('luadbd.sig')
 
-  os.execute('ninja build/listfile.lua')
-  local db2s = require('build.listfile')
-
-  local dbds = (function()
-    local t = {}
-    local dbdparse = require('luadbd.parser').dbd
-    for _, f in ipairs(require('pl.dir').getfiles('vendor/dbdefs/definitions')) do
-      local tn = assert(f:match('vendor/dbdefs/definitions/(.*)%.dbd'))
-      local dbd = assert(dbdparse(require('pl.file').read(f)))
-      dbd.name = tn
-      t[string.lower(tn)] = dbd
+  local t = {}
+  local dbdparse = require('luadbd.parser').dbd
+  for _, f in ipairs(require('pl.dir').getfiles('vendor/dbdefs/definitions')) do
+    local tn = assert(f:match('vendor/dbdefs/definitions/(.*)%.dbd'))
+    local dbd = assert(dbdparse(require('pl.file').read(f)))
+    dbd.name = tn
+    for _, version in ipairs(dbd.versions) do
+      local sig, fields = dbcsig(dbd, version)
+      version.sig = sig
+      version.fields = fields
     end
-    return t
-  end)()
-
-  local ret = {}
-  for tn, dbd in pairs(dbds) do
-    local fdid = db2s[tn]
-    if fdid then
-      ret[tn] = dbd
-      dbd.fdid = fdid
-      for _, version in ipairs(dbd.versions) do
-        local sig, fields = dbcsig(dbd, version)
-        version.sig = sig
-        version.fields = fields
-      end
-    end
+    t[string.lower(tn)] = dbd
   end
-  return ret
+  return t
 end)()
 
 local ret = {}
@@ -51,7 +36,6 @@ for product, build in pairs(builds) do
     end)()
     if not ret[dbd.name] then
       ret[dbd.name] = {
-        fdid = dbd.fdid,
         name = dbd.name,
         versions = {
           {

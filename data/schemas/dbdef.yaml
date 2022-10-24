@@ -2,9 +2,6 @@
 name: dbdef
 type:
   record:
-    fdid:
-      required: true
-      type: number
     name:
       required: true
       type: string
