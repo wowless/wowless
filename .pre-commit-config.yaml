@@ -6,6 +6,10 @@ repos:
   - id: check-yaml
   - id: end-of-file-fixer
   - id: trailing-whitespace
+- repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+  rev: '2.6.1'
+  hooks:
+  - id: editorconfig-checker
 - repo: https://github.com/JohnnyMorganz/StyLua
   rev: v0.12.1
   hooks:
