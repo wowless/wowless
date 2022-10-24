@@ -60,7 +60,6 @@ type:
         type:
           oneof:
           - literal: api
-          - literal: db
           - literal: event
           - literal: schema
           - literal: sqlcursor
