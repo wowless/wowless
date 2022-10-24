@@ -79,6 +79,9 @@ local rules = {
   mkelune = {
     command = 'cd vendor/elune && rm -rf build && cmake --preset linux && cmake --build --preset linux',
   },
+  mklistfile = {
+    command = 'lua tools/listfile.lua',
+  },
   mktestout = {
     command = 'bash -c "set -o pipefail && busted 2>&1 | tee $out"',
   },
@@ -213,6 +216,15 @@ local builds = {
     outs_implicit = { 'wowless/ext.o', 'wowless/ext.so' },
     rule = 'mkwowlessext',
   },
+  {
+    ins_implicit = {
+      'tools/listfile.lua',
+      'tools/util.lua',
+      'vendor/listfile/community-listfile.csv',
+    },
+    outs_implicit = 'build/listfile.lua',
+    rule = 'mklistfile',
+  },
 }
 
 for _, p in ipairs(productList) do
@@ -249,6 +261,7 @@ for _, p in ipairs(productList) do
       'build/sql.stamp',
       'data/products/' .. p .. '/apis.yaml',
       'tools/dblist.lua',
+      'tools/util.lua',
     },
     outs = dblist,
     rule = 'dblist',
