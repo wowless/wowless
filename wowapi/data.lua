@@ -44,9 +44,7 @@ end
 
 local fns = {
   apis = loaddir('api', 'yaml'),
-  builds = perproduct('build'),
   cvars = perproduct('cvars'),
-  dbdefs = loaddir('dbdefs', 'yaml'),
   events = loaddir('events', 'yaml'),
   impl = loaddir('impl', 'lua'),
   schemas = loaddir('schemas', 'yaml'),

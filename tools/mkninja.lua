@@ -125,7 +125,7 @@ local builds = {
     rule = 'stamp',
   },
   {
-    ins = find('data/dbdefs'),
+    ins = find('vendor/dbdefs/definitions'),
     outs = 'build/dbdefs.stamp',
     rule = 'stamp',
   },
@@ -174,7 +174,6 @@ local builds = {
   {
     ins = {
       'build/api.stamp',
-      'build/dbdefs.stamp',
       'build/events.stamp',
       'build/state.stamp',
       'build/structures.lua',
@@ -192,7 +191,6 @@ local builds = {
         end
         local globaldirs = {
           'addon',
-          'data/dbdefs',
           'data/schemas',
           'spec',
           'tools',
@@ -245,12 +243,10 @@ for _, p in ipairs(productList) do
   end
 end
 
-local dblists = {}
 local runtimes = {}
 local runouts = {}
 for _, p in ipairs(productList) do
   local dblist = 'build/products/' .. p .. '/dblist.lua'
-  table.insert(dblists, dblist)
   table.insert(builds, {
     args = {
       product = p,
@@ -316,13 +312,24 @@ for _, p in ipairs(productList) do
   end
   table.insert(builds, {
     args = { product = p },
-    ins_implicit = { 'build/dbdefs.stamp', 'tools/sqlite.lua' },
+    ins_implicit = {
+      dblist,
+      'build/dbdefs.stamp',
+      'data/products/' .. p .. '/build.yaml',
+      'tools/sqlite.lua',
+    },
     outs_implicit = schemadb,
     rule = 'dbschema',
   })
   table.insert(builds, {
     args = { product = p },
-    ins_implicit = { 'build/dbdefs.stamp', 'tools/sqlite.lua', fetchStamp },
+    ins_implicit = {
+      dblist,
+      fetchStamp,
+      'build/dbdefs.stamp',
+      'data/products/' .. p .. '/build.yaml',
+      'tools/sqlite.lua',
+    },
     outs_implicit = datadb,
     rule = 'dbdata',
   })
@@ -352,7 +359,7 @@ for _, p in ipairs(productList) do
 end
 
 table.insert(builds, {
-  ins = { '.busted', 'wowless/ext.so', 'build/wowless.stamp', addonGeneratedFiles, dblists, elune, runtimes },
+  ins = { '.busted', 'wowless/ext.so', 'build/wowless.stamp', addonGeneratedFiles, elune, runtimes },
   outs = 'test.out',
   rule = 'mktestout',
 })

@@ -8,32 +8,47 @@ local quote = (function()
 end)()
 
 local function factory(theProduct)
-  local defs = {}
-  for _, file in ipairs(require('pl.dir').getfiles('data/dbdefs')) do
-    local dbdef = require('wowapi.yaml').parseFile(file)
-    for _, version in ipairs(dbdef.versions) do
-      for _, product in ipairs(version.products) do
-        if product == theProduct then
-          local fields = {}
-          for k in pairs(version.fields) do
-            table.insert(fields, k)
+  local defs = (function()
+    local build = require('wowapi.yaml').parseFile('data/products/' .. theProduct .. '/build.yaml')
+    local bv = build.version .. '.' .. build.build
+    local t = {}
+    for _, db in ipairs(require('build.products.' .. theProduct .. '.dblist')) do
+      local content = assert(require('pl.file').read('vendor/dbdefs/definitions/' .. db .. '.dbd'))
+      local dbd = assert(require('luadbd.parser').dbd(content))
+      local v = (function()
+        for _, version in ipairs(dbd.versions) do
+          for _, vb in ipairs(version.builds) do
+            -- Build ranges are not supported (yet).
+            if #vb == 1 and table.concat(vb[1], '.') == bv then
+              return version
+            end
           end
-          table.sort(fields, function(a, b)
-            return version.fields[a] < version.fields[b]
-          end)
-          defs[dbdef.name] = {
-            fields = fields,
-            version = version,
-          }
         end
-      end
+        error('cannot find ' .. bv .. ' in dbd ' .. db)
+      end)()
+      local sig, field2index = require('luadbd.sig')(dbd, v)
+      t[db] = {
+        field2index = field2index,
+        orderedfields = (function()
+          local list = {}
+          for k in pairs(field2index) do
+            table.insert(list, k)
+          end
+          table.sort(list, function(a, b)
+            return field2index[a] < field2index[b]
+          end)
+          return list
+        end)(),
+        sig = sig,
+      }
     end
-  end
+    return t
+  end)()
 
   local function create(filename)
     local dbinit = { 'BEGIN' }
     for k, v in pairs(defs) do
-      table.insert(dbinit, ('CREATE TABLE %s (%s)'):format(k, table.concat(v.fields, ',')))
+      table.insert(dbinit, ('CREATE TABLE %s (%s)'):format(k, table.concat(v.orderedfields, ',')))
     end
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
@@ -50,10 +65,10 @@ local function factory(theProduct)
       local success, msg = pcall(function()
         local data = require('pl.file').read(('extracts/%s/db2/%s.db2'):format(theProduct, k))
         assert(data, 'missing db2 for ' .. k)
-        for row in require('dbc').rows(data, '{' .. v.version.sig:gsub('%.', '%?') .. '}') do
+        for row in require('dbc').rows(data, '{' .. v.sig:gsub('%.', '%?') .. '}') do
           local values = {}
-          for _, field in ipairs(v.fields) do
-            local value = row[v.version.fields[field]]
+          for _, field in ipairs(v.orderedfields) do
+            local value = row[v.field2index[field]]
             local ty = type(value)
             if ty == 'table' then
               value = value[1]
