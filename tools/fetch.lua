@@ -10,7 +10,7 @@ local log = args.verbose and print or function() end
 
 local build = require('wowapi.yaml').parseFile('data/products/' .. product .. '/build.yaml')
 
-local dbs = require('wowapi.data').dbdefs
+local fdids = require('build.listfile')
 
 local path = require('path')
 path.mkdir('cache')
@@ -119,7 +119,7 @@ local function processTocDir(dir)
 end
 
 for _, db in ipairs(require('build.products.' .. product .. '.dblist')) do
-  save(path.join('db2', db .. '.db2'), handle:readFile(dbs[db].fdid))
+  save(path.join('db2', db .. '.db2'), handle:readFile(fdids[db:lower()]))
 end
 
 processTocDir('Interface/FrameXML')

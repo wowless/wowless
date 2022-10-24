@@ -271,6 +271,7 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins = {
       dblist,
+      'build/listfile.lua',
       'data/products/' .. p .. '/build.yaml',
       'tools/fetch.lua',
       'vendor/tactkeys/WoW.txt',
