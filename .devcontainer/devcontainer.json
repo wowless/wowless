@@ -10,6 +10,11 @@
             "permissions": "write-all"
           }
         }
+      },
+      "vscode": {
+        "extensions": [
+          "EditorConfig.EditorConfig"
+        ]
       }
     },
     "features": {
