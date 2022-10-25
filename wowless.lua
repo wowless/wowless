@@ -18,7 +18,7 @@ local args = (function()
   parser:flag('--frame0', 'write frame0 debug')
   return parser:parse()
 end)()
-local api = require('wowless.runner').run({
+require('wowless.runner').run({
   allevents = args.allevents,
   cascproxy = args.cascproxy,
   debug = args.debug,
@@ -30,7 +30,3 @@ local api = require('wowless.runner').run({
   product = args.product,
   scripts = args.scripts,
 })
-if api.GetErrorCount() ~= 0 then
-  io.stderr:write('failure on ' .. args.product .. '\n')
-  os.exit(1)
-end

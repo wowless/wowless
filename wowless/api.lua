@@ -80,7 +80,7 @@ local function new(log, maxErrors, product)
     log(0, 'error: ' .. str .. '\n' .. traceback())
     if maxErrors and errors >= maxErrors then
       log(0, 'maxerrors reached, quitting')
-      os.exit(1)
+      os.exit(0)
     end
   end
 

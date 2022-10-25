@@ -70,7 +70,7 @@ local rules = {
     pool = 'fetch_pool',
   },
   frame0 = {
-    command = elune .. ' wowless.lua -p $product -e5 --frame0 > $out || true',
+    command = elune .. ' wowless.lua -p $product -e5 --frame0 > $out',
     pool = 'run_pool',
   },
   mkaddon = {
@@ -95,7 +95,7 @@ local rules = {
     command = 'lua tools/render.lua $in',
   },
   run = {
-    command = elune .. ' wowless.lua -p $product -e5 > $out || true',
+    command = elune .. ' wowless.lua -p $product -e5 > $out',
     pool = 'run_pool',
   },
   stamp = {
