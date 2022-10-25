@@ -215,6 +215,9 @@ local builds = {
     rule = 'mkwowlessext',
   },
   {
+    args = {
+      restat = 1,
+    },
     ins_implicit = {
       'tools/listfile.lua',
       'tools/util.lua',
