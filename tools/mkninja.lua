@@ -70,7 +70,7 @@ local rules = {
     pool = 'fetch_pool',
   },
   frame0 = {
-    command = elune .. ' wowless.lua -p $product -e5 --frame0 > $out',
+    command = elune .. ' wowless.lua -p $product --frame0 > /dev/null',
     pool = 'run_pool',
   },
   mkaddon = {
@@ -105,7 +105,7 @@ local rules = {
 
 local builds = {
   {
-    ins = { 'test.out', 'outs' },
+    ins = { 'test.out', 'outs', 'pngs' },
     outs = 'all',
     rule = 'phony',
   },
@@ -248,6 +248,7 @@ end
 
 local runtimes = {}
 local runouts = {}
+local pngs = {}
 for _, p in ipairs(productList) do
   local dblist = 'build/products/' .. p .. '/dblist.lua'
   table.insert(builds, {
@@ -299,12 +300,12 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p },
     ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, elune, datadb, datalua },
-    outs = 'out/' .. p .. '/frame0log.txt',
     outs_implicit = { 'out/' .. p .. '/frame0.yaml', 'out/' .. p .. '/frame1.yaml' },
     rule = 'frame0',
   })
   for i = 0, 1 do
     local prefix = 'out/' .. p .. '/frame' .. i
+    table.insert(pngs, prefix .. '.png')
     table.insert(builds, {
       args = { product = p },
       ins = { prefix .. '.yaml' },
@@ -368,8 +369,13 @@ table.insert(builds, {
 })
 table.insert(builds, {
   ins = runouts,
-  rule = 'phony',
   outs = 'outs',
+  rule = 'phony',
+})
+table.insert(builds, {
+  ins = pngs,
+  outs = 'pngs',
+  rule = 'phony',
 })
 
 local function flatten(x)

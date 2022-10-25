@@ -1,11 +1,12 @@
+local args
 local require = require
 _G.require = function(k, ...)
   assert(k:sub(1, 6) ~= 'tools.')
-  assert(k ~= 'wowapi.yaml')
+  assert(k ~= 'wowapi.yaml' or args.frame0)
   return require(k, ...)
 end
 local util = require('wowless.util')
-local args = (function()
+args = (function()
   local parser = require('argparse')()
   parser:option('-p --product', 'product tag'):count(1):choices(util.productList())
   parser:option('-l --loglevel', 'log level', '0'):convert(tonumber)
