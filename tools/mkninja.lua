@@ -20,7 +20,7 @@ local perProductAddonGeneratedTypes = {
     return { 'data/products/' .. p .. '/cvars.yaml' }
   end,
   events = function(p)
-    return { 'data/products/' .. p .. '/events.yaml', 'build/events.stamp' }
+    return { 'data/products/' .. p .. '/events.yaml' }
   end,
   globalapis = function(p)
     return { 'data/products/' .. p .. '/apis.yaml', 'build/api.stamp' }
@@ -130,11 +130,6 @@ local builds = {
     rule = 'stamp',
   },
   {
-    ins = find('data/events'),
-    outs = 'build/events.stamp',
-    rule = 'stamp',
-  },
-  {
     ins = find('data/impl'),
     outs = 'build/impl.stamp',
     rule = 'stamp',
@@ -174,7 +169,6 @@ local builds = {
   {
     ins = {
       'build/api.stamp',
-      'build/events.stamp',
       'build/state.stamp',
       'build/structures.lua',
       'build/structures.stamp',
@@ -343,7 +337,6 @@ for _, p in ipairs(productList) do
     ins_implicit = {
       'tools/prep.lua',
       'build/api.stamp',
-      'build/events.stamp',
       'build/impl.stamp',
       'build/sql.stamp',
       'build/state.stamp',

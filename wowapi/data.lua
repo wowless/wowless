@@ -45,7 +45,6 @@ end
 local fns = {
   apis = loaddir('api', 'yaml'),
   cvars = perproduct('cvars'),
-  events = loaddir('events', 'yaml'),
   impl = loaddir('impl', 'lua'),
   schemas = loaddir('schemas', 'yaml'),
   sqlcursor = loaddir('sql/cursor', 'sql'),

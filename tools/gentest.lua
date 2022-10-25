@@ -58,21 +58,22 @@ local ptablemap = {
     return 'CVars', perproduct(p, 'cvars')
   end,
   events = function(p)
-    local evs = {}
-    for _, f in ipairs(require('pl.dir').getfiles('data/events')) do
-      local cfg = yaml.parseFile(f)
-      evs[cfg.name] = cfg
-    end
     local t = {}
     for k, v in pairs(perproduct(p, 'events')) do
       t[k] = {
-        payload = v == false and -1 or #evs[v == true and k or v].payload,
+        payload = v.payload and #v.payload or -1,
         registerable = true,
       }
     end
-    for _, v in pairs(evs) do
-      local k = v.eventname or v.name
-      t[k] = t[k] or { payload = -1, registerable = false }
+    for _, product in ipairs(require('wowless.util').productList()) do
+      for k in pairs(perproduct(product, 'events')) do
+        if not t[k] then
+          t[k] = {
+            payload = -1,
+            registerable = false,
+          }
+        end
+      end
     end
     return 'Events', t
   end,

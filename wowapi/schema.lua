@@ -1,7 +1,6 @@
 local wdata = require('wowapi.data')
 local domains = {
   api = wdata.apis,
-  event = wdata.events,
   schema = wdata.schemas,
   sqlcursor = wdata.sqlcursor,
   sqllookup = wdata.sqllookup,
