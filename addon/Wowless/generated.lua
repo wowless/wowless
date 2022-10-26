@@ -155,7 +155,7 @@ function G.GeneratedTests()
     local frame = CreateFrame('Frame')
     for k, v in pairs(_G.WowlessData.Events) do
       tests[k] = function()
-        assertEquals(v.registerable, pcall(frame.RegisterEvent, frame, k))
+        assertEquals(v.registerable, (pcall(frame.RegisterEvent, frame, k)))
       end
     end
     return tests
