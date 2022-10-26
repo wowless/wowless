@@ -43,5 +43,6 @@ contents:
 - Anchors
 - Color
 - KeyValues
+- Scripts
 - Size
 virtual: true

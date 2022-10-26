@@ -11,5 +11,4 @@ attributes:
     type: boolean
 contents:
 - Animation
-- Scripts
 extends: LayoutFrame
