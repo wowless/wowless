@@ -5,6 +5,8 @@ type:
     key: string
     value:
       record:
+        docsarewrong:
+          type: boolean
         payload:
           type:
             sequenceof:

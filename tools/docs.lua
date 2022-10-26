@@ -290,7 +290,7 @@ if enabledTypes.events then
     assert(ev.LiteralName ~= nil)
     local dotpos = name:find('%.')
     local ns = dotpos and name:sub(1, dotpos - 1)
-    out[ev.LiteralName] = {
+    local value = {
       payload = (function()
         local t = {}
         for _, arg in ipairs(ev.Payload or {}) do
@@ -308,6 +308,12 @@ if enabledTypes.events then
         return t
       end)(),
     }
+    local k = ev.LiteralName
+    if out[k] and out[k].docsarewrong then
+      assert(not require('pl.tablex').deepcompare(out[k].payload, value.payload))
+    else
+      out[k] = value
+    end
   end
   writeFile(filename, pprintYaml(out))
 end
