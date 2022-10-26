@@ -321,8 +321,11 @@ local function loader(api, cfg)
           end,
           maskedtexture = function(e, parent)
             local t = navigate(parent:GetParent(), e.attr.childkey)
-            assert(t, 'cannot find maskedtexture childkey ' .. e.attr.childkey)
-            t:AddMaskTexture(parent)
+            if t then
+              t:AddMaskTexture(parent)
+            else
+              api.log(1, 'cannot find maskedtexture childkey ' .. e.attr.childkey)
+            end
           end,
           maxresize = function(e, parent)
             -- TODO fix for dragonflight
