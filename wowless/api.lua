@@ -160,13 +160,13 @@ local function new(log, maxErrors, product)
       u(obj).frameIndex = #frames
     end
     local tmpls = {}
+    if type.template then
+      table.insert(tmpls, type.template)
+    end
     if tmplsarg then
       for _, tmpl in ipairs(tmplsarg) do
         table.insert(tmpls, tmpl)
       end
-    end
-    if type.template then
-      table.insert(tmpls, type.template)
     end
     for _, template in ipairs(tmpls) do
       log(4, 'initializing early attributes for ' .. tostring(template.name))
