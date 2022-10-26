@@ -38,9 +38,9 @@ ACTIVATE_GLYPH:
     type: number
 ACTIVE_TALENT_GROUP_CHANGED:
   payload:
-  - name: curr
+  - name: changedTo
     type: number
-  - name: prev
+  - name: changedFrom
     type: number
 ADAPTER_LIST_CHANGED:
   payload: {}
@@ -131,6 +131,8 @@ ARENA_CROWD_CONTROL_SPELL_UPDATE:
   - name: unitTarget
     type: string
   - name: spellID
+    type: number
+  - name: itemID
     type: number
 ARENA_OPPONENT_UPDATE:
   payload:
@@ -398,9 +400,7 @@ BN_CHAT_WHISPER_UNDELIVERABLE:
   - name: senderID
     type: number
 BN_CONNECTED:
-  payload:
-  - name: suppressNotification
-    type: boolean
+  payload: {}
 BN_CUSTOM_MESSAGE_CHANGED:
   payload:
   - name: id
@@ -412,20 +412,14 @@ BN_DISCONNECTED:
   payload:
   - name: result
     type: boolean
-  - name: suppressNotification
-    type: boolean
 BN_FRIEND_ACCOUNT_OFFLINE:
   payload:
   - name: friendId
     type: number
-  - name: isCompanionApp
-    type: boolean
 BN_FRIEND_ACCOUNT_ONLINE:
   payload:
   - name: friendId
     type: number
-  - name: isCompanionApp
-    type: boolean
 BN_FRIEND_INFO_CHANGED:
   payload:
   - name: friendIndex
@@ -3124,8 +3118,13 @@ CLUB_TICKET_CREATED:
     type: C_Club.ClubTicketInfo
 CLUB_TICKET_RECEIVED:
   payload:
+  - name: error
+    type: number
   - name: ticket
     type: string
+  - name: info
+    nilable: true
+    type: C_Club.ClubInfo
 CLUB_TICKETS_RECEIVED:
   payload:
   - name: clubId
@@ -3504,10 +3503,7 @@ GOSSIP_ENTER_CODE:
   - name: gossipIndex
     type: number
 GOSSIP_SHOW:
-  payload:
-  - name: uiTextureKit
-    nilable: true
-    type: string
+  payload: {}
 GROUP_FORMED:
   payload:
   - name: category
@@ -3547,9 +3543,36 @@ GUILD_INVITE_REQUEST:
   - name: isNewGuild
     nilable: true
     type: boolean
-  - name: tabardInfo
+  - name: bkgColorR
     nilable: true
-    type: unknown
+    type: number
+  - name: bkgColorG
+    nilable: true
+    type: number
+  - name: bkgColorB
+    nilable: true
+    type: number
+  - name: borderColorR
+    nilable: true
+    type: number
+  - name: borderColorG
+    nilable: true
+    type: number
+  - name: borderColorB
+    nilable: true
+    type: number
+  - name: emblemColorR
+    nilable: true
+    type: number
+  - name: emblemColorG
+    nilable: true
+    type: number
+  - name: emblemColorB
+    nilable: true
+    type: number
+  - name: emblemFilename
+    nilable: true
+    type: string
 GUILD_MOTD:
   payload:
   - name: motdText
@@ -3675,7 +3698,8 @@ INSTANCE_LOCK_STOP:
   payload: {}
 INSTANCE_LOCK_WARNING:
   payload: {}
-INVENTORY_SEARCH_UPDATE: {}
+INVENTORY_SEARCH_UPDATE:
+  docsarewrong: true
 ISLAND_COMPLETED:
   payload:
   - name: mapID
@@ -3931,8 +3955,6 @@ LOOT_OPENED:
   payload:
   - name: autoLoot
     type: boolean
-  - name: isFromItem
-    type: boolean
 LOOT_READY:
   payload:
   - name: autoloot
@@ -4137,7 +4159,8 @@ OPEN_MASTER_LOOT_LIST:
   payload: {}
 OPEN_TABARD_FRAME:
   payload: {}
-PARTY_INVITE_CANCEL: {}
+PARTY_INVITE_CANCEL:
+  docsarewrong: true
 PARTY_INVITE_REQUEST:
   payload:
   - name: name
@@ -4154,8 +4177,6 @@ PARTY_INVITE_REQUEST:
     type: boolean
   - name: inviterGUID
     type: string
-  - name: questSessionActive
-    type: boolean
 PARTY_LEADER_CHANGED:
   payload: {}
 PARTY_LOOT_METHOD_CHANGED:
@@ -4418,8 +4439,6 @@ PLAYER_LEVEL_CHANGED:
     type: number
   - name: newLevel
     type: number
-  - name: real
-    type: boolean
 PLAYER_LEVEL_UP:
   payload:
   - name: level
@@ -4439,6 +4458,8 @@ PLAYER_LEVEL_UP:
   - name: staminaDelta
     type: number
   - name: intellectDelta
+    type: number
+  - name: spiritDelta
     type: number
 PLAYER_LOGIN:
   payload: {}
@@ -4570,6 +4591,8 @@ QUEST_ACCEPT_CONFIRM:
     type: string
 QUEST_ACCEPTED:
   payload:
+  - name: questIndex
+    type: number
   - name: questId
     type: number
 QUEST_AUTOCOMPLETE:
@@ -4607,8 +4630,6 @@ QUEST_REMOVED:
   payload:
   - name: questID
     type: number
-  - name: wasReplayQuest
-    type: boolean
 QUEST_SESSION_CREATED:
   payload: {}
 QUEST_SESSION_DESTROYED:
@@ -4696,11 +4717,13 @@ RAID_INSTANCE_WELCOME:
   payload:
   - name: mapname
     type: string
-  - name: timeLeft
+  - name: daysLeft
+    type: number
+  - name: hoursLeft
+    type: number
+  - name: minutesLeft
     type: number
   - name: locked
-    type: number
-  - name: extended
     type: number
 RAID_ROSTER_UPDATE:
   payload: {}
@@ -4797,7 +4820,8 @@ SEARCH_DB_LOADED:
   payload: {}
 SECURE_TRANSFER_CANCEL:
   payload: {}
-SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+SECURE_TRANSFER_CONFIRM_SEND_MAIL:
+  docsarewrong: true
 SECURE_TRANSFER_CONFIRM_TRADE_ACCEPT:
   payload: {}
 SELF_RES_SPELL_CHANGED:
@@ -5301,10 +5325,6 @@ UNIT_AURA:
   payload:
   - name: unitTarget
     type: string
-  - name: isFullUpdate
-    type: boolean
-  - name: updateInfo
-    type: unknown
 UNIT_CHEAT_TOGGLE_EVENT:
   payload: {}
 UNIT_CLASSIFICATION_CHANGED:
