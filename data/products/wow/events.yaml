@@ -3588,7 +3588,7 @@ CORPSE_OUT_OF_RANGE:
   payload: {}
 COVENANT_CALLINGS_UPDATED:
   payload:
-  - innerType: unknown
+  - innerType: BountyInfo
     name: callings
     type: table
 COVENANT_CHOSEN:
@@ -4184,7 +4184,7 @@ GOSSIP_CLOSED:
   payload: {}
 GOSSIP_CONFIRM:
   payload:
-  - name: gossipIndex
+  - name: gossipID
     type: number
   - name: text
     type: string
@@ -4194,7 +4194,7 @@ GOSSIP_CONFIRM_CANCEL:
   payload: {}
 GOSSIP_ENTER_CODE:
   payload:
-  - name: gossipIndex
+  - name: gossipID
     type: number
 GOSSIP_OPTIONS_REFRESHED:
   payload: {}
@@ -4256,7 +4256,7 @@ GUILD_INVITE_REQUEST:
     type: boolean
   - name: tabardInfo
     nilable: true
-    type: unknown
+    type: GuildTabardInfo
 GUILD_MOTD:
   payload:
   - name: motdText
@@ -5473,7 +5473,11 @@ PLAYER_SOFT_ENEMY_CHANGED:
 PLAYER_SOFT_FRIEND_CHANGED:
   payload: {}
 PLAYER_SOFT_INTERACT_CHANGED:
-  payload: {}
+  payload:
+  - name: oldTarget
+    type: string
+  - name: newTarget
+    type: string
 PLAYER_SPECIALIZATION_CHANGED:
   payload:
   - name: unitTarget
@@ -5883,6 +5887,8 @@ RESURRECT_REQUEST:
   payload:
   - name: inviter
     type: string
+RETURNING_PLAYER_PROMPT:
+  payload: {}
 REVEAL_CAPTURE_TOGGLED:
   payload: {}
 ROLE_CHANGED_INFORM:
@@ -5978,7 +5984,8 @@ SEARCH_DB_LOADED:
   payload: {}
 SECURE_TRANSFER_CANCEL:
   payload: {}
-SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+SECURE_TRANSFER_CONFIRM_SEND_MAIL:
+  payload: {}
 SECURE_TRANSFER_CONFIRM_TRADE_ACCEPT:
   payload: {}
 SELF_RES_SPELL_CHANGED:
@@ -6556,10 +6563,18 @@ TRADE_SHOW:
   payload: {}
 TRADE_SKILL_CLOSE:
   payload: {}
+TRADE_SKILL_CRAFT_BEGIN:
+  payload:
+  - name: recipeSpellID
+    type: number
 TRADE_SKILL_CRAFTING_REAGENT_BONUS_TEXT_UPDATED:
   payload:
   - name: itemID
     type: number
+TRADE_SKILL_CURRENCY_REWARD_RESULT:
+  payload:
+  - name: data
+    type: CraftingCurrencyResultData
 TRADE_SKILL_DATA_SOURCE_CHANGED:
   payload: {}
 TRADE_SKILL_DATA_SOURCE_CHANGING:
@@ -6569,7 +6584,7 @@ TRADE_SKILL_DETAILS_UPDATE:
 TRADE_SKILL_ITEM_CRAFTED_RESULT:
   payload:
   - name: data
-    type: unknown
+    type: CraftingItemResultData
 TRADE_SKILL_ITEM_UPDATE:
   payload:
   - name: itemGUID
@@ -6608,6 +6623,8 @@ TRAIT_CONFIG_DELETED:
   payload:
   - name: configID
     type: number
+TRAIT_CONFIG_LIST_UPDATED:
+  payload: {}
 TRAIT_CONFIG_UPDATED:
   payload:
   - name: configID
@@ -6628,7 +6645,7 @@ TRAIT_NODE_ENTRY_UPDATED:
     type: number
 TRAIT_SYSTEM_INTERACTION_STARTED:
   payload:
-  - name: systemID
+  - name: treeID
     type: number
 TRAIT_SYSTEM_NPC_CLOSED:
   payload: {}
@@ -6795,10 +6812,8 @@ UNIT_AURA:
   payload:
   - name: unitTarget
     type: string
-  - name: isFullUpdate
-    type: boolean
   - name: updateInfo
-    type: unknown
+    type: UnitAuraUpdateInfo
 UNIT_CHEAT_TOGGLE_EVENT:
   payload: {}
 UNIT_CLASSIFICATION_CHANGED:
