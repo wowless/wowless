@@ -502,10 +502,12 @@ local function loader(api, cfg)
           if api.IsIntrinsicType(e.type) then
             local newctx = withContext({ intrinsic = not not e.attr.intrinsic })
             local template = {
+              inherits = e.attr.inherits,
               initEarlyAttrs = newctx.mkInitPhase('EarlyAttrs', e),
               initAttrs = newctx.mkInitPhase('Attrs', e),
               initKids = newctx.mkInitPhase('Kids', e),
               name = e.attr.name,
+              type = e.type,
             }
             local virtual = e.attr.virtual
             if e.attr.intrinsic then
