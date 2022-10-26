@@ -13,6 +13,9 @@ fields:
   type: boolean
 - name: canRefundRank
   type: boolean
+- name: cascadeRepurchaseEntryID
+  nilable: true
+  type: number
 - innerType: number
   name: conditionIDs
   type: table
@@ -20,6 +23,9 @@ fields:
   type: number
 - innerType: number
   name: entryIDs
+  type: table
+- innerType: number
+  name: entryIDsWithCommittedRanks
   type: table
 - name: flags
   type: number
