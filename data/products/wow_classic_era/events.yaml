@@ -126,6 +126,8 @@ ARENA_CROWD_CONTROL_SPELL_UPDATE:
     type: string
   - name: spellID
     type: number
+  - name: itemID
+    type: number
 ARENA_OPPONENT_UPDATE:
   payload:
   - name: unitToken
@@ -368,9 +370,7 @@ BN_CHAT_WHISPER_UNDELIVERABLE:
   - name: senderID
     type: number
 BN_CONNECTED:
-  payload:
-  - name: suppressNotification
-    type: boolean
+  payload: {}
 BN_CUSTOM_MESSAGE_CHANGED:
   payload:
   - name: id
@@ -381,8 +381,6 @@ BN_CUSTOM_MESSAGE_LOADED:
 BN_DISCONNECTED:
   payload:
   - name: result
-    type: boolean
-  - name: suppressNotification
     type: boolean
 BN_FRIEND_ACCOUNT_OFFLINE:
   payload:
@@ -3090,8 +3088,13 @@ CLUB_TICKET_CREATED:
     type: C_Club.ClubTicketInfo
 CLUB_TICKET_RECEIVED:
   payload:
+  - name: error
+    type: number
   - name: ticket
     type: string
+  - name: info
+    nilable: true
+    type: C_Club.ClubInfo
 CLUB_TICKETS_RECEIVED:
   payload:
   - name: clubId
@@ -3435,10 +3438,7 @@ GOSSIP_ENTER_CODE:
   - name: gossipIndex
     type: number
 GOSSIP_SHOW:
-  payload:
-  - name: uiTextureKit
-    nilable: true
-    type: string
+  payload: {}
 GROUP_FORMED:
   payload:
   - name: category
@@ -3476,9 +3476,36 @@ GUILD_INVITE_REQUEST:
   - name: isNewGuild
     nilable: true
     type: boolean
-  - name: tabardInfo
+  - name: bkgColorR
     nilable: true
-    type: unknown
+    type: number
+  - name: bkgColorG
+    nilable: true
+    type: number
+  - name: bkgColorB
+    nilable: true
+    type: number
+  - name: borderColorR
+    nilable: true
+    type: number
+  - name: borderColorG
+    nilable: true
+    type: number
+  - name: borderColorB
+    nilable: true
+    type: number
+  - name: emblemColorR
+    nilable: true
+    type: number
+  - name: emblemColorG
+    nilable: true
+    type: number
+  - name: emblemColorB
+    nilable: true
+    type: number
+  - name: emblemFilename
+    nilable: true
+    type: string
 GUILD_MOTD:
   payload:
   - name: motdText
@@ -3859,8 +3886,6 @@ LOOT_OPENED:
   payload:
   - name: autoLoot
     type: boolean
-  - name: isFromItem
-    type: boolean
 LOOT_READY:
   payload:
   - name: autoloot
@@ -4073,7 +4098,8 @@ OPEN_REPORT_PLAYER:
     type: string
 OPEN_TABARD_FRAME:
   payload: {}
-PARTY_INVITE_CANCEL: {}
+PARTY_INVITE_CANCEL:
+  docsarewrong: true
 PARTY_INVITE_REQUEST:
   payload:
   - name: name
@@ -4090,8 +4116,6 @@ PARTY_INVITE_REQUEST:
     type: boolean
   - name: inviterGUID
     type: string
-  - name: questSessionActive
-    type: boolean
 PARTY_LEADER_CHANGED:
   payload: {}
 PARTY_LOOT_METHOD_CHANGED:
@@ -4350,8 +4374,6 @@ PLAYER_LEVEL_CHANGED:
     type: number
   - name: newLevel
     type: number
-  - name: real
-    type: boolean
 PLAYER_LEVEL_UP:
   payload:
   - name: level
@@ -4371,6 +4393,8 @@ PLAYER_LEVEL_UP:
   - name: staminaDelta
     type: number
   - name: intellectDelta
+    type: number
+  - name: spiritDelta
     type: number
 PLAYER_LOGIN:
   payload: {}
@@ -4478,6 +4502,8 @@ QUEST_ACCEPT_CONFIRM:
     type: string
 QUEST_ACCEPTED:
   payload:
+  - name: questIndex
+    type: number
   - name: questId
     type: number
 QUEST_AUTOCOMPLETE:
@@ -4515,8 +4541,6 @@ QUEST_REMOVED:
   payload:
   - name: questID
     type: number
-  - name: wasReplayQuest
-    type: boolean
 QUEST_SESSION_CREATED:
   payload: {}
 QUEST_SESSION_DESTROYED:
@@ -4604,11 +4628,13 @@ RAID_INSTANCE_WELCOME:
   payload:
   - name: mapname
     type: string
-  - name: timeLeft
+  - name: daysLeft
+    type: number
+  - name: hoursLeft
+    type: number
+  - name: minutesLeft
     type: number
   - name: locked
-    type: number
-  - name: extended
     type: number
 RAID_ROSTER_UPDATE:
   payload: {}
@@ -4646,8 +4672,6 @@ REPORT_PLAYER_RESULT:
   payload:
   - name: success
     type: boolean
-  - name: reportType
-    type: number
 REQUEST_CEMETERY_LIST_RESPONSE:
   payload:
   - name: isGossipTriggered
@@ -4688,7 +4712,8 @@ SEARCH_DB_LOADED:
   payload: {}
 SECURE_TRANSFER_CANCEL:
   payload: {}
-SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+SECURE_TRANSFER_CONFIRM_SEND_MAIL:
+  docsarewrong: true
 SECURE_TRANSFER_CONFIRM_TRADE_ACCEPT:
   payload: {}
 SELF_RES_SPELL_CHANGED:
