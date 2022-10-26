@@ -30,7 +30,6 @@ methods:
     status: unimplemented
   GetStatusBarAtlas:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -41,6 +40,7 @@ methods:
     status: implemented
   GetStatusBarDesaturation:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -54,11 +54,13 @@ methods:
     status: getter
   IsStatusBarDesaturated:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetColorFill:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -77,7 +79,6 @@ methods:
     status: unimplemented
   SetStatusBarAtlas:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -88,11 +89,13 @@ methods:
     status: implemented
   SetStatusBarDesaturated:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetStatusBarDesaturation:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

@@ -12,6 +12,7 @@ methods:
     status: implemented
   GetAnimationSpeedMultiplier:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -33,6 +34,7 @@ methods:
     status: unimplemented
   IsReverse:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -48,6 +50,7 @@ methods:
     status: unimplemented
   SetAnimationSpeedMultiplier:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

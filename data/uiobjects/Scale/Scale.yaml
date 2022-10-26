@@ -5,7 +5,6 @@ inherits:
 methods:
   GetFromScale:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -18,17 +17,18 @@ methods:
     status: unimplemented
   GetScaleFrom:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
   GetScaleTo:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
   GetToScale:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -37,7 +37,6 @@ methods:
     status: unimplemented
   SetFromScale:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -50,17 +49,18 @@ methods:
     status: unimplemented
   SetScaleFrom:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetScaleTo:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetToScale:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era

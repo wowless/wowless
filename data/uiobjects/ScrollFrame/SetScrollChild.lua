@@ -1,10 +1,7 @@
 return (function(self, ...)
   assert(select('#', ...) == 1, 'SetScrollChild: wrong number of arguments')
   local scrollChild = ...
-  assert(
-    type(scrollChild) == 'table' or runtimeProduct ~= 'wowt' and runtimeProduct ~= 'wow_beta',
-    'Usage: self:SetScrollChild(scrollChild)'
-  )
+  assert(type(scrollChild) == 'table' or build.flavor ~= 'Mainline', 'Usage: self:SetScrollChild(scrollChild)')
   if type(scrollChild) == 'string' then
     scrollChild = api.env[scrollChild]
   end

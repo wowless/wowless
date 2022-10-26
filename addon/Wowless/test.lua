@@ -1,6 +1,5 @@
 local addonName, G = ...
 local assertEquals = _G.assertEquals
-local runtimeProduct = _G.WowlessData.product
 
 local check0 = G.check0
 local check1 = G.check1
@@ -537,7 +536,7 @@ local syncTests = function()
           }
         end,
         Kids = function()
-          if _G.__wowless or runtimeProduct == 'wow_beta' or runtimeProduct == 'wowt' then
+          if _G.__wowless or _G.WowlessData.Build.flavor == 'Mainline' then -- TODO fix
             return
           end
           local parent = f(1, CreateFrame('Frame'))
@@ -643,7 +642,7 @@ local syncTests = function()
           f:SetScrollChild(g)
           assertEquals(g, f:GetScrollChild())
           assertEquals(f, g:GetParent())
-          if runtimeProduct == 'wowt' or runtimeProduct == 'wow_beta' then
+          if _G.WowlessData.Build.flavor == 'Mainline' then
             assertEquals(false, pcall(f.SetScrollChild, f, nil))
             assertEquals(false, pcall(f.SetScrollChild, f, 'WowlessScrollFrameChild'))
           else
