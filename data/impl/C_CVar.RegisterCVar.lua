@@ -1,2 +1,2 @@
 local cvars, var, value = ...
-cvars[var] = value
+cvars[var:lower()] = value

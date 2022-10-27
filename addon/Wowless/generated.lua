@@ -116,20 +116,21 @@ function G.GeneratedTests()
       for _, command in ipairs(_G.C_Console.GetAllCommands()) do
         local name = command.command
         if name:sub(1, 6) ~= 'CACHE-' then
-          t[name] = _G.C_CVar.GetCVarDefault(name)
+          t[name:lower()] = _G.C_CVar.GetCVarDefault(name)
         end
       end
       return t
     end)()
     local tests = {}
     local toskipin = {
-      mouseSpeed = true, -- varies based on host?
-      RenderScale = true, -- varies based on host?
+      mousespeed = true, -- varies based on host?
+      renderscale = true, -- varies based on host?
     }
     for name in pairs(toskipin) do
       tests[name] = function() end
     end
     for name, value in pairs(_G.WowlessData.CVars) do
+      name = name:lower()
       if not tests[name] then
         tests[name] = function()
           assertEquals(value, cvarDefaults[name])
@@ -137,8 +138,8 @@ function G.GeneratedTests()
       end
     end
     local toskipout = {
-      PraiseTheSun = true, -- set in FrameXML
-      TTSUseCharacterSettings = true,
+      praisethesun = true, -- set in FrameXML
+      ttsusecharactersettings = true,
     }
     for k, v in pairs(cvarDefaults) do
       if not tests[k] and not toskipout[k] then

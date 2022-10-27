@@ -144,6 +144,11 @@ local function supported(obj)
   return false
 end
 
+local cvars = {}
+for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
+  cvars[k:lower()] = v
+end
+
 local events = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
   events[k] = {
@@ -180,7 +185,7 @@ end
 local data = {
   apis = apis,
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
-  cvars = parseYaml('data/products/' .. product .. '/cvars.yaml'),
+  cvars = cvars,
   events = events,
   globals = parseYaml('data/products/' .. product .. '/globals.yaml'),
   impls = impls,
