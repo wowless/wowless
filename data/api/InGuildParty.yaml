@@ -1,3 +1,14 @@
 ---
 name: InGuildParty
 status: unimplemented
+inputs:
+- {}
+outputs:
+- name: inGroup
+  type: boolean
+- name: numGuildPresent
+  type: number
+- name: numGuildRequired
+  type: number
+- name: xpMultiplier
+  type: number
