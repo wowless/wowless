@@ -3248,7 +3248,7 @@ GetAchievementSearchProgress: GetAchievementSearchProgress
 GetAchievementSearchSize: GetAchievementSearchSize
 GetActionAutocast: GetActionAutocast
 GetActionBarPage: GetActionBarPage
-GetActionBarToggles: GetActionBarToggles
+GetActionBarToggles: GetActionBarToggles_Mainline
 GetActionCharges: GetActionCharges
 GetActionCooldown: GetActionCooldown
 GetActionCount: GetActionCount

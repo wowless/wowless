@@ -1365,7 +1365,7 @@ GetAbandonQuestName: GetAbandonQuestName
 GetAccountExpansionLevel: GetAccountExpansionLevel
 GetActionAutocast: GetActionAutocast
 GetActionBarPage: GetActionBarPage
-GetActionBarToggles: GetActionBarToggles
+GetActionBarToggles: GetActionBarToggles_Vanilla
 GetActionCharges: GetActionCharges
 GetActionCooldown: GetActionCooldown
 GetActionCount: GetActionCount
