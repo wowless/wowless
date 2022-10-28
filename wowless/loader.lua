@@ -686,6 +686,34 @@ local function loader(api, cfg)
     time.timers:push(math.huge, function()
       error('fell off the end of time')
     end)
+
+    local cancelled = setmetatable({}, { __mode = 'k' })
+    local tickerMT = {
+      __index = {
+        Cancel = debug.newcfunction(function(self)
+          cancelled[self] = true
+        end),
+        IsCancelled = debug.newcfunction(function(self)
+          return cancelled[self]
+        end),
+      },
+      __metatable = false,
+    }
+    time.newTicker = function(seconds, callback, iterations)
+      local p = newproxy(true)
+      mixin(getmetatable(p), tickerMT)
+      cancelled[p] = false
+      local count = 0
+      local function cb()
+        if not cancelled[p] and count < iterations then
+          callback()
+          count = count + 1
+          time.timers:push(time.stamp + seconds, cb)
+        end
+      end
+      time.timers:push(time.stamp + seconds, cb)
+      return p
+    end
   end
 
   api.states.CVars.portal = build.ptr and 'test' or ''

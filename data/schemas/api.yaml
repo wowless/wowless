@@ -101,6 +101,7 @@ type:
                   - literal: string
                   - literal: table
                   - literal: unknown
+                  - literal: userdata
                   - ref: structure
       protection:
         type:
