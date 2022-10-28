@@ -1,3 +1,11 @@
 ---
 name: Ambiguate
 status: unimplemented
+inputs:
+- - name: fullName
+    type: string
+  - name: context
+    type: string
+outputs:
+- name: name
+  type: string
