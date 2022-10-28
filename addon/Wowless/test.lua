@@ -983,22 +983,24 @@ do
     if not asyncPending then
       if asyncIndex == numAsyncTests then
         frame:SetScript('OnUpdate', nil)
-        _G.WowlessTestFailures.LUA_WARNING = (function()
-          local function check()
-            assertEquals(#G.ExpectedLuaWarnings, #G.ActualLuaWarnings)
-            for i, e in ipairs(G.ExpectedLuaWarnings) do
-              local a = G.ActualLuaWarnings[i]
-              assertEquals(e.warnType, a.warnType)
-              assertEquals(e.warnText, a.warnText)
+        if _G.WowlessData.Build.flavor ~= 'Mainline' then -- TODO reenable for mainline
+          _G.WowlessTestFailures.LUA_WARNING = (function()
+            local function check()
+              assertEquals(#G.ExpectedLuaWarnings, #G.ActualLuaWarnings)
+              for i, e in ipairs(G.ExpectedLuaWarnings) do
+                local a = G.ActualLuaWarnings[i]
+                assertEquals(e.warnType, a.warnType)
+                assertEquals(e.warnText, a.warnText)
+              end
             end
-          end
-          if not pcall(check) then
-            return {
-              actual = G.ActualLuaWarnings,
-              expected = G.ExpectedLuaWarnings,
-            }
-          end
-        end)()
+            if not pcall(check) then
+              return {
+                actual = G.ActualLuaWarnings,
+                expected = G.ExpectedLuaWarnings,
+              }
+            end
+          end)()
+        end
         _G.WowlessTestsDone = true
         local print = DevTools_Dump and print or function() end
         print(('Wowless testing completed in %.1fs (%d frames).'):format(totalTime, numFrames))
