@@ -121,6 +121,7 @@ local function run(cfg)
         STORE_GUILD_MASTER_INFO_RECEIVED = true, -- SelectedRealm shenanigans
         UPDATE_MASTER_LOOT_LIST = true,
         VARIABLES_LOADED = true,
+        VOICE_CHAT_VAD_SETTINGS_UPDATED = true, -- inconsistent with nilable C_VoiceChat outputs
       }
       local keys = {}
       local payloads = {}
