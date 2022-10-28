@@ -5998,6 +5998,8 @@ SESSION_TIME_ALERT:
   payload:
   - name: time
     type: number
+SET_DEBUG_TOOL_VISIBLE:
+  payload: {}
 SETTINGS_LOADED:
   payload: {}
 SHIPMENT_CRAFTER_CLOSED:
