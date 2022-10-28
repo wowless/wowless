@@ -2180,6 +2180,8 @@ C_Reputation.IsMajorFaction: C_Reputation.IsMajorFaction
 C_Reputation.RequestFactionParagonPreloadRewardData: C_Reputation.RequestFactionParagonPreloadRewardData
 C_Reputation.SetWatchedFaction: C_Reputation.SetWatchedFaction
 C_ResearchInfo.GetDigSitesForMap: C_ResearchInfo.GetDigSitesForMap
+C_ReturningPlayerUI.AcceptPrompt: C_ReturningPlayerUI.AcceptPrompt
+C_ReturningPlayerUI.DeclinePrompt: C_ReturningPlayerUI.DeclinePrompt
 C_Scenario.GetBonusStepRewardQuestID: C_Scenario.GetBonusStepRewardQuestID
 C_Scenario.GetBonusSteps: C_Scenario.GetBonusSteps
 C_Scenario.GetCriteriaInfo: C_Scenario.GetCriteriaInfo
