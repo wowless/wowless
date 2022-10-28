@@ -9,3 +9,5 @@ inputs:
 outputs:
 - name: cbObject
   type: userdata
+states:
+- Time

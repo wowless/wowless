@@ -704,7 +704,7 @@ local function loader(api, cfg)
       mixin(getmetatable(p), tickerMT)
       cancelled[p] = false
       local count = 0
-      local cb = function()
+      local function cb()
         if not cancelled[p] and count < iterations then
           callback()
           count = count + 1
