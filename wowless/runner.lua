@@ -183,6 +183,7 @@ local function run(cfg)
       local cmdBlacklist = { -- TODO remove this; these require a better SecureCmdOptionParse
         BENCHMARK = true,
         CASTRANDOM = true,
+        EVENT = true, -- throws Lua errors if text isn't a valid event
         LOOT_MASTER = true, -- broken
         PTRFEEDBACK = true, -- this just seems broken with an empty string
         USERANDOM = true,
