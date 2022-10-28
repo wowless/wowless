@@ -33,6 +33,9 @@ local function run(cfg)
   api.SendEvent('PLAYER_ENTERING_WORLD', true, false)
   api.SendEvent('TRIAL_STATUS_UPDATE')
   api.SendEvent('DISPLAY_SIZE_CHANGED')
+  if api.env.UIParent then -- Super duper hack to unblock 10.0 UIPanel code.
+    api.env.UIParent:SetSize(api.states.System.screenWidth, api.states.System.screenHeight)
+  end
   api.SendEvent('SPELLS_CHANGED')
   if cfg.debug then
     print('_, api = debug.getlocal(3, 5)')
