@@ -133,6 +133,6 @@ methods:
   SetViewTranslation:
     status: unimplemented
   TransformCameraSpaceToModelSpace:
-    status: unimplemented
+    status: implemented
   UseModelCenterToTransform:
     status: unimplemented
