@@ -15,6 +15,14 @@ fields:
 - name: ranking
   nilable: true
   type: number
+- name: roundsSeasonPlayed
+  type: number
+- name: roundsSeasonWon
+  type: number
+- name: roundsWeeklyPlayed
+  type: number
+- name: roundsWeeklyWon
+  type: number
 - name: seasonPlayed
   type: number
 - name: seasonWon

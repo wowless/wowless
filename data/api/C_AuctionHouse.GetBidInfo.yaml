@@ -6,5 +6,4 @@ inputs:
     type: number
 outputs:
 - name: bid
-  nilable: true
   type: C_AuctionHouse.BidInfo

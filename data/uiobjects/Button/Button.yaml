@@ -42,21 +42,25 @@ inherits:
 methods:
   ClearDisabledTexture:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
   ClearHighlightTexture:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
   ClearNormalTexture:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
   ClearPushedTexture:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -145,6 +149,7 @@ methods:
     status: unimplemented
   SetHighlightLocked:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

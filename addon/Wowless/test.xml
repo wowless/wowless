@@ -407,14 +407,19 @@
   <Frame>
     <Layers>
       <Layer>
-        <Texture>
+        <Texture parentKey='tex'>
           <Scripts>
             <OnLoad>
-              error('textures should not support scripts')
+              self.loaded = true
             </OnLoad>
           </Scripts>
         </Texture>
       </Layer>
     </Layers>
+    <Scripts>
+      <OnLoad>
+        assertEquals(_G.WowlessData.Build.flavor == 'Mainline', not not self.tex.loaded)
+      </OnLoad>
+    </Scripts>
   </Frame>
 </Ui>

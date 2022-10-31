@@ -10,10 +10,14 @@
             "permissions": "write-all"
           }
         }
+      },
+      "vscode": {
+        "extensions": [
+          "EditorConfig.EditorConfig"
+        ]
       }
     },
     "features": {
-        "docker-from-docker": {},
         "github-cli": {}
     },
     "name": "lua-wow-tools/wowless",

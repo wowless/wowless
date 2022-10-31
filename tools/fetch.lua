@@ -10,11 +10,20 @@ local log = args.verbose and print or function() end
 
 local build = require('wowapi.yaml').parseFile('data/products/' .. product .. '/build.yaml')
 
-local dbs = require('wowless.db')
-assert(dbs.fdid('ManifestInterfaceTOCData'), 'missing manifest')
+local fdids = require('build.listfile')
 
 local path = require('path')
 path.mkdir('cache')
+
+local encryptionKeys = (function()
+  local wowtxt = require('pl.file').read('vendor/tactkeys/WoW.txt')
+  local ret = {}
+  for line in wowtxt:gmatch('[^\r\n]+') do
+    local k, v = line:match('^([0-9A-F]+) ([0-9A-F]+)')
+    ret[k:lower()] = v:lower()
+  end
+  return ret
+end)()
 
 local handle = (function()
   local casc = require('casc')
@@ -25,6 +34,7 @@ local handle = (function()
     cacheFiles = true,
     cdn = cdn,
     ckey = ckey,
+    keys = encryptionKeys,
     locale = casc.locale.US,
     log = log,
     zerofillEncryptedChunks = true,
@@ -108,15 +118,16 @@ local function processTocDir(dir)
   end
 end
 
-for _, db in ipairs(require('tools.dblist')(product)) do
-  save(path.join('db2', db .. '.db2'), handle:readFile(dbs.fdid(db)))
+for _, db in ipairs(require('build.products.' .. product .. '.dblist')) do
+  save(path.join('db2', db .. '.db2'), handle:readFile(fdids[db:lower()]))
 end
 
 processTocDir('Interface/FrameXML')
 do
-  local tocdata = handle:readFile(dbs.fdid('ManifestInterfaceTOCData'))
-  for row in dbs.rows(product, 'ManifestInterfaceTOCData', tocdata) do
-    processTocDir(normalizePath(row.FilePath))
+  -- Yes, ManifestInterfaceTOCData fdid and sig are hardcoded.
+  local tocdata = handle:readFile(1267335)
+  for _, filepath in require('dbc').rows(tocdata, 's') do
+    processTocDir(normalizePath(filepath))
   end
   processTocDir('Interface/AddOns/Blizzard_APIDocumentationGenerated')
 end

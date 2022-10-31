@@ -126,7 +126,7 @@ local function new(log, maxErrors, product)
     log(0, 'error: ' .. str .. '\n' .. traceback())
     if maxErrors and errors >= maxErrors then
       log(0, 'maxerrors reached, quitting')
-      os.exit(1)
+      os.exit(0)
     end
   end
 
@@ -206,13 +206,13 @@ local function new(log, maxErrors, product)
       u(obj).frameIndex = #frames
     end
     local tmpls = {}
+    if type.template then
+      table.insert(tmpls, type.template)
+    end
     if tmplsarg then
       for _, tmpl in ipairs(tmplsarg) do
         table.insert(tmpls, tmpl)
       end
-    end
-    if type.template then
-      table.insert(tmpls, type.template)
     end
     for _, template in ipairs(tmpls) do
       log(4, 'initializing early attributes for ' .. tostring(template.name))

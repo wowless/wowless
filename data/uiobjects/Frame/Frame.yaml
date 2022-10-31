@@ -57,7 +57,6 @@ fields:
 inherits:
   MouseMixin:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -103,7 +102,6 @@ methods:
     status: unimplemented
   GetDepth:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -116,7 +114,6 @@ methods:
     status: implemented
   GetEffectiveDepth:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -150,7 +147,6 @@ methods:
     - name: maxResizeWidth
     - name: maxResizeHeight
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -162,7 +158,6 @@ methods:
     - name: minResizeWidth
     - name: minResizeHeight
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -181,6 +176,7 @@ methods:
     status: implemented
   GetResizeBounds:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -194,7 +190,6 @@ methods:
     status: getter
   IgnoreDepth:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -213,7 +208,6 @@ methods:
     status: unimplemented
   IsIgnoringDepth:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -266,7 +260,6 @@ methods:
     status: unimplemented
   SetDepth:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -289,7 +282,6 @@ methods:
     status: unimplemented
   SetFrameBuffer:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -314,6 +306,7 @@ methods:
     status: setter
   SetIsFrameBuffer:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -322,7 +315,6 @@ methods:
     - name: maxResizeWidth
     - name: maxResizeHeight
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -334,7 +326,6 @@ methods:
     - name: minResizeWidth
     - name: minResizeHeight
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -355,6 +346,7 @@ methods:
     status: setter
   SetResizeBounds:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

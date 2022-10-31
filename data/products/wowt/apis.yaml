@@ -509,6 +509,7 @@ C_CampaignInfo.GetCurrentChapterID: C_CampaignInfo.GetCurrentChapterID
 C_CampaignInfo.GetFailureReason: C_CampaignInfo.GetFailureReason
 C_CampaignInfo.GetState: C_CampaignInfo.GetState
 C_CampaignInfo.IsCampaignQuest: C_CampaignInfo.IsCampaignQuest
+C_CampaignInfo.SortAsNormalQuest: C_CampaignInfo.SortAsNormalQuest
 C_CampaignInfo.UsesNormalQuestIcons: C_CampaignInfo.UsesNormalQuestIcons
 C_ChallengeMode.CanUseKeystoneInCurrentMap: C_ChallengeMode.CanUseKeystoneInCurrentMap
 C_ChallengeMode.ClearKeystone: C_ChallengeMode.ClearKeystone
@@ -597,7 +598,7 @@ C_ClassTalents.GetNextStarterBuildPurchase: C_ClassTalents.GetNextStarterBuildPu
 C_ClassTalents.GetStarterBuildActive: C_ClassTalents.GetStarterBuildActive
 C_ClassTalents.HasUnspentTalentPoints: C_ClassTalents.HasUnspentTalentPoints
 C_ClassTalents.ImportLoadout: C_ClassTalents.ImportLoadout
-C_ClassTalents.IsConfigReady: C_ClassTalents.IsConfigReady
+C_ClassTalents.IsConfigPopulated: C_ClassTalents.IsConfigPopulated
 C_ClassTalents.LoadConfig: C_ClassTalents.LoadConfig
 C_ClassTalents.RenameConfig: C_ClassTalents.RenameConfig
 C_ClassTalents.RequestNewConfig: C_ClassTalents.RequestNewConfig
@@ -1678,6 +1679,7 @@ C_MountJournal.GetMountFromSpell: C_MountJournal.GetMountFromSpell
 C_MountJournal.GetMountIDs: C_MountJournal.GetMountIDs
 C_MountJournal.GetMountInfoByID: C_MountJournal.GetMountInfoByID
 C_MountJournal.GetMountInfoExtraByID: C_MountJournal.GetMountInfoExtraByID
+C_MountJournal.GetMountLink: C_MountJournal.GetMountLink
 C_MountJournal.GetMountUsabilityByID: C_MountJournal.GetMountUsabilityByID
 C_MountJournal.GetNumDisplayedMounts: C_MountJournal.GetNumDisplayedMounts
 C_MountJournal.GetNumMounts: C_MountJournal.GetNumMounts
@@ -2041,6 +2043,7 @@ C_PvP.IsPVPMap: C_PvP.IsPVPMap
 C_PvP.IsRatedArena: C_PvP.IsRatedArena
 C_PvP.IsRatedBattleground: C_PvP.IsRatedBattleground
 C_PvP.IsRatedMap: C_PvP.IsRatedMap
+C_PvP.IsRatedSoloShuffle: C_PvP.IsRatedSoloShuffle
 C_PvP.IsSoloShuffle: C_PvP.IsSoloShuffle
 C_PvP.IsWarModeActive: C_PvP.IsWarModeActive
 C_PvP.IsWarModeDesired: C_PvP.IsWarModeDesired
@@ -2177,6 +2180,8 @@ C_Reputation.IsMajorFaction: C_Reputation.IsMajorFaction
 C_Reputation.RequestFactionParagonPreloadRewardData: C_Reputation.RequestFactionParagonPreloadRewardData
 C_Reputation.SetWatchedFaction: C_Reputation.SetWatchedFaction
 C_ResearchInfo.GetDigSitesForMap: C_ResearchInfo.GetDigSitesForMap
+C_ReturningPlayerUI.AcceptPrompt: C_ReturningPlayerUI.AcceptPrompt
+C_ReturningPlayerUI.DeclinePrompt: C_ReturningPlayerUI.DeclinePrompt
 C_Scenario.GetBonusStepRewardQuestID: C_Scenario.GetBonusStepRewardQuestID
 C_Scenario.GetBonusSteps: C_Scenario.GetBonusSteps
 C_Scenario.GetCriteriaInfo: C_Scenario.GetCriteriaInfo
@@ -2457,6 +2462,7 @@ C_TradeSkillUI.CraftSalvage: C_TradeSkillUI.CraftSalvage
 C_TradeSkillUI.DoesRecraftingRecipeAcceptItem: C_TradeSkillUI.DoesRecraftingRecipeAcceptItem
 C_TradeSkillUI.DropPendingObliterateItemFromCursor: C_TradeSkillUI.DropPendingObliterateItemFromCursor
 C_TradeSkillUI.GetAllFilterableInventorySlots: C_TradeSkillUI.GetAllFilterableInventorySlots
+C_TradeSkillUI.GetAllFilterableInventorySlotsCount: C_TradeSkillUI.GetAllFilterableInventorySlotsCount
 C_TradeSkillUI.GetAllProfessionTradeSkillLines: C_TradeSkillUI.GetAllProfessionTradeSkillLines
 C_TradeSkillUI.GetAllRecipeIDs: C_TradeSkillUI.GetAllRecipeIDs
 C_TradeSkillUI.GetBaseProfessionInfo: C_TradeSkillUI.GetBaseProfessionInfo
@@ -2469,9 +2475,11 @@ C_TradeSkillUI.GetCraftingOperationInfo: C_TradeSkillUI.GetCraftingOperationInfo
 C_TradeSkillUI.GetCraftingReagentBonusText: C_TradeSkillUI.GetCraftingReagentBonusText
 C_TradeSkillUI.GetEnchantItems: C_TradeSkillUI.GetEnchantItems
 C_TradeSkillUI.GetFactionSpecificOutputItem: C_TradeSkillUI.GetFactionSpecificOutputItem
+C_TradeSkillUI.GetFilterableInventorySlotName: C_TradeSkillUI.GetFilterableInventorySlotName
 C_TradeSkillUI.GetFilterableInventorySlots: C_TradeSkillUI.GetFilterableInventorySlots
 C_TradeSkillUI.GetFilteredRecipeIDs: C_TradeSkillUI.GetFilteredRecipeIDs
 C_TradeSkillUI.GetGatheringOperationInfo: C_TradeSkillUI.GetGatheringOperationInfo
+C_TradeSkillUI.GetHideUnownedFlags: C_TradeSkillUI.GetHideUnownedFlags
 C_TradeSkillUI.GetItemCraftedQualityByItemInfo: C_TradeSkillUI.GetItemCraftedQualityByItemInfo
 C_TradeSkillUI.GetItemReagentQualityByItemInfo: C_TradeSkillUI.GetItemReagentQualityByItemInfo
 C_TradeSkillUI.GetItemSlotModifications: C_TradeSkillUI.GetItemSlotModifications
@@ -2555,6 +2563,7 @@ C_TradeSkillUI.StopRecipeRepeat: C_TradeSkillUI.StopRecipeRepeat
 C_Traits.CanPurchaseRank: C_Traits.CanPurchaseRank
 C_Traits.CanRefundRank: C_Traits.CanRefundRank
 C_Traits.CascadeRepurchaseRanks: C_Traits.CascadeRepurchaseRanks
+C_Traits.ClearCascadeRepurchaseHistory: C_Traits.ClearCascadeRepurchaseHistory
 C_Traits.CloseTraitSystemInteraction: C_Traits.CloseTraitSystemInteraction
 C_Traits.CommitConfig: C_Traits.CommitConfig
 C_Traits.ConfigHasStagedChanges: C_Traits.ConfigHasStagedChanges
@@ -2572,6 +2581,7 @@ C_Traits.GetTraitDescription: C_Traits.GetTraitDescription
 C_Traits.GetTreeCurrencyInfo: C_Traits.GetTreeCurrencyInfo
 C_Traits.GetTreeHash: C_Traits.GetTreeHash
 C_Traits.GetTreeNodes: C_Traits.GetTreeNodes
+C_Traits.HasValidInspectData: C_Traits.HasValidInspectData
 C_Traits.PurchaseRank: C_Traits.PurchaseRank
 C_Traits.RefundAllRanks: C_Traits.RefundAllRanks
 C_Traits.RefundRank: C_Traits.RefundRank
@@ -2882,6 +2892,7 @@ C_WeeklyRewards.GetNextMythicPlusIncrease: C_WeeklyRewards.GetNextMythicPlusIncr
 C_WeeklyRewards.HasAvailableRewards: C_WeeklyRewards.HasAvailableRewards
 C_WeeklyRewards.HasGeneratedRewards: C_WeeklyRewards.HasGeneratedRewards
 C_WeeklyRewards.HasInteraction: C_WeeklyRewards.HasInteraction
+C_WeeklyRewards.IsWeeklyChestRetired: C_WeeklyRewards.IsWeeklyChestRetired
 C_WeeklyRewards.OnUIInteract: C_WeeklyRewards.OnUIInteract
 C_Widget.IsFrameWidget: C_Widget.IsFrameWidget
 C_Widget.IsRenderableWidget: C_Widget.IsRenderableWidget
@@ -3066,6 +3077,7 @@ CombatLogGetRetentionTime: CombatLogGetRetentionTime
 CombatLogResetFilter: CombatLogResetFilter
 CombatLogSetCurrentEntry: CombatLogSetCurrentEntry
 CombatLogSetRetentionTime: CombatLogSetRetentionTime
+CombatLogShowCurrentEntry: CombatLogShowCurrentEntry
 CombatTextSetActiveUnit: CombatTextSetActiveUnit
 CompleteLFGReadyCheck: CompleteLFGReadyCheck
 CompleteLFGRoleCheck: CompleteLFGRoleCheck
@@ -3238,7 +3250,7 @@ GetAchievementSearchProgress: GetAchievementSearchProgress
 GetAchievementSearchSize: GetAchievementSearchSize
 GetActionAutocast: GetActionAutocast
 GetActionBarPage: GetActionBarPage
-GetActionBarToggles: GetActionBarToggles
+GetActionBarToggles: GetActionBarToggles_Mainline
 GetActionCharges: GetActionCharges
 GetActionCooldown: GetActionCooldown
 GetActionCount: GetActionCount
@@ -5194,12 +5206,9 @@ UseWorldMapActionButtonSpellOnQuest: UseWorldMapActionButtonSpellOnQuest
 VehicleAimDecrement: VehicleAimDecrement
 VehicleAimDownStart: VehicleAimDownStart
 VehicleAimDownStop: VehicleAimDownStop
-VehicleAimGetAngle: VehicleAimGetAngle
-VehicleAimGetNormAngle: VehicleAimGetNormAngle
 VehicleAimGetNormPower: VehicleAimGetNormPower
 VehicleAimIncrement: VehicleAimIncrement
 VehicleAimRequestAngle: VehicleAimRequestAngle
-VehicleAimRequestNormAngle: VehicleAimRequestNormAngle
 VehicleAimSetNormPower: VehicleAimSetNormPower
 VehicleAimUpStart: VehicleAimUpStart
 VehicleAimUpStop: VehicleAimUpStop

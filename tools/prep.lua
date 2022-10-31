@@ -144,11 +144,17 @@ local function supported(obj)
   return false
 end
 
+local cvars = {}
+for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
+  cvars[k:lower()] = v
+end
+
 local events = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
-  local cfg = parseYaml('data/events/' .. (type(v) == 'string' and v or k) .. '.yaml')
-  cfg.neverSent = v == false or nil
-  events[k] = cfg
+  events[k] = {
+    neverSent = v.payload == nil or nil,
+    payload = v.payload or {},
+  }
 end
 
 local state = {}
@@ -179,7 +185,7 @@ end
 local data = {
   apis = apis,
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
-  cvars = parseYaml('data/products/' .. product .. '/cvars.yaml'),
+  cvars = cvars,
   events = events,
   globals = parseYaml('data/products/' .. product .. '/globals.yaml'),
   impls = impls,

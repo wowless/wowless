@@ -7,7 +7,7 @@ inputs:
   - default: 1
     name: numCasts
     type: number
-  - innerType: unknown
+  - innerType: CraftingReagentInfo
     name: craftingReagents
     nilable: true
     type: table

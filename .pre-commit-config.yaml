@@ -6,6 +6,10 @@ repos:
   - id: check-yaml
   - id: end-of-file-fixer
   - id: trailing-whitespace
+- repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+  rev: '2.6.1'
+  hooks:
+  - id: editorconfig-checker
 - repo: https://github.com/JohnnyMorganz/StyLua
   rev: v0.12.1
   hooks:
@@ -40,11 +44,6 @@ repos:
   - id: local-test
     name: build and test
     entry: sh -c "lua tools/mkninja.lua && ninja"
-    language: system
-    pass_filenames: false
-  - id: docker-build-and-run
-    name: docker build and run
-    entry: sh -c "if which docker; then docker run $(docker build -q .) -h; fi"
     language: system
     pass_filenames: false
 - repo: meta

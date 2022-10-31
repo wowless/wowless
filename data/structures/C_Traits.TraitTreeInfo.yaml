@@ -7,3 +7,5 @@ fields:
 - innerType: C_Traits.TraitGateInfo
   name: gates
   type: table
+- name: hideSingleRankNumbers
+  type: boolean

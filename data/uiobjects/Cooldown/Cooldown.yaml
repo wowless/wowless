@@ -76,6 +76,7 @@ methods:
     status: setter
   SetTexCoordRange:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

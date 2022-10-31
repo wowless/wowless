@@ -11,3 +11,5 @@ fields:
   type: table
 - name: type
   type: number
+- name: usesSharedActionBars
+  type: boolean
