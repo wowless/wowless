@@ -88,6 +88,7 @@ methods:
     status: unimplemented
   HasText:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

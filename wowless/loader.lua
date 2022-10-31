@@ -170,7 +170,7 @@ local function loader(api, cfg)
       local tfn = loadstr(fnstr, filename, script.line)
       fn = setfenv(tfn, env == api.env and api.env.getenv() or env)()
     end
-    if fn then
+    if fn and obj.GetScript then -- TODO tighten up xml yaml
       local old = obj:GetScript(script.type)
       if old and script.attr.inherit then
         local bfn = fn
@@ -329,8 +329,11 @@ local function loader(api, cfg)
           end,
           maskedtexture = function(e, parent)
             local t = navigate(parent:GetParent(), e.attr.childkey)
-            assert(t, 'cannot find maskedtexture childkey ' .. e.attr.childkey)
-            t:AddMaskTexture(parent)
+            if t then
+              t:AddMaskTexture(parent)
+            else
+              api.log(1, 'cannot find maskedtexture childkey ' .. e.attr.childkey)
+            end
           end,
           maxresize = function(e, parent)
             -- TODO fix for dragonflight
@@ -508,10 +511,12 @@ local function loader(api, cfg)
           if api.IsIntrinsicType(e.type) then
             local newctx = withContext({ intrinsic = not not e.attr.intrinsic })
             local template = {
+              inherits = e.attr.inherits,
               initEarlyAttrs = newctx.mkInitPhase('EarlyAttrs', e),
               initAttrs = newctx.mkInitPhase('Attrs', e),
               initKids = newctx.mkInitPhase('Kids', e),
               name = e.attr.name,
+              type = e.type,
             }
             local virtual = e.attr.virtual
             if e.attr.intrinsic then
@@ -687,6 +692,34 @@ local function loader(api, cfg)
     time.timers:push(math.huge, function()
       error('fell off the end of time')
     end)
+
+    local cancelled = setmetatable({}, { __mode = 'k' })
+    local tickerMT = {
+      __index = {
+        Cancel = debug.newcfunction(function(self)
+          cancelled[self] = true
+        end),
+        IsCancelled = debug.newcfunction(function(self)
+          return cancelled[self]
+        end),
+      },
+      __metatable = false,
+    }
+    time.newTicker = function(seconds, callback, iterations)
+      local p = newproxy(true)
+      mixin(getmetatable(p), tickerMT)
+      cancelled[p] = false
+      local count = 0
+      local function cb()
+        if not cancelled[p] and count < iterations then
+          callback()
+          count = count + 1
+          time.timers:push(time.stamp + seconds, cb)
+        end
+      end
+      time.timers:push(time.stamp + seconds, cb)
+      return p
+    end
   end
 
   api.states.CVars.portal = build.ptr and 'test' or ''

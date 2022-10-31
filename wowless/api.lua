@@ -1,5 +1,18 @@
 local traceback = require('wowless.ext').traceback
 
+local function isscalar(x)
+  local t = type(x)
+  return t == 'nil' or t == 'number' or t == 'string' or t == 'boolean'
+end
+
+local function nextscalarkey(t, k)
+  k = next(t, k)
+  while k ~= nil and not isscalar(k) do
+    k = next(t, k)
+  end
+  return k
+end
+
 local function mkenv()
   local t = {}
   t._G = t
@@ -7,15 +20,21 @@ local function mkenv()
   require('wowless.util').mixin(getmetatable(p), {
     __index = {
       get = function(k)
+        if not isscalar(k) then
+          error(('bad key %q'):format(tostring(k)))
+        end
         return t[k]
       end,
       getenv = function()
         return t
       end,
       keys = function()
-        return next, t, nil
+        return nextscalarkey, t, nil
       end,
       set = function(k, v)
+        if not isscalar(k) then
+          error(('bad key %q'):format(tostring(k)))
+        end
         t[k] = v
       end,
     },
@@ -107,7 +126,7 @@ local function new(log, maxErrors, product)
     log(0, 'error: ' .. str .. '\n' .. traceback())
     if maxErrors and errors >= maxErrors then
       log(0, 'maxerrors reached, quitting')
-      os.exit(1)
+      os.exit(0)
     end
   end
 
@@ -187,13 +206,13 @@ local function new(log, maxErrors, product)
       u(obj).frameIndex = #frames
     end
     local tmpls = {}
+    if type.template then
+      table.insert(tmpls, type.template)
+    end
     if tmplsarg then
       for _, tmpl in ipairs(tmplsarg) do
         table.insert(tmpls, tmpl)
       end
-    end
-    if type.template then
-      table.insert(tmpls, type.template)
     end
     for _, template in ipairs(tmpls) do
       log(4, 'initializing early attributes for ' .. tostring(template.name))

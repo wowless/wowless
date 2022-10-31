@@ -1,0 +1,20 @@
+---
+name: GetActionBarToggles_Mainline
+status: unimplemented
+inputs:
+- {}
+outputs:
+- name: bottomLeftState
+  type: boolean
+- name: bottomRightState
+  type: boolean
+- name: sideRightState
+  type: boolean
+- name: sideRight2State
+  type: boolean
+- name: extra1State
+  type: boolean
+- name: extra2State
+  type: boolean
+- name: extra3State
+  type: boolean

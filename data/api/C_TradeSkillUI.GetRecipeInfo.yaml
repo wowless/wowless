@@ -10,4 +10,4 @@ inputs:
 outputs:
 - name: recipeInfo
   nilable: true
-  type: unknown
+  type: TradeSkillRecipeInfo

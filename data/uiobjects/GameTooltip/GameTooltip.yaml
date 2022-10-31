@@ -31,6 +31,7 @@ methods:
     status: unimplemented
   AddTraitEntry:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -276,6 +277,7 @@ methods:
     status: unimplemented
   SetItemByGUID:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -283,6 +285,7 @@ methods:
     status: unimplemented
   SetItemByIDWithQuality:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -357,6 +360,7 @@ methods:
     status: unimplemented
   SetQualityReagentSlotItemByID:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -412,10 +416,6 @@ methods:
     - wow
     - wow_beta
     - wowt
-    status: unimplemented
-  SetRecipeResultItem:
-    products:
-    - wow
     status: unimplemented
   SetRuneforgeResultItem:
     products:
@@ -501,6 +501,7 @@ methods:
     status: unimplemented
   SetUnitBuffByAuraInstanceID:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -508,6 +509,7 @@ methods:
     status: unimplemented
   SetUnitDebuffByAuraInstanceID:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

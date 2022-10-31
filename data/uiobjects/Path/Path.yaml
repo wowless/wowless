@@ -9,7 +9,6 @@ methods:
     status: unimplemented
   GetCurve:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -18,17 +17,18 @@ methods:
     status: unimplemented
   GetCurveType:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
   GetMaxControlPointOrder:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
   GetMaxOrder:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -37,7 +37,6 @@ methods:
     status: unimplemented
   SetCurve:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -46,6 +45,7 @@ methods:
     status: unimplemented
   SetCurveType:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

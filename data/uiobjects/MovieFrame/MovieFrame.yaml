@@ -9,6 +9,7 @@ methods:
     status: unimplemented
   StartMovieByName:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

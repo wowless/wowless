@@ -711,6 +711,7 @@ C_LFGList.GetAvailableCategories: C_LFGList.GetAvailableCategories
 C_LFGList.GetCategoryInfo: C_LFGList.GetCategoryInfo
 C_LFGList.GetFilteredSearchResults: C_LFGList.GetFilteredSearchResults
 C_LFGList.GetRoles: C_LFGList.GetRoles
+C_LFGList.GetSavedRoles: C_LFGList.GetSavedRoles
 C_LFGList.GetSearchResultFriends: C_LFGList.GetSearchResultFriends
 C_LFGList.GetSearchResultInfo: C_LFGList.GetSearchResultInfo
 C_LFGList.GetSearchResultLeaderInfo: C_LFGList.GetSearchResultLeaderInfo
@@ -827,6 +828,8 @@ C_ProductChoice.GetNumSuppressed: C_ProductChoice.GetNumSuppressed
 C_ProductChoice.GetProducts: C_ProductChoice.GetProducts
 C_ProductChoice.MakeSelection: C_ProductChoice.MakeSelection
 C_PvP.GetArenaCrowdControlInfo: C_PvP.GetArenaCrowdControlInfo
+C_PvP.GetHolidayBGLossRewards: C_PvP.GetHolidayBGLossRewards
+C_PvP.GetHolidayBGRewards: C_PvP.GetHolidayBGRewards
 C_PvP.GetRandomBGLossRewards: C_PvP.GetRandomBGLossRewards
 C_PvP.GetRandomBGRewards: C_PvP.GetRandomBGRewards
 C_PvP.IsInBrawl: C_PvP.IsInBrawl
@@ -1159,6 +1162,7 @@ CanEditGuildInfo: CanEditGuildInfo
 CanEditGuildTabInfo: CanEditGuildTabInfo
 CanEditMOTD: CanEditMOTD
 CanEditPublicNote: CanEditPublicNote
+CanEjectPassengerFromSeat: CanEjectPassengerFromSeat
 CanExitVehicle: CanExitVehicle
 CanGamePadControlCursor: CanGamePadControlCursor
 CanGrantLevel: CanGrantLevel
@@ -1182,6 +1186,7 @@ CanShowAchievementUI: CanShowAchievementUI
 CanShowResetInstances: CanShowResetInstances
 CanSignPetition: CanSignPetition
 CanSummonFriend: CanSummonFriend
+CanSwitchVehicleSeat: CanSwitchVehicleSeat
 CanSwitchVehicleSeats: CanSwitchVehicleSeats
 CanUpgradeExpansion: CanUpgradeExpansion
 CanWithdrawGuildBankMoney: CanWithdrawGuildBankMoney
@@ -1354,6 +1359,7 @@ DoTradeSkill: DoTradeSkill
 DropCursorMoney: DropCursorMoney
 DropItemOnUnit: DropItemOnUnit
 EditMacro: EditMacro
+EjectPassengerFromSeat: EjectPassengerFromSeat
 EnableAddOn: EnableAddOn
 EnableAllAddOns: EnableAllAddOns
 EnableSpellAutocast: EnableSpellAutocast
@@ -1410,7 +1416,7 @@ GetAchievementNumRewards: GetAchievementNumRewards
 GetAchievementReward: GetAchievementReward
 GetActionAutocast: GetActionAutocast
 GetActionBarPage: GetActionBarPage
-GetActionBarToggles: GetActionBarToggles
+GetActionBarToggles: GetActionBarToggles_Vanilla
 GetActionCharges: GetActionCharges
 GetActionCooldown: GetActionCooldown
 GetActionCount: GetActionCount
@@ -2153,6 +2159,8 @@ GetUnitPowerModifier: GetUnitPowerModifier
 GetUnitSpeed: GetUnitSpeed
 GetUnspentTalentPoints: GetUnspentTalentPoints
 GetVehicleBarIndex: GetVehicleBarIndex
+GetVehicleUIIndicator: GetVehicleUIIndicator
+GetVehicleUIIndicatorSeat: GetVehicleUIIndicatorSeat
 GetVideoCaps: GetVideoCaps
 GetVideoOptions: GetVideoOptions
 GetWarGameQueueStatus: GetWarGameQueueStatus
@@ -3137,12 +3145,15 @@ UnitSetRole: UnitSetRole
 UnitSex: UnitSex
 UnitShouldDisplayName: UnitShouldDisplayName
 UnitStat: UnitStat
+UnitSwitchToVehicleSeat: UnitSwitchToVehicleSeat
 UnitTargetsVehicleInRaidUI: UnitTargetsVehicleInRaidUI
 UnitThreatPercentageOfLead: UnitThreatPercentageOfLead
 UnitThreatSituation: UnitThreatSituation
 UnitTrialBankedLevels: UnitTrialBankedLevels
 UnitTrialXP: UnitTrialXP
 UnitUsingVehicle: UnitUsingVehicle
+UnitVehicleSeatCount: UnitVehicleSeatCount
+UnitVehicleSeatInfo: UnitVehicleSeatInfo
 UnitVehicleSkin: UnitVehicleSkin
 UnitVehicleSkinType: UnitVehicleSkinType
 UnitXP: UnitXP

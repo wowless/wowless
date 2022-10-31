@@ -1,3 +1,14 @@
 ---
 name: GetBinding
 status: unimplemented
+comment: trailing string... with keybinding values
+inputs:
+- - name: index
+    type: number
+outputs:
+- name: command
+  stub: MOVEFORWARD
+  type: string
+- name: category
+  stub: BINDING_HEADER_MOVEMENT
+  type: string

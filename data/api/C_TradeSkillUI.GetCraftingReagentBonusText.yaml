@@ -6,9 +6,12 @@ inputs:
     type: number
   - name: craftingReagentIndex
     type: number
-  - innerType: unknown
+  - innerType: CraftingReagentInfo
     name: craftingReagents
     type: table
+  - name: allocationItemGUID
+    nilable: true
+    type: string
 outputs:
 - innerType: string
   name: bonusText

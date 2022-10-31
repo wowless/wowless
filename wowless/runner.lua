@@ -33,6 +33,9 @@ local function run(cfg)
   api.SendEvent('PLAYER_ENTERING_WORLD', true, false)
   api.SendEvent('TRIAL_STATUS_UPDATE')
   api.SendEvent('DISPLAY_SIZE_CHANGED')
+  if api.env.UIParent then -- Super duper hack to unblock 10.0 UIPanel code.
+    api.env.UIParent:SetSize(api.states.System.screenWidth, api.states.System.screenHeight)
+  end
   api.SendEvent('SPELLS_CHANGED')
   if cfg.debug then
     print('_, api = debug.getlocal(3, 5)')
@@ -118,6 +121,7 @@ local function run(cfg)
         STORE_GUILD_MASTER_INFO_RECEIVED = true, -- SelectedRealm shenanigans
         UPDATE_MASTER_LOOT_LIST = true,
         VARIABLES_LOADED = true,
+        VOICE_CHAT_VAD_SETTINGS_UPDATED = true, -- inconsistent with nilable C_VoiceChat outputs
       }
       local keys = {}
       local payloads = {}
@@ -180,6 +184,7 @@ local function run(cfg)
       local cmdBlacklist = { -- TODO remove this; these require a better SecureCmdOptionParse
         BENCHMARK = true,
         CASTRANDOM = true,
+        EVENT = true, -- throws Lua errors if text isn't a valid event
         LOOT_MASTER = true, -- broken
         PTRFEEDBACK = true, -- this just seems broken with an empty string
         USERANDOM = true,

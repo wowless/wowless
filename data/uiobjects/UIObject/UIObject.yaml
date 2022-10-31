@@ -6,6 +6,7 @@ fields:
 inherits:
   ForbiddenMixin:
     products:
+    - wow
     - wow_beta
     - wowt
 methods:

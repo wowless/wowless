@@ -83,5 +83,4 @@ contents:
 - HitRectInsets
 - Layers
 - ResizeBounds
-- Scripts
 extends: LayoutFrame

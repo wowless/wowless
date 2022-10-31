@@ -1,6 +1,5 @@
 local addonName, G = ...
 local assertEquals = _G.assertEquals
-local runtimeProduct = _G.WowlessData.product
 
 local check0 = G.check0
 local check1 = G.check1
@@ -537,7 +536,7 @@ local syncTests = function()
           }
         end,
         Kids = function()
-          if _G.__wowless or runtimeProduct == 'wow_beta' or runtimeProduct == 'wowt' then
+          if _G.__wowless or _G.WowlessData.Build.flavor == 'Mainline' then -- TODO fix
             return
           end
           local parent = f(1, CreateFrame('Frame'))
@@ -643,7 +642,7 @@ local syncTests = function()
           f:SetScrollChild(g)
           assertEquals(g, f:GetScrollChild())
           assertEquals(f, g:GetParent())
-          if runtimeProduct == 'wowt' or runtimeProduct == 'wow_beta' then
+          if _G.WowlessData.Build.flavor == 'Mainline' then
             assertEquals(false, pcall(f.SetScrollChild, f, nil))
             assertEquals(false, pcall(f.SetScrollChild, f, 'WowlessScrollFrameChild'))
           else
@@ -984,22 +983,24 @@ do
     if not asyncPending then
       if asyncIndex == numAsyncTests then
         frame:SetScript('OnUpdate', nil)
-        _G.WowlessTestFailures.LUA_WARNING = (function()
-          local function check()
-            assertEquals(#G.ExpectedLuaWarnings, #G.ActualLuaWarnings)
-            for i, e in ipairs(G.ExpectedLuaWarnings) do
-              local a = G.ActualLuaWarnings[i]
-              assertEquals(e.warnType, a.warnType)
-              assertEquals(e.warnText, a.warnText)
+        if _G.WowlessData.Build.flavor ~= 'Mainline' then -- TODO reenable for mainline
+          _G.WowlessTestFailures.LUA_WARNING = (function()
+            local function check()
+              assertEquals(#G.ExpectedLuaWarnings, #G.ActualLuaWarnings)
+              for i, e in ipairs(G.ExpectedLuaWarnings) do
+                local a = G.ActualLuaWarnings[i]
+                assertEquals(e.warnType, a.warnType)
+                assertEquals(e.warnText, a.warnText)
+              end
             end
-          end
-          if not pcall(check) then
-            return {
-              actual = G.ActualLuaWarnings,
-              expected = G.ExpectedLuaWarnings,
-            }
-          end
-        end)()
+            if not pcall(check) then
+              return {
+                actual = G.ActualLuaWarnings,
+                expected = G.ExpectedLuaWarnings,
+              }
+            end
+          end)()
+        end
         _G.WowlessTestsDone = true
         local print = DevTools_Dump and print or function() end
         print(('Wowless testing completed in %.1fs (%d frames).'):format(totalTime, numFrames))

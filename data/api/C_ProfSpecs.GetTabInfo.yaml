@@ -7,4 +7,4 @@ inputs:
 outputs:
 - name: tabInfo
   nilable: true
-  type: unknown
+  type: ProfTabInfo

@@ -21,6 +21,7 @@ methods:
     status: unimplemented
   NavigateTo:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

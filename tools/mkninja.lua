@@ -20,7 +20,7 @@ local perProductAddonGeneratedTypes = {
     return { 'data/products/' .. p .. '/cvars.yaml' }
   end,
   events = function(p)
-    return { 'data/products/' .. p .. '/events.yaml', 'build/events.stamp' }
+    return { 'data/products/' .. p .. '/events.yaml' }
   end,
   globalapis = function(p)
     return { 'data/products/' .. p .. '/apis.yaml', 'build/api.stamp' }
@@ -48,7 +48,7 @@ for _, p in ipairs(productList) do
   end
 end
 
-local elune = 'elune/build/linux/bin/Release/lua5.1'
+local elune = 'vendor/elune/build/linux/bin/Release/lua5.1'
 
 local pools = {
   fetch_pool = 1,
@@ -59,6 +59,9 @@ local rules = {
   dbdata = {
     command = 'lua tools/sqlite.lua -f $product',
   },
+  dblist = {
+    command = 'lua tools/dblist.lua $product',
+  },
   dbschema = {
     command = 'lua tools/sqlite.lua $product',
   },
@@ -67,14 +70,17 @@ local rules = {
     pool = 'fetch_pool',
   },
   frame0 = {
-    command = elune .. ' wowless.lua -p $product -e5 --frame0 > $out || true',
+    command = elune .. ' wowless.lua -p $product --frame0 > /dev/null',
     pool = 'run_pool',
   },
   mkaddon = {
     command = elune .. ' tools/gentest.lua -f $type -p $product',
   },
   mkelune = {
-    command = 'cd elune && rm -rf build && cmake --preset linux && cmake --build --preset linux',
+    command = 'cd vendor/elune && rm -rf build && cmake --preset linux && cmake --build --preset linux',
+  },
+  mklistfile = {
+    command = 'lua tools/listfile.lua',
   },
   mktestout = {
     command = 'bash -c "set -o pipefail && busted 2>&1 | tee $out"',
@@ -89,7 +95,7 @@ local rules = {
     command = 'lua tools/render.lua $in',
   },
   run = {
-    command = elune .. ' wowless.lua -p $product -e5 > $out || true',
+    command = elune .. ' wowless.lua -p $product -e5 > $out',
     pool = 'run_pool',
   },
   stamp = {
@@ -99,7 +105,7 @@ local rules = {
 
 local builds = {
   {
-    ins = { 'test.out', 'outs' },
+    ins = { 'test.out', 'outs', 'pngs' },
     outs = 'all',
     rule = 'phony',
   },
@@ -109,7 +115,7 @@ local builds = {
     rule = 'phony',
   },
   {
-    ins = find('elune -not -path \'elune/build/*\''),
+    ins = find('vendor/elune -not -path \'vendor/elune/build/*\''),
     outs_implicit = elune,
     rule = 'mkelune',
   },
@@ -119,13 +125,8 @@ local builds = {
     rule = 'stamp',
   },
   {
-    ins = find('data/dbdefs'),
+    ins = find('vendor/dbdefs/definitions'),
     outs = 'build/dbdefs.stamp',
-    rule = 'stamp',
-  },
-  {
-    ins = find('data/events'),
-    outs = 'build/events.stamp',
     rule = 'stamp',
   },
   {
@@ -168,8 +169,6 @@ local builds = {
   {
     ins = {
       'build/api.stamp',
-      'build/dbdefs.stamp',
-      'build/events.stamp',
       'build/state.stamp',
       'build/structures.lua',
       'build/structures.stamp',
@@ -186,7 +185,6 @@ local builds = {
         end
         local globaldirs = {
           'addon',
-          'data/dbdefs',
           'data/schemas',
           'spec',
           'tools',
@@ -210,6 +208,18 @@ local builds = {
     outs_implicit = { 'wowless/ext.o', 'wowless/ext.so' },
     rule = 'mkwowlessext',
   },
+  {
+    args = {
+      restat = 1,
+    },
+    ins_implicit = {
+      'tools/listfile.lua',
+      'tools/util.lua',
+      'vendor/listfile/community-listfile.csv',
+    },
+    outs_implicit = 'build/listfile.lua',
+    rule = 'mklistfile',
+  },
 }
 
 for _, p in ipairs(productList) do
@@ -232,15 +242,33 @@ end
 
 local runtimes = {}
 local runouts = {}
+local pngs = {}
 for _, p in ipairs(productList) do
+  local dblist = 'build/products/' .. p .. '/dblist.lua'
+  table.insert(builds, {
+    args = {
+      product = p,
+      restat = 1,
+    },
+    ins = {
+      'build/api.stamp',
+      'build/sql.stamp',
+      'data/products/' .. p .. '/apis.yaml',
+      'tools/dblist.lua',
+      'tools/util.lua',
+    },
+    outs = dblist,
+    rule = 'dblist',
+  })
   local fetchStamp = 'build/products/' .. p .. '/fetch.stamp'
   table.insert(builds, {
     args = { product = p },
     ins = {
-      'build/sql.stamp',
+      dblist,
+      'build/listfile.lua',
       'data/products/' .. p .. '/build.yaml',
-      'tools/dblist.lua',
       'tools/fetch.lua',
+      'vendor/tactkeys/WoW.txt',
     },
     outs = fetchStamp,
     rule = 'fetch',
@@ -266,12 +294,12 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p },
     ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, elune, datadb, datalua },
-    outs = 'out/' .. p .. '/frame0log.txt',
     outs_implicit = { 'out/' .. p .. '/frame0.yaml', 'out/' .. p .. '/frame1.yaml' },
     rule = 'frame0',
   })
   for i = 0, 1 do
     local prefix = 'out/' .. p .. '/frame' .. i
+    table.insert(pngs, prefix .. '.png')
     table.insert(builds, {
       args = { product = p },
       ins = { prefix .. '.yaml' },
@@ -282,13 +310,24 @@ for _, p in ipairs(productList) do
   end
   table.insert(builds, {
     args = { product = p },
-    ins_implicit = { 'build/dbdefs.stamp', 'tools/sqlite.lua', 'wowapi/sqlite.lua' },
+    ins_implicit = {
+      dblist,
+      'build/dbdefs.stamp',
+      'data/products/' .. p .. '/build.yaml',
+      'tools/sqlite.lua',
+    },
     outs_implicit = schemadb,
     rule = 'dbschema',
   })
   table.insert(builds, {
     args = { product = p },
-    ins_implicit = { 'build/dbdefs.stamp', 'tools/sqlite.lua', 'wowapi/sqlite.lua', fetchStamp },
+    ins_implicit = {
+      dblist,
+      fetchStamp,
+      'build/dbdefs.stamp',
+      'data/products/' .. p .. '/build.yaml',
+      'tools/sqlite.lua',
+    },
     outs_implicit = datadb,
     rule = 'dbdata',
   })
@@ -298,7 +337,6 @@ for _, p in ipairs(productList) do
     ins_implicit = {
       'tools/prep.lua',
       'build/api.stamp',
-      'build/events.stamp',
       'build/impl.stamp',
       'build/sql.stamp',
       'build/state.stamp',
@@ -324,8 +362,13 @@ table.insert(builds, {
 })
 table.insert(builds, {
   ins = runouts,
-  rule = 'phony',
   outs = 'outs',
+  rule = 'phony',
+})
+table.insert(builds, {
+  ins = pngs,
+  outs = 'pngs',
+  rule = 'phony',
 })
 
 local function flatten(x)

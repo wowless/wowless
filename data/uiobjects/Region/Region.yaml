@@ -40,6 +40,7 @@ fields:
 inherits:
   MouseMixin:
     products:
+    - wow
     - wow_beta
     - wowt
   ParentedObject: {}
@@ -52,12 +53,12 @@ methods:
     status: implemented
   ClearPoint:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
   ClearPointByName:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -177,6 +178,7 @@ methods:
     status: setter
   SetPassThroughButtons:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

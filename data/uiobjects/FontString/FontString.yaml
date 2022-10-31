@@ -15,6 +15,7 @@ inherits:
   LayeredRegion: {}
   ScriptObject:
     products:
+    - wow
     - wow_beta
     - wowt
 methods:
@@ -42,6 +43,7 @@ methods:
     status: unimplemented
   GetRotation:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -67,6 +69,7 @@ methods:
     status: unimplemented
   GetVertexColor:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -90,6 +93,7 @@ methods:
     status: unimplemented
   SetRotation:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

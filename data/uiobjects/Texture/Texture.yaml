@@ -57,6 +57,7 @@ inherits:
   ParentedObject: {}
   ScriptObject:
     products:
+    - wow
     - wow_beta
     - wowt
 methods:
@@ -78,7 +79,6 @@ methods:
     status: unimplemented
   GetNonBlocking:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -123,6 +123,7 @@ methods:
     status: getter
   IsBlockingLoadRequested:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -140,6 +141,7 @@ methods:
     status: setter
   SetBlockingLoadsRequested:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -153,7 +155,6 @@ methods:
     status: unimplemented
   SetGradientAlpha:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -170,7 +171,6 @@ methods:
     status: setter
   SetNonBlocking:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era

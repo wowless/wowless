@@ -17,6 +17,7 @@ methods:
     status: unimplemented
   TestPrintToFile:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented

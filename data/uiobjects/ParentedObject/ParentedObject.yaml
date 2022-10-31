@@ -13,7 +13,6 @@ fields:
 inherits:
   ForbiddenMixin:
     products:
-    - wow
     - wow_classic
     - wow_classic_beta
     - wow_classic_era
@@ -29,6 +28,7 @@ methods:
     status: getter
   GetParentKey:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -36,6 +36,7 @@ methods:
     status: implemented
   SetParentKey:
     products:
+    - wow
     - wow_beta
     - wowt
     status: unimplemented
