@@ -1,0 +1,21 @@
+---
+Bartender4:
+  owner: nevcairiel
+  repo: bartender4
+  tag: '4.13.3'
+Ferronnizer:
+  owner: ferronn-dev
+  repo: ferronnizer
+  tag: v441
+Questie:
+  owner: questie
+  repo: questie
+  tag: v7.4.4
+Talented:
+  owner: lethay
+  repo: talentedclassic
+  tag: v220907
+TalentTreeViewer:
+  owner: numynum
+  repo: talentviewer
+  tag: v2.1.1
