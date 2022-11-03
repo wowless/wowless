@@ -258,7 +258,10 @@ local function loader(api, cfg)
             -- TODO interpret all binding attributes
             if not e.attr.debug then -- TODO support debug bindings
               local fn = 'return function(keystate) ' .. e.text .. ' end'
-              api.states.Bindings[e.attr.name] = setfenv(loadstr(fn, filename, e.line), api.env)()
+              api.states.Bindings[e.attr.name] = {
+                fn = setfenv(loadstr(fn, filename, e.line), api.env)(),
+                up = not not e.attr.runonup,
+              }
             end
           end,
           color = function(e, parent)
