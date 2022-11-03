@@ -1,5 +1,3 @@
-local sorted = require('pl.tablex').sort
-
 local function run(cfg)
   assert(cfg, 'missing configuration')
   assert(cfg.product, 'missing product')
@@ -62,13 +60,20 @@ local function run(cfg)
 
   local scripts = {
     bindings = function()
-      for name, binding in sorted(api.states.Bindings) do
-        api.log(2, 'firing binding %q down', name)
-        api.CallSafely(binding.fn, 'down')
-        if binding.up then
-          api.log(2, 'firing binding %q up', name)
-          api.CallSafely(binding.fn, 'up')
-        end
+      local names = {}
+      for name in pairs(api.states.Bindings) do
+        table.insert(names, name)
+      end
+      table.sort(names)
+      for _, name in ipairs(names) do
+        local fn = api.states.Bindings[name]
+        api.log(2, 'firing binding ' .. name)
+        api.CallSafely(function()
+          fn('down')
+        end)
+        api.CallSafely(function()
+          fn('up')
+        end)
       end
     end,
     clicks = function()
@@ -191,7 +196,7 @@ local function run(cfg)
           cmds[cmd] = v
         end
       end
-      for k, v in sorted(cmds) do
+      for k, v in require('pl.tablex').sort(cmds) do
         api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
         api.SendEvent('EXECUTE_CHAT_LINE', v)
       end
