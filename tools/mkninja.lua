@@ -112,7 +112,7 @@ local rules = {
 
 local builds = {
   {
-    ins = { 'test.out', 'outs', 'pngs' },
+    ins = { 'test.out', 'outs', 'pngs', 'addonouts' },
     outs = 'all',
     rule = 'phony',
   },
@@ -250,6 +250,7 @@ end
 local runtimes = {}
 local runouts = {}
 local pngs = {}
+local addonouts = {}
 for _, p in ipairs(productList) do
   local dblist = 'build/products/' .. p .. '/dblist.lua'
   table.insert(builds, {
@@ -378,13 +379,15 @@ for _, p in ipairs(productList) do
       end
     end
     if found then
+      local addonout = 'out/' .. p .. '/addons/' .. k .. '.txt'
+      table.insert(addonouts, addonout)
       table.insert(builds, {
         args = {
           addon = k,
           product = p,
         },
         ins = { rundeps, 'build/addonreleases/' .. k .. '.zip' },
-        outs = 'out/' .. p .. '/addons/' .. k .. '.txt',
+        outs = addonout,
         rule = 'runaddon',
       })
     end
@@ -416,6 +419,11 @@ table.insert(builds, {
 table.insert(builds, {
   ins = pngs,
   outs = 'pngs',
+  rule = 'phony',
+})
+table.insert(builds, {
+  ins = addonouts,
+  outs = 'addonouts',
   rule = 'phony',
 })
 
