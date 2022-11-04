@@ -19,4 +19,5 @@ query(\$owner: String!, \$name: String!, \$tag: String!) {
   | select(.contentType == "application/zip" or .contentType == "application/x-zip-compressed")
   | .downloadUrl
 ')"
+mkdir -p extracts/addons
 unzip -q -o -d extracts/addons "$4"
