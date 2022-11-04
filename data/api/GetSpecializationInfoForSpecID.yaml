@@ -1,3 +1,30 @@
 ---
 name: GetSpecializationInfoForSpecID
-status: unimplemented
+status: implemented
+inputs:
+- - name: specID
+    type: number
+  - name: gender
+    nilable: true
+    type: number
+outputs:
+- name: id
+  type: number
+- name: name
+  type: string
+- name: description
+  type: string
+- name: texture
+  type: number
+- name: role
+  type: string
+- name: isRecommended
+  type: boolean
+- name: isAllowed
+  type: boolean
+- name: masterySpellID
+  type: number
+sqls:
+- lookup: GetSpecializationInfoForSpecID
+states:
+- Units
