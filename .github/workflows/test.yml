@@ -21,6 +21,8 @@ jobs:
         restore-keys: cache
     - uses: devcontainers/ci@v0.2
       with:
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
         runCmd: ninja -v all
