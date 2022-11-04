@@ -14,13 +14,20 @@ jobs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/cache@v3
+      with:
+        path: cache
+        key: cache-${{ github.run_id }}
+        restore-keys: cache
     - uses: devcontainers/ci@v0.2
       with:
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
-        runCmd: true
+        runCmd: ninja -v all
     - uses: actions/upload-artifact@v3
       if: success() || failure()
       with:
         name: test-results
-        path: test.out
+        path: |
+          out/
+          test.out
