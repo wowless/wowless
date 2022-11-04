@@ -21,6 +21,6 @@
         "github-cli": {}
     },
     "name": "lua-wow-tools/wowless",
-    "postCreateCommand": "git submodule update --init --recursive && pre-commit install && pre-commit run -a -v --show-diff-on-failure",
+    "postCreateCommand": "git submodule update --init --recursive --depth 1 && pre-commit install && pre-commit run -a -v --show-diff-on-failure",
     "remoteUser": "vscode"
 }
