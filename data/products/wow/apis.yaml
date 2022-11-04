@@ -2567,11 +2567,13 @@ C_Traits.ClearCascadeRepurchaseHistory: C_Traits.ClearCascadeRepurchaseHistory
 C_Traits.CloseTraitSystemInteraction: C_Traits.CloseTraitSystemInteraction
 C_Traits.CommitConfig: C_Traits.CommitConfig
 C_Traits.ConfigHasStagedChanges: C_Traits.ConfigHasStagedChanges
+C_Traits.GetConditionInfo: C_Traits.GetConditionInfo
 C_Traits.GetConfigIDBySystemID: C_Traits.GetConfigIDBySystemID
 C_Traits.GetConfigIDByTreeID: C_Traits.GetConfigIDByTreeID
 C_Traits.GetConfigInfo: C_Traits.GetConfigInfo
 C_Traits.GetConfigsByType: C_Traits.GetConfigsByType
 C_Traits.GetDefinitionInfo: C_Traits.GetDefinitionInfo
+C_Traits.GetEntryInfo: C_Traits.GetEntryInfo
 C_Traits.GetNodeCost: C_Traits.GetNodeCost
 C_Traits.GetNodeInfo: C_Traits.GetNodeInfo
 C_Traits.GetStagedChangesCost: C_Traits.GetStagedChangesCost
@@ -2580,6 +2582,7 @@ C_Traits.GetTraitCurrencyInfo: C_Traits.GetTraitCurrencyInfo
 C_Traits.GetTraitDescription: C_Traits.GetTraitDescription
 C_Traits.GetTreeCurrencyInfo: C_Traits.GetTreeCurrencyInfo
 C_Traits.GetTreeHash: C_Traits.GetTreeHash
+C_Traits.GetTreeInfo: C_Traits.GetTreeInfo
 C_Traits.GetTreeNodes: C_Traits.GetTreeNodes
 C_Traits.HasValidInspectData: C_Traits.HasValidInspectData
 C_Traits.PurchaseRank: C_Traits.PurchaseRank

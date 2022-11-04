@@ -25,7 +25,7 @@ function G.GeneratedTests()
         assertEquals(env or _G, getfenv(func))
       end,
       impltype = function()
-        assertEquals(isLua, pcall(coroutine.create, func))
+        assertEquals(isLua, (pcall(coroutine.create, func)))
       end,
       unique = not isLua and function()
         assertEquals(nil, cfuncs[func])
@@ -79,7 +79,9 @@ function G.GeneratedTests()
               else
                 assertEquals(ty, type(func))
               end
-            else
+            elseif
+              name ~= 'C_Traits' or mname ~= 'GetEntryInfo' and mname ~= 'GetConditionInfo' and mname ~= 'GetTreeInfo'
+            then
               return checkCFunc(func)
             end
           end
