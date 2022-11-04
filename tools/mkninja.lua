@@ -369,16 +369,25 @@ for _, p in ipairs(productList) do
     outs = p,
     rule = 'phony',
   })
-  for k in pairs(require('wowapi.yaml').parseFile('tools/addons.yaml')) do
-    table.insert(builds, {
-      args = {
-        addon = k,
-        product = p,
-      },
-      ins = { rundeps, 'build/addonreleases/' .. k .. '.zip' },
-      outs = 'out/' .. p .. '/addons/' .. k .. '.txt',
-      rule = 'runaddon',
-    })
+  local b = require('wowapi.yaml').parseFile('data/products/' .. p .. '/build.yaml')
+  for k, v in pairs(require('wowapi.yaml').parseFile('tools/addons.yaml')) do
+    local found = v.flavors == nil
+    if not found then
+      for _, f in ipairs(v.flavors) do
+        found = found or f == b.flavor
+      end
+    end
+    if found then
+      table.insert(builds, {
+        args = {
+          addon = k,
+          product = p,
+        },
+        ins = { rundeps, 'build/addonreleases/' .. k .. '.zip' },
+        outs = 'out/' .. p .. '/addons/' .. k .. '.txt',
+        rule = 'runaddon',
+      })
+    end
   end
 end
 

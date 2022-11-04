@@ -4,6 +4,8 @@ Bartender4:
   repo: bartender4
   tag: '4.13.3'
 Ferronnizer:
+  flavors:
+  - Vanilla
   owner: ferronn-dev
   repo: ferronnizer
   tag: v441
@@ -12,10 +14,14 @@ Questie:
   repo: questie
   tag: v7.4.4
 Talented:
+  flavors:
+  - Wrath
   owner: lethay
   repo: talentedclassic
   tag: v220907
 TalentTreeViewer:
+  flavors:
+  - Mainline
   owner: numynum
   repo: talentviewer
   tag: v2.1.1
