@@ -1,4 +1,7 @@
 local addons, addonNameOrIndex = ...
+if type(addonNameOrIndex) == 'string' then
+  addonNameOrIndex = addonNameOrIndex:lower()
+end
 local toc = addons[addonNameOrIndex]
 if tonumber(addonNameOrIndex) and not toc then
   error('AddOn index must be in the range of 1 to ' .. #addons)
