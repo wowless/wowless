@@ -734,7 +734,7 @@ local function loader(api, cfg)
         if addon then
           addon.name = name
           addon.fdid = fdid
-          addonData[name] = addon
+          addonData[name:lower()] = addon
           table.insert(addonData, addon)
         end
       end
@@ -772,10 +772,11 @@ local function loader(api, cfg)
   }
 
   local function doLoadAddon(addonName)
-    local toc = addonData[addonName]
+    local toc = addonData[addonName:lower()]
     if not toc then
       error('unknown addon ' .. addonName)
     end
+    addonName = toc.name
     if not toc.loaded and toc.attrs.AllowLoad ~= 'Glue' then
       api.log(1, 'loading addon dependencies for %s', addonName)
       for _, attr in ipairs(depAttrs) do
