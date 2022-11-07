@@ -180,6 +180,17 @@ local function run(cfg)
       api.SendEvent('QUEST_PROGRESS')
       api.SendEvent('QUEST_FINISHED')
     end,
+    petwomp = function()
+      if api.templates.petactionbuttontemplate then
+        -- Adapted from Bartender4.
+        local f = api.CreateFrame('CheckButton', 'WowlessTestPetButton', nil, 'PetActionButtonTemplate')
+        f.OnEnter = f:GetScript('OnEnter')
+        f:SetScript('OnEnter', function(self, ...)
+          self:OnEnter(...)
+        end)
+        api.RunScript(f, 'OnEnter', false)
+      end
+    end,
     slashcmds = function()
       local cmdBlacklist = { -- TODO remove this; these require a better SecureCmdOptionParse
         BENCHMARK = true,
@@ -218,6 +229,7 @@ local function run(cfg)
     'bindings',
     'slashcmds',
     'events',
+    'petwomp',
   }
   for _, script in ipairs(cfg.scripts and { strsplit(',', cfg.scripts) } or defaultScripts) do
     local fn = scripts[script]
