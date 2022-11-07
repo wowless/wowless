@@ -1,0 +1,6 @@
+[sqlfluff]
+dialect = sqlite
+exclude_rules = L014, L034, L036
+
+[sqlfluff:rules]
+tab_space_size = 2

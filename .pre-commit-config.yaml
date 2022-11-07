@@ -29,6 +29,11 @@ repos:
   - id: shellcheck
     args:
     - --shell=bash
+- repo: https://github.com/sqlfluff/sqlfluff
+  rev: 0.11.0
+  hooks:
+  - id: sqlfluff-fix
+  - id: sqlfluff-lint
 - repo: local
   hooks:
   - id: luacheck
