@@ -6,10 +6,15 @@ value:
   guids:
     Player-1096-06DF65C1:
       class: 1
+      class_comment: Warrior
       faction: Horde
       guid: Player-1096-06DF65C1
       isplayer: true
       level: 30
       name: Unitname
       race: 2
+      race_comment: Orc
       sex: 2
+      sex_comment: Male
+      spec: 71
+      spec_comment: Arms
