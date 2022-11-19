@@ -8,7 +8,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
     - uses: docker/login-action@v1
       with:
         registry: ghcr.io
@@ -25,7 +27,7 @@ jobs:
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
-        runCmd: ninja -v all
+        runCmd: pre-commit run -a && ninja -v all
     - uses: actions/upload-artifact@v3
       if: success() || failure()
       with:
