@@ -20,7 +20,6 @@ local products = next(args.products) and args.products
     'wow_beta',
     'wowt',
     'wow',
-    'wow_classic_beta',
     'wow_classic_ptr',
     'wow_classic',
     'wow_classic_era_ptr',

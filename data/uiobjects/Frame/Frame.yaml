@@ -58,7 +58,6 @@ inherits:
   MouseMixin:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -103,7 +102,6 @@ methods:
   GetDepth:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -115,7 +113,6 @@ methods:
   GetEffectiveDepth:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -148,7 +145,6 @@ methods:
     - name: maxResizeHeight
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -159,7 +155,6 @@ methods:
     - name: minResizeHeight
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -191,7 +186,6 @@ methods:
   IgnoreDepth:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -209,7 +203,6 @@ methods:
   IsIgnoringDepth:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -261,7 +254,6 @@ methods:
   SetDepth:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -283,7 +275,6 @@ methods:
   SetFrameBuffer:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -316,7 +307,6 @@ methods:
     - name: maxResizeHeight
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -327,7 +317,6 @@ methods:
     - name: minResizeHeight
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr

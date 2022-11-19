@@ -80,7 +80,6 @@ methods:
   GetNonBlocking:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -156,7 +155,6 @@ methods:
   SetGradientAlpha:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -172,7 +170,6 @@ methods:
   SetNonBlocking:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr

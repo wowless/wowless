@@ -10,7 +10,6 @@ methods:
   GetCurve:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -30,7 +29,6 @@ methods:
   GetMaxOrder:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
@@ -38,7 +36,6 @@ methods:
   SetCurve:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
     - wow_classic_ptr
