@@ -493,4 +493,32 @@
   <Script>
     assertEquals('hidden', table.concat(WowlessLog, ','))
   </Script>
+
+  <!-- function= in templates is resolved at template instantiation time -->
+  <Script>
+    WowlessLog = {}
+    WowlessLoad = function()
+      table.insert(WowlessLog, 'load1')
+    end
+  </Script>
+  <Frame name='WowlessFunctionInstantiationTemplate' virtual='true'>
+    <Scripts>
+      <OnLoad function='WowlessLoad' />
+    </Scripts>
+  </Frame>
+  <Script>
+    WowlessLoad = function()
+      table.insert(WowlessLog, 'load2')
+    end
+  </Script>
+  <Frame inherits='WowlessFunctionInstantiationTemplate' />
+  <Script>
+    WowlessLoad = function()
+      table.insert(WowlessLog, 'load3')
+    end
+  </Script>
+  <Frame inherits='WowlessFunctionInstantiationTemplate' />
+  <Script>
+    assertEquals('load2,load3', table.concat(WowlessLog, ','))
+  </Script>
 </Ui>
