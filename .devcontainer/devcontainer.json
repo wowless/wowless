@@ -13,7 +13,8 @@
       },
       "vscode": {
         "extensions": [
-          "EditorConfig.EditorConfig"
+          "EditorConfig.EditorConfig",
+          "qwtel.sqlite-viewer"
         ]
       }
     },
