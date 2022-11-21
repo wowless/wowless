@@ -147,15 +147,15 @@ local function loader(api, cfg)
     local fn
     if script.attr['function'] then
       local fnattr = script.attr['function']
-      fn = function(...)
-        assert(env[fnattr], 'unknown script function ' .. fnattr)
-        env[fnattr](...)
+      fn = env[fnattr]
+      if not fn then
+        api.log(2, 'unknown script function %q on %q', fnattr, obj:GetDebugName())
       end
     elseif script.attr.method then
       local mattr = script.attr.method
-      fn = function(x, ...)
-        assert(x[mattr], 'unknown script method ' .. mattr)
-        x[mattr](x, ...)
+      fn = obj[mattr]
+      if not fn then
+        api.log(2, 'unknown script method %q on %q', mattr, obj:GetDebugName())
       end
     elseif script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'

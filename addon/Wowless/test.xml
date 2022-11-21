@@ -422,4 +422,75 @@
       </OnLoad>
     </Scripts>
   </Frame>
+
+  <Script>
+    WowlessLog = {}
+    WowlessHide = function()
+      table.insert(WowlessLog, 'hide1')
+    end
+  </Script>
+  <Frame>
+    <Scripts>
+      <OnLoad>
+        table.insert(WowlessLog, 'load')
+        WowlessHide = function()
+          table.insert(WowlessLog, 'hide2')
+        end
+        self:Hide()
+      </OnLoad>
+      <OnHide function='WowlessHide' />
+    </Scripts>
+  </Frame>
+  <Script>
+    assertEquals('load,hide1', table.concat(WowlessLog, ','))
+  </Script>
+
+  <Script>
+    WowlessLog = {}
+    WowlessMixin = {
+      OnHide = function()
+        table.insert(WowlessLog, 'hide1')
+      end,
+    }
+  </Script>
+  <Frame mixin='WowlessMixin'>
+    <Scripts>
+      <OnLoad>
+        table.insert(WowlessLog, 'load')
+        self.OnHide = function()
+          table.insert(WowlessLog, 'hide2')
+        end
+        self:Hide()
+      </OnLoad>
+      <OnHide method='OnHide' />
+    </Scripts>
+  </Frame>
+  <Script>
+    assertEquals('load,hide1', table.concat(WowlessLog, ','))
+  </Script>
+
+  <Script>
+    WowlessLog = {}
+    WowlessMixin = {
+      OnHide = function()
+        table.insert(WowlessLog, 'hidden')
+      end,
+      OnLoad = function(self)
+        self.OnHide = self:GetScript('OnHide')
+        self:SetScript('OnHide', function(self, ...)
+          self:OnHide(...)
+        end)
+        self:Hide()
+      end,
+    }
+  </Script>
+  <Frame mixin='WowlessMixin'>
+    <Scripts>
+      <OnLoad method='OnLoad' />
+      <OnHide method='OnHide' />
+    </Scripts>
+  </Frame>
+  <Script>
+    assertEquals('hidden', table.concat(WowlessLog, ','))
+  </Script>
 </Ui>
