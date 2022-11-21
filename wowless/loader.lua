@@ -162,9 +162,9 @@ local function loader(api, cfg)
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
       fn = setfenv(loadstr(fnstr, filename, script.line), env)()
     end
-    if fn and obj.GetScript then -- TODO tighten up xml yaml
+    if obj.GetScript then -- TODO tighten up xml yaml
       local old = obj:GetScript(script.type)
-      if old and script.attr.inherit then
+      if old and fn and script.attr.inherit then
         local bfn = fn
         if script.attr.inherit == 'prepend' then
           fn = function(...)

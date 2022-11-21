@@ -518,6 +518,11 @@
     end
   </Script>
   <Frame inherits='WowlessFunctionInstantiationTemplate' />
+  <Frame inherits='WowlessFunctionInstantiationTemplate'>
+    <Scripts>
+      <OnLoad function='' />
+    </Scripts>
+  </Frame>
   <Script>
     assertEquals('load2,load3', table.concat(WowlessLog, ','))
   </Script>
