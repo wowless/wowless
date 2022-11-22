@@ -22,6 +22,6 @@
         "github-cli": {}
     },
     "name": "wowless/wowless",
-    "postCreateCommand": "pre-commit install",
+    "postCreateCommand": "pre-commit install --install-hooks",
     "remoteUser": "vscode"
 }
