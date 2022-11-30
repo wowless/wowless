@@ -12,7 +12,8 @@
     }
   },
   "features": {
-    "github-cli": {}
+    "ghcr.io/devcontainers/features/docker-from-docker:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "name": "wowless/wowless",
   "postCreateCommand": "pre-commit install --install-hooks",
