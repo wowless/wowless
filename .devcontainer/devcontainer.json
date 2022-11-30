@@ -4,13 +4,6 @@
         "dockerfile": "Dockerfile"
     },
     "customizations": {
-      "codespaces": {
-        "repositories": {
-          "lua-wow-tools/*": {
-            "permissions": "write-all"
-          }
-        }
-      },
       "vscode": {
         "extensions": [
           "EditorConfig.EditorConfig",
