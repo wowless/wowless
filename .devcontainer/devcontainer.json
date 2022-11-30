@@ -1,20 +1,20 @@
 {
-    "build": {
-        "context": "..",
-        "dockerfile": "Dockerfile"
-    },
-    "customizations": {
-      "vscode": {
-        "extensions": [
-          "EditorConfig.EditorConfig",
-          "qwtel.sqlite-viewer"
-        ]
-      }
-    },
-    "features": {
-        "github-cli": {}
-    },
-    "name": "wowless/wowless",
-    "postCreateCommand": "pre-commit install --install-hooks",
-    "remoteUser": "vscode"
+  "build": {
+    "context": "..",
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "EditorConfig.EditorConfig",
+        "qwtel.sqlite-viewer"
+      ]
+    }
+  },
+  "features": {
+    "github-cli": {}
+  },
+  "name": "wowless/wowless",
+  "postCreateCommand": "pre-commit install --install-hooks",
+  "remoteUser": "vscode"
 }
