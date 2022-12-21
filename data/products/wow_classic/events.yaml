@@ -6056,10 +6056,6 @@ WARGAME_REQUESTED:
     type: number
   - name: tournamentRules
     type: boolean
-WEAR_EQUIPMENT_SET:
-  payload:
-  - name: setID
-    type: number
 WHO_LIST_UPDATE:
   payload: {}
 WORLD_PVP_QUEUE:
