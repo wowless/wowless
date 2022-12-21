@@ -15,6 +15,10 @@ LunaUnitFrames:
   owner: aviana
   repo: lunaunitframes
   tag: '4343'
+Quartz:
+  owner: nevcairiel
+  repo: quartz
+  tag: 3.7.1
 Questie:
   owner: questie
   repo: questie
