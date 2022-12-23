@@ -42,6 +42,7 @@ inherits:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
   ParentedObject: {}
 methods:
@@ -55,6 +56,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   ClearPointByName:
@@ -62,7 +64,6 @@ methods:
     - wow_classic
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   ClearPointsOffset:
     status: unimplemented
@@ -178,6 +179,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetPoint:

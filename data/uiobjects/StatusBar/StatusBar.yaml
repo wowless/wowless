@@ -33,7 +33,6 @@ methods:
     - wow_classic
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   GetStatusBarColor:
     status: implemented
@@ -41,6 +40,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   GetStatusBarTexture:
@@ -55,12 +55,14 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetColorFill:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetFillStyle:
@@ -81,7 +83,6 @@ methods:
     - wow_classic
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   SetStatusBarColor:
     status: implemented
@@ -89,12 +90,14 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetStatusBarDesaturation:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetStatusBarTexture:

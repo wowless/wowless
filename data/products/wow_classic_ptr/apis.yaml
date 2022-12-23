@@ -13,7 +13,6 @@ AcceptResurrect: AcceptResurrect
 AcceptSockets: AcceptSockets
 AcceptSpellConfirmationPrompt: AcceptSpellConfirmationPrompt
 AcceptTrade: AcceptTrade
-AcceptXPLoss: AcceptXPLoss
 AcknowledgeSurvey: AcknowledgeSurvey
 acos: acos
 ActionBindsItem: ActionBindsItem
@@ -141,7 +140,6 @@ C_AuthChallenge.OnTabPressed: C_AuthChallenge.OnTabPressed
 C_AuthChallenge.SetFrame: C_AuthChallenge.SetFrame
 C_AuthChallenge.Submit: C_AuthChallenge.Submit
 C_AzeriteEmpoweredItem.CanSelectPower: C_AzeriteEmpoweredItem.CanSelectPower
-C_AzeriteEmpoweredItem.CloseAzeriteEmpoweredItemRespec: C_AzeriteEmpoweredItem.CloseAzeriteEmpoweredItemRespec
 C_AzeriteEmpoweredItem.ConfirmAzeriteEmpoweredItemRespec: C_AzeriteEmpoweredItem.ConfirmAzeriteEmpoweredItemRespec
 C_AzeriteEmpoweredItem.GetAllTierInfo: C_AzeriteEmpoweredItem.GetAllTierInfo
 C_AzeriteEmpoweredItem.GetAllTierInfoByItemID: C_AzeriteEmpoweredItem.GetAllTierInfoByItemID
@@ -199,6 +197,7 @@ C_BarberShop.GetCurrentCameraZoom: C_BarberShop.GetCurrentCameraZoom
 C_BarberShop.GetCurrentCharacterData: C_BarberShop.GetCurrentCharacterData
 C_BarberShop.GetCurrentCost: C_BarberShop.GetCurrentCost
 C_BarberShop.GetCustomizationTypeInfo: C_BarberShop.GetCustomizationTypeInfo
+C_BarberShop.GetViewingChrModel: C_BarberShop.GetViewingChrModel
 C_BarberShop.HasAnyChanges: C_BarberShop.HasAnyChanges
 C_BarberShop.IsValidCustomizationType: C_BarberShop.IsValidCustomizationType
 C_BarberShop.IsViewingAlteredForm: C_BarberShop.IsViewingAlteredForm
@@ -215,6 +214,7 @@ C_BarberShop.SetCustomizationChoice: C_BarberShop.SetCustomizationChoice
 C_BarberShop.SetModelDressState: C_BarberShop.SetModelDressState
 C_BarberShop.SetSelectedSex: C_BarberShop.SetSelectedSex
 C_BarberShop.SetViewingAlteredForm: C_BarberShop.SetViewingAlteredForm
+C_BarberShop.SetViewingChrModel: C_BarberShop.SetViewingChrModel
 C_BarberShop.SetViewingShapeshiftForm: C_BarberShop.SetViewingShapeshiftForm
 C_BarberShop.ZoomCamera: C_BarberShop.ZoomCamera
 C_BehavioralMessaging.SendNotificationReceipt: C_BehavioralMessaging.SendNotificationReceipt
@@ -308,13 +308,17 @@ C_Calendar.SetAbsMonth: C_Calendar.SetAbsMonth
 C_Calendar.SetMonth: C_Calendar.SetMonth
 C_Calendar.SetNextClubId: C_Calendar.SetNextClubId
 C_Calendar.UpdateEvent: C_Calendar.UpdateEvent
+C_CharacterServices.AssignPFCDistribution: C_CharacterServices.AssignPFCDistribution
 C_CharacterServices.AssignUpgradeDistribution: C_CharacterServices.AssignUpgradeDistribution
 C_CharacterServices.GetActiveCharacterUpgradeBoostType: C_CharacterServices.GetActiveCharacterUpgradeBoostType
 C_CharacterServices.GetActiveClassTrialBoostType: C_CharacterServices.GetActiveClassTrialBoostType
 C_CharacterServices.GetAutomaticBoost: C_CharacterServices.GetAutomaticBoost
 C_CharacterServices.GetAutomaticBoostCharacter: C_CharacterServices.GetAutomaticBoostCharacter
 C_CharacterServices.GetCharacterServiceDisplayData: C_CharacterServices.GetCharacterServiceDisplayData
+C_CharacterServices.GetCharacterServiceDisplayDataByVASType: C_CharacterServices.GetCharacterServiceDisplayDataByVASType
+C_CharacterServices.GetCharacterServiceDisplayInfo: C_CharacterServices.GetCharacterServiceDisplayInfo
 C_CharacterServices.GetCharacterServiceDisplayOrder: C_CharacterServices.GetCharacterServiceDisplayOrder
+C_CharacterServices.GetVASDistributions: C_CharacterServices.GetVASDistributions
 C_CharacterServices.HasRequiredBoostForClassTrial: C_CharacterServices.HasRequiredBoostForClassTrial
 C_CharacterServices.HasRequiredBoostForUnrevoke: C_CharacterServices.HasRequiredBoostForUnrevoke
 C_CharacterServices.SetAutomaticBoost: C_CharacterServices.SetAutomaticBoost
@@ -555,6 +559,7 @@ C_CurrencyInfo.GetBasicCurrencyInfo: C_CurrencyInfo.GetBasicCurrencyInfo
 C_CurrencyInfo.GetCurrencyContainerInfo: C_CurrencyInfo.GetCurrencyContainerInfo
 C_CurrencyInfo.GetCurrencyInfo: C_CurrencyInfo.GetCurrencyInfo
 C_CurrencyInfo.GetCurrencyInfoFromLink: C_CurrencyInfo.GetCurrencyInfoFromLink
+C_CurrencyInfo.GetCurrencyListLink: C_CurrencyInfo.GetCurrencyListLink
 C_Cursor.GetCursorItem: C_Cursor.GetCursorItem
 C_CVar.GetCVar: C_CVar.GetCVar
 C_CVar.GetCVarBitfield: C_CVar.GetCVarBitfield
@@ -653,9 +658,23 @@ C_GamePad.SetLedColor: C_GamePad.SetLedColor
 C_GamePad.SetVibration: C_GamePad.SetVibration
 C_GamePad.StickIndexToConfigName: C_GamePad.StickIndexToConfigName
 C_GamePad.StopVibration: C_GamePad.StopVibration
+C_GossipInfo.CloseGossip: C_GossipInfo.CloseGossip
+C_GossipInfo.ForceGossip: C_GossipInfo.ForceGossip
+C_GossipInfo.GetActiveQuests: C_GossipInfo.GetActiveQuests
+C_GossipInfo.GetAvailableQuests: C_GossipInfo.GetAvailableQuests
+C_GossipInfo.GetCompletedOptionDescriptionString: C_GossipInfo.GetCompletedOptionDescriptionString
 C_GossipInfo.GetCustomGossipDescriptionString: C_GossipInfo.GetCustomGossipDescriptionString
+C_GossipInfo.GetFriendshipReputation: C_GossipInfo.GetFriendshipReputation
+C_GossipInfo.GetFriendshipReputationRanks: C_GossipInfo.GetFriendshipReputationRanks
+C_GossipInfo.GetNumActiveQuests: C_GossipInfo.GetNumActiveQuests
+C_GossipInfo.GetNumAvailableQuests: C_GossipInfo.GetNumAvailableQuests
+C_GossipInfo.GetOptions: C_GossipInfo.GetOptions
 C_GossipInfo.GetPoiForUiMapID: C_GossipInfo.GetPoiForUiMapID
 C_GossipInfo.GetPoiInfo: C_GossipInfo.GetPoiInfo
+C_GossipInfo.GetText: C_GossipInfo.GetText
+C_GossipInfo.SelectActiveQuest: C_GossipInfo.SelectActiveQuest
+C_GossipInfo.SelectAvailableQuest: C_GossipInfo.SelectAvailableQuest
+C_GossipInfo.SelectOption: C_GossipInfo.SelectOption
 C_GuildInfo.CanEditOfficerNote: C_GuildInfo.CanEditOfficerNote
 C_GuildInfo.CanSpeakInGuildChat: C_GuildInfo.CanSpeakInGuildChat
 C_GuildInfo.CanViewOfficerNote: C_GuildInfo.CanViewOfficerNote
@@ -679,6 +698,8 @@ C_Item.GetItemID: C_Item.GetItemID
 C_Item.GetItemInventoryType: C_Item.GetItemInventoryType
 C_Item.GetItemInventoryTypeByID: C_Item.GetItemInventoryTypeByID
 C_Item.GetItemLink: C_Item.GetItemLink
+C_Item.GetItemMaxStackSize: C_Item.GetItemMaxStackSize
+C_Item.GetItemMaxStackSizeByID: C_Item.GetItemMaxStackSizeByID
 C_Item.GetItemName: C_Item.GetItemName
 C_Item.GetItemNameByID: C_Item.GetItemNameByID
 C_Item.GetItemQuality: C_Item.GetItemQuality
@@ -696,6 +717,7 @@ C_Item.UnlockItem: C_Item.UnlockItem
 C_Item.UnlockItemByGUID: C_Item.UnlockItemByGUID
 C_ItemSocketInfo.CompleteSocketing: C_ItemSocketInfo.CompleteSocketing
 C_ItemUpgrade.GetItemHyperlink: C_ItemUpgrade.GetItemHyperlink
+C_KeyBindings.GetBindingIndex: C_KeyBindings.GetBindingIndex
 C_KeyBindings.GetCustomBindingType: C_KeyBindings.GetCustomBindingType
 C_LFGList.ClearCreationTextFields: C_LFGList.ClearCreationTextFields
 C_LFGList.ClearSearchResults: C_LFGList.ClearSearchResults
@@ -820,6 +842,7 @@ C_PlayerInfo.GetName: C_PlayerInfo.GetName
 C_PlayerInfo.GetRace: C_PlayerInfo.GetRace
 C_PlayerInfo.GetSex: C_PlayerInfo.GetSex
 C_PlayerInfo.GUIDIsPlayer: C_PlayerInfo.GUIDIsPlayer
+C_PlayerInfo.HasVisibleInvSlot: C_PlayerInfo.HasVisibleInvSlot
 C_PlayerInfo.IsConnected: C_PlayerInfo.IsConnected
 C_PlayerInfo.IsXPUserDisabled: C_PlayerInfo.IsXPUserDisabled
 C_PlayerInfo.UnitIsSameServer: C_PlayerInfo.UnitIsSameServer
@@ -834,6 +857,7 @@ C_PvP.GetRandomBGLossRewards: C_PvP.GetRandomBGLossRewards
 C_PvP.GetRandomBGRewards: C_PvP.GetRandomBGRewards
 C_PvP.IsInBrawl: C_PvP.IsInBrawl
 C_PvP.IsPVPMap: C_PvP.IsPVPMap
+C_PvP.IsRatedMap: C_PvP.IsRatedMap
 C_PvP.RequestCrowdControlSpell: C_PvP.RequestCrowdControlSpell
 C_QuestLog.GetMaxNumQuests: C_QuestLog.GetMaxNumQuests
 C_QuestLog.GetMaxNumQuestsCanAccept: C_QuestLog.GetMaxNumQuestsCanAccept
@@ -869,6 +893,7 @@ C_ReportSystem.SendReport: C_ReportSystem.SendReport
 C_Reputation.GetFactionParagonInfo: C_Reputation.GetFactionParagonInfo
 C_Reputation.IsFactionParagon: C_Reputation.IsFactionParagon
 C_Reputation.RequestFactionParagonPreloadRewardData: C_Reputation.RequestFactionParagonPreloadRewardData
+C_Reputation.SetWatchedFaction: C_Reputation.SetWatchedFaction
 C_ScriptedAnimations.GetAllScriptedAnimationEffects: C_ScriptedAnimations.GetAllScriptedAnimationEffects
 C_Seasons.GetActiveSeason: C_Seasons.GetActiveSeason
 C_Seasons.HasActiveSeason: C_Seasons.HasActiveSeason
@@ -919,6 +944,7 @@ C_StoreSecure.GetCharactersForRealm: C_StoreSecure.GetCharactersForRealm
 C_StoreSecure.GetConfirmationInfo: C_StoreSecure.GetConfirmationInfo
 C_StoreSecure.GetCurrencyID: C_StoreSecure.GetCurrencyID
 C_StoreSecure.GetCurrentRealmCategory: C_StoreSecure.GetCurrentRealmCategory
+C_StoreSecure.GetCurrentRealmContentSet: C_StoreSecure.GetCurrentRealmContentSet
 C_StoreSecure.GetEligibleRacesForVASService: C_StoreSecure.GetEligibleRacesForVASService
 C_StoreSecure.GetEntryInfo: C_StoreSecure.GetEntryInfo
 C_StoreSecure.GetFailureInfo: C_StoreSecure.GetFailureInfo
@@ -941,6 +967,7 @@ C_StoreSecure.HasPurchaseInProgress: C_StoreSecure.HasPurchaseInProgress
 C_StoreSecure.HasPurchaseList: C_StoreSecure.HasPurchaseList
 C_StoreSecure.IsAvailable: C_StoreSecure.IsAvailable
 C_StoreSecure.IsRegionLocked: C_StoreSecure.IsRegionLocked
+C_StoreSecure.IsVASEligibleCharacterGUID: C_StoreSecure.IsVASEligibleCharacterGUID
 C_StoreSecure.PurchaseProduct: C_StoreSecure.PurchaseProduct
 C_StoreSecure.PurchaseProductConfirm: C_StoreSecure.PurchaseProductConfirm
 C_StoreSecure.PurchaseVASProduct: C_StoreSecure.PurchaseVASProduct
@@ -971,7 +998,10 @@ C_TaskQuest.RequestPreloadRewardData: C_TaskQuest.RequestPreloadRewardData
 C_TaxiMap.GetAllTaxiNodes: C_TaxiMap.GetAllTaxiNodes
 C_TaxiMap.GetTaxiNodesForMap: C_TaxiMap.GetTaxiNodesForMap
 C_Texture.GetAtlasInfo: C_Texture.GetAtlasInfo
+C_Texture.GetFilenameFromFileDataID: C_Texture.GetFilenameFromFileDataID
 C_Timer.After: C_Timer.After
+C_Timer.NewTicker: C_Timer.NewTicker
+C_Timer.NewTimer: C_Timer.NewTimer
 C_ToyBoxInfo.ClearFanfare: C_ToyBoxInfo.ClearFanfare
 C_ToyBoxInfo.NeedsFanfare: C_ToyBoxInfo.NeedsFanfare
 C_TTSSettings.GetChannelEnabled: C_TTSSettings.GetChannelEnabled
@@ -1016,7 +1046,11 @@ C_UIWidgetManager.GetTextWithStateWidgetVisualizationInfo: C_UIWidgetManager.Get
 C_UIWidgetManager.GetTopCenterWidgetSetID: C_UIWidgetManager.GetTopCenterWidgetSetID
 C_UserFeedback.SubmitBug: C_UserFeedback.SubmitBug
 C_UserFeedback.SubmitSuggestion: C_UserFeedback.SubmitSuggestion
+C_VideoOptions.GetCurrentGameWindowSize: C_VideoOptions.GetCurrentGameWindowSize
+C_VideoOptions.GetDefaultGameWindowSize: C_VideoOptions.GetDefaultGameWindowSize
+C_VideoOptions.GetGameWindowSizes: C_VideoOptions.GetGameWindowSizes
 C_VideoOptions.GetGxAdapterInfo: C_VideoOptions.GetGxAdapterInfo
+C_VideoOptions.SetGameWindowSize: C_VideoOptions.SetGameWindowSize
 C_VoiceChat.ActivateChannel: C_VoiceChat.ActivateChannel
 C_VoiceChat.ActivateChannelTranscription: C_VoiceChat.ActivateChannelTranscription
 C_VoiceChat.BeginLocalCapture: C_VoiceChat.BeginLocalCapture
@@ -1066,6 +1100,7 @@ C_VoiceChat.IsSilenced: C_VoiceChat.IsSilenced
 C_VoiceChat.IsSpeakForMeActive: C_VoiceChat.IsSpeakForMeActive
 C_VoiceChat.IsSpeakForMeAllowed: C_VoiceChat.IsSpeakForMeAllowed
 C_VoiceChat.IsTranscriptionAllowed: C_VoiceChat.IsTranscriptionAllowed
+C_VoiceChat.IsVoiceChatConnected: C_VoiceChat.IsVoiceChatConnected
 C_VoiceChat.LeaveChannel: C_VoiceChat.LeaveChannel
 C_VoiceChat.Login: C_VoiceChat.Login
 C_VoiceChat.Logout: C_VoiceChat.Logout
@@ -1210,14 +1245,11 @@ ChannelSetPartyMemberSilent: ChannelSetPartyMemberSilent
 ChannelToggleAnnouncements: ChannelToggleAnnouncements
 ChannelUnban: ChannelUnban
 ChannelUnmoderator: ChannelUnmoderator
-CheckBinderDist: CheckBinderDist
 CheckInbox: CheckInbox
 CheckInteractDistance: CheckInteractDistance
-CheckSpiritHealerDist: CheckSpiritHealerDist
 CheckTalentMasterDist: CheckTalentMasterDist
 ClassicExpansionAtLeast: ClassicExpansionAtLeast
 ClearAchievementComparisonUnit: ClearAchievementComparisonUnit
-ClearAllTracking: ClearAllTracking
 ClearBattlemaster: ClearBattlemaster
 ClearCursor: ClearCursor
 ClearFocus: ClearFocus
@@ -1237,7 +1269,6 @@ CloseArenaTeamRoster: CloseArenaTeamRoster
 CloseAuctionHouse: CloseAuctionHouse
 CloseBankFrame: CloseBankFrame
 CloseCraft: CloseCraft
-CloseGossip: CloseGossip
 CloseGuildBankFrame: CloseGuildBankFrame
 CloseGuildRoster: CloseGuildRoster
 CloseItemText: CloseItemText
@@ -1291,8 +1322,6 @@ ConfirmReadyCheck: ConfirmReadyCheck
 ConfirmTalentWipe: ConfirmTalentWipe
 ConsoleAddMessage: ConsoleAddMessage
 ConsoleExec: ConsoleExec
-ContainerIDToInventoryID: ContainerIDToInventoryID
-ContainerRefundItemPurchase: ContainerRefundItemPurchase
 ConvertToParty: ConvertToParty
 ConvertToRaid: ConvertToRaid
 CopyToClipboard: CopyToClipboard
@@ -1358,6 +1387,7 @@ DoReadyCheck: DoReadyCheck
 DoTradeSkill: DoTradeSkill
 DropCursorMoney: DropCursorMoney
 DropItemOnUnit: DropItemOnUnit
+DumpMovementCapture: DumpMovementCapture
 EditMacro: EditMacro
 EjectPassengerFromSeat: EjectPassengerFromSeat
 EnableAddOn: EnableAddOn
@@ -1392,7 +1422,6 @@ FlipCameraYaw: FlipCameraYaw
 floor: floor
 FocusUnit: FocusUnit
 FollowUnit: FollowUnit
-ForceGossip: ForceGossip
 forceinsecure: forceinsecure
 ForceLogout: ForceLogout
 ForceQuit: ForceQuit
@@ -1466,9 +1495,6 @@ GetAvailableLocales: GetAvailableLocales
 GetAvailableTitle: GetAvailableTitle
 GetBackgroundLoadingStatus: GetBackgroundLoadingStatus
 GetBackpackCurrencyInfo: GetBackpackCurrencyInfo
-GetBagName: GetBagName
-GetBagSlotFlag: GetBagSlotFlag
-GetBankBagSlotFlag: GetBankBagSlotFlag
 GetBankSlotCost: GetBankSlotCost
 GetBattlefieldEstimatedWaitTime: GetBattlefieldEstimatedWaitTime
 GetBattlefieldFlagPosition: GetBattlefieldFlagPosition
@@ -1531,19 +1557,6 @@ GetCompanionInfo: GetCompanionInfo
 GetComparisonAchievementPoints: GetComparisonAchievementPoints
 GetComparisonCategoryNumAchievements: GetComparisonCategoryNumAchievements
 GetComparisonStatistic: GetComparisonStatistic
-GetContainerFreeSlots: GetContainerFreeSlots
-GetContainerItemCooldown: GetContainerItemCooldown
-GetContainerItemDurability: GetContainerItemDurability
-GetContainerItemGems: GetContainerItemGems
-GetContainerItemID: GetContainerItemID
-GetContainerItemInfo: GetContainerItemInfo
-GetContainerItemLink: GetContainerItemLink
-GetContainerItemPurchaseCurrency: GetContainerItemPurchaseCurrency
-GetContainerItemPurchaseInfo: GetContainerItemPurchaseInfo
-GetContainerItemPurchaseItem: GetContainerItemPurchaseItem
-GetContainerItemQuestInfo: GetContainerItemQuestInfo
-GetContainerNumFreeSlots: GetContainerNumFreeSlots
-GetContainerNumSlots: GetContainerNumSlots
 GetCorpseRecoveryDelay: GetCorpseRecoveryDelay
 GetCraftButtonToken: GetCraftButtonToken
 GetCraftCooldown: GetCraftCooldown
@@ -1569,7 +1582,6 @@ GetCriteriaSpell: GetCriteriaSpell
 GetCurrencyInfo: GetCurrencyInfo
 GetCurrencyLink: GetCurrencyLink
 GetCurrencyListInfo: GetCurrencyListInfo
-GetCurrencyListLink: GetCurrencyListLink
 GetCurrencyListSize: GetCurrencyListSize
 GetCurrentArenaSeason: GetCurrentArenaSeason
 GetCurrentArenaSeasonUsesTeams: GetCurrentArenaSeasonUsesTeams
@@ -1635,10 +1647,6 @@ GetGlyphLink: GetGlyphLink
 GetGlyphSocketInfo: GetGlyphSocketInfo
 GetGMStatus: GetGMStatus
 GetGMTicket: GetGMTicket
-GetGossipActiveQuests: GetGossipActiveQuests
-GetGossipAvailableQuests: GetGossipAvailableQuests
-GetGossipOptions: GetGossipOptions
-GetGossipText: GetGossipText
 GetGraphicsAPIs: GetGraphicsAPIs
 GetGraphicsDropdownIndexByMasterIndex: GetGraphicsDropdownIndexByMasterIndex
 GetGreetingText: GetGreetingText
@@ -1678,7 +1686,6 @@ GetInboxItem: GetInboxItem
 GetInboxItemLink: GetInboxItemLink
 GetInboxNumItems: GetInboxNumItems
 GetInboxText: GetInboxText
-GetInsertItemsLeftToRight: GetInsertItemsLeftToRight
 GetInspectArenaData: GetInspectArenaData
 GetInspectArenaTeamData: GetInspectArenaTeamData
 GetInspectHonorData: GetInspectHonorData
@@ -1704,7 +1711,6 @@ GetInviteConfirmationInfo: GetInviteConfirmationInfo
 GetInviteReferralInfo: GetInviteReferralInfo
 GetItemChildInfo: GetItemChildInfo
 GetItemClassInfo: GetItemClassInfo
-GetItemCooldown: GetItemCooldown
 GetItemCount: GetItemCount
 GetItemCreationContext: GetItemCreationContext
 GetItemFamily: GetItemFamily
@@ -1825,9 +1831,6 @@ GetNumExpansions: GetNumExpansions
 GetNumFactions: GetNumFactions
 GetNumFrames: GetNumFrames
 GetNumGlyphSockets: GetNumGlyphSockets
-GetNumGossipActiveQuests: GetNumGossipActiveQuests
-GetNumGossipAvailableQuests: GetNumGossipAvailableQuests
-GetNumGossipOptions: GetNumGossipOptions
 GetNumGroupChannels: GetNumGroupChannels
 GetNumGroupMembers: GetNumGroupMembers
 GetNumGuildBankMoneyTransactions: GetNumGuildBankMoneyTransactions
@@ -1871,10 +1874,8 @@ GetNumTalents: GetNumTalents
 GetNumTalentTabs: GetNumTalentTabs
 GetNumTitles: GetNumTitles
 GetNumTrackedAchievements: GetNumTrackedAchievements
-GetNumTrackingTypes: GetNumTrackingTypes
 GetNumTradeSkills: GetNumTradeSkills
 GetNumTrainerServices: GetNumTrainerServices
-GetObjectIconTextureCoords: GetObjectIconTextureCoords
 GetObjectiveText: GetObjectiveText
 GetOptOutOfLoot: GetOptOutOfLoot
 GetOSLocale: GetOSLocale
@@ -1908,7 +1909,6 @@ GetPhysicalScreenSize: GetPhysicalScreenSize
 GetPlayerFacing: GetPlayerFacing
 GetPlayerInfoByGUID: GetPlayerInfoByGUID
 GetPlayerTradeMoney: GetPlayerTradeMoney
-GetPOITextureCoords: GetPOITextureCoords
 GetPossessInfo: GetPossessInfo
 GetPowerRegen: GetPowerRegen
 GetPowerRegenForPowerType: GetPowerRegenForPowerType
@@ -2105,7 +2105,6 @@ GetTotemCannotDismiss: GetTotemCannotDismiss
 GetTotemInfo: GetTotemInfo
 GetTotemTimeLeft: GetTotemTimeLeft
 GetTrackedAchievements: GetTrackedAchievements
-GetTrackingInfo: GetTrackingInfo
 GetTrackingTexture: GetTrackingTexture
 GetTradePlayerItemInfo: GetTradePlayerItemInfo
 GetTradePlayerItemLink: GetTradePlayerItemLink
@@ -2254,7 +2253,6 @@ InCombatLockdown: InCombatLockdown
 InitiateRolePoll: InitiateRolePoll
 InitiateTrade: InitiateTrade
 InRepairMode: InRepairMode
-InteractUnit: InteractUnit
 InviteUnit: InviteUnit
 ipairs: ipairs
 Is64BitClient: Is64BitClient
@@ -2277,10 +2275,7 @@ IsAuctionSortReversed: IsAuctionSortReversed
 IsAutoRepeatAction: IsAutoRepeatAction
 IsAutoRepeatSpell: IsAutoRepeatSpell
 IsAvailableQuestTrivial: IsAvailableQuestTrivial
-IsBagSlotFlagEnabledOnOtherBags: IsBagSlotFlagEnabledOnOtherBags
-IsBagSlotFlagEnabledOnOtherBankBags: IsBagSlotFlagEnabledOnOtherBankBags
 IsBattlefieldArena: IsBattlefieldArena
-IsBattlePayItem: IsBattlePayItem
 IsBindingForGamePad: IsBindingForGamePad
 IsBNLogin: IsBNLogin
 IsCemeterySelectionAvailable: IsCemeterySelectionAvailable
@@ -2291,7 +2286,6 @@ IsCompetitiveModeEnabled: IsCompetitiveModeEnabled
 IsConsumableAction: IsConsumableAction
 IsConsumableItem: IsConsumableItem
 IsConsumableSpell: IsConsumableSpell
-IsContainerFiltered: IsContainerFiltered
 IsControlKeyDown: IsControlKeyDown
 IsCurrentAction: IsCurrentAction
 IsCurrentItem: IsCurrentItem
@@ -2387,7 +2381,6 @@ IsQuestWatched: IsQuestWatched
 IsRangedWeapon: IsRangedWeapon
 IsRecognizedName: IsRecognizedName
 IsReferAFriendLinked: IsReferAFriendLinked
-IsReplacingUnit: IsReplacingUnit
 IsResting: IsResting
 IsRestrictedAccount: IsRestrictedAccount
 IsRightAltKeyDown: IsRightAltKeyDown
@@ -2406,6 +2399,7 @@ IsStealthed: IsStealthed
 IsSubmerged: IsSubmerged
 IsSubZonePVPPOI: IsSubZonePVPPOI
 IsSwimming: IsSwimming
+IsTargetLoose: IsTargetLoose
 IsTestBuild: IsTestBuild
 IsThreatWarningEnabled: IsThreatWarningEnabled
 IsTitleKnown: IsTitleKnown
@@ -2590,7 +2584,6 @@ PI: PI
 PickupAction: PickupAction
 PickupBagFromSlot: PickupBagFromSlot
 PickupCompanion: PickupCompanion
-PickupContainerItem: PickupContainerItem
 PickupCurrency: PickupCurrency
 PickupGuildBankItem: PickupGuildBankItem
 PickupGuildBankMoney: PickupGuildBankMoney
@@ -2614,7 +2607,6 @@ PlaceAuctionBid: PlaceAuctionBid
 PlaceGlyphInSocket: PlaceGlyphInSocket
 PlayerCanTeleport: PlayerCanTeleport
 PlayerEffectiveAttackPower: PlayerEffectiveAttackPower
-PlayerHasHearthstone: PlayerHasHearthstone
 PlayerIsPVPInactive: PlayerIsPVPInactive
 PlayMusic: PlayMusic
 PlaySound: PlaySound
@@ -2653,7 +2645,6 @@ RemoveGlyphFromSocket: RemoveGlyphFromSocket
 RemoveQuestWatch: RemoveQuestWatch
 RemoveTrackedAchievement: RemoveTrackedAchievement
 RenamePetition: RenamePetition
-ReopenInteraction: ReopenInteraction
 RepairAllItems: RepairAllItems
 ReplaceEnchant: ReplaceEnchant
 ReplaceGuildMaster: ReplaceGuildMaster
@@ -2715,9 +2706,6 @@ SelectActiveQuest: SelectActiveQuest
 SelectAvailableQuest: SelectAvailableQuest
 SelectCraft: SelectCraft
 SelectedRealmName: SelectedRealmName
-SelectGossipActiveQuest: SelectGossipActiveQuest
-SelectGossipAvailableQuest: SelectGossipAvailableQuest
-SelectGossipOption: SelectGossipOption
 SelectQuestLogEntry: SelectQuestLogEntry
 SelectTradeSkill: SelectTradeSkill
 SelectTrainerService: SelectTrainerService
@@ -2738,9 +2726,6 @@ SetArenaTeamRosterSelection: SetArenaTeamRosterSelection
 SetArenaTeamRosterShowOffline: SetArenaTeamRosterShowOffline
 SetAuctionsTabShowing: SetAuctionsTabShowing
 SetAutoDeclineGuildInvites: SetAutoDeclineGuildInvites
-SetBagPortraitTexture: SetBagPortraitTexture
-SetBagSlotFlag: SetBagSlotFlag
-SetBankBagSlotFlag: SetBankBagSlotFlag
 SetBattlefieldScoreFaction: SetBattlefieldScoreFaction
 SetBinding: SetBinding
 SetBindingClick: SetBindingClick
@@ -2788,10 +2773,8 @@ SetGuildInfoText: SetGuildInfoText
 SetGuildMemberRank: SetGuildMemberRank
 SetGuildRosterSelection: SetGuildRosterSelection
 SetGuildRosterShowOffline: SetGuildRosterShowOffline
-SetInsertItemsLeftToRight: SetInsertItemsLeftToRight
 SetInventoryPortraitTexture: SetInventoryPortraitTexture
 SetInWorldUIVisibility: SetInWorldUIVisibility
-SetItemSearch: SetItemSearch
 SetLegacyRaidDifficultyID: SetLegacyRaidDifficultyID
 SetLootMethod: SetLootMethod
 SetLootPortrait: SetLootPortrait
@@ -2837,7 +2820,6 @@ SetSuperTrackedQuestID: SetSuperTrackedQuestID
 SetTalentGroupRole: SetTalentGroupRole
 SetTaxiBenchmarkMode: SetTaxiBenchmarkMode
 SetTaxiMap: SetTaxiMap
-SetTracking: SetTracking
 SetTradeMoney: SetTradeMoney
 SetTradeSkillInvSlotFilter: SetTradeSkillInvSlotFilter
 SetTradeSkillItemLevelFilter: SetTradeSkillItemLevelFilter
@@ -2846,6 +2828,7 @@ SetTradeSkillSubClassFilter: SetTradeSkillSubClassFilter
 SetTrainerServiceTypeFilter: SetTrainerServiceTypeFilter
 SetTurnEnabled: SetTurnEnabled
 SetUIVisibility: SetUIVisibility
+SetUnitCursorTexture: SetUnitCursorTexture
 SetupFullscreenScale: SetupFullscreenScale
 SetView: SetView
 SetWatchedFactionIndex: SetWatchedFactionIndex
@@ -2854,7 +2837,6 @@ ShouldKnowUnitHealth: ShouldKnowUnitHealth
 ShowBossFrameWhenUninteractable: ShowBossFrameWhenUninteractable
 ShowBuybackSellCursor: ShowBuybackSellCursor
 ShowCloak: ShowCloak
-ShowContainerSellCursor: ShowContainerSellCursor
 ShowHelm: ShowHelm
 ShowingCloak: ShowingCloak
 ShowingHelm: ShowingHelm
@@ -2865,7 +2847,6 @@ ShowRepairCursor: ShowRepairCursor
 SignPetition: SignPetition
 sin: sin
 SitStandOrDescendStart: SitStandOrDescendStart
-SocketContainerItem: SocketContainerItem
 SocketInventoryItem: SocketInventoryItem
 sort: sort
 SortArenaTeamRoster: SortArenaTeamRoster
@@ -2901,7 +2882,6 @@ SpellStopCasting: SpellStopCasting
 SpellStopTargeting: SpellStopTargeting
 SpellTargetItem: SpellTargetItem
 SpellTargetUnit: SpellTargetUnit
-SplitContainerItem: SplitContainerItem
 SplitGuildBankItem: SplitGuildBankItem
 sqrt: sqrt
 StablePet: StablePet
@@ -2991,6 +2971,7 @@ TargetNearestPartyMember: TargetNearestPartyMember
 TargetNearestRaidMember: TargetNearestRaidMember
 TargetPriorityHighlightEnd: TargetPriorityHighlightEnd
 TargetPriorityHighlightStart: TargetPriorityHighlightStart
+TargetToggle: TargetToggle
 TargetTotem: TargetTotem
 TargetUnit: TargetUnit
 TaxiGetDestX: TaxiGetDestX
@@ -3100,10 +3081,12 @@ UnitIsDND: UnitIsDND
 UnitIsEnemy: UnitIsEnemy
 UnitIsFeignDeath: UnitIsFeignDeath
 UnitIsFriend: UnitIsFriend
+UnitIsGameObject: UnitIsGameObject
 UnitIsGhost: UnitIsGhost
 UnitIsGroupAssistant: UnitIsGroupAssistant
 UnitIsGroupLeader: UnitIsGroupLeader
 UnitIsInMyGuild: UnitIsInMyGuild
+UnitIsInteractable: UnitIsInteractable
 UnitIsOtherPlayersPet: UnitIsOtherPlayersPet
 UnitIsOwnerOrControllerOfUnit: UnitIsOwnerOrControllerOfUnit
 UnitIsPlayer: UnitIsPlayer
@@ -3166,20 +3149,15 @@ UpdateAddOnMemoryUsage: UpdateAddOnMemoryUsage
 UpdateInventoryAlertStatus: UpdateInventoryAlertStatus
 UpdateWindow: UpdateWindow
 UseAction: UseAction
-UseContainerItem: UseContainerItem
-UseHearthstone: UseHearthstone
 UseInventoryItem: UseInventoryItem
 UseItemByName: UseItemByName
 UseQuestLogSpecialItem: UseQuestLogSpecialItem
 VehicleAimDecrement: VehicleAimDecrement
 VehicleAimDownStart: VehicleAimDownStart
 VehicleAimDownStop: VehicleAimDownStop
-VehicleAimGetAngle: VehicleAimGetAngle
-VehicleAimGetNormAngle: VehicleAimGetNormAngle
 VehicleAimGetNormPower: VehicleAimGetNormPower
 VehicleAimIncrement: VehicleAimIncrement
 VehicleAimRequestAngle: VehicleAimRequestAngle
-VehicleAimRequestNormAngle: VehicleAimRequestNormAngle
 VehicleAimSetNormPower: VehicleAimSetNormPower
 VehicleAimUpStart: VehicleAimUpStart
 VehicleAimUpStop: VehicleAimUpStop

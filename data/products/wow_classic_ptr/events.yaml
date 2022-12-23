@@ -36,6 +36,8 @@ ACTIVATE_GLYPH:
   payload:
   - name: spellID
     type: number
+ACTIVE_PLAYER_SPECIALIZATION_CHANGED:
+  payload: {}
 ACTIVE_TALENT_GROUP_CHANGED:
   payload:
   - name: changedTo
@@ -273,6 +275,8 @@ BAG_CLOSED:
   payload:
   - name: bagID
     type: number
+BAG_CONTAINER_UPDATE:
+  payload: {}
 BAG_NEW_ITEMS_UPDATED:
   payload: {}
 BAG_OPEN:
@@ -3183,6 +3187,8 @@ COMPANION_UPDATE:
   - name: companionType
     nilable: true
     type: string
+CONFIG_COMMIT_FAILED:
+  payload: {}
 CONFIRM_BARBERS_CHOICE:
   payload:
   - name: cost
@@ -3332,6 +3338,8 @@ DUEL_REQUESTED:
     type: string
 DYNAMIC_GOSSIP_POI_UPDATED:
   payload: {}
+EDIT_MODE_LAYOUTS_UPDATED:
+  payload: {}
 ENABLE_DECLINE_GUILD_INVITE:
   payload: {}
 ENABLE_LOW_LEVEL_RAID:
@@ -3408,6 +3416,8 @@ EXECUTE_CHAT_LINE:
   payload:
   - name: chatLine
     type: string
+EXPAND_BAG_BAR_CHANGED:
+  payload: {}
 EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED:
   payload: {}
 FIRST_FRAME_RENDERED:
@@ -3752,10 +3762,6 @@ ITEM_UNLOCKED:
     nilable: true
     type: number
 ITEM_UPGRADE_FAILED:
-  payload: {}
-ITEM_UPGRADE_MASTER_CLOSED:
-  payload: {}
-ITEM_UPGRADE_MASTER_OPENED:
   payload: {}
 ITEM_UPGRADE_MASTER_SET_ITEM:
   payload: {}
@@ -4149,11 +4155,7 @@ OBJECT_LEFT_AOI:
   payload:
   - name: guid
     type: string
-OBLITERUM_FORGE_CLOSE:
-  payload: {}
 OBLITERUM_FORGE_PENDING_ITEM_CHANGED:
-  payload: {}
-OBLITERUM_FORGE_SHOW:
   payload: {}
 OPEN_MASTER_LOOT_LIST:
   payload: {}
@@ -4429,6 +4431,10 @@ PLAYER_GUILD_UPDATE:
   payload:
   - name: unitTarget
     type: string
+PLAYER_INTERACTION_MANAGER_FRAME_HIDE:
+  payload: {}
+PLAYER_INTERACTION_MANAGER_FRAME_SHOW:
+  payload: {}
 PLAYER_LEAVE_COMBAT:
   payload: {}
 PLAYER_LEAVING_WORLD:
@@ -4501,6 +4507,12 @@ PLAYER_SKINNED:
   payload:
   - name: hasFreeRepop
     type: number
+PLAYER_SOFT_ENEMY_CHANGED:
+  payload: {}
+PLAYER_SOFT_FRIEND_CHANGED:
+  payload: {}
+PLAYER_SOFT_INTERACT_CHANGED:
+  payload: {}
 PLAYER_STARTED_LOOKING:
   payload: {}
 PLAYER_STARTED_MOVING:
@@ -4773,10 +4785,6 @@ REQUIRED_GUILD_RENAME_RESULT:
   payload:
   - name: success
     type: boolean
-RESPEC_AZERITE_EMPOWERED_ITEM_CLOSED:
-  payload: {}
-RESPEC_AZERITE_EMPOWERED_ITEM_OPENED:
-  payload: {}
 RESURRECT_REQUEST:
   payload:
   - name: inviter
@@ -4834,6 +4842,10 @@ SESSION_TIME_ALERT:
   payload:
   - name: time
     type: number
+SET_DEBUG_TOOL_VISIBLE:
+  payload: {}
+SETTINGS_LOADED:
+  payload: {}
 SHOW_LFG_EXPAND_SEARCH_PROMPT:
   payload: {}
 SHOW_LOOT_TOAST_LEGENDARY_LOOTED:
@@ -5259,6 +5271,30 @@ TRAINER_SHOW:
   payload: {}
 TRAINER_UPDATE:
   payload: {}
+TRAIT_COND_INFO_CHANGED:
+  payload: {}
+TRAIT_CONFIG_CREATED:
+  payload: {}
+TRAIT_CONFIG_DELETED:
+  payload: {}
+TRAIT_CONFIG_LIST_UPDATED:
+  payload: {}
+TRAIT_CONFIG_UPDATED:
+  payload: {}
+TRAIT_NODE_CHANGED:
+  payload: {}
+TRAIT_NODE_CHANGED_PARTIAL:
+  payload: {}
+TRAIT_NODE_ENTRY_UPDATED:
+  payload: {}
+TRAIT_SYSTEM_INTERACTION_STARTED:
+  payload: {}
+TRAIT_SYSTEM_NPC_CLOSED:
+  payload: {}
+TRAIT_TREE_CHANGED:
+  payload: {}
+TRAIT_TREE_CURRENCY_INFO_UPDATED:
+  payload: {}
 TRANSMOG_OUTFITS_CHANGED:
   payload: {}
 TRIAL_CAP_REACHED_LEVEL:
@@ -5409,6 +5445,8 @@ UNIT_FLAGS:
   payload:
   - name: unitTarget
     type: string
+UNIT_FORM_CHANGED:
+  payload: {}
 UNIT_HAPPINESS:
   payload:
   - name: unitTarget
@@ -5736,6 +5774,8 @@ UPDATE_WEB_TICKET:
     type: string
 USE_BIND_CONFIRM:
   payload: {}
+USE_COMBINED_BAGS_CHANGED:
+  payload: {}
 USE_GLYPH:
   payload:
   - name: spellID
@@ -6018,22 +6058,20 @@ VOICE_CHAT_TTS_SPEAK_TEXT_UPDATE:
     type: number
 VOICE_CHAT_TTS_VOICES_UPDATE:
   payload: {}
+VOICE_CHAT_VAD_SETTINGS_UPDATED:
+  payload: {}
 VOID_DEPOSIT_WARNING:
   payload:
   - name: slot
     type: number
   - name: link
     type: string
-VOID_STORAGE_CLOSE:
-  payload: {}
 VOID_STORAGE_CONTENTS_UPDATE:
   payload: {}
 VOID_STORAGE_DEPOSIT_UPDATE:
   payload:
   - name: slot
     type: number
-VOID_STORAGE_OPEN:
-  payload: {}
 VOID_STORAGE_UPDATE:
   payload: {}
 VOID_TRANSFER_DONE:
@@ -6056,10 +6094,6 @@ WARGAME_REQUESTED:
     type: number
   - name: tournamentRules
     type: boolean
-WEAR_EQUIPMENT_SET:
-  payload:
-  - name: setID
-    type: number
 WHO_LIST_UPDATE:
   payload: {}
 WORLD_PVP_QUEUE:

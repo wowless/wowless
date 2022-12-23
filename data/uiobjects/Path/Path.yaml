@@ -12,18 +12,19 @@ methods:
     - wow_classic
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   GetCurveType:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   GetMaxControlPointOrder:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   GetMaxOrder:
@@ -31,18 +32,17 @@ methods:
     - wow_classic
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   SetCurve:
     products:
     - wow_classic
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   SetCurveType:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented

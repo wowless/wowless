@@ -8,7 +8,6 @@ methods:
     - wow_classic
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   GetOrigin:
     status: unimplemented
@@ -18,12 +17,14 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   GetScaleTo:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   GetToScale:
@@ -31,14 +32,12 @@ methods:
     - wow_classic
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   SetFromScale:
     products:
     - wow_classic
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   SetOrigin:
     status: unimplemented
@@ -48,12 +47,14 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetScaleTo:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetToScale:
@@ -61,5 +62,4 @@ methods:
     - wow_classic
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
