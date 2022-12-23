@@ -436,6 +436,7 @@ local function loader(api, cfg)
             return { [attr.impl.scope] = v }
           elseif attr.impl.method then
             local fn = api.uiobjectTypes[api.UserData(obj).type].metatable.__index[attr.impl.method]
+            assert(fn, ('missing method %q on object type %q'):format(attr.impl.method, api.UserData(obj).type))
             if type(v) == 'table' then -- stringlist
               fn(obj, unpack(v))
             else
