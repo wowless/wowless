@@ -112,30 +112,43 @@ function G.GeneratedTests()
   end
 
   local function cvars()
-    -- Do this early to avoid issues with deferred cvar creation.
-    local cvarDefaults = (function()
+    local function lowify(t)
+      local tt = {}
+      for k, v in pairs(t) do
+        local lk = k:lower()
+        assertEquals(nil, tt[lk])
+        tt[lk] = {
+          name = k,
+          value = v,
+        }
+      end
+      return tt
+    end
+    local expectedCVars = lowify(_G.WowlessData.CVars)
+    local actualCVars = lowify((function()
+      -- Do this early to avoid issues with deferred cvar creation.
       local t = {}
       for _, command in ipairs(_G.C_Console.GetAllCommands()) do
         local name = command.command
         if name:sub(1, 6) ~= 'CACHE-' then
-          t[name:lower()] = _G.C_CVar.GetCVarDefault(name)
+          assertEquals(nil, t[name])
+          t[name] = _G.C_CVar.GetCVarDefault(name)
         end
       end
       return t
-    end)()
-    local tests = {}
+    end)())
     local toskipin = {
       mousespeed = true, -- varies based on host?
       renderscale = true, -- varies based on host?
     }
-    for name in pairs(toskipin) do
-      tests[name] = function() end
-    end
-    for name, value in pairs(_G.WowlessData.CVars) do
-      name = name:lower()
-      if not tests[name] then
-        tests[name] = function()
-          assertEquals(value, cvarDefaults[name])
+    local tests = {}
+    for k, v in pairs(expectedCVars) do
+      tests[v.name] = function()
+        local actual = actualCVars[k]
+        assert(actual, format('extra cvar', k))
+        assertEquals(v.name, actual.name, 'cvar name mismatch')
+        if not toskipin[k] then
+          assertEquals(v.value, actual.value, 'cvar value mismatch')
         end
       end
     end
@@ -143,10 +156,10 @@ function G.GeneratedTests()
       praisethesun = true, -- set in FrameXML
       ttsusecharactersettings = true,
     }
-    for k, v in pairs(cvarDefaults) do
-      if not tests[k] and not toskipout[k] then
-        tests[k] = function()
-          error(format('missing cvar %q with default %q', k, v))
+    for k, v in pairs(actualCVars) do
+      if not tests[v.name] and not toskipout[k] then
+        tests[v.name] = function()
+          error(format('missing cvar with default %q', v.value))
         end
       end
     end

@@ -146,7 +146,10 @@ end
 
 local cvars = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
-  cvars[k:lower()] = v
+  cvars[k:lower()] = {
+    name = k,
+    value = v,
+  }
 end
 
 local events = {}
