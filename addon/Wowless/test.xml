@@ -526,4 +526,34 @@
   <Script>
     assertEquals('load2,load3', table.concat(WowlessLog, ','))
   </Script>
+
+  <Frame name='WowlessParentSubFrame'>
+    <Frames>
+      <Frame>
+        <Frames>
+          <Frame name='$parentChild'>
+            <Scripts>
+              <OnLoad>
+                assertEquals('WowlessParentSubFrameChild', self:GetName())
+                assertEquals(WowlessParentSubFrame, self:GetParent():GetParent())
+              </OnLoad>
+            </Scripts>
+          </Frame>
+          <Frame>
+            <Anchors>
+              <Anchor point='TOPLEFT' relativeTo='$parent' />
+            </Anchors>
+            <Scripts>
+              <OnLoad>
+                assertEquals(WowlessParentSubFrame, self:GetParent():GetParent())
+                assertEquals(1, self:GetNumPoints())
+                local relativeTo = select(2, self:GetPoint(1))
+                assertEquals(self:GetParent():GetParent(), relativeTo) -- notably not self:GetParent()
+              </OnLoad>
+            </Scripts>
+          </Frame>
+        </Frames>
+      </Frame>
+    </Frames>
+  </Frame>
 </Ui>
