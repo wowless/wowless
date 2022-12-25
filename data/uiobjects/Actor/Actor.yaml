@@ -114,9 +114,21 @@ methods:
     status: unimplemented
   Hide:
     status: unimplemented
+  IsGeoReady:
+    products:
+    - wow
+    status: unimplemented
   IsLoaded:
     status: unimplemented
   IsShown:
+    status: unimplemented
+  IsSlotAllowed:
+    products:
+    - wow
+    status: unimplemented
+  IsSlotVisible:
+    products:
+    - wow
     status: unimplemented
   IsUsingCenterForOrigin:
     status: unimplemented

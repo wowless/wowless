@@ -72,7 +72,9 @@ function G.GeneratedTests()
           mcfg = mcfg == true and empty or mcfg
           mtests[mname] = function()
             local func = ns[mname]
-            if mcfg.stdlib then
+            if mcfg.alias then
+              assertEquals(func, assert(tget(_G, mcfg.alias)))
+            elseif mcfg.stdlib then
               local ty = type(tget(_G, mcfg.stdlib))
               if ty == 'function' then
                 return checkCFunc(func)

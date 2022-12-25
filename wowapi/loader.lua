@@ -272,7 +272,7 @@ local function loadFunctions(api, loader)
     end
   end
   for k, v in pairs(aliases) do
-    fns[k] = util.tget(fns, v)
+    util.tset(fns, k, util.tget(fns, v))
   end
   api.log(1, 'functions loaded')
   return fns

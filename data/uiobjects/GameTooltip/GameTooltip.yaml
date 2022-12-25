@@ -26,16 +26,29 @@ methods:
   AddLine:
     status: unimplemented
   AddSpellByID:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   AddTexture:
     status: unimplemented
   AddTraitEntry:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   AdvanceSecondaryCompareItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   AppendText:
     status: unimplemented
@@ -51,7 +64,6 @@ methods:
     status: getter
   GetAzeritePowerID:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -62,6 +74,13 @@ methods:
     - wowt
     status: unimplemented
   GetItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   GetMinimumWidth:
     outputs:
@@ -74,28 +93,69 @@ methods:
   GetPadding:
     status: unimplemented
   GetSpell:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   GetUnit:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   IsEquippedItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   IsOwned:
     status: implemented
   IsUnit:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   NumLines:
     fields:
     - name: tooltipLines
     status: getter
   ResetSecondaryCompareItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetAchievementByID:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetAction:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetAllowShowWithNoLines:
     products:
@@ -107,13 +167,11 @@ methods:
     status: unimplemented
   SetArtifactItem:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetArtifactPowerByID:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -133,53 +191,74 @@ methods:
     status: unimplemented
   SetAzeriteEssence:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetAzeriteEssenceSlot:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetAzeritePower:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetBackpackToken:
     products:
-    - wow
     - wow_beta
     - wow_classic
     - wow_classic_ptr
     - wowt
     status: unimplemented
   SetBagItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetBagItemChild:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetBuybackItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetCompanionPet:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetCompareAzeritePower:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetCompareItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetConduit:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -199,13 +278,11 @@ methods:
     status: unimplemented
   SetCurrencyByID:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetCurrencyToken:
     products:
-    - wow
     - wow_beta
     - wow_classic
     - wow_classic_ptr
@@ -213,7 +290,6 @@ methods:
     status: unimplemented
   SetCurrencyTokenByID:
     products:
-    - wow
     - wow_beta
     - wow_classic
     - wow_classic_ptr
@@ -227,19 +303,24 @@ methods:
     status: unimplemented
   SetEnhancedConduit:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetEquipmentSet:
     products:
-    - wow
     - wow_beta
     - wow_classic
     - wow_classic_ptr
     - wowt
     status: unimplemented
   SetExistingSocketGem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetFrameStack:
     status: unimplemented
@@ -249,82 +330,154 @@ methods:
     - wow_classic_ptr
     status: unimplemented
   SetGuildBankItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetHeirloomByItemID:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetHyperlink:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetInboxItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetInstanceLockEncountersComplete:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetInventoryItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetInventoryItemByID:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetItemByGUID:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetItemByID:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetItemByIDWithQuality:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetItemKey:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetLFGDungeonReward:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetLFGDungeonShortageReward:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetLootCurrency:
     products:
-    - wow
     - wow_beta
     - wow_classic
     - wow_classic_ptr
     - wowt
     status: unimplemented
   SetLootItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetLootRollItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetMerchantCostItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetMerchantItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetMinimumWidth:
     status: unimplemented
   SetMountBySpellID:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
-  SetOwnedItemByID:
+  SetObjectTooltipPosition:
     products:
     - wow
+    status: unimplemented
+  SetOwnedItemByID:
+    products:
     - wow_beta
     - wowt
     status: unimplemented
@@ -333,52 +486,81 @@ methods:
   SetPadding:
     status: unimplemented
   SetPetAction:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetPossession:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetPvpBrawl:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetPvpTalent:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetQualityReagentSlotItemByID:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetQuestCurrency:
     products:
-    - wow
     - wow_beta
     - wow_classic
     - wow_classic_ptr
     - wowt
     status: unimplemented
   SetQuestItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetQuestLogCurrency:
     products:
-    - wow
     - wow_beta
     - wow_classic
     - wow_classic_ptr
     - wowt
     status: unimplemented
   SetQuestLogItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetQuestLogRewardSpell:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetQuestLogSpecialItem:
     products:
-    - wow
     - wow_beta
     - wow_classic
     - wow_classic_ptr
@@ -386,33 +568,50 @@ methods:
     status: unimplemented
   SetQuestPartyProgress:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetQuestRewardSpell:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetRecipeRankInfo:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetRecipeReagentItem:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetRuneforgeResultItem:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetSendMailItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetShapeshift:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetShrinkToFitWrapped:
     products:
@@ -421,34 +620,73 @@ methods:
     - wowt
     status: unimplemented
   SetSocketedItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetSocketedRelic:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetSocketGem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetSpecialPvpBrawl:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetSpellBookItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetSpellByID:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetTalent:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetText:
     status: unimplemented
   SetTotem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetToyByItemID:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
@@ -460,6 +698,13 @@ methods:
     - wow_classic_era_ptr
     status: unimplemented
   SetTradePlayerItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetTradeSkillItem:
     products:
@@ -469,62 +714,96 @@ methods:
     - wow_classic_era_ptr
     status: unimplemented
   SetTradeTargetItem:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetTrainerService:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetTransmogrifyItem:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetUnit:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetUnitAura:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetUnitBuff:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetUnitBuffByAuraInstanceID:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetUnitDebuff:
+    products:
+    - wow_beta
+    - wow_classic
+    - wow_classic_era
+    - wow_classic_era_ptr
+    - wow_classic_ptr
+    - wowt
     status: unimplemented
   SetUnitDebuffByAuraInstanceID:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetUpgradeItem:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetVoidDepositItem:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetVoidItem:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetVoidWithdrawalItem:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented
   SetWeeklyReward:
     products:
-    - wow
     - wow_beta
     - wowt
     status: unimplemented

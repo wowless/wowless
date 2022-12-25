@@ -113,6 +113,7 @@ local ptablemap = {
       local mt = {}
       for mk, mv in pairs(v.methods) do
         local tt = {
+          alias = mv.alias,
           stdlib = mv.stdlib,
         }
         mt[mk] = next(tt) and tt or true
