@@ -1,56 +1,51 @@
+local allTypes = { 'apis', 'constants', 'enums', 'events', 'structures' }
 local args = (function()
   local parser = require('argparse')()
-  parser:option('-p --products', 'products to process'):count('*')
-  parser:option('-t --types', 'types to write'):count('*')
+  parser:option('-p --product', 'product to process'):count(1)
+  parser:option('-t --types', 'types to write'):choices(allTypes):count('*')
   parser:option('-f --filter', 'api filter')
   return parser:parse()
 end)()
-if not next(args.types) then
-  args.types = { 'apis', 'constants', 'enums', 'events', 'structures' }
-end
 local enabledTypes = {}
-for _, ty in ipairs(args.types) do
+for _, ty in ipairs(next(args.types) and args.types or allTypes) do
   enabledTypes[ty] = true
 end
+
 local lfs = require('lfs')
 local writeFile = require('pl.file').write
 local pprintYaml = require('wowapi.yaml').pprint
-local products = next(args.products) and args.products
-  or { -- priority order
-    'wow_beta',
-    'wowt',
-    'wow',
-    'wow_classic_ptr',
-    'wow_classic',
-    'wow_classic_era_ptr',
-    'wow_classic_era',
-  }
+local product = args.product
+
 local docs = {}
-local enum = {}
-local function processDocDir(docdir)
-  if lfs.attributes(docdir) then
-    for f in lfs.dir(docdir) do
-      if f:sub(-4) == '.lua' then
-        pcall(setfenv(loadfile(docdir .. '/' .. f), {
-          APIDocumentation = {
-            AddDocumentationTable = function(_, t)
-              docs[f] = docs[f] or t
-            end,
-          },
-        }))
+do
+  local function processDocDir(docdir)
+    if lfs.attributes(docdir) then
+      for f in lfs.dir(docdir) do
+        if f:sub(-4) == '.lua' then
+          pcall(setfenv(loadfile(docdir .. '/' .. f), {
+            APIDocumentation = {
+              AddDocumentationTable = function(_, t)
+                docs[f] = docs[f] or t
+              end,
+            },
+          }))
+        end
       end
     end
   end
-end
-for _, product in ipairs(products) do
   local prefix = 'extracts/' .. product .. '/Interface/AddOns/'
   processDocDir(prefix .. 'Blizzard_APIDocumentation')
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
+end
+
+local enum = {}
+do
   local globals = require('wowapi.yaml').parseFile('data/products/' .. product .. '/globals.yaml')
   for en, em in pairs(globals.Enum) do
     enum[en] = enum[en] or em
   end
 end
+
 local expectedTopLevelFields = {
   Events = true,
   Functions = true,
@@ -273,8 +268,7 @@ local expectedEventPayloadKeys = {
   Type = true,
 }
 if enabledTypes.events then
-  assert(#products == 1)
-  local filename = ('data/products/%s/events.yaml'):format(products[1])
+  local filename = ('data/products/%s/events.yaml'):format(product)
   local out = require('wowapi.yaml').parseFile(filename)
   for name, ev in pairs(events) do
     for k in pairs(ev) do
@@ -335,15 +329,13 @@ if enabledTypes.enums then
       }
     end
   end
-  for _, p in ipairs(products) do
-    local y = require('wowapi.yaml')
-    local f = 'data/products/' .. p .. '/globals.yaml'
-    local g = y.parseFile(f)
-    for k, v in pairs(t) do
-      g.Enum[k] = v
-    end
-    require('pl.file').write(f, y.pprint(g))
+  local y = require('wowapi.yaml')
+  local f = 'data/products/' .. product .. '/globals.yaml'
+  local g = y.parseFile(f)
+  for k, v in pairs(t) do
+    g.Enum[k] = v
   end
+  require('pl.file').write(f, y.pprint(g))
 end
 
 if enabledTypes.constants then
@@ -361,13 +353,11 @@ if enabledTypes.constants then
       t[v.Name] = vt
     end
   end
-  for _, p in ipairs(products) do
-    local y = require('wowapi.yaml')
-    local f = 'data/products/' .. p .. '/globals.yaml'
-    local g = y.parseFile(f)
-    for k, v in pairs(t) do
-      g.Constants[k] = v
-    end
-    require('pl.file').write(f, y.pprint(g))
+  local y = require('wowapi.yaml')
+  local f = 'data/products/' .. product .. '/globals.yaml'
+  local g = y.parseFile(f)
+  for k, v in pairs(t) do
+    g.Constants[k] = v
   end
+  require('pl.file').write(f, y.pprint(g))
 end
