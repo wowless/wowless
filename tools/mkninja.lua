@@ -152,20 +152,9 @@ local builds = {
     rule = 'stamp',
   },
   {
-    ins = find('data/structures'),
-    outs = 'build/structures.stamp',
-    rule = 'stamp',
-  },
-  {
     ins = find('data/uiobjects'),
     outs = 'build/uiobjects.stamp',
     rule = 'stamp',
-  },
-  {
-    args = { product = 'structures' },
-    ins_implicit = { find('data/structures'), 'tools/prep.lua' },
-    outs_implicit = 'build/structures.lua',
-    rule = 'prep',
   },
   {
     args = { product = 'xml' },
@@ -177,8 +166,6 @@ local builds = {
     ins = {
       'build/api.stamp',
       'build/state.stamp',
-      'build/structures.lua',
-      'build/structures.stamp',
       'build/uiobjects.stamp',
       'build/xml.lua',
       (function()
@@ -357,7 +344,6 @@ for _, p in ipairs(productList) do
       'build/impl.stamp',
       'build/sql.stamp',
       'build/state.stamp',
-      'build/structures.stamp',
       'build/uiobjects.stamp',
       dataStamp,
     },
@@ -366,7 +352,7 @@ for _, p in ipairs(productList) do
   })
   table.insert(builds, {
     args = { product = p },
-    ins = { datadb, datalua, 'build/structures.lua', 'build/xml.lua' },
+    ins = { datadb, datalua, 'build/xml.lua' },
     outs = p,
     rule = 'phony',
   })

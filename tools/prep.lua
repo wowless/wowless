@@ -13,20 +13,19 @@ local function readFile(...)
 end
 local plprettywrite = require('pl.pretty').write
 
-if product == 'xml' or product == 'structures' then
-  local isxml = product == 'xml'
+if product == 'xml' then
   local data = {}
-  for _, f in ipairs(require('pl.dir').getfiles('data/' .. product)) do
+  for _, f in ipairs(require('pl.dir').getfiles('data/xml')) do
     local cfg = parseYaml(f)
-    data[cfg.name] = isxml and cfg or true
+    data[cfg.name] = cfg
   end
   local txt = 'return ' .. plprettywrite(data)
-  assert(require('pl.file').write('build/' .. product .. '.lua', txt))
+  assert(require('pl.file').write('build/xml.lua', txt))
   return
 end
 
 local getStub = (function()
-  local structures = require('wowapi.data').structures
+  local structures = require('wowapi.data').structures[product]
   local defaultOutputs = {
     boolean = 'false',
     ['function'] = 'function() end',
@@ -195,6 +194,7 @@ local data = {
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
   state = state,
+  structures = parseYaml('data/products/' .. product .. '/structures.yaml'),
   uiobjects = uiobjects,
 }
 local txt = 'return ' .. plprettywrite(data)

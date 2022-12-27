@@ -1,8 +1,0 @@
----
-name: C_SecureTransfer.MailInfo
-status: implemented
-fields:
-- name: sendMoney
-  type: number
-- name: target
-  type: string

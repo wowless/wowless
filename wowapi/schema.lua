@@ -5,7 +5,18 @@ local domains = {
   sqlcursor = wdata.sqlcursor,
   sqllookup = wdata.sqllookup,
   state = wdata.state,
-  structure = wdata.structures,
+  structure = (function()
+    -- Combine all product structures. We could check structures and events
+    -- on a per-product basis, but apis are harder and they're not really
+    -- per-product yet, so it's easier to just throw them all in one bin.
+    local t = {}
+    for _, v in pairs(wdata.structures) do
+      for k in pairs(v) do
+        t[k] = true
+      end
+    end
+    return t
+  end)(),
   uiobject = wdata.uiobjects,
   xml = wdata.xml,
 }

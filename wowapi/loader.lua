@@ -1,4 +1,3 @@
-local structures = require('build.structures')
 local util = require('wowless.util')
 
 local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
@@ -55,6 +54,7 @@ local function loadFunctions(api, loader)
   api.log(1, 'loading functions')
   local datalua = api.datalua
   local apis = datalua.apis
+  local structures = datalua.structures
   local sqls = loadSqls(loader.sqlitedb, datalua.sqlcursors, datalua.sqllookups)
   local impls = {}
   for k, v in pairs(datalua.impls) do
