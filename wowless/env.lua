@@ -1,4 +1,3 @@
-local Mixin = require('wowless.util').mixin
 local deepcopy = require('pl.tablex').deepcopy
 
 local function dump(api)
@@ -17,14 +16,17 @@ end
 
 local function init(api, loader, lite)
   api.impls = require('wowapi.loader').loadFunctions(api, loader)
-  api.env._G = api.env
-  Mixin(api.env, deepcopy(api.impls))
-  Mixin(api.env, deepcopy(api.datalua.globals))
-  api.env.__wowless = {
+  for k, v in pairs(deepcopy(api.impls)) do
+    api.env.set(k, v)
+  end
+  for k, v in pairs(deepcopy(api.datalua.globals)) do
+    api.env.set(k, v)
+  end
+  api.env.set('__wowless', {
     dump = dump(api),
     lite = lite,
     product = api.product,
-  }
+  })
 end
 
 return {

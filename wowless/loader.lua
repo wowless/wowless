@@ -78,9 +78,15 @@ local function loader(api, cfg)
     if type == 'number' then
       return tonumber(value)
     elseif type == 'global' then
-      local t = api.env
+      local t
+      local first = true
       for part in value:gmatch('[^.]+') do
-        t = t[part]
+        if first then
+          t = api.env.get(part)
+          first = false
+        else
+          t = t[part]
+        end
       end
       return t
     elseif type == 'boolean' or type == 'bool' then
@@ -118,22 +124,22 @@ local function loader(api, cfg)
   local function getColor(e)
     local name = e.attr.name or e.attr.color
     if name then
-      return assert(api.env[name], ('unknown color %q'):format(name)):GetRGBA()
+      return assert(api.env.get(name), ('unknown color %q'):format(name)):GetRGBA()
     else
       return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
     end
   end
 
   local function loadLuaString(filename, str, line, closureTaint, ...)
-    local before = api.env.ScrollingMessageFrameMixin
-    local fn = setfenv(loadstr(str, filename, line), api.env)
+    local before = api.env.get('ScrollingMessageFrameMixin')
+    local fn = setfenv(loadstr(str, filename, line), api.env.getenv())
     api.CallSafely(function(...)
       debug.setnewclosuretaint(closureTaint)
       fn(...)
     end, ...)
     debug.setnewclosuretaint(nil)
     -- Super hacky hack to hook ScrollingMessageFrameMixin.AddMessage
-    local after = api.env.ScrollingMessageFrameMixin
+    local after = api.env.get('ScrollingMessageFrameMixin')
     if after and not before then
       local f = after.AddMessage
       after.AddMessage = function(self, text, ...)
@@ -149,7 +155,7 @@ local function loader(api, cfg)
     local fn
     if script.attr['function'] then
       local fnattr = script.attr['function']
-      fn = env[fnattr]
+      fn = env == api.env and api.env.get(fnattr) or env[fnattr]
       if not fn then
         api.log(2, 'unknown script function %q on %q', fnattr, obj:GetDebugName())
       end
@@ -164,7 +170,8 @@ local function loader(api, cfg)
     elseif script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-      fn = setfenv(loadstr(fnstr, filename, script.line), env)()
+      local tfn = loadstr(fnstr, filename, script.line)
+      fn = setfenv(tfn, env == api.env and api.env.getenv() or env)()
       scriptCache[script] = fn
     end
     if obj.GetScript then -- TODO tighten up xml yaml
@@ -263,7 +270,7 @@ local function loader(api, cfg)
             -- TODO interpret all binding attributes
             if not e.attr.debug then -- TODO support debug bindings
               local fn = 'return function(keystate) ' .. e.text .. ' end'
-              api.states.Bindings[e.attr.name] = setfenv(loadstr(fn, filename, e.line), api.env)()
+              api.states.Bindings[e.attr.name] = setfenv(loadstr(fn, filename, e.line), api.env.getenv())()
             end
           end,
           color = function(e, parent)
@@ -398,13 +405,12 @@ local function loader(api, cfg)
             api.UserData(obj).shown = not value
           end,
           mixin = function(obj, value)
-            local env = ctx.useAddonEnv and addonEnv or api.env
             for _, m in ipairs(value) do
-              mixin(obj, env[m])
+              mixin(obj, ctx.useAddonEnv and addonEnv and addonEnv[m] or api.env.get(m))
             end
           end,
           parent = function(obj, value)
-            api.SetParent(obj, api.env[value])
+            api.SetParent(obj, api.env.get(value))
           end,
           parentarray = function(obj, value)
             local p = api.UserData(obj).parent
@@ -420,9 +426,8 @@ local function loader(api, cfg)
             end
           end,
           securemixin = function(obj, value)
-            local env = ctx.useAddonEnv and addonEnv or api.env
             for _, m in ipairs(value) do
-              mixin(obj, env[m])
+              mixin(obj, ctx.useAddonEnv and addonEnv and addonEnv[m] or api.env.get(m))
             end
           end,
           setallpoints = function(obj, value)
@@ -815,7 +820,7 @@ local function loader(api, cfg)
   local function loadFrameXml()
     local loadFile = forAddon()
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
-      api.env[tag] = text
+      api.env.set(tag, text)
     end
     for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do
       loadFile(file)
@@ -848,7 +853,7 @@ local function loader(api, cfg)
         local t = {}
         for _, attr in ipairs({ 'SavedVariables', 'SavedVariablesPerCharacter' }) do
           for var in (v.attrs[attr] or ''):gmatch('[^, ]+') do
-            local val = api.env[var]
+            local val = api.env.get(var)
             if val ~= nil then
               table.insert(t, var)
               table.insert(t, ' = ')
