@@ -200,13 +200,13 @@ local function mkBaseUIObjectTypes(api)
               ud[f.name] = tostring(v)
             elseif ty == 'font' then
               if type(v) == 'string' then
-                v = api.env[v]
+                v = api.env.get(v)
               end
               assert(type(v) == 'table', 'expected font')
               ud[f.name] = v
             elseif ty == 'frame' then
               if type(v) == 'string' then
-                v = api.env[v]
+                v = api.env.get(v)
               end
               assert(api.InheritsFrom(v:GetObjectType():lower(), 'frame'))
               ud[f.name] = v

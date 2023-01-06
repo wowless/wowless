@@ -1,8 +1,54 @@
 local traceback = require('wowless.ext').traceback
 
+local function isscalar(x)
+  local t = type(x)
+  return t == 'nil' or t == 'number' or t == 'string' or t == 'boolean'
+end
+
+local function nextscalarkey(t, k)
+  k = next(t, k)
+  while k ~= nil and not isscalar(k) do
+    k = next(t, k)
+  end
+  return k
+end
+
+local function mkenv()
+  local t = {}
+  t._G = t
+  local p = newproxy(true)
+  require('wowless.util').mixin(getmetatable(p), {
+    __index = {
+      get = function(k)
+        if not isscalar(k) then
+          error(('bad key %q'):format(tostring(k)))
+        end
+        return t[k]
+      end,
+      getenv = function()
+        return t
+      end,
+      keys = function()
+        return nextscalarkey, t, nil
+      end,
+      set = function(k, v)
+        if not isscalar(k) then
+          error(('bad key %q'):format(tostring(k)))
+        end
+        t[k] = v
+      end,
+    },
+    __metatable = 'wowless environment',
+    __newindex = function(_, k)
+      error('invalid env __newindex: ' .. tostring(k))
+    end,
+  })
+  return p
+end
+
 local function new(log, maxErrors, product)
   local allEventRegistrations = {}
-  local env = {}
+  local env = mkenv()
   local errors = 0
   local eventRegistrations = {}
   local frames = {}
@@ -175,10 +221,10 @@ local function new(log, maxErrors, product)
     if objname then
       objname = ParentSub(objnamearg, u(obj).parent)
       u(obj).name = objname
-      if env[objname] then
+      if env.get(objname) then
         log(3, 'overwriting global ' .. objname)
       end
-      env[objname] = obj
+      env.set(objname, obj)
       if addonEnv then
         addonEnv[objname] = obj
       end

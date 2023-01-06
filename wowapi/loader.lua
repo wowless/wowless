@@ -80,7 +80,7 @@ local function loadFunctions(api, loader)
 
   local stubenv = setmetatable({}, {
     __index = function(_, k)
-      return k == 'Mixin' and util.mixin or api.env[k]
+      return k == 'Mixin' and util.mixin or api.env.get(k)
     end,
     __metatable = 'stub metatable',
     __newindex = function()
@@ -207,7 +207,7 @@ local function loadFunctions(api, loader)
         for idx, mixin in pairs(mixins) do
           local t = select(idx, ...)
           if t then
-            util.mixin(t, api.env[mixin])
+            util.mixin(t, api.env.get(mixin))
           end
         end
         return ...
