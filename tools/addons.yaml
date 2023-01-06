@@ -1,0 +1,37 @@
+---
+Bartender4:
+  owner: nevcairiel
+  repo: bartender4
+  tag: 4.14.4
+Ferronnizer:
+  flavors:
+  - Vanilla
+  owner: ferronn-dev
+  repo: ferronnizer
+  tag: v450
+LunaUnitFrames:
+  flavors:
+  - Wrath
+  owner: aviana
+  repo: lunaunitframes
+  tag: '4343'
+Quartz:
+  owner: nevcairiel
+  repo: quartz
+  tag: 3.7.1
+Questie:
+  owner: questie
+  repo: questie
+  tag: v7.4.5
+Talented:
+  flavors:
+  - Wrath
+  owner: lethay
+  repo: talentedclassic
+  tag: v221207-WotLK
+TalentTreeViewer:
+  flavors:
+  - Mainline
+  owner: numynum
+  repo: talentviewer
+  tag: v2.1.10

@@ -1,3 +1,4 @@
 local datalua, cvars, var = ...
-var = var:lower()
-return tostring(cvars[var] or datalua.cvars[var]) == '1'
+local lvar = var:lower()
+local t = cvars[lvar] or datalua.cvars[lvar]
+return t and t.value == '1'

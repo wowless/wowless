@@ -2581,11 +2581,12 @@ Enum:
     Mail: 12
     Pet: 9
     PvP: 13
+    PvPGroupMember: 15
     PvPScoreboard: 14
   ReportTypeMeta:
-    MaxValue: 14
+    MaxValue: 15
     MinValue: 0
-    NumValues: 15
+    NumValues: 16
   ScriptedAnimationBehavior:
     None: 0
     SourceCollideWithTarget: 4

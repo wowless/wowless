@@ -1,3 +1,4 @@
 local datalua, cvars, var = ...
-var = var:lower()
-return cvars[var] or datalua.cvars[var]
+local lvar = var:lower()
+local t = cvars[lvar] or datalua.cvars[lvar]
+return t and t.value

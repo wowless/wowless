@@ -1,4 +1,7 @@
 local cvars, var, value = ...
-cvars[var:lower()] = value
 -- TODO assert cvar exists
+cvars[var:lower()] = {
+  name = var,
+  value = value,
+}
 return true

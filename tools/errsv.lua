@@ -45,11 +45,15 @@ local getPatternValue = (function()
       value = mustnumber,
     },
     {
-      pattern = ': missing cvar ".+" with default "(.*)"$',
+      pattern = ': extra cvar$',
+      value = constant(nil),
+    },
+    {
+      pattern = ': missing cvar with default "(.*)"$',
       value = tostring,
     },
     {
-      pattern = ': missing key ".+" with value (-?%d+)$',
+      pattern = ': missing key ".+" with value (-?[0-9.]+)$',
       value = mustnumber,
     },
     {
@@ -146,13 +150,13 @@ do
           mn = mn:sub(2)
           assert(next(mv) == 'impltype')
           assert(next(mv, 'impltype') == nil)
-          assert(
-            mv.impltype:match(': bad argument #1 to \'[^\']+\' %(Lua function expected%): want true, got false$'),
-            mn
-          )
-          local funcname = ns .. '.' .. mn
-          ensureExists(funcname)
-          apis[funcname] = funcname
+          if mv.impltype:match(': want true, got false$') then
+            local funcname = ns .. '.' .. mn
+            ensureExists(funcname)
+            apis[funcname] = funcname
+          else
+            error(mv)
+          end
         else
           local funcname = ns .. '.' .. mn
           if type(mv) == 'string' then
@@ -205,19 +209,27 @@ do
       k = k:sub(2)
       assert(next(v) == 'impltype')
       assert(next(v, 'impltype') == nil)
-      assert(v.impltype:match(': bad argument #1 to \'[^\']+\' %(Lua function expected%): want true, got false$'), k)
-      apis[k] = k
-      ensureExists(k)
+      if v.impltype:match(': want true, got false$') then
+        apis[k] = k
+        ensureExists(k)
+      else
+        error(k)
+      end
     else
       if type(v) == 'string' then
         assert(v:match(': want "function", got "nil"$'))
         apis[k] = nil
       elseif type(v) == 'table' then
-        assert(next(v) == 'impltype')
+        assert(next(v) == 'impltype', ('expected impltype, got %q'):format(next(v)))
         assert(next(v, 'impltype') == nil)
-        assert(v.impltype:match(': bad argument #1 to \'create\' %(Lua function expected%): want true, got false$'), k)
-        apis[k] = k
-        ensureExists(k)
+        if v.impltype:match(': bad argument #1 to \'create\' %(Lua function expected%): want true, got false$') then
+          apis[k] = k
+          ensureExists(k)
+        elseif v.impltype:match(': want false, got true$') then
+          apis[k] = nil
+        else
+          error(k)
+        end
       else
         error('invalid type at globalApi ' .. k)
       end

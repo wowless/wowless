@@ -626,7 +626,7 @@ guildShowOffline: '1'
 gxAdapter: ''
 gxAFRDevicesCount: '0'
 gxAftermathEnabled: '1'
-GxAllowCachelessShaderMode: '1'
+GxAllowCachelessShaderMode: '0'
 gxApi: auto
 gxAspect: '1'
 gxFullscreenResolution: auto

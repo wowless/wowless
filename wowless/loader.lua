@@ -153,16 +153,15 @@ local function loader(api, cfg)
     local fn
     if script.attr['function'] then
       local fnattr = script.attr['function']
-      fn = function(...)
-        local f = env == api.env and api.env.get(fnattr) or env[fnattr]
-        assert(f, 'unknown script function ' .. fnattr)
-        f(...)
+      fn = env == api.env and api.env.get(fnattr) or env[fnattr]
+      if not fn then
+        api.log(2, 'unknown script function %q on %q', fnattr, obj:GetDebugName())
       end
     elseif script.attr.method then
       local mattr = script.attr.method
-      fn = function(x, ...)
-        assert(x[mattr], 'unknown script method ' .. mattr)
-        x[mattr](x, ...)
+      fn = obj[mattr]
+      if not fn then
+        api.log(2, 'unknown script method %q on %q', mattr, obj:GetDebugName())
       end
     elseif script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
@@ -170,9 +169,9 @@ local function loader(api, cfg)
       local tfn = loadstr(fnstr, filename, script.line)
       fn = setfenv(tfn, env == api.env and api.env.getenv() or env)()
     end
-    if fn and obj.GetScript then -- TODO tighten up xml yaml
+    if obj.GetScript then -- TODO tighten up xml yaml
       local old = obj:GetScript(script.type)
-      if old and script.attr.inherit then
+      if old and fn and script.attr.inherit then
         local bfn = fn
         if script.attr.inherit == 'prepend' then
           fn = function(...)
@@ -442,6 +441,7 @@ local function loader(api, cfg)
             return { [attr.impl.scope] = v }
           elseif attr.impl.method then
             local fn = api.uiobjectTypes[api.UserData(obj).type].metatable.__index[attr.impl.method]
+            assert(fn, ('missing method %q on object type %q'):format(attr.impl.method, api.UserData(obj).type))
             if type(v) == 'table' then -- stringlist
               fn(obj, unpack(v))
             else
@@ -740,7 +740,7 @@ local function loader(api, cfg)
         if addon then
           addon.name = name
           addon.fdid = fdid
-          addonData[name] = addon
+          addonData[name:lower()] = addon
           table.insert(addonData, addon)
         end
       end
@@ -778,10 +778,11 @@ local function loader(api, cfg)
   }
 
   local function doLoadAddon(addonName)
-    local toc = addonData[addonName]
+    local toc = addonData[addonName:lower()]
     if not toc then
       error('unknown addon ' .. addonName)
     end
+    addonName = toc.name
     if not toc.loaded and toc.attrs.AllowLoad ~= 'Glue' then
       api.log(1, 'loading addon dependencies for %s', addonName)
       for _, attr in ipairs(depAttrs) do

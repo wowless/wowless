@@ -145,12 +145,13 @@ local function parseRoot(root, intrinsics, snapshot)
       return nil
     end
     local resultAttrs = {}
-    for k, v in pairs(e._attr or {}) do
+    for _, k in ipairs(e._attr) do
       local an = string.lower(k)
       local attr = ty.attributes[an]
       if not attr then
         table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
       else
+        local v = e._attr[k]
         local vv = attributeTypes[attr](v)
         if vv == nil then
           table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)

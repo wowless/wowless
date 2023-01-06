@@ -17,6 +17,7 @@ inherits:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
 methods:
   CalculateScreenAreaFromCharacterSpan:
@@ -45,6 +46,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   GetStringHeight:
@@ -71,6 +73,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   GetWrappedWidth:
@@ -95,6 +98,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetText:

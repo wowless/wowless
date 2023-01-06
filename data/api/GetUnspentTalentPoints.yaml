@@ -2,11 +2,14 @@
 name: GetUnspentTalentPoints
 status: unimplemented
 inputs:
-- - name: isInspected
+- - default: false
+    name: isInspected
     type: boolean
-  - name: isPet
+  - default: false
+    name: isPet
     type: boolean
-  - name: talentGroup
+  - default: 1
+    name: talentGroup
     type: number
 outputs:
 - name: talentPoints

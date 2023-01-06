@@ -1,6 +1,6 @@
 local datalua = ...
 local t = {}
-for k in require('pl.tablex').sort(datalua.cvars) do
-  table.insert(t, { command = k })
+for _, v in require('pl.tablex').sort(datalua.cvars) do
+  table.insert(t, { command = v.name })
 end
 return t
