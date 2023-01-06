@@ -50,7 +50,7 @@ local fns = {
   sqlcursor = loaddir('sql/cursor', 'sql'),
   sqllookup = loaddir('sql/lookup', 'sql'),
   state = loaddir('state', 'yaml'),
-  structures = loaddir('structures', 'yaml'),
+  structures = perproduct('structures'),
   uiobjects = loadUIObjects,
   xml = loaddir('xml', 'yaml'),
 }

@@ -25,7 +25,7 @@ methods:
   GetProgress:
     status: unimplemented
   GetRegionParent:
-    status: unimplemented
+    status: implemented
   GetSmoothing:
     fields:
     - name: smoothing
@@ -84,12 +84,14 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetTargetParent:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   Stop:

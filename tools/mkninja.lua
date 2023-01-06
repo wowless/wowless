@@ -65,6 +65,9 @@ local rules = {
   dbschema = {
     command = 'lua tools/sqlite.lua $product',
   },
+  downloadrelease = {
+    command = 'sh bin/downloadaddon.sh $owner $repo $tag $out',
+  },
   fetch = {
     command = 'lua tools/fetch.lua $product && touch $out',
     pool = 'fetch_pool',
@@ -98,6 +101,10 @@ local rules = {
     command = elune .. ' wowless.lua -p $product -e5 > $out',
     pool = 'run_pool',
   },
+  runaddon = {
+    command = elune .. ' wowless.lua -p $product -e5 -a extracts/addons/$addon > $out',
+    pool = 'run_pool',
+  },
   stamp = {
     command = 'touch $out',
   },
@@ -105,7 +112,7 @@ local rules = {
 
 local builds = {
   {
-    ins = { 'test.out', 'outs', 'pngs' },
+    ins = { 'test.out', 'outs', 'pngs', 'addonouts' },
     outs = 'all',
     rule = 'phony',
   },
@@ -145,20 +152,9 @@ local builds = {
     rule = 'stamp',
   },
   {
-    ins = find('data/structures'),
-    outs = 'build/structures.stamp',
-    rule = 'stamp',
-  },
-  {
     ins = find('data/uiobjects'),
     outs = 'build/uiobjects.stamp',
     rule = 'stamp',
-  },
-  {
-    args = { product = 'structures' },
-    ins_implicit = { find('data/structures'), 'tools/prep.lua' },
-    outs_implicit = 'build/structures.lua',
-    rule = 'prep',
   },
   {
     args = { product = 'xml' },
@@ -170,8 +166,6 @@ local builds = {
     ins = {
       'build/api.stamp',
       'build/state.stamp',
-      'build/structures.lua',
-      'build/structures.stamp',
       'build/uiobjects.stamp',
       'build/xml.lua',
       (function()
@@ -243,6 +237,7 @@ end
 local runtimes = {}
 local runouts = {}
 local pngs = {}
+local addonouts = {}
 for _, p in ipairs(productList) do
   local dblist = 'build/products/' .. p .. '/dblist.lua'
   table.insert(builds, {
@@ -285,15 +280,24 @@ for _, p in ipairs(productList) do
   local datadb = 'build/products/' .. p .. '/data.db'
   local datalua = 'build/products/' .. p .. '/data.lua'
   table.insert(runtimes, schemadb)
+  local rundeps = {
+    'wowless/ext.so',
+    'build/wowless.stamp',
+    dataStamp,
+    fetchStamp,
+    elune,
+    datadb,
+    datalua,
+  }
   table.insert(builds, {
     args = { product = p },
-    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, elune, datadb, datalua },
+    ins = rundeps,
     outs = runout,
     rule = 'run',
   })
   table.insert(builds, {
     args = { product = p },
-    ins = { 'wowless/ext.so', 'build/wowless.stamp', dataStamp, fetchStamp, elune, datadb, datalua },
+    ins = rundeps,
     outs_implicit = { 'out/' .. p .. '/frame0.yaml', 'out/' .. p .. '/frame1.yaml' },
     rule = 'frame0',
   })
@@ -340,7 +344,6 @@ for _, p in ipairs(productList) do
       'build/impl.stamp',
       'build/sql.stamp',
       'build/state.stamp',
-      'build/structures.stamp',
       'build/uiobjects.stamp',
       dataStamp,
     },
@@ -349,9 +352,43 @@ for _, p in ipairs(productList) do
   })
   table.insert(builds, {
     args = { product = p },
-    ins = { datadb, datalua, 'build/structures.lua', 'build/xml.lua' },
+    ins = { datadb, datalua, 'build/xml.lua' },
     outs = p,
     rule = 'phony',
+  })
+  local b = require('wowapi.yaml').parseFile('data/products/' .. p .. '/build.yaml')
+  for k, v in pairs(require('wowapi.yaml').parseFile('tools/addons.yaml')) do
+    local found = v.flavors == nil
+    if not found then
+      for _, f in ipairs(v.flavors) do
+        found = found or f == b.flavor
+      end
+    end
+    if found then
+      local addonout = 'out/' .. p .. '/addons/' .. k .. '.txt'
+      table.insert(addonouts, addonout)
+      table.insert(builds, {
+        args = {
+          addon = k,
+          product = p,
+        },
+        ins = { rundeps, 'build/addonreleases/' .. k .. '.zip' },
+        outs = addonout,
+        rule = 'runaddon',
+      })
+    end
+  end
+end
+
+for k, v in pairs(require('wowapi.yaml').parseFile('tools/addons.yaml')) do
+  table.insert(builds, {
+    args = {
+      owner = v.owner,
+      repo = v.repo,
+      tag = v.tag,
+    },
+    outs = 'build/addonreleases/' .. k .. '.zip',
+    rule = 'downloadrelease',
   })
 end
 
@@ -368,6 +405,11 @@ table.insert(builds, {
 table.insert(builds, {
   ins = pngs,
   outs = 'pngs',
+  rule = 'phony',
+})
+table.insert(builds, {
+  ins = addonouts,
+  outs = 'addonouts',
   rule = 'phony',
 })
 

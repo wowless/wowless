@@ -8,14 +8,30 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
     - uses: docker/login-action@v1
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/cache@v3
+      with:
+        path: cache
+        key: cache-${{ github.run_id }}
+        restore-keys: cache
     - uses: devcontainers/ci@v0.2
       with:
-        imageName: ghcr.io/lua-wow-tools/wowless-devcontainer
+        env: |
+          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+        imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
-        runCmd: true
+        runCmd: pre-commit run -a && ninja -v all
+    - uses: actions/upload-artifact@v3
+      if: success() || failure()
+      with:
+        name: test-results
+        path: |
+          out/
+          test.out

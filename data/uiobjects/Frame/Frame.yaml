@@ -58,10 +58,8 @@ inherits:
   MouseMixin:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
   ParentedObject: {}
   Region: {}
   ScriptObject: {}
@@ -103,10 +101,8 @@ methods:
   GetDepth:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   GetDontSavePosition:
     status: unimplemented
@@ -115,10 +111,8 @@ methods:
   GetEffectiveDepth:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   GetEffectivelyFlattensRenderLayers:
     status: unimplemented
@@ -148,10 +142,8 @@ methods:
     - name: maxResizeHeight
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: getter
   GetMinResize:
     fields:
@@ -159,10 +151,8 @@ methods:
     - name: minResizeHeight
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: getter
   GetNumChildren:
     status: implemented
@@ -178,6 +168,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   HasFixedFrameLevel:
@@ -191,10 +182,8 @@ methods:
   IgnoreDepth:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   IsClampedToScreen:
     fields:
@@ -209,10 +198,8 @@ methods:
   IsIgnoringDepth:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   IsKeyboardEnabled:
     status: unimplemented
@@ -261,10 +248,8 @@ methods:
   SetDepth:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   SetDontSavePosition:
     status: unimplemented
@@ -283,10 +268,8 @@ methods:
   SetFrameBuffer:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   SetFrameLevel:
     status: implemented
@@ -308,6 +291,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetMaxResize:
@@ -316,10 +300,8 @@ methods:
     - name: maxResizeHeight
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: setter
   SetMinResize:
     fields:
@@ -327,10 +309,8 @@ methods:
     - name: minResizeHeight
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: setter
   SetMovable:
     fields:
@@ -348,6 +328,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetToplevel:

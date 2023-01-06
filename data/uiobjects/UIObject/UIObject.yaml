@@ -8,6 +8,7 @@ inherits:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
 methods:
   GetName:

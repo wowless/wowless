@@ -5,7 +5,7 @@ local function dump(api)
   return function(...)
     for _, x in ipairs({ ... }) do
       d(x)
-      if api.UserData(x) then
+      if type(x) == 'table' and api.UserData(x) then
         print('===[begin userdata]===')
         d(api.UserData(x))
         print('===[ end userdata ]===')

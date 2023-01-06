@@ -1,0 +1,6 @@
+---
+name: Talents
+value:
+  activeConfigID: 12345
+  activeConfigID_comment: strictly speaking should be spec specific (nil if no spec
+    selected)

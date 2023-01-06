@@ -21,7 +21,8 @@ RUN apt-get update \
         unzip \
         zip \
     && pip install git+https://github.com/luarocks/hererocks cmake pre-commit \
-    && hererocks -l 5.1 -r 3.8.0 /usr/local
+    && hererocks -l 5.1 -r 3.8.0 /usr/local \
+    && git config --system --add safe.directory '*'
 COPY --from=stylua-builder /opt/stylua /usr/local
 WORKDIR /wowless
 COPY wowless-scm-0.rockspec .

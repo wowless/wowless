@@ -6,7 +6,6 @@ local dirschemas = {
   api = 'api',
   schemas = 'schema',
   state = 'state',
-  structures = 'structure',
   xml = 'xml',
 }
 
@@ -16,6 +15,7 @@ local productschemas = {
   cvars = 'cvars',
   events = 'events',
   globals = 'globals',
+  structures = 'structures',
 }
 
 describe('yaml', function()

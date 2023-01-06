@@ -14,10 +14,8 @@ inherits:
   ForbiddenMixin:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
   UIObject: {}
 methods:
   GetDebugName:
@@ -30,6 +28,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetParent:
@@ -38,6 +37,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
 virtual: true

@@ -59,6 +59,7 @@ inherits:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
 methods:
   AddMaskTexture:
@@ -80,10 +81,8 @@ methods:
   GetNonBlocking:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   GetNumMaskTextures:
     status: unimplemented
@@ -125,6 +124,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   IsDesaturated:
@@ -143,6 +143,7 @@ methods:
     products:
     - wow
     - wow_beta
+    - wow_classic_ptr
     - wowt
     status: unimplemented
   SetColorTexture:
@@ -156,10 +157,8 @@ methods:
   SetGradientAlpha:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   SetHorizTile:
     fields:
@@ -172,10 +171,8 @@ methods:
   SetNonBlocking:
     products:
     - wow_classic
-    - wow_classic_beta
     - wow_classic_era
     - wow_classic_era_ptr
-    - wow_classic_ptr
     status: unimplemented
   SetRotation:
     status: unimplemented
