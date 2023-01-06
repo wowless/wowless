@@ -381,7 +381,7 @@
         local foo = self.foo:GetScript('OnEvent')
         local bar = self.bar:GetScript('OnEvent')
         assert(foo ~= nil)
-        assertEquals(__wowless == nil, foo == bar) -- TODO fix wowless
+        assert(foo == bar)
       </OnLoad>
     </Scripts>
   </Frame>
@@ -544,11 +544,7 @@
   </Script>
   <Frame inherits='WowlessFunctionLoadstringTemplate' />
   <Script>
-    if __wowless then  -- TODO fix wowless
-      assertEquals('foo,foo', table.concat(WowlessLog, ','))
-    else
-      assertEquals('foo', table.concat(WowlessLog, ','))
-    end
+    assertEquals('foo', table.concat(WowlessLog, ','))
   </Script>
 
   <Frame name='WowlessParentSubFrame'>

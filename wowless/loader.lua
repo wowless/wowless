@@ -143,6 +143,8 @@ local function loader(api, cfg)
     end
   end
 
+  local scriptCache = {}
+
   local function loadScript(script, obj, env, filename, intrinsic)
     local fn
     if script.attr['function'] then
@@ -157,10 +159,13 @@ local function loader(api, cfg)
       if not fn then
         api.log(2, 'unknown script method %q on %q', mattr, obj:GetDebugName())
       end
+    elseif scriptCache[script] then
+      fn = scriptCache[script]
     elseif script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
       fn = setfenv(loadstr(fnstr, filename, script.line), env)()
+      scriptCache[script] = fn
     end
     if obj.GetScript then -- TODO tighten up xml yaml
       local old = obj:GetScript(script.type)
