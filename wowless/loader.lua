@@ -532,6 +532,7 @@ local function loader(api, cfg)
               api.uiobjectTypes[name] = {
                 constructor = base.constructor,
                 inherits = { basetype },
+                isa = mixin({ [name] = true }, base.isa),
                 metatable = base.metatable,
                 name = base.name,
                 template = template,

@@ -16,12 +16,9 @@ local function new(log, maxErrors, product)
   end
 
   local function InheritsFrom(a, b)
-    assert(uiobjectTypes[a], 'unknown type ' .. a)
-    local result = a == b
-    for _, inh in ipairs(uiobjectTypes[a].inherits) do
-      result = result or InheritsFrom(inh, b)
-    end
-    return result
+    local t = uiobjectTypes[a]
+    assert(t, 'unknown type ' .. a)
+    return t.isa[b]
   end
 
   local function IsIntrinsicType(t)

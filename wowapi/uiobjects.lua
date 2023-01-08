@@ -85,11 +85,13 @@ local function mkBaseUIObjectTypes(api)
       if not result[lk] then
         local ty = types[k]
         local inherits = {}
+        local isa = { [lk] = true }
         local metaindex = Mixin({}, ty.mixin)
         for inh, t in pairs(ty.inherits) do
           if hasproduct(t, api.product) then
             flattenOne(inh)
             table.insert(inherits, string.lower(inh))
+            Mixin(isa, result[string.lower(inh)].isa)
             for mk, mv in pairs(result[string.lower(inh)].metatable.__index) do
               assert(not metaindex[mk] or metaindex[mk] == mv, 'multiple implementations of ' .. mk)
               metaindex[mk] = mv
@@ -106,6 +108,7 @@ local function mkBaseUIObjectTypes(api)
             end
           end,
           inherits = inherits,
+          isa = isa,
           metatable = { __index = metaindex },
           name = ty.cfg.objectType or k,
         }
