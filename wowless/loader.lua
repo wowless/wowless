@@ -404,197 +404,185 @@ local function loader(api, cfg)
     local function loadXml(filename, xmlstr)
       local dir = path.dirname(filename)
 
-      local function usingContext(ctx)
-        local function withContext(update)
-          return usingContext(mixin({}, ctx, update))
-        end
-
-        local loadElement
-
-        local function loadElements(t, parent)
-          for _, v in ipairs(t) do
-            loadElement(v, parent)
-          end
-        end
-
-        local function processAttr(attr, obj, v)
-          if attr.impl == 'internal' then
-            xmlattrlang[attr.name](ctx, obj, v)
-          elseif attr.impl == 'loadfile' then
-            loadFile(path.join(dir, v))
-          elseif attr.impl.scope then
-            return { [attr.impl.scope] = v }
-          elseif attr.impl.method then
-            local fn = api.uiobjectTypes[api.UserData(obj).type].metatable.__index[attr.impl.method]
-            assert(fn, ('missing method %q on object type %q'):format(attr.impl.method, api.UserData(obj).type))
-            if type(v) == 'table' then -- stringlist
-              fn(obj, unpack(v))
-            else
-              fn(obj, v)
-            end
-          elseif attr.impl.field then
-            api.UserData(obj)[attr.impl.field] = v
+      local function processAttr(ctx, attr, obj, v)
+        if attr.impl == 'internal' then
+          xmlattrlang[attr.name](ctx, obj, v)
+        elseif attr.impl == 'loadfile' then
+          loadFile(path.join(dir, v))
+        elseif attr.impl.scope then
+          return { [attr.impl.scope] = v }
+        elseif attr.impl.method then
+          local fn = api.uiobjectTypes[api.UserData(obj).type].metatable.__index[attr.impl.method]
+          assert(fn, ('missing method %q on object type %q'):format(attr.impl.method, api.UserData(obj).type))
+          if type(v) == 'table' then -- stringlist
+            fn(obj, unpack(v))
           else
-            error('invalid attribute impl for ' .. attr.name)
+            fn(obj, v)
+          end
+        elseif attr.impl.field then
+          api.UserData(obj)[attr.impl.field] = v
+        else
+          error('invalid attribute impl for ' .. attr.name)
+        end
+      end
+
+      local function processAttrs(ctx, e, obj, phase)
+        local objty = api.UserData(obj).type
+        local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
+        for k, v in pairs(e.attr) do
+          -- This assumes that uiobject types and xml types are the same "space" of strings.
+          local attr = attrs[k]
+          if attr and phase == attr.phase then
+            processAttr(ctx, attr, obj, v)
           end
         end
+      end
 
-        local function processAttrs(e, obj, phase)
-          local objty = api.UserData(obj).type
-          local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
-          for k, v in pairs(e.attr) do
-            -- This assumes that uiobject types and xml types are the same "space" of strings.
-            local attr = attrs[k]
-            if attr and phase == attr.phase then
-              processAttr(attr, obj, v)
-            end
+      local loadElement
+
+      local function loadElements(ctx, t, parent)
+        for _, v in ipairs(t) do
+          loadElement(ctx, v, parent)
+        end
+      end
+
+      local function processKids(ctx, e, obj, phase)
+        ctx = ctx.ignoreVirtual and ctx or mixin({}, ctx, { ignoreVirtual = true })
+        for _, kid in ipairs(e.kids) do
+          if xmlimpls[string.lower(kid.type)].phase == phase then
+            loadElement(ctx, kid, obj)
           end
         end
+      end
 
-        local function processKids(e, obj, phase)
-          local newctx = withContext({ ignoreVirtual = true })
-          for _, kid in ipairs(e.kids) do
-            if xmlimpls[string.lower(kid.type)].phase == phase then
-              newctx.loadElement(kid, obj)
-            end
+      local phases = {
+        EarlyAttrs = function(ctx, e, obj)
+          if ctx.layer and obj.SetDrawLayer then
+            obj:SetDrawLayer(ctx.layer)
           end
-        end
-
-        local phases = {
-          EarlyAttrs = function(e, obj)
-            if ctx.layer and obj.SetDrawLayer then
-              obj:SetDrawLayer(ctx.layer)
-            end
-            processAttrs(e, obj, 'early')
-          end,
-          Attrs = function(e, obj)
-            processAttrs(e, obj, 'middle')
-            processKids(e, obj, 'middle')
-          end,
-          Kids = function(e, obj)
-            processKids(e, obj, 'late')
-            processAttrs(e, obj, 'late')
-            -- Implicit setallpoints hack for textures.
-            if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
-              obj:SetAllPoints()
-            end
-          end,
-        }
-
-        local function mkInitPhase(phaseName, e)
-          local phase = phases[phaseName]
-          return function(obj)
-            for _, inh in ipairs(e.attr.inherits or {}) do
-              local t = assert(api.templates[string.lower(inh)], 'unknown template ' .. inh)
-              t['init' .. phaseName](obj)
-            end
-            phase(e, obj)
+          processAttrs(ctx, e, obj, 'early')
+        end,
+        Attrs = function(ctx, e, obj)
+          processAttrs(ctx, e, obj, 'middle')
+          processKids(ctx, e, obj, 'middle')
+        end,
+        Kids = function(ctx, e, obj)
+          processKids(ctx, e, obj, 'late')
+          processAttrs(ctx, e, obj, 'late')
+          -- Implicit setallpoints hack for textures.
+          if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
+            obj:SetAllPoints()
           end
-        end
+        end,
+      }
 
-        function loadElement(e, parent)
-          if api.IsIntrinsicType(e.type) then
-            local newctx = withContext({ intrinsic = not not e.attr.intrinsic })
-            local template = {
-              inherits = e.attr.inherits,
-              initEarlyAttrs = newctx.mkInitPhase('EarlyAttrs', e),
-              initAttrs = newctx.mkInitPhase('Attrs', e),
-              initKids = newctx.mkInitPhase('Kids', e),
-              name = e.attr.name,
-              type = e.type,
+      local function mkInitPhase(ctx, phaseName, e)
+        local phase = phases[phaseName]
+        return function(obj)
+          for _, inh in ipairs(e.attr.inherits or {}) do
+            local t = assert(api.templates[string.lower(inh)], 'unknown template ' .. inh)
+            t['init' .. phaseName](obj)
+          end
+          phase(ctx, e, obj)
+        end
+      end
+
+      function loadElement(ctx, e, parent)
+        if api.IsIntrinsicType(e.type) then
+          ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
+          local template = {
+            inherits = e.attr.inherits,
+            initEarlyAttrs = mkInitPhase(ctx, 'EarlyAttrs', e),
+            initAttrs = mkInitPhase(ctx, 'Attrs', e),
+            initKids = mkInitPhase(ctx, 'Kids', e),
+            name = e.attr.name,
+            type = e.type,
+          }
+          local virtual = e.attr.virtual
+          if e.attr.intrinsic then
+            assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
+            assert(e.attr.name, 'cannot create anonymous intrinsic')
+            local name = string.lower(e.attr.name)
+            if api.uiobjectTypes[name] then
+              api.log(1, 'overwriting intrinsic ' .. e.attr.name)
+            end
+            api.log(3, 'creating intrinsic ' .. e.attr.name)
+            local basetype = string.lower(e.type)
+            local base = api.uiobjectTypes[basetype]
+            api.uiobjectTypes[name] = {
+              constructor = base.constructor,
+              inherits = { basetype },
+              isa = mixin({ [name] = true }, base.isa),
+              metatable = base.metatable,
+              name = base.name,
+              template = template,
             }
-            local virtual = e.attr.virtual
-            if e.attr.intrinsic then
-              assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
-              assert(e.attr.name, 'cannot create anonymous intrinsic')
-              local name = string.lower(e.attr.name)
-              if api.uiobjectTypes[name] then
-                api.log(1, 'overwriting intrinsic ' .. e.attr.name)
-              end
-              api.log(3, 'creating intrinsic ' .. e.attr.name)
-              local basetype = string.lower(e.type)
-              local base = api.uiobjectTypes[basetype]
-              api.uiobjectTypes[name] = {
-                constructor = base.constructor,
-                inherits = { basetype },
-                isa = mixin({ [name] = true }, base.isa),
-                metatable = base.metatable,
-                name = base.name,
-                template = template,
-              }
-              intrinsics[name] = xmlimpls[basetype]
-            else
-              local ltype = string.lower(e.type)
-              if (ltype == 'font' and e.attr.name) or (virtual and not ctx.ignoreVirtual) then
-                assert(e.attr.name, 'cannot create anonymous template')
-                local name = string.lower(e.attr.name)
-                if api.templates[name] then
-                  api.log(1, 'overwriting template ' .. e.attr.name)
-                end
-                api.log(3, 'creating template ' .. e.attr.name)
-                api.templates[name] = template
-              end
-              if ltype == 'font' or (not virtual or ctx.ignoreVirtual) then
-                local name = e.attr.name
-                if virtual and ctx.ignoreVirtual then
-                  api.log(1, 'ignoring virtual on ' .. tostring(name))
-                end
-                return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
-              end
-            end
+            intrinsics[name] = xmlimpls[basetype]
           else
-            local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
-            local fn = xmllang[e.type]
-            if type(impl) == 'table' and impl.script then
-              local env = ctx.useAddonEnv and addonEnv or api.env
-              loadScript(e, parent, env, filename, ctx.intrinsic)
-            elseif type(impl) == 'table' and impl.scope then
-              withContext({ [impl.scope] = true }).loadElements(e.kids, parent)
-            elseif type(impl) == 'table' then
-              local elt = impl.argument == 'lastkid' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
-              local obj = loadElement(elt, parent)
-              -- TODO find if this if needs to be broader to everything here including kids
-              if api.InheritsFrom(api.UserData(parent).type, impl.parenttype:lower()) then
-                api.uiobjectTypes[impl.parenttype:lower()].metatable.__index[impl.parentmethod](parent, obj)
+            local ltype = string.lower(e.type)
+            if (ltype == 'font' and e.attr.name) or (virtual and not ctx.ignoreVirtual) then
+              assert(e.attr.name, 'cannot create anonymous template')
+              local name = string.lower(e.attr.name)
+              if api.templates[name] then
+                api.log(1, 'overwriting template ' .. e.attr.name)
               end
-            elseif impl == 'transparent' or impl == 'loadstring' then
-              local ctxmix = {}
-              for k, v in pairs(e.attr) do
-                local attr = xmlimpls[e.type].attrs[k]
-                if attr then
-                  mixin(ctxmix, processAttr(attr, nil, v))
-                end
+              api.log(3, 'creating template ' .. e.attr.name)
+              api.templates[name] = template
+            end
+            if ltype == 'font' or (not virtual or ctx.ignoreVirtual) then
+              local name = e.attr.name
+              if virtual and ctx.ignoreVirtual then
+                api.log(1, 'ignoring virtual on ' .. tostring(name))
               end
-              withContext(ctxmix).loadElements(e.kids, parent)
-              if impl == 'loadstring' and e.text then
-                loadLuaString(filename, e.text, e.line)
-              end
-            elseif e.type == 'binding' then -- TODO do this another way
-              -- TODO interpret all binding attributes
-              if not e.attr.debug then -- TODO support debug bindings
-                local bfn = 'return function(keystate) ' .. e.text .. ' end'
-                api.states.Bindings[e.attr.name] = setfenv(loadstr(bfn, filename, e.line), api.env)()
-              end
-            elseif e.type == 'fontfamily' then -- TODO do this another way
-              local font = e.kids[1].kids[1]
-              loadElement({
-                attr = mixin({}, font.attr, { virtual = true, name = e.attr.name }),
-                kids = font.kids,
-                type = font.type,
-              })
-            elseif fn then
-              fn(ctx, e, parent)
-            else
-              error('unimplemented xml tag ' .. e.type)
+              return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
             end
           end
+        else
+          local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
+          local fn = xmllang[e.type]
+          if type(impl) == 'table' and impl.script then
+            local env = ctx.useAddonEnv and addonEnv or api.env
+            loadScript(e, parent, env, filename, ctx.intrinsic)
+          elseif type(impl) == 'table' and impl.scope then
+            loadElements(mixin({}, ctx, { [impl.scope] = true }), e.kids, parent)
+          elseif type(impl) == 'table' then
+            local elt = impl.argument == 'lastkid' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
+            local obj = loadElement(ctx, elt, parent)
+            -- TODO find if this if needs to be broader to everything here including kids
+            if api.InheritsFrom(api.UserData(parent).type, impl.parenttype:lower()) then
+              api.uiobjectTypes[impl.parenttype:lower()].metatable.__index[impl.parentmethod](parent, obj)
+            end
+          elseif impl == 'transparent' or impl == 'loadstring' then
+            local ctxmix = mixin({}, ctx)
+            for k, v in pairs(e.attr) do
+              local attr = xmlimpls[e.type].attrs[k]
+              if attr then
+                mixin(ctxmix, processAttr(ctx, attr, nil, v))
+              end
+            end
+            loadElements(ctxmix, e.kids, parent)
+            if impl == 'loadstring' and e.text then
+              loadLuaString(filename, e.text, e.line)
+            end
+          elseif e.type == 'binding' then -- TODO do this another way
+            -- TODO interpret all binding attributes
+            if not e.attr.debug then -- TODO support debug bindings
+              local bfn = 'return function(keystate) ' .. e.text .. ' end'
+              api.states.Bindings[e.attr.name] = setfenv(loadstr(bfn, filename, e.line), api.env)()
+            end
+          elseif e.type == 'fontfamily' then -- TODO do this another way
+            local font = e.kids[1].kids[1]
+            loadElement(ctx, {
+              attr = mixin({}, font.attr, { virtual = true, name = e.attr.name }),
+              kids = font.kids,
+              type = font.type,
+            })
+          elseif fn then
+            fn(ctx, e, parent)
+          else
+            error('unimplemented xml tag ' .. e.type)
+          end
         end
-
-        return {
-          loadElement = loadElement,
-          loadElements = loadElements,
-          mkInitPhase = mkInitPhase,
-        }
       end
 
       return api.CallSafely(function()
@@ -607,7 +595,7 @@ local function loader(api, cfg)
           intrinsic = false,
           useAddonEnv = false,
         }
-        usingContext(ctx).loadElement(root)
+        loadElement(ctx, root)
       end)
     end
 
