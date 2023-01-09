@@ -215,8 +215,191 @@ local function loader(api, cfg)
     return obj
   end
 
+  local xmllang = {
+    anchor = function(_, anchor, parent)
+      local point = anchor.attr.point
+      local relativeTo
+      if anchor.attr.relativeto then
+        relativeTo = api.ParentSub(anchor.attr.relativeto, parent:GetParent())
+      elseif anchor.attr.relativekey then
+        relativeTo = navigate(parent, anchor.attr.relativekey)
+      else
+        relativeTo = api.UserData(parent).parent
+      end
+      local relativePoint = anchor.attr.relativepoint or point
+      local offsetX, offsetY = getXY(anchor.kids[#anchor.kids])
+      local x = anchor.attr.x or offsetX
+      local y = anchor.attr.y or offsetY
+      parent:SetPoint(point, relativeTo, relativePoint, x, y)
+    end,
+    attribute = function(_, e, parent)
+      -- TODO share code with SetAttribute somehow
+      local a = e.attr
+      api.UserData(parent).attributes[a.name] = parseTypedValue(a.type, a.value)
+    end,
+    barcolor = function(_, e, parent)
+      parent:SetStatusBarColor(getColor(e))
+    end,
+    color = function(ctx, e, parent)
+      local r, g, b, a = getColor(e)
+      local p = api.UserData(parent)
+      if api.InheritsFrom(p.type, 'texture') then
+        parent:SetColorTexture(r, g, b, a)
+      elseif api.InheritsFrom(p.type, 'fontinstance') then
+        if ctx.shadow then
+          parent:SetShadowColor(r, g, b, a)
+        else
+          parent:SetTextColor(r, g, b, a)
+        end
+      else
+        error('cannot apply color to ' .. p.type)
+      end
+    end,
+    fontheight = function(_, e, parent)
+      local name, _, flags = parent:GetFont()
+      parent:SetFont(name, e.kids[#e.kids].attr.val, flags)
+    end,
+    gradient = function(_, e, parent)
+      local minColor, maxColor
+      for _, kid in ipairs(e.kids) do
+        if kid.type == 'mincolor' then
+          minColor = kid
+        elseif kid.type == 'maxcolor' then
+          maxColor = kid
+        end
+      end
+      if minColor and maxColor then
+        local minR, minG, minB, minA = getColor(minColor)
+        local maxR, maxG, maxB, maxA = getColor(maxColor)
+        if parent.SetGradientAlpha then
+          parent:SetGradientAlpha(e.attr.orientation, minR, minG, minB, minA, maxR, maxG, maxB, maxA)
+        else
+          local min = { r = minR, g = minG, b = minB, a = minA }
+          local max = { r = maxR, g = maxG, b = maxB, a = maxA }
+          parent:SetGradient(e.attr.orientation, min, max)
+        end
+      end
+    end,
+    highlightcolor = function(_, e, parent)
+      parent:SetHighlightColor(getColor(e))
+    end,
+    hitrectinsets = function(_, e, parent)
+      parent:SetHitRectInsets(getInsets(e))
+    end,
+    keyvalue = function(_, e, parent)
+      local a = e.attr
+      parent[a.key] = parseTypedValue(a.type, a.value)
+    end,
+    maskedtexture = function(_, e, parent)
+      local t = navigate(parent:GetParent(), e.attr.childkey)
+      if t then
+        t:AddMaskTexture(parent)
+      else
+        api.log(1, 'cannot find maskedtexture childkey ' .. e.attr.childkey)
+      end
+    end,
+    maxresize = function(_, e, parent)
+      -- TODO fix for dragonflight
+      if parent.SetMaxResize then
+        parent:SetMaxResize(getXY(e.kids[#e.kids]))
+      end
+    end,
+    minresize = function(_, e, parent)
+      -- TODO fix for dragonflight
+      if parent.SetMinResize then
+        parent:SetMinResize(getXY(e.kids[#e.kids]))
+      end
+    end,
+    modifiedclick = function(_, e)
+      api.states.ModifiedClicks[e.attr.action] = e.attr.default
+    end,
+    offset = function(ctx, e, parent)
+      assert(ctx.shadow, 'this should only run on shadow for now')
+      parent:SetShadowOffset(getXY(e))
+    end,
+    origin = function(_, e, parent)
+      parent:SetOrigin(e.attr.point, getXY(e.kids[#e.kids]))
+    end,
+    pushedtextoffset = function(_, e, parent)
+      parent:SetPushedTextOffset(getXY(e))
+    end,
+    size = function(_, e, parent)
+      local x, y = getXY(e)
+      if x then
+        parent:SetWidth(x)
+      end
+      if y then
+        parent:SetHeight(y)
+      end
+    end,
+    texcoords = function(_, e, parent)
+      local rect = e.kids[#e.kids]
+      if rect then
+        local x = rect.attr
+        parent:SetTexCoord(
+          x.ulx or 0,
+          x.uly or 0,
+          x.llx or 0,
+          x.lly or 1,
+          x.urx or 1,
+          x.ury or 0,
+          x.lrx or 1,
+          x.lry or 1
+        )
+      else
+        local x = e.attr
+        parent:SetTexCoord(x.left or 0, x.right or 1, x.top or 0, x.bottom or 1)
+      end
+    end,
+    textinsets = function(_, e, parent)
+      parent:SetTextInsets(getInsets(e))
+    end,
+    viewinsets = function(_, e, parent)
+      parent:SetViewInsets(getInsets(e))
+    end,
+  }
+
   local function forAddon(addonName, addonEnv)
     local loadFile
+
+    local xmlattrlang = {
+      hidden = function(_, obj, value)
+        api.UserData(obj).shown = not value
+      end,
+      mixin = function(ctx, obj, value)
+        local env = ctx.useAddonEnv and addonEnv or api.env
+        for _, m in ipairs(value) do
+          mixin(obj, env[m])
+        end
+      end,
+      parent = function(_, obj, value)
+        api.SetParent(obj, api.env[value])
+      end,
+      parentarray = function(_, obj, value)
+        local p = api.UserData(obj).parent
+        if p then
+          p[value] = p[value] or {}
+          table.insert(p[value], obj)
+        end
+      end,
+      parentkey = function(_, obj, value)
+        local p = api.UserData(obj).parent
+        if p then
+          p[value] = obj
+        end
+      end,
+      securemixin = function(ctx, obj, value)
+        local env = ctx.useAddonEnv and addonEnv or api.env
+        for _, m in ipairs(value) do
+          mixin(obj, env[m])
+        end
+      end,
+      setallpoints = function(_, obj, value)
+        if value and not obj:IsObjectType('texture') then
+          obj:SetAllPoints()
+        end
+      end,
+    }
 
     local function loadXml(filename, xmlstr)
       local dir = path.dirname(filename)
@@ -234,207 +417,9 @@ local function loader(api, cfg)
           end
         end
 
-        local xmllang = {
-          anchor = function(anchor, parent)
-            local point = anchor.attr.point
-            local relativeTo
-            if anchor.attr.relativeto then
-              relativeTo = api.ParentSub(anchor.attr.relativeto, parent:GetParent())
-            elseif anchor.attr.relativekey then
-              relativeTo = navigate(parent, anchor.attr.relativekey)
-            else
-              relativeTo = api.UserData(parent).parent
-            end
-            local relativePoint = anchor.attr.relativepoint or point
-            local offsetX, offsetY = getXY(anchor.kids[#anchor.kids])
-            local x = anchor.attr.x or offsetX
-            local y = anchor.attr.y or offsetY
-            parent:SetPoint(point, relativeTo, relativePoint, x, y)
-          end,
-          attribute = function(e, parent)
-            -- TODO share code with SetAttribute somehow
-            local a = e.attr
-            api.UserData(parent).attributes[a.name] = parseTypedValue(a.type, a.value)
-          end,
-          barcolor = function(e, parent)
-            parent:SetStatusBarColor(getColor(e))
-          end,
-          binding = function(e)
-            -- TODO interpret all binding attributes
-            if not e.attr.debug then -- TODO support debug bindings
-              local fn = 'return function(keystate) ' .. e.text .. ' end'
-              api.states.Bindings[e.attr.name] = setfenv(loadstr(fn, filename, e.line), api.env)()
-            end
-          end,
-          color = function(e, parent)
-            local r, g, b, a = getColor(e)
-            local p = api.UserData(parent)
-            if api.InheritsFrom(p.type, 'texture') then
-              parent:SetColorTexture(r, g, b, a)
-            elseif api.InheritsFrom(p.type, 'fontinstance') then
-              if ctx.shadow then
-                parent:SetShadowColor(r, g, b, a)
-              else
-                parent:SetTextColor(r, g, b, a)
-              end
-            else
-              error('cannot apply color to ' .. p.type)
-            end
-          end,
-          fontfamily = function(e)
-            local font = e.kids[1].kids[1]
-            return loadElement({
-              attr = mixin({}, font.attr, { virtual = true, name = e.attr.name }),
-              kids = font.kids,
-              type = font.type,
-            })
-          end,
-          fontheight = function(e, parent)
-            local name, _, flags = parent:GetFont()
-            parent:SetFont(name, e.kids[#e.kids].attr.val, flags)
-          end,
-          gradient = function(e, parent)
-            local minColor, maxColor
-            for _, kid in ipairs(e.kids) do
-              if kid.type == 'mincolor' then
-                minColor = kid
-              elseif kid.type == 'maxcolor' then
-                maxColor = kid
-              end
-            end
-            if minColor and maxColor then
-              local minR, minG, minB, minA = getColor(minColor)
-              local maxR, maxG, maxB, maxA = getColor(maxColor)
-              if parent.SetGradientAlpha then
-                parent:SetGradientAlpha(e.attr.orientation, minR, minG, minB, minA, maxR, maxG, maxB, maxA)
-              else
-                local min = { r = minR, g = minG, b = minB, a = minA }
-                local max = { r = maxR, g = maxG, b = maxB, a = maxA }
-                parent:SetGradient(e.attr.orientation, min, max)
-              end
-            end
-          end,
-          highlightcolor = function(e, parent)
-            parent:SetHighlightColor(getColor(e))
-          end,
-          hitrectinsets = function(e, parent)
-            parent:SetHitRectInsets(getInsets(e))
-          end,
-          keyvalue = function(e, parent)
-            local a = e.attr
-            parent[a.key] = parseTypedValue(a.type, a.value)
-          end,
-          maskedtexture = function(e, parent)
-            local t = navigate(parent:GetParent(), e.attr.childkey)
-            if t then
-              t:AddMaskTexture(parent)
-            else
-              api.log(1, 'cannot find maskedtexture childkey ' .. e.attr.childkey)
-            end
-          end,
-          maxresize = function(e, parent)
-            -- TODO fix for dragonflight
-            if parent.SetMaxResize then
-              parent:SetMaxResize(getXY(e.kids[#e.kids]))
-            end
-          end,
-          minresize = function(e, parent)
-            -- TODO fix for dragonflight
-            if parent.SetMinResize then
-              parent:SetMinResize(getXY(e.kids[#e.kids]))
-            end
-          end,
-          modifiedclick = function(e)
-            api.states.ModifiedClicks[e.attr.action] = e.attr.default
-          end,
-          offset = function(e, parent)
-            assert(ctx.shadow, 'this should only run on shadow for now')
-            parent:SetShadowOffset(getXY(e))
-          end,
-          origin = function(e, parent)
-            parent:SetOrigin(e.attr.point, getXY(e.kids[#e.kids]))
-          end,
-          pushedtextoffset = function(e, parent)
-            parent:SetPushedTextOffset(getXY(e))
-          end,
-          size = function(e, parent)
-            local x, y = getXY(e)
-            if x then
-              parent:SetWidth(x)
-            end
-            if y then
-              parent:SetHeight(y)
-            end
-          end,
-          texcoords = function(e, parent)
-            local rect = e.kids[#e.kids]
-            if rect then
-              local x = rect.attr
-              parent:SetTexCoord(
-                x.ulx or 0,
-                x.uly or 0,
-                x.llx or 0,
-                x.lly or 1,
-                x.urx or 1,
-                x.ury or 0,
-                x.lrx or 1,
-                x.lry or 1
-              )
-            else
-              local x = e.attr
-              parent:SetTexCoord(x.left or 0, x.right or 1, x.top or 0, x.bottom or 1)
-            end
-          end,
-          textinsets = function(e, parent)
-            parent:SetTextInsets(getInsets(e))
-          end,
-          viewinsets = function(e, parent)
-            parent:SetViewInsets(getInsets(e))
-          end,
-        }
-
-        local xmlattrlang = {
-          hidden = function(obj, value)
-            api.UserData(obj).shown = not value
-          end,
-          mixin = function(obj, value)
-            local env = ctx.useAddonEnv and addonEnv or api.env
-            for _, m in ipairs(value) do
-              mixin(obj, env[m])
-            end
-          end,
-          parent = function(obj, value)
-            api.SetParent(obj, api.env[value])
-          end,
-          parentarray = function(obj, value)
-            local p = api.UserData(obj).parent
-            if p then
-              p[value] = p[value] or {}
-              table.insert(p[value], obj)
-            end
-          end,
-          parentkey = function(obj, value)
-            local p = api.UserData(obj).parent
-            if p then
-              p[value] = obj
-            end
-          end,
-          securemixin = function(obj, value)
-            local env = ctx.useAddonEnv and addonEnv or api.env
-            for _, m in ipairs(value) do
-              mixin(obj, env[m])
-            end
-          end,
-          setallpoints = function(obj, value)
-            if value and not obj:IsObjectType('texture') then
-              obj:SetAllPoints()
-            end
-          end,
-        }
-
         local function processAttr(attr, obj, v)
           if attr.impl == 'internal' then
-            xmlattrlang[attr.name](obj, v)
+            xmlattrlang[attr.name](ctx, obj, v)
           elseif attr.impl == 'loadfile' then
             loadFile(path.join(dir, v))
           elseif attr.impl.scope then
@@ -584,8 +569,21 @@ local function loader(api, cfg)
               if impl == 'loadstring' and e.text then
                 loadLuaString(filename, e.text, e.line)
               end
+            elseif e.type == 'binding' then -- TODO do this another way
+              -- TODO interpret all binding attributes
+              if not e.attr.debug then -- TODO support debug bindings
+                local bfn = 'return function(keystate) ' .. e.text .. ' end'
+                api.states.Bindings[e.attr.name] = setfenv(loadstr(bfn, filename, e.line), api.env)()
+              end
+            elseif e.type == 'fontfamily' then -- TODO do this another way
+              local font = e.kids[1].kids[1]
+              loadElement({
+                attr = mixin({}, font.attr, { virtual = true, name = e.attr.name }),
+                kids = font.kids,
+                type = font.type,
+              })
             elseif fn then
-              fn(e, parent)
+              fn(ctx, e, parent)
             else
               error('unimplemented xml tag ' .. e.type)
             end
