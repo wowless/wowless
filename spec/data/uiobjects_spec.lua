@@ -43,4 +43,51 @@ describe('uiobjects', function()
       end)
     end
   end
+
+  describe('hierarchy', function()
+    local function hasproduct(t, p)
+      if not t.products then
+        return true
+      end
+      for _, k in ipairs(t.products) do
+        if k == p then
+          return true
+        end
+      end
+      return false
+    end
+
+    local uiobjects = require('wowapi.data').uiobjects
+
+    for _, p in ipairs(require('wowless.util').productList()) do
+      it(p, function()
+        local g = {}
+        for k, v in pairs(uiobjects) do
+          local t = {}
+          for ik, iv in pairs(v.cfg.inherits) do
+            t[ik] = hasproduct(iv, p) or nil
+          end
+          g[k] = t
+        end
+        local nr = {}
+        for _, v in pairs(g) do
+          for ik in pairs(v) do
+            nr[ik] = true
+          end
+        end
+        local function process(t, root, k)
+          assert(not t[k], ('multiple paths from %s to %s'):format(root, k))
+          t[k] = true
+          for ik in pairs(g[k]) do
+            process(t, root, ik)
+          end
+        end
+        for k in pairs(g) do
+          if not nr[k] then
+            process({}, k, k)
+          end
+        end
+      end)
+    end
+  end)
 end)
