@@ -15,6 +15,8 @@ Running on WoW client Lua/XML code requires some additional steps.
 From inside the container:
 
 ```sh
+git submodule update --init --depth 1
+lua tools/mkninja.lua
 bin/run.sh wow
 ```
 
