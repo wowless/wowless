@@ -24,8 +24,6 @@ local function hasproduct(t, p)
 end
 
 local function mkBaseUIObjectTypes(api)
-  local log = api.log or function() end
-
   local function u(x)
     return api.UserData(x)
   end
@@ -68,14 +66,12 @@ local function mkBaseUIObjectTypes(api)
   end
 
   local function UpdateVisible(obj, fn)
-    log(4, 'enter UpdateVisible(%s)', api.GetDebugName(obj))
     local wasVisible = m(obj, 'IsVisible')
     fn()
     local visibleNow = m(obj, 'IsVisible')
     if wasVisible ~= visibleNow then
       DoUpdateVisible(obj, visibleNow and 'OnShow' or 'OnHide')
     end
-    log(4, 'leave UpdateVisible(%s)', api.GetDebugName(obj))
   end
 
   local function flatten(types)

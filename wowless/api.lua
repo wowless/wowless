@@ -125,11 +125,9 @@ local function new(log, maxErrors, product)
       for i = 0, 2 do
         local script = ud.scripts[i][string.lower(name)]
         if script then
-          log(4, 'begin %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
           CallSafely(function(...)
             script(obj, ...)
           end, ...)
-          log(4, 'end %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
         end
       end
     end
@@ -166,7 +164,6 @@ local function new(log, maxErrors, product)
       end
     end
     for _, template in ipairs(tmpls) do
-      log(4, 'initializing early attributes for ' .. tostring(template.name))
       template.initEarlyAttrs(obj)
     end
     if objname then
@@ -181,11 +178,9 @@ local function new(log, maxErrors, product)
       end
     end
     for _, template in ipairs(tmpls) do
-      log(4, 'initializing attributes for ' .. tostring(template.name))
       template.initAttrs(obj)
     end
     for _, template in ipairs(tmpls) do
-      log(4, 'initializing children for ' .. tostring(template.name))
       template.initKids(obj)
     end
     if id then
@@ -204,7 +199,6 @@ local function new(log, maxErrors, product)
 
   local function SetScript(obj, name, bindingType, script)
     local ud = u(obj)
-    log(4, 'setting %s[%d] for %s %s', name, bindingType, ud.type, GetDebugName(obj))
     ud.scripts[bindingType][string.lower(name)] = script
   end
 
