@@ -24,9 +24,7 @@ local function hasproduct(t, p)
 end
 
 local function mkBaseUIObjectTypes(api)
-  local function u(x)
-    return api.UserData(x)
-  end
+  local u = api.UserData
 
   local function m(obj, f, ...)
     return getmetatable(obj).__index[f](obj, ...)
