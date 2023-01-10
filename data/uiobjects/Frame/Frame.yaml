@@ -60,7 +60,6 @@ inherits:
     - wow_classic
     - wow_classic_era
     - wow_classic_era_ptr
-  ParentedObject: {}
   Region: {}
   ScriptObject: {}
 methods:
