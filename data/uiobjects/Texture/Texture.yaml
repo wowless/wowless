@@ -54,7 +54,6 @@ fields:
     type: boolean
 inherits:
   LayeredRegion: {}
-  ParentedObject: {}
   ScriptObject:
     products:
     - wow
