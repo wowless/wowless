@@ -1,7 +1,6 @@
 ---
 name: FontInstance
-inherits:
-  UIObject: {}
+inherits: {}
 methods:
   GetFont:
     status: implemented

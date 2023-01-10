@@ -2,6 +2,7 @@
 name: Font
 inherits:
   FontInstance: {}
+  UIObject: {}
 methods:
   CopyFontObject:
     status: unimplemented
