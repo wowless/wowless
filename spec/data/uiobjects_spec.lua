@@ -60,7 +60,7 @@ describe('uiobjects', function()
     local uiobjects = require('wowapi.data').uiobjects
 
     for _, p in ipairs(require('wowless.util').productList()) do
-      it(p, function()
+      describe(p, function()
         local g = {}
         for k, v in pairs(uiobjects) do
           local t = {}
@@ -83,9 +83,24 @@ describe('uiobjects', function()
           end
         end
         for k in pairs(g) do
-          if not nr[k] then
-            process({}, k, k)
-          end
+          describe(k, function()
+            local t = {}
+            it('is a tree', function()
+              process(t, k, k)
+            end)
+            if not nr[k] then
+              it('is not virtual', function()
+                assert.Nil(uiobjects[k].cfg.virtual)
+              end)
+              it('is a uiobject', function()
+                assert.True(t.UIObject)
+              end)
+            elseif not next(g[k]) then
+              it('is virtual', function()
+                assert.True(uiobjects[k].cfg.virtual)
+              end)
+            end
+          end)
         end
       end)
     end
