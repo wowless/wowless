@@ -547,6 +547,28 @@
     assertEquals('foo', table.concat(WowlessLog, ','))
   </Script>
 
+  <Script>
+    WowlessLog = {}
+  </Script>
+  <Frame>
+    <Scripts>
+      <OnLoad>table.insert(WowlessLog, 'overwritten') end, table.insert(WowlessLog, 'before')--</OnLoad>
+    </Scripts>
+    <Frames>
+      <Frame>
+        <Scripts>
+          <OnLoad>table.insert(WowlessLog, 'innerload') end, table.insert(WowlessLog, 'inner')--</OnLoad>
+        </Scripts>
+      </Frame>
+    </Frames>
+    <Scripts>
+      <OnLoad>table.insert(WowlessLog, 'load') end, table.insert(WowlessLog, 'after')--</OnLoad>
+    </Scripts>
+  </Frame>
+  <Script>
+    assertEquals('before,after,inner,innerload,load', table.concat(WowlessLog, ','))
+  </Script>
+
   <Frame name='WowlessParentSubFrame'>
     <Frames>
       <Frame>
