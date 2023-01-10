@@ -62,11 +62,17 @@ if path.isdir(outdir) then
   require('pl.dir').rmtree(outdir)
 end
 
-local function save(fn, content)
-  log('writing', fn)
-  path.mkdir(path.dirname(path.join(outdir, fn)))
-  require('pl.file').write(path.join(outdir, fn), content)
-end
+local save = (function()
+  local saved = {}
+  return function(fn, content)
+    if not saved[fn:lower()] then
+      log('writing', fn)
+      path.mkdir(path.dirname(path.join(outdir, fn)))
+      require('pl.file').write(path.join(outdir, fn), content)
+      saved[fn:lower()] = true
+    end
+  end
+end)()
 
 local processFile = (function()
   local lxp = require('lxp')
