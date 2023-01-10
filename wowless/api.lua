@@ -125,9 +125,7 @@ local function new(log, maxErrors, product)
       for i = 0, 2 do
         local script = ud.scripts[i][string.lower(name)]
         if script then
-          CallSafely(function(...)
-            script(obj, ...)
-          end, ...)
+          CallSafely(script, obj, ...)
         end
       end
     end
