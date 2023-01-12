@@ -5,23 +5,14 @@ local domains = {
   sqlcursor = wdata.sqlcursor,
   sqllookup = wdata.sqllookup,
   state = wdata.state,
-  structure = (function()
-    -- Combine all product structures. We could check structures and events
-    -- on a per-product basis, but apis are harder and they're not really
-    -- per-product yet, so it's easier to just throw them all in one bin.
-    local t = {}
-    for _, v in pairs(wdata.structures) do
-      for k in pairs(v) do
-        t[k] = true
-      end
-    end
-    return t
-  end)(),
   uiobject = wdata.uiobjects,
   xml = wdata.xml,
 }
+local productDomains = {
+  structure = wdata.structures,
+}
 
-local function validate(schematype, v)
+local function validate(product, schematype, v)
   if schematype == 'number' then
     assert(type(v) == 'number', 'expected number')
   elseif schematype == 'string' then
@@ -35,13 +26,13 @@ local function validate(schematype, v)
   elseif schematype.schema then
     local schema = wdata.schemas[schematype.schema]
     assert(schema and schema.type, 'bad schema: ' .. schematype.schema)
-    validate(schema.type, v)
+    validate(product, schema.type, v)
   elseif schematype.record then
     assert(type(v) == 'table', 'expected table')
     for k2, v2 in pairs(v) do
       local info = schematype.record[k2]
       assert(info, 'unknown field ' .. k2)
-      validate(info.type, v2)
+      validate(product, info.type, v2)
     end
     for field, info in pairs(schematype.record) do
       assert(not info.required or v[field] ~= nil, 'missing required field ' .. field)
@@ -51,8 +42,8 @@ local function validate(schematype, v)
     local vty = assert(schematype.mapof.value, 'missing value type')
     assert(type(v) == 'table', 'expected table')
     for k2, v2 in pairs(v) do
-      validate(kty, k2)
-      validate(vty, v2)
+      validate(product, kty, k2)
+      validate(product, vty, v2)
     end
   elseif schematype.sequenceof then
     assert(type(v) == 'table', 'expected table')
@@ -60,12 +51,12 @@ local function validate(schematype, v)
     for k2, v2 in pairs(v) do
       assert(type(k2) == 'number', 'expected number key')
       max = k2 > max and k2 or max
-      validate(schematype.sequenceof, v2)
+      validate(product, schematype.sequenceof, v2)
     end
     assert(max == #v, 'expected array')
   elseif schematype.oneof then
     for _, ty in ipairs(schematype.oneof) do
-      if pcall(validate, ty, v) then
+      if pcall(validate, product, ty, v) then
         return
       end
     end
@@ -89,7 +80,9 @@ local function validate(schematype, v)
     assert(not schematype.enumset.nonempty or next(seen), 'missing value in enumset')
   elseif schematype.ref then
     assert(type(v) == 'string', 'expected string in ref')
-    local domain = assert(domains[schematype.ref], 'bad schema: invalid domain')
+    local ref = schematype.ref
+    local domain = domains[ref] or productDomains[ref] and productDomains[ref][product]
+    assert(domain, 'bad schema: invalid domain')
     assert(domain[v], 'unknown domain value ' .. v)
   else
     error('expected record/mapof/sequenceof/oneof')

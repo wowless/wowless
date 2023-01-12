@@ -18,6 +18,8 @@ local productschemas = {
   structures = 'structures',
 }
 
+local products = require('wowless.util').productList()
+
 describe('yaml', function()
   for dir, schemaname in pairs(dirschemas) do
     describe(dir, function()
@@ -35,15 +37,20 @@ describe('yaml', function()
             it('has the right name', function()
               assert.same(name, data.name)
             end)
-            it('schema validates', function()
-              validate(schema, data)
-            end)
+            for _, p in ipairs(products) do
+              describe(p, function()
+                it('schema validates', function()
+                  validate(p, schema, data)
+                end)
+              end)
+            end
           end)
         end
       end
     end)
   end
-  for _, d in ipairs(require('pl.dir').getdirectories('data/products')) do
+  for _, p in ipairs(products) do
+    local d = 'data/products/' .. p
     for file, schemaname in pairs(productschemas) do
       describe(d .. '/' .. file, function()
         local schema = yaml.parseFile('data/schemas/' .. schemaname .. '.yaml').type
@@ -53,7 +60,7 @@ describe('yaml', function()
           assert.same(str, yaml.pprint(data))
         end)
         it('schema validates', function()
-          validate(schema, data)
+          validate(p, schema, data)
         end)
       end)
     end
