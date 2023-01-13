@@ -1,4 +1,0 @@
----
-name: POIFrame
-extends: Frame
-virtual: true

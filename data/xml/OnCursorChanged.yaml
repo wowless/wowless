@@ -1,5 +1,0 @@
----
-name: OnCursorChanged
-extends: ScriptType
-impl:
-  script: {}

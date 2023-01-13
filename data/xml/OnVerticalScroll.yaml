@@ -1,5 +1,0 @@
----
-name: OnVerticalScroll
-extends: ScriptType
-impl:
-  script: {}

@@ -1,49 +1,13 @@
-local xmlimpls = (function()
-  local mixin = require('wowless.util').mixin
-  local tree = require('build.xml')
-  local newtree = {}
-  for k, v in pairs(tree) do
-    local attrs = mixin({}, v.attributes)
-    local t = v
-    while t.extends do
-      t = tree[t.extends]
-      mixin(attrs, t.attributes)
-    end
-    local aimpls = {}
-    for n, a in pairs(attrs) do
-      if a.impl then
-        aimpls[n] = {
-          impl = a.impl,
-          name = n,
-          phase = a.phase or 'middle',
-        }
-      end
-    end
-    local tag = v.impl
-    if type(tag) == 'table' and tag.argument == 'self' then
-      local arg = v.extends
-      while tree[arg].virtual do
-        arg = tree[arg].extends
-      end
-      tag.argument = arg:lower()
-    end
-    newtree[k:lower()] = {
-      attrs = aimpls,
-      phase = v.phase or 'middle',
-      tag = tag,
-    }
-  end
-  return newtree
-end)()
 
 local function loader(api, cfg)
   local rootDir = cfg and cfg.rootDir
   local product = cfg and cfg.product
   assert(product, 'loader requires a product')
   local otherAddonDirs = cfg and cfg.otherAddonDirs or {}
+  local datalua = require('build.products.' .. product .. '.data')
 
   local path = require('path')
-  local parseXml = require('wowless.xml').newParser()
+  local parseXml = require('wowless.xml').newParser(product)
   local util = require('wowless.util')
   local mixin = util.mixin
   local intrinsics = {}
@@ -71,6 +35,44 @@ local function loader(api, cfg)
     else
       return util.readfile
     end
+  end)()
+
+  local xmlimpls = (function()
+    local mixin = require('wowless.util').mixin
+    local tree = datalua.xml
+    local newtree = {}
+    for k, v in pairs(tree) do
+      local attrs = mixin({}, v.attributes)
+      local t = v
+      while t.extends do
+        t = tree[t.extends]
+        mixin(attrs, t.attributes)
+      end
+      local aimpls = {}
+      for n, a in pairs(attrs) do
+        if a.impl then
+          aimpls[n] = {
+            impl = a.impl,
+            name = n,
+            phase = a.phase or 'middle',
+          }
+        end
+      end
+      local tag = v.impl
+      if type(tag) == 'table' and tag.argument == 'self' then
+        local arg = v.extends
+        while tree[arg].virtual do
+          arg = tree[arg].extends
+        end
+        tag.argument = arg:lower()
+      end
+      newtree[k:lower()] = {
+        attrs = aimpls,
+        phase = v.phase or 'middle',
+        tag = tag,
+      }
+    end
+    return newtree
   end)()
 
   local function parseTypedValue(type, value)
@@ -623,7 +625,7 @@ local function loader(api, cfg)
     return loadFile
   end
 
-  local build = require('build.products.' .. product .. '.data').build
+  local build = datalua.build
 
   local alternateVersionNames = {
     Mainline = 'Mainline',

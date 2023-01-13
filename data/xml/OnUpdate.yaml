@@ -1,6 +1,0 @@
----
-name: OnUpdate
-extends: ScriptType
-impl:
-  script:
-    args: self, elapsed

@@ -1,5 +1,0 @@
----
-name: OnChar
-extends: ScriptType
-impl:
-  script: {}

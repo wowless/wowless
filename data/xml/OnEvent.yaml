@@ -1,6 +1,0 @@
----
-name: OnEvent
-extends: ScriptType
-impl:
-  script:
-    args: self, event, ...

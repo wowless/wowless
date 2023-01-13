@@ -157,17 +157,10 @@ local builds = {
     rule = 'stamp',
   },
   {
-    args = { product = 'xml' },
-    ins_implicit = { find('data/xml'), 'tools/prep.lua' },
-    outs_implicit = 'build/xml.lua',
-    rule = 'prep',
-  },
-  {
     ins = {
       'build/api.stamp',
       'build/state.stamp',
       'build/uiobjects.stamp',
-      'build/xml.lua',
       (function()
         local skip = {
           ['tools/mkninja.lua'] = true,
@@ -352,7 +345,7 @@ for _, p in ipairs(productList) do
   })
   table.insert(builds, {
     args = { product = p },
-    ins = { datadb, datalua, 'build/xml.lua' },
+    ins = { datadb, datalua },
     outs = p,
     rule = 'phony',
   })

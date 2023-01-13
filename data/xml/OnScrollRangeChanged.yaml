@@ -1,5 +1,0 @@
----
-name: OnScrollRangeChanged
-extends: ScriptType
-impl:
-  script: {}

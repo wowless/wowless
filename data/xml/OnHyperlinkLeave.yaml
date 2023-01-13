@@ -1,5 +1,0 @@
----
-name: OnHyperlinkLeave
-extends: ScriptType
-impl:
-  script: {}

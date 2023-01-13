@@ -1,5 +1,0 @@
----
-name: OnSizeChanged
-extends: ScriptType
-impl:
-  script: {}

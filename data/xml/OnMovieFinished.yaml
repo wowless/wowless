@@ -1,5 +1,0 @@
----
-name: OnMovieFinished
-extends: ScriptType
-impl:
-  script: {}

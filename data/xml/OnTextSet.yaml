@@ -1,5 +1,0 @@
----
-name: OnTextSet
-extends: ScriptType
-impl:
-  script: {}

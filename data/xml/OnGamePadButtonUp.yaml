@@ -1,5 +1,0 @@
----
-name: OnGamePadButtonUp
-extends: ScriptType
-impl:
-  script: {}

@@ -1,5 +1,0 @@
----
-name: OnLoad
-extends: ScriptType
-impl:
-  script: {}

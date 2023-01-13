@@ -1,6 +1,0 @@
----
-name: OnAttributeChanged
-extends: ScriptType
-impl:
-  script:
-    args: self, name, value

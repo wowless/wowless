@@ -1,5 +1,0 @@
----
-name: OnMovieHideSubtitle
-extends: ScriptType
-impl:
-  script: {}

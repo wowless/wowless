@@ -1,0 +1,1558 @@
+---
+AbsDimension:
+  attributes:
+    x:
+      type: number
+    y:
+      type: number
+  name: AbsDimension
+AbsInset:
+  attributes:
+    bottom:
+      type: number
+    left:
+      type: number
+    right:
+      type: number
+    top:
+      type: number
+  name: AbsInset
+AbsValue:
+  attributes:
+    val:
+      type: number
+  name: AbsValue
+Actor:
+  attributes:
+    mixin:
+      impl: internal
+      phase: early
+      type: stringlist
+    name:
+      type: string
+    virtual:
+      type: boolean
+  contents:
+  - Scripts
+  name: Actor
+Alpha:
+  attributes:
+    fromalpha:
+      impl:
+        method: SetFromAlpha
+      type: number
+    toalpha:
+      impl:
+        method: SetToAlpha
+      type: number
+  extends: Animation
+  name: Alpha
+Anchor:
+  attributes:
+    point:
+      type: string
+    relativekey:
+      type: string
+    relativepoint:
+      type: string
+    relativeto:
+      type: string
+    x:
+      type: number
+    y:
+      type: number
+  contents:
+  - Offset
+  name: Anchor
+Anchors:
+  contents:
+  - Anchor
+  impl: transparent
+  name: Anchors
+Animation:
+  attributes:
+    childkey:
+      type: string
+    duration:
+      impl:
+        method: SetDuration
+      type: number
+    enddelay:
+      impl:
+        method: SetEndDelay
+      type: number
+    order:
+      impl:
+        method: SetOrder
+      type: number
+    parentkey:
+      impl: internal
+      type: string
+    smoothing:
+      impl:
+        method: SetSmoothing
+      type: string
+    startdelay:
+      impl:
+        method: SetStartDelay
+      type: number
+    target:
+      impl:
+        method: SetTarget
+      type: string
+  contents:
+  - KeyValues
+  - Scripts
+  name: Animation
+AnimationGroup:
+  attributes:
+    looping:
+      impl:
+        method: SetLooping
+      type: string
+    settofinalalpha:
+      impl:
+        method: SetToFinalAlpha
+      type: boolean
+  contents:
+  - Animation
+  extends: LayoutFrame
+  name: AnimationGroup
+Animations:
+  contents:
+  - AnimationGroup
+  impl: transparent
+  name: Animations
+Attribute:
+  attributes:
+    name:
+      type: string
+    type:
+      type: string
+    value:
+      type: string
+  name: Attribute
+Attributes:
+  contents:
+  - Attribute
+  impl: transparent
+  name: Attributes
+BarColor:
+  extends: Color
+  name: BarColor
+BarTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetStatusBarTexture
+    parenttype: StatusBar
+  name: BarTexture
+Binding:
+  attributes:
+    category:
+      type: string
+    custombindingid:
+      type: string
+    debug:
+      type: boolean
+    default:
+      type: string
+    header:
+      type: string
+    hidden:
+      type: boolean
+    name:
+      type: string
+    runonup:
+      type: boolean
+  contents: text
+  name: Binding
+Bindings:
+  contents:
+  - Binding
+  - ModifiedClick
+  impl: transparent
+  name: Bindings
+BlingTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetBlingTexture
+    parenttype: Cooldown
+  name: BlingTexture
+Browser:
+  attributes:
+    imefont:
+      type: string
+  extends: Frame
+  name: Browser
+Button:
+  attributes:
+    motionscriptswhiledisabled:
+      impl:
+        method: SetMotionScriptsWhileDisabled
+      type: boolean
+    registerforclicks:
+      impl:
+        method: RegisterForClicks
+      type: stringlist
+    text:
+      impl:
+        method: SetText
+      phase: late
+      type: string
+  contents:
+  - ButtonFont
+  - ButtonText
+  - DisabledTexture
+  - HighlightTexture
+  - NormalTexture
+  - PushedTextOffset
+  - PushedTexture
+  extends: Frame
+  name: Button
+ButtonFont:
+  attributes:
+    style:
+      type: string
+  extends: Font
+  name: ButtonFont
+  virtual: true
+ButtonText:
+  extends: FontString
+  impl:
+    argument: self
+    parentmethod: SetFontString
+    parenttype: Button
+  name: ButtonText
+  phase: late
+CheckButton:
+  attributes:
+    checked:
+      impl:
+        method: SetChecked
+      type: boolean
+  contents:
+  - CheckedTexture
+  - DisabledCheckedTexture
+  extends: Button
+  name: CheckButton
+CheckedTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetCheckedTexture
+    parenttype: CheckButton
+  name: CheckedTexture
+Checkout:
+  attributes:
+    imefont:
+      type: string
+  extends: Frame
+  name: Checkout
+CinematicModel:
+  extends: Frame
+  name: CinematicModel
+Color:
+  attributes:
+    a:
+      type: number
+    b:
+      type: number
+    color:
+      type: string
+    g:
+      type: number
+    r:
+      type: number
+  name: Color
+ColorSelect:
+  contents:
+  - ColorValueTexture
+  - ColorValueThumbTexture
+  - ColorWheelTexture
+  - ColorWheelThumbTexture
+  extends: Frame
+  name: ColorSelect
+ColorValueTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetColorValueTexture
+    parenttype: ColorSelect
+  name: ColorValueTexture
+ColorValueThumbTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetColorValueThumbTexture
+    parenttype: ColorSelect
+  name: ColorValueThumbTexture
+ColorWheelTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetColorWheelTexture
+    parenttype: ColorSelect
+  name: ColorWheelTexture
+ColorWheelThumbTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetColorWheelThumbTexture
+    parenttype: ColorSelect
+  name: ColorWheelThumbTexture
+ControlPoint:
+  attributes:
+    offsetx:
+      type: number
+    offsety:
+      type: number
+  name: ControlPoint
+ControlPoints:
+  contents:
+  - ControlPoint
+  impl: transparent
+  name: ControlPoints
+Cooldown:
+  attributes:
+    drawedge:
+      impl:
+        method: SetDrawEdge
+      type: boolean
+    hidecountdownnumbers:
+      impl:
+        method: SetHideCountdownNumbers
+      type: boolean
+    reverse:
+      impl:
+        method: SetReverse
+      type: boolean
+  contents:
+  - BlingTexture
+  - EdgeTexture
+  - SwipeTexture
+  extends: Frame
+  name: Cooldown
+Dimension:
+  contents:
+  - AbsDimension
+  name: Dimension
+  virtual: true
+DisabledCheckedTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetDisabledCheckedTexture
+    parenttype: CheckButton
+  name: DisabledCheckedTexture
+DisabledFont:
+  extends: ButtonFont
+  impl:
+    argument: self
+    parentmethod: SetDisabledFontObject
+    parenttype: Button
+  name: DisabledFont
+DisabledTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetDisabledTexture
+    parenttype: Button
+  name: DisabledTexture
+DressUpModel:
+  attributes:
+    modelscale:
+      type: number
+  extends: Frame
+  name: DressUpModel
+EdgeTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetEdgeTexture
+    parenttype: Cooldown
+  name: EdgeTexture
+EditBox:
+  attributes:
+    autofocus:
+      type: boolean
+    bytes:
+      type: number
+    countinvisibleletters:
+      type: boolean
+    historylines:
+      type: number
+    ignorearrows:
+      type: boolean
+    invisiblebytes:
+      type: number
+    letters:
+      type: number
+    multiline:
+      type: boolean
+    numeric:
+      type: boolean
+    visiblebytes:
+      type: number
+  contents:
+  - FontString
+  - HighlightColor
+  - TextInsets
+  extends: Frame
+  name: EditBox
+FogOfWarFrame:
+  extends: Frame
+  name: FogOfWarFrame
+Font:
+  attributes:
+    filter:
+      type: boolean
+    fixedsize:
+      type: boolean
+    font:
+      type: string
+    height:
+      type: number
+    inherits:
+      type: stringlist
+    justifyh:
+      type: string
+    justifyv:
+      type: string
+    monochrome:
+      type: boolean
+    name:
+      type: string
+    outline:
+      type: string
+    spacing:
+      type: number
+    virtual:
+      type: boolean
+  contents:
+  - Color
+  - Shadow
+  name: Font
+FontFamily:
+  attributes:
+    name:
+      required: true
+      type: string
+    virtual:
+      type: boolean
+  contents:
+  - Member
+  name: FontFamily
+FontHeight:
+  extends: Value
+  name: FontHeight
+FontString:
+  attributes:
+    font:
+      type: string
+    justifyh:
+      type: string
+    justifyv:
+      type: string
+    maxlines:
+      type: number
+    nonspacewrap:
+      type: boolean
+    spacing:
+      type: number
+    text:
+      type: string
+    wordwrap:
+      type: boolean
+  contents:
+  - FontHeight
+  - Shadow
+  extends: LayoutFrame
+  name: FontString
+FontStringHeader1:
+  extends: FontString
+  name: FontStringHeader1
+FontStringHeader2:
+  extends: FontString
+  name: FontStringHeader2
+FontStringHeader3:
+  extends: FontString
+  name: FontStringHeader3
+Frame:
+  attributes:
+    clampedtoscreen:
+      impl:
+        method: SetClampedToScreen
+      type: boolean
+    clipchildren:
+      impl:
+        method: SetClipsChildren
+      type: boolean
+    debugid:
+      type: number
+    dontsaveposition:
+      type: boolean
+    enablekeyboard:
+      impl:
+        method: EnableKeyboard
+      type: boolean
+    enablemouse:
+      impl:
+        method: EnableMouse
+      type: boolean
+    enablemouseclicks:
+      type: boolean
+    enablemousemotion:
+      type: boolean
+    enablemousewheel:
+      impl:
+        method: EnableMouseWheel
+      type: boolean
+    flattenrenderlayers:
+      type: boolean
+    framelevel:
+      impl:
+        method: SetFrameLevel
+      type: number
+    framestrata:
+      impl:
+        method: SetFrameStrata
+      type: string
+    hyperlinksenabled:
+      impl:
+        method: SetHyperlinksEnabled
+      type: boolean
+    id:
+      impl:
+        method: SetID
+      type: number
+    intrinsic:
+      type: boolean
+    movable:
+      impl:
+        method: SetMovable
+      type: boolean
+    parent:
+      impl: internal
+      phase: early
+      type: string
+    propagatehyperlinkstoparent:
+      type: boolean
+    protected:
+      impl:
+        field: explicitlyProtected
+      type: boolean
+    resizable:
+      impl:
+        method: SetResizable
+      type: boolean
+    securemixin:
+      impl: internal
+      type: stringlist
+    toplevel:
+      impl:
+        method: SetToplevel
+      type: boolean
+    useparentlevel:
+      type: boolean
+  contents:
+  - Animations
+  - Attributes
+  - Frames
+  - HitRectInsets
+  - Layers
+  - ResizeBounds
+  extends: LayoutFrame
+  name: Frame
+Frames:
+  contents:
+  - Frame
+  impl: transparent
+  name: Frames
+  phase: late
+GameTooltip:
+  extends: Frame
+  name: GameTooltip
+Gradient:
+  attributes:
+    orientation:
+      type: string
+  contents:
+  - MaxColor
+  - MinColor
+  name: Gradient
+HighlightColor:
+  extends: Color
+  name: HighlightColor
+HighlightFont:
+  extends: ButtonFont
+  impl:
+    argument: self
+    parentmethod: SetHighlightFontObject
+    parenttype: Button
+  name: HighlightFont
+HighlightTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetHighlightTexture
+    parenttype: Button
+  name: HighlightTexture
+  phase: late
+HitRectInsets:
+  extends: Insets
+  name: HitRectInsets
+Include:
+  attributes:
+    file:
+      impl: loadfile
+      required: true
+      type: string
+  impl: transparent
+  name: Include
+Insets:
+  attributes:
+    bottom:
+      type: number
+    left:
+      type: number
+    right:
+      type: number
+    top:
+      type: number
+  contents:
+  - AbsInset
+  name: Insets
+  virtual: true
+KeyValue:
+  attributes:
+    key:
+      required: true
+      type: string
+    type:
+      type: string
+    value:
+      required: true
+      type: string
+  name: KeyValue
+KeyValues:
+  contents:
+  - KeyValue
+  impl: transparent
+  name: KeyValues
+Layer:
+  attributes:
+    level:
+      impl:
+        scope: layer
+      required: true
+      type: string
+    texturesublevel:
+      type: number
+  contents:
+  - FontString
+  - Line
+  - Texture
+  impl: transparent
+  name: Layer
+Layers:
+  contents:
+  - Layer
+  impl: transparent
+  name: Layers
+  phase: late
+LayoutFrame:
+  attributes:
+    alpha:
+      impl:
+        method: SetAlpha
+      type: number
+    hidden:
+      impl: internal
+      type: boolean
+    ignoreparentalpha:
+      impl:
+        method: SetIgnoreParentAlpha
+      type: boolean
+    ignoreparentscale:
+      impl:
+        method: SetIgnoreParentScale
+      type: boolean
+    inherits:
+      type: stringlist
+    mixin:
+      impl: internal
+      phase: early
+      type: stringlist
+    name:
+      type: string
+    parentarray:
+      impl: internal
+      type: string
+    parentkey:
+      impl: internal
+      type: string
+    scale:
+      impl:
+        method: SetScale
+      type: number
+    setallpoints:
+      impl: internal
+      type: boolean
+    virtual:
+      type: boolean
+  contents:
+  - Anchors
+  - Color
+  - KeyValues
+  - Scripts
+  - Size
+  name: LayoutFrame
+  virtual: true
+Line:
+  attributes:
+    alphamode:
+      type: string
+    atlas:
+      type: string
+    thickness:
+      type: number
+  extends: LayoutFrame
+  name: Line
+LineScale:
+  attributes:
+    fromscalex:
+      type: number
+    fromscaley:
+      type: number
+    toscalex:
+      type: number
+    toscaley:
+      type: number
+  contents:
+  - Origin
+  extends: Animation
+  name: LineScale
+MaskedTexture:
+  attributes:
+    childkey:
+      type: string
+  name: MaskedTexture
+MaskedTextures:
+  contents:
+  - MaskedTexture
+  impl: transparent
+  name: MaskedTextures
+MaskTexture:
+  attributes:
+    hwrapmode:
+      type: string
+    vwrapmode:
+      type: string
+  contents:
+  - MaskedTextures
+  extends: Texture
+  name: MaskTexture
+MaxColor:
+  extends: Color
+  name: MaxColor
+MaxResize:
+  extends: Dimension
+  name: MaxResize
+Member:
+  attributes:
+    alphabet:
+      required: true
+      type: string
+  contents:
+  - Font
+  name: Member
+MessageFrame:
+  attributes:
+    displayduration:
+      type: number
+    fadeduration:
+      type: number
+    fadepower:
+      type: number
+    insertmode:
+      type: string
+  contents:
+  - FontString
+  extends: Frame
+  name: MessageFrame
+MinColor:
+  extends: Color
+  name: MinColor
+Minimap:
+  extends: Frame
+  name: Minimap
+MinResize:
+  extends: Dimension
+  name: MinResize
+Model:
+  extends: Frame
+  name: Model
+ModelScene:
+  contents:
+  - ViewInsets
+  extends: Frame
+  name: ModelScene
+ModifiedClick:
+  attributes:
+    action:
+      type: string
+    default:
+      type: string
+  name: ModifiedClick
+MovieFrame:
+  extends: Frame
+  name: MovieFrame
+NormalFont:
+  extends: ButtonFont
+  impl:
+    argument: self
+    parentmethod: SetNormalFontObject
+    parenttype: Button
+  name: NormalFont
+NormalTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetNormalTexture
+    parenttype: Button
+  name: NormalTexture
+OffScreenFrame:
+  extends: Frame
+  name: OffScreenFrame
+Offset:
+  attributes:
+    x:
+      type: number
+    y:
+      type: number
+  contents:
+  - AbsDimension
+  name: Offset
+OnAnimFinished:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnAnimFinished
+OnAnimStarted:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnAnimStarted
+OnArrowPressed:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnArrowPressed
+OnAttributeChanged:
+  extends: ScriptType
+  impl:
+    script:
+      args: self, name, value
+  name: OnAttributeChanged
+OnButtonUpdate:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnButtonUpdate
+OnChar:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnChar
+OnCharComposition:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnCharComposition
+OnClick:
+  extends: ScriptType
+  impl:
+    script:
+      args: self, button, down
+  name: OnClick
+OnColorSelect:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnColorSelect
+OnCooldownDone:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnCooldownDone
+OnCursorChanged:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnCursorChanged
+OnDisable:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnDisable
+OnDoubleClick:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnDoubleClick
+OnDragStart:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnDragStart
+OnDragStop:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnDragStop
+OnDressModel:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnDressModel
+OnEditFocusGained:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnEditFocusGained
+OnEditFocusLost:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnEditFocusLost
+OnEnable:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnEnable
+OnEnter:
+  extends: ScriptType
+  impl:
+    script:
+      args: self, motion
+  name: OnEnter
+OnEnterPressed:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnEnterPressed
+OnError:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnError
+OnEscapePressed:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnEscapePressed
+OnEvent:
+  extends: ScriptType
+  impl:
+    script:
+      args: self, event, ...
+  name: OnEvent
+OnExternalLink:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnExternalLink
+OnFinished:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnFinished
+OnFocusGained:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnFocusGained
+OnGamePadButtonDown:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnGamePadButtonDown
+OnGamePadButtonUp:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnGamePadButtonUp
+OnHide:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnHide
+OnHyperlinkClick:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnHyperlinkClick
+OnHyperlinkEnter:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnHyperlinkEnter
+OnHyperlinkLeave:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnHyperlinkLeave
+OnInputLanguageChanged:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnInputLanguageChanged
+OnKeyDown:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnKeyDown
+OnKeyUp:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnKeyUp
+OnLeave:
+  extends: ScriptType
+  impl:
+    script:
+      args: self, motion
+  name: OnLeave
+OnLoad:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnLoad
+OnLoop:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnLoop
+OnModelCleared:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnModelCleared
+OnModelLoaded:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnModelLoaded
+OnMouseDown:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnMouseDown
+OnMouseEnter:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnMouseEnter
+OnMouseLeave:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnMouseLeave
+OnMouseUp:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnMouseUp
+OnMouseWheel:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnMouseWheel
+OnMovieFinished:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnMovieFinished
+OnMovieHideSubtitle:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnMovieHideSubtitle
+OnMovieShowSubtitle:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnMovieShowSubtitle
+OnPlay:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnPlay
+OnReceiveDrag:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnReceiveDrag
+OnRequestNewSize:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnRequestNewSize
+OnScrollRangeChanged:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnScrollRangeChanged
+OnShow:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnShow
+OnSizeChanged:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnSizeChanged
+OnSpacePressed:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnSpacePressed
+OnStop:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnStop
+OnTabPressed:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnTabPressed
+OnTextChanged:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnTextChanged
+OnTextSet:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnTextSet
+OnTooltipAddMoney:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnTooltipAddMoney
+OnTooltipCleared:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnTooltipCleared
+OnTooltipSetDefaultAnchor:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnTooltipSetDefaultAnchor
+OnTooltipSetFrameStack:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnTooltipSetFrameStack
+OnTooltipSetItem:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnTooltipSetItem
+OnTooltipSetSpell:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnTooltipSetSpell
+OnTooltipSetUnit:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnTooltipSetUnit
+OnUiMapChanged:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnUiMapChanged
+OnUpdate:
+  extends: ScriptType
+  impl:
+    script:
+      args: self, elapsed
+  name: OnUpdate
+OnValueChanged:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnValueChanged
+OnVerticalScroll:
+  extends: ScriptType
+  impl:
+    script: {}
+  name: OnVerticalScroll
+Origin:
+  attributes:
+    point:
+      type: string
+  contents:
+  - Offset
+  name: Origin
+Path:
+  attributes:
+    curve:
+      type: string
+  contents:
+  - ControlPoints
+  extends: Animation
+  name: Path
+PlayerModel:
+  extends: Frame
+  name: PlayerModel
+POIFrame:
+  extends: Frame
+  name: POIFrame
+  virtual: true
+PostClick:
+  extends: ScriptType
+  impl:
+    script:
+      args: self, button, down
+  name: PostClick
+PreClick:
+  extends: ScriptType
+  impl:
+    script:
+      args: self, button, down
+  name: PreClick
+PushedFont:
+  extends: ButtonFont
+  name: PushedFont
+PushedTextOffset:
+  extends: Offset
+  name: PushedTextOffset
+PushedTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetPushedTexture
+    parenttype: Button
+  name: PushedTexture
+QuestPOIFrame:
+  extends: POIFrame
+  name: QuestPOIFrame
+Rect:
+  attributes:
+    llx:
+      type: number
+    lly:
+      type: number
+    lrx:
+      type: number
+    lry:
+      type: number
+    ulx:
+      type: number
+    uly:
+      type: number
+    urx:
+      type: number
+    ury:
+      type: number
+  name: Rect
+ResizeBounds:
+  contents:
+  - MaxResize
+  - MinResize
+  impl: transparent
+  name: ResizeBounds
+Rotation:
+  attributes:
+    degrees:
+      type: number
+  extends: Animation
+  name: Rotation
+Scale:
+  attributes:
+    fromscalex:
+      type: number
+    fromscaley:
+      type: number
+    scalex:
+      type: number
+    scaley:
+      type: number
+    toscalex:
+      type: number
+    toscaley:
+      type: number
+  contents:
+  - Origin
+  extends: Animation
+  name: Scale
+ScenarioPOIFrame:
+  extends: POIFrame
+  name: ScenarioPOIFrame
+ScopedModifier:
+  attributes:
+    forbidden:
+      type: boolean
+    fulllockdown:
+      type: boolean
+    scriptsusegivenenv:
+      impl:
+        scope: useAddonEnv
+      type: boolean
+  contents:
+  - Actor
+  - LayoutFrame
+  impl: transparent
+  name: ScopedModifier
+Script:
+  attributes:
+    file:
+      impl: loadfile
+      type: string
+  contents: text
+  impl: loadstring
+  name: Script
+Scripts:
+  contents:
+  - ScriptType
+  impl: transparent
+  name: Scripts
+ScriptType:
+  attributes:
+    autoenableinput:
+      type: boolean
+    function:
+      type: string
+    inherit:
+      type: string
+    intrinsicorder:
+      type: string
+    method:
+      type: string
+  contents: text
+  name: ScriptType
+  virtual: true
+ScrollChild:
+  contents:
+  - Frame
+  impl:
+    argument: lastkid
+    parentmethod: SetScrollChild
+    parenttype: ScrollFrame
+  name: ScrollChild
+ScrollFrame:
+  contents:
+  - ScrollChild
+  extends: Frame
+  name: ScrollFrame
+Shadow:
+  attributes:
+    x:
+      type: number
+    y:
+      type: number
+  contents:
+  - Color
+  - Offset
+  impl:
+    scope: shadow
+  name: Shadow
+SimpleHTML:
+  contents:
+  - FontString
+  - FontStringHeader1
+  - FontStringHeader2
+  - FontStringHeader3
+  extends: Frame
+  name: SimpleHTML
+Size:
+  attributes:
+    x:
+      type: number
+    y:
+      type: number
+  contents:
+  - AbsDimension
+  name: Size
+Slider:
+  attributes:
+    defaultvalue:
+      impl:
+        method: SetValue
+      type: number
+    maxvalue:
+      type: number
+    minvalue:
+      type: number
+    obeystepondrag:
+      impl:
+        method: SetObeyStepOnDrag
+      type: boolean
+    orientation:
+      impl:
+        method: SetOrientation
+      type: string
+    stepsperpage:
+      impl:
+        method: SetStepsPerPage
+      type: number
+    valuestep:
+      impl:
+        method: SetValueStep
+      type: number
+  contents:
+  - ThumbTexture
+  extends: Frame
+  name: Slider
+StatusBar:
+  attributes:
+    defaultvalue:
+      impl:
+        method: SetValue
+      type: number
+    drawlayer:
+      type: string
+    maxvalue:
+      type: number
+    minvalue:
+      type: number
+    reversefill:
+      impl:
+        method: SetReverseFill
+      type: boolean
+  contents:
+  - BarColor
+  - BarTexture
+  extends: Frame
+  name: StatusBar
+SwipeTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetSwipeTexture
+    parenttype: Cooldown
+  name: SwipeTexture
+TabardModel:
+  extends: Frame
+  name: TabardModel
+TexCoords:
+  attributes:
+    bottom:
+      type: number
+    left:
+      type: number
+    right:
+      type: number
+    top:
+      type: number
+  contents:
+  - Rect
+  name: TexCoords
+TextInsets:
+  extends: Insets
+  name: TextInsets
+Texture:
+  attributes:
+    alphamode:
+      impl:
+        method: SetBlendMode
+      type: string
+    atlas:
+      impl:
+        method: SetAtlas
+      type: string
+    desaturated:
+      impl:
+        method: SetDesaturated
+      type: boolean
+    file:
+      impl:
+        method: SetTexture
+      type: string
+    horiztile:
+      impl:
+        method: SetHorizTile
+      type: boolean
+    nonblocking:
+      impl:
+        method: SetNonBlocking
+      type: boolean
+    snaptopixelgrid:
+      impl:
+        method: SetSnapToPixelGrid
+      type: boolean
+    texelsnappingbias:
+      impl:
+        method: SetTexelSnappingBias
+      type: number
+    useatlassize:
+      type: boolean
+    verttile:
+      impl:
+        method: SetVertTile
+      type: boolean
+  contents:
+  - Animations
+  - Gradient
+  - TexCoords
+  extends: LayoutFrame
+  name: Texture
+TextureCoordTranslation:
+  extends: Animation
+  name: TextureCoordTranslation
+ThumbTexture:
+  extends: Texture
+  impl:
+    argument: self
+    parentmethod: SetThumbTexture
+    parenttype: Slider
+  name: ThumbTexture
+Translation:
+  attributes:
+    offsetx:
+      type: number
+    offsety:
+      type: number
+  extends: Animation
+  name: Translation
+Ui:
+  contents:
+  - Actor
+  - Font
+  - FontFamily
+  - Include
+  - LayoutFrame
+  - ScopedModifier
+  - Script
+  impl: transparent
+  name: Ui
+UnitPositionFrame:
+  extends: Frame
+  name: UnitPositionFrame
+Value:
+  contents:
+  - AbsValue
+  name: Value
+ViewInsets:
+  attributes:
+    bottom:
+      type: number
+    left:
+      type: number
+    right:
+      type: number
+    top:
+      type: number
+  name: ViewInsets
+WorldFrame:
+  extends: Frame
+  name: WorldFrame
