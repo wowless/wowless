@@ -1,92 +1,95 @@
 ---
 name: xml
 type:
-  record:
-    attributes:
-      type:
-        mapof:
-          key: string
-          value:
-            record:
-              impl:
-                type:
-                  oneof:
-                  - literal: internal
-                  - literal: loadfile
-                  - record:
-                      field:
-                        required: true
-                        type: string
-                  - record:
-                      method:
-                        required: true
-                        type: string
-                  - record:
-                      scope:
-                        required: true
-                        type: string
-              phase:
-                type:
-                  oneof:
-                  - literal: early
-                  - literal: middle
-                  - literal: late
-              required:
-                type: boolean
-              type:
-                required: true
-                type:
-                  oneof:
-                  - literal: boolean
-                  - literal: number
-                  - literal: string
-                  - literal: stringlist
-    contents:
-      type:
-        oneof:
-        - literal: text
-        - sequenceof:
-            ref: xml
-    extends:
-      type:
-        ref: xml
-    impl:
-      type:
-        oneof:
-        - record:
-            argument:
-              required: true
-              type:
-                oneof:
-                - literal: lastkid
-                - literal: self
-            parentmethod:
-              required: true
-              type: string
-            parenttype:
-              required: true
-              type:
-                ref: uiobject
-        - record:
-            scope:
-              required: true
-              type: string
-        - record:
-            script:
-              required: true
-              type:
+  mapof:
+    key: string
+    value:
+      record:
+        attributes:
+          type:
+            mapof:
+              key: string
+              value:
                 record:
-                  args:
-                    type: string
-        - literal: loadstring
-        - literal: transparent
-    name:
-      required: true
-      type: string
-    phase:
-      type:
-        oneof:
-        - literal: middle
-        - literal: late
-    virtual:
-      type: boolean
+                  impl:
+                    type:
+                      oneof:
+                      - literal: internal
+                      - literal: loadfile
+                      - record:
+                          field:
+                            required: true
+                            type: string
+                      - record:
+                          method:
+                            required: true
+                            type: string
+                      - record:
+                          scope:
+                            required: true
+                            type: string
+                  phase:
+                    type:
+                      oneof:
+                      - literal: early
+                      - literal: middle
+                      - literal: late
+                  required:
+                    type: boolean
+                  type:
+                    required: true
+                    type:
+                      oneof:
+                      - literal: boolean
+                      - literal: number
+                      - literal: string
+                      - literal: stringlist
+        contents:
+          type:
+            oneof:
+            - literal: text
+            - sequenceof:
+                ref: xml
+        extends:
+          type:
+            ref: xml
+        impl:
+          type:
+            oneof:
+            - record:
+                argument:
+                  required: true
+                  type:
+                    oneof:
+                    - literal: lastkid
+                    - literal: self
+                parentmethod:
+                  required: true
+                  type: string
+                parenttype:
+                  required: true
+                  type:
+                    ref: uiobject
+            - record:
+                scope:
+                  required: true
+                  type: string
+            - record:
+                script:
+                  required: true
+                  type:
+                    record:
+                      args:
+                        type: string
+            - literal: loadstring
+            - literal: transparent
+        name:
+          required: true
+          type: string
+        phase:
+          type:
+            oneof:
+            - literal: middle
+            - literal: late
+        virtual:
+          type: boolean
