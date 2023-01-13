@@ -1,4 +1,3 @@
-
 local function loader(api, cfg)
   local rootDir = cfg and cfg.rootDir
   local product = cfg and cfg.product
@@ -38,7 +37,6 @@ local function loader(api, cfg)
   end)()
 
   local xmlimpls = (function()
-    local mixin = require('wowless.util').mixin
     local tree = datalua.xml
     local newtree = {}
     for k, v in pairs(tree) do
