@@ -6,7 +6,6 @@ local dirschemas = {
   api = 'api',
   schemas = 'schema',
   state = 'state',
-  xml = 'xml',
 }
 
 local productschemas = {
@@ -16,6 +15,7 @@ local productschemas = {
   events = 'events',
   globals = 'globals',
   structures = 'structures',
+  xml = 'xml',
 }
 
 local products = require('wowless.util').productList()

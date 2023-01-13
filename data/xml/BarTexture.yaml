@@ -1,7 +1,0 @@
----
-name: BarTexture
-extends: Texture
-impl:
-  argument: self
-  parentmethod: SetStatusBarTexture
-  parenttype: StatusBar

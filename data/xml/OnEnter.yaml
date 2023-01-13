@@ -1,6 +1,0 @@
----
-name: OnEnter
-extends: ScriptType
-impl:
-  script:
-    args: self, motion

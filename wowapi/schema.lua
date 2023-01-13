@@ -6,10 +6,10 @@ local domains = {
   sqllookup = wdata.sqllookup,
   state = wdata.state,
   uiobject = wdata.uiobjects,
-  xml = wdata.xml,
 }
 local productDomains = {
   structure = wdata.structures,
+  xml = wdata.xml,
 }
 
 local function validate(product, schematype, v)

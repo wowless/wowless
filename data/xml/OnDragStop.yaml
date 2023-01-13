@@ -1,5 +1,0 @@
----
-name: OnDragStop
-extends: ScriptType
-impl:
-  script: {}

@@ -1,5 +1,0 @@
----
-name: KeyValues
-contents:
-- KeyValue
-impl: transparent

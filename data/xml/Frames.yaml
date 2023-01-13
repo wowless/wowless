@@ -1,6 +1,0 @@
----
-name: Frames
-contents:
-- Frame
-impl: transparent
-phase: late

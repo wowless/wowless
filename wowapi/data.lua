@@ -52,7 +52,7 @@ local fns = {
   state = loaddir('state', 'yaml'),
   structures = perproduct('structures'),
   uiobjects = loadUIObjects,
-  xml = loaddir('xml', 'yaml'),
+  xml = perproduct('xml'),
 }
 
 return setmetatable({}, {

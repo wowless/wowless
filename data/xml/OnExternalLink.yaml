@@ -1,5 +1,0 @@
----
-name: OnExternalLink
-extends: ScriptType
-impl:
-  script: {}

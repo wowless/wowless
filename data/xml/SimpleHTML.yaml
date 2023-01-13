@@ -1,8 +1,0 @@
----
-name: SimpleHTML
-contents:
-- FontString
-- FontStringHeader1
-- FontStringHeader2
-- FontStringHeader3
-extends: Frame

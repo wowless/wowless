@@ -1,5 +1,0 @@
----
-name: OnTooltipAddMoney
-extends: ScriptType
-impl:
-  script: {}

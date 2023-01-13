@@ -1,5 +1,0 @@
----
-name: ScrollFrame
-contents:
-- ScrollChild
-extends: Frame

@@ -1,5 +1,0 @@
----
-name: OnEnterPressed
-extends: ScriptType
-impl:
-  script: {}

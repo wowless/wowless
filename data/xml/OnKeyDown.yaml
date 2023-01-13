@@ -1,5 +1,0 @@
----
-name: OnKeyDown
-extends: ScriptType
-impl:
-  script: {}

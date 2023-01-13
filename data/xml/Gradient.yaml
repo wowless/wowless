@@ -1,8 +1,0 @@
----
-name: Gradient
-attributes:
-  orientation:
-    type: string
-contents:
-- MaxColor
-- MinColor

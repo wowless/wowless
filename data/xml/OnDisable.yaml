@@ -1,5 +1,0 @@
----
-name: OnDisable
-extends: ScriptType
-impl:
-  script: {}
