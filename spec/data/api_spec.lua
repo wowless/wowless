@@ -1,8 +1,9 @@
 describe('api', function()
   local yaml = require('wowapi.yaml')
+  local products = require('wowless.util').productList()
   local used = {}
-  for _, d in ipairs(require('pl.dir').getdirectories('data/products')) do
-    for _, v in pairs(yaml.parseFile(d .. '/apis.yaml')) do
+  for _, p in ipairs(products) do
+    for _, v in pairs(yaml.parseFile('data/products/' .. p .. '/apis.yaml')) do
       used[v] = true
     end
   end
@@ -32,4 +33,18 @@ describe('api', function()
       end)
     end
   end
+  local schema = yaml.parseFile('data/schemas/api.yaml').type
+  describe('schema', function()
+    for _, p in ipairs(products) do
+      describe(p, function()
+        for k, v in pairs(yaml.parseFile('data/products/' .. p .. '/apis.yaml')) do
+          describe(k, function()
+            it('validates', function()
+              require('wowapi.schema').validate(p, schema, data.apis[v])
+            end)
+          end)
+        end
+      end)
+    end
+  end)
 end)

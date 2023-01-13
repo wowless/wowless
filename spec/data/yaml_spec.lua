@@ -37,12 +37,14 @@ describe('yaml', function()
             it('has the right name', function()
               assert.same(name, data.name)
             end)
-            for _, p in ipairs(products) do
-              describe(p, function()
-                it('schema validates', function()
-                  validate(p, schema, data)
+            if schemaname ~= 'api' then
+              for _, p in ipairs(products) do
+                describe(p, function()
+                  it('schema validates', function()
+                    validate(p, schema, data)
+                  end)
                 end)
-              end)
+              end
             end
           end)
         end
