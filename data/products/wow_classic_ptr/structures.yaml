@@ -1410,6 +1410,30 @@ C_PvP.BattlefieldItemReward:
     type: number
   - name: texture
     type: number
+C_PvP.BattlefieldVehicleInfo:
+  fields:
+  - name: atlas
+    type: string
+  - name: facing
+    type: number
+  - name: isAlive
+    type: boolean
+  - name: isOccupied
+    type: boolean
+  - name: isPlayer
+    type: boolean
+  - name: name
+    type: string
+  - name: shouldDrawBelowPlayerBlips
+    type: boolean
+  - name: textureHeight
+    type: number
+  - name: textureWidth
+    type: number
+  - name: x
+    type: number
+  - name: y
+    type: number
 C_QuestLog.QuestObjectiveInfo:
   fields:
   - name: finished
