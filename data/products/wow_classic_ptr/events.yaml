@@ -3188,7 +3188,9 @@ COMPANION_UPDATE:
     nilable: true
     type: string
 CONFIG_COMMIT_FAILED:
-  payload: {}
+  payload:
+  - name: configID
+    type: number
 CONFIRM_BARBERS_CHOICE:
   payload:
   - name: cost
@@ -3339,7 +3341,11 @@ DUEL_REQUESTED:
 DYNAMIC_GOSSIP_POI_UPDATED:
   payload: {}
 EDIT_MODE_LAYOUTS_UPDATED:
-  payload: {}
+  payload:
+  - name: layoutInfo
+    type: C_EditMode.EditModeLayouts
+  - name: fromServer
+    type: boolean
 ENABLE_DECLINE_GUILD_INVITE:
   payload: {}
 ENABLE_LOW_LEVEL_RAID:
@@ -3417,7 +3423,9 @@ EXECUTE_CHAT_LINE:
   - name: chatLine
     type: string
 EXPAND_BAG_BAR_CHANGED:
-  payload: {}
+  payload:
+  - name: expandBagBar
+    type: boolean
 EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED:
   payload: {}
 FIRST_FRAME_RENDERED:
@@ -3458,6 +3466,10 @@ GENERIC_ERROR:
   payload:
   - name: errorMessage
     type: string
+GENERIC_WIDGET_DISPLAY_SHOW:
+  payload:
+  - name: info
+    type: C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo
 GET_ITEM_INFO_RECEIVED:
   payload:
   - name: itemID
@@ -3500,7 +3512,7 @@ GOSSIP_CLOSED:
   payload: {}
 GOSSIP_CONFIRM:
   payload:
-  - name: gossipIndex
+  - name: gossipID
     type: number
   - name: text
     type: string
@@ -3510,10 +3522,13 @@ GOSSIP_CONFIRM_CANCEL:
   payload: {}
 GOSSIP_ENTER_CODE:
   payload:
-  - name: gossipIndex
+  - name: gossipID
     type: number
 GOSSIP_SHOW:
-  payload: {}
+  payload:
+  - name: uiTextureKit
+    nilable: true
+    type: string
 GROUP_FORMED:
   payload:
   - name: category
@@ -3650,6 +3665,8 @@ HEIRLOOMS_UPDATED:
   - name: hideUntilLearned
     nilable: true
     type: boolean
+HIDE_HYPERLINK_TOOLTIP:
+  payload: {}
 HIDE_SUBTITLE:
   payload: {}
 IGNORELIST_UPDATE:
@@ -4432,9 +4449,13 @@ PLAYER_GUILD_UPDATE:
   - name: unitTarget
     type: string
 PLAYER_INTERACTION_MANAGER_FRAME_HIDE:
-  payload: {}
+  payload:
+  - name: type
+    type: number
 PLAYER_INTERACTION_MANAGER_FRAME_SHOW:
-  payload: {}
+  payload:
+  - name: type
+    type: number
 PLAYER_LEAVE_COMBAT:
   payload: {}
 PLAYER_LEAVING_WORLD:
@@ -4512,6 +4533,12 @@ PLAYER_SOFT_ENEMY_CHANGED:
 PLAYER_SOFT_FRIEND_CHANGED:
   payload: {}
 PLAYER_SOFT_INTERACT_CHANGED:
+  payload:
+  - name: oldTarget
+    type: string
+  - name: newTarget
+    type: string
+PLAYER_SOFT_TARGET_INTERACTION:
   payload: {}
 PLAYER_STARTED_LOOKING:
   payload: {}
@@ -4593,6 +4620,8 @@ PVP_TIMER_UPDATE:
   payload:
   - name: unitTarget
     type: string
+PVP_VEHICLE_INFO_UPDATED:
+  payload: {}
 PVP_WORLDSTATE_UPDATE:
   payload: {}
 QUEST_ACCEPT_CONFIRM:
@@ -4771,6 +4800,12 @@ REPLACE_ENCHANT:
     type: string
   - name: replacementStr
     type: string
+REPLACE_TRADESKILL_ENCHANT:
+  payload:
+  - name: existing
+    type: string
+  - name: replacement
+    type: string
 REPORT_PLAYER_RESULT:
   payload:
   - name: success
@@ -4846,6 +4881,10 @@ SET_DEBUG_TOOL_VISIBLE:
   payload: {}
 SETTINGS_LOADED:
   payload: {}
+SHOW_HYPERLINK_TOOLTIP:
+  payload:
+  - name: hyperlink
+    type: string
 SHOW_LFG_EXPAND_SEARCH_PROMPT:
   payload: {}
 SHOW_LOOT_TOAST_LEGENDARY_LOOTED:
@@ -5038,6 +5077,10 @@ STOP_AUTOREPEAT_SPELL:
   payload: {}
 STOP_MOVIE:
   payload: {}
+STOP_TIMER_OF_TYPE:
+  payload:
+  - name: timerType
+    type: number
 STORE_BOOST_AUTO_CONSUMED:
   payload: {}
 STORE_CHARACTER_LIST_RECEIVED:
@@ -5094,6 +5137,8 @@ SYSMSG:
     type: number
   - name: b
     type: number
+SYSTEM_VISIBILITY_CHANGED:
+  payload: {}
 TABARD_CANSAVE_CHANGED:
   payload: {}
 TABARD_SAVE_PENDING:
@@ -5172,6 +5217,8 @@ TOKEN_SELL_RESULT:
   - name: result
     type: number
 TOKEN_STATUS_CHANGED:
+  payload: {}
+TOOLTIP_DATA_UPDATE:
   payload: {}
 TOYS_UPDATED:
   payload:
@@ -5272,29 +5319,51 @@ TRAINER_SHOW:
 TRAINER_UPDATE:
   payload: {}
 TRAIT_COND_INFO_CHANGED:
-  payload: {}
+  payload:
+  - name: condID
+    type: number
 TRAIT_CONFIG_CREATED:
-  payload: {}
+  payload:
+  - name: configInfo
+    type: C_Traits.TraitConfigInfo
 TRAIT_CONFIG_DELETED:
-  payload: {}
+  payload:
+  - name: configID
+    type: number
 TRAIT_CONFIG_LIST_UPDATED:
   payload: {}
 TRAIT_CONFIG_UPDATED:
-  payload: {}
+  payload:
+  - name: configID
+    type: number
 TRAIT_NODE_CHANGED:
-  payload: {}
+  payload:
+  - name: nodeID
+    type: number
 TRAIT_NODE_CHANGED_PARTIAL:
-  payload: {}
+  payload:
+  - name: ID
+    type: number
+  - name: info
+    type: C_Traits.TraitNodeInfoPartial
 TRAIT_NODE_ENTRY_UPDATED:
-  payload: {}
+  payload:
+  - name: nodeEntryID
+    type: number
 TRAIT_SYSTEM_INTERACTION_STARTED:
-  payload: {}
+  payload:
+  - name: treeID
+    type: number
 TRAIT_SYSTEM_NPC_CLOSED:
   payload: {}
 TRAIT_TREE_CHANGED:
-  payload: {}
+  payload:
+  - name: treeID
+    type: number
 TRAIT_TREE_CURRENCY_INFO_UPDATED:
-  payload: {}
+  payload:
+  - name: treeID
+    type: number
 TRANSMOG_OUTFITS_CHANGED:
   payload: {}
 TRIAL_CAP_REACHED_LEVEL:
@@ -5446,7 +5515,9 @@ UNIT_FLAGS:
   - name: unitTarget
     type: string
 UNIT_FORM_CHANGED:
-  payload: {}
+  payload:
+  - name: unitTarget
+    type: string
 UNIT_HAPPINESS:
   payload:
   - name: unitTarget
@@ -5775,7 +5846,9 @@ UPDATE_WEB_TICKET:
 USE_BIND_CONFIRM:
   payload: {}
 USE_COMBINED_BAGS_CHANGED:
-  payload: {}
+  payload:
+  - name: useCombinedBags
+    type: boolean
 USE_GLYPH:
   payload:
   - name: spellID

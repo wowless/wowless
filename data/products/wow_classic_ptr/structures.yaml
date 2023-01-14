@@ -815,6 +815,13 @@ C_DeathInfo.SelfResurrectOption:
     type: number
   - name: priority
     type: number
+C_EditMode.EditModeLayouts:
+  fields:
+  - name: activeLayout
+    type: number
+  - innerType: C_EditMode.EditModeLayoutInfo
+    name: layouts
+    type: table
 C_FriendList.FriendInfo:
   fields:
   - name: afk
@@ -932,6 +939,21 @@ C_GamePad.GamePadRawState:
     name: rawButtons
     type: table
   - name: vendorID
+    type: number
+C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo:
+  fields:
+  - name: frameHeight
+    type: number
+  - name: frameWidth
+    type: number
+  - name: title
+    nilable: true
+    type: string
+  - name: uiTextureKit
+    nilable: true
+    type: string
+  - name: uiWidgetSetID
+    nilable: true
     type: number
 C_GossipInfo.FriendshipReputationInfo:
   fields:
@@ -1601,6 +1623,48 @@ C_Texture.AtlasInfo:
   - name: topTexCoord
     type: number
   - name: width
+    type: number
+C_Traits.TraitConfigInfo:
+  fields:
+  - name: ID
+    type: number
+  - name: name
+    type: string
+  - innerType: number
+    name: treeIDs
+    type: table
+  - name: type
+    type: number
+  - name: usesSharedActionBars
+    type: boolean
+C_Traits.TraitNodeInfoPartial:
+  fields:
+  - name: activeRank
+    nilable: true
+    type: number
+  - name: canPurchaseRank
+    nilable: true
+    type: boolean
+  - name: canRefundRank
+    nilable: true
+    type: boolean
+  - name: currentRank
+    nilable: true
+    type: number
+  - name: isAvailable
+    nilable: true
+    type: boolean
+  - name: isCascadeRepurchasable
+    nilable: true
+    type: boolean
+  - name: isVisible
+    nilable: true
+    type: boolean
+  - name: meetsEdgeRequirements
+    nilable: true
+    type: boolean
+  - name: ranksPurchased
+    nilable: true
     type: number
 C_UIColor.DBColorExport:
   fields:
