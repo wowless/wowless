@@ -1,8 +1,0 @@
----
-name: GetRewardHonor
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: value
-  type: number

@@ -1,9 +1,0 @@
----
-name: IsContainerFiltered
-status: unimplemented
-inputs:
-- - name: index
-    type: number
-outputs:
-- name: value
-  type: boolean

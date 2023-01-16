@@ -1,8 +1,0 @@
----
-name: GetNumGlyphSockets
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: numGlyphSockets
-  type: number

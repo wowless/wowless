@@ -1,9 +1,0 @@
----
-name: GetGuildBankText
-status: unimplemented
-inputs:
-- - name: tabIndex
-    type: number
-outputs:
-- name: text
-  type: string

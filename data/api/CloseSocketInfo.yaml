@@ -1,6 +1,0 @@
----
-name: CloseSocketInfo
-status: unimplemented
-inputs:
-- {}
-outputs: {}

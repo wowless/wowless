@@ -1,7 +1,0 @@
----
-name: GetCombatRatingBonus
-status: unimplemented
-inputs:
-- - type: number
-outputs:
-- type: number

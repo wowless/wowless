@@ -1,8 +1,0 @@
----
-name: VehicleAimDecrement
-status: unimplemented
-inputs:
-- - name: amount
-    nilable: true
-    type: number
-outputs: {}

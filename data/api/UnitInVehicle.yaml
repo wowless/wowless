@@ -1,7 +1,0 @@
----
-name: UnitInVehicle
-status: unimplemented
-inputs:
-- - type: string
-outputs:
-- type: boolean

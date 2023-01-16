@@ -1,7 +1,0 @@
----
-name: PlayerIsPVPInactive
-status: unimplemented
-inputs:
-- - type: unit
-outputs:
-- type: boolean

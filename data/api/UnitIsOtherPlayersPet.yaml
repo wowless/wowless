@@ -1,8 +1,0 @@
----
-name: UnitIsOtherPlayersPet
-status: unimplemented
-inputs:
-- - nilable: true
-    type: string
-outputs:
-- type: boolean

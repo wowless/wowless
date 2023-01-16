@@ -1,7 +1,0 @@
----
-name: GetNumTradeSkills
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

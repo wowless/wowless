@@ -1,8 +1,0 @@
----
-name: GetAttackPowerForStat
-status: unimplemented
-inputs:
-- - type: number
-  - type: number
-outputs:
-- type: number

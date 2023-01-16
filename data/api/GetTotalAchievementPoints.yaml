@@ -1,8 +1,0 @@
----
-name: GetTotalAchievementPoints
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: points
-  type: number

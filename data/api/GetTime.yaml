@@ -1,7 +1,0 @@
----
-name: GetTime
-status: implemented
-outputs:
-- type: number
-states:
-- Time

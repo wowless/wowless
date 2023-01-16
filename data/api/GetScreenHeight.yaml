@@ -1,7 +1,0 @@
----
-name: GetScreenHeight
-status: implemented
-outputs:
-- type: number
-states:
-- System

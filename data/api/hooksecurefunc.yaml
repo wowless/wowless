@@ -1,6 +1,0 @@
----
-name: hooksecurefunc
-status: implemented
-outputs: {}
-frameworks:
-- env

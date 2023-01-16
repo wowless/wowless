@@ -1,7 +1,0 @@
----
-name: GetBattlefieldArenaFaction
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

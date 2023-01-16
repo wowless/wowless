@@ -1,7 +1,0 @@
----
-name: GetScreenWidth
-status: implemented
-outputs:
-- type: number
-states:
-- System

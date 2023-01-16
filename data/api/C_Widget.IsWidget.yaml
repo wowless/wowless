@@ -1,9 +1,0 @@
----
-name: C_Widget.IsWidget
-status: unimplemented
-inputs:
-- - name: object
-    type: unknown
-outputs:
-- name: value
-  type: boolean

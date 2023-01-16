@@ -1,5 +1,0 @@
----
-name: GetNumArenaOpponentSpecs
-status: unimplemented
-outputs:
-- type: number

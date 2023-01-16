@@ -1,5 +1,0 @@
----
-name: GetGuildRosterMOTD
-status: unimplemented
-outputs:
-- type: string

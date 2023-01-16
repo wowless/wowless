@@ -1,6 +1,0 @@
----
-name: C_StoreSecure.GetProductList
-status: unimplemented
-inputs:
-- {}
-outputs: {}

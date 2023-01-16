@@ -1,7 +1,0 @@
----
-name: QueryGuildBankTab
-status: unimplemented
-inputs:
-- - name: index
-    type: number
-outputs: {}

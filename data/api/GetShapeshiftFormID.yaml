@@ -1,8 +1,0 @@
----
-name: GetShapeshiftFormID
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: index
-  type: number

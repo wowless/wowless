@@ -1,8 +1,0 @@
----
-name: GetExpertisePercent
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number
-- type: number

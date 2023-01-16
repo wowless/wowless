@@ -1,8 +1,0 @@
----
-name: GetQuestGreenRange
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: range
-  type: number

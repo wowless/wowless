@@ -1,7 +1,0 @@
----
-name: UnitHasLFGDeserter
-status: unimplemented
-inputs:
-- - type: string
-outputs:
-- type: boolean

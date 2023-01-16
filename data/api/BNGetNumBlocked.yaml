@@ -1,8 +1,0 @@
----
-name: BNGetNumBlocked
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: numBlocked
-  type: number

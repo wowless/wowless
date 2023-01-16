@@ -1,9 +1,0 @@
----
-name: HaveQuestData
-status: unimplemented
-inputs:
-- - name: questID
-    type: number
-outputs:
-- name: value
-  type: boolean

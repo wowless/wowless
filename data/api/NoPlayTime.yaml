@@ -1,7 +1,0 @@
----
-name: NoPlayTime
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: boolean

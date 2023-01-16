@@ -1,8 +1,0 @@
----
-name: GetGuildRosterShowOffline
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: value
-  type: boolean

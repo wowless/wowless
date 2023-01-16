@@ -1,7 +1,0 @@
----
-name: C_TradeSkillUI.IsTradeSkillReady
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: boolean

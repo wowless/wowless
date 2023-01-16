@@ -1,5 +1,0 @@
----
-name: GetPlayerTradeMoney
-status: unimplemented
-outputs:
-- type: number

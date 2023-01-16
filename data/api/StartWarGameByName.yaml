@@ -1,8 +1,0 @@
----
-name: StartWarGameByName
-status: unimplemented
-inputs:
-- - name: args
-    nilable: true
-    type: string
-outputs: {}

@@ -1,8 +1,0 @@
----
-name: GetSpellSubtext
-status: unimplemented
-inputs:
-- - nilable: true
-    type: number
-outputs:
-- type: nil

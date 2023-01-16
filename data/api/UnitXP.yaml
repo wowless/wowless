@@ -1,7 +1,0 @@
----
-name: UnitXP
-status: unimplemented
-inputs:
-- - type: string
-outputs:
-- type: number

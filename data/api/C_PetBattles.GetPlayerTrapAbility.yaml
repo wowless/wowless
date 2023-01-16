@@ -1,8 +1,0 @@
----
-name: C_PetBattles.GetPlayerTrapAbility
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: trapAbilityID
-  type: number

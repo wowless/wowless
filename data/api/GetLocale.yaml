@@ -1,9 +1,0 @@
----
-name: GetLocale
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: locale
-  stub: enUS
-  type: string

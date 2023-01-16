@@ -1,9 +1,0 @@
----
-name: GetScreenResolutions
-status: unimplemented
-comment: output is actually an unpacked string table
-inputs:
-- {}
-outputs:
-- stub: 1024x768
-  type: string

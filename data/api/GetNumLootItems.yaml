@@ -1,5 +1,0 @@
----
-name: GetNumLootItems
-status: unimplemented
-outputs:
-- type: number

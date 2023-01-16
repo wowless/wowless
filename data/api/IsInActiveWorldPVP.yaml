@@ -1,8 +1,0 @@
----
-name: IsInActiveWorldPVP
-status: unimplemented
-inputs:
-- - nilable: true
-    type: string
-outputs:
-- type: oneornil

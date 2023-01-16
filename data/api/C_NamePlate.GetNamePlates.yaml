@@ -1,5 +1,0 @@
----
-name: C_NamePlate.GetNamePlates
-status: unimplemented
-outputs:
-- type: table

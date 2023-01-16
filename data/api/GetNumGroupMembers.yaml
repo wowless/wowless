@@ -1,5 +1,0 @@
----
-name: GetNumGroupMembers
-status: unimplemented
-outputs:
-- type: number

@@ -1,7 +1,0 @@
----
-name: SelectTradeSkill
-status: unimplemented
-inputs:
-- - name: skillIndex
-    type: number
-outputs: {}

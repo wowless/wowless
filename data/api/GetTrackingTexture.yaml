@@ -1,7 +1,0 @@
----
-name: GetTrackingTexture
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: nil

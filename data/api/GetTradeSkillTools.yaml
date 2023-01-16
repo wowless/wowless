@@ -1,6 +1,0 @@
----
-name: GetTradeSkillTools
-status: unimplemented
-inputs:
-- - name: skillIndex
-    type: number

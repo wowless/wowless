@@ -1,5 +1,0 @@
----
-name: GetNumBindings
-status: unimplemented
-outputs:
-- type: number

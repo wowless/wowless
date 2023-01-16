@@ -1,7 +1,0 @@
----
-name: C_PetJournal.SummonRandomPet
-status: unimplemented
-inputs:
-- - name: onlyFavorites
-    type: boolean
-outputs: {}

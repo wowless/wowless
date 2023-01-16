@@ -1,8 +1,0 @@
----
-name: HasBoundGemProposed
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: value
-  type: boolean

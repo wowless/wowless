@@ -1,8 +1,0 @@
----
-name: GetSpellDescription
-status: unimplemented
-inputs:
-- - nilable: true
-    type: number
-outputs:
-- type: string

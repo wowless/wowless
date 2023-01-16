@@ -1,5 +1,0 @@
----
-name: GetSpellConfirmationPromptsInfo
-status: unimplemented
-outputs:
-- type: table

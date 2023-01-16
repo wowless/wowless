@@ -1,7 +1,0 @@
----
-name: UnitIsPVPFreeForAll
-status: unimplemented
-inputs:
-- - type: unit
-outputs:
-- type: boolean

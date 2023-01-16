@@ -1,9 +1,0 @@
----
-name: SetPartyAssignment
-status: unimplemented
-inputs:
-- - name: role
-    type: string
-  - name: unit
-    type: unit
-outputs: {}

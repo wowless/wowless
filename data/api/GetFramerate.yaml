@@ -1,7 +1,0 @@
----
-name: GetFramerate
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

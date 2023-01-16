@@ -1,7 +1,0 @@
----
-name: GetRaidDifficultyID
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

@@ -1,7 +1,0 @@
----
-name: HasExtraActionBar
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: oneornil

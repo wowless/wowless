@@ -23,13 +23,13 @@ local perProductAddonGeneratedTypes = {
     return { 'data/products/' .. p .. '/events.yaml' }
   end,
   globalapis = function(p)
-    return { 'data/products/' .. p .. '/apis.yaml', 'build/api.stamp' }
+    return { 'data/products/' .. p .. '/apis.yaml' }
   end,
   globals = function(p)
     return { 'data/products/' .. p .. '/globals.yaml' }
   end,
   namespaceapis = function(p)
-    return { 'data/products/' .. p .. '/apis.yaml', 'build/api.stamp' }
+    return { 'data/products/' .. p .. '/apis.yaml' }
   end,
   product = function()
     return {}
@@ -127,11 +127,6 @@ local builds = {
     rule = 'mkelune',
   },
   {
-    ins = find('data/api'),
-    outs = 'build/api.stamp',
-    rule = 'stamp',
-  },
-  {
     ins = find('vendor/dbdefs/definitions'),
     outs = 'build/dbdefs.stamp',
     rule = 'stamp',
@@ -158,7 +153,6 @@ local builds = {
   },
   {
     ins = {
-      'build/api.stamp',
       'build/state.stamp',
       'build/uiobjects.stamp',
       (function()
@@ -239,7 +233,6 @@ for _, p in ipairs(productList) do
       restat = 1,
     },
     ins = {
-      'build/api.stamp',
       'build/sql.stamp',
       'data/products/' .. p .. '/apis.yaml',
       'tools/dblist.lua',
@@ -333,7 +326,6 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins_implicit = {
       'tools/prep.lua',
-      'build/api.stamp',
       'build/impl.stamp',
       'build/sql.stamp',
       'build/state.stamp',

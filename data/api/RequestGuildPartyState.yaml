@@ -1,6 +1,0 @@
----
-name: RequestGuildPartyState
-status: unimplemented
-inputs:
-- {}
-outputs: {}

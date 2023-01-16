@@ -1,8 +1,0 @@
----
-name: CameraOrSelectOrMoveStop
-status: unimplemented
-inputs:
-- - name: stickyFlag
-    nilable: true
-    type: boolean
-outputs: {}

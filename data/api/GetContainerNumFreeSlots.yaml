@@ -1,5 +1,0 @@
----
-name: GetContainerNumFreeSlots
-status: unimplemented
-outputs:
-- type: number

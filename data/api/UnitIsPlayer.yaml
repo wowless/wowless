@@ -1,8 +1,0 @@
----
-name: UnitIsPlayer
-status: implemented
-inputs:
-- - nilable: true
-    type: unit
-outputs:
-- type: boolean

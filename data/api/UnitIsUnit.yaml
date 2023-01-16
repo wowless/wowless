@@ -1,8 +1,0 @@
----
-name: UnitIsUnit
-status: implemented
-inputs:
-- - type: unit
-  - type: unit
-outputs:
-- type: boolean

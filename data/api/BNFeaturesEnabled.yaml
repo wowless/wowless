@@ -1,7 +1,0 @@
----
-name: BNFeaturesEnabled
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: boolean

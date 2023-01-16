@@ -1,9 +1,0 @@
----
-name: UnitHasIncomingResurrection
-status: unimplemented
-inputs:
-- - name: unit
-    type: unit
-outputs:
-- name: isBeingResurrected
-  type: boolean

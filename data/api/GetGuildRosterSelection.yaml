@@ -1,8 +1,0 @@
----
-name: GetGuildRosterSelection
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: memberIndex
-  type: number

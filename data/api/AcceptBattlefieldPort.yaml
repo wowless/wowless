@@ -1,9 +1,0 @@
----
-name: AcceptBattlefieldPort
-status: unimplemented
-inputs:
-- - type: number
-  - type: boolean
-outputs:
-- type: boolean
-protection: hardware

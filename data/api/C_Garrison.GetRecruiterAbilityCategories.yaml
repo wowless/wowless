@@ -1,5 +1,0 @@
----
-name: C_Garrison.GetRecruiterAbilityCategories
-status: unimplemented
-outputs:
-- type: table

@@ -11,18 +11,6 @@ local function lazy(f)
   end
 end
 
-local apis = lazy(function()
-  local t = {}
-  for d in lfs.dir('data/api') do
-    if d ~= '.' and d ~= '..' then
-      local filename = ('data/api/%s'):format(d)
-      local cfg = yaml.parseFile(filename)
-      t[cfg.name] = cfg
-    end
-  end
-  return t
-end)
-
 local function mapify(t)
   if t then
     local tt = {}
@@ -78,10 +66,8 @@ local ptablemap = {
     return 'Events', t
   end,
   globalapis = function(p)
-    local allapis = apis()
     local t = {}
-    for name, apiname in pairs(perproduct(p, 'apis')) do
-      local api = assert(allapis[apiname], 'no api ' .. apiname)
+    for name, api in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') and not api.debug then
         local vv = {
           alias = api.alias,
@@ -98,9 +84,7 @@ local ptablemap = {
   end,
   namespaceapis = function(p)
     local apiNamespaces = {}
-    local allapis = apis()
-    for k, apiname in pairs(perproduct(p, 'apis')) do
-      local api = assert(allapis[apiname], 'no api ' .. apiname)
+    for k, api in pairs(perproduct(p, 'apis')) do
       local dot = k:find('%.')
       if dot and not api.debug then
         local name = k:sub(1, dot - 1)

@@ -1,8 +1,0 @@
----
-name: GetNumActiveQuests
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: numActiveQuests
-  type: number

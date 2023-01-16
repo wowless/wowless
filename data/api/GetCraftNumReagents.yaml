@@ -1,9 +1,0 @@
----
-name: GetCraftNumReagents
-status: unimplemented
-inputs:
-- - name: id
-    type: number
-outputs:
-- name: numReagents
-  type: number

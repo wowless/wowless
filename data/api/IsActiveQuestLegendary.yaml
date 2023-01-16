@@ -1,9 +1,0 @@
----
-name: IsActiveQuestLegendary
-status: unimplemented
-inputs:
-- - name: index
-    type: number
-outputs:
-- name: isActiveQuestLegendary
-  type: boolean

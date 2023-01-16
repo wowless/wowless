@@ -1,8 +1,0 @@
----
-name: GetNumQuestCurrencies
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: numQuestCurrencies
-  type: number

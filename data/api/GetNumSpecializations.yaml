@@ -1,5 +1,0 @@
----
-name: GetNumSpecializations
-status: unimplemented
-outputs:
-- type: number

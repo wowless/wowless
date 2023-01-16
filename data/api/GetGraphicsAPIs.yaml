@@ -1,9 +1,0 @@
----
-name: GetGraphicsAPIs
-status: unimplemented
-comment: actually returns a string dotdotdot, not just a string
-inputs:
-- {}
-outputs:
-- stub: opengl
-  type: string

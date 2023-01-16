@@ -1,8 +1,0 @@
----
-name: IsStealthed
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: value
-  type: boolean

@@ -1,7 +1,0 @@
----
-name: UnitIsGhost
-status: unimplemented
-inputs:
-- - type: string
-outputs:
-- type: boolean

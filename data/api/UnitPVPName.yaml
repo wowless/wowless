@@ -1,7 +1,0 @@
----
-name: UnitPVPName
-status: unimplemented
-inputs:
-- - type: string
-outputs:
-- type: string

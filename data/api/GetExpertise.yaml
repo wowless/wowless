@@ -1,8 +1,0 @@
----
-name: GetExpertise
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number
-- type: number

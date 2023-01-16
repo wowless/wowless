@@ -1,8 +1,0 @@
----
-name: IsDebugBuild
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: value
-  type: boolean

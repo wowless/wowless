@@ -1,8 +1,0 @@
----
-name: EquipItemByName
-status: unimplemented
-inputs:
-- - name: item
-    nilable: true
-    type: string
-outputs: {}
