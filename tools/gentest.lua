@@ -1,16 +1,6 @@
 local lfs = require('lfs')
 local yaml = require('wowapi.yaml')
 
-local function lazy(f)
-  local cached
-  return function()
-    if not cached then
-      cached = f()
-    end
-    return cached
-  end
-end
-
 local function mapify(t)
   if t then
     local tt = {}
