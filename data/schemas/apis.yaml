@@ -4,4 +4,123 @@ type:
   mapof:
     key: string
     value:
-      ref: api
+      oneof:
+      - record:
+          alias:
+            required: true
+            type: string
+      - record:
+          stdlib:
+            required: true
+            type: string
+      - record:
+          comment:
+            type: string
+          debug:
+            type: boolean
+          frameworks:
+            type:
+              sequenceof:
+                oneof:
+                - literal: api
+                - literal: datalua
+                - literal: env
+                - literal: loader
+          impl:
+            type: string
+          inputs:
+            type:
+              sequenceof:
+                sequenceof:
+                  record:
+                    default:
+                      type:
+                        schema: any
+                    innerType:
+                      type: string
+                    mixin:
+                      type: string
+                    name:
+                      type: string
+                    nilable:
+                      type: boolean
+                    type:
+                      required: true
+                      type:
+                        oneof:
+                        - literal: boolean
+                        - literal: function
+                        - literal: number
+                        - literal: string
+                        - literal: table
+                        - literal: unit
+                        - literal: unknown
+                        - ref: structure
+          mayreturnnothing:
+            type: boolean
+          nowrap:
+            type: boolean
+          outputs:
+            type:
+              sequenceof:
+                record:
+                  default:
+                    type:
+                      schema: any
+                  innerType:
+                    type:
+                      oneof:
+                      - literal: boolean
+                      - literal: number
+                      - literal: string
+                      - literal: table
+                      - literal: unknown
+                      - ref: structure
+                  mixin:
+                    type: string
+                  name:
+                    type: string
+                  nilable:
+                    type: boolean
+                  stub:
+                    type:
+                      schema: any
+                  type:
+                    required: true
+                    type:
+                      oneof:
+                      - literal: boolean
+                      - literal: function
+                      - literal: nil
+                      - literal: number
+                      - literal: oneornil
+                      - literal: string
+                      - literal: table
+                      - literal: unknown
+                      - literal: userdata
+                      - ref: structure
+          protection:
+            type:
+              oneof:
+              - literal: hardware
+              - literal: secure
+          sqls:
+            type:
+              sequenceof:
+                oneof:
+                - record:
+                    cursor:
+                      type:
+                        ref: sqlcursor
+                    table:
+                      type: boolean
+                - record:
+                    lookup:
+                      type:
+                        ref: sqllookup
+                    table:
+                      type: boolean
+          states:
+            type:
+              sequenceof:
+                ref: state

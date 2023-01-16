@@ -3,7 +3,6 @@ local yaml = require('wowapi.yaml')
 local validate = require('wowapi.schema').validate
 
 local dirschemas = {
-  api = 'api',
   schemas = 'schema',
   state = 'state',
 }

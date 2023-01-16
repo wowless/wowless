@@ -1,5 +1,4 @@
 describe('structures', function()
-  local allApis = require('wowapi.data').apis
   local parseYaml = require('wowapi.yaml').parseFile
   for _, p in ipairs(require('wowless.util').productList()) do
     describe(p, function()
@@ -12,8 +11,7 @@ describe('structures', function()
           end
         end
       end
-      for _, v in pairs(parseYaml('data/products/' .. p .. '/apis.yaml')) do
-        local api = allApis[v]
+      for _, api in pairs(parseYaml('data/products/' .. p .. '/apis.yaml')) do
         for _, il in ipairs(api.inputs or {}) do
           ref(il)
         end
