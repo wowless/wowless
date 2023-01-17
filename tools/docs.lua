@@ -14,17 +14,40 @@ local product = args.product
 
 local docs = {}
 do
+  local mixmt = {
+    __index = function()
+      return function() end
+    end,
+  }
+  local nummt = {
+    __index = function()
+      return 42
+    end,
+  }
+  local nsmt = {
+    __index = function()
+      return setmetatable({}, nummt)
+    end,
+  }
   local function processDocDir(docdir)
     if lfs.attributes(docdir) then
       for f in lfs.dir(docdir) do
         if f:sub(-4) == '.lua' then
-          pcall(setfenv(loadfile(docdir .. '/' .. f), {
+          local success, err = pcall(setfenv(loadfile(docdir .. '/' .. f), {
             APIDocumentation = {
               AddDocumentationTable = function(_, t)
                 docs[f] = docs[f] or t
               end,
             },
+            Constants = setmetatable({}, nsmt),
+            CreateFromMixins = function()
+              return setmetatable({}, mixmt)
+            end,
+            Enum = setmetatable({}, nsmt),
           }))
+          if not success then
+            print(('error loading %s: %s'):format(f, err))
+          end
         end
       end
     end

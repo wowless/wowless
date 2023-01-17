@@ -2325,6 +2325,78 @@ CalendarTime:
     type: number
   - name: year
     type: number
+CharCustomizationCategory:
+  fields:
+  - name: cameraDistanceOffset
+    type: number
+  - name: cameraZoomLevel
+    type: number
+  - name: chrModelID
+    nilable: true
+    type: number
+  - name: hasNewChoices
+    type: boolean
+  - name: icon
+    type: string
+  - name: id
+    type: number
+  - name: name
+    type: string
+  - innerType: CharCustomizationOption
+    name: options
+    type: table
+  - name: orderIndex
+    type: number
+  - name: selectedIcon
+    type: string
+  - name: spellShapeshiftFormID
+    nilable: true
+    type: number
+  - name: undressModel
+    type: boolean
+CharCustomizationChoice:
+  fields:
+  - name: id
+    type: number
+  - name: ineligibleChoice
+    type: boolean
+  - name: isLocked
+    type: boolean
+  - name: isNew
+    type: boolean
+  - name: lockedText
+    nilable: true
+    type: string
+  - name: name
+    type: string
+  - mixin: ColorMixin
+    name: swatchColor1
+    nilable: true
+    type: Color
+  - mixin: ColorMixin
+    name: swatchColor2
+    nilable: true
+    type: Color
+CharCustomizationOption:
+  fields:
+  - innerType: CharCustomizationChoice
+    name: choices
+    type: table
+  - name: currentChoiceIndex
+    nilable: true
+    type: number
+  - name: hasNewChoices
+    type: boolean
+  - name: id
+    type: number
+  - name: isSound
+    type: boolean
+  - name: name
+    type: string
+  - name: optionType
+    type: number
+  - name: orderIndex
+    type: number
 ChatChannelInfo:
   fields:
   - name: name
