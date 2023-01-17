@@ -1,4 +1,46 @@
 ---
+AppearanceSourceInfo:
+  fields:
+  - default: None
+    name: categoryID
+    type: number
+  - default: 0
+    name: invType
+    type: number
+  - name: inventorySlot
+    nilable: true
+    type: number
+  - name: isCollected
+    type: boolean
+  - name: isHideVisual
+    nilable: true
+    type: boolean
+  - name: itemID
+    type: number
+  - name: itemModID
+    type: number
+  - name: meetsTransmogPlayerCondition
+    nilable: true
+    type: boolean
+  - name: name
+    nilable: true
+    type: string
+  - name: quality
+    nilable: true
+    type: number
+  - name: sourceID
+    type: number
+  - name: sourceType
+    nilable: true
+    type: number
+  - name: useError
+    nilable: true
+    type: string
+  - name: useErrorType
+    nilable: true
+    type: number
+  - name: visualID
+    type: number
 BountyInfo:
   fields:
   - name: factionID
@@ -2915,6 +2957,18 @@ C_MythicPlus.MythicPlusRunInfo:
     type: number
   - name: thisWeek
     type: boolean
+C_PaperDollInfo.InspectPVPData:
+  fields:
+  - name: gamesPlayed
+    type: number
+  - name: gamesWon
+    type: number
+  - name: rating
+    type: number
+  - name: roundsPlayed
+    type: number
+  - name: roundsWon
+    type: number
 C_PartyPose.PartyPoseInfo:
   fields:
   - name: defeatModelSceneID
@@ -3289,6 +3343,16 @@ C_PvP.RandomBGInfo:
   - name: maxLevel
     type: number
   - name: minLevel
+    type: number
+C_PvP.RatedSoloShuffleSpecStats:
+  fields:
+  - name: seasonMostPlayedSpecID
+    type: number
+  - name: seasonMostPlayedSpecRounds
+    type: number
+  - name: weeklyMostPlayedSpecID
+    type: number
+  - name: weeklyMostPlayedSpecRounds
     type: number
 C_QuestLine.QuestLineInfo:
   fields:
@@ -4620,6 +4684,50 @@ C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo:
     type: number
   - name: widgetTag
     type: string
+C_UIWidgetManager.FillUpFramesWidgetVisualizationInfo:
+  fields:
+  - name: fillMax
+    type: number
+  - name: fillMin
+    type: number
+  - name: fillValue
+    type: number
+  - name: frameTextureKit
+    type: string
+  - name: hasTimer
+    type: boolean
+  - name: inAnimType
+    type: number
+  - name: layoutDirection
+    type: number
+  - name: modelSceneLayer
+    type: number
+  - name: numFullFrames
+    type: number
+  - name: numTotalFrames
+    type: number
+  - name: orderIndex
+    type: number
+  - name: outAnimType
+    type: number
+  - name: pulseFillingFrame
+    type: boolean
+  - name: scriptedAnimationEffectID
+    type: number
+  - name: shownState
+    type: number
+  - name: textureKit
+    type: string
+  - name: tooltip
+    type: string
+  - name: tooltipLoc
+    type: number
+  - name: widgetScale
+    type: number
+  - name: widgetSizeSetting
+    type: number
+  - name: widgetTag
+    type: string
 C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
   fields:
   - innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
@@ -5545,6 +5653,16 @@ ChatChannelInfo:
     type: number
   - name: channelType
     type: number
+ClickBindingInfo:
+  fields:
+  - name: actionID
+    type: number
+  - name: button
+    type: string
+  - name: modifiers
+    type: number
+  - name: type
+    type: number
 Color:
   fields:
   - name: r
@@ -5643,6 +5761,74 @@ CraftingOperationInfo:
     type: number
   - name: upperSkillTreshold
     type: number
+CraftingOrderCustomerCategory:
+  fields:
+  - name: categoryID
+    type: number
+  - name: categoryName
+    type: string
+  - name: primaryCategorySortOrder
+    nilable: true
+    type: number
+  - name: secondaryCategorySortOrder
+    nilable: true
+    type: number
+  - name: type
+    type: number
+  - name: uiSortOrder
+    type: number
+CraftingOrderCustomerCategoryFilters:
+  fields:
+  - name: primaryCategoryID
+    nilable: true
+    type: number
+  - name: secondaryCategoryID
+    nilable: true
+    type: number
+  - name: tertiaryCategoryID
+    nilable: true
+    type: number
+CraftingOrderCustomerSearchParams:
+  fields:
+  - name: categoryFilters
+    type: CraftingOrderCustomerCategoryFilters
+  - name: includeArtifact
+    type: boolean
+  - name: includeCommon
+    type: boolean
+  - name: includeEpic
+    type: boolean
+  - name: includeLegendary
+    type: boolean
+  - name: includePoor
+    type: boolean
+  - name: includeRare
+    type: boolean
+  - name: includeUncommon
+    type: boolean
+  - name: isFavoritesSearch
+    type: boolean
+  - name: maxLevel
+    type: number
+  - name: minLevel
+    type: number
+  - name: searchText
+    nilable: true
+    type: string
+  - name: uncollectedOnly
+    type: boolean
+  - name: upgradesOnly
+    type: boolean
+  - name: usableOnly
+    type: boolean
+CraftingOrderCustomerSearchResults:
+  fields:
+  - name: extraColumnType
+    nilable: true
+    type: number
+  - innerType: CraftingOrderCustomerOptionInfo
+    name: options
+    type: table
 CraftingReagentInfo:
   fields:
   - name: dataSlotIndex
@@ -5690,6 +5876,12 @@ CraftingRecipeSchematic:
     type: number
   - default: Item
     name: recipeType
+    type: number
+CurrencyCost:
+  fields:
+  - name: amount
+    type: number
+  - name: currencyID
     type: number
 ExpansionDisplayInfo:
   fields:
@@ -5802,6 +5994,25 @@ GarrisonTalentSocketInfo:
     type: number
   - name: socketType
     type: number
+GarrisonTalentTreeInfo:
+  fields:
+  - name: featureSubtype
+    type: number
+  - name: featureType
+    type: number
+  - name: isClassAgnostic
+    type: boolean
+  - name: isThemed
+    type: boolean
+  - innerType: GarrisonTalentInfo
+    name: talents
+    type: table
+  - name: textureKit
+    type: string
+  - name: title
+    type: string
+  - name: treeID
+    type: number
 GatheringOperationInfo:
   fields:
   - name: baseSkill
@@ -5830,6 +6041,30 @@ GuildTabardInfo:
     type: number
   - name: emblemStyle
     type: number
+MythicPlusAffixScoreInfo:
+  fields:
+  - name: durationSec
+    type: number
+  - name: level
+    type: number
+  - name: name
+    type: string
+  - name: overTime
+    type: boolean
+  - name: score
+    type: number
+MythicPlusRatingLinkInfo:
+  fields:
+  - name: completedInTime
+    type: number
+  - name: dungeonScore
+    type: number
+  - name: level
+    type: number
+  - name: mapChallengeModeID
+    type: number
+  - name: name
+    type: string
 ProfessionInfo:
   fields:
   - name: expansionName
@@ -5863,6 +6098,12 @@ ProfTabInfo:
     type: string
   - name: rootNodeID
     type: number
+QuestReputationRewardInfo:
+  fields:
+  - name: factionID
+    type: number
+  - name: rewardAmount
+    type: number
 QueueSpecificInfo:
   fields:
   - name: activityID
@@ -5894,6 +6135,61 @@ QueueSpecificInfo:
     type: boolean
   - name: teamSize
     nilable: true
+    type: number
+RuneforgeItemPreviewInfo:
+  fields:
+  - name: itemGUID
+    type: string
+  - name: itemLevel
+    type: number
+  - name: itemName
+    type: string
+RuneforgeLegendaryComponentInfo:
+  fields:
+  - innerType: number
+    name: modifiers
+    type: table
+  - name: powerID
+    type: number
+RuneforgeLegendaryCraftDescription:
+  fields:
+  - mixin: ItemLocationMixin
+    name: baseItem
+    type: table
+  - innerType: number
+    name: modifiers
+    type: table
+  - name: runeforgePowerID
+    type: number
+RuneforgePower:
+  fields:
+  - name: covenantID
+    nilable: true
+    type: number
+  - name: description
+    type: string
+  - name: descriptionSpellID
+    type: number
+  - name: iconFileID
+    type: number
+  - name: matchesCovenant
+    type: boolean
+  - name: matchesSpec
+    type: boolean
+  - name: name
+    type: string
+  - name: runeforgePowerID
+    type: number
+  - innerType: string
+    name: slots
+    type: table
+  - name: source
+    nilable: true
+    type: string
+  - name: specName
+    nilable: true
+    type: string
+  - name: state
     type: number
 SpecializationTabInfo:
   fields:

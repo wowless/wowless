@@ -2226,7 +2226,13 @@ C_BarberShop.GetCurrentCost:
   outputs:
   - name: cost
     type: number
-C_BarberShop.GetViewingChrModel: {}
+C_BarberShop.GetViewingChrModel:
+  inputs:
+  - {}
+  outputs:
+  - name: chrModelID
+    nilable: true
+    type: number
 C_BarberShop.HasAnyChanges:
   inputs:
   - {}
@@ -3085,7 +3091,13 @@ C_CampaignInfo.IsCampaignQuest:
   outputs:
   - name: isCampaignQuest
     type: boolean
-C_CampaignInfo.SortAsNormalQuest: {}
+C_CampaignInfo.SortAsNormalQuest:
+  inputs:
+  - - name: campaignID
+      type: number
+  outputs:
+  - name: sortAsNormalQuest
+    type: boolean
 C_CampaignInfo.UsesNormalQuestIcons:
   inputs:
   - - name: campaignID
@@ -3206,7 +3218,7 @@ C_ChallengeMode.GetMapScoreInfo:
   inputs:
   - {}
   outputs:
-  - innerType: unknown
+  - innerType: MythicPlusRatingLinkInfo
     name: displayScores
     type: table
 C_ChallengeMode.GetMapTable:
@@ -3600,7 +3612,12 @@ C_ClassTalents.CanChangeTalents:
     type: boolean
   - name: changeError
     type: string
-C_ClassTalents.CanCreateNewConfig: {}
+C_ClassTalents.CanCreateNewConfig:
+  inputs:
+  - {}
+  outputs:
+  - name: canCreate
+    type: boolean
 C_ClassTalents.CommitConfig:
   inputs:
   - - name: savedConfigID
@@ -3609,7 +3626,13 @@ C_ClassTalents.CommitConfig:
   outputs:
   - name: success
     type: boolean
-C_ClassTalents.DeleteConfig: {}
+C_ClassTalents.DeleteConfig:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: success
+    type: boolean
 C_ClassTalents.GetActiveConfigID:
   impl: C_ClassTalents.GetActiveConfigID
   inputs:
@@ -3629,13 +3652,67 @@ C_ClassTalents.GetConfigIDsBySpecID:
   - innerType: number
     name: configIDs
     type: table
-C_ClassTalents.GetHasStarterBuild: {}
-C_ClassTalents.GetLastSelectedSavedConfigID: {}
-C_ClassTalents.GetNextStarterBuildPurchase: {}
-C_ClassTalents.GetStarterBuildActive: {}
-C_ClassTalents.HasUnspentTalentPoints: {}
-C_ClassTalents.ImportLoadout: {}
-C_ClassTalents.IsConfigPopulated: {}
+C_ClassTalents.GetHasStarterBuild:
+  inputs:
+  - {}
+  outputs:
+  - name: hasStarterBuild
+    type: boolean
+C_ClassTalents.GetLastSelectedSavedConfigID:
+  inputs:
+  - - name: specID
+      type: number
+  outputs:
+  - name: configID
+    nilable: true
+    type: number
+C_ClassTalents.GetNextStarterBuildPurchase:
+  inputs:
+  - {}
+  outputs:
+  - name: nodeID
+    nilable: true
+    type: number
+  - name: entryID
+    nilable: true
+    type: number
+C_ClassTalents.GetStarterBuildActive:
+  inputs:
+  - {}
+  outputs:
+  - name: isActive
+    type: boolean
+C_ClassTalents.HasUnspentTalentPoints:
+  inputs:
+  - {}
+  outputs:
+  - name: hasUnspentPoints
+    type: boolean
+  - name: numClassPoints
+    type: number
+  - name: numSpecPoints
+    type: number
+C_ClassTalents.ImportLoadout:
+  inputs:
+  - - name: configID
+      type: number
+    - innerType: C_ClassTalents.ImportLoadoutEntryInfo
+      name: entries
+      type: table
+    - name: name
+      type: string
+  outputs:
+  - name: success
+    type: boolean
+  - name: importError
+    type: string
+C_ClassTalents.IsConfigPopulated:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: isPopulated
+    type: boolean
 C_ClassTalents.LoadConfig:
   inputs:
   - - name: configID
@@ -3645,7 +3722,15 @@ C_ClassTalents.LoadConfig:
   outputs:
   - name: result
     type: number
-C_ClassTalents.RenameConfig: {}
+C_ClassTalents.RenameConfig:
+  inputs:
+  - - name: configID
+      type: number
+    - name: name
+      type: string
+  outputs:
+  - name: success
+    type: boolean
 C_ClassTalents.RequestNewConfig:
   inputs:
   - - name: name
@@ -3660,9 +3745,28 @@ C_ClassTalents.SaveConfig:
   outputs:
   - name: success
     type: boolean
-C_ClassTalents.SetStarterBuildActive: {}
-C_ClassTalents.SetUsesSharedActionBars: {}
-C_ClassTalents.UpdateLastSelectedSavedConfigID: {}
+C_ClassTalents.SetStarterBuildActive:
+  inputs:
+  - - name: active
+      type: boolean
+  outputs:
+  - name: result
+    type: number
+C_ClassTalents.SetUsesSharedActionBars:
+  inputs:
+  - - name: configID
+      type: number
+    - name: usesShared
+      type: boolean
+  outputs: {}
+C_ClassTalents.UpdateLastSelectedSavedConfigID:
+  inputs:
+  - - name: specID
+      type: number
+    - name: configID
+      nilable: true
+      type: number
+  outputs: {}
 C_ClassTrial.GetClassTrialLogoutTimeSeconds:
   outputs:
   - type: number
@@ -3705,7 +3809,7 @@ C_ClickBindings.GetProfileInfo:
   inputs:
   - {}
   outputs:
-  - innerType: unknown
+  - innerType: ClickBindingInfo
     name: infoVec
     type: table
 C_ClickBindings.GetStringFromModifiers:
@@ -3733,7 +3837,7 @@ C_ClickBindings.ResetCurrentProfile:
   outputs: {}
 C_ClickBindings.SetProfileByInfo:
   inputs:
-  - - innerType: unknown
+  - - innerType: ClickBindingInfo
       name: infoVec
       type: table
   outputs: {}
@@ -5855,6 +5959,7 @@ C_ContributionCollector.GetContributionAppearance:
       type: number
   outputs:
   - name: appearance
+    nilable: true
     type: C_ContributionCollector.ContributionAppearance
 C_ContributionCollector.GetContributionCollectorsForMap:
   inputs:
@@ -5992,6 +6097,7 @@ C_Covenants.GetCovenantData:
       type: number
   outputs:
   - name: data
+    nilable: true
     type: C_Covenants.CovenantData
 C_Covenants.GetCovenantIDs:
   inputs:
@@ -6117,23 +6223,40 @@ C_CraftingOrders.GetCustomerCategories:
   inputs:
   - {}
   outputs:
-  - innerType: unknown
+  - innerType: CraftingOrderCustomerCategory
     name: categories
     type: table
 C_CraftingOrders.GetCustomerOptions:
   inputs:
   - - name: params
-      type: unknown
+      type: CraftingOrderCustomerSearchParams
   outputs:
   - name: results
-    type: unknown
-C_CraftingOrders.HasFavoriteCustomerOptions: {}
-C_CraftingOrders.IsCustomerOptionFavorited: {}
+    type: CraftingOrderCustomerSearchResults
+C_CraftingOrders.HasFavoriteCustomerOptions:
+  inputs:
+  - {}
+  outputs:
+  - name: hasFavorites
+    type: boolean
+C_CraftingOrders.IsCustomerOptionFavorited:
+  inputs:
+  - - name: recipeID
+      type: number
+  outputs:
+  - name: favorited
+    type: boolean
 C_CraftingOrders.ParseCustomerOptions:
   inputs:
   - {}
   outputs: {}
-C_CraftingOrders.SetCustomerOptionFavorited: {}
+C_CraftingOrders.SetCustomerOptionFavorited:
+  inputs:
+  - - name: recipeID
+      type: number
+    - name: favorited
+      type: boolean
+  outputs: {}
 C_CreatureInfo.GetClassInfo:
   impl: C_CreatureInfo.GetClassInfo
   inputs:
@@ -6212,7 +6335,13 @@ C_CurrencyInfo.GetCurrencyContainerInfo:
   outputs:
   - name: info
     type: C_CurrencyInfo.CurrencyDisplayInfo
-C_CurrencyInfo.GetCurrencyDescription: {}
+C_CurrencyInfo.GetCurrencyDescription:
+  inputs:
+  - - name: type
+      type: number
+  outputs:
+  - name: description
+    type: string
 C_CurrencyInfo.GetCurrencyIDFromLink:
   inputs:
   - - name: currencyLink
@@ -6517,7 +6646,10 @@ C_EditMode.GetLayouts:
   outputs:
   - name: layoutInfo
     type: C_EditMode.EditModeLayouts
-C_EditMode.OnEditModeExit: {}
+C_EditMode.OnEditModeExit:
+  inputs:
+  - {}
+  outputs: {}
 C_EditMode.OnLayoutAdded:
   inputs:
   - - name: addedLayoutIndex
@@ -7612,7 +7744,7 @@ C_Garrison.GetTalentTreeInfo:
       type: number
   outputs:
   - name: info
-    type: unknown
+    type: GarrisonTalentTreeInfo
 C_Garrison.GetTalentTreeResetInfo:
   inputs:
   - - name: garrTalentTreeID
@@ -7860,17 +7992,17 @@ C_GossipInfo.RefreshOptions:
   outputs: {}
 C_GossipInfo.SelectActiveQuest:
   inputs:
-  - - name: index
+  - - name: optionID
       type: number
   outputs: {}
 C_GossipInfo.SelectAvailableQuest:
   inputs:
-  - - name: index
+  - - name: optionID
       type: number
   outputs: {}
 C_GossipInfo.SelectOption:
   inputs:
-  - - name: index
+  - - name: optionID
       type: number
     - name: text
       nilable: true
@@ -7919,7 +8051,7 @@ C_GuildInfo.GetGuildTabardInfo:
   outputs:
   - name: tabardInfo
     nilable: true
-    type: unknown
+    type: GuildTabardInfo
 C_GuildInfo.GuildControlGetRankFlags:
   inputs:
   - - name: rankOrder
@@ -8759,7 +8891,14 @@ C_ItemUpgrade.UpgradeItem:
       name: numUpgrades
       type: number
   outputs: {}
-C_KeyBindings.GetBindingIndex: {}
+C_KeyBindings.GetBindingIndex:
+  inputs:
+  - - name: action
+      type: string
+  outputs:
+  - name: bindingIndex
+    nilable: true
+    type: number
 C_KeyBindings.GetCustomBindingType:
   inputs:
   - - name: bindingIndex
@@ -8775,7 +8914,7 @@ C_LegendaryCrafting.CloseRuneforgeInteraction:
 C_LegendaryCrafting.CraftRuneforgeLegendary:
   inputs:
   - - name: description
-      type: unknown
+      type: RuneforgeLegendaryCraftDescription
   outputs: {}
 C_LegendaryCrafting.GetRuneforgeItemPreviewInfo:
   inputs:
@@ -8792,7 +8931,7 @@ C_LegendaryCrafting.GetRuneforgeItemPreviewInfo:
   outputs:
   - name: info
     nilable: true
-    type: unknown
+    type: RuneforgeItemPreviewInfo
 C_LegendaryCrafting.GetRuneforgeLegendaryComponentInfo:
   inputs:
   - - mixin: ItemLocationMixin
@@ -8800,14 +8939,14 @@ C_LegendaryCrafting.GetRuneforgeLegendaryComponentInfo:
       type: table
   outputs:
   - name: componentInfo
-    type: unknown
+    type: RuneforgeLegendaryComponentInfo
 C_LegendaryCrafting.GetRuneforgeLegendaryCost:
   inputs:
   - - mixin: ItemLocationMixin
       name: baseItem
       type: table
   outputs:
-  - innerType: unknown
+  - innerType: CurrencyCost
     name: cost
     type: table
 C_LegendaryCrafting.GetRuneforgeLegendaryCraftSpellID:
@@ -8832,7 +8971,7 @@ C_LegendaryCrafting.GetRuneforgeLegendaryUpgradeCost:
       name: upgradeItem
       type: table
   outputs:
-  - innerType: unknown
+  - innerType: CurrencyCost
     name: cost
     type: table
 C_LegendaryCrafting.GetRuneforgeModifierInfo:
@@ -8867,7 +9006,7 @@ C_LegendaryCrafting.GetRuneforgePowerInfo:
       type: number
   outputs:
   - name: power
-    type: unknown
+    type: RuneforgePower
 C_LegendaryCrafting.GetRuneforgePowers:
   inputs:
   - - mixin: ItemLocationMixin
@@ -8957,7 +9096,7 @@ C_LegendaryCrafting.MakeRuneforgeCraftDescription:
       type: table
   outputs:
   - name: description
-    type: unknown
+    type: RuneforgeLegendaryCraftDescription
 C_LegendaryCrafting.UpgradeRuneforgeLegendary:
   inputs:
   - - mixin: ItemLocationMixin
@@ -10313,7 +10452,14 @@ C_MountJournal.GetMountInfoExtraByID:
     type: number
   - name: disablePlayerMountPreview
     type: boolean
-C_MountJournal.GetMountLink: {}
+C_MountJournal.GetMountLink:
+  inputs:
+  - - name: spellID
+      type: number
+  outputs:
+  - name: mountCreatureDisplayInfoLink
+    nilable: true
+    type: string
 C_MountJournal.GetMountUsabilityByID:
   inputs:
   - - name: mountID
@@ -10546,7 +10692,7 @@ C_MythicPlus.GetSeasonBestAffixScoreInfoForMap:
   - - name: mapChallengeModeID
       type: number
   outputs:
-  - innerType: unknown
+  - innerType: MythicPlusAffixScoreInfo
     name: affixScores
     type: table
   - name: bestOverAllScore
@@ -10720,7 +10866,12 @@ C_PaperDollInfo.GetInspectItemLevel:
   outputs:
   - name: equippedItemLevel
     type: number
-C_PaperDollInfo.GetInspectRatedSoloShuffleData: {}
+C_PaperDollInfo.GetInspectRatedSoloShuffleData:
+  inputs:
+  - {}
+  outputs:
+  - name: ratedSoloShuffleData
+    type: C_PaperDollInfo.InspectPVPData
 C_PaperDollInfo.GetMinItemLevel:
   inputs:
   - {}
@@ -10830,7 +10981,7 @@ C_PartyInfo.GetInviteConfirmationInvalidQueues:
   - - name: inviteGUID
       type: string
   outputs:
-  - innerType: unknown
+  - innerType: QueueSpecificInfo
     name: invalidQueues
     type: table
 C_PartyInfo.GetInviteReferralInfo:
@@ -11509,13 +11660,52 @@ C_PlayerInfo.UnitIsSameServer:
   outputs:
   - name: unitIsSameServer
     type: boolean
-C_PlayerInteractionManager.ClearInteraction: {}
-C_PlayerInteractionManager.ConfirmationInteraction: {}
-C_PlayerInteractionManager.InteractUnit: {}
-C_PlayerInteractionManager.IsInteractingWithNpcOfType: {}
-C_PlayerInteractionManager.IsReplacingUnit: {}
-C_PlayerInteractionManager.IsValidNPCInteraction: {}
-C_PlayerInteractionManager.ReopenInteraction: {}
+C_PlayerInteractionManager.ClearInteraction:
+  inputs:
+  - - name: type
+      nilable: true
+      type: number
+  outputs: {}
+C_PlayerInteractionManager.ConfirmationInteraction:
+  inputs:
+  - - name: type
+      nilable: true
+      type: number
+  outputs: {}
+C_PlayerInteractionManager.InteractUnit:
+  inputs:
+  - - name: unit
+      type: string
+    - default: false
+      name: exactMatch
+      type: boolean
+  outputs:
+  - name: success
+    type: boolean
+C_PlayerInteractionManager.IsInteractingWithNpcOfType:
+  inputs:
+  - - name: type
+      type: number
+  outputs:
+  - name: interacting
+    type: boolean
+C_PlayerInteractionManager.IsReplacingUnit:
+  inputs:
+  - {}
+  outputs:
+  - name: replacing
+    type: boolean
+C_PlayerInteractionManager.IsValidNPCInteraction:
+  inputs:
+  - - name: type
+      type: number
+  outputs:
+  - name: isValidInteraction
+    type: boolean
+C_PlayerInteractionManager.ReopenInteraction:
+  inputs:
+  - {}
+  outputs: {}
 C_PlayerMentorship.GetMentorLevelRequirement:
   inputs:
   - {}
@@ -11989,7 +12179,13 @@ C_PvP.GetOutdoorPvPWaitTime:
   outputs:
   - name: pvpWaitTime
     type: number
-C_PvP.GetPersonalRatedSoloShuffleSpecStats: {}
+C_PvP.GetPersonalRatedSoloShuffleSpecStats:
+  inputs:
+  - {}
+  outputs:
+  - name: specStats
+    nilable: true
+    type: C_PvP.RatedSoloShuffleSpecStats
 C_PvP.GetPostMatchCurrencyRewards:
   inputs:
   - {}
@@ -12235,7 +12431,12 @@ C_PvP.IsBattlegroundEnlistmentBonusActive:
     type: boolean
   - name: brawlActive
     type: boolean
-C_PvP.IsBrawlSoloShuffle: {}
+C_PvP.IsBrawlSoloShuffle:
+  inputs:
+  - {}
+  outputs:
+  - name: isBrawlSoloShuffle
+    type: boolean
 C_PvP.IsInBrawl:
   inputs:
   - {}
@@ -12278,7 +12479,12 @@ C_PvP.IsRatedMap:
   outputs:
   - name: isRatedMap
     type: boolean
-C_PvP.IsRatedSoloShuffle: {}
+C_PvP.IsRatedSoloShuffle:
+  inputs:
+  - {}
+  outputs:
+  - name: isRatedSoloShuffle
+    type: boolean
 C_PvP.IsSoloShuffle:
   inputs:
   - {}
@@ -12437,7 +12643,7 @@ C_QuestLog.GetBountiesForMapID:
   - - name: uiMapID
       type: number
   outputs:
-  - innerType: unknown
+  - innerType: BountyInfo
     name: bounties
     nilable: true
     type: table
@@ -12605,7 +12811,14 @@ C_QuestLog.GetQuestIDForWorldQuestWatchIndex:
   - name: questID
     nilable: true
     type: number
-C_QuestLog.GetQuestLogMajorFactionReputationRewards: {}
+C_QuestLog.GetQuestLogMajorFactionReputationRewards:
+  inputs:
+  - - name: questID
+      type: number
+  outputs:
+  - innerType: QuestReputationRewardInfo
+    name: reputationRewards
+    type: table
 C_QuestLog.GetQuestLogPortraitGiver:
   inputs:
   - - name: questLogIndex
@@ -12970,7 +13183,13 @@ C_QuestOffer.GetHideRequiredItemsOnTurnIn:
   outputs:
   - name: hideRequiredItemsOnTurnIn
     type: boolean
-C_QuestOffer.GetQuestOfferMajorFactionReputationRewards: {}
+C_QuestOffer.GetQuestOfferMajorFactionReputationRewards:
+  inputs:
+  - {}
+  outputs:
+  - innerType: QuestReputationRewardInfo
+    name: reputationRewards
+    type: table
 C_QuestSession.CanStart:
   inputs:
   - {}
@@ -13229,13 +13448,23 @@ C_Reputation.IsFactionParagon:
   outputs:
   - name: hasParagon
     type: boolean
-C_Reputation.IsMajorFaction: {}
+C_Reputation.IsMajorFaction:
+  inputs:
+  - - name: factionID
+      type: number
+  outputs:
+  - name: isMajorFaction
+    type: boolean
 C_Reputation.RequestFactionParagonPreloadRewardData:
   inputs:
   - - name: factionID
       type: number
   outputs: {}
-C_Reputation.SetWatchedFaction: {}
+C_Reputation.SetWatchedFaction:
+  inputs:
+  - - name: factionID
+      type: number
+  outputs: {}
 C_ResearchInfo.GetDigSitesForMap:
   inputs:
   - - name: uiMapID
@@ -13876,7 +14105,14 @@ C_Sound.IsPlaying:
   outputs:
   - name: isPlaying
     type: boolean
-C_Sound.PlayItemSound: {}
+C_Sound.PlayItemSound:
+  inputs:
+  - - name: soundType
+      type: number
+    - mixin: ItemLocationMixin
+      name: itemLocation
+      type: table
+  outputs: {}
 C_SpecializationInfo.CanPlayerUsePVPTalentUI:
   inputs:
   - {}
@@ -14079,7 +14315,13 @@ C_SpellBook.GetSpellLinkFromSpellID:
   outputs:
   - name: spellLink
     type: string
-C_SpellBook.GetTrackedNameplateCooldownSpells: {}
+C_SpellBook.GetTrackedNameplateCooldownSpells:
+  inputs:
+  - {}
+  outputs:
+  - innerType: number
+    name: spellIDs
+    type: table
 C_SpellBook.IsSpellDisabled:
   inputs:
   - - name: spellID
@@ -15792,7 +16034,7 @@ C_TransmogCollection.GetAppearanceSources:
       nilable: true
       type: table
   outputs:
-  - innerType: unknown
+  - innerType: AppearanceSourceInfo
     name: sources
     type: table
 C_TransmogCollection.GetArtifactAppearanceStrings:
@@ -15998,7 +16240,7 @@ C_TransmogCollection.GetSourceInfo:
       type: number
   outputs:
   - name: sourceInfo
-    type: unknown
+    type: AppearanceSourceInfo
 C_TransmogCollection.GetSourceItemID:
   inputs:
   - - name: itemModifiedAppearanceID
@@ -16345,7 +16587,7 @@ C_TransmogSets.GetSourcesForSlot:
     - name: slot
       type: number
   outputs:
-  - innerType: unknown
+  - innerType: AppearanceSourceInfo
     name: sources
     type: table
 C_TransmogSets.GetUsableSets:
@@ -16694,7 +16936,14 @@ C_UIWidgetManager.GetDoubleStatusBarWidgetVisualizationInfo:
   - name: widgetInfo
     nilable: true
     type: C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo
-C_UIWidgetManager.GetFillUpFramesWidgetVisualizationInfo: {}
+C_UIWidgetManager.GetFillUpFramesWidgetVisualizationInfo:
+  inputs:
+  - - name: widgetID
+      type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type: C_UIWidgetManager.FillUpFramesWidgetVisualizationInfo
 C_UIWidgetManager.GetHorizontalCurrenciesWidgetVisualizationInfo:
   inputs:
   - - name: widgetID
@@ -16931,7 +17180,13 @@ C_UnitAuras.IsAuraFilteredOutByInstanceID:
   outputs:
   - name: isFiltered
     type: boolean
-C_UnitAuras.WantsAlteredForm: {}
+C_UnitAuras.WantsAlteredForm:
+  inputs:
+  - - name: unitToken
+      type: string
+  outputs:
+  - name: wantsAlteredForm
+    type: boolean
 C_UserFeedback.SubmitBug:
   inputs:
   - - name: bugInfo
@@ -17644,7 +17899,12 @@ C_WeeklyRewards.HasInteraction:
   outputs:
   - name: isInteracting
     type: boolean
-C_WeeklyRewards.IsWeeklyChestRetired: {}
+C_WeeklyRewards.IsWeeklyChestRetired:
+  inputs:
+  - {}
+  outputs:
+  - name: isRetired
+    type: boolean
 C_WeeklyRewards.OnUIInteract:
   inputs:
   - {}
@@ -22220,9 +22480,29 @@ GetUnitChargedPowerPoints:
   - innerType: number
     name: pointIndices
     type: table
-GetUnitEmpowerHoldAtMaxTime: {}
-GetUnitEmpowerMinHoldTime: {}
-GetUnitEmpowerStageDuration: {}
+GetUnitEmpowerHoldAtMaxTime:
+  inputs:
+  - - name: unit
+      type: string
+  outputs:
+  - name: holdAtMaxTime
+    type: number
+GetUnitEmpowerMinHoldTime:
+  inputs:
+  - - name: unit
+      type: string
+  outputs:
+  - name: minHoldTime
+    type: number
+GetUnitEmpowerStageDuration:
+  inputs:
+  - - name: unit
+      type: string
+    - name: index
+      type: number
+  outputs:
+  - name: duration
+    type: number
 GetUnitHealthModifier: {}
 GetUnitMaxHealthModifier:
   inputs:
@@ -23894,7 +24174,21 @@ SetTrainerServiceTypeFilter:
   outputs: {}
 SetTurnEnabled: {}
 SetUIVisibility: {}
-SetUnitCursorTexture: {}
+SetUnitCursorTexture:
+  inputs:
+  - - name: textureObject
+      type: table
+    - name: unit
+      type: string
+    - name: style
+      nilable: true
+      type: number
+    - name: includeLowPriority
+      nilable: true
+      type: boolean
+  outputs:
+  - name: hasCursor
+    type: boolean
 SetupFullscreenScale: {}
 SetView:
   inputs:
