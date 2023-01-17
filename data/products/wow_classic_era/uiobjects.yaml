@@ -2022,40 +2022,6 @@ PlayerModel:
       status: unimplemented
     StopAnimKit:
       status: unimplemented
-POIFrame:
-  inherits: {}
-  methods:
-    DrawAll:
-      status: unimplemented
-    DrawBlob:
-      status: unimplemented
-    DrawNone:
-      status: unimplemented
-    EnableMerging:
-      status: unimplemented
-    EnableSmoothing:
-      status: unimplemented
-    GetMapID:
-      status: unimplemented
-    SetBorderAlpha:
-      status: unimplemented
-    SetBorderScalar:
-      status: unimplemented
-    SetBorderTexture:
-      status: unimplemented
-    SetFillAlpha:
-      status: unimplemented
-    SetFillTexture:
-      status: unimplemented
-    SetMapID:
-      status: unimplemented
-    SetMergeThreshold:
-      status: unimplemented
-    SetNumSplinePoints:
-      status: unimplemented
-    UpdateMouseOverTooltip:
-      status: unimplemented
-  virtual: true
 Region:
   fields:
     alpha:
