@@ -3611,18 +3611,74 @@ COVENANT_SANCTUM_RENOWN_LEVEL_CHANGED:
     type: number
 CRAFTING_DETAILS_UPDATE:
   payload: {}
+CRAFTING_HOUSE_DISABLED:
+  payload: {}
+CRAFTINGORDERS_CAN_REQUEST:
+  payload: {}
+CRAFTINGORDERS_CLAIM_ORDER_RESPONSE:
+  payload:
+  - name: result
+    type: number
+  - name: orderID
+    type: number
+CRAFTINGORDERS_CLAIMED_ORDER_ADDED:
+  payload: {}
+CRAFTINGORDERS_CLAIMED_ORDER_REMOVED:
+  payload: {}
+CRAFTINGORDERS_CLAIMED_ORDER_UPDATED:
+  payload:
+  - name: orderID
+    type: number
 CRAFTINGORDERS_CUSTOMER_FAVORITES_CHANGED:
   payload: {}
 CRAFTINGORDERS_CUSTOMER_OPTIONS_PARSED:
   payload: {}
+CRAFTINGORDERS_FULFILL_ORDER_RESPONSE:
+  payload:
+  - name: result
+    type: number
+  - name: orderID
+    type: number
 CRAFTINGORDERS_HIDE_CRAFTER:
   payload: {}
 CRAFTINGORDERS_HIDE_CUSTOMER:
   payload: {}
+CRAFTINGORDERS_ORDER_CANCEL_RESPONSE:
+  payload:
+  - name: result
+    type: number
+CRAFTINGORDERS_ORDER_PLACEMENT_RESPONSE:
+  payload:
+  - name: result
+    type: number
+CRAFTINGORDERS_REJECT_ORDER_RESPONSE:
+  payload:
+  - name: result
+    type: number
+  - name: orderID
+    type: number
+CRAFTINGORDERS_RELEASE_ORDER_RESPONSE:
+  payload:
+  - name: result
+    type: number
+  - name: orderID
+    type: number
 CRAFTINGORDERS_SHOW_CRAFTER:
   payload: {}
 CRAFTINGORDERS_SHOW_CUSTOMER:
   payload: {}
+CRAFTINGORDERS_UPDATE_CUSTOMER_NAME:
+  payload:
+  - name: customerName
+    type: string
+  - name: orderID
+    type: number
+CRAFTINGORDERS_UPDATE_ORDER_COUNT:
+  payload:
+  - name: orderType
+    type: number
+  - name: numOrders
+    type: number
 CRITERIA_COMPLETE:
   payload:
   - name: criteriaID
@@ -4154,6 +4210,10 @@ GENERIC_ERROR:
   payload:
   - name: errorMessage
     type: string
+GENERIC_WIDGET_DISPLAY_SHOW:
+  payload:
+  - name: info
+    type: C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo
 GET_ITEM_INFO_RECEIVED:
   payload:
   - name: itemID
@@ -4332,6 +4392,8 @@ HEIRLOOMS_UPDATED:
   - name: hideUntilLearned
     nilable: true
     type: boolean
+HIDE_HYPERLINK_TOOLTIP:
+  payload: {}
 HIDE_SUBTITLE:
   payload: {}
 HONOR_LEVEL_UPDATE:
@@ -5478,6 +5540,8 @@ PLAYER_SOFT_INTERACT_CHANGED:
     type: string
   - name: newTarget
     type: string
+PLAYER_SOFT_TARGET_INTERACTION:
+  payload: {}
 PLAYER_SPECIALIZATION_CHANGED:
   payload:
   - name: unitTarget
@@ -5546,6 +5610,8 @@ PROFESSION_EQUIPMENT_CHANGED:
   payload:
   - name: skillLineID
     type: number
+  - name: isTool
+    type: boolean
 PROVING_GROUNDS_SCORE_UPDATE:
   payload:
   - name: points
@@ -5570,16 +5636,14 @@ PVP_REWARDS_UPDATE:
   payload: {}
 PVP_ROLE_POPUP_HIDE:
   payload:
-  - innerType: C_PvP.PvpRoleQueueInfo
-    name: roleQueueInfo
-    type: table
+  - name: readyCheckInfo
+    type: C_PvP.PvpReadyCheckInfo
 PVP_ROLE_POPUP_JOINED_MATCH:
   payload: {}
 PVP_ROLE_POPUP_SHOW:
   payload:
-  - innerType: C_PvP.PvpRoleQueueInfo
-    name: roleQueueInfo
-    type: table
+  - name: readyCheckInfo
+    type: C_PvP.PvpReadyCheckInfo
 PVP_ROLE_UPDATE:
   payload: {}
 PVP_SPECIAL_EVENT_INFO_UPDATED:
@@ -5840,6 +5904,12 @@ REPLACE_ENCHANT:
     type: string
   - name: replacementStr
     type: string
+REPLACE_TRADESKILL_ENCHANT:
+  payload:
+  - name: existing
+    type: string
+  - name: replacement
+    type: string
 REPLICATE_ITEM_LIST_UPDATE:
   payload: {}
 REPORT_PLAYER_RESULT:
@@ -6032,6 +6102,10 @@ SHIPMENT_UPDATE:
     type: boolean
 SHOW_FACTION_SELECT_UI:
   payload: {}
+SHOW_HYPERLINK_TOOLTIP:
+  payload:
+  - name: hyperlink
+    type: string
 SHOW_LFG_EXPAND_SEARCH_PROMPT:
   payload: {}
 SHOW_LOOT_TOAST:
@@ -6346,6 +6420,10 @@ STOP_AUTOREPEAT_SPELL:
   payload: {}
 STOP_MOVIE:
   payload: {}
+STOP_TIMER_OF_TYPE:
+  payload:
+  - name: timerType
+    type: number
 STORE_BOOST_AUTO_CONSUMED:
   payload: {}
 STORE_CHARACTER_LIST_RECEIVED:
@@ -6406,6 +6484,8 @@ SYSMSG:
     type: number
   - name: b
     type: number
+SYSTEM_VISIBILITY_CHANGED:
+  payload: {}
 TABARD_CANSAVE_CHANGED:
   payload: {}
 TABARD_SAVE_PENDING:
@@ -6484,6 +6564,8 @@ TOKEN_SELL_RESULT:
   - name: result
     type: number
 TOKEN_STATUS_CHANGED:
+  payload: {}
+TOOLTIP_DATA_UPDATE:
   payload: {}
 TOYS_UPDATED:
   payload:
@@ -6582,6 +6664,8 @@ TRADE_SKILL_DATA_SOURCE_CHANGED:
 TRADE_SKILL_DATA_SOURCE_CHANGING:
   payload: {}
 TRADE_SKILL_DETAILS_UPDATE:
+  payload: {}
+TRADE_SKILL_FAVORITES_CHANGED:
   payload: {}
 TRADE_SKILL_ITEM_CRAFTED_RESULT:
   payload:
@@ -7239,7 +7323,9 @@ UPDATE_STEALTH:
 UPDATE_SUMMONPETS_ACTION:
   payload: {}
 UPDATE_TRADESKILL_CAST_COMPLETE:
-  payload: {}
+  payload:
+  - name: isScrapping
+    type: boolean
 UPDATE_TRADESKILL_RECAST:
   payload: {}
 UPDATE_UI_WIDGET:
@@ -7628,6 +7714,10 @@ WEEKLY_REWARDS_UPDATE:
   payload: {}
 WHO_LIST_UPDATE:
   payload: {}
+WORLD_CURSOR_TOOLTIP_UPDATE:
+  payload:
+  - name: anchorType
+    type: number
 WORLD_MAP_OPEN:
   payload:
   - name: uiMapID

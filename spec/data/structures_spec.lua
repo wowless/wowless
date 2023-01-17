@@ -27,6 +27,9 @@ describe('structures', function()
           closure[t] = true
           for _, f in ipairs(structures[t].fields) do
             close(f.type)
+            if f.innerType then
+              close(f.innerType)
+            end
           end
         end
       end

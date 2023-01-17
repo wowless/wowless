@@ -2178,6 +2178,21 @@ C_Garrison.MissionEncounterIconInfo:
     type: number
   - name: portraitFileDataID
     type: number
+C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo:
+  fields:
+  - name: frameHeight
+    type: number
+  - name: frameWidth
+    type: number
+  - name: title
+    nilable: true
+    type: string
+  - name: uiTextureKit
+    nilable: true
+    type: string
+  - name: uiWidgetSetID
+    nilable: true
+    type: number
 C_GossipInfo.FriendshipReputationInfo:
   fields:
   - name: friendshipFactionID
@@ -3187,6 +3202,17 @@ C_PvP.PVPPostMatchItemReward:
     type: number
   - name: type
     type: string
+C_PvP.PvpReadyCheckInfo:
+  fields:
+  - name: numPlayersAccepted
+    type: number
+  - name: numPlayersDeclined
+    type: number
+  - innerType: C_PvP.PvpRoleQueueInfo
+    name: roles
+    type: table
+  - name: totalNumPlayers
+    type: number
 C_PvP.PvpRoleQueueInfo:
   fields:
   - name: role
