@@ -2205,7 +2205,7 @@ C_BarberShop.GetAvailableCustomizations:
   inputs:
   - {}
   outputs:
-  - innerType: unknown
+  - innerType: CharCustomizationCategory
     name: categories
     type: table
 C_BarberShop.GetCurrentCameraZoom:
