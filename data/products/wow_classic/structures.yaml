@@ -2100,6 +2100,53 @@ ExpansionDisplayInfo:
     type: number
   - name: lowResBackgroundID
     type: number
+GuildTabardInfo:
+  fields:
+  - mixin: ColorMixin
+    name: backgroundColor
+    type: Color
+  - mixin: ColorMixin
+    name: borderColor
+    type: Color
+  - mixin: ColorMixin
+    name: emblemColor
+    type: Color
+  - name: emblemFilename
+    type: string
+  - name: emblemStyle
+    type: number
+QueueSpecificInfo:
+  fields:
+  - name: activityID
+    nilable: true
+    type: number
+  - name: battlefieldType
+    nilable: true
+    type: string
+  - name: isBrawl
+    nilable: true
+    type: boolean
+  - innerType: number
+    name: lfgIDs
+    nilable: true
+    type: table
+  - name: lfgListID
+    nilable: true
+    type: number
+  - name: listID
+    nilable: true
+    type: number
+  - name: mapName
+    nilable: true
+    type: string
+  - name: queueType
+    type: string
+  - name: rated
+    nilable: true
+    type: boolean
+  - name: teamSize
+    nilable: true
+    type: number
 Vector2D:
   fields:
   - name: x

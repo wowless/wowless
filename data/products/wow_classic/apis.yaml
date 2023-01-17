@@ -4215,7 +4215,7 @@ C_GuildInfo.GetGuildTabardInfo:
   outputs:
   - name: tabardInfo
     nilable: true
-    type: unknown
+    type: GuildTabardInfo
 C_GuildInfo.GuildControlGetRankFlags:
   inputs:
   - - name: rankOrder
@@ -5186,7 +5186,7 @@ C_PartyInfo.GetInviteConfirmationInvalidQueues:
   - - name: inviteGUID
       type: string
   outputs:
-  - innerType: unknown
+  - innerType: QueueSpecificInfo
     name: invalidQueues
     type: table
 C_PartyInfo.IsPartyFull:
