@@ -2,8 +2,6 @@ local lfs = require('lfs')
 local plfile = require('pl.file')
 local plpath = require('pl.path')
 local yaml = require('wowapi.yaml')
-local schema = yaml.parseFile('data/schemas/uiobject.yaml').type
-local validate = require('wowapi.schema').validate
 
 describe('uiobjects', function()
   for entry in lfs.dir('data/uiobjects') do
@@ -29,9 +27,6 @@ describe('uiobjects', function()
           end)
           it('has the right name', function()
             assert.same(entry, cfg.name)
-          end)
-          it('schema validates', function()
-            validate('fake product', schema, cfg)
           end)
           it('has valid methods', function()
             assert.same('table', type(cfg.methods))

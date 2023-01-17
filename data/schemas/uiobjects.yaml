@@ -1,0 +1,74 @@
+---
+name: uiobjects
+type:
+  mapof:
+    key: string
+    value:
+      record:
+        fields:
+          type:
+            mapof:
+              key: string
+              value:
+                record:
+                  init:
+                    type:
+                      schema: any
+                  nilable:
+                    type: boolean
+                  type:
+                    required: true
+                    type:
+                      oneof:
+                      - literal: boolean
+                      - literal: font
+                      - literal: frame
+                      - literal: number
+                      - literal: string
+                      - literal: table
+                      - literal: texture
+        inherits:
+          type:
+            mapof:
+              key:
+                ref: uiobject
+              value:
+                record: null
+        methods:
+          type:
+            mapof:
+              key: string
+              value:
+                record:
+                  fields:
+                    type:
+                      sequenceof:
+                        record:
+                          name:
+                            required: true
+                            type: string
+                          nilable:
+                            type: boolean
+                  outputs:
+                    type:
+                      sequenceof:
+                        record:
+                          name:
+                            type: string
+                          type:
+                            required: true
+                            type:
+                              oneof:
+                              - literal: number
+                  status:
+                    required: true
+                    type:
+                      oneof:
+                      - literal: getter
+                      - literal: implemented
+                      - literal: setter
+                      - literal: unimplemented
+        objectType:
+          type: string
+        virtual:
+          type: boolean

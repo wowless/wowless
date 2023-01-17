@@ -14,6 +14,7 @@ local productschemas = {
   events = 'events',
   globals = 'globals',
   structures = 'structures',
+  uiobjects = 'uiobjects',
   xml = 'xml',
 }
 
