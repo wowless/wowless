@@ -3383,9 +3383,23 @@ C_Container.GetContainerItemLink: {}
 C_Container.GetContainerItemPurchaseCurrency: {}
 C_Container.GetContainerItemPurchaseInfo: {}
 C_Container.GetContainerItemPurchaseItem: {}
-C_Container.GetContainerItemQuestInfo: {}
+C_Container.GetContainerItemQuestInfo:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: questInfo
+    type: C_Container.ItemQuestInfo
 C_Container.GetContainerNumFreeSlots: {}
-C_Container.GetContainerNumSlots: {}
+C_Container.GetContainerNumSlots:
+  inputs:
+  - - name: containerIndex
+      type: number
+  outputs:
+  - name: numSlots
+    type: number
 C_Container.GetInsertItemsLeftToRight: {}
 C_Container.GetItemCooldown: {}
 C_Container.IsBagSlotFlagEnabledOnOtherBankBags: {}
