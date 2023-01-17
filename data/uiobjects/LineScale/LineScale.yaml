@@ -1,5 +1,0 @@
----
-name: LineScale
-inherits:
-  Scale: {}
-methods: {}
