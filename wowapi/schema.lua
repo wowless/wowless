@@ -55,12 +55,16 @@ local function validate(product, schematype, v)
     end
     assert(max == #v, 'expected array')
   elseif schematype.oneof then
+    local errors = {}
     for _, ty in ipairs(schematype.oneof) do
-      if pcall(validate, product, ty, v) then
+      local success, err = pcall(validate, product, ty, v)
+      if success then
         return
+      else
+        table.insert(errors, err)
       end
     end
-    error('did not validate against any element of oneof')
+    error('did not validate against any element of oneof: ' .. require('pl.pretty').write(errors))
   elseif schematype.literal then
     assert(type(v) == 'string', 'expected string')
     assert(v == schematype.literal, 'string literal mismatch')

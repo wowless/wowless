@@ -712,6 +712,61 @@ C_Console.ConsoleCommandInfo:
     type: string
   - name: scriptParameters
     type: string
+C_Container.ContainerItemInfo:
+  fields:
+  - name: hasLoot
+    type: boolean
+  - name: hasNoValue
+    type: boolean
+  - name: hyperlink
+    type: string
+  - name: iconFileID
+    type: number
+  - name: isBound
+    type: boolean
+  - name: isFiltered
+    type: boolean
+  - name: isLocked
+    type: boolean
+  - name: isReadable
+    type: boolean
+  - name: itemID
+    type: number
+  - name: quality
+    nilable: true
+    type: number
+  - name: stackCount
+    type: number
+C_Container.ItemPurchaseCurrency:
+  fields:
+  - name: currencyCount
+    type: number
+  - name: iconFileID
+    nilable: true
+    type: number
+  - name: name
+    type: string
+C_Container.ItemPurchaseInfo:
+  fields:
+  - name: currencyCount
+    type: number
+  - name: hasEnchants
+    type: boolean
+  - name: itemCount
+    type: number
+  - name: money
+    type: number
+  - name: refundSeconds
+    type: number
+C_Container.ItemPurchaseItem:
+  fields:
+  - name: hyperlink
+    type: string
+  - name: iconFileID
+    nilable: true
+    type: number
+  - name: itemCount
+    type: number
 C_Container.ItemQuestInfo:
   fields:
   - name: isActive
@@ -1140,6 +1195,14 @@ C_LFGList.LfgEntryData:
     type: number
   - name: voiceChat
     type: string
+C_LFGList.LFGRoles:
+  fields:
+  - name: dps
+    type: boolean
+  - name: healer
+    type: boolean
+  - name: tank
+    type: boolean
 C_LFGList.LfgSearchResultData:
   fields:
   - name: activityID
@@ -1213,41 +1276,6 @@ C_LFGList.PvpRatingInfo:
     type: number
   - name: tier
     type: number
-C_LFGList.WowLocale:
-  fields:
-  - default: false
-    name: deDE
-    type: boolean
-  - default: false
-    name: enUS
-    type: boolean
-  - default: false
-    name: esES
-    type: boolean
-  - default: false
-    name: esMX
-    type: boolean
-  - default: false
-    name: frFR
-    type: boolean
-  - default: false
-    name: itIT
-    type: boolean
-  - default: false
-    name: koKR
-    type: boolean
-  - default: false
-    name: ptBR
-    type: boolean
-  - default: false
-    name: ruRU
-    type: boolean
-  - default: false
-    name: zhCN
-    type: boolean
-  - default: false
-    name: zhTW
-    type: boolean
 C_LossOfControl.LossOfControlData:
   fields:
   - name: displayText
@@ -2331,6 +2359,53 @@ ExpansionDisplayInfo:
   - name: logo
     type: number
   - name: lowResBackgroundID
+    type: number
+GuildTabardInfo:
+  fields:
+  - mixin: ColorMixin
+    name: backgroundColor
+    type: Color
+  - mixin: ColorMixin
+    name: borderColor
+    type: Color
+  - mixin: ColorMixin
+    name: emblemColor
+    type: Color
+  - name: emblemFilename
+    type: string
+  - name: emblemStyle
+    type: number
+QueueSpecificInfo:
+  fields:
+  - name: activityID
+    nilable: true
+    type: number
+  - name: battlefieldType
+    nilable: true
+    type: string
+  - name: isBrawl
+    nilable: true
+    type: boolean
+  - innerType: number
+    name: lfgIDs
+    nilable: true
+    type: table
+  - name: lfgListID
+    nilable: true
+    type: number
+  - name: listID
+    nilable: true
+    type: number
+  - name: mapName
+    nilable: true
+    type: string
+  - name: queueType
+    type: string
+  - name: rated
+    nilable: true
+    type: boolean
+  - name: teamSize
+    nilable: true
     type: number
 Vector2D:
   fields:

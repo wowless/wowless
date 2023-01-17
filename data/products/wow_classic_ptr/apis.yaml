@@ -832,7 +832,13 @@ C_BarberShop.ClearPreviewChoices:
       name: clearSavedChoices
       type: boolean
   outputs: {}
-C_BarberShop.CycleCharCustomization: {}
+C_BarberShop.CycleCharCustomization:
+  inputs:
+  - - name: type
+      type: number
+    - name: forward
+      type: boolean
+  outputs: {}
 C_BarberShop.GetAvailableCustomizations:
   inputs:
   - {}
@@ -840,7 +846,12 @@ C_BarberShop.GetAvailableCustomizations:
   - innerType: unknown
     name: categories
     type: table
-C_BarberShop.GetBarbersChoiceCost: {}
+C_BarberShop.GetBarbersChoiceCost:
+  inputs:
+  - {}
+  outputs:
+  - name: cost
+    type: number
 C_BarberShop.GetCurrentCameraZoom:
   inputs:
   - {}
@@ -859,23 +870,56 @@ C_BarberShop.GetCurrentCost:
   outputs:
   - name: cost
     type: number
-C_BarberShop.GetCustomizationTypeInfo: {}
-C_BarberShop.GetViewingChrModel: {}
+C_BarberShop.GetCustomizationTypeInfo:
+  inputs:
+  - - name: type
+      type: number
+  outputs:
+  - name: customizationName
+    type: string
+  - name: name
+    type: string
+  - name: isCurrent
+    type: boolean
+C_BarberShop.GetViewingChrModel:
+  inputs:
+  - {}
+  outputs:
+  - name: chrModelID
+    nilable: true
+    type: number
 C_BarberShop.HasAnyChanges:
   inputs:
   - {}
   outputs:
   - name: hasChanges
     type: boolean
-C_BarberShop.IsValidCustomizationType: {}
+C_BarberShop.IsValidCustomizationType:
+  inputs:
+  - - name: type
+      type: number
+  outputs:
+  - name: isValid
+    type: boolean
 C_BarberShop.IsViewingAlteredForm:
   inputs:
   - {}
   outputs:
   - name: isViewingAlteredForm
     type: boolean
-C_BarberShop.IsViewingNativeSex: {}
-C_BarberShop.IsViewingVisibleSex: {}
+C_BarberShop.IsViewingNativeSex:
+  inputs:
+  - {}
+  outputs:
+  - name: isNativeSex
+    type: boolean
+C_BarberShop.IsViewingVisibleSex:
+  inputs:
+  - - name: sex
+      type: number
+  outputs:
+  - name: isVisibleSex
+    type: boolean
 C_BarberShop.PreviewCustomizationChoice:
   inputs:
   - - name: optionID
@@ -1816,9 +1860,6 @@ C_Club.CreateTicket:
     - name: defaultStreamId
       nilable: true
       type: string
-    - name: isCrossFaction
-      nilable: true
-      type: boolean
   outputs: {}
 C_Club.DeclineInvitation:
   inputs:
@@ -3080,7 +3121,7 @@ C_Commentator.SetBlocklistedAuras:
   outputs: {}
 C_Commentator.SetBlocklistedCooldowns:
   inputs:
-  - - name: specID
+  - - name: classID
       type: number
     - innerType: number
       name: spellIDs
@@ -3210,7 +3251,7 @@ C_Commentator.SetPositionLerpAmount:
   outputs: {}
 C_Commentator.SetRequestedDebuffCooldowns:
   inputs:
-  - - name: specID
+  - - name: classID
       type: number
     - innerType: number
       name: spellIDs
@@ -3218,7 +3259,7 @@ C_Commentator.SetRequestedDebuffCooldowns:
   outputs: {}
 C_Commentator.SetRequestedDefensiveCooldowns:
   inputs:
-  - - name: specID
+  - - name: classID
       type: number
     - innerType: number
       name: spellIDs
@@ -3226,7 +3267,7 @@ C_Commentator.SetRequestedDefensiveCooldowns:
   outputs: {}
 C_Commentator.SetRequestedOffensiveCooldowns:
   inputs:
-  - - name: specID
+  - - name: classID
       type: number
     - innerType: number
       name: spellIDs
@@ -3361,9 +3402,30 @@ C_Console.SetFontHeight:
   - - name: fontHeightInPixels
       type: number
   outputs: {}
-C_Container.ContainerIDToInventoryID: {}
-C_Container.ContainerRefundItemPurchase: {}
-C_Container.GetBagName: {}
+C_Container.ContainerIDToInventoryID:
+  inputs:
+  - - name: containerID
+      type: number
+  outputs:
+  - name: inventoryID
+    type: number
+C_Container.ContainerRefundItemPurchase:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - default: false
+      name: isEquipped
+      type: boolean
+  outputs: {}
+C_Container.GetBagName:
+  inputs:
+  - - name: bagIndex
+      type: number
+  outputs:
+  - name: name
+    type: string
 C_Container.GetBagSlotFlag:
   inputs:
   - - name: bagIndex
@@ -3373,16 +3435,112 @@ C_Container.GetBagSlotFlag:
   outputs:
   - name: isSet
     type: boolean
-C_Container.GetContainerFreeSlots: {}
-C_Container.GetContainerItemCooldown: {}
-C_Container.GetContainerItemDurability: {}
-C_Container.GetContainerItemGems: {}
-C_Container.GetContainerItemID: {}
-C_Container.GetContainerItemInfo: {}
-C_Container.GetContainerItemLink: {}
-C_Container.GetContainerItemPurchaseCurrency: {}
-C_Container.GetContainerItemPurchaseInfo: {}
-C_Container.GetContainerItemPurchaseItem: {}
+C_Container.GetContainerFreeSlots:
+  inputs:
+  - - name: containerIndex
+      type: number
+  outputs:
+  - innerType: number
+    name: freeSlots
+    type: table
+C_Container.GetContainerItemCooldown:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: startTime
+    type: number
+  - name: duration
+    type: number
+  - name: enable
+    type: number
+C_Container.GetContainerItemDurability:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: durability
+    type: number
+  - name: maxDurability
+    type: number
+C_Container.GetContainerItemGems:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - innerType: number
+    name: numGems
+    type: table
+C_Container.GetContainerItemID:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: containerID
+    type: number
+C_Container.GetContainerItemInfo:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: containerInfo
+    type: C_Container.ContainerItemInfo
+C_Container.GetContainerItemLink:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: itemLink
+    type: string
+C_Container.GetContainerItemPurchaseCurrency:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - name: itemIndex
+      type: number
+    - name: isEquipped
+      type: boolean
+  outputs:
+  - name: currencyInfo
+    type: C_Container.ItemPurchaseCurrency
+C_Container.GetContainerItemPurchaseInfo:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - name: isEquipped
+      type: boolean
+  outputs:
+  - name: info
+    type: C_Container.ItemPurchaseInfo
+C_Container.GetContainerItemPurchaseItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - name: itemIndex
+      type: number
+    - name: isEquipped
+      type: boolean
+  outputs:
+  - name: itemInfo
+    type: C_Container.ItemPurchaseItem
 C_Container.GetContainerItemQuestInfo:
   inputs:
   - - name: containerIndex
@@ -3392,7 +3550,16 @@ C_Container.GetContainerItemQuestInfo:
   outputs:
   - name: questInfo
     type: C_Container.ItemQuestInfo
-C_Container.GetContainerNumFreeSlots: {}
+C_Container.GetContainerNumFreeSlots:
+  inputs:
+  - - name: bagIndex
+      type: number
+  outputs:
+  - name: numFreeSlots
+    type: number
+  - name: bagFamily
+    nilable: true
+    type: number
 C_Container.GetContainerNumSlots:
   inputs:
   - - name: containerIndex
@@ -3400,12 +3567,53 @@ C_Container.GetContainerNumSlots:
   outputs:
   - name: numSlots
     type: number
-C_Container.GetInsertItemsLeftToRight: {}
-C_Container.GetItemCooldown: {}
-C_Container.IsBagSlotFlagEnabledOnOtherBankBags: {}
-C_Container.IsContainerFiltered: {}
-C_Container.PickupContainerItem: {}
-C_Container.SetBagPortraitTexture: {}
+C_Container.GetInsertItemsLeftToRight:
+  inputs:
+  - {}
+  outputs:
+  - name: isEnabled
+    type: boolean
+C_Container.GetItemCooldown:
+  inputs:
+  - - name: itemID
+      type: number
+  outputs:
+  - name: startTime
+    type: number
+  - name: duration
+    type: number
+  - name: enable
+    type: number
+C_Container.IsBagSlotFlagEnabledOnOtherBankBags:
+  inputs:
+  - - name: bagIndex
+      type: number
+    - name: flagIndex
+      type: number
+  outputs:
+  - name: isSet
+    type: boolean
+C_Container.IsContainerFiltered:
+  inputs:
+  - - name: containerIndex
+      type: number
+  outputs:
+  - name: isFiltered
+    type: boolean
+C_Container.PickupContainerItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs: {}
+C_Container.SetBagPortraitTexture:
+  inputs:
+  - - name: texture
+      type: table
+    - name: bagIndex
+      type: number
+  outputs: {}
 C_Container.SetBagSlotFlag:
   inputs:
   - - name: bagIndex
@@ -3415,12 +3623,54 @@ C_Container.SetBagSlotFlag:
     - name: isSet
       type: boolean
   outputs: {}
-C_Container.SetInsertItemsLeftToRight: {}
-C_Container.SetItemSearch: {}
-C_Container.ShowContainerSellCursor: {}
-C_Container.SocketContainerItem: {}
-C_Container.SplitContainerItem: {}
-C_Container.UseContainerItem: {}
+C_Container.SetInsertItemsLeftToRight:
+  inputs:
+  - - name: enable
+      type: boolean
+  outputs: {}
+C_Container.SetItemSearch:
+  inputs:
+  - - name: searchString
+      type: string
+  outputs: {}
+C_Container.ShowContainerSellCursor:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs: {}
+C_Container.SocketContainerItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Container.SplitContainerItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - name: amount
+      type: number
+  outputs: {}
+C_Container.UseContainerItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - name: unitToken
+      nilable: true
+      type: string
+    - default: false
+      name: reagentBankOpen
+      type: boolean
+  outputs: {}
 C_CreatureInfo.GetClassInfo:
   impl: C_CreatureInfo.GetClassInfo
   inputs:
@@ -3569,6 +3819,9 @@ C_CVar.SetCVarBitfield:
       type: number
     - name: value
       type: boolean
+    - name: scriptCVar
+      nilable: true
+      type: string
   outputs:
   - name: success
     type: boolean
@@ -4289,17 +4542,17 @@ C_GossipInfo.GetText:
     type: string
 C_GossipInfo.SelectActiveQuest:
   inputs:
-  - - name: index
+  - - name: optionID
       type: number
   outputs: {}
 C_GossipInfo.SelectAvailableQuest:
   inputs:
-  - - name: index
+  - - name: optionID
       type: number
   outputs: {}
 C_GossipInfo.SelectOption:
   inputs:
-  - - name: index
+  - - name: optionID
       type: number
     - name: text
       nilable: true
@@ -4341,7 +4594,7 @@ C_GuildInfo.GetGuildTabardInfo:
   outputs:
   - name: tabardInfo
     nilable: true
-    type: unknown
+    type: GuildTabardInfo
 C_GuildInfo.GuildControlGetRankFlags:
   inputs:
   - - name: rankOrder
@@ -4643,7 +4896,14 @@ C_ItemUpgrade.GetItemHyperlink:
   outputs:
   - name: link
     type: string
-C_KeyBindings.GetBindingIndex: {}
+C_KeyBindings.GetBindingIndex:
+  inputs:
+  - - name: action
+      type: string
+  outputs:
+  - name: bindingIndex
+    nilable: true
+    type: number
 C_KeyBindings.GetCustomBindingType:
   inputs:
   - - name: bindingIndex
@@ -4666,6 +4926,9 @@ C_LFGList.CreateListing:
   - - innerType: number
       name: activityIDs
       type: table
+    - name: newPlayerFriendly
+      nilable: true
+      type: boolean
   outputs:
   - name: success
     type: boolean
@@ -4689,12 +4952,6 @@ C_LFGList.GetActivityInfoTable:
   inputs:
   - - name: activityID
       type: number
-    - name: questID
-      nilable: true
-      type: number
-    - name: showWarmode
-      nilable: true
-      type: boolean
   outputs:
   - name: activityInfo
     type: C_LFGList.GroupFinderActivityInfo
@@ -4727,9 +4984,25 @@ C_LFGList.GetFilteredSearchResults:
   - innerType: number
     name: filteredResults
     type: table
-C_LFGList.GetRedirectedMapDifficultyID: {}
-C_LFGList.GetRoles: {}
-C_LFGList.GetSavedRoles: {}
+C_LFGList.GetRedirectedMapDifficultyID:
+  inputs:
+  - - name: difficultyID
+      type: number
+  outputs:
+  - name: redirectedMapDifficultyID
+    type: number
+C_LFGList.GetRoles:
+  inputs:
+  - {}
+  outputs:
+  - name: roles
+    type: C_LFGList.LFGRoles
+C_LFGList.GetSavedRoles:
+  inputs:
+  - {}
+  outputs:
+  - name: roles
+    type: C_LFGList.LFGRoles
 C_LFGList.GetSearchResultFriends: {}
 C_LFGList.GetSearchResultInfo:
   inputs:
@@ -4777,7 +5050,7 @@ C_LFGList.IsLookingForGroupEnabled:
     type: boolean
 C_LFGList.IsPlayerAuthenticatedForLFG:
   inputs:
-  - - name: activityID
+  - - name: categoryID
       nilable: true
       type: number
   outputs:
@@ -4788,31 +5061,40 @@ C_LFGList.RequestAvailableActivities:
   inputs:
   - {}
   outputs: {}
-C_LFGList.RequestInvite: {}
+C_LFGList.RequestInvite:
+  inputs:
+  - - name: searchResultID
+      type: number
+  outputs: {}
 C_LFGList.Search:
   inputs:
   - - name: categoryID
       type: number
+    - innerType: number
+      name: activityIDs
+      type: table
     - default: 0
       name: filter
       type: number
     - default: 0
       name: preferredFilters
       type: number
-    - name: languageFilter
-      nilable: true
-      type: C_LFGList.WowLocale
-    - default: false
-      name: searchCrossFactionListings
-      nilable: true
-      type: boolean
   outputs: {}
-C_LFGList.SetRoles: {}
+C_LFGList.SetRoles:
+  inputs:
+  - - name: roles
+      type: C_LFGList.LFGRoles
+  outputs:
+  - name: success
+    type: boolean
 C_LFGList.UpdateListing:
   inputs:
   - - innerType: number
       name: activityIDs
       type: table
+    - name: newPlayerFriendly
+      nilable: true
+      type: boolean
   outputs:
   - name: success
     type: boolean
@@ -5321,9 +5603,26 @@ C_NamePlate.SetNamePlateSelfClickThrough: {}
 C_NamePlate.SetNamePlateSelfPreferredClickInsets: {}
 C_NamePlate.SetNamePlateSelfSize: {}
 C_NamePlate.SetTargetClampingInsets: {}
-C_NewItems.ClearAll: {}
-C_NewItems.IsNewItem: {}
-C_NewItems.RemoveNewItem: {}
+C_NewItems.ClearAll:
+  inputs:
+  - {}
+  outputs: {}
+C_NewItems.IsNewItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: isNew
+    type: boolean
+C_NewItems.RemoveNewItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs: {}
 C_PaperDollInfo.GetArmorEffectiveness:
   inputs:
   - - name: armor
@@ -5378,7 +5677,7 @@ C_PartyInfo.GetInviteConfirmationInvalidQueues:
   - - name: inviteGUID
       type: string
   outputs:
-  - innerType: unknown
+  - innerType: QueueSpecificInfo
     name: invalidQueues
     type: table
 C_PartyInfo.IsPartyFull:
@@ -5446,7 +5745,13 @@ C_PlayerInfo.GUIDIsPlayer:
   outputs:
   - name: isPlayer
     type: boolean
-C_PlayerInfo.HasVisibleInvSlot: {}
+C_PlayerInfo.HasVisibleInvSlot:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: isVisible
+    type: boolean
 C_PlayerInfo.IsConnected:
   inputs:
   - - mixin: PlayerLocationMixin
@@ -5457,7 +5762,12 @@ C_PlayerInfo.IsConnected:
   - name: isConnected
     nilable: true
     type: boolean
-C_PlayerInfo.IsXPUserDisabled: {}
+C_PlayerInfo.IsXPUserDisabled:
+  inputs:
+  - {}
+  outputs:
+  - name: isDisabled
+    type: boolean
 C_PlayerInfo.UnitIsSameServer:
   inputs:
   - - mixin: PlayerLocationMixin
@@ -5466,13 +5776,52 @@ C_PlayerInfo.UnitIsSameServer:
   outputs:
   - name: unitIsSameServer
     type: boolean
-C_PlayerInteractionManager.ClearInteraction: {}
-C_PlayerInteractionManager.ConfirmationInteraction: {}
-C_PlayerInteractionManager.InteractUnit: {}
-C_PlayerInteractionManager.IsInteractingWithNpcOfType: {}
-C_PlayerInteractionManager.IsReplacingUnit: {}
-C_PlayerInteractionManager.IsValidNPCInteraction: {}
-C_PlayerInteractionManager.ReopenInteraction: {}
+C_PlayerInteractionManager.ClearInteraction:
+  inputs:
+  - - name: type
+      nilable: true
+      type: number
+  outputs: {}
+C_PlayerInteractionManager.ConfirmationInteraction:
+  inputs:
+  - - name: type
+      nilable: true
+      type: number
+  outputs: {}
+C_PlayerInteractionManager.InteractUnit:
+  inputs:
+  - - name: unit
+      type: string
+    - default: false
+      name: exactMatch
+      type: boolean
+  outputs:
+  - name: success
+    type: boolean
+C_PlayerInteractionManager.IsInteractingWithNpcOfType:
+  inputs:
+  - - name: type
+      type: number
+  outputs:
+  - name: interacting
+    type: boolean
+C_PlayerInteractionManager.IsReplacingUnit:
+  inputs:
+  - {}
+  outputs:
+  - name: replacing
+    type: boolean
+C_PlayerInteractionManager.IsValidNPCInteraction:
+  inputs:
+  - - name: type
+      type: number
+  outputs:
+  - name: isValidInteraction
+    type: boolean
+C_PlayerInteractionManager.ReopenInteraction:
+  inputs:
+  - {}
+  outputs: {}
 C_ProductChoice.GetChoices:
   outputs:
   - type: table
@@ -5487,6 +5836,8 @@ C_PvP.GetArenaCrowdControlInfo:
       type: string
   outputs:
   - name: spellID
+    type: number
+  - name: itemID
     type: number
   - name: startTime
     type: number
@@ -5509,9 +5860,54 @@ C_PvP.GetBattlefieldVehicles:
   - innerType: C_PvP.BattlefieldVehicleInfo
     name: vehicles
     type: table
-C_PvP.GetHolidayBGLossRewards: {}
-C_PvP.GetHolidayBGRewards: {}
-C_PvP.GetRandomBGLossRewards: {}
+C_PvP.GetHolidayBGLossRewards:
+  inputs:
+  - {}
+  outputs:
+  - name: honor
+    type: number
+  - name: experience
+    type: number
+  - innerType: C_PvP.BattlefieldItemReward
+    name: itemRewards
+    nilable: true
+    type: table
+  - innerType: C_PvP.BattlefieldCurrencyReward
+    name: currencyRewards
+    nilable: true
+    type: table
+C_PvP.GetHolidayBGRewards:
+  inputs:
+  - {}
+  outputs:
+  - name: honor
+    type: number
+  - name: experience
+    type: number
+  - innerType: C_PvP.BattlefieldItemReward
+    name: itemRewards
+    nilable: true
+    type: table
+  - innerType: C_PvP.BattlefieldCurrencyReward
+    name: currencyRewards
+    nilable: true
+    type: table
+C_PvP.GetRandomBGLossRewards:
+  inputs:
+  - {}
+  outputs:
+  - name: honor
+    type: number
+  - name: experience
+    type: number
+  - innerType: C_PvP.BattlefieldItemReward
+    name: itemRewards
+    nilable: true
+    type: table
+  - innerType: C_PvP.BattlefieldCurrencyReward
+    name: currencyRewards
+    nilable: true
+    type: table
 C_PvP.GetRandomBGRewards:
   inputs:
   - {}
@@ -5786,7 +6182,11 @@ C_Reputation.RequestFactionParagonPreloadRewardData:
   - - name: factionID
       type: number
   outputs: {}
-C_Reputation.SetWatchedFaction: {}
+C_Reputation.SetWatchedFaction:
+  inputs:
+  - - name: factionID
+      type: number
+  outputs: {}
 C_ScriptedAnimations.GetAllScriptedAnimationEffects:
   impl: C_ScriptedAnimations.GetAllScriptedAnimationEffects
   inputs:
@@ -5802,13 +6202,15 @@ C_Seasons.GetActiveSeason:
   inputs:
   - {}
   outputs:
-  - nilable: true
+  - name: seasonID
+    nilable: true
     type: number
 C_Seasons.HasActiveSeason:
   inputs:
   - {}
   outputs:
-  - type: boolean
+  - name: value
+    type: boolean
 C_SharedCharacterServices.GetLastSeenCharacterUpgradePopup: {}
 C_SharedCharacterServices.GetLastSeenExpansionTrialPopup: {}
 C_SharedCharacterServices.GetUpgradeDistributions: {}
@@ -5890,7 +6292,7 @@ C_SocialRestrictions.IsChatDisabled:
   inputs:
   - {}
   outputs:
-  - name: disabled
+  - name: isDisabled
     type: boolean
 C_SocialRestrictions.IsMuted:
   inputs:
@@ -8800,6 +9202,8 @@ GetExistingSocketLink: {}
 GetExpansionDisplayInfo:
   inputs:
   - - name: expansionLevel
+      type: number
+    - name: desiredReleaseType
       type: number
   outputs:
   - name: info
@@ -12752,7 +13156,21 @@ SetTrainerServiceTypeFilter:
   outputs: {}
 SetTurnEnabled: {}
 SetUIVisibility: {}
-SetUnitCursorTexture: {}
+SetUnitCursorTexture:
+  inputs:
+  - - name: textureObject
+      type: table
+    - name: unit
+      type: string
+    - name: style
+      nilable: true
+      type: number
+    - name: includeLowPriority
+      nilable: true
+      type: boolean
+  outputs:
+  - name: hasCursor
+    type: boolean
 SetupFullscreenScale: {}
 SetView:
   inputs:
