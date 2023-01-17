@@ -1,22 +1,6 @@
 local mkemitter = require('yaml').emitter
 local parse = require('lyaml').load
 
-local fieldOrder = {
-  'name',
-  'status',
-  'comment',
-  'flavors',
-  'versions',
-  'inputs',
-  'newinputs',
-  'outputs',
-  'mixin',
-  'protected',
-  'returns',
-  'module',
-  'api',
-}
-
 local function isarray(t)
   local i = 0
   for _ in pairs(t) do
@@ -69,18 +53,11 @@ local function api2yaml(api)
         assert(emit({ type = 'SEQUENCE_END' }))
       else
         assert(emit({ type = 'MAPPING_START' }))
-        local sortedKeys = {}
-        for name in pairs(v) do
-          table.insert(sortedKeys, name)
-        end
-        table.sort(sortedKeys, keycomp)
         local names = {}
-        for _, name in ipairs(v == api and fieldOrder or {}) do
+        for name in pairs(v) do
           table.insert(names, name)
         end
-        for _, name in ipairs(sortedKeys) do
-          table.insert(names, name)
-        end
+        table.sort(names, keycomp)
         local handled = {}
         for _, name in ipairs(names) do
           local value = v[name]
