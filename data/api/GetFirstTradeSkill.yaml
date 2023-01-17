@@ -1,7 +1,0 @@
----
-name: GetFirstTradeSkill
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

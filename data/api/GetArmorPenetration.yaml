@@ -1,7 +1,0 @@
----
-name: GetArmorPenetration
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

@@ -1,9 +1,0 @@
----
-name: UnitAttackPower
-status: unimplemented
-inputs:
-- - type: string
-outputs:
-- type: number
-- type: number
-- type: number

@@ -1,9 +1,0 @@
----
-name: GuildControlGetRankName
-status: unimplemented
-inputs:
-- - name: rank
-    type: number
-outputs:
-- name: value
-  type: string

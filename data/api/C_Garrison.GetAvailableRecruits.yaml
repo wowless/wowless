@@ -1,8 +1,0 @@
----
-name: C_Garrison.GetAvailableRecruits
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: followers
-  type: table

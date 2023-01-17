@@ -1,8 +1,0 @@
----
-name: GetNumSavedWorldBosses
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: numSavedWorldBosses
-  type: number

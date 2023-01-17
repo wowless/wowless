@@ -1,7 +1,0 @@
----
-name: ResetView
-status: unimplemented
-inputs:
-- - name: view
-    type: number
-outputs: {}

@@ -1,7 +1,0 @@
----
-name: SaveView
-status: unimplemented
-inputs:
-- - name: view
-    type: number
-outputs: {}

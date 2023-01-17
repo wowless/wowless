@@ -1,7 +1,0 @@
----
-name: TargetPriorityHighlightStart
-status: unimplemented
-inputs:
-- - nilable: true
-    type: boolean
-outputs: {}

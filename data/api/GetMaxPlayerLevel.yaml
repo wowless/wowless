@@ -1,5 +1,0 @@
----
-name: GetMaxPlayerLevel
-status: unimplemented
-outputs:
-- type: number

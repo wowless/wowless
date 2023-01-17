@@ -1,9 +1,0 @@
----
-name: C_Covenants.GetCovenantData
-status: unimplemented
-inputs:
-- - name: covenantID
-    type: number
-outputs:
-- name: data
-  type: C_Covenants.CovenantData

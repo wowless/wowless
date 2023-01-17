@@ -1,7 +1,0 @@
----
-name: GetAverageItemLevel
-status: unimplemented
-outputs:
-- type: number
-- type: number
-- type: number

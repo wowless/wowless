@@ -1,7 +1,0 @@
----
-name: GetVehicleBarIndex
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

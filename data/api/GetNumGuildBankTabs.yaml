@@ -1,5 +1,0 @@
----
-name: GetNumGuildBankTabs
-status: unimplemented
-outputs:
-- type: number

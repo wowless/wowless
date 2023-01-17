@@ -1,9 +1,0 @@
----
-name: C_Map.GetFallbackWorldMapID
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: uiMapID
-  stub: 947
-  type: number

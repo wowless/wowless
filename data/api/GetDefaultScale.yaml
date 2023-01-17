@@ -1,5 +1,0 @@
----
-name: GetDefaultScale
-status: unimplemented
-outputs:
-- type: number

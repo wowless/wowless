@@ -1,7 +1,0 @@
----
-name: GetNumDisplayChannels
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

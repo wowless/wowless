@@ -1,8 +1,0 @@
----
-name: GetCurrencyListSize
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: currencyListSize
-  type: number

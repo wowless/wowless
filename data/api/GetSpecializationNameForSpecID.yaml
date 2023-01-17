@@ -1,9 +1,0 @@
----
-name: GetSpecializationNameForSpecID
-status: unimplemented
-inputs:
-- - name: specID
-    type: number
-outputs:
-- name: value
-  type: string

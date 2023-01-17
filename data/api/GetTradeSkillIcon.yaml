@@ -1,9 +1,0 @@
----
-name: GetTradeSkillIcon
-status: unimplemented
-inputs:
-- - name: skillIndex
-    type: number
-outputs:
-- name: texture
-  type: number

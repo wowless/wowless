@@ -1,7 +1,0 @@
----
-name: GetActionBarPage
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

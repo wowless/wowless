@@ -1,8 +1,0 @@
----
-name: GetMaxRewardCurrencies
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: maxRewardCurrencies
-  type: number

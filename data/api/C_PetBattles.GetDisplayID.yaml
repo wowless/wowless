@@ -1,5 +1,0 @@
----
-name: C_PetBattles.GetDisplayID
-status: unimplemented
-outputs:
-- type: number

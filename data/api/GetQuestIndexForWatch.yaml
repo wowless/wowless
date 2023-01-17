@@ -1,9 +1,0 @@
----
-name: GetQuestIndexForWatch
-status: unimplemented
-inputs:
-- - name: watchIndex
-    type: number
-outputs:
-- name: questIndex
-  type: number

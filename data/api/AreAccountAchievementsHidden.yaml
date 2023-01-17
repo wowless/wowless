@@ -1,8 +1,0 @@
----
-name: AreAccountAchievementsHidden
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: hidden
-  type: boolean

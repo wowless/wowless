@@ -1,7 +1,0 @@
----
-name: GetUnitHealthRegenRateFromSpirit
-status: unimplemented
-inputs:
-- - type: string
-outputs:
-- type: number

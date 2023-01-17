@@ -1,5 +1,0 @@
----
-name: GetActiveLootRollIDs
-status: unimplemented
-outputs:
-- type: table

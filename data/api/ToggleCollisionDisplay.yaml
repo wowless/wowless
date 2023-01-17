@@ -1,7 +1,0 @@
----
-name: ToggleCollisionDisplay
-status: unimplemented
-inputs:
-- {}
-outputs: {}
-debug: true

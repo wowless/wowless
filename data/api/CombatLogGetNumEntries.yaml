@@ -1,5 +1,0 @@
----
-name: CombatLogGetNumEntries
-status: unimplemented
-outputs:
-- type: number

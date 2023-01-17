@@ -1,6 +1,0 @@
----
-name: RequestLFDPartyLockInfo
-status: unimplemented
-inputs:
-- {}
-outputs: {}

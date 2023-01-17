@@ -1,9 +1,0 @@
----
-name: InteractUnit
-status: unimplemented
-inputs:
-- - name: unit
-    type: unit
-outputs:
-- name: value
-  type: boolean

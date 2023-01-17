@@ -1,9 +1,0 @@
----
-name: GetMerchantItemLink
-status: unimplemented
-inputs:
-- - name: index
-    type: number
-outputs:
-- name: itemLink
-  type: string

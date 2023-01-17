@@ -1,8 +1,0 @@
----
-name: GetNumGossipAvailableQuests
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: numNewQuests
-  type: number

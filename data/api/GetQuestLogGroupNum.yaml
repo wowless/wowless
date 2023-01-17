@@ -1,5 +1,0 @@
----
-name: GetQuestLogGroupNum
-status: unimplemented
-outputs:
-- type: number

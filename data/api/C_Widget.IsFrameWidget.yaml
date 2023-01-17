@@ -1,9 +1,0 @@
----
-name: C_Widget.IsFrameWidget
-status: unimplemented
-inputs:
-- - name: frame
-    type: unknown
-outputs:
-- stub: true
-  type: boolean

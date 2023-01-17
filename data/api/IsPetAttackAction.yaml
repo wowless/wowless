@@ -1,7 +1,0 @@
----
-name: IsPetAttackAction
-status: unimplemented
-inputs:
-- - type: number
-outputs:
-- type: boolean

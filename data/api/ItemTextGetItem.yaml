@@ -1,8 +1,0 @@
----
-name: ItemTextGetItem
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: textName
-  type: string

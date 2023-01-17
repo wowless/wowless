@@ -1,5 +1,0 @@
----
-name: GetNumQuestLogChoices
-status: unimplemented
-outputs:
-- type: number

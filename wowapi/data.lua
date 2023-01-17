@@ -43,7 +43,7 @@ local function perproduct(f)
 end
 
 local fns = {
-  apis = loaddir('api', 'yaml'),
+  apis = perproduct('apis'),
   cvars = perproduct('cvars'),
   impl = loaddir('impl', 'lua'),
   schemas = loaddir('schemas', 'yaml'),

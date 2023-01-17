@@ -1,8 +1,0 @@
----
-name: GetNumGuildPerks
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: numGuildPerks
-  type: number

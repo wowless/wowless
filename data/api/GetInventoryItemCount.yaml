@@ -1,8 +1,0 @@
----
-name: GetInventoryItemCount
-status: unimplemented
-inputs:
-- - type: string
-  - type: number
-outputs:
-- type: number

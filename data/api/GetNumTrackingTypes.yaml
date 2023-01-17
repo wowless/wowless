@@ -1,5 +1,0 @@
----
-name: GetNumTrackingTypes
-status: unimplemented
-outputs:
-- type: number

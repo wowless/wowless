@@ -1,5 +1,0 @@
----
-name: C_PetBattles.GetHealth
-status: unimplemented
-outputs:
-- type: number

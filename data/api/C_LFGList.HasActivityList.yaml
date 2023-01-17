@@ -1,7 +1,0 @@
----
-name: C_LFGList.HasActivityList
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: boolean

@@ -3,7 +3,6 @@ local yaml = require('wowapi.yaml')
 local validate = require('wowapi.schema').validate
 
 local dirschemas = {
-  api = 'api',
   schemas = 'schema',
   state = 'state',
 }
@@ -37,14 +36,12 @@ describe('yaml', function()
             it('has the right name', function()
               assert.same(name, data.name)
             end)
-            if schemaname ~= 'api' then
-              for _, p in ipairs(products) do
-                describe(p, function()
-                  it('schema validates', function()
-                    validate(p, schema, data)
-                  end)
+            for _, p in ipairs(products) do
+              describe(p, function()
+                it('schema validates', function()
+                  validate(p, schema, data)
                 end)
-              end
+              end)
             end
           end)
         end

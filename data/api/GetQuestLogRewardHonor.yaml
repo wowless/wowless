@@ -1,6 +1,0 @@
----
-name: GetQuestLogRewardHonor
-status: unimplemented
-outputs:
-- stub: 0
-  type: number

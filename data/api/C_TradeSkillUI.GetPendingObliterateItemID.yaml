@@ -1,9 +1,0 @@
----
-name: C_TradeSkillUI.GetPendingObliterateItemID
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: itemID
-  nilable: true
-  type: number

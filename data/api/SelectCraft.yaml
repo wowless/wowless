@@ -1,7 +1,0 @@
----
-name: SelectCraft
-status: unimplemented
-inputs:
-- - name: id
-    type: number
-outputs: {}

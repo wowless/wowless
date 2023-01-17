@@ -1,9 +1,0 @@
----
-name: C_Heirloom.GetHeirloomItemIDFromDisplayedIndex
-status: unimplemented
-inputs:
-- - name: index
-    type: number
-outputs:
-- name: itemID
-  type: number

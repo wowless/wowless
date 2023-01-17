@@ -1,8 +1,0 @@
----
-name: GetAchievementNumCriteria
-status: unimplemented
-inputs:
-- - name: achievementID
-    type: number
-outputs:
-- type: number

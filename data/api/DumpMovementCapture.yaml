@@ -1,6 +1,0 @@
----
-name: DumpMovementCapture
-status: unimplemented
-inputs:
-- {}
-outputs: {}

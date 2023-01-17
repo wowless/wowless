@@ -1,9 +1,0 @@
----
-name: GetPVPRoles
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: boolean
-- type: boolean
-- type: boolean

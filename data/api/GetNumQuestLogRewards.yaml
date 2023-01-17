@@ -1,5 +1,0 @@
----
-name: GetNumQuestLogRewards
-status: unimplemented
-outputs:
-- type: number

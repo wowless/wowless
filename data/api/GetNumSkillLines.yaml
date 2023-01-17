@@ -1,5 +1,0 @@
----
-name: GetNumSkillLines
-status: unimplemented
-outputs:
-- type: number

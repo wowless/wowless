@@ -1,7 +1,0 @@
----
-name: SetSendMailShowing
-status: unimplemented
-inputs:
-- - name: sendMailShowing
-    type: boolean
-outputs: {}

@@ -1,7 +1,0 @@
----
-name: HasLoadedCUFProfiles
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: boolean

@@ -1,9 +1,0 @@
----
-name: SetPortraitTexture
-status: implemented
-inputs:
-- - name: textureObject
-    type: table
-  - name: unitToken
-    type: string
-outputs: {}

@@ -1,7 +1,0 @@
----
-name: debugprofilestop
-status: implemented
-inputs:
-- {}
-outputs:
-- type: number

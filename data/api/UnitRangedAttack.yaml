@@ -1,8 +1,0 @@
----
-name: UnitRangedAttack
-status: unimplemented
-inputs:
-- - type: string
-outputs:
-- type: number
-- type: number

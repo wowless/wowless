@@ -1,9 +1,0 @@
----
-name: GetNumCompanions
-status: unimplemented
-inputs:
-- - name: type
-    type: string
-outputs:
-- name: count
-  type: number

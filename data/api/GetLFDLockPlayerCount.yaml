@@ -1,8 +1,0 @@
----
-name: GetLFDLockPlayerCount
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: count
-  type: number

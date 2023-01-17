@@ -1,5 +1,0 @@
----
-name: GetNumBattlegroundTypes
-status: unimplemented
-outputs:
-- type: number

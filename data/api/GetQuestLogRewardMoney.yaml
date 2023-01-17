@@ -1,5 +1,0 @@
----
-name: GetQuestLogRewardMoney
-status: unimplemented
-outputs:
-- type: number

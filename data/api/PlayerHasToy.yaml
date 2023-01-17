@@ -1,9 +1,0 @@
----
-name: PlayerHasToy
-status: unimplemented
-inputs:
-- - name: itemID
-    type: number
-outputs:
-- name: value
-  type: boolean

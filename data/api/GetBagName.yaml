@@ -1,9 +1,0 @@
----
-name: GetBagName
-status: unimplemented
-inputs:
-- - name: bagID
-    type: number
-outputs:
-- name: bagName
-  type: string

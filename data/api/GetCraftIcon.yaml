@@ -1,8 +1,0 @@
----
-name: GetCraftIcon
-status: unimplemented
-inputs:
-- - name: id
-    type: number
-outputs:
-- type: number

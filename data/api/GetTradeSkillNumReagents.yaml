@@ -1,8 +1,0 @@
----
-name: GetTradeSkillNumReagents
-status: unimplemented
-inputs:
-- - name: skillIndex
-    type: number
-outputs:
-- type: number

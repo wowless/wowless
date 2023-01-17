@@ -1,9 +1,0 @@
----
-name: UnitStagger
-status: unimplemented
-inputs:
-- - name: unit
-    type: unit
-outputs:
-- name: stagger
-  type: number

@@ -1,9 +1,0 @@
----
-name: C_ToyBox.GetToyFromIndex
-status: unimplemented
-inputs:
-- - name: itemIndex
-    type: number
-outputs:
-- name: itemID
-  type: number

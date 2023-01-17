@@ -1,7 +1,0 @@
----
-name: GetCurrentBindingSet
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

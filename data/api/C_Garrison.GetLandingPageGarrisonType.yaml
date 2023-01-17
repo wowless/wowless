@@ -1,7 +1,0 @@
----
-name: C_Garrison.GetLandingPageGarrisonType
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

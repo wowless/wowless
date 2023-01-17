@@ -1,6 +1,0 @@
----
-name: GetNumFactions
-status: unimplemented
-outputs:
-- name: numFactions
-  type: number

@@ -10,10 +10,8 @@ local function dblist(product)
     ManifestInterfaceTOCData = true,
   }
   local productapis = require('wowapi.yaml').parseFile('data/products/' .. product .. '/apis.yaml')
-  local allapis = require('wowapi.data').apis
   local sqls = {}
-  for _, apiname in pairs(productapis) do
-    local api = allapis[apiname]
+  for _, api in pairs(productapis) do
     for _, db in ipairs(api.dbs or {}) do
       dbset[db.name] = true
     end

@@ -1,8 +1,0 @@
----
-name: GetQuestID
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: questID
-  type: number
