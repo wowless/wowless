@@ -1,6 +1,3 @@
-local lfs = require('lfs')
-local yaml = require('wowapi.yaml')
-
 local function mapify(t)
   if t then
     local tt = {}
@@ -9,10 +6,6 @@ local function mapify(t)
     end
     return tt
   end
-end
-
-local function hasproduct(t, p)
-  return not t.products or mapify(t.products)[p]
 end
 
 local function stylua(s)
@@ -97,35 +90,24 @@ local ptablemap = {
     return 'NamespaceApis', t
   end,
   uiobjectapis = function(p)
-    local uiobjects = {}
-    for d in lfs.dir('data/uiobjects') do
-      if d ~= '.' and d ~= '..' then
-        local filename = ('data/uiobjects/%s/%s.yaml'):format(d, d)
-        local cfg = yaml.parseFile(filename)
-        uiobjects[cfg.name] = cfg
-      end
-    end
+    local uiobjects = perproduct(p, 'uiobjects')
     local inhrev = {}
-    for _, cfg in pairs(uiobjects) do
-      for inh, t in pairs(cfg.inherits) do
-        if hasproduct(t, p) then
-          inhrev[inh] = inhrev[inh] or {}
-          table.insert(inhrev[inh], cfg.name)
-        end
+    for k, cfg in pairs(uiobjects) do
+      for inh in pairs(cfg.inherits) do
+        inhrev[inh] = inhrev[inh] or {}
+        table.insert(inhrev[inh], k)
       end
     end
     local objTypes = {}
-    for _, cfg in pairs(uiobjects) do
-      objTypes[cfg.name] = cfg.objectType or cfg.name
+    for k, cfg in pairs(uiobjects) do
+      objTypes[k] = cfg.objectType or k
     end
     local function fixup(cfg)
-      for inhname, t in pairs(cfg.inherits) do
-        if hasproduct(t, p) then
-          local inh = uiobjects[inhname]
-          fixup(inh)
-          for n, m in pairs(inh.methods) do
-            cfg.methods[n] = m
-          end
+      for inhname in pairs(cfg.inherits) do
+        local inh = uiobjects[inhname]
+        fixup(inh)
+        for n, m in pairs(inh.methods) do
+          cfg.methods[n] = m
         end
       end
     end
@@ -147,22 +129,16 @@ local ptablemap = {
     uiobjects.WorldFrame = nil
     local t = {}
     for k, v in pairs(uiobjects) do
-      if not hasproduct(v, p) then
-        t[k] = false
-      else
-        local mt = {}
-        for mk, mv in pairs(v.methods) do
-          if hasproduct(mv, p) then
-            mt[mk] = true
-          end
-        end
-        t[k] = {
-          frametype = not not frametypes[k],
-          methods = mt,
-          objtype = objTypes[k],
-          virtual = v.virtual,
-        }
+      local mt = {}
+      for mk in pairs(v.methods) do
+        mt[mk] = true
       end
+      t[k] = {
+        frametype = not not frametypes[k],
+        methods = mt,
+        objtype = objTypes[k],
+        virtual = v.virtual,
+      }
     end
     return 'UIObjectApis', t
   end,

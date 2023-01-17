@@ -1,71 +1,23 @@
-local lfs = require('lfs')
-local plfile = require('pl.file')
-local plpath = require('pl.path')
 local yaml = require('wowapi.yaml')
-local schema = yaml.parseFile('data/schemas/uiobject.yaml').type
-local validate = require('wowapi.schema').validate
 
 describe('uiobjects', function()
-  for entry in lfs.dir('data/uiobjects') do
-    if entry ~= '.' and entry ~= '..' then
-      local fentry = 'data/uiobjects/' .. entry
-      assert(plpath.isdir(fentry), 'invalid entry ' .. entry)
-      describe(entry, function()
-        local yamlname = fentry .. '/' .. entry .. '.yaml'
-        local cfg = assert(yaml.parseFile(yamlname))
-        local luas = {}
-        for subentry in lfs.dir(fentry) do
-          if subentry ~= '.' and subentry ~= '..' then
-            if subentry:sub(-4) == '.lua' then
-              luas[subentry:sub(1, -5)] = assert(loadfile(fentry .. '/' .. subentry))
-            else
-              assert(subentry == entry .. '.yaml')
-            end
+  local expectedImpls = {}
+  for _, p in ipairs(require('wowless.util').productList()) do
+    describe(p, function()
+      local uiobjects = yaml.parseFile('data/products/' .. p .. '/uiobjects.yaml')
+      for k, v in pairs(uiobjects) do
+        for mk, mv in pairs(v.methods or {}) do
+          if mv.status == 'implemented' then
+            expectedImpls[('data/uiobjects/%s/%s.lua'):format(k, mk)] = true
           end
         end
-        describe('yaml', function()
-          it('is correctly formatted', function()
-            assert.same(plfile.read(yamlname), yaml.pprint(cfg))
-          end)
-          it('has the right name', function()
-            assert.same(entry, cfg.name)
-          end)
-          it('schema validates', function()
-            validate('fake product', schema, cfg)
-          end)
-          it('has valid methods', function()
-            assert.same('table', type(cfg.methods))
-            for k in pairs(luas) do
-              assert.Truthy(cfg.methods[k], ('method %q not in yaml'):format(k))
-            end
-          end)
-        end)
-      end)
-    end
-  end
-
-  describe('hierarchy', function()
-    local function hasproduct(t, p)
-      if not t.products then
-        return true
       end
-      for _, k in ipairs(t.products) do
-        if k == p then
-          return true
-        end
-      end
-      return false
-    end
-
-    local uiobjects = require('wowapi.data').uiobjects
-
-    for _, p in ipairs(require('wowless.util').productList()) do
-      describe(p, function()
+      describe('hierarchy', function()
         local g = {}
         for k, v in pairs(uiobjects) do
           local t = {}
-          for ik, iv in pairs(v.cfg.inherits) do
-            t[ik] = hasproduct(iv, p) or nil
+          for ik in pairs(v.inherits) do
+            t[ik] = true
           end
           g[k] = t
         end
@@ -90,19 +42,26 @@ describe('uiobjects', function()
             end)
             if not nr[k] then
               it('is not virtual', function()
-                assert.Nil(uiobjects[k].cfg.virtual)
+                assert.Nil(uiobjects[k].virtual)
               end)
               it('is a uiobject', function()
                 assert.True(t.UIObject)
               end)
             elseif not next(g[k]) then
               it('is virtual', function()
-                assert.True(uiobjects[k].cfg.virtual)
+                assert.True(uiobjects[k].virtual)
               end)
             end
           end)
         end
       end)
-    end
+    end)
+  end
+  local actualImpls = {}
+  for _, f in ipairs(require('pl.dir').getallfiles('data/uiobjects/')) do
+    actualImpls[f] = true
+  end
+  it('has exactly the right impl files', function()
+    assert.same(expectedImpls, actualImpls)
   end)
 end)

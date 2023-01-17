@@ -4,11 +4,11 @@ local domains = {
   sqlcursor = wdata.sqlcursor,
   sqllookup = wdata.sqllookup,
   state = wdata.state,
-  uiobject = wdata.uiobjects,
 }
 local productDomains = {
   api = wdata.apis,
   structure = wdata.structures,
+  uiobject = wdata.uiobjects,
   xml = wdata.xml,
 }
 

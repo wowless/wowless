@@ -121,18 +121,6 @@ do
   end
 end
 
-local function supported(obj)
-  if not obj.products then
-    return true
-  end
-  for _, p in ipairs(obj.products) do
-    if p == args.product then
-      return true
-    end
-  end
-  return false
-end
-
 local cvars = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
   cvars[k:lower()] = {
@@ -156,22 +144,16 @@ for _, f in ipairs(require('pl.dir').getfiles('data/state')) do
 end
 
 local uiobjects = {}
-for _, d in ipairs(require('pl.dir').getdirectories('data/uiobjects')) do
-  local name = d:match('/(%a+)$')
-  local cfg = parseYaml(d .. '/' .. name .. '.yaml')
-  if supported(cfg) then
-    local methods = {}
-    for k, v in pairs(cfg.methods or {}) do
-      if supported(v) then
-        if v.status == 'implemented' then
-          v.impl = readFile('data/uiobjects/' .. name .. '/' .. k .. '.lua')
-        end
-        methods[k] = v
-      end
+for k, v in pairs(parseYaml('data/products/' .. product .. '/uiobjects.yaml')) do
+  local methods = {}
+  for mk, mv in pairs(v.methods or {}) do
+    if mv.status == 'implemented' then
+      mv.impl = readFile('data/uiobjects/' .. k .. '/' .. mk .. '.lua')
     end
-    cfg.methods = methods
-    uiobjects[cfg.name] = cfg
+    methods[mk] = mv
   end
+  v.methods = methods
+  uiobjects[k] = v
 end
 
 local data = {
