@@ -1684,9 +1684,6 @@ C_Club.CreateTicket:
     - name: defaultStreamId
       nilable: true
       type: string
-    - name: isCrossFaction
-      nilable: true
-      type: boolean
   outputs: {}
 C_Club.DeclineInvitation:
   inputs:
@@ -2948,7 +2945,7 @@ C_Commentator.SetBlocklistedAuras:
   outputs: {}
 C_Commentator.SetBlocklistedCooldowns:
   inputs:
-  - - name: specID
+  - - name: classID
       type: number
     - innerType: number
       name: spellIDs
@@ -3078,7 +3075,7 @@ C_Commentator.SetPositionLerpAmount:
   outputs: {}
 C_Commentator.SetRequestedDebuffCooldowns:
   inputs:
-  - - name: specID
+  - - name: classID
       type: number
     - innerType: number
       name: spellIDs
@@ -3086,7 +3083,7 @@ C_Commentator.SetRequestedDebuffCooldowns:
   outputs: {}
 C_Commentator.SetRequestedDefensiveCooldowns:
   inputs:
-  - - name: specID
+  - - name: classID
       type: number
     - innerType: number
       name: spellIDs
@@ -3094,7 +3091,7 @@ C_Commentator.SetRequestedDefensiveCooldowns:
   outputs: {}
 C_Commentator.SetRequestedOffensiveCooldowns:
   inputs:
-  - - name: specID
+  - - name: classID
       type: number
     - innerType: number
       name: spellIDs
@@ -3370,6 +3367,9 @@ C_CVar.SetCVarBitfield:
       type: number
     - name: value
       type: boolean
+    - name: scriptCVar
+      nilable: true
+      type: string
   outputs:
   - name: success
     type: boolean
@@ -4152,7 +4152,7 @@ C_Item.GetItemGUID:
       name: itemLocation
       type: table
   outputs:
-  - name: itemGUID
+  - name: itemGuid
     type: string
 C_Item.GetItemIcon:
   inputs:
@@ -4522,19 +4522,15 @@ C_LFGList.Search:
   inputs:
   - - name: categoryID
       type: number
+    - innerType: number
+      name: activityIDs
+      type: table
     - default: 0
       name: filter
       type: number
     - default: 0
       name: preferredFilters
       type: number
-    - name: languageFilter
-      nilable: true
-      type: C_LFGList.WowLocale
-    - default: false
-      name: searchCrossFactionListings
-      nilable: true
-      type: boolean
   outputs: {}
 C_LFGList.UpdateListing:
   inputs:
@@ -5128,6 +5124,8 @@ C_PvP.GetArenaCrowdControlInfo:
   outputs:
   - name: spellID
     type: number
+  - name: itemID
+    type: number
   - name: startTime
     type: number
   - name: duration
@@ -5411,13 +5409,15 @@ C_Seasons.GetActiveSeason:
   inputs:
   - {}
   outputs:
-  - nilable: true
+  - name: seasonID
+    nilable: true
     type: number
 C_Seasons.HasActiveSeason:
   inputs:
   - {}
   outputs:
-  - type: boolean
+  - name: value
+    type: boolean
 C_SharedCharacterServices.GetLastSeenCharacterUpgradePopup: {}
 C_SharedCharacterServices.GetLastSeenExpansionTrialPopup: {}
 C_SharedCharacterServices.GetUpgradeDistributions: {}
@@ -5499,7 +5499,7 @@ C_SocialRestrictions.IsChatDisabled:
   inputs:
   - {}
   outputs:
-  - name: disabled
+  - name: isDisabled
     type: boolean
 C_SocialRestrictions.IsMuted:
   inputs:
@@ -6242,7 +6242,6 @@ C_VoiceChat.GetCurrentVoiceChatConnectionStatusCode:
   - {}
   outputs:
   - name: statusCode
-    nilable: true
     type: number
 C_VoiceChat.GetInputVolume:
   inputs:

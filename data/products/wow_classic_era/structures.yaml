@@ -1038,41 +1038,6 @@ C_LFGList.PvpRatingInfo:
     type: number
   - name: tier
     type: number
-C_LFGList.WowLocale:
-  fields:
-  - default: false
-    name: deDE
-    type: boolean
-  - default: false
-    name: enUS
-    type: boolean
-  - default: false
-    name: esES
-    type: boolean
-  - default: false
-    name: esMX
-    type: boolean
-  - default: false
-    name: frFR
-    type: boolean
-  - default: false
-    name: itIT
-    type: boolean
-  - default: false
-    name: koKR
-    type: boolean
-  - default: false
-    name: ptBR
-    type: boolean
-  - default: false
-    name: ruRU
-    type: boolean
-  - default: false
-    name: zhCN
-    type: boolean
-  - default: false
-    name: zhTW
-    type: boolean
 C_LossOfControl.LossOfControlData:
   fields:
   - name: displayText

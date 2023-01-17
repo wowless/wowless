@@ -3,7 +3,7 @@ local args = (function()
   local parser = require('argparse')()
   parser:argument('product', 'product to process')
   parser:argument('type', 'type to write'):choices(allTypes)
-  parser:option('-f --filter', 'name filter')
+  parser:argument('filter', 'name filter'):default('')
   return parser:parse()
 end)()
 
@@ -85,10 +85,8 @@ local tys = {}
 for name in pairs(tabs) do
   tys[name] = true
 end
-for k, v in pairs(require('wowapi.data').structures) do
-  if v.status == 'implemented' then
-    tys[k] = true
-  end
+for k in pairs(require('wowapi.data').structures[product]) do
+  tys[k] = true
 end
 local knownMixinStructs = {
   ColorMixin = 'Color',
@@ -177,11 +175,22 @@ local rewriters = {
       end
       return outputs
     end
+    local function skip(api)
+      if not api or api.impl then
+        return true
+      end
+      for _, out in ipairs(api.outputs) do
+        if out.stub then
+          return true
+        end
+      end
+      return false
+    end
     local y = require('wowapi.yaml')
     local f = 'data/products/' .. product .. '/apis.yaml'
     local apis = y.parseFile(f)
     for name, fn in pairs(funcs) do
-      if name:sub(1, #args.filter) == args.filter then
+      if name:sub(1, #args.filter) == args.filter and not skip(apis[name]) then
         local dotpos = name:find('%.')
         local ns = dotpos and name:sub(1, dotpos - 1)
         apis[name] = {
