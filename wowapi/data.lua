@@ -19,19 +19,6 @@ local function loaddir(dir, ext)
   end
 end
 
-local function loadUIObjects()
-  local uiobjects = {}
-  for d in require('lfs').dir('data/uiobjects') do
-    if d ~= '.' and d ~= '..' then
-      uiobjects[d] = {
-        cfg = extLoaders.yaml(('data/uiobjects/%s/%s.yaml'):format(d, d)),
-        methods = loaddir('uiobjects/' .. d, 'lua')(),
-      }
-    end
-  end
-  return uiobjects
-end
-
 local function perproduct(f)
   return function()
     local t = {}
@@ -51,7 +38,7 @@ local fns = {
   sqllookup = loaddir('sql/lookup', 'sql'),
   state = loaddir('state', 'yaml'),
   structures = perproduct('structures'),
-  uiobjects = loadUIObjects,
+  uiobjects = perproduct('uiobjects'),
   xml = perproduct('xml'),
 }
 
