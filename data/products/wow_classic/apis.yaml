@@ -837,7 +837,13 @@ C_BarberShop.ClearPreviewChoices:
       name: clearSavedChoices
       type: boolean
   outputs: {}
-C_BarberShop.CycleCharCustomization: {}
+C_BarberShop.CycleCharCustomization:
+  inputs:
+  - - name: type
+      type: number
+    - name: forward
+      type: boolean
+  outputs: {}
 C_BarberShop.GetAvailableCustomizations:
   inputs:
   - {}
@@ -845,7 +851,12 @@ C_BarberShop.GetAvailableCustomizations:
   - innerType: unknown
     name: categories
     type: table
-C_BarberShop.GetBarbersChoiceCost: {}
+C_BarberShop.GetBarbersChoiceCost:
+  inputs:
+  - {}
+  outputs:
+  - name: cost
+    type: number
 C_BarberShop.GetCurrentCameraZoom:
   inputs:
   - {}
@@ -864,22 +875,49 @@ C_BarberShop.GetCurrentCost:
   outputs:
   - name: cost
     type: number
-C_BarberShop.GetCustomizationTypeInfo: {}
+C_BarberShop.GetCustomizationTypeInfo:
+  inputs:
+  - - name: type
+      type: number
+  outputs:
+  - name: customizationName
+    type: string
+  - name: name
+    type: string
+  - name: isCurrent
+    type: boolean
 C_BarberShop.HasAnyChanges:
   inputs:
   - {}
   outputs:
   - name: hasChanges
     type: boolean
-C_BarberShop.IsValidCustomizationType: {}
+C_BarberShop.IsValidCustomizationType:
+  inputs:
+  - - name: type
+      type: number
+  outputs:
+  - name: isValid
+    type: boolean
 C_BarberShop.IsViewingAlteredForm:
   inputs:
   - {}
   outputs:
   - name: isViewingAlteredForm
     type: boolean
-C_BarberShop.IsViewingNativeSex: {}
-C_BarberShop.IsViewingVisibleSex: {}
+C_BarberShop.IsViewingNativeSex:
+  inputs:
+  - {}
+  outputs:
+  - name: isNativeSex
+    type: boolean
+C_BarberShop.IsViewingVisibleSex:
+  inputs:
+  - - name: sex
+      type: number
+  outputs:
+  - name: isVisibleSex
+    type: boolean
 C_BarberShop.PreviewCustomizationChoice:
   inputs:
   - - name: optionID
@@ -1810,9 +1848,6 @@ C_Club.CreateTicket:
     - name: defaultStreamId
       nilable: true
       type: string
-    - name: isCrossFaction
-      nilable: true
-      type: boolean
   outputs: {}
 C_Club.DeclineInvitation:
   inputs:
@@ -3074,7 +3109,7 @@ C_Commentator.SetBlocklistedAuras:
   outputs: {}
 C_Commentator.SetBlocklistedCooldowns:
   inputs:
-  - - name: specID
+  - - name: classID
       type: number
     - innerType: number
       name: spellIDs
@@ -3204,7 +3239,7 @@ C_Commentator.SetPositionLerpAmount:
   outputs: {}
 C_Commentator.SetRequestedDebuffCooldowns:
   inputs:
-  - - name: specID
+  - - name: classID
       type: number
     - innerType: number
       name: spellIDs
@@ -3212,7 +3247,7 @@ C_Commentator.SetRequestedDebuffCooldowns:
   outputs: {}
 C_Commentator.SetRequestedDefensiveCooldowns:
   inputs:
-  - - name: specID
+  - - name: classID
       type: number
     - innerType: number
       name: spellIDs
@@ -3220,7 +3255,7 @@ C_Commentator.SetRequestedDefensiveCooldowns:
   outputs: {}
 C_Commentator.SetRequestedOffensiveCooldowns:
   inputs:
-  - - name: specID
+  - - name: classID
       type: number
     - innerType: number
       name: spellIDs
@@ -3496,6 +3531,9 @@ C_CVar.SetCVarBitfield:
       type: number
     - name: value
       type: boolean
+    - name: scriptCVar
+      nilable: true
+      type: string
   outputs:
   - name: success
     type: boolean
@@ -4293,7 +4331,7 @@ C_Item.GetItemGUID:
       name: itemLocation
       type: table
   outputs:
-  - name: itemGUID
+  - name: itemGuid
     type: string
 C_Item.GetItemIcon:
   inputs:
@@ -4484,6 +4522,9 @@ C_LFGList.CreateListing:
   - - innerType: number
       name: activityIDs
       type: table
+    - name: newPlayerFriendly
+      nilable: true
+      type: boolean
   outputs:
   - name: success
     type: boolean
@@ -4507,12 +4548,6 @@ C_LFGList.GetActivityInfoTable:
   inputs:
   - - name: activityID
       type: number
-    - name: questID
-      nilable: true
-      type: number
-    - name: showWarmode
-      nilable: true
-      type: boolean
   outputs:
   - name: activityInfo
     type: C_LFGList.GroupFinderActivityInfo
@@ -4545,8 +4580,18 @@ C_LFGList.GetFilteredSearchResults:
   - innerType: number
     name: filteredResults
     type: table
-C_LFGList.GetRoles: {}
-C_LFGList.GetSavedRoles: {}
+C_LFGList.GetRoles:
+  inputs:
+  - {}
+  outputs:
+  - name: roles
+    type: C_LFGList.LFGRoles
+C_LFGList.GetSavedRoles:
+  inputs:
+  - {}
+  outputs:
+  - name: roles
+    type: C_LFGList.LFGRoles
 C_LFGList.GetSearchResultFriends: {}
 C_LFGList.GetSearchResultInfo:
   inputs:
@@ -4594,7 +4639,7 @@ C_LFGList.IsLookingForGroupEnabled:
     type: boolean
 C_LFGList.IsPlayerAuthenticatedForLFG:
   inputs:
-  - - name: activityID
+  - - name: categoryID
       nilable: true
       type: number
   outputs:
@@ -4605,31 +4650,40 @@ C_LFGList.RequestAvailableActivities:
   inputs:
   - {}
   outputs: {}
-C_LFGList.RequestInvite: {}
+C_LFGList.RequestInvite:
+  inputs:
+  - - name: searchResultID
+      type: number
+  outputs: {}
 C_LFGList.Search:
   inputs:
   - - name: categoryID
       type: number
+    - innerType: number
+      name: activityIDs
+      type: table
     - default: 0
       name: filter
       type: number
     - default: 0
       name: preferredFilters
       type: number
-    - name: languageFilter
-      nilable: true
-      type: C_LFGList.WowLocale
-    - default: false
-      name: searchCrossFactionListings
-      nilable: true
-      type: boolean
   outputs: {}
-C_LFGList.SetRoles: {}
+C_LFGList.SetRoles:
+  inputs:
+  - - name: roles
+      type: C_LFGList.LFGRoles
+  outputs:
+  - name: success
+    type: boolean
 C_LFGList.UpdateListing:
   inputs:
   - - innerType: number
       name: activityIDs
       type: table
+    - name: newPlayerFriendly
+      nilable: true
+      type: boolean
   outputs:
   - name: success
     type: boolean
@@ -5210,7 +5264,12 @@ C_PlayerInfo.IsConnected:
   - name: isConnected
     nilable: true
     type: boolean
-C_PlayerInfo.IsXPUserDisabled: {}
+C_PlayerInfo.IsXPUserDisabled:
+  inputs:
+  - {}
+  outputs:
+  - name: isDisabled
+    type: boolean
 C_PlayerInfo.UnitIsSameServer:
   inputs:
   - - mixin: PlayerLocationMixin
@@ -5234,13 +5293,60 @@ C_PvP.GetArenaCrowdControlInfo:
   outputs:
   - name: spellID
     type: number
+  - name: itemID
+    type: number
   - name: startTime
     type: number
   - name: duration
     type: number
-C_PvP.GetHolidayBGLossRewards: {}
-C_PvP.GetHolidayBGRewards: {}
-C_PvP.GetRandomBGLossRewards: {}
+C_PvP.GetHolidayBGLossRewards:
+  inputs:
+  - {}
+  outputs:
+  - name: honor
+    type: number
+  - name: experience
+    type: number
+  - innerType: C_PvP.BattlefieldItemReward
+    name: itemRewards
+    nilable: true
+    type: table
+  - innerType: C_PvP.BattlefieldCurrencyReward
+    name: currencyRewards
+    nilable: true
+    type: table
+C_PvP.GetHolidayBGRewards:
+  inputs:
+  - {}
+  outputs:
+  - name: honor
+    type: number
+  - name: experience
+    type: number
+  - innerType: C_PvP.BattlefieldItemReward
+    name: itemRewards
+    nilable: true
+    type: table
+  - innerType: C_PvP.BattlefieldCurrencyReward
+    name: currencyRewards
+    nilable: true
+    type: table
+C_PvP.GetRandomBGLossRewards:
+  inputs:
+  - {}
+  outputs:
+  - name: honor
+    type: number
+  - name: experience
+    type: number
+  - innerType: C_PvP.BattlefieldItemReward
+    name: itemRewards
+    nilable: true
+    type: table
+  - innerType: C_PvP.BattlefieldCurrencyReward
+    name: currencyRewards
+    nilable: true
+    type: table
 C_PvP.GetRandomBGRewards:
   inputs:
   - {}
@@ -5524,13 +5630,15 @@ C_Seasons.GetActiveSeason:
   inputs:
   - {}
   outputs:
-  - nilable: true
+  - name: seasonID
+    nilable: true
     type: number
 C_Seasons.HasActiveSeason:
   inputs:
   - {}
   outputs:
-  - type: boolean
+  - name: value
+    type: boolean
 C_SharedCharacterServices.GetLastSeenCharacterUpgradePopup: {}
 C_SharedCharacterServices.GetLastSeenExpansionTrialPopup: {}
 C_SharedCharacterServices.GetUpgradeDistributions: {}
@@ -5612,7 +5720,7 @@ C_SocialRestrictions.IsChatDisabled:
   inputs:
   - {}
   outputs:
-  - name: disabled
+  - name: isDisabled
     type: boolean
 C_SocialRestrictions.IsMuted:
   inputs:
@@ -6354,7 +6462,6 @@ C_VoiceChat.GetCurrentVoiceChatConnectionStatusCode:
   - {}
   outputs:
   - name: statusCode
-    nilable: true
     type: number
 C_VoiceChat.GetInputVolume:
   inputs:
@@ -8480,6 +8587,8 @@ GetExistingSocketLink: {}
 GetExpansionDisplayInfo:
   inputs:
   - - name: expansionLevel
+      type: number
+    - name: desiredReleaseType
       type: number
   outputs:
   - name: info

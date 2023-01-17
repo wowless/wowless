@@ -179,7 +179,7 @@ local rewriters = {
       if not api or api.impl then
         return true
       end
-      for _, out in ipairs(api.outputs) do
+      for _, out in ipairs(api.outputs or {}) do
         if out.stub then
           return true
         end
