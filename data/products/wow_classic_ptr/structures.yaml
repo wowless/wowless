@@ -712,6 +712,15 @@ C_Console.ConsoleCommandInfo:
     type: string
   - name: scriptParameters
     type: string
+C_Container.ItemQuestInfo:
+  fields:
+  - name: isActive
+    type: boolean
+  - name: isQuestItem
+    type: boolean
+  - name: questID
+    nilable: true
+    type: number
 C_CreatureInfo.ClassInfo:
   fields:
   - name: classFile
