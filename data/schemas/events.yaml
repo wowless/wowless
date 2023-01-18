@@ -11,13 +11,6 @@ type:
           type:
             sequenceof:
               record:
-                innerType:
-                  type:
-                    oneof:
-                    - literal: string
-                    - ref: structure
-                mixin:
-                  type: string
                 name:
                   required: true
                   type: string
@@ -31,4 +24,17 @@ type:
                     - literal: number
                     - literal: string
                     - literal: table
-                    - ref: structure
+                    - record:
+                        mixin:
+                          type: string
+                        structure:
+                          required: true
+                          type:
+                            ref: structure
+                    - record:
+                        arrayof:
+                          required: true
+                          type:
+                            oneof:
+                            - literal: string
+                            - ref: structure

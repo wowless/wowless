@@ -33,7 +33,10 @@ describe('structures', function()
         reflist(expected, api.outputs)
       end
       for _, v in pairs(parseYaml('data/products/' .. p .. '/events.yaml')) do
-        reflist(expected, v.payload)
+        for _, pv in ipairs(v.payload or {}) do
+          ref(expected, pv.type.structure)
+          ref(expected, pv.type.arrayof)
+        end
       end
       local actual = {}
       for k, v in pairs(parseYaml('data/products/' .. p .. '/structures.yaml')) do

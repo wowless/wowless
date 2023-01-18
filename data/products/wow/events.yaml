@@ -133,7 +133,8 @@ ANIMA_DIVERSION_CLOSE:
 ANIMA_DIVERSION_OPEN:
   payload:
   - name: info
-    type: C_AnimaDiversion.AnimaDiversionFrameInfo
+    type:
+      structure: C_AnimaDiversion.AnimaDiversionFrameInfo
 ANIMA_DIVERSION_TALENT_UPDATED:
   payload: {}
 ARCHAEOLOGY_CLOSED:
@@ -242,9 +243,9 @@ AUCTION_HOUSE_BROWSE_FAILURE:
   payload: {}
 AUCTION_HOUSE_BROWSE_RESULTS_ADDED:
   payload:
-  - innerType: C_AuctionHouse.BrowseResultInfo
-    name: addedBrowseResults
-    type: table
+  - name: addedBrowseResults
+    type:
+      arrayof: C_AuctionHouse.BrowseResultInfo
 AUCTION_HOUSE_BROWSE_RESULTS_UPDATED:
   payload: {}
 AUCTION_HOUSE_CLOSED:
@@ -261,7 +262,8 @@ AUCTION_HOUSE_NEW_RESULTS_RECEIVED:
   payload:
   - name: itemKey
     nilable: true
-    type: C_AuctionHouse.ItemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
 AUCTION_HOUSE_POST_ERROR:
   payload: {}
 AUCTION_HOUSE_POST_WARNING:
@@ -347,9 +349,10 @@ AZERITE_EMPOWERED_ITEM_LOOTED:
     type: string
 AZERITE_EMPOWERED_ITEM_SELECTION_UPDATED:
   payload:
-  - mixin: ItemLocationMixin
-    name: azeriteEmpoweredItemLocation
-    type: ItemLocation
+  - name: azeriteEmpoweredItemLocation
+    type:
+      mixin: ItemLocationMixin
+      structure: ItemLocation
 AZERITE_ESSENCE_ACTIVATED:
   payload:
   - name: slot
@@ -384,25 +387,27 @@ AZERITE_ITEM_ENABLED_STATE_CHANGED:
     type: boolean
 AZERITE_ITEM_EXPERIENCE_CHANGED:
   payload:
-  - mixin: ItemLocationMixin
-    name: azeriteItemLocation
-    type: ItemLocation
+  - name: azeriteItemLocation
+    type:
+      mixin: ItemLocationMixin
+      structure: ItemLocation
   - name: oldExperienceAmount
     type: number
   - name: newExperienceAmount
     type: number
 AZERITE_ITEM_POWER_LEVEL_CHANGED:
   payload:
-  - mixin: ItemLocationMixin
-    name: azeriteItemLocation
-    type: ItemLocation
+  - name: azeriteItemLocation
+    type:
+      mixin: ItemLocationMixin
+      structure: ItemLocation
   - name: oldPowerLevel
     type: number
   - name: newPowerLevel
     type: number
-  - innerType: C_AzeriteItem.UnlockedAzeriteEmpoweredItems
-    name: unlockedEmpoweredItemsInfo
-    type: table
+  - name: unlockedEmpoweredItemsInfo
+    type:
+      arrayof: C_AzeriteItem.UnlockedAzeriteEmpoweredItems
 BAG_CLOSED:
   payload:
   - name: bagID
@@ -3229,16 +3234,16 @@ CLUB_ERROR:
     type: number
 CLUB_FINDER_APPLICANT_INVITE_RECIEVED:
   payload:
-  - innerType: string
-    name: clubFinderGUIDs
-    type: table
+  - name: clubFinderGUIDs
+    type:
+      arrayof: string
 CLUB_FINDER_APPLICATIONS_UPDATED:
   payload:
   - name: type
     type: number
-  - innerType: string
-    name: clubFinderGUIDs
-    type: table
+  - name: clubFinderGUIDs
+    type:
+      arrayof: string
 CLUB_FINDER_CAN_WHISPER_APPLICANT:
   payload:
   - name: applicant
@@ -3262,7 +3267,8 @@ CLUB_FINDER_ENABLED_OR_DISABLED:
 CLUB_FINDER_LINKED_CLUB_RETURNED:
   payload:
   - name: clubInfo
-    type: C_ClubFinder.RecruitingClubInfo
+    type:
+      structure: C_ClubFinder.RecruitingClubInfo
 CLUB_FINDER_MEMBERSHIP_LIST_CHANGED:
   payload: {}
 CLUB_FINDER_PLAYER_PENDING_LIST_RECIEVED:
@@ -3271,9 +3277,9 @@ CLUB_FINDER_PLAYER_PENDING_LIST_RECIEVED:
     type: number
 CLUB_FINDER_POST_UPDATED:
   payload:
-  - innerType: string
-    name: clubFinderGUIDs
-    type: table
+  - name: clubFinderGUIDs
+    type:
+      arrayof: string
 CLUB_FINDER_RECRUIT_LIST_CHANGED:
   payload: {}
 CLUB_FINDER_RECRUITMENT_POST_RETURNED:
@@ -3287,7 +3293,8 @@ CLUB_FINDER_RECRUITS_UPDATED:
 CLUB_INVITATION_ADDED_FOR_SELF:
   payload:
   - name: invitation
-    type: C_Club.ClubSelfInvitationInfo
+    type:
+      structure: C_Club.ClubSelfInvitationInfo
 CLUB_INVITATION_REMOVED_FOR_SELF:
   payload:
   - name: invitationId
@@ -3337,7 +3344,8 @@ CLUB_MESSAGE_ADDED:
   - name: streamId
     type: string
   - name: messageId
-    type: C_Club.ClubMessageIdentifier
+    type:
+      structure: C_Club.ClubMessageIdentifier
 CLUB_MESSAGE_HISTORY_RECEIVED:
   payload:
   - name: clubId
@@ -3345,9 +3353,11 @@ CLUB_MESSAGE_HISTORY_RECEIVED:
   - name: streamId
     type: string
   - name: downloadedRange
-    type: C_Club.ClubMessageRange
+    type:
+      structure: C_Club.ClubMessageRange
   - name: contiguousRange
-    type: C_Club.ClubMessageRange
+    type:
+      structure: C_Club.ClubMessageRange
 CLUB_MESSAGE_UPDATED:
   payload:
   - name: clubId
@@ -3355,7 +3365,8 @@ CLUB_MESSAGE_UPDATED:
   - name: streamId
     type: string
   - name: messageId
-    type: C_Club.ClubMessageIdentifier
+    type:
+      structure: C_Club.ClubMessageIdentifier
 CLUB_REMOVED:
   payload:
   - name: clubId
@@ -3411,7 +3422,8 @@ CLUB_TICKET_CREATED:
   - name: clubId
     type: string
   - name: ticketInfo
-    type: C_Club.ClubTicketInfo
+    type:
+      structure: C_Club.ClubTicketInfo
 CLUB_TICKET_RECEIVED:
   payload:
   - name: ticket
@@ -3588,9 +3600,9 @@ CORPSE_OUT_OF_RANGE:
   payload: {}
 COVENANT_CALLINGS_UPDATED:
   payload:
-  - innerType: BountyInfo
-    name: callings
-    type: table
+  - name: callings
+    type:
+      arrayof: BountyInfo
 COVENANT_CHOSEN:
   payload:
   - name: covenantID
@@ -3600,7 +3612,8 @@ COVENANT_PREVIEW_CLOSE:
 COVENANT_PREVIEW_OPEN:
   payload:
   - name: previewInfo
-    type: C_CovenantPreview.CovenantPreviewInfo
+    type:
+      structure: C_CovenantPreview.CovenantPreviewInfo
 COVENANT_RENOWN_CATCH_UP_STATE_UPDATE:
   payload: {}
 COVENANT_SANCTUM_RENOWN_LEVEL_CHANGED:
@@ -3773,7 +3786,8 @@ DYNAMIC_GOSSIP_POI_UPDATED:
 EDIT_MODE_LAYOUTS_UPDATED:
   payload:
   - name: layoutInfo
-    type: C_EditMode.EditModeLayouts
+    type:
+      structure: C_EditMode.EditModeLayouts
   - name: fromServer
     type: boolean
 EJ_DIFFICULTY_UPDATE:
@@ -4062,12 +4076,13 @@ GARRISON_MISSION_COMPLETE_RESPONSE:
     type: boolean
   - name: bonusRollSuccess
     type: boolean
-  - innerType: C_Garrison.GarrisonFollowerDeathInfo
-    name: followerDeaths
-    type: table
+  - name: followerDeaths
+    type:
+      arrayof: C_Garrison.GarrisonFollowerDeathInfo
   - name: autoCombatResult
     nilable: true
-    type: C_Garrison.AutoCombatResult
+    type:
+      structure: C_Garrison.AutoCombatResult
 GARRISON_MISSION_FINISHED:
   payload:
   - name: followerTypeID
@@ -4213,7 +4228,8 @@ GENERIC_ERROR:
 GENERIC_WIDGET_DISPLAY_SHOW:
   payload:
   - name: info
-    type: C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo
+    type:
+      structure: C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo
 GET_ITEM_INFO_RECEIVED:
   payload:
   - name: itemID
@@ -4316,7 +4332,8 @@ GUILD_INVITE_REQUEST:
     type: boolean
   - name: tabardInfo
     nilable: true
-    type: GuildTabardInfo
+    type:
+      structure: GuildTabardInfo
 GUILD_MOTD:
   payload:
   - name: motdText
@@ -4530,10 +4547,11 @@ ITEM_INTERACTION_CHARGE_INFO_UPDATED:
   payload: {}
 ITEM_INTERACTION_ITEM_SELECTION_UPDATED:
   payload:
-  - mixin: ItemLocationMixin
-    name: itemLocation
+  - name: itemLocation
     nilable: true
-    type: ItemLocation
+    type:
+      mixin: ItemLocationMixin
+      structure: ItemLocation
 ITEM_KEY_ITEM_INFO_RECEIVED:
   payload:
   - name: itemID
@@ -4567,11 +4585,13 @@ ITEM_RESTORATION_BUTTON_STATUS:
 ITEM_SEARCH_RESULTS_ADDED:
   payload:
   - name: itemKey
-    type: C_AuctionHouse.ItemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
 ITEM_SEARCH_RESULTS_UPDATED:
   payload:
   - name: itemKey
-    type: C_AuctionHouse.ItemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
   - name: newAuctionID
     nilable: true
     type: number
@@ -4858,9 +4878,9 @@ LORE_TEXT_UPDATED_CAMPAIGN:
   payload:
   - name: campaignID
     type: number
-  - innerType: C_LoreText.LoreTextEntry
-    name: textEntries
-    type: table
+  - name: textEntries
+    type:
+      arrayof: C_LoreText.LoreTextEntry
 LOSS_OF_CONTROL_ADDED:
   payload:
   - name: effectIndex
@@ -5119,7 +5139,8 @@ OPEN_SPLASH_SCREEN:
   payload:
   - name: info
     nilable: true
-    type: C_SplashScreen.SplashScreenInfo
+    type:
+      structure: C_SplashScreen.SplashScreenInfo
 OPEN_TABARD_FRAME:
   payload: {}
 OWNED_AUCTION_BIDDER_INFO_RECEIVED:
@@ -5599,7 +5620,8 @@ PORTRAITS_UPDATED:
 POST_MATCH_CURRENCY_REWARD_UPDATE:
   payload:
   - name: reward
-    type: C_PvP.PVPPostMatchCurrencyReward
+    type:
+      structure: C_PvP.PVPPostMatchCurrencyReward
 POST_MATCH_ITEM_REWARD_UPDATE:
   payload: {}
 PRODUCT_ASSIGN_TO_TARGET_FAILED:
@@ -5637,13 +5659,15 @@ PVP_REWARDS_UPDATE:
 PVP_ROLE_POPUP_HIDE:
   payload:
   - name: readyCheckInfo
-    type: C_PvP.PvpReadyCheckInfo
+    type:
+      structure: C_PvP.PvpReadyCheckInfo
 PVP_ROLE_POPUP_JOINED_MATCH:
   payload: {}
 PVP_ROLE_POPUP_SHOW:
   payload:
   - name: readyCheckInfo
-    type: C_PvP.PvpReadyCheckInfo
+    type:
+      structure: C_PvP.PvpReadyCheckInfo
 PVP_ROLE_UPDATE:
   payload: {}
 PVP_SPECIAL_EVENT_INFO_UPDATED:
@@ -5823,7 +5847,8 @@ RAF_ENTITLEMENT_DELIVERED:
 RAF_INFO_UPDATED:
   payload:
   - name: info
-    type: C_RecruitAFriend.RafInfo
+    type:
+      structure: C_RecruitAFriend.RafInfo
 RAF_RECRUITING_ENABLED_STATUS:
   payload:
   - name: enabled
@@ -5835,7 +5860,8 @@ RAF_SYSTEM_ENABLED_STATUS:
 RAF_SYSTEM_INFO_UPDATED:
   payload:
   - name: systemInfo
-    type: C_RecruitAFriend.RafSystemInfo
+    type:
+      structure: C_RecruitAFriend.RafSystemInfo
 RAID_BOSS_EMOTE:
   payload:
   - name: text
@@ -6240,19 +6266,22 @@ SOULBIND_CONDUIT_COLLECTION_REMOVED:
 SOULBIND_CONDUIT_COLLECTION_UPDATED:
   payload:
   - name: collectionData
-    type: C_Soulbinds.ConduitCollectionData
+    type:
+      structure: C_Soulbinds.ConduitCollectionData
 SOULBIND_CONDUIT_INSTALLED:
   payload:
   - name: nodeID
     type: number
   - name: data
-    type: C_Soulbinds.SoulbindConduitData
+    type:
+      structure: C_Soulbinds.SoulbindConduitData
 SOULBIND_CONDUIT_UNINSTALLED:
   payload:
   - name: nodeID
     type: number
   - name: data
-    type: C_Soulbinds.SoulbindConduitData
+    type:
+      structure: C_Soulbinds.SoulbindConduitData
 SOULBIND_FORGE_INTERACTION_ENDED:
   payload: {}
 SOULBIND_FORGE_INTERACTION_STARTED:
@@ -6658,7 +6687,8 @@ TRADE_SKILL_CRAFTING_REAGENT_BONUS_TEXT_UPDATED:
 TRADE_SKILL_CURRENCY_REWARD_RESULT:
   payload:
   - name: data
-    type: CraftingCurrencyResultData
+    type:
+      structure: CraftingCurrencyResultData
 TRADE_SKILL_DATA_SOURCE_CHANGED:
   payload: {}
 TRADE_SKILL_DATA_SOURCE_CHANGING:
@@ -6670,7 +6700,8 @@ TRADE_SKILL_FAVORITES_CHANGED:
 TRADE_SKILL_ITEM_CRAFTED_RESULT:
   payload:
   - name: data
-    type: CraftingItemResultData
+    type:
+      structure: CraftingItemResultData
 TRADE_SKILL_ITEM_UPDATE:
   payload:
   - name: itemGUID
@@ -6704,7 +6735,8 @@ TRAIT_COND_INFO_CHANGED:
 TRAIT_CONFIG_CREATED:
   payload:
   - name: configInfo
-    type: C_Traits.TraitConfigInfo
+    type:
+      structure: C_Traits.TraitConfigInfo
 TRAIT_CONFIG_DELETED:
   payload:
   - name: configID
@@ -6724,7 +6756,8 @@ TRAIT_NODE_CHANGED_PARTIAL:
   - name: ID
     type: number
   - name: info
-    type: C_Traits.TraitNodeInfoPartial
+    type:
+      structure: C_Traits.TraitNodeInfoPartial
 TRAIT_NODE_ENTRY_UPDATED:
   payload:
   - name: nodeEntryID
@@ -6798,15 +6831,17 @@ TRANSMOGRIFY_OPEN:
   payload: {}
 TRANSMOGRIFY_SUCCESS:
   payload:
-  - mixin: TransmogLocationMixin
-    name: transmogLocation
-    type: TransmogLocation
+  - name: transmogLocation
+    type:
+      mixin: TransmogLocationMixin
+      structure: TransmogLocation
 TRANSMOGRIFY_UPDATE:
   payload:
-  - mixin: TransmogLocationMixin
-    name: transmogLocation
+  - name: transmogLocation
     nilable: true
-    type: TransmogLocation
+    type:
+      mixin: TransmogLocationMixin
+      structure: TransmogLocation
   - name: action
     nilable: true
     type: string
@@ -6899,7 +6934,8 @@ UNIT_AURA:
   - name: unitTarget
     type: string
   - name: updateInfo
-    type: UnitAuraUpdateInfo
+    type:
+      structure: UnitAuraUpdateInfo
 UNIT_CHEAT_TOGGLE_EVENT:
   payload: {}
 UNIT_CLASSIFICATION_CHANGED:
@@ -7331,7 +7367,8 @@ UPDATE_TRADESKILL_RECAST:
 UPDATE_UI_WIDGET:
   payload:
   - name: widgetInfo
-    type: C_UIWidgetManager.UIWidgetInfo
+    type:
+      structure: C_UIWidgetManager.UIWidgetInfo
 UPDATE_VEHICLE_ACTIONBAR:
   payload: {}
 UPDATE_WEB_TICKET:

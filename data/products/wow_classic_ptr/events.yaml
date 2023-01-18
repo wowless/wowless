@@ -215,9 +215,10 @@ AZERITE_EMPOWERED_ITEM_LOOTED:
     type: string
 AZERITE_EMPOWERED_ITEM_SELECTION_UPDATED:
   payload:
-  - mixin: ItemLocationMixin
-    name: azeriteEmpoweredItemLocation
-    type: ItemLocation
+  - name: azeriteEmpoweredItemLocation
+    type:
+      mixin: ItemLocationMixin
+      structure: ItemLocation
 AZERITE_ESSENCE_ACTIVATED:
   payload:
   - name: slot
@@ -252,25 +253,27 @@ AZERITE_ITEM_ENABLED_STATE_CHANGED:
     type: boolean
 AZERITE_ITEM_EXPERIENCE_CHANGED:
   payload:
-  - mixin: ItemLocationMixin
-    name: azeriteItemLocation
-    type: ItemLocation
+  - name: azeriteItemLocation
+    type:
+      mixin: ItemLocationMixin
+      structure: ItemLocation
   - name: oldExperienceAmount
     type: number
   - name: newExperienceAmount
     type: number
 AZERITE_ITEM_POWER_LEVEL_CHANGED:
   payload:
-  - mixin: ItemLocationMixin
-    name: azeriteItemLocation
-    type: ItemLocation
+  - name: azeriteItemLocation
+    type:
+      mixin: ItemLocationMixin
+      structure: ItemLocation
   - name: oldPowerLevel
     type: number
   - name: newPowerLevel
     type: number
-  - innerType: C_AzeriteItem.UnlockedAzeriteEmpoweredItems
-    name: unlockedEmpoweredItemsInfo
-    type: table
+  - name: unlockedEmpoweredItemsInfo
+    type:
+      arrayof: C_AzeriteItem.UnlockedAzeriteEmpoweredItems
 BAG_CLOSED:
   payload:
   - name: bagID
@@ -2995,7 +2998,8 @@ CLUB_ERROR:
 CLUB_INVITATION_ADDED_FOR_SELF:
   payload:
   - name: invitation
-    type: C_Club.ClubSelfInvitationInfo
+    type:
+      structure: C_Club.ClubSelfInvitationInfo
 CLUB_INVITATION_REMOVED_FOR_SELF:
   payload:
   - name: invitationId
@@ -3045,7 +3049,8 @@ CLUB_MESSAGE_ADDED:
   - name: streamId
     type: string
   - name: messageId
-    type: C_Club.ClubMessageIdentifier
+    type:
+      structure: C_Club.ClubMessageIdentifier
 CLUB_MESSAGE_HISTORY_RECEIVED:
   payload:
   - name: clubId
@@ -3053,9 +3058,11 @@ CLUB_MESSAGE_HISTORY_RECEIVED:
   - name: streamId
     type: string
   - name: downloadedRange
-    type: C_Club.ClubMessageRange
+    type:
+      structure: C_Club.ClubMessageRange
   - name: contiguousRange
-    type: C_Club.ClubMessageRange
+    type:
+      structure: C_Club.ClubMessageRange
 CLUB_MESSAGE_UPDATED:
   payload:
   - name: clubId
@@ -3063,7 +3070,8 @@ CLUB_MESSAGE_UPDATED:
   - name: streamId
     type: string
   - name: messageId
-    type: C_Club.ClubMessageIdentifier
+    type:
+      structure: C_Club.ClubMessageIdentifier
 CLUB_REMOVED:
   payload:
   - name: clubId
@@ -3119,7 +3127,8 @@ CLUB_TICKET_CREATED:
   - name: clubId
     type: string
   - name: ticketInfo
-    type: C_Club.ClubTicketInfo
+    type:
+      structure: C_Club.ClubTicketInfo
 CLUB_TICKET_RECEIVED:
   payload:
   - name: error
@@ -3128,7 +3137,8 @@ CLUB_TICKET_RECEIVED:
     type: string
   - name: info
     nilable: true
-    type: C_Club.ClubInfo
+    type:
+      structure: C_Club.ClubInfo
 CLUB_TICKETS_RECEIVED:
   payload:
   - name: clubId
@@ -3465,7 +3475,8 @@ GENERIC_ERROR:
 GENERIC_WIDGET_DISPLAY_SHOW:
   payload:
   - name: info
-    type: C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo
+    type:
+      structure: C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo
 GET_ITEM_INFO_RECEIVED:
   payload:
   - name: itemID
@@ -5321,7 +5332,8 @@ TRAIT_COND_INFO_CHANGED:
 TRAIT_CONFIG_CREATED:
   payload:
   - name: configInfo
-    type: C_Traits.TraitConfigInfo
+    type:
+      structure: C_Traits.TraitConfigInfo
 TRAIT_CONFIG_DELETED:
   payload:
   - name: configID
@@ -5341,7 +5353,8 @@ TRAIT_NODE_CHANGED_PARTIAL:
   - name: ID
     type: number
   - name: info
-    type: C_Traits.TraitNodeInfoPartial
+    type:
+      structure: C_Traits.TraitNodeInfoPartial
 TRAIT_NODE_ENTRY_UPDATED:
   payload:
   - name: nodeEntryID
@@ -5817,7 +5830,8 @@ UPDATE_TRADESKILL_RECAST:
 UPDATE_UI_WIDGET:
   payload:
   - name: widgetInfo
-    type: C_UIWidgetManager.UIWidgetInfo
+    type:
+      structure: C_UIWidgetManager.UIWidgetInfo
 UPDATE_VEHICLE_ACTIONBAR:
   payload: {}
 UPDATE_WEB_TICKET:
