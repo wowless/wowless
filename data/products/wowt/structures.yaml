@@ -462,7 +462,7 @@ C_BarberShop.BarberShopCharacterData:
 C_BarberShop.BarberShopRaceData:
   alternateFormRaceData:
     nilable: true
-    type: unknown
+    type: CharacterAlternateFormData
   createScreenIconAtlas:
     type: string
   fileName:
@@ -5355,6 +5355,15 @@ CalendarTime:
   weekday:
     type: number
   year:
+    type: number
+CharacterAlternateFormData:
+  createScreenIconAtlas:
+    type: string
+  fileName:
+    type: string
+  name:
+    type: string
+  raceID:
     type: number
 CharCustomizationCategory:
   cameraDistanceOffset:
