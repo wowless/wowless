@@ -593,6 +593,11 @@ C_Commentator.CommentatorHistory:
   teamDirectory:
     innerType: C_Commentator.CommentatorTeamDirectoryEntry
     type: table
+C_Commentator.CommentatorOverrideNameEntry:
+  newName:
+    type: string
+  originalName:
+    type: string
 C_Commentator.CommentatorPlayerData:
   damageDone:
     type: number
@@ -622,6 +627,16 @@ C_Commentator.CommentatorSeries:
   teams:
     innerType: C_Commentator.CommentatorSeriesTeam
     type: table
+C_Commentator.CommentatorSeriesTeam:
+  name:
+    type: string
+  score:
+    type: number
+C_Commentator.CommentatorTeamDirectoryEntry:
+  playerName:
+    type: string
+  teamName:
+    type: string
 C_Commentator.CommentatorUnitData:
   absorbTotal:
     type: number
@@ -784,6 +799,30 @@ C_FriendList.WhoInfo:
     type: number
   raceStr:
     type: string
+C_GamePad.GamePadAxisConfig:
+  axis:
+    type: string
+  buttonNeg:
+    nilable: true
+    type: string
+  buttonPos:
+    nilable: true
+    type: string
+  buttonThreshold:
+    nilable: true
+    type: number
+  comment:
+    nilable: true
+    type: string
+  deadzone:
+    nilable: true
+    type: number
+  scale:
+    nilable: true
+    type: number
+  shift:
+    nilable: true
+    type: number
 C_GamePad.GamePadConfig:
   axisConfigs:
     innerType: C_GamePad.GamePadAxisConfig
@@ -835,6 +874,30 @@ C_GamePad.GamePadMappedState:
   sticks:
     innerType: C_GamePad.GamePadStick
     type: table
+C_GamePad.GamePadRawAxisMapping:
+  axis:
+    nilable: true
+    type: string
+  comment:
+    nilable: true
+    type: string
+  rawIndex:
+    type: number
+C_GamePad.GamePadRawButtonMapping:
+  axis:
+    nilable: true
+    type: string
+  axisValue:
+    nilable: true
+    type: number
+  button:
+    nilable: true
+    type: string
+  comment:
+    nilable: true
+    type: string
+  rawIndex:
+    type: number
 C_GamePad.GamePadRawState:
   name:
     type: string
@@ -852,6 +915,34 @@ C_GamePad.GamePadRawState:
     type: table
   vendorID:
     type: number
+C_GamePad.GamePadStick:
+  len:
+    type: number
+  x:
+    type: number
+  y:
+    type: number
+C_GamePad.GamePadStickConfig:
+  axisX:
+    nilable: true
+    type: string
+  axisY:
+    nilable: true
+    type: string
+  comment:
+    nilable: true
+    type: string
+  deadzone:
+    nilable: true
+    type: number
+  deadzoneX:
+    nilable: true
+    type: number
+  deadzoneY:
+    nilable: true
+    type: number
+  stick:
+    type: string
 C_GossipInfo.GossipPoiInfo:
   inBattleMap:
     type: boolean
@@ -1795,6 +1886,17 @@ C_UIWidgetManager.TextWithStateWidgetVisualizationInfo:
     type: number
   widgetTag:
     type: string
+C_UIWidgetManager.UIWidgetCurrencyInfo:
+  iconFileID:
+    type: number
+  isCurrencyMaxed:
+    type: boolean
+  leadingText:
+    type: string
+  text:
+    type: string
+  tooltip:
+    type: string
 C_UIWidgetManager.UIWidgetInfo:
   unitToken:
     nilable: true
@@ -1916,6 +2018,11 @@ ExpansionDisplayInfo:
     type: number
   lowResBackgroundID:
     type: number
+ExpansionDisplayInfoFeature:
+  icon:
+    type: number
+  text:
+    type: string
 GuildTabardInfo:
   backgroundColor:
     mixin: ColorMixin

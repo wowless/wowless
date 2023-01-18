@@ -3341,11 +3341,7 @@ DUEL_REQUESTED:
 DYNAMIC_GOSSIP_POI_UPDATED:
   payload: {}
 EDIT_MODE_LAYOUTS_UPDATED:
-  payload:
-  - name: layoutInfo
-    type: C_EditMode.EditModeLayouts
-  - name: fromServer
-    type: boolean
+  docsarewrong: true
 ENABLE_DECLINE_GUILD_INVITE:
   payload: {}
 ENABLE_LOW_LEVEL_RAID:
