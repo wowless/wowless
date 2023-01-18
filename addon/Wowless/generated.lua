@@ -261,9 +261,15 @@ function G.GeneratedTests()
         end
       end
     end
-    -- LE_EXPANSION works differently for some reason
-    assert(genums.LE_EXPANSION == nil)
-    genums.LE_EXPANSION = true
+    -- Some work differently for some reason.
+    local exceptions = {
+      LE_EXPANSION = true,
+      LE_GAME_ERR = true,
+    }
+    for k in pairs(exceptions) do
+      assert(genums[k] == nil)
+      genums[k] = true
+    end
     for k, v in pairs(_G) do
       for gk in pairs(genums) do
         if k:sub(1, #gk) == gk then
