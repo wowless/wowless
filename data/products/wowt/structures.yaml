@@ -2680,7 +2680,7 @@ C_ModelInfo.UIModelSceneActorInfo:
     type: number
   position:
     mixin: Vector3DMixin
-    type: table
+    type: Vector3D
   roll:
     type: number
   scriptTag:
@@ -2712,7 +2712,7 @@ C_ModelInfo.UIModelSceneCameraInfo:
     type: string
   target:
     mixin: Vector3DMixin
-    type: table
+    type: Vector3D
   yaw:
     type: number
   zoomDistance:
@@ -2723,7 +2723,7 @@ C_ModelInfo.UIModelSceneCameraInfo:
     type: number
   zoomedTargetOffset:
     mixin: Vector3DMixin
-    type: table
+    type: Vector3D
   zoomedYawOffset:
     type: number
 C_ModifiedInstance.ModifiedInstanceInfo:
@@ -6110,4 +6110,11 @@ Vector2D:
   x:
     type: number
   y:
+    type: number
+Vector3D:
+  x:
+    type: number
+  y:
+    type: number
+  z:
     type: number

@@ -2736,7 +2736,7 @@ C_Commentator.GetStartLocation:
   outputs:
   - mixin: Vector3DMixin
     name: pos
-    type: table
+    type: Vector3D
 C_Commentator.GetTeamColor:
   inputs:
   - - name: teamIndex
