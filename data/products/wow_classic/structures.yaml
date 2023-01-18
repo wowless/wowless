@@ -11,8 +11,9 @@ C_AreaPoiInfo.AreaPOIInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   shouldGlow:
     type: boolean
   textureIndex:
@@ -36,8 +37,8 @@ C_AzeriteEmpoweredItem.AzeriteEmpoweredItemPowerText:
     type: string
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemTierInfo:
   azeritePowerIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   unlockLevel:
     type: number
 C_AzeriteEmpoweredItem.AzeriteSpecInfo:
@@ -77,17 +78,20 @@ C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
   tierIndex:
     type: number
   unlockedItem:
-    mixin: ItemLocationMixin
-    type: ItemLocation
+    type:
+      mixin: ItemLocationMixin
+      structure: ItemLocation
 C_BarberShop.BarberShopCharacterData:
   raceData:
-    type: C_BarberShop.BarberShopRaceData
+    type:
+      structure: C_BarberShop.BarberShopRaceData
   sex:
     type: number
 C_BarberShop.BarberShopRaceData:
   alternateFormRaceData:
     nilable: true
-    type: CharacterAlternateFormData
+    type:
+      structure: CharacterAlternateFormData
   createScreenIconAtlas:
     type: string
   fileName:
@@ -109,7 +113,8 @@ C_Calendar.CalendarDayEvent:
   dontDisplayEnd:
     type: boolean
   endTime:
-    type: CalendarTime
+    type:
+      structure: CalendarTime
   eventID:
     type: string
   eventType:
@@ -136,7 +141,8 @@ C_Calendar.CalendarDayEvent:
   sequenceType:
     type: string
   startTime:
-    type: CalendarTime
+    type:
+      structure: CalendarTime
   title:
     type: string
 C_Calendar.CalendarEventIndexInfo:
@@ -172,7 +178,8 @@ C_Calendar.CalendarEventInfo:
   isLocked:
     type: boolean
   lockoutTime:
-    type: CalendarTime
+    type:
+      structure: CalendarTime
   maxSize:
     type: number
   repeatOption:
@@ -181,7 +188,8 @@ C_Calendar.CalendarEventInfo:
     nilable: true
     type: number
   time:
-    type: CalendarTime
+    type:
+      structure: CalendarTime
   title:
     type: string
 C_Calendar.CalendarEventInviteInfo:
@@ -278,12 +286,14 @@ C_Calendar.CalendarHolidayInfo:
     type: string
   endTime:
     nilable: true
-    type: CalendarTime
+    type:
+      structure: CalendarTime
   name:
     type: string
   startTime:
     nilable: true
-    type: CalendarTime
+    type:
+      structure: CalendarTime
   texture:
     type: number
 C_Calendar.CalendarMonthInfo:
@@ -308,7 +318,8 @@ C_Calendar.CalendarRaidInfo:
   raidID:
     type: number
   time:
-    type: CalendarTime
+    type:
+      structure: CalendarTime
 C_Club.ClubInfo:
   avatarId:
     type: number
@@ -353,7 +364,8 @@ C_Club.ClubInvitationInfo:
   invitationId:
     type: string
   invitee:
-    type: C_Club.ClubMemberInfo
+    type:
+      structure: C_Club.ClubMemberInfo
   isMyInvitation:
     type: boolean
 C_Club.ClubMemberInfo:
@@ -451,23 +463,28 @@ C_Club.ClubMessageIdentifier:
     type: number
 C_Club.ClubMessageInfo:
   author:
-    type: C_Club.ClubMemberInfo
+    type:
+      structure: C_Club.ClubMemberInfo
   content:
     type: string
   destroyed:
     type: boolean
   destroyer:
     nilable: true
-    type: C_Club.ClubMemberInfo
+    type:
+      structure: C_Club.ClubMemberInfo
   edited:
     type: boolean
   messageId:
-    type: C_Club.ClubMessageIdentifier
+    type:
+      structure: C_Club.ClubMessageIdentifier
 C_Club.ClubMessageRange:
   newestMessageId:
-    type: C_Club.ClubMessageIdentifier
+    type:
+      structure: C_Club.ClubMessageIdentifier
   oldestMessageId:
-    type: C_Club.ClubMessageIdentifier
+    type:
+      structure: C_Club.ClubMessageIdentifier
 C_Club.ClubPrivilegeInfo:
   canAddBan:
     type: boolean
@@ -552,18 +569,20 @@ C_Club.ClubPrivilegeInfo:
   canVoiceMuteMemberForAll:
     type: boolean
   kickableRoleIds:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
 C_Club.ClubSelfInvitationInfo:
   club:
-    type: C_Club.ClubInfo
+    type:
+      structure: C_Club.ClubInfo
   invitationId:
     type: string
   inviter:
-    type: C_Club.ClubMemberInfo
+    type:
+      structure: C_Club.ClubMemberInfo
   leaders:
-    innerType: C_Club.ClubMemberInfo
-    type: table
+    type:
+      arrayof: C_Club.ClubMemberInfo
 C_Club.ClubStreamInfo:
   creationTime:
     type: number
@@ -588,7 +607,8 @@ C_Club.ClubTicketInfo:
   creationTime:
     type: number
   creator:
-    type: C_Club.ClubMemberInfo
+    type:
+      structure: C_Club.ClubMemberInfo
   currentRedeemCount:
     type: number
   defaultStreamId:
@@ -600,14 +620,14 @@ C_Club.ClubTicketInfo:
     type: string
 C_Commentator.CommentatorHistory:
   overrideNameDirectory:
-    innerType: C_Commentator.CommentatorOverrideNameEntry
-    type: table
+    type:
+      arrayof: C_Commentator.CommentatorOverrideNameEntry
   series:
-    innerType: C_Commentator.CommentatorSeries
-    type: table
+    type:
+      arrayof: C_Commentator.CommentatorSeries
   teamDirectory:
-    innerType: C_Commentator.CommentatorTeamDirectoryEntry
-    type: table
+    type:
+      arrayof: C_Commentator.CommentatorTeamDirectoryEntry
 C_Commentator.CommentatorOverrideNameEntry:
   newName:
     type: string
@@ -640,8 +660,8 @@ C_Commentator.CommentatorPlayerData:
     type: string
 C_Commentator.CommentatorSeries:
   teams:
-    innerType: C_Commentator.CommentatorSeriesTeam
-    type: table
+    type:
+      arrayof: C_Commentator.CommentatorSeriesTeam
 C_Commentator.CommentatorSeriesTeam:
   name:
     type: string
@@ -825,8 +845,9 @@ C_DeathInfo.GraveyardMapInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   textureIndex:
     type: number
 C_DeathInfo.SelfResurrectOption:
@@ -912,13 +933,14 @@ C_GamePad.GamePadAxisConfig:
     type: number
 C_GamePad.GamePadConfig:
   axisConfigs:
-    innerType: C_GamePad.GamePadAxisConfig
-    type: table
+    type:
+      arrayof: C_GamePad.GamePadAxisConfig
   comment:
     nilable: true
     type: string
   configID:
-    type: C_GamePad.GamePadConfigID
+    type:
+      structure: C_GamePad.GamePadConfigID
   labelStyle:
     nilable: true
     type: string
@@ -926,14 +948,14 @@ C_GamePad.GamePadConfig:
     nilable: true
     type: string
   rawAxisMappings:
-    innerType: C_GamePad.GamePadRawAxisMapping
-    type: table
+    type:
+      arrayof: C_GamePad.GamePadRawAxisMapping
   rawButtonMappings:
-    innerType: C_GamePad.GamePadRawButtonMapping
-    type: table
+    type:
+      arrayof: C_GamePad.GamePadRawButtonMapping
   stickConfigs:
-    innerType: C_GamePad.GamePadStickConfig
-    type: table
+    type:
+      arrayof: C_GamePad.GamePadStickConfig
 C_GamePad.GamePadConfigID:
   productID:
     nilable: true
@@ -943,15 +965,15 @@ C_GamePad.GamePadConfigID:
     type: number
 C_GamePad.GamePadMappedState:
   axes:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   axisCount:
     type: number
   buttonCount:
     type: number
   buttons:
-    innerType: boolean
-    type: table
+    type:
+      arrayof: boolean
   labelStyle:
     type: string
   name:
@@ -959,8 +981,8 @@ C_GamePad.GamePadMappedState:
   stickCount:
     type: number
   sticks:
-    innerType: C_GamePad.GamePadStick
-    type: table
+    type:
+      arrayof: C_GamePad.GamePadStick
 C_GamePad.GamePadRawAxisMapping:
   axis:
     nilable: true
@@ -991,15 +1013,15 @@ C_GamePad.GamePadRawState:
   productID:
     type: number
   rawAxes:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   rawAxisCount:
     type: number
   rawButtonCount:
     type: number
   rawButtons:
-    innerType: boolean
-    type: table
+    type:
+      arrayof: boolean
   vendorID:
     type: number
 C_GamePad.GamePadStick:
@@ -1097,8 +1119,9 @@ C_GossipInfo.GossipPoiInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   textureIndex:
     type: number
 C_GossipInfo.GossipQuestUIInfo:
@@ -1231,7 +1254,8 @@ C_LFGList.LfgSearchResultData:
     type: boolean
   leaderDungeonScoreInfo:
     nilable: true
-    type: C_LFGList.BestDungeonScoreMapInfo
+    type:
+      structure: C_LFGList.BestDungeonScoreMapInfo
   leaderFactionGroup:
     type: number
   leaderName:
@@ -1242,7 +1266,8 @@ C_LFGList.LfgSearchResultData:
     type: number
   leaderPvpRatingInfo:
     nilable: true
-    type: C_LFGList.PvpRatingInfo
+    type:
+      structure: C_LFGList.PvpRatingInfo
   name:
     type: string
   numBNetFriends:
@@ -1326,8 +1351,9 @@ C_Map.MapLinkInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
 C_Map.UiMapDetails:
   flags:
     type: number
@@ -1357,10 +1383,11 @@ C_MapExplorationInfo.UiMapExplorationHitRect:
     type: number
 C_MapExplorationInfo.UiMapExplorationInfo:
   fileDataIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   hitRect:
-    type: C_MapExplorationInfo.UiMapExplorationHitRect
+    type:
+      structure: C_MapExplorationInfo.UiMapExplorationHitRect
   isDrawOnTopLayer:
     type: boolean
   isShownByMouseOver:
@@ -1402,8 +1429,9 @@ C_ModelInfo.UIModelSceneActorInfo:
   pitch:
     type: number
   position:
-    mixin: Vector3DMixin
-    type: Vector3D
+    type:
+      mixin: Vector3DMixin
+      structure: Vector3D
   roll:
     type: number
   scriptTag:
@@ -1434,8 +1462,9 @@ C_ModelInfo.UIModelSceneCameraInfo:
   scriptTag:
     type: string
   target:
-    mixin: Vector3DMixin
-    type: Vector3D
+    type:
+      mixin: Vector3DMixin
+      structure: Vector3D
   yaw:
     type: number
   zoomDistance:
@@ -1445,8 +1474,9 @@ C_ModelInfo.UIModelSceneCameraInfo:
   zoomedRollOffset:
     type: number
   zoomedTargetOffset:
-    mixin: Vector3DMixin
-    type: Vector3D
+    type:
+      mixin: Vector3DMixin
+      structure: Vector3D
   zoomedYawOffset:
     type: number
 C_PvP.BattlefieldCurrencyReward:
@@ -1601,8 +1631,9 @@ C_TaxiMap.MapTaxiNodeInfo:
   nodeID:
     type: number
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   textureKit:
     type: string
 C_TaxiMap.TaxiNodeInfo:
@@ -1611,8 +1642,9 @@ C_TaxiMap.TaxiNodeInfo:
   nodeID:
     type: number
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   slotIndex:
     type: number
   specialIconCostString:
@@ -1653,8 +1685,8 @@ C_Traits.TraitConfigInfo:
   name:
     type: string
   treeIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   type:
     type: number
   usesSharedActionBars:
@@ -1691,8 +1723,9 @@ C_UIColor.DBColorExport:
   baseTag:
     type: string
   color:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   enabledState:
     type: number
@@ -1705,8 +1738,8 @@ C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   layoutDirection:
     type: number
   lines:
-    innerType: string
-    type: table
+    type:
+      arrayof: string
   modelSceneLayer:
     type: number
   orderIndex:
@@ -1864,8 +1897,8 @@ C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo:
     type: string
 C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
   currencies:
-    innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
   frameTextureKit:
     type: string
   hasTimer:
@@ -1960,8 +1993,8 @@ C_UIWidgetManager.IconTextAndBackgroundWidgetVisualizationInfo:
     type: string
 C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
   currencies:
-    innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
   description:
     type: string
   descriptionEnabledState:
@@ -2002,8 +2035,8 @@ C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
     type: string
 C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
   currencies:
-    innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
   frameTextureKit:
     type: string
   hasTimer:
@@ -2048,8 +2081,8 @@ C_UIWidgetManager.StackedResourceTrackerWidgetVisualizationInfo:
   outAnimType:
     type: number
   resources:
-    innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
   scriptedAnimationEffectID:
     type: number
   shownState:
@@ -2102,8 +2135,8 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
   overrideBarTextShownType:
     type: number
   partitionValues:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   scriptedAnimationEffectID:
     type: number
   shownState:
@@ -2233,8 +2266,8 @@ C_VoiceChat.VoiceChatChannel:
   isTransmitting:
     type: boolean
   members:
-    innerType: C_VoiceChat.VoiceChatMember
-    type: table
+    type:
+      arrayof: C_VoiceChat.VoiceChatMember
   name:
     type: string
   streamId:
@@ -2256,8 +2289,8 @@ C_VoiceChat.VoiceChatMember:
     type: number
 C_VoiceChat.VoiceChatProcess:
   channels:
-    innerType: C_VoiceChat.VoiceChatChannel
-    type: table
+    type:
+      arrayof: C_VoiceChat.VoiceChatChannel
   name:
     type: string
 C_VoiceChat.VoiceTtsVoiceType:
@@ -2272,8 +2305,8 @@ C_XMLUtil.XMLTemplateInfo:
     nilable: true
     type: string
   keyValues:
-    innerType: C_XMLUtil.XMLTemplateKeyValue
-    type: table
+    type:
+      arrayof: C_XMLUtil.XMLTemplateKeyValue
   type:
     type: string
   width:
@@ -2331,8 +2364,8 @@ CharCustomizationCategory:
   name:
     type: string
   options:
-    innerType: CharCustomizationOption
-    type: table
+    type:
+      arrayof: CharCustomizationOption
   orderIndex:
     type: number
   selectedIcon:
@@ -2357,17 +2390,19 @@ CharCustomizationChoice:
   name:
     type: string
   swatchColor1:
-    mixin: ColorMixin
     nilable: true
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   swatchColor2:
-    mixin: ColorMixin
     nilable: true
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
 CharCustomizationOption:
   choices:
-    innerType: CharCustomizationChoice
-    type: table
+    type:
+      arrayof: CharCustomizationChoice
   currentChoiceIndex:
     nilable: true
     type: number
@@ -2407,8 +2442,8 @@ ExpansionDisplayInfo:
   banner:
     type: string
   features:
-    innerType: ExpansionDisplayInfoFeature
-    type: table
+    type:
+      arrayof: ExpansionDisplayInfoFeature
   highResBackgroundID:
     type: number
   logo:
@@ -2422,14 +2457,17 @@ ExpansionDisplayInfoFeature:
     type: string
 GuildTabardInfo:
   backgroundColor:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   borderColor:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   emblemColor:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   emblemFilename:
     type: string
   emblemStyle:
@@ -2455,9 +2493,9 @@ QueueSpecificInfo:
     nilable: true
     type: boolean
   lfgIDs:
-    innerType: number
     nilable: true
-    type: table
+    type:
+      arrayof: number
   lfgListID:
     nilable: true
     type: number

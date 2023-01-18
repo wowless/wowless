@@ -35,13 +35,12 @@ describe('structures', function()
       for _, v in pairs(parseYaml('data/products/' .. p .. '/events.yaml')) do
         reflist(expected, v.payload)
       end
-      local structures = parseYaml('data/products/' .. p .. '/structures.yaml')
       local actual = {}
-      for k, v in pairs(structures) do
+      for k, v in pairs(parseYaml('data/products/' .. p .. '/structures.yaml')) do
         actual[k] = true
         for _, fv in pairs(v) do
-          ref(expected, fv.type)
-          ref(expected, fv.innerType)
+          ref(expected, fv.type.structure)
+          ref(expected, fv.type.arrayof)
         end
       end
       describe('exists', function()

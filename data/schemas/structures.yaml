@@ -11,10 +11,6 @@ type:
             default:
               type:
                 schema: any
-            innerType:
-              type: string
-            mixin:
-              type: string
             nilable:
               type: boolean
             stub:
@@ -26,5 +22,20 @@ type:
                 - literal: boolean
                 - literal: number
                 - literal: string
-                - literal: table
-                - ref: structure
+                - record:
+                    mixin:
+                      type: string
+                    structure:
+                      required: true
+                      type:
+                        ref: structure
+                - record:
+                    arrayof:
+                      required: true
+                      type:
+                        oneof:
+                        - literal: boolean
+                        - literal: number
+                        - literal: string
+                        - literal: table
+                        - ref: structure

@@ -33,21 +33,24 @@ local getStub = (function()
       local t = {}
       for fname, field in require('pl.tablex').sort(st) do
         local v
-        if structures[field.type] then
-          ensureStructureDefault(field.type)
-          v = structureDefaults[field.type]
-        elseif field.type == 'table' and not defaultOutputs[field.innerType] then
-          assert(field.innerType, name .. '.' .. fname)
-          ensureStructureDefault(field.innerType)
-          v = '{' .. structureDefaults[field.innerType] .. '}'
+        if structures[field.type.structure] then
+          ensureStructureDefault(field.type.structure)
+          v = structureDefaults[field.type.structure]
+          if field.type.mixin then
+            v = ('Mixin(%s,%s)'):format(v, field.type.mixin)
+          end
+        elseif field.type.arrayof then
+          if defaultOutputs[field.type.arrayof] then
+            v = '{}'
+          else
+            ensureStructureDefault(field.type.arrayof)
+            v = '{' .. structureDefaults[field.type.arrayof] .. '}'
+          end
         elseif field.stub then
           assert(type(field.stub) == 'string', 'only string stubs supported in structures')
           v = string.format('%q', field.stub)
         else
           v = tostring(defaultOutputs[field.nilable and 'nil' or field.type])
-        end
-        if field.mixin then
-          v = ('Mixin(%s,%s)'):format(v, field.mixin)
         end
         if v ~= 'nil' then
           table.insert(t, ('[%q]=%s'):format(fname, v))

@@ -54,11 +54,12 @@ BountyInfo:
     type: string
 C_AlliedRaces.AlliedRaceInfo:
   achievementIds:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   bannerColor:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   crestAtlas:
     type: string
   description:
@@ -98,8 +99,8 @@ C_AnimaDiversion.AnimaDiversionFrameInfo:
     type: string
 C_AnimaDiversion.AnimaDiversionNodeInfo:
   costs:
-    innerType: C_AnimaDiversion.AnimaDiversionCostInfo
-    type: table
+    type:
+      arrayof: C_AnimaDiversion.AnimaDiversionCostInfo
   currencyID:
     type: number
   description:
@@ -109,8 +110,9 @@ C_AnimaDiversion.AnimaDiversionNodeInfo:
   name:
     type: string
   normalizedPosition:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   state:
     type: number
   talentID:
@@ -134,8 +136,9 @@ C_AreaPoiInfo.AreaPOIInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   shouldGlow:
     type: boolean
   textureIndex:
@@ -149,18 +152,21 @@ C_AreaPoiInfo.AreaPOIInfo:
     type: number
 C_ArtifactUI.ArtifactArtInfo:
   barConnectedColor:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   barDisconnectedColor:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   spellVisualKitID:
     type: number
   textureKit:
     type: string
   titleColor:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   titleName:
     type: string
   uiModelSceneID:
@@ -186,12 +192,14 @@ C_ArtifactUI.ArtifactPowerInfo:
   numMaxRankBonusFromTier:
     type: number
   offset:
-    mixin: Vector2DMixin
     nilable: true
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   prereqsMet:
     type: boolean
   spellID:
@@ -200,13 +208,13 @@ C_ArtifactUI.ArtifactPowerInfo:
     type: number
 C_AuctionHouse.AuctionHouseBrowseQuery:
   filters:
-    innerType: number
     nilable: true
-    type: table
+    type:
+      arrayof: number
   itemClassFilters:
-    innerType: C_AuctionHouse.AuctionHouseItemClassFilter
     nilable: true
-    type: table
+    type:
+      arrayof: C_AuctionHouse.AuctionHouseItemClassFilter
   maxLevel:
     nilable: true
     type: number
@@ -216,14 +224,14 @@ C_AuctionHouse.AuctionHouseBrowseQuery:
   searchString:
     type: string
   sorts:
-    innerType: C_AuctionHouse.AuctionHouseSortType
-    type: table
+    type:
+      arrayof: C_AuctionHouse.AuctionHouseSortType
 C_AuctionHouse.AuctionHouseFilterGroup:
   category:
     type: number
   filters:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
 C_AuctionHouse.AuctionHouseItemClassFilter:
   classID:
     type: number
@@ -249,7 +257,8 @@ C_AuctionHouse.AuctionInfo:
     nilable: true
     type: number
   itemKey:
-    type: C_AuctionHouse.ItemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
   itemLink:
     nilable: true
     type: string
@@ -269,7 +278,8 @@ C_AuctionHouse.BidInfo:
     nilable: true
     type: number
   itemKey:
-    type: C_AuctionHouse.ItemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
   itemLink:
     nilable: true
     type: string
@@ -285,7 +295,8 @@ C_AuctionHouse.BrowseResultInfo:
   containsOwnerItem:
     type: boolean
   itemKey:
-    type: C_AuctionHouse.ItemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
   minPrice:
     type: number
   totalQuantity:
@@ -302,8 +313,8 @@ C_AuctionHouse.CommoditySearchResultInfo:
   numOwnerItems:
     type: number
   owners:
-    innerType: string
-    type: table
+    type:
+      arrayof: string
   quantity:
     type: number
   timeLeftSeconds:
@@ -367,7 +378,8 @@ C_AuctionHouse.ItemSearchResultInfo:
   containsSocketedItem:
     type: boolean
   itemKey:
-    type: C_AuctionHouse.ItemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
   itemLink:
     nilable: true
     type: string
@@ -375,8 +387,8 @@ C_AuctionHouse.ItemSearchResultInfo:
     nilable: true
     type: number
   owners:
-    innerType: string
-    type: table
+    type:
+      arrayof: string
   quantity:
     type: number
   timeLeft:
@@ -399,7 +411,8 @@ C_AuctionHouse.OwnedAuctionInfo:
     nilable: true
     type: number
   itemKey:
-    type: C_AuctionHouse.ItemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
   itemLink:
     nilable: true
     type: string
@@ -425,8 +438,8 @@ C_AzeriteEmpoweredItem.AzeriteEmpoweredItemPowerText:
     type: string
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemTierInfo:
   azeritePowerIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   unlockLevel:
     type: number
 C_AzeriteEmpoweredItem.AzeriteSpecInfo:
@@ -466,17 +479,20 @@ C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
   tierIndex:
     type: number
   unlockedItem:
-    mixin: ItemLocationMixin
-    type: ItemLocation
+    type:
+      mixin: ItemLocationMixin
+      structure: ItemLocation
 C_BarberShop.BarberShopCharacterData:
   raceData:
-    type: C_BarberShop.BarberShopRaceData
+    type:
+      structure: C_BarberShop.BarberShopRaceData
   sex:
     type: number
 C_BarberShop.BarberShopRaceData:
   alternateFormRaceData:
     nilable: true
-    type: CharacterAlternateFormData
+    type:
+      structure: CharacterAlternateFormData
   createScreenIconAtlas:
     type: string
   fileName:
@@ -497,7 +513,8 @@ C_BattleNet.BNetAccountInfo:
   customMessageTime:
     type: number
   gameAccountInfo:
-    type: C_BattleNet.BNetGameAccountInfo
+    type:
+      structure: C_BattleNet.BNetGameAccountInfo
   isAFK:
     type: boolean
   isBattleTagFriend:
@@ -587,7 +604,8 @@ C_Calendar.CalendarDayEvent:
   dontDisplayEnd:
     type: boolean
   endTime:
-    type: CalendarTime
+    type:
+      structure: CalendarTime
   eventID:
     type: string
   eventType:
@@ -614,7 +632,8 @@ C_Calendar.CalendarDayEvent:
   sequenceType:
     type: string
   startTime:
-    type: CalendarTime
+    type:
+      structure: CalendarTime
   title:
     type: string
 C_Calendar.CalendarEventIndexInfo:
@@ -650,7 +669,8 @@ C_Calendar.CalendarEventInfo:
   isLocked:
     type: boolean
   lockoutTime:
-    type: CalendarTime
+    type:
+      structure: CalendarTime
   maxSize:
     type: number
   repeatOption:
@@ -659,7 +679,8 @@ C_Calendar.CalendarEventInfo:
     nilable: true
     type: number
   time:
-    type: CalendarTime
+    type:
+      structure: CalendarTime
   title:
     type: string
 C_Calendar.CalendarEventInviteInfo:
@@ -756,12 +777,14 @@ C_Calendar.CalendarHolidayInfo:
     type: string
   endTime:
     nilable: true
-    type: CalendarTime
+    type:
+      structure: CalendarTime
   name:
     type: string
   startTime:
     nilable: true
-    type: CalendarTime
+    type:
+      structure: CalendarTime
   texture:
     type: number
 C_Calendar.CalendarMonthInfo:
@@ -786,7 +809,8 @@ C_Calendar.CalendarRaidInfo:
   raidID:
     type: number
   time:
-    type: CalendarTime
+    type:
+      structure: CalendarTime
 C_CampaignInfo.CampaignChapterInfo:
   description:
     type: string
@@ -832,8 +856,8 @@ C_ChallengeMode.ChallengeModeGuildTopAttempt:
   mapChallengeModeID:
     type: number
   members:
-    innerType: C_ChallengeMode.ChallengeModeGuildAttemptMember
-    type: table
+    type:
+      arrayof: C_ChallengeMode.ChallengeModeGuildAttemptMember
   name:
     type: string
 C_ChromieTime.ChromieTimeExpansionInfo:
@@ -902,7 +926,8 @@ C_Club.ClubInvitationInfo:
   invitationId:
     type: string
   invitee:
-    type: C_Club.ClubMemberInfo
+    type:
+      structure: C_Club.ClubMemberInfo
   isMyInvitation:
     type: boolean
 C_Club.ClubLimits:
@@ -1003,23 +1028,28 @@ C_Club.ClubMessageIdentifier:
     type: number
 C_Club.ClubMessageInfo:
   author:
-    type: C_Club.ClubMemberInfo
+    type:
+      structure: C_Club.ClubMemberInfo
   content:
     type: string
   destroyed:
     type: boolean
   destroyer:
     nilable: true
-    type: C_Club.ClubMemberInfo
+    type:
+      structure: C_Club.ClubMemberInfo
   edited:
     type: boolean
   messageId:
-    type: C_Club.ClubMessageIdentifier
+    type:
+      structure: C_Club.ClubMessageIdentifier
 C_Club.ClubMessageRange:
   newestMessageId:
-    type: C_Club.ClubMessageIdentifier
+    type:
+      structure: C_Club.ClubMessageIdentifier
   oldestMessageId:
-    type: C_Club.ClubMessageIdentifier
+    type:
+      structure: C_Club.ClubMessageIdentifier
 C_Club.ClubPrivilegeInfo:
   canAddBan:
     type: boolean
@@ -1104,18 +1134,20 @@ C_Club.ClubPrivilegeInfo:
   canVoiceMuteMemberForAll:
     type: boolean
   kickableRoleIds:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
 C_Club.ClubSelfInvitationInfo:
   club:
-    type: C_Club.ClubInfo
+    type:
+      structure: C_Club.ClubInfo
   invitationId:
     type: string
   inviter:
-    type: C_Club.ClubMemberInfo
+    type:
+      structure: C_Club.ClubMemberInfo
   leaders:
-    innerType: C_Club.ClubMemberInfo
-    type: table
+    type:
+      arrayof: C_Club.ClubMemberInfo
 C_Club.ClubStreamInfo:
   creationTime:
     type: number
@@ -1140,7 +1172,8 @@ C_Club.ClubTicketInfo:
   creationTime:
     type: number
   creator:
-    type: C_Club.ClubMemberInfo
+    type:
+      structure: C_Club.ClubMemberInfo
   currentRedeemCount:
     type: number
   defaultStreamId:
@@ -1176,8 +1209,8 @@ C_ClubFinder.ClubFinderApplicantInfo:
   requestStatus:
     type: number
   specIds:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
 C_ClubFinder.ClubSettingsInfo:
   autoAccept:
     type: boolean
@@ -1247,25 +1280,26 @@ C_ClubFinder.RecruitingClubInfo:
   numActiveMembers:
     type: number
   recruitingSpecIds:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   recruitmentFlags:
     type: number
   recruitmentLocale:
     type: number
   tabardInfo:
     nilable: true
-    type: GuildTabardInfo
+    type:
+      structure: GuildTabardInfo
 C_Commentator.CommentatorHistory:
   overrideNameDirectory:
-    innerType: C_Commentator.CommentatorOverrideNameEntry
-    type: table
+    type:
+      arrayof: C_Commentator.CommentatorOverrideNameEntry
   series:
-    innerType: C_Commentator.CommentatorSeries
-    type: table
+    type:
+      arrayof: C_Commentator.CommentatorSeries
   teamDirectory:
-    innerType: C_Commentator.CommentatorTeamDirectoryEntry
-    type: table
+    type:
+      arrayof: C_Commentator.CommentatorTeamDirectoryEntry
 C_Commentator.CommentatorOverrideNameEntry:
   newName:
     type: string
@@ -1298,8 +1332,8 @@ C_Commentator.CommentatorPlayerData:
     type: string
 C_Commentator.CommentatorSeries:
   teams:
-    innerType: C_Commentator.CommentatorSeriesTeam
-    type: table
+    type:
+      arrayof: C_Commentator.CommentatorSeriesTeam
 C_Commentator.CommentatorSeriesTeam:
   name:
     type: string
@@ -1410,8 +1444,9 @@ C_ContributionCollector.ContributionAppearance:
   borderAtlas:
     type: string
   stateColor:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   stateName:
     type: string
   statusBarAtlas:
@@ -1430,8 +1465,9 @@ C_ContributionCollector.ContributionMapInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
 C_CovenantPreview.CovenantAbilityInfo:
   spellID:
     type: number
@@ -1446,21 +1482,22 @@ C_CovenantPreview.CovenantFeatureInfo:
     type: number
 C_CovenantPreview.CovenantPreviewInfo:
   covenantAbilities:
-    innerType: C_CovenantPreview.CovenantAbilityInfo
-    type: table
+    type:
+      arrayof: C_CovenantPreview.CovenantAbilityInfo
   covenantCrest:
     type: string
   covenantName:
     type: string
   covenantSoulbinds:
-    innerType: C_CovenantPreview.CovenantSoulbindInfo
-    type: table
+    type:
+      arrayof: C_CovenantPreview.CovenantSoulbindInfo
   covenantZone:
     type: string
   description:
     type: string
   featureInfo:
-    type: C_CovenantPreview.CovenantFeatureInfo
+    type:
+      structure: C_CovenantPreview.CovenantFeatureInfo
   fromPlayerChoice:
     type: boolean
   mountID:
@@ -1504,8 +1541,8 @@ C_Covenants.CovenantData:
   reservoirFullSoundKitID:
     type: number
   soulbindIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   textureKit:
     type: string
   upgradeTabSelectSoundKitID:
@@ -1567,7 +1604,8 @@ C_CovenantSanctumUI.CovenantSanctumRenownRewardInfo:
     type: number
 C_CraftingOrders.CraftingOrderRequestInfo:
   callback:
-    type: CraftingOrderRequestCallback
+    type:
+      structure: CraftingOrderRequestCallback
   forCrafter:
     type: boolean
   initialNonPublicSearch:
@@ -1577,26 +1615,31 @@ C_CraftingOrders.CraftingOrderRequestInfo:
   orderType:
     type: number
   primarySort:
-    type: CraftingOrderSortInfo
+    type:
+      structure: CraftingOrderSortInfo
   profession:
     nilable: true
     type: number
   searchFavorites:
     type: boolean
   secondarySort:
-    type: CraftingOrderSortInfo
+    type:
+      structure: CraftingOrderSortInfo
   selectedSkillLineAbility:
     nilable: true
     type: number
 C_CraftingOrders.CraftingOrderRequestMyOrdersInfo:
   callback:
-    type: CraftingOrderRequestMyOrdersCallback
+    type:
+      structure: CraftingOrderRequestMyOrdersCallback
   offset:
     type: number
   primarySort:
-    type: CraftingOrderSortInfo
+    type:
+      structure: CraftingOrderSortInfo
   secondarySort:
-    type: CraftingOrderSortInfo
+    type:
+      structure: CraftingOrderSortInfo
 C_CreatureInfo.ClassInfo:
   classFile:
     type: string
@@ -1685,8 +1728,9 @@ C_DeathInfo.GraveyardMapInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   textureIndex:
     type: number
 C_DeathInfo.SelfResurrectOption:
@@ -1721,14 +1765,14 @@ C_EditMode.EditModeLayoutInfo:
   layoutType:
     type: number
   systems:
-    innerType: C_EditMode.EditModeSystemInfo
-    type: table
+    type:
+      arrayof: C_EditMode.EditModeSystemInfo
 C_EditMode.EditModeLayouts:
   activeLayout:
     type: number
   layouts:
-    innerType: C_EditMode.EditModeLayoutInfo
-    type: table
+    type:
+      arrayof: C_EditMode.EditModeLayoutInfo
 C_EditMode.EditModeSettingInfo:
   setting:
     type: number
@@ -1736,15 +1780,17 @@ C_EditMode.EditModeSettingInfo:
     type: number
 C_EditMode.EditModeSystemInfo:
   anchorInfo:
-    type: C_EditMode.EditModeAnchorInfo
+    type:
+      structure: C_EditMode.EditModeAnchorInfo
   anchorInfo2:
     nilable: true
-    type: C_EditMode.EditModeAnchorInfo
+    type:
+      structure: C_EditMode.EditModeAnchorInfo
   isInDefaultPosition:
     type: boolean
   settings:
-    innerType: C_EditMode.EditModeSettingInfo
-    type: table
+    type:
+      arrayof: C_EditMode.EditModeSettingInfo
   system:
     type: number
   systemIndex:
@@ -1762,8 +1808,9 @@ C_EncounterJournal.DungeonEntranceMapInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
 C_EncounterJournal.EncounterJournalItemInfo:
   armorType:
     nilable: true
@@ -1837,9 +1884,10 @@ C_EncounterJournal.EncounterJournalSectionInfo:
     type: number
 C_EventToastManager.EventToastInfo:
   colorTint:
-    mixin: ColorMixin
     nilable: true
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   displayType:
     type: number
   eventToastID:
@@ -1978,13 +2026,14 @@ C_GamePad.GamePadAxisConfig:
     type: number
 C_GamePad.GamePadConfig:
   axisConfigs:
-    innerType: C_GamePad.GamePadAxisConfig
-    type: table
+    type:
+      arrayof: C_GamePad.GamePadAxisConfig
   comment:
     nilable: true
     type: string
   configID:
-    type: C_GamePad.GamePadConfigID
+    type:
+      structure: C_GamePad.GamePadConfigID
   labelStyle:
     nilable: true
     type: string
@@ -1992,14 +2041,14 @@ C_GamePad.GamePadConfig:
     nilable: true
     type: string
   rawAxisMappings:
-    innerType: C_GamePad.GamePadRawAxisMapping
-    type: table
+    type:
+      arrayof: C_GamePad.GamePadRawAxisMapping
   rawButtonMappings:
-    innerType: C_GamePad.GamePadRawButtonMapping
-    type: table
+    type:
+      arrayof: C_GamePad.GamePadRawButtonMapping
   stickConfigs:
-    innerType: C_GamePad.GamePadStickConfig
-    type: table
+    type:
+      arrayof: C_GamePad.GamePadStickConfig
 C_GamePad.GamePadConfigID:
   productID:
     nilable: true
@@ -2009,15 +2058,15 @@ C_GamePad.GamePadConfigID:
     type: number
 C_GamePad.GamePadMappedState:
   axes:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   axisCount:
     type: number
   buttonCount:
     type: number
   buttons:
-    innerType: boolean
-    type: table
+    type:
+      arrayof: boolean
   labelStyle:
     type: string
   name:
@@ -2025,8 +2074,8 @@ C_GamePad.GamePadMappedState:
   stickCount:
     type: number
   sticks:
-    innerType: C_GamePad.GamePadStick
-    type: table
+    type:
+      arrayof: C_GamePad.GamePadStick
 C_GamePad.GamePadRawAxisMapping:
   axis:
     nilable: true
@@ -2057,15 +2106,15 @@ C_GamePad.GamePadRawState:
   productID:
     type: number
   rawAxes:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   rawAxisCount:
     type: number
   rawButtonCount:
     type: number
   rawButtons:
-    innerType: boolean
-    type: table
+    type:
+      arrayof: boolean
   vendorID:
     type: number
 C_GamePad.GamePadStick:
@@ -2103,8 +2152,8 @@ C_Garrison.AutoCombatDamageClassString:
     type: string
 C_Garrison.AutoCombatResult:
   combatLog:
-    innerType: C_Garrison.AutoMissionRound
-    type: table
+    type:
+      arrayof: C_Garrison.AutoMissionRound
   winner:
     type: boolean
 C_Garrison.AutoCombatSpellInfo:
@@ -2130,7 +2179,8 @@ C_Garrison.AutoCombatSpellInfo:
     type: number
 C_Garrison.AutoCombatTroopInfo:
   autoCombatStats:
-    type: C_Garrison.FollowerAutoCombatStatsInfo
+    type:
+      structure: C_Garrison.FollowerAutoCombatStatsInfo
   classAtlas:
     type: string
   className:
@@ -2143,8 +2193,8 @@ C_Garrison.AutoCombatTroopInfo:
     nilable: true
     type: number
   displayIDs:
-    innerType: C_Garrison.FollowerDisplayID
-    type: table
+    type:
+      arrayof: C_Garrison.FollowerDisplayID
   displayScale:
     nilable: true
     type: number
@@ -2205,7 +2255,8 @@ C_Garrison.AutoMissionCombatEventInfo:
     type: number
 C_Garrison.AutoMissionEnvironmentEffect:
   autoCombatSpellInfo:
-    type: C_Garrison.AutoCombatSpellInfo
+    type:
+      structure: C_Garrison.AutoCombatSpellInfo
   name:
     type: string
 C_Garrison.AutoMissionEvent:
@@ -2220,14 +2271,14 @@ C_Garrison.AutoMissionEvent:
   spellID:
     type: number
   targetInfo:
-    innerType: C_Garrison.AutoMissionCombatEventInfo
-    type: table
+    type:
+      arrayof: C_Garrison.AutoMissionCombatEventInfo
   type:
     type: number
 C_Garrison.AutoMissionRound:
   events:
-    innerType: C_Garrison.AutoMissionEvent
-    type: table
+    type:
+      arrayof: C_Garrison.AutoMissionEvent
 C_Garrison.AutoMissionTargetingInfo:
   effectIndex:
     type: number
@@ -2274,8 +2325,8 @@ C_Garrison.FollowerMissionCompleteInfo:
   currentXP:
     type: number
   displayIDs:
-    innerType: C_Garrison.FollowerDisplayID
-    type: table
+    type:
+      arrayof: C_Garrison.FollowerDisplayID
   health:
     type: number
   height:
@@ -2334,8 +2385,8 @@ C_Garrison.GarrisonAbilityInfo:
     nilable: true
     type: string
   counters:
-    innerType: C_Garrison.GarrisonAbilityCounterInfo
-    type: table
+    type:
+      arrayof: C_Garrison.GarrisonAbilityCounterInfo
   description:
     type: string
   icon:
@@ -2357,10 +2408,11 @@ C_Garrison.GarrisonEnemyEncounterInfo:
     type: number
   autoCombatAutoAttack:
     nilable: true
-    type: C_Garrison.AutoCombatSpellInfo
+    type:
+      structure: C_Garrison.AutoCombatSpellInfo
   autoCombatSpells:
-    innerType: C_Garrison.AutoCombatSpellInfo
-    type: table
+    type:
+      arrayof: C_Garrison.AutoCombatSpellInfo
   boardIndex:
     type: number
   displayID:
@@ -2374,8 +2426,8 @@ C_Garrison.GarrisonEnemyEncounterInfo:
   maxHealth:
     type: number
   mechanics:
-    innerType: C_Garrison.GarrisonMechanicInfo
-    type: table
+    type:
+      arrayof: C_Garrison.GarrisonMechanicInfo
   name:
     type: string
   portraitFileDataID:
@@ -2394,7 +2446,8 @@ C_Garrison.GarrisonFollowerDeathInfo:
 C_Garrison.GarrisonMechanicInfo:
   ability:
     nilable: true
-    type: C_Garrison.GarrisonAbilityInfo
+    type:
+      structure: C_Garrison.GarrisonAbilityInfo
   description:
     type: string
   factor:
@@ -2413,12 +2466,13 @@ C_Garrison.GarrisonPlotInstanceMapInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
 C_Garrison.MissionDeploymentInfo:
   enemies:
-    innerType: C_Garrison.GarrisonEnemyEncounterInfo
-    type: table
+    type:
+      arrayof: C_Garrison.GarrisonEnemyEncounterInfo
   environment:
     nilable: true
     type: string
@@ -2511,8 +2565,8 @@ C_GossipInfo.GossipOptionUIInfo:
     nilable: true
     type: number
   rewards:
-    innerType: C_GossipInfo.GossipOptionRewardInfo
-    type: table
+    type:
+      arrayof: C_GossipInfo.GossipOptionRewardInfo
   selectOptionWhenOnlyOption:
     type: boolean
   spellID:
@@ -2526,8 +2580,9 @@ C_GossipInfo.GossipPoiInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   textureIndex:
     type: number
 C_GossipInfo.GossipQuestUIInfo:
@@ -2554,8 +2609,8 @@ C_GossipInfo.GossipQuestUIInfo:
     type: string
 C_GuildInfo.GuildNewsInfo:
   data:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   day:
     type: number
   guildMembersPresent:
@@ -2588,8 +2643,9 @@ C_InvasionInfo.InvasionMapInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   rewardQuestID:
     nilable: true
     type: number
@@ -2664,12 +2720,12 @@ C_ItemUpgrade.ItemUpgradeItemInfo:
   name:
     type: string
   upgradeLevelInfos:
-    innerType: C_ItemUpgrade.ItemUpgradeLevelInfo
-    type: table
+    type:
+      arrayof: C_ItemUpgrade.ItemUpgradeLevelInfo
 C_ItemUpgrade.ItemUpgradeLevelInfo:
   costsToUpgrade:
-    innerType: C_ItemUpgrade.ItemUpgradeCurrencyCost
-    type: table
+    type:
+      arrayof: C_ItemUpgrade.ItemUpgradeCurrencyCost
   displayQuality:
     type: number
   failureMessage:
@@ -2678,8 +2734,8 @@ C_ItemUpgrade.ItemUpgradeLevelInfo:
   itemLevelIncrement:
     type: number
   levelStats:
-    innerType: C_ItemUpgrade.ItemUpgradeStat
-    type: table
+    type:
+      arrayof: C_ItemUpgrade.ItemUpgradeStat
   upgradeLevel:
     type: number
 C_ItemUpgrade.ItemUpgradeStat:
@@ -2837,7 +2893,8 @@ C_LFGList.LfgSearchResultData:
     type: boolean
   leaderDungeonScoreInfo:
     nilable: true
-    type: C_LFGList.BestDungeonScoreMapInfo
+    type:
+      structure: C_LFGList.BestDungeonScoreMapInfo
   leaderFactionGroup:
     type: number
   leaderName:
@@ -2848,7 +2905,8 @@ C_LFGList.LfgSearchResultData:
     type: number
   leaderPvpRatingInfo:
     nilable: true
-    type: C_LFGList.PvpRatingInfo
+    type:
+      structure: C_LFGList.PvpRatingInfo
   name:
     type: string
   numBNetFriends:
@@ -2985,8 +3043,9 @@ C_Map.MapLinkInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
 C_Map.UiMapDetails:
   flags:
     type: number
@@ -3016,10 +3075,11 @@ C_MapExplorationInfo.UiMapExplorationHitRect:
     type: number
 C_MapExplorationInfo.UiMapExplorationInfo:
   fileDataIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   hitRect:
-    type: C_MapExplorationInfo.UiMapExplorationHitRect
+    type:
+      structure: C_MapExplorationInfo.UiMapExplorationHitRect
   isDrawOnTopLayer:
     type: boolean
   isShownByMouseOver:
@@ -3068,8 +3128,9 @@ C_ModelInfo.UIModelSceneActorInfo:
   pitch:
     type: number
   position:
-    mixin: Vector3DMixin
-    type: Vector3D
+    type:
+      mixin: Vector3DMixin
+      structure: Vector3D
   roll:
     type: number
   scriptTag:
@@ -3100,8 +3161,9 @@ C_ModelInfo.UIModelSceneCameraInfo:
   scriptTag:
     type: string
   target:
-    mixin: Vector3DMixin
-    type: Vector3D
+    type:
+      mixin: Vector3DMixin
+      structure: Vector3D
   yaw:
     type: number
   zoomDistance:
@@ -3111,8 +3173,9 @@ C_ModelInfo.UIModelSceneCameraInfo:
   zoomedRollOffset:
     type: number
   zoomedTargetOffset:
-    mixin: Vector3DMixin
-    type: Vector3D
+    type:
+      mixin: Vector3DMixin
+      structure: Vector3D
   zoomedYawOffset:
     type: number
 C_ModifiedInstance.ModifiedInstanceInfo:
@@ -3139,10 +3202,11 @@ C_MountJournal.MountCreatureDisplayInfo:
     type: boolean
 C_MythicPlus.MapSeasonBestInfo:
   affixIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   completionDate:
-    type: C_MythicPlus.MythicPlusDate
+    type:
+      structure: C_MythicPlus.MythicPlusDate
   dungeonScore:
     type: number
   durationSec:
@@ -3150,8 +3214,8 @@ C_MythicPlus.MapSeasonBestInfo:
   level:
     type: number
   members:
-    innerType: C_MythicPlus.MythicPlusMember
-    type: table
+    type:
+      arrayof: C_MythicPlus.MythicPlusMember
 C_MythicPlus.MythicPlusDate:
   day:
     type: number
@@ -3223,8 +3287,9 @@ C_PetInfo.PetTamerMapInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   textureIndex:
     nilable: true
     type: number
@@ -3285,8 +3350,8 @@ C_PlayerChoice.PlayerChoiceInfo:
   objectGUID:
     type: string
   options:
-    innerType: C_PlayerChoice.PlayerChoiceOptionInfo
-    type: table
+    type:
+      arrayof: C_PlayerChoice.PlayerChoiceOptionInfo
   pendingChoiceText:
     type: string
   questionText:
@@ -3317,8 +3382,8 @@ C_PlayerChoice.PlayerChoiceOptionButtonInfo:
     type: string
 C_PlayerChoice.PlayerChoiceOptionInfo:
   buttons:
-    innerType: C_PlayerChoice.PlayerChoiceOptionButtonInfo
-    type: table
+    type:
+      arrayof: C_PlayerChoice.PlayerChoiceOptionButtonInfo
   choiceArtID:
     type: number
   desaturatedArt:
@@ -3342,11 +3407,13 @@ C_PlayerChoice.PlayerChoiceOptionInfo:
     nilable: true
     type: number
   rarityColor:
-    mixin: ColorMixin
     nilable: true
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   rewardInfo:
-    type: C_PlayerChoice.PlayerChoiceOptionRewardInfo
+    type:
+      structure: C_PlayerChoice.PlayerChoiceOptionRewardInfo
   spellID:
     nilable: true
     type: number
@@ -3363,14 +3430,14 @@ C_PlayerChoice.PlayerChoiceOptionInfo:
     type: number
 C_PlayerChoice.PlayerChoiceOptionRewardInfo:
   currencyRewards:
-    innerType: C_PlayerChoice.PlayerChoiceRewardCurrencyInfo
-    type: table
+    type:
+      arrayof: C_PlayerChoice.PlayerChoiceRewardCurrencyInfo
   itemRewards:
-    innerType: C_PlayerChoice.PlayerChoiceRewardItemInfo
-    type: table
+    type:
+      arrayof: C_PlayerChoice.PlayerChoiceRewardItemInfo
   repRewards:
-    innerType: C_PlayerChoice.PlayerChoiceRewardReputationInfo
-    type: table
+    type:
+      arrayof: C_PlayerChoice.PlayerChoiceRewardReputationInfo
 C_PlayerChoice.PlayerChoiceRewardCurrencyInfo:
   currencyId:
     type: number
@@ -3409,8 +3476,8 @@ C_PlayerInfo.MythicPlusRatingSummary:
   currentSeasonScore:
     type: number
   runs:
-    innerType: C_PlayerInfo.MythicPlusRatingMapSummary
-    type: table
+    type:
+      arrayof: C_PlayerInfo.MythicPlusRatingMapSummary
 C_PvP.BattlefieldCurrencyReward:
   id:
     type: number
@@ -3503,8 +3570,8 @@ C_PvP.PvpBrawlInfo:
   longDescription:
     type: string
   mapNames:
-    innerType: string
-    type: table
+    type:
+      arrayof: string
   name:
     type: string
   shortDescription:
@@ -3568,8 +3635,8 @@ C_PvP.PvpReadyCheckInfo:
   numPlayersDeclined:
     type: number
   roles:
-    innerType: C_PvP.PvpRoleQueueInfo
-    type: table
+    type:
+      arrayof: C_PvP.PvpRoleQueueInfo
   totalNumPlayers:
     type: number
 C_PvP.PvpRoleQueueInfo:
@@ -3628,8 +3695,8 @@ C_PvP.PVPScoreInfo:
   roleAssigned:
     type: number
   stats:
-    innerType: C_PvP.PVPStatInfo
-    type: table
+    type:
+      arrayof: C_PvP.PVPStatInfo
   talentSpec:
     type: string
 C_PvP.PVPStatInfo:
@@ -3821,8 +3888,8 @@ C_RecruitAFriend.RafAppearanceInfo:
     type: number
 C_RecruitAFriend.RafAppearanceSetInfo:
   appearanceIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   setID:
     type: number
   setName:
@@ -3839,16 +3906,18 @@ C_RecruitAFriend.RafInfo:
     type: number
   nextReward:
     nilable: true
-    type: C_RecruitAFriend.RafReward
+    type:
+      structure: C_RecruitAFriend.RafReward
   recruitmentInfo:
     nilable: true
-    type: C_RecruitAFriend.RafRecruitmentinfo
+    type:
+      structure: C_RecruitAFriend.RafRecruitmentinfo
   recruits:
-    innerType: C_RecruitAFriend.RafRecruit
-    type: table
+    type:
+      arrayof: C_RecruitAFriend.RafRecruit
   rewards:
-    innerType: C_RecruitAFriend.RafReward
-    type: table
+    type:
+      arrayof: C_RecruitAFriend.RafReward
   spentMonths:
     type: number
 C_RecruitAFriend.RafMountInfo:
@@ -3871,8 +3940,8 @@ C_RecruitAFriend.RafRecruit:
   acceptanceID:
     type: string
   activities:
-    innerType: C_RecruitAFriend.RafRecruitActivity
-    type: table
+    type:
+      arrayof: C_RecruitAFriend.RafRecruitActivity
   battleTag:
     type: string
   bnetAccountID:
@@ -3910,10 +3979,12 @@ C_RecruitAFriend.RafRecruitmentinfo:
 C_RecruitAFriend.RafReward:
   appearanceInfo:
     nilable: true
-    type: C_RecruitAFriend.RafAppearanceInfo
+    type:
+      structure: C_RecruitAFriend.RafAppearanceInfo
   appearanceSetInfo:
     nilable: true
-    type: C_RecruitAFriend.RafAppearanceSetInfo
+    type:
+      structure: C_RecruitAFriend.RafAppearanceSetInfo
   availableInMonths:
     type: number
   canClaim:
@@ -3924,7 +3995,8 @@ C_RecruitAFriend.RafReward:
     type: number
   illusionInfo:
     nilable: true
-    type: C_RecruitAFriend.RafIllusionInfo
+    type:
+      structure: C_RecruitAFriend.RafIllusionInfo
   itemID:
     type: number
   monthCost:
@@ -3933,10 +4005,12 @@ C_RecruitAFriend.RafReward:
     type: number
   mountInfo:
     nilable: true
-    type: C_RecruitAFriend.RafMountInfo
+    type:
+      structure: C_RecruitAFriend.RafMountInfo
   petInfo:
     nilable: true
-    type: C_RecruitAFriend.RafPetInfo
+    type:
+      structure: C_RecruitAFriend.RafPetInfo
   repeatable:
     type: boolean
   repeatableClaimCount:
@@ -3947,7 +4021,8 @@ C_RecruitAFriend.RafReward:
     type: number
   titleInfo:
     nilable: true
-    type: C_RecruitAFriend.RafTitleInfo
+    type:
+      structure: C_RecruitAFriend.RafTitleInfo
 C_RecruitAFriend.RafSystemInfo:
   daysInCycle:
     type: number
@@ -3964,8 +4039,9 @@ C_ResearchInfo.DigSiteMapInfo:
   name:
     type: string
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   researchSiteID:
     type: number
   textureIndex:
@@ -4005,8 +4081,8 @@ C_ScenarioInfo.ScenarioStepInfo:
   shouldShowBonusObjective:
     type: boolean
   spells:
-    innerType: C_ScenarioInfo.ScenarioStepSpellInfo
-    type: table
+    type:
+      arrayof: C_ScenarioInfo.ScenarioStepSpellInfo
   stepFailed:
     type: boolean
   title:
@@ -4152,7 +4228,8 @@ C_SocialQueue.SocialQueueGroupQueueInfo:
   needTank:
     type: boolean
   queueData:
-    type: QueueSpecificInfo
+    type:
+      structure: QueueSpecificInfo
 C_SocialQueue.SocialQueuePlayerInfo:
   clubId:
     nilable: true
@@ -4169,8 +4246,8 @@ C_Soulbinds.ConduitCollectionData:
   conduitRank:
     type: number
   conduitSpecIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   conduitSpecName:
     nilable: true
     type: string
@@ -4198,7 +4275,8 @@ C_Soulbinds.SoulbindData:
   ID:
     type: number
   modelSceneData:
-    type: C_Soulbinds.SoulbindModelSceneData
+    type:
+      structure: C_Soulbinds.SoulbindModelSceneData
   name:
     type: string
   playerConditionReason:
@@ -4207,7 +4285,8 @@ C_Soulbinds.SoulbindData:
   textureKit:
     type: string
   tree:
-    type: C_Soulbinds.SoulbindTree
+    type:
+      structure: C_Soulbinds.SoulbindTree
   unlocked:
     type: boolean
 C_Soulbinds.SoulbindModelSceneData:
@@ -4233,8 +4312,8 @@ C_Soulbinds.SoulbindNode:
   ID:
     type: number
   parentNodeIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   playerConditionReason:
     nilable: true
     type: string
@@ -4251,8 +4330,8 @@ C_Soulbinds.SoulbindTree:
   editable:
     type: boolean
   nodes:
-    innerType: C_Soulbinds.SoulbindNode
-    type: table
+    type:
+      arrayof: C_Soulbinds.SoulbindNode
 C_SpecializationInfo.PvpTalentInfo:
   available:
     type: boolean
@@ -4279,8 +4358,8 @@ C_SpecializationInfo.PvpTalentInfo:
     type: boolean
 C_SpecializationInfo.PvpTalentSlotInfo:
   availableTalentIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   enabled:
     type: boolean
   level:
@@ -4376,8 +4455,9 @@ C_TaxiMap.MapTaxiNodeInfo:
   nodeID:
     type: number
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   textureKit:
     type: string
 C_TaxiMap.TaxiNodeInfo:
@@ -4386,8 +4466,9 @@ C_TaxiMap.TaxiNodeInfo:
   nodeID:
     type: number
   position:
-    mixin: Vector2DMixin
-    type: Vector2D
+    type:
+      mixin: Vector2DMixin
+      structure: Vector2D
   slotIndex:
     type: number
   specialIconCostString:
@@ -4461,8 +4542,8 @@ C_Traits.TraitConfigInfo:
   name:
     type: string
   treeIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   type:
     type: number
   usesSharedActionBars:
@@ -4493,8 +4574,8 @@ C_Traits.TraitDefinitionInfo:
     type: number
 C_Traits.TraitEntryInfo:
   conditionIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   definitionID:
     type: number
   isAvailable:
@@ -4516,7 +4597,8 @@ C_Traits.TraitGateInfo:
 C_Traits.TraitNodeInfo:
   activeEntry:
     nilable: true
-    type: C_Traits.TraitEntryRankInfo
+    type:
+      structure: C_Traits.TraitEntryRankInfo
   activeRank:
     type: number
   canPurchaseRank:
@@ -4527,21 +4609,21 @@ C_Traits.TraitNodeInfo:
     nilable: true
     type: number
   conditionIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   currentRank:
     type: number
   entryIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   entryIDsWithCommittedRanks:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   flags:
     type: number
   groupIDs:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   ID:
     type: number
   isAvailable:
@@ -4556,7 +4638,8 @@ C_Traits.TraitNodeInfo:
     type: boolean
   nextEntry:
     nilable: true
-    type: C_Traits.TraitEntryRankInfo
+    type:
+      structure: C_Traits.TraitEntryRankInfo
   posX:
     type: number
   posY:
@@ -4566,8 +4649,8 @@ C_Traits.TraitNodeInfo:
   type:
     type: number
   visibleEdges:
-    innerType: C_Traits.TraitOutEdgeInfo
-    type: table
+    type:
+      arrayof: C_Traits.TraitOutEdgeInfo
 C_Traits.TraitNodeInfoPartial:
   activeRank:
     nilable: true
@@ -4607,8 +4690,8 @@ C_Traits.TraitOutEdgeInfo:
     type: number
 C_Traits.TraitTreeInfo:
   gates:
-    innerType: C_Traits.TraitGateInfo
-    type: table
+    type:
+      arrayof: C_Traits.TraitGateInfo
   hideSingleRankNumbers:
     type: boolean
   ID:
@@ -4653,8 +4736,8 @@ C_TransmogCollection.TransmogAppearanceInfoBySourceData:
     type: boolean
 C_TransmogCollection.TransmogAppearanceJournalEncounterInfo:
   difficulties:
-    innerType: string
-    type: table
+    type:
+      arrayof: string
   encounter:
     type: string
   instance:
@@ -4662,8 +4745,8 @@ C_TransmogCollection.TransmogAppearanceJournalEncounterInfo:
   instanceType:
     type: number
   tiers:
-    innerType: string
-    type: table
+    type:
+      arrayof: string
 C_TransmogCollection.TransmogCategoryAppearanceInfo:
   alwaysShowItem:
     nilable: true
@@ -4744,8 +4827,9 @@ C_UIColor.DBColorExport:
   baseTag:
     type: string
   color:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   enabledState:
     type: number
@@ -4758,8 +4842,8 @@ C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   layoutDirection:
     type: number
   lines:
-    innerType: string
-    type: table
+    type:
+      arrayof: string
   modelSceneLayer:
     type: number
   orderIndex:
@@ -4859,7 +4943,8 @@ C_UIWidgetManager.CaptureZoneVisualizationInfo:
   widgetTag:
     type: string
   zoneInfo:
-    type: C_UIWidgetManager.ZoneEntry
+    type:
+      structure: C_UIWidgetManager.ZoneEntry
 C_UIWidgetManager.DiscreteProgressStepsVisualizationInfo:
   frameTextureKit:
     type: string
@@ -4948,8 +5033,8 @@ C_UIWidgetManager.DoubleStateIconRowVisualizationInfo:
   layoutDirection:
     type: number
   leftIcons:
-    innerType: C_UIWidgetManager.UIWidgetStateIconInfo
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.UIWidgetStateIconInfo
   modelSceneLayer:
     type: number
   orderIndex:
@@ -4957,8 +5042,8 @@ C_UIWidgetManager.DoubleStateIconRowVisualizationInfo:
   outAnimType:
     type: number
   rightIcons:
-    innerType: C_UIWidgetManager.UIWidgetStateIconInfo
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.UIWidgetStateIconInfo
   scriptedAnimationEffectID:
     type: number
   shownState:
@@ -5071,8 +5156,8 @@ C_UIWidgetManager.FillUpFramesWidgetVisualizationInfo:
     type: string
 C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
   currencies:
-    innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
   frameTextureKit:
     type: string
   hasTimer:
@@ -5167,8 +5252,8 @@ C_UIWidgetManager.IconTextAndBackgroundWidgetVisualizationInfo:
     type: string
 C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
   currencies:
-    innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
   description:
     type: string
   descriptionEnabledState:
@@ -5209,8 +5294,8 @@ C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
     type: string
 C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
   currencies:
-    innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
   frameTextureKit:
     type: string
   hasTimer:
@@ -5329,7 +5414,8 @@ C_UIWidgetManager.SpellDisplayVisualizationInfo:
   shownState:
     type: number
   spellInfo:
-    type: C_UIWidgetManager.UIWidgetSpellInfo
+    type:
+      structure: C_UIWidgetManager.UIWidgetSpellInfo
   textureKit:
     type: string
   tooltipLoc:
@@ -5356,8 +5442,8 @@ C_UIWidgetManager.StackedResourceTrackerWidgetVisualizationInfo:
   outAnimType:
     type: number
   resources:
-    innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
   scriptedAnimationEffectID:
     type: number
   shownState:
@@ -5410,8 +5496,8 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
   overrideBarTextShownType:
     type: number
   partitionValues:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   scriptedAnimationEffectID:
     type: number
   shownState:
@@ -5443,8 +5529,8 @@ C_UIWidgetManager.TextColumnRowVisualizationInfo:
   bottomPadding:
     type: number
   entries:
-    innerType: C_UIWidgetManager.TextColumnRowEntryInfo
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.TextColumnRowEntryInfo
   fontType:
     type: number
   frameTextureKit:
@@ -5486,8 +5572,8 @@ C_UIWidgetManager.TextureAndTextEntryInfo:
     type: string
 C_UIWidgetManager.TextureAndTextRowVisualizationInfo:
   entries:
-    innerType: C_UIWidgetManager.TextureAndTextEntryInfo
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.TextureAndTextEntryInfo
   fixedWidth:
     nilable: true
     type: number
@@ -5828,8 +5914,8 @@ C_UIWidgetManager.ZoneControlVisualizationInfo:
   widgetTag:
     type: string
   zoneEntries:
-    innerType: C_UIWidgetManager.ZoneEntry
-    type: table
+    type:
+      arrayof: C_UIWidgetManager.ZoneEntry
 C_UIWidgetManager.ZoneEntry:
   activeState:
     type: number
@@ -5913,8 +5999,8 @@ C_VoiceChat.VoiceChatChannel:
   isTransmitting:
     type: boolean
   members:
-    innerType: C_VoiceChat.VoiceChatMember
-    type: table
+    type:
+      arrayof: C_VoiceChat.VoiceChatMember
   name:
     type: string
   streamId:
@@ -5936,8 +6022,8 @@ C_VoiceChat.VoiceChatMember:
     type: number
 C_VoiceChat.VoiceChatProcess:
   channels:
-    innerType: C_VoiceChat.VoiceChatChannel
-    type: table
+    type:
+      arrayof: C_VoiceChat.VoiceChatChannel
   name:
     type: string
 C_VoiceChat.VoiceTtsVoiceType:
@@ -5983,8 +6069,8 @@ C_WeeklyRewards.WeeklyRewardActivityInfo:
     nilable: true
     type: string
   rewards:
-    innerType: C_WeeklyRewards.WeeklyRewardActivityRewardInfo
-    type: table
+    type:
+      arrayof: C_WeeklyRewards.WeeklyRewardActivityRewardInfo
   threshold:
     type: number
   type:
@@ -6006,8 +6092,8 @@ C_XMLUtil.XMLTemplateInfo:
     nilable: true
     type: string
   keyValues:
-    innerType: C_XMLUtil.XMLTemplateKeyValue
-    type: table
+    type:
+      arrayof: C_XMLUtil.XMLTemplateKeyValue
   type:
     type: string
   width:
@@ -6077,8 +6163,8 @@ CharCustomizationCategory:
   name:
     type: string
   options:
-    innerType: CharCustomizationOption
-    type: table
+    type:
+      arrayof: CharCustomizationOption
   orderIndex:
     type: number
   selectedIcon:
@@ -6103,17 +6189,19 @@ CharCustomizationChoice:
   name:
     type: string
   swatchColor1:
-    mixin: ColorMixin
     nilable: true
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   swatchColor2:
-    mixin: ColorMixin
     nilable: true
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
 CharCustomizationOption:
   choices:
-    innerType: CharCustomizationChoice
-    type: table
+    type:
+      arrayof: CharCustomizationChoice
   currentChoiceIndex:
     nilable: true
     type: number
@@ -6206,9 +6294,9 @@ CraftingItemResultData:
     default: false
     type: boolean
   resourcesReturned:
-    innerType: CraftingResourceReturnInfo
     nilable: true
-    type: table
+    type:
+      arrayof: CraftingResourceReturnInfo
 CraftingItemSlotModification:
   dataSlotIndex:
     type: number
@@ -6236,8 +6324,8 @@ CraftingOperationInfo:
   bonusSkill:
     type: number
   bonusStats:
-    innerType: CraftingOperationBonusStatInfo
-    type: table
+    type:
+      arrayof: CraftingOperationBonusStatInfo
   craftingDataID:
     type: number
   craftingQuality:
@@ -6301,9 +6389,9 @@ CraftingOrderCustomerCategoryFilters:
     type: number
 CraftingOrderCustomerOptionInfo:
   craftingQualityIDs:
-    innerType: number
     nilable: true
-    type: table
+    type:
+      arrayof: number
   iLvl:
     type: number
   itemID:
@@ -6321,9 +6409,9 @@ CraftingOrderCustomerOptionInfo:
     nilable: true
     type: number
   qualityIlvlBonuses:
-    innerType: number
     nilable: true
-    type: table
+    type:
+      arrayof: number
   secondaryCategoryID:
     nilable: true
     type: number
@@ -6344,7 +6432,8 @@ CraftingOrderCustomerOptionInfo:
     type: number
 CraftingOrderCustomerSearchParams:
   categoryFilters:
-    type: CraftingOrderCustomerCategoryFilters
+    type:
+      structure: CraftingOrderCustomerCategoryFilters
   includeArtifact:
     type: boolean
   includeCommon:
@@ -6379,8 +6468,8 @@ CraftingOrderCustomerSearchResults:
     nilable: true
     type: number
   options:
-    innerType: CraftingOrderCustomerOptionInfo
-    type: table
+    type:
+      arrayof: CraftingOrderCustomerOptionInfo
 CraftingOrderInfo:
   claimEndTime:
     type: number
@@ -6423,8 +6512,8 @@ CraftingOrderInfo:
     nilable: true
     type: string
   reagents:
-    innerType: CraftingOrderReagentInfo
-    type: table
+    type:
+      arrayof: CraftingOrderReagentInfo
   reagentState:
     type: number
   recraftItemHyperlink:
@@ -6463,7 +6552,8 @@ CraftingOrderReagentInfo:
   isBasicReagent:
     type: boolean
   reagent:
-    type: CraftingReagentInfo
+    type:
+      structure: CraftingReagentInfo
   reagentSlot:
     type: number
   source:
@@ -6509,15 +6599,16 @@ CraftingReagentSlotSchematic:
   quantityRequired:
     type: number
   reagents:
-    innerType: CraftingReagent
-    type: table
+    type:
+      arrayof: CraftingReagent
   reagentType:
     type: number
   slotIndex:
     type: number
   slotInfo:
     nilable: true
-    type: CraftingReagentSlotInfo
+    type:
+      structure: CraftingReagentSlotInfo
 CraftingRecipeOutputInfo:
   hyperlink:
     nilable: true
@@ -6556,8 +6647,8 @@ CraftingRecipeSchematic:
   quantityMin:
     type: number
   reagentSlotSchematics:
-    innerType: CraftingReagentSlotSchematic
-    type: table
+    type:
+      arrayof: CraftingReagentSlotSchematic
   recipeID:
     type: number
   recipeType:
@@ -6587,8 +6678,8 @@ ExpansionDisplayInfo:
   banner:
     type: string
   features:
-    innerType: ExpansionDisplayInfoFeature
-    type: table
+    type:
+      arrayof: ExpansionDisplayInfoFeature
   highResBackgroundID:
     type: number
   logo:
@@ -6614,8 +6705,8 @@ GarrisonFollowerAbilityInfo:
     nilable: true
     type: string
   counters:
-    innerType: GarrisonAbilityEffect
-    type: table
+    type:
+      arrayof: GarrisonAbilityEffect
   description:
     type: string
   icon:
@@ -6639,7 +6730,8 @@ GarrisonTalentCurrencyCostInfo:
     type: number
 GarrisonTalentInfo:
   ability:
-    type: GarrisonFollowerAbilityInfo
+    type:
+      structure: GarrisonFollowerAbilityInfo
   description:
     type: string
   icon:
@@ -6661,8 +6753,8 @@ GarrisonTalentInfo:
     nilable: true
     type: number
   researchCurrencyCosts:
-    innerType: GarrisonTalentCurrencyCostInfo
-    type: table
+    type:
+      arrayof: GarrisonTalentCurrencyCostInfo
   researchDescription:
     nilable: true
     type: string
@@ -6675,7 +6767,8 @@ GarrisonTalentInfo:
   selected:
     type: boolean
   socketInfo:
-    type: GarrisonTalentSocketInfo
+    type:
+      structure: GarrisonTalentSocketInfo
   startTime:
     type: number
   talentAvailability:
@@ -6713,8 +6806,8 @@ GarrisonTalentTreeInfo:
   isThemed:
     type: boolean
   talents:
-    innerType: GarrisonTalentInfo
-    type: table
+    type:
+      arrayof: GarrisonTalentInfo
   textureKit:
     type: string
   title:
@@ -6738,22 +6831,25 @@ GatheringOperationInfo:
   bonusSkill:
     type: number
   bonusStats:
-    innerType: GatheringOperationBonusStatInfo
-    type: table
+    type:
+      arrayof: GatheringOperationBonusStatInfo
   maxDifficulty:
     type: number
   spellID:
     type: number
 GuildTabardInfo:
   backgroundColor:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   borderColor:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   emblemColor:
-    mixin: ColorMixin
-    type: Color
+    type:
+      mixin: ColorMixin
+      structure: Color
   emblemFileID:
     type: number
   emblemStyle:
@@ -6792,8 +6888,8 @@ MythicPlusRatingLinkInfo:
     type: string
 NewCraftingOrderInfo:
   craftingReagentItems:
-    innerType: CraftingReagentInfo
-    type: table
+    type:
+      arrayof: CraftingReagentInfo
   customerNotes:
     type: string
   minCraftingQualityID:
@@ -6807,8 +6903,8 @@ NewCraftingOrderInfo:
   orderType:
     type: number
   reagentItems:
-    innerType: RegularReagentInfo
-    type: table
+    type:
+      arrayof: RegularReagentInfo
   recraftItem:
     nilable: true
     type: string
@@ -6863,9 +6959,9 @@ QueueSpecificInfo:
     nilable: true
     type: boolean
   lfgIDs:
-    innerType: number
     nilable: true
-    type: table
+    type:
+      arrayof: number
   lfgListID:
     nilable: true
     type: number
@@ -6897,17 +6993,18 @@ RuneforgeItemPreviewInfo:
     type: string
 RuneforgeLegendaryComponentInfo:
   modifiers:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   powerID:
     type: number
 RuneforgeLegendaryCraftDescription:
   baseItem:
-    mixin: ItemLocationMixin
-    type: ItemLocation
+    type:
+      mixin: ItemLocationMixin
+      structure: ItemLocation
   modifiers:
-    innerType: number
-    type: table
+    type:
+      arrayof: number
   runeforgePowerID:
     type: number
 RuneforgePower:
@@ -6929,8 +7026,8 @@ RuneforgePower:
   runeforgePowerID:
     type: number
   slots:
-    innerType: string
-    type: table
+    type:
+      arrayof: string
   source:
     nilable: true
     type: string
@@ -7037,17 +7134,17 @@ TradeSkillRecipeInfo:
     nilable: true
     type: number
   qualityIDs:
-    innerType: number
     nilable: true
-    type: table
+    type:
+      arrayof: number
   qualityIlvlBonuses:
-    innerType: number
     nilable: true
-    type: table
+    type:
+      arrayof: number
   qualityItemIDs:
-    innerType: number
     nilable: true
-    type: table
+    type:
+      arrayof: number
   recipeID:
     type: number
   relativeDifficulty:
@@ -7066,20 +7163,20 @@ TradeSkillRecipeInfo:
     type: number
 UnitAuraUpdateInfo:
   addedAuras:
-    innerType: table
     nilable: true
-    type: table
+    type:
+      arrayof: table
   isFullUpdate:
     default: false
     type: boolean
   removedAuraInstanceIDs:
-    innerType: number
     nilable: true
-    type: table
+    type:
+      arrayof: number
   updatedAuraInstanceIDs:
-    innerType: number
     nilable: true
-    type: table
+    type:
+      arrayof: number
 UnitPowerBarInfo:
   anchorTop:
     type: boolean
