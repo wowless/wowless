@@ -28,5 +28,4 @@ type:
                     - literal: number
                     - literal: string
                     - literal: table
-                    - literal: unknown
                     - ref: structure
