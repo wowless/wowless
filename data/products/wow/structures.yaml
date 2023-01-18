@@ -1,4 +1,46 @@
 ---
+AppearanceSourceInfo:
+  fields:
+  - default: None
+    name: categoryID
+    type: number
+  - default: 0
+    name: invType
+    type: number
+  - name: inventorySlot
+    nilable: true
+    type: number
+  - name: isCollected
+    type: boolean
+  - name: isHideVisual
+    nilable: true
+    type: boolean
+  - name: itemID
+    type: number
+  - name: itemModID
+    type: number
+  - name: meetsTransmogPlayerCondition
+    nilable: true
+    type: boolean
+  - name: name
+    nilable: true
+    type: string
+  - name: quality
+    nilable: true
+    type: number
+  - name: sourceID
+    type: number
+  - name: sourceType
+    nilable: true
+    type: number
+  - name: useError
+    nilable: true
+    type: string
+  - name: useErrorType
+    nilable: true
+    type: number
+  - name: visualID
+    type: number
 BountyInfo:
   fields:
   - name: factionID
@@ -1334,6 +1376,70 @@ C_Console.ConsoleCommandInfo:
     type: string
   - name: scriptParameters
     type: string
+C_Container.ContainerItemInfo:
+  fields:
+  - name: hasLoot
+    type: boolean
+  - name: hasNoValue
+    type: boolean
+  - name: hyperlink
+    type: string
+  - name: iconFileID
+    type: number
+  - name: isBound
+    type: boolean
+  - name: isFiltered
+    type: boolean
+  - name: isLocked
+    type: boolean
+  - name: isReadable
+    type: boolean
+  - name: itemID
+    type: number
+  - name: quality
+    nilable: true
+    type: number
+  - name: stackCount
+    type: number
+C_Container.ItemPurchaseCurrency:
+  fields:
+  - name: currencyCount
+    type: number
+  - name: iconFileID
+    nilable: true
+    type: number
+  - name: name
+    type: string
+C_Container.ItemPurchaseInfo:
+  fields:
+  - name: currencyCount
+    type: number
+  - name: hasEnchants
+    type: boolean
+  - name: itemCount
+    type: number
+  - name: money
+    type: number
+  - name: refundSeconds
+    type: number
+C_Container.ItemPurchaseItem:
+  fields:
+  - name: hyperlink
+    type: string
+  - name: iconFileID
+    nilable: true
+    type: number
+  - name: itemCount
+    type: number
+C_Container.ItemQuestInfo:
+  fields:
+  - name: isActive
+    type: boolean
+  - name: isQuestItem
+    type: boolean
+  - name: questID
+    nilable: true
+    type: number
 C_ContributionCollector.ContributionAppearance:
   fields:
   - name: bannerAtlas
@@ -1487,6 +1593,40 @@ C_CovenantSanctumUI.CovenantSanctumRenownRewardInfo:
     type: number
   - name: uiOrder
     type: number
+C_CraftingOrders.CraftingOrderRequestInfo:
+  fields:
+  - name: callback
+    type: CraftingOrderRequestCallback
+  - name: forCrafter
+    type: boolean
+  - name: initialNonPublicSearch
+    type: boolean
+  - name: offset
+    type: number
+  - name: orderType
+    type: number
+  - name: primarySort
+    type: CraftingOrderSortInfo
+  - name: profession
+    nilable: true
+    type: number
+  - name: searchFavorites
+    type: boolean
+  - name: secondarySort
+    type: CraftingOrderSortInfo
+  - name: selectedSkillLineAbility
+    nilable: true
+    type: number
+C_CraftingOrders.CraftingOrderRequestMyOrdersInfo:
+  fields:
+  - name: callback
+    type: CraftingOrderRequestMyOrdersCallback
+  - name: offset
+    type: number
+  - name: primarySort
+    type: CraftingOrderSortInfo
+  - name: secondarySort
+    type: CraftingOrderSortInfo
 C_CreatureInfo.ClassInfo:
   fields:
   - name: classFile
@@ -2930,6 +3070,18 @@ C_MythicPlus.MythicPlusRunInfo:
     type: number
   - name: thisWeek
     type: boolean
+C_PaperDollInfo.InspectPVPData:
+  fields:
+  - name: gamesPlayed
+    type: number
+  - name: gamesWon
+    type: number
+  - name: rating
+    type: number
+  - name: roundsPlayed
+    type: number
+  - name: roundsWon
+    type: number
 C_PartyPose.PartyPoseInfo:
   fields:
   - name: defeatModelSceneID
@@ -3315,6 +3467,16 @@ C_PvP.RandomBGInfo:
   - name: maxLevel
     type: number
   - name: minLevel
+    type: number
+C_PvP.RatedSoloShuffleSpecStats:
+  fields:
+  - name: seasonMostPlayedSpecID
+    type: number
+  - name: seasonMostPlayedSpecRounds
+    type: number
+  - name: weeklyMostPlayedSpecID
+    type: number
+  - name: weeklyMostPlayedSpecRounds
     type: number
 C_QuestLine.QuestLineInfo:
   fields:
@@ -3878,6 +4040,31 @@ C_Soulbinds.SoulbindTree:
   - innerType: C_Soulbinds.SoulbindNode
     name: nodes
     type: table
+C_SpecializationInfo.PvpTalentInfo:
+  fields:
+  - name: available
+    type: boolean
+  - name: dependenciesUnmet
+    type: boolean
+  - name: dependenciesUnmetReason
+    nilable: true
+    type: string
+  - name: grantedByAura
+    type: boolean
+  - name: icon
+    type: number
+  - name: known
+    type: boolean
+  - name: name
+    type: string
+  - name: selected
+    type: boolean
+  - name: spellID
+    type: number
+  - name: talentID
+    type: number
+  - name: unlocked
+    type: boolean
 C_SpecializationInfo.PvpTalentSlotInfo:
   fields:
   - innerType: number
@@ -4646,6 +4833,50 @@ C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo:
     type: number
   - name: widgetTag
     type: string
+C_UIWidgetManager.FillUpFramesWidgetVisualizationInfo:
+  fields:
+  - name: fillMax
+    type: number
+  - name: fillMin
+    type: number
+  - name: fillValue
+    type: number
+  - name: frameTextureKit
+    type: string
+  - name: hasTimer
+    type: boolean
+  - name: inAnimType
+    type: number
+  - name: layoutDirection
+    type: number
+  - name: modelSceneLayer
+    type: number
+  - name: numFullFrames
+    type: number
+  - name: numTotalFrames
+    type: number
+  - name: orderIndex
+    type: number
+  - name: outAnimType
+    type: number
+  - name: pulseFillingFrame
+    type: boolean
+  - name: scriptedAnimationEffectID
+    type: number
+  - name: shownState
+    type: number
+  - name: textureKit
+    type: string
+  - name: tooltip
+    type: string
+  - name: tooltipLoc
+    type: number
+  - name: widgetScale
+    type: number
+  - name: widgetSizeSetting
+    type: number
+  - name: widgetTag
+    type: string
 C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
   fields:
   - innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
@@ -5206,6 +5437,62 @@ C_UIWidgetManager.TextWithStateWidgetVisualizationInfo:
     type: number
   - name: widgetTag
     type: string
+C_UIWidgetManager.TextWithSubtextWidgetVisualizationInfo:
+  fields:
+  - name: enabledState
+    type: number
+  - name: fontType
+    type: number
+  - name: frameTextureKit
+    type: string
+  - name: hAlign
+    type: number
+  - name: hasTimer
+    type: boolean
+  - name: inAnimType
+    type: number
+  - name: layoutDirection
+    type: number
+  - name: modelSceneLayer
+    type: number
+  - name: orderIndex
+    type: number
+  - name: outAnimType
+    type: number
+  - name: scriptedAnimationEffectID
+    type: number
+  - name: shownState
+    type: number
+  - name: spacing
+    type: number
+  - name: subText
+    type: string
+  - name: subTextEnabledState
+    type: number
+  - name: subTextFontType
+    type: number
+  - name: subTextHAlign
+    type: number
+  - name: subTextSizeType
+    type: number
+  - name: text
+    type: string
+  - name: textSizeType
+    type: number
+  - name: textureKit
+    type: string
+  - name: tooltip
+    type: string
+  - name: tooltipLoc
+    type: number
+  - name: widgetScale
+    type: number
+  - name: widgetSizeSetting
+    type: number
+  - name: widgetTag
+    type: string
+  - name: widgetWidth
+    type: number
 C_UIWidgetManager.UIWidgetInfo:
   fields:
   - name: unitToken
@@ -5557,6 +5844,35 @@ CalendarTime:
     type: number
   - name: year
     type: number
+CharCustomizationCategory:
+  fields:
+  - name: cameraDistanceOffset
+    type: number
+  - name: cameraZoomLevel
+    type: number
+  - name: chrModelID
+    nilable: true
+    type: number
+  - name: hasNewChoices
+    type: boolean
+  - name: icon
+    type: string
+  - name: id
+    type: number
+  - name: name
+    type: string
+  - innerType: CharCustomizationOption
+    name: options
+    type: table
+  - name: orderIndex
+    type: number
+  - name: selectedIcon
+    type: string
+  - name: spellShapeshiftFormID
+    nilable: true
+    type: number
+  - name: undressModel
+    type: boolean
 ChatChannelInfo:
   fields:
   - name: name
@@ -5570,6 +5886,16 @@ ChatChannelInfo:
   - name: zoneChannelID
     type: number
   - name: channelType
+    type: number
+ClickBindingInfo:
+  fields:
+  - name: actionID
+    type: number
+  - name: button
+    type: string
+  - name: modifiers
+    type: number
+  - name: type
     type: number
 Color:
   fields:
@@ -5669,6 +5995,186 @@ CraftingOperationInfo:
     type: number
   - name: upperSkillTreshold
     type: number
+CraftingOrderBucketInfo:
+  fields:
+  - name: itemID
+    type: number
+  - name: numAvailable
+    type: number
+  - name: skillLineAbilityID
+    type: number
+  - name: spellID
+    type: number
+  - name: tipAmountAvg
+    type: number
+  - name: tipAmountMax
+    type: number
+CraftingOrderClaimsRemainingInfo:
+  fields:
+  - default: 0
+    name: claimsRemaining
+    type: number
+  - name: hoursToRecharge
+    nilable: true
+    type: number
+CraftingOrderCustomerCategory:
+  fields:
+  - name: categoryID
+    type: number
+  - name: categoryName
+    type: string
+  - name: primaryCategorySortOrder
+    nilable: true
+    type: number
+  - name: secondaryCategorySortOrder
+    nilable: true
+    type: number
+  - name: type
+    type: number
+  - name: uiSortOrder
+    type: number
+CraftingOrderCustomerCategoryFilters:
+  fields:
+  - name: primaryCategoryID
+    nilable: true
+    type: number
+  - name: secondaryCategoryID
+    nilable: true
+    type: number
+  - name: tertiaryCategoryID
+    nilable: true
+    type: number
+CraftingOrderCustomerSearchParams:
+  fields:
+  - name: categoryFilters
+    type: CraftingOrderCustomerCategoryFilters
+  - name: includeArtifact
+    type: boolean
+  - name: includeCommon
+    type: boolean
+  - name: includeEpic
+    type: boolean
+  - name: includeLegendary
+    type: boolean
+  - name: includePoor
+    type: boolean
+  - name: includeRare
+    type: boolean
+  - name: includeUncommon
+    type: boolean
+  - name: isFavoritesSearch
+    type: boolean
+  - name: maxLevel
+    type: number
+  - name: minLevel
+    type: number
+  - name: searchText
+    nilable: true
+    type: string
+  - name: uncollectedOnly
+    type: boolean
+  - name: upgradesOnly
+    type: boolean
+  - name: usableOnly
+    type: boolean
+CraftingOrderCustomerSearchResults:
+  fields:
+  - name: extraColumnType
+    nilable: true
+    type: number
+  - innerType: CraftingOrderCustomerOptionInfo
+    name: options
+    type: table
+CraftingOrderInfo:
+  fields:
+  - name: claimEndTime
+    type: number
+  - name: consortiumCut
+    type: number
+  - name: crafterGuid
+    nilable: true
+    type: string
+  - name: crafterName
+    nilable: true
+    type: string
+  - name: customerGuid
+    nilable: true
+    type: string
+  - name: customerName
+    nilable: true
+    type: string
+  - name: customerNotes
+    type: string
+  - name: expirationTime
+    type: number
+  - name: isFulfillable
+    type: boolean
+  - name: isRecraft
+    type: boolean
+  - name: itemID
+    type: number
+  - name: minQuality
+    type: number
+  - name: orderID
+    type: number
+  - name: orderState
+    type: number
+  - name: orderType
+    type: number
+  - name: outputItemGUID
+    nilable: true
+    type: string
+  - name: outputItemHyperlink
+    nilable: true
+    type: string
+  - name: reagentState
+    type: number
+  - innerType: CraftingOrderReagentInfo
+    name: reagents
+    type: table
+  - name: recraftItemHyperlink
+    nilable: true
+    type: string
+  - name: skillLineAbilityID
+    type: number
+  - name: spellID
+    type: number
+  - name: tipAmount
+    type: number
+CraftingOrderMailInfo:
+  fields:
+  - name: commissionPaid
+    nilable: true
+    type: number
+  - name: crafterGUID
+    nilable: true
+    type: string
+  - name: crafterName
+    nilable: true
+    type: string
+  - name: crafterNote
+    nilable: true
+    type: string
+  - name: customerGUID
+    nilable: true
+    type: string
+  - name: customerName
+    nilable: true
+    type: string
+  - name: reason
+    type: number
+  - name: recipeName
+    type: string
+CraftingOrderRequestCallback:
+  fields: {}
+CraftingOrderRequestMyOrdersCallback:
+  fields: {}
+CraftingOrderSortInfo:
+  fields:
+  - name: reversed
+    type: boolean
+  - name: sortType
+    type: number
 CraftingReagentInfo:
   fields:
   - name: dataSlotIndex
@@ -5686,6 +6192,14 @@ CraftingRecipeOutputInfo:
     type: number
   - name: itemID
     nilable: true
+    type: number
+CraftingRecipeRequirement:
+  fields:
+  - name: met
+    type: boolean
+  - name: name
+    type: string
+  - name: type
     type: number
 CraftingRecipeSchematic:
   fields:
@@ -5716,6 +6230,23 @@ CraftingRecipeSchematic:
     type: number
   - default: Item
     name: recipeType
+    type: number
+CraftingTargetItem:
+  fields:
+  - name: hyperlink
+    nilable: true
+    type: string
+  - name: itemGUID
+    type: string
+  - name: itemID
+    type: number
+  - name: quantity
+    type: number
+CurrencyCost:
+  fields:
+  - name: amount
+    type: number
+  - name: currencyID
     type: number
 ExpansionDisplayInfo:
   fields:
@@ -5828,6 +6359,25 @@ GarrisonTalentSocketInfo:
     type: number
   - name: socketType
     type: number
+GarrisonTalentTreeInfo:
+  fields:
+  - name: featureSubtype
+    type: number
+  - name: featureType
+    type: number
+  - name: isClassAgnostic
+    type: boolean
+  - name: isThemed
+    type: boolean
+  - innerType: GarrisonTalentInfo
+    name: talents
+    type: table
+  - name: textureKit
+    type: string
+  - name: title
+    type: string
+  - name: treeID
+    type: number
 GatheringOperationInfo:
   fields:
   - name: baseSkill
@@ -5855,6 +6405,57 @@ GuildTabardInfo:
   - name: emblemFileID
     type: number
   - name: emblemStyle
+    type: number
+MythicPlusAffixScoreInfo:
+  fields:
+  - name: durationSec
+    type: number
+  - name: level
+    type: number
+  - name: name
+    type: string
+  - name: overTime
+    type: boolean
+  - name: score
+    type: number
+MythicPlusRatingLinkInfo:
+  fields:
+  - name: completedInTime
+    type: number
+  - name: dungeonScore
+    type: number
+  - name: level
+    type: number
+  - name: mapChallengeModeID
+    type: number
+  - name: name
+    type: string
+NewCraftingOrderInfo:
+  fields:
+  - innerType: CraftingReagentInfo
+    name: craftingReagentItems
+    type: table
+  - name: customerNotes
+    type: string
+  - name: minCraftingQualityID
+    nilable: true
+    type: number
+  - name: orderDuration
+    type: number
+  - name: orderTarget
+    nilable: true
+    type: string
+  - name: orderType
+    type: number
+  - innerType: RegularReagentInfo
+    name: reagentItems
+    type: table
+  - name: recraftItem
+    nilable: true
+    type: string
+  - name: skillLineAbilityID
+    type: number
+  - name: tipAmount
     type: number
 ProfessionInfo:
   fields:
@@ -5889,6 +6490,12 @@ ProfTabInfo:
     type: string
   - name: rootNodeID
     type: number
+QuestReputationRewardInfo:
+  fields:
+  - name: factionID
+    type: number
+  - name: rewardAmount
+    type: number
 QueueSpecificInfo:
   fields:
   - name: activityID
@@ -5921,6 +6528,67 @@ QueueSpecificInfo:
   - name: teamSize
     nilable: true
     type: number
+RuneforgeItemPreviewInfo:
+  fields:
+  - name: itemGUID
+    type: string
+  - name: itemLevel
+    type: number
+  - name: itemName
+    type: string
+RuneforgeLegendaryComponentInfo:
+  fields:
+  - innerType: number
+    name: modifiers
+    type: table
+  - name: powerID
+    type: number
+RuneforgeLegendaryCraftDescription:
+  fields:
+  - mixin: ItemLocationMixin
+    name: baseItem
+    type: table
+  - innerType: number
+    name: modifiers
+    type: table
+  - name: runeforgePowerID
+    type: number
+RuneforgePower:
+  fields:
+  - name: covenantID
+    nilable: true
+    type: number
+  - name: description
+    type: string
+  - name: descriptionSpellID
+    type: number
+  - name: iconFileID
+    type: number
+  - name: matchesCovenant
+    type: boolean
+  - name: matchesSpec
+    type: boolean
+  - name: name
+    type: string
+  - name: runeforgePowerID
+    type: number
+  - innerType: string
+    name: slots
+    type: table
+  - name: source
+    nilable: true
+    type: string
+  - name: specName
+    nilable: true
+    type: string
+  - name: state
+    type: number
+SpecializationCurrencyInfo:
+  fields:
+  - name: currencyName
+    type: string
+  - name: numAvailable
+    type: number
 SpecializationTabInfo:
   fields:
   - default: true
@@ -5928,6 +6596,12 @@ SpecializationTabInfo:
     type: boolean
   - name: errorReason
     type: string
+SpecPerkInfo:
+  fields:
+  - name: isMajorPerk
+    type: boolean
+  - name: perkID
+    type: number
 TradeSkillRecipeInfo:
   fields:
   - name: abilityAllVerb

@@ -346,7 +346,14 @@ C_ActionBar.GetPetActionPetBarIndices:
   - innerType: number
     name: slots
     type: table
-C_ActionBar.GetProfessionQuality: {}
+C_ActionBar.GetProfessionQuality:
+  inputs:
+  - - name: actionID
+      type: number
+  outputs:
+  - name: quality
+    nilable: true
+    type: number
 C_ActionBar.HasFlyoutActionButtons:
   inputs:
   - - name: flyoutID
@@ -1067,7 +1074,14 @@ C_ArtifactUI.IsArtifactDisabled:
   outputs:
   - name: artifactDisabled
     type: boolean
-C_ArtifactUI.IsArtifactItem: {}
+C_ArtifactUI.IsArtifactItem:
+  inputs:
+  - - mixin: ItemLocationMixin
+      name: itemLocation
+      type: table
+  outputs:
+  - name: isArtifact
+    type: boolean
 C_ArtifactUI.IsAtForge:
   inputs:
   - {}
@@ -1255,6 +1269,7 @@ C_AuctionHouse.GetBidInfo:
       type: number
   outputs:
   - name: bid
+    nilable: true
     type: C_AuctionHouse.BidInfo
 C_AuctionHouse.GetBids:
   inputs:
@@ -2207,7 +2222,7 @@ C_BarberShop.GetAvailableCustomizations:
   inputs:
   - {}
   outputs:
-  - innerType: unknown
+  - innerType: CharCustomizationCategory
     name: categories
     type: table
 C_BarberShop.GetCurrentCameraZoom:
@@ -2228,8 +2243,19 @@ C_BarberShop.GetCurrentCost:
   outputs:
   - name: cost
     type: number
-C_BarberShop.GetCustomizationScope: {}
-C_BarberShop.GetViewingChrModel: {}
+C_BarberShop.GetCustomizationScope:
+  inputs:
+  - {}
+  outputs:
+  - name: customizationScope
+    type: number
+C_BarberShop.GetViewingChrModel:
+  inputs:
+  - {}
+  outputs:
+  - name: chrModelID
+    nilable: true
+    type: number
 C_BarberShop.HasAnyChanges:
   inputs:
   - {}
@@ -3088,7 +3114,13 @@ C_CampaignInfo.IsCampaignQuest:
   outputs:
   - name: isCampaignQuest
     type: boolean
-C_CampaignInfo.SortAsNormalQuest: {}
+C_CampaignInfo.SortAsNormalQuest:
+  inputs:
+  - - name: campaignID
+      type: number
+  outputs:
+  - name: sortAsNormalQuest
+    type: boolean
 C_CampaignInfo.UsesNormalQuestIcons:
   inputs:
   - - name: campaignID
@@ -3209,7 +3241,7 @@ C_ChallengeMode.GetMapScoreInfo:
   inputs:
   - {}
   outputs:
-  - innerType: unknown
+  - innerType: MythicPlusRatingLinkInfo
     name: displayScores
     type: table
 C_ChallengeMode.GetMapTable:
@@ -3599,8 +3631,20 @@ C_ClassTalents.CanChangeTalents:
     type: boolean
   - name: changeError
     type: string
-C_ClassTalents.CanCreateNewConfig: {}
-C_ClassTalents.CanEditTalents: {}
+C_ClassTalents.CanCreateNewConfig:
+  inputs:
+  - {}
+  outputs:
+  - name: canCreate
+    type: boolean
+C_ClassTalents.CanEditTalents:
+  inputs:
+  - {}
+  outputs:
+  - name: canEdit
+    type: boolean
+  - name: changeError
+    type: string
 C_ClassTalents.CommitConfig:
   inputs:
   - - name: savedConfigID
@@ -3609,7 +3653,13 @@ C_ClassTalents.CommitConfig:
   outputs:
   - name: success
     type: boolean
-C_ClassTalents.DeleteConfig: {}
+C_ClassTalents.DeleteConfig:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: success
+    type: boolean
 C_ClassTalents.GetActiveConfigID:
   impl: C_ClassTalents.GetActiveConfigID
   inputs:
@@ -3629,13 +3679,67 @@ C_ClassTalents.GetConfigIDsBySpecID:
   - innerType: number
     name: configIDs
     type: table
-C_ClassTalents.GetHasStarterBuild: {}
-C_ClassTalents.GetLastSelectedSavedConfigID: {}
-C_ClassTalents.GetNextStarterBuildPurchase: {}
-C_ClassTalents.GetStarterBuildActive: {}
-C_ClassTalents.HasUnspentTalentPoints: {}
-C_ClassTalents.ImportLoadout: {}
-C_ClassTalents.IsConfigPopulated: {}
+C_ClassTalents.GetHasStarterBuild:
+  inputs:
+  - {}
+  outputs:
+  - name: hasStarterBuild
+    type: boolean
+C_ClassTalents.GetLastSelectedSavedConfigID:
+  inputs:
+  - - name: specID
+      type: number
+  outputs:
+  - name: configID
+    nilable: true
+    type: number
+C_ClassTalents.GetNextStarterBuildPurchase:
+  inputs:
+  - {}
+  outputs:
+  - name: nodeID
+    nilable: true
+    type: number
+  - name: entryID
+    nilable: true
+    type: number
+C_ClassTalents.GetStarterBuildActive:
+  inputs:
+  - {}
+  outputs:
+  - name: isActive
+    type: boolean
+C_ClassTalents.HasUnspentTalentPoints:
+  inputs:
+  - {}
+  outputs:
+  - name: hasUnspentPoints
+    type: boolean
+  - name: numClassPoints
+    type: number
+  - name: numSpecPoints
+    type: number
+C_ClassTalents.ImportLoadout:
+  inputs:
+  - - name: configID
+      type: number
+    - innerType: C_ClassTalents.ImportLoadoutEntryInfo
+      name: entries
+      type: table
+    - name: name
+      type: string
+  outputs:
+  - name: success
+    type: boolean
+  - name: importError
+    type: string
+C_ClassTalents.IsConfigPopulated:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: isPopulated
+    type: boolean
 C_ClassTalents.LoadConfig:
   inputs:
   - - name: configID
@@ -3645,7 +3749,15 @@ C_ClassTalents.LoadConfig:
   outputs:
   - name: result
     type: number
-C_ClassTalents.RenameConfig: {}
+C_ClassTalents.RenameConfig:
+  inputs:
+  - - name: configID
+      type: number
+    - name: name
+      type: string
+  outputs:
+  - name: success
+    type: boolean
 C_ClassTalents.RequestNewConfig:
   inputs:
   - - name: name
@@ -3660,9 +3772,28 @@ C_ClassTalents.SaveConfig:
   outputs:
   - name: success
     type: boolean
-C_ClassTalents.SetStarterBuildActive: {}
-C_ClassTalents.SetUsesSharedActionBars: {}
-C_ClassTalents.UpdateLastSelectedSavedConfigID: {}
+C_ClassTalents.SetStarterBuildActive:
+  inputs:
+  - - name: active
+      type: boolean
+  outputs:
+  - name: result
+    type: number
+C_ClassTalents.SetUsesSharedActionBars:
+  inputs:
+  - - name: configID
+      type: number
+    - name: usesShared
+      type: boolean
+  outputs: {}
+C_ClassTalents.UpdateLastSelectedSavedConfigID:
+  inputs:
+  - - name: specID
+      type: number
+    - name: configID
+      nilable: true
+      type: number
+  outputs: {}
 C_ClassTrial.GetClassTrialLogoutTimeSeconds:
   outputs:
   - type: number
@@ -3705,7 +3836,7 @@ C_ClickBindings.GetProfileInfo:
   inputs:
   - {}
   outputs:
-  - innerType: unknown
+  - innerType: ClickBindingInfo
     name: infoVec
     type: table
 C_ClickBindings.GetStringFromModifiers:
@@ -3733,7 +3864,7 @@ C_ClickBindings.ResetCurrentProfile:
   outputs: {}
 C_ClickBindings.SetProfileByInfo:
   inputs:
-  - - innerType: unknown
+  - - innerType: ClickBindingInfo
       name: infoVec
       type: table
   outputs: {}
@@ -5799,10 +5930,36 @@ C_Console.SetFontHeight:
   - - name: fontHeightInPixels
       type: number
   outputs: {}
-C_Container.ContainerIDToInventoryID: {}
-C_Container.ContainerRefundItemPurchase: {}
-C_Container.GetBackpackAutosortDisabled: {}
-C_Container.GetBagName: {}
+C_Container.ContainerIDToInventoryID:
+  inputs:
+  - - name: containerID
+      type: number
+  outputs:
+  - name: inventoryID
+    type: number
+C_Container.ContainerRefundItemPurchase:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - default: false
+      name: isEquipped
+      type: boolean
+  outputs: {}
+C_Container.GetBackpackAutosortDisabled:
+  inputs:
+  - {}
+  outputs:
+  - name: isDisabled
+    type: boolean
+C_Container.GetBagName:
+  inputs:
+  - - name: bagIndex
+      type: number
+  outputs:
+  - name: name
+    type: string
 C_Container.GetBagSlotFlag:
   inputs:
   - - name: bagIndex
@@ -5812,30 +5969,216 @@ C_Container.GetBagSlotFlag:
   outputs:
   - name: isSet
     type: boolean
-C_Container.GetBankAutosortDisabled: {}
-C_Container.GetContainerFreeSlots: {}
-C_Container.GetContainerItemCooldown: {}
-C_Container.GetContainerItemDurability: {}
-C_Container.GetContainerItemEquipmentSetInfo: {}
-C_Container.GetContainerItemID: {}
-C_Container.GetContainerItemInfo: {}
-C_Container.GetContainerItemLink: {}
-C_Container.GetContainerItemPurchaseCurrency: {}
-C_Container.GetContainerItemPurchaseInfo: {}
-C_Container.GetContainerItemPurchaseItem: {}
-C_Container.GetContainerItemQuestInfo: {}
-C_Container.GetContainerNumFreeSlots: {}
-C_Container.GetContainerNumSlots: {}
-C_Container.GetInsertItemsLeftToRight: {}
-C_Container.GetItemCooldown: {}
-C_Container.GetMaxArenaCurrency: {}
-C_Container.GetSortBagsRightToLeft: {}
-C_Container.IsBattlePayItem: {}
-C_Container.IsContainerFiltered: {}
-C_Container.PickupContainerItem: {}
-C_Container.PlayerHasHearthstone: {}
-C_Container.SetBackpackAutosortDisabled: {}
-C_Container.SetBagPortraitTexture: {}
+C_Container.GetBankAutosortDisabled:
+  inputs:
+  - {}
+  outputs:
+  - name: isDisabled
+    type: boolean
+C_Container.GetContainerFreeSlots:
+  inputs:
+  - - name: containerIndex
+      type: number
+  outputs:
+  - innerType: number
+    name: freeSlots
+    type: table
+C_Container.GetContainerItemCooldown:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: startTime
+    type: number
+  - name: duration
+    type: number
+  - name: enable
+    type: number
+C_Container.GetContainerItemDurability:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: durability
+    type: number
+  - name: maxDurability
+    type: number
+C_Container.GetContainerItemEquipmentSetInfo:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: inSet
+    type: boolean
+  - name: setList
+    type: string
+C_Container.GetContainerItemID:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: containerID
+    type: number
+C_Container.GetContainerItemInfo:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: containerInfo
+    type: C_Container.ContainerItemInfo
+C_Container.GetContainerItemLink:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: itemLink
+    type: string
+C_Container.GetContainerItemPurchaseCurrency:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - name: itemIndex
+      type: number
+    - name: isEquipped
+      type: boolean
+  outputs:
+  - name: currencyInfo
+    type: C_Container.ItemPurchaseCurrency
+C_Container.GetContainerItemPurchaseInfo:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - name: isEquipped
+      type: boolean
+  outputs:
+  - name: info
+    type: C_Container.ItemPurchaseInfo
+C_Container.GetContainerItemPurchaseItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - name: itemIndex
+      type: number
+    - name: isEquipped
+      type: boolean
+  outputs:
+  - name: itemInfo
+    type: C_Container.ItemPurchaseItem
+C_Container.GetContainerItemQuestInfo:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: questInfo
+    type: C_Container.ItemQuestInfo
+C_Container.GetContainerNumFreeSlots:
+  inputs:
+  - - name: bagIndex
+      type: number
+  outputs:
+  - name: numFreeSlots
+    type: number
+  - name: bagFamily
+    nilable: true
+    type: number
+C_Container.GetContainerNumSlots:
+  inputs:
+  - - name: containerIndex
+      type: number
+  outputs:
+  - name: numSlots
+    type: number
+C_Container.GetInsertItemsLeftToRight:
+  inputs:
+  - {}
+  outputs:
+  - name: isEnabled
+    type: boolean
+C_Container.GetItemCooldown:
+  inputs:
+  - - name: itemID
+      type: number
+  outputs:
+  - name: startTime
+    type: number
+  - name: duration
+    type: number
+  - name: enable
+    type: number
+C_Container.GetMaxArenaCurrency:
+  inputs:
+  - {}
+  outputs:
+  - name: maxCurrency
+    type: number
+C_Container.GetSortBagsRightToLeft:
+  inputs:
+  - {}
+  outputs:
+  - name: isEnabled
+    type: boolean
+C_Container.IsBattlePayItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: isBattlePayItem
+    type: boolean
+C_Container.IsContainerFiltered:
+  inputs:
+  - - name: containerIndex
+      type: number
+  outputs:
+  - name: isFiltered
+    type: boolean
+C_Container.PickupContainerItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs: {}
+C_Container.PlayerHasHearthstone:
+  inputs:
+  - {}
+  outputs:
+  - name: itemID
+    nilable: true
+    type: number
+C_Container.SetBackpackAutosortDisabled:
+  inputs:
+  - - name: disable
+      type: boolean
+  outputs: {}
+C_Container.SetBagPortraitTexture:
+  inputs:
+  - - name: texture
+      type: table
+    - name: bagIndex
+      type: number
+  outputs: {}
 C_Container.SetBagSlotFlag:
   inputs:
   - - name: bagIndex
@@ -5845,18 +6188,82 @@ C_Container.SetBagSlotFlag:
     - name: isSet
       type: boolean
   outputs: {}
-C_Container.SetBankAutosortDisabled: {}
-C_Container.SetInsertItemsLeftToRight: {}
-C_Container.SetItemSearch: {}
-C_Container.SetSortBagsRightToLeft: {}
-C_Container.ShowContainerSellCursor: {}
-C_Container.SocketContainerItem: {}
-C_Container.SortBags: {}
-C_Container.SortBankBags: {}
-C_Container.SortReagentBankBags: {}
-C_Container.SplitContainerItem: {}
-C_Container.UseContainerItem: {}
-C_Container.UseHearthstone: {}
+C_Container.SetBankAutosortDisabled:
+  inputs:
+  - - name: disable
+      type: boolean
+  outputs: {}
+C_Container.SetInsertItemsLeftToRight:
+  inputs:
+  - - name: enable
+      type: boolean
+  outputs: {}
+C_Container.SetItemSearch:
+  inputs:
+  - - name: searchString
+      type: string
+  outputs: {}
+C_Container.SetSortBagsRightToLeft:
+  inputs:
+  - - name: enable
+      type: boolean
+  outputs: {}
+C_Container.ShowContainerSellCursor:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs: {}
+C_Container.SocketContainerItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Container.SortBags:
+  inputs:
+  - {}
+  outputs: {}
+C_Container.SortBankBags:
+  inputs:
+  - {}
+  outputs: {}
+C_Container.SortReagentBankBags:
+  inputs:
+  - {}
+  outputs: {}
+C_Container.SplitContainerItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - name: amount
+      type: number
+  outputs: {}
+C_Container.UseContainerItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - name: unitToken
+      nilable: true
+      type: string
+    - default: false
+      name: reagentBankOpen
+      type: boolean
+  outputs: {}
+C_Container.UseHearthstone:
+  inputs:
+  - {}
+  outputs:
+  - name: used
+    type: boolean
 C_ContributionCollector.Close:
   inputs:
   - {}
@@ -5895,6 +6302,7 @@ C_ContributionCollector.GetContributionAppearance:
       type: number
   outputs:
   - name: appearance
+    nilable: true
     type: C_ContributionCollector.ContributionAppearance
 C_ContributionCollector.GetContributionCollectorsForMap:
   inputs:
@@ -6032,6 +6440,7 @@ C_Covenants.GetCovenantData:
       type: number
   outputs:
   - name: data
+    nilable: true
     type: C_Covenants.CovenantData
 C_Covenants.GetCovenantIDs:
   inputs:
@@ -6149,58 +6558,220 @@ C_CovenantSanctumUI.RequestCatchUpState:
   inputs:
   - {}
   outputs: {}
-C_CraftingOrders.AreOrderNotesDisabled: {}
-C_CraftingOrders.CalculateCraftingOrderPostingFee: {}
-C_CraftingOrders.CancelOrder: {}
-C_CraftingOrders.CanOrderSkillAbility: {}
-C_CraftingOrders.ClaimOrder: {}
-C_CraftingOrders.CloseCrafterCraftingOrders: {}
+C_CraftingOrders.AreOrderNotesDisabled:
+  inputs:
+  - {}
+  outputs:
+  - name: areNotesDisabled
+    type: boolean
+C_CraftingOrders.CalculateCraftingOrderPostingFee:
+  inputs:
+  - - name: skillLineAbilityID
+      type: number
+    - name: orderType
+      type: number
+    - name: orderDuration
+      type: number
+  outputs:
+  - name: deposit
+    type: number
+C_CraftingOrders.CancelOrder:
+  inputs:
+  - - name: orderID
+      type: number
+  outputs: {}
+C_CraftingOrders.CanOrderSkillAbility:
+  inputs:
+  - - name: skillLineAbilityID
+      type: number
+  outputs:
+  - name: canOrder
+    type: boolean
+C_CraftingOrders.ClaimOrder:
+  inputs:
+  - - name: orderID
+      type: number
+    - name: profession
+      type: number
+  outputs: {}
+C_CraftingOrders.CloseCrafterCraftingOrders:
+  inputs:
+  - {}
+  outputs: {}
 C_CraftingOrders.CloseCustomerCraftingOrders:
   inputs:
   - {}
   outputs: {}
-C_CraftingOrders.FulfillOrder: {}
-C_CraftingOrders.GetClaimedOrder: {}
-C_CraftingOrders.GetCrafterBuckets: {}
-C_CraftingOrders.GetCrafterOrders: {}
-C_CraftingOrders.GetCraftingOrderTime: {}
+C_CraftingOrders.FulfillOrder:
+  inputs:
+  - - name: orderID
+      type: number
+    - name: crafterNote
+      type: string
+    - name: profession
+      type: number
+  outputs: {}
+C_CraftingOrders.GetClaimedOrder:
+  inputs:
+  - {}
+  outputs:
+  - name: order
+    nilable: true
+    type: CraftingOrderInfo
+C_CraftingOrders.GetCrafterBuckets:
+  inputs:
+  - {}
+  outputs:
+  - innerType: CraftingOrderBucketInfo
+    name: buckets
+    type: table
+C_CraftingOrders.GetCrafterOrders:
+  inputs:
+  - {}
+  outputs:
+  - innerType: CraftingOrderInfo
+    name: orders
+    type: table
+C_CraftingOrders.GetCraftingOrderTime:
+  inputs:
+  - {}
+  outputs:
+  - name: time
+    type: number
 C_CraftingOrders.GetCustomerCategories:
   inputs:
   - {}
   outputs:
-  - innerType: unknown
+  - innerType: CraftingOrderCustomerCategory
     name: categories
     type: table
 C_CraftingOrders.GetCustomerOptions:
   inputs:
   - - name: params
-      type: unknown
+      type: CraftingOrderCustomerSearchParams
   outputs:
   - name: results
-    type: unknown
-C_CraftingOrders.GetCustomerOrders: {}
-C_CraftingOrders.GetDefaultOrdersSkillLine: {}
-C_CraftingOrders.GetMyOrders: {}
-C_CraftingOrders.GetOrderClaimInfo: {}
-C_CraftingOrders.HasFavoriteCustomerOptions: {}
-C_CraftingOrders.IsCustomerOptionFavorited: {}
-C_CraftingOrders.ListMyOrders: {}
-C_CraftingOrders.OpenCrafterCraftingOrders: {}
-C_CraftingOrders.OpenCustomerCraftingOrders: {}
-C_CraftingOrders.OrderCanBeRecrafted: {}
+    type: CraftingOrderCustomerSearchResults
+C_CraftingOrders.GetCustomerOrders:
+  inputs:
+  - {}
+  outputs:
+  - innerType: CraftingOrderInfo
+    name: customerOrders
+    type: table
+C_CraftingOrders.GetDefaultOrdersSkillLine:
+  inputs:
+  - {}
+  outputs:
+  - name: skillLineID
+    nilable: true
+    type: number
+C_CraftingOrders.GetMyOrders:
+  inputs:
+  - {}
+  outputs:
+  - innerType: CraftingOrderInfo
+    name: myOrders
+    type: table
+C_CraftingOrders.GetOrderClaimInfo:
+  inputs:
+  - - name: profession
+      type: number
+  outputs:
+  - name: claimInfo
+    type: CraftingOrderClaimsRemainingInfo
+C_CraftingOrders.HasFavoriteCustomerOptions:
+  inputs:
+  - {}
+  outputs:
+  - name: hasFavorites
+    type: boolean
+C_CraftingOrders.IsCustomerOptionFavorited:
+  inputs:
+  - - name: recipeID
+      type: number
+  outputs:
+  - name: favorited
+    type: boolean
+C_CraftingOrders.ListMyOrders:
+  inputs:
+  - - name: request
+      type: C_CraftingOrders.CraftingOrderRequestMyOrdersInfo
+  outputs: {}
+C_CraftingOrders.OpenCrafterCraftingOrders:
+  inputs:
+  - {}
+  outputs: {}
+C_CraftingOrders.OpenCustomerCraftingOrders:
+  inputs:
+  - {}
+  outputs: {}
+C_CraftingOrders.OrderCanBeRecrafted:
+  inputs:
+  - - name: orderID
+      type: number
+  outputs:
+  - name: recraftable
+    type: boolean
 C_CraftingOrders.ParseCustomerOptions:
   inputs:
   - {}
   outputs: {}
-C_CraftingOrders.PlaceNewOrder: {}
-C_CraftingOrders.RejectOrder: {}
-C_CraftingOrders.ReleaseOrder: {}
-C_CraftingOrders.RequestCrafterOrders: {}
-C_CraftingOrders.RequestCustomerOrders: {}
-C_CraftingOrders.SetCustomerOptionFavorited: {}
-C_CraftingOrders.ShouldShowCraftingOrderTab: {}
-C_CraftingOrders.SkillLineHasOrders: {}
-C_CraftingOrders.UpdateIgnoreList: {}
+C_CraftingOrders.PlaceNewOrder:
+  inputs:
+  - - name: orderInfo
+      type: NewCraftingOrderInfo
+  outputs: {}
+C_CraftingOrders.RejectOrder:
+  inputs:
+  - - name: orderID
+      type: number
+    - name: crafterNote
+      type: string
+    - name: profession
+      type: number
+  outputs: {}
+C_CraftingOrders.ReleaseOrder:
+  inputs:
+  - - name: orderID
+      type: number
+    - name: profession
+      type: number
+  outputs: {}
+C_CraftingOrders.RequestCrafterOrders:
+  inputs:
+  - - name: request
+      type: C_CraftingOrders.CraftingOrderRequestInfo
+  outputs: {}
+C_CraftingOrders.RequestCustomerOrders:
+  inputs:
+  - - name: request
+      type: C_CraftingOrders.CraftingOrderRequestInfo
+  outputs: {}
+C_CraftingOrders.SetCustomerOptionFavorited:
+  inputs:
+  - - name: recipeID
+      type: number
+    - name: favorited
+      type: boolean
+  outputs: {}
+C_CraftingOrders.ShouldShowCraftingOrderTab:
+  inputs:
+  - {}
+  outputs:
+  - name: showTab
+    type: boolean
+C_CraftingOrders.SkillLineHasOrders:
+  inputs:
+  - - name: skillLineID
+      type: number
+  outputs:
+  - name: hasOrders
+    type: boolean
+C_CraftingOrders.UpdateIgnoreList:
+  inputs:
+  - {}
+  outputs: {}
 C_CreatureInfo.GetClassInfo:
   impl: C_CreatureInfo.GetClassInfo
   inputs:
@@ -6279,7 +6850,13 @@ C_CurrencyInfo.GetCurrencyContainerInfo:
   outputs:
   - name: info
     type: C_CurrencyInfo.CurrencyDisplayInfo
-C_CurrencyInfo.GetCurrencyDescription: {}
+C_CurrencyInfo.GetCurrencyDescription:
+  inputs:
+  - - name: type
+      type: number
+  outputs:
+  - name: description
+    type: string
 C_CurrencyInfo.GetCurrencyIDFromLink:
   inputs:
   - - name: currencyLink
@@ -6584,7 +7161,10 @@ C_EditMode.GetLayouts:
   outputs:
   - name: layoutInfo
     type: C_EditMode.EditModeLayouts
-C_EditMode.OnEditModeExit: {}
+C_EditMode.OnEditModeExit:
+  inputs:
+  - {}
+  outputs: {}
 C_EditMode.OnLayoutAdded:
   inputs:
   - - name: addedLayoutIndex
@@ -7679,7 +8259,7 @@ C_Garrison.GetTalentTreeInfo:
       type: number
   outputs:
   - name: info
-    type: unknown
+    type: GarrisonTalentTreeInfo
 C_Garrison.GetTalentTreeResetInfo:
   inputs:
   - - name: garrTalentTreeID
@@ -7927,17 +8507,17 @@ C_GossipInfo.RefreshOptions:
   outputs: {}
 C_GossipInfo.SelectActiveQuest:
   inputs:
-  - - name: index
+  - - name: optionID
       type: number
   outputs: {}
 C_GossipInfo.SelectAvailableQuest:
   inputs:
-  - - name: index
+  - - name: optionID
       type: number
   outputs: {}
 C_GossipInfo.SelectOption:
   inputs:
-  - - name: index
+  - - name: optionID
       type: number
     - name: text
       nilable: true
@@ -7986,7 +8566,7 @@ C_GuildInfo.GetGuildTabardInfo:
   outputs:
   - name: tabardInfo
     nilable: true
-    type: unknown
+    type: GuildTabardInfo
 C_GuildInfo.GuildControlGetRankFlags:
   inputs:
   - - name: rankOrder
@@ -8437,7 +9017,14 @@ C_Item.GetItemLink:
   - name: itemLink
     nilable: true
     type: string
-C_Item.GetItemLinkByGUID: {}
+C_Item.GetItemLinkByGUID:
+  inputs:
+  - - name: itemGUID
+      type: string
+  outputs:
+  - name: itemLink
+    nilable: true
+    type: string
 C_Item.GetItemLocation:
   inputs:
   - - name: itemGUID
@@ -8819,7 +9406,14 @@ C_ItemUpgrade.UpgradeItem:
       name: numUpgrades
       type: number
   outputs: {}
-C_KeyBindings.GetBindingIndex: {}
+C_KeyBindings.GetBindingIndex:
+  inputs:
+  - - name: action
+      type: string
+  outputs:
+  - name: bindingIndex
+    nilable: true
+    type: number
 C_KeyBindings.GetCustomBindingType:
   inputs:
   - - name: bindingIndex
@@ -8835,7 +9429,7 @@ C_LegendaryCrafting.CloseRuneforgeInteraction:
 C_LegendaryCrafting.CraftRuneforgeLegendary:
   inputs:
   - - name: description
-      type: unknown
+      type: RuneforgeLegendaryCraftDescription
   outputs: {}
 C_LegendaryCrafting.GetRuneforgeItemPreviewInfo:
   inputs:
@@ -8852,7 +9446,7 @@ C_LegendaryCrafting.GetRuneforgeItemPreviewInfo:
   outputs:
   - name: info
     nilable: true
-    type: unknown
+    type: RuneforgeItemPreviewInfo
 C_LegendaryCrafting.GetRuneforgeLegendaryComponentInfo:
   inputs:
   - - mixin: ItemLocationMixin
@@ -8860,14 +9454,14 @@ C_LegendaryCrafting.GetRuneforgeLegendaryComponentInfo:
       type: table
   outputs:
   - name: componentInfo
-    type: unknown
+    type: RuneforgeLegendaryComponentInfo
 C_LegendaryCrafting.GetRuneforgeLegendaryCost:
   inputs:
   - - mixin: ItemLocationMixin
       name: baseItem
       type: table
   outputs:
-  - innerType: unknown
+  - innerType: CurrencyCost
     name: cost
     type: table
 C_LegendaryCrafting.GetRuneforgeLegendaryCraftSpellID:
@@ -8892,7 +9486,7 @@ C_LegendaryCrafting.GetRuneforgeLegendaryUpgradeCost:
       name: upgradeItem
       type: table
   outputs:
-  - innerType: unknown
+  - innerType: CurrencyCost
     name: cost
     type: table
 C_LegendaryCrafting.GetRuneforgeModifierInfo:
@@ -8927,7 +9521,7 @@ C_LegendaryCrafting.GetRuneforgePowerInfo:
       type: number
   outputs:
   - name: power
-    type: unknown
+    type: RuneforgePower
 C_LegendaryCrafting.GetRuneforgePowers:
   inputs:
   - - mixin: ItemLocationMixin
@@ -9017,7 +9611,7 @@ C_LegendaryCrafting.MakeRuneforgeCraftDescription:
       type: table
   outputs:
   - name: description
-    type: unknown
+    type: RuneforgeLegendaryCraftDescription
 C_LegendaryCrafting.UpgradeRuneforgeLegendary:
   inputs:
   - - mixin: ItemLocationMixin
@@ -9573,7 +10167,14 @@ C_Mail.CanCheckInbox:
     type: boolean
   - name: secondsUntilAllowed
     type: number
-C_Mail.GetCraftingOrderMailInfo: {}
+C_Mail.GetCraftingOrderMailInfo:
+  inputs:
+  - - name: inboxIndex
+      type: number
+  outputs:
+  - name: info
+    nilable: true
+    type: CraftingOrderMailInfo
 C_Mail.HasInboxMoney:
   inputs:
   - - name: inboxIndex
@@ -10374,7 +10975,14 @@ C_MountJournal.GetMountInfoExtraByID:
     type: number
   - name: disablePlayerMountPreview
     type: boolean
-C_MountJournal.GetMountLink: {}
+C_MountJournal.GetMountLink:
+  inputs:
+  - - name: spellID
+      type: number
+  outputs:
+  - name: mountCreatureDisplayInfoLink
+    nilable: true
+    type: string
 C_MountJournal.GetMountUsabilityByID:
   inputs:
   - - name: mountID
@@ -10547,7 +11155,14 @@ C_MythicPlus.GetCurrentUIDisplaySeason:
   - name: seasonID
     nilable: true
     type: number
-C_MythicPlus.GetEndOfRunGearSequenceLevel: {}
+C_MythicPlus.GetEndOfRunGearSequenceLevel:
+  inputs:
+  - - name: keystoneLevel
+      type: number
+  outputs:
+  - name: sequenceLevel
+    nilable: true
+    type: number
 C_MythicPlus.GetLastWeeklyBestInformation:
   inputs:
   - {}
@@ -10608,7 +11223,7 @@ C_MythicPlus.GetSeasonBestAffixScoreInfoForMap:
   - - name: mapChallengeModeID
       type: number
   outputs:
-  - innerType: unknown
+  - innerType: MythicPlusAffixScoreInfo
     name: affixScores
     type: table
   - name: bestOverAllScore
@@ -10745,12 +11360,39 @@ C_Navigation.WasClampedToScreen:
   outputs:
   - name: wasClamped
     type: boolean
-C_NewItems.ClearAll: {}
-C_NewItems.IsNewItem: {}
-C_NewItems.RemoveNewItem: {}
-C_PaperDollInfo.CanAutoEquipCursorItem: {}
+C_NewItems.ClearAll:
+  inputs:
+  - {}
+  outputs: {}
+C_NewItems.IsNewItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: isNew
+    type: boolean
+C_NewItems.RemoveNewItem:
+  inputs:
+  - - name: containerIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs: {}
+C_PaperDollInfo.CanAutoEquipCursorItem:
+  inputs:
+  - {}
+  outputs:
+  - name: canAutoEquip
+    type: boolean
 C_PaperDollInfo.CanCursorCanGoInSlot:
-  alias: CursorCanGoInSlot
+  inputs:
+  - - name: slotIndex
+      type: number
+  outputs:
+  - name: canOccupySlot
+    type: boolean
 C_PaperDollInfo.GetArmorEffectiveness:
   inputs:
   - - name: armor
@@ -10785,7 +11427,12 @@ C_PaperDollInfo.GetInspectItemLevel:
   outputs:
   - name: equippedItemLevel
     type: number
-C_PaperDollInfo.GetInspectRatedSoloShuffleData: {}
+C_PaperDollInfo.GetInspectRatedSoloShuffleData:
+  inputs:
+  - {}
+  outputs:
+  - name: ratedSoloShuffleData
+    type: C_PaperDollInfo.InspectPVPData
 C_PaperDollInfo.GetMinItemLevel:
   inputs:
   - {}
@@ -10895,7 +11542,7 @@ C_PartyInfo.GetInviteConfirmationInvalidQueues:
   - - name: inviteGUID
       type: string
   outputs:
-  - innerType: unknown
+  - innerType: QueueSpecificInfo
     name: invalidQueues
     type: table
 C_PartyInfo.GetInviteReferralInfo:
@@ -11528,7 +12175,13 @@ C_PlayerInfo.GUIDIsPlayer:
   outputs:
   - name: isPlayer
     type: boolean
-C_PlayerInfo.HasVisibleInvSlot: {}
+C_PlayerInfo.HasVisibleInvSlot:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: isVisible
+    type: boolean
 C_PlayerInfo.IsConnected:
   inputs:
   - - mixin: PlayerLocationMixin
@@ -11539,7 +12192,13 @@ C_PlayerInfo.IsConnected:
   - name: isConnected
     nilable: true
     type: boolean
-C_PlayerInfo.IsExpansionLandingPageUnlockedForPlayer: {}
+C_PlayerInfo.IsExpansionLandingPageUnlockedForPlayer:
+  inputs:
+  - - name: expansionID
+      type: number
+  outputs:
+  - name: isUnlocked
+    type: boolean
 C_PlayerInfo.IsPlayerEligibleForNPE:
   inputs:
   - {}
@@ -11576,13 +12235,52 @@ C_PlayerInfo.UnitIsSameServer:
   outputs:
   - name: unitIsSameServer
     type: boolean
-C_PlayerInteractionManager.ClearInteraction: {}
-C_PlayerInteractionManager.ConfirmationInteraction: {}
-C_PlayerInteractionManager.InteractUnit: {}
-C_PlayerInteractionManager.IsInteractingWithNpcOfType: {}
-C_PlayerInteractionManager.IsReplacingUnit: {}
-C_PlayerInteractionManager.IsValidNPCInteraction: {}
-C_PlayerInteractionManager.ReopenInteraction: {}
+C_PlayerInteractionManager.ClearInteraction:
+  inputs:
+  - - name: type
+      nilable: true
+      type: number
+  outputs: {}
+C_PlayerInteractionManager.ConfirmationInteraction:
+  inputs:
+  - - name: type
+      nilable: true
+      type: number
+  outputs: {}
+C_PlayerInteractionManager.InteractUnit:
+  inputs:
+  - - name: unit
+      type: string
+    - default: false
+      name: exactMatch
+      type: boolean
+  outputs:
+  - name: success
+    type: boolean
+C_PlayerInteractionManager.IsInteractingWithNpcOfType:
+  inputs:
+  - - name: type
+      type: number
+  outputs:
+  - name: interacting
+    type: boolean
+C_PlayerInteractionManager.IsReplacingUnit:
+  inputs:
+  - {}
+  outputs:
+  - name: replacing
+    type: boolean
+C_PlayerInteractionManager.IsValidNPCInteraction:
+  inputs:
+  - - name: type
+      type: number
+  outputs:
+  - name: isValidInteraction
+    type: boolean
+C_PlayerInteractionManager.ReopenInteraction:
+  inputs:
+  - {}
+  outputs: {}
 C_PlayerMentorship.GetMentorLevelRequirement:
   inputs:
   - {}
@@ -11655,12 +12353,19 @@ C_ProfSpecs.GetConfigIDForSkillLine:
   outputs:
   - name: configID
     type: number
-C_ProfSpecs.GetCurrencyInfoForSkillLine: {}
+C_ProfSpecs.GetCurrencyInfoForSkillLine:
+  inputs:
+  - - name: skillLineID
+      type: number
+  outputs:
+  - name: info
+    type: SpecializationCurrencyInfo
 C_ProfSpecs.GetDefaultSpecSkillLine:
   inputs:
   - {}
   outputs:
   - name: defaultSpecSkillLine
+    nilable: true
     type: number
 C_ProfSpecs.GetDescriptionForPath:
   inputs:
@@ -11688,8 +12393,8 @@ C_ProfSpecs.GetPerksForPath:
   - - name: pathID
       type: number
   outputs:
-  - innerType: number
-    name: perkIDs
+  - innerType: SpecPerkInfo
+    name: perkInfos
     type: table
 C_ProfSpecs.GetRootPathForTab:
   inputs:
@@ -11787,8 +12492,19 @@ C_ProfSpecs.GetUnlockRankForPerk:
   - name: unlockRank
     nilable: true
     type: number
-C_ProfSpecs.ShouldShowPointsReminder: {}
-C_ProfSpecs.ShouldShowPointsReminderForSkillLine: {}
+C_ProfSpecs.ShouldShowPointsReminder:
+  inputs:
+  - {}
+  outputs:
+  - name: showReminder
+    type: boolean
+C_ProfSpecs.ShouldShowPointsReminderForSkillLine:
+  inputs:
+  - - name: skillLineID
+      type: number
+  outputs:
+  - name: showReminder
+    type: boolean
 C_ProfSpecs.ShouldShowSpecTab:
   inputs:
   - {}
@@ -12052,7 +12768,13 @@ C_PvP.GetOutdoorPvPWaitTime:
   outputs:
   - name: pvpWaitTime
     type: number
-C_PvP.GetPersonalRatedSoloShuffleSpecStats: {}
+C_PvP.GetPersonalRatedSoloShuffleSpecStats:
+  inputs:
+  - {}
+  outputs:
+  - name: specStats
+    nilable: true
+    type: C_PvP.RatedSoloShuffleSpecStats
 C_PvP.GetPostMatchCurrencyRewards:
   inputs:
   - {}
@@ -12236,7 +12958,12 @@ C_PvP.GetTeamInfo:
   - name: info
     nilable: true
     type: C_PvP.PVPTeamInfo
-C_PvP.GetUIDisplaySeason: {}
+C_PvP.GetUIDisplaySeason:
+  inputs:
+  - {}
+  outputs:
+  - name: uiDisplaySeason
+    type: number
 C_PvP.GetWarModeRewardBonus:
   inputs:
   - {}
@@ -12299,7 +13026,12 @@ C_PvP.IsBattlegroundEnlistmentBonusActive:
     type: boolean
   - name: brawlActive
     type: boolean
-C_PvP.IsBrawlSoloShuffle: {}
+C_PvP.IsBrawlSoloShuffle:
+  inputs:
+  - {}
+  outputs:
+  - name: isBrawlSoloShuffle
+    type: boolean
 C_PvP.IsInBrawl:
   inputs:
   - {}
@@ -12342,7 +13074,12 @@ C_PvP.IsRatedMap:
   outputs:
   - name: isRatedMap
     type: boolean
-C_PvP.IsRatedSoloShuffle: {}
+C_PvP.IsRatedSoloShuffle:
+  inputs:
+  - {}
+  outputs:
+  - name: isRatedSoloShuffle
+    type: boolean
 C_PvP.IsSoloShuffle:
   inputs:
   - {}
@@ -12469,7 +13206,15 @@ C_QuestLog.CanAbandonQuest:
   outputs:
   - name: canAbandon
     type: boolean
-C_QuestLog.DoesQuestAwardReputationWithFaction: {}
+C_QuestLog.DoesQuestAwardReputationWithFaction:
+  inputs:
+  - - name: questID
+      type: number
+    - name: factionID
+      type: number
+  outputs:
+  - name: awardsReputation
+    type: boolean
 C_QuestLog.GetAbandonQuest:
   inputs:
   - {}
@@ -12502,7 +13247,7 @@ C_QuestLog.GetBountiesForMapID:
   - - name: uiMapID
       type: number
   outputs:
-  - innerType: unknown
+  - innerType: BountyInfo
     name: bounties
     nilable: true
     type: table
@@ -12517,6 +13262,8 @@ C_QuestLog.GetBountySetInfoForMapID:
     type: number
   - name: bountySetID
     type: number
+  - name: isActivitySet
+    type: boolean
 C_QuestLog.GetDistanceSqToQuest:
   inputs:
   - - name: questID
@@ -12670,7 +13417,14 @@ C_QuestLog.GetQuestIDForWorldQuestWatchIndex:
   - name: questID
     nilable: true
     type: number
-C_QuestLog.GetQuestLogMajorFactionReputationRewards: {}
+C_QuestLog.GetQuestLogMajorFactionReputationRewards:
+  inputs:
+  - - name: questID
+      type: number
+  outputs:
+  - innerType: QuestReputationRewardInfo
+    name: reputationRewards
+    type: table
 C_QuestLog.GetQuestLogPortraitGiver:
   inputs:
   - - name: questLogIndex
@@ -13035,7 +13789,13 @@ C_QuestOffer.GetHideRequiredItemsOnTurnIn:
   outputs:
   - name: hideRequiredItemsOnTurnIn
     type: boolean
-C_QuestOffer.GetQuestOfferMajorFactionReputationRewards: {}
+C_QuestOffer.GetQuestOfferMajorFactionReputationRewards:
+  inputs:
+  - {}
+  outputs:
+  - innerType: QuestReputationRewardInfo
+    name: reputationRewards
+    type: table
 C_QuestSession.CanStart:
   inputs:
   - {}
@@ -13294,13 +14054,23 @@ C_Reputation.IsFactionParagon:
   outputs:
   - name: hasParagon
     type: boolean
-C_Reputation.IsMajorFaction: {}
+C_Reputation.IsMajorFaction:
+  inputs:
+  - - name: factionID
+      type: number
+  outputs:
+  - name: isMajorFaction
+    type: boolean
 C_Reputation.RequestFactionParagonPreloadRewardData:
   inputs:
   - - name: factionID
       type: number
   outputs: {}
-C_Reputation.SetWatchedFaction: {}
+C_Reputation.SetWatchedFaction:
+  inputs:
+  - - name: factionID
+      type: number
+  outputs: {}
 C_ResearchInfo.GetDigSitesForMap:
   inputs:
   - - name: uiMapID
@@ -13941,7 +14711,14 @@ C_Sound.IsPlaying:
   outputs:
   - name: isPlaying
     type: boolean
-C_Sound.PlayItemSound: {}
+C_Sound.PlayItemSound:
+  inputs:
+  - - name: soundType
+      type: number
+    - mixin: ItemLocationMixin
+      name: itemLocation
+      type: table
+  outputs: {}
 C_SpecializationInfo.CanPlayerUsePVPTalentUI:
   inputs:
   - {}
@@ -13991,7 +14768,14 @@ C_SpecializationInfo.GetPvpTalentAlertStatus:
     type: boolean
   - name: hasNewTalent
     type: boolean
-C_SpecializationInfo.GetPvpTalentInfo: {}
+C_SpecializationInfo.GetPvpTalentInfo:
+  inputs:
+  - - name: talentID
+      type: number
+  outputs:
+  - name: talentInfo
+    nilable: true
+    type: C_SpecializationInfo.PvpTalentInfo
 C_SpecializationInfo.GetPvpTalentSlotInfo:
   inputs:
   - - name: talentIndex
@@ -14145,7 +14929,13 @@ C_SpellBook.GetSpellLinkFromSpellID:
   outputs:
   - name: spellLink
     type: string
-C_SpellBook.GetTrackedNameplateCooldownSpells: {}
+C_SpellBook.GetTrackedNameplateCooldownSpells:
+  inputs:
+  - {}
+  outputs:
+  - innerType: number
+    name: spellIDs
+    type: table
 C_SpellBook.IsSpellDisabled:
   inputs:
   - - name: spellID
@@ -14507,7 +15297,13 @@ C_Texture.GetAtlasInfo:
     type: C_Texture.AtlasInfo
   sqls:
   - lookup: C_Texture.GetAtlasInfo
-C_Texture.GetCraftingReagentQualityChatIcon: {}
+C_Texture.GetCraftingReagentQualityChatIcon:
+  inputs:
+  - - name: quality
+      type: number
+  outputs:
+  - name: textureMarkup
+    type: string
 C_Texture.GetFilenameFromFileDataID:
   inputs:
   - - name: fileDataID
@@ -14701,6 +15497,9 @@ C_TradeSkillUI.CraftRecipe:
     - name: recipeLevel
       nilable: true
       type: number
+    - name: orderID
+      nilable: true
+      type: number
   outputs: {}
 C_TradeSkillUI.CraftSalvage:
   inputs:
@@ -14782,7 +15581,19 @@ C_TradeSkillUI.GetCraftingOperationInfo:
   - name: info
     nilable: true
     type: CraftingOperationInfo
-C_TradeSkillUI.GetCraftingOperationInfoForOrder: {}
+C_TradeSkillUI.GetCraftingOperationInfoForOrder:
+  inputs:
+  - - name: recipeID
+      type: number
+    - innerType: CraftingReagentInfo
+      name: craftingReagents
+      type: table
+    - name: orderID
+      type: number
+  outputs:
+  - name: info
+    nilable: true
+    type: CraftingOperationInfo
 C_TradeSkillUI.GetCraftingReagentBonusText:
   inputs:
   - - name: recipeSpellID
@@ -14799,7 +15610,15 @@ C_TradeSkillUI.GetCraftingReagentBonusText:
   - innerType: string
     name: bonusText
     type: table
-C_TradeSkillUI.GetCraftingTargetItems: {}
+C_TradeSkillUI.GetCraftingTargetItems:
+  inputs:
+  - - innerType: number
+      name: itemIDs
+      type: table
+  outputs:
+  - innerType: CraftingTargetItem
+    name: items
+    type: table
 C_TradeSkillUI.GetEnchantItems:
   inputs:
   - - name: recipeID
@@ -14839,7 +15658,7 @@ C_TradeSkillUI.GetHideUnownedFlags:
   outputs:
   - name: cannotModifyHideUnowned
     type: boolean
-  - name: alwaysHideUnowned
+  - name: alwaysShowUnowned
     type: boolean
 C_TradeSkillUI.GetItemCraftedQualityByItemInfo:
   inputs:
@@ -14865,7 +15684,14 @@ C_TradeSkillUI.GetItemSlotModifications:
   - innerType: CraftingItemSlotModification
     name: slotMods
     type: table
-C_TradeSkillUI.GetItemSlotModificationsForOrder: {}
+C_TradeSkillUI.GetItemSlotModificationsForOrder:
+  inputs:
+  - - name: orderID
+      type: number
+  outputs:
+  - innerType: CraftingItemSlotModification
+    name: slotMods
+    type: table
 C_TradeSkillUI.GetObliterateSpellID: {}
 C_TradeSkillUI.GetOnlyShowFirstCraftRecipes: {}
 C_TradeSkillUI.GetOnlyShowMakeableRecipes: {}
@@ -14878,6 +15704,9 @@ C_TradeSkillUI.GetOriginalCraftRecipeID:
   - name: recipeID
     nilable: true
     type: number
+  - name: skillLineAbilityID
+    nilable: true
+    type: number
 C_TradeSkillUI.GetPendingObliterateItemID:
   inputs:
   - {}
@@ -14886,14 +15715,27 @@ C_TradeSkillUI.GetPendingObliterateItemID:
     nilable: true
     type: number
 C_TradeSkillUI.GetPendingObliterateItemLink: {}
-C_TradeSkillUI.GetProfessionByInventorySlot: {}
+C_TradeSkillUI.GetProfessionByInventorySlot:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: profession
+    nilable: true
+    type: number
 C_TradeSkillUI.GetProfessionChildSkillLineID:
   inputs:
   - {}
   outputs:
   - name: skillLineID
     type: number
-C_TradeSkillUI.GetProfessionForCursorItem: {}
+C_TradeSkillUI.GetProfessionForCursorItem:
+  inputs:
+  - {}
+  outputs:
+  - name: profession
+    nilable: true
+    type: number
 C_TradeSkillUI.GetProfessionInfoBySkillLineID:
   inputs:
   - - name: skillLineID
@@ -14901,8 +15743,20 @@ C_TradeSkillUI.GetProfessionInfoBySkillLineID:
   outputs:
   - name: info
     type: ProfessionInfo
-C_TradeSkillUI.GetProfessionInventorySlots: {}
-C_TradeSkillUI.GetProfessionNameForSkillLineAbility: {}
+C_TradeSkillUI.GetProfessionInventorySlots:
+  inputs:
+  - {}
+  outputs:
+  - innerType: unknown
+    name: invSlots
+    type: table
+C_TradeSkillUI.GetProfessionNameForSkillLineAbility:
+  inputs:
+  - - name: skillLineAbilityID
+      type: number
+  outputs:
+  - name: professionNmae
+    type: string
 C_TradeSkillUI.GetProfessionSkillLineID:
   inputs:
   - - name: profession
@@ -14929,7 +15783,15 @@ C_TradeSkillUI.GetProfessionSpells:
   - innerType: number
     name: knownSpells
     type: table
-C_TradeSkillUI.GetQualitiesForRecipe: {}
+C_TradeSkillUI.GetQualitiesForRecipe:
+  inputs:
+  - - name: recipeID
+      type: number
+  outputs:
+  - innerType: number
+    name: qualityIDs
+    nilable: true
+    type: table
 C_TradeSkillUI.GetReagentDifficultyText:
   inputs:
   - - name: craftingReagentIndex
@@ -14945,6 +15807,8 @@ C_TradeSkillUI.GetReagentSlotStatus:
   - - name: mcrSlotID
       type: number
     - name: recipeSpellID
+      type: number
+    - name: skillLineAbilityID
       type: number
   outputs:
   - name: locked
@@ -14985,7 +15849,17 @@ C_TradeSkillUI.GetRecipeInfo:
   - name: recipeInfo
     nilable: true
     type: TradeSkillRecipeInfo
-C_TradeSkillUI.GetRecipeInfoForSkillLineAbility: {}
+C_TradeSkillUI.GetRecipeInfoForSkillLineAbility:
+  inputs:
+  - - name: skillLineAbilityID
+      type: number
+    - name: recipeLevel
+      nilable: true
+      type: number
+  outputs:
+  - name: recipeInfo
+    nilable: true
+    type: TradeSkillRecipeInfo
 C_TradeSkillUI.GetRecipeItemLevelFilter: {}
 C_TradeSkillUI.GetRecipeItemLink: {}
 C_TradeSkillUI.GetRecipeItemNameFilter: {}
@@ -15001,10 +15875,21 @@ C_TradeSkillUI.GetRecipeOutputItemData:
     - name: allocationItemGUID
       nilable: true
       type: string
+    - name: overrideQualityID
+      nilable: true
+      type: number
   outputs:
   - name: outputInfo
     type: CraftingRecipeOutputInfo
-C_TradeSkillUI.GetRecipeQualityItemIDs: {}
+C_TradeSkillUI.GetRecipeQualityItemIDs:
+  inputs:
+  - - name: recipeSpellID
+      type: number
+  outputs:
+  - innerType: number
+    name: qualityItemIDs
+    nilable: true
+    type: table
 C_TradeSkillUI.GetRecipeQualityReagentItemLink:
   inputs:
   - - name: recipeID
@@ -15022,7 +15907,14 @@ C_TradeSkillUI.GetRecipeRepeatCount:
   outputs:
   - name: recastTimes
     type: number
-C_TradeSkillUI.GetRecipeRequirements: {}
+C_TradeSkillUI.GetRecipeRequirements:
+  inputs:
+  - - name: recipeID
+      type: number
+  outputs:
+  - innerType: CraftingRecipeRequirement
+    name: requirements
+    type: table
 C_TradeSkillUI.GetRecipeSchematic:
   inputs:
   - - name: recipeSpellID
@@ -15046,6 +15938,7 @@ C_TradeSkillUI.GetRecipesTracked:
 C_TradeSkillUI.GetRecraftItems:
   inputs:
   - - name: recipeID
+      nilable: true
       type: number
   outputs:
   - innerType: string
@@ -15071,8 +15964,20 @@ C_TradeSkillUI.GetShowUnlearned:
   outputs:
   - name: flag
     type: boolean
-C_TradeSkillUI.GetSkillLineForGear: {}
-C_TradeSkillUI.GetSourceTypeFilter: {}
+C_TradeSkillUI.GetSkillLineForGear:
+  inputs:
+  - - name: itemInfo
+      type: string
+  outputs:
+  - name: skillLineID
+    nilable: true
+    type: number
+C_TradeSkillUI.GetSourceTypeFilter:
+  inputs:
+  - {}
+  outputs:
+  - name: sourceTypeFilter
+    type: number
 C_TradeSkillUI.GetSubCategories: {}
 C_TradeSkillUI.GetTradeSkillDisplayName:
   inputs:
@@ -15084,7 +15989,12 @@ C_TradeSkillUI.GetTradeSkillDisplayName:
 C_TradeSkillUI.GetTradeSkillLineForRecipe: {}
 C_TradeSkillUI.GetTradeSkillListLink: {}
 C_TradeSkillUI.GetTradeSkillTexture: {}
-C_TradeSkillUI.HasFavoriteOrderRecipes: {}
+C_TradeSkillUI.HasFavoriteOrderRecipes:
+  inputs:
+  - {}
+  outputs:
+  - name: hasFavorites
+    type: boolean
 C_TradeSkillUI.HasRecipesTracked:
   inputs:
   - {}
@@ -15094,7 +16004,13 @@ C_TradeSkillUI.HasRecipesTracked:
 C_TradeSkillUI.IsAnyRecipeFromSource: {}
 C_TradeSkillUI.IsDataSourceChanging: {}
 C_TradeSkillUI.IsInventorySlotFiltered: {}
-C_TradeSkillUI.IsNearProfessionSpellFocus: {}
+C_TradeSkillUI.IsNearProfessionSpellFocus:
+  inputs:
+  - - name: profession
+      type: number
+  outputs:
+  - name: nearFocus
+    type: boolean
 C_TradeSkillUI.IsNPCCrafting:
   inputs:
   - {}
@@ -15110,7 +16026,13 @@ C_TradeSkillUI.IsOriginalCraftRecipeLearned:
     type: boolean
 C_TradeSkillUI.IsRecipeCategoryFiltered: {}
 C_TradeSkillUI.IsRecipeFavorite: {}
-C_TradeSkillUI.IsRecipeInBaseSkillLine: {}
+C_TradeSkillUI.IsRecipeInBaseSkillLine:
+  inputs:
+  - - name: recipeID
+      type: number
+  outputs:
+  - name: result
+    type: boolean
 C_TradeSkillUI.IsRecipeInSkillLine:
   inputs:
   - - name: recipeID
@@ -15137,7 +16059,13 @@ C_TradeSkillUI.IsRecipeTracked:
   outputs:
   - name: tracked
     type: boolean
-C_TradeSkillUI.IsRecraftItemEquipped: {}
+C_TradeSkillUI.IsRecraftItemEquipped:
+  inputs:
+  - - name: recraftItemGUID
+      type: string
+  outputs:
+  - name: isEquipped
+    type: boolean
 C_TradeSkillUI.IsRuneforging:
   inputs:
   - {}
@@ -15170,7 +16098,13 @@ C_TradeSkillUI.OpenTradeSkill:
   outputs:
   - name: opened
     type: boolean
-C_TradeSkillUI.RecraftLimitCategoryValid: {}
+C_TradeSkillUI.RecraftLimitCategoryValid:
+  inputs:
+  - - name: reagentItemID
+      type: number
+  outputs:
+  - name: recraftValid
+    type: boolean
 C_TradeSkillUI.RecraftRecipe:
   inputs:
   - - name: itemGUID
@@ -15182,9 +16116,25 @@ C_TradeSkillUI.RecraftRecipe:
   outputs:
   - name: result
     type: boolean
-C_TradeSkillUI.RecraftRecipeForOrder: {}
+C_TradeSkillUI.RecraftRecipeForOrder:
+  inputs:
+  - - name: orderID
+      type: number
+    - name: itemGUID
+      type: string
+    - innerType: CraftingReagentInfo
+      name: craftingReagents
+      nilable: true
+      type: table
+  outputs:
+  - name: result
+    type: boolean
 C_TradeSkillUI.SetInventorySlotFilter: {}
-C_TradeSkillUI.SetOnlyShowAvailableForOrders: {}
+C_TradeSkillUI.SetOnlyShowAvailableForOrders:
+  inputs:
+  - - name: flag
+      type: boolean
+  outputs: {}
 C_TradeSkillUI.SetOnlyShowFirstCraftRecipes: {}
 C_TradeSkillUI.SetOnlyShowMakeableRecipes: {}
 C_TradeSkillUI.SetOnlyShowSkillUpRecipes: {}
@@ -15215,7 +16165,11 @@ C_TradeSkillUI.SetShowUnlearned:
   - - name: flag
       type: boolean
   outputs: {}
-C_TradeSkillUI.SetSourceTypeFilter: {}
+C_TradeSkillUI.SetSourceTypeFilter:
+  inputs:
+  - - name: sourceTypeFilter
+      type: number
+  outputs: {}
 C_TradeSkillUI.StopRecipeRepeat: {}
 C_Traits.CanPurchaseRank:
   inputs:
@@ -15331,7 +16285,12 @@ C_Traits.GetEntryInfo:
   outputs:
   - name: entryInfo
     type: C_Traits.TraitEntryInfo
-C_Traits.GetLoadoutSerializationVersion: {}
+C_Traits.GetLoadoutSerializationVersion:
+  inputs:
+  - {}
+  outputs:
+  - name: serializationVersion
+    type: number
 C_Traits.GetNodeCost:
   inputs:
   - - name: configID
@@ -15406,7 +16365,13 @@ C_Traits.GetTraitDescription:
   outputs:
   - name: description
     type: string
-C_Traits.GetTraitSystemWidgetSetID: {}
+C_Traits.GetTraitSystemWidgetSetID:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: uiWidgetSetID
+    type: number
 C_Traits.GetTreeCurrencyInfo:
   inputs:
   - - name: configID
@@ -15857,7 +16822,7 @@ C_TransmogCollection.GetAppearanceSources:
       nilable: true
       type: table
   outputs:
-  - innerType: unknown
+  - innerType: AppearanceSourceInfo
     name: sources
     type: table
 C_TransmogCollection.GetArtifactAppearanceStrings:
@@ -16063,7 +17028,7 @@ C_TransmogCollection.GetSourceInfo:
       type: number
   outputs:
   - name: sourceInfo
-    type: unknown
+    type: AppearanceSourceInfo
 C_TransmogCollection.GetSourceItemID:
   inputs:
   - - name: itemModifiedAppearanceID
@@ -16410,7 +17375,7 @@ C_TransmogSets.GetSourcesForSlot:
     - name: slot
       type: number
   outputs:
-  - innerType: unknown
+  - innerType: AppearanceSourceInfo
     name: sources
     type: table
 C_TransmogSets.GetUsableSets:
@@ -16759,7 +17724,14 @@ C_UIWidgetManager.GetDoubleStatusBarWidgetVisualizationInfo:
   - name: widgetInfo
     nilable: true
     type: C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo
-C_UIWidgetManager.GetFillUpFramesWidgetVisualizationInfo: {}
+C_UIWidgetManager.GetFillUpFramesWidgetVisualizationInfo:
+  inputs:
+  - - name: widgetID
+      type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type: C_UIWidgetManager.FillUpFramesWidgetVisualizationInfo
 C_UIWidgetManager.GetHorizontalCurrenciesWidgetVisualizationInfo:
   inputs:
   - - name: widgetID
@@ -16892,7 +17864,14 @@ C_UIWidgetManager.GetTextWithStateWidgetVisualizationInfo:
   - name: widgetInfo
     nilable: true
     type: C_UIWidgetManager.TextWithStateWidgetVisualizationInfo
-C_UIWidgetManager.GetTextWithSubtextWidgetVisualizationInfo: {}
+C_UIWidgetManager.GetTextWithSubtextWidgetVisualizationInfo:
+  inputs:
+  - - name: widgetID
+      type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type: C_UIWidgetManager.TextWithSubtextWidgetVisualizationInfo
 C_UIWidgetManager.GetTopCenterWidgetSetID:
   inputs:
   - {}
@@ -16997,7 +17976,13 @@ C_UnitAuras.IsAuraFilteredOutByInstanceID:
   outputs:
   - name: isFiltered
     type: boolean
-C_UnitAuras.WantsAlteredForm: {}
+C_UnitAuras.WantsAlteredForm:
+  inputs:
+  - - name: unitToken
+      type: string
+  outputs:
+  - name: wantsAlteredForm
+    type: boolean
 C_UserFeedback.SubmitBug:
   inputs:
   - - name: bugInfo
@@ -17692,7 +18677,12 @@ C_WeeklyRewards.GetNextMythicPlusIncrease:
   - name: itemLevel
     nilable: true
     type: number
-C_WeeklyRewards.GetWeeklyRewardTextureKit: {}
+C_WeeklyRewards.GetWeeklyRewardTextureKit:
+  inputs:
+  - {}
+  outputs:
+  - name: uiTextureKit
+    type: string
 C_WeeklyRewards.HasAvailableRewards:
   inputs:
   - {}
@@ -17711,13 +18701,28 @@ C_WeeklyRewards.HasInteraction:
   outputs:
   - name: isInteracting
     type: boolean
-C_WeeklyRewards.IsWeeklyChestRetired: {}
+C_WeeklyRewards.IsWeeklyChestRetired:
+  inputs:
+  - {}
+  outputs:
+  - name: isRetired
+    type: boolean
 C_WeeklyRewards.OnUIInteract:
   inputs:
   - {}
   outputs: {}
-C_WeeklyRewards.ShouldShowFinalRetirementMessage: {}
-C_WeeklyRewards.ShouldShowRetirementMessage: {}
+C_WeeklyRewards.ShouldShowFinalRetirementMessage:
+  inputs:
+  - {}
+  outputs:
+  - name: showRetirementMessage
+    type: boolean
+C_WeeklyRewards.ShouldShowRetirementMessage:
+  inputs:
+  - {}
+  outputs:
+  - name: showRetirementMessage
+    type: boolean
 C_Widget.IsFrameWidget:
   inputs:
   - - name: frame
@@ -22231,9 +23236,29 @@ GetUnitChargedPowerPoints:
   - innerType: number
     name: pointIndices
     type: table
-GetUnitEmpowerHoldAtMaxTime: {}
-GetUnitEmpowerMinHoldTime: {}
-GetUnitEmpowerStageDuration: {}
+GetUnitEmpowerHoldAtMaxTime:
+  inputs:
+  - - name: unit
+      type: string
+  outputs:
+  - name: holdAtMaxTime
+    type: number
+GetUnitEmpowerMinHoldTime:
+  inputs:
+  - - name: unit
+      type: string
+  outputs:
+  - name: minHoldTime
+    type: number
+GetUnitEmpowerStageDuration:
+  inputs:
+  - - name: unit
+      type: string
+    - name: index
+      type: number
+  outputs:
+  - name: duration
+    type: number
 GetUnitHealthModifier: {}
 GetUnitMaxHealthModifier:
   inputs:
@@ -23881,7 +24906,21 @@ SetTrainerServiceTypeFilter:
   outputs: {}
 SetTurnEnabled: {}
 SetUIVisibility: {}
-SetUnitCursorTexture: {}
+SetUnitCursorTexture:
+  inputs:
+  - - name: textureObject
+      type: table
+    - name: unit
+      type: string
+    - name: style
+      nilable: true
+      type: number
+    - name: includeLowPriority
+      nilable: true
+      type: boolean
+  outputs:
+  - name: hasCursor
+    type: boolean
 SetupFullscreenScale: {}
 SetView:
   inputs:
@@ -24771,8 +25810,27 @@ UnitOnTaxi:
   - - type: string
   outputs:
   - type: oneornil
-UnitPartialPower: {}
-UnitPercentHealthFromGUID: {}
+UnitPartialPower:
+  inputs:
+  - - name: unitToken
+      type: string
+    - default: NumPowerTypes
+      name: powerType
+      type: number
+    - default: false
+      name: unmodified
+      type: boolean
+  outputs:
+  - name: partialPower
+    type: number
+UnitPercentHealthFromGUID:
+  inputs:
+  - - name: unitGUID
+      type: string
+  outputs:
+  - name: percentHealth
+    nilable: true
+    type: number
 UnitPhaseReason:
   inputs:
   - - name: unit
@@ -24977,7 +26035,14 @@ UnitTargetsVehicleInRaidUI:
     type: boolean
 UnitThreatPercentageOfLead: {}
 UnitThreatSituation: {}
-UnitTokenFromGUID: {}
+UnitTokenFromGUID:
+  inputs:
+  - - name: unitGUID
+      type: string
+  outputs:
+  - name: unitToken
+    nilable: true
+    type: string
 UnitTreatAsPlayerForDisplay:
   inputs:
   - - name: unit
