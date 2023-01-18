@@ -217,7 +217,7 @@ AZERITE_EMPOWERED_ITEM_SELECTION_UPDATED:
   payload:
   - mixin: ItemLocationMixin
     name: azeriteEmpoweredItemLocation
-    type: table
+    type: ItemLocation
 AZERITE_ESSENCE_ACTIVATED:
   payload:
   - name: slot
@@ -254,7 +254,7 @@ AZERITE_ITEM_EXPERIENCE_CHANGED:
   payload:
   - mixin: ItemLocationMixin
     name: azeriteItemLocation
-    type: table
+    type: ItemLocation
   - name: oldExperienceAmount
     type: number
   - name: newExperienceAmount
@@ -263,7 +263,7 @@ AZERITE_ITEM_POWER_LEVEL_CHANGED:
   payload:
   - mixin: ItemLocationMixin
     name: azeriteItemLocation
-    type: table
+    type: ItemLocation
   - name: oldPowerLevel
     type: number
   - name: newPowerLevel
