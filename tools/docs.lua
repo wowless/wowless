@@ -115,6 +115,7 @@ end
 local knownMixinStructs = {
   ColorMixin = 'Color',
   ItemLocationMixin = 'ItemLocation',
+  TransmogLocationMixin = 'TransmogLocation',
   Vector2DMixin = 'Vector2D',
   Vector3DMixin = 'Vector3D',
 }

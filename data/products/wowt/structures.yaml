@@ -6775,6 +6775,13 @@ TradeSkillRecipeInfo:
   unlockedRecipeLevel:
     nilable: true
     type: number
+TransmogLocation:
+  modification:
+    type: number
+  slotID:
+    type: number
+  type:
+    type: number
 UnitAuraUpdateInfo:
   addedAuras:
     nilable: true

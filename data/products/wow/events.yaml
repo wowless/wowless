@@ -6800,13 +6800,13 @@ TRANSMOGRIFY_SUCCESS:
   payload:
   - mixin: TransmogLocationMixin
     name: transmogLocation
-    type: table
+    type: TransmogLocation
 TRANSMOGRIFY_UPDATE:
   payload:
   - mixin: TransmogLocationMixin
     name: transmogLocation
     nilable: true
-    type: table
+    type: TransmogLocation
   - name: action
     nilable: true
     type: string
