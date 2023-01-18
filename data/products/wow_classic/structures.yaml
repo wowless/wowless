@@ -970,15 +970,10 @@ C_GossipInfo.FriendshipReputationInfo:
   nextThreshold:
     nilable: true
     type: number
-  overrideColor:
-    nilable: true
-    type: number
   reaction:
     type: string
   reactionThreshold:
     type: number
-  reversedColor:
-    type: boolean
   standing:
     type: number
   text:
@@ -1004,9 +999,6 @@ C_GossipInfo.GossipOptionUIInfo:
   overrideIconID:
     nilable: true
     type: number
-  rewards:
-    innerType: C_GossipInfo.GossipOptionRewardInfo
-    type: table
   selectOptionWhenOnlyOption:
     type: boolean
   spellID:

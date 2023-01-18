@@ -2240,6 +2240,13 @@ C_GossipInfo.FriendshipReputationRankInfo:
     type: number
   maxLevel:
     type: number
+C_GossipInfo.GossipOptionRewardInfo:
+  id:
+    type: number
+  quantity:
+    type: number
+  rewardType:
+    type: number
 C_GossipInfo.GossipOptionUIInfo:
   flags:
     type: number
