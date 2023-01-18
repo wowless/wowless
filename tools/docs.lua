@@ -100,6 +100,7 @@ for f, t in pairs(docs) do
 end
 local types = {
   bool = 'boolean',
+  FramePoint = 'string', -- hack, yes
   number = 'number',
   string = 'string',
   table = 'table',
@@ -355,6 +356,9 @@ local rewriters = {
       Documentation = true,
       Default = true,
     }
+    local stubs = {
+      FramePoint = 'CENTER',
+    }
     local filename = ('data/products/%s/structures.yaml'):format(product)
     local out = require('wowapi.yaml').parseFile(filename)
     for name, tab in pairs(tabs) do
@@ -376,6 +380,7 @@ local rewriters = {
               innerType = field.InnerType and t2ty(field.InnerType, ns),
               mixin = field.Mixin,
               default = field.Default,
+              stub = stubs[field.Type],
             }
           end
           return ret
