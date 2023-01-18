@@ -712,6 +712,70 @@ C_Console.ConsoleCommandInfo:
     type: string
   - name: scriptParameters
     type: string
+C_Container.ContainerItemInfo:
+  fields:
+  - name: hasLoot
+    type: boolean
+  - name: hasNoValue
+    type: boolean
+  - name: hyperlink
+    type: string
+  - name: iconFileID
+    type: number
+  - name: isBound
+    type: boolean
+  - name: isFiltered
+    type: boolean
+  - name: isLocked
+    type: boolean
+  - name: isReadable
+    type: boolean
+  - name: itemID
+    type: number
+  - name: quality
+    nilable: true
+    type: number
+  - name: stackCount
+    type: number
+C_Container.ItemPurchaseCurrency:
+  fields:
+  - name: currencyCount
+    type: number
+  - name: iconFileID
+    nilable: true
+    type: number
+  - name: name
+    type: string
+C_Container.ItemPurchaseInfo:
+  fields:
+  - name: currencyCount
+    type: number
+  - name: hasEnchants
+    type: boolean
+  - name: itemCount
+    type: number
+  - name: money
+    type: number
+  - name: refundSeconds
+    type: number
+C_Container.ItemPurchaseItem:
+  fields:
+  - name: hyperlink
+    type: string
+  - name: iconFileID
+    nilable: true
+    type: number
+  - name: itemCount
+    type: number
+C_Container.ItemQuestInfo:
+  fields:
+  - name: isActive
+    type: boolean
+  - name: isQuestItem
+    type: boolean
+  - name: questID
+    nilable: true
+    type: number
 C_CreatureInfo.ClassInfo:
   fields:
   - name: classFile
@@ -815,6 +879,13 @@ C_DeathInfo.SelfResurrectOption:
     type: number
   - name: priority
     type: number
+C_EditMode.EditModeLayouts:
+  fields:
+  - name: activeLayout
+    type: number
+  - innerType: C_EditMode.EditModeLayoutInfo
+    name: layouts
+    type: table
 C_FriendList.FriendInfo:
   fields:
   - name: afk
@@ -933,6 +1004,79 @@ C_GamePad.GamePadRawState:
     type: table
   - name: vendorID
     type: number
+C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo:
+  fields:
+  - name: frameHeight
+    type: number
+  - name: frameWidth
+    type: number
+  - name: title
+    nilable: true
+    type: string
+  - name: uiTextureKit
+    nilable: true
+    type: string
+  - name: uiWidgetSetID
+    nilable: true
+    type: number
+C_GossipInfo.FriendshipReputationInfo:
+  fields:
+  - name: friendshipFactionID
+    type: number
+  - name: maxRep
+    type: number
+  - name: name
+    nilable: true
+    type: string
+  - name: nextThreshold
+    nilable: true
+    type: number
+  - name: overrideColor
+    nilable: true
+    type: number
+  - name: reaction
+    type: string
+  - name: reactionThreshold
+    type: number
+  - name: reversedColor
+    type: boolean
+  - name: standing
+    type: number
+  - name: text
+    type: string
+  - name: texture
+    type: number
+C_GossipInfo.FriendshipReputationRankInfo:
+  fields:
+  - name: currentLevel
+    type: number
+  - name: maxLevel
+    type: number
+C_GossipInfo.GossipOptionUIInfo:
+  fields:
+  - name: flags
+    type: number
+  - name: gossipOptionID
+    type: number
+  - name: icon
+    type: number
+  - name: name
+    type: string
+  - name: orderIndex
+    type: number
+  - name: overrideIconID
+    nilable: true
+    type: number
+  - innerType: C_GossipInfo.GossipOptionRewardInfo
+    name: rewards
+    type: table
+  - name: selectOptionWhenOnlyOption
+    type: boolean
+  - name: spellID
+    nilable: true
+    type: number
+  - name: status
+    type: number
 C_GossipInfo.GossipPoiInfo:
   fields:
   - name: inBattleMap
@@ -944,6 +1088,29 @@ C_GossipInfo.GossipPoiInfo:
     type: Vector2D
   - name: textureIndex
     type: number
+C_GossipInfo.GossipQuestUIInfo:
+  fields:
+  - name: frequency
+    nilable: true
+    type: number
+  - name: isComplete
+    nilable: true
+    type: boolean
+  - name: isIgnored
+    type: boolean
+  - name: isLegendary
+    type: boolean
+  - name: isTrivial
+    type: boolean
+  - name: questID
+    type: number
+  - name: questLevel
+    type: number
+  - name: repeatable
+    nilable: true
+    type: boolean
+  - name: title
+    type: string
 C_LFGList.BestDungeonScoreMapInfo:
   fields:
   - name: bestRunLevel
@@ -1302,6 +1469,30 @@ C_PvP.BattlefieldItemReward:
     type: number
   - name: texture
     type: number
+C_PvP.BattlefieldVehicleInfo:
+  fields:
+  - name: atlas
+    type: string
+  - name: facing
+    type: number
+  - name: isAlive
+    type: boolean
+  - name: isOccupied
+    type: boolean
+  - name: isPlayer
+    type: boolean
+  - name: name
+    type: string
+  - name: shouldDrawBelowPlayerBlips
+    type: boolean
+  - name: textureHeight
+    type: number
+  - name: textureWidth
+    type: number
+  - name: x
+    type: number
+  - name: y
+    type: number
 C_QuestLog.QuestObjectiveInfo:
   fields:
   - name: finished
@@ -1470,6 +1661,55 @@ C_Texture.AtlasInfo:
     type: number
   - name: width
     type: number
+C_Traits.TraitConfigInfo:
+  fields:
+  - name: ID
+    type: number
+  - name: name
+    type: string
+  - innerType: number
+    name: treeIDs
+    type: table
+  - name: type
+    type: number
+  - name: usesSharedActionBars
+    type: boolean
+C_Traits.TraitNodeInfoPartial:
+  fields:
+  - name: activeRank
+    nilable: true
+    type: number
+  - name: canPurchaseRank
+    nilable: true
+    type: boolean
+  - name: canRefundRank
+    nilable: true
+    type: boolean
+  - name: currentRank
+    nilable: true
+    type: number
+  - name: isAvailable
+    nilable: true
+    type: boolean
+  - name: isCascadeRepurchasable
+    nilable: true
+    type: boolean
+  - name: isVisible
+    nilable: true
+    type: boolean
+  - name: meetsEdgeRequirements
+    nilable: true
+    type: boolean
+  - name: ranksPurchased
+    nilable: true
+    type: number
+C_UIColor.DBColorExport:
+  fields:
+  - name: baseTag
+    type: string
+  - mixin: ColorMixin
+    name: color
+    type: Color
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   fields:
   - name: enabledState
@@ -2051,6 +2291,26 @@ C_VoiceChat.VoiceTtsVoiceType:
     type: string
   - name: voiceID
     type: number
+C_XMLUtil.XMLTemplateInfo:
+  fields:
+  - name: height
+    type: number
+  - name: inherits
+    nilable: true
+    type: string
+  - innerType: C_XMLUtil.XMLTemplateKeyValue
+    name: keyValues
+    type: table
+  - name: type
+    type: string
+  - name: width
+    type: number
+C_XMLUtil.XMLTemplateListInfo:
+  fields:
+  - name: name
+    type: string
+  - name: type
+    type: string
 CalendarTime:
   fields:
   - name: hour

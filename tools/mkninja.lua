@@ -34,8 +34,8 @@ local perProductAddonGeneratedTypes = {
   product = function()
     return {}
   end,
-  uiobjectapis = function()
-    return find('data/uiobjects -name \'*.yaml\'')
+  uiobjectapis = function(p)
+    return { 'data/products/' .. p .. '/uiobjects.yaml' }
   end,
 }
 

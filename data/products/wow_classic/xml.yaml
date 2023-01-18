@@ -1299,7 +1299,7 @@ Texture:
       type: boolean
     nonblocking:
       impl:
-        method: SetNonBlocking
+        method: SetBlockingLoadsRequested
       type: boolean
     snaptopixelgrid:
       impl:

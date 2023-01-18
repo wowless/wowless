@@ -36,6 +36,8 @@ ACTIVATE_GLYPH:
   payload:
   - name: spellID
     type: number
+ACTIVE_PLAYER_SPECIALIZATION_CHANGED:
+  payload: {}
 ACTIVE_TALENT_GROUP_CHANGED:
   payload:
   - name: changedTo
@@ -273,6 +275,8 @@ BAG_CLOSED:
   payload:
   - name: bagID
     type: number
+BAG_CONTAINER_UPDATE:
+  payload: {}
 BAG_NEW_ITEMS_UPDATED:
   payload: {}
 BAG_OPEN:
@@ -3183,6 +3187,10 @@ COMPANION_UPDATE:
   - name: companionType
     nilable: true
     type: string
+CONFIG_COMMIT_FAILED:
+  payload:
+  - name: configID
+    type: number
 CONFIRM_BARBERS_CHOICE:
   payload:
   - name: cost
@@ -3332,6 +3340,12 @@ DUEL_REQUESTED:
     type: string
 DYNAMIC_GOSSIP_POI_UPDATED:
   payload: {}
+EDIT_MODE_LAYOUTS_UPDATED:
+  payload:
+  - name: layoutInfo
+    type: C_EditMode.EditModeLayouts
+  - name: fromServer
+    type: boolean
 ENABLE_DECLINE_GUILD_INVITE:
   payload: {}
 ENABLE_LOW_LEVEL_RAID:
@@ -3408,6 +3422,10 @@ EXECUTE_CHAT_LINE:
   payload:
   - name: chatLine
     type: string
+EXPAND_BAG_BAR_CHANGED:
+  payload:
+  - name: expandBagBar
+    type: boolean
 EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED:
   payload: {}
 FIRST_FRAME_RENDERED:
@@ -3448,6 +3466,10 @@ GENERIC_ERROR:
   payload:
   - name: errorMessage
     type: string
+GENERIC_WIDGET_DISPLAY_SHOW:
+  payload:
+  - name: info
+    type: C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo
 GET_ITEM_INFO_RECEIVED:
   payload:
   - name: itemID
@@ -3490,7 +3512,7 @@ GOSSIP_CLOSED:
   payload: {}
 GOSSIP_CONFIRM:
   payload:
-  - name: gossipIndex
+  - name: gossipID
     type: number
   - name: text
     type: string
@@ -3500,10 +3522,13 @@ GOSSIP_CONFIRM_CANCEL:
   payload: {}
 GOSSIP_ENTER_CODE:
   payload:
-  - name: gossipIndex
+  - name: gossipID
     type: number
 GOSSIP_SHOW:
-  payload: {}
+  payload:
+  - name: uiTextureKit
+    nilable: true
+    type: string
 GROUP_FORMED:
   payload:
   - name: category
@@ -3640,6 +3665,8 @@ HEIRLOOMS_UPDATED:
   - name: hideUntilLearned
     nilable: true
     type: boolean
+HIDE_HYPERLINK_TOOLTIP:
+  payload: {}
 HIDE_SUBTITLE:
   payload: {}
 IGNORELIST_UPDATE:
@@ -3752,10 +3779,6 @@ ITEM_UNLOCKED:
     nilable: true
     type: number
 ITEM_UPGRADE_FAILED:
-  payload: {}
-ITEM_UPGRADE_MASTER_CLOSED:
-  payload: {}
-ITEM_UPGRADE_MASTER_OPENED:
   payload: {}
 ITEM_UPGRADE_MASTER_SET_ITEM:
   payload: {}
@@ -4149,11 +4172,7 @@ OBJECT_LEFT_AOI:
   payload:
   - name: guid
     type: string
-OBLITERUM_FORGE_CLOSE:
-  payload: {}
 OBLITERUM_FORGE_PENDING_ITEM_CHANGED:
-  payload: {}
-OBLITERUM_FORGE_SHOW:
   payload: {}
 OPEN_MASTER_LOOT_LIST:
   payload: {}
@@ -4429,6 +4448,14 @@ PLAYER_GUILD_UPDATE:
   payload:
   - name: unitTarget
     type: string
+PLAYER_INTERACTION_MANAGER_FRAME_HIDE:
+  payload:
+  - name: type
+    type: number
+PLAYER_INTERACTION_MANAGER_FRAME_SHOW:
+  payload:
+  - name: type
+    type: number
 PLAYER_LEAVE_COMBAT:
   payload: {}
 PLAYER_LEAVING_WORLD:
@@ -4501,6 +4528,18 @@ PLAYER_SKINNED:
   payload:
   - name: hasFreeRepop
     type: number
+PLAYER_SOFT_ENEMY_CHANGED:
+  payload: {}
+PLAYER_SOFT_FRIEND_CHANGED:
+  payload: {}
+PLAYER_SOFT_INTERACT_CHANGED:
+  payload:
+  - name: oldTarget
+    type: string
+  - name: newTarget
+    type: string
+PLAYER_SOFT_TARGET_INTERACTION:
+  payload: {}
 PLAYER_STARTED_LOOKING:
   payload: {}
 PLAYER_STARTED_MOVING:
@@ -4581,6 +4620,8 @@ PVP_TIMER_UPDATE:
   payload:
   - name: unitTarget
     type: string
+PVP_VEHICLE_INFO_UPDATED:
+  payload: {}
 PVP_WORLDSTATE_UPDATE:
   payload: {}
 QUEST_ACCEPT_CONFIRM:
@@ -4759,6 +4800,12 @@ REPLACE_ENCHANT:
     type: string
   - name: replacementStr
     type: string
+REPLACE_TRADESKILL_ENCHANT:
+  payload:
+  - name: existing
+    type: string
+  - name: replacement
+    type: string
 REPORT_PLAYER_RESULT:
   payload:
   - name: success
@@ -4773,10 +4820,6 @@ REQUIRED_GUILD_RENAME_RESULT:
   payload:
   - name: success
     type: boolean
-RESPEC_AZERITE_EMPOWERED_ITEM_CLOSED:
-  payload: {}
-RESPEC_AZERITE_EMPOWERED_ITEM_OPENED:
-  payload: {}
 RESURRECT_REQUEST:
   payload:
   - name: inviter
@@ -4834,6 +4877,14 @@ SESSION_TIME_ALERT:
   payload:
   - name: time
     type: number
+SET_DEBUG_TOOL_VISIBLE:
+  payload: {}
+SETTINGS_LOADED:
+  payload: {}
+SHOW_HYPERLINK_TOOLTIP:
+  payload:
+  - name: hyperlink
+    type: string
 SHOW_LFG_EXPAND_SEARCH_PROMPT:
   payload: {}
 SHOW_LOOT_TOAST_LEGENDARY_LOOTED:
@@ -5026,6 +5077,10 @@ STOP_AUTOREPEAT_SPELL:
   payload: {}
 STOP_MOVIE:
   payload: {}
+STOP_TIMER_OF_TYPE:
+  payload:
+  - name: timerType
+    type: number
 STORE_BOOST_AUTO_CONSUMED:
   payload: {}
 STORE_CHARACTER_LIST_RECEIVED:
@@ -5082,6 +5137,8 @@ SYSMSG:
     type: number
   - name: b
     type: number
+SYSTEM_VISIBILITY_CHANGED:
+  payload: {}
 TABARD_CANSAVE_CHANGED:
   payload: {}
 TABARD_SAVE_PENDING:
@@ -5160,6 +5217,8 @@ TOKEN_SELL_RESULT:
   - name: result
     type: number
 TOKEN_STATUS_CHANGED:
+  payload: {}
+TOOLTIP_DATA_UPDATE:
   payload: {}
 TOYS_UPDATED:
   payload:
@@ -5259,6 +5318,52 @@ TRAINER_SHOW:
   payload: {}
 TRAINER_UPDATE:
   payload: {}
+TRAIT_COND_INFO_CHANGED:
+  payload:
+  - name: condID
+    type: number
+TRAIT_CONFIG_CREATED:
+  payload:
+  - name: configInfo
+    type: C_Traits.TraitConfigInfo
+TRAIT_CONFIG_DELETED:
+  payload:
+  - name: configID
+    type: number
+TRAIT_CONFIG_LIST_UPDATED:
+  payload: {}
+TRAIT_CONFIG_UPDATED:
+  payload:
+  - name: configID
+    type: number
+TRAIT_NODE_CHANGED:
+  payload:
+  - name: nodeID
+    type: number
+TRAIT_NODE_CHANGED_PARTIAL:
+  payload:
+  - name: ID
+    type: number
+  - name: info
+    type: C_Traits.TraitNodeInfoPartial
+TRAIT_NODE_ENTRY_UPDATED:
+  payload:
+  - name: nodeEntryID
+    type: number
+TRAIT_SYSTEM_INTERACTION_STARTED:
+  payload:
+  - name: treeID
+    type: number
+TRAIT_SYSTEM_NPC_CLOSED:
+  payload: {}
+TRAIT_TREE_CHANGED:
+  payload:
+  - name: treeID
+    type: number
+TRAIT_TREE_CURRENCY_INFO_UPDATED:
+  payload:
+  - name: treeID
+    type: number
 TRANSMOG_OUTFITS_CHANGED:
   payload: {}
 TRIAL_CAP_REACHED_LEVEL:
@@ -5406,6 +5511,10 @@ UNIT_FACTION:
   - name: unitTarget
     type: string
 UNIT_FLAGS:
+  payload:
+  - name: unitTarget
+    type: string
+UNIT_FORM_CHANGED:
   payload:
   - name: unitTarget
     type: string
@@ -5736,6 +5845,10 @@ UPDATE_WEB_TICKET:
     type: string
 USE_BIND_CONFIRM:
   payload: {}
+USE_COMBINED_BAGS_CHANGED:
+  payload:
+  - name: useCombinedBags
+    type: boolean
 USE_GLYPH:
   payload:
   - name: spellID
@@ -6018,22 +6131,20 @@ VOICE_CHAT_TTS_SPEAK_TEXT_UPDATE:
     type: number
 VOICE_CHAT_TTS_VOICES_UPDATE:
   payload: {}
+VOICE_CHAT_VAD_SETTINGS_UPDATED:
+  payload: {}
 VOID_DEPOSIT_WARNING:
   payload:
   - name: slot
     type: number
   - name: link
     type: string
-VOID_STORAGE_CLOSE:
-  payload: {}
 VOID_STORAGE_CONTENTS_UPDATE:
   payload: {}
 VOID_STORAGE_DEPOSIT_UPDATE:
   payload:
   - name: slot
     type: number
-VOID_STORAGE_OPEN:
-  payload: {}
 VOID_STORAGE_UPDATE:
   payload: {}
 VOID_TRANSFER_DONE:

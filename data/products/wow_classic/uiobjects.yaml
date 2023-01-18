@@ -192,6 +192,10 @@ Animation:
       status: unimplemented
     SetTargetKey:
       status: unimplemented
+    SetTargetName:
+      status: unimplemented
+    SetTargetParent:
+      status: unimplemented
     Stop:
       status: unimplemented
 AnimationGroup:
@@ -205,6 +209,8 @@ AnimationGroup:
       status: unimplemented
     GetAnimations:
       status: implemented
+    GetAnimationSpeedMultiplier:
+      status: unimplemented
     GetDuration:
       status: unimplemented
     GetLooping:
@@ -221,6 +227,8 @@ AnimationGroup:
       status: unimplemented
     IsPlaying:
       status: unimplemented
+    IsReverse:
+      status: unimplemented
     IsSetToFinalAlpha:
       status: unimplemented
     Pause:
@@ -230,6 +238,8 @@ AnimationGroup:
     RemoveAnimations:
       status: unimplemented
     Restart:
+      status: unimplemented
+    SetAnimationSpeedMultiplier:
       status: unimplemented
     SetLooping:
       status: unimplemented
@@ -258,6 +268,8 @@ Browser:
     NavigateReload:
       status: unimplemented
     NavigateStop:
+      status: unimplemented
+    NavigateTo:
       status: unimplemented
     OpenExternalLink:
       status: unimplemented
@@ -308,6 +320,14 @@ Button:
   inherits:
     Frame: {}
   methods:
+    ClearDisabledTexture:
+      status: unimplemented
+    ClearHighlightTexture:
+      status: unimplemented
+    ClearNormalTexture:
+      status: unimplemented
+    ClearPushedTexture:
+      status: unimplemented
     Click:
       status: implemented
     Disable:
@@ -390,6 +410,8 @@ Button:
     SetHighlightAtlas:
       status: implemented
     SetHighlightFontObject:
+      status: unimplemented
+    SetHighlightLocked:
       status: unimplemented
     SetHighlightTexture:
       status: implemented
@@ -518,6 +540,8 @@ ColorSelect:
   inherits:
     Frame: {}
   methods:
+    ClearColorWheelTexture:
+      status: unimplemented
     GetColorHSV:
       outputs:
       - name: h
@@ -659,6 +683,8 @@ Cooldown:
       fields:
       - name: swipeTexture
       status: setter
+    SetTexCoordRange:
+      status: unimplemented
     SetUseCircularEdge:
       status: unimplemented
 DressUpModel:
@@ -767,6 +793,8 @@ EditBox:
     GetVisibleTextByteLimit:
       status: unimplemented
     HasFocus:
+      status: unimplemented
+    HasText:
       status: unimplemented
     HighlightText:
       status: unimplemented
@@ -945,6 +973,7 @@ FontString:
   inherits:
     FontInstance: {}
     LayeredRegion: {}
+    ScriptObject: {}
   methods:
     CalculateScreenAreaFromCharacterSpan:
       status: unimplemented
@@ -968,6 +997,8 @@ FontString:
       outputs:
       - type: number
       status: unimplemented
+    GetRotation:
+      status: unimplemented
     GetStringHeight:
       outputs:
       - type: number
@@ -988,6 +1019,8 @@ FontString:
       outputs:
       - type: number
       status: unimplemented
+    GetVertexColor:
+      status: unimplemented
     GetWrappedWidth:
       outputs:
       - type: number
@@ -1005,6 +1038,8 @@ FontString:
       - name: maxLines
       status: setter
     SetNonSpaceWrap:
+      status: unimplemented
+    SetRotation:
       status: unimplemented
     SetText:
       status: implemented
@@ -1086,7 +1121,6 @@ Frame:
       init: false
       type: boolean
   inherits:
-    MouseMixin: {}
     Region: {}
     ScriptObject: {}
   methods:
@@ -1124,14 +1158,10 @@ Frame:
       status: implemented
     GetClampRectInsets:
       status: unimplemented
-    GetDepth:
-      status: unimplemented
     GetDontSavePosition:
       status: unimplemented
     GetEffectiveAlpha:
       status: implemented
-    GetEffectiveDepth:
-      status: unimplemented
     GetEffectivelyFlattensRenderLayers:
       status: unimplemented
     GetFlattensRenderLayers:
@@ -1154,16 +1184,6 @@ Frame:
       fields:
       - name: id
       status: getter
-    GetMaxResize:
-      fields:
-      - name: maxResizeWidth
-      - name: maxResizeHeight
-      status: getter
-    GetMinResize:
-      fields:
-      - name: minResizeWidth
-      - name: minResizeHeight
-      status: getter
     GetNumChildren:
       status: implemented
     GetNumRegions:
@@ -1174,6 +1194,8 @@ Frame:
       status: getter
     GetRegions:
       status: implemented
+    GetResizeBounds:
+      status: unimplemented
     HasFixedFrameLevel:
       fields:
       - name: hasFixedFrameLevel
@@ -1182,8 +1204,6 @@ Frame:
       fields:
       - name: hasFixedFrameStrata
       status: getter
-    IgnoreDepth:
-      status: unimplemented
     IsClampedToScreen:
       fields:
       - name: isClampedToScreen
@@ -1193,8 +1213,6 @@ Frame:
     IsGamePadButtonEnabled:
       status: unimplemented
     IsGamePadStickEnabled:
-      status: unimplemented
-    IsIgnoringDepth:
       status: unimplemented
     IsKeyboardEnabled:
       status: unimplemented
@@ -1240,8 +1258,6 @@ Frame:
       status: unimplemented
     SetClipsChildren:
       status: unimplemented
-    SetDepth:
-      status: unimplemented
     SetDontSavePosition:
       status: unimplemented
     SetDrawLayerEnabled:
@@ -1255,8 +1271,6 @@ Frame:
       - name: hasFixedFrameStrata
       status: setter
     SetFlattensRenderLayers:
-      status: unimplemented
-    SetFrameBuffer:
       status: unimplemented
     SetFrameLevel:
       status: implemented
@@ -1274,16 +1288,8 @@ Frame:
       fields:
       - name: id
       status: setter
-    SetMaxResize:
-      fields:
-      - name: maxResizeWidth
-      - name: maxResizeHeight
-      status: setter
-    SetMinResize:
-      fields:
-      - name: minResizeWidth
-      - name: minResizeHeight
-      status: setter
+    SetIsFrameBuffer:
+      status: unimplemented
     SetMovable:
       fields:
       - name: movable
@@ -1296,6 +1302,8 @@ Frame:
       fields:
       - name: resizable
       status: setter
+    SetResizeBounds:
+      status: unimplemented
     SetToplevel:
       fields:
       - name: toplevel
@@ -1930,6 +1938,8 @@ MovieFrame:
       status: unimplemented
     StartMovie:
       status: unimplemented
+    StartMovieByName:
+      status: unimplemented
     StopMovie:
       status: unimplemented
 OffScreenFrame:
@@ -1948,6 +1958,8 @@ OffScreenFrame:
       status: unimplemented
     TakeSnapshot:
       status: unimplemented
+    TestPrintToFile:
+      status: unimplemented
     UsesNPOT:
       status: unimplemented
 ParentedObject:
@@ -1962,7 +1974,6 @@ ParentedObject:
       nilable: true
       type: table
   inherits:
-    ForbiddenMixin: {}
     UIObject: {}
   methods:
     GetDebugName:
@@ -1971,8 +1982,12 @@ ParentedObject:
       fields:
       - name: parent
       status: getter
+    GetParentKey:
+      status: unimplemented
     SetParent:
       status: implemented
+    SetParentKey:
+      status: unimplemented
   virtual: true
 Path:
   inherits:
@@ -1982,11 +1997,11 @@ Path:
       status: implemented
     GetControlPoints:
       status: unimplemented
-    GetCurve:
+    GetCurveType:
       status: unimplemented
-    GetMaxOrder:
+    GetMaxControlPointOrder:
       status: unimplemented
-    SetCurve:
+    SetCurveType:
       status: unimplemented
 PlayerModel:
   inherits:
@@ -2079,6 +2094,7 @@ Region:
       init: 0
       type: number
   inherits:
+    MouseMixin: {}
     ParentedObject: {}
   methods:
     AdjustPointsOffset:
@@ -2087,7 +2103,7 @@ Region:
       status: unimplemented
     ClearAllPoints:
       status: implemented
-    ClearPointByName:
+    ClearPoint:
       status: unimplemented
     ClearPointsOffset:
       status: unimplemented
@@ -2193,6 +2209,8 @@ Region:
       fields:
       - name: isIgnoringParentScale
       status: setter
+    SetPassThroughButtons:
+      status: unimplemented
     SetPoint:
       status: implemented
     SetScale:
@@ -2233,21 +2251,21 @@ Scale:
   inherits:
     Animation: {}
   methods:
-    GetFromScale:
-      status: unimplemented
     GetOrigin:
       status: unimplemented
     GetScale:
       status: unimplemented
-    GetToScale:
+    GetScaleFrom:
       status: unimplemented
-    SetFromScale:
+    GetScaleTo:
       status: unimplemented
     SetOrigin:
       status: unimplemented
     SetScale:
       status: unimplemented
-    SetToScale:
+    SetScaleFrom:
+      status: unimplemented
+    SetScaleTo:
       status: unimplemented
 ScriptObject:
   fields:
@@ -2422,10 +2440,10 @@ StatusBar:
       status: unimplemented
     GetRotatesTexture:
       status: unimplemented
-    GetStatusBarAtlas:
-      status: unimplemented
     GetStatusBarColor:
       status: implemented
+    GetStatusBarDesaturation:
+      status: unimplemented
     GetStatusBarTexture:
       fields:
       - name: statusBarTexture
@@ -2434,6 +2452,10 @@ StatusBar:
       fields:
       - name: value
       status: getter
+    IsStatusBarDesaturated:
+      status: unimplemented
+    SetColorFill:
+      status: unimplemented
     SetFillStyle:
       status: unimplemented
     SetMinMaxValues:
@@ -2447,10 +2469,12 @@ StatusBar:
       status: unimplemented
     SetRotatesTexture:
       status: unimplemented
-    SetStatusBarAtlas:
-      status: unimplemented
     SetStatusBarColor:
       status: implemented
+    SetStatusBarDesaturated:
+      status: unimplemented
+    SetStatusBarDesaturation:
+      status: unimplemented
     SetStatusBarTexture:
       status: implemented
     SetValue:
@@ -2536,6 +2560,7 @@ Texture:
       type: boolean
   inherits:
     LayeredRegion: {}
+    ScriptObject: {}
   methods:
     AddMaskTexture:
       status: unimplemented
@@ -2552,8 +2577,6 @@ Texture:
       - name: horizTile
       status: getter
     GetMaskTexture:
-      status: unimplemented
-    GetNonBlocking:
       status: unimplemented
     GetNumMaskTextures:
       status: unimplemented
@@ -2591,6 +2614,8 @@ Texture:
       fields:
       - name: vertTile
       status: getter
+    IsBlockingLoadRequested:
+      status: unimplemented
     IsDesaturated:
       status: unimplemented
     IsSnappingToPixelGrid:
@@ -2603,6 +2628,8 @@ Texture:
       fields:
       - name: blendMode
       status: setter
+    SetBlockingLoadsRequested:
+      status: unimplemented
     SetColorTexture:
       status: implemented
     SetDesaturated:
@@ -2610,8 +2637,6 @@ Texture:
     SetDesaturation:
       status: unimplemented
     SetGradient:
-      status: unimplemented
-    SetGradientAlpha:
       status: unimplemented
     SetHorizTile:
       fields:
@@ -2621,8 +2646,6 @@ Texture:
       fields:
       - name: maskName
       status: setter
-    SetNonBlocking:
-      status: unimplemented
     SetRotation:
       status: unimplemented
     SetSnapToPixelGrid:
@@ -2655,7 +2678,8 @@ UIObject:
   fields:
     name:
       type: string
-  inherits: {}
+  inherits:
+    ForbiddenMixin: {}
   methods:
     GetName:
       fields:
