@@ -25,7 +25,7 @@ describe('structures', function()
       local function close(t)
         if structures[t] and not closure[t] then
           closure[t] = true
-          for _, f in ipairs(structures[t].fields) do
+          for _, f in pairs(structures[t]) do
             close(f.type)
             if f.innerType then
               close(f.innerType)

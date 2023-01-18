@@ -4,33 +4,28 @@ type:
   mapof:
     key: string
     value:
-      record:
-        fields:
-          required: true
-          type:
-            sequenceof:
-              record:
-                default:
-                  type:
-                    schema: any
-                innerType:
-                  type: string
-                mixin:
-                  type: string
-                name:
-                  required: true
-                  type: string
-                nilable:
-                  type: boolean
-                stub:
-                  type: string
-                type:
-                  required: true
-                  type:
-                    oneof:
-                    - literal: boolean
-                    - literal: number
-                    - literal: string
-                    - literal: table
-                    - literal: unknown
-                    - ref: structure
+      mapof:
+        key: string
+        value:
+          record:
+            default:
+              type:
+                schema: any
+            innerType:
+              type: string
+            mixin:
+              type: string
+            nilable:
+              type: boolean
+            stub:
+              type: string
+            type:
+              required: true
+              type:
+                oneof:
+                - literal: boolean
+                - literal: number
+                - literal: string
+                - literal: table
+                - literal: unknown
+                - ref: structure

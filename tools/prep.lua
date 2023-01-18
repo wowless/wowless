@@ -31,7 +31,7 @@ local getStub = (function()
       structureDefaults[name] = true
       local st = structures[name]
       local t = {}
-      for _, field in ipairs(st.fields) do
+      for fname, field in require('pl.tablex').sort(st) do
         local v
         if structures[field.type] then
           ensureStructureDefault(field.type)
@@ -49,7 +49,7 @@ local getStub = (function()
           v = ('Mixin(%s,%s)'):format(v, field.mixin)
         end
         if v ~= 'nil' then
-          table.insert(t, ('[%q]=%s'):format(field.name, v))
+          table.insert(t, ('[%q]=%s'):format(fname, v))
         end
       end
       structureDefaults[name] = '{' .. table.concat(t, ',') .. '}'

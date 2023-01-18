@@ -1,2068 +1,1968 @@
 ---
 C_AreaPoiInfo.AreaPOIInfo:
-  fields:
-  - name: areaPoiID
+  areaPoiID:
     type: number
-  - name: atlasName
+  atlasName:
     nilable: true
     type: string
-  - name: description
+  description:
     nilable: true
     type: string
-  - name: name
+  name:
     type: string
-  - mixin: Vector2DMixin
-    name: position
+  position:
+    mixin: Vector2DMixin
     type: Vector2D
-  - name: shouldGlow
+  shouldGlow:
     type: boolean
-  - name: textureIndex
+  textureIndex:
     nilable: true
     type: number
-  - name: uiTextureKit
+  uiTextureKit:
     nilable: true
     type: string
-  - name: widgetSetID
+  widgetSetID:
     nilable: true
     type: number
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemPowerInfo:
-  fields:
-  - name: azeritePowerID
+  azeritePowerID:
     type: number
-  - name: spellID
+  spellID:
     type: number
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemPowerText:
-  fields:
-  - name: description
+  description:
     type: string
-  - name: name
+  name:
     type: string
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemTierInfo:
-  fields:
-  - innerType: number
-    name: azeritePowerIDs
+  azeritePowerIDs:
+    innerType: number
     type: table
-  - name: unlockLevel
+  unlockLevel:
     type: number
 C_AzeriteEmpoweredItem.AzeriteSpecInfo:
-  fields:
-  - name: classID
+  classID:
     type: number
-  - name: specID
+  specID:
     type: number
 C_AzeriteEssence.AzeriteEssenceInfo:
-  fields:
-  - name: ID
+  icon:
     type: number
-  - name: icon
+  ID:
     type: number
-  - name: name
+  name:
     type: string
-  - name: rank
+  rank:
     type: number
-  - name: unlocked
+  unlocked:
     type: boolean
-  - name: valid
+  valid:
     type: boolean
 C_AzeriteEssence.AzeriteMilestoneInfo:
-  fields:
-  - name: ID
-    type: number
-  - name: canUnlock
+  canUnlock:
     type: boolean
-  - name: rank
+  ID:
+    type: number
+  rank:
     nilable: true
     type: number
-  - name: requiredLevel
+  requiredLevel:
     type: number
-  - name: slot
+  slot:
     nilable: true
     type: number
-  - name: unlocked
+  unlocked:
     type: boolean
 C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
-  fields:
-  - name: tierIndex
+  tierIndex:
     type: number
-  - mixin: ItemLocationMixin
-    name: unlockedItem
+  unlockedItem:
+    mixin: ItemLocationMixin
     type: table
 C_Calendar.CalendarDayEvent:
-  fields:
-  - name: calendarType
+  calendarType:
     stub: SYSTEM
     type: string
-  - name: clubID
+  clubID:
     type: string
-  - name: difficulty
+  difficulty:
     type: number
-  - name: difficultyName
+  difficultyName:
     type: string
-  - name: dontDisplayBanner
+  dontDisplayBanner:
     type: boolean
-  - name: dontDisplayEnd
+  dontDisplayEnd:
     type: boolean
-  - name: endTime
+  endTime:
     type: CalendarTime
-  - name: eventID
+  eventID:
     type: string
-  - name: eventType
+  eventType:
     type: number
-  - name: iconTexture
+  iconTexture:
     nilable: true
     type: number
-  - name: inviteStatus
-    type: number
-  - name: inviteType
-    type: number
-  - name: invitedBy
+  invitedBy:
     type: string
-  - name: isCustomTitle
+  inviteStatus:
+    type: number
+  inviteType:
+    type: number
+  isCustomTitle:
     type: boolean
-  - name: isLocked
+  isLocked:
     type: boolean
-  - name: modStatus
+  modStatus:
     type: string
-  - name: numSequenceDays
+  numSequenceDays:
     type: number
-  - name: sequenceIndex
+  sequenceIndex:
     type: number
-  - name: sequenceType
+  sequenceType:
     type: string
-  - name: startTime
+  startTime:
     type: CalendarTime
-  - name: title
+  title:
     type: string
 C_Calendar.CalendarEventIndexInfo:
-  fields:
-  - name: eventIndex
+  eventIndex:
     type: number
-  - name: monthDay
+  monthDay:
     type: number
-  - name: offsetMonths
+  offsetMonths:
     type: number
 C_Calendar.CalendarEventInfo:
-  fields:
-  - name: calendarType
+  calendarType:
     type: string
-  - name: communityName
+  communityName:
     nilable: true
     type: string
-  - name: creator
+  creator:
     nilable: true
     type: string
-  - name: description
+  description:
     type: string
-  - name: eventType
+  eventType:
     type: number
-  - name: hasPendingInvite
+  hasPendingInvite:
     type: boolean
-  - name: inviteStatus
-    nilable: true
-    type: number
-  - name: inviteType
+  inviteStatus:
     nilable: true
     type: number
-  - name: isAutoApprove
+  inviteType:
+    nilable: true
+    type: number
+  isAutoApprove:
     type: boolean
-  - name: isLocked
+  isLocked:
     type: boolean
-  - name: lockoutTime
+  lockoutTime:
     type: CalendarTime
-  - name: maxSize
+  maxSize:
     type: number
-  - name: repeatOption
+  repeatOption:
     type: number
-  - name: textureIndex
+  textureIndex:
     nilable: true
     type: number
-  - name: time
+  time:
     type: CalendarTime
-  - name: title
+  title:
     type: string
 C_Calendar.CalendarEventInviteInfo:
-  fields:
-  - name: classFilename
+  classFilename:
     nilable: true
     type: string
-  - name: classID
+  classID:
     nilable: true
     type: number
-  - name: className
+  className:
     nilable: true
     type: string
-  - name: guid
+  guid:
     type: string
-  - name: inviteIsMine
+  inviteIsMine:
     type: boolean
-  - name: inviteStatus
+  inviteStatus:
     nilable: true
     type: number
-  - name: level
+  level:
     type: number
-  - name: modStatus
+  modStatus:
     nilable: true
     type: string
-  - name: name
+  name:
     nilable: true
     type: string
-  - name: notes
+  notes:
     type: string
-  - name: type
+  type:
     type: number
 C_Calendar.CalendarEventStatusOption:
-  fields:
-  - name: status
+  status:
     type: number
-  - name: statusString
+  statusString:
     type: string
 C_Calendar.CalendarEventTextureInfo:
-  fields:
-  - name: difficultyId
+  difficultyId:
     nilable: true
     type: number
-  - name: expansionLevel
+  expansionLevel:
     type: number
-  - name: iconTexture
+  iconTexture:
     type: number
-  - name: isLfr
+  isLfr:
     nilable: true
     type: boolean
-  - name: mapId
+  mapId:
     nilable: true
     type: number
-  - name: title
+  title:
     type: string
 C_Calendar.CalendarEventTypeDisplayInfo:
-  fields:
-  - name: displayString
+  displayString:
     type: string
-  - name: eventType
+  eventType:
     type: number
 C_Calendar.CalendarGuildEventInfo:
-  fields:
-  - name: calendarType
+  calendarType:
     type: string
-  - name: clubID
+  clubID:
     type: string
-  - name: eventID
+  eventID:
     type: string
-  - name: eventType
+  eventType:
     type: number
-  - name: hour
+  hour:
     type: number
-  - name: inviteStatus
+  inviteStatus:
     type: number
-  - name: minute
+  minute:
     type: number
-  - name: month
+  month:
     type: number
-  - name: monthDay
+  monthDay:
     type: number
-  - name: texture
+  texture:
     type: number
-  - name: title
+  title:
     type: string
-  - name: weekday
+  weekday:
     type: number
-  - name: year
+  year:
     type: number
 C_Calendar.CalendarGuildFilterInfo:
-  fields:
-  - name: maxLevel
+  maxLevel:
     type: number
-  - name: minLevel
+  minLevel:
     type: number
-  - name: rank
+  rank:
     type: number
 C_Calendar.CalendarHolidayInfo:
-  fields:
-  - name: description
+  description:
     type: string
-  - name: endTime
+  endTime:
     nilable: true
     type: CalendarTime
-  - name: name
+  name:
     type: string
-  - name: startTime
+  startTime:
     nilable: true
     type: CalendarTime
-  - name: texture
+  texture:
     type: number
 C_Calendar.CalendarMonthInfo:
-  fields:
-  - name: firstWeekday
+  firstWeekday:
     type: number
-  - name: month
+  month:
     type: number
-  - name: numDays
+  numDays:
     type: number
-  - name: year
+  year:
     type: number
 C_Calendar.CalendarRaidInfo:
-  fields:
-  - name: calendarType
+  calendarType:
     type: string
-  - name: difficulty
+  difficulty:
     type: number
-  - name: difficultyName
+  difficultyName:
     nilable: true
     type: string
-  - name: name
+  name:
     type: string
-  - name: raidID
+  raidID:
     type: number
-  - name: time
+  time:
     type: CalendarTime
 C_Club.ClubInfo:
-  fields:
-  - name: avatarId
+  avatarId:
     type: number
-  - name: broadcast
+  broadcast:
     type: string
-  - name: clubId
+  clubId:
     type: string
-  - name: clubType
+  clubType:
     type: number
-  - name: crossFaction
+  crossFaction:
     nilable: true
     type: boolean
-  - name: description
+  description:
     type: string
-  - name: favoriteTimeStamp
+  favoriteTimeStamp:
     nilable: true
     type: number
-  - name: joinTime
+  joinTime:
     nilable: true
     type: number
-  - name: memberCount
+  memberCount:
     nilable: true
     type: number
-  - name: name
+  name:
     type: string
-  - name: shortName
+  shortName:
     nilable: true
     type: string
-  - name: socialQueueingEnabled
+  socialQueueingEnabled:
     nilable: true
     type: boolean
 C_Club.ClubInvitationCandidateInfo:
-  fields:
-  - name: memberId
+  memberId:
     type: number
-  - name: name
+  name:
     type: string
-  - name: priority
+  priority:
     type: number
-  - name: status
+  status:
     type: number
 C_Club.ClubInvitationInfo:
-  fields:
-  - name: invitationId
+  invitationId:
     type: string
-  - name: invitee
+  invitee:
     type: C_Club.ClubMemberInfo
-  - name: isMyInvitation
+  isMyInvitation:
     type: boolean
 C_Club.ClubMemberInfo:
-  fields:
-  - name: achievementPoints
+  achievementPoints:
     nilable: true
     type: number
-  - name: bnetAccountId
+  bnetAccountId:
     nilable: true
     type: number
-  - name: classID
+  classID:
     nilable: true
     type: number
-  - name: clubType
+  clubType:
     nilable: true
     type: number
-  - name: faction
+  faction:
     nilable: true
     type: number
-  - name: guid
+  guid:
     nilable: true
     type: string
-  - name: guildRank
+  guildRank:
     nilable: true
     type: string
-  - name: guildRankOrder
+  guildRankOrder:
     nilable: true
     type: number
-  - name: isRemoteChat
+  isRemoteChat:
     nilable: true
     type: boolean
-  - name: isSelf
+  isSelf:
     type: boolean
-  - name: lastOnlineDay
+  lastOnlineDay:
     nilable: true
     type: number
-  - name: lastOnlineHour
+  lastOnlineHour:
     nilable: true
     type: number
-  - name: lastOnlineMonth
+  lastOnlineMonth:
     nilable: true
     type: number
-  - name: lastOnlineYear
+  lastOnlineYear:
     nilable: true
     type: number
-  - name: level
+  level:
     nilable: true
     type: number
-  - name: memberId
+  memberId:
     type: number
-  - name: memberNote
+  memberNote:
     nilable: true
     type: string
-  - name: name
+  name:
     nilable: true
     type: string
-  - name: officerNote
+  officerNote:
     nilable: true
     type: string
-  - name: overallDungeonScore
+  overallDungeonScore:
     nilable: true
     type: number
-  - name: presence
+  presence:
     type: number
-  - name: profession1ID
+  profession1ID:
     nilable: true
     type: number
-  - name: profession1Name
+  profession1Name:
     nilable: true
     type: string
-  - name: profession1Rank
+  profession1Rank:
     nilable: true
     type: number
-  - name: profession2ID
+  profession2ID:
     nilable: true
     type: number
-  - name: profession2Name
+  profession2Name:
     nilable: true
     type: string
-  - name: profession2Rank
+  profession2Rank:
     nilable: true
     type: number
-  - name: race
+  race:
     nilable: true
     type: number
-  - name: role
+  role:
     nilable: true
     type: number
-  - name: zone
+  zone:
     nilable: true
     type: string
 C_Club.ClubMessageIdentifier:
-  fields:
-  - name: epoch
+  epoch:
     type: number
-  - name: position
+  position:
     type: number
 C_Club.ClubMessageInfo:
-  fields:
-  - name: author
+  author:
     type: C_Club.ClubMemberInfo
-  - name: content
+  content:
     type: string
-  - name: destroyed
+  destroyed:
     type: boolean
-  - name: destroyer
+  destroyer:
     nilable: true
     type: C_Club.ClubMemberInfo
-  - name: edited
+  edited:
     type: boolean
-  - name: messageId
+  messageId:
     type: C_Club.ClubMessageIdentifier
 C_Club.ClubMessageRange:
-  fields:
-  - name: newestMessageId
+  newestMessageId:
     type: C_Club.ClubMessageIdentifier
-  - name: oldestMessageId
+  oldestMessageId:
     type: C_Club.ClubMessageIdentifier
 C_Club.ClubPrivilegeInfo:
-  fields:
-  - name: canAddBan
+  canAddBan:
     type: boolean
-  - name: canCreateMessage
+  canCreateMessage:
     type: boolean
-  - name: canCreateStream
+  canCreateStream:
     type: boolean
-  - name: canCreateTicket
+  canCreateTicket:
     type: boolean
-  - name: canDestroy
+  canDestroy:
     type: boolean
-  - name: canDestroyOtherMessage
+  canDestroyOtherMessage:
     type: boolean
-  - name: canDestroyOwnMessage
+  canDestroyOwnMessage:
     type: boolean
-  - name: canDestroyStream
+  canDestroyStream:
     type: boolean
-  - name: canDestroyTicket
+  canDestroyTicket:
     type: boolean
-  - name: canEditOwnMessage
+  canEditOwnMessage:
     type: boolean
-  - name: canGetBan
+  canGetBan:
     type: boolean
-  - name: canGetInvitation
+  canGetInvitation:
     type: boolean
-  - name: canGetSuggestion
+  canGetSuggestion:
     type: boolean
-  - name: canGetTicket
+  canGetTicket:
     type: boolean
-  - name: canPinMessage
+  canPinMessage:
     type: boolean
-  - name: canRemoveBan
+  canRemoveBan:
     type: boolean
-  - name: canRevokeOtherInvitation
+  canRevokeOtherInvitation:
     type: boolean
-  - name: canRevokeOwnInvitation
+  canRevokeOwnInvitation:
     type: boolean
-  - name: canSendGuestInvitation
+  canSendGuestInvitation:
     type: boolean
-  - name: canSendInvitation
+  canSendInvitation:
     type: boolean
-  - name: canSetAttribute
+  canSetAttribute:
     type: boolean
-  - name: canSetAvatar
+  canSetAvatar:
     type: boolean
-  - name: canSetBroadcast
+  canSetBroadcast:
     type: boolean
-  - name: canSetDescription
+  canSetDescription:
     type: boolean
-  - name: canSetName
+  canSetName:
     type: boolean
-  - name: canSetOtherMemberAttribute
+  canSetOtherMemberAttribute:
     type: boolean
-  - name: canSetOtherMemberNote
+  canSetOtherMemberNote:
     type: boolean
-  - name: canSetOwnMemberAttribute
+  canSetOwnMemberAttribute:
     type: boolean
-  - name: canSetOwnMemberNote
+  canSetOwnMemberNote:
     type: boolean
-  - name: canSetOwnPresenceLevel
+  canSetOwnPresenceLevel:
     type: boolean
-  - name: canSetOwnVoiceState
+  canSetOwnVoiceState:
     type: boolean
-  - name: canSetPrivacyLevel
+  canSetPrivacyLevel:
     type: boolean
-  - name: canSetStreamAccess
+  canSetStreamAccess:
     type: boolean
-  - name: canSetStreamAttribute
+  canSetStreamAttribute:
     type: boolean
-  - name: canSetStreamName
+  canSetStreamName:
     type: boolean
-  - name: canSetStreamPosition
+  canSetStreamPosition:
     type: boolean
-  - name: canSetStreamSubject
+  canSetStreamSubject:
     type: boolean
-  - name: canSetStreamVoiceLevel
+  canSetStreamVoiceLevel:
     type: boolean
-  - name: canSuggestMember
+  canSuggestMember:
     type: boolean
-  - name: canUseVoice
+  canUseVoice:
     type: boolean
-  - name: canVoiceMuteMemberForAll
+  canVoiceMuteMemberForAll:
     type: boolean
-  - innerType: number
-    name: kickableRoleIds
+  kickableRoleIds:
+    innerType: number
     type: table
 C_Club.ClubSelfInvitationInfo:
-  fields:
-  - name: club
+  club:
     type: C_Club.ClubInfo
-  - name: invitationId
+  invitationId:
     type: string
-  - name: inviter
+  inviter:
     type: C_Club.ClubMemberInfo
-  - innerType: C_Club.ClubMemberInfo
-    name: leaders
+  leaders:
+    innerType: C_Club.ClubMemberInfo
     type: table
 C_Club.ClubStreamInfo:
-  fields:
-  - name: creationTime
+  creationTime:
     type: number
-  - name: leadersAndModeratorsOnly
+  leadersAndModeratorsOnly:
     type: boolean
-  - name: name
+  name:
     type: string
-  - name: streamId
+  streamId:
     type: string
-  - name: streamType
+  streamType:
     type: number
-  - name: subject
+  subject:
     type: string
 C_Club.ClubStreamNotificationSetting:
-  fields:
-  - name: filter
+  filter:
     type: number
-  - name: streamId
+  streamId:
     type: string
 C_Club.ClubTicketInfo:
-  fields:
-  - name: allowedRedeemCount
+  allowedRedeemCount:
     type: number
-  - name: creationTime
+  creationTime:
     type: number
-  - name: creator
+  creator:
     type: C_Club.ClubMemberInfo
-  - name: currentRedeemCount
+  currentRedeemCount:
     type: number
-  - name: defaultStreamId
+  defaultStreamId:
     nilable: true
     type: string
-  - name: expirationTime
+  expirationTime:
     type: number
-  - name: ticketId
+  ticketId:
     type: string
 C_Commentator.CommentatorHistory:
-  fields:
-  - innerType: C_Commentator.CommentatorOverrideNameEntry
-    name: overrideNameDirectory
+  overrideNameDirectory:
+    innerType: C_Commentator.CommentatorOverrideNameEntry
     type: table
-  - innerType: C_Commentator.CommentatorSeries
-    name: series
+  series:
+    innerType: C_Commentator.CommentatorSeries
     type: table
-  - innerType: C_Commentator.CommentatorTeamDirectoryEntry
-    name: teamDirectory
+  teamDirectory:
+    innerType: C_Commentator.CommentatorTeamDirectoryEntry
     type: table
 C_Commentator.CommentatorPlayerData:
-  fields:
-  - name: damageDone
+  damageDone:
     type: number
-  - name: damageTaken
+  damageTaken:
     type: number
-  - name: deaths
+  deaths:
     type: number
-  - name: faction
+  faction:
     type: number
-  - name: healingDone
+  healingDone:
     type: number
-  - name: healingTaken
+  healingTaken:
     type: number
-  - name: kills
+  kills:
     type: number
-  - name: name
+  name:
     type: string
-  - name: soloShuffleRoundLosses
+  soloShuffleRoundLosses:
     type: number
-  - name: soloShuffleRoundWins
+  soloShuffleRoundWins:
     type: number
-  - name: specialization
+  specialization:
     type: number
-  - name: unitToken
+  unitToken:
     type: string
 C_Commentator.CommentatorSeries:
-  fields:
-  - innerType: C_Commentator.CommentatorSeriesTeam
-    name: teams
+  teams:
+    innerType: C_Commentator.CommentatorSeriesTeam
     type: table
 C_Commentator.CommentatorUnitData:
-  fields:
-  - name: absorbTotal
+  absorbTotal:
     type: number
-  - name: health
+  health:
     type: number
-  - name: healthMax
+  healthMax:
     type: number
-  - name: isDeadOrGhost
+  isDeadOrGhost:
     type: boolean
-  - name: isFeignDeath
+  isFeignDeath:
     type: boolean
-  - name: power
+  power:
     type: number
-  - name: powerMax
+  powerMax:
     type: number
-  - name: powerTypeToken
+  powerTypeToken:
     type: string
 C_Commentator.NameOverrideEntry:
-  fields:
-  - name: originalName
+  originalName:
     type: string
-  - name: overrideName
+  overrideName:
     type: string
 C_Console.ConsoleCommandInfo:
-  fields:
-  - name: category
+  category:
     type: number
-  - name: command
+  command:
     type: string
-  - name: commandType
+  commandType:
     type: number
-  - name: help
+  help:
     type: string
-  - name: scriptContents
+  scriptContents:
     type: string
-  - name: scriptParameters
+  scriptParameters:
     type: string
 C_CreatureInfo.ClassInfo:
-  fields:
-  - name: classFile
+  classFile:
     type: string
-  - name: classID
+  classID:
     type: number
-  - name: className
+  className:
     type: string
 C_CreatureInfo.FactionInfo:
-  fields:
-  - name: groupTag
+  groupTag:
     type: string
-  - name: name
+  name:
     type: string
 C_CreatureInfo.RaceInfo:
-  fields:
-  - name: clientFileString
+  clientFileString:
     type: string
-  - name: raceID
+  raceID:
     type: number
-  - name: raceName
+  raceName:
     type: string
 C_CurrencyInfo.CurrencyInfo:
-  fields:
-  - name: canEarnPerWeek
+  canEarnPerWeek:
     type: boolean
-  - name: description
+  description:
     type: string
-  - name: discovered
+  discovered:
     type: boolean
-  - name: iconFileID
+  iconFileID:
     type: number
-  - name: isHeader
+  isHeader:
     type: boolean
-  - name: isHeaderExpanded
+  isHeaderExpanded:
     type: boolean
-  - name: isShowInBackpack
+  isShowInBackpack:
     type: boolean
-  - name: isTradeable
+  isTradeable:
     type: boolean
-  - name: isTypeUnused
+  isTypeUnused:
     type: boolean
-  - name: maxQuantity
+  maxQuantity:
     type: number
-  - name: maxWeeklyQuantity
+  maxWeeklyQuantity:
     type: number
-  - name: name
+  name:
     type: string
-  - name: quality
+  quality:
     type: number
-  - name: quantity
+  quantity:
     type: number
-  - name: quantityEarnedThisWeek
+  quantityEarnedThisWeek:
     type: number
-  - name: totalEarned
+  totalEarned:
     type: number
-  - name: trackedQuantity
+  trackedQuantity:
     type: number
-  - name: useTotalEarnedForMaxQty
+  useTotalEarnedForMaxQty:
     type: boolean
 C_DeathInfo.GraveyardMapInfo:
-  fields:
-  - name: areaPoiID
+  areaPoiID:
     type: number
-  - name: graveyardID
+  graveyardID:
     type: number
-  - name: isGraveyardSelectable
+  isGraveyardSelectable:
     type: boolean
-  - name: name
+  name:
     type: string
-  - mixin: Vector2DMixin
-    name: position
+  position:
+    mixin: Vector2DMixin
     type: Vector2D
-  - name: textureIndex
+  textureIndex:
     type: number
 C_DeathInfo.SelfResurrectOption:
-  fields:
-  - name: canUse
+  canUse:
     type: boolean
-  - name: id
+  id:
     type: number
-  - name: isLimited
+  isLimited:
     type: boolean
-  - name: name
+  name:
     type: string
-  - name: optionType
+  optionType:
     type: number
-  - name: priority
+  priority:
     type: number
 C_FriendList.FriendInfo:
-  fields:
-  - name: afk
+  afk:
     type: boolean
-  - name: area
+  area:
     nilable: true
     type: string
-  - name: className
+  className:
     nilable: true
     type: string
-  - name: connected
+  connected:
     type: boolean
-  - name: dnd
+  dnd:
     type: boolean
-  - name: guid
+  guid:
     type: string
-  - name: level
+  level:
     type: number
-  - name: mobile
+  mobile:
     type: boolean
-  - name: name
+  name:
     type: string
-  - name: notes
+  notes:
     nilable: true
     type: string
-  - name: rafLinkType
+  rafLinkType:
     type: number
 C_FriendList.WhoInfo:
-  fields:
-  - name: area
+  area:
     type: string
-  - name: classStr
+  classStr:
     type: string
-  - name: filename
+  filename:
     nilable: true
     type: string
-  - name: fullGuildName
+  fullGuildName:
     type: string
-  - name: fullName
+  fullName:
     type: string
-  - name: gender
+  gender:
     type: number
-  - name: level
+  level:
     type: number
-  - name: raceStr
+  raceStr:
     type: string
 C_GamePad.GamePadConfig:
-  fields:
-  - innerType: C_GamePad.GamePadAxisConfig
-    name: axisConfigs
+  axisConfigs:
+    innerType: C_GamePad.GamePadAxisConfig
     type: table
-  - name: comment
+  comment:
     nilable: true
     type: string
-  - name: configID
+  configID:
     type: C_GamePad.GamePadConfigID
-  - name: labelStyle
+  labelStyle:
     nilable: true
     type: string
-  - name: name
+  name:
     nilable: true
     type: string
-  - innerType: C_GamePad.GamePadRawAxisMapping
-    name: rawAxisMappings
+  rawAxisMappings:
+    innerType: C_GamePad.GamePadRawAxisMapping
     type: table
-  - innerType: C_GamePad.GamePadRawButtonMapping
-    name: rawButtonMappings
+  rawButtonMappings:
+    innerType: C_GamePad.GamePadRawButtonMapping
     type: table
-  - innerType: C_GamePad.GamePadStickConfig
-    name: stickConfigs
+  stickConfigs:
+    innerType: C_GamePad.GamePadStickConfig
     type: table
 C_GamePad.GamePadConfigID:
-  fields:
-  - name: productID
+  productID:
     nilable: true
     type: number
-  - name: vendorID
+  vendorID:
     nilable: true
     type: number
 C_GamePad.GamePadMappedState:
-  fields:
-  - innerType: number
-    name: axes
+  axes:
+    innerType: number
     type: table
-  - name: axisCount
+  axisCount:
     type: number
-  - name: buttonCount
+  buttonCount:
     type: number
-  - innerType: boolean
-    name: buttons
+  buttons:
+    innerType: boolean
     type: table
-  - name: labelStyle
+  labelStyle:
     type: string
-  - name: name
+  name:
     type: string
-  - name: stickCount
+  stickCount:
     type: number
-  - innerType: C_GamePad.GamePadStick
-    name: sticks
+  sticks:
+    innerType: C_GamePad.GamePadStick
     type: table
 C_GamePad.GamePadRawState:
-  fields:
-  - name: name
+  name:
     type: string
-  - name: productID
+  productID:
     type: number
-  - innerType: number
-    name: rawAxes
+  rawAxes:
+    innerType: number
     type: table
-  - name: rawAxisCount
+  rawAxisCount:
     type: number
-  - name: rawButtonCount
+  rawButtonCount:
     type: number
-  - innerType: boolean
-    name: rawButtons
+  rawButtons:
+    innerType: boolean
     type: table
-  - name: vendorID
+  vendorID:
     type: number
 C_GossipInfo.GossipPoiInfo:
-  fields:
-  - name: inBattleMap
+  inBattleMap:
     type: boolean
-  - name: name
+  name:
     type: string
-  - mixin: Vector2DMixin
-    name: position
+  position:
+    mixin: Vector2DMixin
     type: Vector2D
-  - name: textureIndex
+  textureIndex:
     type: number
 C_LFGInfo.LFGLockInfo:
-  fields:
-  - name: hideEntry
+  hideEntry:
     type: boolean
-  - name: lfgID
+  lfgID:
     type: number
-  - name: reason
+  reason:
     type: number
 C_LFGList.BestDungeonScoreMapInfo:
-  fields:
-  - name: bestRunLevel
+  bestRunLevel:
     type: number
-  - name: finishedSuccess
+  finishedSuccess:
     type: boolean
-  - name: mapName
+  mapName:
     type: string
-  - name: mapScore
+  mapScore:
     type: number
 C_LFGList.LfgEntryData:
-  fields:
-  - name: activityID
+  activityID:
     type: number
-  - name: autoAccept
+  autoAccept:
     type: boolean
-  - name: comment
+  comment:
     type: string
-  - name: duration
+  duration:
     type: number
-  - name: isCrossFactionListing
+  isCrossFactionListing:
     type: boolean
-  - name: name
+  name:
     type: string
-  - name: playstyle
+  playstyle:
     nilable: true
     type: number
-  - name: privateGroup
+  privateGroup:
     type: boolean
-  - name: questID
+  questID:
     nilable: true
     type: number
-  - name: requiredDungeonScore
+  requiredDungeonScore:
     nilable: true
     type: number
-  - name: requiredHonorLevel
+  requiredHonorLevel:
     type: number
-  - name: requiredItemLevel
+  requiredItemLevel:
     type: number
-  - name: requiredPvpRating
+  requiredPvpRating:
     nilable: true
     type: number
-  - name: voiceChat
+  voiceChat:
     type: string
 C_LFGList.LfgSearchResultData:
-  fields:
-  - name: activityID
+  activityID:
     type: number
-  - name: age
+  age:
     type: number
-  - name: autoAccept
+  autoAccept:
     type: boolean
-  - name: comment
+  comment:
     type: string
-  - name: crossFactionListing
+  crossFactionListing:
     nilable: true
     type: boolean
-  - name: hasSelf
+  hasSelf:
     type: boolean
-  - name: isDelisted
+  isDelisted:
     type: boolean
-  - name: isWarMode
+  isWarMode:
     type: boolean
-  - name: leaderDungeonScoreInfo
+  leaderDungeonScoreInfo:
     nilable: true
     type: C_LFGList.BestDungeonScoreMapInfo
-  - name: leaderFactionGroup
+  leaderFactionGroup:
     type: number
-  - name: leaderName
+  leaderName:
     nilable: true
     type: string
-  - name: leaderOverallDungeonScore
+  leaderOverallDungeonScore:
     nilable: true
     type: number
-  - name: leaderPvpRatingInfo
+  leaderPvpRatingInfo:
     nilable: true
     type: C_LFGList.PvpRatingInfo
-  - name: name
+  name:
     type: string
-  - name: numBNetFriends
+  numBNetFriends:
     type: number
-  - name: numCharFriends
+  numCharFriends:
     type: number
-  - name: numGuildMates
+  numGuildMates:
     type: number
-  - name: numMembers
+  numMembers:
     type: number
-  - name: playstyle
+  playstyle:
     nilable: true
     type: number
-  - name: questID
+  questID:
     nilable: true
     type: number
-  - name: requiredDungeonScore
+  requiredDungeonScore:
     nilable: true
     type: number
-  - name: requiredHonorLevel
+  requiredHonorLevel:
     type: number
-  - name: requiredItemLevel
+  requiredItemLevel:
     type: number
-  - name: requiredPvpRating
+  requiredPvpRating:
     nilable: true
     type: number
-  - name: searchResultID
+  searchResultID:
     type: number
-  - name: voiceChat
+  voiceChat:
     type: string
 C_LFGList.PvpRatingInfo:
-  fields:
-  - name: activityName
+  activityName:
     type: string
-  - name: bracket
+  bracket:
     type: number
-  - name: rating
+  rating:
     type: number
-  - name: tier
+  tier:
     type: number
 C_LossOfControl.LossOfControlData:
-  fields:
-  - name: displayText
+  displayText:
     type: string
-  - name: displayType
+  displayType:
     type: number
-  - name: duration
+  duration:
     nilable: true
     type: number
-  - name: iconTexture
+  iconTexture:
     type: number
-  - name: locType
+  lockoutSchool:
+    type: number
+  locType:
     type: string
-  - name: lockoutSchool
+  priority:
     type: number
-  - name: priority
+  spellID:
     type: number
-  - name: spellID
-    type: number
-  - name: startTime
+  startTime:
     nilable: true
     type: number
-  - name: timeRemaining
+  timeRemaining:
     nilable: true
     type: number
 C_Map.MapBannerInfo:
-  fields:
-  - name: areaPoiID
+  areaPoiID:
     type: number
-  - name: atlasName
+  atlasName:
     type: string
-  - name: name
+  name:
     type: string
-  - name: uiTextureKit
+  uiTextureKit:
     nilable: true
     type: string
 C_Map.MapLinkInfo:
-  fields:
-  - name: areaPoiID
+  areaPoiID:
     type: number
-  - name: atlasName
+  atlasName:
     type: string
-  - name: linkedUiMapID
+  linkedUiMapID:
     type: number
-  - name: name
+  name:
     type: string
-  - mixin: Vector2DMixin
-    name: position
+  position:
+    mixin: Vector2DMixin
     type: Vector2D
 C_Map.UiMapDetails:
-  fields:
-  - name: flags
+  flags:
     type: number
-  - name: mapID
+  mapID:
     type: number
-  - name: mapType
+  mapType:
     type: number
-  - name: name
+  name:
     type: string
-  - name: parentMapID
+  parentMapID:
     type: number
 C_Map.UiMapGroupMemberInfo:
-  fields:
-  - name: mapID
+  mapID:
     type: number
-  - name: name
+  name:
     type: string
-  - name: relativeHeightIndex
+  relativeHeightIndex:
     type: number
 C_MapExplorationInfo.UiMapExplorationHitRect:
-  fields:
-  - name: bottom
+  bottom:
     type: number
-  - name: left
+  left:
     type: number
-  - name: right
+  right:
     type: number
-  - name: top
+  top:
     type: number
 C_MapExplorationInfo.UiMapExplorationInfo:
-  fields:
-  - innerType: number
-    name: fileDataIDs
+  fileDataIDs:
+    innerType: number
     type: table
-  - name: hitRect
+  hitRect:
     type: C_MapExplorationInfo.UiMapExplorationHitRect
-  - name: isDrawOnTopLayer
+  isDrawOnTopLayer:
     type: boolean
-  - name: isShownByMouseOver
+  isShownByMouseOver:
     type: boolean
-  - name: offsetX
+  offsetX:
     type: number
-  - name: offsetY
+  offsetY:
     type: number
-  - name: textureHeight
+  textureHeight:
     type: number
-  - name: textureWidth
+  textureWidth:
     type: number
 C_ModelInfo.UIModelSceneActorDisplayInfo:
-  fields:
-  - name: alpha
+  alpha:
     type: number
-  - name: animSpeed
+  animation:
     type: number
-  - name: animation
-    type: number
-  - name: animationKitID
+  animationKitID:
     nilable: true
     type: number
-  - name: animationVariation
+  animationVariation:
     type: number
-  - name: scale
+  animSpeed:
     type: number
-  - name: spellVisualKitID
+  scale:
+    type: number
+  spellVisualKitID:
     nilable: true
     type: number
 C_ModelInfo.UIModelSceneActorInfo:
-  fields:
-  - name: modelActorDisplayID
+  modelActorDisplayID:
     nilable: true
     type: number
-  - name: modelActorID
+  modelActorID:
     type: number
-  - name: normalizeScaleAggressiveness
+  normalizeScaleAggressiveness:
     nilable: true
     type: number
-  - name: pitch
+  pitch:
     type: number
-  - mixin: Vector3DMixin
-    name: position
+  position:
+    mixin: Vector3DMixin
     type: table
-  - name: roll
+  roll:
     type: number
-  - name: scriptTag
+  scriptTag:
     type: string
-  - name: useCenterForOriginX
+  useCenterForOriginX:
     type: boolean
-  - name: useCenterForOriginY
+  useCenterForOriginY:
     type: boolean
-  - name: useCenterForOriginZ
+  useCenterForOriginZ:
     type: boolean
-  - name: yaw
+  yaw:
     type: number
 C_ModelInfo.UIModelSceneCameraInfo:
-  fields:
-  - name: cameraType
+  cameraType:
     type: string
-  - name: flags
+  flags:
     type: number
-  - name: maxZoomDistance
+  maxZoomDistance:
     type: number
-  - name: minZoomDistance
+  minZoomDistance:
     type: number
-  - name: modelSceneCameraID
+  modelSceneCameraID:
     type: number
-  - name: pitch
+  pitch:
     type: number
-  - name: roll
+  roll:
     type: number
-  - name: scriptTag
+  scriptTag:
     type: string
-  - mixin: Vector3DMixin
-    name: target
+  target:
+    mixin: Vector3DMixin
     type: table
-  - name: yaw
+  yaw:
     type: number
-  - name: zoomDistance
+  zoomDistance:
     type: number
-  - name: zoomedPitchOffset
+  zoomedPitchOffset:
     type: number
-  - name: zoomedRollOffset
+  zoomedRollOffset:
     type: number
-  - mixin: Vector3DMixin
-    name: zoomedTargetOffset
+  zoomedTargetOffset:
+    mixin: Vector3DMixin
     type: table
-  - name: zoomedYawOffset
+  zoomedYawOffset:
     type: number
 C_QuestLog.QuestObjectiveInfo:
-  fields:
-  - name: finished
+  finished:
     type: boolean
-  - name: numFulfilled
+  numFulfilled:
     type: number
-  - name: numRequired
+  numRequired:
     type: number
-  - name: text
+  text:
     type: string
-  - name: type
+  type:
     type: string
 C_QuestSession.QuestSessionPlayerDetails:
-  fields:
-  - name: guid
+  guid:
     type: string
-  - name: name
+  name:
     type: string
 C_ScriptedAnimations.ScriptedAnimationEffect:
-  fields:
-  - name: alpha
+  alpha:
     type: number
-  - name: animation
+  animation:
     type: number
-  - name: animationSpeed
+  animationSpeed:
     type: number
-  - name: animationStartOffset
+  animationStartOffset:
     nilable: true
     type: number
-  - name: duration
+  duration:
     type: number
-  - name: endAlphaFade
+  endAlphaFade:
     nilable: true
     type: number
-  - name: endAlphaFadeDuration
+  endAlphaFadeDuration:
     nilable: true
     type: number
-  - name: finishBehavior
+  finishBehavior:
     nilable: true
     type: number
-  - name: finishEffectID
+  finishEffectID:
     nilable: true
     type: number
-  - name: finishSoundKitID
+  finishSoundKitID:
     nilable: true
     type: number
-  - name: id
+  id:
     type: number
-  - name: loopingSoundKitID
+  loopingSoundKitID:
     nilable: true
     type: number
-  - name: offsetX
+  offsetX:
     type: number
-  - name: offsetY
+  offsetY:
     type: number
-  - name: offsetZ
+  offsetZ:
     type: number
-  - name: particleOverrideScale
+  particleOverrideScale:
     nilable: true
     type: number
-  - name: pitchRadians
+  pitchRadians:
     type: number
-  - name: rollRadians
+  rollRadians:
     type: number
-  - name: startAlphaFade
+  startAlphaFade:
     nilable: true
     type: number
-  - name: startAlphaFadeDuration
+  startAlphaFadeDuration:
     nilable: true
     type: number
-  - name: startBehavior
+  startBehavior:
     nilable: true
     type: number
-  - name: startSoundKitID
+  startSoundKitID:
     nilable: true
     type: number
-  - name: trajectory
+  trajectory:
     type: number
-  - name: useTargetAsSource
+  useTargetAsSource:
     type: boolean
-  - name: visual
+  visual:
     type: number
-  - name: visualScale
+  visualScale:
     type: number
-  - name: yawRadians
+  yawRadians:
     type: number
 C_TaskQuest.TaskPOIData:
-  fields:
-  - name: childDepth
+  childDepth:
     nilable: true
     type: number
-  - name: inProgress
+  inProgress:
     type: boolean
-  - name: isCombatAllyQuest
+  isCombatAllyQuest:
     type: boolean
-  - name: isDaily
+  isDaily:
     type: boolean
-  - name: isQuestStart
+  isQuestStart:
     type: boolean
-  - name: mapID
+  mapID:
     type: number
-  - name: numObjectives
+  numObjectives:
     type: number
-  - name: questId
+  questId:
     type: number
-  - name: x
+  x:
     type: number
-  - name: y
+  y:
     type: number
 C_TaxiMap.MapTaxiNodeInfo:
-  fields:
-  - name: atlasName
+  atlasName:
     type: string
-  - name: faction
+  faction:
     type: number
-  - name: name
+  name:
     type: string
-  - name: nodeID
+  nodeID:
     type: number
-  - mixin: Vector2DMixin
-    name: position
+  position:
+    mixin: Vector2DMixin
     type: Vector2D
-  - name: textureKit
+  textureKit:
     type: string
 C_TaxiMap.TaxiNodeInfo:
-  fields:
-  - name: name
+  name:
     type: string
-  - name: nodeID
+  nodeID:
     type: number
-  - mixin: Vector2DMixin
-    name: position
+  position:
+    mixin: Vector2DMixin
     type: Vector2D
-  - name: slotIndex
+  slotIndex:
     type: number
-  - name: specialIconCostString
+  specialIconCostString:
     nilable: true
     type: string
-  - name: state
+  state:
     type: number
-  - name: textureKit
+  textureKit:
     type: string
-  - name: useSpecialIcon
+  useSpecialIcon:
     type: boolean
 C_Texture.AtlasInfo:
-  fields:
-  - name: bottomTexCoord
+  bottomTexCoord:
     type: number
-  - name: file
+  file:
     nilable: true
     type: number
-  - name: filename
+  filename:
     nilable: true
     type: string
-  - name: height
+  height:
     type: number
-  - name: leftTexCoord
+  leftTexCoord:
     type: number
-  - name: rightTexCoord
+  rightTexCoord:
     type: number
-  - name: tilesHorizontally
+  tilesHorizontally:
     type: boolean
-  - name: tilesVertically
+  tilesVertically:
     type: boolean
-  - name: topTexCoord
+  topTexCoord:
     type: number
-  - name: width
+  width:
     type: number
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
-  fields:
-  - name: enabledState
+  enabledState:
     type: number
-  - name: frameTextureKit
+  frameTextureKit:
     type: string
-  - name: hasTimer
+  hasTimer:
     type: boolean
-  - name: inAnimType
+  inAnimType:
     type: number
-  - name: layoutDirection
+  layoutDirection:
     type: number
-  - innerType: string
-    name: lines
+  lines:
+    innerType: string
     type: table
-  - name: modelSceneLayer
+  modelSceneLayer:
     type: number
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: outAnimType
+  outAnimType:
     type: number
-  - name: scriptedAnimationEffectID
+  scriptedAnimationEffectID:
     type: number
-  - name: shownState
+  shownState:
     type: number
-  - name: textureKit
+  textureKit:
     type: string
-  - name: widgetScale
+  widgetScale:
     type: number
-  - name: widgetSizeSetting
+  widgetSizeSetting:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.CaptureBarWidgetVisualizationInfo:
-  fields:
-  - name: barMaxValue
+  barMaxValue:
     type: number
-  - name: barMinValue
+  barMinValue:
     type: number
-  - name: barValue
+  barValue:
     type: number
-  - name: fillDirectionType
+  fillDirectionType:
     type: number
-  - name: frameTextureKit
+  frameTextureKit:
     type: string
-  - name: glowAnimType
+  glowAnimType:
     type: number
-  - name: hasTimer
+  hasTimer:
     type: boolean
-  - name: inAnimType
+  inAnimType:
     type: number
-  - name: layoutDirection
+  layoutDirection:
     type: number
-  - name: modelSceneLayer
+  modelSceneLayer:
     type: number
-  - name: neutralZoneCenter
+  neutralZoneCenter:
     type: number
-  - name: neutralZoneSize
+  neutralZoneSize:
     type: number
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: outAnimType
+  outAnimType:
     type: number
-  - name: scriptedAnimationEffectID
+  scriptedAnimationEffectID:
     type: number
-  - name: shownState
+  shownState:
     type: number
-  - name: textureKit
+  textureKit:
     type: string
-  - name: tooltip
+  tooltip:
     type: string
-  - name: tooltipLoc
+  tooltipLoc:
     type: number
-  - name: widgetScale
+  widgetScale:
     type: number
-  - name: widgetSizeSetting
+  widgetSizeSetting:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.DoubleIconAndTextWidgetVisualizationInfo:
-  fields:
-  - name: frameTextureKit
+  frameTextureKit:
     type: string
-  - name: hasTimer
+  hasTimer:
     type: boolean
-  - name: inAnimType
+  inAnimType:
     type: number
-  - name: label
+  label:
     type: string
-  - name: layoutDirection
+  layoutDirection:
     type: number
-  - name: leftText
+  leftText:
     type: string
-  - name: leftTooltip
+  leftTooltip:
     type: string
-  - name: modelSceneLayer
+  modelSceneLayer:
     type: number
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: outAnimType
+  outAnimType:
     type: number
-  - name: rightText
+  rightText:
     type: string
-  - name: rightTooltip
+  rightTooltip:
     type: string
-  - name: scriptedAnimationEffectID
+  scriptedAnimationEffectID:
     type: number
-  - name: shownState
+  shownState:
     type: number
-  - name: textureKit
+  textureKit:
     type: string
-  - name: tooltipLoc
+  tooltipLoc:
     type: number
-  - name: widgetScale
+  widgetScale:
     type: number
-  - name: widgetSizeSetting
+  widgetSizeSetting:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo:
-  fields:
-  - name: barValueTextType
+  barValueTextType:
     type: number
-  - name: fillMotionType
+  fillMotionType:
     type: number
-  - name: frameTextureKit
+  frameTextureKit:
     type: string
-  - name: hasTimer
+  hasTimer:
     type: boolean
-  - name: inAnimType
+  inAnimType:
     type: number
-  - name: layoutDirection
+  layoutDirection:
     type: number
-  - name: leftBarMax
+  leftBarMax:
     type: number
-  - name: leftBarMin
+  leftBarMin:
     type: number
-  - name: leftBarTooltip
+  leftBarTooltip:
     type: string
-  - name: leftBarTooltipLoc
+  leftBarTooltipLoc:
     type: number
-  - name: leftBarValue
+  leftBarValue:
     type: number
-  - name: modelSceneLayer
+  modelSceneLayer:
     type: number
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: outAnimType
+  outAnimType:
     type: number
-  - name: rightBarMax
+  rightBarMax:
     type: number
-  - name: rightBarMin
+  rightBarMin:
     type: number
-  - name: rightBarTooltip
+  rightBarTooltip:
     type: string
-  - name: rightBarTooltipLoc
+  rightBarTooltipLoc:
     type: number
-  - name: rightBarValue
+  rightBarValue:
     type: number
-  - name: scriptedAnimationEffectID
+  scriptedAnimationEffectID:
     type: number
-  - name: shownState
+  shownState:
     type: number
-  - name: text
+  text:
     type: string
-  - name: textureKit
+  textureKit:
     type: string
-  - name: widgetScale
+  widgetScale:
     type: number
-  - name: widgetSizeSetting
+  widgetSizeSetting:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
-  fields:
-  - innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
-    name: currencies
+  currencies:
+    innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
     type: table
-  - name: frameTextureKit
+  frameTextureKit:
     type: string
-  - name: hasTimer
+  hasTimer:
     type: boolean
-  - name: inAnimType
+  inAnimType:
     type: number
-  - name: layoutDirection
+  layoutDirection:
     type: number
-  - name: modelSceneLayer
+  modelSceneLayer:
     type: number
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: outAnimType
+  outAnimType:
     type: number
-  - name: scriptedAnimationEffectID
+  scriptedAnimationEffectID:
     type: number
-  - name: shownState
+  shownState:
     type: number
-  - name: textureKit
+  textureKit:
     type: string
-  - name: tooltipLoc
+  tooltipLoc:
     type: number
-  - name: widgetScale
+  widgetScale:
     type: number
-  - name: widgetSizeSetting
+  widgetSizeSetting:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.IconAndTextWidgetVisualizationInfo:
-  fields:
-  - name: dynamicTooltip
+  dynamicTooltip:
     type: string
-  - name: frameTextureKit
+  frameTextureKit:
     type: string
-  - name: hasTimer
+  hasTimer:
     type: boolean
-  - name: inAnimType
+  inAnimType:
     type: number
-  - name: layoutDirection
+  layoutDirection:
     type: number
-  - name: modelSceneLayer
+  modelSceneLayer:
     type: number
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: outAnimType
+  outAnimType:
     type: number
-  - name: scriptedAnimationEffectID
+  scriptedAnimationEffectID:
     type: number
-  - name: state
+  state:
     type: number
-  - name: text
+  text:
     type: string
-  - name: textureKit
+  textureKit:
     type: string
-  - name: tooltip
+  tooltip:
     type: string
-  - name: tooltipLoc
+  tooltipLoc:
     type: number
-  - name: widgetScale
+  widgetScale:
     type: number
-  - name: widgetSizeSetting
+  widgetSizeSetting:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.IconTextAndBackgroundWidgetVisualizationInfo:
-  fields:
-  - name: frameTextureKit
+  frameTextureKit:
     type: string
-  - name: hasTimer
+  hasTimer:
     type: boolean
-  - name: inAnimType
+  inAnimType:
     type: number
-  - name: layoutDirection
+  layoutDirection:
     type: number
-  - name: modelSceneLayer
+  modelSceneLayer:
     type: number
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: outAnimType
+  outAnimType:
     type: number
-  - name: scriptedAnimationEffectID
+  scriptedAnimationEffectID:
     type: number
-  - name: shownState
+  shownState:
     type: number
-  - name: text
+  text:
     type: string
-  - name: textureKit
+  textureKit:
     type: string
-  - name: widgetScale
+  widgetScale:
     type: number
-  - name: widgetSizeSetting
+  widgetSizeSetting:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
-  fields:
-  - innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
-    name: currencies
+  currencies:
+    innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
     type: table
-  - name: description
+  description:
     type: string
-  - name: descriptionEnabledState
+  descriptionEnabledState:
     type: number
-  - name: descriptionShownState
+  descriptionShownState:
     type: number
-  - name: enabledState
+  enabledState:
     type: number
-  - name: frameTextureKit
+  frameTextureKit:
     type: string
-  - name: hasTimer
+  hasTimer:
     type: boolean
-  - name: inAnimType
+  inAnimType:
     type: number
-  - name: layoutDirection
+  layoutDirection:
     type: number
-  - name: modelSceneLayer
+  modelSceneLayer:
     type: number
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: outAnimType
+  outAnimType:
     type: number
-  - name: scriptedAnimationEffectID
+  scriptedAnimationEffectID:
     type: number
-  - name: shownState
+  shownState:
     type: number
-  - name: text
+  text:
     type: string
-  - name: textureKit
+  textureKit:
     type: string
-  - name: tooltipLoc
+  tooltipLoc:
     type: number
-  - name: widgetScale
+  widgetScale:
     type: number
-  - name: widgetSizeSetting
+  widgetSizeSetting:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
-  fields:
-  - innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
-    name: currencies
+  currencies:
+    innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
     type: table
-  - name: frameTextureKit
+  frameTextureKit:
     type: string
-  - name: hasTimer
+  hasTimer:
     type: boolean
-  - name: headerText
+  headerText:
     type: string
-  - name: inAnimType
+  inAnimType:
     type: number
-  - name: layoutDirection
+  layoutDirection:
     type: number
-  - name: modelSceneLayer
+  modelSceneLayer:
     type: number
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: outAnimType
+  outAnimType:
     type: number
-  - name: scriptedAnimationEffectID
+  scriptedAnimationEffectID:
     type: number
-  - name: shownState
+  shownState:
     type: number
-  - name: textureKit
+  textureKit:
     type: string
-  - name: widgetScale
+  widgetScale:
     type: number
-  - name: widgetSizeSetting
+  widgetSizeSetting:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.StackedResourceTrackerWidgetVisualizationInfo:
-  fields:
-  - name: frameTextureKit
+  frameTextureKit:
     type: string
-  - name: hasTimer
+  hasTimer:
     type: boolean
-  - name: inAnimType
+  inAnimType:
     type: number
-  - name: layoutDirection
+  layoutDirection:
     type: number
-  - name: modelSceneLayer
+  modelSceneLayer:
     type: number
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: outAnimType
+  outAnimType:
     type: number
-  - innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
-    name: resources
+  resources:
+    innerType: C_UIWidgetManager.UIWidgetCurrencyInfo
     type: table
-  - name: scriptedAnimationEffectID
+  scriptedAnimationEffectID:
     type: number
-  - name: shownState
+  shownState:
     type: number
-  - name: textureKit
+  textureKit:
     type: string
-  - name: tooltipLoc
+  tooltipLoc:
     type: number
-  - name: widgetScale
+  widgetScale:
     type: number
-  - name: widgetSizeSetting
+  widgetSizeSetting:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
-  fields:
-  - name: barMax
+  barMax:
     type: number
-  - name: barMin
+  barMin:
     type: number
-  - name: barTextEnabledState
+  barTextEnabledState:
     type: number
-  - name: barTextFontType
+  barTextFontType:
     type: number
-  - name: barTextSizeType
+  barTextSizeType:
     type: number
-  - name: barValue
+  barValue:
     type: number
-  - name: barValueTextType
+  barValueTextType:
     type: number
-  - name: colorTint
+  colorTint:
     type: number
-  - name: fillMotionType
+  fillMotionType:
     type: number
-  - name: frameTextureKit
+  frameTextureKit:
     type: string
-  - name: hasTimer
+  hasTimer:
     type: boolean
-  - name: inAnimType
+  inAnimType:
     type: number
-  - name: layoutDirection
+  layoutDirection:
     type: number
-  - name: modelSceneLayer
+  modelSceneLayer:
     type: number
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: outAnimType
+  outAnimType:
     type: number
-  - name: overrideBarText
+  overrideBarText:
     type: string
-  - name: overrideBarTextShownType
+  overrideBarTextShownType:
     type: number
-  - innerType: number
-    name: partitionValues
+  partitionValues:
+    innerType: number
     type: table
-  - name: scriptedAnimationEffectID
+  scriptedAnimationEffectID:
     type: number
-  - name: shownState
+  shownState:
     type: number
-  - name: text
+  text:
     type: string
-  - name: textureKit
+  textureKit:
     type: string
-  - name: tooltip
+  tooltip:
     type: string
-  - name: tooltipLoc
+  tooltipLoc:
     type: number
-  - name: widgetScale
+  widgetScale:
     type: number
-  - name: widgetSizeSetting
+  widgetSizeSetting:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.TextureWithStateVisualizationInfo:
-  fields:
-  - name: backgroundTextureKitID
+  backgroundTextureKitID:
     type: number
-  - name: name
+  name:
     type: string
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: portraitTextureKitID
+  portraitTextureKitID:
     type: number
-  - name: shownState
+  shownState:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.TextWithStateWidgetVisualizationInfo:
-  fields:
-  - name: bottomPadding
+  bottomPadding:
     type: number
-  - name: enabledState
+  enabledState:
     type: number
-  - name: fontType
+  fontType:
     type: number
-  - name: frameTextureKit
+  frameTextureKit:
     type: string
-  - name: hAlign
+  hAlign:
     type: number
-  - name: hasTimer
+  hasTimer:
     type: boolean
-  - name: inAnimType
+  inAnimType:
     type: number
-  - name: layoutDirection
+  layoutDirection:
     type: number
-  - name: modelSceneLayer
+  modelSceneLayer:
     type: number
-  - name: orderIndex
+  orderIndex:
     type: number
-  - name: outAnimType
+  outAnimType:
     type: number
-  - name: scriptedAnimationEffectID
+  scriptedAnimationEffectID:
     type: number
-  - name: shownState
+  shownState:
     type: number
-  - name: text
+  text:
     type: string
-  - name: textSizeType
+  textSizeType:
     type: number
-  - name: textureKit
+  textureKit:
     type: string
-  - name: tooltip
+  tooltip:
     type: string
-  - name: tooltipLoc
+  tooltipLoc:
     type: number
-  - name: widgetScale
+  widgetScale:
     type: number
-  - name: widgetSizeSetting
+  widgetSizeSetting:
     type: number
-  - name: widgetTag
+  widgetTag:
     type: string
 C_UIWidgetManager.UIWidgetInfo:
-  fields:
-  - name: unitToken
+  unitToken:
     nilable: true
     type: string
-  - name: widgetID
+  widgetID:
     type: number
-  - name: widgetSetID
+  widgetSetID:
     type: number
-  - name: widgetType
+  widgetType:
     type: number
 C_VideoOptions.GxAdapterInfoDetails:
-  fields:
-  - name: isExternal
+  isExternal:
     type: boolean
-  - name: isLowPower
+  isLowPower:
     type: boolean
-  - name: name
+  name:
     type: string
 C_VoiceChat.VoiceAudioDevice:
-  fields:
-  - name: deviceID
+  deviceID:
     type: string
-  - name: displayName
+  displayName:
     type: string
-  - name: isActive
+  isActive:
     type: boolean
-  - name: isCommsDefault
+  isCommsDefault:
     type: boolean
-  - name: isSystemDefault
+  isSystemDefault:
     type: boolean
 C_VoiceChat.VoiceChatChannel:
-  fields:
-  - name: channelID
+  channelID:
     type: number
-  - name: channelType
+  channelType:
     type: number
-  - name: clubId
+  clubId:
     type: string
-  - name: isActive
+  isActive:
     type: boolean
-  - name: isMuted
+  isMuted:
     type: boolean
-  - name: isTranscribing
+  isTranscribing:
     type: boolean
-  - name: isTransmitting
+  isTransmitting:
     type: boolean
-  - innerType: C_VoiceChat.VoiceChatMember
-    name: members
+  members:
+    innerType: C_VoiceChat.VoiceChatMember
     type: table
-  - name: name
+  name:
     type: string
-  - name: streamId
+  streamId:
     type: string
-  - name: volume
+  volume:
     type: number
 C_VoiceChat.VoiceChatMember:
-  fields:
-  - name: energy
+  energy:
     type: number
-  - name: isActive
+  isActive:
     type: boolean
-  - name: isMutedForAll
+  isMutedForAll:
     type: boolean
-  - name: isSilenced
+  isSilenced:
     type: boolean
-  - name: isSpeaking
+  isSpeaking:
     type: boolean
-  - name: memberID
+  memberID:
     type: number
 C_VoiceChat.VoiceChatProcess:
-  fields:
-  - innerType: C_VoiceChat.VoiceChatChannel
-    name: channels
+  channels:
+    innerType: C_VoiceChat.VoiceChatChannel
     type: table
-  - name: name
+  name:
     type: string
 C_VoiceChat.VoiceTtsVoiceType:
-  fields:
-  - name: name
+  name:
     type: string
-  - name: voiceID
+  voiceID:
     type: number
 CalendarTime:
-  fields:
-  - name: hour
+  hour:
     type: number
-  - name: minute
+  minute:
     type: number
-  - name: month
+  month:
     type: number
-  - name: monthDay
+  monthDay:
     type: number
-  - name: weekday
+  weekday:
     type: number
-  - name: year
+  year:
     type: number
 ChatChannelInfo:
-  fields:
-  - name: name
+  channelType:
+    type: number
+  instanceID:
+    type: number
+  localID:
+    type: number
+  name:
     type: string
-  - name: shortcut
+  shortcut:
     type: string
-  - name: localID
-    type: number
-  - name: instanceID
-    type: number
-  - name: zoneChannelID
-    type: number
-  - name: channelType
+  zoneChannelID:
     type: number
 Color:
-  fields:
-  - name: r
+  b:
     type: number
-  - name: g
+  g:
     type: number
-  - name: b
+  r:
     type: number
 ExpansionDisplayInfo:
-  fields:
-  - name: banner
+  banner:
     type: string
-  - innerType: ExpansionDisplayInfoFeature
-    name: features
+  features:
+    innerType: ExpansionDisplayInfoFeature
     type: table
-  - name: highResBackgroundID
+  highResBackgroundID:
     type: number
-  - name: logo
+  logo:
     type: number
-  - name: lowResBackgroundID
+  lowResBackgroundID:
     type: number
 GuildTabardInfo:
-  fields:
-  - mixin: ColorMixin
-    name: backgroundColor
+  backgroundColor:
+    mixin: ColorMixin
     type: Color
-  - mixin: ColorMixin
-    name: borderColor
+  borderColor:
+    mixin: ColorMixin
     type: Color
-  - mixin: ColorMixin
-    name: emblemColor
+  emblemColor:
+    mixin: ColorMixin
     type: Color
-  - name: emblemFilename
+  emblemFilename:
     type: string
-  - name: emblemStyle
+  emblemStyle:
     type: number
 QueueSpecificInfo:
-  fields:
-  - name: activityID
+  activityID:
     nilable: true
     type: number
-  - name: battlefieldType
+  battlefieldType:
     nilable: true
     type: string
-  - name: isBrawl
+  isBrawl:
     nilable: true
     type: boolean
-  - innerType: number
-    name: lfgIDs
+  lfgIDs:
+    innerType: number
     nilable: true
     type: table
-  - name: lfgListID
+  lfgListID:
     nilable: true
     type: number
-  - name: listID
+  listID:
     nilable: true
     type: number
-  - name: mapName
+  mapName:
     nilable: true
     type: string
-  - name: queueType
+  queueType:
     type: string
-  - name: rated
+  rated:
     nilable: true
     type: boolean
-  - name: teamSize
+  teamSize:
     nilable: true
     type: number
 Vector2D:
-  fields:
-  - name: x
+  x:
     type: number
-  - name: y
+  y:
     type: number
