@@ -453,7 +453,7 @@ C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
     type: number
   unlockedItem:
     mixin: ItemLocationMixin
-    type: table
+    type: ItemLocation
 C_BarberShop.BarberShopCharacterData:
   raceData:
     type: C_BarberShop.BarberShopRaceData
@@ -5802,6 +5802,16 @@ GuildTabardInfo:
     type: number
   emblemStyle:
     type: number
+ItemLocation:
+  bagID:
+    nilable: true
+    type: number
+  equipmentSlotIndex:
+    nilable: true
+    type: number
+  slotIndex:
+    nilable: true
+    type: number
 MythicPlusAffixScoreInfo:
   durationSec:
     type: number
@@ -5907,7 +5917,7 @@ RuneforgeLegendaryComponentInfo:
 RuneforgeLegendaryCraftDescription:
   baseItem:
     mixin: ItemLocationMixin
-    type: table
+    type: ItemLocation
   modifiers:
     innerType: number
     type: table

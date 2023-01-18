@@ -113,6 +113,7 @@ for k in pairs(require('wowapi.data').structures[product]) do
 end
 local knownMixinStructs = {
   ColorMixin = 'Color',
+  ItemLocationMixin = 'ItemLocation',
   Vector2DMixin = 'Vector2D',
   Vector3DMixin = 'Vector3D',
 }

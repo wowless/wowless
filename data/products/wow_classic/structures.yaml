@@ -78,7 +78,7 @@ C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
     type: number
   unlockedItem:
     mixin: ItemLocationMixin
-    type: table
+    type: ItemLocation
 C_BarberShop.BarberShopCharacterData:
   raceData:
     type: C_BarberShop.BarberShopRaceData
@@ -2322,6 +2322,16 @@ GuildTabardInfo:
   emblemFilename:
     type: string
   emblemStyle:
+    type: number
+ItemLocation:
+  bagID:
+    nilable: true
+    type: number
+  equipmentSlotIndex:
+    nilable: true
+    type: number
+  slotIndex:
+    nilable: true
     type: number
 QueueSpecificInfo:
   activityID:
