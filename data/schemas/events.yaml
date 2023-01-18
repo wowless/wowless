@@ -12,7 +12,10 @@ type:
             sequenceof:
               record:
                 innerType:
-                  type: string
+                  type:
+                    oneof:
+                    - literal: string
+                    - ref: structure
                 mixin:
                   type: string
                 name:
