@@ -203,7 +203,10 @@ local rewriters = {
       return outputs
     end
     local function skip(api)
-      if not api or api.impl then
+      if not api then
+        return false
+      end
+      if api.impl then
         return true
       end
       for _, out in ipairs(api.outputs or {}) do
@@ -376,12 +379,20 @@ local rewriters = {
               assert(expectedStructureFieldKeys[k], ('unexpected field key %q in %q'):format(k, name))
             end
             ret[field.Name] = {
-              nilable = field.Nilable or nil,
-              type = t2ty(field.Type, ns, field.Mixin),
-              innerType = field.InnerType and t2ty(field.InnerType, ns),
-              mixin = field.Mixin,
               default = field.Default,
+              nilable = field.Nilable or nil,
               stub = stubs[field.Type],
+              type = (function()
+                if field.InnerType then
+                  return { arrayof = t2ty(field.InnerType, ns) }
+                end
+                local ty = t2ty(field.Type, ns, field.Mixin)
+                if ty ~= 'boolean' and ty ~= 'number' and ty ~= 'string' then
+                  return { mixin = field.Mixin, structure = ty }
+                else
+                  return ty
+                end
+              end)(),
             }
           end
           return ret

@@ -15350,6 +15350,789 @@ C_Timer.NewTimer:
     type: userdata
   states:
   - Time
+C_TooltipInfo.GetAchievementByID:
+  inputs:
+  - - name: achievementID
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetAction:
+  inputs:
+  - - name: actionID
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetArtifactItem:
+  inputs:
+  - {}
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetArtifactPowerByID:
+  inputs:
+  - - name: powerID
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetAzeriteEssence:
+  inputs:
+  - - name: essenceID
+      type: number
+    - name: rank
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetAzeriteEssenceSlot:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetAzeritePower:
+  inputs:
+  - - name: itemID
+      type: number
+    - name: itemLevel
+      type: number
+    - name: powerID
+      type: number
+    - name: owningItemLink
+      nilable: true
+      type: string
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetBackpackToken:
+  inputs:
+  - - name: index
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetBagItem:
+  inputs:
+  - - name: bagIndex
+      type: number
+    - name: slotIndex
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetBagItemChild:
+  inputs:
+  - - name: bagIndex
+      type: number
+    - name: slotIndex
+      type: number
+    - name: equipSlotIndex
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetBuybackItem:
+  inputs:
+  - - name: index
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetCompanionPet:
+  inputs:
+  - - name: petGUID
+      type: string
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetConduit:
+  inputs:
+  - - name: conduitID
+      type: number
+    - name: conduitRank
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetCurrencyByID:
+  inputs:
+  - - name: currencyID
+      type: number
+    - name: amount
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetCurrencyToken:
+  inputs:
+  - - name: tokenIndex
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetEnhancedConduit:
+  inputs:
+  - - name: conduitID
+      type: number
+    - name: rank
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetEquipmentSet:
+  inputs:
+  - - name: setID
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetExistingSocketGem:
+  inputs:
+  - - name: index
+      type: number
+    - name: toDestroy
+      nilable: true
+      type: boolean
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetGuildBankItem:
+  inputs:
+  - - name: tab
+      type: number
+    - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetHeirloomByItemID:
+  inputs:
+  - - name: itemID
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetHyperlink:
+  inputs:
+  - - name: hyperlink
+      type: string
+    - name: optionalArg1
+      nilable: true
+      type: number
+    - name: optionalArg2
+      nilable: true
+      type: number
+    - name: hideVendorPrice
+      nilable: true
+      type: boolean
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetInboxItem:
+  inputs:
+  - - name: messageIndex
+      type: number
+    - name: attachmentIndex
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetInstanceLockEncountersComplete:
+  inputs:
+  - - name: index
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetInventoryItem:
+  inputs:
+  - - name: unit
+      type: string
+    - name: slot
+      type: number
+    - name: hideUselessStats
+      nilable: true
+      type: boolean
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetInventoryItemByID:
+  inputs:
+  - - name: itemID
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetItemByGUID:
+  inputs:
+  - - name: guid
+      type: string
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetItemByID:
+  inputs:
+  - - name: itemID
+      type: number
+    - name: quality
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetItemInteractionItem:
+  inputs:
+  - {}
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetItemKey:
+  inputs:
+  - - name: itemID
+      type: number
+    - name: itemLevel
+      type: number
+    - name: itemSuffix
+      type: number
+    - name: requiredLevel
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetLFGDungeonReward:
+  inputs:
+  - - name: dungeonID
+      type: number
+    - name: lootIndex
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetLFGDungeonShortageReward:
+  inputs:
+  - - name: dungeonID
+      type: number
+    - name: shortageSeverity
+      type: number
+    - name: lootIndex
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetLootCurrency:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetLootItem:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetLootRollItem:
+  inputs:
+  - - name: id
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetMerchantCostItem:
+  inputs:
+  - - name: slot
+      type: number
+    - name: costIndex
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetMerchantItem:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetMinimapMouseover:
+  inputs:
+  - {}
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetMountBySpellID:
+  inputs:
+  - - name: spellID
+      type: number
+    - name: checkIndoors
+      nilable: true
+      type: boolean
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetOwnedItemByID:
+  inputs:
+  - - name: itemID
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetPetAction:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetPossession:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetPvpBrawl:
+  inputs:
+  - - name: isSpecial
+      nilable: true
+      type: boolean
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetPvpTalent:
+  inputs:
+  - - name: talentID
+      type: number
+    - name: isInspect
+      nilable: true
+      type: boolean
+    - name: groupIndex
+      nilable: true
+      type: number
+    - name: talentIndex
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetQuestCurrency:
+  inputs:
+  - - name: type
+      type: string
+    - name: currencyIndex
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetQuestItem:
+  inputs:
+  - - name: type
+      type: string
+    - name: itemIndex
+      type: number
+    - name: allowCollectionText
+      nilable: true
+      type: boolean
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetQuestLogCurrency:
+  inputs:
+  - - name: type
+      type: string
+    - name: currencyIndex
+      type: number
+    - name: questID
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetQuestLogItem:
+  inputs:
+  - - name: type
+      type: string
+    - name: itemIndex
+      type: number
+    - name: questID
+      nilable: true
+      type: number
+    - name: allowCollectionText
+      nilable: true
+      type: boolean
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetQuestLogRewardSpell:
+  inputs:
+  - - name: spellIndex
+      type: number
+    - name: questID
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetQuestLogSpecialItem:
+  inputs:
+  - - name: questIndex
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetQuestPartyProgress:
+  inputs:
+  - - name: questID
+      type: number
+    - name: omitTitle
+      nilable: true
+      type: boolean
+    - name: ignoreActivePlayer
+      nilable: true
+      type: boolean
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetQuestRewardSpell:
+  inputs:
+  - - name: spellIndex
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetRecipeRankInfo:
+  inputs:
+  - - name: recipeID
+      type: number
+    - name: rank
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetRecipeReagentItem:
+  inputs:
+  - - name: recipeSpellID
+      type: number
+    - name: dataSlotIndex
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetRecipeResultItem:
+  inputs:
+  - - name: recipeID
+      type: number
+    - innerType: CraftingReagentInfo
+      name: craftingReagents
+      nilable: true
+      type: table
+    - name: recraftItemGUID
+      nilable: true
+      type: string
+    - name: recipeLevel
+      nilable: true
+      type: number
+    - name: overrideQualityID
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetRecipeResultItemForOrder:
+  inputs:
+  - - name: recipeID
+      type: number
+    - innerType: CraftingReagentInfo
+      name: craftingReagents
+      nilable: true
+      type: table
+    - name: orderID
+      nilable: true
+      type: number
+    - name: recipeLevel
+      nilable: true
+      type: number
+    - name: overrideQualityID
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetRuneforgeResultItem:
+  inputs:
+  - - name: itemGUID
+      type: string
+    - name: itemLevel
+      type: number
+    - name: powerID
+      nilable: true
+      type: number
+    - innerType: number
+      name: modifiers
+      nilable: true
+      type: table
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetSendMailItem:
+  inputs:
+  - - name: attachmentIndex
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetShapeshift:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetSlottedKeystone:
+  inputs:
+  - {}
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetSocketedItem:
+  inputs:
+  - {}
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetSocketedRelic:
+  inputs:
+  - - name: slotIndex
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetSocketGem:
+  inputs:
+  - - name: index
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetSpellBookItem:
+  inputs:
+  - - name: slot
+      type: number
+    - name: spellBookType
+      type: string
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetSpellByID:
+  inputs:
+  - - name: spellID
+      type: number
+    - name: isPet
+      nilable: true
+      type: boolean
+    - name: showSubtext
+      nilable: true
+      type: boolean
+    - name: dontOverride
+      nilable: true
+      type: boolean
+    - name: difficultyID
+      nilable: true
+      type: number
+    - name: isLink
+      nilable: true
+      type: boolean
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetTalent:
+  inputs:
+  - - name: talentID
+      type: number
+    - name: isInspect
+      nilable: true
+      type: boolean
+    - name: groupIndex
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetTotem:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetToyByItemID:
+  inputs:
+  - - name: itemID
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetTradePlayerItem:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetTradeTargetItem:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetTrainerService:
+  inputs:
+  - - name: serviceIndex
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetTraitEntry:
+  inputs:
+  - - name: entryID
+      type: number
+    - name: rank
+      nilable: true
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetTransmogrifyItem:
+  inputs:
+  - - mixin: TransmogLocationMixin
+      name: transmogLocation
+      type: TransmogLocation
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetUnit:
+  inputs:
+  - - name: unit
+      type: string
+    - name: hideStatus
+      nilable: true
+      type: boolean
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetUnitAura:
+  inputs:
+  - - name: unitToken
+      type: string
+    - name: index
+      type: number
+    - name: filter
+      nilable: true
+      type: string
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetUnitBuff:
+  inputs:
+  - - name: unitToken
+      type: string
+    - name: index
+      type: number
+    - name: filter
+      nilable: true
+      type: string
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetUnitBuffByAuraInstanceID:
+  inputs:
+  - - name: unitTokenString
+      type: string
+    - name: auraInstanceID
+      type: number
+    - name: filter
+      nilable: true
+      type: string
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetUnitDebuff:
+  inputs:
+  - - name: unitToken
+      type: string
+    - name: index
+      type: number
+    - name: filter
+      nilable: true
+      type: string
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetUnitDebuffByAuraInstanceID:
+  inputs:
+  - - name: unitTokenString
+      type: string
+    - name: auraInstanceID
+      type: number
+    - name: filter
+      nilable: true
+      type: string
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetUpgradeItem:
+  inputs:
+  - {}
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetVoidDepositItem:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetVoidItem:
+  inputs:
+  - - name: tab
+      type: number
+    - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetVoidWithdrawalItem:
+  inputs:
+  - - name: slot
+      type: number
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetWeeklyReward:
+  inputs:
+  - - name: itemDBID
+      type: string
+  outputs:
+  - name: data
+    type: TooltipData
+C_TooltipInfo.GetWorldCursor:
+  inputs:
+  - {}
+  outputs:
+  - name: data
+    type: TooltipData
 C_ToyBox.ForceToyRefilter:
   inputs:
   - {}

@@ -7052,6 +7052,40 @@ SpecPerkInfo:
     type: boolean
   perkID:
     type: number
+TooltipData:
+  args:
+    type:
+      arrayof: TooltipDataArg
+  lines:
+    type:
+      arrayof: TooltipDataLine
+TooltipDataArg:
+  boolVal:
+    nilable: true
+    type: boolean
+  colorVal:
+    nilable: true
+    type:
+      mixin: ColorMixin
+      structure: Color
+  field:
+    type: string
+  floatVal:
+    nilable: true
+    type: number
+  guidVal:
+    nilable: true
+    type: string
+  intVal:
+    nilable: true
+    type: number
+  stringVal:
+    nilable: true
+    type: string
+TooltipDataLine:
+  args:
+    type:
+      arrayof: TooltipDataArg
 TradeSkillRecipeInfo:
   abilityAllVerb:
     nilable: true
