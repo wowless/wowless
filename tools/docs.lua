@@ -108,11 +108,22 @@ local types = {
   table = 'table',
 }
 local tys = {}
-for name in pairs(tabs) do
-  tys[name] = true
+for name, tab in pairs(tabs) do
+  tys[name] = tab.Type
 end
 for k in pairs(require('wowapi.data').structures[product]) do
-  tys[k] = true
+  if tys[k] and tys[k] ~= 'Structure' then
+    error(('%s is a wowless structure but is a %s in docs'):format(k, tys[k]))
+  else
+    tys[k] = 'Structure'
+  end
+end
+for k in pairs(enum) do
+  if tys[k] and tys[k] ~= 'Enumeration' then
+    error(('%s is a wowless enum but is a %s in docs'):format(k, tys[k]))
+  else
+    tys[k] = 'Enumeration'
+  end
 end
 local knownMixinStructs = {
   ColorMixin = 'Color',
@@ -122,30 +133,22 @@ local knownMixinStructs = {
   Vector3DMixin = 'Vector3D',
 }
 local function t2ty(t, ns, mixin)
-  if enum[t] then
-    return 'number'
-  elseif t == 'table' then
-    return mixin and knownMixinStructs[mixin] or t
+  if t == 'table' and mixin then
+    return knownMixinStructs[mixin], true
   elseif types[t] then
     return types[t]
-  elseif ns and tys[ns .. '.' .. t] then
-    local n = ns .. '.' .. t
-    local b = tabs[n]
-    if b then
-      if b.Type == 'Structure' then
-        return n
-      elseif b.Type == 'CallbackType' then
-        return 'function'
-      elseif b.Type == 'Enumeration' then
-        return 'number'
-      end
-    end
-    error('confused by ' .. n)
-  elseif tys[t] then
-    return t
+  end
+  local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
+  local ty = tys[n]
+  assert(ty, 'wtf ' .. n)
+  if ty == 'Enumeration' or ty == 'Constants' then
+    return 'number'
+  elseif ty == 'Structure' then
+    return n, true
+  elseif ty == 'CallbackType' then
+    return 'function'
   else
-    print('unknown type ' .. t)
-    return 'unknown'
+    error(('%s has unexpected type %s'):format(n, ty))
   end
 end
 
@@ -276,8 +279,8 @@ local rewriters = {
                 if arg.InnerType then
                   return { arrayof = t2ty(arg.InnerType, ns) }
                 end
-                local ty = t2ty(arg.Type, ns, arg.Mixin)
-                if ty ~= 'boolean' and ty ~= 'number' and ty ~= 'string' and ty ~= 'table' then
+                local ty, isstruct = t2ty(arg.Type, ns, arg.Mixin)
+                if isstruct then
                   return { mixin = arg.Mixin, structure = ty }
                 else
                   return ty
@@ -319,8 +322,8 @@ local rewriters = {
                 if field.InnerType then
                   return { arrayof = t2ty(field.InnerType, ns) }
                 end
-                local ty = t2ty(field.Type, ns, field.Mixin)
-                if ty ~= 'boolean' and ty ~= 'number' and ty ~= 'string' and ty ~= 'table' then
+                local ty, isstruct = t2ty(field.Type, ns, field.Mixin)
+                if isstruct then
                   return { mixin = field.Mixin, structure = ty }
                 else
                   return ty

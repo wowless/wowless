@@ -1611,8 +1611,7 @@ C_CovenantSanctumUI.CovenantSanctumRenownRewardInfo:
     type: number
 C_CraftingOrders.CraftingOrderRequestInfo:
   callback:
-    type:
-      structure: CraftingOrderRequestCallback
+    type: function
   forCrafter:
     type: boolean
   initialNonPublicSearch:
@@ -1637,8 +1636,7 @@ C_CraftingOrders.CraftingOrderRequestInfo:
     type: number
 C_CraftingOrders.CraftingOrderRequestMyOrdersInfo:
   callback:
-    type:
-      structure: CraftingOrderRequestMyOrdersCallback
+    type: function
   offset:
     type: number
   primarySort:
@@ -6689,8 +6687,6 @@ CraftingOrderReagentInfo:
     type: number
   source:
     type: number
-CraftingOrderRequestCallback: {}
-CraftingOrderRequestMyOrdersCallback: {}
 CraftingOrderSortInfo:
   reversed:
     type: boolean
