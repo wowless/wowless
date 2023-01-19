@@ -19251,14 +19251,6 @@ CreateFrame:
   impl: CreateFrame
 CreateMacro: {}
 CreateNewRaidProfile: {}
-CursorCanGoInSlot:
-  inputs:
-  - - name: slot
-      nilable: true
-      type: number
-  outputs:
-  - name: value
-    type: boolean
 CursorHasItem: {}
 CursorHasMacro: {}
 CursorHasMoney: {}
