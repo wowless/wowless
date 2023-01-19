@@ -4,6 +4,7 @@ local args = (function()
   parser:argument('product', 'product to process')
   parser:argument('type', 'type to write'):choices(allTypes)
   parser:argument('filter', 'name filter'):default('')
+  parser:option('--new', 'add missing objects')
   return parser:parse()
 end)()
 
@@ -11,6 +12,10 @@ local lfs = require('lfs')
 local writeFile = require('pl.file').write
 local pprintYaml = require('wowapi.yaml').pprint
 local product = args.product
+
+local function enabled(t, k)
+  return k:sub(1, #args.filter) == args.filter and (args.new or t[k])
+end
 
 local docs = {}
 do
@@ -220,7 +225,7 @@ local rewriters = {
     local f = 'data/products/' .. product .. '/apis.yaml'
     local apis = y.parseFile(f)
     for name, fn in pairs(funcs) do
-      if name:sub(1, #args.filter) == args.filter and not skip(apis[name]) then
+      if enabled(apis, name) and not skip(apis[name]) then
         local dotpos = name:find('%.')
         local ns = dotpos and name:sub(1, dotpos - 1)
         apis[name] = {
@@ -374,7 +379,7 @@ local rewriters = {
     local filename = ('data/products/%s/structures.yaml'):format(product)
     local out = require('wowapi.yaml').parseFile(filename)
     for name, tab in pairs(tabs) do
-      if tab.Type == 'Structure' and name:sub(1, #args.filter) == args.filter then
+      if tab.Type == 'Structure' and enabled(out, name) then
         for k in pairs(tab) do
           assert(expectedStructureKeys[k], ('unexpected structure key %q in %q'):format(k, name))
         end
