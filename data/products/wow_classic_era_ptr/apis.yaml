@@ -10343,7 +10343,12 @@ GetText:
   outputs:
   - name: text
     type: string
-GetTickTime: {}
+GetTickTime:
+  inputs:
+  - {}
+  outputs:
+  - name: elapsed
+    type: number
 GetTime:
   impl: GetTime
   outputs:

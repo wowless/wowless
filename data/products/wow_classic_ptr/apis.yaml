@@ -11522,7 +11522,12 @@ GetThreatStatusColor:
     type: number
   - name: b
     type: number
-GetTickTime: {}
+GetTickTime:
+  inputs:
+  - {}
+  outputs:
+  - name: elapsed
+    type: number
 GetTime:
   impl: GetTime
   outputs:
