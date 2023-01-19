@@ -46,6 +46,7 @@ do
       return setmetatable({}, nummt)
     end,
   }
+  local schema = require('wowapi.yaml').parseFile('data/schemas/docs.yaml').type
   local function processDocDir(docdir)
     if lfs.attributes(docdir) then
       for f in lfs.dir(docdir) do
@@ -53,7 +54,8 @@ do
           local success, err = pcall(setfenv(loadfile(docdir .. '/' .. f), {
             APIDocumentation = {
               AddDocumentationTable = function(_, t)
-                docs[f] = docs[f] or t
+                require('wowapi.schema').validate(product, schema, t)
+                docs[f] = t
               end,
             },
             Constants = setmetatable({}, nsmt),
@@ -82,24 +84,8 @@ do
   end
 end
 
-local expectedTopLevelFields = {
-  Events = true,
-  Functions = true,
-  Name = true,
-  Namespace = true,
-  Tables = true,
-  Type = true,
-}
-local expectedTypes = {
-  ScriptObject = true,
-  System = true,
-}
 local tabs, funcs, events = {}, {}, {}
-for f, t in pairs(docs) do
-  for k in pairs(t) do
-    assert(expectedTopLevelFields[k], ('unexpected field %q in %q'):format(k, f))
-  end
-  assert(not t.Type or expectedTypes[t.Type], 'unexpected type in ' .. f)
+for _, t in pairs(docs) do
   if not t.Type or t.Type == 'System' and t.Namespace ~= 'C_ConfigurationWarnings' then
     for _, tab in ipairs(t.Tables or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. tab.Name
@@ -167,21 +153,9 @@ end
 
 local rewriters = {
   apis = function()
-    local expectedArgumentKeys = {
-      Default = true,
-      Documentation = true,
-      InnerType = true,
-      Mixin = true,
-      Name = true,
-      Nilable = true,
-      Type = true,
-    }
     local function insig(fn, ns)
       local t = {}
       for _, a in ipairs(fn.Arguments or {}) do
-        for k in pairs(a) do
-          assert(expectedArgumentKeys[k], ('invalid argument key %q in %q'):format(k, fn.Name))
-        end
         table.insert(t, {
           default = a.Default,
           innerType = a.InnerType and t2ty(a.InnerType, ns),
@@ -193,22 +167,9 @@ local rewriters = {
       end
       return t
     end
-    local expectedReturnKeys = {
-      Default = true,
-      Documentation = true,
-      InnerType = true,
-      Mixin = true,
-      Name = true,
-      Nilable = true,
-      StrideIndex = true,
-      Type = true,
-    }
     local function outsig(fn, ns)
       local outputs = {}
       for _, r in ipairs(fn.Returns or {}) do
-        for k in pairs(r) do
-          assert(expectedReturnKeys[k], ('unexpected key %q'):format(k))
-        end
         table.insert(outputs, {
           default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
           innerType = r.InnerType and t2ty(r.InnerType, ns),
@@ -279,14 +240,8 @@ local rewriters = {
     for _, v in pairs(tabs) do
       if v.Type == 'Enumeration' then
         local vt = {}
-        assert(type(v.MinValue) == 'number')
-        assert(type(v.MaxValue) == 'number')
-        assert(type(v.NumValues) == 'number')
-        assert(type(v.Fields) == 'table')
         for _, fv in ipairs(v.Fields) do
-          assert(type(fv.Name) == 'string', 'missing name for field of ' .. v.Name)
           assert(fv.Type == v.Name, 'wrong type for ' .. v.Name .. '.' .. fv.Name)
-          assert(type(fv.EnumValue) == 'number')
           vt[fv.Name] = fv.EnumValue
         end
         t[v.Name] = vt
@@ -307,40 +262,15 @@ local rewriters = {
   end,
 
   events = function()
-    local expectedEventKeys = {
-      Documentation = true,
-      Name = true,
-      LiteralName = true,
-      Payload = true,
-      Type = true,
-    }
-    local expectedEventPayloadKeys = {
-      Default = true,
-      Documentation = true,
-      InnerType = true,
-      Mixin = true,
-      Name = true,
-      Nilable = true,
-      StrideIndex = true,
-      Type = true,
-    }
     local filename = ('data/products/%s/events.yaml'):format(product)
     local out = require('wowapi.yaml').parseFile(filename)
     for name, ev in pairs(events) do
-      for k in pairs(ev) do
-        assert(expectedEventKeys[k], ('unexpected event key %q in %q'):format(k, name))
-      end
-      assert(ev.Type == 'Event')
-      assert(ev.LiteralName ~= nil)
       local dotpos = name:find('%.')
       local ns = dotpos and name:sub(1, dotpos - 1)
       local value = {
         payload = (function()
           local t = {}
           for _, arg in ipairs(ev.Payload or {}) do
-            for k in pairs(arg) do
-              assert(expectedEventPayloadKeys[k], ('unexpected field key %q in %q'):format(k, name))
-            end
             table.insert(t, {
               name = arg.Name,
               nilable = arg.Nilable or nil,
@@ -371,21 +301,6 @@ local rewriters = {
   end,
 
   structures = function()
-    local expectedStructureKeys = {
-      Name = true,
-      Type = true,
-      Fields = true,
-      Documentation = true,
-    }
-    local expectedStructureFieldKeys = {
-      Name = true,
-      Nilable = true,
-      Type = true,
-      InnerType = true,
-      Mixin = true,
-      Documentation = true,
-      Default = true,
-    }
     local stubs = {
       FramePoint = 'CENTER',
     }
@@ -393,17 +308,11 @@ local rewriters = {
     local out = require('wowapi.yaml').parseFile(filename)
     for name, tab in pairs(tabs) do
       if tab.Type == 'Structure' and enabled(out, name) then
-        for k in pairs(tab) do
-          assert(expectedStructureKeys[k], ('unexpected structure key %q in %q'):format(k, name))
-        end
         local dotpos = name:find('%.')
         local ns = dotpos and name:sub(1, dotpos - 1)
         out[name] = (function()
           local ret = {}
           for _, field in ipairs(tab.Fields) do
-            for k in pairs(field) do
-              assert(expectedStructureFieldKeys[k], ('unexpected field key %q in %q'):format(k, name))
-            end
             ret[field.Name] = {
               default = field.Default,
               nilable = field.Nilable or nil,
