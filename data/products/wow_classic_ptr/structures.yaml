@@ -2100,6 +2100,7 @@ ItemLocation:
   slotIndex:
     nilable: true
     type: number
+PlayerLocation: {}
 QueueSpecificInfo:
   activityID:
     nilable: true
@@ -2131,6 +2132,7 @@ QueueSpecificInfo:
   teamSize:
     nilable: true
     type: number
+ReportInfo: {}
 Vector2D:
   x:
     type: number

@@ -128,13 +128,17 @@ end
 local knownMixinStructs = {
   ColorMixin = 'Color',
   ItemLocationMixin = 'ItemLocation',
+  ItemTransmogInfoMixin = 'ItemTransmogInfo',
+  PlayerLocationMixin = 'PlayerLocation',
+  ReportInfoMixin = 'ReportInfo',
   TransmogLocationMixin = 'TransmogLocation',
+  TransmogPendingInfoMixin = 'TransmogPendingInfo',
   Vector2DMixin = 'Vector2D',
   Vector3DMixin = 'Vector3D',
 }
 local function t2ty(t, ns, mixin)
   if t == 'table' and mixin then
-    return knownMixinStructs[mixin], true
+    return assert(knownMixinStructs[mixin], 'no struct for mixin ' .. mixin), true
   elseif types[t] then
     return types[t]
   end

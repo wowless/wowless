@@ -6519,6 +6519,7 @@ ItemLocation:
   slotIndex:
     nilable: true
     type: number
+ItemTransmogInfo: {}
 MythicPlusAffixScoreInfo:
   durationSec:
     type: number
@@ -6541,6 +6542,7 @@ MythicPlusRatingLinkInfo:
     type: number
   name:
     type: string
+PlayerLocation: {}
 ProfessionInfo:
   expansionName:
     type: string
@@ -6608,6 +6610,7 @@ QueueSpecificInfo:
   teamSize:
     nilable: true
     type: number
+ReportInfo: {}
 RuneforgeItemPreviewInfo:
   itemGUID:
     type: string
@@ -6782,6 +6785,7 @@ TransmogLocation:
     type: number
   type:
     type: number
+TransmogPendingInfo: {}
 UnitAuraUpdateInfo:
   addedAuras:
     nilable: true
