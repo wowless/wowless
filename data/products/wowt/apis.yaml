@@ -15154,7 +15154,12 @@ C_TradeSkillUI.GetRecipeInfo:
     type: TradeSkillRecipeInfo
 C_TradeSkillUI.GetRecipeItemLevelFilter: {}
 C_TradeSkillUI.GetRecipeItemLink: {}
-C_TradeSkillUI.GetRecipeItemNameFilter: {}
+C_TradeSkillUI.GetRecipeItemNameFilter:
+  inputs:
+  - {}
+  outputs:
+  - name: filter
+    type: string
 C_TradeSkillUI.GetRecipeLink: {}
 C_TradeSkillUI.GetRecipeOutputItemData:
   inputs:
