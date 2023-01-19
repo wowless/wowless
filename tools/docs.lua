@@ -387,7 +387,7 @@ local rewriters = {
                   return { arrayof = t2ty(field.InnerType, ns) }
                 end
                 local ty = t2ty(field.Type, ns, field.Mixin)
-                if ty ~= 'boolean' and ty ~= 'number' and ty ~= 'string' then
+                if ty ~= 'boolean' and ty ~= 'number' and ty ~= 'string' and ty ~= 'table' then
                   return { mixin = field.Mixin, structure = ty }
                 else
                   return ty

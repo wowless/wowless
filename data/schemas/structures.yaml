@@ -22,6 +22,7 @@ type:
                 - literal: boolean
                 - literal: number
                 - literal: string
+                - literal: table
                 - record:
                     mixin:
                       type: string

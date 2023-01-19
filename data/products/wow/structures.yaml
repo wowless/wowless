@@ -3023,6 +3023,88 @@ C_LossOfControl.LossOfControlData:
   timeRemaining:
     nilable: true
     type: number
+C_MajorFactions.MajorFactionData:
+  bountySetID:
+    type: number
+  celebrationSoundKit:
+    type: number
+  expansionID:
+    type: number
+  factionID:
+    type: number
+  isUnlocked:
+    type: boolean
+  name:
+    type: string
+  renownFanfareSoundKitID:
+    type: number
+  renownLevel:
+    type: number
+  renownLevelThreshold:
+    type: number
+  renownReputationEarned:
+    type: number
+  textureKit:
+    type: string
+  unlockDescription:
+    nilable: true
+    type: string
+  unlockOrder:
+    type: number
+C_MajorFactions.MajorFactionFeatureAbilityInfo:
+  featureAbilityType:
+    type: number
+  uiOrder:
+    type: number
+C_MajorFactions.MajorFactionRenownLevelInfo:
+  factionID:
+    type: number
+  isCapstone:
+    type: boolean
+  isMilestone:
+    type: boolean
+  level:
+    type: number
+  locked:
+    type: boolean
+C_MajorFactions.MajorFactionRenownRewardInfo:
+  description:
+    nilable: true
+    type: string
+  icon:
+    nilable: true
+    type: number
+  itemID:
+    nilable: true
+    type: number
+  mountID:
+    nilable: true
+    type: number
+  name:
+    nilable: true
+    type: string
+  renownRewardID:
+    type: number
+  spellID:
+    nilable: true
+    type: number
+  titleMaskID:
+    nilable: true
+    type: number
+  toastDescription:
+    nilable: true
+    type: string
+  transmogID:
+    nilable: true
+    type: number
+  transmogIllusionSourceID:
+    nilable: true
+    type: number
+  transmogSetID:
+    nilable: true
+    type: number
+  uiOrder:
+    type: number
 C_Map.MapBannerInfo:
   areaPoiID:
     type: number
@@ -4502,6 +4584,15 @@ C_Texture.AtlasInfo:
   topTexCoord:
     type: number
   width:
+    type: number
+C_TooltipComparison.TooltipItemComparisonInfo:
+  additionalItems:
+    type:
+      arrayof: table
+  item:
+    type: table
+  method:
+    default: Single
     type: number
 C_Traits.TraitCondInfo:
   achievementID:
