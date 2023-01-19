@@ -76,31 +76,29 @@ do
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
 end
 
-local enum = {}
-do
-  local globals = require('wowapi.yaml').parseFile('data/products/' .. product .. '/globals.yaml')
-  for en, em in pairs(globals.Enum) do
-    enum[en] = enum[en] or em
-  end
-end
+local enum = require('wowapi.yaml').parseFile('data/products/' .. product .. '/globals.yaml').Enum
 
 local tabs, funcs, events = {}, {}, {}
 for _, t in pairs(docs) do
   if not t.Type or t.Type == 'System' and t.Namespace ~= 'C_ConfigurationWarnings' then
     for _, tab in ipairs(t.Tables or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. tab.Name
-      tabs[name] = tabs[name] or tab
+      assert(not tabs[name])
+      tabs[name] = tab
     end
     for _, func in ipairs(t.Functions or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. func.Name
-      funcs[name] = funcs[name] or func
+      assert(not funcs[name])
+      funcs[name] = func
     end
     for _, event in ipairs(t.Events or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. event.Name
-      events[name] = events[name] or event
+      assert(not events[name])
+      events[name] = event
     end
   end
 end
+
 local types = {
   bool = 'boolean',
   FramePoint = 'string', -- hack, yes
