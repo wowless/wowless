@@ -8931,7 +8931,7 @@ C_Item.GetAppliedItemTransmogInfo:
   - mixin: ItemTransmogInfoMixin
     name: info
     nilable: true
-    type: table
+    type: ItemTransmogInfo
 C_Item.GetBaseItemTransmogInfo:
   inputs:
   - - mixin: ItemLocationMixin
@@ -8941,7 +8941,7 @@ C_Item.GetBaseItemTransmogInfo:
   - mixin: ItemTransmogInfoMixin
     name: info
     nilable: true
-    type: table
+    type: ItemTransmogInfo
 C_Item.GetCurrentItemLevel:
   inputs:
   - - mixin: ItemLocationMixin
@@ -8960,7 +8960,7 @@ C_Item.GetCurrentItemTransmogInfo:
   - mixin: ItemTransmogInfoMixin
     name: info
     nilable: true
-    type: table
+    type: ItemTransmogInfo
 C_Item.GetItemConversionOutputIcon:
   inputs:
   - - mixin: ItemLocationMixin
@@ -12394,7 +12394,7 @@ C_PlayerInfo.GetClass:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: className
     nilable: true
@@ -12449,7 +12449,7 @@ C_PlayerInfo.GetName:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: name
     nilable: true
@@ -12471,7 +12471,7 @@ C_PlayerInfo.GetRace:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: raceID
     nilable: true
@@ -12480,7 +12480,7 @@ C_PlayerInfo.GetSex:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: sex
     nilable: true
@@ -12504,7 +12504,7 @@ C_PlayerInfo.IsConnected:
   - - mixin: PlayerLocationMixin
       name: playerLocation
       nilable: true
-      type: table
+      type: PlayerLocation
   outputs:
   - name: isConnected
     nilable: true
@@ -12554,7 +12554,7 @@ C_PlayerInfo.UnitIsSameServer:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: unitIsSameServer
     type: boolean
@@ -12627,7 +12627,7 @@ C_PlayerMentorship.GetMentorshipStatus:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: status
     type: number
@@ -14318,7 +14318,7 @@ C_ReportSystem.CanReportPlayer:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: canReport
     type: boolean
@@ -14326,7 +14326,7 @@ C_ReportSystem.CanReportPlayerForLanguage:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: canReport
     type: boolean
@@ -14374,11 +14374,11 @@ C_ReportSystem.SendReport:
   inputs:
   - - mixin: ReportInfoMixin
       name: reportInfo
-      type: table
+      type: ReportInfo
     - mixin: PlayerLocationMixin
       name: playerLocation
       nilable: true
-      type: table
+      type: PlayerLocation
   outputs: {}
 C_Reputation.GetFactionParagonInfo:
   inputs:
@@ -17782,7 +17782,7 @@ C_Transmog.GetPending:
   outputs:
   - mixin: TransmogPendingInfoMixin
     name: pendingInfo
-    type: table
+    type: TransmogPendingInfo
 C_Transmog.GetSlotEffectiveCategory:
   inputs:
   - - mixin: TransmogLocationMixin
@@ -17881,7 +17881,7 @@ C_Transmog.SetPending:
       type: TransmogLocation
     - mixin: TransmogPendingInfoMixin
       name: pendingInfo
-      type: table
+      type: TransmogPendingInfo
   outputs: {}
 C_TransmogCollection.AccountCanCollectSource:
   inputs:
@@ -19454,7 +19454,7 @@ C_VoiceChat.GetMemberVolume:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: volume
     nilable: true
@@ -19554,7 +19554,7 @@ C_VoiceChat.IsMemberMuted:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: mutedForMe
     nilable: true
@@ -19602,7 +19602,7 @@ C_VoiceChat.IsPlayerUsingVoice:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: isUsingVoice
     type: boolean
@@ -19702,7 +19702,7 @@ C_VoiceChat.SetMemberMuted:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
     - name: muted
       type: boolean
   outputs: {}
@@ -19710,7 +19710,7 @@ C_VoiceChat.SetMemberVolume:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
     - name: volume
       type: number
   outputs: {}
@@ -19785,7 +19785,7 @@ C_VoiceChat.ToggleMemberMuted:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs: {}
 C_VoiceChat.ToggleMuted:
   inputs:

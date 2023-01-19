@@ -996,6 +996,69 @@ C_BarberShop.ZoomCamera:
   - - name: zoomAmount
       type: number
   outputs: {}
+C_BattleNet.GetAccountInfoByGUID:
+  inputs:
+  - - name: guid
+      type: string
+  outputs:
+  - name: accountInfo
+    nilable: true
+    type: C_BattleNet.BNetAccountInfo
+C_BattleNet.GetAccountInfoByID:
+  inputs:
+  - - name: id
+      type: number
+    - name: wowAccountGUID
+      nilable: true
+      type: string
+  outputs:
+  - name: accountInfo
+    nilable: true
+    type: C_BattleNet.BNetAccountInfo
+C_BattleNet.GetFriendAccountInfo:
+  inputs:
+  - - name: friendIndex
+      type: number
+    - name: wowAccountGUID
+      nilable: true
+      type: string
+  outputs:
+  - name: accountInfo
+    nilable: true
+    type: C_BattleNet.BNetAccountInfo
+C_BattleNet.GetFriendGameAccountInfo:
+  inputs:
+  - - name: friendIndex
+      type: number
+    - name: accountIndex
+      type: number
+  outputs:
+  - name: gameAccountInfo
+    nilable: true
+    type: C_BattleNet.BNetGameAccountInfo
+C_BattleNet.GetFriendNumGameAccounts:
+  inputs:
+  - - name: friendIndex
+      type: number
+  outputs:
+  - name: numGameAccounts
+    type: number
+C_BattleNet.GetGameAccountInfoByGUID:
+  inputs:
+  - - name: guid
+      type: string
+  outputs:
+  - name: gameAccountInfo
+    nilable: true
+    type: C_BattleNet.BNetGameAccountInfo
+C_BattleNet.GetGameAccountInfoByID:
+  inputs:
+  - - name: id
+      type: number
+  outputs:
+  - name: gameAccountInfo
+    nilable: true
+    type: C_BattleNet.BNetGameAccountInfo
 C_BehavioralMessaging.SendNotificationReceipt:
   inputs:
   - - name: dbId
@@ -1627,7 +1690,7 @@ C_ChatInfo.CanReportPlayer:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: canReport
     type: boolean
@@ -4096,6 +4159,17 @@ C_EquipmentSet.UseEquipmentSet:
   outputs:
   - name: setWasEquipped
     type: boolean
+C_EventUtils.IsEventValid:
+  inputs:
+  - - name: eventName
+      type: string
+  outputs:
+  - name: valid
+    type: boolean
+C_EventUtils.NotifySettingsLoaded:
+  inputs:
+  - {}
+  outputs: {}
 C_FriendList.AddFriend:
   inputs:
   - - name: name
@@ -5160,6 +5234,12 @@ C_LossOfControl.GetActiveLossOfControlDataCountByUnit:
   outputs:
   - name: count
     type: number
+C_Macro.GetNumIcons:
+  inputs:
+  - {}
+  outputs:
+  - name: numIcons
+    type: number
 C_Mail.HasInboxMoney:
   inputs:
   - - name: inboxIndex
@@ -5700,7 +5780,7 @@ C_PlayerInfo.GetClass:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: className
     nilable: true
@@ -5715,7 +5795,7 @@ C_PlayerInfo.GetName:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: name
     nilable: true
@@ -5724,7 +5804,7 @@ C_PlayerInfo.GetRace:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: raceID
     nilable: true
@@ -5733,7 +5813,7 @@ C_PlayerInfo.GetSex:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: sex
     nilable: true
@@ -5757,7 +5837,7 @@ C_PlayerInfo.IsConnected:
   - - mixin: PlayerLocationMixin
       name: playerLocation
       nilable: true
-      type: table
+      type: PlayerLocation
   outputs:
   - name: isConnected
     nilable: true
@@ -5772,7 +5852,7 @@ C_PlayerInfo.UnitIsSameServer:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: unitIsSameServer
     type: boolean
@@ -6093,7 +6173,7 @@ C_ReportSystem.CanReportPlayer:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: canReport
     type: boolean
@@ -6101,7 +6181,7 @@ C_ReportSystem.CanReportPlayerForLanguage:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: canReport
     type: boolean
@@ -6149,11 +6229,11 @@ C_ReportSystem.SendReport:
   inputs:
   - - mixin: ReportInfoMixin
       name: reportInfo
-      type: table
+      type: ReportInfo
     - mixin: PlayerLocationMixin
       name: playerLocation
       nilable: true
-      type: table
+      type: PlayerLocation
   outputs: {}
 C_Reputation.GetFactionParagonInfo:
   inputs:
@@ -6317,6 +6397,28 @@ C_SocialRestrictions.SetChatDisabled:
   - - name: disabled
       type: boolean
   outputs: {}
+C_Sound.GetSoundScaledVolume:
+  inputs:
+  - - name: soundHandle
+      type: number
+  outputs:
+  - name: scaledVolume
+    type: number
+C_Sound.IsPlaying:
+  inputs:
+  - - name: soundHandle
+      type: number
+  outputs:
+  - name: isPlaying
+    type: boolean
+C_Sound.PlayItemSound:
+  inputs:
+  - - name: soundType
+      type: number
+    - mixin: ItemLocationMixin
+      name: itemLocation
+      type: ItemLocation
+  outputs: {}
 C_Spell.DoesSpellExist:
   inputs:
   - - name: spellID
@@ -6467,6 +6569,13 @@ C_System.GetFrameStack:
   - innerType: table
     name: objects
     type: table
+C_SystemVisibilityManager.IsSystemVisible:
+  inputs:
+  - - name: system
+      type: number
+  outputs:
+  - name: visible
+    type: boolean
 C_TaskQuest.DoesMapShowTaskQuestObjectives:
   inputs:
   - - name: uiMapID
@@ -6648,6 +6757,293 @@ C_ToyBoxInfo.NeedsFanfare:
   outputs:
   - name: needsFanfare
     type: boolean
+C_Traits.CanPurchaseRank:
+  inputs:
+  - - name: configID
+      type: number
+    - name: nodeID
+      type: number
+    - name: nodeEntryID
+      type: number
+  outputs:
+  - name: canPurchase
+    type: boolean
+C_Traits.CanRefundRank:
+  inputs:
+  - - name: configID
+      type: number
+    - name: nodeID
+      type: number
+  outputs:
+  - name: canRefund
+    type: boolean
+C_Traits.CascadeRepurchaseRanks:
+  inputs:
+  - - name: configID
+      type: number
+    - name: nodeID
+      type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Traits.ClearCascadeRepurchaseHistory:
+  inputs:
+  - - name: configID
+      type: number
+  outputs: {}
+C_Traits.CloseTraitSystemInteraction:
+  inputs:
+  - {}
+  outputs: {}
+C_Traits.CommitConfig:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Traits.ConfigHasStagedChanges:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: hasChanges
+    type: boolean
+C_Traits.GetConditionInfo:
+  inputs:
+  - - name: configID
+      type: number
+    - name: condID
+      type: number
+  outputs:
+  - name: condInfo
+    type: C_Traits.TraitCondInfo
+C_Traits.GetConfigIDBySystemID:
+  inputs:
+  - - name: systemID
+      type: number
+  outputs:
+  - name: configID
+    type: number
+C_Traits.GetConfigIDByTreeID:
+  inputs:
+  - - name: treeID
+      type: number
+  outputs:
+  - name: configID
+    type: number
+C_Traits.GetConfigInfo:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: configInfo
+    type: C_Traits.TraitConfigInfo
+C_Traits.GetConfigsByType:
+  inputs:
+  - - name: configType
+      type: number
+  outputs:
+  - innerType: number
+    name: configIDs
+    type: table
+C_Traits.GetDefinitionInfo:
+  inputs:
+  - - name: definitionID
+      type: number
+  outputs:
+  - name: definitionInfo
+    type: C_Traits.TraitDefinitionInfo
+C_Traits.GetEntryInfo:
+  inputs:
+  - - name: configID
+      type: number
+    - name: entryID
+      type: number
+  outputs:
+  - name: entryInfo
+    type: C_Traits.TraitEntryInfo
+C_Traits.GetLoadoutSerializationVersion:
+  inputs:
+  - {}
+  outputs:
+  - name: serializationVersion
+    type: number
+C_Traits.GetNodeCost:
+  inputs:
+  - - name: configID
+      type: number
+    - name: nodeID
+      type: number
+  outputs:
+  - innerType: C_Traits.TraitCurrencyCost
+    name: costs
+    type: table
+C_Traits.GetNodeInfo:
+  inputs:
+  - - name: configID
+      type: number
+    - name: nodeID
+      type: number
+  outputs:
+  - name: nodeInfo
+    type: C_Traits.TraitNodeInfo
+C_Traits.GetStagedChangesCost:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - innerType: C_Traits.TraitCurrencyCost
+    name: costs
+    type: table
+C_Traits.GetStagedPurchases:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - innerType: number
+    name: nodeIDsWithPurchases
+    type: table
+C_Traits.GetTraitCurrencyInfo:
+  inputs:
+  - - name: traitCurrencyID
+      type: number
+  outputs:
+  - name: flags
+    type: number
+  - name: type
+    type: number
+  - name: currencyTypesID
+    nilable: true
+    type: number
+  - name: icon
+    nilable: true
+    type: number
+C_Traits.GetTraitDescription:
+  inputs:
+  - - name: entryID
+      type: number
+    - name: rank
+      type: number
+  outputs:
+  - name: description
+    type: string
+C_Traits.GetTraitSystemWidgetSetID:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: uiWidgetSetID
+    type: number
+C_Traits.GetTreeCurrencyInfo:
+  inputs:
+  - - name: configID
+      type: number
+    - name: treeID
+      type: number
+    - name: excludeStagedChanges
+      type: boolean
+  outputs:
+  - innerType: C_Traits.TreeCurrencyInfo
+    name: treeCurrencyInfo
+    type: table
+C_Traits.GetTreeHash:
+  inputs:
+  - - name: treeID
+      type: number
+  outputs:
+  - innerType: number
+    name: result
+    type: table
+C_Traits.GetTreeInfo:
+  inputs:
+  - - name: configID
+      type: number
+    - name: treeID
+      type: number
+  outputs:
+  - name: treeInfo
+    type: C_Traits.TraitTreeInfo
+C_Traits.GetTreeNodes:
+  inputs:
+  - - name: treeID
+      type: number
+  outputs:
+  - innerType: number
+    name: nodeIDs
+    type: table
+C_Traits.HasValidInspectData:
+  inputs:
+  - {}
+  outputs:
+  - name: hasValidInspectData
+    type: boolean
+C_Traits.PurchaseRank:
+  inputs:
+  - - name: configID
+      type: number
+    - name: nodeID
+      type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Traits.RefundAllRanks:
+  inputs:
+  - - name: configID
+      type: number
+    - name: nodeID
+      type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Traits.RefundRank:
+  inputs:
+  - - name: configID
+      type: number
+    - name: nodeID
+      type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Traits.ResetTree:
+  inputs:
+  - - name: configID
+      type: number
+    - name: treeID
+      type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Traits.RollbackConfig:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Traits.SetSelection:
+  inputs:
+  - - name: configID
+      type: number
+    - name: nodeID
+      type: number
+    - name: nodeEntryID
+      nilable: true
+      type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Traits.StageConfig:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Traits.TalentTestUnlearnSpells:
+  inputs:
+  - {}
+  outputs: {}
 C_TTSSettings.GetChannelEnabled:
   inputs:
   - - name: channelInfo
@@ -7185,7 +7581,7 @@ C_VoiceChat.GetMemberVolume:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: volume
     nilable: true
@@ -7285,7 +7681,7 @@ C_VoiceChat.IsMemberMuted:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: mutedForMe
     nilable: true
@@ -7333,7 +7729,7 @@ C_VoiceChat.IsPlayerUsingVoice:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs:
   - name: isUsingVoice
     type: boolean
@@ -7433,7 +7829,7 @@ C_VoiceChat.SetMemberMuted:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
     - name: muted
       type: boolean
   outputs: {}
@@ -7441,7 +7837,7 @@ C_VoiceChat.SetMemberVolume:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
     - name: volume
       type: number
   outputs: {}
@@ -7516,7 +7912,7 @@ C_VoiceChat.ToggleMemberMuted:
   inputs:
   - - mixin: PlayerLocationMixin
       name: playerLocation
-      type: table
+      type: PlayerLocation
   outputs: {}
 C_VoiceChat.ToggleMuted:
   inputs:

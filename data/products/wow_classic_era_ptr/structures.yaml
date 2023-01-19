@@ -1684,6 +1684,7 @@ ItemLocation:
   slotIndex:
     nilable: true
     type: number
+PlayerLocation: {}
 QueueSpecificInfo:
   activityID:
     nilable: true

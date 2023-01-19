@@ -102,6 +102,96 @@ C_BarberShop.BarberShopRaceData:
     type: string
   name:
     type: string
+C_BattleNet.BNetAccountInfo:
+  accountName:
+    type: string
+  appearOffline:
+    type: boolean
+  battleTag:
+    type: string
+  bnetAccountID:
+    type: number
+  customMessage:
+    type: string
+  customMessageTime:
+    type: number
+  gameAccountInfo:
+    type:
+      structure: C_BattleNet.BNetGameAccountInfo
+  isAFK:
+    type: boolean
+  isBattleTagFriend:
+    type: boolean
+  isDND:
+    type: boolean
+  isFavorite:
+    type: boolean
+  isFriend:
+    type: boolean
+  lastOnlineTime:
+    type: number
+  note:
+    type: string
+  rafLinkType:
+    type: number
+C_BattleNet.BNetGameAccountInfo:
+  areaName:
+    nilable: true
+    type: string
+  canSummon:
+    type: boolean
+  characterLevel:
+    nilable: true
+    type: number
+  characterName:
+    nilable: true
+    type: string
+  className:
+    nilable: true
+    type: string
+  clientProgram:
+    type: string
+  factionName:
+    nilable: true
+    type: string
+  gameAccountID:
+    nilable: true
+    type: number
+  hasFocus:
+    type: boolean
+  isGameAFK:
+    type: boolean
+  isGameBusy:
+    type: boolean
+  isInCurrentRegion:
+    type: boolean
+  isOnline:
+    type: boolean
+  isWowMobile:
+    type: boolean
+  playerGuid:
+    nilable: true
+    type: string
+  raceName:
+    nilable: true
+    type: string
+  realmDisplayName:
+    nilable: true
+    type: string
+  realmID:
+    nilable: true
+    type: number
+  realmName:
+    nilable: true
+    type: string
+  regionID:
+    type: number
+  richPresence:
+    nilable: true
+    type: string
+  wowProjectID:
+    nilable: true
+    type: number
 C_Calendar.CalendarDayEvent:
   calendarType:
     stub: SYSTEM
@@ -1587,6 +1677,39 @@ C_Texture.AtlasInfo:
     type: number
   width:
     type: number
+C_Traits.TraitCondInfo:
+  achievementID:
+    nilable: true
+    type: number
+  condID:
+    type: number
+  isAlwaysMet:
+    type: boolean
+  isGate:
+    type: boolean
+  isMet:
+    type: boolean
+  playerLevel:
+    nilable: true
+    type: number
+  questID:
+    nilable: true
+    type: number
+  ranksGranted:
+    nilable: true
+    type: number
+  specSetID:
+    nilable: true
+    type: number
+  spentAmountRequired:
+    nilable: true
+    type: number
+  tooltipFormat:
+    nilable: true
+    type: string
+  traitCurrencyID:
+    nilable: true
+    type: number
 C_Traits.TraitConfigInfo:
   ID:
     type: number
@@ -1599,6 +1722,112 @@ C_Traits.TraitConfigInfo:
     type: number
   usesSharedActionBars:
     type: boolean
+C_Traits.TraitCurrencyCost:
+  amount:
+    type: number
+  ID:
+    type: number
+C_Traits.TraitDefinitionInfo:
+  overriddenSpellID:
+    nilable: true
+    type: number
+  overrideDescription:
+    nilable: true
+    type: string
+  overrideIcon:
+    nilable: true
+    type: number
+  overrideName:
+    nilable: true
+    type: string
+  overrideSubtext:
+    nilable: true
+    type: string
+  spellID:
+    nilable: true
+    type: number
+  subType:
+    nilable: true
+    type: number
+C_Traits.TraitEntryInfo:
+  conditionIDs:
+    type:
+      arrayof: number
+  definitionID:
+    type: number
+  isAvailable:
+    type: boolean
+  maxRanks:
+    type: number
+  type:
+    type: number
+C_Traits.TraitEntryRankInfo:
+  entryID:
+    type: number
+  rank:
+    type: number
+C_Traits.TraitGateInfo:
+  conditionID:
+    type: number
+  topLeftNodeID:
+    type: number
+C_Traits.TraitNodeInfo:
+  activeEntry:
+    nilable: true
+    type:
+      structure: C_Traits.TraitEntryRankInfo
+  activeRank:
+    type: number
+  canPurchaseRank:
+    type: boolean
+  canRefundRank:
+    type: boolean
+  cascadeRepurchaseEntryID:
+    nilable: true
+    type: number
+  conditionIDs:
+    type:
+      arrayof: number
+  currentRank:
+    type: number
+  entryIDs:
+    type:
+      arrayof: number
+  entryIDsWithCommittedRanks:
+    type:
+      arrayof: number
+  flags:
+    type: number
+  groupIDs:
+    type:
+      arrayof: number
+  ID:
+    type: number
+  isAvailable:
+    type: boolean
+  isCascadeRepurchasable:
+    type: boolean
+  isVisible:
+    type: boolean
+  maxRanks:
+    type: number
+  meetsEdgeRequirements:
+    type: boolean
+  nextEntry:
+    nilable: true
+    type:
+      structure: C_Traits.TraitEntryRankInfo
+  posX:
+    type: number
+  posY:
+    type: number
+  ranksPurchased:
+    type: number
+  type:
+    type: number
+  visibleEdges:
+    type:
+      arrayof: C_Traits.TraitOutEdgeInfo
 C_Traits.TraitNodeInfoPartial:
   activeRank:
     nilable: true
@@ -1626,6 +1855,33 @@ C_Traits.TraitNodeInfoPartial:
     type: boolean
   ranksPurchased:
     nilable: true
+    type: number
+C_Traits.TraitOutEdgeInfo:
+  isActive:
+    type: boolean
+  targetNode:
+    type: number
+  type:
+    type: number
+  visualStyle:
+    type: number
+C_Traits.TraitTreeInfo:
+  gates:
+    type:
+      arrayof: C_Traits.TraitGateInfo
+  hideSingleRankNumbers:
+    type: boolean
+  ID:
+    type: number
+C_Traits.TreeCurrencyInfo:
+  maxQuantity:
+    nilable: true
+    type: number
+  quantity:
+    type: number
+  spent:
+    type: number
+  traitCurrencyID:
     type: number
 C_UIColor.DBColorExport:
   baseTag:
@@ -2100,6 +2356,7 @@ ItemLocation:
   slotIndex:
     nilable: true
     type: number
+PlayerLocation: {}
 QueueSpecificInfo:
   activityID:
     nilable: true
@@ -2131,6 +2388,7 @@ QueueSpecificInfo:
   teamSize:
     nilable: true
     type: number
+ReportInfo: {}
 Vector2D:
   x:
     type: number
