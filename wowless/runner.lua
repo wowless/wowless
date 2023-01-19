@@ -116,6 +116,7 @@ local function run(cfg)
         INSTANCE_LOCK_WARNING = true,
         MAIL_INBOX_UPDATE = true, -- InboxFrame.openMailID not set when it should be
         OPEN_MASTER_LOOT_LIST = true,
+        PERKS_PROGRAM_OPEN = true, -- temporarily disable while iterating on wowt
         PLAYER_LOGIN = true,
         PLAYER_LOGOUT = true,
         STORE_GUILD_MASTER_INFO_RECEIVED = true, -- SelectedRealm shenanigans

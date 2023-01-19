@@ -70,9 +70,15 @@ Actor:
       status: unimplemented
     Hide:
       status: unimplemented
+    IsGeoReady:
+      status: unimplemented
     IsLoaded:
       status: unimplemented
     IsShown:
+      status: unimplemented
+    IsSlotAllowed:
+      status: unimplemented
+    IsSlotVisible:
       status: unimplemented
     IsUsingCenterForOrigin:
       status: unimplemented
@@ -753,6 +759,12 @@ DressUpModel:
       status: unimplemented
     GetUseTransmogSkin:
       status: unimplemented
+    IsGeoReady:
+      status: unimplemented
+    IsSlotAllowed:
+      status: unimplemented
+    IsSlotVisible:
+      status: unimplemented
     SetAutoDress:
       status: unimplemented
     SetItemTransmogInfo:
@@ -1428,13 +1440,7 @@ GameTooltip:
       status: unimplemented
     AddLine:
       status: unimplemented
-    AddSpellByID:
-      status: unimplemented
     AddTexture:
-      status: unimplemented
-    AddTraitEntry:
-      status: unimplemented
-    AdvanceSecondaryCompareItem:
       status: unimplemented
     AppendText:
       status: unimplemented
@@ -1448,11 +1454,7 @@ GameTooltip:
       fields:
       - name: tooltipAnchorType
       status: getter
-    GetAzeritePowerID:
-      status: unimplemented
     GetCustomLineSpacing:
-      status: unimplemented
-    GetItem:
       status: unimplemented
     GetMinimumWidth:
       outputs:
@@ -1464,205 +1466,31 @@ GameTooltip:
       status: getter
     GetPadding:
       status: unimplemented
-    GetSpell:
-      status: unimplemented
-    GetUnit:
-      status: unimplemented
-    IsEquippedItem:
-      status: unimplemented
     IsOwned:
       status: implemented
-    IsUnit:
-      status: unimplemented
     NumLines:
       fields:
       - name: tooltipLines
       status: getter
-    ResetSecondaryCompareItem:
-      status: unimplemented
-    SetAchievementByID:
-      status: unimplemented
-    SetAction:
-      status: unimplemented
     SetAllowShowWithNoLines:
       status: unimplemented
     SetAnchorType:
       status: unimplemented
-    SetArtifactItem:
-      status: unimplemented
-    SetArtifactPowerByID:
-      status: unimplemented
-    SetAzeriteEssence:
-      status: unimplemented
-    SetAzeriteEssenceSlot:
-      status: unimplemented
-    SetAzeritePower:
-      status: unimplemented
-    SetBackpackToken:
-      status: unimplemented
-    SetBagItem:
-      status: unimplemented
-    SetBagItemChild:
-      status: unimplemented
-    SetBuybackItem:
-      status: unimplemented
-    SetCompanionPet:
-      status: unimplemented
-    SetCompareAzeritePower:
-      status: unimplemented
-    SetCompareItem:
-      status: unimplemented
-    SetConduit:
-      status: unimplemented
-    SetCurrencyByID:
-      status: unimplemented
-    SetCurrencyToken:
-      status: unimplemented
-    SetCurrencyTokenByID:
-      status: unimplemented
     SetCustomLineSpacing:
-      status: unimplemented
-    SetEnhancedConduit:
-      status: unimplemented
-    SetEquipmentSet:
-      status: unimplemented
-    SetExistingSocketGem:
       status: unimplemented
     SetFrameStack:
       status: unimplemented
-    SetGuildBankItem:
-      status: unimplemented
-    SetHeirloomByItemID:
-      status: unimplemented
-    SetHyperlink:
-      status: unimplemented
-    SetInboxItem:
-      status: unimplemented
-    SetInstanceLockEncountersComplete:
-      status: unimplemented
-    SetInventoryItem:
-      status: unimplemented
-    SetInventoryItemByID:
-      status: unimplemented
-    SetItemByGUID:
-      status: unimplemented
-    SetItemByID:
-      status: unimplemented
-    SetItemByIDWithQuality:
-      status: unimplemented
-    SetItemKey:
-      status: unimplemented
-    SetLFGDungeonReward:
-      status: unimplemented
-    SetLFGDungeonShortageReward:
-      status: unimplemented
-    SetLootCurrency:
-      status: unimplemented
-    SetLootItem:
-      status: unimplemented
-    SetLootRollItem:
-      status: unimplemented
-    SetMerchantCostItem:
-      status: unimplemented
-    SetMerchantItem:
-      status: unimplemented
     SetMinimumWidth:
       status: unimplemented
-    SetMountBySpellID:
-      status: unimplemented
-    SetOwnedItemByID:
+    SetObjectTooltipPosition:
       status: unimplemented
     SetOwner:
       status: implemented
     SetPadding:
       status: unimplemented
-    SetPetAction:
-      status: unimplemented
-    SetPossession:
-      status: unimplemented
-    SetPvpBrawl:
-      status: unimplemented
-    SetPvpTalent:
-      status: unimplemented
-    SetQualityReagentSlotItemByID:
-      status: unimplemented
-    SetQuestCurrency:
-      status: unimplemented
-    SetQuestItem:
-      status: unimplemented
-    SetQuestLogCurrency:
-      status: unimplemented
-    SetQuestLogItem:
-      status: unimplemented
-    SetQuestLogRewardSpell:
-      status: unimplemented
-    SetQuestLogSpecialItem:
-      status: unimplemented
-    SetQuestPartyProgress:
-      status: unimplemented
-    SetQuestRewardSpell:
-      status: unimplemented
-    SetRecipeRankInfo:
-      status: unimplemented
-    SetRecipeReagentItem:
-      status: unimplemented
-    SetRuneforgeResultItem:
-      status: unimplemented
-    SetSendMailItem:
-      status: unimplemented
-    SetShapeshift:
-      status: unimplemented
     SetShrinkToFitWrapped:
       status: unimplemented
-    SetSocketedItem:
-      status: unimplemented
-    SetSocketedRelic:
-      status: unimplemented
-    SetSocketGem:
-      status: unimplemented
-    SetSpecialPvpBrawl:
-      status: unimplemented
-    SetSpellBookItem:
-      status: unimplemented
-    SetSpellByID:
-      status: unimplemented
-    SetTalent:
-      status: unimplemented
     SetText:
-      status: unimplemented
-    SetTotem:
-      status: unimplemented
-    SetToyByItemID:
-      status: unimplemented
-    SetTradePlayerItem:
-      status: unimplemented
-    SetTradeTargetItem:
-      status: unimplemented
-    SetTrainerService:
-      status: unimplemented
-    SetTransmogrifyItem:
-      status: unimplemented
-    SetUnit:
-      status: unimplemented
-    SetUnitAura:
-      status: unimplemented
-    SetUnitBuff:
-      status: unimplemented
-    SetUnitBuffByAuraInstanceID:
-      status: unimplemented
-    SetUnitDebuff:
-      status: unimplemented
-    SetUnitDebuffByAuraInstanceID:
-      status: unimplemented
-    SetUpgradeItem:
-      status: unimplemented
-    SetVoidDepositItem:
-      status: unimplemented
-    SetVoidItem:
-      status: unimplemented
-    SetVoidWithdrawalItem:
-      status: unimplemented
-    SetWeeklyReward:
       status: unimplemented
 LayeredRegion:
   fields:

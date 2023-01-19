@@ -133,6 +133,13 @@ C_AreaPoiInfo.AreaPOIInfo:
   description:
     nilable: true
     type: string
+  factionID:
+    nilable: true
+    type: number
+  isAlwaysOnFlightmap:
+    type: boolean
+  isPrimaryMapForPOI:
+    type: boolean
   name:
     type: string
   position:
@@ -482,23 +489,6 @@ C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
     type:
       mixin: ItemLocationMixin
       structure: ItemLocation
-C_BarberShop.BarberShopCharacterData:
-  raceData:
-    type:
-      structure: C_BarberShop.BarberShopRaceData
-  sex:
-    type: number
-C_BarberShop.BarberShopRaceData:
-  alternateFormRaceData:
-    nilable: true
-    type:
-      structure: CharacterAlternateFormData
-  createScreenIconAtlas:
-    type: string
-  fileName:
-    type: string
-  name:
-    type: string
 C_BattleNet.BNetAccountInfo:
   accountName:
     type: string
@@ -1379,6 +1369,65 @@ C_Console.ConsoleCommandInfo:
     type: string
   scriptParameters:
     type: string
+C_Container.ContainerItemInfo:
+  hasLoot:
+    type: boolean
+  hasNoValue:
+    type: boolean
+  hyperlink:
+    type: string
+  iconFileID:
+    type: number
+  isBound:
+    type: boolean
+  isFiltered:
+    type: boolean
+  isLocked:
+    type: boolean
+  isReadable:
+    type: boolean
+  itemID:
+    type: number
+  quality:
+    nilable: true
+    type: number
+  stackCount:
+    type: number
+C_Container.ItemPurchaseCurrency:
+  currencyCount:
+    type: number
+  iconFileID:
+    nilable: true
+    type: number
+  name:
+    type: string
+C_Container.ItemPurchaseInfo:
+  currencyCount:
+    type: number
+  hasEnchants:
+    type: boolean
+  itemCount:
+    type: number
+  money:
+    type: number
+  refundSeconds:
+    type: number
+C_Container.ItemPurchaseItem:
+  hyperlink:
+    type: string
+  iconFileID:
+    nilable: true
+    type: number
+  itemCount:
+    type: number
+C_Container.ItemQuestInfo:
+  isActive:
+    type: boolean
+  isQuestItem:
+    type: boolean
+  questID:
+    nilable: true
+    type: number
 C_ContributionCollector.ContributionAppearance:
   bannerAtlas:
     type: string
@@ -1543,6 +1592,42 @@ C_CovenantSanctumUI.CovenantSanctumRenownRewardInfo:
     type: number
   uiOrder:
     type: number
+C_CraftingOrders.CraftingOrderRequestInfo:
+  callback:
+    type: function
+  forCrafter:
+    type: boolean
+  initialNonPublicSearch:
+    type: boolean
+  offset:
+    type: number
+  orderType:
+    type: number
+  primarySort:
+    type:
+      structure: CraftingOrderSortInfo
+  profession:
+    nilable: true
+    type: number
+  searchFavorites:
+    type: boolean
+  secondarySort:
+    type:
+      structure: CraftingOrderSortInfo
+  selectedSkillLineAbility:
+    nilable: true
+    type: number
+C_CraftingOrders.CraftingOrderRequestMyOrdersInfo:
+  callback:
+    type: function
+  offset:
+    type: number
+  primarySort:
+    type:
+      structure: CraftingOrderSortInfo
+  secondarySort:
+    type:
+      structure: CraftingOrderSortInfo
 C_CreatureInfo.ClassInfo:
   classFile:
     type: string
@@ -1718,7 +1803,13 @@ C_EncounterJournal.EncounterJournalItemInfo:
   armorType:
     nilable: true
     type: string
+  displayAsExtremelyRare:
+    nilable: true
+    type: boolean
   displayAsPerPlayerLoot:
+    nilable: true
+    type: boolean
+  displayAsVeryRare:
     nilable: true
     type: boolean
   encounterID:
@@ -2401,6 +2492,20 @@ C_Garrison.MissionEncounterIconInfo:
     type: number
   portraitFileDataID:
     type: number
+C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo:
+  frameHeight:
+    type: number
+  frameWidth:
+    type: number
+  title:
+    nilable: true
+    type: string
+  uiTextureKit:
+    nilable: true
+    type: string
+  uiWidgetSetID:
+    nilable: true
+    type: number
 C_GossipInfo.FriendshipReputationInfo:
   friendshipFactionID:
     type: number
@@ -2584,6 +2689,9 @@ C_ItemInteraction.ItemInteractionFrameInfo:
     type: number
   openSoundKitID:
     type: number
+  slotTooltip:
+    nilable: true
+    type: string
   textureKit:
     type: string
   titleText:
@@ -2912,6 +3020,88 @@ C_LossOfControl.LossOfControlData:
   timeRemaining:
     nilable: true
     type: number
+C_MajorFactions.MajorFactionData:
+  bountySetID:
+    type: number
+  celebrationSoundKit:
+    type: number
+  expansionID:
+    type: number
+  factionID:
+    type: number
+  isUnlocked:
+    type: boolean
+  name:
+    type: string
+  renownFanfareSoundKitID:
+    type: number
+  renownLevel:
+    type: number
+  renownLevelThreshold:
+    type: number
+  renownReputationEarned:
+    type: number
+  textureKit:
+    type: string
+  unlockDescription:
+    nilable: true
+    type: string
+  unlockOrder:
+    type: number
+C_MajorFactions.MajorFactionFeatureAbilityInfo:
+  featureAbilityType:
+    type: number
+  uiOrder:
+    type: number
+C_MajorFactions.MajorFactionRenownLevelInfo:
+  factionID:
+    type: number
+  isCapstone:
+    type: boolean
+  isMilestone:
+    type: boolean
+  level:
+    type: number
+  locked:
+    type: boolean
+C_MajorFactions.MajorFactionRenownRewardInfo:
+  description:
+    nilable: true
+    type: string
+  icon:
+    nilable: true
+    type: number
+  itemID:
+    nilable: true
+    type: number
+  mountID:
+    nilable: true
+    type: number
+  name:
+    nilable: true
+    type: string
+  renownRewardID:
+    type: number
+  spellID:
+    nilable: true
+    type: number
+  titleMaskID:
+    nilable: true
+    type: number
+  toastDescription:
+    nilable: true
+    type: string
+  transmogID:
+    nilable: true
+    type: number
+  transmogIllusionSourceID:
+    nilable: true
+    type: number
+  transmogSetID:
+    nilable: true
+    type: number
+  uiOrder:
+    type: number
 C_Map.MapBannerInfo:
   areaPoiID:
     type: number
@@ -3166,6 +3356,120 @@ C_PartyPose.PartyPoseInfo:
     type: number
   widgetSetID:
     nilable: true
+    type: number
+C_PerksActivities.PerksActivitiesInfo:
+  activePerksMonth:
+    type: number
+  activities:
+    type:
+      arrayof: C_PerksActivities.PerksActivityInfo
+  displayMonthName:
+    type: string
+  thresholds:
+    type:
+      arrayof: C_PerksActivities.PerksActivityThresholdInfo
+C_PerksActivities.PerksActivitiesPending:
+  pendingIDs:
+    type:
+      arrayof: number
+C_PerksActivities.PerksActivitiesTracked:
+  trackedIDs:
+    type:
+      arrayof: number
+C_PerksActivities.PerksActivityInfo:
+  activityName:
+    type: string
+  completed:
+    type: boolean
+  description:
+    type: string
+  ID:
+    type: number
+  requirementsList:
+    type:
+      arrayof: C_PerksActivities.PerksActivityRequirement
+  tagNames:
+    type:
+      arrayof: string
+  thresholdContributionAmount:
+    type: number
+  tracked:
+    type: boolean
+C_PerksActivities.PerksActivityRequirement:
+  completed:
+    type: boolean
+  requirementText:
+    type: string
+C_PerksActivities.PerksActivityTags:
+  tagName:
+    type:
+      arrayof: string
+C_PerksActivities.PerksActivityThresholdInfo:
+  currencyAwardAmount:
+    type: number
+  itemReward:
+    nilable: true
+    type: number
+  pendingReward:
+    type: boolean
+  requiredContributionAmount:
+    type: number
+  thresholdID:
+    type: number
+C_PerksProgram.PerksProgramItemDisplayInfo:
+  overrideModelSceneID:
+    nilable: true
+    type: number
+C_PerksProgram.PerksProgramPendingChestRewards:
+  activityMonthID:
+    type: number
+  activityThresholdID:
+    type: number
+  monthRewarded:
+    nilable: true
+    type: string
+  perksVendorItemID:
+    nilable: true
+    type: number
+  rewardAmount:
+    type: number
+  rewardTypeID:
+    type: number
+C_PerksProgram.PerksVendorCategoryInfo:
+  defaultUIModelSceneID:
+    type: number
+  displayName:
+    type: string
+  ID:
+    type: number
+C_PerksProgram.PerksVendorItemInfo:
+  description:
+    type: string
+  iconTexture:
+    type: string
+  itemID:
+    type: number
+  itemModifiedAppearanceID:
+    type: number
+  mountID:
+    type: number
+  name:
+    type: string
+  perksVendorCategoryID:
+    type: number
+  perksVendorItemID:
+    type: number
+  price:
+    type: number
+  purchased:
+    type: boolean
+  refundable:
+    type: boolean
+  speciesID:
+    type: number
+  timeRemaining:
+    type: number
+  transmogSetID:
     type: number
 C_PetInfo.PetTamerMapInfo:
   areaPoiID:
@@ -3453,6 +3757,8 @@ C_PvP.PvpBrawlInfo:
     type: number
   canQueue:
     type: boolean
+  groupsAllowed:
+    type: boolean
   includesAllArenas:
     default: false
     type: boolean
@@ -3461,6 +3767,10 @@ C_PvP.PvpBrawlInfo:
   mapNames:
     type:
       arrayof: string
+  maxLevel:
+    type: number
+  minLevel:
+    type: number
   name:
     type: string
   shortDescription:
@@ -3518,6 +3828,16 @@ C_PvP.PVPPostMatchItemReward:
     type: number
   type:
     type: string
+C_PvP.PvpReadyCheckInfo:
+  numPlayersAccepted:
+    type: number
+  numPlayersDeclined:
+    type: number
+  roles:
+    type:
+      arrayof: C_PvP.PvpRoleQueueInfo
+  totalNumPlayers:
+    type: number
 C_PvP.PvpRoleQueueInfo:
   role:
     type: string
@@ -3628,6 +3948,13 @@ C_PvP.RandomBGInfo:
     type: number
   minLevel:
     type: number
+C_PvP.RatedMatchDeserterPenalty:
+  personalRatingChange:
+    type: number
+  queuePenaltyDuration:
+    type: number
+  queuePenaltySpellID:
+    type: number
 C_PvP.RatedSoloShuffleSpecStats:
   seasonMostPlayedSpecID:
     type: number
@@ -3706,6 +4033,8 @@ C_QuestLog.QuestInfo:
     type: number
   title:
     type: string
+  useMinimalHeader:
+    type: boolean
 C_QuestLog.QuestObjectiveInfo:
   finished:
     type: boolean
@@ -4211,6 +4540,30 @@ C_Soulbinds.SoulbindTree:
   nodes:
     type:
       arrayof: C_Soulbinds.SoulbindNode
+C_SpecializationInfo.PvpTalentInfo:
+  available:
+    type: boolean
+  dependenciesUnmet:
+    type: boolean
+  dependenciesUnmetReason:
+    nilable: true
+    type: string
+  grantedByAura:
+    type: boolean
+  icon:
+    type: number
+  known:
+    type: boolean
+  name:
+    type: string
+  selected:
+    type: boolean
+  spellID:
+    type: number
+  talentID:
+    type: number
+  unlocked:
+    type: boolean
 C_SpecializationInfo.PvpTalentSlotInfo:
   availableTalentIDs:
     type:
@@ -4358,6 +4711,15 @@ C_Texture.AtlasInfo:
     type: number
   width:
     type: number
+C_TooltipComparison.TooltipItemComparisonInfo:
+  additionalItems:
+    type:
+      arrayof: table
+  item:
+    type: table
+  method:
+    default: Single
+    type: number
 C_Traits.TraitCondInfo:
   achievementID:
     nilable: true
@@ -4425,6 +4787,9 @@ C_Traits.TraitDefinitionInfo:
     nilable: true
     type: string
   spellID:
+    nilable: true
+    type: number
+  subType:
     nilable: true
     type: number
 C_Traits.TraitEntryInfo:
@@ -5569,6 +5934,61 @@ C_UIWidgetManager.TextWithStateWidgetVisualizationInfo:
     type: number
   widgetTag:
     type: string
+C_UIWidgetManager.TextWithSubtextWidgetVisualizationInfo:
+  enabledState:
+    type: number
+  fontType:
+    type: number
+  frameTextureKit:
+    type: string
+  hAlign:
+    type: number
+  hasTimer:
+    type: boolean
+  inAnimType:
+    type: number
+  layoutDirection:
+    type: number
+  modelSceneLayer:
+    type: number
+  orderIndex:
+    type: number
+  outAnimType:
+    type: number
+  scriptedAnimationEffectID:
+    type: number
+  shownState:
+    type: number
+  spacing:
+    type: number
+  subText:
+    type: string
+  subTextEnabledState:
+    type: number
+  subTextFontType:
+    type: number
+  subTextHAlign:
+    type: number
+  subTextSizeType:
+    type: number
+  text:
+    type: string
+  textSizeType:
+    type: number
+  textureKit:
+    type: string
+  tooltip:
+    type: string
+  tooltipLoc:
+    type: number
+  widgetScale:
+    type: number
+  widgetSizeSetting:
+    type: number
+  widgetTag:
+    type: string
+  widgetWidth:
+    type: number
 C_UIWidgetManager.UIWidgetCurrencyInfo:
   iconFileID:
     type: number
@@ -5979,14 +6399,15 @@ CharCustomizationChoice:
     type: number
   ineligibleChoice:
     type: boolean
+  isLocked:
+    type: boolean
   isNew:
     type: boolean
-  lockedTooltip:
+  lockedText:
+    nilable: true
     type: string
   name:
     type: string
-  showLocked:
-    type: boolean
   swatchColor1:
     nilable: true
     type:
@@ -6053,17 +6474,22 @@ CorruptionEffectInfo:
   name:
     type: string
 CraftingCurrencyResultData:
-  associatedItemGUID:
-    type: string
   currencyID:
+    default: 0
+    type: number
+  firstCraftReward:
+    default: false
+    type: boolean
+  operationID:
     default: 0
     type: number
   quantity:
     default: 0
     type: number
+  showCurrencyText:
+    default: true
+    type: boolean
 CraftingItemResultData:
-  associatedItemGUID:
-    type: string
   bonusCraft:
     default: false
     type: boolean
@@ -6073,9 +6499,15 @@ CraftingItemResultData:
   critBonusSkill:
     default: 0
     type: number
+  firstCraftReward:
+    default: false
+    type: boolean
   hyperlink:
     type: string
   isCrit:
+    default: false
+    type: boolean
+  isEnchant:
     default: false
     type: boolean
   itemGUID:
@@ -6084,6 +6516,12 @@ CraftingItemResultData:
     default: 0
     type: number
   multicraft:
+    default: 0
+    type: number
+  operationID:
+    default: 0
+    type: number
+  qualityProgress:
     default: 0
     type: number
   quantity:
@@ -6131,6 +6569,8 @@ CraftingOperationInfo:
     type: number
   craftingQualityID:
     type: number
+  guaranteedCraftingQualityID:
+    type: number
   isQualityCraft:
     type: boolean
   lowerSkillThreshold:
@@ -6140,6 +6580,26 @@ CraftingOperationInfo:
   recipeID:
     type: number
   upperSkillTreshold:
+    type: number
+CraftingOrderBucketInfo:
+  itemID:
+    type: number
+  numAvailable:
+    type: number
+  skillLineAbilityID:
+    type: number
+  spellID:
+    type: number
+  tipAmountAvg:
+    type: number
+  tipAmountMax:
+    type: number
+CraftingOrderClaimsRemainingInfo:
+  claimsRemaining:
+    default: 0
+    type: number
+  hoursToRecharge:
+    nilable: true
     type: number
 CraftingOrderCustomerCategory:
   categoryID:
@@ -6167,6 +6627,14 @@ CraftingOrderCustomerCategoryFilters:
     nilable: true
     type: number
 CraftingOrderCustomerOptionInfo:
+  bindOnPickup:
+    type: boolean
+  canUse:
+    type: boolean
+  craftingQualityIDs:
+    nilable: true
+    type:
+      arrayof: number
   iLvl:
     type: number
   itemID:
@@ -6174,6 +6642,7 @@ CraftingOrderCustomerOptionInfo:
   itemName:
     type: string
   level:
+    nilable: true
     type: number
   primaryCategoryID:
     type: number
@@ -6182,6 +6651,10 @@ CraftingOrderCustomerOptionInfo:
   quality:
     nilable: true
     type: number
+  qualityIlvlBonuses:
+    nilable: true
+    type:
+      arrayof: number
   secondaryCategoryID:
     nilable: true
     type: number
@@ -6240,6 +6713,106 @@ CraftingOrderCustomerSearchResults:
   options:
     type:
       arrayof: CraftingOrderCustomerOptionInfo
+CraftingOrderInfo:
+  claimEndTime:
+    type: number
+  consortiumCut:
+    type: number
+  crafterGuid:
+    nilable: true
+    type: string
+  crafterName:
+    nilable: true
+    type: string
+  customerGuid:
+    nilable: true
+    type: string
+  customerName:
+    nilable: true
+    type: string
+  customerNotes:
+    type: string
+  expirationTime:
+    type: number
+  isFulfillable:
+    type: boolean
+  isRecraft:
+    type: boolean
+  itemID:
+    type: number
+  minQuality:
+    type: number
+  orderID:
+    type: number
+  orderState:
+    type: number
+  orderType:
+    type: number
+  outputItemGUID:
+    nilable: true
+    type: string
+  outputItemHyperlink:
+    nilable: true
+    type: string
+  reagents:
+    type:
+      arrayof: CraftingOrderReagentInfo
+  reagentState:
+    type: number
+  recraftItemHyperlink:
+    nilable: true
+    type: string
+  skillLineAbilityID:
+    type: number
+  spellID:
+    type: number
+  tipAmount:
+    type: number
+CraftingOrderMailInfo:
+  commissionPaid:
+    nilable: true
+    type: number
+  crafterGUID:
+    nilable: true
+    type: string
+  crafterName:
+    nilable: true
+    type: string
+  crafterNote:
+    nilable: true
+    type: string
+  customerGUID:
+    nilable: true
+    type: string
+  customerName:
+    nilable: true
+    type: string
+  reason:
+    type: number
+  recipeName:
+    type: string
+CraftingOrderPersonalOrdersInfo:
+  numPersonalOrders:
+    type: number
+  profession:
+    type: number
+  professionName:
+    type: string
+CraftingOrderReagentInfo:
+  isBasicReagent:
+    type: boolean
+  reagent:
+    type:
+      structure: CraftingReagentInfo
+  reagentSlot:
+    type: number
+  source:
+    type: number
+CraftingOrderSortInfo:
+  reversed:
+    type: boolean
+  sortType:
+    type: number
 CraftingReagent:
   currencyID:
     nilable: true
@@ -6268,6 +6841,9 @@ CraftingReagentSlotSchematic:
   dataSlotType:
     default: Reagent
     type: number
+  orderSource:
+    nilable: true
+    type: number
   quantityRequired:
     type: number
   reagents:
@@ -6290,10 +6866,15 @@ CraftingRecipeOutputInfo:
   itemID:
     nilable: true
     type: number
+CraftingRecipeRequirement:
+  met:
+    type: boolean
+  name:
+    type: string
+  type:
+    type: number
 CraftingRecipeSchematic:
   hasCraftingOperationInfo:
-    type: boolean
-  hasGatheringOperationInfo:
     type: boolean
   icon:
     type: number
@@ -6320,6 +6901,16 @@ CraftingRecipeSchematic:
     default: Item
     type: number
 CraftingResourceReturnInfo:
+  itemID:
+    type: number
+  quantity:
+    type: number
+CraftingTargetItem:
+  hyperlink:
+    nilable: true
+    type: string
+  itemGUID:
+    type: string
   itemID:
     type: number
   quantity:
@@ -6542,6 +7133,45 @@ MythicPlusRatingLinkInfo:
     type: number
   name:
     type: string
+NewCraftingOrderInfo:
+  craftingReagentItems:
+    type:
+      arrayof: CraftingReagentInfo
+  customerNotes:
+    type: string
+  minCraftingQualityID:
+    nilable: true
+    type: number
+  orderDuration:
+    type: number
+  orderTarget:
+    nilable: true
+    type: string
+  orderType:
+    type: number
+  reagentItems:
+    type:
+      arrayof: RegularReagentInfo
+  recraftItem:
+    nilable: true
+    type: string
+  skillLineAbilityID:
+    type: number
+  tipAmount:
+    type: number
+PlayerInfoCharacterData:
+  alternateFormRaceData:
+    nilable: true
+    type:
+      structure: CharacterAlternateFormData
+  createScreenIconAtlas:
+    type: string
+  fileName:
+    type: string
+  name:
+    type: string
+  sex:
+    type: number
 PlayerLocation: {}
 ProfessionInfo:
   expansionName:
@@ -6610,6 +7240,11 @@ QueueSpecificInfo:
   teamSize:
     nilable: true
     type: number
+RegularReagentInfo:
+  itemID:
+    type: number
+  quantity:
+    type: number
 ReportInfo: {}
 RuneforgeItemPreviewInfo:
   itemGUID:
@@ -6663,12 +7298,56 @@ RuneforgePower:
     type: string
   state:
     type: number
+SpecializationCurrencyInfo:
+  currencyName:
+    type: string
+  numAvailable:
+    type: number
 SpecializationTabInfo:
   enabled:
     default: true
     type: boolean
   errorReason:
     type: string
+SpecPerkInfo:
+  isMajorPerk:
+    type: boolean
+  perkID:
+    type: number
+TooltipData:
+  args:
+    type:
+      arrayof: TooltipDataArg
+  lines:
+    type:
+      arrayof: TooltipDataLine
+TooltipDataArg:
+  boolVal:
+    nilable: true
+    type: boolean
+  colorVal:
+    nilable: true
+    type:
+      mixin: ColorMixin
+      structure: Color
+  field:
+    type: string
+  floatVal:
+    nilable: true
+    type: number
+  guidVal:
+    nilable: true
+    type: string
+  intVal:
+    nilable: true
+    type: number
+  stringVal:
+    nilable: true
+    type: string
+TooltipDataLine:
+  args:
+    type:
+      arrayof: TooltipDataArg
 TradeSkillRecipeInfo:
   abilityAllVerb:
     nilable: true
@@ -6679,14 +7358,14 @@ TradeSkillRecipeInfo:
   alternateVerb:
     nilable: true
     type: string
+  canCreateMultiple:
+    default: true
+    type: boolean
   canSkillUp:
     type: boolean
   categoryID:
     type: number
   craftable:
-    default: true
-    type: boolean
-  createsItem:
     default: true
     type: boolean
   currentRecipeExperience:
@@ -6766,6 +7445,8 @@ TradeSkillRecipeInfo:
     type: number
   relativeDifficulty:
     nilable: true
+    type: number
+  skillLineAbilityID:
     type: number
   sourceType:
     nilable: true

@@ -1,9 +1,9 @@
 ---
-build: '46455'
-date: Nov  1 2022
+build: '47660'
+date: Jan 13 2023
 flavor: Mainline
-hash: a95aa8bedc067cfb77a0359d2727b901
+hash: 3a28abe1b3769a6bcef5971635849264
 ptr: true
 test: false
-tocversion: 100000
-version: 10.0.0
+tocversion: 100005
+version: 10.0.5

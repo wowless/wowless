@@ -408,6 +408,8 @@ AZERITE_ITEM_POWER_LEVEL_CHANGED:
   - name: unlockedEmpoweredItemsInfo
     type:
       arrayof: C_AzeriteItem.UnlockedAzeriteEmpoweredItems
+  - name: azeriteItemID
+    type: number
 BAG_CLOSED:
   payload:
   - name: bagID
@@ -3192,6 +3194,8 @@ CHAT_SERVER_DISCONNECTED:
     type: boolean
 CHAT_SERVER_RECONNECTED:
   payload: {}
+CHEST_REWARDS_UPDATED_FROM_SERVER:
+  payload: {}
 CINEMATIC_START:
   payload:
   - name: canBeCancelled
@@ -3624,17 +3628,77 @@ COVENANT_SANCTUM_RENOWN_LEVEL_CHANGED:
     type: number
 CRAFTING_DETAILS_UPDATE:
   payload: {}
+CRAFTING_HOUSE_DISABLED:
+  payload: {}
+CRAFTINGORDERS_CAN_REQUEST:
+  payload: {}
+CRAFTINGORDERS_CLAIM_ORDER_RESPONSE:
+  payload:
+  - name: result
+    type: number
+  - name: orderID
+    type: number
+CRAFTINGORDERS_CLAIMED_ORDER_ADDED:
+  payload: {}
+CRAFTINGORDERS_CLAIMED_ORDER_REMOVED:
+  payload: {}
+CRAFTINGORDERS_CLAIMED_ORDER_UPDATED:
+  payload:
+  - name: orderID
+    type: number
 CRAFTINGORDERS_CUSTOMER_FAVORITES_CHANGED:
   payload: {}
 CRAFTINGORDERS_CUSTOMER_OPTIONS_PARSED:
   payload: {}
+CRAFTINGORDERS_FULFILL_ORDER_RESPONSE:
+  payload:
+  - name: result
+    type: number
+  - name: orderID
+    type: number
 CRAFTINGORDERS_HIDE_CRAFTER:
   payload: {}
 CRAFTINGORDERS_HIDE_CUSTOMER:
   payload: {}
+CRAFTINGORDERS_ORDER_CANCEL_RESPONSE:
+  payload:
+  - name: result
+    type: number
+CRAFTINGORDERS_ORDER_PLACEMENT_RESPONSE:
+  payload:
+  - name: result
+    type: number
+CRAFTINGORDERS_REJECT_ORDER_RESPONSE:
+  payload:
+  - name: result
+    type: number
+  - name: orderID
+    type: number
+CRAFTINGORDERS_RELEASE_ORDER_RESPONSE:
+  payload:
+  - name: result
+    type: number
+  - name: orderID
+    type: number
 CRAFTINGORDERS_SHOW_CRAFTER:
   payload: {}
 CRAFTINGORDERS_SHOW_CUSTOMER:
+  payload: {}
+CRAFTINGORDERS_UNEXPECTED_ERROR:
+  payload: {}
+CRAFTINGORDERS_UPDATE_CUSTOMER_NAME:
+  payload:
+  - name: customerName
+    type: string
+  - name: orderID
+    type: number
+CRAFTINGORDERS_UPDATE_ORDER_COUNT:
+  payload:
+  - name: orderType
+    type: number
+  - name: numOrders
+    type: number
+CRAFTINGORDERS_UPDATE_PERSONAL_ORDER_COUNTS:
   payload: {}
 CRITERIA_COMPLETE:
   payload:
@@ -4169,6 +4233,11 @@ GENERIC_ERROR:
   payload:
   - name: errorMessage
     type: string
+GENERIC_WIDGET_DISPLAY_SHOW:
+  payload:
+  - name: info
+    type:
+      structure: C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo
 GET_ITEM_INFO_RECEIVED:
   payload:
   - name: itemID
@@ -4348,6 +4417,8 @@ HEIRLOOMS_UPDATED:
   - name: hideUntilLearned
     nilable: true
     type: boolean
+HIDE_HYPERLINK_TOOLTIP:
+  payload: {}
 HIDE_SUBTITLE:
   payload: {}
 HONOR_LEVEL_UPDATE:
@@ -5127,6 +5198,54 @@ PENDING_AZERITE_ESSENCE_CHANGED:
   - name: essenceID
     nilable: true
     type: number
+PERKS_ACTIVITIES_TRACKED_UPDATED:
+  payload:
+  - name: trackedPerksActivities
+    type:
+      structure: C_PerksActivities.PerksActivitiesTracked
+PERKS_ACTIVITIES_UPDATED:
+  payload:
+  - name: info
+    type:
+      structure: C_PerksActivities.PerksActivitiesInfo
+PERKS_ACTIVITY_COMPLETED:
+  payload:
+  - name: perksActivityID
+    type: number
+PERKS_PROGRAM_CLOSE:
+  payload: {}
+PERKS_PROGRAM_CURRENCY_AWARDED:
+  payload:
+  - name: value
+    type: number
+PERKS_PROGRAM_CURRENCY_REFRESH:
+  payload:
+  - name: oldValue
+    type: number
+  - name: newValue
+    type: number
+PERKS_PROGRAM_DATA_REFRESH:
+  payload: {}
+PERKS_PROGRAM_DATA_SPECIFIC_ITEM_REFRESH:
+  payload:
+  - name: vendorItemID
+    type: number
+PERKS_PROGRAM_DISABLED:
+  payload: {}
+PERKS_PROGRAM_OPEN:
+  payload: {}
+PERKS_PROGRAM_PURCHASE_SUCCESS:
+  payload:
+  - name: vendorItemID
+    type: number
+PERKS_PROGRAM_REFUND_SUCCESS:
+  payload:
+  - name: vendorItemID
+    type: number
+PERKS_PROGRAM_SET_FROZEN_ITEM:
+  payload:
+  - name: vendorItemID
+    type: number
 PET_ATTACK_START:
   payload: {}
 PET_ATTACK_STOP:
@@ -5354,6 +5473,10 @@ PLAYER_AVG_ITEM_LEVEL_UPDATE:
   payload: {}
 PLAYER_CAMPING:
   payload: {}
+PLAYER_CAN_GLIDE_CHANGED:
+  payload:
+  - name: canGlide
+    type: boolean
 PLAYER_CHOICE_CLOSE:
   payload: {}
 PLAYER_CHOICE_UPDATE:
@@ -5498,6 +5621,8 @@ PLAYER_SOFT_INTERACT_CHANGED:
     type: string
   - name: newTarget
     type: string
+PLAYER_SOFT_TARGET_INTERACTION:
+  payload: {}
 PLAYER_SPECIALIZATION_CHANGED:
   payload:
   - name: unitTarget
@@ -5567,6 +5692,8 @@ PROFESSION_EQUIPMENT_CHANGED:
   payload:
   - name: skillLineID
     type: number
+  - name: isTool
+    type: boolean
 PROVING_GROUNDS_SCORE_UPDATE:
   payload:
   - name: points
@@ -5591,16 +5718,16 @@ PVP_REWARDS_UPDATE:
   payload: {}
 PVP_ROLE_POPUP_HIDE:
   payload:
-  - name: roleQueueInfo
+  - name: readyCheckInfo
     type:
-      arrayof: C_PvP.PvpRoleQueueInfo
+      structure: C_PvP.PvpReadyCheckInfo
 PVP_ROLE_POPUP_JOINED_MATCH:
   payload: {}
 PVP_ROLE_POPUP_SHOW:
   payload:
-  - name: roleQueueInfo
+  - name: readyCheckInfo
     type:
-      arrayof: C_PvP.PvpRoleQueueInfo
+      structure: C_PvP.PvpReadyCheckInfo
 PVP_ROLE_UPDATE:
   payload: {}
 PVP_SPECIAL_EVENT_INFO_UPDATED:
@@ -5863,6 +5990,12 @@ REPLACE_ENCHANT:
     type: string
   - name: replacementStr
     type: string
+REPLACE_TRADESKILL_ENCHANT:
+  payload:
+  - name: existing
+    type: string
+  - name: replacement
+    type: string
 REPLICATE_ITEM_LIST_UPDATE:
   payload: {}
 REPORT_PLAYER_RESULT:
@@ -6055,6 +6188,10 @@ SHIPMENT_UPDATE:
     type: boolean
 SHOW_FACTION_SELECT_UI:
   payload: {}
+SHOW_HYPERLINK_TOOLTIP:
+  payload:
+  - name: hyperlink
+    type: string
 SHOW_LFG_EXPAND_SEARCH_PROMPT:
   payload: {}
 SHOW_LOOT_TOAST:
@@ -6372,6 +6509,10 @@ STOP_AUTOREPEAT_SPELL:
   payload: {}
 STOP_MOVIE:
   payload: {}
+STOP_TIMER_OF_TYPE:
+  payload:
+  - name: timerType
+    type: number
 STORE_BOOST_AUTO_CONSUMED:
   payload: {}
 STORE_CHARACTER_LIST_RECEIVED:
@@ -6432,6 +6573,8 @@ SYSMSG:
     type: number
   - name: b
     type: number
+SYSTEM_VISIBILITY_CHANGED:
+  payload: {}
 TABARD_CANSAVE_CHANGED:
   payload: {}
 TABARD_SAVE_PENDING:
@@ -6510,6 +6653,8 @@ TOKEN_SELL_RESULT:
   - name: result
     type: number
 TOKEN_STATUS_CHANGED:
+  payload: {}
+TOOLTIP_DATA_UPDATE:
   payload: {}
 TOYS_UPDATED:
   payload:
@@ -6609,6 +6754,8 @@ TRADE_SKILL_DATA_SOURCE_CHANGED:
 TRADE_SKILL_DATA_SOURCE_CHANGING:
   payload: {}
 TRADE_SKILL_DETAILS_UPDATE:
+  payload: {}
+TRADE_SKILL_FAVORITES_CHANGED:
   payload: {}
 TRADE_SKILL_ITEM_CRAFTED_RESULT:
   payload:
@@ -7272,7 +7419,9 @@ UPDATE_STEALTH:
 UPDATE_SUMMONPETS_ACTION:
   payload: {}
 UPDATE_TRADESKILL_CAST_COMPLETE:
-  payload: {}
+  payload:
+  - name: isScrapping
+    type: boolean
 UPDATE_TRADESKILL_RECAST:
   payload: {}
 UPDATE_UI_WIDGET:
@@ -7652,16 +7801,16 @@ WEAPON_ENCHANT_CHANGED:
   payload: {}
 WEAPON_SLOT_CHANGED:
   payload: {}
-WEAR_EQUIPMENT_SET:
-  payload:
-  - name: setID
-    type: number
 WEEKLY_REWARDS_ITEM_CHANGED:
   payload: {}
 WEEKLY_REWARDS_UPDATE:
   payload: {}
 WHO_LIST_UPDATE:
   payload: {}
+WORLD_CURSOR_TOOLTIP_UPDATE:
+  payload:
+  - name: anchorType
+    type: number
 WORLD_MAP_OPEN:
   payload:
   - name: uiMapID
