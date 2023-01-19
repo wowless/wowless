@@ -4,7 +4,7 @@ local args = (function()
   parser:argument('product', 'product to process')
   parser:argument('type', 'type to write'):choices(allTypes)
   parser:argument('filter', 'name filter'):default('')
-  parser:option('--new', 'add missing objects')
+  parser:flag('--new', 'add missing objects')
   return parser:parse()
 end)()
 
