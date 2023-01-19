@@ -324,11 +324,19 @@ local rewriters = {
               assert(expectedEventPayloadKeys[k], ('unexpected field key %q in %q'):format(k, name))
             end
             table.insert(t, {
-              innerType = arg.InnerType and t2ty(arg.InnerType, ns),
-              mixin = arg.Mixin,
               name = arg.Name,
               nilable = arg.Nilable or nil,
-              type = t2ty(arg.Type, ns, arg.Mixin),
+              type = (function()
+                if arg.InnerType then
+                  return { arrayof = t2ty(arg.InnerType, ns) }
+                end
+                local ty = t2ty(arg.Type, ns, arg.Mixin)
+                if ty ~= 'boolean' and ty ~= 'number' and ty ~= 'string' and ty ~= 'table' then
+                  return { mixin = arg.Mixin, structure = ty }
+                else
+                  return ty
+                end
+              end)(),
             })
           end
           return t

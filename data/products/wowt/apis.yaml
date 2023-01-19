@@ -1268,7 +1268,6 @@ C_AuctionHouse.GetBidInfo:
       type: number
   outputs:
   - name: bid
-    nilable: true
     type: C_AuctionHouse.BidInfo
 C_AuctionHouse.GetBids:
   inputs:
