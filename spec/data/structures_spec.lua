@@ -14,42 +14,48 @@ describe('structures', function()
   }
   for _, p in ipairs(require('wowless.util').productList()) do
     describe(p, function()
-      local function ref(refs, x)
+      local refs = {}
+      local function ref(x)
         if x and not nonStructs[x] then
           refs[x] = true
         end
       end
-      local function reflist(refs, xs)
+      local function reflist(xs)
         for _, x in ipairs(xs or {}) do
-          ref(refs, x.type)
-          ref(refs, x.innerType)
+          ref(x.type)
+          ref(x.innerType)
         end
       end
-      local expected = {}
       for _, api in pairs(parseYaml('data/products/' .. p .. '/apis.yaml')) do
         for _, il in ipairs(api.inputs or {}) do
-          reflist(expected, il)
+          reflist(il)
         end
-        reflist(expected, api.outputs)
+        reflist(api.outputs)
       end
       for _, v in pairs(parseYaml('data/products/' .. p .. '/events.yaml')) do
         for _, pv in ipairs(v.payload or {}) do
-          ref(expected, pv.type.structure)
-          ref(expected, pv.type.arrayof)
+          ref(pv.type.structure)
+          ref(pv.type.arrayof)
         end
       end
-      local actual = {}
-      for k, v in pairs(parseYaml('data/products/' .. p .. '/structures.yaml')) do
-        actual[k] = true
-        for _, fv in pairs(v) do
-          ref(expected, fv.type.structure)
-          ref(expected, fv.type.arrayof)
+      local actual = parseYaml('data/products/' .. p .. '/structures.yaml')
+      local expected = {}
+      local function close(k)
+        if k and not nonStructs[k] and not expected[k] then
+          expected[k] = true
+          for _, fv in pairs(actual[k] or {}) do
+            close(fv.type.structure)
+            close(fv.type.arrayof)
+          end
         end
+      end
+      for k in pairs(refs) do
+        close(k)
       end
       describe('exists', function()
         for k in pairs(expected) do
           it(k, function()
-            assert.True(actual[k])
+            assert.Not.Nil(actual[k])
           end)
         end
       end)
