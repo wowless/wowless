@@ -16645,7 +16645,7 @@ C_TradeSkillUI.GetProfessionInventorySlots:
   inputs:
   - {}
   outputs:
-  - innerType: unknown
+  - innerType: number
     name: invSlots
     type: table
 C_TradeSkillUI.GetProfessionNameForSkillLineAbility:

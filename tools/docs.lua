@@ -118,6 +118,7 @@ end
 local types = {
   bool = 'boolean',
   FramePoint = 'string', -- hack, yes
+  InventorySlots = 'number',
   number = 'number',
   string = 'string',
   table = 'table',

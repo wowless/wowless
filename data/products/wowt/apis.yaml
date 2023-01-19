@@ -1149,7 +1149,7 @@ C_AuctionHouse.CalculateItemDeposit:
   inputs:
   - - mixin: ItemLocationMixin
       name: item
-      type: table
+      type: ItemLocation
     - name: duration
       type: number
     - name: quantity
@@ -1193,7 +1193,7 @@ C_AuctionHouse.ConfirmPostCommodity:
   inputs:
   - - mixin: ItemLocationMixin
       name: item
-      type: table
+      type: ItemLocation
     - name: duration
       type: number
     - name: quantity
@@ -1205,7 +1205,7 @@ C_AuctionHouse.ConfirmPostItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: item
-      type: table
+      type: ItemLocation
     - name: duration
       type: number
     - name: quantity
@@ -1243,7 +1243,7 @@ C_AuctionHouse.GetAvailablePostCount:
   inputs:
   - - mixin: ItemLocationMixin
       name: item
-      type: table
+      type: ItemLocation
   outputs:
   - name: listCount
     type: number
@@ -1318,7 +1318,7 @@ C_AuctionHouse.GetItemCommodityStatus:
   inputs:
   - - mixin: ItemLocationMixin
       name: item
-      type: table
+      type: ItemLocation
   outputs:
   - name: isCommodity
     type: number
@@ -1326,7 +1326,7 @@ C_AuctionHouse.GetItemKeyFromItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: item
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemKey
     type: C_AuctionHouse.ItemKey
@@ -1635,7 +1635,7 @@ C_AuctionHouse.IsSellItemValid:
   inputs:
   - - mixin: ItemLocationMixin
       name: item
-      type: table
+      type: ItemLocation
     - default: true
       name: displayError
       type: boolean
@@ -1675,7 +1675,7 @@ C_AuctionHouse.PostCommodity:
   inputs:
   - - mixin: ItemLocationMixin
       name: item
-      type: table
+      type: ItemLocation
     - name: duration
       type: number
     - name: quantity
@@ -1689,7 +1689,7 @@ C_AuctionHouse.PostItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: item
-      type: table
+      type: ItemLocation
     - name: duration
       type: number
     - name: quantity
@@ -1836,7 +1836,7 @@ C_AzeriteEmpoweredItem.CanSelectPower:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
     - name: powerID
       type: number
   outputs:
@@ -1846,13 +1846,13 @@ C_AzeriteEmpoweredItem.ConfirmAzeriteEmpoweredItemRespec:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
   outputs: {}
 C_AzeriteEmpoweredItem.GetAllTierInfo:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - innerType: C_AzeriteEmpoweredItem.AzeriteEmpoweredItemTierInfo
     name: tierInfo
@@ -1885,7 +1885,7 @@ C_AzeriteEmpoweredItem.GetPowerText:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
     - name: powerID
       type: number
     - name: level
@@ -1905,7 +1905,7 @@ C_AzeriteEmpoweredItem.HasAnyUnselectedPowers:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: hasAnyUnselectedPowers
     type: boolean
@@ -1913,7 +1913,7 @@ C_AzeriteEmpoweredItem.HasBeenViewed:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: hasBeenViewed
     type: boolean
@@ -1921,7 +1921,7 @@ C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isAzeriteEmpoweredItem
     type: boolean
@@ -1961,7 +1961,7 @@ C_AzeriteEmpoweredItem.IsPowerSelected:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
     - name: powerID
       type: number
   outputs:
@@ -1971,7 +1971,7 @@ C_AzeriteEmpoweredItem.SelectPower:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
     - name: powerID
       type: number
   outputs:
@@ -1981,7 +1981,7 @@ C_AzeriteEmpoweredItem.SetHasBeenViewed:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
   outputs: {}
 C_AzeriteEssence.ActivateEssence:
   inputs:
@@ -2123,12 +2123,12 @@ C_AzeriteItem.FindActiveAzeriteItem:
   outputs:
   - mixin: ItemLocationMixin
     name: activeAzeriteItemLocation
-    type: table
+    type: ItemLocation
 C_AzeriteItem.GetAzeriteItemXPInfo:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: xp
     type: number
@@ -2138,7 +2138,7 @@ C_AzeriteItem.GetPowerLevel:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: powerLevel
     type: number
@@ -2146,7 +2146,7 @@ C_AzeriteItem.GetUnlimitedPowerLevel:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: powerLevel
     type: number
@@ -2160,7 +2160,7 @@ C_AzeriteItem.IsAzeriteItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isAzeriteItem
     type: boolean
@@ -2181,7 +2181,7 @@ C_AzeriteItem.IsAzeriteItemEnabled:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isEnabled
     type: boolean
@@ -3109,7 +3109,7 @@ C_ChallengeMode.CanUseKeystoneInCurrentMap:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: canUse
     type: boolean
@@ -5413,7 +5413,7 @@ C_Commentator.GetStartLocation:
   outputs:
   - mixin: Vector3DMixin
     name: pos
-    type: table
+    type: Vector3D
 C_Commentator.GetTeamColor:
   inputs:
   - - name: teamIndex
@@ -6441,7 +6441,7 @@ C_Cursor.GetCursorItem:
   outputs:
   - mixin: ItemLocationMixin
     name: item
-    type: table
+    type: ItemLocation
 C_CVar.GetCVar:
   frameworks:
   - datalua
@@ -8339,7 +8339,7 @@ C_Item.CanItemTransmogAppearance:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - name: canTransmog
     type: boolean
@@ -8349,7 +8349,7 @@ C_Item.CanScrapItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - name: canBeScrapped
     type: boolean
@@ -8357,7 +8357,7 @@ C_Item.CanViewItemPowers:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - name: isItemViewable
     type: boolean
@@ -8365,7 +8365,7 @@ C_Item.DoesItemExist:
   inputs:
   - - mixin: ItemLocationMixin
       name: emptiableItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemExists
     type: boolean
@@ -8383,7 +8383,7 @@ C_Item.DoesItemMatchBonusTreeReplacement:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - name: matchesBonusTree
     type: boolean
@@ -8391,7 +8391,7 @@ C_Item.GetAppliedItemTransmogInfo:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - mixin: ItemTransmogInfoMixin
     name: info
@@ -8401,7 +8401,7 @@ C_Item.GetBaseItemTransmogInfo:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - mixin: ItemTransmogInfoMixin
     name: info
@@ -8411,7 +8411,7 @@ C_Item.GetCurrentItemLevel:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: currentItemLevel
     nilable: true
@@ -8420,7 +8420,7 @@ C_Item.GetCurrentItemTransmogInfo:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - mixin: ItemTransmogInfoMixin
     name: info
@@ -8430,7 +8430,7 @@ C_Item.GetItemConversionOutputIcon:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - name: icon
     nilable: true
@@ -8439,7 +8439,7 @@ C_Item.GetItemGUID:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemGUID
     type: string
@@ -8447,7 +8447,7 @@ C_Item.GetItemIcon:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: icon
     nilable: true
@@ -8464,7 +8464,7 @@ C_Item.GetItemID:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemID
     type: number
@@ -8480,7 +8480,7 @@ C_Item.GetItemInventoryType:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: inventoryType
     nilable: true
@@ -8497,7 +8497,7 @@ C_Item.GetItemLink:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemLink
     nilable: true
@@ -8510,12 +8510,12 @@ C_Item.GetItemLocation:
   - mixin: ItemLocationMixin
     name: itemLocation
     nilable: true
-    type: table
+    type: ItemLocation
 C_Item.GetItemMaxStackSize:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: stackSize
     nilable: true
@@ -8532,7 +8532,7 @@ C_Item.GetItemName:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemName
     nilable: true
@@ -8549,7 +8549,7 @@ C_Item.GetItemQuality:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemQuality
     nilable: true
@@ -8597,7 +8597,7 @@ C_Item.GetStackCount:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: stackCount
     type: number
@@ -8612,7 +8612,7 @@ C_Item.IsBound:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isBound
     type: boolean
@@ -8627,7 +8627,7 @@ C_Item.IsItemConduit:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - name: isConduit
     type: boolean
@@ -8635,7 +8635,7 @@ C_Item.IsItemConvertibleAndValidForPlayer:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - name: isItemConvertibleAndValidForPlayer
     type: boolean
@@ -8643,7 +8643,7 @@ C_Item.IsItemCorrupted:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - name: isCorrupted
     type: boolean
@@ -8651,7 +8651,7 @@ C_Item.IsItemCorruptionRelated:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - name: isCorruptionRelated
     type: boolean
@@ -8659,7 +8659,7 @@ C_Item.IsItemCorruptionResistant:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLoc
-      type: table
+      type: ItemLocation
   outputs:
   - name: isCorruptionResistant
     type: boolean
@@ -8667,7 +8667,7 @@ C_Item.IsItemDataCached:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isCached
     type: boolean
@@ -8703,7 +8703,7 @@ C_Item.IsLocked:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isLocked
     type: boolean
@@ -8711,7 +8711,7 @@ C_Item.LockItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs: {}
 C_Item.LockItemByGUID:
   inputs:
@@ -8722,7 +8722,7 @@ C_Item.RequestLoadItemData:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs: {}
 C_Item.RequestLoadItemDataByID:
   inputs:
@@ -8733,7 +8733,7 @@ C_Item.UnlockItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs: {}
 C_Item.UnlockItemByGUID:
   inputs:
@@ -8758,7 +8758,7 @@ C_ItemInteraction.GetItemConversionCurrencyCost:
   inputs:
   - - mixin: ItemLocationMixin
       name: item
-      type: table
+      type: ItemLocation
   outputs:
   - name: conversionCost
     type: C_ItemInteraction.ConversionCurrencyCost
@@ -8804,7 +8804,7 @@ C_ItemInteraction.SetPendingItem:
   - - mixin: ItemLocationMixin
       name: item
       nilable: true
-      type: table
+      type: ItemLocation
   outputs:
   - name: success
     type: boolean
@@ -8816,7 +8816,7 @@ C_ItemUpgrade.CanUpgradeItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: baseItem
-      type: table
+      type: ItemLocation
   outputs:
   - name: isValid
     type: boolean
@@ -8883,7 +8883,7 @@ C_ItemUpgrade.SetItemUpgradeFromLocation:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemToSet
-      type: table
+      type: ItemLocation
   outputs: {}
 C_ItemUpgrade.UpgradeItem:
   inputs:
@@ -8920,7 +8920,7 @@ C_LegendaryCrafting.GetRuneforgeItemPreviewInfo:
   inputs:
   - - mixin: ItemLocationMixin
       name: baseItem
-      type: table
+      type: ItemLocation
     - name: runeforgePowerID
       nilable: true
       type: number
@@ -8936,7 +8936,7 @@ C_LegendaryCrafting.GetRuneforgeLegendaryComponentInfo:
   inputs:
   - - mixin: ItemLocationMixin
       name: runeforgeLegendary
-      type: table
+      type: ItemLocation
   outputs:
   - name: componentInfo
     type: RuneforgeLegendaryComponentInfo
@@ -8944,7 +8944,7 @@ C_LegendaryCrafting.GetRuneforgeLegendaryCost:
   inputs:
   - - mixin: ItemLocationMixin
       name: baseItem
-      type: table
+      type: ItemLocation
   outputs:
   - innerType: CurrencyCost
     name: cost
@@ -8966,10 +8966,10 @@ C_LegendaryCrafting.GetRuneforgeLegendaryUpgradeCost:
   inputs:
   - - mixin: ItemLocationMixin
       name: runeforgeLegendary
-      type: table
+      type: ItemLocation
     - mixin: ItemLocationMixin
       name: upgradeItem
-      type: table
+      type: ItemLocation
   outputs:
   - innerType: CurrencyCost
     name: cost
@@ -8978,7 +8978,7 @@ C_LegendaryCrafting.GetRuneforgeModifierInfo:
   inputs:
   - - mixin: ItemLocationMixin
       name: baseItem
-      type: table
+      type: ItemLocation
     - name: powerID
       nilable: true
       type: number
@@ -9012,7 +9012,7 @@ C_LegendaryCrafting.GetRuneforgePowers:
   - - mixin: ItemLocationMixin
       name: baseItem
       nilable: true
-      type: table
+      type: ItemLocation
     - name: filter
       nilable: true
       type: number
@@ -9053,7 +9053,7 @@ C_LegendaryCrafting.IsRuneforgeLegendary:
   inputs:
   - - mixin: ItemLocationMixin
       name: item
-      type: table
+      type: ItemLocation
   outputs:
   - name: isRuneforgeLegendary
     type: boolean
@@ -9061,7 +9061,7 @@ C_LegendaryCrafting.IsRuneforgeLegendaryMaxLevel:
   inputs:
   - - mixin: ItemLocationMixin
       name: runeforgeLegendary
-      type: table
+      type: ItemLocation
   outputs:
   - name: isMaxLevel
     type: boolean
@@ -9069,10 +9069,10 @@ C_LegendaryCrafting.IsUpgradeItemValidForRuneforgeLegendary:
   inputs:
   - - mixin: ItemLocationMixin
       name: runeforgeLegendary
-      type: table
+      type: ItemLocation
     - mixin: ItemLocationMixin
       name: upgradeItem
-      type: table
+      type: ItemLocation
   outputs:
   - name: isValid
     type: boolean
@@ -9080,7 +9080,7 @@ C_LegendaryCrafting.IsValidRuneforgeBaseItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: baseItem
-      type: table
+      type: ItemLocation
   outputs:
   - name: isValid
     type: boolean
@@ -9088,7 +9088,7 @@ C_LegendaryCrafting.MakeRuneforgeCraftDescription:
   inputs:
   - - mixin: ItemLocationMixin
       name: baseItem
-      type: table
+      type: ItemLocation
     - name: runeforgePowerID
       type: number
     - innerType: number
@@ -9101,10 +9101,10 @@ C_LegendaryCrafting.UpgradeRuneforgeLegendary:
   inputs:
   - - mixin: ItemLocationMixin
       name: runeforgeLegendary
-      type: table
+      type: ItemLocation
     - mixin: ItemLocationMixin
       name: upgradeItem
-      type: table
+      type: ItemLocation
   outputs: {}
 C_LevelLink.IsActionLocked:
   inputs:
@@ -10235,7 +10235,7 @@ C_MountJournal.ApplyMountEquipment:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: canContinue
     type: boolean
@@ -10494,7 +10494,7 @@ C_MountJournal.IsItemMountEquipment:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isMountEquipment
     type: boolean
@@ -12533,7 +12533,7 @@ C_QuestItemUse.CanUseQuestItemOnObject:
   inputs:
   - - mixin: ItemLocationMixin
       name: item
-      type: table
+      type: ItemLocation
     - name: unit
       type: string
     - name: checkRange
@@ -13531,7 +13531,7 @@ C_ScrappingMachineUI.GetCurrentPendingScrapItemLocationByIndex:
   outputs:
   - mixin: ItemLocationMixin
     name: itemLoc
-    type: table
+    type: ItemLocation
 C_ScrappingMachineUI.GetScrappingMachineName:
   inputs:
   - {}
@@ -14111,7 +14111,7 @@ C_Sound.PlayItemSound:
       type: number
     - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs: {}
 C_SpecializationInfo.CanPlayerUsePVPTalentUI:
   inputs:
@@ -14860,7 +14860,7 @@ C_TradeSkillUI.CraftEnchant:
     - mixin: ItemLocationMixin
       name: itemTarget
       nilable: true
-      type: table
+      type: ItemLocation
   outputs: {}
 C_TradeSkillUI.CraftRecipe:
   inputs:
@@ -14886,13 +14886,13 @@ C_TradeSkillUI.CraftSalvage:
       type: number
     - mixin: ItemLocationMixin
       name: itemTarget
-      type: table
+      type: ItemLocation
   outputs: {}
 C_TradeSkillUI.DoesRecraftingRecipeAcceptItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
     - name: recipeID
       type: number
   outputs:
@@ -15751,7 +15751,7 @@ C_Transmog.ClearPending:
   inputs:
   - - mixin: TransmogLocationMixin
       name: transmogLocation
-      type: table
+      type: TransmogLocation
   outputs: {}
 C_Transmog.Close:
   inputs:
@@ -15806,7 +15806,7 @@ C_Transmog.GetPending:
   inputs:
   - - mixin: TransmogLocationMixin
       name: transmogLocation
-      type: table
+      type: TransmogLocation
   outputs:
   - mixin: TransmogPendingInfoMixin
     name: pendingInfo
@@ -15815,7 +15815,7 @@ C_Transmog.GetSlotEffectiveCategory:
   inputs:
   - - mixin: TransmogLocationMixin
       name: transmogLocation
-      type: table
+      type: TransmogLocation
   outputs:
   - name: categoryID
     type: number
@@ -15830,7 +15830,7 @@ C_Transmog.GetSlotInfo:
   inputs:
   - - mixin: TransmogLocationMixin
       name: transmogLocation
-      type: table
+      type: TransmogLocation
   outputs:
   - name: isTransmogrified
     type: boolean
@@ -15853,7 +15853,7 @@ C_Transmog.GetSlotUseError:
   inputs:
   - - mixin: TransmogLocationMixin
       name: transmogLocation
-      type: table
+      type: TransmogLocation
   outputs:
   - name: errorCode
     type: number
@@ -15863,7 +15863,7 @@ C_Transmog.GetSlotVisualInfo:
   inputs:
   - - mixin: TransmogLocationMixin
       name: transmogLocation
-      type: table
+      type: TransmogLocation
   outputs:
   - name: baseSourceID
     type: number
@@ -15893,7 +15893,7 @@ C_Transmog.IsSlotBeingCollapsed:
   inputs:
   - - mixin: TransmogLocationMixin
       name: transmogLocation
-      type: table
+      type: TransmogLocation
   outputs:
   - name: isBeingCollapsed
     type: boolean
@@ -15906,7 +15906,7 @@ C_Transmog.SetPending:
   inputs:
   - - mixin: TransmogLocationMixin
       name: transmogLocation
-      type: table
+      type: TransmogLocation
     - mixin: TransmogPendingInfoMixin
       name: pendingInfo
       type: table
@@ -16037,7 +16037,7 @@ C_TransmogCollection.GetAppearanceSources:
     - mixin: TransmogLocationMixin
       name: transmogLocation
       nilable: true
-      type: table
+      type: TransmogLocation
   outputs:
   - innerType: AppearanceSourceInfo
     name: sources
@@ -16058,7 +16058,7 @@ C_TransmogCollection.GetCategoryAppearances:
     - mixin: TransmogLocationMixin
       name: transmogLocation
       nilable: true
-      type: table
+      type: TransmogLocation
   outputs:
   - innerType: C_TransmogCollection.TransmogCategoryAppearanceInfo
     name: appearances
