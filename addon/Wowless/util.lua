@@ -54,8 +54,18 @@ local function check4(e1, e2, e3, e4, ...)
   assertEquals(e4, a4)
 end
 
+local function mixin(t, ...)
+  for i = 1, select('#', ...) do
+    for k, v in pairs(select(i, ...)) do
+      t[k] = v
+    end
+  end
+  return t
+end
+
 G.assertEquals = assertEquals
 G.assertRecursivelyEqual = assertRecursivelyEqual
 G.check0 = check0
 G.check1 = check1
 G.check4 = check4
+G.mixin = mixin

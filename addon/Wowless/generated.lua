@@ -228,28 +228,11 @@ function G.GeneratedTests()
 
   local function globals()
     local data = _G.WowlessData.Globals
-    if _G.SecureCapsuleGet ~= nil then -- addon_spec hack
-      -- TODO grab these a la theflatdumper
-      local toskip = {
-        'BattlepayBannerType',
-        'BattlepayCardType',
-        'BattlepayDisplayFlag',
-        'BattlepayGroupDisplayType',
-        'BattlepayProductDecorator',
-        'BattlepayProductGroupFlag',
-        'PurchaseEligibility',
-        'StoreError',
-        'VasError',
-        'VasServiceType',
-      }
-      for _, v in ipairs(toskip) do
-        data.Enum[v] = nil
-      end
-    end
     local tests = {}
+    local actualEnum = G.mixin({}, _G.Enum, capsuleEnv.Enum or {})
     for k, v in pairs(data) do
       tests[k] = function()
-        return G.assertRecursivelyEqual(v, _G[k])
+        return G.assertRecursivelyEqual(v, k == 'Enum' and actualEnum or _G[k])
       end
     end
     local genums = {}
