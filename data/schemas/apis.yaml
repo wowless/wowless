@@ -27,7 +27,8 @@ type:
                 - literal: env
                 - literal: loader
           impl:
-            type: string
+            type:
+              ref: impl
           inputs:
             type:
               sequenceof:
