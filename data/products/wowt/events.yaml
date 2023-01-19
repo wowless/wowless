@@ -3624,17 +3624,43 @@ COVENANT_SANCTUM_RENOWN_LEVEL_CHANGED:
     type: number
 CRAFTING_DETAILS_UPDATE:
   payload: {}
+CRAFTING_HOUSE_DISABLED:
+  payload: {}
+CRAFTINGORDERS_CAN_REQUEST:
+  payload: {}
+CRAFTINGORDERS_CLAIM_ORDER_RESPONSE:
+  payload: {}
+CRAFTINGORDERS_CLAIMED_ORDER_ADDED:
+  payload: {}
+CRAFTINGORDERS_CLAIMED_ORDER_REMOVED:
+  payload: {}
+CRAFTINGORDERS_CLAIMED_ORDER_UPDATED:
+  payload: {}
 CRAFTINGORDERS_CUSTOMER_FAVORITES_CHANGED:
   payload: {}
 CRAFTINGORDERS_CUSTOMER_OPTIONS_PARSED:
+  payload: {}
+CRAFTINGORDERS_FULFILL_ORDER_RESPONSE:
   payload: {}
 CRAFTINGORDERS_HIDE_CRAFTER:
   payload: {}
 CRAFTINGORDERS_HIDE_CUSTOMER:
   payload: {}
+CRAFTINGORDERS_ORDER_CANCEL_RESPONSE:
+  payload: {}
+CRAFTINGORDERS_ORDER_PLACEMENT_RESPONSE:
+  payload: {}
+CRAFTINGORDERS_REJECT_ORDER_RESPONSE:
+  payload: {}
+CRAFTINGORDERS_RELEASE_ORDER_RESPONSE:
+  payload: {}
 CRAFTINGORDERS_SHOW_CRAFTER:
   payload: {}
 CRAFTINGORDERS_SHOW_CUSTOMER:
+  payload: {}
+CRAFTINGORDERS_UPDATE_CUSTOMER_NAME:
+  payload: {}
+CRAFTINGORDERS_UPDATE_ORDER_COUNT:
   payload: {}
 CRITERIA_COMPLETE:
   payload:
@@ -4169,6 +4195,8 @@ GENERIC_ERROR:
   payload:
   - name: errorMessage
     type: string
+GENERIC_WIDGET_DISPLAY_SHOW:
+  payload: {}
 GET_ITEM_INFO_RECEIVED:
   payload:
   - name: itemID
@@ -4348,6 +4376,8 @@ HEIRLOOMS_UPDATED:
   - name: hideUntilLearned
     nilable: true
     type: boolean
+HIDE_HYPERLINK_TOOLTIP:
+  payload: {}
 HIDE_SUBTITLE:
   payload: {}
 HONOR_LEVEL_UPDATE:
@@ -5498,6 +5528,8 @@ PLAYER_SOFT_INTERACT_CHANGED:
     type: string
   - name: newTarget
     type: string
+PLAYER_SOFT_TARGET_INTERACTION:
+  payload: {}
 PLAYER_SPECIALIZATION_CHANGED:
   payload:
   - name: unitTarget
@@ -5863,6 +5895,8 @@ REPLACE_ENCHANT:
     type: string
   - name: replacementStr
     type: string
+REPLACE_TRADESKILL_ENCHANT:
+  payload: {}
 REPLICATE_ITEM_LIST_UPDATE:
   payload: {}
 REPORT_PLAYER_RESULT:
@@ -6054,6 +6088,8 @@ SHIPMENT_UPDATE:
     nilable: true
     type: boolean
 SHOW_FACTION_SELECT_UI:
+  payload: {}
+SHOW_HYPERLINK_TOOLTIP:
   payload: {}
 SHOW_LFG_EXPAND_SEARCH_PROMPT:
   payload: {}
@@ -6372,6 +6408,8 @@ STOP_AUTOREPEAT_SPELL:
   payload: {}
 STOP_MOVIE:
   payload: {}
+STOP_TIMER_OF_TYPE:
+  payload: {}
 STORE_BOOST_AUTO_CONSUMED:
   payload: {}
 STORE_CHARACTER_LIST_RECEIVED:
@@ -6432,6 +6470,8 @@ SYSMSG:
     type: number
   - name: b
     type: number
+SYSTEM_VISIBILITY_CHANGED:
+  payload: {}
 TABARD_CANSAVE_CHANGED:
   payload: {}
 TABARD_SAVE_PENDING:
@@ -6510,6 +6550,8 @@ TOKEN_SELL_RESULT:
   - name: result
     type: number
 TOKEN_STATUS_CHANGED:
+  payload: {}
+TOOLTIP_DATA_UPDATE:
   payload: {}
 TOYS_UPDATED:
   payload:
@@ -6609,6 +6651,8 @@ TRADE_SKILL_DATA_SOURCE_CHANGED:
 TRADE_SKILL_DATA_SOURCE_CHANGING:
   payload: {}
 TRADE_SKILL_DETAILS_UPDATE:
+  payload: {}
+TRADE_SKILL_FAVORITES_CHANGED:
   payload: {}
 TRADE_SKILL_ITEM_CRAFTED_RESULT:
   payload:
@@ -7652,15 +7696,13 @@ WEAPON_ENCHANT_CHANGED:
   payload: {}
 WEAPON_SLOT_CHANGED:
   payload: {}
-WEAR_EQUIPMENT_SET:
-  payload:
-  - name: setID
-    type: number
 WEEKLY_REWARDS_ITEM_CHANGED:
   payload: {}
 WEEKLY_REWARDS_UPDATE:
   payload: {}
 WHO_LIST_UPDATE:
+  payload: {}
+WORLD_CURSOR_TOOLTIP_UPDATE:
   payload: {}
 WORLD_MAP_OPEN:
   payload:
