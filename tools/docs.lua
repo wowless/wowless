@@ -17,6 +17,18 @@ local function enabled(t, k)
   return k:sub(1, #args.filter) == args.filter and (args.new or t[k])
 end
 
+local function deref(t, ...)
+  for i = 1, select('#', ...) do
+    assert(type(t) == 'table')
+    local k = select(i, ...)
+    t = t[k]
+    if t == nil then
+      return nil
+    end
+  end
+  return t
+end
+
 local docs = {}
 do
   local mixmt = {
@@ -394,7 +406,7 @@ local rewriters = {
             ret[field.Name] = {
               default = field.Default,
               nilable = field.Nilable or nil,
-              stub = stubs[field.Type],
+              stub = deref(out, name, field.Name, 'stub') or stubs[field.Type],
               type = (function()
                 if field.InnerType then
                   return { arrayof = t2ty(field.InnerType, ns) }
