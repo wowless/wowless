@@ -133,6 +133,13 @@ C_AreaPoiInfo.AreaPOIInfo:
   description:
     nilable: true
     type: string
+  factionID:
+    nilable: true
+    type: number
+  isAlwaysOnFlightmap:
+    type: boolean
+  isPrimaryMapForPOI:
+    type: boolean
   name:
     type: string
   position:
@@ -1604,8 +1611,7 @@ C_CovenantSanctumUI.CovenantSanctumRenownRewardInfo:
     type: number
 C_CraftingOrders.CraftingOrderRequestInfo:
   callback:
-    type:
-      structure: CraftingOrderRequestCallback
+    type: function
   forCrafter:
     type: boolean
   initialNonPublicSearch:
@@ -1630,8 +1636,7 @@ C_CraftingOrders.CraftingOrderRequestInfo:
     type: number
 C_CraftingOrders.CraftingOrderRequestMyOrdersInfo:
   callback:
-    type:
-      structure: CraftingOrderRequestMyOrdersCallback
+    type: function
   offset:
     type: number
   primarySort:
@@ -1815,7 +1820,13 @@ C_EncounterJournal.EncounterJournalItemInfo:
   armorType:
     nilable: true
     type: string
+  displayAsExtremelyRare:
+    nilable: true
+    type: boolean
   displayAsPerPlayerLoot:
+    nilable: true
+    type: boolean
+  displayAsVeryRare:
     nilable: true
     type: boolean
   encounterID:
@@ -2695,6 +2706,9 @@ C_ItemInteraction.ItemInteractionFrameInfo:
     type: number
   openSoundKitID:
     type: number
+  slotTooltip:
+    nilable: true
+    type: string
   textureKit:
     type: string
   titleText:
@@ -3646,6 +3660,8 @@ C_PvP.PvpBrawlInfo:
     type: number
   canQueue:
     type: boolean
+  groupsAllowed:
+    type: boolean
   includesAllArenas:
     default: false
     type: boolean
@@ -3654,6 +3670,10 @@ C_PvP.PvpBrawlInfo:
   mapNames:
     type:
       arrayof: string
+  maxLevel:
+    type: number
+  minLevel:
+    type: number
   name:
     type: string
   shortDescription:
@@ -3909,6 +3929,8 @@ C_QuestLog.QuestInfo:
     type: number
   title:
     type: string
+  useMinimalHeader:
+    type: boolean
 C_QuestLog.QuestObjectiveInfo:
   finished:
     type: boolean
@@ -4661,6 +4683,9 @@ C_Traits.TraitDefinitionInfo:
     nilable: true
     type: string
   spellID:
+    nilable: true
+    type: number
+  subType:
     nilable: true
     type: number
 C_Traits.TraitEntryInfo:
@@ -6345,17 +6370,22 @@ CorruptionEffectInfo:
   name:
     type: string
 CraftingCurrencyResultData:
-  associatedItemGUID:
-    type: string
   currencyID:
+    default: 0
+    type: number
+  firstCraftReward:
+    default: false
+    type: boolean
+  operationID:
     default: 0
     type: number
   quantity:
     default: 0
     type: number
+  showCurrencyText:
+    default: true
+    type: boolean
 CraftingItemResultData:
-  associatedItemGUID:
-    type: string
   bonusCraft:
     default: false
     type: boolean
@@ -6365,6 +6395,9 @@ CraftingItemResultData:
   critBonusSkill:
     default: 0
     type: number
+  firstCraftReward:
+    default: false
+    type: boolean
   hyperlink:
     type: string
   isCrit:
@@ -6376,6 +6409,9 @@ CraftingItemResultData:
     default: 0
     type: number
   multicraft:
+    default: 0
+    type: number
+  operationID:
     default: 0
     type: number
   quantity:
@@ -6422,6 +6458,8 @@ CraftingOperationInfo:
   craftingQuality:
     type: number
   craftingQualityID:
+    type: number
+  guaranteedCraftingQualityID:
     type: number
   isQualityCraft:
     type: boolean
@@ -6649,8 +6687,6 @@ CraftingOrderReagentInfo:
     type: number
   source:
     type: number
-CraftingOrderRequestCallback: {}
-CraftingOrderRequestMyOrdersCallback: {}
 CraftingOrderSortInfo:
   reversed:
     type: boolean
@@ -7274,6 +7310,8 @@ TradeSkillRecipeInfo:
     type: number
   relativeDifficulty:
     nilable: true
+    type: number
+  skillLineAbilityID:
     type: number
   sourceType:
     nilable: true

@@ -1268,6 +1268,7 @@ C_AuctionHouse.GetBidInfo:
       type: number
   outputs:
   - name: bid
+    nilable: true
     type: C_AuctionHouse.BidInfo
 C_AuctionHouse.GetBids:
   inputs:
@@ -1437,6 +1438,7 @@ C_AuctionHouse.GetNumBids:
   - {}
   outputs:
   - name: numBids
+    stub: 0
     type: number
 C_AuctionHouse.GetNumBidTypes:
   inputs:

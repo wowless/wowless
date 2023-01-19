@@ -19,9 +19,6 @@ C_AreaPoiInfo.AreaPOIInfo:
   textureIndex:
     nilable: true
     type: number
-  uiTextureKit:
-    nilable: true
-    type: string
   widgetSetID:
     nilable: true
     type: number
@@ -312,9 +309,6 @@ C_Club.ClubInfo:
     type: string
   clubType:
     type: number
-  crossFaction:
-    nilable: true
-    type: boolean
   description:
     type: string
   favoriteTimeStamp:
@@ -364,9 +358,6 @@ C_Club.ClubMemberInfo:
   clubType:
     nilable: true
     type: number
-  faction:
-    nilable: true
-    type: number
   guid:
     nilable: true
     type: string
@@ -407,9 +398,6 @@ C_Club.ClubMemberInfo:
   officerNote:
     nilable: true
     type: string
-  overallDungeonScore:
-    nilable: true
-    type: number
   presence:
     type: number
   profession1ID:
@@ -633,10 +621,6 @@ C_Commentator.CommentatorPlayerData:
     type: number
   name:
     type: string
-  soloShuffleRoundLosses:
-    type: number
-  soloShuffleRoundWins:
-    type: number
   specialization:
     type: number
   unitToken:
@@ -712,8 +696,6 @@ C_CreatureInfo.RaceInfo:
 C_CurrencyInfo.CurrencyInfo:
   canEarnPerWeek:
     type: boolean
-  description:
-    type: string
   discovered:
     type: boolean
   iconFileID:
@@ -791,15 +773,11 @@ C_FriendList.FriendInfo:
     type: string
   level:
     type: number
-  mobile:
-    type: boolean
   name:
     type: string
   notes:
     nilable: true
     type: string
-  rafLinkType:
-    type: number
 C_FriendList.WhoInfo:
   area:
     type: string
@@ -981,82 +959,31 @@ C_LFGInfo.LFGLockInfo:
     type: number
   reason:
     type: number
-C_LFGList.BestDungeonScoreMapInfo:
-  bestRunLevel:
-    type: number
-  finishedSuccess:
-    type: boolean
-  mapName:
-    type: string
-  mapScore:
-    type: number
 C_LFGList.LfgEntryData:
-  activityID:
-    type: number
-  autoAccept:
-    type: boolean
+  activityIDs:
+    type:
+      arrayof: number
   comment:
     type: string
   duration:
     type: number
-  isCrossFactionListing:
-    type: boolean
-  name:
-    type: string
-  playstyle:
-    nilable: true
-    type: number
-  privateGroup:
-    type: boolean
-  questID:
-    nilable: true
-    type: number
-  requiredDungeonScore:
-    nilable: true
-    type: number
-  requiredHonorLevel:
-    type: number
-  requiredItemLevel:
-    type: number
-  requiredPvpRating:
-    nilable: true
-    type: number
-  voiceChat:
-    type: string
 C_LFGList.LfgSearchResultData:
-  activityID:
-    type: number
+  activityIDs:
+    type:
+      arrayof: number
   age:
     type: number
   autoAccept:
     type: boolean
   comment:
     type: string
-  crossFactionListing:
-    nilable: true
-    type: boolean
-  hasSelf:
-    type: boolean
   isDelisted:
     type: boolean
   isWarMode:
     type: boolean
-  leaderDungeonScoreInfo:
-    nilable: true
-    type:
-      structure: C_LFGList.BestDungeonScoreMapInfo
-  leaderFactionGroup:
-    type: number
   leaderName:
     nilable: true
     type: string
-  leaderOverallDungeonScore:
-    nilable: true
-    type: number
-  leaderPvpRatingInfo:
-    nilable: true
-    type:
-      structure: C_LFGList.PvpRatingInfo
   name:
     type: string
   numBNetFriends:
@@ -1067,35 +994,14 @@ C_LFGList.LfgSearchResultData:
     type: number
   numMembers:
     type: number
-  playstyle:
-    nilable: true
-    type: number
-  questID:
-    nilable: true
-    type: number
-  requiredDungeonScore:
-    nilable: true
-    type: number
   requiredHonorLevel:
     type: number
   requiredItemLevel:
-    type: number
-  requiredPvpRating:
-    nilable: true
     type: number
   searchResultID:
     type: number
   voiceChat:
     type: string
-C_LFGList.PvpRatingInfo:
-  activityName:
-    type: string
-  bracket:
-    type: number
-  rating:
-    type: number
-  tier:
-    type: number
 C_LossOfControl.LossOfControlData:
   displayText:
     type: string
@@ -1127,9 +1033,6 @@ C_Map.MapBannerInfo:
     type: string
   name:
     type: string
-  uiTextureKit:
-    nilable: true
-    type: string
 C_Map.MapLinkInfo:
   areaPoiID:
     type: number
@@ -1144,8 +1047,6 @@ C_Map.MapLinkInfo:
       mixin: Vector2DMixin
       structure: Vector2D
 C_Map.UiMapDetails:
-  flags:
-    type: number
   mapID:
     type: number
   mapType:
@@ -1177,8 +1078,6 @@ C_MapExplorationInfo.UiMapExplorationInfo:
   hitRect:
     type:
       structure: C_MapExplorationInfo.UiMapExplorationHitRect
-  isDrawOnTopLayer:
-    type: boolean
   isShownByMouseOver:
     type: boolean
   offsetX:
@@ -1386,7 +1285,8 @@ C_TaxiMap.MapTaxiNodeInfo:
     type:
       mixin: Vector2DMixin
       structure: Vector2D
-  textureKit:
+  textureKitPrefix:
+    nilable: true
     type: string
 C_TaxiMap.TaxiNodeInfo:
   name:
@@ -1399,15 +1299,11 @@ C_TaxiMap.TaxiNodeInfo:
       structure: Vector2D
   slotIndex:
     type: number
-  specialIconCostString:
-    nilable: true
-    type: string
   state:
     type: number
-  textureKit:
+  textureKitPrefix:
+    nilable: true
     type: string
-  useSpecialIcon:
-    type: boolean
 C_Texture.AtlasInfo:
   bottomTexCoord:
     type: number
@@ -1434,169 +1330,67 @@ C_Texture.AtlasInfo:
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   enabledState:
     type: number
-  frameTextureKit:
-    type: string
-  hasTimer:
-    type: boolean
-  inAnimType:
-    type: number
-  layoutDirection:
-    type: number
   lines:
     type:
       arrayof: string
-  modelSceneLayer:
-    type: number
   orderIndex:
     type: number
-  outAnimType:
-    type: number
-  scriptedAnimationEffectID:
-    type: number
   shownState:
-    type: number
-  textureKit:
-    type: string
-  widgetScale:
-    type: number
-  widgetSizeSetting:
     type: number
   widgetTag:
     type: string
 C_UIWidgetManager.CaptureBarWidgetVisualizationInfo:
-  barMaxValue:
+  barPercent:
     type: number
-  barMinValue:
-    type: number
-  barValue:
-    type: number
-  fillDirectionType:
-    type: number
-  frameTextureKit:
-    type: string
-  glowAnimType:
-    type: number
-  hasTimer:
-    type: boolean
-  inAnimType:
-    type: number
-  layoutDirection:
-    type: number
-  modelSceneLayer:
-    type: number
-  neutralZoneCenter:
-    type: number
-  neutralZoneSize:
+  neutralPercent:
     type: number
   orderIndex:
     type: number
-  outAnimType:
-    type: number
-  scriptedAnimationEffectID:
-    type: number
   shownState:
     type: number
-  textureKit:
-    type: string
-  tooltip:
-    type: string
-  tooltipLoc:
-    type: number
-  widgetScale:
-    type: number
-  widgetSizeSetting:
+  textureKitID:
     type: number
   widgetTag:
     type: string
 C_UIWidgetManager.DoubleIconAndTextWidgetVisualizationInfo:
-  frameTextureKit:
-    type: string
-  hasTimer:
-    type: boolean
-  inAnimType:
-    type: number
   label:
     type: string
-  layoutDirection:
-    type: number
   leftText:
     type: string
   leftTooltip:
     type: string
-  modelSceneLayer:
-    type: number
   orderIndex:
-    type: number
-  outAnimType:
     type: number
   rightText:
     type: string
   rightTooltip:
     type: string
-  scriptedAnimationEffectID:
-    type: number
   shownState:
     type: number
-  textureKit:
-    type: string
-  tooltipLoc:
-    type: number
-  widgetScale:
-    type: number
-  widgetSizeSetting:
+  textureKitID:
     type: number
   widgetTag:
     type: string
 C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo:
-  barValueTextType:
-    type: number
-  fillMotionType:
-    type: number
-  frameTextureKit:
-    type: string
-  hasTimer:
-    type: boolean
-  inAnimType:
-    type: number
-  layoutDirection:
-    type: number
   leftBarMax:
     type: number
   leftBarMin:
     type: number
-  leftBarTooltip:
-    type: string
-  leftBarTooltipLoc:
-    type: number
   leftBarValue:
     type: number
-  modelSceneLayer:
-    type: number
   orderIndex:
-    type: number
-  outAnimType:
     type: number
   rightBarMax:
     type: number
   rightBarMin:
     type: number
-  rightBarTooltip:
-    type: string
-  rightBarTooltipLoc:
-    type: number
   rightBarValue:
-    type: number
-  scriptedAnimationEffectID:
     type: number
   shownState:
     type: number
   text:
     type: string
-  textureKit:
-    type: string
-  widgetScale:
-    type: number
-  widgetSizeSetting:
+  textureKitID:
     type: number
   widgetTag:
     type: string
@@ -1604,95 +1398,37 @@ C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
   currencies:
     type:
       arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
-  frameTextureKit:
-    type: string
-  hasTimer:
-    type: boolean
-  inAnimType:
-    type: number
-  layoutDirection:
-    type: number
-  modelSceneLayer:
-    type: number
   orderIndex:
     type: number
-  outAnimType:
-    type: number
-  scriptedAnimationEffectID:
-    type: number
   shownState:
-    type: number
-  textureKit:
-    type: string
-  tooltipLoc:
-    type: number
-  widgetScale:
-    type: number
-  widgetSizeSetting:
     type: number
   widgetTag:
     type: string
 C_UIWidgetManager.IconAndTextWidgetVisualizationInfo:
   dynamicTooltip:
     type: string
-  frameTextureKit:
-    type: string
   hasTimer:
     type: boolean
-  inAnimType:
-    type: number
-  layoutDirection:
-    type: number
-  modelSceneLayer:
-    type: number
   orderIndex:
-    type: number
-  outAnimType:
-    type: number
-  scriptedAnimationEffectID:
     type: number
   state:
     type: number
   text:
     type: string
-  textureKit:
-    type: string
+  textureKitID:
+    type: number
   tooltip:
     type: string
-  tooltipLoc:
-    type: number
-  widgetScale:
-    type: number
-  widgetSizeSetting:
-    type: number
   widgetTag:
     type: string
 C_UIWidgetManager.IconTextAndBackgroundWidgetVisualizationInfo:
-  frameTextureKit:
-    type: string
-  hasTimer:
-    type: boolean
-  inAnimType:
-    type: number
-  layoutDirection:
-    type: number
-  modelSceneLayer:
-    type: number
   orderIndex:
-    type: number
-  outAnimType:
-    type: number
-  scriptedAnimationEffectID:
     type: number
   shownState:
     type: number
-  text:
-    type: string
-  textureKit:
-    type: string
-  widgetScale:
+  textureKitID:
     type: number
-  widgetSizeSetting:
+  value:
     type: number
   widgetTag:
     type: string
@@ -1708,33 +1444,13 @@ C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
     type: number
   enabledState:
     type: number
-  frameTextureKit:
-    type: string
-  hasTimer:
-    type: boolean
-  inAnimType:
-    type: number
-  layoutDirection:
-    type: number
-  modelSceneLayer:
-    type: number
   orderIndex:
-    type: number
-  outAnimType:
-    type: number
-  scriptedAnimationEffectID:
     type: number
   shownState:
     type: number
   text:
     type: string
-  textureKit:
-    type: string
-  tooltipLoc:
-    type: number
-  widgetScale:
-    type: number
-  widgetSizeSetting:
+  textureKitID:
     type: number
   widgetTag:
     type: string
@@ -1742,63 +1458,23 @@ C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
   currencies:
     type:
       arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
-  frameTextureKit:
-    type: string
-  hasTimer:
-    type: boolean
-  headerText:
-    type: string
-  inAnimType:
-    type: number
-  layoutDirection:
-    type: number
-  modelSceneLayer:
+  frameTextureKitID:
     type: number
   orderIndex:
     type: number
-  outAnimType:
-    type: number
-  scriptedAnimationEffectID:
-    type: number
   shownState:
-    type: number
-  textureKit:
-    type: string
-  widgetScale:
-    type: number
-  widgetSizeSetting:
     type: number
   widgetTag:
     type: string
 C_UIWidgetManager.StackedResourceTrackerWidgetVisualizationInfo:
-  frameTextureKit:
-    type: string
-  hasTimer:
-    type: boolean
-  inAnimType:
-    type: number
-  layoutDirection:
-    type: number
-  modelSceneLayer:
+  frameTextureKitID:
     type: number
   orderIndex:
-    type: number
-  outAnimType:
     type: number
   resources:
     type:
       arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
-  scriptedAnimationEffectID:
-    type: number
   shownState:
-    type: number
-  textureKit:
-    type: string
-  tooltipLoc:
-    type: number
-  widgetScale:
-    type: number
-  widgetSizeSetting:
     type: number
   widgetTag:
     type: string
@@ -1807,57 +1483,22 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
     type: number
   barMin:
     type: number
-  barTextEnabledState:
-    type: number
-  barTextFontType:
-    type: number
-  barTextSizeType:
-    type: number
   barValue:
     type: number
-  barValueTextType:
+  barValueInSeconds:
     type: number
-  colorTint:
+  barWidth:
     type: number
-  fillMotionType:
+  fillTextureKitID:
     type: number
-  frameTextureKit:
-    type: string
-  hasTimer:
-    type: boolean
-  inAnimType:
-    type: number
-  layoutDirection:
-    type: number
-  modelSceneLayer:
+  frameTextureKitID:
     type: number
   orderIndex:
-    type: number
-  outAnimType:
-    type: number
-  overrideBarText:
-    type: string
-  overrideBarTextShownType:
-    type: number
-  partitionValues:
-    type:
-      arrayof: number
-  scriptedAnimationEffectID:
     type: number
   shownState:
     type: number
   text:
     type: string
-  textureKit:
-    type: string
-  tooltip:
-    type: string
-  tooltipLoc:
-    type: number
-  widgetScale:
-    type: number
-  widgetSizeSetting:
-    type: number
   widgetTag:
     type: string
 C_UIWidgetManager.TextureWithStateVisualizationInfo:
@@ -1874,48 +1515,18 @@ C_UIWidgetManager.TextureWithStateVisualizationInfo:
   widgetTag:
     type: string
 C_UIWidgetManager.TextWithStateWidgetVisualizationInfo:
-  bottomPadding:
-    type: number
   enabledState:
     type: number
-  fontType:
-    type: number
-  frameTextureKit:
-    type: string
-  hAlign:
-    type: number
-  hasTimer:
-    type: boolean
-  inAnimType:
-    type: number
-  layoutDirection:
-    type: number
-  modelSceneLayer:
-    type: number
   orderIndex:
-    type: number
-  outAnimType:
-    type: number
-  scriptedAnimationEffectID:
     type: number
   shownState:
     type: number
   text:
     type: string
-  textSizeType:
-    type: number
-  textureKit:
-    type: string
-  tooltip:
-    type: string
-  tooltipLoc:
-    type: number
-  widgetScale:
-    type: number
-  widgetSizeSetting:
-    type: number
   widgetTag:
     type: string
+  widgetWidth:
+    type: number
 C_UIWidgetManager.UIWidgetCurrencyInfo:
   iconFileID:
     type: number
@@ -1928,9 +1539,6 @@ C_UIWidgetManager.UIWidgetCurrencyInfo:
   tooltip:
     type: string
 C_UIWidgetManager.UIWidgetInfo:
-  unitToken:
-    nilable: true
-    type: string
   widgetID:
     type: number
   widgetSetID:
@@ -2042,11 +1650,7 @@ ExpansionDisplayInfo:
   features:
     type:
       arrayof: ExpansionDisplayInfoFeature
-  highResBackgroundID:
-    type: number
   logo:
-    type: number
-  lowResBackgroundID:
     type: number
 ExpansionDisplayInfoFeature:
   icon:

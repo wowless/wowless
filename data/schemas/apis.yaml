@@ -8,7 +8,8 @@ type:
       - record:
           alias:
             required: true
-            type: string
+            type:
+              ref: api
       - record:
           stdlib:
             required: true
@@ -27,7 +28,8 @@ type:
                 - literal: env
                 - literal: loader
           impl:
-            type: string
+            type:
+              ref: impl
           inputs:
             type:
               sequenceof:

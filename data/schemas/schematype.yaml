@@ -60,6 +60,7 @@ type:
         type:
           oneof:
           - literal: api
+          - literal: impl
           - literal: schema
           - literal: sqlcursor
           - literal: sqllookup

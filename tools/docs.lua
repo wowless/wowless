@@ -4,6 +4,7 @@ local args = (function()
   parser:argument('product', 'product to process')
   parser:argument('type', 'type to write'):choices(allTypes)
   parser:argument('filter', 'name filter'):default('')
+  parser:flag('--new', 'add missing objects')
   return parser:parse()
 end)()
 
@@ -11,6 +12,22 @@ local lfs = require('lfs')
 local writeFile = require('pl.file').write
 local pprintYaml = require('wowapi.yaml').pprint
 local product = args.product
+
+local function enabled(t, k)
+  return k:sub(1, #args.filter) == args.filter and (args.new or t[k])
+end
+
+local function deref(t, ...)
+  for i = 1, select('#', ...) do
+    assert(type(t) == 'table')
+    local k = select(i, ...)
+    t = t[k]
+    if t == nil then
+      return nil
+    end
+  end
+  return t
+end
 
 local docs = {}
 do
@@ -29,6 +46,7 @@ do
       return setmetatable({}, nummt)
     end,
   }
+  local schema = require('wowapi.yaml').parseFile('data/schemas/docs.yaml').type
   local function processDocDir(docdir)
     if lfs.attributes(docdir) then
       for f in lfs.dir(docdir) do
@@ -36,7 +54,8 @@ do
           local success, err = pcall(setfenv(loadfile(docdir .. '/' .. f), {
             APIDocumentation = {
               AddDocumentationTable = function(_, t)
-                docs[f] = docs[f] or t
+                require('wowapi.schema').validate(product, schema, t)
+                docs[f] = t
               end,
             },
             Constants = setmetatable({}, nsmt),
@@ -57,60 +76,54 @@ do
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
 end
 
-local enum = {}
-do
-  local globals = require('wowapi.yaml').parseFile('data/products/' .. product .. '/globals.yaml')
-  for en, em in pairs(globals.Enum) do
-    enum[en] = enum[en] or em
-  end
-end
+local enum = require('wowapi.yaml').parseFile('data/products/' .. product .. '/globals.yaml').Enum
 
-local expectedTopLevelFields = {
-  Events = true,
-  Functions = true,
-  Name = true,
-  Namespace = true,
-  Tables = true,
-  Type = true,
-}
-local expectedTypes = {
-  ScriptObject = true,
-  System = true,
-}
 local tabs, funcs, events = {}, {}, {}
-for f, t in pairs(docs) do
-  for k in pairs(t) do
-    assert(expectedTopLevelFields[k], ('unexpected field %q in %q'):format(k, f))
-  end
-  assert(not t.Type or expectedTypes[t.Type], 'unexpected type in ' .. f)
+for _, t in pairs(docs) do
   if not t.Type or t.Type == 'System' and t.Namespace ~= 'C_ConfigurationWarnings' then
     for _, tab in ipairs(t.Tables or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. tab.Name
-      tabs[name] = tabs[name] or tab
+      assert(not tabs[name])
+      tabs[name] = tab
     end
     for _, func in ipairs(t.Functions or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. func.Name
-      funcs[name] = funcs[name] or func
+      assert(not funcs[name])
+      funcs[name] = func
     end
     for _, event in ipairs(t.Events or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. event.Name
-      events[name] = events[name] or event
+      assert(not events[name])
+      events[name] = event
     end
   end
 end
+
 local types = {
   bool = 'boolean',
   FramePoint = 'string', -- hack, yes
+  InventorySlots = 'number',
   number = 'number',
   string = 'string',
   table = 'table',
 }
 local tys = {}
-for name in pairs(tabs) do
-  tys[name] = true
+for name, tab in pairs(tabs) do
+  tys[name] = tab.Type
 end
 for k in pairs(require('wowapi.data').structures[product]) do
-  tys[k] = true
+  if tys[k] and tys[k] ~= 'Structure' then
+    error(('%s is a wowless structure but is a %s in docs'):format(k, tys[k]))
+  else
+    tys[k] = 'Structure'
+  end
+end
+for k in pairs(enum) do
+  if tys[k] and tys[k] ~= 'Enumeration' then
+    error(('%s is a wowless enum but is a %s in docs'):format(k, tys[k]))
+  else
+    tys[k] = 'Enumeration'
+  end
 end
 local knownMixinStructs = {
   ColorMixin = 'Color',
@@ -120,50 +133,30 @@ local knownMixinStructs = {
   Vector3DMixin = 'Vector3D',
 }
 local function t2ty(t, ns, mixin)
-  if enum[t] then
-    return 'number'
-  elseif t == 'table' then
-    return mixin and knownMixinStructs[mixin] or t
+  if t == 'table' and mixin then
+    return knownMixinStructs[mixin], true
   elseif types[t] then
     return types[t]
-  elseif ns and tys[ns .. '.' .. t] then
-    local n = ns .. '.' .. t
-    local b = tabs[n]
-    if b then
-      if b.Type == 'Structure' then
-        return n
-      elseif b.Type == 'CallbackType' then
-        return 'function'
-      elseif b.Type == 'Enumeration' then
-        return 'number'
-      end
-    end
-    error('confused by ' .. n)
-  elseif tys[t] then
-    return t
+  end
+  local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
+  local ty = tys[n]
+  assert(ty, 'wtf ' .. n)
+  if ty == 'Enumeration' or ty == 'Constants' then
+    return 'number'
+  elseif ty == 'Structure' then
+    return n, true
+  elseif ty == 'CallbackType' then
+    return 'function'
   else
-    print('unknown type ' .. t)
-    return 'unknown'
+    error(('%s has unexpected type %s'):format(n, ty))
   end
 end
 
 local rewriters = {
   apis = function()
-    local expectedArgumentKeys = {
-      Default = true,
-      Documentation = true,
-      InnerType = true,
-      Mixin = true,
-      Name = true,
-      Nilable = true,
-      Type = true,
-    }
     local function insig(fn, ns)
       local t = {}
       for _, a in ipairs(fn.Arguments or {}) do
-        for k in pairs(a) do
-          assert(expectedArgumentKeys[k], ('invalid argument key %q in %q'):format(k, fn.Name))
-        end
         table.insert(t, {
           default = a.Default,
           innerType = a.InnerType and t2ty(a.InnerType, ns),
@@ -175,22 +168,9 @@ local rewriters = {
       end
       return t
     end
-    local expectedReturnKeys = {
-      Default = true,
-      Documentation = true,
-      InnerType = true,
-      Mixin = true,
-      Name = true,
-      Nilable = true,
-      StrideIndex = true,
-      Type = true,
-    }
     local function outsig(fn, ns)
       local outputs = {}
       for _, r in ipairs(fn.Returns or {}) do
-        for k in pairs(r) do
-          assert(expectedReturnKeys[k], ('unexpected key %q'):format(k))
-        end
         table.insert(outputs, {
           default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
           innerType = r.InnerType and t2ty(r.InnerType, ns),
@@ -220,7 +200,7 @@ local rewriters = {
     local f = 'data/products/' .. product .. '/apis.yaml'
     local apis = y.parseFile(f)
     for name, fn in pairs(funcs) do
-      if name:sub(1, #args.filter) == args.filter and not skip(apis[name]) then
+      if enabled(apis, name) and not skip(apis[name]) then
         local dotpos = name:find('%.')
         local ns = dotpos and name:sub(1, dotpos - 1)
         apis[name] = {
@@ -261,14 +241,8 @@ local rewriters = {
     for _, v in pairs(tabs) do
       if v.Type == 'Enumeration' then
         local vt = {}
-        assert(type(v.MinValue) == 'number')
-        assert(type(v.MaxValue) == 'number')
-        assert(type(v.NumValues) == 'number')
-        assert(type(v.Fields) == 'table')
         for _, fv in ipairs(v.Fields) do
-          assert(type(fv.Name) == 'string', 'missing name for field of ' .. v.Name)
           assert(fv.Type == v.Name, 'wrong type for ' .. v.Name .. '.' .. fv.Name)
-          assert(type(fv.EnumValue) == 'number')
           vt[fv.Name] = fv.EnumValue
         end
         t[v.Name] = vt
@@ -289,40 +263,15 @@ local rewriters = {
   end,
 
   events = function()
-    local expectedEventKeys = {
-      Documentation = true,
-      Name = true,
-      LiteralName = true,
-      Payload = true,
-      Type = true,
-    }
-    local expectedEventPayloadKeys = {
-      Default = true,
-      Documentation = true,
-      InnerType = true,
-      Mixin = true,
-      Name = true,
-      Nilable = true,
-      StrideIndex = true,
-      Type = true,
-    }
     local filename = ('data/products/%s/events.yaml'):format(product)
     local out = require('wowapi.yaml').parseFile(filename)
     for name, ev in pairs(events) do
-      for k in pairs(ev) do
-        assert(expectedEventKeys[k], ('unexpected event key %q in %q'):format(k, name))
-      end
-      assert(ev.Type == 'Event')
-      assert(ev.LiteralName ~= nil)
       local dotpos = name:find('%.')
       local ns = dotpos and name:sub(1, dotpos - 1)
       local value = {
         payload = (function()
           local t = {}
           for _, arg in ipairs(ev.Payload or {}) do
-            for k in pairs(arg) do
-              assert(expectedEventPayloadKeys[k], ('unexpected field key %q in %q'):format(k, name))
-            end
             table.insert(t, {
               name = arg.Name,
               nilable = arg.Nilable or nil,
@@ -330,8 +279,8 @@ local rewriters = {
                 if arg.InnerType then
                   return { arrayof = t2ty(arg.InnerType, ns) }
                 end
-                local ty = t2ty(arg.Type, ns, arg.Mixin)
-                if ty ~= 'boolean' and ty ~= 'number' and ty ~= 'string' and ty ~= 'table' then
+                local ty, isstruct = t2ty(arg.Type, ns, arg.Mixin)
+                if isstruct then
                   return { mixin = arg.Mixin, structure = ty }
                 else
                   return ty
@@ -353,49 +302,28 @@ local rewriters = {
   end,
 
   structures = function()
-    local expectedStructureKeys = {
-      Name = true,
-      Type = true,
-      Fields = true,
-      Documentation = true,
-    }
-    local expectedStructureFieldKeys = {
-      Name = true,
-      Nilable = true,
-      Type = true,
-      InnerType = true,
-      Mixin = true,
-      Documentation = true,
-      Default = true,
-    }
     local stubs = {
       FramePoint = 'CENTER',
     }
     local filename = ('data/products/%s/structures.yaml'):format(product)
     local out = require('wowapi.yaml').parseFile(filename)
     for name, tab in pairs(tabs) do
-      if tab.Type == 'Structure' and name:sub(1, #args.filter) == args.filter then
-        for k in pairs(tab) do
-          assert(expectedStructureKeys[k], ('unexpected structure key %q in %q'):format(k, name))
-        end
+      if tab.Type == 'Structure' and enabled(out, name) then
         local dotpos = name:find('%.')
         local ns = dotpos and name:sub(1, dotpos - 1)
         out[name] = (function()
           local ret = {}
           for _, field in ipairs(tab.Fields) do
-            for k in pairs(field) do
-              assert(expectedStructureFieldKeys[k], ('unexpected field key %q in %q'):format(k, name))
-            end
             ret[field.Name] = {
               default = field.Default,
               nilable = field.Nilable or nil,
-              stub = stubs[field.Type],
+              stub = deref(out, name, field.Name, 'stub') or stubs[field.Type],
               type = (function()
                 if field.InnerType then
                   return { arrayof = t2ty(field.InnerType, ns) }
                 end
-                local ty = t2ty(field.Type, ns, field.Mixin)
-                if ty ~= 'boolean' and ty ~= 'number' and ty ~= 'string' and ty ~= 'table' then
+                local ty, isstruct = t2ty(field.Type, ns, field.Mixin)
+                if isstruct then
                   return { mixin = field.Mixin, structure = ty }
                 else
                   return ty

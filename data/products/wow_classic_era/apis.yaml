@@ -455,7 +455,7 @@ C_AzeriteEmpoweredItem.CanSelectPower:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
     - name: powerID
       type: number
   outputs:
@@ -469,13 +469,13 @@ C_AzeriteEmpoweredItem.ConfirmAzeriteEmpoweredItemRespec:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
   outputs: {}
 C_AzeriteEmpoweredItem.GetAllTierInfo:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - innerType: C_AzeriteEmpoweredItem.AzeriteEmpoweredItemTierInfo
     name: tierInfo
@@ -508,7 +508,7 @@ C_AzeriteEmpoweredItem.GetPowerText:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
     - name: powerID
       type: number
     - name: level
@@ -528,7 +528,7 @@ C_AzeriteEmpoweredItem.HasAnyUnselectedPowers:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: hasAnyUnselectedPowers
     type: boolean
@@ -536,7 +536,7 @@ C_AzeriteEmpoweredItem.HasBeenViewed:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: hasBeenViewed
     type: boolean
@@ -544,7 +544,7 @@ C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isAzeriteEmpoweredItem
     type: boolean
@@ -584,7 +584,7 @@ C_AzeriteEmpoweredItem.IsPowerSelected:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
     - name: powerID
       type: number
   outputs:
@@ -594,7 +594,7 @@ C_AzeriteEmpoweredItem.SelectPower:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
     - name: powerID
       type: number
   outputs:
@@ -604,7 +604,7 @@ C_AzeriteEmpoweredItem.SetHasBeenViewed:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteEmpoweredItemLocation
-      type: table
+      type: ItemLocation
   outputs: {}
 C_AzeriteEssence.ActivateEssence:
   inputs:
@@ -746,12 +746,12 @@ C_AzeriteItem.FindActiveAzeriteItem:
   outputs:
   - mixin: ItemLocationMixin
     name: activeAzeriteItemLocation
-    type: table
+    type: ItemLocation
 C_AzeriteItem.GetAzeriteItemXPInfo:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: xp
     type: number
@@ -761,7 +761,7 @@ C_AzeriteItem.GetPowerLevel:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: powerLevel
     type: number
@@ -769,7 +769,7 @@ C_AzeriteItem.GetUnlimitedPowerLevel:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: powerLevel
     type: number
@@ -783,7 +783,7 @@ C_AzeriteItem.IsAzeriteItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isAzeriteItem
     type: boolean
@@ -804,7 +804,7 @@ C_AzeriteItem.IsAzeriteItemEnabled:
   inputs:
   - - mixin: ItemLocationMixin
       name: azeriteItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isEnabled
     type: boolean
@@ -3286,7 +3286,7 @@ C_Cursor.GetCursorItem:
   outputs:
   - mixin: ItemLocationMixin
     name: item
-    type: table
+    type: ItemLocation
 C_Cursor.SetCursorCommunitiesStream:
   inputs:
   - - name: clubId
@@ -4123,7 +4123,7 @@ C_Item.DoesItemExist:
   inputs:
   - - mixin: ItemLocationMixin
       name: emptiableItemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemExists
     type: boolean
@@ -4141,7 +4141,7 @@ C_Item.GetCurrentItemLevel:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: currentItemLevel
     nilable: true
@@ -4150,7 +4150,7 @@ C_Item.GetItemGUID:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemGuid
     type: string
@@ -4158,7 +4158,7 @@ C_Item.GetItemIcon:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: icon
     nilable: true
@@ -4175,7 +4175,7 @@ C_Item.GetItemID:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemID
     type: number
@@ -4183,7 +4183,7 @@ C_Item.GetItemInventoryType:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: inventoryType
     nilable: true
@@ -4200,7 +4200,7 @@ C_Item.GetItemLink:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemLink
     nilable: true
@@ -4209,7 +4209,7 @@ C_Item.GetItemName:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemName
     nilable: true
@@ -4226,7 +4226,7 @@ C_Item.GetItemQuality:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: itemQuality
     nilable: true
@@ -4243,7 +4243,7 @@ C_Item.GetStackCount:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: stackCount
     type: number
@@ -4251,7 +4251,7 @@ C_Item.IsBound:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isBound
     type: boolean
@@ -4259,7 +4259,7 @@ C_Item.IsItemDataCached:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isCached
     type: boolean
@@ -4274,7 +4274,7 @@ C_Item.IsLocked:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs:
   - name: isLocked
     type: boolean
@@ -4282,7 +4282,7 @@ C_Item.LockItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs: {}
 C_Item.LockItemByGUID:
   inputs:
@@ -4293,7 +4293,7 @@ C_Item.RequestLoadItemData:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs: {}
 C_Item.RequestLoadItemDataByID:
   inputs:
@@ -4304,7 +4304,7 @@ C_Item.UnlockItem:
   inputs:
   - - mixin: ItemLocationMixin
       name: itemLocation
-      type: table
+      type: ItemLocation
   outputs: {}
 C_Item.UnlockItemByGUID:
   inputs:
