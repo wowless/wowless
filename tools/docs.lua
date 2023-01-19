@@ -134,7 +134,7 @@ local knownMixinStructs = {
 }
 local function t2ty(t, ns, mixin)
   if t == 'table' and mixin then
-    return knownMixinStructs[mixin], true
+    return knownMixinStructs[mixin] or 'table', true
   elseif types[t] then
     return types[t]
   end
