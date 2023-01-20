@@ -14,7 +14,7 @@ end
 local plprettywrite = require('pl.pretty').write
 
 local getStub = (function()
-  local structures = require('wowapi.data').structures[product]
+  local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
   local defaultOutputs = {
     boolean = 'false',
     ['function'] = 'function() end',

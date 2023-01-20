@@ -10,6 +10,7 @@ end)()
 
 local lfs = require('lfs')
 local writeFile = require('pl.file').write
+local parseYaml = require('wowapi.yaml').parseFile
 local pprintYaml = require('wowapi.yaml').pprint
 local product = args.product
 
@@ -76,7 +77,7 @@ do
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
 end
 
-local enum = require('wowapi.yaml').parseFile('data/products/' .. product .. '/globals.yaml').Enum
+local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
 
 local tabs, funcs, events = {}, {}, {}
 for _, t in pairs(docs) do
@@ -111,7 +112,7 @@ local tys = {}
 for name, tab in pairs(tabs) do
   tys[name] = tab.Type
 end
-for k in pairs(require('wowapi.data').structures[product]) do
+for k in pairs(parseYaml('data/products/' .. product .. '/structures.yaml')) do
   if tys[k] and tys[k] ~= 'Structure' then
     error(('%s is a wowless structure but is a %s in docs'):format(k, tys[k]))
   else
