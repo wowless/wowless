@@ -255,6 +255,7 @@ SendSystemMessage:
   - api
   states:
   - Time
+  - Units
 SetPortraitTexture: {}
 sin: {}
 tan: {}
