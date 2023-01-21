@@ -1,0 +1,13 @@
+---
+Mainline:
+  alternate: Mainline
+  dir: Interface
+TBC:
+  alternate: BCC
+  dir: Interface_TBC
+Vanilla:
+  alternate: Classic
+  dir: Interface_Vanilla
+Wrath:
+  alternate: WOTLKC
+  dir: Interface_Wrath

@@ -108,6 +108,9 @@ local rules = {
   stamp = {
     command = 'touch $out',
   },
+  yaml2lua = {
+    command = 'lua tools/yaml2lua.lua $in > $out',
+  },
 }
 
 local builds = {
@@ -201,6 +204,11 @@ local builds = {
     outs_implicit = 'build/listfile.lua',
     rule = 'mklistfile',
   },
+  {
+    ins = 'data/flavors.yaml',
+    outs = 'build/flavors.lua',
+    rule = 'yaml2lua',
+  },
 }
 
 for _, p in ipairs(productList) do
@@ -270,6 +278,7 @@ for _, p in ipairs(productList) do
   local rundeps = {
     'wowless/ext.so',
     'build/wowless.stamp',
+    'build/flavors.lua',
     dataStamp,
     fetchStamp,
     elune,
@@ -382,6 +391,7 @@ end
 table.insert(builds, {
   ins = {
     '.busted',
+    'build/flavors.lua',
     'build/wowless.stamp',
     'data/impl.yaml',
     'wowless/ext.so',

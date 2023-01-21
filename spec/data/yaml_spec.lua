@@ -3,6 +3,7 @@ local yaml = require('wowapi.yaml')
 local validate = require('wowapi.schema').validate
 
 local globalschemas = {
+  ['data/flavors'] = 'flavors',
   ['data/impl'] = 'impl',
   ['tools/addons'] = 'addons',
 }

@@ -18,6 +18,12 @@ local function loaddir(dir, ext)
   end
 end
 
+local function global(f)
+  return function()
+    return extLoaders.yaml('data/' .. f .. '.yaml')
+  end
+end
+
 local function perproduct(f)
   return function()
     local t = {}
@@ -30,9 +36,8 @@ end
 
 local fns = {
   apis = perproduct('apis'),
-  impl = function()
-    return extLoaders.yaml('data/impl.yaml')
-  end,
+  flavors = global('flavors'),
+  impl = global('impl'),
   schemas = loaddir('schemas', 'yaml'),
   sqlcursor = loaddir('sql/cursor', 'sql'),
   sqllookup = loaddir('sql/lookup', 'sql'),

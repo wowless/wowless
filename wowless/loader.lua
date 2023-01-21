@@ -624,13 +624,7 @@ local function loader(api, cfg)
   end
 
   local build = datalua.build
-
-  local alternateVersionNames = {
-    Mainline = 'Mainline',
-    TBC = 'BCC',
-    Vanilla = 'Classic',
-    Wrath = 'WOTLKC',
-  }
+  local flavors = require('build.flavors')
 
   local function parseToc(tocFile, content)
     local attrs = {}
@@ -653,12 +647,12 @@ local function loader(api, cfg)
   local function resolveTocDir(tocDir)
     api.log(1, 'resolving %s', tocDir)
     local base = path.basename(tocDir)
-    local version = build.flavor
+    local flavor = build.flavor
     local toTry = {
-      '_' .. version,
-      '-' .. version,
-      '_' .. alternateVersionNames[version],
-      '-' .. alternateVersionNames[version],
+      '_' .. flavor,
+      '-' .. flavor,
+      '_' .. flavors[flavor].alternate,
+      '-' .. flavors[flavor].alternate,
       '',
     }
     for _, try in ipairs(toTry) do
@@ -807,13 +801,7 @@ local function loader(api, cfg)
     for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do
       loadFile(file)
     end
-    local frameXmlBindingsDirMap = {
-      Mainline = 'Interface',
-      TBC = 'Interface_TBC',
-      Vanilla = 'Interface_Vanilla',
-      Wrath = 'Interface_Wrath',
-    }
-    loadFile(path.join(rootDir, frameXmlBindingsDirMap[build.flavor], 'FrameXML', 'Bindings.xml'))
+    loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
     local blizzardAddons = {}
     for name, toc in pairs(addonData) do
       if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' then
