@@ -98,9 +98,14 @@ local sqlcursors = {}
 local sqllookups = {}
 do
   local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
+  local implcfg = parseYaml('data/impl.yaml')
   for name, apicfg in pairs(cfg) do
     if not apicfg.debug then
       if apicfg.impl then
+        local ic = implcfg[apicfg.impl]
+        apicfg.frameworks = ic.frameworks
+        apicfg.sqls = ic.sqls
+        apicfg.states = ic.states
         if not impls[apicfg.impl] then
           impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
         end

@@ -235,6 +235,7 @@ for _, p in ipairs(productList) do
     ins = {
       'build/sql.stamp',
       'data/products/' .. p .. '/apis.yaml',
+      'data/impl.yaml',
       'tools/dblist.lua',
       'tools/util.lua',
     },
@@ -325,11 +326,12 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p },
     ins_implicit = {
-      'tools/prep.lua',
       'build/impl.stamp',
       'build/sql.stamp',
       'build/state.stamp',
       'build/uiobjects.stamp',
+      'data/impl.yaml',
+      'tools/prep.lua',
       dataStamp,
     },
     outs_implicit = datalua,
@@ -378,7 +380,15 @@ for k, v in pairs(require('wowapi.yaml').parseFile('tools/addons.yaml')) do
 end
 
 table.insert(builds, {
-  ins = { '.busted', 'wowless/ext.so', 'build/wowless.stamp', addonGeneratedFiles, elune, runtimes },
+  ins = {
+    '.busted',
+    'build/wowless.stamp',
+    'data/impl.yaml',
+    'wowless/ext.so',
+    addonGeneratedFiles,
+    elune,
+    runtimes,
+  },
   outs = 'test.out',
   rule = 'mktestout',
 })

@@ -4,20 +4,26 @@ local args = (function()
   return parser:parse()
 end)()
 
+local parseYaml = require('wowapi.yaml').parseFile
+
 local function dblist(product)
   local dbset = {
     GlobalStrings = true,
     ManifestInterfaceTOCData = true,
   }
-  local productapis = require('wowapi.yaml').parseFile('data/products/' .. product .. '/apis.yaml')
+  local impls = parseYaml('data/impl.yaml')
+  local productapis = parseYaml('data/products/' .. product .. '/apis.yaml')
   local sqls = {}
   for _, api in pairs(productapis) do
-    for _, db in ipairs(api.dbs or {}) do
-      dbset[db.name] = true
-    end
-    for _, sql in ipairs(api.sqls or {}) do
-      local kk = sql.lookup and 'lookup' or 'cursor'
-      table.insert(sqls, kk .. '/' .. sql[kk])
+    local impl = impls[api.impl]
+    if impl then
+      for _, db in ipairs(impl.dbs or {}) do
+        dbset[db.name] = true
+      end
+      for _, sql in ipairs(impl.sqls or {}) do
+        local kk = sql.lookup and 'lookup' or 'cursor'
+        table.insert(sqls, kk .. '/' .. sql[kk])
+      end
     end
   end
   for _, sql in ipairs(sqls) do

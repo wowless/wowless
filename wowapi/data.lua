@@ -1,5 +1,4 @@
 local extLoaders = {
-  lua = loadfile,
   sql = require('pl.file').read,
   yaml = require('wowapi.yaml').parseFile,
 }
@@ -31,8 +30,9 @@ end
 
 local fns = {
   apis = perproduct('apis'),
-  cvars = perproduct('cvars'),
-  impl = loaddir('impl', 'lua'),
+  impl = function()
+    return extLoaders.yaml('data/impl.yaml')
+  end,
   schemas = loaddir('schemas', 'yaml'),
   sqlcursor = loaddir('sql/cursor', 'sql'),
   sqllookup = loaddir('sql/lookup', 'sql'),

@@ -2907,8 +2907,6 @@ C_Calendar.GetMonthInfo:
   outputs:
   - name: monthInfo
     type: C_Calendar.CalendarMonthInfo
-  states:
-  - Calendar
 C_Calendar.GetNextClubId:
   inputs:
   - {}
@@ -3014,16 +3012,12 @@ C_Calendar.SetAbsMonth:
     - name: year
       type: number
   outputs: {}
-  states:
-  - Calendar
 C_Calendar.SetMonth:
   impl: C_Calendar.SetMonth
   inputs:
   - - name: offsetMonths
       type: number
   outputs: {}
-  states:
-  - Calendar
 C_Calendar.SetNextClubId:
   inputs:
   - - name: clubId
@@ -3668,8 +3662,6 @@ C_ClassTalents.GetActiveConfigID:
   - name: activeConfigID
     nilable: true
     type: number
-  states:
-  - Talents
 C_ClassTalents.GetConfigIDsBySpecID:
   inputs:
   - - name: specID
@@ -5902,8 +5894,6 @@ C_Commentator.ZoomOut:
   - {}
   outputs: {}
 C_Console.GetAllCommands:
-  frameworks:
-  - datalua
   impl: C_Console.GetAllCommands
   inputs:
   - {}
@@ -6511,8 +6501,6 @@ C_CovenantSanctumUI.GetRenownLevels:
   - innerType: C_CovenantSanctumUI.CovenantSanctumRenownLevelInfo
     name: levels
     type: table
-  sqls:
-  - cursor: C_CovenantSanctumUI.GetRenownLevels
 C_CovenantSanctumUI.GetRenownRewardsForLevel:
   impl: C_CovenantSanctumUI.GetRenownRewardsForLevel
   inputs:
@@ -6524,9 +6512,6 @@ C_CovenantSanctumUI.GetRenownRewardsForLevel:
   - innerType: C_CovenantSanctumUI.CovenantSanctumRenownRewardInfo
     name: rewards
     type: table
-  sqls:
-  - cursor: C_CovenantSanctumUI.GetRenownRewardsForLevel
-    table: true
 C_CovenantSanctumUI.GetSanctumType:
   inputs:
   - {}
@@ -6799,9 +6784,6 @@ C_CreatureInfo.GetClassInfo:
   - name: classInfo
     nilable: true
     type: C_CreatureInfo.ClassInfo
-  sqls:
-  - lookup: C_CreatureInfo.GetClassInfo
-    table: true
 C_CreatureInfo.GetFactionInfo:
   inputs:
   - - name: raceID
@@ -6976,8 +6958,6 @@ C_Cursor.GetCursorItem:
     name: item
     type: ItemLocation
 C_CVar.GetCVar:
-  frameworks:
-  - datalua
   impl: C_CVar.GetCVar
   inputs:
   - - type: string
@@ -6985,8 +6965,6 @@ C_CVar.GetCVar:
   - name: value
     nilable: true
     type: string
-  states:
-  - CVars
 C_CVar.GetCVarBitfield:
   inputs:
   - - name: name
@@ -6998,8 +6976,6 @@ C_CVar.GetCVarBitfield:
     nilable: true
     type: boolean
 C_CVar.GetCVarBool:
-  frameworks:
-  - datalua
   impl: C_CVar.GetCVarBool
   inputs:
   - - type: string
@@ -7007,11 +6983,7 @@ C_CVar.GetCVarBool:
   - name: value
     nilable: true
     type: boolean
-  states:
-  - CVars
 C_CVar.GetCVarDefault:
-  frameworks:
-  - datalua
   impl: C_CVar.GetCVarDefault
 C_CVar.RegisterCVar:
   impl: C_CVar.RegisterCVar
@@ -7020,8 +6992,6 @@ C_CVar.RegisterCVar:
     - nilable: true
       type: string
   outputs: {}
-  states:
-  - CVars
 C_CVar.ResetTestCVars:
   inputs:
   - {}
@@ -7038,8 +7008,6 @@ C_CVar.SetCVar:
   - name: success
     nilable: true
     type: boolean
-  states:
-  - CVars
 C_CVar.SetCVarBitfield:
   inputs:
   - - name: name
@@ -8912,8 +8880,6 @@ C_Item.DoesItemExistByID:
   outputs:
   - name: itemExists
     type: boolean
-  sqls:
-  - lookup: C_Item.DoesItemExistByID
 C_Item.DoesItemMatchBonusTreeReplacement:
   inputs:
   - - mixin: ItemLocationMixin
@@ -9313,9 +9279,6 @@ C_ItemInteraction.GetItemInteractionInfo:
   - name: info
     nilable: true
     type: C_ItemInteraction.ItemInteractionFrameInfo
-  sqls:
-  - lookup: C_ItemInteraction.GetItemInteractionInfo
-    table: true
 C_ItemInteraction.GetItemInteractionSpellId:
   inputs:
   - {}
@@ -10466,9 +10429,6 @@ C_Map.GetMapInfo:
   - name: info
     nilable: true
     type: C_Map.UiMapDetails
-  sqls:
-  - lookup: C_Map.GetMapInfo
-    table: true
 C_Map.GetMapInfoAtPosition:
   inputs:
   - - name: uiMapID
@@ -14533,9 +14493,6 @@ C_ScriptedAnimations.GetAllScriptedAnimationEffects:
   - innerType: C_ScriptedAnimations.ScriptedAnimationEffect
     name: scriptedAnimationEffects
     type: table
-  sqls:
-  - cursor: C_ScriptedAnimations.GetAllScriptedAnimationEffects
-    table: true
 C_SharedCharacterServices.GetLastSeenCharacterUpgradePopup: {}
 C_SharedCharacterServices.GetLastSeenExpansionTrialPopup: {}
 C_SharedCharacterServices.GetUpgradeDistributions: {}
@@ -15650,8 +15607,6 @@ C_Texture.GetAtlasInfo:
   - name: info
     nilable: true
     type: C_Texture.AtlasInfo
-  sqls:
-  - lookup: C_Texture.GetAtlasInfo
 C_Texture.GetCraftingReagentQualityChatIcon:
   inputs:
   - - name: quality
@@ -15667,8 +15622,6 @@ C_Texture.GetFilenameFromFileDataID:
   - name: filename
     type: string
 C_Timer.After:
-  frameworks:
-  - api
   impl: C_Timer.After
   inputs:
   - - name: seconds
@@ -15676,8 +15629,6 @@ C_Timer.After:
     - name: callback
       type: function
   outputs: {}
-  states:
-  - Time
 C_Timer.NewTicker:
   impl: C_Timer.NewTicker
   inputs:
@@ -15691,8 +15642,6 @@ C_Timer.NewTicker:
   outputs:
   - name: cbObject
     type: userdata
-  states:
-  - Time
 C_Timer.NewTimer:
   impl: C_Timer.NewTimer
   inputs:
@@ -15703,8 +15652,6 @@ C_Timer.NewTimer:
   outputs:
   - name: cbObject
     type: userdata
-  states:
-  - Time
 C_TooltipComparison.GetItemComparisonDelta:
   inputs:
   - - name: comparisonItem
@@ -17425,8 +17372,6 @@ C_Traits.GetConfigIDByTreeID:
   - name: configID
     type: number
 C_Traits.GetConfigInfo:
-  frameworks:
-  - datalua
   impl: C_Traits.GetConfigInfo
   inputs:
   - - name: configID
@@ -17434,11 +17379,6 @@ C_Traits.GetConfigInfo:
   outputs:
   - name: configInfo
     type: C_Traits.TraitConfigInfo
-  sqls:
-  - lookup: C_Traits.GetConfigInfo
-  states:
-  - Units
-  - Talents
 C_Traits.GetConfigsByType:
   inputs:
   - - name: configType
@@ -17480,8 +17420,6 @@ C_Traits.GetNodeCost:
     name: costs
     type: table
 C_Traits.GetNodeInfo:
-  frameworks:
-  - datalua
   impl: C_Traits.GetNodeInfo
   inputs:
   - - name: configID
@@ -17491,18 +17429,6 @@ C_Traits.GetNodeInfo:
   outputs:
   - name: nodeInfo
     type: C_Traits.TraitNodeInfo
-  sqls:
-  - lookup: C_Traits.GetNodeInfo
-  - cursor: C_Traits.GetNodeInfo.entries
-    table: true
-  - cursor: C_Traits.GetNodeInfo.edges
-    table: true
-  - cursor: C_Traits.GetNodeInfo.groups
-  - cursor: C_Traits.GetNodeInfo.conditions
-    table: true
-  states:
-  - Units
-  - Talents
 C_Traits.GetStagedChangesCost:
   inputs:
   - - name: configID
@@ -17588,8 +17514,6 @@ C_Traits.GetTreeNodes:
   - innerType: number
     name: nodeIDs
     type: table
-  sqls:
-  - cursor: C_Traits.GetTreeNodes
 C_Traits.HasValidInspectData:
   inputs:
   - {}
@@ -18841,8 +18765,6 @@ C_UIColor.GetColors:
   - innerType: C_UIColor.DBColorExport
     name: colors
     type: table
-  sqls:
-  - cursor: C_UIColor.GetColors
 C_UIWidgetManager.GetAllWidgetsBySetID:
   inputs:
   - - name: setID
@@ -20023,8 +19945,6 @@ C_WowTokenUI.StartTokenSell:
       type: string
   outputs: {}
 C_XMLUtil.GetTemplateInfo:
-  frameworks:
-  - api
   impl: C_XMLUtil.GetTemplateInfo
   inputs:
   - - name: name
@@ -20421,8 +20341,6 @@ cos:
   impl: cos
   nowrap: true
 CreateFont:
-  frameworks:
-  - api
   impl: CreateFont
   inputs:
   - - name: name
@@ -20431,12 +20349,8 @@ CreateFont:
   - name: font
     type: table
 CreateForbiddenFrame:
-  frameworks:
-  - api
   impl: CreateForbiddenFrame
 CreateFrame:
-  frameworks:
-  - api
   impl: CreateFrame
 CreateMacro: {}
 CreateNewRaidProfile: {}
@@ -20607,8 +20521,6 @@ EnableSpellAutocast: {}
 EndBoundTradeable: {}
 EndRefund: {}
 EnumerateFrames:
-  frameworks:
-  - api
   impl: EnumerateFrames
   inputs:
   - - name: frame
@@ -20652,8 +20564,6 @@ FillLocalizedClassList:
   outputs:
   - name: classTable
     type: table
-  sqls:
-  - cursor: FillLocalizedClassList
 FindBaseSpellByID: {}
 FindFlyoutSlotBySpellID: {}
 FindSpellBookSlotBySpellID:
@@ -20864,8 +20774,6 @@ GetAddOnEnableState:
   outputs:
   - name: enabledState
     type: number
-  states:
-  - Addons
 GetAddOnInfo:
   impl: GetAddOnInfo
   inputs:
@@ -20891,8 +20799,6 @@ GetAddOnInfo:
     type: string
   - name: newVersion
     type: boolean
-  states:
-  - Addons
 GetAddOnMemoryUsage:
   inputs:
   - - name: index
@@ -20917,8 +20823,6 @@ GetAddOnMetadata:
   - name: value
     nilable: true
     type: string
-  states:
-  - Addons
 GetAddOnOptionalDependencies: {}
 GetAllowLowLevelRaid: {}
 GetAlternativeDefaultLanguage: {}
@@ -21131,8 +21035,6 @@ GetBlockChance: {}
 GetBonusBarIndex: {}
 GetBonusBarOffset: {}
 GetBuildInfo:
-  frameworks:
-  - datalua
   impl: GetBuildInfo
   inputs:
   - {}
@@ -21247,8 +21149,6 @@ GetChatWindowInfo:
   - name: uninteractable
     type: boolean
 GetChatWindowMessages:
-  frameworks:
-  - env
   impl: GetChatWindowMessages
   inputs:
   - - name: index
@@ -21267,11 +21167,7 @@ GetClassInfo:
     type: string
   - name: classID
     type: number
-  sqls:
-  - lookup: GetClassInfo
 GetClickFrame:
-  frameworks:
-  - env
   impl: GetClickFrame
   inputs:
   - - type: string
@@ -21571,8 +21467,6 @@ GetFactionInfoByID:
 GetFailedPVPTalentIDs: {}
 GetFailedTalentIDs: {}
 getfenv:
-  frameworks:
-  - env
   impl: getfenv
 GetFileIDFromPath: {}
 GetFileStreamingStatus:
@@ -22034,8 +21928,6 @@ GetInventorySlotInfo:
     type: number
   - name: texture
     type: number
-  sqls:
-  - lookup: GetInventorySlotInfo
 GetInviteConfirmationInfo: {}
 GetItemChildInfo: {}
 GetItemClassInfo:
@@ -22808,8 +22700,6 @@ GetNumAddOns:
   - {}
   outputs:
   - type: number
-  states:
-  - Addons
 GetNumArchaeologyRaces:
   outputs:
   - type: number
@@ -23757,14 +23647,10 @@ GetScreenHeight:
   impl: GetScreenHeight
   outputs:
   - type: number
-  states:
-  - System
 GetScreenWidth:
   impl: GetScreenWidth
   outputs:
   - type: number
-  states:
-  - System
 GetScriptCPUUsage: {}
 GetSecondsUntilParentalControlsKick: {}
 GetSelectedArtifactInfo: {}
@@ -23877,10 +23763,6 @@ GetSpecializationInfo:
     type: string
   - name: primaryStat
     type: number
-  sqls:
-  - lookup: GetSpecializationInfo
-  states:
-  - Units
 GetSpecializationInfoByID:
   impl: GetSpecializationInfoByID
   inputs:
@@ -23904,8 +23786,6 @@ GetSpecializationInfoByID:
     type: string
   - name: className
     type: string
-  sqls:
-  - lookup: GetSpecializationInfoByID
 GetSpecializationInfoForClassID:
   inputs:
   - - name: classID
@@ -23953,10 +23833,6 @@ GetSpecializationInfoForSpecID:
     type: boolean
   - name: masterySpellID
     type: number
-  sqls:
-  - lookup: GetSpecializationInfoForSpecID
-  states:
-  - Units
 GetSpecializationMasterySpells: {}
 GetSpecializationNameForSpecID:
   inputs:
@@ -24255,8 +24131,6 @@ GetTime:
   impl: GetTime
   outputs:
   - type: number
-  states:
-  - Time
 GetTimePreciseSec:
   inputs:
   - {}
@@ -24763,8 +24637,6 @@ HaveQuestRewardData:
 HearthAndResurrectFromArea: {}
 HideRepairCursor: {}
 hooksecurefunc:
-  frameworks:
-  - env
   impl: hooksecurefunc
   outputs: {}
 InboxItemCanDelete:
@@ -24825,8 +24697,6 @@ IsAddOnLoaded:
       type: string
   outputs:
   - type: boolean
-  states:
-  - Addons
 IsAddOnLoadOnDemand:
   impl: IsAddOnLoadOnDemand
   inputs:
@@ -24836,8 +24706,6 @@ IsAddOnLoadOnDemand:
       type: string
   outputs:
   - type: oneornil
-  states:
-  - Addons
 IsAddonVersionCheckEnabled:
   inputs:
   - {}
@@ -25058,8 +24926,6 @@ IsLoggedIn:
   outputs:
   - name: isLoggedIn
     type: boolean
-  states:
-  - System
 IsMacClient: {}
 IsMasterLooter: {}
 IsMetaKeyDown: {}
@@ -25199,8 +25065,6 @@ IsSwimming: {}
 IsTalentSpell: {}
 IsTargetLoose: {}
 IsTestBuild:
-  frameworks:
-  - datalua
   impl: IsTestBuild
   inputs:
   - {}
@@ -25361,8 +25225,6 @@ LFGTeleport: {}
 ListChannelByName: {}
 ListChannels: {}
 LoadAddOn:
-  frameworks:
-  - loader
   impl: LoadAddOn
   inputs:
   - - name: addonIndex
@@ -25764,14 +25626,10 @@ RequestRaidInfo: {}
 RequestRandomBattlegroundInstanceInfo: {}
 RequestRatedInfo: {}
 RequestTimePlayed:
-  frameworks:
-  - api
   impl: RequestTimePlayed
   inputs:
   - {}
   outputs: {}
-  states:
-  - Time
 RequeueSkirmish: {}
 ResetAddOns:
   inputs:
@@ -25818,8 +25676,6 @@ RollOnLoot: {}
 RunBinding: {}
 RunMacro: {}
 RunMacroText:
-  frameworks:
-  - api
   impl: RunMacroText
   inputs:
   - - name: macroText
@@ -25864,8 +25720,6 @@ SearchLFGJoin: {}
 SearchLFGLeave: {}
 SearchLFGSort: {}
 securecall:
-  frameworks:
-  - env
   impl: securecall
 securecallfunction:
   stdlib: securecallfunction
@@ -25909,15 +25763,11 @@ SendSubscriptionInterstitialResponse:
       type: number
   outputs: {}
 SendSystemMessage:
-  frameworks:
-  - api
   impl: SendSystemMessage
   inputs:
   - - name: msg
       type: string
   outputs: {}
-  states:
-  - Time
 SetAchievementComparisonUnit: {}
 SetAchievementSearchString: {}
 SetActionBarToggles: {}
@@ -26592,8 +26442,6 @@ UnitClass:
     type: string
   - name: classID
     type: number
-  sqls:
-  - lookup: UnitClass
 UnitClassBase:
   impl: UnitClassBase
   inputs:
@@ -26605,8 +26453,6 @@ UnitClassBase:
     type: string
   - name: classID
     type: number
-  sqls:
-  - lookup: UnitClassBase
 UnitClassification:
   inputs:
   - - name: unit
@@ -26656,8 +26502,6 @@ UnitFactionGroup:
     type: string
   - name: localizedFactionName
     type: string
-  sqls:
-  - lookup: UnitFactionGroup
 UnitFullName:
   inputs:
   - - type: string
@@ -27111,8 +26955,6 @@ UnitPowerType:
   - name: altB
     nilable: true
     type: number
-  sqls:
-  - lookup: UnitPowerType
 UnitPvpClassification:
   inputs:
   - - name: unit
@@ -27152,8 +26994,6 @@ UnitRace:
     type: string
   - name: id
     type: number
-  sqls:
-  - lookup: UnitRace
 UnitRangedAttackPower: {}
 UnitRangedDamage: {}
 UnitReaction:

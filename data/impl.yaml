@@ -1,0 +1,282 @@
+---
+acos: {}
+asin: {}
+atan: {}
+atan2: {}
+C_Calendar.GetMonthInfo:
+  states:
+  - Calendar
+C_Calendar.SetAbsMonth:
+  states:
+  - Calendar
+C_Calendar.SetMonth:
+  states:
+  - Calendar
+C_ClassTalents.GetActiveConfigID:
+  states:
+  - Talents
+C_Console.GetAllCommands:
+  frameworks:
+  - datalua
+C_CovenantSanctumUI.GetRenownLevels:
+  sqls:
+  - cursor: C_CovenantSanctumUI.GetRenownLevels
+C_CovenantSanctumUI.GetRenownRewardsForLevel:
+  sqls:
+  - cursor: C_CovenantSanctumUI.GetRenownRewardsForLevel
+    table: true
+C_CreatureInfo.GetClassInfo:
+  sqls:
+  - lookup: C_CreatureInfo.GetClassInfo
+    table: true
+C_CVar.GetCVar:
+  frameworks:
+  - datalua
+  states:
+  - CVars
+C_CVar.GetCVarBool:
+  frameworks:
+  - datalua
+  states:
+  - CVars
+C_CVar.GetCVarDefault:
+  frameworks:
+  - datalua
+C_CVar.RegisterCVar:
+  states:
+  - CVars
+C_CVar.SetCVar:
+  states:
+  - CVars
+C_DateAndTime.AdjustTimeByDays: {}
+C_DateAndTime.AdjustTimeByMinutes: {}
+C_DateAndTime.CompareCalendarTime: {}
+C_Item.DoesItemExistByID:
+  sqls:
+  - lookup: C_Item.DoesItemExistByID
+C_ItemInteraction.GetItemInteractionInfo:
+  sqls:
+  - lookup: C_ItemInteraction.GetItemInteractionInfo
+    table: true
+C_Map.GetMapInfo:
+  sqls:
+  - lookup: C_Map.GetMapInfo
+    table: true
+C_ScriptedAnimations.GetAllScriptedAnimationEffects:
+  sqls:
+  - cursor: C_ScriptedAnimations.GetAllScriptedAnimationEffects
+    table: true
+C_Texture.GetAtlasInfo:
+  sqls:
+  - lookup: C_Texture.GetAtlasInfo
+C_Timer.After:
+  frameworks:
+  - api
+  states:
+  - Time
+C_Timer.NewTicker:
+  states:
+  - Time
+C_Timer.NewTimer:
+  states:
+  - Time
+C_Traits.GetConfigInfo:
+  frameworks:
+  - datalua
+  sqls:
+  - lookup: C_Traits.GetConfigInfo
+  states:
+  - Units
+  - Talents
+C_Traits.GetNodeInfo:
+  frameworks:
+  - datalua
+  sqls:
+  - lookup: C_Traits.GetNodeInfo
+  - cursor: C_Traits.GetNodeInfo.entries
+    table: true
+  - cursor: C_Traits.GetNodeInfo.edges
+    table: true
+  - cursor: C_Traits.GetNodeInfo.groups
+  - cursor: C_Traits.GetNodeInfo.conditions
+    table: true
+  states:
+  - Units
+  - Talents
+C_Traits.GetTreeNodes:
+  sqls:
+  - cursor: C_Traits.GetTreeNodes
+C_UIColor.GetColors:
+  sqls:
+  - cursor: C_UIColor.GetColors
+C_XMLUtil.GetTemplateInfo:
+  frameworks:
+  - api
+cos: {}
+CreateFont:
+  frameworks:
+  - api
+CreateForbiddenFrame:
+  frameworks:
+  - api
+CreateFrame:
+  frameworks:
+  - api
+debugprofilestop: {}
+debugstack: {}
+EnumerateFrames:
+  frameworks:
+  - api
+FillLocalizedClassList:
+  sqls:
+  - cursor: FillLocalizedClassList
+GetAddOnEnableState:
+  states:
+  - Addons
+GetAddOnInfo:
+  states:
+  - Addons
+GetAddOnMetadata:
+  states:
+  - Addons
+GetBuildInfo:
+  frameworks:
+  - datalua
+GetChatWindowInfo: {}
+GetChatWindowMessages:
+  frameworks:
+  - env
+GetClassInfo:
+  sqls:
+  - lookup: GetClassInfo
+GetClickFrame:
+  frameworks:
+  - env
+getfenv:
+  frameworks:
+  - env
+GetInventorySlotInfo:
+  sqls:
+  - lookup: GetInventorySlotInfo
+GetItemQualityColor: {}
+GetNumAddOns:
+  states:
+  - Addons
+GetNumTalents:
+  sqls:
+  - lookup: GetNumTalents
+  states:
+  - Units
+GetNumTalentTabs:
+  sqls:
+  - lookup: GetNumTalentTabs
+  states:
+  - Units
+GetScreenHeight:
+  states:
+  - System
+GetScreenWidth:
+  states:
+  - System
+GetSpecializationInfo:
+  sqls:
+  - lookup: GetSpecializationInfo
+  states:
+  - Units
+GetSpecializationInfoByID:
+  sqls:
+  - lookup: GetSpecializationInfoByID
+GetSpecializationInfoForSpecID:
+  sqls:
+  - lookup: GetSpecializationInfoForSpecID
+  states:
+  - Units
+GetTalentInfo_Vanilla:
+  sqls:
+  - lookup: GetTalentInfo_Vanilla
+  states:
+  - Units
+GetTalentPrereqs_Vanilla:
+  sqls:
+  - cursor: GetTalentPrereqs
+  states:
+  - Units
+GetTalentPrereqs_Wrath:
+  sqls:
+  - cursor: GetTalentPrereqs
+  states:
+  - Units
+GetTalentTabInfo_Vanilla:
+  sqls:
+  - lookup: GetTalentTabInfo
+  states:
+  - Units
+GetTalentTabInfo_Wrath:
+  sqls:
+  - lookup: GetTalentTabInfo
+  states:
+  - Units
+GetTime:
+  states:
+  - Time
+hooksecurefunc:
+  frameworks:
+  - env
+IsAddOnLoaded:
+  states:
+  - Addons
+IsAddOnLoadOnDemand:
+  states:
+  - Addons
+IsLoggedIn:
+  states:
+  - System
+IsTestBuild:
+  frameworks:
+  - datalua
+LoadAddOn:
+  frameworks:
+  - loader
+RequestTimePlayed:
+  frameworks:
+  - api
+  states:
+  - Time
+RunMacroText:
+  frameworks:
+  - api
+RunScript: {}
+securecall:
+  frameworks:
+  - env
+SecureCmdOptionParse: {}
+SendSystemMessage:
+  frameworks:
+  - api
+  states:
+  - Time
+SetPortraitTexture: {}
+sin: {}
+tan: {}
+UnitClass:
+  sqls:
+  - lookup: UnitClass
+UnitClassBase:
+  sqls:
+  - lookup: UnitClassBase
+UnitExists: {}
+UnitFactionGroup:
+  sqls:
+  - lookup: UnitFactionGroup
+UnitGUID: {}
+UnitIsPlayer: {}
+UnitIsUnit: {}
+UnitLevel: {}
+UnitName: {}
+UnitPowerType:
+  sqls:
+  - lookup: UnitPowerType
+UnitRace:
+  sqls:
+  - lookup: UnitRace
+UnitSex: {}
