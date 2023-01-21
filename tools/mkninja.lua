@@ -98,7 +98,7 @@ local rules = {
     command = 'lua tools/render.lua $in',
   },
   run = {
-    command = elune .. ' wowless.lua -p $product -e5 > $out',
+    command = elune .. ' wowless.lua -p $product -e5 -a addon/Wowless -a build/products/$product/WowlessData > $out',
     pool = 'run_pool',
   },
   runaddon = {
