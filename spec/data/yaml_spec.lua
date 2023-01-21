@@ -3,7 +3,8 @@ local yaml = require('wowapi.yaml')
 local validate = require('wowapi.schema').validate
 
 local globalschemas = {
-  impl = 'impl',
+  ['data/impl'] = 'impl',
+  ['tools/addons'] = 'addons',
 }
 
 local dirschemas = {
@@ -54,9 +55,9 @@ describe('yaml', function()
     end)
   end
   for file, schemaname in pairs(globalschemas) do
-    describe('data/' .. file, function()
+    describe(file, function()
       local schema = yaml.parseFile('data/schemas/' .. schemaname .. '.yaml').type
-      local str = plfile.read('data/' .. file .. '.yaml')
+      local str = plfile.read(file .. '.yaml')
       local data = yaml.parse(str)
       it('is correctly formatted', function()
         assert.same(str, yaml.pprint(data))
