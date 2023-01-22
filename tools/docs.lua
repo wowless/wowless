@@ -77,11 +77,12 @@ do
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
 end
 
+local config = parseYaml('data/products/' .. product .. '/config.yaml').docs
 local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
 
 local tabs, funcs, events = {}, {}, {}
 for _, t in pairs(docs) do
-  if not t.Type or t.Type == 'System' and t.Namespace ~= 'C_ConfigurationWarnings' then
+  if not t.Type or t.Type == 'System' then
     for _, tab in ipairs(t.Tables or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. tab.Name
       assert(not tabs[name])
@@ -157,6 +158,15 @@ local function t2ty(t, ns, mixin)
   end
 end
 
+local function split(name)
+  local dotpos = name:find('%.')
+  if not dotpos then
+    return nil, name
+  else
+    return name:sub(1, dotpos - 1), name:sub(dotpos + 1)
+  end
+end
+
 local rewriters = {
   apis = function()
     local function insig(fn, ns)
@@ -187,7 +197,13 @@ local rewriters = {
       end
       return outputs
     end
-    local function skip(api)
+    local cfgskip = deref(config, 'apis', 'skip_namespaces') or {}
+    local function skip(apis, name)
+      local ns = split(name)
+      if ns and cfgskip[ns] then
+        return true
+      end
+      local api = apis[name]
       if not api then
         return false
       end
@@ -204,15 +220,19 @@ local rewriters = {
     local y = require('wowapi.yaml')
     local f = 'data/products/' .. product .. '/apis.yaml'
     local apis = y.parseFile(f)
+    local nss = {}
     for name, fn in pairs(funcs) do
-      if enabled(apis, name) and not skip(apis[name]) then
-        local dotpos = name:find('%.')
-        local ns = dotpos and name:sub(1, dotpos - 1)
+      nss[split(name) or ''] = true
+      if enabled(apis, name) and not skip(apis, name) then
+        local ns = split(name)
         apis[name] = {
           inputs = { insig(fn, ns) },
           outputs = outsig(fn, ns),
         }
       end
+    end
+    for k in pairs(cfgskip) do
+      assert(nss[k], k .. ' in skip_namespaces but not in docs')
     end
     require('pl.file').write(f, y.pprint(apis))
   end,
@@ -271,8 +291,7 @@ local rewriters = {
     local filename = ('data/products/%s/events.yaml'):format(product)
     local out = require('wowapi.yaml').parseFile(filename)
     for name, ev in pairs(events) do
-      local dotpos = name:find('%.')
-      local ns = dotpos and name:sub(1, dotpos - 1)
+      local ns = split(name)
       local value = {
         payload = (function()
           local t = {}
@@ -314,8 +333,7 @@ local rewriters = {
     local out = require('wowapi.yaml').parseFile(filename)
     for name, tab in pairs(tabs) do
       if tab.Type == 'Structure' and enabled(out, name) then
-        local dotpos = name:find('%.')
-        local ns = dotpos and name:sub(1, dotpos - 1)
+        local ns = split(name)
         out[name] = (function()
           local ret = {}
           for _, field in ipairs(tab.Fields) do

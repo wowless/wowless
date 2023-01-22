@@ -1,0 +1,16 @@
+---
+name: config
+type:
+  record:
+    docs:
+      type:
+        record:
+          apis:
+            type:
+              record:
+                skip_namespaces:
+                  type:
+                    mapof:
+                      key: string
+                      value:
+                        record: null

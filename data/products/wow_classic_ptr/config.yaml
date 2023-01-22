@@ -1,0 +1,6 @@
+---
+docs:
+  apis:
+    skip_namespaces:
+      C_ConfigurationWarnings: {}
+      C_EditMode: {}

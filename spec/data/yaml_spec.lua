@@ -16,6 +16,7 @@ local dirschemas = {
 local productschemas = {
   apis = 'apis',
   build = 'build',
+  config = 'config',
   cvars = 'cvars',
   events = 'events',
   globals = 'globals',
