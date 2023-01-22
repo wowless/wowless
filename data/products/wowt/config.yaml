@@ -3,3 +3,6 @@ docs:
   apis:
     skip_namespaces:
       C_ConfigurationWarnings: {}
+  events:
+    never_sent:
+      SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}

@@ -289,11 +289,17 @@ local rewriters = {
 
   events = function()
     local filename = ('data/products/%s/events.yaml'):format(product)
+    local neversent = deref(config, 'events', 'never_sent') or {}
     local out = require('wowapi.yaml').parseFile(filename)
+    local seen = {}
     for name, ev in pairs(events) do
+      seen[ev.LiteralName] = true
       local ns = split(name)
-      local value = {
+      out[ev.LiteralName] = {
         payload = (function()
+          if neversent[ev.LiteralName] then
+            return nil
+          end
           local t = {}
           for _, arg in ipairs(ev.Payload or {}) do
             table.insert(t, {
@@ -315,12 +321,9 @@ local rewriters = {
           return t
         end)(),
       }
-      local k = ev.LiteralName
-      if out[k] and out[k].docsarewrong then
-        assert(not require('pl.tablex').deepcompare(out[k].payload, value.payload))
-      else
-        out[k] = value
-      end
+    end
+    for k in pairs(neversent) do
+      assert(seen[k], k .. ' is marked never_sent but not present in docs')
     end
     writeFile(filename, pprintYaml(out))
   end,

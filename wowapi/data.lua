@@ -36,6 +36,7 @@ end
 
 local fns = {
   apis = perproduct('apis'),
+  events = perproduct('events'),
   flavors = global('flavors'),
   impl = global('impl'),
   schemas = loaddir('schemas', 'yaml'),

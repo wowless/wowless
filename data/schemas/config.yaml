@@ -14,3 +14,13 @@ type:
                       key: string
                       value:
                         record: null
+          events:
+            type:
+              record:
+                never_sent:
+                  type:
+                    mapof:
+                      key:
+                        ref: event
+                      value:
+                        record: null

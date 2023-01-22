@@ -4,3 +4,9 @@ docs:
     skip_namespaces:
       C_ConfigurationWarnings: {}
       C_EditMode: {}
+  events:
+    never_sent:
+      EDIT_MODE_LAYOUTS_UPDATED: {}
+      INVENTORY_SEARCH_UPDATE: {}
+      PARTY_INVITE_CANCEL: {}
+      SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}

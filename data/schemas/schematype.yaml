@@ -60,6 +60,7 @@ type:
         type:
           oneof:
           - literal: api
+          - literal: event
           - literal: flavor
           - literal: impl
           - literal: schema
