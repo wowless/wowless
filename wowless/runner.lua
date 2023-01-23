@@ -222,8 +222,7 @@ local function run(cfg)
   end
 
   api.SendEvent('PLAYER_LOGOUT')
-  -- TODO reenable saving variables once infinite loops are fixed
-  -- loader.saveAllVariables()
+  loader.saveAllVariables()
   return api
 end
 

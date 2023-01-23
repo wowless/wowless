@@ -827,7 +827,7 @@ local function loader(api, cfg)
             if val ~= nil then
               table.insert(t, var)
               table.insert(t, ' = ')
-              table.insert(t, type(val) == 'table' and w(val) or tostring(val))
+              table.insert(t, type(val) == 'table' and w(val, '  ', true) or tostring(val))
               table.insert(t, '\n')
             end
           end
