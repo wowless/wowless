@@ -170,6 +170,9 @@ GetNumAddOns:
 GetNumClasses:
   sqls:
   - lookup: GetNumClasses
+GetNumSpecializationsForClassID:
+  sqls:
+  - lookup: GetNumSpecializationsForClassID
 GetNumTalents:
   sqls:
   - lookup: GetNumTalents

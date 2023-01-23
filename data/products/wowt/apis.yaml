@@ -22970,8 +22970,13 @@ GetNumSpecializations:
   outputs:
   - type: number
 GetNumSpecializationsForClassID:
+  impl: GetNumSpecializationsForClassID
+  inputs:
+  - - name: classID
+      type: number
   outputs:
-  - type: number
+  - name: numSpecializations
+    type: number
 GetNumSpellTabs:
   outputs:
   - type: number
