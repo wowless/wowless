@@ -24,3 +24,12 @@ type:
                         ref: event
                       value:
                         record: null
+    runner:
+      type:
+        record:
+          skip_events:
+            type:
+              mapof:
+                key:
+                  ref: event
+                value: string

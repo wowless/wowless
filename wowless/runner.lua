@@ -109,7 +109,6 @@ local function run(cfg)
         INSTANCE_LOCK_WARNING = true,
         MAIL_INBOX_UPDATE = true, -- InboxFrame.openMailID not set when it should be
         OPEN_MASTER_LOOT_LIST = true,
-        PERKS_PROGRAM_OPEN = true, -- temporarily disable while iterating on wowt
         PLAYER_LOGIN = true,
         PLAYER_LOGOUT = true,
         STORE_GUILD_MASTER_INFO_RECEIVED = true, -- SelectedRealm shenanigans
@@ -126,8 +125,10 @@ local function run(cfg)
         table = '{}',
         unknown = 'nil',
       }
-      for k, v in pairs(require('build.products.' .. cfg.product .. '.data').events) do
-        if not v.neverSent and not eventBlacklist[k] then
+      local datalua = require('build.products.' .. cfg.product .. '.data')
+      local skip = (datalua.config.runner or {}).skip_events or {}
+      for k, v in pairs(datalua.events) do
+        if not v.neverSent and not eventBlacklist[k] and not skip[k] then
           local payload = {}
           for _, p in ipairs(v.payload or {}) do
             local pv = typeToPayload[p.type] or 'nil'

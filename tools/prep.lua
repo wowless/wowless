@@ -173,6 +173,7 @@ end
 local data = {
   apis = apis,
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
+  config = parseYaml('data/products/' .. product .. '/config.yaml'),
   cvars = cvars,
   events = events,
   globals = parseYaml('data/products/' .. product .. '/globals.yaml'),
