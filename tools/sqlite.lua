@@ -92,9 +92,13 @@ local function factory(theProduct)
         error('failed to populate ' .. k .. ': ' .. msg)
       end
     end
+    table.insert(dbinit, 'CREATE INDEX MooIndex ON UiTextureAtlasMember (CommittedName COLLATE NOCASE)')
+    table.insert(dbinit, 'CREATE INDEX CowIndex ON UiTextureAtlas (ID)')
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
-    assert(db:exec(table.concat(dbinit, ';\n')) == lsqlite3.OK)
+    if db:exec(table.concat(dbinit, ';\n')) ~= lsqlite3.OK then
+      error('sqlite failure: ' .. db:errmsg())
+    end
   end
 
   return create, populate
