@@ -167,6 +167,9 @@ GetItemQualityColor: {}
 GetNumAddOns:
   states:
   - Addons
+GetNumClasses:
+  sqls:
+  - lookup: GetNumClasses
 GetNumTalents:
   sqls:
   - lookup: GetNumTalents

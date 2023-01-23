@@ -22466,8 +22466,12 @@ GetNumBuybackItems:
     type: number
 GetNumChannelMembers: {}
 GetNumClasses:
+  impl: GetNumClasses
+  inputs:
+  - {}
   outputs:
-  - type: number
+  - name: numClasses
+    type: number
 GetNumCompanions:
   inputs:
   - - name: type
