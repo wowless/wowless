@@ -23513,12 +23513,14 @@ GetSpecializationInfoByID:
   - name: className
     type: string
 GetSpecializationInfoForClassID:
+  impl: GetSpecializationInfoForClassID
   inputs:
   - - name: classID
       type: number
     - name: specIndex
       nilable: true
       type: number
+  mayreturnnothing: true
   outputs:
   - name: id
     type: number

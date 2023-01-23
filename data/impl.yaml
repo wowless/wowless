@@ -197,6 +197,11 @@ GetSpecializationInfo:
 GetSpecializationInfoByID:
   sqls:
   - lookup: GetSpecializationInfoByID
+GetSpecializationInfoForClassID:
+  sqls:
+  - lookup: GetSpecializationInfoForClassID
+  states:
+  - Units
 GetSpecializationInfoForSpecID:
   sqls:
   - lookup: GetSpecializationInfoForSpecID
