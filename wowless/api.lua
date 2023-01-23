@@ -134,27 +134,32 @@ local function new(log, maxErrors, product)
   local datalua = require('build.products.' .. product .. '.data')
 
   local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id)
-    local objname = ParentSub(objnamearg, parent)
+    local objname
+    if type(objnamearg) == 'string' then
+      objname = ParentSub(objnamearg, parent)
+    elseif type(objnamearg) == 'number' then
+      objname = tostring(objnamearg)
+    end
     assert(typename, 'must specify type for ' .. tostring(objname))
-    local type = uiobjectTypes[typename]
-    assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
+    local objtype = uiobjectTypes[typename]
+    assert(objtype, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
     assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
-    log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
-    local obj = setmetatable({}, type.metatable)
+    log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
+    local obj = setmetatable({}, objtype.metatable)
     obj[0] = newproxy()
     userdata[obj[0]] = {
       name = objname,
       type = typename,
     }
-    type.constructor(obj)
+    objtype.constructor(obj)
     SetParent(obj, parent)
     if InheritsFrom(typename, 'frame') then
       table.insert(frames, obj)
       u(obj).frameIndex = #frames
     end
     local tmpls = {}
-    if type.template then
-      table.insert(tmpls, type.template)
+    if objtype.template then
+      table.insert(tmpls, objtype.template)
     end
     if tmplsarg then
       for _, tmpl in ipairs(tmplsarg) do
@@ -165,7 +170,11 @@ local function new(log, maxErrors, product)
       template.initEarlyAttrs(obj)
     end
     if objname then
-      objname = ParentSub(objnamearg, u(obj).parent)
+      if type(objnamearg) == 'string' then
+        objname = ParentSub(objnamearg, u(obj).parent)
+      elseif type(objnamearg) == 'number' then
+        objname = tostring(objnamearg)
+      end
       u(obj).name = objname
       if env[objname] then
         log(3, 'overwriting global ' .. objname)

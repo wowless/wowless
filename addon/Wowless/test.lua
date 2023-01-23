@@ -425,6 +425,15 @@ local syncTests = function()
     end,
     ['frame'] = function()
       return {
+        ['creation with frame in name position'] = function()
+          local f = CreateFrame('Frame')
+          local g = CreateFrame('Frame', f)
+          assert(g:GetName() == nil)
+          assert(g:GetParent() == nil)
+        end,
+        ['creation with number name'] = function()
+          assertEquals('999', CreateFrame('Frame', 999):GetName())
+        end,
         ['kid order'] = function()
           return {
             ['three'] = function()
