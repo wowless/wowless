@@ -4622,6 +4622,16 @@ JAILERS_TOWER_LEVEL_UPDATE:
     type: number
   - name: type
     type: number
+KIOSK_SESSION_EXPIRATION_CHANGED:
+  payload:
+  - name: reactivated
+    type: boolean
+KIOSK_SESSION_EXPIRATION_WARNING:
+  payload:
+  - name: seconds
+    type: number
+KIOSK_SESSION_EXPIRED:
+  payload: {}
 KNOWLEDGE_BASE_ARTICLE_LOAD_FAILURE:
   payload: {}
 KNOWLEDGE_BASE_ARTICLE_LOAD_SUCCESS:
