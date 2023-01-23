@@ -13,4 +13,4 @@ FROM
   UiTextureAtlasMember m
   JOIN UiTextureAtlas a ON a.ID = m.UiTextureAtlasID
 WHERE
-  m.CommittedName = ?1;
+  m.CommittedName = ?1 COLLATE NOCASE;
