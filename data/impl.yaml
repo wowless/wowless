@@ -18,6 +18,11 @@ C_ClassTalents.GetActiveConfigID:
 C_Console.GetAllCommands:
   frameworks:
   - datalua
+C_Covenants.GetCovenantData:
+  sqls:
+  - lookup: C_Covenants.GetCovenantData
+    table: true
+  - cursor: C_Covenants.GetCovenantData.soulbinds
 C_CovenantSanctumUI.GetRenownLevels:
   sqls:
   - cursor: C_CovenantSanctumUI.GetRenownLevels

@@ -6426,6 +6426,7 @@ C_Covenants.GetActiveCovenantID:
   - name: covenantID
     type: number
 C_Covenants.GetCovenantData:
+  impl: C_Covenants.GetCovenantData
   inputs:
   - - name: covenantID
       type: number
