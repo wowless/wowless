@@ -140,8 +140,34 @@ function G.GeneratedTests()
       return t
     end)())
     local toskipin = {
-      mousespeed = true, -- varies based on host?
-      renderscale = true, -- varies based on host?
+      graphicscomputeeffects = true,
+      graphicsdeptheffects = true,
+      graphicsenvironmentdetail = true,
+      graphicsgroundclutter = true,
+      graphicsliquiddetail = true,
+      graphicsoutlinemode = true,
+      graphicsparticledensity = true,
+      graphicsquality = true,
+      graphicsshadowquality = true,
+      graphicsspelldensity = true,
+      graphicsssao = true,
+      graphicstextureresolution = true,
+      graphicsviewdistance = true,
+      mousespeed = true,
+      raidgraphicscomputeeffects = true,
+      raidgraphicsdeptheffects = true,
+      raidgraphicsenvironmentdetail = true,
+      raidgraphicsgroundclutter = true,
+      raidgraphicsliquiddetail = true,
+      raidgraphicsoutlinemode = true,
+      raidgraphicsparticledensity = true,
+      raidgraphicsquality = true,
+      raidgraphicsshadowquality = true,
+      raidgraphicsspelldensity = true,
+      raidgraphicsssao = true,
+      raidgraphicstextureresolution = true,
+      raidgraphicsviewdistance = true,
+      renderscale = true,
     }
     local tests = {}
     for k, v in pairs(expectedCVars) do
