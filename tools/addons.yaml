@@ -3,6 +3,12 @@ Bartender4:
   owner: nevcairiel
   repo: bartender4
   tag: 4.14.5
+BtWLoadouts:
+  flavors:
+  - Mainline
+  owner: breeni
+  repo: btwloadouts
+  tag: v1.10.1-beta
 Ferronnizer:
   flavors:
   - Vanilla
