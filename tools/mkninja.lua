@@ -404,6 +404,10 @@ for k, v in pairs(require('wowapi.yaml').parseFile('tools/addons.yaml')) do
       repo = v.repo,
       tag = v.tag,
     },
+    ins_implicit = {
+      'bin/downloadaddon.sh',
+      'tools/addons.yaml',
+    },
     outs = 'build/addonreleases/' .. k .. '.zip',
     rule = 'downloadrelease',
   })
