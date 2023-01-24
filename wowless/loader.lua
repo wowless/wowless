@@ -10,31 +10,7 @@ local function loader(api, cfg)
   local util = require('wowless.util')
   local mixin = util.mixin
   local intrinsics = {}
-  local readFile = (function()
-    if cfg and cfg.cascproxy and cfg.rootDir then
-      local conn = require('wowless.http').connect(cfg.cascproxy)
-      local skip = cfg.rootDir:len() + 2
-      local prefix = '/product/' .. cfg.rootDir:sub(10)
-      return function(f)
-        if type(f) == 'string' and f:sub(1, cfg.rootDir:len()) ~= cfg.rootDir then
-          return util.readfile(f)
-        end
-        local fpath = prefix .. (type(f) == 'number' and '/fdid/' .. f or '/name/' .. f:sub(skip):gsub('\\', '/'))
-        api.log(2, 'fetching cascproxy %s', fpath)
-        local data = conn(fpath)
-        if not data then
-          return util.readfile(f)
-        end
-        api.log(2, 'successfully fetched cascproxy %s', fpath)
-        if data:sub(1, 3) == '\239\187\191' then
-          data = data:sub(4)
-        end
-        return data
-      end
-    else
-      return util.readfile
-    end
-  end)()
+  local readFile = util.readfile
 
   local xmlimpls = (function()
     local tree = datalua.xml

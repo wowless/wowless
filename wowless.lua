@@ -11,7 +11,6 @@ args = (function()
   parser:option('-p --product', 'product tag'):count(1):choices(util.productList())
   parser:option('-l --loglevel', 'log level', '0'):convert(tonumber)
   parser:option('-a --addondir', 'addon directory to test'):count('*')
-  parser:option('-c --cascproxy', 'url prefix to cascproxy')
   parser:option('-e --maxerrors', 'quit once this number of errors occur'):convert(tonumber)
   parser:option('-s --scripts', 'scripts to execute')
   parser:flag('--allevents', 'send all nullary events')
@@ -21,7 +20,6 @@ args = (function()
 end)()
 require('wowless.runner').run({
   allevents = args.allevents,
-  cascproxy = args.cascproxy,
   debug = args.debug,
   dir = 'extracts/' .. args.product,
   frame0 = args.frame0,
