@@ -172,7 +172,7 @@ local layers = {
   HIGHLIGHT = 5,
 }
 
-local function rects2png(data, authority, outfile)
+local function rects2png(data, casc, outfile)
   local magick = require('luamagick')
   local function color(c)
     local pwand = magick.new_pixel_wand()
@@ -182,7 +182,6 @@ local function rects2png(data, authority, outfile)
   local red, blue = color('red'), color('blue')
   local dwand = magick.new_drawing_wand()
   dwand:set_fill_opacity(0)
-  local conn = authority and require('wowless.http').connect(authority)
   local mwand = magick.new_magick_wand()
   assert(mwand:new_image(data.screenWidth, data.screenHeight, color('none')))
 
@@ -190,9 +189,9 @@ local function rects2png(data, authority, outfile)
   local function getblob(path)
     local fpath
     if tonumber(path) then
-      fpath = '/fdid/' .. path
+      fpath = tonumber(path)
     else
-      fpath = '/name/' .. path:lower():gsub('\\', '/')
+      fpath = path:lower():gsub('\\', '/')
       if fpath:sub(-4) ~= '.blp' then
         fpath = fpath .. '.blp'
       end
@@ -201,7 +200,7 @@ local function rects2png(data, authority, outfile)
     if prev then
       return prev.width, prev.height, prev.png
     end
-    local content = conn('/product/' .. data.product .. fpath)
+    local content = casc:readFile(fpath)
     local success, width, height, png = pcall(function()
       local width, height, rgba = require('wowless.blp').read(content)
       return width, height, require('wowless.png').write(width, height, rgba)
@@ -235,7 +234,7 @@ local function rects2png(data, authority, outfile)
         local left, top, right, bottom = r.left, data.screenHeight - r.top, r.right, data.screenHeight - r.bottom
         local x = v.content.texture.path
         x = x ~= 'FileData ID 0' and x or nil
-        if conn and x and left < right and top < bottom then
+        if x and left < right and top < bottom then
           local width, height, png = getblob(x)
           local c = v.content.texture.coords
           if png then
