@@ -11,15 +11,6 @@ local parseYaml = require('wowapi.yaml').parseFile
 local data = parseYaml(args.input)
 
 local casc = (function()
-  local encryptionKeys = (function()
-    local wowtxt = require('pl.file').read('vendor/tactkeys/WoW.txt')
-    local ret = {}
-    for line in wowtxt:gmatch('[^\r\n]+') do
-      local k, v = line:match('^([0-9A-F]+) ([0-9A-F]+)')
-      ret[k:lower()] = v:lower()
-    end
-    return ret
-  end)()
   local build = parseYaml('data/products/' .. data.product .. '/build.yaml')
   local lib = require('casc')
   local _, cdn, ckey = lib.cdnbuild('http://us.patch.battle.net:1119/' .. data.product, 'us')
@@ -29,7 +20,7 @@ local casc = (function()
     cacheFiles = true,
     cdn = cdn,
     ckey = ckey,
-    keys = encryptionKeys,
+    keys = require('build.tactkeys'),
     locale = lib.locale.US,
     log = args.verbose and print or nil,
     zerofillEncryptedChunks = true,

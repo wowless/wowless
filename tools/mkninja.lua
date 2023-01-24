@@ -85,6 +85,9 @@ local rules = {
   mklistfile = {
     command = 'lua tools/listfile.lua',
   },
+  mktactkeys = {
+    command = 'lua tools/tactkeys.lua',
+  },
   mktestout = {
     command = 'bash -c "set -o pipefail && busted 2>&1 | tee $out"',
   },
@@ -206,6 +209,18 @@ local builds = {
     rule = 'mklistfile',
   },
   {
+    args = {
+      restat = 1,
+    },
+    ins_implicit = {
+      'tools/tactkeys.lua',
+      'tools/util.lua',
+      'vendor/tactkeys/WoW.txt',
+    },
+    outs_implicit = 'build/tactkeys.lua',
+    rule = 'mktactkeys',
+  },
+  {
     ins = 'data/flavors.yaml',
     outs = 'build/flavors.lua',
     rule = 'yaml2lua',
@@ -257,9 +272,9 @@ for _, p in ipairs(productList) do
     ins = {
       dblist,
       'build/listfile.lua',
+      'build/tactkeys.lua',
       'data/products/' .. p .. '/build.yaml',
       'tools/fetch.lua',
-      'vendor/tactkeys/WoW.txt',
     },
     outs = fetchStamp,
     rule = 'fetch',
@@ -304,7 +319,12 @@ for _, p in ipairs(productList) do
     table.insert(builds, {
       args = { product = p },
       ins = { prefix .. '.yaml' },
-      ins_implicit = { 'tools/render.lua', 'wowless/render.lua' },
+      ins_implicit = {
+        'build/tactkeys.lua',
+        'data/products/' .. p .. '/build.yaml',
+        'tools/render.lua',
+        'wowless/render.lua',
+      },
       outs = { prefix .. '.png' },
       rule = 'render',
     })
