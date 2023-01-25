@@ -29,7 +29,7 @@ local getStub = (function()
   local function ensureStructureDefault(name)
     if structureDefaults[name] == nil then
       structureDefaults[name] = true
-      local st = structures[name]
+      local st = assert(structures[name], name)
       local t = {}
       for fname, field in require('pl.tablex').sort(st) do
         local v

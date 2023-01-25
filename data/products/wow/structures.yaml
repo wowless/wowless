@@ -489,23 +489,6 @@ C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
     type:
       mixin: ItemLocationMixin
       structure: ItemLocation
-C_BarberShop.BarberShopCharacterData:
-  raceData:
-    type:
-      structure: C_BarberShop.BarberShopRaceData
-  sex:
-    type: number
-C_BarberShop.BarberShopRaceData:
-  alternateFormRaceData:
-    nilable: true
-    type:
-      structure: CharacterAlternateFormData
-  createScreenIconAtlas:
-    type: string
-  fileName:
-    type: string
-  name:
-    type: string
 C_BattleNet.BNetAccountInfo:
   accountName:
     type: string
@@ -2720,6 +2703,11 @@ C_ItemUpgrade.ItemUpgradeCurrencyCost:
     type: number
   currencyID:
     type: number
+C_ItemUpgrade.ItemUpgradeItemCost:
+  cost:
+    type: number
+  itemID:
+    type: number
 C_ItemUpgrade.ItemUpgradeItemInfo:
   currUpgrade:
     type: number
@@ -2737,7 +2725,7 @@ C_ItemUpgrade.ItemUpgradeItemInfo:
     type:
       arrayof: C_ItemUpgrade.ItemUpgradeLevelInfo
 C_ItemUpgrade.ItemUpgradeLevelInfo:
-  costsToUpgrade:
+  currencyCostsToUpgrade:
     type:
       arrayof: C_ItemUpgrade.ItemUpgradeCurrencyCost
   displayQuality:
@@ -2745,6 +2733,9 @@ C_ItemUpgrade.ItemUpgradeLevelInfo:
   failureMessage:
     nilable: true
     type: string
+  itemCostsToUpgrade:
+    type:
+      arrayof: C_ItemUpgrade.ItemUpgradeItemCost
   itemLevelIncrement:
     type: number
   levelStats:
@@ -3374,6 +3365,120 @@ C_PartyPose.PartyPoseInfo:
   widgetSetID:
     nilable: true
     type: number
+C_PerksActivities.PerksActivitiesInfo:
+  activePerksMonth:
+    type: number
+  activities:
+    type:
+      arrayof: C_PerksActivities.PerksActivityInfo
+  displayMonthName:
+    type: string
+  thresholds:
+    type:
+      arrayof: C_PerksActivities.PerksActivityThresholdInfo
+C_PerksActivities.PerksActivitiesPending:
+  pendingIDs:
+    type:
+      arrayof: number
+C_PerksActivities.PerksActivitiesTracked:
+  trackedIDs:
+    type:
+      arrayof: number
+C_PerksActivities.PerksActivityInfo:
+  activityName:
+    type: string
+  completed:
+    type: boolean
+  description:
+    type: string
+  ID:
+    type: number
+  requirementsList:
+    type:
+      arrayof: C_PerksActivities.PerksActivityRequirement
+  tagNames:
+    type:
+      arrayof: string
+  thresholdContributionAmount:
+    type: number
+  tracked:
+    type: boolean
+C_PerksActivities.PerksActivityRequirement:
+  completed:
+    type: boolean
+  requirementText:
+    type: string
+C_PerksActivities.PerksActivityTags:
+  tagName:
+    type:
+      arrayof: string
+C_PerksActivities.PerksActivityThresholdInfo:
+  currencyAwardAmount:
+    type: number
+  itemReward:
+    nilable: true
+    type: number
+  pendingReward:
+    type: boolean
+  requiredContributionAmount:
+    type: number
+  thresholdID:
+    type: number
+C_PerksProgram.PerksProgramItemDisplayInfo:
+  overrideModelSceneID:
+    nilable: true
+    type: number
+C_PerksProgram.PerksProgramPendingChestRewards:
+  activityMonthID:
+    type: number
+  activityThresholdID:
+    type: number
+  monthRewarded:
+    nilable: true
+    type: string
+  perksVendorItemID:
+    nilable: true
+    type: number
+  rewardAmount:
+    type: number
+  rewardTypeID:
+    type: number
+C_PerksProgram.PerksVendorCategoryInfo:
+  defaultUIModelSceneID:
+    type: number
+  displayName:
+    type: string
+  ID:
+    type: number
+C_PerksProgram.PerksVendorItemInfo:
+  description:
+    type: string
+  iconTexture:
+    type: string
+  itemID:
+    type: number
+  itemModifiedAppearanceID:
+    type: number
+  mountID:
+    type: number
+  name:
+    type: string
+  perksVendorCategoryID:
+    type: number
+  perksVendorItemID:
+    type: number
+  price:
+    type: number
+  purchased:
+    type: boolean
+  refundable:
+    type: boolean
+  speciesID:
+    type: number
+  timeRemaining:
+    type: number
+  transmogSetID:
+    type: number
 C_PetInfo.PetTamerMapInfo:
   areaPoiID:
     type: number
@@ -3850,6 +3955,13 @@ C_PvP.RandomBGInfo:
   maxLevel:
     type: number
   minLevel:
+    type: number
+C_PvP.RatedMatchDeserterPenalty:
+  personalRatingChange:
+    type: number
+  queuePenaltyDuration:
+    type: number
+  queuePenaltySpellID:
     type: number
 C_PvP.RatedSoloShuffleSpecStats:
   seasonMostPlayedSpecID:
@@ -6403,6 +6515,9 @@ CraftingItemResultData:
   isCrit:
     default: false
     type: boolean
+  isEnchant:
+    default: false
+    type: boolean
   itemGUID:
     type: string
   itemID:
@@ -6412,6 +6527,9 @@ CraftingItemResultData:
     default: 0
     type: number
   operationID:
+    default: 0
+    type: number
+  qualityProgress:
     default: 0
     type: number
   quantity:
@@ -6517,6 +6635,10 @@ CraftingOrderCustomerCategoryFilters:
     nilable: true
     type: number
 CraftingOrderCustomerOptionInfo:
+  bindOnPickup:
+    type: boolean
+  canUse:
+    type: boolean
   craftingQualityIDs:
     nilable: true
     type:
@@ -6677,6 +6799,13 @@ CraftingOrderMailInfo:
     type: number
   recipeName:
     type: string
+CraftingOrderPersonalOrdersInfo:
+  numPersonalOrders:
+    type: number
+  profession:
+    type: number
+  professionName:
+    type: string
 CraftingOrderReagentInfo:
   isBasicReagent:
     type: boolean
@@ -6754,8 +6883,6 @@ CraftingRecipeRequirement:
     type: number
 CraftingRecipeSchematic:
   hasCraftingOperationInfo:
-    type: boolean
-  hasGatheringOperationInfo:
     type: boolean
   icon:
     type: number
@@ -7040,6 +7167,19 @@ NewCraftingOrderInfo:
     type: number
   tipAmount:
     type: number
+PlayerInfoCharacterData:
+  alternateFormRaceData:
+    nilable: true
+    type:
+      structure: CharacterAlternateFormData
+  createScreenIconAtlas:
+    type: string
+  fileName:
+    type: string
+  name:
+    type: string
+  sex:
+    type: number
 PlayerLocation: {}
 ProfessionInfo:
   expansionName:
@@ -7226,14 +7366,14 @@ TradeSkillRecipeInfo:
   alternateVerb:
     nilable: true
     type: string
+  canCreateMultiple:
+    default: true
+    type: boolean
   canSkillUp:
     type: boolean
   categoryID:
     type: number
   craftable:
-    default: true
-    type: boolean
-  createsItem:
     default: true
     type: boolean
   currentRecipeExperience:

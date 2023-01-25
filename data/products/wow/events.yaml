@@ -408,6 +408,8 @@ AZERITE_ITEM_POWER_LEVEL_CHANGED:
   - name: unlockedEmpoweredItemsInfo
     type:
       arrayof: C_AzeriteItem.UnlockedAzeriteEmpoweredItems
+  - name: azeriteItemID
+    type: number
 BAG_CLOSED:
   payload:
   - name: bagID
@@ -3192,6 +3194,8 @@ CHAT_SERVER_DISCONNECTED:
     type: boolean
 CHAT_SERVER_RECONNECTED:
   payload: {}
+CHEST_REWARDS_UPDATED_FROM_SERVER:
+  payload: {}
 CINEMATIC_START:
   payload:
   - name: canBeCancelled
@@ -3680,6 +3684,8 @@ CRAFTINGORDERS_SHOW_CRAFTER:
   payload: {}
 CRAFTINGORDERS_SHOW_CUSTOMER:
   payload: {}
+CRAFTINGORDERS_UNEXPECTED_ERROR:
+  payload: {}
 CRAFTINGORDERS_UPDATE_CUSTOMER_NAME:
   payload:
   - name: customerName
@@ -3692,6 +3698,8 @@ CRAFTINGORDERS_UPDATE_ORDER_COUNT:
     type: number
   - name: numOrders
     type: number
+CRAFTINGORDERS_UPDATE_PERSONAL_ORDER_COUNTS:
+  payload: {}
 CRITERIA_COMPLETE:
   payload:
   - name: criteriaID
@@ -3788,7 +3796,7 @@ EDIT_MODE_LAYOUTS_UPDATED:
   - name: layoutInfo
     type:
       structure: C_EditMode.EditModeLayouts
-  - name: fromServer
+  - name: reconcileLayouts
     type: boolean
 EJ_DIFFICULTY_UPDATE:
   payload:
@@ -5200,6 +5208,54 @@ PENDING_AZERITE_ESSENCE_CHANGED:
   - name: essenceID
     nilable: true
     type: number
+PERKS_ACTIVITIES_TRACKED_UPDATED:
+  payload:
+  - name: trackedPerksActivities
+    type:
+      structure: C_PerksActivities.PerksActivitiesTracked
+PERKS_ACTIVITIES_UPDATED:
+  payload:
+  - name: info
+    type:
+      structure: C_PerksActivities.PerksActivitiesInfo
+PERKS_ACTIVITY_COMPLETED:
+  payload:
+  - name: perksActivityID
+    type: number
+PERKS_PROGRAM_CLOSE:
+  payload: {}
+PERKS_PROGRAM_CURRENCY_AWARDED:
+  payload:
+  - name: value
+    type: number
+PERKS_PROGRAM_CURRENCY_REFRESH:
+  payload:
+  - name: oldValue
+    type: number
+  - name: newValue
+    type: number
+PERKS_PROGRAM_DATA_REFRESH:
+  payload: {}
+PERKS_PROGRAM_DATA_SPECIFIC_ITEM_REFRESH:
+  payload:
+  - name: vendorItemID
+    type: number
+PERKS_PROGRAM_DISABLED:
+  payload: {}
+PERKS_PROGRAM_OPEN:
+  payload: {}
+PERKS_PROGRAM_PURCHASE_SUCCESS:
+  payload:
+  - name: vendorItemID
+    type: number
+PERKS_PROGRAM_REFUND_SUCCESS:
+  payload:
+  - name: vendorItemID
+    type: number
+PERKS_PROGRAM_SET_FROZEN_ITEM:
+  payload:
+  - name: vendorItemID
+    type: number
 PET_ATTACK_START:
   payload: {}
 PET_ATTACK_STOP:
@@ -5427,6 +5483,10 @@ PLAYER_AVG_ITEM_LEVEL_UPDATE:
   payload: {}
 PLAYER_CAMPING:
   payload: {}
+PLAYER_CAN_GLIDE_CHANGED:
+  payload:
+  - name: canGlide
+    type: boolean
 PLAYER_CHOICE_CLOSE:
   payload: {}
 PLAYER_CHOICE_UPDATE:
@@ -7750,10 +7810,6 @@ WEAPON_ENCHANT_CHANGED:
   payload: {}
 WEAPON_SLOT_CHANGED:
   payload: {}
-WEAR_EQUIPMENT_SET:
-  payload:
-  - name: setID
-    type: number
 WEEKLY_REWARDS_ITEM_CHANGED:
   payload: {}
 WEEKLY_REWARDS_UPDATE:

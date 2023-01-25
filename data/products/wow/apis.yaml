@@ -217,7 +217,6 @@ BNRequestInviteFriend: {}
 BNSendFriendInvite: {}
 BNSendFriendInviteByID: {}
 BNSendGameData: {}
-BNSendSoR: {}
 BNSendVerifiedBattleTagInvite: {}
 BNSendWhisper: {}
 BNSetAFK: {}
@@ -2237,7 +2236,7 @@ C_BarberShop.GetCurrentCharacterData:
   - {}
   outputs:
   - name: characterData
-    type: C_BarberShop.BarberShopCharacterData
+    type: PlayerInfoCharacterData
 C_BarberShop.GetCurrentCost:
   inputs:
   - {}
@@ -3742,6 +3741,11 @@ C_ClassTalents.LoadConfig:
   outputs:
   - name: result
     type: number
+  - name: changeError
+    type: string
+  - innerType: number
+    name: newLearnedNodeIDs
+    type: table
 C_ClassTalents.RenameConfig:
   inputs:
   - - name: configID
@@ -6660,6 +6664,12 @@ C_CraftingOrders.GetMyOrders:
   - innerType: CraftingOrderInfo
     name: myOrders
     type: table
+C_CraftingOrders.GetNumFavoriteCustomerOptions:
+  inputs:
+  - {}
+  outputs:
+  - name: numFavorites
+    type: number
 C_CraftingOrders.GetOrderClaimInfo:
   inputs:
   - - name: profession
@@ -6667,6 +6677,13 @@ C_CraftingOrders.GetOrderClaimInfo:
   outputs:
   - name: claimInfo
     type: CraftingOrderClaimsRemainingInfo
+C_CraftingOrders.GetPersonalOrdersInfo:
+  inputs:
+  - {}
+  outputs:
+  - innerType: CraftingOrderPersonalOrdersInfo
+    name: infos
+    type: table
 C_CraftingOrders.HasFavoriteCustomerOptions:
   inputs:
   - {}
@@ -7139,6 +7156,10 @@ C_EditMode.OnLayoutAdded:
   inputs:
   - - name: addedLayoutIndex
       type: number
+    - name: activateNewLayout
+      type: boolean
+    - name: isLayoutImported
+      type: boolean
   outputs: {}
 C_EditMode.OnLayoutDeleted:
   inputs:
@@ -10153,6 +10174,11 @@ C_Mail.IsCommandPending:
   outputs:
   - name: isCommandPending
     type: boolean
+C_Mail.SetOpeningAll:
+  inputs:
+  - - name: openingAll
+      type: boolean
+  outputs: {}
 C_MajorFactions.GetCovenantIDForMajorFaction:
   inputs:
   - - name: majorFactionID
@@ -10795,6 +10821,8 @@ C_ModelInfo.GetModelSceneInfoByID:
   - innerType: number
     name: modelActorsIDs
     type: table
+  - name: flags
+    type: number
 C_ModifiedInstance.GetModifiedInstanceInfoFromMapID:
   inputs:
   - - name: mapID
@@ -10829,6 +10857,14 @@ C_MountJournal.Dismiss:
   inputs:
   - {}
   outputs: {}
+C_MountJournal.GetAllCreatureDisplayIDsForMountID:
+  inputs:
+  - - name: mountID
+      type: number
+  outputs:
+  - innerType: number
+    name: creatureDisplayIDs
+    type: table
 C_MountJournal.GetAppliedMountEquipmentID:
   inputs:
   - {}
@@ -11670,6 +11706,173 @@ C_PartyPose.GetPartyPoseInfoByMapID:
   outputs:
   - name: info
     type: C_PartyPose.PartyPoseInfo
+C_PerksActivities.AddTrackedPerksActivity:
+  inputs:
+  - - name: perksActivityID
+      type: number
+  outputs: {}
+C_PerksActivities.ClearPerksActivitiesPendingCompletion:
+  inputs:
+  - {}
+  outputs: {}
+C_PerksActivities.GetAllPerksActivityTags:
+  inputs:
+  - {}
+  outputs:
+  - name: tags
+    type: C_PerksActivities.PerksActivityTags
+C_PerksActivities.GetPerksActivitiesInfo:
+  inputs:
+  - {}
+  outputs:
+  - name: info
+    type: C_PerksActivities.PerksActivitiesInfo
+C_PerksActivities.GetPerksActivitiesPendingCompletion:
+  inputs:
+  - {}
+  outputs:
+  - name: pending
+    type: C_PerksActivities.PerksActivitiesPending
+C_PerksActivities.GetPerksActivityChatLink:
+  inputs:
+  - - name: perksActivityID
+      type: number
+  outputs:
+  - name: link
+    type: string
+C_PerksActivities.GetPerksActivityInfo:
+  inputs:
+  - - name: perksActivityID
+      type: number
+  outputs:
+  - name: info
+    nilable: true
+    type: C_PerksActivities.PerksActivityInfo
+C_PerksActivities.GetTrackedPerksActivities:
+  inputs:
+  - {}
+  outputs:
+  - name: trackedPerksActivities
+    type: C_PerksActivities.PerksActivitiesTracked
+C_PerksActivities.RemoveTrackedPerksActivity:
+  inputs:
+  - - name: perksActivityID
+      type: number
+  outputs: {}
+C_PerksProgram.ClearFrozenPerksVendorItem:
+  inputs:
+  - {}
+  outputs: {}
+C_PerksProgram.CloseInteraction:
+  inputs:
+  - {}
+  outputs: {}
+C_PerksProgram.GetAvailableCategoryIDs:
+  inputs:
+  - {}
+  outputs:
+  - innerType: number
+    name: categoryIDs
+    type: table
+C_PerksProgram.GetAvailableVendorItemIDs:
+  inputs:
+  - {}
+  outputs:
+  - innerType: number
+    name: vendorItemIDs
+    type: table
+C_PerksProgram.GetCategoryInfo:
+  inputs:
+  - - name: categoryID
+      type: number
+  outputs:
+  - name: categoryInfo
+    type: C_PerksProgram.PerksVendorCategoryInfo
+C_PerksProgram.GetCurrencyAmount:
+  inputs:
+  - {}
+  outputs:
+  - name: currencyAmount
+    type: number
+C_PerksProgram.GetDraggedPerksVendorItem:
+  inputs:
+  - {}
+  outputs:
+  - name: perksVendorItemID
+    type: number
+C_PerksProgram.GetFrozenPerksVendorItemInfo:
+  inputs:
+  - {}
+  outputs:
+  - name: vendorItemInfo
+    type: C_PerksProgram.PerksVendorItemInfo
+C_PerksProgram.GetPendingChestRewards:
+  inputs:
+  - {}
+  outputs:
+  - innerType: C_PerksProgram.PerksProgramPendingChestRewards
+    name: pendingRewards
+    type: table
+C_PerksProgram.GetPerksProgramItemDisplayInfo:
+  inputs:
+  - - name: id
+      type: number
+  outputs:
+  - name: item
+    type: C_PerksProgram.PerksProgramItemDisplayInfo
+C_PerksProgram.GetTimeRemaining:
+  inputs:
+  - - name: vendorItemID
+      type: number
+  outputs:
+  - name: timeRemaining
+    type: number
+C_PerksProgram.GetVendorItemInfo:
+  inputs:
+  - - name: vendorItemID
+      type: number
+  outputs:
+  - name: vendorItemInfo
+    type: C_PerksProgram.PerksVendorItemInfo
+C_PerksProgram.GetVendorItemInfoRefundTimeLeft:
+  inputs:
+  - - name: vendorItemID
+      type: number
+  outputs:
+  - name: refundTimeRemaining
+    type: number
+C_PerksProgram.ItemSelectedTelemetry:
+  inputs:
+  - - name: perksVendorItemID
+      type: number
+  outputs: {}
+C_PerksProgram.PickupPerksVendorItem:
+  inputs:
+  - - name: perksVendorItemID
+      type: number
+  outputs: {}
+C_PerksProgram.RequestPendingChestRewards:
+  inputs:
+  - {}
+  outputs: {}
+C_PerksProgram.RequestPurchase:
+  inputs:
+  - - name: perksVendorItemID
+      type: number
+  outputs: {}
+C_PerksProgram.RequestRefund:
+  inputs:
+  - - name: perksVendorItemID
+      type: number
+  outputs: {}
+C_PerksProgram.ResetHeldItemDragAndDrop:
+  inputs:
+  - {}
+  outputs: {}
+C_PerksProgram.SetFrozenPerksVendorItem:
+  inputs:
+  - {}
+  outputs: {}
 C_PetBattles.AcceptPVPDuel: {}
 C_PetBattles.AcceptQueuedPVPMatch: {}
 C_PetBattles.CanAcceptQueuedPVPMatch: {}
@@ -12135,6 +12338,13 @@ C_PlayerInfo.CanPlayerUseMountEquipment:
     type: boolean
   - name: failureReason
     type: string
+C_PlayerInfo.CanUseItem:
+  inputs:
+  - - name: itemID
+      type: number
+  outputs:
+  - name: isUseable
+    type: boolean
 C_PlayerInfo.GetAlternateFormInfo:
   inputs:
   - {}
@@ -12172,6 +12382,22 @@ C_PlayerInfo.GetContentDifficultyQuestForPlayer:
   outputs:
   - name: difficulty
     type: number
+C_PlayerInfo.GetDisplayID:
+  inputs:
+  - {}
+  outputs:
+  - name: displayID
+    type: number
+C_PlayerInfo.GetGlidingInfo:
+  inputs:
+  - {}
+  outputs:
+  - name: isGliding
+    type: boolean
+  - name: canGlide
+    type: boolean
+  - name: forwardSpeed
+    type: number
 C_PlayerInfo.GetInstancesUnlockedAtLevel:
   inputs:
   - - name: level
@@ -12191,6 +12417,12 @@ C_PlayerInfo.GetName:
   - name: name
     nilable: true
     type: string
+C_PlayerInfo.GetPlayerCharacterData:
+  inputs:
+  - {}
+  outputs:
+  - name: characterData
+    type: PlayerInfoCharacterData
 C_PlayerInfo.GetPlayerMythicPlusRatingSummary:
   inputs:
   - - name: playerToken
@@ -12274,6 +12506,12 @@ C_PlayerInfo.IsPlayerNPERestricted:
   - {}
   outputs:
   - name: isRestricted
+    type: boolean
+C_PlayerInfo.IsTravelersLogAvailable:
+  inputs:
+  - {}
+  outputs:
+  - name: isAvailable
     type: boolean
 C_PlayerInfo.UnitIsSameServer:
   inputs:
@@ -12566,6 +12804,12 @@ C_ProfSpecs.SkillLineHasSpecialization:
   outputs:
   - name: hasSpecialization
     type: boolean
+C_PvP.ArePvpTalentsUnlocked:
+  inputs:
+  - {}
+  outputs:
+  - name: arePvpTalentsUnlocked
+    type: boolean
 C_PvP.CanDisplayDamage:
   inputs:
   - {}
@@ -12844,11 +13088,24 @@ C_PvP.GetPVPActiveMatchPersonalRatedInfo:
   - name: info
     nilable: true
     type: C_PvP.PVPPersonalRatedInfo
+C_PvP.GetPVPActiveRatedMatchDeserterPenalty:
+  inputs:
+  - {}
+  outputs:
+  - name: deserterPenalty
+    nilable: true
+    type: C_PvP.RatedMatchDeserterPenalty
 C_PvP.GetPVPSeasonRewardAchievementID:
   inputs:
   - {}
   outputs:
   - name: achievementID
+    type: number
+C_PvP.GetPvpTalentsUnlockedLevel:
+  inputs:
+  - {}
+  outputs:
+  - name: unlockLevel
     type: number
 C_PvP.GetPvpTierID:
   inputs:
@@ -13085,6 +13342,12 @@ C_PvP.IsInBrawl:
   - {}
   outputs:
   - name: isInBrawl
+    type: boolean
+C_PvP.IsInRatedMatchWithDeserterPenalty:
+  inputs:
+  - {}
+  outputs:
+  - name: isInRatedMatchWithDeserterPenalty
     type: boolean
 C_PvP.IsMatchConsideredArena:
   inputs:
@@ -16311,10 +16574,6 @@ C_TradeSkillUI.CloseTradeSkill:
   inputs:
   - {}
   outputs: {}
-C_TradeSkillUI.ContinueRecast:
-  inputs:
-  - {}
-  outputs: {}
 C_TradeSkillUI.CraftEnchant:
   inputs:
   - - name: recipeSpellID
@@ -16731,6 +16990,9 @@ C_TradeSkillUI.GetRecipeOutputItemData:
     - name: overrideQualityID
       nilable: true
       type: number
+    - name: recraftOrderID
+      nilable: true
+      type: number
   outputs:
   - name: outputInfo
     type: CraftingRecipeOutputInfo
@@ -16754,12 +17016,6 @@ C_TradeSkillUI.GetRecipeQualityReagentItemLink:
   outputs:
   - name: link
     type: string
-C_TradeSkillUI.GetRecipeRepeatCount:
-  inputs:
-  - {}
-  outputs:
-  - name: recastTimes
-    type: number
 C_TradeSkillUI.GetRecipeRequirements:
   inputs:
   - - name: recipeID
@@ -16783,7 +17039,8 @@ C_TradeSkillUI.GetRecipeSchematic:
 C_TradeSkillUI.GetRecipeSourceText: {}
 C_TradeSkillUI.GetRecipesTracked:
   inputs:
-  - {}
+  - - name: isRecraft
+      type: boolean
   outputs:
   - innerType: number
     name: recipeIDs
@@ -16797,6 +17054,12 @@ C_TradeSkillUI.GetRecraftItems:
   - innerType: string
     name: items
     type: table
+C_TradeSkillUI.GetRemainingRecasts:
+  inputs:
+  - {}
+  outputs:
+  - name: remaining
+    type: number
 C_TradeSkillUI.GetSalvagableItemIDs:
   inputs:
   - - name: recipeID
@@ -16848,12 +17111,6 @@ C_TradeSkillUI.HasFavoriteOrderRecipes:
   outputs:
   - name: hasFavorites
     type: boolean
-C_TradeSkillUI.HasRecipesTracked:
-  inputs:
-  - {}
-  outputs:
-  - name: hasRecipesTracked
-    type: boolean
 C_TradeSkillUI.IsAnyRecipeFromSource: {}
 C_TradeSkillUI.IsDataSourceChanging: {}
 C_TradeSkillUI.IsInventorySlotFiltered: {}
@@ -16879,6 +17136,13 @@ C_TradeSkillUI.IsOriginalCraftRecipeLearned:
     type: boolean
 C_TradeSkillUI.IsRecipeCategoryFiltered: {}
 C_TradeSkillUI.IsRecipeFavorite: {}
+C_TradeSkillUI.IsRecipeFirstCraft:
+  inputs:
+  - - name: recipeID
+      type: number
+  outputs:
+  - name: result
+    type: boolean
 C_TradeSkillUI.IsRecipeInBaseSkillLine:
   inputs:
   - - name: recipeID
@@ -16909,6 +17173,8 @@ C_TradeSkillUI.IsRecipeTracked:
   inputs:
   - - name: recipeID
       type: number
+    - name: isRecraft
+      type: boolean
   outputs:
   - name: tracked
     type: boolean
@@ -17007,6 +17273,8 @@ C_TradeSkillUI.SetRecipeTracked:
       type: number
     - name: tracked
       type: boolean
+    - name: isRecraft
+      type: boolean
   outputs: {}
 C_TradeSkillUI.SetShowLearned:
   inputs:
@@ -17076,6 +17344,13 @@ C_Traits.ConfigHasStagedChanges:
   outputs:
   - name: hasChanges
     type: boolean
+C_Traits.GenerateInspectImportString:
+  inputs:
+  - - name: target
+      type: string
+  outputs:
+  - name: importString
+    type: string
 C_Traits.GetConditionInfo:
   inputs:
   - - name: configID
@@ -17280,6 +17555,17 @@ C_Traits.ResetTree:
   - - name: configID
       type: number
     - name: treeID
+      type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Traits.ResetTreeByCurrency:
+  inputs:
+  - - name: configID
+      type: number
+    - name: treeID
+      type: number
+    - name: traitCurrencyID
       type: number
   outputs:
   - name: success
@@ -24826,6 +25112,8 @@ IsUsableAction: {}
 IsUsableItem: {}
 IsUsableSpell: {}
 IsUsingFixedTimeStep: {}
+IsUsingGamepad: {}
+IsUsingMouse: {}
 IsUsingVehicleControls: {}
 IsVehicleAimAngleAdjustable: {}
 IsVehicleAimPowerAdjustable: {}
