@@ -39,13 +39,19 @@ local perProductAddonGeneratedTypes = {
   end,
 }
 
+local perProductAddonGeneratedFiles = {}
 local addonGeneratedFiles = {}
 for _, p in ipairs(productList) do
+  local pp = {}
   local prefix = 'build/products/' .. p .. '/WowlessData/'
-  table.insert(addonGeneratedFiles, prefix .. 'WowlessData.toc')
+  table.insert(pp, prefix .. 'WowlessData.toc')
   for k in pairs(perProductAddonGeneratedTypes) do
-    table.insert(addonGeneratedFiles, prefix .. k .. '.lua')
+    table.insert(pp, prefix .. k .. '.lua')
   end
+  for _, file in ipairs(pp) do
+    table.insert(addonGeneratedFiles, file)
+  end
+  perProductAddonGeneratedFiles[p] = pp
 end
 
 local elune = 'vendor/elune/build/linux/bin/Release/lua5.1'
@@ -303,7 +309,7 @@ for _, p in ipairs(productList) do
   }
   table.insert(builds, {
     args = { product = p },
-    ins = rundeps,
+    ins = { perProductAddonGeneratedFiles[p], rundeps },
     outs = runout,
     rule = 'run',
   })
