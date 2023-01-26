@@ -40,17 +40,22 @@ describe('structures', function()
       end
       local actual = parseYaml('data/products/' .. p .. '/structures.yaml')
       local expected = {}
-      local function close(k)
-        if k and not nonStructs[k] and not expected[k] then
-          expected[k] = true
-          for _, fv in pairs(actual[k] or {}) do
-            close(fv.type.structure)
-            close(fv.type.arrayof)
+      local function close(ty)
+        if ty.arrayof then
+          close(ty.arrayof)
+        elseif ty.structure then
+          if not expected[ty.structure] then
+            expected[ty.structure] = true
+            for _, fv in pairs(actual[ty.structure] or {}) do
+              close(fv.type)
+            end
           end
+        else
+          assert(nonStructs[ty], 'weird type ' .. tostring(ty))
         end
       end
       for k in pairs(refs) do
-        close(k)
+        close({ structure = k })
       end
       describe('exists', function()
         for k in pairs(expected) do

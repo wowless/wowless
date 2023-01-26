@@ -18,26 +18,4 @@ type:
             type:
               required: true
               type:
-                oneof:
-                - literal: boolean
-                - literal: function
-                - literal: number
-                - literal: string
-                - literal: table
-                - record:
-                    mixin:
-                      type: string
-                    structure:
-                      required: true
-                      type:
-                        ref: structure
-                - record:
-                    arrayof:
-                      required: true
-                      type:
-                        oneof:
-                        - literal: boolean
-                        - literal: number
-                        - literal: string
-                        - literal: table
-                        - ref: structure
+                schema: type

@@ -26,43 +26,41 @@ local getStub = (function()
     unknown = 'nil',
   }
   local structureDefaults = {}
-  local function ensureStructureDefault(name)
-    if structureDefaults[name] == nil then
-      structureDefaults[name] = true
-      local st = assert(structures[name], name)
-      local t = {}
-      for fname, field in require('pl.tablex').sort(st) do
-        local v
-        if structures[field.type.structure] then
-          ensureStructureDefault(field.type.structure)
-          v = structureDefaults[field.type.structure]
-          if field.type.mixin then
-            v = ('Mixin(%s,%s)'):format(v, field.type.mixin)
-          end
-        elseif field.type.arrayof then
-          if defaultOutputs[field.type.arrayof] then
-            v = '{}'
-          else
-            ensureStructureDefault(field.type.arrayof)
-            v = '{' .. structureDefaults[field.type.arrayof] .. '}'
-          end
-        elseif field.stub then
-          assert(type(field.stub) == 'string', 'only string stubs supported in structures')
-          v = string.format('%q', field.stub)
-        else
-          v = tostring(defaultOutputs[field.nilable and 'nil' or field.type])
-        end
-        if v ~= 'nil' then
-          table.insert(t, ('[%q]=%s'):format(fname, v))
-        end
-      end
-      structureDefaults[name] = '{' .. table.concat(t, ',') .. '}'
-    else
-      assert(structureDefaults[name] ~= true, 'loop in structure definitions')
+  local function typeDefault(ty)
+    if defaultOutputs[ty] then
+      return defaultOutputs[ty]
     end
+    if ty.arrayof then
+      return '{' .. typeDefault(ty.arrayof) .. '}'
+    end
+    if ty.structure then
+      if not structureDefaults[ty.structure] then
+        local st = assert(structures[ty.structure], ty.structure)
+        local t = {}
+        for fname, field in require('pl.tablex').sort(st) do
+          local v
+          if field.stub then
+            assert(field.type == 'string', 'only string stubs supported in structures')
+            assert(type(field.stub) == 'string', 'only string stubs supported in structures')
+            v = string.format('%q', field.stub)
+          elseif field.nilable then
+            v = 'nil'
+          else
+            v = typeDefault(field.type)
+          end
+          if v ~= 'nil' then
+            table.insert(t, ('[%q]=%s'):format(fname, v))
+          end
+        end
+        structureDefaults[ty.structure] = '{' .. table.concat(t, ',') .. '}'
+      end
+      local v = structureDefaults[ty.structure]
+      return ty.mixin and ('Mixin(%s,%s)'):format(v, ty.mixin) or v
+    end
+    error('unexpected type: ' .. require('pl.pretty').write(ty))
   end
   for name in pairs(structures) do
-    ensureStructureDefault(name)
+    typeDefault({ structure = name })
   end
   return function(sig)
     local rets = {}

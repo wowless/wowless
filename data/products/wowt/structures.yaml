@@ -100,7 +100,8 @@ C_AnimaDiversion.AnimaDiversionFrameInfo:
 C_AnimaDiversion.AnimaDiversionNodeInfo:
   costs:
     type:
-      arrayof: C_AnimaDiversion.AnimaDiversionCostInfo
+      arrayof:
+        structure: C_AnimaDiversion.AnimaDiversionCostInfo
   currencyID:
     type: number
   description:
@@ -221,7 +222,8 @@ C_AuctionHouse.AuctionHouseBrowseQuery:
   itemClassFilters:
     nilable: true
     type:
-      arrayof: C_AuctionHouse.AuctionHouseItemClassFilter
+      arrayof:
+        structure: C_AuctionHouse.AuctionHouseItemClassFilter
   maxLevel:
     nilable: true
     type: number
@@ -232,7 +234,8 @@ C_AuctionHouse.AuctionHouseBrowseQuery:
     type: string
   sorts:
     type:
-      arrayof: C_AuctionHouse.AuctionHouseSortType
+      arrayof:
+        structure: C_AuctionHouse.AuctionHouseSortType
 C_AuctionHouse.AuctionHouseFilterGroup:
   category:
     type: number
@@ -847,7 +850,8 @@ C_ChallengeMode.ChallengeModeGuildTopAttempt:
     type: number
   members:
     type:
-      arrayof: C_ChallengeMode.ChallengeModeGuildAttemptMember
+      arrayof:
+        structure: C_ChallengeMode.ChallengeModeGuildAttemptMember
   name:
     type: string
 C_ChromieTime.ChromieTimeExpansionInfo:
@@ -1137,7 +1141,8 @@ C_Club.ClubSelfInvitationInfo:
       structure: C_Club.ClubMemberInfo
   leaders:
     type:
-      arrayof: C_Club.ClubMemberInfo
+      arrayof:
+        structure: C_Club.ClubMemberInfo
 C_Club.ClubStreamInfo:
   creationTime:
     type: number
@@ -1283,13 +1288,16 @@ C_ClubFinder.RecruitingClubInfo:
 C_Commentator.CommentatorHistory:
   overrideNameDirectory:
     type:
-      arrayof: C_Commentator.CommentatorOverrideNameEntry
+      arrayof:
+        structure: C_Commentator.CommentatorOverrideNameEntry
   series:
     type:
-      arrayof: C_Commentator.CommentatorSeries
+      arrayof:
+        structure: C_Commentator.CommentatorSeries
   teamDirectory:
     type:
-      arrayof: C_Commentator.CommentatorTeamDirectoryEntry
+      arrayof:
+        structure: C_Commentator.CommentatorTeamDirectoryEntry
 C_Commentator.CommentatorOverrideNameEntry:
   newName:
     type: string
@@ -1323,7 +1331,8 @@ C_Commentator.CommentatorPlayerData:
 C_Commentator.CommentatorSeries:
   teams:
     type:
-      arrayof: C_Commentator.CommentatorSeriesTeam
+      arrayof:
+        structure: C_Commentator.CommentatorSeriesTeam
 C_Commentator.CommentatorSeriesTeam:
   name:
     type: string
@@ -1473,14 +1482,16 @@ C_CovenantPreview.CovenantFeatureInfo:
 C_CovenantPreview.CovenantPreviewInfo:
   covenantAbilities:
     type:
-      arrayof: C_CovenantPreview.CovenantAbilityInfo
+      arrayof:
+        structure: C_CovenantPreview.CovenantAbilityInfo
   covenantCrest:
     type: string
   covenantName:
     type: string
   covenantSoulbinds:
     type:
-      arrayof: C_CovenantPreview.CovenantSoulbindInfo
+      arrayof:
+        structure: C_CovenantPreview.CovenantSoulbindInfo
   covenantZone:
     type: string
   description:
@@ -1754,13 +1765,15 @@ C_EditMode.EditModeLayoutInfo:
     type: number
   systems:
     type:
-      arrayof: C_EditMode.EditModeSystemInfo
+      arrayof:
+        structure: C_EditMode.EditModeSystemInfo
 C_EditMode.EditModeLayouts:
   activeLayout:
     type: number
   layouts:
     type:
-      arrayof: C_EditMode.EditModeLayoutInfo
+      arrayof:
+        structure: C_EditMode.EditModeLayoutInfo
 C_EditMode.EditModeSettingInfo:
   setting:
     type: number
@@ -1778,7 +1791,8 @@ C_EditMode.EditModeSystemInfo:
     type: boolean
   settings:
     type:
-      arrayof: C_EditMode.EditModeSettingInfo
+      arrayof:
+        structure: C_EditMode.EditModeSettingInfo
   system:
     type: number
   systemIndex:
@@ -2021,7 +2035,8 @@ C_GamePad.GamePadAxisConfig:
 C_GamePad.GamePadConfig:
   axisConfigs:
     type:
-      arrayof: C_GamePad.GamePadAxisConfig
+      arrayof:
+        structure: C_GamePad.GamePadAxisConfig
   comment:
     nilable: true
     type: string
@@ -2036,13 +2051,16 @@ C_GamePad.GamePadConfig:
     type: string
   rawAxisMappings:
     type:
-      arrayof: C_GamePad.GamePadRawAxisMapping
+      arrayof:
+        structure: C_GamePad.GamePadRawAxisMapping
   rawButtonMappings:
     type:
-      arrayof: C_GamePad.GamePadRawButtonMapping
+      arrayof:
+        structure: C_GamePad.GamePadRawButtonMapping
   stickConfigs:
     type:
-      arrayof: C_GamePad.GamePadStickConfig
+      arrayof:
+        structure: C_GamePad.GamePadStickConfig
 C_GamePad.GamePadConfigID:
   productID:
     nilable: true
@@ -2069,7 +2087,8 @@ C_GamePad.GamePadMappedState:
     type: number
   sticks:
     type:
-      arrayof: C_GamePad.GamePadStick
+      arrayof:
+        structure: C_GamePad.GamePadStick
 C_GamePad.GamePadRawAxisMapping:
   axis:
     nilable: true
@@ -2147,7 +2166,8 @@ C_Garrison.AutoCombatDamageClassString:
 C_Garrison.AutoCombatResult:
   combatLog:
     type:
-      arrayof: C_Garrison.AutoMissionRound
+      arrayof:
+        structure: C_Garrison.AutoMissionRound
   winner:
     type: boolean
 C_Garrison.AutoCombatSpellInfo:
@@ -2188,7 +2208,8 @@ C_Garrison.AutoCombatTroopInfo:
     type: number
   displayIDs:
     type:
-      arrayof: C_Garrison.FollowerDisplayID
+      arrayof:
+        structure: C_Garrison.FollowerDisplayID
   displayScale:
     nilable: true
     type: number
@@ -2266,13 +2287,15 @@ C_Garrison.AutoMissionEvent:
     type: number
   targetInfo:
     type:
-      arrayof: C_Garrison.AutoMissionCombatEventInfo
+      arrayof:
+        structure: C_Garrison.AutoMissionCombatEventInfo
   type:
     type: number
 C_Garrison.AutoMissionRound:
   events:
     type:
-      arrayof: C_Garrison.AutoMissionEvent
+      arrayof:
+        structure: C_Garrison.AutoMissionEvent
 C_Garrison.AutoMissionTargetingInfo:
   effectIndex:
     type: number
@@ -2320,7 +2343,8 @@ C_Garrison.FollowerMissionCompleteInfo:
     type: number
   displayIDs:
     type:
-      arrayof: C_Garrison.FollowerDisplayID
+      arrayof:
+        structure: C_Garrison.FollowerDisplayID
   health:
     type: number
   height:
@@ -2380,7 +2404,8 @@ C_Garrison.GarrisonAbilityInfo:
     type: string
   counters:
     type:
-      arrayof: C_Garrison.GarrisonAbilityCounterInfo
+      arrayof:
+        structure: C_Garrison.GarrisonAbilityCounterInfo
   description:
     type: string
   icon:
@@ -2406,7 +2431,8 @@ C_Garrison.GarrisonEnemyEncounterInfo:
       structure: C_Garrison.AutoCombatSpellInfo
   autoCombatSpells:
     type:
-      arrayof: C_Garrison.AutoCombatSpellInfo
+      arrayof:
+        structure: C_Garrison.AutoCombatSpellInfo
   boardIndex:
     type: number
   displayID:
@@ -2421,7 +2447,8 @@ C_Garrison.GarrisonEnemyEncounterInfo:
     type: number
   mechanics:
     type:
-      arrayof: C_Garrison.GarrisonMechanicInfo
+      arrayof:
+        structure: C_Garrison.GarrisonMechanicInfo
   name:
     type: string
   portraitFileDataID:
@@ -2466,7 +2493,8 @@ C_Garrison.GarrisonPlotInstanceMapInfo:
 C_Garrison.MissionDeploymentInfo:
   enemies:
     type:
-      arrayof: C_Garrison.GarrisonEnemyEncounterInfo
+      arrayof:
+        structure: C_Garrison.GarrisonEnemyEncounterInfo
   environment:
     nilable: true
     type: string
@@ -2560,7 +2588,8 @@ C_GossipInfo.GossipOptionUIInfo:
     type: number
   rewards:
     type:
-      arrayof: C_GossipInfo.GossipOptionRewardInfo
+      arrayof:
+        structure: C_GossipInfo.GossipOptionRewardInfo
   selectOptionWhenOnlyOption:
     type: boolean
   spellID:
@@ -2718,11 +2747,13 @@ C_ItemUpgrade.ItemUpgradeItemInfo:
     type: string
   upgradeLevelInfos:
     type:
-      arrayof: C_ItemUpgrade.ItemUpgradeLevelInfo
+      arrayof:
+        structure: C_ItemUpgrade.ItemUpgradeLevelInfo
 C_ItemUpgrade.ItemUpgradeLevelInfo:
   costsToUpgrade:
     type:
-      arrayof: C_ItemUpgrade.ItemUpgradeCurrencyCost
+      arrayof:
+        structure: C_ItemUpgrade.ItemUpgradeCurrencyCost
   displayQuality:
     type: number
   failureMessage:
@@ -2732,7 +2763,8 @@ C_ItemUpgrade.ItemUpgradeLevelInfo:
     type: number
   levelStats:
     type:
-      arrayof: C_ItemUpgrade.ItemUpgradeStat
+      arrayof:
+        structure: C_ItemUpgrade.ItemUpgradeStat
   upgradeLevel:
     type: number
 C_ItemUpgrade.ItemUpgradeStat:
@@ -3294,7 +3326,8 @@ C_MythicPlus.MapSeasonBestInfo:
     type: number
   members:
     type:
-      arrayof: C_MythicPlus.MythicPlusMember
+      arrayof:
+        structure: C_MythicPlus.MythicPlusMember
 C_MythicPlus.MythicPlusDate:
   day:
     type: number
@@ -3362,12 +3395,14 @@ C_PerksActivities.PerksActivitiesInfo:
     type: number
   activities:
     type:
-      arrayof: C_PerksActivities.PerksActivityInfo
+      arrayof:
+        structure: C_PerksActivities.PerksActivityInfo
   displayMonthName:
     type: string
   thresholds:
     type:
-      arrayof: C_PerksActivities.PerksActivityThresholdInfo
+      arrayof:
+        structure: C_PerksActivities.PerksActivityThresholdInfo
 C_PerksActivities.PerksActivitiesPending:
   pendingIDs:
     type:
@@ -3387,7 +3422,8 @@ C_PerksActivities.PerksActivityInfo:
     type: number
   requirementsList:
     type:
-      arrayof: C_PerksActivities.PerksActivityRequirement
+      arrayof:
+        structure: C_PerksActivities.PerksActivityRequirement
   tagNames:
     type:
       arrayof: string
@@ -3544,7 +3580,8 @@ C_PlayerChoice.PlayerChoiceInfo:
     type: string
   options:
     type:
-      arrayof: C_PlayerChoice.PlayerChoiceOptionInfo
+      arrayof:
+        structure: C_PlayerChoice.PlayerChoiceOptionInfo
   pendingChoiceText:
     type: string
   questionText:
@@ -3576,7 +3613,8 @@ C_PlayerChoice.PlayerChoiceOptionButtonInfo:
 C_PlayerChoice.PlayerChoiceOptionInfo:
   buttons:
     type:
-      arrayof: C_PlayerChoice.PlayerChoiceOptionButtonInfo
+      arrayof:
+        structure: C_PlayerChoice.PlayerChoiceOptionButtonInfo
   choiceArtID:
     type: number
   desaturatedArt:
@@ -3624,13 +3662,16 @@ C_PlayerChoice.PlayerChoiceOptionInfo:
 C_PlayerChoice.PlayerChoiceOptionRewardInfo:
   currencyRewards:
     type:
-      arrayof: C_PlayerChoice.PlayerChoiceRewardCurrencyInfo
+      arrayof:
+        structure: C_PlayerChoice.PlayerChoiceRewardCurrencyInfo
   itemRewards:
     type:
-      arrayof: C_PlayerChoice.PlayerChoiceRewardItemInfo
+      arrayof:
+        structure: C_PlayerChoice.PlayerChoiceRewardItemInfo
   repRewards:
     type:
-      arrayof: C_PlayerChoice.PlayerChoiceRewardReputationInfo
+      arrayof:
+        structure: C_PlayerChoice.PlayerChoiceRewardReputationInfo
 C_PlayerChoice.PlayerChoiceRewardCurrencyInfo:
   currencyId:
     type: number
@@ -3670,7 +3711,8 @@ C_PlayerInfo.MythicPlusRatingSummary:
     type: number
   runs:
     type:
-      arrayof: C_PlayerInfo.MythicPlusRatingMapSummary
+      arrayof:
+        structure: C_PlayerInfo.MythicPlusRatingMapSummary
 C_PvP.BattlefieldCurrencyReward:
   id:
     type: number
@@ -3835,7 +3877,8 @@ C_PvP.PvpReadyCheckInfo:
     type: number
   roles:
     type:
-      arrayof: C_PvP.PvpRoleQueueInfo
+      arrayof:
+        structure: C_PvP.PvpRoleQueueInfo
   totalNumPlayers:
     type: number
 C_PvP.PvpRoleQueueInfo:
@@ -3895,7 +3938,8 @@ C_PvP.PVPScoreInfo:
     type: number
   stats:
     type:
-      arrayof: C_PvP.PVPStatInfo
+      arrayof:
+        structure: C_PvP.PVPStatInfo
   talentSpec:
     type: string
 C_PvP.PVPStatInfo:
@@ -4122,10 +4166,12 @@ C_RecruitAFriend.RafInfo:
       structure: C_RecruitAFriend.RafRecruitmentinfo
   recruits:
     type:
-      arrayof: C_RecruitAFriend.RafRecruit
+      arrayof:
+        structure: C_RecruitAFriend.RafRecruit
   rewards:
     type:
-      arrayof: C_RecruitAFriend.RafReward
+      arrayof:
+        structure: C_RecruitAFriend.RafReward
   spentMonths:
     type: number
 C_RecruitAFriend.RafMountInfo:
@@ -4149,7 +4195,8 @@ C_RecruitAFriend.RafRecruit:
     type: string
   activities:
     type:
-      arrayof: C_RecruitAFriend.RafRecruitActivity
+      arrayof:
+        structure: C_RecruitAFriend.RafRecruitActivity
   battleTag:
     type: string
   bnetAccountID:
@@ -4290,7 +4337,8 @@ C_ScenarioInfo.ScenarioStepInfo:
     type: boolean
   spells:
     type:
-      arrayof: C_ScenarioInfo.ScenarioStepSpellInfo
+      arrayof:
+        structure: C_ScenarioInfo.ScenarioStepSpellInfo
   stepFailed:
     type: boolean
   title:
@@ -4539,7 +4587,8 @@ C_Soulbinds.SoulbindTree:
     type: boolean
   nodes:
     type:
-      arrayof: C_Soulbinds.SoulbindNode
+      arrayof:
+        structure: C_Soulbinds.SoulbindNode
 C_SpecializationInfo.PvpTalentInfo:
   available:
     type: boolean
@@ -4870,7 +4919,8 @@ C_Traits.TraitNodeInfo:
     type: number
   visibleEdges:
     type:
-      arrayof: C_Traits.TraitOutEdgeInfo
+      arrayof:
+        structure: C_Traits.TraitOutEdgeInfo
 C_Traits.TraitNodeInfoPartial:
   activeRank:
     nilable: true
@@ -4911,7 +4961,8 @@ C_Traits.TraitOutEdgeInfo:
 C_Traits.TraitTreeInfo:
   gates:
     type:
-      arrayof: C_Traits.TraitGateInfo
+      arrayof:
+        structure: C_Traits.TraitGateInfo
   hideSingleRankNumbers:
     type: boolean
   ID:
@@ -5254,7 +5305,8 @@ C_UIWidgetManager.DoubleStateIconRowVisualizationInfo:
     type: number
   leftIcons:
     type:
-      arrayof: C_UIWidgetManager.UIWidgetStateIconInfo
+      arrayof:
+        structure: C_UIWidgetManager.UIWidgetStateIconInfo
   modelSceneLayer:
     type: number
   orderIndex:
@@ -5263,7 +5315,8 @@ C_UIWidgetManager.DoubleStateIconRowVisualizationInfo:
     type: number
   rightIcons:
     type:
-      arrayof: C_UIWidgetManager.UIWidgetStateIconInfo
+      arrayof:
+        structure: C_UIWidgetManager.UIWidgetStateIconInfo
   scriptedAnimationEffectID:
     type: number
   shownState:
@@ -5377,7 +5430,8 @@ C_UIWidgetManager.FillUpFramesWidgetVisualizationInfo:
 C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
   currencies:
     type:
-      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
+      arrayof:
+        structure: C_UIWidgetManager.UIWidgetCurrencyInfo
   frameTextureKit:
     type: string
   hasTimer:
@@ -5473,7 +5527,8 @@ C_UIWidgetManager.IconTextAndBackgroundWidgetVisualizationInfo:
 C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
   currencies:
     type:
-      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
+      arrayof:
+        structure: C_UIWidgetManager.UIWidgetCurrencyInfo
   description:
     type: string
   descriptionEnabledState:
@@ -5515,7 +5570,8 @@ C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
 C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
   currencies:
     type:
-      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
+      arrayof:
+        structure: C_UIWidgetManager.UIWidgetCurrencyInfo
   frameTextureKit:
     type: string
   hasTimer:
@@ -5663,7 +5719,8 @@ C_UIWidgetManager.StackedResourceTrackerWidgetVisualizationInfo:
     type: number
   resources:
     type:
-      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
+      arrayof:
+        structure: C_UIWidgetManager.UIWidgetCurrencyInfo
   scriptedAnimationEffectID:
     type: number
   shownState:
@@ -5750,7 +5807,8 @@ C_UIWidgetManager.TextColumnRowVisualizationInfo:
     type: number
   entries:
     type:
-      arrayof: C_UIWidgetManager.TextColumnRowEntryInfo
+      arrayof:
+        structure: C_UIWidgetManager.TextColumnRowEntryInfo
   fontType:
     type: number
   frameTextureKit:
@@ -5793,7 +5851,8 @@ C_UIWidgetManager.TextureAndTextEntryInfo:
 C_UIWidgetManager.TextureAndTextRowVisualizationInfo:
   entries:
     type:
-      arrayof: C_UIWidgetManager.TextureAndTextEntryInfo
+      arrayof:
+        structure: C_UIWidgetManager.TextureAndTextEntryInfo
   fixedWidth:
     nilable: true
     type: number
@@ -6135,7 +6194,8 @@ C_UIWidgetManager.ZoneControlVisualizationInfo:
     type: string
   zoneEntries:
     type:
-      arrayof: C_UIWidgetManager.ZoneEntry
+      arrayof:
+        structure: C_UIWidgetManager.ZoneEntry
 C_UIWidgetManager.ZoneEntry:
   activeState:
     type: number
@@ -6220,7 +6280,8 @@ C_VoiceChat.VoiceChatChannel:
     type: boolean
   members:
     type:
-      arrayof: C_VoiceChat.VoiceChatMember
+      arrayof:
+        structure: C_VoiceChat.VoiceChatMember
   name:
     type: string
   streamId:
@@ -6243,7 +6304,8 @@ C_VoiceChat.VoiceChatMember:
 C_VoiceChat.VoiceChatProcess:
   channels:
     type:
-      arrayof: C_VoiceChat.VoiceChatChannel
+      arrayof:
+        structure: C_VoiceChat.VoiceChatChannel
   name:
     type: string
 C_VoiceChat.VoiceTtsVoiceType:
@@ -6290,7 +6352,8 @@ C_WeeklyRewards.WeeklyRewardActivityInfo:
     type: string
   rewards:
     type:
-      arrayof: C_WeeklyRewards.WeeklyRewardActivityRewardInfo
+      arrayof:
+        structure: C_WeeklyRewards.WeeklyRewardActivityRewardInfo
   threshold:
     type: number
   type:
@@ -6313,7 +6376,8 @@ C_XMLUtil.XMLTemplateInfo:
     type: string
   keyValues:
     type:
-      arrayof: C_XMLUtil.XMLTemplateKeyValue
+      arrayof:
+        structure: C_XMLUtil.XMLTemplateKeyValue
   type:
     type: string
   width:
@@ -6384,7 +6448,8 @@ CharCustomizationCategory:
     type: string
   options:
     type:
-      arrayof: CharCustomizationOption
+      arrayof:
+        structure: CharCustomizationOption
   orderIndex:
     type: number
   selectedIcon:
@@ -6421,7 +6486,8 @@ CharCustomizationChoice:
 CharCustomizationOption:
   choices:
     type:
-      arrayof: CharCustomizationChoice
+      arrayof:
+        structure: CharCustomizationChoice
   currentChoiceIndex:
     nilable: true
     type: number
@@ -6533,7 +6599,8 @@ CraftingItemResultData:
   resourcesReturned:
     nilable: true
     type:
-      arrayof: CraftingResourceReturnInfo
+      arrayof:
+        structure: CraftingResourceReturnInfo
 CraftingItemSlotModification:
   dataSlotIndex:
     type: number
@@ -6562,7 +6629,8 @@ CraftingOperationInfo:
     type: number
   bonusStats:
     type:
-      arrayof: CraftingOperationBonusStatInfo
+      arrayof:
+        structure: CraftingOperationBonusStatInfo
   craftingDataID:
     type: number
   craftingQuality:
@@ -6712,7 +6780,8 @@ CraftingOrderCustomerSearchResults:
     type: number
   options:
     type:
-      arrayof: CraftingOrderCustomerOptionInfo
+      arrayof:
+        structure: CraftingOrderCustomerOptionInfo
 CraftingOrderInfo:
   claimEndTime:
     type: number
@@ -6756,7 +6825,8 @@ CraftingOrderInfo:
     type: string
   reagents:
     type:
-      arrayof: CraftingOrderReagentInfo
+      arrayof:
+        structure: CraftingOrderReagentInfo
   reagentState:
     type: number
   recraftItemHyperlink:
@@ -6848,7 +6918,8 @@ CraftingReagentSlotSchematic:
     type: number
   reagents:
     type:
-      arrayof: CraftingReagent
+      arrayof:
+        structure: CraftingReagent
   reagentType:
     type: number
   slotIndex:
@@ -6894,7 +6965,8 @@ CraftingRecipeSchematic:
     type: number
   reagentSlotSchematics:
     type:
-      arrayof: CraftingReagentSlotSchematic
+      arrayof:
+        structure: CraftingReagentSlotSchematic
   recipeID:
     type: number
   recipeType:
@@ -6925,7 +6997,8 @@ ExpansionDisplayInfo:
     type: string
   features:
     type:
-      arrayof: ExpansionDisplayInfoFeature
+      arrayof:
+        structure: ExpansionDisplayInfoFeature
   highResBackgroundID:
     type: number
   logo:
@@ -6952,7 +7025,8 @@ GarrisonFollowerAbilityInfo:
     type: string
   counters:
     type:
-      arrayof: GarrisonAbilityEffect
+      arrayof:
+        structure: GarrisonAbilityEffect
   description:
     type: string
   icon:
@@ -7000,7 +7074,8 @@ GarrisonTalentInfo:
     type: number
   researchCurrencyCosts:
     type:
-      arrayof: GarrisonTalentCurrencyCostInfo
+      arrayof:
+        structure: GarrisonTalentCurrencyCostInfo
   researchDescription:
     nilable: true
     type: string
@@ -7053,7 +7128,8 @@ GarrisonTalentTreeInfo:
     type: boolean
   talents:
     type:
-      arrayof: GarrisonTalentInfo
+      arrayof:
+        structure: GarrisonTalentInfo
   textureKit:
     type: string
   title:
@@ -7078,7 +7154,8 @@ GatheringOperationInfo:
     type: number
   bonusStats:
     type:
-      arrayof: GatheringOperationBonusStatInfo
+      arrayof:
+        structure: GatheringOperationBonusStatInfo
   maxDifficulty:
     type: number
   spellID:
@@ -7136,7 +7213,8 @@ MythicPlusRatingLinkInfo:
 NewCraftingOrderInfo:
   craftingReagentItems:
     type:
-      arrayof: CraftingReagentInfo
+      arrayof:
+        structure: CraftingReagentInfo
   customerNotes:
     type: string
   minCraftingQualityID:
@@ -7151,7 +7229,8 @@ NewCraftingOrderInfo:
     type: number
   reagentItems:
     type:
-      arrayof: RegularReagentInfo
+      arrayof:
+        structure: RegularReagentInfo
   recraftItem:
     nilable: true
     type: string
@@ -7317,10 +7396,12 @@ SpecPerkInfo:
 TooltipData:
   args:
     type:
-      arrayof: TooltipDataArg
+      arrayof:
+        structure: TooltipDataArg
   lines:
     type:
-      arrayof: TooltipDataLine
+      arrayof:
+        structure: TooltipDataLine
 TooltipDataArg:
   boolVal:
     nilable: true
@@ -7347,7 +7428,8 @@ TooltipDataArg:
 TooltipDataLine:
   args:
     type:
-      arrayof: TooltipDataArg
+      arrayof:
+        structure: TooltipDataArg
 TradeSkillRecipeInfo:
   abilityAllVerb:
     nilable: true

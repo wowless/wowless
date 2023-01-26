@@ -667,7 +667,8 @@ C_Club.ClubSelfInvitationInfo:
       structure: C_Club.ClubMemberInfo
   leaders:
     type:
-      arrayof: C_Club.ClubMemberInfo
+      arrayof:
+        structure: C_Club.ClubMemberInfo
 C_Club.ClubStreamInfo:
   creationTime:
     type: number
@@ -706,13 +707,16 @@ C_Club.ClubTicketInfo:
 C_Commentator.CommentatorHistory:
   overrideNameDirectory:
     type:
-      arrayof: C_Commentator.CommentatorOverrideNameEntry
+      arrayof:
+        structure: C_Commentator.CommentatorOverrideNameEntry
   series:
     type:
-      arrayof: C_Commentator.CommentatorSeries
+      arrayof:
+        structure: C_Commentator.CommentatorSeries
   teamDirectory:
     type:
-      arrayof: C_Commentator.CommentatorTeamDirectoryEntry
+      arrayof:
+        structure: C_Commentator.CommentatorTeamDirectoryEntry
 C_Commentator.CommentatorOverrideNameEntry:
   newName:
     type: string
@@ -742,7 +746,8 @@ C_Commentator.CommentatorPlayerData:
 C_Commentator.CommentatorSeries:
   teams:
     type:
-      arrayof: C_Commentator.CommentatorSeriesTeam
+      arrayof:
+        structure: C_Commentator.CommentatorSeriesTeam
 C_Commentator.CommentatorSeriesTeam:
   name:
     type: string
@@ -1011,7 +1016,8 @@ C_GamePad.GamePadAxisConfig:
 C_GamePad.GamePadConfig:
   axisConfigs:
     type:
-      arrayof: C_GamePad.GamePadAxisConfig
+      arrayof:
+        structure: C_GamePad.GamePadAxisConfig
   comment:
     nilable: true
     type: string
@@ -1026,13 +1032,16 @@ C_GamePad.GamePadConfig:
     type: string
   rawAxisMappings:
     type:
-      arrayof: C_GamePad.GamePadRawAxisMapping
+      arrayof:
+        structure: C_GamePad.GamePadRawAxisMapping
   rawButtonMappings:
     type:
-      arrayof: C_GamePad.GamePadRawButtonMapping
+      arrayof:
+        structure: C_GamePad.GamePadRawButtonMapping
   stickConfigs:
     type:
-      arrayof: C_GamePad.GamePadStickConfig
+      arrayof:
+        structure: C_GamePad.GamePadStickConfig
 C_GamePad.GamePadConfigID:
   productID:
     nilable: true
@@ -1059,7 +1068,8 @@ C_GamePad.GamePadMappedState:
     type: number
   sticks:
     type:
-      arrayof: C_GamePad.GamePadStick
+      arrayof:
+        structure: C_GamePad.GamePadStick
 C_GamePad.GamePadRawAxisMapping:
   axis:
     nilable: true
@@ -1827,7 +1837,8 @@ C_Traits.TraitNodeInfo:
     type: number
   visibleEdges:
     type:
-      arrayof: C_Traits.TraitOutEdgeInfo
+      arrayof:
+        structure: C_Traits.TraitOutEdgeInfo
 C_Traits.TraitNodeInfoPartial:
   activeRank:
     nilable: true
@@ -1868,7 +1879,8 @@ C_Traits.TraitOutEdgeInfo:
 C_Traits.TraitTreeInfo:
   gates:
     type:
-      arrayof: C_Traits.TraitGateInfo
+      arrayof:
+        structure: C_Traits.TraitGateInfo
   hideSingleRankNumbers:
     type: boolean
   ID:
@@ -1960,7 +1972,8 @@ C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo:
 C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
   currencies:
     type:
-      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
+      arrayof:
+        structure: C_UIWidgetManager.UIWidgetCurrencyInfo
   orderIndex:
     type: number
   shownState:
@@ -1998,7 +2011,8 @@ C_UIWidgetManager.IconTextAndBackgroundWidgetVisualizationInfo:
 C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
   currencies:
     type:
-      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
+      arrayof:
+        structure: C_UIWidgetManager.UIWidgetCurrencyInfo
   description:
     type: string
   descriptionEnabledState:
@@ -2020,7 +2034,8 @@ C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
 C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
   currencies:
     type:
-      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
+      arrayof:
+        structure: C_UIWidgetManager.UIWidgetCurrencyInfo
   frameTextureKitID:
     type: number
   orderIndex:
@@ -2036,7 +2051,8 @@ C_UIWidgetManager.StackedResourceTrackerWidgetVisualizationInfo:
     type: number
   resources:
     type:
-      arrayof: C_UIWidgetManager.UIWidgetCurrencyInfo
+      arrayof:
+        structure: C_UIWidgetManager.UIWidgetCurrencyInfo
   shownState:
     type: number
   widgetTag:
@@ -2143,7 +2159,8 @@ C_VoiceChat.VoiceChatChannel:
     type: boolean
   members:
     type:
-      arrayof: C_VoiceChat.VoiceChatMember
+      arrayof:
+        structure: C_VoiceChat.VoiceChatMember
   name:
     type: string
   streamId:
@@ -2166,7 +2183,8 @@ C_VoiceChat.VoiceChatMember:
 C_VoiceChat.VoiceChatProcess:
   channels:
     type:
-      arrayof: C_VoiceChat.VoiceChatChannel
+      arrayof:
+        structure: C_VoiceChat.VoiceChatChannel
   name:
     type: string
 C_VoiceChat.VoiceTtsVoiceType:
@@ -2182,7 +2200,8 @@ C_XMLUtil.XMLTemplateInfo:
     type: string
   keyValues:
     type:
-      arrayof: C_XMLUtil.XMLTemplateKeyValue
+      arrayof:
+        structure: C_XMLUtil.XMLTemplateKeyValue
   type:
     type: string
   width:
@@ -2243,7 +2262,8 @@ CharCustomizationCategory:
     type: string
   options:
     type:
-      arrayof: CharCustomizationOption
+      arrayof:
+        structure: CharCustomizationOption
   orderIndex:
     type: number
   selectedIcon:
@@ -2280,7 +2300,8 @@ CharCustomizationChoice:
 CharCustomizationOption:
   choices:
     type:
-      arrayof: CharCustomizationChoice
+      arrayof:
+        structure: CharCustomizationChoice
   currentChoiceIndex:
     nilable: true
     type: number
@@ -2321,7 +2342,8 @@ ExpansionDisplayInfo:
     type: string
   features:
     type:
-      arrayof: ExpansionDisplayInfoFeature
+      arrayof:
+        structure: ExpansionDisplayInfoFeature
   logo:
     type: number
 ExpansionDisplayInfoFeature:
