@@ -12507,6 +12507,12 @@ C_PlayerInfo.IsPlayerNPERestricted:
   outputs:
   - name: isRestricted
     type: boolean
+C_PlayerInfo.IsTradingPostAvailable:
+  inputs:
+  - {}
+  outputs:
+  - name: isAvailable
+    type: boolean
 C_PlayerInfo.IsTravelersLogAvailable:
   inputs:
   - {}
