@@ -157,6 +157,17 @@ local function t2ty(t, ns, mixin)
     error(('%s has unexpected type %s'):format(n, ty))
   end
 end
+local function t2nty(field, ns)
+  if field.InnerType then
+    return { arrayof = t2nty({ Type = field.InnerType }, ns) }
+  end
+  local ty, isstruct = t2ty(field.Type, ns, field.Mixin)
+  if isstruct then
+    return { mixin = field.Mixin, structure = ty }
+  else
+    return ty
+  end
+end
 
 local function split(name)
   local dotpos = name:find('%.')
@@ -305,17 +316,7 @@ local rewriters = {
             table.insert(t, {
               name = arg.Name,
               nilable = arg.Nilable or nil,
-              type = (function()
-                if arg.InnerType then
-                  return { arrayof = t2ty(arg.InnerType, ns) }
-                end
-                local ty, isstruct = t2ty(arg.Type, ns, arg.Mixin)
-                if isstruct then
-                  return { mixin = arg.Mixin, structure = ty }
-                else
-                  return ty
-                end
-              end)(),
+              type = t2nty(arg, ns),
             })
           end
           return t
@@ -344,17 +345,7 @@ local rewriters = {
               default = field.Default,
               nilable = field.Nilable or nil,
               stub = deref(out, name, field.Name, 'stub') or stubs[field.Type],
-              type = (function()
-                if field.InnerType then
-                  return { arrayof = t2ty(field.InnerType, ns) }
-                end
-                local ty, isstruct = t2ty(field.Type, ns, field.Mixin)
-                if isstruct then
-                  return { mixin = field.Mixin, structure = ty }
-                else
-                  return ty
-                end
-              end)(),
+              type = t2nty(field, ns),
             }
           end
           return ret
