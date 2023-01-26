@@ -261,7 +261,8 @@ AZERITE_ITEM_POWER_LEVEL_CHANGED:
     type: number
   - name: unlockedEmpoweredItemsInfo
     type:
-      arrayof: C_AzeriteItem.UnlockedAzeriteEmpoweredItems
+      arrayof:
+        structure: C_AzeriteItem.UnlockedAzeriteEmpoweredItems
 BAG_CLOSED:
   payload:
   - name: bagID

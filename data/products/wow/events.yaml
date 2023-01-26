@@ -245,7 +245,8 @@ AUCTION_HOUSE_BROWSE_RESULTS_ADDED:
   payload:
   - name: addedBrowseResults
     type:
-      arrayof: C_AuctionHouse.BrowseResultInfo
+      arrayof:
+        structure: C_AuctionHouse.BrowseResultInfo
 AUCTION_HOUSE_BROWSE_RESULTS_UPDATED:
   payload: {}
 AUCTION_HOUSE_CLOSED:
@@ -407,7 +408,8 @@ AZERITE_ITEM_POWER_LEVEL_CHANGED:
     type: number
   - name: unlockedEmpoweredItemsInfo
     type:
-      arrayof: C_AzeriteItem.UnlockedAzeriteEmpoweredItems
+      arrayof:
+        structure: C_AzeriteItem.UnlockedAzeriteEmpoweredItems
   - name: azeriteItemID
     type: number
 BAG_CLOSED:
@@ -3606,7 +3608,8 @@ COVENANT_CALLINGS_UPDATED:
   payload:
   - name: callings
     type:
-      arrayof: BountyInfo
+      arrayof:
+        structure: BountyInfo
 COVENANT_CHOSEN:
   payload:
   - name: covenantID
@@ -4086,7 +4089,8 @@ GARRISON_MISSION_COMPLETE_RESPONSE:
     type: boolean
   - name: followerDeaths
     type:
-      arrayof: C_Garrison.GarrisonFollowerDeathInfo
+      arrayof:
+        structure: C_Garrison.GarrisonFollowerDeathInfo
   - name: autoCombatResult
     nilable: true
     type:
@@ -4898,7 +4902,8 @@ LORE_TEXT_UPDATED_CAMPAIGN:
     type: number
   - name: textEntries
     type:
-      arrayof: C_LoreText.LoreTextEntry
+      arrayof:
+        structure: C_LoreText.LoreTextEntry
 LOSS_OF_CONTROL_ADDED:
   payload:
   - name: effectIndex

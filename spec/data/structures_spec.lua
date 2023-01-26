@@ -32,10 +32,16 @@ describe('structures', function()
         end
         reflist(api.outputs)
       end
+      local function refty(ty)
+        if ty.arrayof then
+          refty(ty.arrayof)
+        elseif ty.structure then
+          ref(ty.structure)
+        end
+      end
       for _, v in pairs(parseYaml('data/products/' .. p .. '/events.yaml')) do
         for _, pv in ipairs(v.payload or {}) do
-          ref(pv.type.structure)
-          ref(pv.type.arrayof)
+          refty(pv.type)
         end
       end
       local actual = parseYaml('data/products/' .. p .. '/structures.yaml')
