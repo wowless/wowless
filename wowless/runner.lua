@@ -115,33 +115,14 @@ local function run(cfg)
         VARIABLES_LOADED = true,
         VOICE_CHAT_VAD_SETTINGS_UPDATED = true, -- inconsistent with nilable C_VoiceChat outputs
       }
-      local keys = {}
-      local payloads = {}
-      local typeToPayload = {
-        boolean = 'false',
-        number = '1',
-        string = '\'\'',
-        table = '{}',
-        unknown = 'nil',
-      }
       local datalua = require('build.products.' .. cfg.product .. '.data')
       local skip = (datalua.config.runner or {}).skip_events or {}
-      for k, v in pairs(datalua.events) do
-        if not v.neverSent and not eventBlacklist[k] and not skip[k] then
-          local payload = {}
-          for _, p in ipairs(v.payload or {}) do
-            local pv = typeToPayload[p.type] or 'nil'
-            table.insert(payload, pv)
-          end
-          if not next(payload) or cfg.allevents then
-            table.insert(keys, k)
-            payloads[k] = loadstring('return ' .. table.concat(payload, ','))
+      for k, v in require('pl.tablex').sort(datalua.events) do
+        if v.payload and not eventBlacklist[k] and not skip[k] then
+          if v.payload == 'return ' or cfg.allevents then
+            api.SendEvent(k, loadstring(v.payload)())
           end
         end
-      end
-      table.sort(keys)
-      for _, k in ipairs(keys) do
-        api.SendEvent(k, payloads[k]())
       end
     end,
     loot = function()

@@ -13,19 +13,21 @@ local function readFile(...)
 end
 local plprettywrite = require('pl.pretty').write
 
-local getStub = (function()
+local defaultOutputs = {
+  boolean = 'false',
+  ['function'] = 'function() end',
+  ['nil'] = 'nil',
+  number = '1',
+  oneornil = 'nil',
+  string = '\'\'',
+  table = '{}',
+  unknown = 'nil',
+}
+
+local structureDefaults = {}
+
+local typeDefault = (function()
   local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
-  local defaultOutputs = {
-    boolean = 'false',
-    ['function'] = 'function() end',
-    ['nil'] = 'nil',
-    number = '1',
-    oneornil = 'nil',
-    string = '\'\'',
-    table = '{}',
-    unknown = 'nil',
-  }
-  local structureDefaults = {}
   local function typeDefault(ty)
     if defaultOutputs[ty] then
       return defaultOutputs[ty]
@@ -62,6 +64,10 @@ local getStub = (function()
   for name in pairs(structures) do
     typeDefault({ structure = name })
   end
+  return typeDefault
+end)()
+
+local getStub = (function()
   return function(sig)
     local rets = {}
     for _, out in ipairs(sig) do
@@ -139,8 +145,13 @@ end
 local events = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
   events[k] = {
-    neverSent = v.payload == nil or nil,
-    payload = v.payload or {},
+    payload = v.payload and (function()
+      local t = {}
+      for _, f in ipairs(v.payload or {}) do
+        table.insert(t, typeDefault(f.type))
+      end
+      return 'return ' .. table.concat(t, ',')
+    end)(),
   }
 end
 
