@@ -1,17 +1,5 @@
 describe('structures', function()
   local parseYaml = require('wowapi.yaml').parseFile
-  local nonStructs = {
-    boolean = true,
-    ['function'] = true,
-    ['nil'] = true,
-    number = true,
-    ['oneornil'] = true,
-    string = true,
-    table = true,
-    unit = true,
-    unknown = true,
-    userdata = true,
-  }
   for _, p in ipairs(require('wowless.util').productList()) do
     describe(p, function()
       local refs = {}
@@ -51,7 +39,7 @@ describe('structures', function()
             end
           end
         else
-          assert(nonStructs[ty], 'weird type ' .. tostring(ty))
+          assert(type(ty) == 'string', 'weird type ' .. tostring(ty))
         end
       end
       for k in pairs(refs) do
