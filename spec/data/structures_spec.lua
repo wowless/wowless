@@ -15,15 +15,16 @@ describe('structures', function()
   for _, p in ipairs(require('wowless.util').productList()) do
     describe(p, function()
       local refs = {}
-      local function ref(x)
-        if x and not nonStructs[x] then
-          refs[x] = true
+      local function refty(ty)
+        if ty.arrayof then
+          refty(ty.arrayof)
+        elseif ty.structure then
+          refs[ty.structure] = true
         end
       end
       local function reflist(xs)
         for _, x in ipairs(xs or {}) do
-          ref(x.type)
-          ref(x.innerType)
+          refty(x.type)
         end
       end
       for _, api in pairs(parseYaml('data/products/' .. p .. '/apis.yaml')) do
@@ -31,13 +32,6 @@ describe('structures', function()
           reflist(il)
         end
         reflist(api.outputs)
-      end
-      local function refty(ty)
-        if ty.arrayof then
-          refty(ty.arrayof)
-        elseif ty.structure then
-          ref(ty.structure)
-        end
       end
       for _, v in pairs(parseYaml('data/products/' .. p .. '/events.yaml')) do
         for _, pv in ipairs(v.payload or {}) do

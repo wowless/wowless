@@ -74,10 +74,6 @@ local specDefault = (function()
     if ty.structure then
       return valstruct(ty.structure, ty.mixin)
     end
-    -- TODO remove this when api specs are refactored
-    if structures[ty] then
-      return valstruct(ty, spec.mixin)
-    end
     error('unexpected type: ' .. require('pl.pretty').write(ty))
   end
   return specDefault
