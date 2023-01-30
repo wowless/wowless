@@ -87,6 +87,22 @@ local function loadFunctions(api, loader)
     end,
   })
 
+  local function typestr(ty)
+    if type(ty) == 'string' then
+      return ty
+    end
+    if ty.structure then
+      return ty.structure
+    end
+    if ty.arrayof then
+      return typestr(ty.arrayof) .. ' array'
+    end
+    if ty.enum then
+      return ty.enum
+    end
+    error('unable to typestr')
+  end
+
   local function mkfn(fname, apicfg)
     local function base()
       if apicfg.stub then
@@ -98,42 +114,58 @@ local function loadFunctions(api, loader)
       end
     end
 
+    local function checkArg(i, param, arg)
+      if arg == nil then
+        if not param.nilable and param.default == nil then
+          error(('arg %d (%q) of %q is not nilable, but nil was passed'):format(i, tostring(param.name), fname))
+        end
+        return nil
+      end
+      local function checkarg(val, ty)
+        if type(val) ~= ty then
+          error(
+            ('arg %d (%q) of %q is of type %q, but %q was passed'):format(
+              i,
+              tostring(param.name),
+              fname,
+              typestr(param.type),
+              type(arg)
+            )
+          )
+        end
+        return val
+      end
+      if param.type == 'number' then
+        -- luaL_checknumber
+        return checkarg(type(arg) == 'string' and tonumber(arg) or arg, 'number')
+      elseif param.type == 'string' then
+        -- luaL_checkstring
+        return checkarg(type(arg) == 'number' and tostring(arg) or arg, 'string')
+      elseif param.type == 'unit' then
+        checkarg(arg, 'string')
+        return resolveUnit(api.states.Units, arg)
+      elseif param.type == 'unknown' then
+        return arg
+      elseif param.type == 'function' or param.type == 'table' or param.type == 'boolean' then
+        return checkarg(arg, param.type)
+      elseif param.type.enum then
+        -- TODO better enum checking
+        return checkarg(type(arg) == 'string' and tonumber(arg) or arg, 'number')
+      elseif param.type.structure then
+        -- TODO better structure checking
+        return checkarg(arg, 'table')
+      elseif param.type.arrayof then
+        -- TODO better array checking
+        return checkarg(arg, 'table')
+      else
+        error(('internal error: arg %d (%q) of %q has an invalid type'):format(i, tostring(param.name), fname))
+      end
+    end
+
     local function doCheckInputs(sig, ...)
       local args = {}
       for i, param in ipairs(sig) do
-        local arg = select(i, ...)
-        if arg == nil then
-          if not param.nilable and param.default == nil then
-            error(('arg %d (%q) of %q is not nilable, but nil was passed'):format(i, tostring(param.name), fname))
-          end
-        else
-          local ty = type(arg)
-          -- Simulate C lua_tonumber and lua_tostring.
-          if param.type == 'number' and ty == 'string' then
-            arg = tonumber(arg) or arg
-            ty = type(arg)
-          elseif param.type == 'string' and ty == 'number' then
-            arg = tostring(arg) or arg
-            ty = type(arg)
-          elseif param.type == 'unknown' then
-            ty = param.type
-          elseif param.type == 'unit' and ty == 'string' then
-            arg = resolveUnit(api.states.Units, arg)
-            ty = 'unit'
-          end
-          if ty ~= param.type and type(param.type) ~= 'table' then
-            error(
-              ('arg %d (%q) of %q is of type %q, but %q was passed'):format(
-                i,
-                tostring(param.name),
-                fname,
-                param.type,
-                ty
-              )
-            )
-          end
-          args[i] = arg
-        end
+        args[i] = checkArg(i, param, (select(i, ...)))
       end
       return unpack(args, 1, select('#', ...))
     end
