@@ -83,7 +83,7 @@ local getStub = (function()
   return function(sig)
     local rets = {}
     for _, out in ipairs(sig) do
-      table.insert(rets, out.type.arrayof and '{}' or specDefault(out))
+      table.insert(rets, out.type.arrayof and not out.stub and '{}' or specDefault(out))
     end
     return 'return ' .. table.concat(rets, ', ')
   end
