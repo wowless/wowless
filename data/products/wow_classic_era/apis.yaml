@@ -9632,7 +9632,20 @@ GetPlayerInfoByGUID:
 GetPlayerTradeMoney:
   outputs:
   - type: number
-GetPOITextureCoords: {}
+GetPOITextureCoords:
+  inputs:
+  - - name: index
+      nilable: true
+      type: number
+  outputs:
+  - name: x1
+    type: number
+  - name: x2
+    type: number
+  - name: y1
+    type: number
+  - name: y2
+    type: number
 GetPossessInfo: {}
 GetPowerRegen: {}
 GetPowerRegenForPowerType: {}
