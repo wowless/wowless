@@ -144,8 +144,10 @@ local function t2nty(field, ns)
   local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
   local ty = tys[n]
   assert(ty, 'wtf ' .. n)
-  if ty == 'Enumeration' or ty == 'Constants' then
+  if ty == 'Constants' then
     return 'number'
+  elseif ty == 'Enumeration' then
+    return { enum = t }
   elseif ty == 'Structure' then
     return { mixin = field.Mixin, structure = n }
   elseif ty == 'CallbackType' then

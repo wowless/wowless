@@ -68,7 +68,8 @@ C_AzeriteEssence.AzeriteMilestoneInfo:
     type: number
   slot:
     nilable: true
-    type: number
+    type:
+      enum: AzeriteEssenceSlot
   unlocked:
     type: boolean
 C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
@@ -98,16 +99,19 @@ C_Calendar.CalendarDayEvent:
   eventID:
     type: string
   eventType:
-    type: number
+    type:
+      enum: CalendarEventType
   iconTexture:
     nilable: true
     type: number
   invitedBy:
     type: string
   inviteStatus:
-    type: number
+    type:
+      enum: CalendarStatus
   inviteType:
-    type: number
+    type:
+      enum: CalendarInviteType
   isCustomTitle:
     type: boolean
   isLocked:
@@ -144,15 +148,18 @@ C_Calendar.CalendarEventInfo:
   description:
     type: string
   eventType:
-    type: number
+    type:
+      enum: CalendarEventType
   hasPendingInvite:
     type: boolean
   inviteStatus:
     nilable: true
-    type: number
+    type:
+      enum: CalendarStatus
   inviteType:
     nilable: true
-    type: number
+    type:
+      enum: CalendarInviteType
   isAutoApprove:
     type: boolean
   isLocked:
@@ -163,7 +170,8 @@ C_Calendar.CalendarEventInfo:
   maxSize:
     type: number
   repeatOption:
-    type: number
+    type:
+      enum: CalendarEventRepeatOptions
   textureIndex:
     nilable: true
     type: number
@@ -188,7 +196,8 @@ C_Calendar.CalendarEventInviteInfo:
     type: boolean
   inviteStatus:
     nilable: true
-    type: number
+    type:
+      enum: CalendarStatus
   level:
     type: number
   modStatus:
@@ -200,10 +209,12 @@ C_Calendar.CalendarEventInviteInfo:
   notes:
     type: string
   type:
-    type: number
+    type:
+      enum: CalendarInviteType
 C_Calendar.CalendarEventStatusOption:
   status:
-    type: number
+    type:
+      enum: CalendarStatus
   statusString:
     type: string
 C_Calendar.CalendarEventTextureInfo:
@@ -226,7 +237,8 @@ C_Calendar.CalendarEventTypeDisplayInfo:
   displayString:
     type: string
   eventType:
-    type: number
+    type:
+      enum: CalendarEventType
 C_Calendar.CalendarGuildEventInfo:
   calendarType:
     type: string
@@ -235,11 +247,13 @@ C_Calendar.CalendarGuildEventInfo:
   eventID:
     type: string
   eventType:
-    type: number
+    type:
+      enum: CalendarEventType
   hour:
     type: number
   inviteStatus:
-    type: number
+    type:
+      enum: CalendarStatus
   minute:
     type: number
   month:
@@ -308,7 +322,8 @@ C_Club.ClubInfo:
   clubId:
     type: string
   clubType:
-    type: number
+    type:
+      enum: ClubType
   description:
     type: string
   favoriteTimeStamp:
@@ -336,7 +351,8 @@ C_Club.ClubInvitationCandidateInfo:
   priority:
     type: number
   status:
-    type: number
+    type:
+      enum: ClubInvitationCandidateStatus
 C_Club.ClubInvitationInfo:
   invitationId:
     type: string
@@ -357,7 +373,8 @@ C_Club.ClubMemberInfo:
     type: number
   clubType:
     nilable: true
-    type: number
+    type:
+      enum: ClubType
   guid:
     nilable: true
     type: string
@@ -399,7 +416,8 @@ C_Club.ClubMemberInfo:
     nilable: true
     type: string
   presence:
-    type: number
+    type:
+      enum: ClubMemberPresence
   profession1ID:
     nilable: true
     type: number
@@ -423,7 +441,8 @@ C_Club.ClubMemberInfo:
     type: number
   role:
     nilable: true
-    type: number
+    type:
+      enum: ClubRoleIdentifier
   zone:
     nilable: true
     type: string
@@ -565,12 +584,14 @@ C_Club.ClubStreamInfo:
   streamId:
     type: string
   streamType:
-    type: number
+    type:
+      enum: ClubStreamType
   subject:
     type: string
 C_Club.ClubStreamNotificationSetting:
   filter:
-    type: number
+    type:
+      enum: ClubStreamNotificationFilter
   streamId:
     type: string
 C_Club.ClubTicketInfo:
@@ -668,11 +689,13 @@ C_Commentator.NameOverrideEntry:
     type: string
 C_Console.ConsoleCommandInfo:
   category:
-    type: number
+    type:
+      enum: ConsoleCategory
   command:
     type: string
   commandType:
-    type: number
+    type:
+      enum: ConsoleCommandType
   help:
     type: string
   scriptContents:
@@ -722,7 +745,8 @@ C_CurrencyInfo.CurrencyInfo:
   name:
     type: string
   quality:
-    type: number
+    type:
+      enum: ItemQuality
   quantity:
     type: number
   quantityEarnedThisWeek:
@@ -758,7 +782,8 @@ C_DeathInfo.SelfResurrectOption:
   name:
     type: string
   optionType:
-    type: number
+    type:
+      enum: SelfResurrectOptionType
   priority:
     type: number
 C_FriendList.FriendInfo:
@@ -1060,7 +1085,8 @@ C_Map.UiMapDetails:
   mapID:
     type: number
   mapType:
-    type: number
+    type:
+      enum: UIMapType
   name:
     type: string
   parentMapID:
@@ -1146,7 +1172,8 @@ C_ModelInfo.UIModelSceneCameraInfo:
   cameraType:
     type: string
   flags:
-    type: number
+    type:
+      enum: ModelSceneSetting
   maxZoomDistance:
     type: number
   minZoomDistance:
@@ -1213,7 +1240,8 @@ C_ScriptedAnimations.ScriptedAnimationEffect:
     type: number
   finishBehavior:
     nilable: true
-    type: number
+    type:
+      enum: ScriptedAnimationBehavior
   finishEffectID:
     nilable: true
     type: number
@@ -1246,12 +1274,14 @@ C_ScriptedAnimations.ScriptedAnimationEffect:
     type: number
   startBehavior:
     nilable: true
-    type: number
+    type:
+      enum: ScriptedAnimationBehavior
   startSoundKitID:
     nilable: true
     type: number
   trajectory:
-    type: number
+    type:
+      enum: ScriptedAnimationTrajectory
   useTargetAsSource:
     type: boolean
   visual:
@@ -1286,7 +1316,8 @@ C_TaxiMap.MapTaxiNodeInfo:
   atlasName:
     type: string
   faction:
-    type: number
+    type:
+      enum: FlightPathFaction
   name:
     type: string
   nodeID:
@@ -1310,7 +1341,8 @@ C_TaxiMap.TaxiNodeInfo:
   slotIndex:
     type: number
   state:
-    type: number
+    type:
+      enum: FlightPathState
   textureKitPrefix:
     nilable: true
     type: string
@@ -1339,14 +1371,16 @@ C_Texture.AtlasInfo:
     type: number
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   enabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   lines:
     type:
       arrayof: string
   orderIndex:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   widgetTag:
     type: string
 C_UIWidgetManager.CaptureBarWidgetVisualizationInfo:
@@ -1357,7 +1391,8 @@ C_UIWidgetManager.CaptureBarWidgetVisualizationInfo:
   orderIndex:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKitID:
     type: number
   widgetTag:
@@ -1376,7 +1411,8 @@ C_UIWidgetManager.DoubleIconAndTextWidgetVisualizationInfo:
   rightTooltip:
     type: string
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKitID:
     type: number
   widgetTag:
@@ -1397,7 +1433,8 @@ C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo:
   rightBarValue:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   text:
     type: string
   textureKitID:
@@ -1412,7 +1449,8 @@ C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
   orderIndex:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   widgetTag:
     type: string
 C_UIWidgetManager.IconAndTextWidgetVisualizationInfo:
@@ -1423,7 +1461,8 @@ C_UIWidgetManager.IconAndTextWidgetVisualizationInfo:
   orderIndex:
     type: number
   state:
-    type: number
+    type:
+      enum: IconAndTextWidgetState
   text:
     type: string
   textureKitID:
@@ -1436,7 +1475,8 @@ C_UIWidgetManager.IconTextAndBackgroundWidgetVisualizationInfo:
   orderIndex:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKitID:
     type: number
   value:
@@ -1451,15 +1491,19 @@ C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
   description:
     type: string
   descriptionEnabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   descriptionShownState:
-    type: number
+    type:
+      enum: WidgetShownState
   enabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   orderIndex:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   text:
     type: string
   textureKitID:
@@ -1476,7 +1520,8 @@ C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
   orderIndex:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   widgetTag:
     type: string
 C_UIWidgetManager.StackedResourceTrackerWidgetVisualizationInfo:
@@ -1489,7 +1534,8 @@ C_UIWidgetManager.StackedResourceTrackerWidgetVisualizationInfo:
       arrayof:
         structure: C_UIWidgetManager.UIWidgetCurrencyInfo
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   widgetTag:
     type: string
 C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
@@ -1510,7 +1556,8 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
   orderIndex:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   text:
     type: string
   widgetTag:
@@ -1525,16 +1572,19 @@ C_UIWidgetManager.TextureWithStateVisualizationInfo:
   portraitTextureKitID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   widgetTag:
     type: string
 C_UIWidgetManager.TextWithStateWidgetVisualizationInfo:
   enabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   orderIndex:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   text:
     type: string
   widgetTag:
@@ -1558,7 +1608,8 @@ C_UIWidgetManager.UIWidgetInfo:
   widgetSetID:
     type: number
   widgetType:
-    type: number
+    type:
+      enum: UIWidgetVisualizationType
 C_VideoOptions.GxAdapterInfoDetails:
   isExternal:
     type: boolean
@@ -1581,7 +1632,8 @@ C_VoiceChat.VoiceChatChannel:
   channelID:
     type: number
   channelType:
-    type: number
+    type:
+      enum: ChatChannelType
   clubId:
     type: string
   isActive:

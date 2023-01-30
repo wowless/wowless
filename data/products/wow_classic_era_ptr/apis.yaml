@@ -520,7 +520,8 @@ C_AzeriteEmpoweredItem.GetPowerText:
     - name: powerID
       type: number
     - name: level
-      type: number
+      type:
+        enum: AzeritePowerLevel
   outputs:
   - name: powerText
     type:
@@ -1069,7 +1070,8 @@ C_Calendar.EventGetStatusOptions:
 C_Calendar.EventGetTextures:
   inputs:
   - - name: eventType
-      type: number
+      type:
+        enum: CalendarEventType
   outputs:
   - name: textures
     type:
@@ -1151,7 +1153,8 @@ C_Calendar.EventSetInviteStatus:
   - - name: eventIndex
       type: number
     - name: status
-      type: number
+      type:
+        enum: CalendarStatus
   outputs: {}
 C_Calendar.EventSetLocked:
   inputs:
@@ -1182,7 +1185,8 @@ C_Calendar.EventSetTitle:
 C_Calendar.EventSetType:
   inputs:
   - - name: typeIndex
-      type: number
+      type:
+        enum: CalendarEventType
   outputs: {}
 C_Calendar.EventSignUp:
   inputs:
@@ -1553,7 +1557,8 @@ C_ChatInfo.IsAddonMessagePrefixRegistered:
 C_ChatInfo.IsPartyChannelType:
   inputs:
   - - name: channelType
-      type: number
+      type:
+        enum: ChatChannelType
   outputs:
   - name: isPartyChannelType
     type: boolean
@@ -1652,7 +1657,8 @@ C_Club.AssignMemberRole:
     - name: memberId
       type: number
     - name: roleId
-      type: number
+      type:
+        enum: ClubRoleIdentifier
   outputs: {}
 C_Club.CanResolvePlayerLocationFromClubMessageData:
   inputs:
@@ -1696,7 +1702,8 @@ C_Club.CreateClub:
     - name: description
       type: string
     - name: clubType
-      type: number
+      type:
+        enum: ClubType
     - name: avatarId
       type: number
     - name: isCrossFaction
@@ -1839,11 +1846,13 @@ C_Club.GetAssignableRoles:
   outputs:
   - name: assignableRoles
     type:
-      arrayof: number
+      arrayof:
+        enum: ClubRoleIdentifier
 C_Club.GetAvatarIdList:
   inputs:
   - - name: clubType
-      type: number
+      type:
+        enum: ClubType
   outputs:
   - name: avatarIds
     nilable: true
@@ -1889,7 +1898,8 @@ C_Club.GetClubStreamNotificationSettings:
 C_Club.GetCommunityNameResultText:
   inputs:
   - - name: result
-      type: number
+      type:
+        enum: ValidateNameResult
   outputs:
   - name: errorCode
     nilable: true
@@ -1906,7 +1916,8 @@ C_Club.GetInfoFromLastCommunityChatLine:
   - name: streamId
     type: string
   - name: clubType
-    type: number
+    type:
+      enum: ClubType
 C_Club.GetInvitationCandidates:
   inputs:
   - - name: filter
@@ -2109,7 +2120,8 @@ C_Club.IsRestricted:
   - {}
   outputs:
   - name: restrictionReason
-    type: number
+    type:
+      enum: ClubRestrictionReason
 C_Club.IsSubscribedToStream:
   inputs:
   - - name: clubId
@@ -2211,7 +2223,8 @@ C_Club.SetAvatarTexture:
     - name: avatarId
       type: number
     - name: clubType
-      type: number
+      type:
+        enum: ClubType
   outputs: {}
 C_Club.SetClubMemberNote:
   inputs:
@@ -2258,7 +2271,8 @@ C_Club.SetSocialQueueingEnabled:
 C_Club.ShouldAllowClubType:
   inputs:
   - - name: clubType
-      type: number
+      type:
+        enum: ClubType
   outputs:
   - name: clubTypeIsAllowed
     type: boolean
@@ -2277,14 +2291,17 @@ C_Club.UnfocusStream:
 C_Club.ValidateText:
   inputs:
   - - name: clubType
-      type: number
+      type:
+        enum: ClubType
     - name: text
       type: string
     - name: clubFieldType
-      type: number
+      type:
+        enum: ClubFieldType
   outputs:
   - name: result
-    type: number
+    type:
+      enum: ValidateNameResult
 C_Commentator.AddPlayerOverrideName:
   inputs:
   - - name: playerName
@@ -2851,7 +2868,8 @@ C_Commentator.GetTrackedSpells:
     - name: playerIndex
       type: number
     - name: category
-      type: number
+      type:
+        enum: TrackedSpellCategory
   outputs:
   - name: spells
     nilable: true
@@ -2862,7 +2880,8 @@ C_Commentator.GetTrackedSpellsByUnit:
   - - name: unitToken
       type: string
     - name: category
-      type: number
+      type:
+        enum: TrackedSpellCategory
   outputs:
   - name: spells
     nilable: true
@@ -2933,7 +2952,8 @@ C_Commentator.IsTrackedSpell:
     - name: spellID
       type: number
     - name: category
-      type: number
+      type:
+        enum: TrackedSpellCategory
   outputs:
   - name: isTracked
     type: boolean
@@ -2944,7 +2964,8 @@ C_Commentator.IsTrackedSpellByUnit:
     - name: spellID
       type: number
     - name: category
-      type: number
+      type:
+        enum: TrackedSpellCategory
   outputs:
   - name: isTracked
     type: boolean
@@ -3283,7 +3304,8 @@ C_Console.GetAllCommands:
 C_Console.GetColorFromType:
   inputs:
   - - name: colorType
-      type: number
+      type:
+        enum: ConsoleColorType
   outputs:
   - name: color
     type:
@@ -3550,7 +3572,8 @@ C_DeathInfo.GetSelfResurrectOptions:
 C_DeathInfo.UseSelfResurrectOption:
   inputs:
   - - name: optionType
-      type: number
+      type:
+        enum: SelfResurrectOptionType
     - name: id
       type: number
   outputs: {}
@@ -3916,7 +3939,8 @@ C_FriendList.SortWho:
 C_GamePad.AddSDLMapping:
   inputs:
   - - name: platform
-      type: number
+      type:
+        enum: ClientPlatformType
     - name: mapping
       type: string
   outputs:
@@ -4285,7 +4309,8 @@ C_Item.GetItemInventoryType:
   outputs:
   - name: inventoryType
     nilable: true
-    type: number
+    type:
+      enum: InventoryType
 C_Item.GetItemInventoryTypeByID:
   inputs:
   - - name: itemInfo
@@ -4293,7 +4318,8 @@ C_Item.GetItemInventoryTypeByID:
   outputs:
   - name: inventoryType
     nilable: true
-    type: number
+    type:
+      enum: InventoryType
 C_Item.GetItemLink:
   inputs:
   - - name: itemLocation
@@ -4331,7 +4357,8 @@ C_Item.GetItemQuality:
   outputs:
   - name: itemQuality
     nilable: true
-    type: number
+    type:
+      enum: ItemQuality
 C_Item.GetItemQualityByID:
   inputs:
   - - name: itemInfo
@@ -4339,7 +4366,8 @@ C_Item.GetItemQualityByID:
   outputs:
   - name: itemQuality
     nilable: true
-    type: number
+    type:
+      enum: ItemQuality
 C_Item.GetStackCount:
   inputs:
   - - name: itemLocation
@@ -4436,7 +4464,8 @@ C_KeyBindings.GetCustomBindingType:
   outputs:
   - name: customBindingType
     nilable: true
-    type: number
+    type:
+      enum: CustomBindingType
 C_LFGInfo.CanPlayerUseGroupFinder:
   inputs:
   - {}
@@ -4770,7 +4799,8 @@ C_Map.GetMapArtHelpTextPosition:
       type: number
   outputs:
   - name: position
-    type: number
+    type:
+      enum: MapCanvasPosition
 C_Map.GetMapArtID:
   inputs:
   - - name: uiMapID
@@ -4816,7 +4846,8 @@ C_Map.GetMapChildrenInfo:
       type: number
     - name: mapType
       nilable: true
-      type: number
+      type:
+        enum: UIMapType
     - name: allDescendants
       nilable: true
       type: boolean
@@ -5074,7 +5105,8 @@ C_ModelInfo.GetModelSceneInfoByID:
       type: number
   outputs:
   - name: modelSceneType
-    type: number
+    type:
+      enum: ModelSceneType
   - name: modelCameraIDs
     type:
       arrayof: number
@@ -5352,13 +5384,15 @@ C_QuestSession.GetAvailableSessionCommand:
   - {}
   outputs:
   - name: command
-    type: number
+    type:
+      enum: QuestSessionCommand
 C_QuestSession.GetPendingCommand:
   inputs:
   - {}
   outputs:
   - name: command
-    type: number
+    type:
+      enum: QuestSessionCommand
 C_QuestSession.GetProposedMaxLevelForSession:
   inputs:
   - {}
@@ -5979,7 +6013,8 @@ C_TTSSettings.GetChatTypeEnabled:
 C_TTSSettings.GetSetting:
   inputs:
   - - name: setting
-      type: number
+      type:
+        enum: TtsBoolSetting
   outputs:
   - name: enabled
     type: boolean
@@ -5998,14 +6033,16 @@ C_TTSSettings.GetSpeechVolume:
 C_TTSSettings.GetVoiceOptionID:
   inputs:
   - - name: voiceType
-      type: number
+      type:
+        enum: TtsVoiceType
   outputs:
   - name: voiceID
     type: number
 C_TTSSettings.GetVoiceOptionName:
   inputs:
   - - name: voiceType
-      type: number
+      type:
+        enum: TtsVoiceType
   outputs:
   - name: voiceName
     type: string
@@ -6045,7 +6082,8 @@ C_TTSSettings.SetDefaultSettings:
 C_TTSSettings.SetSetting:
   inputs:
   - - name: setting
-      type: number
+      type:
+        enum: TtsBoolSetting
     - default: false
       name: newVal
       type: boolean
@@ -6063,14 +6101,16 @@ C_TTSSettings.SetSpeechVolume:
 C_TTSSettings.SetVoiceOption:
   inputs:
   - - name: voiceType
-      type: number
+      type:
+        enum: TtsVoiceType
     - name: voiceID
       type: number
   outputs: {}
 C_TTSSettings.SetVoiceOptionName:
   inputs:
   - - name: voiceType
-      type: number
+      type:
+        enum: TtsVoiceType
     - name: voiceName
       type: string
   outputs: {}
@@ -6311,7 +6351,8 @@ C_VoiceChat.CreateChannel:
       type: string
   outputs:
   - name: status
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 C_VoiceChat.DeactivateChannel:
   inputs:
   - - name: channelID
@@ -6339,7 +6380,8 @@ C_VoiceChat.GetActiveChannelType:
   outputs:
   - name: channelType
     nilable: true
-    type: number
+    type:
+      enum: ChatChannelType
 C_VoiceChat.GetAvailableInputDevices:
   inputs:
   - {}
@@ -6370,7 +6412,8 @@ C_VoiceChat.GetChannel:
 C_VoiceChat.GetChannelForChannelType:
   inputs:
   - - name: channelType
-      type: number
+      type:
+        enum: ChatChannelType
   outputs:
   - name: channel
     nilable: true
@@ -6393,13 +6436,15 @@ C_VoiceChat.GetCommunicationMode:
   outputs:
   - name: communicationMode
     nilable: true
-    type: number
+    type:
+      enum: CommunicationMode
 C_VoiceChat.GetCurrentVoiceChatConnectionStatusCode:
   inputs:
   - {}
   outputs:
   - name: statusCode
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 C_VoiceChat.GetInputVolume:
   inputs:
   - {}
@@ -6535,7 +6580,8 @@ C_VoiceChat.GetVADSensitivity:
 C_VoiceChat.IsChannelJoinPending:
   inputs:
   - - name: channelType
-      type: number
+      type:
+        enum: ChatChannelType
     - name: clubId
       nilable: true
       type: string
@@ -6666,13 +6712,15 @@ C_VoiceChat.Login:
   - {}
   outputs:
   - name: status
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 C_VoiceChat.Logout:
   inputs:
   - {}
   outputs:
   - name: status
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 C_VoiceChat.MarkChannelsDiscovered:
   inputs:
   - {}
@@ -6687,7 +6735,8 @@ C_VoiceChat.RequestJoinAndActivateCommunityStreamChannel:
 C_VoiceChat.RequestJoinChannelByChannelType:
   inputs:
   - - name: channelType
-      type: number
+      type:
+        enum: ChatChannelType
     - name: autoActivate
       nilable: true
       type: boolean
@@ -6695,7 +6744,8 @@ C_VoiceChat.RequestJoinChannelByChannelType:
 C_VoiceChat.SetCommunicationMode:
   inputs:
   - - name: communicationMode
-      type: number
+      type:
+        enum: CommunicationMode
   outputs: {}
 C_VoiceChat.SetDeafened:
   inputs:
@@ -6788,7 +6838,8 @@ C_VoiceChat.SpeakText:
     - name: text
       type: string
     - name: destination
-      type: number
+      type:
+        enum: VoiceTtsDestination
     - name: rate
       type: number
     - name: volume
@@ -12866,7 +12917,8 @@ UnitPower:
       type: string
     - default: NumPowerTypes
       name: powerType
-      type: number
+      type:
+        enum: PowerType
     - default: false
       name: unmodified
       type: boolean
@@ -12876,7 +12928,8 @@ UnitPower:
 UnitPowerDisplayMod:
   inputs:
   - - name: powerType
-      type: number
+      type:
+        enum: PowerType
   outputs:
   - name: displayMod
     type: number
@@ -12886,7 +12939,8 @@ UnitPowerMax:
       type: string
     - default: NumPowerTypes
       name: powerType
-      type: number
+      type:
+        enum: PowerType
     - default: false
       name: unmodified
       type: boolean

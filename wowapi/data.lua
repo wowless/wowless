@@ -36,6 +36,13 @@ end
 
 local fns = {
   apis = perproduct('apis'),
+  enums = function()
+    local t = {}
+    for _, d in ipairs(require('pl.dir').getdirectories('data/products')) do
+      t[require('path').basename(d)] = extLoaders.yaml(d .. '/globals.yaml').Enum
+    end
+    return t
+  end,
   events = perproduct('events'),
   flavors = global('flavors'),
   impl = global('impl'),

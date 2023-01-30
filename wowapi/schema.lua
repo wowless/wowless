@@ -9,6 +9,7 @@ local domains = {
 }
 local productDomains = {
   api = wdata.apis,
+  enum = wdata.enums,
   event = wdata.events,
   structure = wdata.structures,
   uiobject = wdata.uiobjects,

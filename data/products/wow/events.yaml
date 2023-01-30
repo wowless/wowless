@@ -290,11 +290,13 @@ AUCTION_HOUSE_SHOW_COMMODITY_WON_NOTIFICATION:
 AUCTION_HOUSE_SHOW_ERROR:
   payload:
   - name: error
-    type: number
+    type:
+      enum: AuctionHouseError
 AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION:
   payload:
   - name: notification
-    type: number
+    type:
+      enum: AuctionHouseNotification
   - name: text
     type: string
   - name: auctionID
@@ -303,7 +305,8 @@ AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION:
 AUCTION_HOUSE_SHOW_NOTIFICATION:
   payload:
   - name: notification
-    type: number
+    type:
+      enum: AuctionHouseNotification
 AUCTION_HOUSE_THROTTLED_MESSAGE_DROPPED:
   payload: {}
 AUCTION_HOUSE_THROTTLED_MESSAGE_QUEUED:
@@ -337,7 +340,8 @@ AUTOFOLLOW_END:
 AVATAR_LIST_UPDATED:
   payload:
   - name: clubType
-    type: number
+    type:
+      enum: ClubType
 AVOIDANCE_UPDATE:
   payload: {}
 AZERITE_EMPOWERED_ITEM_EQUIPPED_STATUS_CHANGED:
@@ -357,13 +361,15 @@ AZERITE_EMPOWERED_ITEM_SELECTION_UPDATED:
 AZERITE_ESSENCE_ACTIVATED:
   payload:
   - name: slot
-    type: number
+    type:
+      enum: AzeriteEssenceSlot
   - name: essenceID
     type: number
 AZERITE_ESSENCE_ACTIVATION_FAILED:
   payload:
   - name: slot
-    type: number
+    type:
+      enum: AzeriteEssenceSlot
   - name: essenceID
     type: number
 AZERITE_ESSENCE_CHANGED:
@@ -3219,7 +3225,8 @@ CLIENT_SCENE_CLOSED:
 CLIENT_SCENE_OPENED:
   payload:
   - name: sceneType
-    type: number
+    type:
+      enum: ClientSceneType
 CLOSE_INBOX_ITEM:
   payload:
   - name: mailIndex
@@ -3233,11 +3240,14 @@ CLUB_ADDED:
 CLUB_ERROR:
   payload:
   - name: action
-    type: number
+    type:
+      enum: ClubActionType
   - name: error
-    type: number
+    type:
+      enum: ClubErrorType
   - name: clubType
-    type: number
+    type:
+      enum: ClubType
 CLUB_FINDER_APPLICANT_INVITE_RECIEVED:
   payload:
   - name: clubFinderGUIDs
@@ -3246,7 +3256,8 @@ CLUB_FINDER_APPLICANT_INVITE_RECIEVED:
 CLUB_FINDER_APPLICATIONS_UPDATED:
   payload:
   - name: type
-    type: number
+    type:
+      enum: ClubFinderRequestType
   - name: clubFinderGUIDs
     type:
       arrayof: string
@@ -3257,11 +3268,13 @@ CLUB_FINDER_CAN_WHISPER_APPLICANT:
 CLUB_FINDER_CLUB_LIST_RETURNED:
   payload:
   - name: type
-    type: number
+    type:
+      enum: ClubFinderRequestType
 CLUB_FINDER_CLUB_REPORTED:
   payload:
   - name: type
-    type: number
+    type:
+      enum: ClubFinderRequestType
   - name: clubFinderGUID
     type: string
 CLUB_FINDER_COMMUNITY_OFFLINE_JOIN:
@@ -3280,7 +3293,8 @@ CLUB_FINDER_MEMBERSHIP_LIST_CHANGED:
 CLUB_FINDER_PLAYER_PENDING_LIST_RECIEVED:
   payload:
   - name: type
-    type: number
+    type:
+      enum: ClubFinderRequestType
 CLUB_FINDER_POST_UPDATED:
   payload:
   - name: clubFinderGUIDs
@@ -3291,11 +3305,13 @@ CLUB_FINDER_RECRUIT_LIST_CHANGED:
 CLUB_FINDER_RECRUITMENT_POST_RETURNED:
   payload:
   - name: type
-    type: number
+    type:
+      enum: ClubFinderRequestType
 CLUB_FINDER_RECRUITS_UPDATED:
   payload:
   - name: type
-    type: number
+    type:
+      enum: ClubFinderRequestType
 CLUB_INVITATION_ADDED_FOR_SELF:
   payload:
   - name: invitation
@@ -3322,7 +3338,8 @@ CLUB_MEMBER_PRESENCE_UPDATED:
   - name: memberId
     type: number
   - name: presence
-    type: number
+    type:
+      enum: ClubMemberPresence
 CLUB_MEMBER_REMOVED:
   payload:
   - name: clubId
@@ -3382,7 +3399,8 @@ CLUB_REMOVED_MESSAGE:
   - name: clubName
     type: string
   - name: clubRemovedReason
-    type: number
+    type:
+      enum: ClubRemovedReason
 CLUB_SELF_MEMBER_ROLE_UPDATED:
   payload:
   - name: clubId
@@ -3575,9 +3593,11 @@ CONSOLE_MESSAGE:
 CONTRIBUTION_CHANGED:
   payload:
   - name: state
-    type: number
+    type:
+      enum: ContributionState
   - name: result
-    type: number
+    type:
+      enum: ContributionResult
   - name: name
     type: string
   - name: contributionID
@@ -3638,7 +3658,8 @@ CRAFTINGORDERS_CAN_REQUEST:
 CRAFTINGORDERS_CLAIM_ORDER_RESPONSE:
   payload:
   - name: result
-    type: number
+    type:
+      enum: CraftingOrderResult
   - name: orderID
     type: number
 CRAFTINGORDERS_CLAIMED_ORDER_ADDED:
@@ -3656,7 +3677,8 @@ CRAFTINGORDERS_CUSTOMER_OPTIONS_PARSED:
 CRAFTINGORDERS_FULFILL_ORDER_RESPONSE:
   payload:
   - name: result
-    type: number
+    type:
+      enum: CraftingOrderResult
   - name: orderID
     type: number
 CRAFTINGORDERS_HIDE_CRAFTER:
@@ -3666,21 +3688,25 @@ CRAFTINGORDERS_HIDE_CUSTOMER:
 CRAFTINGORDERS_ORDER_CANCEL_RESPONSE:
   payload:
   - name: result
-    type: number
+    type:
+      enum: CraftingOrderResult
 CRAFTINGORDERS_ORDER_PLACEMENT_RESPONSE:
   payload:
   - name: result
-    type: number
+    type:
+      enum: CraftingOrderResult
 CRAFTINGORDERS_REJECT_ORDER_RESPONSE:
   payload:
   - name: result
-    type: number
+    type:
+      enum: CraftingOrderResult
   - name: orderID
     type: number
 CRAFTINGORDERS_RELEASE_ORDER_RESPONSE:
   payload:
   - name: result
-    type: number
+    type:
+      enum: CraftingOrderResult
   - name: orderID
     type: number
 CRAFTINGORDERS_SHOW_CRAFTER:
@@ -3698,7 +3724,8 @@ CRAFTINGORDERS_UPDATE_CUSTOMER_NAME:
 CRAFTINGORDERS_UPDATE_ORDER_COUNT:
   payload:
   - name: orderType
-    type: number
+    type:
+      enum: CraftingOrderType
   - name: numOrders
     type: number
 CRAFTINGORDERS_UPDATE_PERSONAL_ORDER_COUNTS:
@@ -3741,9 +3768,11 @@ CURSOR_CHANGED:
   - name: isDefault
     type: boolean
   - name: newCursorType
-    type: number
+    type:
+      enum: UICursorType
   - name: oldCursorType
-    type: number
+    type:
+      enum: UICursorType
   - name: oldCursorVirtualID
     type: number
 CVAR_UPDATE:
@@ -3863,7 +3892,8 @@ ENTERED_DIFFERENT_INSTANCE_FROM_PARTY:
 ENTITLEMENT_DELIVERED:
   payload:
   - name: entitlementType
-    type: number
+    type:
+      enum: WoWEntitlementType
   - name: textureID
     type: number
   - name: name
@@ -3931,7 +3961,8 @@ FRAME_MANAGER_UPDATE_ALL:
 FRAME_MANAGER_UPDATE_FRAME:
   payload:
   - name: type
-    type: number
+    type:
+      enum: UIFrameType
   - name: show
     type: boolean
 FRAMESTACK_VISIBILITY_UPDATED:
@@ -3951,7 +3982,8 @@ GAME_PAD_DISCONNECTED:
 GAME_PAD_POWER_CHANGED:
   payload:
   - name: powerLevel
-    type: number
+    type:
+      enum: GamePadPowerLevel
 GARRISON_ARCHITECT_CLOSED:
   payload: {}
 GARRISON_ARCHITECT_OPENED:
@@ -4633,7 +4665,8 @@ JAILERS_TOWER_LEVEL_UPDATE:
   - name: level
     type: number
   - name: type
-    type: number
+    type:
+      enum: JailersTowerType
 KIOSK_SESSION_EXPIRATION_CHANGED:
   payload:
   - name: reactivated
@@ -5545,11 +5578,13 @@ PLAYER_GUILD_UPDATE:
 PLAYER_INTERACTION_MANAGER_FRAME_HIDE:
   payload:
   - name: type
-    type: number
+    type:
+      enum: PlayerInteractionType
 PLAYER_INTERACTION_MANAGER_FRAME_SHOW:
   payload:
   - name: type
-    type: number
+    type:
+      enum: PlayerInteractionType
 PLAYER_LEARN_PVP_TALENT_FAILED:
   payload: {}
 PLAYER_LEARN_TALENT_FAILED:
@@ -5875,7 +5910,8 @@ QUEST_SESSION_MEMBER_START_RESPONSE:
 QUEST_SESSION_NOTIFICATION:
   payload:
   - name: result
-    type: number
+    type:
+      enum: QuestSessionResult
   - name: guid
     type: string
 QUEST_TURNED_IN:
@@ -5909,7 +5945,8 @@ QUICK_TICKET_THROTTLE_CHANGED:
 RAF_ENTITLEMENT_DELIVERED:
   payload:
   - name: entitlementType
-    type: number
+    type:
+      enum: WoWEntitlementType
   - name: textureID
     type: number
   - name: name
@@ -6018,7 +6055,8 @@ REPORT_PLAYER_RESULT:
   - name: success
     type: boolean
   - name: reportType
-    type: number
+    type:
+      enum: ReportType
 REQUEST_CEMETERY_LIST_RESPONSE:
   payload:
   - name: isGossipTriggered
@@ -6285,7 +6323,8 @@ SHOW_RATED_PVP_REWARD_TOAST:
 SHOW_SUBSCRIPTION_INTERSTITIAL:
   payload:
   - name: type
-    type: number
+    type:
+      enum: SubscriptionInterstitialType
 SIMPLE_BROWSER_WEB_ERROR:
   payload:
   - name: errorCode
@@ -6885,10 +6924,12 @@ TRANSMOG_OUTFITS_CHANGED:
 TRANSMOG_SEARCH_UPDATED:
   payload:
   - name: searchType
-    type: number
+    type:
+      enum: TransmogSearchType
   - name: collectionType
     nilable: true
-    type: number
+    type:
+      enum: TransmogCollectionType
 TRANSMOG_SETS_UPDATE_FAVORITE:
   payload: {}
 TRANSMOG_SOURCE_COLLECTABILITY_UPDATE:
@@ -7544,11 +7585,13 @@ VOICE_CHAT_CHANNEL_DISPLAY_NAME_CHANGED:
 VOICE_CHAT_CHANNEL_JOINED:
   payload:
   - name: status
-    type: number
+    type:
+      enum: VoiceChatStatusCode
   - name: channelID
     type: number
   - name: channelType
-    type: number
+    type:
+      enum: ChatChannelType
   - name: clubId
     nilable: true
     type: string
@@ -7676,7 +7719,8 @@ VOICE_CHAT_CHANNEL_VOLUME_CHANGED:
 VOICE_CHAT_COMMUNICATION_MODE_CHANGED:
   payload:
   - name: communicationMode
-    type: number
+    type:
+      enum: CommunicationMode
 VOICE_CHAT_CONNECTION_SUCCESS:
   payload: {}
 VOICE_CHAT_DEAFENED_CHANGED:
@@ -7688,17 +7732,20 @@ VOICE_CHAT_ERROR:
   - name: platformCode
     type: number
   - name: statusCode
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 VOICE_CHAT_INPUT_DEVICES_UPDATED:
   payload: {}
 VOICE_CHAT_LOGIN:
   payload:
   - name: status
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 VOICE_CHAT_LOGOUT:
   payload:
   - name: status
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 VOICE_CHAT_MUTED_CHANGED:
   payload:
   - name: isMuted
@@ -7708,7 +7755,8 @@ VOICE_CHAT_OUTPUT_DEVICES_UPDATED:
 VOICE_CHAT_PENDING_CHANNEL_JOIN_STATE:
   payload:
   - name: channelType
-    type: number
+    type:
+      enum: ChatChannelType
   - name: clubId
     nilable: true
     type: string
@@ -7732,11 +7780,13 @@ VOICE_CHAT_SPEAK_FOR_ME_FEATURE_STATUS_UPDATED:
 VOICE_CHAT_TTS_PLAYBACK_FAILED:
   payload:
   - name: status
-    type: number
+    type:
+      enum: VoiceTtsStatusCode
   - name: utteranceID
     type: number
   - name: destination
-    type: number
+    type:
+      enum: VoiceTtsDestination
 VOICE_CHAT_TTS_PLAYBACK_FINISHED:
   payload:
   - name: numConsumers
@@ -7744,7 +7794,8 @@ VOICE_CHAT_TTS_PLAYBACK_FINISHED:
   - name: utteranceID
     type: number
   - name: destination
-    type: number
+    type:
+      enum: VoiceTtsDestination
 VOICE_CHAT_TTS_PLAYBACK_STARTED:
   payload:
   - name: numConsumers
@@ -7754,11 +7805,13 @@ VOICE_CHAT_TTS_PLAYBACK_STARTED:
   - name: durationMS
     type: number
   - name: destination
-    type: number
+    type:
+      enum: VoiceTtsDestination
 VOICE_CHAT_TTS_SPEAK_TEXT_UPDATE:
   payload:
   - name: status
-    type: number
+    type:
+      enum: VoiceTtsStatusCode
   - name: utteranceID
     type: number
 VOICE_CHAT_TTS_VOICES_UPDATE:
@@ -7824,7 +7877,8 @@ WHO_LIST_UPDATE:
 WORLD_CURSOR_TOOLTIP_UPDATE:
   payload:
   - name: anchorType
-    type: number
+    type:
+      enum: WorldCursorAnchorType
 WORLD_MAP_OPEN:
   payload:
   - name: uiMapID

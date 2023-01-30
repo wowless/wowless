@@ -24,3 +24,8 @@ type:
         required: true
         type:
           schema: type
+  - record:
+      enum:
+        required: true
+        type:
+          ref: enum

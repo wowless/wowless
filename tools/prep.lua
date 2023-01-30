@@ -13,6 +13,8 @@ local function readFile(...)
 end
 local plprettywrite = require('pl.pretty').write
 
+local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
+
 local specDefault = (function()
   local defaultOutputs = {
     boolean = 'false',
@@ -73,6 +75,16 @@ local specDefault = (function()
     end
     if ty.structure then
       return valstruct(ty.structure, ty.mixin)
+    end
+    if ty.enum then
+      local e = assert(globals.Enum[ty.enum], 'missing enum ' .. ty.enum)
+      -- Unfortunately we cannot rely on the existence of a Meta enum,
+      -- so we go fishing for the minimum value manually.
+      local x
+      for _, v in pairs(e) do
+        x = (not x or v < x) and v or x
+      end
+      return valstr(x)
     end
     error('unexpected type: ' .. require('pl.pretty').write(ty))
   end
@@ -167,7 +179,7 @@ local data = {
   config = parseYaml('data/products/' .. product .. '/config.yaml'),
   cvars = cvars,
   events = events,
-  globals = parseYaml('data/products/' .. product .. '/globals.yaml'),
+  globals = globals,
   impls = impls,
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,

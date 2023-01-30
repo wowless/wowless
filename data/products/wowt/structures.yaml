@@ -2,7 +2,8 @@
 AppearanceSourceInfo:
   categoryID:
     default: 0
-    type: number
+    type:
+      enum: TransmogCollectionType
   inventorySlot:
     nilable: true
     type: number
@@ -37,7 +38,8 @@ AppearanceSourceInfo:
     type: string
   useErrorType:
     nilable: true
-    type: number
+    type:
+      enum: TransmogUseErrorType
   visualID:
     type: number
 BountyInfo:
@@ -115,7 +117,8 @@ C_AnimaDiversion.AnimaDiversionNodeInfo:
       mixin: Vector2DMixin
       structure: Vector2D
   state:
-    type: number
+    type:
+      enum: AnimaDiversionNodeState
   talentID:
     type: number
 C_ArdenwealdGardening.ArdenwealdGardenData:
@@ -218,7 +221,8 @@ C_AuctionHouse.AuctionHouseBrowseQuery:
   filters:
     nilable: true
     type:
-      arrayof: number
+      arrayof:
+        enum: AuctionHouseFilter
   itemClassFilters:
     nilable: true
     type:
@@ -238,16 +242,19 @@ C_AuctionHouse.AuctionHouseBrowseQuery:
         structure: C_AuctionHouse.AuctionHouseSortType
 C_AuctionHouse.AuctionHouseFilterGroup:
   category:
-    type: number
+    type:
+      enum: AuctionHouseFilterCategory
   filters:
     type:
-      arrayof: number
+      arrayof:
+        enum: AuctionHouseFilter
 C_AuctionHouse.AuctionHouseItemClassFilter:
   classID:
     type: number
   inventoryType:
     nilable: true
-    type: number
+    type:
+      enum: InventoryType
   subClassID:
     nilable: true
     type: number
@@ -255,7 +262,8 @@ C_AuctionHouse.AuctionHouseSortType:
   reverseSort:
     type: boolean
   sortOrder:
-    type: number
+    type:
+      enum: AuctionHouseSortOrder
 C_AuctionHouse.AuctionInfo:
   bidAmount:
     nilable: true
@@ -297,7 +305,8 @@ C_AuctionHouse.BidInfo:
     nilable: true
     type: number
   timeLeft:
-    type: number
+    type:
+      enum: AuctionHouseTimeLeftBand
 C_AuctionHouse.BrowseResultInfo:
   appearanceLink:
     nilable: true
@@ -402,7 +411,8 @@ C_AuctionHouse.ItemSearchResultInfo:
   quantity:
     type: number
   timeLeft:
-    type: number
+    type:
+      enum: AuctionHouseTimeLeftBand
   timeLeftSeconds:
     nilable: true
     type: number
@@ -429,10 +439,12 @@ C_AuctionHouse.OwnedAuctionInfo:
   quantity:
     type: number
   status:
-    type: number
+    type:
+      enum: AuctionStatus
   timeLeft:
     nilable: true
-    type: number
+    type:
+      enum: AuctionHouseTimeLeftBand
   timeLeftSeconds:
     nilable: true
     type: number
@@ -482,7 +494,8 @@ C_AzeriteEssence.AzeriteMilestoneInfo:
     type: number
   slot:
     nilable: true
-    type: number
+    type:
+      enum: AzeriteEssenceSlot
   unlocked:
     type: boolean
 C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
@@ -523,7 +536,8 @@ C_BattleNet.BNetAccountInfo:
   note:
     type: string
   rafLinkType:
-    type: number
+    type:
+      enum: RafLinkType
 C_BattleNet.BNetGameAccountInfo:
   areaName:
     nilable: true
@@ -602,16 +616,19 @@ C_Calendar.CalendarDayEvent:
   eventID:
     type: string
   eventType:
-    type: number
+    type:
+      enum: CalendarEventType
   iconTexture:
     nilable: true
     type: number
   invitedBy:
     type: string
   inviteStatus:
-    type: number
+    type:
+      enum: CalendarStatus
   inviteType:
-    type: number
+    type:
+      enum: CalendarInviteType
   isCustomTitle:
     type: boolean
   isLocked:
@@ -648,15 +665,18 @@ C_Calendar.CalendarEventInfo:
   description:
     type: string
   eventType:
-    type: number
+    type:
+      enum: CalendarEventType
   hasPendingInvite:
     type: boolean
   inviteStatus:
     nilable: true
-    type: number
+    type:
+      enum: CalendarStatus
   inviteType:
     nilable: true
-    type: number
+    type:
+      enum: CalendarInviteType
   isAutoApprove:
     type: boolean
   isLocked:
@@ -667,7 +687,8 @@ C_Calendar.CalendarEventInfo:
   maxSize:
     type: number
   repeatOption:
-    type: number
+    type:
+      enum: CalendarEventRepeatOptions
   textureIndex:
     nilable: true
     type: number
@@ -692,7 +713,8 @@ C_Calendar.CalendarEventInviteInfo:
     type: boolean
   inviteStatus:
     nilable: true
-    type: number
+    type:
+      enum: CalendarStatus
   level:
     type: number
   modStatus:
@@ -704,10 +726,12 @@ C_Calendar.CalendarEventInviteInfo:
   notes:
     type: string
   type:
-    type: number
+    type:
+      enum: CalendarInviteType
 C_Calendar.CalendarEventStatusOption:
   status:
-    type: number
+    type:
+      enum: CalendarStatus
   statusString:
     type: string
 C_Calendar.CalendarEventTextureInfo:
@@ -730,7 +754,8 @@ C_Calendar.CalendarEventTypeDisplayInfo:
   displayString:
     type: string
   eventType:
-    type: number
+    type:
+      enum: CalendarEventType
 C_Calendar.CalendarGuildEventInfo:
   calendarType:
     type: string
@@ -739,11 +764,13 @@ C_Calendar.CalendarGuildEventInfo:
   eventID:
     type: string
   eventType:
-    type: number
+    type:
+      enum: CalendarEventType
   hour:
     type: number
   inviteStatus:
-    type: number
+    type:
+      enum: CalendarStatus
   minute:
     type: number
   month:
@@ -884,7 +911,8 @@ C_Club.ClubInfo:
   clubId:
     type: string
   clubType:
-    type: number
+    type:
+      enum: ClubType
   crossFaction:
     nilable: true
     type: boolean
@@ -915,7 +943,8 @@ C_Club.ClubInvitationCandidateInfo:
   priority:
     type: number
   status:
-    type: number
+    type:
+      enum: ClubInvitationCandidateStatus
 C_Club.ClubInvitationInfo:
   invitationId:
     type: string
@@ -939,10 +968,12 @@ C_Club.ClubMemberInfo:
     type: number
   clubType:
     nilable: true
-    type: number
+    type:
+      enum: ClubType
   faction:
     nilable: true
-    type: number
+    type:
+      enum: PvPFaction
   guid:
     nilable: true
     type: string
@@ -987,7 +1018,8 @@ C_Club.ClubMemberInfo:
     nilable: true
     type: number
   presence:
-    type: number
+    type:
+      enum: ClubMemberPresence
   profession1ID:
     nilable: true
     type: number
@@ -1011,7 +1043,8 @@ C_Club.ClubMemberInfo:
     type: number
   role:
     nilable: true
-    type: number
+    type:
+      enum: ClubRoleIdentifier
   zone:
     nilable: true
     type: string
@@ -1153,12 +1186,14 @@ C_Club.ClubStreamInfo:
   streamId:
     type: string
   streamType:
-    type: number
+    type:
+      enum: ClubStreamType
   subject:
     type: string
 C_Club.ClubStreamNotificationSetting:
   filter:
-    type: number
+    type:
+      enum: ClubStreamNotificationFilter
   streamId:
     type: string
 C_Club.ClubTicketInfo:
@@ -1202,7 +1237,8 @@ C_ClubFinder.ClubFinderApplicantInfo:
   playerGUID:
     type: string
   requestStatus:
-    type: number
+    type:
+      enum: PlayerClubRequestStatus
   specIds:
     type:
       arrayof: number
@@ -1367,11 +1403,13 @@ C_Commentator.NameOverrideEntry:
     type: string
 C_Console.ConsoleCommandInfo:
   category:
-    type: number
+    type:
+      enum: ConsoleCategory
   command:
     type: string
   commandType:
-    type: number
+    type:
+      enum: ConsoleCommandType
   help:
     type: string
   scriptContents:
@@ -1399,7 +1437,8 @@ C_Container.ContainerItemInfo:
     type: number
   quality:
     nilable: true
-    type: number
+    type:
+      enum: ItemQuality
   stackCount:
     type: number
 C_Container.ItemPurchaseCurrency:
@@ -1471,7 +1510,8 @@ C_CovenantPreview.CovenantAbilityInfo:
   spellID:
     type: number
   type:
-    type: number
+    type:
+      enum: CovenantAbilityType
 C_CovenantPreview.CovenantFeatureInfo:
   description:
     type: string
@@ -1613,13 +1653,15 @@ C_CraftingOrders.CraftingOrderRequestInfo:
   offset:
     type: number
   orderType:
-    type: number
+    type:
+      enum: CraftingOrderType
   primarySort:
     type:
       structure: CraftingOrderSortInfo
   profession:
     nilable: true
-    type: number
+    type:
+      enum: Profession
   searchFavorites:
     type: boolean
   secondarySort:
@@ -1706,7 +1748,8 @@ C_CurrencyInfo.CurrencyInfo:
   name:
     type: string
   quality:
-    type: number
+    type:
+      enum: ItemQuality
   quantity:
     type: number
   quantityEarnedThisWeek:
@@ -1742,7 +1785,8 @@ C_DeathInfo.SelfResurrectOption:
   name:
     type: string
   optionType:
-    type: number
+    type:
+      enum: SelfResurrectOptionType
   priority:
     type: number
 C_EditMode.EditModeAnchorInfo:
@@ -1762,7 +1806,8 @@ C_EditMode.EditModeLayoutInfo:
   layoutName:
     type: string
   layoutType:
-    type: number
+    type:
+      enum: EditModeLayoutType
   systems:
     type:
       arrayof:
@@ -1794,7 +1839,8 @@ C_EditMode.EditModeSystemInfo:
       arrayof:
         structure: C_EditMode.EditModeSettingInfo
   system:
-    type: number
+    type:
+      enum: EditModeSystem
   systemIndex:
     nilable: true
     type: number
@@ -1831,7 +1877,8 @@ C_EncounterJournal.EncounterJournalItemInfo:
     type: number
   filterType:
     nilable: true
-    type: number
+    type:
+      enum: ItemSlotFilterType
   handError:
     nilable: true
     type: boolean
@@ -1897,11 +1944,13 @@ C_EventToastManager.EventToastInfo:
       mixin: ColorMixin
       structure: Color
   displayType:
-    type: number
+    type:
+      enum: EventToastDisplayType
   eventToastID:
     type: number
   eventType:
-    type: number
+    type:
+      enum: EventToastEventType
   extraUiWidgetSetID:
     nilable: true
     type: number
@@ -1989,7 +2038,8 @@ C_FriendList.FriendInfo:
     nilable: true
     type: string
   rafLinkType:
-    type: number
+    type:
+      enum: RafLinkType
 C_FriendList.WhoInfo:
   area:
     type: string
@@ -2571,7 +2621,8 @@ C_GossipInfo.GossipOptionRewardInfo:
   quantity:
     type: number
   rewardType:
-    type: number
+    type:
+      enum: GossipOptionRewardType
 C_GossipInfo.GossipOptionUIInfo:
   flags:
     type: number
@@ -2596,7 +2647,8 @@ C_GossipInfo.GossipOptionUIInfo:
     nilable: true
     type: number
   status:
-    type: number
+    type:
+      enum: GossipOptionStatus
 C_GossipInfo.GossipPoiInfo:
   inBattleMap:
     type: boolean
@@ -2715,7 +2767,8 @@ C_ItemInteraction.ItemInteractionFrameInfo:
   flags:
     type: number
   interactionType:
-    type: number
+    type:
+      enum: UIItemInteractionType
   openSoundKitID:
     type: number
   slotTooltip:
@@ -2804,7 +2857,8 @@ C_LFGList.GroupFinderActivityInfo:
   categoryID:
     type: number
   displayType:
-    type: number
+    type:
+      enum: LFGListDisplayType
   filters:
     type: number
   fullName:
@@ -2884,7 +2938,8 @@ C_LFGList.LfgEntryData:
     type: string
   playstyle:
     nilable: true
-    type: number
+    type:
+      enum: LFGEntryPlaystyle
   privateGroup:
     type: boolean
   questID:
@@ -2948,7 +3003,8 @@ C_LFGList.LfgSearchResultData:
     type: number
   playstyle:
     nilable: true
-    type: number
+    type:
+      enum: LFGEntryPlaystyle
   questID:
     nilable: true
     type: number
@@ -3163,7 +3219,8 @@ C_Map.UiMapDetails:
   mapID:
     type: number
   mapType:
-    type: number
+    type:
+      enum: UIMapType
   name:
     type: string
   parentMapID:
@@ -3206,7 +3263,8 @@ C_MapExplorationInfo.UiMapExplorationInfo:
 C_Minimap.MinimapScriptTrackingFilter:
   filterID:
     nilable: true
-    type: number
+    type:
+      enum: MinimapTrackingFilter
   spellID:
     nilable: true
     type: number
@@ -3258,7 +3316,8 @@ C_ModelInfo.UIModelSceneCameraInfo:
   cameraType:
     type: string
   flags:
-    type: number
+    type:
+      enum: ModelSceneSetting
   maxZoomDistance:
     type: number
   minZoomDistance:
@@ -3636,7 +3695,8 @@ C_PlayerChoice.PlayerChoiceOptionInfo:
     type: number
   rarity:
     nilable: true
-    type: number
+    type:
+      enum: PlayerChoiceRarity
   rarityColor:
     nilable: true
     type:
@@ -3796,7 +3856,8 @@ C_PvP.PvpBrawlInfo:
   brawlID:
     type: number
   brawlType:
-    type: number
+    type:
+      enum: BrawlType
   canQueue:
     type: boolean
   groupsAllowed:
@@ -4010,7 +4071,8 @@ C_PvP.RatedSoloShuffleSpecStats:
     type: number
 C_QuestLine.QuestLineInfo:
   floorLocation:
-    type: number
+    type:
+      enum: QuestLineFloorLocation
   isCampaign:
     type: boolean
   isDaily:
@@ -4039,7 +4101,8 @@ C_QuestLog.QuestInfo:
     type: number
   frequency:
     nilable: true
-    type: number
+    type:
+      enum: QuestFrequency
   hasLocalPOI:
     type: boolean
   isAutoComplete:
@@ -4110,7 +4173,8 @@ C_QuestLog.QuestTagInfo:
     type: boolean
   quality:
     nilable: true
-    type: number
+    type:
+      enum: WorldQuestQuality
   tagID:
     type: number
   tagName:
@@ -4204,7 +4268,8 @@ C_RecruitAFriend.RafRecruit:
   monthsRemaining:
     type: number
   subStatus:
-    type: number
+    type:
+      enum: RafRecruitSubStatus
   wowAccountGUID:
     type: string
 C_RecruitAFriend.RafRecruitActivity:
@@ -4213,7 +4278,8 @@ C_RecruitAFriend.RafRecruitActivity:
   rewardQuestID:
     type: number
   state:
-    type: number
+    type:
+      enum: RafRecruitActivityState
 C_RecruitAFriend.RafRecruitmentinfo:
   expireTime:
     type: number
@@ -4273,7 +4339,8 @@ C_RecruitAFriend.RafReward:
   rewardID:
     type: number
   rewardType:
-    type: number
+    type:
+      enum: RafRewardType
   titleInfo:
     nilable: true
     type:
@@ -4376,7 +4443,8 @@ C_ScriptedAnimations.ScriptedAnimationEffect:
     type: number
   finishBehavior:
     nilable: true
-    type: number
+    type:
+      enum: ScriptedAnimationBehavior
   finishEffectID:
     nilable: true
     type: number
@@ -4409,12 +4477,14 @@ C_ScriptedAnimations.ScriptedAnimationEffect:
     type: number
   startBehavior:
     nilable: true
-    type: number
+    type:
+      enum: ScriptedAnimationBehavior
   startSoundKitID:
     nilable: true
     type: number
   trajectory:
-    type: number
+    type:
+      enum: ScriptedAnimationTrajectory
   useTargetAsSource:
     type: boolean
   visual:
@@ -4510,7 +4580,8 @@ C_Soulbinds.ConduitCollectionData:
   conduitSpecSetID:
     type: number
   conduitType:
-    type: number
+    type:
+      enum: SoulbindConduitType
   covenantID:
     nilable: true
     type: number
@@ -4559,7 +4630,8 @@ C_Soulbinds.SoulbindNode:
     type: number
   conduitType:
     nilable: true
-    type: number
+    type:
+      enum: SoulbindConduitType
   failureRenownRequirement:
     nilable: true
     type: number
@@ -4581,7 +4653,8 @@ C_Soulbinds.SoulbindNode:
   spellID:
     type: number
   state:
-    type: number
+    type:
+      enum: SoulbindNodeState
 C_Soulbinds.SoulbindTree:
   editable:
     type: boolean
@@ -4669,7 +4742,8 @@ C_SplashScreen.SplashScreenInfo:
   rightFeatureTitle:
     type: string
   screenType:
-    type: number
+    type:
+      enum: SplashScreenType
   shouldShowQuest:
     type: boolean
   soundKitID:
@@ -4706,7 +4780,8 @@ C_TaxiMap.MapTaxiNodeInfo:
   atlasName:
     type: string
   faction:
-    type: number
+    type:
+      enum: FlightPathFaction
   name:
     type: string
   nodeID:
@@ -4732,7 +4807,8 @@ C_TaxiMap.TaxiNodeInfo:
     nilable: true
     type: string
   state:
-    type: number
+    type:
+      enum: FlightPathState
   textureKit:
     type: string
   useSpecialIcon:
@@ -4768,7 +4844,8 @@ C_TooltipComparison.TooltipItemComparisonInfo:
     type: table
   method:
     default: 0
-    type: number
+    type:
+      enum: TooltipComparisonMethod
 C_Traits.TraitCondInfo:
   achievementID:
     nilable: true
@@ -4811,7 +4888,8 @@ C_Traits.TraitConfigInfo:
     type:
       arrayof: number
   type:
-    type: number
+    type:
+      enum: TraitConfigType
   usesSharedActionBars:
     type: boolean
 C_Traits.TraitCurrencyCost:
@@ -4840,7 +4918,8 @@ C_Traits.TraitDefinitionInfo:
     type: number
   subType:
     nilable: true
-    type: number
+    type:
+      enum: TraitDefinitionSubType
 C_Traits.TraitEntryInfo:
   conditionIDs:
     type:
@@ -4852,7 +4931,8 @@ C_Traits.TraitEntryInfo:
   maxRanks:
     type: number
   type:
-    type: number
+    type:
+      enum: TraitNodeEntryType
 C_Traits.TraitEntryRankInfo:
   entryID:
     type: number
@@ -4916,7 +4996,8 @@ C_Traits.TraitNodeInfo:
   ranksPurchased:
     type: number
   type:
-    type: number
+    type:
+      enum: TraitNodeType
   visibleEdges:
     type:
       arrayof:
@@ -5103,32 +5184,39 @@ C_UIColor.DBColorExport:
       structure: Color
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   enabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   frameTextureKit:
     type: string
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   lines:
     type:
       arrayof: string
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5141,19 +5229,24 @@ C_UIWidgetManager.CaptureBarWidgetVisualizationInfo:
   barValue:
     type: number
   fillDirectionType:
-    type: number
+    type:
+      enum: CaptureBarWidgetFillDirectionType
   frameTextureKit:
     type: string
   glowAnimType:
-    type: number
+    type:
+      enum: CaptureBarWidgetGlowAnimType
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   neutralZoneCenter:
     type: number
   neutralZoneSize:
@@ -5161,54 +5254,68 @@ C_UIWidgetManager.CaptureBarWidgetVisualizationInfo:
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   tooltip:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
     type: string
 C_UIWidgetManager.CaptureZoneVisualizationInfo:
   dangerFlashType:
-    type: number
+    type:
+      enum: ZoneControlDangerFlashType
   frameTextureKit:
     type: string
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   leadingEdgeType:
-    type: number
+    type:
+      enum: ZoneControlLeadingEdgeType
   mode:
-    type: number
+    type:
+      enum: ZoneControlMode
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5222,17 +5329,21 @@ C_UIWidgetManager.DiscreteProgressStepsVisualizationInfo:
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   numSteps:
     type: number
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   progressMax:
     type: number
   progressMin:
@@ -5242,15 +5353,18 @@ C_UIWidgetManager.DiscreteProgressStepsVisualizationInfo:
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   tooltip:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5261,21 +5375,25 @@ C_UIWidgetManager.DoubleIconAndTextWidgetVisualizationInfo:
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   label:
     type: string
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   leftText:
     type: string
   leftTooltip:
     type: string
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   rightText:
     type: string
   rightTooltip:
@@ -5283,13 +5401,16 @@ C_UIWidgetManager.DoubleIconAndTextWidgetVisualizationInfo:
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5300,19 +5421,23 @@ C_UIWidgetManager.DoubleStateIconRowVisualizationInfo:
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   leftIcons:
     type:
       arrayof:
         structure: C_UIWidgetManager.UIWidgetStateIconInfo
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   rightIcons:
     type:
       arrayof:
@@ -5320,30 +5445,37 @@ C_UIWidgetManager.DoubleStateIconRowVisualizationInfo:
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
     type: string
 C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo:
   barValueTextType:
-    type: number
+    type:
+      enum: StatusBarValueTextType
   fillMotionType:
-    type: number
+    type:
+      enum: UIWidgetMotionType
   frameTextureKit:
     type: string
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   leftBarMax:
     type: number
   leftBarMin:
@@ -5351,15 +5483,18 @@ C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo:
   leftBarTooltip:
     type: string
   leftBarTooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   leftBarValue:
     type: number
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   rightBarMax:
     type: number
   rightBarMin:
@@ -5367,19 +5502,22 @@ C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo:
   rightBarTooltip:
     type: string
   rightBarTooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   rightBarValue:
     type: number
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   text:
     type: string
   textureKit:
     type: string
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5396,11 +5534,14 @@ C_UIWidgetManager.FillUpFramesWidgetVisualizationInfo:
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   numFullFrames:
     type: number
   numTotalFrames:
@@ -5408,21 +5549,25 @@ C_UIWidgetManager.FillUpFramesWidgetVisualizationInfo:
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   pulseFillingFrame:
     type: boolean
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   tooltip:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5437,25 +5582,32 @@ C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5468,19 +5620,24 @@ C_UIWidgetManager.IconAndTextWidgetVisualizationInfo:
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   state:
-    type: number
+    type:
+      enum: IconAndTextWidgetState
   text:
     type: string
   textureKit:
@@ -5488,9 +5645,11 @@ C_UIWidgetManager.IconAndTextWidgetVisualizationInfo:
   tooltip:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5501,25 +5660,31 @@ C_UIWidgetManager.IconTextAndBackgroundWidgetVisualizationInfo:
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   text:
     type: string
   textureKit:
     type: string
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5532,37 +5697,47 @@ C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
   description:
     type: string
   descriptionEnabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   descriptionShownState:
-    type: number
+    type:
+      enum: WidgetShownState
   enabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   frameTextureKit:
     type: string
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   text:
     type: string
   textureKit:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5579,23 +5754,29 @@ C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
   headerText:
     type: string
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5608,19 +5789,24 @@ C_UIWidgetManager.ScenarioHeaderTimerWidgetVisualizationInfo:
   headerText:
     type: string
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   timerMax:
@@ -5632,7 +5818,8 @@ C_UIWidgetManager.ScenarioHeaderTimerWidgetVisualizationInfo:
   timerValue:
     type: number
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5643,25 +5830,31 @@ C_UIWidgetManager.SpacerVisualizationInfo:
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   widgetHeight:
     type: number
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5670,34 +5863,42 @@ C_UIWidgetManager.SpacerVisualizationInfo:
     type: number
 C_UIWidgetManager.SpellDisplayVisualizationInfo:
   enabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   frameTextureKit:
     type: string
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   spellInfo:
     type:
       structure: C_UIWidgetManager.UIWidgetSpellInfo
   textureKit:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5708,15 +5909,19 @@ C_UIWidgetManager.StackedResourceTrackerWidgetVisualizationInfo:
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   resources:
     type:
       arrayof:
@@ -5724,13 +5929,16 @@ C_UIWidgetManager.StackedResourceTrackerWidgetVisualizationInfo:
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5741,44 +5949,56 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
   barMin:
     type: number
   barTextEnabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   barTextFontType:
-    type: number
+    type:
+      enum: UIWidgetFontType
   barTextSizeType:
-    type: number
+    type:
+      enum: UIWidgetTextSizeType
   barValue:
     type: number
   barValueTextType:
-    type: number
+    type:
+      enum: StatusBarValueTextType
   colorTint:
-    type: number
+    type:
+      enum: StatusBarColorTintValue
   fillMotionType:
-    type: number
+    type:
+      enum: UIWidgetMotionType
   frameTextureKit:
     type: string
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   overrideBarText:
     type: string
   overrideBarTextShownType:
-    type: number
+    type:
+      enum: StatusBarOverrideBarTextShownType
   partitionValues:
     type:
       arrayof: number
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   text:
     type: string
   textureKit:
@@ -5786,9 +6006,11 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
   tooltip:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5797,9 +6019,11 @@ C_UIWidgetManager.TextColumnRowEntryInfo:
   columnWidth:
     type: number
   enabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   hAlign:
-    type: number
+    type:
+      enum: WidgetTextHorizontalAlignmentType
   text:
     type: string
 C_UIWidgetManager.TextColumnRowVisualizationInfo:
@@ -5810,35 +6034,44 @@ C_UIWidgetManager.TextColumnRowVisualizationInfo:
       arrayof:
         structure: C_UIWidgetManager.TextColumnRowEntryInfo
   fontType:
-    type: number
+    type:
+      enum: UIWidgetFontType
   frameTextureKit:
     type: string
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textSizeType:
-    type: number
+    type:
+      enum: UIWidgetTextSizeType
   textureKit:
     type: string
   tooltip:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5861,27 +6094,35 @@ C_UIWidgetManager.TextureAndTextRowVisualizationInfo:
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textSizeType:
-    type: number
+    type:
+      enum: UIWidgetTextureAndTextSizeType
   textureKit:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5892,19 +6133,24 @@ C_UIWidgetManager.TextureAndTextVisualizationInfo:
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   text:
     type: string
   textureKit:
@@ -5912,9 +6158,11 @@ C_UIWidgetManager.TextureAndTextVisualizationInfo:
   tooltip:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5925,27 +6173,34 @@ C_UIWidgetManager.TextureWithAnimationVisualizationInfo:
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   tooltip:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -5954,94 +6209,120 @@ C_UIWidgetManager.TextWithStateWidgetVisualizationInfo:
   bottomPadding:
     type: number
   enabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   fontType:
-    type: number
+    type:
+      enum: UIWidgetFontType
   frameTextureKit:
     type: string
   hAlign:
-    type: number
+    type:
+      enum: WidgetTextHorizontalAlignmentType
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   text:
     type: string
   textSizeType:
-    type: number
+    type:
+      enum: UIWidgetTextSizeType
   textureKit:
     type: string
   tooltip:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
     type: string
 C_UIWidgetManager.TextWithSubtextWidgetVisualizationInfo:
   enabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   fontType:
-    type: number
+    type:
+      enum: UIWidgetFontType
   frameTextureKit:
     type: string
   hAlign:
-    type: number
+    type:
+      enum: WidgetTextHorizontalAlignmentType
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   spacing:
     type: number
   subText:
     type: string
   subTextEnabledState:
-    type: number
+    type:
+      enum: WidgetEnabledState
   subTextFontType:
-    type: number
+    type:
+      enum: UIWidgetFontType
   subTextHAlign:
-    type: number
+    type:
+      enum: WidgetTextHorizontalAlignmentType
   subTextSizeType:
-    type: number
+    type:
+      enum: UIWidgetTextSizeType
   text:
     type: string
   textSizeType:
-    type: number
+    type:
+      enum: UIWidgetTextSizeType
   textureKit:
     type: string
   tooltip:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -6068,21 +6349,27 @@ C_UIWidgetManager.UIWidgetInfo:
   widgetSetID:
     type: number
   widgetType:
-    type: number
+    type:
+      enum: UIWidgetVisualizationType
 C_UIWidgetManager.UIWidgetSetInfo:
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetSetLayoutDirection
   verticalPadding:
     type: number
 C_UIWidgetManager.UIWidgetSpellInfo:
   borderColor:
-    type: number
+    type:
+      enum: SpellDisplayBorderColor
   hAlignType:
-    type: number
+    type:
+      enum: WidgetTextHorizontalAlignmentType
   iconDisplayType:
-    type: number
+    type:
+      enum: SpellDisplayIconDisplayType
   iconSizeType:
-    type: number
+    type:
+      enum: SpellDisplayIconSizeType
   isLootObject:
     type: boolean
   spellID:
@@ -6092,16 +6379,20 @@ C_UIWidgetManager.UIWidgetSpellInfo:
   text:
     type: string
   textFontType:
-    type: number
+    type:
+      enum: UIWidgetFontType
   textShownState:
-    type: number
+    type:
+      enum: SpellDisplayTextShownStateType
   textSizeType:
-    type: number
+    type:
+      enum: UIWidgetTextSizeType
   tooltip:
     type: string
 C_UIWidgetManager.UIWidgetStateIconInfo:
   iconState:
-    type: number
+    type:
+      enum: IconState
   state1Tooltip:
     type: string
   state2Tooltip:
@@ -6114,80 +6405,103 @@ C_UIWidgetManager.UnitPowerBarWidgetVisualizationInfo:
   barValue:
     type: number
   barValueTextType:
-    type: number
+    type:
+      enum: StatusBarValueTextType
   fillMotionType:
-    type: number
+    type:
+      enum: UIWidgetMotionType
   flashBlendModeType:
-    type: number
+    type:
+      enum: UIWidgetBlendModeType
   flashMomentType:
-    type: number
+    type:
+      enum: WidgetUnitPowerBarFlashMomentType
   frameTextureKit:
     type: string
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   overrideBarText:
     type: string
   overrideBarTextShownType:
-    type: number
+    type:
+      enum: StatusBarOverrideBarTextShownType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   sparkBlendModeType:
-    type: number
+    type:
+      enum: UIWidgetBlendModeType
   textureKit:
     type: string
   tooltip:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
     type: string
 C_UIWidgetManager.ZoneControlVisualizationInfo:
   dangerFlashType:
-    type: number
+    type:
+      enum: ZoneControlDangerFlashType
   frameTextureKit:
     type: string
   hasTimer:
     type: boolean
   inAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   layoutDirection:
-    type: number
+    type:
+      enum: UIWidgetLayoutDirection
   leadingEdgeType:
-    type: number
+    type:
+      enum: ZoneControlLeadingEdgeType
   mode:
-    type: number
+    type:
+      enum: ZoneControlMode
   modelSceneLayer:
-    type: number
+    type:
+      enum: UIWidgetModelSceneLayer
   orderIndex:
     type: number
   outAnimType:
-    type: number
+    type:
+      enum: WidgetAnimationType
   scriptedAnimationEffectID:
     type: number
   shownState:
-    type: number
+    type:
+      enum: WidgetShownState
   textureKit:
     type: string
   tooltipLoc:
-    type: number
+    type:
+      enum: UIWidgetTooltipLocation
   widgetScale:
-    type: number
+    type:
+      enum: UIWidgetScale
   widgetSizeSetting:
     type: number
   widgetTag:
@@ -6198,19 +6512,22 @@ C_UIWidgetManager.ZoneControlVisualizationInfo:
         structure: C_UIWidgetManager.ZoneEntry
 C_UIWidgetManager.ZoneEntry:
   activeState:
-    type: number
+    type:
+      enum: ZoneControlActiveState
   capturePoint:
     type: number
   current:
     type: number
   fillType:
-    type: number
+    type:
+      enum: ZoneControlFillType
   max:
     type: number
   min:
     type: number
   state:
-    type: number
+    type:
+      enum: ZoneControlState
   tooltip:
     type: string
 C_VideoOptions.GxAdapterInfoDetails:
@@ -6242,7 +6559,8 @@ C_VignetteInfo.VignetteInfo:
   rewardQuestID:
     type: number
   type:
-    type: number
+    type:
+      enum: VignetteType
   vignetteGUID:
     type: string
   vignetteID:
@@ -6267,7 +6585,8 @@ C_VoiceChat.VoiceChatChannel:
   channelID:
     type: number
   channelType:
-    type: number
+    type:
+      enum: ChatChannelType
   clubId:
     type: string
   isActive:
@@ -6315,7 +6634,8 @@ C_VoiceChat.VoiceTtsVoiceType:
     type: number
 C_WeeklyRewards.ConquestWeeklyProgress:
   displayType:
-    type: number
+    type:
+      enum: ConquestProgressBarDisplayType
   maxProgress:
     type: number
   maxUnlocks:
@@ -6357,7 +6677,8 @@ C_WeeklyRewards.WeeklyRewardActivityInfo:
   threshold:
     type: number
   type:
-    type: number
+    type:
+      enum: WeeklyRewardChestThresholdType
 C_WeeklyRewards.WeeklyRewardActivityRewardInfo:
   id:
     type: number
@@ -6367,7 +6688,8 @@ C_WeeklyRewards.WeeklyRewardActivityRewardInfo:
   quantity:
     type: number
   type:
-    type: number
+    type:
+      enum: CachedRewardType
 C_XMLUtil.XMLTemplateInfo:
   height:
     type: number
@@ -6500,12 +6822,14 @@ CharCustomizationOption:
   name:
     type: string
   optionType:
-    type: number
+    type:
+      enum: ChrCustomizationOptionType
   orderIndex:
     type: number
 ChatChannelInfo:
   channelType:
-    type: number
+    type:
+      enum: PermanentChatChannelType
   instanceID:
     type: number
   localID:
@@ -6524,7 +6848,8 @@ ClickBindingInfo:
   modifiers:
     type: number
   type:
-    type: number
+    type:
+      enum: ClickBindingType
 Color:
   b:
     type: number
@@ -6681,7 +7006,8 @@ CraftingOrderCustomerCategory:
     nilable: true
     type: number
   type:
-    type: number
+    type:
+      enum: CraftingOrderCustomerCategoryType
   uiSortOrder:
     type: number
 CraftingOrderCustomerCategoryFilters:
@@ -6718,7 +7044,8 @@ CraftingOrderCustomerOptionInfo:
     type: number
   quality:
     nilable: true
-    type: number
+    type:
+      enum: ItemQuality
   qualityIlvlBonuses:
     nilable: true
     type:
@@ -6777,7 +7104,8 @@ CraftingOrderCustomerSearchParams:
 CraftingOrderCustomerSearchResults:
   extraColumnType:
     nilable: true
-    type: number
+    type:
+      enum: AuctionHouseExtraColumn
   options:
     type:
       arrayof:
@@ -6814,9 +7142,11 @@ CraftingOrderInfo:
   orderID:
     type: number
   orderState:
-    type: number
+    type:
+      enum: CraftingOrderState
   orderType:
-    type: number
+    type:
+      enum: CraftingOrderType
   outputItemGUID:
     nilable: true
     type: string
@@ -6828,7 +7158,8 @@ CraftingOrderInfo:
       arrayof:
         structure: CraftingOrderReagentInfo
   reagentState:
-    type: number
+    type:
+      enum: CraftingOrderReagentsType
   recraftItemHyperlink:
     nilable: true
     type: string
@@ -6858,14 +7189,16 @@ CraftingOrderMailInfo:
     nilable: true
     type: string
   reason:
-    type: number
+    type:
+      enum: RcoCloseReason
   recipeName:
     type: string
 CraftingOrderPersonalOrdersInfo:
   numPersonalOrders:
     type: number
   profession:
-    type: number
+    type:
+      enum: Profession
   professionName:
     type: string
 CraftingOrderReagentInfo:
@@ -6877,12 +7210,14 @@ CraftingOrderReagentInfo:
   reagentSlot:
     type: number
   source:
-    type: number
+    type:
+      enum: CraftingOrderReagentSource
 CraftingOrderSortInfo:
   reversed:
     type: boolean
   sortType:
-    type: number
+    type:
+      enum: CraftingOrderSortType
 CraftingReagent:
   currencyID:
     nilable: true
@@ -6910,10 +7245,12 @@ CraftingReagentSlotSchematic:
     type: number
   dataSlotType:
     default: 1
-    type: number
+    type:
+      enum: TradeskillSlotDataType
   orderSource:
     nilable: true
-    type: number
+    type:
+      enum: CraftingOrderReagentSource
   quantityRequired:
     type: number
   reagents:
@@ -6921,7 +7258,8 @@ CraftingReagentSlotSchematic:
       arrayof:
         structure: CraftingReagent
   reagentType:
-    type: number
+    type:
+      enum: CraftingReagentType
   slotIndex:
     type: number
   slotInfo:
@@ -6943,7 +7281,8 @@ CraftingRecipeRequirement:
   name:
     type: string
   type:
-    type: number
+    type:
+      enum: RecipeRequirementType
 CraftingRecipeSchematic:
   hasCraftingOperationInfo:
     type: boolean
@@ -6971,7 +7310,8 @@ CraftingRecipeSchematic:
     type: number
   recipeType:
     default: 1
-    type: number
+    type:
+      enum: TradeskillRecipeType
 CraftingResourceReturnInfo:
   itemID:
     type: number
@@ -7093,7 +7433,8 @@ GarrisonTalentInfo:
   startTime:
     type: number
   talentAvailability:
-    type: number
+    type:
+      enum: GarrisonTalentAvailability
   talentMaxRank:
     type: number
   talentRank:
@@ -7221,12 +7562,14 @@ NewCraftingOrderInfo:
     nilable: true
     type: number
   orderDuration:
-    type: number
+    type:
+      enum: CraftingOrderDuration
   orderTarget:
     nilable: true
     type: string
   orderType:
-    type: number
+    type:
+      enum: CraftingOrderType
   reagentItems:
     type:
       arrayof:
@@ -7250,7 +7593,8 @@ PlayerInfoCharacterData:
   name:
     type: string
   sex:
-    type: number
+    type:
+      enum: UnitSex
 PlayerLocation: {}
 ProfessionInfo:
   expansionName:
@@ -7267,7 +7611,8 @@ ProfessionInfo:
     type: string
   profession:
     nilable: true
-    type: number
+    type:
+      enum: Profession
   professionID:
     type: number
   professionName:
@@ -7376,7 +7721,8 @@ RuneforgePower:
     nilable: true
     type: string
   state:
-    type: number
+    type:
+      enum: RuneforgePowerState
 SpecializationCurrencyInfo:
   currencyName:
     type: string
@@ -7527,7 +7873,8 @@ TradeSkillRecipeInfo:
     type: number
   relativeDifficulty:
     nilable: true
-    type: number
+    type:
+      enum: TradeskillRelativeDifficulty
   skillLineAbilityID:
     type: number
   sourceType:

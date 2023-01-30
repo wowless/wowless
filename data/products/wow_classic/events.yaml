@@ -204,7 +204,8 @@ AUTOFOLLOW_END:
 AVATAR_LIST_UPDATED:
   payload:
   - name: clubType
-    type: number
+    type:
+      enum: ClubType
 AZERITE_EMPOWERED_ITEM_EQUIPPED_STATUS_CHANGED:
   payload:
   - name: isHeartEquipped
@@ -222,13 +223,15 @@ AZERITE_EMPOWERED_ITEM_SELECTION_UPDATED:
 AZERITE_ESSENCE_ACTIVATED:
   payload:
   - name: slot
-    type: number
+    type:
+      enum: AzeriteEssenceSlot
   - name: essenceID
     type: number
 AZERITE_ESSENCE_ACTIVATION_FAILED:
   payload:
   - name: slot
-    type: number
+    type:
+      enum: AzeriteEssenceSlot
   - name: essenceID
     type: number
 AZERITE_ESSENCE_CHANGED:
@@ -2977,7 +2980,8 @@ CLIENT_SCENE_CLOSED:
 CLIENT_SCENE_OPENED:
   payload:
   - name: sceneType
-    type: number
+    type:
+      enum: ClientSceneType
 CLOSE_INBOX_ITEM:
   payload:
   - name: mailIndex
@@ -2991,11 +2995,14 @@ CLUB_ADDED:
 CLUB_ERROR:
   payload:
   - name: action
-    type: number
+    type:
+      enum: ClubActionType
   - name: error
-    type: number
+    type:
+      enum: ClubErrorType
   - name: clubType
-    type: number
+    type:
+      enum: ClubType
 CLUB_INVITATION_ADDED_FOR_SELF:
   payload:
   - name: invitation
@@ -3022,7 +3029,8 @@ CLUB_MEMBER_PRESENCE_UPDATED:
   - name: memberId
     type: number
   - name: presence
-    type: number
+    type:
+      enum: ClubMemberPresence
 CLUB_MEMBER_REMOVED:
   payload:
   - name: clubId
@@ -3082,7 +3090,8 @@ CLUB_REMOVED_MESSAGE:
   - name: clubName
     type: string
   - name: clubRemovedReason
-    type: number
+    type:
+      enum: ClubRemovedReason
 CLUB_SELF_MEMBER_ROLE_UPDATED:
   payload:
   - name: clubId
@@ -3133,7 +3142,8 @@ CLUB_TICKET_CREATED:
 CLUB_TICKET_RECEIVED:
   payload:
   - name: error
-    type: number
+    type:
+      enum: ClubErrorType
   - name: ticket
     type: string
   - name: info
@@ -3306,9 +3316,11 @@ CURSOR_CHANGED:
   - name: isDefault
     type: boolean
   - name: newCursorType
-    type: number
+    type:
+      enum: UICursorType
   - name: oldCursorType
-    type: number
+    type:
+      enum: UICursorType
   - name: oldCursorVirtualID
     type: number
 CVAR_UPDATE:
@@ -3391,7 +3403,8 @@ ENTERED_DIFFERENT_INSTANCE_FROM_PARTY:
 ENTITLEMENT_DELIVERED:
   payload:
   - name: entitlementType
-    type: number
+    type:
+      enum: WoWEntitlementType
   - name: textureID
     type: number
   - name: name
@@ -3465,7 +3478,8 @@ GAME_PAD_DISCONNECTED:
 GAME_PAD_POWER_CHANGED:
   payload:
   - name: powerLevel
-    type: number
+    type:
+      enum: GamePadPowerLevel
 GDF_SIM_COMPLETE:
   payload: {}
 GENERIC_ERROR:
@@ -4466,11 +4480,13 @@ PLAYER_GUILD_UPDATE:
 PLAYER_INTERACTION_MANAGER_FRAME_HIDE:
   payload:
   - name: type
-    type: number
+    type:
+      enum: PlayerInteractionType
 PLAYER_INTERACTION_MANAGER_FRAME_SHOW:
   payload:
   - name: type
-    type: number
+    type:
+      enum: PlayerInteractionType
 PLAYER_LEAVE_COMBAT:
   payload: {}
 PLAYER_LEAVING_WORLD:
@@ -4709,7 +4725,8 @@ QUEST_SESSION_MEMBER_START_RESPONSE:
 QUEST_SESSION_NOTIFICATION:
   payload:
   - name: result
-    type: number
+    type:
+      enum: QuestSessionResult
   - name: guid
     type: string
 QUEST_TURNED_IN:
@@ -4739,7 +4756,8 @@ QUICK_TICKET_THROTTLE_CHANGED:
 RAF_ENTITLEMENT_DELIVERED:
   payload:
   - name: entitlementType
-    type: number
+    type:
+      enum: WoWEntitlementType
   - name: textureID
     type: number
   - name: name
@@ -4826,7 +4844,8 @@ REPORT_PLAYER_RESULT:
   - name: success
     type: boolean
   - name: reportType
-    type: number
+    type:
+      enum: ReportType
 REQUEST_CEMETERY_LIST_RESPONSE:
   payload:
   - name: isGossipTriggered
@@ -5929,11 +5948,13 @@ VOICE_CHAT_CHANNEL_DISPLAY_NAME_CHANGED:
 VOICE_CHAT_CHANNEL_JOINED:
   payload:
   - name: status
-    type: number
+    type:
+      enum: VoiceChatStatusCode
   - name: channelID
     type: number
   - name: channelType
-    type: number
+    type:
+      enum: ChatChannelType
   - name: clubId
     nilable: true
     type: string
@@ -6061,7 +6082,8 @@ VOICE_CHAT_CHANNEL_VOLUME_CHANGED:
 VOICE_CHAT_COMMUNICATION_MODE_CHANGED:
   payload:
   - name: communicationMode
-    type: number
+    type:
+      enum: CommunicationMode
 VOICE_CHAT_CONNECTION_SUCCESS:
   payload: {}
 VOICE_CHAT_DEAFENED_CHANGED:
@@ -6073,17 +6095,20 @@ VOICE_CHAT_ERROR:
   - name: platformCode
     type: number
   - name: statusCode
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 VOICE_CHAT_INPUT_DEVICES_UPDATED:
   payload: {}
 VOICE_CHAT_LOGIN:
   payload:
   - name: status
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 VOICE_CHAT_LOGOUT:
   payload:
   - name: status
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 VOICE_CHAT_MUTED_CHANGED:
   payload:
   - name: isMuted
@@ -6093,7 +6118,8 @@ VOICE_CHAT_OUTPUT_DEVICES_UPDATED:
 VOICE_CHAT_PENDING_CHANNEL_JOIN_STATE:
   payload:
   - name: channelType
-    type: number
+    type:
+      enum: ChatChannelType
   - name: clubId
     nilable: true
     type: string
@@ -6117,11 +6143,13 @@ VOICE_CHAT_SPEAK_FOR_ME_FEATURE_STATUS_UPDATED:
 VOICE_CHAT_TTS_PLAYBACK_FAILED:
   payload:
   - name: status
-    type: number
+    type:
+      enum: VoiceTtsStatusCode
   - name: utteranceID
     type: number
   - name: destination
-    type: number
+    type:
+      enum: VoiceTtsDestination
 VOICE_CHAT_TTS_PLAYBACK_FINISHED:
   payload:
   - name: numConsumers
@@ -6129,7 +6157,8 @@ VOICE_CHAT_TTS_PLAYBACK_FINISHED:
   - name: utteranceID
     type: number
   - name: destination
-    type: number
+    type:
+      enum: VoiceTtsDestination
 VOICE_CHAT_TTS_PLAYBACK_STARTED:
   payload:
   - name: numConsumers
@@ -6139,11 +6168,13 @@ VOICE_CHAT_TTS_PLAYBACK_STARTED:
   - name: durationMS
     type: number
   - name: destination
-    type: number
+    type:
+      enum: VoiceTtsDestination
 VOICE_CHAT_TTS_SPEAK_TEXT_UPDATE:
   payload:
   - name: status
-    type: number
+    type:
+      enum: VoiceTtsStatusCode
   - name: utteranceID
     type: number
 VOICE_CHAT_TTS_VOICES_UPDATE:

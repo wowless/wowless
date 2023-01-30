@@ -1361,7 +1361,8 @@ C_AuctionHouse.GetItemCommodityStatus:
         structure: ItemLocation
   outputs:
   - name: isCommodity
-    type: number
+    type:
+      enum: ItemCommodityStatus
 C_AuctionHouse.GetItemKeyFromItem:
   inputs:
   - - name: item
@@ -1622,7 +1623,8 @@ C_AuctionHouse.GetReplicateItemTimeLeft:
 C_AuctionHouse.GetTimeLeftBandInfo:
   inputs:
   - - name: timeLeftBand
-      type: number
+      type:
+        enum: AuctionHouseTimeLeftBand
   outputs:
   - name: timeLeftMinSeconds
     type: number
@@ -1971,7 +1973,8 @@ C_AzeriteEmpoweredItem.GetPowerText:
     - name: powerID
       type: number
     - name: level
-      type: number
+      type:
+        enum: AzeritePowerLevel
   outputs:
   - name: powerText
     type:
@@ -2762,7 +2765,8 @@ C_Calendar.EventGetStatusOptions:
 C_Calendar.EventGetTextures:
   inputs:
   - - name: eventType
-      type: number
+      type:
+        enum: CalendarEventType
   outputs:
   - name: textures
     type:
@@ -2844,7 +2848,8 @@ C_Calendar.EventSetInviteStatus:
   - - name: eventIndex
       type: number
     - name: status
-      type: number
+      type:
+        enum: CalendarStatus
   outputs: {}
 C_Calendar.EventSetLocked:
   inputs:
@@ -2875,7 +2880,8 @@ C_Calendar.EventSetTitle:
 C_Calendar.EventSetType:
   inputs:
   - - name: typeIndex
-      type: number
+      type:
+        enum: CalendarEventType
   outputs: {}
 C_Calendar.EventSignUp:
   inputs:
@@ -3214,7 +3220,8 @@ C_CampaignInfo.GetState:
       type: number
   outputs:
   - name: state
-    type: number
+    type:
+      enum: CampaignState
 C_CampaignInfo.IsCampaignQuest:
   inputs:
   - - name: questID
@@ -3527,14 +3534,16 @@ C_ChatInfo.GetChannelRuleset:
       type: number
   outputs:
   - name: ruleset
-    type: number
+    type:
+      enum: ChatChannelRuleset
 C_ChatInfo.GetChannelRulesetForChannelID:
   inputs:
   - - name: channelID
       type: number
   outputs:
   - name: ruleset
-    type: number
+    type:
+      enum: ChatChannelRuleset
 C_ChatInfo.GetChannelShortcut:
   inputs:
   - - name: channelIndex
@@ -3627,7 +3636,8 @@ C_ChatInfo.IsChannelRegionalForChannelID:
 C_ChatInfo.IsPartyChannelType:
   inputs:
   - - name: channelType
-      type: number
+      type:
+        enum: ChatChannelType
   outputs:
   - name: isPartyChannelType
     type: boolean
@@ -3867,7 +3877,8 @@ C_ClassTalents.LoadConfig:
       type: boolean
   outputs:
   - name: result
-    type: number
+    type:
+      enum: LoadConfigResult
   - name: changeError
     type: string
   - name: newLearnedNodeIDs
@@ -3902,7 +3913,8 @@ C_ClassTalents.SetStarterBuildActive:
       type: boolean
   outputs:
   - name: result
-    type: number
+    type:
+      enum: LoadConfigResult
 C_ClassTalents.SetUsesSharedActionBars:
   inputs:
   - - name: configID
@@ -3946,7 +3958,8 @@ C_ClickBindings.GetBindingType:
       type: number
   outputs:
   - name: type
-    type: number
+    type:
+      enum: ClickBindingType
 C_ClickBindings.GetEffectiveInteractionButton:
   inputs:
   - - name: button
@@ -4024,7 +4037,8 @@ C_Club.AssignMemberRole:
     - name: memberId
       type: number
     - name: roleId
-      type: number
+      type:
+        enum: ClubRoleIdentifier
   outputs: {}
 C_Club.CanResolvePlayerLocationFromClubMessageData:
   inputs:
@@ -4068,7 +4082,8 @@ C_Club.CreateClub:
     - name: description
       type: string
     - name: clubType
-      type: number
+      type:
+        enum: ClubType
     - name: avatarId
       type: number
     - name: isCrossFaction
@@ -4221,11 +4236,13 @@ C_Club.GetAssignableRoles:
   outputs:
   - name: assignableRoles
     type:
-      arrayof: number
+      arrayof:
+        enum: ClubRoleIdentifier
 C_Club.GetAvatarIdList:
   inputs:
   - - name: clubType
-      type: number
+      type:
+        enum: ClubType
   outputs:
   - name: avatarIds
     nilable: true
@@ -4249,7 +4266,8 @@ C_Club.GetClubInfo:
 C_Club.GetClubLimits:
   inputs:
   - - name: clubType
-      type: number
+      type:
+        enum: ClubType
   outputs:
   - name: clubLimits
     type:
@@ -4285,7 +4303,8 @@ C_Club.GetClubStreamNotificationSettings:
 C_Club.GetCommunityNameResultText:
   inputs:
   - - name: result
-      type: number
+      type:
+        enum: ValidateNameResult
   outputs:
   - name: errorCode
     nilable: true
@@ -4309,7 +4328,8 @@ C_Club.GetInfoFromLastCommunityChatLine:
   - name: streamId
     type: string
   - name: clubType
-    type: number
+    type:
+      enum: ClubType
 C_Club.GetInvitationCandidates:
   inputs:
   - - name: filter
@@ -4363,7 +4383,8 @@ C_Club.GetLastTicketResponse:
       type: string
   outputs:
   - name: error
-    type: number
+    type:
+      enum: ClubErrorType
   - name: info
     nilable: true
     type:
@@ -4525,7 +4546,8 @@ C_Club.IsRestricted:
   - {}
   outputs:
   - name: restrictionReason
-    type: number
+    type:
+      enum: ClubRestrictionReason
 C_Club.IsSubscribedToStream:
   inputs:
   - - name: clubId
@@ -4634,7 +4656,8 @@ C_Club.SetAvatarTexture:
     - name: avatarId
       type: number
     - name: clubType
-      type: number
+      type:
+        enum: ClubType
   outputs: {}
 C_Club.SetClubMemberNote:
   inputs:
@@ -4676,7 +4699,8 @@ C_Club.SetSocialQueueingEnabled:
 C_Club.ShouldAllowClubType:
   inputs:
   - - name: clubType
-      type: number
+      type:
+        enum: ClubType
   outputs:
   - name: clubTypeIsAllowed
     type: boolean
@@ -4695,14 +4719,17 @@ C_Club.UnfocusStream:
 C_Club.ValidateText:
   inputs:
   - - name: clubType
-      type: number
+      type:
+        enum: ClubType
     - name: text
       type: string
     - name: clubFieldType
-      type: number
+      type:
+        enum: ClubFieldType
   outputs:
   - name: result
-    type: number
+    type:
+      enum: ValidateNameResult
 C_ClubFinder.ApplicantAcceptClubInvite:
   inputs:
   - - name: clubFinderGUID
@@ -4747,7 +4774,8 @@ C_ClubFinder.GetClubFinderDisableReason:
   outputs:
   - name: disableReason
     nilable: true
-    type: number
+    type:
+      enum: ClubFinderDisableReason
 C_ClubFinder.GetClubRecruitmentSettings:
   inputs:
   - {}
@@ -4761,7 +4789,8 @@ C_ClubFinder.GetClubTypeFromFinderGUID:
       type: string
   outputs:
   - name: clubType
-    type: number
+    type:
+      enum: ClubFinderRequestType
 C_ClubFinder.GetFocusIndexFromFlag:
   inputs:
   - - name: flags
@@ -4788,7 +4817,8 @@ C_ClubFinder.GetPlayerClubApplicationStatus:
       type: string
   outputs:
   - name: clubStatus
-    type: number
+    type:
+      enum: PlayerClubRequestStatus
 C_ClubFinder.GetPlayerSettingsFocusFlagsSelectedCount:
   inputs:
   - {}
@@ -4827,7 +4857,8 @@ C_ClubFinder.GetStatusOfPostingFromClubId:
   outputs:
   - name: postingFlags
     type:
-      arrayof: number
+      arrayof:
+        enum: ClubFinderClubPostingStatusFlags
 C_ClubFinder.GetTotalMatchingCommunityListSize:
   inputs:
   - {}
@@ -4892,7 +4923,8 @@ C_ClubFinder.PlayerGetClubInvitationList:
 C_ClubFinder.PlayerRequestPendingClubsList:
   inputs:
   - - name: type
-      type: number
+      type:
+        enum: ClubFinderRequestType
   outputs: {}
 C_ClubFinder.PlayerReturnPendingCommunitiesList:
   inputs:
@@ -4926,7 +4958,8 @@ C_ClubFinder.PostClub:
       type:
         arrayof: number
     - name: type
-      type: number
+      type:
+        enum: ClubFinderRequestType
     - default: false
       name: crossFaction
       type: boolean
@@ -4936,7 +4969,8 @@ C_ClubFinder.PostClub:
 C_ClubFinder.RequestApplicantList:
   inputs:
   - - name: type
-      type: number
+      type:
+        enum: ClubFinderRequestType
   outputs: {}
 C_ClubFinder.RequestClubsList:
   inputs:
@@ -4996,7 +5030,8 @@ C_ClubFinder.RespondToApplicant:
     - name: shouldAccept
       type: boolean
     - name: requestType
-      type: number
+      type:
+        enum: ClubFinderRequestType
     - name: playerName
       type: string
     - name: forceAccept
@@ -5046,7 +5081,8 @@ C_ClubFinder.SendChatWhisper:
     - name: playerGUID
       type: string
     - name: applicantType
-      type: number
+      type:
+        enum: ClubFinderRequestType
     - name: name
       type: string
   outputs: {}
@@ -5651,7 +5687,8 @@ C_Commentator.GetTrackedSpells:
     - name: playerIndex
       type: number
     - name: category
-      type: number
+      type:
+        enum: TrackedSpellCategory
   outputs:
   - name: spells
     nilable: true
@@ -5662,7 +5699,8 @@ C_Commentator.GetTrackedSpellsByUnit:
   - - name: unitToken
       type: string
     - name: category
-      type: number
+      type:
+        enum: TrackedSpellCategory
   outputs:
   - name: spells
     nilable: true
@@ -5733,7 +5771,8 @@ C_Commentator.IsTrackedSpell:
     - name: spellID
       type: number
     - name: category
-      type: number
+      type:
+        enum: TrackedSpellCategory
   outputs:
   - name: isTracked
     type: boolean
@@ -5744,7 +5783,8 @@ C_Commentator.IsTrackedSpellByUnit:
     - name: spellID
       type: number
     - name: category
-      type: number
+      type:
+        enum: TrackedSpellCategory
   outputs:
   - name: isTracked
     type: boolean
@@ -6083,7 +6123,8 @@ C_Console.GetAllCommands:
 C_Console.GetColorFromType:
   inputs:
   - - name: colorType
-      type: number
+      type:
+        enum: ConsoleColorType
   outputs:
   - name: color
     type:
@@ -6140,7 +6181,8 @@ C_Container.GetBagSlotFlag:
   - - name: bagIndex
       type: number
     - name: flag
-      type: number
+      type:
+        enum: BagSlotFlags
   outputs:
   - name: isSet
     type: boolean
@@ -6364,7 +6406,8 @@ C_Container.SetBagSlotFlag:
   - - name: bagIndex
       type: number
     - name: flag
-      type: number
+      type:
+        enum: BagSlotFlags
     - name: isSet
       type: boolean
   outputs: {}
@@ -6479,7 +6522,8 @@ C_ContributionCollector.GetContributionAppearance:
   - - name: contributionID
       type: number
     - name: contributionState
-      type: number
+      type:
+        enum: ContributionState
   outputs:
   - name: appearance
     nilable: true
@@ -6500,7 +6544,8 @@ C_ContributionCollector.GetContributionResult:
       type: number
   outputs:
   - name: result
-    type: number
+    type:
+      enum: ContributionResult
 C_ContributionCollector.GetDescription:
   inputs:
   - - name: contributionID
@@ -6567,7 +6612,8 @@ C_ContributionCollector.GetState:
   outputs:
   - default: 0
     name: contributionState
-    type: number
+    type:
+      enum: ContributionState
   - name: contributionPercentageComplete
     type: number
   - name: timeOfNextStateChange
@@ -6711,7 +6757,8 @@ C_CovenantSanctumUI.GetSanctumType:
   outputs:
   - name: sanctumType
     nilable: true
-    type: number
+    type:
+      enum: GarrTalentFeatureSubtype
 C_CovenantSanctumUI.GetSoulCurrencies:
   inputs:
   - {}
@@ -6752,9 +6799,11 @@ C_CraftingOrders.CalculateCraftingOrderPostingFee:
   - - name: skillLineAbilityID
       type: number
     - name: orderType
-      type: number
+      type:
+        enum: CraftingOrderType
     - name: orderDuration
-      type: number
+      type:
+        enum: CraftingOrderDuration
   outputs:
   - name: deposit
     type: number
@@ -6775,7 +6824,8 @@ C_CraftingOrders.ClaimOrder:
   - - name: orderID
       type: number
     - name: profession
-      type: number
+      type:
+        enum: Profession
   outputs: {}
 C_CraftingOrders.CloseCrafterCraftingOrders:
   inputs:
@@ -6792,7 +6842,8 @@ C_CraftingOrders.FulfillOrder:
     - name: crafterNote
       type: string
     - name: profession
-      type: number
+      type:
+        enum: Profession
   outputs: {}
 C_CraftingOrders.GetClaimedOrder:
   inputs:
@@ -6873,7 +6924,8 @@ C_CraftingOrders.GetNumFavoriteCustomerOptions:
 C_CraftingOrders.GetOrderClaimInfo:
   inputs:
   - - name: profession
-      type: number
+      type:
+        enum: Profession
   outputs:
   - name: claimInfo
     type:
@@ -6937,14 +6989,16 @@ C_CraftingOrders.RejectOrder:
     - name: crafterNote
       type: string
     - name: profession
-      type: number
+      type:
+        enum: Profession
   outputs: {}
 C_CraftingOrders.ReleaseOrder:
   inputs:
   - - name: orderID
       type: number
     - name: profession
-      type: number
+      type:
+        enum: Profession
   outputs: {}
 C_CraftingOrders.RequestCrafterOrders:
   inputs:
@@ -7345,7 +7399,8 @@ C_DeathInfo.GetSelfResurrectOptions:
 C_DeathInfo.UseSelfResurrectOption:
   inputs:
   - - name: optionType
-      type: number
+      type:
+        enum: SelfResurrectOptionType
     - name: id
       type: number
   outputs: {}
@@ -7407,7 +7462,8 @@ C_EditMode.SaveLayouts:
 C_EditMode.SetAccountSetting:
   inputs:
   - - name: setting
-      type: number
+      type:
+        enum: EditModeAccountSetting
     - name: value
       type: number
   outputs: {}
@@ -7475,7 +7531,8 @@ C_EncounterJournal.GetSlotFilter:
   - {}
   outputs:
   - name: filter
-    type: number
+    type:
+      enum: ItemSlotFilterType
 C_EncounterJournal.InstanceHasLoot:
   inputs:
   - - name: instanceID
@@ -7508,7 +7565,8 @@ C_EncounterJournal.SetPreviewPvpTier:
 C_EncounterJournal.SetSlotFilter:
   inputs:
   - - name: filterSlot
-      type: number
+      type:
+        enum: ItemSlotFilterType
   outputs: {}
 C_EquipmentSet.AssignSpecToEquipmentSet:
   inputs:
@@ -7732,7 +7790,8 @@ C_FogOfWar.GetFogOfWarInfo:
 C_FrameManager.GetFrameVisibilityState:
   inputs:
   - - name: frameType
-      type: number
+      type:
+        enum: UIFrameType
   outputs:
   - name: shouldShow
     type: boolean
@@ -7935,7 +7994,8 @@ C_FriendList.SortWho:
 C_GamePad.AddSDLMapping:
   inputs:
   - - name: platform
-      type: number
+      type:
+        enum: ClientPlatformType
     - name: mapping
       type: string
   outputs:
@@ -8058,7 +8118,8 @@ C_GamePad.GetPowerLevel:
       type: number
   outputs:
   - name: powerLevel
-    type: number
+    type:
+      enum: GamePadPowerLevel
 C_GamePad.IsEnabled:
   inputs:
   - {}
@@ -9057,7 +9118,8 @@ C_IncomingSummon.IncomingSummonStatus:
       type: string
   outputs:
   - name: status
-    type: number
+    type:
+      enum: SummonStatus
 C_InvasionInfo.AreInvasionsAvailable:
   inputs:
   - {}
@@ -9287,7 +9349,8 @@ C_Item.GetItemInventoryType:
   outputs:
   - name: inventoryType
     nilable: true
-    type: number
+    type:
+      enum: InventoryType
 C_Item.GetItemInventoryTypeByID:
   inputs:
   - - name: itemInfo
@@ -9295,7 +9358,8 @@ C_Item.GetItemInventoryTypeByID:
   outputs:
   - name: inventoryType
     nilable: true
-    type: number
+    type:
+      enum: InventoryType
 C_Item.GetItemLink:
   inputs:
   - - name: itemLocation
@@ -9369,7 +9433,8 @@ C_Item.GetItemQuality:
   outputs:
   - name: itemQuality
     nilable: true
-    type: number
+    type:
+      enum: ItemQuality
 C_Item.GetItemQualityByID:
   inputs:
   - - name: itemInfo
@@ -9377,7 +9442,8 @@ C_Item.GetItemQualityByID:
   outputs:
   - name: itemQuality
     nilable: true
-    type: number
+    type:
+      enum: ItemQuality
 C_Item.GetItemUniquenessByID:
   inputs:
   - - name: itemInfo
@@ -9731,7 +9797,8 @@ C_KeyBindings.GetCustomBindingType:
   outputs:
   - name: customBindingType
     nilable: true
-    type: number
+    type:
+      enum: CustomBindingType
 C_LegendaryCrafting.CloseRuneforgeInteraction:
   inputs:
   - {}
@@ -9853,7 +9920,8 @@ C_LegendaryCrafting.GetRuneforgePowers:
         structure: ItemLocation
     - name: filter
       nilable: true
-      type: number
+      type:
+        enum: RuneforgePowerFilter
   outputs:
   - name: primaryRuneforgePowerIDs
     type:
@@ -9874,7 +9942,8 @@ C_LegendaryCrafting.GetRuneforgePowersByClassSpecAndCovenant:
       type: number
     - name: filter
       nilable: true
-      type: number
+      type:
+        enum: RuneforgePowerFilter
   outputs:
   - name: runeforgePowerIDs
     type:
@@ -10118,7 +10187,8 @@ C_LFGList.DoesEntryTitleMatchPrebuiltTitle:
       type: number
     - name: playstyle
       nilable: true
-      type: number
+      type:
+        enum: LFGEntryPlaystyle
   outputs:
   - name: matches
     type: boolean
@@ -10285,7 +10355,8 @@ C_LFGList.GetOwnedKeystoneActivityAndGroupAndLevel:
 C_LFGList.GetPlaystyleString:
   inputs:
   - - name: playstyle
-      type: number
+      type:
+        enum: LFGEntryPlaystyle
     - name: activityInfo
       type:
         structure: C_LFGList.GroupFinderActivityInfo
@@ -10379,7 +10450,8 @@ C_LFGList.SetEntryTitle:
       type: number
     - name: playstyle
       nilable: true
-      type: number
+      type:
+        enum: LFGEntryPlaystyle
   outputs: {}
 C_LFGList.SetSearchToActivity:
   inputs:
@@ -10689,7 +10761,8 @@ C_Map.GetMapArtHelpTextPosition:
       type: number
   outputs:
   - name: position
-    type: number
+    type:
+      enum: MapCanvasPosition
 C_Map.GetMapArtID:
   inputs:
   - - name: uiMapID
@@ -10735,7 +10808,8 @@ C_Map.GetMapChildrenInfo:
       type: number
     - name: mapType
       nilable: true
-      type: number
+      type:
+        enum: UIMapType
     - name: allDescendants
       nilable: true
       type: boolean
@@ -11099,7 +11173,8 @@ C_Minimap.GetViewRadius:
 C_Minimap.IsFilteredOut:
   inputs:
   - - name: filterType
-      type: number
+      type:
+        enum: MinimapTrackingFilter
   outputs:
   - name: isFiltered
     type: boolean
@@ -11198,7 +11273,8 @@ C_ModelInfo.GetModelSceneInfoByID:
       type: number
   outputs:
   - name: modelSceneType
-    type: number
+    type:
+      enum: ModelSceneType
   - name: modelCameraIDs
     type:
       arrayof: number
@@ -11827,7 +11903,8 @@ C_Navigation.GetTargetState:
   - {}
   outputs:
   - name: state
-    type: number
+    type:
+      enum: NavigationState
 C_Navigation.HasValidScreenPosition:
   inputs:
   - {}
@@ -12037,7 +12114,8 @@ C_PartyInfo.GetInviteReferralInfo:
   - name: outReferredByName
     type: string
   - name: outRelationType
-    type: number
+    type:
+      enum: PartyRequestJoinRelation
   - name: outIsQuickJoin
     type: boolean
   - name: outClubId
@@ -12599,7 +12677,8 @@ C_PetJournal.GetPetSummonInfo:
   - name: isSummonable
     type: boolean
   - name: error
-    type: number
+    type:
+      enum: PetJournalError
   - name: errorText
     type: string
 C_PetJournal.GetPetTeamAverageLevel: {}
@@ -12788,14 +12867,16 @@ C_PlayerInfo.GetContentDifficultyCreatureForPlayer:
       type: string
   outputs:
   - name: difficulty
-    type: number
+    type:
+      enum: RelativeContentDifficulty
 C_PlayerInfo.GetContentDifficultyQuestForPlayer:
   inputs:
   - - name: questID
       type: number
   outputs:
   - name: difficulty
-    type: number
+    type:
+      enum: RelativeContentDifficulty
 C_PlayerInfo.GetDisplayID:
   inputs:
   - {}
@@ -12952,13 +13033,15 @@ C_PlayerInteractionManager.ClearInteraction:
   inputs:
   - - name: type
       nilable: true
-      type: number
+      type:
+        enum: PlayerInteractionType
   outputs: {}
 C_PlayerInteractionManager.ConfirmationInteraction:
   inputs:
   - - name: type
       nilable: true
-      type: number
+      type:
+        enum: PlayerInteractionType
   outputs: {}
 C_PlayerInteractionManager.InteractUnit:
   inputs:
@@ -12973,7 +13056,8 @@ C_PlayerInteractionManager.InteractUnit:
 C_PlayerInteractionManager.IsInteractingWithNpcOfType:
   inputs:
   - - name: type
-      type: number
+      type:
+        enum: PlayerInteractionType
   outputs:
   - name: interacting
     type: boolean
@@ -12986,7 +13070,8 @@ C_PlayerInteractionManager.IsReplacingUnit:
 C_PlayerInteractionManager.IsValidNPCInteraction:
   inputs:
   - - name: type
-      type: number
+      type:
+        enum: PlayerInteractionType
   outputs:
   - name: isValidInteraction
     type: boolean
@@ -13021,7 +13106,8 @@ C_PlayerMentorship.GetMentorshipStatus:
         structure: PlayerLocation
   outputs:
   - name: status
-    type: number
+    type:
+      enum: PlayerMentorshipStatus
 C_PlayerMentorship.IsActivePlayerConsideredNewcomer:
   inputs:
   - {}
@@ -13167,7 +13253,8 @@ C_ProfSpecs.GetStateForPath:
       type: number
   outputs:
   - name: state
-    type: number
+    type:
+      enum: ProfessionsSpecPathState
 C_ProfSpecs.GetStateForPerk:
   inputs:
   - - name: perkID
@@ -13176,7 +13263,8 @@ C_ProfSpecs.GetStateForPerk:
       type: number
   outputs:
   - name: state
-    type: number
+    type:
+      enum: ProfessionsSpecPerkState
 C_ProfSpecs.GetStateForTab:
   inputs:
   - - name: tabTreeID
@@ -13185,7 +13273,8 @@ C_ProfSpecs.GetStateForTab:
       type: number
   outputs:
   - name: tabInfo
-    type: number
+    type:
+      enum: ProfessionsSpecTabState
 C_ProfSpecs.GetTabInfo:
   inputs:
   - - name: tabTreeID
@@ -13324,7 +13413,8 @@ C_PvP.GetActiveMatchState:
   - {}
   outputs:
   - name: state
-    type: number
+    type:
+      enum: PvPMatchState
 C_PvP.GetActiveMatchWinner:
   inputs:
   - {}
@@ -13424,7 +13514,8 @@ C_PvP.GetBattlefieldVehicles:
 C_PvP.GetBrawlRewards:
   inputs:
   - - name: brawlType
-      type: number
+      type:
+        enum: BrawlType
   outputs:
   - name: honor
     type: number
@@ -13967,7 +14058,8 @@ C_QuestLog.AddQuestWatch:
       type: number
     - name: watchType
       nilable: true
-      type: number
+      type:
+        enum: QuestWatchType
   outputs:
   - name: wasWatched
     type: boolean
@@ -13977,7 +14069,8 @@ C_QuestLog.AddWorldQuestWatch:
       type: number
     - name: watchType
       nilable: true
-      type: number
+      type:
+        enum: QuestWatchType
   outputs:
   - name: wasWatched
     type: boolean
@@ -14040,7 +14133,8 @@ C_QuestLog.GetBountySetInfoForMapID:
       type: number
   outputs:
   - name: displayLocation
-    type: number
+    type:
+      enum: MapOverlayDisplayLocation
   - name: lockQuestID
     type: number
   - name: bountySetID
@@ -14270,7 +14364,8 @@ C_QuestLog.GetQuestWatchType:
   outputs:
   - name: watchType
     nilable: true
-    type: number
+    type:
+      enum: QuestWatchType
 C_QuestLog.GetRequiredMoney:
   inputs:
   - - name: questID
@@ -14610,13 +14705,15 @@ C_QuestSession.GetAvailableSessionCommand:
   - {}
   outputs:
   - name: command
-    type: number
+    type:
+      enum: QuestSessionCommand
 C_QuestSession.GetPendingCommand:
   inputs:
   - {}
   outputs:
   - name: command
-    type: number
+    type:
+      enum: QuestSessionCommand
 C_QuestSession.GetProposedMaxLevelForSession:
   inputs:
   - {}
@@ -14781,32 +14878,39 @@ C_ReportSystem.CanReportPlayerForLanguage:
 C_ReportSystem.GetMajorCategoriesForReportType:
   inputs:
   - - name: reportType
-      type: number
+      type:
+        enum: ReportType
   outputs:
   - name: majorCategories
     type:
-      arrayof: number
+      arrayof:
+        enum: ReportMajorCategory
 C_ReportSystem.GetMajorCategoryString:
   inputs:
   - - name: majorCategory
-      type: number
+      type:
+        enum: ReportMajorCategory
   outputs:
   - name: majorCategoryString
     type: string
 C_ReportSystem.GetMinorCategoriesForReportTypeAndMajorCategory:
   inputs:
   - - name: reportType
-      type: number
+      type:
+        enum: ReportType
     - name: majorCategory
-      type: number
+      type:
+        enum: ReportMajorCategory
   outputs:
   - name: minorCategories
     type:
-      arrayof: number
+      arrayof:
+        enum: ReportMinorCategory
 C_ReportSystem.GetMinorCategoryString:
   inputs:
   - - name: minorCategory
-      type: number
+      type:
+        enum: ReportMinorCategory
   outputs:
   - name: minorCategoryString
     type: string
@@ -14901,7 +15005,8 @@ C_Scenario.TreatScenarioAsDungeon: {}
 C_ScenarioInfo.GetJailersTowerTypeString:
   inputs:
   - - name: runType
-      type: number
+      type:
+        enum: JailersTowerType
   outputs:
   - name: typeString
     nilable: true
@@ -15306,7 +15411,8 @@ C_Soulbinds.GetActiveSoulbindID:
 C_Soulbinds.GetConduitCollection:
   inputs:
   - - name: conduitType
-      type: number
+      type:
+        enum: SoulbindConduitType
   outputs:
   - name: collectionData
     type:
@@ -15495,7 +15601,8 @@ C_Soulbinds.ModifyNode:
     - name: conduitID
       type: number
     - name: type
-      type: number
+      type:
+        enum: SoulbindConduitTransactionType
   outputs: {}
 C_Soulbinds.SelectNode:
   inputs:
@@ -15524,7 +15631,8 @@ C_Sound.IsPlaying:
 C_Sound.PlayItemSound:
   inputs:
   - - name: soundType
-      type: number
+      type:
+        enum: ItemSoundType
     - name: itemLocation
       type:
         mixin: ItemLocationMixin
@@ -15902,7 +16010,8 @@ C_SuperTrack.GetHighestPrioritySuperTrackingType:
   outputs:
   - name: type
     nilable: true
-    type: number
+    type:
+      enum: SuperTrackingType
 C_SuperTrack.GetSuperTrackedQuestID:
   inputs:
   - {}
@@ -15955,7 +16064,8 @@ C_System.GetFrameStack:
 C_SystemVisibilityManager.IsSystemVisible:
   inputs:
   - - name: system
-      type: number
+      type:
+        enum: UISystemType
   outputs:
   - name: visible
     type: boolean
@@ -16235,7 +16345,8 @@ C_TooltipInfo.GetAzeriteEssence:
 C_TooltipInfo.GetAzeriteEssenceSlot:
   inputs:
   - - name: slot
-      type: number
+      type:
+        enum: AzeriteEssenceSlot
   outputs:
   - name: data
     type:
@@ -17446,7 +17557,8 @@ C_TradeSkillUI.GetProfessionByInventorySlot:
   outputs:
   - name: profession
     nilable: true
-    type: number
+    type:
+      enum: Profession
 C_TradeSkillUI.GetProfessionChildSkillLineID:
   inputs:
   - {}
@@ -17459,7 +17571,8 @@ C_TradeSkillUI.GetProfessionForCursorItem:
   outputs:
   - name: profession
     nilable: true
-    type: number
+    type:
+      enum: Profession
 C_TradeSkillUI.GetProfessionInfoBySkillLineID:
   inputs:
   - - name: skillLineID
@@ -17485,14 +17598,16 @@ C_TradeSkillUI.GetProfessionNameForSkillLineAbility:
 C_TradeSkillUI.GetProfessionSkillLineID:
   inputs:
   - - name: profession
-      type: number
+      type:
+        enum: Profession
   outputs:
   - name: skillLineID
     type: number
 C_TradeSkillUI.GetProfessionSlots:
   inputs:
   - - name: profession
-      type: number
+      type:
+        enum: Profession
   outputs:
   - name: slots
     type:
@@ -17743,7 +17858,8 @@ C_TradeSkillUI.IsInventorySlotFiltered: {}
 C_TradeSkillUI.IsNearProfessionSpellFocus:
   inputs:
   - - name: profession
-      type: number
+      type:
+        enum: Profession
   outputs:
   - name: nearFocus
     type: boolean
@@ -18015,7 +18131,8 @@ C_Traits.GetConfigInfo:
 C_Traits.GetConfigsByType:
   inputs:
   - - name: configType
-      type: number
+      type:
+        enum: TraitConfigType
   outputs:
   - name: configIDs
     type:
@@ -18323,7 +18440,8 @@ C_Transmog.GetBaseCategory:
       type: number
   outputs:
   - name: categoryID
-    type: number
+    type:
+      enum: TransmogCollectionType
 C_Transmog.GetCreatureDisplayIDForSource:
   inputs:
   - - name: itemModifiedAppearanceID
@@ -18359,7 +18477,8 @@ C_Transmog.GetSlotEffectiveCategory:
         structure: TransmogLocation
   outputs:
   - name: categoryID
-    type: number
+    type:
+      enum: TransmogCollectionType
 C_Transmog.GetSlotForInventoryType:
   inputs:
   - - name: inventoryType
@@ -18494,7 +18613,8 @@ C_TransmogCollection.ClearNewAppearance:
 C_TransmogCollection.ClearSearch:
   inputs:
   - - name: searchType
-      type: number
+      type:
+        enum: TransmogSearchType
   outputs:
   - name: completed
     type: boolean
@@ -18521,7 +18641,8 @@ C_TransmogCollection.GetAppearanceCameraID:
       type: number
     - name: variation
       nilable: true
-      type: number
+      type:
+        enum: TransmogCameraVariation
   outputs:
   - name: cameraID
     type: number
@@ -18531,7 +18652,8 @@ C_TransmogCollection.GetAppearanceCameraIDBySource:
       type: number
     - name: variation
       nilable: true
-      type: number
+      type:
+        enum: TransmogCameraVariation
   outputs:
   - name: cameraID
     type: number
@@ -18558,7 +18680,8 @@ C_TransmogCollection.GetAppearanceSourceInfo:
       type: number
   outputs:
   - name: category
-    type: number
+    type:
+      enum: TransmogCollectionType
   - name: itemAppearanceID
     type: number
   - name: canHaveIllusion
@@ -18582,7 +18705,8 @@ C_TransmogCollection.GetAppearanceSources:
       type: number
     - name: categoryType
       nilable: true
-      type: number
+      type:
+        enum: TransmogCollectionType
     - name: transmogLocation
       nilable: true
       type:
@@ -18605,7 +18729,8 @@ C_TransmogCollection.GetArtifactAppearanceStrings:
 C_TransmogCollection.GetCategoryAppearances:
   inputs:
   - - name: category
-      type: number
+      type:
+        enum: TransmogCollectionType
     - name: transmogLocation
       nilable: true
       type:
@@ -18619,7 +18744,8 @@ C_TransmogCollection.GetCategoryAppearances:
 C_TransmogCollection.GetCategoryCollectedCount:
   inputs:
   - - name: category
-      type: number
+      type:
+        enum: TransmogCollectionType
   outputs:
   - name: count
     type: number
@@ -18629,11 +18755,13 @@ C_TransmogCollection.GetCategoryForItem:
       type: number
   outputs:
   - name: collectionCategory
-    type: number
+    type:
+      enum: TransmogCollectionType
 C_TransmogCollection.GetCategoryInfo:
   inputs:
   - - name: category
-      type: number
+      type:
+        enum: TransmogCollectionType
   outputs:
   - name: name
     type: string
@@ -18652,7 +18780,8 @@ C_TransmogCollection.GetCategoryInfo:
 C_TransmogCollection.GetCategoryTotal:
   inputs:
   - - name: category
-      type: number
+      type:
+        enum: TransmogCollectionType
   outputs:
   - name: total
     type: number
@@ -18735,7 +18864,9 @@ C_TransmogCollection.GetLatestAppearance:
   - name: visualID
     type: number
   - name: category
-    type: number
+    stub: 1
+    type:
+      enum: TransmogCollectionType
 C_TransmogCollection.GetNumMaxOutfits:
   inputs:
   - {}
@@ -18838,7 +18969,8 @@ C_TransmogCollection.IsAppearanceHiddenVisual:
 C_TransmogCollection.IsCategoryValidForItem:
   inputs:
   - - name: category
-      type: number
+      type:
+        enum: TransmogCollectionType
     - name: itemInfo
       type: string
   outputs:
@@ -18860,7 +18992,8 @@ C_TransmogCollection.IsSearchDBLoading:
 C_TransmogCollection.IsSearchInProgress:
   inputs:
   - - name: searchType
-      type: number
+      type:
+        enum: TransmogSearchType
   outputs:
   - name: inProgress
     type: boolean
@@ -18948,14 +19081,16 @@ C_TransmogCollection.RenameOutfit:
 C_TransmogCollection.SearchProgress:
   inputs:
   - - name: searchType
-      type: number
+      type:
+        enum: TransmogSearchType
   outputs:
   - name: progress
     type: number
 C_TransmogCollection.SearchSize:
   inputs:
   - - name: searchType
-      type: number
+      type:
+        enum: TransmogSearchType
   outputs:
   - name: size
     type: number
@@ -18988,7 +19123,8 @@ C_TransmogCollection.SetIsAppearanceFavorite:
 C_TransmogCollection.SetSearch:
   inputs:
   - - name: searchType
-      type: number
+      type:
+        enum: TransmogSearchType
     - name: searchText
       type: string
   outputs:
@@ -18997,7 +19133,8 @@ C_TransmogCollection.SetSearch:
 C_TransmogCollection.SetSearchAndFilterCategory:
   inputs:
   - - name: category
-      type: number
+      type:
+        enum: TransmogCollectionType
   outputs: {}
 C_TransmogCollection.SetSourceTypeFilter:
   inputs:
@@ -19276,7 +19413,8 @@ C_TTSSettings.GetChatTypeEnabled:
 C_TTSSettings.GetSetting:
   inputs:
   - - name: setting
-      type: number
+      type:
+        enum: TtsBoolSetting
   outputs:
   - name: enabled
     type: boolean
@@ -19295,14 +19433,16 @@ C_TTSSettings.GetSpeechVolume:
 C_TTSSettings.GetVoiceOptionID:
   inputs:
   - - name: voiceType
-      type: number
+      type:
+        enum: TtsVoiceType
   outputs:
   - name: voiceID
     type: number
 C_TTSSettings.GetVoiceOptionName:
   inputs:
   - - name: voiceType
-      type: number
+      type:
+        enum: TtsVoiceType
   outputs:
   - name: voiceName
     type: string
@@ -19342,7 +19482,8 @@ C_TTSSettings.SetDefaultSettings:
 C_TTSSettings.SetSetting:
   inputs:
   - - name: setting
-      type: number
+      type:
+        enum: TtsBoolSetting
     - default: false
       name: newVal
       type: boolean
@@ -19360,14 +19501,16 @@ C_TTSSettings.SetSpeechVolume:
 C_TTSSettings.SetVoiceOption:
   inputs:
   - - name: voiceType
-      type: number
+      type:
+        enum: TtsVoiceType
     - name: voiceID
       type: number
   outputs: {}
 C_TTSSettings.SetVoiceOptionName:
   inputs:
   - - name: voiceType
-      type: number
+      type:
+        enum: TtsVoiceType
     - name: voiceName
       type: string
   outputs: {}
@@ -19915,7 +20058,8 @@ C_VoiceChat.CreateChannel:
       type: string
   outputs:
   - name: status
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 C_VoiceChat.DeactivateChannel:
   inputs:
   - - name: channelID
@@ -19943,7 +20087,8 @@ C_VoiceChat.GetActiveChannelType:
   outputs:
   - name: channelType
     nilable: true
-    type: number
+    type:
+      enum: ChatChannelType
 C_VoiceChat.GetAvailableInputDevices:
   inputs:
   - {}
@@ -19974,7 +20119,8 @@ C_VoiceChat.GetChannel:
 C_VoiceChat.GetChannelForChannelType:
   inputs:
   - - name: channelType
-      type: number
+      type:
+        enum: ChatChannelType
   outputs:
   - name: channel
     nilable: true
@@ -19997,14 +20143,16 @@ C_VoiceChat.GetCommunicationMode:
   outputs:
   - name: communicationMode
     nilable: true
-    type: number
+    type:
+      enum: CommunicationMode
 C_VoiceChat.GetCurrentVoiceChatConnectionStatusCode:
   inputs:
   - {}
   outputs:
   - name: statusCode
     nilable: true
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 C_VoiceChat.GetInputVolume:
   inputs:
   - {}
@@ -20019,7 +20167,8 @@ C_VoiceChat.GetJoinClubVoiceChannelError:
   outputs:
   - name: errorReason
     nilable: true
-    type: number
+    type:
+      enum: VoiceChannelErrorReason
 C_VoiceChat.GetLocalPlayerActiveChannelMemberInfo:
   inputs:
   - {}
@@ -20148,7 +20297,8 @@ C_VoiceChat.GetVADSensitivity:
 C_VoiceChat.IsChannelJoinPending:
   inputs:
   - - name: channelType
-      type: number
+      type:
+        enum: ChatChannelType
     - name: clubId
       nilable: true
       type: string
@@ -20285,13 +20435,15 @@ C_VoiceChat.Login:
   - {}
   outputs:
   - name: status
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 C_VoiceChat.Logout:
   inputs:
   - {}
   outputs:
   - name: status
-    type: number
+    type:
+      enum: VoiceChatStatusCode
 C_VoiceChat.MarkChannelsDiscovered:
   inputs:
   - {}
@@ -20306,7 +20458,8 @@ C_VoiceChat.RequestJoinAndActivateCommunityStreamChannel:
 C_VoiceChat.RequestJoinChannelByChannelType:
   inputs:
   - - name: channelType
-      type: number
+      type:
+        enum: ChatChannelType
     - name: autoActivate
       nilable: true
       type: boolean
@@ -20314,7 +20467,8 @@ C_VoiceChat.RequestJoinChannelByChannelType:
 C_VoiceChat.SetCommunicationMode:
   inputs:
   - - name: communicationMode
-      type: number
+      type:
+        enum: CommunicationMode
   outputs: {}
 C_VoiceChat.SetDeafened:
   inputs:
@@ -20407,7 +20561,8 @@ C_VoiceChat.SpeakText:
     - name: text
       type: string
     - name: destination
-      type: number
+      type:
+        enum: VoiceTtsDestination
     - name: rate
       type: number
     - name: volume
@@ -20457,7 +20612,8 @@ C_WeeklyRewards.GetActivities:
   inputs:
   - - name: type
       nilable: true
-      type: number
+      type:
+        enum: WeeklyRewardChestThresholdType
   outputs:
   - name: activities
     type:
@@ -20466,7 +20622,8 @@ C_WeeklyRewards.GetActivities:
 C_WeeklyRewards.GetActivityEncounterInfo:
   inputs:
   - - name: type
-      type: number
+      type:
+        enum: WeeklyRewardChestThresholdType
     - name: index
       type: number
   outputs:
@@ -26500,7 +26657,8 @@ SendMail: {}
 SendSubscriptionInterstitialResponse:
   inputs:
   - - name: response
-      type: number
+      type:
+        enum: SubscriptionInterstitialResponseType
   outputs: {}
 SendSystemMessage:
   impl: SendSystemMessage
@@ -26692,7 +26850,8 @@ SetUnitCursorTexture:
       type: string
     - name: style
       nilable: true
-      type: number
+      type:
+        enum: CursorStyle
     - name: includeLowPriority
       nilable: true
       type: boolean
@@ -27588,7 +27747,8 @@ UnitPartialPower:
       type: string
     - default: NumPowerTypes
       name: powerType
-      type: number
+      type:
+        enum: PowerType
     - default: false
       name: unmodified
       type: boolean
@@ -27610,7 +27770,8 @@ UnitPhaseReason:
   outputs:
   - name: reason
     nilable: true
-    type: number
+    type:
+      enum: PhaseReason
 UnitPlayerControlled:
   inputs:
   - - nilable: true
@@ -27640,7 +27801,8 @@ UnitPower:
       type: string
     - default: NumPowerTypes
       name: powerType
-      type: number
+      type:
+        enum: PowerType
     - default: false
       name: unmodified
       type: boolean
@@ -27658,7 +27820,8 @@ UnitPowerBarTimerInfo: {}
 UnitPowerDisplayMod:
   inputs:
   - - name: powerType
-      type: number
+      type:
+        enum: PowerType
   outputs:
   - name: displayMod
     type: number
@@ -27668,7 +27831,8 @@ UnitPowerMax:
       type: string
     - default: NumPowerTypes
       name: powerType
-      type: number
+      type:
+        enum: PowerType
     - default: false
       name: unmodified
       type: boolean
@@ -27702,7 +27866,8 @@ UnitPvpClassification:
   outputs:
   - name: classification
     nilable: true
-    type: number
+    type:
+      enum: PvPUnitClassification
 UnitPVPName:
   inputs:
   - - type: string
