@@ -60,6 +60,15 @@ local function loadFunctions(api, loader)
     impls[k] = loadstring(v)
   end
 
+  local enumrev = {}
+  for k, v in pairs(datalua.globals.Enum) do
+    local t = {}
+    for vk, vv in pairs(v) do
+      t[vv] = vk
+    end
+    enumrev[k] = t
+  end
+
   local frameworks = {
     api = api, -- TODO replace api framework with something finer grained
     datalua = api.datalua,
@@ -123,15 +132,8 @@ local function loadFunctions(api, loader)
       end
       local function checkarg(val, ty)
         if type(val) ~= ty then
-          error(
-            ('arg %d (%q) of %q is of type %q, but %q was passed'):format(
-              i,
-              tostring(param.name),
-              fname,
-              typestr(param.type),
-              type(arg)
-            )
-          )
+          local fmt = 'arg %d (%q) of %q is of type %q, but %q was passed'
+          error(fmt:format(i, tostring(param.name), fname, typestr(param.type), type(arg)))
         end
         return val
       end
@@ -149,8 +151,12 @@ local function loadFunctions(api, loader)
       elseif param.type == 'function' or param.type == 'table' or param.type == 'boolean' then
         return checkarg(arg, param.type)
       elseif param.type.enum then
-        -- TODO better enum checking
-        return checkarg(type(arg) == 'string' and tonumber(arg) or arg, 'number')
+        local v = checkarg(type(arg) == 'string' and tonumber(arg) or arg, 'number')
+        if not enumrev[param.type.enum][v] then
+          local fmt = 'warning: arg %d (%q) of %q is of enum type %q, which does not have value %d'
+          api.log(1, fmt, i, tostring(param.name), fname, param.type.enum, v)
+        end
+        return v
       elseif param.type.structure then
         -- TODO better structure checking
         return checkarg(arg, 'table')
