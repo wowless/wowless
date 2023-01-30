@@ -79,16 +79,6 @@ local specDefault = (function()
   return specDefault
 end)()
 
-local getStub = (function()
-  return function(sig)
-    local rets = {}
-    for _, out in ipairs(sig) do
-      table.insert(rets, out.type.arrayof and not out.stub and '{}' or specDefault(out))
-    end
-    return 'return ' .. table.concat(rets, ', ')
-  end
-end)()
-
 local apis = {}
 local impls = {}
 local sqlcursors = {}
@@ -107,7 +97,11 @@ do
           impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
         end
       else
-        apicfg.stub = getStub(apicfg.outputs or {})
+        local rets = {}
+        for _, out in ipairs(apicfg.outputs or {}) do
+          table.insert(rets, out.type.arrayof and not out.stub and '{}' or specDefault(out))
+        end
+        apicfg.stub = 'return ' .. table.concat(rets, ',')
       end
       for _, sql in ipairs(apicfg.sqls or {}) do
         if sql.cursor then
