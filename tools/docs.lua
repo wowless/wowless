@@ -138,9 +138,14 @@ local knownMixinStructs = {
   Vector2DMixin = 'Vector2D',
   Vector3DMixin = 'Vector3D',
 }
-local function t2ty(t, ns, mixin)
-  if t == 'table' and mixin then
-    return assert(knownMixinStructs[mixin], 'no struct for mixin ' .. mixin), true
+local function t2nty(field, ns)
+  local t = field.Type
+  if field.InnerType then
+    assert(t == 'table')
+    return { arrayof = t2nty({ Type = field.InnerType }, ns) }
+  elseif t == 'table' and field.Mixin then
+    local mst = assert(knownMixinStructs[field.Mixin], 'no struct for mixin ' .. field.Mixin)
+    return { mixin = field.Mixin, structure = mst }
   elseif types[t] then
     return types[t]
   end
@@ -150,22 +155,11 @@ local function t2ty(t, ns, mixin)
   if ty == 'Enumeration' or ty == 'Constants' then
     return 'number'
   elseif ty == 'Structure' then
-    return n, true
+    return { mixin = field.Mixin, structure = n }
   elseif ty == 'CallbackType' then
     return 'function'
   else
     error(('%s has unexpected type %s'):format(n, ty))
-  end
-end
-local function t2nty(field, ns)
-  if field.InnerType then
-    return { arrayof = t2nty({ Type = field.InnerType }, ns) }
-  end
-  local ty, isstruct = t2ty(field.Type, ns, field.Mixin)
-  if isstruct then
-    return { mixin = field.Mixin, structure = ty }
-  else
-    return ty
   end
 end
 
