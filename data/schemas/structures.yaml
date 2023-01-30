@@ -14,7 +14,8 @@ type:
             nilable:
               type: boolean
             stub:
-              type: string
+              type:
+                schema: any
             type:
               required: true
               type:
