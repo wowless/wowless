@@ -1,4 +1,4 @@
-local allTypes = { 'apis', 'constants', 'enums', 'events', 'structures' }
+local allTypes = { 'apis', 'events', 'structures' }
 local args = (function()
   local parser = require('argparse')()
   parser:argument('product', 'product to process')
@@ -236,56 +236,6 @@ local rewriters = {
       assert(nss[k], k .. ' in skip_namespaces but not in docs')
     end
     require('pl.file').write(f, y.pprint(apis))
-  end,
-
-  constants = function()
-    local t = {}
-    for _, v in pairs(tabs) do
-      if v.Type == 'Constants' then
-        local vt = {}
-        assert(type(v.Values) == 'table')
-        for _, fv in ipairs(v.Values) do
-          assert(type(fv.Name) == 'string', 'missing name for field of ' .. v.Name)
-          -- TODO fv.Type validation
-          -- TODO support non-number-literal constants
-          vt[fv.Name] = type(fv.Value) == 'number' and fv.Value or 0
-        end
-        t[v.Name] = vt
-      end
-    end
-    local y = require('wowapi.yaml')
-    local f = 'data/products/' .. product .. '/globals.yaml'
-    local g = y.parseFile(f)
-    for k, v in pairs(t) do
-      g.Constants[k] = v
-    end
-    require('pl.file').write(f, y.pprint(g))
-  end,
-
-  enums = function()
-    local t = {}
-    for _, v in pairs(tabs) do
-      if v.Type == 'Enumeration' then
-        local vt = {}
-        for _, fv in ipairs(v.Fields) do
-          assert(fv.Type == v.Name, 'wrong type for ' .. v.Name .. '.' .. fv.Name)
-          vt[fv.Name] = fv.EnumValue
-        end
-        t[v.Name] = vt
-        t[v.Name .. 'Meta'] = {
-          MaxValue = v.MaxValue,
-          MinValue = v.MinValue,
-          NumValues = v.NumValues,
-        }
-      end
-    end
-    local y = require('wowapi.yaml')
-    local f = 'data/products/' .. product .. '/globals.yaml'
-    local g = y.parseFile(f)
-    for k, v in pairs(t) do
-      g.Enum[k] = v
-    end
-    require('pl.file').write(f, y.pprint(g))
   end,
 
   events = function()
