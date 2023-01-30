@@ -1181,6 +1181,7 @@ C_GossipInfo.FriendshipReputationRankInfo:
     type: number
 C_GossipInfo.GossipOptionUIInfo:
   flags:
+    stub: 0
     type: number
   gossipOptionID:
     type: number
