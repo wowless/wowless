@@ -54,7 +54,6 @@ local function loadFunctions(api, loader)
   api.log(1, 'loading functions')
   local datalua = api.datalua
   local apis = datalua.apis
-  local structures = datalua.structures
   local sqls = loadSqls(loader.sqlitedb, datalua.sqlcursors, datalua.sqllookups)
   local impls = {}
   for k, v in pairs(datalua.impls) do
@@ -116,13 +115,13 @@ local function loadFunctions(api, loader)
           elseif param.type == 'string' and ty == 'number' then
             arg = tostring(arg) or arg
             ty = type(arg)
-          elseif param.type == 'unknown' or structures[param.type] ~= nil then
+          elseif param.type == 'unknown' then
             ty = param.type
           elseif param.type == 'unit' and ty == 'string' then
             arg = resolveUnit(api.states.Units, arg)
             ty = 'unit'
           end
-          if ty ~= param.type then
+          if ty ~= param.type and type(param.type) ~= 'table' then
             error(
               ('arg %d (%q) of %q is of type %q, but %q was passed'):format(
                 i,

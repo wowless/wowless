@@ -154,11 +154,6 @@ for _, f in ipairs(require('pl.dir').getfiles('data/state')) do
   state[cfg.name] = cfg.value
 end
 
-local structures = {}
-for k in pairs(parseYaml('data/products/' .. product .. '/structures.yaml')) do
-  structures[k] = true
-end
-
 local uiobjects = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/uiobjects.yaml')) do
   local methods = {}
@@ -183,7 +178,6 @@ local data = {
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
   state = state,
-  structures = structures,
   uiobjects = uiobjects,
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
 }
