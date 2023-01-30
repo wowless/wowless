@@ -185,11 +185,9 @@ local rewriters = {
       for _, a in ipairs(fn.Arguments or {}) do
         table.insert(t, {
           default = a.Default,
-          innerType = a.InnerType and t2ty(a.InnerType, ns),
-          mixin = a.Mixin,
           name = a.Name,
           nilable = a.Nilable or nil,
-          type = t2ty(a.Type, ns, a.Mixin),
+          type = t2nty(a, ns),
         })
       end
       return t
@@ -199,11 +197,9 @@ local rewriters = {
       for _, r in ipairs(fn.Returns or {}) do
         table.insert(outputs, {
           default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
-          innerType = r.InnerType and t2ty(r.InnerType, ns),
-          mixin = r.Mixin,
           name = r.Name,
           nilable = r.Nilable or nil,
-          type = t2ty(r.Type, ns, r.Mixin),
+          type = t2nty(r, ns),
         })
       end
       return outputs
