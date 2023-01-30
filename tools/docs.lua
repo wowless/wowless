@@ -336,12 +336,12 @@ local rewriters = {
         local ns = split(name)
         out[name] = (function()
           local ret = {}
-          for _, field in ipairs(tab.Fields) do
-            ret[field.Name] = {
-              default = field.Default,
-              nilable = field.Nilable or nil,
-              stub = deref(out, name, field.Name, 'stub') or stubs[field.Type],
-              type = t2nty(field, ns),
+          for _, f in ipairs(tab.Fields) do
+            ret[f.Name] = {
+              default = enum[f.Type] and enum[f.Type][f.Default] or f.Default,
+              nilable = f.Nilable or nil,
+              stub = deref(out, name, f.Name, 'stub') or stubs[f.Type],
+              type = t2nty(f, ns),
             }
           end
           return ret

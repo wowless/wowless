@@ -1,7 +1,7 @@
 ---
 AppearanceSourceInfo:
   categoryID:
-    default: None
+    default: 0
     type: number
   inventorySlot:
     nilable: true
@@ -4767,7 +4767,7 @@ C_TooltipComparison.TooltipItemComparisonInfo:
   item:
     type: table
   method:
-    default: Single
+    default: 0
     type: number
 C_Traits.TraitCondInfo:
   achievementID:
@@ -6909,7 +6909,7 @@ CraftingReagentSlotSchematic:
   dataSlotIndex:
     type: number
   dataSlotType:
-    default: Reagent
+    default: 1
     type: number
   orderSource:
     nilable: true
@@ -6970,7 +6970,7 @@ CraftingRecipeSchematic:
   recipeID:
     type: number
   recipeType:
-    default: Item
+    default: 1
     type: number
 CraftingResourceReturnInfo:
   itemID:
