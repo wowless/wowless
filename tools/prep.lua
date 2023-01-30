@@ -99,7 +99,7 @@ do
       else
         local rets = {}
         for _, out in ipairs(apicfg.outputs or {}) do
-          table.insert(rets, out.type.arrayof and not out.stub and '{}' or specDefault(out))
+          table.insert(rets, specDefault(out))
         end
         apicfg.stub = 'return ' .. table.concat(rets, ',')
       end

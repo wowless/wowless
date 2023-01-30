@@ -14575,6 +14575,7 @@ C_QuestOffer.GetQuestOfferMajorFactionReputationRewards:
   - {}
   outputs:
   - name: reputationRewards
+    stub: {}
     type:
       arrayof:
         structure: QuestReputationRewardInfo
@@ -17352,7 +17353,8 @@ C_TradeSkillUI.GetFilteredRecipeIDs:
   inputs:
   - {}
   outputs:
-  - type:
+  - stub: {}
+    type:
       arrayof: number
 C_TradeSkillUI.GetGatheringOperationInfo:
   inputs:
