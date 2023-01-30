@@ -30,10 +30,6 @@ type:
                     default:
                       type:
                         schema: any
-                    innerType:
-                      type: string
-                    mixin:
-                      type: string
                     name:
                       type: string
                     nilable:
@@ -41,15 +37,7 @@ type:
                     type:
                       required: true
                       type:
-                        oneof:
-                        - literal: boolean
-                        - literal: function
-                        - literal: number
-                        - literal: string
-                        - literal: table
-                        - literal: unit
-                        - literal: unknown
-                        - ref: structure
+                        schema: type
           mayreturnnothing:
             type: boolean
           nowrap:
@@ -61,17 +49,6 @@ type:
                   default:
                     type:
                       schema: any
-                  innerType:
-                    type:
-                      oneof:
-                      - literal: boolean
-                      - literal: number
-                      - literal: string
-                      - literal: table
-                      - literal: unknown
-                      - ref: structure
-                  mixin:
-                    type: string
                   name:
                     type: string
                   nilable:
@@ -82,17 +59,7 @@ type:
                   type:
                     required: true
                     type:
-                      oneof:
-                      - literal: boolean
-                      - literal: function
-                      - literal: nil
-                      - literal: number
-                      - literal: oneornil
-                      - literal: string
-                      - literal: table
-                      - literal: unknown
-                      - literal: userdata
-                      - ref: structure
+                      schema: type
           protection:
             type:
               oneof:

@@ -4,9 +4,14 @@ type:
   oneof:
   - literal: boolean
   - literal: function
+  - literal: nil
   - literal: number
+  - literal: oneornil
   - literal: string
   - literal: table
+  - literal: unit
+  - literal: unknown
+  - literal: userdata
   - record:
       mixin:
         type: string

@@ -74,10 +74,6 @@ local specDefault = (function()
     if ty.structure then
       return valstruct(ty.structure, ty.mixin)
     end
-    -- TODO remove this when api specs are refactored
-    if structures[ty] then
-      return valstruct(ty, spec.mixin)
-    end
     error('unexpected type: ' .. require('pl.pretty').write(ty))
   end
   return specDefault
@@ -87,7 +83,7 @@ local getStub = (function()
   return function(sig)
     local rets = {}
     for _, out in ipairs(sig) do
-      table.insert(rets, specDefault(out))
+      table.insert(rets, out.type.arrayof and not out.stub and '{}' or specDefault(out))
     end
     return 'return ' .. table.concat(rets, ', ')
   end
@@ -158,11 +154,6 @@ for _, f in ipairs(require('pl.dir').getfiles('data/state')) do
   state[cfg.name] = cfg.value
 end
 
-local structures = {}
-for k in pairs(parseYaml('data/products/' .. product .. '/structures.yaml')) do
-  structures[k] = true
-end
-
 local uiobjects = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/uiobjects.yaml')) do
   local methods = {}
@@ -187,7 +178,6 @@ local data = {
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
   state = state,
-  structures = structures,
   uiobjects = uiobjects,
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
 }
