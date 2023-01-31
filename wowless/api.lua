@@ -6,7 +6,7 @@ local function new(log, maxErrors, product)
   local env = {}
   local errors = 0
   local eventRegistrations = {}
-  local frames = {}
+  local frames = hlist()
   local states = {}
   local templates = {}
   local uiobjectTypes = {}
@@ -154,8 +154,7 @@ local function new(log, maxErrors, product)
     objtype.constructor(obj)
     SetParent(obj, parent)
     if InheritsFrom(typename, 'frame') then
-      table.insert(frames, obj)
-      u(obj).frameIndex = #frames
+      frames:insert(obj)
     end
     local tmpls = {}
     if objtype.template then
@@ -257,7 +256,7 @@ local function new(log, maxErrors, product)
       log(2, 'running timer %.2f %s', timer.pri, tostring(timer.val))
       CallSafely(timer.val)
     end
-    for _, frame in ipairs(frames) do
+    for frame in frames:entries() do
       if frame.IsVisible and frame:IsVisible() then
         RunScript(frame, 'OnUpdate', 1)
       end
