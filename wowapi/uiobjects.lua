@@ -20,21 +20,18 @@ local function mkBaseUIObjectTypes(api)
 
   local function nextkid(obj, kid)
     local ud = u(obj)
-    local set = ud.childrenSet
-    if set then
-      local list = assert(ud.childrenList)
-      local idx = 0
-      if kid then
-        idx = assert(set[kid])
-        assert(list[idx] == kid)
-      end
-      while idx < #list do
-        idx = idx + 1
-        kid = list[idx]
-        if set[kid] == idx then
-          return kid
-        end
-      end
+    local set = assert(ud.childrenSet)
+    local list = assert(ud.childrenList)
+    local idx = 0
+    if kid then
+      idx = assert(set[kid])
+      assert(list[idx] == kid)
+    end
+    if idx < #list then
+      idx = idx + 1
+      kid = list[idx]
+      assert(set[kid] == idx)
+      return kid
     end
   end
 
