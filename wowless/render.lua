@@ -9,7 +9,7 @@ local function frames2rects(api, product, screenWidth, screenHeight)
     end
   end
   for frame in api.frames:entries() do
-    addPoints(frame)
+    addPoints(frame.luarep)
     for _, r in ipairs({ frame:GetRegions() }) do
       addPoints(r)
     end

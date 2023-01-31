@@ -77,11 +77,9 @@ local function run(cfg)
     end,
     clicks = function()
       for frame in api.frames:entries() do
-        if api.InheritsFrom(api.UserData(frame).type, 'button') and frame:IsVisible() then
-          api.log(2, 'clicking %s', api.GetDebugName(frame))
-          api.CallSafely(function()
-            frame:Click()
-          end)
+        if frame:IsObjectType('button') and frame:IsVisible() then
+          api.log(2, 'clicking %s', frame:GetDebugName())
+          api.CallSafely(frame.Click, frame)
         end
       end
     end,
@@ -93,10 +91,10 @@ local function run(cfg)
     end,
     enterleave = function()
       for frame in api.frames:entries() do
-        if frame.IsVisible and frame:IsVisible() then
-          api.log(2, 'enter/leave %s', api.GetDebugName(frame))
-          api.RunScript(frame, 'OnEnter', true)
-          api.RunScript(frame, 'OnLeave', true)
+        if frame:IsVisible() then
+          api.log(2, 'enter/leave %s', frame:GetDebugName())
+          api.RunScript(frame.luarep, 'OnEnter', true)
+          api.RunScript(frame.luarep, 'OnLeave', true)
         end
       end
     end,

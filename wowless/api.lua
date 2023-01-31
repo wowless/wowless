@@ -156,7 +156,7 @@ local function new(log, maxErrors, product)
     objtype.constructor(obj)
     SetParent(obj, parent)
     if InheritsFrom(typename, 'frame') then
-      frames:insert(obj)
+      frames:insert(u(obj))
     end
     local tmpls = {}
     if objtype.template then
@@ -259,8 +259,8 @@ local function new(log, maxErrors, product)
       CallSafely(timer.val)
     end
     for frame in frames:entries() do
-      if frame.IsVisible and frame:IsVisible() then
-        RunScript(frame, 'OnUpdate', 1)
+      if frame:IsVisible() then
+        RunScript(frame.luarep, 'OnUpdate', 1)
       end
     end
   end
