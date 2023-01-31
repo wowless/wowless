@@ -19,12 +19,8 @@ local function mkBaseUIObjectTypes(api)
     return getmetatable(obj).__index[f](obj, ...)
   end
 
-  local function kids(obj)
-    return u(obj).children:entries()
-  end
-
   local function DoUpdateVisible(obj, script)
-    for kid in kids(obj) do
+    for kid in u(obj).children:entries() do
       if u(kid).shown then
         DoUpdateVisible(kid, script)
       end
@@ -102,7 +98,6 @@ local function mkBaseUIObjectTypes(api)
   local env = {
     api = api,
     build = api.datalua.build,
-    kids = kids,
     m = m,
     runtimeProduct = api.product,
     toTexture = toTexture,

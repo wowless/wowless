@@ -39,7 +39,6 @@ files['data/uiobjects'] = {
   read_globals = {
     'api',
     'build',
-    'kids',
     'm',
     'runtimeProduct',
     'toTexture',

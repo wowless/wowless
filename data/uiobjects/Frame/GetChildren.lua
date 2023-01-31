@@ -1,6 +1,6 @@
 return (function(self)
   local ret = {}
-  for kid in kids(self) do
+  for kid in u(self).children:entries() do
     if api.InheritsFrom(u(kid).type, 'frame') then
       table.insert(ret, kid)
     end
