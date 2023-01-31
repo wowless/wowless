@@ -76,7 +76,7 @@ local function run(cfg)
       end
     end,
     clicks = function()
-      for _, frame in ipairs(api.frames) do
+      for frame in api.frames:entries() do
         if api.InheritsFrom(api.UserData(frame).type, 'button') and frame:IsVisible() then
           api.log(2, 'clicking %s', api.GetDebugName(frame))
           api.CallSafely(function()
@@ -92,7 +92,7 @@ local function run(cfg)
       api.SendEvent('PLAYER_REGEN_ENABLED')
     end,
     enterleave = function()
-      for _, frame in ipairs(api.frames) do
+      for frame in api.frames:entries() do
         if frame.IsVisible and frame:IsVisible() then
           api.log(2, 'enter/leave %s', api.GetDebugName(frame))
           api.RunScript(frame, 'OnEnter', true)

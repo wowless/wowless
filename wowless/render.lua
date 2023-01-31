@@ -8,7 +8,7 @@ local function frames2rects(api, product, screenWidth, screenHeight)
       end
     end
   end
-  for _, frame in ipairs(api.frames) do
+  for frame in api.frames:entries() do
     addPoints(frame)
     for _, r in ipairs({ frame:GetRegions() }) do
       addPoints(r)
@@ -75,7 +75,7 @@ local function frames2rects(api, product, screenWidth, screenHeight)
     }
   end
   local frames = {}
-  for _, frame in ipairs(api.frames) do
+  for frame in api.frames:entries() do
     local regions = {}
     for _, r in ipairs({ frame:GetRegions() }) do
       local rect = rects[r]
