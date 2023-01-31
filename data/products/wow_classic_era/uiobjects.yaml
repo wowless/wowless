@@ -1073,12 +1073,6 @@ Frame:
     propagateKeyboardInput:
       init: false
       type: boolean
-    registeredAllEvents:
-      nilable: true
-      type: number
-    registeredEvents:
-      init: {}
-      type: table
     resizable:
       init: false
       type: boolean

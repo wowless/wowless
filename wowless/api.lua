@@ -1,7 +1,8 @@
 local traceback = require('wowless.ext').traceback
+local hlist = require('wowless.hlist')
 
 local function new(log, maxErrors, product)
-  local allEventRegistrations = {}
+  local allEventRegistrations = hlist()
   local env = {}
   local errors = 0
   local eventRegistrations = {}
@@ -218,12 +219,12 @@ local function new(log, maxErrors, product)
     log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
     -- Snapshot current registrations since handlers can mutate them.
     local regs = {}
-    for i, frame in ipairs(eventRegistrations[event] or {}) do
-      assert(u(frame).registeredEvents[event] == i, 'event registration invariant violated')
-      table.insert(regs, frame)
+    if eventRegistrations[event] then
+      for frame in eventRegistrations[event]:entries() do
+        table.insert(regs, frame)
+      end
     end
-    for i, frame in ipairs(allEventRegistrations) do
-      assert(u(frame).registeredAllEvents == i, 'event registration invariant violated')
+    for frame in allEventRegistrations:entries() do
       table.insert(regs, frame)
     end
     for _, reg in ipairs(regs) do
@@ -267,66 +268,38 @@ local function new(log, maxErrors, product)
     return errors
   end
 
-  local eventConfigs = datalua.events
+  for k in pairs(datalua.events) do
+    eventRegistrations[k] = hlist()
+  end
 
   local function RegisterEvent(frame, event)
     event = event:upper()
-    assert(eventConfigs[event], 'cannot register ' .. event)
-    local ud = u(frame)
-    if not ud.registeredEvents[event] and not ud.registeredAllEvents then
-      local reg = eventRegistrations[event]
-      if not reg then
-        reg = {}
-        eventRegistrations[event] = reg
-      end
-      table.insert(reg, frame)
-      ud.registeredEvents[event] = #reg
+    assert(eventRegistrations[event], 'cannot register ' .. event)
+    if not allEventRegistrations:has(frame) then
+      eventRegistrations[event]:insert(frame)
     end
   end
 
   local function UnregisterEvent(frame, event)
     event = event:upper()
-    local ud = u(frame)
-    local idx = ud.registeredEvents[event]
-    if idx then
-      local reg = eventRegistrations[event]
-      assert(reg and reg[idx] == frame, 'event registration invariant violated')
-      if idx ~= #reg then
-        reg[idx] = reg[#reg]
-        u(reg[idx]).registeredEvents[event] = idx
-      end
-      reg[#reg] = nil
-      ud.registeredEvents[event] = nil
-    end
+    assert(eventRegistrations[event], 'cannot unregister ' .. event)
+    eventRegistrations[event]:remove(frame)
   end
 
   local function UnregisterAllEvents(frame)
-    local ud = u(frame)
-    for k in pairs(ud.registeredEvents) do
-      UnregisterEvent(frame, k)
+    for _, reg in pairs(eventRegistrations) do
+      reg:remove(frame)
     end
-    local idx = ud.registeredAllEvents
-    if idx then
-      assert(allEventRegistrations[idx] == frame, 'event registration invariant violated')
-      if idx ~= #allEventRegistrations then
-        allEventRegistrations[idx] = allEventRegistrations[#allEventRegistrations]
-        u(allEventRegistrations[idx]).registeredAllEvents = idx
-      end
-      allEventRegistrations[#allEventRegistrations] = nil
-      ud.registeredAllEvents = nil
-    end
+    allEventRegistrations:remove(frame)
   end
 
   local function RegisterAllEvents(frame)
     UnregisterAllEvents(frame)
-    table.insert(allEventRegistrations, frame)
-    u(frame).registeredAllEvents = #allEventRegistrations
+    allEventRegistrations:insert(frame)
   end
 
   local function IsEventRegistered(frame, event)
-    event = event:upper()
-    local ud = u(frame)
-    return ud.registeredAllEvents or ud.registeredEvents[event]
+    return allEventRegistrations:has(frame) or eventRegistrations[event:upper()]:has(frame)
   end
 
   for k, v in pairs(datalua.state) do
