@@ -1934,12 +1934,8 @@ OffScreenFrame:
       status: unimplemented
 ParentedObject:
   fields:
-    childrenList:
-      init: {}
-      type: table
-    childrenSet:
-      init: {}
-      type: table
+    children:
+      type: hlist
     parent:
       nilable: true
       type: table

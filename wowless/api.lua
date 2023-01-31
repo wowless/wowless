@@ -41,13 +41,7 @@ local function new(log, maxErrors, product)
     end
     if u(obj).parent then
       local up = u(u(obj).parent)
-      local idx = up.childrenSet[obj]
-      if idx ~= #up.childrenList then
-        up.childrenList[idx] = up.childrenList[#up.childrenList]
-        up.childrenSet[up.childrenList[idx]] = idx
-      end
-      up.childrenSet[obj] = nil
-      up.childrenList[#up.childrenList] = nil
+      up.children:remove(obj)
       for _, f in ipairs(parentFieldsToClear) do
         if up[f] == obj then
           up[f] = nil
@@ -56,8 +50,7 @@ local function new(log, maxErrors, product)
     end
     u(obj).parent = parent
     if parent then
-      table.insert(u(parent).childrenList, obj)
-      u(parent).childrenSet[obj] = #u(parent).childrenList
+      u(parent).children:insert(obj)
     end
     if parent and u(parent).frameLevel and u(obj).frameLevel and not u(obj).hasFixedFrameLevel then
       obj:SetFrameLevel(u(parent).frameLevel + 1)

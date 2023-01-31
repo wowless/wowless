@@ -1,5 +1,6 @@
 local util = require('wowless.util')
 local Mixin = util.mixin
+local hlist = require('wowless.hlist')
 
 local function toTexture(parent, tex, obj)
   if type(tex) == 'string' or type(tex) == 'number' then
@@ -18,25 +19,8 @@ local function mkBaseUIObjectTypes(api)
     return getmetatable(obj).__index[f](obj, ...)
   end
 
-  local function nextkid(obj, kid)
-    local ud = u(obj)
-    local set = assert(ud.childrenSet)
-    local list = assert(ud.childrenList)
-    local idx = 0
-    if kid then
-      idx = assert(set[kid])
-      assert(list[idx] == kid)
-    end
-    if idx < #list then
-      idx = idx + 1
-      kid = list[idx]
-      assert(set[kid] == idx)
-      return kid
-    end
-  end
-
   local function kids(obj)
-    return nextkid, obj, nil
+    return u(obj).children:entries()
   end
 
   local function DoUpdateVisible(obj, script)
@@ -143,6 +127,8 @@ local function mkBaseUIObjectTypes(api)
         for fname, field in pairs(cfg.fields or {}) do
           if field.init ~= nil then
             ud[fname] = type(field.init) == 'table' and deepcopy(field.init) or field.init
+          elseif field.type == 'hlist' then
+            ud[fname] = hlist()
           end
         end
       end

@@ -23,6 +23,7 @@ type:
                       - literal: boolean
                       - literal: font
                       - literal: frame
+                      - literal: hlist
                       - literal: number
                       - literal: string
                       - literal: table
