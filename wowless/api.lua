@@ -145,12 +145,14 @@ local function new(log, maxErrors, product)
     assert(objtype, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
     assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
-    local obj = setmetatable({}, objtype.metatable)
+    local obj = setmetatable({}, objtype.sandboxMT)
     obj[0] = newproxy()
     userdata[obj[0]] = {
+      luarep = obj,
       name = objname,
       type = typename,
     }
+    setmetatable(u(obj), objtype.hostMT)
     objtype.constructor(obj)
     SetParent(obj, parent)
     if InheritsFrom(typename, 'frame') then

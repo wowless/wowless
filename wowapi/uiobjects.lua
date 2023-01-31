@@ -54,7 +54,7 @@ local function mkBaseUIObjectTypes(api)
           flattenOne(inh)
           table.insert(inherits, string.lower(inh))
           Mixin(isa, result[string.lower(inh)].isa)
-          for mk, mv in pairs(result[string.lower(inh)].metatable.__index) do
+          for mk, mv in pairs(result[string.lower(inh)].metaindex) do
             assert(not metaindex[mk] or metaindex[mk] == mv, 'multiple implementations of ' .. mk)
             metaindex[mk] = mv
           end
@@ -70,7 +70,7 @@ local function mkBaseUIObjectTypes(api)
           end,
           inherits = inherits,
           isa = isa,
-          metatable = { __index = metaindex },
+          metaindex = metaindex,
           name = ty.cfg.objectType or k,
         }
       end
@@ -78,13 +78,25 @@ local function mkBaseUIObjectTypes(api)
     for k in pairs(types) do
       flattenOne(k)
     end
-    for _, v in pairs(result) do
-      local t = v.metatable.__index
-      for k, f in pairs(t) do
-        t[k] = debug.newcfunction(f)
+    local t = {}
+    for k, v in pairs(result) do
+      local hostIndex = {}
+      local sandboxIndex = {}
+      for n, f in pairs(v.metaindex) do
+        hostIndex[n] = function(obj, ...)
+          return f(obj.luarep, ...)
+        end
+        sandboxIndex[n] = debug.newcfunction(f)
       end
+      t[k] = {
+        constructor = v.constructor,
+        hostMT = { __index = hostIndex },
+        isa = v.isa,
+        name = v.name,
+        sandboxMT = { __index = sandboxIndex },
+      }
     end
-    return result
+    return t
   end
 
   local env = {

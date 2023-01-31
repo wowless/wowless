@@ -388,12 +388,13 @@ local function loader(api, cfg)
         elseif attr.impl.scope then
           return { [attr.impl.scope] = v }
         elseif attr.impl.method then
-          local fn = api.uiobjectTypes[api.UserData(obj).type].metatable.__index[attr.impl.method]
+          local ud = api.UserData(obj)
+          local fn = ud[attr.impl.method]
           assert(fn, ('missing method %q on object type %q'):format(attr.impl.method, api.UserData(obj).type))
           if type(v) == 'table' then -- stringlist
-            fn(obj, unpack(v))
+            fn(ud, unpack(v))
           else
-            fn(obj, v)
+            fn(ud, v)
           end
         elseif attr.impl.field then
           api.UserData(obj)[attr.impl.field] = v
@@ -487,10 +488,10 @@ local function loader(api, cfg)
             local base = api.uiobjectTypes[basetype]
             api.uiobjectTypes[name] = {
               constructor = base.constructor,
-              inherits = { basetype },
+              hostMT = base.hostMT,
               isa = mixin({ [name] = true }, base.isa),
-              metatable = base.metatable,
               name = base.name,
+              sandboxMT = base.sandboxMT,
               template = template,
             }
             intrinsics[name] = xmlimpls[basetype]
@@ -524,9 +525,10 @@ local function loader(api, cfg)
           elseif type(impl) == 'table' then
             local elt = impl.argument == 'lastkid' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
             local obj = loadElement(ctx, elt, parent)
+            local up = api.UserData(parent)
             -- TODO find if this if needs to be broader to everything here including kids
-            if api.InheritsFrom(api.UserData(parent).type, impl.parenttype:lower()) then
-              api.uiobjectTypes[impl.parenttype:lower()].metatable.__index[impl.parentmethod](parent, obj)
+            if up:IsObjectType(impl.parenttype) then
+              up[impl.parentmethod](up, obj)
             end
           elseif impl == 'transparent' or impl == 'loadstring' then
             local ctxmix = mixin({}, ctx)
