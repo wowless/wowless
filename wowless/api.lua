@@ -211,20 +211,23 @@ local function new(log, maxErrors, product)
     ud.scripts[bindingType][string.lower(name)] = script
   end
 
+  for k in pairs(datalua.events) do
+    eventRegistrations[k] = hlist()
+  end
+
   local function SendEvent(event, ...)
+    event = event:upper()
+    assert(eventRegistrations[event], 'internal error: cannot send ' .. event)
     local largs = {}
     for i = 1, select('#', ...) do
       local arg = select(i, ...)
       table.insert(largs, type(arg) == 'string' and ('%q'):format(arg) or tostring(arg))
     end
-    event = event:upper()
     log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
     -- Snapshot current registrations since handlers can mutate them.
     local regs = {}
-    if eventRegistrations[event] then
-      for frame in eventRegistrations[event]:entries() do
-        table.insert(regs, frame)
-      end
+    for frame in eventRegistrations[event]:entries() do
+      table.insert(regs, frame)
     end
     for frame in allEventRegistrations:entries() do
       table.insert(regs, frame)
@@ -268,10 +271,6 @@ local function new(log, maxErrors, product)
 
   local function GetErrorCount()
     return errors
-  end
-
-  for k in pairs(datalua.events) do
-    eventRegistrations[k] = hlist()
   end
 
   local function RegisterEvent(frame, event)

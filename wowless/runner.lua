@@ -150,19 +150,6 @@ local function run(cfg)
         b:Click()
       end
     end,
-    misc = function()
-      api.SendEvent('CRAFT_SHOW')
-      api.SendEvent('CRAFT_UPDATE')
-      api.SendEvent('CRAFT_CLOSE')
-      api.SendEvent('TRADE_SKILL_SHOW')
-      api.SendEvent('TRADE_SKILL_UPDATE')
-      api.SendEvent('TRADE_SKILL_CLOSE')
-      api.SendEvent('GOSSIP_SHOW')
-      api.SendEvent('GOSSIP_CLOSE')
-      api.SendEvent('QUEST_GREETING')
-      api.SendEvent('QUEST_PROGRESS')
-      api.SendEvent('QUEST_FINISHED')
-    end,
     slashcmds = function()
       local cmdBlacklist = { -- TODO remove this; these require a better SecureCmdOptionParse
         BENCHMARK = true,
@@ -197,7 +184,6 @@ local function run(cfg)
     'enterleave',
     'loot',
     'macrotext',
-    'misc',
     'bindings',
     'slashcmds',
     'events',
