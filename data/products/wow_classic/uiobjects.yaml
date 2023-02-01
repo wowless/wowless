@@ -8,109 +8,64 @@ Actor:
     ParentedObject: {}
     ScriptObject: {}
   methods:
-    ClearModel:
-      status: unimplemented
-    GetActiveBoundingBox:
-      status: unimplemented
-    GetAlpha:
-      status: unimplemented
-    GetAnimation:
-      status: unimplemented
-    GetAnimationBlendOperation:
-      status: unimplemented
-    GetAnimationVariation:
-      status: unimplemented
-    GetDesaturation:
-      status: unimplemented
-    GetMaxBoundingBox:
-      status: unimplemented
-    GetModelFileID:
-      status: unimplemented
-    GetModelPath:
-      status: unimplemented
-    GetModelUnitGUID:
-      status: unimplemented
-    GetParticleOverrideScale:
-      status: unimplemented
-    GetPitch:
-      status: unimplemented
-    GetPosition:
-      status: unimplemented
-    GetRoll:
-      status: unimplemented
+    ClearModel: {}
+    GetActiveBoundingBox: {}
+    GetAlpha: {}
+    GetAnimation: {}
+    GetAnimationBlendOperation: {}
+    GetAnimationVariation: {}
+    GetDesaturation: {}
+    GetMaxBoundingBox: {}
+    GetModelFileID: {}
+    GetModelPath: {}
+    GetModelUnitGUID: {}
+    GetParticleOverrideScale: {}
+    GetPitch: {}
+    GetPosition: {}
+    GetRoll: {}
     GetScale:
       fields:
       - name: scale
       status: getter
-    GetSpellVisualKit:
-      status: unimplemented
-    GetYaw:
-      status: unimplemented
-    Hide:
-      status: unimplemented
-    IsLoaded:
-      status: unimplemented
-    IsShown:
-      status: unimplemented
-    IsUsingCenterForOrigin:
-      status: unimplemented
-    IsVisible:
-      status: unimplemented
-    PlayAnimationKit:
-      status: unimplemented
-    SetAlpha:
-      status: unimplemented
-    SetAnimation:
-      status: unimplemented
-    SetAnimationBlendOperation:
-      status: unimplemented
-    SetDesaturation:
-      status: unimplemented
-    SetModelByCreatureDisplayID:
-      status: unimplemented
-    SetModelByFileID:
-      status: unimplemented
-    SetModelByPath:
-      status: unimplemented
-    SetModelByUnit:
-      status: unimplemented
-    SetParticleOverrideScale:
-      status: unimplemented
-    SetPitch:
-      status: unimplemented
-    SetPosition:
-      status: unimplemented
-    SetRoll:
-      status: unimplemented
+    GetSpellVisualKit: {}
+    GetYaw: {}
+    Hide: {}
+    IsLoaded: {}
+    IsShown: {}
+    IsUsingCenterForOrigin: {}
+    IsVisible: {}
+    PlayAnimationKit: {}
+    SetAlpha: {}
+    SetAnimation: {}
+    SetAnimationBlendOperation: {}
+    SetDesaturation: {}
+    SetModelByCreatureDisplayID: {}
+    SetModelByFileID: {}
+    SetModelByPath: {}
+    SetModelByUnit: {}
+    SetParticleOverrideScale: {}
+    SetPitch: {}
+    SetPosition: {}
+    SetRoll: {}
     SetScale:
       fields:
       - name: scale
       status: setter
-    SetShown:
-      status: unimplemented
-    SetSpellVisualKit:
-      status: unimplemented
-    SetUseCenterForOrigin:
-      status: unimplemented
-    SetYaw:
-      status: unimplemented
-    Show:
-      status: unimplemented
-    StopAnimationKit:
-      status: unimplemented
+    SetShown: {}
+    SetSpellVisualKit: {}
+    SetUseCenterForOrigin: {}
+    SetYaw: {}
+    Show: {}
+    StopAnimationKit: {}
   objectType: ModelSceneActor
 Alpha:
   inherits:
     Animation: {}
   methods:
-    GetFromAlpha:
-      status: unimplemented
-    GetToAlpha:
-      status: unimplemented
-    SetFromAlpha:
-      status: unimplemented
-    SetToAlpha:
-      status: unimplemented
+    GetFromAlpha: {}
+    GetToAlpha: {}
+    SetFromAlpha: {}
+    SetToAlpha: {}
 Animation:
   fields:
     endDelay:
@@ -124,80 +79,56 @@ Animation:
     ParentedObject: {}
     ScriptObject: {}
   methods:
-    GetDuration:
-      status: unimplemented
-    GetElapsed:
-      status: unimplemented
+    GetDuration: {}
+    GetElapsed: {}
     GetEndDelay:
       fields:
       - name: endDelay
       status: getter
-    GetOrder:
-      status: unimplemented
-    GetProgress:
-      status: unimplemented
+    GetOrder: {}
+    GetProgress: {}
     GetRegionParent:
       status: implemented
     GetSmoothing:
       fields:
       - name: smoothing
       status: getter
-    GetSmoothProgress:
-      status: unimplemented
+    GetSmoothProgress: {}
     GetStartDelay:
       fields:
       - name: startDelay
       status: getter
-    GetTarget:
-      status: unimplemented
-    IsDelaying:
-      status: unimplemented
-    IsDone:
-      status: unimplemented
-    IsPaused:
-      status: unimplemented
-    IsPlaying:
-      status: unimplemented
-    IsStopped:
-      status: unimplemented
-    Pause:
-      status: unimplemented
-    Play:
-      status: unimplemented
-    Restart:
-      status: unimplemented
-    SetChildKey:
-      status: unimplemented
-    SetDuration:
-      status: unimplemented
+    GetTarget: {}
+    IsDelaying: {}
+    IsDone: {}
+    IsPaused: {}
+    IsPlaying: {}
+    IsStopped: {}
+    Pause: {}
+    Play: {}
+    Restart: {}
+    SetChildKey: {}
+    SetDuration: {}
     SetEndDelay:
       fields:
       - name: endDelay
       status: setter
-    SetOrder:
-      status: unimplemented
-    SetPlaying:
-      status: unimplemented
+    SetOrder: {}
+    SetPlaying: {}
     SetSmoothing:
       fields:
       - name: smoothing
       status: setter
-    SetSmoothProgress:
-      status: unimplemented
+    SetSmoothProgress: {}
     SetStartDelay:
       fields:
       - name: startDelay
       status: setter
-    SetTarget:
-      status: unimplemented
-    SetTargetKey:
-      status: unimplemented
-    SetTargetName:
-      status: unimplemented
-    SetTargetParent:
-      status: unimplemented
-    Stop:
-      status: unimplemented
+    SetTarget: {}
+    SetTargetKey: {}
+    SetTargetName: {}
+    SetTargetParent: {}
+    Stop: {}
 AnimationGroup:
   inherits:
     ParentedObject: {}
@@ -205,80 +136,46 @@ AnimationGroup:
   methods:
     CreateAnimation:
       status: implemented
-    Finish:
-      status: unimplemented
+    Finish: {}
     GetAnimations:
       status: implemented
-    GetAnimationSpeedMultiplier:
-      status: unimplemented
-    GetDuration:
-      status: unimplemented
-    GetLooping:
-      status: unimplemented
-    GetLoopState:
-      status: unimplemented
-    GetProgress:
-      status: unimplemented
-    IsDone:
-      status: unimplemented
-    IsPaused:
-      status: unimplemented
-    IsPendingFinish:
-      status: unimplemented
-    IsPlaying:
-      status: unimplemented
-    IsReverse:
-      status: unimplemented
-    IsSetToFinalAlpha:
-      status: unimplemented
-    Pause:
-      status: unimplemented
-    Play:
-      status: unimplemented
-    RemoveAnimations:
-      status: unimplemented
-    Restart:
-      status: unimplemented
-    SetAnimationSpeedMultiplier:
-      status: unimplemented
-    SetLooping:
-      status: unimplemented
-    SetPlaying:
-      status: unimplemented
-    SetToFinalAlpha:
-      status: unimplemented
-    Stop:
-      status: unimplemented
+    GetAnimationSpeedMultiplier: {}
+    GetDuration: {}
+    GetLooping: {}
+    GetLoopState: {}
+    GetProgress: {}
+    IsDone: {}
+    IsPaused: {}
+    IsPendingFinish: {}
+    IsPlaying: {}
+    IsReverse: {}
+    IsSetToFinalAlpha: {}
+    Pause: {}
+    Play: {}
+    RemoveAnimations: {}
+    Restart: {}
+    SetAnimationSpeedMultiplier: {}
+    SetLooping: {}
+    SetPlaying: {}
+    SetToFinalAlpha: {}
+    Stop: {}
 Browser:
   inherits:
     Frame: {}
   methods:
-    ClearFocus:
-      status: unimplemented
-    CopyExternalLink:
-      status: unimplemented
-    DeleteCookies:
-      status: unimplemented
-    NavigateBack:
-      status: unimplemented
-    NavigateForward:
-      status: unimplemented
-    NavigateHome:
-      status: unimplemented
-    NavigateReload:
-      status: unimplemented
-    NavigateStop:
-      status: unimplemented
-    NavigateTo:
-      status: unimplemented
-    OpenExternalLink:
-      status: unimplemented
-    OpenTicket:
-      status: unimplemented
-    SetFocus:
-      status: unimplemented
-    SetZoom:
-      status: unimplemented
+    ClearFocus: {}
+    CopyExternalLink: {}
+    DeleteCookies: {}
+    NavigateBack: {}
+    NavigateForward: {}
+    NavigateHome: {}
+    NavigateReload: {}
+    NavigateStop: {}
+    NavigateTo: {}
+    OpenExternalLink: {}
+    OpenTicket: {}
+    SetFocus: {}
+    SetZoom: {}
 Button:
   fields:
     beingClicked:
@@ -320,14 +217,10 @@ Button:
   inherits:
     Frame: {}
   methods:
-    ClearDisabledTexture:
-      status: unimplemented
-    ClearHighlightTexture:
-      status: unimplemented
-    ClearNormalTexture:
-      status: unimplemented
-    ClearPushedTexture:
-      status: unimplemented
+    ClearDisabledTexture: {}
+    ClearHighlightTexture: {}
+    ClearNormalTexture: {}
+    ClearPushedTexture: {}
     Click:
       status: implemented
     Disable:
@@ -338,8 +231,7 @@ Button:
       fields:
       - name: buttonState
       status: getter
-    GetDisabledFontObject:
-      status: unimplemented
+    GetDisabledFontObject: {}
     GetDisabledTexture:
       fields:
       - name: disabledTexture
@@ -348,8 +240,7 @@ Button:
       fields:
       - name: fontstring
       status: getter
-    GetHighlightFontObject:
-      status: unimplemented
+    GetHighlightFontObject: {}
     GetHighlightTexture:
       fields:
       - name: highlightTexture
@@ -380,25 +271,20 @@ Button:
     GetTextHeight:
       outputs:
       - type: number
-      status: unimplemented
     GetTextWidth:
       outputs:
       - type: number
-      status: unimplemented
     IsEnabled:
       status: implemented
-    LockHighlight:
-      status: unimplemented
+    LockHighlight: {}
     RegisterForClicks:
       status: implemented
-    RegisterForMouse:
-      status: unimplemented
+    RegisterForMouse: {}
     SetButtonState:
       status: implemented
     SetDisabledAtlas:
       status: implemented
-    SetDisabledFontObject:
-      status: unimplemented
+    SetDisabledFontObject: {}
     SetDisabledTexture:
       status: implemented
     SetEnabled:
@@ -409,10 +295,8 @@ Button:
       status: implemented
     SetHighlightAtlas:
       status: implemented
-    SetHighlightFontObject:
-      status: unimplemented
-    SetHighlightLocked:
-      status: unimplemented
+    SetHighlightFontObject: {}
+    SetHighlightLocked: {}
     SetHighlightTexture:
       status: implemented
     SetMotionScriptsWhileDisabled:
@@ -438,8 +322,7 @@ Button:
       status: implemented
     SetText:
       status: implemented
-    UnlockHighlight:
-      status: unimplemented
+    UnlockHighlight: {}
 CheckButton:
   fields:
     checked:
@@ -476,57 +359,34 @@ Checkout:
   inherits:
     Frame: {}
   methods:
-    CancelOpenCheckout:
-      status: unimplemented
-    ClearFocus:
-      status: unimplemented
-    CloseCheckout:
-      status: unimplemented
-    CopyExternalLink:
-      status: unimplemented
-    OpenCheckout:
-      status: unimplemented
-    OpenExternalLink:
-      status: unimplemented
-    SetFocus:
-      status: unimplemented
-    SetZoom:
-      status: unimplemented
+    CancelOpenCheckout: {}
+    ClearFocus: {}
+    CloseCheckout: {}
+    CopyExternalLink: {}
+    OpenCheckout: {}
+    OpenExternalLink: {}
+    SetFocus: {}
+    SetZoom: {}
   objectType: BlizzardCheckout
 CinematicModel:
   inherits:
     PlayerModel: {}
   methods:
-    EquipItem:
-      status: unimplemented
-    InitializeCamera:
-      status: unimplemented
-    InitializePanCamera:
-      status: unimplemented
-    SetAnimOffset:
-      status: unimplemented
-    SetCreatureData:
-      status: unimplemented
-    SetFacingLeft:
-      status: unimplemented
-    SetFadeTimes:
-      status: unimplemented
-    SetHeightFactor:
-      status: unimplemented
-    SetJumpInfo:
-      status: unimplemented
-    SetPanDistance:
-      status: unimplemented
-    SetSpellVisualKit:
-      status: unimplemented
-    SetTargetDistance:
-      status: unimplemented
-    StartPan:
-      status: unimplemented
-    StopPan:
-      status: unimplemented
-    UnequipItems:
-      status: unimplemented
+    EquipItem: {}
+    InitializeCamera: {}
+    InitializePanCamera: {}
+    SetAnimOffset: {}
+    SetCreatureData: {}
+    SetFacingLeft: {}
+    SetFadeTimes: {}
+    SetHeightFactor: {}
+    SetJumpInfo: {}
+    SetPanDistance: {}
+    SetSpellVisualKit: {}
+    SetTargetDistance: {}
+    StartPan: {}
+    StopPan: {}
+    UnequipItems: {}
 ColorSelect:
   fields:
     colorValueTexture:
@@ -540,8 +400,7 @@ ColorSelect:
   inherits:
     Frame: {}
   methods:
-    ClearColorWheelTexture:
-      status: unimplemented
+    ClearColorWheelTexture: {}
     GetColorHSV:
       outputs:
       - name: h
@@ -550,7 +409,6 @@ ColorSelect:
         type: number
       - name: v
         type: number
-      status: unimplemented
     GetColorRGB:
       outputs:
       - name: r
@@ -559,7 +417,6 @@ ColorSelect:
         type: number
       - name: b
         type: number
-      status: unimplemented
     GetColorValueTexture:
       fields:
       - name: colorValueTexture
@@ -576,10 +433,8 @@ ColorSelect:
       fields:
       - name: colorWheelThumbTexture
       status: getter
-    SetColorHSV:
-      status: unimplemented
-    SetColorRGB:
-      status: unimplemented
+    SetColorHSV: {}
+    SetColorRGB: {}
     SetColorValueTexture:
       fields:
       - name: colorValueTexture
@@ -600,14 +455,10 @@ ControlPoint:
   inherits:
     ParentedObject: {}
   methods:
-    GetOffset:
-      status: unimplemented
-    GetOrder:
-      status: unimplemented
-    SetOffset:
-      status: unimplemented
-    SetOrder:
-      status: unimplemented
+    GetOffset: {}
+    GetOrder: {}
+    SetOffset: {}
+    SetOrder: {}
 Cooldown:
   fields:
     blingTexture:
@@ -619,94 +470,58 @@ Cooldown:
   inherits:
     Frame: {}
   methods:
-    Clear:
-      status: unimplemented
-    GetCooldownDisplayDuration:
-      status: unimplemented
-    GetCooldownDuration:
-      status: unimplemented
-    GetCooldownTimes:
-      status: unimplemented
-    GetDrawBling:
-      status: unimplemented
-    GetDrawEdge:
-      status: unimplemented
-    GetDrawSwipe:
-      status: unimplemented
-    GetEdgeScale:
-      status: unimplemented
-    GetReverse:
-      status: unimplemented
-    GetRotation:
-      status: unimplemented
-    IsPaused:
-      status: unimplemented
-    Pause:
-      status: unimplemented
-    Resume:
-      status: unimplemented
+    Clear: {}
+    GetCooldownDisplayDuration: {}
+    GetCooldownDuration: {}
+    GetCooldownTimes: {}
+    GetDrawBling: {}
+    GetDrawEdge: {}
+    GetDrawSwipe: {}
+    GetEdgeScale: {}
+    GetReverse: {}
+    GetRotation: {}
+    IsPaused: {}
+    Pause: {}
+    Resume: {}
     SetBlingTexture:
       fields:
       - name: blingTexture
       status: setter
-    SetCooldown:
-      status: unimplemented
-    SetCooldownDuration:
-      status: unimplemented
-    SetCooldownUNIX:
-      status: unimplemented
-    SetCountdownAbbrevThreshold:
-      status: unimplemented
-    SetCountdownFont:
-      status: unimplemented
-    SetDrawBling:
-      status: unimplemented
-    SetDrawEdge:
-      status: unimplemented
-    SetDrawSwipe:
-      status: unimplemented
-    SetEdgeScale:
-      status: unimplemented
+    SetCooldown: {}
+    SetCooldownDuration: {}
+    SetCooldownUNIX: {}
+    SetCountdownAbbrevThreshold: {}
+    SetCountdownFont: {}
+    SetDrawBling: {}
+    SetDrawEdge: {}
+    SetDrawSwipe: {}
+    SetEdgeScale: {}
     SetEdgeTexture:
       fields:
       - name: edgeTexture
       status: setter
-    SetHideCountdownNumbers:
-      status: unimplemented
-    SetReverse:
-      status: unimplemented
-    SetRotation:
-      status: unimplemented
-    SetSwipeColor:
-      status: unimplemented
+    SetHideCountdownNumbers: {}
+    SetReverse: {}
+    SetRotation: {}
+    SetSwipeColor: {}
     SetSwipeTexture:
       fields:
       - name: swipeTexture
       status: setter
-    SetTexCoordRange:
-      status: unimplemented
-    SetUseCircularEdge:
-      status: unimplemented
+    SetTexCoordRange: {}
+    SetUseCircularEdge: {}
 DressUpModel:
   inherits:
     PlayerModel: {}
   methods:
-    Dress:
-      status: unimplemented
-    GetAutoDress:
-      status: unimplemented
-    GetSheathed:
-      status: unimplemented
-    SetAutoDress:
-      status: unimplemented
-    SetSheathed:
-      status: unimplemented
-    TryOn:
-      status: unimplemented
-    Undress:
-      status: unimplemented
-    UndressSlot:
-      status: unimplemented
+    Dress: {}
+    GetAutoDress: {}
+    GetSheathed: {}
+    SetAutoDress: {}
+    SetSheathed: {}
+    TryOn: {}
+    Undress: {}
+    UndressSlot: {}
 EditBox:
   fields:
     editboxText:
@@ -740,28 +555,19 @@ EditBox:
     FontInstance: {}
     Frame: {}
   methods:
-    AddHistoryLine:
-      status: unimplemented
-    ClearFocus:
-      status: unimplemented
-    ClearHighlightText:
-      status: unimplemented
-    ClearHistory:
-      status: unimplemented
+    AddHistoryLine: {}
+    ClearFocus: {}
+    ClearHighlightText: {}
+    ClearHistory: {}
     Disable:
       status: implemented
     Enable:
       status: implemented
-    GetAltArrowKeyMode:
-      status: unimplemented
-    GetBlinkSpeed:
-      status: unimplemented
-    GetCursorPosition:
-      status: unimplemented
-    GetDisplayText:
-      status: unimplemented
-    GetHighlightColor:
-      status: unimplemented
+    GetAltArrowKeyMode: {}
+    GetBlinkSpeed: {}
+    GetCursorPosition: {}
+    GetDisplayText: {}
+    GetHighlightColor: {}
     GetHistoryLines:
       fields:
       - name: historyLines
@@ -779,25 +585,17 @@ EditBox:
     GetNumber:
       outputs:
       - type: number
-      status: unimplemented
-    GetNumLetters:
-      status: unimplemented
+    GetNumLetters: {}
     GetText:
       fields:
       - name: editboxText
       status: getter
-    GetTextInsets:
-      status: unimplemented
-    GetUTF8CursorPosition:
-      status: unimplemented
-    GetVisibleTextByteLimit:
-      status: unimplemented
-    HasFocus:
-      status: unimplemented
-    HasText:
-      status: unimplemented
-    HighlightText:
-      status: unimplemented
+    GetTextInsets: {}
+    GetUTF8CursorPosition: {}
+    GetVisibleTextByteLimit: {}
+    HasFocus: {}
+    HasText: {}
+    HighlightText: {}
     Insert:
       status: implemented
     IsAutoFocus:
@@ -812,42 +610,34 @@ EditBox:
       fields:
       - name: enabled
       status: getter
-    IsInIMECompositionMode:
-      status: unimplemented
+    IsInIMECompositionMode: {}
     IsMultiLine:
       fields:
       - name: isMultiLine
       status: getter
-    IsNumeric:
-      status: unimplemented
-    IsPassword:
-      status: unimplemented
+    IsNumeric: {}
+    IsPassword: {}
     IsSecureText:
       fields:
       - name: isSecureText
       status: getter
-    SetAltArrowKeyMode:
-      status: unimplemented
+    SetAltArrowKeyMode: {}
     SetAutoFocus:
       fields:
       - name: isAutoFocus
       status: setter
-    SetBlinkSpeed:
-      status: unimplemented
+    SetBlinkSpeed: {}
     SetCountInvisibleLetters:
       fields:
       - name: isCountInvisibleLetters
       status: setter
-    SetCursorPosition:
-      status: unimplemented
+    SetCursorPosition: {}
     SetEnabled:
       fields:
       - name: enabled
       status: setter
-    SetFocus:
-      status: unimplemented
-    SetHighlightColor:
-      status: unimplemented
+    SetFocus: {}
+    SetHighlightColor: {}
     SetHistoryLines:
       fields:
       - name: historyLines
@@ -864,49 +654,36 @@ EditBox:
       fields:
       - name: isMultiLine
       status: setter
-    SetNumber:
-      status: unimplemented
-    SetNumeric:
-      status: unimplemented
-    SetPassword:
-      status: unimplemented
+    SetNumber: {}
+    SetNumeric: {}
+    SetPassword: {}
     SetSecureText:
       fields:
       - name: isSecureText
       status: setter
-    SetSecurityDisablePaste:
-      status: unimplemented
-    SetSecurityDisableSetText:
-      status: unimplemented
+    SetSecurityDisablePaste: {}
+    SetSecurityDisableSetText: {}
     SetText:
       fields:
       - name: editboxText
       status: setter
-    SetTextInsets:
-      status: unimplemented
-    SetVisibleTextByteLimit:
-      status: unimplemented
-    ToggleInputLanguage:
-      status: unimplemented
+    SetTextInsets: {}
+    SetVisibleTextByteLimit: {}
+    ToggleInputLanguage: {}
 FogOfWarFrame:
   inherits:
     Frame: {}
   methods:
-    GetUiMapID:
-      status: unimplemented
-    SetUiMapID:
-      status: unimplemented
+    GetUiMapID: {}
+    SetUiMapID: {}
 Font:
   inherits:
     FontInstance: {}
     UIObject: {}
   methods:
-    CopyFontObject:
-      status: unimplemented
-    GetAlpha:
-      status: unimplemented
-    SetAlpha:
-      status: unimplemented
+    CopyFontObject: {}
+    GetAlpha: {}
+    SetAlpha: {}
 FontInstance:
   inherits: {}
   methods:
@@ -914,50 +691,34 @@ FontInstance:
       status: implemented
     GetFontObject:
       status: implemented
-    GetIndentedWordWrap:
-      status: unimplemented
-    GetJustifyH:
-      status: unimplemented
-    GetJustifyV:
-      status: unimplemented
+    GetIndentedWordWrap: {}
+    GetJustifyH: {}
+    GetJustifyV: {}
     GetShadowColor:
       outputs:
       - type: number
       - type: number
       - type: number
-      status: unimplemented
     GetShadowOffset:
       outputs:
       - type: number
-      status: unimplemented
     GetSpacing:
       outputs:
       - type: number
-      status: unimplemented
     GetTextColor:
       outputs:
       - type: number
       - type: number
       - type: number
-      status: unimplemented
-    SetFont:
-      status: unimplemented
-    SetFontObject:
-      status: unimplemented
-    SetIndentedWordWrap:
-      status: unimplemented
-    SetJustifyH:
-      status: unimplemented
-    SetJustifyV:
-      status: unimplemented
-    SetShadowColor:
-      status: unimplemented
-    SetShadowOffset:
-      status: unimplemented
-    SetSpacing:
-      status: unimplemented
-    SetTextColor:
-      status: unimplemented
+    SetFont: {}
+    SetFontObject: {}
+    SetIndentedWordWrap: {}
+    SetJustifyH: {}
+    SetJustifyV: {}
+    SetShadowColor: {}
+    SetShadowOffset: {}
+    SetSpacing: {}
+    SetTextColor: {}
   virtual: true
 FontString:
   fields:
@@ -975,20 +736,14 @@ FontString:
     LayeredRegion: {}
     ScriptObject: {}
   methods:
-    CalculateScreenAreaFromCharacterSpan:
-      status: unimplemented
-    CanNonSpaceWrap:
-      status: unimplemented
-    CanWordWrap:
-      status: unimplemented
-    FindCharacterIndexAtCoordinate:
-      status: unimplemented
-    GetFieldSize:
-      status: unimplemented
+    CalculateScreenAreaFromCharacterSpan: {}
+    CanNonSpaceWrap: {}
+    CanWordWrap: {}
+    FindCharacterIndexAtCoordinate: {}
+    GetFieldSize: {}
     GetLineHeight:
       outputs:
       - type: number
-      status: unimplemented
     GetMaxLines:
       fields:
       - name: maxLines
@@ -996,17 +751,13 @@ FontString:
     GetNumLines:
       outputs:
       - type: number
-      status: unimplemented
-    GetRotation:
-      status: unimplemented
+    GetRotation: {}
     GetStringHeight:
       outputs:
       - type: number
-      status: unimplemented
     GetStringWidth:
       outputs:
       - type: number
-      status: unimplemented
     GetText:
       fields:
       - name: text
@@ -1018,39 +769,28 @@ FontString:
     GetUnboundedStringWidth:
       outputs:
       - type: number
-      status: unimplemented
-    GetVertexColor:
-      status: unimplemented
+    GetVertexColor: {}
     GetWrappedWidth:
       outputs:
       - type: number
-      status: unimplemented
-    IsTruncated:
-      status: unimplemented
-    SetAlphaGradient:
-      status: unimplemented
-    SetFixedColor:
-      status: unimplemented
-    SetFormattedText:
-      status: unimplemented
+    IsTruncated: {}
+    SetAlphaGradient: {}
+    SetFixedColor: {}
+    SetFormattedText: {}
     SetMaxLines:
       fields:
       - name: maxLines
       status: setter
-    SetNonSpaceWrap:
-      status: unimplemented
-    SetRotation:
-      status: unimplemented
+    SetNonSpaceWrap: {}
+    SetRotation: {}
     SetText:
       status: implemented
-    SetTextHeight:
-      status: unimplemented
+    SetTextHeight: {}
     SetTextScale:
       fields:
       - name: textScale
       status: setter
-    SetWordWrap:
-      status: unimplemented
+    SetWordWrap: {}
 ForbiddenMixin:
   fields:
     forbidden:
@@ -1118,8 +858,7 @@ Frame:
     Region: {}
     ScriptObject: {}
   methods:
-    CanChangeAttribute:
-      status: unimplemented
+    CanChangeAttribute: {}
     CreateFontString:
       status: implemented
     CreateLine:
@@ -1128,38 +867,25 @@ Frame:
       status: implemented
     CreateTexture:
       status: implemented
-    DesaturateHierarchy:
-      status: unimplemented
-    DisableDrawLayer:
-      status: unimplemented
-    DoesClipChildren:
-      status: unimplemented
-    EnableDrawLayer:
-      status: unimplemented
-    EnableGamePadButton:
-      status: unimplemented
-    EnableGamePadStick:
-      status: unimplemented
-    EnableKeyboard:
-      status: unimplemented
-    ExecuteAttribute:
-      status: unimplemented
+    DesaturateHierarchy: {}
+    DisableDrawLayer: {}
+    DoesClipChildren: {}
+    EnableDrawLayer: {}
+    EnableGamePadButton: {}
+    EnableGamePadStick: {}
+    EnableKeyboard: {}
+    ExecuteAttribute: {}
     GetAttribute:
       status: implemented
-    GetBoundsRect:
-      status: unimplemented
+    GetBoundsRect: {}
     GetChildren:
       status: implemented
-    GetClampRectInsets:
-      status: unimplemented
-    GetDontSavePosition:
-      status: unimplemented
+    GetClampRectInsets: {}
+    GetDontSavePosition: {}
     GetEffectiveAlpha:
       status: implemented
-    GetEffectivelyFlattensRenderLayers:
-      status: unimplemented
-    GetFlattensRenderLayers:
-      status: unimplemented
+    GetEffectivelyFlattensRenderLayers: {}
+    GetFlattensRenderLayers: {}
     GetFrameLevel:
       fields:
       - name: frameLevel
@@ -1168,8 +894,7 @@ Frame:
       fields:
       - name: frameStrata
       status: getter
-    GetHitRectInsets:
-      status: unimplemented
+    GetHitRectInsets: {}
     GetHyperlinksEnabled:
       fields:
       - name: hyperlinksEnabled
@@ -1188,8 +913,7 @@ Frame:
       status: getter
     GetRegions:
       status: implemented
-    GetResizeBounds:
-      status: unimplemented
+    GetResizeBounds: {}
     HasFixedFrameLevel:
       fields:
       - name: hasFixedFrameLevel
@@ -1204,12 +928,9 @@ Frame:
       status: getter
     IsEventRegistered:
       status: implemented
-    IsGamePadButtonEnabled:
-      status: unimplemented
-    IsGamePadStickEnabled:
-      status: unimplemented
-    IsKeyboardEnabled:
-      status: unimplemented
+    IsGamePadButtonEnabled: {}
+    IsGamePadStickEnabled: {}
+    IsKeyboardEnabled: {}
     IsMovable:
       fields:
       - name: movable
@@ -1226,20 +947,16 @@ Frame:
       fields:
       - name: isUserPlaced
       status: getter
-    Lower:
-      status: unimplemented
-    Raise:
-      status: unimplemented
+    Lower: {}
+    Raise: {}
     RegisterAllEvents:
       status: implemented
     RegisterEvent:
       status: implemented
-    RegisterForDrag:
-      status: unimplemented
+    RegisterForDrag: {}
     RegisterUnitEvent:
       status: implemented
-    RotateTextures:
-      status: unimplemented
+    RotateTextures: {}
     SetAttribute:
       status: implemented
     SetAttributeNoHandler:
@@ -1248,14 +965,10 @@ Frame:
       fields:
       - name: isClampedToScreen
       status: setter
-    SetClampRectInsets:
-      status: unimplemented
-    SetClipsChildren:
-      status: unimplemented
-    SetDontSavePosition:
-      status: unimplemented
-    SetDrawLayerEnabled:
-      status: unimplemented
+    SetClampRectInsets: {}
+    SetClipsChildren: {}
+    SetDontSavePosition: {}
+    SetDrawLayerEnabled: {}
     SetFixedFrameLevel:
       fields:
       - name: hasFixedFrameLevel
@@ -1264,16 +977,14 @@ Frame:
       fields:
       - name: hasFixedFrameStrata
       status: setter
-    SetFlattensRenderLayers:
-      status: unimplemented
+    SetFlattensRenderLayers: {}
     SetFrameLevel:
       status: implemented
     SetFrameStrata:
       fields:
       - name: frameStrata
       status: setter
-    SetHitRectInsets:
-      status: unimplemented
+    SetHitRectInsets: {}
     SetHyperlinksEnabled:
       fields:
       - name: hyperlinksEnabled
@@ -1282,8 +993,7 @@ Frame:
       fields:
       - name: id
       status: setter
-    SetIsFrameBuffer:
-      status: unimplemented
+    SetIsFrameBuffer: {}
     SetMovable:
       fields:
       - name: movable
@@ -1296,8 +1006,7 @@ Frame:
       fields:
       - name: resizable
       status: setter
-    SetResizeBounds:
-      status: unimplemented
+    SetResizeBounds: {}
     SetToplevel:
       fields:
       - name: toplevel
@@ -1306,12 +1015,9 @@ Frame:
       fields:
       - name: isUserPlaced
       status: setter
-    StartMoving:
-      status: unimplemented
-    StartSizing:
-      status: unimplemented
-    StopMovingOrSizing:
-      status: unimplemented
+    StartMoving: {}
+    StartSizing: {}
+    StopMovingOrSizing: {}
     UnregisterAllEvents:
       status: implemented
     UnregisterEvent:
@@ -1330,176 +1036,100 @@ GameTooltip:
   inherits:
     Frame: {}
   methods:
-    AddDoubleLine:
-      status: unimplemented
-    AddFontStrings:
-      status: unimplemented
-    AddLine:
-      status: unimplemented
-    AddSpellByID:
-      status: unimplemented
-    AddTexture:
-      status: unimplemented
-    AdvanceSecondaryCompareItem:
-      status: unimplemented
-    AppendText:
-      status: unimplemented
-    ClearLines:
-      status: unimplemented
-    CopyTooltip:
-      status: unimplemented
-    FadeOut:
-      status: unimplemented
+    AddDoubleLine: {}
+    AddFontStrings: {}
+    AddLine: {}
+    AddSpellByID: {}
+    AddTexture: {}
+    AdvanceSecondaryCompareItem: {}
+    AppendText: {}
+    ClearLines: {}
+    CopyTooltip: {}
+    FadeOut: {}
     GetAnchorType:
       fields:
       - name: tooltipAnchorType
       status: getter
-    GetItem:
-      status: unimplemented
+    GetItem: {}
     GetMinimumWidth:
       outputs:
       - type: number
-      status: unimplemented
     GetOwner:
       fields:
       - name: tooltipOwner
       status: getter
-    GetPadding:
-      status: unimplemented
-    GetSpell:
-      status: unimplemented
-    GetUnit:
-      status: unimplemented
-    IsEquippedItem:
-      status: unimplemented
+    GetPadding: {}
+    GetSpell: {}
+    GetUnit: {}
+    IsEquippedItem: {}
     IsOwned:
       status: implemented
-    IsUnit:
-      status: unimplemented
+    IsUnit: {}
     NumLines:
       fields:
       - name: tooltipLines
       status: getter
-    ResetSecondaryCompareItem:
-      status: unimplemented
-    SetAction:
-      status: unimplemented
-    SetAnchorType:
-      status: unimplemented
-    SetAuctionItem:
-      status: unimplemented
-    SetAuctionSellItem:
-      status: unimplemented
-    SetBackpackToken:
-      status: unimplemented
-    SetBagItem:
-      status: unimplemented
-    SetBagItemChild:
-      status: unimplemented
-    SetBuybackItem:
-      status: unimplemented
-    SetCompareItem:
-      status: unimplemented
-    SetCraftItem:
-      status: unimplemented
-    SetCraftSpell:
-      status: unimplemented
-    SetCurrencyToken:
-      status: unimplemented
-    SetCurrencyTokenByID:
-      status: unimplemented
-    SetEquipmentSet:
-      status: unimplemented
-    SetExistingSocketGem:
-      status: unimplemented
-    SetFrameStack:
-      status: unimplemented
-    SetGlyph:
-      status: unimplemented
-    SetGuildBankItem:
-      status: unimplemented
-    SetHyperlink:
-      status: unimplemented
-    SetInboxItem:
-      status: unimplemented
-    SetInstanceLockEncountersComplete:
-      status: unimplemented
-    SetInventoryItem:
-      status: unimplemented
-    SetInventoryItemByID:
-      status: unimplemented
-    SetItemByID:
-      status: unimplemented
-    SetLootCurrency:
-      status: unimplemented
-    SetLootItem:
-      status: unimplemented
-    SetLootRollItem:
-      status: unimplemented
-    SetMerchantCostItem:
-      status: unimplemented
-    SetMerchantItem:
-      status: unimplemented
-    SetMinimumWidth:
-      status: unimplemented
+    ResetSecondaryCompareItem: {}
+    SetAction: {}
+    SetAnchorType: {}
+    SetAuctionItem: {}
+    SetAuctionSellItem: {}
+    SetBackpackToken: {}
+    SetBagItem: {}
+    SetBagItemChild: {}
+    SetBuybackItem: {}
+    SetCompareItem: {}
+    SetCraftItem: {}
+    SetCraftSpell: {}
+    SetCurrencyToken: {}
+    SetCurrencyTokenByID: {}
+    SetEquipmentSet: {}
+    SetExistingSocketGem: {}
+    SetFrameStack: {}
+    SetGlyph: {}
+    SetGuildBankItem: {}
+    SetHyperlink: {}
+    SetInboxItem: {}
+    SetInstanceLockEncountersComplete: {}
+    SetInventoryItem: {}
+    SetInventoryItemByID: {}
+    SetItemByID: {}
+    SetLootCurrency: {}
+    SetLootItem: {}
+    SetLootRollItem: {}
+    SetMerchantCostItem: {}
+    SetMerchantItem: {}
+    SetMinimumWidth: {}
     SetOwner:
       status: implemented
-    SetPadding:
-      status: unimplemented
-    SetPetAction:
-      status: unimplemented
-    SetPossession:
-      status: unimplemented
-    SetQuestCurrency:
-      status: unimplemented
-    SetQuestItem:
-      status: unimplemented
-    SetQuestLogCurrency:
-      status: unimplemented
-    SetQuestLogItem:
-      status: unimplemented
-    SetQuestLogRewardSpell:
-      status: unimplemented
-    SetQuestLogSpecialItem:
-      status: unimplemented
-    SetQuestRewardSpell:
-      status: unimplemented
-    SetSendMailItem:
-      status: unimplemented
-    SetShapeshift:
-      status: unimplemented
-    SetSocketedItem:
-      status: unimplemented
-    SetSocketGem:
-      status: unimplemented
-    SetSpellBookItem:
-      status: unimplemented
-    SetSpellByID:
-      status: unimplemented
-    SetTalent:
-      status: unimplemented
-    SetText:
-      status: unimplemented
-    SetTotem:
-      status: unimplemented
-    SetTrackingSpell:
-      status: unimplemented
-    SetTradePlayerItem:
-      status: unimplemented
-    SetTradeSkillItem:
-      status: unimplemented
-    SetTradeTargetItem:
-      status: unimplemented
-    SetTrainerService:
-      status: unimplemented
-    SetUnit:
-      status: unimplemented
-    SetUnitAura:
-      status: unimplemented
-    SetUnitBuff:
-      status: unimplemented
-    SetUnitDebuff:
-      status: unimplemented
+    SetPadding: {}
+    SetPetAction: {}
+    SetPossession: {}
+    SetQuestCurrency: {}
+    SetQuestItem: {}
+    SetQuestLogCurrency: {}
+    SetQuestLogItem: {}
+    SetQuestLogRewardSpell: {}
+    SetQuestLogSpecialItem: {}
+    SetQuestRewardSpell: {}
+    SetSendMailItem: {}
+    SetShapeshift: {}
+    SetSocketedItem: {}
+    SetSocketGem: {}
+    SetSpellBookItem: {}
+    SetSpellByID: {}
+    SetTalent: {}
+    SetText: {}
+    SetTotem: {}
+    SetTrackingSpell: {}
+    SetTradePlayerItem: {}
+    SetTradeSkillItem: {}
+    SetTradeTargetItem: {}
+    SetTrainerService: {}
+    SetUnit: {}
+    SetUnitAura: {}
+    SetUnitBuff: {}
+    SetUnitDebuff: {}
 LayeredRegion:
   fields:
     layer:
@@ -1545,18 +1175,14 @@ Line:
   inherits:
     Texture: {}
   methods:
-    GetEndPoint:
-      status: unimplemented
-    GetStartPoint:
-      status: unimplemented
+    GetEndPoint: {}
+    GetStartPoint: {}
     GetThickness:
       fields:
       - name: thickness
       status: getter
-    SetEndPoint:
-      status: unimplemented
-    SetStartPoint:
-      status: unimplemented
+    SetEndPoint: {}
+    SetStartPoint: {}
     SetThickness:
       fields:
       - name: thickness
@@ -1580,68 +1206,41 @@ MessageFrame:
   methods:
     AddMessage:
       status: implemented
-    Clear:
-      status: unimplemented
-    GetFadeDuration:
-      status: unimplemented
-    GetFadePower:
-      status: unimplemented
-    GetFading:
-      status: unimplemented
-    GetFontStringByID:
-      status: unimplemented
-    GetInsertMode:
-      status: unimplemented
-    GetTimeVisible:
-      status: unimplemented
-    HasMessageByID:
-      status: unimplemented
-    ResetMessageFadeByID:
-      status: unimplemented
-    SetFadeDuration:
-      status: unimplemented
-    SetFadePower:
-      status: unimplemented
-    SetFading:
-      status: unimplemented
-    SetInsertMode:
-      status: unimplemented
-    SetTimeVisible:
-      status: unimplemented
+    Clear: {}
+    GetFadeDuration: {}
+    GetFadePower: {}
+    GetFading: {}
+    GetFontStringByID: {}
+    GetInsertMode: {}
+    GetTimeVisible: {}
+    HasMessageByID: {}
+    ResetMessageFadeByID: {}
+    SetFadeDuration: {}
+    SetFadePower: {}
+    SetFading: {}
+    SetInsertMode: {}
+    SetTimeVisible: {}
 Minimap:
   inherits:
     Frame: {}
   methods:
-    GetPingPosition:
-      status: unimplemented
+    GetPingPosition: {}
     GetZoom:
       outputs:
       - type: number
-      status: unimplemented
     GetZoomLevels:
       outputs:
       - type: number
-      status: unimplemented
-    PingLocation:
-      status: unimplemented
-    SetBlipTexture:
-      status: unimplemented
-    SetCorpsePOIArrowTexture:
-      status: unimplemented
-    SetIconTexture:
-      status: unimplemented
-    SetMaskTexture:
-      status: unimplemented
-    SetPlayerTexture:
-      status: unimplemented
-    SetPOIArrowTexture:
-      status: unimplemented
-    SetStaticPOIArrowTexture:
-      status: unimplemented
-    SetZoom:
-      status: unimplemented
-    UpdateBlips:
-      status: unimplemented
+    PingLocation: {}
+    SetBlipTexture: {}
+    SetCorpsePOIArrowTexture: {}
+    SetIconTexture: {}
+    SetMaskTexture: {}
+    SetPlayerTexture: {}
+    SetPOIArrowTexture: {}
+    SetStaticPOIArrowTexture: {}
+    SetZoom: {}
+    UpdateBlips: {}
 Model:
   fields:
     modelScale:
@@ -1649,239 +1248,137 @@ Model:
   inherits:
     Frame: {}
   methods:
-    AdvanceTime:
-      status: unimplemented
-    ClearFog:
-      status: unimplemented
-    ClearModel:
-      status: unimplemented
-    ClearTransform:
-      status: unimplemented
-    GetCameraDistance:
-      status: unimplemented
-    GetCameraFacing:
-      status: unimplemented
-    GetCameraPosition:
-      status: unimplemented
-    GetCameraRoll:
-      status: unimplemented
-    GetCameraTarget:
-      status: unimplemented
-    GetDesaturation:
-      status: unimplemented
-    GetFacing:
-      status: unimplemented
-    GetFogColor:
-      status: unimplemented
-    GetFogFar:
-      status: unimplemented
-    GetFogNear:
-      status: unimplemented
-    GetLight:
-      status: unimplemented
-    GetModelAlpha:
-      status: unimplemented
-    GetModelDrawLayer:
-      status: unimplemented
-    GetModelFileID:
-      status: unimplemented
+    AdvanceTime: {}
+    ClearFog: {}
+    ClearModel: {}
+    ClearTransform: {}
+    GetCameraDistance: {}
+    GetCameraFacing: {}
+    GetCameraPosition: {}
+    GetCameraRoll: {}
+    GetCameraTarget: {}
+    GetDesaturation: {}
+    GetFacing: {}
+    GetFogColor: {}
+    GetFogFar: {}
+    GetFogNear: {}
+    GetLight: {}
+    GetModelAlpha: {}
+    GetModelDrawLayer: {}
+    GetModelFileID: {}
     GetModelScale:
       fields:
       - name: modelScale
       status: getter
-    GetPaused:
-      status: unimplemented
-    GetPitch:
-      status: unimplemented
-    GetPosition:
-      status: unimplemented
-    GetRoll:
-      status: unimplemented
-    GetShadowEffect:
-      status: unimplemented
-    GetViewInsets:
-      status: unimplemented
-    GetViewTranslation:
-      status: unimplemented
-    GetWorldScale:
-      status: unimplemented
-    HasAttachmentPoints:
-      status: unimplemented
-    HasCustomCamera:
-      status: unimplemented
-    IsUsingModelCenterToTransform:
-      status: unimplemented
-    MakeCurrentCameraCustom:
-      status: unimplemented
-    ReplaceIconTexture:
-      status: unimplemented
-    SetCamera:
-      status: unimplemented
-    SetCameraDistance:
-      status: unimplemented
-    SetCameraFacing:
-      status: unimplemented
-    SetCameraPosition:
-      status: unimplemented
-    SetCameraRoll:
-      status: unimplemented
-    SetCameraTarget:
-      status: unimplemented
-    SetCustomCamera:
-      status: unimplemented
-    SetDesaturation:
-      status: unimplemented
-    SetFacing:
-      status: unimplemented
-    SetFogColor:
-      status: unimplemented
-    SetFogFar:
-      status: unimplemented
-    SetFogNear:
-      status: unimplemented
-    SetGlow:
-      status: unimplemented
-    SetLight:
-      status: unimplemented
-    SetModel:
-      status: unimplemented
-    SetModelAlpha:
-      status: unimplemented
-    SetModelDrawLayer:
-      status: unimplemented
+    GetPaused: {}
+    GetPitch: {}
+    GetPosition: {}
+    GetRoll: {}
+    GetShadowEffect: {}
+    GetViewInsets: {}
+    GetViewTranslation: {}
+    GetWorldScale: {}
+    HasAttachmentPoints: {}
+    HasCustomCamera: {}
+    IsUsingModelCenterToTransform: {}
+    MakeCurrentCameraCustom: {}
+    ReplaceIconTexture: {}
+    SetCamera: {}
+    SetCameraDistance: {}
+    SetCameraFacing: {}
+    SetCameraPosition: {}
+    SetCameraRoll: {}
+    SetCameraTarget: {}
+    SetCustomCamera: {}
+    SetDesaturation: {}
+    SetFacing: {}
+    SetFogColor: {}
+    SetFogFar: {}
+    SetFogNear: {}
+    SetGlow: {}
+    SetLight: {}
+    SetModel: {}
+    SetModelAlpha: {}
+    SetModelDrawLayer: {}
     SetModelScale:
       fields:
       - name: modelScale
       status: setter
-    SetParticlesEnabled:
-      status: unimplemented
-    SetPaused:
-      status: unimplemented
-    SetPitch:
-      status: unimplemented
-    SetPosition:
-      status: unimplemented
-    SetRoll:
-      status: unimplemented
-    SetSequence:
-      status: unimplemented
-    SetSequenceTime:
-      status: unimplemented
-    SetShadowEffect:
-      status: unimplemented
-    SetTransform:
-      status: unimplemented
-    SetViewInsets:
-      status: unimplemented
-    SetViewTranslation:
-      status: unimplemented
+    SetParticlesEnabled: {}
+    SetPaused: {}
+    SetPitch: {}
+    SetPosition: {}
+    SetRoll: {}
+    SetSequence: {}
+    SetSequenceTime: {}
+    SetShadowEffect: {}
+    SetTransform: {}
+    SetViewInsets: {}
+    SetViewTranslation: {}
     TransformCameraSpaceToModelSpace:
       status: implemented
-    UseModelCenterToTransform:
-      status: unimplemented
+    UseModelCenterToTransform: {}
 ModelScene:
   inherits:
     Frame: {}
   methods:
-    ClearFog:
-      status: unimplemented
+    ClearFog: {}
     CreateActor:
       status: implemented
-    GetActorAtIndex:
-      status: unimplemented
-    GetCameraFarClip:
-      status: unimplemented
-    GetCameraFieldOfView:
-      status: unimplemented
-    GetCameraForward:
-      status: unimplemented
-    GetCameraNearClip:
-      status: unimplemented
-    GetCameraPosition:
-      status: unimplemented
-    GetCameraRight:
-      status: unimplemented
-    GetCameraUp:
-      status: unimplemented
-    GetDrawLayer:
-      status: unimplemented
-    GetFogColor:
-      status: unimplemented
-    GetFogFar:
-      status: unimplemented
-    GetFogNear:
-      status: unimplemented
-    GetLightAmbientColor:
-      status: unimplemented
-    GetLightDiffuseColor:
-      status: unimplemented
+    GetActorAtIndex: {}
+    GetCameraFarClip: {}
+    GetCameraFieldOfView: {}
+    GetCameraForward: {}
+    GetCameraNearClip: {}
+    GetCameraPosition: {}
+    GetCameraRight: {}
+    GetCameraUp: {}
+    GetDrawLayer: {}
+    GetFogColor: {}
+    GetFogFar: {}
+    GetFogNear: {}
+    GetLightAmbientColor: {}
+    GetLightDiffuseColor: {}
     GetLightDirection:
       outputs:
       - type: number
       - type: number
       - type: number
-      status: unimplemented
     GetLightPosition:
       outputs:
       - type: number
       - type: number
       - type: number
-      status: unimplemented
-    GetLightType:
-      status: unimplemented
-    GetNumActors:
-      status: unimplemented
+    GetLightType: {}
+    GetNumActors: {}
     GetViewInsets:
       outputs:
       - type: number
       - type: number
       - type: number
       - type: number
-      status: unimplemented
-    GetViewTranslation:
-      status: unimplemented
-    IsLightVisible:
-      status: unimplemented
-    Project3DPointTo2D:
-      status: unimplemented
-    SetCameraFarClip:
-      status: unimplemented
-    SetCameraFieldOfView:
-      status: unimplemented
-    SetCameraNearClip:
-      status: unimplemented
-    SetCameraOrientationByAxisVectors:
-      status: unimplemented
-    SetCameraOrientationByYawPitchRoll:
-      status: unimplemented
-    SetCameraPosition:
-      status: unimplemented
-    SetDrawLayer:
-      status: unimplemented
-    SetFogColor:
-      status: unimplemented
-    SetFogFar:
-      status: unimplemented
-    SetFogNear:
-      status: unimplemented
-    SetLightAmbientColor:
-      status: unimplemented
-    SetLightDiffuseColor:
-      status: unimplemented
-    SetLightDirection:
-      status: unimplemented
-    SetLightPosition:
-      status: unimplemented
-    SetLightType:
-      status: unimplemented
-    SetLightVisible:
-      status: unimplemented
-    SetViewInsets:
-      status: unimplemented
-    SetViewTranslation:
-      status: unimplemented
-    TakeActor:
-      status: unimplemented
+    GetViewTranslation: {}
+    IsLightVisible: {}
+    Project3DPointTo2D: {}
+    SetCameraFarClip: {}
+    SetCameraFieldOfView: {}
+    SetCameraNearClip: {}
+    SetCameraOrientationByAxisVectors: {}
+    SetCameraOrientationByYawPitchRoll: {}
+    SetCameraPosition: {}
+    SetDrawLayer: {}
+    SetFogColor: {}
+    SetFogFar: {}
+    SetFogNear: {}
+    SetLightAmbientColor: {}
+    SetLightDiffuseColor: {}
+    SetLightDirection: {}
+    SetLightPosition: {}
+    SetLightType: {}
+    SetLightVisible: {}
+    SetViewInsets: {}
+    SetViewTranslation: {}
+    TakeActor: {}
 MouseMixin:
   fields:
     mouseClickEnabled:
@@ -1928,34 +1425,22 @@ MovieFrame:
   inherits:
     Frame: {}
   methods:
-    EnableSubtitles:
-      status: unimplemented
-    StartMovie:
-      status: unimplemented
-    StartMovieByName:
-      status: unimplemented
-    StopMovie:
-      status: unimplemented
+    EnableSubtitles: {}
+    StartMovie: {}
+    StartMovieByName: {}
+    StopMovie: {}
 OffScreenFrame:
   inherits:
     Frame: {}
   methods:
-    ApplySnapshot:
-      status: unimplemented
-    Flush:
-      status: unimplemented
-    GetMaxSnapshots:
-      status: unimplemented
-    IsSnapshotValid:
-      status: unimplemented
-    SetMaxSnapshots:
-      status: unimplemented
-    TakeSnapshot:
-      status: unimplemented
-    TestPrintToFile:
-      status: unimplemented
-    UsesNPOT:
-      status: unimplemented
+    ApplySnapshot: {}
+    Flush: {}
+    GetMaxSnapshots: {}
+    IsSnapshotValid: {}
+    SetMaxSnapshots: {}
+    TakeSnapshot: {}
+    TestPrintToFile: {}
+    UsesNPOT: {}
 ParentedObject:
   fields:
     children:
@@ -1972,12 +1457,10 @@ ParentedObject:
       fields:
       - name: parent
       status: getter
-    GetParentKey:
-      status: unimplemented
+    GetParentKey: {}
     SetParent:
       status: implemented
-    SetParentKey:
-      status: unimplemented
+    SetParentKey: {}
   virtual: true
 Path:
   inherits:
@@ -1985,66 +1468,38 @@ Path:
   methods:
     CreateControlPoint:
       status: implemented
-    GetControlPoints:
-      status: unimplemented
-    GetCurveType:
-      status: unimplemented
-    GetMaxControlPointOrder:
-      status: unimplemented
-    SetCurveType:
-      status: unimplemented
+    GetControlPoints: {}
+    GetCurveType: {}
+    GetMaxControlPointOrder: {}
+    SetCurveType: {}
 PlayerModel:
   inherits:
     Model: {}
   methods:
-    ApplySpellVisualKit:
-      status: unimplemented
-    CanSetUnit:
-      status: unimplemented
-    FreezeAnimation:
-      status: unimplemented
-    GetDisplayInfo:
-      status: unimplemented
-    GetDoBlend:
-      status: unimplemented
-    GetKeepModelOnHide:
-      status: unimplemented
-    HasAnimation:
-      status: unimplemented
-    PlayAnimKit:
-      status: unimplemented
-    RefreshCamera:
-      status: unimplemented
-    RefreshUnit:
-      status: unimplemented
-    SetAnimation:
-      status: unimplemented
-    SetBarberShopAlternateForm:
-      status: unimplemented
-    SetCamDistanceScale:
-      status: unimplemented
-    SetCreature:
-      status: unimplemented
-    SetCustomRace:
-      status: unimplemented
-    SetDisplayInfo:
-      status: unimplemented
-    SetDoBlend:
-      status: unimplemented
-    SetItem:
-      status: unimplemented
-    SetItemAppearance:
-      status: unimplemented
-    SetKeepModelOnHide:
-      status: unimplemented
-    SetPortraitZoom:
-      status: unimplemented
-    SetRotation:
-      status: unimplemented
-    SetUnit:
-      status: unimplemented
-    StopAnimKit:
-      status: unimplemented
+    ApplySpellVisualKit: {}
+    CanSetUnit: {}
+    FreezeAnimation: {}
+    GetDisplayInfo: {}
+    GetDoBlend: {}
+    GetKeepModelOnHide: {}
+    HasAnimation: {}
+    PlayAnimKit: {}
+    RefreshCamera: {}
+    RefreshUnit: {}
+    SetAnimation: {}
+    SetBarberShopAlternateForm: {}
+    SetCamDistanceScale: {}
+    SetCreature: {}
+    SetCustomRace: {}
+    SetDisplayInfo: {}
+    SetDoBlend: {}
+    SetItem: {}
+    SetItemAppearance: {}
+    SetKeepModelOnHide: {}
+    SetPortraitZoom: {}
+    SetRotation: {}
+    SetUnit: {}
+    StopAnimKit: {}
 Region:
   fields:
     alpha:
@@ -2087,16 +1542,12 @@ Region:
     MouseMixin: {}
     ParentedObject: {}
   methods:
-    AdjustPointsOffset:
-      status: unimplemented
-    CanChangeProtectedState:
-      status: unimplemented
+    AdjustPointsOffset: {}
+    CanChangeProtectedState: {}
     ClearAllPoints:
       status: implemented
-    ClearPoint:
-      status: unimplemented
-    ClearPointsOffset:
-      status: unimplemented
+    ClearPoint: {}
+    ClearPointsOffset: {}
     CreateAnimationGroup:
       status: implemented
     GetAlpha:
@@ -2125,8 +1576,7 @@ Region:
       status: implemented
     GetPoint:
       status: implemented
-    GetPointByName:
-      status: unimplemented
+    GetPointByName: {}
     GetRect:
       fields:
       - name: bottom
@@ -2147,8 +1597,7 @@ Region:
       - name: width
       - name: height
       status: getter
-    GetSourceLocation:
-      status: unimplemented
+    GetSourceLocation: {}
     GetTop:
       status: implemented
     GetWidth:
@@ -2157,10 +1606,8 @@ Region:
       status: getter
     Hide:
       status: implemented
-    IsAnchoringRestricted:
-      status: unimplemented
-    IsDragging:
-      status: unimplemented
+    IsAnchoringRestricted: {}
+    IsDragging: {}
     IsIgnoringParentAlpha:
       fields:
       - name: isIgnoringParentAlpha
@@ -2169,14 +1616,11 @@ Region:
       fields:
       - name: isIgnoringParentScale
       status: getter
-    IsMouseOver:
-      status: unimplemented
-    IsObjectLoaded:
-      status: unimplemented
+    IsMouseOver: {}
+    IsObjectLoaded: {}
     IsProtected:
       status: implemented
-    IsRectValid:
-      status: unimplemented
+    IsRectValid: {}
     IsShown:
       fields:
       - name: shown
@@ -2199,8 +1643,7 @@ Region:
       fields:
       - name: isIgnoringParentScale
       status: setter
-    SetPassThroughButtons:
-      status: unimplemented
+    SetPassThroughButtons: {}
     SetPoint:
       status: implemented
     SetScale:
@@ -2218,45 +1661,30 @@ Region:
       status: setter
     Show:
       status: implemented
-    StopAnimating:
-      status: unimplemented
+    StopAnimating: {}
   virtual: true
 Rotation:
   inherits:
     Animation: {}
   methods:
-    GetDegrees:
-      status: unimplemented
-    GetOrigin:
-      status: unimplemented
-    GetRadians:
-      status: unimplemented
-    SetDegrees:
-      status: unimplemented
-    SetOrigin:
-      status: unimplemented
-    SetRadians:
-      status: unimplemented
+    GetDegrees: {}
+    GetOrigin: {}
+    GetRadians: {}
+    SetDegrees: {}
+    SetOrigin: {}
+    SetRadians: {}
 Scale:
   inherits:
     Animation: {}
   methods:
-    GetOrigin:
-      status: unimplemented
-    GetScale:
-      status: unimplemented
-    GetScaleFrom:
-      status: unimplemented
-    GetScaleTo:
-      status: unimplemented
-    SetOrigin:
-      status: unimplemented
-    SetScale:
-      status: unimplemented
-    SetScaleFrom:
-      status: unimplemented
-    SetScaleTo:
-      status: unimplemented
+    GetOrigin: {}
+    GetScale: {}
+    GetScaleFrom: {}
+    GetScaleTo: {}
+    SetOrigin: {}
+    SetScale: {}
+    SetScaleFrom: {}
+    SetScaleTo: {}
 ScriptObject:
   fields:
     scripts:
@@ -2287,11 +1715,9 @@ ScrollFrame:
     GetHorizontalScroll:
       outputs:
       - type: number
-      status: unimplemented
     GetHorizontalScrollRange:
       outputs:
       - type: number
-      status: unimplemented
     GetScrollChild:
       fields:
       - name: scrollChild
@@ -2299,19 +1725,14 @@ ScrollFrame:
     GetVerticalScroll:
       outputs:
       - type: number
-      status: unimplemented
     GetVerticalScrollRange:
       outputs:
       - type: number
-      status: unimplemented
-    SetHorizontalScroll:
-      status: unimplemented
+    SetHorizontalScroll: {}
     SetScrollChild:
       status: implemented
-    SetVerticalScroll:
-      status: unimplemented
-    UpdateScrollChildRect:
-      status: unimplemented
+    SetVerticalScroll: {}
+    UpdateScrollChildRect: {}
 SimpleHTML:
   inherits:
     FontInstance: {}
@@ -2320,15 +1741,10 @@ SimpleHTML:
     GetContentHeight:
       outputs:
       - type: number
-      status: unimplemented
-    GetHyperlinkFormat:
-      status: unimplemented
-    GetTextData:
-      status: unimplemented
-    SetHyperlinkFormat:
-      status: unimplemented
-    SetText:
-      status: unimplemented
+    GetHyperlinkFormat: {}
+    GetTextData: {}
+    SetHyperlinkFormat: {}
+    SetText: {}
 Slider:
   fields:
     enabled:
@@ -2358,12 +1774,9 @@ Slider:
       - name: min
       - name: max
       status: getter
-    GetObeyStepOnDrag:
-      status: unimplemented
-    GetOrientation:
-      status: unimplemented
-    GetStepsPerPage:
-      status: unimplemented
+    GetObeyStepOnDrag: {}
+    GetOrientation: {}
+    GetStepsPerPage: {}
     GetThumbTexture:
       fields:
       - name: thumbTexture
@@ -2372,25 +1785,18 @@ Slider:
       fields:
       - name: value
       status: getter
-    GetValueStep:
-      status: unimplemented
-    IsDraggingThumb:
-      status: unimplemented
-    IsEnabled:
-      status: unimplemented
-    SetEnabled:
-      status: unimplemented
+    GetValueStep: {}
+    IsDraggingThumb: {}
+    IsEnabled: {}
+    SetEnabled: {}
     SetMinMaxValues:
       fields:
       - name: min
       - name: max
       status: setter
-    SetObeyStepOnDrag:
-      status: unimplemented
-    SetOrientation:
-      status: unimplemented
-    SetStepsPerPage:
-      status: unimplemented
+    SetObeyStepOnDrag: {}
+    SetOrientation: {}
+    SetStepsPerPage: {}
     SetThumbTexture:
       fields:
       - name: thumbTexture
@@ -2399,8 +1805,7 @@ Slider:
       fields:
       - name: value
       status: setter
-    SetValueStep:
-      status: unimplemented
+    SetValueStep: {}
 StatusBar:
   fields:
     max:
@@ -2417,23 +1822,18 @@ StatusBar:
   inherits:
     Frame: {}
   methods:
-    GetFillStyle:
-      status: unimplemented
+    GetFillStyle: {}
     GetMinMaxValues:
       fields:
       - name: min
       - name: max
       status: getter
-    GetOrientation:
-      status: unimplemented
-    GetReverseFill:
-      status: unimplemented
-    GetRotatesTexture:
-      status: unimplemented
+    GetOrientation: {}
+    GetReverseFill: {}
+    GetRotatesTexture: {}
     GetStatusBarColor:
       status: implemented
-    GetStatusBarDesaturation:
-      status: unimplemented
+    GetStatusBarDesaturation: {}
     GetStatusBarTexture:
       fields:
       - name: statusBarTexture
@@ -2442,29 +1842,21 @@ StatusBar:
       fields:
       - name: value
       status: getter
-    IsStatusBarDesaturated:
-      status: unimplemented
-    SetColorFill:
-      status: unimplemented
-    SetFillStyle:
-      status: unimplemented
+    IsStatusBarDesaturated: {}
+    SetColorFill: {}
+    SetFillStyle: {}
     SetMinMaxValues:
       fields:
       - name: min
       - name: max
       status: setter
-    SetOrientation:
-      status: unimplemented
-    SetReverseFill:
-      status: unimplemented
-    SetRotatesTexture:
-      status: unimplemented
+    SetOrientation: {}
+    SetReverseFill: {}
+    SetRotatesTexture: {}
     SetStatusBarColor:
       status: implemented
-    SetStatusBarDesaturated:
-      status: unimplemented
-    SetStatusBarDesaturation:
-      status: unimplemented
+    SetStatusBarDesaturated: {}
+    SetStatusBarDesaturation: {}
     SetStatusBarTexture:
       status: implemented
     SetValue:
@@ -2475,26 +1867,16 @@ TabardModel:
   inherits:
     PlayerModel: {}
   methods:
-    CanSaveTabardNow:
-      status: unimplemented
-    CycleVariation:
-      status: unimplemented
-    GetLowerBackgroundFileName:
-      status: unimplemented
-    GetLowerEmblemFileName:
-      status: unimplemented
-    GetLowerEmblemTexture:
-      status: unimplemented
-    GetUpperBackgroundFileName:
-      status: unimplemented
-    GetUpperEmblemFileName:
-      status: unimplemented
-    GetUpperEmblemTexture:
-      status: unimplemented
-    InitializeTabardColors:
-      status: unimplemented
-    Save:
-      status: unimplemented
+    CanSaveTabardNow: {}
+    CycleVariation: {}
+    GetLowerBackgroundFileName: {}
+    GetLowerEmblemFileName: {}
+    GetLowerEmblemTexture: {}
+    GetUpperBackgroundFileName: {}
+    GetUpperEmblemFileName: {}
+    GetUpperEmblemTexture: {}
+    InitializeTabardColors: {}
+    Save: {}
 Texture:
   fields:
     blendMode:
@@ -2552,26 +1934,20 @@ Texture:
     LayeredRegion: {}
     ScriptObject: {}
   methods:
-    AddMaskTexture:
-      status: unimplemented
-    GetAtlas:
-      status: unimplemented
+    AddMaskTexture: {}
+    GetAtlas: {}
     GetBlendMode:
       fields:
       - name: blendMode
       status: getter
-    GetDesaturation:
-      status: unimplemented
+    GetDesaturation: {}
     GetHorizTile:
       fields:
       - name: horizTile
       status: getter
-    GetMaskTexture:
-      status: unimplemented
-    GetNumMaskTextures:
-      status: unimplemented
-    GetRotation:
-      status: unimplemented
+    GetMaskTexture: {}
+    GetNumMaskTextures: {}
+    GetRotation: {}
     GetTexCoord:
       fields:
       - name: tlx
@@ -2583,14 +1959,11 @@ Texture:
       - name: brx
       - name: bry
       status: getter
-    GetTexelSnappingBias:
-      status: unimplemented
+    GetTexelSnappingBias: {}
     GetTexture:
       status: implemented
-    GetTextureFileID:
-      status: unimplemented
-    GetTextureFilePath:
-      status: unimplemented
+    GetTextureFileID: {}
+    GetTextureFilePath: {}
     GetVertexColor:
       fields:
       - name: vertexColorR
@@ -2598,36 +1971,27 @@ Texture:
       - name: vertexColorB
       - name: vertexColorA
       status: getter
-    GetVertexOffset:
-      status: unimplemented
+    GetVertexOffset: {}
     GetVertTile:
       fields:
       - name: vertTile
       status: getter
-    IsBlockingLoadRequested:
-      status: unimplemented
-    IsDesaturated:
-      status: unimplemented
-    IsSnappingToPixelGrid:
-      status: unimplemented
-    RemoveMaskTexture:
-      status: unimplemented
+    IsBlockingLoadRequested: {}
+    IsDesaturated: {}
+    IsSnappingToPixelGrid: {}
+    RemoveMaskTexture: {}
     SetAtlas:
       status: implemented
     SetBlendMode:
       fields:
       - name: blendMode
       status: setter
-    SetBlockingLoadsRequested:
-      status: unimplemented
+    SetBlockingLoadsRequested: {}
     SetColorTexture:
       status: implemented
-    SetDesaturated:
-      status: unimplemented
-    SetDesaturation:
-      status: unimplemented
-    SetGradient:
-      status: unimplemented
+    SetDesaturated: {}
+    SetDesaturation: {}
+    SetGradient: {}
     SetHorizTile:
       fields:
       - name: horizTile
@@ -2636,18 +2000,14 @@ Texture:
       fields:
       - name: maskName
       status: setter
-    SetRotation:
-      status: unimplemented
-    SetSnapToPixelGrid:
-      status: unimplemented
+    SetRotation: {}
+    SetSnapToPixelGrid: {}
     SetTexCoord:
       status: implemented
-    SetTexelSnappingBias:
-      status: unimplemented
+    SetTexelSnappingBias: {}
     SetTexture:
       status: implemented
-    SetVertexOffset:
-      status: unimplemented
+    SetVertexOffset: {}
     SetVertTile:
       fields:
       - name: vertTile
@@ -2660,10 +2020,8 @@ Translation:
   inherits:
     Animation: {}
   methods:
-    GetOffset:
-      status: unimplemented
-    SetOffset:
-      status: unimplemented
+    GetOffset: {}
+    SetOffset: {}
 UIObject:
   fields:
     name:
@@ -2684,34 +2042,20 @@ UnitPositionFrame:
   inherits:
     Frame: {}
   methods:
-    AddUnit:
-      status: unimplemented
-    AddUnitAtlas:
-      status: unimplemented
-    AddUnitFileID:
-      status: unimplemented
-    ClearUnits:
-      status: unimplemented
-    FinalizeUnits:
-      status: unimplemented
-    GetMouseOverUnits:
-      status: unimplemented
-    GetPlayerPingScale:
-      status: unimplemented
-    GetUiMapID:
-      status: unimplemented
-    SetPlayerPingScale:
-      status: unimplemented
-    SetPlayerPingTexture:
-      status: unimplemented
-    SetUiMapID:
-      status: unimplemented
-    SetUnitColor:
-      status: unimplemented
-    StartPlayerPing:
-      status: unimplemented
-    StopPlayerPing:
-      status: unimplemented
+    AddUnit: {}
+    AddUnitAtlas: {}
+    AddUnitFileID: {}
+    ClearUnits: {}
+    FinalizeUnits: {}
+    GetMouseOverUnits: {}
+    GetPlayerPingScale: {}
+    GetUiMapID: {}
+    SetPlayerPingScale: {}
+    SetPlayerPingTexture: {}
+    SetUiMapID: {}
+    SetUnitColor: {}
+    StartPlayerPing: {}
+    StopPlayerPing: {}
 WorldFrame:
   inherits:
     Frame: {}

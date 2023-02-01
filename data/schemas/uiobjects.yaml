@@ -62,13 +62,11 @@ type:
                               oneof:
                               - literal: number
                   status:
-                    required: true
                     type:
                       oneof:
                       - literal: getter
                       - literal: implemented
                       - literal: setter
-                      - literal: unimplemented
         objectType:
           type: string
         virtual:

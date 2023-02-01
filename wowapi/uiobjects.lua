@@ -190,7 +190,7 @@ local function mkBaseUIObjectTypes(api)
             end
           end
         end
-      elseif method.status == 'unimplemented' then
+      elseif not method.status then
         -- TODO unify this with loader.lua
         local t = {}
         for _, output in ipairs(method.outputs or {}) do
