@@ -55,13 +55,13 @@ describe('uiobjects', function()
           end)
         end
       end)
-      local function hasField(k, f)
+      local function hasMember(k, m, f)
         local v = uiobjects[k]
-        if (v.fields or {})[f] then
+        if (v[m] or {})[f] then
           return true
         end
         for inh in pairs(v.inherits) do
-          if hasField(inh, f) then
+          if hasMember(inh, m, f) then
             return true
           end
         end
@@ -74,7 +74,7 @@ describe('uiobjects', function()
               describe(fk, function()
                 it('is not defined up inheritance tree', function()
                   for inh in pairs(v.inherits) do
-                    assert.False(hasField(inh, fk))
+                    assert.False(hasMember(inh, 'fields', fk))
                   end
                 end)
               end)
@@ -83,9 +83,14 @@ describe('uiobjects', function()
           describe('methods', function()
             for mk, mv in pairs(v.methods) do
               describe(mk, function()
+                it('is not defined up inheritance tree', function()
+                  for inh in pairs(v.inherits) do
+                    assert.False(hasMember(inh, 'methods', mk))
+                  end
+                end)
                 it('manipulates only declared fields', function()
                   for _, field in ipairs(mv.fields or {}) do
-                    assert.True(hasField(k, field.name))
+                    assert.True(hasMember(k, 'fields', field.name))
                   end
                 end)
               end)
