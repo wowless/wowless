@@ -40,7 +40,6 @@ files['data/uiobjects'] = {
     'api',
     'build',
     'm',
-    'runtimeProduct',
     'toTexture',
     'u',
     'UpdateVisible',

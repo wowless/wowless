@@ -99,7 +99,6 @@ local function mkBaseUIObjectTypes(api)
     api = api,
     build = api.datalua.build,
     m = m,
-    runtimeProduct = api.product,
     toTexture = toTexture,
     u = u,
     UpdateVisible = UpdateVisible,
