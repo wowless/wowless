@@ -93,8 +93,8 @@ local function run(cfg)
       for frame in api.frames:entries() do
         if frame:IsVisible() then
           api.log(2, 'enter/leave %s', frame:GetDebugName())
-          api.RunScript(frame.luarep, 'OnEnter', true)
-          api.RunScript(frame.luarep, 'OnLeave', true)
+          api.RunScript(frame, 'OnEnter', true)
+          api.RunScript(frame, 'OnLeave', true)
         end
       end
     end,

@@ -25,7 +25,7 @@ local function mkBaseUIObjectTypes(api)
         DoUpdateVisible(kid, script)
       end
     end
-    api.RunScript(obj.luarep, script)
+    api.RunScript(obj, script)
   end
 
   local function UpdateVisible(obj, fn)

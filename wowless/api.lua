@@ -121,12 +121,11 @@ local function new(log, maxErrors, product)
   end
 
   local function RunScript(obj, name, ...)
-    local ud = u(obj)
-    if ud.scripts then
+    if obj.scripts then
       for i = 0, 2 do
-        local script = ud.scripts[i][string.lower(name)]
+        local script = obj.scripts[i][string.lower(name)]
         if script then
-          CallSafely(script, obj, ...)
+          CallSafely(script, obj.luarep, ...)
         end
       end
     end
@@ -195,9 +194,9 @@ local function new(log, maxErrors, product)
     if id then
       obj:SetID(id)
     end
-    RunScript(obj, 'OnLoad')
+    RunScript(u(obj), 'OnLoad')
     if InheritsFrom(typename, 'region') and obj:IsVisible() then
-      RunScript(obj, 'OnShow')
+      RunScript(u(obj), 'OnShow')
     end
     -- I have found a theory for this hack but this comment is too small to contain it.
     if typename == 'fogofwarframe' and datalua.build.flavor ~= 'Mainline' then
@@ -233,7 +232,7 @@ local function new(log, maxErrors, product)
       table.insert(regs, frame)
     end
     for _, reg in ipairs(regs) do
-      RunScript(reg.luarep, 'OnEvent', event, ...)
+      RunScript(reg, 'OnEvent', event, ...)
     end
   end
 
@@ -264,7 +263,7 @@ local function new(log, maxErrors, product)
     end
     for frame in frames:entries() do
       if frame:IsVisible() then
-        RunScript(frame.luarep, 'OnUpdate', 1)
+        RunScript(frame, 'OnUpdate', 1)
       end
     end
   end
