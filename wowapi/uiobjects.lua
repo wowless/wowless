@@ -20,12 +20,12 @@ local function mkBaseUIObjectTypes(api)
   end
 
   local function DoUpdateVisible(obj, script)
-    for kid in u(obj).children:entries() do
-      if u(kid).shown then
+    for kid in obj.children:entries() do
+      if kid.shown then
         DoUpdateVisible(kid, script)
       end
     end
-    api.RunScript(obj, script)
+    api.RunScript(obj.luarep, script)
   end
 
   local function UpdateVisible(obj, fn)
@@ -33,7 +33,7 @@ local function mkBaseUIObjectTypes(api)
     fn()
     local visibleNow = m(obj, 'IsVisible')
     if wasVisible ~= visibleNow then
-      DoUpdateVisible(obj, visibleNow and 'OnShow' or 'OnHide')
+      DoUpdateVisible(u(obj), visibleNow and 'OnShow' or 'OnHide')
     end
   end
 

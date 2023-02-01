@@ -37,24 +37,25 @@ local function new(log, maxErrors, product)
   }
 
   local function SetParent(obj, parent)
-    if u(obj).parent == parent then
+    local ud = u(obj)
+    if ud.parent == parent then
       return
     end
-    if u(obj).parent then
-      local up = u(u(obj).parent)
-      up.children:remove(obj)
+    if ud.parent then
+      local up = u(ud.parent)
+      up.children:remove(ud)
       for _, f in ipairs(parentFieldsToClear) do
         if up[f] == obj then
           up[f] = nil
         end
       end
     end
-    u(obj).parent = parent
+    ud.parent = parent
     if parent then
-      u(parent).children:insert(obj)
+      u(parent).children:insert(ud)
     end
-    if parent and u(parent).frameLevel and u(obj).frameLevel and not u(obj).hasFixedFrameLevel then
-      obj:SetFrameLevel(u(parent).frameLevel + 1)
+    if parent and u(parent).frameLevel and ud.frameLevel and not ud.hasFixedFrameLevel then
+      ud:SetFrameLevel(u(parent).frameLevel + 1)
     end
   end
 
