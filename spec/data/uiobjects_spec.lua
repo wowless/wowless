@@ -69,15 +69,28 @@ describe('uiobjects', function()
       end
       for k, v in pairs(uiobjects) do
         describe(k, function()
-          for mk, mv in pairs(v.methods) do
-            describe(mk, function()
-              it('manipulates only declared fields', function()
-                for _, field in ipairs(mv.fields or {}) do
-                  assert.True(hasField(k, field.name))
-                end
+          describe('fields', function()
+            for fk in pairs(v.fields or {}) do
+              describe(fk, function()
+                it('is not defined up inheritance tree', function()
+                  for inh in pairs(v.inherits) do
+                    assert.False(hasField(inh, fk))
+                  end
+                end)
               end)
-            end)
-          end
+            end
+          end)
+          describe('methods', function()
+            for mk, mv in pairs(v.methods) do
+              describe(mk, function()
+                it('manipulates only declared fields', function()
+                  for _, field in ipairs(mv.fields or {}) do
+                    assert.True(hasField(k, field.name))
+                  end
+                end)
+              end)
+            end
+          end)
         end)
       end
     end)
