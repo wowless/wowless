@@ -216,6 +216,9 @@ Button:
     disabledTexture:
       nilable: true
       type: texture
+    fontstring:
+      nilable: true
+      type: table
     highlightTexture:
       nilable: true
       type: texture

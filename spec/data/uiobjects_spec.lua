@@ -55,6 +55,31 @@ describe('uiobjects', function()
           end)
         end
       end)
+      local function hasField(k, f)
+        local v = uiobjects[k]
+        if (v.fields or {})[f] then
+          return true
+        end
+        for inh in pairs(v.inherits) do
+          if hasField(inh, f) then
+            return true
+          end
+        end
+        return false
+      end
+      for k, v in pairs(uiobjects) do
+        describe(k, function()
+          for mk, mv in pairs(v.methods) do
+            describe(mk, function()
+              it('manipulates only declared fields', function()
+                for _, field in ipairs(mv.fields or {}) do
+                  assert.True(hasField(k, field.name))
+                end
+              end)
+            end)
+          end
+        end)
+      end
     end)
   end
   local actualImpls = {}
