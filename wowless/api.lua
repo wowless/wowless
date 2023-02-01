@@ -233,7 +233,7 @@ local function new(log, maxErrors, product)
       table.insert(regs, frame)
     end
     for _, reg in ipairs(regs) do
-      RunScript(reg, 'OnEvent', event, ...)
+      RunScript(reg.luarep, 'OnEvent', event, ...)
     end
   end
 
@@ -276,31 +276,31 @@ local function new(log, maxErrors, product)
   local function RegisterEvent(frame, event)
     event = event:upper()
     assert(eventRegistrations[event], 'cannot register ' .. event)
-    if not allEventRegistrations:has(frame) then
-      eventRegistrations[event]:insert(frame)
+    if not allEventRegistrations:has(u(frame)) then
+      eventRegistrations[event]:insert(u(frame))
     end
   end
 
   local function UnregisterEvent(frame, event)
     event = event:upper()
     assert(eventRegistrations[event], 'cannot unregister ' .. event)
-    eventRegistrations[event]:remove(frame)
+    eventRegistrations[event]:remove(u(frame))
   end
 
   local function UnregisterAllEvents(frame)
     for _, reg in pairs(eventRegistrations) do
-      reg:remove(frame)
+      reg:remove(u(frame))
     end
-    allEventRegistrations:remove(frame)
+    allEventRegistrations:remove(u(frame))
   end
 
   local function RegisterAllEvents(frame)
     UnregisterAllEvents(frame)
-    allEventRegistrations:insert(frame)
+    allEventRegistrations:insert(u(frame))
   end
 
   local function IsEventRegistered(frame, event)
-    return allEventRegistrations:has(frame) or eventRegistrations[event:upper()]:has(frame)
+    return allEventRegistrations:has(u(frame)) or eventRegistrations[event:upper()]:has(u(frame))
   end
 
   for k, v in pairs(datalua.state) do
