@@ -1,6 +1,18 @@
+local validPoints = {
+  BOTTOM = true,
+  BOTTOMLEFT = true,
+  BOTTOMRIGHT = true,
+  CENTER = true,
+  LEFT = true,
+  RIGHT = true,
+  TOP = true,
+  TOPLEFT = true,
+  TOPRIGHT = true,
+}
 return (function(self, point, ...)
   -- TODO handle resetting points
   point = point or 'CENTER'
+  assert(validPoints[point])
   local relativeTo = u(self).parent
   local relativePoint = point
   local x, y = 0, 0
