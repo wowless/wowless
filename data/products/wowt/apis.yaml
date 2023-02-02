@@ -7445,6 +7445,8 @@ C_EditMode.OnLayoutAdded:
       type: number
     - name: activateNewLayout
       type: boolean
+    - name: isLayoutImported
+      type: boolean
   outputs: {}
 C_EditMode.OnLayoutDeleted:
   inputs:
@@ -13005,6 +13007,12 @@ C_PlayerInfo.IsPlayerNPERestricted:
   - {}
   outputs:
   - name: isRestricted
+    type: boolean
+C_PlayerInfo.IsTradingPostAvailable:
+  inputs:
+  - {}
+  outputs:
+  - name: isAvailable
     type: boolean
 C_PlayerInfo.IsTravelersLogAvailable:
   inputs:

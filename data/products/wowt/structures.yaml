@@ -2785,6 +2785,11 @@ C_ItemUpgrade.ItemUpgradeCurrencyCost:
     type: number
   currencyID:
     type: number
+C_ItemUpgrade.ItemUpgradeItemCost:
+  cost:
+    type: number
+  itemID:
+    type: number
 C_ItemUpgrade.ItemUpgradeItemInfo:
   currUpgrade:
     type: number
@@ -2803,7 +2808,7 @@ C_ItemUpgrade.ItemUpgradeItemInfo:
       arrayof:
         structure: C_ItemUpgrade.ItemUpgradeLevelInfo
 C_ItemUpgrade.ItemUpgradeLevelInfo:
-  costsToUpgrade:
+  currencyCostsToUpgrade:
     type:
       arrayof:
         structure: C_ItemUpgrade.ItemUpgradeCurrencyCost
@@ -2812,6 +2817,10 @@ C_ItemUpgrade.ItemUpgradeLevelInfo:
   failureMessage:
     nilable: true
     type: string
+  itemCostsToUpgrade:
+    type:
+      arrayof:
+        structure: C_ItemUpgrade.ItemUpgradeItemCost
   itemLevelIncrement:
     type: number
   levelStats:
