@@ -92,14 +92,9 @@ for _, t in pairs(docs) do
     end
   elseif t.Type == 'ScriptObject' then
     assert(not scrobjs[t.Name])
-    assert(not next(t.Events))
-    assert(not next(t.Tables))
-    scrobjs[t.Name] = t.Functions
+    scrobjs[t.Name] = t
   end
 end
-
-require('pl.file').write('moo.yaml', require('wowapi.yaml').pprint(scrobjs))
-os.exit(0) -- DO NOT SUBMIT
 
 local types = {
   AuraData = 'table',
@@ -114,6 +109,7 @@ local types = {
   cstring = 'string',
   fileID = 'number',
   FramePoint = 'string', -- hack, yes
+  ['function'] = 'function',
   GarrisonFollower = 'string',
   HTMLTextType = 'string',
   InventorySlots = 'number',
@@ -365,6 +361,43 @@ local function rewriteStructures(outApis, outEvents)
   end
   writeFile(filename, pprintYaml(out))
 end
+
+local moo = {}
+
+for _, t in pairs(scrobjs) do
+  assert(not next(t.Events))
+  assert(not next(t.Tables))
+  local fns = {}
+  for _, fn in ipairs(t.Functions) do
+    assert(not fns[fn.Name])
+    local inputs = {}
+    for _, arg in ipairs(fn.Arguments or {}) do
+      table.insert(inputs, {
+        default = arg.Default,
+        name = arg.Name,
+        nilable = arg.Nilable or nil,
+        type = t2nty(arg),
+      })
+    end
+    local outputs = {}
+    for _, ret in ipairs(fn.Returns or {}) do
+      table.insert(outputs, {
+        default = ret.Default,
+        name = ret.Name,
+        nilable = ret.Nilable or nil,
+        type = t2nty(ret),
+      })
+    end
+    fns[fn.Name] = {
+      inputs = inputs,
+      outputs = outputs,
+    }
+  end
+  moo[t.Name] = fns
+end
+
+require('pl.file').write('moo.yaml', require('wowapi.yaml').pprint(moo))
+os.exit(0) -- DO NOT SUBMIT
 
 local outApis = rewriteApis()
 local outEvents = rewriteEvents()
