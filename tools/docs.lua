@@ -72,7 +72,7 @@ end
 local config = parseYaml('data/products/' .. product .. '/config.yaml').docs
 local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
 
-local tabs, funcs, events = {}, {}, {}
+local tabs, funcs, events, scrobjs = {}, {}, {}, {}
 for _, t in pairs(docs) do
   if not t.Type or t.Type == 'System' then
     for _, tab in ipairs(t.Tables or {}) do
@@ -90,8 +90,16 @@ for _, t in pairs(docs) do
       assert(not events[name])
       events[name] = event
     end
+  elseif t.Type == 'ScriptObject' then
+    assert(not scrobjs[t.Name])
+    assert(not next(t.Events))
+    assert(not next(t.Tables))
+    scrobjs[t.Name] = t.Functions
   end
 end
+
+require('pl.file').write('moo.yaml', require('wowapi.yaml').pprint(scrobjs))
+os.exit(0) -- DO NOT SUBMIT
 
 local types = {
   AuraData = 'table',
