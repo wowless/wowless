@@ -308,7 +308,7 @@ function G.GeneratedTests()
       assertEquals(expectedErr, err:sub(err:len() - expectedErr:len() + 1))
     end
     local indexes = {}
-    local function mkTests(objectTypeName, factory, tests)
+    local function mkTests(objectTypeName, zombie, factory, tests)
       local obj = assert(factory(), 'factory failed')
       local obj2 = assert(factory(), 'factory failed')
       if objectTypeName == 'EditBox' then
@@ -318,7 +318,7 @@ function G.GeneratedTests()
       assert(obj ~= obj2)
       local mt = getmetatable(obj)
       assert(mt == getmetatable(obj2))
-      if objectTypeName == 'FogOfWarFrame' and _G.WowlessData.Build.flavor ~= 'Mainline' then
+      if zombie then
         assert(mt == nil)
         assertEquals(objectTypeName, CreateFrame('Frame').GetObjectType(obj))
       else
@@ -470,7 +470,7 @@ function G.GeneratedTests()
                 return assertCreateFrame(name)
               end
             assert(factory, 'missing factory')
-            return mkTests(cfg.objtype, factory, function(__index)
+            return mkTests(cfg.objtype, cfg.zombie, factory, function(__index)
               local mtests = {}
               for mname in pairs(cfg.methods) do
                 mtests[mname] = function()

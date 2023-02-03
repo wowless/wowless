@@ -138,6 +138,7 @@ local ptablemap = {
         methods = mt,
         objtype = objTypes[k],
         virtual = v.virtual,
+        zombie = v.zombie,
       }
     end
     return 'UIObjectApis', t
