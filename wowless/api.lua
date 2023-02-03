@@ -198,8 +198,7 @@ local function new(log, maxErrors, product)
     if InheritsFrom(typename, 'region') and obj:IsVisible() then
       RunScript(u(obj), 'OnShow')
     end
-    -- I have found a theory for this hack but this comment is too small to contain it.
-    if typename == 'fogofwarframe' and datalua.build.flavor ~= 'Mainline' then
+    if objtype.zombie then
       setmetatable(obj, nil)
     end
     return obj

@@ -679,6 +679,7 @@ FogOfWarFrame:
   methods:
     GetUiMapID: {}
     SetUiMapID: {}
+  zombie: true
 Font:
   inherits:
     FontInstance: {}

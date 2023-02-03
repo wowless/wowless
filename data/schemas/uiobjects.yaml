@@ -71,3 +71,5 @@ type:
           type: string
         virtual:
           type: boolean
+        zombie:
+          type: boolean
