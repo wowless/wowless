@@ -5,5 +5,7 @@ docs:
       C_ConfigurationWarnings: {}
   events:
     never_sent:
-      PARTY_INVITE_CANCEL: {}
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+runner:
+  skip_events:
+    PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented

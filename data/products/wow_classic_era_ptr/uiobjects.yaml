@@ -8,18 +8,26 @@ Actor:
     ParentedObject: {}
     ScriptObject: {}
   methods:
+    AttachToMount: {}
+    CalculateMountScale: {}
     ClearModel: {}
+    Dress: {}
     GetActiveBoundingBox: {}
     GetAlpha: {}
     GetAnimation: {}
     GetAnimationBlendOperation: {}
     GetAnimationVariation: {}
+    GetAutoDress: {}
     GetDesaturation: {}
+    GetItemTransmogInfo: {}
+    GetItemTransmogInfoList: {}
     GetMaxBoundingBox: {}
     GetModelFileID: {}
     GetModelPath: {}
     GetModelUnitGUID: {}
+    GetObeyHideInTransmogFlag: {}
     GetParticleOverrideScale: {}
+    GetPaused: {}
     GetPitch: {}
     GetPosition: {}
     GetRoll: {}
@@ -27,36 +35,54 @@ Actor:
       fields:
       - name: scale
       status: getter
+    GetSheathed: {}
     GetSpellVisualKit: {}
+    GetUseTransmogChoices: {}
+    GetUseTransmogSkin: {}
     GetYaw: {}
     Hide: {}
+    IsGeoReady: {}
     IsLoaded: {}
     IsShown: {}
+    IsSlotAllowed: {}
+    IsSlotVisible: {}
     IsUsingCenterForOrigin: {}
     IsVisible: {}
     PlayAnimationKit: {}
     SetAlpha: {}
     SetAnimation: {}
     SetAnimationBlendOperation: {}
+    SetAutoDress: {}
     SetDesaturation: {}
+    SetItemTransmogInfo: {}
     SetModelByCreatureDisplayID: {}
     SetModelByFileID: {}
+    SetModelByHyperlink: {}
     SetModelByPath: {}
     SetModelByUnit: {}
+    SetObeyHideInTransmogFlag: {}
     SetParticleOverrideScale: {}
+    SetPaused: {}
     SetPitch: {}
+    SetPlayerModelFromGlues: {}
     SetPosition: {}
     SetRoll: {}
     SetScale:
       fields:
       - name: scale
       status: setter
+    SetSheathed: {}
     SetShown: {}
     SetSpellVisualKit: {}
     SetUseCenterForOrigin: {}
+    SetUseTransmogChoices: {}
+    SetUseTransmogSkin: {}
     SetYaw: {}
     Show: {}
     StopAnimationKit: {}
+    TryOn: {}
+    Undress: {}
+    UndressSlot: {}
   objectType: ModelSceneActor
 Alpha:
   inherits:
@@ -126,6 +152,8 @@ Animation:
       status: setter
     SetTarget: {}
     SetTargetKey: {}
+    SetTargetName: {}
+    SetTargetParent: {}
     Stop: {}
 AnimationGroup:
   inherits:
@@ -137,6 +165,7 @@ AnimationGroup:
     Finish: {}
     GetAnimations:
       status: implemented
+    GetAnimationSpeedMultiplier: {}
     GetDuration: {}
     GetLooping: {}
     GetLoopState: {}
@@ -145,11 +174,13 @@ AnimationGroup:
     IsPaused: {}
     IsPendingFinish: {}
     IsPlaying: {}
+    IsReverse: {}
     IsSetToFinalAlpha: {}
     Pause: {}
     Play: {}
     RemoveAnimations: {}
     Restart: {}
+    SetAnimationSpeedMultiplier: {}
     SetLooping: {}
     SetPlaying: {}
     SetToFinalAlpha: {}
@@ -166,6 +197,7 @@ Browser:
     NavigateHome: {}
     NavigateReload: {}
     NavigateStop: {}
+    NavigateTo: {}
     OpenExternalLink: {}
     OpenTicket: {}
     SetFocus: {}
@@ -214,6 +246,10 @@ Button:
   inherits:
     Frame: {}
   methods:
+    ClearDisabledTexture: {}
+    ClearHighlightTexture: {}
+    ClearNormalTexture: {}
+    ClearPushedTexture: {}
     Click:
       status: implemented
     Disable:
@@ -289,6 +325,7 @@ Button:
     SetHighlightAtlas:
       status: implemented
     SetHighlightFontObject: {}
+    SetHighlightLocked: {}
     SetHighlightTexture:
       status: implemented
     SetMotionScriptsWhileDisabled:
@@ -392,6 +429,7 @@ ColorSelect:
   inherits:
     Frame: {}
   methods:
+    ClearColorWheelTexture: {}
     GetColorHSV:
       outputs:
       - name: h
@@ -499,6 +537,7 @@ Cooldown:
       fields:
       - name: swipeTexture
       status: setter
+    SetTexCoordRange: {}
     SetUseCircularEdge: {}
 DressUpModel:
   inherits:
@@ -506,9 +545,21 @@ DressUpModel:
   methods:
     Dress: {}
     GetAutoDress: {}
+    GetItemTransmogInfo: {}
+    GetItemTransmogInfoList: {}
+    GetObeyHideInTransmogFlag: {}
     GetSheathed: {}
+    GetUseTransmogChoices: {}
+    GetUseTransmogSkin: {}
+    IsGeoReady: {}
+    IsSlotAllowed: {}
+    IsSlotVisible: {}
     SetAutoDress: {}
+    SetItemTransmogInfo: {}
+    SetObeyHideInTransmogFlag: {}
     SetSheathed: {}
+    SetUseTransmogChoices: {}
+    SetUseTransmogSkin: {}
     TryOn: {}
     Undress: {}
     UndressSlot: {}
@@ -584,6 +635,7 @@ EditBox:
     GetUTF8CursorPosition: {}
     GetVisibleTextByteLimit: {}
     HasFocus: {}
+    HasText: {}
     HighlightText: {}
     Insert:
       status: implemented
@@ -663,7 +715,17 @@ FogOfWarFrame:
   inherits:
     Frame: {}
   methods:
+    GetFogOfWarBackgroundAtlas: {}
+    GetFogOfWarBackgroundTexture: {}
+    GetFogOfWarMaskAtlas: {}
+    GetFogOfWarMaskTexture: {}
+    GetMaskScalar: {}
     GetUiMapID: {}
+    SetFogOfWarBackgroundAtlas: {}
+    SetFogOfWarBackgroundTexture: {}
+    SetFogOfWarMaskAtlas: {}
+    SetFogOfWarMaskTexture: {}
+    SetMaskScalar: {}
     SetUiMapID: {}
 Font:
   inherits:
@@ -723,6 +785,7 @@ FontString:
   inherits:
     FontInstance: {}
     LayeredRegion: {}
+    ScriptObject: {}
   methods:
     CalculateScreenAreaFromCharacterSpan: {}
     CanNonSpaceWrap: {}
@@ -739,6 +802,7 @@ FontString:
     GetNumLines:
       outputs:
       - type: number
+    GetRotation: {}
     GetStringHeight:
       outputs:
       - type: number
@@ -756,6 +820,7 @@ FontString:
     GetUnboundedStringWidth:
       outputs:
       - type: number
+    GetVertexColor: {}
     GetWrappedWidth:
       outputs:
       - type: number
@@ -768,6 +833,7 @@ FontString:
       - name: maxLines
       status: setter
     SetNonSpaceWrap: {}
+    SetRotation: {}
     SetText:
       status: implemented
     SetTextHeight: {}
@@ -840,7 +906,6 @@ Frame:
       init: false
       type: boolean
   inherits:
-    MouseMixin: {}
     Region: {}
     ScriptObject: {}
   methods:
@@ -867,11 +932,9 @@ Frame:
     GetChildren:
       status: implemented
     GetClampRectInsets: {}
-    GetDepth: {}
     GetDontSavePosition: {}
     GetEffectiveAlpha:
       status: implemented
-    GetEffectiveDepth: {}
     GetEffectivelyFlattensRenderLayers: {}
     GetFlattensRenderLayers: {}
     GetFrameLevel:
@@ -891,16 +954,6 @@ Frame:
       fields:
       - name: id
       status: getter
-    GetMaxResize:
-      fields:
-      - name: maxResizeWidth
-      - name: maxResizeHeight
-      status: getter
-    GetMinResize:
-      fields:
-      - name: minResizeWidth
-      - name: minResizeHeight
-      status: getter
     GetNumChildren:
       status: implemented
     GetNumRegions:
@@ -911,6 +964,7 @@ Frame:
       status: getter
     GetRegions:
       status: implemented
+    GetResizeBounds: {}
     HasFixedFrameLevel:
       fields:
       - name: hasFixedFrameLevel
@@ -919,7 +973,6 @@ Frame:
       fields:
       - name: hasFixedFrameStrata
       status: getter
-    IgnoreDepth: {}
     IsClampedToScreen:
       fields:
       - name: isClampedToScreen
@@ -928,7 +981,6 @@ Frame:
       status: implemented
     IsGamePadButtonEnabled: {}
     IsGamePadStickEnabled: {}
-    IsIgnoringDepth: {}
     IsKeyboardEnabled: {}
     IsMovable:
       fields:
@@ -966,7 +1018,6 @@ Frame:
       status: setter
     SetClampRectInsets: {}
     SetClipsChildren: {}
-    SetDepth: {}
     SetDontSavePosition: {}
     SetDrawLayerEnabled: {}
     SetFixedFrameLevel:
@@ -978,7 +1029,6 @@ Frame:
       - name: hasFixedFrameStrata
       status: setter
     SetFlattensRenderLayers: {}
-    SetFrameBuffer: {}
     SetFrameLevel:
       status: implemented
     SetFrameStrata:
@@ -994,16 +1044,7 @@ Frame:
       fields:
       - name: id
       status: setter
-    SetMaxResize:
-      fields:
-      - name: maxResizeWidth
-      - name: maxResizeHeight
-      status: setter
-    SetMinResize:
-      fields:
-      - name: minResizeWidth
-      - name: minResizeHeight
-      status: setter
+    SetIsFrameBuffer: {}
     SetMovable:
       fields:
       - name: movable
@@ -1016,6 +1057,7 @@ Frame:
       fields:
       - name: resizable
       status: setter
+    SetResizeBounds: {}
     SetToplevel:
       fields:
       - name: toplevel
@@ -1045,12 +1087,11 @@ GameTooltip:
   inherits:
     Frame: {}
   methods:
+    AddAtlas: {}
     AddDoubleLine: {}
     AddFontStrings: {}
     AddLine: {}
-    AddSpellByID: {}
     AddTexture: {}
-    AdvanceSecondaryCompareItem: {}
     AppendText: {}
     ClearLines: {}
     CopyTooltip: {}
@@ -1059,7 +1100,7 @@ GameTooltip:
       fields:
       - name: tooltipAnchorType
       status: getter
-    GetItem: {}
+    GetCustomLineSpacing: {}
     GetMinimumWidth:
       outputs:
       - type: number
@@ -1068,68 +1109,23 @@ GameTooltip:
       - name: tooltipOwner
       status: getter
     GetPadding: {}
-    GetSpell: {}
-    GetUnit: {}
-    IsEquippedItem: {}
     IsOwned:
       status: implemented
-    IsUnit: {}
     NumLines:
       fields:
       - name: tooltipLines
       status: getter
-    ResetSecondaryCompareItem: {}
-    SetAction: {}
+    SetAllowShowWithNoLines: {}
     SetAnchorType: {}
-    SetAuctionItem: {}
-    SetAuctionSellItem: {}
-    SetBagItem: {}
-    SetBagItemChild: {}
-    SetBuybackItem: {}
-    SetCompareItem: {}
-    SetCraftItem: {}
-    SetCraftSpell: {}
-    SetExistingSocketGem: {}
+    SetCustomLineSpacing: {}
     SetFrameStack: {}
-    SetGuildBankItem: {}
-    SetHyperlink: {}
-    SetInboxItem: {}
-    SetInstanceLockEncountersComplete: {}
-    SetInventoryItem: {}
-    SetInventoryItemByID: {}
-    SetItemByID: {}
-    SetLootItem: {}
-    SetLootRollItem: {}
-    SetMerchantCostItem: {}
-    SetMerchantItem: {}
     SetMinimumWidth: {}
+    SetObjectTooltipPosition: {}
     SetOwner:
       status: implemented
     SetPadding: {}
-    SetPetAction: {}
-    SetPossession: {}
-    SetQuestItem: {}
-    SetQuestLogItem: {}
-    SetQuestLogRewardSpell: {}
-    SetQuestRewardSpell: {}
-    SetSendMailItem: {}
-    SetShapeshift: {}
-    SetSocketedItem: {}
-    SetSocketGem: {}
-    SetSpellBookItem: {}
-    SetSpellByID: {}
-    SetTalent: {}
+    SetShrinkToFitWrapped: {}
     SetText: {}
-    SetTotem: {}
-    SetTrackingSpell: {}
-    SetTradePlayerItem: {}
-    SetTradeSkillItem: {}
-    SetTradeTargetItem: {}
-    SetTrainerService: {}
-    SetUnit: {}
-    SetUnitAura: {}
-    SetUnitBuff: {}
-    SetUnitDebuff: {}
 LayeredRegion:
   fields:
     layer:
@@ -1232,13 +1228,36 @@ Minimap:
       outputs:
       - type: number
     PingLocation: {}
+    SetArchBlobInsideAlpha: {}
+    SetArchBlobInsideTexture: {}
+    SetArchBlobOutsideAlpha: {}
+    SetArchBlobOutsideTexture: {}
+    SetArchBlobRingAlpha: {}
+    SetArchBlobRingScalar: {}
+    SetArchBlobRingTexture: {}
     SetBlipTexture: {}
     SetCorpsePOIArrowTexture: {}
     SetIconTexture: {}
     SetMaskTexture: {}
     SetPlayerTexture: {}
     SetPOIArrowTexture: {}
+    SetQuestBlobInsideAlpha: {}
+    SetQuestBlobInsideTexture: {}
+    SetQuestBlobOutsideAlpha: {}
+    SetQuestBlobOutsideSelectedTexture: {}
+    SetQuestBlobOutsideTexture: {}
+    SetQuestBlobRingAlpha: {}
+    SetQuestBlobRingScalar: {}
+    SetQuestBlobRingTexture: {}
     SetStaticPOIArrowTexture: {}
+    SetTaskBlobInsideAlpha: {}
+    SetTaskBlobInsideTexture: {}
+    SetTaskBlobOutsideAlpha: {}
+    SetTaskBlobOutsideSelectedTexture: {}
+    SetTaskBlobOutsideTexture: {}
+    SetTaskBlobRingAlpha: {}
+    SetTaskBlobRingScalar: {}
+    SetTaskBlobRingTexture: {}
     SetZoom: {}
     UpdateBlips: {}
 Model:
@@ -1366,6 +1385,7 @@ ModelScene:
     SetCameraOrientationByAxisVectors: {}
     SetCameraOrientationByYawPitchRoll: {}
     SetCameraPosition: {}
+    SetDesaturation: {}
     SetDrawLayer: {}
     SetFogColor: {}
     SetFogFar: {}
@@ -1376,6 +1396,7 @@ ModelScene:
     SetLightPosition: {}
     SetLightType: {}
     SetLightVisible: {}
+    SetPaused: {}
     SetViewInsets: {}
     SetViewTranslation: {}
     TakeActor: {}
@@ -1427,6 +1448,7 @@ MovieFrame:
   methods:
     EnableSubtitles: {}
     StartMovie: {}
+    StartMovieByName: {}
     StopMovie: {}
 OffScreenFrame:
   inherits:
@@ -1438,6 +1460,7 @@ OffScreenFrame:
     IsSnapshotValid: {}
     SetMaxSnapshots: {}
     TakeSnapshot: {}
+    TestPrintToFile: {}
     UsesNPOT: {}
 ParentedObject:
   fields:
@@ -1447,7 +1470,6 @@ ParentedObject:
       nilable: true
       type: table
   inherits:
-    ForbiddenMixin: {}
     UIObject: {}
   methods:
     GetDebugName:
@@ -1456,8 +1478,10 @@ ParentedObject:
       fields:
       - name: parent
       status: getter
+    GetParentKey: {}
     SetParent:
       status: implemented
+    SetParentKey: {}
   virtual: true
 Path:
   inherits:
@@ -1466,9 +1490,9 @@ Path:
     CreateControlPoint:
       status: implemented
     GetControlPoints: {}
-    GetCurve: {}
-    GetMaxOrder: {}
-    SetCurve: {}
+    GetCurveType: {}
+    GetMaxControlPointOrder: {}
+    SetCurveType: {}
 PlayerModel:
   inherits:
     Model: {}
@@ -1497,6 +1521,33 @@ PlayerModel:
     SetRotation: {}
     SetUnit: {}
     StopAnimKit: {}
+    ZeroCachedCenterXY: {}
+POIFrame:
+  inherits: {}
+  methods:
+    DrawAll: {}
+    DrawBlob: {}
+    DrawNone: {}
+    EnableMerging: {}
+    EnableSmoothing: {}
+    GetMapID: {}
+    SetBorderAlpha: {}
+    SetBorderScalar: {}
+    SetBorderTexture: {}
+    SetFillAlpha: {}
+    SetFillTexture: {}
+    SetMapID: {}
+    SetMergeThreshold: {}
+    SetNumSplinePoints: {}
+    UpdateMouseOverTooltip: {}
+  virtual: true
+QuestPOIFrame:
+  inherits:
+    Frame: {}
+    POIFrame: {}
+  methods:
+    GetNumTooltips: {}
+    GetTooltipIndex: {}
 Region:
   fields:
     alpha:
@@ -1536,13 +1587,14 @@ Region:
       init: 0
       type: number
   inherits:
+    MouseMixin: {}
     ParentedObject: {}
   methods:
     AdjustPointsOffset: {}
     CanChangeProtectedState: {}
     ClearAllPoints:
       status: implemented
-    ClearPointByName: {}
+    ClearPoint: {}
     ClearPointsOffset: {}
     CreateAnimationGroup:
       status: implemented
@@ -1593,6 +1645,7 @@ Region:
       - name: width
       - name: height
       status: getter
+    GetSourceLocation: {}
     GetTop:
       status: implemented
     GetWidth:
@@ -1638,6 +1691,7 @@ Region:
       fields:
       - name: isIgnoringParentScale
       status: setter
+    SetPassThroughButtons: {}
     SetPoint:
       status: implemented
     SetScale:
@@ -1671,14 +1725,20 @@ Scale:
   inherits:
     Animation: {}
   methods:
-    GetFromScale: {}
     GetOrigin: {}
     GetScale: {}
-    GetToScale: {}
-    SetFromScale: {}
+    GetScaleFrom: {}
+    GetScaleTo: {}
     SetOrigin: {}
     SetScale: {}
-    SetToScale: {}
+    SetScaleFrom: {}
+    SetScaleTo: {}
+ScenarioPOIFrame:
+  inherits:
+    Frame: {}
+    POIFrame: {}
+  methods:
+    GetScenarioTooltipText: {}
 ScriptObject:
   fields:
     scripts:
@@ -1825,9 +1885,9 @@ StatusBar:
     GetOrientation: {}
     GetReverseFill: {}
     GetRotatesTexture: {}
-    GetStatusBarAtlas: {}
     GetStatusBarColor:
       status: implemented
+    GetStatusBarDesaturation: {}
     GetStatusBarTexture:
       fields:
       - name: statusBarTexture
@@ -1836,6 +1896,8 @@ StatusBar:
       fields:
       - name: value
       status: getter
+    IsStatusBarDesaturated: {}
+    SetColorFill: {}
     SetFillStyle: {}
     SetMinMaxValues:
       fields:
@@ -1845,9 +1907,10 @@ StatusBar:
     SetOrientation: {}
     SetReverseFill: {}
     SetRotatesTexture: {}
-    SetStatusBarAtlas: {}
     SetStatusBarColor:
       status: implemented
+    SetStatusBarDesaturated: {}
+    SetStatusBarDesaturation: {}
     SetStatusBarTexture:
       status: implemented
     SetValue:
@@ -1861,10 +1924,10 @@ TabardModel:
     CanSaveTabardNow: {}
     CycleVariation: {}
     GetLowerBackgroundFileName: {}
-    GetLowerEmblemFileName: {}
+    GetLowerEmblemFile: {}
     GetLowerEmblemTexture: {}
     GetUpperBackgroundFileName: {}
-    GetUpperEmblemFileName: {}
+    GetUpperEmblemFile: {}
     GetUpperEmblemTexture: {}
     InitializeTabardColors: {}
     Save: {}
@@ -1923,6 +1986,7 @@ Texture:
       type: boolean
   inherits:
     LayeredRegion: {}
+    ScriptObject: {}
   methods:
     AddMaskTexture: {}
     GetAtlas: {}
@@ -1936,7 +2000,6 @@ Texture:
       - name: horizTile
       status: getter
     GetMaskTexture: {}
-    GetNonBlocking: {}
     GetNumMaskTextures: {}
     GetRotation: {}
     GetTexCoord:
@@ -1967,6 +2030,7 @@ Texture:
       fields:
       - name: vertTile
       status: getter
+    IsBlockingLoadRequested: {}
     IsDesaturated: {}
     IsSnappingToPixelGrid: {}
     RemoveMaskTexture: {}
@@ -1976,12 +2040,12 @@ Texture:
       fields:
       - name: blendMode
       status: setter
+    SetBlockingLoadsRequested: {}
     SetColorTexture:
       status: implemented
     SetDesaturated: {}
     SetDesaturation: {}
     SetGradient: {}
-    SetGradientAlpha: {}
     SetHorizTile:
       fields:
       - name: horizTile
@@ -1990,7 +2054,6 @@ Texture:
       fields:
       - name: maskName
       status: setter
-    SetNonBlocking: {}
     SetRotation: {}
     SetSnapToPixelGrid: {}
     SetTexCoord:
@@ -2017,7 +2080,8 @@ UIObject:
   fields:
     name:
       type: string
-  inherits: {}
+  inherits:
+    ForbiddenMixin: {}
   methods:
     GetName:
       fields:
