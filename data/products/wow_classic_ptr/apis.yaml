@@ -6071,6 +6071,9 @@ C_PlayerInteractionManager.InteractUnit:
     - default: false
       name: exactMatch
       type: boolean
+    - default: true
+      name: looseTargeting
+      type: boolean
   outputs:
   - name: success
     type: boolean
