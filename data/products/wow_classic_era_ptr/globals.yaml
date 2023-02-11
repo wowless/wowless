@@ -1015,6 +1015,15 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  ChatToxityFilterOptOut:
+    ExcludeFilterAll: 4294967295
+    ExcludeFilterFriend: 1
+    ExcludeFilterGuild: 2
+    FilterAll: 0
+  ChatToxityFilterOptOutMeta:
+    MaxValue: -1
+    MinValue: 0
+    NumValues: 4
   ChrCustomizationCategoryFlag:
     UndressModel: 1
   ChrCustomizationCategoryFlagMeta:
