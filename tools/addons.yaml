@@ -2,29 +2,29 @@
 Bartender4:
   owner: nevcairiel
   repo: bartender4
-  tag: 4.14.5
+  tag: 4.14.7
 BlizzMove:
   owner: kiatra
   repo: blizzmove
-  tag: v3.5.8
+  tag: v3.5.9
 BtWLoadouts:
   flavors:
   - Mainline
   owner: breeni
   repo: btwloadouts
-  tag: v1.10.1-beta
+  tag: v1.12.3
 Ferronnizer:
   flavors:
   - Vanilla
   owner: ferronn-dev
   repo: ferronnizer
-  tag: v450
+  tag: v451
 LunaUnitFrames:
   flavors:
   - Wrath
   owner: aviana
   repo: lunaunitframes
-  tag: '4345'
+  tag: '4346'
 Quartz:
   owner: nevcairiel
   repo: quartz
@@ -32,16 +32,16 @@ Quartz:
 Questie:
   owner: questie
   repo: questie
-  tag: v7.4.10
+  tag: v7.4.14
 Talented:
   flavors:
   - Wrath
   owner: lethay
   repo: talentedclassic
-  tag: v221207-WotLK
+  tag: v230211-WotLK
 TalentTreeViewer:
   flavors:
   - Mainline
   owner: numynum
   repo: talentviewer
-  tag: v2.1.12
+  tag: v2.1.14
