@@ -4261,10 +4261,6 @@ C_RecruitAFriend.RafIllusionInfo:
 C_RecruitAFriend.RafInfo:
   claimInProgress:
     type: boolean
-  nextReward:
-    nilable: true
-    type:
-      structure: C_RecruitAFriend.RafReward
   recruitmentInfo:
     nilable: true
     type:
@@ -4273,10 +4269,17 @@ C_RecruitAFriend.RafInfo:
     type:
       arrayof:
         structure: C_RecruitAFriend.RafRecruit
-  rewards:
+  versions:
     type:
       arrayof:
-        structure: C_RecruitAFriend.RafReward
+        structure: C_RecruitAFriend.RafVersionInfo
+C_RecruitAFriend.RafMonthCount:
+  availableMonths:
+    type: number
+  lifetimeMonths:
+    type: number
+  spentMonths:
+    type: number
 C_RecruitAFriend.RafMountInfo:
   mountID:
     type: number
@@ -4309,6 +4312,9 @@ C_RecruitAFriend.RafRecruit:
   subStatus:
     type:
       enum: RafRecruitSubStatus
+  versionRecruited:
+    type:
+      enum: RecruitAFriendRewardsVersion
   wowAccountGUID:
     type: string
 C_RecruitAFriend.RafRecruitActivity:
@@ -4371,6 +4377,9 @@ C_RecruitAFriend.RafReward:
     nilable: true
     type:
       structure: C_RecruitAFriend.RafPetInfo
+  rafVersion:
+    type:
+      enum: RecruitAFriendRewardsVersion
   repeatable:
     type: boolean
   repeatableClaimCount:
@@ -4396,6 +4405,21 @@ C_RecruitAFriend.RafSystemInfo:
 C_RecruitAFriend.RafTitleInfo:
   titleMaskID:
     type: number
+C_RecruitAFriend.RafVersionInfo:
+  monthCount:
+    type:
+      structure: C_RecruitAFriend.RafMonthCount
+  nextReward:
+    nilable: true
+    type:
+      structure: C_RecruitAFriend.RafReward
+  rafVersion:
+    type:
+      enum: RecruitAFriendRewardsVersion
+  rewards:
+    type:
+      arrayof:
+        structure: C_RecruitAFriend.RafReward
 C_ResearchInfo.DigSiteMapInfo:
   name:
     type: string

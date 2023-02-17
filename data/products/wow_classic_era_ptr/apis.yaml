@@ -3710,6 +3710,11 @@ C_ChatInfo.ReplaceIconAndGroupExpressions:
   outputs:
   - name: output
     type: string
+C_ChatInfo.RequestCanLocalWhisperTarget:
+  inputs:
+  - - name: whisperTarget
+      type: string
+  outputs: {}
 C_ChatInfo.ResetDefaultZoneChannels:
   inputs:
   - {}
@@ -6224,14 +6229,16 @@ C_ConsoleScriptCollection.GetScriptData:
 C_Container.ContainerIDToInventoryID:
   inputs:
   - - name: containerID
-      type: number
+      type:
+        enum: BagIndex
   outputs:
   - name: inventoryID
     type: number
 C_Container.ContainerRefundItemPurchase:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - default: false
@@ -6247,14 +6254,16 @@ C_Container.GetBackpackAutosortDisabled:
 C_Container.GetBagName:
   inputs:
   - - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
   outputs:
   - name: name
     type: string
 C_Container.GetBagSlotFlag:
   inputs:
   - - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: flag
       type:
         enum: BagSlotFlags
@@ -6270,7 +6279,8 @@ C_Container.GetBankAutosortDisabled:
 C_Container.GetContainerFreeSlots:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
   outputs:
   - name: freeSlots
     type:
@@ -6278,7 +6288,8 @@ C_Container.GetContainerFreeSlots:
 C_Container.GetContainerItemCooldown:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6291,7 +6302,8 @@ C_Container.GetContainerItemCooldown:
 C_Container.GetContainerItemDurability:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6302,7 +6314,8 @@ C_Container.GetContainerItemDurability:
 C_Container.GetContainerItemEquipmentSetInfo:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6313,7 +6326,8 @@ C_Container.GetContainerItemEquipmentSetInfo:
 C_Container.GetContainerItemID:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6322,7 +6336,8 @@ C_Container.GetContainerItemID:
 C_Container.GetContainerItemInfo:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6332,7 +6347,8 @@ C_Container.GetContainerItemInfo:
 C_Container.GetContainerItemLink:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6341,7 +6357,8 @@ C_Container.GetContainerItemLink:
 C_Container.GetContainerItemPurchaseCurrency:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - name: itemIndex
@@ -6355,7 +6372,8 @@ C_Container.GetContainerItemPurchaseCurrency:
 C_Container.GetContainerItemPurchaseInfo:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - name: isEquipped
@@ -6367,7 +6385,8 @@ C_Container.GetContainerItemPurchaseInfo:
 C_Container.GetContainerItemPurchaseItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - name: itemIndex
@@ -6381,7 +6400,8 @@ C_Container.GetContainerItemPurchaseItem:
 C_Container.GetContainerItemQuestInfo:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6391,7 +6411,8 @@ C_Container.GetContainerItemQuestInfo:
 C_Container.GetContainerNumFreeSlots:
   inputs:
   - - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
   outputs:
   - name: numFreeSlots
     type: number
@@ -6401,7 +6422,8 @@ C_Container.GetContainerNumFreeSlots:
 C_Container.GetContainerNumSlots:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
   outputs:
   - name: numSlots
     type: number
@@ -6437,7 +6459,8 @@ C_Container.GetSortBagsRightToLeft:
 C_Container.IsBattlePayItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6446,14 +6469,16 @@ C_Container.IsBattlePayItem:
 C_Container.IsContainerFiltered:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
   outputs:
   - name: isFiltered
     type: boolean
 C_Container.PickupContainerItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs: {}
@@ -6474,12 +6499,14 @@ C_Container.SetBagPortraitTexture:
   - - name: texture
       type: table
     - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
   outputs: {}
 C_Container.SetBagSlotFlag:
   inputs:
   - - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: flag
       type:
         enum: BagSlotFlags
@@ -6509,14 +6536,16 @@ C_Container.SetSortBagsRightToLeft:
 C_Container.ShowContainerSellCursor:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs: {}
 C_Container.SocketContainerItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6537,7 +6566,8 @@ C_Container.SortReagentBankBags:
 C_Container.SplitContainerItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - name: amount
@@ -6546,7 +6576,8 @@ C_Container.SplitContainerItem:
 C_Container.UseContainerItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - name: unitToken
@@ -12010,7 +12041,8 @@ C_NewItems.ClearAll:
 C_NewItems.IsNewItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -12019,7 +12051,8 @@ C_NewItems.IsNewItem:
 C_NewItems.RemoveNewItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs: {}
@@ -14888,7 +14921,10 @@ C_RecruitAFriend.ClaimActivityReward:
     type: boolean
 C_RecruitAFriend.ClaimNextReward:
   inputs:
-  - {}
+  - - name: rafVersion
+      nilable: true
+      type:
+        enum: RecruitAFriendRewardsVersion
   outputs:
   - name: success
     type: boolean
@@ -16476,7 +16512,8 @@ C_TooltipInfo.GetBackpackToken:
 C_TooltipInfo.GetBagItem:
   inputs:
   - - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -16486,7 +16523,8 @@ C_TooltipInfo.GetBagItem:
 C_TooltipInfo.GetBagItemChild:
   inputs:
   - - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - name: equipSlotIndex
@@ -18931,7 +18969,8 @@ C_TransmogCollection.GetInspectItemTransmogInfoList:
   outputs:
   - name: list
     type:
-      arrayof: table
+      arrayof:
+        structure: ItemTransmogInfo
 C_TransmogCollection.GetIsAppearanceFavorite:
   inputs:
   - - name: itemAppearanceID
@@ -18955,7 +18994,8 @@ C_TransmogCollection.GetItemTransmogInfoListFromOutfitHyperlink:
   outputs:
   - name: list
     type:
-      arrayof: table
+      arrayof:
+        structure: ItemTransmogInfo
 C_TransmogCollection.GetLatestAppearance:
   inputs:
   - {}
@@ -18982,7 +19022,8 @@ C_TransmogCollection.GetOutfitHyperlinkFromItemTransmogInfoList:
   inputs:
   - - name: itemTransmogInfoList
       type:
-        arrayof: table
+        arrayof:
+          structure: ItemTransmogInfo
   outputs:
   - name: hyperlink
     type: string
@@ -19002,7 +19043,8 @@ C_TransmogCollection.GetOutfitItemTransmogInfoList:
   outputs:
   - name: list
     type:
-      arrayof: table
+      arrayof:
+        structure: ItemTransmogInfo
 C_TransmogCollection.GetOutfits:
   inputs:
   - {}
@@ -19115,7 +19157,8 @@ C_TransmogCollection.ModifyOutfit:
       type: number
     - name: itemTransmogInfoList
       type:
-        arrayof: table
+        arrayof:
+          structure: ItemTransmogInfo
   outputs: {}
 C_TransmogCollection.NewOutfit:
   inputs:
@@ -19125,7 +19168,8 @@ C_TransmogCollection.NewOutfit:
       type: number
     - name: itemTransmogInfoList
       type:
-        arrayof: table
+        arrayof:
+          structure: ItemTransmogInfo
   outputs:
   - name: outfitID
     nilable: true
@@ -20077,7 +20121,8 @@ C_VideoOptions.GetGameWindowSizes:
   outputs:
   - name: sizes
     type:
-      arrayof: table
+      arrayof:
+        structure: Vector2D
 C_VideoOptions.GetGxAdapterInfo:
   inputs:
   - {}

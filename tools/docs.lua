@@ -94,12 +94,48 @@ for _, t in pairs(docs) do
 end
 
 local types = {
+  AuraData = 'table',
+  BigInteger = 'number',
+  BigUInteger = 'number',
   bool = 'boolean',
+  CalendarEventID = 'string',
+  ChatBubbleFrame = 'table',
+  ClubId = 'string',
+  ClubInvitationId = 'string',
+  ClubStreamId = 'string',
+  cstring = 'string',
+  fileID = 'number',
   FramePoint = 'string', -- hack, yes
+  GarrisonFollower = 'string',
+  HTMLTextType = 'string',
   InventorySlots = 'number',
+  ItemInfo = 'string',
+  kstringClubMessage = 'string',
+  kstringLfgListApplicant = 'string',
+  kstringLfgListChat = 'string',
+  kstringLfgListSearch = 'string',
+  luaIndex = 'number',
+  ModelSceneFrame = 'table',
+  ModelSceneFrameActor = 'table',
+  NamePlateFrame = 'table',
+  NotificationDbId = 'string',
   number = 'number',
+  RecruitAcceptanceID = 'string',
+  ScriptRegion = 'table',
+  SimpleTexture = 'table',
   string = 'string',
   table = 'table',
+  TBFStyleFlags = 'string',
+  textureAtlas = 'string',
+  textureKit = 'string',
+  time_t = 'number',
+  TooltipComparisonItem = 'table',
+  UiMapPoint = 'table',
+  uiUnit = 'number',
+  UnitToken = 'string',
+  WeeklyRewardItemDBID = 'string',
+  WOWGUID = 'string',
+  WOWMONEY = 'number',
 }
 local tys = {}
 for name, tab in pairs(tabs) do
@@ -130,6 +166,15 @@ local knownMixinStructs = {
   Vector2DMixin = 'Vector2D',
   Vector3DMixin = 'Vector3D',
 }
+local structRewrites = {
+  AzeriteEmpoweredItemLocation = 'ItemLocation',
+  AzeriteItemLocation = 'ItemLocation',
+  colorRGB = 'Color',
+  colorRGBA = 'Color',
+  EmptiableItemLocation = 'ItemLocation',
+  vector2 = 'Vector2D',
+  vector3 = 'Vector3D',
+}
 local function t2nty(field, ns)
   local t = field.Type
   if field.InnerType then
@@ -142,6 +187,7 @@ local function t2nty(field, ns)
     return types[t]
   end
   local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
+  n = structRewrites[n] or n
   local ty = tys[n]
   assert(ty, 'wtf ' .. n)
   if ty == 'Constants' then

@@ -1024,6 +1024,14 @@ Enum:
     MaxValue: -1
     MinValue: 0
     NumValues: 4
+  ChatWhisperTargetStatus:
+    CanWhisper: 0
+    Offline: 1
+    WrongFaction: 2
+  ChatWhisperTargetStatusMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ChrCustomizationCategoryFlag:
     UndressModel: 1
   ChrCustomizationCategoryFlagMeta:
@@ -4277,6 +4285,15 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  RecruitAFriendRewardsVersion:
+    InvalidVersion: 0
+    UnusedVersionOne: 1
+    VersionThree: 3
+    VersionTwo: 2
+  RecruitAFriendRewardsVersionMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   RelativeContentDifficulty:
     Difficult: 3
     Easy: 1

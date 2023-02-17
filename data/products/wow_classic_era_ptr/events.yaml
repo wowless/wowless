@@ -421,7 +421,8 @@ AZERITE_ITEM_POWER_LEVEL_CHANGED:
 BAG_CLOSED:
   payload:
   - name: bagID
-    type: number
+    type:
+      enum: BagIndex
 BAG_CONTAINER_UPDATE:
   payload: {}
 BAG_NEW_ITEMS_UPDATED:
@@ -439,7 +440,8 @@ BAG_SLOT_FLAGS_UPDATED:
 BAG_UPDATE:
   payload:
   - name: bagID
-    type: number
+    type:
+      enum: BagIndex
 BAG_UPDATE_COOLDOWN:
   payload: {}
 BAG_UPDATE_DELAYED:
@@ -713,6 +715,13 @@ CALENDAR_UPDATE_INVITE_LIST:
     type: boolean
 CALENDAR_UPDATE_PENDING_INVITES:
   payload: {}
+CAN_LOCAL_WHISPER_TARGET_RESPONSE:
+  payload:
+  - name: whisperTarget
+    type: string
+  - name: status
+    type:
+      enum: ChatWhisperTargetStatus
 CAN_PLAYER_SPEAK_LANGUAGE_CHANGED:
   payload:
   - name: languageId
@@ -4609,14 +4618,16 @@ ITEM_KEY_ITEM_INFO_RECEIVED:
 ITEM_LOCK_CHANGED:
   payload:
   - name: bagOrSlotIndex
-    type: number
+    type:
+      enum: BagIndex
   - name: slotIndex
     nilable: true
     type: number
 ITEM_LOCKED:
   payload:
   - name: bagOrSlotIndex
-    type: number
+    type:
+      enum: BagIndex
   - name: slotIndex
     nilable: true
     type: number
@@ -4658,7 +4669,8 @@ ITEM_TEXT_TRANSLATION:
 ITEM_UNLOCKED:
   payload:
   - name: bagOrSlotIndex
-    type: number
+    type:
+      enum: BagIndex
   - name: slotIndex
     nilable: true
     type: number
@@ -5962,6 +5974,9 @@ RAF_ENTITLEMENT_DELIVERED:
     type: number
   - name: showFancyToast
     type: boolean
+  - name: rafVersion
+    type:
+      enum: RecruitAFriendRewardsVersion
 RAF_INFO_UPDATED:
   payload:
   - name: info
