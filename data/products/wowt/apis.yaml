@@ -501,7 +501,7 @@ C_AnimaDiversion.GetOriginPosition:
     nilable: true
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_AnimaDiversion.GetReinforceProgress:
   inputs:
   - {}
@@ -5647,7 +5647,7 @@ C_Commentator.GetStartLocation:
   - name: pos
     type:
       mixin: Vector3DMixin
-      structure: Vector3D
+      structure: vector3
 C_Commentator.GetTeamColor:
   inputs:
   - - name: teamIndex
@@ -7368,7 +7368,7 @@ C_DeathInfo.GetCorpseMapPosition:
     nilable: true
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_DeathInfo.GetDeathReleasePosition:
   inputs:
   - - name: uiMapID
@@ -7378,7 +7378,7 @@ C_DeathInfo.GetDeathReleasePosition:
     nilable: true
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_DeathInfo.GetGraveyardsForMap:
   inputs:
   - - name: uiMapID
@@ -10919,7 +10919,7 @@ C_Map.GetMapPosFromWorldPos:
     - name: worldPosition
       type:
         mixin: Vector2DMixin
-        structure: Vector2D
+        structure: vector2
     - name: overrideUiMapID
       nilable: true
       type: number
@@ -10929,7 +10929,7 @@ C_Map.GetMapPosFromWorldPos:
   - name: mapPosition
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_Map.GetMapRectOnMap:
   inputs:
   - - name: uiMapID
@@ -10965,7 +10965,7 @@ C_Map.GetPlayerMapPosition:
     nilable: true
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_Map.GetUserWaypoint:
   inputs:
   - {}
@@ -10993,7 +10993,7 @@ C_Map.GetUserWaypointPositionForMap:
   - name: mapPosition
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_Map.GetWorldPosFromMapPos:
   inputs:
   - - name: uiMapID
@@ -11001,14 +11001,14 @@ C_Map.GetWorldPosFromMapPos:
     - name: mapPosition
       type:
         mixin: Vector2DMixin
-        structure: Vector2D
+        structure: vector2
   outputs:
   - name: continentID
     type: number
   - name: worldPosition
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_Map.HasUserWaypoint:
   inputs:
   - {}
@@ -11046,7 +11046,7 @@ C_MapExplorationInfo.GetExploredAreaIDsAtPosition:
     - name: normalizedPosition
       type:
         mixin: Vector2DMixin
-        structure: Vector2D
+        structure: vector2
   outputs:
   - name: areaID
     nilable: true
@@ -19959,7 +19959,7 @@ C_VideoOptions.GetCurrentGameWindowSize:
   - name: size
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_VideoOptions.GetDefaultGameWindowSize:
   inputs:
   - - name: monitor
@@ -19968,7 +19968,7 @@ C_VideoOptions.GetDefaultGameWindowSize:
   - name: size
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_VideoOptions.GetGameWindowSizes:
   inputs:
   - - name: monitor
@@ -20023,7 +20023,7 @@ C_VignetteInfo.GetVignettePosition:
     nilable: true
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_VignetteInfo.GetVignettes:
   inputs:
   - {}

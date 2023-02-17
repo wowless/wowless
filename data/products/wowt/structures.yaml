@@ -115,7 +115,7 @@ C_AnimaDiversion.AnimaDiversionNodeInfo:
   normalizedPosition:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   state:
     type:
       enum: AnimaDiversionNodeState
@@ -149,7 +149,7 @@ C_AreaPoiInfo.AreaPOIInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   shouldGlow:
     type: boolean
   textureIndex:
@@ -206,11 +206,11 @@ C_ArtifactUI.ArtifactPowerInfo:
     nilable: true
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   prereqsMet:
     type: boolean
   spellID:
@@ -1505,7 +1505,7 @@ C_ContributionCollector.ContributionMapInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_CovenantPreview.CovenantAbilityInfo:
   spellID:
     type: number
@@ -1772,7 +1772,7 @@ C_DeathInfo.GraveyardMapInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   textureIndex:
     type: number
 C_DeathInfo.SelfResurrectOption:
@@ -1858,7 +1858,7 @@ C_EncounterJournal.DungeonEntranceMapInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_EncounterJournal.EncounterJournalItemInfo:
   armorType:
     nilable: true
@@ -2539,7 +2539,7 @@ C_Garrison.GarrisonPlotInstanceMapInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_Garrison.MissionDeploymentInfo:
   enemies:
     type:
@@ -2657,7 +2657,7 @@ C_GossipInfo.GossipPoiInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   textureIndex:
     type: number
 C_GossipInfo.GossipQuestUIInfo:
@@ -2720,7 +2720,7 @@ C_InvasionInfo.InvasionMapInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   rewardQuestID:
     nilable: true
     type: number
@@ -3221,7 +3221,7 @@ C_Map.MapLinkInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_Map.UiMapDetails:
   flags:
     type: number
@@ -3308,7 +3308,7 @@ C_ModelInfo.UIModelSceneActorInfo:
   position:
     type:
       mixin: Vector3DMixin
-      structure: Vector3D
+      structure: vector3
   roll:
     type: number
   scriptTag:
@@ -3342,7 +3342,7 @@ C_ModelInfo.UIModelSceneCameraInfo:
   target:
     type:
       mixin: Vector3DMixin
-      structure: Vector3D
+      structure: vector3
   yaw:
     type: number
   zoomDistance:
@@ -3354,7 +3354,7 @@ C_ModelInfo.UIModelSceneCameraInfo:
   zoomedTargetOffset:
     type:
       mixin: Vector3DMixin
-      structure: Vector3D
+      structure: vector3
   zoomedYawOffset:
     type: number
 C_ModifiedInstance.ModifiedInstanceInfo:
@@ -3586,7 +3586,7 @@ C_PetInfo.PetTamerMapInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   textureIndex:
     nilable: true
     type: number
@@ -4372,7 +4372,7 @@ C_ResearchInfo.DigSiteMapInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   researchSiteID:
     type: number
   textureIndex:
@@ -4798,7 +4798,7 @@ C_TaxiMap.MapTaxiNodeInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   textureKit:
     type: string
 C_TaxiMap.TaxiNodeInfo:
@@ -4809,7 +4809,7 @@ C_TaxiMap.TaxiNodeInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   slotIndex:
     type: number
   specialIconCostString:
@@ -7954,12 +7954,12 @@ UnitPowerBarInfo:
     type: boolean
   startInset:
     type: number
-Vector2D:
+vector2:
   x:
     type: number
   y:
     type: number
-Vector3D:
+vector3:
   x:
     type: number
   y:

@@ -13,7 +13,7 @@ C_AreaPoiInfo.AreaPOIInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   shouldGlow:
     type: boolean
   textureIndex:
@@ -769,7 +769,7 @@ C_DeathInfo.GraveyardMapInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   textureIndex:
     type: number
 C_DeathInfo.SelfResurrectOption:
@@ -984,7 +984,7 @@ C_GossipInfo.GossipPoiInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   textureIndex:
     type: number
 C_LFGInfo.LFGLockInfo:
@@ -1080,7 +1080,7 @@ C_Map.MapLinkInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_Map.UiMapDetails:
   mapID:
     type: number
@@ -1155,7 +1155,7 @@ C_ModelInfo.UIModelSceneActorInfo:
   position:
     type:
       mixin: Vector3DMixin
-      structure: Vector3D
+      structure: vector3
   roll:
     type: number
   scriptTag:
@@ -1189,7 +1189,7 @@ C_ModelInfo.UIModelSceneCameraInfo:
   target:
     type:
       mixin: Vector3DMixin
-      structure: Vector3D
+      structure: vector3
   yaw:
     type: number
   zoomDistance:
@@ -1201,7 +1201,7 @@ C_ModelInfo.UIModelSceneCameraInfo:
   zoomedTargetOffset:
     type:
       mixin: Vector3DMixin
-      structure: Vector3D
+      structure: vector3
   zoomedYawOffset:
     type: number
 C_QuestLog.QuestObjectiveInfo:
@@ -1325,7 +1325,7 @@ C_TaxiMap.MapTaxiNodeInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   textureKitPrefix:
     nilable: true
     type: string
@@ -1337,7 +1337,7 @@ C_TaxiMap.TaxiNodeInfo:
   position:
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
   slotIndex:
     type: number
   state:
@@ -1785,12 +1785,12 @@ QueueSpecificInfo:
   teamSize:
     nilable: true
     type: number
-Vector2D:
+vector2:
   x:
     type: number
   y:
     type: number
-Vector3D:
+vector3:
   x:
     type: number
   y:

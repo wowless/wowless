@@ -2828,7 +2828,7 @@ C_Commentator.GetStartLocation:
   - name: pos
     type:
       mixin: Vector3DMixin
-      structure: Vector3D
+      structure: vector3
 C_Commentator.GetTeamColor:
   inputs:
   - - name: teamIndex
@@ -3541,7 +3541,7 @@ C_DeathInfo.GetCorpseMapPosition:
     nilable: true
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_DeathInfo.GetDeathReleasePosition:
   inputs:
   - - name: uiMapID
@@ -3551,7 +3551,7 @@ C_DeathInfo.GetDeathReleasePosition:
     nilable: true
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_DeathInfo.GetGraveyardsForMap:
   inputs:
   - - name: uiMapID
@@ -4957,7 +4957,7 @@ C_Map.GetMapPosFromWorldPos:
     - name: worldPosition
       type:
         mixin: Vector2DMixin
-        structure: Vector2D
+        structure: vector2
     - name: overrideUiMapID
       nilable: true
       type: number
@@ -4967,7 +4967,7 @@ C_Map.GetMapPosFromWorldPos:
   - name: mapPosition
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_Map.GetMapRectOnMap:
   inputs:
   - - name: uiMapID
@@ -4994,7 +4994,7 @@ C_Map.GetPlayerMapPosition:
     nilable: true
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_Map.GetWorldPosFromMapPos:
   inputs:
   - - name: uiMapID
@@ -5002,14 +5002,14 @@ C_Map.GetWorldPosFromMapPos:
     - name: mapPosition
       type:
         mixin: Vector2DMixin
-        structure: Vector2D
+        structure: vector2
   outputs:
   - name: continentID
     type: number
   - name: worldPosition
     type:
       mixin: Vector2DMixin
-      structure: Vector2D
+      structure: vector2
 C_Map.MapHasArt:
   inputs:
   - - name: uiMapID
@@ -5029,7 +5029,7 @@ C_MapExplorationInfo.GetExploredAreaIDsAtPosition:
     - name: normalizedPosition
       type:
         mixin: Vector2DMixin
-        structure: Vector2D
+        structure: vector2
   outputs:
   - name: areaID
     nilable: true

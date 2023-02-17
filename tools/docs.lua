@@ -163,8 +163,8 @@ local knownMixinStructs = {
   ReportInfoMixin = 'ReportInfo',
   TransmogLocationMixin = 'TransmogLocation',
   TransmogPendingInfoMixin = 'TransmogPendingInfo',
-  Vector2DMixin = 'Vector2D',
-  Vector3DMixin = 'Vector3D',
+  Vector2DMixin = 'vector2',
+  Vector3DMixin = 'vector3',
 }
 local structRewrites = {
   AzeriteEmpoweredItemLocation = 'ItemLocation',
@@ -172,8 +172,6 @@ local structRewrites = {
   colorRGB = 'Color',
   colorRGBA = 'Color',
   EmptiableItemLocation = 'ItemLocation',
-  vector2 = 'Vector2D',
-  vector3 = 'Vector3D',
 }
 local function t2nty(field, ns)
   local t = field.Type
