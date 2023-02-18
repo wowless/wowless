@@ -18124,6 +18124,7 @@ C_Traits.GetConfigInfo:
   inputs:
   - - name: configID
       type: number
+  mayreturnnothing: true
   outputs:
   - name: configInfo
     type:
@@ -24664,6 +24665,7 @@ GetSpecializationInfoByID:
     - name: gender
       nilable: true
       type: number
+  mayreturnnothing: true
   outputs:
   - name: id
     type: number
