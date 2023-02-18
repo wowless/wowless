@@ -24,6 +24,7 @@ local specDefault = (function()
     oneornil = 'nil',
     string = '\'\'',
     table = '{}',
+    unit = '\'player\'',
     unknown = 'nil',
   }
   local structureDefaults = {}

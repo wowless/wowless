@@ -5244,7 +5244,7 @@ C_Commentator.ExitInstance:
 C_Commentator.FindSpectatedUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: playerIndex
     type: number
@@ -5303,7 +5303,7 @@ C_Commentator.GetAdditionalCameraWeight:
 C_Commentator.GetAdditionalCameraWeightByToken:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: weight
     type: number
@@ -5532,7 +5532,7 @@ C_Commentator.GetPlayerAuraInfo:
 C_Commentator.GetPlayerAuraInfoByUnit:
   inputs:
   - - name: token
-      type: string
+      type: unit
     - name: spellID
       type: number
   outputs:
@@ -5560,7 +5560,7 @@ C_Commentator.GetPlayerCooldownInfo:
 C_Commentator.GetPlayerCooldownInfoByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: spellID
       type: number
   outputs:
@@ -5586,7 +5586,7 @@ C_Commentator.GetPlayerCrowdControlInfo:
 C_Commentator.GetPlayerCrowdControlInfoByUnit:
   inputs:
   - - name: token
-      type: string
+      type: unit
   outputs:
   - name: spellID
     type: number
@@ -5617,7 +5617,7 @@ C_Commentator.GetPlayerFlagInfo:
 C_Commentator.GetPlayerFlagInfoByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: hasFlag
     type: boolean
@@ -5648,7 +5648,7 @@ C_Commentator.GetPlayerSpellCharges:
 C_Commentator.GetPlayerSpellChargesByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: spellID
       type: number
   outputs:
@@ -5705,7 +5705,7 @@ C_Commentator.GetTeamColor:
 C_Commentator.GetTeamColorByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: color
     type:
@@ -5742,7 +5742,7 @@ C_Commentator.GetTrackedSpells:
 C_Commentator.GetTrackedSpellsByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: category
       type:
         enum: TrackedSpellCategory
@@ -5754,7 +5754,7 @@ C_Commentator.GetTrackedSpellsByUnit:
 C_Commentator.GetUnitData:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: data
     type:
@@ -5775,7 +5775,7 @@ C_Commentator.GetWargameInfo:
 C_Commentator.HasTrackedAuras:
   inputs:
   - - name: token
-      type: string
+      type: unit
   outputs:
   - name: hasOffensiveAura
     type: boolean
@@ -5824,7 +5824,7 @@ C_Commentator.IsTrackedSpell:
 C_Commentator.IsTrackedSpellByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: spellID
       type: number
     - name: category
@@ -5896,7 +5896,7 @@ C_Commentator.SetAdditionalCameraWeight:
 C_Commentator.SetAdditionalCameraWeightByToken:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: weight
       type: number
   outputs: {}
@@ -6582,7 +6582,7 @@ C_Container.UseContainerItem:
       type: number
     - name: unitToken
       nilable: true
-      type: string
+      type: unit
     - default: false
       name: reagentBankOpen
       type: boolean
@@ -9010,7 +9010,7 @@ C_GuildInfo.GetGuildTabardInfo:
   inputs:
   - - name: unit
       nilable: true
-      type: string
+      type: unit
   outputs:
   - name: tabardInfo
     nilable: true
@@ -9225,14 +9225,14 @@ C_HeirloomInfo.SetDefaultFilters:
 C_IncomingSummon.HasIncomingSummon:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: summon
     type: boolean
 C_IncomingSummon.IncomingSummonStatus:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: status
     type:
@@ -10674,7 +10674,7 @@ C_LossOfControl.GetActiveLossOfControlData:
 C_LossOfControl.GetActiveLossOfControlDataByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: index
       type: number
   outputs:
@@ -10691,7 +10691,7 @@ C_LossOfControl.GetActiveLossOfControlDataCount:
 C_LossOfControl.GetActiveLossOfControlDataCountByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: count
     type: number
@@ -10845,7 +10845,7 @@ C_Map.GetAreaInfo:
 C_Map.GetBestMapForUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: uiMapID
     nilable: true
@@ -11076,7 +11076,7 @@ C_Map.GetPlayerMapPosition:
   - - name: uiMapID
       type: number
     - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: position
     nilable: true
@@ -12089,7 +12089,7 @@ C_PaperDollInfo.GetArmorEffectivenessAgainstTarget:
 C_PaperDollInfo.GetInspectAzeriteItemEmpoweredChoices:
   inputs:
   - - name: unit
-      type: string
+      type: unit
     - name: equipmentSlotIndex
       type: number
   outputs:
@@ -12099,7 +12099,7 @@ C_PaperDollInfo.GetInspectAzeriteItemEmpoweredChoices:
 C_PaperDollInfo.GetInspectItemLevel:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: equippedItemLevel
     type: number
@@ -12120,7 +12120,7 @@ C_PaperDollInfo.GetMinItemLevel:
 C_PaperDollInfo.GetStaggerPercentage:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: stagger
     type: number
@@ -12992,7 +12992,7 @@ C_PlayerInfo.GetClass:
 C_PlayerInfo.GetContentDifficultyCreatureForPlayer:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: difficulty
     type:
@@ -13051,7 +13051,7 @@ C_PlayerInfo.GetPlayerCharacterData:
 C_PlayerInfo.GetPlayerMythicPlusRatingSummary:
   inputs:
   - - name: playerToken
-      type: string
+      type: unit
   outputs:
   - name: ratingSummary
     type:
@@ -13555,7 +13555,7 @@ C_PvP.GetActiveMatchWinner:
 C_PvP.GetArenaCrowdControlInfo:
   inputs:
   - - name: playerToken
-      type: string
+      type: unit
   outputs:
   - name: spellID
     type: number
@@ -14114,7 +14114,7 @@ C_PvP.JoinBrawl:
 C_PvP.RequestCrowdControlSpell:
   inputs:
   - - name: playerToken
-      type: string
+      type: unit
   outputs: {}
 C_PvP.SetWarModeDesired:
   inputs:
@@ -14132,7 +14132,7 @@ C_QuestItemUse.CanUseQuestItemOnObject:
         mixin: ItemLocationMixin
         structure: ItemLocation
     - name: unit
-      type: string
+      type: unit
     - name: checkRange
       nilable: true
       type: boolean
@@ -14698,7 +14698,7 @@ C_QuestLog.IsThreatQuest:
 C_QuestLog.IsUnitOnQuest:
   inputs:
   - - name: unit
-      type: string
+      type: unit
     - name: questID
       type: number
   outputs:
@@ -14794,7 +14794,7 @@ C_QuestLog.SortQuestWatches:
 C_QuestLog.UnitIsRelatedToActiveQuest:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: isRelatedToActiveQuest
     type: boolean
@@ -15806,7 +15806,7 @@ C_SpecializationInfo.GetAllSelectedPvpTalentIDs:
 C_SpecializationInfo.GetInspectSelectedPvpTalent:
   inputs:
   - - name: inspectedUnit
-      type: string
+      type: unit
     - name: talentIndex
       type: number
   outputs:
@@ -16664,7 +16664,7 @@ C_TooltipInfo.GetInstanceLockEncountersComplete:
 C_TooltipInfo.GetInventoryItem:
   inputs:
   - - name: unit
-      type: string
+      type: unit
     - name: slot
       type: number
     - name: hideUselessStats
@@ -17187,7 +17187,7 @@ C_TooltipInfo.GetTransmogrifyItem:
 C_TooltipInfo.GetUnit:
   inputs:
   - - name: unit
-      type: string
+      type: unit
     - name: hideStatus
       nilable: true
       type: boolean
@@ -17198,7 +17198,7 @@ C_TooltipInfo.GetUnit:
 C_TooltipInfo.GetUnitAura:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: index
       type: number
     - name: filter
@@ -17211,7 +17211,7 @@ C_TooltipInfo.GetUnitAura:
 C_TooltipInfo.GetUnitBuff:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: index
       type: number
     - name: filter
@@ -17237,7 +17237,7 @@ C_TooltipInfo.GetUnitBuffByAuraInstanceID:
 C_TooltipInfo.GetUnitDebuff:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: index
       type: number
     - name: filter
@@ -20008,7 +20008,7 @@ C_UIWidgetManager.SetProcessingUnit:
   inputs:
   - - name: unit
       nilable: true
-      type: string
+      type: unit
   outputs: {}
 C_UIWidgetManager.SetProcessingUnitGuid:
   inputs:
@@ -25331,7 +25331,7 @@ GetUICameraInfo: {}
 GetUnitChargedPowerPoints:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: pointIndices
     type:
@@ -25339,21 +25339,21 @@ GetUnitChargedPowerPoints:
 GetUnitEmpowerHoldAtMaxTime:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: holdAtMaxTime
     type: number
 GetUnitEmpowerMinHoldTime:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: minHoldTime
     type: number
 GetUnitEmpowerStageDuration:
   inputs:
   - - name: unit
-      type: string
+      type: unit
     - name: index
       type: number
   outputs:
@@ -25368,7 +25368,7 @@ GetUnitMaxHealthModifier:
 GetUnitPowerBarInfo:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: info
     type:
@@ -25384,7 +25384,7 @@ GetUnitPowerBarInfoByID:
 GetUnitPowerBarStrings:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: name
     nilable: true
@@ -25412,7 +25412,7 @@ GetUnitPowerBarStringsByID:
 GetUnitPowerBarTextureInfo:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: textureIndex
       type: number
     - name: timerIndex
@@ -26133,7 +26133,7 @@ IsTutorialFlagged: {}
 IsUnitModelReadyForUI:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: isReady
     type: boolean
@@ -26993,7 +26993,7 @@ SetUnitCursorTexture:
   - - name: textureObject
       type: table
     - name: unit
-      type: string
+      type: unit
     - name: style
       nilable: true
       type:
@@ -27407,7 +27407,7 @@ UnitAffectingCombat:
 UnitAlliedRaceInfo:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: isAlliedRace
     type: boolean
@@ -27470,7 +27470,7 @@ UnitChannelInfo:
 UnitChromieTimeID:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: ID
     type: number
@@ -27672,7 +27672,7 @@ UnitInParty:
 UnitInPartyShard:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: inPartyShard
     type: boolean
@@ -27720,7 +27720,7 @@ UnitIsCharmed:
 UnitIsConnected:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: isConnected
     type: boolean
@@ -27792,9 +27792,9 @@ UnitIsOtherPlayersPet:
 UnitIsOwnerOrControllerOfUnit:
   inputs:
   - - name: controllingUnit
-      type: string
+      type: unit
     - name: controlledUnit
-      type: string
+      type: unit
   outputs:
   - name: unitIsOwnerOrControllerOfUnit
     type: boolean
@@ -27872,7 +27872,7 @@ UnitName:
 UnitNameplateShowsWidgetsOnly:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: nameplateShowsWidgetsOnly
     type: boolean
@@ -27890,7 +27890,7 @@ UnitOnTaxi:
 UnitPartialPower:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - default: NumPowerTypes
       name: powerType
       type:
@@ -27912,7 +27912,7 @@ UnitPercentHealthFromGUID:
 UnitPhaseReason:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: reason
     nilable: true
@@ -27944,7 +27944,7 @@ UnitPosition: {}
 UnitPower:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - default: NumPowerTypes
       name: powerType
       type:
@@ -27958,7 +27958,7 @@ UnitPower:
 UnitPowerBarID:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: barID
     type: number
@@ -27974,7 +27974,7 @@ UnitPowerDisplayMod:
 UnitPowerMax:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - default: NumPowerTypes
       name: powerType
       type:
@@ -28008,7 +28008,7 @@ UnitPowerType:
 UnitPvpClassification:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: classification
     nilable: true
@@ -28022,14 +28022,14 @@ UnitPVPName:
 UnitQuestTrivialLevelRange:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: levelRange
     type: number
 UnitQuestTrivialLevelRangeScaling:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: levelRange
     type: number
@@ -28125,7 +28125,7 @@ UnitTokenFromGUID:
 UnitTreatAsPlayerForDisplay:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: treatAsPlayer
     type: boolean
@@ -28139,7 +28139,7 @@ UnitWeaponAttackPower: {}
 UnitWidgetSet:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: uiWidgetSet
     type: number
