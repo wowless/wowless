@@ -3086,7 +3086,7 @@ C_Commentator.GetTeamColor:
   - name: color
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
 C_Commentator.GetTeamColorByUnit:
   inputs:
   - - name: unitToken
@@ -3095,7 +3095,7 @@ C_Commentator.GetTeamColorByUnit:
   - name: color
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
 C_Commentator.GetTimeLeftInMatch:
   inputs:
   - {}
@@ -3559,7 +3559,7 @@ C_Console.GetColorFromType:
   - name: color
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
 C_Console.GetFontHeight:
   inputs:
   - {}
@@ -4607,7 +4607,7 @@ C_GamePad.GetLedColor:
   - name: color
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
 C_GamePad.GetPowerLevel:
   inputs:
   - - name: deviceID
@@ -4634,7 +4634,7 @@ C_GamePad.SetLedColor:
   - - name: color
       type:
         mixin: ColorMixin
-        structure: Color
+        structure: colorRGBA
   outputs: {}
 C_GamePad.SetVibration:
   inputs:

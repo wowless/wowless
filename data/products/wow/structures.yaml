@@ -61,7 +61,7 @@ C_AlliedRaces.AlliedRaceInfo:
   bannerColor:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   crestAtlas:
     type: string
   description:
@@ -165,11 +165,11 @@ C_ArtifactUI.ArtifactArtInfo:
   barConnectedColor:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   barDisconnectedColor:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   spellVisualKitID:
     type: number
   textureKit:
@@ -177,7 +177,7 @@ C_ArtifactUI.ArtifactArtInfo:
   titleColor:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   titleName:
     type: string
   uiModelSceneID:
@@ -1484,7 +1484,7 @@ C_ContributionCollector.ContributionAppearance:
   stateColor:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   stateName:
     type: string
   statusBarAtlas:
@@ -1942,7 +1942,7 @@ C_EventToastManager.EventToastInfo:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   displayType:
     type:
       enum: EventToastDisplayType
@@ -3710,7 +3710,7 @@ C_PlayerChoice.PlayerChoiceOptionInfo:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   rewardInfo:
     type:
       structure: C_PlayerChoice.PlayerChoiceOptionRewardInfo
@@ -5190,7 +5190,7 @@ C_UIColor.DBColorExport:
   color:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   enabledState:
     type:
@@ -6808,12 +6808,12 @@ CharCustomizationChoice:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   swatchColor2:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
 CharCustomizationOption:
   choices:
     type:
@@ -6859,7 +6859,9 @@ ClickBindingInfo:
   type:
     type:
       enum: ClickBindingType
-Color:
+colorRGBA:
+  a:
+    type: number
   b:
     type: number
   g:
@@ -7514,15 +7516,15 @@ GuildTabardInfo:
   backgroundColor:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   borderColor:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   emblemColor:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   emblemFileID:
     type: number
   emblemStyle:
@@ -7765,7 +7767,7 @@ TooltipDataArg:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   field:
     type: string
   floatVal:

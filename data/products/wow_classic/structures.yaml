@@ -1942,7 +1942,7 @@ C_UIColor.DBColorExport:
   color:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   enabledState:
     type:
@@ -2352,12 +2352,12 @@ CharCustomizationChoice:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   swatchColor2:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
 CharCustomizationOption:
   choices:
     type:
@@ -2393,7 +2393,9 @@ ChatChannelInfo:
     type: string
   zoneChannelID:
     type: number
-Color:
+colorRGBA:
+  a:
+    type: number
   b:
     type: number
   g:
@@ -2418,15 +2420,15 @@ GuildTabardInfo:
   backgroundColor:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   borderColor:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   emblemColor:
     type:
       mixin: ColorMixin
-      structure: Color
+      structure: colorRGBA
   emblemFilename:
     type: string
   emblemStyle:

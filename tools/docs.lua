@@ -156,7 +156,7 @@ for k in pairs(enum) do
   end
 end
 local knownMixinStructs = {
-  ColorMixin = 'Color',
+  ColorMixin = 'colorRGBA',
   ItemLocationMixin = 'ItemLocation',
   ItemTransmogInfoMixin = 'ItemTransmogInfo',
   PlayerLocationMixin = 'PlayerLocation',
@@ -169,8 +169,7 @@ local knownMixinStructs = {
 local structRewrites = {
   AzeriteEmpoweredItemLocation = 'ItemLocation',
   AzeriteItemLocation = 'ItemLocation',
-  colorRGB = 'Color',
-  colorRGBA = 'Color',
+  colorRGB = 'colorRGBA',
   EmptiableItemLocation = 'ItemLocation',
 }
 local function t2nty(field, ns)
