@@ -61,7 +61,7 @@ C_AlliedRaces.AlliedRaceInfo:
   bannerColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   crestAtlas:
     type: string
   description:
@@ -165,11 +165,11 @@ C_ArtifactUI.ArtifactArtInfo:
   barConnectedColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   barDisconnectedColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   spellVisualKitID:
     type: number
   textureKit:
@@ -177,7 +177,7 @@ C_ArtifactUI.ArtifactArtInfo:
   titleColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   titleName:
     type: string
   uiModelSceneID:
@@ -1510,7 +1510,7 @@ C_ContributionCollector.ContributionAppearance:
   stateColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   stateName:
     type: string
   statusBarAtlas:
@@ -1968,7 +1968,7 @@ C_EventToastManager.EventToastInfo:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   displayType:
     type:
       enum: EventToastDisplayType
@@ -6862,12 +6862,12 @@ CharCustomizationChoice:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   swatchColor2:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 CharCustomizationOption:
   choices:
     type:
@@ -6913,6 +6913,13 @@ ClickBindingInfo:
   type:
     type:
       enum: ClickBindingType
+colorRGB:
+  b:
+    type: number
+  g:
+    type: number
+  r:
+    type: number
 colorRGBA:
   a:
     type: number
@@ -7570,15 +7577,15 @@ GuildTabardInfo:
   backgroundColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   borderColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   emblemColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   emblemFileID:
     type: number
   emblemStyle:
@@ -7830,7 +7837,7 @@ TooltipDataArg:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   field:
     type: string
   floatVal:

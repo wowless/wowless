@@ -169,7 +169,6 @@ local knownMixinStructs = {
 local structRewrites = {
   AzeriteEmpoweredItemLocation = 'ItemLocation',
   AzeriteItemLocation = 'ItemLocation',
-  colorRGB = 'colorRGBA',
   EmptiableItemLocation = 'ItemLocation',
 }
 local function t2nty(field, ns)

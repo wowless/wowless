@@ -3339,7 +3339,7 @@ C_ChallengeMode.GetDungeonScoreRarityColor:
   - name: scoreColor
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_ChallengeMode.GetGuildLeaders:
   inputs:
   - {}
@@ -3356,7 +3356,7 @@ C_ChallengeMode.GetKeystoneLevelRarityColor:
   - name: levelScore
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_ChallengeMode.GetMapScoreInfo:
   inputs:
   - {}
@@ -3424,7 +3424,7 @@ C_ChallengeMode.GetSpecificDungeonOverallScoreRarityColor:
   - name: specificDungeonOverallScoreColor
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_ChallengeMode.GetSpecificDungeonScoreRarityColor:
   inputs:
   - - name: specificDungeonScore
@@ -3433,7 +3433,7 @@ C_ChallengeMode.GetSpecificDungeonScoreRarityColor:
   - name: specificDungeonScoreColor
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_ChallengeMode.HasSlottedKeystone:
   inputs:
   - {}
@@ -3795,7 +3795,7 @@ C_ClassColor.GetClassColor:
   - name: classColor
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_ClassTalents.CanChangeTalents:
   inputs:
   - {}
@@ -5701,7 +5701,7 @@ C_Commentator.GetTeamColor:
   - name: color
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_Commentator.GetTeamColorByUnit:
   inputs:
   - - name: unitToken
@@ -5710,7 +5710,7 @@ C_Commentator.GetTeamColorByUnit:
   - name: color
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_Commentator.GetTimeLeftInMatch:
   inputs:
   - {}
@@ -6174,7 +6174,7 @@ C_Console.GetColorFromType:
   - name: color
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_Console.GetFontHeight:
   inputs:
   - {}
@@ -8216,7 +8216,7 @@ C_GamePad.GetLedColor:
   - name: color
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_GamePad.GetPowerLevel:
   inputs:
   - - name: deviceID
@@ -8243,7 +8243,7 @@ C_GamePad.SetLedColor:
   - - name: color
       type:
         mixin: ColorMixin
-        structure: colorRGBA
+        structure: colorRGB
   outputs: {}
 C_GamePad.SetVibration:
   inputs:
