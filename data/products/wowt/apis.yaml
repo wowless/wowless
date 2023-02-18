@@ -15722,6 +15722,7 @@ C_SpecializationInfo.GetPvpTalentUnlockLevel:
     nilable: true
     type: number
 C_SpecializationInfo.GetSpecIDs:
+  impl: C_SpecializationInfo.GetSpecIDs
   inputs:
   - - name: specSetID
       type: number

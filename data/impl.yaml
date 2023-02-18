@@ -71,6 +71,9 @@ C_ScriptedAnimations.GetAllScriptedAnimationEffects:
   sqls:
   - cursor: C_ScriptedAnimations.GetAllScriptedAnimationEffects
     table: true
+C_SpecializationInfo.GetSpecIDs:
+  sqls:
+  - cursor: C_SpecializationInfo.GetSpecIDs
 C_Texture.GetAtlasInfo:
   sqls:
   - lookup: C_Texture.GetAtlasInfo
