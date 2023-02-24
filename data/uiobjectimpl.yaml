@@ -45,7 +45,8 @@ Frame/IsEventRegistered: {}
 Frame/RegisterAllEvents: {}
 Frame/RegisterEvent: {}
 Frame/RegisterUnitEvent: {}
-Frame/SetAttribute: {}
+Frame/SetAttribute:
+  hostrep: true
 Frame/SetAttributeNoHandler: {}
 Frame/SetFrameLevel: {}
 Frame/UnregisterAllEvents: {}

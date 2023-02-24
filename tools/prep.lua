@@ -162,13 +162,14 @@ for _, f in ipairs(require('pl.dir').getfiles('data/state')) do
 end
 
 local uiobjects = {}
+local uiobjectimpl = parseYaml('data/uiobjectimpl.yaml')
 for k, v in pairs(parseYaml('data/products/' .. product .. '/uiobjects.yaml')) do
   local methods = {}
   for mk, mv in pairs(v.methods or {}) do
     if mv.impl then
       methods[mk] = {
         impl = readFile('data/uiobjects/' .. mv.impl .. '.lua'),
-        luarep = true,
+        luarep = not uiobjectimpl[mv.impl].hostrep,
       }
     elseif mv.getter then
       local t = {}

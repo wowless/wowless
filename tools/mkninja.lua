@@ -367,6 +367,7 @@ for _, p in ipairs(productList) do
       'build/state.stamp',
       'build/uiobjects.stamp',
       'data/impl.yaml',
+      'data/uiobjectimpl.yaml',
       'tools/prep.lua',
       dataStamp,
     },
