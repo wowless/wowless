@@ -29,11 +29,11 @@ local function mkBaseUIObjectTypes(api)
   end
 
   local function UpdateVisible(obj, fn)
-    local wasVisible = m(obj, 'IsVisible')
+    local wasVisible = obj:IsVisible()
     fn()
-    local visibleNow = m(obj, 'IsVisible')
+    local visibleNow = obj:IsVisible()
     if wasVisible ~= visibleNow then
-      DoUpdateVisible(u(obj), visibleNow and 'OnShow' or 'OnHide')
+      DoUpdateVisible(obj, visibleNow and 'OnShow' or 'OnHide')
     end
   end
 
