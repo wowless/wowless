@@ -145,18 +145,19 @@ local function new(log, maxErrors, product)
     assert(objtype, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
     assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
-    local obj = setmetatable({}, objtype.sandboxMT)
-    obj[0] = newproxy()
-    userdata[obj[0]] = {
+    local objp = newproxy()
+    local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
+    local ud = {
       luarep = obj,
       name = objname,
       type = typename,
     }
-    setmetatable(u(obj), objtype.hostMT)
-    objtype.constructor(obj)
+    userdata[objp] = ud
+    setmetatable(ud, objtype.hostMT)
+    objtype.constructor(ud)
     SetParent(obj, parent)
     if InheritsFrom(typename, 'frame') then
-      frames:insert(u(obj))
+      frames:insert(ud)
     end
     local tmpls = {}
     if objtype.template then
@@ -172,11 +173,11 @@ local function new(log, maxErrors, product)
     end
     if objname then
       if type(objnamearg) == 'string' then
-        objname = ParentSub(objnamearg, u(obj).parent)
+        objname = ParentSub(objnamearg, ud.parent)
       elseif type(objnamearg) == 'number' then
         objname = tostring(objnamearg)
       end
-      u(obj).name = objname
+      ud.name = objname
       if env[objname] then
         log(3, 'overwriting global ' .. objname)
       end
@@ -194,9 +195,9 @@ local function new(log, maxErrors, product)
     if id then
       obj:SetID(id)
     end
-    RunScript(u(obj), 'OnLoad')
+    RunScript(ud, 'OnLoad')
     if InheritsFrom(typename, 'region') and obj:IsVisible() then
-      RunScript(u(obj), 'OnShow')
+      RunScript(ud, 'OnShow')
     end
     if objtype.zombie then
       setmetatable(obj, nil)

@@ -77,17 +77,15 @@ local function mkBaseUIObjectTypes(api)
     end
     local t = {}
     for k, v in pairs(result) do
-      local hostIndex = {}
       local sandboxIndex = {}
       for n, f in pairs(v.metaindex) do
-        hostIndex[n] = function(obj, ...)
-          return f(obj.luarep, ...)
-        end
-        sandboxIndex[n] = debug.newcfunction(f)
+        sandboxIndex[n] = debug.newcfunction(function(obj, ...)
+          return f(u(obj), ...)
+        end)
       end
       t[k] = {
         constructor = v.constructor,
-        hostMT = { __index = hostIndex },
+        hostMT = { __index = v.metaindex },
         isa = v.isa,
         name = v.name,
         sandboxMT = { __index = sandboxIndex },
@@ -113,10 +111,9 @@ local function mkBaseUIObjectTypes(api)
   for name, cfg in pairs(api.datalua.uiobjects) do
     local lname = name:lower()
     local function wrap(fname, fn)
-      setfenv(fn, env)
       return function(self, ...)
-        if not api.InheritsFrom(u(self).type, lname) then
-          error(('invalid self to %s.%s, got %s'):format(name, fname, tostring(u(self).type)))
+        if not api.InheritsFrom(self.type, lname) then
+          error(('invalid self to %s.%s, got %s'):format(name, fname, tostring(self.type)))
         end
         return fn(self, ...)
       end
@@ -131,12 +128,11 @@ local function mkBaseUIObjectTypes(api)
     local constructor = (function()
       local deepcopy = require('pl.tablex').deepcopy
       return function(self)
-        local ud = u(self)
         for fname, field in pairs(cfg.fields or {}) do
           if field.init ~= nil then
-            ud[fname] = type(field.init) == 'table' and deepcopy(field.init) or field.init
+            self[fname] = type(field.init) == 'table' and deepcopy(field.init) or field.init
           elseif field.type == 'hlist' then
-            ud[fname] = hlist()
+            self[fname] = hlist()
           end
         end
       end
@@ -145,48 +141,50 @@ local function mkBaseUIObjectTypes(api)
     for mname, method in pairs(cfg.methods) do
       local fname = name .. ':' .. mname
       if method.status == 'implemented' then
-        mixin[mname] = assert(loadstring(method.impl, fname), 'function required on ' .. fname)
+        local impl = assert(loadstring(method.impl, fname), 'function required on ' .. fname)
+        setfenv(impl, env)
+        mixin[mname] = function(self, ...)
+          return impl(self.luarep, ...)
+        end
       elseif method.status == 'getter' then
         local t = {}
         for _, f in ipairs(method.fields) do
           table.insert(t, 'x.' .. f.name)
         end
-        local src = 'function(x) x=u(x);return ' .. table.concat(t, ',') .. ' end'
-        src = 'local u = ...;return ' .. src
-        mixin[mname] = assert(loadstring(src, fname))(u)
+        local src = 'local x = ...;return ' .. table.concat(t, ',')
+        mixin[mname] = assert(loadstring(src, fname))
       elseif method.status == 'setter' then
         mixin[mname] = function(self, ...)
-          local ud = u(self)
           for i, f in ipairs(method.fields) do
             local v = select(i, ...)
             local cf = cfg.fields[f.name]
             local ty = cf.type
             if ty == 'boolean' then
-              ud[f.name] = not not v
+              self[f.name] = not not v
             elseif v == nil then
               assert(f.nilable or cf.nilable, ('cannot set nil on %s.%s.%s'):format(name, mname, f.name))
-              ud[f.name] = nil
+              self[f.name] = nil
             elseif ty == 'texture' then
-              ud[f.name] = toTexture(self, v)
+              self[f.name] = toTexture(self, v)
             elseif ty == 'number' then
-              ud[f.name] = assert(tonumber(v), ('want number, got %s'):format(type(v)))
+              self[f.name] = assert(tonumber(v), ('want number, got %s'):format(type(v)))
             elseif ty == 'string' then
-              ud[f.name] = tostring(v)
+              self[f.name] = tostring(v)
             elseif ty == 'font' then
               if type(v) == 'string' then
                 v = api.env[v]
               end
               assert(type(v) == 'table', 'expected font')
-              ud[f.name] = v
+              self[f.name] = v
             elseif ty == 'frame' then
               if type(v) == 'string' then
                 v = api.env[v]
               end
               assert(api.InheritsFrom(v:GetObjectType():lower(), 'frame'))
-              ud[f.name] = v
+              self[f.name] = v
             elseif ty == 'table' then
               assert(type(v) == 'table', 'expected table, got ' .. type(v))
-              ud[f.name] = v
+              self[f.name] = v
             else
               error('unexpected type ' .. ty)
             end
