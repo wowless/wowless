@@ -165,10 +165,24 @@ local uiobjects = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/uiobjects.yaml')) do
   local methods = {}
   for mk, mv in pairs(v.methods or {}) do
-    if mv.status == 'implemented' then
-      mv.impl = readFile('data/uiobjects/' .. k .. '/' .. mk .. '.lua')
+    if mv.impl then
+      methods[mk] = {
+        impl = readFile('data/uiobjects/' .. mv.impl .. '.lua'),
+        status = 'implemented',
+      }
+    elseif mv.getter then
+      methods[mk] = {
+        fields = mv.getter,
+        status = 'getter',
+      }
+    elseif mv.setter then
+      methods[mk] = {
+        fields = mv.setter,
+        status = 'setter',
+      }
+    else
+      methods[mk] = { outputs = mv.outputs }
     end
-    methods[mk] = mv
   end
   v.methods = methods
   uiobjects[k] = v

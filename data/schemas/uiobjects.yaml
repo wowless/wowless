@@ -40,33 +40,41 @@ type:
             mapof:
               key: string
               value:
-                record:
-                  fields:
-                    type:
-                      sequenceof:
-                        record:
-                          name:
-                            required: true
-                            type: string
-                          nilable:
-                            type: boolean
-                  outputs:
-                    type:
-                      sequenceof:
-                        record:
-                          name:
-                            type: string
-                          type:
-                            required: true
+                oneof:
+                - record:
+                    getter:
+                      type:
+                        sequenceof:
+                          record:
+                            name:
+                              required: true
+                              type: string
+                - record:
+                    impl:
+                      type:
+                        ref: uiobjectimpl
+                - record:
+                    outputs:
+                      type:
+                        sequenceof:
+                          record:
+                            name:
+                              type: string
                             type:
-                              oneof:
-                              - literal: number
-                  status:
-                    type:
-                      oneof:
-                      - literal: getter
-                      - literal: implemented
-                      - literal: setter
+                              required: true
+                              type:
+                                oneof:
+                                - literal: number
+                - record:
+                    setter:
+                      type:
+                        sequenceof:
+                          record:
+                            name:
+                              required: true
+                              type: string
+                            nilable:
+                              type: boolean
         objectType:
           type: string
         virtual:

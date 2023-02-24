@@ -1,17 +1,9 @@
 local yaml = require('wowapi.yaml')
 
 describe('uiobjects', function()
-  local expectedImpls = {}
   for _, p in ipairs(require('wowless.util').productList()) do
     describe(p, function()
       local uiobjects = yaml.parseFile('data/products/' .. p .. '/uiobjects.yaml')
-      for k, v in pairs(uiobjects) do
-        for mk, mv in pairs(v.methods or {}) do
-          if mv.status == 'implemented' then
-            expectedImpls[('data/uiobjects/%s/%s.lua'):format(k, mk)] = true
-          end
-        end
-      end
       describe('hierarchy', function()
         local g = {}
         for k, v in pairs(uiobjects) do
@@ -100,11 +92,4 @@ describe('uiobjects', function()
       end
     end)
   end
-  local actualImpls = {}
-  for _, f in ipairs(require('pl.dir').getallfiles('data/uiobjects/')) do
-    actualImpls[f] = true
-  end
-  it('has exactly the right impl files', function()
-    assert.same(expectedImpls, actualImpls)
-  end)
 end)

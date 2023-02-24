@@ -5,6 +5,7 @@ local validate = require('wowapi.schema').validate
 local globalschemas = {
   ['data/flavors'] = 'flavors',
   ['data/impl'] = 'impl',
+  ['data/uiobjectimpl'] = 'uiobjectimpl',
   ['tools/addons'] = 'addons',
 }
 

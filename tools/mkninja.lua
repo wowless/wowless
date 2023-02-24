@@ -425,6 +425,7 @@ table.insert(builds, {
     'build/flavors.lua',
     'build/wowless.stamp',
     'data/impl.yaml',
+    'data/uiobjectimpl.yaml',
     'wowless/ext.so',
     addonGeneratedFiles,
     elune,
