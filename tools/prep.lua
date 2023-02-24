@@ -168,20 +168,23 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/uiobjects.yaml')) d
     if mv.impl then
       methods[mk] = {
         impl = readFile('data/uiobjects/' .. mv.impl .. '.lua'),
-        status = 'implemented',
+        luarep = true,
       }
     elseif mv.getter then
-      methods[mk] = {
-        fields = mv.getter,
-        status = 'getter',
-      }
+      local t = {}
+      for _, f in ipairs(mv.getter) do
+        table.insert(t, 'x.' .. f.name)
+      end
+      methods[mk] = { impl = 'local x = ...;return ' .. table.concat(t, ',') }
     elseif mv.setter then
-      methods[mk] = {
-        fields = mv.setter,
-        status = 'setter',
-      }
+      methods[mk] = { fields = mv.setter }
     else
-      methods[mk] = { outputs = mv.outputs }
+      local t = {}
+      for _, output in ipairs(mv.outputs or {}) do
+        assert(output.type == 'number', 'unsupported type in ' .. k .. '.' .. mk)
+        table.insert(t, 1)
+      end
+      methods[mk] = { impl = 'return ' .. table.concat(t, ',') }
     end
   end
   v.methods = methods
