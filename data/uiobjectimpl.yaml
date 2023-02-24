@@ -41,16 +41,22 @@ Frame/GetEffectiveAlpha: {}
 Frame/GetNumChildren: {}
 Frame/GetNumRegions: {}
 Frame/GetRegions: {}
-Frame/IsEventRegistered: {}
-Frame/RegisterAllEvents: {}
-Frame/RegisterEvent: {}
-Frame/RegisterUnitEvent: {}
+Frame/IsEventRegistered:
+  hostrep: true
+Frame/RegisterAllEvents:
+  hostrep: true
+Frame/RegisterEvent:
+  hostrep: true
+Frame/RegisterUnitEvent:
+  hostrep: true
 Frame/SetAttribute:
   hostrep: true
 Frame/SetAttributeNoHandler: {}
 Frame/SetFrameLevel: {}
-Frame/UnregisterAllEvents: {}
-Frame/UnregisterEvent: {}
+Frame/UnregisterAllEvents:
+  hostrep: true
+Frame/UnregisterEvent:
+  hostrep: true
 GameTooltip/IsOwned: {}
 GameTooltip/SetOwner: {}
 LayeredRegion/SetVertexColor: {}

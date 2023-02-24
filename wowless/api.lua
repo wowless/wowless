@@ -275,31 +275,31 @@ local function new(log, maxErrors, product)
   local function RegisterEvent(frame, event)
     event = event:upper()
     assert(eventRegistrations[event], 'cannot register ' .. event)
-    if not allEventRegistrations:has(u(frame)) then
-      eventRegistrations[event]:insert(u(frame))
+    if not allEventRegistrations:has(frame) then
+      eventRegistrations[event]:insert(frame)
     end
   end
 
   local function UnregisterEvent(frame, event)
     event = event:upper()
     assert(eventRegistrations[event], 'cannot unregister ' .. event)
-    eventRegistrations[event]:remove(u(frame))
+    eventRegistrations[event]:remove(frame)
   end
 
   local function UnregisterAllEvents(frame)
     for _, reg in pairs(eventRegistrations) do
-      reg:remove(u(frame))
+      reg:remove(frame)
     end
-    allEventRegistrations:remove(u(frame))
+    allEventRegistrations:remove(frame)
   end
 
   local function RegisterAllEvents(frame)
     UnregisterAllEvents(frame)
-    allEventRegistrations:insert(u(frame))
+    allEventRegistrations:insert(frame)
   end
 
   local function IsEventRegistered(frame, event)
-    return allEventRegistrations:has(u(frame)) or eventRegistrations[event:upper()]:has(u(frame))
+    return allEventRegistrations:has(frame) or eventRegistrations[event:upper()]:has(frame)
   end
 
   for k, v in pairs(datalua.state) do
