@@ -4,6 +4,4 @@ type:
   mapof:
     key: string
     value:
-      record:
-        hostrep:
-          type: boolean
+      record: null

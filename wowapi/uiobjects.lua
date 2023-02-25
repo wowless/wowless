@@ -143,10 +143,7 @@ local function mkBaseUIObjectTypes(api)
       if method.impl then
         local impl = assert(loadstring(method.impl, fname), 'function required on ' .. fname)
         setfenv(impl, env)
-        mixin[mname] = not method.luarep and impl
-          or function(self, ...)
-            return impl(self.luarep, ...)
-          end
+        mixin[mname] = impl
       else
         assert(method.fields, 'missing fields on ' .. fname)
         mixin[mname] = function(self, ...)

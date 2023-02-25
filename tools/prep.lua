@@ -167,10 +167,8 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/uiobjects.yaml')) d
   local methods = {}
   for mk, mv in pairs(v.methods or {}) do
     if mv.impl then
-      methods[mk] = {
-        impl = readFile('data/uiobjects/' .. mv.impl .. '.lua'),
-        luarep = not uiobjectimpl[mv.impl].hostrep,
-      }
+      assert(uiobjectimpl[mv.impl])
+      methods[mk] = { impl = readFile('data/uiobjects/' .. mv.impl .. '.lua') }
     elseif mv.getter then
       local t = {}
       for _, f in ipairs(mv.getter) do

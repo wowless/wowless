@@ -1,197 +1,99 @@
 ---
-Animation/GetRegionParent:
-  hostrep: true
-AnimationGroup/CreateAnimation:
-  hostrep: true
-AnimationGroup/GetAnimations:
-  hostrep: true
-Button/Click:
-  hostrep: true
-Button/Disable:
-  hostrep: true
-Button/Enable:
-  hostrep: true
-Button/GetText:
-  hostrep: true
-Button/IsEnabled:
-  hostrep: true
-Button/RegisterForClicks:
-  hostrep: true
-Button/SetButtonState:
-  hostrep: true
-Button/SetDisabledAtlas:
-  hostrep: true
-Button/SetDisabledTexture:
-  hostrep: true
-Button/SetEnabled:
-  hostrep: true
-Button/SetFontString:
-  hostrep: true
-Button/SetFormattedText:
-  hostrep: true
-Button/SetHighlightAtlas:
-  hostrep: true
-Button/SetHighlightTexture:
-  hostrep: true
-Button/SetNormalAtlas:
-  hostrep: true
-Button/SetNormalTexture:
-  hostrep: true
-Button/SetPushedAtlas:
-  hostrep: true
-Button/SetPushedTexture:
-  hostrep: true
-Button/SetText:
-  hostrep: true
-CheckButton/SetChecked:
-  hostrep: true
-CheckButton/SetCheckedTexture:
-  hostrep: true
-EditBox/Disable:
-  hostrep: true
-EditBox/Enable:
-  hostrep: true
-EditBox/GetInputLanguage:
-  hostrep: true
-EditBox/Insert:
-  hostrep: true
-FontInstance/GetFont:
-  hostrep: true
-FontInstance/GetFontObject:
-  hostrep: true
-FontString/SetText:
-  hostrep: true
-ForbiddenMixin/SetForbidden:
-  hostrep: true
-Frame/CreateFontString:
-  hostrep: true
-Frame/CreateLine:
-  hostrep: true
-Frame/CreateMaskTexture:
-  hostrep: true
-Frame/CreateTexture:
-  hostrep: true
-Frame/GetAttribute:
-  hostrep: true
-Frame/GetChildren:
-  hostrep: true
-Frame/GetEffectiveAlpha:
-  hostrep: true
-Frame/GetNumChildren:
-  hostrep: true
-Frame/GetNumRegions:
-  hostrep: true
-Frame/GetRegions:
-  hostrep: true
-Frame/IsEventRegistered:
-  hostrep: true
-Frame/RegisterAllEvents:
-  hostrep: true
-Frame/RegisterEvent:
-  hostrep: true
-Frame/RegisterUnitEvent:
-  hostrep: true
-Frame/SetAttribute:
-  hostrep: true
-Frame/SetAttributeNoHandler:
-  hostrep: true
-Frame/SetFrameLevel:
-  hostrep: true
-Frame/UnregisterAllEvents:
-  hostrep: true
-Frame/UnregisterEvent:
-  hostrep: true
-GameTooltip/IsOwned:
-  hostrep: true
-GameTooltip/SetOwner:
-  hostrep: true
-LayeredRegion/SetVertexColor:
-  hostrep: true
-MessageFrame/AddMessage:
-  hostrep: true
-Model/TransformCameraSpaceToModelSpace:
-  hostrep: true
-ModelScene/CreateActor:
-  hostrep: true
-MouseMixin/EnableMouse:
-  hostrep: true
-MouseMixin/IsMouseEnabled:
-  hostrep: true
-ParentedObject/GetDebugName:
-  hostrep: true
-ParentedObject/SetParent:
-  hostrep: true
-Path/CreateControlPoint:
-  hostrep: true
-Region/ClearAllPoints:
-  hostrep: true
-Region/CreateAnimationGroup:
-  hostrep: true
-Region/GetAnimationGroups:
-  hostrep: true
-Region/GetCenter:
-  hostrep: true
-Region/GetEffectiveScale:
-  hostrep: true
-Region/GetNumPoints:
-  hostrep: true
-Region/GetPoint:
-  hostrep: true
-Region/GetRight:
-  hostrep: true
-Region/GetScaledRect:
-  hostrep: true
-Region/GetTop:
-  hostrep: true
-Region/Hide:
-  hostrep: true
-Region/IsProtected:
-  hostrep: true
-Region/IsVisible:
-  hostrep: true
-Region/SetAllPoints:
-  hostrep: true
-Region/SetAlpha:
-  hostrep: true
-Region/SetPoint:
-  hostrep: true
-Region/SetScale:
-  hostrep: true
-Region/SetShown:
-  hostrep: true
-Region/Show:
-  hostrep: true
-ScriptObject/GetScript:
-  hostrep: true
-ScriptObject/HasScript:
-  hostrep: true
-ScriptObject/HookScript:
-  hostrep: true
-ScriptObject/SetScript:
-  hostrep: true
-ScrollFrame/SetScrollChild:
-  hostrep: true
-Slider/Disable:
-  hostrep: true
-Slider/Enable:
-  hostrep: true
-StatusBar/GetStatusBarColor:
-  hostrep: true
-StatusBar/SetStatusBarColor:
-  hostrep: true
-StatusBar/SetStatusBarTexture:
-  hostrep: true
-Texture/GetTexture:
-  hostrep: true
-Texture/SetAtlas:
-  hostrep: true
-Texture/SetColorTexture:
-  hostrep: true
-Texture/SetTexCoord:
-  hostrep: true
-Texture/SetTexture:
-  hostrep: true
-UIObject/GetObjectType:
-  hostrep: true
-UIObject/IsObjectType:
-  hostrep: true
+Animation/GetRegionParent: {}
+AnimationGroup/CreateAnimation: {}
+AnimationGroup/GetAnimations: {}
+Button/Click: {}
+Button/Disable: {}
+Button/Enable: {}
+Button/GetText: {}
+Button/IsEnabled: {}
+Button/RegisterForClicks: {}
+Button/SetButtonState: {}
+Button/SetDisabledAtlas: {}
+Button/SetDisabledTexture: {}
+Button/SetEnabled: {}
+Button/SetFontString: {}
+Button/SetFormattedText: {}
+Button/SetHighlightAtlas: {}
+Button/SetHighlightTexture: {}
+Button/SetNormalAtlas: {}
+Button/SetNormalTexture: {}
+Button/SetPushedAtlas: {}
+Button/SetPushedTexture: {}
+Button/SetText: {}
+CheckButton/SetChecked: {}
+CheckButton/SetCheckedTexture: {}
+EditBox/Disable: {}
+EditBox/Enable: {}
+EditBox/GetInputLanguage: {}
+EditBox/Insert: {}
+FontInstance/GetFont: {}
+FontInstance/GetFontObject: {}
+FontString/SetText: {}
+ForbiddenMixin/SetForbidden: {}
+Frame/CreateFontString: {}
+Frame/CreateLine: {}
+Frame/CreateMaskTexture: {}
+Frame/CreateTexture: {}
+Frame/GetAttribute: {}
+Frame/GetChildren: {}
+Frame/GetEffectiveAlpha: {}
+Frame/GetNumChildren: {}
+Frame/GetNumRegions: {}
+Frame/GetRegions: {}
+Frame/IsEventRegistered: {}
+Frame/RegisterAllEvents: {}
+Frame/RegisterEvent: {}
+Frame/RegisterUnitEvent: {}
+Frame/SetAttribute: {}
+Frame/SetAttributeNoHandler: {}
+Frame/SetFrameLevel: {}
+Frame/UnregisterAllEvents: {}
+Frame/UnregisterEvent: {}
+GameTooltip/IsOwned: {}
+GameTooltip/SetOwner: {}
+LayeredRegion/SetVertexColor: {}
+MessageFrame/AddMessage: {}
+Model/TransformCameraSpaceToModelSpace: {}
+ModelScene/CreateActor: {}
+MouseMixin/EnableMouse: {}
+MouseMixin/IsMouseEnabled: {}
+ParentedObject/GetDebugName: {}
+ParentedObject/SetParent: {}
+Path/CreateControlPoint: {}
+Region/ClearAllPoints: {}
+Region/CreateAnimationGroup: {}
+Region/GetAnimationGroups: {}
+Region/GetCenter: {}
+Region/GetEffectiveScale: {}
+Region/GetNumPoints: {}
+Region/GetPoint: {}
+Region/GetRight: {}
+Region/GetScaledRect: {}
+Region/GetTop: {}
+Region/Hide: {}
+Region/IsProtected: {}
+Region/IsVisible: {}
+Region/SetAllPoints: {}
+Region/SetAlpha: {}
+Region/SetPoint: {}
+Region/SetScale: {}
+Region/SetShown: {}
+Region/Show: {}
+ScriptObject/GetScript: {}
+ScriptObject/HasScript: {}
+ScriptObject/HookScript: {}
+ScriptObject/SetScript: {}
+ScrollFrame/SetScrollChild: {}
+Slider/Disable: {}
+Slider/Enable: {}
+StatusBar/GetStatusBarColor: {}
+StatusBar/SetStatusBarColor: {}
+StatusBar/SetStatusBarTexture: {}
+Texture/GetTexture: {}
+Texture/SetAtlas: {}
+Texture/SetColorTexture: {}
+Texture/SetTexCoord: {}
+Texture/SetTexture: {}
+UIObject/GetObjectType: {}
+UIObject/IsObjectType: {}
