@@ -511,7 +511,13 @@ local function loader(api, cfg)
               if virtual and ctx.ignoreVirtual then
                 api.log(1, 'ignoring virtual on ' .. tostring(name))
               end
-              return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
+              return api.CreateUIObject(
+                e.type,
+                name,
+                parent and api.UserData(parent),
+                ctx.useAddonEnv and addonEnv or nil,
+                { template }
+              )
             end
           end
         else

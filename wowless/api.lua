@@ -136,7 +136,7 @@ local function new(log, maxErrors, product)
   local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id)
     local objname
     if type(objnamearg) == 'string' then
-      objname = ParentSub(objnamearg, parent)
+      objname = ParentSub(objnamearg, parent and parent.luarep)
     elseif type(objnamearg) == 'number' then
       objname = tostring(objnamearg)
     end
@@ -155,7 +155,7 @@ local function new(log, maxErrors, product)
     userdata[objp] = ud
     setmetatable(ud, objtype.hostMT)
     objtype.constructor(ud)
-    SetParent(obj, parent)
+    SetParent(obj, parent and parent.luarep)
     if InheritsFrom(typename, 'frame') then
       frames:insert(ud)
     end
@@ -250,7 +250,7 @@ local function new(log, maxErrors, product)
       assert(template, 'unknown template ' .. templateName)
       table.insert(tmpls, template)
     end
-    return CreateUIObject(ltype, name, parent, nil, tmpls, id)
+    return CreateUIObject(ltype, name, parent and u(parent), nil, tmpls, id)
   end
 
   local function NextFrame(elapsed)

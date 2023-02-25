@@ -6,7 +6,7 @@ return (function(self, name, layer, inherits, sublayer)
     assert(template, 'unknown template ' .. templateName)
     table.insert(tmpls, template)
   end
-  local tex = api.CreateUIObject('texture', name, self.luarep, nil, tmpls)
+  local tex = api.CreateUIObject('texture', name, self, nil, tmpls)
   if layer then
     tex:SetDrawLayer(layer, sublayer)
   end
