@@ -1,12 +1,11 @@
 return (function(self, tex)
-  local ud = u(self)
-  local t = toTexture(self, tex, ud.normalTexture)
+  local t = toTexture(self, tex, self.normalTexture)
   if t then
-    t:SetParent(self)
+    t:SetParent(self.luarep)
     if t:GetNumPoints() == 0 then
       t:SetAllPoints()
     end
-    t:SetShown(ud.buttonState == 'NORMAL')
+    t:SetShown(self.buttonState == 'NORMAL')
   end
-  ud.normalTexture = t
+  self.normalTexture = t
 end)(...)

@@ -1,26 +1,48 @@
 ---
-Animation/GetRegionParent: {}
-AnimationGroup/CreateAnimation: {}
-AnimationGroup/GetAnimations: {}
-Button/Click: {}
-Button/Disable: {}
-Button/Enable: {}
-Button/GetText: {}
-Button/IsEnabled: {}
-Button/RegisterForClicks: {}
-Button/SetButtonState: {}
-Button/SetDisabledAtlas: {}
-Button/SetDisabledTexture: {}
-Button/SetEnabled: {}
-Button/SetFontString: {}
-Button/SetFormattedText: {}
-Button/SetHighlightAtlas: {}
-Button/SetHighlightTexture: {}
-Button/SetNormalAtlas: {}
-Button/SetNormalTexture: {}
-Button/SetPushedAtlas: {}
-Button/SetPushedTexture: {}
-Button/SetText: {}
+Animation/GetRegionParent:
+  hostrep: true
+AnimationGroup/CreateAnimation:
+  hostrep: true
+AnimationGroup/GetAnimations:
+  hostrep: true
+Button/Click:
+  hostrep: true
+Button/Disable:
+  hostrep: true
+Button/Enable:
+  hostrep: true
+Button/GetText:
+  hostrep: true
+Button/IsEnabled:
+  hostrep: true
+Button/RegisterForClicks:
+  hostrep: true
+Button/SetButtonState:
+  hostrep: true
+Button/SetDisabledAtlas:
+  hostrep: true
+Button/SetDisabledTexture:
+  hostrep: true
+Button/SetEnabled:
+  hostrep: true
+Button/SetFontString:
+  hostrep: true
+Button/SetFormattedText:
+  hostrep: true
+Button/SetHighlightAtlas:
+  hostrep: true
+Button/SetHighlightTexture:
+  hostrep: true
+Button/SetNormalAtlas:
+  hostrep: true
+Button/SetNormalTexture:
+  hostrep: true
+Button/SetPushedAtlas:
+  hostrep: true
+Button/SetPushedTexture:
+  hostrep: true
+Button/SetText:
+  hostrep: true
 CheckButton/SetChecked: {}
 CheckButton/SetCheckedTexture: {}
 EditBox/Disable: {}

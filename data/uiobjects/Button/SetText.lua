@@ -1,4 +1,4 @@
 return (function(self, text)
-  u(self).fontstring = u(self).fontstring or m(self, 'CreateFontString')
-  m(u(self).fontstring, 'SetText', text)
+  self.fontstring = self.fontstring or self:CreateFontString()
+  u(self.fontstring):SetText(text)
 end)(...)
