@@ -1,3 +1,3 @@
 return (function(self)
-  return select('#', m(self, 'GetRegions'))
+  return select('#', self:GetRegions())
 end)(...)

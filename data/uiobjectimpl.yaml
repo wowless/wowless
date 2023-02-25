@@ -63,16 +63,26 @@ FontString/SetText:
   hostrep: true
 ForbiddenMixin/SetForbidden:
   hostrep: true
-Frame/CreateFontString: {}
-Frame/CreateLine: {}
-Frame/CreateMaskTexture: {}
-Frame/CreateTexture: {}
-Frame/GetAttribute: {}
-Frame/GetChildren: {}
-Frame/GetEffectiveAlpha: {}
-Frame/GetNumChildren: {}
-Frame/GetNumRegions: {}
-Frame/GetRegions: {}
+Frame/CreateFontString:
+  hostrep: true
+Frame/CreateLine:
+  hostrep: true
+Frame/CreateMaskTexture:
+  hostrep: true
+Frame/CreateTexture:
+  hostrep: true
+Frame/GetAttribute:
+  hostrep: true
+Frame/GetChildren:
+  hostrep: true
+Frame/GetEffectiveAlpha:
+  hostrep: true
+Frame/GetNumChildren:
+  hostrep: true
+Frame/GetNumRegions:
+  hostrep: true
+Frame/GetRegions:
+  hostrep: true
 Frame/IsEventRegistered:
   hostrep: true
 Frame/RegisterAllEvents:
@@ -83,8 +93,10 @@ Frame/RegisterUnitEvent:
   hostrep: true
 Frame/SetAttribute:
   hostrep: true
-Frame/SetAttributeNoHandler: {}
-Frame/SetFrameLevel: {}
+Frame/SetAttributeNoHandler:
+  hostrep: true
+Frame/SetFrameLevel:
+  hostrep: true
 Frame/UnregisterAllEvents:
   hostrep: true
 Frame/UnregisterEvent:
