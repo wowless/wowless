@@ -1,3 +1,3 @@
 return (function(self)
-  return u(self).left + u(self).width
+  return self.left + self.width
 end)(...)

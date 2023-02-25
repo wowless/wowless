@@ -123,25 +123,44 @@ ParentedObject/SetParent:
   hostrep: true
 Path/CreateControlPoint:
   hostrep: true
-Region/ClearAllPoints: {}
-Region/CreateAnimationGroup: {}
-Region/GetAnimationGroups: {}
-Region/GetCenter: {}
-Region/GetEffectiveScale: {}
-Region/GetNumPoints: {}
-Region/GetPoint: {}
-Region/GetRight: {}
-Region/GetScaledRect: {}
-Region/GetTop: {}
-Region/Hide: {}
-Region/IsProtected: {}
-Region/IsVisible: {}
-Region/SetAllPoints: {}
-Region/SetAlpha: {}
-Region/SetPoint: {}
-Region/SetScale: {}
-Region/SetShown: {}
-Region/Show: {}
+Region/ClearAllPoints:
+  hostrep: true
+Region/CreateAnimationGroup:
+  hostrep: true
+Region/GetAnimationGroups:
+  hostrep: true
+Region/GetCenter:
+  hostrep: true
+Region/GetEffectiveScale:
+  hostrep: true
+Region/GetNumPoints:
+  hostrep: true
+Region/GetPoint:
+  hostrep: true
+Region/GetRight:
+  hostrep: true
+Region/GetScaledRect:
+  hostrep: true
+Region/GetTop:
+  hostrep: true
+Region/Hide:
+  hostrep: true
+Region/IsProtected:
+  hostrep: true
+Region/IsVisible:
+  hostrep: true
+Region/SetAllPoints:
+  hostrep: true
+Region/SetAlpha:
+  hostrep: true
+Region/SetPoint:
+  hostrep: true
+Region/SetScale:
+  hostrep: true
+Region/SetShown:
+  hostrep: true
+Region/Show:
+  hostrep: true
 ScriptObject/GetScript: {}
 ScriptObject/HasScript: {}
 ScriptObject/HookScript: {}

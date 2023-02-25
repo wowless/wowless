@@ -1,8 +1,7 @@
 return (function(self)
-  local ud = u(self)
-  if not ud.parent or ud.isIgnoringParentScale then
-    return ud.scale
+  if not self.parent or self.isIgnoringParentScale then
+    return self.scale
   else
-    return m(ud.parent, 'GetEffectiveScale') * ud.scale
+    return u(self.parent):GetEffectiveScale() * self.scale
   end
 end)(...)

@@ -1,5 +1,5 @@
 return (function(self)
-  local group = api.CreateUIObject('animationgroup', nil, self)
-  table.insert(u(self).animationGroups, group)
+  local group = api.CreateUIObject('animationgroup', nil, self.luarep)
+  table.insert(self.animationGroups, group)
   return group
 end)(...)
