@@ -1,4 +1,4 @@
 return (function(self, owner)
   assert(owner)
-  return u(self).tooltipOwner == owner
+  return self.tooltipOwner == owner
 end)(...)

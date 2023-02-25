@@ -2,7 +2,7 @@ return (function(self, parent)
   if type(parent) == 'string' then
     parent = api.env[parent]
   end
-  UpdateVisible(u(self), function()
-    api.SetParent(self, parent)
+  UpdateVisible(self, function()
+    api.SetParent(self.luarep, parent)
   end)
 end)(...)

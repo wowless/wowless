@@ -101,17 +101,28 @@ Frame/UnregisterAllEvents:
   hostrep: true
 Frame/UnregisterEvent:
   hostrep: true
-GameTooltip/IsOwned: {}
-GameTooltip/SetOwner: {}
-LayeredRegion/SetVertexColor: {}
-MessageFrame/AddMessage: {}
-Model/TransformCameraSpaceToModelSpace: {}
-ModelScene/CreateActor: {}
-MouseMixin/EnableMouse: {}
-MouseMixin/IsMouseEnabled: {}
-ParentedObject/GetDebugName: {}
-ParentedObject/SetParent: {}
-Path/CreateControlPoint: {}
+GameTooltip/IsOwned:
+  hostrep: true
+GameTooltip/SetOwner:
+  hostrep: true
+LayeredRegion/SetVertexColor:
+  hostrep: true
+MessageFrame/AddMessage:
+  hostrep: true
+Model/TransformCameraSpaceToModelSpace:
+  hostrep: true
+ModelScene/CreateActor:
+  hostrep: true
+MouseMixin/EnableMouse:
+  hostrep: true
+MouseMixin/IsMouseEnabled:
+  hostrep: true
+ParentedObject/GetDebugName:
+  hostrep: true
+ParentedObject/SetParent:
+  hostrep: true
+Path/CreateControlPoint:
+  hostrep: true
 Region/ClearAllPoints: {}
 Region/CreateAnimationGroup: {}
 Region/GetAnimationGroups: {}
