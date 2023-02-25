@@ -161,20 +161,37 @@ Region/SetShown:
   hostrep: true
 Region/Show:
   hostrep: true
-ScriptObject/GetScript: {}
-ScriptObject/HasScript: {}
-ScriptObject/HookScript: {}
-ScriptObject/SetScript: {}
-ScrollFrame/SetScrollChild: {}
-Slider/Disable: {}
-Slider/Enable: {}
-StatusBar/GetStatusBarColor: {}
-StatusBar/SetStatusBarColor: {}
-StatusBar/SetStatusBarTexture: {}
-Texture/GetTexture: {}
-Texture/SetAtlas: {}
-Texture/SetColorTexture: {}
-Texture/SetTexCoord: {}
-Texture/SetTexture: {}
-UIObject/GetObjectType: {}
-UIObject/IsObjectType: {}
+ScriptObject/GetScript:
+  hostrep: true
+ScriptObject/HasScript:
+  hostrep: true
+ScriptObject/HookScript:
+  hostrep: true
+ScriptObject/SetScript:
+  hostrep: true
+ScrollFrame/SetScrollChild:
+  hostrep: true
+Slider/Disable:
+  hostrep: true
+Slider/Enable:
+  hostrep: true
+StatusBar/GetStatusBarColor:
+  hostrep: true
+StatusBar/SetStatusBarColor:
+  hostrep: true
+StatusBar/SetStatusBarTexture:
+  hostrep: true
+Texture/GetTexture:
+  hostrep: true
+Texture/SetAtlas:
+  hostrep: true
+Texture/SetColorTexture:
+  hostrep: true
+Texture/SetTexCoord:
+  hostrep: true
+Texture/SetTexture:
+  hostrep: true
+UIObject/GetObjectType:
+  hostrep: true
+UIObject/IsObjectType:
+  hostrep: true

@@ -5,12 +5,12 @@ return (function(self, ...)
   if type(scrollChild) == 'string' then
     scrollChild = api.env[scrollChild]
   end
-  local old = u(self).scrollChild
+  local old = self.scrollChild
   if old then
     old:SetParent(nil)
   end
-  u(self).scrollChild = scrollChild
+  self.scrollChild = scrollChild
   if scrollChild then
-    scrollChild:SetParent(self)
+    scrollChild:SetParent(self.luarep)
   end
 end)(...)

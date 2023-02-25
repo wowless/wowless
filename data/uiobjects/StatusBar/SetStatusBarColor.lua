@@ -1,5 +1,5 @@
 return (function(self, ...)
-  local t = u(self).statusBarTexture
+  local t = self.statusBarTexture
   if t then
     return t:SetVertexColor(...)
   end

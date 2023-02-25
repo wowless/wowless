@@ -8,8 +8,8 @@ return (function(self, name)
     -- TODO determine if we should error here instead of silently ignoring
     return
   end
-  m(self, 'SetTexture', t.filename or tostring(t.file))
-  m(self, 'SetHorizTile', t.tilesHorizontally)
-  m(self, 'SetVertTile', t.tilesVertically)
-  m(self, 'SetTexCoord', t.leftTexCoord, t.rightTexCoord, t.topTexCoord, t.bottomTexCoord)
+  self:SetTexture(t.filename or tostring(t.file))
+  self:SetHorizTile(t.tilesHorizontally)
+  self:SetVertTile(t.tilesVertically)
+  self:SetTexCoord(t.leftTexCoord, t.rightTexCoord, t.topTexCoord, t.bottomTexCoord)
 end)(...)

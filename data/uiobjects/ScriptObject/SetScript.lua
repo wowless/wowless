@@ -1,3 +1,3 @@
 return (function(self, name, script)
-  api.SetScript(self, name, 1, script)
+  api.SetScript(self.luarep, name, 1, script)
 end)(...)
