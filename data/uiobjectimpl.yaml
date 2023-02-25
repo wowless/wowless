@@ -43,16 +43,26 @@ Button/SetPushedTexture:
   hostrep: true
 Button/SetText:
   hostrep: true
-CheckButton/SetChecked: {}
-CheckButton/SetCheckedTexture: {}
-EditBox/Disable: {}
-EditBox/Enable: {}
-EditBox/GetInputLanguage: {}
-EditBox/Insert: {}
-FontInstance/GetFont: {}
-FontInstance/GetFontObject: {}
-FontString/SetText: {}
-ForbiddenMixin/SetForbidden: {}
+CheckButton/SetChecked:
+  hostrep: true
+CheckButton/SetCheckedTexture:
+  hostrep: true
+EditBox/Disable:
+  hostrep: true
+EditBox/Enable:
+  hostrep: true
+EditBox/GetInputLanguage:
+  hostrep: true
+EditBox/Insert:
+  hostrep: true
+FontInstance/GetFont:
+  hostrep: true
+FontInstance/GetFontObject:
+  hostrep: true
+FontString/SetText:
+  hostrep: true
+ForbiddenMixin/SetForbidden:
+  hostrep: true
 Frame/CreateFontString: {}
 Frame/CreateLine: {}
 Frame/CreateMaskTexture: {}

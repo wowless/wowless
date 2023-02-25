@@ -1,12 +1,11 @@
 return (function(self, tex)
-  local ud = u(self)
-  local t = toTexture(self, tex, ud.checkedTexture)
+  local t = toTexture(self, tex, self.checkedTexture)
   if t then
-    t:SetParent(self)
+    t:SetParent(self.luarep)
     if t:GetNumPoints() == 0 then
       t:SetAllPoints()
     end
-    t:SetShown(ud.checked)
+    t:SetShown(self.checked)
   end
-  ud.checkedTexture = t
+  self.checkedTexture = t
 end)(...)
