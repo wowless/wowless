@@ -3689,6 +3689,18 @@ CRAFTINGORDERS_CUSTOMER_FAVORITES_CHANGED:
   payload: {}
 CRAFTINGORDERS_CUSTOMER_OPTIONS_PARSED:
   payload: {}
+CRAFTINGORDERS_DISPLAY_CRAFTER_FULFILLED_MSG:
+  payload:
+  - name: orderTypeString
+    type: string
+  - name: itemNameString
+    type: string
+  - name: playerNameString
+    type: string
+  - name: tipAmount
+    type: number
+  - name: quantityCrafted
+    type: number
 CRAFTINGORDERS_FULFILL_ORDER_RESPONSE:
   payload:
   - name: result
@@ -6364,8 +6376,6 @@ SKILL_LINE_SPECS_UNLOCKED:
     type: number
 SKILL_LINES_CHANGED:
   payload: {}
-SOCIAL_ITEM_RECEIVED:
-  payload: {}
 SOCIAL_QUEUE_CONFIG_UPDATED:
   payload: {}
 SOCIAL_QUEUE_UPDATE:
@@ -7005,26 +7015,6 @@ TUTORIAL_TRIGGER:
     type: boolean
 TUTORIAL_UNHIGHLIGHT_SPELL:
   payload: {}
-TWITTER_LINK_RESULT:
-  payload:
-  - name: isLinked
-    type: boolean
-  - name: screenName
-    type: string
-  - name: error
-    type: string
-TWITTER_POST_RESULT:
-  payload:
-  - name: result
-    type: number
-TWITTER_STATUS_UPDATE:
-  payload:
-  - name: isTwitterEnabled
-    type: boolean
-  - name: isLinked
-    type: boolean
-  - name: screenName
-    type: string
 UI_ERROR_MESSAGE:
   payload:
   - name: errorType

@@ -15241,96 +15241,6 @@ C_SharedCharacterServices.QueryClassTrialBoostResult: {}
 C_SharedCharacterServices.SetCharacterUpgradePopupSeen: {}
 C_SharedCharacterServices.SetExpansionTrialPopupSeen: {}
 C_SharedCharacterServices.SetPromotionalPopupSeen: {}
-C_Social.GetLastAchievement:
-  inputs:
-  - {}
-  outputs:
-  - name: achievementID
-    type: number
-  - name: achievementName
-    type: string
-  - name: achievementDesc
-    type: string
-  - name: iconFileID
-    type: number
-C_Social.GetLastItem:
-  inputs:
-  - {}
-  outputs:
-  - name: itemID
-    type: number
-  - name: itemName
-    type: string
-  - name: iconFileID
-    type: number
-  - name: itemQuality
-    type: number
-  - name: itemLevel
-    type: number
-  - name: itemLinkString
-    type: string
-C_Social.GetLastScreenshotIndex:
-  inputs:
-  - {}
-  outputs:
-  - name: screenShotIndex
-    type: number
-C_Social.GetMaxTweetLength:
-  inputs:
-  - {}
-  outputs:
-  - name: maxTweetLength
-    type: number
-C_Social.GetScreenshotInfoByIndex:
-  inputs:
-  - - name: index
-      type: number
-  outputs:
-  - name: screenWidth
-    type: number
-  - name: screenHeight
-    type: number
-C_Social.GetTweetLength:
-  inputs:
-  - - name: tweetText
-      type: string
-  outputs:
-  - name: tweetLength
-    type: number
-C_Social.IsSocialEnabled:
-  inputs:
-  - {}
-  outputs:
-  - name: isEnabled
-    type: boolean
-C_Social.RegisterSocialBrowser: {}
-C_Social.SetTextureToScreenshot: {}
-C_Social.TwitterCheckStatus:
-  inputs:
-  - {}
-  outputs: {}
-C_Social.TwitterConnect:
-  inputs:
-  - {}
-  outputs: {}
-C_Social.TwitterDisconnect:
-  inputs:
-  - {}
-  outputs: {}
-C_Social.TwitterGetMSTillCanPost:
-  inputs:
-  - {}
-  outputs:
-  - name: msTimeLeft
-    type: number
-C_Social.TwitterPostAchievement: {}
-C_Social.TwitterPostItem: {}
-C_Social.TwitterPostMessage:
-  inputs:
-  - - name: message
-      type: string
-  outputs: {}
-C_Social.TwitterPostScreenshot: {}
 C_SocialQueue.GetAllGroups:
   inputs:
   - - default: false
@@ -16357,6 +16267,11 @@ C_TaxiMap.ShouldMapShowTaxiNodes:
   outputs:
   - name: shouldShowNodes
     type: boolean
+C_Texture.ClearTitleIconTexture:
+  inputs:
+  - - name: texture
+      type: table
+  outputs: {}
 C_Texture.GetAtlasInfo:
   impl: C_Texture.GetAtlasInfo
   inputs:
@@ -16381,6 +16296,36 @@ C_Texture.GetFilenameFromFileDataID:
   outputs:
   - name: filename
     type: string
+C_Texture.GetTitleIconTexture:
+  inputs:
+  - - name: titleID
+      type: string
+    - name: version
+      type:
+        enum: TitleIconVersion
+    - name: callback
+      type: function
+  outputs: {}
+C_Texture.IsTitleIconTextureReady:
+  inputs:
+  - - name: titleID
+      type: string
+    - name: version
+      type:
+        enum: TitleIconVersion
+  outputs:
+  - name: ready
+    type: boolean
+C_Texture.SetTitleIconTexture:
+  inputs:
+  - - name: texture
+      type: table
+    - name: titleID
+      type: string
+    - name: version
+      type:
+        enum: TitleIconVersion
+  outputs: {}
 C_Timer.After:
   impl: C_Timer.After
   inputs:
@@ -19663,6 +19608,8 @@ C_TTSSettings.ShouldOverrideMessage:
   inputs:
   - - name: language
       type: number
+    - name: messageText
+      type: string
   outputs:
   - name: overrideMessage
     type: boolean
