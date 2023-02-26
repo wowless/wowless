@@ -186,8 +186,13 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/uiobjects.yaml')) d
       methods[mk] = { impl = 'return ' .. table.concat(t, ',') }
     end
   end
-  v.methods = methods
-  uiobjects[k] = v
+  uiobjects[k] = {
+    fields = v.fields,
+    inherits = v.inherits,
+    methods = methods,
+    objectType = v.objectType,
+    zombie = v.zombie,
+  }
 end
 
 local data = {
