@@ -147,14 +147,12 @@ local function new(log, maxErrors, product)
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
     local objp = newproxy()
     local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
-    local ud = {
-      luarep = obj,
-      name = objname,
-      type = typename,
-    }
+    local ud = objtype.constructor()
+    ud.luarep = obj
+    ud.name = objname
+    ud.type = typename
     userdata[objp] = ud
     setmetatable(ud, objtype.hostMT)
-    objtype.constructor(ud)
     SetParent(obj, parent and parent.luarep)
     if InheritsFrom(typename, 'frame') then
       frames:insert(ud)

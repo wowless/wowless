@@ -39,12 +39,10 @@ local function mkBaseUIObjectTypes(api)
       local lk = string.lower(k)
       if not result[lk] then
         local ty = types[k]
-        local inherits = {}
         local isa = { [lk] = true }
         local metaindex = Mixin({}, ty.mixin)
         for inh in pairs(ty.inherits) do
           flattenOne(inh)
-          table.insert(inherits, string.lower(inh))
           Mixin(isa, result[string.lower(inh)].isa)
           for mk, mv in pairs(result[string.lower(inh)].metaindex) do
             assert(not metaindex[mk], 'multiple implementations of ' .. mk)
@@ -52,12 +50,7 @@ local function mkBaseUIObjectTypes(api)
           end
         end
         result[lk] = {
-          constructor = function(self)
-            for _, inh in ipairs(inherits) do
-              result[inh].constructor(self)
-            end
-            ty.constructor(self)
-          end,
+          constructor = ty.constructor,
           isa = isa,
           metaindex = metaindex,
           name = ty.cfg.objectType or k,
@@ -171,7 +164,7 @@ local function mkBaseUIObjectTypes(api)
     end
     uiobjects[name] = {
       cfg = cfg,
-      constructor = wrap('<init>', constructor),
+      constructor = constructor,
       inherits = cfg.inherits,
       mixin = wrapAll(mixin),
     }

@@ -12,6 +12,7 @@ local function readFile(...)
   return (assert(require('pl.file').read(...)))
 end
 local plprettywrite = require('pl.pretty').write
+local Mixin = require('wowless.util').mixin
 
 local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
 
@@ -162,18 +163,35 @@ for _, f in ipairs(require('pl.dir').getfiles('data/state')) do
   state[cfg.name] = cfg.value
 end
 
-local uiobjects = {}
+local uiobjectdata = parseYaml('data/products/' .. product .. '/uiobjects.yaml')
 local uiobjectimpl = parseYaml('data/uiobjectimpl.yaml')
-for k, v in pairs(parseYaml('data/products/' .. product .. '/uiobjects.yaml')) do
-  local constructor = { 'local x = ...' }
-  for fk, fv in pairs(v.fields or {}) do
-    if fv.init ~= nil then
-      table.insert(constructor, ('x.%s = %s'):format(fk, valstr(fv.init)))
-    elseif fv.type == 'hlist' then
-      table.insert(constructor, ('x.%s = hlist()'):format(fk))
+local uiobjectinits = {}
+local function mkuiobjectinit(k)
+  local init = uiobjectinits[k]
+  if not init then
+    init = {}
+    local v = uiobjectdata[k]
+    for inh in pairs(v.inherits or {}) do
+      Mixin(init, mkuiobjectinit(inh))
     end
+    for fk, fv in pairs(v.fields or {}) do
+      if fv.init ~= nil then
+        init[fk] = valstr(fv.init)
+      elseif fv.type == 'hlist' then
+        init[fk] = 'hlist()'
+      end
+    end
+    uiobjectinits[k] = init
   end
-  table.sort(constructor)
+  return init
+end
+local uiobjects = {}
+for k, v in pairs(uiobjectdata) do
+  local constructor = { 'return {' }
+  for fk, fv in require('pl.tablex').sort(mkuiobjectinit(k)) do
+    table.insert(constructor, ('  %s = %s,'):format(fk, fv))
+  end
+  table.insert(constructor, '}')
   local methods = {}
   for mk, mv in pairs(v.methods or {}) do
     if mv.impl then
