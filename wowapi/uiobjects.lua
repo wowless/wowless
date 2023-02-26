@@ -47,7 +47,7 @@ local function mkBaseUIObjectTypes(api)
           table.insert(inherits, string.lower(inh))
           Mixin(isa, result[string.lower(inh)].isa)
           for mk, mv in pairs(result[string.lower(inh)].metaindex) do
-            assert(not metaindex[mk] or metaindex[mk] == mv, 'multiple implementations of ' .. mk)
+            assert(not metaindex[mk], 'multiple implementations of ' .. mk)
             metaindex[mk] = mv
           end
         end
@@ -56,11 +56,8 @@ local function mkBaseUIObjectTypes(api)
             for _, inh in ipairs(inherits) do
               result[inh].constructor(self)
             end
-            if ty.constructor then
-              ty.constructor(self)
-            end
+            ty.constructor(self)
           end,
-          inherits = inherits,
           isa = isa,
           metaindex = metaindex,
           name = ty.cfg.objectType or k,
