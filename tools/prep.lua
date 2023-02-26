@@ -15,6 +15,19 @@ local plprettywrite = require('pl.pretty').write
 
 local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
 
+local function valstr(value)
+  local ty = type(value)
+  if ty == 'number' or ty == 'boolean' then
+    return tostring(value)
+  elseif ty == 'string' then
+    return string.format('%q', value)
+  elseif ty == 'table' then
+    return plprettywrite(value)
+  else
+    error('unsupported stub value type ' .. ty)
+  end
+end
+
 local specDefault = (function()
   local defaultOutputs = {
     boolean = 'false',
@@ -44,18 +57,6 @@ local specDefault = (function()
     end
     local v = structureDefaults[name]
     return mixin and ('Mixin(%s,%s)'):format(v, mixin) or v
-  end
-  local function valstr(value)
-    local ty = type(value)
-    if ty == 'number' or ty == 'boolean' then
-      return tostring(value)
-    elseif ty == 'string' then
-      return string.format('%q', value)
-    elseif ty == 'table' then
-      return plprettywrite(value)
-    else
-      error('unsupported stub value type ' .. ty)
-    end
   end
   function specDefault(spec)
     if spec.stub ~= nil then
@@ -164,6 +165,15 @@ end
 local uiobjects = {}
 local uiobjectimpl = parseYaml('data/uiobjectimpl.yaml')
 for k, v in pairs(parseYaml('data/products/' .. product .. '/uiobjects.yaml')) do
+  local constructor = { 'local x = ...' }
+  for fk, fv in pairs(v.fields or {}) do
+    if fv.init ~= nil then
+      table.insert(constructor, ('x.%s = %s'):format(fk, valstr(fv.init)))
+    elseif fv.type == 'hlist' then
+      table.insert(constructor, ('x.%s = hlist()'):format(fk))
+    end
+  end
+  table.sort(constructor)
   local methods = {}
   for mk, mv in pairs(v.methods or {}) do
     if mv.impl then
@@ -187,6 +197,7 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/uiobjects.yaml')) d
     end
   end
   uiobjects[k] = {
+    constructor = table.concat(constructor, '\n'),
     fields = v.fields,
     inherits = v.inherits,
     methods = methods,

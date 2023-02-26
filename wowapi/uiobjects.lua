@@ -99,6 +99,10 @@ local function mkBaseUIObjectTypes(api)
     env[k] = v
   end
 
+  local constructorEnv = {
+    hlist = hlist,
+  }
+
   local uiobjects = {}
   for name, cfg in pairs(api.datalua.uiobjects) do
     local lname = name:lower()
@@ -117,18 +121,7 @@ local function mkBaseUIObjectTypes(api)
       end
       return mm
     end
-    local constructor = (function()
-      local deepcopy = require('pl.tablex').deepcopy
-      return function(self)
-        for fname, field in pairs(cfg.fields or {}) do
-          if field.init ~= nil then
-            self[fname] = type(field.init) == 'table' and deepcopy(field.init) or field.init
-          elseif field.type == 'hlist' then
-            self[fname] = hlist()
-          end
-        end
-      end
-    end)()
+    local constructor = setfenv(assert(loadstring(cfg.constructor)), constructorEnv)
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
       local fname = name .. ':' .. mname
