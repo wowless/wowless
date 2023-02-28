@@ -219,7 +219,7 @@ local function loader(api, cfg)
     color = function(ctx, e, parent)
       local r, g, b, a = getColor(e)
       local p = api.UserData(parent)
-      if api.InheritsFrom(p.type, 'texture') then
+      if api.InheritsFrom(p.type, 'texturebase') then
         parent:SetColorTexture(r, g, b, a)
       elseif api.InheritsFrom(p.type, 'fontinstance') then
         if ctx.shadow then
@@ -371,7 +371,7 @@ local function loader(api, cfg)
         end
       end,
       setallpoints = function(_, obj, value)
-        if value and not obj:IsObjectType('texture') then
+        if value and not obj:IsObjectType('texturebase') then
           obj:SetAllPoints()
         end
       end,

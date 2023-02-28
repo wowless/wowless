@@ -1090,7 +1090,7 @@ Line:
       init: 1
       type: number
   inherits:
-    Texture: {}
+    TextureBase: {}
   methods:
     GetEndPoint: {}
     GetStartPoint: {}
@@ -1112,7 +1112,7 @@ LineTranslation:
   methods: {}
 MaskTexture:
   inherits:
-    Texture: {}
+    TextureBase: {}
   methods: {}
 MessageFrame:
   inherits:
@@ -1756,6 +1756,14 @@ TabardModel:
     InitializeTabardColors: {}
     Save: {}
 Texture:
+  inherits:
+    TextureBase: {}
+  methods:
+    AddMaskTexture: {}
+    GetMaskTexture: {}
+    GetNumMaskTextures: {}
+    RemoveMaskTexture: {}
+TextureBase:
   fields:
     blendMode:
       init: BLEND
@@ -1812,7 +1820,6 @@ Texture:
     LayeredRegion: {}
     ScriptObject: {}
   methods:
-    AddMaskTexture: {}
     GetAtlas: {}
     GetBlendMode:
       getter:
@@ -1821,8 +1828,6 @@ Texture:
     GetHorizTile:
       getter:
       - name: horizTile
-    GetMaskTexture: {}
-    GetNumMaskTextures: {}
     GetRotation: {}
     GetTexCoord:
       getter:
@@ -1852,7 +1857,6 @@ Texture:
     IsBlockingLoadRequested: {}
     IsDesaturated: {}
     IsSnappingToPixelGrid: {}
-    RemoveMaskTexture: {}
     SetAtlas:
       impl: Texture/SetAtlas
     SetBlendMode:
@@ -1881,6 +1885,7 @@ Texture:
     SetVertTile:
       setter:
       - name: vertTile
+  virtual: true
 TextureCoordTranslation:
   inherits:
     Animation: {}

@@ -416,27 +416,17 @@ function G.GeneratedTests()
       },
       AnimationGroup = { SetParent = true },
       Line = {
-        AddMaskTexture = true,
         AdjustPointsOffset = true,
         ClearPointByName = true,
         ClearPointsOffset = true,
-        GetMaskTexture = true,
-        GetNumMaskTextures = true,
         GetNumPoints = true,
         GetPoint = true,
         GetPointByName = true,
-        RemoveMaskTexture = true,
         SetAllPoints = true,
         SetHeight = true,
         SetPoint = true,
         SetSize = true,
         SetWidth = true,
-      },
-      MaskTexture = {
-        AddMaskTexture = true,
-        GetMaskTexture = true,
-        GetNumMaskTextures = true,
-        RemoveMaskTexture = true,
       },
     }
     local warners = {
