@@ -9,6 +9,8 @@ set(EXPAT_BUILD_TESTS OFF)
 set(EXPAT_BUILD_TOOLS OFF)
 set(LUA_CPATH_CUSTOM ";" CACHE STRING "disable dynamic C Lua modules")
 
+add_compile_options(-D_GNU_SOURCE -DNDEBUG -flto -O3)
+
 include(FetchContent)
 FetchContent_Declare(
   elune
@@ -43,9 +45,6 @@ FetchContent_MakeAvailable(
   luaexpat
   luafilesystem
 )
-
-add_compile_options(-DNDEBUG -flto -O3)
-target_compile_options(liblua PRIVATE -D_GNU_SOURCE -DNDEBUG -flto -O3)
 
 add_executable(
   wowless
