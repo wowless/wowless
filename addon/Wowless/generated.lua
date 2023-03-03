@@ -407,10 +407,6 @@ function G.GeneratedTests()
       end,
     }
     local exceptions = { -- TODO remove need for this
-      Actor = {
-        SetParent = true,
-      },
-      AnimationGroup = { SetParent = true },
       Line = {
         AdjustPointsOffset = true,
         ClearPointByName = true,

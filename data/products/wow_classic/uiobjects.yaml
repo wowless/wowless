@@ -5,7 +5,7 @@ Actor:
       init: 1
       type: number
   inherits:
-    ParentedObject: {}
+    ParentedObjectBase: {}
     ScriptObjectBase: {}
   methods:
     ClearModel: {}
@@ -123,7 +123,7 @@ Animation:
     Stop: {}
 AnimationGroup:
   inherits:
-    ParentedObject: {}
+    ParentedObjectBase: {}
     ScriptObject: {}
   methods:
     CreateAnimation:
@@ -1349,6 +1349,13 @@ OffScreenFrame:
     TestPrintToFile: {}
     UsesNPOT: {}
 ParentedObject:
+  inherits:
+    ParentedObjectBase: {}
+  methods:
+    SetParent:
+      impl: ParentedObject/SetParent
+  virtual: true
+ParentedObjectBase:
   fields:
     children:
       type: hlist
@@ -1364,8 +1371,6 @@ ParentedObject:
       getter:
       - name: parent
     GetParentKey: {}
-    SetParent:
-      impl: ParentedObject/SetParent
     SetParentKey: {}
   virtual: true
 Path:
