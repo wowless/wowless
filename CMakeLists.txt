@@ -44,9 +44,8 @@ FetchContent_MakeAvailable(
   luafilesystem
 )
 
-add_compile_options(-O3)
-target_compile_options(liblua PRIVATE -D_GNU_SOURCE)
-set_source_files_properties(main.c PROPERTIES COMPILE_FLAGS "-O3 -Wall -Wextra")
+add_compile_options(-DNDEBUG -flto -O3)
+target_compile_options(liblua PRIVATE -D_GNU_SOURCE -DNDEBUG -flto -O3)
 
 add_executable(
   wowless
