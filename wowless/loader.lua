@@ -143,8 +143,8 @@ local function loader(api, cfg)
       fn = setfenv(loadstr(fnstr, filename, script.line), env)()
       scriptCache[script] = fn
     end
-    if obj.GetScript then -- TODO tighten up xml yaml
-      local old = obj:GetScript(script.type)
+    if api.UserData(obj).scripts then
+      local old = api.UserData(obj).scripts[1][script.type:lower()]
       if old and fn and script.attr.inherit then
         local bfn = fn
         if script.attr.inherit == 'prepend' then

@@ -408,11 +408,7 @@ function G.GeneratedTests()
     }
     local exceptions = { -- TODO remove need for this
       Actor = {
-        GetScript = true,
-        HasScript = true,
-        HookScript = true,
         SetParent = true,
-        SetScript = true,
       },
       AnimationGroup = { SetParent = true },
       Line = {

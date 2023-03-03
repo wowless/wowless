@@ -6,7 +6,7 @@ Actor:
       type: number
   inherits:
     ParentedObject: {}
-    ScriptObject: {}
+    ScriptObjectBase: {}
   methods:
     AttachToMount: {}
     CalculateMountScale: {}
@@ -1626,14 +1626,8 @@ ScenarioPOIFrame:
   methods:
     GetScenarioTooltipText: {}
 ScriptObject:
-  fields:
-    scripts:
-      init:
-        0: {}
-        1: {}
-        2: {}
-      type: table
-  inherits: {}
+  inherits:
+    ScriptObjectBase: {}
   methods:
     GetScript:
       impl: ScriptObject/GetScript
@@ -1643,6 +1637,17 @@ ScriptObject:
       impl: ScriptObject/HookScript
     SetScript:
       impl: ScriptObject/SetScript
+  virtual: true
+ScriptObjectBase:
+  fields:
+    scripts:
+      init:
+        0: {}
+        1: {}
+        2: {}
+      type: table
+  inherits: {}
+  methods: {}
   virtual: true
 ScrollFrame:
   fields:
