@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <body>Running...</body>
+  <script type="text/javascript">
+    let text = '';
+    var Module = {
+      arguments: ['-p', 'wow', '-l1'],
+      print: function(message) {
+        text += message + '\n';
+      },
+      postRun: function() {
+        document.body.innerText += ' done.\n' + text;
+      },
+    };
+  </script>
+  <script async type="text/javascript" src="wowless.js"></script>
+</html>
