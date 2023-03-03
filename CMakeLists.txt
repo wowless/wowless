@@ -56,3 +56,17 @@ add_executable(
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
 )
 target_link_libraries(wowless expat liblua pthread)
+
+if(EMSCRIPTEN)
+  target_link_options(
+    wowless PRIVATE
+    -sALLOW_MEMORY_GROWTH
+    --preload-file=${wowless_SOURCE_DIR}/wowless.lua@wowless.lua
+    --preload-file=${wowless_SOURCE_DIR}/wowless@wowless
+    --preload-file=${wowless_SOURCE_DIR}/build/flavors.lua@build/flavors.lua
+    --preload-file=${wowless_SOURCE_DIR}/build/products/wow@build/products/wow
+    --preload-file=${wowless_SOURCE_DIR}/extracts/wow@extracts/wow
+    --preload-file=${wowless_SOURCE_DIR}/wowapi@wowapi
+    --preload-file=/usr/local/share/lua/5.1
+  )
+endif()
