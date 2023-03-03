@@ -83,7 +83,7 @@ local rules = {
     pool = 'run_pool',
   },
   mkaddon = {
-    command = elune .. ' tools/gentest.lua -f $type -p $product',
+    command = 'lua tools/gentest.lua -f $type -p $product',
   },
   mkelune = {
     command = 'cd vendor/elune && rm -rf build && cmake --preset linux && cmake --build --preset linux',
@@ -237,14 +237,14 @@ for _, p in ipairs(productList) do
   local prefix = 'build/products/' .. p .. '/WowlessData/'
   table.insert(builds, {
     args = { product = p, ['type'] = 'toc' },
-    ins = { elune, 'tools/gentest.lua' },
+    ins = 'tools/gentest.lua',
     outs_implicit = prefix .. 'WowlessData.toc',
     rule = 'mkaddon',
   })
   for k, v in pairs(perProductAddonGeneratedTypes) do
     table.insert(builds, {
       args = { product = p, ['type'] = k },
-      ins = { elune, v(p), 'tools/gentest.lua' },
+      ins = { v(p), 'tools/gentest.lua' },
       outs_implicit = prefix .. k .. '.lua',
       rule = 'mkaddon',
     })
