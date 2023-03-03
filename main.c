@@ -35,6 +35,12 @@ int main(int argc, char **argv) {
     lua_setfield(L, -2, m->name);
   }
   lua_pop(L, 1);
+  lua_newtable(L);
+  for (int i = 0; i < argc; ++i) {
+    lua_pushstring(L, argv[i]);
+    lua_rawseti(L, -2, i);
+  }
+  lua_setglobal(L, "arg");
   if (luaL_dofile(L, "wowless.lua") != 0) {
     puts(lua_tostring(L, -1));
   }
