@@ -2345,11 +2345,11 @@ Enum:
     MinValue: 0
     NumValues: 7
   GarrisonFollowerType:
-    FollowerType_6_0: 1
-    FollowerType_6_2: 2
-    FollowerType_7_0: 4
-    FollowerType_8_0: 22
-    FollowerType_9_0: 123
+    FollowerType_6_0_Boat: 2
+    FollowerType_6_0_GarrisonFollower: 1
+    FollowerType_7_0_GarrisonFollower: 4
+    FollowerType_8_0_GarrisonFollower: 22
+    FollowerType_9_0_GarrisonFollower: 123
   GarrisonFollowerTypeMeta:
     MaxValue: 123
     MinValue: 1
@@ -2370,9 +2370,13 @@ Enum:
     NumValues: 9
   GarrisonType:
     Type_6_0: 2
+    Type_6_0_Garrison: 2
     Type_7_0: 3
+    Type_7_0_Garrison: 3
     Type_8_0: 9
+    Type_8_0_Garrison: 9
     Type_9_0: 111
+    Type_9_0_Garrison: 111
   GarrisonTypeMeta:
     MaxValue: 111
     MinValue: 2

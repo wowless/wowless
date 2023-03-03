@@ -4413,6 +4413,8 @@ C_RecruitAFriend.RafVersionInfo:
     nilable: true
     type:
       structure: C_RecruitAFriend.RafReward
+  numRecruits:
+    type: number
   rafVersion:
     type:
       enum: RecruitAFriendRewardsVersion
