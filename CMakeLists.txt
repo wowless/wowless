@@ -1,0 +1,57 @@
+cmake_minimum_required(VERSION 3.24)
+project(wowless)
+
+set(BUILD_SHARED_LIBS OFF)
+set(BUILD_LUA OFF)
+set(BUILD_LUAC OFF)
+set(LUA_CPATH_CUSTOM ";" CACHE STRING "disable dynamic C Lua modules")
+
+include(FetchContent)
+FetchContent_Declare(
+  elune
+  GIT_REPOSITORY https://github.com/meorawr/elune.git
+  GIT_TAG 43c8c48ccbfe09084bc3ef42f745f253c228e26e
+)
+FetchContent_Declare(
+  expat
+  GIT_REPOSITORY https://github.com/libexpat/libexpat.git
+  GIT_TAG R_2_5_0
+  SOURCE_SUBDIR expat
+)
+FetchContent_Declare(
+  lsqlite3
+  URL http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip
+  URL_HASH MD5=57d7a8bf5ae15d22044ed64343a39d89
+)
+FetchContent_Declare(
+  luaexpat
+  GIT_REPOSITORY https://github.com/lunarmodules/luaexpat.git
+  GIT_TAG 1.4.1
+)
+FetchContent_Declare(
+  luafilesystem
+  GIT_REPOSITORY https://github.com/lunarmodules/luafilesystem.git
+  GIT_TAG v1_8_0
+)
+FetchContent_MakeAvailable(
+  elune
+  expat
+  lsqlite3
+  luaexpat
+  luafilesystem
+)
+
+add_compile_options(-O3)
+target_compile_options(liblua PRIVATE -D_GNU_SOURCE)
+set_source_files_properties(main.c PROPERTIES COMPILE_FLAGS "-O3 -Wall -Wextra")
+
+add_executable(
+  wowless
+  main.c
+  wowless/ext.c
+  ${lsqlite3_SOURCE_DIR}/lsqlite3.c
+  ${lsqlite3_SOURCE_DIR}/sqlite3.c
+  ${luaexpat_SOURCE_DIR}/src/lxplib.c
+  ${luafilesystem_SOURCE_DIR}/src/lfs.c
+)
+target_link_libraries(wowless expat liblua pthread)
