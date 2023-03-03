@@ -3944,6 +3944,7 @@ Enum:
     GuildRankInsufficient: 20069
     HasAuctions: 20033
     HasCagedBattlePet: 20084
+    HasCraftingOrders: 20092
     HasHeirloom: 20080
     HasMail: 20016
     HasWoWToken: 20079
