@@ -27986,7 +27986,17 @@ UnitTreatAsPlayerForDisplay:
   outputs:
   - name: treatAsPlayer
     type: boolean
-UnitTrialBankedLevels: {}
+UnitTrialBankedLevels:
+  inputs:
+  - - name: unit
+      type: string
+  outputs:
+  - name: bankedLevels
+    type: number
+  - name: xpIntoCurrentLevel
+    type: number
+  - name: xpForNextLevel
+    type: number
 UnitTrialXP: {}
 UnitUsingVehicle: {}
 UnitVehicleSeatCount: {}
