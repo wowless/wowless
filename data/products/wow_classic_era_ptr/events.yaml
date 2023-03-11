@@ -5998,6 +5998,8 @@ RAF_RECRUITING_ENABLED_STATUS:
   payload:
   - name: enabled
     type: boolean
+RAF_REWARD_CLAIM_FAILED:
+  payload: {}
 RAF_SYSTEM_ENABLED_STATUS:
   payload:
   - name: enabled
@@ -6367,6 +6369,8 @@ SIMPLE_BROWSER_WEB_ERROR:
 SIMPLE_BROWSER_WEB_PROXY_FAILED:
   payload: {}
 SIMPLE_CHECKOUT_CLOSED:
+  payload: {}
+SKILL_LINE_SPECS_RANKS_CHANGED:
   payload: {}
 SKILL_LINE_SPECS_UNLOCKED:
   payload:

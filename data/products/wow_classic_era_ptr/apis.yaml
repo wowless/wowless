@@ -13320,6 +13320,13 @@ C_ProfSpecs.GetEntryIDForPerk:
   outputs:
   - name: entryID
     type: number
+C_ProfSpecs.GetNewSpecReminderProfName:
+  inputs:
+  - {}
+  outputs:
+  - name: profName
+    nilable: true
+    type: string
 C_ProfSpecs.GetPerksForPath:
   inputs:
   - - name: pathID
@@ -13600,6 +13607,14 @@ C_PvP.GetArenaSkirmishRewards:
     type:
       arrayof:
         structure: C_PvP.BattlefieldCurrencyReward
+C_PvP.GetAssignedSpecForBattlefieldQueue:
+  inputs:
+  - - name: queueID
+      type: number
+  outputs:
+  - name: specializationID
+    nilable: true
+    type: number
 C_PvP.GetAvailableBrawlInfo:
   inputs:
   - {}
@@ -14798,11 +14813,11 @@ C_QuestLog.UnitIsRelatedToActiveQuest:
   outputs:
   - name: isRelatedToActiveQuest
     type: boolean
-C_QuestOffer.GetHideRequiredItemsOnTurnIn:
+C_QuestOffer.GetHideRequiredItems:
   inputs:
   - {}
   outputs:
-  - name: hideRequiredItemsOnTurnIn
+  - name: hideRequiredItems
     type: boolean
 C_QuestOffer.GetQuestOfferMajorFactionReputationRewards:
   inputs:
@@ -18308,6 +18323,13 @@ C_Traits.GetTraitDescription:
   outputs:
   - name: description
     type: string
+C_Traits.GetTraitSystemFlags:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: flags
+    type: number
 C_Traits.GetTraitSystemWidgetSetID:
   inputs:
   - - name: configID
@@ -18360,6 +18382,12 @@ C_Traits.HasValidInspectData:
   - {}
   outputs:
   - name: hasValidInspectData
+    type: boolean
+C_Traits.IsReadyForCommit:
+  inputs:
+  - {}
+  outputs:
+  - name: isReadyForCommit
     type: boolean
 C_Traits.PurchaseRank:
   inputs:
@@ -28079,7 +28107,17 @@ UnitTreatAsPlayerForDisplay:
   outputs:
   - name: treatAsPlayer
     type: boolean
-UnitTrialBankedLevels: {}
+UnitTrialBankedLevels:
+  inputs:
+  - - name: unit
+      type: unit
+  outputs:
+  - name: bankedLevels
+    type: number
+  - name: xpIntoCurrentLevel
+    type: number
+  - name: xpForNextLevel
+    type: number
 UnitTrialXP: {}
 UnitUsingVehicle: {}
 UnitVehicleSeatCount: {}

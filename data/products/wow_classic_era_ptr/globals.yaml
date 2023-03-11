@@ -2167,8 +2167,10 @@ Enum:
     MinValue: 0
     NumValues: 23
   ExcludedCensorSources:
+    All: 255
     Friends: 1
     Guild: 2
+    None: 0
     Reserve1: 4
     Reserve2: 8
     Reserve3: 16
@@ -2176,9 +2178,9 @@ Enum:
     Reserve5: 64
     Reserve6: 128
   ExcludedCensorSourcesMeta:
-    MaxValue: 128
-    MinValue: 1
-    NumValues: 8
+    MaxValue: 255
+    MinValue: 0
+    NumValues: 10
   ExpansionLandingPageType:
     Dragonflight: 1
     None: 0
@@ -4631,6 +4633,12 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  TimeEventFlag:
+    GlueScreenShortcut: 1
+  TimeEventFlagMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   TitleIconVersion:
     Large: 2
     Medium: 1
@@ -4955,10 +4963,11 @@ Enum:
     NumValues: 3
   TraitSystemFlag:
     AllowMultipleLoadoutsPerTree: 1
+    ShowSpendConfirmation: 2
   TraitSystemFlagMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 1
-    NumValues: 1
+    NumValues: 2
   TraitTreeFlag:
     CannotRefund: 1
     HideSingleRankNumbers: 2
