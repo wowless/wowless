@@ -82,6 +82,7 @@ local function worker(content, sig)
   for _ = 1, h.section_count do
     local sh = section_header:read(cur)
     assert(sh.record_count * 4 == sh.id_list_size)
+    assert(sh.relationship_data_size == 0)
     assert(sh.tact_key_hash == '\0\0\0\0\0\0\0\0')
     table.insert(shs, sh)
   end
@@ -116,19 +117,22 @@ local function worker(content, sig)
     table.insert(fsis, fsi)
   end
   local palletpos = cur.pos
-  cur:seek(nil, h.pallet_data_size)
-  cur:seek(nil, h.common_data_size)
+  local pos = cur.pos + h.pallet_data_size + h.common_data_size
+  for _, sh in ipairs(shs) do
+    assert(pos == sh.file_offset)
+    pos = pos + sh.record_count * h.record_size
+    pos = pos + sh.string_table_size
+    pos = pos + sh.id_list_size
+    pos = pos + sh.copy_table_count * 8
+    pos = pos + sh.offset_map_id_count * 6
+    pos = pos + sh.offset_map_id_count * 4
+  end
+  assert(pos == #content)
   for i = 1, h.section_count do
     local sh = shs[i]
-    assert(cur.pos == sh.file_offset)
-    local rpos = cur.pos
+    local rpos = sh.file_offset
     local spos = rpos + sh.record_count * h.record_size
     local ipos = spos + sh.string_table_size
-    cur:seek('set', ipos + sh.id_list_size)
-    cur:seek(nil, sh.copy_table_count * 8)
-    cur:seek(nil, sh.offset_map_id_count * 6)
-    assert(sh.relationship_data_size == 0)
-    cur:seek(nil, sh.offset_map_id_count * 4)
     for j = 1, sh.record_count do
       local t = { [0] = u4(content, ipos + (j - 1) * 4) }
       for k = 1, h.total_field_count do
@@ -149,7 +153,6 @@ local function worker(content, sig)
       coroutine.yield(t)
     end
   end
-  assert(cur.pos == #content)
 end
 
 local function rows(content, sig)
