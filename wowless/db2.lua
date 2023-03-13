@@ -49,11 +49,18 @@ local field_storage_info = vstruct.compile([[<
   cx3: u4
 ]])
 
-local sbyte = string.byte
+local strbyte = string.byte
+local strfind = string.find
+local strsub = string.sub
 
 local function u4(content, offset)
-  local w, x, y, z = sbyte(content, offset + 1, offset + 4)
+  local w, x, y, z = strbyte(content, offset + 1, offset + 4)
   return w + x * 256 + y * 65536 + z * 16777216
+end
+
+local function z(content, offset)
+  local e = assert(strfind(content, '\0', offset + 1, true))
+  return strsub(content, offset + 1, e - 1)
 end
 
 local function worker(content, sig)
@@ -131,7 +138,7 @@ local function worker(content, sig)
         if c == 's' then
           -- TODO this is only correct in simple cases; see the WDC2 docs
           local offset = foffset + v
-          t[k] = vstruct.read('@' .. offset .. ' z', content)[1]
+          t[k] = z(content, offset)
         elseif c == 'u' then
           local offset = palletpos + v * 4
           t[k] = u4(content, offset)
