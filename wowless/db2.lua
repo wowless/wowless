@@ -66,16 +66,17 @@ end
 local function rows(content, sig)
   assert(sig:sub(1, 1) == '{')
   assert(sig:sub(-1) == '}')
-  sig = sig:sub(2, sig:len() - 1)
-  for i = 1, sig:len() do
+  local tsig = {}
+  for i = 2, sig:len() - 1 do
     local c = sig:sub(i, i)
     assert(c == 's' or c == 'u')
+    table.insert(tsig, c)
   end
   local cur = vstruct.cursor(content)
   local h = header:read(cur)
   assert(h.magic == 'WDC3')
   assert(h.section_count == 1) -- see string offset TODO below
-  assert(h.total_field_count == #sig)
+  assert(h.total_field_count == #tsig)
   assert(h.total_field_count * 24 == h.field_storage_info_size)
   assert(h.flags.use_offset_map == false)
   local shs = {}
@@ -89,7 +90,7 @@ local function rows(content, sig)
   local fs = {}
   for i = 1, h.total_field_count do
     local f = field:read(cur)
-    local c = sig:sub(i, i)
+    local c = tsig[i]
     assert(f.size == (c == 's' and 0 or 32))
     assert(f.position == (i - 1) * 4)
     table.insert(fs, f)
@@ -100,7 +101,7 @@ local function rows(content, sig)
     assert(fsi.field_offset_bits == (i - 1) * 32)
     assert(fsi.cx1 == 0)
     assert(fsi.cx3 == 0)
-    local c = sig:sub(i, i)
+    local c = tsig[i]
     if c == 's' then
       assert(fsi.storage_type == 0)
       assert(fsi.field_size_bits == 32)
@@ -140,7 +141,7 @@ local function rows(content, sig)
         for k = 1, h.total_field_count do
           local foffset = rpos + fs[k].position
           local v = u4(content, foffset)
-          local c = sig:sub(k, k)
+          local c = tsig[k]
           if c == 's' then
             -- TODO this is only correct in simple cases; see the WDC2 docs
             local offset = foffset + v
