@@ -51,6 +51,13 @@ local field_storage_info = vstruct.compile([[<
 
 local id = vstruct.compile('<u4')
 
+local sbyte = string.byte
+
+local function u4(content, offset)
+  local w, x, y, z = sbyte(content, offset + 1, offset + 4)
+  return w + x * 256 + y * 65536 + z * 16777216
+end
+
 local function worker(content, sig)
   assert(sig:sub(1, 1) == '{')
   assert(sig:sub(-1) == '}')
@@ -122,7 +129,7 @@ local function worker(content, sig)
       local t = { [0] = id:read(icur)[1] }
       for k = 1, h.total_field_count do
         local foffset = rpos + (j - 1) * h.record_size + (k - 1) * 4
-        local v = vstruct.read('@' .. foffset .. ' <u4', content)[1]
+        local v = u4(content, foffset)
         local c = sig:sub(k, k)
         if c == 's' then
           -- TODO this is only correct in simple cases; see the WDC2 docs
@@ -130,7 +137,7 @@ local function worker(content, sig)
           t[k] = vstruct.read('@' .. offset .. ' z', content)[1]
         elseif c == 'u' then
           local offset = palletpos + v * 4
-          t[k] = vstruct.read('@' .. offset .. ' <u4', content)[1]
+          t[k] = u4(content, offset)
         else
           error('internal error')
         end
