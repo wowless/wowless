@@ -55,13 +55,10 @@ local function worker(content, sig)
   assert(sig:sub(1, 1) == '{')
   assert(sig:sub(-1) == '}')
   sig = sig:sub(2, sig:len() - 1)
-  local recstr = '<'
   for i = 1, sig:len() do
     local c = sig:sub(i, i)
     assert(c == 's' or c == 'u')
-    recstr = recstr .. 'u4'
   end
-  local record = vstruct.compile(recstr)
   local cur = vstruct.cursor(content)
   local h = header:read(cur)
   assert(h.magic == 'WDC3')
@@ -109,33 +106,31 @@ local function worker(content, sig)
   local palletpos = cur.pos
   cur:seek(nil, h.pallet_data_size)
   cur:seek(nil, h.common_data_size)
-  local rcur = vstruct.cursor(content)
   local icur = vstruct.cursor(content)
   for i = 1, h.section_count do
     local sh = shs[i]
     assert(cur.pos == sh.file_offset)
-    rcur:seek('set', cur.pos)
-    local spos = rcur.pos + sh.record_count * h.record_size
+    local rpos = cur.pos
+    local spos = rpos + sh.record_count * h.record_size
     icur:seek('set', spos + sh.string_table_size)
     cur:seek('set', icur.pos + sh.id_list_size)
     cur:seek(nil, sh.copy_table_count * 8)
     cur:seek(nil, sh.offset_map_id_count * 6)
     assert(sh.relationship_data_size == 0)
     cur:seek(nil, sh.offset_map_id_count * 4)
-    for _ = 1, sh.record_count do
+    for j = 1, sh.record_count do
       local t = { [0] = id:read(icur)[1] }
-      local rpos = rcur.pos
-      record:read(rcur, t)
-      for j = 1, h.total_field_count do
-        local v = t[j]
-        local c = sig:sub(j, j)
+      for k = 1, h.total_field_count do
+        local foffset = rpos + (j - 1) * h.record_size + (k - 1) * 4
+        local v = vstruct.read('@' .. foffset .. ' <u4', content)[1]
+        local c = sig:sub(k, k)
         if c == 's' then
           -- TODO this is only correct in simple cases; see the WDC2 docs
-          local offset = rpos + v + 4 * (j - 1)
-          t[j] = vstruct.read('@' .. offset .. ' z', content)[1]
+          local offset = foffset + v
+          t[k] = vstruct.read('@' .. offset .. ' z', content)[1]
         elseif c == 'u' then
           local offset = palletpos + v * 4
-          t[j] = vstruct.read('@' .. offset .. ' u4', content)[1]
+          t[k] = vstruct.read('@' .. offset .. ' <u4', content)[1]
         else
           error('internal error')
         end
