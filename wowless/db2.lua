@@ -52,12 +52,20 @@ local field_storage_info = vstruct.compile([[<
 local id = vstruct.compile('<u4')
 
 local function worker(content, sig)
-  assert(sig == '{s}')
-  local record = vstruct.compile('<u4')
+  assert(sig:sub(1, 1) == '{')
+  assert(sig:sub(-1) == '}')
+  sig = sig:sub(2, sig:len() - 1)
+  local recstr = '<'
+  for i = 1, sig:len() do
+    local c = sig:sub(i, i)
+    assert(c == 's' or c == 'u')
+    recstr = recstr .. 'u4'
+  end
+  local record = vstruct.compile(recstr)
   local cur = vstruct.cursor(content)
   local h = header:read(cur)
   assert(h.magic == 'WDC3')
-  assert(h.total_field_count == 1)
+  assert(h.total_field_count == #sig)
   assert(h.total_field_count * 24 == h.field_storage_info_size)
   assert(h.flags.use_offset_map == false)
   local shs = {}
@@ -68,19 +76,33 @@ local function worker(content, sig)
     table.insert(shs, sh)
   end
   local fs = {}
-  for _ = 1, h.total_field_count do
+  for i = 1, h.total_field_count do
     local f = field:read(cur)
-    assert(f.size == 0)
-    assert(f.position == 0)
+    local c = sig:sub(i, i)
+    assert(f.size == (c == 's' and 0 or 32))
+    assert(f.position == (i - 1) * 4)
     table.insert(fs, f)
   end
   local fsis = {}
-  for _ = 1, h.total_field_count do
+  for i = 1, h.total_field_count do
     local fsi = field_storage_info:read(cur)
-    assert(fsi.storage_type == 0)
-    assert(fsi.field_offset_bits == 0)
-    assert(fsi.field_size_bits == 32)
-    assert(fsi.additional_data_size == 0)
+    assert(fsi.field_offset_bits == (i - 1) * 32)
+    assert(fsi.cx1 == 0)
+    assert(fsi.cx3 == 0)
+    local c = sig:sub(i, i)
+    if c == 's' then
+      assert(fsi.storage_type == 0)
+      assert(fsi.field_size_bits == 32)
+      assert(fsi.additional_data_size == 0)
+      assert(fsi.cx2 == 0)
+    elseif c == 'u' then
+      assert(fsi.storage_type == 3)
+      assert(fsi.field_size_bits == 2)
+      assert(fsi.additional_data_size == 12)
+      assert(fsi.cx2 == 2)
+    else
+      error('internal error')
+    end
     table.insert(fsis, fsi)
   end
   cur:seek(nil, h.pallet_data_size)
@@ -99,10 +121,22 @@ local function worker(content, sig)
     assert(sh.relationship_data_size == 0)
     cur:seek(nil, sh.offset_map_id_count * 4)
     for _ = 1, sh.record_count do
-      local idval = id:read(icur)[1]
-      local offset = rcur.pos + record:read(rcur)[1]
-      local str = vstruct.readvals('@' .. offset .. ' z', content)
-      coroutine.yield({ [0] = idval, str })
+      local t = { [0] = id:read(icur)[1] }
+      local rpos = rcur.pos
+      local rec = record:read(rcur, t)
+      for j = 1, h.total_field_count do
+        local v = rec[j]
+        local c = sig:sub(j, j)
+        if c == 's' then
+          local offset = rpos + v + 4 * (j - 1)
+          t[j] = vstruct.read('@' .. offset .. ' z', content)[1]
+        elseif c == 'u' then
+          t[j] = v
+        else
+          error('internal error')
+        end
+      end
+      coroutine.yield(t)
     end
   end
   assert(cur.pos == #content)
