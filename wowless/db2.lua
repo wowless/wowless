@@ -138,7 +138,7 @@ local function rows(content, sig)
         local t = { [0] = u4(content, ipos) }
         ipos = ipos + 4
         for k = 1, h.total_field_count do
-          local foffset = rpos + (k - 1) * 4
+          local foffset = rpos + fs[k].position
           local v = u4(content, foffset)
           local c = sig:sub(k, k)
           if c == 's' then
