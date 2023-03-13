@@ -63,7 +63,7 @@ local function z(content, offset)
   return strsub(content, offset + 1, e - 1)
 end
 
-local function worker(content, sig)
+local function rows(content, sig)
   assert(sig:sub(1, 1) == '{')
   assert(sig:sub(-1) == '}')
   sig = sig:sub(2, sig:len() - 1)
@@ -128,38 +128,34 @@ local function worker(content, sig)
     pos = pos + sh.offset_map_id_count * 4
   end
   assert(pos == #content)
-  for i = 1, h.section_count do
-    local sh = shs[i]
-    local rpos = sh.file_offset
-    local spos = rpos + sh.record_count * h.record_size
-    local ipos = spos + sh.string_table_size
-    for _ = 1, sh.record_count do
-      local t = { [0] = u4(content, ipos) }
-      ipos = ipos + 4
-      for k = 1, h.total_field_count do
-        local foffset = rpos + (k - 1) * 4
-        local v = u4(content, foffset)
-        local c = sig:sub(k, k)
-        if c == 's' then
-          -- TODO this is only correct in simple cases; see the WDC2 docs
-          local offset = foffset + v
-          t[k] = z(content, offset)
-        elseif c == 'u' then
-          local offset = palletpos + v * 4
-          t[k] = u4(content, offset)
-        else
-          error('internal error')
-        end
-      end
-      rpos = rpos + h.record_size
-      coroutine.yield(t)
-    end
-  end
-end
-
-local function rows(content, sig)
   return coroutine.wrap(function()
-    worker(content, sig)
+    for i = 1, h.section_count do
+      local sh = shs[i]
+      local rpos = sh.file_offset
+      local spos = rpos + sh.record_count * h.record_size
+      local ipos = spos + sh.string_table_size
+      for _ = 1, sh.record_count do
+        local t = { [0] = u4(content, ipos) }
+        ipos = ipos + 4
+        for k = 1, h.total_field_count do
+          local foffset = rpos + (k - 1) * 4
+          local v = u4(content, foffset)
+          local c = sig:sub(k, k)
+          if c == 's' then
+            -- TODO this is only correct in simple cases; see the WDC2 docs
+            local offset = foffset + v
+            t[k] = z(content, offset)
+          elseif c == 'u' then
+            local offset = palletpos + v * 4
+            t[k] = u4(content, offset)
+          else
+            error('internal error')
+          end
+        end
+        rpos = rpos + h.record_size
+        coroutine.yield(t)
+      end
+    end
   end)
 end
 
