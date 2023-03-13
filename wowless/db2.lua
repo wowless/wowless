@@ -133,8 +133,7 @@ local function rows(content, sig)
     for i = 1, h.section_count do
       local sh = shs[i]
       local rpos = sh.file_offset
-      local spos = rpos + sh.record_count * h.record_size
-      local ipos = spos + sh.string_table_size
+      local ipos = rpos + sh.record_count * h.record_size + sh.string_table_size
       for _ = 1, sh.record_count do
         local t = { [0] = u4(content, ipos) }
         ipos = ipos + 4
