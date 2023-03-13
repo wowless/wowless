@@ -85,24 +85,24 @@ local function worker(content, sig)
   end
   cur:seek(nil, h.pallet_data_size)
   cur:seek(nil, h.common_data_size)
+  local rcur = vstruct.cursor(content)
+  local icur = vstruct.cursor(content)
   for i = 1, h.section_count do
     local sh = shs[i]
     assert(cur.pos == sh.file_offset)
-    local records = {}
-    for _ = 1, sh.record_count do
-      record:read(cur, records)
-    end
-    cur:seek(nil, sh.string_table_size)
-    local ids = {}
-    for _ = 1, sh.record_count do
-      id:read(cur, ids)
-    end
+    rcur:seek('set', cur.pos)
+    local spos = rcur.pos + sh.record_count * h.record_size
+    icur:seek('set', spos + sh.string_table_size)
+    cur:seek('set', icur.pos + sh.id_list_size)
     cur:seek(nil, sh.copy_table_count * 8)
     cur:seek(nil, sh.offset_map_id_count * 6)
     assert(sh.relationship_data_size == 0)
     cur:seek(nil, sh.offset_map_id_count * 4)
-    for j = 1, sh.record_count do
-      coroutine.yield({ [0] = ids[j], records[j] })
+    for _ = 1, sh.record_count do
+      local idval = id:read(icur)[1]
+      local offset = rcur.pos + record:read(rcur)[1]
+      local str = vstruct.readvals('@' .. offset .. ' z', content)
+      coroutine.yield({ [0] = idval, str })
     end
   end
   assert(cur.pos == #content)
