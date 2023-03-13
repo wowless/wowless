@@ -133,10 +133,11 @@ local function worker(content, sig)
     local rpos = sh.file_offset
     local spos = rpos + sh.record_count * h.record_size
     local ipos = spos + sh.string_table_size
-    for j = 1, sh.record_count do
-      local t = { [0] = u4(content, ipos + (j - 1) * 4) }
+    for _ = 1, sh.record_count do
+      local t = { [0] = u4(content, ipos) }
+      ipos = ipos + 4
       for k = 1, h.total_field_count do
-        local foffset = rpos + (j - 1) * h.record_size + (k - 1) * 4
+        local foffset = rpos + (k - 1) * 4
         local v = u4(content, foffset)
         local c = sig:sub(k, k)
         if c == 's' then
@@ -150,6 +151,7 @@ local function worker(content, sig)
           error('internal error')
         end
       end
+      rpos = rpos + h.record_size
       coroutine.yield(t)
     end
   end
