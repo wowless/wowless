@@ -106,6 +106,7 @@ local function worker(content, sig)
     end
     table.insert(fsis, fsi)
   end
+  local palletpos = cur.pos
   cur:seek(nil, h.pallet_data_size)
   cur:seek(nil, h.common_data_size)
   local rcur = vstruct.cursor(content)
@@ -124,16 +125,17 @@ local function worker(content, sig)
     for _ = 1, sh.record_count do
       local t = { [0] = id:read(icur)[1] }
       local rpos = rcur.pos
-      local rec = record:read(rcur, t)
+      record:read(rcur, t)
       for j = 1, h.total_field_count do
-        local v = rec[j]
+        local v = t[j]
         local c = sig:sub(j, j)
         if c == 's' then
           -- TODO this is only correct in simple cases; see the WDC2 docs
           local offset = rpos + v + 4 * (j - 1)
           t[j] = vstruct.read('@' .. offset .. ' z', content)[1]
         elseif c == 'u' then
-          t[j] = v
+          local offset = palletpos + v * 4
+          t[j] = vstruct.read('@' .. offset .. ' u4', content)[1]
         else
           error('internal error')
         end
