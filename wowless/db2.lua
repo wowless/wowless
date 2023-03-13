@@ -128,6 +128,7 @@ local function worker(content, sig)
         local v = rec[j]
         local c = sig:sub(j, j)
         if c == 's' then
+          -- TODO this is only correct in simple cases; see the WDC2 docs
           local offset = rpos + v + 4 * (j - 1)
           t[j] = vstruct.read('@' .. offset .. ' z', content)[1]
         elseif c == 'u' then
