@@ -52,7 +52,7 @@ local field_storage_info = vstruct.compile([[<
 local id = vstruct.compile('<u4')
 
 local function worker(content, sig)
-  assert(sig == 's')
+  assert(sig == '{s}')
   local record = vstruct.compile('<u4')
   local cur = vstruct.cursor(content)
   local h = header:read(cur)
