@@ -136,14 +136,14 @@ local function rows(content, sig)
       for _ = 1, sh.record_count do
         local t = { [0] = u4(content, ipos) }
         for k = 1, h.total_field_count do
+          local fsi = fsis[k]
+          local c = tsig[k]
           local foffset = rpos + fs[k].position
           local v = u4(content, foffset)
-          local c = tsig[k]
-          if c == 's' then
-            -- TODO this is only correct in simple cases; see the WDC2 docs
-            local offset = foffset + v
-            t[k] = z(content, offset)
-          elseif c == 'u' then
+          if fsi.storage_type == 0 then
+            -- TODO strings are only correct in simple cases; see the WDC2 docs
+            t[k] = c == 's' and z(content, foffset + v) or v
+          elseif fsi.storage_type == 3 then
             local offset = palletpos + v * 4
             t[k] = u4(content, offset)
           else
