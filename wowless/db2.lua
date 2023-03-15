@@ -100,7 +100,7 @@ local function rows(content, sig)
     local fsi = field_storage_info:read(cur)
     local f = fs[i]
     assert(fsi.field_offset_bits >= f.position * 8)
-    assert(fsi.field_offset_bits < f.position * 8 + f.size)
+    assert(fsi.field_offset_bits + fsi.field_size_bits <= f.position * 8 + f.size)
     if fsi.storage_type == 0 then
       assert(fsi.field_size_bits == 32)
       assert(fsi.additional_data_size == 0)
