@@ -92,7 +92,7 @@ local function rows(content, sig)
     local f = field:read(cur)
     local c = tsig[i]
     assert(f.size == (c == 's' and 0 or 32))
-    assert(f.position == (i - 1) * 4)
+    assert(f.position % 4 == 0)
     table.insert(fs, f)
   end
   local fsis = {}
