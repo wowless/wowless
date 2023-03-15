@@ -88,23 +88,30 @@ local function rows(content, sig)
     table.insert(shs, sh)
   end
   local fs = {}
-  for i = 1, h.total_field_count do
+  for _ = 1, h.total_field_count do
     local f = field:read(cur)
-    local c = tsig[i]
-    assert(f.size == (c == 's' and 0 or 32))
+    assert(f.size == 0 or f.size == 32)
+    f.size = 32
     assert(f.position % 4 == 0)
     table.insert(fs, f)
   end
   local fsis = {}
   for i = 1, h.total_field_count do
     local fsi = field_storage_info:read(cur)
-    assert(fsi.field_offset_bits == (i - 1) * 32)
+    local f = fs[i]
+    assert(fsi.field_offset_bits >= f.position * 8)
+    assert(fsi.field_offset_bits < f.position * 8 + f.size)
     if fsi.storage_type == 0 then
       assert(fsi.field_size_bits == 32)
       assert(fsi.additional_data_size == 0)
     elseif fsi.storage_type == 3 then
-      assert(fsi.field_size_bits == 2)
-      assert(fsi.additional_data_size == 12)
+      assert(fsi.field_size_bits > 0)
+      assert(fsi.field_size_bits <= 32)
+      assert(fsi.additional_data_size > 0)
+    elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
+      assert(fsi.field_size_bits > 0)
+      assert(fsi.field_size_bits <= 32)
+      assert(fsi.additional_data_size == 0)
     else
       error('unsupported storage type ' .. fsi.storage_type)
     end
