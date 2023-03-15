@@ -91,7 +91,6 @@ local function rows(content, sig)
   for _ = 1, h.total_field_count do
     local f = field:read(cur)
     assert(f.size == 0 or f.size == 32)
-    f.size = 32
     assert(f.position % 4 == 0)
     table.insert(fs, f)
   end
@@ -100,7 +99,7 @@ local function rows(content, sig)
     local fsi = field_storage_info:read(cur)
     local f = fs[i]
     assert(fsi.field_offset_bits >= f.position * 8)
-    assert(fsi.field_offset_bits + fsi.field_size_bits <= f.position * 8 + f.size)
+    assert(fsi.field_offset_bits + fsi.field_size_bits <= f.position * 8 + (f.size == 0 and 32 or f.size))
     if fsi.storage_type == 0 then
       assert(fsi.field_size_bits == 32)
       assert(fsi.additional_data_size == 0)
