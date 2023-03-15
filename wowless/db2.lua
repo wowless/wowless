@@ -99,21 +99,14 @@ local function rows(content, sig)
   for i = 1, h.total_field_count do
     local fsi = field_storage_info:read(cur)
     assert(fsi.field_offset_bits == (i - 1) * 32)
-    assert(fsi.cx1 == 0)
-    assert(fsi.cx3 == 0)
-    local c = tsig[i]
-    if c == 's' then
-      assert(fsi.storage_type == 0)
+    if fsi.storage_type == 0 then
       assert(fsi.field_size_bits == 32)
       assert(fsi.additional_data_size == 0)
-      assert(fsi.cx2 == 0)
-    elseif c == 'u' then
-      assert(fsi.storage_type == 3)
+    elseif fsi.storage_type == 3 then
       assert(fsi.field_size_bits == 2)
       assert(fsi.additional_data_size == 12)
-      assert(fsi.cx2 == 2)
     else
-      error('internal error')
+      error('unsupported storage type ' .. fsi.storage_type)
     end
     table.insert(fsis, fsi)
   end
@@ -136,7 +129,6 @@ local function rows(content, sig)
       local ipos = rpos + sh.record_count * h.record_size + sh.string_table_size
       for _ = 1, sh.record_count do
         local t = { [0] = u4(content, ipos) }
-        ipos = ipos + 4
         for k = 1, h.total_field_count do
           local foffset = rpos + fs[k].position
           local v = u4(content, foffset)
@@ -153,6 +145,7 @@ local function rows(content, sig)
           end
         end
         rpos = rpos + h.record_size
+        ipos = ipos + 4
         coroutine.yield(t)
       end
     end
