@@ -11,7 +11,7 @@ local header = vstruct.compile([[<
   min_id: u4
   max_id: u4
   locale: u4
-  flags: { [ 2 | x14 use_offset_map: b1 x1 ] }
+  flags: { [ 2 | x15 has_offset_map: b1 ] }
   id_index: u2
   total_field_count: u4
   bitpacked_data_offset: u4
@@ -78,7 +78,7 @@ local function rows(content, sig)
   assert(h.section_count == 1) -- see string offset TODO below
   assert(h.total_field_count == #tsig)
   assert(h.total_field_count * 24 == h.field_storage_info_size)
-  assert(h.flags.use_offset_map == false)
+  assert(h.flags.has_offset_map == false)
   local shs = {}
   for _ = 1, h.section_count do
     local sh = section_header:read(cur)
