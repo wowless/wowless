@@ -1,0 +1,42 @@
+---
+wdc3, no sections:
+  input:
+    fields: {}
+    field_storage_infos: {}
+    header:
+      common_data_size: 0
+      field_storage_info_size: 0
+      flags:
+        has_offset_map: false
+      magic: WDC3
+      pallet_data_size: 0
+      record_count: 0
+      record_size: 0
+      section_count: 0
+      string_table_size: 0
+      total_field_count: 0
+    section_headers: {}
+  output: {}
+  sig: '{}'
+wdc3, one empty section:
+  input:
+    fields: {}
+    field_storage_infos: {}
+    header:
+      common_data_size: 0
+      field_storage_info_size: 0
+      flags:
+        has_offset_map: false
+      magic: WDC3
+      pallet_data_size: 0
+      record_count: 0
+      record_size: 0
+      section_count: 1
+      string_table_size: 0
+      total_field_count: 0
+    section_headers:
+    - file_offset: 112
+      record_count: 0
+      string_table_size: 0
+  output: {}
+  sig: '{}'

@@ -75,7 +75,7 @@ local function rows(content, sig)
   local cur = vstruct.cursor(content)
   local h = header:read(cur)
   assert(h.magic == 'WDC3')
-  assert(h.section_count == 1) -- see string offset TODO below
+  assert(h.section_count <= 1) -- see string offset TODO below
   assert(h.total_field_count == #tsig)
   assert(h.total_field_count * 24 == h.field_storage_info_size)
   assert(h.flags.has_offset_map == false)
