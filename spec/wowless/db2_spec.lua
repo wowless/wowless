@@ -52,40 +52,31 @@ local field_storage_info = vstruct.compile([[<
 
 local function spec2data(spec)
   local data = {}
-  table.insert(
-    data,
-    header:write({
-      field_storage_info_size = 24 * #spec.fields,
-      magic = 'WDC3',
-      record_size = 4 * #spec.fields,
-      section_count = #spec.sections,
-      total_field_count = #spec.fields,
-    })
-  )
+  local function write(fmt, t)
+    table.insert(data, fmt:write(t))
+  end
+  write(header, {
+    field_storage_info_size = 24 * #spec.fields,
+    magic = 'WDC3',
+    record_size = 4 * #spec.fields,
+    section_count = #spec.sections,
+    total_field_count = #spec.fields,
+  })
   for _ in ipairs(spec.sections) do
-    table.insert(
-      data,
-      section_header:write({
-        file_offset = 112 + 28 * #spec.fields,
-      })
-    )
+    write(section_header, {
+      file_offset = 112 + 28 * #spec.fields,
+    })
   end
   for i in ipairs(spec.fields) do
-    table.insert(
-      data,
-      field:write({
-        position = (i - 1) * 4,
-      })
-    )
+    write(field, {
+      position = (i - 1) * 4,
+    })
   end
   for i in ipairs(spec.fields) do
-    table.insert(
-      data,
-      field_storage_info:write({
-        field_offset_bits = (i - 1) * 32,
-        field_size_bits = 32,
-      })
-    )
+    write(field_storage_info, {
+      field_offset_bits = (i - 1) * 32,
+      field_size_bits = 32,
+    })
   end
   return table.concat(data)
 end
