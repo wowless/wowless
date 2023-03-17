@@ -1,12 +1,31 @@
 ---
 wdc3, no sections:
   input:
+    fields: {}
     sections: {}
   output: {}
   sig: '{}'
-wdc3, one empty section:
+wdc3, one empty section, no fields:
   input:
+    fields: {}
     sections:
     - {}
   output: {}
   sig: '{}'
+wdc3, one empty section, one field:
+  input:
+    fields:
+    - {}
+    sections:
+    - {}
+  output: {}
+  sig: '{u}'
+wdc3, one empty section, two fields:
+  input:
+    fields:
+    - {}
+    - {}
+    sections:
+    - {}
+  output: {}
+  sig: '{uu}'
