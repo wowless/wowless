@@ -50,14 +50,6 @@ local field_storage_info = vstruct.compile([[<
   cx3: u4
 ]])
 
-local function collect(data, sig)
-  local rows = {}
-  for k in db2.rows(data, sig) do
-    table.insert(rows, k)
-  end
-  return rows
-end
-
 describe('db2', function()
   local tests = require('wowapi.yaml').parseFile('spec/wowless/db2tests.yaml')
   for k, v in pairs(tests) do
@@ -72,7 +64,11 @@ describe('db2', function()
       for _, fsi in ipairs(v.input.field_storage_infos) do
         table.insert(data, field_storage_info:write(fsi))
       end
-      assert.same(v.output, collect(table.concat(data), v.sig))
+      local rows = {}
+      for row in db2.rows(table.concat(data), v.sig) do
+        table.insert(rows, row)
+      end
+      assert.same(v.output, rows)
     end)
   end
 end)
