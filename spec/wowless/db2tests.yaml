@@ -17,7 +17,7 @@ wdc3, one empty section, no fields:
   input:
     fields: {}
     sections:
-    - {}
+    - records: {}
   output: {}
   sig: '{}'
 wdc3, one empty section, one field:
@@ -25,7 +25,7 @@ wdc3, one empty section, one field:
     fields:
     - {}
     sections:
-    - {}
+    - records: {}
   output: {}
   sig: '{u}'
 wdc3, one empty section, two fields:
@@ -34,6 +34,29 @@ wdc3, one empty section, two fields:
     - {}
     - {}
     sections:
-    - {}
+    - records: {}
   output: {}
+  sig: '{uu}'
+wdc3, one section, two integer fields:
+  input:
+    fields:
+    - {}
+    - {}
+    sections:
+    - records:
+      - id: 11
+        fields:
+        - 22
+        - 33
+      - id: 44
+        fields:
+        - 55
+        - 66
+  output:
+  - 0: 11
+    1: 22
+    2: 33
+  - 0: 44
+    1: 55
+    2: 66
   sig: '{uu}'

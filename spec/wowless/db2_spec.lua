@@ -26,10 +26,10 @@ local header = vstruct.compile([[<
 local section_header = vstruct.compile([[<
   x8  -- tact_key_hash: s8
   file_offset: u4
-  x4  -- record_count: u4
+  record_count: u4
   x4  -- string_table_size: u4
   x4  -- offset_records_end: u4
-  x4  -- id_list_size: u4
+  id_list_size: u4
   x4  -- relationship_data_size: u4
   x4  -- offset_map_id_count: u4
   x4  -- copy_table_count: u4
@@ -50,6 +50,8 @@ local field_storage_info = vstruct.compile([[<
   x4  -- cx3: u4
 ]])
 
+local u4 = vstruct.compile('<u4')
+
 local function spec2data(spec)
   local data = {}
   local function write(fmt, t)
@@ -62,9 +64,11 @@ local function spec2data(spec)
     section_count = #spec.sections,
     total_field_count = #spec.fields,
   })
-  for _ in ipairs(spec.sections) do
+  for _, s in ipairs(spec.sections) do
     write(section_header, {
       file_offset = 112 + 28 * #spec.fields,
+      id_list_size = 4 * #s.records,
+      record_count = #s.records,
     })
   end
   for i in ipairs(spec.fields) do
@@ -77,6 +81,16 @@ local function spec2data(spec)
       field_offset_bits = (i - 1) * 32,
       field_size_bits = 32,
     })
+  end
+  for _, s in ipairs(spec.sections) do
+    for _, r in ipairs(s.records) do
+      for _, f in ipairs(r.fields) do
+        write(u4, { f })
+      end
+    end
+    for _, r in ipairs(s.records) do
+      write(u4, { r.id })
+    end
   end
   return table.concat(data)
 end
