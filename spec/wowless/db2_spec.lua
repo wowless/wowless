@@ -50,25 +50,33 @@ local field_storage_info = vstruct.compile([[<
   cx3: u4
 ]])
 
+local function spec2data(spec)
+  local data = { header:write(spec.header) }
+  for _, sh in ipairs(spec.section_headers) do
+    table.insert(data, section_header:write(sh))
+  end
+  for _, f in ipairs(spec.fields) do
+    table.insert(data, field:write(f))
+  end
+  for _, fsi in ipairs(spec.field_storage_infos) do
+    table.insert(data, field_storage_info:write(fsi))
+  end
+  return table.concat(data)
+end
+
+local function collect(data, sig)
+  local rows = {}
+  for row in db2.rows(data, sig) do
+    table.insert(rows, row)
+  end
+  return rows
+end
+
 describe('db2', function()
   local tests = require('wowapi.yaml').parseFile('spec/wowless/db2tests.yaml')
   for k, v in pairs(tests) do
     it(k, function()
-      local data = { header:write(v.input.header) }
-      for _, sh in ipairs(v.input.section_headers) do
-        table.insert(data, section_header:write(sh))
-      end
-      for _, f in ipairs(v.input.fields) do
-        table.insert(data, field:write(f))
-      end
-      for _, fsi in ipairs(v.input.field_storage_infos) do
-        table.insert(data, field_storage_info:write(fsi))
-      end
-      local rows = {}
-      for row in db2.rows(table.concat(data), v.sig) do
-        table.insert(rows, row)
-      end
-      assert.same(v.output, rows)
+      assert.same(v.output, collect(spec2data(v.input), v.sig))
     end)
   end
 end)
