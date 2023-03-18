@@ -1,5 +1,6 @@
 local db2 = require('wowless.db2')
 local vstruct = require('vstruct')
+local sorted = require('pl.tablex').sort
 
 local header = vstruct.compile([[<
   magic: s4
@@ -27,7 +28,7 @@ local section_header = vstruct.compile([[<
   x8  -- tact_key_hash: s8
   file_offset: u4
   record_count: u4
-  x4  -- string_table_size: u4
+  string_table_size: u4
   x4  -- offset_records_end: u4
   id_list_size: u4
   x4  -- relationship_data_size: u4
@@ -53,6 +54,28 @@ local field_storage_info = vstruct.compile([[<
 local u4 = vstruct.compile('<u4')
 
 local function spec2data(spec)
+  local strtabs = {}
+  for i, s in ipairs(spec.sections) do
+    local strs = {}
+    for _, r in ipairs(s.records) do
+      for _, f in ipairs(r.fields) do
+        if type(f) == 'string' then
+          strs[f] = true
+        end
+      end
+    end
+    local strrev = {}
+    local strtab = ''
+    for k in sorted(strs) do
+      strrev[k] = #strtab
+      strtab = strtab .. k .. '\0'
+    end
+    strtabs[i] = {
+      data = strtab,
+      rev = strrev,
+    }
+  end
+  local record_size = 4 * #spec.fields
   local data = {}
   local function write(fmt, t)
     table.insert(data, fmt:write(t))
@@ -60,15 +83,16 @@ local function spec2data(spec)
   write(header, {
     field_storage_info_size = 24 * #spec.fields,
     magic = 'WDC3',
-    record_size = 4 * #spec.fields,
+    record_size = record_size,
     section_count = #spec.sections,
     total_field_count = #spec.fields,
   })
-  for _, s in ipairs(spec.sections) do
+  for i, s in ipairs(spec.sections) do
     write(section_header, {
       file_offset = 112 + 28 * #spec.fields,
       id_list_size = 4 * #s.records,
       record_count = #s.records,
+      string_table_size = #strtabs[i].data,
     })
   end
   for i in ipairs(spec.fields) do
@@ -82,12 +106,20 @@ local function spec2data(spec)
       field_size_bits = 32,
     })
   end
-  for _, s in ipairs(spec.sections) do
-    for _, r in ipairs(s.records) do
-      for _, f in ipairs(r.fields) do
+  for i, s in ipairs(spec.sections) do
+    local strrev = strtabs[i].rev
+    for j, r in ipairs(s.records) do
+      for k, f in ipairs(r.fields) do
+        if type(f) == 'string' then
+          -- From wowdev.wiki: the relative position from the
+          -- beginning of the field where this offset was stored
+          -- to the position of the referenced string in the string block.
+          f = strrev[f] + (#s.records - j + 1) * record_size - (k - 1) * 4
+        end
         write(u4, { f })
       end
     end
+    table.insert(data, strtabs[i].data)
     for _, r in ipairs(s.records) do
       write(u4, { r.id })
     end

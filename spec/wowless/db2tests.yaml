@@ -60,3 +60,26 @@ wdc3, one section, two integer fields:
     1: 55
     2: 66
   sig: '{uu}'
+wdc3, one section, two string fields:
+  input:
+    fields:
+    - {}
+    - {}
+    sections:
+    - records:
+      - id: 11
+        fields:
+        - hello
+        - world
+      - id: 44
+        fields:
+        - so long, cruel
+        - world
+  output:
+  - 0: 11
+    1: hello
+    2: world
+  - 0: 44
+    1: so long, cruel
+    2: world
+  sig: '{ss}'
