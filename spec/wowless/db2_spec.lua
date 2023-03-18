@@ -54,6 +54,16 @@ local field_storage_info = vstruct.compile([[<
 local u4 = vstruct.compile('<u4')
 
 local function spec2data(spec)
+  local expected = {}
+  for _, s in ipairs(spec.sections) do
+    for _, r in ipairs(s.records) do
+      local row = { [0] = r.id }
+      for k, f in ipairs(r.fields) do
+        row[k] = f
+      end
+      table.insert(expected, row)
+    end
+  end
   local strtabs = {}
   for i, s in ipairs(spec.sections) do
     local strs = {}
@@ -124,7 +134,7 @@ local function spec2data(spec)
       write(u4, { r.id })
     end
   end
-  return table.concat(data)
+  return table.concat(data), expected
 end
 
 local function collect(data, sig)
@@ -139,7 +149,8 @@ describe('db2', function()
   local tests = require('wowapi.yaml').parseFile('spec/wowless/db2tests.yaml')
   for k, v in pairs(tests) do
     it(k, function()
-      assert.same(v.output, collect(spec2data(v.input), v.sig))
+      local data, expected = spec2data(v)
+      assert.same(expected, collect(data, v.sig))
     end)
   end
 end)

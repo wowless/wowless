@@ -1,85 +1,59 @@
 ---
 wdc3, no sections, no fields:
-  input:
-    fields: {}
-    sections: {}
-  output: {}
+  fields: {}
+  sections: {}
   sig: '{}'
 wdc3, no sections, two fields:
-  input:
-    fields:
-    - {}
-    - {}
-    sections: {}
-  output: {}
+  fields:
+  - {}
+  - {}
+  sections: {}
   sig: '{uu}'
 wdc3, one empty section, no fields:
-  input:
-    fields: {}
-    sections:
-    - records: {}
-  output: {}
+  fields: {}
+  sections:
+  - records: {}
   sig: '{}'
 wdc3, one empty section, one field:
-  input:
-    fields:
-    - {}
-    sections:
-    - records: {}
-  output: {}
+  fields:
+  - {}
+  sections:
+  - records: {}
   sig: '{u}'
 wdc3, one empty section, two fields:
-  input:
-    fields:
-    - {}
-    - {}
-    sections:
-    - records: {}
-  output: {}
+  fields:
+  - {}
+  - {}
+  sections:
+  - records: {}
   sig: '{uu}'
 wdc3, one section, two integer fields:
-  input:
-    fields:
-    - {}
-    - {}
-    sections:
-    - records:
-      - id: 11
-        fields:
-        - 22
-        - 33
-      - id: 44
-        fields:
-        - 55
-        - 66
-  output:
-  - 0: 11
-    1: 22
-    2: 33
-  - 0: 44
-    1: 55
-    2: 66
+  fields:
+  - {}
+  - {}
+  sections:
+  - records:
+    - id: 11
+      fields:
+      - 22
+      - 33
+    - id: 44
+      fields:
+      - 55
+      - 66
   sig: '{uu}'
 wdc3, one section, two string fields:
-  input:
-    fields:
-    - {}
-    - {}
-    sections:
-    - records:
-      - id: 11
-        fields:
-        - hello
-        - world
-      - id: 44
-        fields:
-        - so long, cruel
-        - world
-  output:
-  - 0: 11
-    1: hello
-    2: world
-  - 0: 44
-    1: so long, cruel
-    2: world
+  fields:
+  - {}
+  - {}
+  sections:
+  - records:
+    - id: 11
+      fields:
+      - hello
+      - world
+    - id: 44
+      fields:
+      - so long, cruel
+      - world
   sig: '{ss}'
