@@ -5,8 +5,8 @@ wdc3, no sections, no fields:
   sig: '{}'
 wdc3, no sections, two fields:
   fields:
-  - {}
-  - {}
+  - uncompressed
+  - uncompressed
   sections: {}
   sig: '{uu}'
 wdc3, one empty section, no fields:
@@ -16,21 +16,21 @@ wdc3, one empty section, no fields:
   sig: '{}'
 wdc3, one empty section, one field:
   fields:
-  - {}
+  - uncompressed
   sections:
   - records: {}
   sig: '{u}'
 wdc3, one empty section, two fields:
   fields:
-  - {}
-  - {}
+  - uncompressed
+  - uncompressed
   sections:
   - records: {}
   sig: '{uu}'
 wdc3, one section, two integer fields:
   fields:
-  - {}
-  - {}
+  - uncompressed
+  - uncompressed
   sections:
   - records:
     - id: 11
@@ -44,8 +44,8 @@ wdc3, one section, two integer fields:
   sig: '{uu}'
 wdc3, one section, two string fields:
   fields:
-  - {}
-  - {}
+  - uncompressed
+  - uncompressed
   sections:
   - records:
     - id: 11

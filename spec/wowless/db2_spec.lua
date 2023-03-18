@@ -54,6 +54,9 @@ local field_storage_info = vstruct.compile([[<
 local u4 = vstruct.compile('<u4')
 
 local function spec2data(spec)
+  for _, f in ipairs(spec.fields) do
+    assert(f == 'uncompressed', 'invalid field spec')
+  end
   local expected = {}
   for _, s in ipairs(spec.sections) do
     for _, r in ipairs(s.records) do
