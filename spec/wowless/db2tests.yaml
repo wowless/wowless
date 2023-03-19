@@ -27,6 +27,25 @@ wdc3, one empty section, two fields:
   sections:
   - records: {}
   sig: '{uu}'
+wdc3, one section, bitpacked_indexed field:
+  fields:
+  - uncompressed
+  - bitpacked_indexed
+  sections:
+  - records:
+    - id: 10
+      fields:
+      - 11
+      - 12
+    - id: 20
+      fields:
+      - 21
+      - 22
+    - id: 30
+      fields:
+      - 31
+      - 12
+  sig: '{uu}'
 wdc3, one section, two integer fields:
   fields:
   - uncompressed

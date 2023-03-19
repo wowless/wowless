@@ -20,7 +20,7 @@ local header = vstruct.compile([[<
   x4  -- lookup_column_count: u4
   field_storage_info_size: u4
   x4  -- common_data_size: u4
-  x4  -- pallet_data_size: u4
+  pallet_data_size: u4
   section_count: u4
 ]])
 
@@ -44,8 +44,8 @@ local field = vstruct.compile([[<
 local field_storage_info = vstruct.compile([[<
   field_offset_bits: u2
   field_size_bits: u2
-  x4  -- additional_data_size: u4
-  x4  -- storage_type: u4
+  additional_data_size: u4
+  storage_type: u4
   x4  -- cx1: u4
   x4  -- cx2: u4
   x4  -- cx3: u4
@@ -92,10 +92,38 @@ local function mkstrtabs(spec)
   return strtabs
 end
 
-local function spec2data(spec)
-  for _, f in ipairs(spec.fields) do
-    assert(f == 'uncompressed', 'invalid field spec')
+local function mkpallet(spec)
+  local vals = {}
+  for _ in ipairs(spec.fields) do
+    table.insert(vals, {})
   end
+  for _, s in ipairs(spec.sections) do
+    for _, r in ipairs(s.records) do
+      for k, f in ipairs(r.fields) do
+        if spec.fields[k] == 'bitpacked_indexed' then
+          vals[k][f] = true
+        end
+      end
+    end
+  end
+  local pallet = {}
+  local revs = {}
+  for _, v in ipairs(vals) do
+    local part = {}
+    local rev = {}
+    for f in sorted(v) do
+      rev[f] = #part
+      table.insert(part, u4:write({ f }))
+    end
+    table.insert(pallet, table.concat(part))
+    table.insert(revs, rev)
+  end
+  return pallet, revs
+end
+
+local function spec2data(spec)
+  local pallet, palletrevs = mkpallet(spec)
+  local pallet_size = #table.concat(pallet)
   local strtabs = mkstrtabs(spec)
   local record_size = 4 * #spec.fields
   local data = {}
@@ -105,13 +133,14 @@ local function spec2data(spec)
   write(header, {
     field_storage_info_size = 24 * #spec.fields,
     magic = 'WDC3',
+    pallet_data_size = pallet_size,
     record_size = record_size,
     section_count = #spec.sections,
     total_field_count = #spec.fields,
   })
   for i, s in ipairs(spec.sections) do
     write(section_header, {
-      file_offset = 112 + 28 * #spec.fields,
+      file_offset = 112 + 28 * #spec.fields + pallet_size,
       id_list_size = 4 * #s.records,
       record_count = #s.records,
       string_table_size = #strtabs[i].data,
@@ -122,12 +151,23 @@ local function spec2data(spec)
       position = (i - 1) * 4,
     })
   end
-  for i in ipairs(spec.fields) do
+  for i, f in ipairs(spec.fields) do
+    local storage_type
+    if f == 'uncompressed' then
+      storage_type = 0
+    elseif f == 'bitpacked_indexed' then
+      storage_type = 3
+    else
+      error('invalid field spec')
+    end
     write(field_storage_info, {
+      additional_data_size = #pallet[i],
       field_offset_bits = (i - 1) * 32,
       field_size_bits = 32,
+      storage_type = storage_type,
     })
   end
+  table.insert(data, table.concat(pallet))
   for i, s in ipairs(spec.sections) do
     local strrev = strtabs[i].rev
     for j, r in ipairs(s.records) do
@@ -137,6 +177,9 @@ local function spec2data(spec)
           -- beginning of the field where this offset was stored
           -- to the position of the referenced string in the string block.
           f = strrev[f] + (#s.records - j + 1) * record_size - (k - 1) * 4
+        end
+        if spec.fields[k] == 'bitpacked_indexed' then
+          f = palletrevs[k][f]
         end
         write(u4, { f })
       end
