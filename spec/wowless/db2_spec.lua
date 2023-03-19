@@ -53,10 +53,7 @@ local field_storage_info = vstruct.compile([[<
 
 local u4 = vstruct.compile('<u4')
 
-local function spec2data(spec)
-  for _, f in ipairs(spec.fields) do
-    assert(f == 'uncompressed', 'invalid field spec')
-  end
+local function mkexpected(spec)
   local expected = {}
   for _, s in ipairs(spec.sections) do
     for _, r in ipairs(s.records) do
@@ -67,6 +64,10 @@ local function spec2data(spec)
       table.insert(expected, row)
     end
   end
+  return expected
+end
+
+local function mkstrtabs(spec)
   local strtabs = {}
   for i, s in ipairs(spec.sections) do
     local strs = {}
@@ -88,6 +89,14 @@ local function spec2data(spec)
       rev = strrev,
     }
   end
+  return strtabs
+end
+
+local function spec2data(spec)
+  for _, f in ipairs(spec.fields) do
+    assert(f == 'uncompressed', 'invalid field spec')
+  end
+  local strtabs = mkstrtabs(spec)
   local record_size = 4 * #spec.fields
   local data = {}
   local function write(fmt, t)
@@ -137,7 +146,7 @@ local function spec2data(spec)
       write(u4, { r.id })
     end
   end
-  return table.concat(data), expected
+  return table.concat(data)
 end
 
 local function collect(data, sig)
@@ -152,8 +161,7 @@ describe('db2', function()
   local tests = require('wowapi.yaml').parseFile('spec/wowless/db2tests.yaml')
   for k, v in pairs(tests) do
     it(k, function()
-      local data, expected = spec2data(v)
-      assert.same(expected, collect(data, v.sig))
+      assert.same(mkexpected(v), collect(spec2data(v), v.sig))
     end)
   end
 end)
