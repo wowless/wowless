@@ -1,11 +1,12 @@
 local db2 = require('wowless.db2')
+local dbc = require('dbc')
 local vstruct = require('vstruct')
 local sorted = require('pl.tablex').sort
 
 local header = vstruct.compile([[<
   magic: s4
   x4  -- record_count: u4
-  x4  -- field_count: u4
+  field_count: u4
   record_size: u4
   x4  -- string_table_size: u4
   x4  -- table_hash: u4
@@ -37,7 +38,7 @@ local section_header = vstruct.compile([[<
 ]])
 
 local field = vstruct.compile([[<
-  x2  -- size: i2
+  size: i2
   position: u2
 ]])
 
@@ -131,6 +132,7 @@ local function spec2data(spec)
     table.insert(data, fmt:write(t))
   end
   write(header, {
+    field_count = #spec.fields,
     field_storage_info_size = 24 * #spec.fields,
     magic = 'WDC3',
     pallet_data_size = pallet_size,
@@ -146,9 +148,10 @@ local function spec2data(spec)
       string_table_size = #strtabs[i].data,
     })
   end
-  for i in ipairs(spec.fields) do
+  for i, f in ipairs(spec.fields) do
     write(field, {
       position = (i - 1) * 4,
+      size = f == 'uncompressed' and 0 or 32,
     })
   end
   for i, f in ipairs(spec.fields) do
@@ -192,9 +195,9 @@ local function spec2data(spec)
   return table.concat(data)
 end
 
-local function collect(data, sig)
+local function collect(fn, data, sig)
   local rows = {}
-  for row in db2.rows(data, sig) do
+  for row in fn(data, sig) do
     table.insert(rows, row)
   end
   return rows
@@ -203,8 +206,16 @@ end
 describe('db2', function()
   local tests = require('wowapi.yaml').parseFile('spec/wowless/db2tests.yaml')
   for k, v in pairs(tests) do
-    it(k, function()
-      assert.same(mkexpected(v), collect(spec2data(v), v.sig))
+    describe(k, function()
+      local data = spec2data(v)
+      local expected = mkexpected(v)
+      local sig = v.sig
+      it('works with wowless.db2', function()
+        assert.same(expected, collect(db2.rows, data, sig))
+      end)
+      it('works with luadbc', function()
+        assert.same(expected, collect(dbc.rows, data, sig))
+      end)
     end)
   end
 end)
