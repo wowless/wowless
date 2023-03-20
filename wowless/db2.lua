@@ -1,3 +1,4 @@
+local bit = require('bit')
 local vstruct = require('vstruct')
 
 local header = vstruct.compile([[<
@@ -144,8 +145,10 @@ local function rows(content, sig)
             -- TODO strings are only correct in simple cases; see the WDC2 docs
             t[k] = c == 's' and z(content, foffset + v) or v
           elseif fsi.storage_type == 3 then
-            local offset = palletpos + v * 4
-            t[k] = u4(content, offset)
+            local boffset = fsi.field_offset_bits - fs[k].position * 8
+            local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
+            local vv = bit.band(v, mask)
+            t[k] = u4(content, palletpos + vv * 4)
           else
             error('internal error')
           end

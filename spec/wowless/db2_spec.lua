@@ -186,7 +186,9 @@ local function spec2data(spec)
           f = strrev[f] + (#s.records - j + 1) * record_size - (k - 1) * 4
         end
         if spec.fields[k] == 'bitpacked_indexed' then
-          f = palletrevs[k][f]
+          -- Fill unclaimed bits with 1s to attempt to trigger bitpacking bugs.
+          local w = bitwidth(#pallet[k] / 4)
+          f = 2 ^ 32 - 2 ^ w + palletrevs[k][f]
         end
         write(u4, { f })
       end
