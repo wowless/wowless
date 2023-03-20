@@ -91,6 +91,9 @@ local rules = {
   mklistfile = {
     command = 'lua tools/listfile.lua',
   },
+  mkninja = {
+    command = 'lua tools/mkninja.lua',
+  },
   mktactkeys = {
     command = 'lua tools/tactkeys.lua',
   },
@@ -138,6 +141,11 @@ local builds = {
     ins = 'build/runtime.stamp',
     outs = 'runtime',
     rule = 'phony',
+  },
+  {
+    ins = { 'tools/addons.yaml', 'tools/mkninja.lua' },
+    outs = 'build.ninja',
+    rule = 'mkninja',
   },
   {
     ins = find('vendor/elune -not -path \'vendor/elune/build/*\''),
