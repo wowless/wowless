@@ -135,6 +135,11 @@ local builds = {
     rule = 'phony',
   },
   {
+    ins = 'build/runtime.stamp',
+    outs = 'runtime',
+    rule = 'phony',
+  },
+  {
     ins = find('vendor/elune -not -path \'vendor/elune/build/*\''),
     outs_implicit = elune,
     rule = 'mkelune',
@@ -147,6 +152,16 @@ local builds = {
   {
     ins = find('data/impl'),
     outs = 'build/impl.stamp',
+    rule = 'stamp',
+  },
+  {
+    ins = {
+      elune,
+      'build/flavors.lua',
+      'build/wowless.stamp',
+      'wowless/ext.so',
+    },
+    outs = 'build/runtime.stamp',
     rule = 'stamp',
   },
   {
@@ -298,12 +313,7 @@ for _, p in ipairs(productList) do
   local datalua = 'build/products/' .. p .. '/data.lua'
   table.insert(runtimes, schemadb)
   local rundeps = {
-    'wowless/ext.so',
-    'build/wowless.stamp',
-    'build/flavors.lua',
-    dataStamp,
-    fetchStamp,
-    elune,
+    'build/runtime.stamp',
     datadb,
     datalua,
   }
@@ -423,13 +433,10 @@ end
 table.insert(builds, {
   ins = {
     '.busted',
-    'build/flavors.lua',
-    'build/wowless.stamp',
+    'build/runtime.stamp',
     'data/impl.yaml',
     'data/uiobjectimpl.yaml',
-    'wowless/ext.so',
     addonGeneratedFiles,
-    elune,
     runtimes,
   },
   outs = 'test.out',
