@@ -149,6 +149,10 @@ local function rows(content, sig)
           if fsi.storage_type == 0 then
             -- TODO strings are only correct in simple cases; see the WDC2 docs
             t[k] = c == 's' and z(content, foffset + v) or v
+          elseif fsi.storage_type == 1 then
+            local boffset = fsi.field_offset_bits - fs[k].position * 8
+            local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
+            t[k] = bit.band(v, mask)
           elseif fsi.storage_type == 3 then
             local boffset = fsi.field_offset_bits - fs[k].position * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset

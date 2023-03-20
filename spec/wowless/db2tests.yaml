@@ -65,6 +65,25 @@ wdc3, one section, multiple bitpacked_indexed fields:
       - 31
       - 12
   sig: '{uu}'
+wdc3, one section, multiple bitpacked fields:
+  fields:
+  - bitpacked
+  - bitpacked
+  sections:
+  - records:
+    - id: 10
+      fields:
+      - 11
+      - 12
+    - id: 20
+      fields:
+      - 21
+      - 22
+    - id: 30
+      fields:
+      - 31
+      - 12
+  sig: '{uu}'
 wdc3, one section, two integer fields:
   fields:
   - uncompressed

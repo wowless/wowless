@@ -126,6 +126,12 @@ local function bitwidth(x)
   return math.ceil(math.log(x) / math.log(2))
 end
 
+local storage_types = {
+  uncompressed = 0,
+  bitpacked = 1,
+  bitpacked_indexed = 3,
+}
+
 local function spec2data(spec)
   local pallet, palletrevs = mkpallet(spec)
   local pallet_size = #table.concat(pallet)
@@ -159,19 +165,21 @@ local function spec2data(spec)
     })
   end
   for i, f in ipairs(spec.fields) do
-    local storage_type
+    local field_size_bits
     if f == 'uncompressed' then
-      storage_type = 0
+      field_size_bits = 32
+    elseif f == 'bitpacked' then
+      field_size_bits = 8
     elseif f == 'bitpacked_indexed' then
-      storage_type = 3
+      field_size_bits = bitwidth(#pallet[i] / 4)
     else
-      error('invalid field spec')
+      error('invalid field storage type ' .. f)
     end
     write(field_storage_info, {
       additional_data_size = #pallet[i],
       field_offset_bits = (i - 1) * 32,
-      field_size_bits = f == 'uncompressed' and 32 or bitwidth(#pallet[i] / 4),
-      storage_type = storage_type,
+      field_size_bits = field_size_bits,
+      storage_type = storage_types[f],
     })
   end
   table.insert(data, table.concat(pallet))
@@ -185,7 +193,10 @@ local function spec2data(spec)
           -- to the position of the referenced string in the string block.
           f = strrev[f] + (#s.records - j + 1) * record_size - (k - 1) * 4
         end
-        if spec.fields[k] == 'bitpacked_indexed' then
+        if spec.fields[k] == 'bitpacked' then
+          -- Fill unclaimed bits with 1s to attempt to trigger bitpacking bugs.
+          f = 2 ^ 32 - 2 ^ 24 + f
+        elseif spec.fields[k] == 'bitpacked_indexed' then
           -- Fill unclaimed bits with 1s to attempt to trigger bitpacking bugs.
           local w = bitwidth(#pallet[k] / 4)
           f = 2 ^ 32 - 2 ^ w + palletrevs[k][f]
