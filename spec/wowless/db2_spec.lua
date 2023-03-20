@@ -122,6 +122,10 @@ local function mkpallet(spec)
   return pallet, revs
 end
 
+local function bitwidth(x)
+  return math.ceil(math.log(x) / math.log(2))
+end
+
 local function spec2data(spec)
   local pallet, palletrevs = mkpallet(spec)
   local pallet_size = #table.concat(pallet)
@@ -166,7 +170,7 @@ local function spec2data(spec)
     write(field_storage_info, {
       additional_data_size = #pallet[i],
       field_offset_bits = (i - 1) * 32,
-      field_size_bits = 32,
+      field_size_bits = f == 'uncompressed' and 32 or bitwidth(#pallet[i] / 4),
       storage_type = storage_type,
     })
   end
