@@ -96,6 +96,8 @@ local function rows(content, sig)
     table.insert(fs, f)
   end
   local fsis = {}
+  local pallet_offsets = {}
+  local pallet_offset = 0
   for i = 1, h.total_field_count do
     local fsi = field_storage_info:read(cur)
     local f = fs[i]
@@ -116,7 +118,10 @@ local function rows(content, sig)
       error('unsupported storage type ' .. fsi.storage_type)
     end
     table.insert(fsis, fsi)
+    table.insert(pallet_offsets, pallet_offset)
+    pallet_offset = pallet_offset + fsi.additional_data_size
   end
+  assert(pallet_offset == h.pallet_data_size)
   local palletpos = cur.pos
   local pos = cur.pos + h.pallet_data_size + h.common_data_size
   for _, sh in ipairs(shs) do
@@ -148,7 +153,7 @@ local function rows(content, sig)
             local boffset = fsi.field_offset_bits - fs[k].position * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
             local vv = bit.band(v, mask)
-            t[k] = u4(content, palletpos + vv * 4)
+            t[k] = u4(content, palletpos + pallet_offsets[k] + vv * 4)
           else
             error('internal error')
           end
