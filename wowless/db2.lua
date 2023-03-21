@@ -70,7 +70,7 @@ local function rows(content, sig)
   local tsig = {}
   for i = 2, sig:len() - 1 do
     local c = sig:sub(i, i)
-    assert(c == 's' or c == 'u')
+    assert(c == 's' or c == 'u' or c == 'i')
     table.insert(tsig, c)
   end
   local cur = vstruct.cursor(content)
@@ -149,10 +149,10 @@ local function rows(content, sig)
           if fsi.storage_type == 0 then
             -- TODO strings are only correct in simple cases; see the WDC2 docs
             t[k] = c == 's' and z(content, foffset + v) or v
-          elseif fsi.storage_type == 1 then
+          elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
             local boffset = fsi.field_offset_bits - fs[k].position * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
-            t[k] = bit.band(v, mask)
+            t[k] = bit.rshift(bit.band(v, mask), boffset)
           elseif fsi.storage_type == 3 then
             local boffset = fsi.field_offset_bits - fs[k].position * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
