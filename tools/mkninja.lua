@@ -54,7 +54,7 @@ for _, p in ipairs(productList) do
   perProductAddonGeneratedFiles[p] = pp
 end
 
-local elune = 'vendor/elune/build/linux/bin/Release/lua5.1'
+local elune = 'build/elune/lua/lua5.1'
 
 local pools = {
   fetch_pool = 1,
@@ -84,9 +84,6 @@ local rules = {
   },
   mkaddon = {
     command = 'lua tools/gentest.lua -f $type -p $product',
-  },
-  mkelune = {
-    command = 'cd vendor/elune && rm -rf build && cmake --preset linux && cmake --build --preset linux',
   },
   mklistfile = {
     command = 'lua tools/listfile.lua',
@@ -143,14 +140,9 @@ local builds = {
     rule = 'phony',
   },
   {
-    ins = { 'tools/addons.yaml', 'tools/mkninja.lua' },
+    ins = { 'tools/addons.yaml', 'tools/mkninja.lua', 'vendor/elune/CMakeLists.txt' },
     outs = 'build.ninja',
     rule = 'mkninja',
-  },
-  {
-    ins = find('vendor/elune -not -path \'vendor/elune/build/*\''),
-    outs_implicit = elune,
-    rule = 'mkelune',
   },
   {
     ins = find('vendor/dbdefs/definitions'),
@@ -519,8 +511,19 @@ for _, b in ipairs(builds) do
   end
 end
 table.insert(out, 'default test.out')
+table.insert(out, 'subninja build/elune/build.ninja')
 
 local f = io.open('build.ninja', 'w')
 f:write(table.concat(out, '\n'))
 f:write('\n')
 f:close()
+
+os.execute([[
+  cmake \
+  -S vendor/elune \
+  -B build/elune \
+  -G Ninja \
+  -DCMAKE_C_FLAGS="-DNDEBUG -D_GNU_SOURCE -O3 -flto" \
+  -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/elune/ \
+  > /dev/null \
+]])
