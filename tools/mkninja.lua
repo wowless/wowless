@@ -64,12 +64,16 @@ local pools = {
 local rules = {
   dbdata = {
     command = 'lua tools/sqlite.lua -f $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   dblist = {
     command = 'lua tools/dblist.lua $product',
   },
   dbschema = {
     command = 'lua tools/sqlite.lua $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   downloadrelease = {
     command = 'sh bin/downloadaddon.sh $owner $repo $tag $out',
@@ -143,11 +147,6 @@ local builds = {
     ins = { 'tools/addons.yaml', 'tools/mkninja.lua', 'vendor/elune/CMakeLists.txt' },
     outs = 'build.ninja',
     rule = 'mkninja',
-  },
-  {
-    ins = find('vendor/dbdefs/definitions'),
-    outs = 'build/dbdefs.stamp',
-    rule = 'stamp',
   },
   {
     ins = find('data/impl'),
@@ -343,11 +342,10 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins_implicit = {
       dblist,
-      'build/dbdefs.stamp',
       'data/products/' .. p .. '/build.yaml',
       'tools/sqlite.lua',
     },
-    outs_implicit = schemadb,
+    outs = schemadb,
     rule = 'dbschema',
   })
   table.insert(builds, {
@@ -355,11 +353,10 @@ for _, p in ipairs(productList) do
     ins_implicit = {
       dblist,
       fetchStamp,
-      'build/dbdefs.stamp',
       'data/products/' .. p .. '/build.yaml',
       'tools/sqlite.lua',
     },
-    outs_implicit = datadb,
+    outs = datadb,
     rule = 'dbdata',
   })
   table.insert(runtimes, datalua)

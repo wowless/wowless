@@ -110,8 +110,16 @@ local args = (function()
   parser:flag('-f --full', 'also include data')
   return parser:parse()
 end)()
+
 local filebase = args.full and 'data' or 'schema'
 local filename = ('build/products/%s/%s.db'):format(args.product, filebase)
+
+local depfile = { filename .. ':' }
+for _, db in ipairs(require('build.products.' .. args.product .. '.dblist')) do
+  table.insert(depfile, 'vendor/dbdefs/definitions/' .. db .. '.dbd')
+end
+require('pl.file').write(filename .. '.d', table.concat(depfile, ' \\\n ') .. '\n')
+
 require('pl.file').delete(filename)
 local create, populate = factory(args.product)
 local db = create(filename)
