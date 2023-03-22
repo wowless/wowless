@@ -300,12 +300,6 @@ for _, p in ipairs(productList) do
     outs = fetchStamp,
     rule = 'fetch',
   })
-  local dataStamp = 'build/products/' .. p .. '/data.stamp'
-  table.insert(builds, {
-    ins = find('data/products/' .. p),
-    outs = dataStamp,
-    rule = 'stamp',
-  })
   local runout = 'out/' .. p .. '/log.txt'
   table.insert(runouts, runout)
   local schemadb = 'build/products/' .. p .. '/schema.db'
@@ -377,9 +371,17 @@ for _, p in ipairs(productList) do
       'build/state.stamp',
       'build/uiobjects.stamp',
       'data/impl.yaml',
+      'data/products/' .. p .. '/apis.yaml',
+      'data/products/' .. p .. '/build.yaml',
+      'data/products/' .. p .. '/config.yaml',
+      'data/products/' .. p .. '/cvars.yaml',
+      'data/products/' .. p .. '/events.yaml',
+      'data/products/' .. p .. '/globals.yaml',
+      'data/products/' .. p .. '/structures.yaml',
+      'data/products/' .. p .. '/uiobjects.yaml',
+      'data/products/' .. p .. '/xml.yaml',
       'data/uiobjectimpl.yaml',
       'tools/prep.lua',
-      dataStamp,
     },
     outs_implicit = datalua,
     rule = 'prep',
