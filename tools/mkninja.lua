@@ -404,8 +404,6 @@ table.insert(builds, {
   ins = {
     '.busted',
     'build/runtime.stamp',
-    'data/impl.yaml',
-    'data/uiobjectimpl.yaml',
     addonGeneratedFiles,
     runtimes,
   },
