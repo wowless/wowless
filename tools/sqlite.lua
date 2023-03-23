@@ -114,11 +114,13 @@ end)()
 local filebase = args.full and 'data' or 'schema'
 local filename = ('build/products/%s/%s.db'):format(args.product, filebase)
 
-local depfile = { filename .. ':' }
-for _, db in ipairs(require('build.products.' .. args.product .. '.dblist')) do
-  table.insert(depfile, 'vendor/dbdefs/definitions/' .. db .. '.dbd')
+do
+  local deps = {}
+  for _, db in ipairs(require('build.products.' .. args.product .. '.dblist')) do
+    deps['vendor/dbdefs/definitions/' .. db .. '.dbd'] = true
+  end
+  require('tools.util').writedeps(filename, deps)
 end
-require('pl.file').write(filename .. '.d', table.concat(depfile, ' \\\n ') .. '\n')
 
 require('pl.file').delete(filename)
 local create, populate = factory(args.product)

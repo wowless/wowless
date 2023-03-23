@@ -106,6 +106,8 @@ local rules = {
   },
   prep = {
     command = 'lua tools/prep.lua $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   render = {
     command = 'lua tools/render.lua $in',
@@ -147,11 +149,6 @@ local builds = {
     ins = { 'tools/addons.yaml', 'tools/mkninja.lua', 'vendor/elune/CMakeLists.txt' },
     outs = 'build.ninja',
     rule = 'mkninja',
-  },
-  {
-    ins = find('data/impl'),
-    outs = 'build/impl.stamp',
-    rule = 'stamp',
   },
   {
     ins = {
@@ -363,24 +360,10 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p },
     ins_implicit = {
-      'build/impl.stamp',
-      'build/sql.stamp',
-      'build/state.stamp',
-      'build/uiobjects.stamp',
-      'data/impl.yaml',
-      'data/products/' .. p .. '/apis.yaml',
-      'data/products/' .. p .. '/build.yaml',
-      'data/products/' .. p .. '/config.yaml',
-      'data/products/' .. p .. '/cvars.yaml',
-      'data/products/' .. p .. '/events.yaml',
-      'data/products/' .. p .. '/globals.yaml',
-      'data/products/' .. p .. '/structures.yaml',
-      'data/products/' .. p .. '/uiobjects.yaml',
-      'data/products/' .. p .. '/xml.yaml',
-      'data/uiobjectimpl.yaml',
       'tools/prep.lua',
+      'tools/util.lua',
     },
-    outs_implicit = datalua,
+    outs = datalua,
     rule = 'prep',
   })
   table.insert(builds, {

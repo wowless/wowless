@@ -5,11 +5,16 @@ local args = (function()
 end)()
 
 local product = args.product
-local function parseYaml(...)
-  return (assert(require('wowapi.yaml').parseFile(...)))
+
+local deps = {} -- accumulated during runtime
+
+local function parseYaml(f)
+  deps[f] = true
+  return (assert(require('wowapi.yaml').parseFile(f)))
 end
-local function readFile(...)
-  return (assert(require('pl.file').read(...)))
+local function readFile(f)
+  deps[f] = true
+  return (assert(require('pl.file').read(f)))
 end
 local plprettywrite = require('pl.pretty').write
 local Mixin = require('wowless.util').mixin
@@ -238,5 +243,8 @@ local data = {
   uiobjects = uiobjects,
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
 }
-local txt = 'return ' .. plprettywrite(data)
-assert(require('pl.file').write('build/products/' .. args.product .. '/data.lua', txt))
+
+local outfn = 'build/products/' .. args.product .. '/data.lua'
+local tu = require('tools.util')
+tu.writedeps(outfn, deps)
+tu.writeifchanged(outfn, tu.returntable(data))
