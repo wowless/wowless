@@ -166,19 +166,7 @@ local builds = {
     rule = 'stamp',
   },
   {
-    ins = find('data/state'),
-    outs = 'build/state.stamp',
-    rule = 'stamp',
-  },
-  {
-    ins = find('data/uiobjects'),
-    outs = 'build/uiobjects.stamp',
-    rule = 'stamp',
-  },
-  {
     ins = {
-      'build/state.stamp',
-      'build/uiobjects.stamp',
       (function()
         local skip = {
           ['tools/mkninja.lua'] = true,
