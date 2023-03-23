@@ -103,6 +103,11 @@ local apis = {}
 local impls = {}
 local sqlcursors = {}
 local sqllookups = {}
+local states = {
+  -- These are unreferenced by any API, alas.
+  Bindings = parseYaml('data/state/Bindings.yaml').value,
+  ModifiedClicks = parseYaml('data/state/ModifiedClicks.yaml').value,
+}
 do
   local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
   local implcfg = parseYaml('data/impl.yaml')
@@ -136,6 +141,12 @@ do
           }
         end
       end
+      for _, state in ipairs(apicfg.states or {}) do
+        if not states[state] then
+          local statecfg = parseYaml('data/state/' .. state .. '.yaml')
+          states[state] = statecfg.value
+        end
+      end
       apis[name] = apicfg
     end
   end
@@ -160,12 +171,6 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
       return 'return ' .. table.concat(t, ',')
     end)(),
   }
-end
-
-local state = {}
-for _, f in ipairs(require('pl.dir').getfiles('data/state')) do
-  local cfg = parseYaml(f)
-  state[cfg.name] = cfg.value
 end
 
 local uiobjectdata = parseYaml('data/products/' .. product .. '/uiobjects.yaml')
@@ -239,7 +244,7 @@ local data = {
   impls = impls,
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
-  state = state,
+  states = states,
   uiobjects = uiobjects,
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
 }
