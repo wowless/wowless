@@ -69,6 +69,8 @@ local rules = {
   },
   dblist = {
     command = 'lua tools/dblist.lua $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   dbschema = {
     command = 'lua tools/sqlite.lua $product',
@@ -158,11 +160,6 @@ local builds = {
       'wowless/ext.so',
     },
     outs = 'build/runtime.stamp',
-    rule = 'stamp',
-  },
-  {
-    ins = find('data/sql'),
-    outs = 'build/sql.stamp',
     rule = 'stamp',
   },
   {
@@ -261,10 +258,7 @@ for _, p in ipairs(productList) do
       product = p,
       restat = 1,
     },
-    ins = {
-      'build/sql.stamp',
-      'data/products/' .. p .. '/apis.yaml',
-      'data/impl.yaml',
+    ins_implicit = {
       'tools/dblist.lua',
       'tools/util.lua',
     },

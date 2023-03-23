@@ -4,7 +4,17 @@ local args = (function()
   return parser:parse()
 end)()
 
-local parseYaml = require('wowapi.yaml').parseFile
+local deps = {}
+
+local function parseYaml(f)
+  deps[f] = true
+  return (require('wowapi.yaml').parseFile(f))
+end
+
+local function readFile(f)
+  deps[f] = true
+  return (assert(require('pl.file').read(f)))
+end
 
 local function dblist(product)
   local dbset = {
@@ -28,7 +38,7 @@ local function dblist(product)
   end
   for _, sql in ipairs(sqls) do
     -- We are fortunate that sqlite complains about missing tables first.
-    local sqltext = assert(require('pl.file').read('data/sql/' .. sql .. '.sql'))
+    local sqltext = readFile('data/sql/' .. sql .. '.sql')
     local db = require('lsqlite3').open_memory()
     while not db:prepare(sqltext) do
       local t = db:errmsg():match('^no such table: (%a+)$')
@@ -49,5 +59,7 @@ local function dblist(product)
 end
 
 local u = require('tools.util')
-local out = 'build/products/' .. args.product .. '/dblist.lua'
-u.writeifchanged(out, u.returntable(dblist(args.product)))
+local outfn = 'build/products/' .. args.product .. '/dblist.lua'
+local out = dblist(args.product)
+u.writedeps(outfn, deps)
+u.writeifchanged(outfn, u.returntable(out))
