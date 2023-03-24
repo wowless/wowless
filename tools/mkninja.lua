@@ -54,7 +54,7 @@ for _, p in ipairs(productList) do
   perProductAddonGeneratedFiles[p] = pp
 end
 
-local elune = 'vendor/elune/build/linux/bin/Release/lua5.1'
+local elune = 'build/elune/lua/lua5.1'
 
 local pools = {
   fetch_pool = 1,
@@ -64,12 +64,18 @@ local pools = {
 local rules = {
   dbdata = {
     command = 'lua tools/sqlite.lua -f $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   dblist = {
     command = 'lua tools/dblist.lua $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   dbschema = {
     command = 'lua tools/sqlite.lua $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   downloadrelease = {
     command = 'sh bin/downloadaddon.sh $owner $repo $tag $out',
@@ -84,9 +90,6 @@ local rules = {
   },
   mkaddon = {
     command = 'lua tools/gentest.lua -f $type -p $product',
-  },
-  mkelune = {
-    command = 'cd vendor/elune && rm -rf build && cmake --preset linux && cmake --build --preset linux',
   },
   mklistfile = {
     command = 'lua tools/listfile.lua',
@@ -105,6 +108,8 @@ local rules = {
   },
   prep = {
     command = 'lua tools/prep.lua $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   render = {
     command = 'lua tools/render.lua $in',
@@ -143,24 +148,9 @@ local builds = {
     rule = 'phony',
   },
   {
-    ins = { 'tools/addons.yaml', 'tools/mkninja.lua' },
+    ins = { 'tools/addons.yaml', 'tools/mkninja.lua', 'vendor/elune/CMakeLists.txt' },
     outs = 'build.ninja',
     rule = 'mkninja',
-  },
-  {
-    ins = find('vendor/elune -not -path \'vendor/elune/build/*\''),
-    outs_implicit = elune,
-    rule = 'mkelune',
-  },
-  {
-    ins = find('vendor/dbdefs/definitions'),
-    outs = 'build/dbdefs.stamp',
-    rule = 'stamp',
-  },
-  {
-    ins = find('data/impl'),
-    outs = 'build/impl.stamp',
-    rule = 'stamp',
   },
   {
     ins = {
@@ -173,33 +163,8 @@ local builds = {
     rule = 'stamp',
   },
   {
-    ins = find('data/sql'),
-    outs = 'build/sql.stamp',
-    rule = 'stamp',
-  },
-  {
-    ins = find('data/state'),
-    outs = 'build/state.stamp',
-    rule = 'stamp',
-  },
-  {
-    ins = find('data/uiobjects'),
-    outs = 'build/uiobjects.stamp',
-    rule = 'stamp',
-  },
-  {
     ins = {
-      'build/state.stamp',
-      'build/uiobjects.stamp',
       (function()
-        local skip = {
-          ['tools/mkninja.lua'] = true,
-          ['wowless/ext.o'] = true,
-          ['wowless/ext.so'] = true,
-        }
-        for _, k in ipairs(addonGeneratedFiles) do
-          skip[k] = true
-        end
         local globaldirs = {
           'addon',
           'data/schemas',
@@ -210,9 +175,7 @@ local builds = {
         }
         local t = {}
         for _, k in ipairs(find(table.concat(globaldirs, ' '))) do
-          if not skip[k] then
-            table.insert(t, k)
-          end
+          table.insert(t, k)
         end
         return t
       end)(),
@@ -285,10 +248,7 @@ for _, p in ipairs(productList) do
       product = p,
       restat = 1,
     },
-    ins = {
-      'build/sql.stamp',
-      'data/products/' .. p .. '/apis.yaml',
-      'data/impl.yaml',
+    ins_implicit = {
       'tools/dblist.lua',
       'tools/util.lua',
     },
@@ -307,12 +267,6 @@ for _, p in ipairs(productList) do
     },
     outs = fetchStamp,
     rule = 'fetch',
-  })
-  local dataStamp = 'build/products/' .. p .. '/data.stamp'
-  table.insert(builds, {
-    ins = find('data/products/' .. p),
-    outs = dataStamp,
-    rule = 'stamp',
   })
   local runout = 'out/' .. p .. '/log.txt'
   table.insert(runouts, runout)
@@ -357,11 +311,10 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins_implicit = {
       dblist,
-      'build/dbdefs.stamp',
       'data/products/' .. p .. '/build.yaml',
       'tools/sqlite.lua',
     },
-    outs_implicit = schemadb,
+    outs = schemadb,
     rule = 'dbschema',
   })
   table.insert(builds, {
@@ -369,27 +322,20 @@ for _, p in ipairs(productList) do
     ins_implicit = {
       dblist,
       fetchStamp,
-      'build/dbdefs.stamp',
       'data/products/' .. p .. '/build.yaml',
       'tools/sqlite.lua',
     },
-    outs_implicit = datadb,
+    outs = datadb,
     rule = 'dbdata',
   })
   table.insert(runtimes, datalua)
   table.insert(builds, {
     args = { product = p },
     ins_implicit = {
-      'build/impl.stamp',
-      'build/sql.stamp',
-      'build/state.stamp',
-      'build/uiobjects.stamp',
-      'data/impl.yaml',
-      'data/uiobjectimpl.yaml',
       'tools/prep.lua',
-      dataStamp,
+      'tools/util.lua',
     },
-    outs_implicit = datalua,
+    outs = datalua,
     rule = 'prep',
   })
   table.insert(builds, {
@@ -442,8 +388,6 @@ table.insert(builds, {
   ins = {
     '.busted',
     'build/runtime.stamp',
-    'data/impl.yaml',
-    'data/uiobjectimpl.yaml',
     addonGeneratedFiles,
     runtimes,
   },
@@ -519,8 +463,19 @@ for _, b in ipairs(builds) do
   end
 end
 table.insert(out, 'default test.out')
+table.insert(out, 'subninja build/elune/build.ninja')
 
 local f = io.open('build.ninja', 'w')
 f:write(table.concat(out, '\n'))
 f:write('\n')
 f:close()
+
+os.execute([[
+  cmake \
+  -S vendor/elune \
+  -B build/elune \
+  -G Ninja \
+  -DCMAKE_C_FLAGS="-DNDEBUG -D_GNU_SOURCE -O3 -flto" \
+  -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/elune/ \
+  > /dev/null \
+]])

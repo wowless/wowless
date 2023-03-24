@@ -300,7 +300,7 @@ local function new(log, maxErrors, product)
     return allEventRegistrations:has(frame) or eventRegistrations[event:upper()]:has(frame)
   end
 
-  for k, v in pairs(datalua.state) do
+  for k, v in pairs(datalua.states) do
     states[k] = require('pl.tablex').deepcopy(v)
   end
   seterrorhandler(ErrorHandler)
