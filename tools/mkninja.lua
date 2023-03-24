@@ -157,7 +157,6 @@ local builds = {
       elune,
       'build/flavors.lua',
       'build/wowless.stamp',
-      'wowless/ext.so',
     },
     outs = 'build/runtime.stamp',
     rule = 'stamp',
@@ -165,14 +164,6 @@ local builds = {
   {
     ins = {
       (function()
-        local skip = {
-          ['tools/mkninja.lua'] = true,
-          ['wowless/ext.o'] = true,
-          ['wowless/ext.so'] = true,
-        }
-        for _, k in ipairs(addonGeneratedFiles) do
-          skip[k] = true
-        end
         local globaldirs = {
           'addon',
           'data/schemas',
@@ -183,9 +174,7 @@ local builds = {
         }
         local t = {}
         for _, k in ipairs(find(table.concat(globaldirs, ' '))) do
-          if not skip[k] then
-            table.insert(t, k)
-          end
+          table.insert(t, k)
         end
         return t
       end)(),
