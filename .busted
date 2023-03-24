@@ -2,7 +2,7 @@ return {
   _all = {
     ['auto-insulate'] = false,
     ['defer-print'] = true,
-    lua = 'build/elune/lua/lua5.1',
+    lua = 'build/cmake/vendor/elune/lua/lua5.1',
     verbose = true,
   },
 }

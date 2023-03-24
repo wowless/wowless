@@ -54,7 +54,7 @@ for _, p in ipairs(productList) do
   perProductAddonGeneratedFiles[p] = pp
 end
 
-local elune = 'build/elune/lua/lua5.1'
+local elune = 'build/cmake/vendor/elune/lua/lua5.1'
 
 local pools = {
   fetch_pool = 1,
@@ -102,9 +102,6 @@ local rules = {
   },
   mktestout = {
     command = 'bash -c "set -o pipefail && busted 2>&1 | tee $out"',
-  },
-  mkwowlessext = {
-    command = 'luarocks build --no-install',
   },
   prep = {
     command = 'lua tools/prep.lua $product',
@@ -155,9 +152,9 @@ local builds = {
   {
     ins = {
       elune,
+      'build/cmake/ext.so',
       'build/flavors.lua',
       'build/wowless.stamp',
-      'wowless/ext.so',
     },
     outs = 'build/runtime.stamp',
     rule = 'stamp',
@@ -182,11 +179,6 @@ local builds = {
     },
     outs = 'build/wowless.stamp',
     rule = 'stamp',
-  },
-  {
-    ins = { 'wowless-scm-0.rockspec', 'wowless/ext.c' },
-    outs_implicit = { 'wowless/ext.o', 'wowless/ext.so' },
-    rule = 'mkwowlessext',
   },
   {
     args = {
@@ -463,7 +455,7 @@ for _, b in ipairs(builds) do
   end
 end
 table.insert(out, 'default test.out')
-table.insert(out, 'subninja build/elune/build.ninja')
+table.insert(out, 'subninja build/cmake/build.ninja')
 
 local f = io.open('build.ninja', 'w')
 f:write(table.concat(out, '\n'))
@@ -472,10 +464,8 @@ f:close()
 
 os.execute([[
   cmake \
-  -S vendor/elune \
-  -B build/elune \
+  -B build/cmake \
   -G Ninja \
-  -DCMAKE_C_FLAGS="-DNDEBUG -D_GNU_SOURCE -O3 -flto" \
-  -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/elune/ \
+  -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/cmake/ \
   > /dev/null \
 ]])

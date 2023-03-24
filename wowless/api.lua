@@ -1,4 +1,4 @@
-local traceback = require('wowless.ext').traceback
+local traceback = require('build.cmake.ext').traceback
 local hlist = require('wowless.hlist')
 
 local function new(log, maxErrors, product)
