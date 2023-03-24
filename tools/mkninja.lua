@@ -157,6 +157,7 @@ local builds = {
       elune,
       'build/flavors.lua',
       'build/wowless.stamp',
+      'wowless/ext.so',
     },
     outs = 'build/runtime.stamp',
     rule = 'stamp',
