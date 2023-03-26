@@ -145,7 +145,12 @@ local builds = {
     rule = 'phony',
   },
   {
-    ins = { 'tools/addons.yaml', 'tools/mkninja.lua', 'vendor/elune/CMakeLists.txt' },
+    ins = {
+      'CMakeLists.txt',
+      'tools/addons.yaml',
+      'tools/mkninja.lua',
+      'vendor/elune/CMakeLists.txt',
+    },
     outs = 'build.ninja',
     rule = 'mkninja',
   },
