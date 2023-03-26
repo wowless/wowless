@@ -9,7 +9,15 @@ local function find(spec)
   return t
 end
 
-local productList = require('wowless.util').productList()
+-- TODO deduplicate with wowless.util
+local productList = {
+  'wow',
+  'wow_classic',
+  'wow_classic_era',
+  'wow_classic_era_ptr',
+  'wow_classic_ptr',
+  'wowt',
+}
 
 -- TODO get this from gentest.lua
 local perProductAddonGeneratedTypes = {
@@ -150,6 +158,7 @@ local builds = {
       'tools/addons.yaml',
       'tools/mkninja.lua',
       'vendor/elune/CMakeLists.txt',
+      'wowapi/yaml.lua',
     },
     outs = 'build.ninja',
     rule = 'mkninja',
