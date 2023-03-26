@@ -471,6 +471,7 @@ os.execute([[
   cmake \
   -B build/cmake \
   -G Ninja \
+  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
   -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/cmake/ \
   > /dev/null \
 ]])
