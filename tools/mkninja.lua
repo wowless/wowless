@@ -336,7 +336,10 @@ for _, p in ipairs(productList) do
   })
   table.insert(runtimes, datalua)
   table.insert(builds, {
-    args = { product = p },
+    args = {
+      product = p,
+      restat = 1,
+    },
     ins_implicit = {
       'tools/prep.lua',
       'tools/util.lua',
