@@ -19,11 +19,5 @@ RUN apt-get update \
         ruby \
         tar \
         unzip \
-        zip \
-    && pip install git+https://github.com/luarocks/hererocks cmake pre-commit \
-    && hererocks -l 5.1 -r 3.8.0 /usr/local \
-    && git config --system --add safe.directory '*'
+        zip
 COPY --from=stylua-builder /opt/stylua /usr/local
-WORKDIR /wowless
-COPY wowless-scm-0.rockspec .
-RUN luarocks build --deps-only

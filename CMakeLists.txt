@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.24)
 project(wowless)
 add_compile_options(-D_GNU_SOURCE -DNDEBUG -flto -O3)
+set(LUA_ROOT env)
 add_subdirectory(vendor/elune)
 add_library(ext MODULE wowless/ext.c)
 set_target_properties(ext PROPERTIES PREFIX "")

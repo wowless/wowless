@@ -3,6 +3,7 @@
 /build/
 /build.ninja
 /cache
+/env/
 /extracts
 /luacov.*
 /out/
