@@ -1,15 +1,12 @@
-local function find(spec)
-  local f = io.popen('find ' .. spec .. ' -type f')
-  local deps = f:read('*a')
-  f:close()
-  local t = {}
-  for k in deps:gmatch('[^\n]+') do
-    table.insert(t, k)
-  end
-  return t
-end
-
-local productList = require('wowless.util').productList()
+-- TODO deduplicate with wowless.util
+local productList = {
+  'wow',
+  'wow_classic',
+  'wow_classic_era',
+  'wow_classic_era_ptr',
+  'wow_classic_ptr',
+  'wowt',
+}
 
 -- TODO get this from gentest.lua
 local perProductAddonGeneratedTypes = {
@@ -54,7 +51,7 @@ for _, p in ipairs(productList) do
   perProductAddonGeneratedFiles[p] = pp
 end
 
-local elune = 'vendor/elune/build/linux/bin/Release/lua5.1'
+local elune = 'build/cmake/vendor/elune/lua/lua5.1'
 
 local pools = {
   fetch_pool = 1,
@@ -64,12 +61,18 @@ local pools = {
 local rules = {
   dbdata = {
     command = 'lua tools/sqlite.lua -f $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   dblist = {
     command = 'lua tools/dblist.lua $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   dbschema = {
     command = 'lua tools/sqlite.lua $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   downloadrelease = {
     command = 'sh bin/downloadaddon.sh $owner $repo $tag $out',
@@ -85,9 +88,6 @@ local rules = {
   mkaddon = {
     command = 'lua tools/gentest.lua -f $type -p $product',
   },
-  mkelune = {
-    command = 'cd vendor/elune && rm -rf build && cmake --preset linux && cmake --build --preset linux',
-  },
   mklistfile = {
     command = 'lua tools/listfile.lua',
   },
@@ -100,11 +100,10 @@ local rules = {
   mktestout = {
     command = 'bash -c "set -o pipefail && busted 2>&1 | tee $out"',
   },
-  mkwowlessext = {
-    command = 'luarocks build --no-install',
-  },
   prep = {
     command = 'lua tools/prep.lua $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   render = {
     command = 'lua tools/render.lua $in',
@@ -143,87 +142,125 @@ local builds = {
     rule = 'phony',
   },
   {
-    ins = { 'tools/addons.yaml', 'tools/mkninja.lua' },
+    ins = {
+      'CMakeLists.txt',
+      'tools/addons.yaml',
+      'tools/mkninja.lua',
+      'vendor/elune/CMakeLists.txt',
+      'wowapi/yaml.lua',
+    },
     outs = 'build.ninja',
     rule = 'mkninja',
   },
   {
-    ins = find('vendor/elune -not -path \'vendor/elune/build/*\''),
-    outs_implicit = elune,
-    rule = 'mkelune',
-  },
-  {
-    ins = find('vendor/dbdefs/definitions'),
-    outs = 'build/dbdefs.stamp',
-    rule = 'stamp',
-  },
-  {
-    ins = find('data/impl'),
-    outs = 'build/impl.stamp',
-    rule = 'stamp',
-  },
-  {
     ins = {
       elune,
+      'build/cmake/ext.so',
       'build/flavors.lua',
       'build/wowless.stamp',
-      'wowless/ext.so',
     },
     outs = 'build/runtime.stamp',
     rule = 'stamp',
   },
   {
-    ins = find('data/sql'),
-    outs = 'build/sql.stamp',
-    rule = 'stamp',
-  },
-  {
-    ins = find('data/state'),
-    outs = 'build/state.stamp',
-    rule = 'stamp',
-  },
-  {
-    ins = find('data/uiobjects'),
-    outs = 'build/uiobjects.stamp',
-    rule = 'stamp',
-  },
-  {
+    -- Someday this shouldn't need to be explicit.
+    -- However, today is not that day.
     ins = {
-      'build/state.stamp',
-      'build/uiobjects.stamp',
-      (function()
-        local skip = {
-          ['tools/mkninja.lua'] = true,
-          ['wowless/ext.o'] = true,
-          ['wowless/ext.so'] = true,
-        }
-        for _, k in ipairs(addonGeneratedFiles) do
-          skip[k] = true
-        end
-        local globaldirs = {
-          'addon',
-          'data/schemas',
-          'spec',
-          'tools',
-          'wowapi',
-          'wowless',
-        }
-        local t = {}
-        for _, k in ipairs(find(table.concat(globaldirs, ' '))) do
-          if not skip[k] then
-            table.insert(t, k)
-          end
-        end
-        return t
-      end)(),
+      'addon/Wowless/api.lua',
+      'addon/Wowless/evenmoreintrinsic.xml',
+      'addon/Wowless/framework.lua',
+      'addon/Wowless/generated.lua',
+      'addon/Wowless/init.lua',
+      'addon/Wowless/test.lua',
+      'addon/Wowless/test.xml',
+      'addon/Wowless/util.lua',
+      'addon/Wowless/Wowless.toc',
+      'addon/WowlessTracker/tracker.lua',
+      'addon/WowlessTracker/WowlessTracker.toc',
+      'data/schemas/addons.yaml',
+      'data/schemas/any.yaml',
+      'data/schemas/apis.yaml',
+      'data/schemas/build.yaml',
+      'data/schemas/config.yaml',
+      'data/schemas/cvars.yaml',
+      'data/schemas/docs.yaml',
+      'data/schemas/events.yaml',
+      'data/schemas/flavors.yaml',
+      'data/schemas/globals.yaml',
+      'data/schemas/impl.yaml',
+      'data/schemas/schema.yaml',
+      'data/schemas/schematype.yaml',
+      'data/schemas/state.yaml',
+      'data/schemas/structures.yaml',
+      'data/schemas/type.yaml',
+      'data/schemas/uiobjectimpl.yaml',
+      'data/schemas/uiobjects.yaml',
+      'data/schemas/xml.yaml',
+      'spec/addon/framework_spec.lua',
+      'spec/addon/util_spec.lua',
+      'spec/data/apis_spec.lua',
+      'spec/data/config_spec.lua',
+      'spec/data/impl_spec.lua',
+      'spec/data/impl/C_DateAndTime.AdjustTimeByDays_spec.lua',
+      'spec/data/impl/C_DateAndTime.AdjustTimeByMinutes_spec.lua',
+      'spec/data/impl/C_DateAndTime.CompareCalendarTime_spec.lua',
+      'spec/data/impl/EnumerateFrames_spec.lua',
+      'spec/data/impl/hooksecurefunc_spec.lua',
+      'spec/data/structures_spec.lua',
+      'spec/data/uiobjectimpl_spec.lua',
+      'spec/data/uiobjects_spec.lua',
+      'spec/data/yaml_spec.lua',
+      'spec/elune_spec.lua',
+      'spec/wowapi/schema_spec.lua',
+      'spec/wowapi/yaml_spec.lua',
+      'spec/wowless/addon_spec.lua',
+      'spec/wowless/blp_spec.lua',
+      'spec/wowless/frame_spec.lua',
+      'spec/wowless/green.png',
+      'spec/wowless/hlist_spec.lua',
+      'spec/wowless/png_spec.lua',
+      'spec/wowless/temp.blp',
+      'spec/wowless/temp.png',
+      'spec/wowless/util_spec.lua',
+      'tools/addons.yaml',
+      'tools/bump.lua',
+      'tools/bumpaddons.lua',
+      'tools/dblist.lua',
+      'tools/docs.lua',
+      'tools/errsv.lua',
+      'tools/fetch.lua',
+      'tools/gentest.lua',
+      'tools/listfile.lua',
+      'tools/mkninja.lua',
+      'tools/precov.lua',
+      'tools/prep.lua',
+      'tools/proto.lua',
+      'tools/render.lua',
+      'tools/rewrite.lua',
+      'tools/sqlite.lua',
+      'tools/tactkeys.lua',
+      'tools/util.lua',
+      'tools/yaml2lua.lua',
+      'tools/yamlfmt.lua',
+      'wowapi/data.lua',
+      'wowapi/loader.lua',
+      'wowapi/schema.lua',
+      'wowapi/uiobjects.lua',
+      'wowapi/yaml.lua',
+      'wowless/api.lua',
+      'wowless/blp.lua',
+      'wowless/env.lua',
+      'wowless/ext.c',
+      'wowless/hlist.lua',
+      'wowless/loader.lua',
+      'wowless/png.lua',
+      'wowless/render.lua',
+      'wowless/runner.lua',
+      'wowless/util.lua',
+      'wowless/xml.lua',
     },
     outs = 'build/wowless.stamp',
     rule = 'stamp',
-  },
-  {
-    ins = { 'wowless-scm-0.rockspec', 'wowless/ext.c' },
-    outs_implicit = { 'wowless/ext.o', 'wowless/ext.so' },
-    rule = 'mkwowlessext',
   },
   {
     args = {
@@ -285,10 +322,7 @@ for _, p in ipairs(productList) do
       product = p,
       restat = 1,
     },
-    ins = {
-      'build/sql.stamp',
-      'data/products/' .. p .. '/apis.yaml',
-      'data/impl.yaml',
+    ins_implicit = {
       'tools/dblist.lua',
       'tools/util.lua',
     },
@@ -307,12 +341,6 @@ for _, p in ipairs(productList) do
     },
     outs = fetchStamp,
     rule = 'fetch',
-  })
-  local dataStamp = 'build/products/' .. p .. '/data.stamp'
-  table.insert(builds, {
-    ins = find('data/products/' .. p),
-    outs = dataStamp,
-    rule = 'stamp',
   })
   local runout = 'out/' .. p .. '/log.txt'
   table.insert(runouts, runout)
@@ -357,11 +385,10 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins_implicit = {
       dblist,
-      'build/dbdefs.stamp',
       'data/products/' .. p .. '/build.yaml',
       'tools/sqlite.lua',
     },
-    outs_implicit = schemadb,
+    outs = schemadb,
     rule = 'dbschema',
   })
   table.insert(builds, {
@@ -369,27 +396,23 @@ for _, p in ipairs(productList) do
     ins_implicit = {
       dblist,
       fetchStamp,
-      'build/dbdefs.stamp',
       'data/products/' .. p .. '/build.yaml',
       'tools/sqlite.lua',
     },
-    outs_implicit = datadb,
+    outs = datadb,
     rule = 'dbdata',
   })
   table.insert(runtimes, datalua)
   table.insert(builds, {
-    args = { product = p },
-    ins_implicit = {
-      'build/impl.stamp',
-      'build/sql.stamp',
-      'build/state.stamp',
-      'build/uiobjects.stamp',
-      'data/impl.yaml',
-      'data/uiobjectimpl.yaml',
-      'tools/prep.lua',
-      dataStamp,
+    args = {
+      product = p,
+      restat = 1,
     },
-    outs_implicit = datalua,
+    ins_implicit = {
+      'tools/prep.lua',
+      'tools/util.lua',
+    },
+    outs = datalua,
     rule = 'prep',
   })
   table.insert(builds, {
@@ -442,8 +465,6 @@ table.insert(builds, {
   ins = {
     '.busted',
     'build/runtime.stamp',
-    'data/impl.yaml',
-    'data/uiobjectimpl.yaml',
     addonGeneratedFiles,
     runtimes,
   },
@@ -519,8 +540,18 @@ for _, b in ipairs(builds) do
   end
 end
 table.insert(out, 'default test.out')
+table.insert(out, 'subninja build/cmake/build.ninja')
 
 local f = io.open('build.ninja', 'w')
 f:write(table.concat(out, '\n'))
 f:write('\n')
 f:close()
+
+os.execute([[
+  cmake \
+  -B build/cmake \
+  -G Ninja \
+  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+  -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/cmake/ \
+  > /dev/null \
+]])

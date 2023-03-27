@@ -31,6 +31,12 @@ repos:
     - --shell=bash
 - repo: local
   hooks:
+  - id: yamlfmt
+    name: wowless yamlfmt
+    entry: lua tools/yamlfmt.lua
+    language: system
+    types: [yaml]
+    files: ^data/
   - id: luacheck
     name: luacheck
     entry: luacheck

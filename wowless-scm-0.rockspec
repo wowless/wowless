@@ -28,7 +28,5 @@ dependencies = {
 }
 build = {
   type = 'builtin',
-  modules = {
-    ['wowless.ext'] = 'wowless/ext.c',
-  },
+  modules = {},
 }
