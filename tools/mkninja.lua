@@ -1,14 +1,3 @@
-local function find(spec)
-  local f = io.popen('find ' .. spec .. ' -type f')
-  local deps = f:read('*a')
-  f:close()
-  local t = {}
-  for k in deps:gmatch('[^\n]+') do
-    table.insert(t, k)
-  end
-  return t
-end
-
 -- TODO deduplicate with wowless.util
 local productList = {
   'wow',
@@ -174,22 +163,101 @@ local builds = {
     rule = 'stamp',
   },
   {
+    -- Someday this shouldn't need to be explicit.
+    -- However, today is not that day.
     ins = {
-      (function()
-        local globaldirs = {
-          'addon',
-          'data/schemas',
-          'spec',
-          'tools',
-          'wowapi',
-          'wowless',
-        }
-        local t = {}
-        for _, k in ipairs(find(table.concat(globaldirs, ' '))) do
-          table.insert(t, k)
-        end
-        return t
-      end)(),
+      'addon/Wowless/api.lua',
+      'addon/Wowless/evenmoreintrinsic.xml',
+      'addon/Wowless/framework.lua',
+      'addon/Wowless/generated.lua',
+      'addon/Wowless/init.lua',
+      'addon/Wowless/test.lua',
+      'addon/Wowless/test.xml',
+      'addon/Wowless/util.lua',
+      'addon/Wowless/Wowless.toc',
+      'addon/WowlessTracker/tracker.lua',
+      'addon/WowlessTracker/WowlessTracker.toc',
+      'data/schemas/addons.yaml',
+      'data/schemas/any.yaml',
+      'data/schemas/apis.yaml',
+      'data/schemas/build.yaml',
+      'data/schemas/config.yaml',
+      'data/schemas/cvars.yaml',
+      'data/schemas/docs.yaml',
+      'data/schemas/events.yaml',
+      'data/schemas/flavors.yaml',
+      'data/schemas/globals.yaml',
+      'data/schemas/impl.yaml',
+      'data/schemas/schema.yaml',
+      'data/schemas/schematype.yaml',
+      'data/schemas/state.yaml',
+      'data/schemas/structures.yaml',
+      'data/schemas/type.yaml',
+      'data/schemas/uiobjectimpl.yaml',
+      'data/schemas/uiobjects.yaml',
+      'data/schemas/xml.yaml',
+      'spec/addon/framework_spec.lua',
+      'spec/addon/util_spec.lua',
+      'spec/data/apis_spec.lua',
+      'spec/data/config_spec.lua',
+      'spec/data/impl_spec.lua',
+      'spec/data/impl/C_DateAndTime.AdjustTimeByDays_spec.lua',
+      'spec/data/impl/C_DateAndTime.AdjustTimeByMinutes_spec.lua',
+      'spec/data/impl/C_DateAndTime.CompareCalendarTime_spec.lua',
+      'spec/data/impl/EnumerateFrames_spec.lua',
+      'spec/data/impl/hooksecurefunc_spec.lua',
+      'spec/data/structures_spec.lua',
+      'spec/data/uiobjectimpl_spec.lua',
+      'spec/data/uiobjects_spec.lua',
+      'spec/data/yaml_spec.lua',
+      'spec/elune_spec.lua',
+      'spec/wowapi/schema_spec.lua',
+      'spec/wowapi/yaml_spec.lua',
+      'spec/wowless/addon_spec.lua',
+      'spec/wowless/blp_spec.lua',
+      'spec/wowless/frame_spec.lua',
+      'spec/wowless/green.png',
+      'spec/wowless/hlist_spec.lua',
+      'spec/wowless/png_spec.lua',
+      'spec/wowless/temp.blp',
+      'spec/wowless/temp.png',
+      'spec/wowless/util_spec.lua',
+      'tools/addons.yaml',
+      'tools/bump.lua',
+      'tools/bumpaddons.lua',
+      'tools/dblist.lua',
+      'tools/docs.lua',
+      'tools/errsv.lua',
+      'tools/fetch.lua',
+      'tools/gentest.lua',
+      'tools/listfile.lua',
+      'tools/mkninja.lua',
+      'tools/precov.lua',
+      'tools/prep.lua',
+      'tools/proto.lua',
+      'tools/render.lua',
+      'tools/rewrite.lua',
+      'tools/sqlite.lua',
+      'tools/tactkeys.lua',
+      'tools/util.lua',
+      'tools/yaml2lua.lua',
+      'tools/yamlfmt.lua',
+      'wowapi/data.lua',
+      'wowapi/loader.lua',
+      'wowapi/schema.lua',
+      'wowapi/uiobjects.lua',
+      'wowapi/yaml.lua',
+      'wowless/api.lua',
+      'wowless/blp.lua',
+      'wowless/env.lua',
+      'wowless/ext.c',
+      'wowless/hlist.lua',
+      'wowless/loader.lua',
+      'wowless/png.lua',
+      'wowless/render.lua',
+      'wowless/runner.lua',
+      'wowless/util.lua',
+      'wowless/xml.lua',
     },
     outs = 'build/wowless.stamp',
     rule = 'stamp',
