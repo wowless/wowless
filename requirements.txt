@@ -1,0 +1,2 @@
+cmake==3.26.1
+hererocks==0.25.1

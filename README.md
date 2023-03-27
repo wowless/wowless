@@ -9,14 +9,32 @@ Discord at <https://discord.gg/rTwWcfJXuz>.
 
 Development is currently only supported via VSCode and Docker.
 Use `Clone Repository in Container Volume...`, select this repository to clone,
-and then watch as VSCode builds a container and installs all necessary dependencies.
+and then watch as VSCode builds a container and installs necessary dependencies.
+
+Completing setup requires a few more commands, from inside the container:
+
+```sh
+git submodule update --init --depth 1
+python3 -m venv env
+source env/bin/activate
+python3 -m pip install -r requirements.txt
+hererocks -l 5.1.5 -r 3.8.0 env
+luarocks build --only-deps
+lua tools/mkninja.lua
+```
+
+Once that's done, the edit-compile-debug cycle is as simple as:
+
+```sh
+ninja
+```
+
+The above build remaining dependencies and runs unit tests.
 
 Running on WoW client Lua/XML code requires some additional steps.
 From inside the container:
 
 ```sh
-git submodule update --init --depth 1
-lua tools/mkninja.lua
 bin/run.sh wow
 ```
 
