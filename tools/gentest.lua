@@ -8,15 +8,6 @@ local function mapify(t)
   end
 end
 
-local function stylua(s)
-  local fn = os.tmpname()
-  require('pl.file').write(fn, s)
-  os.execute('stylua ' .. fn)
-  local ret = require('pl.file').read(fn)
-  os.remove(fn)
-  return ret
-end
-
 local function perproduct(p, f)
   return (require('wowapi.yaml').parseFile(('data/products/%s/%s.yaml'):format(p, f)))
 end
@@ -167,8 +158,7 @@ local filemap = (function()
   end)()
   local function style(ss)
     -- workaround elune issue with formatting %d
-    ss = ss:gsub('DeprecatedCurrencyFlag = [-0-9]+', 'DeprecatedCurrencyFlag = 2147483648')
-    return stylua(ss)
+    return ss:gsub('DeprecatedCurrencyFlag = [-0-9]+', 'DeprecatedCurrencyFlag = 2147483648')
   end
   for k in pairs(files) do
     if ptablemap[k] then
