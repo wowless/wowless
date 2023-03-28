@@ -11,9 +11,9 @@ repos:
   hooks:
   - id: editorconfig-checker
 - repo: https://github.com/JohnnyMorganz/StyLua
-  rev: v0.12.1
+  rev: v0.17.0
   hooks:
-  - id: stylua-system
+  - id: stylua-github
 - repo: https://github.com/Lucas-C/pre-commit-hooks
   rev: v1.1.13
   hooks:
