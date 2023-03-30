@@ -33,13 +33,13 @@ repos:
   hooks:
   - id: yamlfmt
     name: wowless yamlfmt
-    entry: lua tools/yamlfmt.lua
+    entry: env/bin/lua tools/yamlfmt.lua
     language: system
     types: [yaml]
     files: ^data/
   - id: luacheck
     name: luacheck
-    entry: luacheck
+    entry: env/bin/luacheck
     language: system
     types: [lua]
   - id: addon-chmod
@@ -49,7 +49,7 @@ repos:
     files: ^addon/
   - id: local-test
     name: build and test
-    entry: sh -c "lua tools/mkninja.lua && ninja"
+    entry: sh -c "env/bin/lua tools/mkninja.lua && ninja"
     language: system
     pass_filenames: false
 - repo: meta

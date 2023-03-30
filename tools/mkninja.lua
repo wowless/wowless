@@ -60,17 +60,17 @@ local pools = {
 
 local rules = {
   dbdata = {
-    command = 'lua tools/sqlite.lua -f $product',
+    command = 'env/bin/lua tools/sqlite.lua -f $product',
     depfile = '$out.d',
     deps = 'gcc',
   },
   dblist = {
-    command = 'lua tools/dblist.lua $product',
+    command = 'env/bin/lua tools/dblist.lua $product',
     depfile = '$out.d',
     deps = 'gcc',
   },
   dbschema = {
-    command = 'lua tools/sqlite.lua $product',
+    command = 'env/bin/lua tools/sqlite.lua $product',
     depfile = '$out.d',
     deps = 'gcc',
   },
@@ -78,7 +78,7 @@ local rules = {
     command = 'sh bin/downloadaddon.sh $owner $repo $tag $out',
   },
   fetch = {
-    command = 'lua tools/fetch.lua $product && touch $out',
+    command = 'env/bin/lua tools/fetch.lua $product && touch $out',
     pool = 'fetch_pool',
   },
   frame0 = {
@@ -86,27 +86,27 @@ local rules = {
     pool = 'run_pool',
   },
   mkaddon = {
-    command = 'lua tools/gentest.lua -f $type -p $product',
+    command = 'env/bin/lua tools/gentest.lua -f $type -p $product',
   },
   mklistfile = {
-    command = 'lua tools/listfile.lua',
+    command = 'env/bin/lua tools/listfile.lua',
   },
   mkninja = {
-    command = 'lua tools/mkninja.lua',
+    command = 'env/bin/lua tools/mkninja.lua',
   },
   mktactkeys = {
-    command = 'lua tools/tactkeys.lua',
+    command = 'env/bin/lua tools/tactkeys.lua',
   },
   mktestout = {
-    command = 'bash -c "set -o pipefail && busted 2>&1 | tee $out"',
+    command = 'bash -c "set -o pipefail && env/bin/busted 2>&1 | tee $out"',
   },
   prep = {
-    command = 'lua tools/prep.lua $product',
+    command = 'env/bin/lua tools/prep.lua $product',
     depfile = '$out.d',
     deps = 'gcc',
   },
   render = {
-    command = 'lua tools/render.lua $in',
+    command = 'env/bin/lua tools/render.lua $in',
     pool = 'fetch_pool',
   },
   run = {
@@ -121,7 +121,7 @@ local rules = {
     command = 'touch $out',
   },
   yaml2lua = {
-    command = 'lua tools/yaml2lua.lua $in > $out',
+    command = 'env/bin/lua tools/yaml2lua.lua $in > $out',
   },
 }
 
@@ -548,7 +548,7 @@ f:write('\n')
 f:close()
 
 os.execute([[
-  cmake \
+  env/bin/cmake \
   -B build/cmake \
   -G Ninja \
   -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
