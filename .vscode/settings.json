@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        ".busted": "lua",
+        ".luacheckrc": "lua"
+    }
+}
