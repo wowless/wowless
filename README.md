@@ -14,13 +14,7 @@ and then watch as VSCode builds a container and installs necessary dependencies.
 Completing setup requires a few more commands, from inside the container:
 
 ```sh
-git submodule update --init --depth 1
-python3 -m venv env
-source env/bin/activate
-python3 -m pip install -r requirements.txt
-hererocks -l 5.1.5 -r 3.8.0 env
-luarocks build --only-deps
-lua tools/mkninja.lua
+bin/bootstrap.sh
 ```
 
 Once that's done, the edit-compile-debug cycle is as simple as:
