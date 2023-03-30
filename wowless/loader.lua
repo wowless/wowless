@@ -690,7 +690,7 @@ local function loader(api, cfg)
   api.states.CVars.portal = build.ptr and 'test' or ''
 
   local sqlitedb = (function()
-    local dbfile = ('build/products/%s/%s.db'):format(product, rootDir and 'data' or 'schema')
+    local dbfile = ('build/products/%s/%s.sqlite3'):format(product, rootDir and 'data' or 'schema')
     return require('lsqlite3').open(dbfile)
   end)()
 

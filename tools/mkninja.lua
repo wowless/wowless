@@ -344,8 +344,8 @@ for _, p in ipairs(productList) do
   })
   local runout = 'out/' .. p .. '/log.txt'
   table.insert(runouts, runout)
-  local schemadb = 'build/products/' .. p .. '/schema.db'
-  local datadb = 'build/products/' .. p .. '/data.db'
+  local schemadb = 'build/products/' .. p .. '/schema.sqlite3'
+  local datadb = 'build/products/' .. p .. '/data.sqlite3'
   local datalua = 'build/products/' .. p .. '/data.lua'
   table.insert(runtimes, schemadb)
   local rundeps = {

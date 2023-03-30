@@ -112,7 +112,7 @@ local args = (function()
 end)()
 
 local filebase = args.full and 'data' or 'schema'
-local filename = ('build/products/%s/%s.db'):format(args.product, filebase)
+local filename = ('build/products/%s/%s.sqlite3'):format(args.product, filebase)
 
 do
   local deps = {}
