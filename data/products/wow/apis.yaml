@@ -3339,7 +3339,7 @@ C_ChallengeMode.GetDungeonScoreRarityColor:
   - name: scoreColor
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_ChallengeMode.GetGuildLeaders:
   inputs:
   - {}
@@ -3356,7 +3356,7 @@ C_ChallengeMode.GetKeystoneLevelRarityColor:
   - name: levelScore
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_ChallengeMode.GetMapScoreInfo:
   inputs:
   - {}
@@ -3424,7 +3424,7 @@ C_ChallengeMode.GetSpecificDungeonOverallScoreRarityColor:
   - name: specificDungeonOverallScoreColor
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_ChallengeMode.GetSpecificDungeonScoreRarityColor:
   inputs:
   - - name: specificDungeonScore
@@ -3433,7 +3433,7 @@ C_ChallengeMode.GetSpecificDungeonScoreRarityColor:
   - name: specificDungeonScoreColor
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_ChallengeMode.HasSlottedKeystone:
   inputs:
   - {}
@@ -3504,6 +3504,13 @@ C_ChatBubbles.GetAllChatBubbles:
   - name: chatBubbles
     type:
       arrayof: table
+C_ChatInfo.CanPlayerSpeakLanguage:
+  inputs:
+  - - name: languageId
+      type: number
+  outputs:
+  - name: canSpeakLanguage
+    type: boolean
 C_ChatInfo.GetChannelInfoFromIdentifier:
   inputs:
   - - name: channelIdentifier
@@ -3557,6 +3564,27 @@ C_ChatInfo.GetChannelShortcutForChannelID:
       type: number
   outputs:
   - name: shortcut
+    type: string
+C_ChatInfo.GetChatLineSenderGUID:
+  inputs:
+  - - name: chatLine
+      type: number
+  outputs:
+  - name: guid
+    type: string
+C_ChatInfo.GetChatLineSenderName:
+  inputs:
+  - - name: chatLine
+      type: number
+  outputs:
+  - name: name
+    type: string
+C_ChatInfo.GetChatLineText:
+  inputs:
+  - - name: chatLine
+      type: number
+  outputs:
+  - name: text
     type: string
 C_ChatInfo.GetChatTypeName:
   inputs:
@@ -3633,6 +3661,13 @@ C_ChatInfo.IsChannelRegionalForChannelID:
   outputs:
   - name: isRegional
     type: boolean
+C_ChatInfo.IsChatLineCensored:
+  inputs:
+  - - name: chatLine
+      type: number
+  outputs:
+  - name: isCensored
+    type: boolean
 C_ChatInfo.IsPartyChannelType:
   inputs:
   - - name: channelType
@@ -3675,6 +3710,11 @@ C_ChatInfo.ReplaceIconAndGroupExpressions:
   outputs:
   - name: output
     type: string
+C_ChatInfo.RequestCanLocalWhisperTarget:
+  inputs:
+  - - name: whisperTarget
+      type: string
+  outputs: {}
 C_ChatInfo.ResetDefaultZoneChannels:
   inputs:
   - {}
@@ -3716,6 +3756,11 @@ C_ChatInfo.SwapChatChannelsByChannelIndex:
     - name: secondChannelIndex
       type: number
   outputs: {}
+C_ChatInfo.UncensorChatLine:
+  inputs:
+  - - name: chatLine
+      type: number
+  outputs: {}
 C_ChromieTime.CloseUI:
   inputs:
   - {}
@@ -3750,7 +3795,7 @@ C_ClassColor.GetClassColor:
   - name: classColor
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_ClassTalents.CanChangeTalents:
   inputs:
   - {}
@@ -5199,7 +5244,7 @@ C_Commentator.ExitInstance:
 C_Commentator.FindSpectatedUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: playerIndex
     type: number
@@ -5258,7 +5303,7 @@ C_Commentator.GetAdditionalCameraWeight:
 C_Commentator.GetAdditionalCameraWeightByToken:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: weight
     type: number
@@ -5487,7 +5532,7 @@ C_Commentator.GetPlayerAuraInfo:
 C_Commentator.GetPlayerAuraInfoByUnit:
   inputs:
   - - name: token
-      type: string
+      type: unit
     - name: spellID
       type: number
   outputs:
@@ -5515,7 +5560,7 @@ C_Commentator.GetPlayerCooldownInfo:
 C_Commentator.GetPlayerCooldownInfoByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: spellID
       type: number
   outputs:
@@ -5541,7 +5586,7 @@ C_Commentator.GetPlayerCrowdControlInfo:
 C_Commentator.GetPlayerCrowdControlInfoByUnit:
   inputs:
   - - name: token
-      type: string
+      type: unit
   outputs:
   - name: spellID
     type: number
@@ -5572,7 +5617,7 @@ C_Commentator.GetPlayerFlagInfo:
 C_Commentator.GetPlayerFlagInfoByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: hasFlag
     type: boolean
@@ -5603,7 +5648,7 @@ C_Commentator.GetPlayerSpellCharges:
 C_Commentator.GetPlayerSpellChargesByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: spellID
       type: number
   outputs:
@@ -5656,16 +5701,16 @@ C_Commentator.GetTeamColor:
   - name: color
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_Commentator.GetTeamColorByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: color
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_Commentator.GetTimeLeftInMatch:
   inputs:
   - {}
@@ -5697,7 +5742,7 @@ C_Commentator.GetTrackedSpells:
 C_Commentator.GetTrackedSpellsByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: category
       type:
         enum: TrackedSpellCategory
@@ -5709,7 +5754,7 @@ C_Commentator.GetTrackedSpellsByUnit:
 C_Commentator.GetUnitData:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: data
     type:
@@ -5730,7 +5775,7 @@ C_Commentator.GetWargameInfo:
 C_Commentator.HasTrackedAuras:
   inputs:
   - - name: token
-      type: string
+      type: unit
   outputs:
   - name: hasOffensiveAura
     type: boolean
@@ -5779,7 +5824,7 @@ C_Commentator.IsTrackedSpell:
 C_Commentator.IsTrackedSpellByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: spellID
       type: number
     - name: category
@@ -5851,7 +5896,7 @@ C_Commentator.SetAdditionalCameraWeight:
 C_Commentator.SetAdditionalCameraWeightByToken:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: weight
       type: number
   outputs: {}
@@ -6129,7 +6174,7 @@ C_Console.GetColorFromType:
   - name: color
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_Console.GetFontHeight:
   inputs:
   - {}
@@ -6146,17 +6191,54 @@ C_Console.SetFontHeight:
   - - name: fontHeightInPixels
       type: number
   outputs: {}
+C_ConsoleScriptCollection.GetCollectionDataByID:
+  inputs:
+  - - name: collectionID
+      type: number
+  outputs:
+  - name: data
+    nilable: true
+    type:
+      structure: C_ConsoleScriptCollection.ConsoleScriptCollectionData
+C_ConsoleScriptCollection.GetCollectionDataByTag:
+  inputs:
+  - - name: collectionTag
+      type: string
+  outputs:
+  - name: data
+    nilable: true
+    type:
+      structure: C_ConsoleScriptCollection.ConsoleScriptCollectionData
+C_ConsoleScriptCollection.GetElements:
+  inputs:
+  - - name: collectionID
+      type: number
+  outputs:
+  - name: elementIDs
+    type:
+      arrayof:
+        structure: C_ConsoleScriptCollection.ConsoleScriptCollectionElementData
+C_ConsoleScriptCollection.GetScriptData:
+  inputs:
+  - - name: consoleScriptID
+      type: number
+  outputs:
+  - name: data
+    type:
+      structure: C_ConsoleScriptCollection.ConsoleScriptData
 C_Container.ContainerIDToInventoryID:
   inputs:
   - - name: containerID
-      type: number
+      type:
+        enum: BagIndex
   outputs:
   - name: inventoryID
     type: number
 C_Container.ContainerRefundItemPurchase:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - default: false
@@ -6172,14 +6254,16 @@ C_Container.GetBackpackAutosortDisabled:
 C_Container.GetBagName:
   inputs:
   - - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
   outputs:
   - name: name
     type: string
 C_Container.GetBagSlotFlag:
   inputs:
   - - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: flag
       type:
         enum: BagSlotFlags
@@ -6195,7 +6279,8 @@ C_Container.GetBankAutosortDisabled:
 C_Container.GetContainerFreeSlots:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
   outputs:
   - name: freeSlots
     type:
@@ -6203,7 +6288,8 @@ C_Container.GetContainerFreeSlots:
 C_Container.GetContainerItemCooldown:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6216,7 +6302,8 @@ C_Container.GetContainerItemCooldown:
 C_Container.GetContainerItemDurability:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6227,7 +6314,8 @@ C_Container.GetContainerItemDurability:
 C_Container.GetContainerItemEquipmentSetInfo:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6238,7 +6326,8 @@ C_Container.GetContainerItemEquipmentSetInfo:
 C_Container.GetContainerItemID:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6247,7 +6336,8 @@ C_Container.GetContainerItemID:
 C_Container.GetContainerItemInfo:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6257,7 +6347,8 @@ C_Container.GetContainerItemInfo:
 C_Container.GetContainerItemLink:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6266,7 +6357,8 @@ C_Container.GetContainerItemLink:
 C_Container.GetContainerItemPurchaseCurrency:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - name: itemIndex
@@ -6280,7 +6372,8 @@ C_Container.GetContainerItemPurchaseCurrency:
 C_Container.GetContainerItemPurchaseInfo:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - name: isEquipped
@@ -6292,7 +6385,8 @@ C_Container.GetContainerItemPurchaseInfo:
 C_Container.GetContainerItemPurchaseItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - name: itemIndex
@@ -6306,7 +6400,8 @@ C_Container.GetContainerItemPurchaseItem:
 C_Container.GetContainerItemQuestInfo:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6316,7 +6411,8 @@ C_Container.GetContainerItemQuestInfo:
 C_Container.GetContainerNumFreeSlots:
   inputs:
   - - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
   outputs:
   - name: numFreeSlots
     type: number
@@ -6326,7 +6422,8 @@ C_Container.GetContainerNumFreeSlots:
 C_Container.GetContainerNumSlots:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
   outputs:
   - name: numSlots
     type: number
@@ -6362,7 +6459,8 @@ C_Container.GetSortBagsRightToLeft:
 C_Container.IsBattlePayItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6371,14 +6469,16 @@ C_Container.IsBattlePayItem:
 C_Container.IsContainerFiltered:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
   outputs:
   - name: isFiltered
     type: boolean
 C_Container.PickupContainerItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs: {}
@@ -6399,12 +6499,14 @@ C_Container.SetBagPortraitTexture:
   - - name: texture
       type: table
     - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
   outputs: {}
 C_Container.SetBagSlotFlag:
   inputs:
   - - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: flag
       type:
         enum: BagSlotFlags
@@ -6434,14 +6536,16 @@ C_Container.SetSortBagsRightToLeft:
 C_Container.ShowContainerSellCursor:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs: {}
 C_Container.SocketContainerItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -6462,7 +6566,8 @@ C_Container.SortReagentBankBags:
 C_Container.SplitContainerItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - name: amount
@@ -6471,12 +6576,13 @@ C_Container.SplitContainerItem:
 C_Container.UseContainerItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - name: unitToken
       nilable: true
-      type: string
+      type: unit
     - default: false
       name: reagentBankOpen
       type: boolean
@@ -8110,7 +8216,7 @@ C_GamePad.GetLedColor:
   - name: color
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 C_GamePad.GetPowerLevel:
   inputs:
   - - name: deviceID
@@ -8137,7 +8243,7 @@ C_GamePad.SetLedColor:
   - - name: color
       type:
         mixin: ColorMixin
-        structure: colorRGBA
+        structure: colorRGB
   outputs: {}
 C_GamePad.SetVibration:
   inputs:
@@ -8856,6 +8962,17 @@ C_GossipInfo.SelectOption:
       nilable: true
       type: boolean
   outputs: {}
+C_GossipInfo.SelectOptionByIndex:
+  inputs:
+  - - name: optionID
+      type: number
+    - name: text
+      nilable: true
+      type: string
+    - name: confirmed
+      nilable: true
+      type: boolean
+  outputs: {}
 C_GuildInfo.CanEditOfficerNote:
   inputs:
   - {}
@@ -8893,7 +9010,7 @@ C_GuildInfo.GetGuildTabardInfo:
   inputs:
   - - name: unit
       nilable: true
-      type: string
+      type: unit
   outputs:
   - name: tabardInfo
     nilable: true
@@ -9108,14 +9225,14 @@ C_HeirloomInfo.SetDefaultFilters:
 C_IncomingSummon.HasIncomingSummon:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: summon
     type: boolean
 C_IncomingSummon.IncomingSummonStatus:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: status
     type:
@@ -10557,7 +10674,7 @@ C_LossOfControl.GetActiveLossOfControlData:
 C_LossOfControl.GetActiveLossOfControlDataByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: index
       type: number
   outputs:
@@ -10574,7 +10691,7 @@ C_LossOfControl.GetActiveLossOfControlDataCount:
 C_LossOfControl.GetActiveLossOfControlDataCountByUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: count
     type: number
@@ -10728,7 +10845,7 @@ C_Map.GetAreaInfo:
 C_Map.GetBestMapForUnit:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: uiMapID
     nilable: true
@@ -10959,7 +11076,7 @@ C_Map.GetPlayerMapPosition:
   - - name: uiMapID
       type: number
     - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: position
     nilable: true
@@ -11924,7 +12041,8 @@ C_NewItems.ClearAll:
 C_NewItems.IsNewItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -11933,7 +12051,8 @@ C_NewItems.IsNewItem:
 C_NewItems.RemoveNewItem:
   inputs:
   - - name: containerIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs: {}
@@ -11970,7 +12089,7 @@ C_PaperDollInfo.GetArmorEffectivenessAgainstTarget:
 C_PaperDollInfo.GetInspectAzeriteItemEmpoweredChoices:
   inputs:
   - - name: unit
-      type: string
+      type: unit
     - name: equipmentSlotIndex
       type: number
   outputs:
@@ -11980,7 +12099,7 @@ C_PaperDollInfo.GetInspectAzeriteItemEmpoweredChoices:
 C_PaperDollInfo.GetInspectItemLevel:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: equippedItemLevel
     type: number
@@ -12001,7 +12120,7 @@ C_PaperDollInfo.GetMinItemLevel:
 C_PaperDollInfo.GetStaggerPercentage:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: stagger
     type: number
@@ -12593,6 +12712,15 @@ C_PetJournal.GetNumPets:
     type: number
   - name: numOwned
     type: number
+C_PetJournal.GetNumPetsInJournal:
+  inputs:
+  - - name: creatureID
+      type: number
+  outputs:
+  - name: maxAllowed
+    type: number
+  - name: numPets
+    type: number
 C_PetJournal.GetNumPetsNeedingFanfare:
   outputs:
   - type: number
@@ -12864,7 +12992,7 @@ C_PlayerInfo.GetClass:
 C_PlayerInfo.GetContentDifficultyCreatureForPlayer:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: difficulty
     type:
@@ -12923,7 +13051,7 @@ C_PlayerInfo.GetPlayerCharacterData:
 C_PlayerInfo.GetPlayerMythicPlusRatingSummary:
   inputs:
   - - name: playerToken
-      type: string
+      type: unit
   outputs:
   - name: ratingSummary
     type:
@@ -13049,6 +13177,9 @@ C_PlayerInteractionManager.InteractUnit:
       type: string
     - default: false
       name: exactMatch
+      type: boolean
+    - default: true
+      name: looseTargeting
       type: boolean
   outputs:
   - name: success
@@ -13189,6 +13320,13 @@ C_ProfSpecs.GetEntryIDForPerk:
   outputs:
   - name: entryID
     type: number
+C_ProfSpecs.GetNewSpecReminderProfName:
+  inputs:
+  - {}
+  outputs:
+  - name: profName
+    nilable: true
+    type: string
 C_ProfSpecs.GetPerksForPath:
   inputs:
   - - name: pathID
@@ -13424,7 +13562,7 @@ C_PvP.GetActiveMatchWinner:
 C_PvP.GetArenaCrowdControlInfo:
   inputs:
   - - name: playerToken
-      type: string
+      type: unit
   outputs:
   - name: spellID
     type: number
@@ -13469,6 +13607,14 @@ C_PvP.GetArenaSkirmishRewards:
     type:
       arrayof:
         structure: C_PvP.BattlefieldCurrencyReward
+C_PvP.GetAssignedSpecForBattlefieldQueue:
+  inputs:
+  - - name: queueID
+      type: number
+  outputs:
+  - name: specializationID
+    nilable: true
+    type: number
 C_PvP.GetAvailableBrawlInfo:
   inputs:
   - {}
@@ -13983,7 +14129,7 @@ C_PvP.JoinBrawl:
 C_PvP.RequestCrowdControlSpell:
   inputs:
   - - name: playerToken
-      type: string
+      type: unit
   outputs: {}
 C_PvP.SetWarModeDesired:
   inputs:
@@ -14001,7 +14147,7 @@ C_QuestItemUse.CanUseQuestItemOnObject:
         mixin: ItemLocationMixin
         structure: ItemLocation
     - name: unit
-      type: string
+      type: unit
     - name: checkRange
       nilable: true
       type: boolean
@@ -14567,7 +14713,7 @@ C_QuestLog.IsThreatQuest:
 C_QuestLog.IsUnitOnQuest:
   inputs:
   - - name: unit
-      type: string
+      type: unit
     - name: questID
       type: number
   outputs:
@@ -14663,15 +14809,15 @@ C_QuestLog.SortQuestWatches:
 C_QuestLog.UnitIsRelatedToActiveQuest:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: isRelatedToActiveQuest
     type: boolean
-C_QuestOffer.GetHideRequiredItemsOnTurnIn:
+C_QuestOffer.GetHideRequiredItems:
   inputs:
   - {}
   outputs:
-  - name: hideRequiredItemsOnTurnIn
+  - name: hideRequiredItems
     type: boolean
 C_QuestOffer.GetQuestOfferMajorFactionReputationRewards:
   inputs:
@@ -14790,7 +14936,10 @@ C_RecruitAFriend.ClaimActivityReward:
     type: boolean
 C_RecruitAFriend.ClaimNextReward:
   inputs:
-  - {}
+  - - name: rafVersion
+      nilable: true
+      type:
+        enum: RecruitAFriendRewardsVersion
   outputs:
   - name: success
     type: boolean
@@ -15107,96 +15256,6 @@ C_SharedCharacterServices.QueryClassTrialBoostResult: {}
 C_SharedCharacterServices.SetCharacterUpgradePopupSeen: {}
 C_SharedCharacterServices.SetExpansionTrialPopupSeen: {}
 C_SharedCharacterServices.SetPromotionalPopupSeen: {}
-C_Social.GetLastAchievement:
-  inputs:
-  - {}
-  outputs:
-  - name: achievementID
-    type: number
-  - name: achievementName
-    type: string
-  - name: achievementDesc
-    type: string
-  - name: iconFileID
-    type: number
-C_Social.GetLastItem:
-  inputs:
-  - {}
-  outputs:
-  - name: itemID
-    type: number
-  - name: itemName
-    type: string
-  - name: iconFileID
-    type: number
-  - name: itemQuality
-    type: number
-  - name: itemLevel
-    type: number
-  - name: itemLinkString
-    type: string
-C_Social.GetLastScreenshotIndex:
-  inputs:
-  - {}
-  outputs:
-  - name: screenShotIndex
-    type: number
-C_Social.GetMaxTweetLength:
-  inputs:
-  - {}
-  outputs:
-  - name: maxTweetLength
-    type: number
-C_Social.GetScreenshotInfoByIndex:
-  inputs:
-  - - name: index
-      type: number
-  outputs:
-  - name: screenWidth
-    type: number
-  - name: screenHeight
-    type: number
-C_Social.GetTweetLength:
-  inputs:
-  - - name: tweetText
-      type: string
-  outputs:
-  - name: tweetLength
-    type: number
-C_Social.IsSocialEnabled:
-  inputs:
-  - {}
-  outputs:
-  - name: isEnabled
-    type: boolean
-C_Social.RegisterSocialBrowser: {}
-C_Social.SetTextureToScreenshot: {}
-C_Social.TwitterCheckStatus:
-  inputs:
-  - {}
-  outputs: {}
-C_Social.TwitterConnect:
-  inputs:
-  - {}
-  outputs: {}
-C_Social.TwitterDisconnect:
-  inputs:
-  - {}
-  outputs: {}
-C_Social.TwitterGetMSTillCanPost:
-  inputs:
-  - {}
-  outputs:
-  - name: msTimeLeft
-    type: number
-C_Social.TwitterPostAchievement: {}
-C_Social.TwitterPostItem: {}
-C_Social.TwitterPostMessage:
-  inputs:
-  - - name: message
-      type: string
-  outputs: {}
-C_Social.TwitterPostScreenshot: {}
 C_SocialQueue.GetAllGroups:
   inputs:
   - - default: false
@@ -15672,7 +15731,7 @@ C_SpecializationInfo.GetAllSelectedPvpTalentIDs:
 C_SpecializationInfo.GetInspectSelectedPvpTalent:
   inputs:
   - - name: inspectedUnit
-      type: string
+      type: unit
     - name: talentIndex
       type: number
   outputs:
@@ -15927,6 +15986,7 @@ C_StoreSecure.GetCurrencyID: {}
 C_StoreSecure.GetEligibleRacesForVASService: {}
 C_StoreSecure.GetEntryInfo: {}
 C_StoreSecure.GetFailureInfo: {}
+C_StoreSecure.GetLastProductListResponseError: {}
 C_StoreSecure.GetProductGroupInfo: {}
 C_StoreSecure.GetProductGroups:
   outputs:
@@ -16222,6 +16282,11 @@ C_TaxiMap.ShouldMapShowTaxiNodes:
   outputs:
   - name: shouldShowNodes
     type: boolean
+C_Texture.ClearTitleIconTexture:
+  inputs:
+  - - name: texture
+      type: table
+  outputs: {}
 C_Texture.GetAtlasInfo:
   impl: C_Texture.GetAtlasInfo
   inputs:
@@ -16246,6 +16311,36 @@ C_Texture.GetFilenameFromFileDataID:
   outputs:
   - name: filename
     type: string
+C_Texture.GetTitleIconTexture:
+  inputs:
+  - - name: titleID
+      type: string
+    - name: version
+      type:
+        enum: TitleIconVersion
+    - name: callback
+      type: function
+  outputs: {}
+C_Texture.IsTitleIconTextureReady:
+  inputs:
+  - - name: titleID
+      type: string
+    - name: version
+      type:
+        enum: TitleIconVersion
+  outputs:
+  - name: ready
+    type: boolean
+C_Texture.SetTitleIconTexture:
+  inputs:
+  - - name: texture
+      type: table
+    - name: titleID
+      type: string
+    - name: version
+      type:
+        enum: TitleIconVersion
+  outputs: {}
 C_Timer.After:
   impl: C_Timer.After
   inputs:
@@ -16378,7 +16473,8 @@ C_TooltipInfo.GetBackpackToken:
 C_TooltipInfo.GetBagItem:
   inputs:
   - - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
   outputs:
@@ -16388,7 +16484,8 @@ C_TooltipInfo.GetBagItem:
 C_TooltipInfo.GetBagItemChild:
   inputs:
   - - name: bagIndex
-      type: number
+      type:
+        enum: BagIndex
     - name: slotIndex
       type: number
     - name: equipSlotIndex
@@ -16528,7 +16625,7 @@ C_TooltipInfo.GetInstanceLockEncountersComplete:
 C_TooltipInfo.GetInventoryItem:
   inputs:
   - - name: unit
-      type: string
+      type: unit
     - name: slot
       type: number
     - name: hideUselessStats
@@ -17051,7 +17148,7 @@ C_TooltipInfo.GetTransmogrifyItem:
 C_TooltipInfo.GetUnit:
   inputs:
   - - name: unit
-      type: string
+      type: unit
     - name: hideStatus
       nilable: true
       type: boolean
@@ -17062,7 +17159,7 @@ C_TooltipInfo.GetUnit:
 C_TooltipInfo.GetUnitAura:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: index
       type: number
     - name: filter
@@ -17075,7 +17172,7 @@ C_TooltipInfo.GetUnitAura:
 C_TooltipInfo.GetUnitBuff:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: index
       type: number
     - name: filter
@@ -17101,7 +17198,7 @@ C_TooltipInfo.GetUnitBuffByAuraInstanceID:
 C_TooltipInfo.GetUnitDebuff:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: index
       type: number
     - name: filter
@@ -18226,6 +18323,13 @@ C_Traits.GetTraitDescription:
   outputs:
   - name: description
     type: string
+C_Traits.GetTraitSystemFlags:
+  inputs:
+  - - name: configID
+      type: number
+  outputs:
+  - name: flags
+    type: number
 C_Traits.GetTraitSystemWidgetSetID:
   inputs:
   - - name: configID
@@ -18278,6 +18382,12 @@ C_Traits.HasValidInspectData:
   - {}
   outputs:
   - name: hasValidInspectData
+    type: boolean
+C_Traits.IsReadyForCommit:
+  inputs:
+  - {}
+  outputs:
+  - name: isReadyForCommit
     type: boolean
 C_Traits.PurchaseRank:
   inputs:
@@ -18834,7 +18944,8 @@ C_TransmogCollection.GetInspectItemTransmogInfoList:
   outputs:
   - name: list
     type:
-      arrayof: table
+      arrayof:
+        structure: ItemTransmogInfo
 C_TransmogCollection.GetIsAppearanceFavorite:
   inputs:
   - - name: itemAppearanceID
@@ -18858,7 +18969,8 @@ C_TransmogCollection.GetItemTransmogInfoListFromOutfitHyperlink:
   outputs:
   - name: list
     type:
-      arrayof: table
+      arrayof:
+        structure: ItemTransmogInfo
 C_TransmogCollection.GetLatestAppearance:
   inputs:
   - {}
@@ -18885,7 +18997,8 @@ C_TransmogCollection.GetOutfitHyperlinkFromItemTransmogInfoList:
   inputs:
   - - name: itemTransmogInfoList
       type:
-        arrayof: table
+        arrayof:
+          structure: ItemTransmogInfo
   outputs:
   - name: hyperlink
     type: string
@@ -18905,7 +19018,8 @@ C_TransmogCollection.GetOutfitItemTransmogInfoList:
   outputs:
   - name: list
     type:
-      arrayof: table
+      arrayof:
+        structure: ItemTransmogInfo
 C_TransmogCollection.GetOutfits:
   inputs:
   - {}
@@ -19018,7 +19132,8 @@ C_TransmogCollection.ModifyOutfit:
       type: number
     - name: itemTransmogInfoList
       type:
-        arrayof: table
+        arrayof:
+          structure: ItemTransmogInfo
   outputs: {}
 C_TransmogCollection.NewOutfit:
   inputs:
@@ -19028,7 +19143,8 @@ C_TransmogCollection.NewOutfit:
       type: number
     - name: itemTransmogInfoList
       type:
-        arrayof: table
+        arrayof:
+          structure: ItemTransmogInfo
   outputs:
   - name: outfitID
     nilable: true
@@ -19520,6 +19636,8 @@ C_TTSSettings.ShouldOverrideMessage:
   inputs:
   - - name: language
       type: number
+    - name: messageText
+      type: string
   outputs:
   - name: overrideMessage
     type: boolean
@@ -19867,7 +19985,7 @@ C_UIWidgetManager.SetProcessingUnit:
   inputs:
   - - name: unit
       nilable: true
-      type: string
+      type: unit
   outputs: {}
 C_UIWidgetManager.SetProcessingUnitGuid:
   inputs:
@@ -19980,7 +20098,8 @@ C_VideoOptions.GetGameWindowSizes:
   outputs:
   - name: sizes
     type:
-      arrayof: table
+      arrayof:
+        structure: vector2
 C_VideoOptions.GetGxAdapterInfo:
   inputs:
   - {}
@@ -22136,6 +22255,7 @@ GetCurrentBindingSet:
 GetCurrentCombatTextEventInfo: {}
 GetCurrentEventID: {}
 GetCurrentGlyphNameForSpell: {}
+GetCurrentGraphicsAPI: {}
 GetCurrentGraphicsSetting: {}
 GetCurrentGuildBankTab:
   outputs:
@@ -25189,7 +25309,7 @@ GetUICameraInfo: {}
 GetUnitChargedPowerPoints:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: pointIndices
     type:
@@ -25197,21 +25317,21 @@ GetUnitChargedPowerPoints:
 GetUnitEmpowerHoldAtMaxTime:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: holdAtMaxTime
     type: number
 GetUnitEmpowerMinHoldTime:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: minHoldTime
     type: number
 GetUnitEmpowerStageDuration:
   inputs:
   - - name: unit
-      type: string
+      type: unit
     - name: index
       type: number
   outputs:
@@ -25226,7 +25346,7 @@ GetUnitMaxHealthModifier:
 GetUnitPowerBarInfo:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: info
     type:
@@ -25242,7 +25362,7 @@ GetUnitPowerBarInfoByID:
 GetUnitPowerBarStrings:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: name
     nilable: true
@@ -25270,7 +25390,7 @@ GetUnitPowerBarStringsByID:
 GetUnitPowerBarTextureInfo:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - name: textureIndex
       type: number
     - name: timerIndex
@@ -25611,6 +25731,7 @@ IsAddonVersionCheckEnabled:
   - {}
   outputs:
   - type: boolean
+IsAdvancedFlyableArea: {}
 IsAllowedToUserTeleport: {}
 IsAltKeyDown: {}
 IsArenaSkirmish: {}
@@ -25990,7 +26111,7 @@ IsTutorialFlagged: {}
 IsUnitModelReadyForUI:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: isReady
     type: boolean
@@ -26850,7 +26971,7 @@ SetUnitCursorTexture:
   - - name: textureObject
       type: table
     - name: unit
-      type: string
+      type: unit
     - name: style
       nilable: true
       type:
@@ -27264,7 +27385,7 @@ UnitAffectingCombat:
 UnitAlliedRaceInfo:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: isAlliedRace
     type: boolean
@@ -27327,7 +27448,7 @@ UnitChannelInfo:
 UnitChromieTimeID:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: ID
     type: number
@@ -27529,7 +27650,7 @@ UnitInParty:
 UnitInPartyShard:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: inPartyShard
     type: boolean
@@ -27577,7 +27698,7 @@ UnitIsCharmed:
 UnitIsConnected:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: isConnected
     type: boolean
@@ -27649,9 +27770,9 @@ UnitIsOtherPlayersPet:
 UnitIsOwnerOrControllerOfUnit:
   inputs:
   - - name: controllingUnit
-      type: string
+      type: unit
     - name: controlledUnit
-      type: string
+      type: unit
   outputs:
   - name: unitIsOwnerOrControllerOfUnit
     type: boolean
@@ -27729,7 +27850,7 @@ UnitName:
 UnitNameplateShowsWidgetsOnly:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: nameplateShowsWidgetsOnly
     type: boolean
@@ -27747,7 +27868,7 @@ UnitOnTaxi:
 UnitPartialPower:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - default: NumPowerTypes
       name: powerType
       type:
@@ -27769,7 +27890,7 @@ UnitPercentHealthFromGUID:
 UnitPhaseReason:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: reason
     nilable: true
@@ -27801,7 +27922,7 @@ UnitPosition: {}
 UnitPower:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - default: NumPowerTypes
       name: powerType
       type:
@@ -27815,7 +27936,7 @@ UnitPower:
 UnitPowerBarID:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
   outputs:
   - name: barID
     type: number
@@ -27831,7 +27952,7 @@ UnitPowerDisplayMod:
 UnitPowerMax:
   inputs:
   - - name: unitToken
-      type: string
+      type: unit
     - default: NumPowerTypes
       name: powerType
       type:
@@ -27865,7 +27986,7 @@ UnitPowerType:
 UnitPvpClassification:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: classification
     nilable: true
@@ -27879,14 +28000,14 @@ UnitPVPName:
 UnitQuestTrivialLevelRange:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: levelRange
     type: number
 UnitQuestTrivialLevelRangeScaling:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: levelRange
     type: number
@@ -27982,14 +28103,14 @@ UnitTokenFromGUID:
 UnitTreatAsPlayerForDisplay:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: treatAsPlayer
     type: boolean
 UnitTrialBankedLevels:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: bankedLevels
     type: number
@@ -28006,7 +28127,7 @@ UnitWeaponAttackPower: {}
 UnitWidgetSet:
   inputs:
   - - name: unit
-      type: string
+      type: unit
   outputs:
   - name: uiWidgetSet
     type: number

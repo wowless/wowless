@@ -61,7 +61,7 @@ C_AlliedRaces.AlliedRaceInfo:
   bannerColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   crestAtlas:
     type: string
   description:
@@ -165,11 +165,11 @@ C_ArtifactUI.ArtifactArtInfo:
   barConnectedColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   barDisconnectedColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   spellVisualKitID:
     type: number
   textureKit:
@@ -177,7 +177,7 @@ C_ArtifactUI.ArtifactArtInfo:
   titleColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   titleName:
     type: string
   uiModelSceneID:
@@ -377,7 +377,8 @@ C_AuctionHouse.ItemKeyInfo:
   itemName:
     type: string
   quality:
-    type: number
+    type:
+      enum: ItemQuality
 C_AuctionHouse.ItemSearchResultInfo:
   auctionID:
     type: number
@@ -559,7 +560,6 @@ C_BattleNet.BNetGameAccountInfo:
     nilable: true
     type: string
   gameAccountID:
-    nilable: true
     type: number
   hasFocus:
     type: boolean
@@ -1416,6 +1416,31 @@ C_Console.ConsoleCommandInfo:
     type: string
   scriptParameters:
     type: string
+C_ConsoleScriptCollection.ConsoleScriptCollectionData:
+  ID:
+    type: number
+  name:
+    type: string
+C_ConsoleScriptCollection.ConsoleScriptCollectionElementData:
+  collectionID:
+    nilable: true
+    type: number
+  consoleScriptID:
+    nilable: true
+    type: number
+C_ConsoleScriptCollection.ConsoleScriptData:
+  help:
+    type: string
+  ID:
+    type: number
+  isLuaScript:
+    type: boolean
+  name:
+    type: string
+  params:
+    type: string
+  script:
+    type: string
 C_Container.ContainerItemInfo:
   hasLoot:
     type: boolean
@@ -1484,7 +1509,7 @@ C_ContributionCollector.ContributionAppearance:
   stateColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   stateName:
     type: string
   statusBarAtlas:
@@ -1942,7 +1967,7 @@ C_EventToastManager.EventToastInfo:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   displayType:
     type:
       enum: EventToastDisplayType
@@ -2627,6 +2652,7 @@ C_GossipInfo.GossipOptionUIInfo:
   flags:
     type: number
   gossipOptionID:
+    nilable: true
     type: number
   icon:
     type: number
@@ -3479,11 +3505,20 @@ C_PerksActivities.PerksActivitiesTracked:
   trackedIDs:
     type:
       arrayof: number
+C_PerksActivities.PerksActivityCriteria:
+  criteriaID:
+    type: number
+  requiredValue:
+    type: number
 C_PerksActivities.PerksActivityInfo:
   activityName:
     type: string
   completed:
     type: boolean
+  criteriaList:
+    type:
+      arrayof:
+        structure: C_PerksActivities.PerksActivityCriteria
   description:
     type: string
   ID:
@@ -4223,16 +4258,8 @@ C_RecruitAFriend.RafIllusionInfo:
   spellItemEnchantmentID:
     type: number
 C_RecruitAFriend.RafInfo:
-  availableMonths:
-    type: number
   claimInProgress:
     type: boolean
-  lifetimeMonths:
-    type: number
-  nextReward:
-    nilable: true
-    type:
-      structure: C_RecruitAFriend.RafReward
   recruitmentInfo:
     nilable: true
     type:
@@ -4241,10 +4268,15 @@ C_RecruitAFriend.RafInfo:
     type:
       arrayof:
         structure: C_RecruitAFriend.RafRecruit
-  rewards:
+  versions:
     type:
       arrayof:
-        structure: C_RecruitAFriend.RafReward
+        structure: C_RecruitAFriend.RafVersionInfo
+C_RecruitAFriend.RafMonthCount:
+  availableMonths:
+    type: number
+  lifetimeMonths:
+    type: number
   spentMonths:
     type: number
 C_RecruitAFriend.RafMountInfo:
@@ -4279,6 +4311,9 @@ C_RecruitAFriend.RafRecruit:
   subStatus:
     type:
       enum: RafRecruitSubStatus
+  versionRecruited:
+    type:
+      enum: RecruitAFriendRewardsVersion
   wowAccountGUID:
     type: string
 C_RecruitAFriend.RafRecruitActivity:
@@ -4317,6 +4352,8 @@ C_RecruitAFriend.RafReward:
       structure: C_RecruitAFriend.RafAppearanceSetInfo
   availableInMonths:
     type: number
+  canAfford:
+    type: boolean
   canClaim:
     type: boolean
   claimed:
@@ -4341,6 +4378,9 @@ C_RecruitAFriend.RafReward:
     nilable: true
     type:
       structure: C_RecruitAFriend.RafPetInfo
+  rafVersion:
+    type:
+      enum: RecruitAFriendRewardsVersion
   repeatable:
     type: boolean
   repeatableClaimCount:
@@ -4366,6 +4406,25 @@ C_RecruitAFriend.RafSystemInfo:
 C_RecruitAFriend.RafTitleInfo:
   titleMaskID:
     type: number
+C_RecruitAFriend.RafVersionInfo:
+  monthCount:
+    type:
+      structure: C_RecruitAFriend.RafMonthCount
+  nextReward:
+    nilable: true
+    type:
+      structure: C_RecruitAFriend.RafReward
+  numAffordableRewards:
+    type: number
+  numRecruits:
+    type: number
+  rafVersion:
+    type:
+      enum: RecruitAFriendRewardsVersion
+  rewards:
+    type:
+      arrayof:
+        structure: C_RecruitAFriend.RafReward
 C_ResearchInfo.DigSiteMapInfo:
   name:
     type: string
@@ -6808,12 +6867,12 @@ CharCustomizationChoice:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   swatchColor2:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 CharCustomizationOption:
   choices:
     type:
@@ -6859,6 +6918,13 @@ ClickBindingInfo:
   type:
     type:
       enum: ClickBindingType
+colorRGB:
+  b:
+    type: number
+  g:
+    type: number
+  r:
+    type: number
 colorRGBA:
   a:
     type: number
@@ -7040,7 +7106,10 @@ CraftingOrderCustomerOptionInfo:
     nilable: true
     type:
       arrayof: number
-  iLvl:
+  iLvlMax:
+    nilable: true
+    type: number
+  iLvlMin:
     type: number
   itemID:
     type: number
@@ -7516,15 +7585,15 @@ GuildTabardInfo:
   backgroundColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   borderColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   emblemColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   emblemFileID:
     type: number
   emblemStyle:
@@ -7632,11 +7701,20 @@ ProfessionInfo:
     type: number
   skillModifier:
     type: number
+ProfTabHighlight:
+  description:
+    type: string
 ProfTabInfo:
   description:
     type: string
+  highlights:
+    type:
+      arrayof:
+        structure: ProfTabHighlight
   name:
     type: string
+  rootIconID:
+    type: number
   rootNodeID:
     type: number
 QuestReputationRewardInfo:
@@ -7767,7 +7845,7 @@ TooltipDataArg:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   field:
     type: string
   floatVal:
