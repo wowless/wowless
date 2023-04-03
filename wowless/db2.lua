@@ -170,7 +170,7 @@ local function rows(content, sig)
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
             t[k] = i4tou4(bit.rshift(bit.band(v, mask), boffset))
           elseif fsi.storage_type == 2 then
-            t[k] = v -- TODO actually implement common data lookups
+            t[k] = fsi.cx1 -- TODO actually implement common data lookups
           elseif fsi.storage_type == 3 then
             local boffset = fsi.field_offset_bits - fs[k].position * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
