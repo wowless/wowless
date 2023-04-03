@@ -35,11 +35,6 @@ local section_header = vstruct.compile([[<
   copy_table_count: u4
 ]])
 
-local field = vstruct.compile([[<
-  size: i2
-  position: u2
-]])
-
 local field_storage_info = vstruct.compile([[<
   field_offset_bits: u2
   field_size_bits: u2
@@ -91,21 +86,13 @@ local function rows(content, sig)
     assert(sh.tact_key_hash == '\0\0\0\0\0\0\0\0')
     table.insert(shs, sh)
   end
-  local fs = {}
-  for _ = 1, h.total_field_count do
-    local f = field:read(cur)
-    assert(f.size == 0 or f.size == 32)
-    assert(f.position % 4 == 0)
-    table.insert(fs, f)
-  end
+  cur:seek(nil, h.total_field_count * 4) -- ignore struct field_structure
   local fsis = {}
   local pallet_offsets = {}
   local pallet_offset = 0
-  for i = 1, h.total_field_count do
+  for _ = 1, h.total_field_count do
     local fsi = field_storage_info:read(cur)
-    local f = fs[i]
-    assert(fsi.field_offset_bits >= f.position * 8)
-    assert(fsi.field_offset_bits + fsi.field_size_bits <= f.position * 8 + (f.size == 0 and 32 or f.size))
+    assert(fsi.field_offset_bits + fsi.field_size_bits <= h.record_size * 8)
     if fsi.storage_type == 0 then
       assert(fsi.field_size_bits == 32)
       assert(fsi.additional_data_size == 0)
@@ -159,20 +146,19 @@ local function rows(content, sig)
         local t = {}
         for k = 1, h.total_field_count do
           local fsi = fsis[k]
-          local c = tsig[k]
-          local foffset = rpos + fs[k].position
-          local v = u4(content, foffset)
+          local foffset = math.floor(fsi.field_offset_bits / 32) * 4
+          local v = u4(content, rpos + foffset)
           if fsi.storage_type == 0 then
             -- TODO strings are only correct in simple cases; see the WDC2 docs
-            t[k] = c == 's' and z(content, foffset + v) or v
+            t[k] = tsig[k] == 's' and z(content, rpos + foffset + v) or v
           elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
-            local boffset = fsi.field_offset_bits - fs[k].position * 8
+            local boffset = fsi.field_offset_bits - foffset * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
             t[k] = i4tou4(bit.rshift(bit.band(v, mask), boffset))
           elseif fsi.storage_type == 2 then
             t[k] = fsi.cx1 -- TODO actually implement common data lookups
           elseif fsi.storage_type == 3 then
-            local boffset = fsi.field_offset_bits - fs[k].position * 8
+            local boffset = fsi.field_offset_bits - foffset * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
             local vv = i4tou4(bit.rshift(bit.band(v, mask), boffset))
             t[k] = u4(content, palletpos + pallet_offsets[k] + vv * 4)
