@@ -88,7 +88,6 @@ local function rows(content, sig)
   for _ = 1, h.section_count do
     local sh = section_header:read(cur)
     assert(sh.id_list_size == 0 or sh.record_count * 4 == sh.id_list_size)
-    assert(sh.relationship_data_size == 0)
     assert(sh.tact_key_hash == '\0\0\0\0\0\0\0\0')
     table.insert(shs, sh)
   end
@@ -138,6 +137,7 @@ local function rows(content, sig)
     pos = pos + sh.id_list_size
     pos = pos + sh.copy_table_count * 8
     pos = pos + sh.offset_map_id_count * 6
+    pos = pos + sh.relationship_data_size
     pos = pos + sh.offset_map_id_count * 4
   end
   assert(pos == #content)
@@ -174,7 +174,7 @@ local function rows(content, sig)
           elseif fsi.storage_type == 3 then
             local boffset = fsi.field_offset_bits - fs[k].position * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
-            local vv = bit.band(v, mask)
+            local vv = i4tou4(bit.rshift(bit.band(v, mask), boffset))
             t[k] = u4(content, palletpos + pallet_offsets[k] + vv * 4)
           else
             error('internal error')
