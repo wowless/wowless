@@ -61,6 +61,9 @@ local pools = {
 local rules = {
   dbdata = {
     command = 'lua tools/sqlite.lua -f $product',
+  },
+  dbdefs = {
+    command = 'lua tools/dbdefs.lua $product',
     depfile = '$out.d',
     deps = 'gcc',
   },
@@ -71,8 +74,6 @@ local rules = {
   },
   dbschema = {
     command = 'lua tools/sqlite.lua $product',
-    depfile = '$out.d',
-    deps = 'gcc',
   },
   downloadrelease = {
     command = 'sh bin/downloadaddon.sh $owner $repo $tag $out',
@@ -228,6 +229,7 @@ local builds = {
       'tools/bump.lua',
       'tools/bumpaddons.lua',
       'tools/db2dump.lua',
+      'tools/dbdefs.lua',
       'tools/dblist.lua',
       'tools/docs.lua',
       'tools/errsv.lua',
@@ -333,6 +335,21 @@ for _, p in ipairs(productList) do
     outs = dblist,
     rule = 'dblist',
   })
+  local dbdefs = 'build/products/' .. p .. '/dbdefs.lua'
+  table.insert(builds, {
+    args = {
+      product = p,
+      restat = 1,
+    },
+    ins_implicit = {
+      dblist,
+      'data/products/' .. p .. '/build.yaml',
+      'tools/dbdefs.lua',
+      'tools/util.lua',
+    },
+    outs = dbdefs,
+    rule = 'dbdefs',
+  })
   local fetchStamp = 'build/products/' .. p .. '/fetch.stamp'
   table.insert(builds, {
     args = { product = p },
@@ -388,8 +405,7 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p },
     ins_implicit = {
-      dblist,
-      'data/products/' .. p .. '/build.yaml',
+      dbdefs,
       'tools/sqlite.lua',
     },
     outs = schemadb,
@@ -398,9 +414,8 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p },
     ins_implicit = {
-      dblist,
+      dbdefs,
       fetchStamp,
-      'data/products/' .. p .. '/build.yaml',
       'tools/sqlite.lua',
     },
     outs = datadb,

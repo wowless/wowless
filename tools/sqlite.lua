@@ -8,42 +8,20 @@ local quote = (function()
 end)()
 
 local function factory(theProduct)
-  local defs = (function()
-    local build = require('wowapi.yaml').parseFile('data/products/' .. theProduct .. '/build.yaml')
-    local bv = build.version .. '.' .. build.build
-    local t = {}
-    for _, db in ipairs(require('build.products.' .. theProduct .. '.dblist')) do
-      local content = assert(require('pl.file').read('vendor/dbdefs/definitions/' .. db .. '.dbd'))
-      local dbd = assert(require('luadbd.parser').dbd(content))
-      local v = (function()
-        for _, version in ipairs(dbd.versions) do
-          for _, vb in ipairs(version.builds) do
-            -- Build ranges are not supported (yet).
-            if #vb == 1 and table.concat(vb[1], '.') == bv then
-              return version
-            end
-          end
-        end
-        error('cannot find ' .. bv .. ' in dbd ' .. db)
-      end)()
-      local sig, field2index = require('luadbd.sig')(dbd, v)
-      t[db] = {
-        field2index = field2index,
-        orderedfields = (function()
-          local list = {}
-          for k in pairs(field2index) do
-            table.insert(list, k)
-          end
-          table.sort(list, function(a, b)
-            return field2index[a] < field2index[b]
-          end)
-          return list
-        end)(),
-        sig = sig,
-      }
-    end
-    return t
-  end)()
+  local defs = require('build.products.' .. theProduct .. '.dbdefs')
+  for _, v in pairs(defs) do
+    v.orderedfields = (function()
+      local field2index = v.field2index
+      local list = {}
+      for k in pairs(field2index) do
+        table.insert(list, k)
+      end
+      table.sort(list, function(a, b)
+        return field2index[a] < field2index[b]
+      end)
+      return list
+    end)()
+  end
 
   local function create(filename)
     local dbinit = { 'BEGIN' }
@@ -113,14 +91,6 @@ end)()
 
 local filebase = args.full and 'data' or 'schema'
 local filename = ('build/products/%s/%s.sqlite3'):format(args.product, filebase)
-
-do
-  local deps = {}
-  for _, db in ipairs(require('build.products.' .. args.product .. '.dblist')) do
-    deps['vendor/dbdefs/definitions/' .. db .. '.dbd'] = true
-  end
-  require('tools.util').writedeps(filename, deps)
-end
 
 require('pl.file').delete(filename)
 local create, populate = factory(args.product)
