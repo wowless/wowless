@@ -139,6 +139,14 @@ local function rows(content, sig)
       local sh = shs[i]
       local rpos = sh.file_offset
       local ipos = rpos + sh.record_count * h.record_size + sh.string_table_size
+      local cpos = ipos + sh.id_list_size
+      local copytable = {}
+      for _ = 1, sh.copy_table_count do
+        local newid = u4(content, cpos)
+        local copiedid = u4(content, cpos + 4)
+        copytable[copiedid] = newid
+        cpos = cpos + 8
+      end
       for _ = 1, sh.record_count do
         local t = { [0] = u4(content, ipos) }
         for k = 1, h.total_field_count do
@@ -164,7 +172,18 @@ local function rows(content, sig)
         end
         rpos = rpos + h.record_size
         ipos = ipos + 4
+        local copyid = copytable[t[0]]
+        local tt = {}
+        if copyid then
+          tt[0] = copyid
+          for k = 1, h.total_field_count do
+            tt[k] = t[k]
+          end
+        end
         coroutine.yield(t)
+        if copyid then
+          coroutine.yield(tt)
+        end
       end
     end
   end)
