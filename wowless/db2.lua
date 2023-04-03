@@ -144,7 +144,8 @@ local function rows(content, sig)
       for _ = 1, sh.copy_table_count do
         local newid = u4(content, cpos)
         local copiedid = u4(content, cpos + 4)
-        copytable[copiedid] = newid
+        copytable[copiedid] = copytable[copiedid] or {}
+        table.insert(copytable[copiedid], newid)
         cpos = cpos + 8
       end
       for _ = 1, sh.record_count do
@@ -172,17 +173,17 @@ local function rows(content, sig)
         end
         rpos = rpos + h.record_size
         ipos = ipos + 4
-        local copyid = copytable[t[0]]
-        local tt = {}
-        if copyid then
-          tt[0] = copyid
+        local copies = {}
+        for _, newid in ipairs(copytable[t[0]] or {}) do
+          local tt = { [0] = newid }
           for k = 1, h.total_field_count do
             tt[k] = t[k]
           end
+          table.insert(copies, tt)
         end
         coroutine.yield(t)
-        if copyid then
-          coroutine.yield(tt)
+        for k = #copies, 1, -1 do
+          coroutine.yield(copies[k])
         end
       end
     end
