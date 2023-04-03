@@ -1708,7 +1708,7 @@ C_Calendar.UpdateEvent:
   inputs:
   - {}
   outputs: {}
-C_CharacterServices.AssignPFCDistribution: {}
+C_CharacterServices.AssignRaceOrFactionChangeDistribution: {}
 C_CharacterServices.AssignUpgradeDistribution: {}
 C_CharacterServices.GetActiveCharacterUpgradeBoostType: {}
 C_CharacterServices.GetActiveClassTrialBoostType: {}
