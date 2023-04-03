@@ -110,6 +110,9 @@ local function rows(content, sig)
     if fsi.storage_type == 0 then
       assert(fsi.field_size_bits == 32)
       assert(fsi.additional_data_size == 0)
+    elseif fsi.storage_type == 2 then
+      assert(fsi.field_size_bits == 0)
+      assert(fsi.additional_data_size == 0)
     elseif fsi.storage_type == 3 then
       assert(fsi.field_size_bits > 0)
       assert(fsi.field_size_bits <= 32)
@@ -166,6 +169,8 @@ local function rows(content, sig)
             local boffset = fsi.field_offset_bits - fs[k].position * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
             t[k] = i4tou4(bit.rshift(bit.band(v, mask), boffset))
+          elseif fsi.storage_type == 2 then
+            t[k] = v -- TODO actually implement common data lookups
           elseif fsi.storage_type == 3 then
             local boffset = fsi.field_offset_bits - fs[k].position * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
