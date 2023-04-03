@@ -12,7 +12,7 @@ local header = vstruct.compile([[<
   min_id: u4
   max_id: u4
   locale: u4
-  flags: { [ 2 | x15 has_offset_map: b1 ] }
+  flags: { [ 2 | x13 ignore_id_index: b1 x1 has_offset_map: b1 ] }
   id_index: u2
   total_field_count: u4
   bitpacked_data_offset: u4
@@ -156,7 +156,7 @@ local function rows(content, sig)
         cpos = cpos + 8
       end
       for _ = 1, sh.record_count do
-        local t = { [0] = sh.id_list_size > 0 and u4(content, ipos) or nil }
+        local t = {}
         for k = 1, h.total_field_count do
           local fsi = fsis[k]
           local c = tsig[k]
@@ -180,8 +180,13 @@ local function rows(content, sig)
             error('internal error')
           end
         end
+        if sh.id_list_size > 0 then
+          t[0] = u4(content, ipos)
+          ipos = ipos + 4
+        elseif not h.flags.ignore_id_index then
+          t[0] = t[h.id_index + 1]
+        end
         rpos = rpos + h.record_size
-        ipos = ipos + 4
         local copies = {}
         for _, newid in ipairs(copytable[t[0]] or {}) do
           local tt = { [0] = newid }
