@@ -64,6 +64,10 @@ local function z(content, offset)
   return strsub(content, offset + 1, e - 1)
 end
 
+local function i4tou4(x)
+  return x >= 0 and x or 2 ^ 32 + x
+end
+
 local function rows(content, sig)
   assert(sig:sub(1, 1) == '{')
   assert(sig:sub(-1) == '}')
@@ -161,7 +165,7 @@ local function rows(content, sig)
           elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
             local boffset = fsi.field_offset_bits - fs[k].position * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
-            t[k] = bit.rshift(bit.band(v, mask), boffset)
+            t[k] = i4tou4(bit.rshift(bit.band(v, mask), boffset))
           elseif fsi.storage_type == 3 then
             local boffset = fsi.field_offset_bits - fs[k].position * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
