@@ -83,7 +83,7 @@ local function rows(content, sig)
   local shs = {}
   for _ = 1, h.section_count do
     local sh = section_header:read(cur)
-    assert(sh.record_count * 4 == sh.id_list_size)
+    assert(sh.id_list_size == 0 or sh.record_count * 4 == sh.id_list_size)
     assert(sh.relationship_data_size == 0)
     assert(sh.tact_key_hash == '\0\0\0\0\0\0\0\0')
     table.insert(shs, sh)
@@ -149,7 +149,7 @@ local function rows(content, sig)
         cpos = cpos + 8
       end
       for _ = 1, sh.record_count do
-        local t = { [0] = u4(content, ipos) }
+        local t = { [0] = sh.id_list_size > 0 and u4(content, ipos) or nil }
         for k = 1, h.total_field_count do
           local fsi = fsis[k]
           local c = tsig[k]
