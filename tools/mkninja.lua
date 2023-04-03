@@ -228,6 +228,7 @@ local builds = {
       'tools/addons.yaml',
       'tools/bump.lua',
       'tools/bumpaddons.lua',
+      'tools/db2compare.lua',
       'tools/db2dump.lua',
       'tools/dbdefs.lua',
       'tools/dblist.lua',
