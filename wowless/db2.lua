@@ -122,7 +122,8 @@ local function rows(content, sig)
   assert(common_offset == h.common_data_size)
   assert(pallet_offset == h.pallet_data_size)
   local palletpos = cur.pos
-  local pos = cur.pos + h.pallet_data_size + h.common_data_size
+  local commonpos = cur.pos + h.pallet_data_size
+  local pos = commonpos + h.common_data_size
   for _, sh in ipairs(shs) do
     assert(pos == sh.file_offset)
     pos = pos + sh.record_count * h.record_size
@@ -134,6 +135,19 @@ local function rows(content, sig)
     pos = pos + sh.offset_map_id_count * 4
   end
   assert(pos == #content)
+  local commons = {}
+  for i, fsi in ipairs(fsis) do
+    local common = {}
+    if fsi.storage_type == 2 then
+      local start = commonpos + common_offsets[i]
+      for c = start, start + fsi.additional_data_size, 8 do
+        local recordid = u4(content, c)
+        local value = u4(content, c + 4)
+        common[recordid] = value
+      end
+    end
+    table.insert(commons, common)
+  end
   return coroutine.wrap(function()
     for i = 1, h.section_count do
       local sh = shs[i]
@@ -162,11 +176,9 @@ local function rows(content, sig)
             t[k] = tsig[k] == 's' and z(content, rpos + foffset + vv) or vv
           elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
             t[k] = vv
-          elseif fsi.storage_type == 2 then
-            t[k] = fsi.cx1 -- TODO actually implement common data lookups
           elseif fsi.storage_type == 3 then
             t[k] = u4(content, palletpos + pallet_offsets[k] + vv * 4)
-          else
+          elseif fsi.storage_type ~= 2 then
             error('internal error')
           end
         end
@@ -175,6 +187,12 @@ local function rows(content, sig)
           ipos = ipos + 4
         elseif not h.flags.ignore_id_index then
           t[0] = t[h.id_index + 1]
+        end
+        for k = 1, h.total_field_count do
+          local fsi = fsis[k]
+          if fsi.storage_type == 2 then
+            t[k] = commons[k][t[0]] or fsi.cx1
+          end
         end
         rpos = rpos + h.record_size
         local copies = {}
