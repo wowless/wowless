@@ -147,20 +147,18 @@ local function rows(content, sig)
         for k = 1, h.total_field_count do
           local fsi = fsis[k]
           local foffset = math.floor(fsi.field_offset_bits / 8)
+          local boffset = fsi.field_offset_bits - foffset * 8
+          local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
           local v = u4(content, rpos + foffset)
+          local vv = i4tou4(bit.rshift(bit.band(v, mask), boffset))
           if fsi.storage_type == 0 then
             -- TODO strings are only correct in simple cases; see the WDC2 docs
-            t[k] = tsig[k] == 's' and z(content, rpos + foffset + v) or v
+            t[k] = tsig[k] == 's' and z(content, rpos + foffset + vv) or vv
           elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
-            local boffset = fsi.field_offset_bits - foffset * 8
-            local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
-            t[k] = i4tou4(bit.rshift(bit.band(v, mask), boffset))
+            t[k] = vv
           elseif fsi.storage_type == 2 then
             t[k] = fsi.cx1 -- TODO actually implement common data lookups
           elseif fsi.storage_type == 3 then
-            local boffset = fsi.field_offset_bits - foffset * 8
-            local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
-            local vv = i4tou4(bit.rshift(bit.band(v, mask), boffset))
             t[k] = u4(content, palletpos + pallet_offsets[k] + vv * 4)
           else
             error('internal error')
