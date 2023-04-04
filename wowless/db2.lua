@@ -96,7 +96,6 @@ local function rows(content, sig)
     assert(fsi.field_size_bits + math.fmod(fsi.field_offset_bits, 8) <= 32)
     assert(fsi.field_offset_bits + fsi.field_size_bits <= h.record_size * 8)
     if fsi.storage_type == 0 then
-      assert(fsi.field_size_bits == 32)
       assert(fsi.additional_data_size == 0)
     elseif fsi.storage_type == 2 then
       assert(fsi.field_size_bits == 0)
