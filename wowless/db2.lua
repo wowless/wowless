@@ -92,6 +92,8 @@ local function rows(content, sig)
   local pallet_offset = 0
   for _ = 1, h.total_field_count do
     local fsi = field_storage_info:read(cur)
+    -- Hacky check to ensure field can be read by masking a u4.
+    assert(fsi.field_size_bits + math.fmod(fsi.field_offset_bits, 8) <= 32)
     assert(fsi.field_offset_bits + fsi.field_size_bits <= h.record_size * 8)
     if fsi.storage_type == 0 then
       assert(fsi.field_size_bits == 32)
@@ -101,11 +103,9 @@ local function rows(content, sig)
       assert(fsi.additional_data_size == 0)
     elseif fsi.storage_type == 3 then
       assert(fsi.field_size_bits > 0)
-      assert(fsi.field_size_bits <= 32)
       assert(fsi.additional_data_size > 0)
     elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
       assert(fsi.field_size_bits > 0)
-      assert(fsi.field_size_bits <= 32)
       assert(fsi.additional_data_size == 0)
     else
       error('unsupported storage type ' .. fsi.storage_type)
@@ -146,7 +146,7 @@ local function rows(content, sig)
         local t = {}
         for k = 1, h.total_field_count do
           local fsi = fsis[k]
-          local foffset = math.floor(fsi.field_offset_bits / 32) * 4
+          local foffset = math.floor(fsi.field_offset_bits / 8)
           local v = u4(content, rpos + foffset)
           if fsi.storage_type == 0 then
             -- TODO strings are only correct in simple cases; see the WDC2 docs
