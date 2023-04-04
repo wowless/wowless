@@ -1,12 +1,14 @@
 local args = (function()
   local parser = require('argparse')()
   parser:flag('--dbc -d', 'use dbc instead of db2')
-  parser:argument('db2file', 'db2file to dump')
-  parser:argument('signature', 'luadbc-style type signature')
+  parser:argument('product', 'product')
+  parser:argument('db2', 'db2')
   return parser:parse()
 end)()
 local rows = require(args.dbc and 'dbc' or 'wowless.db2').rows
-local content = assert(require('pl.file').read(args.db2file))
-for row in rows(content, args.signature) do
+local dbdefs = require('build.products.' .. args.product .. '.dbdefs')
+local db2file = 'extracts/' .. args.product .. '/db2/' .. args.db2 .. '.db2'
+local content = assert(require('pl.file').read(db2file))
+for row in rows(content, '{' .. dbdefs[args.db2].sig .. '}') do
   print(row[0], unpack(row))
 end
