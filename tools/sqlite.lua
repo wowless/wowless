@@ -43,7 +43,7 @@ local function factory(theProduct)
       local success, msg = pcall(function()
         local data = require('pl.file').read(('extracts/%s/db2/%s.db2'):format(theProduct, k))
         assert(data, 'missing db2 for ' .. k)
-        for row in require('dbc').rows(data, '{' .. v.sig:gsub('%.', '%?') .. '}') do
+        for row in require('tools.dbc').rows(data, '{' .. v.sig:gsub('%.', '%?') .. '}') do
           local values = {}
           for _, field in ipairs(v.orderedfields) do
             local value = row[v.field2index[field]]
