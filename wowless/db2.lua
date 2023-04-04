@@ -140,7 +140,7 @@ local function rows(content, sig)
     local common = {}
     if fsi.storage_type == 2 then
       local start = commonpos + common_offsets[i]
-      for c = start, start + fsi.additional_data_size, 8 do
+      for c = start, start + fsi.additional_data_size - 1, 8 do
         local recordid = u4(content, c)
         local value = u4(content, c + 4)
         common[recordid] = value
