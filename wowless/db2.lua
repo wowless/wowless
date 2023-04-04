@@ -51,7 +51,7 @@ local strsub = string.sub
 
 local function u4(content, offset)
   local w, x, y, z = strbyte(content, offset + 1, offset + 4)
-  return w + x * 256 + y * 65536 + z * 16777216
+  return w + (x or 0) * 256 + (y or 0) * 65536 + (z or 0) * 16777216
 end
 
 local function z(content, offset)
