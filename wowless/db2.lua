@@ -88,6 +88,8 @@ local function rows(content, sig)
   end
   cur:seek(nil, h.total_field_count * 4) -- ignore struct field_structure
   local fsis = {}
+  local common_offsets = {}
+  local common_offset = 0
   local pallet_offsets = {}
   local pallet_offset = 0
   for _ = 1, h.total_field_count do
@@ -99,7 +101,6 @@ local function rows(content, sig)
       assert(fsi.additional_data_size == 0)
     elseif fsi.storage_type == 2 then
       assert(fsi.field_size_bits == 0)
-      assert(fsi.additional_data_size == 0)
     elseif fsi.storage_type == 3 then
       assert(fsi.field_size_bits > 0)
       assert(fsi.additional_data_size > 0)
@@ -110,9 +111,15 @@ local function rows(content, sig)
       error('unsupported storage type ' .. fsi.storage_type)
     end
     table.insert(fsis, fsi)
+    table.insert(common_offsets, common_offset)
     table.insert(pallet_offsets, pallet_offset)
-    pallet_offset = pallet_offset + fsi.additional_data_size
+    if fsi.storage_type == 2 then
+      common_offset = common_offset + fsi.additional_data_size
+    elseif fsi.storage_type == 3 then
+      pallet_offset = pallet_offset + fsi.additional_data_size
+    end
   end
+  assert(common_offset == h.common_data_size)
   assert(pallet_offset == h.pallet_data_size)
   local palletpos = cur.pos
   local pos = cur.pos + h.pallet_data_size + h.common_data_size
