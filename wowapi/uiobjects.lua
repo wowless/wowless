@@ -2,18 +2,18 @@ local util = require('wowless.util')
 local Mixin = util.mixin
 local hlist = require('wowless.hlist')
 
-local function toTexture(parent, tex, obj)
-  if type(tex) == 'string' or type(tex) == 'number' then
-    local t = obj or parent:CreateTexture()
-    t:SetTexture(tex)
-    return t
-  else
-    return tex
-  end
-end
-
 local function mkBaseUIObjectTypes(api)
   local u = api.UserData
+
+  local function toTexture(parent, tex, obj)
+    if type(tex) == 'string' or type(tex) == 'number' then
+      local t = obj or u(parent:CreateTexture())
+      t:SetTexture(tex)
+      return t
+    else
+      return tex and u(tex)
+    end
+  end
 
   local function flatten(types)
     local result = {}
@@ -116,7 +116,8 @@ local function mkBaseUIObjectTypes(api)
               assert(f.nilable or cf.nilable, ('cannot set nil on %s.%s.%s'):format(name, mname, f.name))
               self[f.name] = nil
             elseif ty == 'texture' then
-              self[f.name] = toTexture(self, v)
+              local tex = toTexture(self, v)
+              self[f.name] = tex and u(tex)
             elseif ty == 'number' then
               self[f.name] = assert(tonumber(v), ('want number, got %s'):format(type(v)))
             elseif ty == 'string' then

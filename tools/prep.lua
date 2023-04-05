@@ -195,6 +195,23 @@ local function mkuiobjectinit(k)
   end
   return init
 end
+-- Getters can manipulate inherited fields, so we need that info.
+local uiobjectfieldsets = {}
+local function mkuiobjectfieldset(k)
+  local set = uiobjectfieldsets[k]
+  if not set then
+    set = {}
+    local v = uiobjectdata[k]
+    for inh in pairs(v.inherits or {}) do
+      Mixin(set, mkuiobjectfieldset(inh))
+    end
+    for fk, fv in pairs(v.fields or {}) do
+      set[fk] = fv.type
+    end
+    uiobjectfieldsets[k] = set
+  end
+  return set
+end
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
   local constructor = { 'return {' }
@@ -202,6 +219,7 @@ for k, v in pairs(uiobjectdata) do
     table.insert(constructor, ('  %s = %s,'):format(fk, fv))
   end
   table.insert(constructor, '}')
+  local fieldset = mkuiobjectfieldset(k)
   local methods = {}
   for mk, mv in pairs(v.methods or {}) do
     if mv.impl then
@@ -210,7 +228,11 @@ for k, v in pairs(uiobjectdata) do
     elseif mv.getter then
       local t = {}
       for _, f in ipairs(mv.getter) do
-        table.insert(t, 'x.' .. f.name)
+        if fieldset[f.name] == 'texture' then
+          table.insert(t, 'x.' .. f.name .. ' and x.' .. f.name .. '.luarep')
+        else
+          table.insert(t, 'x.' .. f.name)
+        end
       end
       methods[mk] = { impl = 'local x = ...;return ' .. table.concat(t, ',') }
     elseif mv.setter then
