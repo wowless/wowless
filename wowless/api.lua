@@ -37,6 +37,8 @@ local function new(log, maxErrors, product)
   }
 
   local function DoSetParent(obj, parent)
+    obj = obj.luarep -- TODO push this down through the method
+    parent = parent and parent.luarep -- TODO push this down through the method
     local ud = u(obj)
     if ud.parent == parent then
       return
@@ -150,8 +152,8 @@ local function new(log, maxErrors, product)
   end
 
   local function SetParent(obj, parent)
-    if u(obj).IsVisible then
-      UpdateVisible(u(obj), function()
+    if obj.IsVisible then
+      UpdateVisible(obj, function()
         DoSetParent(obj, parent)
       end)
     else
@@ -181,7 +183,7 @@ local function new(log, maxErrors, product)
     ud.type = typename
     userdata[objp] = ud
     setmetatable(ud, objtype.hostMT)
-    SetParent(obj, parent and parent.luarep)
+    DoSetParent(ud, parent)
     if InheritsFrom(typename, 'frame') then
       frames:insert(ud)
     end

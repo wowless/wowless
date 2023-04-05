@@ -349,7 +349,8 @@ local function loader(api, cfg)
         end
       end,
       parent = function(_, obj, value)
-        api.SetParent(obj, api.env[value])
+        local parent = api.env[value]
+        api.SetParent(api.UserData(obj), parent and api.UserData(parent))
       end,
       parentarray = function(_, obj, value)
         local p = api.UserData(obj).parent
