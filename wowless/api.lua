@@ -36,7 +36,7 @@ local function new(log, maxErrors, product)
     'statusBarTexture',
   }
 
-  local function SetParent(obj, parent)
+  local function DoSetParent(obj, parent)
     local ud = u(obj)
     if ud.parent == parent then
       return
@@ -146,6 +146,16 @@ local function new(log, maxErrors, product)
     local visibleNow = obj:IsVisible()
     if wasVisible ~= visibleNow then
       DoUpdateVisible(obj, visibleNow and 'OnShow' or 'OnHide')
+    end
+  end
+
+  local function SetParent(obj, parent)
+    if u(obj).IsVisible then
+      UpdateVisible(u(obj), function()
+        DoSetParent(obj, parent)
+      end)
+    else
+      DoSetParent(obj, parent)
     end
   end
 
