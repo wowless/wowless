@@ -232,8 +232,7 @@ local function new(log, maxErrors, product)
   end
 
   local function SetScript(obj, name, bindingType, script)
-    local ud = u(obj)
-    ud.scripts[bindingType][string.lower(name)] = script
+    obj.scripts[bindingType][string.lower(name)] = script
   end
 
   for k in pairs(datalua.events) do

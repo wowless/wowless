@@ -172,7 +172,7 @@ local function loader(api, cfg)
       elseif intrinsic then
         bindingType = 0
       end
-      api.SetScript(obj, script.type, bindingType, fn)
+      api.SetScript(api.UserData(obj), script.type, bindingType, fn)
     end
   end
 
