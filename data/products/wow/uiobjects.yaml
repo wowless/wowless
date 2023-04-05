@@ -1,11 +1,9 @@
 ---
 Actor:
-  fields:
-    scale:
-      init: 1
-      type: number
+  fields: {}
   inherits:
     ParentedObjectBase: {}
+    RegionBase: {}
     ScriptObjectBase: {}
   methods:
     AttachToMount: {}
@@ -13,7 +11,6 @@ Actor:
     ClearModel: {}
     Dress: {}
     GetActiveBoundingBox: {}
-    GetAlpha: {}
     GetAnimation: {}
     GetAnimationBlendOperation: {}
     GetAnimationVariation: {}
@@ -31,24 +28,17 @@ Actor:
     GetPitch: {}
     GetPosition: {}
     GetRoll: {}
-    GetScale:
-      getter:
-      - name: scale
     GetSheathed: {}
     GetSpellVisualKit: {}
     GetUseTransmogChoices: {}
     GetUseTransmogSkin: {}
     GetYaw: {}
-    Hide: {}
     IsGeoReady: {}
     IsLoaded: {}
-    IsShown: {}
     IsSlotAllowed: {}
     IsSlotVisible: {}
     IsUsingCenterForOrigin: {}
-    IsVisible: {}
     PlayAnimationKit: {}
-    SetAlpha: {}
     SetAnimation: {}
     SetAnimationBlendOperation: {}
     SetAutoDress: {}
@@ -66,17 +56,12 @@ Actor:
     SetPlayerModelFromGlues: {}
     SetPosition: {}
     SetRoll: {}
-    SetScale:
-      setter:
-      - name: scale
     SetSheathed: {}
-    SetShown: {}
     SetSpellVisualKit: {}
     SetUseCenterForOrigin: {}
     SetUseTransmogChoices: {}
     SetUseTransmogSkin: {}
     SetYaw: {}
-    Show: {}
     StopAnimationKit: {}
     TryOn: {}
     Undress: {}
@@ -1457,9 +1442,6 @@ QuestPOIFrame:
     GetTooltipIndex: {}
 Region:
   fields:
-    alpha:
-      init: 1
-      type: number
     animationGroups:
       init: {}
       type: table
@@ -1484,18 +1466,13 @@ Region:
     points:
       init: {}
       type: table
-    scale:
-      init: 1
-      type: number
-    shown:
-      init: true
-      type: boolean
     width:
       init: 0
       type: number
   inherits:
     MouseMixin: {}
     ParentedObject: {}
+    RegionBase: {}
   methods:
     AdjustPointsOffset: {}
     CanChangeProtectedState: {}
@@ -1505,9 +1482,6 @@ Region:
     ClearPointsOffset: {}
     CreateAnimationGroup:
       impl: Region/CreateAnimationGroup
-    GetAlpha:
-      getter:
-      - name: alpha
     GetAnimationGroups:
       impl: Region/GetAnimationGroups
     GetBottom:
@@ -1536,9 +1510,6 @@ Region:
       - name: height
     GetRight:
       impl: Region/GetRight
-    GetScale:
-      getter:
-      - name: scale
     GetScaledRect:
       impl: Region/GetScaledRect
     GetSize:
@@ -1551,8 +1522,6 @@ Region:
     GetWidth:
       getter:
       - name: width
-    Hide:
-      impl: Region/Hide
     IsAnchoringRestricted: {}
     IsDragging: {}
     IsIgnoringParentAlpha:
@@ -1566,15 +1535,8 @@ Region:
     IsProtected:
       impl: Region/IsProtected
     IsRectValid: {}
-    IsShown:
-      getter:
-      - name: shown
-    IsVisible:
-      impl: Region/IsVisible
     SetAllPoints:
       impl: Region/SetAllPoints
-    SetAlpha:
-      impl: Region/SetAlpha
     SetHeight:
       setter:
       - name: height
@@ -1587,10 +1549,6 @@ Region:
     SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
-    SetScale:
-      impl: Region/SetScale
-    SetShown:
-      impl: Region/SetShown
     SetSize:
       setter:
       - name: width
@@ -1598,9 +1556,42 @@ Region:
     SetWidth:
       setter:
       - name: width
+    StopAnimating: {}
+  virtual: true
+RegionBase:
+  fields:
+    alpha:
+      init: 1
+      type: number
+    scale:
+      init: 1
+      type: number
+    shown:
+      init: true
+      type: boolean
+  inherits: {}
+  methods:
+    GetAlpha:
+      getter:
+      - name: alpha
+    GetScale:
+      getter:
+      - name: scale
+    Hide:
+      impl: Region/Hide
+    IsShown:
+      getter:
+      - name: shown
+    IsVisible:
+      impl: Region/IsVisible
+    SetAlpha:
+      impl: Region/SetAlpha
+    SetScale:
+      impl: Region/SetScale
+    SetShown:
+      impl: Region/SetShown
     Show:
       impl: Region/Show
-    StopAnimating: {}
   virtual: true
 Rotation:
   inherits:

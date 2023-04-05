@@ -1,16 +1,13 @@
 ---
 Actor:
-  fields:
-    scale:
-      init: 1
-      type: number
+  fields: {}
   inherits:
     ParentedObjectBase: {}
+    RegionBase: {}
     ScriptObjectBase: {}
   methods:
     ClearModel: {}
     GetActiveBoundingBox: {}
-    GetAlpha: {}
     GetAnimation: {}
     GetAnimationBlendOperation: {}
     GetAnimationVariation: {}
@@ -23,18 +20,11 @@ Actor:
     GetPitch: {}
     GetPosition: {}
     GetRoll: {}
-    GetScale:
-      getter:
-      - name: scale
     GetSpellVisualKit: {}
     GetYaw: {}
-    Hide: {}
     IsLoaded: {}
-    IsShown: {}
     IsUsingCenterForOrigin: {}
-    IsVisible: {}
     PlayAnimationKit: {}
-    SetAlpha: {}
     SetAnimation: {}
     SetAnimationBlendOperation: {}
     SetDesaturation: {}
@@ -46,14 +36,9 @@ Actor:
     SetPitch: {}
     SetPosition: {}
     SetRoll: {}
-    SetScale:
-      setter:
-      - name: scale
-    SetShown: {}
     SetSpellVisualKit: {}
     SetUseCenterForOrigin: {}
     SetYaw: {}
-    Show: {}
     StopAnimationKit: {}
   objectType: ModelSceneActor
 Alpha:
@@ -1413,9 +1398,6 @@ PlayerModel:
     StopAnimKit: {}
 Region:
   fields:
-    alpha:
-      init: 1
-      type: number
     animationGroups:
       init: {}
       type: table
@@ -1440,18 +1422,13 @@ Region:
     points:
       init: {}
       type: table
-    scale:
-      init: 1
-      type: number
-    shown:
-      init: true
-      type: boolean
     width:
       init: 0
       type: number
   inherits:
     MouseMixin: {}
     ParentedObject: {}
+    RegionBase: {}
   methods:
     AdjustPointsOffset: {}
     CanChangeProtectedState: {}
@@ -1461,9 +1438,6 @@ Region:
     ClearPointsOffset: {}
     CreateAnimationGroup:
       impl: Region/CreateAnimationGroup
-    GetAlpha:
-      getter:
-      - name: alpha
     GetAnimationGroups:
       impl: Region/GetAnimationGroups
     GetBottom:
@@ -1492,9 +1466,6 @@ Region:
       - name: height
     GetRight:
       impl: Region/GetRight
-    GetScale:
-      getter:
-      - name: scale
     GetScaledRect:
       impl: Region/GetScaledRect
     GetSize:
@@ -1507,8 +1478,6 @@ Region:
     GetWidth:
       getter:
       - name: width
-    Hide:
-      impl: Region/Hide
     IsAnchoringRestricted: {}
     IsDragging: {}
     IsIgnoringParentAlpha:
@@ -1522,15 +1491,8 @@ Region:
     IsProtected:
       impl: Region/IsProtected
     IsRectValid: {}
-    IsShown:
-      getter:
-      - name: shown
-    IsVisible:
-      impl: Region/IsVisible
     SetAllPoints:
       impl: Region/SetAllPoints
-    SetAlpha:
-      impl: Region/SetAlpha
     SetHeight:
       setter:
       - name: height
@@ -1543,10 +1505,6 @@ Region:
     SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
-    SetScale:
-      impl: Region/SetScale
-    SetShown:
-      impl: Region/SetShown
     SetSize:
       setter:
       - name: width
@@ -1554,9 +1512,42 @@ Region:
     SetWidth:
       setter:
       - name: width
+    StopAnimating: {}
+  virtual: true
+RegionBase:
+  fields:
+    alpha:
+      init: 1
+      type: number
+    scale:
+      init: 1
+      type: number
+    shown:
+      init: true
+      type: boolean
+  inherits: {}
+  methods:
+    GetAlpha:
+      getter:
+      - name: alpha
+    GetScale:
+      getter:
+      - name: scale
+    Hide:
+      impl: Region/Hide
+    IsShown:
+      getter:
+      - name: shown
+    IsVisible:
+      impl: Region/IsVisible
+    SetAlpha:
+      impl: Region/SetAlpha
+    SetScale:
+      impl: Region/SetScale
+    SetShown:
+      impl: Region/SetShown
     Show:
       impl: Region/Show
-    StopAnimating: {}
   virtual: true
 Rotation:
   inherits:
