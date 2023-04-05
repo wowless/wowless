@@ -131,6 +131,24 @@ local function new(log, maxErrors, product)
     end
   end
 
+  local function DoUpdateVisible(obj, script)
+    for kid in obj.children:entries() do
+      if kid.shown then
+        DoUpdateVisible(kid, script)
+      end
+    end
+    RunScript(obj, script)
+  end
+
+  local function UpdateVisible(obj, fn)
+    local wasVisible = obj:IsVisible()
+    fn()
+    local visibleNow = obj:IsVisible()
+    if wasVisible ~= visibleNow then
+      DoUpdateVisible(obj, visibleNow and 'OnShow' or 'OnHide')
+    end
+  end
+
   local datalua = require('build.products.' .. product .. '.data')
 
   local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id)
@@ -333,6 +351,7 @@ local function new(log, maxErrors, product)
     uiobjectTypes = uiobjectTypes,
     UnregisterAllEvents = UnregisterAllEvents,
     UnregisterEvent = UnregisterEvent,
+    UpdateVisible = UpdateVisible,
     UserData = u,
   }
   require('wowless.util').mixin(uiobjectTypes, require('wowapi.uiobjects')(api))

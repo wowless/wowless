@@ -15,24 +15,6 @@ end
 local function mkBaseUIObjectTypes(api)
   local u = api.UserData
 
-  local function DoUpdateVisible(obj, script)
-    for kid in obj.children:entries() do
-      if kid.shown then
-        DoUpdateVisible(kid, script)
-      end
-    end
-    api.RunScript(obj, script)
-  end
-
-  local function UpdateVisible(obj, fn)
-    local wasVisible = obj:IsVisible()
-    fn()
-    local visibleNow = obj:IsVisible()
-    if wasVisible ~= visibleNow then
-      DoUpdateVisible(obj, visibleNow and 'OnShow' or 'OnHide')
-    end
-  end
-
   local function flatten(types)
     local result = {}
     local function flattenOne(k)
@@ -86,7 +68,6 @@ local function mkBaseUIObjectTypes(api)
     build = api.datalua.build,
     toTexture = toTexture,
     u = u,
-    UpdateVisible = UpdateVisible,
   }
   for k, v in pairs(_G) do
     env[k] = v

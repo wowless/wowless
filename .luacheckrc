@@ -41,6 +41,5 @@ files['data/uiobjects'] = {
     'build',
     'toTexture',
     'u',
-    'UpdateVisible',
   },
 }
