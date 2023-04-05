@@ -3553,7 +3553,7 @@ C_PerksActivities.PerksActivityThresholdInfo:
     type: boolean
   requiredContributionAmount:
     type: number
-  thresholdID:
+  thresholdOrderIndex:
     type: number
 C_PerksProgram.PerksProgramItemDisplayInfo:
   overrideModelSceneID:
@@ -3561,8 +3561,6 @@ C_PerksProgram.PerksProgramItemDisplayInfo:
     type: number
 C_PerksProgram.PerksProgramPendingChestRewards:
   activityMonthID:
-    type: number
-  activityThresholdID:
     type: number
   monthRewarded:
     nilable: true
@@ -3573,6 +3571,8 @@ C_PerksProgram.PerksProgramPendingChestRewards:
   rewardAmount:
     type: number
   rewardTypeID:
+    type: number
+  thresholdOrderIndex:
     type: number
 C_PerksProgram.PerksVendorCategoryInfo:
   defaultUIModelSceneID:
