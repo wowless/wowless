@@ -38,7 +38,6 @@ files['addon/Wowless'] = {
 files['data/uiobjects'] = {
   read_globals = {
     'api',
-    'build',
     'toTexture',
     'u',
   },

@@ -65,7 +65,6 @@ local function mkBaseUIObjectTypes(api)
 
   local env = {
     api = api,
-    build = api.datalua.build,
     toTexture = toTexture,
     u = u,
   }
