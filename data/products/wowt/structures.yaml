@@ -1,4 +1,36 @@
 ---
+AddPrivateAuraAnchorArgs:
+  auraIndex:
+    type: number
+  durationAnchor:
+    nilable: true
+    type:
+      structure: AnchorBinding
+  iconInfo:
+    nilable: true
+    type:
+      structure: PrivateAuraIconInfo
+  parent:
+    type: table
+  showCountdownFrame:
+    type: boolean
+  showCountdownNumbers:
+    type: boolean
+  unitToken:
+    type: string
+AnchorBinding:
+  offsetX:
+    type: number
+  offsetY:
+    type: number
+  point:
+    stub: CENTER
+    type: string
+  relativePoint:
+    stub: CENTER
+    type: string
+  relativeTo:
+    type: table
 AppearanceSourceInfo:
   categoryID:
     default: 0
@@ -61,7 +93,7 @@ C_AlliedRaces.AlliedRaceInfo:
   bannerColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   crestAtlas:
     type: string
   description:
@@ -165,11 +197,11 @@ C_ArtifactUI.ArtifactArtInfo:
   barConnectedColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   barDisconnectedColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   spellVisualKitID:
     type: number
   textureKit:
@@ -177,7 +209,7 @@ C_ArtifactUI.ArtifactArtInfo:
   titleColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   titleName:
     type: string
   uiModelSceneID:
@@ -377,7 +409,8 @@ C_AuctionHouse.ItemKeyInfo:
   itemName:
     type: string
   quality:
-    type: number
+    type:
+      enum: ItemQuality
 C_AuctionHouse.ItemSearchResultInfo:
   auctionID:
     type: number
@@ -559,7 +592,6 @@ C_BattleNet.BNetGameAccountInfo:
     nilable: true
     type: string
   gameAccountID:
-    nilable: true
     type: number
   hasFocus:
     type: boolean
@@ -1416,6 +1448,31 @@ C_Console.ConsoleCommandInfo:
     type: string
   scriptParameters:
     type: string
+C_ConsoleScriptCollection.ConsoleScriptCollectionData:
+  ID:
+    type: number
+  name:
+    type: string
+C_ConsoleScriptCollection.ConsoleScriptCollectionElementData:
+  collectionID:
+    nilable: true
+    type: number
+  consoleScriptID:
+    nilable: true
+    type: number
+C_ConsoleScriptCollection.ConsoleScriptData:
+  help:
+    type: string
+  ID:
+    type: number
+  isLuaScript:
+    type: boolean
+  name:
+    type: string
+  params:
+    type: string
+  script:
+    type: string
 C_Container.ContainerItemInfo:
   hasLoot:
     type: boolean
@@ -1484,7 +1541,7 @@ C_ContributionCollector.ContributionAppearance:
   stateColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   stateName:
     type: string
   statusBarAtlas:
@@ -1942,7 +1999,7 @@ C_EventToastManager.EventToastInfo:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   displayType:
     type:
       enum: EventToastDisplayType
@@ -2571,6 +2628,12 @@ C_Garrison.MissionEncounterIconInfo:
   portraitFileDataID:
     type: number
 C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo:
+  closeButtonText:
+    nilable: true
+    type: string
+  extraButtonText:
+    nilable: true
+    type: string
   frameHeight:
     type: number
   frameWidth:
@@ -2627,6 +2690,7 @@ C_GossipInfo.GossipOptionUIInfo:
   flags:
     type: number
   gossipOptionID:
+    nilable: true
     type: number
   icon:
     type: number
@@ -2780,29 +2844,59 @@ C_ItemInteraction.ItemInteractionFrameInfo:
     type: string
   tutorialText:
     type: string
+C_ItemUpgrade.ItemUpgradeCostDiscountInfo:
+  discountHighWatermark:
+    type: number
+  doesCurrentCharacterMeetHighWatermark:
+    type: boolean
+  isAccountWideDiscount:
+    type: boolean
+  isDiscounted:
+    type: boolean
+  isPartialTwoHandDiscount:
+    type: boolean
 C_ItemUpgrade.ItemUpgradeCurrencyCost:
   cost:
     type: number
   currencyID:
     type: number
+  discountInfo:
+    type:
+      structure: C_ItemUpgrade.ItemUpgradeCostDiscountInfo
 C_ItemUpgrade.ItemUpgradeItemCost:
   cost:
     type: number
+  discountInfo:
+    type:
+      structure: C_ItemUpgrade.ItemUpgradeCostDiscountInfo
   itemID:
     type: number
 C_ItemUpgrade.ItemUpgradeItemInfo:
   currUpgrade:
     type: number
+  customUpgradeString:
+    nilable: true
+    type: string
   displayQuality:
+    type: number
+  highWatermarkSlot:
     type: number
   iconID:
     type: number
   itemUpgradeable:
     type: boolean
+  maxItemLevel:
+    type: number
   maxUpgrade:
+    type: number
+  minItemLevel:
     type: number
   name:
     type: string
+  upgradeCostTypesForSeason:
+    type:
+      arrayof:
+        structure: C_ItemUpgrade.ItemUpgradeSeasonalCostType
   upgradeLevelInfos:
     type:
       arrayof:
@@ -2829,6 +2923,14 @@ C_ItemUpgrade.ItemUpgradeLevelInfo:
         structure: C_ItemUpgrade.ItemUpgradeStat
   upgradeLevel:
     type: number
+C_ItemUpgrade.ItemUpgradeSeasonalCostType:
+  itemID:
+    type: number
+  orderIndex:
+    type: number
+  sourceString:
+    nilable: true
+    type: string
 C_ItemUpgrade.ItemUpgradeStat:
   active:
     type: boolean
@@ -3074,6 +3176,63 @@ C_LFGList.WowLocale:
   zhTW:
     default: false
     type: boolean
+C_LootHistory.EncounterLootDropInfo:
+  allPassed:
+    default: false
+    type: boolean
+  currentLeader:
+    nilable: true
+    type:
+      structure: C_LootHistory.EncounterLootDropRollInfo
+  duration:
+    type: number
+  isTied:
+    default: false
+    type: boolean
+  itemHyperlink:
+    type: string
+  lootListID:
+    type: number
+  playerRollState:
+    type:
+      enum: EncounterLootDropRollState
+  rollInfos:
+    type:
+      arrayof:
+        structure: C_LootHistory.EncounterLootDropRollInfo
+  startTime:
+    type: number
+  winner:
+    nilable: true
+    type:
+      structure: C_LootHistory.EncounterLootDropRollInfo
+C_LootHistory.EncounterLootDropRollInfo:
+  isSelf:
+    type: boolean
+  isWinner:
+    default: false
+    type: boolean
+  playerClass:
+    type: string
+  playerGUID:
+    type: string
+  playerName:
+    type: string
+  roll:
+    nilable: true
+    type: number
+  state:
+    type:
+      enum: EncounterLootDropRollState
+C_LootHistory.EncounterLootInfo:
+  duration:
+    type: number
+  encounterID:
+    type: number
+  encounterName:
+    type: string
+  startTime:
+    type: number
 C_LootJournal.LootJournalItemInfo:
   icon:
     type: number
@@ -3224,7 +3383,8 @@ C_Map.MapLinkInfo:
       structure: vector2
 C_Map.UiMapDetails:
   flags:
-    type: number
+    type:
+      enum: UIMapFlag
   mapID:
     type: number
   mapType:
@@ -3451,6 +3611,12 @@ C_PartyPose.PartyPoseInfo:
     type: number
   partyPoseID:
     type: number
+  titleText:
+    nilable: true
+    type: string
+  uiTextureKit:
+    nilable: true
+    type: string
   victoryModelSceneID:
     type: number
   victorySoundKitID:
@@ -3479,11 +3645,20 @@ C_PerksActivities.PerksActivitiesTracked:
   trackedIDs:
     type:
       arrayof: number
+C_PerksActivities.PerksActivityCriteria:
+  criteriaID:
+    type: number
+  requiredValue:
+    type: number
 C_PerksActivities.PerksActivityInfo:
   activityName:
     type: string
   completed:
     type: boolean
+  criteriaList:
+    type:
+      arrayof:
+        structure: C_PerksActivities.PerksActivityCriteria
   description:
     type: string
   ID:
@@ -3492,6 +3667,8 @@ C_PerksActivities.PerksActivityInfo:
     type:
       arrayof:
         structure: C_PerksActivities.PerksActivityRequirement
+  supersedes:
+    type: number
   tagNames:
     type:
       arrayof: string
@@ -3499,6 +3676,8 @@ C_PerksActivities.PerksActivityInfo:
     type: number
   tracked:
     type: boolean
+  uiPriority:
+    type: number
 C_PerksActivities.PerksActivityRequirement:
   completed:
     type: boolean
@@ -3518,7 +3697,7 @@ C_PerksActivities.PerksActivityThresholdInfo:
     type: boolean
   requiredContributionAmount:
     type: number
-  thresholdID:
+  thresholdOrderIndex:
     type: number
 C_PerksProgram.PerksProgramItemDisplayInfo:
   overrideModelSceneID:
@@ -3526,8 +3705,6 @@ C_PerksProgram.PerksProgramItemDisplayInfo:
     type: number
 C_PerksProgram.PerksProgramPendingChestRewards:
   activityMonthID:
-    type: number
-  activityThresholdID:
     type: number
   monthRewarded:
     nilable: true
@@ -3538,6 +3715,8 @@ C_PerksProgram.PerksProgramPendingChestRewards:
   rewardAmount:
     type: number
   rewardTypeID:
+    type: number
+  thresholdOrderIndex:
     type: number
 C_PerksProgram.PerksVendorCategoryInfo:
   defaultUIModelSceneID:
@@ -3861,6 +4040,8 @@ C_PvP.MatchPVPStatColumn:
     type: number
   tooltip:
     type: string
+  tooltipTitle:
+    type: string
 C_PvP.PvpBrawlInfo:
   brawlID:
     type: number
@@ -3996,6 +4177,8 @@ C_PvP.PVPScoreInfo:
     type: number
   name:
     type: string
+  postmatchMMR:
+    type: number
   prematchMMR:
     type: number
   raceName:
@@ -4078,6 +4261,27 @@ C_PvP.RatedSoloShuffleSpecStats:
     type: number
   weeklyMostPlayedSpecRounds:
     type: number
+C_QuestInfoSystem.QuestRewardSpellInfo:
+  garrFollowerID:
+    nilable: true
+    type: number
+  genericUnlock:
+    type: boolean
+  hideSpellLearnText:
+    type: boolean
+  isBoostSpell:
+    type: boolean
+  isSpellLearned:
+    type: boolean
+  isTradeskill:
+    type: boolean
+  name:
+    type: string
+  texture:
+    type: number
+  type:
+    type:
+      enum: QuestCompleteSpellType
 C_QuestLine.QuestLineInfo:
   floorLocation:
     type:
@@ -4123,6 +4327,8 @@ C_QuestLog.QuestInfo:
   isHeader:
     type: boolean
   isHidden:
+    type: boolean
+  isLegendarySort:
     type: boolean
   isOnMap:
     type: boolean
@@ -4223,16 +4429,8 @@ C_RecruitAFriend.RafIllusionInfo:
   spellItemEnchantmentID:
     type: number
 C_RecruitAFriend.RafInfo:
-  availableMonths:
-    type: number
   claimInProgress:
     type: boolean
-  lifetimeMonths:
-    type: number
-  nextReward:
-    nilable: true
-    type:
-      structure: C_RecruitAFriend.RafReward
   recruitmentInfo:
     nilable: true
     type:
@@ -4241,10 +4439,15 @@ C_RecruitAFriend.RafInfo:
     type:
       arrayof:
         structure: C_RecruitAFriend.RafRecruit
-  rewards:
+  versions:
     type:
       arrayof:
-        structure: C_RecruitAFriend.RafReward
+        structure: C_RecruitAFriend.RafVersionInfo
+C_RecruitAFriend.RafMonthCount:
+  availableMonths:
+    type: number
+  lifetimeMonths:
+    type: number
   spentMonths:
     type: number
 C_RecruitAFriend.RafMountInfo:
@@ -4279,6 +4482,9 @@ C_RecruitAFriend.RafRecruit:
   subStatus:
     type:
       enum: RafRecruitSubStatus
+  versionRecruited:
+    type:
+      enum: RecruitAFriendRewardsVersion
   wowAccountGUID:
     type: string
 C_RecruitAFriend.RafRecruitActivity:
@@ -4317,6 +4523,8 @@ C_RecruitAFriend.RafReward:
       structure: C_RecruitAFriend.RafAppearanceSetInfo
   availableInMonths:
     type: number
+  canAfford:
+    type: boolean
   canClaim:
     type: boolean
   claimed:
@@ -4341,6 +4549,9 @@ C_RecruitAFriend.RafReward:
     nilable: true
     type:
       structure: C_RecruitAFriend.RafPetInfo
+  rafVersion:
+    type:
+      enum: RecruitAFriendRewardsVersion
   repeatable:
     type: boolean
   repeatableClaimCount:
@@ -4366,6 +4577,25 @@ C_RecruitAFriend.RafSystemInfo:
 C_RecruitAFriend.RafTitleInfo:
   titleMaskID:
     type: number
+C_RecruitAFriend.RafVersionInfo:
+  monthCount:
+    type:
+      structure: C_RecruitAFriend.RafMonthCount
+  nextReward:
+    nilable: true
+    type:
+      structure: C_RecruitAFriend.RafReward
+  numAffordableRewards:
+    type: number
+  numRecruits:
+    type: number
+  rafVersion:
+    type:
+      enum: RecruitAFriendRewardsVersion
+  rewards:
+    type:
+      arrayof:
+        structure: C_RecruitAFriend.RafReward
 C_ResearchInfo.DigSiteMapInfo:
   name:
     type: string
@@ -4802,6 +5032,8 @@ C_TaxiMap.MapTaxiNodeInfo:
   textureKit:
     type: string
 C_TaxiMap.TaxiNodeInfo:
+  isMapLayerTransition:
+    type: boolean
   name:
     type: string
   nodeID:
@@ -6010,6 +6242,15 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
       enum: WidgetShownState
   text:
     type: string
+  textEnabledState:
+    type:
+      enum: WidgetEnabledState
+  textFontType:
+    type:
+      enum: UIWidgetFontType
+  textSizeType:
+    type:
+      enum: UIWidgetTextSizeType
   textureKit:
     type: string
   tooltip:
@@ -6804,16 +7045,19 @@ CharCustomizationChoice:
     type: string
   name:
     type: string
+  soundKit:
+    nilable: true
+    type: number
   swatchColor1:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   swatchColor2:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
 CharCustomizationOption:
   choices:
     type:
@@ -6859,6 +7103,13 @@ ClickBindingInfo:
   type:
     type:
       enum: ClickBindingType
+colorRGB:
+  b:
+    type: number
+  g:
+    type: number
+  r:
+    type: number
 colorRGBA:
   a:
     type: number
@@ -7040,7 +7291,10 @@ CraftingOrderCustomerOptionInfo:
     nilable: true
     type:
       arrayof: number
-  iLvl:
+  iLvlMax:
+    nilable: true
+    type: number
+  iLvlMin:
     type: number
   itemID:
     type: number
@@ -7271,6 +7525,8 @@ CraftingReagentSlotSchematic:
   reagentType:
     type:
       enum: CraftingReagentType
+  required:
+    type: boolean
   slotIndex:
     type: number
   slotInfo:
@@ -7516,15 +7772,15 @@ GuildTabardInfo:
   backgroundColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   borderColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   emblemColor:
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   emblemFileID:
     type: number
   emblemStyle:
@@ -7607,6 +7863,14 @@ PlayerInfoCharacterData:
     type:
       enum: UnitSex
 PlayerLocation: {}
+PrivateAuraIconInfo:
+  iconAnchor:
+    type:
+      structure: AnchorBinding
+  iconHeight:
+    type: number
+  iconWidth:
+    type: number
 ProfessionInfo:
   expansionName:
     type: string
@@ -7632,11 +7896,22 @@ ProfessionInfo:
     type: number
   skillModifier:
     type: number
+  sourceCounter:
+    type: number
+ProfTabHighlight:
+  description:
+    type: string
 ProfTabInfo:
   description:
     type: string
+  highlights:
+    type:
+      arrayof:
+        structure: ProfTabHighlight
   name:
     type: string
+  rootIconID:
+    type: number
   rootNodeID:
     type: number
 QuestReputationRewardInfo:
@@ -7767,7 +8042,7 @@ TooltipDataArg:
     nilable: true
     type:
       mixin: ColorMixin
-      structure: colorRGBA
+      structure: colorRGB
   field:
     type: string
   floatVal:

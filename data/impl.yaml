@@ -150,6 +150,9 @@ GetAddOnMetadata:
 GetBuildInfo:
   frameworks:
   - datalua
+GetBuildInfo_10_1:
+  frameworks:
+  - datalua
 GetChatWindowInfo: {}
 GetChatWindowMessages:
   frameworks:
