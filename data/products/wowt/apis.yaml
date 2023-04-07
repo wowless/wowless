@@ -21978,23 +21978,16 @@ GetAddOnEnableState:
   - - name: character
       nilable: true
       type: string
-    - name: addonIndex
-      type: number
-  - - name: character
-      nilable: true
-      type: string
-    - name: addonName
-      type: string
+    - name: addon
+      type: uiAddon
   outputs:
   - name: enabledState
     type: number
 GetAddOnInfo:
   impl: GetAddOnInfo
   inputs:
-  - - name: index
-      type: number
-  - - name: name
-      type: string
+  - - name: addon
+      type: uiAddon
   outputs:
   - name: name
     type: string
@@ -22015,10 +22008,8 @@ GetAddOnInfo:
     type: boolean
 GetAddOnMemoryUsage:
   inputs:
-  - - name: index
-      type: number
-  - - name: name
-      type: string
+  - - name: addon
+      type: uiAddon
   outputs:
   - name: memoryKb
     type: number
@@ -25883,19 +25874,15 @@ IsActiveQuestTrivial:
 IsAddOnLoaded:
   impl: IsAddOnLoaded
   inputs:
-  - - name: index
-      type: number
-  - - name: name
-      type: string
+  - - name: addon
+      type: uiAddon
   outputs:
   - type: boolean
 IsAddOnLoadOnDemand:
   impl: IsAddOnLoadOnDemand
   inputs:
-  - - name: index
-      type: number
-  - - name: name
-      type: string
+  - - name: addon
+      type: uiAddon
   outputs:
   - type: oneornil
 IsAddonVersionCheckEnabled:
@@ -26421,10 +26408,8 @@ ListChannels: {}
 LoadAddOn:
   impl: LoadAddOn
   inputs:
-  - - name: addonIndex
-      type: number
-  - - name: addonName
-      type: string
+  - - name: addon
+      type: uiAddon
   outputs:
   - name: loaded
     type: boolean
