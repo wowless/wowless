@@ -138,15 +138,9 @@ EnumerateFrames:
 FillLocalizedClassList:
   sqls:
   - cursor: FillLocalizedClassList
-GetAddOnEnableState:
-  states:
-  - Addons
-GetAddOnInfo:
-  states:
-  - Addons
-GetAddOnMetadata:
-  states:
-  - Addons
+GetAddOnEnableState: {}
+GetAddOnInfo: {}
+GetAddOnMetadata: {}
 GetBuildInfo:
   frameworks:
   - datalua
@@ -241,12 +235,8 @@ GetTime:
 hooksecurefunc:
   frameworks:
   - env
-IsAddOnLoaded:
-  states:
-  - Addons
-IsAddOnLoadOnDemand:
-  states:
-  - Addons
+IsAddOnLoaded: {}
+IsAddOnLoadOnDemand: {}
 IsLoggedIn:
   states:
   - System

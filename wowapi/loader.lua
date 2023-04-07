@@ -146,6 +146,8 @@ local function loadFunctions(api, loader)
       elseif param.type == 'unit' then
         checkarg(arg, 'string')
         return resolveUnit(api.states.Units, arg)
+      elseif param.type == 'uiAddon' then
+        return api.states.Addons[tonumber(arg) or tostring(arg):lower()]
       elseif param.type == 'unknown' then
         return arg
       elseif param.type == 'function' or param.type == 'table' or param.type == 'boolean' then

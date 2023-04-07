@@ -9,6 +9,7 @@ type:
   - literal: oneornil
   - literal: string
   - literal: table
+  - literal: uiAddon
   - literal: unit
   - literal: unknown
   - literal: userdata
