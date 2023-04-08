@@ -446,11 +446,12 @@ C_AddOns.GetAddOnMetadata:
   impl: GetAddOnMetadata
   inputs:
   - - name: name
-      type: string
+      type: uiAddon
     - name: variable
       type: string
   outputs:
   - name: value
+    nilable: true
     type: string
 C_AdventureJournal.ActivateEntry: {}
 C_AdventureJournal.CanBeShown: {}
