@@ -81,11 +81,11 @@ function G.GeneratedTests()
               else
                 assertEquals(ty, type(func))
               end
-            elseif
-              name ~= 'C_Traits' or mname ~= 'GetEntryInfo' and mname ~= 'GetConditionInfo' and mname ~= 'GetTreeInfo'
-            then
+            elseif not mcfg.overwritten then
               return checkCFunc(func)
             end
+            -- Do nothing on overwritten APIs. They're Lua when processing
+            -- FrameXML, and C when running bare.
           end
         end
         return mkTests(ns, mtests)

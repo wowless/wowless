@@ -1,4 +1,9 @@
 ---
+addon:
+  overwritten_apis:
+    C_Traits.GetConditionInfo: {}
+    C_Traits.GetEntryInfo: {}
+    C_Traits.GetTreeInfo: {}
 docs:
   apis:
     skip_namespaces:
