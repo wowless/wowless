@@ -598,7 +598,8 @@ local function loader(api, cfg)
         end
         local success, content = pcall(readFile, filename)
         if success then
-          loadFn(filename, content, nil, closureTaint, addonName, addonEnv)
+          -- TODO only pass SecureCapsuleGet on signed addons
+          loadFn(filename, content, nil, closureTaint, addonName, addonEnv, api.env.SecureCapsuleGet)
         else
           api.log(1, 'skipping missing file %s', filename)
         end
