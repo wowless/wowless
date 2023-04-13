@@ -2,6 +2,16 @@
 name: config
 type:
   record:
+    addon:
+      type:
+        record:
+          overwritten_apis:
+            type:
+              mapof:
+                key:
+                  ref: api
+                value:
+                  record: null
     docs:
       type:
         record:
