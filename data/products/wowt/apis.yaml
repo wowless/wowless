@@ -20334,6 +20334,15 @@ C_UnitAuras.WantsAlteredForm:
   outputs:
   - name: wantsAlteredForm
     type: boolean
+C_UnitAurasPrivate.AddPrivateAuraUpdateCallback: {}
+C_UnitAurasPrivate.AnchorPrivateAura: {}
+C_UnitAurasPrivate.GetAllPrivateAuras: {}
+C_UnitAurasPrivate.GetAuraDataByAuraInstanceIDPrivate: {}
+C_UnitAurasPrivate.GetPrivateAuraAnchors: {}
+C_UnitAurasPrivate.SetPrivateAuraAnchorAddedCallback: {}
+C_UnitAurasPrivate.SetPrivateAuraAnchorRemovedCallback: {}
+C_UnitAurasPrivate.SetPrivateRaidBossMessageCallback: {}
+C_UnitAurasPrivate.SetPrivateWarningTextFrame: {}
 C_UserFeedback.SubmitBug:
   inputs:
   - - name: bugInfo
