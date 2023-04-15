@@ -305,7 +305,7 @@ local function loadFunctions(api, loader)
     if apicfg.alias then
       aliases[fn] = apicfg.alias
     elseif apicfg.stdlib then
-      util.tset(fns, fn, util.tget(_G, apicfg.stdlib))
+      util.tset(fns, fn, assert(util.tget(_G, apicfg.stdlib)))
     else
       util.tset(fns, fn, mkfn(fn, apicfg))
     end
