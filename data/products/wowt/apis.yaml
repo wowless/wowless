@@ -20340,7 +20340,14 @@ C_UnitAuras.WantsAlteredForm:
     type: boolean
 C_UnitAurasPrivate.AddPrivateAuraUpdateCallback: {}
 C_UnitAurasPrivate.AnchorPrivateAura: {}
-C_UnitAurasPrivate.GetAllPrivateAuras: {}
+C_UnitAurasPrivate.GetAllPrivateAuras:
+  inputs:
+  - {}
+  outputs:
+  - name: auras
+    type:
+      arrayof:
+        structure: AuraData
 C_UnitAurasPrivate.GetAuraDataByAuraInstanceIDPrivate: {}
 C_UnitAurasPrivate.GetPrivateAuraAnchors:
   inputs:
