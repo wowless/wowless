@@ -51,6 +51,7 @@ function G.GeneratedTests()
   end
 
   local function apiNamespaces()
+    local capsulens = capsuleconfig.apinamespaces or {}
     local function mkTests(ns, tests)
       for k, v in pairs(ns) do
         -- Anything left over must be a FrameXML-defined function.
@@ -65,32 +66,34 @@ function G.GeneratedTests()
     local tests = {}
     local empty = {}
     for name, ncfg in pairs(_G.WowlessData.NamespaceApis) do
-      tests[name] = function()
-        local ns = _G[name] or capsuleEnv[name]
-        assertEquals('table', type(ns))
-        assert(getmetatable(ns) == nil)
-        local mtests = {}
-        for mname, mcfg in pairs(ncfg) do
-          mcfg = mcfg == true and empty or mcfg
-          mtests[mname] = function()
-            local func = ns[mname]
-            if mcfg.alias then
-              assertEquals(func, assert(tget(_G, mcfg.alias)))
-            elseif mcfg.stdlib then
-              local ty = type(tget(_G, mcfg.stdlib))
-              if ty == 'function' then
+      if not capsulens[name] then
+        tests[name] = function()
+          local ns = _G[name] or capsuleEnv[name]
+          assertEquals('table', type(ns))
+          assert(getmetatable(ns) == nil)
+          local mtests = {}
+          for mname, mcfg in pairs(ncfg) do
+            mcfg = mcfg == true and empty or mcfg
+            mtests[mname] = function()
+              local func = ns[mname]
+              if mcfg.alias then
+                assertEquals(func, assert(tget(_G, mcfg.alias)))
+              elseif mcfg.stdlib then
+                local ty = type(tget(_G, mcfg.stdlib))
+                if ty == 'function' then
+                  return checkCFunc(func)
+                else
+                  assertEquals(ty, type(func))
+                end
+              elseif not mcfg.overwritten then
                 return checkCFunc(func)
-              else
-                assertEquals(ty, type(func))
               end
-            elseif not mcfg.overwritten then
-              return checkCFunc(func)
+              -- Do nothing on overwritten APIs. They're Lua when processing
+              -- FrameXML, and C when running bare.
             end
-            -- Do nothing on overwritten APIs. They're Lua when processing
-            -- FrameXML, and C when running bare.
           end
+          return mkTests(ns, mtests)
         end
-        return mkTests(ns, mtests)
       end
     end
     return tests
