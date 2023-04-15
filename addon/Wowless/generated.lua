@@ -5,6 +5,8 @@ local capsuleEnv = _G.SimpleCheckout and getfenv(_G.SimpleCheckout.OnLoad) or {}
 
 assert(_G.WowlessData, 'missing WowlessData')
 
+local capsuleconfig = _G.WowlessData.Config.capsule or {}
+
 local function tget(t, s)
   local dot = s:find('%.')
   if dot then
@@ -210,6 +212,7 @@ function G.GeneratedTests()
   end
 
   local function globalApis()
+    local capsuleapis = capsuleconfig.globalapis or {}
     local tests = {}
     local empty = {}
     for name, cfg in pairs(_G.WowlessData.GlobalApis) do
@@ -227,7 +230,7 @@ function G.GeneratedTests()
           end
         elseif cfg.nowrap then
           return checkLuaFunc(func)
-        else
+        elseif not capsuleapis[name] then
           return checkCFunc(func)
         end
       end
@@ -257,8 +260,7 @@ function G.GeneratedTests()
   end
 
   local function globals()
-    local capsuleconfig = _G.WowlessData.Config.capsule
-    local capsuleenums = capsuleconfig and capsuleconfig.enums or {}
+    local capsuleenums = capsuleconfig.enums or {}
     local data = _G.WowlessData.Globals
     local tests = {}
     local actualEnum = G.mixin({}, _G.Enum, capsuleEnv.Enum or {})
