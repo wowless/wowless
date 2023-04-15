@@ -1313,6 +1313,7 @@ MouseMixin:
   methods:
     EnableMouse:
       impl: MouseMixin/EnableMouse
+    EnableMouseMotion: {}
     EnableMouseWheel:
       setter:
       - name: mouseWheelEnabled
