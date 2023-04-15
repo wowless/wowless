@@ -7471,6 +7471,7 @@ C_DateAndTime.AdjustTimeByMinutes:
   - name: newDate
     type:
       structure: CalendarTime
+C_DateAndTime.AdjustTimeByMonths: {}
 C_DateAndTime.CompareCalendarTime:
   impl: C_DateAndTime.CompareCalendarTime
   inputs:
@@ -9423,6 +9424,7 @@ C_Item.DoesItemMatchBonusTreeReplacement:
   outputs:
   - name: matchesBonusTree
     type: boolean
+C_Item.DoesItemMatchTrackJump: {}
 C_Item.GetAppliedItemTransmogInfo:
   inputs:
   - - name: itemLoc
@@ -9973,6 +9975,7 @@ C_ItemUpgrade.GetNumItemUpgradeEffects:
   outputs:
   - name: numItemUpgradeEffects
     type: number
+C_ItemUpgrade.IsItemBound: {}
 C_ItemUpgrade.SetItemUpgradeFromCursorItem:
   inputs:
   - {}
@@ -11093,6 +11096,7 @@ C_Map.GetMapHighlightInfoAtPosition:
     type: number
   - name: scrollChildY
     type: number
+C_Map.GetMapHighlightPulseInfo: {}
 C_Map.GetMapInfo:
   impl: C_Map.GetMapInfo
   inputs:
@@ -16021,6 +16025,7 @@ C_Spell.RequestLoadSpellData:
   - - name: spellID
       type: number
   outputs: {}
+C_Spell.TargetSpellJumpsUpgradeTrack: {}
 C_SpellBook.ContainsAnyDisenchantSpell:
   inputs:
   - {}
@@ -18072,6 +18077,7 @@ C_TradeSkillUI.GetRecraftItems:
   - name: items
     type:
       arrayof: string
+C_TradeSkillUI.GetRecraftRemovalWarnings: {}
 C_TradeSkillUI.GetRemainingRecasts:
   inputs:
   - {}
@@ -22539,10 +22545,10 @@ GetDungeonDifficultyID:
   outputs:
   - type: number
 GetDungeonForRandomSlot: {}
+GetEditBoxMetatable: {}
 GetEquipmentNameFromSpell: {}
 geterrorhandler:
   stdlib: geterrorhandler
-GetEventCPUUsage: {}
 GetEventTime: {}
 GetExistingSocketInfo:
   inputs:
@@ -22701,6 +22707,7 @@ GetFlyoutSlotInfo: {}
 GetFollowerTypeIDFromSpell: {}
 GetFontInfo: {}
 GetFonts: {}
+GetFontStringMetatable: {}
 GetFrameCPUUsage: {}
 GetFramerate:
   inputs:
@@ -22708,7 +22715,6 @@ GetFramerate:
   outputs:
   - type: number
 GetFramesRegisteredForEvent: {}
-GetFunctionCPUUsage: {}
 GetGameMessageInfo: {}
 GetGameTime:
   inputs:
@@ -23997,7 +24003,6 @@ GetNumFactions:
 GetNumFilteredAchievements: {}
 GetNumFlexRaidDungeons: {}
 GetNumFlyouts: {}
-GetNumFrames: {}
 GetNumGroupChannels: {}
 GetNumGroupMembers:
   outputs:
@@ -24829,7 +24834,6 @@ GetScreenWidth:
   impl: GetScreenWidth
   outputs:
   - type: number
-GetScriptCPUUsage: {}
 GetSecondsUntilParentalControlsKick: {}
 GetSelectedArtifactInfo: {}
 GetSelectedDisplayChannel: {}
@@ -26595,6 +26599,7 @@ PartialPlayTime:
 PartyLFGStartBackfill: {}
 pcall:
   stdlib: pcall
+pcallwithenv: {}
 PetAbandon: {}
 PetAggressiveMode: {}
 PetAssistMode: {}
