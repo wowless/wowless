@@ -160,6 +160,9 @@ GetClickFrame:
 getfenv:
   frameworks:
   - env
+GetFontStringMetatable:
+  frameworks:
+  - api
 GetInventorySlotInfo:
   sqls:
   - lookup: GetInventorySlotInfo

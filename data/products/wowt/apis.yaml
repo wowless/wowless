@@ -22768,7 +22768,8 @@ GetFlyoutSlotInfo: {}
 GetFollowerTypeIDFromSpell: {}
 GetFontInfo: {}
 GetFonts: {}
-GetFontStringMetatable: {}
+GetFontStringMetatable:
+  impl: GetFontStringMetatable
 GetFrameCPUUsage: {}
 GetFramerate:
   inputs:
