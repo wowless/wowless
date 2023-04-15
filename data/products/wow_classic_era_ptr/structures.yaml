@@ -42,6 +42,7 @@ AppearanceSourceInfo:
       enum: TransmogUseErrorType
   visualID:
     type: number
+AuraData: {}
 BountyInfo:
   factionID:
     type: number
@@ -7989,7 +7990,8 @@ UnitAuraUpdateInfo:
   addedAuras:
     nilable: true
     type:
-      arrayof: table
+      arrayof:
+        structure: AuraData
   isFullUpdate:
     default: false
     type: boolean
