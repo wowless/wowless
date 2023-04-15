@@ -581,6 +581,9 @@ C_AreaPoiInfo.IsAreaPOITimed:
   outputs:
   - name: isTimed
     type: boolean
+  - name: hideTimerInTooltip
+    nilable: true
+    type: boolean
 C_ArtifactUI.AddPower:
   inputs:
   - - name: powerID
@@ -7471,7 +7474,17 @@ C_DateAndTime.AdjustTimeByMinutes:
   - name: newDate
     type:
       structure: CalendarTime
-C_DateAndTime.AdjustTimeByMonths: {}
+C_DateAndTime.AdjustTimeByMonths:
+  inputs:
+  - - name: date
+      type:
+        structure: CalendarTime
+    - name: months
+      type: number
+  outputs:
+  - name: newDate
+    type:
+      structure: CalendarTime
 C_DateAndTime.CompareCalendarTime:
   impl: C_DateAndTime.CompareCalendarTime
   inputs:
@@ -9424,7 +9437,15 @@ C_Item.DoesItemMatchBonusTreeReplacement:
   outputs:
   - name: matchesBonusTree
     type: boolean
-C_Item.DoesItemMatchTrackJump: {}
+C_Item.DoesItemMatchTrackJump:
+  inputs:
+  - - name: itemLoc
+      type:
+        mixin: ItemLocationMixin
+        structure: ItemLocation
+  outputs:
+  - name: matchesTrackJump
+    type: boolean
 C_Item.GetAppliedItemTransmogInfo:
   inputs:
   - - name: itemLoc
@@ -9975,7 +9996,12 @@ C_ItemUpgrade.GetNumItemUpgradeEffects:
   outputs:
   - name: numItemUpgradeEffects
     type: number
-C_ItemUpgrade.IsItemBound: {}
+C_ItemUpgrade.IsItemBound:
+  inputs:
+  - {}
+  outputs:
+  - name: isBound
+    type: boolean
 C_ItemUpgrade.SetItemUpgradeFromCursorItem:
   inputs:
   - {}
@@ -11096,7 +11122,27 @@ C_Map.GetMapHighlightInfoAtPosition:
     type: number
   - name: scrollChildY
     type: number
-C_Map.GetMapHighlightPulseInfo: {}
+C_Map.GetMapHighlightPulseInfo:
+  inputs:
+  - - name: uiMapID
+      type: number
+  outputs:
+  - name: fileDataID
+    type: number
+  - name: atlasID
+    type: string
+  - name: texturePercentageX
+    type: number
+  - name: texturePercentageY
+    type: number
+  - name: textureX
+    type: number
+  - name: textureY
+    type: number
+  - name: scrollChildX
+    type: number
+  - name: scrollChildY
+    type: number
 C_Map.GetMapInfo:
   impl: C_Map.GetMapInfo
   inputs:
@@ -16025,7 +16071,12 @@ C_Spell.RequestLoadSpellData:
   - - name: spellID
       type: number
   outputs: {}
-C_Spell.TargetSpellJumpsUpgradeTrack: {}
+C_Spell.TargetSpellJumpsUpgradeTrack:
+  inputs:
+  - {}
+  outputs:
+  - name: jumpsUpgradeTrack
+    type: boolean
 C_SpellBook.ContainsAnyDisenchantSpell:
   inputs:
   - {}
@@ -18077,7 +18128,17 @@ C_TradeSkillUI.GetRecraftItems:
   - name: items
     type:
       arrayof: string
-C_TradeSkillUI.GetRecraftRemovalWarnings: {}
+C_TradeSkillUI.GetRecraftRemovalWarnings:
+  inputs:
+  - - name: itemGUID
+      type: string
+    - name: replacedItemIDs
+      type:
+        arrayof: number
+  outputs:
+  - name: warnings
+    type:
+      arrayof: string
 C_TradeSkillUI.GetRemainingRecasts:
   inputs:
   - {}

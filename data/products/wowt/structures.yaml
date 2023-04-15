@@ -161,6 +161,9 @@ C_ArdenwealdGardening.ArdenwealdGardenData:
   remainingSeconds:
     type: number
 C_AreaPoiInfo.AreaPOIInfo:
+  addPaddingAboveWidgets:
+    nilable: true
+    type: boolean
   areaPoiID:
     type: number
   atlasName:
@@ -6788,6 +6791,9 @@ C_VideoOptions.GxAdapterInfoDetails:
   name:
     type: string
 C_VignetteInfo.VignetteInfo:
+  addPaddingAboveWidgets:
+    nilable: true
+    type: boolean
   atlasName:
     type: string
   hasTooltip:
