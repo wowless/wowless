@@ -20338,7 +20338,14 @@ C_UnitAurasPrivate.AddPrivateAuraUpdateCallback: {}
 C_UnitAurasPrivate.AnchorPrivateAura: {}
 C_UnitAurasPrivate.GetAllPrivateAuras: {}
 C_UnitAurasPrivate.GetAuraDataByAuraInstanceIDPrivate: {}
-C_UnitAurasPrivate.GetPrivateAuraAnchors: {}
+C_UnitAurasPrivate.GetPrivateAuraAnchors:
+  inputs:
+  - {}
+  outputs:
+  - name: existingAnchors
+    type:
+      arrayof:
+        structure: AddPrivateAuraAnchorArgs
 C_UnitAurasPrivate.SetPrivateAuraAnchorAddedCallback: {}
 C_UnitAurasPrivate.SetPrivateAuraAnchorRemovedCallback: {}
 C_UnitAurasPrivate.SetPrivateRaidBossMessageCallback: {}
