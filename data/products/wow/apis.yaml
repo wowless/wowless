@@ -20010,7 +20010,8 @@ C_UnitAuras.GetAuraDataByAuraInstanceID:
   outputs:
   - name: aura
     nilable: true
-    type: table
+    type:
+      structure: AuraData
 C_UnitAuras.GetAuraDataBySlot:
   inputs:
   - - name: unitToken
@@ -20020,7 +20021,8 @@ C_UnitAuras.GetAuraDataBySlot:
   outputs:
   - name: aura
     nilable: true
-    type: table
+    type:
+      structure: AuraData
 C_UnitAuras.GetCooldownAuraBySpellID:
   inputs:
   - - name: spellID
@@ -20036,7 +20038,8 @@ C_UnitAuras.GetPlayerAuraBySpellID:
   outputs:
   - name: aura
     nilable: true
-    type: table
+    type:
+      structure: AuraData
 C_UnitAuras.IsAuraFilteredOutByInstanceID:
   inputs:
   - - name: unitToken

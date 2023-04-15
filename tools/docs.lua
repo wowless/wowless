@@ -94,7 +94,6 @@ for _, t in pairs(docs) do
 end
 
 local types = {
-  AuraData = 'table',
   BigInteger = 'number',
   BigUInteger = 'number',
   bool = 'boolean',
