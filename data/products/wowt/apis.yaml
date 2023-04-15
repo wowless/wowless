@@ -26660,7 +26660,8 @@ PartialPlayTime:
 PartyLFGStartBackfill: {}
 pcall:
   stdlib: pcall
-pcallwithenv: {}
+pcallwithenv:
+  stdlib: pcallwithenv
 PetAbandon: {}
 PetAggressiveMode: {}
 PetAssistMode: {}
