@@ -1,5 +1,23 @@
 ---
 addon:
+  capsule:
+    apinamespaces:
+      C_AuthChallenge: {}
+      C_StoreSecure: {}
+      C_WowTokenSecure: {}
+    enums:
+      BattlepayBannerType: {}
+      BattlepayCardType: {}
+      BattlepayDisplayFlag: {}
+      BattlepayGroupDisplayType: {}
+      BattlepayProductDecorator: {}
+      BattlepayProductGroupFlag: {}
+      PurchaseEligibility: {}
+      StoreError: {}
+      VasError: {}
+      VasServiceType: {}
+    globalapis:
+      CreateForbiddenFrame: {}
   overwritten_apis:
     C_Traits.GetConditionInfo: {}
     C_Traits.GetEntryInfo: {}

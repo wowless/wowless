@@ -13,6 +13,9 @@ local perProductAddonGeneratedTypes = {
   build = function(p)
     return { 'data/products/' .. p .. '/build.yaml' }
   end,
+  config = function(p)
+    return { 'data/products/' .. p .. '/config.yaml' }
+  end,
   cvars = function(p)
     return { 'data/products/' .. p .. '/cvars.yaml' }
   end,

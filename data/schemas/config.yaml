@@ -5,6 +5,28 @@ type:
     addon:
       type:
         record:
+          capsule:
+            type:
+              record:
+                apinamespaces:
+                  type:
+                    mapof:
+                      key: string
+                      value:
+                        record: null
+                enums:
+                  type:
+                    mapof:
+                      key: string
+                      value:
+                        record: null
+                globalapis:
+                  type:
+                    mapof:
+                      key:
+                        ref: api
+                      value:
+                        record: null
           overwritten_apis:
             type:
               mapof:

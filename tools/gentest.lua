@@ -27,6 +27,9 @@ local ptablemap = {
   build = function(p)
     return 'Build', perproduct(p, 'build')
   end,
+  config = function(p)
+    return 'Config', perproduct(p, 'config').addon or {}
+  end,
   cvars = function(p)
     return 'CVars', perproduct(p, 'cvars')
   end,
