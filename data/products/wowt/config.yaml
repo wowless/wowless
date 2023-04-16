@@ -35,6 +35,7 @@ runner:
     PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented
   skip_slashcmds:
     CASTRANDOM: {}
+    EDITMODE: {}
     EVENT: {}
     PTRFEEDBACK: {}
     USERANDOM: {}
