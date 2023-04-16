@@ -9,7 +9,6 @@ docs:
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 runner:
   skip_slashcmds:
-    BENCHMARK: {}
     CASTRANDOM: {}
     LOOT_MASTER: {}
     USERANDOM: {}
