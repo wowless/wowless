@@ -15,3 +15,8 @@ runner:
   skip_events:
     PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented
     RAF_REWARD_CLAIM_FAILED: numAffordableRewards never set
+  skip_slashcmds:
+    CASTRANDOM: {}
+    EVENT: {}
+    PTRFEEDBACK: {}
+    USERANDOM: {}

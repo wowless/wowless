@@ -65,3 +65,9 @@ type:
                 key:
                   ref: event
                 value: string
+          skip_slashcmds:
+            type:
+              mapof:
+                key: string
+                value:
+                  record: null

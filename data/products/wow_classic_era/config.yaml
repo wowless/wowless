@@ -7,3 +7,8 @@ docs:
     never_sent:
       PARTY_INVITE_CANCEL: {}
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+runner:
+  skip_slashcmds:
+    CASTRANDOM: {}
+    LOOT_MASTER: {}
+    USERANDOM: {}
