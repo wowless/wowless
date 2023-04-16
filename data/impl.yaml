@@ -144,6 +144,9 @@ GetAddOnMetadata: {}
 GetBuildInfo:
   frameworks:
   - datalua
+GetBuildInfo_10_1:
+  frameworks:
+  - datalua
 GetChatWindowInfo: {}
 GetChatWindowMessages:
   frameworks:
@@ -157,6 +160,9 @@ GetClickFrame:
 getfenv:
   frameworks:
   - env
+GetFontStringMetatable:
+  frameworks:
+  - api
 GetInventorySlotInfo:
   sqls:
   - lookup: GetInventorySlotInfo

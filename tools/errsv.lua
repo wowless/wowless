@@ -57,6 +57,10 @@ local getPatternValue = (function()
       value = mustnumber,
     },
     {
+      pattern = ': missing key ".+" with value (0x000000[01248]+)$',
+      value = tostring,
+    },
+    {
       pattern = ': missing key ".+" with value table: [0-9a-fA-Fx]+$',
       value = constant({}),
     },
