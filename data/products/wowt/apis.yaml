@@ -10761,6 +10761,7 @@ C_LootHistory.GetSortedDropsForEncounter:
   outputs:
   - name: drops
     nilable: true
+    stub: {}
     type:
       arrayof:
         structure: C_LootHistory.EncounterLootDropInfo
