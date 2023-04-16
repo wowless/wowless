@@ -20356,7 +20356,7 @@ C_UnitAurasPrivate.GetPrivateAuraAnchors:
   - name: existingAnchors
     type:
       arrayof:
-        structure: AddPrivateAuraAnchorArgs
+        structure: PrivateAuraAnchor
 C_UnitAurasPrivate.SetPrivateAuraAnchorAddedCallback: {}
 C_UnitAurasPrivate.SetPrivateAuraAnchorRemovedCallback: {}
 C_UnitAurasPrivate.SetPrivateRaidBossMessageCallback: {}

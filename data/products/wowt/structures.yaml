@@ -7872,6 +7872,11 @@ PlayerInfoCharacterData:
     type:
       enum: UnitSex
 PlayerLocation: {}
+PrivateAuraAnchor:
+  anchorID:
+    type: number
+  unitToken:
+    type: string
 PrivateAuraIconInfo:
   iconAnchor:
     type:
