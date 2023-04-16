@@ -14,3 +14,10 @@ docs:
 runner:
   skip_events:
     PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented
+  skip_slashcmds:
+    BENCHMARK: {}
+    CASTRANDOM: {}
+    EVENT: {}
+    LOOT_MASTER: {}
+    PTRFEEDBACK: {}
+    USERANDOM: {}

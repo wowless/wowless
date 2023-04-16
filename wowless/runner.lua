@@ -57,6 +57,9 @@ local function run(cfg)
     os.exit(0)
   end
 
+  local datalua = require('build.products.' .. cfg.product .. '.data')
+  local runnercfg = datalua.config.runner or {}
+
   local scripts = {
     bindings = function()
       local names = {}
@@ -113,8 +116,7 @@ local function run(cfg)
         VARIABLES_LOADED = true,
         VOICE_CHAT_VAD_SETTINGS_UPDATED = true, -- inconsistent with nilable C_VoiceChat outputs
       }
-      local datalua = require('build.products.' .. cfg.product .. '.data')
-      local skip = (datalua.config.runner or {}).skip_events or {}
+      local skip = runnercfg.skip_events or {}
       -- TODO unify with wowapi/loader
       local stubenv = setmetatable({}, {
         __index = function(_, k)
@@ -151,18 +153,11 @@ local function run(cfg)
       end
     end,
     slashcmds = function()
-      local cmdBlacklist = { -- TODO remove this; these require a better SecureCmdOptionParse
-        BENCHMARK = true,
-        CASTRANDOM = true,
-        EVENT = true, -- throws Lua errors if text isn't a valid event
-        LOOT_MASTER = true, -- broken
-        PTRFEEDBACK = true, -- this just seems broken with an empty string
-        USERANDOM = true,
-      }
+      local skip = runnercfg.skip_slashcmds or {}
       local cmds = {}
       for k, v in pairs(api.env) do
         local cmd = k:match('^SLASH_(.+)1$')
-        if cmd and not cmdBlacklist[cmd] then
+        if cmd and not skip[cmd] then
           cmds[cmd] = v
         end
       end
