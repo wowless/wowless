@@ -153,12 +153,19 @@ local function run(cfg)
       end
     end,
     slashcmds = function()
-      local skip = runnercfg.skip_slashcmds or {}
       local cmds = {}
       for k, v in pairs(api.env) do
         local cmd = k:match('^SLASH_(.+)1$')
-        if cmd and not skip[cmd] then
+        if cmd then
           cmds[cmd] = v
+        end
+      end
+      if cfg.dir then
+        for k in pairs(runnercfg.skip_slashcmds or {}) do
+          api.CallSafely(function()
+            assert(cmds[k], 'missing skip_slashcmd ' .. k)
+          end)
+          cmds[k] = nil
         end
       end
       for k, v in require('pl.tablex').sort(cmds) do

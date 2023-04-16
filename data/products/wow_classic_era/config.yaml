@@ -11,7 +11,5 @@ runner:
   skip_slashcmds:
     BENCHMARK: {}
     CASTRANDOM: {}
-    EVENT: {}
     LOOT_MASTER: {}
-    PTRFEEDBACK: {}
     USERANDOM: {}
