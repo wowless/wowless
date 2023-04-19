@@ -7941,6 +7941,14 @@ C_EventUtils.NotifySettingsLoaded:
   inputs:
   - {}
   outputs: {}
+C_ExpansionTrial.OnTrialLevelUpDialogClicked:
+  inputs:
+  - {}
+  outputs: {}
+C_ExpansionTrial.OnTrialLevelUpDialogShown:
+  inputs:
+  - {}
+  outputs: {}
 C_FogOfWar.GetFogOfWarForMap:
   inputs:
   - - name: uiMapID
@@ -17433,7 +17441,6 @@ C_TooltipInfo.GetUnitDebuffByAuraInstanceID:
   - name: data
     type:
       structure: TooltipData
-C_TooltipInfo.GetUnitPrivateAura: {}
 C_TooltipInfo.GetUpgradeItem:
   inputs:
   - {}
@@ -18272,6 +18279,15 @@ C_TradeSkillUI.IsRecraftItemEquipped:
       type: string
   outputs:
   - name: isEquipped
+    type: boolean
+C_TradeSkillUI.IsRecraftReagentValid:
+  inputs:
+  - - name: itemGUID
+      type: string
+    - name: itemID
+      type: number
+  outputs:
+  - name: valid
     type: boolean
 C_TradeSkillUI.IsRuneforging:
   inputs:
@@ -20268,6 +20284,19 @@ C_UnitAuras.AddPrivateAuraAnchor:
   - name: anchorID
     nilable: true
     type: number
+C_UnitAuras.AddPrivateAuraAppliedSound:
+  inputs:
+  - - name: sound
+      type:
+        structure: UnitPrivateAuraAppliedSoundInfo
+  outputs: {}
+C_UnitAuras.AuraIsPrivate:
+  inputs:
+  - - name: spellID
+      type: number
+  outputs:
+  - name: isPrivate
+    type: boolean
 C_UnitAuras.GetAuraDataByAuraInstanceID:
   inputs:
   - - name: unitToken
@@ -22337,6 +22366,7 @@ GetBuildInfo:
     type: string
   - name: buildType
     type: string
+GetButtonMetatable: {}
 GetBuybackItemInfo:
   inputs:
   - - name: index
@@ -22799,6 +22829,7 @@ GetFonts: {}
 GetFontStringMetatable:
   impl: GetFontStringMetatable
 GetFrameCPUUsage: {}
+GetFrameMetatable: {}
 GetFramerate:
   inputs:
   - {}
