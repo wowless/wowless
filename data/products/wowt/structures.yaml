@@ -8246,6 +8246,17 @@ UnitPowerBarInfo:
     type: boolean
   startInset:
     type: number
+UnitPrivateAuraAppliedSoundInfo:
+  soundFileID:
+    nilable: true
+    type: number
+  soundFileName:
+    nilable: true
+    type: string
+  spellID:
+    type: number
+  unitToken:
+    type: string
 vector2:
   x:
     type: number
