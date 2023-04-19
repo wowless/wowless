@@ -22366,7 +22366,8 @@ GetBuildInfo:
     type: string
   - name: buildType
     type: string
-GetButtonMetatable: {}
+GetButtonMetatable:
+  impl: GetButtonMetatable
 GetBuybackItemInfo:
   inputs:
   - - name: index
@@ -22829,7 +22830,8 @@ GetFonts: {}
 GetFontStringMetatable:
   impl: GetFontStringMetatable
 GetFrameCPUUsage: {}
-GetFrameMetatable: {}
+GetFrameMetatable:
+  impl: GetFrameMetatable
 GetFramerate:
   inputs:
   - {}

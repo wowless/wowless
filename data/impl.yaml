@@ -147,6 +147,9 @@ GetBuildInfo:
 GetBuildInfo_10_1:
   frameworks:
   - datalua
+GetButtonMetatable:
+  frameworks:
+  - api
 GetChatWindowInfo: {}
 GetChatWindowMessages:
   frameworks:
@@ -161,6 +164,9 @@ getfenv:
   frameworks:
   - env
 GetFontStringMetatable:
+  frameworks:
+  - api
+GetFrameMetatable:
   frameworks:
   - api
 GetInventorySlotInfo:
