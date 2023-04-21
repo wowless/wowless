@@ -165,16 +165,15 @@ Enum:
     RafActivityLoaded: '0x0000000008000000'
     RafBalanceLoaded: '0x0000000001000000'
     RafFriendMonthsLoaded: '0x0000000010000000'
-    RafRecruiterAcceptancesLoaded: '0x0000000080000000'
     RafRewardsLoaded: '0x0000000002000000'
     RevokedRafRewardsLoaded: '0x0000000020000000'
     SettingsLoaded: '0x0000000000001000'
     TrialBoostHistoryLoaded: '0x0000000000100000'
     VasTransactionsLoaded: '0x0000000000040000'
   AccountStateFlagsMeta:
-    MaxValue: -2147483648
+    MaxValue: 1073741824
     MinValue: 0
-    NumValues: 35
+    NumValues: 34
   ActionBarOrientation:
     Horizontal: 0
     Vertical: 1
@@ -615,11 +614,12 @@ Enum:
     Gm: 3
     PlayerCaged: 2
     PlayerReleased: 1
+    TradingPost: 6
     Unknown: 0
   BattlepetDeletedReasonMeta:
-    MaxValue: 5
+    MaxValue: 6
     MinValue: 0
-    NumValues: 6
+    NumValues: 7
   BattlePetEffectFlags:
     EnableAbilityPicker: 1
     LuaNeedsAllPets: 2
@@ -1672,13 +1672,14 @@ Enum:
     MinValue: 0
     NumValues: 1
   CraftingReagentType:
+    Automatic: 3
     Basic: 1
     Finishing: 2
     Modifying: 0
   CraftingReagentTypeMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   CurrencyDestroyReason:
     BonusRoll: 9
     Capped: 6
@@ -1830,71 +1831,75 @@ Enum:
     NumValues: 4
   Cursormode:
     AttackCursor: 4
-    AttackErrorCursor: 35
+    AttackErrorCursor: 37
     BuyCursor: 3
-    BuyErrorCursor: 34
+    BuyErrorCursor: 36
     CampaignQuestCursor: 23
-    CampaignQuestErrorCursor: 54
+    CampaignQuestErrorCursor: 56
     CampaignQuestTurninCursor: 24
-    CampaignQuestTurninErrorCursor: 55
+    CampaignQuestTurninErrorCursor: 57
     CastCursor: 2
-    CastErrorCursor: 33
-    CustomCursor: 61
+    CastErrorCursor: 35
+    CustomCursor: 65
     GatherCursor: 13
-    GatherErrorCursor: 44
+    GatherErrorCursor: 46
     InnkeeperCursor: 22
-    InnkeeperErrorCursor: 53
+    InnkeeperErrorCursor: 55
     InspectCursor: 7
-    InspectErrorCursor: 38
+    InspectErrorCursor: 40
     InteractCursor: 5
-    InteractErrorCursor: 36
+    InteractErrorCursor: 38
     ItemCursor: 19
-    ItemErrorCursor: 50
+    ItemErrorCursor: 52
     LockCursor: 14
-    LockErrorCursor: 45
+    LockErrorCursor: 47
     LootAllCursor: 16
-    LootAllErrorCursor: 47
+    LootAllErrorCursor: 49
     MailCursor: 15
-    MailErrorCursor: 46
-    MapPinCursor: 29
-    MapPinErrorCursor: 60
+    MailErrorCursor: 48
+    MapPinCursor: 31
+    MapPinErrorCursor: 64
     MineCursor: 11
-    MineErrorCursor: 42
+    MineErrorCursor: 44
     NoCursor: 0
     PickupCursor: 8
-    PickupErrorCursor: 39
+    PickupErrorCursor: 41
     PointCursor: 1
-    PointErrorCursor: 32
+    PointErrorCursor: 34
     QuestCursor: 25
-    QuestErrorCursor: 56
+    QuestErrorCursor: 58
+    QuestLegendaryCursor: 28
+    QuestLegendaryErrorCursor: 61
+    QuestLegendaryTurninCursor: 29
+    QuestLegendaryTurninErrorCursor: 62
     QuestRepeatableCursor: 26
-    QuestRepeatableErrorCursor: 57
+    QuestRepeatableErrorCursor: 59
     QuestTurninCursor: 27
-    QuestTurninErrorCursor: 58
+    QuestTurninErrorCursor: 60
     RepairCursor: 17
-    RepairErrorCursor: 48
+    RepairErrorCursor: 50
     RepairnpcCursor: 18
-    RepairnpcErrorCursor: 49
+    RepairnpcErrorCursor: 51
     SkinAllianceCursor: 21
-    SkinAllianceErrorCursor: 52
+    SkinAllianceErrorCursor: 54
     SkinCursor: 12
-    SkinErrorCursor: 43
+    SkinErrorCursor: 45
     SkinHordeCursor: 20
-    SkinHordeErrorCursor: 51
+    SkinHordeErrorCursor: 53
     SpeakCursor: 6
-    SpeakErrorCursor: 37
+    SpeakErrorCursor: 39
     TaxiCursor: 9
-    TaxiErrorCursor: 40
+    TaxiErrorCursor: 42
     TrainerCursor: 10
-    TrainerErrorCursor: 41
-    UIMoveCursor: 30
-    UIResizeCursor: 31
-    VehicleCursor: 28
-    VehicleErrorCursor: 59
+    TrainerErrorCursor: 43
+    UIMoveCursor: 32
+    UIResizeCursor: 33
+    VehicleCursor: 30
+    VehicleErrorCursor: 63
   CursormodeMeta:
-    MaxValue: 61
+    MaxValue: 65
     MinValue: 0
-    NumValues: 62
+    NumValues: 66
   CursorStyle:
     Crosshair: 1
     Mouse: 0
@@ -2979,6 +2984,21 @@ Enum:
     MaxValue: 100
     MinValue: 0
     NumValues: 101
+  ItemDisplayTextDisplayStyle:
+    ItemNameAndInfoText: 1
+    ItemNameOnlyCentered: 2
+    WorldQuestReward: 0
+  ItemDisplayTextDisplayStyleMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  ItemDisplayTooltipEnabledType:
+    Disabled: 1
+    Enabled: 0
+  ItemDisplayTooltipEnabledTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   ItemGemColor:
     Arcane: 1024
     Blood: 128
@@ -3053,6 +3073,11 @@ Enum:
     CraftingQualityID: 38
     CraftingReagentSlot_0: 43
     CraftingReagentSlot_1: 44
+    CraftingReagentSlot_10: 53
+    CraftingReagentSlot_11: 54
+    CraftingReagentSlot_12: 55
+    CraftingReagentSlot_13: 56
+    CraftingReagentSlot_14: 57
     CraftingReagentSlot_2: 45
     CraftingReagentSlot_3: 46
     CraftingReagentSlot_4: 47
@@ -3094,9 +3119,9 @@ Enum:
     TransmogrifySecondaryItemModifiedAppearanceIDSpec_4: 36
     TransmogrifySecondaryItemModifiedAppearanceIDSpecAll: 31
   ItemModificationMeta:
-    MaxValue: 52
+    MaxValue: 57
     MinValue: 0
-    NumValues: 53
+    NumValues: 58
   ItemProfessionSubclass:
     Alchemy: 2
     Archaeology: 13
@@ -3155,6 +3180,12 @@ Enum:
     MaxValue: 11
     MinValue: 0
     NumValues: 12
+  ItemRecraftFlags:
+    ItemRecraftFlagInvalid: 1
+  ItemRecraftFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   ItemRedundancySlot:
     Chest: 3
     Cloak: 11
@@ -4673,14 +4704,6 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
-  SpellDisplayIconSizeType:
-    Large: 2
-    Medium: 1
-    Small: 0
-  SpellDisplayIconSizeTypeMeta:
-    MaxValue: 2
-    MinValue: 0
-    NumValues: 3
   SpellDisplayTextShownStateType:
     Hidden: 1
     Shown: 0
@@ -5511,6 +5534,7 @@ Enum:
     IconAndText: 0
     IconTextAndBackground: 4
     IconTextAndCurrencies: 7
+    ItemDisplay: 27
     ScenarioHeaderCurrenciesAndBackground: 11
     ScenarioHeaderTimer: 20
     Spacer: 22
@@ -5524,11 +5548,12 @@ Enum:
     TextWithState: 8
     TextWithSubtext: 25
     UnitPowerBar: 23
+    WorldLootObject: 26
     ZoneControl: 16
   UIWidgetVisualizationTypeMeta:
-    MaxValue: 25
+    MaxValue: 27
     MinValue: 0
-    NumValues: 26
+    NumValues: 28
   UnitSex:
     Both: 3
     Female: 1
@@ -5654,14 +5679,15 @@ Enum:
     MinValue: 0
     NumValues: 3
   VignetteType:
+    FyrakkFlight: 4
     Normal: 0
     PvPBounty: 1
     Torghast: 2
     Treasure: 3
   VignetteTypeMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   VoiceChannelErrorReason:
     IsBattleNetChannel: 1
     Unknown: 0
@@ -5767,6 +5793,15 @@ Enum:
     MaxValue: 6
     MinValue: 0
     NumValues: 7
+  WidgetIconSizeType:
+    Large: 2
+    Medium: 1
+    Small: 0
+    Standard: 3
+  WidgetIconSizeTypeMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   WidgetShownState:
     Hidden: 0
     Shown: 1

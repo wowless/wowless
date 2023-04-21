@@ -263,20 +263,22 @@ function G.GeneratedTests()
   end
 
   local function globals()
-    local capsuleenums = capsuleconfig.enums or {}
     local data = _G.WowlessData.Globals
-    local tests = {}
     local actualEnum = G.mixin({}, _G.Enum, capsuleEnv.Enum or {})
+    local capsuleenums = capsuleconfig.enums or {}
+    local expectedEnum = {}
+    for k, v in pairs(data.Enum) do
+      if not capsuleenums[k] or actualEnum[k] then
+        expectedEnum[k] = v
+      end
+    end
+    local tests = {
+      Enum = function()
+        return G.assertRecursivelyEqual(expectedEnum, actualEnum)
+      end,
+    }
     for k, v in pairs(data) do
-      if k == 'Enum' then
-        tests[k] = function()
-          for ek, ev in pairs(v) do
-            if not capsuleenums[ek] then
-              return G.assertRecursivelyEqual(ev, actualEnum[ek])
-            end
-          end
-        end
-      else
+      if k ~= 'Enum' then
         tests[k] = function()
           return G.assertRecursivelyEqual(v, _G[k])
         end

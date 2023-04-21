@@ -5989,6 +5989,45 @@ C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
     type: number
   widgetTag:
     type: string
+C_UIWidgetManager.ItemDisplayVisualizationInfo:
+  frameTextureKit:
+    type: string
+  hasTimer:
+    type: boolean
+  inAnimType:
+    type:
+      enum: WidgetAnimationType
+  itemInfo:
+    type:
+      structure: C_UIWidgetManager.UIWidgetItemInfo
+  layoutDirection:
+    type:
+      enum: UIWidgetLayoutDirection
+  modelSceneLayer:
+    type:
+      enum: UIWidgetModelSceneLayer
+  orderIndex:
+    type: number
+  outAnimType:
+    type:
+      enum: WidgetAnimationType
+  scriptedAnimationEffectID:
+    type: number
+  shownState:
+    type:
+      enum: WidgetShownState
+  textureKit:
+    type: string
+  tooltipLoc:
+    type:
+      enum: UIWidgetTooltipLocation
+  widgetScale:
+    type:
+      enum: UIWidgetScale
+  widgetSizeSetting:
+    type: number
+  widgetTag:
+    type: string
 C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
   currencies:
     type:
@@ -6607,6 +6646,32 @@ C_UIWidgetManager.UIWidgetInfo:
   widgetType:
     type:
       enum: UIWidgetVisualizationType
+C_UIWidgetManager.UIWidgetItemInfo:
+  iconSizeType:
+    type:
+      enum: WidgetIconSizeType
+  infoText:
+    nilable: true
+    type: string
+  infoTextEnabledState:
+    type:
+      enum: WidgetEnabledState
+  itemID:
+    type: number
+  overrideItemName:
+    nilable: true
+    type: string
+  overrideTooltip:
+    nilable: true
+    type: string
+  stackCount:
+    nilable: true
+    type: number
+  textDisplayStyle:
+    type:
+      enum: ItemDisplayTextDisplayStyle
+  tooltipEnabled:
+    type: boolean
 C_UIWidgetManager.UIWidgetSetInfo:
   layoutDirection:
     type:
@@ -6625,7 +6690,7 @@ C_UIWidgetManager.UIWidgetSpellInfo:
       enum: SpellDisplayIconDisplayType
   iconSizeType:
     type:
-      enum: SpellDisplayIconSizeType
+      enum: WidgetIconSizeType
   isLootObject:
     type: boolean
   spellID:

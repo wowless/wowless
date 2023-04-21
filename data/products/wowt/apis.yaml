@@ -7719,6 +7719,14 @@ C_EncounterJournal.IsEncounterComplete:
   outputs:
   - name: isEncounterComplete
     type: boolean
+C_EncounterJournal.OnClose:
+  inputs:
+  - {}
+  outputs: {}
+C_EncounterJournal.OnOpen:
+  inputs:
+  - {}
+  outputs: {}
 C_EncounterJournal.ResetSlotFilter:
   inputs:
   - {}
@@ -7738,6 +7746,11 @@ C_EncounterJournal.SetSlotFilter:
   - - name: filterSlot
       type:
         enum: ItemSlotFilterType
+  outputs: {}
+C_EncounterJournal.SetTab:
+  inputs:
+  - - name: tabIdx
+      type: number
   outputs: {}
 C_EquipmentSet.AssignSpecToEquipmentSet:
   inputs:
@@ -20095,6 +20108,15 @@ C_UIWidgetManager.GetIconTextAndCurrenciesWidgetVisualizationInfo:
     nilable: true
     type:
       structure: C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo
+C_UIWidgetManager.GetItemDisplayVisualizationInfo:
+  inputs:
+  - - name: widgetID
+      type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.ItemDisplayVisualizationInfo
 C_UIWidgetManager.GetObjectiveTrackerWidgetSetID:
   inputs:
   - {}
@@ -20477,10 +20499,12 @@ C_VignetteInfo.GetVignettePosition:
       type: number
   outputs:
   - name: vignettePosition
-    nilable: true
     type:
       mixin: Vector2DMixin
       structure: vector2
+  - name: vignetteFacing
+    nilable: true
+    type: number
 C_VignetteInfo.GetVignettes:
   inputs:
   - {}
