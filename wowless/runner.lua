@@ -212,7 +212,7 @@ local function run(cfg)
   for frame in api.frames:entries() do
     assert(api.UserData(frame.luarep) == frame)
     for k, v in pairs(frame) do
-      assert(type(v) ~= 'table' or sandboxrep_fields[k] or api.UserData(v) == nil, k)
+      assert(type(v) ~= 'table' or sandboxrep_fields[k] == (api.UserData(v) and true), k)
     end
   end
 
