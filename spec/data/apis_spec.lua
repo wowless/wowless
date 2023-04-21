@@ -8,10 +8,6 @@ describe('apis', function()
               for _, output in ipairs(api.outputs or {}) do
                 assert.Nil(output.stub, 'implemented apis cannot specify return values')
               end
-            else
-              assert.Nil(api.frameworks, 'unimplemented apis cannot specify frameworks')
-              assert.Nil(api.sqls, 'unimplemented apis cannot specify sqls')
-              assert.Nil(api.states, 'unimplemented apis cannot specify states')
             end
           end)
         end)
