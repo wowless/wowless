@@ -1,9 +1,7 @@
-local yaml = require('wowapi.yaml')
-
 describe('uiobjects', function()
   for _, p in ipairs(require('wowless.util').productList()) do
     describe(p, function()
-      local uiobjects = yaml.parseFile('data/products/' .. p .. '/uiobjects.yaml')
+      local uiobjects = require('build/data/products/' .. p .. '/uiobjects')
       describe('hierarchy', function()
         local g = {}
         for k, v in pairs(uiobjects) do

@@ -1,7 +1,7 @@
 describe('impl', function()
   it('has the right files', function()
     local expected = {}
-    for k in pairs(require('wowapi.yaml').parseFile('data/impl.yaml')) do
+    for k in pairs(require('build/data/impl')) do
       expected['data/impl/' .. k .. '.lua'] = true
     end
     local actual = {}
