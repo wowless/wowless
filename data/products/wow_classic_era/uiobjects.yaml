@@ -941,7 +941,7 @@ GameTooltip:
       type: number
     tooltipOwner:
       nilable: true
-      type: table
+      type: frame
   inherits:
     Frame: {}
   methods:

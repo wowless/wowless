@@ -13,6 +13,6 @@ local anchorTypes = {
 }
 return (function(self, owner, anchorType)
   assert(owner)
-  self.tooltipOwner = owner
+  self.tooltipOwner = u(owner)
   self.tooltipAnchorType = anchorTypes[anchorType] and anchorType or 'ANCHOR_LEFT'
 end)(...)

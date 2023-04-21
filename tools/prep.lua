@@ -228,7 +228,7 @@ for k, v in pairs(uiobjectdata) do
     elseif mv.getter then
       local t = {}
       for _, f in ipairs(mv.getter) do
-        if fieldset[f.name] == 'texture' then
+        if fieldset[f.name] == 'frame' or fieldset[f.name] == 'texture' then
           table.insert(t, 'x.' .. f.name .. ' and x.' .. f.name .. '.luarep')
         else
           table.insert(t, 'x.' .. f.name)

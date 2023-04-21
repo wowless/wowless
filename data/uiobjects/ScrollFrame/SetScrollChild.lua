@@ -12,7 +12,7 @@ return (function(self, ...)
   if old then
     old:SetParent(nil)
   end
-  self.scrollChild = scrollChild
+  self.scrollChild = scrollChild and u(scrollChild)
   if scrollChild then
     scrollChild:SetParent(self.luarep)
   end

@@ -206,8 +206,6 @@ local function run(cfg)
     luarep = true,
     normalFontObject = true,
     parent = true,
-    scrollChild = true,
-    tooltipOwner = true,
   }
   for frame in api.frames:entries() do
     assert(api.UserData(frame.luarep) == frame)
