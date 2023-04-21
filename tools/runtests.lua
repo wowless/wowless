@@ -12,7 +12,6 @@ local function doit(name, f)
 end
 _G.assert = require('luassert')
 _G.describe = doit
-_G.expose = doit
 _G.it = doit
 for _, f in ipairs(arg) do
   local success, msg = pcall(dofile, f)
