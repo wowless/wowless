@@ -206,9 +206,9 @@ local function run(cfg)
     normalFontObject = true,
     parent = true,
   }
-  for frame in api.frames:entries() do
-    assert(api.UserData(frame.luarep) == frame)
-    for k, v in pairs(frame) do
+  for _, obj in pairs(api.uiobjects) do
+    assert(api.UserData(obj.luarep) == obj)
+    for k, v in pairs(obj) do
       assert(type(v) ~= 'table' or sandboxrep_fields[k] == (api.UserData(v) and true), k)
     end
   end

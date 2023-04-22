@@ -359,6 +359,7 @@ local function new(log, maxErrors, product)
     SetScript = SetScript,
     states = states,
     templates = templates,
+    uiobjects = userdata,
     uiobjectTypes = uiobjectTypes,
     UnregisterAllEvents = UnregisterAllEvents,
     UnregisterEvent = UnregisterEvent,
