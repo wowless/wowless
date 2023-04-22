@@ -201,13 +201,10 @@ local function run(cfg)
   loader.saveAllVariables()
 
   -- Last ditch invariant check.
-  local sandboxrep_fields = {
-    luarep = true,
-  }
   for _, obj in pairs(api.uiobjects) do
     assert(api.UserData(obj.luarep) == obj)
     for k, v in pairs(obj) do
-      assert(type(v) ~= 'table' or sandboxrep_fields[k] == (api.UserData(v) and true), k)
+      assert(type(v) ~= 'table' or (k ~= 'luarep') == not api.UserData(v), k)
     end
   end
 
