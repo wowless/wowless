@@ -217,6 +217,7 @@ local luareps = {
   fontstring = true,
   frame = true,
   texture = true,
+  uiobject = true,
 }
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do

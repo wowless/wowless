@@ -1337,7 +1337,7 @@ ParentedObjectBase:
       type: hlist
     parent:
       nilable: true
-      type: table
+      type: uiobject
   inherits:
     ForbiddenMixin: {}
     UIObject: {}

@@ -29,6 +29,7 @@ type:
                       - literal: string
                       - literal: table
                       - literal: texture
+                      - literal: uiobject
         inherits:
           type:
             mapof:
