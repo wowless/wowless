@@ -126,7 +126,7 @@ local function mkBaseUIObjectTypes(api)
                 v = api.env[v]
               end
               assert(type(v) == 'table', 'expected font')
-              self[f.name] = v
+              self[f.name] = u(v)
             elseif ty == 'frame' then
               if type(v) == 'string' then
                 v = api.env[v]

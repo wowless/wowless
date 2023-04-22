@@ -213,6 +213,7 @@ local function mkuiobjectfieldset(k)
   return set
 end
 local luareps = {
+  font = true,
   fontstring = true,
   frame = true,
   texture = true,
