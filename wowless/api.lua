@@ -47,7 +47,7 @@ local function new(log, maxErrors, product)
       local up = u(ud.parent)
       up.children:remove(ud)
       for _, f in ipairs(parentFieldsToClear) do
-        if up[f] == obj or up[f] == ud then -- TODO clean this up when all such fields are hostrep
+        if up[f] == ud then
           up[f] = nil
         end
       end
