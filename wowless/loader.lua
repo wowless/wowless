@@ -196,7 +196,8 @@ local function loader(api, cfg)
       local point = anchor.attr.point
       local relativeTo
       if anchor.attr.relativeto then
-        relativeTo = api.ParentSub(anchor.attr.relativeto, parent:GetParent())
+        local pp = api.UserData(parent).parent
+        relativeTo = api.ParentSub(anchor.attr.relativeto, pp and api.UserData(pp))
       elseif anchor.attr.relativekey then
         relativeTo = navigate(parent, anchor.attr.relativekey)
       else

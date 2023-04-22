@@ -64,10 +64,10 @@ local function new(log, maxErrors, product)
   local function ParentSub(name, parent)
     if name and string.match(name, parentMatch) then
       local p = parent
-      while p ~= nil and not u(p).name do
-        p = u(p).parent
+      while p ~= nil and not p.name do
+        p = p.parent and u(p.parent)
       end
-      return string.gsub(name, parentMatch, p and u(p).name or 'Top')
+      return string.gsub(name, parentMatch, p and p.name or 'Top')
     else
       return name
     end
@@ -164,7 +164,7 @@ local function new(log, maxErrors, product)
   local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id)
     local objname
     if type(objnamearg) == 'string' then
-      objname = ParentSub(objnamearg, parent and parent.luarep)
+      objname = ParentSub(objnamearg, parent)
     elseif type(objnamearg) == 'number' then
       objname = tostring(objnamearg)
     end
@@ -199,7 +199,7 @@ local function new(log, maxErrors, product)
     end
     if objname then
       if type(objnamearg) == 'string' then
-        objname = ParentSub(objnamearg, ud.parent)
+        objname = ParentSub(objnamearg, ud.parent and u(ud.parent))
       elseif type(objnamearg) == 'number' then
         objname = tostring(objnamearg)
       end

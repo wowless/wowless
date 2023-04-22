@@ -19,7 +19,7 @@ return (function(self, point, ...)
   local idx = 1
   local maybeRelativeTo = select(idx, ...)
   if type(maybeRelativeTo) == 'string' then
-    local name = api.ParentSub(maybeRelativeTo, relativeTo)
+    local name = api.ParentSub(maybeRelativeTo, relativeTo and u(relativeTo))
     local frame = api.env[name]
     if not frame then
       api.log(1, 'SetPoint to unknown frame %q', name)
