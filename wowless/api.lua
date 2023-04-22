@@ -86,13 +86,12 @@ local function new(log, maxErrors, product)
   end
 
   local function GetDebugName(frame)
-    local ud = u(frame)
-    local name = ud.name
+    local name = frame.name
     if name ~= nil then
       return name
     end
     name = ''
-    local parent = ud.parent
+    local parent = frame.parent
     while parent do
       local found = false
       for k, v in pairs(parent) do
