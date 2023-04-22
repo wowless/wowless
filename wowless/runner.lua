@@ -203,7 +203,6 @@ local function run(cfg)
   -- Last ditch invariant check.
   local sandboxrep_fields = {
     luarep = true,
-    parent = true,
   }
   for _, obj in pairs(api.uiobjects) do
     assert(api.UserData(obj.luarep) == obj)

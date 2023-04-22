@@ -37,12 +37,11 @@ local function new(log, maxErrors, product)
   }
 
   local function DoSetParent(obj, parent)
-    parent = parent and parent.luarep -- TODO push this down through the method
     if obj.parent == parent then
       return
     end
     if obj.parent then
-      local up = u(obj.parent)
+      local up = obj.parent
       up.children:remove(obj)
       for _, f in ipairs(parentFieldsToClear) do
         if up[f] == obj then
@@ -52,10 +51,10 @@ local function new(log, maxErrors, product)
     end
     obj.parent = parent
     if parent then
-      u(parent).children:insert(obj)
+      parent.children:insert(obj)
     end
-    if parent and u(parent).frameLevel and obj.frameLevel and not obj.hasFixedFrameLevel then
-      obj:SetFrameLevel(u(parent).frameLevel + 1)
+    if parent and parent.frameLevel and obj.frameLevel and not obj.hasFixedFrameLevel then
+      obj:SetFrameLevel(parent.frameLevel + 1)
     end
   end
 
@@ -65,7 +64,7 @@ local function new(log, maxErrors, product)
     if name and string.match(name, parentMatch) then
       local p = parent
       while p ~= nil and not p.name do
-        p = p.parent and u(p.parent)
+        p = p.parent
       end
       return string.gsub(name, parentMatch, p and p.name or 'Top')
     else
@@ -94,9 +93,7 @@ local function new(log, maxErrors, product)
     end
     name = ''
     local parent = ud.parent
-    local pud
     while parent do
-      pud = u(parent)
       local found = false
       for k, v in pairs(parent) do
         if v == frame then
@@ -107,7 +104,7 @@ local function new(log, maxErrors, product)
       if not found then
         name = string.match(tostring(frame), '^table: 0x0*(.*)$'):lower() .. (name == '' and '' or ('.' .. name))
       end
-      local parentName = pud.name
+      local parentName = parent.name
       if parentName == 'UIParent' then
         break
       elseif parentName and parentName ~= '' then
@@ -115,7 +112,7 @@ local function new(log, maxErrors, product)
         break
       end
       frame = parent
-      parent = pud.parent
+      parent = parent.parent
     end
     return name
   end
@@ -199,7 +196,7 @@ local function new(log, maxErrors, product)
     end
     if objname then
       if type(objnamearg) == 'string' then
-        objname = ParentSub(objnamearg, ud.parent and u(ud.parent))
+        objname = ParentSub(objnamearg, ud.parent)
       elseif type(objnamearg) == 'number' then
         objname = tostring(objnamearg)
       end

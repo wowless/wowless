@@ -13,7 +13,7 @@ return (function(self, point, ...)
   -- TODO handle resetting points
   point = point or 'CENTER'
   assert(validPoints[point])
-  local relativeTo = self.parent
+  local relativeTo = self.parent and self.parent.luarep
   local relativePoint = point
   local x, y = 0, 0
   local idx = 1
