@@ -37,27 +37,25 @@ local function new(log, maxErrors, product)
   }
 
   local function DoSetParent(obj, parent)
-    obj = obj.luarep -- TODO push this down through the method
     parent = parent and parent.luarep -- TODO push this down through the method
-    local ud = u(obj)
-    if ud.parent == parent then
+    if obj.parent == parent then
       return
     end
-    if ud.parent then
-      local up = u(ud.parent)
-      up.children:remove(ud)
+    if obj.parent then
+      local up = u(obj.parent)
+      up.children:remove(obj)
       for _, f in ipairs(parentFieldsToClear) do
-        if up[f] == ud then
+        if up[f] == obj then
           up[f] = nil
         end
       end
     end
-    ud.parent = parent
+    obj.parent = parent
     if parent then
-      u(parent).children:insert(ud)
+      u(parent).children:insert(obj)
     end
-    if parent and u(parent).frameLevel and ud.frameLevel and not ud.hasFixedFrameLevel then
-      ud:SetFrameLevel(u(parent).frameLevel + 1)
+    if parent and u(parent).frameLevel and obj.frameLevel and not obj.hasFixedFrameLevel then
+      obj:SetFrameLevel(u(parent).frameLevel + 1)
     end
   end
 
