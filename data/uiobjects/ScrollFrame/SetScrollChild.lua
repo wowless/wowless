@@ -13,7 +13,7 @@ return (function(self, ...)
     old:SetParent(nil)
   end
   self.scrollChild = scrollChild and u(scrollChild)
-  if scrollChild then
-    scrollChild:SetParent(self.luarep)
+  if self.scrollChild then
+    api.SetParent(self.scrollChild, self)
   end
 end)(...)

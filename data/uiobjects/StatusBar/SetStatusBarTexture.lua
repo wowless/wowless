@@ -1,7 +1,7 @@
 return (function(self, tex)
   local t = toTexture(self, tex, self.statusBarTexture)
   if t then
-    t:SetParent(self.luarep)
+    api.SetParent(t, self)
     t:ClearAllPoints()
     t:SetAllPoints()
     t:Show()
