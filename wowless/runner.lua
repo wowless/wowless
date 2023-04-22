@@ -202,7 +202,6 @@ local function run(cfg)
 
   -- Last ditch invariant check.
   local sandboxrep_fields = {
-    fontstring = true,
     luarep = true,
     normalFontObject = true,
     parent = true,

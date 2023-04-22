@@ -1,4 +1,4 @@
 return (function(self)
   local fs = self.fontstring
-  return fs and u(fs):GetText()
+  return fs and fs:GetText()
 end)(...)

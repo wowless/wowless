@@ -198,7 +198,7 @@ Button:
       type: texture
     fontstring:
       nilable: true
-      type: table
+      type: fontstring
     highlightTexture:
       nilable: true
       type: texture
