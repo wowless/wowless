@@ -196,12 +196,12 @@ local function loader(api, cfg)
       local point = anchor.attr.point
       local relativeTo
       if anchor.attr.relativeto then
-        local pp = api.UserData(parent).parent
-        relativeTo = api.ParentSub(anchor.attr.relativeto, pp and api.UserData(pp))
+        relativeTo = api.ParentSub(anchor.attr.relativeto, api.UserData(parent).parent)
       elseif anchor.attr.relativekey then
         relativeTo = navigate(parent, anchor.attr.relativekey)
       else
-        relativeTo = api.UserData(parent).parent
+        local up = api.UserData(parent).parent
+        relativeTo = up and up.luarep
       end
       local relativePoint = anchor.attr.relativepoint or point
       local offsetX, offsetY = getXY(anchor.kids[#anchor.kids])
@@ -356,6 +356,7 @@ local function loader(api, cfg)
       parentarray = function(_, obj, value)
         local p = api.UserData(obj).parent
         if p then
+          p = p.luarep
           p[value] = p[value] or {}
           table.insert(p[value], obj)
         end
@@ -363,7 +364,7 @@ local function loader(api, cfg)
       parentkey = function(_, obj, value)
         local p = api.UserData(obj).parent
         if p then
-          p[value] = obj
+          p.luarep[value] = obj
         end
       end,
       securemixin = function(ctx, obj, value)
