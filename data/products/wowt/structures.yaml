@@ -3639,6 +3639,8 @@ C_PerksActivities.PerksActivitiesInfo:
         structure: C_PerksActivities.PerksActivityInfo
   displayMonthName:
     type: string
+  secondsRemaining:
+    type: number
   thresholds:
     type:
       arrayof:
@@ -8312,6 +8314,9 @@ UnitPowerBarInfo:
   startInset:
     type: number
 UnitPrivateAuraAppliedSoundInfo:
+  outputChannel:
+    nilable: true
+    type: string
   soundFileID:
     nilable: true
     type: number

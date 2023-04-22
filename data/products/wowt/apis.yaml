@@ -18220,6 +18220,15 @@ C_TradeSkillUI.HasFavoriteOrderRecipes:
     type: boolean
 C_TradeSkillUI.IsAnyRecipeFromSource: {}
 C_TradeSkillUI.IsDataSourceChanging: {}
+C_TradeSkillUI.IsEnchantTargetValid:
+  inputs:
+  - - name: recipeID
+      type: number
+    - name: itemGUID
+      type: string
+  outputs:
+  - name: valid
+    type: boolean
 C_TradeSkillUI.IsInventorySlotFiltered: {}
 C_TradeSkillUI.IsNearProfessionSpellFocus:
   inputs:
@@ -20311,7 +20320,10 @@ C_UnitAuras.AddPrivateAuraAppliedSound:
   - - name: sound
       type:
         structure: UnitPrivateAuraAppliedSoundInfo
-  outputs: {}
+  outputs:
+  - name: privateAuraSoundID
+    nilable: true
+    type: number
 C_UnitAuras.AuraIsPrivate:
   inputs:
   - - name: spellID
@@ -20372,6 +20384,11 @@ C_UnitAuras.IsAuraFilteredOutByInstanceID:
 C_UnitAuras.RemovePrivateAuraAnchor:
   inputs:
   - - name: anchorID
+      type: number
+  outputs: {}
+C_UnitAuras.RemovePrivateAuraAppliedSound:
+  inputs:
+  - - name: privateAuraSoundID
       type: number
   outputs: {}
 C_UnitAuras.SetPrivateWarningTextAnchor:
