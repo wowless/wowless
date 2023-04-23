@@ -3,15 +3,13 @@ local Mixin = util.mixin
 local hlist = require('wowless.hlist')
 
 local function mkBaseUIObjectTypes(api)
-  local u = api.UserData
-
   local function toTexture(parent, tex, obj)
     if type(tex) == 'string' or type(tex) == 'number' then
-      local t = obj or u(parent:CreateTexture())
+      local t = obj or api.UserData(parent:CreateTexture())
       t:SetTexture(tex)
       return t
     else
-      return tex and u(tex)
+      return tex and api.UserData(tex)
     end
   end
 
@@ -48,7 +46,7 @@ local function mkBaseUIObjectTypes(api)
       local sandboxIndex = {}
       for n, f in pairs(v.metaindex) do
         sandboxIndex[n] = debug.newcfunction(function(obj, ...)
-          return f(u(obj), ...)
+          return f(api.UserData(obj), ...)
         end)
       end
       t[k] = {
@@ -115,7 +113,7 @@ local function mkBaseUIObjectTypes(api)
               self[f.name] = nil
             elseif ty == 'texture' then
               local tex = toTexture(self, v)
-              self[f.name] = tex and u(tex)
+              self[f.name] = tex and api.UserData(tex)
             elseif ty == 'number' then
               self[f.name] = assert(tonumber(v), ('want number, got %s'):format(type(v)))
             elseif ty == 'string' then
@@ -125,7 +123,7 @@ local function mkBaseUIObjectTypes(api)
                 v = api.env[v]
               end
               assert(type(v) == 'table', 'expected font')
-              self[f.name] = u(v)
+              self[f.name] = api.UserData(v)
             elseif ty == 'frame' then
               if type(v) == 'string' then
                 v = api.env[v]

@@ -12,7 +12,7 @@ local function new(log, maxErrors, product)
   local uiobjectTypes = {}
   local userdata = {}
 
-  local function u(obj)
+  local function UserData(obj)
     return userdata[obj[0]]
   end
 
@@ -271,7 +271,7 @@ local function new(log, maxErrors, product)
       assert(template, 'unknown template ' .. templateName)
       table.insert(tmpls, template)
     end
-    return CreateUIObject(ltype, name, parent and u(parent), nil, tmpls, id)
+    return CreateUIObject(ltype, name, parent and UserData(parent), nil, tmpls, id)
   end
 
   local function NextFrame(elapsed)
@@ -358,7 +358,7 @@ local function new(log, maxErrors, product)
     UnregisterAllEvents = UnregisterAllEvents,
     UnregisterEvent = UnregisterEvent,
     UpdateVisible = UpdateVisible,
-    UserData = u,
+    UserData = UserData,
   }
   require('wowless.util').mixin(uiobjectTypes, require('wowapi.uiobjects')(api))
   return api
