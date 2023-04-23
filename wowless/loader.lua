@@ -131,7 +131,7 @@ local function loader(api, cfg)
       end
     elseif script.attr.method then
       local mattr = script.attr.method
-      fn = obj[mattr]
+      fn = obj.luarep[mattr]
       if not fn then
         api.log(2, 'unknown script method %q on %q', mattr, obj:GetDebugName())
       end
@@ -143,8 +143,8 @@ local function loader(api, cfg)
       fn = setfenv(loadstr(fnstr, filename, script.line), env)()
       scriptCache[script] = fn
     end
-    if api.UserData(obj).scripts then
-      local old = api.UserData(obj).scripts[1][script.type:lower()]
+    if obj.scripts then
+      local old = obj.scripts[1][script.type:lower()]
       if old and fn and script.attr.inherit then
         local bfn = fn
         if script.attr.inherit == 'prepend' then
@@ -172,7 +172,7 @@ local function loader(api, cfg)
       elseif intrinsic then
         bindingType = 0
       end
-      api.SetScript(api.UserData(obj), script.type, bindingType, fn)
+      api.SetScript(obj, script.type, bindingType, fn)
     end
   end
 
@@ -528,7 +528,7 @@ local function loader(api, cfg)
           local fn = xmllang[e.type]
           if type(impl) == 'table' and impl.script then
             local env = ctx.useAddonEnv and addonEnv or api.env
-            loadScript(e, parent, env, filename, ctx.intrinsic)
+            loadScript(e, api.UserData(parent), env, filename, ctx.intrinsic)
           elseif type(impl) == 'table' and impl.scope then
             loadElements(mixin({}, ctx, { [impl.scope] = true }), e.kids, parent)
           elseif type(impl) == 'table' then
