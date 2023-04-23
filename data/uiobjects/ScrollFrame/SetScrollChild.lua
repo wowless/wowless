@@ -12,7 +12,7 @@ return (function(self, ...)
   if old then
     old:SetParent(nil)
   end
-  self.scrollChild = scrollChild and u(scrollChild)
+  self.scrollChild = scrollChild and api.UserData(scrollChild)
   if self.scrollChild then
     api.SetParent(self.scrollChild, self)
   end

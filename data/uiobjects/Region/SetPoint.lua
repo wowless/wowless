@@ -24,10 +24,10 @@ return (function(self, point, ...)
     if not frame then
       api.log(1, 'SetPoint to unknown frame %q', name)
     end
-    relativeTo = frame and u(frame)
+    relativeTo = frame and api.UserData(frame)
     idx = idx + 1
   elseif type(maybeRelativeTo) == 'table' then
-    relativeTo = u(maybeRelativeTo)
+    relativeTo = api.UserData(maybeRelativeTo)
     idx = idx + 1
   elseif type(maybeRelativeTo) == 'nil' then
     idx = idx + 1

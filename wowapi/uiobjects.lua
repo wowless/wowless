@@ -66,7 +66,6 @@ local function mkBaseUIObjectTypes(api)
   local env = {
     api = api,
     toTexture = toTexture,
-    u = u,
   }
   for k, v in pairs(_G) do
     env[k] = v
