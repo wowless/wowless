@@ -1,3 +1,13 @@
+local function kidregions(r)
+  return coroutine.wrap(function()
+    for kid in r.children:entries() do
+      if kid:IsObjectType('layeredregion') then
+        coroutine.yield(kid)
+      end
+    end
+  end)
+end
+
 local function frames2rects(api, product, screenWidth, screenHeight)
   local tt = require('resty.tsort').new()
   local function addPoints(r)
@@ -10,8 +20,8 @@ local function frames2rects(api, product, screenWidth, screenHeight)
   end
   for frame in api.frames:entries() do
     addPoints(frame)
-    for _, r in ipairs({ frame:GetRegions() }) do
-      addPoints(api.UserData(r))
+    for r in kidregions(frame) do
+      addPoints(r)
     end
   end
   local screen = {
@@ -77,8 +87,8 @@ local function frames2rects(api, product, screenWidth, screenHeight)
   local frames = {}
   for frame in api.frames:entries() do
     local regions = {}
-    for _, r in ipairs({ frame:GetRegions() }) do
-      local rect = rects[api.UserData(r)]
+    for r in kidregions(frame) do
+      local rect = rects[r]
       if rect and next(rect) and r:IsVisible() then
         local content = {
           string = r:IsObjectType('FontString') and r:GetText() or nil,
@@ -90,11 +100,11 @@ local function frames2rects(api, product, screenWidth, screenHeight)
                 return {
                   alpha = t:GetAlpha() * frame:GetEffectiveAlpha(),
                   blendMode = t:GetBlendMode(),
-                  color = api.UserData(t).colorTextureR and {
-                    alpha = api.UserData(t).colorTextureA,
-                    blue = api.UserData(t).colorTextureB,
-                    green = api.UserData(t).colorTextureG,
-                    red = api.UserData(t).colorTextureR,
+                  color = t.colorTextureR and {
+                    alpha = t.colorTextureA,
+                    blue = t.colorTextureB,
+                    green = t.colorTextureG,
+                    red = t.colorTextureR,
                   },
                   coords = (function()
                     local tlx, tly, blx, bly, trx, try, brx, bry = t:GetTexCoord()
@@ -112,14 +122,14 @@ local function frames2rects(api, product, screenWidth, screenHeight)
                   drawLayer = drawLayer,
                   drawSubLayer = drawSubLayer,
                   horizTile = t:GetHorizTile(),
-                  maskPath = api.UserData(t).maskName,
+                  maskPath = t.maskName,
                   path = t:GetTexture(),
                   scale = t:GetEffectiveScale(),
-                  vertexColor = api.UserData(t).vertexColorR and {
-                    alpha = api.UserData(t).vertexColorA,
-                    blue = api.UserData(t).vertexColorB,
-                    green = api.UserData(t).vertexColorG,
-                    red = api.UserData(t).vertexColorR,
+                  vertexColor = t.vertexColorR and {
+                    alpha = t.vertexColorA,
+                    blue = t.vertexColorB,
+                    green = t.vertexColorG,
+                    red = t.vertexColorR,
                   },
                   vertTile = t:GetVertTile(),
                 }
