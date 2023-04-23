@@ -385,35 +385,35 @@ local function loader(api, cfg)
 
       local function processAttr(ctx, attr, obj, v)
         if attr.impl == 'internal' then
-          xmlattrlang[attr.name](ctx, api.UserData(obj), v)
+          xmlattrlang[attr.name](ctx, obj, v)
         elseif attr.impl == 'loadfile' then
           loadFile(path.join(dir, v))
         elseif attr.impl.scope then
           return { [attr.impl.scope] = v }
         elseif attr.impl.method then
-          local ud = api.UserData(obj)
-          local fn = ud[attr.impl.method]
-          assert(fn, ('missing method %q on object type %q'):format(attr.impl.method, api.UserData(obj).type))
+          local fn = obj[attr.impl.method]
+          assert(fn, ('missing method %q on object type %q'):format(attr.impl.method, obj.type))
           if type(v) == 'table' then -- stringlist
-            fn(ud, unpack(v))
+            fn(obj, unpack(v))
           else
-            fn(ud, v)
+            fn(obj, v)
           end
         elseif attr.impl.field then
-          api.UserData(obj)[attr.impl.field] = v
+          obj[attr.impl.field] = v
         else
           error('invalid attribute impl for ' .. attr.name)
         end
       end
 
       local function processAttrs(ctx, e, obj, phase)
-        local objty = api.UserData(obj).type
+        local ud = api.UserData(obj)
+        local objty = ud.type
         local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
         for k, v in pairs(e.attr) do
           -- This assumes that uiobject types and xml types are the same "space" of strings.
           local attr = attrs[k]
           if attr and phase == attr.phase then
-            processAttr(ctx, attr, obj, v)
+            processAttr(ctx, attr, ud, v)
           end
         end
       end
