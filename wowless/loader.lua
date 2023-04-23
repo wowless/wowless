@@ -341,36 +341,36 @@ local function loader(api, cfg)
 
     local xmlattrlang = {
       hidden = function(_, obj, value)
-        api.UserData(obj).shown = not value
+        obj.shown = not value
       end,
       mixin = function(ctx, obj, value)
         local env = ctx.useAddonEnv and addonEnv or api.env
         for _, m in ipairs(value) do
-          mixin(obj, env[m])
+          mixin(obj.luarep, env[m])
         end
       end,
       parent = function(_, obj, value)
         local parent = api.env[value]
-        api.SetParent(api.UserData(obj), parent and api.UserData(parent))
+        api.SetParent(obj, parent and api.UserData(parent))
       end,
       parentarray = function(_, obj, value)
-        local p = api.UserData(obj).parent
+        local p = obj.parent
         if p then
           p = p.luarep
           p[value] = p[value] or {}
-          table.insert(p[value], obj)
+          table.insert(p[value], obj.luarep)
         end
       end,
       parentkey = function(_, obj, value)
-        local p = api.UserData(obj).parent
+        local p = obj.parent
         if p then
-          p.luarep[value] = obj
+          p.luarep[value] = obj.luarep
         end
       end,
       securemixin = function(ctx, obj, value)
         local env = ctx.useAddonEnv and addonEnv or api.env
         for _, m in ipairs(value) do
-          mixin(obj, env[m])
+          mixin(obj.luarep, env[m])
         end
       end,
       setallpoints = function(_, obj, value)
@@ -385,7 +385,7 @@ local function loader(api, cfg)
 
       local function processAttr(ctx, attr, obj, v)
         if attr.impl == 'internal' then
-          xmlattrlang[attr.name](ctx, obj, v)
+          xmlattrlang[attr.name](ctx, api.UserData(obj), v)
         elseif attr.impl == 'loadfile' then
           loadFile(path.join(dir, v))
         elseif attr.impl.scope then
