@@ -1,17 +1,17 @@
 local function frames2rects(api, product, screenWidth, screenHeight)
   local tt = require('resty.tsort').new()
   local function addPoints(r)
-    for i = 1, r:GetNumPoints() do
-      local relativeTo = select(2, r:GetPoint(i))
+    for _, pt in ipairs(r.points) do
+      local relativeTo = pt[2] and api.UserData(pt[2])
       if relativeTo ~= nil and relativeTo ~= r then
         tt:add(relativeTo, r)
       end
     end
   end
   for frame in api.frames:entries() do
-    addPoints(frame.luarep)
+    addPoints(frame)
     for _, r in ipairs({ frame:GetRegions() }) do
-      addPoints(r)
+      addPoints(api.UserData(r))
     end
   end
   local screen = {
@@ -22,8 +22,8 @@ local function frames2rects(api, product, screenWidth, screenHeight)
   }
   local rects = {}
   local function p2c(r, i)
-    local p, rt, rp, px, py = r:GetPoint(i)
-    local pr = rt == nil and screen or assert(rects[rt], 'moo ' .. r:GetDebugName()) -- relies on tsort
+    local p, rt, rp, px, py = unpack(r.points[i])
+    local pr = rt == nil and screen or assert(rects[api.UserData(rt)], 'moo ' .. r:GetDebugName()) -- relies on tsort
     local x = (function()
       if rp == 'TOPLEFT' or rp == 'LEFT' or rp == 'BOTTOMLEFT' then
         return pr.left
@@ -46,7 +46,7 @@ local function frames2rects(api, product, screenWidth, screenHeight)
   end
   for _, r in ipairs(assert(tt:sort())) do
     local points = {}
-    for i = 1, r:GetNumPoints() do
+    for i = 1, #r.points do
       local p, x, y = p2c(r, i)
       points[p] = { x = x, y = y }
     end
@@ -78,7 +78,7 @@ local function frames2rects(api, product, screenWidth, screenHeight)
   for frame in api.frames:entries() do
     local regions = {}
     for _, r in ipairs({ frame:GetRegions() }) do
-      local rect = rects[r]
+      local rect = rects[api.UserData(r)]
       if rect and next(rect) and r:IsVisible() then
         local content = {
           string = r:IsObjectType('FontString') and r:GetText() or nil,
