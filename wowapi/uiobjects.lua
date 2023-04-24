@@ -73,13 +73,6 @@ local function mkBaseUIObjectTypes(api)
       assert(type(v) == 'table', 'expected font')
       return api.UserData(v)
     end,
-    frame = function(v)
-      if type(v) == 'string' then
-        v = api.env[v]
-      end
-      assert(api.InheritsFrom(v:GetObjectType():lower(), 'frame'))
-      return v
-    end,
     number = function(v)
       return assert(tonumber(v), ('want number, got %s'):format(type(v)))
     end,
