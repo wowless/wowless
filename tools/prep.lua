@@ -231,7 +231,7 @@ for k, v in pairs(uiobjectdata) do
   for mk, mv in pairs(v.methods or {}) do
     if mv.impl then
       assert(uiobjectimpl[mv.impl])
-      methods[mk] = { impl = readFile('data/uiobjects/' .. mv.impl .. '.lua') }
+      methods[mk] = readFile('data/uiobjects/' .. mv.impl .. '.lua')
     elseif mv.getter then
       local t = {}
       for _, f in ipairs(mv.getter) do
@@ -241,7 +241,7 @@ for k, v in pairs(uiobjectdata) do
           table.insert(t, 'x.' .. f.name)
         end
       end
-      methods[mk] = { impl = 'local x = ...;return ' .. table.concat(t, ',') }
+      methods[mk] = 'local x = ...;return ' .. table.concat(t, ',')
     elseif mv.setter then
       local t = { 'local self' }
       for _, f in ipairs(mv.setter) do
@@ -272,14 +272,14 @@ for k, v in pairs(uiobjectdata) do
           table.insert(t, '),self)')
         end
       end
-      methods[mk] = { impl = table.concat(t, '') }
+      methods[mk] = table.concat(t, '')
     else
       local t = {}
       for _, output in ipairs(mv.outputs or {}) do
         assert(output.type == 'number', 'unsupported type in ' .. k .. '.' .. mk)
         table.insert(t, 1)
       end
-      methods[mk] = { impl = 'return ' .. table.concat(t, ',') }
+      methods[mk] = 'return ' .. table.concat(t, ',')
     end
   end
   uiobjects[k] = {
