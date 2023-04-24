@@ -62,7 +62,7 @@ local function mkBaseUIObjectTypes(api)
   end
 
   local function wrapstrfn(s, fname, args, ...)
-    return assert(loadstring(('local %s=...;return function(...) %s end'):format(args, s), fname))(...)
+    return assert(loadstring(('local %s=...;return %s'):format(args, s), fname))(...)
   end
 
   local check = {

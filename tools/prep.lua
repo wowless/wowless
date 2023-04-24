@@ -221,37 +221,37 @@ local luareps = {
 }
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
-  local constructor = { 'return {' }
+  local constructor = { 'function() return {' }
   for fk, fv in require('pl.tablex').sort(mkuiobjectinit(k)) do
     table.insert(constructor, ('  %s = %s,'):format(fk, fv))
   end
-  table.insert(constructor, '}')
+  table.insert(constructor, '} end')
   local fieldset = mkuiobjectfieldset(k)
   local methods = {}
   for mk, mv in pairs(v.methods or {}) do
     if mv.impl then
       assert(uiobjectimpl[mv.impl])
-      methods[mk] = readFile('data/uiobjects/' .. mv.impl .. '.lua')
+      methods[mk] = 'function(...) ' .. readFile('data/uiobjects/' .. mv.impl .. '.lua') .. ' end'
     elseif mv.getter then
       local t = {}
       for _, f in ipairs(mv.getter) do
         if luareps[fieldset[f.name].type] then
-          table.insert(t, 'x.' .. f.name .. ' and x.' .. f.name .. '.luarep')
+          table.insert(t, 'self.' .. f.name .. ' and self.' .. f.name .. '.luarep')
         else
-          table.insert(t, 'x.' .. f.name)
+          table.insert(t, 'self.' .. f.name)
         end
       end
-      methods[mk] = 'local x = ...;return ' .. table.concat(t, ',')
+      methods[mk] = 'function(self) return ' .. table.concat(t, ',') .. ' end'
     elseif mv.setter then
-      local t = { 'local self' }
+      local t = { 'function(self' }
       for _, f in ipairs(mv.setter) do
         table.insert(t, ',')
         table.insert(t, f.name)
       end
-      table.insert(t, '=...')
+      table.insert(t, ') ')
       for _, f in ipairs(mv.setter) do
         local cf = fieldset[f.name]
-        table.insert(t, ';self.')
+        table.insert(t, 'self.')
         table.insert(t, f.name)
         table.insert(t, '=')
         if cf.type == 'boolean' then
@@ -273,7 +273,9 @@ for k, v in pairs(uiobjectdata) do
             table.insert(t, sct)
           end
         end
+        table.insert(t, ';')
       end
+      table.insert(t, ' end')
       methods[mk] = table.concat(t, '')
     else
       local t = {}
@@ -281,7 +283,7 @@ for k, v in pairs(uiobjectdata) do
         assert(output.type == 'number', 'unsupported type in ' .. k .. '.' .. mk)
         table.insert(t, 1)
       end
-      methods[mk] = 'return ' .. table.concat(t, ',')
+      methods[mk] = 'function() return ' .. table.concat(t, ',') .. ' end'
     end
   end
   uiobjects[k] = {
