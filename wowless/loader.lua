@@ -406,14 +406,13 @@ local function loader(api, cfg)
       end
 
       local function processAttrs(ctx, e, obj, phase)
-        local ud = api.UserData(obj)
-        local objty = ud.type
+        local objty = obj.type
         local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
         for k, v in pairs(e.attr) do
           -- This assumes that uiobject types and xml types are the same "space" of strings.
           local attr = attrs[k]
           if attr and phase == attr.phase then
-            processAttr(ctx, attr, ud, v)
+            processAttr(ctx, attr, obj, v)
           end
         end
       end
@@ -430,7 +429,7 @@ local function loader(api, cfg)
         ctx = ctx.ignoreVirtual and ctx or mixin({}, ctx, { ignoreVirtual = true })
         for _, kid in ipairs(e.kids) do
           if xmlimpls[string.lower(kid.type)].phase == phase then
-            loadElement(ctx, kid, api.UserData(obj))
+            loadElement(ctx, kid, obj)
           end
         end
       end
@@ -463,7 +462,7 @@ local function loader(api, cfg)
             local t = assert(api.templates[string.lower(inh)], 'unknown template ' .. inh)
             t['init' .. phaseName](obj)
           end
-          phase(ctx, e, obj)
+          phase(ctx, e, api.UserData(obj))
         end
       end
 
