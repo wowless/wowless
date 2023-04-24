@@ -206,7 +206,7 @@ local function mkuiobjectfieldset(k)
       Mixin(set, mkuiobjectfieldset(inh))
     end
     for fk, fv in pairs(v.fields or {}) do
-      set[fk] = fv.type
+      set[fk] = fv
     end
     uiobjectfieldsets[k] = set
   end
@@ -235,7 +235,7 @@ for k, v in pairs(uiobjectdata) do
     elseif mv.getter then
       local t = {}
       for _, f in ipairs(mv.getter) do
-        if luareps[fieldset[f.name]] then
+        if luareps[fieldset[f.name].type] then
           table.insert(t, 'x.' .. f.name .. ' and x.' .. f.name .. '.luarep')
         else
           table.insert(t, 'x.' .. f.name)
@@ -243,7 +243,36 @@ for k, v in pairs(uiobjectdata) do
       end
       methods[mk] = { impl = 'local x = ...;return ' .. table.concat(t, ',') }
     elseif mv.setter then
-      methods[mk] = { fields = mv.setter }
+      local t = { 'local self' }
+      for _, f in ipairs(mv.setter) do
+        table.insert(t, ',')
+        table.insert(t, f.name)
+      end
+      table.insert(t, '=...')
+      for _, f in ipairs(mv.setter) do
+        local cf = fieldset[f.name]
+        table.insert(t, ';self.')
+        table.insert(t, f.name)
+        table.insert(t, '=')
+        if cf.type == 'boolean' then
+          table.insert(t, 'not not ')
+          table.insert(t, f.name)
+        elseif f.nilable or cf.nilable then
+          table.insert(t, f.name)
+          table.insert(t, '~=nil and check("')
+          table.insert(t, cf.type)
+          table.insert(t, '",')
+          table.insert(t, f.name)
+          table.insert(t, ',self) or nil')
+        else
+          table.insert(t, 'check("')
+          table.insert(t, cf.type)
+          table.insert(t, '",assert(')
+          table.insert(t, f.name)
+          table.insert(t, '),self)')
+        end
+      end
+      methods[mk] = { impl = table.concat(t, '') }
     else
       local t = {}
       for _, output in ipairs(mv.outputs or {}) do
@@ -255,7 +284,6 @@ for k, v in pairs(uiobjectdata) do
   end
   uiobjects[k] = {
     constructor = table.concat(constructor, '\n'),
-    fields = v.fields,
     inherits = v.inherits,
     methods = methods,
     objectType = v.objectType,
