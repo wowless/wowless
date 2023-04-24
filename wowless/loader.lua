@@ -462,7 +462,7 @@ local function loader(api, cfg)
             local t = assert(api.templates[string.lower(inh)], 'unknown template ' .. inh)
             t['init' .. phaseName](obj)
           end
-          phase(ctx, e, api.UserData(obj))
+          phase(ctx, e, obj)
         end
       end
 

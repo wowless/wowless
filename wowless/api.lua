@@ -191,7 +191,7 @@ local function new(log, maxErrors, product)
       end
     end
     for _, template in ipairs(tmpls) do
-      template.initEarlyAttrs(obj)
+      template.initEarlyAttrs(ud)
     end
     if objname then
       if type(objnamearg) == 'string' then
@@ -209,10 +209,10 @@ local function new(log, maxErrors, product)
       end
     end
     for _, template in ipairs(tmpls) do
-      template.initAttrs(obj)
+      template.initAttrs(ud)
     end
     for _, template in ipairs(tmpls) do
-      template.initKids(obj)
+      template.initKids(ud)
     end
     if id then
       obj:SetID(id)
