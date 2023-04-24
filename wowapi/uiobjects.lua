@@ -61,17 +61,9 @@ local function mkBaseUIObjectTypes(api)
     return t
   end
 
-  local env = {
-    api = api,
-    toTexture = toTexture,
-  }
-  for k, v in pairs(_G) do
-    env[k] = v
+  local function wrapstrfn(s, fname, args, ...)
+    return assert(loadstring(('local %s=...;return function(...) %s end'):format(args, s), fname))(...)
   end
-
-  local constructorEnv = {
-    hlist = hlist,
-  }
 
   local uiobjects = {}
   for name, cfg in pairs(api.datalua.uiobjects) do
@@ -91,14 +83,12 @@ local function mkBaseUIObjectTypes(api)
       end
       return mm
     end
-    local constructor = setfenv(assert(loadstring(cfg.constructor)), constructorEnv)
+    local constructor = wrapstrfn(cfg.constructor, name, 'hlist', hlist)
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
       local fname = name .. ':' .. mname
       if method.impl then
-        local impl = assert(loadstring(method.impl, fname), 'function required on ' .. fname)
-        setfenv(impl, env)
-        mixin[mname] = impl
+        mixin[mname] = wrapstrfn(method.impl, fname, 'api,toTexture', api, toTexture)
       else
         assert(method.fields, 'missing fields on ' .. fname)
         mixin[mname] = function(self, ...)
