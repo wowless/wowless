@@ -430,7 +430,7 @@ local function loader(api, cfg)
         ctx = ctx.ignoreVirtual and ctx or mixin({}, ctx, { ignoreVirtual = true })
         for _, kid in ipairs(e.kids) do
           if xmlimpls[string.lower(kid.type)].phase == phase then
-            loadElement(ctx, kid, obj)
+            loadElement(ctx, kid, api.UserData(obj))
           end
         end
       end
@@ -514,13 +514,7 @@ local function loader(api, cfg)
               if virtual and ctx.ignoreVirtual then
                 api.log(1, 'ignoring virtual on ' .. tostring(name))
               end
-              return api.CreateUIObject(
-                e.type,
-                name,
-                parent and api.UserData(parent),
-                ctx.useAddonEnv and addonEnv or nil,
-                { template }
-              )
+              return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
             end
           end
         else
@@ -528,16 +522,15 @@ local function loader(api, cfg)
           local fn = xmllang[e.type]
           if type(impl) == 'table' and impl.script then
             local env = ctx.useAddonEnv and addonEnv or api.env
-            loadScript(e, api.UserData(parent), env, filename, ctx.intrinsic)
+            loadScript(e, parent, env, filename, ctx.intrinsic)
           elseif type(impl) == 'table' and impl.scope then
             loadElements(mixin({}, ctx, { [impl.scope] = true }), e.kids, parent)
           elseif type(impl) == 'table' then
             local elt = impl.argument == 'lastkid' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
             local obj = loadElement(ctx, elt, parent)
-            local up = api.UserData(parent)
             -- TODO find if this if needs to be broader to everything here including kids
-            if up:IsObjectType(impl.parenttype) then
-              up[impl.parentmethod](up, obj)
+            if parent:IsObjectType(impl.parenttype) then
+              parent[impl.parentmethod](parent, obj)
             end
           elseif impl == 'transparent' or impl == 'loadstring' then
             local ctxmix = mixin({}, ctx)
@@ -565,7 +558,7 @@ local function loader(api, cfg)
               type = font.type,
             })
           elseif fn then
-            fn(ctx, e, parent)
+            fn(ctx, e, parent and parent.luarep)
           else
             error('unimplemented xml tag ' .. e.type)
           end
