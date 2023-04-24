@@ -259,15 +259,15 @@ for k, v in pairs(uiobjectdata) do
           table.insert(t, f.name)
         elseif f.nilable or cf.nilable then
           table.insert(t, f.name)
-          table.insert(t, '~=nil and check("')
+          table.insert(t, '~=nil and check.')
           table.insert(t, cf.type)
-          table.insert(t, '",')
+          table.insert(t, '(')
           table.insert(t, f.name)
           table.insert(t, ',self) or nil')
         else
-          table.insert(t, 'check("')
+          table.insert(t, 'check.')
           table.insert(t, cf.type)
-          table.insert(t, '",assert(')
+          table.insert(t, '(assert(')
           table.insert(t, f.name)
           table.insert(t, '),self)')
         end

@@ -65,7 +65,7 @@ local function mkBaseUIObjectTypes(api)
     return assert(loadstring(('local %s=...;return function(...) %s end'):format(args, s), fname))(...)
   end
 
-  local checks = {
+  local check = {
     font = function(v)
       if type(v) == 'string' then
         v = api.env[v]
@@ -95,10 +95,6 @@ local function mkBaseUIObjectTypes(api)
       return tex and api.UserData(tex)
     end,
   }
-
-  local function check(ty, v, self)
-    return assert(checks[ty], 'unexpected type ' .. ty)(v, self)
-  end
 
   local uiobjects = {}
   for name, cfg in pairs(api.datalua.uiobjects) do
