@@ -196,12 +196,11 @@ local function loader(api, cfg)
       local point = anchor.attr.point
       local relativeTo
       if anchor.attr.relativeto then
-        relativeTo = api.ParentSub(anchor.attr.relativeto, api.UserData(parent).parent)
+        relativeTo = api.ParentSub(anchor.attr.relativeto, parent.parent)
       elseif anchor.attr.relativekey then
         relativeTo = navigate(parent, anchor.attr.relativekey)
       else
-        local up = api.UserData(parent).parent
-        relativeTo = up and up.luarep
+        relativeTo = parent.parent and parent.parent.luarep
       end
       local relativePoint = anchor.attr.relativepoint or point
       local offsetX, offsetY = getXY(anchor.kids[#anchor.kids])
@@ -212,24 +211,23 @@ local function loader(api, cfg)
     attribute = function(_, e, parent)
       -- TODO share code with SetAttribute somehow
       local a = e.attr
-      api.UserData(parent).attributes[a.name] = parseTypedValue(a.type, a.value)
+      parent.attributes[a.name] = parseTypedValue(a.type, a.value)
     end,
     barcolor = function(_, e, parent)
       parent:SetStatusBarColor(getColor(e))
     end,
     color = function(ctx, e, parent)
       local r, g, b, a = getColor(e)
-      local p = api.UserData(parent)
-      if api.InheritsFrom(p.type, 'texturebase') then
+      if api.InheritsFrom(parent.type, 'texturebase') then
         parent:SetColorTexture(r, g, b, a)
-      elseif api.InheritsFrom(p.type, 'fontinstance') then
+      elseif api.InheritsFrom(parent.type, 'fontinstance') then
         if ctx.shadow then
           parent:SetShadowColor(r, g, b, a)
         else
           parent:SetTextColor(r, g, b, a)
         end
       else
-        error('cannot apply color to ' .. p.type)
+        error('cannot apply color to ' .. parent.type)
       end
     end,
     fontheight = function(_, e, parent)
@@ -265,10 +263,10 @@ local function loader(api, cfg)
     end,
     keyvalue = function(_, e, parent)
       local a = e.attr
-      parent[a.key] = parseTypedValue(a.type, a.value)
+      parent.luarep[a.key] = parseTypedValue(a.type, a.value)
     end,
     maskedtexture = function(_, e, parent)
-      local t = navigate(parent:GetParent(), e.attr.childkey)
+      local t = navigate(parent.parent and parent.parent.luarep, e.attr.childkey)
       if t then
         t:AddMaskTexture(parent)
       else
@@ -557,7 +555,7 @@ local function loader(api, cfg)
               type = font.type,
             })
           elseif fn then
-            fn(ctx, e, parent and parent.luarep)
+            fn(ctx, e, parent)
           else
             error('unimplemented xml tag ' .. e.type)
           end
