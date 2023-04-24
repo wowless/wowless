@@ -257,19 +257,21 @@ for k, v in pairs(uiobjectdata) do
         if cf.type == 'boolean' then
           table.insert(t, 'not not ')
           table.insert(t, f.name)
-        elseif f.nilable or cf.nilable then
-          table.insert(t, f.name)
-          table.insert(t, '~=nil and check.')
-          table.insert(t, cf.type)
-          table.insert(t, '(')
-          table.insert(t, f.name)
-          table.insert(t, ',self) or nil')
         else
-          table.insert(t, 'check.')
-          table.insert(t, cf.type)
-          table.insert(t, '(assert(')
-          table.insert(t, f.name)
-          table.insert(t, '),self)')
+          local ct = { 'check.', cf.type, '(', f.name }
+          if cf.type == 'texture' then
+            table.insert(ct, ',self')
+          end
+          table.insert(ct, ')')
+          local sct = table.concat(ct, '')
+          if f.nilable or cf.nilable then
+            table.insert(t, f.name)
+            table.insert(t, '~=nil and ')
+            table.insert(t, sct)
+            table.insert(t, ' or nil')
+          else
+            table.insert(t, sct)
+          end
         end
       end
       methods[mk] = table.concat(t, '')
