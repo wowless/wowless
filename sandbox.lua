@@ -7,6 +7,7 @@ s:openlibs()
 local function mkfn(v)
   return function(ss)
     local outputs = v.outputs or {}
+    ss:checkstack(#outputs)
     for _, output in ipairs(outputs) do
       if output.type == 'number' then
         ss:pushnumber(1)
