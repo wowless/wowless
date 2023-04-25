@@ -4,9 +4,13 @@ local yaml = require('wowapi.yaml')
 local function rewriteFile(ty, fn)
   for _, p in ipairs(require('wowless.util').productList()) do
     local filename = 'data/products/' .. p .. '/' .. ty .. '.yaml'
-    local data = yaml.parseFile(filename)
+    local before = require('pl.file').read(filename)
+    local data = yaml.parse(before)
     fn(p, data)
-    writeFile(filename, yaml.pprint(data))
+    local after = yaml.pprint(data)
+    if after ~= before then
+      writeFile(filename, after)
+    end
   end
 end
 

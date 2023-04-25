@@ -21789,13 +21789,11 @@ difftime:
   stdlib: difftime
 DisableAddOn:
   inputs:
-  - - name: index
-      type: number
-  - - name: name
-      type: string
-    - name: character
+  - - name: addon
+      type: uiAddon
+    - name: playerOrAll
       nilable: true
-      type: string
+      type: unknown
   outputs: {}
 DisableAllAddOns: {}
 DisableSpellAutocast: {}
@@ -21888,13 +21886,11 @@ EJ_SetSearch: {}
 EjectPassengerFromSeat: {}
 EnableAddOn:
   inputs:
-  - - name: index
-      type: number
-  - - name: name
-      type: string
-    - name: character
+  - - name: addon
+      type: uiAddon
+    - name: playerOrAll
       nilable: true
-      type: string
+      type: unknown
   outputs: {}
 EnableAllAddOns: {}
 EnableSpellAutocast: {}

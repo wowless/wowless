@@ -61,16 +61,32 @@ local function mkBaseUIObjectTypes(api)
     return t
   end
 
-  local env = {
-    api = api,
-    toTexture = toTexture,
-  }
-  for k, v in pairs(_G) do
-    env[k] = v
+  local function wrapstrfn(s, fname, args, ...)
+    return assert(loadstring(('local %s=...;return %s'):format(args, s), fname))(...)
   end
 
-  local constructorEnv = {
-    hlist = hlist,
+  local check = {
+    font = function(v)
+      if type(v) == 'string' then
+        v = api.env[v]
+      end
+      assert(type(v) == 'table', 'expected font')
+      return api.UserData(v)
+    end,
+    number = function(v)
+      return assert(tonumber(v), ('want number, got %s'):format(type(v)))
+    end,
+    string = function(v)
+      return tostring(v)
+    end,
+    table = function(v)
+      assert(type(v) == 'table', 'expected table, got ' .. type(v))
+      return v
+    end,
+    texture = function(v, self)
+      local tex = toTexture(self, v)
+      return tex and api.UserData(tex)
+    end,
   }
 
   local uiobjects = {}
@@ -91,54 +107,11 @@ local function mkBaseUIObjectTypes(api)
       end
       return mm
     end
-    local constructor = setfenv(assert(loadstring(cfg.constructor)), constructorEnv)
+    local constructor = wrapstrfn(cfg.constructor, name, 'hlist', hlist)
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
       local fname = name .. ':' .. mname
-      if method.impl then
-        local impl = assert(loadstring(method.impl, fname), 'function required on ' .. fname)
-        setfenv(impl, env)
-        mixin[mname] = impl
-      else
-        assert(method.fields, 'missing fields on ' .. fname)
-        mixin[mname] = function(self, ...)
-          for i, f in ipairs(method.fields) do
-            local v = select(i, ...)
-            local cf = cfg.fields[f.name]
-            local ty = cf.type
-            if ty == 'boolean' then
-              self[f.name] = not not v
-            elseif v == nil then
-              assert(f.nilable or cf.nilable, ('cannot set nil on %s.%s.%s'):format(name, mname, f.name))
-              self[f.name] = nil
-            elseif ty == 'texture' then
-              local tex = toTexture(self, v)
-              self[f.name] = tex and api.UserData(tex)
-            elseif ty == 'number' then
-              self[f.name] = assert(tonumber(v), ('want number, got %s'):format(type(v)))
-            elseif ty == 'string' then
-              self[f.name] = tostring(v)
-            elseif ty == 'font' then
-              if type(v) == 'string' then
-                v = api.env[v]
-              end
-              assert(type(v) == 'table', 'expected font')
-              self[f.name] = api.UserData(v)
-            elseif ty == 'frame' then
-              if type(v) == 'string' then
-                v = api.env[v]
-              end
-              assert(api.InheritsFrom(v:GetObjectType():lower(), 'frame'))
-              self[f.name] = v
-            elseif ty == 'table' then
-              assert(type(v) == 'table', 'expected table, got ' .. type(v))
-              self[f.name] = v
-            else
-              error('unexpected type ' .. ty)
-            end
-          end
-        end
-      end
+      mixin[mname] = wrapstrfn(method, fname, 'api,toTexture,check', api, toTexture, check)
     end
     uiobjects[name] = {
       cfg = cfg,

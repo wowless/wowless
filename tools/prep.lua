@@ -206,7 +206,7 @@ local function mkuiobjectfieldset(k)
       Mixin(set, mkuiobjectfieldset(inh))
     end
     for fk, fv in pairs(v.fields or {}) do
-      set[fk] = fv.type
+      set[fk] = fv
     end
     uiobjectfieldsets[k] = set
   end
@@ -221,41 +221,73 @@ local luareps = {
 }
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
-  local constructor = { 'return {' }
+  local constructor = { 'function() return {' }
   for fk, fv in require('pl.tablex').sort(mkuiobjectinit(k)) do
     table.insert(constructor, ('  %s = %s,'):format(fk, fv))
   end
-  table.insert(constructor, '}')
+  table.insert(constructor, '} end')
   local fieldset = mkuiobjectfieldset(k)
   local methods = {}
   for mk, mv in pairs(v.methods or {}) do
     if mv.impl then
       assert(uiobjectimpl[mv.impl])
-      methods[mk] = { impl = readFile('data/uiobjects/' .. mv.impl .. '.lua') }
+      methods[mk] = 'function(...) ' .. readFile('data/uiobjects/' .. mv.impl .. '.lua') .. ' end'
     elseif mv.getter then
       local t = {}
       for _, f in ipairs(mv.getter) do
-        if luareps[fieldset[f.name]] then
-          table.insert(t, 'x.' .. f.name .. ' and x.' .. f.name .. '.luarep')
+        if luareps[fieldset[f.name].type] then
+          table.insert(t, 'self.' .. f.name .. ' and self.' .. f.name .. '.luarep')
         else
-          table.insert(t, 'x.' .. f.name)
+          table.insert(t, 'self.' .. f.name)
         end
       end
-      methods[mk] = { impl = 'local x = ...;return ' .. table.concat(t, ',') }
+      methods[mk] = 'function(self) return ' .. table.concat(t, ',') .. ' end'
     elseif mv.setter then
-      methods[mk] = { fields = mv.setter }
+      local t = { 'function(self' }
+      for _, f in ipairs(mv.setter) do
+        table.insert(t, ',')
+        table.insert(t, f.name)
+      end
+      table.insert(t, ') ')
+      for _, f in ipairs(mv.setter) do
+        local cf = fieldset[f.name]
+        table.insert(t, 'self.')
+        table.insert(t, f.name)
+        table.insert(t, '=')
+        if cf.type == 'boolean' then
+          table.insert(t, 'not not ')
+          table.insert(t, f.name)
+        else
+          local ct = { 'check.', cf.type, '(', f.name }
+          if cf.type == 'texture' then
+            table.insert(ct, ',self')
+          end
+          table.insert(ct, ')')
+          local sct = table.concat(ct, '')
+          if f.nilable or cf.nilable then
+            table.insert(t, f.name)
+            table.insert(t, '~=nil and ')
+            table.insert(t, sct)
+            table.insert(t, ' or nil')
+          else
+            table.insert(t, sct)
+          end
+        end
+        table.insert(t, ';')
+      end
+      table.insert(t, ' end')
+      methods[mk] = table.concat(t, '')
     else
       local t = {}
       for _, output in ipairs(mv.outputs or {}) do
         assert(output.type == 'number', 'unsupported type in ' .. k .. '.' .. mk)
         table.insert(t, 1)
       end
-      methods[mk] = { impl = 'return ' .. table.concat(t, ',') }
+      methods[mk] = 'function() return ' .. table.concat(t, ',') .. ' end'
     end
   end
   uiobjects[k] = {
     constructor = table.concat(constructor, '\n'),
-    fields = v.fields,
     inherits = v.inherits,
     methods = methods,
     objectType = v.objectType,

@@ -70,12 +70,8 @@ local function run(cfg)
       for _, name in ipairs(names) do
         local fn = api.states.Bindings[name]
         api.log(2, 'firing binding ' .. name)
-        api.CallSafely(function()
-          fn('down')
-        end)
-        api.CallSafely(function()
-          fn('up')
-        end)
+        api.CallSafely(fn, 'down')
+        api.CallSafely(fn, 'up')
       end
     end,
     clicks = function()
