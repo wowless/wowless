@@ -51,7 +51,7 @@ local specDefault = (function()
   local specDefault
   local function valstruct(name, mixin)
     if not structureDefaults[name] then
-      local st = assert(structures[name], name)
+      local st = assert(structures[name], name).fields
       local t = {}
       for fname, field in require('pl.tablex').sort(st) do
         local v = specDefault(field)

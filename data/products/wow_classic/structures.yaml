@@ -1,2490 +1,2641 @@
 ---
 C_AreaPoiInfo.AreaPOIInfo:
-  areaPoiID:
-    type: number
-  atlasName:
-    nilable: true
-    type: string
-  description:
-    nilable: true
-    type: string
-  factionID:
-    nilable: true
-    type: number
-  isAlwaysOnFlightmap:
-    type: boolean
-  isPrimaryMapForPOI:
-    type: boolean
-  name:
-    type: string
-  position:
-    type:
-      mixin: Vector2DMixin
-      structure: vector2
-  shouldGlow:
-    type: boolean
-  textureIndex:
-    nilable: true
-    type: number
-  widgetSetID:
-    nilable: true
-    type: number
+  fields:
+    areaPoiID:
+      type: number
+    atlasName:
+      nilable: true
+      type: string
+    description:
+      nilable: true
+      type: string
+    factionID:
+      nilable: true
+      type: number
+    isAlwaysOnFlightmap:
+      type: boolean
+    isPrimaryMapForPOI:
+      type: boolean
+    name:
+      type: string
+    position:
+      type:
+        mixin: Vector2DMixin
+        structure: vector2
+    shouldGlow:
+      type: boolean
+    textureIndex:
+      nilable: true
+      type: number
+    widgetSetID:
+      nilable: true
+      type: number
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemPowerInfo:
-  azeritePowerID:
-    type: number
-  spellID:
-    type: number
+  fields:
+    azeritePowerID:
+      type: number
+    spellID:
+      type: number
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemPowerText:
-  description:
-    type: string
-  name:
-    type: string
+  fields:
+    description:
+      type: string
+    name:
+      type: string
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemTierInfo:
-  azeritePowerIDs:
-    type:
-      arrayof: number
-  unlockLevel:
-    type: number
+  fields:
+    azeritePowerIDs:
+      type:
+        arrayof: number
+    unlockLevel:
+      type: number
 C_AzeriteEmpoweredItem.AzeriteSpecInfo:
-  classID:
-    type: number
-  specID:
-    type: number
+  fields:
+    classID:
+      type: number
+    specID:
+      type: number
 C_AzeriteEssence.AzeriteEssenceInfo:
-  icon:
-    type: number
-  ID:
-    type: number
-  name:
-    type: string
-  rank:
-    type: number
-  unlocked:
-    type: boolean
-  valid:
-    type: boolean
+  fields:
+    icon:
+      type: number
+    ID:
+      type: number
+    name:
+      type: string
+    rank:
+      type: number
+    unlocked:
+      type: boolean
+    valid:
+      type: boolean
 C_AzeriteEssence.AzeriteMilestoneInfo:
-  canUnlock:
-    type: boolean
-  ID:
-    type: number
-  rank:
-    nilable: true
-    type: number
-  requiredLevel:
-    type: number
-  slot:
-    nilable: true
-    type:
-      enum: AzeriteEssenceSlot
-  unlocked:
-    type: boolean
+  fields:
+    canUnlock:
+      type: boolean
+    ID:
+      type: number
+    rank:
+      nilable: true
+      type: number
+    requiredLevel:
+      type: number
+    slot:
+      nilable: true
+      type:
+        enum: AzeriteEssenceSlot
+    unlocked:
+      type: boolean
 C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
-  tierIndex:
-    type: number
-  unlockedItem:
-    type:
-      mixin: ItemLocationMixin
-      structure: ItemLocation
+  fields:
+    tierIndex:
+      type: number
+    unlockedItem:
+      type:
+        mixin: ItemLocationMixin
+        structure: ItemLocation
 C_BarberShop.BarberShopCharacterData:
-  raceData:
-    type:
-      structure: C_BarberShop.BarberShopRaceData
-  sex:
-    type: number
+  fields:
+    raceData:
+      type:
+        structure: C_BarberShop.BarberShopRaceData
+    sex:
+      type: number
 C_BarberShop.BarberShopRaceData:
-  alternateFormRaceData:
-    nilable: true
-    type:
-      structure: CharacterAlternateFormData
-  createScreenIconAtlas:
-    type: string
-  fileName:
-    type: string
-  name:
-    type: string
+  fields:
+    alternateFormRaceData:
+      nilable: true
+      type:
+        structure: CharacterAlternateFormData
+    createScreenIconAtlas:
+      type: string
+    fileName:
+      type: string
+    name:
+      type: string
 C_BattleNet.BNetAccountInfo:
-  accountName:
-    type: string
-  appearOffline:
-    type: boolean
-  battleTag:
-    type: string
-  bnetAccountID:
-    type: number
-  customMessage:
-    type: string
-  customMessageTime:
-    type: number
-  gameAccountInfo:
-    type:
-      structure: C_BattleNet.BNetGameAccountInfo
-  isAFK:
-    type: boolean
-  isBattleTagFriend:
-    type: boolean
-  isDND:
-    type: boolean
-  isFavorite:
-    type: boolean
-  isFriend:
-    type: boolean
-  lastOnlineTime:
-    type: number
-  note:
-    type: string
-  rafLinkType:
-    type:
-      enum: RafLinkType
+  fields:
+    accountName:
+      type: string
+    appearOffline:
+      type: boolean
+    battleTag:
+      type: string
+    bnetAccountID:
+      type: number
+    customMessage:
+      type: string
+    customMessageTime:
+      type: number
+    gameAccountInfo:
+      type:
+        structure: C_BattleNet.BNetGameAccountInfo
+    isAFK:
+      type: boolean
+    isBattleTagFriend:
+      type: boolean
+    isDND:
+      type: boolean
+    isFavorite:
+      type: boolean
+    isFriend:
+      type: boolean
+    lastOnlineTime:
+      type: number
+    note:
+      type: string
+    rafLinkType:
+      type:
+        enum: RafLinkType
 C_BattleNet.BNetGameAccountInfo:
-  areaName:
-    nilable: true
-    type: string
-  canSummon:
-    type: boolean
-  characterLevel:
-    nilable: true
-    type: number
-  characterName:
-    nilable: true
-    type: string
-  className:
-    nilable: true
-    type: string
-  clientProgram:
-    type: string
-  factionName:
-    nilable: true
-    type: string
-  gameAccountID:
-    nilable: true
-    type: number
-  hasFocus:
-    type: boolean
-  isGameAFK:
-    type: boolean
-  isGameBusy:
-    type: boolean
-  isInCurrentRegion:
-    type: boolean
-  isOnline:
-    type: boolean
-  isWowMobile:
-    type: boolean
-  playerGuid:
-    nilable: true
-    type: string
-  raceName:
-    nilable: true
-    type: string
-  realmDisplayName:
-    nilable: true
-    type: string
-  realmID:
-    nilable: true
-    type: number
-  realmName:
-    nilable: true
-    type: string
-  regionID:
-    type: number
-  richPresence:
-    nilable: true
-    type: string
-  wowProjectID:
-    nilable: true
-    type: number
+  fields:
+    areaName:
+      nilable: true
+      type: string
+    canSummon:
+      type: boolean
+    characterLevel:
+      nilable: true
+      type: number
+    characterName:
+      nilable: true
+      type: string
+    className:
+      nilable: true
+      type: string
+    clientProgram:
+      type: string
+    factionName:
+      nilable: true
+      type: string
+    gameAccountID:
+      nilable: true
+      type: number
+    hasFocus:
+      type: boolean
+    isGameAFK:
+      type: boolean
+    isGameBusy:
+      type: boolean
+    isInCurrentRegion:
+      type: boolean
+    isOnline:
+      type: boolean
+    isWowMobile:
+      type: boolean
+    playerGuid:
+      nilable: true
+      type: string
+    raceName:
+      nilable: true
+      type: string
+    realmDisplayName:
+      nilable: true
+      type: string
+    realmID:
+      nilable: true
+      type: number
+    realmName:
+      nilable: true
+      type: string
+    regionID:
+      type: number
+    richPresence:
+      nilable: true
+      type: string
+    wowProjectID:
+      nilable: true
+      type: number
 C_Calendar.CalendarDayEvent:
-  calendarType:
-    stub: SYSTEM
-    type: string
-  clubID:
-    type: string
-  difficulty:
-    type: number
-  difficultyName:
-    type: string
-  dontDisplayBanner:
-    type: boolean
-  dontDisplayEnd:
-    type: boolean
-  endTime:
-    type:
-      structure: CalendarTime
-  eventID:
-    type: string
-  eventType:
-    type:
-      enum: CalendarEventType
-  iconTexture:
-    nilable: true
-    type: number
-  invitedBy:
-    type: string
-  inviteStatus:
-    type:
-      enum: CalendarStatus
-  inviteType:
-    type:
-      enum: CalendarInviteType
-  isCustomTitle:
-    type: boolean
-  isLocked:
-    type: boolean
-  modStatus:
-    type: string
-  numSequenceDays:
-    type: number
-  sequenceIndex:
-    type: number
-  sequenceType:
-    type: string
-  startTime:
-    type:
-      structure: CalendarTime
-  title:
-    type: string
+  fields:
+    calendarType:
+      stub: SYSTEM
+      type: string
+    clubID:
+      type: string
+    difficulty:
+      type: number
+    difficultyName:
+      type: string
+    dontDisplayBanner:
+      type: boolean
+    dontDisplayEnd:
+      type: boolean
+    endTime:
+      type:
+        structure: CalendarTime
+    eventID:
+      type: string
+    eventType:
+      type:
+        enum: CalendarEventType
+    iconTexture:
+      nilable: true
+      type: number
+    invitedBy:
+      type: string
+    inviteStatus:
+      type:
+        enum: CalendarStatus
+    inviteType:
+      type:
+        enum: CalendarInviteType
+    isCustomTitle:
+      type: boolean
+    isLocked:
+      type: boolean
+    modStatus:
+      type: string
+    numSequenceDays:
+      type: number
+    sequenceIndex:
+      type: number
+    sequenceType:
+      type: string
+    startTime:
+      type:
+        structure: CalendarTime
+    title:
+      type: string
 C_Calendar.CalendarEventIndexInfo:
-  eventIndex:
-    type: number
-  monthDay:
-    type: number
-  offsetMonths:
-    type: number
+  fields:
+    eventIndex:
+      type: number
+    monthDay:
+      type: number
+    offsetMonths:
+      type: number
 C_Calendar.CalendarEventInfo:
-  calendarType:
-    type: string
-  communityName:
-    nilable: true
-    type: string
-  creator:
-    nilable: true
-    type: string
-  description:
-    type: string
-  eventType:
-    type:
-      enum: CalendarEventType
-  hasPendingInvite:
-    type: boolean
-  inviteStatus:
-    nilable: true
-    type:
-      enum: CalendarStatus
-  inviteType:
-    nilable: true
-    type:
-      enum: CalendarInviteType
-  isAutoApprove:
-    type: boolean
-  isLocked:
-    type: boolean
-  lockoutTime:
-    type:
-      structure: CalendarTime
-  maxSize:
-    type: number
-  repeatOption:
-    type:
-      enum: CalendarEventRepeatOptions
-  textureIndex:
-    nilable: true
-    type: number
-  time:
-    type:
-      structure: CalendarTime
-  title:
-    type: string
+  fields:
+    calendarType:
+      type: string
+    communityName:
+      nilable: true
+      type: string
+    creator:
+      nilable: true
+      type: string
+    description:
+      type: string
+    eventType:
+      type:
+        enum: CalendarEventType
+    hasPendingInvite:
+      type: boolean
+    inviteStatus:
+      nilable: true
+      type:
+        enum: CalendarStatus
+    inviteType:
+      nilable: true
+      type:
+        enum: CalendarInviteType
+    isAutoApprove:
+      type: boolean
+    isLocked:
+      type: boolean
+    lockoutTime:
+      type:
+        structure: CalendarTime
+    maxSize:
+      type: number
+    repeatOption:
+      type:
+        enum: CalendarEventRepeatOptions
+    textureIndex:
+      nilable: true
+      type: number
+    time:
+      type:
+        structure: CalendarTime
+    title:
+      type: string
 C_Calendar.CalendarEventInviteInfo:
-  classFilename:
-    nilable: true
-    type: string
-  classID:
-    nilable: true
-    type: number
-  className:
-    nilable: true
-    type: string
-  guid:
-    type: string
-  inviteIsMine:
-    type: boolean
-  inviteStatus:
-    nilable: true
+  fields:
+    classFilename:
+      nilable: true
+      type: string
+    classID:
+      nilable: true
+      type: number
+    className:
+      nilable: true
+      type: string
+    guid:
+      type: string
+    inviteIsMine:
+      type: boolean
+    inviteStatus:
+      nilable: true
+      type:
+        enum: CalendarStatus
+    level:
+      type: number
+    modStatus:
+      nilable: true
+      type: string
+    name:
+      nilable: true
+      type: string
+    notes:
+      type: string
     type:
-      enum: CalendarStatus
-  level:
-    type: number
-  modStatus:
-    nilable: true
-    type: string
-  name:
-    nilable: true
-    type: string
-  notes:
-    type: string
-  type:
-    type:
-      enum: CalendarInviteType
+      type:
+        enum: CalendarInviteType
 C_Calendar.CalendarEventStatusOption:
-  status:
-    type:
-      enum: CalendarStatus
-  statusString:
-    type: string
+  fields:
+    status:
+      type:
+        enum: CalendarStatus
+    statusString:
+      type: string
 C_Calendar.CalendarEventTextureInfo:
-  difficultyId:
-    nilable: true
-    type: number
-  expansionLevel:
-    type: number
-  iconTexture:
-    type: number
-  isLfr:
-    nilable: true
-    type: boolean
-  mapId:
-    nilable: true
-    type: number
-  title:
-    type: string
+  fields:
+    difficultyId:
+      nilable: true
+      type: number
+    expansionLevel:
+      type: number
+    iconTexture:
+      type: number
+    isLfr:
+      nilable: true
+      type: boolean
+    mapId:
+      nilable: true
+      type: number
+    title:
+      type: string
 C_Calendar.CalendarEventTypeDisplayInfo:
-  displayString:
-    type: string
-  eventType:
-    type:
-      enum: CalendarEventType
+  fields:
+    displayString:
+      type: string
+    eventType:
+      type:
+        enum: CalendarEventType
 C_Calendar.CalendarGuildEventInfo:
-  calendarType:
-    type: string
-  clubID:
-    type: string
-  eventID:
-    type: string
-  eventType:
-    type:
-      enum: CalendarEventType
-  hour:
-    type: number
-  inviteStatus:
-    type:
-      enum: CalendarStatus
-  minute:
-    type: number
-  month:
-    type: number
-  monthDay:
-    type: number
-  texture:
-    type: number
-  title:
-    type: string
-  weekday:
-    type: number
-  year:
-    type: number
+  fields:
+    calendarType:
+      type: string
+    clubID:
+      type: string
+    eventID:
+      type: string
+    eventType:
+      type:
+        enum: CalendarEventType
+    hour:
+      type: number
+    inviteStatus:
+      type:
+        enum: CalendarStatus
+    minute:
+      type: number
+    month:
+      type: number
+    monthDay:
+      type: number
+    texture:
+      type: number
+    title:
+      type: string
+    weekday:
+      type: number
+    year:
+      type: number
 C_Calendar.CalendarGuildFilterInfo:
-  maxLevel:
-    type: number
-  minLevel:
-    type: number
-  rank:
-    type: number
+  fields:
+    maxLevel:
+      type: number
+    minLevel:
+      type: number
+    rank:
+      type: number
 C_Calendar.CalendarHolidayInfo:
-  description:
-    type: string
-  endTime:
-    nilable: true
-    type:
-      structure: CalendarTime
-  name:
-    type: string
-  startTime:
-    nilable: true
-    type:
-      structure: CalendarTime
-  texture:
-    type: number
+  fields:
+    description:
+      type: string
+    endTime:
+      nilable: true
+      type:
+        structure: CalendarTime
+    name:
+      type: string
+    startTime:
+      nilable: true
+      type:
+        structure: CalendarTime
+    texture:
+      type: number
 C_Calendar.CalendarMonthInfo:
-  firstWeekday:
-    type: number
-  month:
-    type: number
-  numDays:
-    type: number
-  year:
-    type: number
+  fields:
+    firstWeekday:
+      type: number
+    month:
+      type: number
+    numDays:
+      type: number
+    year:
+      type: number
 C_Calendar.CalendarRaidInfo:
-  calendarType:
-    type: string
-  difficulty:
-    type: number
-  difficultyName:
-    nilable: true
-    type: string
-  name:
-    type: string
-  raidID:
-    type: number
-  time:
-    type:
-      structure: CalendarTime
+  fields:
+    calendarType:
+      type: string
+    difficulty:
+      type: number
+    difficultyName:
+      nilable: true
+      type: string
+    name:
+      type: string
+    raidID:
+      type: number
+    time:
+      type:
+        structure: CalendarTime
 C_Club.ClubInfo:
-  avatarId:
-    type: number
-  broadcast:
-    type: string
-  clubId:
-    type: string
-  clubType:
-    type:
-      enum: ClubType
-  description:
-    type: string
-  favoriteTimeStamp:
-    nilable: true
-    type: number
-  joinTime:
-    nilable: true
-    type: number
-  memberCount:
-    nilable: true
-    type: number
-  name:
-    type: string
-  shortName:
-    nilable: true
-    type: string
-  socialQueueingEnabled:
-    nilable: true
-    type: boolean
+  fields:
+    avatarId:
+      type: number
+    broadcast:
+      type: string
+    clubId:
+      type: string
+    clubType:
+      type:
+        enum: ClubType
+    description:
+      type: string
+    favoriteTimeStamp:
+      nilable: true
+      type: number
+    joinTime:
+      nilable: true
+      type: number
+    memberCount:
+      nilable: true
+      type: number
+    name:
+      type: string
+    shortName:
+      nilable: true
+      type: string
+    socialQueueingEnabled:
+      nilable: true
+      type: boolean
 C_Club.ClubInvitationCandidateInfo:
-  memberId:
-    type: number
-  name:
-    type: string
-  priority:
-    type: number
-  status:
-    type:
-      enum: ClubInvitationCandidateStatus
+  fields:
+    memberId:
+      type: number
+    name:
+      type: string
+    priority:
+      type: number
+    status:
+      type:
+        enum: ClubInvitationCandidateStatus
 C_Club.ClubInvitationInfo:
-  invitationId:
-    type: string
-  invitee:
-    type:
-      structure: C_Club.ClubMemberInfo
-  isMyInvitation:
-    type: boolean
-C_Club.ClubMemberInfo:
-  achievementPoints:
-    nilable: true
-    type: number
-  bnetAccountId:
-    nilable: true
-    type: number
-  classID:
-    nilable: true
-    type: number
-  clubType:
-    nilable: true
-    type:
-      enum: ClubType
-  guid:
-    nilable: true
-    type: string
-  guildRank:
-    nilable: true
-    type: string
-  guildRankOrder:
-    nilable: true
-    type: number
-  isRemoteChat:
-    nilable: true
-    type: boolean
-  isSelf:
-    type: boolean
-  lastOnlineDay:
-    nilable: true
-    type: number
-  lastOnlineHour:
-    nilable: true
-    type: number
-  lastOnlineMonth:
-    nilable: true
-    type: number
-  lastOnlineYear:
-    nilable: true
-    type: number
-  level:
-    nilable: true
-    type: number
-  memberId:
-    type: number
-  memberNote:
-    nilable: true
-    type: string
-  name:
-    nilable: true
-    type: string
-  officerNote:
-    nilable: true
-    type: string
-  presence:
-    type:
-      enum: ClubMemberPresence
-  profession1ID:
-    nilable: true
-    type: number
-  profession1Name:
-    nilable: true
-    type: string
-  profession1Rank:
-    nilable: true
-    type: number
-  profession2ID:
-    nilable: true
-    type: number
-  profession2Name:
-    nilable: true
-    type: string
-  profession2Rank:
-    nilable: true
-    type: number
-  race:
-    nilable: true
-    type: number
-  role:
-    nilable: true
-    type:
-      enum: ClubRoleIdentifier
-  zone:
-    nilable: true
-    type: string
-C_Club.ClubMessageIdentifier:
-  epoch:
-    type: number
-  position:
-    type: number
-C_Club.ClubMessageInfo:
-  author:
-    type:
-      structure: C_Club.ClubMemberInfo
-  content:
-    type: string
-  destroyed:
-    type: boolean
-  destroyer:
-    nilable: true
-    type:
-      structure: C_Club.ClubMemberInfo
-  edited:
-    type: boolean
-  messageId:
-    type:
-      structure: C_Club.ClubMessageIdentifier
-C_Club.ClubMessageRange:
-  newestMessageId:
-    type:
-      structure: C_Club.ClubMessageIdentifier
-  oldestMessageId:
-    type:
-      structure: C_Club.ClubMessageIdentifier
-C_Club.ClubPrivilegeInfo:
-  canAddBan:
-    type: boolean
-  canCreateMessage:
-    type: boolean
-  canCreateStream:
-    type: boolean
-  canCreateTicket:
-    type: boolean
-  canDestroy:
-    type: boolean
-  canDestroyOtherMessage:
-    type: boolean
-  canDestroyOwnMessage:
-    type: boolean
-  canDestroyStream:
-    type: boolean
-  canDestroyTicket:
-    type: boolean
-  canEditOwnMessage:
-    type: boolean
-  canGetBan:
-    type: boolean
-  canGetInvitation:
-    type: boolean
-  canGetSuggestion:
-    type: boolean
-  canGetTicket:
-    type: boolean
-  canPinMessage:
-    type: boolean
-  canRemoveBan:
-    type: boolean
-  canRevokeOtherInvitation:
-    type: boolean
-  canRevokeOwnInvitation:
-    type: boolean
-  canSendGuestInvitation:
-    type: boolean
-  canSendInvitation:
-    type: boolean
-  canSetAttribute:
-    type: boolean
-  canSetAvatar:
-    type: boolean
-  canSetBroadcast:
-    type: boolean
-  canSetDescription:
-    type: boolean
-  canSetName:
-    type: boolean
-  canSetOtherMemberAttribute:
-    type: boolean
-  canSetOtherMemberNote:
-    type: boolean
-  canSetOwnMemberAttribute:
-    type: boolean
-  canSetOwnMemberNote:
-    type: boolean
-  canSetOwnPresenceLevel:
-    type: boolean
-  canSetOwnVoiceState:
-    type: boolean
-  canSetPrivacyLevel:
-    type: boolean
-  canSetStreamAccess:
-    type: boolean
-  canSetStreamAttribute:
-    type: boolean
-  canSetStreamName:
-    type: boolean
-  canSetStreamPosition:
-    type: boolean
-  canSetStreamSubject:
-    type: boolean
-  canSetStreamVoiceLevel:
-    type: boolean
-  canSuggestMember:
-    type: boolean
-  canUseVoice:
-    type: boolean
-  canVoiceMuteMemberForAll:
-    type: boolean
-  kickableRoleIds:
-    type:
-      arrayof: number
-C_Club.ClubSelfInvitationInfo:
-  club:
-    type:
-      structure: C_Club.ClubInfo
-  invitationId:
-    type: string
-  inviter:
-    type:
-      structure: C_Club.ClubMemberInfo
-  leaders:
-    type:
-      arrayof:
+  fields:
+    invitationId:
+      type: string
+    invitee:
+      type:
         structure: C_Club.ClubMemberInfo
+    isMyInvitation:
+      type: boolean
+C_Club.ClubMemberInfo:
+  fields:
+    achievementPoints:
+      nilable: true
+      type: number
+    bnetAccountId:
+      nilable: true
+      type: number
+    classID:
+      nilable: true
+      type: number
+    clubType:
+      nilable: true
+      type:
+        enum: ClubType
+    guid:
+      nilable: true
+      type: string
+    guildRank:
+      nilable: true
+      type: string
+    guildRankOrder:
+      nilable: true
+      type: number
+    isRemoteChat:
+      nilable: true
+      type: boolean
+    isSelf:
+      type: boolean
+    lastOnlineDay:
+      nilable: true
+      type: number
+    lastOnlineHour:
+      nilable: true
+      type: number
+    lastOnlineMonth:
+      nilable: true
+      type: number
+    lastOnlineYear:
+      nilable: true
+      type: number
+    level:
+      nilable: true
+      type: number
+    memberId:
+      type: number
+    memberNote:
+      nilable: true
+      type: string
+    name:
+      nilable: true
+      type: string
+    officerNote:
+      nilable: true
+      type: string
+    presence:
+      type:
+        enum: ClubMemberPresence
+    profession1ID:
+      nilable: true
+      type: number
+    profession1Name:
+      nilable: true
+      type: string
+    profession1Rank:
+      nilable: true
+      type: number
+    profession2ID:
+      nilable: true
+      type: number
+    profession2Name:
+      nilable: true
+      type: string
+    profession2Rank:
+      nilable: true
+      type: number
+    race:
+      nilable: true
+      type: number
+    role:
+      nilable: true
+      type:
+        enum: ClubRoleIdentifier
+    zone:
+      nilable: true
+      type: string
+C_Club.ClubMessageIdentifier:
+  fields:
+    epoch:
+      type: number
+    position:
+      type: number
+C_Club.ClubMessageInfo:
+  fields:
+    author:
+      type:
+        structure: C_Club.ClubMemberInfo
+    content:
+      type: string
+    destroyed:
+      type: boolean
+    destroyer:
+      nilable: true
+      type:
+        structure: C_Club.ClubMemberInfo
+    edited:
+      type: boolean
+    messageId:
+      type:
+        structure: C_Club.ClubMessageIdentifier
+C_Club.ClubMessageRange:
+  fields:
+    newestMessageId:
+      type:
+        structure: C_Club.ClubMessageIdentifier
+    oldestMessageId:
+      type:
+        structure: C_Club.ClubMessageIdentifier
+C_Club.ClubPrivilegeInfo:
+  fields:
+    canAddBan:
+      type: boolean
+    canCreateMessage:
+      type: boolean
+    canCreateStream:
+      type: boolean
+    canCreateTicket:
+      type: boolean
+    canDestroy:
+      type: boolean
+    canDestroyOtherMessage:
+      type: boolean
+    canDestroyOwnMessage:
+      type: boolean
+    canDestroyStream:
+      type: boolean
+    canDestroyTicket:
+      type: boolean
+    canEditOwnMessage:
+      type: boolean
+    canGetBan:
+      type: boolean
+    canGetInvitation:
+      type: boolean
+    canGetSuggestion:
+      type: boolean
+    canGetTicket:
+      type: boolean
+    canPinMessage:
+      type: boolean
+    canRemoveBan:
+      type: boolean
+    canRevokeOtherInvitation:
+      type: boolean
+    canRevokeOwnInvitation:
+      type: boolean
+    canSendGuestInvitation:
+      type: boolean
+    canSendInvitation:
+      type: boolean
+    canSetAttribute:
+      type: boolean
+    canSetAvatar:
+      type: boolean
+    canSetBroadcast:
+      type: boolean
+    canSetDescription:
+      type: boolean
+    canSetName:
+      type: boolean
+    canSetOtherMemberAttribute:
+      type: boolean
+    canSetOtherMemberNote:
+      type: boolean
+    canSetOwnMemberAttribute:
+      type: boolean
+    canSetOwnMemberNote:
+      type: boolean
+    canSetOwnPresenceLevel:
+      type: boolean
+    canSetOwnVoiceState:
+      type: boolean
+    canSetPrivacyLevel:
+      type: boolean
+    canSetStreamAccess:
+      type: boolean
+    canSetStreamAttribute:
+      type: boolean
+    canSetStreamName:
+      type: boolean
+    canSetStreamPosition:
+      type: boolean
+    canSetStreamSubject:
+      type: boolean
+    canSetStreamVoiceLevel:
+      type: boolean
+    canSuggestMember:
+      type: boolean
+    canUseVoice:
+      type: boolean
+    canVoiceMuteMemberForAll:
+      type: boolean
+    kickableRoleIds:
+      type:
+        arrayof: number
+C_Club.ClubSelfInvitationInfo:
+  fields:
+    club:
+      type:
+        structure: C_Club.ClubInfo
+    invitationId:
+      type: string
+    inviter:
+      type:
+        structure: C_Club.ClubMemberInfo
+    leaders:
+      type:
+        arrayof:
+          structure: C_Club.ClubMemberInfo
 C_Club.ClubStreamInfo:
-  creationTime:
-    type: number
-  leadersAndModeratorsOnly:
-    type: boolean
-  name:
-    type: string
-  streamId:
-    type: string
-  streamType:
-    type:
-      enum: ClubStreamType
-  subject:
-    type: string
+  fields:
+    creationTime:
+      type: number
+    leadersAndModeratorsOnly:
+      type: boolean
+    name:
+      type: string
+    streamId:
+      type: string
+    streamType:
+      type:
+        enum: ClubStreamType
+    subject:
+      type: string
 C_Club.ClubStreamNotificationSetting:
-  filter:
-    type:
-      enum: ClubStreamNotificationFilter
-  streamId:
-    type: string
+  fields:
+    filter:
+      type:
+        enum: ClubStreamNotificationFilter
+    streamId:
+      type: string
 C_Club.ClubTicketInfo:
-  allowedRedeemCount:
-    type: number
-  creationTime:
-    type: number
-  creator:
-    type:
-      structure: C_Club.ClubMemberInfo
-  currentRedeemCount:
-    type: number
-  defaultStreamId:
-    nilable: true
-    type: string
-  expirationTime:
-    type: number
-  ticketId:
-    type: string
+  fields:
+    allowedRedeemCount:
+      type: number
+    creationTime:
+      type: number
+    creator:
+      type:
+        structure: C_Club.ClubMemberInfo
+    currentRedeemCount:
+      type: number
+    defaultStreamId:
+      nilable: true
+      type: string
+    expirationTime:
+      type: number
+    ticketId:
+      type: string
 C_Commentator.CommentatorHistory:
-  overrideNameDirectory:
-    type:
-      arrayof:
-        structure: C_Commentator.CommentatorOverrideNameEntry
-  series:
-    type:
-      arrayof:
-        structure: C_Commentator.CommentatorSeries
-  teamDirectory:
-    type:
-      arrayof:
-        structure: C_Commentator.CommentatorTeamDirectoryEntry
+  fields:
+    overrideNameDirectory:
+      type:
+        arrayof:
+          structure: C_Commentator.CommentatorOverrideNameEntry
+    series:
+      type:
+        arrayof:
+          structure: C_Commentator.CommentatorSeries
+    teamDirectory:
+      type:
+        arrayof:
+          structure: C_Commentator.CommentatorTeamDirectoryEntry
 C_Commentator.CommentatorOverrideNameEntry:
-  newName:
-    type: string
-  originalName:
-    type: string
+  fields:
+    newName:
+      type: string
+    originalName:
+      type: string
 C_Commentator.CommentatorPlayerData:
-  damageDone:
-    type: number
-  damageTaken:
-    type: number
-  deaths:
-    type: number
-  faction:
-    type: number
-  healingDone:
-    type: number
-  healingTaken:
-    type: number
-  kills:
-    type: number
-  name:
-    type: string
-  specialization:
-    type: number
-  unitToken:
-    type: string
+  fields:
+    damageDone:
+      type: number
+    damageTaken:
+      type: number
+    deaths:
+      type: number
+    faction:
+      type: number
+    healingDone:
+      type: number
+    healingTaken:
+      type: number
+    kills:
+      type: number
+    name:
+      type: string
+    specialization:
+      type: number
+    unitToken:
+      type: string
 C_Commentator.CommentatorSeries:
-  teams:
-    type:
-      arrayof:
-        structure: C_Commentator.CommentatorSeriesTeam
+  fields:
+    teams:
+      type:
+        arrayof:
+          structure: C_Commentator.CommentatorSeriesTeam
 C_Commentator.CommentatorSeriesTeam:
-  name:
-    type: string
-  score:
-    type: number
+  fields:
+    name:
+      type: string
+    score:
+      type: number
 C_Commentator.CommentatorTeamDirectoryEntry:
-  playerName:
-    type: string
-  teamName:
-    type: string
+  fields:
+    playerName:
+      type: string
+    teamName:
+      type: string
 C_Commentator.CommentatorUnitData:
-  absorbTotal:
-    type: number
-  health:
-    type: number
-  healthMax:
-    type: number
-  isDeadOrGhost:
-    type: boolean
-  isFeignDeath:
-    type: boolean
-  power:
-    type: number
-  powerMax:
-    type: number
-  powerTypeToken:
-    type: string
+  fields:
+    absorbTotal:
+      type: number
+    health:
+      type: number
+    healthMax:
+      type: number
+    isDeadOrGhost:
+      type: boolean
+    isFeignDeath:
+      type: boolean
+    power:
+      type: number
+    powerMax:
+      type: number
+    powerTypeToken:
+      type: string
 C_Commentator.NameOverrideEntry:
-  originalName:
-    type: string
-  overrideName:
-    type: string
+  fields:
+    originalName:
+      type: string
+    overrideName:
+      type: string
 C_Console.ConsoleCommandInfo:
-  category:
-    type:
-      enum: ConsoleCategory
-  command:
-    type: string
-  commandType:
-    type:
-      enum: ConsoleCommandType
-  help:
-    type: string
-  scriptContents:
-    type: string
-  scriptParameters:
-    type: string
+  fields:
+    category:
+      type:
+        enum: ConsoleCategory
+    command:
+      type: string
+    commandType:
+      type:
+        enum: ConsoleCommandType
+    help:
+      type: string
+    scriptContents:
+      type: string
+    scriptParameters:
+      type: string
 C_Container.ContainerItemInfo:
-  hasLoot:
-    type: boolean
-  hasNoValue:
-    type: boolean
-  hyperlink:
-    type: string
-  iconFileID:
-    type: number
-  isBound:
-    type: boolean
-  isFiltered:
-    type: boolean
-  isLocked:
-    type: boolean
-  isReadable:
-    type: boolean
-  itemID:
-    type: number
-  quality:
-    nilable: true
-    type:
-      enum: ItemQuality
-  stackCount:
-    type: number
+  fields:
+    hasLoot:
+      type: boolean
+    hasNoValue:
+      type: boolean
+    hyperlink:
+      type: string
+    iconFileID:
+      type: number
+    isBound:
+      type: boolean
+    isFiltered:
+      type: boolean
+    isLocked:
+      type: boolean
+    isReadable:
+      type: boolean
+    itemID:
+      type: number
+    quality:
+      nilable: true
+      type:
+        enum: ItemQuality
+    stackCount:
+      type: number
 C_Container.ItemPurchaseCurrency:
-  currencyCount:
-    type: number
-  iconFileID:
-    nilable: true
-    type: number
-  name:
-    type: string
+  fields:
+    currencyCount:
+      type: number
+    iconFileID:
+      nilable: true
+      type: number
+    name:
+      type: string
 C_Container.ItemPurchaseInfo:
-  currencyCount:
-    type: number
-  hasEnchants:
-    type: boolean
-  itemCount:
-    type: number
-  money:
-    type: number
-  refundSeconds:
-    type: number
+  fields:
+    currencyCount:
+      type: number
+    hasEnchants:
+      type: boolean
+    itemCount:
+      type: number
+    money:
+      type: number
+    refundSeconds:
+      type: number
 C_Container.ItemPurchaseItem:
-  hyperlink:
-    type: string
-  iconFileID:
-    nilable: true
-    type: number
-  itemCount:
-    type: number
+  fields:
+    hyperlink:
+      type: string
+    iconFileID:
+      nilable: true
+      type: number
+    itemCount:
+      type: number
 C_Container.ItemQuestInfo:
-  isActive:
-    type: boolean
-  isQuestItem:
-    type: boolean
-  questID:
-    nilable: true
-    type: number
+  fields:
+    isActive:
+      type: boolean
+    isQuestItem:
+      type: boolean
+    questID:
+      nilable: true
+      type: number
 C_CreatureInfo.ClassInfo:
-  classFile:
-    type: string
-  classID:
-    type: number
-  className:
-    type: string
+  fields:
+    classFile:
+      type: string
+    classID:
+      type: number
+    className:
+      type: string
 C_CreatureInfo.FactionInfo:
-  groupTag:
-    type: string
-  name:
-    type: string
+  fields:
+    groupTag:
+      type: string
+    name:
+      type: string
 C_CreatureInfo.RaceInfo:
-  clientFileString:
-    type: string
-  raceID:
-    type: number
-  raceName:
-    type: string
+  fields:
+    clientFileString:
+      type: string
+    raceID:
+      type: number
+    raceName:
+      type: string
 C_CurrencyInfo.CurrencyDisplayInfo:
-  actualAmount:
-    type: number
-  description:
-    type: string
-  displayAmount:
-    type: number
-  icon:
-    type: number
-  name:
-    type: string
-  quality:
-    type: number
+  fields:
+    actualAmount:
+      type: number
+    description:
+      type: string
+    displayAmount:
+      type: number
+    icon:
+      type: number
+    name:
+      type: string
+    quality:
+      type: number
 C_CurrencyInfo.CurrencyInfo:
-  canEarnPerWeek:
-    type: boolean
-  description:
-    type: string
-  discovered:
-    type: boolean
-  iconFileID:
-    type: number
-  isHeader:
-    type: boolean
-  isHeaderExpanded:
-    type: boolean
-  isShowInBackpack:
-    type: boolean
-  isTradeable:
-    type: boolean
-  isTypeUnused:
-    type: boolean
-  maxQuantity:
-    type: number
-  maxWeeklyQuantity:
-    type: number
-  name:
-    type: string
-  quality:
-    type:
-      enum: ItemQuality
-  quantity:
-    type: number
-  quantityEarnedThisWeek:
-    type: number
-  totalEarned:
-    type: number
-  trackedQuantity:
-    type: number
-  useTotalEarnedForMaxQty:
-    type: boolean
+  fields:
+    canEarnPerWeek:
+      type: boolean
+    description:
+      type: string
+    discovered:
+      type: boolean
+    iconFileID:
+      type: number
+    isHeader:
+      type: boolean
+    isHeaderExpanded:
+      type: boolean
+    isShowInBackpack:
+      type: boolean
+    isTradeable:
+      type: boolean
+    isTypeUnused:
+      type: boolean
+    maxQuantity:
+      type: number
+    maxWeeklyQuantity:
+      type: number
+    name:
+      type: string
+    quality:
+      type:
+        enum: ItemQuality
+    quantity:
+      type: number
+    quantityEarnedThisWeek:
+      type: number
+    totalEarned:
+      type: number
+    trackedQuantity:
+      type: number
+    useTotalEarnedForMaxQty:
+      type: boolean
 C_DeathInfo.GraveyardMapInfo:
-  areaPoiID:
-    type: number
-  graveyardID:
-    type: number
-  isGraveyardSelectable:
-    type: boolean
-  name:
-    type: string
-  position:
-    type:
-      mixin: Vector2DMixin
-      structure: vector2
-  textureIndex:
-    type: number
+  fields:
+    areaPoiID:
+      type: number
+    graveyardID:
+      type: number
+    isGraveyardSelectable:
+      type: boolean
+    name:
+      type: string
+    position:
+      type:
+        mixin: Vector2DMixin
+        structure: vector2
+    textureIndex:
+      type: number
 C_DeathInfo.SelfResurrectOption:
-  canUse:
-    type: boolean
-  id:
-    type: number
-  isLimited:
-    type: boolean
-  name:
-    type: string
-  optionType:
-    type:
-      enum: SelfResurrectOptionType
-  priority:
-    type: number
+  fields:
+    canUse:
+      type: boolean
+    id:
+      type: number
+    isLimited:
+      type: boolean
+    name:
+      type: string
+    optionType:
+      type:
+        enum: SelfResurrectOptionType
+    priority:
+      type: number
 C_FriendList.FriendInfo:
-  afk:
-    type: boolean
-  area:
-    nilable: true
-    type: string
-  className:
-    nilable: true
-    type: string
-  connected:
-    type: boolean
-  dnd:
-    type: boolean
-  guid:
-    type: string
-  level:
-    type: number
-  name:
-    type: string
-  notes:
-    nilable: true
-    type: string
+  fields:
+    afk:
+      type: boolean
+    area:
+      nilable: true
+      type: string
+    className:
+      nilable: true
+      type: string
+    connected:
+      type: boolean
+    dnd:
+      type: boolean
+    guid:
+      type: string
+    level:
+      type: number
+    name:
+      type: string
+    notes:
+      nilable: true
+      type: string
 C_FriendList.WhoInfo:
-  area:
-    type: string
-  classStr:
-    type: string
-  filename:
-    nilable: true
-    type: string
-  fullGuildName:
-    type: string
-  fullName:
-    type: string
-  gender:
-    type: number
-  level:
-    type: number
-  raceStr:
-    type: string
+  fields:
+    area:
+      type: string
+    classStr:
+      type: string
+    filename:
+      nilable: true
+      type: string
+    fullGuildName:
+      type: string
+    fullName:
+      type: string
+    gender:
+      type: number
+    level:
+      type: number
+    raceStr:
+      type: string
 C_GamePad.GamePadAxisConfig:
-  axis:
-    type: string
-  buttonNeg:
-    nilable: true
-    type: string
-  buttonPos:
-    nilable: true
-    type: string
-  buttonThreshold:
-    nilable: true
-    type: number
-  comment:
-    nilable: true
-    type: string
-  deadzone:
-    nilable: true
-    type: number
-  scale:
-    nilable: true
-    type: number
-  shift:
-    nilable: true
-    type: number
+  fields:
+    axis:
+      type: string
+    buttonNeg:
+      nilable: true
+      type: string
+    buttonPos:
+      nilable: true
+      type: string
+    buttonThreshold:
+      nilable: true
+      type: number
+    comment:
+      nilable: true
+      type: string
+    deadzone:
+      nilable: true
+      type: number
+    scale:
+      nilable: true
+      type: number
+    shift:
+      nilable: true
+      type: number
 C_GamePad.GamePadConfig:
-  axisConfigs:
-    type:
-      arrayof:
-        structure: C_GamePad.GamePadAxisConfig
-  comment:
-    nilable: true
-    type: string
-  configID:
-    type:
-      structure: C_GamePad.GamePadConfigID
-  labelStyle:
-    nilable: true
-    type: string
-  name:
-    nilable: true
-    type: string
-  rawAxisMappings:
-    type:
-      arrayof:
-        structure: C_GamePad.GamePadRawAxisMapping
-  rawButtonMappings:
-    type:
-      arrayof:
-        structure: C_GamePad.GamePadRawButtonMapping
-  stickConfigs:
-    type:
-      arrayof:
-        structure: C_GamePad.GamePadStickConfig
+  fields:
+    axisConfigs:
+      type:
+        arrayof:
+          structure: C_GamePad.GamePadAxisConfig
+    comment:
+      nilable: true
+      type: string
+    configID:
+      type:
+        structure: C_GamePad.GamePadConfigID
+    labelStyle:
+      nilable: true
+      type: string
+    name:
+      nilable: true
+      type: string
+    rawAxisMappings:
+      type:
+        arrayof:
+          structure: C_GamePad.GamePadRawAxisMapping
+    rawButtonMappings:
+      type:
+        arrayof:
+          structure: C_GamePad.GamePadRawButtonMapping
+    stickConfigs:
+      type:
+        arrayof:
+          structure: C_GamePad.GamePadStickConfig
 C_GamePad.GamePadConfigID:
-  productID:
-    nilable: true
-    type: number
-  vendorID:
-    nilable: true
-    type: number
+  fields:
+    productID:
+      nilable: true
+      type: number
+    vendorID:
+      nilable: true
+      type: number
 C_GamePad.GamePadMappedState:
-  axes:
-    type:
-      arrayof: number
-  axisCount:
-    type: number
-  buttonCount:
-    type: number
-  buttons:
-    type:
-      arrayof: boolean
-  labelStyle:
-    type: string
-  name:
-    type: string
-  stickCount:
-    type: number
-  sticks:
-    type:
-      arrayof:
-        structure: C_GamePad.GamePadStick
+  fields:
+    axes:
+      type:
+        arrayof: number
+    axisCount:
+      type: number
+    buttonCount:
+      type: number
+    buttons:
+      type:
+        arrayof: boolean
+    labelStyle:
+      type: string
+    name:
+      type: string
+    stickCount:
+      type: number
+    sticks:
+      type:
+        arrayof:
+          structure: C_GamePad.GamePadStick
 C_GamePad.GamePadRawAxisMapping:
-  axis:
-    nilable: true
-    type: string
-  comment:
-    nilable: true
-    type: string
-  rawIndex:
-    type: number
+  fields:
+    axis:
+      nilable: true
+      type: string
+    comment:
+      nilable: true
+      type: string
+    rawIndex:
+      type: number
 C_GamePad.GamePadRawButtonMapping:
-  axis:
-    nilable: true
-    type: string
-  axisValue:
-    nilable: true
-    type: number
-  button:
-    nilable: true
-    type: string
-  comment:
-    nilable: true
-    type: string
-  rawIndex:
-    type: number
+  fields:
+    axis:
+      nilable: true
+      type: string
+    axisValue:
+      nilable: true
+      type: number
+    button:
+      nilable: true
+      type: string
+    comment:
+      nilable: true
+      type: string
+    rawIndex:
+      type: number
 C_GamePad.GamePadRawState:
-  name:
-    type: string
-  productID:
-    type: number
-  rawAxes:
-    type:
-      arrayof: number
-  rawAxisCount:
-    type: number
-  rawButtonCount:
-    type: number
-  rawButtons:
-    type:
-      arrayof: boolean
-  vendorID:
-    type: number
+  fields:
+    name:
+      type: string
+    productID:
+      type: number
+    rawAxes:
+      type:
+        arrayof: number
+    rawAxisCount:
+      type: number
+    rawButtonCount:
+      type: number
+    rawButtons:
+      type:
+        arrayof: boolean
+    vendorID:
+      type: number
 C_GamePad.GamePadStick:
-  len:
-    type: number
-  x:
-    type: number
-  y:
-    type: number
+  fields:
+    len:
+      type: number
+    x:
+      type: number
+    y:
+      type: number
 C_GamePad.GamePadStickConfig:
-  axisX:
-    nilable: true
-    type: string
-  axisY:
-    nilable: true
-    type: string
-  comment:
-    nilable: true
-    type: string
-  deadzone:
-    nilable: true
-    type: number
-  deadzoneX:
-    nilable: true
-    type: number
-  deadzoneY:
-    nilable: true
-    type: number
-  stick:
-    type: string
+  fields:
+    axisX:
+      nilable: true
+      type: string
+    axisY:
+      nilable: true
+      type: string
+    comment:
+      nilable: true
+      type: string
+    deadzone:
+      nilable: true
+      type: number
+    deadzoneX:
+      nilable: true
+      type: number
+    deadzoneY:
+      nilable: true
+      type: number
+    stick:
+      type: string
 C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo:
-  frameHeight:
-    type: number
-  frameWidth:
-    type: number
-  title:
-    nilable: true
-    type: string
-  uiTextureKit:
-    nilable: true
-    type: string
-  uiWidgetSetID:
-    nilable: true
-    type: number
+  fields:
+    frameHeight:
+      type: number
+    frameWidth:
+      type: number
+    title:
+      nilable: true
+      type: string
+    uiTextureKit:
+      nilable: true
+      type: string
+    uiWidgetSetID:
+      nilable: true
+      type: number
 C_GossipInfo.FriendshipReputationInfo:
-  friendshipFactionID:
-    type: number
-  maxRep:
-    type: number
-  name:
-    nilable: true
-    type: string
-  nextThreshold:
-    nilable: true
-    type: number
-  reaction:
-    type: string
-  reactionThreshold:
-    type: number
-  standing:
-    type: number
-  text:
-    type: string
-  texture:
-    type: number
+  fields:
+    friendshipFactionID:
+      type: number
+    maxRep:
+      type: number
+    name:
+      nilable: true
+      type: string
+    nextThreshold:
+      nilable: true
+      type: number
+    reaction:
+      type: string
+    reactionThreshold:
+      type: number
+    standing:
+      type: number
+    text:
+      type: string
+    texture:
+      type: number
 C_GossipInfo.FriendshipReputationRankInfo:
-  currentLevel:
-    type: number
-  maxLevel:
-    type: number
+  fields:
+    currentLevel:
+      type: number
+    maxLevel:
+      type: number
 C_GossipInfo.GossipOptionUIInfo:
-  flags:
-    stub: 0
-    type: number
-  gossipOptionID:
-    type: number
-  icon:
-    type: number
-  name:
-    type: string
-  orderIndex:
-    type: number
-  overrideIconID:
-    nilable: true
-    type: number
-  selectOptionWhenOnlyOption:
-    type: boolean
-  spellID:
-    nilable: true
-    type: number
-  status:
-    type:
-      enum: GossipOptionStatus
+  fields:
+    flags:
+      stub: 0
+      type: number
+    gossipOptionID:
+      type: number
+    icon:
+      type: number
+    name:
+      type: string
+    orderIndex:
+      type: number
+    overrideIconID:
+      nilable: true
+      type: number
+    selectOptionWhenOnlyOption:
+      type: boolean
+    spellID:
+      nilable: true
+      type: number
+    status:
+      type:
+        enum: GossipOptionStatus
 C_GossipInfo.GossipPoiInfo:
-  inBattleMap:
-    type: boolean
-  name:
-    type: string
-  position:
-    type:
-      mixin: Vector2DMixin
-      structure: vector2
-  textureIndex:
-    type: number
+  fields:
+    inBattleMap:
+      type: boolean
+    name:
+      type: string
+    position:
+      type:
+        mixin: Vector2DMixin
+        structure: vector2
+    textureIndex:
+      type: number
 C_GossipInfo.GossipQuestUIInfo:
-  frequency:
-    nilable: true
-    type: number
-  isComplete:
-    nilable: true
-    type: boolean
-  isIgnored:
-    type: boolean
-  isLegendary:
-    type: boolean
-  isTrivial:
-    type: boolean
-  questID:
-    type: number
-  questLevel:
-    type: number
-  repeatable:
-    nilable: true
-    type: boolean
-  title:
-    type: string
+  fields:
+    frequency:
+      nilable: true
+      type: number
+    isComplete:
+      nilable: true
+      type: boolean
+    isIgnored:
+      type: boolean
+    isLegendary:
+      type: boolean
+    isTrivial:
+      type: boolean
+    questID:
+      type: number
+    questLevel:
+      type: number
+    repeatable:
+      nilable: true
+      type: boolean
+    title:
+      type: string
 C_LFGList.GroupFinderActivityInfo:
-  categoryID:
-    type: number
-  difficultyID:
-    type: number
-  displayType:
-    type:
-      enum: LFGListDisplayType
-  filters:
-    type: number
-  fullName:
-    type: string
-  groupFinderActivityGroupID:
-    type: number
-  iconFileDataID:
-    type: number
-  mapID:
-    type: number
-  maxLevel:
-    type: number
-  maxLevelSuggestion:
-    type: number
-  maxNumPlayers:
-    type: number
-  minLevel:
-    type: number
-  orderIndex:
-    type: number
-  redirectedDifficultyID:
-    type: number
-  shortName:
-    type: string
-  useDungeonRoleExpectations:
-    type: boolean
+  fields:
+    categoryID:
+      type: number
+    difficultyID:
+      type: number
+    displayType:
+      type:
+        enum: LFGListDisplayType
+    filters:
+      type: number
+    fullName:
+      type: string
+    groupFinderActivityGroupID:
+      type: number
+    iconFileDataID:
+      type: number
+    mapID:
+      type: number
+    maxLevel:
+      type: number
+    maxLevelSuggestion:
+      type: number
+    maxNumPlayers:
+      type: number
+    minLevel:
+      type: number
+    orderIndex:
+      type: number
+    redirectedDifficultyID:
+      type: number
+    shortName:
+      type: string
+    useDungeonRoleExpectations:
+      type: boolean
 C_LFGList.LfgEntryData:
-  activityIDs:
-    type:
-      arrayof: number
-  comment:
-    type: string
-  duration:
-    type: number
-  newPlayerFriendly:
-    type: boolean
+  fields:
+    activityIDs:
+      type:
+        arrayof: number
+    comment:
+      type: string
+    duration:
+      type: number
+    newPlayerFriendly:
+      type: boolean
 C_LFGList.LFGRoles:
-  dps:
-    type: boolean
-  healer:
-    type: boolean
-  tank:
-    type: boolean
+  fields:
+    dps:
+      type: boolean
+    healer:
+      type: boolean
+    tank:
+      type: boolean
 C_LFGList.LfgSearchResultData:
-  activityIDs:
-    type:
-      arrayof: number
-  age:
-    type: number
-  autoAccept:
-    type: boolean
-  comment:
-    type: string
-  hasSelf:
-    type: boolean
-  isDelisted:
-    type: boolean
-  isWarMode:
-    type: boolean
-  leaderName:
-    nilable: true
-    type: string
-  name:
-    type: string
-  newPlayerFriendly:
-    nilable: true
-    type: boolean
-  numBNetFriends:
-    type: number
-  numCharFriends:
-    type: number
-  numGuildMates:
-    type: number
-  numMembers:
-    type: number
-  requiredHonorLevel:
-    type: number
-  requiredItemLevel:
-    type: number
-  searchResultID:
-    type: number
-  voiceChat:
-    type: string
+  fields:
+    activityIDs:
+      type:
+        arrayof: number
+    age:
+      type: number
+    autoAccept:
+      type: boolean
+    comment:
+      type: string
+    hasSelf:
+      type: boolean
+    isDelisted:
+      type: boolean
+    isWarMode:
+      type: boolean
+    leaderName:
+      nilable: true
+      type: string
+    name:
+      type: string
+    newPlayerFriendly:
+      nilable: true
+      type: boolean
+    numBNetFriends:
+      type: number
+    numCharFriends:
+      type: number
+    numGuildMates:
+      type: number
+    numMembers:
+      type: number
+    requiredHonorLevel:
+      type: number
+    requiredItemLevel:
+      type: number
+    searchResultID:
+      type: number
+    voiceChat:
+      type: string
 C_LossOfControl.LossOfControlData:
-  displayText:
-    type: string
-  displayType:
-    type: number
-  duration:
-    nilable: true
-    type: number
-  iconTexture:
-    type: number
-  lockoutSchool:
-    type: number
-  locType:
-    type: string
-  priority:
-    type: number
-  spellID:
-    type: number
-  startTime:
-    nilable: true
-    type: number
-  timeRemaining:
-    nilable: true
-    type: number
+  fields:
+    displayText:
+      type: string
+    displayType:
+      type: number
+    duration:
+      nilable: true
+      type: number
+    iconTexture:
+      type: number
+    lockoutSchool:
+      type: number
+    locType:
+      type: string
+    priority:
+      type: number
+    spellID:
+      type: number
+    startTime:
+      nilable: true
+      type: number
+    timeRemaining:
+      nilable: true
+      type: number
 C_Map.MapBannerInfo:
-  areaPoiID:
-    type: number
-  atlasName:
-    type: string
-  name:
-    type: string
+  fields:
+    areaPoiID:
+      type: number
+    atlasName:
+      type: string
+    name:
+      type: string
 C_Map.MapLinkInfo:
-  areaPoiID:
-    type: number
-  atlasName:
-    type: string
-  linkedUiMapID:
-    type: number
-  name:
-    type: string
-  position:
-    type:
-      mixin: Vector2DMixin
-      structure: vector2
+  fields:
+    areaPoiID:
+      type: number
+    atlasName:
+      type: string
+    linkedUiMapID:
+      type: number
+    name:
+      type: string
+    position:
+      type:
+        mixin: Vector2DMixin
+        structure: vector2
 C_Map.UiMapDetails:
-  mapID:
-    type: number
-  mapType:
-    type:
-      enum: UIMapType
-  name:
-    type: string
-  parentMapID:
-    type: number
+  fields:
+    mapID:
+      type: number
+    mapType:
+      type:
+        enum: UIMapType
+    name:
+      type: string
+    parentMapID:
+      type: number
 C_Map.UiMapGroupMemberInfo:
-  mapID:
-    type: number
-  name:
-    type: string
-  relativeHeightIndex:
-    type: number
+  fields:
+    mapID:
+      type: number
+    name:
+      type: string
+    relativeHeightIndex:
+      type: number
 C_MapExplorationInfo.UiMapExplorationHitRect:
-  bottom:
-    type: number
-  left:
-    type: number
-  right:
-    type: number
-  top:
-    type: number
+  fields:
+    bottom:
+      type: number
+    left:
+      type: number
+    right:
+      type: number
+    top:
+      type: number
 C_MapExplorationInfo.UiMapExplorationInfo:
-  fileDataIDs:
-    type:
-      arrayof: number
-  hitRect:
-    type:
-      structure: C_MapExplorationInfo.UiMapExplorationHitRect
-  isDrawOnTopLayer:
-    type: boolean
-  isShownByMouseOver:
-    type: boolean
-  offsetX:
-    type: number
-  offsetY:
-    type: number
-  textureHeight:
-    type: number
-  textureWidth:
-    type: number
+  fields:
+    fileDataIDs:
+      type:
+        arrayof: number
+    hitRect:
+      type:
+        structure: C_MapExplorationInfo.UiMapExplorationHitRect
+    isDrawOnTopLayer:
+      type: boolean
+    isShownByMouseOver:
+      type: boolean
+    offsetX:
+      type: number
+    offsetY:
+      type: number
+    textureHeight:
+      type: number
+    textureWidth:
+      type: number
 C_ModelInfo.UIModelSceneActorDisplayInfo:
-  alpha:
-    type: number
-  animation:
-    type: number
-  animationKitID:
-    nilable: true
-    type: number
-  animationVariation:
-    type: number
-  animSpeed:
-    type: number
-  scale:
-    type: number
-  spellVisualKitID:
-    nilable: true
-    type: number
+  fields:
+    alpha:
+      type: number
+    animation:
+      type: number
+    animationKitID:
+      nilable: true
+      type: number
+    animationVariation:
+      type: number
+    animSpeed:
+      type: number
+    scale:
+      type: number
+    spellVisualKitID:
+      nilable: true
+      type: number
 C_ModelInfo.UIModelSceneActorInfo:
-  modelActorDisplayID:
-    nilable: true
-    type: number
-  modelActorID:
-    type: number
-  normalizeScaleAggressiveness:
-    nilable: true
-    type: number
-  pitch:
-    type: number
-  position:
-    type:
-      mixin: Vector3DMixin
-      structure: vector3
-  roll:
-    type: number
-  scriptTag:
-    type: string
-  useCenterForOriginX:
-    type: boolean
-  useCenterForOriginY:
-    type: boolean
-  useCenterForOriginZ:
-    type: boolean
-  yaw:
-    type: number
+  fields:
+    modelActorDisplayID:
+      nilable: true
+      type: number
+    modelActorID:
+      type: number
+    normalizeScaleAggressiveness:
+      nilable: true
+      type: number
+    pitch:
+      type: number
+    position:
+      type:
+        mixin: Vector3DMixin
+        structure: vector3
+    roll:
+      type: number
+    scriptTag:
+      type: string
+    useCenterForOriginX:
+      type: boolean
+    useCenterForOriginY:
+      type: boolean
+    useCenterForOriginZ:
+      type: boolean
+    yaw:
+      type: number
 C_ModelInfo.UIModelSceneCameraInfo:
-  cameraType:
-    type: string
-  flags:
-    type:
-      enum: ModelSceneSetting
-  maxZoomDistance:
-    type: number
-  minZoomDistance:
-    type: number
-  modelSceneCameraID:
-    type: number
-  pitch:
-    type: number
-  roll:
-    type: number
-  scriptTag:
-    type: string
-  target:
-    type:
-      mixin: Vector3DMixin
-      structure: vector3
-  yaw:
-    type: number
-  zoomDistance:
-    type: number
-  zoomedPitchOffset:
-    type: number
-  zoomedRollOffset:
-    type: number
-  zoomedTargetOffset:
-    type:
-      mixin: Vector3DMixin
-      structure: vector3
-  zoomedYawOffset:
-    type: number
+  fields:
+    cameraType:
+      type: string
+    flags:
+      type:
+        enum: ModelSceneSetting
+    maxZoomDistance:
+      type: number
+    minZoomDistance:
+      type: number
+    modelSceneCameraID:
+      type: number
+    pitch:
+      type: number
+    roll:
+      type: number
+    scriptTag:
+      type: string
+    target:
+      type:
+        mixin: Vector3DMixin
+        structure: vector3
+    yaw:
+      type: number
+    zoomDistance:
+      type: number
+    zoomedPitchOffset:
+      type: number
+    zoomedRollOffset:
+      type: number
+    zoomedTargetOffset:
+      type:
+        mixin: Vector3DMixin
+        structure: vector3
+    zoomedYawOffset:
+      type: number
 C_PvP.BattlefieldCurrencyReward:
-  id:
-    type: number
-  quantity:
-    type: number
+  fields:
+    id:
+      type: number
+    quantity:
+      type: number
 C_PvP.BattlefieldItemReward:
-  id:
-    type: number
-  name:
-    type: string
-  quantity:
-    type: number
-  texture:
-    type: number
+  fields:
+    id:
+      type: number
+    name:
+      type: string
+    quantity:
+      type: number
+    texture:
+      type: number
 C_PvP.BattlefieldVehicleInfo:
-  atlas:
-    type: string
-  facing:
-    type: number
-  isAlive:
-    type: boolean
-  isOccupied:
-    type: boolean
-  isPlayer:
-    type: boolean
-  name:
-    type: string
-  shouldDrawBelowPlayerBlips:
-    type: boolean
-  textureHeight:
-    type: number
-  textureWidth:
-    type: number
-  x:
-    type: number
-  y:
-    type: number
+  fields:
+    atlas:
+      type: string
+    facing:
+      type: number
+    isAlive:
+      type: boolean
+    isOccupied:
+      type: boolean
+    isPlayer:
+      type: boolean
+    name:
+      type: string
+    shouldDrawBelowPlayerBlips:
+      type: boolean
+    textureHeight:
+      type: number
+    textureWidth:
+      type: number
+    x:
+      type: number
+    y:
+      type: number
 C_QuestLog.QuestObjectiveInfo:
-  finished:
-    type: boolean
-  numFulfilled:
-    type: number
-  numRequired:
-    type: number
-  text:
-    type: string
-  type:
-    type: string
+  fields:
+    finished:
+      type: boolean
+    numFulfilled:
+      type: number
+    numRequired:
+      type: number
+    text:
+      type: string
+    type:
+      type: string
 C_QuestSession.QuestSessionPlayerDetails:
-  guid:
-    type: string
-  name:
-    type: string
+  fields:
+    guid:
+      type: string
+    name:
+      type: string
 C_ScriptedAnimations.ScriptedAnimationEffect:
-  alpha:
-    type: number
-  animation:
-    type: number
-  animationSpeed:
-    type: number
-  animationStartOffset:
-    nilable: true
-    type: number
-  duration:
-    type: number
-  endAlphaFade:
-    nilable: true
-    type: number
-  endAlphaFadeDuration:
-    nilable: true
-    type: number
-  finishBehavior:
-    nilable: true
-    type:
-      enum: ScriptedAnimationBehavior
-  finishEffectID:
-    nilable: true
-    type: number
-  finishSoundKitID:
-    nilable: true
-    type: number
-  id:
-    type: number
-  loopingSoundKitID:
-    nilable: true
-    type: number
-  offsetX:
-    type: number
-  offsetY:
-    type: number
-  offsetZ:
-    type: number
-  particleOverrideScale:
-    nilable: true
-    type: number
-  pitchRadians:
-    type: number
-  rollRadians:
-    type: number
-  startAlphaFade:
-    nilable: true
-    type: number
-  startAlphaFadeDuration:
-    nilable: true
-    type: number
-  startBehavior:
-    nilable: true
-    type:
-      enum: ScriptedAnimationBehavior
-  startSoundKitID:
-    nilable: true
-    type: number
-  trajectory:
-    type:
-      enum: ScriptedAnimationTrajectory
-  useTargetAsSource:
-    type: boolean
-  visual:
-    type: number
-  visualScale:
-    type: number
-  yawRadians:
-    type: number
+  fields:
+    alpha:
+      type: number
+    animation:
+      type: number
+    animationSpeed:
+      type: number
+    animationStartOffset:
+      nilable: true
+      type: number
+    duration:
+      type: number
+    endAlphaFade:
+      nilable: true
+      type: number
+    endAlphaFadeDuration:
+      nilable: true
+      type: number
+    finishBehavior:
+      nilable: true
+      type:
+        enum: ScriptedAnimationBehavior
+    finishEffectID:
+      nilable: true
+      type: number
+    finishSoundKitID:
+      nilable: true
+      type: number
+    id:
+      type: number
+    loopingSoundKitID:
+      nilable: true
+      type: number
+    offsetX:
+      type: number
+    offsetY:
+      type: number
+    offsetZ:
+      type: number
+    particleOverrideScale:
+      nilable: true
+      type: number
+    pitchRadians:
+      type: number
+    rollRadians:
+      type: number
+    startAlphaFade:
+      nilable: true
+      type: number
+    startAlphaFadeDuration:
+      nilable: true
+      type: number
+    startBehavior:
+      nilable: true
+      type:
+        enum: ScriptedAnimationBehavior
+    startSoundKitID:
+      nilable: true
+      type: number
+    trajectory:
+      type:
+        enum: ScriptedAnimationTrajectory
+    useTargetAsSource:
+      type: boolean
+    visual:
+      type: number
+    visualScale:
+      type: number
+    yawRadians:
+      type: number
 C_TaskQuest.TaskPOIData:
-  childDepth:
-    nilable: true
-    type: number
-  inProgress:
-    type: boolean
-  isCombatAllyQuest:
-    type: boolean
-  isDaily:
-    type: boolean
-  isQuestStart:
-    type: boolean
-  mapID:
-    type: number
-  numObjectives:
-    type: number
-  questId:
-    type: number
-  x:
-    type: number
-  y:
-    type: number
+  fields:
+    childDepth:
+      nilable: true
+      type: number
+    inProgress:
+      type: boolean
+    isCombatAllyQuest:
+      type: boolean
+    isDaily:
+      type: boolean
+    isQuestStart:
+      type: boolean
+    mapID:
+      type: number
+    numObjectives:
+      type: number
+    questId:
+      type: number
+    x:
+      type: number
+    y:
+      type: number
 C_TaxiMap.MapTaxiNodeInfo:
-  atlasName:
-    type: string
-  faction:
-    type:
-      enum: FlightPathFaction
-  name:
-    type: string
-  nodeID:
-    type: number
-  position:
-    type:
-      mixin: Vector2DMixin
-      structure: vector2
-  textureKitPrefix:
-    nilable: true
-    type: string
+  fields:
+    atlasName:
+      type: string
+    faction:
+      type:
+        enum: FlightPathFaction
+    name:
+      type: string
+    nodeID:
+      type: number
+    position:
+      type:
+        mixin: Vector2DMixin
+        structure: vector2
+    textureKitPrefix:
+      nilable: true
+      type: string
 C_TaxiMap.TaxiNodeInfo:
-  name:
-    type: string
-  nodeID:
-    type: number
-  position:
-    type:
-      mixin: Vector2DMixin
-      structure: vector2
-  slotIndex:
-    type: number
-  state:
-    type:
-      enum: FlightPathState
-  textureKitPrefix:
-    nilable: true
-    type: string
+  fields:
+    name:
+      type: string
+    nodeID:
+      type: number
+    position:
+      type:
+        mixin: Vector2DMixin
+        structure: vector2
+    slotIndex:
+      type: number
+    state:
+      type:
+        enum: FlightPathState
+    textureKitPrefix:
+      nilable: true
+      type: string
 C_Texture.AtlasInfo:
-  bottomTexCoord:
-    type: number
-  file:
-    nilable: true
-    type: number
-  filename:
-    nilable: true
-    type: string
-  height:
-    type: number
-  leftTexCoord:
-    type: number
-  rightTexCoord:
-    type: number
-  tilesHorizontally:
-    type: boolean
-  tilesVertically:
-    type: boolean
-  topTexCoord:
-    type: number
-  width:
-    type: number
+  fields:
+    bottomTexCoord:
+      type: number
+    file:
+      nilable: true
+      type: number
+    filename:
+      nilable: true
+      type: string
+    height:
+      type: number
+    leftTexCoord:
+      type: number
+    rightTexCoord:
+      type: number
+    tilesHorizontally:
+      type: boolean
+    tilesVertically:
+      type: boolean
+    topTexCoord:
+      type: number
+    width:
+      type: number
 C_Traits.TraitCondInfo:
-  achievementID:
-    nilable: true
-    type: number
-  condID:
-    type: number
-  isAlwaysMet:
-    type: boolean
-  isGate:
-    type: boolean
-  isMet:
-    type: boolean
-  playerLevel:
-    nilable: true
-    type: number
-  questID:
-    nilable: true
-    type: number
-  ranksGranted:
-    nilable: true
-    type: number
-  specSetID:
-    nilable: true
-    type: number
-  spentAmountRequired:
-    nilable: true
-    type: number
-  tooltipFormat:
-    nilable: true
-    type: string
-  traitCurrencyID:
-    nilable: true
-    type: number
+  fields:
+    achievementID:
+      nilable: true
+      type: number
+    condID:
+      type: number
+    isAlwaysMet:
+      type: boolean
+    isGate:
+      type: boolean
+    isMet:
+      type: boolean
+    playerLevel:
+      nilable: true
+      type: number
+    questID:
+      nilable: true
+      type: number
+    ranksGranted:
+      nilable: true
+      type: number
+    specSetID:
+      nilable: true
+      type: number
+    spentAmountRequired:
+      nilable: true
+      type: number
+    tooltipFormat:
+      nilable: true
+      type: string
+    traitCurrencyID:
+      nilable: true
+      type: number
 C_Traits.TraitConfigInfo:
-  ID:
-    type: number
-  name:
-    type: string
-  treeIDs:
+  fields:
+    ID:
+      type: number
+    name:
+      type: string
+    treeIDs:
+      type:
+        arrayof: number
     type:
-      arrayof: number
-  type:
-    type:
-      enum: TraitConfigType
-  usesSharedActionBars:
-    type: boolean
+      type:
+        enum: TraitConfigType
+    usesSharedActionBars:
+      type: boolean
 C_Traits.TraitCurrencyCost:
-  amount:
-    type: number
-  ID:
-    type: number
+  fields:
+    amount:
+      type: number
+    ID:
+      type: number
 C_Traits.TraitDefinitionInfo:
-  overriddenSpellID:
-    nilable: true
-    type: number
-  overrideDescription:
-    nilable: true
-    type: string
-  overrideIcon:
-    nilable: true
-    type: number
-  overrideName:
-    nilable: true
-    type: string
-  overrideSubtext:
-    nilable: true
-    type: string
-  spellID:
-    nilable: true
-    type: number
-  subType:
-    nilable: true
-    type:
-      enum: TraitDefinitionSubType
+  fields:
+    overriddenSpellID:
+      nilable: true
+      type: number
+    overrideDescription:
+      nilable: true
+      type: string
+    overrideIcon:
+      nilable: true
+      type: number
+    overrideName:
+      nilable: true
+      type: string
+    overrideSubtext:
+      nilable: true
+      type: string
+    spellID:
+      nilable: true
+      type: number
+    subType:
+      nilable: true
+      type:
+        enum: TraitDefinitionSubType
 C_Traits.TraitEntryInfo:
-  conditionIDs:
+  fields:
+    conditionIDs:
+      type:
+        arrayof: number
+    definitionID:
+      type: number
+    isAvailable:
+      type: boolean
+    maxRanks:
+      type: number
     type:
-      arrayof: number
-  definitionID:
-    type: number
-  isAvailable:
-    type: boolean
-  maxRanks:
-    type: number
-  type:
-    type:
-      enum: TraitNodeEntryType
+      type:
+        enum: TraitNodeEntryType
 C_Traits.TraitEntryRankInfo:
-  entryID:
-    type: number
-  rank:
-    type: number
+  fields:
+    entryID:
+      type: number
+    rank:
+      type: number
 C_Traits.TraitGateInfo:
-  conditionID:
-    type: number
-  topLeftNodeID:
-    type: number
+  fields:
+    conditionID:
+      type: number
+    topLeftNodeID:
+      type: number
 C_Traits.TraitNodeInfo:
-  activeEntry:
-    nilable: true
+  fields:
+    activeEntry:
+      nilable: true
+      type:
+        structure: C_Traits.TraitEntryRankInfo
+    activeRank:
+      type: number
+    canPurchaseRank:
+      type: boolean
+    canRefundRank:
+      type: boolean
+    cascadeRepurchaseEntryID:
+      nilable: true
+      type: number
+    conditionIDs:
+      type:
+        arrayof: number
+    currentRank:
+      type: number
+    entryIDs:
+      type:
+        arrayof: number
+    entryIDsWithCommittedRanks:
+      type:
+        arrayof: number
+    flags:
+      type: number
+    groupIDs:
+      type:
+        arrayof: number
+    ID:
+      type: number
+    isAvailable:
+      type: boolean
+    isCascadeRepurchasable:
+      type: boolean
+    isVisible:
+      type: boolean
+    maxRanks:
+      type: number
+    meetsEdgeRequirements:
+      type: boolean
+    nextEntry:
+      nilable: true
+      type:
+        structure: C_Traits.TraitEntryRankInfo
+    posX:
+      type: number
+    posY:
+      type: number
+    ranksPurchased:
+      type: number
     type:
-      structure: C_Traits.TraitEntryRankInfo
-  activeRank:
-    type: number
-  canPurchaseRank:
-    type: boolean
-  canRefundRank:
-    type: boolean
-  cascadeRepurchaseEntryID:
-    nilable: true
-    type: number
-  conditionIDs:
-    type:
-      arrayof: number
-  currentRank:
-    type: number
-  entryIDs:
-    type:
-      arrayof: number
-  entryIDsWithCommittedRanks:
-    type:
-      arrayof: number
-  flags:
-    type: number
-  groupIDs:
-    type:
-      arrayof: number
-  ID:
-    type: number
-  isAvailable:
-    type: boolean
-  isCascadeRepurchasable:
-    type: boolean
-  isVisible:
-    type: boolean
-  maxRanks:
-    type: number
-  meetsEdgeRequirements:
-    type: boolean
-  nextEntry:
-    nilable: true
-    type:
-      structure: C_Traits.TraitEntryRankInfo
-  posX:
-    type: number
-  posY:
-    type: number
-  ranksPurchased:
-    type: number
-  type:
-    type:
-      enum: TraitNodeType
-  visibleEdges:
-    type:
-      arrayof:
-        structure: C_Traits.TraitOutEdgeInfo
+      type:
+        enum: TraitNodeType
+    visibleEdges:
+      type:
+        arrayof:
+          structure: C_Traits.TraitOutEdgeInfo
 C_Traits.TraitNodeInfoPartial:
-  activeRank:
-    nilable: true
-    type: number
-  canPurchaseRank:
-    nilable: true
-    type: boolean
-  canRefundRank:
-    nilable: true
-    type: boolean
-  currentRank:
-    nilable: true
-    type: number
-  isAvailable:
-    nilable: true
-    type: boolean
-  isCascadeRepurchasable:
-    nilable: true
-    type: boolean
-  isVisible:
-    nilable: true
-    type: boolean
-  meetsEdgeRequirements:
-    nilable: true
-    type: boolean
-  ranksPurchased:
-    nilable: true
-    type: number
+  fields:
+    activeRank:
+      nilable: true
+      type: number
+    canPurchaseRank:
+      nilable: true
+      type: boolean
+    canRefundRank:
+      nilable: true
+      type: boolean
+    currentRank:
+      nilable: true
+      type: number
+    isAvailable:
+      nilable: true
+      type: boolean
+    isCascadeRepurchasable:
+      nilable: true
+      type: boolean
+    isVisible:
+      nilable: true
+      type: boolean
+    meetsEdgeRequirements:
+      nilable: true
+      type: boolean
+    ranksPurchased:
+      nilable: true
+      type: number
 C_Traits.TraitOutEdgeInfo:
-  isActive:
-    type: boolean
-  targetNode:
-    type: number
-  type:
-    type: number
-  visualStyle:
-    type: number
+  fields:
+    isActive:
+      type: boolean
+    targetNode:
+      type: number
+    type:
+      type: number
+    visualStyle:
+      type: number
 C_Traits.TraitTreeInfo:
-  gates:
-    type:
-      arrayof:
-        structure: C_Traits.TraitGateInfo
-  hideSingleRankNumbers:
-    type: boolean
-  ID:
-    type: number
+  fields:
+    gates:
+      type:
+        arrayof:
+          structure: C_Traits.TraitGateInfo
+    hideSingleRankNumbers:
+      type: boolean
+    ID:
+      type: number
 C_Traits.TreeCurrencyInfo:
-  maxQuantity:
-    nilable: true
-    type: number
-  quantity:
-    type: number
-  spent:
-    type: number
-  traitCurrencyID:
-    type: number
+  fields:
+    maxQuantity:
+      nilable: true
+      type: number
+    quantity:
+      type: number
+    spent:
+      type: number
+    traitCurrencyID:
+      type: number
 C_UIColor.DBColorExport:
-  baseTag:
-    type: string
-  color:
-    type:
-      mixin: ColorMixin
-      structure: colorRGBA
+  fields:
+    baseTag:
+      type: string
+    color:
+      type:
+        mixin: ColorMixin
+        structure: colorRGBA
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
-  enabledState:
-    type:
-      enum: WidgetEnabledState
-  lines:
-    type:
-      arrayof: string
-  orderIndex:
-    type: number
-  shownState:
-    type:
-      enum: WidgetShownState
-  widgetTag:
-    type: string
+  fields:
+    enabledState:
+      type:
+        enum: WidgetEnabledState
+    lines:
+      type:
+        arrayof: string
+    orderIndex:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    widgetTag:
+      type: string
 C_UIWidgetManager.CaptureBarWidgetVisualizationInfo:
-  barPercent:
-    type: number
-  neutralPercent:
-    type: number
-  orderIndex:
-    type: number
-  shownState:
-    type:
-      enum: WidgetShownState
-  textureKitID:
-    type: number
-  widgetTag:
-    type: string
+  fields:
+    barPercent:
+      type: number
+    neutralPercent:
+      type: number
+    orderIndex:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKitID:
+      type: number
+    widgetTag:
+      type: string
 C_UIWidgetManager.DoubleIconAndTextWidgetVisualizationInfo:
-  label:
-    type: string
-  leftText:
-    type: string
-  leftTooltip:
-    type: string
-  orderIndex:
-    type: number
-  rightText:
-    type: string
-  rightTooltip:
-    type: string
-  shownState:
-    type:
-      enum: WidgetShownState
-  textureKitID:
-    type: number
-  widgetTag:
-    type: string
+  fields:
+    label:
+      type: string
+    leftText:
+      type: string
+    leftTooltip:
+      type: string
+    orderIndex:
+      type: number
+    rightText:
+      type: string
+    rightTooltip:
+      type: string
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKitID:
+      type: number
+    widgetTag:
+      type: string
 C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo:
-  leftBarMax:
-    type: number
-  leftBarMin:
-    type: number
-  leftBarValue:
-    type: number
-  orderIndex:
-    type: number
-  rightBarMax:
-    type: number
-  rightBarMin:
-    type: number
-  rightBarValue:
-    type: number
-  shownState:
-    type:
-      enum: WidgetShownState
-  text:
-    type: string
-  textureKitID:
-    type: number
-  widgetTag:
-    type: string
+  fields:
+    leftBarMax:
+      type: number
+    leftBarMin:
+      type: number
+    leftBarValue:
+      type: number
+    orderIndex:
+      type: number
+    rightBarMax:
+      type: number
+    rightBarMin:
+      type: number
+    rightBarValue:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    text:
+      type: string
+    textureKitID:
+      type: number
+    widgetTag:
+      type: string
 C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
-  currencies:
-    type:
-      arrayof:
-        structure: C_UIWidgetManager.UIWidgetCurrencyInfo
-  orderIndex:
-    type: number
-  shownState:
-    type:
-      enum: WidgetShownState
-  widgetTag:
-    type: string
+  fields:
+    currencies:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.UIWidgetCurrencyInfo
+    orderIndex:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    widgetTag:
+      type: string
 C_UIWidgetManager.IconAndTextWidgetVisualizationInfo:
-  dynamicTooltip:
-    type: string
-  hasTimer:
-    type: boolean
-  orderIndex:
-    type: number
-  state:
-    type:
-      enum: IconAndTextWidgetState
-  text:
-    type: string
-  textureKitID:
-    type: number
-  tooltip:
-    type: string
-  widgetTag:
-    type: string
+  fields:
+    dynamicTooltip:
+      type: string
+    hasTimer:
+      type: boolean
+    orderIndex:
+      type: number
+    state:
+      type:
+        enum: IconAndTextWidgetState
+    text:
+      type: string
+    textureKitID:
+      type: number
+    tooltip:
+      type: string
+    widgetTag:
+      type: string
 C_UIWidgetManager.IconTextAndBackgroundWidgetVisualizationInfo:
-  orderIndex:
-    type: number
-  shownState:
-    type:
-      enum: WidgetShownState
-  textureKitID:
-    type: number
-  value:
-    type: number
-  widgetTag:
-    type: string
+  fields:
+    orderIndex:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKitID:
+      type: number
+    value:
+      type: number
+    widgetTag:
+      type: string
 C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
-  currencies:
-    type:
-      arrayof:
-        structure: C_UIWidgetManager.UIWidgetCurrencyInfo
-  description:
-    type: string
-  descriptionEnabledState:
-    type:
-      enum: WidgetEnabledState
-  descriptionShownState:
-    type:
-      enum: WidgetShownState
-  enabledState:
-    type:
-      enum: WidgetEnabledState
-  orderIndex:
-    type: number
-  shownState:
-    type:
-      enum: WidgetShownState
-  text:
-    type: string
-  textureKitID:
-    type: number
-  widgetTag:
-    type: string
+  fields:
+    currencies:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.UIWidgetCurrencyInfo
+    description:
+      type: string
+    descriptionEnabledState:
+      type:
+        enum: WidgetEnabledState
+    descriptionShownState:
+      type:
+        enum: WidgetShownState
+    enabledState:
+      type:
+        enum: WidgetEnabledState
+    orderIndex:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    text:
+      type: string
+    textureKitID:
+      type: number
+    widgetTag:
+      type: string
 C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
-  currencies:
-    type:
-      arrayof:
-        structure: C_UIWidgetManager.UIWidgetCurrencyInfo
-  frameTextureKitID:
-    type: number
-  orderIndex:
-    type: number
-  shownState:
-    type:
-      enum: WidgetShownState
-  widgetTag:
-    type: string
+  fields:
+    currencies:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.UIWidgetCurrencyInfo
+    frameTextureKitID:
+      type: number
+    orderIndex:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    widgetTag:
+      type: string
 C_UIWidgetManager.StackedResourceTrackerWidgetVisualizationInfo:
-  frameTextureKitID:
-    type: number
-  orderIndex:
-    type: number
-  resources:
-    type:
-      arrayof:
-        structure: C_UIWidgetManager.UIWidgetCurrencyInfo
-  shownState:
-    type:
-      enum: WidgetShownState
-  widgetTag:
-    type: string
+  fields:
+    frameTextureKitID:
+      type: number
+    orderIndex:
+      type: number
+    resources:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.UIWidgetCurrencyInfo
+    shownState:
+      type:
+        enum: WidgetShownState
+    widgetTag:
+      type: string
 C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
-  barMax:
-    type: number
-  barMin:
-    type: number
-  barValue:
-    type: number
-  barValueInSeconds:
-    type: number
-  barWidth:
-    type: number
-  fillTextureKitID:
-    type: number
-  frameTextureKitID:
-    type: number
-  orderIndex:
-    type: number
-  shownState:
-    type:
-      enum: WidgetShownState
-  text:
-    type: string
-  widgetTag:
-    type: string
+  fields:
+    barMax:
+      type: number
+    barMin:
+      type: number
+    barValue:
+      type: number
+    barValueInSeconds:
+      type: number
+    barWidth:
+      type: number
+    fillTextureKitID:
+      type: number
+    frameTextureKitID:
+      type: number
+    orderIndex:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    text:
+      type: string
+    widgetTag:
+      type: string
 C_UIWidgetManager.TextureWithStateVisualizationInfo:
-  backgroundTextureKitID:
-    type: number
-  name:
-    type: string
-  orderIndex:
-    type: number
-  portraitTextureKitID:
-    type: number
-  shownState:
-    type:
-      enum: WidgetShownState
-  widgetTag:
-    type: string
+  fields:
+    backgroundTextureKitID:
+      type: number
+    name:
+      type: string
+    orderIndex:
+      type: number
+    portraitTextureKitID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    widgetTag:
+      type: string
 C_UIWidgetManager.TextWithStateWidgetVisualizationInfo:
-  enabledState:
-    type:
-      enum: WidgetEnabledState
-  orderIndex:
-    type: number
-  shownState:
-    type:
-      enum: WidgetShownState
-  text:
-    type: string
-  widgetTag:
-    type: string
-  widgetWidth:
-    type: number
+  fields:
+    enabledState:
+      type:
+        enum: WidgetEnabledState
+    orderIndex:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    text:
+      type: string
+    widgetTag:
+      type: string
+    widgetWidth:
+      type: number
 C_UIWidgetManager.UIWidgetCurrencyInfo:
-  iconFileID:
-    type: number
-  isCurrencyMaxed:
-    type: boolean
-  leadingText:
-    type: string
-  text:
-    type: string
-  tooltip:
-    type: string
+  fields:
+    iconFileID:
+      type: number
+    isCurrencyMaxed:
+      type: boolean
+    leadingText:
+      type: string
+    text:
+      type: string
+    tooltip:
+      type: string
 C_UIWidgetManager.UIWidgetInfo:
-  widgetID:
-    type: number
-  widgetSetID:
-    type: number
-  widgetType:
-    type:
-      enum: UIWidgetVisualizationType
+  fields:
+    widgetID:
+      type: number
+    widgetSetID:
+      type: number
+    widgetType:
+      type:
+        enum: UIWidgetVisualizationType
 C_VideoOptions.GxAdapterInfoDetails:
-  isExternal:
-    type: boolean
-  isLowPower:
-    type: boolean
-  name:
-    type: string
+  fields:
+    isExternal:
+      type: boolean
+    isLowPower:
+      type: boolean
+    name:
+      type: string
 C_VoiceChat.VoiceAudioDevice:
-  deviceID:
-    type: string
-  displayName:
-    type: string
-  isActive:
-    type: boolean
-  isCommsDefault:
-    type: boolean
-  isSystemDefault:
-    type: boolean
+  fields:
+    deviceID:
+      type: string
+    displayName:
+      type: string
+    isActive:
+      type: boolean
+    isCommsDefault:
+      type: boolean
+    isSystemDefault:
+      type: boolean
 C_VoiceChat.VoiceChatChannel:
-  channelID:
-    type: number
-  channelType:
-    type:
-      enum: ChatChannelType
-  clubId:
-    type: string
-  isActive:
-    type: boolean
-  isMuted:
-    type: boolean
-  isTranscribing:
-    type: boolean
-  isTransmitting:
-    type: boolean
-  members:
-    type:
-      arrayof:
-        structure: C_VoiceChat.VoiceChatMember
-  name:
-    type: string
-  streamId:
-    type: string
-  volume:
-    type: number
+  fields:
+    channelID:
+      type: number
+    channelType:
+      type:
+        enum: ChatChannelType
+    clubId:
+      type: string
+    isActive:
+      type: boolean
+    isMuted:
+      type: boolean
+    isTranscribing:
+      type: boolean
+    isTransmitting:
+      type: boolean
+    members:
+      type:
+        arrayof:
+          structure: C_VoiceChat.VoiceChatMember
+    name:
+      type: string
+    streamId:
+      type: string
+    volume:
+      type: number
 C_VoiceChat.VoiceChatMember:
-  energy:
-    type: number
-  isActive:
-    type: boolean
-  isMutedForAll:
-    type: boolean
-  isSilenced:
-    type: boolean
-  isSpeaking:
-    type: boolean
-  memberID:
-    type: number
+  fields:
+    energy:
+      type: number
+    isActive:
+      type: boolean
+    isMutedForAll:
+      type: boolean
+    isSilenced:
+      type: boolean
+    isSpeaking:
+      type: boolean
+    memberID:
+      type: number
 C_VoiceChat.VoiceChatProcess:
-  channels:
-    type:
-      arrayof:
-        structure: C_VoiceChat.VoiceChatChannel
-  name:
-    type: string
+  fields:
+    channels:
+      type:
+        arrayof:
+          structure: C_VoiceChat.VoiceChatChannel
+    name:
+      type: string
 C_VoiceChat.VoiceTtsVoiceType:
-  name:
-    type: string
-  voiceID:
-    type: number
+  fields:
+    name:
+      type: string
+    voiceID:
+      type: number
 C_XMLUtil.XMLTemplateInfo:
-  height:
-    type: number
-  inherits:
-    nilable: true
-    type: string
-  keyValues:
+  fields:
+    height:
+      type: number
+    inherits:
+      nilable: true
+      type: string
+    keyValues:
+      type:
+        arrayof:
+          structure: C_XMLUtil.XMLTemplateKeyValue
     type:
-      arrayof:
-        structure: C_XMLUtil.XMLTemplateKeyValue
-  type:
-    type: string
-  width:
-    type: number
+      type: string
+    width:
+      type: number
 C_XMLUtil.XMLTemplateKeyValue:
-  key:
-    type: string
-  keyType:
-    type: string
-  type:
-    type: string
-  value:
-    type: string
+  fields:
+    key:
+      type: string
+    keyType:
+      type: string
+    type:
+      type: string
+    value:
+      type: string
 C_XMLUtil.XMLTemplateListInfo:
-  name:
-    type: string
-  type:
-    type: string
+  fields:
+    name:
+      type: string
+    type:
+      type: string
 CalendarTime:
-  day:
-    type: number
-  hour:
-    type: number
-  minute:
-    type: number
-  month:
-    type: number
-  monthDay:
-    type: number
-  weekday:
-    type: number
-  year:
-    type: number
+  fields:
+    day:
+      type: number
+    hour:
+      type: number
+    minute:
+      type: number
+    month:
+      type: number
+    monthDay:
+      type: number
+    weekday:
+      type: number
+    year:
+      type: number
 CharacterAlternateFormData:
-  createScreenIconAtlas:
-    type: string
-  fileName:
-    type: string
-  name:
-    type: string
-  raceID:
-    type: number
+  fields:
+    createScreenIconAtlas:
+      type: string
+    fileName:
+      type: string
+    name:
+      type: string
+    raceID:
+      type: number
 CharCustomizationCategory:
-  cameraDistanceOffset:
-    type: number
-  cameraZoomLevel:
-    type: number
-  chrModelID:
-    nilable: true
-    type: number
-  hasNewChoices:
-    type: boolean
-  icon:
-    type: string
-  id:
-    type: number
-  name:
-    type: string
-  options:
-    type:
-      arrayof:
-        structure: CharCustomizationOption
-  orderIndex:
-    type: number
-  selectedIcon:
-    type: string
-  spellShapeshiftFormID:
-    nilable: true
-    type: number
-  undressModel:
-    type: boolean
+  fields:
+    cameraDistanceOffset:
+      type: number
+    cameraZoomLevel:
+      type: number
+    chrModelID:
+      nilable: true
+      type: number
+    hasNewChoices:
+      type: boolean
+    icon:
+      type: string
+    id:
+      type: number
+    name:
+      type: string
+    options:
+      type:
+        arrayof:
+          structure: CharCustomizationOption
+    orderIndex:
+      type: number
+    selectedIcon:
+      type: string
+    spellShapeshiftFormID:
+      nilable: true
+      type: number
+    undressModel:
+      type: boolean
 CharCustomizationChoice:
-  id:
-    type: number
-  ineligibleChoice:
-    type: boolean
-  isLocked:
-    type: boolean
-  isNew:
-    type: boolean
-  lockedText:
-    nilable: true
-    type: string
-  name:
-    type: string
-  swatchColor1:
-    nilable: true
-    type:
-      mixin: ColorMixin
-      structure: colorRGBA
-  swatchColor2:
-    nilable: true
-    type:
-      mixin: ColorMixin
-      structure: colorRGBA
+  fields:
+    id:
+      type: number
+    ineligibleChoice:
+      type: boolean
+    isLocked:
+      type: boolean
+    isNew:
+      type: boolean
+    lockedText:
+      nilable: true
+      type: string
+    name:
+      type: string
+    swatchColor1:
+      nilable: true
+      type:
+        mixin: ColorMixin
+        structure: colorRGBA
+    swatchColor2:
+      nilable: true
+      type:
+        mixin: ColorMixin
+        structure: colorRGBA
 CharCustomizationOption:
-  choices:
-    type:
-      arrayof:
-        structure: CharCustomizationChoice
-  currentChoiceIndex:
-    nilable: true
-    type: number
-  hasNewChoices:
-    type: boolean
-  id:
-    type: number
-  isSound:
-    type: boolean
-  name:
-    type: string
-  optionType:
-    type:
-      enum: ChrCustomizationOptionType
-  orderIndex:
-    type: number
+  fields:
+    choices:
+      type:
+        arrayof:
+          structure: CharCustomizationChoice
+    currentChoiceIndex:
+      nilable: true
+      type: number
+    hasNewChoices:
+      type: boolean
+    id:
+      type: number
+    isSound:
+      type: boolean
+    name:
+      type: string
+    optionType:
+      type:
+        enum: ChrCustomizationOptionType
+    orderIndex:
+      type: number
 ChatChannelInfo:
-  channelType:
-    type:
-      enum: PermanentChatChannelType
-  instanceID:
-    type: number
-  localID:
-    type: number
-  name:
-    type: string
-  shortcut:
-    type: string
-  zoneChannelID:
-    type: number
+  fields:
+    channelType:
+      type:
+        enum: PermanentChatChannelType
+    instanceID:
+      type: number
+    localID:
+      type: number
+    name:
+      type: string
+    shortcut:
+      type: string
+    zoneChannelID:
+      type: number
 colorRGBA:
-  a:
-    type: number
-  b:
-    type: number
-  g:
-    type: number
-  r:
-    type: number
+  fields:
+    a:
+      type: number
+    b:
+      type: number
+    g:
+      type: number
+    r:
+      type: number
 ExpansionDisplayInfo:
-  banner:
-    type: string
-  features:
-    type:
-      arrayof:
-        structure: ExpansionDisplayInfoFeature
-  logo:
-    type: number
+  fields:
+    banner:
+      type: string
+    features:
+      type:
+        arrayof:
+          structure: ExpansionDisplayInfoFeature
+    logo:
+      type: number
 ExpansionDisplayInfoFeature:
-  icon:
-    type: number
-  text:
-    type: string
+  fields:
+    icon:
+      type: number
+    text:
+      type: string
 GuildTabardInfo:
-  backgroundColor:
-    type:
-      mixin: ColorMixin
-      structure: colorRGBA
-  borderColor:
-    type:
-      mixin: ColorMixin
-      structure: colorRGBA
-  emblemColor:
-    type:
-      mixin: ColorMixin
-      structure: colorRGBA
-  emblemFilename:
-    type: string
-  emblemStyle:
-    type: number
+  fields:
+    backgroundColor:
+      type:
+        mixin: ColorMixin
+        structure: colorRGBA
+    borderColor:
+      type:
+        mixin: ColorMixin
+        structure: colorRGBA
+    emblemColor:
+      type:
+        mixin: ColorMixin
+        structure: colorRGBA
+    emblemFilename:
+      type: string
+    emblemStyle:
+      type: number
 ItemLocation:
-  bagID:
-    nilable: true
-    type: number
-  equipmentSlotIndex:
-    nilable: true
-    type: number
-  slotIndex:
-    nilable: true
-    type: number
-PlayerLocation: {}
+  fields:
+    bagID:
+      nilable: true
+      type: number
+    equipmentSlotIndex:
+      nilable: true
+      type: number
+    slotIndex:
+      nilable: true
+      type: number
+PlayerLocation:
+  fields: {}
 QueueSpecificInfo:
-  activityID:
-    nilable: true
-    type: number
-  battlefieldType:
-    nilable: true
-    type: string
-  isBrawl:
-    nilable: true
-    type: boolean
-  lfgIDs:
-    nilable: true
-    type:
-      arrayof: number
-  lfgListID:
-    nilable: true
-    type: number
-  listID:
-    nilable: true
-    type: number
-  mapName:
-    nilable: true
-    type: string
-  queueType:
-    type: string
-  rated:
-    nilable: true
-    type: boolean
-  teamSize:
-    nilable: true
-    type: number
-ReportInfo: {}
+  fields:
+    activityID:
+      nilable: true
+      type: number
+    battlefieldType:
+      nilable: true
+      type: string
+    isBrawl:
+      nilable: true
+      type: boolean
+    lfgIDs:
+      nilable: true
+      type:
+        arrayof: number
+    lfgListID:
+      nilable: true
+      type: number
+    listID:
+      nilable: true
+      type: number
+    mapName:
+      nilable: true
+      type: string
+    queueType:
+      type: string
+    rated:
+      nilable: true
+      type: boolean
+    teamSize:
+      nilable: true
+      type: number
+ReportInfo:
+  fields: {}
 vector2:
-  x:
-    type: number
-  y:
-    type: number
+  fields:
+    x:
+      type: number
+    y:
+      type: number
 vector3:
-  x:
-    type: number
-  y:
-    type: number
-  z:
-    type: number
+  fields:
+    x:
+      type: number
+    y:
+      type: number
+    z:
+      type: number

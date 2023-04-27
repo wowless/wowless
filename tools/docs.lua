@@ -322,11 +322,11 @@ local function rewriteStructures(outApis, outEvents)
           ret[f.Name] = {
             default = enum[f.Type] and enum[f.Type][f.Default] or f.Default,
             nilable = f.Nilable or nil,
-            stub = deref(structures, name, f.Name, 'stub') or stubs[f.Type],
+            stub = deref(structures, name, 'fields', f.Name, 'stub') or stubs[f.Type],
             type = t2nty(f, ns),
           }
         end
-        return ret
+        return { fields = ret }
       end)()
     end
   end
@@ -335,7 +335,7 @@ local function rewriteStructures(outApis, outEvents)
   local function processType(ty)
     if ty.structure and not out[ty.structure] then
       out[ty.structure] = structures[ty.structure]
-      for _, v in pairs(structures[ty.structure]) do
+      for _, v in pairs(structures[ty.structure].fields) do
         processType(v.type)
       end
     elseif ty.arrayof then
