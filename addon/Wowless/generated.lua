@@ -224,6 +224,8 @@ function G.GeneratedTests()
         local func = _G[name] or capsuleEnv[name]
         if cfg.alias then
           assertEquals(func, assert(tget(_G, cfg.alias)))
+        elseif cfg.nowrap then
+          return checkLuaFunc(func)
         elseif cfg.stdlib then
           local ty = type(tget(_G, cfg.stdlib))
           if ty == 'function' then
@@ -231,8 +233,6 @@ function G.GeneratedTests()
           else
             assertEquals(ty, type(func))
           end
-        elseif cfg.nowrap then
-          return checkLuaFunc(func)
         elseif not capsuleapis[name] then
           return checkCFunc(func)
         end

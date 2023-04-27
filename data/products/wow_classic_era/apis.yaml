@@ -26,8 +26,8 @@ AcceptTrade: {}
 AcceptXPLoss: {}
 AcknowledgeSurvey: {}
 acos:
-  impl: acos
   nowrap: true
+  stdlib: acos
 ActionBindsItem: {}
 ActionHasRange: {}
 AddChatWindowChannel: {}
@@ -77,8 +77,8 @@ AscendStop:
   - {}
   outputs: {}
 asin:
-  impl: asin
   nowrap: true
+  stdlib: asin
 assert:
   stdlib: assert
 AssistUnit:
@@ -88,11 +88,11 @@ AssistUnit:
       type: unit
   outputs: {}
 atan:
-  impl: atan
   nowrap: true
+  stdlib: atan
 atan2:
-  impl: atan2
   nowrap: true
+  stdlib: atan2
 AttackTarget:
   inputs:
   - {}
@@ -7280,8 +7280,8 @@ coroutine.wrap:
 coroutine.yield:
   stdlib: coroutine.yield
 cos:
-  impl: cos
   nowrap: true
+  stdlib: cos
 CraftIsEnchanting:
   inputs:
   - {}
@@ -12033,8 +12033,8 @@ ShowQuestOffer: {}
 ShowRepairCursor: {}
 SignPetition: {}
 sin:
-  impl: sin
   nowrap: true
+  stdlib: sin
 SitStandOrDescendStart:
   inputs:
   - {}
@@ -12231,8 +12231,8 @@ TakeInboxMoney: {}
 TakeInboxTextItem: {}
 TakeTaxiNode: {}
 tan:
-  impl: tan
   nowrap: true
+  stdlib: tan
 TargetDirectionEnemy: {}
 TargetDirectionFinished: {}
 TargetDirectionFriend: {}

@@ -1,8 +1,4 @@
 ---
-acos: {}
-asin: {}
-atan: {}
-atan2: {}
 C_Calendar.GetMonthInfo:
   states:
   - Calendar
@@ -120,7 +116,6 @@ C_UIColor.GetColors:
 C_XMLUtil.GetTemplateInfo:
   frameworks:
   - api
-cos: {}
 CreateFont:
   frameworks:
   - api
@@ -278,8 +273,6 @@ SendSystemMessage:
   - Time
   - Units
 SetPortraitTexture: {}
-sin: {}
-tan: {}
 UnitClass:
   sqls:
   - lookup: UnitClass
