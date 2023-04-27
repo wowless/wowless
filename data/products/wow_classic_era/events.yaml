@@ -206,7 +206,6 @@ AZERITE_EMPOWERED_ITEM_SELECTION_UPDATED:
   payload:
   - name: azeriteEmpoweredItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
 AZERITE_ESSENCE_ACTIVATED:
   payload:
@@ -246,7 +245,6 @@ AZERITE_ITEM_EXPERIENCE_CHANGED:
   payload:
   - name: azeriteItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
   - name: oldExperienceAmount
     type: number
@@ -256,7 +254,6 @@ AZERITE_ITEM_POWER_LEVEL_CHANGED:
   payload:
   - name: azeriteItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
   - name: oldPowerLevel
     type: number

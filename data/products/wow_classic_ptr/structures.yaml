@@ -20,7 +20,6 @@ C_AreaPoiInfo.AreaPOIInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     shouldGlow:
       type: boolean
@@ -92,7 +91,6 @@ C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
       type: number
     unlockedItem:
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
 C_BarberShop.BarberShopCharacterData:
   fields:
@@ -1014,7 +1012,6 @@ C_DeathInfo.GraveyardMapInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     textureIndex:
       type: number
@@ -1309,7 +1306,6 @@ C_GossipInfo.GossipPoiInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     textureIndex:
       type: number
@@ -1476,7 +1472,6 @@ C_Map.MapLinkInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
 C_Map.UiMapDetails:
   fields:
@@ -1559,7 +1554,6 @@ C_ModelInfo.UIModelSceneActorInfo:
       type: number
     position:
       type:
-        mixin: Vector3DMixin
         structure: vector3
     roll:
       type: number
@@ -1594,7 +1588,6 @@ C_ModelInfo.UIModelSceneCameraInfo:
       type: string
     target:
       type:
-        mixin: Vector3DMixin
         structure: vector3
     yaw:
       type: number
@@ -1606,7 +1599,6 @@ C_ModelInfo.UIModelSceneCameraInfo:
       type: number
     zoomedTargetOffset:
       type:
-        mixin: Vector3DMixin
         structure: vector3
     zoomedYawOffset:
       type: number
@@ -1775,7 +1767,6 @@ C_TaxiMap.MapTaxiNodeInfo:
       type: number
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     textureKitPrefix:
       nilable: true
@@ -1788,7 +1779,6 @@ C_TaxiMap.TaxiNodeInfo:
       type: number
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     slotIndex:
       type: number
@@ -2052,7 +2042,6 @@ C_UIColor.DBColorExport:
       type: string
     color:
       type:
-        mixin: ColorMixin
         structure: colorRGBA
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   fields:
@@ -2490,12 +2479,10 @@ CharCustomizationChoice:
     swatchColor1:
       nilable: true
       type:
-        mixin: ColorMixin
         structure: colorRGBA
     swatchColor2:
       nilable: true
       type:
-        mixin: ColorMixin
         structure: colorRGBA
 CharCustomizationOption:
   fields:
@@ -2544,6 +2531,7 @@ colorRGBA:
       type: number
     r:
       type: number
+  mixin: ColorMixin
 ExpansionDisplayInfo:
   fields:
     banner:
@@ -2564,15 +2552,12 @@ GuildTabardInfo:
   fields:
     backgroundColor:
       type:
-        mixin: ColorMixin
         structure: colorRGBA
     borderColor:
       type:
-        mixin: ColorMixin
         structure: colorRGBA
     emblemColor:
       type:
-        mixin: ColorMixin
         structure: colorRGBA
     emblemFilename:
       type: string
@@ -2589,6 +2574,7 @@ ItemLocation:
     slotIndex:
       nilable: true
       type: number
+  mixin: ItemLocationMixin
 PlayerLocation:
   fields: {}
 QueueSpecificInfo:
@@ -2631,6 +2617,7 @@ vector2:
       type: number
     y:
       type: number
+  mixin: Vector2DMixin
 vector3:
   fields:
     x:
@@ -2639,3 +2626,4 @@ vector3:
       type: number
     z:
       type: number
+  mixin: Vector3DMixin

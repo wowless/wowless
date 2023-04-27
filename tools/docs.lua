@@ -179,7 +179,7 @@ local function t2nty(field, ns)
     return { arrayof = t2nty({ Type = field.InnerType }, ns) }
   elseif t == 'table' and field.Mixin then
     local mst = assert(knownMixinStructs[field.Mixin], 'no struct for mixin ' .. field.Mixin)
-    return { mixin = field.Mixin, structure = mst }
+    return { structure = mst }
   elseif types[t] then
     return types[t]
   end
@@ -192,7 +192,8 @@ local function t2nty(field, ns)
   elseif ty == 'Enumeration' then
     return { enum = t }
   elseif ty == 'Structure' then
-    return { mixin = field.Mixin, structure = n }
+    -- TODO cross-check mixin
+    return { structure = n }
   elseif ty == 'CallbackType' then
     return 'function'
   else

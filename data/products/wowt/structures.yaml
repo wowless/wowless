@@ -101,7 +101,6 @@ C_AlliedRaces.AlliedRaceInfo:
         arrayof: number
     bannerColor:
       type:
-        mixin: ColorMixin
         structure: colorRGB
     crestAtlas:
       type: string
@@ -159,7 +158,6 @@ C_AnimaDiversion.AnimaDiversionNodeInfo:
       type: string
     normalizedPosition:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     state:
       type:
@@ -198,7 +196,6 @@ C_AreaPoiInfo.AreaPOIInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     shouldGlow:
       type: boolean
@@ -215,11 +212,9 @@ C_ArtifactUI.ArtifactArtInfo:
   fields:
     barConnectedColor:
       type:
-        mixin: ColorMixin
         structure: colorRGB
     barDisconnectedColor:
       type:
-        mixin: ColorMixin
         structure: colorRGB
     spellVisualKitID:
       type: number
@@ -227,7 +222,6 @@ C_ArtifactUI.ArtifactArtInfo:
       type: string
     titleColor:
       type:
-        mixin: ColorMixin
         structure: colorRGB
     titleName:
       type: string
@@ -257,11 +251,9 @@ C_ArtifactUI.ArtifactPowerInfo:
     offset:
       nilable: true
       type:
-        mixin: Vector2DMixin
         structure: vector2
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     prereqsMet:
       type: boolean
@@ -575,7 +567,6 @@ C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
       type: number
     unlockedItem:
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
 C_BattleNet.BNetAccountInfo:
   fields:
@@ -1635,7 +1626,6 @@ C_ContributionCollector.ContributionAppearance:
       type: string
     stateColor:
       type:
-        mixin: ColorMixin
         structure: colorRGB
     stateName:
       type: string
@@ -1657,7 +1647,6 @@ C_ContributionCollector.ContributionMapInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
 C_CovenantPreview.CovenantAbilityInfo:
   fields:
@@ -1941,7 +1930,6 @@ C_DeathInfo.GraveyardMapInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     textureIndex:
       type: number
@@ -2034,7 +2022,6 @@ C_EncounterJournal.DungeonEntranceMapInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
 C_EncounterJournal.EncounterJournalItemInfo:
   fields:
@@ -2122,7 +2109,6 @@ C_EventToastManager.EventToastInfo:
     colorTint:
       nilable: true
       type:
-        mixin: ColorMixin
         structure: colorRGB
     displayType:
       type:
@@ -2749,7 +2735,6 @@ C_Garrison.GarrisonPlotInstanceMapInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
 C_Garrison.MissionDeploymentInfo:
   fields:
@@ -2882,7 +2867,6 @@ C_GossipInfo.GossipPoiInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     textureIndex:
       type: number
@@ -2948,7 +2932,6 @@ C_InvasionInfo.InvasionMapInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     rewardQuestID:
       nilable: true
@@ -3578,7 +3561,6 @@ C_Map.MapLinkInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
 C_Map.UiMapDetails:
   fields:
@@ -3673,7 +3655,6 @@ C_ModelInfo.UIModelSceneActorInfo:
       type: number
     position:
       type:
-        mixin: Vector3DMixin
         structure: vector3
     roll:
       type: number
@@ -3708,7 +3689,6 @@ C_ModelInfo.UIModelSceneCameraInfo:
       type: string
     target:
       type:
-        mixin: Vector3DMixin
         structure: vector3
     yaw:
       type: number
@@ -3720,7 +3700,6 @@ C_ModelInfo.UIModelSceneCameraInfo:
       type: number
     zoomedTargetOffset:
       type:
-        mixin: Vector3DMixin
         structure: vector3
     zoomedYawOffset:
       type: number
@@ -3995,7 +3974,6 @@ C_PetInfo.PetTamerMapInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     textureIndex:
       nilable: true
@@ -4124,7 +4102,6 @@ C_PlayerChoice.PlayerChoiceOptionInfo:
     rarityColor:
       nilable: true
       type:
-        mixin: ColorMixin
         structure: colorRGBA
     rewardInfo:
       type:
@@ -4887,7 +4864,6 @@ C_ResearchInfo.DigSiteMapInfo:
       type: string
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     researchSiteID:
       type: number
@@ -5333,7 +5309,6 @@ C_TaxiMap.MapTaxiNodeInfo:
       type: number
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     textureKit:
       type: string
@@ -5347,7 +5322,6 @@ C_TaxiMap.TaxiNodeInfo:
       type: number
     position:
       type:
-        mixin: Vector2DMixin
         structure: vector2
     slotIndex:
       type: number
@@ -5750,7 +5724,6 @@ C_UIColor.DBColorExport:
       type: string
     color:
       type:
-        mixin: ColorMixin
         structure: colorRGBA
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   fields:
@@ -7503,12 +7476,10 @@ CharCustomizationChoice:
     swatchColor1:
       nilable: true
       type:
-        mixin: ColorMixin
         structure: colorRGB
     swatchColor2:
       nilable: true
       type:
-        mixin: ColorMixin
         structure: colorRGB
 CharCustomizationOption:
   fields:
@@ -7566,6 +7537,7 @@ colorRGB:
       type: number
     r:
       type: number
+  mixin: ColorMixin
 colorRGBA:
   fields:
     a:
@@ -7576,6 +7548,7 @@ colorRGBA:
       type: number
     r:
       type: number
+  mixin: ColorMixin
 CorruptionEffectInfo:
   fields:
     description:
@@ -8267,15 +8240,12 @@ GuildTabardInfo:
   fields:
     backgroundColor:
       type:
-        mixin: ColorMixin
         structure: colorRGB
     borderColor:
       type:
-        mixin: ColorMixin
         structure: colorRGB
     emblemColor:
       type:
-        mixin: ColorMixin
         structure: colorRGB
     emblemFileID:
       type: number
@@ -8292,8 +8262,10 @@ ItemLocation:
     slotIndex:
       nilable: true
       type: number
+  mixin: ItemLocationMixin
 ItemTransmogInfo:
   fields: {}
+  mixin: ItemTransmogInfoMixin
 MythicPlusAffixScoreInfo:
   fields:
     durationSec:
@@ -8492,7 +8464,6 @@ RuneforgeLegendaryCraftDescription:
   fields:
     baseItem:
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     modifiers:
       type:
@@ -8567,7 +8538,6 @@ TooltipDataArg:
     colorVal:
       nilable: true
       type:
-        mixin: ColorMixin
         structure: colorRGB
     field:
       type: string
@@ -8712,6 +8682,7 @@ TransmogLocation:
       type: number
 TransmogPendingInfo:
   fields: {}
+  mixin: TransmogPendingInfoMixin
 UnitAuraUpdateInfo:
   fields:
     addedAuras:
@@ -8785,6 +8756,7 @@ vector2:
       type: number
     y:
       type: number
+  mixin: Vector2DMixin
 vector3:
   fields:
     x:
@@ -8793,3 +8765,4 @@ vector3:
       type: number
     z:
       type: number
+  mixin: Vector3DMixin

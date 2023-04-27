@@ -229,28 +229,6 @@ local function loadFunctions(api, loader)
       end
     end
 
-    local function addMixins(fn)
-      local mixins = {}
-      for idx, out in ipairs(apicfg.outputs or {}) do
-        mixins[idx] = out.mixin
-      end
-      if not next(mixins) then
-        return fn
-      end
-      local function doAddMixins(...)
-        for idx, mixin in pairs(mixins) do
-          local t = select(idx, ...)
-          if t then
-            util.mixin(t, api.env[mixin])
-          end
-        end
-        return ...
-      end
-      return function(...)
-        return doAddMixins(fn(...))
-      end
-    end
-
     local function checkOutputs(fn)
       if not apicfg.outputs then
         return fn
@@ -291,7 +269,7 @@ local function loadFunctions(api, loader)
       return apicfg.nowrap and fn or debug.newcfunction(fn)
     end
 
-    return maybeCWrap(addMixins(checkOutputs(checkInputs(addSpecialArgs(base())))))
+    return maybeCWrap(checkOutputs(checkInputs(addSpecialArgs(base()))))
   end
 
   local fns = {}

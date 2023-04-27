@@ -24,3 +24,5 @@ type:
                     required: true
                     type:
                       schema: type
+        mixin:
+          type: string
