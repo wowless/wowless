@@ -62,7 +62,7 @@ local specDefault = (function()
       structureDefaults[name] = '{' .. table.concat(t, ',') .. '}'
     end
     local v = structureDefaults[name]
-    return mixin and ('Mixin(%s,%s)'):format(v, mixin) or v
+    return mixin and ('Mixin(%s,%q)'):format(v, mixin) or v
   end
   function specDefault(spec)
     if spec.stub ~= nil then

@@ -86,16 +86,6 @@ local function loadFunctions(api, loader)
     string = true,
   }
 
-  local stubenv = setmetatable({}, {
-    __index = function(_, k)
-      return k == 'Mixin' and util.mixin or api.env[k]
-    end,
-    __metatable = 'stub metatable',
-    __newindex = function()
-      error('cannot modify _G from a stub')
-    end,
-  })
-
   local function typestr(ty)
     if type(ty) == 'string' then
       return ty
@@ -112,10 +102,15 @@ local function loadFunctions(api, loader)
     error('unable to typestr')
   end
 
+  local function stubMixin(t, name)
+    return util.mixin(t, api.env[name])
+  end
+
   local function mkfn(fname, apicfg)
     local function base()
       if apicfg.stub then
-        return setfenv(assert(loadstring(apicfg.stub)), stubenv)
+        local text = ('local Mixin = ...; return function() %s end'):format(apicfg.stub)
+        return assert(loadstring(text))(stubMixin)
       elseif apicfg.impl then
         return impls[apicfg.impl]
       else
