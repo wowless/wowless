@@ -323,9 +323,9 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins = {
       dblist,
+      'build/data/products/' .. p .. '/build.lua',
       'build/listfile.lua',
       'build/tactkeys.lua',
-      'data/products/' .. p .. '/build.yaml',
       'tools/fetch.lua',
     },
     outs = fetchStamp,
