@@ -19,6 +19,10 @@ Ferronnizer:
   owner: ferronn-dev
   repo: ferronnizer
   tag: v451
+GSE:
+  owner: timothyluke
+  repo: gse-advanced-macro-compiler
+  tag: 3.1.30
 LunaUnitFrames:
   flavors:
   - Wrath
