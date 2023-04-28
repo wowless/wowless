@@ -602,7 +602,7 @@ local function loader(api, cfg)
   end
 
   local build = datalua.build
-  local flavors = require('build.flavors')
+  local flavors = require('build.data.flavors')
 
   local function parseToc(tocFile, content)
     local attrs = {}

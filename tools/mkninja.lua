@@ -160,7 +160,7 @@ local builds = {
     ins = {
       elune,
       'build/cmake/ext.so',
-      'build/flavors.lua',
+      'build/data/flavors.lua',
       'build/wowless.stamp',
     },
     outs = 'build/runtime.stamp',
@@ -236,6 +236,7 @@ local builds = {
       'wowless/runner.lua',
       'wowless/util.lua',
       'wowless/xml.lua',
+      'wowless.lua',
     },
     outs = 'build/wowless.stamp',
     rule = 'stamp',
@@ -263,11 +264,6 @@ local builds = {
     },
     outs_implicit = 'build/tactkeys.lua',
     rule = 'mktactkeys',
-  },
-  {
-    ins = 'data/flavors.yaml',
-    outs = 'build/flavors.lua',
-    rule = 'yaml2lua',
   },
 }
 
