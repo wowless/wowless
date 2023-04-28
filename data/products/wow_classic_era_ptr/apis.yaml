@@ -27901,7 +27901,14 @@ UnitSex:
     nilable: true
     type: number
 UnitShouldDisplayName: {}
-UnitSpellHaste: {}
+UnitSpellHaste:
+  inputs:
+  - - name: unit
+      type: unit
+  outputs:
+  - name: spellHastePercent
+    stub: 100
+    type: number
 UnitStagger:
   inputs:
   - - name: unit
