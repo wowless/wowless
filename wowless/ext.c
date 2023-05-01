@@ -84,7 +84,7 @@ static struct luaL_Reg extlib[] = {
   {NULL, NULL}
 };
 
-int luaopen_build_cmake_ext(lua_State *L) {
+int luaopen_wowless_ext(lua_State *L) {
   lua_newtable(L);
   luaL_register(L, NULL, extlib);
   return 1;

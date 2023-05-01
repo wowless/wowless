@@ -86,7 +86,7 @@ local rules = {
     pool = 'fetch_pool',
   },
   frame0 = {
-    command = elune .. ' wowless.lua -p $product --frame0 > /dev/null',
+    command = 'build/cmake/wowless -p $product --frame0 > /dev/null',
     pool = 'run_pool',
   },
   mkaddon = {
@@ -114,11 +114,11 @@ local rules = {
     pool = 'fetch_pool',
   },
   run = {
-    command = elune .. ' wowless.lua -p $product -e5 -a addon/Wowless -a build/products/$product/WowlessData > $out',
+    command = 'build/cmake/wowless -p $product -e5 -a addon/Wowless -a build/products/$product/WowlessData > $out',
     pool = 'run_pool',
   },
   runaddon = {
-    command = elune .. ' wowless.lua -p $product -e5 -a extracts/addons/$addon > $out',
+    command = 'build/cmake/wowless -p $product -e5 -a extracts/addons/$addon > $out',
     pool = 'run_pool',
   },
   stamp = {
@@ -159,7 +159,7 @@ local builds = {
   {
     ins = {
       elune,
-      'build/cmake/ext.so',
+      'build/cmake/wowless',
       'build/data/flavors.lua',
       'build/wowless.stamp',
     },
