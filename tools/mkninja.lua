@@ -210,7 +210,6 @@ local builds = {
       'tools/fetch.lua',
       'tools/gentest.lua',
       'tools/listfile.lua',
-      'tools/precov.lua',
       'tools/prep.lua',
       'tools/proto.lua',
       'tools/render.lua',
