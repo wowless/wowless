@@ -54,7 +54,7 @@ for _, p in ipairs(productList) do
   perProductAddonGeneratedFiles[p] = pp
 end
 
-local elune = 'build/cmake/vendor/elune/lua/lua5.1'
+local elune = 'build/cmake/elune-prefix/src/elune/build/linux/install/bin/lua5.1'
 
 local pools = {
   fetch_pool = 1,
@@ -150,7 +150,6 @@ local builds = {
       'CMakeLists.txt',
       'tools/addons.yaml',
       'tools/mkninja.lua',
-      'vendor/elune/CMakeLists.txt',
       'wowapi/yaml.lua',
     },
     outs = 'build.ninja',
@@ -158,8 +157,7 @@ local builds = {
   },
   {
     ins = {
-      elune,
-      'build/cmake/ext.so',
+      'build/cmake/all',
       'build/data/flavors.lua',
       'build/wowless.stamp',
     },

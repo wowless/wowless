@@ -2,10 +2,6 @@
 	path = vendor/dbdefs
 	shallow = true
 	url = https://github.com/wowdev/wowdbdefs
-[submodule "vendor/elune"]
-	path = vendor/elune
-	shallow = true
-	url = https://github.com/meorawr/elune
 [submodule "vendor/listfile"]
 	path = vendor/listfile
 	shallow = true
