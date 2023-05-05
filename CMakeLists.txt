@@ -9,7 +9,7 @@ ExternalProject_Add(
   GIT_SHALLOW 1
   UPDATE_DISCONNECTED 1
   BUILD_IN_SOURCE 1
-  CONFIGURE_COMMAND cmake --preset linux
+  CONFIGURE_COMMAND cmake --preset linux -DLUA_ROOT=build/rocks
   BUILD_COMMAND cmake --build --preset linux --target install
   INSTALL_COMMAND true
 )
