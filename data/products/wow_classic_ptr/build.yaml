@@ -3,7 +3,6 @@ build: '49442'
 date: May  3 2023
 flavor: Wrath
 hash: 41be1fb1fc18b977d72d57cf06fcdf13
-ptr: true
 test: true
 tocversion: 30402
 version: 3.4.2

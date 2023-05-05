@@ -3,7 +3,6 @@ build: '48999'
 date: Apr  6 2023
 flavor: Mainline
 hash: 5568d1fd66e02bdb9c168725f522c15d
-ptr: true
 test: false
 tocversion: 100007
 version: 10.0.7
