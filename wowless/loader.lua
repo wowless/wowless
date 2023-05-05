@@ -49,23 +49,26 @@ local function loader(api, cfg)
     return newtree
   end)()
 
-  local function parseTypedValue(type, value)
-    type = type and string.lower(type) or nil
-    if type == 'number' then
+  local function parseTypedValue(ty, value)
+    ty = ty and string.lower(ty) or nil
+    if ty == 'number' then
       return tonumber(value)
-    elseif type == 'global' then
+    elseif ty == 'global' then
       local t = api.env
       for part in value:gmatch('[^.]+') do
+        if type(t) ~= 'table' then
+          error(('cannot find %q in _G'):format(value))
+        end
         t = t[part]
       end
       return t
-    elseif type == 'boolean' or type == 'bool' then
+    elseif ty == 'boolean' or ty == 'bool' then
       return (value == 'true')
-    elseif type == 'string' or type == nil then
+    elseif ty == 'string' or ty == nil then
       local n = tonumber(value)
       return n ~= nil and n or value
     else
-      error('invalid keyvalue/attribute type ' .. type)
+      error('invalid keyvalue/attribute type ' .. ty)
     end
   end
 
