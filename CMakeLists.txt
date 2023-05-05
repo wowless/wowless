@@ -29,3 +29,13 @@ add_library(ext MODULE wowless/ext.c)
 add_dependencies(ext elune)
 set_target_properties(ext PROPERTIES PREFIX "")
 target_include_directories(ext PRIVATE build/cmake/elune-prefix/src/elune/build/linux/install/include/lua5.1)
+
+ExternalProject_Add(
+  sqlite3
+  URL https://www.sqlite.org/2023/sqlite-autoconf-3410200.tar.gz
+  URL_HASH SHA3_256=1ebb5539dd6fde9a0f89e8ab765af0b9f02010fc6baf6985b54781a38c00020a
+  BUILD_IN_SOURCE 1
+  CONFIGURE_COMMAND ./configure --prefix=${CMAKE_BINARY_DIR}/sqlite3
+  BUILD_COMMAND make
+  INSTALL_COMMAND make install
+)
