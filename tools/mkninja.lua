@@ -54,7 +54,7 @@ for _, p in ipairs(productList) do
   perProductAddonGeneratedFiles[p] = pp
 end
 
-local elune = 'build/cmake/elune-prefix/src/elune/build/linux/install/bin/lua5.1'
+local elune = 'build/cmake/elune/bin/lua5.1'
 
 local pools = {
   fetch_pool = 1,
