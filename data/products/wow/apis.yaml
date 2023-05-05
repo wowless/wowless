@@ -7902,12 +7902,12 @@ C_EventToastManager.RemoveCurrentToast:
   - {}
   outputs: {}
 C_EventUtils.IsEventValid:
+  impl: C_EventUtils.IsEventValid
   inputs:
   - - name: eventName
       type: string
   outputs:
   - name: valid
-    stub: true
     type: boolean
 C_EventUtils.NotifySettingsLoaded:
   inputs:

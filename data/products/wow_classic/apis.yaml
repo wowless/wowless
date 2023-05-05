@@ -4258,6 +4258,7 @@ C_EquipmentSet.UseEquipmentSet:
   - name: setWasEquipped
     type: boolean
 C_EventUtils.IsEventValid:
+  impl: C_EventUtils.IsEventValid
   inputs:
   - - name: eventName
       type: string
