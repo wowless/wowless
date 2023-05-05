@@ -1,6 +1,9 @@
 ---
 C_AreaPoiInfo.AreaPOIInfo:
   fields:
+    addPaddingAboveWidgets:
+      nilable: true
+      type: boolean
     areaPoiID:
       type: number
     atlasName:
@@ -92,25 +95,6 @@ C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
     unlockedItem:
       type:
         structure: ItemLocation
-C_BarberShop.BarberShopCharacterData:
-  fields:
-    raceData:
-      type:
-        structure: C_BarberShop.BarberShopRaceData
-    sex:
-      type: number
-C_BarberShop.BarberShopRaceData:
-  fields:
-    alternateFormRaceData:
-      nilable: true
-      type:
-        structure: CharacterAlternateFormData
-    createScreenIconAtlas:
-      type: string
-    fileName:
-      type: string
-    name:
-      type: string
 C_BattleNet.BNetAccountInfo:
   fields:
     accountName:
@@ -167,7 +151,6 @@ C_BattleNet.BNetGameAccountInfo:
       nilable: true
       type: string
     gameAccountID:
-      nilable: true
       type: number
     hasFocus:
       type: boolean
@@ -860,6 +843,34 @@ C_Console.ConsoleCommandInfo:
       type: string
     scriptParameters:
       type: string
+C_ConsoleScriptCollection.ConsoleScriptCollectionData:
+  fields:
+    ID:
+      type: number
+    name:
+      type: string
+C_ConsoleScriptCollection.ConsoleScriptCollectionElementData:
+  fields:
+    collectionID:
+      nilable: true
+      type: number
+    consoleScriptID:
+      nilable: true
+      type: number
+C_ConsoleScriptCollection.ConsoleScriptData:
+  fields:
+    help:
+      type: string
+    ID:
+      type: number
+    isLuaScript:
+      type: boolean
+    name:
+      type: string
+    params:
+      type: string
+    script:
+      type: string
 C_Container.ContainerItemInfo:
   fields:
     hasLoot:
@@ -1233,6 +1244,12 @@ C_GamePad.GamePadStickConfig:
       type: string
 C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo:
   fields:
+    closeButtonText:
+      nilable: true
+      type: string
+    extraButtonText:
+      nilable: true
+      type: string
     frameHeight:
       type: number
     frameWidth:
@@ -1280,6 +1297,7 @@ C_GossipInfo.GossipOptionUIInfo:
       stub: 0
       type: number
     gossipOptionID:
+      nilable: true
       type: number
     icon:
       type: number
@@ -1642,6 +1660,28 @@ C_PvP.BattlefieldVehicleInfo:
       type: number
     y:
       type: number
+C_QuestInfoSystem.QuestRewardSpellInfo:
+  fields:
+    garrFollowerID:
+      nilable: true
+      type: number
+    genericUnlock:
+      type: boolean
+    hideSpellLearnText:
+      type: boolean
+    isBoostSpell:
+      type: boolean
+    isSpellLearned:
+      type: boolean
+    isTradeskill:
+      type: boolean
+    name:
+      type: string
+    texture:
+      type: number
+    type:
+      type:
+        enum: QuestCompleteSpellType
 C_QuestLog.QuestObjectiveInfo:
   fields:
     finished:
@@ -2476,14 +2516,17 @@ CharCustomizationChoice:
       type: string
     name:
       type: string
+    soundKit:
+      nilable: true
+      type: number
     swatchColor1:
       nilable: true
       type:
-        structure: colorRGBA
+        structure: colorRGB
     swatchColor2:
       nilable: true
       type:
-        structure: colorRGBA
+        structure: colorRGB
 CharCustomizationOption:
   fields:
     choices:
@@ -2521,6 +2564,15 @@ ChatChannelInfo:
       type: string
     zoneChannelID:
       type: number
+colorRGB:
+  fields:
+    b:
+      type: number
+    g:
+      type: number
+    r:
+      type: number
+  mixin: ColorMixin
 colorRGBA:
   fields:
     a:
@@ -2552,13 +2604,13 @@ GuildTabardInfo:
   fields:
     backgroundColor:
       type:
-        structure: colorRGBA
+        structure: colorRGB
     borderColor:
       type:
-        structure: colorRGBA
+        structure: colorRGB
     emblemColor:
       type:
-        structure: colorRGBA
+        structure: colorRGB
     emblemFilename:
       type: string
     emblemStyle:
@@ -2575,6 +2627,21 @@ ItemLocation:
       nilable: true
       type: number
   mixin: ItemLocationMixin
+PlayerInfoCharacterData:
+  fields:
+    alternateFormRaceData:
+      nilable: true
+      type:
+        structure: CharacterAlternateFormData
+    createScreenIconAtlas:
+      type: string
+    fileName:
+      type: string
+    name:
+      type: string
+    sex:
+      type:
+        enum: UnitSex
 PlayerLocation:
   fields: {}
 QueueSpecificInfo:

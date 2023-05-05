@@ -118,6 +118,7 @@ AnimationGroup:
       impl: AnimationGroup/GetAnimations
     GetAnimationSpeedMultiplier: {}
     GetDuration: {}
+    GetElapsed: {}
     GetLooping: {}
     GetLoopState: {}
     GetProgress: {}
@@ -609,9 +610,18 @@ FogOfWarFrame:
   inherits:
     Frame: {}
   methods:
+    GetFogOfWarBackgroundAtlas: {}
+    GetFogOfWarBackgroundTexture: {}
+    GetFogOfWarMaskAtlas: {}
+    GetFogOfWarMaskTexture: {}
+    GetMaskScalar: {}
     GetUiMapID: {}
+    SetFogOfWarBackgroundAtlas: {}
+    SetFogOfWarBackgroundTexture: {}
+    SetFogOfWarMaskAtlas: {}
+    SetFogOfWarMaskTexture: {}
+    SetMaskScalar: {}
     SetUiMapID: {}
-  zombie: true
 Font:
   inherits:
     FontInstance: {}
@@ -1013,9 +1023,7 @@ GameTooltip:
     SetQuestItem: {}
     SetQuestLogCurrency: {}
     SetQuestLogItem: {}
-    SetQuestLogRewardSpell: {}
     SetQuestLogSpecialItem: {}
-    SetQuestRewardSpell: {}
     SetSendMailItem: {}
     SetShapeshift: {}
     SetSocketedItem: {}
@@ -1292,6 +1300,7 @@ MouseMixin:
   methods:
     EnableMouse:
       impl: MouseMixin/EnableMouse
+    EnableMouseMotion: {}
     EnableMouseWheel:
       setter:
       - name: mouseWheelEnabled
@@ -1303,6 +1312,7 @@ MouseMixin:
     IsMouseMotionEnabled:
       getter:
       - name: mouseMotionEnabled
+    IsMouseMotionFocus: {}
     IsMouseWheelEnabled:
       getter:
       - name: mouseWheelEnabled
