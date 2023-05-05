@@ -65,6 +65,18 @@ local function check6(e1, e2, e3, e4, e5, e6, ...)
   assertEquals(e6, a6)
 end
 
+local function check7(e1, e2, e3, e4, e5, e6, e7, ...)
+  assertEquals(7, select('#', ...))
+  local a1, a2, a3, a4, a5, a6, a7 = ...
+  assertEquals(e1, a1)
+  assertEquals(e2, a2)
+  assertEquals(e3, a3)
+  assertEquals(e4, a4)
+  assertEquals(e5, a5)
+  assertEquals(e6, a6)
+  assertEquals(e7, a7)
+end
+
 local function mixin(t, ...)
   for i = 1, select('#', ...) do
     for k, v in pairs(select(i, ...)) do
@@ -80,4 +92,5 @@ G.check0 = check0
 G.check1 = check1
 G.check4 = check4
 G.check6 = check6
+G.check7 = check7
 G.mixin = mixin
