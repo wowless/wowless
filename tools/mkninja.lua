@@ -54,7 +54,7 @@ for _, p in ipairs(productList) do
   perProductAddonGeneratedFiles[p] = pp
 end
 
-local elune = 'build/cmake/vendor/elune/lua/lua5.1'
+local elune = 'build/cmake/elune-prefix/src/elune/build/linux/install/bin/lua5.1'
 
 local pools = {
   fetch_pool = 1,
@@ -62,6 +62,15 @@ local pools = {
 }
 
 local rules = {
+  cmake = {
+    command = table.concat({
+      'rm -rf build/cmake',
+      'cmake -B build/cmake -G Ninja',
+      'cmake --build build/cmake',
+      'touch $out',
+    }, ' && '),
+    pool = 'console',
+  },
   dbdata = {
     command = 'lua tools/sqlite.lua -f $product',
   },
@@ -147,19 +156,21 @@ local builds = {
   },
   {
     ins = {
-      'CMakeLists.txt',
       'tools/addons.yaml',
       'tools/mkninja.lua',
-      'vendor/elune/CMakeLists.txt',
       'wowapi/yaml.lua',
     },
     outs = 'build.ninja',
     rule = 'mkninja',
   },
   {
+    ins = 'CMakeLists.txt',
+    outs = 'build/cmake.stamp',
+    rule = 'cmake',
+  },
+  {
     ins = {
-      elune,
-      'build/cmake/ext.so',
+      'build/cmake.stamp',
       'build/data/flavors.lua',
       'build/wowless.stamp',
     },
@@ -653,18 +664,8 @@ for _, b in ipairs(builds) do
   end
 end
 table.insert(out, 'default test.out')
-table.insert(out, 'subninja build/cmake/build.ninja')
 
 local f = io.open('build.ninja', 'w')
 f:write(table.concat(out, '\n'))
 f:write('\n')
 f:close()
-
-os.execute([[
-  cmake \
-  -B build/cmake \
-  -G Ninja \
-  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-  -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/cmake/ \
-  > /dev/null \
-]])

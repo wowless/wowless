@@ -3,6 +3,10 @@
 #include <lualib.h>
 #include <lauxlib.h>
 
+#ifndef ELUNE_VERSION
+#error Must be compiled against Elune headers.
+#endif
+
 /* Lightly modified from ldblib.c. */
 
 static lua_State *getthread (lua_State *L, int *arg) {
