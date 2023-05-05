@@ -62,6 +62,15 @@ local pools = {
 }
 
 local rules = {
+  cmake = {
+    command = table.concat({
+      'rm -rf build/cmake',
+      'cmake -B build/cmake -G Ninja',
+      'cmake --build build/cmake',
+      'touch $out',
+    }, ' && '),
+    pool = 'console',
+  },
   dbdata = {
     command = 'lua tools/sqlite.lua -f $product',
   },
@@ -147,7 +156,6 @@ local builds = {
   },
   {
     ins = {
-      'CMakeLists.txt',
       'tools/addons.yaml',
       'tools/mkninja.lua',
       'wowapi/yaml.lua',
@@ -156,8 +164,13 @@ local builds = {
     rule = 'mkninja',
   },
   {
+    ins = 'CMakeLists.txt',
+    outs = 'build/cmake.stamp',
+    rule = 'cmake',
+  },
+  {
     ins = {
-      'build/cmake/all',
+      'build/cmake.stamp',
       'build/data/flavors.lua',
       'build/wowless.stamp',
     },
@@ -651,18 +664,8 @@ for _, b in ipairs(builds) do
   end
 end
 table.insert(out, 'default test.out')
-table.insert(out, 'subninja build/cmake/build.ninja')
 
 local f = io.open('build.ninja', 'w')
 f:write(table.concat(out, '\n'))
 f:write('\n')
 f:close()
-
-os.execute([[
-  cmake \
-  -B build/cmake \
-  -G Ninja \
-  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-  -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/cmake/ \
-  > /dev/null \
-]])
