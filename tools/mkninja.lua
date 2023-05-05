@@ -101,7 +101,7 @@ local rules = {
   luarocks = {
     command = table.concat({
       'rm -rf build/rocks',
-      'build/luarocks/bin/luarocks --tree build/rocks build --deps-only',
+      'build/cmake/luarocks/bin/luarocks --tree build/rocks build --deps-only',
       'touch $out',
     }, ' && '),
     pool = 'console',

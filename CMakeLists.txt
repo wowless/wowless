@@ -19,7 +19,7 @@ ExternalProject_Add(
   URL https://luarocks.org/releases/luarocks-3.9.2.tar.gz
   URL_HASH SHA1=116a4ce0bfe945045d9e6b28dedc270b2d7a3ebd
   BUILD_IN_SOURCE 1
-  CONFIGURE_COMMAND ./configure --with-lua=../../../elune-prefix/src/elune/build/linux/install --prefix=../../../../luarocks
+  CONFIGURE_COMMAND ./configure --with-lua=../../../elune-prefix/src/elune/build/linux/install --prefix=${CMAKE_BINARY_DIR}/luarocks
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 )
