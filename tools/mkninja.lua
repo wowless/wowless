@@ -101,13 +101,7 @@ local rules = {
   luarocks = {
     command = table.concat({
       'rm -rf build/rocks',
-      table.concat({
-        'build/cmake/luarocks/bin/luarocks',
-        '--tree build/rocks build',
-        '--deps-only',
-        'EXPAT_DIR=$$PWD/build/cmake/expat',
-        'SQLITE_DIR=$$PWD/build/cmake/sqlite3',
-      }, ' '),
+      'build/cmake/luarocks/bin/luarocks --tree build/rocks build --deps-only SQLITE_DIR=$$PWD/build/cmake/sqlite3',
       'touch $out',
     }, ' && '),
     pool = 'console',
