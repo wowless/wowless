@@ -39,3 +39,13 @@ ExternalProject_Add(
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 )
+
+ExternalProject_Add(
+  expat
+  URL https://github.com/libexpat/libexpat/releases/download/R_2_5_0/expat-2.5.0.tar.gz
+  URL_HASH SHA1=061c1232188dff35e44aa7137aec7757d3d90d27
+  BUILD_IN_SOURCE 1
+  CONFIGURE_COMMAND autoreconf && ./configure --prefix=${CMAKE_BINARY_DIR}/expat
+  BUILD_COMMAND make
+  INSTALL_COMMAND make install
+)
