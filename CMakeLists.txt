@@ -10,7 +10,7 @@ set(EXPAT_BUILD_TOOLS OFF)
 
 set(LUA_CPATH_CUSTOM ";" CACHE STRING "disable dynamic C Lua modules")
 
-add_compile_options(-D_GNU_SOURCE -DNDEBUG -flto -O3)
+add_compile_options(-D_GNU_SOURCE -DNDEBUG -ffast-math -flto -O3)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -60,11 +60,6 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/yaml/libyaml.git
   GIT_TAG 0.2.5
 )
-FetchContent_Declare(
-  zlib
-  URL https://www.zlib.net/zlib-1.2.13.tar.gz
-  URL_HASH SHA256=b3a24de97a8fdbc835b9833169501030b8977031bcb54b3b3ac13740f846ab30
-)
 FetchContent_MakeAvailable(
   elune
   expat
@@ -75,7 +70,6 @@ FetchContent_MakeAvailable(
   lzlib
   sqlite3
   yaml
-  zlib
 )
 
 add_library(
@@ -97,4 +91,4 @@ add_executable(
   ${lzlib_SOURCE_DIR}/lzlib.c
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
-target_link_libraries(wowless expat liblua lyaml pthread yaml zlib)
+target_link_libraries(wowless expat liblua lyaml pthread yaml z)
