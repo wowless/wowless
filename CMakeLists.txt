@@ -10,7 +10,8 @@ set(EXPAT_BUILD_TOOLS OFF)
 
 set(LUA_CPATH_CUSTOM ";" CACHE STRING "disable dynamic C Lua modules")
 
-add_compile_options(-D_GNU_SOURCE -DNDEBUG -ffast-math -flto -O3)
+add_compile_options(-D_GNU_SOURCE -DNDEBUG -flto -O3)
+add_link_options(-ffast-math)
 
 include(FetchContent)
 FetchContent_Declare(
