@@ -56,11 +56,6 @@ FetchContent_Declare(
   URL https://www.sqlite.org/2023/sqlite-amalgamation-3410200.zip
   URL_HASH SHA3_256=c51ca72411b8453c64e0980be23bc9b9530bdc3ec1513e06fbf022ed0fd02463
 )
-FetchContent_Declare(
-  yaml
-  GIT_REPOSITORY https://github.com/yaml/libyaml.git
-  GIT_TAG 0.2.5
-)
 FetchContent_MakeAvailable(
   elune
   expat
@@ -70,7 +65,6 @@ FetchContent_MakeAvailable(
   lyaml
   lzlib
   sqlite3
-  yaml
 )
 
 add_library(
