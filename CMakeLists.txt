@@ -1,51 +1,89 @@
 cmake_minimum_required(VERSION 3.24)
 project(wowless)
 
-include(ExternalProject)
-ExternalProject_Add(
+set(BUILD_SHARED_LIBS OFF)
+set(BUILD_LUA OFF)
+set(BUILD_LUAC OFF)
+set(EXPAT_BUILD_EXAMPLES OFF)
+set(EXPAT_BUILD_TESTS OFF)
+set(EXPAT_BUILD_TOOLS OFF)
+
+set(LUA_CPATH_CUSTOM ";" CACHE STRING "disable dynamic C Lua modules")
+
+add_compile_options(-D_GNU_SOURCE -DNDEBUG -flto -O3)
+add_link_options(-ffast-math)
+
+include(FetchContent)
+FetchContent_Declare(
   elune
-  GIT_REPOSITORY https://github.com/meorawr/elune
+  GIT_REPOSITORY https://github.com/meorawr/elune.git
   GIT_TAG f051f75a3e963130c2d1ad98f56868bfc6b2798d
-  GIT_SHALLOW 1
-  UPDATE_DISCONNECTED 1
-  BUILD_IN_SOURCE 1
-  CONFIGURE_COMMAND cmake --preset linux -DLUA_ROOT=build/rocks
-  BUILD_COMMAND cmake --build --preset linux
-  INSTALL_COMMAND cmake --install build/linux --prefix ${CMAKE_BINARY_DIR}/elune
 )
-
-ExternalProject_Add(
-  luarocks
-  URL https://luarocks.org/releases/luarocks-3.9.2.tar.gz
-  URL_HASH SHA1=116a4ce0bfe945045d9e6b28dedc270b2d7a3ebd
-  BUILD_IN_SOURCE 1
-  CONFIGURE_COMMAND ./configure --with-lua=${CMAKE_BINARY_DIR}/elune --prefix=${CMAKE_BINARY_DIR}/luarocks
-  BUILD_COMMAND make
-  INSTALL_COMMAND make install
-)
-add_dependencies(luarocks elune)
-
-add_library(ext MODULE wowless/ext.c)
-add_dependencies(ext elune)
-set_target_properties(ext PROPERTIES PREFIX "")
-target_include_directories(ext PRIVATE ${CMAKE_BINARY_DIR}/elune/include/lua5.1)
-
-ExternalProject_Add(
-  sqlite3
-  URL https://www.sqlite.org/2023/sqlite-autoconf-3410200.tar.gz
-  URL_HASH SHA3_256=1ebb5539dd6fde9a0f89e8ab765af0b9f02010fc6baf6985b54781a38c00020a
-  BUILD_IN_SOURCE 1
-  CONFIGURE_COMMAND ./configure --prefix=${CMAKE_BINARY_DIR}/sqlite3
-  BUILD_COMMAND make
-  INSTALL_COMMAND make install
-)
-
-ExternalProject_Add(
+FetchContent_Declare(
   expat
-  URL https://github.com/libexpat/libexpat/releases/download/R_2_5_0/expat-2.5.0.tar.gz
-  URL_HASH SHA1=061c1232188dff35e44aa7137aec7757d3d90d27
-  BUILD_IN_SOURCE 1
-  CONFIGURE_COMMAND autoreconf && ./configure --prefix=${CMAKE_BINARY_DIR}/expat
-  BUILD_COMMAND make
-  INSTALL_COMMAND make install
+  GIT_REPOSITORY https://github.com/libexpat/libexpat.git
+  GIT_TAG R_2_5_0
+  SOURCE_SUBDIR expat
 )
+FetchContent_Declare(
+  lsqlite3
+  URL http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip
+  URL_HASH MD5=57d7a8bf5ae15d22044ed64343a39d89
+)
+FetchContent_Declare(
+  luaexpat
+  GIT_REPOSITORY https://github.com/lunarmodules/luaexpat.git
+  GIT_TAG 1.4.1
+)
+FetchContent_Declare(
+  luafilesystem
+  GIT_REPOSITORY https://github.com/lunarmodules/luafilesystem.git
+  GIT_TAG v1_8_0
+)
+FetchContent_Declare(
+  lyaml
+  GIT_REPOSITORY https://github.com/gvvaughan/lyaml.git
+  GIT_TAG v6.2.8
+)
+FetchContent_Declare(
+  lzlib
+  GIT_REPOSITORY https://github.com/luadist/lzlib.git
+  GIT_TAG 0.4.3
+  SOURCE_SUBDIR foo
+)
+FetchContent_Declare(
+  sqlite3
+  URL https://www.sqlite.org/2023/sqlite-amalgamation-3410200.zip
+  URL_HASH SHA3_256=c51ca72411b8453c64e0980be23bc9b9530bdc3ec1513e06fbf022ed0fd02463
+)
+FetchContent_MakeAvailable(
+  elune
+  expat
+  lsqlite3
+  luaexpat
+  luafilesystem
+  lyaml
+  lzlib
+  sqlite3
+)
+
+add_library(
+  lyaml
+  ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
+)
+target_compile_definitions(lyaml PRIVATE VERSION="wowless")
+
+add_executable(
+  wowless
+  main.c
+  wowless/ext.c
+  ${lsqlite3_SOURCE_DIR}/lsqlite3.c
+  ${luaexpat_SOURCE_DIR}/src/lxplib.c
+  ${luafilesystem_SOURCE_DIR}/src/lfs.c
+  ${lzlib_SOURCE_DIR}/lzlib.c
+  ${sqlite3_SOURCE_DIR}/sqlite3.c
+)
+target_link_libraries(wowless expat liblua lyaml pthread yaml z)

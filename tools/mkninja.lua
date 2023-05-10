@@ -54,7 +54,7 @@ for _, p in ipairs(productList) do
   perProductAddonGeneratedFiles[p] = pp
 end
 
-local elune = 'build/cmake/elune/bin/lua5.1'
+local elune = 'build/cmake/wowless'
 
 local pools = {
   fetch_pool = 1,
@@ -62,15 +62,6 @@ local pools = {
 }
 
 local rules = {
-  cmake = {
-    command = table.concat({
-      'rm -rf build/cmake',
-      'cmake -B build/cmake -G Ninja',
-      'cmake --build build/cmake',
-      'touch $out',
-    }, ' && '),
-    pool = 'console',
-  },
   dbdata = {
     command = 'lua tools/sqlite.lua -f $product',
   },
@@ -97,20 +88,6 @@ local rules = {
   frame0 = {
     command = elune .. ' wowless.lua -p $product --frame0 > /dev/null',
     pool = 'run_pool',
-  },
-  luarocks = {
-    command = table.concat({
-      'rm -rf build/rocks',
-      table.concat({
-        'build/cmake/luarocks/bin/luarocks',
-        '--tree build/rocks build',
-        '--deps-only',
-        'EXPAT_DIR=$$PWD/build/cmake/expat',
-        'SQLITE_DIR=$$PWD/build/cmake/sqlite3',
-      }, ' '),
-      'touch $out',
-    }, ' && '),
-    pool = 'console',
   },
   mkaddon = {
     command = 'lua tools/gentest.lua -f $type -p $product',
@@ -170,6 +147,7 @@ local builds = {
   },
   {
     ins = {
+      'CMakeLists.txt',
       'tools/addons.yaml',
       'tools/mkninja.lua',
       'wowapi/yaml.lua',
@@ -178,23 +156,9 @@ local builds = {
     rule = 'mkninja',
   },
   {
-    ins = 'CMakeLists.txt',
-    outs = 'build/cmake.stamp',
-    rule = 'cmake',
-  },
-  {
     ins = {
-      'build/cmake.stamp',
-      'wowless-scm-0.rockspec',
-    },
-    outs = 'build/luarocks.stamp',
-    rule = 'luarocks',
-  },
-  {
-    ins = {
-      'build/cmake.stamp',
+      'build/cmake/wowless',
       'build/data/flavors.lua',
-      'build/luarocks.stamp',
       'build/wowless.stamp',
     },
     outs = 'build/runtime.stamp',
@@ -687,8 +651,17 @@ for _, b in ipairs(builds) do
   end
 end
 table.insert(out, 'default test.out')
+table.insert(out, 'subninja build/cmake/build.ninja')
 
 local f = io.open('build.ninja', 'w')
 f:write(table.concat(out, '\n'))
 f:write('\n')
 f:close()
+
+os.execute([[
+  cmake \
+  -B build/cmake \
+  -G Ninja \
+  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+  -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/cmake/ \
+]])
