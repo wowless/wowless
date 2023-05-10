@@ -2,12 +2,6 @@ cmake_minimum_required(VERSION 3.24)
 project(wowless)
 
 set(BUILD_SHARED_LIBS OFF)
-set(BUILD_LUA OFF)
-set(BUILD_LUAC OFF)
-set(EXPAT_BUILD_EXAMPLES OFF)
-set(EXPAT_BUILD_TESTS OFF)
-set(EXPAT_BUILD_TOOLS OFF)
-
 set(LUA_CPATH_CUSTOM ";" CACHE STRING "disable dynamic C Lua modules")
 
 add_compile_options(-D_GNU_SOURCE -DNDEBUG -flto -O3)
