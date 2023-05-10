@@ -97,6 +97,7 @@ local rules = {
   },
   mkninja = {
     command = 'lua tools/mkninja.lua',
+    pool = 'console',
   },
   mktactkeys = {
     command = 'lua tools/tactkeys.lua',
