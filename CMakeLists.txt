@@ -95,4 +95,5 @@ add_executable(
   ${lzlib_SOURCE_DIR}/lzlib.c
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
+target_include_directories(wowless PRIVATE ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR})
 target_link_libraries(wowless expat liblua lyaml pthread yaml zlibstatic)
