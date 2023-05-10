@@ -97,3 +97,8 @@ add_executable(
 )
 target_include_directories(wowless PRIVATE ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR})
 target_link_libraries(wowless expat liblua lyaml pthread yaml zlibstatic)
+
+if(EMSCRIPTEN)
+  target_link_options(wowless PRIVATE -sALLOW_MEMORY_GROWTH)
+  target_link_libraries(wowless nodefs.js noderawfs.js)
+endif()
