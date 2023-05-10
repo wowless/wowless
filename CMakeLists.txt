@@ -52,6 +52,16 @@ FetchContent_Declare(
   URL https://www.sqlite.org/2023/sqlite-amalgamation-3410200.zip
   URL_HASH SHA3_256=c51ca72411b8453c64e0980be23bc9b9530bdc3ec1513e06fbf022ed0fd02463
 )
+FetchContent_Declare(
+  yaml
+  GIT_REPOSITORY https://github.com/yaml/libyaml.git
+  GIT_TAG 0.2.5
+)
+FetchContent_Declare(
+  zlib
+  URL https://zlib.net/zlib-1.2.13.tar.gz
+  URL_HASH SHA256=b3a24de97a8fdbc835b9833169501030b8977031bcb54b3b3ac13740f846ab30
+)
 FetchContent_MakeAvailable(
   elune
   expat
@@ -61,6 +71,8 @@ FetchContent_MakeAvailable(
   lyaml
   lzlib
   sqlite3
+  yaml
+  zlib
 )
 
 add_library(
@@ -71,6 +83,7 @@ add_library(
   ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
 )
 target_compile_definitions(lyaml PRIVATE VERSION="wowless")
+target_link_libraries(lyaml liblua yaml)
 
 add_executable(
   wowless
@@ -82,4 +95,4 @@ add_executable(
   ${lzlib_SOURCE_DIR}/lzlib.c
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
-target_link_libraries(wowless expat liblua lyaml pthread yaml z)
+target_link_libraries(wowless expat liblua lyaml pthread yaml zlibstatic)
