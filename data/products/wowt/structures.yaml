@@ -8570,6 +8570,9 @@ TradeSkillRecipeInfo:
     alternateVerb:
       nilable: true
       type: string
+    alwaysUsesLowestQuality:
+      default: false
+      type: boolean
     canCreateMultiple:
       default: true
       type: boolean
