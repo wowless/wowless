@@ -1916,11 +1916,9 @@ C_EditMode.EditModeAnchorInfo:
     offsetY:
       type: number
     point:
-      stub: CENTER
-      type: string
+      type: FramePoint
     relativePoint:
-      stub: CENTER
-      type: string
+      type: FramePoint
     relativeTo:
       type: string
 C_EditMode.EditModeLayoutInfo:

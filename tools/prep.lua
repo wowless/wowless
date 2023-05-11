@@ -37,6 +37,7 @@ end
 local specDefault = (function()
   local defaultOutputs = {
     boolean = 'false',
+    FramePoint = 'CENTER', -- TODO move this
     ['function'] = 'function() end',
     ['nil'] = 'nil',
     number = '1',

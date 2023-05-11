@@ -126,3 +126,5 @@ do
   end
   processTocDir('Interface/AddOns/Blizzard_APIDocumentationGenerated')
 end
+processFile('Interface/FrameXML/UI.xsd')
+processFile('Interface/FrameXML/UI_Shared.xsd')

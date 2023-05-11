@@ -113,7 +113,7 @@ local types = {
   FileAsset = 'string',
   fileID = 'number',
   FilterMode = 'string',
-  FramePoint = 'string', -- hack, yes
+  FramePoint = 'FramePoint',
   FrameStrata = 'string',
   ['function'] = 'function',
   GarrisonFollower = 'string',
@@ -342,9 +342,6 @@ local function rewriteEvents()
 end
 
 local function rewriteStructures(outApis, outEvents)
-  local stubs = {
-    FramePoint = 'CENTER',
-  }
   local filename = ('data/products/%s/structures.yaml'):format(product)
   local structures = require('wowapi.yaml').parseFile(filename)
   for name, tab in pairs(tabs) do
@@ -356,7 +353,7 @@ local function rewriteStructures(outApis, outEvents)
           ret[f.Name] = {
             default = enum[f.Type] and enum[f.Type][f.Default] or f.Default,
             nilable = f.Nilable or nil,
-            stub = deref(structures, name, 'fields', f.Name, 'stub') or stubs[f.Type],
+            stub = deref(structures, name, 'fields', f.Name, 'stub'),
             type = t2nty(f, ns),
           }
         end
