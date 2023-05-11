@@ -1,16 +1,13 @@
 ---
 Actor:
-  fields:
-    scale:
-      init: 1
-      type: number
+  fields: {}
   inherits:
-    ParentedObject: {}
-    ScriptObject: {}
+    ParentedObjectBase: {}
+    RegionBase: {}
+    ScriptObjectBase: {}
   methods:
     ClearModel: {}
     GetActiveBoundingBox: {}
-    GetAlpha: {}
     GetAnimation: {}
     GetAnimationBlendOperation: {}
     GetAnimationVariation: {}
@@ -23,19 +20,11 @@ Actor:
     GetPitch: {}
     GetPosition: {}
     GetRoll: {}
-    GetScale:
-      fields:
-      - name: scale
-      status: getter
     GetSpellVisualKit: {}
     GetYaw: {}
-    Hide: {}
     IsLoaded: {}
-    IsShown: {}
     IsUsingCenterForOrigin: {}
-    IsVisible: {}
     PlayAnimationKit: {}
-    SetAlpha: {}
     SetAnimation: {}
     SetAnimationBlendOperation: {}
     SetDesaturation: {}
@@ -47,15 +36,9 @@ Actor:
     SetPitch: {}
     SetPosition: {}
     SetRoll: {}
-    SetScale:
-      fields:
-      - name: scale
-      status: setter
-    SetShown: {}
     SetSpellVisualKit: {}
     SetUseCenterForOrigin: {}
     SetYaw: {}
-    Show: {}
     StopAnimationKit: {}
   objectType: ModelSceneActor
 Alpha:
@@ -82,22 +65,19 @@ Animation:
     GetDuration: {}
     GetElapsed: {}
     GetEndDelay:
-      fields:
+      getter:
       - name: endDelay
-      status: getter
     GetOrder: {}
     GetProgress: {}
     GetRegionParent:
-      status: implemented
+      impl: Animation/GetRegionParent
     GetSmoothing:
-      fields:
+      getter:
       - name: smoothing
-      status: getter
     GetSmoothProgress: {}
     GetStartDelay:
-      fields:
+      getter:
       - name: startDelay
-      status: getter
     GetTarget: {}
     IsDelaying: {}
     IsDone: {}
@@ -110,33 +90,30 @@ Animation:
     SetChildKey: {}
     SetDuration: {}
     SetEndDelay:
-      fields:
+      setter:
       - name: endDelay
-      status: setter
     SetOrder: {}
     SetPlaying: {}
     SetSmoothing:
-      fields:
+      setter:
       - name: smoothing
-      status: setter
     SetSmoothProgress: {}
     SetStartDelay:
-      fields:
+      setter:
       - name: startDelay
-      status: setter
     SetTarget: {}
     SetTargetKey: {}
     Stop: {}
 AnimationGroup:
   inherits:
-    ParentedObject: {}
+    ParentedObjectBase: {}
     ScriptObject: {}
   methods:
     CreateAnimation:
-      status: implemented
+      impl: AnimationGroup/CreateAnimation
     Finish: {}
     GetAnimations:
-      status: implemented
+      impl: AnimationGroup/GetAnimations
     GetDuration: {}
     GetLooping: {}
     GetLoopState: {}
@@ -186,7 +163,7 @@ Button:
       type: texture
     fontstring:
       nilable: true
-      type: table
+      type: fontstring
     highlightTexture:
       nilable: true
       type: texture
@@ -215,52 +192,43 @@ Button:
     Frame: {}
   methods:
     Click:
-      status: implemented
+      impl: Button/Click
     Disable:
-      status: implemented
+      impl: Button/Disable
     Enable:
-      status: implemented
+      impl: Button/Enable
     GetButtonState:
-      fields:
+      getter:
       - name: buttonState
-      status: getter
     GetDisabledFontObject: {}
     GetDisabledTexture:
-      fields:
+      getter:
       - name: disabledTexture
-      status: getter
     GetFontString:
-      fields:
+      getter:
       - name: fontstring
-      status: getter
     GetHighlightFontObject: {}
     GetHighlightTexture:
-      fields:
+      getter:
       - name: highlightTexture
-      status: getter
     GetMotionScriptsWhileDisabled:
-      fields:
+      getter:
       - name: motionScriptsWhileDisabled
-      status: getter
     GetNormalFontObject:
-      fields:
+      getter:
       - name: normalFontObject
-      status: getter
     GetNormalTexture:
-      fields:
+      getter:
       - name: normalTexture
-      status: getter
     GetPushedTextOffset:
-      fields:
+      getter:
       - name: pushedTextOffsetX
       - name: pushedTextOffsetY
-      status: getter
     GetPushedTexture:
-      fields:
+      getter:
       - name: pushedTexture
-      status: getter
     GetText:
-      status: implemented
+      impl: Button/GetText
     GetTextHeight:
       outputs:
       - type: number
@@ -268,52 +236,49 @@ Button:
       outputs:
       - type: number
     IsEnabled:
-      status: implemented
+      impl: Button/IsEnabled
     LockHighlight: {}
     RegisterForClicks:
-      status: implemented
+      impl: Button/RegisterForClicks
     RegisterForMouse: {}
     SetButtonState:
-      status: implemented
+      impl: Button/SetButtonState
     SetDisabledAtlas:
-      status: implemented
+      impl: Button/SetDisabledAtlas
     SetDisabledFontObject: {}
     SetDisabledTexture:
-      status: implemented
+      impl: Button/SetDisabledTexture
     SetEnabled:
-      status: implemented
+      impl: Button/SetEnabled
     SetFontString:
-      status: implemented
+      impl: Button/SetFontString
     SetFormattedText:
-      status: implemented
+      impl: Button/SetFormattedText
     SetHighlightAtlas:
-      status: implemented
+      impl: Button/SetHighlightAtlas
     SetHighlightFontObject: {}
     SetHighlightTexture:
-      status: implemented
+      impl: Button/SetHighlightTexture
     SetMotionScriptsWhileDisabled:
-      fields:
+      setter:
       - name: motionScriptsWhileDisabled
-      status: setter
     SetNormalAtlas:
-      status: implemented
+      impl: Button/SetNormalAtlas
     SetNormalFontObject:
-      fields:
+      setter:
       - name: normalFontObject
-      status: setter
     SetNormalTexture:
-      status: implemented
+      impl: Button/SetNormalTexture
     SetPushedAtlas:
-      status: implemented
+      impl: Button/SetPushedAtlas
     SetPushedTextOffset:
-      fields:
+      setter:
       - name: pushedTextOffsetX
       - name: pushedTextOffsetY
-      status: setter
     SetPushedTexture:
-      status: implemented
+      impl: Button/SetPushedTexture
     SetText:
-      status: implemented
+      impl: Button/SetText
     UnlockHighlight: {}
 CheckButton:
   fields:
@@ -328,25 +293,21 @@ CheckButton:
     Button: {}
   methods:
     GetChecked:
-      fields:
+      getter:
       - name: checked
-      status: getter
     GetCheckedTexture:
-      fields:
+      getter:
       - name: checkedTexture
-      status: getter
     GetDisabledCheckedTexture:
-      fields:
+      getter:
       - name: disabledCheckedTexture
-      status: getter
     SetChecked:
-      status: implemented
+      impl: CheckButton/SetChecked
     SetCheckedTexture:
-      status: implemented
+      impl: CheckButton/SetCheckedTexture
     SetDisabledCheckedTexture:
-      fields:
+      setter:
       - name: disabledCheckedTexture
-      status: setter
 Checkout:
   inherits:
     Frame: {}
@@ -409,39 +370,31 @@ ColorSelect:
       - name: b
         type: number
     GetColorValueTexture:
-      fields:
+      getter:
       - name: colorValueTexture
-      status: getter
     GetColorValueThumbTexture:
-      fields:
+      getter:
       - name: colorValueThumbTexture
-      status: getter
     GetColorWheelTexture:
-      fields:
+      getter:
       - name: colorWheelTexture
-      status: getter
     GetColorWheelThumbTexture:
-      fields:
+      getter:
       - name: colorWheelThumbTexture
-      status: getter
     SetColorHSV: {}
     SetColorRGB: {}
     SetColorValueTexture:
-      fields:
+      setter:
       - name: colorValueTexture
-      status: setter
     SetColorValueThumbTexture:
-      fields:
+      setter:
       - name: colorValueThumbTexture
-      status: setter
     SetColorWheelTexture:
-      fields:
+      setter:
       - name: colorWheelTexture
-      status: setter
     SetColorWheelThumbTexture:
-      fields:
+      setter:
       - name: colorWheelThumbTexture
-      status: setter
 ControlPoint:
   inherits:
     ParentedObject: {}
@@ -475,9 +428,8 @@ Cooldown:
     Pause: {}
     Resume: {}
     SetBlingTexture:
-      fields:
+      setter:
       - name: blingTexture
-      status: setter
     SetCooldown: {}
     SetCooldownDuration: {}
     SetCooldownUNIX: {}
@@ -488,17 +440,15 @@ Cooldown:
     SetDrawSwipe: {}
     SetEdgeScale: {}
     SetEdgeTexture:
-      fields:
+      setter:
       - name: edgeTexture
-      status: setter
     SetHideCountdownNumbers: {}
     SetReverse: {}
     SetRotation: {}
     SetSwipeColor: {}
     SetSwipeTexture:
-      fields:
+      setter:
       - name: swipeTexture
-      status: setter
     SetUseCircularEdge: {}
 DressUpModel:
   inherits:
@@ -550,112 +500,94 @@ EditBox:
     ClearHighlightText: {}
     ClearHistory: {}
     Disable:
-      status: implemented
+      impl: EditBox/Disable
     Enable:
-      status: implemented
+      impl: EditBox/Enable
     GetAltArrowKeyMode: {}
     GetBlinkSpeed: {}
     GetCursorPosition: {}
     GetDisplayText: {}
     GetHighlightColor: {}
     GetHistoryLines:
-      fields:
+      getter:
       - name: historyLines
-      status: getter
     GetInputLanguage:
-      status: implemented
+      impl: EditBox/GetInputLanguage
     GetMaxBytes:
-      fields:
+      getter:
       - name: maxBytes
-      status: getter
     GetMaxLetters:
-      fields:
+      getter:
       - name: maxLetters
-      status: getter
     GetNumber:
       outputs:
       - type: number
     GetNumLetters: {}
     GetText:
-      fields:
+      getter:
       - name: editboxText
-      status: getter
     GetTextInsets: {}
     GetUTF8CursorPosition: {}
     GetVisibleTextByteLimit: {}
     HasFocus: {}
     HighlightText: {}
     Insert:
-      status: implemented
+      impl: EditBox/Insert
     IsAutoFocus:
-      fields:
+      getter:
       - name: isAutoFocus
-      status: getter
     IsCountInvisibleLetters:
-      fields:
+      getter:
       - name: isCountInvisibleLetters
-      status: getter
     IsEnabled:
-      fields:
+      getter:
       - name: enabled
-      status: getter
     IsInIMECompositionMode: {}
     IsMultiLine:
-      fields:
+      getter:
       - name: isMultiLine
-      status: getter
     IsNumeric: {}
     IsPassword: {}
     IsSecureText:
-      fields:
+      getter:
       - name: isSecureText
-      status: getter
     SetAltArrowKeyMode: {}
     SetAutoFocus:
-      fields:
+      setter:
       - name: isAutoFocus
-      status: setter
     SetBlinkSpeed: {}
     SetCountInvisibleLetters:
-      fields:
+      setter:
       - name: isCountInvisibleLetters
-      status: setter
     SetCursorPosition: {}
     SetEnabled:
-      fields:
+      setter:
       - name: enabled
-      status: setter
     SetFocus: {}
     SetHighlightColor: {}
     SetHistoryLines:
-      fields:
+      setter:
       - name: historyLines
-      status: setter
     SetMaxBytes:
-      fields:
+      setter:
       - name: maxBytes
-      status: setter
     SetMaxLetters:
-      fields:
+      setter:
       - name: maxLetters
-      status: setter
     SetMultiLine:
-      fields:
+      setter:
       - name: isMultiLine
-      status: setter
     SetNumber: {}
     SetNumeric: {}
     SetPassword: {}
     SetSecureText:
-      fields:
+      setter:
       - name: isSecureText
-      status: setter
     SetSecurityDisablePaste: {}
     SetSecurityDisableSetText: {}
     SetText:
-      fields:
+      setter:
       - name: editboxText
-      status: setter
     SetTextInsets: {}
     SetVisibleTextByteLimit: {}
     ToggleInputLanguage: {}
@@ -678,9 +610,9 @@ FontInstance:
   inherits: {}
   methods:
     GetFont:
-      status: implemented
+      impl: FontInstance/GetFont
     GetFontObject:
-      status: implemented
+      impl: FontInstance/GetFontObject
     GetIndentedWordWrap: {}
     GetJustifyH: {}
     GetJustifyV: {}
@@ -734,9 +666,8 @@ FontString:
       outputs:
       - type: number
     GetMaxLines:
-      fields:
+      getter:
       - name: maxLines
-      status: getter
     GetNumLines:
       outputs:
       - type: number
@@ -747,13 +678,11 @@ FontString:
       outputs:
       - type: number
     GetText:
-      fields:
+      getter:
       - name: text
-      status: getter
     GetTextScale:
-      fields:
+      getter:
       - name: textScale
-      status: getter
     GetUnboundedStringWidth:
       outputs:
       - type: number
@@ -765,17 +694,15 @@ FontString:
     SetFixedColor: {}
     SetFormattedText: {}
     SetMaxLines:
-      fields:
+      setter:
       - name: maxLines
-      status: setter
     SetNonSpaceWrap: {}
     SetText:
-      status: implemented
+      impl: FontString/SetText
     SetTextHeight: {}
     SetTextScale:
-      fields:
+      setter:
       - name: textScale
-      status: setter
     SetWordWrap: {}
 ForbiddenMixin:
   fields:
@@ -785,11 +712,10 @@ ForbiddenMixin:
   inherits: {}
   methods:
     IsForbidden:
-      fields:
+      getter:
       - name: forbidden
-      status: getter
     SetForbidden:
-      status: implemented
+      impl: ForbiddenMixin/SetForbidden
   virtual: true
 Frame:
   fields:
@@ -847,13 +773,13 @@ Frame:
   methods:
     CanChangeAttribute: {}
     CreateFontString:
-      status: implemented
+      impl: Frame/CreateFontString
     CreateLine:
-      status: implemented
+      impl: Frame/CreateLine
     CreateMaskTexture:
-      status: implemented
+      impl: Frame/CreateMaskTexture
     CreateTexture:
-      status: implemented
+      impl: Frame/CreateTexture
     DesaturateHierarchy: {}
     DisableDrawLayer: {}
     DoesClipChildren: {}
@@ -863,175 +789,148 @@ Frame:
     EnableKeyboard: {}
     ExecuteAttribute: {}
     GetAttribute:
-      status: implemented
+      impl: Frame/GetAttribute
     GetBoundsRect: {}
     GetChildren:
-      status: implemented
+      impl: Frame/GetChildren
     GetClampRectInsets: {}
     GetDepth: {}
     GetDontSavePosition: {}
     GetEffectiveAlpha:
-      status: implemented
+      impl: Frame/GetEffectiveAlpha
     GetEffectiveDepth: {}
     GetEffectivelyFlattensRenderLayers: {}
     GetFlattensRenderLayers: {}
     GetFrameLevel:
-      fields:
+      getter:
       - name: frameLevel
-      status: getter
     GetFrameStrata:
-      fields:
+      getter:
       - name: frameStrata
-      status: getter
     GetHitRectInsets: {}
     GetHyperlinksEnabled:
-      fields:
+      getter:
       - name: hyperlinksEnabled
-      status: getter
     GetID:
-      fields:
+      getter:
       - name: id
-      status: getter
     GetMaxResize:
-      fields:
+      getter:
       - name: maxResizeWidth
       - name: maxResizeHeight
-      status: getter
     GetMinResize:
-      fields:
+      getter:
       - name: minResizeWidth
       - name: minResizeHeight
-      status: getter
     GetNumChildren:
-      status: implemented
+      impl: Frame/GetNumChildren
     GetNumRegions:
-      status: implemented
+      impl: Frame/GetNumRegions
     GetPropagateKeyboardInput:
-      fields:
+      getter:
       - name: propagateKeyboardInput
-      status: getter
     GetRegions:
-      status: implemented
+      impl: Frame/GetRegions
     HasFixedFrameLevel:
-      fields:
+      getter:
       - name: hasFixedFrameLevel
-      status: getter
     HasFixedFrameStrata:
-      fields:
+      getter:
       - name: hasFixedFrameStrata
-      status: getter
     IgnoreDepth: {}
     IsClampedToScreen:
-      fields:
+      getter:
       - name: isClampedToScreen
-      status: getter
     IsEventRegistered:
-      status: implemented
+      impl: Frame/IsEventRegistered
     IsGamePadButtonEnabled: {}
     IsGamePadStickEnabled: {}
     IsIgnoringDepth: {}
     IsKeyboardEnabled: {}
     IsMovable:
-      fields:
+      getter:
       - name: movable
-      status: getter
     IsResizable:
-      fields:
+      getter:
       - name: resizable
-      status: getter
     IsToplevel:
-      fields:
+      getter:
       - name: toplevel
-      status: getter
     IsUserPlaced:
-      fields:
+      getter:
       - name: isUserPlaced
-      status: getter
     Lower: {}
     Raise: {}
     RegisterAllEvents:
-      status: implemented
+      impl: Frame/RegisterAllEvents
     RegisterEvent:
-      status: implemented
+      impl: Frame/RegisterEvent
     RegisterForDrag: {}
     RegisterUnitEvent:
-      status: implemented
+      impl: Frame/RegisterUnitEvent
     RotateTextures: {}
     SetAttribute:
-      status: implemented
+      impl: Frame/SetAttribute
     SetAttributeNoHandler:
-      status: implemented
+      impl: Frame/SetAttributeNoHandler
     SetClampedToScreen:
-      fields:
+      setter:
       - name: isClampedToScreen
-      status: setter
     SetClampRectInsets: {}
     SetClipsChildren: {}
     SetDepth: {}
     SetDontSavePosition: {}
     SetDrawLayerEnabled: {}
     SetFixedFrameLevel:
-      fields:
+      setter:
       - name: hasFixedFrameLevel
-      status: setter
     SetFixedFrameStrata:
-      fields:
+      setter:
       - name: hasFixedFrameStrata
-      status: setter
     SetFlattensRenderLayers: {}
     SetFrameBuffer: {}
     SetFrameLevel:
-      status: implemented
+      impl: Frame/SetFrameLevel
     SetFrameStrata:
-      fields:
+      setter:
       - name: frameStrata
-      status: setter
     SetHitRectInsets: {}
     SetHyperlinksEnabled:
-      fields:
+      setter:
       - name: hyperlinksEnabled
-      status: setter
     SetID:
-      fields:
+      setter:
       - name: id
-      status: setter
     SetMaxResize:
-      fields:
+      setter:
       - name: maxResizeWidth
       - name: maxResizeHeight
-      status: setter
     SetMinResize:
-      fields:
+      setter:
       - name: minResizeWidth
       - name: minResizeHeight
-      status: setter
     SetMovable:
-      fields:
+      setter:
       - name: movable
-      status: setter
     SetPropagateKeyboardInput:
-      fields:
+      setter:
       - name: propagateKeyboardInput
-      status: setter
     SetResizable:
-      fields:
+      setter:
       - name: resizable
-      status: setter
     SetToplevel:
-      fields:
+      setter:
       - name: toplevel
-      status: setter
     SetUserPlaced:
-      fields:
+      setter:
       - name: isUserPlaced
-      status: setter
     StartMoving: {}
     StartSizing: {}
     StopMovingOrSizing: {}
     UnregisterAllEvents:
-      status: implemented
+      impl: Frame/UnregisterAllEvents
     UnregisterEvent:
-      status: implemented
+      impl: Frame/UnregisterEvent
 GameTooltip:
   fields:
     tooltipAnchorType:
@@ -1042,7 +941,7 @@ GameTooltip:
       type: number
     tooltipOwner:
       nilable: true
-      type: table
+      type: frame
   inherits:
     Frame: {}
   methods:
@@ -1057,28 +956,25 @@ GameTooltip:
     CopyTooltip: {}
     FadeOut: {}
     GetAnchorType:
-      fields:
+      getter:
       - name: tooltipAnchorType
-      status: getter
     GetItem: {}
     GetMinimumWidth:
       outputs:
       - type: number
     GetOwner:
-      fields:
+      getter:
       - name: tooltipOwner
-      status: getter
     GetPadding: {}
     GetSpell: {}
     GetUnit: {}
     IsEquippedItem: {}
     IsOwned:
-      status: implemented
+      impl: GameTooltip/IsOwned
     IsUnit: {}
     NumLines:
-      fields:
+      getter:
       - name: tooltipLines
-      status: getter
     ResetSecondaryCompareItem: {}
     SetAction: {}
     SetAnchorType: {}
@@ -1105,7 +1001,7 @@ GameTooltip:
     SetMerchantItem: {}
     SetMinimumWidth: {}
     SetOwner:
-      status: implemented
+      impl: GameTooltip/SetOwner
     SetPadding: {}
     SetPetAction: {}
     SetPossession: {}
@@ -1155,18 +1051,16 @@ LayeredRegion:
     Region: {}
   methods:
     GetDrawLayer:
-      fields:
+      getter:
       - name: layer
       - name: sublevel
-      status: getter
     SetDrawLayer:
-      fields:
+      setter:
       - name: layer
       - name: sublevel
         nilable: true
-      status: setter
     SetVertexColor:
-      status: implemented
+      impl: LayeredRegion/SetVertexColor
   virtual: true
 Line:
   fields:
@@ -1174,20 +1068,18 @@ Line:
       init: 1
       type: number
   inherits:
-    Texture: {}
+    TextureBase: {}
   methods:
     GetEndPoint: {}
     GetStartPoint: {}
     GetThickness:
-      fields:
+      getter:
       - name: thickness
-      status: getter
     SetEndPoint: {}
     SetStartPoint: {}
     SetThickness:
-      fields:
+      setter:
       - name: thickness
-      status: setter
 LineScale:
   inherits:
     Scale: {}
@@ -1198,7 +1090,7 @@ LineTranslation:
   methods: {}
 MaskTexture:
   inherits:
-    Texture: {}
+    TextureBase: {}
   methods: {}
 MessageFrame:
   inherits:
@@ -1206,7 +1098,7 @@ MessageFrame:
     Frame: {}
   methods:
     AddMessage:
-      status: implemented
+      impl: MessageFrame/AddMessage
     Clear: {}
     GetFadeDuration: {}
     GetFadePower: {}
@@ -1268,9 +1160,8 @@ Model:
     GetModelDrawLayer: {}
     GetModelFileID: {}
     GetModelScale:
-      fields:
+      getter:
       - name: modelScale
-      status: getter
     GetPaused: {}
     GetPitch: {}
     GetPosition: {}
@@ -1302,9 +1193,8 @@ Model:
     SetModelAlpha: {}
     SetModelDrawLayer: {}
     SetModelScale:
-      fields:
+      setter:
       - name: modelScale
-      status: setter
     SetParticlesEnabled: {}
     SetPaused: {}
     SetPitch: {}
@@ -1317,7 +1207,7 @@ Model:
     SetViewInsets: {}
     SetViewTranslation: {}
     TransformCameraSpaceToModelSpace:
-      status: implemented
+      impl: Model/TransformCameraSpaceToModelSpace
     UseModelCenterToTransform: {}
 ModelScene:
   inherits:
@@ -1325,7 +1215,7 @@ ModelScene:
   methods:
     ClearFog: {}
     CreateActor:
-      status: implemented
+      impl: ModelScene/CreateActor
     GetActorAtIndex: {}
     GetCameraFarClip: {}
     GetCameraFieldOfView: {}
@@ -1394,33 +1284,27 @@ MouseMixin:
   inherits: {}
   methods:
     EnableMouse:
-      status: implemented
+      impl: MouseMixin/EnableMouse
     EnableMouseWheel:
-      fields:
+      setter:
       - name: mouseWheelEnabled
-      status: setter
     IsMouseClickEnabled:
-      fields:
+      getter:
       - name: mouseClickEnabled
-      status: getter
     IsMouseEnabled:
-      status: implemented
+      impl: MouseMixin/IsMouseEnabled
     IsMouseMotionEnabled:
-      fields:
+      getter:
       - name: mouseMotionEnabled
-      status: getter
     IsMouseWheelEnabled:
-      fields:
+      getter:
       - name: mouseWheelEnabled
-      status: getter
     SetMouseClickEnabled:
-      fields:
+      setter:
       - name: mouseClickEnabled
-      status: setter
     SetMouseMotionEnabled:
-      fields:
+      setter:
       - name: mouseMotionEnabled
-      status: setter
   virtual: true
 MovieFrame:
   inherits:
@@ -1441,31 +1325,35 @@ OffScreenFrame:
     TakeSnapshot: {}
     UsesNPOT: {}
 ParentedObject:
+  inherits:
+    ParentedObjectBase: {}
+  methods:
+    SetParent:
+      impl: ParentedObject/SetParent
+  virtual: true
+ParentedObjectBase:
   fields:
     children:
       type: hlist
     parent:
       nilable: true
-      type: table
+      type: uiobject
   inherits:
     ForbiddenMixin: {}
     UIObject: {}
   methods:
     GetDebugName:
-      status: implemented
+      impl: ParentedObject/GetDebugName
     GetParent:
-      fields:
+      getter:
       - name: parent
-      status: getter
-    SetParent:
-      status: implemented
   virtual: true
 Path:
   inherits:
     Animation: {}
   methods:
     CreateControlPoint:
-      status: implemented
+      impl: Path/CreateControlPoint
     GetControlPoints: {}
     GetCurve: {}
     GetMaxOrder: {}
@@ -1500,9 +1388,6 @@ PlayerModel:
     StopAnimKit: {}
 Region:
   fields:
-    alpha:
-      init: 1
-      type: number
     animationGroups:
       init: {}
       type: table
@@ -1527,136 +1412,129 @@ Region:
     points:
       init: {}
       type: table
+    width:
+      init: 0
+      type: number
+  inherits:
+    ParentedObject: {}
+    RegionBase: {}
+  methods:
+    AdjustPointsOffset: {}
+    CanChangeProtectedState: {}
+    ClearAllPoints:
+      impl: Region/ClearAllPoints
+    ClearPointByName: {}
+    ClearPointsOffset: {}
+    CreateAnimationGroup:
+      impl: Region/CreateAnimationGroup
+    GetAnimationGroups:
+      impl: Region/GetAnimationGroups
+    GetBottom:
+      getter:
+      - name: bottom
+    GetCenter:
+      impl: Region/GetCenter
+    GetEffectiveScale:
+      impl: Region/GetEffectiveScale
+    GetHeight:
+      getter:
+      - name: height
+    GetLeft:
+      getter:
+      - name: left
+    GetNumPoints:
+      impl: Region/GetNumPoints
+    GetPoint:
+      impl: Region/GetPoint
+    GetPointByName: {}
+    GetRect:
+      getter:
+      - name: bottom
+      - name: left
+      - name: width
+      - name: height
+    GetRight:
+      impl: Region/GetRight
+    GetScaledRect:
+      impl: Region/GetScaledRect
+    GetSize:
+      getter:
+      - name: width
+      - name: height
+    GetTop:
+      impl: Region/GetTop
+    GetWidth:
+      getter:
+      - name: width
+    IsAnchoringRestricted: {}
+    IsDragging: {}
+    IsIgnoringParentAlpha:
+      getter:
+      - name: isIgnoringParentAlpha
+    IsIgnoringParentScale:
+      getter:
+      - name: isIgnoringParentScale
+    IsMouseOver: {}
+    IsObjectLoaded: {}
+    IsProtected:
+      impl: Region/IsProtected
+    IsRectValid: {}
+    SetAllPoints:
+      impl: Region/SetAllPoints
+    SetHeight:
+      setter:
+      - name: height
+    SetIgnoreParentAlpha:
+      setter:
+      - name: isIgnoringParentAlpha
+    SetIgnoreParentScale:
+      setter:
+      - name: isIgnoringParentScale
+    SetPoint:
+      impl: Region/SetPoint
+    SetSize:
+      setter:
+      - name: width
+      - name: height
+    SetWidth:
+      setter:
+      - name: width
+    StopAnimating: {}
+  virtual: true
+RegionBase:
+  fields:
+    alpha:
+      init: 1
+      type: number
     scale:
       init: 1
       type: number
     shown:
       init: true
       type: boolean
-    width:
-      init: 0
-      type: number
-  inherits:
-    ParentedObject: {}
+  inherits: {}
   methods:
-    AdjustPointsOffset: {}
-    CanChangeProtectedState: {}
-    ClearAllPoints:
-      status: implemented
-    ClearPointByName: {}
-    ClearPointsOffset: {}
-    CreateAnimationGroup:
-      status: implemented
     GetAlpha:
-      fields:
+      getter:
       - name: alpha
-      status: getter
-    GetAnimationGroups:
-      status: implemented
-    GetBottom:
-      fields:
-      - name: bottom
-      status: getter
-    GetCenter:
-      status: implemented
-    GetEffectiveScale:
-      status: implemented
-    GetHeight:
-      fields:
-      - name: height
-      status: getter
-    GetLeft:
-      fields:
-      - name: left
-      status: getter
-    GetNumPoints:
-      status: implemented
-    GetPoint:
-      status: implemented
-    GetPointByName: {}
-    GetRect:
-      fields:
-      - name: bottom
-      - name: left
-      - name: width
-      - name: height
-      status: getter
-    GetRight:
-      status: implemented
     GetScale:
-      fields:
+      getter:
       - name: scale
-      status: getter
-    GetScaledRect:
-      status: implemented
-    GetSize:
-      fields:
-      - name: width
-      - name: height
-      status: getter
-    GetTop:
-      status: implemented
-    GetWidth:
-      fields:
-      - name: width
-      status: getter
     Hide:
-      status: implemented
-    IsAnchoringRestricted: {}
-    IsDragging: {}
-    IsIgnoringParentAlpha:
-      fields:
-      - name: isIgnoringParentAlpha
-      status: getter
-    IsIgnoringParentScale:
-      fields:
-      - name: isIgnoringParentScale
-      status: getter
-    IsMouseOver: {}
-    IsObjectLoaded: {}
-    IsProtected:
-      status: implemented
-    IsRectValid: {}
+      impl: Region/Hide
     IsShown:
-      fields:
+      getter:
       - name: shown
-      status: getter
     IsVisible:
-      status: implemented
-    SetAllPoints:
-      status: implemented
+      impl: Region/IsVisible
     SetAlpha:
-      status: implemented
-    SetHeight:
-      fields:
-      - name: height
-      status: setter
-    SetIgnoreParentAlpha:
-      fields:
-      - name: isIgnoringParentAlpha
-      status: setter
-    SetIgnoreParentScale:
-      fields:
-      - name: isIgnoringParentScale
-      status: setter
-    SetPoint:
-      status: implemented
+      impl: Region/SetAlpha
     SetScale:
-      status: implemented
+      impl: Region/SetScale
     SetShown:
-      status: implemented
-    SetSize:
-      fields:
-      - name: width
-      - name: height
-      status: setter
-    SetWidth:
-      fields:
-      - name: width
-      status: setter
+      impl: Region/SetShown
     Show:
-      status: implemented
-    StopAnimating: {}
+      impl: Region/Show
   virtual: true
 Rotation:
   inherits:
@@ -1681,6 +1559,19 @@ Scale:
     SetScale: {}
     SetToScale: {}
 ScriptObject:
+  inherits:
+    ScriptObjectBase: {}
+  methods:
+    GetScript:
+      impl: ScriptObject/GetScript
+    HasScript:
+      impl: ScriptObject/HasScript
+    HookScript:
+      impl: ScriptObject/HookScript
+    SetScript:
+      impl: ScriptObject/SetScript
+  virtual: true
+ScriptObjectBase:
   fields:
     scripts:
       init:
@@ -1689,15 +1580,7 @@ ScriptObject:
         2: {}
       type: table
   inherits: {}
-  methods:
-    GetScript:
-      status: implemented
-    HasScript:
-      status: implemented
-    HookScript:
-      status: implemented
-    SetScript:
-      status: implemented
+  methods: {}
   virtual: true
 ScrollFrame:
   fields:
@@ -1714,9 +1597,8 @@ ScrollFrame:
       outputs:
       - type: number
     GetScrollChild:
-      fields:
+      getter:
       - name: scrollChild
-      status: getter
     GetVerticalScroll:
       outputs:
       - type: number
@@ -1725,7 +1607,7 @@ ScrollFrame:
       - type: number
     SetHorizontalScroll: {}
     SetScrollChild:
-      status: implemented
+      impl: ScrollFrame/SetScrollChild
     SetVerticalScroll: {}
     UpdateScrollChildRect: {}
 SimpleHTML:
@@ -1761,45 +1643,39 @@ Slider:
     Frame: {}
   methods:
     Disable:
-      status: implemented
+      impl: Slider/Disable
     Enable:
-      status: implemented
+      impl: Slider/Enable
     GetMinMaxValues:
-      fields:
+      getter:
       - name: min
       - name: max
-      status: getter
     GetObeyStepOnDrag: {}
     GetOrientation: {}
     GetStepsPerPage: {}
     GetThumbTexture:
-      fields:
+      getter:
       - name: thumbTexture
-      status: getter
     GetValue:
-      fields:
+      getter:
       - name: value
-      status: getter
     GetValueStep: {}
     IsDraggingThumb: {}
     IsEnabled: {}
     SetEnabled: {}
     SetMinMaxValues:
-      fields:
+      setter:
       - name: min
       - name: max
-      status: setter
     SetObeyStepOnDrag: {}
     SetOrientation: {}
     SetStepsPerPage: {}
     SetThumbTexture:
-      fields:
+      setter:
       - name: thumbTexture
-      status: setter
     SetValue:
-      fields:
+      setter:
       - name: value
-      status: setter
     SetValueStep: {}
 StatusBar:
   fields:
@@ -1819,42 +1695,37 @@ StatusBar:
   methods:
     GetFillStyle: {}
     GetMinMaxValues:
-      fields:
+      getter:
       - name: min
       - name: max
-      status: getter
     GetOrientation: {}
     GetReverseFill: {}
     GetRotatesTexture: {}
     GetStatusBarAtlas: {}
     GetStatusBarColor:
-      status: implemented
+      impl: StatusBar/GetStatusBarColor
     GetStatusBarTexture:
-      fields:
+      getter:
       - name: statusBarTexture
-      status: getter
     GetValue:
-      fields:
+      getter:
       - name: value
-      status: getter
     SetFillStyle: {}
     SetMinMaxValues:
-      fields:
+      setter:
       - name: min
       - name: max
-      status: setter
     SetOrientation: {}
     SetReverseFill: {}
     SetRotatesTexture: {}
     SetStatusBarAtlas: {}
     SetStatusBarColor:
-      status: implemented
+      impl: StatusBar/SetStatusBarColor
     SetStatusBarTexture:
-      status: implemented
+      impl: StatusBar/SetStatusBarTexture
     SetValue:
-      fields:
+      setter:
       - name: value
-      status: setter
 TabardModel:
   inherits:
     PlayerModel: {}
@@ -1870,6 +1741,14 @@ TabardModel:
     InitializeTabardColors: {}
     Save: {}
 Texture:
+  inherits:
+    TextureBase: {}
+  methods:
+    AddMaskTexture: {}
+    GetMaskTexture: {}
+    GetNumMaskTextures: {}
+    RemoveMaskTexture: {}
+TextureBase:
   fields:
     blendMode:
       init: BLEND
@@ -1925,23 +1804,18 @@ Texture:
   inherits:
     LayeredRegion: {}
   methods:
-    AddMaskTexture: {}
     GetAtlas: {}
     GetBlendMode:
-      fields:
+      getter:
       - name: blendMode
-      status: getter
     GetDesaturation: {}
     GetHorizTile:
-      fields:
+      getter:
       - name: horizTile
-      status: getter
-    GetMaskTexture: {}
     GetNonBlocking: {}
-    GetNumMaskTextures: {}
     GetRotation: {}
     GetTexCoord:
-      fields:
+      getter:
       - name: tlx
       - name: tly
       - name: blx
@@ -1950,60 +1824,53 @@ Texture:
       - name: try
       - name: brx
       - name: bry
-      status: getter
     GetTexelSnappingBias: {}
     GetTexture:
-      status: implemented
+      impl: Texture/GetTexture
     GetTextureFileID: {}
     GetTextureFilePath: {}
     GetVertexColor:
-      fields:
+      getter:
       - name: vertexColorR
       - name: vertexColorG
       - name: vertexColorB
       - name: vertexColorA
-      status: getter
     GetVertexOffset: {}
     GetVertTile:
-      fields:
+      getter:
       - name: vertTile
-      status: getter
     IsDesaturated: {}
     IsSnappingToPixelGrid: {}
-    RemoveMaskTexture: {}
     SetAtlas:
-      status: implemented
+      impl: Texture/SetAtlas
     SetBlendMode:
-      fields:
+      setter:
       - name: blendMode
-      status: setter
     SetColorTexture:
-      status: implemented
+      impl: Texture/SetColorTexture
     SetDesaturated: {}
     SetDesaturation: {}
     SetGradient: {}
     SetGradientAlpha: {}
     SetHorizTile:
-      fields:
+      setter:
       - name: horizTile
-      status: setter
     SetMask:
-      fields:
+      setter:
       - name: maskName
-      status: setter
     SetNonBlocking: {}
     SetRotation: {}
     SetSnapToPixelGrid: {}
     SetTexCoord:
-      status: implemented
+      impl: Texture/SetTexCoord
     SetTexelSnappingBias: {}
     SetTexture:
-      status: implemented
+      impl: Texture/SetTexture
     SetVertexOffset: {}
     SetVertTile:
-      fields:
+      setter:
       - name: vertTile
-      status: setter
+  virtual: true
 TextureCoordTranslation:
   inherits:
     Animation: {}
@@ -2021,13 +1888,12 @@ UIObject:
   inherits: {}
   methods:
     GetName:
-      fields:
+      getter:
       - name: name
-      status: getter
     GetObjectType:
-      status: implemented
+      impl: UIObject/GetObjectType
     IsObjectType:
-      status: implemented
+      impl: UIObject/IsObjectType
   virtual: true
 UnitPositionFrame:
   inherits:

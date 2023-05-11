@@ -11,9 +11,9 @@ repos:
   hooks:
   - id: editorconfig-checker
 - repo: https://github.com/JohnnyMorganz/StyLua
-  rev: v0.12.1
+  rev: v0.17.0
   hooks:
-  - id: stylua-system
+  - id: stylua-github
 - repo: https://github.com/Lucas-C/pre-commit-hooks
   rev: v1.1.13
   hooks:
@@ -31,6 +31,12 @@ repos:
     - --shell=bash
 - repo: local
   hooks:
+  - id: yamlfmt
+    name: wowless yamlfmt
+    entry: lua tools/yamlfmt.lua
+    language: system
+    types: [yaml]
+    files: ^data/
   - id: luacheck
     name: luacheck
     entry: luacheck
@@ -43,7 +49,7 @@ repos:
     files: ^addon/
   - id: local-test
     name: build and test
-    entry: sh -c "lua tools/mkninja.lua && ninja"
+    entry: sh -c "lua tools/mkninja.lua && ninja -v"
     language: system
     pass_filenames: false
 - repo: meta

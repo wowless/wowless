@@ -9,7 +9,18 @@ local function writeifchanged(f, c)
   end
 end
 
+local function writedeps(f, deps)
+  local t = { f, ':' }
+  for dep in require('pl.tablex').sort(deps) do
+    table.insert(t, ' \\\n ')
+    table.insert(t, dep)
+  end
+  table.insert(t, '\n\n')
+  require('pl.file').write(f .. '.d', table.concat(t))
+end
+
 return {
   returntable = returntable,
+  writedeps = writedeps,
   writeifchanged = writeifchanged,
 }

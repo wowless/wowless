@@ -1,6 +1,8 @@
 local extLoaders = {
   sql = require('pl.file').read,
-  yaml = require('wowapi.yaml').parseFile,
+  yaml = function(f)
+    return require('build/' .. f:sub(1, -6))
+  end,
 }
 
 local function loaddir(dir, ext)
@@ -51,6 +53,7 @@ local fns = {
   sqllookup = loaddir('sql/lookup', 'sql'),
   state = loaddir('state', 'yaml'),
   structures = perproduct('structures'),
+  uiobjectimpl = global('uiobjectimpl'),
   uiobjects = perproduct('uiobjects'),
   xml = perproduct('xml'),
 }

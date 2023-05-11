@@ -1,16 +1,11 @@
 {
     "configurations": [
         {
-            "name": "Linux",
+            "name": "default",
             "includePath": [
                 "${workspaceFolder}/**"
             ],
-            "defines": [],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "gnu17",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "linux-gcc-arm64",
-            "compileCommands": "${workspaceFolder}/vendor/elune/build/linux/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/build/cmake/compile_commands.json"
         }
     ],
     "version": 4

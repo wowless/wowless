@@ -2167,8 +2167,10 @@ Enum:
     MinValue: 0
     NumValues: 23
   ExcludedCensorSources:
+    All: 255
     Friends: 1
     Guild: 2
+    None: 0
     Reserve1: 4
     Reserve2: 8
     Reserve3: 16
@@ -2176,9 +2178,9 @@ Enum:
     Reserve5: 64
     Reserve6: 128
   ExcludedCensorSourcesMeta:
-    MaxValue: 128
-    MinValue: 1
-    NumValues: 8
+    MaxValue: 255
+    MinValue: 0
+    NumValues: 10
   ExpansionLandingPageType:
     Dragonflight: 1
     None: 0
@@ -2345,11 +2347,11 @@ Enum:
     MinValue: 0
     NumValues: 7
   GarrisonFollowerType:
-    FollowerType_6_0: 1
-    FollowerType_6_2: 2
-    FollowerType_7_0: 4
-    FollowerType_8_0: 22
-    FollowerType_9_0: 123
+    FollowerType_6_0_Boat: 2
+    FollowerType_6_0_GarrisonFollower: 1
+    FollowerType_7_0_GarrisonFollower: 4
+    FollowerType_8_0_GarrisonFollower: 22
+    FollowerType_9_0_GarrisonFollower: 123
   GarrisonFollowerTypeMeta:
     MaxValue: 123
     MinValue: 1
@@ -2370,9 +2372,13 @@ Enum:
     NumValues: 9
   GarrisonType:
     Type_6_0: 2
+    Type_6_0_Garrison: 2
     Type_7_0: 3
+    Type_7_0_Garrison: 3
     Type_8_0: 9
+    Type_8_0_Garrison: 9
     Type_9_0: 111
+    Type_9_0_Garrison: 111
   GarrisonTypeMeta:
     MaxValue: 111
     MinValue: 2
@@ -4627,6 +4633,20 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  TimeEventFlag:
+    GlueScreenShortcut: 1
+  TimeEventFlagMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
+  TitleIconVersion:
+    Large: 2
+    Medium: 1
+    Small: 0
+  TitleIconVersionMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   TooltipComparisonMethod:
     Single: 0
     WithBagMainHandItem: 2
@@ -4943,10 +4963,11 @@ Enum:
     NumValues: 3
   TraitSystemFlag:
     AllowMultipleLoadoutsPerTree: 1
+    ShowSpendConfirmation: 2
   TraitSystemFlagMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 1
-    NumValues: 1
+    NumValues: 2
   TraitTreeFlag:
     CannotRefund: 1
     HideSingleRankNumbers: 2
@@ -7104,9 +7125,6 @@ LE_TRANSMOG_SET_FILTER_COLLECTED: 1
 LE_TRANSMOG_SET_FILTER_PVE: 3
 LE_TRANSMOG_SET_FILTER_PVP: 4
 LE_TRANSMOG_SET_FILTER_UNCOLLECTED: 2
-LE_TWITTER_RESULT_FAIL: 3
-LE_TWITTER_RESULT_NOT_LINKED: 2
-LE_TWITTER_RESULT_SUCCESS: 1
 LE_UNIT_STAT_AGILITY: 2
 LE_UNIT_STAT_INTELLECT: 4
 LE_UNIT_STAT_STAMINA: 3
@@ -7156,7 +7174,6 @@ NUM_LE_TOKEN_REDEEM_TYPES: 2
 NUM_LE_TOKEN_RESULTS: 10
 NUM_LE_TRACKER_SORTINGS: 4
 NUM_LE_TRANSMOG_SET_FILTERS: 4
-NUM_LE_TWITTER_RESULTS: 3
 NUM_LE_UNIT_STATS: 4
 NUM_LE_VAS_PURCHASE_STATES: 8
 NUM_LE_WORLD_ELAPSED_TIMER_TYPES: 3

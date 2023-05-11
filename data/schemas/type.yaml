@@ -9,12 +9,11 @@ type:
   - literal: oneornil
   - literal: string
   - literal: table
+  - literal: uiAddon
   - literal: unit
   - literal: unknown
   - literal: userdata
   - record:
-      mixin:
-        type: string
       structure:
         required: true
         type:

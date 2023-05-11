@@ -8,22 +8,27 @@ local function mapify(t)
   end
 end
 
-local function stylua(s)
-  local fn = os.tmpname()
-  require('pl.file').write(fn, s)
-  os.execute('stylua ' .. fn)
-  local ret = require('pl.file').read(fn)
-  os.remove(fn)
-  return ret
-end
-
 local function perproduct(p, f)
   return (require('wowapi.yaml').parseFile(('data/products/%s/%s.yaml'):format(p, f)))
+end
+
+local function tpath(t, ...)
+  for i = 1, select('#', ...) do
+    assert(type(t) == 'table')
+    t = t[(select(i, ...))]
+    if t == nil then
+      return nil
+    end
+  end
+  return t
 end
 
 local ptablemap = {
   build = function(p)
     return 'Build', perproduct(p, 'build')
+  end,
+  config = function(p)
+    return 'Config', perproduct(p, 'config').addon or {}
   end,
   cvars = function(p)
     return 'CVars', perproduct(p, 'cvars')
@@ -66,6 +71,7 @@ local ptablemap = {
     return 'Globals', perproduct(p, 'globals')
   end,
   namespaceapis = function(p)
+    local config = perproduct(p, 'config')
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
       local dot = k:find('%.')
@@ -81,6 +87,7 @@ local ptablemap = {
       for mk, mv in pairs(v.methods) do
         local tt = {
           alias = mv.alias,
+          overwritten = tpath(config, 'addon', 'overwritten_apis', k .. '.' .. mk) and true,
           stdlib = mv.stdlib,
         }
         mt[mk] = next(tt) and tt or true
@@ -167,8 +174,7 @@ local filemap = (function()
   end)()
   local function style(ss)
     -- workaround elune issue with formatting %d
-    ss = ss:gsub('DeprecatedCurrencyFlag = [-0-9]+', 'DeprecatedCurrencyFlag = 2147483648')
-    return stylua(ss)
+    return ss:gsub('DeprecatedCurrencyFlag = [-0-9]+', 'DeprecatedCurrencyFlag = 2147483648')
   end
   for k in pairs(files) do
     if ptablemap[k] then

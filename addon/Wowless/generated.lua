@@ -5,6 +5,8 @@ local capsuleEnv = _G.SimpleCheckout and getfenv(_G.SimpleCheckout.OnLoad) or {}
 
 assert(_G.WowlessData, 'missing WowlessData')
 
+local capsuleconfig = _G.WowlessData.Config.capsule or {}
+
 local function tget(t, s)
   local dot = s:find('%.')
   if dot then
@@ -49,6 +51,7 @@ function G.GeneratedTests()
   end
 
   local function apiNamespaces()
+    local capsulens = capsuleconfig.apinamespaces or {}
     local function mkTests(ns, tests)
       for k, v in pairs(ns) do
         -- Anything left over must be a FrameXML-defined function.
@@ -63,32 +66,34 @@ function G.GeneratedTests()
     local tests = {}
     local empty = {}
     for name, ncfg in pairs(_G.WowlessData.NamespaceApis) do
-      tests[name] = function()
-        local ns = _G[name] or capsuleEnv[name]
-        assertEquals('table', type(ns))
-        assert(getmetatable(ns) == nil)
-        local mtests = {}
-        for mname, mcfg in pairs(ncfg) do
-          mcfg = mcfg == true and empty or mcfg
-          mtests[mname] = function()
-            local func = ns[mname]
-            if mcfg.alias then
-              assertEquals(func, assert(tget(_G, mcfg.alias)))
-            elseif mcfg.stdlib then
-              local ty = type(tget(_G, mcfg.stdlib))
-              if ty == 'function' then
+      if not capsulens[name] then
+        tests[name] = function()
+          local ns = _G[name] or capsuleEnv[name]
+          assertEquals('table', type(ns))
+          assert(getmetatable(ns) == nil)
+          local mtests = {}
+          for mname, mcfg in pairs(ncfg) do
+            mcfg = mcfg == true and empty or mcfg
+            mtests[mname] = function()
+              local func = ns[mname]
+              if mcfg.alias then
+                assertEquals(func, assert(tget(_G, mcfg.alias)))
+              elseif mcfg.stdlib then
+                local ty = type(tget(_G, mcfg.stdlib))
+                if ty == 'function' then
+                  return checkCFunc(func)
+                else
+                  assertEquals(ty, type(func))
+                end
+              elseif not mcfg.overwritten then
                 return checkCFunc(func)
-              else
-                assertEquals(ty, type(func))
               end
-            elseif
-              name ~= 'C_Traits' or mname ~= 'GetEntryInfo' and mname ~= 'GetConditionInfo' and mname ~= 'GetTreeInfo'
-            then
-              return checkCFunc(func)
+              -- Do nothing on overwritten APIs. They're Lua when processing
+              -- FrameXML, and C when running bare.
             end
           end
+          return mkTests(ns, mtests)
         end
-        return mkTests(ns, mtests)
       end
     end
     return tests
@@ -99,7 +104,13 @@ function G.GeneratedTests()
     assert(b, 'no build')
     return {
       GetBuildInfo = function()
-        G.check4(b.version, b.build, b.date, b.tocversion, GetBuildInfo())
+        if b.tocversion == 30402 then
+          G.check7(b.version, b.build, b.date, b.tocversion, '', ' ', b.tocversion, GetBuildInfo())
+        elseif b.tocversion >= 100100 then
+          G.check6(b.version, b.build, b.date, b.tocversion, '', ' ', GetBuildInfo())
+        else
+          G.check4(b.version, b.build, b.date, b.tocversion, GetBuildInfo())
+        end
       end,
       IsDebugBuild = function()
         G.check1(false, _G.IsDebugBuild())
@@ -206,6 +217,7 @@ function G.GeneratedTests()
   end
 
   local function globalApis()
+    local capsuleapis = capsuleconfig.globalapis or {}
     local tests = {}
     local empty = {}
     for name, cfg in pairs(_G.WowlessData.GlobalApis) do
@@ -214,6 +226,8 @@ function G.GeneratedTests()
         local func = _G[name] or capsuleEnv[name]
         if cfg.alias then
           assertEquals(func, assert(tget(_G, cfg.alias)))
+        elseif cfg.nowrap then
+          return checkLuaFunc(func)
         elseif cfg.stdlib then
           local ty = type(tget(_G, cfg.stdlib))
           if ty == 'function' then
@@ -221,9 +235,7 @@ function G.GeneratedTests()
           else
             assertEquals(ty, type(func))
           end
-        elseif cfg.nowrap then
-          return checkLuaFunc(func)
-        else
+        elseif not capsuleapis[name] then
           return checkCFunc(func)
         end
       end
@@ -254,11 +266,24 @@ function G.GeneratedTests()
 
   local function globals()
     local data = _G.WowlessData.Globals
-    local tests = {}
     local actualEnum = G.mixin({}, _G.Enum, capsuleEnv.Enum or {})
+    local capsuleenums = capsuleconfig.enums or {}
+    local expectedEnum = {}
+    for k, v in pairs(data.Enum) do
+      if not capsuleenums[k] or actualEnum[k] then
+        expectedEnum[k] = v
+      end
+    end
+    local tests = {
+      Enum = function()
+        return G.assertRecursivelyEqual(expectedEnum, actualEnum)
+      end,
+    }
     for k, v in pairs(data) do
-      tests[k] = function()
-        return G.assertRecursivelyEqual(v, k == 'Enum' and actualEnum or _G[k])
+      if k ~= 'Enum' then
+        tests[k] = function()
+          return G.assertRecursivelyEqual(v, _G[k])
+        end
       end
     end
     local genums = {}
@@ -407,36 +432,18 @@ function G.GeneratedTests()
       end,
     }
     local exceptions = { -- TODO remove need for this
-      Actor = {
-        GetScript = true,
-        HasScript = true,
-        HookScript = true,
-        SetParent = true,
-        SetScript = true,
-      },
-      AnimationGroup = { SetParent = true },
       Line = {
-        AddMaskTexture = true,
         AdjustPointsOffset = true,
         ClearPointByName = true,
         ClearPointsOffset = true,
-        GetMaskTexture = true,
-        GetNumMaskTextures = true,
         GetNumPoints = true,
         GetPoint = true,
         GetPointByName = true,
-        RemoveMaskTexture = true,
         SetAllPoints = true,
         SetHeight = true,
         SetPoint = true,
         SetSize = true,
         SetWidth = true,
-      },
-      MaskTexture = {
-        AddMaskTexture = true,
-        GetMaskTexture = true,
-        GetNumMaskTextures = true,
-        RemoveMaskTexture = true,
       },
     }
     local warners = {

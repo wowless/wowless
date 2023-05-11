@@ -8,7 +8,6 @@ dependencies = {
   'lua = 5.1',
   'argparse',
   'busted',
-  'cluacov',
   'date',
   'http',
   'libdeflate',
@@ -28,7 +27,5 @@ dependencies = {
 }
 build = {
   type = 'builtin',
-  modules = {
-    ['wowless.ext'] = 'wowless/ext.c',
-  },
+  modules = {},
 }

@@ -1,3 +1,3 @@
 return (function(self, ...)
-  return m(self, 'SetText', string.format(...))
+  return self:SetText(string.format(...))
 end)(...)

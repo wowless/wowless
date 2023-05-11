@@ -57,6 +57,25 @@ Constants:
     MAX_WORLD_QUEST_HARD_WATCHES: 5
     MAX_WORLD_QUEST_WATCHES: 1
 Enum:
+  AccountExportResult:
+    AlreadyInProgress: 11
+    Cancelled: 2
+    FailedToGenerateFile: 13
+    FailedToLockAccount: 12
+    FileInvalid: 8
+    FileWriteFailed: 9
+    NoAccountFound: 5
+    RequestedInvalidCharacter: 6
+    RpcError: 7
+    ShuttingDown: 3
+    Success: 0
+    TimedOut: 4
+    Unavailable: 10
+    UnknownError: 1
+  AccountExportResultMeta:
+    MaxValue: 13
+    MinValue: 0
+    NumValues: 14
   AuctionHouseCommoditySortOrder:
     Quantity: 1
     UnitPrice: 0

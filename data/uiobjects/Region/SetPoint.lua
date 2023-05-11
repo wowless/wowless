@@ -13,7 +13,7 @@ return (function(self, point, ...)
   -- TODO handle resetting points
   point = point or 'CENTER'
   assert(validPoints[point])
-  local relativeTo = u(self).parent
+  local relativeTo = self.parent
   local relativePoint = point
   local x, y = 0, 0
   local idx = 1
@@ -24,10 +24,10 @@ return (function(self, point, ...)
     if not frame then
       api.log(1, 'SetPoint to unknown frame %q', name)
     end
-    relativeTo = frame
+    relativeTo = frame and api.UserData(frame)
     idx = idx + 1
   elseif type(maybeRelativeTo) == 'table' then
-    relativeTo = maybeRelativeTo
+    relativeTo = api.UserData(maybeRelativeTo)
     idx = idx + 1
   elseif type(maybeRelativeTo) == 'nil' then
     idx = idx + 1
@@ -43,12 +43,12 @@ return (function(self, point, ...)
   end
   if relativeTo ~= self then
     local newPoint = { point, relativeTo, relativePoint, x, y }
-    for i, p in ipairs(u(self).points) do
+    for i, p in ipairs(self.points) do
       if p[1] == point then
-        u(self).points[i] = newPoint
+        self.points[i] = newPoint
         return
       end
     end
-    table.insert(u(self).points, newPoint)
+    table.insert(self.points, newPoint)
   end
 end)(...)

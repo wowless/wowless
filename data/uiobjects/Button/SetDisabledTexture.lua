@@ -1,12 +1,11 @@
 return (function(self, tex)
-  local ud = u(self)
-  local t = toTexture(self, tex, ud.disabledTexture)
+  local t = toTexture(self, tex, self.disabledTexture)
   if t then
-    t:SetParent(self)
+    api.SetParent(t, self)
     if t:GetNumPoints() == 0 then
       t:SetAllPoints()
     end
-    t:SetShown(ud.buttonState == 'DISABLED')
+    t:SetShown(self.buttonState == 'DISABLED')
   end
-  ud.disabledTexture = t
+  self.disabledTexture = t
 end)(...)

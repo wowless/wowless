@@ -1,3 +1,3 @@
 return (function(self)
-  return select('#', m(self, 'GetChildren'))
+  return select('#', self:GetChildren())
 end)(...)

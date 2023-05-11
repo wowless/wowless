@@ -1,4 +1,5 @@
 return (function(self, value)
-  api.SetParent(value, self)
-  u(self).fontstring = value
+  local ud = value and api.UserData(value)
+  api.SetParent(ud, self)
+  self.fontstring = ud
 end)(...)

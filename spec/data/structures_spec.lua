@@ -1,5 +1,4 @@
 describe('structures', function()
-  local parseYaml = require('wowapi.yaml').parseFile
   for _, p in ipairs(require('wowless.util').productList()) do
     describe(p, function()
       local refs = {}
@@ -15,18 +14,18 @@ describe('structures', function()
           refty(x.type)
         end
       end
-      for _, api in pairs(parseYaml('data/products/' .. p .. '/apis.yaml')) do
+      for _, api in pairs(require('build/data/products/' .. p .. '/apis')) do
         for _, il in ipairs(api.inputs or {}) do
           reflist(il)
         end
         reflist(api.outputs)
       end
-      for _, v in pairs(parseYaml('data/products/' .. p .. '/events.yaml')) do
+      for _, v in pairs(require('build/data/products/' .. p .. '/events')) do
         for _, pv in ipairs(v.payload or {}) do
           refty(pv.type)
         end
       end
-      local actual = parseYaml('data/products/' .. p .. '/structures.yaml')
+      local actual = require('build/data/products/' .. p .. '/structures')
       local expected = {}
       local function close(ty)
         if ty.arrayof then
@@ -34,7 +33,7 @@ describe('structures', function()
         elseif ty.structure then
           if not expected[ty.structure] then
             expected[ty.structure] = true
-            for _, fv in pairs(actual[ty.structure] or {}) do
+            for _, fv in pairs((actual[ty.structure] or {}).fields) do
               close(fv.type)
             end
           end

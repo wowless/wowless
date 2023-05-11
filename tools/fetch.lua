@@ -8,8 +8,7 @@ local product = args.product
 
 local log = args.verbose and print or function() end
 
-local build = require('wowapi.yaml').parseFile('data/products/' .. product .. '/build.yaml')
-
+local build = require('build/data/products/' .. product .. '/build')
 local fdids = require('build.listfile')
 
 local path = require('path')
@@ -122,7 +121,7 @@ processTocDir('Interface/FrameXML')
 do
   -- Yes, ManifestInterfaceTOCData fdid and sig are hardcoded.
   local tocdata = handle:readFile(1267335)
-  for _, filepath in require('dbc').rows(tocdata, 's') do
+  for _, filepath in require('tools.dbc').rows(tocdata, 's') do
     processTocDir(normalizePath(filepath))
   end
   processTocDir('Interface/AddOns/Blizzard_APIDocumentationGenerated')

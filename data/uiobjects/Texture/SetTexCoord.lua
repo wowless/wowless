@@ -1,5 +1,4 @@
 return (function(self, a1, a2, a3, a4, a5, a6, a7, a8)
-  local ud = u(self)
   a1 = assert(tonumber(a1))
   a2 = assert(tonumber(a2))
   a3 = assert(tonumber(a3))
@@ -9,22 +8,22 @@ return (function(self, a1, a2, a3, a4, a5, a6, a7, a8)
     a6 = assert(tonumber(a6))
     a7 = assert(tonumber(a7))
     a8 = assert(tonumber(a8))
-    ud.tlx = a1
-    ud.tly = a2
-    ud.blx = a3
-    ud.bly = a4
-    ud.trx = a5
-    ud.try = a6
-    ud.brx = a7
-    ud.bry = a8
+    self.tlx = a1
+    self.tly = a2
+    self.blx = a3
+    self.bly = a4
+    self.trx = a5
+    self.try = a6
+    self.brx = a7
+    self.bry = a8
   else
-    ud.tlx = a1
-    ud.tly = a3
-    ud.blx = a1
-    ud.bly = a4
-    ud.trx = a2
-    ud.try = a3
-    ud.brx = a2
-    ud.bry = a4
+    self.tlx = a1
+    self.tly = a3
+    self.blx = a1
+    self.bly = a4
+    self.trx = a2
+    self.try = a3
+    self.brx = a2
+    self.bry = a4
   end
 end)(...)

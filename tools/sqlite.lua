@@ -8,42 +8,20 @@ local quote = (function()
 end)()
 
 local function factory(theProduct)
-  local defs = (function()
-    local build = require('wowapi.yaml').parseFile('data/products/' .. theProduct .. '/build.yaml')
-    local bv = build.version .. '.' .. build.build
-    local t = {}
-    for _, db in ipairs(require('build.products.' .. theProduct .. '.dblist')) do
-      local content = assert(require('pl.file').read('vendor/dbdefs/definitions/' .. db .. '.dbd'))
-      local dbd = assert(require('luadbd.parser').dbd(content))
-      local v = (function()
-        for _, version in ipairs(dbd.versions) do
-          for _, vb in ipairs(version.builds) do
-            -- Build ranges are not supported (yet).
-            if #vb == 1 and table.concat(vb[1], '.') == bv then
-              return version
-            end
-          end
-        end
-        error('cannot find ' .. bv .. ' in dbd ' .. db)
-      end)()
-      local sig, field2index = require('luadbd.sig')(dbd, v)
-      t[db] = {
-        field2index = field2index,
-        orderedfields = (function()
-          local list = {}
-          for k in pairs(field2index) do
-            table.insert(list, k)
-          end
-          table.sort(list, function(a, b)
-            return field2index[a] < field2index[b]
-          end)
-          return list
-        end)(),
-        sig = sig,
-      }
-    end
-    return t
-  end)()
+  local defs = require('build.products.' .. theProduct .. '.dbdefs')
+  for _, v in pairs(defs) do
+    v.orderedfields = (function()
+      local field2index = v.field2index
+      local list = {}
+      for k in pairs(field2index) do
+        table.insert(list, k)
+      end
+      table.sort(list, function(a, b)
+        return field2index[a] < field2index[b]
+      end)
+      return list
+    end)()
+  end
 
   local function create(filename)
     local dbinit = { 'BEGIN' }
@@ -65,7 +43,7 @@ local function factory(theProduct)
       local success, msg = pcall(function()
         local data = require('pl.file').read(('extracts/%s/db2/%s.db2'):format(theProduct, k))
         assert(data, 'missing db2 for ' .. k)
-        for row in require('dbc').rows(data, '{' .. v.sig:gsub('%.', '%?') .. '}') do
+        for row in require('tools.dbc').rows(data, '{' .. v.sig:gsub('%.', '%?') .. '}') do
           local values = {}
           for _, field in ipairs(v.orderedfields) do
             local value = row[v.field2index[field]]
@@ -110,8 +88,10 @@ local args = (function()
   parser:flag('-f --full', 'also include data')
   return parser:parse()
 end)()
+
 local filebase = args.full and 'data' or 'schema'
-local filename = ('build/products/%s/%s.db'):format(args.product, filebase)
+local filename = ('build/products/%s/%s.sqlite3'):format(args.product, filebase)
+
 require('pl.file').delete(filename)
 local create, populate = factory(args.product)
 local db = create(filename)

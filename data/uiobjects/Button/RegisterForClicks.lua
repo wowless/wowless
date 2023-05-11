@@ -17,13 +17,12 @@ local validValues = (function()
   return v
 end)()
 return (function(self, ...)
-  local ud = u(self)
-  table.wipe(ud.registeredClicks)
+  table.wipe(self.registeredClicks)
   for i = 1, select('#', ...) do
     local clickType = select(i, ...)
     assert(type(clickType) == 'string', 'expected string, got ' .. type(clickType))
     local ltype = clickType:lower()
     assert(validValues[ltype], 'invalid click registration type ' .. clickType)
-    ud.registeredClicks[ltype] = true
+    self.registeredClicks[ltype] = true
   end
 end)(...)

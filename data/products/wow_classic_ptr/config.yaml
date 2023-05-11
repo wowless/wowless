@@ -1,4 +1,24 @@
 ---
+addon:
+  capsule:
+    apinamespaces:
+      C_AuthChallenge: {}
+      C_StoreSecure: {}
+      C_UnitAurasPrivate: {}
+      C_WowTokenSecure: {}
+    enums:
+      BattlepayBannerType: {}
+      BattlepayCardType: {}
+      BattlepayDisplayFlag: {}
+      BattlepayGroupDisplayType: {}
+      BattlepayProductDecorator: {}
+      BattlepayProductGroupFlag: {}
+      PurchaseEligibility: {}
+      StoreError: {}
+      VasError: {}
+      VasServiceType: {}
+    globalapis:
+      CreateForbiddenFrame: {}
 docs:
   apis:
     skip_namespaces:
@@ -10,3 +30,8 @@ docs:
       INVENTORY_SEARCH_UPDATE: {}
       PARTY_INVITE_CANCEL: {}
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+runner:
+  skip_slashcmds:
+    CASTRANDOM: {}
+    LOOT_MASTER: {}
+    USERANDOM: {}

@@ -1,9 +1,8 @@
 describe('config', function()
-  local parseYaml = require('wowapi.yaml').parseFile
   for _, p in ipairs(require('wowless.util').productList()) do
     describe(p, function()
-      local config = parseYaml('data/products/' .. p .. '/config.yaml')
-      local apis = parseYaml('data/products/' .. p .. '/apis.yaml')
+      local config = require('build/data/products/' .. p .. '/config')
+      local apis = require('build/data/products/' .. p .. '/apis')
       describe('docs', function()
         local doccfg = config.docs or {}
         describe('apis', function()

@@ -70,6 +70,7 @@ type:
           - literal: state
           - literal: structure
           - literal: uiobject
+          - literal: uiobjectimpl
           - literal: xml
   - record:
       schema:

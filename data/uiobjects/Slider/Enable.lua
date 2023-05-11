@@ -1,3 +1,3 @@
 return (function(self)
-  u(self).enabled = true
+  self.enabled = true
 end)(...)

@@ -12,7 +12,7 @@ local function new(log, maxErrors, product)
   local uiobjectTypes = {}
   local userdata = {}
 
-  local function u(obj)
+  local function UserData(obj)
     return userdata[obj[0]]
   end
 
@@ -36,26 +36,25 @@ local function new(log, maxErrors, product)
     'statusBarTexture',
   }
 
-  local function SetParent(obj, parent)
-    local ud = u(obj)
-    if ud.parent == parent then
+  local function DoSetParent(obj, parent)
+    if obj.parent == parent then
       return
     end
-    if ud.parent then
-      local up = u(ud.parent)
-      up.children:remove(ud)
+    if obj.parent then
+      local up = obj.parent
+      up.children:remove(obj)
       for _, f in ipairs(parentFieldsToClear) do
         if up[f] == obj then
           up[f] = nil
         end
       end
     end
-    ud.parent = parent
+    obj.parent = parent
     if parent then
-      u(parent).children:insert(ud)
+      parent.children:insert(obj)
     end
-    if parent and u(parent).frameLevel and ud.frameLevel and not ud.hasFixedFrameLevel then
-      ud:SetFrameLevel(u(parent).frameLevel + 1)
+    if parent and parent.frameLevel and obj.frameLevel and not obj.hasFixedFrameLevel then
+      obj:SetFrameLevel(parent.frameLevel + 1)
     end
   end
 
@@ -64,10 +63,10 @@ local function new(log, maxErrors, product)
   local function ParentSub(name, parent)
     if name and string.match(name, parentMatch) then
       local p = parent
-      while p ~= nil and not u(p).name do
-        p = u(p).parent
+      while p ~= nil and not p.name do
+        p = p.parent
       end
-      return string.gsub(name, parentMatch, p and u(p).name or 'Top')
+      return string.gsub(name, parentMatch, p and p.name or 'Top')
     else
       return name
     end
@@ -87,16 +86,13 @@ local function new(log, maxErrors, product)
   end
 
   local function GetDebugName(frame)
-    local ud = u(frame)
-    local name = ud.name
+    local name = frame.name
     if name ~= nil then
       return name
     end
     name = ''
-    local parent = ud.parent
-    local pud
+    local parent = frame.parent
     while parent do
-      pud = u(parent)
       local found = false
       for k, v in pairs(parent) do
         if v == frame then
@@ -107,7 +103,7 @@ local function new(log, maxErrors, product)
       if not found then
         name = string.match(tostring(frame), '^table: 0x0*(.*)$'):lower() .. (name == '' and '' or ('.' .. name))
       end
-      local parentName = pud.name
+      local parentName = parent.name
       if parentName == 'UIParent' then
         break
       elseif parentName and parentName ~= '' then
@@ -115,7 +111,7 @@ local function new(log, maxErrors, product)
         break
       end
       frame = parent
-      parent = pud.parent
+      parent = parent.parent
     end
     return name
   end
@@ -128,6 +124,34 @@ local function new(log, maxErrors, product)
           CallSafely(script, obj.luarep, ...)
         end
       end
+    end
+  end
+
+  local function DoUpdateVisible(obj, script)
+    for kid in obj.children:entries() do
+      if kid.shown then
+        DoUpdateVisible(kid, script)
+      end
+    end
+    RunScript(obj, script)
+  end
+
+  local function UpdateVisible(obj, fn)
+    local wasVisible = obj:IsVisible()
+    fn()
+    local visibleNow = obj:IsVisible()
+    if wasVisible ~= visibleNow then
+      DoUpdateVisible(obj, visibleNow and 'OnShow' or 'OnHide')
+    end
+  end
+
+  local function SetParent(obj, parent)
+    if obj.IsVisible then
+      UpdateVisible(obj, function()
+        DoSetParent(obj, parent)
+      end)
+    else
+      DoSetParent(obj, parent)
     end
   end
 
@@ -145,18 +169,17 @@ local function new(log, maxErrors, product)
     assert(objtype, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
     assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
-    local obj = setmetatable({}, objtype.sandboxMT)
-    obj[0] = newproxy()
-    userdata[obj[0]] = {
-      luarep = obj,
-      name = objname,
-      type = typename,
-    }
-    setmetatable(u(obj), objtype.hostMT)
-    objtype.constructor(obj)
-    SetParent(obj, parent)
+    local objp = newproxy()
+    local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
+    local ud = objtype.constructor()
+    ud.luarep = obj
+    ud.name = objname
+    ud.type = typename
+    userdata[objp] = ud
+    setmetatable(ud, objtype.hostMT)
+    DoSetParent(ud, parent)
     if InheritsFrom(typename, 'frame') then
-      frames:insert(u(obj))
+      frames:insert(ud)
     end
     local tmpls = {}
     if objtype.template then
@@ -168,15 +191,15 @@ local function new(log, maxErrors, product)
       end
     end
     for _, template in ipairs(tmpls) do
-      template.initEarlyAttrs(obj)
+      template.initEarlyAttrs(ud)
     end
     if objname then
       if type(objnamearg) == 'string' then
-        objname = ParentSub(objnamearg, u(obj).parent)
+        objname = ParentSub(objnamearg, ud.parent)
       elseif type(objnamearg) == 'number' then
         objname = tostring(objnamearg)
       end
-      u(obj).name = objname
+      ud.name = objname
       if env[objname] then
         log(3, 'overwriting global ' .. objname)
       end
@@ -186,17 +209,17 @@ local function new(log, maxErrors, product)
       end
     end
     for _, template in ipairs(tmpls) do
-      template.initAttrs(obj)
+      template.initAttrs(ud)
     end
     for _, template in ipairs(tmpls) do
-      template.initKids(obj)
+      template.initKids(ud)
     end
     if id then
       obj:SetID(id)
     end
-    RunScript(u(obj), 'OnLoad')
+    RunScript(ud, 'OnLoad')
     if InheritsFrom(typename, 'region') and obj:IsVisible() then
-      RunScript(u(obj), 'OnShow')
+      RunScript(ud, 'OnShow')
     end
     if objtype.zombie then
       setmetatable(obj, nil)
@@ -205,8 +228,7 @@ local function new(log, maxErrors, product)
   end
 
   local function SetScript(obj, name, bindingType, script)
-    local ud = u(obj)
-    ud.scripts[bindingType][string.lower(name)] = script
+    obj.scripts[bindingType][string.lower(name)] = script
   end
 
   for k in pairs(datalua.events) do
@@ -249,7 +271,7 @@ local function new(log, maxErrors, product)
       assert(template, 'unknown template ' .. templateName)
       table.insert(tmpls, template)
     end
-    return CreateUIObject(ltype, name, parent, nil, tmpls, id)
+    return CreateUIObject(ltype, name, parent and UserData(parent), nil, tmpls, id)
   end
 
   local function NextFrame(elapsed)
@@ -274,34 +296,34 @@ local function new(log, maxErrors, product)
   local function RegisterEvent(frame, event)
     event = event:upper()
     assert(eventRegistrations[event], 'cannot register ' .. event)
-    if not allEventRegistrations:has(u(frame)) then
-      eventRegistrations[event]:insert(u(frame))
+    if not allEventRegistrations:has(frame) then
+      eventRegistrations[event]:insert(frame)
     end
   end
 
   local function UnregisterEvent(frame, event)
     event = event:upper()
     assert(eventRegistrations[event], 'cannot unregister ' .. event)
-    eventRegistrations[event]:remove(u(frame))
+    eventRegistrations[event]:remove(frame)
   end
 
   local function UnregisterAllEvents(frame)
     for _, reg in pairs(eventRegistrations) do
-      reg:remove(u(frame))
+      reg:remove(frame)
     end
-    allEventRegistrations:remove(u(frame))
+    allEventRegistrations:remove(frame)
   end
 
   local function RegisterAllEvents(frame)
     UnregisterAllEvents(frame)
-    allEventRegistrations:insert(u(frame))
+    allEventRegistrations:insert(frame)
   end
 
   local function IsEventRegistered(frame, event)
-    return allEventRegistrations:has(u(frame)) or eventRegistrations[event:upper()]:has(u(frame))
+    return allEventRegistrations:has(frame) or eventRegistrations[event:upper()]:has(frame)
   end
 
-  for k, v in pairs(datalua.state) do
+  for k, v in pairs(datalua.states) do
     states[k] = require('pl.tablex').deepcopy(v)
   end
   seterrorhandler(ErrorHandler)
@@ -331,10 +353,12 @@ local function new(log, maxErrors, product)
     SetScript = SetScript,
     states = states,
     templates = templates,
+    uiobjects = userdata,
     uiobjectTypes = uiobjectTypes,
     UnregisterAllEvents = UnregisterAllEvents,
     UnregisterEvent = UnregisterEvent,
-    UserData = u,
+    UpdateVisible = UpdateVisible,
+    UserData = UserData,
   }
   require('wowless.util').mixin(uiobjectTypes, require('wowapi.uiobjects')(api))
   return api

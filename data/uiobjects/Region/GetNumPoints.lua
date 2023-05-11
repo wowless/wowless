@@ -1,3 +1,3 @@
 return (function(self)
-  return #u(self).points
+  return #self.points
 end)(...)

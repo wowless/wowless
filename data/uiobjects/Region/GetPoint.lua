@@ -1,7 +1,8 @@
 return (function(self, index)
   local idx = tonumber(index) or 1
-  if u(self).points[idx] then
-    assert(type(u(self).points[idx][4]) ~= 'table')
-    return unpack(u(self).points[idx])
+  if self.points[idx] then
+    assert(type(self.points[idx][4]) ~= 'table')
+    local point, relativeTo, relativePoint, x, y = unpack(self.points[idx])
+    return point, relativeTo and relativeTo.luarep, relativePoint, x, y
   end
 end)(...)

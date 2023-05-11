@@ -1,8 +1,7 @@
 return (function(self)
-  local ud = u(self)
-  if not ud.parent or ud.isIgnoringParentAlpha then
-    return ud.alpha
+  if not self.parent or self.isIgnoringParentAlpha then
+    return self.alpha
   else
-    return m(ud.parent, 'GetEffectiveAlpha') * ud.alpha
+    return self.parent:GetEffectiveAlpha() * self.alpha
   end
 end)(...)

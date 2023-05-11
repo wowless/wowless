@@ -1,13 +1,12 @@
 return (function(self, tex)
-  local ud = u(self)
-  local t = toTexture(self, tex, ud.highlightTexture)
+  local t = toTexture(self, tex, self.highlightTexture)
   if t then
-    t:SetParent(self)
+    api.SetParent(t, self)
     if t:GetNumPoints() == 0 then
       t:SetAllPoints()
     end
     t:SetDrawLayer('HIGHLIGHT')
     t:Show()
   end
-  ud.highlightTexture = t
+  self.highlightTexture = t
 end)(...)

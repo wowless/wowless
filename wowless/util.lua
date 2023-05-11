@@ -101,12 +101,14 @@ local function dateToCalendarTime(d)
 end
 
 local function productList()
-  local t = {}
-  for _, k in ipairs(require('pl.dir').getdirectories('data/products')) do
-    table.insert(t, k:sub(15))
-  end
-  table.sort(t)
-  return t
+  return {
+    'wow',
+    'wow_classic',
+    'wow_classic_era',
+    'wow_classic_era_ptr',
+    'wow_classic_ptr',
+    'wowt',
+  }
 end
 
 return {
