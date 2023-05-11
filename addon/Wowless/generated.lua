@@ -104,7 +104,9 @@ function G.GeneratedTests()
     assert(b, 'no build')
     return {
       GetBuildInfo = function()
-        if b.tocversion >= 100100 then
+        if b.tocversion == 30402 then
+          G.check7(b.version, b.build, b.date, b.tocversion, '', ' ', b.tocversion, GetBuildInfo())
+        elseif b.tocversion >= 100100 then
           G.check6(b.version, b.build, b.date, b.tocversion, '', ' ', GetBuildInfo())
         else
           G.check4(b.version, b.build, b.date, b.tocversion, GetBuildInfo())
@@ -224,6 +226,8 @@ function G.GeneratedTests()
         local func = _G[name] or capsuleEnv[name]
         if cfg.alias then
           assertEquals(func, assert(tget(_G, cfg.alias)))
+        elseif cfg.nowrap then
+          return checkLuaFunc(func)
         elseif cfg.stdlib then
           local ty = type(tget(_G, cfg.stdlib))
           if ty == 'function' then
@@ -231,8 +235,6 @@ function G.GeneratedTests()
           else
             assertEquals(ty, type(func))
           end
-        elseif cfg.nowrap then
-          return checkLuaFunc(func)
         elseif not capsuleapis[name] then
           return checkCFunc(func)
         end

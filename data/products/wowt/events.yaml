@@ -358,7 +358,6 @@ AZERITE_EMPOWERED_ITEM_SELECTION_UPDATED:
   payload:
   - name: azeriteEmpoweredItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
 AZERITE_ESSENCE_ACTIVATED:
   payload:
@@ -398,7 +397,6 @@ AZERITE_ITEM_EXPERIENCE_CHANGED:
   payload:
   - name: azeriteItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
   - name: oldExperienceAmount
     type: number
@@ -408,7 +406,6 @@ AZERITE_ITEM_POWER_LEVEL_CHANGED:
   payload:
   - name: azeriteItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
   - name: oldPowerLevel
     type: number
@@ -4623,7 +4620,6 @@ ITEM_INTERACTION_ITEM_SELECTION_UPDATED:
   - name: itemLocation
     nilable: true
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
 ITEM_KEY_ITEM_INFO_RECEIVED:
   payload:
@@ -7002,14 +6998,12 @@ TRANSMOGRIFY_SUCCESS:
   payload:
   - name: transmogLocation
     type:
-      mixin: TransmogLocationMixin
       structure: TransmogLocation
 TRANSMOGRIFY_UPDATE:
   payload:
   - name: transmogLocation
     nilable: true
     type:
-      mixin: TransmogLocationMixin
       structure: TransmogLocation
   - name: action
     nilable: true

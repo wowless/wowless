@@ -1,5 +1,24 @@
 ---
 addon:
+  capsule:
+    apinamespaces:
+      C_AuthChallenge: {}
+      C_StoreSecure: {}
+      C_UnitAurasPrivate: {}
+      C_WowTokenSecure: {}
+    enums:
+      BattlepayBannerType: {}
+      BattlepayCardType: {}
+      BattlepayDisplayFlag: {}
+      BattlepayGroupDisplayType: {}
+      BattlepayProductDecorator: {}
+      BattlepayProductGroupFlag: {}
+      PurchaseEligibility: {}
+      StoreError: {}
+      VasError: {}
+      VasServiceType: {}
+    globalapis:
+      CreateForbiddenFrame: {}
   overwritten_apis:
     C_Traits.GetConditionInfo: {}
     C_Traits.GetEntryInfo: {}
@@ -17,6 +36,7 @@ runner:
     RAF_REWARD_CLAIM_FAILED: numAffordableRewards never set
   skip_slashcmds:
     CASTRANDOM: {}
+    EDITMODE: {}
     EVENT: {}
     PTRFEEDBACK: {}
     USERANDOM: {}

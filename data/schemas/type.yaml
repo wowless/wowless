@@ -14,8 +14,6 @@ type:
   - literal: unknown
   - literal: userdata
   - record:
-      mixin:
-        type: string
       structure:
         required: true
         type:

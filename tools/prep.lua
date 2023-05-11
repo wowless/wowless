@@ -49,20 +49,20 @@ local specDefault = (function()
   local structureDefaults = {}
   local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
   local specDefault
-  local function valstruct(name, mixin)
+  local function valstruct(name)
     if not structureDefaults[name] then
       local st = assert(structures[name], name)
       local t = {}
-      for fname, field in require('pl.tablex').sort(st) do
+      for fname, field in require('pl.tablex').sort(st.fields) do
         local v = specDefault(field)
         if v ~= 'nil' then
           table.insert(t, ('[%q]=%s'):format(fname, v))
         end
       end
-      structureDefaults[name] = '{' .. table.concat(t, ',') .. '}'
+      local str = '{' .. table.concat(t, ',') .. '}'
+      structureDefaults[name] = st.mixin and ('Mixin(%s,%q)'):format(str, st.mixin) or str
     end
-    local v = structureDefaults[name]
-    return mixin and ('Mixin(%s,%s)'):format(v, mixin) or v
+    return structureDefaults[name]
   end
   function specDefault(spec)
     if spec.stub ~= nil then
@@ -82,7 +82,7 @@ local specDefault = (function()
       return '{' .. specDefault({ type = ty.arrayof }) .. '}'
     end
     if ty.structure then
-      return valstruct(ty.structure, ty.mixin)
+      return valstruct(ty.structure)
     end
     if ty.enum then
       local e = assert(globals.Enum[ty.enum], 'missing enum ' .. ty.enum)

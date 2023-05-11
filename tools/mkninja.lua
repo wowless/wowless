@@ -54,7 +54,7 @@ for _, p in ipairs(productList) do
   perProductAddonGeneratedFiles[p] = pp
 end
 
-local elune = 'build/cmake/vendor/elune/lua/lua5.1'
+local elune = 'build/cmake/wowless'
 
 local pools = {
   fetch_pool = 1,
@@ -97,6 +97,11 @@ local rules = {
   },
   mkninja = {
     command = 'lua tools/mkninja.lua',
+    pool = 'console',
+  },
+  mknode = {
+    command = 'emcmake cmake -B build/emcmake && make -C build/emcmake wowless',
+    pool = 'console',
   },
   mktactkeys = {
     command = 'lua tools/tactkeys.lua',
@@ -150,7 +155,6 @@ local builds = {
       'CMakeLists.txt',
       'tools/addons.yaml',
       'tools/mkninja.lua',
-      'vendor/elune/CMakeLists.txt',
       'wowapi/yaml.lua',
     },
     outs = 'build.ninja',
@@ -158,9 +162,8 @@ local builds = {
   },
   {
     ins = {
-      elune,
-      'build/cmake/ext.so',
-      'build/flavors.lua',
+      'build/cmake/wowless',
+      'build/data/flavors.lua',
       'build/wowless.stamp',
     },
     outs = 'build/runtime.stamp',
@@ -210,7 +213,6 @@ local builds = {
       'tools/fetch.lua',
       'tools/gentest.lua',
       'tools/listfile.lua',
-      'tools/precov.lua',
       'tools/prep.lua',
       'tools/proto.lua',
       'tools/render.lua',
@@ -236,6 +238,7 @@ local builds = {
       'wowless/runner.lua',
       'wowless/util.lua',
       'wowless/xml.lua',
+      'wowless.lua',
     },
     outs = 'build/wowless.stamp',
     rule = 'stamp',
@@ -265,9 +268,9 @@ local builds = {
     rule = 'mktactkeys',
   },
   {
-    ins = 'data/flavors.yaml',
-    outs = 'build/flavors.lua',
-    rule = 'yaml2lua',
+    ins_implicit = 'build/cmake/wowless',
+    outs_implicit = 'build/emcmake/wowless.js',
+    rule = 'mknode',
   },
 }
 
@@ -327,9 +330,9 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins = {
       dblist,
+      'build/data/products/' .. p .. '/build.lua',
       'build/listfile.lua',
       'build/tactkeys.lua',
-      'data/products/' .. p .. '/build.yaml',
       'tools/fetch.lua',
     },
     outs = fetchStamp,
@@ -671,5 +674,4 @@ os.execute([[
   -G Ninja \
   -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
   -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/cmake/ \
-  > /dev/null \
 ]])

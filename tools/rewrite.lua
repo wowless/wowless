@@ -36,7 +36,7 @@ local function rewriteTypes(fn)
   end)
   rewriteFile('structures', function(_, t)
     for _, st in pairs(t) do
-      for _, f in pairs(st) do
+      for _, f in pairs(st.fields) do
         fn(f.type)
       end
     end

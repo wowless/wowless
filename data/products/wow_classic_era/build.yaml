@@ -3,7 +3,6 @@ build: '49229'
 date: Apr 19 2023
 flavor: Vanilla
 hash: 350bfb27a691f8c5479170218ddc9266
-ptr: false
 test: false
 tocversion: 11403
 version: 1.14.3

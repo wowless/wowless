@@ -86,16 +86,6 @@ local function loadFunctions(api, loader)
     string = true,
   }
 
-  local stubenv = setmetatable({}, {
-    __index = function(_, k)
-      return k == 'Mixin' and util.mixin or api.env[k]
-    end,
-    __metatable = 'stub metatable',
-    __newindex = function()
-      error('cannot modify _G from a stub')
-    end,
-  })
-
   local function typestr(ty)
     if type(ty) == 'string' then
       return ty
@@ -112,10 +102,15 @@ local function loadFunctions(api, loader)
     error('unable to typestr')
   end
 
+  local function stubMixin(t, name)
+    return util.mixin(t, api.env[name])
+  end
+
   local function mkfn(fname, apicfg)
     local function base()
       if apicfg.stub then
-        return setfenv(assert(loadstring(apicfg.stub)), stubenv)
+        local text = ('local Mixin = ...; return function() %s end'):format(apicfg.stub)
+        return assert(loadstring(text))(stubMixin)
       elseif apicfg.impl then
         return impls[apicfg.impl]
       else
@@ -234,28 +229,6 @@ local function loadFunctions(api, loader)
       end
     end
 
-    local function addMixins(fn)
-      local mixins = {}
-      for idx, out in ipairs(apicfg.outputs or {}) do
-        mixins[idx] = out.mixin
-      end
-      if not next(mixins) then
-        return fn
-      end
-      local function doAddMixins(...)
-        for idx, mixin in pairs(mixins) do
-          local t = select(idx, ...)
-          if t then
-            util.mixin(t, api.env[mixin])
-          end
-        end
-        return ...
-      end
-      return function(...)
-        return doAddMixins(fn(...))
-      end
-    end
-
     local function checkOutputs(fn)
       if not apicfg.outputs then
         return fn
@@ -296,7 +269,7 @@ local function loadFunctions(api, loader)
       return apicfg.nowrap and fn or debug.newcfunction(fn)
     end
 
-    return maybeCWrap(addMixins(checkOutputs(checkInputs(addSpecialArgs(base())))))
+    return maybeCWrap(checkOutputs(checkInputs(addSpecialArgs(base()))))
   end
 
   local fns = {}

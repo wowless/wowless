@@ -25,8 +25,8 @@ AcceptTrade: {}
 AcknowledgeAutoAcceptQuest: {}
 AcknowledgeSurvey: {}
 acos:
-  impl: acos
   nowrap: true
+  stdlib: acos
 ActionBindsItem: {}
 ActionHasRange: {}
 AddAutoQuestPopUp: {}
@@ -77,8 +77,8 @@ AscendStop:
   - {}
   outputs: {}
 asin:
-  impl: asin
   nowrap: true
+  stdlib: asin
 assert:
   stdlib: assert
 AssistUnit:
@@ -88,11 +88,11 @@ AssistUnit:
       type: unit
   outputs: {}
 atan:
-  impl: atan
   nowrap: true
+  stdlib: atan
 atan2:
-  impl: atan2
   nowrap: true
+  stdlib: atan2
 AttachGlyphToSpell: {}
 AttackTarget:
   inputs:
@@ -442,6 +442,17 @@ C_ActionBar.ToggleAutoCastPetAction:
   - - name: slotID
       type: number
   outputs: {}
+C_AddOns.GetAddOnMetadata:
+  impl: GetAddOnMetadata
+  inputs:
+  - - name: name
+      type: uiAddon
+    - name: variable
+      type: string
+  outputs:
+  - name: value
+    nilable: true
+    type: string
 C_AdventureJournal.ActivateEntry: {}
 C_AdventureJournal.CanBeShown: {}
 C_AdventureJournal.GetNumAvailableSuggestions: {}
@@ -500,7 +511,6 @@ C_AnimaDiversion.GetOriginPosition:
   - name: normalizedPosition
     nilable: true
     type:
-      mixin: Vector2DMixin
       structure: vector2
 C_AnimaDiversion.GetReinforceProgress:
   inputs:
@@ -569,6 +579,9 @@ C_AreaPoiInfo.IsAreaPOITimed:
       type: number
   outputs:
   - name: isTimed
+    type: boolean
+  - name: hideTimerInTooltip
+    nilable: true
     type: boolean
 C_ArtifactUI.AddPower:
   inputs:
@@ -1087,7 +1100,6 @@ C_ArtifactUI.IsArtifactItem:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isArtifact
@@ -1175,7 +1187,6 @@ C_AuctionHouse.CalculateItemDeposit:
   inputs:
   - - name: item
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: duration
       type: number
@@ -1220,7 +1231,6 @@ C_AuctionHouse.ConfirmPostCommodity:
   inputs:
   - - name: item
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: duration
       type: number
@@ -1233,7 +1243,6 @@ C_AuctionHouse.ConfirmPostItem:
   inputs:
   - - name: item
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: duration
       type: number
@@ -1273,7 +1282,6 @@ C_AuctionHouse.GetAvailablePostCount:
   inputs:
   - - name: item
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: listCount
@@ -1357,7 +1365,6 @@ C_AuctionHouse.GetItemCommodityStatus:
   inputs:
   - - name: item
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isCommodity
@@ -1367,7 +1374,6 @@ C_AuctionHouse.GetItemKeyFromItem:
   inputs:
   - - name: item
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: itemKey
@@ -1695,7 +1701,6 @@ C_AuctionHouse.IsSellItemValid:
   inputs:
   - - name: item
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - default: true
       name: displayError
@@ -1737,7 +1742,6 @@ C_AuctionHouse.PostCommodity:
   inputs:
   - - name: item
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: duration
       type: number
@@ -1752,7 +1756,6 @@ C_AuctionHouse.PostItem:
   inputs:
   - - name: item
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: duration
       type: number
@@ -1913,7 +1916,6 @@ C_AzeriteEmpoweredItem.CanSelectPower:
   inputs:
   - - name: azeriteEmpoweredItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: powerID
       type: number
@@ -1924,14 +1926,12 @@ C_AzeriteEmpoweredItem.ConfirmAzeriteEmpoweredItemRespec:
   inputs:
   - - name: azeriteEmpoweredItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs: {}
 C_AzeriteEmpoweredItem.GetAllTierInfo:
   inputs:
   - - name: azeriteEmpoweredItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: tierInfo
@@ -1968,7 +1968,6 @@ C_AzeriteEmpoweredItem.GetPowerText:
   inputs:
   - - name: azeriteEmpoweredItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: powerID
       type: number
@@ -1992,7 +1991,6 @@ C_AzeriteEmpoweredItem.HasAnyUnselectedPowers:
   inputs:
   - - name: azeriteEmpoweredItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: hasAnyUnselectedPowers
@@ -2001,7 +1999,6 @@ C_AzeriteEmpoweredItem.HasBeenViewed:
   inputs:
   - - name: azeriteEmpoweredItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: hasBeenViewed
@@ -2010,7 +2007,6 @@ C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItem:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isAzeriteEmpoweredItem
@@ -2051,7 +2047,6 @@ C_AzeriteEmpoweredItem.IsPowerSelected:
   inputs:
   - - name: azeriteEmpoweredItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: powerID
       type: number
@@ -2062,7 +2057,6 @@ C_AzeriteEmpoweredItem.SelectPower:
   inputs:
   - - name: azeriteEmpoweredItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: powerID
       type: number
@@ -2073,7 +2067,6 @@ C_AzeriteEmpoweredItem.SetHasBeenViewed:
   inputs:
   - - name: azeriteEmpoweredItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs: {}
 C_AzeriteEssence.ActivateEssence:
@@ -2219,13 +2212,11 @@ C_AzeriteItem.FindActiveAzeriteItem:
   outputs:
   - name: activeAzeriteItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
 C_AzeriteItem.GetAzeriteItemXPInfo:
   inputs:
   - - name: azeriteItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: xp
@@ -2236,7 +2227,6 @@ C_AzeriteItem.GetPowerLevel:
   inputs:
   - - name: azeriteItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: powerLevel
@@ -2245,7 +2235,6 @@ C_AzeriteItem.GetUnlimitedPowerLevel:
   inputs:
   - - name: azeriteItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: powerLevel
@@ -2260,7 +2249,6 @@ C_AzeriteItem.IsAzeriteItem:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isAzeriteItem
@@ -2282,10 +2270,15 @@ C_AzeriteItem.IsAzeriteItemEnabled:
   inputs:
   - - name: azeriteItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isEnabled
+    type: boolean
+C_AzeriteItem.IsUnlimitedLevelingUnlocked:
+  inputs:
+  - {}
+  outputs:
+  - name: isUnlimitedLevelingUnlocked
     type: boolean
 C_BarberShop.ApplyCustomizationChoices:
   inputs:
@@ -3247,7 +3240,6 @@ C_ChallengeMode.CanUseKeystoneInCurrentMap:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: canUse
@@ -3338,7 +3330,6 @@ C_ChallengeMode.GetDungeonScoreRarityColor:
   outputs:
   - name: scoreColor
     type:
-      mixin: ColorMixin
       structure: colorRGB
 C_ChallengeMode.GetGuildLeaders:
   inputs:
@@ -3355,7 +3346,6 @@ C_ChallengeMode.GetKeystoneLevelRarityColor:
   outputs:
   - name: levelScore
     type:
-      mixin: ColorMixin
       structure: colorRGB
 C_ChallengeMode.GetMapScoreInfo:
   inputs:
@@ -3423,7 +3413,6 @@ C_ChallengeMode.GetSpecificDungeonOverallScoreRarityColor:
   outputs:
   - name: specificDungeonOverallScoreColor
     type:
-      mixin: ColorMixin
       structure: colorRGB
 C_ChallengeMode.GetSpecificDungeonScoreRarityColor:
   inputs:
@@ -3432,7 +3421,6 @@ C_ChallengeMode.GetSpecificDungeonScoreRarityColor:
   outputs:
   - name: specificDungeonScoreColor
     type:
-      mixin: ColorMixin
       structure: colorRGB
 C_ChallengeMode.HasSlottedKeystone:
   inputs:
@@ -3472,7 +3460,7 @@ C_ChallengeMode.StartChallengeMode:
   - name: success
     type: boolean
 C_CharacterServices.AssignPCTDistribution: {}
-C_CharacterServices.AssignPFCDistribution: {}
+C_CharacterServices.AssignRaceOrFactionChangeDistribution: {}
 C_CharacterServices.AssignUpgradeDistribution: {}
 C_CharacterServices.GetActiveCharacterUpgradeBoostType: {}
 C_CharacterServices.GetActiveClassTrialBoostType: {}
@@ -3602,6 +3590,15 @@ C_ChatInfo.GetClubStreamIDs:
   - name: ids
     type:
       arrayof: string
+C_ChatInfo.GetColorForChatType:
+  inputs:
+  - - name: chatType
+      type: string
+  outputs:
+  - name: color
+    nilable: true
+    type:
+      structure: colorRGB
 C_ChatInfo.GetGeneralChannelID:
   inputs:
   - {}
@@ -3794,7 +3791,6 @@ C_ClassColor.GetClassColor:
   outputs:
   - name: classColor
     type:
-      mixin: ColorMixin
       structure: colorRGB
 C_ClassTalents.CanChangeTalents:
   inputs:
@@ -3882,6 +3878,14 @@ C_ClassTalents.GetStarterBuildActive:
   outputs:
   - name: isActive
     type: boolean
+C_ClassTalents.GetTraitTreeForSpec:
+  inputs:
+  - - name: specID
+      type: number
+  outputs:
+  - name: treeID
+    nilable: true
+    type: number
 C_ClassTalents.HasUnspentTalentPoints:
   inputs:
   - {}
@@ -3907,6 +3911,13 @@ C_ClassTalents.ImportLoadout:
     type: boolean
   - name: importError
     type: string
+C_ClassTalents.InitializeViewLoadout:
+  inputs:
+  - - name: specID
+      type: number
+    - name: level
+      type: number
+  outputs: {}
 C_ClassTalents.IsConfigPopulated:
   inputs:
   - - name: configID
@@ -3975,6 +3986,15 @@ C_ClassTalents.UpdateLastSelectedSavedConfigID:
       nilable: true
       type: number
   outputs: {}
+C_ClassTalents.ViewLoadout:
+  inputs:
+  - - name: entries
+      type:
+        arrayof:
+          structure: C_ClassTalents.ImportLoadoutEntryInfo
+  outputs:
+  - name: success
+    type: boolean
 C_ClassTrial.GetClassTrialLogoutTimeSeconds:
   outputs:
   - type: number
@@ -5691,7 +5711,6 @@ C_Commentator.GetStartLocation:
   outputs:
   - name: pos
     type:
-      mixin: Vector3DMixin
       structure: vector3
 C_Commentator.GetTeamColor:
   inputs:
@@ -5700,7 +5719,6 @@ C_Commentator.GetTeamColor:
   outputs:
   - name: color
     type:
-      mixin: ColorMixin
       structure: colorRGB
 C_Commentator.GetTeamColorByUnit:
   inputs:
@@ -5709,7 +5727,6 @@ C_Commentator.GetTeamColorByUnit:
   outputs:
   - name: color
     type:
-      mixin: ColorMixin
       structure: colorRGB
 C_Commentator.GetTimeLeftInMatch:
   inputs:
@@ -6173,7 +6190,6 @@ C_Console.GetColorFromType:
   outputs:
   - name: color
     type:
-      mixin: ColorMixin
       structure: colorRGB
 C_Console.GetFontHeight:
   inputs:
@@ -7332,7 +7348,6 @@ C_Cursor.GetCursorItem:
   outputs:
   - name: item
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
 C_CVar.GetCVar:
   impl: C_CVar.GetCVar
@@ -7420,6 +7435,17 @@ C_DateAndTime.AdjustTimeByMinutes:
   - name: newDate
     type:
       structure: CalendarTime
+C_DateAndTime.AdjustTimeByMonths:
+  inputs:
+  - - name: date
+      type:
+        structure: CalendarTime
+    - name: months
+      type: number
+  outputs:
+  - name: newDate
+    type:
+      structure: CalendarTime
 C_DateAndTime.CompareCalendarTime:
   impl: C_DateAndTime.CompareCalendarTime
   inputs:
@@ -7473,7 +7499,6 @@ C_DeathInfo.GetCorpseMapPosition:
   - name: position
     nilable: true
     type:
-      mixin: Vector2DMixin
       structure: vector2
 C_DeathInfo.GetDeathReleasePosition:
   inputs:
@@ -7483,7 +7508,6 @@ C_DeathInfo.GetDeathReleasePosition:
   - name: position
     nilable: true
     type:
-      mixin: Vector2DMixin
       structure: vector2
 C_DeathInfo.GetGraveyardsForMap:
   inputs:
@@ -7654,6 +7678,14 @@ C_EncounterJournal.IsEncounterComplete:
   outputs:
   - name: isEncounterComplete
     type: boolean
+C_EncounterJournal.OnClose:
+  inputs:
+  - {}
+  outputs: {}
+C_EncounterJournal.OnOpen:
+  inputs:
+  - {}
+  outputs: {}
 C_EncounterJournal.ResetSlotFilter:
   inputs:
   - {}
@@ -7673,6 +7705,11 @@ C_EncounterJournal.SetSlotFilter:
   - - name: filterSlot
       type:
         enum: ItemSlotFilterType
+  outputs: {}
+C_EncounterJournal.SetTab:
+  inputs:
+  - - name: tabIdx
+      type: number
   outputs: {}
 C_EquipmentSet.AssignSpecToEquipmentSet:
   inputs:
@@ -7865,14 +7902,22 @@ C_EventToastManager.RemoveCurrentToast:
   - {}
   outputs: {}
 C_EventUtils.IsEventValid:
+  impl: C_EventUtils.IsEventValid
   inputs:
   - - name: eventName
       type: string
   outputs:
   - name: valid
-    stub: true
     type: boolean
 C_EventUtils.NotifySettingsLoaded:
+  inputs:
+  - {}
+  outputs: {}
+C_ExpansionTrial.OnTrialLevelUpDialogClicked:
+  inputs:
+  - {}
+  outputs: {}
+C_ExpansionTrial.OnTrialLevelUpDialogShown:
   inputs:
   - {}
   outputs: {}
@@ -8097,6 +8142,7 @@ C_FriendList.SortWho:
   - - name: sorting
       type: string
   outputs: {}
+C_FunctionContainers.CreateCallback: {}
 C_GamePad.AddSDLMapping:
   inputs:
   - - name: platform
@@ -8215,7 +8261,6 @@ C_GamePad.GetLedColor:
   outputs:
   - name: color
     type:
-      mixin: ColorMixin
       structure: colorRGB
 C_GamePad.GetPowerLevel:
   inputs:
@@ -8242,7 +8287,6 @@ C_GamePad.SetLedColor:
   inputs:
   - - name: color
       type:
-        mixin: ColorMixin
         structure: colorRGB
   outputs: {}
 C_GamePad.SetVibration:
@@ -8836,6 +8880,14 @@ C_Garrison.TargetSpellHasFollowerReroll: {}
 C_Garrison.TargetSpellHasFollowerTemporaryAbility: {}
 C_Garrison.UpgradeBuilding: {}
 C_Garrison.UpgradeGarrison: {}
+C_GenericWidgetDisplay.Acknowledge:
+  inputs:
+  - {}
+  outputs: {}
+C_GenericWidgetDisplay.Close:
+  inputs:
+  - {}
+  outputs: {}
 C_GossipInfo.CloseGossip:
   inputs:
   - {}
@@ -9064,6 +9116,13 @@ C_GuildInfo.IsGuildRankAssignmentAllowed:
       type: number
   outputs:
   - name: isGuildRankAssignmentAllowed
+    type: boolean
+C_GuildInfo.MemberExistsByName:
+  inputs:
+  - - name: name
+      type: string
+  outputs:
+  - name: exists
     type: boolean
 C_GuildInfo.QueryGuildMemberRecipes:
   inputs:
@@ -9306,7 +9365,6 @@ C_Item.CanItemTransmogAppearance:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: canTransmog
@@ -9317,7 +9375,6 @@ C_Item.CanScrapItem:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: canBeScrapped
@@ -9326,7 +9383,6 @@ C_Item.CanViewItemPowers:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isItemViewable
@@ -9335,7 +9391,6 @@ C_Item.DoesItemExist:
   inputs:
   - - name: emptiableItemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: itemExists
@@ -9352,40 +9407,42 @@ C_Item.DoesItemMatchBonusTreeReplacement:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: matchesBonusTree
+    type: boolean
+C_Item.DoesItemMatchTrackJump:
+  inputs:
+  - - name: itemLoc
+      type:
+        structure: ItemLocation
+  outputs:
+  - name: matchesTrackJump
     type: boolean
 C_Item.GetAppliedItemTransmogInfo:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: info
     nilable: true
     type:
-      mixin: ItemTransmogInfoMixin
       structure: ItemTransmogInfo
 C_Item.GetBaseItemTransmogInfo:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: info
     nilable: true
     type:
-      mixin: ItemTransmogInfoMixin
       structure: ItemTransmogInfo
 C_Item.GetCurrentItemLevel:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: currentItemLevel
@@ -9395,19 +9452,16 @@ C_Item.GetCurrentItemTransmogInfo:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: info
     nilable: true
     type:
-      mixin: ItemTransmogInfoMixin
       structure: ItemTransmogInfo
 C_Item.GetItemConversionOutputIcon:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: icon
@@ -9417,7 +9471,6 @@ C_Item.GetItemGUID:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: itemGUID
@@ -9426,7 +9479,6 @@ C_Item.GetItemIcon:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: icon
@@ -9444,7 +9496,6 @@ C_Item.GetItemID:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: itemID
@@ -9461,7 +9512,6 @@ C_Item.GetItemInventoryType:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: inventoryType
@@ -9481,7 +9531,6 @@ C_Item.GetItemLink:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: itemLink
@@ -9503,13 +9552,11 @@ C_Item.GetItemLocation:
   - name: itemLocation
     nilable: true
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
 C_Item.GetItemMaxStackSize:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: stackSize
@@ -9527,7 +9574,6 @@ C_Item.GetItemName:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: itemName
@@ -9545,7 +9591,6 @@ C_Item.GetItemQuality:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: itemQuality
@@ -9596,7 +9641,6 @@ C_Item.GetStackCount:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: stackCount
@@ -9612,7 +9656,6 @@ C_Item.IsBound:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isBound
@@ -9628,7 +9671,6 @@ C_Item.IsItemConduit:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isConduit
@@ -9637,7 +9679,6 @@ C_Item.IsItemConvertibleAndValidForPlayer:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isItemConvertibleAndValidForPlayer
@@ -9646,7 +9687,6 @@ C_Item.IsItemCorrupted:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isCorrupted
@@ -9655,7 +9695,6 @@ C_Item.IsItemCorruptionRelated:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isCorruptionRelated
@@ -9664,7 +9703,6 @@ C_Item.IsItemCorruptionResistant:
   inputs:
   - - name: itemLoc
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isCorruptionResistant
@@ -9673,7 +9711,6 @@ C_Item.IsItemDataCached:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isCached
@@ -9710,7 +9747,6 @@ C_Item.IsLocked:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isLocked
@@ -9719,7 +9755,6 @@ C_Item.LockItem:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs: {}
 C_Item.LockItemByGUID:
@@ -9731,7 +9766,6 @@ C_Item.RequestLoadItemData:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs: {}
 C_Item.RequestLoadItemDataByID:
@@ -9743,7 +9777,6 @@ C_Item.UnlockItem:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs: {}
 C_Item.UnlockItemByGUID:
@@ -9770,7 +9803,6 @@ C_ItemInteraction.GetItemConversionCurrencyCost:
   inputs:
   - - name: item
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: conversionCost
@@ -9808,7 +9840,6 @@ C_ItemInteraction.SetPendingItem:
   - - name: item
       nilable: true
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: success
@@ -9821,7 +9852,6 @@ C_ItemUpgrade.CanUpgradeItem:
   inputs:
   - - name: baseItem
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isValid
@@ -9834,6 +9864,31 @@ C_ItemUpgrade.CloseItemUpgrade:
   inputs:
   - {}
   outputs: {}
+C_ItemUpgrade.GetHighWatermarkForItem:
+  inputs:
+  - - name: itemInfo
+      type: string
+  outputs:
+  - name: characterHighWatermark
+    type: number
+  - name: accountHighWatermark
+    type: number
+C_ItemUpgrade.GetHighWatermarkForSlot:
+  inputs:
+  - - name: itemRedundancySlot
+      type: number
+  outputs:
+  - name: characterHighWatermark
+    type: number
+  - name: accountHighWatermark
+    type: number
+C_ItemUpgrade.GetHighWatermarkSlotForItem:
+  inputs:
+  - - name: itemInfo
+      type: string
+  outputs:
+  - name: itemRedundancySlot
+    type: number
 C_ItemUpgrade.GetItemHyperlink:
   inputs:
   - {}
@@ -9882,6 +9937,12 @@ C_ItemUpgrade.GetNumItemUpgradeEffects:
   outputs:
   - name: numItemUpgradeEffects
     type: number
+C_ItemUpgrade.IsItemBound:
+  inputs:
+  - {}
+  outputs:
+  - name: isBound
+    type: boolean
 C_ItemUpgrade.SetItemUpgradeFromCursorItem:
   inputs:
   - {}
@@ -9890,7 +9951,6 @@ C_ItemUpgrade.SetItemUpgradeFromLocation:
   inputs:
   - - name: itemToSet
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs: {}
 C_ItemUpgrade.UpgradeItem:
@@ -9930,7 +9990,6 @@ C_LegendaryCrafting.GetRuneforgeItemPreviewInfo:
   inputs:
   - - name: baseItem
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: runeforgePowerID
       nilable: true
@@ -9948,7 +10007,6 @@ C_LegendaryCrafting.GetRuneforgeLegendaryComponentInfo:
   inputs:
   - - name: runeforgeLegendary
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: componentInfo
@@ -9958,7 +10016,6 @@ C_LegendaryCrafting.GetRuneforgeLegendaryCost:
   inputs:
   - - name: baseItem
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: cost
@@ -9982,11 +10039,9 @@ C_LegendaryCrafting.GetRuneforgeLegendaryUpgradeCost:
   inputs:
   - - name: runeforgeLegendary
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: upgradeItem
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: cost
@@ -9997,7 +10052,6 @@ C_LegendaryCrafting.GetRuneforgeModifierInfo:
   inputs:
   - - name: baseItem
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: powerID
       nilable: true
@@ -10033,7 +10087,6 @@ C_LegendaryCrafting.GetRuneforgePowers:
   - - name: baseItem
       nilable: true
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: filter
       nilable: true
@@ -10077,7 +10130,6 @@ C_LegendaryCrafting.IsRuneforgeLegendary:
   inputs:
   - - name: item
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isRuneforgeLegendary
@@ -10086,7 +10138,6 @@ C_LegendaryCrafting.IsRuneforgeLegendaryMaxLevel:
   inputs:
   - - name: runeforgeLegendary
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isMaxLevel
@@ -10095,11 +10146,9 @@ C_LegendaryCrafting.IsUpgradeItemValidForRuneforgeLegendary:
   inputs:
   - - name: runeforgeLegendary
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: upgradeItem
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isValid
@@ -10108,7 +10157,6 @@ C_LegendaryCrafting.IsValidRuneforgeBaseItem:
   inputs:
   - - name: baseItem
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isValid
@@ -10117,7 +10165,6 @@ C_LegendaryCrafting.MakeRuneforgeCraftDescription:
   inputs:
   - - name: baseItem
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: runeforgePowerID
       type: number
@@ -10132,11 +10179,9 @@ C_LegendaryCrafting.UpgradeRuneforgeLegendary:
   inputs:
   - - name: runeforgeLegendary
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: upgradeItem
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs: {}
 C_LevelLink.IsActionLocked:
@@ -10610,31 +10655,51 @@ C_Loot.IsLegacyLootModeEnabled:
   outputs:
   - name: isLegacyLootModeEnabled
     type: boolean
-C_LootHistory.CanMasterLoot: {}
-C_LootHistory.GetExpiration: {}
-C_LootHistory.GetItem: {}
-C_LootHistory.GetNumItems:
-  outputs:
-  - type: number
-C_LootHistory.GetPlayerInfo:
+C_LootHistory.GetAllEncounterInfos:
   inputs:
-  - - name: itemIndex
-      type: number
-    - name: playerIndex
+  - {}
+  outputs:
+  - name: infos
+    type:
+      arrayof:
+        structure: C_LootHistory.EncounterLootInfo
+C_LootHistory.GetInfoForEncounter:
+  inputs:
+  - - name: encounterID
       type: number
   outputs:
-  - name: name
-    type: string
-  - name: class
-    type: string
-  - name: rollType
-    type: string
-  - name: roll
+  - name: info
+    nilable: true
+    type:
+      structure: C_LootHistory.EncounterLootInfo
+C_LootHistory.GetLootHistoryTime:
+  inputs:
+  - {}
+  outputs:
+  - name: time
     type: number
-  - name: isWinner
-    type: boolean
-C_LootHistory.GiveMasterLoot: {}
-C_LootHistory.SetExpiration: {}
+C_LootHistory.GetSortedDropsForEncounter:
+  inputs:
+  - - name: encounterID
+      type: number
+  outputs:
+  - name: drops
+    nilable: true
+    stub: {}
+    type:
+      arrayof:
+        structure: C_LootHistory.EncounterLootDropInfo
+C_LootHistory.GetSortedInfoForDrop:
+  inputs:
+  - - name: encounterID
+      type: number
+    - name: lootListID
+      type: number
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_LootHistory.EncounterLootDropInfo
 C_LootJournal.GetItemSetItems:
   inputs:
   - - name: setID
@@ -10983,6 +11048,27 @@ C_Map.GetMapHighlightInfoAtPosition:
     type: number
   - name: scrollChildY
     type: number
+C_Map.GetMapHighlightPulseInfo:
+  inputs:
+  - - name: uiMapID
+      type: number
+  outputs:
+  - name: fileDataID
+    type: number
+  - name: atlasID
+    type: string
+  - name: texturePercentageX
+    type: number
+  - name: texturePercentageY
+    type: number
+  - name: textureX
+    type: number
+  - name: textureY
+    type: number
+  - name: scrollChildX
+    type: number
+  - name: scrollChildY
+    type: number
 C_Map.GetMapInfo:
   impl: C_Map.GetMapInfo
   inputs:
@@ -11001,6 +11087,9 @@ C_Map.GetMapInfoAtPosition:
       type: number
     - name: y
       type: number
+    - name: ignoreZoneMapPositionData
+      nilable: true
+      type: boolean
   outputs:
   - name: info
     type:
@@ -11035,7 +11124,6 @@ C_Map.GetMapPosFromWorldPos:
       type: number
     - name: worldPosition
       type:
-        mixin: Vector2DMixin
         structure: vector2
     - name: overrideUiMapID
       nilable: true
@@ -11045,7 +11133,6 @@ C_Map.GetMapPosFromWorldPos:
     type: number
   - name: mapPosition
     type:
-      mixin: Vector2DMixin
       structure: vector2
 C_Map.GetMapRectOnMap:
   inputs:
@@ -11081,7 +11168,6 @@ C_Map.GetPlayerMapPosition:
   - name: position
     nilable: true
     type:
-      mixin: Vector2DMixin
       structure: vector2
 C_Map.GetUserWaypoint:
   inputs:
@@ -11109,7 +11195,6 @@ C_Map.GetUserWaypointPositionForMap:
   outputs:
   - name: mapPosition
     type:
-      mixin: Vector2DMixin
       structure: vector2
 C_Map.GetWorldPosFromMapPos:
   inputs:
@@ -11117,14 +11202,12 @@ C_Map.GetWorldPosFromMapPos:
       type: number
     - name: mapPosition
       type:
-        mixin: Vector2DMixin
         structure: vector2
   outputs:
   - name: continentID
     type: number
   - name: worldPosition
     type:
-      mixin: Vector2DMixin
       structure: vector2
 C_Map.HasUserWaypoint:
   inputs:
@@ -11162,7 +11245,6 @@ C_MapExplorationInfo.GetExploredAreaIDsAtPosition:
       type: number
     - name: normalizedPosition
       type:
-        mixin: Vector2DMixin
         structure: vector2
   outputs:
   - name: areaID
@@ -11412,7 +11494,6 @@ C_MountJournal.ApplyMountEquipment:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: canContinue
@@ -11682,7 +11763,6 @@ C_MountJournal.IsItemMountEquipment:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs:
   - name: isMountEquipment
@@ -12294,6 +12374,19 @@ C_PartyInfo.RequestInviteFromUnit:
       nilable: true
       type: boolean
   outputs: {}
+C_PartyPose.ExtraAction:
+  inputs:
+  - - name: partyPoseID
+      type: number
+  outputs: {}
+C_PartyPose.GetPartyPoseInfoByID:
+  inputs:
+  - - name: mapID
+      type: number
+  outputs:
+  - name: info
+    type:
+      structure: C_PartyPose.PartyPoseInfo
 C_PartyPose.GetPartyPoseInfoByMapID:
   inputs:
   - - name: mapID
@@ -12302,6 +12395,13 @@ C_PartyPose.GetPartyPoseInfoByMapID:
   - name: info
     type:
       structure: C_PartyPose.PartyPoseInfo
+C_PartyPose.HasExtraAction:
+  inputs:
+  - - name: partyPoseID
+      type: number
+  outputs:
+  - name: hasExtraAction
+    type: boolean
 C_PerksActivities.AddTrackedPerksActivity:
   inputs:
   - - name: perksActivityID
@@ -12977,7 +13077,6 @@ C_PlayerInfo.GetClass:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs:
   - name: className
@@ -13035,7 +13134,6 @@ C_PlayerInfo.GetName:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs:
   - name: name
@@ -13060,7 +13158,6 @@ C_PlayerInfo.GetRace:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs:
   - name: raceID
@@ -13070,7 +13167,6 @@ C_PlayerInfo.GetSex:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs:
   - name: sex
@@ -13095,7 +13191,6 @@ C_PlayerInfo.IsConnected:
   - - name: playerLocation
       nilable: true
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs:
   - name: isConnected
@@ -13152,7 +13247,6 @@ C_PlayerInfo.UnitIsSameServer:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs:
   - name: unitIsSameServer
@@ -13233,7 +13327,6 @@ C_PlayerMentorship.GetMentorshipStatus:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs:
   - name: status
@@ -14140,11 +14233,47 @@ C_PvP.ToggleWarMode:
   inputs:
   - {}
   outputs: {}
+C_QuestInfoSystem.GetQuestRewardSpellInfo:
+  inputs:
+  - - name: questID
+      nilable: true
+      type: number
+    - name: spellID
+      type: number
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_QuestInfoSystem.QuestRewardSpellInfo
+C_QuestInfoSystem.GetQuestRewardSpells:
+  inputs:
+  - - name: questID
+      nilable: true
+      type: number
+  outputs:
+  - name: spellIDs
+    type:
+      arrayof: number
+C_QuestInfoSystem.GetQuestShouldToastCompletion:
+  inputs:
+  - - name: questID
+      nilable: true
+      type: number
+  outputs:
+  - name: shouldToast
+    type: boolean
+C_QuestInfoSystem.HasQuestRewardSpells:
+  inputs:
+  - - name: questID
+      nilable: true
+      type: number
+  outputs:
+  - name: hasRewardSpells
+    type: boolean
 C_QuestItemUse.CanUseQuestItemOnObject:
   inputs:
   - - name: item
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: unit
       type: unit
@@ -15010,7 +15139,6 @@ C_ReportSystem.CanReportPlayer:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs:
   - name: canReport
@@ -15019,7 +15147,6 @@ C_ReportSystem.CanReportPlayerForLanguage:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs:
   - name: canReport
@@ -15075,12 +15202,10 @@ C_ReportSystem.SendReport:
   inputs:
   - - name: reportInfo
       type:
-        mixin: ReportInfoMixin
         structure: ReportInfo
     - name: playerLocation
       nilable: true
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs: {}
 C_Reputation.GetFactionParagonInfo:
@@ -15192,7 +15317,6 @@ C_ScrappingMachineUI.GetCurrentPendingScrapItemLocationByIndex:
   outputs:
   - name: itemLoc
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
 C_ScrappingMachineUI.GetScrappingMachineName:
   inputs:
@@ -15694,7 +15818,6 @@ C_Sound.PlayItemSound:
         enum: ItemSoundType
     - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs: {}
 C_SpecializationInfo.CanPlayerUsePVPTalentUI:
@@ -15851,6 +15974,12 @@ C_Spell.RequestLoadSpellData:
   - - name: spellID
       type: number
   outputs: {}
+C_Spell.TargetSpellJumpsUpgradeTrack:
+  inputs:
+  - {}
+  outputs:
+  - name: jumpsUpgradeTrack
+    type: boolean
 C_SpellBook.ContainsAnyDisenchantSpell:
   inputs:
   - {}
@@ -15908,6 +16037,9 @@ C_SpellBook.GetSpellInfo:
 C_SpellBook.GetSpellLinkFromSpellID:
   inputs:
   - - name: spellID
+      type: number
+    - name: glyphID
+      nilable: true
       type: number
   outputs:
   - name: spellLink
@@ -16868,17 +17000,6 @@ C_TooltipInfo.GetQuestLogItem:
   - name: data
     type:
       structure: TooltipData
-C_TooltipInfo.GetQuestLogRewardSpell:
-  inputs:
-  - - name: spellIndex
-      type: number
-    - name: questID
-      nilable: true
-      type: number
-  outputs:
-  - name: data
-    type:
-      structure: TooltipData
 C_TooltipInfo.GetQuestLogSpecialItem:
   inputs:
   - - name: questIndex
@@ -16897,14 +17018,6 @@ C_TooltipInfo.GetQuestPartyProgress:
     - name: ignoreActivePlayer
       nilable: true
       type: boolean
-  outputs:
-  - name: data
-    type:
-      structure: TooltipData
-C_TooltipInfo.GetQuestRewardSpell:
-  inputs:
-  - - name: spellIndex
-      type: number
   outputs:
   - name: data
     type:
@@ -17139,7 +17252,6 @@ C_TooltipInfo.GetTransmogrifyItem:
   inputs:
   - - name: transmogLocation
       type:
-        mixin: TransmogLocationMixin
         structure: TransmogLocation
   outputs:
   - name: data
@@ -17265,6 +17377,14 @@ C_TooltipInfo.GetWeeklyReward:
 C_TooltipInfo.GetWorldCursor:
   inputs:
   - {}
+  outputs:
+  - name: data
+    type:
+      structure: TooltipData
+C_TooltipInfo.GetWorldLootObject:
+  inputs:
+  - - name: unitTokenString
+      type: string
   outputs:
   - name: data
     type:
@@ -17397,7 +17517,6 @@ C_TradeSkillUI.CraftEnchant:
     - name: itemTarget
       nilable: true
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs: {}
 C_TradeSkillUI.CraftRecipe:
@@ -17428,14 +17547,12 @@ C_TradeSkillUI.CraftSalvage:
       type: number
     - name: itemTarget
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
   outputs: {}
 C_TradeSkillUI.DoesRecraftingRecipeAcceptItem:
   inputs:
   - - name: itemLocation
       type:
-        mixin: ItemLocationMixin
         structure: ItemLocation
     - name: recipeID
       type: number
@@ -17671,6 +17788,14 @@ C_TradeSkillUI.GetProfessionForCursorItem:
     nilable: true
     type:
       enum: Profession
+C_TradeSkillUI.GetProfessionInfoByRecipeID:
+  inputs:
+  - - name: recipeID
+      type: number
+  outputs:
+  - name: info
+    type:
+      structure: ProfessionInfo
 C_TradeSkillUI.GetProfessionInfoBySkillLineID:
   inputs:
   - - name: skillLineID
@@ -17741,6 +17866,14 @@ C_TradeSkillUI.GetReagentDifficultyText:
   outputs:
   - name: bonusText
     type: string
+C_TradeSkillUI.GetReagentRequirementItemIDs:
+  inputs:
+  - - name: itemID
+      type: number
+  outputs:
+  - name: itemIDs
+    type:
+      arrayof: number
 C_TradeSkillUI.GetReagentSlotStatus:
   inputs:
   - - name: mcrSlotID
@@ -17893,6 +18026,17 @@ C_TradeSkillUI.GetRecraftItems:
   - name: items
     type:
       arrayof: string
+C_TradeSkillUI.GetRecraftRemovalWarnings:
+  inputs:
+  - - name: itemGUID
+      type: string
+    - name: replacedItemIDs
+      type:
+        arrayof: number
+  outputs:
+  - name: warnings
+    type:
+      arrayof: string
 C_TradeSkillUI.GetRemainingRecasts:
   inputs:
   - {}
@@ -17952,6 +18096,15 @@ C_TradeSkillUI.HasFavoriteOrderRecipes:
     type: boolean
 C_TradeSkillUI.IsAnyRecipeFromSource: {}
 C_TradeSkillUI.IsDataSourceChanging: {}
+C_TradeSkillUI.IsEnchantTargetValid:
+  inputs:
+  - - name: recipeID
+      type: number
+    - name: itemGUID
+      type: string
+  outputs:
+  - name: valid
+    type: boolean
 C_TradeSkillUI.IsInventorySlotFiltered: {}
 C_TradeSkillUI.IsNearProfessionSpellFocus:
   inputs:
@@ -18025,6 +18178,15 @@ C_TradeSkillUI.IsRecraftItemEquipped:
   outputs:
   - name: isEquipped
     type: boolean
+C_TradeSkillUI.IsRecraftReagentValid:
+  inputs:
+  - - name: itemGUID
+      type: string
+    - name: itemID
+      type: number
+  outputs:
+  - name: valid
+    type: boolean
 C_TradeSkillUI.IsRuneforging:
   inputs:
   - {}
@@ -18073,6 +18235,11 @@ C_TradeSkillUI.RecraftRecipe:
       type:
         arrayof:
           structure: CraftingReagentInfo
+    - name: removedModifications
+      nilable: true
+      type:
+        arrayof:
+          structure: CraftingItemSlotModification
   outputs:
   - name: result
     type: boolean
@@ -18087,6 +18254,11 @@ C_TradeSkillUI.RecraftRecipeForOrder:
       type:
         arrayof:
           structure: CraftingReagentInfo
+    - name: removedModifications
+      nilable: true
+      type:
+        arrayof:
+          structure: CraftingItemSlotModification
   outputs:
   - name: result
     type: boolean
@@ -18516,7 +18688,6 @@ C_Transmog.ClearPending:
   inputs:
   - - name: transmogLocation
       type:
-        mixin: TransmogLocationMixin
         structure: TransmogLocation
   outputs: {}
 C_Transmog.Close:
@@ -18574,18 +18745,15 @@ C_Transmog.GetPending:
   inputs:
   - - name: transmogLocation
       type:
-        mixin: TransmogLocationMixin
         structure: TransmogLocation
   outputs:
   - name: pendingInfo
     type:
-      mixin: TransmogPendingInfoMixin
       structure: TransmogPendingInfo
 C_Transmog.GetSlotEffectiveCategory:
   inputs:
   - - name: transmogLocation
       type:
-        mixin: TransmogLocationMixin
         structure: TransmogLocation
   outputs:
   - name: categoryID
@@ -18602,7 +18770,6 @@ C_Transmog.GetSlotInfo:
   inputs:
   - - name: transmogLocation
       type:
-        mixin: TransmogLocationMixin
         structure: TransmogLocation
   outputs:
   - name: isTransmogrified
@@ -18626,7 +18793,6 @@ C_Transmog.GetSlotUseError:
   inputs:
   - - name: transmogLocation
       type:
-        mixin: TransmogLocationMixin
         structure: TransmogLocation
   outputs:
   - name: errorCode
@@ -18637,7 +18803,6 @@ C_Transmog.GetSlotVisualInfo:
   inputs:
   - - name: transmogLocation
       type:
-        mixin: TransmogLocationMixin
         structure: TransmogLocation
   outputs:
   - name: baseSourceID
@@ -18668,7 +18833,6 @@ C_Transmog.IsSlotBeingCollapsed:
   inputs:
   - - name: transmogLocation
       type:
-        mixin: TransmogLocationMixin
         structure: TransmogLocation
   outputs:
   - name: isBeingCollapsed
@@ -18682,11 +18846,9 @@ C_Transmog.SetPending:
   inputs:
   - - name: transmogLocation
       type:
-        mixin: TransmogLocationMixin
         structure: TransmogLocation
     - name: pendingInfo
       type:
-        mixin: TransmogPendingInfoMixin
         structure: TransmogPendingInfo
   outputs: {}
 C_TransmogCollection.AccountCanCollectSource:
@@ -18822,7 +18984,6 @@ C_TransmogCollection.GetAppearanceSources:
     - name: transmogLocation
       nilable: true
       type:
-        mixin: TransmogLocationMixin
         structure: TransmogLocation
   outputs:
   - name: sources
@@ -18846,7 +19007,6 @@ C_TransmogCollection.GetCategoryAppearances:
     - name: transmogLocation
       nilable: true
       type:
-        mixin: TransmogLocationMixin
         structure: TransmogLocation
   outputs:
   - name: appearances
@@ -19821,6 +19981,15 @@ C_UIWidgetManager.GetIconTextAndCurrenciesWidgetVisualizationInfo:
     nilable: true
     type:
       structure: C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo
+C_UIWidgetManager.GetItemDisplayVisualizationInfo:
+  inputs:
+  - - name: widgetID
+      type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.ItemDisplayVisualizationInfo
 C_UIWidgetManager.GetObjectiveTrackerWidgetSetID:
   inputs:
   - {}
@@ -20001,6 +20170,31 @@ C_UIWidgetManager.UnregisterUnitForWidgetUpdates:
       name: isGuid
       type: boolean
   outputs: {}
+C_UnitAuras.AddPrivateAuraAnchor:
+  inputs:
+  - - name: args
+      type:
+        structure: AddPrivateAuraAnchorArgs
+  outputs:
+  - name: anchorID
+    nilable: true
+    type: number
+C_UnitAuras.AddPrivateAuraAppliedSound:
+  inputs:
+  - - name: sound
+      type:
+        structure: UnitPrivateAuraAppliedSoundInfo
+  outputs:
+  - name: privateAuraSoundID
+    nilable: true
+    type: number
+C_UnitAuras.AuraIsPrivate:
+  inputs:
+  - - name: spellID
+      type: number
+  outputs:
+  - name: isPrivate
+    type: boolean
 C_UnitAuras.GetAuraDataByAuraInstanceID:
   inputs:
   - - name: unitToken
@@ -20051,6 +20245,25 @@ C_UnitAuras.IsAuraFilteredOutByInstanceID:
   outputs:
   - name: isFiltered
     type: boolean
+C_UnitAuras.RemovePrivateAuraAnchor:
+  inputs:
+  - - name: anchorID
+      type: number
+  outputs: {}
+C_UnitAuras.RemovePrivateAuraAppliedSound:
+  inputs:
+  - - name: privateAuraSoundID
+      type: number
+  outputs: {}
+C_UnitAuras.SetPrivateWarningTextAnchor:
+  inputs:
+  - - name: parent
+      type: table
+    - name: anchor
+      nilable: true
+      type:
+        structure: AnchorBinding
+  outputs: {}
 C_UnitAuras.WantsAlteredForm:
   inputs:
   - - name: unitToken
@@ -20058,6 +20271,29 @@ C_UnitAuras.WantsAlteredForm:
   outputs:
   - name: wantsAlteredForm
     type: boolean
+C_UnitAurasPrivate.AddPrivateAuraUpdateCallback: {}
+C_UnitAurasPrivate.AnchorPrivateAura: {}
+C_UnitAurasPrivate.GetAllPrivateAuras:
+  inputs:
+  - {}
+  outputs:
+  - name: auras
+    type:
+      arrayof:
+        structure: AuraData
+C_UnitAurasPrivate.GetAuraDataByAuraInstanceIDPrivate: {}
+C_UnitAurasPrivate.GetPrivateAuraAnchors:
+  inputs:
+  - {}
+  outputs:
+  - name: existingAnchors
+    type:
+      arrayof:
+        structure: PrivateAuraAnchor
+C_UnitAurasPrivate.SetPrivateAuraAnchorAddedCallback: {}
+C_UnitAurasPrivate.SetPrivateAuraAnchorRemovedCallback: {}
+C_UnitAurasPrivate.SetPrivateRaidBossMessageCallback: {}
+C_UnitAurasPrivate.SetPrivateWarningTextFrame: {}
 C_UserFeedback.SubmitBug:
   inputs:
   - - name: bugInfo
@@ -20081,7 +20317,6 @@ C_VideoOptions.GetCurrentGameWindowSize:
   outputs:
   - name: size
     type:
-      mixin: Vector2DMixin
       structure: vector2
 C_VideoOptions.GetDefaultGameWindowSize:
   inputs:
@@ -20090,7 +20325,6 @@ C_VideoOptions.GetDefaultGameWindowSize:
   outputs:
   - name: size
     type:
-      mixin: Vector2DMixin
       structure: vector2
 C_VideoOptions.GetGameWindowSizes:
   inputs:
@@ -20144,10 +20378,11 @@ C_VignetteInfo.GetVignettePosition:
       type: number
   outputs:
   - name: vignettePosition
-    nilable: true
     type:
-      mixin: Vector2DMixin
       structure: vector2
+  - name: vignetteFacing
+    nilable: true
+    type: number
 C_VignetteInfo.GetVignettes:
   inputs:
   - {}
@@ -20359,7 +20594,6 @@ C_VoiceChat.GetMemberVolume:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs:
   - name: volume
@@ -20464,7 +20698,6 @@ C_VoiceChat.IsMemberMuted:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs:
   - name: mutedForMe
@@ -20513,7 +20746,6 @@ C_VoiceChat.IsPlayerUsingVoice:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs:
   - name: isUsingVoice
@@ -20618,7 +20850,6 @@ C_VoiceChat.SetMemberMuted:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
     - name: muted
       type: boolean
@@ -20627,7 +20858,6 @@ C_VoiceChat.SetMemberVolume:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
     - name: volume
       type: number
@@ -20704,7 +20934,6 @@ C_VoiceChat.ToggleMemberMuted:
   inputs:
   - - name: playerLocation
       type:
-        mixin: PlayerLocationMixin
         structure: PlayerLocation
   outputs: {}
 C_VoiceChat.ToggleMuted:
@@ -21344,8 +21573,8 @@ coroutine.wrap:
 coroutine.yield:
   stdlib: coroutine.yield
 cos:
-  impl: cos
   nowrap: true
+  stdlib: cos
 CreateFont:
   impl: CreateFont
   inputs:
@@ -21801,17 +22030,6 @@ GetAddOnMemoryUsage:
   outputs:
   - name: memoryKb
     type: number
-GetAddOnMetadata:
-  impl: GetAddOnMetadata
-  inputs:
-  - - name: addon
-      type: uiAddon
-    - name: field
-      type: string
-  outputs:
-  - name: value
-    nilable: true
-    type: string
 GetAddOnOptionalDependencies: {}
 GetAllowLowLevelRaid: {}
 GetAlternativeDefaultLanguage: {}
@@ -22024,7 +22242,7 @@ GetBlockChance: {}
 GetBonusBarIndex: {}
 GetBonusBarOffset: {}
 GetBuildInfo:
-  impl: GetBuildInfo
+  impl: GetBuildInfo_10_1
   inputs:
   - {}
   outputs:
@@ -22036,6 +22254,12 @@ GetBuildInfo:
     type: string
   - name: tocversion
     type: number
+  - name: localizedVersion
+    type: string
+  - name: buildType
+    type: string
+GetButtonMetatable:
+  impl: GetButtonMetatable
 GetBuybackItemInfo:
   inputs:
   - - name: index
@@ -22144,6 +22368,14 @@ GetChatWindowMessages:
       type: number
 GetChatWindowSavedDimensions: {}
 GetChatWindowSavedPosition: {}
+GetClassIDFromSpecID:
+  inputs:
+  - - name: specID
+      type: number
+  outputs:
+  - name: classID
+    nilable: true
+    type: number
 GetClassInfo:
   impl: GetClassInfo
   inputs:
@@ -22325,10 +22557,10 @@ GetDungeonDifficultyID:
   outputs:
   - type: number
 GetDungeonForRandomSlot: {}
+GetEditBoxMetatable: {}
 GetEquipmentNameFromSpell: {}
 geterrorhandler:
   stdlib: geterrorhandler
-GetEventCPUUsage: {}
 GetEventTime: {}
 GetExistingSocketInfo:
   inputs:
@@ -22487,14 +22719,17 @@ GetFlyoutSlotInfo: {}
 GetFollowerTypeIDFromSpell: {}
 GetFontInfo: {}
 GetFonts: {}
+GetFontStringMetatable:
+  impl: GetFontStringMetatable
 GetFrameCPUUsage: {}
+GetFrameMetatable:
+  impl: GetFrameMetatable
 GetFramerate:
   inputs:
   - {}
   outputs:
   - type: number
 GetFramesRegisteredForEvent: {}
-GetFunctionCPUUsage: {}
 GetGameMessageInfo: {}
 GetGameTime:
   inputs:
@@ -23622,9 +23857,7 @@ GetMonitorCount: {}
 GetMonitorName: {}
 GetMouseButtonClicked: {}
 GetMouseButtonName: {}
-GetMouseClickFocus: {}
 GetMouseFocus: {}
-GetMouseMotionFocus: {}
 GetMovieDownloadProgress: {}
 GetMultiCastBarIndex:
   outputs:
@@ -23785,7 +24018,6 @@ GetNumFactions:
 GetNumFilteredAchievements: {}
 GetNumFlexRaidDungeons: {}
 GetNumFlyouts: {}
-GetNumFrames: {}
 GetNumGroupChannels: {}
 GetNumGroupMembers:
   outputs:
@@ -23898,9 +24130,6 @@ GetNumQuestLogRewardFactions: {}
 GetNumQuestLogRewards:
   outputs:
   - type: number
-GetNumQuestLogRewardSpells:
-  outputs:
-  - type: number
 GetNumQuestLogTasks: {}
 GetNumQuestRewards:
   inputs:
@@ -23921,12 +24150,6 @@ GetNumRewardCurrencies:
   - {}
   outputs:
   - name: numQuestCurrencies
-    type: number
-GetNumRewardSpells:
-  inputs:
-  - {}
-  outputs:
-  - name: numRewardSpells
     type: number
 GetNumRFDungeons:
   inputs:
@@ -24341,12 +24564,10 @@ GetQuestLogRewardMoney:
   outputs:
   - type: number
 GetQuestLogRewardSkillPoints: {}
-GetQuestLogRewardSpell: {}
 GetQuestLogRewardTitle: {}
 GetQuestLogRewardXP: {}
 GetQuestLogSpecialItemCooldown: {}
 GetQuestLogSpecialItemInfo: {}
-GetQuestLogSpellLink: {}
 GetQuestLogTimeLeft:
   outputs:
   - type: number
@@ -24381,7 +24602,6 @@ GetQuestProgressBarPercent: {}
 GetQuestResetTime: {}
 GetQuestReward: {}
 GetQuestSortIndex: {}
-GetQuestSpellLink: {}
 GetQuestText: {}
 GetQuestUiMapID: {}
 GetRaidDifficultyID:
@@ -24542,29 +24762,6 @@ GetRewardSkillPoints:
     type: number
   - name: skillPoints
     type: number
-GetRewardSpell:
-  inputs:
-  - {}
-  outputs:
-  - name: texture
-    type: number
-  - name: spellName
-    type: string
-  - name: isTradeskillSpell
-    type: boolean
-  - name: isSpellLearned
-    type: boolean
-  - name: hideSpellLearnText
-    type: boolean
-  - name: isBoostSpell
-    type: boolean
-  - name: garrFollowerID
-    nilable: true
-    type: number
-  - name: genericUnlock
-    type: boolean
-  - name: spellID
-    type: number
 GetRewardText:
   inputs:
   - {}
@@ -24652,7 +24849,6 @@ GetScreenWidth:
   impl: GetScreenWidth
   outputs:
   - type: number
-GetScriptCPUUsage: {}
 GetSecondsUntilParentalControlsKick: {}
 GetSelectedArtifactInfo: {}
 GetSelectedDisplayChannel: {}
@@ -24730,6 +24926,7 @@ GetSocketTypes:
   - name: gemColor
     stub: Blue
     type: string
+GetSoundEntryCount: {}
 GetSpecChangeCost: {}
 GetSpecialization:
   outputs:
@@ -26120,6 +26317,7 @@ IsVoidStorageReady:
     type: boolean
 IsWargame: {}
 IsWindowsClient: {}
+IsWorldLootObject: {}
 IsXPUserDisabled: {}
 ItemAddedToArtifact: {}
 ItemCanTargetGarrisonFollowerAbility: {}
@@ -26416,6 +26614,8 @@ PartialPlayTime:
 PartyLFGStartBackfill: {}
 pcall:
   stdlib: pcall
+pcallwithenv:
+  stdlib: pcallwithenv
 PetAbandon: {}
 PetAggressiveMode: {}
 PetAssistMode: {}
@@ -26979,8 +27179,8 @@ ShowQuestOffer: {}
 ShowRepairCursor: {}
 SignPetition: {}
 sin:
-  impl: sin
   nowrap: true
+  stdlib: sin
 SitStandOrDescendStart:
   inputs:
   - {}
@@ -27127,6 +27327,25 @@ string.trim:
   stdlib: strtrim
 string.upper:
   stdlib: string.upper
+StripHyperlinks:
+  inputs:
+  - - name: text
+      type: string
+    - default: false
+      name: maintainColor
+      type: boolean
+    - default: false
+      name: maintainBrackets
+      type: boolean
+    - default: false
+      name: stripNewlines
+      type: boolean
+    - default: false
+      name: maintainAtlases
+      type: boolean
+  outputs:
+  - name: stripped
+    type: string
 strjoin:
   alias: string.join
 strlen:
@@ -27183,8 +27402,8 @@ TakeInboxMoney: {}
 TakeInboxTextItem: {}
 TakeTaxiNode: {}
 tan:
-  impl: tan
   nowrap: true
+  stdlib: tan
 TargetDirectionEnemy: {}
 TargetDirectionFinished: {}
 TargetDirectionFriend: {}
@@ -28044,7 +28263,14 @@ UnitSex:
     nilable: true
     type: number
 UnitShouldDisplayName: {}
-UnitSpellHaste: {}
+UnitSpellHaste:
+  inputs:
+  - - name: unit
+      type: unit
+  outputs:
+  - name: spellHastePercent
+    stub: 100
+    type: number
 UnitStagger:
   inputs:
   - - name: unit

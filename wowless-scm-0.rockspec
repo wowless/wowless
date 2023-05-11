@@ -8,7 +8,6 @@ dependencies = {
   'lua = 5.1',
   'argparse',
   'busted',
-  'cluacov',
   'date',
   'http',
   'libdeflate',

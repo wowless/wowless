@@ -66,6 +66,8 @@ ADDON_LOADED:
   payload:
   - name: addOnName
     type: string
+  - name: containsBindings
+    type: boolean
 ADDONS_UNLOADING:
   payload:
   - name: closingClient
@@ -356,7 +358,6 @@ AZERITE_EMPOWERED_ITEM_SELECTION_UPDATED:
   payload:
   - name: azeriteEmpoweredItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
 AZERITE_ESSENCE_ACTIVATED:
   payload:
@@ -396,7 +397,6 @@ AZERITE_ITEM_EXPERIENCE_CHANGED:
   payload:
   - name: azeriteItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
   - name: oldExperienceAmount
     type: number
@@ -406,7 +406,6 @@ AZERITE_ITEM_POWER_LEVEL_CHANGED:
   payload:
   - name: azeriteItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
   - name: oldPowerLevel
     type: number
@@ -4621,7 +4620,6 @@ ITEM_INTERACTION_ITEM_SELECTION_UPDATED:
   - name: itemLocation
     nilable: true
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
 ITEM_KEY_ITEM_INFO_RECEIVED:
   payload:
@@ -4901,22 +4899,22 @@ LOOT_BIND_CONFIRM:
     type: number
 LOOT_CLOSED:
   payload: {}
-LOOT_HISTORY_AUTO_SHOW:
-  payload:
-  - name: rollID
-    type: number
-  - name: isMasterLoot
-    type: boolean
-LOOT_HISTORY_FULL_UPDATE:
+LOOT_HISTORY_CLEAR_HISTORY:
   payload: {}
-LOOT_HISTORY_ROLL_CHANGED:
+LOOT_HISTORY_GO_TO_ENCOUNTER:
   payload:
-  - name: historyIndex
+  - name: encounterID
     type: number
-  - name: playerIndex
+LOOT_HISTORY_UPDATE_DROP:
+  payload:
+  - name: encounterID
     type: number
-LOOT_HISTORY_ROLL_COMPLETE:
-  payload: {}
+  - name: lootListID
+    type: number
+LOOT_HISTORY_UPDATE_ENCOUNTER:
+  payload:
+  - name: encounterID
+    type: number
 LOOT_ITEM_AVAILABLE:
   payload:
   - name: itemTooltip
@@ -5157,6 +5155,8 @@ NEUTRAL_FACTION_SELECT_RESULT:
   payload:
   - name: success
     type: boolean
+NEW_MATCHMAKING_PARTY_INVITE:
+  payload: {}
 NEW_MOUNT_ADDED:
   payload:
   - name: mountID
@@ -5615,6 +5615,8 @@ PLAYER_INTERACTION_MANAGER_FRAME_SHOW:
   - name: type
     type:
       enum: PlayerInteractionType
+PLAYER_JOINED_PVP_MATCH:
+  payload: {}
 PLAYER_LEARN_PVP_TALENT_FAILED:
   payload: {}
 PLAYER_LEARN_TALENT_FAILED:
@@ -5801,8 +5803,6 @@ PVP_ROLE_POPUP_HIDE:
   - name: readyCheckInfo
     type:
       structure: C_PvP.PvpReadyCheckInfo
-PVP_ROLE_POPUP_JOINED_MATCH:
-  payload: {}
 PVP_ROLE_POPUP_SHOW:
   payload:
   - name: readyCheckInfo
@@ -6071,6 +6071,10 @@ RECEIVED_ACHIEVEMENT_MEMBER_LIST:
   payload:
   - name: achievementID
     type: number
+REJECTED_MATCHMAKING_PARTY_INVITE:
+  payload:
+  - name: name
+    type: string
 REPLACE_ENCHANT:
   payload:
   - name: existingStr
@@ -6324,6 +6328,12 @@ SHOW_LOOT_TOAST_UPGRADE:
   - name: personalLootToast
     type: boolean
   - name: lessAwesome
+    type: boolean
+SHOW_PARTY_POSE_UI:
+  payload:
+  - name: mapID
+    type: number
+  - name: won
     type: boolean
 SHOW_PVP_FACTION_LOOT_TOAST:
   payload:
@@ -6745,7 +6755,10 @@ TOKEN_SELL_RESULT:
 TOKEN_STATUS_CHANGED:
   payload: {}
 TOOLTIP_DATA_UPDATE:
-  payload: {}
+  payload:
+  - name: dataInstanceID
+    nilable: true
+    type: number
 TOYS_UPDATED:
   payload:
   - name: itemID
@@ -6985,14 +6998,12 @@ TRANSMOGRIFY_SUCCESS:
   payload:
   - name: transmogLocation
     type:
-      mixin: TransmogLocationMixin
       structure: TransmogLocation
 TRANSMOGRIFY_UPDATE:
   payload:
   - name: transmogLocation
     nilable: true
     type:
-      mixin: TransmogLocationMixin
       structure: TransmogLocation
   - name: action
     nilable: true

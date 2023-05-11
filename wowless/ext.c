@@ -3,6 +3,10 @@
 #include <lualib.h>
 #include <lauxlib.h>
 
+#ifndef ELUNE_VERSION
+#error Must be compiled against Elune headers.
+#endif
+
 /* Lightly modified from ldblib.c. */
 
 static lua_State *getthread (lua_State *L, int *arg) {
@@ -84,7 +88,7 @@ static struct luaL_Reg extlib[] = {
   {NULL, NULL}
 };
 
-int luaopen_build_cmake_ext(lua_State *L) {
+int luaopen_wowless_ext(lua_State *L) {
   lua_newtable(L);
   luaL_register(L, NULL, extlib);
   return 1;

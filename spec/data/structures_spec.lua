@@ -33,7 +33,7 @@ describe('structures', function()
         elseif ty.structure then
           if not expected[ty.structure] then
             expected[ty.structure] = true
-            for _, fv in pairs(actual[ty.structure] or {}) do
+            for _, fv in pairs((actual[ty.structure] or {}).fields) do
               close(fv.type)
             end
           end
