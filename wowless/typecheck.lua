@@ -38,6 +38,9 @@ return function(api)
     number = function(value)
       return luatypecheck('number', type(value) == 'string' and tonumber(value) or value)
     end,
+    oneornil = function(value)
+      return value, value ~= 1
+    end,
     string = function(value)
       return luatypecheck('string', type(value) == 'number' and tostring(value) or value)
     end,
@@ -56,8 +59,11 @@ return function(api)
       local guid = units.aliases[value:lower()]
       return guid and units.guids[guid] or nil
     end,
-    unknown = function(_, value)
+    unknown = function(value)
       return value
+    end,
+    userdata = function(value)
+      return luatypecheck('userdata', value)
     end,
   }
 
@@ -65,9 +71,14 @@ return function(api)
     return nil, ('is of type %q, but %q was passed'):format(typestr(spec.type), type(value))
   end
 
+  local nilables = {
+    ['nil'] = true,
+    oneornil = true,
+  }
+
   local function typecheck(spec, value)
     if value == nil then
-      if not spec.nilable and spec.default == nil then
+      if not spec.nilable and spec.default == nil and not nilables[spec.type] then
         return nil, 'is not nilable, but nil was passed'
       end
       return nil

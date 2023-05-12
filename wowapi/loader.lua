@@ -60,16 +60,6 @@ local function loadFunctions(api, loader)
     env = api.env,
     loader = loader,
   }
-  local nilableTypes = {
-    ['nil'] = true,
-    oneornil = true,
-    unknown = true,
-  }
-  local supportedTypes = {
-    boolean = true,
-    number = true,
-    string = true,
-  }
 
   local typechecker = require('wowless.typecheck')(api)
 
@@ -172,24 +162,9 @@ local function loadFunctions(api, loader)
           return
         end
         for i, out in ipairs(apicfg.outputs) do
-          local arg = select(i, ...)
-          if arg == nil then
-            if not out.nilable and not nilableTypes[out.type] then
-              error(('output %d (%q) of %q is not nilable, but nil was returned'):format(i, tostring(out.name), fname))
-            end
-          elseif supportedTypes[out.type] then
-            local ty = type(arg)
-            if ty ~= out.type then
-              error(
-                ('output %d (%q) of %q is of type %q, but %q was returned'):format(
-                  i,
-                  tostring(out.name),
-                  fname,
-                  out.type,
-                  ty
-                )
-              )
-            end
+          local _, errmsg = typechecker(out, (select(i, ...)))
+          if errmsg then
+            error(('output %d (%q) of %q %s'):format(i, tostring(out.name), fname, errmsg))
           end
         end
         return ...
