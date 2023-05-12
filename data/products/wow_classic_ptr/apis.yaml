@@ -9974,6 +9974,7 @@ GetDungeonDifficultyID:
   - type: number
 GetDungeonInfo: {}
 GetEditBoxMetatable: {}
+GetEquivalentDynamicDifficultyID: {}
 geterrorhandler:
   stdlib: geterrorhandler
 GetEventCPUUsage: {}
