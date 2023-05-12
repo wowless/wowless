@@ -158,8 +158,12 @@ local function loadFunctions(api, loader)
         return fn
       end
       local function doCheckOutputs(...)
-        if select('#', ...) == 0 and apicfg.mayreturnnothing then
+        local n = select('#', ...)
+        if n == 0 and apicfg.mayreturnnothing then
           return
+        end
+        if n > #apicfg.outputs then
+          error('returned too many values from ' .. fname)
         end
         for i, out in ipairs(apicfg.outputs) do
           local _, errmsg = typechecker(out, (select(i, ...)))
