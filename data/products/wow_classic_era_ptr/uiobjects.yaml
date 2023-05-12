@@ -445,8 +445,14 @@ Cooldown:
   fields:
     blingTexture:
       type: texture
+    durationMillis:
+      init: 0
+      type: number
     edgeTexture:
       type: texture
+    startTimeMillis:
+      init: 0
+      type: number
     swipeTexture:
       type: texture
   inherits:
@@ -455,7 +461,10 @@ Cooldown:
     Clear: {}
     GetCooldownDisplayDuration: {}
     GetCooldownDuration: {}
-    GetCooldownTimes: {}
+    GetCooldownTimes:
+      getter:
+      - name: startTimeMillis
+      - name: durationMillis
     GetDrawBling: {}
     GetDrawEdge: {}
     GetDrawSwipe: {}
