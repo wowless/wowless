@@ -236,6 +236,7 @@ local builds = {
       'wowless/png.lua',
       'wowless/render.lua',
       'wowless/runner.lua',
+      'wowless/typecheck.lua',
       'wowless/util.lua',
       'wowless/xml.lua',
       'wowless.lua',
@@ -577,6 +578,7 @@ table.insert(builds, {
     'spec/wowless/frame_spec.lua',
     'spec/wowless/hlist_spec.lua',
     'spec/wowless/png_spec.lua',
+    'spec/wowless/typecheck_spec.lua',
     'spec/wowless/util_spec.lua',
   },
   ins_implicit = {
