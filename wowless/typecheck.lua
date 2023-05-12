@@ -65,7 +65,7 @@ return function(api)
     return nil, ('is of type %q, but %q was passed'):format(typestr(spec.type), type(value))
   end
 
-  return function(spec, value)
+  local function typecheck(spec, value)
     if value == nil then
       if not spec.nilable and spec.default == nil then
         return nil, 'is not nilable, but nil was passed'
@@ -97,13 +97,21 @@ return function(api)
       end
       return value
     elseif spec.type.arrayof then
-      -- TODO better array checking
       if type(value) ~= 'table' then
         return mismatch(spec, value)
+      end
+      local espec = { type = spec.type.arrayof }
+      for i, v in ipairs(value) do
+        local _, err = typecheck(espec, v)
+        if err then
+          return nil, 'element ' .. i .. ' ' .. err
+        end
       end
       return value
     else
       return nil, 'invalid spec'
     end
   end
+
+  return typecheck
 end

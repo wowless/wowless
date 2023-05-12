@@ -4,10 +4,20 @@ local tests = {
     spec = { type = { arrayof = 'number' } },
     value = 'moo',
   },
-  ['array of numbres type, table value, empty'] = {
+  ['array of numbers type, table value, empty'] = {
     out = { {} },
     spec = { type = { arrayof = 'number' } },
     value = {},
+  },
+  ['array of numbers type, table value, non-empty with numbers'] = {
+    out = { { 1, 2, 3 } },
+    spec = { type = { arrayof = 'number' } },
+    value = { 1, 2, 3 },
+  },
+  ['array of numbers type, table value, non-empty with strings'] = {
+    out = { nil, 'element 1 is of type "number", but "string" was passed' },
+    spec = { type = { arrayof = 'number' } },
+    value = { 'foo', 'bar' },
   },
   ['enum type, number value, membership fails'] = {
     out = { 3, 'is of enum type "Foo", which does not have value 3', true },
