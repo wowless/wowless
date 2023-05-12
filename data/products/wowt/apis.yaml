@@ -25009,6 +25009,8 @@ GetSpecializationInfoForClassID:
     type: boolean
   - name: isAllowed
     type: boolean
+  - name: mastery
+    type: number
 GetSpecializationInfoForSpecID:
   impl: GetSpecializationInfoForSpecID
   inputs:

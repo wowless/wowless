@@ -9540,6 +9540,12 @@ GetBuildInfo:
     type: string
   - name: tocversion
     type: number
+  - name: localizedVersion
+    type: string
+  - name: buildType
+    type: string
+  - name: tocversionagain
+    type: number
 GetButtonMetatable:
   impl: GetButtonMetatable
 GetBuybackItemInfo:
