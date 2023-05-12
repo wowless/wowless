@@ -450,6 +450,7 @@ C_ActionBar.ToggleAutoCastPetAction:
       type: number
   outputs: {}
 C_AddOns.GetAddOnMetadata:
+  impl: GetAddOnMetadata
   inputs:
   - - name: name
       type: uiAddon
@@ -457,6 +458,7 @@ C_AddOns.GetAddOnMetadata:
       type: string
   outputs:
   - name: value
+    nilable: true
     type: string
 C_AdventureJournal.ActivateEntry: {}
 C_AdventureJournal.CanBeShown: {}
