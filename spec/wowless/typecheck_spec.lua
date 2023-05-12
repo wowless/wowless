@@ -44,6 +44,16 @@ local tests = {
     spec = { type = { enum = 'Foo' } },
     value = 'foo',
   },
+  ['framepoint type, invalid value'] = {
+    out = { nil, 'is of type "FramePoint", but "string" was passed' },
+    spec = { type = 'FramePoint' },
+    value = 'notapoint',
+  },
+  ['framepoint type, valid value'] = {
+    out = { 'TOPRIGHT' },
+    spec = { type = 'FramePoint' },
+    value = 'TOPRIGHT',
+  },
   ['invalid spec'] = {
     out = { nil, 'invalid spec' },
     spec = { type = 'wat' },

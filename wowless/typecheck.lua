@@ -28,13 +28,24 @@ return function(api)
     return value, type(value) ~= basetype
   end
 
+  local framepoints = {
+    BOTTOM = true,
+    BOTTOMLEFT = true,
+    BOTTOMRIGHT = true,
+    CENTER = true,
+    LEFT = true,
+    RIGHT = true,
+    TOP = true,
+    TOPLEFT = true,
+    TOPRIGHT = true,
+  }
+
   local scalartypechecks = {
     boolean = function(value)
       return luatypecheck('boolean', value)
     end,
     FramePoint = function(value)
-      -- TODO assert values
-      return luatypecheck('string', value)
+      return value, not framepoints[value]
     end,
     ['function'] = function(value)
       return luatypecheck('function', value)
