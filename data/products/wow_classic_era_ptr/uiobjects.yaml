@@ -39,10 +39,12 @@ Actor:
     IsSlotVisible: {}
     IsUsingCenterForOrigin: {}
     PlayAnimationKit: {}
+    ReleaseFrontEndCharacterDisplays: {}
     SetAnimation: {}
     SetAnimationBlendOperation: {}
     SetAutoDress: {}
     SetDesaturation: {}
+    SetFrontEndLobbyModelFromDefaultCharacterDisplay: {}
     SetItemTransmogInfo: {}
     SetModelByCreatureDisplayID: {}
     SetModelByFileID: {}
@@ -144,6 +146,7 @@ AnimationGroup:
       impl: AnimationGroup/GetAnimations
     GetAnimationSpeedMultiplier: {}
     GetDuration: {}
+    GetElapsed: {}
     GetLooping: {}
     GetLoopState: {}
     GetProgress: {}
@@ -1027,6 +1030,7 @@ GameTooltip:
     SetAllowShowWithNoLines: {}
     SetAnchorType: {}
     SetCustomLineSpacing: {}
+    SetCustomWordWrapMinWidth: {}
     SetFrameStack: {}
     SetMinimumWidth: {}
     SetObjectTooltipPosition: {}
@@ -1318,6 +1322,7 @@ MouseMixin:
   methods:
     EnableMouse:
       impl: MouseMixin/EnableMouse
+    EnableMouseMotion: {}
     EnableMouseWheel:
       setter:
       - name: mouseWheelEnabled
@@ -1329,6 +1334,7 @@ MouseMixin:
     IsMouseMotionEnabled:
       getter:
       - name: mouseMotionEnabled
+    IsMouseMotionFocus: {}
     IsMouseWheelEnabled:
       getter:
       - name: mouseWheelEnabled
@@ -1412,7 +1418,6 @@ PlayerModel:
     SetBarberShopAlternateForm: {}
     SetCamDistanceScale: {}
     SetCreature: {}
-    SetCustomRace: {}
     SetDisplayInfo: {}
     SetDoBlend: {}
     SetItem: {}
@@ -1976,8 +1981,6 @@ UnitPositionFrame:
     Frame: {}
   methods:
     AddUnit: {}
-    AddUnitAtlas: {}
-    AddUnitFileID: {}
     ClearUnits: {}
     FinalizeUnits: {}
     GetMouseOverUnits: {}
