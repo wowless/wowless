@@ -32,6 +32,10 @@ return function(api)
     boolean = function(value)
       return luatypecheck('boolean', value)
     end,
+    FramePoint = function(value)
+      -- TODO assert values
+      return luatypecheck('string', value)
+    end,
     ['function'] = function(value)
       return luatypecheck('function', value)
     end,
@@ -97,15 +101,26 @@ return function(api)
       if type(v) ~= 'number' then
         return mismatch(spec, value)
       end
+      -- TODO handle flag-style enums more intelligently than this
+      if spec.type.enum:sub(-4) == 'Flag' then
+        return v
+      end
       if not enumrev[spec.type.enum][v] then
         return v, ('is of enum type %q, which does not have value %d'):format(spec.type.enum, v), true
       end
       return v
     elseif spec.type.structure then
-      -- TODO better structure checking
       if type(value) ~= 'table' then
         return mismatch(spec, value)
       end
+      local st = api.datalua.structures[spec.type.structure]
+      for fname, fspec in pairs(st.fields) do
+        local _, err = typecheck(fspec, value[fname])
+        if err then
+          return nil, 'field ' .. fname .. ' ' .. err
+        end
+      end
+      -- TODO assert presence of mixin
       return value
     elseif spec.type.arrayof then
       if type(value) ~= 'table' then

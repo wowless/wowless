@@ -117,6 +117,11 @@ describe('typecheck', function()
           },
         },
       },
+      structures = {
+        structname = {
+          fields = {},
+        },
+      },
     },
     states = {
       Addons = {},
