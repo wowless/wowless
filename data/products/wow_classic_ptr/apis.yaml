@@ -12769,6 +12769,7 @@ IsAddOnLoaded:
       type: uiAddon
   outputs:
   - type: boolean
+  - type: boolean
 IsAddOnLoadOnDemand:
   impl: IsAddOnLoadOnDemand
   inputs:
