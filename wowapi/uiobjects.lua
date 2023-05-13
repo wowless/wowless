@@ -65,29 +65,24 @@ local function mkBaseUIObjectTypes(api)
     return assert(loadstring(('local %s=...;return %s'):format(args, s), fname))(...)
   end
 
-  local check = {
-    font = function(v)
-      if type(v) == 'string' then
-        v = api.env[v]
-      end
-      assert(type(v) == 'table', 'expected font')
-      return api.UserData(v)
-    end,
-    number = function(v)
-      return assert(tonumber(v), ('want number, got %s'):format(type(v)))
-    end,
-    string = function(v)
-      return tostring(v)
-    end,
-    table = function(v)
-      assert(type(v) == 'table', 'expected table, got ' .. type(v))
-      return v
-    end,
+  local typechecker = require('wowless.typecheck')(api)
+
+  local check = setmetatable({
     texture = function(v, self)
       local tex = toTexture(self, v)
       return tex and api.UserData(tex)
     end,
-  }
+  }, {
+    __index = function(t, k)
+      local spec = { type = k }
+      local fn = function(v)
+        local vv, errmsg = typechecker(spec, v)
+        return errmsg and error(errmsg) or vv
+      end
+      t[k] = fn
+      return fn
+    end,
+  })
 
   local uiobjects = {}
   for name, cfg in pairs(api.datalua.uiobjects) do

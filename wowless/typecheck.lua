@@ -44,6 +44,16 @@ return function(api)
     boolean = function(value)
       return luatypecheck('boolean', value)
     end,
+    font = function(value)
+      if type(value) == 'string' then
+        value = api.env[value]
+      end
+      if type(value) ~= 'table' then
+        return nil, true
+      end
+      local ud = api.UserData(value)
+      return ud, ud == nil
+    end,
     FramePoint = function(value)
       return value, not framepoints[value]
     end,
