@@ -52,7 +52,7 @@ return function(api)
         return nil, true
       end
       local ud = api.UserData(value)
-      return ud, ud == nil
+      return ud, not ud or not ud:IsObjectType('fontinstance')
     end,
     FramePoint = function(value)
       return value, not framepoints[value]
