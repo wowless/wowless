@@ -58,6 +58,9 @@ return function(api)
     font = function(value)
       return resolveobj('fontinstance', value)
     end,
+    frame = function(value)
+      return resolveobj('frame', value)
+    end,
     FramePoint = function(value)
       return value, not framepoints[value]
     end,

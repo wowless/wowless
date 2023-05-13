@@ -3,6 +3,7 @@ name: type
 type:
   oneof:
   - literal: boolean
+  - literal: frame
   - literal: FramePoint
   - literal: function
   - literal: nil

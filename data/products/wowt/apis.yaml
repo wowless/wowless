@@ -20258,7 +20258,7 @@ C_UnitAuras.RemovePrivateAuraAppliedSound:
 C_UnitAuras.SetPrivateWarningTextAnchor:
   inputs:
   - - name: parent
-      type: table
+      type: frame
     - name: anchor
       nilable: true
       type:
