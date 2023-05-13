@@ -10,6 +10,7 @@ type:
   - literal: oneornil
   - literal: string
   - literal: table
+  - literal: texture
   - literal: uiAddon
   - literal: unit
   - literal: unknown

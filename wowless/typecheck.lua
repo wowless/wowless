@@ -40,19 +40,23 @@ return function(api)
     TOPRIGHT = true,
   }
 
+  local function resolveobj(ty, value)
+    if type(value) == 'string' then
+      value = api.env[value]
+    end
+    if type(value) ~= 'table' then
+      return nil, true
+    end
+    local ud = api.UserData(value)
+    return ud, not ud or not ud:IsObjectType(ty)
+  end
+
   local scalartypechecks = {
     boolean = function(value)
       return luatypecheck('boolean', value)
     end,
     font = function(value)
-      if type(value) == 'string' then
-        value = api.env[value]
-      end
-      if type(value) ~= 'table' then
-        return nil, true
-      end
-      local ud = api.UserData(value)
-      return ud, not ud or not ud:IsObjectType('fontinstance')
+      return resolveobj('fontinstance', value)
     end,
     FramePoint = function(value)
       return value, not framepoints[value]
@@ -71,6 +75,9 @@ return function(api)
     end,
     table = function(value)
       return luatypecheck('table', value)
+    end,
+    texture = function(value)
+      return resolveobj('texture', value)
     end,
     uiAddon = function(value)
       return api.states.Addons[tonumber(value) or tostring(value):lower()]

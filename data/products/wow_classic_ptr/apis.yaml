@@ -323,7 +323,7 @@ C_AchievementInfo.IsValidAchievement:
 C_AchievementInfo.SetPortraitTexture:
   inputs:
   - - name: textureObject
-      type: table
+      type: texture
   outputs: {}
 C_ActionBar.FindPetActionButtons:
   inputs:
@@ -2509,7 +2509,7 @@ C_Club.SetAutoAdvanceStreamViewMarker:
 C_Club.SetAvatarTexture:
   inputs:
   - - name: texture
-      type: table
+      type: texture
     - name: avatarId
       type: number
     - name: clubType
@@ -3882,7 +3882,7 @@ C_Container.PickupContainerItem:
 C_Container.SetBagPortraitTexture:
   inputs:
   - - name: texture
-      type: table
+      type: texture
     - name: bagIndex
       type:
         enum: BagIndex
@@ -7022,7 +7022,7 @@ C_TaxiMap.GetTaxiNodesForMap:
 C_Texture.ClearTitleIconTexture:
   inputs:
   - - name: texture
-      type: table
+      type: texture
   outputs: {}
 C_Texture.GetAtlasInfo:
   impl: C_Texture.GetAtlasInfo
@@ -7064,7 +7064,7 @@ C_Texture.IsTitleIconTextureReady:
 C_Texture.SetTitleIconTexture:
   inputs:
   - - name: texture
-      type: table
+      type: texture
     - name: titleID
       type: string
     - name: version
@@ -8302,7 +8302,7 @@ C_VoiceChat.SetOutputVolume:
 C_VoiceChat.SetPortraitTexture:
   inputs:
   - - name: textureObject
-      type: table
+      type: texture
     - name: memberID
       type: number
     - name: channelID
@@ -13822,7 +13822,7 @@ SetPortraitTexture:
 SetPortraitTextureFromCreatureDisplayID:
   inputs:
   - - name: textureObject
-      type: table
+      type: texture
     - name: creatureDisplayID
       type: number
   outputs: {}
@@ -13883,7 +13883,7 @@ SetUIVisibility: {}
 SetUnitCursorTexture:
   inputs:
   - - name: textureObject
-      type: table
+      type: texture
     - name: unit
       type: unit
     - name: style
