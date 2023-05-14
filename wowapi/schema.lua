@@ -6,6 +6,7 @@ local domains = {
   sqlcursor = wdata.sqlcursor,
   sqllookup = wdata.sqllookup,
   state = wdata.state,
+  stringenum = wdata.stringenums,
   uiobjectimpl = wdata.uiobjectimpl,
 }
 local productDomains = {

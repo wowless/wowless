@@ -24,13 +24,13 @@ type:
                       - literal: font
                       - literal: fontstring
                       - literal: frame
-                      - literal: FrameStrata
                       - literal: hlist
                       - literal: number
                       - literal: string
                       - literal: table
                       - literal: texture
                       - literal: uiobject
+                      - ref: stringenum
         inherits:
           type:
             mapof:
