@@ -1,4 +1,10 @@
 ---
+DrawLayer:
+  ARTWORK: {}
+  BACKGROUND: {}
+  BORDER: {}
+  HIGHLIGHT: {}
+  OVERLAY: {}
 FramePoint:
   BOTTOM: {}
   BOTTOMLEFT: {}

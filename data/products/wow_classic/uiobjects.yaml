@@ -1047,7 +1047,7 @@ LayeredRegion:
   fields:
     layer:
       init: ARTWORK
-      type: string
+      type: DrawLayer
     sublevel:
       init: 0
       type: number

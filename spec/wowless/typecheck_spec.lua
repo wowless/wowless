@@ -45,7 +45,7 @@ local tests = {
     value = 'foo',
   },
   ['framepoint type, invalid value'] = {
-    out = { nil, 'is of type "FramePoint", which does not have value "notapoint"' },
+    out = { nil, 'is of type "FramePoint", which does not have value "NOTAPOINT"' },
     spec = { type = 'FramePoint' },
     value = 'notapoint',
   },

@@ -113,6 +113,7 @@ return function(api)
       if type(value) ~= 'string' then
         return plainmismatch(etype, value)
       end
+      value = value:upper()
       if not evalues[value] then
         return nil, ('is of type %q, which does not have value %q'):format(etype, value)
       end
