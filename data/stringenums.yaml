@@ -1,4 +1,10 @@
 ---
+BlendMode:
+  ADD: {}
+  ALPHAKEY: {}
+  BLEND: {}
+  DISABLE: {}
+  MOD: {}
 DrawLayer:
   ARTWORK: {}
   BACKGROUND: {}

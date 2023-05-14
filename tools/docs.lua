@@ -96,7 +96,7 @@ end
 local types = {
   BigInteger = 'number',
   BigUInteger = 'number',
-  BlendMode = 'string',
+  BlendMode = 'BlendMode',
   bool = 'boolean',
   CalendarEventID = 'string',
   ChatBubbleFrame = 'table',

@@ -1761,7 +1761,7 @@ TextureBase:
   fields:
     blendMode:
       init: BLEND
-      type: string
+      type: BlendMode
     blx:
       init: 0
       type: number
