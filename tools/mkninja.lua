@@ -164,6 +164,7 @@ local builds = {
     ins = {
       'build/cmake/wowless',
       'build/data/flavors.lua',
+      'build/data/stringenums.lua',
       'build/wowless.stamp',
     },
     outs = 'build/runtime.stamp',
@@ -459,6 +460,7 @@ end
 local yamls = {
   'data/flavors.yaml',
   'data/impl.yaml',
+  'data/stringenums.yaml',
   'data/products/wow/apis.yaml',
   'data/products/wow/build.yaml',
   'data/products/wow/config.yaml',

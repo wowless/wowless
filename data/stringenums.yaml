@@ -1,0 +1,22 @@
+---
+FramePoint:
+  BOTTOM: true
+  BOTTOMLEFT: true
+  BOTTOMRIGHT: true
+  CENTER: true
+  LEFT: true
+  RIGHT: true
+  TOP: true
+  TOPLEFT: true
+  TOPRIGHT: true
+FrameStrata:
+  BACKGROUND: true
+  BLIZZARD: true
+  DIALOG: true
+  FULLSCREEN: true
+  FULLSCREEN_DIALOG: true
+  HIGH: true
+  LOW: true
+  MEDIUM: true
+  PARENT: true
+  TOOLTIP: true

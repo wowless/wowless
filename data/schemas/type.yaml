@@ -5,6 +5,7 @@ type:
   - literal: boolean
   - literal: frame
   - literal: FramePoint
+  - literal: FrameStrata
   - literal: function
   - literal: nil
   - literal: number

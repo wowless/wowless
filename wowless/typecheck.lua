@@ -28,18 +28,6 @@ return function(api)
     return value, type(value) ~= basetype
   end
 
-  local framepoints = {
-    BOTTOM = true,
-    BOTTOMLEFT = true,
-    BOTTOMRIGHT = true,
-    CENTER = true,
-    LEFT = true,
-    RIGHT = true,
-    TOP = true,
-    TOPLEFT = true,
-    TOPRIGHT = true,
-  }
-
   local function resolveobj(ty, value)
     if type(value) == 'string' then
       value = api.env[value]
@@ -51,7 +39,7 @@ return function(api)
     return ud, not ud or not ud:IsObjectType(ty)
   end
 
-  local scalartypechecks = {
+  local plainscalartypechecks = {
     boolean = function(value)
       return luatypecheck('boolean', value)
     end,
@@ -60,9 +48,6 @@ return function(api)
     end,
     frame = function(value)
       return resolveobj('frame', value)
-    end,
-    FramePoint = function(value)
-      return value, not framepoints[value]
     end,
     ['function'] = function(value)
       return luatypecheck('function', value)
@@ -102,8 +87,37 @@ return function(api)
     end,
   }
 
+  local function plainmismatch(typename, value)
+    return nil, ('is of type %q, but %q was passed'):format(typename, type(value))
+  end
+
   local function mismatch(spec, value)
-    return nil, ('is of type %q, but %q was passed'):format(typestr(spec.type), type(value))
+    return plainmismatch(typestr(spec.type), value)
+  end
+
+  local scalartypechecks = {}
+  for checktype, checkfn in pairs(plainscalartypechecks) do
+    assert(not scalartypechecks[checktype])
+    scalartypechecks[checktype] = function(value)
+      local v, err = checkfn(value)
+      if err then
+        return plainmismatch(checktype, v)
+      else
+        return v
+      end
+    end
+  end
+  for etype, evalues in pairs(require('build.data.stringenums')) do
+    assert(not scalartypechecks[etype])
+    scalartypechecks[etype] = function(value)
+      if type(value) ~= 'string' then
+        return plainmismatch(etype, value)
+      end
+      if not evalues[value] then
+        return nil, ('is of type %q, which does not have value %q'):format(etype, value)
+      end
+      return value
+    end
   end
 
   local nilables = {
@@ -120,12 +134,7 @@ return function(api)
     end
     local scalartypecheck = scalartypechecks[spec.type]
     if scalartypecheck then
-      local v, err = scalartypecheck(value)
-      if err then
-        return mismatch(spec, value)
-      else
-        return v
-      end
+      return scalartypecheck(value)
     end
     if spec.type.enum then
       local v = type(value) == 'string' and tonumber(value) or value

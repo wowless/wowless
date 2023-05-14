@@ -736,7 +736,7 @@ Frame:
       type: number
     frameStrata:
       init: MEDIUM
-      type: string
+      type: FrameStrata
     hasFixedFrameLevel:
       init: false
       type: boolean
