@@ -80,6 +80,8 @@ type:
                               type: boolean
         objectType:
           type: string
+        singleton:
+          type: boolean
         virtual:
           type: boolean
         zombie:

@@ -292,6 +292,7 @@ for k, v in pairs(uiobjectdata) do
     inherits = v.inherits,
     methods = methods,
     objectType = v.objectType,
+    singleton = v.singleton,
     zombie = v.zombie,
   }
 end

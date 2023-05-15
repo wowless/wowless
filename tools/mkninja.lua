@@ -29,13 +29,19 @@ local perProductAddonGeneratedTypes = {
     return { 'data/products/' .. p .. '/globals.yaml' }
   end,
   namespaceapis = function(p)
-    return { 'data/products/' .. p .. '/apis.yaml' }
+    return {
+      'data/products/' .. p .. '/apis.yaml',
+      'data/products/' .. p .. '/config.yaml',
+    }
   end,
   product = function()
     return {}
   end,
   uiobjectapis = function(p)
-    return { 'data/products/' .. p .. '/uiobjects.yaml' }
+    return {
+      'data/products/' .. p .. '/config.yaml',
+      'data/products/' .. p .. '/uiobjects.yaml',
+    }
   end,
 }
 

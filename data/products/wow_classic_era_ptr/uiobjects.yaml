@@ -1169,6 +1169,7 @@ Minimap:
     SetTaskBlobRingTexture: {}
     SetZoom: {}
     UpdateBlips: {}
+  singleton: true
 Model:
   fields:
     modelScale:
@@ -2002,3 +2003,4 @@ WorldFrame:
   inherits:
     Frame: {}
   methods: {}
+  singleton: true

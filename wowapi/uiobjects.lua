@@ -103,6 +103,15 @@ local function mkBaseUIObjectTypes(api)
       return mm
     end
     local constructor = wrapstrfn(cfg.constructor, name, 'hlist', hlist)
+    if cfg.singleton then
+      local orig = constructor
+      local called = false
+      constructor = function()
+        assert(not called, name .. ' can only be created once')
+        called = true
+        return orig()
+      end
+    end
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
       local fname = name .. ':' .. mname
