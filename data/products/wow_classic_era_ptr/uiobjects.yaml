@@ -1402,8 +1402,10 @@ ParentedObjectBase:
     GetParent:
       getter:
       - name: parent
-    GetParentKey: {}
-    SetParentKey: {}
+    GetParentKey:
+      impl: ParentedObjectBase/GetParentKey
+    SetParentKey:
+      impl: ParentedObjectBase/SetParentKey
   virtual: true
 Path:
   inherits:
