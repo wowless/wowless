@@ -393,6 +393,9 @@ function G.GeneratedTests()
       ControlPoint = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path'):CreateControlPoint()
       end,
+      FlipBook = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('FlipBook')
+      end,
       Font = (function()
         local count = 0
         return function()

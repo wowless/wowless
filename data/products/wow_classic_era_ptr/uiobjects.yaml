@@ -658,7 +658,17 @@ EditBox:
 FlipBook:
   inherits:
     Animation: {}
-  methods: {}
+  methods:
+    GetFlipBookColumns: {}
+    GetFlipBookFrameHeight: {}
+    GetFlipBookFrames: {}
+    GetFlipBookFrameWidth: {}
+    GetFlipBookRows: {}
+    SetFlipBookColumns: {}
+    SetFlipBookFrameHeight: {}
+    SetFlipBookFrames: {}
+    SetFlipBookFrameWidth: {}
+    SetFlipBookRows: {}
 FogOfWarFrame:
   inherits:
     Frame: {}
