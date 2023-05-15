@@ -24,6 +24,7 @@ addon:
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
   skipped_uiobjects:
+    FlipBook: TODO align with reference client
     Minimap: singleton
     WorldFrame: singleton
 docs:

@@ -655,6 +655,10 @@ EditBox:
     SetTextInsets: {}
     SetVisibleTextByteLimit: {}
     ToggleInputLanguage: {}
+FlipBook:
+  inherits:
+    Animation: {}
+  methods: {}
 FogOfWarFrame:
   inherits:
     Frame: {}
