@@ -43,6 +43,9 @@ return function(api)
     boolean = function(value)
       return luatypecheck('boolean', value)
     end,
+    gender = function(value)
+      return tonumber(value) or 0
+    end,
     font = function(value)
       return resolveobj('fontinstance', value)
     end,
@@ -122,6 +125,7 @@ return function(api)
   end
 
   local nilables = {
+    gender = true,
     ['nil'] = true,
     oneornil = true,
   }

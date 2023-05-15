@@ -25251,8 +25251,7 @@ GetSpecializationInfoByID:
   - - name: specID
       type: number
     - name: gender
-      nilable: true
-      type: number
+      type: gender
   mayreturnnothing: true
   outputs:
   - name: id
