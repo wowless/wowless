@@ -32,3 +32,6 @@ FrameStrata:
   MEDIUM: {}
   PARENT: {}
   TOOLTIP: {}
+Orientation:
+  HORIZONTAL: {}
+  VERTICAL: {}

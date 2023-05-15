@@ -1655,6 +1655,8 @@ Slider:
     min:
       init: 0
       type: number
+    orientation:
+      type: Orientation
     thumbTexture:
       nilable: true
       type: texture
@@ -1673,7 +1675,9 @@ Slider:
       - name: min
       - name: max
     GetObeyStepOnDrag: {}
-    GetOrientation: {}
+    GetOrientation:
+      getter:
+      - name: orientation
     GetStepsPerPage: {}
     GetThumbTexture:
       getter:
@@ -1690,7 +1694,9 @@ Slider:
       - name: min
       - name: max
     SetObeyStepOnDrag: {}
-    SetOrientation: {}
+    SetOrientation:
+      setter:
+      - name: orientation
     SetStepsPerPage: {}
     SetThumbTexture:
       setter:

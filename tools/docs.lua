@@ -128,7 +128,6 @@ local types = {
   normalizedValue = 'number',
   NotificationDbId = 'string',
   number = 'number',
-  Orientation = 'string',
   RecruitAcceptanceID = 'string',
   ScriptRegion = 'table',
   SimpleAnim = 'table',
