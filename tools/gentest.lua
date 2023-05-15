@@ -9,7 +9,7 @@ local function mapify(t)
 end
 
 local function perproduct(p, f)
-  return (require('wowapi.yaml').parseFile(('data/products/%s/%s.yaml'):format(p, f)))
+  return assert(require(('build.data.products.%s.%s'):format(p, f)))
 end
 
 local function tpath(t, ...)

@@ -11,27 +11,31 @@ local productList = {
 -- TODO get this from gentest.lua
 local perProductAddonGeneratedTypes = {
   build = function(p)
-    return { 'data/products/' .. p .. '/build.yaml' }
+    return { 'build/data/products/' .. p .. '/build.lua' }
   end,
   config = function(p)
-    return { 'data/products/' .. p .. '/config.yaml' }
+    return { 'build/data/products/' .. p .. '/config.lua' }
   end,
   cvars = function(p)
-    return { 'data/products/' .. p .. '/cvars.yaml' }
+    return { 'build/data/products/' .. p .. '/cvars.lua' }
   end,
-  events = function(p)
-    return { 'data/products/' .. p .. '/events.yaml' }
+  events = function()
+    local t = {}
+    for _, p in ipairs(productList) do
+      table.insert(t, 'build/data/products/' .. p .. '/events.lua')
+    end
+    return t
   end,
   globalapis = function(p)
-    return { 'data/products/' .. p .. '/apis.yaml' }
+    return { 'build/data/products/' .. p .. '/apis.lua' }
   end,
   globals = function(p)
-    return { 'data/products/' .. p .. '/globals.yaml' }
+    return { 'build/data/products/' .. p .. '/globals.lua' }
   end,
   namespaceapis = function(p)
     return {
-      'data/products/' .. p .. '/apis.yaml',
-      'data/products/' .. p .. '/config.yaml',
+      'build/data/products/' .. p .. '/apis.lua',
+      'build/data/products/' .. p .. '/config.lua',
     }
   end,
   product = function()
@@ -39,8 +43,8 @@ local perProductAddonGeneratedTypes = {
   end,
   uiobjectapis = function(p)
     return {
-      'data/products/' .. p .. '/config.yaml',
-      'data/products/' .. p .. '/uiobjects.yaml',
+      'build/data/products/' .. p .. '/config.lua',
+      'build/data/products/' .. p .. '/uiobjects.lua',
     }
   end,
 }
