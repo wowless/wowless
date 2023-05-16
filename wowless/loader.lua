@@ -410,7 +410,6 @@ local function loader(api, cfg)
         local objty = obj.type
         local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
         for k, v in pairs(e.attr) do
-          -- This assumes that uiobject types and xml types are the same "space" of strings.
           local attr = attrs[k]
           if attr and phase == attr.phase then
             processAttr(ctx, attr, obj, v)
@@ -468,6 +467,7 @@ local function loader(api, cfg)
       end
 
       function loadElement(ctx, e, parent)
+        -- This assumes that uiobject types and xml types are the same "space" of strings.
         if api.IsIntrinsicType(e.type) then
           ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
           local template = {
