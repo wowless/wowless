@@ -48,6 +48,7 @@ Frame/RegisterUnitEvent: {}
 Frame/SetAttribute: {}
 Frame/SetAttributeNoHandler: {}
 Frame/SetFrameLevel: {}
+Frame/SetResizeBounds: {}
 Frame/UnregisterAllEvents: {}
 Frame/UnregisterEvent: {}
 GameTooltip/IsOwned: {}
@@ -60,6 +61,8 @@ MouseMixin/EnableMouse: {}
 MouseMixin/IsMouseEnabled: {}
 ParentedObject/GetDebugName: {}
 ParentedObject/SetParent: {}
+ParentedObjectBase/GetParentKey: {}
+ParentedObjectBase/SetParentKey: {}
 Path/CreateControlPoint: {}
 Region/ClearAllPoints: {}
 Region/CreateAnimationGroup: {}

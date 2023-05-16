@@ -11,31 +11,41 @@ local productList = {
 -- TODO get this from gentest.lua
 local perProductAddonGeneratedTypes = {
   build = function(p)
-    return { 'data/products/' .. p .. '/build.yaml' }
+    return { 'build/data/products/' .. p .. '/build.lua' }
   end,
   config = function(p)
-    return { 'data/products/' .. p .. '/config.yaml' }
+    return { 'build/data/products/' .. p .. '/config.lua' }
   end,
   cvars = function(p)
-    return { 'data/products/' .. p .. '/cvars.yaml' }
+    return { 'build/data/products/' .. p .. '/cvars.lua' }
   end,
-  events = function(p)
-    return { 'data/products/' .. p .. '/events.yaml' }
+  events = function()
+    local t = {}
+    for _, p in ipairs(productList) do
+      table.insert(t, 'build/data/products/' .. p .. '/events.lua')
+    end
+    return t
   end,
   globalapis = function(p)
-    return { 'data/products/' .. p .. '/apis.yaml' }
+    return { 'build/data/products/' .. p .. '/apis.lua' }
   end,
   globals = function(p)
-    return { 'data/products/' .. p .. '/globals.yaml' }
+    return { 'build/data/products/' .. p .. '/globals.lua' }
   end,
   namespaceapis = function(p)
-    return { 'data/products/' .. p .. '/apis.yaml' }
+    return {
+      'build/data/products/' .. p .. '/apis.lua',
+      'build/data/products/' .. p .. '/config.lua',
+    }
   end,
   product = function()
     return {}
   end,
   uiobjectapis = function(p)
-    return { 'data/products/' .. p .. '/uiobjects.yaml' }
+    return {
+      'build/data/products/' .. p .. '/config.lua',
+      'build/data/products/' .. p .. '/uiobjects.lua',
+    }
   end,
 }
 
@@ -164,6 +174,7 @@ local builds = {
     ins = {
       'build/cmake/wowless',
       'build/data/flavors.lua',
+      'build/data/stringenums.lua',
       'build/wowless.stamp',
     },
     outs = 'build/runtime.stamp',
@@ -198,6 +209,7 @@ local builds = {
       'data/schemas/schema.yaml',
       'data/schemas/schematype.yaml',
       'data/schemas/state.yaml',
+      'data/schemas/stringenums.yaml',
       'data/schemas/structures.yaml',
       'data/schemas/type.yaml',
       'data/schemas/uiobjectimpl.yaml',
@@ -236,6 +248,7 @@ local builds = {
       'wowless/png.lua',
       'wowless/render.lua',
       'wowless/runner.lua',
+      'wowless/typecheck.lua',
       'wowless/util.lua',
       'wowless/xml.lua',
       'wowless.lua',
@@ -458,6 +471,7 @@ end
 local yamls = {
   'data/flavors.yaml',
   'data/impl.yaml',
+  'data/stringenums.yaml',
   'data/products/wow/apis.yaml',
   'data/products/wow/build.yaml',
   'data/products/wow/config.yaml',
@@ -526,6 +540,7 @@ local yamls = {
   'data/schemas/schema.yaml',
   'data/schemas/schematype.yaml',
   'data/schemas/state.yaml',
+  'data/schemas/stringenums.yaml',
   'data/schemas/structures.yaml',
   'data/schemas/type.yaml',
   'data/schemas/uiobjectimpl.yaml',
@@ -577,6 +592,7 @@ table.insert(builds, {
     'spec/wowless/frame_spec.lua',
     'spec/wowless/hlist_spec.lua',
     'spec/wowless/png_spec.lua',
+    'spec/wowless/typecheck_spec.lua',
     'spec/wowless/util_spec.lua',
   },
   ins_implicit = {

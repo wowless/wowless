@@ -19,6 +19,9 @@ addon:
       VasServiceType: {}
     globalapis:
       CreateForbiddenFrame: {}
+  skipped_uiobjects:
+    Minimap: singleton
+    WorldFrame: singleton
 docs:
   apis:
     skip_namespaces:

@@ -34,6 +34,12 @@ type:
                   ref: api
                 value:
                   record: null
+          skipped_uiobjects:
+            type:
+              mapof:
+                key:
+                  ref: uiobject
+                value: string
     docs:
       type:
         record:

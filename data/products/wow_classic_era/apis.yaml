@@ -7994,6 +7994,7 @@ GetClassInfo:
   inputs:
   - - name: classIndex
       type: number
+  mayreturnnothing: true
   outputs:
   - name: className
     type: string
@@ -10918,6 +10919,7 @@ IsAddOnLoaded:
   - - name: addon
       type: uiAddon
   outputs:
+  - type: boolean
   - type: boolean
 IsAddOnLoadOnDemand:
   impl: IsAddOnLoadOnDemand

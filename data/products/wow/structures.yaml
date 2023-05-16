@@ -12,7 +12,7 @@ AddPrivateAuraAnchorArgs:
       type:
         structure: PrivateAuraIconInfo
     parent:
-      type: table
+      type: frame
     showCountdownFrame:
       type: boolean
     showCountdownNumbers:
@@ -26,11 +26,9 @@ AnchorBinding:
     offsetY:
       type: number
     point:
-      stub: CENTER
-      type: string
+      type: FramePoint
     relativePoint:
-      stub: CENTER
-      type: string
+      type: FramePoint
     relativeTo:
       type: table
 AppearanceSourceInfo:
@@ -1955,11 +1953,9 @@ C_EditMode.EditModeAnchorInfo:
     offsetY:
       type: number
     point:
-      stub: CENTER
-      type: string
+      type: FramePoint
     relativePoint:
-      stub: CENTER
-      type: string
+      type: FramePoint
     relativeTo:
       type: string
 C_EditMode.EditModeLayoutInfo:

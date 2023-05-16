@@ -407,8 +407,14 @@ Cooldown:
   fields:
     blingTexture:
       type: texture
+    durationMillis:
+      init: 0
+      type: number
     edgeTexture:
       type: texture
+    startTimeMillis:
+      init: 0
+      type: number
     swipeTexture:
       type: texture
   inherits:
@@ -417,7 +423,10 @@ Cooldown:
     Clear: {}
     GetCooldownDisplayDuration: {}
     GetCooldownDuration: {}
-    GetCooldownTimes: {}
+    GetCooldownTimes:
+      getter:
+      - name: startTimeMillis
+      - name: durationMillis
     GetDrawBling: {}
     GetDrawEdge: {}
     GetDrawSwipe: {}
@@ -727,7 +736,7 @@ Frame:
       type: number
     frameStrata:
       init: MEDIUM
-      type: string
+      type: FrameStrata
     hasFixedFrameLevel:
       init: false
       type: boolean
@@ -747,12 +756,16 @@ Frame:
       init: false
       type: boolean
     maxResizeHeight:
+      init: 0
       type: number
     maxResizeWidth:
+      init: 0
       type: number
     minResizeHeight:
+      init: 0
       type: number
     minResizeWidth:
+      init: 0
       type: number
     movable:
       init: false
@@ -1031,7 +1044,7 @@ LayeredRegion:
   fields:
     layer:
       init: ARTWORK
-      type: string
+      type: DrawLayer
     sublevel:
       init: 0
       type: number
@@ -1134,6 +1147,7 @@ Minimap:
     SetStaticPOIArrowTexture: {}
     SetZoom: {}
     UpdateBlips: {}
+  singleton: true
 Model:
   fields:
     modelScale:
@@ -1633,6 +1647,8 @@ Slider:
     min:
       init: 0
       type: number
+    orientation:
+      type: Orientation
     thumbTexture:
       nilable: true
       type: texture
@@ -1651,7 +1667,9 @@ Slider:
       - name: min
       - name: max
     GetObeyStepOnDrag: {}
-    GetOrientation: {}
+    GetOrientation:
+      getter:
+      - name: orientation
     GetStepsPerPage: {}
     GetThumbTexture:
       getter:
@@ -1668,7 +1686,9 @@ Slider:
       - name: min
       - name: max
     SetObeyStepOnDrag: {}
-    SetOrientation: {}
+    SetOrientation:
+      setter:
+      - name: orientation
     SetStepsPerPage: {}
     SetThumbTexture:
       setter:
@@ -1752,7 +1772,7 @@ TextureBase:
   fields:
     blendMode:
       init: BLEND
-      type: string
+      type: BlendMode
     blx:
       init: 0
       type: number
@@ -1917,3 +1937,4 @@ WorldFrame:
   inherits:
     Frame: {}
   methods: {}
+  singleton: true

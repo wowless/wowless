@@ -295,7 +295,7 @@ C_AchievementInfo.IsValidAchievement:
 C_AchievementInfo.SetPortraitTexture:
   inputs:
   - - name: textureObject
-      type: table
+      type: texture
   outputs: {}
 C_ActionBar.FindFlyoutActionButtons:
   inputs:
@@ -4717,7 +4717,7 @@ C_Club.SetAutoAdvanceStreamViewMarker:
 C_Club.SetAvatarTexture:
   inputs:
   - - name: texture
-      type: table
+      type: texture
     - name: avatarId
       type: number
     - name: clubType
@@ -6513,7 +6513,7 @@ C_Container.SetBackpackAutosortDisabled:
 C_Container.SetBagPortraitTexture:
   inputs:
   - - name: texture
-      type: table
+      type: texture
     - name: bagIndex
       type:
         enum: BagIndex
@@ -16417,7 +16417,7 @@ C_TaxiMap.ShouldMapShowTaxiNodes:
 C_Texture.ClearTitleIconTexture:
   inputs:
   - - name: texture
-      type: table
+      type: texture
   outputs: {}
 C_Texture.GetAtlasInfo:
   impl: C_Texture.GetAtlasInfo
@@ -16466,7 +16466,7 @@ C_Texture.IsTitleIconTextureReady:
 C_Texture.SetTitleIconTexture:
   inputs:
   - - name: texture
-      type: table
+      type: texture
     - name: titleID
       type: string
     - name: version
@@ -20258,7 +20258,7 @@ C_UnitAuras.RemovePrivateAuraAppliedSound:
 C_UnitAuras.SetPrivateWarningTextAnchor:
   inputs:
   - - name: parent
-      type: table
+      type: frame
     - name: anchor
       nilable: true
       type:
@@ -20880,7 +20880,7 @@ C_VoiceChat.SetOutputVolume:
 C_VoiceChat.SetPortraitTexture:
   inputs:
   - - name: textureObject
-      type: table
+      type: texture
     - name: memberID
       type: number
     - name: channelID
@@ -22381,6 +22381,7 @@ GetClassInfo:
   inputs:
   - - name: classIndex
       type: number
+  mayreturnnothing: true
   outputs:
   - name: className
     type: string
@@ -24967,8 +24968,7 @@ GetSpecializationInfoByID:
   - - name: specID
       type: number
     - name: gender
-      nilable: true
-      type: number
+      type: gender
   mayreturnnothing: true
   outputs:
   - name: id
@@ -25009,6 +25009,8 @@ GetSpecializationInfoForClassID:
     type: boolean
   - name: isAllowed
     type: boolean
+  - name: mastery
+    type: number
 GetSpecializationInfoForSpecID:
   impl: GetSpecializationInfoForSpecID
   inputs:
@@ -25897,6 +25899,7 @@ IsAddOnLoaded:
   - - name: addon
       type: uiAddon
   outputs:
+  - type: boolean
   - type: boolean
 IsAddOnLoadOnDemand:
   impl: IsAddOnLoadOnDemand
@@ -27092,7 +27095,7 @@ SetPortraitTexture:
 SetPortraitTextureFromCreatureDisplayID:
   inputs:
   - - name: textureObject
-      type: table
+      type: texture
     - name: creatureDisplayID
       type: number
   outputs: {}
@@ -27149,7 +27152,7 @@ SetUIVisibility: {}
 SetUnitCursorTexture:
   inputs:
   - - name: textureObject
-      type: table
+      type: texture
     - name: unit
       type: unit
     - name: style

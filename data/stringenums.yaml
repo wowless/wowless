@@ -1,0 +1,37 @@
+---
+BlendMode:
+  ADD: {}
+  ALPHAKEY: {}
+  BLEND: {}
+  DISABLE: {}
+  MOD: {}
+DrawLayer:
+  ARTWORK: {}
+  BACKGROUND: {}
+  BORDER: {}
+  HIGHLIGHT: {}
+  OVERLAY: {}
+FramePoint:
+  BOTTOM: {}
+  BOTTOMLEFT: {}
+  BOTTOMRIGHT: {}
+  CENTER: {}
+  LEFT: {}
+  RIGHT: {}
+  TOP: {}
+  TOPLEFT: {}
+  TOPRIGHT: {}
+FrameStrata:
+  BACKGROUND: {}
+  BLIZZARD: {}
+  DIALOG: {}
+  FULLSCREEN: {}
+  FULLSCREEN_DIALOG: {}
+  HIGH: {}
+  LOW: {}
+  MEDIUM: {}
+  PARENT: {}
+  TOOLTIP: {}
+Orientation:
+  HORIZONTAL: {}
+  VERTICAL: {}

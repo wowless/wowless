@@ -39,10 +39,12 @@ Actor:
     IsSlotVisible: {}
     IsUsingCenterForOrigin: {}
     PlayAnimationKit: {}
+    ReleaseFrontEndCharacterDisplays: {}
     SetAnimation: {}
     SetAnimationBlendOperation: {}
     SetAutoDress: {}
     SetDesaturation: {}
+    SetFrontEndLobbyModelFromDefaultCharacterDisplay: {}
     SetItemTransmogInfo: {}
     SetModelByCreatureDisplayID: {}
     SetModelByFileID: {}
@@ -144,6 +146,7 @@ AnimationGroup:
       impl: AnimationGroup/GetAnimations
     GetAnimationSpeedMultiplier: {}
     GetDuration: {}
+    GetElapsed: {}
     GetLooping: {}
     GetLoopState: {}
     GetProgress: {}
@@ -445,8 +448,14 @@ Cooldown:
   fields:
     blingTexture:
       type: texture
+    durationMillis:
+      init: 0
+      type: number
     edgeTexture:
       type: texture
+    startTimeMillis:
+      init: 0
+      type: number
     swipeTexture:
       type: texture
   inherits:
@@ -455,7 +464,10 @@ Cooldown:
     Clear: {}
     GetCooldownDisplayDuration: {}
     GetCooldownDuration: {}
-    GetCooldownTimes: {}
+    GetCooldownTimes:
+      getter:
+      - name: startTimeMillis
+      - name: durationMillis
     GetDrawBling: {}
     GetDrawEdge: {}
     GetDrawSwipe: {}
@@ -643,6 +655,20 @@ EditBox:
     SetTextInsets: {}
     SetVisibleTextByteLimit: {}
     ToggleInputLanguage: {}
+FlipBook:
+  inherits:
+    Animation: {}
+  methods:
+    GetFlipBookColumns: {}
+    GetFlipBookFrameHeight: {}
+    GetFlipBookFrames: {}
+    GetFlipBookFrameWidth: {}
+    GetFlipBookRows: {}
+    SetFlipBookColumns: {}
+    SetFlipBookFrameHeight: {}
+    SetFlipBookFrames: {}
+    SetFlipBookFrameWidth: {}
+    SetFlipBookRows: {}
 FogOfWarFrame:
   inherits:
     Frame: {}
@@ -792,7 +818,7 @@ Frame:
       type: number
     frameStrata:
       init: MEDIUM
-      type: string
+      type: FrameStrata
     hasFixedFrameLevel:
       init: false
       type: boolean
@@ -812,12 +838,16 @@ Frame:
       init: false
       type: boolean
     maxResizeHeight:
+      init: 0
       type: number
     maxResizeWidth:
+      init: 0
       type: number
     minResizeHeight:
+      init: 0
       type: number
     minResizeWidth:
+      init: 0
       type: number
     movable:
       init: false
@@ -885,7 +915,12 @@ Frame:
       - name: propagateKeyboardInput
     GetRegions:
       impl: Frame/GetRegions
-    GetResizeBounds: {}
+    GetResizeBounds:
+      getter:
+      - name: minResizeWidth
+      - name: minResizeHeight
+      - name: maxResizeWidth
+      - name: maxResizeHeight
     HasFixedFrameLevel:
       getter:
       - name: hasFixedFrameLevel
@@ -962,7 +997,8 @@ Frame:
     SetResizable:
       setter:
       - name: resizable
-    SetResizeBounds: {}
+    SetResizeBounds:
+      impl: Frame/SetResizeBounds
     SetToplevel:
       setter:
       - name: toplevel
@@ -1018,6 +1054,7 @@ GameTooltip:
     SetAllowShowWithNoLines: {}
     SetAnchorType: {}
     SetCustomLineSpacing: {}
+    SetCustomWordWrapMinWidth: {}
     SetFrameStack: {}
     SetMinimumWidth: {}
     SetObjectTooltipPosition: {}
@@ -1030,7 +1067,7 @@ LayeredRegion:
   fields:
     layer:
       init: ARTWORK
-      type: string
+      type: DrawLayer
     sublevel:
       init: 0
       type: number
@@ -1156,6 +1193,7 @@ Minimap:
     SetTaskBlobRingTexture: {}
     SetZoom: {}
     UpdateBlips: {}
+  singleton: true
 Model:
   fields:
     modelScale:
@@ -1309,6 +1347,7 @@ MouseMixin:
   methods:
     EnableMouse:
       impl: MouseMixin/EnableMouse
+    EnableMouseMotion: {}
     EnableMouseWheel:
       setter:
       - name: mouseWheelEnabled
@@ -1320,6 +1359,7 @@ MouseMixin:
     IsMouseMotionEnabled:
       getter:
       - name: mouseMotionEnabled
+    IsMouseMotionFocus: {}
     IsMouseWheelEnabled:
       getter:
       - name: mouseWheelEnabled
@@ -1372,8 +1412,10 @@ ParentedObjectBase:
     GetParent:
       getter:
       - name: parent
-    GetParentKey: {}
-    SetParentKey: {}
+    GetParentKey:
+      impl: ParentedObjectBase/GetParentKey
+    SetParentKey:
+      impl: ParentedObjectBase/SetParentKey
   virtual: true
 Path:
   inherits:
@@ -1403,7 +1445,6 @@ PlayerModel:
     SetBarberShopAlternateForm: {}
     SetCamDistanceScale: {}
     SetCreature: {}
-    SetCustomRace: {}
     SetDisplayInfo: {}
     SetDoBlend: {}
     SetItem: {}
@@ -1696,6 +1737,8 @@ Slider:
     min:
       init: 0
       type: number
+    orientation:
+      type: Orientation
     thumbTexture:
       nilable: true
       type: texture
@@ -1714,7 +1757,9 @@ Slider:
       - name: min
       - name: max
     GetObeyStepOnDrag: {}
-    GetOrientation: {}
+    GetOrientation:
+      getter:
+      - name: orientation
     GetStepsPerPage: {}
     GetThumbTexture:
       getter:
@@ -1731,7 +1776,9 @@ Slider:
       - name: min
       - name: max
     SetObeyStepOnDrag: {}
-    SetOrientation: {}
+    SetOrientation:
+      setter:
+      - name: orientation
     SetStepsPerPage: {}
     SetThumbTexture:
       setter:
@@ -1818,7 +1865,7 @@ TextureBase:
   fields:
     blendMode:
       init: BLEND
-      type: string
+      type: BlendMode
     blx:
       init: 0
       type: number
@@ -1967,8 +2014,6 @@ UnitPositionFrame:
     Frame: {}
   methods:
     AddUnit: {}
-    AddUnitAtlas: {}
-    AddUnitFileID: {}
     ClearUnits: {}
     FinalizeUnits: {}
     GetMouseOverUnits: {}
@@ -1984,3 +2029,4 @@ WorldFrame:
   inherits:
     Frame: {}
   methods: {}
+  singleton: true

@@ -102,35 +102,60 @@ local types = {
   ClubId = 'string',
   ClubInvitationId = 'string',
   ClubStreamId = 'string',
+  CScriptObject = 'table',
   cstring = 'string',
+  CurveType = 'string',
+  FileAsset = 'string',
   fileID = 'number',
-  FramePoint = 'string', -- hack, yes
+  FilterMode = 'string',
+  ['function'] = 'function',
   GarrisonFollower = 'string',
   HTMLTextType = 'string',
+  InsertMode = 'string',
   InventorySlots = 'number',
   ItemInfo = 'string',
   kstringClubMessage = 'string',
   kstringLfgListApplicant = 'string',
   kstringLfgListChat = 'string',
   kstringLfgListSearch = 'string',
+  LoopType = 'string',
+  luaFunction = 'function',
   luaIndex = 'number',
+  ModelAsset = 'string',
   ModelSceneFrame = 'table',
   ModelSceneFrameActor = 'table',
   NamePlateFrame = 'table',
+  normalizedValue = 'number',
   NotificationDbId = 'string',
   number = 'number',
   RecruitAcceptanceID = 'string',
   ScriptRegion = 'table',
-  SimpleFrame = 'table',
-  SimpleTexture = 'table',
+  SimpleAnim = 'table',
+  SimpleAnimGroup = 'table',
+  SimpleButtonStateToken = 'string',
+  SimpleControlPoint = 'table',
+  SimpleFont = 'table',
+  SimpleFontString = 'table',
+  SimpleFrame = 'frame',
+  SimpleLine = 'table',
+  SimpleMaskTexture = 'table',
+  SimplePathAnim = 'table',
+  SimpleTexture = 'texture',
+  SingleColorValue = 'number',
+  size = 'number',
+  SmoothingType = 'string',
+  StatusBarFillStyle = 'string',
   string = 'string',
   table = 'table',
+  TBFFlags = 'string',
   TBFStyleFlags = 'string',
+  TextureAsset = 'string',
   textureAtlas = 'string',
   textureKit = 'string',
   time_t = 'number',
   TooltipComparisonItem = 'table',
   uiAddon = 'uiAddon',
+  uiFontHeight = 'number',
   UiMapPoint = 'table',
   uiUnit = 'number',
   UnitToken = 'unit',
@@ -138,6 +163,10 @@ local types = {
   WOWGUID = 'string',
   WOWMONEY = 'number',
 }
+for k in pairs(parseYaml('data/stringenums.yaml')) do
+  assert(not types[k])
+  types[k] = k
+end
 local tys = {}
 for name, tab in pairs(tabs) do
   tys[name] = tab.Type
@@ -309,9 +338,6 @@ local function rewriteEvents()
 end
 
 local function rewriteStructures(outApis, outEvents)
-  local stubs = {
-    FramePoint = 'CENTER',
-  }
   local filename = ('data/products/%s/structures.yaml'):format(product)
   local structures = require('wowapi.yaml').parseFile(filename)
   for name, tab in pairs(tabs) do
@@ -323,7 +349,7 @@ local function rewriteStructures(outApis, outEvents)
           ret[f.Name] = {
             default = enum[f.Type] and enum[f.Type][f.Default] or f.Default,
             nilable = f.Nilable or nil,
-            stub = deref(structures, name, 'fields', f.Name, 'stub') or stubs[f.Type],
+            stub = deref(structures, name, 'fields', f.Name, 'stub'),
             type = t2nty(f, ns),
           }
         end
