@@ -48,6 +48,7 @@ Frame/RegisterUnitEvent: {}
 Frame/SetAttribute: {}
 Frame/SetAttributeNoHandler: {}
 Frame/SetFrameLevel: {}
+Frame/SetResizeBounds: {}
 Frame/UnregisterAllEvents: {}
 Frame/UnregisterEvent: {}
 GameTooltip/IsOwned: {}

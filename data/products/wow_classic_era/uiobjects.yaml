@@ -756,12 +756,16 @@ Frame:
       init: false
       type: boolean
     maxResizeHeight:
+      init: 0
       type: number
     maxResizeWidth:
+      init: 0
       type: number
     minResizeHeight:
+      init: 0
       type: number
     minResizeWidth:
+      init: 0
       type: number
     movable:
       init: false

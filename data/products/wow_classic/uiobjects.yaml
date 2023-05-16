@@ -774,12 +774,16 @@ Frame:
       init: false
       type: boolean
     maxResizeHeight:
+      init: 0
       type: number
     maxResizeWidth:
+      init: 0
       type: number
     minResizeHeight:
+      init: 0
       type: number
     minResizeWidth:
+      init: 0
       type: number
     movable:
       init: false
@@ -847,7 +851,12 @@ Frame:
       - name: propagateKeyboardInput
     GetRegions:
       impl: Frame/GetRegions
-    GetResizeBounds: {}
+    GetResizeBounds:
+      getter:
+      - name: minResizeWidth
+      - name: minResizeHeight
+      - name: maxResizeWidth
+      - name: maxResizeHeight
     HasFixedFrameLevel:
       getter:
       - name: hasFixedFrameLevel
@@ -924,7 +933,8 @@ Frame:
     SetResizable:
       setter:
       - name: resizable
-    SetResizeBounds: {}
+    SetResizeBounds:
+      impl: Frame/SetResizeBounds
     SetToplevel:
       setter:
       - name: toplevel
