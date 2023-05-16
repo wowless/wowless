@@ -7994,6 +7994,7 @@ GetClassInfo:
   inputs:
   - - name: classIndex
       type: number
+  mayreturnnothing: true
   outputs:
   - name: className
     type: string
