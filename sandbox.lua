@@ -28,22 +28,6 @@ local function toobject(s, k)
   return t
 end
 
-local function CreateFrame(s)
-  assert(s:tostring(1) == 'Frame')
-  local name = not s:isnoneornil(2) and s:tostring(2) or nil
-  local parent = not s:isnoneornil(3) and toobject(s, 3) or nil
-  s:newtable()
-  local t = s:newuserdata()
-  s:rawseti(-2, 0)
-  t.name = name
-  t.parent = parent
-  s:getfield(lualua.REGISTRYINDEX, 'WowlessFrameMT')
-  s:setmetatable(-2)
-  s:pushvalue(-1)
-  t.ref = s:ref(lualua.REGISTRYINDEX)
-  return 1
-end
-
 local frameindex = {
   GetName = function(s)
     local t = toobject(s, 1)
@@ -58,6 +42,24 @@ local frameindex = {
       s:rawgeti(lualua.REGISTRYINDEX, t.parent.ref)
       return 1
     end
+  end,
+}
+
+local globalfns = {
+  CreateFrame = function(s)
+    assert(s:tostring(1) == 'Frame')
+    local name = not s:isnoneornil(2) and s:tostring(2) or nil
+    local parent = not s:isnoneornil(3) and toobject(s, 3) or nil
+    s:newtable()
+    local t = s:newuserdata()
+    s:rawseti(-2, 0)
+    t.name = name
+    t.parent = parent
+    s:getfield(lualua.REGISTRYINDEX, 'WowlessFrameMT')
+    s:setmetatable(-2)
+    s:pushvalue(-1)
+    t.ref = s:ref(lualua.REGISTRYINDEX)
+    return 1
   end,
 }
 
@@ -78,8 +80,10 @@ for k, v in pairs(frameindex) do
 end
 s:setfield(-2, '__index')
 s:setfield(lualua.REGISTRYINDEX, 'WowlessFrameMT')
-s:pushcfunction(CreateFrame)
-s:setglobal('CreateFrame')
+for k, v in pairs(globalfns) do
+  s:pushcfunction(v)
+  s:setglobal(k)
+end
 s:openlibs()
 s:loadstring([[
   local f = CreateFrame('Frame', 'ThisIsMyVerySpecialFrame')
