@@ -1,9 +1,39 @@
 local product = unpack(arg)
-
 local lualua = require('lualua')
-local s = lualua.newstate()
-s:openlibs()
+local sqlitedb = require('lsqlite3').open(('build/products/%s/data.sqlite3'):format(product))
 
+local function pushvalue(s, x)
+  local tx = type(x)
+  if tx == 'table' then
+    s:newtable()
+    for k, v in pairs(x) do
+      pushvalue(s, k)
+      pushvalue(s, v)
+      s:rawset(-3)
+    end
+  elseif tx == 'string' then
+    s:pushstring(x)
+  elseif tx == 'number' then
+    s:pushnumber(x)
+  else
+    error('cannot push value of type ' .. tx)
+  end
+end
+
+local s = lualua.newstate()
+for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
+  s:pushstring(text)
+  s:setglobal(tag)
+end
+for k, v in pairs(require(('build.data.products.%s.globals'):format(product))) do
+  pushvalue(s, v)
+  s:setglobal(k)
+end
+s:openlibs()
+s:loadstring([[require('pl.pretty').dump(_G)]])
+s:call(0, 0)
+
+--[==[
 local function mkfn(v)
   return function(ss)
     local outputs = v.outputs or {}
@@ -36,7 +66,6 @@ local function mkfn(v)
     return #outputs
   end
 end
-
 local apis = require('wowapi.yaml').parseFile('data/products/' .. product .. '/apis.yaml')
 local globals, namespaces = {}, {}
 for k, v in pairs(apis) do
@@ -75,3 +104,5 @@ s:loadstring([[
   end
 ]])
 s:call(0, 0)
+]==]
+--
