@@ -31,24 +31,35 @@ end
 local function CreateFrame(s)
   assert(s:tostring(1) == 'Frame')
   local name = not s:isnoneornil(2) and s:tostring(2) or nil
+  local parent = not s:isnoneornil(3) and toobject(s, 3) or nil
   s:newtable()
   local t = s:newuserdata()
   s:rawseti(-2, 0)
   t.name = name
+  t.parent = parent
   s:getfield(lualua.REGISTRYINDEX, 'WowlessFrameMT')
   s:setmetatable(-2)
+  s:pushvalue(-1)
+  t.ref = s:ref(lualua.REGISTRYINDEX)
   return 1
 end
 
-local function GetName(s)
-  local t = toobject(s, 1)
-  if t.name then
-    s:pushstring(t.name)
-  else
-    s:pushnil()
-  end
-  return 1
-end
+local frameindex = {
+  GetName = function(s)
+    local t = toobject(s, 1)
+    if t.name then
+      s:pushstring(t.name)
+      return 1
+    end
+  end,
+  GetParent = function(s)
+    local t = toobject(s, 1)
+    if t.parent then
+      s:rawgeti(lualua.REGISTRYINDEX, t.parent.ref)
+      return 1
+    end
+  end,
+}
 
 local s = lualua.newstate()
 for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
@@ -61,8 +72,10 @@ for k, v in pairs(require(('build.data.products.%s.globals'):format(product))) d
 end
 s:newtable()
 s:newtable()
-s:pushcfunction(GetName)
-s:setfield(-2, 'GetName')
+for k, v in pairs(frameindex) do
+  s:pushcfunction(v)
+  s:setfield(-2, k)
+end
 s:setfield(-2, '__index')
 s:setfield(lualua.REGISTRYINDEX, 'WowlessFrameMT')
 s:pushcfunction(CreateFrame)
@@ -71,9 +84,11 @@ s:openlibs()
 s:loadstring([[
   local f = CreateFrame('Frame', 'ThisIsMyVerySpecialFrame')
   assert(f:GetName() == 'ThisIsMyVerySpecialFrame')
-  local g = CreateFrame('Frame')
+  local g = CreateFrame('Frame', nil, f)
   assert(g:GetName() == nil)
   assert(f ~= g)
+  assert(f:GetParent() == nil)
+  assert(g:GetParent() == f)
 ]])
 s:call(0, 0)
 
