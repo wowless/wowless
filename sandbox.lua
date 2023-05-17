@@ -20,6 +20,27 @@ local function pushvalue(s, x)
   end
 end
 
+local function CreateFrame(s)
+  assert(s:tostring(1) == 'Frame')
+  local name = s:tostring(2)
+  s:newtable()
+  local t = s:newuserdata()
+  s:rawseti(-2, 0)
+  t.name = name
+  s:getfield(lualua.REGISTRYINDEX, 'WowlessFrameMT')
+  s:setmetatable(-2)
+  return 1
+end
+
+local function GetName(s)
+  assert(s:istable(1))
+  s:settop(1)
+  s:rawgeti(1, 0)
+  local t = s:touserdata(-1)
+  s:pushstring(t.name)
+  return 1
+end
+
 local s = lualua.newstate()
 for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
   s:pushstring(text)
@@ -29,8 +50,20 @@ for k, v in pairs(require(('build.data.products.%s.globals'):format(product))) d
   pushvalue(s, v)
   s:setglobal(k)
 end
+s:newtable()
+s:newtable()
+s:pushcfunction(GetName)
+s:setfield(-2, 'GetName')
+s:setfield(-2, '__index')
+s:setfield(lualua.REGISTRYINDEX, 'WowlessFrameMT')
+s:pushcfunction(CreateFrame)
+s:setglobal('CreateFrame')
 s:openlibs()
-s:loadstring([[require('pl.pretty').dump(_G)]])
+s:loadstring([[
+  local f = CreateFrame('Frame', 'ThisIsMyVerySpecialFrame')
+  print(CreateFrame, f, f[0])
+  print(f:GetName())
+]])
 s:call(0, 0)
 
 --[==[
