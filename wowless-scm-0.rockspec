@@ -15,7 +15,6 @@ dependencies = {
   'luacheck',
   'luadbd',
   'luaexpat < 1.5.0',
-  'lualua',
   'luamagick',
   'luasql-sqlite3',
   'lua-path',
