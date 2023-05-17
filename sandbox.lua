@@ -20,6 +20,14 @@ local function pushvalue(s, x)
   end
 end
 
+local function toobject(s, k)
+  assert(s:istable(k))
+  s:rawgeti(k, 0)
+  local t = s:touserdata(-1)
+  s:pop(1)
+  return t
+end
+
 local function CreateFrame(s)
   assert(s:tostring(1) == 'Frame')
   local name = not s:isnoneornil(2) and s:tostring(2) or nil
@@ -33,10 +41,7 @@ local function CreateFrame(s)
 end
 
 local function GetName(s)
-  assert(s:istable(1))
-  s:settop(1)
-  s:rawgeti(1, 0)
-  local t = s:touserdata(-1)
+  local t = toobject(s, 1)
   if t.name then
     s:pushstring(t.name)
   else
