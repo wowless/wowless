@@ -22,7 +22,7 @@ end
 
 local function CreateFrame(s)
   assert(s:tostring(1) == 'Frame')
-  local name = s:tostring(2)
+  local name = not s:isnoneornil(2) and s:tostring(2) or nil
   s:newtable()
   local t = s:newuserdata()
   s:rawseti(-2, 0)
@@ -37,7 +37,11 @@ local function GetName(s)
   s:settop(1)
   s:rawgeti(1, 0)
   local t = s:touserdata(-1)
-  s:pushstring(t.name)
+  if t.name then
+    s:pushstring(t.name)
+  else
+    s:pushnil()
+  end
   return 1
 end
 
@@ -61,8 +65,10 @@ s:setglobal('CreateFrame')
 s:openlibs()
 s:loadstring([[
   local f = CreateFrame('Frame', 'ThisIsMyVerySpecialFrame')
-  print(CreateFrame, f, f[0])
-  print(f:GetName())
+  assert(f:GetName() == 'ThisIsMyVerySpecialFrame')
+  local g = CreateFrame('Frame')
+  assert(g:GetName() == nil)
+  assert(f ~= g)
 ]])
 s:call(0, 0)
 
