@@ -27,7 +27,6 @@ repos:
   rev: v16.0.3
   hooks:
   - id: clang-format
-    args: [--style=Google]
     types: [c]
 - repo: https://github.com/shellcheck-py/shellcheck-py
   rev: v0.8.0.1
