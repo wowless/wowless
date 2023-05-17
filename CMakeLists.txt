@@ -37,6 +37,11 @@ FetchContent_Declare(
   GIT_TAG v1_8_0
 )
 FetchContent_Declare(
+  lualua
+  GIT_REPOSITORY https://github.com/lua-wow-tools/lualua.git
+  GIT_TAG 92285f62cba1b177d2aea5abb28eec983b4aafe5
+)
+FetchContent_Declare(
   lyaml
   GIT_REPOSITORY https://github.com/gvvaughan/lyaml.git
   GIT_TAG v6.2.8
@@ -68,6 +73,7 @@ FetchContent_MakeAvailable(
   lsqlite3
   luaexpat
   luafilesystem
+  lualua
   lyaml
   lzlib
   sqlite3
@@ -92,6 +98,7 @@ add_executable(
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
+  ${lualua_SOURCE_DIR}/lualua.c
   ${lzlib_SOURCE_DIR}/lzlib.c
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
