@@ -16,9 +16,12 @@ struct module {
   lua_CFunction func;
 };
 static const struct module modules[] = {
-    {"lfs", luaopen_lfs},   {"lsqlite3", luaopen_lsqlite3},
-    {"lxp", luaopen_lxp},   {"wowless.ext", luaopen_wowless_ext},
-    {"yaml", luaopen_yaml}, {"zlib", luaopen_zlib},
+    {"lfs",         luaopen_lfs        },
+    {"lsqlite3",    luaopen_lsqlite3   },
+    {"lxp",         luaopen_lxp        },
+    {"wowless.ext", luaopen_wowless_ext},
+    {"yaml",        luaopen_yaml       },
+    {"zlib",        luaopen_zlib       },
 };
 
 int main(int argc, char **argv) {

@@ -82,8 +82,10 @@ static int wowless_ext_traceback(lua_State *L) {
   return 1;
 }
 
-static struct luaL_Reg extlib[] = {{"traceback", wowless_ext_traceback},
-                                   {NULL, NULL}};
+static struct luaL_Reg extlib[] = {
+    {"traceback", wowless_ext_traceback},
+    {NULL,        NULL                 }
+};
 
 int luaopen_wowless_ext(lua_State *L) {
   lua_newtable(L);
