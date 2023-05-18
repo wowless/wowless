@@ -11239,6 +11239,10 @@ GetNumTalents:
     type: number
 GetNumTalentTabs:
   impl: GetNumTalentTabs
+  inputs:
+  - - name: isInspect
+      nilable: true
+      type: boolean
   outputs:
   - type: number
 GetNumTitles:
