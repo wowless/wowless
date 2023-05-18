@@ -64,6 +64,19 @@ local globalfns = {
   end,
 }
 
+local function MixinForStubs(s)
+  s:settop(2)
+  s:rawget(lualua.GLOBALSINDEX)
+  s:pushnil()
+  while s:next(2) do
+    s:pushvalue(3)
+    s:insert(4)
+    s:settable(1)
+  end
+  s:pop(1)
+  return 1
+end
+
 local s = lualua.newstate()
 for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
   s:pushstring(text)
@@ -81,7 +94,7 @@ for k, v in pairs(frameindex) do
 end
 s:setfield(-2, '__index')
 s:setfield(lualua.REGISTRYINDEX, 'WowlessFrameMT')
-s:loadstring('return (...)')
+s:pushcfunction(MixinForStubs)
 for k, v in pairs(datalua.apis) do
   if v.stub then
     s:loadstring('local Mixin = ...; return function() ' .. v.stub .. ' end')
@@ -94,6 +107,8 @@ for k, v in pairs(globalfns) do
   s:pushcfunction(v)
   s:setglobal(k)
 end
+s:pushcfunction(MixinForStubs)
+s:setglobal('MixinForStubs')
 s:openlibs()
 s:loadstring([[
   local f = CreateFrame('Frame', 'ThisIsMyVerySpecialFrame')
@@ -105,6 +120,8 @@ s:loadstring([[
   assert(g:GetParent() == f)
   print(GetFactionInfo(1))
   --TODO print(C_ArtifactUI.GetAppearanceInfo(1, 1))
+  MySpecialMixin = { b = 2 }
+  require('pl.pretty').dump(MixinForStubs({ a = 1 }, "MySpecialMixin"))
 ]])
 s:call(0, 0)
 
