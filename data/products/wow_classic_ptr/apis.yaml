@@ -9548,6 +9548,8 @@ GetBuildInfo:
     type: number
 GetButtonMetatable:
   impl: GetButtonMetatable
+  inputs:
+  - {}
 GetBuybackItemInfo:
   inputs:
   - - name: index
@@ -10129,9 +10131,13 @@ GetFontInfo: {}
 GetFonts: {}
 GetFontStringMetatable:
   impl: GetFontStringMetatable
+  inputs:
+  - {}
 GetFrameCPUUsage: {}
 GetFrameMetatable:
   impl: GetFrameMetatable
+  inputs:
+  - {}
 GetFramerate:
   inputs:
   - {}
@@ -11873,6 +11879,8 @@ GetSchoolString:
 GetScreenDPIScale: {}
 GetScreenHeight:
   impl: GetScreenHeight
+  inputs:
+  - {}
   outputs:
   - type: number
 GetScreenResolutions:
@@ -11884,6 +11892,8 @@ GetScreenResolutions:
     type: string
 GetScreenWidth:
   impl: GetScreenWidth
+  inputs:
+  - {}
   outputs:
   - type: number
 GetScriptCPUUsage: {}
@@ -12276,6 +12286,8 @@ GetTickTime:
     type: number
 GetTime:
   impl: GetTime
+  inputs:
+  - {}
   outputs:
   - type: number
 GetTimePreciseSec:

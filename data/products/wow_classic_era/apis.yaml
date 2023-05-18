@@ -10069,6 +10069,8 @@ GetSchoolString:
 GetScreenDPIScale: {}
 GetScreenHeight:
   impl: GetScreenHeight
+  inputs:
+  - {}
   outputs:
   - type: number
 GetScreenResolutions:
@@ -10080,6 +10082,8 @@ GetScreenResolutions:
     type: string
 GetScreenWidth:
   impl: GetScreenWidth
+  inputs:
+  - {}
   outputs:
   - type: number
 GetScriptCPUUsage: {}
@@ -10453,6 +10457,8 @@ GetTickTime:
     type: number
 GetTime:
   impl: GetTime
+  inputs:
+  - {}
   outputs:
   - type: number
 GetTimePreciseSec:
