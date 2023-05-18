@@ -81,6 +81,15 @@ for k, v in pairs(frameindex) do
 end
 s:setfield(-2, '__index')
 s:setfield(lualua.REGISTRYINDEX, 'WowlessFrameMT')
+s:loadstring('return (...)')
+for k, v in pairs(datalua.apis) do
+  if v.stub then
+    s:loadstring('local Mixin = ...; return function() ' .. v.stub .. ' end')
+    s:pushvalue(-2)
+    s:call(1, 1)
+    s:setglobal(k)
+  end
+end
 for k, v in pairs(globalfns) do
   s:pushcfunction(v)
   s:setglobal(k)
@@ -94,6 +103,8 @@ s:loadstring([[
   assert(f ~= g)
   assert(f:GetParent() == nil)
   assert(g:GetParent() == f)
+  print(GetFactionInfo(1))
+  --TODO print(C_ArtifactUI.GetAppearanceInfo(1, 1))
 ]])
 s:call(0, 0)
 
