@@ -1,6 +1,7 @@
 local product = unpack(arg)
 local lualua = require('lualua')
 local sqlitedb = require('lsqlite3').open(('build/products/%s/data.sqlite3'):format(product))
+local datalua = require(('build.products.%s.data'):format(product))
 
 local function pushvalue(s, x)
   local tx = type(x)
@@ -68,7 +69,7 @@ for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings
   s:pushstring(text)
   s:setglobal(tag)
 end
-for k, v in pairs(require(('build.data.products.%s.globals'):format(product))) do
+for k, v in pairs(datalua.globals) do
   pushvalue(s, v)
   s:setglobal(k)
 end
