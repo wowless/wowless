@@ -21936,8 +21936,10 @@ DeathRecap_HasEvents:
   - {}
   outputs:
   - type: boolean
-debuglocals: {}
-debugprofilestart: {}
+debuglocals:
+  stdlib: debuglocals
+debugprofilestart:
+  stdlib: debugprofilestart
 debugprofilestop:
   impl: debugprofilestop
   inputs:
@@ -22118,7 +22120,8 @@ ExpandGuildTradeSkillHeader: {}
 ExpandQuestHeader: {}
 ExpandWarGameHeader: {}
 FactionToggleAtWar: {}
-fastrandom: {}
+fastrandom:
+  stdlib: fastrandom
 FillLocalizedClassList:
   impl: FillLocalizedClassList
   inputs:
@@ -22170,7 +22173,8 @@ GameMovieFinished:
   inputs:
   - {}
   outputs: {}
-gcinfo: {}
+gcinfo:
+  stdlib: gcinfo
 GetAccountExpansionLevel:
   inputs:
   - {}
@@ -27111,7 +27115,8 @@ RandomRoll:
     - name: high
       type: number
   outputs: {}
-rawequal: {}
+rawequal:
+  stdlib: rawequal
 rawget:
   stdlib: rawget
 rawset:
@@ -27358,7 +27363,8 @@ SetCurrentTitle: {}
 SetCursor: {}
 SetCursorVirtualItem: {}
 SetDungeonDifficultyID: {}
-seterrorhandler: {}
+seterrorhandler:
+  stdlib: seterrorhandler
 SetEuropeanNumbers: {}
 SetEveryoneIsAssistant: {}
 SetFactionActive: {}
@@ -27701,7 +27707,8 @@ strrep:
   alias: string.rep
 strsplit:
   alias: string.split
-strsplittable: {}
+strsplittable:
+  stdlib: strsplittable
 strsub:
   alias: string.sub
 strtrim:
