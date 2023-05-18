@@ -11,7 +11,7 @@ describe('apis', function()
             end
           end)
           it('is not stubbed if provided by elune', function()
-            if _G[name] and name ~= 'forceinsecure' then
+            if _G[name] then
               assert.Truthy(api.impl or api.stdlib or api.alias)
             end
           end)

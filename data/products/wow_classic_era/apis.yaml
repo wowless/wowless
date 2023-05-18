@@ -7532,7 +7532,8 @@ FocusUnit:
   outputs: {}
 FollowUnit: {}
 ForceGossip: {}
-forceinsecure: {}
+forceinsecure:
+  impl: forceinsecure
 ForceLogout: {}
 ForceQuit: {}
 ForfeitDuel: {}

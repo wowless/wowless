@@ -9113,7 +9113,8 @@ FocusUnit:
       type: unit
   outputs: {}
 FollowUnit: {}
-forceinsecure: {}
+forceinsecure:
+  impl: forceinsecure
 ForceLogout: {}
 ForceQuit: {}
 ForfeitDuel: {}
