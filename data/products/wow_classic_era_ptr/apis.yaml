@@ -16103,6 +16103,14 @@ C_SpecializationInfo.GetAllSelectedPvpTalentIDs:
   - name: selectedPvpTalentIDs
     type:
       arrayof: number
+C_SpecializationInfo.GetClassIDFromSpecID:
+  inputs:
+  - - name: specID
+      type: number
+  outputs:
+  - name: classID
+    nilable: true
+    type: number
 C_SpecializationInfo.GetInspectSelectedPvpTalent:
   inputs:
   - - name: inspectedUnit
@@ -22652,14 +22660,6 @@ GetChatWindowMessages:
       type: number
 GetChatWindowSavedDimensions: {}
 GetChatWindowSavedPosition: {}
-GetClassIDFromSpecID:
-  inputs:
-  - - name: specID
-      type: number
-  outputs:
-  - name: classID
-    nilable: true
-    type: number
 GetClassInfo:
   impl: GetClassInfo
   inputs:

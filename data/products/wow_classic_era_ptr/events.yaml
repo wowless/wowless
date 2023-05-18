@@ -4990,6 +4990,8 @@ LORE_TEXT_UPDATED_CAMPAIGN:
         structure: C_LoreText.LoreTextEntry
 LOSS_OF_CONTROL_ADDED:
   payload:
+  - name: unitTarget
+    type: unit
   - name: effectIndex
     type: number
 LOSS_OF_CONTROL_COMMENTATOR_ADDED:
@@ -5003,7 +5005,9 @@ LOSS_OF_CONTROL_COMMENTATOR_UPDATE:
   - name: victim
     type: string
 LOSS_OF_CONTROL_UPDATE:
-  payload: {}
+  payload:
+  - name: unitTarget
+    type: unit
 LUA_WARNING:
   payload:
   - name: warnType
@@ -7424,6 +7428,22 @@ UNIT_SPELLCAST_NOT_INTERRUPTIBLE:
   payload:
   - name: unitTarget
     type: unit
+UNIT_SPELLCAST_RETICLE_CLEAR:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: castGUID
+    type: string
+  - name: spellID
+    type: number
+UNIT_SPELLCAST_RETICLE_TARGET:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: castGUID
+    type: string
+  - name: spellID
+    type: number
 UNIT_SPELLCAST_SENT:
   payload:
   - name: unit

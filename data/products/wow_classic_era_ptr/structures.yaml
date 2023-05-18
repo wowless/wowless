@@ -1571,6 +1571,8 @@ C_Container.ContainerItemInfo:
       type: boolean
     itemID:
       type: number
+    itemName:
+      type: string
     quality:
       nilable: true
       type:
@@ -7944,7 +7946,7 @@ CraftingOrderReagentInfo:
     reagent:
       type:
         structure: CraftingReagentInfo
-    reagentSlot:
+    slotIndex:
       type: number
     source:
       type:

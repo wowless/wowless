@@ -865,6 +865,7 @@ Frame:
     Region: {}
     ScriptObject: {}
   methods:
+    AbortDrag: {}
     CanChangeAttribute: {}
     CreateFontString:
       impl: Frame/CreateFontString
@@ -927,6 +928,7 @@ Frame:
     HasFixedFrameStrata:
       getter:
       - name: hasFixedFrameStrata
+    InterceptStartDrag: {}
     IsClampedToScreen:
       getter:
       - name: isClampedToScreen
