@@ -7567,6 +7567,13 @@ C_CVar.GetCVarBool:
     type: boolean
 C_CVar.GetCVarDefault:
   impl: C_CVar.GetCVarDefault
+  inputs:
+  - - name: name
+      type: string
+  outputs:
+  - name: value
+    nilable: true
+    type: string
 C_CVar.RegisterCVar:
   impl: C_CVar.RegisterCVar
   inputs:
