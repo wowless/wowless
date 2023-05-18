@@ -128,7 +128,6 @@ CreateForbiddenFrame:
 CreateFrame:
   frameworks:
   - api
-debugstack: {}
 EnumerateFrames:
   frameworks:
   - api

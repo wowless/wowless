@@ -8719,7 +8719,7 @@ debugprofilestart:
 debugprofilestop:
   stdlib: debugprofilestop
 debugstack:
-  impl: debugstack
+  stdlib: debugstack
 DeclineArenaTeam: {}
 DeclineChannelInvite: {}
 DeclineGroup: {}

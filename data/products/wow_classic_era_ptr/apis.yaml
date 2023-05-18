@@ -21943,7 +21943,7 @@ debugprofilestart:
 debugprofilestop:
   stdlib: debugprofilestop
 debugstack:
-  impl: debugstack
+  stdlib: debugstack
 DeclineChannelInvite: {}
 DeclineGroup: {}
 DeclineGuild: {}

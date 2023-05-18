@@ -1,4 +1,3 @@
-local traceback = require('wowless.ext').traceback
 local hlist = require('wowless.hlist')
 
 local function new(log, maxErrors, product)
@@ -74,7 +73,7 @@ local function new(log, maxErrors, product)
 
   local function ErrorHandler(str)
     errors = errors + 1
-    log(0, 'error: ' .. str .. '\n' .. traceback())
+    log(0, 'error: ' .. str .. '\n' .. debugstack())
     if maxErrors and errors >= maxErrors then
       log(0, 'maxerrors reached, quitting')
       os.exit(0)
