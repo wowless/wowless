@@ -77,6 +77,16 @@ local function MixinForStubs(s)
   return 1
 end
 
+local function pushapi(s, api)
+  if api.stub then
+    s:loadstring('local Mixin = ...; return function() ' .. api.stub .. ' end')
+    s:pushvalue(1)
+    s:call(1, 1)
+  else
+    s:loadstring('')
+  end
+end
+
 local s = lualua.newstate()
 for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
   s:pushstring(text)
@@ -94,21 +104,37 @@ for k, v in pairs(frameindex) do
 end
 s:setfield(-2, '__index')
 s:setfield(lualua.REGISTRYINDEX, 'WowlessFrameMT')
-s:pushcfunction(MixinForStubs)
-for k, v in pairs(datalua.apis) do
-  if v.stub then
-    s:loadstring('local Mixin = ...; return function() ' .. v.stub .. ' end')
-    s:pushvalue(-2)
-    s:call(1, 1)
+do
+  local gapis, nsapis = {}, {}
+  for k, v in pairs(datalua.apis) do
+    local p = k:find('%.')
+    if p then
+      local ns = k:sub(1, p - 1)
+      nsapis[ns] = nsapis[ns] or {}
+      nsapis[ns][k:sub(p + 1)] = v
+    else
+      gapis[k] = v
+    end
+  end
+  s:pushcfunction(MixinForStubs)
+  for k, v in pairs(gapis) do
+    pushapi(s, v)
     s:setglobal(k)
   end
+  for ns, apis in pairs(nsapis) do
+    s:newtable()
+    for k, v in pairs(apis) do
+      pushapi(s, v)
+      s:setfield(-2, k)
+    end
+    s:setglobal(ns)
+  end
+  s:pop(1)
 end
 for k, v in pairs(globalfns) do
   s:pushcfunction(v)
   s:setglobal(k)
 end
-s:pushcfunction(MixinForStubs)
-s:setglobal('MixinForStubs')
 s:openlibs()
 s:loadstring([[
   local f = CreateFrame('Frame', 'ThisIsMyVerySpecialFrame')
@@ -119,82 +145,8 @@ s:loadstring([[
   assert(f:GetParent() == nil)
   assert(g:GetParent() == f)
   print(GetFactionInfo(1))
-  --TODO print(C_ArtifactUI.GetAppearanceInfo(1, 1))
-  MySpecialMixin = { b = 2 }
-  require('pl.pretty').dump(MixinForStubs({ a = 1 }, "MySpecialMixin"))
+  print(C_ArtifactUI.GetAppearanceInfo(1, 1))
+  Vector3DMixin = { rofl = 'copter' }
+  require('pl.pretty').dump(C_Commentator.GetStartLocation(1))
 ]])
 s:call(0, 0)
-
---[==[
-local function mkfn(v)
-  return function(ss)
-    local outputs = v.outputs or {}
-    ss:checkstack(#outputs)
-    for _, output in ipairs(outputs) do
-      if output.type == 'number' then
-        ss:pushnumber(1)
-      elseif output.type == 'boolean' then
-        ss:pushboolean(false)
-      elseif output.type == 'string' then
-        ss:pushstring('')
-      elseif output.type == 'oneornil' then
-        ss:pushnil()
-      elseif output.type == 'nil' then
-        ss:pushnil()
-      elseif output.type == 'unknown' then
-        ss:pushnil()
-      elseif output.type == 'table' then
-        ss:newtable()
-      elseif output.type.arrayof then
-        ss:pushnumber(1)
-      elseif output.type.structure then
-        ss:pushnumber(1)
-      elseif output.type.enum then
-        ss:pushnumber(1)
-      else
-        error('invalid type ' .. output.type)
-      end
-    end
-    return #outputs
-  end
-end
-local apis = require('wowapi.yaml').parseFile('data/products/' .. product .. '/apis.yaml')
-local globals, namespaces = {}, {}
-for k, v in pairs(apis) do
-  if not v.impl and not v.alias and not v.stdlib then
-    local p = k:find('%.')
-    if p then
-      local ns = k:sub(1, p - 1)
-      namespaces[ns] = namespaces[ns] or {}
-      namespaces[ns][k:sub(p + 1)] = v
-    else
-      globals[k] = v
-    end
-  end
-end
-for k, v in pairs(globals) do
-  s:pushcfunction(mkfn(v))
-  s:setglobal('MooCow' .. k)
-end
-for nk, nv in pairs(namespaces) do
-  s:newtable()
-  for k, v in pairs(nv) do
-    s:pushcfunction(mkfn(v))
-    s:setfield(-2, k)
-  end
-  s:setglobal('CowMoo' .. nk)
-end
-s:loadstring([[
-  for k, v in pairs(_G) do
-    if k:sub(1, 6) == 'MooCow' then
-      print(k, v())
-    elseif k:sub(1, 6) == 'CowMoo' then
-      for kk, vv in pairs(v) do
-        print(k, kk, vv())
-      end
-    end
-  end
-]])
-s:call(0, 0)
-]==]
---
