@@ -10413,6 +10413,11 @@ GetTabardCreationCost:
 GetTabardInfo: {}
 GetTalentInfo:
   impl: GetTalentInfo_Vanilla
+  inputs:
+  - - name: tabIndex
+      type: number
+    - name: talentIndex
+      type: number
 GetTalentLink: {}
 GetTalentPrereqs:
   impl: GetTalentPrereqs_Vanilla
