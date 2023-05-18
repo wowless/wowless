@@ -21649,11 +21649,7 @@ debuglocals:
 debugprofilestart:
   stdlib: debugprofilestart
 debugprofilestop:
-  impl: debugprofilestop
-  inputs:
-  - {}
-  outputs:
-  - type: number
+  stdlib: debugprofilestop
 debugstack:
   impl: debugstack
 DeclineChannelInvite: {}
