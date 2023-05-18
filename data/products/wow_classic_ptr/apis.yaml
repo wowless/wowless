@@ -8880,8 +8880,44 @@ CreateFont:
     type: table
 CreateForbiddenFrame:
   impl: CreateForbiddenFrame
+  inputs:
+  - - name: frameType
+      type: string
+    - name: name
+      nilable: true
+      type: unknown
+    - name: parent
+      nilable: true
+      type: unknown
+    - name: template
+      nilable: true
+      type: string
+    - name: id
+      nilable: true
+      type: number
+  outputs:
+  - name: frame
+    type: unknown
 CreateFrame:
   impl: CreateFrame
+  inputs:
+  - - name: frameType
+      type: string
+    - name: name
+      nilable: true
+      type: unknown
+    - name: parent
+      nilable: true
+      type: unknown
+    - name: template
+      nilable: true
+      type: string
+    - name: id
+      nilable: true
+      type: number
+  outputs:
+  - name: frame
+    type: unknown
 CreateMacro: {}
 CreateNewRaidProfile: {}
 CursorCanGoInSlot:
