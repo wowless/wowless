@@ -22489,7 +22489,12 @@ GetCompanionInfo: {}
 GetComparisonAchievementPoints: {}
 GetComparisonCategoryNumAchievements: {}
 GetComparisonStatistic: {}
-GetCorpseRecoveryDelay: {}
+GetCorpseRecoveryDelay:
+  inputs:
+  - {}
+  outputs:
+  - name: recoveryDelay
+    type: number
 GetCorruption:
   outputs:
   - type: number

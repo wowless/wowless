@@ -8131,7 +8131,12 @@ GetContainerNumFreeSlots:
 GetContainerNumSlots:
   outputs:
   - type: number
-GetCorpseRecoveryDelay: {}
+GetCorpseRecoveryDelay:
+  inputs:
+  - {}
+  outputs:
+  - name: recoveryDelay
+    type: number
 GetCraftButtonToken:
   inputs:
   - {}

@@ -9545,7 +9545,12 @@ GetCompanionInfo: {}
 GetComparisonAchievementPoints: {}
 GetComparisonCategoryNumAchievements: {}
 GetComparisonStatistic: {}
-GetCorpseRecoveryDelay: {}
+GetCorpseRecoveryDelay:
+  inputs:
+  - {}
+  outputs:
+  - name: recoveryDelay
+    type: number
 GetCraftButtonToken:
   inputs:
   - {}
