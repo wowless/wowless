@@ -5,7 +5,6 @@ read_globals = {
   'debug.newcfunction',
   'debug.setnewclosuretaint',
   'debug.setprofilingenabled',
-  'debugstack',
   'forceinsecure',
   'issecure',
   'issecurevariable',

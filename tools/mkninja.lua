@@ -242,6 +242,7 @@ local builds = {
       'wowless/api.lua',
       'wowless/blp.lua',
       'wowless/env.lua',
+      'wowless/ext.c',
       'wowless/hlist.lua',
       'wowless/loader.lua',
       'wowless/png.lua',

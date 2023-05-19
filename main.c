@@ -7,6 +7,7 @@
 extern int luaopen_lfs(lua_State *);
 extern int luaopen_lsqlite3(lua_State *);
 extern int luaopen_lxp(lua_State *);
+extern int luaopen_wowless_ext(lua_State *);
 extern int luaopen_yaml(lua_State *);
 extern int luaopen_zlib(lua_State *);
 
@@ -15,11 +16,12 @@ struct module {
   lua_CFunction func;
 };
 static const struct module modules[] = {
-    {"lfs",      luaopen_lfs     },
-    {"lsqlite3", luaopen_lsqlite3},
-    {"lxp",      luaopen_lxp     },
-    {"yaml",     luaopen_yaml    },
-    {"zlib",     luaopen_zlib    },
+    {"lfs",         luaopen_lfs        },
+    {"lsqlite3",    luaopen_lsqlite3   },
+    {"lxp",         luaopen_lxp        },
+    {"wowless.ext", luaopen_wowless_ext},
+    {"yaml",        luaopen_yaml       },
+    {"zlib",        luaopen_zlib       },
 };
 
 int main(int argc, char **argv) {

@@ -88,6 +88,7 @@ target_link_libraries(lyaml liblua yaml)
 add_executable(
   wowless
   main.c
+  wowless/ext.c
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
