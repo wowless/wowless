@@ -52,6 +52,7 @@ local fns = {
   sqlcursor = loaddir('sql/cursor', 'sql'),
   sqllookup = loaddir('sql/lookup', 'sql'),
   state = loaddir('state', 'yaml'),
+  stringenums = global('stringenums'),
   structures = perproduct('structures'),
   uiobjectimpl = global('uiobjectimpl'),
   uiobjects = perproduct('uiobjects'),

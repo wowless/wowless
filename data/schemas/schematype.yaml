@@ -67,6 +67,7 @@ type:
           - literal: schema
           - literal: sqlcursor
           - literal: sqllookup
+          - literal: stringenum
           - literal: state
           - literal: structure
           - literal: uiobject

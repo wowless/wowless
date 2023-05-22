@@ -20,6 +20,7 @@ local plprettywrite = require('pl.pretty').write
 local Mixin = require('wowless.util').mixin
 
 local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
+local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
 
 local function valstr(value)
   local ty = type(value)
@@ -48,7 +49,6 @@ local specDefault = (function()
     unknown = 'nil',
   }
   local structureDefaults = {}
-  local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
   local specDefault
   local function valstruct(name)
     if not structureDefaults[name] then
@@ -292,6 +292,7 @@ for k, v in pairs(uiobjectdata) do
     inherits = v.inherits,
     methods = methods,
     objectType = v.objectType,
+    singleton = v.singleton,
     zombie = v.zombie,
   }
 end
@@ -307,6 +308,7 @@ local data = {
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
   states = states,
+  structures = structures,
   uiobjects = uiobjects,
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
 }

@@ -3403,6 +3403,13 @@ C_CVar.GetCVarBool:
     type: boolean
 C_CVar.GetCVarDefault:
   impl: C_CVar.GetCVarDefault
+  inputs:
+  - - name: name
+      type: string
+  outputs:
+  - name: value
+    nilable: true
+    type: string
 C_CVar.RegisterCVar:
   impl: C_CVar.RegisterCVar
   inputs:
@@ -7298,8 +7305,44 @@ CreateFont:
     type: table
 CreateForbiddenFrame:
   impl: CreateForbiddenFrame
+  inputs:
+  - - name: frameType
+      type: string
+    - name: name
+      nilable: true
+      type: unknown
+    - name: parent
+      nilable: true
+      type: unknown
+    - name: template
+      nilable: true
+      type: string
+    - name: id
+      nilable: true
+      type: number
+  outputs:
+  - name: frame
+    type: unknown
 CreateFrame:
   impl: CreateFrame
+  inputs:
+  - - name: frameType
+      type: string
+    - name: name
+      nilable: true
+      type: unknown
+    - name: parent
+      nilable: true
+      type: unknown
+    - name: template
+      nilable: true
+      type: string
+    - name: id
+      nilable: true
+      type: number
+  outputs:
+  - name: frame
+    type: unknown
 CreateMacro: {}
 CreateNewRaidProfile: {}
 CursorCanGoInSlot:
@@ -7322,16 +7365,14 @@ DeathRecap_HasEvents:
   - {}
   outputs:
   - type: boolean
-debuglocals: {}
-debugprofilestart: {}
+debuglocals:
+  stdlib: debuglocals
+debugprofilestart:
+  stdlib: debugprofilestart
 debugprofilestop:
-  impl: debugprofilestop
-  inputs:
-  - {}
-  outputs:
-  - type: number
+  stdlib: debugprofilestop
 debugstack:
-  impl: debugstack
+  stdlib: debugstack
 DeclineArenaTeam: {}
 DeclineChannelInvite: {}
 DeclineGroup: {}
@@ -7448,7 +7489,8 @@ ExpandTrainerSkillLine:
       type: number
   outputs: {}
 FactionToggleAtWar: {}
-fastrandom: {}
+fastrandom:
+  stdlib: fastrandom
 FillLocalizedClassList:
   impl: FillLocalizedClassList
   inputs:
@@ -7486,7 +7528,8 @@ FocusUnit:
   outputs: {}
 FollowUnit: {}
 ForceGossip: {}
-forceinsecure: {}
+forceinsecure:
+  impl: forceinsecure
 ForceLogout: {}
 ForceQuit: {}
 ForfeitDuel: {}
@@ -7499,7 +7542,8 @@ GameMovieFinished:
   inputs:
   - {}
   outputs: {}
-gcinfo: {}
+gcinfo:
+  stdlib: gcinfo
 GetAbandonQuestItems: {}
 GetAbandonQuestName: {}
 GetAccountExpansionLevel:
@@ -7994,6 +8038,7 @@ GetClassInfo:
   inputs:
   - - name: classIndex
       type: number
+  mayreturnnothing: true
   outputs:
   - name: className
     type: string
@@ -8086,7 +8131,12 @@ GetContainerNumFreeSlots:
 GetContainerNumSlots:
   outputs:
   - type: number
-GetCorpseRecoveryDelay: {}
+GetCorpseRecoveryDelay:
+  inputs:
+  - {}
+  outputs:
+  - name: recoveryDelay
+    type: number
 GetCraftButtonToken:
   inputs:
   - {}
@@ -9483,6 +9533,10 @@ GetNumTalents:
     type: number
 GetNumTalentTabs:
   impl: GetNumTalentTabs
+  inputs:
+  - - name: isInspect
+      nilable: true
+      type: boolean
   outputs:
   - type: number
 GetNumTitles:
@@ -10068,6 +10122,8 @@ GetSchoolString:
 GetScreenDPIScale: {}
 GetScreenHeight:
   impl: GetScreenHeight
+  inputs:
+  - {}
   outputs:
   - type: number
 GetScreenResolutions:
@@ -10079,6 +10135,8 @@ GetScreenResolutions:
     type: string
 GetScreenWidth:
   impl: GetScreenWidth
+  inputs:
+  - {}
   outputs:
   - type: number
 GetScriptCPUUsage: {}
@@ -10397,6 +10455,11 @@ GetTabardCreationCost:
 GetTabardInfo: {}
 GetTalentInfo:
   impl: GetTalentInfo_Vanilla
+  inputs:
+  - - name: tabIndex
+      type: number
+    - name: talentIndex
+      type: number
 GetTalentLink: {}
 GetTalentPrereqs:
   impl: GetTalentPrereqs_Vanilla
@@ -10452,6 +10515,8 @@ GetTickTime:
     type: number
 GetTime:
   impl: GetTime
+  inputs:
+  - {}
   outputs:
   - type: number
 GetTimePreciseSec:
@@ -10918,6 +10983,7 @@ IsAddOnLoaded:
   - - name: addon
       type: uiAddon
   outputs:
+  - type: boolean
   - type: boolean
 IsAddOnLoadOnDemand:
   impl: IsAddOnLoadOnDemand
@@ -11649,7 +11715,8 @@ RandomRoll:
     - name: high
       type: number
   outputs: {}
-rawequal: {}
+rawequal:
+  stdlib: rawequal
 rawget:
   stdlib: rawget
 rawset:
@@ -11876,7 +11943,8 @@ SetCurrentTitle: {}
 SetCursor: {}
 SetDefaultVideoOptions: {}
 SetDungeonDifficultyID: {}
-seterrorhandler: {}
+seterrorhandler:
+  stdlib: seterrorhandler
 SetEuropeanNumbers: {}
 SetEveryoneIsAssistant: {}
 SetFactionActive: {}
@@ -12193,7 +12261,8 @@ strrep:
   alias: string.rep
 strsplit:
   alias: string.split
-strsplittable: {}
+strsplittable:
+  stdlib: strsplittable
 strsub:
   alias: string.sub
 strtrim:

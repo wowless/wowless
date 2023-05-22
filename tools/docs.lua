@@ -99,7 +99,6 @@ end
 local types = {
   BigInteger = 'number',
   BigUInteger = 'number',
-  BlendMode = 'string',
   bool = 'boolean',
   CalendarEventID = 'string',
   ChatBubbleFrame = 'table',
@@ -109,12 +108,9 @@ local types = {
   CScriptObject = 'table',
   cstring = 'string',
   CurveType = 'string',
-  DrawLayer = 'string',
   FileAsset = 'string',
   fileID = 'number',
   FilterMode = 'string',
-  FramePoint = 'FramePoint',
-  FrameStrata = 'string',
   ['function'] = 'function',
   GarrisonFollower = 'string',
   HTMLTextType = 'string',
@@ -135,7 +131,6 @@ local types = {
   normalizedValue = 'number',
   NotificationDbId = 'string',
   number = 'number',
-  Orientation = 'string',
   RecruitAcceptanceID = 'string',
   ScriptRegion = 'table',
   SimpleAnim = 'table',
@@ -144,11 +139,11 @@ local types = {
   SimpleControlPoint = 'table',
   SimpleFont = 'table',
   SimpleFontString = 'table',
-  SimpleFrame = 'table',
+  SimpleFrame = 'frame',
   SimpleLine = 'table',
   SimpleMaskTexture = 'table',
   SimplePathAnim = 'table',
-  SimpleTexture = 'table',
+  SimpleTexture = 'texture',
   SingleColorValue = 'number',
   size = 'number',
   SmoothingType = 'string',
@@ -171,6 +166,10 @@ local types = {
   WOWGUID = 'string',
   WOWMONEY = 'number',
 }
+for k in pairs(parseYaml('data/stringenums.yaml')) do
+  assert(not types[k])
+  types[k] = k
+end
 local tys = {}
 for name, tab in pairs(tabs) do
   tys[name] = tab.Type

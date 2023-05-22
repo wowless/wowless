@@ -3,13 +3,15 @@ name: type
 type:
   oneof:
   - literal: boolean
-  - literal: FramePoint
+  - literal: gender
+  - literal: frame
   - literal: function
   - literal: nil
   - literal: number
   - literal: oneornil
   - literal: string
   - literal: table
+  - literal: texture
   - literal: uiAddon
   - literal: unit
   - literal: unknown
@@ -29,3 +31,4 @@ type:
         required: true
         type:
           ref: enum
+  - ref: stringenum

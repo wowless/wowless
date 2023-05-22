@@ -30,6 +30,7 @@ type:
                       - literal: table
                       - literal: texture
                       - literal: uiobject
+                      - ref: stringenum
         inherits:
           type:
             mapof:
@@ -79,6 +80,8 @@ type:
                               type: boolean
         objectType:
           type: string
+        singleton:
+          type: boolean
         virtual:
           type: boolean
         zombie:

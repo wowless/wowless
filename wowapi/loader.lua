@@ -44,12 +44,6 @@ local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
   }
 end
 
-local function resolveUnit(units, unit)
-  -- TODO complete unit resolution
-  local guid = units.aliases[unit:lower()]
-  return guid and units.guids[guid] or nil
-end
-
 local function loadFunctions(api, loader)
   api.log(1, 'loading functions')
   local datalua = api.datalua
@@ -60,47 +54,14 @@ local function loadFunctions(api, loader)
     impls[k] = loadstring(v)
   end
 
-  local enumrev = {}
-  for k, v in pairs(datalua.globals.Enum) do
-    local t = {}
-    for vk, vv in pairs(v) do
-      t[vv] = vk
-    end
-    enumrev[k] = t
-  end
-
   local frameworks = {
     api = api, -- TODO replace api framework with something finer grained
     datalua = api.datalua,
     env = api.env,
     loader = loader,
   }
-  local nilableTypes = {
-    ['nil'] = true,
-    oneornil = true,
-    unknown = true,
-  }
-  local supportedTypes = {
-    boolean = true,
-    number = true,
-    string = true,
-  }
 
-  local function typestr(ty)
-    if type(ty) == 'string' then
-      return ty
-    end
-    if ty.structure then
-      return ty.structure
-    end
-    if ty.arrayof then
-      return typestr(ty.arrayof) .. ' array'
-    end
-    if ty.enum then
-      return ty.enum
-    end
-    error('unable to typestr')
-  end
+  local typechecker = require('wowless.typecheck')(api)
 
   local function stubMixin(t, name)
     return util.mixin(t, api.env[name])
@@ -118,59 +79,22 @@ local function loadFunctions(api, loader)
       end
     end
 
-    local function checkArg(i, param, arg)
-      if arg == nil then
-        if not param.nilable and param.default == nil then
-          error(('arg %d (%q) of %q is not nilable, but nil was passed'):format(i, tostring(param.name), fname))
-        end
-        return nil
-      end
-      local function checkarg(val, ty)
-        if type(val) ~= ty then
-          local fmt = 'arg %d (%q) of %q is of type %q, but %q was passed'
-          error(fmt:format(i, tostring(param.name), fname, typestr(param.type), type(arg)))
-        end
-        return val
-      end
-      if param.type == 'number' then
-        -- luaL_checknumber
-        return checkarg(type(arg) == 'string' and tonumber(arg) or arg, 'number')
-      elseif param.type == 'string' then
-        -- luaL_checkstring
-        return checkarg(type(arg) == 'number' and tostring(arg) or arg, 'string')
-      elseif param.type == 'unit' then
-        checkarg(arg, 'string')
-        return resolveUnit(api.states.Units, arg)
-      elseif param.type == 'uiAddon' then
-        return api.states.Addons[tonumber(arg) or tostring(arg):lower()]
-      elseif param.type == 'unknown' then
-        return arg
-      elseif param.type == 'function' or param.type == 'table' or param.type == 'boolean' then
-        return checkarg(arg, param.type)
-      elseif param.type.enum then
-        local v = checkarg(type(arg) == 'string' and tonumber(arg) or arg, 'number')
-        if not enumrev[param.type.enum][v] then
-          local fmt = 'warning: arg %d (%q) of %q is of enum type %q, which does not have value %d'
-          api.log(1, fmt, i, tostring(param.name), fname, param.type.enum, v)
-        end
-        return v
-      elseif param.type.structure then
-        -- TODO better structure checking
-        return checkarg(arg, 'table')
-      elseif param.type.arrayof then
-        -- TODO better array checking
-        return checkarg(arg, 'table')
-      else
-        error(('internal error: arg %d (%q) of %q has an invalid type'):format(i, tostring(param.name), fname))
-      end
-    end
-
     local function doCheckInputs(sig, ...)
       local args = {}
       for i, param in ipairs(sig) do
-        args[i] = checkArg(i, param, (select(i, ...)))
+        local v, errmsg, iswarn = typechecker(param, (select(i, ...)))
+        if not errmsg then
+          args[i] = v
+        else
+          local msg = ('arg %d (%q) of %q %s'):format(i, tostring(param.name), fname, errmsg)
+          if iswarn then
+            api.log(1, 'warning: ' .. msg)
+          else
+            error(msg)
+          end
+        end
       end
-      return unpack(args, 1, select('#', ...))
+      return unpack(args, 1, #sig)
     end
 
     local function checkInputs(fn)
@@ -234,28 +158,17 @@ local function loadFunctions(api, loader)
         return fn
       end
       local function doCheckOutputs(...)
-        if select('#', ...) == 0 and apicfg.mayreturnnothing then
+        local n = select('#', ...)
+        if n == 0 and apicfg.mayreturnnothing then
           return
         end
+        if n > #apicfg.outputs then
+          error('returned too many values from ' .. fname)
+        end
         for i, out in ipairs(apicfg.outputs) do
-          local arg = select(i, ...)
-          if arg == nil then
-            if not out.nilable and not nilableTypes[out.type] then
-              error(('output %d (%q) of %q is not nilable, but nil was returned'):format(i, tostring(out.name), fname))
-            end
-          elseif supportedTypes[out.type] then
-            local ty = type(arg)
-            if ty ~= out.type then
-              error(
-                ('output %d (%q) of %q is of type %q, but %q was returned'):format(
-                  i,
-                  tostring(out.name),
-                  fname,
-                  out.type,
-                  ty
-                )
-              )
-            end
+          local _, errmsg = typechecker(out, (select(i, ...)))
+          if errmsg then
+            error(('output %d (%q) of %q %s'):format(i, tostring(out.name), fname, errmsg))
           end
         end
         return ...

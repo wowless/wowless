@@ -504,6 +504,24 @@ local syncTests = function()
           assertEquals(1, f:GetFrameLevel())
           assertEquals(2, g:GetFrameLevel())
         end,
+        ['parent keys'] = function()
+          local up = CreateFrame('Frame')
+          if not up.GetParentKey then
+            return
+          end
+          local down = CreateFrame('Frame', nil, up)
+          check1(nil, down:GetParentKey())
+          up.moo = down
+          check1('moo', down:GetParentKey())
+          check0(down:SetParentKey('cow'))
+          assertEquals(up.cow, down)
+          assertEquals(up.moo, down)
+          check1('moo', down:GetParentKey())
+          up.moo = nil
+          check1('cow', down:GetParentKey())
+          up.cow = nil
+          check1(nil, down:GetParentKey())
+        end,
       }
     end,
 

@@ -360,6 +360,8 @@ EditBox:
   - HighlightColor
   - TextInsets
   extends: Frame
+FlipBook:
+  extends: Animation
 FogOfWarFrame:
   extends: Frame
 Font:

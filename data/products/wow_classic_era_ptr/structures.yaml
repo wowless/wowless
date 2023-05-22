@@ -1,4 +1,36 @@
 ---
+AddPrivateAuraAnchorArgs:
+  fields:
+    auraIndex:
+      type: number
+    durationAnchor:
+      nilable: true
+      type:
+        structure: AnchorBinding
+    iconInfo:
+      nilable: true
+      type:
+        structure: PrivateAuraIconInfo
+    parent:
+      type: frame
+    showCountdownFrame:
+      type: boolean
+    showCountdownNumbers:
+      type: boolean
+    unitToken:
+      type: string
+AnchorBinding:
+  fields:
+    offsetX:
+      type: number
+    offsetY:
+      type: number
+    point:
+      type: FramePoint
+    relativePoint:
+      type: FramePoint
+    relativeTo:
+      type: table
 AppearanceSourceInfo:
   fields:
     categoryID:
@@ -44,7 +76,9 @@ AppearanceSourceInfo:
     visualID:
       type: number
 AuraData:
-  fields: {}
+  fields:
+    auraInstanceID:
+      type: number
 BountyInfo:
   fields:
     factionID:
@@ -138,6 +172,9 @@ C_ArdenwealdGardening.ArdenwealdGardenData:
       type: number
 C_AreaPoiInfo.AreaPOIInfo:
   fields:
+    addPaddingAboveWidgets:
+      nilable: true
+      type: boolean
     areaPoiID:
       type: number
     atlasName:
@@ -1534,6 +1571,8 @@ C_Container.ContainerItemInfo:
       type: boolean
     itemID:
       type: number
+    itemName:
+      type: string
     quality:
       nilable: true
       type:
@@ -2729,6 +2768,12 @@ C_Garrison.MissionEncounterIconInfo:
       type: number
 C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo:
   fields:
+    closeButtonText:
+      nilable: true
+      type: string
+    extraButtonText:
+      nilable: true
+      type: string
     frameHeight:
       type: number
     frameWidth:
@@ -2949,32 +2994,63 @@ C_ItemInteraction.ItemInteractionFrameInfo:
       type: string
     tutorialText:
       type: string
+C_ItemUpgrade.ItemUpgradeCostDiscountInfo:
+  fields:
+    discountHighWatermark:
+      type: number
+    doesCurrentCharacterMeetHighWatermark:
+      type: boolean
+    isAccountWideDiscount:
+      type: boolean
+    isDiscounted:
+      type: boolean
+    isPartialTwoHandDiscount:
+      type: boolean
 C_ItemUpgrade.ItemUpgradeCurrencyCost:
   fields:
     cost:
       type: number
     currencyID:
       type: number
+    discountInfo:
+      type:
+        structure: C_ItemUpgrade.ItemUpgradeCostDiscountInfo
 C_ItemUpgrade.ItemUpgradeItemCost:
   fields:
     cost:
       type: number
+    discountInfo:
+      type:
+        structure: C_ItemUpgrade.ItemUpgradeCostDiscountInfo
     itemID:
       type: number
 C_ItemUpgrade.ItemUpgradeItemInfo:
   fields:
     currUpgrade:
       type: number
+    customUpgradeString:
+      nilable: true
+      type: string
     displayQuality:
+      type: number
+    highWatermarkSlot:
       type: number
     iconID:
       type: number
     itemUpgradeable:
       type: boolean
+    maxItemLevel:
+      type: number
     maxUpgrade:
+      type: number
+    minItemLevel:
       type: number
     name:
       type: string
+    upgradeCostTypesForSeason:
+      type:
+        arrayof:
+          structure: C_ItemUpgrade.ItemUpgradeSeasonalCostType
     upgradeLevelInfos:
       type:
         arrayof:
@@ -3002,6 +3078,15 @@ C_ItemUpgrade.ItemUpgradeLevelInfo:
           structure: C_ItemUpgrade.ItemUpgradeStat
     upgradeLevel:
       type: number
+C_ItemUpgrade.ItemUpgradeSeasonalCostType:
+  fields:
+    itemID:
+      type: number
+    orderIndex:
+      type: number
+    sourceString:
+      nilable: true
+      type: string
 C_ItemUpgrade.ItemUpgradeStat:
   fields:
     active:
@@ -3258,6 +3343,66 @@ C_LFGList.WowLocale:
     zhTW:
       default: false
       type: boolean
+C_LootHistory.EncounterLootDropInfo:
+  fields:
+    allPassed:
+      default: false
+      type: boolean
+    currentLeader:
+      nilable: true
+      type:
+        structure: C_LootHistory.EncounterLootDropRollInfo
+    duration:
+      type: number
+    isTied:
+      default: false
+      type: boolean
+    itemHyperlink:
+      type: string
+    lootListID:
+      type: number
+    playerRollState:
+      type:
+        enum: EncounterLootDropRollState
+    rollInfos:
+      type:
+        arrayof:
+          structure: C_LootHistory.EncounterLootDropRollInfo
+    startTime:
+      type: number
+    winner:
+      nilable: true
+      type:
+        structure: C_LootHistory.EncounterLootDropRollInfo
+C_LootHistory.EncounterLootDropRollInfo:
+  fields:
+    isSelf:
+      type: boolean
+    isWinner:
+      default: false
+      type: boolean
+    playerClass:
+      type: string
+    playerGUID:
+      type: string
+    playerName:
+      type: string
+    roll:
+      nilable: true
+      type: number
+    state:
+      type:
+        enum: EncounterLootDropRollState
+C_LootHistory.EncounterLootInfo:
+  fields:
+    duration:
+      type: number
+    encounterID:
+      type: number
+    encounterName:
+      type: string
+    startTime:
+      type: number
 C_LootJournal.LootJournalItemInfo:
   fields:
     icon:
@@ -3418,7 +3563,8 @@ C_Map.MapLinkInfo:
 C_Map.UiMapDetails:
   fields:
     flags:
-      type: number
+      type:
+        enum: UIMapFlag
     mapID:
       type: number
     mapType:
@@ -3658,6 +3804,12 @@ C_PartyPose.PartyPoseInfo:
       type: number
     partyPoseID:
       type: number
+    titleText:
+      nilable: true
+      type: string
+    uiTextureKit:
+      nilable: true
+      type: string
     victoryModelSceneID:
       type: number
     victorySoundKitID:
@@ -3675,6 +3827,8 @@ C_PerksActivities.PerksActivitiesInfo:
           structure: C_PerksActivities.PerksActivityInfo
     displayMonthName:
       type: string
+    secondsRemaining:
+      type: number
     thresholds:
       type:
         arrayof:
@@ -3713,6 +3867,8 @@ C_PerksActivities.PerksActivityInfo:
       type:
         arrayof:
           structure: C_PerksActivities.PerksActivityRequirement
+    supersedes:
+      type: number
     tagNames:
       type:
         arrayof: string
@@ -3720,6 +3876,8 @@ C_PerksActivities.PerksActivityInfo:
       type: number
     tracked:
       type: boolean
+    uiPriority:
+      type: number
 C_PerksActivities.PerksActivityRequirement:
   fields:
     completed:
@@ -4106,6 +4264,8 @@ C_PvP.MatchPVPStatColumn:
       type: number
     tooltip:
       type: string
+    tooltipTitle:
+      type: string
 C_PvP.PvpBrawlInfo:
   fields:
     brawlID:
@@ -4249,6 +4409,8 @@ C_PvP.PVPScoreInfo:
       type: number
     name:
       type: string
+    postmatchMMR:
+      type: number
     prematchMMR:
       type: number
     raceName:
@@ -4337,6 +4499,37 @@ C_PvP.RatedSoloShuffleSpecStats:
       type: number
     weeklyMostPlayedSpecRounds:
       type: number
+C_PvP.RoleShortageReward:
+  fields:
+    rewardItemID:
+      type: number
+    rewardSpellID:
+      type: number
+    validRoles:
+      type:
+        arrayof: string
+C_QuestInfoSystem.QuestRewardSpellInfo:
+  fields:
+    garrFollowerID:
+      nilable: true
+      type: number
+    genericUnlock:
+      type: boolean
+    hideSpellLearnText:
+      type: boolean
+    isBoostSpell:
+      type: boolean
+    isSpellLearned:
+      type: boolean
+    isTradeskill:
+      type: boolean
+    name:
+      type: string
+    texture:
+      type: number
+    type:
+      type:
+        enum: QuestCompleteSpellType
 C_QuestLine.QuestLineInfo:
   fields:
     floorLocation:
@@ -4384,6 +4577,8 @@ C_QuestLog.QuestInfo:
     isHeader:
       type: boolean
     isHidden:
+      type: boolean
+    isLegendarySort:
       type: boolean
     isOnMap:
       type: boolean
@@ -4696,6 +4891,8 @@ C_ScenarioInfo.ScenarioInformation:
     name:
       type: string
     numStages:
+      type: number
+    scenarioID:
       type: number
     type:
       type: number
@@ -5126,6 +5323,8 @@ C_TaxiMap.MapTaxiNodeInfo:
       type: string
 C_TaxiMap.TaxiNodeInfo:
   fields:
+    isMapLayerTransition:
+      type: boolean
     name:
       type: string
     nodeID:
@@ -6107,6 +6306,46 @@ C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
       type: number
     widgetTag:
       type: string
+C_UIWidgetManager.ItemDisplayVisualizationInfo:
+  fields:
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    itemInfo:
+      type:
+        structure: C_UIWidgetManager.UIWidgetItemInfo
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
 C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
   fields:
     currencies:
@@ -6372,6 +6611,15 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
         enum: WidgetShownState
     text:
       type: string
+    textEnabledState:
+      type:
+        enum: WidgetEnabledState
+    textFontType:
+      type:
+        enum: UIWidgetFontType
+    textSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     textureKit:
       type: string
     tooltip:
@@ -6732,6 +6980,33 @@ C_UIWidgetManager.UIWidgetInfo:
     widgetType:
       type:
         enum: UIWidgetVisualizationType
+C_UIWidgetManager.UIWidgetItemInfo:
+  fields:
+    iconSizeType:
+      type:
+        enum: WidgetIconSizeType
+    infoText:
+      nilable: true
+      type: string
+    infoTextEnabledState:
+      type:
+        enum: WidgetEnabledState
+    itemID:
+      type: number
+    overrideItemName:
+      nilable: true
+      type: string
+    overrideTooltip:
+      nilable: true
+      type: string
+    stackCount:
+      nilable: true
+      type: number
+    textDisplayStyle:
+      type:
+        enum: ItemDisplayTextDisplayStyle
+    tooltipEnabled:
+      type: boolean
 C_UIWidgetManager.UIWidgetSetInfo:
   fields:
     layoutDirection:
@@ -6752,7 +7027,7 @@ C_UIWidgetManager.UIWidgetSpellInfo:
         enum: SpellDisplayIconDisplayType
     iconSizeType:
       type:
-        enum: SpellDisplayIconSizeType
+        enum: WidgetIconSizeType
     isLootObject:
       type: boolean
     spellID:
@@ -6927,6 +7202,9 @@ C_VideoOptions.GxAdapterInfoDetails:
       type: string
 C_VignetteInfo.VignetteInfo:
   fields:
+    addPaddingAboveWidgets:
+      nilable: true
+      type: boolean
     atlasName:
       type: string
     hasTooltip:
@@ -7201,6 +7479,9 @@ CharCustomizationChoice:
       type: string
     name:
       type: string
+    soundKit:
+      nilable: true
+      type: number
     swatchColor1:
       nilable: true
       type:
@@ -7277,6 +7558,24 @@ colorRGBA:
     r:
       type: number
   mixin: ColorMixin
+ContentTrackingMapInfo:
+  fields:
+    targetID:
+      type: number
+    targetType:
+      type:
+        enum: ContentTrackingTargetType
+    trackableID:
+      type: number
+    trackableType:
+      type:
+        enum: ContentTrackingType
+    waypointText:
+      type: string
+    x:
+      type: number
+    y:
+      type: number
 CorruptionEffectInfo:
   fields:
     description:
@@ -7419,7 +7718,7 @@ CraftingOrderClaimsRemainingInfo:
     claimsRemaining:
       default: 0
       type: number
-    hoursToRecharge:
+    secondsToRecharge:
       nilable: true
       type: number
 CraftingOrderCustomerCategory:
@@ -7647,7 +7946,7 @@ CraftingOrderReagentInfo:
     reagent:
       type:
         structure: CraftingReagentInfo
-    reagentSlot:
+    slotIndex:
       type: number
     source:
       type:
@@ -7705,6 +8004,8 @@ CraftingReagentSlotSchematic:
     reagentType:
       type:
         enum: CraftingReagentType
+    required:
+      type: boolean
     slotIndex:
       type: number
     slotInfo:
@@ -7783,6 +8084,30 @@ CurrencyCost:
       type: number
     currencyID:
       type: number
+EncounterTrackingInfo:
+  fields:
+    difficultyID:
+      nilable: true
+      type: number
+    encounterName:
+      type: string
+    groupFinderActivityID:
+      nilable: true
+      type: number
+    instanceName:
+      type: string
+    journalEncounterID:
+      nilable: true
+      type: number
+    journalInstanceID:
+      nilable: true
+      type: number
+    lfgDungeonID:
+      nilable: true
+      type: number
+    subText:
+      nilable: true
+      type: string
 ExpansionDisplayInfo:
   fields:
     banner:
@@ -8064,6 +8389,21 @@ PlayerInfoCharacterData:
         enum: UnitSex
 PlayerLocation:
   fields: {}
+PrivateAuraAnchor:
+  fields:
+    anchorID:
+      type: number
+    unitToken:
+      type: string
+PrivateAuraIconInfo:
+  fields:
+    iconAnchor:
+      type:
+        structure: AnchorBinding
+    iconHeight:
+      type: number
+    iconWidth:
+      type: number
 ProfessionInfo:
   fields:
     expansionName:
@@ -8089,6 +8429,8 @@ ProfessionInfo:
     skillLevel:
       type: number
     skillModifier:
+      type: number
+    sourceCounter:
       type: number
 ProfTabHighlight:
   fields:
@@ -8279,6 +8621,9 @@ TradeSkillRecipeInfo:
     alternateVerb:
       nilable: true
       type: string
+    alwaysUsesLowestQuality:
+      default: false
+      type: boolean
     canCreateMultiple:
       default: true
       type: boolean
@@ -8444,6 +8789,21 @@ UnitPowerBarInfo:
       type: boolean
     startInset:
       type: number
+UnitPrivateAuraAppliedSoundInfo:
+  fields:
+    outputChannel:
+      nilable: true
+      type: string
+    soundFileID:
+      nilable: true
+      type: number
+    soundFileName:
+      nilable: true
+      type: string
+    spellID:
+      type: number
+    unitToken:
+      type: string
 vector2:
   fields:
     x:
@@ -8460,3 +8820,16 @@ vector3:
     z:
       type: number
   mixin: Vector3DMixin
+VendorTrackingInfo:
+  fields:
+    cost:
+      nilable: true
+      type: number
+    creatureName:
+      type: string
+    currencyType:
+      nilable: true
+      type: number
+    zoneName:
+      nilable: true
+      type: string

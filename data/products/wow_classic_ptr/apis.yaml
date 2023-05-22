@@ -323,7 +323,7 @@ C_AchievementInfo.IsValidAchievement:
 C_AchievementInfo.SetPortraitTexture:
   inputs:
   - - name: textureObject
-      type: table
+      type: texture
   outputs: {}
 C_ActionBar.FindPetActionButtons:
   inputs:
@@ -2509,7 +2509,7 @@ C_Club.SetAutoAdvanceStreamViewMarker:
 C_Club.SetAvatarTexture:
   inputs:
   - - name: texture
-      type: table
+      type: texture
     - name: avatarId
       type: number
     - name: clubType
@@ -3882,7 +3882,7 @@ C_Container.PickupContainerItem:
 C_Container.SetBagPortraitTexture:
   inputs:
   - - name: texture
-      type: table
+      type: texture
     - name: bagIndex
       type:
         enum: BagIndex
@@ -4057,6 +4057,13 @@ C_CVar.GetCVarBool:
     type: boolean
 C_CVar.GetCVarDefault:
   impl: C_CVar.GetCVarDefault
+  inputs:
+  - - name: name
+      type: string
+  outputs:
+  - name: value
+    nilable: true
+    type: string
 C_CVar.RegisterCVar:
   impl: C_CVar.RegisterCVar
   inputs:
@@ -7022,7 +7029,7 @@ C_TaxiMap.GetTaxiNodesForMap:
 C_Texture.ClearTitleIconTexture:
   inputs:
   - - name: texture
-      type: table
+      type: texture
   outputs: {}
 C_Texture.GetAtlasInfo:
   impl: C_Texture.GetAtlasInfo
@@ -7064,7 +7071,7 @@ C_Texture.IsTitleIconTextureReady:
 C_Texture.SetTitleIconTexture:
   inputs:
   - - name: texture
-      type: table
+      type: texture
     - name: titleID
       type: string
     - name: version
@@ -8302,7 +8309,7 @@ C_VoiceChat.SetOutputVolume:
 C_VoiceChat.SetPortraitTexture:
   inputs:
   - - name: textureObject
-      type: table
+      type: texture
     - name: memberID
       type: number
     - name: channelID
@@ -8873,8 +8880,44 @@ CreateFont:
     type: table
 CreateForbiddenFrame:
   impl: CreateForbiddenFrame
+  inputs:
+  - - name: frameType
+      type: string
+    - name: name
+      nilable: true
+      type: unknown
+    - name: parent
+      nilable: true
+      type: unknown
+    - name: template
+      nilable: true
+      type: string
+    - name: id
+      nilable: true
+      type: number
+  outputs:
+  - name: frame
+    type: unknown
 CreateFrame:
   impl: CreateFrame
+  inputs:
+  - - name: frameType
+      type: string
+    - name: name
+      nilable: true
+      type: unknown
+    - name: parent
+      nilable: true
+      type: unknown
+    - name: template
+      nilable: true
+      type: string
+    - name: id
+      nilable: true
+      type: number
+  outputs:
+  - name: frame
+    type: unknown
 CreateMacro: {}
 CreateNewRaidProfile: {}
 CursorCanGoInSlot:
@@ -8897,16 +8940,14 @@ DeathRecap_HasEvents:
   - {}
   outputs:
   - type: boolean
-debuglocals: {}
-debugprofilestart: {}
+debuglocals:
+  stdlib: debuglocals
+debugprofilestart:
+  stdlib: debugprofilestart
 debugprofilestop:
-  impl: debugprofilestop
-  inputs:
-  - {}
-  outputs:
-  - type: number
+  stdlib: debugprofilestop
 debugstack:
-  impl: debugstack
+  stdlib: debugstack
 DeclineArenaTeam: {}
 DeclineChannelInvite: {}
 DeclineGroup: {}
@@ -9030,7 +9071,8 @@ ExpandTrainerSkillLine:
       type: number
   outputs: {}
 FactionToggleAtWar: {}
-fastrandom: {}
+fastrandom:
+  stdlib: fastrandom
 FillLocalizedClassList:
   impl: FillLocalizedClassList
   inputs:
@@ -9067,7 +9109,8 @@ FocusUnit:
       type: unit
   outputs: {}
 FollowUnit: {}
-forceinsecure: {}
+forceinsecure:
+  impl: forceinsecure
 ForceLogout: {}
 ForceQuit: {}
 ForfeitDuel: {}
@@ -9080,7 +9123,8 @@ GameMovieFinished:
   inputs:
   - {}
   outputs: {}
-gcinfo: {}
+gcinfo:
+  stdlib: gcinfo
 GetAbandonQuestItems: {}
 GetAbandonQuestName: {}
 GetAccountExpansionLevel:
@@ -9540,8 +9584,16 @@ GetBuildInfo:
     type: string
   - name: tocversion
     type: number
+  - name: localizedVersion
+    type: string
+  - name: buildType
+    type: string
+  - name: tocversionagain
+    type: number
 GetButtonMetatable:
   impl: GetButtonMetatable
+  inputs:
+  - {}
 GetBuybackItemInfo:
   inputs:
   - - name: index
@@ -9658,6 +9710,7 @@ GetClassInfo:
   inputs:
   - - name: classIndex
       type: number
+  mayreturnnothing: true
   outputs:
   - name: className
     type: string
@@ -9719,7 +9772,12 @@ GetCompanionInfo: {}
 GetComparisonAchievementPoints: {}
 GetComparisonCategoryNumAchievements: {}
 GetComparisonStatistic: {}
-GetCorpseRecoveryDelay: {}
+GetCorpseRecoveryDelay:
+  inputs:
+  - {}
+  outputs:
+  - name: recoveryDelay
+    type: number
 GetCraftButtonToken:
   inputs:
   - {}
@@ -9974,6 +10032,7 @@ GetDungeonDifficultyID:
   - type: number
 GetDungeonInfo: {}
 GetEditBoxMetatable: {}
+GetEquivalentDynamicDifficultyID: {}
 geterrorhandler:
   stdlib: geterrorhandler
 GetEventCPUUsage: {}
@@ -10121,9 +10180,13 @@ GetFontInfo: {}
 GetFonts: {}
 GetFontStringMetatable:
   impl: GetFontStringMetatable
+  inputs:
+  - {}
 GetFrameCPUUsage: {}
 GetFrameMetatable:
   impl: GetFrameMetatable
+  inputs:
+  - {}
 GetFramerate:
   inputs:
   - {}
@@ -11218,6 +11281,10 @@ GetNumTalents:
     type: number
 GetNumTalentTabs:
   impl: GetNumTalentTabs
+  inputs:
+  - - name: isInspect
+      nilable: true
+      type: boolean
   outputs:
   - type: number
 GetNumTitles:
@@ -11865,6 +11932,8 @@ GetSchoolString:
 GetScreenDPIScale: {}
 GetScreenHeight:
   impl: GetScreenHeight
+  inputs:
+  - {}
   outputs:
   - type: number
 GetScreenResolutions:
@@ -11876,6 +11945,8 @@ GetScreenResolutions:
     type: string
 GetScreenWidth:
   impl: GetScreenWidth
+  inputs:
+  - {}
   outputs:
   - type: number
 GetScriptCPUUsage: {}
@@ -12198,6 +12269,11 @@ GetTabardInfo: {}
 GetTalentGroupRole: {}
 GetTalentInfo:
   impl: GetTalentInfo_Vanilla
+  inputs:
+  - - name: tabIndex
+      type: number
+    - name: talentIndex
+      type: number
 GetTalentLink: {}
 GetTalentPrereqs:
   impl: GetTalentPrereqs_Wrath
@@ -12268,6 +12344,8 @@ GetTickTime:
     type: number
 GetTime:
   impl: GetTime
+  inputs:
+  - {}
   outputs:
   - type: number
 GetTimePreciseSec:
@@ -12767,6 +12845,7 @@ IsAddOnLoaded:
   - - name: addon
       type: uiAddon
   outputs:
+  - type: boolean
   - type: boolean
 IsAddOnLoadOnDemand:
   impl: IsAddOnLoadOnDemand
@@ -13522,7 +13601,8 @@ RandomRoll:
     - name: high
       type: number
   outputs: {}
-rawequal: {}
+rawequal:
+  stdlib: rawequal
 rawget:
   stdlib: rawget
 rawset:
@@ -13752,7 +13832,8 @@ SetCurrentTitle: {}
 SetCursor: {}
 SetDefaultVideoOptions: {}
 SetDungeonDifficultyID: {}
-seterrorhandler: {}
+seterrorhandler:
+  stdlib: seterrorhandler
 SetEuropeanNumbers: {}
 SetEveryoneIsAssistant: {}
 SetFactionActive: {}
@@ -13814,7 +13895,7 @@ SetPortraitTexture:
 SetPortraitTextureFromCreatureDisplayID:
   inputs:
   - - name: textureObject
-      type: table
+      type: texture
     - name: creatureDisplayID
       type: number
   outputs: {}
@@ -13875,7 +13956,7 @@ SetUIVisibility: {}
 SetUnitCursorTexture:
   inputs:
   - - name: textureObject
-      type: table
+      type: texture
     - name: unit
       type: unit
     - name: style
@@ -14094,7 +14175,8 @@ strrep:
   alias: string.rep
 strsplit:
   alias: string.split
-strsplittable: {}
+strsplittable:
+  stdlib: strsplittable
 strsub:
   alias: string.sub
 strtrim:
