@@ -128,14 +128,13 @@ CreateForbiddenFrame:
 CreateFrame:
   frameworks:
   - api
-debugprofilestop: {}
-debugstack: {}
 EnumerateFrames:
   frameworks:
   - api
 FillLocalizedClassList:
   sqls:
   - cursor: FillLocalizedClassList
+forceinsecure: {}
 GetAddOnEnableState: {}
 GetAddOnInfo: {}
 GetAddOnMetadata: {}

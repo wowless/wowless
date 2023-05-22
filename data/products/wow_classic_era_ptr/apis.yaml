@@ -7567,6 +7567,13 @@ C_CVar.GetCVarBool:
     type: boolean
 C_CVar.GetCVarDefault:
   impl: C_CVar.GetCVarDefault
+  inputs:
+  - - name: name
+      type: string
+  outputs:
+  - name: value
+    nilable: true
+    type: string
 C_CVar.RegisterCVar:
   impl: C_CVar.RegisterCVar
   inputs:
@@ -21877,8 +21884,44 @@ CreateFont:
     type: table
 CreateForbiddenFrame:
   impl: CreateForbiddenFrame
+  inputs:
+  - - name: frameType
+      type: string
+    - name: name
+      nilable: true
+      type: unknown
+    - name: parent
+      nilable: true
+      type: unknown
+    - name: template
+      nilable: true
+      type: string
+    - name: id
+      nilable: true
+      type: number
+  outputs:
+  - name: frame
+    type: unknown
 CreateFrame:
   impl: CreateFrame
+  inputs:
+  - - name: frameType
+      type: string
+    - name: name
+      nilable: true
+      type: unknown
+    - name: parent
+      nilable: true
+      type: unknown
+    - name: template
+      nilable: true
+      type: string
+    - name: id
+      nilable: true
+      type: number
+  outputs:
+  - name: frame
+    type: unknown
 CreateMacro: {}
 CreateNewRaidProfile: {}
 CursorHasItem: {}
@@ -21893,16 +21936,14 @@ DeathRecap_HasEvents:
   - {}
   outputs:
   - type: boolean
-debuglocals: {}
-debugprofilestart: {}
+debuglocals:
+  stdlib: debuglocals
+debugprofilestart:
+  stdlib: debugprofilestart
 debugprofilestop:
-  impl: debugprofilestop
-  inputs:
-  - {}
-  outputs:
-  - type: number
+  stdlib: debugprofilestop
 debugstack:
-  impl: debugstack
+  stdlib: debugstack
 DeclineChannelInvite: {}
 DeclineGroup: {}
 DeclineGuild: {}
@@ -22075,7 +22116,8 @@ ExpandGuildTradeSkillHeader: {}
 ExpandQuestHeader: {}
 ExpandWarGameHeader: {}
 FactionToggleAtWar: {}
-fastrandom: {}
+fastrandom:
+  stdlib: fastrandom
 FillLocalizedClassList:
   impl: FillLocalizedClassList
   inputs:
@@ -22114,7 +22156,8 @@ FocusUnit:
       type: unit
   outputs: {}
 FollowUnit: {}
-forceinsecure: {}
+forceinsecure:
+  impl: forceinsecure
 ForceLogout: {}
 ForceQuit: {}
 ForfeitDuel: {}
@@ -22127,7 +22170,8 @@ GameMovieFinished:
   inputs:
   - {}
   outputs: {}
-gcinfo: {}
+gcinfo:
+  stdlib: gcinfo
 GetAccountExpansionLevel:
   inputs:
   - {}
@@ -22552,6 +22596,8 @@ GetBuildInfo:
     type: string
 GetButtonMetatable:
   impl: GetButtonMetatable
+  inputs:
+  - {}
 GetBuybackItemInfo:
   inputs:
   - - name: index
@@ -22727,7 +22773,12 @@ GetCompanionInfo: {}
 GetComparisonAchievementPoints: {}
 GetComparisonCategoryNumAchievements: {}
 GetComparisonStatistic: {}
-GetCorpseRecoveryDelay: {}
+GetCorpseRecoveryDelay:
+  inputs:
+  - {}
+  outputs:
+  - name: recoveryDelay
+    type: number
 GetCorruption:
   outputs:
   - type: number
@@ -23006,9 +23057,13 @@ GetFontInfo: {}
 GetFonts: {}
 GetFontStringMetatable:
   impl: GetFontStringMetatable
+  inputs:
+  - {}
 GetFrameCPUUsage: {}
 GetFrameMetatable:
   impl: GetFrameMetatable
+  inputs:
+  - {}
 GetFramerate:
   inputs:
   - {}
@@ -25128,10 +25183,14 @@ GetSchoolString:
 GetScreenDPIScale: {}
 GetScreenHeight:
   impl: GetScreenHeight
+  inputs:
+  - {}
   outputs:
   - type: number
 GetScreenWidth:
   impl: GetScreenWidth
+  inputs:
+  - {}
   outputs:
   - type: number
 GetSecondsUntilParentalControlsKick: {}
@@ -25616,6 +25675,8 @@ GetTickTime:
     type: number
 GetTime:
   impl: GetTime
+  inputs:
+  - {}
   outputs:
   - type: number
 GetTimePreciseSec:
@@ -27056,7 +27117,8 @@ RandomRoll:
     - name: high
       type: number
   outputs: {}
-rawequal: {}
+rawequal:
+  stdlib: rawequal
 rawget:
   stdlib: rawget
 rawset:
@@ -27303,7 +27365,8 @@ SetCurrentTitle: {}
 SetCursor: {}
 SetCursorVirtualItem: {}
 SetDungeonDifficultyID: {}
-seterrorhandler: {}
+seterrorhandler:
+  stdlib: seterrorhandler
 SetEuropeanNumbers: {}
 SetEveryoneIsAssistant: {}
 SetFactionActive: {}
@@ -27646,7 +27709,8 @@ strrep:
   alias: string.rep
 strsplit:
   alias: string.split
-strsplittable: {}
+strsplittable:
+  stdlib: strsplittable
 strsub:
   alias: string.sub
 strtrim:

@@ -10,6 +10,11 @@ describe('apis', function()
               end
             end
           end)
+          it('is not stubbed if provided by elune', function()
+            if _G[name] then
+              assert.Truthy(api.impl or api.stdlib or api.alias)
+            end
+          end)
         end)
       end
     end)

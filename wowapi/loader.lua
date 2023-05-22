@@ -94,7 +94,7 @@ local function loadFunctions(api, loader)
           end
         end
       end
-      return unpack(args, 1, select('#', ...))
+      return unpack(args, 1, #sig)
     end
 
     local function checkInputs(fn)
