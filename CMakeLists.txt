@@ -79,6 +79,10 @@ set_property(
   SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
   APPEND PROPERTY COMPILE_DEFINITIONS VERSION="wowless"
 )
+set_property(
+  SOURCE ${lzlib_SOURCE_DIR}/lzlib.c
+  APPEND PROPERTY INCLUDE_DIRECTORIES ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR}
+)
 
 add_executable(
   wowless
@@ -94,7 +98,6 @@ add_executable(
   ${lzlib_SOURCE_DIR}/lzlib.c
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
-target_include_directories(wowless PRIVATE ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR})
 target_link_libraries(wowless expat liblua pthread yaml zlibstatic)
 
 if(EMSCRIPTEN)
