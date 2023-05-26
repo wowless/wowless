@@ -75,15 +75,10 @@ FetchContent_MakeAvailable(
   zlib
 )
 
-add_library(
-  lyaml
-  ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
+set_property(
+  SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
+  APPEND PROPERTY COMPILE_DEFINITIONS VERSION="wowless"
 )
-target_compile_definitions(lyaml PRIVATE VERSION="wowless")
-target_link_libraries(lyaml liblua yaml)
 
 add_executable(
   wowless
@@ -92,11 +87,15 @@ add_executable(
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
   ${lzlib_SOURCE_DIR}/lzlib.c
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
 target_include_directories(wowless PRIVATE ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR})
-target_link_libraries(wowless expat liblua lyaml pthread yaml zlibstatic)
+target_link_libraries(wowless expat liblua pthread yaml zlibstatic)
 
 if(EMSCRIPTEN)
   target_link_options(wowless PRIVATE -sALLOW_MEMORY_GROWTH)
