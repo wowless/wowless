@@ -70,6 +70,10 @@ return function(api)
     texture = function(value)
       return resolveobj('texture', value)
     end,
+    tostring = function(value)
+      local v = type(value) == 'number' and tostring(value) or value
+      return type(v) == 'string' and v or nil
+    end,
     uiAddon = function(value)
       return api.states.Addons[tonumber(value) or tostring(value):lower()]
     end,
