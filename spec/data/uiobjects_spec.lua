@@ -60,12 +60,19 @@ describe('uiobjects', function()
       for k, v in pairs(uiobjects) do
         describe(k, function()
           describe('fields', function()
-            for fk in pairs(v.fields or {}) do
+            for fk, fv in pairs(v.fields or {}) do
               describe(fk, function()
                 it('is not defined up inheritance tree', function()
                   for inh in pairs(v.inherits) do
                     assert.False(hasMember(inh, 'fields', fk))
                   end
+                end)
+                it('has initial value', function()
+                  local nilables = {
+                    hlist = true,
+                    texture = true,
+                  }
+                  assert.True(fv.nilable or fv.init ~= nil or nilables[fv.type])
                 end)
               end)
             end

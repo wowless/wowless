@@ -52,11 +52,13 @@ Alpha:
 Animation:
   fields:
     endDelay:
+      init: 0
       type: number
     smoothing:
       init: OUT
       type: string
     startDelay:
+      init: 0
       type: number
   inherits:
     ParentedObject: {}
@@ -1172,6 +1174,7 @@ Minimap:
 Model:
   fields:
     modelScale:
+      init: 1
       type: number
   inherits:
     Frame: {}
@@ -1679,6 +1682,7 @@ Slider:
       init: 0
       type: number
     orientation:
+      init: HORIZONTAL
       type: Orientation
     thumbTexture:
       nilable: true
@@ -1938,6 +1942,7 @@ Translation:
 UIObject:
   fields:
     name:
+      nilable: true
       type: string
   inherits:
     ForbiddenMixin: {}
