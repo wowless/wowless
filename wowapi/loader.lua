@@ -79,47 +79,28 @@ local function loadFunctions(api, loader)
       end
     end
 
-    local function doCheckInputs(sig, ...)
-      local args = {}
-      for i, param in ipairs(sig) do
-        local v, errmsg, iswarn = typechecker(param, (select(i, ...)))
-        if not errmsg then
-          args[i] = v
-        else
-          local msg = ('arg %d (%q) of %q %s'):format(i, tostring(param.name), fname, errmsg)
-          if iswarn then
-            api.log(1, 'warning: ' .. msg)
-          else
-            error(msg)
-          end
-        end
-      end
-      return unpack(args, 1, #sig)
-    end
-
     local function checkInputs(fn)
       if not apicfg.inputs then
         return fn
-      elseif #apicfg.inputs == 1 then
-        return function(...)
-          return fn(doCheckInputs(apicfg.inputs[1], ...))
-        end
-      else
-        return function(...)
-          local t = { ... }
-          local n = select('#', ...)
-          for _, sig in ipairs(apicfg.inputs) do
-            local result = {
-              pcall(function()
-                return doCheckInputs(sig, unpack(t, 1, n))
-              end),
-            }
-            if result[1] then
-              return fn(unpack(result, 2, n + 1))
+      end
+      local sig = apicfg.inputs
+      local nsig = #apicfg.inputs
+      return function(...)
+        local args = {}
+        for i, param in ipairs(sig) do
+          local v, errmsg, iswarn = typechecker(param, (select(i, ...)))
+          if not errmsg then
+            args[i] = v
+          else
+            local msg = ('arg %d (%q) of %q %s'):format(i, tostring(param.name), fname, errmsg)
+            if iswarn then
+              api.log(1, 'warning: ' .. msg)
+            else
+              error(msg)
             end
           end
-          error('args matched no input signature of ' .. fname)
         end
+        return fn(unpack(args, 1, nsig))
       end
     end
 

@@ -17,10 +17,8 @@ end
 local function rewriteTypes(fn)
   rewriteFile('apis', function(_, t)
     for _, api in pairs(t) do
-      for _, ii in ipairs(api.inputs or {}) do
-        for _, i in ipairs(ii) do
-          fn(i.type)
-        end
+      for _, i in ipairs(api.inputs or {}) do
+        fn(i.type)
       end
       for _, o in ipairs(api.outputs or {}) do
         fn(o.type)
