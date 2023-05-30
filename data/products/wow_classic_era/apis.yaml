@@ -7387,11 +7387,6 @@ DeleteCursorItem: {}
 DeleteGMTicket: {}
 DeleteInboxItem: {}
 DeleteMacro:
-  inputs:
-  - - name: macroSlot
-      type: number
-  - - name: name
-      type: string
   outputs: {}
 DeleteRaidProfile: {}
 DemoteAssistant: {}
@@ -9096,11 +9091,6 @@ GetMacroIndexByName:
   - name: macroSlot
     type: number
 GetMacroInfo:
-  inputs:
-  - - name: macroSlot
-      type: number
-  - - name: name
-      type: string
   outputs:
   - name: name
     type: string
@@ -10296,13 +10286,6 @@ GetSpellBookItemName:
   - name: spellID
     type: number
 GetSpellBookItemTexture:
-  inputs:
-  - - name: index
-      type: number
-    - name: bookType
-      type: string
-  - - name: spellName
-      type: string
   outputs:
   - name: fileID
     type: number
@@ -10311,15 +10294,6 @@ GetSpellConfirmationPromptsInfo:
   outputs:
   - type: table
 GetSpellCooldown:
-  inputs:
-  - - name: spellID
-      type: number
-  - - name: slot
-      type: number
-    - name: bookType
-      type: string
-  - - name: spellName
-      type: string
   outputs:
   - name: start
     type: number
@@ -10351,12 +10325,6 @@ GetSpellDescription:
   - type: string
 GetSpellHitModifier: {}
 GetSpellInfo:
-  inputs:
-  - - name: spellID
-      nilable: true
-      type: number
-  - - name: name
-      type: string
   outputs:
   - name: name
     type: string
@@ -10406,11 +10374,6 @@ GetSpellTabInfo:
   - name: specID
     type: number
 GetSpellTexture:
-  inputs:
-  - - name: spellID
-      type: number
-  - - name: spellName
-      type: string
   outputs:
   - name: icon
     type: number
@@ -11018,11 +10981,6 @@ IsAutoRepeatAction:
   - name: value
     type: boolean
 IsAutoRepeatSpell:
-  inputs:
-  - - name: spellID
-      type: number
-  - - name: spellName
-      type: string
   outputs:
   - name: value
     type: boolean
@@ -11078,11 +11036,6 @@ IsCurrentAction:
 IsCurrentItem: {}
 IsCurrentQuestFailed: {}
 IsCurrentSpell:
-  inputs:
-  - - name: spellID
-      type: number
-  - - name: spellName
-      type: string
   outputs:
   - name: value
     type: boolean
@@ -11199,13 +11152,6 @@ IsOutdoors: {}
 IsOutlineModeSupported: {}
 IsOutOfBounds: {}
 IsPassiveSpell:
-  inputs:
-  - - name: slot
-      type: number
-    - name: bookType
-      type: string
-  - - name: spellName
-      type: string
   outputs:
   - name: isPassive
     type: boolean
