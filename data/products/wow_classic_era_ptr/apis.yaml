@@ -21892,7 +21892,7 @@ CreateForbiddenFrame:
       type: tostring
     - name: parent
       nilable: true
-      type: unknown
+      type: frame
     - name: template
       nilable: true
       type: string
@@ -21912,7 +21912,7 @@ CreateFrame:
       type: tostring
     - name: parent
       nilable: true
-      type: unknown
+      type: frame
     - name: template
       nilable: true
       type: string

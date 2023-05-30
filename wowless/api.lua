@@ -271,7 +271,7 @@ local function new(log, maxErrors, product)
       assert(template, 'unknown template ' .. templateName)
       table.insert(tmpls, template)
     end
-    return CreateUIObject(ltype, name, parent and UserData(parent), nil, tmpls, id)
+    return CreateUIObject(ltype, name, parent, nil, tmpls, id)
   end
 
   local function NextFrame(elapsed)
