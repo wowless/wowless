@@ -143,7 +143,6 @@ local types = {
   SimpleTexture = 'texture',
   SingleColorValue = 'number',
   size = 'number',
-  SmoothingType = 'string',
   StatusBarFillStyle = 'string',
   string = 'string',
   table = 'table',

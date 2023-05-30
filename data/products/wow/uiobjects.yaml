@@ -84,7 +84,7 @@ Animation:
       type: number
     smoothing:
       init: OUT
-      type: string
+      type: SmoothingType
     startDelay:
       init: 0
       type: number
