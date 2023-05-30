@@ -1,2 +1,2 @@
 local self, name = ...
-return api.CreateUIObject('controlpoint', name, self)
+return api.CreateUIObject('controlpoint', name, self).luarep

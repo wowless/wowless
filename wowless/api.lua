@@ -224,7 +224,7 @@ local function new(log, maxErrors, product)
     if objtype.zombie then
       setmetatable(obj, nil)
     end
-    return obj
+    return ud
   end
 
   local function SetScript(obj, name, bindingType, script)

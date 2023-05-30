@@ -530,7 +530,7 @@ local function loader(api, cfg)
             local obj = loadElement(ctx, elt, parent)
             -- TODO find if this if needs to be broader to everything here including kids
             if parent:IsObjectType(impl.parenttype) then
-              parent[impl.parentmethod](parent, obj)
+              parent[impl.parentmethod](parent, obj.luarep)
             end
           elseif impl == 'transparent' or impl == 'loadstring' then
             local ctxmix = mixin({}, ctx)
