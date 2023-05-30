@@ -51,7 +51,7 @@ local function loadFunctions(api, loader)
   local sqls = loadSqls(loader.sqlitedb, datalua.sqlcursors, datalua.sqllookups)
   local impls = {}
   for k, v in pairs(datalua.impls) do
-    impls[k] = loadstring(v)
+    impls[k] = loadstring(v, '@./data/impl/' .. k .. '.lua')
   end
 
   local frameworks = {
