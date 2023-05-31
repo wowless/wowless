@@ -138,21 +138,24 @@ local function loadFunctions(api, loader)
       if not apicfg.impl or not apicfg.outputs then
         return fn
       end
+      local nouts = #apicfg.outputs
       local function doCheckOutputs(...)
         local n = select('#', ...)
         if n == 0 and apicfg.mayreturnnothing then
           return
         end
-        if n > #apicfg.outputs then
+        if n > nouts then
           error('returned too many values from ' .. fname)
         end
+        local rets = {}
         for i, out in ipairs(apicfg.outputs) do
-          local _, errmsg = typechecker(out, (select(i, ...)))
+          local v, errmsg = typechecker(out, (select(i, ...)))
           if errmsg then
             error(('output %d (%q) of %q %s'):format(i, tostring(out.name), fname, errmsg))
           end
+          rets[i] = v
         end
-        return ...
+        return unpack(rets, 1, nouts)
       end
       return function(...)
         return doCheckOutputs(fn(...))
