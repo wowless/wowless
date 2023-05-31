@@ -28,15 +28,23 @@ return function(api)
     return value, type(value) ~= basetype
   end
 
-  local function resolveobj(ty, value)
-    if type(value) == 'string' then
-      value = api.env[value]
+  local function resolveobj(ty, value, isout)
+    if isout then
+      if value and value.luarep then
+        return value.luarep, not value:IsObjectType(ty)
+      else
+        return nil, true
+      end
+    else
+      if type(value) == 'string' then
+        value = api.env[value]
+      end
+      if type(value) ~= 'table' then
+        return nil, true
+      end
+      local ud = api.UserData(value)
+      return ud, not ud or not ud:IsObjectType(ty)
     end
-    if type(value) ~= 'table' then
-      return nil, true
-    end
-    local ud = api.UserData(value)
-    return ud, not ud or not ud:IsObjectType(ty)
   end
 
   local plainscalartypechecks = {
@@ -46,17 +54,11 @@ return function(api)
     gender = function(value)
       return tonumber(value) or 0
     end,
-    font = function(value)
-      return resolveobj('fontinstance', value)
+    font = function(value, isout)
+      return resolveobj('fontinstance', value, isout)
     end,
     frame = function(value, isout)
-      if not isout then
-        return resolveobj('frame', value)
-      elseif value and value.luarep then
-        return value.luarep, not value:IsObjectType('frame')
-      else
-        return nil, true
-      end
+      return resolveobj('frame', value, isout)
     end,
     ['function'] = function(value)
       return luatypecheck('function', value)

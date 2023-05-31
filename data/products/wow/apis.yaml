@@ -20656,7 +20656,7 @@ CreateFont:
     type: string
   outputs:
   - name: font
-    type: table
+    type: font
 CreateForbiddenFrame:
   impl: CreateForbiddenFrame
   inputs:

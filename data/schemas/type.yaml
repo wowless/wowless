@@ -3,9 +3,10 @@ name: type
 type:
   oneof:
   - literal: boolean
-  - literal: gender
+  - literal: font
   - literal: frame
   - literal: function
+  - literal: gender
   - literal: nil
   - literal: number
   - literal: oneornil

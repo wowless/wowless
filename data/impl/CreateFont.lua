@@ -1,2 +1,2 @@
 local api, name = ...
-return api.CreateUIObject('font', name).luarep
+return api.CreateUIObject('font', name)
