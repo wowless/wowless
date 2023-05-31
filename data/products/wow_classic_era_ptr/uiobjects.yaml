@@ -712,7 +712,14 @@ FontInstance:
   inherits: {}
   methods:
     GetFont:
-      impl: FontInstance/GetFont
+      outputs:
+      - name: fontName
+        type: string
+      - name: fontHeight
+        stub: 12
+        type: number
+      - name: fontFlags
+        type: string
     GetFontObject:
       impl: FontInstance/GetFontObject
     GetIndentedWordWrap: {}
