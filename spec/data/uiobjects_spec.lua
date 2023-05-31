@@ -76,8 +76,9 @@ describe('uiobjects', function()
                     }
                     assert.True(fv.nilable or impliedinit[fv.type])
                   else
-                    local _, errmsg = typechecker({ type = fv.type }, fv.init)
+                    local value, errmsg = typechecker({ type = fv.type }, fv.init)
                     assert.Nil(errmsg)
+                    assert.same(value, fv.init)
                   end
                 end)
               end)
