@@ -69,8 +69,7 @@ local function mkBaseUIObjectTypes(api)
 
   local check = setmetatable({
     Texture = function(v, self)
-      local tex = toTexture(self, v)
-      return tex and api.UserData(tex)
+      return toTexture(self, v)
     end,
   }, {
     __index = function(t, k)
