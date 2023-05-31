@@ -25939,7 +25939,7 @@ SetPortraitTexture:
   impl: SetPortraitTexture
   inputs:
   - name: textureObject
-    type: table
+    type: texture
   - name: unitToken
     type: string
   outputs: {}
