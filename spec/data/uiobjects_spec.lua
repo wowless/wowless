@@ -73,7 +73,6 @@ describe('uiobjects', function()
                   if fv.init == nil then
                     local impliedinit = {
                       hlist = true,
-                      texture = true,
                     }
                     assert.True(fv.nilable or impliedinit[fv.type])
                   else

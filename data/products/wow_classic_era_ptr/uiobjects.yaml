@@ -220,6 +220,7 @@ Button:
       init: 0
       type: number
     pushedTexture:
+      nilable: true
       type: texture
     registeredClicks:
       init:
@@ -328,8 +329,10 @@ CheckButton:
       init: false
       type: boolean
     checkedTexture:
+      nilable: true
       type: texture
     disabledCheckedTexture:
+      nilable: true
       type: texture
   inherits:
     Button: {}
@@ -385,12 +388,16 @@ CinematicModel:
 ColorSelect:
   fields:
     colorValueTexture:
+      nilable: true
       type: texture
     colorValueThumbTexture:
+      nilable: true
       type: texture
     colorWheelTexture:
+      nilable: true
       type: texture
     colorWheelThumbTexture:
+      nilable: true
       type: texture
   inherits:
     Frame: {}
@@ -449,16 +456,19 @@ ControlPoint:
 Cooldown:
   fields:
     blingTexture:
+      nilable: true
       type: texture
     durationMillis:
       init: 0
       type: number
     edgeTexture:
+      nilable: true
       type: texture
     startTimeMillis:
       init: 0
       type: number
     swipeTexture:
+      nilable: true
       type: texture
   inherits:
     Frame: {}
@@ -1802,6 +1812,7 @@ StatusBar:
       init: 0
       type: number
     statusBarTexture:
+      nilable: true
       type: texture
     value:
       init: 0
