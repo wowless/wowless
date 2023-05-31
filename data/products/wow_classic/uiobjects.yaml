@@ -546,7 +546,10 @@ EditBox:
       getter:
       - name: historyLines
     GetInputLanguage:
-      impl: EditBox/GetInputLanguage
+      outputs:
+      - name: language
+        stub: ROMAN
+        type: string
     GetMaxBytes:
       getter:
       - name: maxBytes

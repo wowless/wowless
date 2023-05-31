@@ -25,7 +25,6 @@ CheckButton/SetChecked: {}
 CheckButton/SetCheckedTexture: {}
 EditBox/Disable: {}
 EditBox/Enable: {}
-EditBox/GetInputLanguage: {}
 EditBox/Insert: {}
 FontInstance/GetFont: {}
 FontInstance/GetFontObject: {}

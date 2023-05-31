@@ -59,11 +59,13 @@ type:
                           record:
                             name:
                               type: string
+                            stub:
+                              type:
+                                schema: any
                             type:
                               required: true
                               type:
-                                oneof:
-                                - literal: number
+                                schema: type
                 - record:
                     setter:
                       type:
