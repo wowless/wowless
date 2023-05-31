@@ -312,7 +312,7 @@ C_AchievementInfo.IsValidAchievement:
 C_AchievementInfo.SetPortraitTexture:
   inputs:
   - name: textureObject
-    type: texture
+    type: Texture
   outputs: {}
 C_ActionBar.FindPetActionButtons:
   inputs:
@@ -2402,7 +2402,7 @@ C_Club.SetAutoAdvanceStreamViewMarker:
 C_Club.SetAvatarTexture:
   inputs:
   - name: texture
-    type: texture
+    type: Texture
   - name: avatarId
     type: number
   - name: clubType
@@ -3723,7 +3723,7 @@ C_Container.PickupContainerItem:
 C_Container.SetBagPortraitTexture:
   inputs:
   - name: texture
-    type: texture
+    type: Texture
   - name: bagIndex
     type:
       enum: BagIndex
@@ -6747,7 +6747,7 @@ C_TaxiMap.GetTaxiNodesForMap:
 C_Texture.ClearTitleIconTexture:
   inputs:
   - name: texture
-    type: texture
+    type: Texture
   outputs: {}
 C_Texture.GetAtlasInfo:
   impl: C_Texture.GetAtlasInfo
@@ -6789,7 +6789,7 @@ C_Texture.IsTitleIconTextureReady:
 C_Texture.SetTitleIconTexture:
   inputs:
   - name: texture
-    type: texture
+    type: Texture
   - name: titleID
     type: string
   - name: version
@@ -7975,7 +7975,7 @@ C_VoiceChat.SetOutputVolume:
 C_VoiceChat.SetPortraitTexture:
   inputs:
   - name: textureObject
-    type: texture
+    type: Texture
   - name: memberID
     type: number
   - name: channelID
@@ -8495,7 +8495,7 @@ CreateFont:
     type: string
   outputs:
   - name: font
-    type: font
+    type: Font
 CreateForbiddenFrame:
   impl: CreateForbiddenFrame
   inputs:
@@ -8506,7 +8506,7 @@ CreateForbiddenFrame:
     type: tostring
   - name: parent
     nilable: true
-    type: frame
+    type: Frame
   - name: template
     nilable: true
     type: string
@@ -8515,7 +8515,7 @@ CreateForbiddenFrame:
     type: number
   outputs:
   - name: frame
-    type: frame
+    type: Frame
 CreateFrame:
   impl: CreateFrame
   inputs:
@@ -8526,7 +8526,7 @@ CreateFrame:
     type: tostring
   - name: parent
     nilable: true
-    type: frame
+    type: Frame
   - name: template
     nilable: true
     type: string
@@ -8535,7 +8535,7 @@ CreateFrame:
     type: number
   outputs:
   - name: frame
-    type: frame
+    type: Frame
 CreateMacro: {}
 CreateNewRaidProfile: {}
 CursorCanGoInSlot:
@@ -8646,11 +8646,11 @@ EnumerateFrames:
   inputs:
   - name: frame
     nilable: true
-    type: frame
+    type: Frame
   outputs:
   - name: next
     nilable: true
-    type: frame
+    type: Frame
 EnumerateServerChannels:
   inputs: {}
 EquipCursorItem: {}
@@ -9320,7 +9320,7 @@ GetClickFrame:
   outputs:
   - name: frame
     nilable: true
-    type: frame
+    type: Frame
 GetClientDisplayExpansionLevel:
   inputs: {}
   outputs:
@@ -13243,14 +13243,14 @@ SetPortraitTexture:
   impl: SetPortraitTexture
   inputs:
   - name: textureObject
-    type: texture
+    type: Texture
   - name: unitToken
     type: string
   outputs: {}
 SetPortraitTextureFromCreatureDisplayID:
   inputs:
   - name: textureObject
-    type: texture
+    type: Texture
   - name: creatureDisplayID
     type: number
   outputs: {}
@@ -13311,7 +13311,7 @@ SetUIVisibility: {}
 SetUnitCursorTexture:
   inputs:
   - name: textureObject
-    type: texture
+    type: Texture
   - name: unit
     type: unit
   - name: style

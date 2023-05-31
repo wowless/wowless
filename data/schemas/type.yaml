@@ -3,8 +3,6 @@ name: type
 type:
   oneof:
   - literal: boolean
-  - literal: font
-  - literal: frame
   - literal: function
   - literal: gender
   - literal: nil
@@ -12,7 +10,6 @@ type:
   - literal: oneornil
   - literal: string
   - literal: table
-  - literal: texture
   - literal: tostring
   - literal: uiAddon
   - literal: unit
@@ -34,3 +31,4 @@ type:
         type:
           ref: enum
   - ref: stringenum
+  - ref: uiobject

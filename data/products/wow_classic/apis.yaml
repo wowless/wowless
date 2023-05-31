@@ -8268,7 +8268,7 @@ CreateFont:
     type: string
   outputs:
   - name: font
-    type: font
+    type: Font
 CreateForbiddenFrame:
   impl: CreateForbiddenFrame
   inputs:
@@ -8279,7 +8279,7 @@ CreateForbiddenFrame:
     type: tostring
   - name: parent
     nilable: true
-    type: frame
+    type: Frame
   - name: template
     nilable: true
     type: string
@@ -8288,7 +8288,7 @@ CreateForbiddenFrame:
     type: number
   outputs:
   - name: frame
-    type: frame
+    type: Frame
 CreateFrame:
   impl: CreateFrame
   inputs:
@@ -8299,7 +8299,7 @@ CreateFrame:
     type: tostring
   - name: parent
     nilable: true
-    type: frame
+    type: Frame
   - name: template
     nilable: true
     type: string
@@ -8308,7 +8308,7 @@ CreateFrame:
     type: number
   outputs:
   - name: frame
-    type: frame
+    type: Frame
 CreateMacro: {}
 CreateNewRaidProfile: {}
 CursorCanGoInSlot:
@@ -8419,11 +8419,11 @@ EnumerateFrames:
   inputs:
   - name: frame
     nilable: true
-    type: frame
+    type: Frame
   outputs:
   - name: next
     nilable: true
-    type: frame
+    type: Frame
 EnumerateServerChannels:
   inputs: {}
 EquipCursorItem: {}
@@ -9095,7 +9095,7 @@ GetClickFrame:
   outputs:
   - name: frame
     nilable: true
-    type: frame
+    type: Frame
 GetClientDisplayExpansionLevel:
   inputs: {}
   outputs:
@@ -13038,7 +13038,7 @@ SetPortraitTexture:
   impl: SetPortraitTexture
   inputs:
   - name: textureObject
-    type: texture
+    type: Texture
   - name: unitToken
     type: string
   outputs: {}

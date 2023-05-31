@@ -12,7 +12,7 @@ AddPrivateAuraAnchorArgs:
       type:
         structure: PrivateAuraIconInfo
     parent:
-      type: frame
+      type: Frame
     showCountdownFrame:
       type: boolean
     showCountdownNumbers:
