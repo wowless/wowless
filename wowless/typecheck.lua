@@ -54,12 +54,6 @@ return function(api)
     gender = function(value)
       return tonumber(value) or 0
     end,
-    font = function(value, isout)
-      return resolveobj('fontinstance', value, isout)
-    end,
-    frame = function(value, isout)
-      return resolveobj('frame', value, isout)
-    end,
     ['function'] = function(value)
       return luatypecheck('function', value)
     end,
@@ -74,9 +68,6 @@ return function(api)
     end,
     table = function(value)
       return luatypecheck('table', value)
-    end,
-    texture = function(value)
-      return resolveobj('texture', value)
     end,
     tostring = function(value)
       local v = type(value) == 'number' and tostring(value) or value
@@ -134,6 +125,15 @@ return function(api)
       end
       return value
     end
+  end
+  for k in pairs(api.datalua.uiobjects) do
+    assert(not scalartypechecks[k])
+    scalartypechecks[k] = function(value, isout)
+      return resolveobj(k, value, isout)
+    end
+    -- TODO remove lowercase uiobject support once all the types are rewritten
+    assert(not scalartypechecks[k:lower()])
+    scalartypechecks[k:lower()] = scalartypechecks[k]
   end
 
   local nilables = {

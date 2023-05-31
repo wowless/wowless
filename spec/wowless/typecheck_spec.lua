@@ -132,6 +132,7 @@ describe('typecheck', function()
           fields = {},
         },
       },
+      uiobjects = {},
     },
     states = {
       Addons = {},
