@@ -131,9 +131,6 @@ return function(api)
     scalartypechecks[k] = function(value, isout)
       return resolveobj(k, value, isout)
     end
-    -- TODO remove lowercase uiobject support once all the types are rewritten
-    assert(not scalartypechecks[k:lower()])
-    scalartypechecks[k:lower()] = scalartypechecks[k]
   end
 
   local nilables = {
