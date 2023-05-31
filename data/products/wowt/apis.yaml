@@ -23916,7 +23916,7 @@ GetSpecializationInfo:
     type: boolean
   - name: inspectTarget
     nilable: true
-    type: unknown
+    type: string
   - name: sex
     nilable: true
     type: number
