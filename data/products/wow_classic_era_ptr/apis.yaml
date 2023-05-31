@@ -21139,11 +21139,11 @@ EnumerateFrames:
   inputs:
   - name: frame
     nilable: true
-    type: table
+    type: frame
   outputs:
   - name: next
     nilable: true
-    type: table
+    type: frame
 EnumerateServerChannels:
   inputs: {}
 EquipCursorItem: {}
