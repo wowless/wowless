@@ -94,13 +94,6 @@ local function mkBaseUIObjectTypes(api)
         return fn(self, ...)
       end
     end
-    local function wrapAll(map)
-      local mm = {}
-      for k, v in pairs(map) do
-        mm[k] = wrap(k, v)
-      end
-      return mm
-    end
     local constructor = wrapstrfn(cfg.constructor, name, 'hlist', hlist)
     if cfg.singleton then
       local orig = constructor
@@ -114,13 +107,13 @@ local function mkBaseUIObjectTypes(api)
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
       local fname = name .. ':' .. mname
-      mixin[mname] = wrapstrfn(method, fname, 'api,toTexture,check', api, toTexture, check)
+      mixin[mname] = wrap(fname, wrapstrfn(method, fname, 'api,toTexture,check', api, toTexture, check))
     end
     uiobjects[name] = {
       cfg = cfg,
       constructor = constructor,
       inherits = cfg.inherits,
-      mixin = wrapAll(mixin),
+      mixin = mixin,
     }
   end
   return flatten(uiobjects)
