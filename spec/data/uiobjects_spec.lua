@@ -70,13 +70,8 @@ describe('uiobjects', function()
                   end
                 end)
                 it('has initial value of the right type', function()
-                  if fv.init == nil then
-                    local impliedinit = {
-                      hlist = true,
-                    }
-                    assert.True(fv.nilable or impliedinit[fv.type])
-                  else
-                    local value, errmsg = typechecker({ type = fv.type }, fv.init)
+                  if fv.type ~= 'hlist' then
+                    local value, errmsg = typechecker(fv, fv.init)
                     assert.Nil(errmsg)
                     assert.same(value, fv.init)
                   end
