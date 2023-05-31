@@ -274,8 +274,7 @@ for k, v in pairs(uiobjectdata) do
     else
       local t = {}
       for _, output in ipairs(mv.outputs or {}) do
-        assert(output.type == 'number', 'unsupported type in ' .. k .. '.' .. mk)
-        table.insert(t, 1)
+        table.insert(t, specDefault(output))
       end
       methods[mk] = 'function() return ' .. table.concat(t, ',') .. ' end'
     end
