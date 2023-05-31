@@ -57,14 +57,22 @@ return function(api)
     ['function'] = function(value)
       return luatypecheck('function', value)
     end,
-    number = function(value)
-      return luatypecheck('number', type(value) == 'string' and tonumber(value) or value)
+    number = function(value, isout)
+      if isout then
+        return luatypecheck('number', value)
+      else
+        return luatypecheck('number', type(value) == 'string' and tonumber(value) or value)
+      end
     end,
     oneornil = function(value)
       return value, value ~= 1
     end,
-    string = function(value)
-      return luatypecheck('string', type(value) == 'number' and tostring(value) or value)
+    string = function(value, isout)
+      if isout then
+        return luatypecheck('string', value)
+      else
+        return luatypecheck('string', type(value) == 'number' and tostring(value) or value)
+      end
     end,
     table = function(value)
       return luatypecheck('table', value)
