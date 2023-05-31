@@ -42,6 +42,7 @@ type:
                 oneof:
                 - record:
                     getter:
+                      required: true
                       type:
                         sequenceof:
                           record:
@@ -52,7 +53,6 @@ type:
                     impl:
                       type:
                         ref: uiobjectimpl
-                - record:
                     outputs:
                       type:
                         sequenceof:
@@ -68,6 +68,7 @@ type:
                                 schema: type
                 - record:
                     setter:
+                      required: true
                       type:
                         sequenceof:
                           record:
