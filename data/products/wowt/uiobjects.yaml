@@ -1299,6 +1299,9 @@ ModelScene:
     ClearFog: {}
     CreateActor:
       impl: ModelScene/CreateActor
+      outputs:
+      - name: actor
+        type: Actor
     GetActorAtIndex: {}
     GetCameraFarClip: {}
     GetCameraFieldOfView: {}

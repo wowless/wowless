@@ -225,7 +225,10 @@ for k, v in pairs(uiobjectdata) do
   for mk, mv in pairs(v.methods or {}) do
     if mv.impl then
       assert(uiobjectimpl[mv.impl])
-      methods[mk] = 'function(...) ' .. readFile('data/uiobjects/' .. mv.impl .. '.lua') .. ' end'
+      methods[mk] = {
+        impl = 'function(...) ' .. readFile('data/uiobjects/' .. mv.impl .. '.lua') .. ' end',
+        outputs = mv.outputs,
+      }
     elseif mv.getter then
       local t = {}
       for _, f in ipairs(mv.getter) do

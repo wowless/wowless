@@ -107,7 +107,32 @@ local function mkBaseUIObjectTypes(api)
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
       local fname = name .. ':' .. mname
-      mixin[mname] = wrap(fname, wrapstrfn(method, fname, 'api,toTexture,check', api, toTexture, check))
+      local mtext = method.impl or method
+      local fn = wrap(mname, wrapstrfn(mtext, fname, 'api,toTexture,check', api, toTexture, check))
+      if not method.outputs then
+        mixin[mname] = fn
+      else
+        local outs = method.outputs
+        local nouts = #outs
+        local function checkOutputs(...)
+          local n = select('#', ...)
+          if #outs ~= n then
+            error(('wrong number of return values to %q: want %d, got %d'):format(fname, nouts, n))
+          end
+          local rets = {}
+          for i, out in ipairs(outs) do
+            local v, errmsg = typechecker(out, (select(i, ...)), true)
+            if errmsg then
+              error(('output %d (%q) of %q %s'):format(i, tostring(out.name), fname, errmsg))
+            end
+            rets[i] = v
+          end
+          return unpack(rets, 1, nouts)
+        end
+        mixin[mname] = function(...)
+          return checkOutputs(fn(...))
+        end
+      end
     end
     uiobjects[name] = {
       cfg = cfg,
