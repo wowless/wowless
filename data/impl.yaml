@@ -159,7 +159,7 @@ GetClassInfo:
   - lookup: GetClassInfo
 GetClickFrame:
   frameworks:
-  - env
+  - api
 getfenv:
   frameworks:
   - env

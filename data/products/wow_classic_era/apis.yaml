@@ -7688,7 +7688,7 @@ GetClickFrame:
   outputs:
   - name: frame
     nilable: true
-    type: table
+    type: frame
 GetClientDisplayExpansionLevel:
   inputs: {}
   outputs:
