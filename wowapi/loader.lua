@@ -135,7 +135,7 @@ local function loadFunctions(api, loader)
     end
 
     local function checkOutputs(fn)
-      if not apicfg.outputs then
+      if not apicfg.impl or not apicfg.outputs then
         return fn
       end
       local function doCheckOutputs(...)
