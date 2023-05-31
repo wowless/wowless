@@ -83,7 +83,6 @@ Region/SetScale: {}
 Region/SetShown: {}
 Region/Show: {}
 ScriptObject/GetScript: {}
-ScriptObject/HasScript: {}
 ScriptObject/HookScript: {}
 ScriptObject/SetScript: {}
 ScrollFrame/SetScrollChild: {}

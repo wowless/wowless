@@ -1616,7 +1616,10 @@ ScriptObject:
     GetScript:
       impl: ScriptObject/GetScript
     HasScript:
-      impl: ScriptObject/HasScript
+      outputs:
+      - name: hasScript
+        stub: true
+        type: boolean
     HookScript:
       impl: ScriptObject/HookScript
     SetScript:
