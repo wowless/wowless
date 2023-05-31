@@ -162,22 +162,22 @@ Button:
       type: string
     disabledTexture:
       nilable: true
-      type: texture
+      type: Texture
     fontstring:
       nilable: true
-      type: fontstring
+      type: FontString
     highlightTexture:
       nilable: true
-      type: texture
+      type: Texture
     motionScriptsWhileDisabled:
       init: false
       type: boolean
     normalFontObject:
       nilable: true
-      type: font
+      type: Font
     normalTexture:
       nilable: true
-      type: texture
+      type: Texture
     pushedTextOffsetX:
       init: 0
       type: number
@@ -186,7 +186,7 @@ Button:
       type: number
     pushedTexture:
       nilable: true
-      type: texture
+      type: Texture
     registeredClicks:
       init:
         leftbuttonup: true
@@ -290,10 +290,10 @@ CheckButton:
       type: boolean
     checkedTexture:
       nilable: true
-      type: texture
+      type: Texture
     disabledCheckedTexture:
       nilable: true
-      type: texture
+      type: Texture
   inherits:
     Button: {}
   methods:
@@ -349,16 +349,16 @@ ColorSelect:
   fields:
     colorValueTexture:
       nilable: true
-      type: texture
+      type: Texture
     colorValueThumbTexture:
       nilable: true
-      type: texture
+      type: Texture
     colorWheelTexture:
       nilable: true
-      type: texture
+      type: Texture
     colorWheelThumbTexture:
       nilable: true
-      type: texture
+      type: Texture
   inherits:
     Frame: {}
   methods:
@@ -416,19 +416,19 @@ Cooldown:
   fields:
     blingTexture:
       nilable: true
-      type: texture
+      type: Texture
     durationMillis:
       init: 0
       type: number
     edgeTexture:
       nilable: true
-      type: texture
+      type: Texture
     startTimeMillis:
       init: 0
       type: number
     swipeTexture:
       nilable: true
-      type: texture
+      type: Texture
   inherits:
     Frame: {}
   methods:
@@ -966,7 +966,7 @@ GameTooltip:
       type: number
     tooltipOwner:
       nilable: true
-      type: frame
+      type: Frame
   inherits:
     Frame: {}
   methods:
@@ -1364,7 +1364,7 @@ ParentedObjectBase:
       type: hlist
     parent:
       nilable: true
-      type: uiobject
+      type: UIObject
   inherits:
     ForbiddenMixin: {}
     UIObject: {}
@@ -1613,7 +1613,7 @@ ScrollFrame:
   fields:
     scrollChild:
       nilable: true
-      type: frame
+      type: Frame
   inherits:
     Frame: {}
   methods:
@@ -1665,7 +1665,7 @@ Slider:
       type: Orientation
     thumbTexture:
       nilable: true
-      type: texture
+      type: Texture
     value:
       init: 0
       type: number
@@ -1721,7 +1721,7 @@ StatusBar:
       type: number
     statusBarTexture:
       nilable: true
-      type: texture
+      type: Texture
     value:
       init: 0
       type: number

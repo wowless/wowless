@@ -213,13 +213,6 @@ local function mkuiobjectfieldset(k)
   end
   return set
 end
-local luareps = {
-  font = true,
-  fontstring = true,
-  frame = true,
-  texture = true,
-  uiobject = true,
-}
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
   local constructor = { 'function() return {' }
@@ -236,7 +229,7 @@ for k, v in pairs(uiobjectdata) do
     elseif mv.getter then
       local t = {}
       for _, f in ipairs(mv.getter) do
-        if luareps[fieldset[f.name].type] then
+        if uiobjectdata[fieldset[f.name].type] then
           table.insert(t, 'self.' .. f.name .. ' and self.' .. f.name .. '.luarep')
         else
           table.insert(t, 'self.' .. f.name)
@@ -260,7 +253,7 @@ for k, v in pairs(uiobjectdata) do
           table.insert(t, f.name)
         else
           local ct = { 'check.', cf.type, '(', f.name }
-          if cf.type == 'texture' then
+          if cf.type == 'Texture' then
             table.insert(ct, ',self')
           end
           table.insert(ct, ')')

@@ -68,7 +68,7 @@ local function mkBaseUIObjectTypes(api)
   local typechecker = require('wowless.typecheck')(api)
 
   local check = setmetatable({
-    texture = function(v, self)
+    Texture = function(v, self)
       local tex = toTexture(self, v)
       return tex and api.UserData(tex)
     end,

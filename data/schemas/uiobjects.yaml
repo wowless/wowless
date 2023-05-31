@@ -21,16 +21,12 @@ type:
                     type:
                       oneof:
                       - literal: boolean
-                      - literal: font
-                      - literal: fontstring
-                      - literal: frame
                       - literal: hlist
                       - literal: number
                       - literal: string
                       - literal: table
-                      - literal: texture
-                      - literal: uiobject
                       - ref: stringenum
+                      - ref: uiobject
         inherits:
           type:
             mapof:
