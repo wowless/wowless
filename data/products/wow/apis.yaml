@@ -10938,26 +10938,26 @@ C_Minimap.ShouldUseHybridMinimap:
 C_ModelInfo.AddActiveModelScene:
   inputs:
   - name: modelSceneFrame
-    type: table
+    type: ModelScene
   - name: modelSceneID
     type: number
   outputs: {}
 C_ModelInfo.AddActiveModelSceneActor:
   inputs:
   - name: modelSceneFrameActor
-    type: table
+    type: Actor
   - name: modelSceneActorID
     type: number
   outputs: {}
 C_ModelInfo.ClearActiveModelScene:
   inputs:
   - name: modelSceneFrame
-    type: table
+    type: ModelScene
   outputs: {}
 C_ModelInfo.ClearActiveModelSceneActor:
   inputs:
   - name: modelSceneFrameActor
-    type: table
+    type: Actor
   outputs: {}
 C_ModelInfo.GetModelSceneActorDisplayInfoByID:
   inputs:
