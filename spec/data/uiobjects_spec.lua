@@ -1,5 +1,7 @@
 describe('uiobjects', function()
   for _, p in ipairs(require('wowless.util').productList()) do
+    local api = require('wowless.api').new(function() end, 0, p)
+    local typechecker = require('wowless.typecheck')(api)
     describe(p, function()
       local uiobjects = require('build/data/products/' .. p .. '/uiobjects')
       describe('hierarchy', function()
@@ -67,12 +69,17 @@ describe('uiobjects', function()
                     assert.False(hasMember(inh, 'fields', fk))
                   end
                 end)
-                it('has initial value', function()
-                  local nilables = {
-                    hlist = true,
-                    texture = true,
-                  }
-                  assert.True(fv.nilable or fv.init ~= nil or nilables[fv.type])
+                it('has initial value of the right type', function()
+                  if fv.init == nil then
+                    local impliedinit = {
+                      hlist = true,
+                      texture = true,
+                    }
+                    assert.True(fv.nilable or impliedinit[fv.type])
+                  else
+                    local _, errmsg = typechecker({ type = fv.type }, fv.init)
+                    assert.Nil(errmsg)
+                  end
                 end)
               end)
             end
