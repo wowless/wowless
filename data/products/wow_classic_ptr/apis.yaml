@@ -8515,7 +8515,7 @@ CreateForbiddenFrame:
     type: number
   outputs:
   - name: frame
-    type: unknown
+    type: frame
 CreateFrame:
   impl: CreateFrame
   inputs:
@@ -8535,7 +8535,7 @@ CreateFrame:
     type: number
   outputs:
   - name: frame
-    type: unknown
+    type: frame
 CreateMacro: {}
 CreateNewRaidProfile: {}
 CursorCanGoInSlot:

@@ -1,3 +1,3 @@
 return (function(api, ...)
-  return api.CreateFrame(...).luarep
+  return api.CreateFrame(...)
 end)(...)

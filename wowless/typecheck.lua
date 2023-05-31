@@ -49,8 +49,14 @@ return function(api)
     font = function(value)
       return resolveobj('fontinstance', value)
     end,
-    frame = function(value)
-      return resolveobj('frame', value)
+    frame = function(value, isout)
+      if not isout then
+        return resolveobj('frame', value)
+      elseif value and value.luarep then
+        return value.luarep, not value:IsObjectType('frame')
+      else
+        return nil, true
+      end
     end,
     ['function'] = function(value)
       return luatypecheck('function', value)
@@ -105,8 +111,8 @@ return function(api)
   local scalartypechecks = {}
   for checktype, checkfn in pairs(plainscalartypechecks) do
     assert(not scalartypechecks[checktype])
-    scalartypechecks[checktype] = function(value)
-      local v, err = checkfn(value)
+    scalartypechecks[checktype] = function(value, isout)
+      local v, err = checkfn(value, isout)
       if err then
         return plainmismatch(checktype, v)
       else
@@ -134,7 +140,7 @@ return function(api)
     oneornil = true,
   }
 
-  local function typecheck(spec, value)
+  local function typecheck(spec, value, isout)
     if value == nil then
       if not spec.nilable and spec.default == nil and not nilables[spec.type] then
         return nil, 'is not nilable, but nil was passed'
@@ -143,7 +149,7 @@ return function(api)
     end
     local scalartypecheck = scalartypechecks[spec.type]
     if scalartypecheck then
-      return scalartypecheck(value)
+      return scalartypecheck(value, isout)
     end
     if spec.type.enum then
       local v = type(value) == 'string' and tonumber(value) or value

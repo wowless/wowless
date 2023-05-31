@@ -149,7 +149,7 @@ local function loadFunctions(api, loader)
         end
         local rets = {}
         for i, out in ipairs(apicfg.outputs) do
-          local v, errmsg = typechecker(out, (select(i, ...)))
+          local v, errmsg = typechecker(out, (select(i, ...)), true)
           if errmsg then
             error(('output %d (%q) of %q %s'):format(i, tostring(out.name), fname, errmsg))
           end
