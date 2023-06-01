@@ -18,7 +18,9 @@ local function new(log, maxErrors, product)
 
   local function InheritsFrom(a, b)
     local t = uiobjectTypes[a]
-    assert(t, 'unknown type ' .. a)
+    if not t then
+      error('unknown type ' .. a)
+    end
     return t.isa[b]
   end
 
