@@ -21,7 +21,7 @@ args = (function()
 end)()
 debug.setprofilingenabled(args.profile)
 local runner = require('wowless.runner')
-local api = runner.run({
+local api, loader = runner.run({
   allevents = args.allevents,
   debug = args.debug,
   dir = 'extracts/' .. args.product,
@@ -33,15 +33,32 @@ local api = runner.run({
   scripts = args.scripts,
 })
 if args.profile then
-  local t = {
-    global = debug.getglobalstats(),
-    runner = debug.getfunctionstats(runner.run),
-  }
-  for k, v in pairs(api) do
-    if type(v) == 'function' then
-      t[k] = debug.getfunctionstats(v)
+  local mark = {}
+  local function getfuncstats(t)
+    if mark[t] then
+      return
     end
+    mark[t] = true
+    local tt = {}
+    for k, v in pairs(t) do
+      if type(k) == 'string' then
+        if type(v) == 'function' then
+          tt[k] = debug.getfunctionstats(v)
+        elseif type(v) == 'table' then
+          local tv = getfuncstats(v)
+          if tv and next(tv) then
+            tt[k] = tv
+          end
+        end
+      end
+    end
+    return tt
   end
+  local t = {
+    api = getfuncstats(api),
+    loader = getfuncstats(loader),
+    runner = getfuncstats(runner),
+  }
   local fn = 'profile.' .. args.product .. '.yaml'
   local content = require('wowapi.yaml').pprint(t)
   require('pl.file').write(fn, content)

@@ -201,7 +201,7 @@ local function run(cfg)
     end
   end
 
-  return api
+  return api, loader
 end
 
 return {
