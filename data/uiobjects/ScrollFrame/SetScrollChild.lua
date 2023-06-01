@@ -10,7 +10,7 @@ return (function(self, ...)
   end
   local old = self.scrollChild
   if old then
-    old:SetParent(nil)
+    api.SetParent(old, nil)
   end
   self.scrollChild = scrollChild and api.UserData(scrollChild)
   if self.scrollChild then

@@ -1429,6 +1429,11 @@ ParentedObject:
   methods:
     SetParent:
       impl: ParentedObject/SetParent
+      inputs:
+      - name: parent
+        nilable: true
+        type: UIObject
+      outputs: {}
   virtual: true
 ParentedObjectBase:
   fields:
