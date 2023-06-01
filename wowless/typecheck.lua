@@ -137,7 +137,12 @@ return function(api)
   for k in pairs(api.datalua.uiobjects) do
     assert(not scalartypechecks[k])
     scalartypechecks[k] = function(value, isout)
-      return resolveobj(k, value, isout)
+      local v, err = resolveobj(k, value, isout)
+      if err then
+        return plainmismatch(k, v)
+      else
+        return v
+      end
     end
   end
 
