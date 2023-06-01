@@ -166,10 +166,10 @@ local function new(log, maxErrors, product)
     elseif type(objnamearg) == 'number' then
       objname = tostring(objnamearg)
     end
-    assert(typename, 'must specify type for ' .. tostring(objname))
     local objtype = uiobjectTypes[typename]
-    assert(objtype, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
-    assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
+    if not objtype then
+      error('unknown type ' .. tostring(typename) .. ' for ' .. tostring(objname))
+    end
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
     local objp = newproxy()
     local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
