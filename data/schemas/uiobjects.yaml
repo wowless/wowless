@@ -57,6 +57,9 @@ type:
                       type:
                         sequenceof:
                           record:
+                            default:
+                              type:
+                                schema: any
                             name:
                               type: string
                             nilable:
@@ -71,6 +74,8 @@ type:
                           record:
                             name:
                               type: string
+                            nilable:
+                              type: boolean
                             stub:
                               type:
                                 schema: any

@@ -10,5 +10,5 @@ return (function(self, name, layer, inherits, sublayer)
   if layer then
     tex:SetDrawLayer(layer, sublayer)
   end
-  return tex.luarep
+  return tex
 end)(...)

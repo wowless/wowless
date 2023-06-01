@@ -113,6 +113,20 @@ AnimationGroup:
   methods:
     CreateAnimation:
       impl: AnimationGroup/CreateAnimation
+      inputs:
+      - default: Animation
+        name: animationType
+        nilable: true
+        type: string
+      - name: name
+        nilable: true
+        type: string
+      - name: inheritsFrom
+        nilable: true
+        type: string
+      outputs:
+      - name: animation
+        type: Animation
     Finish: {}
     GetAnimations:
       impl: AnimationGroup/GetAnimations
@@ -644,6 +658,11 @@ FontInstance:
         type: string
     GetFontObject:
       impl: FontInstance/GetFontObject
+      inputs: {}
+      outputs:
+      - name: font
+        nilable: true
+        type: FontInstance
     GetIndentedWordWrap: {}
     GetJustifyH: {}
     GetJustifyV: {}
@@ -809,12 +828,62 @@ Frame:
     CanChangeAttribute: {}
     CreateFontString:
       impl: Frame/CreateFontString
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - default: ARTWORK
+        name: drawLayer
+        nilable: true
+        type: DrawLayer
+      - name: templateName
+        nilable: true
+        type: string
+      outputs:
+      - name: fontString
+        type: FontString
     CreateLine:
       impl: Frame/CreateLine
+      inputs: {}
+      outputs:
+      - name: line
+        type: Line
     CreateMaskTexture:
       impl: Frame/CreateMaskTexture
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: layer
+        nilable: true
+        type: DrawLayer
+      - name: inheritsFrom
+        nilable: true
+        type: string
+      - name: subLayer
+        nilable: true
+        type: number
+      outputs:
+      - name: mask
+        type: MaskTexture
     CreateTexture:
       impl: Frame/CreateTexture
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: layer
+        nilable: true
+        type: DrawLayer
+      - name: inheritsFrom
+        nilable: true
+        type: string
+      - name: subLayer
+        nilable: true
+        type: number
+      outputs:
+      - name: texture
+        type: Texture
     DesaturateHierarchy: {}
     DisableDrawLayer: {}
     DoesClipChildren: {}
@@ -1406,6 +1475,19 @@ Path:
   methods:
     CreateControlPoint:
       impl: Path/CreateControlPoint
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: templateName
+        nilable: true
+        type: string
+      - name: order
+        nilable: true
+        type: number
+      outputs:
+      - name: point
+        type: ControlPoint
     GetControlPoints: {}
     GetCurve: {}
     GetMaxOrder: {}
@@ -1479,6 +1561,16 @@ Region:
     ClearPointsOffset: {}
     CreateAnimationGroup:
       impl: Region/CreateAnimationGroup
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: templateName
+        nilable: true
+        type: string
+      outputs:
+      - name: animationGroup
+        type: AnimationGroup
     GetAnimationGroups:
       impl: Region/GetAnimationGroups
     GetBottom:
