@@ -68,6 +68,8 @@ type:
                               required: true
                               type:
                                 schema: type
+                    mayreturnnothing:
+                      type: boolean
                     outputs:
                       type:
                         sequenceof:

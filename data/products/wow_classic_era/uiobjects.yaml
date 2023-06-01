@@ -1590,6 +1590,24 @@ Region:
       impl: Region/GetNumPoints
     GetPoint:
       impl: Region/GetPoint
+      inputs:
+      - default: 1
+        name: anchorIndex
+        nilable: true
+        type: tonumber
+      mayreturnnothing: true
+      outputs:
+      - name: point
+        type: FramePoint
+      - name: relativeTo
+        nilable: true
+        type: UIObject
+      - name: relativePoint
+        type: FramePoint
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
     GetPointByName: {}
     GetRect:
       getter:

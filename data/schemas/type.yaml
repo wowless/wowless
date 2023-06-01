@@ -10,6 +10,7 @@ type:
   - literal: oneornil
   - literal: string
   - literal: table
+  - literal: tonumber
   - literal: tostring
   - literal: uiAddon
   - literal: unit
