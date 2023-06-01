@@ -227,6 +227,7 @@ for k, v in pairs(uiobjectdata) do
       assert(uiobjectimpl[mv.impl])
       methods[mk] = {
         impl = 'function(...) ' .. readFile('data/uiobjects/' .. mv.impl .. '.lua') .. ' end',
+        inputs = mv.inputs,
         outputs = mv.outputs,
       }
     elseif mv.getter then

@@ -107,14 +107,37 @@ local function mkBaseUIObjectTypes(api)
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
       local fname = name .. ':' .. mname
-      local mtext = method.impl or method
-      local fn = wrap(mname, wrapstrfn(mtext, fname, 'api,toTexture,check', api, toTexture, check))
-      if not method.outputs then
-        mixin[mname] = fn
-      else
+      local function checkInputs(fn)
+        if not method.inputs then
+          return fn
+        end
+        local sig = method.inputs
+        local nsig = #method.inputs
+        return function(self, ...)
+          local args = {}
+          for i, param in ipairs(sig) do
+            local v, errmsg, iswarn = typechecker(param, (select(i, ...)))
+            if not errmsg then
+              args[i] = v
+            else
+              local msg = ('arg %d (%q) of %q %s'):format(i, tostring(param.name), fname, errmsg)
+              if iswarn then
+                api.log(1, 'warning: ' .. msg)
+              else
+                error(msg)
+              end
+            end
+          end
+          return fn(self, unpack(args, 1, nsig))
+        end
+      end
+      local function checkOutputs(fn)
+        if not method.outputs then
+          return fn
+        end
         local outs = method.outputs
         local nouts = #outs
-        local function checkOutputs(...)
+        local function doCheckOutputs(...)
           local n = select('#', ...)
           if #outs ~= n then
             error(('wrong number of return values to %q: want %d, got %d'):format(fname, nouts, n))
@@ -129,10 +152,13 @@ local function mkBaseUIObjectTypes(api)
           end
           return unpack(rets, 1, nouts)
         end
-        mixin[mname] = function(...)
-          return checkOutputs(fn(...))
+        return function(...)
+          return doCheckOutputs(fn(...))
         end
       end
+      local mtext = method.impl or method
+      local fn = wrap(mname, wrapstrfn(mtext, fname, 'api,toTexture,check', api, toTexture, check))
+      mixin[mname] = checkOutputs(checkInputs(fn))
     end
     uiobjects[name] = {
       cfg = cfg,

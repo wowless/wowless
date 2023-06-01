@@ -1301,6 +1301,13 @@ ModelScene:
     ClearFog: {}
     CreateActor:
       impl: ModelScene/CreateActor
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: template
+        nilable: true
+        type: string
       outputs:
       - name: actor
         type: Actor

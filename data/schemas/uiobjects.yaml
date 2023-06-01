@@ -53,6 +53,18 @@ type:
                     impl:
                       type:
                         ref: uiobjectimpl
+                    inputs:
+                      type:
+                        sequenceof:
+                          record:
+                            name:
+                              type: string
+                            nilable:
+                              type: boolean
+                            type:
+                              required: true
+                              type:
+                                schema: type
                     outputs:
                       type:
                         sequenceof:
