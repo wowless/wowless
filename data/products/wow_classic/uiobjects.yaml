@@ -279,6 +279,10 @@ Button:
       impl: Button/SetEnabled
     SetFontString:
       impl: Button/SetFontString
+      inputs:
+      - name: fontString
+        type: FontString
+      outputs: {}
     SetFormattedText:
       impl: Button/SetFormattedText
     SetHighlightAtlas:
