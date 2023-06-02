@@ -13,6 +13,7 @@ Use `Clone Repository in Container Volume...`, select this repository to clone,
 and then watch as VSCode builds a container and installs all necessary dependencies.
 
 Using Docker Compose:
+
 ```sh
 cp .env.dist .env
 docker-compose up -d
