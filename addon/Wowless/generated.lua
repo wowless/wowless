@@ -150,36 +150,7 @@ function G.GeneratedTests()
       end
       return t
     end)())
-    local toskipin = {
-      graphicscomputeeffects = true,
-      graphicsdeptheffects = true,
-      graphicsenvironmentdetail = true,
-      graphicsgroundclutter = true,
-      graphicsliquiddetail = true,
-      graphicsoutlinemode = true,
-      graphicsparticledensity = true,
-      graphicsquality = true,
-      graphicsshadowquality = true,
-      graphicsspelldensity = true,
-      graphicsssao = true,
-      graphicstextureresolution = true,
-      graphicsviewdistance = true,
-      mousespeed = true,
-      raidgraphicscomputeeffects = true,
-      raidgraphicsdeptheffects = true,
-      raidgraphicsenvironmentdetail = true,
-      raidgraphicsgroundclutter = true,
-      raidgraphicsliquiddetail = true,
-      raidgraphicsoutlinemode = true,
-      raidgraphicsparticledensity = true,
-      raidgraphicsquality = true,
-      raidgraphicsshadowquality = true,
-      raidgraphicsspelldensity = true,
-      raidgraphicsssao = true,
-      raidgraphicstextureresolution = true,
-      raidgraphicsviewdistance = true,
-      renderscale = true,
-    }
+    local toskipin = _G.WowlessData.Config.ignore_cvar_value or {}
     local tests = {}
     for k, v in pairs(expectedCVars) do
       tests[v.name] = function()

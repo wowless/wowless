@@ -38,6 +38,7 @@ end
 
 local fns = {
   apis = perproduct('apis'),
+  cvars = perproduct('cvars'),
   enums = function()
     local t = {}
     for _, d in ipairs(require('pl.dir').getdirectories('data/products')) do
