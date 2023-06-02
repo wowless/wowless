@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  wowless:
+    image: wowless
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workspaces/wowless
+    tty: true
+    working_dir: /workspaces/wowless

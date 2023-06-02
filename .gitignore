@@ -6,3 +6,5 @@
 /extracts
 /out/
 /test.out
+/.env
+/.idea/
