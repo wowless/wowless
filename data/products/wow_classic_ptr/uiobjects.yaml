@@ -786,6 +786,7 @@ FontString:
       setter:
       - name: textScale
     SetWordWrap: {}
+  warner: true
 ForbiddenMixin:
   fields:
     forbidden:
@@ -1209,6 +1210,7 @@ Line:
     SetThickness:
       setter:
       - name: thickness
+  warner: true
 LineScale:
   inherits:
     Scale: {}
@@ -1959,6 +1961,7 @@ Texture:
     GetMaskTexture: {}
     GetNumMaskTextures: {}
     RemoveMaskTexture: {}
+  warner: true
 TextureBase:
   fields:
     blendMode:

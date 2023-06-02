@@ -449,11 +449,6 @@ function G.GeneratedTests()
         SetWidth = true,
       },
     }
-    local warners = {
-      FontString = true,
-      Line = true,
-      Texture = true,
-    }
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
       tests[name] = function()
@@ -467,7 +462,7 @@ function G.GeneratedTests()
         else
           if not cfg.frametype then
             assertCreateFrameFails(name)
-            if warners[name] then
+            if cfg.warner then
               table.insert(G.ExpectedLuaWarnings, {
                 warnText = 'Unknown frame type: ' .. name,
                 warnType = 0,
