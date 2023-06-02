@@ -1,3 +1,5 @@
+/.env
+/.idea/
 /.ninja_deps
 /.ninja_log
 /build/
@@ -6,5 +8,3 @@
 /extracts
 /out/
 /test.out
-/.env
-/.idea/
