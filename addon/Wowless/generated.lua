@@ -211,17 +211,7 @@ function G.GeneratedTests()
         end
       end
     end
-    local toskip = { -- TODO test these better
-      -- PTR hooked
-      FauxScrollFrame_Update = true,
-      QuestLog_Update = true,
-      QuestMapLogTitleButton_OnEnter = true,
-      SetItemRef = true,
-      UpdateUIParentPosition = true,
-      -- SecureCapsule-grabbed Lua functions defined outside capsule
-      CreateFromSecureMixins = true,
-      SecureMixin = true,
-    }
+    local toskip = _G.WowlessData.Config.skipped_globals or {}
     local function checkEnv(env)
       for k, v in pairs(env) do
         if type(v) == 'function' and not tests[k] and not tests['~' .. k] and not toskip[k] then
