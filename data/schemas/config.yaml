@@ -41,6 +41,12 @@ type:
                   ref: api
                 value:
                   record: null
+          skipped_globals:
+            type:
+              mapof:
+                key: string
+                value:
+                  record: null
           skipped_uiobjects:
             type:
               mapof:

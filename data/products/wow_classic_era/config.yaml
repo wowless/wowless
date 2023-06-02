@@ -21,6 +21,12 @@ addon:
     raidGraphicsSSAO: {}
     raidGraphicsTextureResolution: {}
     RenderScale: {}
+  skipped_globals:
+    CreateFromSecureMixins: {}
+    FauxScrollFrame_Update: {}
+    QuestLog_Update: {}
+    SecureMixin: {}
+    SetItemRef: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton

@@ -52,6 +52,8 @@ addon:
     C_Traits.GetConditionInfo: {}
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
+  skipped_globals:
+    SetItemRef: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton

@@ -40,6 +40,9 @@ addon:
     raidGraphicsSSAO: {}
     raidGraphicsTextureResolution: {}
     RenderScale: {}
+  skipped_globals:
+    FauxScrollFrame_Update: {}
+    SetItemRef: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton
