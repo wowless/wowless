@@ -1111,6 +1111,13 @@ GameTooltip:
     SetMinimumWidth: {}
     SetOwner:
       impl: GameTooltip/SetOwner
+      inputs:
+      - name: owner
+        type: Frame
+      - name: anchorType
+        nilable: true
+        type: string
+      outputs: {}
     SetPadding: {}
     SetPetAction: {}
     SetPossession: {}

@@ -1156,6 +1156,13 @@ GameTooltip:
     SetObjectTooltipPosition: {}
     SetOwner:
       impl: GameTooltip/SetOwner
+      inputs:
+      - name: owner
+        type: Frame
+      - name: anchorType
+        nilable: true
+        type: string
+      outputs: {}
     SetPadding: {}
     SetShrinkToFitWrapped: {}
     SetText: {}
