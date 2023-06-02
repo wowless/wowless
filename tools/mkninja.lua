@@ -6,6 +6,7 @@ local productList = {
   'wow_classic_era_ptr',
   'wow_classic_ptr',
   'wowt',
+  'wowxptr',
 }
 
 -- TODO get this from gentest.lua
@@ -526,6 +527,15 @@ local yamls = {
   'data/products/wowt/structures.yaml',
   'data/products/wowt/uiobjects.yaml',
   'data/products/wowt/xml.yaml',
+  'data/products/wowxptr/apis.yaml',
+  'data/products/wowxptr/build.yaml',
+  'data/products/wowxptr/config.yaml',
+  'data/products/wowxptr/cvars.yaml',
+  'data/products/wowxptr/events.yaml',
+  'data/products/wowxptr/globals.yaml',
+  'data/products/wowxptr/structures.yaml',
+  'data/products/wowxptr/uiobjects.yaml',
+  'data/products/wowxptr/xml.yaml',
   'data/schemas/addons.yaml',
   'data/schemas/any.yaml',
   'data/schemas/apis.yaml',

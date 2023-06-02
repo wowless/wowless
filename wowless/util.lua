@@ -108,6 +108,7 @@ local function productList()
     'wow_classic_era_ptr',
     'wow_classic_ptr',
     'wowt',
+    'wowxptr',
   }
 end
 
