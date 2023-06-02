@@ -20,6 +20,7 @@ addon:
     globalapis:
       CreateForbiddenFrame: {}
   hooked_globals:
+    FauxScrollFrame_Update: {}
     SetItemRef: {}
   ignore_cvar_value:
     graphicsEnvironmentDetail: {}
@@ -42,8 +43,6 @@ addon:
     raidGraphicsSSAO: {}
     raidGraphicsTextureResolution: {}
     RenderScale: {}
-  skipped_globals:
-    FauxScrollFrame_Update: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton

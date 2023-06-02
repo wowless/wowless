@@ -21,6 +21,7 @@ addon:
       CreateForbiddenFrame: {}
   hooked_globals:
     SetItemRef: {}
+    UpdateUIParentPosition: {}
   ignore_cvar_value:
     graphicsComputeEffects: {}
     graphicsDepthEffects: {}
@@ -54,8 +55,6 @@ addon:
     C_Traits.GetConditionInfo: {}
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
-  skipped_globals:
-    UpdateUIParentPosition: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton

@@ -1,6 +1,7 @@
 ---
 addon:
   hooked_globals:
+    FauxScrollFrame_Update: {}
     SetItemRef: {}
   ignore_cvar_value:
     graphicsEnvironmentDetail: {}
@@ -25,7 +26,6 @@ addon:
     RenderScale: {}
   skipped_globals:
     CreateFromSecureMixins: {}
-    FauxScrollFrame_Update: {}
     SecureMixin: {}
   skipped_uiobjects:
     Minimap: singleton
