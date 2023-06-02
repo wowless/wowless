@@ -102,5 +102,7 @@ type:
           type: boolean
         virtual:
           type: boolean
+        warner:
+          type: boolean
         zombie:
           type: boolean
