@@ -19,8 +19,6 @@ addon:
       VasServiceType: {}
     globalapis:
       CreateForbiddenFrame: {}
-  hooked_globals:
-    SetItemRef: {}
   ignore_cvar_value:
     graphicsComputeEffects: {}
     graphicsDepthEffects: {}
@@ -72,5 +70,4 @@ runner:
     CASTRANDOM: {}
     EDITMODE: {}
     EVENT: {}
-    PTRFEEDBACK: {}
     USERANDOM: {}
