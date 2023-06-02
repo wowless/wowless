@@ -1,3 +1,5 @@
+/.env
+/.idea/
 /.ninja_deps
 /.ninja_log
 /build/
