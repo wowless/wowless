@@ -217,6 +217,7 @@ function G.GeneratedTests()
       QuestLog_Update = true,
       QuestMapLogTitleButton_OnEnter = true,
       SetItemRef = true,
+      UpdateUIParentPosition = true,
       -- SecureCapsule-grabbed Lua functions defined outside capsule
       CreateFromSecureMixins = true,
       SecureMixin = true,
