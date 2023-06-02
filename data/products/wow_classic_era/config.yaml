@@ -1,5 +1,8 @@
 ---
 addon:
+  globalenv_in_capsule:
+    CreateFromSecureMixins: {}
+    SecureMixin: {}
   hooked_globals:
     FauxScrollFrame_Update: {}
     QuestLog_Update: {}
@@ -25,9 +28,6 @@ addon:
     raidGraphicsSSAO: {}
     raidGraphicsTextureResolution: {}
     RenderScale: {}
-  skipped_globals:
-    CreateFromSecureMixins: {}
-    SecureMixin: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton

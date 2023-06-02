@@ -215,15 +215,27 @@ function G.GeneratedTests()
     for k in pairs(_G.WowlessData.Config.hooked_globals or {}) do
       assert(not tests[k], k)
       tests[k] = function()
-        if not iswowlesslite then
+        if iswowlesslite then
+          assert(_G[k] == nil)
+        else
           return checkCFunc(_G[k])
         end
       end
     end
-    local toskip = _G.WowlessData.Config.skipped_globals or {}
+    for k in pairs(_G.WowlessData.Config.globalenv_in_capsule or {}) do
+      assert(not tests[k], k)
+      tests[k] = function()
+        local v = capsuleEnv[k]
+        if iswowlesslite then
+          assert(v == nil)
+        else
+          return checkLuaFunc(v, _G)
+        end
+      end
+    end
     local function checkEnv(env)
       for k, v in pairs(env) do
-        if type(v) == 'function' and not tests[k] and not tests['~' .. k] and not toskip[k] then
+        if type(v) == 'function' and not tests[k] and not tests['~' .. k] then
           tests['~' .. k] = function()
             return checkNotCFunc(v, env)
           end
