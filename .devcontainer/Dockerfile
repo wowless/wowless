@@ -17,7 +17,7 @@ RUN apt-get update \
         tar \
         unzip \
         zip \
-    && pip install git+https://github.com/luarocks/hererocks cmake \
+    && pip install git+https://github.com/luarocks/hererocks cmake pre-commit \
     && hererocks -l 5.1 -r 3.8.0 /usr/local \
     && git config --system --add safe.directory '*'
 WORKDIR /wowless
