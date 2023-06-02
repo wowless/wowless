@@ -1,5 +1,6 @@
 local _, G = ...
 local assertEquals = _G.assertEquals
+local iswowlesslite = _G.__wowless and _G.__wowless.lite
 
 local capsuleEnv = _G.SimpleCheckout and getfenv(_G.SimpleCheckout.OnLoad) or {}
 
@@ -208,6 +209,14 @@ function G.GeneratedTests()
           end
         elseif not capsuleapis[name] then
           return checkCFunc(func)
+        end
+      end
+    end
+    for k in pairs(_G.WowlessData.Config.hooked_globals or {}) do
+      assert(not tests[k], k)
+      tests[k] = function()
+        if not iswowlesslite then
+          return checkCFunc(_G[k])
         end
       end
     end

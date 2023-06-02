@@ -19,6 +19,8 @@ addon:
       VasServiceType: {}
     globalapis:
       CreateForbiddenFrame: {}
+  hooked_globals:
+    SetItemRef: {}
   ignore_cvar_value:
     graphicsComputeEffects: {}
     graphicsDepthEffects: {}
@@ -53,7 +55,6 @@ addon:
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
   skipped_globals:
-    SetItemRef: {}
     UpdateUIParentPosition: {}
   skipped_uiobjects:
     Minimap: singleton

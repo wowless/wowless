@@ -27,6 +27,12 @@ type:
                         ref: api
                       value:
                         record: null
+          hooked_globals:
+            type:
+              mapof:
+                key: string
+                value:
+                  record: null
           ignore_cvar_value:
             type:
               mapof:

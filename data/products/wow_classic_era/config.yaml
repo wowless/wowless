@@ -1,5 +1,7 @@
 ---
 addon:
+  hooked_globals:
+    SetItemRef: {}
   ignore_cvar_value:
     graphicsEnvironmentDetail: {}
     graphicsGroundClutter: {}
@@ -26,7 +28,6 @@ addon:
     FauxScrollFrame_Update: {}
     QuestLog_Update: {}
     SecureMixin: {}
-    SetItemRef: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton

@@ -19,6 +19,8 @@ addon:
       VasServiceType: {}
     globalapis:
       CreateForbiddenFrame: {}
+  hooked_globals:
+    SetItemRef: {}
   ignore_cvar_value:
     graphicsEnvironmentDetail: {}
     graphicsGroundClutter: {}
@@ -42,7 +44,6 @@ addon:
     RenderScale: {}
   skipped_globals:
     FauxScrollFrame_Update: {}
-    SetItemRef: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton
