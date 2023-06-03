@@ -10,3 +10,4 @@ services:
       - ..:/workspaces/wowless
     tty: true
     working_dir: /workspaces/wowless
+    user: vscode

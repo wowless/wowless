@@ -20,10 +20,35 @@ local function init(api, loader, lite)
   api.env._G = api.env
   Mixin(api.env, deepcopy(api.impls))
   Mixin(api.env, deepcopy(api.datalua.globals))
+  local wowlessDebug = Mixin({}, debug)
+  wowlessDebug.debug = function()
+    local _G = api.env
+    local function getLocals(stackLevel)
+      stackLevel = (stackLevel or 0) + 5 -- 5 = 3 (this function) + 2 (caller)
+      local locals = {}
+      local i = 1
+      while true do
+        local name, value = debug.getlocal(stackLevel, i)
+        if not name then
+          break
+        end
+        locals[name] = value
+        i = i + 1
+      end
+      return locals
+    end
+
+    print('entering debugger at ' .. debug.getinfo(2).source .. ':' .. debug.getinfo(2).currentline)
+    print('get _G with: _, _G = debug.getlocal(3,1)')
+    print('get locals with: locals = select(2, debug.getlocal(3,2))()')
+    debug.debug()
+  end
+
   api.env.__wowless = {
     dump = dump(api),
     lite = lite,
     product = api.product,
+    debug = wowlessDebug,
   }
 end
 
