@@ -772,6 +772,10 @@ local function loader(api, cfg)
     end
   end
 
+  local function isLoadable(toc)
+    return toc.attrs.OnlyBetaAndPTR ~= '1' or datalua.cvars.agentuid.value == 'wow_ptr'
+  end
+
   local function loadFrameXml()
     local loadFile = forAddon()
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
@@ -783,7 +787,7 @@ local function loader(api, cfg)
     loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
     local blizzardAddons = {}
     for name, toc in pairs(addonData) do
-      if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' then
+      if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' and isLoadable(toc) then
         table.insert(blizzardAddons, name)
       end
     end

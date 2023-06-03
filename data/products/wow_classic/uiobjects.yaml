@@ -776,6 +776,7 @@ FontString:
       setter:
       - name: textScale
     SetWordWrap: {}
+  warner: true
 ForbiddenMixin:
   fields:
     forbidden:
@@ -1120,6 +1121,13 @@ GameTooltip:
     SetMinimumWidth: {}
     SetOwner:
       impl: GameTooltip/SetOwner
+      inputs:
+      - name: owner
+        type: Frame
+      - name: anchorType
+        nilable: true
+        type: string
+      outputs: {}
     SetPadding: {}
     SetPetAction: {}
     SetPossession: {}
@@ -1201,6 +1209,7 @@ Line:
     SetThickness:
       setter:
       - name: thickness
+  warner: true
 LineScale:
   inherits:
     Scale: {}
@@ -1949,6 +1958,7 @@ Texture:
     GetMaskTexture: {}
     GetNumMaskTextures: {}
     RemoveMaskTexture: {}
+  warner: true
 TextureBase:
   fields:
     blendMode:
