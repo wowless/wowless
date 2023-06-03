@@ -11,6 +11,9 @@ C_Calendar.SetMonth:
 C_ClassTalents.GetActiveConfigID:
   states:
   - Talents
+C_ClassTalents.GetTraitTreeForSpec:
+  sqls:
+    - lookup: C_ClassTalents.GetTraitTreeForSpec
 C_Console.GetAllCommands:
   frameworks:
   - datalua
