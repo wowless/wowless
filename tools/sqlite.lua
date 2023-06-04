@@ -42,7 +42,7 @@ local function factory(theProduct)
       table.insert(dbinit, ('CREATE TABLE %s ("%s")'):format(k, table.concat(v.orderedfields, '","')))
       if indexes[k] then
         for i, index in ipairs(indexes[k]) do
-          table.insert(dbinit, ('CREATE INDEX Index%d ON %s'):format(i, index))
+          table.insert(dbinit, ('CREATE INDEX Index%d ON %s'):format(k .. i, index))
         end
       end
     end
