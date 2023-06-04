@@ -70,8 +70,22 @@ local function factory(theProduct)
         error('failed to populate ' .. k .. ': ' .. msg)
       end
     end
-    table.insert(dbinit, 'CREATE INDEX MooIndex ON UiTextureAtlasMember (CommittedName COLLATE NOCASE)')
-    table.insert(dbinit, 'CREATE INDEX CowIndex ON UiTextureAtlas (ID)')
+    local indexes = {
+      'UiTextureAtlasMember (CommittedName COLLATE NOCASE)',
+      'UiTextureAtlas (ID)',
+      'TraitNodeGroupXTraitCond (TraitNodeGroupID)',
+      'TraitNodeXTraitCond (TraitNodeID)',
+      'TraitNode (ID)',
+      'TraitNodeGroupXTraitNode (TraitNodeID)',
+      'TraitCond (ID)',
+      'TraitNodeXTraitNodeEntry (TraitNodeID)',
+      'TraitNodeEntry (ID)',
+      'TraitNodeGroup (ID)',
+      'SpecSetMember (SpecSet)',
+    }
+    for i, index in ipairs(indexes) do
+      table.insert(dbinit, ('CREATE INDEX Index%d ON %s'):format(i, index))
+    end
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
     if db:exec(table.concat(dbinit, ';\n')) ~= lsqlite3.OK then

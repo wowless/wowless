@@ -50,6 +50,10 @@ local function init(api, loader, lite)
     dump = dump(api),
     lite = lite,
     product = api.product,
+    quit = function(exitCode)
+      api.log(1, 'Bye!')
+      os.exit(exitCode)
+    end,
   }
 end
 
