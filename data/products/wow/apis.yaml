@@ -3711,6 +3711,7 @@ C_ClassTalents.ImportLoadout:
   - name: importError
     type: string
 C_ClassTalents.InitializeViewLoadout:
+  impl: C_ClassTalents.InitializeViewLoadout
   inputs:
   - name: specID
     type: number
@@ -3786,6 +3787,7 @@ C_ClassTalents.UpdateLastSelectedSavedConfigID:
     type: number
   outputs: {}
 C_ClassTalents.ViewLoadout:
+  impl: C_ClassTalents.ViewLoadout
   inputs:
   - name: entries
     type:

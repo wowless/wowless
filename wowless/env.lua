@@ -20,6 +20,7 @@ local function init(api, loader, lite)
   api.env._G = api.env
   Mixin(api.env, deepcopy(api.impls))
   Mixin(api.env, deepcopy(api.datalua.globals))
+
   local wowlessDebug = Mixin({}, debug)
   wowlessDebug.debug = function()
     local _G = api.env
@@ -45,10 +46,10 @@ local function init(api, loader, lite)
   end
 
   api.env.__wowless = {
+    debug = wowlessDebug,
     dump = dump(api),
     lite = lite,
     product = api.product,
-    debug = wowlessDebug,
   }
 end
 

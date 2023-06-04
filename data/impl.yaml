@@ -13,7 +13,15 @@ C_ClassTalents.GetActiveConfigID:
   - Talents
 C_ClassTalents.GetTraitTreeForSpec:
   sqls:
-    - lookup: C_ClassTalents.GetTraitTreeForSpec
+  - lookup: C_ClassTalents.GetTraitTreeForSpec
+C_ClassTalents.InitializeViewLoadout:
+  states:
+  - Talents
+C_ClassTalents.ViewLoadout:
+  sqls:
+  - lookup: GetSpecializationInfoByID
+  states:
+  - Talents
 C_Console.GetAllCommands:
   frameworks:
   - datalua
