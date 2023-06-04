@@ -2,6 +2,11 @@ describe('uiobjects', function()
   for _, p in ipairs(require('wowless.util').productList()) do
     local api = require('wowless.api').new(function() end, 0, p)
     local typechecker = require('wowless.typecheck')(api)
+    local function typecheck(spec, val)
+      local value, errmsg = typechecker(spec, val)
+      assert.Nil(errmsg)
+      assert.same(value, val)
+    end
     describe(p, function()
       local uiobjects = require('build/data/products/' .. p .. '/uiobjects')
       describe('hierarchy', function()
@@ -71,9 +76,7 @@ describe('uiobjects', function()
                 end)
                 it('has initial value of the right type', function()
                   if fv.type ~= 'hlist' then
-                    local value, errmsg = typechecker(fv, fv.init)
-                    assert.Nil(errmsg)
-                    assert.same(value, fv.init)
+                    typecheck(fv, fv.init)
                   end
                 end)
               end)
@@ -90,6 +93,28 @@ describe('uiobjects', function()
                 it('manipulates only declared fields', function()
                   for _, field in ipairs(mv.getter or mv.setter or {}) do
                     assert.True(hasMember(k, 'fields', field.name))
+                  end
+                end)
+                describe('inputs', function()
+                  for i, input in ipairs(mv.inputs or {}) do
+                    describe(input.name or i, function()
+                      if input.default ~= nil then
+                        it('has default of the right type', function()
+                          typecheck(input, input.default)
+                        end)
+                      end
+                    end)
+                  end
+                end)
+                describe('outputs', function()
+                  for i, output in ipairs(mv.outputs or {}) do
+                    describe(output.name or i, function()
+                      if output.stub ~= nil then
+                        it('has stub of the right type', function()
+                          typecheck(output, output.stub)
+                        end)
+                      end
+                    end)
                   end
                 end)
               end)
