@@ -24,9 +24,27 @@ local function factory(theProduct)
   end
 
   local function create(filename)
+    local indexes = {
+      SpecSetMember = { 'SpecSetMember (SpecSet)' },
+      TraitCond = { 'TraitCond (ID)' },
+      TraitNode = { 'TraitNode (ID)' },
+      TraitNodeEntry = { 'TraitNodeEntry (ID)' },
+      TraitNodeGroup = { 'TraitNodeGroup (ID)' },
+      TraitNodeGroupXTraitCond = { 'TraitNodeGroupXTraitCond (TraitNodeGroupID)' },
+      TraitNodeGroupXTraitNode = { 'TraitNodeGroupXTraitNode (TraitNodeID)' },
+      TraitNodeXTraitCond = { 'TraitNodeXTraitCond (TraitNodeID)' },
+      TraitNodeXTraitNodeEntry = { 'TraitNodeXTraitNodeEntry (TraitNodeID)' },
+      UiTextureAtlas = { 'UiTextureAtlas (ID)' },
+      UiTextureAtlasMember = { 'UiTextureAtlasMember (CommittedName COLLATE NOCASE)' },
+    }
     local dbinit = { 'BEGIN' }
     for k, v in pairs(defs) do
       table.insert(dbinit, ('CREATE TABLE %s ("%s")'):format(k, table.concat(v.orderedfields, '","')))
+      if indexes[k] then
+        for i, index in ipairs(indexes[k]) do
+          table.insert(dbinit, ('CREATE INDEX Index%d ON %s'):format(i, index))
+        end
+      end
     end
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
@@ -69,22 +87,6 @@ local function factory(theProduct)
       if not success then
         error('failed to populate ' .. k .. ': ' .. msg)
       end
-    end
-    local indexes = {
-      'UiTextureAtlasMember (CommittedName COLLATE NOCASE)',
-      'UiTextureAtlas (ID)',
-      'TraitNodeGroupXTraitCond (TraitNodeGroupID)',
-      'TraitNodeXTraitCond (TraitNodeID)',
-      'TraitNode (ID)',
-      'TraitNodeGroupXTraitNode (TraitNodeID)',
-      'TraitCond (ID)',
-      'TraitNodeXTraitNodeEntry (TraitNodeID)',
-      'TraitNodeEntry (ID)',
-      'TraitNodeGroup (ID)',
-      'SpecSetMember (SpecSet)',
-    }
-    for i, index in ipairs(indexes) do
-      table.insert(dbinit, ('CREATE INDEX Index%d ON %s'):format(i, index))
     end
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
