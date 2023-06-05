@@ -23,6 +23,7 @@ local function init(api, loader, lite)
 
   local wowlessDebug = Mixin({}, debug)
   wowlessDebug.debug = function()
+    -- luacheck: ignore 211
     local _G = api.env
     local function getLocals(stackLevel)
       stackLevel = (stackLevel or 0) + 5 -- 5 = 3 (this function) + 2 (caller)
@@ -52,7 +53,7 @@ local function init(api, loader, lite)
     product = api.product,
     quit = function(exitCode)
       api.log(1, 'Bye!')
-      os.exit(exitCode)
+      os.exit(exitCode or 1)
     end,
   }
 end

@@ -37,12 +37,6 @@ files['addon/Wowless'] = {
     'SendSystemMessage',
   },
 }
-files['wowless/env.lua'] = {
-  ignore = {
-    '211/_G',
-    '211/getLocals',
-  },
-}
 -- TODO remove this when it is no longer necessary
 files['data/uiobjects'] = {
   read_globals = {
