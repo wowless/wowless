@@ -24,9 +24,27 @@ local function factory(theProduct)
   end
 
   local function create(filename)
+    local indexes = {
+      SpecSetMember = { 'SpecSetMember (SpecSet)' },
+      TraitCond = { 'TraitCond (ID)' },
+      TraitNode = { 'TraitNode (ID)' },
+      TraitNodeEntry = { 'TraitNodeEntry (ID)' },
+      TraitNodeGroup = { 'TraitNodeGroup (ID)' },
+      TraitNodeGroupXTraitCond = { 'TraitNodeGroupXTraitCond (TraitNodeGroupID)' },
+      TraitNodeGroupXTraitNode = { 'TraitNodeGroupXTraitNode (TraitNodeID)' },
+      TraitNodeXTraitCond = { 'TraitNodeXTraitCond (TraitNodeID)' },
+      TraitNodeXTraitNodeEntry = { 'TraitNodeXTraitNodeEntry (TraitNodeID)' },
+      UiTextureAtlas = { 'UiTextureAtlas (ID)' },
+      UiTextureAtlasMember = { 'UiTextureAtlasMember (CommittedName COLLATE NOCASE)' },
+    }
     local dbinit = { 'BEGIN' }
     for k, v in pairs(defs) do
       table.insert(dbinit, ('CREATE TABLE %s ("%s")'):format(k, table.concat(v.orderedfields, '","')))
+      if indexes[k] then
+        for i, index in ipairs(indexes[k]) do
+          table.insert(dbinit, ('CREATE INDEX %sIndex%d ON %s'):format(k, i, index))
+        end
+      end
     end
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
@@ -70,8 +88,6 @@ local function factory(theProduct)
         error('failed to populate ' .. k .. ': ' .. msg)
       end
     end
-    table.insert(dbinit, 'CREATE INDEX MooIndex ON UiTextureAtlasMember (CommittedName COLLATE NOCASE)')
-    table.insert(dbinit, 'CREATE INDEX CowIndex ON UiTextureAtlas (ID)')
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
     if db:exec(table.concat(dbinit, ';\n')) ~= lsqlite3.OK then
