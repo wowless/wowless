@@ -4548,6 +4548,8 @@ C_QuestLine.QuestLineInfo:
       type: boolean
     isHidden:
       type: boolean
+    isImportant:
+      type: boolean
     isLegendary:
       type: boolean
     questID:

@@ -3296,6 +3296,7 @@ C_CharacterServices.GetCharacterServiceDisplayInfo: {}
 C_CharacterServices.GetVASDistributions: {}
 C_CharacterServices.HasRequiredBoostForClassTrial: {}
 C_CharacterServices.HasRequiredBoostForUnrevoke: {}
+C_CharacterServices.RPEResetCharacter: {}
 C_CharacterServices.SetAutomaticBoost: {}
 C_CharacterServices.SetAutomaticBoostCharacter: {}
 C_CharacterServicesPublic.ShouldSeeControlPopup: {}
@@ -5372,6 +5373,34 @@ C_Commentator.GetPlayerFlagInfoByUnit:
   outputs:
   - name: hasFlag
     type: boolean
+C_Commentator.GetPlayerItemCooldownInfo:
+  inputs:
+  - name: teamIndex
+    type: number
+  - name: playerIndex
+    type: number
+  - name: itemID
+    type: number
+  outputs:
+  - name: startTime
+    type: number
+  - name: duration
+    type: number
+  - name: enable
+    type: boolean
+C_Commentator.GetPlayerItemCooldownInfoByUnit:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: itemID
+    type: number
+  outputs:
+  - name: startTime
+    type: number
+  - name: duration
+    type: number
+  - name: enable
+    type: boolean
 C_Commentator.GetPlayerOverrideName:
   inputs:
   - name: originalName
@@ -5650,6 +5679,12 @@ C_Commentator.SetBlocklistedCooldowns:
     type:
       arrayof: number
   outputs: {}
+C_Commentator.SetBlocklistedItemCooldowns:
+  inputs:
+  - name: itemIDs
+    type:
+      arrayof: number
+  outputs: {}
 C_Commentator.SetCamera:
   inputs:
   - name: xPos
@@ -5786,6 +5821,12 @@ C_Commentator.SetRequestedDefensiveCooldowns:
   - name: specID
     type: number
   - name: spellIDs
+    type:
+      arrayof: number
+  outputs: {}
+C_Commentator.SetRequestedItemCooldowns:
+  inputs:
+  - name: itemIDs
     type:
       arrayof: number
   outputs: {}
@@ -11006,6 +11047,9 @@ C_MerchantFrame.IsMerchantItemRefundable:
   outputs:
   - name: refundable
     type: boolean
+C_MerchantFrame.SellAllJunkItems:
+  inputs: {}
+  outputs: {}
 C_Minimap.CanTrackBattlePets:
   inputs: {}
   outputs:
@@ -14306,6 +14350,13 @@ C_QuestLog.IsFailed:
     type: number
   outputs:
   - name: isFailed
+    type: boolean
+C_QuestLog.IsImportantQuest:
+  inputs:
+  - name: questID
+    type: number
+  outputs:
+  - name: isImportant
     type: boolean
 C_QuestLog.IsLegendaryQuest:
   inputs:

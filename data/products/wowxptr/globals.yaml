@@ -2031,6 +2031,7 @@ Enum:
     EnableSnap: 22
     GridSpacing: 1
     SettingsExpanded: 2
+    ShowArchaeologyBar: 27
     ShowArenaFrames: 17
     ShowBossFrames: 16
     ShowBuffsAndDebuffs: 10
@@ -2054,9 +2055,9 @@ Enum:
     ShowVehicleLeaveButton: 15
     ShowVehicleSeatIndicator: 26
   EditModeAccountSettingMeta:
-    MaxValue: 26
+    MaxValue: 27
     MinValue: 0
-    NumValues: 27
+    NumValues: 28
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
     DeprecatedSnapToSide: 7
@@ -2088,6 +2089,12 @@ Enum:
     MaxValue: 13
     MinValue: 1
     NumValues: 11
+  EditModeArchaeologyBarSetting:
+    Size: 0
+  EditModeArchaeologyBarSettingMeta:
+    MaxValue: 0
+    MinValue: 0
+    NumValues: 1
   EditModeAuraFrameSetting:
     DeprecatedShowFull: 7
     IconDirection: 2
@@ -2124,6 +2131,9 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  EditModeChatFrameDisplayOnlySetting:
+    Height: 5
+    Width: 4
   EditModeChatFrameSetting:
     HeightHundreds: 2
     HeightTensAndOnes: 3
@@ -2204,6 +2214,7 @@ Enum:
     NumValues: 2
   EditModeSystem:
     ActionBar: 0
+    ArchaeologyBar: 19
     AuraFrame: 6
     Bags: 14
     CastBar: 1
@@ -2223,9 +2234,9 @@ Enum:
     VehicleLeaveButton: 9
     VehicleSeatIndicator: 18
   EditModeSystemMeta:
-    MaxValue: 18
+    MaxValue: 19
     MinValue: 0
-    NumValues: 19
+    NumValues: 20
   EditModeTimerBarsSetting:
     Size: 0
   EditModeTimerBarsSettingMeta:
@@ -5121,11 +5132,11 @@ Enum:
     MinValue: 0
     NumValues: 2
   TrackedSpellCategory:
-    Count: 4
-    Debuff: 2
-    Defensive: 1
-    Offensive: 0
-    RacialAbility: 3
+    Debuff: 3
+    Defensive: 2
+    None: 0
+    Offensive: 1
+    RacialAbility: 4
   TrackedSpellCategoryMeta:
     MaxValue: 4
     MinValue: 0
