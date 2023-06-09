@@ -11,14 +11,14 @@ build_dependencies = {
   'luaexpat < 1.5.0',
   'luamagick',
   'luasql-sqlite3',
-  'lua-resty-tsort',
   'wowcig',
 }
 dependencies = {
   'argparse',
-  'luassert',
   'date',
+  'luassert',
   'lua-path',
+  'lua-resty-tsort',
   'lyaml',
   'minheap',
   'penlight',
