@@ -22,4 +22,4 @@ RUN apt-get update \
     && git config --system --add safe.directory '*'
 WORKDIR /wowless
 COPY wowless-scm-0.rockspec .
-RUN luarocks build --deps-only
+RUN luarocks build

@@ -3,7 +3,8 @@ project(wowless)
 
 set(BUILD_SHARED_LIBS OFF)
 set(BUILD_SUMMARY ON)
-set(LUA_CPATH_CUSTOM ";" CACHE STRING "disable dynamic C Lua modules")
+set(LUA_PATH_CUSTOM "./?.lua;build/luarocks/share/lua/5.1/?.lua;build/luarocks/share/lua/5.1/?/init.lua" CACHE STRING "disable out-of-tree Lua modules" FORCE)
+set(LUA_CPATH_CUSTOM ";" CACHE STRING "disable dynamic C Lua modules" FORCE)
 set(LUA_USE_READLINE OFF)
 
 add_compile_options(-D_GNU_SOURCE -DNDEBUG -flto -O3)
