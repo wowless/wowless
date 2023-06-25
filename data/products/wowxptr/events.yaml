@@ -3618,6 +3618,10 @@ CONSOLE_MESSAGE:
     type: string
   - name: colorType
     type: number
+CONTENT_TRACKING_IS_ENABLED_UPDATE:
+  payload:
+  - name: isEnabled
+    type: boolean
 CONTENT_TRACKING_LIST_UPDATE:
   payload: {}
 CONTENT_TRACKING_UPDATE:
@@ -3867,6 +3871,10 @@ DUEL_INBOUNDS:
 DUEL_OUTOFBOUNDS:
   payload: {}
 DUEL_REQUESTED:
+  payload:
+  - name: playerName
+    type: string
+DUEL_TO_THE_DEATH_REQUESTED:
   payload:
   - name: playerName
     type: string
@@ -5327,6 +5335,10 @@ PERKS_ACTIVITY_COMPLETED:
   payload:
   - name: perksActivityID
     type: number
+PERKS_PROGRAM_ADD_PENDING_SHOP_ITEM:
+  payload:
+  - name: vendorItemID
+    type: number
 PERKS_PROGRAM_CLOSE:
   payload: {}
 PERKS_PROGRAM_CURRENCY_AWARDED:
@@ -5354,6 +5366,10 @@ PERKS_PROGRAM_PURCHASE_SUCCESS:
   - name: vendorItemID
     type: number
 PERKS_PROGRAM_REFUND_SUCCESS:
+  payload:
+  - name: vendorItemID
+    type: number
+PERKS_PROGRAM_REMOVE_PENDING_SHOP_ITEM:
   payload:
   - name: vendorItemID
     type: number
@@ -7390,6 +7406,8 @@ UNIT_SPELLCAST_EMPOWER_STOP:
     type: string
   - name: spellID
     type: number
+  - name: complete
+    type: boolean
 UNIT_SPELLCAST_EMPOWER_UPDATE:
   payload:
   - name: unitTarget

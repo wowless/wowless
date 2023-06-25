@@ -19,16 +19,13 @@ Constants:
     ACCOUNT_WIDE_HONOR_CURRENCY_ID: 1585
     ACCOUNT_WIDE_HONOR_LEVEL_CURRENCY_ID: 1586
     ARTIFACT_KNOWLEDGE_CURRENCY_ID: 1171
-    CATALYST_CHARGE_CAP: 6
     CLASSIC_ARENA_POINTS_CURRENCY_ID: 1900
     CLASSIC_HONOR_CURRENCY_ID: 1901
     CONQUEST_ARENA_AND_BG_META_CURRENCY_ID: 483
     CONQUEST_ASHRAN_META_CURRENCY_ID: 692
     CONQUEST_CURRENCY_ID: 1602
     CONQUEST_RATED_BG_META_CURRENCY_ID: 484
-    CURRENCY_ID_ACCOUNT_WIDE_CATALYST_CHARGES: 2166
     CURRENCY_ID_PERKS_PROGRAM_DISPLAY_INFO: 2032
-    CURRENCY_ID_PERSONAL_CATALYST_CHARGES: 2167
     CURRENCY_ID_RENOWN: 1822
     CURRENCY_ID_RENOWN_KYRIAN: 1829
     CURRENCY_ID_RENOWN_NECROLORD: 1832
@@ -1141,6 +1138,17 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  ChrModelFeatureFlags:
+    DragonCompanions: 8
+    Forms: 2
+    HunterPets: 32
+    Identity: 4
+    Mounts: 16
+    Summons: 1
+  ChrModelFeatureFlagsMeta:
+    MaxValue: 32
+    MinValue: 1
+    NumValues: 6
   ChrRacesAllianceType:
     Alliance: 0
     Horde: 1
@@ -1160,11 +1168,12 @@ Enum:
     Interaction: 3
     Macro: 2
     None: 0
+    PetAction: 4
     Spell: 1
   ClickBindingTypeMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   ClientPlatformType:
     Macintosh: 1
     Windows: 0
@@ -1498,11 +1507,12 @@ Enum:
     Achievement: 2
     JournalEncounter: 0
     Profession: 3
+    Quest: 4
     Vendor: 1
   ContentTrackingTargetTypeMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   ContentTrackingType:
     Achievement: 2
     Appearance: 0
@@ -1877,75 +1887,79 @@ Enum:
     NumValues: 4
   Cursormode:
     AttackCursor: 4
-    AttackErrorCursor: 37
+    AttackErrorCursor: 39
     BuyCursor: 3
-    BuyErrorCursor: 36
+    BuyErrorCursor: 38
     CampaignQuestCursor: 23
-    CampaignQuestErrorCursor: 56
+    CampaignQuestErrorCursor: 58
     CampaignQuestTurninCursor: 24
-    CampaignQuestTurninErrorCursor: 57
+    CampaignQuestTurninErrorCursor: 59
     CastCursor: 2
-    CastErrorCursor: 35
-    CustomCursor: 65
+    CastErrorCursor: 37
+    CustomCursor: 69
     GatherCursor: 13
-    GatherErrorCursor: 46
+    GatherErrorCursor: 48
     InnkeeperCursor: 22
-    InnkeeperErrorCursor: 55
+    InnkeeperErrorCursor: 57
     InspectCursor: 7
-    InspectErrorCursor: 40
+    InspectErrorCursor: 42
     InteractCursor: 5
-    InteractErrorCursor: 38
+    InteractErrorCursor: 40
     ItemCursor: 19
-    ItemErrorCursor: 52
+    ItemErrorCursor: 54
     LockCursor: 14
-    LockErrorCursor: 47
+    LockErrorCursor: 49
     LootAllCursor: 16
-    LootAllErrorCursor: 49
+    LootAllErrorCursor: 51
     MailCursor: 15
-    MailErrorCursor: 48
-    MapPinCursor: 31
-    MapPinErrorCursor: 64
+    MailErrorCursor: 50
+    MapPinCursor: 33
+    MapPinErrorCursor: 68
     MineCursor: 11
-    MineErrorCursor: 44
+    MineErrorCursor: 46
     NoCursor: 0
     PickupCursor: 8
-    PickupErrorCursor: 41
+    PickupErrorCursor: 43
     PointCursor: 1
-    PointErrorCursor: 34
+    PointErrorCursor: 36
     QuestCursor: 25
-    QuestErrorCursor: 58
+    QuestErrorCursor: 60
+    QuestImportantCursor: 30
+    QuestImportantErrorCursor: 65
+    QuestImportantTurninCursor: 31
+    QuestImportantTurninErrorCursor: 66
     QuestLegendaryCursor: 28
-    QuestLegendaryErrorCursor: 61
+    QuestLegendaryErrorCursor: 63
     QuestLegendaryTurninCursor: 29
-    QuestLegendaryTurninErrorCursor: 62
+    QuestLegendaryTurninErrorCursor: 64
     QuestRepeatableCursor: 26
-    QuestRepeatableErrorCursor: 59
+    QuestRepeatableErrorCursor: 61
     QuestTurninCursor: 27
-    QuestTurninErrorCursor: 60
+    QuestTurninErrorCursor: 62
     RepairCursor: 17
-    RepairErrorCursor: 50
+    RepairErrorCursor: 52
     RepairnpcCursor: 18
-    RepairnpcErrorCursor: 51
+    RepairnpcErrorCursor: 53
     SkinAllianceCursor: 21
-    SkinAllianceErrorCursor: 54
+    SkinAllianceErrorCursor: 56
     SkinCursor: 12
-    SkinErrorCursor: 45
+    SkinErrorCursor: 47
     SkinHordeCursor: 20
-    SkinHordeErrorCursor: 53
+    SkinHordeErrorCursor: 55
     SpeakCursor: 6
-    SpeakErrorCursor: 39
+    SpeakErrorCursor: 41
     TaxiCursor: 9
-    TaxiErrorCursor: 42
+    TaxiErrorCursor: 44
     TrainerCursor: 10
-    TrainerErrorCursor: 43
-    UIMoveCursor: 32
-    UIResizeCursor: 33
-    VehicleCursor: 30
-    VehicleErrorCursor: 63
+    TrainerErrorCursor: 45
+    UIMoveCursor: 34
+    UIResizeCursor: 35
+    VehicleCursor: 32
+    VehicleErrorCursor: 67
   CursormodeMeta:
-    MaxValue: 65
+    MaxValue: 69
     MinValue: 0
-    NumValues: 66
+    NumValues: 70
   CursorStyle:
     Crosshair: 1
     Mouse: 0
@@ -3677,6 +3691,20 @@ Enum:
     MaxValue: 1048576
     MinValue: 0
     NumValues: 22
+  ModelBlendOperation:
+    Anim: 1
+    None: 0
+  ModelBlendOperationMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  ModelLightType:
+    Directional: 0
+    Point: 1
+  ModelLightTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   ModelSceneSetting:
     AlignLightToOrbitDelta: 1
   ModelSceneSettingMeta:
@@ -4710,6 +4738,7 @@ Enum:
     ClubFinderApplicant: 3
     ClubFinderPosting: 2
     ClubMember: 6
+    CraftingOrder: 16
     Friend: 8
     GroupFinderApplicant: 5
     GroupFinderPosting: 4
@@ -4721,9 +4750,9 @@ Enum:
     PvPGroupMember: 15
     PvPScoreboard: 14
   ReportTypeMeta:
-    MaxValue: 15
+    MaxValue: 16
     MinValue: 0
-    NumValues: 16
+    NumValues: 17
   RuneforgePowerFilter:
     All: 0
     Available: 2
@@ -5053,6 +5082,8 @@ Enum:
     QuestObjective: 8
     QuestPlayer: 18
     QuestTitle: 17
+    RestrictedArena: 35
+    RestrictedBg: 36
     RestrictedFaction: 22
     RestrictedLevel: 27
     RestrictedPvPMedal: 24
@@ -5064,13 +5095,20 @@ Enum:
     SellPrice: 11
     Separator: 30
     SpellName: 13
+    ToyDescription: 38
+    ToyDuration: 34
+    ToyEffect: 33
+    ToyFlavorText: 37
+    ToyName: 31
+    ToySource: 39
+    ToyText: 32
     UnitName: 2
     UnitOwner: 16
     UnitThreat: 7
   TooltipDataLineTypeMeta:
-    MaxValue: 30
+    MaxValue: 39
     MinValue: 0
-    NumValues: 31
+    NumValues: 40
   TooltipDataType:
     Achievement: 12
     AzeriteEssence: 8
@@ -6713,6 +6751,7 @@ LE_GAME_ERR_ITEM_MAX_COUNT_SOCKETED: 626
 LE_GAME_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED_IS: 691
 LE_GAME_ERR_ITEM_MAX_LIMIT_CATEGORY_EQUIPPED_EXCEEDED_IS: 694
 LE_GAME_ERR_ITEM_MAX_LIMIT_CATEGORY_SOCKETED_EXCEEDED_IS: 693
+LE_GAME_ERR_ITEM_MOD_APPEARANCE_GROUP_ALREADY_KNOWN: 1118
 LE_GAME_ERR_ITEM_NOT_FOUND: 31
 LE_GAME_ERR_ITEM_UNIQUE_EQUIPPABLE: 610
 LE_GAME_ERR_ITEM_UNIQUE_EQUIPPABLE_SOCKETED: 630
@@ -7423,12 +7462,12 @@ LE_GAME_ERR_VOID_TRANSFER_STORAGE_FULL: 903
 LE_GAME_ERR_VOID_WITHDRAW_FULL: 893
 LE_GAME_ERR_WARGAME_REQUEST_FAILURE: 864
 LE_GAME_ERR_WARGAME_REQUEST_SENT: 867
-LE_GAME_ERR_WOW_LABS_LOBBY_MATCHMAKER_ERROR_ENTER_QUEUE_FAILED: 1122
-LE_GAME_ERR_WOW_LABS_LOBBY_MATCHMAKER_ERROR_LEAVE_QUEUE_FAILED: 1123
-LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_MAX_INVITE_SENT: 1119
-LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PARTY_INVITE_INVALID: 1121
-LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PARTY_IS_FULL: 1118
-LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PLAYER_ALREADY_INVITED: 1120
+LE_GAME_ERR_WOW_LABS_LOBBY_MATCHMAKER_ERROR_ENTER_QUEUE_FAILED: 1123
+LE_GAME_ERR_WOW_LABS_LOBBY_MATCHMAKER_ERROR_LEAVE_QUEUE_FAILED: 1124
+LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_MAX_INVITE_SENT: 1120
+LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PARTY_INVITE_INVALID: 1122
+LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PARTY_IS_FULL: 1119
+LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PLAYER_ALREADY_INVITED: 1121
 LE_GAME_ERR_WRONG_BAG_TYPE: 22
 LE_GAME_ERR_WRONG_BAG_TYPE_SUBCLASS: 340
 LE_GAME_ERR_WRONG_SLOT: 12
@@ -7462,10 +7501,8 @@ LE_LOOT_FILTER_SPEC1: 3
 LE_LOOT_FILTER_SPEC2: 4
 LE_LOOT_FILTER_SPEC3: 5
 LE_LOOT_FILTER_SPEC4: 6
-LE_MODEL_BLEND_OPERATION_ANIM: 2
-LE_MODEL_BLEND_OPERATION_NONE: 1
-LE_MODEL_LIGHT_TYPE_DIRECTIONAL: 1
-LE_MODEL_LIGHT_TYPE_POINT: 2
+LE_MODEL_BLEND_OPERATION_ANIM: 1
+LE_MODEL_BLEND_OPERATION_NONE: 0
 LE_MOUNT_JOURNAL_FILTER_COLLECTED: 1
 LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED: 2
 LE_MOUNT_JOURNAL_FILTER_UNUSABLE: 3
@@ -7562,8 +7599,6 @@ NUM_LE_INVITE_REQUEST_TYPES: 3
 NUM_LE_ITEM_BIND_TYPES: 5
 NUM_LE_LFG_CATEGORYS: 7
 NUM_LE_LFG_LIST_DISPLAY_TYPES: 5
-NUM_LE_MODEL_BLEND_OPERATIONS: 2
-NUM_LE_MODEL_LIGHT_TYPES: 2
 NUM_LE_MOUNT_JOURNAL_FILTERS: 3
 NUM_LE_PARTY_CATEGORYS: 2
 NUM_LE_PET_JOURNAL_FILTERS: 2

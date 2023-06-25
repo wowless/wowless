@@ -3911,6 +3911,9 @@ C_PerksActivities.PerksActivityThresholdInfo:
       type: number
 C_PerksProgram.PerksProgramItemDisplayInfo:
   fields:
+    creatureDisplayInfoID:
+      nilable: true
+      type: number
     overrideModelSceneID:
       nilable: true
       type: number
@@ -3952,6 +3955,8 @@ C_PerksProgram.PerksVendorItemInfo:
       type: number
     name:
       type: string
+    pending:
+      type: boolean
     perksVendorCategoryID:
       type: number
     perksVendorItemID:
@@ -7460,6 +7465,8 @@ CharCustomizationCategory:
       type: number
     name:
       type: string
+    needsNativeFormCategory:
+      type: boolean
     options:
       type:
         arrayof:
