@@ -9565,7 +9565,11 @@ GetGraphicsAPIs:
   - stub: opengl
     type: string
 GetGraphicsCVarOffsetForCVar: {}
-GetGraphicsCVarOffsetForUI: {}
+GetGraphicsCVarOffsetForUI:
+  inputs:
+  - type: number
+  outputs:
+  - type: number
 GetGraphicsCVarValueForQualityLevel: {}
 GetGraphicsDropdownIndexByMasterIndex: {}
 GetGreetingText:
