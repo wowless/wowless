@@ -9009,7 +9009,9 @@ GetBuildInfo:
     type: string
   - name: tocversionagain
     type: number
-GetButtonMetatable: {}
+GetButtonMetatable:
+  impl: GetButtonMetatable
+  inputs: {}
 GetBuybackItemInfo:
   inputs:
   - name: index
@@ -9531,9 +9533,13 @@ GetFirstTradeSkill:
   - type: number
 GetFontInfo: {}
 GetFonts: {}
-GetFontStringMetatable: {}
+GetFontStringMetatable:
+  impl: GetFontStringMetatable
+  inputs: {}
 GetFrameCPUUsage: {}
-GetFrameMetatable: {}
+GetFrameMetatable:
+  impl: GetFrameMetatable
+  inputs: {}
 GetFramerate:
   inputs: {}
   outputs:
