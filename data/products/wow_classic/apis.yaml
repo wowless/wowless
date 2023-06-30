@@ -462,6 +462,11 @@ C_AreaPoiInfo.IsAreaPOITimed:
   outputs:
   - name: isTimed
     type: boolean
+C_AuthChallenge.Cancel: {}
+C_AuthChallenge.DidChallengeSucceed: {}
+C_AuthChallenge.OnTabPressed: {}
+C_AuthChallenge.SetFrame: {}
+C_AuthChallenge.Submit: {}
 C_AzeriteEmpoweredItem.CanSelectPower:
   inputs:
   - name: azeriteEmpoweredItemLocation
@@ -6541,6 +6546,52 @@ C_StorePublic.IsEnabled:
   outputs:
   - name: enabled
     type: boolean
+C_StoreSecure.AckFailure: {}
+C_StoreSecure.GetBnetTransferInfo: {}
+C_StoreSecure.GetCharacterInfoByGUID: {}
+C_StoreSecure.GetCharactersForRealm:
+  outputs:
+  - stub:
+    - level: 42
+    type: table
+C_StoreSecure.GetConfirmationInfo: {}
+C_StoreSecure.GetCurrencyID: {}
+C_StoreSecure.GetCurrentRealmCategory: {}
+C_StoreSecure.GetCurrentRealmContentSet: {}
+C_StoreSecure.GetEligibleRacesForVASService: {}
+C_StoreSecure.GetEntryInfo: {}
+C_StoreSecure.GetFailureInfo: {}
+C_StoreSecure.GetProductGroupInfo: {}
+C_StoreSecure.GetProductGroups:
+  outputs:
+  - type: table
+C_StoreSecure.GetProductInfo: {}
+C_StoreSecure.GetProductList:
+  inputs: {}
+  outputs: {}
+C_StoreSecure.GetProducts: {}
+C_StoreSecure.GetPurchaseList: {}
+C_StoreSecure.GetRealmList: {}
+C_StoreSecure.GetUnrevokedBoostInfo: {}
+C_StoreSecure.GetVASCompletionInfo: {}
+C_StoreSecure.GetVASErrors: {}
+C_StoreSecure.GetVASRealmList: {}
+C_StoreSecure.GetWoWAccountGUIDFromName: {}
+C_StoreSecure.HasDistributionList: {}
+C_StoreSecure.HasProductList: {}
+C_StoreSecure.HasProductType: {}
+C_StoreSecure.HasPurchaseInProgress: {}
+C_StoreSecure.HasPurchaseList: {}
+C_StoreSecure.IsAvailable: {}
+C_StoreSecure.IsRegionLocked: {}
+C_StoreSecure.IsVASEligibleCharacterGUID: {}
+C_StoreSecure.PurchaseProduct: {}
+C_StoreSecure.PurchaseProductConfirm: {}
+C_StoreSecure.PurchaseVASProduct: {}
+C_StoreSecure.RequestPriceInfo: {}
+C_StoreSecure.SetDisconnectOnLogout: {}
+C_StoreSecure.SetVASProductReady: {}
+C_StoreSecure.ValidateBnetTransfer: {}
 C_SummonInfo.CancelSummon:
   inputs: {}
   outputs: {}
@@ -8044,6 +8095,46 @@ C_WowTokenPublic.UpdateMarketPrice:
   inputs: {}
   outputs: {}
 C_WowTokenPublic.UpdateTokenCount: {}
+C_WowTokenSecure.CancelRedeem: {}
+C_WowTokenSecure.CanRedeemForBalance: {}
+C_WowTokenSecure.ConfirmBuyToken: {}
+C_WowTokenSecure.ConfirmSellToken:
+  inputs:
+  - name: sell
+    type: boolean
+  outputs: {}
+C_WowTokenSecure.GetBalanceRedeemAmount: {}
+C_WowTokenSecure.GetBalanceRedemptionInfo:
+  inputs: {}
+  outputs:
+  - name: currentBalance
+    type: number
+  - name: addedBalance
+    type: number
+  - name: canRedeem
+    type: boolean
+  - name: cannotRedeemReason
+    type: string
+C_WowTokenSecure.GetGameTimeRedemptionInfo:
+  inputs: {}
+  outputs:
+  - name: isSub
+    type: boolean
+  - name: remaining
+    type: number
+C_WowTokenSecure.GetPriceLockDuration:
+  inputs: {}
+  outputs:
+  - name: value
+    type: number
+C_WowTokenSecure.GetRemainingGameTime: {}
+C_WowTokenSecure.GetTokenCount: {}
+C_WowTokenSecure.GetValidRedemptionTypes: {}
+C_WowTokenSecure.IsRedemptionStillValid: {}
+C_WowTokenSecure.RedeemToken: {}
+C_WowTokenSecure.RedeemTokenConfirm: {}
+C_WowTokenSecure.SetBalanceAmountString: {}
+C_WowTokenSecure.WillKickFromWorld: {}
 C_XMLUtil.GetTemplateInfo:
   impl: C_XMLUtil.GetTemplateInfo
   inputs:
