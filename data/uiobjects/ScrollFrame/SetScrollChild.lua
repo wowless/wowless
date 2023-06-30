@@ -2,7 +2,7 @@ return (function(self, ...)
   assert(select('#', ...) == 1, 'SetScrollChild: wrong number of arguments')
   local scrollChild = ...
   assert(
-    type(scrollChild) == 'table' or api.datalua.build.flavor == 'Vanilla',
+    type(scrollChild) == 'table' or api.datalua.product == 'wow_classic_era',
     'Usage: self:SetScrollChild(scrollChild)'
   )
   if type(scrollChild) == 'string' then

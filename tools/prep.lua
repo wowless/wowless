@@ -303,6 +303,7 @@ local data = {
   events = events,
   globals = globals,
   impls = impls,
+  product = product,
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
   states = states,
