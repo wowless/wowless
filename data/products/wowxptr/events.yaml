@@ -3236,6 +3236,9 @@ CINEMATIC_START:
   payload:
   - name: canBeCancelled
     type: boolean
+  - name: forcedAspectRatio
+    type:
+      enum: CameraModeAspectRatio
 CINEMATIC_STOP:
   payload: {}
 CLASS_TRIAL_TIMER_START:

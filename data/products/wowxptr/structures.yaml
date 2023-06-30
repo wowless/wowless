@@ -981,6 +981,10 @@ C_ChromieTime.ChromieTimeExpansionInfo:
       type: string
     previewAtlas:
       type: string
+    recommended:
+      type: boolean
+    sortPriority:
+      type: number
 C_ClassTalents.ImportLoadoutEntryInfo:
   fields:
     nodeID:
@@ -2881,6 +2885,8 @@ C_GossipInfo.GossipQuestUIInfo:
       nilable: true
       type: boolean
     isIgnored:
+      type: boolean
+    isImportant:
       type: boolean
     isLegendary:
       type: boolean
@@ -5238,7 +5244,11 @@ C_SpecializationInfo.PvpTalentSlotInfo:
       type: number
 C_SpellBook.DeadlyDebuffInfo:
   fields:
-    overrideCriticalTimeRemaining:
+    criticalStacks:
+      nilable: true
+      type: number
+    criticalTimeRemainingMs:
+      nilable: true
       type: number
     priority:
       type: number

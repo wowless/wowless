@@ -1036,6 +1036,15 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  CameraModeAspectRatio:
+    Cinemascope_2_Dot_4_X_1: 3
+    Default: 0
+    HighDefinition_16_X_9: 2
+    LegacyLetterbox: 1
+  CameraModeAspectRatioMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   CampaignState:
     Complete: 1
     InProgress: 2
