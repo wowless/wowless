@@ -272,6 +272,13 @@ BuyGuildCharter: {}
 BuyMerchantItem: {}
 BuyStableSlot: {}
 BuyTrainerService: {}
+C_AccountInfo.GetIDFromBattleNetAccountGUID:
+  inputs:
+  - name: battleNetAccountGUID
+    type: string
+  outputs:
+  - name: battleNetAccountID
+    type: number
 C_AccountInfo.IsGUIDBattleNetAccountType:
   inputs:
   - name: guid
