@@ -165,6 +165,7 @@ Browser:
     NavigateHome: {}
     NavigateReload: {}
     NavigateStop: {}
+    NavigateTo: {}
     OpenExternalLink: {}
     OpenTicket: {}
     SetFocus: {}
@@ -386,6 +387,7 @@ ColorSelect:
   inherits:
     Frame: {}
   methods:
+    ClearColorWheelTexture: {}
     GetColorHSV:
       outputs:
       - name: h
@@ -494,6 +496,7 @@ Cooldown:
     SetSwipeTexture:
       setter:
       - name: swipeTexture
+    SetTexCoordRange: {}
     SetUseCircularEdge: {}
 DressUpModel:
   inherits:
@@ -645,7 +648,6 @@ FogOfWarFrame:
   methods:
     GetUiMapID: {}
     SetUiMapID: {}
-  zombie: true
 Font:
   inherits:
     FontInstance: {}
@@ -732,6 +734,7 @@ FontString:
     GetNumLines:
       outputs:
       - type: number
+    GetRotation: {}
     GetStringHeight:
       outputs:
       - type: number
@@ -747,6 +750,7 @@ FontString:
     GetUnboundedStringWidth:
       outputs:
       - type: number
+    GetVertexColor: {}
     GetWrappedWidth:
       outputs:
       - type: number
@@ -758,6 +762,7 @@ FontString:
       setter:
       - name: maxLines
     SetNonSpaceWrap: {}
+    SetRotation: {}
     SetText:
       impl: FontString/SetText
     SetTextHeight: {}
