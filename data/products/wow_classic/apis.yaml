@@ -10454,7 +10454,9 @@ GetNumBattlefieldScores:
   - name: value
     type: number
 GetNumBattlefieldStats: {}
-GetNumBattlegroundTypes: {}
+GetNumBattlegroundTypes:
+  outputs:
+  - type: number
 GetNumBindings:
   outputs:
   - type: number
