@@ -105,6 +105,8 @@ Animation:
       - name: startDelay
     SetTarget: {}
     SetTargetKey: {}
+    SetTargetName: {}
+    SetTargetParent: {}
     Stop: {}
 AnimationGroup:
   inherits:
@@ -830,6 +832,7 @@ Frame:
     Region: {}
     ScriptObject: {}
   methods:
+    AbortDrag: {}
     CanChangeAttribute: {}
     CreateFontString:
       impl: Frame/CreateFontString
@@ -903,11 +906,9 @@ Frame:
     GetChildren:
       impl: Frame/GetChildren
     GetClampRectInsets: {}
-    GetDepth: {}
     GetDontSavePosition: {}
     GetEffectiveAlpha:
       impl: Frame/GetEffectiveAlpha
-    GetEffectiveDepth: {}
     GetEffectivelyFlattensRenderLayers: {}
     GetFlattensRenderLayers: {}
     GetFrameLevel:
@@ -923,14 +924,6 @@ Frame:
     GetID:
       getter:
       - name: id
-    GetMaxResize:
-      getter:
-      - name: maxResizeWidth
-      - name: maxResizeHeight
-    GetMinResize:
-      getter:
-      - name: minResizeWidth
-      - name: minResizeHeight
     GetNumChildren:
       impl: Frame/GetNumChildren
     GetNumRegions:
@@ -940,13 +933,19 @@ Frame:
       - name: propagateKeyboardInput
     GetRegions:
       impl: Frame/GetRegions
+    GetResizeBounds:
+      getter:
+      - name: minResizeWidth
+      - name: minResizeHeight
+      - name: maxResizeWidth
+      - name: maxResizeHeight
     HasFixedFrameLevel:
       getter:
       - name: hasFixedFrameLevel
     HasFixedFrameStrata:
       getter:
       - name: hasFixedFrameStrata
-    IgnoreDepth: {}
+    InterceptStartDrag: {}
     IsClampedToScreen:
       getter:
       - name: isClampedToScreen
@@ -954,7 +953,6 @@ Frame:
       impl: Frame/IsEventRegistered
     IsGamePadButtonEnabled: {}
     IsGamePadStickEnabled: {}
-    IsIgnoringDepth: {}
     IsKeyboardEnabled: {}
     IsMovable:
       getter:
@@ -987,7 +985,6 @@ Frame:
       - name: isClampedToScreen
     SetClampRectInsets: {}
     SetClipsChildren: {}
-    SetDepth: {}
     SetDontSavePosition: {}
     SetDrawLayerEnabled: {}
     SetFixedFrameLevel:
@@ -997,7 +994,6 @@ Frame:
       setter:
       - name: hasFixedFrameStrata
     SetFlattensRenderLayers: {}
-    SetFrameBuffer: {}
     SetFrameLevel:
       impl: Frame/SetFrameLevel
     SetFrameStrata:
@@ -1010,14 +1006,7 @@ Frame:
     SetID:
       setter:
       - name: id
-    SetMaxResize:
-      setter:
-      - name: maxResizeWidth
-      - name: maxResizeHeight
-    SetMinResize:
-      setter:
-      - name: minResizeWidth
-      - name: minResizeHeight
+    SetIsFrameBuffer: {}
     SetMovable:
       setter:
       - name: movable
@@ -1027,6 +1016,8 @@ Frame:
     SetResizable:
       setter:
       - name: resizable
+    SetResizeBounds:
+      impl: Frame/SetResizeBounds
     SetToplevel:
       setter:
       - name: toplevel
@@ -1414,6 +1405,7 @@ MouseMixin:
   methods:
     EnableMouse:
       impl: MouseMixin/EnableMouse
+    EnableMouseMotion: {}
     EnableMouseWheel:
       setter:
       - name: mouseWheelEnabled
@@ -1425,6 +1417,7 @@ MouseMixin:
     IsMouseMotionEnabled:
       getter:
       - name: mouseMotionEnabled
+    IsMouseMotionFocus: {}
     IsMouseWheelEnabled:
       getter:
       - name: mouseWheelEnabled
@@ -1481,6 +1474,10 @@ ParentedObjectBase:
     GetParent:
       getter:
       - name: parent
+    GetParentKey:
+      impl: ParentedObjectBase/GetParentKey
+    SetParentKey:
+      impl: ParentedObjectBase/SetParentKey
   virtual: true
 Path:
   inherits:
@@ -1570,7 +1567,7 @@ Region:
     CanChangeProtectedState: {}
     ClearAllPoints:
       impl: Region/ClearAllPoints
-    ClearPointByName: {}
+    ClearPoint: {}
     ClearPointsOffset: {}
     CreateAnimationGroup:
       impl: Region/CreateAnimationGroup
@@ -1636,6 +1633,7 @@ Region:
       getter:
       - name: width
       - name: height
+    GetSourceLocation: {}
     GetTop:
       impl: Region/GetTop
     GetWidth:
@@ -1665,6 +1663,7 @@ Region:
     SetIgnoreParentScale:
       setter:
       - name: isIgnoringParentScale
+    SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
     SetSize:
