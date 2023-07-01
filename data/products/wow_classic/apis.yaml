@@ -10615,7 +10615,14 @@ GetNumStableSlots: {}
 GetNumSubgroupMembers:
   outputs:
   - type: number
-GetNumTalentGroups: {}
+GetNumTalentGroups:
+  inputs:
+  - nilable: true
+    type: boolean
+  - nilable: true
+    type: boolean
+  outputs:
+  - type: number
 GetNumTalents:
   impl: GetNumTalents
   inputs:
