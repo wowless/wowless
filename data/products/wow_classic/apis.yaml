@@ -11878,7 +11878,11 @@ GetWatchedFactionInfo:
   - type: number
 GetWeaponEnchantInfo: {}
 GetWebTicket: {}
-GetWorldPVPQueueMapName: {}
+GetWorldPVPQueueMapName:
+  inputs:
+  - type: boolean
+  outputs:
+  - type: string
 GetWorldPVPQueueStatus: {}
 GetXPExhaustion: {}
 GetZonePVPInfo: {}
