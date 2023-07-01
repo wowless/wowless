@@ -829,7 +829,6 @@ Frame:
       init: false
       type: boolean
   inherits:
-    MouseMixin: {}
     Region: {}
     ScriptObject: {}
   methods:
@@ -1561,6 +1560,7 @@ Region:
       init: 0
       type: number
   inherits:
+    MouseMixin: {}
     ParentedObject: {}
     RegionBase: {}
   methods:
