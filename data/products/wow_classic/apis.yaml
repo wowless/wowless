@@ -9702,7 +9702,15 @@ GetGroupMemberCounts:
       NOROLE: 0
       TANK: 1
     type: table
-GetGroupPreviewTalentPointsSpent: {}
+GetGroupPreviewTalentPointsSpent:
+  inputs:
+  - name: isPet
+    type: boolean
+  - name: talentGroup
+    type: number
+  outputs:
+  - name: talentPoints
+    type: number
 GetGuildBankBonusDepositMoney: {}
 GetGuildBankItemInfo:
   inputs:
