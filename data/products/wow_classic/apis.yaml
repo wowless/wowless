@@ -10476,7 +10476,13 @@ GetNumClasses:
   outputs:
   - name: numClasses
     type: number
-GetNumCompanions: {}
+GetNumCompanions:
+  inputs:
+  - name: type
+    type: string
+  outputs:
+  - name: count
+    type: number
 GetNumComparisonCompletedAchievements: {}
 GetNumCompletedAchievements: {}
 GetNumCrafts:
