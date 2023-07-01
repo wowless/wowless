@@ -38,7 +38,6 @@ AddChatWindowMessages:
     type: string
   outputs: {}
 addframetext: {}
-AddTrackedAchievement: {}
 AddTradeMoney: {}
 Ambiguate:
   inputs:
@@ -6368,6 +6367,11 @@ C_ContentTracking.GetBestMapForTrackable:
   - name: mapID
     nilable: true
     type: number
+C_ContentTracking.GetCollectableSourceTrackingEnabled:
+  inputs: {}
+  outputs:
+  - name: isEnabled
+    type: boolean
 C_ContentTracking.GetCollectableSourceTypes:
   inputs: {}
   outputs:
@@ -6468,6 +6472,16 @@ C_ContentTracking.GetVendorTrackingInfo:
   - name: vendorTrackingInfo
     type:
       structure: VendorTrackingInfo
+C_ContentTracking.GetWaypointText:
+  inputs:
+  - name: trackableType
+    type:
+      enum: ContentTrackingType
+  - name: trackableID
+    type: number
+  outputs:
+  - name: waypointText
+    type: string
 C_ContentTracking.IsNavigable:
   inputs:
   - name: trackableType
@@ -7512,6 +7526,14 @@ C_EncounterJournal.GetEncountersOnMap:
     type:
       arrayof:
         structure: C_EncounterJournal.EncounterJournalMapEncounterInfo
+C_EncounterJournal.GetInstanceForGameMap:
+  inputs:
+  - name: mapID
+    type: number
+  outputs:
+  - name: journalInstanceID
+    nilable: true
+    type: number
 C_EncounterJournal.GetLootInfo:
   inputs:
   - name: id
@@ -11040,6 +11062,11 @@ C_MerchantFrame.GetBuybackItemID:
   outputs:
   - name: buybackItemID
     type: number
+C_MerchantFrame.GetNumJunkItems:
+  inputs: {}
+  outputs:
+  - name: numJunkItems
+    type: number
 C_MerchantFrame.IsMerchantItemRefundable:
   inputs:
   - name: index
@@ -12465,6 +12492,14 @@ C_PetInfo.GetPetTamersForMap:
     type:
       arrayof:
         structure: C_PetInfo.PetTamerMapInfo
+C_PetInfo.GetSpellForPetAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: spellID
+    nilable: true
+    type: number
 C_PetJournal.CagePetByID: {}
 C_PetJournal.ClearFanfare: {}
 C_PetJournal.ClearRecentFanfares:
@@ -13933,6 +13968,14 @@ C_QuestLine.GetAvailableQuestLines:
     type:
       arrayof:
         structure: C_QuestLine.QuestLineInfo
+C_QuestLine.GetForceVisibleQuests:
+  inputs:
+  - name: uiMapID
+    type: number
+  outputs:
+  - name: questIDs
+    type:
+      arrayof: number
 C_QuestLine.GetQuestLineInfo:
   inputs:
   - name: questID
@@ -23528,7 +23571,6 @@ GetNumSubgroupMembers:
 GetNumTitles:
   outputs:
   - type: number
-GetNumTrackedAchievements: {}
 GetNumTrainerServices:
   inputs: {}
   outputs:
@@ -24615,7 +24657,6 @@ GetTotalAchievementPoints:
 GetTotemCannotDismiss: {}
 GetTotemInfo: {}
 GetTotemTimeLeft: {}
-GetTrackedAchievements: {}
 GetTradePlayerItemInfo:
   inputs:
   - name: index
@@ -25488,7 +25529,6 @@ IsTestBuild:
     type: boolean
 IsThreatWarningEnabled: {}
 IsTitleKnown: {}
-IsTrackedAchievement: {}
 IsTradeskillTrainer:
   inputs: {}
   outputs:
@@ -25974,7 +26014,6 @@ RemoveChatWindowMessages: {}
 RemoveItemFromArtifact: {}
 RemovePvpTalent: {}
 RemoveTalent: {}
-RemoveTrackedAchievement: {}
 RenamePetition: {}
 RepairAllItems: {}
 ReplaceEnchant: {}

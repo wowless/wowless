@@ -25,7 +25,7 @@ FetchContent_Declare(
 FetchContent_Declare(
   lsqlite3
   URL http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip
-  URL_HASH MD5=57d7a8bf5ae15d22044ed64343a39d89
+  URL_HASH MD5=1f937ed6bf9d5980239da516c424d7b6
 )
 FetchContent_Declare(
   luaexpat

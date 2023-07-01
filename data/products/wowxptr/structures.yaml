@@ -981,6 +981,10 @@ C_ChromieTime.ChromieTimeExpansionInfo:
       type: string
     previewAtlas:
       type: string
+    recommended:
+      type: boolean
+    sortPriority:
+      type: number
 C_ClassTalents.ImportLoadoutEntryInfo:
   fields:
     nodeID:
@@ -2882,6 +2886,8 @@ C_GossipInfo.GossipQuestUIInfo:
       type: boolean
     isIgnored:
       type: boolean
+    isImportant:
+      type: boolean
     isLegendary:
       type: boolean
     isTrivial:
@@ -3911,6 +3917,9 @@ C_PerksActivities.PerksActivityThresholdInfo:
       type: number
 C_PerksProgram.PerksProgramItemDisplayInfo:
   fields:
+    creatureDisplayInfoID:
+      nilable: true
+      type: number
     overrideModelSceneID:
       nilable: true
       type: number
@@ -3952,6 +3961,8 @@ C_PerksProgram.PerksVendorItemInfo:
       type: number
     name:
       type: string
+    pending:
+      type: boolean
     perksVendorCategoryID:
       type: number
     perksVendorItemID:
@@ -5233,7 +5244,11 @@ C_SpecializationInfo.PvpTalentSlotInfo:
       type: number
 C_SpellBook.DeadlyDebuffInfo:
   fields:
-    overrideCriticalTimeRemaining:
+    criticalStacks:
+      nilable: true
+      type: number
+    criticalTimeRemainingMs:
+      nilable: true
       type: number
     priority:
       type: number
@@ -7460,6 +7475,8 @@ CharCustomizationCategory:
       type: number
     name:
       type: string
+    needsNativeFormCategory:
+      type: boolean
     options:
       type:
         arrayof:

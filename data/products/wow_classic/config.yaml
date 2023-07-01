@@ -1,8 +1,22 @@
 ---
 addon:
-  globalenv_in_capsule:
-    CreateFromSecureMixins: {}
-    SecureMixin: {}
+  capsule:
+    apinamespaces:
+      C_AuthChallenge: {}
+      C_StoreSecure: {}
+      C_WowTokenSecure: {}
+    enums:
+      BattlepayBannerType: {}
+      BattlepayDisplayFlag: {}
+      BattlepayGroupDisplayType: {}
+      BattlepayProductDecorator: {}
+      BattlepayProductGroupFlag: {}
+      PurchaseEligibility: {}
+      StoreError: {}
+      VasError: {}
+      VasServiceType: {}
+    globalapis:
+      CreateForbiddenFrame: {}
   ignore_cvar_value:
     graphicsEnvironmentDetail: {}
     graphicsGroundClutter: {}
