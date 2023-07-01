@@ -132,7 +132,9 @@ AnimationGroup:
     Finish: {}
     GetAnimations:
       impl: AnimationGroup/GetAnimations
+    GetAnimationSpeedMultiplier: {}
     GetDuration: {}
+    GetElapsed: {}
     GetLooping: {}
     GetLoopState: {}
     GetProgress: {}
@@ -140,11 +142,13 @@ AnimationGroup:
     IsPaused: {}
     IsPendingFinish: {}
     IsPlaying: {}
+    IsReverse: {}
     IsSetToFinalAlpha: {}
     Pause: {}
     Play: {}
     RemoveAnimations: {}
     Restart: {}
+    SetAnimationSpeedMultiplier: {}
     SetLooping: {}
     SetPlaying: {}
     SetToFinalAlpha: {}
@@ -1499,9 +1503,9 @@ Path:
       - name: point
         type: ControlPoint
     GetControlPoints: {}
-    GetCurve: {}
-    GetMaxOrder: {}
-    SetCurve: {}
+    GetCurveType: {}
+    GetMaxControlPointOrder: {}
+    SetCurveType: {}
 PlayerModel:
   inherits:
     Model: {}
@@ -1520,7 +1524,6 @@ PlayerModel:
     SetBarberShopAlternateForm: {}
     SetCamDistanceScale: {}
     SetCreature: {}
-    SetCustomRace: {}
     SetDisplayInfo: {}
     SetDoBlend: {}
     SetItem: {}
@@ -1530,6 +1533,7 @@ PlayerModel:
     SetRotation: {}
     SetUnit: {}
     StopAnimKit: {}
+    ZeroCachedCenterXY: {}
 Region:
   fields:
     animationGroups:
@@ -1725,14 +1729,14 @@ Scale:
   inherits:
     Animation: {}
   methods:
-    GetFromScale: {}
     GetOrigin: {}
     GetScale: {}
-    GetToScale: {}
-    SetFromScale: {}
+    GetScaleFrom: {}
+    GetScaleTo: {}
     SetOrigin: {}
     SetScale: {}
-    SetToScale: {}
+    SetScaleFrom: {}
+    SetScaleTo: {}
 ScriptObject:
   inherits:
     ScriptObjectBase: {}
@@ -2000,7 +2004,6 @@ TextureBase:
     GetHorizTile:
       getter:
       - name: horizTile
-    GetNonBlocking: {}
     GetRotation: {}
     GetTexCoord:
       getter:
@@ -2027,6 +2030,7 @@ TextureBase:
     GetVertTile:
       getter:
       - name: vertTile
+    IsBlockingLoadRequested: {}
     IsDesaturated: {}
     IsSnappingToPixelGrid: {}
     SetAtlas:
@@ -2034,19 +2038,18 @@ TextureBase:
     SetBlendMode:
       setter:
       - name: blendMode
+    SetBlockingLoadsRequested: {}
     SetColorTexture:
       impl: Texture/SetColorTexture
     SetDesaturated: {}
     SetDesaturation: {}
     SetGradient: {}
-    SetGradientAlpha: {}
     SetHorizTile:
       setter:
       - name: horizTile
     SetMask:
       setter:
       - name: maskName
-    SetNonBlocking: {}
     SetRotation: {}
     SetSnapToPixelGrid: {}
     SetTexCoord:
