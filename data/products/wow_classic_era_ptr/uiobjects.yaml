@@ -712,6 +712,7 @@ FontString:
   inherits:
     FontInstance: {}
     LayeredRegion: {}
+    ScriptObject: {}
   methods:
     CalculateScreenAreaFromCharacterSpan: {}
     CanNonSpaceWrap: {}
@@ -1989,6 +1990,7 @@ TextureBase:
       type: boolean
   inherits:
     LayeredRegion: {}
+    ScriptObject: {}
   methods:
     GetAtlas: {}
     GetBlendMode:
