@@ -10279,7 +10279,11 @@ GetMaxRenderScale:
   outputs:
   - name: value
     type: number
-GetMaxRewardCurrencies: {}
+GetMaxRewardCurrencies:
+  inputs: {}
+  outputs:
+  - name: maxRewardCurrencies
+    type: number
 GetMaxSpellStartRecoveryOffset: {}
 GetMeleeHaste: {}
 GetMerchantItemCostInfo: {}
@@ -10604,7 +10608,11 @@ GetNumQuestWatches:
   outputs:
   - type: number
 GetNumRaidProfiles: {}
-GetNumRewardCurrencies: {}
+GetNumRewardCurrencies:
+  inputs: {}
+  outputs:
+  - name: numQuestCurrencies
+    type: number
 GetNumRoutes: {}
 GetNumSavedInstances:
   outputs:
@@ -10941,7 +10949,11 @@ GetQuestLogQuestType: {}
 GetQuestLogRequiredMoney:
   outputs:
   - type: number
-GetQuestLogRewardArenaPoints: {}
+GetQuestLogRewardArenaPoints:
+  inputs: {}
+  outputs:
+  - name: arenaPoints
+    type: number
 GetQuestLogRewardCurrencyInfo: {}
 GetQuestLogRewardHonor:
   outputs:
@@ -11157,7 +11169,11 @@ GetRestState:
     type: string
   - name: exhaustionStateMultiplier
     type: number
-GetRewardArenaPoints: {}
+GetRewardArenaPoints:
+  inputs: {}
+  outputs:
+  - name: arenaPoints
+    type: number
 GetRewardHonor:
   inputs: {}
   outputs:
