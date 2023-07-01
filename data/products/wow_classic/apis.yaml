@@ -9404,7 +9404,11 @@ GetCriteriaSpell: {}
 GetCurrencyInfo: {}
 GetCurrencyLink: {}
 GetCurrencyListInfo: {}
-GetCurrencyListSize: {}
+GetCurrencyListSize:
+  inputs: {}
+  outputs:
+  - name: currencyListSize
+    type: number
 GetCurrentArenaSeason:
   inputs: {}
   outputs:
