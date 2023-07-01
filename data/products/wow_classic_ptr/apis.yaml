@@ -272,6 +272,13 @@ BuyGuildCharter: {}
 BuyMerchantItem: {}
 BuyStableSlot: {}
 BuyTrainerService: {}
+C_AccountInfo.GetIDFromBattleNetAccountGUID:
+  inputs:
+  - name: battleNetAccountGUID
+    type: string
+  outputs:
+  - name: battleNetAccountID
+    type: number
 C_AccountInfo.IsGUIDBattleNetAccountType:
   inputs:
   - name: guid
@@ -12719,8 +12726,13 @@ LootSlot: {}
 LootSlotHasItem: {}
 MacOptions_AreOSShortcutsDisabled: {}
 MacOptions_GetGameBundleName: {}
+MacOptions_HasNewStyleInputMonitoring: {}
 MacOptions_HasNewStyleUniversalAccess: {}
+MacOptions_IsInputMonitoringEnabled: {}
+MacOptions_IsMicrophoneEnabled: {}
 MacOptions_IsUniversalAccessEnabled: {}
+MacOptions_OpenInputMonitoring: {}
+MacOptions_OpenMicrophoneRequestDialogue: {}
 MacOptions_OpenUniversalAccess: {}
 MacOptions_SetOSShortcutsDisabled: {}
 math.abs:

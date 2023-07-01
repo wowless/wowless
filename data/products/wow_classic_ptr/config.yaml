@@ -4,11 +4,9 @@ addon:
     apinamespaces:
       C_AuthChallenge: {}
       C_StoreSecure: {}
-      C_UnitAurasPrivate: {}
       C_WowTokenSecure: {}
     enums:
       BattlepayBannerType: {}
-      BattlepayCardType: {}
       BattlepayDisplayFlag: {}
       BattlepayGroupDisplayType: {}
       BattlepayProductDecorator: {}

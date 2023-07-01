@@ -57,7 +57,8 @@ local function loader(api, cfg)
       local t = api.env
       for part in value:gmatch('[^.]+') do
         if type(t) ~= 'table' then
-          error(('cannot find %q in _G'):format(value))
+          api.log(1, 'warning: cannot find %q in _G', value)
+          return nil
         end
         t = t[part]
       end
