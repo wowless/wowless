@@ -17,9 +17,6 @@ addon:
       VasServiceType: {}
     globalapis:
       CreateForbiddenFrame: {}
-  globalenv_in_capsule:
-    CreateFromSecureMixins: {}
-    SecureMixin: {}
   ignore_cvar_value:
     graphicsEnvironmentDetail: {}
     graphicsGroundClutter: {}
