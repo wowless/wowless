@@ -10525,7 +10525,11 @@ GetNumGuildBankTabs:
   outputs:
   - type: number
 GetNumGuildBankTransactions: {}
-GetNumGuildEvents: {}
+GetNumGuildEvents:
+  inputs: {}
+  outputs:
+  - name: numEvents
+    type: number
 GetNumGuildMembers:
   inputs: {}
   outputs:
