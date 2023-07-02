@@ -48,6 +48,7 @@ docs:
       C_EditMode: {}
   events:
     never_sent:
+      EDIT_MODE_LAYOUTS_UPDATED: {}
       PARTY_INVITE_CANCEL: {}
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 runner:
