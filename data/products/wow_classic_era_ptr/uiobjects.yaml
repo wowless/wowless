@@ -215,6 +215,10 @@ Button:
   inherits:
     Frame: {}
   methods:
+    ClearDisabledTexture: {}
+    ClearHighlightTexture: {}
+    ClearNormalTexture: {}
+    ClearPushedTexture: {}
     Click:
       impl: Button/Click
     Disable:
@@ -285,6 +289,7 @@ Button:
     SetHighlightAtlas:
       impl: Button/SetHighlightAtlas
     SetHighlightFontObject: {}
+    SetHighlightLocked: {}
     SetHighlightTexture:
       impl: Button/SetHighlightTexture
     SetMotionScriptsWhileDisabled:
@@ -646,7 +651,17 @@ FogOfWarFrame:
   inherits:
     Frame: {}
   methods:
+    GetFogOfWarBackgroundAtlas: {}
+    GetFogOfWarBackgroundTexture: {}
+    GetFogOfWarMaskAtlas: {}
+    GetFogOfWarMaskTexture: {}
+    GetMaskScalar: {}
     GetUiMapID: {}
+    SetFogOfWarBackgroundAtlas: {}
+    SetFogOfWarBackgroundTexture: {}
+    SetFogOfWarMaskAtlas: {}
+    SetFogOfWarMaskTexture: {}
+    SetMaskScalar: {}
     SetUiMapID: {}
 Font:
   inherits:
@@ -1386,6 +1401,7 @@ ModelScene:
     SetCameraOrientationByAxisVectors: {}
     SetCameraOrientationByYawPitchRoll: {}
     SetCameraPosition: {}
+    SetDesaturation: {}
     SetDrawLayer: {}
     SetFogColor: {}
     SetFogFar: {}
@@ -1396,6 +1412,7 @@ ModelScene:
     SetLightPosition: {}
     SetLightType: {}
     SetLightVisible: {}
+    SetPaused: {}
     SetViewInsets: {}
     SetViewTranslation: {}
     TakeActor: {}
@@ -1443,6 +1460,7 @@ MovieFrame:
   methods:
     EnableSubtitles: {}
     StartMovie: {}
+    StartMovieByName: {}
     StopMovie: {}
 OffScreenFrame:
   inherits:
@@ -2097,8 +2115,6 @@ UnitPositionFrame:
     Frame: {}
   methods:
     AddUnit: {}
-    AddUnitAtlas: {}
-    AddUnitFileID: {}
     ClearUnits: {}
     FinalizeUnits: {}
     GetMouseOverUnits: {}
