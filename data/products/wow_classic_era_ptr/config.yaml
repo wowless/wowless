@@ -1,5 +1,16 @@
 ---
 addon:
+  capsule:
+    enums:
+      BattlepayBannerType: {}
+      BattlepayDisplayFlag: {}
+      BattlepayGroupDisplayType: {}
+      BattlepayProductDecorator: {}
+      BattlepayProductGroupFlag: {}
+      PurchaseEligibility: {}
+      StoreError: {}
+      VasError: {}
+      VasServiceType: {}
   ignore_cvar_value:
     graphicsEnvironmentDetail: {}
     graphicsGroundClutter: {}
