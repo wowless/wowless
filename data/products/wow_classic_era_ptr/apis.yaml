@@ -4217,6 +4217,7 @@ C_EquipmentSet.UseEquipmentSet:
   - name: setWasEquipped
     type: boolean
 C_EventUtils.IsEventValid:
+  impl: C_EventUtils.IsEventValid
   inputs:
   - name: eventName
     type: string
@@ -7302,6 +7303,7 @@ C_UI.ShouldUIParentAvoidNotch:
   - name: willAvoidNotch
     type: boolean
 C_UIColor.GetColors:
+  impl: C_UIColor.GetColors
   inputs: {}
   outputs:
   - name: colors
@@ -9026,7 +9028,9 @@ GetBuildInfo:
     type: string
   - name: tocversionagain
     type: number
-GetButtonMetatable: {}
+GetButtonMetatable:
+  impl: GetButtonMetatable
+  inputs: {}
 GetBuybackItemInfo:
   inputs:
   - name: index
@@ -9548,9 +9552,13 @@ GetFirstTradeSkill:
   - type: number
 GetFontInfo: {}
 GetFonts: {}
-GetFontStringMetatable: {}
+GetFontStringMetatable:
+  impl: GetFontStringMetatable
+  inputs: {}
 GetFrameCPUUsage: {}
-GetFrameMetatable: {}
+GetFrameMetatable:
+  impl: GetFrameMetatable
+  inputs: {}
 GetFramerate:
   inputs: {}
   outputs:
@@ -9574,7 +9582,11 @@ GetGraphicsAPIs:
   - stub: opengl
     type: string
 GetGraphicsCVarOffsetForCVar: {}
-GetGraphicsCVarOffsetForUI: {}
+GetGraphicsCVarOffsetForUI:
+  inputs:
+  - type: number
+  outputs:
+  - type: number
 GetGraphicsCVarValueForQualityLevel: {}
 GetGraphicsDropdownIndexByMasterIndex: {}
 GetGreetingText:
