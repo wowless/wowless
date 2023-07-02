@@ -1,5 +1,8 @@
 ---
 addon:
+  capsule:
+    apinamespaces:
+      C_AuthChallenge: {}
   ignore_cvar_value:
     graphicsEnvironmentDetail: {}
     graphicsGroundClutter: {}

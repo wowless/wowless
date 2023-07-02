@@ -462,6 +462,11 @@ C_AreaPoiInfo.IsAreaPOITimed:
   outputs:
   - name: isTimed
     type: boolean
+C_AuthChallenge.Cancel: {}
+C_AuthChallenge.DidChallengeSucceed: {}
+C_AuthChallenge.OnTabPressed: {}
+C_AuthChallenge.SetFrame: {}
+C_AuthChallenge.Submit: {}
 C_AzeriteEmpoweredItem.CanSelectPower:
   inputs:
   - name: azeriteEmpoweredItemLocation
