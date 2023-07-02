@@ -3,6 +3,8 @@ addon:
   capsule:
     apinamespaces:
       C_AuthChallenge: {}
+      C_StoreSecure: {}
+      C_WowTokenSecure: {}
     enums:
       BattlepayBannerType: {}
       BattlepayDisplayFlag: {}
