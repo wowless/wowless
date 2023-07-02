@@ -586,6 +586,7 @@ EditBox:
     GetUTF8CursorPosition: {}
     GetVisibleTextByteLimit: {}
     HasFocus: {}
+    HasText: {}
     HighlightText: {}
     Insert:
       impl: EditBox/Insert
@@ -1104,12 +1105,16 @@ GameTooltip:
     SetAnchorType: {}
     SetAuctionItem: {}
     SetAuctionSellItem: {}
+    SetBackpackToken: {}
     SetBagItem: {}
     SetBagItemChild: {}
     SetBuybackItem: {}
     SetCompareItem: {}
     SetCraftItem: {}
     SetCraftSpell: {}
+    SetCurrencyToken: {}
+    SetCurrencyTokenByID: {}
+    SetEquipmentSet: {}
     SetExistingSocketGem: {}
     SetFrameStack: {}
     SetGuildBankItem: {}
@@ -1119,6 +1124,7 @@ GameTooltip:
     SetInventoryItem: {}
     SetInventoryItemByID: {}
     SetItemByID: {}
+    SetLootCurrency: {}
     SetLootItem: {}
     SetLootRollItem: {}
     SetMerchantCostItem: {}
@@ -1136,10 +1142,11 @@ GameTooltip:
     SetPadding: {}
     SetPetAction: {}
     SetPossession: {}
+    SetQuestCurrency: {}
     SetQuestItem: {}
+    SetQuestLogCurrency: {}
     SetQuestLogItem: {}
-    SetQuestLogRewardSpell: {}
-    SetQuestRewardSpell: {}
+    SetQuestLogSpecialItem: {}
     SetSendMailItem: {}
     SetShapeshift: {}
     SetSocketedItem: {}
@@ -1472,6 +1479,7 @@ OffScreenFrame:
     IsSnapshotValid: {}
     SetMaxSnapshots: {}
     TakeSnapshot: {}
+    TestPrintToFile: {}
     UsesNPOT: {}
 ParentedObject:
   inherits:
@@ -1493,7 +1501,6 @@ ParentedObjectBase:
       nilable: true
       type: UIObject
   inherits:
-    ForbiddenMixin: {}
     UIObject: {}
   methods:
     GetDebugName:
@@ -1914,15 +1921,17 @@ StatusBar:
     GetOrientation: {}
     GetReverseFill: {}
     GetRotatesTexture: {}
-    GetStatusBarAtlas: {}
     GetStatusBarColor:
       impl: StatusBar/GetStatusBarColor
+    GetStatusBarDesaturation: {}
     GetStatusBarTexture:
       getter:
       - name: statusBarTexture
     GetValue:
       getter:
       - name: value
+    IsStatusBarDesaturated: {}
+    SetColorFill: {}
     SetFillStyle: {}
     SetMinMaxValues:
       setter:
@@ -1931,9 +1940,10 @@ StatusBar:
     SetOrientation: {}
     SetReverseFill: {}
     SetRotatesTexture: {}
-    SetStatusBarAtlas: {}
     SetStatusBarColor:
       impl: StatusBar/SetStatusBarColor
+    SetStatusBarDesaturated: {}
+    SetStatusBarDesaturation: {}
     SetStatusBarTexture:
       impl: StatusBar/SetStatusBarTexture
     SetValue:
@@ -2100,7 +2110,8 @@ UIObject:
     name:
       nilable: true
       type: string
-  inherits: {}
+  inherits:
+    ForbiddenMixin: {}
   methods:
     GetName:
       getter:
