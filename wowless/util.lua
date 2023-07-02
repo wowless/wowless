@@ -101,15 +101,7 @@ local function dateToCalendarTime(d)
 end
 
 local function productList()
-  return {
-    'wow',
-    'wow_classic',
-    'wow_classic_era',
-    'wow_classic_era_ptr',
-    'wow_classic_ptr',
-    'wowt',
-    'wowxptr',
-  }
+  return require('build.data.products')
 end
 
 return {
