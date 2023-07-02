@@ -1,13 +1,6 @@
--- TODO deduplicate with wowless.util
-local productList = {
-  'wow',
-  'wow_classic',
-  'wow_classic_era',
-  'wow_classic_era_ptr',
-  'wow_classic_ptr',
-  'wowt',
-  'wowxptr',
-}
+local parseYaml = require('wowapi.yaml').parseFile
+
+local productList = parseYaml('data/products.yaml')
 
 -- TODO get this from gentest.lua
 local perProductAddonGeneratedTypes = {
@@ -167,6 +160,7 @@ local builds = {
   {
     ins = {
       'CMakeLists.txt',
+      'data/products.yaml',
       'tools/addons.yaml',
       'tools/mkninja.lua',
       'wowapi/yaml.lua',
@@ -438,8 +432,8 @@ for _, p in ipairs(productList) do
     outs = p,
     rule = 'phony',
   })
-  local b = require('wowapi.yaml').parseFile('data/products/' .. p .. '/build.yaml')
-  for k, v in pairs(require('wowapi.yaml').parseFile('tools/addons.yaml')) do
+  local b = parseYaml('data/products/' .. p .. '/build.yaml')
+  for k, v in pairs(parseYaml('tools/addons.yaml')) do
     local found = v.flavors == nil
     if not found then
       for _, f in ipairs(v.flavors) do
@@ -462,7 +456,7 @@ for _, p in ipairs(productList) do
   end
 end
 
-for k, v in pairs(require('wowapi.yaml').parseFile('tools/addons.yaml')) do
+for k, v in pairs(parseYaml('tools/addons.yaml')) do
   table.insert(builds, {
     args = {
       owner = v.owner,
@@ -481,6 +475,7 @@ end
 local yamls = {
   'data/flavors.yaml',
   'data/impl.yaml',
+  'data/products.yaml',
   'data/stringenums.yaml',
   'data/products/wow/apis.yaml',
   'data/products/wow/build.yaml',
@@ -556,6 +551,7 @@ local yamls = {
   'data/schemas/flavors.yaml',
   'data/schemas/globals.yaml',
   'data/schemas/impl.yaml',
+  'data/schemas/products.yaml',
   'data/schemas/schema.yaml',
   'data/schemas/schematype.yaml',
   'data/schemas/state.yaml',
@@ -593,6 +589,7 @@ table.insert(builds, {
     'spec/addon/util_spec.lua',
     'spec/data/apis_spec.lua',
     'spec/data/config_spec.lua',
+    'spec/data/globals_spec.lua',
     'spec/data/impl_spec.lua',
     'spec/data/impl/C_DateAndTime.AdjustTimeByDays_spec.lua',
     'spec/data/impl/C_DateAndTime.AdjustTimeByMinutes_spec.lua',

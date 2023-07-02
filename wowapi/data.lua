@@ -49,6 +49,7 @@ local fns = {
   events = perproduct('events'),
   flavors = global('flavors'),
   impl = global('impl'),
+  products = global('products'),
   schemas = loaddir('schemas', 'yaml'),
   sqlcursor = loaddir('sql/cursor', 'sql'),
   sqllookup = loaddir('sql/lookup', 'sql'),
