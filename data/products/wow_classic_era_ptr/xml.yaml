@@ -360,8 +360,6 @@ EditBox:
   - HighlightColor
   - TextInsets
   extends: Frame
-FlipBook:
-  extends: Animation
 FogOfWarFrame:
   extends: Frame
 Font:
@@ -1301,7 +1299,7 @@ Texture:
       type: boolean
     nonblocking:
       impl:
-        method: SetBlockingLoadsRequested
+        method: SetNonBlocking
       type: boolean
     snaptopixelgrid:
       impl:

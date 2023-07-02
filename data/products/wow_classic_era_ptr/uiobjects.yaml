@@ -6,68 +6,40 @@ Actor:
     RegionBase: {}
     ScriptObjectBase: {}
   methods:
-    AttachToMount: {}
-    CalculateMountScale: {}
     ClearModel: {}
-    Dress: {}
     GetActiveBoundingBox: {}
     GetAnimation: {}
     GetAnimationBlendOperation: {}
     GetAnimationVariation: {}
-    GetAutoDress: {}
     GetDesaturation: {}
-    GetItemTransmogInfo: {}
-    GetItemTransmogInfoList: {}
     GetMaxBoundingBox: {}
     GetModelFileID: {}
     GetModelPath: {}
     GetModelUnitGUID: {}
-    GetObeyHideInTransmogFlag: {}
     GetParticleOverrideScale: {}
-    GetPaused: {}
     GetPitch: {}
     GetPosition: {}
     GetRoll: {}
-    GetSheathed: {}
     GetSpellVisualKit: {}
-    GetUseTransmogChoices: {}
-    GetUseTransmogSkin: {}
     GetYaw: {}
-    IsGeoReady: {}
     IsLoaded: {}
-    IsSlotAllowed: {}
-    IsSlotVisible: {}
     IsUsingCenterForOrigin: {}
     PlayAnimationKit: {}
-    ReleaseFrontEndCharacterDisplays: {}
     SetAnimation: {}
     SetAnimationBlendOperation: {}
-    SetAutoDress: {}
     SetDesaturation: {}
-    SetFrontEndLobbyModelFromDefaultCharacterDisplay: {}
-    SetItemTransmogInfo: {}
     SetModelByCreatureDisplayID: {}
     SetModelByFileID: {}
-    SetModelByHyperlink: {}
     SetModelByPath: {}
     SetModelByUnit: {}
-    SetObeyHideInTransmogFlag: {}
     SetParticleOverrideScale: {}
-    SetPaused: {}
     SetPitch: {}
-    SetPlayerModelFromGlues: {}
     SetPosition: {}
     SetRoll: {}
-    SetSheathed: {}
     SetSpellVisualKit: {}
     SetUseCenterForOrigin: {}
-    SetUseTransmogChoices: {}
-    SetUseTransmogSkin: {}
     SetYaw: {}
     StopAnimationKit: {}
-    TryOn: {}
-    Undress: {}
-    UndressSlot: {}
   objectType: ModelSceneActor
 Alpha:
   inherits:
@@ -537,21 +509,9 @@ DressUpModel:
   methods:
     Dress: {}
     GetAutoDress: {}
-    GetItemTransmogInfo: {}
-    GetItemTransmogInfoList: {}
-    GetObeyHideInTransmogFlag: {}
     GetSheathed: {}
-    GetUseTransmogChoices: {}
-    GetUseTransmogSkin: {}
-    IsGeoReady: {}
-    IsSlotAllowed: {}
-    IsSlotVisible: {}
     SetAutoDress: {}
-    SetItemTransmogInfo: {}
-    SetObeyHideInTransmogFlag: {}
     SetSheathed: {}
-    SetUseTransmogChoices: {}
-    SetUseTransmogSkin: {}
     TryOn: {}
     Undress: {}
     UndressSlot: {}
@@ -688,20 +648,6 @@ EditBox:
     SetTextInsets: {}
     SetVisibleTextByteLimit: {}
     ToggleInputLanguage: {}
-FlipBook:
-  inherits:
-    Animation: {}
-  methods:
-    GetFlipBookColumns: {}
-    GetFlipBookFrameHeight: {}
-    GetFlipBookFrames: {}
-    GetFlipBookFrameWidth: {}
-    GetFlipBookRows: {}
-    SetFlipBookColumns: {}
-    SetFlipBookFrameHeight: {}
-    SetFlipBookFrames: {}
-    SetFlipBookFrameWidth: {}
-    SetFlipBookRows: {}
 FogOfWarFrame:
   inherits:
     Frame: {}
@@ -1124,11 +1070,12 @@ GameTooltip:
   inherits:
     Frame: {}
   methods:
-    AddAtlas: {}
     AddDoubleLine: {}
     AddFontStrings: {}
     AddLine: {}
+    AddSpellByID: {}
     AddTexture: {}
+    AdvanceSecondaryCompareItem: {}
     AppendText: {}
     ClearLines: {}
     CopyTooltip: {}
@@ -1136,7 +1083,7 @@ GameTooltip:
     GetAnchorType:
       getter:
       - name: tooltipAnchorType
-    GetCustomLineSpacing: {}
+    GetItem: {}
     GetMinimumWidth:
       outputs:
       - type: number
@@ -1144,18 +1091,45 @@ GameTooltip:
       getter:
       - name: tooltipOwner
     GetPadding: {}
+    GetSpell: {}
+    GetUnit: {}
+    IsEquippedItem: {}
     IsOwned:
       impl: GameTooltip/IsOwned
+    IsUnit: {}
     NumLines:
       getter:
       - name: tooltipLines
-    SetAllowShowWithNoLines: {}
+    ResetSecondaryCompareItem: {}
+    SetAction: {}
     SetAnchorType: {}
-    SetCustomLineSpacing: {}
-    SetCustomWordWrapMinWidth: {}
+    SetAuctionItem: {}
+    SetAuctionSellItem: {}
+    SetBackpackToken: {}
+    SetBagItem: {}
+    SetBagItemChild: {}
+    SetBuybackItem: {}
+    SetCompareItem: {}
+    SetCraftItem: {}
+    SetCraftSpell: {}
+    SetCurrencyToken: {}
+    SetCurrencyTokenByID: {}
+    SetEquipmentSet: {}
+    SetExistingSocketGem: {}
     SetFrameStack: {}
+    SetGuildBankItem: {}
+    SetHyperlink: {}
+    SetInboxItem: {}
+    SetInstanceLockEncountersComplete: {}
+    SetInventoryItem: {}
+    SetInventoryItemByID: {}
+    SetItemByID: {}
+    SetLootCurrency: {}
+    SetLootItem: {}
+    SetLootRollItem: {}
+    SetMerchantCostItem: {}
+    SetMerchantItem: {}
     SetMinimumWidth: {}
-    SetObjectTooltipPosition: {}
     SetOwner:
       impl: GameTooltip/SetOwner
       inputs:
@@ -1166,8 +1140,31 @@ GameTooltip:
         type: string
       outputs: {}
     SetPadding: {}
-    SetShrinkToFitWrapped: {}
+    SetPetAction: {}
+    SetPossession: {}
+    SetQuestCurrency: {}
+    SetQuestItem: {}
+    SetQuestLogCurrency: {}
+    SetQuestLogItem: {}
+    SetQuestLogSpecialItem: {}
+    SetSendMailItem: {}
+    SetShapeshift: {}
+    SetSocketedItem: {}
+    SetSocketGem: {}
+    SetSpellBookItem: {}
+    SetSpellByID: {}
+    SetTalent: {}
     SetText: {}
+    SetTotem: {}
+    SetTrackingSpell: {}
+    SetTradePlayerItem: {}
+    SetTradeSkillItem: {}
+    SetTradeTargetItem: {}
+    SetTrainerService: {}
+    SetUnit: {}
+    SetUnitAura: {}
+    SetUnitBuff: {}
+    SetUnitDebuff: {}
 LayeredRegion:
   fields:
     layer:
@@ -1267,36 +1264,13 @@ Minimap:
       outputs:
       - type: number
     PingLocation: {}
-    SetArchBlobInsideAlpha: {}
-    SetArchBlobInsideTexture: {}
-    SetArchBlobOutsideAlpha: {}
-    SetArchBlobOutsideTexture: {}
-    SetArchBlobRingAlpha: {}
-    SetArchBlobRingScalar: {}
-    SetArchBlobRingTexture: {}
     SetBlipTexture: {}
     SetCorpsePOIArrowTexture: {}
     SetIconTexture: {}
     SetMaskTexture: {}
     SetPlayerTexture: {}
     SetPOIArrowTexture: {}
-    SetQuestBlobInsideAlpha: {}
-    SetQuestBlobInsideTexture: {}
-    SetQuestBlobOutsideAlpha: {}
-    SetQuestBlobOutsideSelectedTexture: {}
-    SetQuestBlobOutsideTexture: {}
-    SetQuestBlobRingAlpha: {}
-    SetQuestBlobRingScalar: {}
-    SetQuestBlobRingTexture: {}
     SetStaticPOIArrowTexture: {}
-    SetTaskBlobInsideAlpha: {}
-    SetTaskBlobInsideTexture: {}
-    SetTaskBlobOutsideAlpha: {}
-    SetTaskBlobOutsideSelectedTexture: {}
-    SetTaskBlobOutsideTexture: {}
-    SetTaskBlobRingAlpha: {}
-    SetTaskBlobRingScalar: {}
-    SetTaskBlobRingTexture: {}
     SetZoom: {}
     UpdateBlips: {}
   singleton: true
@@ -1590,32 +1564,6 @@ PlayerModel:
     SetUnit: {}
     StopAnimKit: {}
     ZeroCachedCenterXY: {}
-POIFrame:
-  inherits: {}
-  methods:
-    DrawAll: {}
-    DrawBlob: {}
-    DrawNone: {}
-    EnableMerging: {}
-    EnableSmoothing: {}
-    GetMapID: {}
-    SetBorderAlpha: {}
-    SetBorderScalar: {}
-    SetBorderTexture: {}
-    SetFillAlpha: {}
-    SetFillTexture: {}
-    SetMapID: {}
-    SetMergeThreshold: {}
-    SetNumSplinePoints: {}
-    UpdateMouseOverTooltip: {}
-  virtual: true
-QuestPOIFrame:
-  inherits:
-    Frame: {}
-    POIFrame: {}
-  methods:
-    GetNumTooltips: {}
-    GetTooltipIndex: {}
 Region:
   fields:
     animationGroups:
@@ -1819,12 +1767,6 @@ Scale:
     SetScale: {}
     SetScaleFrom: {}
     SetScaleTo: {}
-ScenarioPOIFrame:
-  inherits:
-    Frame: {}
-    POIFrame: {}
-  methods:
-    GetScenarioTooltipText: {}
 ScriptObject:
   inherits:
     ScriptObjectBase: {}
@@ -2014,10 +1956,10 @@ TabardModel:
     CanSaveTabardNow: {}
     CycleVariation: {}
     GetLowerBackgroundFileName: {}
-    GetLowerEmblemFile: {}
+    GetLowerEmblemFileName: {}
     GetLowerEmblemTexture: {}
     GetUpperBackgroundFileName: {}
-    GetUpperEmblemFile: {}
+    GetUpperEmblemFileName: {}
     GetUpperEmblemTexture: {}
     InitializeTabardColors: {}
     Save: {}
