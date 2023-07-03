@@ -1,6 +1,10 @@
 ---
 addon:
   capsule:
+    apinamespaces:
+      C_AuthChallenge: {}
+      C_StoreSecure: {}
+      C_WowTokenSecure: {}
     enums:
       BattlepayBannerType: {}
       BattlepayDisplayFlag: {}
@@ -11,6 +15,8 @@ addon:
       StoreError: {}
       VasError: {}
       VasServiceType: {}
+    globalapis:
+      CreateForbiddenFrame: {}
   ignore_cvar_value:
     graphicsEnvironmentDetail: {}
     graphicsGroundClutter: {}
@@ -47,6 +53,7 @@ docs:
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 runner:
   skip_slashcmds:
+    ACHIEVEMENTUI: {}
     CASTRANDOM: {}
     LOOT_MASTER: {}
     USERANDOM: {}

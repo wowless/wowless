@@ -8797,7 +8797,14 @@ GetActiveLevel: {}
 GetActiveLootRollIDs:
   outputs:
   - type: table
-GetActiveTalentGroup: {}
+GetActiveTalentGroup:
+  inputs:
+  - default: false
+    name: isInspect
+    type: boolean
+  outputs:
+  - name: activeSpec
+    type: number
 GetActiveTitle:
   inputs:
   - name: index
