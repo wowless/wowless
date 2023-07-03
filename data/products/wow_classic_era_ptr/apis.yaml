@@ -11505,7 +11505,7 @@ GetTalentPrereqs:
   - name: talentIndex
     type: number
 GetTalentTabInfo:
-  impl: GetTalentTabInfo_Vanilla
+  impl: GetTalentTabInfo_Wrath
   inputs:
   - name: index
     type: number
@@ -11520,7 +11520,10 @@ GetTalentTabInfo:
   - name: pointsSpent
     type: number
   - name: fileName
+    nilable: true
     type: string
+  - name: previewPointsSpent
+    type: number
 GetTargetTradeMoney:
   inputs: {}
   outputs:
