@@ -9730,7 +9730,15 @@ GetGroupMemberCounts:
       NOROLE: 0
       TANK: 1
     type: table
-GetGroupPreviewTalentPointsSpent: {}
+GetGroupPreviewTalentPointsSpent:
+  inputs:
+  - name: isPet
+    type: boolean
+  - name: talentGroup
+    type: number
+  outputs:
+  - name: talentPoints
+    type: number
 GetGuildBankBonusDepositMoney: {}
 GetGuildBankItemInfo:
   inputs:
@@ -11827,7 +11835,20 @@ GetUnitSpeed:
     type: number
   - name: swimSpeed
     type: number
-GetUnspentTalentPoints: {}
+GetUnspentTalentPoints:
+  inputs:
+  - default: false
+    name: isInspected
+    type: boolean
+  - default: false
+    name: isPet
+    type: boolean
+  - default: 1
+    name: talentGroup
+    type: number
+  outputs:
+  - name: talentPoints
+    type: number
 GetVehicleBarIndex: {}
 GetVehicleUIIndicator: {}
 GetVehicleUIIndicatorSeat: {}
