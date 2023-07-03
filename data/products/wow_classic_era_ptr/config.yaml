@@ -53,6 +53,7 @@ docs:
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 runner:
   skip_slashcmds:
+    ACHIEVEMENTUI: {}
     CASTRANDOM: {}
     LOOT_MASTER: {}
     USERANDOM: {}
