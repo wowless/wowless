@@ -213,13 +213,6 @@ local function mkuiobjectfieldset(k)
   end
   return set
 end
-local luareps = {
-  font = true,
-  fontstring = true,
-  frame = true,
-  texture = true,
-  uiobject = true,
-}
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
   local constructor = { 'function() return {' }
@@ -232,11 +225,16 @@ for k, v in pairs(uiobjectdata) do
   for mk, mv in pairs(v.methods or {}) do
     if mv.impl then
       assert(uiobjectimpl[mv.impl])
-      methods[mk] = 'function(...) ' .. readFile('data/uiobjects/' .. mv.impl .. '.lua') .. ' end'
+      methods[mk] = {
+        impl = 'function(...) ' .. readFile('data/uiobjects/' .. mv.impl .. '.lua') .. ' end',
+        inputs = mv.inputs,
+        mayreturnnothing = mv.mayreturnnothing,
+        outputs = mv.outputs,
+      }
     elseif mv.getter then
       local t = {}
       for _, f in ipairs(mv.getter) do
-        if luareps[fieldset[f.name].type] then
+        if uiobjectdata[fieldset[f.name].type] then
           table.insert(t, 'self.' .. f.name .. ' and self.' .. f.name .. '.luarep')
         else
           table.insert(t, 'self.' .. f.name)
@@ -260,7 +258,7 @@ for k, v in pairs(uiobjectdata) do
           table.insert(t, f.name)
         else
           local ct = { 'check.', cf.type, '(', f.name }
-          if cf.type == 'texture' then
+          if cf.type == 'Texture' then
             table.insert(ct, ',self')
           end
           table.insert(ct, ')')
@@ -281,8 +279,7 @@ for k, v in pairs(uiobjectdata) do
     else
       local t = {}
       for _, output in ipairs(mv.outputs or {}) do
-        assert(output.type == 'number', 'unsupported type in ' .. k .. '.' .. mk)
-        table.insert(t, 1)
+        table.insert(t, specDefault(output))
       end
       methods[mk] = 'function() return ' .. table.concat(t, ',') .. ' end'
     end
@@ -293,6 +290,7 @@ for k, v in pairs(uiobjectdata) do
     methods = methods,
     objectType = v.objectType,
     singleton = v.singleton,
+    warner = v.warner,
     zombie = v.zombie,
   }
 end
@@ -305,6 +303,7 @@ local data = {
   events = events,
   globals = globals,
   impls = impls,
+  product = product,
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
   states = states,

@@ -15,9 +15,7 @@ describe('structures', function()
         end
       end
       for _, api in pairs(require('build/data/products/' .. p .. '/apis')) do
-        for _, il in ipairs(api.inputs or {}) do
-          reflist(il)
-        end
+        reflist(api.inputs)
         reflist(api.outputs)
       end
       for _, v in pairs(require('build/data/products/' .. p .. '/events')) do

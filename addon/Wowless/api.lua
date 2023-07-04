@@ -79,6 +79,11 @@ local function apiTests()
         end,
       }
     end,
+    GetClickFrame = function()
+      local name = 'WowlessGetClickFrameTestFrame'
+      local frame = CreateFrame('Frame', name)
+      assertEquals(frame, _G.GetClickFrame(name))
+    end,
   }
 end
 G.ApiTests = apiTests

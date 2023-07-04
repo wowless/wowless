@@ -2,7 +2,7 @@ local args
 local require = require
 _G.require = function(k, ...)
   assert(k:sub(1, 6) ~= 'tools.')
-  assert(k ~= 'wowapi.yaml' or args.frame0)
+  assert(k ~= 'wowapi.yaml' or args.frame0 or args.profile)
   return require(k, ...)
 end
 local util = require('wowless.util')
@@ -21,7 +21,7 @@ args = (function()
 end)()
 debug.setprofilingenabled(args.profile)
 local runner = require('wowless.runner')
-local api = runner.run({
+local api, loader = runner.run({
   allevents = args.allevents,
   debug = args.debug,
   dir = 'extracts/' .. args.product,
@@ -33,16 +33,10 @@ local api = runner.run({
   scripts = args.scripts,
 })
 if args.profile then
-  local t = {
-    global = debug.getglobalstats(),
-    runner = debug.getfunctionstats(runner.run),
-  }
-  for k, v in pairs(api) do
-    if type(v) == 'function' then
-      t[k] = debug.getfunctionstats(v)
-    end
-  end
-  local fn = 'profile.' .. args.product .. '.yaml'
-  local content = require('wowapi.yaml').pprint(t)
-  require('pl.file').write(fn, content)
+  require('wowless.profiler').write({
+    api = api,
+    loader = loader,
+    product = args.product,
+    runner = runner,
+  })
 end

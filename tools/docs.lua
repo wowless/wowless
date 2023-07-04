@@ -122,8 +122,8 @@ local types = {
   luaFunction = 'function',
   luaIndex = 'number',
   ModelAsset = 'string',
-  ModelSceneFrame = 'table',
-  ModelSceneFrameActor = 'table',
+  ModelSceneFrame = 'ModelScene',
+  ModelSceneFrameActor = 'Actor',
   NamePlateFrame = 'table',
   normalizedValue = 'number',
   NotificationDbId = 'string',
@@ -136,14 +136,13 @@ local types = {
   SimpleControlPoint = 'table',
   SimpleFont = 'table',
   SimpleFontString = 'table',
-  SimpleFrame = 'frame',
+  SimpleFrame = 'Frame',
   SimpleLine = 'table',
   SimpleMaskTexture = 'table',
   SimplePathAnim = 'table',
-  SimpleTexture = 'texture',
+  SimpleTexture = 'Texture',
   SingleColorValue = 'number',
   size = 'number',
-  SmoothingType = 'string',
   StatusBarFillStyle = 'string',
   string = 'string',
   table = 'table',
@@ -293,7 +292,7 @@ local function rewriteApis()
     if not skip(apis, name) then
       local ns = split(name)
       apis[name] = {
-        inputs = { insig(fn, ns) },
+        inputs = insig(fn, ns),
         outputs = outsig(fn, ns),
       }
     end
@@ -375,9 +374,7 @@ local function rewriteStructures(outApis, outEvents)
     end
   end
   for _, api in pairs(outApis) do
-    for _, ilist in ipairs(api.inputs or {}) do
-      processList(ilist)
-    end
+    processList(api.inputs)
     processList(api.outputs)
   end
   for _, event in pairs(outEvents) do

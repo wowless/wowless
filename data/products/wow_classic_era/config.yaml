@@ -1,5 +1,29 @@
 ---
 addon:
+  globalenv_in_capsule:
+    CreateFromSecureMixins: {}
+    SecureMixin: {}
+  ignore_cvar_value:
+    graphicsEnvironmentDetail: {}
+    graphicsGroundClutter: {}
+    graphicsLiquidDetail: {}
+    graphicsParticleDensity: {}
+    graphicsQuality: {}
+    graphicsShadowQuality: {}
+    graphicsSpellDensity: {}
+    graphicsSSAO: {}
+    graphicsTextureResolution: {}
+    mouseSpeed: {}
+    raidGraphicsEnvironmentDetail: {}
+    raidGraphicsGroundClutter: {}
+    raidGraphicsLiquidDetail: {}
+    raidGraphicsParticleDensity: {}
+    RAIDgraphicsQuality: {}
+    raidGraphicsShadowQuality: {}
+    raidGraphicsSpellDensity: {}
+    raidGraphicsSSAO: {}
+    raidGraphicsTextureResolution: {}
+    RenderScale: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton

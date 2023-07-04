@@ -3,7 +3,8 @@ project(wowless)
 
 set(BUILD_SHARED_LIBS OFF)
 set(BUILD_SUMMARY ON)
-set(LUA_CPATH_CUSTOM ";" CACHE STRING "disable dynamic C Lua modules")
+set(LUA_PATH_CUSTOM "./?.lua;build/luarocks/share/lua/5.1/?.lua;build/luarocks/share/lua/5.1/?/init.lua" CACHE STRING "disable out-of-tree Lua modules" FORCE)
+set(LUA_CPATH_CUSTOM ";" CACHE STRING "disable dynamic C Lua modules" FORCE)
 set(LUA_USE_READLINE OFF)
 
 add_compile_options(-D_GNU_SOURCE -DNDEBUG -flto -O3)
@@ -24,7 +25,7 @@ FetchContent_Declare(
 FetchContent_Declare(
   lsqlite3
   URL http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip
-  URL_HASH MD5=57d7a8bf5ae15d22044ed64343a39d89
+  URL_HASH MD5=1f937ed6bf9d5980239da516c424d7b6
 )
 FetchContent_Declare(
   luaexpat
@@ -81,15 +82,14 @@ FetchContent_MakeAvailable(
   zlib
 )
 
-add_library(
-  lyaml
-  ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
+set_property(
+  SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
+  APPEND PROPERTY COMPILE_DEFINITIONS VERSION="wowless"
 )
-target_compile_definitions(lyaml PRIVATE VERSION="wowless")
-target_link_libraries(lyaml liblua yaml)
+set_property(
+  SOURCE ${lzlib_SOURCE_DIR}/lzlib.c
+  APPEND PROPERTY INCLUDE_DIRECTORIES ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR}
+)
 
 add_executable(
   wowless
@@ -99,13 +99,16 @@ add_executable(
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
   ${lualua_SOURCE_DIR}/lualua.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
   ${lzlib_SOURCE_DIR}/lzlib.c
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
-target_include_directories(wowless PRIVATE ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR})
-target_link_libraries(wowless expat liblua lyaml pthread yaml zlibstatic)
+target_link_libraries(wowless expat liblua pthread yaml zlibstatic)
 
 if(EMSCRIPTEN)
-  target_link_options(wowless PRIVATE -sALLOW_MEMORY_GROWTH)
+  target_link_options(wowless PRIVATE -sALLOW_MEMORY_GROWTH -sTOTAL_STACK=1MB)
   target_link_libraries(wowless nodefs.js noderawfs.js)
 endif()

@@ -21,16 +21,12 @@ type:
                     type:
                       oneof:
                       - literal: boolean
-                      - literal: font
-                      - literal: fontstring
-                      - literal: frame
                       - literal: hlist
                       - literal: number
                       - literal: string
                       - literal: table
-                      - literal: texture
-                      - literal: uiobject
                       - ref: stringenum
+                      - ref: uiobject
         inherits:
           type:
             mapof:
@@ -46,6 +42,7 @@ type:
                 oneof:
                 - record:
                     getter:
+                      required: true
                       type:
                         sequenceof:
                           record:
@@ -56,20 +53,41 @@ type:
                     impl:
                       type:
                         ref: uiobjectimpl
-                - record:
+                    inputs:
+                      type:
+                        sequenceof:
+                          record:
+                            default:
+                              type:
+                                schema: any
+                            name:
+                              type: string
+                            nilable:
+                              type: boolean
+                            type:
+                              required: true
+                              type:
+                                schema: type
+                    mayreturnnothing:
+                      type: boolean
                     outputs:
                       type:
                         sequenceof:
                           record:
                             name:
                               type: string
+                            nilable:
+                              type: boolean
+                            stub:
+                              type:
+                                schema: any
                             type:
                               required: true
                               type:
-                                oneof:
-                                - literal: number
+                                schema: type
                 - record:
                     setter:
+                      required: true
                       type:
                         sequenceof:
                           record:
@@ -83,6 +101,8 @@ type:
         singleton:
           type: boolean
         virtual:
+          type: boolean
+        warner:
           type: boolean
         zombie:
           type: boolean

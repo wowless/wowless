@@ -11,8 +11,8 @@ else
   tbl, name, fn = env, arg1, arg2
 end
 local oldfn = tbl[name]
-tbl[name] = function(...)
+tbl[name] = debug.newcfunction(function(...)
   local t, n = returner(oldfn(...))
   fn(...)
   return unpack(t, 1, n)
-end
+end)

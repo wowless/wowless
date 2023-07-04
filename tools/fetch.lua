@@ -65,23 +65,28 @@ end)()
 
 local processFile = (function()
   local lxp = require('lxp')
-  local function doProcessFile(fn)
+  local function doProcessFile(fn, root)
     local content = handle:readFile(fn)
-    if content then
-      save(fn, content)
-      if fn:sub(-4) == '.xml' then
-        local parser = lxp.new({
-          StartElement = function(_, name, attrs)
-            local lname = string.lower(name)
-            if (lname == 'include' or lname == 'script') and attrs.file then
-              doProcessFile(joinRelative(fn, attrs.file))
-            end
-          end,
-        })
-        parser:parse(content)
-        parser:close()
-      end
+    if not content then
+      return false
     end
+    save(fn, content)
+    if fn:sub(-4) == '.xml' then
+      local parser = lxp.new({
+        StartElement = function(_, name, attrs)
+          local lname = string.lower(name)
+          if (lname == 'include' or lname == 'script') and attrs.file then
+            if doProcessFile(joinRelative(fn, attrs.file), root) then
+              return true
+            end
+            return root and doProcessFile(normalizePath(path.join(root, attrs.file)), root)
+          end
+        end,
+      })
+      parser:parse(content)
+      parser:close()
+    end
+    return true
   end
   return doProcessFile
 end)()
@@ -98,7 +103,7 @@ local function processTocDir(dir)
     save(tocName, tocContent)
     for line in tocContent:gmatch('[^\r\n]+') do
       if line:sub(1, 1) ~= '#' then
-        processFile(joinRelative(tocName, line:gsub('%s*$', '')))
+        processFile(joinRelative(tocName, line:gsub('%s*$', '')), dir)
       end
     end
   end

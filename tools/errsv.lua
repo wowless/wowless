@@ -41,7 +41,7 @@ local getPatternValue = (function()
       value = tostring,
     },
     {
-      pattern = ': missing, has value (%d+)$',
+      pattern = ': missing, has value (-?%d+)$',
       value = mustnumber,
     },
     {

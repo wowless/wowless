@@ -12,7 +12,6 @@ local anchorTypes = {
   ANCHOR_TOPRIGHT = true,
 }
 return (function(self, owner, anchorType)
-  assert(owner)
-  self.tooltipOwner = api.UserData(owner)
+  self.tooltipOwner = owner
   self.tooltipAnchorType = anchorTypes[anchorType] and anchorType or 'ANCHOR_LEFT'
 end)(...)

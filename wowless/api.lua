@@ -18,7 +18,9 @@ local function new(log, maxErrors, product)
 
   local function InheritsFrom(a, b)
     local t = uiobjectTypes[a]
-    assert(t, 'unknown type ' .. a)
+    if not t then
+      error('unknown type ' .. a)
+    end
     return t.isa[b]
   end
 
@@ -164,10 +166,10 @@ local function new(log, maxErrors, product)
     elseif type(objnamearg) == 'number' then
       objname = tostring(objnamearg)
     end
-    assert(typename, 'must specify type for ' .. tostring(objname))
     local objtype = uiobjectTypes[typename]
-    assert(objtype, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
-    assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
+    if not objtype then
+      error('unknown type ' .. tostring(typename) .. ' for ' .. tostring(objname))
+    end
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
     local objp = newproxy()
     local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
@@ -224,7 +226,7 @@ local function new(log, maxErrors, product)
     if objtype.zombie then
       setmetatable(obj, nil)
     end
-    return obj
+    return ud
   end
 
   local function SetScript(obj, name, bindingType, script)
@@ -260,7 +262,7 @@ local function new(log, maxErrors, product)
   local function CreateFrame(type, name, parent, templateNames, id)
     local ltype = string.lower(type)
     if not IsIntrinsicType(ltype) or not InheritsFrom(ltype, 'frame') then
-      if not uiobjectTypes[ltype] or ltype == 'texture' or ltype == 'line' or ltype == 'fontstring' then
+      if not uiobjectTypes[ltype] or uiobjectTypes[ltype].warner then
         SendEvent('LUA_WARNING', 0, 'Unknown frame type: ' .. type)
       end
       error('CreateFrame: Unknown frame type \'' .. type .. '\'')
@@ -271,7 +273,7 @@ local function new(log, maxErrors, product)
       assert(template, 'unknown template ' .. templateName)
       table.insert(tmpls, template)
     end
-    return CreateUIObject(ltype, name, parent and UserData(parent), nil, tmpls, id)
+    return CreateUIObject(ltype, name, parent, nil, tmpls, id)
   end
 
   local function NextFrame(elapsed)
