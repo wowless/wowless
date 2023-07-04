@@ -44,6 +44,7 @@ type:
                       - literal: number
                       - literal: string
                       - literal: stringlist
+                      - ref: stringenum
         contents:
           type:
             oneof:
