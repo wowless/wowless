@@ -8165,6 +8165,7 @@ C_WowTokenSecure.RedeemTokenConfirm: {}
 C_WowTokenSecure.SetBalanceAmountString: {}
 C_WowTokenSecure.WillKickFromWorld: {}
 C_XMLUtil.GetTemplateInfo:
+  impl: C_XMLUtil.GetTemplateInfo
   inputs:
   - name: name
     type: string
