@@ -1280,7 +1280,7 @@ Texture:
     alphamode:
       impl:
         method: SetBlendMode
-      type: string
+      type: BlendMode
     atlas:
       impl:
         method: SetAtlas
