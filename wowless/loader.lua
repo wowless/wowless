@@ -338,7 +338,7 @@ local function loader(api, cfg)
     end,
   }
 
-  local function forAddon(addonName, addonEnv)
+  local function forAddon(addonName, addonEnv, addonRoot)
     local loadFile
 
     local xmlattrlang = {
@@ -389,7 +389,7 @@ local function loader(api, cfg)
         if attr.impl == 'internal' then
           xmlattrlang[attr.name](ctx, obj, v)
         elseif attr.impl == 'loadfile' then
-          loadFile(path.join(dir, v))
+          loadFile(path.join(dir, v), nil, path.join(addonRoot, v))
         elseif attr.impl.scope then
           return { [attr.impl.scope] = v }
         elseif attr.impl.method then
@@ -580,7 +580,7 @@ local function loader(api, cfg)
       end)
     end
 
-    function loadFile(filename, closureTaint)
+    function loadFile(filename, closureTaint, secondaryFileName)
       filename = path.normalize(filename)
       api.CallSafely(function()
         api.log(2, 'loading file %s', filename)
@@ -593,6 +593,9 @@ local function loader(api, cfg)
           error('unknown file type ' .. filename)
         end
         local success, content = pcall(readFile, filename)
+        if not success and secondaryFileName then
+          success, content = pcall(readFile, secondaryFileName)
+        end
         if success then
           -- TODO only pass SecureCapsuleGet on signed addons
           loadFn(filename, content, nil, closureTaint, addonName, addonEnv, api.env.SecureCapsuleGet)
@@ -701,6 +704,7 @@ local function loader(api, cfg)
         if addon then
           addon.name = name
           addon.fdid = fdid
+          addon.dir = dir
           addonData[name:lower()] = addon
           table.insert(addonData, addon)
         end
@@ -752,7 +756,7 @@ local function loader(api, cfg)
         end
       end
       api.log(1, 'loading addon files for %s', addonName)
-      local loadFile = forAddon(addonName, {})
+      local loadFile = forAddon(addonName, {}, toc.dir)
       for _, file in ipairs(toc.files) do
         loadFile(file)
       end
@@ -778,11 +782,12 @@ local function loader(api, cfg)
   end
 
   local function loadFrameXml()
-    local loadFile = forAddon()
+    local tocdir = path.join(rootDir, 'Interface', 'FrameXML')
+    local loadFile = forAddon(nil, nil, tocdir)
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
       api.env[tag] = text
     end
-    for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do
+    for _, file in ipairs(resolveTocDir(tocdir).files) do
       loadFile(file)
     end
     loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
