@@ -891,6 +891,15 @@ Enum:
     MaxValue: 6
     MinValue: 0
     NumValues: 7
+  CameraModeAspectRatio:
+    Cinemascope_2_Dot_4_X_1: 3
+    Default: 0
+    HighDefinition_16_X_9: 2
+    LegacyLetterbox: 1
+  CameraModeAspectRatioMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   CharacterServiceInfoFlag:
     RestrictToRecommendedSpecs: 1
   CharacterServiceInfoFlagMeta:
@@ -989,17 +998,6 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
-  CinematicAspectRatio:
-    Cinemascope2Dot4X_1: 5
-    Hd_16_X_9: 4
-    Legacy_16_X_9: 1
-    NoAspectRatioSpecified: 0
-    Sd_4_X_3: 3
-    Square_1_X_1: 2
-  CinematicAspectRatioMeta:
-    MaxValue: 5
-    MinValue: 0
-    NumValues: 6
   ClientPlatformType:
     Macintosh: 1
     Windows: 0

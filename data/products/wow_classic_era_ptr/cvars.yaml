@@ -1118,7 +1118,7 @@ TargetPriorityCombatLock: '1'
 TargetPriorityCombatLockContextualRelaxation: '1'
 TargetPriorityCombatLockHighlight: '0'
 TargetPriorityPvp: '1'
-telemetryTargetPackage: Blizzard.Telemetry.Wow_Classic
+telemetryTargetPackage: Blizzard.Telemetry.Wow_Classic_PTR
 teleportMaxNoLoadDist: '200'
 terrainLodDist: '500'
 TerrainLodDiv: '768'

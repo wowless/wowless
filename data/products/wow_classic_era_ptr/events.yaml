@@ -2982,7 +2982,7 @@ CINEMATIC_START:
     type: boolean
   - name: forcedAspectRatio
     type:
-      enum: CinematicAspectRatio
+      enum: CameraModeAspectRatio
 CINEMATIC_STOP:
   payload: {}
 CLASS_TRIAL_TIMER_START:
