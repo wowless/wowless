@@ -38,7 +38,6 @@ AddChatWindowMessages:
     type: string
   outputs: {}
 addframetext: {}
-AddTrackedAchievement: {}
 AddTradeMoney: {}
 Ambiguate:
   inputs:
@@ -284,6 +283,13 @@ C_AchievementInfo.SetPortraitTexture:
   inputs:
   - name: textureObject
     type: Texture
+  outputs: {}
+C_ActionBar.EnableActionRangeCheck:
+  inputs:
+  - name: actionID
+    type: number
+  - name: enable
+    type: boolean
   outputs: {}
 C_ActionBar.FindFlyoutActionButtons:
   inputs:
@@ -3062,13 +3068,6 @@ C_CampaignInfo.SortAsNormalQuest:
   outputs:
   - name: sortAsNormalQuest
     type: boolean
-C_CampaignInfo.UsesNormalQuestIcons:
-  inputs:
-  - name: campaignID
-    type: number
-  outputs:
-  - name: useNormalQuestIcons
-    type: boolean
 C_ChallengeMode.CanUseKeystoneInCurrentMap:
   inputs:
   - name: itemLocation
@@ -3296,6 +3295,7 @@ C_CharacterServices.GetCharacterServiceDisplayInfo: {}
 C_CharacterServices.GetVASDistributions: {}
 C_CharacterServices.HasRequiredBoostForClassTrial: {}
 C_CharacterServices.HasRequiredBoostForUnrevoke: {}
+C_CharacterServices.RPEResetCharacter: {}
 C_CharacterServices.SetAutomaticBoost: {}
 C_CharacterServices.SetAutomaticBoostCharacter: {}
 C_CharacterServicesPublic.ShouldSeeControlPopup: {}
@@ -5375,6 +5375,34 @@ C_Commentator.GetPlayerFlagInfoByUnit:
   outputs:
   - name: hasFlag
     type: boolean
+C_Commentator.GetPlayerItemCooldownInfo:
+  inputs:
+  - name: teamIndex
+    type: number
+  - name: playerIndex
+    type: number
+  - name: itemID
+    type: number
+  outputs:
+  - name: startTime
+    type: number
+  - name: duration
+    type: number
+  - name: enable
+    type: boolean
+C_Commentator.GetPlayerItemCooldownInfoByUnit:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: itemID
+    type: number
+  outputs:
+  - name: startTime
+    type: number
+  - name: duration
+    type: number
+  - name: enable
+    type: boolean
 C_Commentator.GetPlayerOverrideName:
   inputs:
   - name: originalName
@@ -5653,6 +5681,12 @@ C_Commentator.SetBlocklistedCooldowns:
     type:
       arrayof: number
   outputs: {}
+C_Commentator.SetBlocklistedItemCooldowns:
+  inputs:
+  - name: itemIDs
+    type:
+      arrayof: number
+  outputs: {}
 C_Commentator.SetCamera:
   inputs:
   - name: xPos
@@ -5789,6 +5823,12 @@ C_Commentator.SetRequestedDefensiveCooldowns:
   - name: specID
     type: number
   - name: spellIDs
+    type:
+      arrayof: number
+  outputs: {}
+C_Commentator.SetRequestedItemCooldowns:
+  inputs:
+  - name: itemIDs
     type:
       arrayof: number
   outputs: {}
@@ -6313,6 +6353,203 @@ C_Container.UseHearthstone:
   outputs:
   - name: used
     type: boolean
+C_ContentTracking.GetBestMapForTrackable:
+  inputs:
+  - name: trackableType
+    type:
+      enum: ContentTrackingType
+  - name: trackableID
+    type: number
+  - default: false
+    name: ignoreWaypoint
+    type: boolean
+  outputs:
+  - name: result
+    type:
+      enum: ContentTrackingResult
+  - name: mapID
+    nilable: true
+    type: number
+C_ContentTracking.GetCollectableSourceTrackingEnabled:
+  inputs: {}
+  outputs:
+  - name: isEnabled
+    type: boolean
+C_ContentTracking.GetCollectableSourceTypes:
+  inputs: {}
+  outputs:
+  - name: collectableSourceTypes
+    type:
+      arrayof:
+        enum: ContentTrackingType
+C_ContentTracking.GetCurrentTrackingTarget:
+  inputs:
+  - name: type
+    type:
+      enum: ContentTrackingType
+  - name: id
+    type: number
+  outputs:
+  - name: targetType
+    type:
+      enum: ContentTrackingTargetType
+  - name: targetID
+    type: number
+C_ContentTracking.GetEncounterTrackingInfo:
+  inputs:
+  - name: journalEncounterID
+    type: number
+  outputs:
+  - name: trackingInfo
+    type:
+      structure: EncounterTrackingInfo
+C_ContentTracking.GetNextWaypointForTrackable:
+  inputs:
+  - name: trackableType
+    type:
+      enum: ContentTrackingType
+  - name: trackableID
+    type: number
+  - name: uiMapID
+    type: number
+  outputs:
+  - name: result
+    type:
+      enum: ContentTrackingResult
+  - name: mapInfo
+    nilable: true
+    type:
+      structure: ContentTrackingMapInfo
+C_ContentTracking.GetObjectiveText:
+  inputs:
+  - name: targetType
+    type:
+      enum: ContentTrackingTargetType
+  - name: targetID
+    type: number
+  - default: true
+    name: includeHyperlinks
+    type: boolean
+  outputs:
+  - name: objectiveText
+    type: string
+C_ContentTracking.GetTitle:
+  inputs:
+  - name: trackableType
+    type:
+      enum: ContentTrackingType
+  - name: trackableID
+    type: number
+  outputs:
+  - name: title
+    type: string
+C_ContentTracking.GetTrackablesOnMap:
+  inputs:
+  - name: trackableType
+    type:
+      enum: ContentTrackingType
+  - name: uiMapID
+    type: number
+  outputs:
+  - name: result
+    type:
+      enum: ContentTrackingResult
+  - name: trackableMapInfos
+    type:
+      arrayof:
+        structure: ContentTrackingMapInfo
+C_ContentTracking.GetTrackedIDs:
+  inputs:
+  - name: trackableType
+    type:
+      enum: ContentTrackingType
+  outputs:
+  - name: entryIDs
+    type:
+      arrayof: number
+C_ContentTracking.GetVendorTrackingInfo:
+  inputs:
+  - name: collectableEntryID
+    type: number
+  outputs:
+  - name: vendorTrackingInfo
+    type:
+      structure: VendorTrackingInfo
+C_ContentTracking.GetWaypointText:
+  inputs:
+  - name: trackableType
+    type:
+      enum: ContentTrackingType
+  - name: trackableID
+    type: number
+  outputs:
+  - name: waypointText
+    type: string
+C_ContentTracking.IsNavigable:
+  inputs:
+  - name: trackableType
+    type:
+      enum: ContentTrackingType
+  - name: trackableID
+    type: number
+  outputs:
+  - name: result
+    type:
+      enum: ContentTrackingResult
+  - name: isNavigable
+    type: boolean
+C_ContentTracking.IsTrackable:
+  inputs:
+  - name: type
+    type:
+      enum: ContentTrackingType
+  - name: id
+    type: number
+  outputs:
+  - name: isTrackable
+    type: boolean
+C_ContentTracking.IsTracking:
+  inputs:
+  - name: type
+    type:
+      enum: ContentTrackingType
+  - name: id
+    type: number
+  outputs:
+  - name: isTracking
+    type: boolean
+C_ContentTracking.StartTracking:
+  inputs:
+  - name: type
+    type:
+      enum: ContentTrackingType
+  - name: id
+    type: number
+  outputs:
+  - name: error
+    nilable: true
+    type:
+      enum: ContentTrackingError
+C_ContentTracking.StopTracking:
+  inputs:
+  - name: type
+    type:
+      enum: ContentTrackingType
+  - name: id
+    type: number
+  outputs: {}
+C_ContentTracking.ToggleTracking:
+  inputs:
+  - name: type
+    type:
+      enum: ContentTrackingType
+  - name: id
+    type: number
+  outputs:
+  - name: error
+    nilable: true
+    type:
+      enum: ContentTrackingError
 C_ContributionCollector.Close:
   inputs: {}
   outputs: {}
@@ -7269,6 +7506,20 @@ C_EncounterJournal.GetDungeonEntrancesForMap:
     type:
       arrayof:
         structure: C_EncounterJournal.DungeonEntranceMapInfo
+C_EncounterJournal.GetEncounterJournalLink:
+  inputs:
+  - name: linkType
+    type:
+      enum: JournalLinkTypes
+  - name: ID
+    type: number
+  - name: displayText
+    type: string
+  - name: difficultyID
+    type: number
+  outputs:
+  - name: link
+    type: string
 C_EncounterJournal.GetEncountersOnMap:
   inputs:
   - name: uiMapID
@@ -7278,6 +7529,14 @@ C_EncounterJournal.GetEncountersOnMap:
     type:
       arrayof:
         structure: C_EncounterJournal.EncounterJournalMapEncounterInfo
+C_EncounterJournal.GetInstanceForGameMap:
+  inputs:
+  - name: mapID
+    type: number
+  outputs:
+  - name: journalInstanceID
+    nilable: true
+    type: number
 C_EncounterJournal.GetLootInfo:
   inputs:
   - name: id
@@ -10196,6 +10455,14 @@ C_LFGList.ValidateRequiredPvpRatingForActivity:
   outputs:
   - name: passes
     type: boolean
+C_Loot.GetLootRollDuration:
+  inputs:
+  - name: rollID
+    type: number
+  outputs:
+  - name: duration
+    nilable: true
+    type: number
 C_Loot.IsLegacyLootModeEnabled:
   inputs: {}
   outputs:
@@ -10797,6 +11064,11 @@ C_MerchantFrame.GetBuybackItemID:
     type: number
   outputs:
   - name: buybackItemID
+    type: number
+C_MerchantFrame.GetNumJunkItems:
+  inputs: {}
+  outputs:
+  - name: numJunkItems
     type: number
 C_MerchantFrame.IsMerchantItemRefundable:
   inputs:
@@ -12220,6 +12492,14 @@ C_PetInfo.GetPetTamersForMap:
     type:
       arrayof:
         structure: C_PetInfo.PetTamerMapInfo
+C_PetInfo.GetSpellForPetAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: spellID
+    nilable: true
+    type: number
 C_PetJournal.CagePetByID: {}
 C_PetJournal.ClearFanfare: {}
 C_PetJournal.ClearRecentFanfares:
@@ -13085,6 +13365,10 @@ C_PvP.GetArenaRewards:
     type:
       arrayof:
         structure: C_PvP.BattlefieldCurrencyReward
+  - name: roleShortageBonus
+    nilable: true
+    type:
+      structure: C_PvP.RoleShortageReward
 C_PvP.GetArenaSkirmishRewards:
   inputs: {}
   outputs:
@@ -13102,6 +13386,10 @@ C_PvP.GetArenaSkirmishRewards:
     type:
       arrayof:
         structure: C_PvP.BattlefieldCurrencyReward
+  - name: roleShortageBonus
+    nilable: true
+    type:
+      structure: C_PvP.RoleShortageReward
 C_PvP.GetAssignedSpecForBattlefieldQueue:
   inputs:
   - name: queueID
@@ -13171,6 +13459,10 @@ C_PvP.GetBrawlRewards:
     type:
       arrayof:
         structure: C_PvP.BattlefieldCurrencyReward
+  - name: roleShortageBonus
+    nilable: true
+    type:
+      structure: C_PvP.RoleShortageReward
   - name: hasWon
     type: boolean
 C_PvP.GetCustomVictoryStatID:
@@ -13323,6 +13615,10 @@ C_PvP.GetRandomBGRewards:
     type:
       arrayof:
         structure: C_PvP.BattlefieldCurrencyReward
+  - name: roleShortageBonus
+    nilable: true
+    type:
+      structure: C_PvP.RoleShortageReward
 C_PvP.GetRandomEpicBGInfo:
   inputs: {}
   outputs:
@@ -13346,6 +13642,10 @@ C_PvP.GetRandomEpicBGRewards:
     type:
       arrayof:
         structure: C_PvP.BattlefieldCurrencyReward
+  - name: roleShortageBonus
+    nilable: true
+    type:
+      structure: C_PvP.RoleShortageReward
 C_PvP.GetRatedBGRewards:
   inputs: {}
   outputs:
@@ -13363,6 +13663,10 @@ C_PvP.GetRatedBGRewards:
     type:
       arrayof:
         structure: C_PvP.BattlefieldCurrencyReward
+  - name: roleShortageBonus
+    nilable: true
+    type:
+      structure: C_PvP.RoleShortageReward
 C_PvP.GetRatedSoloShuffleMinItemLevel:
   inputs: {}
   outputs:
@@ -13385,6 +13689,10 @@ C_PvP.GetRatedSoloShuffleRewards:
     type:
       arrayof:
         structure: C_PvP.BattlefieldCurrencyReward
+  - name: roleShortageBonus
+    nilable: true
+    type:
+      structure: C_PvP.RoleShortageReward
 C_PvP.GetRewardItemLevelsByTierEnum:
   inputs:
   - name: pvpTierEnum
@@ -13516,6 +13824,16 @@ C_PvP.IsInRatedMatchWithDeserterPenalty:
   inputs: {}
   outputs:
   - name: isInRatedMatchWithDeserterPenalty
+    type: boolean
+C_PvP.IsMatchActive:
+  inputs: {}
+  outputs:
+  - name: isActive
+    type: boolean
+C_PvP.IsMatchComplete:
+  inputs: {}
+  outputs:
+  - name: isComplete
     type: boolean
 C_PvP.IsMatchConsideredArena:
   inputs: {}
@@ -13650,6 +13968,14 @@ C_QuestLine.GetAvailableQuestLines:
     type:
       arrayof:
         structure: C_QuestLine.QuestLineInfo
+C_QuestLine.GetForceVisibleQuests:
+  inputs:
+  - name: uiMapID
+    type: number
+  outputs:
+  - name: questIDs
+    type:
+      arrayof: number
 C_QuestLine.GetQuestLineInfo:
   inputs:
   - name: questID
@@ -14067,6 +14393,13 @@ C_QuestLog.IsFailed:
     type: number
   outputs:
   - name: isFailed
+    type: boolean
+C_QuestLog.IsImportantQuest:
+  inputs:
+  - name: questID
+    type: number
+  outputs:
+  - name: isImportant
     type: boolean
 C_QuestLog.IsLegendaryQuest:
   inputs:
@@ -15141,6 +15474,14 @@ C_SpecializationInfo.GetAllSelectedPvpTalentIDs:
   - name: selectedPvpTalentIDs
     type:
       arrayof: number
+C_SpecializationInfo.GetClassIDFromSpecID:
+  inputs:
+  - name: specID
+    type: number
+  outputs:
+  - name: classID
+    nilable: true
+    type: number
 C_SpecializationInfo.GetInspectSelectedPvpTalent:
   inputs:
   - name: inspectedUnit
@@ -15468,6 +15809,9 @@ C_SummonInfo.IsSummonSkippingStartExperience:
   outputs:
   - name: isSummonSkippingStartExperience
     type: boolean
+C_SuperTrack.ClearSuperTrackedContent:
+  inputs: {}
+  outputs: {}
 C_SuperTrack.GetHighestPrioritySuperTrackingType:
   inputs: {}
   outputs:
@@ -15475,6 +15819,14 @@ C_SuperTrack.GetHighestPrioritySuperTrackingType:
     nilable: true
     type:
       enum: SuperTrackingType
+C_SuperTrack.GetSuperTrackedContent:
+  inputs: {}
+  outputs:
+  - name: trackableType
+    type:
+      enum: ContentTrackingType
+  - name: trackableID
+    type: number
 C_SuperTrack.GetSuperTrackedQuestID:
   inputs: {}
   outputs:
@@ -15483,6 +15835,11 @@ C_SuperTrack.GetSuperTrackedQuestID:
     stub: 22
     type: number
 C_SuperTrack.IsSuperTrackingAnything:
+  inputs: {}
+  outputs:
+  - name: isSuperTracking
+    type: boolean
+C_SuperTrack.IsSuperTrackingContent:
   inputs: {}
   outputs:
   - name: isSuperTracking
@@ -15502,6 +15859,14 @@ C_SuperTrack.IsSuperTrackingUserWaypoint:
   outputs:
   - name: isSuperTracking
     type: boolean
+C_SuperTrack.SetSuperTrackedContent:
+  inputs:
+  - name: trackableType
+    type:
+      enum: ContentTrackingType
+  - name: trackableID
+    type: number
+  outputs: {}
 C_SuperTrack.SetSuperTrackedQuestID:
   inputs:
   - name: questID
@@ -17335,6 +17700,11 @@ C_TradeSkillUI.IsEnchantTargetValid:
     type: number
   - name: itemGUID
     type: string
+  - name: craftingReagents
+    nilable: true
+    type:
+      arrayof:
+        structure: CraftingReagentInfo
   outputs:
   - name: valid
     type: boolean
@@ -21459,14 +21829,6 @@ GetChatWindowMessages:
     type: number
 GetChatWindowSavedDimensions: {}
 GetChatWindowSavedPosition: {}
-GetClassIDFromSpecID:
-  inputs:
-  - name: specID
-    type: number
-  outputs:
-  - name: classID
-    nilable: true
-    type: number
 GetClassInfo:
   impl: GetClassInfo
   inputs:
@@ -23210,7 +23572,6 @@ GetNumSubgroupMembers:
 GetNumTitles:
   outputs:
   - type: number
-GetNumTrackedAchievements: {}
 GetNumTrainerServices:
   inputs: {}
   outputs:
@@ -24297,7 +24658,6 @@ GetTotalAchievementPoints:
 GetTotemCannotDismiss: {}
 GetTotemInfo: {}
 GetTotemTimeLeft: {}
-GetTrackedAchievements: {}
 GetTradePlayerItemInfo:
   inputs:
   - name: index
@@ -25170,7 +25530,6 @@ IsTestBuild:
     type: boolean
 IsThreatWarningEnabled: {}
 IsTitleKnown: {}
-IsTrackedAchievement: {}
 IsTradeskillTrainer:
   inputs: {}
   outputs:
@@ -25656,7 +26015,6 @@ RemoveChatWindowMessages: {}
 RemoveItemFromArtifact: {}
 RemovePvpTalent: {}
 RemoveTalent: {}
-RemoveTrackedAchievement: {}
 RenamePetition: {}
 RepairAllItems: {}
 ReplaceEnchant: {}
@@ -25669,7 +26027,6 @@ RepopMe:
 ReportBug: {}
 ReportPlayerIsPVPAFK: {}
 ReportSuggestion: {}
-RequestArtifactCompletionHistory: {}
 RequestBattlefieldScoreData: {}
 RequestBattlegroundInstanceInfo: {}
 RequestBottomLeftActionBar: {}
@@ -26530,7 +26887,15 @@ UnitDamage:
   - type: number
 UnitDebuff: {}
 UnitDetailedThreatSituation: {}
-UnitDistanceSquared: {}
+UnitDistanceSquared:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: distance
+    type: number
+  - name: checkedDistance
+    type: boolean
 UnitEffectiveLevel:
   inputs:
   - type: string
@@ -27187,6 +27552,7 @@ UpdateAddOnMemoryUsage:
   inputs: {}
   outputs: {}
 UpdateInventoryAlertStatus: {}
+UpdateUIParentPosition: {}
 UpdateWarGamesList: {}
 UpdateWindow: {}
 UseAction:
