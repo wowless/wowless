@@ -11074,9 +11074,6 @@ C_MerchantFrame.IsMerchantItemRefundable:
   outputs:
   - name: refundable
     type: boolean
-C_MerchantFrame.SellAllJunkItems:
-  inputs: {}
-  outputs: {}
 C_Minimap.CanTrackBattlePets:
   inputs: {}
   outputs:
