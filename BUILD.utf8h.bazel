@@ -1,0 +1,5 @@
+cc_library(
+    name = "utf8h",
+    visibility = ["//visibility:public"],
+    hdrs = ["utf8.h"],
+)

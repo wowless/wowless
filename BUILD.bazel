@@ -1,0 +1,8 @@
+cc_binary(
+    name = "wowless",
+    srcs = [
+        "main.c",
+        "wowless/ext.c",
+    ],
+    deps = ["@elune//:liblua"],
+)

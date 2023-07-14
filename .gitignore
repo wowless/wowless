@@ -2,6 +2,10 @@
 /.idea/
 /.ninja_deps
 /.ninja_log
+/bazel-bin
+/bazel-out
+/bazel-testlogs
+/bazel-wowless
 /build/
 /build.ninja
 /cache

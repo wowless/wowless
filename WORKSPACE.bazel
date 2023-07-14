@@ -1,0 +1,15 @@
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+git_repository(
+    name = "elune",
+    commit = "f051f75a3e963130c2d1ad98f56868bfc6b2798d",
+    remote = "https://github.com/meorawr/elune",
+    build_file = "@//:BUILD.elune.bazel",
+)
+
+git_repository(
+    name = "utf8h",
+    commit = "ce48f0eda6cac8f365837edaf8298ad5c03f7f2e",
+    remote = "https://github.com/sheredom/utf8.h",
+    build_file = "@//:BUILD.utf8h.bazel",
+)
