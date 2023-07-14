@@ -8,6 +8,7 @@ cc_binary(
         "@elune//:liblua",
         "@lsqlite3",
         "@luafilesystem",
+        "@lyaml",
         "@lzlib",
     ],
 )

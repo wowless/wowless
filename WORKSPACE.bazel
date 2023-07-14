@@ -24,6 +24,13 @@ git_repository(
 )
 
 git_repository(
+    name = "lyaml",
+    commit = "1afb1f870ae486097f79586502f4254d6074afcb",
+    remote = "https://github.com/gvvaughan/lyaml.git",
+    build_file = "@//:bazel/lyaml.bazel",
+)
+
+git_repository(
     name = "lzlib",
     commit = "79329a07d8f79c19eadd7ea2752b4c4e1574b015",
     remote = "https://github.com/luadist/lzlib",

@@ -1,0 +1,12 @@
+cc_library(
+    name = "lyaml",
+    visibility = ["//visibility:public"],
+    srcs = [
+        "ext/yaml/emitter.c",
+        "ext/yaml/lyaml.h",
+        "ext/yaml/parser.c",
+        "ext/yaml/scanner.c",
+        "ext/yaml/yaml.c",
+    ],
+    local_defines = ["VERSION=\\\"wowless\\\""],
+)
