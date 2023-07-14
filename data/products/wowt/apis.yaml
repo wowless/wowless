@@ -12761,11 +12761,13 @@ C_Ping.GetDefaultPingOptions:
       arrayof:
         structure: PingTypeInfo
 C_Ping.GetTargetPingReceiver:
+  impl: _ReturnNothing
   inputs:
   - name: mousePosX
     type: number
   - name: mousePosY
     type: number
+  mayreturnnothing: true
   outputs:
   - name: frame
     type: table
