@@ -51,3 +51,10 @@ git_repository(
     remote = "https://github.com/sheredom/utf8.h",
     build_file = "@//:bazel/utf8h.bazel",
 )
+
+git_repository(
+    name = "yaml",
+    commit = "2c891fc7a770e8ba2fec34fc6b545c672beb37e6",
+    remote = "https://github.com/yaml/libyaml.git",
+    build_file = "@//:bazel/yaml.bazel",
+)
