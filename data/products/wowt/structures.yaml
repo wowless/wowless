@@ -927,12 +927,16 @@ C_CampaignInfo.CampaignInfo:
   fields:
     description:
       type: string
+    isContainerCampaign:
+      type: boolean
     isWarCampaign:
       type: boolean
     name:
       type: string
     uiTextureKit:
       type: string
+    usesNormalQuestIcons:
+      type: boolean
 C_ChallengeMode.ChallengeModeCompletionMemberInfo:
   fields:
     memberGUID:
@@ -977,6 +981,10 @@ C_ChromieTime.ChromieTimeExpansionInfo:
       type: string
     previewAtlas:
       type: string
+    recommended:
+      type: boolean
+    sortPriority:
+      type: number
 C_ClassTalents.ImportLoadoutEntryInfo:
   fields:
     nodeID:
@@ -1571,6 +1579,8 @@ C_Container.ContainerItemInfo:
       type: boolean
     itemID:
       type: number
+    itemName:
+      type: string
     quality:
       nilable: true
       type:
@@ -2876,6 +2886,8 @@ C_GossipInfo.GossipQuestUIInfo:
       type: boolean
     isIgnored:
       type: boolean
+    isImportant:
+      type: boolean
     isLegendary:
       type: boolean
     isTrivial:
@@ -3425,6 +3437,9 @@ C_LoreText.LoreTextEntry:
       type: string
 C_LossOfControl.LossOfControlData:
   fields:
+    auraInstanceID:
+      nilable: true
+      type: number
     displayText:
       type: string
     displayType:
@@ -3902,6 +3917,9 @@ C_PerksActivities.PerksActivityThresholdInfo:
       type: number
 C_PerksProgram.PerksProgramItemDisplayInfo:
   fields:
+    creatureDisplayInfoID:
+      nilable: true
+      type: number
     overrideModelSceneID:
       nilable: true
       type: number
@@ -3943,6 +3961,8 @@ C_PerksProgram.PerksVendorItemInfo:
       type: number
     name:
       type: string
+    pending:
+      type: boolean
     perksVendorCategoryID:
       type: number
     perksVendorItemID:
@@ -4497,6 +4517,15 @@ C_PvP.RatedSoloShuffleSpecStats:
       type: number
     weeklyMostPlayedSpecRounds:
       type: number
+C_PvP.RoleShortageReward:
+  fields:
+    rewardItemID:
+      type: number
+    rewardSpellID:
+      type: number
+    validRoles:
+      type:
+        arrayof: string
 C_QuestInfoSystem.QuestRewardSpellInfo:
   fields:
     garrFollowerID:
@@ -4529,6 +4558,8 @@ C_QuestLine.QuestLineInfo:
     isDaily:
       type: boolean
     isHidden:
+      type: boolean
+    isImportant:
       type: boolean
     isLegendary:
       type: boolean
@@ -4881,6 +4912,8 @@ C_ScenarioInfo.ScenarioInformation:
       type: string
     numStages:
       type: number
+    scenarioID:
+      type: number
     type:
       type: number
     uiTextureKit:
@@ -5211,7 +5244,11 @@ C_SpecializationInfo.PvpTalentSlotInfo:
       type: number
 C_SpellBook.DeadlyDebuffInfo:
   fields:
-    overrideCriticalTimeRemaining:
+    criticalStacks:
+      nilable: true
+      type: number
+    criticalTimeRemainingMs:
+      nilable: true
       type: number
     priority:
       type: number
@@ -7438,6 +7475,8 @@ CharCustomizationCategory:
       type: number
     name:
       type: string
+    needsNativeFormCategory:
+      type: boolean
     options:
       type:
         arrayof:
@@ -7545,6 +7584,33 @@ colorRGBA:
     r:
       type: number
   mixin: ColorMixin
+ContentTrackingMapInfo:
+  fields:
+    targetID:
+      type: number
+    targetType:
+      type:
+        enum: ContentTrackingTargetType
+    trackableID:
+      type: number
+    trackableType:
+      type:
+        enum: ContentTrackingType
+    waypointText:
+      type: string
+    x:
+      type: number
+    y:
+      type: number
+ContextualWorldPingResult:
+  fields:
+    contextualPingType:
+      nilable: true
+      type:
+        enum: PingSubjectType
+    result:
+      type:
+        enum: PingResult
 CorruptionEffectInfo:
   fields:
     description:
@@ -7687,7 +7753,7 @@ CraftingOrderClaimsRemainingInfo:
     claimsRemaining:
       default: 0
       type: number
-    hoursToRecharge:
+    secondsToRecharge:
       nilable: true
       type: number
 CraftingOrderCustomerCategory:
@@ -7915,7 +7981,7 @@ CraftingOrderReagentInfo:
     reagent:
       type:
         structure: CraftingReagentInfo
-    reagentSlot:
+    slotIndex:
       type: number
     source:
       type:
@@ -8053,6 +8119,30 @@ CurrencyCost:
       type: number
     currencyID:
       type: number
+EncounterTrackingInfo:
+  fields:
+    difficultyID:
+      nilable: true
+      type: number
+    encounterName:
+      type: string
+    groupFinderActivityID:
+      nilable: true
+      type: number
+    instanceName:
+      type: string
+    journalEncounterID:
+      nilable: true
+      type: number
+    journalInstanceID:
+      nilable: true
+      type: number
+    lfgDungeonID:
+      nilable: true
+      type: number
+    subText:
+      nilable: true
+      type: string
 ExpansionDisplayInfo:
   fields:
     banner:
@@ -8317,6 +8407,21 @@ NewCraftingOrderInfo:
       type: number
     tipAmount:
       type: number
+PingCooldownInfo:
+  fields:
+    endTimeMs:
+      type: number
+    startTimeMs:
+      type: number
+PingTypeInfo:
+  fields:
+    orderIndex:
+      type: number
+    type:
+      type:
+        enum: PingSubjectType
+    uiTextureKitID:
+      type: string
 PlayerInfoCharacterData:
   fields:
     alternateFormRaceData:
@@ -8765,3 +8870,16 @@ vector3:
     z:
       type: number
   mixin: Vector3DMixin
+VendorTrackingInfo:
+  fields:
+    cost:
+      nilable: true
+      type: number
+    creatureName:
+      type: string
+    currencyType:
+      nilable: true
+      type: number
+    zoneName:
+      nilable: true
+      type: string

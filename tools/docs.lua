@@ -291,8 +291,10 @@ local function rewriteApis()
     nss[split(name) or ''] = true
     if not skip(apis, name) then
       local ns = split(name)
+      local api = apis[name]
       apis[name] = {
         inputs = insig(fn, ns),
+        mayreturnnothing = api and api.mayreturnnothing,
         outputs = outsig(fn, ns),
       }
     end
