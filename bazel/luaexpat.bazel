@@ -1,0 +1,8 @@
+cc_library(
+    name = "luaexpat",
+    visibility = ["//visibility:public"],
+    srcs = [
+        "src/lxplib.c",
+        "src/lxplib.h",
+    ],
+)

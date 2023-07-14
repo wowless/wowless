@@ -17,6 +17,13 @@ http_archive(
 )
 
 git_repository(
+    name = "luaexpat",
+    commit = "90b1af46829ba45a6b772bc66d3355b2e20671b6",
+    remote = "https://github.com/lunarmodules/luaexpat",
+    build_file = "@//:bazel/luaexpat.bazel",
+)
+
+git_repository(
     name = "luafilesystem",
     commit = "7c6e1b013caec0602ca4796df3b1d7253a2dd258",
     remote = "https://github.com/lunarmodules/luafilesystem",
