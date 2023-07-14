@@ -5,7 +5,7 @@ git_repository(
     name = "elune",
     commit = "f051f75a3e963130c2d1ad98f56868bfc6b2798d",
     remote = "https://github.com/meorawr/elune",
-    build_file = "@//:BUILD.elune.bazel",
+    build_file = "@//:bazel/elune.bazel",
 )
 
 http_archive(
@@ -13,21 +13,21 @@ http_archive(
     url = "http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip",
     sha256 = "8c9a722c3d451e7996b8263f4320889f3b27504aeee264ab2dbd2bdfaca08dc7",
     strip_prefix = "lsqlite3_fsl09y",
-    build_file = "@//:BUILD.lsqlite3.bazel",
+    build_file = "@//:bazel/lsqlite3.bazel",
 )
 
 git_repository(
     name = "luafilesystem",
     commit = "7c6e1b013caec0602ca4796df3b1d7253a2dd258",
     remote = "https://github.com/lunarmodules/luafilesystem",
-    build_file = "@//:BUILD.luafilesystem.bazel",
+    build_file = "@//:bazel/luafilesystem.bazel",
 )
 
 git_repository(
     name = "lzlib",
-    tag = "0.4.3",
+    commit = "79329a07d8f79c19eadd7ea2752b4c4e1574b015",
     remote = "https://github.com/luadist/lzlib",
-    build_file = "@//:BUILD.lzlib.bazel",
+    build_file = "@//:bazel/lzlib.bazel",
 )
 
 http_archive(
@@ -35,12 +35,12 @@ http_archive(
     url = "https://www.sqlite.org/2023/sqlite-amalgamation-3410200.zip",
     sha256 = "01df06a84803c1ab4d62c64e995b151b2dbcf5dbc93bbc5eee213cb18225d987",
     strip_prefix = "sqlite-amalgamation-3410200",
-    build_file = "@//:BUILD.sqlite3.bazel",
+    build_file = "@//:bazel/sqlite3.bazel",
 )
 
 git_repository(
     name = "utf8h",
     commit = "ce48f0eda6cac8f365837edaf8298ad5c03f7f2e",
     remote = "https://github.com/sheredom/utf8.h",
-    build_file = "@//:BUILD.utf8h.bazel",
+    build_file = "@//:bazel/utf8h.bazel",
 )
