@@ -8,6 +8,13 @@ git_repository(
 )
 
 git_repository(
+    name = "lzlib",
+    tag = "0.4.3",
+    remote = "https://github.com/luadist/lzlib",
+    build_file = "@//:BUILD.lzlib.bazel",
+)
+
+git_repository(
     name = "utf8h",
     commit = "ce48f0eda6cac8f365837edaf8298ad5c03f7f2e",
     remote = "https://github.com/sheredom/utf8.h",

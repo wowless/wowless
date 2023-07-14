@@ -4,5 +4,8 @@ cc_binary(
         "main.c",
         "wowless/ext.c",
     ],
-    deps = ["@elune//:liblua"],
+    deps = [
+        "@elune//:liblua",
+        "@lzlib",
+    ],
 )

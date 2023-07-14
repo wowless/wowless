@@ -1,0 +1,6 @@
+cc_library(
+    name = "lzlib",
+    visibility = ["//visibility:public"],
+    srcs = ["lzlib.c"],
+    deps = ["@zlib"],
+)
