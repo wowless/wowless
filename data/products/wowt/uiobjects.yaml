@@ -630,6 +630,7 @@ EditBox:
     HighlightText: {}
     Insert:
       impl: EditBox/Insert
+    IsAlphabeticOnly: {}
     IsAutoFocus:
       getter:
       - name: isAutoFocus
@@ -644,10 +645,13 @@ EditBox:
       getter:
       - name: isMultiLine
     IsNumeric: {}
+    IsNumericFullRange: {}
     IsPassword: {}
     IsSecureText:
       getter:
       - name: isSecureText
+    ResetInputMode: {}
+    SetAlphabeticOnly: {}
     SetAltArrowKeyMode: {}
     SetAutoFocus:
       setter:
@@ -676,6 +680,7 @@ EditBox:
       - name: isMultiLine
     SetNumber: {}
     SetNumeric: {}
+    SetNumericFullRange: {}
     SetPassword: {}
     SetSecureText:
       setter:
@@ -911,6 +916,7 @@ Frame:
     Region: {}
     ScriptObject: {}
   methods:
+    AbortDrag: {}
     CanChangeAttribute: {}
     CreateFontString:
       impl: Frame/CreateFontString
@@ -1023,6 +1029,7 @@ Frame:
     HasFixedFrameStrata:
       getter:
       - name: hasFixedFrameStrata
+    InterceptStartDrag: {}
     IsClampedToScreen:
       getter:
       - name: isClampedToScreen
@@ -1578,7 +1585,6 @@ PlayerModel:
     SetBarberShopAlternateForm: {}
     SetCamDistanceScale: {}
     SetCreature: {}
-    SetCustomRace: {}
     SetDisplayInfo: {}
     SetDoBlend: {}
     SetItem: {}
@@ -2183,8 +2189,6 @@ UnitPositionFrame:
     Frame: {}
   methods:
     AddUnit: {}
-    AddUnitAtlas: {}
-    AddUnitFileID: {}
     ClearUnits: {}
     FinalizeUnits: {}
     GetMouseOverUnits: {}

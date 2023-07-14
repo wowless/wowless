@@ -10,22 +10,22 @@ Constants:
     CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_FIRST: 5
     CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_LAST: 8
     NUM_CUSTOM_DISPLAY: 4
+  ContentTrackingConsts:
+    MaxTrackedAchievements: 10
+    MaxTrackedCollectableSources: 15
   CraftingOrderConsts:
     MAX_CRAFTING_ORDER_FAVORITE_RECIPES: 100
   CurrencyConsts:
     ACCOUNT_WIDE_HONOR_CURRENCY_ID: 1585
     ACCOUNT_WIDE_HONOR_LEVEL_CURRENCY_ID: 1586
     ARTIFACT_KNOWLEDGE_CURRENCY_ID: 1171
-    CATALYST_CHARGE_CAP: 6
     CLASSIC_ARENA_POINTS_CURRENCY_ID: 1900
     CLASSIC_HONOR_CURRENCY_ID: 1901
     CONQUEST_ARENA_AND_BG_META_CURRENCY_ID: 483
     CONQUEST_ASHRAN_META_CURRENCY_ID: 692
     CONQUEST_CURRENCY_ID: 1602
     CONQUEST_RATED_BG_META_CURRENCY_ID: 484
-    CURRENCY_ID_ACCOUNT_WIDE_CATALYST_CHARGES: 2166
     CURRENCY_ID_PERKS_PROGRAM_DISPLAY_INFO: 2032
-    CURRENCY_ID_PERSONAL_CATALYST_CHARGES: 2167
     CURRENCY_ID_RENOWN: 1822
     CURRENCY_ID_RENOWN_KYRIAN: 1829
     CURRENCY_ID_RENOWN_NECROLORD: 1832
@@ -1036,6 +1036,15 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  CameraModeAspectRatio:
+    Cinemascope_2_Dot_4_X_1: 3
+    Default: 0
+    HighDefinition_16_X_9: 2
+    LegacyLetterbox: 1
+  CameraModeAspectRatioMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   CampaignState:
     Complete: 1
     InProgress: 2
@@ -1117,12 +1126,13 @@ Enum:
     NumValues: 4
   ChatWhisperTargetStatus:
     CanWhisper: 0
-    Offline: 1
-    WrongFaction: 2
+    CanWhisperGuild: 1
+    Offline: 2
+    WrongFaction: 3
   ChatWhisperTargetStatusMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   ChrCustomizationCategoryFlag:
     UndressModel: 1
   ChrCustomizationCategoryFlagMeta:
@@ -1137,6 +1147,25 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  ChrModelFeatureFlags:
+    DragonCompanions: 8
+    Forms: 2
+    HunterPets: 32
+    Identity: 4
+    Mounts: 16
+    Summons: 1
+  ChrModelFeatureFlagsMeta:
+    MaxValue: 32
+    MinValue: 1
+    NumValues: 6
+  ChrRacesAllianceType:
+    Alliance: 0
+    Horde: 1
+    NeutralOrNpc: 2
+  ChrRacesAllianceTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ClickBindingInteraction:
     OpenContextMenu: 2
     Target: 1
@@ -1148,11 +1177,12 @@ Enum:
     Interaction: 3
     Macro: 2
     None: 0
+    PetAction: 4
     Spell: 1
   ClickBindingTypeMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   ClientPlatformType:
     Macintosh: 1
     Windows: 0
@@ -1466,6 +1496,40 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  ContentTrackingError:
+    AlreadyTracked: 2
+    MaxTracked: 1
+    Untrackable: 0
+  ContentTrackingErrorMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  ContentTrackingResult:
+    DataPending: 1
+    Failure: 2
+    Success: 0
+  ContentTrackingResultMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  ContentTrackingTargetType:
+    Achievement: 2
+    JournalEncounter: 0
+    Profession: 3
+    Quest: 4
+    Vendor: 1
+  ContentTrackingTargetTypeMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
+  ContentTrackingType:
+    Achievement: 2
+    Appearance: 0
+    Mount: 1
+  ContentTrackingTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ContributionAppearanceFlags:
     TooltipUseTimeRemaining: 0
   ContributionAppearanceFlagsMeta:
@@ -1552,10 +1616,11 @@ Enum:
     CraftedResult: 2
     Reagent: 0
     Recraft: 1
+    RemoveReagent: 3
   CraftingOrderItemTypeMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   CraftingOrderReagentSource:
     Any: 0
     Crafter: 2
@@ -1733,13 +1798,15 @@ Enum:
     DeprecatedCurrencyFlag: 2147483648
   CurrencyFlagsB:
     CurrencyBBattlenetVirtualCurrency: 8
+    CurrencyBDontDisplayIfZero: 32
     CurrencyBNoNotificationMailOnOfflineProgress: 4
     CurrencyBShowQuestXPGainInTooltip: 2
     CurrencyBUseTotalEarnedForEarned: 1
+    FutureCurrencyFlag: 16
   CurrencyFlagsBMeta:
-    MaxValue: 8
+    MaxValue: 32
     MinValue: 1
-    NumValues: 4
+    NumValues: 6
   CurrencyFlagsMeta:
     MaxValue: -2147483648
     MinValue: 1
@@ -1831,75 +1898,79 @@ Enum:
     NumValues: 4
   Cursormode:
     AttackCursor: 4
-    AttackErrorCursor: 37
+    AttackErrorCursor: 39
     BuyCursor: 3
-    BuyErrorCursor: 36
+    BuyErrorCursor: 38
     CampaignQuestCursor: 23
-    CampaignQuestErrorCursor: 56
+    CampaignQuestErrorCursor: 58
     CampaignQuestTurninCursor: 24
-    CampaignQuestTurninErrorCursor: 57
+    CampaignQuestTurninErrorCursor: 59
     CastCursor: 2
-    CastErrorCursor: 35
-    CustomCursor: 65
+    CastErrorCursor: 37
+    CustomCursor: 69
     GatherCursor: 13
-    GatherErrorCursor: 46
+    GatherErrorCursor: 48
     InnkeeperCursor: 22
-    InnkeeperErrorCursor: 55
+    InnkeeperErrorCursor: 57
     InspectCursor: 7
-    InspectErrorCursor: 40
+    InspectErrorCursor: 42
     InteractCursor: 5
-    InteractErrorCursor: 38
+    InteractErrorCursor: 40
     ItemCursor: 19
-    ItemErrorCursor: 52
+    ItemErrorCursor: 54
     LockCursor: 14
-    LockErrorCursor: 47
+    LockErrorCursor: 49
     LootAllCursor: 16
-    LootAllErrorCursor: 49
+    LootAllErrorCursor: 51
     MailCursor: 15
-    MailErrorCursor: 48
-    MapPinCursor: 31
-    MapPinErrorCursor: 64
+    MailErrorCursor: 50
+    MapPinCursor: 33
+    MapPinErrorCursor: 68
     MineCursor: 11
-    MineErrorCursor: 44
+    MineErrorCursor: 46
     NoCursor: 0
     PickupCursor: 8
-    PickupErrorCursor: 41
+    PickupErrorCursor: 43
     PointCursor: 1
-    PointErrorCursor: 34
+    PointErrorCursor: 36
     QuestCursor: 25
-    QuestErrorCursor: 58
+    QuestErrorCursor: 60
+    QuestImportantCursor: 30
+    QuestImportantErrorCursor: 65
+    QuestImportantTurninCursor: 31
+    QuestImportantTurninErrorCursor: 66
     QuestLegendaryCursor: 28
-    QuestLegendaryErrorCursor: 61
+    QuestLegendaryErrorCursor: 63
     QuestLegendaryTurninCursor: 29
-    QuestLegendaryTurninErrorCursor: 62
+    QuestLegendaryTurninErrorCursor: 64
     QuestRepeatableCursor: 26
-    QuestRepeatableErrorCursor: 59
+    QuestRepeatableErrorCursor: 61
     QuestTurninCursor: 27
-    QuestTurninErrorCursor: 60
+    QuestTurninErrorCursor: 62
     RepairCursor: 17
-    RepairErrorCursor: 50
+    RepairErrorCursor: 52
     RepairnpcCursor: 18
-    RepairnpcErrorCursor: 51
+    RepairnpcErrorCursor: 53
     SkinAllianceCursor: 21
-    SkinAllianceErrorCursor: 54
+    SkinAllianceErrorCursor: 56
     SkinCursor: 12
-    SkinErrorCursor: 45
+    SkinErrorCursor: 47
     SkinHordeCursor: 20
-    SkinHordeErrorCursor: 53
+    SkinHordeErrorCursor: 55
     SpeakCursor: 6
-    SpeakErrorCursor: 39
+    SpeakErrorCursor: 41
     TaxiCursor: 9
-    TaxiErrorCursor: 42
+    TaxiErrorCursor: 44
     TrainerCursor: 10
-    TrainerErrorCursor: 43
-    UIMoveCursor: 32
-    UIResizeCursor: 33
-    VehicleCursor: 30
-    VehicleErrorCursor: 63
+    TrainerErrorCursor: 45
+    UIMoveCursor: 34
+    UIResizeCursor: 35
+    VehicleCursor: 32
+    VehicleErrorCursor: 67
   CursormodeMeta:
-    MaxValue: 65
+    MaxValue: 69
     MinValue: 0
-    NumValues: 66
+    NumValues: 70
   CursorStyle:
     Crosshair: 1
     Mouse: 0
@@ -1985,6 +2056,7 @@ Enum:
     EnableSnap: 22
     GridSpacing: 1
     SettingsExpanded: 2
+    ShowArchaeologyBar: 27
     ShowArenaFrames: 17
     ShowBossFrames: 16
     ShowBuffsAndDebuffs: 10
@@ -2004,11 +2076,13 @@ Enum:
     ShowStatusTrackingBar2: 20
     ShowTalkingHeadFrame: 14
     ShowTargetAndFocus: 3
+    ShowTimerBars: 25
     ShowVehicleLeaveButton: 15
+    ShowVehicleSeatIndicator: 26
   EditModeAccountSettingMeta:
-    MaxValue: 24
+    MaxValue: 27
     MinValue: 0
-    NumValues: 25
+    NumValues: 28
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
     DeprecatedSnapToSide: 7
@@ -2040,6 +2114,12 @@ Enum:
     MaxValue: 13
     MinValue: 1
     NumValues: 11
+  EditModeArchaeologyBarSetting:
+    Size: 0
+  EditModeArchaeologyBarSettingMeta:
+    MaxValue: 0
+    MinValue: 0
+    NumValues: 1
   EditModeAuraFrameSetting:
     DeprecatedShowFull: 7
     IconDirection: 2
@@ -2076,6 +2156,9 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  EditModeChatFrameDisplayOnlySetting:
+    Height: 5
+    Width: 4
   EditModeChatFrameSetting:
     HeightHundreds: 2
     HeightTensAndOnes: 3
@@ -2156,6 +2239,7 @@ Enum:
     NumValues: 2
   EditModeSystem:
     ActionBar: 0
+    ArchaeologyBar: 19
     AuraFrame: 6
     Bags: 14
     CastBar: 1
@@ -2170,12 +2254,20 @@ Enum:
     ObjectiveTracker: 12
     StatusTrackingBar: 15
     TalkingHeadFrame: 7
+    TimerBars: 17
     UnitFrame: 3
     VehicleLeaveButton: 9
+    VehicleSeatIndicator: 18
   EditModeSystemMeta:
-    MaxValue: 16
+    MaxValue: 19
     MinValue: 0
-    NumValues: 17
+    NumValues: 20
+  EditModeTimerBarsSetting:
+    Size: 0
+  EditModeTimerBarsSettingMeta:
+    MaxValue: 0
+    MinValue: 0
+    NumValues: 1
   EditModeUnitFrameSetting:
     BuffsOnTop: 2
     CastBarOnSide: 7
@@ -2193,11 +2285,12 @@ Enum:
     UseHorizontalGroups: 6
     UseLargerFrame: 3
     UseRaidStylePartyFrames: 4
+    ViewArenaSize: 17
     ViewRaidSize: 9
   EditModeUnitFrameSettingMeta:
-    MaxValue: 16
+    MaxValue: 17
     MinValue: 0
-    NumValues: 17
+    NumValues: 18
   EditModeUnitFrameSystemIndices:
     Arena: 7
     Boss: 6
@@ -2211,6 +2304,12 @@ Enum:
     MaxValue: 8
     MinValue: 1
     NumValues: 8
+  EditModeVehicleSeatIndicatorSetting:
+    Size: 0
+  EditModeVehicleSeatIndicatorSettingMeta:
+    MaxValue: 0
+    MinValue: 0
+    NumValues: 1
   EncounterLootDropRollState:
     Greed: 3
     NeedMainSpec: 0
@@ -2463,10 +2562,15 @@ Enum:
     MinValue: 0
     NumValues: 7
   GarrisonFollowerType:
+    FollowerType_6_0: 1
     FollowerType_6_0_Boat: 2
     FollowerType_6_0_GarrisonFollower: 1
+    FollowerType_6_2: 2
+    FollowerType_7_0: 4
     FollowerType_7_0_GarrisonFollower: 4
+    FollowerType_8_0: 22
     FollowerType_8_0_GarrisonFollower: 22
+    FollowerType_9_0: 123
     FollowerType_9_0_GarrisonFollower: 123
   GarrisonFollowerTypeMeta:
     MaxValue: 123
@@ -2809,6 +2913,18 @@ Enum:
     MaxValue: 11
     MinValue: 0
     NumValues: 12
+  ItemBind:
+    None: 0
+    OnAcquire: 1
+    OnEquip: 2
+    OnUse: 3
+    Quest: 4
+    Unused1: 5
+    Unused2: 6
+  ItemBindMeta:
+    MaxValue: 6
+    MinValue: 0
+    NumValues: 7
   ItemClass:
     Armor: 4
     Battlepet: 17
@@ -3356,6 +3472,84 @@ Enum:
     MaxValue: 14
     MinValue: 0
     NumValues: 15
+  JournalEncounterFlags:
+    AllianceOnly: 4
+    HordeOnly: 8
+    InternalOnly: 32
+    LimitDifficulties: 2
+    NoMap: 16
+    Obsolete: 1
+  JournalEncounterFlagsMeta:
+    MaxValue: 32
+    MinValue: 1
+    NumValues: 6
+  JournalEncounterIconFlags:
+    Bleed: 8192
+    Curse: 256
+    Deadly: 16
+    Disease: 1024
+    Dps: 2
+    Enrage: 2048
+    Healer: 4
+    Heroic: 8
+    Important: 32
+    Interruptible: 64
+    Magic: 128
+    Mythic: 4096
+    Poison: 512
+    Tank: 1
+  JournalEncounterIconFlagsMeta:
+    MaxValue: 8192
+    MinValue: 1
+    NumValues: 14
+  JournalEncounterItemFlags:
+    DisplayAsExtremelyRare: 16
+    DisplayAsPerPlayerLoot: 4
+    DisplayAsVeryRare: 8
+    LimitDifficulties: 2
+    Obsolete: 1
+  JournalEncounterItemFlagsMeta:
+    MaxValue: 16
+    MinValue: 1
+    NumValues: 5
+  JournalEncounterLocFlags:
+    Primary: 1
+  JournalEncounterLocFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
+  JournalEncounterSectionFlags:
+    LimitDifficulties: 2
+    StartExpanded: 1
+  JournalEncounterSectionFlagsMeta:
+    MaxValue: 2
+    MinValue: 1
+    NumValues: 2
+  JournalEncounterSecTypes:
+    Ability: 2
+    Creature: 1
+    Generic: 0
+    Overview: 3
+  JournalEncounterSecTypesMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
+  JournalInstanceFlags:
+    HideUserSelectableDifficulty: 2
+    Timewalker: 1
+  JournalInstanceFlagsMeta:
+    MaxValue: 2
+    MinValue: 1
+    NumValues: 2
+  JournalLinkTypes:
+    Encounter: 1
+    Instance: 0
+    Section: 2
+    Tier: 3
+  JournalLinkTypesMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   LanguageFlag:
     HiddenFromPlayer: 2
     HideLanguageNameInChat: 4
@@ -3508,6 +3702,20 @@ Enum:
     MaxValue: 1048576
     MinValue: 0
     NumValues: 22
+  ModelBlendOperation:
+    Anim: 1
+    None: 0
+  ModelBlendOperationMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  ModelLightType:
+    Directional: 0
+    Point: 1
+  ModelLightTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   ModelSceneSetting:
     AlignLightToOrbitDelta: 1
   ModelSceneSettingMeta:
@@ -3897,6 +4105,41 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  PingResult:
+    FailedDisabledByLeader: 3
+    FailedInvalidTarget: 2
+    FailedSpamming: 1
+    FailedUnspecified: 4
+    Success: 0
+  PingResultMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
+  PingSubjectType:
+    AlertNotThreat: 5
+    AlertThreat: 4
+    Assist: 2
+    Attack: 0
+    OnMyWay: 3
+    Warning: 1
+  PingSubjectTypeMeta:
+    MaxValue: 5
+    MinValue: 0
+    NumValues: 6
+  PingTextureType:
+    Center: 0
+    Expand: 1
+    Rotation: 2
+  PingTextureTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  PingTypeFlags:
+    DefaultPing: 1
+  PingTypeFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   PlayerChoiceRarity:
     Common: 0
     Epic: 3
@@ -4255,13 +4498,16 @@ Enum:
     MinValue: 0
     NumValues: 2
   PvPMatchState:
-    Active: 1
-    Complete: 2
+    Complete: 5
+    Engaged: 3
     Inactive: 0
+    PostRound: 4
+    StartUp: 2
+    Waiting: 1
   PvPMatchStateMeta:
-    MaxValue: 2
+    MaxValue: 5
     MinValue: 0
-    NumValues: 3
+    NumValues: 6
   PvPUnitClassification:
     AssassinAlliance: 6
     AssassinHorde: 5
@@ -4307,10 +4553,6 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
-  QuestPOIQuestTypes:
-    Calling: 3
-    Campaign: 2
-    Normal: 1
   QuestSessionCommand:
     None: 0
     SessionActiveNoCommand: 3
@@ -4520,6 +4762,13 @@ Enum:
     MaxValue: 16384
     MinValue: 1
     NumValues: 15
+  ReportSubComplaintTypes:
+    Advertising: 1
+    Inappropriate: 0
+  ReportSubComplaintTypesMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   ReportType:
     BattlePet: 10
     Calendar: 11
@@ -4527,6 +4776,7 @@ Enum:
     ClubFinderApplicant: 3
     ClubFinderPosting: 2
     ClubMember: 6
+    CraftingOrder: 16
     Friend: 8
     GroupFinderApplicant: 5
     GroupFinderPosting: 4
@@ -4538,18 +4788,26 @@ Enum:
     PvPGroupMember: 15
     PvPScoreboard: 14
   ReportTypeMeta:
-    MaxValue: 15
+    MaxValue: 16
     MinValue: 0
-    NumValues: 16
+    NumValues: 17
   RuneforgePowerFilter:
     All: 0
     Available: 2
     Relevant: 1
     Unavailable: 3
+  RuneforgePowerFilterMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   RuneforgePowerState:
     Available: 0
     Invalid: 2
     Unavailable: 1
+  RuneforgePowerStateMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ScriptedAnimationBehavior:
     None: 0
     SourceCollideWithTarget: 4
@@ -4798,14 +5056,15 @@ Enum:
     MinValue: 0
     NumValues: 4
   SuperTrackingType:
+    Content: 4
     Corpse: 2
     Quest: 0
     Scenario: 3
     UserWaypoint: 1
   SuperTrackingTypeMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   TimeEventFlag:
     GlueScreenShortcut: 1
   TimeEventFlagMeta:
@@ -4861,6 +5120,8 @@ Enum:
     QuestObjective: 8
     QuestPlayer: 18
     QuestTitle: 17
+    RestrictedArena: 35
+    RestrictedBg: 36
     RestrictedFaction: 22
     RestrictedLevel: 27
     RestrictedPvPMedal: 24
@@ -4872,13 +5133,20 @@ Enum:
     SellPrice: 11
     Separator: 30
     SpellName: 13
+    ToyDescription: 38
+    ToyDuration: 34
+    ToyEffect: 33
+    ToyFlavorText: 37
+    ToyName: 31
+    ToySource: 39
+    ToyText: 32
     UnitName: 2
     UnitOwner: 16
     UnitThreat: 7
   TooltipDataLineTypeMeta:
-    MaxValue: 30
+    MaxValue: 39
     MinValue: 0
-    NumValues: 31
+    NumValues: 40
   TooltipDataType:
     Achievement: 12
     AzeriteEssence: 8
@@ -4940,11 +5208,11 @@ Enum:
     MinValue: 0
     NumValues: 2
   TrackedSpellCategory:
-    Count: 4
-    Debuff: 2
-    Defensive: 1
-    Offensive: 0
-    RacialAbility: 3
+    Debuff: 3
+    Defensive: 2
+    None: 0
+    Offensive: 1
+    RacialAbility: 4
   TrackedSpellCategoryMeta:
     MaxValue: 4
     MinValue: 0
@@ -5353,6 +5621,7 @@ Enum:
     FlightMapAutoZoom: 16384
     FlightMapShowZoomOut: 8192
     ForceAllOverlayExplored: 4096
+    ForceAllowMapLinks: 262144
     ForceOnNavbar: 32768
     GarrisonMap: 8
     HideArchaeologyDigs: 256
@@ -5365,9 +5634,9 @@ Enum:
     ShowTaskObjectives: 64
     ShowTaxiNodes: 4
   UIMapFlagMeta:
-    MaxValue: 131072
+    MaxValue: 262144
     MinValue: 1
-    NumValues: 18
+    NumValues: 19
   UIMapSystem:
     Adventure: 2
     Minimap: 3
@@ -5670,6 +5939,14 @@ Enum:
     MaxValue: 9
     MinValue: 0
     NumValues: 10
+  ViewArenaSize:
+    Five: 2
+    Three: 1
+    Two: 0
+  ViewArenaSizeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ViewRaidSize:
     Forty: 2
     Ten: 0
@@ -6103,6 +6380,7 @@ LE_FRAME_TUTORIAL_TRANSMOG_SPECS_BUTTON: 37
 LE_FRAME_TUTORIAL_TRIAL_BANKED_XP: 54
 LE_FRAME_TUTORIAL_UPGRADEABLE_ITEM_IN_SLOT: 109
 LE_FRAME_TUTORIAL_VIEWABLE_ARTIFACT: 29
+LE_FRAME_TUTORIAL_WARDROBE_TRACKING_INTERFACE: 152
 LE_FRAME_TUTORIAL_WARFRONT_CONSTRUCTION: 61
 LE_FRAME_TUTORIAL_WARFRONT_RESOURCES: 60
 LE_FRAME_TUTORIAL_WHAT_HAS_CHANGED: 8
@@ -6511,6 +6789,7 @@ LE_GAME_ERR_ITEM_MAX_COUNT_SOCKETED: 626
 LE_GAME_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED_IS: 691
 LE_GAME_ERR_ITEM_MAX_LIMIT_CATEGORY_EQUIPPED_EXCEEDED_IS: 694
 LE_GAME_ERR_ITEM_MAX_LIMIT_CATEGORY_SOCKETED_EXCEEDED_IS: 693
+LE_GAME_ERR_ITEM_MOD_APPEARANCE_GROUP_ALREADY_KNOWN: 1118
 LE_GAME_ERR_ITEM_NOT_FOUND: 31
 LE_GAME_ERR_ITEM_UNIQUE_EQUIPPABLE: 610
 LE_GAME_ERR_ITEM_UNIQUE_EQUIPPABLE_SOCKETED: 630
@@ -7221,12 +7500,12 @@ LE_GAME_ERR_VOID_TRANSFER_STORAGE_FULL: 903
 LE_GAME_ERR_VOID_WITHDRAW_FULL: 893
 LE_GAME_ERR_WARGAME_REQUEST_FAILURE: 864
 LE_GAME_ERR_WARGAME_REQUEST_SENT: 867
-LE_GAME_ERR_WOW_LABS_LOBBY_MATCHMAKER_ERROR_ENTER_QUEUE_FAILED: 1122
-LE_GAME_ERR_WOW_LABS_LOBBY_MATCHMAKER_ERROR_LEAVE_QUEUE_FAILED: 1123
-LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_MAX_INVITE_SENT: 1119
-LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PARTY_INVITE_INVALID: 1121
-LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PARTY_IS_FULL: 1118
-LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PLAYER_ALREADY_INVITED: 1120
+LE_GAME_ERR_WOW_LABS_LOBBY_MATCHMAKER_ERROR_ENTER_QUEUE_FAILED: 1123
+LE_GAME_ERR_WOW_LABS_LOBBY_MATCHMAKER_ERROR_LEAVE_QUEUE_FAILED: 1124
+LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_MAX_INVITE_SENT: 1120
+LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PARTY_INVITE_INVALID: 1122
+LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PARTY_IS_FULL: 1119
+LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PLAYER_ALREADY_INVITED: 1121
 LE_GAME_ERR_WRONG_BAG_TYPE: 22
 LE_GAME_ERR_WRONG_BAG_TYPE_SUBCLASS: 340
 LE_GAME_ERR_WRONG_SLOT: 12
@@ -7260,10 +7539,8 @@ LE_LOOT_FILTER_SPEC1: 3
 LE_LOOT_FILTER_SPEC2: 4
 LE_LOOT_FILTER_SPEC3: 5
 LE_LOOT_FILTER_SPEC4: 6
-LE_MODEL_BLEND_OPERATION_ANIM: 2
-LE_MODEL_BLEND_OPERATION_NONE: 1
-LE_MODEL_LIGHT_TYPE_DIRECTIONAL: 1
-LE_MODEL_LIGHT_TYPE_POINT: 2
+LE_MODEL_BLEND_OPERATION_ANIM: 1
+LE_MODEL_BLEND_OPERATION_NONE: 0
 LE_MOUNT_JOURNAL_FILTER_COLLECTED: 1
 LE_MOUNT_JOURNAL_FILTER_NOT_COLLECTED: 2
 LE_MOUNT_JOURNAL_FILTER_UNUSABLE: 3
@@ -7354,14 +7631,12 @@ NUM_LE_CHARACTER_UPGRADE_RESULTS: 13
 NUM_LE_CINEMATIC_PAN_TYPES: 6
 NUM_LE_EXPANSION_LEVELS: 9
 NUM_LE_FRAME_TUTORIAL_ACCCOUNTS: 3
-NUM_LE_FRAME_TUTORIALS: 151
+NUM_LE_FRAME_TUTORIALS: 152
 NUM_LE_GM_WEB_TICKET_STATUSS: 4
 NUM_LE_INVITE_REQUEST_TYPES: 3
 NUM_LE_ITEM_BIND_TYPES: 5
 NUM_LE_LFG_CATEGORYS: 7
 NUM_LE_LFG_LIST_DISPLAY_TYPES: 5
-NUM_LE_MODEL_BLEND_OPERATIONS: 2
-NUM_LE_MODEL_LIGHT_TYPES: 2
 NUM_LE_MOUNT_JOURNAL_FILTERS: 3
 NUM_LE_PARTY_CATEGORYS: 2
 NUM_LE_PET_JOURNAL_FILTERS: 2
