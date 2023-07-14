@@ -6,6 +6,7 @@ cc_binary(
     ],
     deps = [
         "@elune//:liblua",
+        "@lsqlite3",
         "@luafilesystem",
         "@lzlib",
     ],

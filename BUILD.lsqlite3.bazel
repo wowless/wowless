@@ -1,0 +1,6 @@
+cc_library(
+    name = "lsqlite3",
+    visibility = ["//visibility:public"],
+    srcs = ["lsqlite3.c"],
+    deps = ["@sqlite3"],
+)
