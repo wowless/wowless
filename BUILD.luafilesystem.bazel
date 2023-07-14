@@ -1,0 +1,8 @@
+cc_library(
+    name = "luafilesystem",
+    visibility = ["//visibility:public"],
+    srcs = [
+        "src/lfs.c",
+        "src/lfs.h",
+    ],
+)

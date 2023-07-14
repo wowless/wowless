@@ -8,6 +8,13 @@ git_repository(
 )
 
 git_repository(
+    name = "luafilesystem",
+    commit = "7c6e1b013caec0602ca4796df3b1d7253a2dd258",
+    remote = "https://github.com/lunarmodules/luafilesystem",
+    build_file = "@//:BUILD.luafilesystem.bazel",
+)
+
+git_repository(
     name = "lzlib",
     tag = "0.4.3",
     remote = "https://github.com/luadist/lzlib",
