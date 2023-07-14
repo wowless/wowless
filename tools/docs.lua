@@ -5,7 +5,7 @@ local args = (function()
 end)()
 
 local lfs = require('lfs')
-local writeFile = require('pl.file').write
+local writeifchanged = require('tools.util').writeifchanged
 local parseYaml = require('wowapi.yaml').parseFile
 local pprintYaml = require('wowapi.yaml').pprint
 local product = args.product
@@ -302,7 +302,7 @@ local function rewriteApis()
   for k in pairs(cfgskip) do
     assert(nss[k], k .. ' in skip_namespaces but not in docs')
   end
-  require('pl.file').write(f, y.pprint(apis))
+  writeifchanged(f, y.pprint(apis))
   return apis
 end
 
@@ -334,7 +334,7 @@ local function rewriteEvents()
   for k in pairs(neversent) do
     assert(seen[k], k .. ' is marked never_sent but not present in docs')
   end
-  writeFile(filename, pprintYaml(out))
+  writeifchanged(filename, pprintYaml(out))
   return out
 end
 
@@ -382,7 +382,7 @@ local function rewriteStructures(outApis, outEvents)
   for _, event in pairs(outEvents) do
     processList(event.payload)
   end
-  writeFile(filename, pprintYaml(out))
+  writeifchanged(filename, pprintYaml(out))
 end
 
 local outApis = rewriteApis()
