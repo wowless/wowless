@@ -1,3 +1,5 @@
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+
 cc_library(
     name = "liblua",
     visibility = ["//visibility:public"],
@@ -77,18 +79,28 @@ cc_library(
     linkopts = ["-ldl"],
 )
 
-genrule(
+expand_template(
     name = "generate_luaconf",
-    outs = ["liblua/include/luaconf.h"],
-    srcs = ["liblua/include/luaconf.h.in"],
-    cmd = """
-      cat $(location liblua/include/luaconf.h.in) |
-      sed 's/#cmakedefine LUA_USE_LINUX/#define LUA_USE_LINUX/' |
-      sed 's/#cmakedefine LUA_USE_POSIX/#define LUA_USE_POSIX/' |
-      sed 's/#cmakedefine LUAI_BITSINT/#define LUAI_BITSINT/' |
-      sed 's/@LUAI_BITSINT@/32/' |
-      grep -v cmakedefine > $(location liblua/include/luaconf.h)
-    """,
+    out = "liblua/include/luaconf.h",
+    template = "liblua/include/luaconf.h.in",
+    substitutions = {
+        "#cmakedefine LUA_USE_CXX_EXCEPTIONS": "/* #undef LUA_USE_CXX_EXCEPTIONS */",
+        "#cmakedefine LUA_USE_CXX_LINKAGE": "/* #undef LUA_USE_CXX_LINKAGE */",
+        "#cmakedefine LUA_USE_LINUX": "#define LUA_USE_LINUX",
+        "#cmakedefine LUA_USE_LONGLONG": "/* #undef LUA_USE_LONGLONG */",
+        "#cmakedefine LUA_USE_MACOS": "/* #undef LUA_USE_MACOS */",
+        "#cmakedefine LUA_USE_POSIX": "#define LUA_USE_POSIX",
+        "#cmakedefine LUA_USE_READLINE": "/* #undef LUA_USE_READLINE */",
+        "#cmakedefine LUA_USE_SHARED": "/* #undef LUA_USE_SHARED */",
+        "#cmakedefine LUA_USE_WINDOWS": "/* #undef LUA_USE_WINDOWS */",
+        "#cmakedefine LUAI_BITSINT": "#define LUAI_BITSINT",
+        "@LUA_CPATH_ESCAPED@": "",
+        "@LUA_DIRSEP_ESCAPED@": "/",
+        "@LUA_PATH_ESCAPED@": "./?.lua;build/luarocks/share/lua/5.1/?.lua;build/luarocks/share/lua/5.1/?/init.lua",
+        "@LUA_PROGNAME@": "lua5.1",
+        "@LUAI_BITSINT@": "32",
+        "@PROJECT_VERSION@": "3.1",
+    },
 )
 
 genrule(
