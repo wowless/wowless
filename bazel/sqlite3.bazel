@@ -2,5 +2,6 @@ cc_library(
     name = "sqlite3",
     visibility = ["//visibility:public"],
     srcs = ["sqlite3.c"],
+    hdrs = ["sqlite3.h"],
     linkopts = ["-lpthread"],
 )
