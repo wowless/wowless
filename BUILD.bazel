@@ -1,10 +1,8 @@
 cc_binary(
     name = "wowless",
-    srcs = [
-        "main.c",
-        "wowless/ext.c",
-    ],
+    srcs = ["main.c"],
     deps = [
+        ":ext",
         "@elune",
         "@lsqlite3",
         "@luaexpat",
@@ -12,4 +10,10 @@ cc_binary(
         "@lyaml",
         "@lzlib",
     ],
+)
+
+cc_library(
+    name = "ext",
+    srcs = ["wowless/ext.c"],
+    deps = ["@elune"],
 )
