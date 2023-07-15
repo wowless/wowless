@@ -14,7 +14,8 @@
   },
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/ebaskoro/devcontainer-features/emscripten:1": {}
+    "ghcr.io/ebaskoro/devcontainer-features/emscripten:1": {},
+    "ghcr.io/balazs23/devcontainers-features/bazel:1": {}
   },
   "name": "wowless/wowless",
   "postCreateCommand": "pre-commit install --install-hooks",
