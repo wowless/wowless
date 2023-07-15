@@ -1,17 +1,18 @@
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-git_repository(
+http_archive(
     name = "elune",
-    commit = "f051f75a3e963130c2d1ad98f56868bfc6b2798d",
-    remote = "https://github.com/meorawr/elune",
+    url = "https://github.com/meorawr/elune/archive/f051f75a3e963130c2d1ad98f56868bfc6b2798d.tar.gz",
+    sha256 = "1685a740991d86d45acd07bde00af99191de3cfa0e5a8c0c11c2095c7fcbe480",
+    strip_prefix = "elune-f051f75a3e963130c2d1ad98f56868bfc6b2798d",
     build_file = "@//:bazel/elune.bazel",
 )
 
-git_repository(
+http_archive(
     name = "expat",
-    commit = "654d2de0da85662fcc7644a7acd7c2dd2cfb21f0",
-    remote = "https://github.com/libexpat/libexpat",
+    url = "https://github.com/libexpat/libexpat/archive/654d2de0da85662fcc7644a7acd7c2dd2cfb21f0.tar.gz",
+    sha256 = "81e02291cffb1cbba6669886b9943fa9c61bcdaac577017638737c19f35a0d0b",
+    strip_prefix = "libexpat-654d2de0da85662fcc7644a7acd7c2dd2cfb21f0",
     build_file = "@//:bazel/expat.bazel",
 )
 
@@ -23,31 +24,35 @@ http_archive(
     build_file = "@//:bazel/lsqlite3.bazel",
 )
 
-git_repository(
+http_archive(
     name = "luaexpat",
-    commit = "90b1af46829ba45a6b772bc66d3355b2e20671b6",
-    remote = "https://github.com/lunarmodules/luaexpat",
+    url = "https://github.com/lunarmodules/luaexpat/archive/90b1af46829ba45a6b772bc66d3355b2e20671b6.tar.gz",
+    sha256 = "57135e369ff9cdd71604f108425f71f9c43f44656c328a1a687cedd7270f7c61",
+    strip_prefix = "luaexpat-90b1af46829ba45a6b772bc66d3355b2e20671b6",
     build_file = "@//:bazel/luaexpat.bazel",
 )
 
-git_repository(
+http_archive(
     name = "luafilesystem",
-    commit = "7c6e1b013caec0602ca4796df3b1d7253a2dd258",
-    remote = "https://github.com/lunarmodules/luafilesystem",
+    url = "https://github.com/lunarmodules/luafilesystem/archive/7c6e1b013caec0602ca4796df3b1d7253a2dd258.tar.gz",
+    sha256 = "5bddb6971adbc0c48daf913b38ce40168c808c3c33b639ea9a9ddd30a60c85bd",
+    strip_prefix = "luafilesystem-7c6e1b013caec0602ca4796df3b1d7253a2dd258",
     build_file = "@//:bazel/luafilesystem.bazel",
 )
 
-git_repository(
+http_archive(
     name = "lyaml",
-    commit = "1afb1f870ae486097f79586502f4254d6074afcb",
-    remote = "https://github.com/gvvaughan/lyaml.git",
+    url = "https://github.com/gvvaughan/lyaml/archive/1afb1f870ae486097f79586502f4254d6074afcb.tar.gz",
+    sha256 = "74f347f16514a6c70ec22bfaf0e4e0de87a0d434191111642560de93ab312efc",
+    strip_prefix = "lyaml-1afb1f870ae486097f79586502f4254d6074afcb",
     build_file = "@//:bazel/lyaml.bazel",
 )
 
-git_repository(
+http_archive(
     name = "lzlib",
-    commit = "79329a07d8f79c19eadd7ea2752b4c4e1574b015",
-    remote = "https://github.com/luadist/lzlib",
+    url = "https://github.com/luadist/lzlib/archive/79329a07d8f79c19eadd7ea2752b4c4e1574b015.tar.gz",
+    sha256 = "b0be6ff887470a0579a9673c418082ddeb7df8b991a6a9a841ce190a55932be0",
+    strip_prefix = "lzlib-79329a07d8f79c19eadd7ea2752b4c4e1574b015",
     build_file = "@//:bazel/lzlib.bazel",
 )
 
@@ -59,16 +64,18 @@ http_archive(
     build_file = "@//:bazel/sqlite3.bazel",
 )
 
-git_repository(
+http_archive(
     name = "utf8h",
-    commit = "ce48f0eda6cac8f365837edaf8298ad5c03f7f2e",
-    remote = "https://github.com/sheredom/utf8.h",
+    url = "https://github.com/sheredom/utf8.h/archive/ce48f0eda6cac8f365837edaf8298ad5c03f7f2e.tar.gz",
+    sha256 = "d1664cd25e7b322b030a029bd05adca94bf6eafc7b553d33b18409573d7cd330",
+    strip_prefix = "utf8.h-ce48f0eda6cac8f365837edaf8298ad5c03f7f2e",
     build_file = "@//:bazel/utf8h.bazel",
 )
 
-git_repository(
+http_archive(
     name = "yaml",
-    commit = "2c891fc7a770e8ba2fec34fc6b545c672beb37e6",
-    remote = "https://github.com/yaml/libyaml.git",
+    url = "https://github.com/yaml/libyaml/archive/2c891fc7a770e8ba2fec34fc6b545c672beb37e6.tar.gz",
+    sha256 = "77987051b6f5bee8ba472f1efbe0053663a58d8d3e7a2f0f4a27d178adbf8844",
+    strip_prefix = "libyaml-2c891fc7a770e8ba2fec34fc6b545c672beb37e6",
     build_file = "@//:bazel/yaml.bazel",
 )
