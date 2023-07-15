@@ -106,10 +106,6 @@ local rules = {
     command = 'lua tools/mkninja.lua',
     pool = 'console',
   },
-  mknode = {
-    command = 'emcmake cmake -B build/emcmake && make -C build/emcmake wowless',
-    pool = 'console',
-  },
   mktactkeys = {
     command = 'lua tools/tactkeys.lua',
   },
@@ -283,11 +279,6 @@ local builds = {
     },
     outs_implicit = 'build/tactkeys.lua',
     rule = 'mktactkeys',
-  },
-  {
-    ins_implicit = 'build/cmake/wowless',
-    outs_implicit = 'build/emcmake/wowless.js',
-    rule = 'mknode',
   },
 }
 

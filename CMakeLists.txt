@@ -100,8 +100,3 @@ add_executable(
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
 target_link_libraries(wowless expat liblua pthread yaml zlibstatic)
-
-if(EMSCRIPTEN)
-  target_link_options(wowless PRIVATE -sALLOW_MEMORY_GROWTH -sTOTAL_STACK=1MB)
-  target_link_libraries(wowless nodefs.js noderawfs.js)
-endif()
