@@ -51,6 +51,7 @@ cc_library(
         "liblua/lstatslib.c",
         "liblua/lstring.c",
         "liblua/lstring.h",
+        "liblua/lstrlib.c",
         "liblua/ltable.c",
         "liblua/ltable.h",
         "liblua/ltablib.c",
@@ -62,7 +63,6 @@ cc_library(
         "liblua/lvm.h",
         "liblua/lzio.c",
         "liblua/lzio.h",
-        "lstrlib.c",
     ],
     hdrs = [
         "liblua/include/lauxlib.h",
@@ -97,11 +97,4 @@ expand_template(
         "@LUAI_BITSINT@": "32",
         "@PROJECT_VERSION@": "3.1",
     },
-)
-
-genrule(
-    name = "fix_lstrlib",
-    outs = ["lstrlib.c"],
-    srcs = ["liblua/lstrlib.c"],
-    cmd = "sed 's/<utf8.h>/\"utf8.h\"/' < $(location liblua/lstrlib.c) > $(location lstrlib.c)",
 )
