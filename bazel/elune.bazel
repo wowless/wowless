@@ -71,10 +71,6 @@ cc_library(
         "liblua/include/lualib.h",
     ],
     strip_include_prefix = "liblua/include",
-    copts = [
-        "-Iexternal/elune/liblua",
-        "-Iexternal/elune/liblua/include",
-    ],
     deps = ["@utf8h"],
     linkopts = ["-ldl"],
 )
