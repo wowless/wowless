@@ -5,4 +5,5 @@ cc_library(
         "src/lfs.c",
         "src/lfs.h",
     ],
+    deps = ["@elune"],
 )

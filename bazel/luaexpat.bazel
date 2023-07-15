@@ -5,5 +5,8 @@ cc_library(
         "src/lxplib.c",
         "src/lxplib.h",
     ],
-    deps = ["@expat"],
+    deps = [
+        "@elune",
+        "@expat",
+    ],
 )

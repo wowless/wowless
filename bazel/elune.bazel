@@ -1,7 +1,7 @@
 load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 
 cc_library(
-    name = "liblua",
+    name = "elune",
     visibility = ["//visibility:public"],
     srcs = [
         "liblua/lapi.c",

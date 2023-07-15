@@ -5,7 +5,7 @@ cc_binary(
         "wowless/ext.c",
     ],
     deps = [
-        "@elune//:liblua",
+        "@elune",
         "@lsqlite3",
         "@luaexpat",
         "@luafilesystem",

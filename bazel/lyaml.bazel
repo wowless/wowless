@@ -8,6 +8,9 @@ cc_library(
         "ext/yaml/scanner.c",
         "ext/yaml/yaml.c",
     ],
-    deps = ["@yaml"],
+    deps = [
+        "@elune",
+        "@yaml",
+    ],
     local_defines = ["VERSION=\\\"wowless\\\""],
 )
