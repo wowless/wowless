@@ -1710,6 +1710,17 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  DisableAccountProfilesFlags:
+    Document: 1
+    ItemsCollections: 16
+    MountsCollections: 4
+    None: 0
+    PetsCollections: 8
+    SharedCollections: 2
+  DisableAccountProfilesFlagsMeta:
+    MaxValue: 16
+    MinValue: 0
+    NumValues: 6
   EnvironmentalDamageFlags:
     DmgIsPct: 2
     OneTime: 1
