@@ -17185,6 +17185,13 @@ C_ToyBoxInfo.SetDefaultFilters:
 C_TradeSkillUI.AnyRecipeCategoriesFiltered: {}
 C_TradeSkillUI.AreAnyInventorySlotsFiltered: {}
 C_TradeSkillUI.CanObliterateCursorItem: {}
+C_TradeSkillUI.CanStoreEnchantInItem:
+  inputs:
+  - name: itemGUID
+    type: string
+  outputs:
+  - name: canStore
+    type: boolean
 C_TradeSkillUI.CanTradeSkillListLink: {}
 C_TradeSkillUI.ClearInventorySlotFilter: {}
 C_TradeSkillUI.ClearPendingObliterateItem: {}
