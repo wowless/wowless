@@ -101,6 +101,7 @@ local rules = {
   },
   mkelune = {
     command = 'bazel build -c opt ... && touch build/elune.stamp',
+    pool = 'console',
   },
   mklistfile = {
     command = 'lua tools/listfile.lua',
