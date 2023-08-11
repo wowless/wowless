@@ -100,7 +100,7 @@ local rules = {
     command = 'lua tools/gentest.lua -f $type -p $product',
   },
   mkelune = {
-    command = 'bazel build -c opt ...',
+    command = 'bazel build -c opt ... && touch build/elune.stamp',
   },
   mklistfile = {
     command = 'lua tools/listfile.lua',
@@ -173,9 +173,9 @@ local builds = {
   },
   {
     ins = {
-      elune,
       'build/data/flavors.lua',
       'build/data/stringenums.lua',
+      'build/elune.stamp',
       'build/luarocks.stamp',
       'build/wowless.stamp',
     },
@@ -298,7 +298,7 @@ local builds = {
       'bazel/utf8h.bazel',
       'bazel/yaml.bazel',
     },
-    outs_implicit = elune,
+    outs_implicit = 'build/elune.stamp',
     rule = 'mkelune',
   },
 }
