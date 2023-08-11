@@ -3278,6 +3278,7 @@ C_CharacterServices.AssignNameChangeDistribution: {}
 C_CharacterServices.AssignPCTDistribution: {}
 C_CharacterServices.AssignRaceOrFactionChangeDistribution: {}
 C_CharacterServices.AssignUpgradeDistribution: {}
+C_CharacterServices.CapitalizeCharName: {}
 C_CharacterServices.GetActiveCharacterUpgradeBoostType: {}
 C_CharacterServices.GetActiveClassTrialBoostType: {}
 C_CharacterServices.GetAutomaticBoost: {}
@@ -4009,6 +4010,11 @@ C_Club.DestroyTicket:
   - name: ticketId
     type: string
   outputs: {}
+C_Club.DoesAnyCommunityHaveUnreadMessages:
+  inputs: {}
+  outputs:
+  - name: hasUnreadMessages
+    type: boolean
 C_Club.DoesCommunityHaveMembersOfTheOppositeFaction:
   inputs:
   - name: clubId
@@ -6535,6 +6541,9 @@ C_ContentTracking.StopTracking:
       enum: ContentTrackingType
   - name: id
     type: number
+  - name: stopType
+    type:
+      enum: ContentTrackingStopType
   outputs: {}
 C_ContentTracking.ToggleTracking:
   inputs:
@@ -6543,6 +6552,9 @@ C_ContentTracking.ToggleTracking:
       enum: ContentTrackingType
   - name: id
     type: number
+  - name: stopType
+    type:
+      enum: ContentTrackingStopType
   outputs:
   - name: error
     nilable: true
@@ -9146,6 +9158,12 @@ C_IncomingSummon.IncomingSummonStatus:
   - name: status
     type:
       enum: SummonStatus
+C_InterfaceFileManifest.GetInterfaceArtFiles:
+  inputs: {}
+  outputs:
+  - name: images
+    type:
+      arrayof: string
 C_InvasionInfo.AreInvasionsAvailable:
   inputs: {}
   outputs:
@@ -17185,6 +17203,13 @@ C_ToyBoxInfo.SetDefaultFilters:
 C_TradeSkillUI.AnyRecipeCategoriesFiltered: {}
 C_TradeSkillUI.AreAnyInventorySlotsFiltered: {}
 C_TradeSkillUI.CanObliterateCursorItem: {}
+C_TradeSkillUI.CanStoreEnchantInItem:
+  inputs:
+  - name: itemGUID
+    type: string
+  outputs:
+  - name: canStore
+    type: boolean
 C_TradeSkillUI.CanTradeSkillListLink: {}
 C_TradeSkillUI.ClearInventorySlotFilter: {}
 C_TradeSkillUI.ClearPendingObliterateItem: {}
@@ -18036,6 +18061,13 @@ C_Traits.ConfigHasStagedChanges:
   outputs:
   - name: hasChanges
     type: boolean
+C_Traits.GenerateImportString:
+  inputs:
+  - name: configID
+    type: number
+  outputs:
+  - name: importString
+    type: string
 C_Traits.GenerateInspectImportString:
   inputs:
   - name: target
@@ -19740,6 +19772,15 @@ C_UIWidgetManager.GetTopCenterWidgetSetID:
   outputs:
   - name: setID
     type: number
+C_UIWidgetManager.GetTugOfWarWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.TugOfWarWidgetVisualizationInfo
 C_UIWidgetManager.GetUnitPowerBarWidgetVisualizationInfo:
   inputs:
   - name: widgetID

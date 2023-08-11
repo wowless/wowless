@@ -4888,7 +4888,13 @@ C_Item.GetItemID:
   outputs:
   - name: itemID
     type: number
-C_Item.GetItemIDForItemInfo: {}
+C_Item.GetItemIDForItemInfo:
+  inputs:
+  - name: itemInfo
+    type: string
+  outputs:
+  - name: itemID
+    type: number
 C_Item.GetItemInventoryType:
   inputs:
   - name: itemLocation

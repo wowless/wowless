@@ -1551,11 +1551,12 @@ Enum:
     FlagPlayerItemAssignment: 2
     FlagSortLast: 1
     Hidden: 4
+    StartsCollapsed: 16
     Virtual: 8
   CurrencyTokenCategoryFlagsMeta:
-    MaxValue: 8
+    MaxValue: 16
     MinValue: 1
-    NumValues: 4
+    NumValues: 5
   Cursormode:
     AttackCursor: 4
     AttackErrorCursor: 39
@@ -1710,6 +1711,17 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  DisableAccountProfilesFlags:
+    Document: 1
+    ItemsCollections: 16
+    MountsCollections: 4
+    None: 0
+    PetsCollections: 8
+    SharedCollections: 2
+  DisableAccountProfilesFlagsMeta:
+    MaxValue: 16
+    MinValue: 0
+    NumValues: 6
   EnvironmentalDamageFlags:
     DmgIsPct: 2
     OneTime: 1

@@ -7661,12 +7661,10 @@ UPDATE_STEALTH:
   payload: {}
 UPDATE_SUMMONPETS_ACTION:
   payload: {}
-UPDATE_TRADESKILL_CAST_COMPLETE:
+UPDATE_TRADESKILL_CAST_STOPPED:
   payload:
   - name: isScrapping
     type: boolean
-UPDATE_TRADESKILL_RECAST:
-  payload: {}
 UPDATE_UI_WIDGET:
   payload:
   - name: widgetInfo
