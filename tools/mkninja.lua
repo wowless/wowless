@@ -58,7 +58,7 @@ for _, p in ipairs(productList) do
   perProductAddonGeneratedFiles[p] = pp
 end
 
-local elune = 'build/cmake/wowless'
+local elune = 'bazel-bin/wowless'
 
 local pools = {
   fetch_pool = 1,
@@ -98,6 +98,9 @@ local rules = {
   },
   mkaddon = {
     command = 'lua tools/gentest.lua -f $type -p $product',
+  },
+  mkelune = {
+    command = 'bazel build -c opt ...',
   },
   mklistfile = {
     command = 'lua tools/listfile.lua',
@@ -155,7 +158,6 @@ local builds = {
   },
   {
     ins = {
-      'CMakeLists.txt',
       'data/products.yaml',
       'tools/addons.yaml',
       'tools/mkninja.lua',
@@ -171,7 +173,7 @@ local builds = {
   },
   {
     ins = {
-      'build/cmake/wowless',
+      elune,
       'build/data/flavors.lua',
       'build/data/stringenums.lua',
       'build/luarocks.stamp',
@@ -279,6 +281,25 @@ local builds = {
     },
     outs_implicit = 'build/tactkeys.lua',
     rule = 'mktactkeys',
+  },
+  {
+    ins_implicit = {
+      'BUILD.bazel',
+      'MODULE.bazel',
+      'WORKSPACE.bazel',
+      'bazel/elune.bazel',
+      'bazel/expat.bazel',
+      'bazel/lsqlite3.bazel',
+      'bazel/luaexpat.bazel',
+      'bazel/luafilesystem.bazel',
+      'bazel/lyaml.bazel',
+      'bazel/lzlib.bazel',
+      'bazel/sqlite3.bazel',
+      'bazel/utf8h.bazel',
+      'bazel/yaml.bazel',
+    },
+    outs_implicit = elune,
+    rule = 'mkelune',
   },
 }
 
@@ -684,17 +705,8 @@ for _, b in ipairs(builds) do
   end
 end
 table.insert(out, 'default test.out')
-table.insert(out, 'subninja build/cmake/build.ninja')
 
 local f = io.open('build.ninja', 'w')
 f:write(table.concat(out, '\n'))
 f:write('\n')
 f:close()
-
-os.execute([[
-  cmake \
-  -B build/cmake \
-  -G Ninja \
-  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-  -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/cmake/ \
-]])

@@ -4,8 +4,7 @@
             "name": "default",
             "includePath": [
                 "${workspaceFolder}/**"
-            ],
-            "compileCommands": "${workspaceFolder}/build/cmake/compile_commands.json"
+            ]
         }
     ],
     "version": 4
