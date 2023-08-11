@@ -186,6 +186,10 @@ C_AreaPoiInfo.AreaPOIInfo:
     factionID:
       nilable: true
       type: number
+    highlightVignettesOnHover:
+      type: boolean
+    highlightWorldQuestsOnHover:
+      type: boolean
     isAlwaysOnFlightmap:
       type: boolean
     isPrimaryMapForPOI:
@@ -3487,11 +3491,11 @@ C_MajorFactions.MajorFactionData:
       type: number
     textureKit:
       type: string
+    uiPriority:
+      type: number
     unlockDescription:
       nilable: true
       type: string
-    unlockOrder:
-      type: number
 C_MajorFactions.MajorFactionFeatureAbilityInfo:
   fields:
     featureAbilityType:
@@ -3874,6 +3878,12 @@ C_PerksActivities.PerksActivityInfo:
           structure: C_PerksActivities.PerksActivityCriteria
     description:
       type: string
+    eventEndTime:
+      nilable: true
+      type: number
+    eventStartTime:
+      nilable: true
+      type: number
     ID:
       type: number
     requirementsList:
@@ -4940,6 +4950,8 @@ C_ScenarioInfo.ScenarioStepInfo:
           structure: C_ScenarioInfo.ScenarioStepSpellInfo
     stepFailed:
       type: boolean
+    stepID:
+      type: number
     title:
       type: string
     weightedProgress:
@@ -5813,7 +5825,7 @@ C_UIWidgetManager.CaptureBarWidgetVisualizationInfo:
       type: string
     glowAnimType:
       type:
-        enum: CaptureBarWidgetGlowAnimType
+        enum: WidgetGlowAnimType
     hasTimer:
       type: boolean
     inAnimType:
@@ -6980,6 +6992,64 @@ C_UIWidgetManager.TextWithSubtextWidgetVisualizationInfo:
       type: string
     widgetWidth:
       type: number
+C_UIWidgetManager.TugOfWarWidgetVisualizationInfo:
+  fields:
+    currentValue:
+      type: number
+    frameTextureKit:
+      type: string
+    glowAnimType:
+      type:
+        enum: WidgetGlowAnimType
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    leftIconInfo:
+      type:
+        structure: C_UIWidgetManager.UIWidgetIconInfo
+    maxValue:
+      type: number
+    minValue:
+      type: number
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    neutralZoneCenter:
+      type: number
+    neutralZoneSize:
+      type: number
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    rightIconInfo:
+      type:
+        structure: C_UIWidgetManager.UIWidgetIconInfo
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
 C_UIWidgetManager.UIWidgetCurrencyInfo:
   fields:
     iconFileID:
@@ -6992,6 +7062,21 @@ C_UIWidgetManager.UIWidgetCurrencyInfo:
       type: string
     tooltip:
       type: string
+C_UIWidgetManager.UIWidgetIconInfo:
+  fields:
+    sizeType:
+      type:
+        enum: WidgetIconSizeType
+    sourceID:
+      type: number
+    sourceType:
+      type:
+        enum: WidgetIconSourceType
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
 C_UIWidgetManager.UIWidgetInfo:
   fields:
     unitToken:

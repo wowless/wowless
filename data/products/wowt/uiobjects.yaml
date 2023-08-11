@@ -1758,6 +1758,7 @@ Region:
     SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
+    SetProtected: {}
     SetSize:
       setter:
       - name: width

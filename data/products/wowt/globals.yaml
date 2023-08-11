@@ -1061,13 +1061,6 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
-  CaptureBarWidgetGlowAnimType:
-    None: 0
-    Pulse: 1
-  CaptureBarWidgetGlowAnimTypeMeta:
-    MaxValue: 1
-    MinValue: 0
-    NumValues: 2
   CharacterServiceInfoFlag:
     RestrictToRecommendedSpecs: 1
   CharacterServiceInfoFlagMeta:
@@ -1512,6 +1505,14 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  ContentTrackingStopType:
+    Collected: 1
+    Invalidated: 0
+    Manual: 2
+  ContentTrackingStopTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ContentTrackingTargetType:
     Achievement: 2
     JournalEncounter: 0
@@ -1891,11 +1892,12 @@ Enum:
     FlagPlayerItemAssignment: 2
     FlagSortLast: 1
     Hidden: 4
+    StartsCollapsed: 16
     Virtual: 8
   CurrencyTokenCategoryFlagsMeta:
-    MaxValue: 8
+    MaxValue: 16
     MinValue: 1
-    NumValues: 4
+    NumValues: 5
   Cursormode:
     AttackCursor: 4
     AttackErrorCursor: 39
@@ -4116,16 +4118,24 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  PingMode:
+    ClickDrag: 1
+    KeyDown: 0
+  PingModeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   PingResult:
     FailedDisabledByLeader: 3
-    FailedInvalidTarget: 2
-    FailedSpamming: 1
-    FailedUnspecified: 4
+    FailedDisabledBySettings: 4
+    FailedGeneric: 1
+    FailedSpamming: 2
+    FailedUnspecified: 5
     Success: 0
   PingResultMeta:
-    MaxValue: 4
+    MaxValue: 5
     MinValue: 0
-    NumValues: 5
+    NumValues: 6
   PingSubjectType:
     AlertNotThreat: 5
     AlertThreat: 4
@@ -5827,13 +5837,14 @@ Enum:
     TextureWithAnimation: 18
     TextWithState: 8
     TextWithSubtext: 25
+    TugOfWar: 28
     UnitPowerBar: 23
     WorldLootObject: 26
     ZoneControl: 16
   UIWidgetVisualizationTypeMeta:
-    MaxValue: 27
+    MaxValue: 28
     MinValue: 0
-    NumValues: 28
+    NumValues: 29
   UnitSex:
     Both: 3
     Female: 1
@@ -5896,6 +5907,7 @@ Enum:
     IneligibleMapID: 20076
     IneligibleTargetRealm: 20022
     InvalidDestinationAccount: 6
+    InvalidName: 777777700
     InvalidSourceAccount: 7
     IsNpeRestricted: 20091
     LastCustomizeTooRecent: 20058
@@ -5919,9 +5931,9 @@ Enum:
     TooMuchMoneyForLevel: 20032
     UnderMinLevelReq: 20021
   VasErrorMeta:
-    MaxValue: 20092
+    MaxValue: 20094
     MinValue: 4
-    NumValues: 50
+    NumValues: 51
   VasPurchaseProgress:
     ApplyingLicense: 3
     Complete: 7
@@ -6081,6 +6093,13 @@ Enum:
     MaxValue: 6
     MinValue: 0
     NumValues: 7
+  WidgetGlowAnimType:
+    None: 0
+    Pulse: 1
+  WidgetGlowAnimTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   WidgetIconSizeType:
     Large: 2
     Medium: 1
@@ -6090,6 +6109,13 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  WidgetIconSourceType:
+    Item: 1
+    Spell: 0
+  WidgetIconSourceTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   WidgetShownState:
     Hidden: 0
     Shown: 1
@@ -6519,6 +6545,7 @@ LE_GAME_ERR_CANT_BE_DISENCHANTED: 452
 LE_GAME_ERR_CANT_BE_OBLITERATED: 1015
 LE_GAME_ERR_CANT_BE_RECRAFTED: 1017
 LE_GAME_ERR_CANT_BE_SCRAPPED: 1016
+LE_GAME_ERR_CANT_BULK_SELL_ITEM_WITH_REFUND: 1119
 LE_GAME_ERR_CANT_BUY_QUANTITY: 870
 LE_GAME_ERR_CANT_CAGE_PET_YET: 989
 LE_GAME_ERR_CANT_DO_THAT_CHALLENGE_MODE_ACTIVE: 1033
@@ -7511,12 +7538,12 @@ LE_GAME_ERR_VOID_TRANSFER_STORAGE_FULL: 903
 LE_GAME_ERR_VOID_WITHDRAW_FULL: 893
 LE_GAME_ERR_WARGAME_REQUEST_FAILURE: 864
 LE_GAME_ERR_WARGAME_REQUEST_SENT: 867
-LE_GAME_ERR_WOW_LABS_LOBBY_MATCHMAKER_ERROR_ENTER_QUEUE_FAILED: 1123
-LE_GAME_ERR_WOW_LABS_LOBBY_MATCHMAKER_ERROR_LEAVE_QUEUE_FAILED: 1124
-LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_MAX_INVITE_SENT: 1120
-LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PARTY_INVITE_INVALID: 1122
-LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PARTY_IS_FULL: 1119
-LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PLAYER_ALREADY_INVITED: 1121
+LE_GAME_ERR_WOW_LABS_LOBBY_MATCHMAKER_ERROR_ENTER_QUEUE_FAILED: 1124
+LE_GAME_ERR_WOW_LABS_LOBBY_MATCHMAKER_ERROR_LEAVE_QUEUE_FAILED: 1125
+LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_MAX_INVITE_SENT: 1121
+LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PARTY_INVITE_INVALID: 1123
+LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PARTY_IS_FULL: 1120
+LE_GAME_ERR_WOW_LABS_PARTY_ERROR_TYPE_PLAYER_ALREADY_INVITED: 1122
 LE_GAME_ERR_WRONG_BAG_TYPE: 22
 LE_GAME_ERR_WRONG_BAG_TYPE_SUBCLASS: 340
 LE_GAME_ERR_WRONG_SLOT: 12
