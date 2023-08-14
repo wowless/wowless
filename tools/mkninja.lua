@@ -100,7 +100,7 @@ local rules = {
     command = 'lua tools/gentest.lua -f $type -p $product',
   },
   mkelune = {
-    command = 'bazel build -c opt ... && touch build/elune.stamp',
+    command = 'bazel build -c opt :wowless && touch build/elune.stamp',
     pool = 'console',
   },
   mklistfile = {
