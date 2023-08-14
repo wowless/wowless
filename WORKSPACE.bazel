@@ -65,6 +65,14 @@ http_archive(
 )
 
 http_archive(
+    name = "puclua",
+    url = "http://www.lua.org/ftp/lua-5.1.5.tar.gz",
+    sha256 = "2640fc56a795f29d28ef15e13c34a47e223960b0240e8cb0a82d9b0738695333",
+    strip_prefix = "lua-5.1.5",
+    build_file = "@//:bazel/puclua.bazel",
+)
+
+http_archive(
     name = "say",
     url = "https://github.com/lunarmodules/say/archive/3e1f783d0aa496eb21d16e85b2235335cb9332df.tar.gz",
     sha256 = "ab1e2e662114358f758103785d0f56a1f8fb764564b0163290f2270cf976a094",
