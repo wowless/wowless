@@ -14,7 +14,7 @@ def _lua_library_impl(ctx):
     for k, v in ctx.attr.modules.items():
         if v in modules:
             fail("moo")
-        modules[v] = k
+        modules[v] = k.files.to_list()[0]
     return [LuaLibraryInfo(modules = modules)]
 
 lua_library = rule(
@@ -32,9 +32,8 @@ def _lua_binary_impl(ctx):
     runfiles = [ctx.executable.interpreter, ctx.file.src]
     for l in ctx.attr.deps:
         for k, v in l[LuaLibraryInfo].modules.items():
-            src = v.files.to_list()[0]
             dst = ctx.actions.declare_file(_path(k))
-            ctx.actions.symlink(output = dst, target_file = src)
+            ctx.actions.symlink(output = dst, target_file = v)
             runfiles.append(dst)
     script = ctx.actions.declare_file(ctx.label.name)
     ctx.actions.write(script, "./" + ctx.executable.interpreter.short_path + " " + ctx.file.src.short_path, is_executable = True)
