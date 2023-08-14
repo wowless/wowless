@@ -1,9 +1,20 @@
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
+
 cc_binary(
     name = "puclua",
     visibility = ["//visibility:public"],
+    srcs = ["src/lua.c"],
+    deps = [":liblua"],
+)
+
+cc_library(
+    name = "liblua",
+    visibility = ["//visibility:public"],
     srcs = [
+        ":luaconf.h",
         "src/lapi.c",
         "src/lapi.h",
+        "src/lauxlib.h",
         "src/lauxlib.c",
         "src/lbaselib.c",
         "src/lcode.c",
@@ -44,7 +55,8 @@ cc_binary(
         "src/ltablib.c",
         "src/ltm.c",
         "src/ltm.h",
-        "src/lua.c",
+        "src/lua.h",
+        "src/lualib.h",
         "src/lundump.c",
         "src/lundump.h",
         "src/lvm.c",
@@ -52,4 +64,13 @@ cc_binary(
         "src/lzio.c",
         "src/lzio.h",
     ],
+)
+
+expand_template(
+    name = "generate_luaconf",
+    out = "luaconf.h",
+    template = "src/luaconf.h",
+    substitutions = {
+        "/usr/local/": "build/puclua/"
+    },
 )
