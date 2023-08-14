@@ -1,3 +1,5 @@
+load("bazel/lua.bzl", "lua_binary")
+
 cc_binary(
     name = "wowless",
     srcs = ["main.c"],
@@ -17,4 +19,13 @@ cc_library(
     name = "ext",
     srcs = ["wowless/ext.c"],
     deps = ["@elune"],
+)
+
+lua_binary(
+    name = "runtests",
+    interpreter = ":wowless",
+    src = "tools/runtests.lua",
+    deps = [
+        "@luassert",
+    ],
 )

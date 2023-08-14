@@ -41,6 +41,14 @@ http_archive(
 )
 
 http_archive(
+    name = "luassert",
+    url = "https://github.com/lunarmodules/luassert/archive/8c9385b1a1944a5ce0ef9dbd721ad1987cf85e9d.tar.gz",
+    sha256 = "49e200b154d8347fac02a846359ad29b3b64a0510ed06287dc6954333f201e86",
+    strip_prefix = "luassert-8c9385b1a1944a5ce0ef9dbd721ad1987cf85e9d",
+    build_file = "@//:bazel/luassert.bazel",
+)
+
+http_archive(
     name = "lyaml",
     url = "https://github.com/gvvaughan/lyaml/archive/1afb1f870ae486097f79586502f4254d6074afcb.tar.gz",
     sha256 = "74f347f16514a6c70ec22bfaf0e4e0de87a0d434191111642560de93ab312efc",
@@ -54,6 +62,14 @@ http_archive(
     sha256 = "b0be6ff887470a0579a9673c418082ddeb7df8b991a6a9a841ce190a55932be0",
     strip_prefix = "lzlib-79329a07d8f79c19eadd7ea2752b4c4e1574b015",
     build_file = "@//:bazel/lzlib.bazel",
+)
+
+http_archive(
+    name = "say",
+    url = "https://github.com/lunarmodules/say/archive/3e1f783d0aa496eb21d16e85b2235335cb9332df.tar.gz",
+    sha256 = "ab1e2e662114358f758103785d0f56a1f8fb764564b0163290f2270cf976a094",
+    strip_prefix = "say-3e1f783d0aa496eb21d16e85b2235335cb9332df",
+    build_file = "@//:bazel/say.bazel",
 )
 
 http_archive(

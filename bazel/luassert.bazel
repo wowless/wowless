@@ -1,0 +1,23 @@
+load("@//:bazel/lua.bzl", "lua_library")
+
+lua_library(
+    name = "luassert",
+    visibility = ["//visibility:public"],
+    deps = ["@say"],
+    modules = {
+        "src/array.lua": "luassert.array",
+        "src/assert.lua": "luassert.assert",
+        "src/assertions.lua": "luassert.assertions",
+        "src/formatters/init.lua": "luassert.formatters.init",
+        "src/init.lua": "luassert.init",
+        "src/languages/en.lua": "luassert.languages.en",
+        "src/match.lua": "luassert.match",
+        "src/matchers/composite.lua": "luassert.matchers.composite",
+        "src/matchers/core.lua": "luassert.matchers.core",
+        "src/matchers/init.lua": "luassert.matchers.init",
+        "src/modifiers.lua": "luassert.modifiers",
+        "src/namespaces.lua": "luassert.namespaces",
+        "src/state.lua": "luassert.state",
+        "src/util.lua": "luassert.util",
+    },
+)

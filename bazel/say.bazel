@@ -1,0 +1,9 @@
+load("@//:bazel/lua.bzl", "lua_library")
+
+lua_library(
+    name = "say",
+    visibility = ["//visibility:public"],
+    modules = {
+        "src/say/init.lua": "say.init",
+    },
+)
