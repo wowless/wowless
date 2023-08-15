@@ -64,6 +64,7 @@ cc_library(
         "src/lzio.c",
         "src/lzio.h",
     ],
+    linkopts = ["-ldl"],
 )
 
 expand_template(
@@ -72,5 +73,7 @@ expand_template(
     template = "src/luaconf.h",
     substitutions = {
         "/usr/local/": "build/luarocks/",
+        "#if defined(LUA_USE_LINUX)": "#define LUA_USE_LINUX\n#if 1",
+        "#define LUA_USE_READLINE": "#undef LUA_USE_READLINE",
     },
 )
