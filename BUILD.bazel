@@ -29,3 +29,10 @@ lua_binary(
         "@luassert",
     ],
 )
+
+lua_binary(
+    name = "listfile",
+    interpreter = "@puclua",
+    src = "tools/listfile.lua",
+    deps = ["@penlight"],
+)

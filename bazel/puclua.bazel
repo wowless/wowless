@@ -71,6 +71,6 @@ expand_template(
     out = "luaconf.h",
     template = "src/luaconf.h",
     substitutions = {
-        "/usr/local/": "build/puclua/"
+        "/usr/local/": "build/luarocks/"
     },
 )
