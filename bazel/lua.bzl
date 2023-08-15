@@ -89,6 +89,7 @@ def _lua_materialized_cc_library_impl(ctx):
         name = ctx.label.name,
         srcs = [s for s in allsrcs if s.extension != "h"],
         private_hdrs = [s for s in allsrcs if s.extension == "h"],
+        compilation_contexts = [ctx.attr.lua[CcInfo].compilation_context],
     )
     linking_context, _ = cc_common.create_linking_context_from_compilation_outputs(
         actions = ctx.actions,
