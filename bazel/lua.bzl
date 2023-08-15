@@ -1,3 +1,5 @@
+load("@bazel_tools//tools/cpp:toolchain_utils.bzl", "find_cpp_toolchain", "use_cpp_toolchain")
+
 LuaLibraryInfo = provider(
     fields = {
         "modules": "",
@@ -56,11 +58,10 @@ lua_binary = rule(
 )
 
 def _lua_cc_library_impl(ctx):
-    modules = {}
     return [
         cc_common.merge_cc_infos(cc_infos = [dep[CcInfo] for dep in ctx.attr.deps]),
         DefaultInfo(files = depset(ctx.files.srcs)),
-        LuaLibraryInfo(modules = modules),
+        LuaLibraryInfo(modules = {}),
     ]
 
 lua_cc_library = rule(
@@ -70,4 +71,43 @@ lua_cc_library = rule(
         "srcs": attr.label_list(allow_files = [".c", ".h"]),
         "deps": attr.label_list(providers = [CcInfo]),
     },
+)
+
+def _lua_materialized_cc_library_impl(ctx):
+    cc_toolchain = find_cpp_toolchain(ctx)
+    feature_configuration = cc_common.configure_features(
+        ctx = ctx,
+        cc_toolchain = cc_toolchain,
+        requested_features = ctx.features,
+        unsupported_features = ctx.disabled_features,
+    )
+    allsrcs = [f for d in ctx.attr.deps for f in d[DefaultInfo].files.to_list()]
+    _, compilation_outputs = cc_common.compile(
+        actions = ctx.actions,
+        feature_configuration = feature_configuration,
+        cc_toolchain = cc_toolchain,
+        name = ctx.label.name,
+        srcs = [s for s in allsrcs if s.extension != "h"],
+        private_hdrs = [s for s in allsrcs if s.extension == "h"],
+    )
+    linking_context, _ = cc_common.create_linking_context_from_compilation_outputs(
+        actions = ctx.actions,
+        feature_configuration = feature_configuration,
+        cc_toolchain = cc_toolchain,
+        name = ctx.label.name,
+        compilation_outputs = compilation_outputs,
+    )
+    ccinfo = CcInfo(linking_context = linking_context)
+    depccinfos = [dep[CcInfo] for dep in ctx.attr.deps]
+    return [cc_common.merge_cc_infos(cc_infos = [ccinfo] + depccinfos)]
+
+lua_materialized_cc_library = rule(
+    implementation = _lua_materialized_cc_library_impl,
+    attrs = {
+        "lua": attr.label(mandatory = True, providers = [CcInfo]),
+        "deps": attr.label_list(providers = [LuaLibraryInfo]),
+        "_cc_toolchain": attr.label(default = Label("@bazel_tools//tools/cpp:current_cc_toolchain")),
+    },
+    fragments = ["cpp"],
+    toolchains = use_cpp_toolchain(),
 )

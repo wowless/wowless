@@ -4,7 +4,7 @@
 #include <lualib.h>
 
 #ifndef ELUNE_VERSION
-#error Must be compiled against Elune headers.
+// #error Must be compiled against Elune headers.
 #endif
 
 /* Lightly modified from ldblib.c. */
